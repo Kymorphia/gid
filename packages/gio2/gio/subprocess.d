@@ -132,7 +132,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GSubprocess* _cretval;
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
@@ -281,15 +281,15 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   bool communicateUtf8(string stdinBuf, gio.cancellable.Cancellable cancellable, out string stdoutBuf, out string stderrBuf)
   {
     bool _retval;
-    const(char)* _stdinBuf = stdinBuf.toCString(No.Alloc);
+    const(char)* _stdinBuf = stdinBuf.toCString!(No.Malloc, Yes.Nullable);
     char* _stdoutBuf;
     char* _stderrBuf;
     GError *_err;
     _retval = cast(bool)g_subprocess_communicate_utf8(cast(GSubprocess*)this._cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    stdoutBuf = _stdoutBuf.fromCString(Yes.Free);
-    stderrBuf = _stderrBuf.fromCString(Yes.Free);
+    stdoutBuf = _stdoutBuf.fromCString!(Yes.Free);
+    stderrBuf = _stderrBuf.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _stdinBuf = stdinBuf.toCString(No.Alloc);
+    const(char)* _stdinBuf = stdinBuf.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_subprocess_communicate_utf8_async(cast(GSubprocess*)this._cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -343,8 +343,8 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     _retval = cast(bool)g_subprocess_communicate_utf8_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    stdoutBuf = _stdoutBuf.fromCString(Yes.Free);
-    stderrBuf = _stderrBuf.fromCString(Yes.Free);
+    stdoutBuf = _stdoutBuf.fromCString!(Yes.Free);
+    stderrBuf = _stderrBuf.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -391,7 +391,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   {
     const(char)* _cretval;
     _cretval = g_subprocess_get_identifier(cast(GSubprocess*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

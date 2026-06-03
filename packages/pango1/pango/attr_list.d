@@ -298,7 +298,7 @@ class AttrList : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_attr_list_to_string(cast(PangoAttrList*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -341,7 +341,7 @@ class AttrList : gobject.boxed.Boxed
   static pango.attr_list.AttrList fromString(string text) nothrow
   {
     PangoAttrList* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_attr_list_from_string(_text);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

@@ -538,7 +538,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     const(char)* _cretval;
     _cretval = gtk_menu_get_accel_path(cast(GtkMenu*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     const(char)* _cretval;
     _cretval = gtk_menu_get_title(cast(GtkMenu*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -923,7 +923,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void setAccelPath(string accelPath = null) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, Yes.Nullable);
     gtk_menu_set_accel_path(cast(GtkMenu*)this._cPtr, _accelPath);
   }
 
@@ -1012,7 +1012,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void setTitle(string title = null) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     gtk_menu_set_title(cast(GtkMenu*)this._cPtr, _title);
   }
 

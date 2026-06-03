@@ -124,7 +124,7 @@ class TargetEntry : gobject.boxed.Boxed
   this(string target, uint flags, uint info) nothrow
   {
     GtkTargetEntry* _cretval;
-    const(char)* _target = target.toCString(No.Alloc);
+    const(char)* _target = target.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_target_entry_new(_target, flags, info);
     this(_cretval, Yes.Take);
   }

@@ -57,7 +57,7 @@ class Param : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_charset(cast(GMimeParam*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Param : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_lang(cast(GMimeParam*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Param : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_name(cast(GMimeParam*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class Param : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_value(cast(GMimeParam*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class Param : gobject.object.ObjectWrap
   */
   void setCharset(string charset) nothrow
   {
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     g_mime_param_set_charset(cast(GMimeParam*)this._cPtr, _charset);
   }
 
@@ -140,7 +140,7 @@ class Param : gobject.object.ObjectWrap
   */
   void setLang(string lang) nothrow
   {
-    const(char)* _lang = lang.toCString(No.Alloc);
+    const(char)* _lang = lang.toCString!(No.Malloc, No.Nullable);
     g_mime_param_set_lang(cast(GMimeParam*)this._cPtr, _lang);
   }
 
@@ -152,7 +152,7 @@ class Param : gobject.object.ObjectWrap
   */
   void setValue(string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_mime_param_set_value(cast(GMimeParam*)this._cPtr, _value);
   }
 }

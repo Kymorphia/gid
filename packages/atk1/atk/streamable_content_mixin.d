@@ -46,7 +46,7 @@ template StreamableContentT()
   {
     const(char)* _cretval;
     _cretval = atk_streamable_content_get_mime_type(cast(AtkStreamableContent*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ template StreamableContentT()
   override glib.iochannel.IOChannel getStream(string mimeType) nothrow
   {
     GIOChannel* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_streamable_content_get_stream(cast(AtkStreamableContent*)this._cPtr, _mimeType);
     auto _retval = _cretval ? new glib.iochannel.IOChannel(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -97,9 +97,9 @@ template StreamableContentT()
   override string getUri(string mimeType) nothrow
   {
     const(char)* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_streamable_content_get_uri(cast(AtkStreamableContent*)this._cPtr, _mimeType);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

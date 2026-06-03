@@ -32,7 +32,7 @@ struct AttrType
   {
     const(char)* _cretval;
     _cretval = pango_attr_type_get_name(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ struct AttrType
   static pango.types.AttrType register(string name) nothrow
   {
     PangoAttrType _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_attr_type_register(_name);
     pango.types.AttrType _retval = cast(pango.types.AttrType)_cretval;
     return _retval;

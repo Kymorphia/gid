@@ -75,7 +75,7 @@ class Multipart : gmime.object.ObjectWrap
   static gmime.multipart.Multipart newWithSubtype(string subtype) nothrow
   {
     GMimeMultipart* _cretval;
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_multipart_new_with_subtype(_subtype);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.multipart.Multipart)(cast(GMimeMultipart*)_cretval, Yes.Take);
     return _retval;
@@ -152,7 +152,7 @@ class Multipart : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_multipart_get_boundary(cast(GMimeMultipart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Multipart : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_multipart_get_epilogue(cast(GMimeMultipart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class Multipart : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_multipart_get_prologue(cast(GMimeMultipart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class Multipart : gmime.object.ObjectWrap
   gmime.object.ObjectWrap getSubpartFromContentId(string contentId) nothrow
   {
     GMimeObject* _cretval;
-    const(char)* _contentId = contentId.toCString(No.Alloc);
+    const(char)* _contentId = contentId.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_multipart_get_subpart_from_content_id(cast(GMimeMultipart*)this._cPtr, _contentId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(GMimeObject*)_cretval, No.Take);
     return _retval;
@@ -307,7 +307,7 @@ class Multipart : gmime.object.ObjectWrap
   */
   void setBoundary(string boundary) nothrow
   {
-    const(char)* _boundary = boundary.toCString(No.Alloc);
+    const(char)* _boundary = boundary.toCString!(No.Malloc, No.Nullable);
     g_mime_multipart_set_boundary(cast(GMimeMultipart*)this._cPtr, _boundary);
   }
 
@@ -319,7 +319,7 @@ class Multipart : gmime.object.ObjectWrap
   */
   void setEpilogue(string epilogue) nothrow
   {
-    const(char)* _epilogue = epilogue.toCString(No.Alloc);
+    const(char)* _epilogue = epilogue.toCString!(No.Malloc, No.Nullable);
     g_mime_multipart_set_epilogue(cast(GMimeMultipart*)this._cPtr, _epilogue);
   }
 
@@ -331,7 +331,7 @@ class Multipart : gmime.object.ObjectWrap
   */
   void setPrologue(string prologue) nothrow
   {
-    const(char)* _prologue = prologue.toCString(No.Alloc);
+    const(char)* _prologue = prologue.toCString!(No.Malloc, No.Nullable);
     g_mime_multipart_set_prologue(cast(GMimeMultipart*)this._cPtr, _prologue);
   }
 }

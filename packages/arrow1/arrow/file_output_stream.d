@@ -56,7 +56,7 @@ class FileOutputStream : arrow.output_stream.OutputStream
   this(string path, bool append)
   {
     GArrowFileOutputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_file_output_stream_new(_path, append, &_err);
     if (_err)

@@ -74,7 +74,7 @@ string mediaKeySystemPermissionGetName(webkit.media_key_system_permission_reques
 {
   const(char)* _cretval;
   _cretval = webkit_media_key_system_permission_get_name(request ? cast(WebKitMediaKeySystemPermissionRequest*)request._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -95,9 +95,9 @@ string mediaKeySystemPermissionGetName(webkit.media_key_system_permission_reques
 string uriForDisplay(string uri) nothrow
 {
   char* _cretval;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   _cretval = webkit_uri_for_display(_uri);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 

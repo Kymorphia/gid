@@ -1311,7 +1311,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void addAccelerator(string accelSignal, gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags) nothrow
   {
-    const(char)* _accelSignal = accelSignal.toCString(No.Alloc);
+    const(char)* _accelSignal = accelSignal.toCString!(No.Malloc, No.Nullable);
     gtk_widget_add_accelerator(cast(GtkWidget*)this._cPtr, _accelSignal, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null, accelKey, accelMods, accelFlags);
   }
 
@@ -1478,7 +1478,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void childNotify(string childProperty) nothrow
   {
-    const(char)* _childProperty = childProperty.toCString(No.Alloc);
+    const(char)* _childProperty = childProperty.toCString!(No.Malloc, No.Nullable);
     gtk_widget_child_notify(cast(GtkWidget*)this._cPtr, _childProperty);
   }
 
@@ -1501,8 +1501,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     char* _path;
     char* _pathReversed;
     gtk_widget_class_path(cast(GtkWidget*)this._cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
-    path = _path.fromCString(Yes.Free);
-    pathReversed = _pathReversed.fromCString(Yes.Free);
+    path = _path.fromCString!(Yes.Free);
+    pathReversed = _pathReversed.fromCString!(Yes.Free);
   }
 
   /**
@@ -1560,7 +1560,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   pango.layout.Layout createPangoLayout(string text = null) nothrow
   {
     PangoLayout* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)this._cPtr, _text);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
@@ -2062,7 +2062,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconName(string iconName) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     gtk_drag_source_set_icon_name(cast(GtkWidget*)this._cPtr, _iconName);
   }
 
@@ -2090,7 +2090,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconStock(string stockId) nothrow
   {
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     gtk_drag_source_set_icon_stock(cast(GtkWidget*)this._cPtr, _stockId);
   }
 
@@ -2250,7 +2250,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gio.action_group.ActionGroup getActionGroup(string prefix) nothrow
   {
     GActionGroup* _cretval;
-    const(char)* _prefix = prefix.toCString(No.Alloc);
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_widget_get_action_group(cast(GtkWidget*)this._cPtr, _prefix);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
     return _retval;
@@ -2503,7 +2503,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _cretval;
     _cretval = gtk_widget_get_composite_name(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -2892,7 +2892,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_name(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -3388,7 +3388,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gobject.object.ObjectWrap getTemplateChild(gobject.types.GType widgetType, string name) nothrow
   {
     GObject* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_widget_get_template_child(cast(GtkWidget*)this._cPtr, widgetType, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
@@ -3403,7 +3403,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _cretval;
     _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -3416,7 +3416,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _cretval;
     _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -3816,7 +3816,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void insertActionGroup(string name, gio.action_group.ActionGroup group = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_insert_action_group(cast(GtkWidget*)this._cPtr, _name, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null);
   }
 
@@ -4021,7 +4021,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -4370,7 +4370,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideSymbolicColor(string name, gdk.rgba.RGBA color) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_override_symbolic_color(cast(GtkWidget*)this._cPtr, _name, cast(const(GdkRGBA)*)&color);
   }
 
@@ -4403,8 +4403,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     char* _path;
     char* _pathReversed;
     gtk_widget_path(cast(GtkWidget*)this._cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
-    path = _path.fromCString(Yes.Free);
-    pathReversed = _pathReversed.fromCString(Yes.Free);
+    path = _path.fromCString!(Yes.Free);
+    pathReversed = _pathReversed.fromCString!(Yes.Free);
   }
 
   /**
@@ -4651,8 +4651,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdkpixbuf.pixbuf.Pixbuf renderIcon(string stockId, gtk.types.IconSize size, string detail = null) nothrow
   {
     GdkPixbuf* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
-    const(char)* _detail = detail.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_widget_render_icon(cast(GtkWidget*)this._cPtr, _stockId, size, _detail);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
@@ -4682,7 +4682,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(string stockId, gtk.types.IconSize size) nothrow
   {
     GdkPixbuf* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_widget_render_icon_pixbuf(cast(GtkWidget*)this._cPtr, _stockId, size);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
@@ -4822,7 +4822,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setAccelPath(string accelPath = null, gtk.accel_group.AccelGroup accelGroup = null) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, Yes.Nullable);
     gtk_widget_set_accel_path(cast(GtkWidget*)this._cPtr, _accelPath, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
 
@@ -4950,7 +4950,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setCompositeName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_set_composite_name(cast(GtkWidget*)this._cPtr, _name);
   }
 
@@ -5325,7 +5325,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_set_name(cast(GtkWidget*)this._cPtr, _name);
   }
 
@@ -5600,7 +5600,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setTooltipMarkup(string markup = null) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, Yes.Nullable);
     gtk_widget_set_tooltip_markup(cast(GtkWidget*)this._cPtr, _markup);
   }
 
@@ -5616,7 +5616,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setTooltipText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     gtk_widget_set_tooltip_text(cast(GtkWidget*)this._cPtr, _text);
   }
 
@@ -5880,7 +5880,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void styleGetProperty(string propertyName, gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     gtk_widget_style_get_property(cast(GtkWidget*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 

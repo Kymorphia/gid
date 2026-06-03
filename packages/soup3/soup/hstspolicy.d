@@ -85,7 +85,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   this(string domain, gulong maxAge, bool includeSubdomains) nothrow
   {
     SoupHSTSPolicy* _cretval;
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_hsts_policy_new(_domain, maxAge, includeSubdomains);
     this(_cretval, Yes.Take);
   }
@@ -123,7 +123,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   static soup.hstspolicy.HSTSPolicy newFull(string domain, gulong maxAge, glib.date_time.DateTime expires, bool includeSubdomains) nothrow
   {
     SoupHSTSPolicy* _cretval;
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_hsts_policy_new_full(_domain, maxAge, expires ? cast(GDateTime*)expires._cPtr(No.Dup) : null, includeSubdomains);
     auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -152,7 +152,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   static soup.hstspolicy.HSTSPolicy newSessionPolicy(string domain, bool includeSubdomains) nothrow
   {
     SoupHSTSPolicy* _cretval;
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_hsts_policy_new_session_policy(_domain, includeSubdomains);
     auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -192,7 +192,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_hsts_policy_get_domain(cast(SoupHSTSPolicy*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

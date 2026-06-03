@@ -179,7 +179,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void addSetter(gobject.object.ObjectWrap object, string property, gobject.value.Value value = null) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     adw_breakpoint_add_setter(cast(AdwBreakpoint*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -213,7 +213,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString;
     const(char*)* _names = _tmpnames.ptr;
 
     if (values)

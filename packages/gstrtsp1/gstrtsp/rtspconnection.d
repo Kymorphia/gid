@@ -54,8 +54,8 @@ class RTSPConnection
   */
   void addExtraHttpRequestHeader(string key, string value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     gst_rtsp_connection_add_extra_http_request_header(cast(GstRTSPConnection*)this._cPtr, _key, _value);
   }
 
@@ -225,7 +225,7 @@ class RTSPConnection
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_connection_get_ip(cast(const(GstRTSPConnection)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class RTSPConnection
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_connection_get_tunnelid(cast(const(GstRTSPConnection)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -698,8 +698,8 @@ class RTSPConnection
   gstrtsp.types.RTSPResult setAuth(gstrtsp.types.RTSPAuthMethod method, string user, string pass) nothrow
   {
     GstRTSPResult _cretval;
-    const(char)* _user = user.toCString(No.Alloc);
-    const(char)* _pass = pass.toCString(No.Alloc);
+    const(char)* _user = user.toCString!(No.Malloc, No.Nullable);
+    const(char)* _pass = pass.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_rtsp_connection_set_auth(cast(GstRTSPConnection*)this._cPtr, method, _user, _pass);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -718,8 +718,8 @@ class RTSPConnection
   */
   void setAuthParam(string param, string value) nothrow
   {
-    const(char)* _param = param.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _param = param.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     gst_rtsp_connection_set_auth_param(cast(GstRTSPConnection*)this._cPtr, _param, _value);
   }
 
@@ -770,7 +770,7 @@ class RTSPConnection
   */
   void setIp(string ip) nothrow
   {
-    const(char)* _ip = ip.toCString(No.Alloc);
+    const(char)* _ip = ip.toCString!(No.Malloc, No.Nullable);
     gst_rtsp_connection_set_ip(cast(GstRTSPConnection*)this._cPtr, _ip);
   }
 
@@ -785,7 +785,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult setProxy(string host, uint port) nothrow
   {
     GstRTSPResult _cretval;
-    const(char)* _host = host.toCString(No.Alloc);
+    const(char)* _host = host.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_rtsp_connection_set_proxy(cast(GstRTSPConnection*)this._cPtr, _host, port);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -991,8 +991,8 @@ class RTSPConnection
   static gstrtsp.types.RTSPResult createFromSocket(gio.socket.Socket socket, string ip, ushort port, string initialBuffer, out gstrtsp.rtspconnection.RTSPConnection conn) nothrow
   {
     GstRTSPResult _cretval;
-    const(char)* _ip = ip.toCString(No.Alloc);
-    const(char)* _initialBuffer = initialBuffer.toCString(No.Alloc);
+    const(char)* _ip = ip.toCString!(No.Malloc, No.Nullable);
+    const(char)* _initialBuffer = initialBuffer.toCString!(No.Malloc, No.Nullable);
     GstRTSPConnection* _conn;
     _cretval = gst_rtsp_connection_create_from_socket(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, _ip, port, _initialBuffer, &_conn);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;

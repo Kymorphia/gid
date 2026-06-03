@@ -340,7 +340,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_mikey_message_base64_encode(cast(GstMIKEYMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

@@ -84,7 +84,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_description(cast(GSettingsSchemaKey*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_name(cast(GSettingsSchemaKey*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_summary(cast(GSettingsSchemaKey*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -552,8 +552,8 @@ class WebView : webkit.web_view_base.WebViewBase
       _length = cast(ptrdiff_t)body_.length;
 
     auto _body_ = body_.ptr ? cast(const(char)*)body_.ptr : [char.init].ptr;
-    const(char)* _worldName = worldName.toCString(No.Alloc);
-    const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
+    const(char)* _worldName = worldName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _sourceUri = sourceUri.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_call_async_javascript_function(cast(WebKitWebView*)this._cPtr, _body_, _length, arguments ? cast(GVariant*)arguments._cPtr(No.Dup) : null, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -606,7 +606,7 @@ class WebView : webkit.web_view_base.WebViewBase
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _command = command.toCString(No.Alloc);
+    const(char)* _command = command.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_can_execute_editing_command(cast(WebKitWebView*)this._cPtr, _command, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -661,7 +661,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool canShowMimeType(string mimeType) nothrow
   {
     bool _retval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_web_view_can_show_mime_type(cast(WebKitWebView*)this._cPtr, _mimeType);
     return _retval;
   }
@@ -677,7 +677,7 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.download.Download downloadUri(string uri) nothrow
   {
     WebKitDownload* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_web_view_download_uri(cast(WebKitWebView*)this._cPtr, _uri);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
     return _retval;
@@ -768,8 +768,8 @@ class WebView : webkit.web_view_base.WebViewBase
       _length = cast(ptrdiff_t)script.length;
 
     auto _script = script.ptr ? cast(const(char)*)script.ptr : [char.init].ptr;
-    const(char)* _worldName = worldName.toCString(No.Alloc);
-    const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
+    const(char)* _worldName = worldName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _sourceUri = sourceUri.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_web_view_evaluate_javascript(cast(WebKitWebView*)this._cPtr, _script, _length, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -805,7 +805,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void executeEditingCommand(string command) nothrow
   {
-    const(char)* _command = command.toCString(No.Alloc);
+    const(char)* _command = command.toCString!(No.Malloc, No.Nullable);
     webkit_web_view_execute_editing_command(cast(WebKitWebView*)this._cPtr, _command);
   }
 
@@ -822,8 +822,8 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void executeEditingCommandWithArgument(string command, string argument) nothrow
   {
-    const(char)* _command = command.toCString(No.Alloc);
-    const(char)* _argument = argument.toCString(No.Alloc);
+    const(char)* _command = command.toCString!(No.Malloc, No.Nullable);
+    const(char)* _argument = argument.toCString!(No.Malloc, No.Nullable);
     webkit_web_view_execute_editing_command_with_argument(cast(WebKitWebView*)this._cPtr, _command, _argument);
   }
 
@@ -902,7 +902,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_custom_charset(cast(WebKitWebView*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -914,7 +914,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_default_content_security_policy(cast(WebKitWebView*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1194,7 +1194,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_title(cast(WebKitWebView*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1291,7 +1291,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_uri(cast(WebKitWebView*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1481,9 +1481,9 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void loadAlternateHtml(string content, string contentUri, string baseUri = null) nothrow
   {
-    const(char)* _content = content.toCString(No.Alloc);
-    const(char)* _contentUri = contentUri.toCString(No.Alloc);
-    const(char)* _baseUri = baseUri.toCString(No.Alloc);
+    const(char)* _content = content.toCString!(No.Malloc, No.Nullable);
+    const(char)* _contentUri = contentUri.toCString!(No.Malloc, No.Nullable);
+    const(char)* _baseUri = baseUri.toCString!(No.Malloc, Yes.Nullable);
     webkit_web_view_load_alternate_html(cast(WebKitWebView*)this._cPtr, _content, _contentUri, _baseUri);
   }
 
@@ -1503,9 +1503,9 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void loadBytes(glib.bytes.Bytes bytes, string mimeType = null, string encoding = null, string baseUri = null) nothrow
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    const(char)* _encoding = encoding.toCString(No.Alloc);
-    const(char)* _baseUri = baseUri.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _encoding = encoding.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _baseUri = baseUri.toCString!(No.Malloc, Yes.Nullable);
     webkit_web_view_load_bytes(cast(WebKitWebView*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, _mimeType, _encoding, _baseUri);
   }
 
@@ -1527,8 +1527,8 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void loadHtml(string content, string baseUri = null) nothrow
   {
-    const(char)* _content = content.toCString(No.Alloc);
-    const(char)* _baseUri = baseUri.toCString(No.Alloc);
+    const(char)* _content = content.toCString!(No.Malloc, No.Nullable);
+    const(char)* _baseUri = baseUri.toCString!(No.Malloc, Yes.Nullable);
     webkit_web_view_load_html(cast(WebKitWebView*)this._cPtr, _content, _baseUri);
   }
 
@@ -1543,7 +1543,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void loadPlainText(string plainText) nothrow
   {
-    const(char)* _plainText = plainText.toCString(No.Alloc);
+    const(char)* _plainText = plainText.toCString!(No.Malloc, No.Nullable);
     webkit_web_view_load_plain_text(cast(WebKitWebView*)this._cPtr, _plainText);
   }
 
@@ -1572,7 +1572,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void loadUri(string uri) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     webkit_web_view_load_uri(cast(WebKitWebView*)this._cPtr, _uri);
   }
 
@@ -1828,7 +1828,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     const(char)*[] _tmpallowlist;
     foreach (s; allowlist)
-      _tmpallowlist ~= s.toCString(No.Alloc);
+      _tmpallowlist ~= s.toCString;
     _tmpallowlist ~= null;
     const(char*)* _allowlist = _tmpallowlist.ptr;
 
@@ -1848,7 +1848,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setCustomCharset(string charset = null) nothrow
   {
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
     webkit_web_view_set_custom_charset(cast(WebKitWebView*)this._cPtr, _charset);
   }
 

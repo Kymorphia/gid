@@ -458,7 +458,7 @@ class MenuButton : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_icon_name(cast(GtkMenuButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -470,7 +470,7 @@ class MenuButton : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_label(cast(GtkMenuButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -687,7 +687,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setIconName(string iconName) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     gtk_menu_button_set_icon_name(cast(GtkMenuButton*)this._cPtr, _iconName);
   }
 
@@ -705,7 +705,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     gtk_menu_button_set_label(cast(GtkMenuButton*)this._cPtr, _label);
   }
 

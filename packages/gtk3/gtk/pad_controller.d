@@ -150,8 +150,8 @@ class PadController : gtk.event_controller.EventController
   */
   void setAction(gtk.types.PadActionType type, int index, int mode, string label, string actionName) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     gtk_pad_controller_set_action(cast(GtkPadController*)this._cPtr, type, index, mode, _label, _actionName);
   }
 }

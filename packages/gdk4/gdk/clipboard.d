@@ -206,7 +206,7 @@ class Clipboard : gobject.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
     char*[] _tmpmimeTypes;
     foreach (s; mimeTypes)
-      _tmpmimeTypes ~= s.toCString(No.Alloc);
+      _tmpmimeTypes ~= s.toCString;
     _tmpmimeTypes ~= null;
     const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
 
@@ -235,7 +235,7 @@ class Clipboard : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
-    outMimeType = _outMimeType.fromCString(No.Free);
+    outMimeType = _outMimeType.fromCString!(No.Free);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class Clipboard : gobject.object.ObjectWrap
     _cretval = gdk_clipboard_read_text_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

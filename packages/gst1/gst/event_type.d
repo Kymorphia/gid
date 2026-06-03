@@ -38,7 +38,7 @@ struct EventType
   {
     const(char)* _cretval;
     _cretval = gst_event_type_get_name(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -125,7 +125,7 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void addEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
     gtk_accel_map_add_entry(_accelPath, accelKey, accelMods);
   }
 
@@ -144,7 +144,7 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void addFilter(string filterPattern) nothrow
   {
-    const(char)* _filterPattern = filterPattern.toCString(No.Alloc);
+    const(char)* _filterPattern = filterPattern.toCString!(No.Malloc, No.Nullable);
     gtk_accel_map_add_filter(_filterPattern);
   }
 
@@ -170,7 +170,7 @@ class AccelMap : gobject.object.ObjectWrap
   static bool changeEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods, bool replace) nothrow
   {
     bool _retval;
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_accel_map_change_entry(_accelPath, accelKey, accelMods, replace);
     return _retval;
   }
@@ -193,7 +193,7 @@ class AccelMap : gobject.object.ObjectWrap
     extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed) nothrow
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
-      string _accelPath = accelPath.fromCString(No.Free);
+      string _accelPath = accelPath.fromCString!(No.Free);
 
       try
       {
@@ -225,7 +225,7 @@ class AccelMap : gobject.object.ObjectWrap
     extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed) nothrow
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
-      string _accelPath = accelPath.fromCString(No.Free);
+      string _accelPath = accelPath.fromCString!(No.Free);
 
       try
       {
@@ -265,7 +265,7 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void load(string fileName) nothrow
   {
-    const(char)* _fileName = fileName.toCString(No.Alloc);
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
     gtk_accel_map_load(_fileName);
   }
 
@@ -316,7 +316,7 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void lockPath(string accelPath) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
     gtk_accel_map_lock_path(_accelPath);
   }
 
@@ -331,7 +331,7 @@ class AccelMap : gobject.object.ObjectWrap
   static bool lookupEntry(string accelPath, out gtk.types.AccelKey key) nothrow
   {
     bool _retval;
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_accel_map_lookup_entry(_accelPath, &key);
     return _retval;
   }
@@ -348,7 +348,7 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void save(string fileName) nothrow
   {
-    const(char)* _fileName = fileName.toCString(No.Alloc);
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
     gtk_accel_map_save(_fileName);
   }
 
@@ -374,7 +374,7 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void unlockPath(string accelPath) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
     gtk_accel_map_unlock_path(_accelPath);
   }
 

@@ -77,7 +77,7 @@ class GeolocationManager : gobject.object.ObjectWrap
   */
   void failed(string errorMessage) nothrow
   {
-    const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
+    const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
     webkit_geolocation_manager_failed(cast(WebKitGeolocationManager*)this._cPtr, _errorMessage);
   }
 

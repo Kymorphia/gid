@@ -116,7 +116,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   {
     const(char)* _cretval;
     _cretval = gdk_content_deserializer_get_mime_type(cast(GdkContentDeserializer*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

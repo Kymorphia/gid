@@ -64,7 +64,7 @@ class OptionContext
   void addMainEntries(glib.types.OptionEntry[] entries, string translationDomain = null) nothrow
   {
     auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
-    const(char)* _translationDomain = translationDomain.toCString(No.Alloc);
+    const(char)* _translationDomain = translationDomain.toCString!(No.Malloc, Yes.Nullable);
     g_option_context_add_main_entries(cast(GOptionContext*)this._cPtr, _entries, _translationDomain);
   }
 
@@ -76,7 +76,7 @@ class OptionContext
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_description(cast(GOptionContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class OptionContext
   {
     char* _cretval;
     _cretval = g_option_context_get_help(cast(GOptionContext*)this._cPtr, mainHelp, group ? cast(GOptionGroup*)group._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class OptionContext
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_summary(cast(GOptionContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class OptionContext
   */
   void setDescription(string description = null) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
     g_option_context_set_description(cast(GOptionContext*)this._cPtr, _description);
   }
 
@@ -276,7 +276,7 @@ class OptionContext
   */
   void setSummary(string summary = null) nothrow
   {
-    const(char)* _summary = summary.toCString(No.Alloc);
+    const(char)* _summary = summary.toCString!(No.Malloc, Yes.Nullable);
     g_option_context_set_summary(cast(GOptionContext*)this._cPtr, _summary);
   }
 
@@ -302,7 +302,7 @@ class OptionContext
     {
       string _dretval;
       auto _dlg = cast(glib.types.TranslateFunc*)data;
-      string _str = str.fromCString(No.Free);
+      string _str = str.fromCString!(No.Free);
 
       try
       {
@@ -312,7 +312,7 @@ class OptionContext
       {
         gidInvokeCallbackExceptionHandler(e, "glib.types.TranslateFunc");
       }
-      auto _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
 
       return _retval;
     }
@@ -331,7 +331,7 @@ class OptionContext
   */
   void setTranslationDomain(string domain) nothrow
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     g_option_context_set_translation_domain(cast(GOptionContext*)this._cPtr, _domain);
   }
 }

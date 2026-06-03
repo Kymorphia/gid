@@ -190,7 +190,7 @@ class MenuModel : gobject.object.ObjectWrap
   glib.variant.Variant getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)this._cPtr, itemIndex, _attribute, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -211,7 +211,7 @@ class MenuModel : gobject.object.ObjectWrap
   gio.menu_model.MenuModel getItemLink(int itemIndex, string link) nothrow
   {
     GMenuModel* _cretval;
-    const(char)* _link = link.toCString(No.Alloc);
+    const(char)* _link = link.toCString!(No.Malloc, No.Nullable);
     _cretval = g_menu_model_get_item_link(cast(GMenuModel*)this._cPtr, itemIndex, _link);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;

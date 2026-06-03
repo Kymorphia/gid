@@ -78,7 +78,7 @@ class MappedFile : gobject.boxed.Boxed
   this(string filename, bool writable)
   {
     GMappedFile* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_mapped_file_new(_filename, writable, &_err);
     if (_err)
@@ -145,7 +145,7 @@ class MappedFile : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_mapped_file_get_contents(cast(GMappedFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

@@ -1435,7 +1435,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void resetProperty(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_settings_reset_property(cast(GtkSettings*)this._cPtr, _name);
   }
 }

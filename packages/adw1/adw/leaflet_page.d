@@ -145,7 +145,7 @@ class LeafletPage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = adw_leaflet_page_get_name(cast(AdwLeafletPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class LeafletPage : gobject.object.ObjectWrap
   */
   void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     adw_leaflet_page_set_name(cast(AdwLeafletPage*)this._cPtr, _name);
   }
 

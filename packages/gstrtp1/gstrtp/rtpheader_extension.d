@@ -56,7 +56,7 @@ class RTPHeaderExtension : gst.element.Element
   static gstrtp.rtpheader_extension.RTPHeaderExtension createFromUri(string uri) nothrow
   {
     GstRTPHeaderExtension* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_rtp_header_extension_create_from_uri(_uri);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstrtp.rtpheader_extension.RTPHeaderExtension)(cast(GstRTPHeaderExtension*)_cretval, Yes.Take);
     return _retval;
@@ -106,7 +106,7 @@ class RTPHeaderExtension : gst.element.Element
   {
     char* _cretval;
     _cretval = gst_rtp_header_extension_get_sdp_caps_field_name(cast(GstRTPHeaderExtension*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class RTPHeaderExtension : gst.element.Element
   {
     const(char)* _cretval;
     _cretval = gst_rtp_header_extension_get_uri(cast(GstRTPHeaderExtension*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class RTPHeaderExtension : gst.element.Element
   bool setCapsFromAttributesHelper(gst.caps.Caps caps, string attributes) nothrow
   {
     bool _retval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_rtp_header_extension_set_caps_from_attributes_helper(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _attributes);
     return _retval;
   }

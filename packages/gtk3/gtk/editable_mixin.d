@@ -113,7 +113,7 @@ template EditableT()
   {
     char* _cretval;
     _cretval = gtk_editable_get_chars(cast(GtkEditable*)this._cPtr, startPos, endPos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

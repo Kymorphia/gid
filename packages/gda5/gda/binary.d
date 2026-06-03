@@ -94,7 +94,7 @@ class Binary : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gda_binary_to_string(cast(const(GdaBinary)*)this._cPtr, maxlen);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

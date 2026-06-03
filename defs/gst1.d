@@ -95,13 +95,13 @@ void init_(ref string[] argv) nothrow
   scope(exit) gFree(_argv);
 
   foreach (i, a; argv)
-    _argv[i] = toCString(a, No.Alloc);
+    _argv[i] = a.toCString;
 
   gst_init(&_argc, &_argv);
 
   argv.length = _argc;
   foreach (i; 0 .. _argc)
-    argv[i] = fromCString(_argv[i], No.Free);
+    argv[i] = fromCString(_argv[i]);
 }
 
 /**
@@ -124,7 +124,7 @@ bool initCheck(ref string[] argv)
   scope(exit) gFree(_argv);
 
   foreach (i, a; argv)
-    _argv[i] = toCString(a, No.Alloc);
+    _argv[i] = a.toCString;
 
   GError *_err;
   gboolean _retval = gst_init_check(&_argc, &_argv, &_err);
@@ -134,7 +134,7 @@ bool initCheck(ref string[] argv)
 
   argv.length = _argc;
   foreach (i; 0 .. _argc)
-    argv[i] = fromCString(_argv[i], No.Free);
+    argv[i] = fromCString(_argv[i]);
 
   return cast(bool)_retval;
 }

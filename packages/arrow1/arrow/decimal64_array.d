@@ -54,7 +54,7 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   {
     char* _cretval;
     _cretval = garrow_decimal64_array_format_value(cast(GArrowDecimal64Array*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

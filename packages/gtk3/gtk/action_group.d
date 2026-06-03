@@ -184,7 +184,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   this(string name) nothrow
   {
     GtkActionGroup* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_action_group_new(_name);
     this(_cretval, Yes.Take);
   }
@@ -221,7 +221,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void addActionWithAccel(gtk.action.Action action, string accelerator = null) nothrow
   {
-    const(char)* _accelerator = accelerator.toCString(No.Alloc);
+    const(char)* _accelerator = accelerator.toCString!(No.Malloc, Yes.Nullable);
     gtk_action_group_add_action_with_accel(cast(GtkActionGroup*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null, _accelerator);
   }
 
@@ -248,7 +248,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.action.Action getAction(string actionName) nothrow
   {
     GtkAction* _cretval;
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_action_group_get_action(cast(GtkActionGroup*)this._cPtr, _actionName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
@@ -262,7 +262,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_group_get_name(cast(GtkActionGroup*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
     {
       string _dretval;
       auto _dlg = cast(gtk.types.TranslateFunc*)funcData;
-      string _path = path.fromCString(No.Free);
+      string _path = path.fromCString!(No.Free);
 
       try
       {
@@ -365,7 +365,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TranslateFunc");
       }
-      auto _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
 
       return _retval;
     }
@@ -389,7 +389,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setTranslationDomain(string domain = null) nothrow
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
     gtk_action_group_set_translation_domain(cast(GtkActionGroup*)this._cPtr, _domain);
   }
 
@@ -416,9 +416,9 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   string translateString(string string_) nothrow
   {
     const(char)* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_action_group_translate_string(cast(GtkActionGroup*)this._cPtr, _string_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

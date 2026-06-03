@@ -118,7 +118,7 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource csA, gst.control_source.ControlSource csR, gst.control_source.ControlSource csG, gst.control_source.ControlSource csB) nothrow
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, csA ? cast(GstControlSource*)csA._cPtr(No.Dup) : null, csR ? cast(GstControlSource*)csR._cPtr(No.Dup) : null, csG ? cast(GstControlSource*)csG._cPtr(No.Dup) : null, csB ? cast(GstControlSource*)csB._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }

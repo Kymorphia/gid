@@ -63,8 +63,8 @@ class ContentType : gobject.object.ObjectWrap
   this(string type, string subtype) nothrow
   {
     GMimeContentType* _cretval;
-    const(char)* _type = type.toCString(No.Alloc);
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_content_type_new(_type, _subtype);
     this(_cretval, Yes.Take);
   }
@@ -80,7 +80,7 @@ class ContentType : gobject.object.ObjectWrap
   static gmime.content_type.ContentType parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeContentType* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_content_type_parse(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _str);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.content_type.ContentType)(cast(GMimeContentType*)_cretval, Yes.Take);
     return _retval;
@@ -97,7 +97,7 @@ class ContentType : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_mime_content_type_encode(cast(GMimeContentType*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ContentType : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_content_type_get_media_subtype(cast(GMimeContentType*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class ContentType : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_content_type_get_media_type(cast(GMimeContentType*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class ContentType : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_mime_content_type_get_mime_type(cast(GMimeContentType*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -151,9 +151,9 @@ class ContentType : gobject.object.ObjectWrap
   string getParameter(string name) nothrow
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_content_type_get_parameter(cast(GMimeContentType*)this._cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -182,8 +182,8 @@ class ContentType : gobject.object.ObjectWrap
   bool isType(string type, string subtype) nothrow
   {
     bool _retval;
-    const(char)* _type = type.toCString(No.Alloc);
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_mime_content_type_is_type(cast(GMimeContentType*)this._cPtr, _type, _subtype);
     return _retval;
   }
@@ -196,7 +196,7 @@ class ContentType : gobject.object.ObjectWrap
   */
   void setMediaSubtype(string subtype) nothrow
   {
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     g_mime_content_type_set_media_subtype(cast(GMimeContentType*)this._cPtr, _subtype);
   }
 
@@ -208,7 +208,7 @@ class ContentType : gobject.object.ObjectWrap
   */
   void setMediaType(string type) nothrow
   {
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
     g_mime_content_type_set_media_type(cast(GMimeContentType*)this._cPtr, _type);
   }
 
@@ -224,8 +224,8 @@ class ContentType : gobject.object.ObjectWrap
   */
   void setParameter(string name, string value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_mime_content_type_set_parameter(cast(GMimeContentType*)this._cPtr, _name, _value);
   }
 }

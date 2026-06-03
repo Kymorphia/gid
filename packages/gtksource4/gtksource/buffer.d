@@ -228,7 +228,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool backwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null) nothrow
   {
     bool _retval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)gtk_source_buffer_backward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
     return _retval;
   }
@@ -307,8 +307,8 @@ class Buffer : gtk.text_buffer.TextBuffer
   gtksource.mark.Mark createSourceMark(string name, string category, gtk.text_iter.TextIter where) nothrow
   {
     GtkSourceMark* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_buffer_create_source_mark(cast(GtkSourceBuffer*)this._cPtr, _name, _category, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
@@ -358,7 +358,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool forwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null) nothrow
   {
     bool _retval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)gtk_source_buffer_forward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
     return _retval;
   }
@@ -387,7 +387,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -464,7 +464,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   gtksource.mark.Mark[] getSourceMarksAtIter(gtk.text_iter.TextIter iter, string category = null) nothrow
   {
     GSList* _cretval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_buffer_get_source_marks_at_iter(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
     auto _retval = gSListToD!(gtksource.mark.Mark, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
@@ -482,7 +482,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   gtksource.mark.Mark[] getSourceMarksAtLine(int line, string category = null) nothrow
   {
     GSList* _cretval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_buffer_get_source_marks_at_line(cast(GtkSourceBuffer*)this._cPtr, line, _category);
     auto _retval = gSListToD!(gtksource.mark.Mark, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
@@ -535,7 +535,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool iterBackwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass) nothrow
   {
     bool _retval;
-    const(char)* _contextClass = contextClass.toCString(No.Alloc);
+    const(char)* _contextClass = contextClass.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_source_buffer_iter_backward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _contextClass);
     return _retval;
   }
@@ -557,7 +557,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool iterForwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass) nothrow
   {
     bool _retval;
-    const(char)* _contextClass = contextClass.toCString(No.Alloc);
+    const(char)* _contextClass = contextClass.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_source_buffer_iter_forward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _contextClass);
     return _retval;
   }
@@ -575,7 +575,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool iterHasContextClass(gtk.text_iter.TextIter iter, string contextClass) nothrow
   {
     bool _retval;
-    const(char)* _contextClass = contextClass.toCString(No.Alloc);
+    const(char)* _contextClass = contextClass.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_source_buffer_iter_has_context_class(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, _contextClass);
     return _retval;
   }
@@ -614,7 +614,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void removeSourceMarks(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, string category = null) nothrow
   {
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_buffer_remove_source_marks(cast(GtkSourceBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, _category);
   }
 

@@ -15,7 +15,7 @@ struct GLPlatform
   static gstgl.types.GLPlatform fromString(string platformS) nothrow
   {
     GstGLPlatform _cretval;
-    const(char)* _platformS = platformS.toCString(No.Alloc);
+    const(char)* _platformS = platformS.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_gl_platform_from_string(_platformS);
     gstgl.types.GLPlatform _retval = cast(gstgl.types.GLPlatform)_cretval;
     return _retval;
@@ -26,7 +26,7 @@ struct GLPlatform
   {
     char* _cretval;
     _cretval = gst_gl_platform_to_string(platform);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

@@ -288,7 +288,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     _cretval = g_data_input_stream_read_line_utf8(cast(GDataInputStream*)this._cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -425,12 +425,12 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   string readUntil(string stopChars, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
-    const(char)* _stopChars = stopChars.toCString(No.Alloc);
+    const(char)* _stopChars = stopChars.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_data_input_stream_read_until(cast(GDataInputStream*)this._cPtr, _stopChars, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -477,7 +477,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _stopChars = stopChars.toCString(No.Alloc);
+    const(char)* _stopChars = stopChars.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_data_input_stream_read_until_async(cast(GDataInputStream*)this._cPtr, _stopChars, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -505,7 +505,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)this._cPtr, _stopChars, _stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -623,7 +623,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

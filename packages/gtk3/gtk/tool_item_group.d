@@ -138,7 +138,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   this(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_tool_item_group_new(_label);
     this(_cretval, No.Take);
   }
@@ -218,7 +218,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     const(char)* _cretval;
     _cretval = gtk_tool_item_group_get_label(cast(GtkToolItemGroup*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     gtk_tool_item_group_set_label(cast(GtkToolItemGroup*)this._cPtr, _label);
   }
 

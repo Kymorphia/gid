@@ -2018,39 +2018,39 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void resetProperty(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_settings_reset_property(cast(GtkSettings*)this._cPtr, _name);
   }
 
   /** */
   void setDoubleProperty(string name, double vDouble, string origin) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, No.Nullable);
     gtk_settings_set_double_property(cast(GtkSettings*)this._cPtr, _name, vDouble, _origin);
   }
 
   /** */
   void setLongProperty(string name, glong vLong, string origin) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, No.Nullable);
     gtk_settings_set_long_property(cast(GtkSettings*)this._cPtr, _name, vLong, _origin);
   }
 
   /** */
   void setPropertyValue(string name, gtk.settings_value.SettingsValue svalue) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_settings_set_property_value(cast(GtkSettings*)this._cPtr, _name, svalue ? cast(const(GtkSettingsValue)*)svalue._cPtr : null);
   }
 
   /** */
   void setStringProperty(string name, string vString, string origin) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _vString = vString.toCString(No.Alloc);
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _vString = vString.toCString!(No.Malloc, No.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, No.Nullable);
     gtk_settings_set_string_property(cast(GtkSettings*)this._cPtr, _name, _vString, _origin);
   }
 }

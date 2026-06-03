@@ -1535,7 +1535,7 @@ class Settings : gobject.object.ObjectWrap
   bool applyFromKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)webkit_settings_apply_from_key_file(cast(WebKitSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
@@ -1607,7 +1607,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_cursive_font_family(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1619,7 +1619,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_default_charset(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1631,7 +1631,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_default_font_family(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1996,7 +1996,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_fantasy_font_family(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2067,7 +2067,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_media_content_types_requiring_hardware_support(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2114,7 +2114,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_monospace_font_family(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2126,7 +2126,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_pictograph_font_family(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2149,7 +2149,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_sans_serif_font_family(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2161,7 +2161,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_serif_font_family(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2173,7 +2173,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_user_agent(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2185,7 +2185,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_webrtc_udp_ports_range(cast(WebKitSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2264,7 +2264,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setCursiveFontFamily(string cursiveFontFamily) nothrow
   {
-    const(char)* _cursiveFontFamily = cursiveFontFamily.toCString(No.Alloc);
+    const(char)* _cursiveFontFamily = cursiveFontFamily.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_cursive_font_family(cast(WebKitSettings*)this._cPtr, _cursiveFontFamily);
   }
 
@@ -2276,7 +2276,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setDefaultCharset(string defaultCharset) nothrow
   {
-    const(char)* _defaultCharset = defaultCharset.toCString(No.Alloc);
+    const(char)* _defaultCharset = defaultCharset.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_default_charset(cast(WebKitSettings*)this._cPtr, _defaultCharset);
   }
 
@@ -2288,7 +2288,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setDefaultFontFamily(string defaultFontFamily) nothrow
   {
-    const(char)* _defaultFontFamily = defaultFontFamily.toCString(No.Alloc);
+    const(char)* _defaultFontFamily = defaultFontFamily.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_default_font_family(cast(WebKitSettings*)this._cPtr, _defaultFontFamily);
   }
 
@@ -2654,7 +2654,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setFantasyFontFamily(string fantasyFontFamily) nothrow
   {
-    const(char)* _fantasyFontFamily = fantasyFontFamily.toCString(No.Alloc);
+    const(char)* _fantasyFontFamily = fantasyFontFamily.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_fantasy_font_family(cast(WebKitSettings*)this._cPtr, _fantasyFontFamily);
   }
 
@@ -2727,7 +2727,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setMediaContentTypesRequiringHardwareSupport(string contentTypes = null) nothrow
   {
-    const(char)* _contentTypes = contentTypes.toCString(No.Alloc);
+    const(char)* _contentTypes = contentTypes.toCString!(No.Malloc, Yes.Nullable);
     webkit_settings_set_media_content_types_requiring_hardware_support(cast(WebKitSettings*)this._cPtr, _contentTypes);
   }
 
@@ -2772,7 +2772,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setMonospaceFontFamily(string monospaceFontFamily) nothrow
   {
-    const(char)* _monospaceFontFamily = monospaceFontFamily.toCString(No.Alloc);
+    const(char)* _monospaceFontFamily = monospaceFontFamily.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_monospace_font_family(cast(WebKitSettings*)this._cPtr, _monospaceFontFamily);
   }
 
@@ -2784,7 +2784,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setPictographFontFamily(string pictographFontFamily) nothrow
   {
-    const(char)* _pictographFontFamily = pictographFontFamily.toCString(No.Alloc);
+    const(char)* _pictographFontFamily = pictographFontFamily.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_pictograph_font_family(cast(WebKitSettings*)this._cPtr, _pictographFontFamily);
   }
 
@@ -2807,7 +2807,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setSansSerifFontFamily(string sansSerifFontFamily) nothrow
   {
-    const(char)* _sansSerifFontFamily = sansSerifFontFamily.toCString(No.Alloc);
+    const(char)* _sansSerifFontFamily = sansSerifFontFamily.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_sans_serif_font_family(cast(WebKitSettings*)this._cPtr, _sansSerifFontFamily);
   }
 
@@ -2819,7 +2819,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setSerifFontFamily(string serifFontFamily) nothrow
   {
-    const(char)* _serifFontFamily = serifFontFamily.toCString(No.Alloc);
+    const(char)* _serifFontFamily = serifFontFamily.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_serif_font_family(cast(WebKitSettings*)this._cPtr, _serifFontFamily);
   }
 
@@ -2831,7 +2831,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setUserAgent(string userAgent = null) nothrow
   {
-    const(char)* _userAgent = userAgent.toCString(No.Alloc);
+    const(char)* _userAgent = userAgent.toCString!(No.Malloc, Yes.Nullable);
     webkit_settings_set_user_agent(cast(WebKitSettings*)this._cPtr, _userAgent);
   }
 
@@ -2848,8 +2848,8 @@ class Settings : gobject.object.ObjectWrap
   */
   void setUserAgentWithApplicationDetails(string applicationName = null, string applicationVersion = null) nothrow
   {
-    const(char)* _applicationName = applicationName.toCString(No.Alloc);
-    const(char)* _applicationVersion = applicationVersion.toCString(No.Alloc);
+    const(char)* _applicationName = applicationName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _applicationVersion = applicationVersion.toCString!(No.Malloc, Yes.Nullable);
     webkit_settings_set_user_agent_with_application_details(cast(WebKitSettings*)this._cPtr, _applicationName, _applicationVersion);
   }
 
@@ -2861,7 +2861,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setWebrtcUdpPortsRange(string udpPortRange) nothrow
   {
-    const(char)* _udpPortRange = udpPortRange.toCString(No.Alloc);
+    const(char)* _udpPortRange = udpPortRange.toCString!(No.Malloc, No.Nullable);
     webkit_settings_set_webrtc_udp_ports_range(cast(WebKitSettings*)this._cPtr, _udpPortRange);
   }
 

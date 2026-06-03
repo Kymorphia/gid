@@ -129,7 +129,7 @@ class MetaContext : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gda_meta_context_get_table(cast(GdaMetaContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class MetaContext : gobject.boxed.Boxed
   */
   void setColumn(string column, gobject.value.Value value, gda.connection.Connection cnc = null) nothrow
   {
-    const(char)* _column = column.toCString(No.Alloc);
+    const(char)* _column = column.toCString!(No.Malloc, No.Nullable);
     gda_meta_context_set_column(cast(GdaMetaContext*)this._cPtr, _column, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
   }
 
@@ -161,7 +161,7 @@ class MetaContext : gobject.boxed.Boxed
   */
   void setTable(string table) nothrow
   {
-    const(char)* _table = table.toCString(No.Alloc);
+    const(char)* _table = table.toCString!(No.Malloc, No.Nullable);
     gda_meta_context_set_table(cast(GdaMetaContext*)this._cPtr, _table);
   }
 }

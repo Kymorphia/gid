@@ -63,7 +63,7 @@ class CryptoContext : gobject.object.ObjectWrap
   this(string protocol) nothrow
   {
     GMimeCryptoContext* _cretval;
-    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_crypto_context_new(_protocol);
     this(_cretval, Yes.Take);
   }
@@ -101,7 +101,7 @@ class CryptoContext : gobject.object.ObjectWrap
   gmime.decrypt_result.DecryptResult decrypt(gmime.types.DecryptFlags flags, string sessionKey, gmime.stream.Stream istream, gmime.stream.Stream ostream)
   {
     GMimeDecryptResult* _cretval;
-    const(char)* _sessionKey = sessionKey.toCString(No.Alloc);
+    const(char)* _sessionKey = sessionKey.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_mime_crypto_context_decrypt(cast(GMimeCryptoContext*)this._cPtr, flags, _sessionKey, istream ? cast(GMimeStream*)istream._cPtr(No.Dup) : null, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -120,7 +120,7 @@ class CryptoContext : gobject.object.ObjectWrap
   gmime.types.DigestAlgo digestId(string name) nothrow
   {
     GMimeDigestAlgo _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_crypto_context_digest_id(cast(GMimeCryptoContext*)this._cPtr, _name);
     gmime.types.DigestAlgo _retval = cast(gmime.types.DigestAlgo)_cretval;
     return _retval;
@@ -137,7 +137,7 @@ class CryptoContext : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_digest_name(cast(GMimeCryptoContext*)this._cPtr, digest);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class CryptoContext : gobject.object.ObjectWrap
   int encrypt(bool sign, string userid, gmime.types.EncryptFlags flags, string[] recipients, gmime.stream.Stream istream, gmime.stream.Stream ostream)
   {
     int _retval;
-    const(char)* _userid = userid.toCString(No.Alloc);
+    const(char)* _userid = userid.toCString!(No.Malloc, Yes.Nullable);
     auto _recipients = gPtrArrayFromD!(string, false)(recipients);
     scope(exit) containerFree!(GPtrArray*, string, GidOwnership.None)(_recipients);
     GError *_err;
@@ -186,7 +186,7 @@ class CryptoContext : gobject.object.ObjectWrap
     int _retval;
     char*[] _tmpkeys;
     foreach (s; keys)
-      _tmpkeys ~= s.toCString(No.Alloc);
+      _tmpkeys ~= s.toCString;
     _tmpkeys ~= null;
     const(char*)* _keys = _tmpkeys.ptr;
 
@@ -205,7 +205,7 @@ class CryptoContext : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_get_encryption_protocol(cast(GMimeCryptoContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class CryptoContext : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_get_key_exchange_protocol(cast(GMimeCryptoContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class CryptoContext : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_get_signature_protocol(cast(GMimeCryptoContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class CryptoContext : gobject.object.ObjectWrap
   int sign(bool detach, string userid, gmime.stream.Stream istream, gmime.stream.Stream ostream)
   {
     int _retval;
-    const(char)* _userid = userid.toCString(No.Alloc);
+    const(char)* _userid = userid.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = g_mime_crypto_context_sign(cast(GMimeCryptoContext*)this._cPtr, detach, _userid, istream ? cast(GMimeStream*)istream._cPtr(No.Dup) : null, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)

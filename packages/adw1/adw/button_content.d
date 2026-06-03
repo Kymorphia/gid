@@ -227,7 +227,7 @@ class ButtonContent : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_button_content_get_icon_name(cast(AdwButtonContent*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class ButtonContent : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_button_content_get_label(cast(AdwButtonContent*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class ButtonContent : gtk.widget.Widget
   */
   void setIconName(string iconName) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     adw_button_content_set_icon_name(cast(AdwButtonContent*)this._cPtr, _iconName);
   }
 
@@ -291,7 +291,7 @@ class ButtonContent : gtk.widget.Widget
   */
   void setLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     adw_button_content_set_label(cast(AdwButtonContent*)this._cPtr, _label);
   }
 

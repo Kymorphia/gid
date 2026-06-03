@@ -52,7 +52,7 @@ template SerializableT()
   override bool defaultDeserializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec, json.node.Node propertyNode) nothrow
   {
     bool _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)json_serializable_default_deserialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, propertyNode ? cast(JsonNode*)propertyNode._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -88,7 +88,7 @@ template SerializableT()
   override json.node.Node defaultSerializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec) nothrow
   {
     JsonNode* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = json_serializable_default_serialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -119,7 +119,7 @@ template SerializableT()
   override bool deserializeProperty(string propertyName, out gobject.value.Value value, gobject.param_spec.ParamSpec pspec, json.node.Node propertyNode) nothrow
   {
     bool _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     GValue _value;
     _retval = cast(bool)json_serializable_deserialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, &_value, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, propertyNode ? cast(JsonNode*)propertyNode._cPtr(No.Dup) : null);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -138,7 +138,7 @@ template SerializableT()
   override gobject.param_spec.ParamSpec findProperty(string name) nothrow
   {
     GParamSpec* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = json_serializable_find_property(cast(JsonSerializable*)this._cPtr, _name);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
@@ -197,7 +197,7 @@ template SerializableT()
   override json.node.Node serializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec) nothrow
   {
     JsonNode* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = json_serializable_serialize_property(cast(JsonSerializable*)this._cPtr, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

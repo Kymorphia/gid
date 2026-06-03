@@ -172,7 +172,7 @@ class DateTime : gobject.boxed.Boxed
   static glib.date_time.DateTime newFromIso8601(string text, glib.time_zone.TimeZone defaultTz = null) nothrow
   {
     GDateTime* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = g_date_time_new_from_iso8601(_text, defaultTz ? cast(GTimeZone*)defaultTz._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -786,9 +786,9 @@ class DateTime : gobject.boxed.Boxed
   string format(string format) nothrow
   {
     char* _cretval;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
     _cretval = g_date_time_format(cast(GDateTime*)this._cPtr, _format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -806,7 +806,7 @@ class DateTime : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_date_time_format_iso8601(cast(GDateTime*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -941,7 +941,7 @@ class DateTime : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_date_time_get_timezone_abbreviation(cast(GDateTime*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

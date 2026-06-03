@@ -142,7 +142,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addApplication(string application) nothrow
   {
-    const(char)* _application = application.toCString(No.Alloc);
+    const(char)* _application = application.toCString!(No.Malloc, No.Nullable);
     gtk_recent_filter_add_application(cast(GtkRecentFilter*)this._cPtr, _application);
   }
 
@@ -193,7 +193,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addGroup(string group) nothrow
   {
-    const(char)* _group = group.toCString(No.Alloc);
+    const(char)* _group = group.toCString!(No.Malloc, No.Nullable);
     gtk_recent_filter_add_group(cast(GtkRecentFilter*)this._cPtr, _group);
   }
 
@@ -205,7 +205,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addMimeType(string mimeType) nothrow
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     gtk_recent_filter_add_mime_type(cast(GtkRecentFilter*)this._cPtr, _mimeType);
   }
 
@@ -218,7 +218,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addPattern(string pattern) nothrow
   {
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
     gtk_recent_filter_add_pattern(cast(GtkRecentFilter*)this._cPtr, _pattern);
   }
 
@@ -264,7 +264,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   {
     const(char)* _cretval;
     _cretval = gtk_recent_filter_get_name(cast(GtkRecentFilter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_recent_filter_set_name(cast(GtkRecentFilter*)this._cPtr, _name);
   }
 }

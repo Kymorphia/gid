@@ -166,7 +166,7 @@ class Set : gobject.object.ObjectWrap
   static gda.set.Set newFromSpecString(string xmlSpec)
   {
     GdaSet* _cretval;
-    const(char)* _xmlSpec = xmlSpec.toCString(No.Alloc);
+    const(char)* _xmlSpec = xmlSpec.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gda_set_new_from_spec_string(_xmlSpec, &_err);
     if (_err)
@@ -258,7 +258,7 @@ class Set : gobject.object.ObjectWrap
   gda.holder.Holder getHolder(string holderId) nothrow
   {
     GdaHolder* _cretval;
-    const(char)* _holderId = holderId.toCString(No.Alloc);
+    const(char)* _holderId = holderId.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_set_get_holder(cast(GdaSet*)this._cPtr, _holderId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.holder.Holder)(cast(GdaHolder*)_cretval, No.Take);
     return _retval;
@@ -274,7 +274,7 @@ class Set : gobject.object.ObjectWrap
   gobject.value.Value getHolderValue(string holderId) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _holderId = holderId.toCString(No.Alloc);
+    const(char)* _holderId = holderId.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_set_get_holder_value(cast(GdaSet*)this._cPtr, _holderId);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;

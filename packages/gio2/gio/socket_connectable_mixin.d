@@ -117,7 +117,7 @@ template SocketConnectableT()
   {
     char* _cretval;
     _cretval = g_socket_connectable_to_string(cast(GSocketConnectable*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

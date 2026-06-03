@@ -89,7 +89,7 @@ class PrintSettings : gobject.object.ObjectWrap
   static gtk.print_settings.PrintSettings newFromFile(string fileName)
   {
     GtkPrintSettings* _cretval;
-    const(char)* _fileName = fileName.toCString(No.Alloc);
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gtk_print_settings_new_from_file(_fileName, &_err);
     if (_err)
@@ -130,7 +130,7 @@ class PrintSettings : gobject.object.ObjectWrap
   static gtk.print_settings.PrintSettings newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     GtkPrintSettings* _cretval;
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
@@ -162,8 +162,8 @@ class PrintSettings : gobject.object.ObjectWrap
     extern(C) void _funcCallback(const(char)* key, const(char)* value, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.PrintSettingsFunc*)userData;
-      string _key = key.fromCString(No.Free);
-      string _value = value.fromCString(No.Free);
+      string _key = key.fromCString!(No.Free);
+      string _value = value.fromCString!(No.Free);
 
       try
       {
@@ -189,9 +189,9 @@ class PrintSettings : gobject.object.ObjectWrap
   string get(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_print_settings_get(cast(GtkPrintSettings*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool getBool(string key) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_print_settings_get_bool(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -233,7 +233,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_default_source(cast(GtkPrintSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_dither(cast(GtkPrintSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class PrintSettings : gobject.object.ObjectWrap
   double getDouble(string key) nothrow
   {
     double _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = gtk_print_settings_get_double(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -279,7 +279,7 @@ class PrintSettings : gobject.object.ObjectWrap
   double getDoubleWithDefault(string key, double def) nothrow
   {
     double _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = gtk_print_settings_get_double_with_default(cast(GtkPrintSettings*)this._cPtr, _key, def);
     return _retval;
   }
@@ -304,7 +304,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_finishings(cast(GtkPrintSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class PrintSettings : gobject.object.ObjectWrap
   int getInt(string key) nothrow
   {
     int _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = gtk_print_settings_get_int(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -335,7 +335,7 @@ class PrintSettings : gobject.object.ObjectWrap
   int getIntWithDefault(string key, int def) nothrow
   {
     int _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = gtk_print_settings_get_int_with_default(cast(GtkPrintSettings*)this._cPtr, _key, def);
     return _retval;
   }
@@ -352,7 +352,7 @@ class PrintSettings : gobject.object.ObjectWrap
   double getLength(string key, gtk.types.Unit unit) nothrow
   {
     double _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = gtk_print_settings_get_length(cast(GtkPrintSettings*)this._cPtr, _key, unit);
     return _retval;
   }
@@ -367,7 +367,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_media_type(cast(GtkPrintSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_output_bin(cast(GtkPrintSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -529,7 +529,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_printer(cast(GtkPrintSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -632,7 +632,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool hasKey(string key) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_print_settings_has_key(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -650,7 +650,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool loadFile(string fileName)
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(No.Alloc);
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_print_settings_load_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
@@ -673,7 +673,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_print_settings_load_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
@@ -690,8 +690,8 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void set(string key, string value = null) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     gtk_print_settings_set(cast(GtkPrintSettings*)this._cPtr, _key, _value);
   }
 
@@ -704,7 +704,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setBool(string key, bool value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_bool(cast(GtkPrintSettings*)this._cPtr, _key, value);
   }
 
@@ -727,7 +727,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setDefaultSource(string defaultSource) nothrow
   {
-    const(char)* _defaultSource = defaultSource.toCString(No.Alloc);
+    const(char)* _defaultSource = defaultSource.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_default_source(cast(GtkPrintSettings*)this._cPtr, _defaultSource);
   }
 
@@ -739,7 +739,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setDither(string dither) nothrow
   {
-    const(char)* _dither = dither.toCString(No.Alloc);
+    const(char)* _dither = dither.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_dither(cast(GtkPrintSettings*)this._cPtr, _dither);
   }
 
@@ -752,7 +752,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setDouble(string key, double value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_double(cast(GtkPrintSettings*)this._cPtr, _key, value);
   }
 
@@ -775,7 +775,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setFinishings(string finishings) nothrow
   {
-    const(char)* _finishings = finishings.toCString(No.Alloc);
+    const(char)* _finishings = finishings.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_finishings(cast(GtkPrintSettings*)this._cPtr, _finishings);
   }
 
@@ -788,7 +788,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setInt(string key, int value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_int(cast(GtkPrintSettings*)this._cPtr, _key, value);
   }
 
@@ -802,7 +802,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setLength(string key, double value, gtk.types.Unit unit) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_length(cast(GtkPrintSettings*)this._cPtr, _key, value, unit);
   }
 
@@ -816,7 +816,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setMediaType(string mediaType) nothrow
   {
-    const(char)* _mediaType = mediaType.toCString(No.Alloc);
+    const(char)* _mediaType = mediaType.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_media_type(cast(GtkPrintSettings*)this._cPtr, _mediaType);
   }
 
@@ -872,7 +872,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setOutputBin(string outputBin) nothrow
   {
-    const(char)* _outputBin = outputBin.toCString(No.Alloc);
+    const(char)* _outputBin = outputBin.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_output_bin(cast(GtkPrintSettings*)this._cPtr, _outputBin);
   }
 
@@ -960,7 +960,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setPrinter(string printer) nothrow
   {
-    const(char)* _printer = printer.toCString(No.Alloc);
+    const(char)* _printer = printer.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_set_printer(cast(GtkPrintSettings*)this._cPtr, _printer);
   }
 
@@ -1059,7 +1059,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool toFile(string fileName)
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(No.Alloc);
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_print_settings_to_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
@@ -1089,7 +1089,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null) nothrow
   {
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
     gtk_print_settings_to_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
   }
 
@@ -1102,7 +1102,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void unset(string key) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     gtk_print_settings_unset(cast(GtkPrintSettings*)this._cPtr, _key);
   }
 }

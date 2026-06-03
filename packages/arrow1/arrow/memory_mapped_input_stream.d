@@ -56,7 +56,7 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
   this(string path)
   {
     GArrowMemoryMappedInputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_memory_mapped_input_stream_new(_path, &_err);
     if (_err)

@@ -63,7 +63,7 @@ class MessagePartial : gmime.part.Part
   this(string id, int number, int total) nothrow
   {
     GMimeMessagePartial* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_message_partial_new(_id, number, total);
     this(_cretval, Yes.Take);
   }
@@ -102,7 +102,7 @@ class MessagePartial : gmime.part.Part
   {
     const(char)* _cretval;
     _cretval = g_mime_message_partial_get_id(cast(GMimeMessagePartial*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

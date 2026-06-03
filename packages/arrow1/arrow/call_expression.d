@@ -52,7 +52,7 @@ class CallExpression : arrow.expression.Expression
   this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options = null) nothrow
   {
     GArrowCallExpression* _cretval;
-    const(char)* _function_ = function_.toCString(No.Alloc);
+    const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
     auto _arguments = gListFromD!(arrow.expression.Expression)(arguments);
     scope(exit) containerFree!(GList*, arrow.expression.Expression, GidOwnership.None)(_arguments);
     _cretval = garrow_call_expression_new(_function_, _arguments, options ? cast(GArrowFunctionOptions*)options._cPtr(No.Dup) : null);

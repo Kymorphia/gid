@@ -135,7 +135,7 @@ class Config : gobject.object.ObjectWrap
   static bool dsnNeedsAuthentication(string dsnName) nothrow
   {
     bool _retval;
-    const(char)* _dsnName = dsnName.toCString(No.Alloc);
+    const(char)* _dsnName = dsnName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gda_config_dsn_needs_authentication(_dsnName);
     return _retval;
   }
@@ -175,7 +175,7 @@ class Config : gobject.object.ObjectWrap
   static gda.dsn_info.DsnInfo getDsnInfo(string dsnName) nothrow
   {
     GdaDsnInfo* _cretval;
-    const(char)* _dsnName = dsnName.toCString(No.Alloc);
+    const(char)* _dsnName = dsnName.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_config_get_dsn_info(_dsnName);
     auto _retval = _cretval ? new gda.dsn_info.DsnInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -206,7 +206,7 @@ class Config : gobject.object.ObjectWrap
   static int getDsnInfoIndex(string dsnName) nothrow
   {
     int _retval;
-    const(char)* _dsnName = dsnName.toCString(No.Alloc);
+    const(char)* _dsnName = dsnName.toCString!(No.Malloc, No.Nullable);
     _retval = gda_config_get_dsn_info_index(_dsnName);
     return _retval;
   }
@@ -237,7 +237,7 @@ class Config : gobject.object.ObjectWrap
   static gda.server_provider.ServerProvider getProvider(string providerName)
   {
     GdaServerProvider* _cretval;
-    const(char)* _providerName = providerName.toCString(No.Alloc);
+    const(char)* _providerName = providerName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gda_config_get_provider(_providerName, &_err);
     if (_err)
@@ -256,7 +256,7 @@ class Config : gobject.object.ObjectWrap
   static gda.provider_info.ProviderInfo getProviderInfo(string providerName) nothrow
   {
     GdaProviderInfo* _cretval;
-    const(char)* _providerName = providerName.toCString(No.Alloc);
+    const(char)* _providerName = providerName.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_config_get_provider_info(_providerName);
     auto _retval = _cretval ? new gda.provider_info.ProviderInfo(cast(GdaProviderInfo*)_cretval, No.Take) : null;
     return _retval;
@@ -318,7 +318,7 @@ class Config : gobject.object.ObjectWrap
   static bool removeDsn(string dsnName)
   {
     bool _retval;
-    const(char)* _dsnName = dsnName.toCString(No.Alloc);
+    const(char)* _dsnName = dsnName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_config_remove_dsn(_dsnName, &_err);
     if (_err)

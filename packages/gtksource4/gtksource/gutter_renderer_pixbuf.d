@@ -114,7 +114,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   {
     const(char)* _cretval;
     _cretval = gtk_source_gutter_renderer_pixbuf_get_icon_name(cast(GtkSourceGutterRendererPixbuf*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   /** */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_gutter_renderer_pixbuf_set_icon_name(cast(GtkSourceGutterRendererPixbuf*)this._cPtr, _iconName);
   }
 

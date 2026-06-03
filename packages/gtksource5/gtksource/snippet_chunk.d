@@ -196,7 +196,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_spec(cast(GtkSourceSnippetChunk*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_text(cast(GtkSourceSnippetChunk*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   */
   void setSpec(string spec) nothrow
   {
-    const(char)* _spec = spec.toCString(No.Alloc);
+    const(char)* _spec = spec.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_chunk_set_spec(cast(GtkSourceSnippetChunk*)this._cPtr, _spec);
   }
 
@@ -292,7 +292,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   */
   void setText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_chunk_set_text(cast(GtkSourceSnippetChunk*)this._cPtr, _text);
   }
 
@@ -313,7 +313,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   /** */
   void setTooltipText(string tooltipText) nothrow
   {
-    const(char)* _tooltipText = tooltipText.toCString(No.Alloc);
+    const(char)* _tooltipText = tooltipText.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_chunk_set_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr, _tooltipText);
   }
 }

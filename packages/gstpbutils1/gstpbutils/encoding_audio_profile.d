@@ -68,7 +68,7 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
   this(gst.caps.Caps format, string preset, gst.caps.Caps restriction, uint presence) nothrow
   {
     GstEncodingAudioProfile* _cretval;
-    const(char)* _preset = preset.toCString(No.Alloc);
+    const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_encoding_audio_profile_new(format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction._cPtr(No.Dup) : null, presence);
     this(_cretval, Yes.Take);
   }

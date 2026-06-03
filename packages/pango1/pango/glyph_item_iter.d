@@ -234,7 +234,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool initEnd(pango.glyph_item.GlyphItem glyphItem, string text) nothrow
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)pango_glyph_item_iter_init_end(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
     return _retval;
   }
@@ -253,7 +253,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool initStart(pango.glyph_item.GlyphItem glyphItem, string text) nothrow
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)pango_glyph_item_iter_init_start(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
     return _retval;
   }

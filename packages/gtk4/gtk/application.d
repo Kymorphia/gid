@@ -222,7 +222,7 @@ class Application : gio.application.Application
   this(string applicationId, gio.types.ApplicationFlags flags) nothrow
   {
     GtkApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_application_new(_applicationId, flags);
     this(_cretval, Yes.Take);
   }
@@ -264,7 +264,7 @@ class Application : gio.application.Application
   string[] getAccelsForAction(string detailedActionName) nothrow
   {
     char** _cretval;
-    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
+    const(char)* _detailedActionName = detailedActionName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_application_get_accels_for_action(cast(GtkApplication*)this._cPtr, _detailedActionName);
     string[] _retval;
 
@@ -275,7 +275,7 @@ class Application : gio.application.Application
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -307,7 +307,7 @@ class Application : gio.application.Application
   string[] getActionsForAccel(string accel) nothrow
   {
     char** _cretval;
-    const(char)* _accel = accel.toCString(No.Alloc);
+    const(char)* _accel = accel.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_application_get_actions_for_accel(cast(GtkApplication*)this._cPtr, _accel);
     string[] _retval;
 
@@ -318,7 +318,7 @@ class Application : gio.application.Application
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -355,7 +355,7 @@ class Application : gio.application.Application
   gio.menu.Menu getMenuById(string id) nothrow
   {
     GMenu* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)this._cPtr, _id);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
@@ -451,7 +451,7 @@ class Application : gio.application.Application
   uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason = null) nothrow
   {
     uint _retval;
-    const(char)* _reason = reason.toCString(No.Alloc);
+    const(char)* _reason = reason.toCString!(No.Malloc, Yes.Nullable);
     _retval = gtk_application_inhibit(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null, flags, _reason);
     return _retval;
   }
@@ -475,7 +475,7 @@ class Application : gio.application.Application
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -520,10 +520,10 @@ class Application : gio.application.Application
   */
   void setAccelsForAction(string detailedActionName, string[] accels) nothrow
   {
-    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
+    const(char)* _detailedActionName = detailedActionName.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpaccels;
     foreach (s; accels)
-      _tmpaccels ~= s.toCString(No.Alloc);
+      _tmpaccels ~= s.toCString;
     _tmpaccels ~= null;
     const(char*)* _accels = _tmpaccels.ptr;
 

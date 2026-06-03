@@ -2401,7 +2401,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setIconName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gdk_window_set_icon_name(cast(GdkWindow*)this._cPtr, _name);
   }
 
@@ -2577,7 +2577,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setRole(string role) nothrow
   {
-    const(char)* _role = role.toCString(No.Alloc);
+    const(char)* _role = role.toCString!(No.Malloc, No.Nullable);
     gdk_window_set_role(cast(GdkWindow*)this._cPtr, _role);
   }
 
@@ -2661,7 +2661,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setStartupId(string startupId) nothrow
   {
-    const(char)* _startupId = startupId.toCString(No.Alloc);
+    const(char)* _startupId = startupId.toCString!(No.Malloc, No.Nullable);
     gdk_window_set_startup_id(cast(GdkWindow*)this._cPtr, _startupId);
   }
 
@@ -2711,7 +2711,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gdk_window_set_title(cast(GdkWindow*)this._cPtr, _title);
   }
 

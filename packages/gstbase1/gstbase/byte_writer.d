@@ -469,7 +469,7 @@ class ByteWriter
   bool putStringUtf8(string data) nothrow
   {
     bool _retval;
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_byte_writer_put_string_utf8(cast(GstByteWriter*)this._cPtr, _data);
     return _retval;
   }

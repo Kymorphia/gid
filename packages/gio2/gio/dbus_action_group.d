@@ -86,8 +86,8 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
   static gio.dbus_action_group.DBusActionGroup get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath) nothrow
   {
     GDBusActionGroup* _cretval;
-    const(char)* _busName = busName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _busName = busName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _busName, _objectPath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
     return _retval;

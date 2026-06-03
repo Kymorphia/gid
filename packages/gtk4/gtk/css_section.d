@@ -157,7 +157,7 @@ class CssSection : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_css_section_to_string(cast(const(GtkCssSection)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

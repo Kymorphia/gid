@@ -45,7 +45,7 @@ class PropertyExpression : gtk.expression.Expression
   this(gobject.types.GType thisType, gtk.expression.Expression expression, string propertyName) nothrow
   {
     GtkExpression* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_property_expression_new(thisType, expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null, _propertyName);
     this(_cretval, Yes.Take);
   }

@@ -145,7 +145,7 @@ class Discoverer : gobject.object.ObjectWrap
   gstpbutils.discoverer_info.DiscovererInfo discoverUri(string uri)
   {
     GstDiscovererInfo* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gst_discoverer_discover_uri(cast(GstDiscoverer*)this._cPtr, _uri, &_err);
     if (_err)
@@ -170,7 +170,7 @@ class Discoverer : gobject.object.ObjectWrap
   bool discoverUriAsync(string uri) nothrow
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_discoverer_discover_uri_async(cast(GstDiscoverer*)this._cPtr, _uri);
     return _retval;
   }

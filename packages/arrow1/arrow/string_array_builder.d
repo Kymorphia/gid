@@ -62,7 +62,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   bool append(string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_string_array_builder_append(cast(GArrowStringArrayBuilder*)this._cPtr, _value, &_err);
     if (_err)
@@ -74,7 +74,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   bool appendString(string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_string_array_builder_append_string(cast(GArrowStringArrayBuilder*)this._cPtr, _value, &_err);
     if (_err)
@@ -86,7 +86,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   bool appendStringLen(string value, int length)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_string_array_builder_append_string_len(cast(GArrowStringArrayBuilder*)this._cPtr, _value, length, &_err);
     if (_err)
@@ -116,7 +116,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
 
     char*[] _tmpvalues;
     foreach (s; values)
-      _tmpvalues ~= s.toCString(No.Alloc);
+      _tmpvalues ~= s.toCString;
     const(char*)* _values = _tmpvalues.ptr;
 
     long _isValidsLength;

@@ -57,7 +57,7 @@ class TreeMgrLabel : gda.tree_manager.TreeManager
   this(string label) nothrow
   {
     GdaTreeManager* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_tree_mgr_label_new(_label);
     this(_cretval, Yes.Take);
   }

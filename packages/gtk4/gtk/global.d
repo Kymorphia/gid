@@ -62,7 +62,7 @@ string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType accelerat
 {
   char* _cretval;
   _cretval = gtk_accelerator_get_label(acceleratorKey, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -88,7 +88,7 @@ string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint accelera
 {
   char* _cretval;
   _cretval = gtk_accelerator_get_label_with_keycode(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -111,7 +111,7 @@ string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMo
 {
   char* _cretval;
   _cretval = gtk_accelerator_name(acceleratorKey, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -134,7 +134,7 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
 {
   char* _cretval;
   _cretval = gtk_accelerator_name_with_keycode(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -173,7 +173,7 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
 bool acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods) nothrow
 {
   bool _retval;
-  const(char)* _accelerator = accelerator.toCString(No.Alloc);
+  const(char)* _accelerator = accelerator.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gtk_accelerator_parse(_accelerator, cast(uint*)&acceleratorKey, &acceleratorMods);
   return _retval;
 }
@@ -206,7 +206,7 @@ bool acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types
 bool acceleratorParseWithKeycode(string accelerator, gdk.display.Display display, out uint acceleratorKey, out uint[] acceleratorCodes, out gdk.types.ModifierType acceleratorMods) nothrow
 {
   bool _retval;
-  const(char)* _accelerator = accelerator.toCString(No.Alloc);
+  const(char)* _accelerator = accelerator.toCString!(No.Malloc, No.Nullable);
   uint* _acceleratorCodes;
   _retval = cast(bool)gtk_accelerator_parse_with_keycode(_accelerator, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, cast(uint*)&acceleratorKey, &_acceleratorCodes, &acceleratorMods);
   uint _lenacceleratorCodes;
@@ -281,7 +281,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) 
 {
   const(char)* _cretval;
   _cretval = gtk_check_version(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -625,9 +625,9 @@ bool isInitialized() nothrow
 gobject.param_spec.ParamSpec paramSpecExpression(string name, string nick, string blurb, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, No.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_param_spec_expression(_name, _nick, _blurb, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -975,7 +975,7 @@ void setDebugFlags(gtk.types.DebugFlags flags) nothrow
 */
 void showUri(gtk.window.Window parent, string uri, uint timestamp) nothrow
 {
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   gtk_show_uri(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _uri, timestamp);
 }
 
@@ -1016,7 +1016,7 @@ void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cance
     }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   gtk_show_uri_full(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _uri, timestamp, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
@@ -1048,10 +1048,10 @@ bool showUriFullFinish(gtk.window.Window parent, gio.async_result.AsyncResult re
 /** */
 void testAccessibleAssertionMessageRole(string domain, string file, int line, string func, string expr, gtk.accessible.Accessible accessible, gtk.types.AccessibleRole expectedRole, gtk.types.AccessibleRole actualRole) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
-  const(char)* _expr = expr.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
+  const(char)* _expr = expr.toCString!(No.Malloc, No.Nullable);
   gtk_test_accessible_assertion_message_role(_domain, _file, line, _func, _expr, accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, expectedRole, actualRole);
 }
 

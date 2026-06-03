@@ -224,7 +224,7 @@ class InfoBar : gtk.box.Box
   gtk.button.Button addButton(string buttonText, int responseId) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _buttonText = buttonText.toCString(No.Alloc);
+    const(char)* _buttonText = buttonText.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)this._cPtr, _buttonText, responseId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

@@ -98,8 +98,8 @@ interface AppInfo
   static gio.app_info.AppInfo createFromCommandline(string commandline, string applicationName, gio.types.AppInfoCreateFlags flags)
   {
     GAppInfo* _cretval;
-    const(char)* _commandline = commandline.toCString(No.Alloc);
-    const(char)* _applicationName = applicationName.toCString(No.Alloc);
+    const(char)* _commandline = commandline.toCString!(No.Malloc, No.Nullable);
+    const(char)* _applicationName = applicationName.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_app_info_create_from_commandline(_commandline, _applicationName, flags, &_err);
     if (_err)
@@ -141,7 +141,7 @@ interface AppInfo
   static gio.app_info.AppInfo[] getAllForType(string contentType) nothrow
   {
     GList* _cretval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     _cretval = g_app_info_get_all_for_type(_contentType);
     auto _retval = gListToD!(gio.app_info.AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -160,7 +160,7 @@ interface AppInfo
   static gio.app_info.AppInfo getDefaultForType(string contentType, bool mustSupportUris) nothrow
   {
     GAppInfo* _cretval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     _cretval = g_app_info_get_default_for_type(_contentType, mustSupportUris);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
@@ -193,7 +193,7 @@ interface AppInfo
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_app_info_get_default_for_type_async(_contentType, mustSupportUris, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -235,7 +235,7 @@ interface AppInfo
   static gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme) nothrow
   {
     GAppInfo* _cretval;
-    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
+    const(char)* _uriScheme = uriScheme.toCString!(No.Malloc, No.Nullable);
     _cretval = g_app_info_get_default_for_uri_scheme(_uriScheme);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
@@ -269,7 +269,7 @@ interface AppInfo
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
+    const(char)* _uriScheme = uriScheme.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_app_info_get_default_for_uri_scheme_async(_uriScheme, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -310,7 +310,7 @@ interface AppInfo
   static gio.app_info.AppInfo[] getFallbackForType(string contentType) nothrow
   {
     GList* _cretval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     _cretval = g_app_info_get_fallback_for_type(_contentType);
     auto _retval = gListToD!(gio.app_info.AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -332,7 +332,7 @@ interface AppInfo
   static gio.app_info.AppInfo[] getRecommendedForType(string contentType) nothrow
   {
     GList* _cretval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     _cretval = g_app_info_get_recommended_for_type(_contentType);
     auto _retval = gListToD!(gio.app_info.AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -357,7 +357,7 @@ interface AppInfo
   static bool launchDefaultForUri(string uri, gio.app_launch_context.AppLaunchContext context = null)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_app_info_launch_default_for_uri(_uri, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -400,7 +400,7 @@ interface AppInfo
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_app_info_launch_default_for_uri_async(_uri, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -435,7 +435,7 @@ interface AppInfo
   */
   static void resetTypeAssociations(string contentType) nothrow
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     g_app_info_reset_type_associations(_contentType);
   }
 

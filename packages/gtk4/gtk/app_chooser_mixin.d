@@ -76,7 +76,7 @@ template AppChooserT()
   {
     char* _cretval;
     _cretval = gtk_app_chooser_get_content_type(cast(GtkAppChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

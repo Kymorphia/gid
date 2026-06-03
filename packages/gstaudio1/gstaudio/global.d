@@ -102,7 +102,7 @@ string audioChannelPositionsToString(gstaudio.types.AudioChannelPosition[] posit
 
   auto _position = position.ptr ? cast(const(GstAudioChannelPosition)*)position.ptr : [GstAudioChannelPosition.init].ptr;
   _cretval = gst_audio_channel_positions_to_string(_position, _channels);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 

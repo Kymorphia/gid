@@ -76,7 +76,7 @@ class StrvBuilder : gobject.boxed.Boxed
   */
   void add(string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_strv_builder_add(cast(GStrvBuilder*)this._cPtr, _value);
   }
 
@@ -92,7 +92,7 @@ class StrvBuilder : gobject.boxed.Boxed
   {
     char*[] _tmpvalue;
     foreach (s; value)
-      _tmpvalue ~= s.toCString(No.Alloc);
+      _tmpvalue ~= s.toCString;
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
 
@@ -120,7 +120,7 @@ class StrvBuilder : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -138,7 +138,7 @@ class StrvBuilder : gobject.boxed.Boxed
   */
   void take(string value) nothrow
   {
-    char* _value = value.toCString(Yes.Alloc);
+    char* _value = value.toCString!(Yes.Malloc, No.Nullable);
     g_strv_builder_take(cast(GStrvBuilder*)this._cPtr, _value);
   }
 }

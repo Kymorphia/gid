@@ -63,7 +63,7 @@ struct VideoFormat
   static gstvideo.types.VideoFormat fromString(string format) nothrow
   {
     GstVideoFormat _cretval;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_video_format_from_string(_format);
     gstvideo.types.VideoFormat _retval = cast(gstvideo.types.VideoFormat)_cretval;
     return _retval;
@@ -128,7 +128,7 @@ struct VideoFormat
   {
     const(char)* _cretval;
     _cretval = gst_video_format_to_string(format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

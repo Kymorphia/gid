@@ -36,7 +36,7 @@ class DebugMessage
   {
     const(char)* _cretval;
     _cretval = gst_debug_message_get(cast(GstDebugMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ class DebugMessage
   {
     const(char)* _cretval;
     _cretval = gst_debug_message_get_id(cast(GstDebugMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

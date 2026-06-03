@@ -708,7 +708,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     const(char)* _cretval;
     _cretval = gtk_text_get_placeholder_text(cast(GtkText*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -944,7 +944,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setPlaceholderText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     gtk_text_set_placeholder_text(cast(GtkText*)this._cPtr, _text);
   }
 

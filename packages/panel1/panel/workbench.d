@@ -103,7 +103,7 @@ class Workbench : gtk.window_group.WindowGroup
   /** */
   void actionSetEnabled(string actionName, bool enabled) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     panel_workbench_action_set_enabled(cast(PanelWorkbench*)this._cPtr, _actionName, enabled);
   }
 
@@ -171,7 +171,7 @@ class Workbench : gtk.window_group.WindowGroup
   {
     const(char)* _cretval;
     _cretval = panel_workbench_get_id(cast(PanelWorkbench*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class Workbench : gtk.window_group.WindowGroup
   /** */
   void setId(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     panel_workbench_set_id(cast(PanelWorkbench*)this._cPtr, _id);
   }
 

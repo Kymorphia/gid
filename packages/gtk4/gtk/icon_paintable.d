@@ -128,7 +128,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   {
     const(char)* _cretval;
     _cretval = gtk_icon_paintable_get_icon_name(cast(GtkIconPaintable*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -59,7 +59,7 @@ class InternetAddress : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = internet_address_get_charset(cast(GMimeInternetAddress*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class InternetAddress : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = internet_address_get_name(cast(GMimeInternetAddress*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class InternetAddress : gobject.object.ObjectWrap
   */
   void setCharset(string charset = null) nothrow
   {
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
     internet_address_set_charset(cast(GMimeInternetAddress*)this._cPtr, _charset);
   }
 
@@ -99,7 +99,7 @@ class InternetAddress : gobject.object.ObjectWrap
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     internet_address_set_name(cast(GMimeInternetAddress*)this._cPtr, _name);
   }
 
@@ -117,7 +117,7 @@ class InternetAddress : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = internet_address_to_string(cast(GMimeInternetAddress*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, encode);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

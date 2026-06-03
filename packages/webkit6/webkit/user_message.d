@@ -99,7 +99,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   this(string name, glib.variant.Variant parameters = null) nothrow
   {
     WebKitUserMessage* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_user_message_new(_name, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
@@ -116,7 +116,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   static webkit.user_message.UserMessage newWithFdList(string name, glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null) nothrow
   {
     WebKitUserMessage* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_user_message_new_with_fd_list(_name, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, No.Take);
     return _retval;
@@ -142,7 +142,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = webkit_user_message_get_name(cast(WebKitUserMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

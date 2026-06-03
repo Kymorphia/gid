@@ -66,7 +66,7 @@ class SecurityManager : gobject.object.ObjectWrap
   */
   void registerUriSchemeAsCorsEnabled(string scheme) nothrow
   {
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     webkit_security_manager_register_uri_scheme_as_cors_enabled(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
@@ -81,7 +81,7 @@ class SecurityManager : gobject.object.ObjectWrap
   */
   void registerUriSchemeAsDisplayIsolated(string scheme) nothrow
   {
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     webkit_security_manager_register_uri_scheme_as_display_isolated(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
@@ -96,7 +96,7 @@ class SecurityManager : gobject.object.ObjectWrap
   */
   void registerUriSchemeAsEmptyDocument(string scheme) nothrow
   {
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     webkit_security_manager_register_uri_scheme_as_empty_document(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
@@ -111,7 +111,7 @@ class SecurityManager : gobject.object.ObjectWrap
   */
   void registerUriSchemeAsLocal(string scheme) nothrow
   {
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     webkit_security_manager_register_uri_scheme_as_local(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
@@ -126,7 +126,7 @@ class SecurityManager : gobject.object.ObjectWrap
   */
   void registerUriSchemeAsNoAccess(string scheme) nothrow
   {
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     webkit_security_manager_register_uri_scheme_as_no_access(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
@@ -142,7 +142,7 @@ class SecurityManager : gobject.object.ObjectWrap
   */
   void registerUriSchemeAsSecure(string scheme) nothrow
   {
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     webkit_security_manager_register_uri_scheme_as_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
@@ -158,7 +158,7 @@ class SecurityManager : gobject.object.ObjectWrap
   bool uriSchemeIsCorsEnabled(string scheme) nothrow
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_security_manager_uri_scheme_is_cors_enabled(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
@@ -175,7 +175,7 @@ class SecurityManager : gobject.object.ObjectWrap
   bool uriSchemeIsDisplayIsolated(string scheme) nothrow
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_security_manager_uri_scheme_is_display_isolated(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
@@ -192,7 +192,7 @@ class SecurityManager : gobject.object.ObjectWrap
   bool uriSchemeIsEmptyDocument(string scheme) nothrow
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_security_manager_uri_scheme_is_empty_document(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
@@ -209,7 +209,7 @@ class SecurityManager : gobject.object.ObjectWrap
   bool uriSchemeIsLocal(string scheme) nothrow
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_security_manager_uri_scheme_is_local(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
@@ -226,7 +226,7 @@ class SecurityManager : gobject.object.ObjectWrap
   bool uriSchemeIsNoAccess(string scheme) nothrow
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_security_manager_uri_scheme_is_no_access(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
@@ -243,7 +243,7 @@ class SecurityManager : gobject.object.ObjectWrap
   bool uriSchemeIsSecure(string scheme) nothrow
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_security_manager_uri_scheme_is_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }

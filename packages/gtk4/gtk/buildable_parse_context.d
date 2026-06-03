@@ -41,7 +41,7 @@ class BuildableParseContext
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_parse_context_get_element(cast(GtkBuildableParseContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -185,7 +185,7 @@ class PrintDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_accept_label(cast(GtkPrintDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class PrintDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_title(cast(GtkPrintDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ class PrintDialog : gobject.object.ObjectWrap
   */
   void setAcceptLabel(string acceptLabel) nothrow
   {
-    const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
+    const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, No.Nullable);
     gtk_print_dialog_set_accept_label(cast(GtkPrintDialog*)this._cPtr, _acceptLabel);
   }
 
@@ -418,7 +418,7 @@ class PrintDialog : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_print_dialog_set_title(cast(GtkPrintDialog*)this._cPtr, _title);
   }
 

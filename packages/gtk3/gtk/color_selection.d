@@ -159,7 +159,7 @@ class ColorSelection : gtk.box.Box
   static bool paletteFromString(string str, out gdk.color.Color[] colors) nothrow
   {
     bool _retval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     int _nColors;
     GdkColor* _colors;
     _retval = cast(bool)gtk_color_selection_palette_from_string(_str, &_colors, &_nColors);
@@ -185,7 +185,7 @@ class ColorSelection : gtk.box.Box
 
     auto _colors = colors.ptr ? cast(const(GdkColor)*)colors.ptr : [GdkColor.init].ptr;
     _cretval = gtk_color_selection_palette_to_string(_colors, _nColors);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

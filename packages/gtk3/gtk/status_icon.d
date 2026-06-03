@@ -386,7 +386,7 @@ class StatusIcon : gobject.object.ObjectWrap
   static gtk.status_icon.StatusIcon newFromFile(string filename) nothrow
   {
     GtkStatusIcon* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_status_icon_new_from_file(_filename);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
@@ -426,7 +426,7 @@ class StatusIcon : gobject.object.ObjectWrap
   static gtk.status_icon.StatusIcon newFromIconName(string iconName) nothrow
   {
     GtkStatusIcon* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_status_icon_new_from_icon_name(_iconName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
@@ -469,7 +469,7 @@ class StatusIcon : gobject.object.ObjectWrap
   static gtk.status_icon.StatusIcon newFromStock(string stockId) nothrow
   {
     GtkStatusIcon* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_status_icon_new_from_stock(_stockId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
@@ -593,7 +593,7 @@ class StatusIcon : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_icon_name(cast(GtkStatusIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -672,7 +672,7 @@ class StatusIcon : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_stock(cast(GtkStatusIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -707,7 +707,7 @@ class StatusIcon : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_title(cast(GtkStatusIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -724,7 +724,7 @@ class StatusIcon : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_status_icon_get_tooltip_markup(cast(GtkStatusIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class StatusIcon : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_status_icon_get_tooltip_text(cast(GtkStatusIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -819,7 +819,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setFromFile(string filename) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     gtk_status_icon_set_from_file(cast(GtkStatusIcon*)this._cPtr, _filename);
   }
 
@@ -853,7 +853,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setFromIconName(string iconName) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     gtk_status_icon_set_from_icon_name(cast(GtkStatusIcon*)this._cPtr, _iconName);
   }
 
@@ -884,7 +884,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setFromStock(string stockId) nothrow
   {
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     gtk_status_icon_set_from_stock(cast(GtkStatusIcon*)this._cPtr, _stockId);
   }
 
@@ -921,7 +921,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_status_icon_set_name(cast(GtkStatusIcon*)this._cPtr, _name);
   }
 
@@ -958,7 +958,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_status_icon_set_title(cast(GtkStatusIcon*)this._cPtr, _title);
   }
 
@@ -981,7 +981,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setTooltipMarkup(string markup = null) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, Yes.Nullable);
     gtk_status_icon_set_tooltip_markup(cast(GtkStatusIcon*)this._cPtr, _markup);
   }
 
@@ -1004,7 +1004,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setTooltipText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_status_icon_set_tooltip_text(cast(GtkStatusIcon*)this._cPtr, _text);
   }
 

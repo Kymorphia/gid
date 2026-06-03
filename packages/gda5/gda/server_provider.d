@@ -78,11 +78,11 @@ class ServerProvider : gobject.object.ObjectWrap
   static string loadFileContents(string instDir, string dataDir, string filename) nothrow
   {
     char* _cretval;
-    const(char)* _instDir = instDir.toCString(No.Alloc);
-    const(char)* _dataDir = dataDir.toCString(No.Alloc);
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _instDir = instDir.toCString!(No.Malloc, No.Nullable);
+    const(char)* _dataDir = dataDir.toCString!(No.Malloc, No.Nullable);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_provider_load_file_contents(_instDir, _dataDir, _filename);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -143,9 +143,9 @@ class ServerProvider : gobject.object.ObjectWrap
   string escapeString(gda.connection.Connection cnc, string str) nothrow
   {
     char* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_provider_escape_string(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _str);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -161,10 +161,10 @@ class ServerProvider : gobject.object.ObjectWrap
   string findFile(string instDir, string filename) nothrow
   {
     char* _cretval;
-    const(char)* _instDir = instDir.toCString(No.Alloc);
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _instDir = instDir.toCString!(No.Malloc, No.Nullable);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_provider_find_file(cast(GdaServerProvider*)this._cPtr, _instDir, _filename);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class ServerProvider : gobject.object.ObjectWrap
   gda.data_handler.DataHandler getDataHandlerDbms(gda.connection.Connection cnc, string forType) nothrow
   {
     GdaDataHandler* _cretval;
-    const(char)* _forType = forType.toCString(No.Alloc);
+    const(char)* _forType = forType.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_provider_get_data_handler_dbms(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _forType);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_handler.DataHandler)(cast(GdaDataHandler*)_cretval, No.Take);
     return _retval;
@@ -201,7 +201,7 @@ class ServerProvider : gobject.object.ObjectWrap
   gda.data_handler.DataHandler getDataHandlerDefault(gda.connection.Connection cnc, gobject.types.GType type, string dbmsType) nothrow
   {
     GdaDataHandler* _cretval;
-    const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
+    const(char)* _dbmsType = dbmsType.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_provider_get_data_handler_default(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, type, _dbmsType);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_handler.DataHandler)(cast(GdaDataHandler*)_cretval, No.Take);
     return _retval;
@@ -239,7 +239,7 @@ class ServerProvider : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_default_dbms_type(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class ServerProvider : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_name(cast(GdaServerProvider*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class ServerProvider : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_server_version(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -278,14 +278,14 @@ class ServerProvider : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_version(cast(GdaServerProvider*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
   /** */
   void handlerDeclare(gda.data_handler.DataHandler dh, gda.connection.Connection cnc, gobject.types.GType gType, string dbmsType) nothrow
   {
-    const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
+    const(char)* _dbmsType = dbmsType.toCString!(No.Malloc, No.Nullable);
     gda_server_provider_handler_declare(cast(GdaServerProvider*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, gType, _dbmsType);
   }
 
@@ -302,7 +302,7 @@ class ServerProvider : gobject.object.ObjectWrap
   gda.data_handler.DataHandler handlerFind(gda.connection.Connection cnc, gobject.types.GType gType, string dbmsType = null) nothrow
   {
     GdaDataHandler* _cretval;
-    const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
+    const(char)* _dbmsType = dbmsType.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gda_server_provider_handler_find(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, gType, _dbmsType);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_handler.DataHandler)(cast(GdaDataHandler*)_cretval, No.Take);
     return _retval;
@@ -381,7 +381,7 @@ class ServerProvider : gobject.object.ObjectWrap
     _cretval = gda_server_provider_render_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ServerProviderException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -411,11 +411,11 @@ class ServerProvider : gobject.object.ObjectWrap
   gobject.value.Value stringToValue(gda.connection.Connection cnc, string string_, gobject.types.GType preferredType, out string dbmsType) nothrow
   {
     GValue* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     char* _dbmsType;
     _cretval = gda_server_provider_string_to_value(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _string_, preferredType, &_dbmsType);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
-    dbmsType = _dbmsType.fromCString(No.Free);
+    dbmsType = _dbmsType.fromCString!(No.Free);
     return _retval;
   }
 
@@ -462,9 +462,9 @@ class ServerProvider : gobject.object.ObjectWrap
   string unescapeString(gda.connection.Connection cnc, string str) nothrow
   {
     char* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_provider_unescape_string(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _str);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class ServerProvider : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gda_server_provider_value_to_sql_string(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, from ? cast(GValue*)from._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

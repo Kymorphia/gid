@@ -122,7 +122,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_stream_info_get_stream_id(cast(GstDiscovererStreamInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_stream_info_get_stream_type_nick(cast(GstDiscovererStreamInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

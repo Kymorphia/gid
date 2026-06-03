@@ -129,7 +129,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_authentication_request_get_host(cast(WebKitAuthenticationRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_authentication_request_get_realm(cast(WebKitAuthenticationRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

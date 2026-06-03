@@ -23,7 +23,7 @@ struct VideoFieldOrder
   static gstvideo.types.VideoFieldOrder fromString(string order) nothrow
   {
     GstVideoFieldOrder _cretval;
-    const(char)* _order = order.toCString(No.Alloc);
+    const(char)* _order = order.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_video_field_order_from_string(_order);
     gstvideo.types.VideoFieldOrder _retval = cast(gstvideo.types.VideoFieldOrder)_cretval;
     return _retval;
@@ -40,7 +40,7 @@ struct VideoFieldOrder
   {
     const(char)* _cretval;
     _cretval = gst_video_field_order_to_string(order);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

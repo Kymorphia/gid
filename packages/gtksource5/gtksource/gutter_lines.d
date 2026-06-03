@@ -75,7 +75,7 @@ class GutterLines : gobject.object.ObjectWrap
   */
   void addClass(uint line, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_source_gutter_lines_add_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
   }
 
@@ -207,7 +207,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool hasClass(uint line, string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_source_gutter_lines_has_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
     return _retval;
   }
@@ -285,7 +285,7 @@ class GutterLines : gobject.object.ObjectWrap
   */
   void removeClass(uint line, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_source_gutter_lines_remove_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
   }
 

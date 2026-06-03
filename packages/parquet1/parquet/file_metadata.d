@@ -70,7 +70,7 @@ class FileMetadata : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gparquet_file_metadata_get_created_by(cast(GParquetFileMetadata*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

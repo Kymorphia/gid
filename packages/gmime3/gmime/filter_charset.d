@@ -61,8 +61,8 @@ class FilterCharset : gmime.filter.Filter
   this(string fromCharset, string toCharset) nothrow
   {
     GMimeFilter* _cretval;
-    const(char)* _fromCharset = fromCharset.toCString(No.Alloc);
-    const(char)* _toCharset = toCharset.toCString(No.Alloc);
+    const(char)* _fromCharset = fromCharset.toCString!(No.Malloc, No.Nullable);
+    const(char)* _toCharset = toCharset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_filter_charset_new(_fromCharset, _toCharset);
     this(_cretval, Yes.Take);
   }

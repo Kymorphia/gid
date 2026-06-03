@@ -123,7 +123,7 @@ class Auth : gobject.object.ObjectWrap
   this(gobject.types.GType type, soup.message.Message msg, string authHeader) nothrow
   {
     SoupAuth* _cretval;
-    const(char)* _authHeader = authHeader.toCString(No.Alloc);
+    const(char)* _authHeader = authHeader.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_auth_new(type, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _authHeader);
     this(_cretval, Yes.Take);
   }
@@ -140,8 +140,8 @@ class Auth : gobject.object.ObjectWrap
   */
   void authenticate(string username, string password) nothrow
   {
-    const(char)* _username = username.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
     soup_auth_authenticate(cast(SoupAuth*)this._cPtr, _username, _password);
   }
 
@@ -177,7 +177,7 @@ class Auth : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_authority(cast(SoupAuth*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class Auth : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = soup_auth_get_authorization(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class Auth : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = soup_auth_get_info(cast(SoupAuth*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Auth : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_realm(cast(SoupAuth*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Auth : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_scheme_name(cast(SoupAuth*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class Auth : gobject.object.ObjectWrap
   bool update(soup.message.Message msg, string authHeader) nothrow
   {
     bool _retval;
-    const(char)* _authHeader = authHeader.toCString(No.Alloc);
+    const(char)* _authHeader = authHeader.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)soup_auth_update(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _authHeader);
     return _retval;
   }

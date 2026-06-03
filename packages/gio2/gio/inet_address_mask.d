@@ -140,7 +140,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   static gio.inet_address_mask.InetAddressMask newFromString(string maskString)
   {
     GInetAddressMask* _cretval;
-    const(char)* _maskString = maskString.toCString(No.Alloc);
+    const(char)* _maskString = maskString.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_inet_address_mask_new_from_string(_maskString, &_err);
     if (_err)
@@ -221,7 +221,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   {
     char* _cretval;
     _cretval = g_inet_address_mask_to_string(cast(GInetAddressMask*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

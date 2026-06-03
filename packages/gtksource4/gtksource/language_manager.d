@@ -87,7 +87,7 @@ class LanguageManager : gobject.object.ObjectWrap
   gtksource.language.Language getLanguage(string id) nothrow
   {
     GtkSourceLanguage* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_language_manager_get_language(cast(GtkSourceLanguageManager*)this._cPtr, _id);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
@@ -113,7 +113,7 @@ class LanguageManager : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -137,7 +137,7 @@ class LanguageManager : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -186,8 +186,8 @@ class LanguageManager : gobject.object.ObjectWrap
   gtksource.language.Language guessLanguage(string filename = null, string contentType = null) nothrow
   {
     GtkSourceLanguage* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_language_manager_guess_language(cast(GtkSourceLanguageManager*)this._cPtr, _filename, _contentType);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
@@ -214,7 +214,7 @@ class LanguageManager : gobject.object.ObjectWrap
   {
     char*[] _tmpdirs;
     foreach (s; dirs)
-      _tmpdirs ~= s.toCString(No.Alloc);
+      _tmpdirs ~= s.toCString;
     _tmpdirs ~= null;
     char** _dirs = _tmpdirs.ptr;
 

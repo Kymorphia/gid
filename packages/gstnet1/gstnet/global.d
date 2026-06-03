@@ -125,7 +125,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null) nothrow
   bool _retval;
   char*[] _tmpinterfaces;
   foreach (s; interfaces)
-    _tmpinterfaces ~= s.toCString(No.Alloc);
+    _tmpinterfaces ~= s.toCString;
   _tmpinterfaces ~= null;
   char** _interfaces = _tmpinterfaces.ptr;
 

@@ -75,7 +75,7 @@ class ParamList : gobject.object.ObjectWrap
   static gmime.param_list.ParamList parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeParamList* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_param_list_parse(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _str);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.param_list.ParamList)(cast(GMimeParamList*)_cretval, Yes.Take);
     return _retval;
@@ -114,7 +114,7 @@ class ParamList : gobject.object.ObjectWrap
   gmime.param.Param getParameter(string name) nothrow
   {
     GMimeParam* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_param_list_get_parameter(cast(GMimeParamList*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.param.Param)(cast(GMimeParam*)_cretval, No.Take);
     return _retval;
@@ -156,7 +156,7 @@ class ParamList : gobject.object.ObjectWrap
   bool remove(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_mime_param_list_remove(cast(GMimeParamList*)this._cPtr, _name);
     return _retval;
   }
@@ -184,8 +184,8 @@ class ParamList : gobject.object.ObjectWrap
   */
   void setParameter(string name, string value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_mime_param_list_set_parameter(cast(GMimeParamList*)this._cPtr, _name, _value);
   }
 }

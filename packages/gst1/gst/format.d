@@ -25,7 +25,7 @@ struct Format
   static gst.types.Format getByNick(string nick) nothrow
   {
     GstFormat _cretval;
-    const(char)* _nick = nick.toCString(No.Alloc);
+    const(char)* _nick = nick.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_format_get_by_nick(_nick);
     gst.types.Format _retval = cast(gst.types.Format)_cretval;
     return _retval;
@@ -61,7 +61,7 @@ struct Format
   {
     const(char)* _cretval;
     _cretval = gst_format_get_name(format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -93,8 +93,8 @@ struct Format
   static gst.types.Format register(string nick, string description) nothrow
   {
     GstFormat _cretval;
-    const(char)* _nick = nick.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _nick = nick.toCString!(No.Malloc, No.Nullable);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_format_register(_nick, _description);
     gst.types.Format _retval = cast(gst.types.Format)_cretval;
     return _retval;

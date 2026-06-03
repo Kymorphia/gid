@@ -227,7 +227,7 @@ class Query : gobject.boxed.Boxed
   static gst.query.Query newContext(string contextType) nothrow
   {
     GstQuery* _cretval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_query_new_context(_contextType);
     auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -797,7 +797,7 @@ class Query : gobject.boxed.Boxed
     bool _retval;
     char* _contextType;
     _retval = cast(bool)gst_query_parse_context_type(cast(GstQuery*)this._cPtr, &_contextType);
-    contextType = _contextType.fromCString(No.Free);
+    contextType = _contextType.fromCString!(No.Free);
     return _retval;
   }
 
@@ -1050,7 +1050,7 @@ class Query : gobject.boxed.Boxed
   {
     char* _uri;
     gst_query_parse_uri(cast(GstQuery*)this._cPtr, &_uri);
-    uri = _uri.fromCString(Yes.Free);
+    uri = _uri.fromCString!(Yes.Free);
   }
 
   /**
@@ -1066,7 +1066,7 @@ class Query : gobject.boxed.Boxed
   {
     char* _uri;
     gst_query_parse_uri_redirection(cast(GstQuery*)this._cPtr, &_uri);
-    uri = _uri.fromCString(Yes.Free);
+    uri = _uri.fromCString!(Yes.Free);
   }
 
   /**
@@ -1377,7 +1377,7 @@ class Query : gobject.boxed.Boxed
   */
   void setUri(string uri = null) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, Yes.Nullable);
     gst_query_set_uri(cast(GstQuery*)this._cPtr, _uri);
   }
 
@@ -1389,7 +1389,7 @@ class Query : gobject.boxed.Boxed
   */
   void setUriRedirection(string uri = null) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, Yes.Nullable);
     gst_query_set_uri_redirection(cast(GstQuery*)this._cPtr, _uri);
   }
 

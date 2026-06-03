@@ -119,7 +119,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   */
   void changed(string key, void* originTag = null) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     g_settings_backend_changed(cast(GSettingsBackend*)this._cPtr, _key, originTag);
   }
 
@@ -153,10 +153,10 @@ class SettingsBackend : gobject.object.ObjectWrap
   */
   void keysChanged(string path, string[] items, void* originTag = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpitems;
     foreach (s; items)
-      _tmpitems ~= s.toCString(No.Alloc);
+      _tmpitems ~= s.toCString;
     _tmpitems ~= null;
     const(char*)* _items = _tmpitems.ptr;
 
@@ -192,7 +192,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   */
   void pathChanged(string path, void* originTag = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     g_settings_backend_path_changed(cast(GSettingsBackend*)this._cPtr, _path, originTag);
   }
 
@@ -208,7 +208,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   */
   void pathWritableChanged(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     g_settings_backend_path_writable_changed(cast(GSettingsBackend*)this._cPtr, _path);
   }
 
@@ -223,7 +223,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   */
   void writableChanged(string key) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     g_settings_backend_writable_changed(cast(GSettingsBackend*)this._cPtr, _key);
   }
 }

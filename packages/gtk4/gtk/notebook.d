@@ -401,7 +401,7 @@ class Notebook : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_group_name(cast(GtkNotebook*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class Notebook : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_menu_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -580,7 +580,7 @@ class Notebook : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_tab_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -828,7 +828,7 @@ class Notebook : gtk.widget.Widget
   */
   void setGroupName(string groupName = null) nothrow
   {
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
     gtk_notebook_set_group_name(cast(GtkNotebook*)this._cPtr, _groupName);
   }
 
@@ -853,7 +853,7 @@ class Notebook : gtk.widget.Widget
   */
   void setMenuLabelText(gtk.widget.Widget child, string menuText) nothrow
   {
-    const(char)* _menuText = menuText.toCString(No.Alloc);
+    const(char)* _menuText = menuText.toCString!(No.Malloc, No.Nullable);
     gtk_notebook_set_menu_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _menuText);
   }
 
@@ -975,7 +975,7 @@ class Notebook : gtk.widget.Widget
   */
   void setTabLabelText(gtk.widget.Widget child, string tabText) nothrow
   {
-    const(char)* _tabText = tabText.toCString(No.Alloc);
+    const(char)* _tabText = tabText.toCString!(No.Malloc, No.Nullable);
     gtk_notebook_set_tab_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _tabText);
   }
 

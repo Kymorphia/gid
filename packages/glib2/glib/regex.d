@@ -115,7 +115,7 @@ class Regex : gobject.boxed.Boxed
   this(string pattern, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions)
   {
     GRegex* _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_regex_new(_pattern, compileOptions, matchOptions, &_err);
     if (_err)
@@ -208,7 +208,7 @@ class Regex : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_regex_get_pattern(cast(const(GRegex)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class Regex : gobject.boxed.Boxed
   int getStringNumber(string name) nothrow
   {
     int _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = g_regex_get_string_number(cast(const(GRegex)*)this._cPtr, _name);
     return _retval;
   }
@@ -280,7 +280,7 @@ class Regex : gobject.boxed.Boxed
   bool match(string string_, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     GMatchInfo* _matchInfo;
     _retval = cast(bool)g_regex_match(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
     matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
@@ -313,7 +313,7 @@ class Regex : gobject.boxed.Boxed
   bool matchAll(string string_, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     GMatchInfo* _matchInfo;
     _retval = cast(bool)g_regex_match_all(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
     matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
@@ -509,12 +509,12 @@ class Regex : gobject.boxed.Boxed
       _stringLen = cast(ptrdiff_t)string_.length;
 
     auto _string_ = string_.ptr ? cast(const(char)*)string_.ptr : [char.init].ptr;
-    const(char)* _replacement = replacement.toCString(No.Alloc);
+    const(char)* _replacement = replacement.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_regex_replace(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, _replacement, matchOptions, &_err);
     if (_err)
       throw new RegexException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -604,7 +604,7 @@ class Regex : gobject.boxed.Boxed
     _cretval = g_regex_replace_eval(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, matchOptions, _evalCB, _eval, &_err);
     if (_err)
       throw new RegexException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -634,12 +634,12 @@ class Regex : gobject.boxed.Boxed
       _stringLen = cast(ptrdiff_t)string_.length;
 
     auto _string_ = string_.ptr ? cast(const(char)*)string_.ptr : [char.init].ptr;
-    const(char)* _replacement = replacement.toCString(No.Alloc);
+    const(char)* _replacement = replacement.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_regex_replace_literal(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, _replacement, matchOptions, &_err);
     if (_err)
       throw new RegexException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -671,7 +671,7 @@ class Regex : gobject.boxed.Boxed
   string[] split(string string_, glib.types.RegexMatchFlags matchOptions) nothrow
   {
     char** _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_regex_split(cast(const(GRegex)*)this._cPtr, _string_, matchOptions);
     string[] _retval;
 
@@ -682,7 +682,7 @@ class Regex : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -742,7 +742,7 @@ class Regex : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -769,7 +769,7 @@ class Regex : gobject.boxed.Boxed
   static bool checkReplacement(string replacement, out bool hasReferences)
   {
     bool _retval;
-    const(char)* _replacement = replacement.toCString(No.Alloc);
+    const(char)* _replacement = replacement.toCString!(No.Malloc, No.Nullable);
     gboolean _hasReferences;
     GError *_err;
     _retval = cast(bool)g_regex_check_replacement(_replacement, &_hasReferences, &_err);
@@ -807,7 +807,7 @@ class Regex : gobject.boxed.Boxed
 
     auto _string_ = string_.ptr ? cast(const(char)*)string_.ptr : [char.init].ptr;
     _cretval = g_regex_escape_nul(_string_, _length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -833,7 +833,7 @@ class Regex : gobject.boxed.Boxed
 
     auto _string_ = string_.ptr ? cast(const(char)*)string_.ptr : [char.init].ptr;
     _cretval = g_regex_escape_string(_string_, _length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -859,8 +859,8 @@ class Regex : gobject.boxed.Boxed
   static bool matchSimple(string pattern, string string_, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions) nothrow
   {
     bool _retval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_regex_match_simple(_pattern, _string_, compileOptions, matchOptions);
     return _retval;
   }
@@ -905,8 +905,8 @@ class Regex : gobject.boxed.Boxed
   static string[] splitSimple(string pattern, string string_, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions) nothrow
   {
     char** _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_regex_split_simple(_pattern, _string_, compileOptions, matchOptions);
     string[] _retval;
 
@@ -917,7 +917,7 @@ class Regex : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;

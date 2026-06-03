@@ -664,7 +664,7 @@ class Label : gtk.misc.Misc
   this(string str = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_label_new(_str);
     this(_cretval, No.Take);
   }
@@ -693,7 +693,7 @@ class Label : gtk.misc.Misc
   static gtk.label.Label newWithMnemonic(string str = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_label_new_with_mnemonic(_str);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -744,7 +744,7 @@ class Label : gtk.misc.Misc
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_current_uri(cast(GtkLabel*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -783,7 +783,7 @@ class Label : gtk.misc.Misc
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_label(cast(GtkLabel*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -948,7 +948,7 @@ class Label : gtk.misc.Misc
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_text(cast(GtkLabel*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1112,7 +1112,7 @@ class Label : gtk.misc.Misc
   */
   void setLabel(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gtk_label_set_label(cast(GtkLabel*)this._cPtr, _str);
   }
 
@@ -1195,7 +1195,7 @@ class Label : gtk.misc.Misc
   */
   void setMarkup(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gtk_label_set_markup(cast(GtkLabel*)this._cPtr, _str);
   }
 
@@ -1215,7 +1215,7 @@ class Label : gtk.misc.Misc
   */
   void setMarkupWithMnemonic(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gtk_label_set_markup_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
   }
 
@@ -1265,7 +1265,7 @@ class Label : gtk.misc.Misc
   */
   void setPattern(string pattern) nothrow
   {
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
     gtk_label_set_pattern(cast(GtkLabel*)this._cPtr, _pattern);
   }
 
@@ -1309,7 +1309,7 @@ class Label : gtk.misc.Misc
   */
   void setText(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gtk_label_set_text(cast(GtkLabel*)this._cPtr, _str);
   }
 
@@ -1325,7 +1325,7 @@ class Label : gtk.misc.Misc
   */
   void setTextWithMnemonic(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gtk_label_set_text_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
   }
 

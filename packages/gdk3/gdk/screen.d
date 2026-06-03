@@ -340,7 +340,7 @@ class Screen : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gdk_screen_get_monitor_plug_name(cast(GdkScreen*)this._cPtr, monitorNum);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class Screen : gobject.object.ObjectWrap
   bool getSetting(string name, gobject.value.Value value) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_screen_get_setting(cast(GdkScreen*)this._cPtr, _name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -661,7 +661,7 @@ class Screen : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gdk_screen_make_display_name(cast(GdkScreen*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

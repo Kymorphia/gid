@@ -75,9 +75,9 @@ class FilenameCompleter : gobject.object.ObjectWrap
   string getCompletionSuffix(string initialText) nothrow
   {
     char* _cretval;
-    const(char)* _initialText = initialText.toCString(No.Alloc);
+    const(char)* _initialText = initialText.toCString!(No.Malloc, No.Nullable);
     _cretval = g_filename_completer_get_completion_suffix(cast(GFilenameCompleter*)this._cPtr, _initialText);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class FilenameCompleter : gobject.object.ObjectWrap
   string[] getCompletions(string initialText) nothrow
   {
     char** _cretval;
-    const(char)* _initialText = initialText.toCString(No.Alloc);
+    const(char)* _initialText = initialText.toCString!(No.Malloc, No.Nullable);
     _cretval = g_filename_completer_get_completions(cast(GFilenameCompleter*)this._cPtr, _initialText);
     string[] _retval;
 
@@ -103,7 +103,7 @@ class FilenameCompleter : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;

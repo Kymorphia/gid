@@ -94,7 +94,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   this(string iconname) nothrow
   {
     GIcon* _cretval;
-    const(char)* _iconname = iconname.toCString(No.Alloc);
+    const(char)* _iconname = iconname.toCString!(No.Malloc, No.Nullable);
     _cretval = g_themed_icon_new(_iconname);
     this(_cretval, Yes.Take);
   }
@@ -115,7 +115,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
 
     char*[] _tmpiconnames;
     foreach (s; iconnames)
-      _tmpiconnames ~= s.toCString(No.Alloc);
+      _tmpiconnames ~= s.toCString;
     char** _iconnames = _tmpiconnames.ptr;
 
     _cretval = g_themed_icon_new_from_names(_iconnames, _len);
@@ -147,7 +147,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   static gio.themed_icon.ThemedIcon newWithDefaultFallbacks(string iconname) nothrow
   {
     GIcon* _cretval;
-    const(char)* _iconname = iconname.toCString(No.Alloc);
+    const(char)* _iconname = iconname.toCString!(No.Malloc, No.Nullable);
     _cretval = g_themed_icon_new_with_default_fallbacks(_iconname);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
@@ -164,7 +164,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   */
   void appendName(string iconname) nothrow
   {
-    const(char)* _iconname = iconname.toCString(No.Alloc);
+    const(char)* _iconname = iconname.toCString!(No.Malloc, No.Nullable);
     g_themed_icon_append_name(cast(GThemedIcon*)this._cPtr, _iconname);
   }
 
@@ -185,7 +185,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -201,7 +201,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   */
   void prependName(string iconname) nothrow
   {
-    const(char)* _iconname = iconname.toCString(No.Alloc);
+    const(char)* _iconname = iconname.toCString!(No.Malloc, No.Nullable);
     g_themed_icon_prepend_name(cast(GThemedIcon*)this._cPtr, _iconname);
   }
 }

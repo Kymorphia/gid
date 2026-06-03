@@ -210,7 +210,7 @@ class Statement : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gda_statement_serialize(cast(GdaStatement*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Statement : gobject.object.ObjectWrap
     _cretval = gda_statement_to_sql_extended(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, flags, &_paramsUsed, &_err);
     if (_err)
       throw new StatementException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     paramsUsed = gSListToD!(gda.holder.Holder, GidOwnership.Container)(_paramsUsed);
     return _retval;
   }
@@ -260,7 +260,7 @@ class Statement : gobject.object.ObjectWrap
     _cretval = gda_statement_to_sql_real(cast(GdaStatement*)this._cPtr, context ? cast(GdaSqlRenderingContext*)context._cPtr : null, &_err);
     if (_err)
       throw new StatementException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

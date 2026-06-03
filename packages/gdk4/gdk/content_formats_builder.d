@@ -93,7 +93,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   */
   void addMimeType(string mimeType) nothrow
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     gdk_content_formats_builder_add_mime_type(cast(GdkContentFormatsBuilder*)this._cPtr, _mimeType);
   }
 

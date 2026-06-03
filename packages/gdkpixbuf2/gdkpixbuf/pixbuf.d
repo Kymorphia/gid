@@ -358,7 +358,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static gdkpixbuf.pixbuf.Pixbuf newFromFile(string filename)
   {
     GdkPixbuf* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_new_from_file(_filename, &_err);
     if (_err)
@@ -403,7 +403,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static gdkpixbuf.pixbuf.Pixbuf newFromFileAtScale(string filename, int width, int height, bool preserveAspectRatio)
   {
     GdkPixbuf* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_new_from_file_at_scale(_filename, width, height, preserveAspectRatio, &_err);
     if (_err)
@@ -443,7 +443,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static gdkpixbuf.pixbuf.Pixbuf newFromFileAtSize(string filename, int width, int height)
   {
     GdkPixbuf* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_new_from_file_at_size(_filename, width, height, &_err);
     if (_err)
@@ -527,7 +527,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static gdkpixbuf.pixbuf.Pixbuf newFromResource(string resourcePath)
   {
     GdkPixbuf* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_new_from_resource(_resourcePath, &_err);
     if (_err)
@@ -562,7 +562,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static gdkpixbuf.pixbuf.Pixbuf newFromResourceAtScale(string resourcePath, int width, int height, bool preserveAspectRatio)
   {
     GdkPixbuf* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_new_from_resource_at_scale(_resourcePath, width, height, preserveAspectRatio, &_err);
     if (_err)
@@ -680,7 +680,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     GdkPixbuf* _cretval;
     char*[] _tmpdata;
     foreach (s; data)
-      _tmpdata ~= s.toCString(No.Alloc);
+      _tmpdata ~= s.toCString;
     _tmpdata ~= null;
     const(char*)* _data = _tmpdata.ptr;
 
@@ -724,7 +724,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static gdkpixbuf.pixbuf_format.PixbufFormat getFileInfo(string filename, out int width, out int height) nothrow
   {
     GdkPixbufFormat* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_pixbuf_get_file_info(_filename, cast(int*)&width, cast(int*)&height);
     auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -763,7 +763,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_pixbuf_get_file_info_async(_filename, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -828,7 +828,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static bool initModules(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gdk_pixbuf_init_modules(_path, &_err);
     if (_err)
@@ -1254,9 +1254,9 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   string getOption(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_pixbuf_get_option(cast(GdkPixbuf*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1391,7 +1391,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   bool removeOption(string key) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_pixbuf_remove_option(cast(GdkPixbuf*)this._cPtr, _key);
     return _retval;
   }
@@ -1461,16 +1461,16 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     bool _retval;
     size_t _bufferSize;
     ubyte* _buffer;
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpoptionKeys;
     foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString(No.Alloc);
+      _tmpoptionKeys ~= s.toCString;
     _tmpoptionKeys ~= null;
     char** _optionKeys = _tmpoptionKeys.ptr;
 
     char*[] _tmpoptionValues;
     foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString(No.Alloc);
+      _tmpoptionValues ~= s.toCString;
     _tmpoptionValues ~= null;
     char** _optionValues = _tmpoptionValues.ptr;
 
@@ -1530,16 +1530,16 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     auto _saveFuncCB = saveFunc ? &_saveFuncCallback : null;
     bool _retval;
     auto _saveFunc = saveFunc ? cast(void*)&(saveFunc) : null;
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpoptionKeys;
     foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString(No.Alloc);
+      _tmpoptionKeys ~= s.toCString;
     _tmpoptionKeys ~= null;
     char** _optionKeys = _tmpoptionKeys.ptr;
 
     char*[] _tmpoptionValues;
     foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString(No.Alloc);
+      _tmpoptionValues ~= s.toCString;
     _tmpoptionValues ~= null;
     char** _optionValues = _tmpoptionValues.ptr;
 
@@ -1571,16 +1571,16 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   bool saveToStreamv(gio.output_stream.OutputStream stream, string type, string[] optionKeys = null, string[] optionValues = null, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpoptionKeys;
     foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString(No.Alloc);
+      _tmpoptionKeys ~= s.toCString;
     _tmpoptionKeys ~= null;
     char** _optionKeys = _tmpoptionKeys.ptr;
 
     char*[] _tmpoptionValues;
     foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString(No.Alloc);
+      _tmpoptionValues ~= s.toCString;
     _tmpoptionValues ~= null;
     char** _optionValues = _tmpoptionValues.ptr;
 
@@ -1627,16 +1627,16 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpoptionKeys;
     foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString(No.Alloc);
+      _tmpoptionKeys ~= s.toCString;
     _tmpoptionKeys ~= null;
     char** _optionKeys = _tmpoptionKeys.ptr;
 
     char*[] _tmpoptionValues;
     foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString(No.Alloc);
+      _tmpoptionValues ~= s.toCString;
     _tmpoptionValues ~= null;
     char** _optionValues = _tmpoptionValues.ptr;
 
@@ -1664,17 +1664,17 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   bool savev(string filename, string type, string[] optionKeys = null, string[] optionValues = null)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpoptionKeys;
     foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString(No.Alloc);
+      _tmpoptionKeys ~= s.toCString;
     _tmpoptionKeys ~= null;
     char** _optionKeys = _tmpoptionKeys.ptr;
 
     char*[] _tmpoptionValues;
     foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString(No.Alloc);
+      _tmpoptionValues ~= s.toCString;
     _tmpoptionValues ~= null;
     char** _optionValues = _tmpoptionValues.ptr;
 
@@ -1765,8 +1765,8 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   bool setOption(string key, string value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_pixbuf_set_option(cast(GdkPixbuf*)this._cPtr, _key, _value);
     return _retval;
   }

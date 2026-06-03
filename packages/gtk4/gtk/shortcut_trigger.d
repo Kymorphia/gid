@@ -88,7 +88,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   static gtk.shortcut_trigger.ShortcutTrigger parseString(string string_) nothrow
   {
     GtkShortcutTrigger* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_shortcut_trigger_parse_string(_string_);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
     return _retval;
@@ -213,7 +213,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_shortcut_trigger_to_string(cast(GtkShortcutTrigger*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

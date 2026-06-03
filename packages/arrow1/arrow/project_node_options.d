@@ -60,7 +60,7 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString;
     char** _names = _tmpnames.ptr;
 
     _cretval = garrow_project_node_options_new(_expressions, _names, _nNames);

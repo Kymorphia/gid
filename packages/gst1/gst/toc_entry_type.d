@@ -24,7 +24,7 @@ struct TocEntryType
   {
     const(char)* _cretval;
     _cretval = gst_toc_entry_type_get_nick(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

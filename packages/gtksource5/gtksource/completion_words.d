@@ -122,7 +122,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   this(string title = null) nothrow
   {
     GtkSourceCompletionWords* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_completion_words_new(_title);
     this(_cretval, Yes.Take);
   }

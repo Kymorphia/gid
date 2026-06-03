@@ -309,7 +309,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   static gio.dbus_connection.DBusConnection newForAddressSync(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusConnection* _cretval;
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dbus_connection_new_for_address_sync(_address, flags, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -348,7 +348,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   static gio.dbus_connection.DBusConnection newSync(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusConnection* _cretval;
-    const(char)* _guid = guid.toCString(No.Alloc);
+    const(char)* _guid = guid.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_dbus_connection_new_sync(stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, _guid, flags, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -404,7 +404,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _guid = guid.toCString(No.Alloc);
+    const(char)* _guid = guid.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_new(stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, _guid, flags, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -457,7 +457,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_new_for_address(_address, flags, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -605,10 +605,10 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _busName = busName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _busName = busName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_call(cast(GDBusConnection*)this._cPtr, _busName, _objectPath, _interfaceName, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, replyType ? cast(const(GVariantType)*)replyType._cPtr(No.Dup) : null, flags, timeoutMsec, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -691,10 +691,10 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   glib.variant.Variant callSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null)
   {
     GVariant* _cretval;
-    const(char)* _busName = busName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _busName = busName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dbus_connection_call_sync(cast(GDBusConnection*)this._cPtr, _busName, _objectPath, _interfaceName, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, replyType ? cast(const(GVariantType)*)replyType._cPtr(No.Dup) : null, flags, timeoutMsec, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -755,10 +755,10 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _busName = busName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _busName = busName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_connection_call_with_unix_fd_list(cast(GDBusConnection*)this._cPtr, _busName, _objectPath, _interfaceName, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, replyType ? cast(const(GVariantType)*)replyType._cPtr(No.Dup) : null, flags, timeoutMsec, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -827,10 +827,10 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   glib.variant.Variant callWithUnixFdListSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, out gio.unix_fdlist.UnixFDList outFdList, gio.cancellable.Cancellable cancellable = null)
   {
     GVariant* _cretval;
-    const(char)* _busName = busName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _busName = busName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     GUnixFDList* _outFdList;
     GError *_err;
     _cretval = g_dbus_connection_call_with_unix_fd_list_sync(cast(GDBusConnection*)this._cPtr, _busName, _objectPath, _interfaceName, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, replyType ? cast(const(GVariantType)*)replyType._cPtr(No.Dup) : null, flags, timeoutMsec, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null, &_outFdList, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
@@ -956,10 +956,10 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   bool emitSignal(string destinationBusName, string objectPath, string interfaceName, string signalName, glib.variant.Variant parameters = null)
   {
     bool _retval;
-    const(char)* _destinationBusName = destinationBusName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    const(char)* _signalName = signalName.toCString(No.Alloc);
+    const(char)* _destinationBusName = destinationBusName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _signalName = signalName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_dbus_connection_emit_signal(cast(GDBusConnection*)this._cPtr, _destinationBusName, _objectPath, _interfaceName, _signalName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -999,7 +999,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   uint exportActionGroup(string objectPath, gio.action_group.ActionGroup actionGroup)
   {
     uint _retval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = g_dbus_connection_export_action_group(cast(GDBusConnection*)this._cPtr, _objectPath, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup)._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1034,7 +1034,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   uint exportMenuModel(string objectPath, gio.menu_model.MenuModel menu)
   {
     uint _retval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = g_dbus_connection_export_menu_model(cast(GDBusConnection*)this._cPtr, _objectPath, menu ? cast(GMenuModel*)menu._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1172,7 +1172,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   {
     const(char)* _cretval;
     _cretval = g_dbus_connection_get_guid(cast(GDBusConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1241,7 +1241,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   {
     const(char)* _cretval;
     _cretval = g_dbus_connection_get_unique_name(cast(GDBusConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1273,7 +1273,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   uint registerObject(string objectPath, gio.dbus_interface_info.DBusInterfaceInfo interfaceInfo, gobject.closure.Closure methodCallClosure = null, gobject.closure.Closure getPropertyClosure = null, gobject.closure.Closure setPropertyClosure = null)
   {
     uint _retval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = g_dbus_connection_register_object_with_closures(cast(GDBusConnection*)this._cPtr, _objectPath, interfaceInfo ? cast(GDBusInterfaceInfo*)interfaceInfo._cPtr(No.Dup) : null, methodCallClosure ? cast(GClosure*)methodCallClosure._cPtr(No.Dup) : null, getPropertyClosure ? cast(GClosure*)getPropertyClosure._cPtr(No.Dup) : null, setPropertyClosure ? cast(GClosure*)setPropertyClosure._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1346,7 +1346,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     }
     auto _userDataFreeFuncCB = userDataFreeFunc ? &_userDataFreeFuncCallback : null;
     uint _retval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = g_dbus_connection_register_subtree(cast(GDBusConnection*)this._cPtr, _objectPath, &vtable, flags, userData, _userDataFreeFuncCB, &_err);
     if (_err)
@@ -1654,10 +1654,10 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     extern(C) void _callbackCallback(GDBusConnection* connection, const(char)* senderName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, GVariant* parameters, void* userData) nothrow
     {
       auto _dlg = cast(gio.types.DBusSignalCallback*)userData;
-      string _senderName = senderName.fromCString(No.Free);
-      string _objectPath = objectPath.fromCString(No.Free);
-      string _interfaceName = interfaceName.fromCString(No.Free);
-      string _signalName = signalName.fromCString(No.Free);
+      string _senderName = senderName.fromCString!(No.Free);
+      string _objectPath = objectPath.fromCString!(No.Free);
+      string _interfaceName = interfaceName.fromCString!(No.Free);
+      string _signalName = signalName.fromCString!(No.Free);
 
       try
       {
@@ -1670,11 +1670,11 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     uint _retval;
-    const(char)* _sender = sender.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    const(char)* _member = member.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _arg0 = arg0.toCString(No.Alloc);
+    const(char)* _sender = sender.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _member = member.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _arg0 = arg0.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     _retval = g_dbus_connection_signal_subscribe(cast(GDBusConnection*)this._cPtr, _sender, _interfaceName, _member, _objectPath, _arg0, flags, _callbackCB, _callback, _callbackDestroyCB);

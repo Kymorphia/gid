@@ -259,9 +259,9 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null) nothrow
   {
     GtkFileChooserNative* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
-    const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
-    const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _cancelLabel = cancelLabel.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_file_chooser_native_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, action, _acceptLabel, _cancelLabel);
     this(_cretval, Yes.Take);
   }
@@ -276,7 +276,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_native_get_accept_label(cast(GtkFileChooserNative*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_native_get_cancel_label(cast(GtkFileChooserNative*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   */
   void setAcceptLabel(string acceptLabel = null) nothrow
   {
-    const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
+    const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, Yes.Nullable);
     gtk_file_chooser_native_set_accept_label(cast(GtkFileChooserNative*)this._cPtr, _acceptLabel);
   }
 
@@ -332,7 +332,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   */
   void setCancelLabel(string cancelLabel = null) nothrow
   {
-    const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
+    const(char)* _cancelLabel = cancelLabel.toCString!(No.Malloc, Yes.Nullable);
     gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)this._cPtr, _cancelLabel);
   }
 }

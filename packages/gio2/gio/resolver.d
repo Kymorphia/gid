@@ -161,7 +161,7 @@ class Resolver : gobject.object.ObjectWrap
     _cretval = g_resolver_lookup_by_address(cast(GResolver*)this._cPtr, address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Resolver : gobject.object.ObjectWrap
     _cretval = g_resolver_lookup_by_address_finish(cast(GResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class Resolver : gobject.object.ObjectWrap
   gio.inet_address.InetAddress[] lookupByName(string hostname, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resolver_lookup_by_name(cast(GResolver*)this._cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -295,7 +295,7 @@ class Resolver : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_by_name_async(cast(GResolver*)this._cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -344,7 +344,7 @@ class Resolver : gobject.object.ObjectWrap
   gio.inet_address.InetAddress[] lookupByNameWithFlags(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resolver_lookup_by_name_with_flags(cast(GResolver*)this._cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -382,7 +382,7 @@ class Resolver : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)this._cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -438,7 +438,7 @@ class Resolver : gobject.object.ObjectWrap
   glib.variant.Variant[] lookupRecords(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _rrname = rrname.toCString(No.Alloc);
+    const(char)* _rrname = rrname.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resolver_lookup_records(cast(GResolver*)this._cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -476,7 +476,7 @@ class Resolver : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _rrname = rrname.toCString(No.Alloc);
+    const(char)* _rrname = rrname.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_records_async(cast(GResolver*)this._cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -547,9 +547,9 @@ class Resolver : gobject.object.ObjectWrap
   gio.srv_target.SrvTarget[] lookupService(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _service = service.toCString(No.Alloc);
-    const(char)* _protocol = protocol.toCString(No.Alloc);
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _service = service.toCString!(No.Malloc, No.Nullable);
+    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resolver_lookup_service(cast(GResolver*)this._cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -589,9 +589,9 @@ class Resolver : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _service = service.toCString(No.Alloc);
-    const(char)* _protocol = protocol.toCString(No.Alloc);
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _service = service.toCString!(No.Malloc, No.Nullable);
+    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_resolver_lookup_service_async(cast(GResolver*)this._cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

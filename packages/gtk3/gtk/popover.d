@@ -314,7 +314,7 @@ class Popover : gtk.bin.Bin
   */
   void bindModel(gio.menu_model.MenuModel model = null, string actionNamespace = null) nothrow
   {
-    const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
+    const(char)* _actionNamespace = actionNamespace.toCString!(No.Malloc, Yes.Nullable);
     gtk_popover_bind_model(cast(GtkPopover*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, _actionNamespace);
   }
 

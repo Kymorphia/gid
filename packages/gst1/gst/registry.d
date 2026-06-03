@@ -209,7 +209,7 @@ class Registry : gst.object.ObjectWrap
   bool checkFeatureVersion(string featureName, uint minMajor, uint minMinor, uint minMicro) nothrow
   {
     bool _retval;
-    const(char)* _featureName = featureName.toCString(No.Alloc);
+    const(char)* _featureName = featureName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_registry_check_feature_version(cast(GstRegistry*)this._cPtr, _featureName, minMajor, minMinor, minMicro);
     return _retval;
   }
@@ -270,7 +270,7 @@ class Registry : gst.object.ObjectWrap
   gst.plugin_feature.PluginFeature findFeature(string name, gobject.types.GType type) nothrow
   {
     GstPluginFeature* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_registry_find_feature(cast(GstRegistry*)this._cPtr, _name, type);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
     return _retval;
@@ -291,7 +291,7 @@ class Registry : gst.object.ObjectWrap
   gst.plugin.Plugin findPlugin(string name) nothrow
   {
     GstPlugin* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_registry_find_plugin(cast(GstRegistry*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
@@ -326,7 +326,7 @@ class Registry : gst.object.ObjectWrap
   gst.plugin_feature.PluginFeature[] getFeatureListByPlugin(string name) nothrow
   {
     GList* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_registry_get_feature_list_by_plugin(cast(GstRegistry*)this._cPtr, _name);
     auto _retval = gListToD!(gst.plugin_feature.PluginFeature, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -372,7 +372,7 @@ class Registry : gst.object.ObjectWrap
   gst.plugin.Plugin lookup(string filename) nothrow
   {
     GstPlugin* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_registry_lookup(cast(GstRegistry*)this._cPtr, _filename);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
@@ -391,7 +391,7 @@ class Registry : gst.object.ObjectWrap
   gst.plugin_feature.PluginFeature lookupFeature(string name) nothrow
   {
     GstPluginFeature* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_registry_lookup_feature(cast(GstRegistry*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
     return _retval;
@@ -476,7 +476,7 @@ class Registry : gst.object.ObjectWrap
   bool scanPath(string path) nothrow
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_registry_scan_path(cast(GstRegistry*)this._cPtr, _path);
     return _retval;
   }

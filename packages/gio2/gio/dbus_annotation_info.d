@@ -138,9 +138,9 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
     _tmpannotations.length++;
     GDBusAnnotationInfo** _annotations = _tmpannotations.ptr;
 
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_annotation_info_lookup(_annotations, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

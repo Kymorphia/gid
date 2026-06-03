@@ -87,7 +87,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   this(gio.dbus_connection.DBusConnection connection, string objectPath) nothrow
   {
     GDBusObjectProxy* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_object_proxy_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath);
     this(_cretval, Yes.Take);
   }

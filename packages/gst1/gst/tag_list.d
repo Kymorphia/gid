@@ -87,7 +87,7 @@ class TagList : gobject.boxed.Boxed
   static gst.tag_list.TagList newFromString(string str) nothrow
   {
     GstTagList* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_tag_list_new_from_string(_str);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -103,7 +103,7 @@ class TagList : gobject.boxed.Boxed
   */
   void addValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value) nothrow
   {
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     gst_tag_list_add_value(cast(GstTagList*)this._cPtr, mode, _tag, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -139,7 +139,7 @@ class TagList : gobject.boxed.Boxed
     extern(C) void _funcCallback(const(GstTagList)* list, const(char)* tag, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TagForeachFunc*)userData;
-      string _tag = tag.fromCString(No.Free);
+      string _tag = tag.fromCString!(No.Free);
 
       try
       {
@@ -168,7 +168,7 @@ class TagList : gobject.boxed.Boxed
   bool getBoolean(string tag, out bool value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     gboolean _value;
     _retval = cast(bool)gst_tag_list_get_boolean(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
     value = cast(bool)_value;
@@ -189,7 +189,7 @@ class TagList : gobject.boxed.Boxed
   bool getBooleanIndex(string tag, uint index, out bool value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     gboolean _value;
     _retval = cast(bool)gst_tag_list_get_boolean_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
     value = cast(bool)_value;
@@ -213,7 +213,7 @@ class TagList : gobject.boxed.Boxed
   bool getDate(string tag, out glib.date.Date value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GDate* _value;
     _retval = cast(bool)gst_tag_list_get_date(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
     value = *cast(Date*)_value;
@@ -237,7 +237,7 @@ class TagList : gobject.boxed.Boxed
   bool getDateIndex(string tag, uint index, out glib.date.Date value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GDate* _value;
     _retval = cast(bool)gst_tag_list_get_date_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
     value = *cast(Date*)_value;
@@ -261,7 +261,7 @@ class TagList : gobject.boxed.Boxed
   bool getDateTime(string tag, out gst.date_time.DateTime value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstDateTime* _value;
     _retval = cast(bool)gst_tag_list_get_date_time(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
     value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
@@ -285,7 +285,7 @@ class TagList : gobject.boxed.Boxed
   bool getDateTimeIndex(string tag, uint index, out gst.date_time.DateTime value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstDateTime* _value;
     _retval = cast(bool)gst_tag_list_get_date_time_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
     value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
@@ -305,7 +305,7 @@ class TagList : gobject.boxed.Boxed
   bool getDouble(string tag, out double value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_double(cast(const(GstTagList)*)this._cPtr, _tag, cast(double*)&value);
     return _retval;
   }
@@ -324,7 +324,7 @@ class TagList : gobject.boxed.Boxed
   bool getDoubleIndex(string tag, uint index, out double value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_double_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(double*)&value);
     return _retval;
   }
@@ -342,7 +342,7 @@ class TagList : gobject.boxed.Boxed
   bool getFloat(string tag, out float value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_float(cast(const(GstTagList)*)this._cPtr, _tag, cast(float*)&value);
     return _retval;
   }
@@ -361,7 +361,7 @@ class TagList : gobject.boxed.Boxed
   bool getFloatIndex(string tag, uint index, out float value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_float_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(float*)&value);
     return _retval;
   }
@@ -379,7 +379,7 @@ class TagList : gobject.boxed.Boxed
   bool getInt(string tag, out int value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_int(cast(const(GstTagList)*)this._cPtr, _tag, cast(int*)&value);
     return _retval;
   }
@@ -397,7 +397,7 @@ class TagList : gobject.boxed.Boxed
   bool getInt64(string tag, out long value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_int64(cast(const(GstTagList)*)this._cPtr, _tag, cast(long*)&value);
     return _retval;
   }
@@ -416,7 +416,7 @@ class TagList : gobject.boxed.Boxed
   bool getInt64Index(string tag, uint index, out long value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_int64_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(long*)&value);
     return _retval;
   }
@@ -435,7 +435,7 @@ class TagList : gobject.boxed.Boxed
   bool getIntIndex(string tag, uint index, out int value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_int_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(int*)&value);
     return _retval;
   }
@@ -453,7 +453,7 @@ class TagList : gobject.boxed.Boxed
   bool getPointer(string tag, out void* value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_pointer(cast(const(GstTagList)*)this._cPtr, _tag, cast(void**)&value);
     return _retval;
   }
@@ -472,7 +472,7 @@ class TagList : gobject.boxed.Boxed
   bool getPointerIndex(string tag, uint index, out void* value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_pointer_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(void**)&value);
     return _retval;
   }
@@ -496,7 +496,7 @@ class TagList : gobject.boxed.Boxed
   bool getSample(string tag, out gst.sample.Sample sample) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstSample* _sample;
     _retval = cast(bool)gst_tag_list_get_sample(cast(const(GstTagList)*)this._cPtr, _tag, &_sample);
     sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
@@ -523,7 +523,7 @@ class TagList : gobject.boxed.Boxed
   bool getSampleIndex(string tag, uint index, out gst.sample.Sample sample) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstSample* _sample;
     _retval = cast(bool)gst_tag_list_get_sample_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_sample);
     sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
@@ -564,10 +564,10 @@ class TagList : gobject.boxed.Boxed
   bool getString(string tag, out string value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     char* _value;
     _retval = cast(bool)gst_tag_list_get_string(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
-    value = _value.fromCString(Yes.Free);
+    value = _value.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -591,10 +591,10 @@ class TagList : gobject.boxed.Boxed
   bool getStringIndex(string tag, uint index, out string value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     char* _value;
     _retval = cast(bool)gst_tag_list_get_string_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
-    value = _value.fromCString(Yes.Free);
+    value = _value.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -608,7 +608,7 @@ class TagList : gobject.boxed.Boxed
   uint getTagSize(string tag) nothrow
   {
     uint _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = gst_tag_list_get_tag_size(cast(const(GstTagList)*)this._cPtr, _tag);
     return _retval;
   }
@@ -626,7 +626,7 @@ class TagList : gobject.boxed.Boxed
   bool getUint(string tag, out uint value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_uint(cast(const(GstTagList)*)this._cPtr, _tag, cast(uint*)&value);
     return _retval;
   }
@@ -644,7 +644,7 @@ class TagList : gobject.boxed.Boxed
   bool getUint64(string tag, out ulong value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_uint64(cast(const(GstTagList)*)this._cPtr, _tag, cast(ulong*)&value);
     return _retval;
   }
@@ -663,7 +663,7 @@ class TagList : gobject.boxed.Boxed
   bool getUint64Index(string tag, uint index, out ulong value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_uint64_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(ulong*)&value);
     return _retval;
   }
@@ -682,7 +682,7 @@ class TagList : gobject.boxed.Boxed
   bool getUintIndex(string tag, uint index, out uint value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_get_uint_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(uint*)&value);
     return _retval;
   }
@@ -701,7 +701,7 @@ class TagList : gobject.boxed.Boxed
   gobject.value.Value getValueIndex(string tag, uint index) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_tag_list_get_value_index(cast(const(GstTagList)*)this._cPtr, _tag, index);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -785,7 +785,7 @@ class TagList : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_tag_list_nth_tag_name(cast(const(GstTagList)*)this._cPtr, index);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -807,10 +807,10 @@ class TagList : gobject.boxed.Boxed
   bool peekStringIndex(string tag, uint index, out string value) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     char* _value;
     _retval = cast(bool)gst_tag_list_peek_string_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
-    value = _value.fromCString(No.Free);
+    value = _value.fromCString!(No.Free);
     return _retval;
   }
 
@@ -822,7 +822,7 @@ class TagList : gobject.boxed.Boxed
   */
   void removeTag(string tag) nothrow
   {
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     gst_tag_list_remove_tag(cast(GstTagList*)this._cPtr, _tag);
   }
 
@@ -848,7 +848,7 @@ class TagList : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_tag_list_to_string(cast(const(GstTagList)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -869,7 +869,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     GValue _dest;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_copy_value(&_dest, list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _tag);
     dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
     return _retval;

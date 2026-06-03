@@ -205,7 +205,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
     extern(C) void _printerCallback(SoupLogger* logger, SoupLoggerLogLevel level, char direction, const(char)* data, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.LoggerPrinter*)userData;
-      string _data = data.fromCString(No.Free);
+      string _data = data.fromCString!(No.Free);
 
       try
       {

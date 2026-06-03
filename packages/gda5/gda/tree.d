@@ -124,7 +124,7 @@ class Tree : gobject.object.ObjectWrap
   gda.tree_node.TreeNode getNode(string treePath, bool useNames) nothrow
   {
     GdaTreeNode* _cretval;
-    const(char)* _treePath = treePath.toCString(No.Alloc);
+    const(char)* _treePath = treePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_tree_get_node(cast(GdaTree*)this._cPtr, _treePath, useNames);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.tree_node.TreeNode)(cast(GdaTreeNode*)_cretval, No.Take);
     return _retval;
@@ -156,7 +156,7 @@ class Tree : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gda_tree_get_node_path(cast(GdaTree*)this._cPtr, node ? cast(GdaTreeNode*)node._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Tree : gobject.object.ObjectWrap
   gda.tree_node.TreeNode[] getNodesInPath(string treePath, bool useNames) nothrow
   {
     GSList* _cretval;
-    const(char)* _treePath = treePath.toCString(No.Alloc);
+    const(char)* _treePath = treePath.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gda_tree_get_nodes_in_path(cast(GdaTree*)this._cPtr, _treePath, useNames);
     auto _retval = gSListToD!(gda.tree_node.TreeNode, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
@@ -206,7 +206,7 @@ class Tree : gobject.object.ObjectWrap
       }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     gda_tree_set_attribute(cast(GdaTree*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
 

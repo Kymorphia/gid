@@ -128,7 +128,7 @@ gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectWrap obj, gst.buf
 gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, string extension, out gst.types.TypeFindProbability prob) nothrow
 {
   GstCaps* _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
+  const(char)* _extension = extension.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_type_find_helper_for_buffer_with_extension(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, _extension, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -240,7 +240,7 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyt
     _size = cast(size_t)data.length;
 
   auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
-  const(char)* _extension = extension.toCString(No.Alloc);
+  const(char)* _extension = extension.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_type_find_helper_for_data_with_extension(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _data, _size, _extension, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -265,7 +265,7 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyt
 gst.caps.Caps typeFindHelperForExtension(gst.object.ObjectWrap obj, string extension) nothrow
 {
   GstCaps* _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
+  const(char)* _extension = extension.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_type_find_helper_for_extension(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _extension);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -324,7 +324,7 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.Objec
   auto _funcCB = func ? &_funcCallback : null;
   _static_func = func;
   GstCaps* _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
+  const(char)* _extension = extension.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_type_find_helper_get_range(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, _funcCB, size, _extension, &prob);
   _static_func = null;
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
@@ -383,7 +383,7 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
   auto _funcCB = func ? &_funcCallback : null;
   _static_func = func;
   GstFlowReturn _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
+  const(char)* _extension = extension.toCString!(No.Malloc, Yes.Nullable);
   GstCaps* _caps;
   _cretval = gst_type_find_helper_get_range_full(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, _funcCB, size, _extension, &_caps, &prob);
   _static_func = null;

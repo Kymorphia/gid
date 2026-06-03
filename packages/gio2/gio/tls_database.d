@@ -82,7 +82,7 @@ class TlsDatabase : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_tls_database_create_certificate_handle(cast(GTlsDatabase*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class TlsDatabase : gobject.object.ObjectWrap
   gio.tls_certificate.TlsCertificate lookupCertificateForHandle(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsCertificate* _cretval;
-    const(char)* _handle = handle.toCString(No.Alloc);
+    const(char)* _handle = handle.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_tls_database_lookup_certificate_for_handle(cast(GTlsDatabase*)this._cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -149,7 +149,7 @@ class TlsDatabase : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _handle = handle.toCString(No.Alloc);
+    const(char)* _handle = handle.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_tls_database_lookup_certificate_for_handle_async(cast(GTlsDatabase*)this._cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -436,7 +436,7 @@ class TlsDatabase : gobject.object.ObjectWrap
   gio.types.TlsCertificateFlags verifyChain(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsCertificateFlags _cretval;
-    const(char)* _purpose = purpose.toCString(No.Alloc);
+    const(char)* _purpose = purpose.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_tls_database_verify_chain(cast(GTlsDatabase*)this._cPtr, chain ? cast(GTlsCertificate*)chain._cPtr(No.Dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -476,7 +476,7 @@ class TlsDatabase : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _purpose = purpose.toCString(No.Alloc);
+    const(char)* _purpose = purpose.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_tls_database_verify_chain_async(cast(GTlsDatabase*)this._cPtr, chain ? cast(GTlsCertificate*)chain._cPtr(No.Dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

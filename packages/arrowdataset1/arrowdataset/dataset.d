@@ -68,7 +68,7 @@ class Dataset : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gadataset_dataset_get_type_name(cast(GADatasetDataset*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

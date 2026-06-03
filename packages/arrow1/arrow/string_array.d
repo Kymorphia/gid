@@ -61,7 +61,7 @@ class StringArray : arrow.binary_array.BinaryArray
   {
     char* _cretval;
     _cretval = garrow_string_array_get_string(cast(GArrowStringArray*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

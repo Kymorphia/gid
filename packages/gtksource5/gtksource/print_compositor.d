@@ -480,7 +480,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_body_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -524,7 +524,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_footer_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -539,7 +539,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_header_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -582,7 +582,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_line_numbers_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -807,7 +807,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setBodyFontName(string fontName) nothrow
   {
-    const(char)* _fontName = fontName.toCString(No.Alloc);
+    const(char)* _fontName = fontName.toCString!(No.Malloc, No.Nullable);
     gtk_source_print_compositor_set_body_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 
@@ -842,7 +842,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setFooterFontName(string fontName = null) nothrow
   {
-    const(char)* _fontName = fontName.toCString(No.Alloc);
+    const(char)* _fontName = fontName.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_print_compositor_set_footer_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 
@@ -858,9 +858,9 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setFooterFormat(bool separator, string left = null, string center = null, string right = null) nothrow
   {
-    const(char)* _left = left.toCString(No.Alloc);
-    const(char)* _center = center.toCString(No.Alloc);
-    const(char)* _right = right.toCString(No.Alloc);
+    const(char)* _left = left.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _center = center.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _right = right.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_print_compositor_set_footer_format(cast(GtkSourcePrintCompositor*)this._cPtr, separator, _left, _center, _right);
   }
 
@@ -883,7 +883,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setHeaderFontName(string fontName = null) nothrow
   {
-    const(char)* _fontName = fontName.toCString(No.Alloc);
+    const(char)* _fontName = fontName.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_print_compositor_set_header_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 
@@ -920,9 +920,9 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setHeaderFormat(bool separator, string left = null, string center = null, string right = null) nothrow
   {
-    const(char)* _left = left.toCString(No.Alloc);
-    const(char)* _center = center.toCString(No.Alloc);
-    const(char)* _right = right.toCString(No.Alloc);
+    const(char)* _left = left.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _center = center.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _right = right.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_print_compositor_set_header_format(cast(GtkSourcePrintCompositor*)this._cPtr, separator, _left, _center, _right);
   }
 
@@ -972,7 +972,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setLineNumbersFontName(string fontName = null) nothrow
   {
-    const(char)* _fontName = fontName.toCString(No.Alloc);
+    const(char)* _fontName = fontName.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_print_compositor_set_line_numbers_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 

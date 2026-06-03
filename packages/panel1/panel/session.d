@@ -126,7 +126,7 @@ class Session : gobject.object.ObjectWrap
   panel.session_item.SessionItem lookupById(string id) nothrow
   {
     PanelSessionItem* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_session_lookup_by_id(cast(PanelSession*)this._cPtr, _id);
     auto _retval = gobject.object.ObjectWrap._getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, Yes.Take);
     return _retval;

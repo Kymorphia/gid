@@ -225,7 +225,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterAddClass(int pos, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_path_iter_add_class(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
@@ -246,7 +246,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterAddRegion(int pos, string name, gtk.types.RegionFlags flags) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_path_iter_add_region(cast(GtkWidgetPath*)this._cPtr, pos, _name, flags);
   }
 
@@ -289,7 +289,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_widget_path_iter_get_name(cast(const(GtkWidgetPath)*)this._cPtr, pos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_widget_path_iter_get_object_name(cast(const(GtkWidgetPath)*)this._cPtr, pos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasClass(int pos, string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_widget_path_iter_has_class(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
     return _retval;
   }
@@ -403,7 +403,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasName(int pos, string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_widget_path_iter_has_name(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
     return _retval;
   }
@@ -474,7 +474,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasRegion(int pos, string name, out gtk.types.RegionFlags flags) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_widget_path_iter_has_region(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name, &flags);
     return _retval;
   }
@@ -529,7 +529,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterRemoveClass(int pos, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_path_iter_remove_class(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
@@ -545,7 +545,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterRemoveRegion(int pos, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_path_iter_remove_region(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
@@ -559,7 +559,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterSetName(int pos, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_path_iter_set_name(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
@@ -576,7 +576,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterSetObjectName(int pos, string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_widget_path_iter_set_object_name(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
@@ -657,7 +657,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_widget_path_to_string(cast(const(GtkWidgetPath)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

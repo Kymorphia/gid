@@ -100,7 +100,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   */
   void setDesktopId(string desktopId) nothrow
   {
-    const(char)* _desktopId = desktopId.toCString(No.Alloc);
+    const(char)* _desktopId = desktopId.toCString!(No.Malloc, No.Nullable);
     gst_install_plugins_context_set_desktop_id(cast(GstInstallPluginsContext*)this._cPtr, _desktopId);
   }
 
@@ -129,7 +129,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   */
   void setStartupNotificationId(string startupId) nothrow
   {
-    const(char)* _startupId = startupId.toCString(No.Alloc);
+    const(char)* _startupId = startupId.toCString!(No.Malloc, No.Nullable);
     gst_install_plugins_context_set_startup_notification_id(cast(GstInstallPluginsContext*)this._cPtr, _startupId);
   }
 

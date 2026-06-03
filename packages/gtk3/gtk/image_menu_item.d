@@ -248,7 +248,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   static gtk.image_menu_item.ImageMenuItem newFromStock(string stockId, gtk.accel_group.AccelGroup accelGroup = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_menu_item_new_from_stock(_stockId, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -266,7 +266,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   static gtk.image_menu_item.ImageMenuItem newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_menu_item_new_with_label(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -287,7 +287,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   static gtk.image_menu_item.ImageMenuItem newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_menu_item_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

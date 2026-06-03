@@ -105,7 +105,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   bool appendString(string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_string_dictionary_array_builder_append_string(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr, _value, &_err);
     if (_err)

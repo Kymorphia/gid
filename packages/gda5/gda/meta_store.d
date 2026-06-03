@@ -71,7 +71,7 @@ class MetaStore : gobject.object.ObjectWrap
   this(string cncString = null) nothrow
   {
     GdaMetaStore* _cretval;
-    const(char)* _cncString = cncString.toCString(No.Alloc);
+    const(char)* _cncString = cncString.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gda_meta_store_new(_cncString);
     this(_cretval, Yes.Take);
   }
@@ -87,7 +87,7 @@ class MetaStore : gobject.object.ObjectWrap
   static gda.meta_store.MetaStore newWithFile(string fileName) nothrow
   {
     GdaMetaStore* _cretval;
-    const(char)* _fileName = fileName.toCString(No.Alloc);
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_meta_store_new_with_file(_fileName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.meta_store.MetaStore)(cast(GdaMetaStore*)_cretval, Yes.Take);
     return _retval;
@@ -117,9 +117,9 @@ class MetaStore : gobject.object.ObjectWrap
   static string sqlIdentifierQuote(string id, gda.connection.Connection cnc) nothrow
   {
     char* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_meta_store_sql_identifier_quote(_id, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class MetaStore : gobject.object.ObjectWrap
   gda.data_model.DataModel createModifyDataModel(string tableName) nothrow
   {
     GdaDataModel* _cretval;
-    const(char)* _tableName = tableName.toCString(No.Alloc);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_meta_store_create_modify_data_model(cast(GdaMetaStore*)this._cPtr, _tableName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model.DataModel)(cast(GdaDataModel*)_cretval, Yes.Take);
     return _retval;
@@ -178,20 +178,20 @@ class MetaStore : gobject.object.ObjectWrap
   bool declareForeignKey(gda.meta_struct.MetaStruct mstruct, string fkName, string catalog, string schema, string table, string refCatalog, string refSchema, string refTable, string[] colnames, string[] refColnames)
   {
     bool _retval;
-    const(char)* _fkName = fkName.toCString(No.Alloc);
-    const(char)* _catalog = catalog.toCString(No.Alloc);
-    const(char)* _schema = schema.toCString(No.Alloc);
-    const(char)* _table = table.toCString(No.Alloc);
-    const(char)* _refCatalog = refCatalog.toCString(No.Alloc);
-    const(char)* _refSchema = refSchema.toCString(No.Alloc);
-    const(char)* _refTable = refTable.toCString(No.Alloc);
+    const(char)* _fkName = fkName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _catalog = catalog.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _schema = schema.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _table = table.toCString!(No.Malloc, No.Nullable);
+    const(char)* _refCatalog = refCatalog.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _refSchema = refSchema.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _refTable = refTable.toCString!(No.Malloc, No.Nullable);
     uint _nbCols;
     if (colnames)
       _nbCols = cast(uint)colnames.length;
 
     char*[] _tmpcolnames;
     foreach (s; colnames)
-      _tmpcolnames ~= s.toCString(No.Alloc);
+      _tmpcolnames ~= s.toCString;
     char** _colnames = _tmpcolnames.ptr;
 
     if (refColnames)
@@ -199,7 +199,7 @@ class MetaStore : gobject.object.ObjectWrap
 
     char*[] _tmprefColnames;
     foreach (s; refColnames)
-      _tmprefColnames ~= s.toCString(No.Alloc);
+      _tmprefColnames ~= s.toCString;
     char** _refColnames = _tmprefColnames.ptr;
 
     GError *_err;
@@ -229,13 +229,13 @@ class MetaStore : gobject.object.ObjectWrap
   bool getAttributeValue(string attName, out string attValue)
   {
     bool _retval;
-    const(char)* _attName = attName.toCString(No.Alloc);
+    const(char)* _attName = attName.toCString!(No.Malloc, No.Nullable);
     char* _attValue;
     GError *_err;
     _retval = cast(bool)gda_meta_store_get_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, &_attValue, &_err);
     if (_err)
       throw new MetaStoreException(_err);
-    attValue = _attValue.fromCString(Yes.Free);
+    attValue = _attValue.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -284,15 +284,15 @@ class MetaStore : gobject.object.ObjectWrap
   bool modify(string tableName, gda.data_model.DataModel newData, string condition, string[] valueNames, gobject.value.Value[] values)
   {
     bool _retval;
-    const(char)* _tableName = tableName.toCString(No.Alloc);
-    const(char)* _condition = condition.toCString(No.Alloc);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _condition = condition.toCString!(No.Malloc, Yes.Nullable);
     int _nvalues;
     if (valueNames)
       _nvalues = cast(int)valueNames.length;
 
     char*[] _tmpvalueNames;
     foreach (s; valueNames)
-      _tmpvalueNames ~= s.toCString(No.Alloc);
+      _tmpvalueNames ~= s.toCString;
     const(char*)* _valueNames = _tmpvalueNames.ptr;
 
     if (values)
@@ -390,7 +390,7 @@ class MetaStore : gobject.object.ObjectWrap
   bool schemaAddCustomObject(string xmlDescription)
   {
     bool _retval;
-    const(char)* _xmlDescription = xmlDescription.toCString(No.Alloc);
+    const(char)* _xmlDescription = xmlDescription.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_meta_store_schema_add_custom_object(cast(GdaMetaStore*)this._cPtr, _xmlDescription, &_err);
     if (_err)
@@ -425,7 +425,7 @@ class MetaStore : gobject.object.ObjectWrap
   string[] schemaGetDependTables(string tableName) nothrow
   {
     GSList* _cretval;
-    const(char)* _tableName = tableName.toCString(No.Alloc);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_meta_store_schema_get_depend_tables(cast(GdaMetaStore*)this._cPtr, _tableName);
     auto _retval = gSListToD!(string, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
@@ -458,7 +458,7 @@ class MetaStore : gobject.object.ObjectWrap
   bool schemaRemoveCustomObject(string objName)
   {
     bool _retval;
-    const(char)* _objName = objName.toCString(No.Alloc);
+    const(char)* _objName = objName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_meta_store_schema_remove_custom_object(cast(GdaMetaStore*)this._cPtr, _objName, &_err);
     if (_err)
@@ -479,8 +479,8 @@ class MetaStore : gobject.object.ObjectWrap
   bool setAttributeValue(string attName, string attValue = null)
   {
     bool _retval;
-    const(char)* _attName = attName.toCString(No.Alloc);
-    const(char)* _attValue = attValue.toCString(No.Alloc);
+    const(char)* _attName = attName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _attValue = attValue.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_meta_store_set_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, _attValue, &_err);
     if (_err)
@@ -516,7 +516,7 @@ class MetaStore : gobject.object.ObjectWrap
     extern(C) gboolean _funcCallback(const(char)* word) nothrow
     {
       bool _dretval;
-      string _word = word.fromCString(No.Free);
+      string _word = word.fromCString!(No.Free);
 
       try
       {
@@ -565,13 +565,13 @@ class MetaStore : gobject.object.ObjectWrap
   bool undeclareForeignKey(gda.meta_struct.MetaStruct mstruct, string fkName, string catalog, string schema, string table, string refCatalog, string refSchema, string refTable)
   {
     bool _retval;
-    const(char)* _fkName = fkName.toCString(No.Alloc);
-    const(char)* _catalog = catalog.toCString(No.Alloc);
-    const(char)* _schema = schema.toCString(No.Alloc);
-    const(char)* _table = table.toCString(No.Alloc);
-    const(char)* _refCatalog = refCatalog.toCString(No.Alloc);
-    const(char)* _refSchema = refSchema.toCString(No.Alloc);
-    const(char)* _refTable = refTable.toCString(No.Alloc);
+    const(char)* _fkName = fkName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _catalog = catalog.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _schema = schema.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _table = table.toCString!(No.Malloc, No.Nullable);
+    const(char)* _refCatalog = refCatalog.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _refSchema = refSchema.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _refTable = refTable.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_meta_store_undeclare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, &_err);
     if (_err)

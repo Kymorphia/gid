@@ -142,7 +142,7 @@ class MediaFile : gtk.media_stream.MediaStream
   static gtk.media_file.MediaFile newForFilename(string filename) nothrow
   {
     GtkMediaStream* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_media_file_new_for_filename(_filename);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
     return _retval;
@@ -179,7 +179,7 @@ class MediaFile : gtk.media_stream.MediaStream
   static gtk.media_file.MediaFile newForResource(string resourcePath) nothrow
   {
     GtkMediaStream* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_media_file_new_for_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
     return _retval;
@@ -247,7 +247,7 @@ class MediaFile : gtk.media_stream.MediaStream
   */
   void setFilename(string filename = null) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     gtk_media_file_set_filename(cast(GtkMediaFile*)this._cPtr, _filename);
   }
 
@@ -278,7 +278,7 @@ class MediaFile : gtk.media_stream.MediaStream
   */
   void setResource(string resourcePath = null) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     gtk_media_file_set_resource(cast(GtkMediaFile*)this._cPtr, _resourcePath);
   }
 }

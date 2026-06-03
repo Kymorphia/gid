@@ -63,7 +63,7 @@ class FilterWindows : gmime.filter.Filter
   this(string claimedCharset) nothrow
   {
     GMimeFilter* _cretval;
-    const(char)* _claimedCharset = claimedCharset.toCString(No.Alloc);
+    const(char)* _claimedCharset = claimedCharset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_filter_windows_new(_claimedCharset);
     this(_cretval, Yes.Take);
   }
@@ -91,7 +91,7 @@ class FilterWindows : gmime.filter.Filter
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_windows_real_charset(cast(GMimeFilterWindows*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

@@ -175,7 +175,7 @@ void checkDropBuffers() nothrow
 */
 void checkElementPushBuffer(string elementName, gst.buffer.Buffer bufferIn, gst.caps.Caps capsIn, gst.buffer.Buffer bufferOut, gst.caps.Caps capsOut) nothrow
 {
-  const(char)* _elementName = elementName.toCString(No.Alloc);
+  const(char)* _elementName = elementName.toCString!(No.Malloc, No.Nullable);
   gst_check_element_push_buffer(_elementName, bufferIn ? cast(GstBuffer*)bufferIn._cPtr(No.Dup) : null, capsIn ? cast(GstCaps*)capsIn._cPtr(No.Dup) : null, bufferOut ? cast(GstBuffer*)bufferOut._cPtr(No.Dup) : null, capsOut ? cast(GstCaps*)capsOut._cPtr(No.Dup) : null);
 }
 
@@ -220,7 +220,7 @@ void checkRemoveLogFilter(gstcheck.types.CheckLogFilter filter) nothrow
 gst.element.Element checkSetupElement(string factory) nothrow
 {
   GstElement* _cretval;
-  const(char)* _factory = factory.toCString(No.Alloc);
+  const(char)* _factory = factory.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_check_setup_element(_factory);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
   return _retval;
@@ -257,7 +257,7 @@ void checkSetupEvents(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.
 */
 void checkSetupEventsWithStreamId(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.Caps caps, gst.types.Format format, string streamId) nothrow
 {
-  const(char)* _streamId = streamId.toCString(No.Alloc);
+  const(char)* _streamId = streamId.toCString!(No.Malloc, No.Nullable);
   gst_check_setup_events_with_stream_id(srcpad ? cast(GstPad*)srcpad._cPtr(No.Dup) : null, element ? cast(GstElement*)element._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, format, _streamId);
 }
 
@@ -291,7 +291,7 @@ gst.pad.Pad checkSetupSinkPad(gst.element.Element element, gst.static_pad_templa
 gst.pad.Pad checkSetupSinkPadByName(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_check_setup_sink_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null, _name);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
@@ -301,7 +301,7 @@ gst.pad.Pad checkSetupSinkPadByName(gst.element.Element element, gst.static_pad_
 gst.pad.Pad checkSetupSinkPadByNameFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_check_setup_sink_pad_by_name_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null, _name);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
@@ -376,7 +376,7 @@ gst.pad.Pad checkSetupSrcPad(gst.element.Element element, gst.static_pad_templat
 gst.pad.Pad checkSetupSrcPadByName(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_check_setup_src_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null, _name);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
@@ -386,7 +386,7 @@ gst.pad.Pad checkSetupSrcPadByName(gst.element.Element element, gst.static_pad_t
 gst.pad.Pad checkSetupSrcPadByNameFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_check_setup_src_pad_by_name_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null, _name);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
@@ -410,7 +410,7 @@ void checkTeardownElement(gst.element.Element element) nothrow
 /** */
 void checkTeardownPadByName(gst.element.Element element, string name) nothrow
 {
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   gst_check_teardown_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, _name);
 }
 

@@ -70,7 +70,7 @@ class PatternSpec : gobject.boxed.Boxed
   this(string pattern) nothrow
   {
     GPatternSpec* _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
     _cretval = g_pattern_spec_new(_pattern);
     this(_cretval, Yes.Take);
   }
@@ -134,7 +134,7 @@ class PatternSpec : gobject.boxed.Boxed
       _stringLength = cast(size_t)string_.length;
 
     auto _string_ = string_.ptr ? cast(const(char)*)string_.ptr : [char.init].ptr;
-    const(char)* _stringReversed = stringReversed.toCString(No.Alloc);
+    const(char)* _stringReversed = stringReversed.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)g_pattern_spec_match(cast(GPatternSpec*)this._cPtr, _stringLength, _string_, _stringReversed);
     return _retval;
   }
@@ -151,7 +151,7 @@ class PatternSpec : gobject.boxed.Boxed
   bool matchString(string string_) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_pattern_spec_match_string(cast(GPatternSpec*)this._cPtr, _string_);
     return _retval;
   }

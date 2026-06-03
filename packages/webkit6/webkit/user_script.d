@@ -67,16 +67,16 @@ class UserScript : gobject.boxed.Boxed
   this(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserScriptInjectionTime injectionTime, string[] allowList = null, string[] blockList = null) nothrow
   {
     WebKitUserScript* _cretval;
-    const(char)* _source = source.toCString(No.Alloc);
+    const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpallowList;
     foreach (s; allowList)
-      _tmpallowList ~= s.toCString(No.Alloc);
+      _tmpallowList ~= s.toCString;
     _tmpallowList ~= null;
     const(char*)* _allowList = _tmpallowList.ptr;
 
     char*[] _tmpblockList;
     foreach (s; blockList)
-      _tmpblockList ~= s.toCString(No.Alloc);
+      _tmpblockList ~= s.toCString;
     _tmpblockList ~= null;
     const(char*)* _blockList = _tmpblockList.ptr;
 
@@ -101,17 +101,17 @@ class UserScript : gobject.boxed.Boxed
   static webkit.user_script.UserScript newForWorld(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserScriptInjectionTime injectionTime, string worldName, string[] allowList = null, string[] blockList = null) nothrow
   {
     WebKitUserScript* _cretval;
-    const(char)* _source = source.toCString(No.Alloc);
-    const(char)* _worldName = worldName.toCString(No.Alloc);
+    const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
+    const(char)* _worldName = worldName.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpallowList;
     foreach (s; allowList)
-      _tmpallowList ~= s.toCString(No.Alloc);
+      _tmpallowList ~= s.toCString;
     _tmpallowList ~= null;
     const(char*)* _allowList = _tmpallowList.ptr;
 
     char*[] _tmpblockList;
     foreach (s; blockList)
-      _tmpblockList ~= s.toCString(No.Alloc);
+      _tmpblockList ~= s.toCString;
     _tmpblockList ~= null;
     const(char*)* _blockList = _tmpblockList.ptr;
 

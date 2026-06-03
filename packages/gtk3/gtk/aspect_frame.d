@@ -131,7 +131,7 @@ class AspectFrame : gtk.frame.Frame
   this(string label, float xalign, float yalign, float ratio, bool obeyChild) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_aspect_frame_new(_label, xalign, yalign, ratio, obeyChild);
     this(_cretval, No.Take);
   }

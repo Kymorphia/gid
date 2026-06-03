@@ -133,7 +133,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   static gtk.check_menu_item.CheckMenuItem newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_check_menu_item_new_with_label(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -152,7 +152,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   static gtk.check_menu_item.CheckMenuItem newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_check_menu_item_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

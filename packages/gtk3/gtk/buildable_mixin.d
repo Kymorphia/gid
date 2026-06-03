@@ -41,7 +41,7 @@ template BuildableT()
   */
   override void addChild(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string type = null) nothrow
   {
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, Yes.Nullable);
     gtk_buildable_add_child(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _type);
   }
 
@@ -59,7 +59,7 @@ template BuildableT()
   override gobject.object.ObjectWrap constructChild(gtk.builder.Builder builder, string name) nothrow
   {
     GObject* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_buildable_construct_child(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
@@ -77,7 +77,7 @@ template BuildableT()
   */
   override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, void* data = null) nothrow
   {
-    const(char)* _tagname = tagname.toCString(No.Alloc);
+    const(char)* _tagname = tagname.toCString!(No.Malloc, No.Nullable);
     gtk_buildable_custom_finished(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _tagname, data);
   }
 
@@ -97,7 +97,7 @@ template BuildableT()
   override bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, out glib.types.MarkupParser parser, out void* data) nothrow
   {
     bool _retval;
-    const(char)* _tagname = tagname.toCString(No.Alloc);
+    const(char)* _tagname = tagname.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_buildable_custom_tag_start(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _tagname, &parser, cast(void**)&data);
     return _retval;
   }
@@ -113,7 +113,7 @@ template BuildableT()
   override gobject.object.ObjectWrap getInternalChild(gtk.builder.Builder builder, string childname) nothrow
   {
     GObject* _cretval;
-    const(char)* _childname = childname.toCString(No.Alloc);
+    const(char)* _childname = childname.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_buildable_get_internal_child(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, _childname);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
@@ -131,7 +131,7 @@ template BuildableT()
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_get_name(cast(GtkBuildable*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ template BuildableT()
   */
   override void setBuildableProperty(gtk.builder.Builder builder, string name, gobject.value.Value value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_buildable_set_buildable_property(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, _name, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -172,7 +172,7 @@ template BuildableT()
   */
   override void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_buildable_set_name(cast(GtkBuildable*)this._cPtr, _name);
   }
 }

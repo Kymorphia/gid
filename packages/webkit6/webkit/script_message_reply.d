@@ -56,7 +56,7 @@ class ScriptMessageReply : gobject.boxed.Boxed
   */
   void returnErrorMessage(string errorMessage) nothrow
   {
-    const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
+    const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
     webkit_script_message_reply_return_error_message(cast(WebKitScriptMessageReply*)this._cPtr, _errorMessage);
   }
 

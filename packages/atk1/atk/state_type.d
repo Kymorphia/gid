@@ -21,7 +21,7 @@ struct StateType
   static atk.types.StateType forName(string name) nothrow
   {
     AtkStateType _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_state_type_for_name(_name);
     atk.types.StateType _retval = cast(atk.types.StateType)_cretval;
     return _retval;
@@ -38,7 +38,7 @@ struct StateType
   {
     const(char)* _cretval;
     _cretval = atk_state_type_get_name(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ struct StateType
   static atk.types.StateType register(string name) nothrow
   {
     AtkStateType _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_state_type_register(_name);
     atk.types.StateType _retval = cast(atk.types.StateType)_cretval;
     return _retval;

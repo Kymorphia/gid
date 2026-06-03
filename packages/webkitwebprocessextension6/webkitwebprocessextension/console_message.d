@@ -98,7 +98,7 @@ class ConsoleMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_console_message_get_source_id(cast(WebKitConsoleMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class ConsoleMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_console_message_get_text(cast(WebKitConsoleMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

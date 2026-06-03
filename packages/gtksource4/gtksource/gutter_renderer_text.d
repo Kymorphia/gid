@@ -96,7 +96,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   */
   void measure(string text, out int width, out int height) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_source_gutter_renderer_text_measure(cast(GtkSourceGutterRendererText*)this._cPtr, _text, cast(int*)&width, cast(int*)&height);
   }
 
@@ -113,7 +113,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   */
   void measureMarkup(string markup, out int width, out int height) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, No.Nullable);
     gtk_source_gutter_renderer_text_measure_markup(cast(GtkSourceGutterRendererText*)this._cPtr, _markup, cast(int*)&width, cast(int*)&height);
   }
 

@@ -221,13 +221,13 @@ class Regex : gobject.boxed.Boxed
   string substitute(string subject, string replacement, uint flags)
   {
     char* _cretval;
-    const(char)* _subject = subject.toCString(No.Alloc);
-    const(char)* _replacement = replacement.toCString(No.Alloc);
+    const(char)* _subject = subject.toCString!(No.Malloc, No.Nullable);
+    const(char)* _replacement = replacement.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = vte_regex_substitute(cast(VteRegex*)this._cPtr, _subject, _replacement, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

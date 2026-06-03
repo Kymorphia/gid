@@ -290,7 +290,7 @@ class Widget : gtk.widget.Widget
   /** */
   override void actionSetEnabled(string actionName, bool enabled) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     panel_widget_action_set_enabled(cast(PanelWidget*)this._cPtr, _actionName, enabled);
   }
 
@@ -381,7 +381,7 @@ class Widget : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_icon_name(cast(PanelWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class Widget : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_id(cast(PanelWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -402,7 +402,7 @@ class Widget : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_kind(cast(PanelWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -486,7 +486,7 @@ class Widget : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_title(cast(PanelWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -498,14 +498,14 @@ class Widget : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_tooltip(cast(PanelWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
   /** */
   override void insertActionGroup(string prefix, gio.action_group.ActionGroup group) nothrow
   {
-    const(char)* _prefix = prefix.toCString(No.Alloc);
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
     panel_widget_insert_action_group(cast(PanelWidget*)this._cPtr, _prefix, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null);
   }
 
@@ -563,7 +563,7 @@ class Widget : gtk.widget.Widget
   */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     panel_widget_set_icon_name(cast(PanelWidget*)this._cPtr, _iconName);
   }
 
@@ -575,7 +575,7 @@ class Widget : gtk.widget.Widget
   */
   void setId(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     panel_widget_set_id(cast(PanelWidget*)this._cPtr, _id);
   }
 
@@ -587,7 +587,7 @@ class Widget : gtk.widget.Widget
   */
   void setKind(string kind = null) nothrow
   {
-    const(char)* _kind = kind.toCString(No.Alloc);
+    const(char)* _kind = kind.toCString!(No.Malloc, Yes.Nullable);
     panel_widget_set_kind(cast(PanelWidget*)this._cPtr, _kind);
   }
 
@@ -652,7 +652,7 @@ class Widget : gtk.widget.Widget
   */
   void setTitle(string title = null) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     panel_widget_set_title(cast(PanelWidget*)this._cPtr, _title);
   }
 
@@ -664,7 +664,7 @@ class Widget : gtk.widget.Widget
   */
   void setTooltip(string tooltip = null) nothrow
   {
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
     panel_widget_set_tooltip(cast(PanelWidget*)this._cPtr, _tooltip);
   }
 

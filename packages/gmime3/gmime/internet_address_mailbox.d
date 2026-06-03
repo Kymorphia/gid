@@ -63,8 +63,8 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   this(string name, string addr) nothrow
   {
     GMimeInternetAddress* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _addr = addr.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _addr = addr.toCString!(No.Malloc, No.Nullable);
     _cretval = internet_address_mailbox_new(_name, _addr);
     this(_cretval, Yes.Take);
   }
@@ -77,7 +77,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   {
     const(char)* _cretval;
     _cretval = internet_address_mailbox_get_addr(cast(GMimeInternetAddressMailbox*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   {
     const(char)* _cretval;
     _cretval = internet_address_mailbox_get_idn_addr(cast(GMimeInternetAddressMailbox*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   */
   void setAddr(string addr) nothrow
   {
-    const(char)* _addr = addr.toCString(No.Alloc);
+    const(char)* _addr = addr.toCString!(No.Malloc, No.Nullable);
     internet_address_mailbox_set_addr(cast(GMimeInternetAddressMailbox*)this._cPtr, _addr);
   }
 }

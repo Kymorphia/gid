@@ -90,7 +90,7 @@ class UriParamsIter
       _length = cast(ptrdiff_t)params.length;
 
     auto _params = params.ptr ? cast(const(char)*)params.ptr : [char.init].ptr;
-    const(char)* _separators = separators.toCString(No.Alloc);
+    const(char)* _separators = separators.toCString!(No.Malloc, No.Nullable);
     g_uri_params_iter_init(cast(GUriParamsIter*)this._cPtr, _params, _length, _separators, flags);
   }
 
@@ -123,8 +123,8 @@ class UriParamsIter
     _retval = cast(bool)g_uri_params_iter_next(cast(GUriParamsIter*)this._cPtr, &_attribute, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    attribute = _attribute.fromCString(Yes.Free);
-    value = _value.fromCString(Yes.Free);
+    attribute = _attribute.fromCString!(Yes.Free);
+    value = _value.fromCString!(Yes.Free);
     return _retval;
   }
 }

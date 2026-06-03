@@ -87,8 +87,8 @@ class CallOptions : gobject.object.ObjectWrap
   */
   void addHeader(string name, string value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     gaflight_call_options_add_header(cast(GAFlightCallOptions*)this._cPtr, _name, _value);
   }
 
@@ -111,8 +111,8 @@ class CallOptions : gobject.object.ObjectWrap
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData) nothrow
     {
       auto _dlg = cast(arrowflight.types.HeaderFunc*)userData;
-      string _name = name.fromCString(No.Free);
-      string _value = value.fromCString(No.Free);
+      string _name = name.fromCString!(No.Free);
+      string _value = value.fromCString!(No.Free);
 
       try
       {

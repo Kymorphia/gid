@@ -119,7 +119,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   this(string objectPath) nothrow
   {
     GDBusObjectManagerServer* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_object_manager_server_new(_objectPath);
     this(_cretval, Yes.Take);
   }
@@ -212,7 +212,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   bool unexport(string objectPath) nothrow
   {
     bool _retval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_dbus_object_manager_server_unexport(cast(GDBusObjectManagerServer*)this._cPtr, _objectPath);
     return _retval;
   }

@@ -94,7 +94,7 @@ class UriLauncher : gobject.object.ObjectWrap
   this(string uri = null) nothrow
   {
     GtkUriLauncher* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_uri_launcher_new(_uri);
     this(_cretval, Yes.Take);
   }
@@ -107,7 +107,7 @@ class UriLauncher : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_uri_launcher_get_uri(cast(GtkUriLauncher*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class UriLauncher : gobject.object.ObjectWrap
   */
   void setUri(string uri = null) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, Yes.Nullable);
     gtk_uri_launcher_set_uri(cast(GtkUriLauncher*)this._cPtr, _uri);
   }
 }

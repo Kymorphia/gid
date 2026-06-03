@@ -61,7 +61,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmpkeys;
     foreach (s; keys)
-      _tmpkeys ~= s.toCString(No.Alloc);
+      _tmpkeys ~= s.toCString;
     const(char*)* _keys = _tmpkeys.ptr;
 
     GError *_err;

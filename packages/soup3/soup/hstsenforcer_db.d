@@ -81,7 +81,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
   this(string filename) nothrow
   {
     SoupHSTSEnforcer* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_hsts_enforcer_db_new(_filename);
     this(_cretval, Yes.Take);
   }

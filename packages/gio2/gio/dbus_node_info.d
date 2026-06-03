@@ -119,7 +119,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
   static gio.dbus_node_info.DBusNodeInfo newForXml(string xmlData)
   {
     GDBusNodeInfo* _cretval;
-    const(char)* _xmlData = xmlData.toCString(No.Alloc);
+    const(char)* _xmlData = xmlData.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dbus_node_info_new_for_xml(_xmlData, &_err);
     if (_err)
@@ -155,7 +155,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
   gio.dbus_interface_info.DBusInterfaceInfo lookupInterface(string name) nothrow
   {
     GDBusInterfaceInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_node_info_lookup_interface(cast(GDBusNodeInfo*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;

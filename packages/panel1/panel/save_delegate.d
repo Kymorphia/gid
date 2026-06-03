@@ -243,7 +243,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = panel_save_delegate_get_icon_name(cast(PanelSaveDelegate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = panel_save_delegate_get_subtitle(cast(PanelSaveDelegate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = panel_save_delegate_get_title(cast(PanelSaveDelegate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   void setIconName(string icon = null) nothrow
   {
-    const(char)* _icon = icon.toCString(No.Alloc);
+    const(char)* _icon = icon.toCString!(No.Malloc, Yes.Nullable);
     panel_save_delegate_set_icon_name(cast(PanelSaveDelegate*)this._cPtr, _icon);
   }
 
@@ -363,7 +363,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   void setSubtitle(string subtitle = null) nothrow
   {
-    const(char)* _subtitle = subtitle.toCString(No.Alloc);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, Yes.Nullable);
     panel_save_delegate_set_subtitle(cast(PanelSaveDelegate*)this._cPtr, _subtitle);
   }
 
@@ -375,7 +375,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   void setTitle(string title = null) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     panel_save_delegate_set_title(cast(PanelSaveDelegate*)this._cPtr, _title);
   }
 

@@ -56,7 +56,7 @@ class UserContentFilter : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_user_content_filter_get_identifier(cast(WebKitUserContentFilter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

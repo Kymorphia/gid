@@ -135,7 +135,7 @@ class WebPage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_page_get_uri(cast(WebKitWebPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

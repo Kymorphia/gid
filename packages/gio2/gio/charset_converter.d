@@ -107,8 +107,8 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   this(string toCharset, string fromCharset)
   {
     GCharsetConverter* _cretval;
-    const(char)* _toCharset = toCharset.toCString(No.Alloc);
-    const(char)* _fromCharset = fromCharset.toCString(No.Alloc);
+    const(char)* _toCharset = toCharset.toCString!(No.Malloc, No.Nullable);
+    const(char)* _fromCharset = fromCharset.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_charset_converter_new(_toCharset, _fromCharset, &_err);
     if (_err)

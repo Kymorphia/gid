@@ -62,7 +62,7 @@ class ExtensionDataType : arrow.data_type.DataType
   {
     char* _cretval;
     _cretval = garrow_extension_data_type_get_extension_name(cast(GArrowExtensionDataType*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

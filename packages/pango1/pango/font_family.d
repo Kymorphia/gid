@@ -99,7 +99,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   pango.font_face.FontFace getFace(string name = null) nothrow
   {
     PangoFontFace* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = pango_font_family_get_face(cast(PangoFontFamily*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
@@ -118,7 +118,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = pango_font_family_get_name(cast(PangoFontFamily*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

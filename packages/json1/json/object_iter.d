@@ -124,7 +124,7 @@ class ObjectIter
     char* _memberName;
     JsonNode* _memberNode;
     _retval = cast(bool)json_object_iter_next(cast(JsonObjectIter*)this._cPtr, &_memberName, &_memberNode);
-    memberName = _memberName.fromCString(No.Free);
+    memberName = _memberName.fromCString!(No.Free);
     memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;
   }
@@ -159,7 +159,7 @@ class ObjectIter
     char* _memberName;
     JsonNode* _memberNode;
     _retval = cast(bool)json_object_iter_next_ordered(cast(JsonObjectIter*)this._cPtr, &_memberName, &_memberNode);
-    memberName = _memberName.fromCString(No.Free);
+    memberName = _memberName.fromCString!(No.Free);
     memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;
   }

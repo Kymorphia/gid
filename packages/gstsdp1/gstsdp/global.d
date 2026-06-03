@@ -19,9 +19,9 @@ import gstsdp.types;
 bool sdpAddressIsMulticast(string nettype, string addrtype, string addr) nothrow
 {
   bool _retval;
-  const(char)* _nettype = nettype.toCString(No.Alloc);
-  const(char)* _addrtype = addrtype.toCString(No.Alloc);
-  const(char)* _addr = addr.toCString(No.Alloc);
+  const(char)* _nettype = nettype.toCString!(No.Malloc, No.Nullable);
+  const(char)* _addrtype = addrtype.toCString!(No.Malloc, No.Nullable);
+  const(char)* _addr = addr.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_sdp_address_is_multicast(_nettype, _addrtype, _addr);
   return _retval;
 }
@@ -37,9 +37,9 @@ bool sdpAddressIsMulticast(string nettype, string addrtype, string addr) nothrow
 string sdpMakeKeymgmt(string uri, string base64) nothrow
 {
   char* _cretval;
-  const(char)* _uri = uri.toCString(No.Alloc);
-  const(char)* _base64 = base64.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+  const(char)* _base64 = base64.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_sdp_make_keymgmt(_uri, _base64);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

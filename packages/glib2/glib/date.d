@@ -124,7 +124,7 @@ struct Date
   string strftime(string format) nothrow
   {
     char[] buf;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString;
 
     for (buf.length = 32; buf.length <= 1024; buf.length *= 2) // Increase buffer until output fits
     {
@@ -475,7 +475,7 @@ struct Date
   */
   void setParse(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     g_date_set_parse(cast(GDate*)&this, _str);
   }
 

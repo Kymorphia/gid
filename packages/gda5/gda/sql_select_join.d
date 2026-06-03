@@ -96,7 +96,7 @@ class SqlSelectJoin
   {
     char* _cretval;
     _cretval = gda_sql_select_join_serialize(cast(GdaSqlSelectJoin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class SqlSelectJoin
   {
     const(char)* _cretval;
     _cretval = gda_sql_select_join_type_to_string(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

@@ -125,7 +125,7 @@ class TextMark : gobject.object.ObjectWrap
   this(string name, bool leftGravity) nothrow
   {
     GtkTextMark* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_text_mark_new(_name, leftGravity);
     this(_cretval, Yes.Take);
   }
@@ -179,7 +179,7 @@ class TextMark : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_text_mark_get_name(cast(GtkTextMark*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

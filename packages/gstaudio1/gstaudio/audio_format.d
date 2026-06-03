@@ -62,7 +62,7 @@ struct AudioFormat
   static gstaudio.types.AudioFormat fromString(string format) nothrow
   {
     GstAudioFormat _cretval;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_audio_format_from_string(_format);
     gstaudio.types.AudioFormat _retval = cast(gstaudio.types.AudioFormat)_cretval;
     return _retval;
@@ -88,7 +88,7 @@ struct AudioFormat
   {
     const(char)* _cretval;
     _cretval = gst_audio_format_to_string(format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

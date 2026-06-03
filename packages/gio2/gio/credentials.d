@@ -209,7 +209,7 @@ class Credentials : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_credentials_to_string(cast(GCredentials*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

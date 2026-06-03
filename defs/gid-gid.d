@@ -89,16 +89,25 @@ extern(C) void thawDelegate(void* dlg) nothrow
 /**
  * Convert a D string to a zero terminated C string, with allocation parameter.
  * Params:
+ *   malloc = Yes.Malloc if string is being transferred to C (use g_malloc), No.Malloc for D allocation (no transfer, the default)
+ *   nullable = Yes.Nullable if an empty or null D string should be converted to a null C value, No.Nullable results in an empty C string (default)
  *   dstr = String to convert
- *   alloc = Yes.Alloc if string is being transferred to C (use g_malloc), No.Alloc for D allocation (no transfer)
- * Returns: Zero terminated C string (D or C allocation)
+ * Returns: Zero terminated C string (D or C allocation), can be null if nullable is set
  */
-char* toCString(string dstr, Flag!"Alloc" alloc) nothrow
+char* toCString(Flag!"Malloc" malloc = No.Malloc, Flag!"Nullable" nullable = No.Nullable)(string dstr) nothrow
 {
-  if (dstr is null)
-    dstr = "";
+  static if (nullable)
+  {
+    if (dstr.length == 0)
+      return null;
+  }
+  else
+  {
+    if (dstr is null)
+      dstr = "";
+  }
 
-  if (alloc)
+  static if (malloc)
   {
     char* cstr = cast(char*)g_try_malloc(dstr.length + 1);
 
@@ -109,8 +118,8 @@ char* toCString(string dstr, Flag!"Alloc" alloc) nothrow
     cstr[dstr.length] = '\0';
     return cstr;
   }
-
-  return cast(char*)dstr.toStringz;
+  else
+    return cast(char*)dstr.toStringz;
 }
 
 /**
@@ -120,14 +129,14 @@ char* toCString(string dstr, Flag!"Alloc" alloc) nothrow
  *   free = Yes.Free to free the C string with g_free, No.Free to just copy it
  * Returns: The D string copy
  */
-string fromCString(const(char)* cstr, Flag!"Free" free) nothrow
+string fromCString(Flag!"Free" free = No.Free)(const(char)* cstr) nothrow
 {
   if (!cstr)
     return null;
 
   string dstr = cstr[0 .. strlen(cstr)].dup;
 
-  if (free && cstr)
+  static if (free)
     g_free(cast(void*)cstr);
 
   return dstr;
@@ -170,19 +179,19 @@ char* strdup(const(char)* s) nothrow
  * Template to copy a D array for use by C.
  * Params:
  *   T = The array type
- *   alloc = Yes.Alloc to use g_malloc() to allocate the array, No.Alloc to use D memory (defaults to No)
+ *   malloc = Yes.Malloc to use g_malloc() to allocate the array, No.Malloc to use D memory (defaults to No)
  *   zeroTerm = Yes.ZeroTerminated if the resulting array should be zero terminated (defaults to No)
  *   array = The array to copy
  * Returns: C array or null if array is empty
  */
-T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array) nothrow
+T* arrayDtoC(T, Flag!"Malloc" malloc = No.Malloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array) nothrow
 {
   if (array.length == 0)
     return null;
 
   T* retArray;
 
-  static if (alloc)
+  static if (malloc)
   {
     static if (zeroTerm)
     {
@@ -216,7 +225,7 @@ T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.Zer
   else static if (is(T : string))
   {
     foreach(i, elem; array)
-      retarray[i] = toCString(array[i], alloc);
+      retarray[i] = toCString!(malloc)(array[i]);
   }
   else
     retArray[0 .. array.length] = array[0 .. $];
@@ -782,7 +791,7 @@ T cToD(T)(void* data) nothrow
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
     return gobject.object.ObjectWrap._getDObject!T(data, No.Take);
   else static if (is(T == string))
-    return fromCString(cast(const(char)*)data, No.Free);
+    return fromCString(cast(const(char)*)data);
   else static if (isTypeCopyableStruct!T)
     return new T(data, No.Take);
   else static if (is(T == void*) || is(T == const(void)*))
@@ -813,7 +822,7 @@ void dToC(T)(T val, void* data) nothrow
       assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectWrap");
   }
   else static if (is(T == string))
-    *cast(char**)data = toCString(val, Yes.Alloc); // Transfer the string to C (use g_malloc)
+    *cast(char**)data = toCString!(Yes.Malloc)(val); // Transfer the string to C (use g_malloc)
   else static if (is(T == void*) || is(T == const(void)*))
     *(cast(void**)data) = cast(void*)val;
   else static if (isTypeSimple!T)

@@ -172,7 +172,7 @@ class WebInspector : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_inspector_get_inspected_uri(cast(WebKitWebInspector*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

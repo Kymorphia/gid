@@ -39,7 +39,7 @@ template TagXmpWriterT()
   */
   override void addSchema(string schema) nothrow
   {
-    const(char)* _schema = schema.toCString(No.Alloc);
+    const(char)* _schema = schema.toCString!(No.Malloc, No.Nullable);
     gst_tag_xmp_writer_add_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
   }
 
@@ -53,7 +53,7 @@ template TagXmpWriterT()
   override bool hasSchema(string schema) nothrow
   {
     bool _retval;
-    const(char)* _schema = schema.toCString(No.Alloc);
+    const(char)* _schema = schema.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_xmp_writer_has_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
     return _retval;
   }
@@ -76,7 +76,7 @@ template TagXmpWriterT()
   */
   override void removeSchema(string schema) nothrow
   {
-    const(char)* _schema = schema.toCString(No.Alloc);
+    const(char)* _schema = schema.toCString!(No.Malloc, No.Nullable);
     gst_tag_xmp_writer_remove_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
   }
 

@@ -150,7 +150,7 @@ class AccelLabel : gtk.label.Label
   this(string string_) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_accel_label_new(_string_);
     this(_cretval, No.Take);
   }

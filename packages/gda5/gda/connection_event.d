@@ -76,7 +76,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_connection_event_get_description(cast(GdaConnectionEvent*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_connection_event_get_source(cast(GdaConnectionEvent*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_connection_event_get_sqlstate(cast(GdaConnectionEvent*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   */
   void setDescription(string description = null) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
     gda_connection_event_set_description(cast(GdaConnectionEvent*)this._cPtr, _description);
   }
 
@@ -189,7 +189,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   */
   void setSource(string source) nothrow
   {
-    const(char)* _source = source.toCString(No.Alloc);
+    const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
     gda_connection_event_set_source(cast(GdaConnectionEvent*)this._cPtr, _source);
   }
 
@@ -203,7 +203,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   */
   void setSqlstate(string sqlstate) nothrow
   {
-    const(char)* _sqlstate = sqlstate.toCString(No.Alloc);
+    const(char)* _sqlstate = sqlstate.toCString!(No.Malloc, No.Nullable);
     gda_connection_event_set_sqlstate(cast(GdaConnectionEvent*)this._cPtr, _sqlstate);
   }
 }

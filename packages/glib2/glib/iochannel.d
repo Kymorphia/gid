@@ -99,8 +99,8 @@ class IOChannel : gobject.boxed.Boxed
   static glib.iochannel.IOChannel newFile(string filename, string mode)
   {
     GIOChannel* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
-    const(char)* _mode = mode.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    const(char)* _mode = mode.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_io_channel_new_file(_filename, _mode, &_err);
     if (_err)
@@ -236,7 +236,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_encoding(cast(GIOChannel*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_line_term(cast(GIOChannel*)this._cPtr, cast(int*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class IOChannel : gobject.boxed.Boxed
     if (_err)
       throw new IOChannelException(_err);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
-    strReturn = _strReturn.fromCString(Yes.Free);
+    strReturn = _strReturn.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -582,7 +582,7 @@ class IOChannel : gobject.boxed.Boxed
   glib.types.IOStatus setEncoding(string encoding = null)
   {
     GIOStatus _cretval;
-    const(char)* _encoding = encoding.toCString(No.Alloc);
+    const(char)* _encoding = encoding.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_io_channel_set_encoding(cast(GIOChannel*)this._cPtr, _encoding, &_err);
     if (_err)

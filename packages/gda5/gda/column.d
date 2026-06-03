@@ -107,7 +107,7 @@ class Column : gobject.object.ObjectWrap
   gobject.value.Value getAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_column_get_attribute(cast(GdaColumn*)this._cPtr, _attribute);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -126,7 +126,7 @@ class Column : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_column_get_dbms_type(cast(GdaColumn*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class Column : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_column_get_description(cast(GdaColumn*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Column : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_column_get_name(cast(GdaColumn*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class Column : gobject.object.ObjectWrap
       }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     gda_column_set_attribute(cast(GdaColumn*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
 
@@ -251,7 +251,7 @@ class Column : gobject.object.ObjectWrap
   */
   void setDbmsType(string dbmsType) nothrow
   {
-    const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
+    const(char)* _dbmsType = dbmsType.toCString!(No.Malloc, No.Nullable);
     gda_column_set_dbms_type(cast(GdaColumn*)this._cPtr, _dbmsType);
   }
 
@@ -274,7 +274,7 @@ class Column : gobject.object.ObjectWrap
   */
   void setDescription(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gda_column_set_description(cast(GdaColumn*)this._cPtr, _title);
   }
 
@@ -297,7 +297,7 @@ class Column : gobject.object.ObjectWrap
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gda_column_set_name(cast(GdaColumn*)this._cPtr, _name);
   }
 

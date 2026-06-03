@@ -102,7 +102,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   gio.action.Action lookup(string actionName) nothrow
   {
     GAction* _cretval;
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_simple_action_group_lookup(cast(GSimpleActionGroup*)this._cPtr, _actionName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
     return _retval;
@@ -120,7 +120,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   */
   void remove(string actionName) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     g_simple_action_group_remove(cast(GSimpleActionGroup*)this._cPtr, _actionName);
   }
 }

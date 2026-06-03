@@ -211,7 +211,7 @@ class NavigationPage : gtk.widget.Widget
   this(gtk.widget.Widget child, string title) nothrow
   {
     AdwNavigationPage* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_navigation_page_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _title);
     this(_cretval, No.Take);
   }
@@ -228,8 +228,8 @@ class NavigationPage : gtk.widget.Widget
   static adw.navigation_page.NavigationPage newWithTag(gtk.widget.Widget child, string title, string tag) nothrow
   {
     AdwNavigationPage* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_navigation_page_new_with_tag(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _title, _tag);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
@@ -266,7 +266,7 @@ class NavigationPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_navigation_page_get_tag(cast(AdwNavigationPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class NavigationPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_navigation_page_get_title(cast(AdwNavigationPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class NavigationPage : gtk.widget.Widget
   */
   void setTag(string tag = null) nothrow
   {
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, Yes.Nullable);
     adw_navigation_page_set_tag(cast(AdwNavigationPage*)this._cPtr, _tag);
   }
 
@@ -345,7 +345,7 @@ class NavigationPage : gtk.widget.Widget
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_navigation_page_set_title(cast(AdwNavigationPage*)this._cPtr, _title);
   }
 

@@ -118,7 +118,7 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
   this(gst.clock.Clock clock, string address, int port) nothrow
   {
     GstNetTimeProvider* _cretval;
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _address = address.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock._cPtr(No.Dup) : null, _address, port);
     this(_cretval, Yes.Take);
   }

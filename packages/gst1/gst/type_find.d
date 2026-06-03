@@ -126,7 +126,7 @@ class TypeFind
   */
   void suggestEmptySimple(uint probability, string mediaType) nothrow
   {
-    const(char)* _mediaType = mediaType.toCString(No.Alloc);
+    const(char)* _mediaType = mediaType.toCString!(No.Malloc, No.Nullable);
     gst_type_find_suggest_empty_simple(cast(GstTypeFind*)this._cPtr, probability, _mediaType);
   }
 
@@ -163,8 +163,8 @@ class TypeFind
     }
     auto _funcCB = func ? &_funcCallback : null;
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _extensions = extensions.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _extensions = extensions.toCString!(No.Malloc, Yes.Nullable);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _retval = cast(bool)gst_type_find_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, _funcCB, _extensions, possibleCaps ? cast(GstCaps*)possibleCaps._cPtr(No.Dup) : null, _func, _funcDestroyCB);

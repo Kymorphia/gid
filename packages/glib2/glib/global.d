@@ -40,7 +40,7 @@ import gobject.types;
 int access(string filename, int mode) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_access(_filename, mode);
   return _retval;
 }
@@ -184,7 +184,7 @@ void asciiFormatd(ref char[] buffer, string format, double d) nothrow
 {
   int _bufLen;
   _bufLen = cast(int)buffer.length;
-  const(char)* _format = format.toCString(No.Alloc);
+  const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
   g_ascii_formatd(buffer.ptr, _bufLen, _format, d);
 }
 
@@ -214,8 +214,8 @@ void asciiFormatd(ref char[] buffer, string format, double d) nothrow
 int asciiStrcasecmp(string s1, string s2) nothrow
 {
   int _retval;
-  const(char)* _s1 = s1.toCString(No.Alloc);
-  const(char)* _s2 = s2.toCString(No.Alloc);
+  const(char)* _s1 = s1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _s2 = s2.toCString!(No.Malloc, No.Nullable);
   _retval = g_ascii_strcasecmp(_s1, _s2);
   return _retval;
 }
@@ -239,7 +239,7 @@ string asciiStrdown(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_ascii_strdown(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -278,7 +278,7 @@ string asciiStrdown(string str) nothrow
 bool asciiStringToSigned(string str, uint base, long min, long max, out long outNum)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _retval = cast(bool)g_ascii_string_to_signed(_str, base, min, max, cast(long*)&outNum, &_err);
   if (_err)
@@ -322,7 +322,7 @@ bool asciiStringToSigned(string str, uint base, long min, long max, out long out
 bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulong outNum)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _retval = cast(bool)g_ascii_string_to_unsigned(_str, base, min, max, cast(ulong*)&outNum, &_err);
   if (_err)
@@ -354,8 +354,8 @@ bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulon
 int asciiStrncasecmp(string s1, string s2, size_t n) nothrow
 {
   int _retval;
-  const(char)* _s1 = s1.toCString(No.Alloc);
-  const(char)* _s2 = s2.toCString(No.Alloc);
+  const(char)* _s1 = s1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _s2 = s2.toCString!(No.Malloc, No.Nullable);
   _retval = g_ascii_strncasecmp(_s1, _s2, n);
   return _retval;
 }
@@ -394,10 +394,10 @@ int asciiStrncasecmp(string s1, string s2, size_t n) nothrow
 double asciiStrtod(string nptr, out string endptr) nothrow
 {
   double _retval;
-  const(char)* _nptr = nptr.toCString(No.Alloc);
+  const(char)* _nptr = nptr.toCString!(No.Malloc, No.Nullable);
   char* _endptr;
   _retval = g_ascii_strtod(_nptr, &_endptr);
-  endptr = _endptr.fromCString(No.Free);
+  endptr = _endptr.fromCString!(No.Free);
   return _retval;
 }
 
@@ -431,10 +431,10 @@ double asciiStrtod(string nptr, out string endptr) nothrow
 long asciiStrtoll(string nptr, out string endptr, uint base) nothrow
 {
   long _retval;
-  const(char)* _nptr = nptr.toCString(No.Alloc);
+  const(char)* _nptr = nptr.toCString!(No.Malloc, No.Nullable);
   char* _endptr;
   _retval = g_ascii_strtoll(_nptr, &_endptr, base);
-  endptr = _endptr.fromCString(No.Free);
+  endptr = _endptr.fromCString!(No.Free);
   return _retval;
 }
 
@@ -473,10 +473,10 @@ long asciiStrtoll(string nptr, out string endptr, uint base) nothrow
 ulong asciiStrtoull(string nptr, out string endptr, uint base) nothrow
 {
   ulong _retval;
-  const(char)* _nptr = nptr.toCString(No.Alloc);
+  const(char)* _nptr = nptr.toCString!(No.Malloc, No.Nullable);
   char* _endptr;
   _retval = g_ascii_strtoull(_nptr, &_endptr, base);
-  endptr = _endptr.fromCString(No.Free);
+  endptr = _endptr.fromCString!(No.Free);
   return _retval;
 }
 
@@ -499,7 +499,7 @@ string asciiStrup(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_ascii_strup(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -574,63 +574,63 @@ int asciiXdigitValue(char c) nothrow
 /** */
 void assertWarning(string logDomain, string file, int line, string prettyFunction, string expression) nothrow
 {
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _prettyFunction = prettyFunction.toCString(No.Alloc);
-  const(char)* _expression = expression.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _prettyFunction = prettyFunction.toCString!(No.Malloc, No.Nullable);
+  const(char)* _expression = expression.toCString!(No.Malloc, No.Nullable);
   g_assert_warning(_logDomain, _file, line, _prettyFunction, _expression);
 }
 
 /** */
 void assertionMessage(string domain, string file, int line, string func, string message) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
-  const(char)* _message = message.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
+  const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
   g_assertion_message(_domain, _file, line, _func, _message);
 }
 
 /** */
 void assertionMessageCmpint(string domain, string file, int line, string func, string expr, ulong arg1, string cmp, ulong arg2, char numtype) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
-  const(char)* _expr = expr.toCString(No.Alloc);
-  const(char)* _cmp = cmp.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
+  const(char)* _expr = expr.toCString!(No.Malloc, No.Nullable);
+  const(char)* _cmp = cmp.toCString!(No.Malloc, No.Nullable);
   g_assertion_message_cmpint(_domain, _file, line, _func, _expr, arg1, _cmp, arg2, numtype);
 }
 
 /** */
 void assertionMessageCmpstr(string domain, string file, int line, string func, string expr, string arg1, string cmp, string arg2) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
-  const(char)* _expr = expr.toCString(No.Alloc);
-  const(char)* _arg1 = arg1.toCString(No.Alloc);
-  const(char)* _cmp = cmp.toCString(No.Alloc);
-  const(char)* _arg2 = arg2.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
+  const(char)* _expr = expr.toCString!(No.Malloc, No.Nullable);
+  const(char)* _arg1 = arg1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _cmp = cmp.toCString!(No.Malloc, No.Nullable);
+  const(char)* _arg2 = arg2.toCString!(No.Malloc, No.Nullable);
   g_assertion_message_cmpstr(_domain, _file, line, _func, _expr, _arg1, _cmp, _arg2);
 }
 
 /** */
 void assertionMessageCmpstrv(string domain, string file, int line, string func, string expr, string[] arg1, string[] arg2, size_t firstWrongIdx) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
-  const(char)* _expr = expr.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
+  const(char)* _expr = expr.toCString!(No.Malloc, No.Nullable);
   const(char)*[] _tmparg1;
   foreach (s; arg1)
-    _tmparg1 ~= s.toCString(No.Alloc);
+    _tmparg1 ~= s.toCString;
   _tmparg1 ~= null;
   const(char*)* _arg1 = _tmparg1.ptr;
 
   const(char)*[] _tmparg2;
   foreach (s; arg2)
-    _tmparg2 ~= s.toCString(No.Alloc);
+    _tmparg2 ~= s.toCString;
   _tmparg2 ~= null;
   const(char*)* _arg2 = _tmparg2.ptr;
 
@@ -640,10 +640,10 @@ void assertionMessageCmpstrv(string domain, string file, int line, string func, 
 /** */
 void assertionMessageError(string domain, string file, int line, string func, string expr, glib.error.ErrorWrap error, glib.types.Quark errorDomain, int errorCode) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
-  const(char)* _expr = expr.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
+  const(char)* _expr = expr.toCString!(No.Malloc, No.Nullable);
   g_assertion_message_error(_domain, _file, line, _func, _expr, error ? cast(const(GError)*)error._cPtr : null, errorDomain, errorCode);
 }
 
@@ -1345,7 +1345,7 @@ ubyte[] base64Decode(string text) nothrow
 {
   ubyte* _cretval;
   size_t _cretlength;
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = g_base64_decode(_text, &_cretlength);
   ubyte[] _retval;
 
@@ -1376,7 +1376,7 @@ string base64Encode(ubyte[] data = null) nothrow
 
   auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = g_base64_encode(_data, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1398,9 +1398,9 @@ string base64Encode(ubyte[] data = null) nothrow
 string basename(string fileName) nothrow
 {
   const(char)* _cretval;
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   _cretval = g_basename(_fileName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1556,12 +1556,12 @@ string buildFilenamev(string[] args) nothrow
   char* _cretval;
   char*[] _tmpargs;
   foreach (s; args)
-    _tmpargs ~= s.toCString(No.Alloc);
+    _tmpargs ~= s.toCString;
   _tmpargs ~= null;
   char** _args = _tmpargs.ptr;
 
   _cretval = g_build_filenamev(_args);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1581,15 +1581,15 @@ string buildFilenamev(string[] args) nothrow
 string buildPathv(string separator, string[] args) nothrow
 {
   char* _cretval;
-  const(char)* _separator = separator.toCString(No.Alloc);
+  const(char)* _separator = separator.toCString!(No.Malloc, No.Nullable);
   char*[] _tmpargs;
   foreach (s; args)
-    _tmpargs ~= s.toCString(No.Alloc);
+    _tmpargs ~= s.toCString;
   _tmpargs ~= null;
   char** _args = _tmpargs.ptr;
 
   _cretval = g_build_pathv(_separator, _args);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1619,10 +1619,10 @@ string buildPathv(string separator, string[] args) nothrow
 string canonicalizeFilename(string filename, string relativeTo = null) nothrow
 {
   char* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
-  const(char)* _relativeTo = relativeTo.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+  const(char)* _relativeTo = relativeTo.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_canonicalize_filename(_filename, _relativeTo);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1640,7 +1640,7 @@ string canonicalizeFilename(string filename, string relativeTo = null) nothrow
 int chdir(string path) nothrow
 {
   int _retval;
-  const(char)* _path = path.toCString(No.Alloc);
+  const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
   _retval = g_chdir(_path);
   return _retval;
 }
@@ -1675,7 +1675,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) 
 {
   const(char)* _cretval;
   _cretval = glib_check_version(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1812,7 +1812,7 @@ glib.source.Source childWatchSourceNew(glib.types.Pid pid) nothrow
 int chmod(string filename, int mode) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_chmod(_filename, mode);
   return _retval;
 }
@@ -1911,7 +1911,7 @@ string computeChecksumForBytes(glib.types.ChecksumType checksumType, glib.bytes.
 {
   char* _cretval;
   _cretval = g_compute_checksum_for_bytes(checksumType, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1939,7 +1939,7 @@ string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data
 
   auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = g_compute_checksum_for_data(checksumType, _data, _length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1964,7 +1964,7 @@ string computeChecksumForString(glib.types.ChecksumType checksumType, string str
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_compute_checksum_for_string(checksumType, _str, _length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1986,7 +1986,7 @@ string computeHmacForBytes(glib.types.ChecksumType digestType, glib.bytes.Bytes 
 {
   char* _cretval;
   _cretval = g_compute_hmac_for_bytes(digestType, key ? cast(GBytes*)key._cPtr(No.Dup) : null, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2018,7 +2018,7 @@ string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte
 
   auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = g_compute_hmac_for_data(digestType, _key, _keyLen, _data, _length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2049,7 +2049,7 @@ string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, str
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_compute_hmac_for_string(digestType, _key, _keyLen, _str, _length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2095,8 +2095,8 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
     _len = cast(ptrdiff_t)str.length;
 
   auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
-  const(char)* _toCodeset = toCodeset.toCString(No.Alloc);
-  const(char)* _fromCodeset = fromCodeset.toCString(No.Alloc);
+  const(char)* _toCodeset = toCodeset.toCString!(No.Malloc, No.Nullable);
+  const(char)* _fromCodeset = fromCodeset.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_convert(_str, _len, _toCodeset, _fromCodeset, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -2166,9 +2166,9 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
     _len = cast(ptrdiff_t)str.length;
 
   auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
-  const(char)* _toCodeset = toCodeset.toCString(No.Alloc);
-  const(char)* _fromCodeset = fromCodeset.toCString(No.Alloc);
-  const(char)* _fallback = fallback.toCString(No.Alloc);
+  const(char)* _toCodeset = toCodeset.toCString!(No.Malloc, No.Nullable);
+  const(char)* _fromCodeset = fromCodeset.toCString!(No.Malloc, No.Nullable);
+  const(char)* _fallback = fallback.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_convert_with_fallback(_str, _len, _toCodeset, _fromCodeset, _fallback, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -2215,7 +2215,7 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
 int creat(string filename, int mode) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_creat(_filename, mode);
   return _retval;
 }
@@ -2297,10 +2297,10 @@ void* datasetIdGetData(const(void)* datasetLocation, glib.types.Quark keyId) not
 string dcgettext(string domain, string msgid, int category) nothrow
 {
   const(char)* _cretval;
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _msgid = msgid.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _msgid = msgid.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dcgettext(_domain, _msgid, category);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2347,10 +2347,10 @@ string dcgettext(string domain, string msgid, int category) nothrow
 string dgettext(string domain, string msgid) nothrow
 {
   const(char)* _cretval;
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _msgid = msgid.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _msgid = msgid.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dgettext(_domain, _msgid);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2414,11 +2414,11 @@ uint directHash(const(void)* v = null) nothrow
 string dngettext(string domain, string msgid, string msgidPlural, gulong n) nothrow
 {
   const(char)* _cretval;
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _msgid = msgid.toCString(No.Alloc);
-  const(char)* _msgidPlural = msgidPlural.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _msgid = msgid.toCString!(No.Malloc, No.Nullable);
+  const(char)* _msgidPlural = msgidPlural.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dngettext(_domain, _msgid, _msgidPlural, n);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2484,10 +2484,10 @@ uint doubleHash(const(void)* v) nothrow
 string dpgettext(string domain, string msgctxtid, size_t msgidoffset) nothrow
 {
   const(char)* _cretval;
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _msgctxtid = msgctxtid.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _msgctxtid = msgctxtid.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dpgettext(_domain, _msgctxtid, msgidoffset);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2513,11 +2513,11 @@ string dpgettext(string domain, string msgctxtid, size_t msgidoffset) nothrow
 string dpgettext2(string domain, string context, string msgid) nothrow
 {
   const(char)* _cretval;
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _context = context.toCString(No.Alloc);
-  const(char)* _msgid = msgid.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _context = context.toCString!(No.Malloc, No.Nullable);
+  const(char)* _msgid = msgid.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dpgettext2(_domain, _context, _msgid);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2539,13 +2539,13 @@ string environGetenv(string[] envp, string variable) nothrow
   const(char)* _cretval;
   char*[] _tmpenvp;
   foreach (s; envp)
-    _tmpenvp ~= s.toCString(No.Alloc);
+    _tmpenvp ~= s.toCString;
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
-  const(char)* _variable = variable.toCString(No.Alloc);
+  const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
   _cretval = g_environ_getenv(_envp, _variable);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2629,7 +2629,7 @@ glib.types.Quark fileErrorQuark() nothrow
 bool fileGetContents(string filename, out ubyte[] contents)
 {
   bool _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   size_t _length;
   ubyte* _contents;
   GError *_err;
@@ -2674,13 +2674,13 @@ bool fileGetContents(string filename, out ubyte[] contents)
 int fileOpenTmp(string tmpl, out string nameUsed)
 {
   int _retval;
-  const(char)* _tmpl = tmpl.toCString(No.Alloc);
+  const(char)* _tmpl = tmpl.toCString!(No.Malloc, Yes.Nullable);
   char* _nameUsed;
   GError *_err;
   _retval = g_file_open_tmp(_tmpl, &_nameUsed, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  nameUsed = _nameUsed.fromCString(Yes.Free);
+  nameUsed = _nameUsed.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2718,12 +2718,12 @@ int fileOpenTmp(string tmpl, out string nameUsed)
 string fileReadLink(string filename)
 {
   char* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_file_read_link(_filename, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2743,7 +2743,7 @@ string fileReadLink(string filename)
 bool fileSetContents(string filename, ubyte[] contents)
 {
   bool _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   ptrdiff_t _length;
   if (contents)
     _length = cast(ptrdiff_t)contents.length;
@@ -2824,7 +2824,7 @@ bool fileSetContents(string filename, ubyte[] contents)
 bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetContentsFlags flags, int mode)
 {
   bool _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   ptrdiff_t _length;
   if (contents)
     _length = cast(ptrdiff_t)contents.length;
@@ -2907,7 +2907,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
 bool fileTest(string filename, glib.types.FileTest test) nothrow
 {
   bool _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_file_test(_filename, test);
   return _retval;
 }
@@ -2939,9 +2939,9 @@ bool fileTest(string filename, glib.types.FileTest test) nothrow
 string filenameDisplayBasename(string filename) nothrow
 {
   char* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _cretval = g_filename_display_basename(_filename);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2971,9 +2971,9 @@ string filenameDisplayBasename(string filename) nothrow
 string filenameDisplayName(string filename) nothrow
 {
   char* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _cretval = g_filename_display_name(_filename);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2998,14 +2998,14 @@ string filenameDisplayName(string filename) nothrow
 string filenameFromUri(string uri, out string hostname)
 {
   char* _cretval;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   char* _hostname;
   GError *_err;
   _cretval = g_filename_from_uri(_uri, &_hostname, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
-  hostname = _hostname.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+  hostname = _hostname.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3073,13 +3073,13 @@ ubyte[] filenameFromUtf8(ubyte[] utf8string, out size_t bytesRead)
 string filenameToUri(string filename, string hostname = null)
 {
   char* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
-  const(char)* _hostname = hostname.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+  const(char)* _hostname = hostname.toCString!(No.Malloc, Yes.Nullable);
   GError *_err;
   _cretval = g_filename_to_uri(_filename, _hostname, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3160,9 +3160,9 @@ string filenameToUtf8(ubyte[] opsysstring, out size_t bytesRead)
 string findProgramInPath(string program) nothrow
 {
   char* _cretval;
-  const(char)* _program = program.toCString(No.Alloc);
+  const(char)* _program = program.toCString!(No.Malloc, No.Nullable);
   _cretval = g_find_program_in_path(_program);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3193,8 +3193,8 @@ string findProgramInPath(string program) nothrow
 */
 void* fopen(string filename, string mode) nothrow
 {
-  const(char)* _filename = filename.toCString(No.Alloc);
-  const(char)* _mode = mode.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+  const(char)* _mode = mode.toCString!(No.Malloc, No.Nullable);
   auto _retval = g_fopen(_filename, _mode);
   return _retval;
 }
@@ -3223,7 +3223,7 @@ string formatSize(ulong size) nothrow
 {
   char* _cretval;
   _cretval = g_format_size(size);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3250,7 +3250,7 @@ string formatSizeForDisplay(long size) nothrow
 {
   char* _cretval;
   _cretval = g_format_size_for_display(size);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3270,7 +3270,7 @@ string formatSizeFull(ulong size, glib.types.FormatSizeFlags flags) nothrow
 {
   char* _cretval;
   _cretval = g_format_size_full(size, flags);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3335,8 +3335,8 @@ void freeSized(void* mem, size_t size) nothrow
 */
 void* freopen(string filename, string mode, void* stream = null) nothrow
 {
-  const(char)* _filename = filename.toCString(No.Alloc);
-  const(char)* _mode = mode.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+  const(char)* _mode = mode.toCString!(No.Malloc, No.Nullable);
   auto _retval = g_freopen(_filename, _mode, stream);
   return _retval;
 }
@@ -3378,7 +3378,7 @@ string getApplicationName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_application_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -3415,7 +3415,7 @@ bool getCharset(out string charset) nothrow
   bool _retval;
   char* _charset;
   _retval = cast(bool)g_get_charset(&_charset);
-  charset = _charset.fromCString(No.Free);
+  charset = _charset.fromCString!(No.Free);
   return _retval;
 }
 
@@ -3428,7 +3428,7 @@ string getCodeset() nothrow
 {
   char* _cretval;
   _cretval = g_get_codeset();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3461,7 +3461,7 @@ bool getConsoleCharset(out string charset) nothrow
   bool _retval;
   char* _charset;
   _retval = cast(bool)g_get_console_charset(&_charset);
-  charset = _charset.fromCString(No.Free);
+  charset = _charset.fromCString!(No.Free);
   return _retval;
 }
 
@@ -3482,7 +3482,7 @@ string getCurrentDir() nothrow
 {
   char* _cretval;
   _cretval = g_get_current_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3528,7 +3528,7 @@ string[] getEnviron() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -3579,7 +3579,7 @@ bool getFilenameCharsets(out string[] filenameCharsets) nothrow
 
   filenameCharsets.length = _lenfilenameCharsets;
   foreach (i; 0 .. _lenfilenameCharsets)
-    filenameCharsets[i] = _filenameCharsets[i].fromCString(No.Free);
+    filenameCharsets[i] = _filenameCharsets[i].fromCString!(No.Free);
   return _retval;
 }
 
@@ -3610,7 +3610,7 @@ string getHomeDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_home_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -3635,7 +3635,7 @@ string getHostName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_host_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -3667,7 +3667,7 @@ string[] getLanguageNames() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -3693,7 +3693,7 @@ string[] getLanguageNames() nothrow
 string[] getLanguageNamesWithCategory(string categoryName) nothrow
 {
   const(char*)* _cretval;
-  const(char)* _categoryName = categoryName.toCString(No.Alloc);
+  const(char)* _categoryName = categoryName.toCString!(No.Malloc, No.Nullable);
   _cretval = g_get_language_names_with_category(_categoryName);
   string[] _retval;
 
@@ -3704,7 +3704,7 @@ string[] getLanguageNamesWithCategory(string categoryName) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -3735,7 +3735,7 @@ string[] getLanguageNamesWithCategory(string categoryName) nothrow
 string[] getLocaleVariants(string locale) nothrow
 {
   char** _cretval;
-  const(char)* _locale = locale.toCString(No.Alloc);
+  const(char)* _locale = locale.toCString!(No.Malloc, No.Nullable);
   _cretval = g_get_locale_variants(_locale);
   string[] _retval;
 
@@ -3746,7 +3746,7 @@ string[] getLocaleVariants(string locale) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -3804,9 +3804,9 @@ uint getNumProcessors() nothrow
 string getOsInfo(string keyName) nothrow
 {
   char* _cretval;
-  const(char)* _keyName = keyName.toCString(No.Alloc);
+  const(char)* _keyName = keyName.toCString!(No.Malloc, No.Nullable);
   _cretval = g_get_os_info(_keyName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3827,7 +3827,7 @@ string getPrgname() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_prgname();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -3843,7 +3843,7 @@ string getRealName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_real_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -3903,7 +3903,7 @@ string[] getSystemConfigDirs() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -3959,7 +3959,7 @@ string[] getSystemDataDirs() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -3985,7 +3985,7 @@ string getTmpDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_tmp_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4013,7 +4013,7 @@ string getUserCacheDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_cache_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4042,7 +4042,7 @@ string getUserConfigDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_config_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4071,7 +4071,7 @@ string getUserDataDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_data_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4086,7 +4086,7 @@ string getUserName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4111,7 +4111,7 @@ string getUserRuntimeDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_runtime_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4137,7 +4137,7 @@ string getUserSpecialDir(glib.types.UserDirectory directory) nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_special_dir(directory);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4166,7 +4166,7 @@ string getUserStateDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_state_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4189,9 +4189,9 @@ string getUserStateDir() nothrow
 string getenv(string variable) nothrow
 {
   const(char)* _cretval;
-  const(char)* _variable = variable.toCString(No.Alloc);
+  const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
   _cretval = g_getenv(_variable);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4213,7 +4213,7 @@ string getenv(string variable) nothrow
 bool hostnameIsAsciiEncoded(string hostname) nothrow
 {
   bool _retval;
-  const(char)* _hostname = hostname.toCString(No.Alloc);
+  const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_hostname_is_ascii_encoded(_hostname);
   return _retval;
 }
@@ -4231,7 +4231,7 @@ bool hostnameIsAsciiEncoded(string hostname) nothrow
 bool hostnameIsIpAddress(string hostname) nothrow
 {
   bool _retval;
-  const(char)* _hostname = hostname.toCString(No.Alloc);
+  const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_hostname_is_ip_address(_hostname);
   return _retval;
 }
@@ -4252,7 +4252,7 @@ bool hostnameIsIpAddress(string hostname) nothrow
 bool hostnameIsNonAscii(string hostname) nothrow
 {
   bool _retval;
-  const(char)* _hostname = hostname.toCString(No.Alloc);
+  const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_hostname_is_non_ascii(_hostname);
   return _retval;
 }
@@ -4270,9 +4270,9 @@ bool hostnameIsNonAscii(string hostname) nothrow
 string hostnameToAscii(string hostname) nothrow
 {
   char* _cretval;
-  const(char)* _hostname = hostname.toCString(No.Alloc);
+  const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
   _cretval = g_hostname_to_ascii(_hostname);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -4293,9 +4293,9 @@ string hostnameToAscii(string hostname) nothrow
 string hostnameToUnicode(string hostname) nothrow
 {
   char* _cretval;
-  const(char)* _hostname = hostname.toCString(No.Alloc);
+  const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
   _cretval = g_hostname_to_unicode(_hostname);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -4477,9 +4477,9 @@ uint intHash(const(void)* v) nothrow
 string internStaticString(string string_ = null) nothrow
 {
   const(char)* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_intern_static_string(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4499,9 +4499,9 @@ string internStaticString(string string_ = null) nothrow
 string internString(string string_ = null) nothrow
 {
   const(char)* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_intern_string(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -4601,7 +4601,7 @@ string[] listenv() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -4745,8 +4745,8 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
 */
 void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, string message = null, void* unusedData = null) nothrow
 {
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
-  const(char)* _message = message.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _message = message.toCString!(No.Malloc, Yes.Nullable);
   g_log_default_handler(_logDomain, logLevel, _message, unusedData);
 }
 
@@ -4781,7 +4781,7 @@ bool logGetDebugEnabled() nothrow
 */
 void logRemoveHandler(string logDomain, uint handlerId) nothrow
 {
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, No.Nullable);
   g_log_remove_handler(_logDomain, handlerId);
 }
 
@@ -4859,7 +4859,7 @@ void logSetDebugEnabled(bool enabled) nothrow
 glib.types.LogLevelFlags logSetFatalMask(string logDomain, glib.types.LogLevelFlags fatalMask) nothrow
 {
   GLogLevelFlags _cretval;
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, No.Nullable);
   _cretval = g_log_set_fatal_mask(_logDomain, fatalMask);
   glib.types.LogLevelFlags _retval = cast(glib.types.LogLevelFlags)_cretval;
   return _retval;
@@ -4886,8 +4886,8 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
   extern(C) void _logFuncCallback(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) nothrow
   {
     auto _dlg = cast(glib.types.LogFunc*)userData;
-    string _logDomain = logDomain.fromCString(No.Free);
-    string _message = message.fromCString(No.Free);
+    string _logDomain = logDomain.fromCString!(No.Free);
+    string _message = message.fromCString!(No.Free);
 
     try
     {
@@ -4900,7 +4900,7 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
   }
   auto _logFuncCB = logFunc ? &_logFuncCallback : null;
   uint _retval;
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, Yes.Nullable);
   auto _logFunc = logFunc ? freezeDelegate(cast(void*)&logFunc) : null;
   GDestroyNotify _logFuncDestroyCB = logFunc ? &thawDelegate : null;
   _retval = g_log_set_handler_full(_logDomain, logLevels, _logFuncCB, _logFunc, _logFuncDestroyCB);
@@ -4933,7 +4933,7 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
 */
 void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.variant.Variant fields) nothrow
 {
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, Yes.Nullable);
   g_log_variant(_logDomain, logLevel, fields ? cast(GVariant*)fields._cPtr(No.Dup) : null);
 }
 
@@ -4951,7 +4951,7 @@ void logWriterDefaultSetDebugDomains(string[] domains = null) nothrow
 {
   const(char)*[] _tmpdomains;
   foreach (s; domains)
-    _tmpdomains ~= s.toCString(No.Alloc);
+    _tmpdomains ~= s.toCString;
   _tmpdomains ~= null;
   const(char*)* _domains = _tmpdomains.ptr;
 
@@ -5022,7 +5022,7 @@ void logWriterDefaultSetUseStderr(bool useStderr) nothrow
 bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDomain = null) nothrow
 {
   bool _retval;
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, Yes.Nullable);
   _retval = cast(bool)g_log_writer_default_would_drop(logLevel, _logDomain);
   return _retval;
 }
@@ -5086,7 +5086,7 @@ bool logWriterSupportsColor(int outputFd) nothrow
 int lstat(string filename, glib.types.StatBuf buf) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_lstat(_filename, buf);
   return _retval;
 }
@@ -5321,7 +5321,7 @@ string markupEscapeText(string text) nothrow
 
   auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
   _cretval = g_markup_escape_text(_text, _length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -5426,7 +5426,7 @@ void* memdup2(const(void)* mem, size_t byteSize) nothrow
 int mkdir(string filename, int mode) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_mkdir(_filename, mode);
   return _retval;
 }
@@ -5444,7 +5444,7 @@ int mkdir(string filename, int mode) nothrow
 int mkdirWithParents(string pathname, int mode) nothrow
 {
   int _retval;
-  const(char)* _pathname = pathname.toCString(No.Alloc);
+  const(char)* _pathname = pathname.toCString!(No.Malloc, No.Nullable);
   _retval = g_mkdir_with_parents(_pathname, mode);
   return _retval;
 }
@@ -5524,7 +5524,7 @@ glib.types.Quark numberParserErrorQuark() nothrow
 */
 void onErrorQuery(string prgName) nothrow
 {
-  const(char)* _prgName = prgName.toCString(No.Alloc);
+  const(char)* _prgName = prgName.toCString!(No.Malloc, No.Nullable);
   g_on_error_query(_prgName);
 }
 
@@ -5549,7 +5549,7 @@ void onErrorQuery(string prgName) nothrow
 */
 void onErrorStackTrace(string prgName) nothrow
 {
-  const(char)* _prgName = prgName.toCString(No.Alloc);
+  const(char)* _prgName = prgName.toCString!(No.Malloc, No.Nullable);
   g_on_error_stack_trace(_prgName);
 }
 
@@ -5585,7 +5585,7 @@ void onErrorStackTrace(string prgName) nothrow
 int open(string filename, int flags, int mode) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_open(_filename, flags, mode);
   return _retval;
 }
@@ -5614,9 +5614,9 @@ glib.types.Quark optionErrorQuark() nothrow
 string pathGetBasename(string fileName) nothrow
 {
   char* _cretval;
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   _cretval = g_path_get_basename(_fileName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -5635,9 +5635,9 @@ string pathGetBasename(string fileName) nothrow
 string pathGetDirname(string fileName) nothrow
 {
   char* _cretval;
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   _cretval = g_path_get_dirname(_fileName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -5674,7 +5674,7 @@ string pathGetDirname(string fileName) nothrow
 bool pathIsAbsolute(string fileName) nothrow
 {
   bool _retval;
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_path_is_absolute(_fileName);
   return _retval;
 }
@@ -5692,9 +5692,9 @@ bool pathIsAbsolute(string fileName) nothrow
 string pathSkipRoot(string fileName) nothrow
 {
   const(char)* _cretval;
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   _cretval = g_path_skip_root(_fileName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -5712,8 +5712,8 @@ string pathSkipRoot(string fileName) nothrow
 bool patternMatchSimple(string pattern, string string_) nothrow
 {
   bool _retval;
-  const(char)* _pattern = pattern.toCString(No.Alloc);
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_pattern_match_simple(_pattern, _string_);
   return _retval;
 }
@@ -5960,7 +5960,7 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.C
 glib.types.Quark quarkFromStaticString(string string_ = null) nothrow
 {
   glib.types.Quark _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, Yes.Nullable);
   _retval = g_quark_from_static_string(_string_);
   return _retval;
 }
@@ -5981,7 +5981,7 @@ glib.types.Quark quarkFromStaticString(string string_ = null) nothrow
 glib.types.Quark quarkFromString(string string_ = null) nothrow
 {
   glib.types.Quark _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, Yes.Nullable);
   _retval = g_quark_from_string(_string_);
   return _retval;
 }
@@ -5997,7 +5997,7 @@ string quarkToString(glib.types.Quark quark) nothrow
 {
   const(char)* _cretval;
   _cretval = g_quark_to_string(quark);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -6019,7 +6019,7 @@ string quarkToString(glib.types.Quark quark) nothrow
 glib.types.Quark quarkTryString(string string_ = null) nothrow
 {
   glib.types.Quark _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, Yes.Nullable);
   _retval = g_quark_try_string(_string_);
   return _retval;
 }
@@ -6328,9 +6328,9 @@ void refCountInit(ref int rc) nothrow
 string refStringAcquire(string str) nothrow
 {
   char* _cretval;
-  char* _str = str.toCString(No.Alloc);
+  char* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_ref_string_acquire(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -6344,7 +6344,7 @@ string refStringAcquire(string str) nothrow
 size_t refStringLength(string str) nothrow
 {
   size_t _retval;
-  char* _str = str.toCString(No.Alloc);
+  char* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = g_ref_string_length(_str);
   return _retval;
 }
@@ -6360,9 +6360,9 @@ size_t refStringLength(string str) nothrow
 string refStringNew(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_ref_string_new(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -6382,9 +6382,9 @@ string refStringNew(string str) nothrow
 string refStringNewIntern(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_ref_string_new_intern(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -6403,9 +6403,9 @@ string refStringNewIntern(string str) nothrow
 string refStringNewLen(string str, ptrdiff_t len) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_ref_string_new_len(_str, len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -6418,7 +6418,7 @@ string refStringNewLen(string str, ptrdiff_t len) nothrow
 */
 void refStringRelease(string str) nothrow
 {
-  char* _str = str.toCString(No.Alloc);
+  char* _str = str.toCString!(No.Malloc, No.Nullable);
   g_ref_string_release(_str);
 }
 
@@ -6464,7 +6464,7 @@ void reloadUserSpecialDirsCache() nothrow
 int remove(string filename) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_remove(_filename);
   return _retval;
 }
@@ -6486,8 +6486,8 @@ int remove(string filename) nothrow
 int rename(string oldfilename, string newfilename) nothrow
 {
   int _retval;
-  const(char)* _oldfilename = oldfilename.toCString(No.Alloc);
-  const(char)* _newfilename = newfilename.toCString(No.Alloc);
+  const(char)* _oldfilename = oldfilename.toCString!(No.Malloc, No.Nullable);
+  const(char)* _newfilename = newfilename.toCString!(No.Malloc, No.Nullable);
   _retval = g_rename(_oldfilename, _newfilename);
   return _retval;
 }
@@ -6508,7 +6508,7 @@ int rename(string oldfilename, string newfilename) nothrow
 int rmdir(string filename) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_rmdir(_filename);
   return _retval;
 }
@@ -6531,7 +6531,7 @@ int rmdir(string filename) nothrow
 */
 void setApplicationName(string applicationName) nothrow
 {
-  const(char)* _applicationName = applicationName.toCString(No.Alloc);
+  const(char)* _applicationName = applicationName.toCString!(No.Malloc, No.Nullable);
   g_set_application_name(_applicationName);
 }
 
@@ -6551,7 +6551,7 @@ void setApplicationName(string applicationName) nothrow
 void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int code, string message) nothrow
 {
   GError* _err;
-  const(char)* _message = message.toCString(No.Alloc);
+  const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
   g_set_error_literal(&_err, domain, code, _message);
   err = new glib.error.ErrorWrap(cast(void*)_err, Yes.Take);
 }
@@ -6575,7 +6575,7 @@ void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int 
 */
 void setPrgname(string prgname) nothrow
 {
-  const(char)* _prgname = prgname.toCString(No.Alloc);
+  const(char)* _prgname = prgname.toCString!(No.Malloc, No.Nullable);
   g_set_prgname(_prgname);
 }
 
@@ -6610,8 +6610,8 @@ void setPrgname(string prgname) nothrow
 bool setenv(string variable, string value, bool overwrite) nothrow
 {
   bool _retval;
-  const(char)* _variable = variable.toCString(No.Alloc);
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_setenv(_variable, _value, overwrite);
   return _retval;
 }
@@ -6653,7 +6653,7 @@ glib.types.Quark shellErrorQuark() nothrow
 bool shellParseArgv(string commandLine, out string[] argvp)
 {
   bool _retval;
-  const(char)* _commandLine = commandLine.toCString(No.Alloc);
+  const(char)* _commandLine = commandLine.toCString!(No.Malloc, No.Nullable);
   int _argcp;
   char** _argvp;
   GError *_err;
@@ -6662,7 +6662,7 @@ bool shellParseArgv(string commandLine, out string[] argvp)
     throw new ErrorWrap(_err);
   argvp.length = _argcp;
   foreach (i; 0 .. _argcp)
-    argvp[i] = _argvp[i].fromCString(Yes.Free);
+    argvp[i] = _argvp[i].fromCString!(Yes.Free);
   gFree(cast(void*)_argvp);
   return _retval;
 }
@@ -6686,9 +6686,9 @@ bool shellParseArgv(string commandLine, out string[] argvp)
 string shellQuote(string unquotedString) nothrow
 {
   char* _cretval;
-  const(char)* _unquotedString = unquotedString.toCString(No.Alloc);
+  const(char)* _unquotedString = unquotedString.toCString!(No.Malloc, No.Nullable);
   _cretval = g_shell_quote(_unquotedString);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -6729,12 +6729,12 @@ string shellQuote(string unquotedString) nothrow
 string shellUnquote(string quotedString)
 {
   char* _cretval;
-  const(char)* _quotedString = quotedString.toCString(No.Alloc);
+  const(char)* _quotedString = quotedString.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_shell_unquote(_quotedString, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -6942,16 +6942,16 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
-  const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+  const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpargv;
   foreach (s; argv)
-    _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= s.toCString;
   _tmpargv ~= null;
   char** _argv = _tmpargv.ptr;
 
   char*[] _tmpenvp;
   foreach (s; envp)
-    _tmpenvp ~= s.toCString(No.Alloc);
+    _tmpenvp ~= s.toCString;
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
@@ -7002,16 +7002,16 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
-  const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+  const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpargv;
   foreach (s; argv)
-    _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= s.toCString;
   _tmpargv ~= null;
   char** _argv = _tmpargv.ptr;
 
   char*[] _tmpenvp;
   foreach (s; envp)
-    _tmpenvp ~= s.toCString(No.Alloc);
+    _tmpenvp ~= s.toCString;
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
@@ -7062,16 +7062,16 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
-  const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+  const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpargv;
   foreach (s; argv)
-    _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= s.toCString;
   _tmpargv ~= null;
   char** _argv = _tmpargv.ptr;
 
   char*[] _tmpenvp;
   foreach (s; envp)
-    _tmpenvp ~= s.toCString(No.Alloc);
+    _tmpenvp ~= s.toCString;
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
@@ -7321,16 +7321,16 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
-  const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+  const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
   const(char)*[] _tmpargv;
   foreach (s; argv)
-    _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= s.toCString;
   _tmpargv ~= null;
   const(char*)* _argv = _tmpargv.ptr;
 
   const(char)*[] _tmpenvp;
   foreach (s; envp)
-    _tmpenvp ~= s.toCString(No.Alloc);
+    _tmpenvp ~= s.toCString;
   _tmpenvp ~= null;
   const(char*)* _envp = _tmpenvp.ptr;
 
@@ -7470,7 +7470,7 @@ void spawnClosePid(glib.types.Pid pid) nothrow
 bool spawnCommandLineAsync(string commandLine)
 {
   bool _retval;
-  const(char)* _commandLine = commandLine.toCString(No.Alloc);
+  const(char)* _commandLine = commandLine.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _retval = cast(bool)g_spawn_command_line_async(_commandLine, &_err);
   if (_err)
@@ -7520,15 +7520,15 @@ bool spawnCommandLineAsync(string commandLine)
 bool spawnCommandLineSync(string commandLine, out string standardOutput, out string standardError, out int waitStatus)
 {
   bool _retval;
-  const(char)* _commandLine = commandLine.toCString(No.Alloc);
+  const(char)* _commandLine = commandLine.toCString!(No.Malloc, No.Nullable);
   char* _standardOutput;
   char* _standardError;
   GError *_err;
   _retval = cast(bool)g_spawn_command_line_sync(_commandLine, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  standardOutput = _standardOutput.fromCString(Yes.Free);
-  standardError = _standardError.fromCString(Yes.Free);
+  standardOutput = _standardOutput.fromCString!(Yes.Free);
+  standardError = _standardError.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -7604,16 +7604,16 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
-  const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+  const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpargv;
   foreach (s; argv)
-    _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= s.toCString;
   _tmpargv ~= null;
   char** _argv = _tmpargv.ptr;
 
   char*[] _tmpenvp;
   foreach (s; envp)
-    _tmpenvp ~= s.toCString(No.Alloc);
+    _tmpenvp ~= s.toCString;
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
@@ -7624,8 +7624,8 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
   _retval = cast(bool)g_spawn_sync(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  standardOutput = _standardOutput.fromCString(Yes.Free);
-  standardError = _standardError.fromCString(Yes.Free);
+  standardOutput = _standardOutput.fromCString!(Yes.Free);
+  standardError = _standardError.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -7662,7 +7662,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
 int stat(string filename, glib.types.StatBuf buf) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_stat(_filename, buf);
   return _retval;
 }
@@ -7681,10 +7681,10 @@ int stat(string filename, glib.types.StatBuf buf) nothrow
 string stpcpy(string dest, string src) nothrow
 {
   char* _cretval;
-  char* _dest = dest.toCString(No.Alloc);
-  const(char)* _src = src.toCString(No.Alloc);
+  char* _dest = dest.toCString!(No.Malloc, No.Nullable);
+  const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
   _cretval = g_stpcpy(_dest, _src);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -7721,8 +7721,8 @@ bool strEqual(const(void)* v1, const(void)* v2) nothrow
 bool strHasPrefix(string str, string prefix) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
-  const(char)* _prefix = prefix.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+  const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_str_has_prefix(_str, _prefix);
   return _retval;
 }
@@ -7738,8 +7738,8 @@ bool strHasPrefix(string str, string prefix) nothrow
 bool strHasSuffix(string str, string suffix) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
-  const(char)* _suffix = suffix.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+  const(char)* _suffix = suffix.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_str_has_suffix(_str, _suffix);
   return _retval;
 }
@@ -7782,7 +7782,7 @@ uint strHash(const(void)* v) nothrow
 bool strIsAscii(string str) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_str_is_ascii(_str);
   return _retval;
 }
@@ -7820,8 +7820,8 @@ bool strIsAscii(string str) nothrow
 bool strMatchString(string searchTerm, string potentialHit, bool acceptAlternates) nothrow
 {
   bool _retval;
-  const(char)* _searchTerm = searchTerm.toCString(No.Alloc);
-  const(char)* _potentialHit = potentialHit.toCString(No.Alloc);
+  const(char)* _searchTerm = searchTerm.toCString!(No.Malloc, No.Nullable);
+  const(char)* _potentialHit = potentialHit.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_str_match_string(_searchTerm, _potentialHit, acceptAlternates);
   return _retval;
 }
@@ -7854,10 +7854,10 @@ bool strMatchString(string searchTerm, string potentialHit, bool acceptAlternate
 string strToAscii(string str, string fromLocale = null) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  const(char)* _fromLocale = fromLocale.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+  const(char)* _fromLocale = fromLocale.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_str_to_ascii(_str, _fromLocale);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -7888,8 +7888,8 @@ string strToAscii(string str, string fromLocale = null) nothrow
 string[] strTokenizeAndFold(string string_, string translitLocale, out string[] asciiAlternates) nothrow
 {
   char** _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
-  const(char)* _translitLocale = translitLocale.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _translitLocale = translitLocale.toCString!(No.Malloc, Yes.Nullable);
   char** _asciiAlternates;
   _cretval = g_str_tokenize_and_fold(_string_, _translitLocale, &_asciiAlternates);
   string[] _retval;
@@ -7901,7 +7901,7 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   uint _lenasciiAlternates;
@@ -7914,7 +7914,7 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
 
   asciiAlternates.length = _lenasciiAlternates;
   foreach (i; 0 .. _lenasciiAlternates)
-    asciiAlternates[i] = _asciiAlternates[i].fromCString(Yes.Free);
+    asciiAlternates[i] = _asciiAlternates[i].fromCString!(Yes.Free);
   gFree(cast(void*)_asciiAlternates);
   return _retval;
 }
@@ -7945,10 +7945,10 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
 string strcanon(string string_, string validChars, char substitutor) nothrow
 {
   char* _cretval;
-  char* _string_ = string_.toCString(No.Alloc);
-  const(char)* _validChars = validChars.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _validChars = validChars.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strcanon(_string_, _validChars, substitutor);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -7968,8 +7968,8 @@ string strcanon(string string_, string validChars, char substitutor) nothrow
 int strcasecmp(string s1, string s2) nothrow
 {
   int _retval;
-  const(char)* _s1 = s1.toCString(No.Alloc);
-  const(char)* _s2 = s2.toCString(No.Alloc);
+  const(char)* _s1 = s1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _s2 = s2.toCString!(No.Malloc, No.Nullable);
   _retval = g_strcasecmp(_s1, _s2);
   return _retval;
 }
@@ -7992,9 +7992,9 @@ int strcasecmp(string s1, string s2) nothrow
 string strchomp(string string_) nothrow
 {
   char* _cretval;
-  char* _string_ = string_.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strchomp(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8017,9 +8017,9 @@ string strchomp(string string_) nothrow
 string strchug(string string_) nothrow
 {
   char* _cretval;
-  char* _string_ = string_.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strchug(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8036,8 +8036,8 @@ string strchug(string string_) nothrow
 int strcmp0(string str1 = null, string str2 = null) nothrow
 {
   int _retval;
-  const(char)* _str1 = str1.toCString(No.Alloc);
-  const(char)* _str2 = str2.toCString(No.Alloc);
+  const(char)* _str1 = str1.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _str2 = str2.toCString!(No.Malloc, Yes.Nullable);
   _retval = g_strcmp0(_str1, _str2);
   return _retval;
 }
@@ -8055,9 +8055,9 @@ int strcmp0(string str1 = null, string str2 = null) nothrow
 string strcompress(string source) nothrow
 {
   char* _cretval;
-  const(char)* _source = source.toCString(No.Alloc);
+  const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strcompress(_source);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8090,10 +8090,10 @@ string strcompress(string source) nothrow
 string strdelimit(string string_, string delimiters, char newDelimiter) nothrow
 {
   char* _cretval;
-  char* _string_ = string_.toCString(No.Alloc);
-  const(char)* _delimiters = delimiters.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _delimiters = delimiters.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_strdelimit(_string_, _delimiters, newDelimiter);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8111,9 +8111,9 @@ string strdelimit(string string_, string delimiters, char newDelimiter) nothrow
 string strdown(string string_) nothrow
 {
   char* _cretval;
-  char* _string_ = string_.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strdown(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8127,9 +8127,9 @@ string strdown(string string_) nothrow
 string strdup(string str = null) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_strdup(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8149,7 +8149,7 @@ string[] strdupv(string[] strArray = null) nothrow
   char** _cretval;
   char*[] _tmpstrArray;
   foreach (s; strArray)
-    _tmpstrArray ~= s.toCString(No.Alloc);
+    _tmpstrArray ~= s.toCString;
   _tmpstrArray ~= null;
   char** _strArray = _tmpstrArray.ptr;
 
@@ -8163,7 +8163,7 @@ string[] strdupv(string[] strArray = null) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -8200,7 +8200,7 @@ string strerror(int errnum) nothrow
 {
   const(char)* _cretval;
   _cretval = g_strerror(errnum);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -8222,10 +8222,10 @@ string strerror(int errnum) nothrow
 string strescape(string source, string exceptions = null) nothrow
 {
   char* _cretval;
-  const(char)* _source = source.toCString(No.Alloc);
-  const(char)* _exceptions = exceptions.toCString(No.Alloc);
+  const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
+  const(char)* _exceptions = exceptions.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_strescape(_source, _exceptions);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8242,10 +8242,10 @@ string strescape(string source, string exceptions = null) nothrow
 string stripContext(string msgid, string msgval) nothrow
 {
   const(char)* _cretval;
-  const(char)* _msgid = msgid.toCString(No.Alloc);
-  const(char)* _msgval = msgval.toCString(No.Alloc);
+  const(char)* _msgid = msgid.toCString!(No.Malloc, No.Nullable);
+  const(char)* _msgval = msgval.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strip_context(_msgid, _msgval);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -8266,15 +8266,15 @@ string stripContext(string msgid, string msgval) nothrow
 string strjoinv(string separator, string[] strArray) nothrow
 {
   char* _cretval;
-  const(char)* _separator = separator.toCString(No.Alloc);
+  const(char)* _separator = separator.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpstrArray;
   foreach (s; strArray)
-    _tmpstrArray ~= s.toCString(No.Alloc);
+    _tmpstrArray ~= s.toCString;
   _tmpstrArray ~= null;
   char** _strArray = _tmpstrArray.ptr;
 
   _cretval = g_strjoinv(_separator, _strArray);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8309,8 +8309,8 @@ string strjoinv(string separator, string[] strArray) nothrow
 int strncasecmp(string s1, string s2, uint n) nothrow
 {
   int _retval;
-  const(char)* _s1 = s1.toCString(No.Alloc);
-  const(char)* _s2 = s2.toCString(No.Alloc);
+  const(char)* _s1 = s1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _s2 = s2.toCString!(No.Malloc, No.Nullable);
   _retval = g_strncasecmp(_s1, _s2, n);
   return _retval;
 }
@@ -8333,9 +8333,9 @@ int strncasecmp(string s1, string s2, uint n) nothrow
 string strndup(string str, size_t n) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_strndup(_str, n);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8351,7 +8351,7 @@ string strnfill(size_t length, char fillChar) nothrow
 {
   char* _cretval;
   _cretval = g_strnfill(length, fillChar);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8370,9 +8370,9 @@ string strnfill(size_t length, char fillChar) nothrow
 string strreverse(string string_) nothrow
 {
   char* _cretval;
-  char* _string_ = string_.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strreverse(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8388,10 +8388,10 @@ string strreverse(string string_) nothrow
 string strrstr(string haystack, string needle) nothrow
 {
   char* _cretval;
-  const(char)* _haystack = haystack.toCString(No.Alloc);
-  const(char)* _needle = needle.toCString(No.Alloc);
+  const(char)* _haystack = haystack.toCString!(No.Malloc, No.Nullable);
+  const(char)* _needle = needle.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strrstr(_haystack, _needle);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8411,7 +8411,7 @@ string strsignal(int signum) nothrow
 {
   const(char)* _cretval;
   _cretval = g_strsignal(signum);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -8443,8 +8443,8 @@ string strsignal(int signum) nothrow
 string[] strsplit(string string_, string delimiter, int maxTokens) nothrow
 {
   char** _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
-  const(char)* _delimiter = delimiter.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _delimiter = delimiter.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strsplit(_string_, _delimiter, maxTokens);
   string[] _retval;
 
@@ -8455,7 +8455,7 @@ string[] strsplit(string string_, string delimiter, int maxTokens) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -8495,8 +8495,8 @@ string[] strsplit(string string_, string delimiter, int maxTokens) nothrow
 string[] strsplitSet(string string_, string delimiters, int maxTokens) nothrow
 {
   char** _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
-  const(char)* _delimiters = delimiters.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _delimiters = delimiters.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strsplit_set(_string_, _delimiters, maxTokens);
   string[] _retval;
 
@@ -8507,7 +8507,7 @@ string[] strsplitSet(string string_, string delimiters, int maxTokens) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -8536,10 +8536,10 @@ string[] strsplitSet(string string_, string delimiters, int maxTokens) nothrow
 double strtod(string nptr, out string endptr) nothrow
 {
   double _retval;
-  const(char)* _nptr = nptr.toCString(No.Alloc);
+  const(char)* _nptr = nptr.toCString!(No.Malloc, No.Nullable);
   char* _endptr;
   _retval = g_strtod(_nptr, &_endptr);
-  endptr = _endptr.fromCString(No.Free);
+  endptr = _endptr.fromCString!(No.Free);
   return _retval;
 }
 
@@ -8557,9 +8557,9 @@ double strtod(string nptr, out string endptr) nothrow
 string strup(string string_) nothrow
 {
   char* _cretval;
-  char* _string_ = string_.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strup(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -8577,11 +8577,11 @@ bool strvContains(string[] strv, string str) nothrow
   bool _retval;
   char*[] _tmpstrv;
   foreach (s; strv)
-    _tmpstrv ~= s.toCString(No.Alloc);
+    _tmpstrv ~= s.toCString;
   _tmpstrv ~= null;
   const(char*)* _strv = _tmpstrv.ptr;
 
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_strv_contains(_strv, _str);
   return _retval;
 }
@@ -8611,13 +8611,13 @@ bool strvEqual(string[] strv1, string[] strv2) nothrow
   bool _retval;
   char*[] _tmpstrv1;
   foreach (s; strv1)
-    _tmpstrv1 ~= s.toCString(No.Alloc);
+    _tmpstrv1 ~= s.toCString;
   _tmpstrv1 ~= null;
   const(char*)* _strv1 = _tmpstrv1.ptr;
 
   char*[] _tmpstrv2;
   foreach (s; strv2)
-    _tmpstrv2 ~= s.toCString(No.Alloc);
+    _tmpstrv2 ~= s.toCString;
   _tmpstrv2 ~= null;
   const(char*)* _strv2 = _tmpstrv2.ptr;
 
@@ -8645,7 +8645,7 @@ uint strvLength(string[] strArray) nothrow
   uint _retval;
   char*[] _tmpstrArray;
   foreach (s; strArray)
-    _tmpstrArray ~= s.toCString(No.Alloc);
+    _tmpstrArray ~= s.toCString;
   _tmpstrArray ~= null;
   char** _strArray = _tmpstrArray.ptr;
 
@@ -8690,16 +8690,16 @@ void testAddDataFunc(string testpath, const(void)* testData, glib.types.TestData
     }
   }
   auto _testFuncCB = testFunc ? &_testFuncCallback : null;
-  const(char)* _testpath = testpath.toCString(No.Alloc);
+  const(char)* _testpath = testpath.toCString!(No.Malloc, No.Nullable);
   g_test_add_data_func(_testpath, testData, _testFuncCB);
 }
 
 /** */
 void testAssertExpectedMessagesInternal(string domain, string file, int line, string func) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
   g_test_assert_expected_messages_internal(_domain, _file, line, _func);
 }
 
@@ -8722,7 +8722,7 @@ void testAssertExpectedMessagesInternal(string domain, string file, int line, st
 */
 void testBug(string bugUriSnippet) nothrow
 {
-  const(char)* _bugUriSnippet = bugUriSnippet.toCString(No.Alloc);
+  const(char)* _bugUriSnippet = bugUriSnippet.toCString!(No.Malloc, No.Nullable);
   g_test_bug(_bugUriSnippet);
 }
 
@@ -8747,7 +8747,7 @@ void testBug(string bugUriSnippet) nothrow
 */
 void testBugBase(string uriPattern) nothrow
 {
-  const(char)* _uriPattern = uriPattern.toCString(No.Alloc);
+  const(char)* _uriPattern = uriPattern.toCString!(No.Malloc, No.Nullable);
   g_test_bug_base(_uriPattern);
 }
 
@@ -8807,8 +8807,8 @@ void testDisableCrashReporting() nothrow
 */
 void testExpectMessage(string logDomain, glib.types.LogLevelFlags logLevel, string pattern) nothrow
 {
-  const(char)* _logDomain = logDomain.toCString(No.Alloc);
-  const(char)* _pattern = pattern.toCString(No.Alloc);
+  const(char)* _logDomain = logDomain.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
   g_test_expect_message(_logDomain, logLevel, _pattern);
 }
 
@@ -8873,7 +8873,7 @@ string testGetDir(glib.types.TestFileType fileType) nothrow
 {
   const(char)* _cretval;
   _cretval = g_test_get_dir(fileType);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -8892,7 +8892,7 @@ string testGetPath() nothrow
 {
   const(char)* _cretval;
   _cretval = g_test_get_path();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -8913,7 +8913,7 @@ string testGetPath() nothrow
 */
 void testIncomplete(string msg = null) nothrow
 {
-  const(char)* _msg = msg.toCString(No.Alloc);
+  const(char)* _msg = msg.toCString!(No.Malloc, Yes.Nullable);
   g_test_incomplete(_msg);
 }
 
@@ -8922,7 +8922,7 @@ string testLogTypeName(glib.types.TestLogType logType) nothrow
 {
   const(char)* _cretval;
   _cretval = g_test_log_type_name(logType);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -9100,7 +9100,7 @@ void testSetNonfatalAssertions() nothrow
 */
 void testSkip(string msg = null) nothrow
 {
-  const(char)* _msg = msg.toCString(No.Alloc);
+  const(char)* _msg = msg.toCString!(No.Malloc, Yes.Nullable);
   g_test_skip(_msg);
 }
 
@@ -9145,7 +9145,7 @@ bool testSubprocess() nothrow
 */
 void testSummary(string summary) nothrow
 {
-  const(char)* _summary = summary.toCString(No.Alloc);
+  const(char)* _summary = summary.toCString!(No.Malloc, No.Nullable);
   g_test_summary(_summary);
 }
 
@@ -9184,10 +9184,10 @@ void testTimerStart() nothrow
 /** */
 void testTrapAssertions(string domain, string file, int line, string func, ulong assertionFlags, string pattern) nothrow
 {
-  const(char)* _domain = domain.toCString(No.Alloc);
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _func = func.toCString(No.Alloc);
-  const(char)* _pattern = pattern.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
+  const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
   g_test_trap_assertions(_domain, _file, line, _func, assertionFlags, _pattern);
 }
 
@@ -9273,7 +9273,7 @@ bool testTrapReachedTimeout() nothrow
 */
 void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags) nothrow
 {
-  const(char)* _testPath = testPath.toCString(No.Alloc);
+  const(char)* _testPath = testPath.toCString!(No.Malloc, Yes.Nullable);
   g_test_trap_subprocess(_testPath, usecTimeout, testFlags);
 }
 
@@ -9379,10 +9379,10 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubpr
 */
 void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags) nothrow
 {
-  const(char)* _testPath = testPath.toCString(No.Alloc);
+  const(char)* _testPath = testPath.toCString!(No.Malloc, Yes.Nullable);
   const(char)*[] _tmpenvp;
   foreach (s; envp)
-    _tmpenvp ~= s.toCString(No.Alloc);
+    _tmpenvp ~= s.toCString;
   _tmpenvp ~= null;
   const(char*)* _envp = _tmpenvp.ptr;
 
@@ -9735,7 +9735,7 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
   _cretval = g_ucs4_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -10464,7 +10464,7 @@ glib.source.Source unixFdSourceNew(int fd, glib.types.IOCondition condition) not
 */
 void* unixGetPasswdEntry(string userName)
 {
-  const(char)* _userName = userName.toCString(No.Alloc);
+  const(char)* _userName = userName.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   auto _retval = g_unix_get_passwd_entry(_userName, &_err);
   if (_err)
@@ -10627,7 +10627,7 @@ glib.source.Source unixSignalSourceNew(int signum) nothrow
 int unlink(string filename) nothrow
 {
   int _retval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _retval = g_unlink(_filename);
   return _retval;
 }
@@ -10657,7 +10657,7 @@ int unlink(string filename) nothrow
 */
 void unsetenv(string variable) nothrow
 {
-  const(char)* _variable = variable.toCString(No.Alloc);
+  const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
   g_unsetenv(_variable);
 }
 
@@ -10757,7 +10757,7 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
   _cretval = g_utf16_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -10788,7 +10788,7 @@ string utf8Casefold(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_casefold(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -10813,8 +10813,8 @@ string utf8Casefold(string str) nothrow
 int utf8Collate(string str1, string str2) nothrow
 {
   int _retval;
-  const(char)* _str1 = str1.toCString(No.Alloc);
-  const(char)* _str2 = str2.toCString(No.Alloc);
+  const(char)* _str1 = str1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _str2 = str2.toCString!(No.Malloc, No.Nullable);
   _retval = g_utf8_collate(_str1, _str2);
   return _retval;
 }
@@ -10844,7 +10844,7 @@ string utf8CollateKey(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_collate_key(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -10875,7 +10875,7 @@ string utf8CollateKeyForFilename(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_collate_key_for_filename(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -10901,10 +10901,10 @@ string utf8CollateKeyForFilename(string str) nothrow
 string utf8FindNextChar(string p, string end = null) nothrow
 {
   char* _cretval;
-  const(char)* _p = p.toCString(No.Alloc);
-  const(char)* _end = end.toCString(No.Alloc);
+  const(char)* _p = p.toCString!(No.Malloc, No.Nullable);
+  const(char)* _end = end.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_utf8_find_next_char(_p, _end);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -10925,10 +10925,10 @@ string utf8FindNextChar(string p, string end = null) nothrow
 string utf8FindPrevChar(string str, string p) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
-  const(char)* _p = p.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+  const(char)* _p = p.toCString!(No.Malloc, No.Nullable);
   _cretval = g_utf8_find_prev_char(_str, _p);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -10947,7 +10947,7 @@ string utf8FindPrevChar(string str, string p) nothrow
 dchar utf8GetChar(string p) nothrow
 {
   dchar _retval;
-  const(char)* _p = p.toCString(No.Alloc);
+  const(char)* _p = p.toCString!(No.Malloc, No.Nullable);
   _retval = g_utf8_get_char(_p);
   return _retval;
 }
@@ -11006,7 +11006,7 @@ string utf8MakeValid(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_make_valid(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -11053,7 +11053,7 @@ string utf8Normalize(string str, glib.types.NormalizeMode mode) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_normalize(_str, _len, mode);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -11080,9 +11080,9 @@ string utf8Normalize(string str, glib.types.NormalizeMode mode) nothrow
 string utf8OffsetToPointer(string str, glong offset) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_utf8_offset_to_pointer(_str, offset);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -11101,8 +11101,8 @@ string utf8OffsetToPointer(string str, glong offset) nothrow
 glong utf8PointerToOffset(string str, string pos) nothrow
 {
   glong _retval;
-  const(char)* _str = str.toCString(No.Alloc);
-  const(char)* _pos = pos.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+  const(char)* _pos = pos.toCString!(No.Malloc, No.Nullable);
   _retval = g_utf8_pointer_to_offset(_str, _pos);
   return _retval;
 }
@@ -11122,9 +11122,9 @@ glong utf8PointerToOffset(string str, string pos) nothrow
 string utf8PrevChar(string p) nothrow
 {
   char* _cretval;
-  const(char)* _p = p.toCString(No.Alloc);
+  const(char)* _p = p.toCString!(No.Malloc, No.Nullable);
   _cretval = g_utf8_prev_char(_p);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -11149,7 +11149,7 @@ string utf8Strchr(string p, dchar c) nothrow
 
   auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
   _cretval = g_utf8_strchr(_p, _len, c);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -11173,7 +11173,7 @@ string utf8Strdown(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_strdown(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -11194,7 +11194,7 @@ string utf8Strdown(string str) nothrow
 glong utf8Strlen(string p, ptrdiff_t max) nothrow
 {
   glong _retval;
-  const(char)* _p = p.toCString(No.Alloc);
+  const(char)* _p = p.toCString!(No.Malloc, No.Nullable);
   _retval = g_utf8_strlen(_p, max);
   return _retval;
 }
@@ -11217,10 +11217,10 @@ glong utf8Strlen(string p, ptrdiff_t max) nothrow
 string utf8Strncpy(string dest, string src, size_t n) nothrow
 {
   char* _cretval;
-  char* _dest = dest.toCString(No.Alloc);
-  const(char)* _src = src.toCString(No.Alloc);
+  char* _dest = dest.toCString!(No.Malloc, No.Nullable);
+  const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
   _cretval = g_utf8_strncpy(_dest, _src, n);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -11245,7 +11245,7 @@ string utf8Strrchr(string p, dchar c) nothrow
 
   auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
   _cretval = g_utf8_strrchr(_p, _len, c);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -11277,7 +11277,7 @@ string utf8Strreverse(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_strreverse(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -11302,7 +11302,7 @@ string utf8Strup(string str) nothrow
 
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_strup(_str, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -11324,9 +11324,9 @@ string utf8Strup(string str) nothrow
 string utf8Substring(string str, glong startPos, glong endPos) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_utf8_substring(_str, startPos, endPos);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -11354,7 +11354,7 @@ dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
 {
   dchar* _cretval;
   glong _cretlength;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_utf8_to_ucs4(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
@@ -11422,7 +11422,7 @@ ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
 {
   ushort* _cretval;
   glong _cretlength;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_utf8_to_utf16(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
@@ -11452,9 +11452,9 @@ ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
 string utf8TruncateMiddle(string string_, size_t truncateLength) nothrow
 {
   char* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = g_utf8_truncate_middle(_string_, truncateLength);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -11490,7 +11490,7 @@ bool utf8Validate(ubyte[] str, out string end) nothrow
   auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
   char* _end;
   _retval = cast(bool)g_utf8_validate(_str, _maxLen, &_end);
-  end = _end.fromCString(No.Free);
+  end = _end.fromCString!(No.Free);
   return _retval;
 }
 
@@ -11515,7 +11515,7 @@ bool utf8ValidateLen(ubyte[] str, out string end) nothrow
   auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
   char* _end;
   _retval = cast(bool)g_utf8_validate_len(_str, _maxLen, &_end);
-  end = _end.fromCString(No.Free);
+  end = _end.fromCString!(No.Free);
   return _retval;
 }
 
@@ -11536,7 +11536,7 @@ bool utf8ValidateLen(ubyte[] str, out string end) nothrow
 bool uuidStringIsValid(string str) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_uuid_string_is_valid(_str);
   return _retval;
 }
@@ -11551,7 +11551,7 @@ string uuidStringRandom() nothrow
 {
   char* _cretval;
   _cretval = g_uuid_string_random();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 

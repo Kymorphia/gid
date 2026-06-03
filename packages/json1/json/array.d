@@ -188,7 +188,7 @@ class Array : gobject.boxed.Boxed
   */
   void addStringElement(string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     json_array_add_string_element(cast(JsonArray*)this._cPtr, _value);
   }
 
@@ -412,7 +412,7 @@ class Array : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = json_array_get_string_element(cast(JsonArray*)this._cPtr, index);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

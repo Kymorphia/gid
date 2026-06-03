@@ -63,7 +63,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = webkit_back_forward_list_item_get_original_uri(cast(WebKitBackForwardListItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = webkit_back_forward_list_item_get_title(cast(WebKitBackForwardListItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = webkit_back_forward_list_item_get_uri(cast(WebKitBackForwardListItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

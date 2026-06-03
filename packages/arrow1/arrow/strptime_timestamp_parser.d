@@ -51,7 +51,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
   this(string format) nothrow
   {
     GArrowStrptimeTimestampParser* _cretval;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_strptime_timestamp_parser_new(_format);
     this(_cretval, Yes.Take);
   }
@@ -61,7 +61,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
   {
     const(char)* _cretval;
     _cretval = garrow_strptime_timestamp_parser_get_format(cast(GArrowStrptimeTimestampParser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

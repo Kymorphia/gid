@@ -102,7 +102,7 @@ class ThemeSelector : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = panel_theme_selector_get_action_name(cast(PanelThemeSelector*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class ThemeSelector : gtk.widget.Widget
   */
   void setActionName(string actionName) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     panel_theme_selector_set_action_name(cast(PanelThemeSelector*)this._cPtr, _actionName);
   }
 }

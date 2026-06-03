@@ -205,7 +205,7 @@ class Video : gtk.widget.Widget
   static gtk.video.Video newForFilename(string filename = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_video_new_for_filename(_filename);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -239,7 +239,7 @@ class Video : gtk.widget.Widget
   static gtk.video.Video newForResource(string resourcePath = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_video_new_for_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -339,7 +339,7 @@ class Video : gtk.widget.Widget
   */
   void setFilename(string filename = null) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     gtk_video_set_filename(cast(GtkVideo*)this._cPtr, _filename);
   }
 
@@ -395,7 +395,7 @@ class Video : gtk.widget.Widget
   */
   void setResource(string resourcePath = null) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     gtk_video_set_resource(cast(GtkVideo*)this._cPtr, _resourcePath);
   }
 }

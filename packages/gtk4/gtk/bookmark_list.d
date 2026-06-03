@@ -146,8 +146,8 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   this(string filename = null, string attributes = null) nothrow
   {
     GtkBookmarkList* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_bookmark_list_new(_filename, _attributes);
     this(_cretval, Yes.Take);
   }
@@ -160,7 +160,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_attributes(cast(GtkBookmarkList*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_filename(cast(GtkBookmarkList*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setAttributes(string attributes = null) nothrow
   {
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
     gtk_bookmark_list_set_attributes(cast(GtkBookmarkList*)this._cPtr, _attributes);
   }
 

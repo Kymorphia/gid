@@ -281,7 +281,7 @@ void showErrorUnderline(cairo.context.Context cr, double x, double y, double wid
 */
 void showGlyphItem(cairo.context.Context cr, string text, pango.glyph_item.GlyphItem glyphItem) nothrow
 {
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   pango_cairo_show_glyph_item(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null);
 }
 

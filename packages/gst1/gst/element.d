@@ -129,8 +129,8 @@ class Element : gst.object.ObjectWrap
   static gst.element.Element makeFromUri(gst.types.URIType type, string uri, string elementname = null)
   {
     GstElement* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
-    const(char)* _elementname = elementname.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    const(char)* _elementname = elementname.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gst_element_make_from_uri(type, _uri, _elementname, &_err);
     if (_err)
@@ -154,7 +154,7 @@ class Element : gst.object.ObjectWrap
   static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_element_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
     return _retval;
   }
@@ -171,7 +171,7 @@ class Element : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_element_state_change_return_get_name(stateRet);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Element : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_element_state_get_name(state);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class Element : gst.object.ObjectWrap
   gulong addPropertyDeepNotifyWatch(string propertyName, bool includeValue) nothrow
   {
     gulong _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, Yes.Nullable);
     _retval = gst_element_add_property_deep_notify_watch(cast(GstElement*)this._cPtr, _propertyName, includeValue);
     return _retval;
   }
@@ -270,7 +270,7 @@ class Element : gst.object.ObjectWrap
   gulong addPropertyNotifyWatch(string propertyName, bool includeValue) nothrow
   {
     gulong _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, Yes.Nullable);
     _retval = gst_element_add_property_notify_watch(cast(GstElement*)this._cPtr, _propertyName, includeValue);
     return _retval;
   }
@@ -390,9 +390,9 @@ class Element : gst.object.ObjectWrap
   string decorateStreamId(string streamId) nothrow
   {
     char* _cretval;
-    const(char)* _streamId = streamId.toCString(No.Alloc);
+    const(char)* _streamId = streamId.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_decorate_stream_id(cast(GstElement*)this._cPtr, _streamId);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -617,7 +617,7 @@ class Element : gst.object.ObjectWrap
   gst.context.Context getContext(string contextType) nothrow
   {
     GstContext* _cretval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_get_context(cast(GstElement*)this._cPtr, _contextType);
     auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -633,7 +633,7 @@ class Element : gst.object.ObjectWrap
   gst.context.Context getContextUnlocked(string contextType) nothrow
   {
     GstContext* _cretval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_get_context_unlocked(cast(GstElement*)this._cPtr, _contextType);
     auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -703,9 +703,9 @@ class Element : gst.object.ObjectWrap
   string getMetadata(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_get_metadata(cast(GstElement*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -721,7 +721,7 @@ class Element : gst.object.ObjectWrap
   gst.pad_template.PadTemplate getPadTemplate(string name) nothrow
   {
     GstPadTemplate* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_get_pad_template(cast(GstElement*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
@@ -757,7 +757,7 @@ class Element : gst.object.ObjectWrap
   gst.pad.Pad getRequestPad(string name) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_get_request_pad(cast(GstElement*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
@@ -838,7 +838,7 @@ class Element : gst.object.ObjectWrap
   gst.pad.Pad getStaticPad(string name) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_get_static_pad(cast(GstElement*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
@@ -975,8 +975,8 @@ class Element : gst.object.ObjectWrap
   bool linkPads(string srcpadname, gst.element.Element dest, string destpadname = null) nothrow
   {
     bool _retval;
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
+    const(char)* _srcpadname = srcpadname.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _destpadname = destpadname.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)gst_element_link_pads(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname);
     return _retval;
   }
@@ -1000,8 +1000,8 @@ class Element : gst.object.ObjectWrap
   bool linkPadsFiltered(string srcpadname, gst.element.Element dest, string destpadname = null, gst.caps.Caps filter = null) nothrow
   {
     bool _retval;
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
+    const(char)* _srcpadname = srcpadname.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _destpadname = destpadname.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)gst_element_link_pads_filtered(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -1030,8 +1030,8 @@ class Element : gst.object.ObjectWrap
   bool linkPadsFull(string srcpadname, gst.element.Element dest, string destpadname, gst.types.PadLinkCheck flags) nothrow
   {
     bool _retval;
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
+    const(char)* _srcpadname = srcpadname.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _destpadname = destpadname.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)gst_element_link_pads_full(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, flags);
     return _retval;
   }
@@ -1083,10 +1083,10 @@ class Element : gst.object.ObjectWrap
   */
   void messageFull(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line) nothrow
   {
-    char* _text = text.toCString(Yes.Alloc);
-    char* _debug_ = debug_.toCString(Yes.Alloc);
-    const(char)* _file = file.toCString(No.Alloc);
-    const(char)* _function_ = function_.toCString(No.Alloc);
+    char* _text = text.toCString!(Yes.Malloc, Yes.Nullable);
+    char* _debug_ = debug_.toCString!(Yes.Malloc, Yes.Nullable);
+    const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+    const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
     gst_element_message_full(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line);
   }
 
@@ -1113,10 +1113,10 @@ class Element : gst.object.ObjectWrap
   */
   void messageFullWithDetails(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line, gst.structure.Structure structure) nothrow
   {
-    char* _text = text.toCString(Yes.Alloc);
-    char* _debug_ = debug_.toCString(Yes.Alloc);
-    const(char)* _file = file.toCString(No.Alloc);
-    const(char)* _function_ = function_.toCString(No.Alloc);
+    char* _text = text.toCString!(Yes.Malloc, Yes.Nullable);
+    char* _debug_ = debug_.toCString!(Yes.Malloc, Yes.Nullable);
+    const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+    const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
     gst_element_message_full_with_details(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
   }
 
@@ -1332,7 +1332,7 @@ class Element : gst.object.ObjectWrap
   gst.pad.Pad requestPad(gst.pad_template.PadTemplate templ, string name = null, gst.caps.Caps caps = null) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_element_request_pad(cast(GstElement*)this._cPtr, templ ? cast(GstPadTemplate*)templ._cPtr(No.Dup) : null, _name, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
@@ -1360,7 +1360,7 @@ class Element : gst.object.ObjectWrap
   gst.pad.Pad requestPadSimple(string name) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_request_pad_simple(cast(GstElement*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
@@ -1621,8 +1621,8 @@ class Element : gst.object.ObjectWrap
   */
   void unlinkPads(string srcpadname, gst.element.Element dest, string destpadname) nothrow
   {
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
+    const(char)* _srcpadname = srcpadname.toCString!(No.Malloc, No.Nullable);
+    const(char)* _destpadname = destpadname.toCString!(No.Malloc, No.Nullable);
     gst_element_unlink_pads(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname);
   }
 

@@ -247,7 +247,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = adw_view_stack_page_get_icon_name(cast(AdwViewStackPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = adw_view_stack_page_get_name(cast(AdwViewStackPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = adw_view_stack_page_get_title(cast(AdwViewStackPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     adw_view_stack_page_set_icon_name(cast(AdwViewStackPage*)this._cPtr, _iconName);
   }
 
@@ -347,7 +347,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     adw_view_stack_page_set_name(cast(AdwViewStackPage*)this._cPtr, _name);
   }
 
@@ -372,7 +372,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setTitle(string title = null) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     adw_view_stack_page_set_title(cast(AdwViewStackPage*)this._cPtr, _title);
   }
 

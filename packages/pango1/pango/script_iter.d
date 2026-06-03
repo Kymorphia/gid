@@ -94,8 +94,8 @@ class ScriptIter : gobject.boxed.Boxed
     char* _start;
     char* _end;
     pango_script_iter_get_range(cast(PangoScriptIter*)this._cPtr, &_start, &_end, &script);
-    start = _start.fromCString(Yes.Free);
-    end = _end.fromCString(Yes.Free);
+    start = _start.fromCString!(Yes.Free);
+    end = _end.fromCString!(Yes.Free);
   }
 
   /**

@@ -211,7 +211,7 @@ class HeaderBar : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setDecorationLayout(string layout = null) nothrow
   {
-    const(char)* _layout = layout.toCString(No.Alloc);
+    const(char)* _layout = layout.toCString!(No.Malloc, Yes.Nullable);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)this._cPtr, _layout);
   }
 

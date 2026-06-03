@@ -61,7 +61,7 @@ class FunctionDoc : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -72,7 +72,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_description(cast(GArrowFunctionDoc*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_options_class_name(cast(GArrowFunctionDoc*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_summary(cast(GArrowFunctionDoc*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

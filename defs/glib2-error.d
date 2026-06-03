@@ -12,13 +12,13 @@ class ErrorWrap : Exception
   this(void* err, bool unused=false) nothrow
   {
     errPtr = cast(GError*)err;
-    super(errPtr.message.fromCString(No.Free));
+    super(errPtr.message.fromCString);
   }
 
   /** */
   this(Quark domain, int code, string message) nothrow
   {
-    this(g_error_new_literal(domain, code, message.toCString(No.Alloc)));
+    this(g_error_new_literal(domain, code, message.toCString));
   }
 
   /** */
@@ -84,7 +84,7 @@ class ErrorWrap : Exception
    */
   @property string message() nothrow
   {
-    return errPtr.message.fromCString(No.Free);
+    return errPtr.message.fromCString;
   }
 
   /**
@@ -95,7 +95,7 @@ class ErrorWrap : Exception
   @property void message(string propval) nothrow
   {
     g_free(cast(void*)errPtr.message);
-    errPtr.message = propval.toCString(Yes.Alloc);
+    errPtr.message = toCString!(Yes.Malloc)(propval);
   }
 
   /**
@@ -109,7 +109,7 @@ class ErrorWrap : Exception
   static ErrorWrap newLiteral(Quark domain, int code, string message) nothrow
   {
     GError* _cretval;
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString;
     _cretval = g_error_new_literal(domain, code, _message);
     ErrorWrap _retval = new ErrorWrap(cast(GError*)_cretval);
     return _retval;

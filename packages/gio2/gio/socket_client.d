@@ -313,7 +313,7 @@ class SocketClient : gobject.object.ObjectWrap
   */
   void addApplicationProxy(string protocol) nothrow
   {
-    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
     g_socket_client_add_application_proxy(cast(GSocketClient*)this._cPtr, _protocol);
   }
 
@@ -457,7 +457,7 @@ class SocketClient : gobject.object.ObjectWrap
   gio.socket_connection.SocketConnection connectToHost(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
-    const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
+    const(char)* _hostAndPort = hostAndPort.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_socket_client_connect_to_host(cast(GSocketClient*)this._cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -496,7 +496,7 @@ class SocketClient : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
+    const(char)* _hostAndPort = hostAndPort.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_client_connect_to_host_async(cast(GSocketClient*)this._cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -546,8 +546,8 @@ class SocketClient : gobject.object.ObjectWrap
   gio.socket_connection.SocketConnection connectToService(string domain, string service, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
-    const(char)* _domain = domain.toCString(No.Alloc);
-    const(char)* _service = service.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+    const(char)* _service = service.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_socket_client_connect_to_service(cast(GSocketClient*)this._cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -583,8 +583,8 @@ class SocketClient : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _domain = domain.toCString(No.Alloc);
-    const(char)* _service = service.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+    const(char)* _service = service.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_client_connect_to_service_async(cast(GSocketClient*)this._cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -641,7 +641,7 @@ class SocketClient : gobject.object.ObjectWrap
   gio.socket_connection.SocketConnection connectToUri(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_socket_client_connect_to_uri(cast(GSocketClient*)this._cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -680,7 +680,7 @@ class SocketClient : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_socket_client_connect_to_uri_async(cast(GSocketClient*)this._cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

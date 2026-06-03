@@ -291,7 +291,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   {
     char* _cretval;
     _cretval = soup_cookie_jar_get_cookies(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, forHttp);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void setCookie(glib.uri.Uri uri, string cookie) nothrow
   {
-    const(char)* _cookie = cookie.toCString(No.Alloc);
+    const(char)* _cookie = cookie.toCString!(No.Malloc, No.Nullable);
     soup_cookie_jar_set_cookie(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, _cookie);
   }
 
@@ -352,7 +352,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void setCookieWithFirstParty(glib.uri.Uri uri, glib.uri.Uri firstParty, string cookie) nothrow
   {
-    const(char)* _cookie = cookie.toCString(No.Alloc);
+    const(char)* _cookie = cookie.toCString!(No.Malloc, No.Nullable);
     soup_cookie_jar_set_cookie_with_first_party(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null, _cookie);
   }
 

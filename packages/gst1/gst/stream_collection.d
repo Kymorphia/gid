@@ -97,7 +97,7 @@ class StreamCollection : gst.object.ObjectWrap
   this(string upstreamId = null) nothrow
   {
     GstStreamCollection* _cretval;
-    const(char)* _upstreamId = upstreamId.toCString(No.Alloc);
+    const(char)* _upstreamId = upstreamId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_stream_collection_new(_upstreamId);
     this(_cretval, Yes.Take);
   }
@@ -152,7 +152,7 @@ class StreamCollection : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_stream_collection_get_upstream_id(cast(GstStreamCollection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

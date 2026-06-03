@@ -114,8 +114,8 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool addData(gda.types.DataPivotAggregate aggregateType, string field, string alias_ = null)
   {
     bool _retval;
-    const(char)* _field = field.toCString(No.Alloc);
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _field = field.toCString!(No.Malloc, No.Nullable);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_data_pivot_add_data(cast(GdaDataPivot*)this._cPtr, aggregateType, _field, _alias_, &_err);
     if (_err)
@@ -149,8 +149,8 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool addField(gda.types.DataPivotFieldType fieldType, string field, string alias_ = null)
   {
     bool _retval;
-    const(char)* _field = field.toCString(No.Alloc);
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _field = field.toCString!(No.Malloc, No.Nullable);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_data_pivot_add_field(cast(GdaDataPivot*)this._cPtr, fieldType, _field, _alias_, &_err);
     if (_err)

@@ -354,8 +354,8 @@ class Message : gobject.object.ObjectWrap
   this(string method, string uriString) nothrow
   {
     SoupMessage* _cretval;
-    const(char)* _method = method.toCString(No.Alloc);
-    const(char)* _uriString = uriString.toCString(No.Alloc);
+    const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
+    const(char)* _uriString = uriString.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_message_new(_method, _uriString);
     this(_cretval, Yes.Take);
   }
@@ -380,9 +380,9 @@ class Message : gobject.object.ObjectWrap
   static soup.message.Message newFromEncodedForm(string method, string uriString, string encodedForm) nothrow
   {
     SoupMessage* _cretval;
-    const(char)* _method = method.toCString(No.Alloc);
-    const(char)* _uriString = uriString.toCString(No.Alloc);
-    char* _encodedForm = encodedForm.toCString(Yes.Alloc);
+    const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
+    const(char)* _uriString = uriString.toCString!(No.Malloc, No.Nullable);
+    char* _encodedForm = encodedForm.toCString!(Yes.Malloc, No.Nullable);
     _cretval = soup_message_new_from_encoded_form(_method, _uriString, _encodedForm);
     auto _retval = gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
@@ -401,7 +401,7 @@ class Message : gobject.object.ObjectWrap
   static soup.message.Message newFromMultipart(string uriString, soup.multipart.Multipart multipart) nothrow
   {
     SoupMessage* _cretval;
-    const(char)* _uriString = uriString.toCString(No.Alloc);
+    const(char)* _uriString = uriString.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_message_new_from_multipart(_uriString, multipart ? cast(SoupMultipart*)multipart._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
@@ -418,7 +418,7 @@ class Message : gobject.object.ObjectWrap
   static soup.message.Message newFromUri(string method, glib.uri.Uri uri) nothrow
   {
     SoupMessage* _cretval;
-    const(char)* _method = method.toCString(No.Alloc);
+    const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_message_new_from_uri(_method, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
@@ -568,7 +568,7 @@ class Message : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_message_get_method(cast(SoupMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -609,7 +609,7 @@ class Message : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_message_get_reason_phrase(cast(SoupMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -690,7 +690,7 @@ class Message : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_message_get_tls_ciphersuite_name(cast(SoupMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -881,7 +881,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setMethod(string method) nothrow
   {
-    const(char)* _method = method.toCString(No.Alloc);
+    const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
     soup_message_set_method(cast(SoupMessage*)this._cPtr, _method);
   }
 
@@ -922,7 +922,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setRequestBody(string contentType, gio.input_stream.InputStream stream, ptrdiff_t contentLength) nothrow
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, Yes.Nullable);
     soup_message_set_request_body(cast(SoupMessage*)this._cPtr, _contentType, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, contentLength);
   }
 
@@ -940,7 +940,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setRequestBodyFromBytes(string contentType = null, glib.bytes.Bytes bytes = null) nothrow
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, Yes.Nullable);
     soup_message_set_request_body_from_bytes(cast(SoupMessage*)this._cPtr, _contentType, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
   }
 

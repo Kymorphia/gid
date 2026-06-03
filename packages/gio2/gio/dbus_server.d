@@ -168,8 +168,8 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusServer* _cretval;
-    const(char)* _address = address.toCString(No.Alloc);
-    const(char)* _guid = guid.toCString(No.Alloc);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
+    const(char)* _guid = guid.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -191,7 +191,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_client_address(cast(GDBusServer*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_guid(cast(GDBusServer*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

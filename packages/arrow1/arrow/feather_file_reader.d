@@ -108,7 +108,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString;
     const(char*)* _names = _tmpnames.ptr;
 
     GError *_err;

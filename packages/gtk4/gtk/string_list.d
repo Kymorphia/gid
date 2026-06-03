@@ -113,7 +113,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
     GtkStringList* _cretval;
     char*[] _tmpstrings;
     foreach (s; strings)
-      _tmpstrings ~= s.toCString(No.Alloc);
+      _tmpstrings ~= s.toCString;
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
 
@@ -132,7 +132,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   */
   void append(string string_) nothrow
   {
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     gtk_string_list_append(cast(GtkStringList*)this._cPtr, _string_);
   }
 
@@ -152,7 +152,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   {
     const(char)* _cretval;
     _cretval = gtk_string_list_get_string(cast(GtkStringList*)this._cPtr, position);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   {
     char*[] _tmpadditions;
     foreach (s; additions)
-      _tmpadditions ~= s.toCString(No.Alloc);
+      _tmpadditions ~= s.toCString;
     _tmpadditions ~= null;
     const(char*)* _additions = _tmpadditions.ptr;
 
@@ -216,7 +216,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   */
   void take(string string_) nothrow
   {
-    char* _string_ = string_.toCString(Yes.Alloc);
+    char* _string_ = string_.toCString!(Yes.Malloc, No.Nullable);
     gtk_string_list_take(cast(GtkStringList*)this._cPtr, _string_);
   }
 }

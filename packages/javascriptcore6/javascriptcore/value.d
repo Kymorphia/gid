@@ -110,12 +110,12 @@ class Value : gobject.object.ObjectWrap
       }
       catch (Exception e)
       {
-        jsc_context_throw(ctx, e.msg.toCString(No.Alloc));
+        jsc_context_throw(ctx, e.msg.toCString);
         return jsc_value_new_undefined(ctx);
       }
     }
 
-    JSCValue* funcVal = jsc_value_new_function_variadic(cast(JSCContext*)context._cPtr, name.toCString(No.Alloc),
+    JSCValue* funcVal = jsc_value_new_function_variadic(cast(JSCContext*)context._cPtr, name.toCString,
     cast(GCallback)&_ccallback, freezeDelegate(cast(void*)&callback), &thawDelegate, _getGType);
 
     return new Value(cast(void*)funcVal, Yes.Take);
@@ -236,7 +236,7 @@ class Value : gobject.object.ObjectWrap
     JSCValue* _cretval;
     const(char)*[] _tmpstrv;
     foreach (s; strv)
-      _tmpstrv ~= s.toCString(No.Alloc);
+      _tmpstrv ~= s.toCString;
     _tmpstrv ~= null;
     const(char*)* _strv = _tmpstrv.ptr;
 
@@ -272,7 +272,7 @@ class Value : gobject.object.ObjectWrap
   static javascriptcore.value.Value newFromJson(javascriptcore.context.Context context, string json) nothrow
   {
     JSCValue* _cretval;
-    const(char)* _json = json.toCString(No.Alloc);
+    const(char)* _json = json.toCString!(No.Malloc, No.Nullable);
     _cretval = jsc_value_new_from_json(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _json);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -375,7 +375,7 @@ class Value : gobject.object.ObjectWrap
   static javascriptcore.value.Value newString(javascriptcore.context.Context context, string string_ = null) nothrow
   {
     JSCValue* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = jsc_value_new_string(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _string_);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -677,7 +677,7 @@ class Value : gobject.object.ObjectWrap
   */
   void objectDefinePropertyData(string propertyName, javascriptcore.types.ValuePropertyFlags flags, javascriptcore.value.Value propertyValue = null) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     jsc_value_object_define_property_data(cast(JSCValue*)this._cPtr, _propertyName, flags, propertyValue ? cast(JSCValue*)propertyValue._cPtr(No.Dup) : null);
   }
 
@@ -692,7 +692,7 @@ class Value : gobject.object.ObjectWrap
   bool objectDeleteProperty(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)jsc_value_object_delete_property(cast(JSCValue*)this._cPtr, _name);
     return _retval;
   }
@@ -716,7 +716,7 @@ class Value : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -732,7 +732,7 @@ class Value : gobject.object.ObjectWrap
   javascriptcore.value.Value objectGetProperty(string name) nothrow
   {
     JSCValue* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = jsc_value_object_get_property(cast(JSCValue*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -763,7 +763,7 @@ class Value : gobject.object.ObjectWrap
   bool objectHasProperty(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)jsc_value_object_has_property(cast(JSCValue*)this._cPtr, _name);
     return _retval;
   }
@@ -786,7 +786,7 @@ class Value : gobject.object.ObjectWrap
   javascriptcore.value.Value objectInvokeMethod(string name, javascriptcore.value.Value[] parameters = null) nothrow
   {
     JSCValue* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     uint _nParameters;
     if (parameters)
       _nParameters = cast(uint)parameters.length;
@@ -811,7 +811,7 @@ class Value : gobject.object.ObjectWrap
   bool objectIsInstanceOf(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)jsc_value_object_is_instance_of(cast(JSCValue*)this._cPtr, _name);
     return _retval;
   }
@@ -825,7 +825,7 @@ class Value : gobject.object.ObjectWrap
   */
   void objectSetProperty(string name, javascriptcore.value.Value property) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     jsc_value_object_set_property(cast(JSCValue*)this._cPtr, _name, property ? cast(JSCValue*)property._cPtr(No.Dup) : null);
   }
 
@@ -886,7 +886,7 @@ class Value : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = jsc_value_to_json(cast(JSCValue*)this._cPtr, indent);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -899,7 +899,7 @@ class Value : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = jsc_value_to_string(cast(JSCValue*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1054,7 +1054,7 @@ static T getJsVal(T)(JSCValue* jsval) nothrow
   else static if (is(T == double))
     return jsc_value_to_double(jsval);
   else static if (is(T == string))
-    return jsc_value_to_string(jsval).fromCString(Yes.Free);
+    return jsc_value_to_string(jsval).fromCString!(Yes.Free);
   else static if (is(T == Value))
     return gobject.object.ObjectWrap._getDObject!Value(jsval, No.Take);
   else static if (is(T == U[], U))
@@ -1093,7 +1093,7 @@ static T getJsVal(T)(JSCValue* jsval) nothrow
     {
       auto v = jsc_value_object_get_property(jsval, propNames[i]);
       scope(exit) if (v) g_object_unref(cast(GObject*)v);
-      obj[propNames[i].fromCString(No.Free)] = getJsVal!U(v); // Free the individual strings
+      obj[propNames[i].fromCString] = getJsVal!U(v); // Free the individual strings
     }
 
     return obj;
@@ -1117,7 +1117,7 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val) nothrow
   else static if (isNumeric!T)
     return jsc_value_new_number(ctx, val);
   else static if (is(T == string))
-    return jsc_value_new_string(ctx, val.toCString(No.Alloc));
+    return jsc_value_new_string(ctx, val.toCString);
   else static if (is(T == Value))
     return cast(JSCValue*)g_object_ref(cast(GObject*)val._cPtr);
   else static if (is(T == U[], U))
@@ -1141,7 +1141,7 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val) nothrow
     {
       auto itemVal = createJsVal(ctx, v);
       scope(exit) if (itemVal) g_object_unref(cast(GObject*)itemVal);
-      jsc_value_object_set_property(obj, k.toCString(No.Alloc), itemVal);
+      jsc_value_object_set_property(obj, k.toCString, itemVal);
     }
 
     return obj;

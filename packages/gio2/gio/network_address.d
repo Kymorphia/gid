@@ -108,7 +108,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   this(string hostname, ushort port) nothrow
   {
     GSocketConnectable* _cretval;
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
     _cretval = g_network_address_new(_hostname, port);
     this(_cretval, Yes.Take);
   }
@@ -172,7 +172,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   static gio.network_address.NetworkAddress parse(string hostAndPort, ushort defaultPort)
   {
     GSocketConnectable* _cretval;
-    const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
+    const(char)* _hostAndPort = hostAndPort.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_network_address_parse(_hostAndPort, defaultPort, &_err);
     if (_err)
@@ -199,7 +199,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   static gio.network_address.NetworkAddress parseUri(string uri, ushort defaultPort)
   {
     GSocketConnectable* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_network_address_parse_uri(_uri, defaultPort, &_err);
     if (_err)
@@ -217,7 +217,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_hostname(cast(GNetworkAddress*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_scheme(cast(GNetworkAddress*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

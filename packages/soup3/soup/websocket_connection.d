@@ -211,7 +211,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   void close(ushort code, string data = null) nothrow
   {
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString!(No.Malloc, Yes.Nullable);
     soup_websocket_connection_close(cast(SoupWebsocketConnection*)this._cPtr, code, _data);
   }
 
@@ -243,7 +243,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_close_data(cast(SoupWebsocketConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -313,7 +313,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_origin(cast(SoupWebsocketConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_protocol(cast(SoupWebsocketConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   void sendText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     soup_websocket_connection_send_text(cast(SoupWebsocketConnection*)this._cPtr, _text);
   }
 

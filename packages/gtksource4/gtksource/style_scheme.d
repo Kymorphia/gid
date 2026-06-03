@@ -99,7 +99,7 @@ class StyleScheme : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -109,7 +109,7 @@ class StyleScheme : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_description(cast(GtkSourceStyleScheme*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class StyleScheme : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_filename(cast(GtkSourceStyleScheme*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class StyleScheme : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_id(cast(GtkSourceStyleScheme*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class StyleScheme : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_name(cast(GtkSourceStyleScheme*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class StyleScheme : gobject.object.ObjectWrap
   gtksource.style.Style getStyle(string styleId) nothrow
   {
     GtkSourceStyle* _cretval;
-    const(char)* _styleId = styleId.toCString(No.Alloc);
+    const(char)* _styleId = styleId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_style_scheme_get_style(cast(GtkSourceStyleScheme*)this._cPtr, _styleId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
     return _retval;

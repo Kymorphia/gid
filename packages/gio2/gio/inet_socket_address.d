@@ -123,7 +123,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   static gio.inet_socket_address.InetSocketAddress newFromString(string address, uint port) nothrow
   {
     GSocketAddress* _cretval;
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
     _cretval = g_inet_socket_address_new_from_string(_address, port);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;

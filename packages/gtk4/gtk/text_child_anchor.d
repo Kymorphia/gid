@@ -82,7 +82,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
   static gtk.text_child_anchor.TextChildAnchor newWithReplacement(string character) nothrow
   {
     GtkTextChildAnchor* _cretval;
-    const(char)* _character = character.toCString(No.Alloc);
+    const(char)* _character = character.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_text_child_anchor_new_with_replacement(_character);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
     return _retval;

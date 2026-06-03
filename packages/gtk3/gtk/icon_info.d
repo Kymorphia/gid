@@ -168,7 +168,7 @@ class IconInfo : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_icon_info_get_display_name(cast(GtkIconInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class IconInfo : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_icon_info_get_filename(cast(GtkIconInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

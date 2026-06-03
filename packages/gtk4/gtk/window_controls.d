@@ -183,7 +183,7 @@ class WindowControls : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_window_controls_get_decoration_layout(cast(GtkWindowControls*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class WindowControls : gtk.widget.Widget
   */
   void setDecorationLayout(string layout = null) nothrow
   {
-    const(char)* _layout = layout.toCString(No.Alloc);
+    const(char)* _layout = layout.toCString!(No.Malloc, Yes.Nullable);
     gtk_window_controls_set_decoration_layout(cast(GtkWindowControls*)this._cPtr, _layout);
   }
 

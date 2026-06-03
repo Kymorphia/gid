@@ -349,7 +349,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   */
   void addAttribute(gtk.cell_renderer.CellRenderer cellRenderer, string attribute, int column) nothrow
   {
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     gtk_tree_view_column_add_attribute(cast(GtkTreeViewColumn*)this._cPtr, cellRenderer ? cast(GtkCellRenderer*)cellRenderer._cPtr(No.Dup) : null, _attribute, column);
   }
 
@@ -679,7 +679,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   {
     const(char)* _cretval;
     _cretval = gtk_tree_view_column_get_title(cast(GtkTreeViewColumn*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1059,7 +1059,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_tree_view_column_set_title(cast(GtkTreeViewColumn*)this._cPtr, _title);
   }
 

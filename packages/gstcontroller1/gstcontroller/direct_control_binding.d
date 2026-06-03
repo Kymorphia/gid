@@ -89,7 +89,7 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs) nothrow
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_direct_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
@@ -108,7 +108,7 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   static gstcontroller.direct_control_binding.DirectControlBinding newAbsolute(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs) nothrow
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_direct_control_binding_new_absolute(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.Take);
     return _retval;

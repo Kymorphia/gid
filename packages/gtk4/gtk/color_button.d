@@ -203,7 +203,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   {
     const(char)* _cretval;
     _cretval = gtk_color_button_get_title(cast(GtkColorButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_color_button_set_title(cast(GtkColorButton*)this._cPtr, _title);
   }
 

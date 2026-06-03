@@ -192,7 +192,7 @@ class RecentManager : gobject.object.ObjectWrap
   bool addFull(string uri, gtk.recent_data.RecentData recentData) nothrow
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_recent_manager_add_full(cast(GtkRecentManager*)this._cPtr, _uri, recentData ? cast(const(GtkRecentData)*)recentData._cPtr : null);
     return _retval;
   }
@@ -216,7 +216,7 @@ class RecentManager : gobject.object.ObjectWrap
   bool addItem(string uri) nothrow
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_recent_manager_add_item(cast(GtkRecentManager*)this._cPtr, _uri);
     return _retval;
   }
@@ -247,7 +247,7 @@ class RecentManager : gobject.object.ObjectWrap
   bool hasItem(string uri) nothrow
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_recent_manager_has_item(cast(GtkRecentManager*)this._cPtr, _uri);
     return _retval;
   }
@@ -268,7 +268,7 @@ class RecentManager : gobject.object.ObjectWrap
   gtk.recent_info.RecentInfo lookupItem(string uri)
   {
     GtkRecentInfo* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
     if (_err)
@@ -293,8 +293,8 @@ class RecentManager : gobject.object.ObjectWrap
   bool moveItem(string uri, string newUri = null)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
-    const(char)* _newUri = newUri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    const(char)* _newUri = newUri.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_recent_manager_move_item(cast(GtkRecentManager*)this._cPtr, _uri, _newUri, &_err);
     if (_err)
@@ -331,7 +331,7 @@ class RecentManager : gobject.object.ObjectWrap
   bool removeItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_recent_manager_remove_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
     if (_err)

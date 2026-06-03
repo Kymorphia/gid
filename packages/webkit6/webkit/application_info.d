@@ -67,7 +67,7 @@ class ApplicationInfo : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_application_info_get_name(cast(WebKitApplicationInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class ApplicationInfo : gobject.boxed.Boxed
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     webkit_application_info_set_name(cast(WebKitApplicationInfo*)this._cPtr, _name);
   }
 

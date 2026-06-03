@@ -199,7 +199,7 @@ class StringFilter : gtk.filter.Filter
   {
     const(char)* _cretval;
     _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class StringFilter : gtk.filter.Filter
   */
   void setSearch(string search = null) nothrow
   {
-    const(char)* _search = search.toCString(No.Alloc);
+    const(char)* _search = search.toCString!(No.Malloc, Yes.Nullable);
     gtk_string_filter_set_search(cast(GtkStringFilter*)this._cPtr, _search);
   }
 }

@@ -132,7 +132,7 @@ class RTCPPacket
   {
     const(char)* _cretval;
     _cretval = gst_rtcp_packet_app_get_name(cast(GstRTCPPacket*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class RTCPPacket
   */
   void appSetName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gst_rtcp_packet_app_set_name(cast(GstRTCPPacket*)this._cPtr, _name);
   }
 
@@ -268,7 +268,7 @@ class RTCPPacket
   {
     char* _cretval;
     _cretval = gst_rtcp_packet_bye_get_reason(cast(GstRTCPPacket*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class RTCPPacket
   bool byeSetReason(string reason) nothrow
   {
     bool _retval;
-    const(char)* _reason = reason.toCString(No.Alloc);
+    const(char)* _reason = reason.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_rtcp_packet_bye_set_reason(cast(GstRTCPPacket*)this._cPtr, _reason);
     return _retval;
   }

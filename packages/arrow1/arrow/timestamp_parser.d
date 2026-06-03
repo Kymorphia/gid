@@ -52,7 +52,7 @@ class TimestampParser : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = garrow_timestamp_parser_get_kind(cast(GArrowTimestampParser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

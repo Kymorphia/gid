@@ -233,7 +233,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   static gtk.menu_item.MenuItem newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_menu_item_new_with_label(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -253,7 +253,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   static gtk.menu_item.MenuItem newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_menu_item_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -288,7 +288,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   {
     const(char)* _cretval;
     _cretval = gtk_menu_item_get_accel_path(cast(GtkMenuItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   {
     const(char)* _cretval;
     _cretval = gtk_menu_item_get_label(cast(GtkMenuItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -397,7 +397,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setAccelPath(string accelPath = null) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, Yes.Nullable);
     gtk_menu_item_set_accel_path(cast(GtkMenuItem*)this._cPtr, _accelPath);
   }
 
@@ -409,7 +409,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     gtk_menu_item_set_label(cast(GtkMenuItem*)this._cPtr, _label);
   }
 

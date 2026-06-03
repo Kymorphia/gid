@@ -158,7 +158,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   uint addFilter(string classes = null, gst.caps.Caps caps = null) nothrow
   {
     uint _retval;
-    const(char)* _classes = classes.toCString(No.Alloc);
+    const(char)* _classes = classes.toCString!(No.Malloc, Yes.Nullable);
     _retval = gst_device_monitor_add_filter(cast(GstDeviceMonitor*)this._cPtr, _classes, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -209,7 +209,7 @@ class DeviceMonitor : gst.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;

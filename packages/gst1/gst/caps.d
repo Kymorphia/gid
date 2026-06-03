@@ -138,7 +138,7 @@ class Caps : gobject.boxed.Boxed
   static gst.caps.Caps newEmptySimple(string mediaType) nothrow
   {
     GstCaps* _cretval;
-    const(char)* _mediaType = mediaType.toCString(No.Alloc);
+    const(char)* _mediaType = mediaType.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_caps_new_empty_simple(_mediaType);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -692,7 +692,7 @@ class Caps : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_caps_serialize(cast(const(GstCaps)*)this._cPtr, flags);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -730,7 +730,7 @@ class Caps : gobject.boxed.Boxed
   */
   void setValue(string field, gobject.value.Value value) nothrow
   {
-    const(char)* _field = field.toCString(No.Alloc);
+    const(char)* _field = field.toCString!(No.Malloc, No.Nullable);
     gst_caps_set_value(cast(GstCaps*)this._cPtr, _field, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -809,7 +809,7 @@ class Caps : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_caps_to_string(cast(const(GstCaps)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -847,7 +847,7 @@ class Caps : gobject.boxed.Boxed
   static gst.caps.Caps fromString(string string_) nothrow
   {
     GstCaps* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_caps_from_string(_string_);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

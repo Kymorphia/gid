@@ -22,7 +22,7 @@ struct RelationType
   static atk.types.RelationType forName(string name) nothrow
   {
     AtkRelationType _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_relation_type_for_name(_name);
     atk.types.RelationType _retval = cast(atk.types.RelationType)_cretval;
     return _retval;
@@ -39,7 +39,7 @@ struct RelationType
   {
     const(char)* _cretval;
     _cretval = atk_relation_type_get_name(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -53,7 +53,7 @@ struct RelationType
   static atk.types.RelationType register(string name) nothrow
   {
     AtkRelationType _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_relation_type_register(_name);
     atk.types.RelationType _retval = cast(atk.types.RelationType)_cretval;
     return _retval;

@@ -179,7 +179,7 @@ class Pad : gst.object.ObjectWrap
   this(string name, gst.types.PadDirection direction) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_pad_new(_name, direction);
     this(_cretval, No.Take);
   }
@@ -198,7 +198,7 @@ class Pad : gst.object.ObjectWrap
   static gst.pad.Pad newFromStaticTemplate(gst.static_pad_template.StaticPadTemplate templ, string name) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_pad_new_from_static_template(templ ? cast(GstStaticPadTemplate*)templ._cPtr : null, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
@@ -218,7 +218,7 @@ class Pad : gst.object.ObjectWrap
   static gst.pad.Pad newFromTemplate(gst.pad_template.PadTemplate templ, string name = null) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_pad_new_from_template(templ ? cast(GstPadTemplate*)templ._cPtr(No.Dup) : null, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
@@ -235,7 +235,7 @@ class Pad : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_pad_link_get_name(ret);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -425,9 +425,9 @@ class Pad : gst.object.ObjectWrap
   string createStreamId(gst.element.Element parent, string streamId = null) nothrow
   {
     char* _cretval;
-    const(char)* _streamId = streamId.toCString(No.Alloc);
+    const(char)* _streamId = streamId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_pad_create_stream_id(cast(GstPad*)this._cPtr, parent ? cast(GstElement*)parent._cPtr(No.Dup) : null, _streamId);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -749,7 +749,7 @@ class Pad : gst.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gst_pad_get_stream_id(cast(GstPad*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

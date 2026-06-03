@@ -468,8 +468,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newProtection(string systemId, gst.buffer.Buffer data, string origin) nothrow
   {
     GstEvent* _cretval;
-    const(char)* _systemId = systemId.toCString(No.Alloc);
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _systemId = systemId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_event_new_protection(_systemId, data ? cast(GstBuffer*)data._cPtr(No.Dup) : null, _origin);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -704,7 +704,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newSinkMessage(string name, gst.message.Message msg) nothrow
   {
     GstEvent* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_event_new_sink_message(_name, msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -816,7 +816,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newStreamStart(string streamId) nothrow
   {
     GstEvent* _cretval;
-    const(char)* _streamId = streamId.toCString(No.Alloc);
+    const(char)* _streamId = streamId.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_event_new_stream_start(_streamId);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -873,7 +873,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newTocSelect(string uid) nothrow
   {
     GstEvent* _cretval;
-    const(char)* _uid = uid.toCString(No.Alloc);
+    const(char)* _uid = uid.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_event_new_toc_select(_uid);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -963,7 +963,7 @@ class Event : gobject.boxed.Boxed
   bool hasName(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_event_has_name(cast(GstEvent*)this._cPtr, _name);
     return _retval;
   }
@@ -1121,9 +1121,9 @@ class Event : gobject.boxed.Boxed
     GstBuffer* _data;
     char* _origin;
     gst_event_parse_protection(cast(GstEvent*)this._cPtr, &_systemId, &_data, &_origin);
-    systemId = _systemId.fromCString(No.Free);
+    systemId = _systemId.fromCString!(No.Free);
     data = new gst.buffer.Buffer(cast(void*)_data, No.Take);
-    origin = _origin.fromCString(No.Free);
+    origin = _origin.fromCString!(No.Free);
   }
 
   /**
@@ -1302,7 +1302,7 @@ class Event : gobject.boxed.Boxed
   {
     char* _streamId;
     gst_event_parse_stream_start(cast(GstEvent*)this._cPtr, &_streamId);
-    streamId = _streamId.fromCString(No.Free);
+    streamId = _streamId.fromCString!(No.Free);
   }
 
   /**
@@ -1347,7 +1347,7 @@ class Event : gobject.boxed.Boxed
   {
     char* _uid;
     gst_event_parse_toc_select(cast(GstEvent*)this._cPtr, &_uid);
-    uid = _uid.fromCString(Yes.Free);
+    uid = _uid.fromCString!(Yes.Free);
   }
 
   /**

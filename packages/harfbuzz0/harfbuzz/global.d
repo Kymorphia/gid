@@ -161,7 +161,7 @@ harfbuzz.blob.Blob blobCopyWritableOrFail(harfbuzz.blob.Blob blob) nothrow
 harfbuzz.blob.Blob blobCreateFromFile(string fileName) nothrow
 {
   hb_blob_t* _cretval;
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   _cretval = hb_blob_create_from_file(_fileName);
   auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -179,7 +179,7 @@ harfbuzz.blob.Blob blobCreateFromFile(string fileName) nothrow
 harfbuzz.blob.Blob blobCreateFromFileOrFail(string fileName) nothrow
 {
   hb_blob_t* _cretval;
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   _cretval = hb_blob_create_from_file_or_fail(_fileName);
   auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -553,7 +553,7 @@ harfbuzz.types.Bool bufferDeserializeGlyphs(harfbuzz.buffer.Buffer buffer, strin
   auto _buf = buf.ptr ? cast(const(char)*)buf.ptr : [char.init].ptr;
   char* _endPtr;
   _retval = hb_buffer_deserialize_glyphs(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _buf, _bufLen, &_endPtr, font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, format);
-  endPtr = _endPtr.fromCString(Yes.Free);
+  endPtr = _endPtr.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -580,7 +580,7 @@ harfbuzz.types.Bool bufferDeserializeUnicode(harfbuzz.buffer.Buffer buffer, stri
   auto _buf = buf.ptr ? cast(const(char)*)buf.ptr : [char.init].ptr;
   char* _endPtr;
   _retval = hb_buffer_deserialize_unicode(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _buf, _bufLen, &_endPtr, format);
-  endPtr = _endPtr.fromCString(Yes.Free);
+  endPtr = _endPtr.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1008,7 +1008,7 @@ string bufferSerializeFormatToString(harfbuzz.types.BufferSerializeFormat format
 {
   const(char)* _cretval;
   _cretval = hb_buffer_serialize_format_to_string(format);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1029,7 +1029,7 @@ string[] bufferSerializeListFormats() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -1181,7 +1181,7 @@ void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMe
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.BufferMessageFunc*)userData;
-    string _message = message.fromCString(No.Free);
+    string _message = message.fromCString!(No.Free);
 
     try
     {
@@ -1408,7 +1408,7 @@ string directionToString(harfbuzz.types.Direction direction) nothrow
 {
   const(char)* _cretval;
   _cretval = hb_direction_to_string(direction);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2535,7 +2535,7 @@ void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
     }
     auto _retval = cast(hb_bool_t)_dretval;
     size = cast(uint)_name.length;
-    name = arrayDtoC!(char, Yes.Alloc, No.ZeroTerm)(_name);
+    name = arrayDtoC!(char, Yes.Malloc, No.ZeroTerm)(_name);
 
     return _retval;
   }
@@ -4017,7 +4017,7 @@ string languageToString(harfbuzz.types.Language language) nothrow
 {
   const(char)* _cretval;
   _cretval = hb_language_to_string(language);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -7158,7 +7158,7 @@ harfbuzz.types.Bool shapeFull(harfbuzz.font.Font font, harfbuzz.buffer.Buffer bu
   auto _features = features.ptr ? cast(const(hb_feature_t)*)features.ptr : [hb_feature_t.init].ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.Alloc);
+    _tmpshaperList ~= s.toCString;
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
 
@@ -7205,7 +7205,7 @@ harfbuzz.types.Bool shapeJustify(harfbuzz.font.Font font, harfbuzz.buffer.Buffer
   auto _features = features.ptr ? cast(const(hb_feature_t)*)features.ptr : [hb_feature_t.init].ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.Alloc);
+    _tmpshaperList ~= s.toCString;
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
 
@@ -7231,7 +7231,7 @@ string[] shapeListShapers() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -7257,7 +7257,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate(harfbuzz.face.Face face, harfbuzz.
   auto _userFeatures = userFeatures.ptr ? cast(const(hb_feature_t)*)userFeatures.ptr : [hb_feature_t.init].ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.Alloc);
+    _tmpshaperList ~= s.toCString;
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
 
@@ -7294,7 +7294,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate2(harfbuzz.face.Face face, harfbuzz
   auto _coords = coords.ptr ? cast(const(int)*)coords.ptr : [int.init].ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.Alloc);
+    _tmpshaperList ~= s.toCString;
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
 
@@ -7324,7 +7324,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached(harfbuzz.face.Face face, har
   auto _userFeatures = userFeatures.ptr ? cast(const(hb_feature_t)*)userFeatures.ptr : [hb_feature_t.init].ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.Alloc);
+    _tmpshaperList ~= s.toCString;
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
 
@@ -7362,7 +7362,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached2(harfbuzz.face.Face face, ha
   auto _coords = coords.ptr ? cast(const(int)*)coords.ptr : [int.init].ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.Alloc);
+    _tmpshaperList ~= s.toCString;
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
 
@@ -7417,7 +7417,7 @@ string shapePlanGetShaper(harfbuzz.shape_plan.ShapePlan shapePlan) nothrow
 {
   const(char)* _cretval;
   _cretval = hb_shape_plan_get_shaper(shapePlan ? cast(hb_shape_plan_t*)shapePlan._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 

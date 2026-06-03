@@ -58,7 +58,7 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
   this(string basePath, arrow.file_system.FileSystem baseFileSystem) nothrow
   {
     GArrowSubTreeFileSystem* _cretval;
-    const(char)* _basePath = basePath.toCString(No.Alloc);
+    const(char)* _basePath = basePath.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_sub_tree_file_system_new(_basePath, baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }

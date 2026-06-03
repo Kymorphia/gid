@@ -156,7 +156,7 @@ string getToolkitName() nothrow
 {
   const(char)* _cretval;
   _cretval = atk_get_toolkit_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -168,7 +168,7 @@ string getToolkitVersion() nothrow
 {
   const(char)* _cretval;
   _cretval = atk_get_toolkit_version();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -180,7 +180,7 @@ string getVersion() nothrow
 {
   const(char)* _cretval;
   _cretval = atk_get_version();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 

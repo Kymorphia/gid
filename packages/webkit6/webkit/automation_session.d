@@ -90,7 +90,7 @@ class AutomationSession : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_automation_session_get_id(cast(WebKitAutomationSession*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

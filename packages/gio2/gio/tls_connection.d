@@ -386,7 +386,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     char* _cretval;
     _cretval = g_tls_connection_get_ciphersuite_name(cast(GTlsConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     const(char)* _cretval;
     _cretval = g_tls_connection_get_negotiated_protocol(cast(GTlsConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -643,7 +643,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.Alloc);
+      _tmpprotocols ~= s.toCString;
     _tmpprotocols ~= null;
     const(char*)* _protocols = _tmpprotocols.ptr;
 

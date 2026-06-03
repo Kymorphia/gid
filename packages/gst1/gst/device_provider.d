@@ -79,7 +79,7 @@ class DeviceProvider : gst.object.ObjectWrap
   static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_device_provider_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
     return _retval;
   }
@@ -200,7 +200,7 @@ class DeviceProvider : gst.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -216,9 +216,9 @@ class DeviceProvider : gst.object.ObjectWrap
   string getMetadata(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_device_provider_get_metadata(cast(GstDeviceProvider*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class DeviceProvider : gst.object.ObjectWrap
   */
   void hideProvider(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gst_device_provider_hide_provider(cast(GstDeviceProvider*)this._cPtr, _name);
   }
 
@@ -294,7 +294,7 @@ class DeviceProvider : gst.object.ObjectWrap
   */
   void unhideProvider(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gst_device_provider_unhide_provider(cast(GstDeviceProvider*)this._cPtr, _name);
   }
 

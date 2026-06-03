@@ -83,7 +83,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
   static gmime.autocrypt_header.AutocryptHeader newFromString(string string_) nothrow
   {
     GMimeAutocryptHeader* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_autocrypt_header_new_from_string(_string_);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.autocrypt_header.AutocryptHeader)(cast(GMimeAutocryptHeader*)_cretval, Yes.Take);
     return _retval;
@@ -141,7 +141,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_autocrypt_header_get_address_as_string(cast(GMimeAutocryptHeader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
   */
   void setAddressFromString(string address) nothrow
   {
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
     g_mime_autocrypt_header_set_address_from_string(cast(GMimeAutocryptHeader*)this._cPtr, _address);
   }
 
@@ -271,7 +271,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_mime_autocrypt_header_to_string(cast(GMimeAutocryptHeader*)this._cPtr, gossip);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

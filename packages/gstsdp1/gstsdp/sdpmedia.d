@@ -153,8 +153,8 @@ class SDPMedia
   gstsdp.types.SDPResult addAttribute(string key, string value = null) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_sdp_media_add_attribute(cast(GstSDPMedia*)this._cPtr, _key, _value);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -171,7 +171,7 @@ class SDPMedia
   gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _bwtype = bwtype.toCString(No.Alloc);
+    const(char)* _bwtype = bwtype.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_add_bandwidth(cast(GstSDPMedia*)this._cPtr, _bwtype, bandwidth);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -192,9 +192,9 @@ class SDPMedia
   gstsdp.types.SDPResult addConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _nettype = nettype.toCString(No.Alloc);
-    const(char)* _addrtype = addrtype.toCString(No.Alloc);
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _nettype = nettype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _addrtype = addrtype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_add_connection(cast(GstSDPMedia*)this._cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -210,7 +210,7 @@ class SDPMedia
   gstsdp.types.SDPResult addFormat(string format) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_add_format(cast(GstSDPMedia*)this._cPtr, _format);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -224,7 +224,7 @@ class SDPMedia
   {
     char* _cretval;
     _cretval = gst_sdp_media_as_text(cast(const(GstSDPMedia)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -330,9 +330,9 @@ class SDPMedia
   string getAttributeVal(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_get_attribute_val(cast(const(GstSDPMedia)*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -347,9 +347,9 @@ class SDPMedia
   string getAttributeValN(string key, uint nth) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_get_attribute_val_n(cast(const(GstSDPMedia)*)this._cPtr, _key, nth);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ class SDPMedia
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_format(cast(const(GstSDPMedia)*)this._cPtr, idx);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class SDPMedia
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_information(cast(const(GstSDPMedia)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ class SDPMedia
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_media(cast(const(GstSDPMedia)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -487,7 +487,7 @@ class SDPMedia
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_proto(cast(const(GstSDPMedia)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -554,7 +554,7 @@ class SDPMedia
   gstsdp.types.SDPResult insertFormat(int idx, string format) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_insert_format(cast(GstSDPMedia*)this._cPtr, idx, _format);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -697,7 +697,7 @@ class SDPMedia
   gstsdp.types.SDPResult replaceFormat(uint idx, string format) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_replace_format(cast(GstSDPMedia*)this._cPtr, idx, _format);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -713,7 +713,7 @@ class SDPMedia
   gstsdp.types.SDPResult setInformation(string information) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _information = information.toCString(No.Alloc);
+    const(char)* _information = information.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_set_information(cast(GstSDPMedia*)this._cPtr, _information);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -730,8 +730,8 @@ class SDPMedia
   gstsdp.types.SDPResult setKey(string type, string data) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _type = type.toCString(No.Alloc);
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+    const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_set_key(cast(GstSDPMedia*)this._cPtr, _type, _data);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -747,7 +747,7 @@ class SDPMedia
   gstsdp.types.SDPResult setMedia(string med) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _med = med.toCString(No.Alloc);
+    const(char)* _med = med.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_set_media(cast(GstSDPMedia*)this._cPtr, _med);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -779,7 +779,7 @@ class SDPMedia
   gstsdp.types.SDPResult setProto(string proto) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _proto = proto.toCString(No.Alloc);
+    const(char)* _proto = proto.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_media_set_proto(cast(GstSDPMedia*)this._cPtr, _proto);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

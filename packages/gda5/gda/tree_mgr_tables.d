@@ -83,7 +83,7 @@ class TreeMgrTables : gda.tree_manager.TreeManager
   this(gda.connection.Connection cnc, string schema = null) nothrow
   {
     GdaTreeManager* _cretval;
-    const(char)* _schema = schema.toCString(No.Alloc);
+    const(char)* _schema = schema.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gda_tree_mgr_tables_new(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _schema);
     this(_cretval, Yes.Take);
   }

@@ -90,7 +90,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   static gst.element_factory.ElementFactory find(string name) nothrow
   {
     GstElementFactory* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_factory_find(_name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, Yes.Take);
     return _retval;
@@ -160,8 +160,8 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   static gst.element.Element make(string factoryname, string name = null) nothrow
   {
     GstElement* _cretval;
-    const(char)* _factoryname = factoryname.toCString(No.Alloc);
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _factoryname = factoryname.toCString!(No.Malloc, No.Nullable);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_element_factory_make(_factoryname, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
@@ -181,14 +181,14 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   static gst.element.Element makeWithProperties(string factoryname, string[] names = null, gobject.value.Value[] values = null) nothrow
   {
     GstElement* _cretval;
-    const(char)* _factoryname = factoryname.toCString(No.Alloc);
+    const(char)* _factoryname = factoryname.toCString!(No.Malloc, No.Nullable);
     uint _n;
     if (names)
       _n = cast(uint)names.length;
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString;
     const(char*)* _names = _tmpnames.ptr;
 
     if (values)
@@ -274,7 +274,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   gst.element.Element create(string name = null) nothrow
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_element_factory_create(cast(GstElementFactory*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
@@ -299,7 +299,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString;
     const(char*)* _names = _tmpnames.ptr;
 
     if (values)
@@ -340,9 +340,9 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   string getMetadata(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_element_factory_get_metadata(cast(GstElementFactory*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -364,7 +364,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -414,7 +414,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -441,7 +441,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool hasInterface(string interfacename) nothrow
   {
     bool _retval;
-    const(char)* _interfacename = interfacename.toCString(No.Alloc);
+    const(char)* _interfacename = interfacename.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_element_factory_has_interface(cast(GstElementFactory*)this._cPtr, _interfacename);
     return _retval;
   }

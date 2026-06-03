@@ -212,7 +212,7 @@ template VolumeT()
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -298,9 +298,9 @@ template VolumeT()
   override string getIdentifier(string kind) nothrow
   {
     char* _cretval;
-    const(char)* _kind = kind.toCString(No.Alloc);
+    const(char)* _kind = kind.toCString!(No.Malloc, No.Nullable);
     _cretval = g_volume_get_identifier(cast(GVolume*)this._cPtr, _kind);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ template VolumeT()
   {
     char* _cretval;
     _cretval = g_volume_get_name(cast(GVolume*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ template VolumeT()
   {
     const(char)* _cretval;
     _cretval = g_volume_get_sort_key(cast(GVolume*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ template VolumeT()
   {
     char* _cretval;
     _cretval = g_volume_get_uuid(cast(GVolume*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

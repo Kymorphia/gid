@@ -158,7 +158,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -253,7 +253,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_info_get_uri(cast(const(GstDiscovererInfo)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -209,7 +209,7 @@ class Path : gobject.object.ObjectWrap
   static json.node.Node query(string expression, json.node.Node root)
   {
     JsonNode* _cretval;
-    const(char)* _expression = expression.toCString(No.Alloc);
+    const(char)* _expression = expression.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = json_path_query(_expression, root ? cast(JsonNode*)root._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -233,7 +233,7 @@ class Path : gobject.object.ObjectWrap
   bool compile(string expression)
   {
     bool _retval;
-    const(char)* _expression = expression.toCString(No.Alloc);
+    const(char)* _expression = expression.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)json_path_compile(cast(JsonPath*)this._cPtr, _expression, &_err);
     if (_err)

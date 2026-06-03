@@ -67,7 +67,7 @@ class FileSystem : gobject.object.ObjectWrap
   static arrow.file_system.FileSystem create(string uri)
   {
     GArrowFileSystem* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_file_system_create(_uri, &_err);
     if (_err)
@@ -90,8 +90,8 @@ class FileSystem : gobject.object.ObjectWrap
   bool copyFile(string src, string dest)
   {
     bool _retval;
-    const(char)* _src = src.toCString(No.Alloc);
-    const(char)* _dest = dest.toCString(No.Alloc);
+    const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
+    const(char)* _dest = dest.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_file_system_copy_file(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
     if (_err)
@@ -112,7 +112,7 @@ class FileSystem : gobject.object.ObjectWrap
   bool createDir(string path, bool recursive)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_file_system_create_dir(cast(GArrowFileSystem*)this._cPtr, _path, recursive, &_err);
     if (_err)
@@ -131,7 +131,7 @@ class FileSystem : gobject.object.ObjectWrap
   bool deleteDir(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_file_system_delete_dir(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
@@ -153,7 +153,7 @@ class FileSystem : gobject.object.ObjectWrap
   bool deleteDirContents(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_file_system_delete_dir_contents(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
@@ -172,7 +172,7 @@ class FileSystem : gobject.object.ObjectWrap
   bool deleteFile(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_file_system_delete_file(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
@@ -197,7 +197,7 @@ class FileSystem : gobject.object.ObjectWrap
 
     char*[] _tmppaths;
     foreach (s; paths)
-      _tmppaths ~= s.toCString(No.Alloc);
+      _tmppaths ~= s.toCString;
     const(char*)* _paths = _tmppaths.ptr;
 
     GError *_err;
@@ -224,7 +224,7 @@ class FileSystem : gobject.object.ObjectWrap
   arrow.file_info.FileInfo getFileInfo(string path)
   {
     GArrowFileInfo* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_file_system_get_file_info(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
@@ -251,7 +251,7 @@ class FileSystem : gobject.object.ObjectWrap
 
     char*[] _tmppaths;
     foreach (s; paths)
-      _tmppaths ~= s.toCString(No.Alloc);
+      _tmppaths ~= s.toCString;
     const(char*)* _paths = _tmppaths.ptr;
 
     GError *_err;
@@ -290,7 +290,7 @@ class FileSystem : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_file_system_get_type_name(cast(GArrowFileSystem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -310,8 +310,8 @@ class FileSystem : gobject.object.ObjectWrap
   bool move(string src, string dest)
   {
     bool _retval;
-    const(char)* _src = src.toCString(No.Alloc);
-    const(char)* _dest = dest.toCString(No.Alloc);
+    const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
+    const(char)* _dest = dest.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_file_system_move(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
     if (_err)
@@ -332,7 +332,7 @@ class FileSystem : gobject.object.ObjectWrap
   arrow.output_stream.OutputStream openAppendStream(string path)
   {
     GArrowOutputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_file_system_open_append_stream(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
@@ -353,7 +353,7 @@ class FileSystem : gobject.object.ObjectWrap
   arrow.seekable_input_stream.SeekableInputStream openInputFile(string path)
   {
     GArrowSeekableInputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_file_system_open_input_file(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
@@ -374,7 +374,7 @@ class FileSystem : gobject.object.ObjectWrap
   arrow.input_stream.InputStream openInputStream(string path)
   {
     GArrowInputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_file_system_open_input_stream(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
@@ -396,7 +396,7 @@ class FileSystem : gobject.object.ObjectWrap
   arrow.output_stream.OutputStream openOutputStream(string path)
   {
     GArrowOutputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_file_system_open_output_stream(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)

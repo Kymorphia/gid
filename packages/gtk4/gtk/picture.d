@@ -270,7 +270,7 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForFilename(string filename = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_picture_new_for_filename(_filename);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -330,7 +330,7 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForResource(string resourcePath = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_picture_new_for_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -346,7 +346,7 @@ class Picture : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_picture_get_alternative_text(cast(GtkPicture*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class Picture : gtk.widget.Widget
   */
   void setAlternativeText(string alternativeText = null) nothrow
   {
-    const(char)* _alternativeText = alternativeText.toCString(No.Alloc);
+    const(char)* _alternativeText = alternativeText.toCString!(No.Malloc, Yes.Nullable);
     gtk_picture_set_alternative_text(cast(GtkPicture*)this._cPtr, _alternativeText);
   }
 
@@ -491,7 +491,7 @@ class Picture : gtk.widget.Widget
   */
   void setFilename(string filename = null) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     gtk_picture_set_filename(cast(GtkPicture*)this._cPtr, _filename);
   }
 
@@ -561,7 +561,7 @@ class Picture : gtk.widget.Widget
   */
   void setResource(string resourcePath = null) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     gtk_picture_set_resource(cast(GtkPicture*)this._cPtr, _resourcePath);
   }
 }

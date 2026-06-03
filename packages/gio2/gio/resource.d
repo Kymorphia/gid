@@ -258,7 +258,7 @@ class Resource : gobject.boxed.Boxed
   string[] enumerateChildren(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     char** _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resource_enumerate_children(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
@@ -272,7 +272,7 @@ class Resource : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -297,7 +297,7 @@ class Resource : gobject.boxed.Boxed
   bool getInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_resource_get_info(cast(GResource*)this._cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
     if (_err)
@@ -331,7 +331,7 @@ class Resource : gobject.boxed.Boxed
   glib.bytes.Bytes lookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     GBytes* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resource_lookup_data(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
@@ -356,7 +356,7 @@ class Resource : gobject.boxed.Boxed
   gio.input_stream.InputStream openStream(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     GInputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resource_open_stream(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
@@ -385,7 +385,7 @@ class Resource : gobject.boxed.Boxed
   static gio.resource.Resource load(string filename)
   {
     GResource* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_resource_load(_filename, &_err);
     if (_err)

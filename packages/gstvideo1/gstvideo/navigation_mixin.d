@@ -112,8 +112,8 @@ template NavigationT()
   /** */
   override void sendKeyEvent(string event, string key) nothrow
   {
-    const(char)* _event = event.toCString(No.Alloc);
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _event = event.toCString!(No.Malloc, No.Nullable);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     gst_navigation_send_key_event(cast(GstNavigation*)this._cPtr, _event, _key);
   }
 
@@ -133,7 +133,7 @@ template NavigationT()
   */
   override void sendMouseEvent(string event, int button, double x, double y) nothrow
   {
-    const(char)* _event = event.toCString(No.Alloc);
+    const(char)* _event = event.toCString!(No.Malloc, No.Nullable);
     gst_navigation_send_mouse_event(cast(GstNavigation*)this._cPtr, _event, button, x, y);
   }
 

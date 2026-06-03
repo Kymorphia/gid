@@ -273,7 +273,7 @@ class VariantType : Boxed
   this(string typeString) nothrow
   {
     GVariantType* _cretval;
-    const(char)* _typeString = typeString.toCString(No.Alloc);
+    const(char)* _typeString = typeString.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_type_new(_typeString);
     this(_cretval, Yes.Take);
   }
@@ -397,7 +397,7 @@ class VariantType : Boxed
   {
     char* _cretval;
     _cretval = g_variant_type_dup_string(cast(const(GVariantType)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -753,7 +753,7 @@ class VariantType : Boxed
   static glib.variant_type.VariantType checked(string typeString) nothrow
   {
     const(GVariantType)* _cretval;
-    const(char)* _typeString = typeString.toCString(No.Alloc);
+    const(char)* _typeString = typeString.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_type_checked_(_typeString);
     auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -763,7 +763,7 @@ class VariantType : Boxed
   static size_t stringGetDepth(string typeString) nothrow
   {
     size_t _retval;
-    const(char)* _typeString = typeString.toCString(No.Alloc);
+    const(char)* _typeString = typeString.toCString!(No.Malloc, No.Nullable);
     _retval = g_variant_type_string_get_depth_(_typeString);
     return _retval;
   }
@@ -782,7 +782,7 @@ class VariantType : Boxed
   static bool stringIsValid(string typeString) nothrow
   {
     bool _retval;
-    const(char)* _typeString = typeString.toCString(No.Alloc);
+    const(char)* _typeString = typeString.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_variant_type_string_is_valid(_typeString);
     return _retval;
   }
@@ -811,11 +811,11 @@ class VariantType : Boxed
   static bool stringScan(string string_, string limit, out string endptr) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
-    const(char)* _limit = limit.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _limit = limit.toCString!(No.Malloc, Yes.Nullable);
     char* _endptr;
     _retval = cast(bool)g_variant_type_string_scan(_string_, _limit, &_endptr);
-    endptr = _endptr.fromCString(Yes.Free);
+    endptr = _endptr.fromCString!(Yes.Free);
     return _retval;
   }
 }

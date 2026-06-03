@@ -163,7 +163,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
     bool _retval;
     auto _list = gListFromD!(gst.object.ObjectWrap)(list);
     scope(exit) containerFree!(GList*, gst.object.ObjectWrap, GidOwnership.None)(_list);
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_object_check_uniqueness(_list, _name);
     return _retval;
   }
@@ -188,7 +188,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   {
     char*[] _tmpexcludedProps;
     foreach (s; excludedProps)
-      _tmpexcludedProps ~= s.toCString(No.Alloc);
+      _tmpexcludedProps ~= s.toCString;
     _tmpexcludedProps ~= null;
     char** _excludedProps = _tmpexcludedProps.ptr;
 
@@ -246,7 +246,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   */
   void defaultError(glib.error.ErrorWrap error, string debug_ = null) nothrow
   {
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
     gst_object_default_error(cast(GstObject*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null, _debug_);
   }
 
@@ -262,7 +262,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   gst.control_binding.ControlBinding getControlBinding(string propertyName) nothrow
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_object_get_control_binding(cast(GstObject*)this._cPtr, _propertyName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.control_binding.ControlBinding)(cast(GstControlBinding*)_cretval, Yes.Take);
     return _retval;
@@ -306,7 +306,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool getGValueArray(string propertyName, gst.types.ClockTime timestamp, gst.types.ClockTime interval, gobject.value.Value[] values) nothrow
   {
     bool _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     uint _nValues;
     if (values)
       _nValues = cast(uint)values.length;
@@ -336,7 +336,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   {
     char* _cretval;
     _cretval = gst_object_get_name(cast(GstObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   {
     char* _cretval;
     _cretval = gst_object_get_path_string(cast(GstObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   gobject.value.Value getValue(string propertyName, gst.types.ClockTime timestamp) nothrow
   {
     GValue* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_object_get_value(cast(GstObject*)this._cPtr, _propertyName, timestamp);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -485,7 +485,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   */
   void setControlBindingDisabled(string propertyName, bool disabled) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     gst_object_set_control_binding_disabled(cast(GstObject*)this._cPtr, _propertyName, disabled);
   }
 
@@ -536,7 +536,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool setName(string name = null) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)gst_object_set_name(cast(GstObject*)this._cPtr, _name);
     return _retval;
   }

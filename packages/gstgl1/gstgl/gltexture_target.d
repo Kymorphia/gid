@@ -24,7 +24,7 @@ struct GLTextureTarget
   static gstgl.types.GLTextureTarget fromString(string str) nothrow
   {
     GstGLTextureTarget _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_gl_texture_target_from_string(_str);
     gstgl.types.GLTextureTarget _retval = cast(gstgl.types.GLTextureTarget)_cretval;
     return _retval;
@@ -35,7 +35,7 @@ struct GLTextureTarget
   {
     const(char)* _cretval;
     _cretval = gst_gl_texture_target_to_buffer_pool_option(target);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ struct GLTextureTarget
   {
     const(char)* _cretval;
     _cretval = gst_gl_texture_target_to_string(target);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

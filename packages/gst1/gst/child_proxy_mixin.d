@@ -40,7 +40,7 @@ template ChildProxyT()
   */
   override void childAdded(gobject.object.ObjectWrap child, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gst_child_proxy_child_added(cast(GstChildProxy*)this._cPtr, child ? cast(GObject*)child._cPtr(No.Dup) : null, _name);
   }
 
@@ -53,7 +53,7 @@ template ChildProxyT()
   */
   override void childRemoved(gobject.object.ObjectWrap child, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gst_child_proxy_child_removed(cast(GstChildProxy*)this._cPtr, child ? cast(GObject*)child._cPtr(No.Dup) : null, _name);
   }
 
@@ -88,7 +88,7 @@ template ChildProxyT()
   override gobject.object.ObjectWrap getChildByName(string name) nothrow
   {
     GObject* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_child_proxy_get_child_by_name(cast(GstChildProxy*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
@@ -112,7 +112,7 @@ template ChildProxyT()
   override gobject.object.ObjectWrap getChildByNameRecurse(string name) nothrow
   {
     GObject* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_child_proxy_get_child_by_name_recurse(cast(GstChildProxy*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
@@ -139,7 +139,7 @@ template ChildProxyT()
   */
   override void getChildProxyProperty(string name, out gobject.value.Value value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     GValue _value;
     gst_child_proxy_get_property(cast(GstChildProxy*)this._cPtr, _name, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -161,7 +161,7 @@ template ChildProxyT()
   override bool lookup(string name, out gobject.object.ObjectWrap target, out gobject.param_spec.ParamSpec pspec) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     GObject* _target;
     GParamSpec* _pspec;
     _retval = cast(bool)gst_child_proxy_lookup(cast(GstChildProxy*)this._cPtr, _name, &_target, &_pspec);
@@ -179,7 +179,7 @@ template ChildProxyT()
   */
   override void setProperty(string name, gobject.value.Value value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gst_child_proxy_set_property(cast(GstChildProxy*)this._cPtr, _name, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 

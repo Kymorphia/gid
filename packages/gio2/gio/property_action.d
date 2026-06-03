@@ -187,8 +187,8 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   this(string name, gobject.object.ObjectWrap object, string propertyName) nothrow
   {
     GPropertyAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_property_action_new(_name, object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
     this(_cretval, Yes.Take);
   }

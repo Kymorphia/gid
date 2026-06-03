@@ -179,7 +179,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   {
     const(char)* _cretval;
     _cretval = gtk_numerable_icon_get_background_icon_name(cast(GtkNumerableIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   {
     const(char)* _cretval;
     _cretval = gtk_numerable_icon_get_label(cast(GtkNumerableIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   */
   void setBackgroundIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     gtk_numerable_icon_set_background_icon_name(cast(GtkNumerableIcon*)this._cPtr, _iconName);
   }
 
@@ -297,7 +297,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   */
   void setLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     gtk_numerable_icon_set_label(cast(GtkNumerableIcon*)this._cPtr, _label);
   }
 

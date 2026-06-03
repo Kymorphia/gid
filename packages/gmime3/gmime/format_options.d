@@ -66,7 +66,7 @@ class FormatOptions : gobject.boxed.Boxed
   */
   void addHiddenHeader(string header) nothrow
   {
-    const(char)* _header = header.toCString(No.Alloc);
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
     g_mime_format_options_add_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
   }
 
@@ -114,7 +114,7 @@ class FormatOptions : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_mime_format_options_get_newline(cast(GMimeFormatOptions*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class FormatOptions : gobject.boxed.Boxed
   bool isHiddenHeader(string header) nothrow
   {
     bool _retval;
-    const(char)* _header = header.toCString(No.Alloc);
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_mime_format_options_is_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
     return _retval;
   }
@@ -166,7 +166,7 @@ class FormatOptions : gobject.boxed.Boxed
   */
   void removeHiddenHeader(string header) nothrow
   {
-    const(char)* _header = header.toCString(No.Alloc);
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
     g_mime_format_options_remove_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
   }
 

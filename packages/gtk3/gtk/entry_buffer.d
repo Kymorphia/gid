@@ -229,7 +229,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_entry_buffer_get_text(cast(GtkEntryBuffer*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -203,7 +203,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   this(string attributes = null, gio.file.File file = null) nothrow
   {
     GtkDirectoryList* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
@@ -216,7 +216,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setAttributes(string attributes = null) nothrow
   {
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
     gtk_directory_list_set_attributes(cast(GtkDirectoryList*)this._cPtr, _attributes);
   }
 

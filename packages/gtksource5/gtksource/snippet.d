@@ -135,8 +135,8 @@ class Snippet : gobject.object.ObjectWrap
   this(string trigger = null, string languageId = null) nothrow
   {
     GtkSourceSnippet* _cretval;
-    const(char)* _trigger = trigger.toCString(No.Alloc);
-    const(char)* _languageId = languageId.toCString(No.Alloc);
+    const(char)* _trigger = trigger.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _languageId = languageId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_snippet_new(_trigger, _languageId);
     this(_cretval, Yes.Take);
   }
@@ -154,7 +154,7 @@ class Snippet : gobject.object.ObjectWrap
   static gtksource.snippet.Snippet newParsed(string text)
   {
     GtkSourceSnippet* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gtk_source_snippet_new_parsed(_text, &_err);
     if (_err)
@@ -208,7 +208,7 @@ class Snippet : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_description(cast(GtkSourceSnippet*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class Snippet : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_language_id(cast(GtkSourceSnippet*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class Snippet : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_name(cast(GtkSourceSnippet*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class Snippet : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_trigger(cast(GtkSourceSnippet*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Snippet : gobject.object.ObjectWrap
   */
   void setDescription(string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_set_description(cast(GtkSourceSnippet*)this._cPtr, _description);
   }
 
@@ -317,7 +317,7 @@ class Snippet : gobject.object.ObjectWrap
   */
   void setLanguageId(string languageId) nothrow
   {
-    const(char)* _languageId = languageId.toCString(No.Alloc);
+    const(char)* _languageId = languageId.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_set_language_id(cast(GtkSourceSnippet*)this._cPtr, _languageId);
   }
 
@@ -329,7 +329,7 @@ class Snippet : gobject.object.ObjectWrap
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_set_name(cast(GtkSourceSnippet*)this._cPtr, _name);
   }
 
@@ -341,7 +341,7 @@ class Snippet : gobject.object.ObjectWrap
   */
   void setTrigger(string trigger) nothrow
   {
-    const(char)* _trigger = trigger.toCString(No.Alloc);
+    const(char)* _trigger = trigger.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_set_trigger(cast(GtkSourceSnippet*)this._cPtr, _trigger);
   }
 }

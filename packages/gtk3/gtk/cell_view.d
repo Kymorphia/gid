@@ -303,7 +303,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   static gtk.cell_view.CellView newWithMarkup(string markup) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_cell_view_new_with_markup(_markup);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -336,7 +336,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   static gtk.cell_view.CellView newWithText(string text) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_cell_view_new_with_text(_text);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

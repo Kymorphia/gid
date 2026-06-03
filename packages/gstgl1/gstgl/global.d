@@ -124,8 +124,8 @@ void contextSetGlDisplay(gst.context.Context context, gstgl.gldisplay.GLDisplay 
 bool glCheckExtension(string name, string ext) nothrow
 {
   bool _retval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _ext = ext.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _ext = ext.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_gl_check_extension(_name, _ext);
   return _retval;
 }
@@ -403,7 +403,7 @@ bool glVideoFormatSwizzle(gstvideo.types.VideoFormat videoFormat, ref int[] swiz
 bool glslStringGetVersionProfile(string s, out gstgl.types.GLSLVersion version_, out gstgl.types.GLSLProfile profile) nothrow
 {
   bool _retval;
-  const(char)* _s = s.toCString(No.Alloc);
+  const(char)* _s = s.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_glsl_string_get_version_profile(_s, &version_, &profile);
   return _retval;
 }

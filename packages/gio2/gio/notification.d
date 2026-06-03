@@ -110,7 +110,7 @@ class Notification : gobject.object.ObjectWrap
   this(string title) nothrow
   {
     GNotification* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = g_notification_new(_title);
     this(_cretval, Yes.Take);
   }
@@ -131,8 +131,8 @@ class Notification : gobject.object.ObjectWrap
   */
   void addButton(string label, string detailedAction) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, No.Nullable);
     g_notification_add_button(cast(GNotification*)this._cPtr, _label, _detailedAction);
   }
 
@@ -150,8 +150,8 @@ class Notification : gobject.object.ObjectWrap
   */
   void addButtonWithTarget(string label, string action, glib.variant.Variant target = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _action = action.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    const(char)* _action = action.toCString!(No.Malloc, No.Nullable);
     g_notification_add_button_with_target_value(cast(GNotification*)this._cPtr, _label, _action, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
   }
 
@@ -163,7 +163,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void setBody(string body_ = null) nothrow
   {
-    const(char)* _body_ = body_.toCString(No.Alloc);
+    const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
     g_notification_set_body(cast(GNotification*)this._cPtr, _body_);
   }
 
@@ -180,7 +180,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void setCategory(string category = null) nothrow
   {
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     g_notification_set_category(cast(GNotification*)this._cPtr, _category);
   }
 
@@ -202,7 +202,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void setDefaultAction(string detailedAction) nothrow
   {
-    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, No.Nullable);
     g_notification_set_default_action(cast(GNotification*)this._cPtr, _detailedAction);
   }
 
@@ -223,7 +223,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void setDefaultActionAndTarget(string action, glib.variant.Variant target = null) nothrow
   {
-    const(char)* _action = action.toCString(No.Alloc);
+    const(char)* _action = action.toCString!(No.Malloc, No.Nullable);
     g_notification_set_default_action_and_target_value(cast(GNotification*)this._cPtr, _action, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
   }
 
@@ -258,7 +258,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     g_notification_set_title(cast(GNotification*)this._cPtr, _title);
   }
 

@@ -179,7 +179,7 @@ class AuthDomain : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = soup_auth_domain_accepts(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class AuthDomain : gobject.object.ObjectWrap
   */
   void addPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     soup_auth_domain_add_path(cast(SoupAuthDomain*)this._cPtr, _path);
   }
 
@@ -231,8 +231,8 @@ class AuthDomain : gobject.object.ObjectWrap
   bool checkPassword(soup.server_message.ServerMessage msg, string username, string password) nothrow
   {
     bool _retval;
-    const(char)* _username = username.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)soup_auth_domain_check_password(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null, _username, _password);
     return _retval;
   }
@@ -266,7 +266,7 @@ class AuthDomain : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_auth_domain_get_realm(cast(SoupAuthDomain*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class AuthDomain : gobject.object.ObjectWrap
   */
   void removePath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     soup_auth_domain_remove_path(cast(SoupAuthDomain*)this._cPtr, _path);
   }
 
@@ -366,7 +366,7 @@ class AuthDomain : gobject.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(soup.types.AuthDomainGenericAuthCallback*)userData;
-      string _username = username.fromCString(No.Free);
+      string _username = username.fromCString!(No.Free);
 
       try
       {

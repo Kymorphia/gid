@@ -558,7 +558,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_indicator_tooltip(cast(AdwTabPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -570,7 +570,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_keyword(cast(AdwTabPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -675,7 +675,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_title(cast(AdwTabPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -687,7 +687,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_tooltip(cast(AdwTabPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -778,7 +778,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setIndicatorTooltip(string tooltip) nothrow
   {
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, No.Nullable);
     adw_tab_page_set_indicator_tooltip(cast(AdwTabPage*)this._cPtr, _tooltip);
   }
 
@@ -795,7 +795,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setKeyword(string keyword) nothrow
   {
-    const(char)* _keyword = keyword.toCString(No.Alloc);
+    const(char)* _keyword = keyword.toCString!(No.Malloc, No.Nullable);
     adw_tab_page_set_keyword(cast(AdwTabPage*)this._cPtr, _keyword);
   }
 
@@ -911,7 +911,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_tab_page_set_title(cast(AdwTabPage*)this._cPtr, _title);
   }
 
@@ -928,7 +928,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setTooltip(string tooltip) nothrow
   {
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, No.Nullable);
     adw_tab_page_set_tooltip(cast(AdwTabPage*)this._cPtr, _tooltip);
   }
 }

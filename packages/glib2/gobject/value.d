@@ -167,7 +167,7 @@ class Value : Boxed
   {
     char* _cretval;
     _cretval = g_value_dup_string(cast(const(GValue)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class Value : Boxed
   {
     const(char)* _cretval;
     _cretval = g_value_get_string(cast(const(GValue)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -639,7 +639,7 @@ class Value : Boxed
   */
   void setInternedString(string vString = null) nothrow
   {
-    const(char)* _vString = vString.toCString(No.Alloc);
+    const(char)* _vString = vString.toCString!(No.Malloc, Yes.Nullable);
     g_value_set_interned_string(cast(GValue*)this._cPtr, _vString);
   }
 
@@ -735,7 +735,7 @@ class Value : Boxed
   */
   void setStaticString(string vString = null) nothrow
   {
-    const(char)* _vString = vString.toCString(No.Alloc);
+    const(char)* _vString = vString.toCString!(No.Malloc, Yes.Nullable);
     g_value_set_static_string(cast(GValue*)this._cPtr, _vString);
   }
 
@@ -747,7 +747,7 @@ class Value : Boxed
   */
   void setString(string vString = null) nothrow
   {
-    const(char)* _vString = vString.toCString(No.Alloc);
+    const(char)* _vString = vString.toCString!(No.Malloc, Yes.Nullable);
     g_value_set_string(cast(GValue*)this._cPtr, _vString);
   }
 
@@ -761,7 +761,7 @@ class Value : Boxed
   */
   void setStringTakeOwnership(string vString = null) nothrow
   {
-    char* _vString = vString.toCString(No.Alloc);
+    char* _vString = vString.toCString!(No.Malloc, Yes.Nullable);
     g_value_set_string_take_ownership(cast(GValue*)this._cPtr, _vString);
   }
 
@@ -838,7 +838,7 @@ class Value : Boxed
   {
     char* _cretval;
     _cretval = g_value_steal_string(cast(GValue*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -863,7 +863,7 @@ class Value : Boxed
   */
   void takeString(string vString = null) nothrow
   {
-    char* _vString = vString.toCString(Yes.Alloc);
+    char* _vString = vString.toCString!(Yes.Malloc, Yes.Nullable);
     g_value_take_string(cast(GValue*)this._cPtr, _vString);
   }
 
@@ -1033,7 +1033,7 @@ T getVal(T)(const(GValue)* gval) nothrow
   else static if (is(T == enum)) // enum or flags
     return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
   else static if (is(T == string))
-    return g_value_get_string(gval).fromCString(No.Free);
+    return g_value_get_string(gval).fromCString;
   else static if (is(T == glib.variant.Variant))
   {
     auto v = g_value_get_variant(gval);
@@ -1056,7 +1056,7 @@ T getVal(T)(const(GValue)* gval) nothrow
 
       sa.length = len;
       foreach (i; len)
-        sa[i] = strv[i].fromCString(No.Free);
+        sa[i] = strv[i].fromCString;
     }
 
     return sa;
@@ -1136,7 +1136,7 @@ void setVal(T)(GValue* gval, T v) nothrow
       g_value_set_enum(gval, v);
   }
   else static if (is(T == string))
-    g_value_take_string(gval, v.toCString(Yes.Alloc));
+    g_value_take_string(gval, toCString!(Yes.Malloc)(v));
   else static if (is(T == glib.variant.Variant))
     g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
   else static if (is(T : ParamSpec))
@@ -1145,7 +1145,7 @@ void setVal(T)(GValue* gval, T v) nothrow
   {
     auto strv = cast(char**)gMalloc((v.length + 1) * (char*).sizeof);
     foreach(i; 0 .. v.length)
-    strv[i] = v[i].toCString(Yes.Alloc);
+    strv[i] = toCString!(Yes.Malloc)(v[i]);
 
     g_value_set_boxed(gval, strv);
   }

@@ -74,7 +74,7 @@ class XaTransaction : gobject.object.ObjectWrap
   this(uint format, string globalTransactionId) nothrow
   {
     GdaXaTransaction* _cretval;
-    const(char)* _globalTransactionId = globalTransactionId.toCString(No.Alloc);
+    const(char)* _globalTransactionId = globalTransactionId.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_xa_transaction_new(format, _globalTransactionId);
     this(_cretval, Yes.Take);
   }
@@ -172,7 +172,7 @@ class XaTransaction : gobject.object.ObjectWrap
   bool registerConnection(gda.connection.Connection cnc, string branch)
   {
     bool _retval;
-    const(char)* _branch = branch.toCString(No.Alloc);
+    const(char)* _branch = branch.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_xa_transaction_register_connection(cast(GdaXaTransaction*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _branch, &_err);
     if (_err)

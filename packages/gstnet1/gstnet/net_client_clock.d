@@ -174,8 +174,8 @@ class NetClientClock : gst.system_clock.SystemClock
   this(string name, string remoteAddress, int remotePort, gst.types.ClockTime baseTime) nothrow
   {
     GstClock* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _remoteAddress = remoteAddress.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _remoteAddress = remoteAddress.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_net_client_clock_new(_name, _remoteAddress, remotePort, baseTime);
     this(_cretval, Yes.Take);
   }

@@ -181,7 +181,7 @@ class Node : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = json_node_dup_string(cast(JsonNode*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class Node : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = json_node_get_string(cast(JsonNode*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node initString(string value = null) nothrow
   {
     JsonNode* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     _cretval = json_node_init_string(cast(JsonNode*)this._cPtr, _value);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -667,7 +667,7 @@ class Node : gobject.boxed.Boxed
   */
   void setString(string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     json_node_set_string(cast(JsonNode*)this._cPtr, _value);
   }
 
@@ -742,7 +742,7 @@ class Node : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = json_node_type_name(cast(JsonNode*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

@@ -63,7 +63,7 @@ class Dir : gobject.boxed.Boxed
   static glib.dir.Dir open(string path, uint flags)
   {
     GDir* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dir_open(_path, flags, &_err);
     if (_err)
@@ -94,7 +94,7 @@ class Dir : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_dir_read_name(cast(GDir*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -132,12 +132,12 @@ class Dir : gobject.boxed.Boxed
   static string makeTmp(string tmpl = null)
   {
     char* _cretval;
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_dir_make_tmp(_tmpl, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

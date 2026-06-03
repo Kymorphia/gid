@@ -52,7 +52,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null) nothrow
   {
     byte _retval;
-    const(char)* _fieldName = fieldName.toCString(No.Alloc);
+    const(char)* _fieldName = fieldName.toCString!(No.Malloc, Yes.Nullable);
     _retval = garrow_union_array_builder_append_child(cast(GArrowUnionArrayBuilder*)this._cPtr, child ? cast(GArrowArrayBuilder*)child._cPtr(No.Dup) : null, _fieldName);
     return _retval;
   }

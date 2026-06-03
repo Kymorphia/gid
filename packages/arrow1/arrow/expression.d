@@ -60,7 +60,7 @@ class Expression : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_expression_to_string(cast(GArrowExpression*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

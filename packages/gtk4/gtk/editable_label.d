@@ -116,7 +116,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   this(string str) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_editable_label_new(_str);
     this(_cretval, No.Take);
   }

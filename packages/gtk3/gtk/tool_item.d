@@ -218,7 +218,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.widget.Widget getProxyMenuItem(string menuItemId) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
+    const(char)* _menuItemId = menuItemId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_tool_item_get_proxy_menu_item(cast(GtkToolItem*)this._cPtr, _menuItemId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -428,7 +428,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setProxyMenuItem(string menuItemId, gtk.widget.Widget menuItem = null) nothrow
   {
-    const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
+    const(char)* _menuItemId = menuItemId.toCString!(No.Malloc, No.Nullable);
     gtk_tool_item_set_proxy_menu_item(cast(GtkToolItem*)this._cPtr, _menuItemId, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null);
   }
 
@@ -441,7 +441,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   override void setTooltipMarkup(string markup) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, No.Nullable);
     gtk_tool_item_set_tooltip_markup(cast(GtkToolItem*)this._cPtr, _markup);
   }
 
@@ -454,7 +454,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   override void setTooltipText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_tool_item_set_tooltip_text(cast(GtkToolItem*)this._cPtr, _text);
   }
 

@@ -60,7 +60,7 @@ interface TlsFileDatabase
   static gio.tls_file_database.TlsFileDatabase new_(string anchors)
   {
     GTlsDatabase* _cretval;
-    const(char)* _anchors = anchors.toCString(No.Alloc);
+    const(char)* _anchors = anchors.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_tls_file_database_new(_anchors, &_err);
     if (_err)

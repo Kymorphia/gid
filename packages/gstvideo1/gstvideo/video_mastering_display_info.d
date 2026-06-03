@@ -152,7 +152,7 @@ class VideoMasteringDisplayInfo
   {
     char* _cretval;
     _cretval = gst_video_mastering_display_info_to_string(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class VideoMasteringDisplayInfo
   {
     bool _retval;
     GstVideoMasteringDisplayInfo _minfo;
-    const(char)* _mastering = mastering.toCString(No.Alloc);
+    const(char)* _mastering = mastering.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_video_mastering_display_info_from_string(&_minfo, _mastering);
     minfo = new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(void*)&_minfo, No.Take);
     return _retval;

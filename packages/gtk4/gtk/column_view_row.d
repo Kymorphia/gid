@@ -183,7 +183,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_description(cast(GtkColumnViewRow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_label(cast(GtkColumnViewRow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   void setAccessibleDescription(string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     gtk_column_view_row_set_accessible_description(cast(GtkColumnViewRow*)this._cPtr, _description);
   }
 
@@ -300,7 +300,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   void setAccessibleLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     gtk_column_view_row_set_accessible_label(cast(GtkColumnViewRow*)this._cPtr, _label);
   }
 

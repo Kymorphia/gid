@@ -161,7 +161,7 @@ class Cursor : gobject.object.ObjectWrap
   static gdk.cursor.Cursor newFromName(string name, gdk.cursor.Cursor fallback = null) nothrow
   {
     GdkCursor* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_cursor_new_from_name(_name, fallback ? cast(GdkCursor*)fallback._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
@@ -250,7 +250,7 @@ class Cursor : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gdk_cursor_get_name(cast(GdkCursor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

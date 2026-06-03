@@ -114,10 +114,10 @@ class ToggleAction : gtk.action.Action
   this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
     GtkToggleAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_toggle_action_new(_name, _label, _tooltip, _stockId);
     this(_cretval, Yes.Take);
   }

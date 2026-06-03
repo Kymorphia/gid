@@ -338,7 +338,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   this(string applicationId, gio.types.ApplicationFlags flags) nothrow
   {
     GApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_application_new(_applicationId, flags);
     this(_cretval, Yes.Take);
   }
@@ -415,7 +415,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   static bool idIsValid(string applicationId) nothrow
   {
     bool _retval;
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_application_id_is_valid(_applicationId);
     return _retval;
   }
@@ -459,9 +459,9 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void addMainOption(string longName, char shortName, glib.types.OptionFlags flags, glib.types.OptionArg arg, string description, string argDescription = null) nothrow
   {
-    const(char)* _longName = longName.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _argDescription = argDescription.toCString(No.Alloc);
+    const(char)* _longName = longName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
+    const(char)* _argDescription = argDescription.toCString!(No.Malloc, Yes.Nullable);
     g_application_add_main_option(cast(GApplication*)this._cPtr, _longName, shortName, flags, arg, _description, _argDescription);
   }
 
@@ -582,7 +582,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void bindBusyProperty(gobject.object.ObjectWrap object, string property) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     g_application_bind_busy_property(cast(GApplication*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
   }
 
@@ -594,7 +594,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     const(char)* _cretval;
     _cretval = g_application_get_application_id(cast(GApplication*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -643,7 +643,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     const(char)* _cretval;
     _cretval = g_application_get_dbus_object_path(cast(GApplication*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -731,7 +731,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     const(char)* _cretval;
     _cretval = g_application_get_resource_base_path(cast(GApplication*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -743,7 +743,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     const(char)* _cretval;
     _cretval = g_application_get_version(cast(GApplication*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -811,7 +811,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
     GFile** _files = _tmpfiles.ptr;
 
-    const(char)* _hint = hint.toCString(No.Alloc);
+    const(char)* _hint = hint.toCString!(No.Malloc, No.Nullable);
     g_application_open(cast(GApplication*)this._cPtr, _files, _nFiles, _hint);
   }
 
@@ -985,7 +985,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
 
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     char** _argv = _tmpargv.ptr;
 
     _retval = g_application_run(cast(GApplication*)this._cPtr, _argc, _argv);
@@ -1029,7 +1029,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void sendNotification(string id, gio.notification.Notification notification) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     g_application_send_notification(cast(GApplication*)this._cPtr, _id, notification ? cast(GNotification*)notification._cPtr(No.Dup) : null);
   }
 
@@ -1065,7 +1065,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setApplicationId(string applicationId = null) nothrow
   {
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
     g_application_set_application_id(cast(GApplication*)this._cPtr, _applicationId);
   }
 
@@ -1127,7 +1127,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setOptionContextDescription(string description = null) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
     g_application_set_option_context_description(cast(GApplication*)this._cPtr, _description);
   }
 
@@ -1145,7 +1145,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setOptionContextParameterString(string parameterString = null) nothrow
   {
-    const(char)* _parameterString = parameterString.toCString(No.Alloc);
+    const(char)* _parameterString = parameterString.toCString!(No.Malloc, Yes.Nullable);
     g_application_set_option_context_parameter_string(cast(GApplication*)this._cPtr, _parameterString);
   }
 
@@ -1160,7 +1160,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setOptionContextSummary(string summary = null) nothrow
   {
-    const(char)* _summary = summary.toCString(No.Alloc);
+    const(char)* _summary = summary.toCString!(No.Malloc, Yes.Nullable);
     g_application_set_option_context_summary(cast(GApplication*)this._cPtr, _summary);
   }
 
@@ -1204,7 +1204,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setResourceBasePath(string resourcePath = null) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     g_application_set_resource_base_path(cast(GApplication*)this._cPtr, _resourcePath);
   }
 
@@ -1220,7 +1220,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setVersion(string version_) nothrow
   {
-    const(char)* _version_ = version_.toCString(No.Alloc);
+    const(char)* _version_ = version_.toCString!(No.Malloc, No.Nullable);
     g_application_set_version(cast(GApplication*)this._cPtr, _version_);
   }
 
@@ -1235,7 +1235,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void unbindBusyProperty(gobject.object.ObjectWrap object, string property) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     g_application_unbind_busy_property(cast(GApplication*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
   }
 
@@ -1273,7 +1273,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void withdrawNotification(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     g_application_withdraw_notification(cast(GApplication*)this._cPtr, _id);
   }
 

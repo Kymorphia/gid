@@ -96,7 +96,7 @@ string cookiesToCookieHeader(soup.cookie.Cookie[] cookies) nothrow
   auto _cookies = gSListFromD!(soup.cookie.Cookie)(cookies);
   scope(exit) containerFree!(GSList*, soup.cookie.Cookie, GidOwnership.None)(_cookies);
   _cretval = soup_cookies_to_cookie_header(_cookies);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -152,7 +152,7 @@ void cookiesToResponse(soup.cookie.Cookie[] cookies, soup.message.Message msg) n
 glib.date_time.DateTime dateTimeNewFromHttpString(string dateString) nothrow
 {
   GDateTime* _cretval;
-  const(char)* _dateString = dateString.toCString(No.Alloc);
+  const(char)* _dateString = dateString.toCString!(No.Malloc, No.Nullable);
   _cretval = soup_date_time_new_from_http_string(_dateString);
   auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -170,7 +170,7 @@ string dateTimeToString(glib.date_time.DateTime date, soup.types.DateFormat form
 {
   char* _cretval;
   _cretval = soup_date_time_to_string(date ? cast(GDateTime*)date._cPtr(No.Dup) : null, format);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -188,7 +188,7 @@ string dateTimeToString(glib.date_time.DateTime date, soup.types.DateFormat form
 string[string] formDecode(string encodedForm) nothrow
 {
   GHashTable* _cretval;
-  const(char)* _encodedForm = encodedForm.toCString(No.Alloc);
+  const(char)* _encodedForm = encodedForm.toCString!(No.Malloc, No.Nullable);
   _cretval = soup_form_decode(_encodedForm);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Container)(cast(GHashTable*)_cretval);
   return _retval;
@@ -228,14 +228,14 @@ string[string] formDecode(string encodedForm) nothrow
 string[string] formDecodeMultipart(soup.multipart.Multipart multipart, string fileControlName, out string filename, out string contentType, out glib.bytes.Bytes file) nothrow
 {
   GHashTable* _cretval;
-  const(char)* _fileControlName = fileControlName.toCString(No.Alloc);
+  const(char)* _fileControlName = fileControlName.toCString!(No.Malloc, Yes.Nullable);
   char* _filename;
   char* _contentType;
   GBytes* _file;
   _cretval = soup_form_decode_multipart(multipart ? cast(SoupMultipart*)multipart._cPtr(No.Dup) : null, _fileControlName, &_filename, &_contentType, &_file);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Container)(cast(GHashTable*)_cretval);
-  filename = _filename.fromCString(Yes.Free);
-  contentType = _contentType.fromCString(Yes.Free);
+  filename = _filename.fromCString!(Yes.Free);
+  contentType = _contentType.fromCString!(Yes.Free);
   file = new glib.bytes.Bytes(cast(void*)_file, Yes.Take);
   return _retval;
 }
@@ -264,7 +264,7 @@ string formEncodeHash(string[string] formDataSet) nothrow
   auto _formDataSet = gHashTableFromD!(string, string)(formDataSet);
   scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_formDataSet);
   _cretval = soup_form_encode_hash(_formDataSet);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -337,8 +337,8 @@ uint getMinorVersion() nothrow
 bool headerContains(string header, string token) nothrow
 {
   bool _retval;
-  const(char)* _header = header.toCString(No.Alloc);
-  const(char)* _token = token.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
+  const(char)* _token = token.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)soup_header_contains(_header, _token);
   return _retval;
 }
@@ -376,8 +376,8 @@ void headerFreeParamList(string[string] paramList) nothrow
 */
 void headerGStringAppendParam(glib.string_.String string_, string name, string value = null) nothrow
 {
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
   soup_header_g_string_append_param(string_ ? cast(GString*)string_._cPtr(No.Dup) : null, _name, _value);
 }
 
@@ -395,8 +395,8 @@ void headerGStringAppendParam(glib.string_.String string_, string name, string v
 */
 void headerGStringAppendParamQuoted(glib.string_.String string_, string name, string value) nothrow
 {
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   soup_header_g_string_append_param_quoted(string_ ? cast(GString*)string_._cPtr(No.Dup) : null, _name, _value);
 }
 
@@ -413,7 +413,7 @@ void headerGStringAppendParamQuoted(glib.string_.String string_, string name, st
 string[] headerParseList(string header) nothrow
 {
   GSList* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = soup_header_parse_list(_header);
   auto _retval = gSListToD!(string, GidOwnership.Full)(cast(GSList*)_cretval);
   return _retval;
@@ -439,7 +439,7 @@ string[] headerParseList(string header) nothrow
 string[string] headerParseParamList(string header) nothrow
 {
   GHashTable* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = soup_header_parse_param_list(_header);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
   return _retval;
@@ -464,7 +464,7 @@ string[string] headerParseParamList(string header) nothrow
 string[string] headerParseParamListStrict(string header) nothrow
 {
   GHashTable* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = soup_header_parse_param_list_strict(_header);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
   return _retval;
@@ -489,7 +489,7 @@ string[string] headerParseParamListStrict(string header) nothrow
 string[] headerParseQualityList(string header, out string[] unacceptable) nothrow
 {
   GSList* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   GSList* _unacceptable;
   _cretval = soup_header_parse_quality_list(_header, &_unacceptable);
   auto _retval = gSListToD!(string, GidOwnership.Full)(cast(GSList*)_cretval);
@@ -517,7 +517,7 @@ string[] headerParseQualityList(string header, out string[] unacceptable) nothro
 string[string] headerParseSemiParamList(string header) nothrow
 {
   GHashTable* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = soup_header_parse_semi_param_list(_header);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
   return _retval;
@@ -542,7 +542,7 @@ string[string] headerParseSemiParamList(string header) nothrow
 string[string] headerParseSemiParamListStrict(string header) nothrow
 {
   GHashTable* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = soup_header_parse_semi_param_list_strict(_header);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
   return _retval;
@@ -604,8 +604,8 @@ uint headersParseRequest(string str, soup.message_headers.MessageHeaders reqHead
   char* _reqMethod;
   char* _reqPath;
   _retval = soup_headers_parse_request(_str, _len, reqHeaders ? cast(SoupMessageHeaders*)reqHeaders._cPtr(No.Dup) : null, &_reqMethod, &_reqPath, &ver);
-  reqMethod = _reqMethod.fromCString(Yes.Free);
-  reqPath = _reqPath.fromCString(Yes.Free);
+  reqMethod = _reqMethod.fromCString!(Yes.Free);
+  reqPath = _reqPath.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -636,7 +636,7 @@ bool headersParseResponse(string str, soup.message_headers.MessageHeaders header
   auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   char* _reasonPhrase;
   _retval = cast(bool)soup_headers_parse_response(_str, _len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
-  reasonPhrase = _reasonPhrase.fromCString(Yes.Free);
+  reasonPhrase = _reasonPhrase.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -659,10 +659,10 @@ bool headersParseResponse(string str, soup.message_headers.MessageHeaders header
 bool headersParseStatusLine(string statusLine, out soup.types.HTTPVersion ver, out uint statusCode, out string reasonPhrase) nothrow
 {
   bool _retval;
-  const(char)* _statusLine = statusLine.toCString(No.Alloc);
+  const(char)* _statusLine = statusLine.toCString!(No.Malloc, No.Nullable);
   char* _reasonPhrase;
   _retval = cast(bool)soup_headers_parse_status_line(_statusLine, &ver, cast(uint*)&statusCode, &_reasonPhrase);
-  reasonPhrase = _reasonPhrase.fromCString(Yes.Free);
+  reasonPhrase = _reasonPhrase.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -681,7 +681,7 @@ bool headersParseStatusLine(string statusLine, out soup.types.HTTPVersion ver, o
 bool tldDomainIsPublicSuffix(string domain) nothrow
 {
   bool _retval;
-  const(char)* _domain = domain.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)soup_tld_domain_is_public_suffix(_domain);
   return _retval;
 }
@@ -711,12 +711,12 @@ bool tldDomainIsPublicSuffix(string domain) nothrow
 string tldGetBaseDomain(string hostname)
 {
   const(char)* _cretval;
-  const(char)* _hostname = hostname.toCString(No.Alloc);
+  const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = soup_tld_get_base_domain(_hostname, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -732,11 +732,11 @@ string tldGetBaseDomain(string hostname)
 glib.bytes.Bytes uriDecodeDataUri(string uri, out string contentType) nothrow
 {
   GBytes* _cretval;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   char* _contentType;
   _cretval = soup_uri_decode_data_uri(_uri, &_contentType);
   auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
-  contentType = _contentType.fromCString(Yes.Free);
+  contentType = _contentType.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -776,10 +776,10 @@ bool uriEqual(glib.uri.Uri uri1, glib.uri.Uri uri2) nothrow
 */
 void websocketClientPrepareHandshake(soup.message.Message msg, string origin = null, string[] protocols = null, gobject.type_class.TypeClass[] supportedExtensions = null) nothrow
 {
-  const(char)* _origin = origin.toCString(No.Alloc);
+  const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpprotocols;
   foreach (s; protocols)
-    _tmpprotocols ~= s.toCString(No.Alloc);
+    _tmpprotocols ~= s.toCString;
   _tmpprotocols ~= null;
   char** _protocols = _tmpprotocols.ptr;
 
@@ -859,10 +859,10 @@ bool websocketClientVerifyHandshake(soup.message.Message msg, gobject.type_class
 bool websocketServerCheckHandshake(soup.server_message.ServerMessage msg, string origin = null, string[] protocols = null, gobject.type_class.TypeClass[] supportedExtensions = null)
 {
   bool _retval;
-  const(char)* _origin = origin.toCString(No.Alloc);
+  const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpprotocols;
   foreach (s; protocols)
-    _tmpprotocols ~= s.toCString(No.Alloc);
+    _tmpprotocols ~= s.toCString;
   _tmpprotocols ~= null;
   char** _protocols = _tmpprotocols.ptr;
 
@@ -907,10 +907,10 @@ bool websocketServerCheckHandshake(soup.server_message.ServerMessage msg, string
 bool websocketServerProcessHandshake(soup.server_message.ServerMessage msg, string expectedOrigin, string[] protocols, gobject.type_class.TypeClass[] supportedExtensions, out soup.websocket_extension.WebsocketExtension[] acceptedExtensions) nothrow
 {
   bool _retval;
-  const(char)* _expectedOrigin = expectedOrigin.toCString(No.Alloc);
+  const(char)* _expectedOrigin = expectedOrigin.toCString!(No.Malloc, Yes.Nullable);
   char*[] _tmpprotocols;
   foreach (s; protocols)
-    _tmpprotocols ~= s.toCString(No.Alloc);
+    _tmpprotocols ~= s.toCString;
   _tmpprotocols ~= null;
   char** _protocols = _tmpprotocols.ptr;
 

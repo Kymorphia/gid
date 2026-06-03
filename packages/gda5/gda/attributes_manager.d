@@ -41,7 +41,7 @@ class AttributesManager
     extern(C) void _funcCallback(const(char)* attName, const(GValue)* value, void* data) nothrow
     {
       auto _dlg = cast(gda.types.AttributesManagerFunc*)data;
-      string _attName = attName.fromCString(No.Free);
+      string _attName = attName.fromCString!(No.Free);
 
       try
       {
@@ -61,7 +61,7 @@ class AttributesManager
   gobject.value.Value get(void* ptr, string attName) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _attName = attName.toCString(No.Alloc);
+    const(char)* _attName = attName.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_attributes_manager_get(cast(GdaAttributesManager*)this._cPtr, ptr, _attName);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -70,7 +70,7 @@ class AttributesManager
   /** */
   void set(void* ptr, string attName, gobject.value.Value value) nothrow
   {
-    const(char)* _attName = attName.toCString(No.Alloc);
+    const(char)* _attName = attName.toCString!(No.Malloc, No.Nullable);
     gda_attributes_manager_set(cast(GdaAttributesManager*)this._cPtr, ptr, _attName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -92,7 +92,7 @@ class AttributesManager
       }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attName = attName.toCString(No.Alloc);
+    const(char)* _attName = attName.toCString!(No.Malloc, No.Nullable);
     gda_attributes_manager_set_full(cast(GdaAttributesManager*)this._cPtr, ptr, _attName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
 }

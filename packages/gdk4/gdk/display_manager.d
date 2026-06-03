@@ -167,7 +167,7 @@ class DisplayManager : gobject.object.ObjectWrap
   gdk.display.Display openDisplay(string name = null) nothrow
   {
     GdkDisplay* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gdk_display_manager_open_display(cast(GdkDisplayManager*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;

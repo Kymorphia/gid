@@ -86,7 +86,7 @@ interface Icon
   static gio.icon.Icon newForString(string str)
   {
     GIcon* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_icon_new_for_string(_str, &_err);
     if (_err)

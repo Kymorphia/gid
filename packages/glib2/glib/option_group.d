@@ -55,9 +55,9 @@ class OptionGroup : gobject.boxed.Boxed
   this(string name, string description, string helpDescription) nothrow
   {
     GOptionGroup* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _helpDescription = helpDescription.toCString(No.Alloc);
+    const(char)* _name = name.toCString;
+    const(char)* _description = description.toCString;
+    const(char)* _helpDescription = helpDescription.toCString;
     _cretval = g_option_group_new(_name, _description, _helpDescription, null, null);
     this(_cretval, Yes.Take);
   }
@@ -92,7 +92,7 @@ class OptionGroup : gobject.boxed.Boxed
     {
       string _dretval;
       auto _dlg = cast(glib.types.TranslateFunc*)data;
-      string _str = str.fromCString(No.Free);
+      string _str = str.fromCString!(No.Free);
 
       try
       {
@@ -102,7 +102,7 @@ class OptionGroup : gobject.boxed.Boxed
       {
         gidInvokeCallbackExceptionHandler(e, "glib.types.TranslateFunc");
       }
-      auto _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
 
       return _retval;
     }
@@ -121,7 +121,7 @@ class OptionGroup : gobject.boxed.Boxed
   */
   void setTranslationDomain(string domain) nothrow
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     g_option_group_set_translation_domain(cast(GOptionGroup*)this._cPtr, _domain);
   }
 }

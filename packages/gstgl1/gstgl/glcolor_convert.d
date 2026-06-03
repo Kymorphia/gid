@@ -93,7 +93,7 @@ class GLColorConvert : gst.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gst_gl_color_convert_swizzle_shader_string(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class GLColorConvert : gst.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gst_gl_color_convert_yuv_to_rgb_shader_string(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

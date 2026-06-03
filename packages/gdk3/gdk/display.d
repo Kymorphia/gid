@@ -102,7 +102,7 @@ class Display : gobject.object.ObjectWrap
   static gdk.display.Display open(string displayName) nothrow
   {
     GdkDisplay* _cretval;
-    const(char)* _displayName = displayName.toCString(No.Alloc);
+    const(char)* _displayName = displayName.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_display_open(_displayName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
@@ -368,7 +368,7 @@ class Display : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_name(cast(GdkDisplay*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class Display : gobject.object.ObjectWrap
   */
   void notifyStartupComplete(string startupId) nothrow
   {
-    const(char)* _startupId = startupId.toCString(No.Alloc);
+    const(char)* _startupId = startupId.toCString!(No.Malloc, No.Nullable);
     gdk_display_notify_startup_complete(cast(GdkDisplay*)this._cPtr, _startupId);
   }
 

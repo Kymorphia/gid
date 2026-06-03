@@ -92,8 +92,8 @@ class Mark : gtk.text_mark.TextMark
   this(string name, string category) nothrow
   {
     GtkSourceMark* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_mark_new(_name, _category);
     this(_cretval, Yes.Take);
   }
@@ -106,7 +106,7 @@ class Mark : gtk.text_mark.TextMark
   {
     const(char)* _cretval;
     _cretval = gtk_source_mark_get_category(cast(GtkSourceMark*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class Mark : gtk.text_mark.TextMark
   gtksource.mark.Mark next(string category = null) nothrow
   {
     GtkSourceMark* _cretval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_mark_next(cast(GtkSourceMark*)this._cPtr, _category);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
@@ -146,7 +146,7 @@ class Mark : gtk.text_mark.TextMark
   gtksource.mark.Mark prev(string category = null) nothrow
   {
     GtkSourceMark* _cretval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_mark_prev(cast(GtkSourceMark*)this._cPtr, _category);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;

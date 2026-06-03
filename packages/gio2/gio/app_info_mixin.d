@@ -99,7 +99,7 @@ template AppInfoT()
   override bool addSupportsType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_app_info_add_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
@@ -186,7 +186,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_commandline(cast(GAppInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_description(cast(GAppInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_display_name(cast(GAppInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_executable(cast(GAppInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_id(cast(GAppInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_name(cast(GAppInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ template AppInfoT()
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -449,7 +449,7 @@ template AppInfoT()
   override bool removeSupportsType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_app_info_remove_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
@@ -469,7 +469,7 @@ template AppInfoT()
   override bool setAsDefaultForExtension(string extension)
   {
     bool _retval;
-    const(char)* _extension = extension.toCString(No.Alloc);
+    const(char)* _extension = extension.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_app_info_set_as_default_for_extension(cast(GAppInfo*)this._cPtr, _extension, &_err);
     if (_err)
@@ -488,7 +488,7 @@ template AppInfoT()
   override bool setAsDefaultForType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_app_info_set_as_default_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
@@ -510,7 +510,7 @@ template AppInfoT()
   override bool setAsLastUsedForType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_app_info_set_as_last_used_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)

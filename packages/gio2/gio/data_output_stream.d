@@ -192,7 +192,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   bool putString(string str, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_data_output_stream_put_string(cast(GDataOutputStream*)this._cPtr, _str, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

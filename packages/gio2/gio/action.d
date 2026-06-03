@@ -106,7 +106,7 @@ interface Action
   static bool nameIsValid(string actionName) nothrow
   {
     bool _retval;
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_action_name_is_valid(_actionName);
     return _retval;
   }
@@ -154,14 +154,14 @@ interface Action
   static bool parseDetailedName(string detailedName, out string actionName, out glib.variant.Variant targetValue)
   {
     bool _retval;
-    const(char)* _detailedName = detailedName.toCString(No.Alloc);
+    const(char)* _detailedName = detailedName.toCString!(No.Malloc, No.Nullable);
     char* _actionName;
     GVariant* _targetValue;
     GError *_err;
     _retval = cast(bool)g_action_parse_detailed_name(_detailedName, &_actionName, &_targetValue, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    actionName = _actionName.fromCString(Yes.Free);
+    actionName = _actionName.fromCString!(Yes.Free);
     targetValue = new glib.variant.Variant(cast(void*)_targetValue, Yes.Take);
     return _retval;
   }
@@ -186,9 +186,9 @@ interface Action
   static string printDetailedName(string actionName, glib.variant.Variant targetValue = null) nothrow
   {
     char* _cretval;
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_action_print_detailed_name(_actionName, targetValue ? cast(GVariant*)targetValue._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

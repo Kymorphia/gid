@@ -720,7 +720,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   {
     const(char)* _cretval;
     _cretval = gtk_print_operation_get_status_string(cast(GtkPrintOperation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -870,7 +870,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setCustomTabLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     gtk_print_operation_set_custom_tab_label(cast(GtkPrintOperation*)this._cPtr, _label);
   }
 
@@ -928,7 +928,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setExportFilename(string filename) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     gtk_print_operation_set_export_filename(cast(GtkPrintOperation*)this._cPtr, _filename);
   }
 
@@ -959,7 +959,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setJobName(string jobName) nothrow
   {
-    const(char)* _jobName = jobName.toCString(No.Alloc);
+    const(char)* _jobName = jobName.toCString!(No.Malloc, No.Nullable);
     gtk_print_operation_set_job_name(cast(GtkPrintOperation*)this._cPtr, _jobName);
   }
 

@@ -107,7 +107,7 @@ json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed
 gobject.object.ObjectWrap constructGobject(gobject.types.GType gtype, string data)
 {
   GObject* _cretval;
-  const(char)* _data = data.toCString(No.Alloc);
+  const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = json_construct_gobject(gtype, _data, size_t.init, &_err);
   if (_err)
@@ -132,7 +132,7 @@ gobject.object.ObjectWrap constructGobject(gobject.types.GType gtype, string dat
 json.node.Node fromString(string str)
 {
   JsonNode* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = json_from_string(_str, &_err);
   if (_err)
@@ -231,7 +231,7 @@ string gobjectToData(gobject.object.ObjectWrap gobject, out size_t length) nothr
 {
   char* _cretval;
   _cretval = json_gobject_to_data(gobject ? cast(GObject*)gobject._cPtr(No.Dup) : null, cast(size_t*)&length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -266,7 +266,7 @@ string gobjectToData(gobject.object.ObjectWrap gobject, out size_t length) nothr
 glib.variant.Variant gvariantDeserialize(json.node.Node jsonNode, string signature = null)
 {
   GVariant* _cretval;
-  const(char)* _signature = signature.toCString(No.Alloc);
+  const(char)* _signature = signature.toCString!(No.Malloc, Yes.Nullable);
   GError *_err;
   _cretval = json_gvariant_deserialize(jsonNode ? cast(JsonNode*)jsonNode._cPtr(No.Dup) : null, _signature, &_err);
   if (_err)
@@ -302,7 +302,7 @@ glib.variant.Variant gvariantDeserializeData(string json, string signature = nul
     _length = cast(ptrdiff_t)json.length;
 
   auto _json = json.ptr ? cast(const(char)*)json.ptr : [char.init].ptr;
-  const(char)* _signature = signature.toCString(No.Alloc);
+  const(char)* _signature = signature.toCString!(No.Malloc, Yes.Nullable);
   GError *_err;
   _cretval = json_gvariant_deserialize_data(_json, _length, _signature, &_err);
   if (_err)
@@ -343,7 +343,7 @@ string gvariantSerializeData(glib.variant.Variant variant, out size_t length) no
 {
   char* _cretval;
   _cretval = json_gvariant_serialize_data(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null, cast(size_t*)&length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -366,7 +366,7 @@ string serializeGobject(gobject.object.ObjectWrap gobject, out size_t length) no
 {
   char* _cretval;
   _cretval = json_serialize_gobject(gobject ? cast(GObject*)gobject._cPtr(No.Dup) : null, cast(size_t*)&length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -383,8 +383,8 @@ string serializeGobject(gobject.object.ObjectWrap gobject, out size_t length) no
 int stringCompare(string a, string b) nothrow
 {
   int _retval;
-  const(void)* _a = a.toCString(No.Alloc);
-  const(void)* _b = b.toCString(No.Alloc);
+  const(void)* _a = a.toCString!(No.Malloc, No.Nullable);
+  const(void)* _b = b.toCString!(No.Malloc, No.Nullable);
   _retval = json_string_compare(_a, _b);
   return _retval;
 }
@@ -400,8 +400,8 @@ int stringCompare(string a, string b) nothrow
 bool stringEqual(string a, string b) nothrow
 {
   bool _retval;
-  const(void)* _a = a.toCString(No.Alloc);
-  const(void)* _b = b.toCString(No.Alloc);
+  const(void)* _a = a.toCString!(No.Malloc, No.Nullable);
+  const(void)* _b = b.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)json_string_equal(_a, _b);
   return _retval;
 }
@@ -420,7 +420,7 @@ bool stringEqual(string a, string b) nothrow
 uint stringHash(string key) nothrow
 {
   uint _retval;
-  const(void)* _key = key.toCString(No.Alloc);
+  const(void)* _key = key.toCString!(No.Malloc, No.Nullable);
   _retval = json_string_hash(_key);
   return _retval;
 }
@@ -438,6 +438,6 @@ string toString_(json.node.Node node, bool pretty) nothrow
 {
   char* _cretval;
   _cretval = json_to_string(node ? cast(JsonNode*)node._cPtr(No.Dup) : null, pretty);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

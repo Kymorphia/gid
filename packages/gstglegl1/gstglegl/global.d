@@ -13,7 +13,7 @@ string eglGetErrorString(int err) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_egl_get_error_string(err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 

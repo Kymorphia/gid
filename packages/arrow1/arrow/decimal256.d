@@ -62,7 +62,7 @@ class Decimal256 : gobject.object.ObjectWrap
   static arrow.decimal256.Decimal256 newString(string data)
   {
     GArrowDecimal256* _cretval;
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_decimal256_new_string(_data, &_err);
     if (_err)
@@ -202,7 +202,7 @@ class Decimal256 : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_decimal256_to_string(cast(GArrowDecimal256*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Decimal256 : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_decimal256_to_string_scale(cast(GArrowDecimal256*)this._cPtr, scale);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

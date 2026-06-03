@@ -448,7 +448,7 @@ class Handle : gobject.object.ObjectWrap
   static rsvg.handle.Handle newFromFile(string filename)
   {
     RsvgHandle* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = rsvg_handle_new_from_file(_filename, &_err);
     if (_err)
@@ -571,7 +571,7 @@ class Handle : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_base_uri(cast(RsvgHandle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -580,7 +580,7 @@ class Handle : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_desc(cast(RsvgHandle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -626,7 +626,7 @@ class Handle : gobject.object.ObjectWrap
   bool getDimensionsSub(out rsvg.types.DimensionData dimensionData, string id = null) nothrow
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)rsvg_handle_get_dimensions_sub(cast(RsvgHandle*)this._cPtr, &dimensionData, _id);
     return _retval;
   }
@@ -680,7 +680,7 @@ class Handle : gobject.object.ObjectWrap
   bool getGeometryForElement(string id, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)rsvg_handle_get_geometry_for_element(cast(RsvgHandle*)this._cPtr, _id, &outInkRect, &outLogicalRect, &_err);
     if (_err)
@@ -732,7 +732,7 @@ class Handle : gobject.object.ObjectWrap
   bool getGeometryForLayer(string id, rsvg.types.Rectangle viewport, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)rsvg_handle_get_geometry_for_layer(cast(RsvgHandle*)this._cPtr, _id, &viewport, &outInkRect, &outLogicalRect, &_err);
     if (_err)
@@ -876,7 +876,7 @@ class Handle : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_metadata(cast(RsvgHandle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -931,7 +931,7 @@ class Handle : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id = null) nothrow
   {
     GdkPixbuf* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     _cretval = rsvg_handle_get_pixbuf_sub(cast(RsvgHandle*)this._cPtr, _id);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
@@ -962,7 +962,7 @@ class Handle : gobject.object.ObjectWrap
   bool getPositionSub(out rsvg.types.PositionData positionData, string id = null) nothrow
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)rsvg_handle_get_position_sub(cast(RsvgHandle*)this._cPtr, &positionData, _id);
     return _retval;
   }
@@ -972,7 +972,7 @@ class Handle : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_title(cast(RsvgHandle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -992,7 +992,7 @@ class Handle : gobject.object.ObjectWrap
   bool hasSub(string id) nothrow
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)rsvg_handle_has_sub(cast(RsvgHandle*)this._cPtr, _id);
     return _retval;
   }
@@ -1159,7 +1159,7 @@ class Handle : gobject.object.ObjectWrap
   bool renderCairoSub(cairo.context.Context cr, string id = null) nothrow
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)rsvg_handle_render_cairo_sub(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id);
     return _retval;
   }
@@ -1232,7 +1232,7 @@ class Handle : gobject.object.ObjectWrap
   bool renderElement(cairo.context.Context cr, string id, rsvg.types.Rectangle elementViewport)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)rsvg_handle_render_element(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &elementViewport, &_err);
     if (_err)
@@ -1280,7 +1280,7 @@ class Handle : gobject.object.ObjectWrap
   bool renderLayer(cairo.context.Context cr, string id, rsvg.types.Rectangle viewport)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)rsvg_handle_render_layer(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &viewport, &_err);
     if (_err)
@@ -1313,7 +1313,7 @@ class Handle : gobject.object.ObjectWrap
   */
   void setBaseUri(string baseUri) nothrow
   {
-    const(char)* _baseUri = baseUri.toCString(No.Alloc);
+    const(char)* _baseUri = baseUri.toCString!(No.Malloc, No.Nullable);
     rsvg_handle_set_base_uri(cast(RsvgHandle*)this._cPtr, _baseUri);
   }
 

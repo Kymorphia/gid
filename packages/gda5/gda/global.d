@@ -36,9 +36,9 @@ import libxml2.types;
 string escapeString(string string_) nothrow
 {
   char* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_default_escape_string(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -53,9 +53,9 @@ string escapeString(string string_) nothrow
 string unescapeString(string string_) nothrow
 {
   char* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_default_unescape_string(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -69,9 +69,9 @@ string unescapeString(string string_) nothrow
 string alphanumToText(string text) nothrow
 {
   char* _cretval;
-  char* _text = text.toCString(No.Alloc);
+  char* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_alphanum_to_text(_text);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -90,7 +90,7 @@ string alphanumToText(string text) nothrow
 string[] completionListGet(gda.connection.Connection cnc, string sql, int start, int end) nothrow
 {
   char** _cretval;
-  const(char)* _sql = sql.toCString(No.Alloc);
+  const(char)* _sql = sql.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_completion_list_get(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _sql, start, end);
   string[] _retval;
 
@@ -101,7 +101,7 @@ string[] completionListGet(gda.connection.Connection cnc, string sql, int start,
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -147,14 +147,14 @@ bool computeDmlStatements(gda.connection.Connection cnc, gda.statement.Statement
 */
 void dsnSplit(string string_, out string outDsn, out string outUsername, out string outPassword) nothrow
 {
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   char* _outDsn;
   char* _outUsername;
   char* _outPassword;
   gda_dsn_split(_string_, &_outDsn, &_outUsername, &_outPassword);
-  outDsn = _outDsn.fromCString(No.Free);
-  outUsername = _outUsername.fromCString(No.Free);
-  outPassword = _outPassword.fromCString(No.Free);
+  outDsn = _outDsn.fromCString!(No.Free);
+  outUsername = _outUsername.fromCString!(No.Free);
+  outPassword = _outPassword.fromCString!(No.Free);
 }
 
 /**
@@ -188,7 +188,7 @@ void dsnSplit(string string_, out string outDsn, out string outUsername, out str
 gobject.types.GType gTypeFromString(string str) nothrow
 {
   gobject.types.GType _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = gda_g_type_from_string(_str);
   return _retval;
 }
@@ -210,7 +210,7 @@ string gTypeToString(gobject.types.GType type) nothrow
 {
   const(char)* _cretval;
   _cretval = gda_g_type_to_string(type);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -227,9 +227,9 @@ string gTypeToString(gobject.types.GType type) nothrow
 string getApplicationExecPath(string appName) nothrow
 {
   char* _cretval;
-  const(char)* _appName = appName.toCString(No.Alloc);
+  const(char)* _appName = appName.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_get_application_exec_path(_appName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -245,8 +245,8 @@ string getApplicationExecPath(string appName) nothrow
 bool identifierEqual(string id1, string id2) nothrow
 {
   bool _retval;
-  const(char)* _id1 = id1.toCString(No.Alloc);
-  const(char)* _id2 = id2.toCString(No.Alloc);
+  const(char)* _id1 = id1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _id2 = id2.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_identifier_equal(_id1, _id2);
   return _retval;
 }
@@ -261,7 +261,7 @@ bool identifierEqual(string id1, string id2) nothrow
 uint identifierHash(string id) nothrow
 {
   uint _retval;
-  const(char)* _id = id.toCString(No.Alloc);
+  const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
   _retval = gda_identifier_hash(_id);
   return _retval;
 }
@@ -330,7 +330,7 @@ bool logIsEnabled() nothrow
 bool parseFormattedDate(glib.date.Date gdate, string value, glib.types.DateDMY first, glib.types.DateDMY second, glib.types.DateDMY third, char sep) nothrow
 {
   bool _retval;
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_parse_formatted_date(cast(GDate*)&gdate, _value, first, second, third, sep);
   return _retval;
 }
@@ -339,7 +339,7 @@ bool parseFormattedDate(glib.date.Date gdate, string value, glib.types.DateDMY f
 bool parseFormattedTime(gda.time.Time timegda, string value, char sep) nothrow
 {
   bool _retval;
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_parse_formatted_time(cast(GdaTime*)&timegda, _value, sep);
   return _retval;
 }
@@ -360,7 +360,7 @@ bool parseFormattedTime(gda.time.Time timegda, string value, char sep) nothrow
 bool parseFormattedTimestamp(gda.timestamp.Timestamp timestamp, string value, glib.types.DateDMY first, glib.types.DateDMY second, glib.types.DateDMY third, char sep) nothrow
 {
   bool _retval;
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_parse_formatted_timestamp(cast(GdaTimestamp*)&timestamp, _value, first, second, third, sep);
   return _retval;
 }
@@ -380,7 +380,7 @@ bool parseFormattedTimestamp(gda.timestamp.Timestamp timestamp, string value, gl
 bool parseIso8601Date(glib.date.Date gdate, string value) nothrow
 {
   bool _retval;
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_parse_iso8601_date(cast(GDate*)&gdate, _value);
   return _retval;
 }
@@ -398,7 +398,7 @@ bool parseIso8601Date(glib.date.Date gdate, string value) nothrow
 bool parseIso8601Time(gda.time.Time timegda, string value) nothrow
 {
   bool _retval;
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_parse_iso8601_time(cast(GdaTime*)&timegda, _value);
   return _retval;
 }
@@ -416,7 +416,7 @@ bool parseIso8601Time(gda.time.Time timegda, string value) nothrow
 bool parseIso8601Timestamp(gda.timestamp.Timestamp timestamp, string value) nothrow
 {
   bool _retval;
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_parse_iso8601_timestamp(cast(GdaTimestamp*)&timestamp, _value);
   return _retval;
 }
@@ -479,7 +479,7 @@ bool rewriteStatementForNullParameters(gda.statement.Statement stmt, gda.set.Set
 bool rfc1738Decode(string string_) nothrow
 {
   bool _retval;
-  char* _string_ = string_.toCString(No.Alloc);
+  char* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gda_rfc1738_decode(_string_);
   return _retval;
 }
@@ -497,9 +497,9 @@ bool rfc1738Decode(string string_) nothrow
 string rfc1738Encode(string string_) nothrow
 {
   char* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_rfc1738_encode(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -544,9 +544,9 @@ glib.types.Quark sqlErrorQuark() nothrow
 string sqlIdentifierForceQuotes(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_sql_identifier_force_quotes(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -575,9 +575,9 @@ string sqlIdentifierForceQuotes(string str) nothrow
 string sqlIdentifierPrepareForCompare(string str) nothrow
 {
   char* _cretval;
-  char* _str = str.toCString(No.Alloc);
+  char* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_sql_identifier_prepare_for_compare(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -765,9 +765,9 @@ string sqlIdentifierPrepareForCompare(string str) nothrow
 string sqlIdentifierQuote(string id, gda.connection.Connection cnc, gda.server_provider.ServerProvider prov, bool metaStoreConvention, bool forceQuotes) nothrow
 {
   char* _cretval;
-  const(char)* _id = id.toCString(No.Alloc);
+  const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_sql_identifier_quote(_id, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, prov ? cast(GdaServerProvider*)prov._cPtr(No.Dup) : null, metaStoreConvention, forceQuotes);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -785,7 +785,7 @@ string sqlIdentifierQuote(string id, gda.connection.Connection cnc, gda.server_p
 string[] sqlIdentifierSplit(string id) nothrow
 {
   char** _cretval;
-  const(char)* _id = id.toCString(No.Alloc);
+  const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_sql_identifier_split(_id);
   string[] _retval;
 
@@ -796,7 +796,7 @@ string[] sqlIdentifierSplit(string id) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -813,7 +813,7 @@ string sqlValueStringify(gobject.value.Value value) nothrow
 {
   char* _cretval;
   _cretval = gda_sql_value_stringify(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -831,7 +831,7 @@ string sqlValueStringify(gobject.value.Value value) nothrow
 gda.binary.Binary stringToBinary(string str = null) nothrow
 {
   GdaBinary* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gda_string_to_binary(_str);
   auto _retval = _cretval ? new gda.binary.Binary(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -847,7 +847,7 @@ gda.binary.Binary stringToBinary(string str = null) nothrow
 gda.blob.Blob stringToBlob(string str) nothrow
 {
   GdaBlob* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_string_to_blob(_str);
   auto _retval = _cretval ? new gda.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -865,9 +865,9 @@ gda.blob.Blob stringToBlob(string str) nothrow
 string textToAlphanum(string text) nothrow
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_text_to_alphanum(_text);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -935,9 +935,9 @@ bool utilityDataModelDumpDataToXml(gda.data_model.DataModel model, libxml2.types
 string utilityDataModelFindColumnDescription(gda.data_select.DataSelect model, string fieldName) nothrow
 {
   const(char)* _cretval;
-  const(char)* _fieldName = fieldName.toCString(No.Alloc);
+  const(char)* _fieldName = fieldName.toCString!(No.Malloc, No.Nullable);
   _cretval = gda_utility_data_model_find_column_description(model ? cast(GdaDataSelect*)model._cPtr(No.Dup) : null, _fieldName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1042,6 +1042,6 @@ string valueStringify(gobject.value.Value value) nothrow
 {
   char* _cretval;
   _cretval = gda_value_stringify(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

@@ -264,7 +264,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void addClass(string className) nothrow
   {
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString!(No.Malloc, No.Nullable);
     gtk_style_context_add_class(cast(GtkStyleContext*)this._cPtr, _className);
   }
 
@@ -322,7 +322,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void addRegion(string regionName, gtk.types.RegionFlags flags) nothrow
   {
-    const(char)* _regionName = regionName.toCString(No.Alloc);
+    const(char)* _regionName = regionName.toCString!(No.Malloc, No.Nullable);
     gtk_style_context_add_region(cast(GtkStyleContext*)this._cPtr, _regionName, flags);
   }
 
@@ -555,7 +555,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     GValue _value;
     gtk_style_context_get_property(cast(GtkStyleContext*)this._cPtr, _property, state, &_value);
     value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
@@ -606,7 +606,7 @@ class StyleContext : gobject.object.ObjectWrap
   gtk.css_section.CssSection getSection(string property) nothrow
   {
     GtkCssSection* _cretval;
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_style_context_get_section(cast(GtkStyleContext*)this._cPtr, _property);
     auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -641,7 +641,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void getStyleProperty(string propertyName, gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     gtk_style_context_get_style_property(cast(GtkStyleContext*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 
@@ -656,7 +656,7 @@ class StyleContext : gobject.object.ObjectWrap
   bool hasClass(string className) nothrow
   {
     bool _retval;
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_style_context_has_class(cast(GtkStyleContext*)this._cPtr, _className);
     return _retval;
   }
@@ -674,7 +674,7 @@ class StyleContext : gobject.object.ObjectWrap
   bool hasRegion(string regionName, out gtk.types.RegionFlags flagsReturn) nothrow
   {
     bool _retval;
-    const(char)* _regionName = regionName.toCString(No.Alloc);
+    const(char)* _regionName = regionName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_style_context_has_region(cast(GtkStyleContext*)this._cPtr, _regionName, &flagsReturn);
     return _retval;
   }
@@ -732,7 +732,7 @@ class StyleContext : gobject.object.ObjectWrap
   bool lookupColor(string colorName, out gdk.rgba.RGBA color) nothrow
   {
     bool _retval;
-    const(char)* _colorName = colorName.toCString(No.Alloc);
+    const(char)* _colorName = colorName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_style_context_lookup_color(cast(GtkStyleContext*)this._cPtr, _colorName, cast(GdkRGBA*)&color);
     return _retval;
   }
@@ -751,7 +751,7 @@ class StyleContext : gobject.object.ObjectWrap
   gtk.icon_set.IconSet lookupIconSet(string stockId) nothrow
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_style_context_lookup_icon_set(cast(GtkStyleContext*)this._cPtr, _stockId);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -854,7 +854,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void removeClass(string className) nothrow
   {
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString!(No.Malloc, No.Nullable);
     gtk_style_context_remove_class(cast(GtkStyleContext*)this._cPtr, _className);
   }
 
@@ -877,7 +877,7 @@ class StyleContext : gobject.object.ObjectWrap
   */
   void removeRegion(string regionName) nothrow
   {
-    const(char)* _regionName = regionName.toCString(No.Alloc);
+    const(char)* _regionName = regionName.toCString!(No.Malloc, No.Nullable);
     gtk_style_context_remove_region(cast(GtkStyleContext*)this._cPtr, _regionName);
   }
 
@@ -1113,7 +1113,7 @@ class StyleContext : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)this._cPtr, flags);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

@@ -118,11 +118,11 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   static string encodePassword(string username, string realm, string password) nothrow
   {
     char* _cretval;
-    const(char)* _username = username.toCString(No.Alloc);
-    const(char)* _realm = realm.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+    const(char)* _realm = realm.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_auth_domain_digest_encode_password(_username, _realm, _password);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
     {
       string _dretval;
       auto _dlg = cast(soup.types.AuthDomainDigestAuthCallback*)userData;
-      string _username = username.fromCString(No.Free);
+      string _username = username.fromCString!(No.Free);
 
       try
       {
@@ -158,7 +158,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       {
         gidInvokeCallbackExceptionHandler(e, "soup.types.AuthDomainDigestAuthCallback");
       }
-      auto _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = toCString!(Yes.Malloc, Yes.Nullable)(_dretval);
 
       return _retval;
     }

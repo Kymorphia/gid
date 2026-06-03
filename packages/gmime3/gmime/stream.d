@@ -267,7 +267,7 @@ class Stream : gobject.object.ObjectWrap
   ptrdiff_t writeString(string str) nothrow
   {
     ptrdiff_t _retval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _retval = g_mime_stream_write_string(cast(GMimeStream*)this._cPtr, _str);
     return _retval;
   }

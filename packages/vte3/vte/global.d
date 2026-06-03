@@ -31,7 +31,7 @@ gobject.types.GType eventContextGetType() nothrow
 bool getEncodingSupported(string encoding) nothrow
 {
   bool _retval;
-  const(char)* _encoding = encoding.toCString(No.Alloc);
+  const(char)* _encoding = encoding.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)vte_get_encoding_supported(_encoding);
   return _retval;
 }
@@ -61,7 +61,7 @@ string[] getEncodings(bool includeAliases) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -87,7 +87,7 @@ string getFeatures() nothrow
 {
   const(char)* _cretval;
   _cretval = vte_get_features();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -143,6 +143,6 @@ string getUserShell() nothrow
 {
   char* _cretval;
   _cretval = vte_get_user_shell();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

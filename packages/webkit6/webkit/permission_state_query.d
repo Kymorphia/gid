@@ -75,7 +75,7 @@ class PermissionStateQuery : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_permission_state_query_get_name(cast(WebKitPermissionStateQuery*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -227,7 +227,7 @@ class MetaStruct : gobject.object.ObjectWrap
     _cretval = gda_meta_struct_dump_as_graph(cast(GdaMetaStruct*)this._cPtr, info, &_err);
     if (_err)
       throw new MetaStructException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -266,9 +266,9 @@ class MetaStruct : gobject.object.ObjectWrap
   bool loadFromXmlFile(string catalog, string schema, string xmlSpecFile)
   {
     bool _retval;
-    const(char)* _catalog = catalog.toCString(No.Alloc);
-    const(char)* _schema = schema.toCString(No.Alloc);
-    const(char)* _xmlSpecFile = xmlSpecFile.toCString(No.Alloc);
+    const(char)* _catalog = catalog.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _schema = schema.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _xmlSpecFile = xmlSpecFile.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_meta_struct_load_from_xml_file(cast(GdaMetaStruct*)this._cPtr, _catalog, _schema, _xmlSpecFile, &_err);
     if (_err)

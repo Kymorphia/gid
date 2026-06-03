@@ -80,7 +80,7 @@ class QuarkList : gobject.boxed.Boxed
   static gda.quark_list.QuarkList newFromString(string string_) nothrow
   {
     GdaQuarkList* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_quark_list_new_from_string(_string_);
     auto _retval = _cretval ? new gda.quark_list.QuarkList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -105,7 +105,7 @@ class QuarkList : gobject.boxed.Boxed
   */
   void addFromString(string string_, bool cleanup) nothrow
   {
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     gda_quark_list_add_from_string(cast(GdaQuarkList*)this._cPtr, _string_, cleanup);
   }
 
@@ -141,9 +141,9 @@ class QuarkList : gobject.boxed.Boxed
   string find(string name) nothrow
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_quark_list_find(cast(GdaQuarkList*)this._cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class QuarkList : gobject.boxed.Boxed
   */
   void remove(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gda_quark_list_remove(cast(GdaQuarkList*)this._cPtr, _name);
   }
 }

@@ -200,7 +200,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void applyTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)this._cPtr, _name, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
 
@@ -311,7 +311,7 @@ class TextBuffer : gobject.object.ObjectWrap
   gtk.text_mark.TextMark createMark(string markName, gtk.text_iter.TextIter where, bool leftGravity) nothrow
   {
     GtkTextMark* _cretval;
-    const(char)* _markName = markName.toCString(No.Alloc);
+    const(char)* _markName = markName.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)this._cPtr, _markName, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null, leftGravity);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
@@ -396,7 +396,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void deleteMarkByName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_text_buffer_delete_mark_by_name(cast(GtkTextBuffer*)this._cPtr, _name);
   }
 
@@ -720,7 +720,7 @@ class TextBuffer : gobject.object.ObjectWrap
   gtk.text_mark.TextMark getMark(string name) nothrow
   {
     GtkTextMark* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_text_buffer_get_mark(cast(GtkTextBuffer*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
@@ -824,7 +824,7 @@ class TextBuffer : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, includeHiddenChars);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -874,7 +874,7 @@ class TextBuffer : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, includeHiddenChars);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1097,7 +1097,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void moveMarkByName(string name, gtk.text_iter.TextIter where) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)this._cPtr, _name, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
   }
 
@@ -1171,7 +1171,7 @@ class TextBuffer : gobject.object.ObjectWrap
     }
     auto _function_CB = function_ ? &_function_Callback : null;
     GdkAtom _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
     GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
     _cretval = gtk_text_buffer_register_deserialize_format(cast(GtkTextBuffer*)this._cPtr, _mimeType, _function_CB, _function_, _function_DestroyCB);
@@ -1192,7 +1192,7 @@ class TextBuffer : gobject.object.ObjectWrap
   gdk.atom.Atom registerDeserializeTagset(string tagsetName = null) nothrow
   {
     GdkAtom _cretval;
-    const(char)* _tagsetName = tagsetName.toCString(No.Alloc);
+    const(char)* _tagsetName = tagsetName.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_text_buffer_register_deserialize_tagset(cast(GtkTextBuffer*)this._cPtr, _tagsetName);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
@@ -1237,7 +1237,7 @@ class TextBuffer : gobject.object.ObjectWrap
     }
     auto _function_CB = function_ ? &_function_Callback : null;
     GdkAtom _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
     GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
     _cretval = gtk_text_buffer_register_serialize_format(cast(GtkTextBuffer*)this._cPtr, _mimeType, _function_CB, _function_, _function_DestroyCB);
@@ -1272,7 +1272,7 @@ class TextBuffer : gobject.object.ObjectWrap
   gdk.atom.Atom registerSerializeTagset(string tagsetName = null) nothrow
   {
     GdkAtom _cretval;
-    const(char)* _tagsetName = tagsetName.toCString(No.Alloc);
+    const(char)* _tagsetName = tagsetName.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_text_buffer_register_serialize_tagset(cast(GtkTextBuffer*)this._cPtr, _tagsetName);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
@@ -1333,7 +1333,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void removeTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)this._cPtr, _name, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
 

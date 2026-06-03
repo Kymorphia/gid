@@ -101,8 +101,8 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   this(string identifier, string schemaId) nothrow
   {
     PanelSettings* _cretval;
-    const(char)* _identifier = identifier.toCString(No.Alloc);
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_new(_identifier, _schemaId);
     this(_cretval, Yes.Take);
   }
@@ -111,11 +111,11 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   static panel.settings.Settings newRelocatable(string identifier, string schemaId, string schemaIdPrefix, string pathPrefix, string pathSuffix) nothrow
   {
     PanelSettings* _cretval;
-    const(char)* _identifier = identifier.toCString(No.Alloc);
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
-    const(char)* _schemaIdPrefix = schemaIdPrefix.toCString(No.Alloc);
-    const(char)* _pathPrefix = pathPrefix.toCString(No.Alloc);
-    const(char)* _pathSuffix = pathSuffix.toCString(No.Alloc);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _schemaIdPrefix = schemaIdPrefix.toCString!(No.Malloc, No.Nullable);
+    const(char)* _pathPrefix = pathPrefix.toCString!(No.Malloc, No.Nullable);
+    const(char)* _pathSuffix = pathSuffix.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_new_relocatable(_identifier, _schemaId, _schemaIdPrefix, _pathPrefix, _pathSuffix);
     auto _retval = gobject.object.ObjectWrap._getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
     return _retval;
@@ -125,9 +125,9 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   static panel.settings.Settings newWithPath(string identifier, string schemaId, string path) nothrow
   {
     PanelSettings* _cretval;
-    const(char)* _identifier = identifier.toCString(No.Alloc);
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_new_with_path(_identifier, _schemaId, _path);
     auto _retval = gobject.object.ObjectWrap._getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
     return _retval;
@@ -137,21 +137,21 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   static string resolveSchemaPath(string schemaIdPrefix, string schemaId, string identifier, string pathPrefix, string pathSuffix) nothrow
   {
     char* _cretval;
-    const(char)* _schemaIdPrefix = schemaIdPrefix.toCString(No.Alloc);
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
-    const(char)* _identifier = identifier.toCString(No.Alloc);
-    const(char)* _pathPrefix = pathPrefix.toCString(No.Alloc);
-    const(char)* _pathSuffix = pathSuffix.toCString(No.Alloc);
+    const(char)* _schemaIdPrefix = schemaIdPrefix.toCString!(No.Malloc, No.Nullable);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
+    const(char)* _pathPrefix = pathPrefix.toCString!(No.Malloc, No.Nullable);
+    const(char)* _pathSuffix = pathSuffix.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_resolve_schema_path(_schemaIdPrefix, _schemaId, _identifier, _pathPrefix, _pathSuffix);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
   /** */
   void bind(string key, void* object, string property, gio.types.SettingsBindFlags flags) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     panel_settings_bind(cast(PanelSettings*)this._cPtr, _key, object, _property, flags);
   }
 
@@ -207,8 +207,8 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       return _retval;
     }
     auto _setMappingCB = setMapping ? &_setMappingCallback : null;
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     auto _setMapping = setMapping ? freezeDelegate(cast(void*)&setMapping) : null;
     GDestroyNotify _setMappingDestroyCB = setMapping ? &thawDelegate : null;
     panel_settings_bind_with_mapping(cast(PanelSettings*)this._cPtr, _key, object, _property, flags, _getMappingCB, _setMappingCB, _setMapping, _setMappingDestroyCB);
@@ -218,7 +218,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   bool getBoolean(string key) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)panel_settings_get_boolean(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -227,7 +227,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   glib.variant.Variant getDefaultValue(string key) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_get_default_value(cast(PanelSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -237,7 +237,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   double getDouble(string key) nothrow
   {
     double _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = panel_settings_get_double(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -246,7 +246,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   int getInt(string key) nothrow
   {
     int _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = panel_settings_get_int(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -256,7 +256,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     const(char)* _cretval;
     _cretval = panel_settings_get_schema_id(cast(PanelSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -264,9 +264,9 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   string getString(string key) nothrow
   {
     char* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_get_string(cast(PanelSettings*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   uint getUint(string key) nothrow
   {
     uint _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = panel_settings_get_uint(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -283,7 +283,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   glib.variant.Variant getUserValue(string key) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_get_user_value(cast(PanelSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -293,7 +293,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   glib.variant.Variant getValue(string key) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_settings_get_value(cast(PanelSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -302,50 +302,50 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   /** */
   void setBoolean(string key, bool val) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     panel_settings_set_boolean(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setDouble(string key, double val) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     panel_settings_set_double(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setInt(string key, int val) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     panel_settings_set_int(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setString(string key, string val) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _val = val.toCString!(No.Malloc, No.Nullable);
     panel_settings_set_string(cast(PanelSettings*)this._cPtr, _key, _val);
   }
 
   /** */
   void setUint(string key, uint val) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     panel_settings_set_uint(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setValue(string key, glib.variant.Variant value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     panel_settings_set_value(cast(PanelSettings*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /** */
   void unbind(string property) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     panel_settings_unbind(cast(PanelSettings*)this._cPtr, _property);
   }
 

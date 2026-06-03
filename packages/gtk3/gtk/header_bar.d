@@ -249,7 +249,7 @@ class HeaderBar : gtk.container.Container
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class HeaderBar : gtk.container.Container
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_subtitle(cast(GtkHeaderBar*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class HeaderBar : gtk.container.Container
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_title(cast(GtkHeaderBar*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class HeaderBar : gtk.container.Container
   */
   void setDecorationLayout(string layout = null) nothrow
   {
-    const(char)* _layout = layout.toCString(No.Alloc);
+    const(char)* _layout = layout.toCString!(No.Malloc, Yes.Nullable);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)this._cPtr, _layout);
   }
 
@@ -416,7 +416,7 @@ class HeaderBar : gtk.container.Container
   */
   void setSubtitle(string subtitle = null) nothrow
   {
-    const(char)* _subtitle = subtitle.toCString(No.Alloc);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, Yes.Nullable);
     gtk_header_bar_set_subtitle(cast(GtkHeaderBar*)this._cPtr, _subtitle);
   }
 
@@ -430,7 +430,7 @@ class HeaderBar : gtk.container.Container
   */
   void setTitle(string title = null) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     gtk_header_bar_set_title(cast(GtkHeaderBar*)this._cPtr, _title);
   }
 }

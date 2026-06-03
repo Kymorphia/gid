@@ -81,7 +81,7 @@ class Plugin : gst.object.ObjectWrap
   static gst.plugin.Plugin loadByName(string name) nothrow
   {
     GstPlugin* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_plugin_load_by_name(_name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
@@ -99,7 +99,7 @@ class Plugin : gst.object.ObjectWrap
   static gst.plugin.Plugin loadFile(string filename)
   {
     GstPlugin* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gst_plugin_load_file(_filename, &_err);
     if (_err)
@@ -157,13 +157,13 @@ class Plugin : gst.object.ObjectWrap
     auto _initFuncCB = initFunc ? &_initFuncCallback : null;
     _static_initFunc = initFunc;
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _version_ = version_.toCString(No.Alloc);
-    const(char)* _license = license.toCString(No.Alloc);
-    const(char)* _source = source.toCString(No.Alloc);
-    const(char)* _package_ = package_.toCString(No.Alloc);
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
+    const(char)* _version_ = version_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _license = license.toCString!(No.Malloc, No.Nullable);
+    const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
+    const(char)* _package_ = package_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_plugin_register_static(majorVersion, minorVersion, _name, _description, _initFuncCB, _version_, _license, _source, _package_, _origin);
     _static_initFunc = null;
     return _retval;
@@ -219,13 +219,13 @@ class Plugin : gst.object.ObjectWrap
     }
     auto _initFullFuncCB = initFullFunc ? &_initFullFuncCallback : null;
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _version_ = version_.toCString(No.Alloc);
-    const(char)* _license = license.toCString(No.Alloc);
-    const(char)* _source = source.toCString(No.Alloc);
-    const(char)* _package_ = package_.toCString(No.Alloc);
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
+    const(char)* _version_ = version_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _license = license.toCString!(No.Malloc, No.Nullable);
+    const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
+    const(char)* _package_ = package_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, No.Nullable);
     auto _initFullFunc = initFullFunc ? cast(void*)&(initFullFunc) : null;
     _retval = cast(bool)gst_plugin_register_static_full(majorVersion, minorVersion, _name, _description, _initFullFuncCB, _version_, _license, _source, _package_, _origin, _initFullFunc);
     return _retval;
@@ -261,19 +261,19 @@ class Plugin : gst.object.ObjectWrap
   {
     char*[] _tmpenvVars;
     foreach (s; envVars)
-      _tmpenvVars ~= s.toCString(No.Alloc);
+      _tmpenvVars ~= s.toCString;
     _tmpenvVars ~= null;
     const(char*)* _envVars = _tmpenvVars.ptr;
 
     char*[] _tmppaths;
     foreach (s; paths)
-      _tmppaths ~= s.toCString(No.Alloc);
+      _tmppaths ~= s.toCString;
     _tmppaths ~= null;
     const(char*)* _paths = _tmppaths.ptr;
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString;
     _tmpnames ~= null;
     const(char*)* _names = _tmpnames.ptr;
 
@@ -308,30 +308,30 @@ class Plugin : gst.object.ObjectWrap
   */
   void addDependencySimple(string envVars, string paths, string names, gst.types.PluginDependencyFlags flags) nothrow
   {
-    const(char)* _envVars = envVars.toCString(No.Alloc);
-    const(char)* _paths = paths.toCString(No.Alloc);
-    const(char)* _names = names.toCString(No.Alloc);
+    const(char)* _envVars = envVars.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _paths = paths.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _names = names.toCString!(No.Malloc, Yes.Nullable);
     gst_plugin_add_dependency_simple(cast(GstPlugin*)this._cPtr, _envVars, _paths, _names, flags);
   }
 
   /** */
   void addStatusError(string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     gst_plugin_add_status_error(cast(GstPlugin*)this._cPtr, _message);
   }
 
   /** */
   void addStatusInfo(string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     gst_plugin_add_status_info(cast(GstPlugin*)this._cPtr, _message);
   }
 
   /** */
   void addStatusWarning(string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     gst_plugin_add_status_warning(cast(GstPlugin*)this._cPtr, _message);
   }
 
@@ -357,7 +357,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_description(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -369,7 +369,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_filename(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -381,7 +381,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_license(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_name(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_origin(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_package(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_release_date_string(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -449,7 +449,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_source(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class Plugin : gst.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -487,7 +487,7 @@ class Plugin : gst.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -507,7 +507,7 @@ class Plugin : gst.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -521,7 +521,7 @@ class Plugin : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_version(cast(GstPlugin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

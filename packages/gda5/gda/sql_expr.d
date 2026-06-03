@@ -167,7 +167,7 @@ class SqlExpr : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gda_sql_expr_serialize(cast(GdaSqlExpr*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

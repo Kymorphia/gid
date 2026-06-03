@@ -242,7 +242,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   static gstvideo.video_time_code.VideoTimeCode newFromString(string tcStr) nothrow
   {
     GstVideoTimeCode* _cretval;
-    const(char)* _tcStr = tcStr.toCString(No.Alloc);
+    const(char)* _tcStr = tcStr.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_video_time_code_new_from_string(_tcStr);
     auto _retval = _cretval ? new gstvideo.video_time_code.VideoTimeCode(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -431,7 +431,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_video_time_code_to_string(cast(const(GstVideoTimeCode)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

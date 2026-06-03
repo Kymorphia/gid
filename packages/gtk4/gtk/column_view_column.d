@@ -279,7 +279,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   this(string title = null, gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     GtkColumnViewColumn* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
@@ -354,7 +354,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_id(cast(GtkColumnViewColumn*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_title(cast(GtkColumnViewColumn*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -470,7 +470,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setId(string id = null) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
     gtk_column_view_column_set_id(cast(GtkColumnViewColumn*)this._cPtr, _id);
   }
 
@@ -517,7 +517,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setTitle(string title = null) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     gtk_column_view_column_set_title(cast(GtkColumnViewColumn*)this._cPtr, _title);
   }
 

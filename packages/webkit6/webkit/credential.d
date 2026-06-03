@@ -59,8 +59,8 @@ class Credential : gobject.boxed.Boxed
   this(string username, string password, webkit.types.CredentialPersistence persistence) nothrow
   {
     WebKitCredential* _cretval;
-    const(char)* _username = username.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_credential_new(_username, _password, persistence);
     this(_cretval, Yes.Take);
   }
@@ -96,7 +96,7 @@ class Credential : gobject.boxed.Boxed
   static webkit.credential.Credential newForCertificatePin(string pin, webkit.types.CredentialPersistence persistence) nothrow
   {
     WebKitCredential* _cretval;
-    const(char)* _pin = pin.toCString(No.Alloc);
+    const(char)* _pin = pin.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_credential_new_for_certificate_pin(_pin, persistence);
     auto _retval = _cretval ? new webkit.credential.Credential(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -134,7 +134,7 @@ class Credential : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_credential_get_password(cast(WebKitCredential*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class Credential : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_credential_get_username(cast(WebKitCredential*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

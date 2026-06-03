@@ -110,7 +110,7 @@ class BufferPool : gst.object.ObjectWrap
   */
   static void configAddOption(gst.structure.Structure config, string option) nothrow
   {
-    const(char)* _option = option.toCString(No.Alloc);
+    const(char)* _option = option.toCString!(No.Malloc, No.Nullable);
     gst_buffer_pool_config_add_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, _option);
   }
 
@@ -145,7 +145,7 @@ class BufferPool : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_buffer_pool_config_get_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, index);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class BufferPool : gst.object.ObjectWrap
   static bool configHasOption(gst.structure.Structure config, string option) nothrow
   {
     bool _retval;
-    const(char)* _option = option.toCString(No.Alloc);
+    const(char)* _option = option.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_buffer_pool_config_has_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, _option);
     return _retval;
   }
@@ -321,7 +321,7 @@ class BufferPool : gst.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -336,7 +336,7 @@ class BufferPool : gst.object.ObjectWrap
   bool hasOption(string option) nothrow
   {
     bool _retval;
-    const(char)* _option = option.toCString(No.Alloc);
+    const(char)* _option = option.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_buffer_pool_has_option(cast(GstBufferPool*)this._cPtr, _option);
     return _retval;
   }

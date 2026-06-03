@@ -485,7 +485,7 @@ class Variant
   static glib.variant.Variant newBytestring(string string_) nothrow
   {
     GVariant* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_new_bytestring(_string_);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -510,7 +510,7 @@ class Variant
 
     char*[] _tmpstrv;
     foreach (s; strv)
-      _tmpstrv ~= s.toCString(No.Alloc);
+      _tmpstrv ~= s.toCString;
     const(char*)* _strv = _tmpstrv.ptr;
 
     _cretval = g_variant_new_bytestring_array(_strv, _length);
@@ -709,7 +709,7 @@ class Variant
   static glib.variant.Variant newObjectPath(string objectPath) nothrow
   {
     GVariant* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_new_object_path(_objectPath);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -737,7 +737,7 @@ class Variant
 
     const(char)*[] _tmpstrv;
     foreach (s; strv)
-      _tmpstrv ~= s.toCString(No.Alloc);
+      _tmpstrv ~= s.toCString;
     const(char*)* _strv = _tmpstrv.ptr;
 
     _cretval = g_variant_new_objv(_strv, _length);
@@ -757,7 +757,7 @@ class Variant
   static glib.variant.Variant newSignature(string signature) nothrow
   {
     GVariant* _cretval;
-    const(char)* _signature = signature.toCString(No.Alloc);
+    const(char)* _signature = signature.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_new_signature(_signature);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -777,7 +777,7 @@ class Variant
   static glib.variant.Variant newString(string string_) nothrow
   {
     GVariant* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_new_string(_string_);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -802,7 +802,7 @@ class Variant
 
     const(char)*[] _tmpstrv;
     foreach (s; strv)
-      _tmpstrv ~= s.toCString(No.Alloc);
+      _tmpstrv ~= s.toCString;
     const(char*)* _strv = _tmpstrv.ptr;
 
     _cretval = g_variant_new_strv(_strv, _length);
@@ -957,7 +957,7 @@ class Variant
   bool checkFormatString(string formatString, bool copyOnly) nothrow
   {
     bool _retval;
-    const(char)* _formatString = formatString.toCString(No.Alloc);
+    const(char)* _formatString = formatString.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_variant_check_format_string(cast(GVariant*)this._cPtr, _formatString, copyOnly);
     return _retval;
   }
@@ -1054,7 +1054,7 @@ class Variant
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1084,7 +1084,7 @@ class Variant
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1114,7 +1114,7 @@ class Variant
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1190,7 +1190,7 @@ class Variant
   {
     const(char)* _cretval;
     _cretval = g_variant_get_bytestring(cast(GVariant*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1218,7 +1218,7 @@ class Variant
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1457,7 +1457,7 @@ class Variant
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1543,7 +1543,7 @@ class Variant
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1574,7 +1574,7 @@ class Variant
   {
     const(char)* _cretval;
     _cretval = g_variant_get_type_string(cast(GVariant*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1750,7 +1750,7 @@ class Variant
   glib.variant.Variant lookupValue(string key, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_lookup_value(cast(GVariant*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1794,7 +1794,7 @@ class Variant
   {
     char* _cretval;
     _cretval = g_variant_print(cast(GVariant*)this._cPtr, typeAnnotate);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1913,7 +1913,7 @@ class Variant
   static bool isObjectPath(string string_) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_variant_is_object_path(_string_);
     return _retval;
   }
@@ -1933,7 +1933,7 @@ class Variant
   static bool isSignature(string string_) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_variant_is_signature(_string_);
     return _retval;
   }
@@ -1977,9 +1977,9 @@ class Variant
   static string parseErrorPrintContext(glib.error.ErrorWrap error, string sourceStr) nothrow
   {
     char* _cretval;
-    const(char)* _sourceStr = sourceStr.toCString(No.Alloc);
+    const(char)* _sourceStr = sourceStr.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_parse_error_print_context(error ? cast(GError*)error._cPtr : null, _sourceStr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -2035,10 +2035,10 @@ GVariant* createVariant(T)(T val) nothrow
   else static if (is(T == float) || is(T == double))
     return g_variant_new_double(val);
   else static if (isSomeString!T)
-    return g_variant_new_string(toCString(val.to!string, No.Alloc));
+    return g_variant_new_string(val.to!string.toCString);
   else static if (is(T : E[], E))
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -2050,7 +2050,7 @@ GVariant* createVariant(T)(T val) nothrow
   }
   else static if (is(T : V[K], V, K)) // Dictionary
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -2161,7 +2161,7 @@ T getVal(T)(GVariant* v) nothrow
   else static if (is(T == float) || is(T == double))
     return cast(T)g_variant_get_double(v);
   else static if (isSomeString!T)
-    return fromCString(g_variant_get_string(v, null), No.Free); // g_variant_get_string second argument is an optional output length parameter
+    return fromCString(g_variant_get_string(v, null)); // g_variant_get_string second argument is an optional output length parameter
   else static if (is(T : E[], E))
   {
     T valArray;

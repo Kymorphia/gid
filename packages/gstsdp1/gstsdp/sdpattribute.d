@@ -92,8 +92,8 @@ class SDPAttribute
   gstsdp.types.SDPResult set(string key, string value = null) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_sdp_attribute_set(cast(GstSDPAttribute*)this._cPtr, _key, _value);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

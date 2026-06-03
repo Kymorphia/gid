@@ -176,7 +176,7 @@ class FontSelection : gtk.box.Box
   {
     char* _cretval;
     _cretval = gtk_font_selection_get_font_name(cast(GtkFontSelection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class FontSelection : gtk.box.Box
   {
     const(char)* _cretval;
     _cretval = gtk_font_selection_get_preview_text(cast(GtkFontSelection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class FontSelection : gtk.box.Box
   bool setFontName(string fontname) nothrow
   {
     bool _retval;
-    const(char)* _fontname = fontname.toCString(No.Alloc);
+    const(char)* _fontname = fontname.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_font_selection_set_font_name(cast(GtkFontSelection*)this._cPtr, _fontname);
     return _retval;
   }
@@ -287,7 +287,7 @@ class FontSelection : gtk.box.Box
   */
   void setPreviewText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_font_selection_set_preview_text(cast(GtkFontSelection*)this._cPtr, _text);
   }
 }

@@ -329,7 +329,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   {
     const(char)* _cretval;
     _cretval = adw_expander_row_get_icon_name(cast(AdwExpanderRow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   {
     const(char)* _cretval;
     _cretval = adw_expander_row_get_subtitle(cast(AdwExpanderRow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     adw_expander_row_set_icon_name(cast(AdwExpanderRow*)this._cPtr, _iconName);
   }
 
@@ -451,7 +451,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void setSubtitle(string subtitle) nothrow
   {
-    const(char)* _subtitle = subtitle.toCString(No.Alloc);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
     adw_expander_row_set_subtitle(cast(AdwExpanderRow*)this._cPtr, _subtitle);
   }
 

@@ -260,7 +260,7 @@ class Path : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gsk_path_to_string(cast(GskPath*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class Path : gobject.boxed.Boxed
   static gsk.path.Path parse(string string_) nothrow
   {
     GskPath* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gsk_path_parse(_string_);
     auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

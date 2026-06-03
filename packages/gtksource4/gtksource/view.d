@@ -449,7 +449,7 @@ class View : gtk.text_view.TextView
   gtksource.mark_attributes.MarkAttributes getMarkAttributes(string category, out int priority) nothrow
   {
     GtkSourceMarkAttributes* _cretval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)this._cPtr, _category, cast(int*)&priority);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
     return _retval;
@@ -687,7 +687,7 @@ class View : gtk.text_view.TextView
   */
   void setMarkAttributes(string category, gtksource.mark_attributes.MarkAttributes attributes, int priority) nothrow
   {
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
     gtk_source_view_set_mark_attributes(cast(GtkSourceView*)this._cPtr, _category, attributes ? cast(GtkSourceMarkAttributes*)attributes._cPtr(No.Dup) : null, priority);
   }
 

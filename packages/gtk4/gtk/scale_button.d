@@ -168,7 +168,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     GtkWidget* _cretval;
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(No.Alloc);
+      _tmpicons ~= s.toCString;
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
 
@@ -299,7 +299,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(No.Alloc);
+      _tmpicons ~= s.toCString;
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
 

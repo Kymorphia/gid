@@ -313,17 +313,17 @@ template FileChooserT()
   */
   override void addChoice(string id, string label, string[] options = null, string[] optionLabels = null) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpoptions;
     foreach (s; options)
-      _tmpoptions ~= s.toCString(No.Alloc);
+      _tmpoptions ~= s.toCString;
     _tmpoptions ~= null;
     const(char*)* _options = _tmpoptions.ptr;
 
     char*[] _tmpoptionLabels;
     foreach (s; optionLabels)
-      _tmpoptionLabels ~= s.toCString(No.Alloc);
+      _tmpoptionLabels ~= s.toCString;
     _tmpoptionLabels ~= null;
     const(char*)* _optionLabels = _tmpoptionLabels.ptr;
 
@@ -361,7 +361,7 @@ template FileChooserT()
   override bool addShortcutFolder(string folder)
   {
     bool _retval;
-    const(char)* _folder = folder.toCString(No.Alloc);
+    const(char)* _folder = folder.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
     if (_err)
@@ -384,7 +384,7 @@ template FileChooserT()
   override bool addShortcutFolderUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_add_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
     if (_err)
@@ -415,9 +415,9 @@ template FileChooserT()
   override string getChoice(string id) nothrow
   {
     const(char)* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_file_chooser_get_choice(cast(GtkFileChooser*)this._cPtr, _id);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -455,7 +455,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_folder(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -493,7 +493,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_folder_uri(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_name(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -579,7 +579,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_filename(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -666,7 +666,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_preview_filename(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -680,7 +680,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_preview_uri(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -750,7 +750,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_uri(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -837,7 +837,7 @@ template FileChooserT()
   */
   override void removeChoice(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_remove_choice(cast(GtkFileChooser*)this._cPtr, _id);
   }
 
@@ -866,7 +866,7 @@ template FileChooserT()
   override bool removeShortcutFolder(string folder)
   {
     bool _retval;
-    const(char)* _folder = folder.toCString(No.Alloc);
+    const(char)* _folder = folder.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
     if (_err)
@@ -888,7 +888,7 @@ template FileChooserT()
   override bool removeShortcutFolderUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_remove_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
     if (_err)
@@ -937,7 +937,7 @@ template FileChooserT()
   override bool selectFilename(string filename) nothrow
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_file_chooser_select_filename(cast(GtkFileChooser*)this._cPtr, _filename);
     return _retval;
   }
@@ -954,7 +954,7 @@ template FileChooserT()
   override bool selectUri(string uri) nothrow
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_file_chooser_select_uri(cast(GtkFileChooser*)this._cPtr, _uri);
     return _retval;
   }
@@ -985,8 +985,8 @@ template FileChooserT()
   */
   override void setChoice(string id, string option) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _option = option.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    const(char)* _option = option.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_set_choice(cast(GtkFileChooser*)this._cPtr, _id, _option);
   }
 
@@ -1019,7 +1019,7 @@ template FileChooserT()
   override bool setCurrentFolder(string filename) nothrow
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)this._cPtr, _filename);
     return _retval;
   }
@@ -1061,7 +1061,7 @@ template FileChooserT()
   override bool setCurrentFolderUri(string uri) nothrow
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_file_chooser_set_current_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri);
     return _retval;
   }
@@ -1083,7 +1083,7 @@ template FileChooserT()
   */
   override void setCurrentName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_set_current_name(cast(GtkFileChooser*)this._cPtr, _name);
   }
 
@@ -1210,7 +1210,7 @@ template FileChooserT()
   override bool setFilename(string filename) nothrow
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_file_chooser_set_filename(cast(GtkFileChooser*)this._cPtr, _filename);
     return _retval;
   }
@@ -1357,7 +1357,7 @@ template FileChooserT()
   override bool setUri(string uri) nothrow
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_file_chooser_set_uri(cast(GtkFileChooser*)this._cPtr, _uri);
     return _retval;
   }
@@ -1408,7 +1408,7 @@ template FileChooserT()
   */
   override void unselectFilename(string filename) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_unselect_filename(cast(GtkFileChooser*)this._cPtr, _filename);
   }
 
@@ -1422,7 +1422,7 @@ template FileChooserT()
   */
   override void unselectUri(string uri) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_unselect_uri(cast(GtkFileChooser*)this._cPtr, _uri);
   }
 

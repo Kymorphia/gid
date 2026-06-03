@@ -351,7 +351,7 @@ template TreeModelT()
   {
     bool _retval;
     GtkTreeIter _iter;
-    const(char)* _pathString = pathString.toCString(No.Alloc);
+    const(char)* _pathString = pathString.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_tree_model_get_iter_from_string(cast(GtkTreeModel*)this._cPtr, &_iter, _pathString);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
@@ -400,7 +400,7 @@ template TreeModelT()
   {
     char* _cretval;
     _cretval = gtk_tree_model_get_string_from_iter(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

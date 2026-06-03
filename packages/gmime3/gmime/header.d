@@ -64,10 +64,10 @@ class Header : gobject.object.ObjectWrap
   string formatAddrlist(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_addrlist(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -84,10 +84,10 @@ class Header : gobject.object.ObjectWrap
   string formatContentDisposition(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_content_disposition(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -104,10 +104,10 @@ class Header : gobject.object.ObjectWrap
   string formatContentType(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_content_type(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -124,10 +124,10 @@ class Header : gobject.object.ObjectWrap
   string formatDefault(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_default(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -144,10 +144,10 @@ class Header : gobject.object.ObjectWrap
   string formatMessageId(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_message_id(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -164,10 +164,10 @@ class Header : gobject.object.ObjectWrap
   string formatNewsgroups(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_newsgroups(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -184,10 +184,10 @@ class Header : gobject.object.ObjectWrap
   string formatReceived(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_received(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -204,10 +204,10 @@ class Header : gobject.object.ObjectWrap
   string formatReferences(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_format_references(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class Header : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_name(cast(GMimeHeader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Header : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_raw_name(cast(GMimeHeader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class Header : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_raw_value(cast(GMimeHeader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class Header : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_value(cast(GMimeHeader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Header : gobject.object.ObjectWrap
   */
   void setRawValue(string rawValue) nothrow
   {
-    const(char)* _rawValue = rawValue.toCString(No.Alloc);
+    const(char)* _rawValue = rawValue.toCString!(No.Malloc, No.Nullable);
     g_mime_header_set_raw_value(cast(GMimeHeader*)this._cPtr, _rawValue);
   }
 
@@ -296,8 +296,8 @@ class Header : gobject.object.ObjectWrap
   */
   void setValue(gmime.format_options.FormatOptions options, string value, string charset = null) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
     g_mime_header_set_value(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _value, _charset);
   }
 

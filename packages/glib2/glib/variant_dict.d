@@ -190,7 +190,7 @@ class VariantDict : gobject.boxed.Boxed
   bool contains(string key) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_variant_dict_contains(cast(GVariantDict*)this._cPtr, _key);
     return _retval;
   }
@@ -224,7 +224,7 @@ class VariantDict : gobject.boxed.Boxed
   */
   void insertValue(string key, glib.variant.Variant value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     g_variant_dict_insert_value(cast(GVariantDict*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
@@ -249,7 +249,7 @@ class VariantDict : gobject.boxed.Boxed
   glib.variant.Variant lookupValue(string key, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_variant_dict_lookup_value(cast(GVariantDict*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -265,7 +265,7 @@ class VariantDict : gobject.boxed.Boxed
   bool remove(string key) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_variant_dict_remove(cast(GVariantDict*)this._cPtr, _key);
     return _retval;
   }

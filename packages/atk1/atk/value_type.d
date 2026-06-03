@@ -22,7 +22,7 @@ struct ValueType
   {
     const(char)* _cretval;
     _cretval = atk_value_type_get_localized_name(valueType);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -37,7 +37,7 @@ struct ValueType
   {
     const(char)* _cretval;
     _cretval = atk_value_type_get_name(valueType);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

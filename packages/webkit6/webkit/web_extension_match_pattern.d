@@ -89,9 +89,9 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   static webkit.web_extension_match_pattern.WebExtensionMatchPattern newWithScheme(string scheme, string host, string path)
   {
     WebKitWebExtensionMatchPattern* _cretval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
-    const(char)* _host = host.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
+    const(char)* _host = host.toCString!(No.Malloc, No.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = webkit_web_extension_match_pattern_new_with_scheme(_scheme, _host, _path, &_err);
     if (_err)
@@ -112,7 +112,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   static webkit.web_extension_match_pattern.WebExtensionMatchPattern newWithString(string string_)
   {
     WebKitWebExtensionMatchPattern* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = webkit_web_extension_match_pattern_new_with_string(_string_, &_err);
     if (_err)
@@ -129,7 +129,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_host(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_path(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_scheme(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_string(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   bool matchesUrl(string url, webkit.types.WebExtensionMatchPatternOptions options) nothrow
   {
     bool _retval;
-    const(char)* _url = url.toCString(No.Alloc);
+    const(char)* _url = url.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)webkit_web_extension_match_pattern_matches_url(cast(WebKitWebExtensionMatchPattern*)this._cPtr, _url, options);
     return _retval;
   }
@@ -235,7 +235,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   */
   static void registerCustomURLScheme(string urlScheme) nothrow
   {
-    const(char)* _urlScheme = urlScheme.toCString(No.Alloc);
+    const(char)* _urlScheme = urlScheme.toCString!(No.Malloc, No.Nullable);
     webkit_web_extension_match_pattern_register_custom_URL_scheme(_urlScheme);
   }
 }

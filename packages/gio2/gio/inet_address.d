@@ -226,7 +226,7 @@ class InetAddress : gobject.object.ObjectWrap
   static gio.inet_address.InetAddress newFromString(string string_) nothrow
   {
     GInetAddress* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_inet_address_new_from_string(_string_);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
@@ -411,7 +411,7 @@ class InetAddress : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_inet_address_to_string(cast(GInetAddress*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

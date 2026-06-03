@@ -101,7 +101,7 @@ template EditableTextT()
   */
   override void setTextContents(string string_) nothrow
   {
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     atk_editable_text_set_text_contents(cast(AtkEditableText*)this._cPtr, _string_);
   }
 }

@@ -64,9 +64,9 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   this(string name, string description, gst.caps.Caps format, string preset = null) nothrow
   {
     GstEncodingContainerProfile* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _preset = preset.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_encoding_container_profile_new(_name, _description, format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset);
     this(_cretval, Yes.Take);
   }

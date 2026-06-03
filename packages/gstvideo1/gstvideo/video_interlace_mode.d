@@ -23,7 +23,7 @@ struct VideoInterlaceMode
   static gstvideo.types.VideoInterlaceMode fromString(string mode) nothrow
   {
     GstVideoInterlaceMode _cretval;
-    const(char)* _mode = mode.toCString(No.Alloc);
+    const(char)* _mode = mode.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_video_interlace_mode_from_string(_mode);
     gstvideo.types.VideoInterlaceMode _retval = cast(gstvideo.types.VideoInterlaceMode)_cretval;
     return _retval;
@@ -40,7 +40,7 @@ struct VideoInterlaceMode
   {
     const(char)* _cretval;
     _cretval = gst_video_interlace_mode_to_string(mode);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

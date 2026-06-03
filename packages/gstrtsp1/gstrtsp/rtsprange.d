@@ -85,7 +85,7 @@ struct RTSPRange
   static gstrtsp.types.RTSPResult parse(string rangestr, out gstrtsp.rtsptime_range.RTSPTimeRange range) nothrow
   {
     GstRTSPResult _cretval;
-    const(char)* _rangestr = rangestr.toCString(No.Alloc);
+    const(char)* _rangestr = rangestr.toCString!(No.Malloc, No.Nullable);
     GstRTSPTimeRange* _range;
     _cretval = gst_rtsp_range_parse(_rangestr, &_range);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
@@ -104,7 +104,7 @@ struct RTSPRange
   {
     char* _cretval;
     _cretval = gst_rtsp_range_to_string(range ? cast(const(GstRTSPTimeRange)*)range._cPtr : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

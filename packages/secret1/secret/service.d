@@ -248,7 +248,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _serviceBusName = serviceBusName.toCString(No.Alloc);
+    const(char)* _serviceBusName = serviceBusName.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_service_open(serviceGtype, _serviceBusName, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -302,7 +302,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   static secret.service.Service openSync(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     SecretService* _cretval;
-    const(char)* _serviceBusName = serviceBusName.toCString(No.Alloc);
+    const(char)* _serviceBusName = serviceBusName.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = secret_service_open_sync(serviceGtype, _serviceBusName, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -601,7 +601,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     const(char)* _cretval;
     _cretval = secret_service_get_session_algorithms(cast(SecretService*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -618,7 +618,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     const(char)* _cretval;
     _cretval = secret_service_get_session_dbus_path(cast(SecretService*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1144,7 +1144,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_service_set_alias(cast(SecretService*)this._cPtr, _alias_, collection ? cast(SecretCollection*)collection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1186,7 +1186,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   bool setAliasSync(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)secret_service_set_alias_sync(cast(SecretService*)this._cPtr, _alias_, collection ? cast(SecretCollection*)collection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1240,8 +1240,8 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
-    const(char)* _collection = collection.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _collection = collection.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_service_store(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1298,8 +1298,8 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     bool _retval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
-    const(char)* _collection = collection.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _collection = collection.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)secret_service_store_sync(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

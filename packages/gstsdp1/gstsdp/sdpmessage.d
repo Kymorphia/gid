@@ -191,8 +191,8 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult addAttribute(string key, string value = null) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_sdp_message_add_attribute(cast(GstSDPMessage*)this._cPtr, _key, _value);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -209,7 +209,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _bwtype = bwtype.toCString(No.Alloc);
+    const(char)* _bwtype = bwtype.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_add_bandwidth(cast(GstSDPMessage*)this._cPtr, _bwtype, bandwidth);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -225,7 +225,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult addEmail(string email) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _email = email.toCString(No.Alloc);
+    const(char)* _email = email.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_add_email(cast(GstSDPMessage*)this._cPtr, _email);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -258,7 +258,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult addPhone(string phone) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _phone = phone.toCString(No.Alloc);
+    const(char)* _phone = phone.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_add_phone(cast(GstSDPMessage*)this._cPtr, _phone);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -276,11 +276,11 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult addTime(string start, string stop, string[] repeat) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _start = start.toCString(No.Alloc);
-    const(char)* _stop = stop.toCString(No.Alloc);
+    const(char)* _start = start.toCString!(No.Malloc, No.Nullable);
+    const(char)* _stop = stop.toCString!(No.Malloc, No.Nullable);
     char*[] _tmprepeat;
     foreach (s; repeat)
-      _tmprepeat ~= s.toCString(No.Alloc);
+      _tmprepeat ~= s.toCString;
     _tmprepeat ~= null;
     const(char*)* _repeat = _tmprepeat.ptr;
 
@@ -300,8 +300,8 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult addZone(string adjTime, string typedTime) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _adjTime = adjTime.toCString(No.Alloc);
-    const(char)* _typedTime = typedTime.toCString(No.Alloc);
+    const(char)* _adjTime = adjTime.toCString!(No.Malloc, No.Nullable);
+    const(char)* _typedTime = typedTime.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_add_zone(cast(GstSDPMessage*)this._cPtr, _adjTime, _typedTime);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -315,7 +315,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_sdp_message_as_text(cast(const(GstSDPMessage)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -422,9 +422,9 @@ class SDPMessage : gobject.boxed.Boxed
   string getAttributeVal(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_get_attribute_val(cast(const(GstSDPMessage)*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -439,9 +439,9 @@ class SDPMessage : gobject.boxed.Boxed
   string getAttributeValN(string key, uint nth) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_get_attribute_val_n(cast(const(GstSDPMessage)*)this._cPtr, _key, nth);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -483,7 +483,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_email(cast(const(GstSDPMessage)*)this._cPtr, idx);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -495,7 +495,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_information(cast(const(GstSDPMessage)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -549,7 +549,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_phone(cast(const(GstSDPMessage)*)this._cPtr, idx);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -561,7 +561,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_session_name(cast(const(GstSDPMessage)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -588,7 +588,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_uri(cast(const(GstSDPMessage)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -600,7 +600,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_version(cast(const(GstSDPMessage)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -667,7 +667,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult insertEmail(int idx, string email) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _email = email.toCString(No.Alloc);
+    const(char)* _email = email.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_insert_email(cast(GstSDPMessage*)this._cPtr, idx, _email);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -685,7 +685,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult insertPhone(int idx, string phone) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _phone = phone.toCString(No.Alloc);
+    const(char)* _phone = phone.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_insert_phone(cast(GstSDPMessage*)this._cPtr, idx, _phone);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -916,7 +916,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult replaceEmail(uint idx, string email) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _email = email.toCString(No.Alloc);
+    const(char)* _email = email.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_replace_email(cast(GstSDPMessage*)this._cPtr, idx, _email);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -933,7 +933,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult replacePhone(uint idx, string phone) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _phone = phone.toCString(No.Alloc);
+    const(char)* _phone = phone.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_replace_phone(cast(GstSDPMessage*)this._cPtr, idx, _phone);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -986,9 +986,9 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult setConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _nettype = nettype.toCString(No.Alloc);
-    const(char)* _addrtype = addrtype.toCString(No.Alloc);
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _nettype = nettype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _addrtype = addrtype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_set_connection(cast(GstSDPMessage*)this._cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1004,7 +1004,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult setInformation(string information) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _information = information.toCString(No.Alloc);
+    const(char)* _information = information.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_set_information(cast(GstSDPMessage*)this._cPtr, _information);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1021,8 +1021,8 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult setKey(string type, string data) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _type = type.toCString(No.Alloc);
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+    const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_set_key(cast(GstSDPMessage*)this._cPtr, _type, _data);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1043,12 +1043,12 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult setOrigin(string username, string sessId, string sessVersion, string nettype, string addrtype, string addr) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _username = username.toCString(No.Alloc);
-    const(char)* _sessId = sessId.toCString(No.Alloc);
-    const(char)* _sessVersion = sessVersion.toCString(No.Alloc);
-    const(char)* _nettype = nettype.toCString(No.Alloc);
-    const(char)* _addrtype = addrtype.toCString(No.Alloc);
-    const(char)* _addr = addr.toCString(No.Alloc);
+    const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+    const(char)* _sessId = sessId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _sessVersion = sessVersion.toCString!(No.Malloc, No.Nullable);
+    const(char)* _nettype = nettype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _addrtype = addrtype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _addr = addr.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_set_origin(cast(GstSDPMessage*)this._cPtr, _username, _sessId, _sessVersion, _nettype, _addrtype, _addr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1064,7 +1064,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult setSessionName(string sessionName) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _sessionName = sessionName.toCString(No.Alloc);
+    const(char)* _sessionName = sessionName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_set_session_name(cast(GstSDPMessage*)this._cPtr, _sessionName);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1080,7 +1080,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult setUri(string uri) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_set_uri(cast(GstSDPMessage*)this._cPtr, _uri);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1096,7 +1096,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult setVersion(string version_) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _version_ = version_.toCString(No.Alloc);
+    const(char)* _version_ = version_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_set_version(cast(GstSDPMessage*)this._cPtr, _version_);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1153,9 +1153,9 @@ class SDPMessage : gobject.boxed.Boxed
   static string asUri(string scheme, gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     char* _cretval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_as_uri(_scheme, msg ? cast(const(GstSDPMessage)*)msg._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1209,7 +1209,7 @@ class SDPMessage : gobject.boxed.Boxed
   static gstsdp.types.SDPResult newFromText(string text, out gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     GstSDPMessage* _msg;
     _cretval = gst_sdp_message_new_from_text(_text, &_msg);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
@@ -1258,7 +1258,7 @@ class SDPMessage : gobject.boxed.Boxed
   static gstsdp.types.SDPResult parseUri(string uri, gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_parse_uri(_uri, msg ? cast(GstSDPMessage*)msg._cPtr(No.Dup) : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

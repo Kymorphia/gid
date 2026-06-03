@@ -81,7 +81,7 @@ class Codec : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = garrow_codec_get_name(cast(GArrowCodec*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

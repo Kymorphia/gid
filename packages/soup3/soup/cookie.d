@@ -104,10 +104,10 @@ class Cookie : gobject.boxed.Boxed
   this(string name, string value, string domain, string path, int maxAge) nothrow
   {
     SoupCookie* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _domain = domain.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_cookie_new(_name, _value, _domain, _path, maxAge);
     this(_cretval, Yes.Take);
   }
@@ -155,7 +155,7 @@ class Cookie : gobject.boxed.Boxed
   bool domainMatches(string host) nothrow
   {
     bool _retval;
-    const(char)* _host = host.toCString(No.Alloc);
+    const(char)* _host = host.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)soup_cookie_domain_matches(cast(SoupCookie*)this._cPtr, _host);
     return _retval;
   }
@@ -185,7 +185,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_domain(cast(SoupCookie*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_name(cast(SoupCookie*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_path(cast(SoupCookie*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_value(cast(SoupCookie*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setDomain(string domain) nothrow
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     soup_cookie_set_domain(cast(SoupCookie*)this._cPtr, _domain);
   }
 
@@ -343,7 +343,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     soup_cookie_set_name(cast(SoupCookie*)this._cPtr, _name);
   }
 
@@ -355,7 +355,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     soup_cookie_set_path(cast(SoupCookie*)this._cPtr, _path);
   }
 
@@ -394,7 +394,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setValue(string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     soup_cookie_set_value(cast(SoupCookie*)this._cPtr, _value);
   }
 
@@ -407,7 +407,7 @@ class Cookie : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = soup_cookie_to_cookie_header(cast(SoupCookie*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ class Cookie : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = soup_cookie_to_set_cookie_header(cast(SoupCookie*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -450,7 +450,7 @@ class Cookie : gobject.boxed.Boxed
   static soup.cookie.Cookie parse(string header, glib.uri.Uri origin = null) nothrow
   {
     SoupCookie* _cretval;
-    const(char)* _header = header.toCString(No.Alloc);
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_cookie_parse(_header, origin ? cast(GUri*)origin._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new soup.cookie.Cookie(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

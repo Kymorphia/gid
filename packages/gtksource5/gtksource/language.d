@@ -101,7 +101,7 @@ class Language : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -129,7 +129,7 @@ class Language : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_id(cast(GtkSourceLanguage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -137,9 +137,9 @@ class Language : gobject.object.ObjectWrap
   string getMetadata(string name) nothrow
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_language_get_metadata(cast(GtkSourceLanguage*)this._cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Language : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -183,7 +183,7 @@ class Language : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_name(cast(GtkSourceLanguage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Language : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_section(cast(GtkSourceLanguage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -218,9 +218,9 @@ class Language : gobject.object.ObjectWrap
   string getStyleFallback(string styleId) nothrow
   {
     const(char)* _cretval;
-    const(char)* _styleId = styleId.toCString(No.Alloc);
+    const(char)* _styleId = styleId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_language_get_style_fallback(cast(GtkSourceLanguage*)this._cPtr, _styleId);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Language : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -262,9 +262,9 @@ class Language : gobject.object.ObjectWrap
   string getStyleName(string styleId) nothrow
   {
     const(char)* _cretval;
-    const(char)* _styleId = styleId.toCString(No.Alloc);
+    const(char)* _styleId = styleId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_language_get_style_name(cast(GtkSourceLanguage*)this._cPtr, _styleId);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

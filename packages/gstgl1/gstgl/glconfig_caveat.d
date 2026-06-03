@@ -16,7 +16,7 @@ struct GLConfigCaveat
   {
     const(char)* _cretval;
     _cretval = gst_gl_config_caveat_to_string(caveat);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

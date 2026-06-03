@@ -82,7 +82,7 @@ class GLSLStage : gst.object.ObjectWrap
   static gstgl.glslstage.GLSLStage newWithString(gstgl.glcontext.GLContext context, uint type, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string str) nothrow
   {
     GstGLSLStage* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_glsl_stage_new_with_string(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, type, version_, profile, _str);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
     return _retval;
@@ -98,7 +98,7 @@ class GLSLStage : gst.object.ObjectWrap
 
     char*[] _tmpstr;
     foreach (s; str)
-      _tmpstr ~= s.toCString(No.Alloc);
+      _tmpstr ~= s.toCString;
     const(char*)* _str = _tmpstr.ptr;
 
     _cretval = gst_glsl_stage_new_with_strings(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, type, version_, profile, _nStrings, _str);
@@ -169,7 +169,7 @@ class GLSLStage : gst.object.ObjectWrap
 
     char*[] _tmpstr;
     foreach (s; str)
-      _tmpstr ~= s.toCString(No.Alloc);
+      _tmpstr ~= s.toCString;
     const(char*)* _str = _tmpstr.ptr;
 
     _retval = cast(bool)gst_glsl_stage_set_strings(cast(GstGLSLStage*)this._cPtr, version_, profile, _nStrings, _str);

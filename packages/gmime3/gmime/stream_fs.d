@@ -97,7 +97,7 @@ class StreamFs : gmime.stream.Stream
   static gmime.stream.Stream open(string path, int flags, int mode)
   {
     GMimeStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_mime_stream_fs_open(_path, flags, mode, &_err);
     if (_err)

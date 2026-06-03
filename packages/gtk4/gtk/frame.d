@@ -189,7 +189,7 @@ class Frame : gtk.widget.Widget
   this(string label = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_frame_new(_label);
     this(_cretval, No.Take);
   }
@@ -219,7 +219,7 @@ class Frame : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_frame_get_label(cast(GtkFrame*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Frame : gtk.widget.Widget
   */
   void setLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     gtk_frame_set_label(cast(GtkFrame*)this._cPtr, _label);
   }
 

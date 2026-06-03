@@ -43,7 +43,7 @@ template LoadableIconT()
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
-    type = _type.fromCString(Yes.Free);
+    type = _type.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ template LoadableIconT()
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
-    type = _type.fromCString(Yes.Free);
+    type = _type.fromCString!(Yes.Free);
     return _retval;
   }
 }

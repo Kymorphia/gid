@@ -263,7 +263,7 @@ class Source : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_source_get_name(cast(GSource*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -617,7 +617,7 @@ class Source : gobject.boxed.Boxed
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     g_source_set_name(cast(GSource*)this._cPtr, _name);
   }
 
@@ -682,7 +682,7 @@ class Source : gobject.boxed.Boxed
   */
   void setStaticName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     g_source_set_static_name(cast(GSource*)this._cPtr, _name);
   }
 
@@ -775,7 +775,7 @@ class Source : gobject.boxed.Boxed
   */
   static void setNameById(uint tag, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     g_source_set_name_by_id(tag, _name);
   }
 }

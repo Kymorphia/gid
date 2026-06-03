@@ -156,9 +156,9 @@ class SDPConnection
   gstsdp.types.SDPResult set(string nettype, string addrtype, string address, uint ttl, uint addrNumber) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _nettype = nettype.toCString(No.Alloc);
-    const(char)* _addrtype = addrtype.toCString(No.Alloc);
-    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _nettype = nettype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _addrtype = addrtype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_connection_set(cast(GstSDPConnection*)this._cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

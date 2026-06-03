@@ -684,7 +684,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_default_icon_name();
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -749,7 +749,7 @@ class Window : gtk.bin.Bin
   static bool setDefaultIconFromFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_window_set_default_icon_from_file(_filename, &_err);
     if (_err)
@@ -767,7 +767,7 @@ class Window : gtk.bin.Bin
   */
   static void setDefaultIconName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_window_set_default_icon_name(_name);
   }
 
@@ -1183,7 +1183,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_icon_name(cast(GtkWindow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1327,7 +1327,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_role(cast(GtkWindow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1458,7 +1458,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_title(cast(GtkWindow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1770,7 +1770,7 @@ class Window : gtk.bin.Bin
   bool parseGeometry(string geometry) nothrow
   {
     bool _retval;
-    const(char)* _geometry = geometry.toCString(No.Alloc);
+    const(char)* _geometry = geometry.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_window_parse_geometry(cast(GtkWindow*)this._cPtr, _geometry);
     return _retval;
   }
@@ -2304,7 +2304,7 @@ class Window : gtk.bin.Bin
   bool setIconFromFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_window_set_icon_from_file(cast(GtkWindow*)this._cPtr, _filename, &_err);
     if (_err)
@@ -2362,7 +2362,7 @@ class Window : gtk.bin.Bin
   */
   void setIconName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_window_set_icon_name(cast(GtkWindow*)this._cPtr, _name);
   }
 
@@ -2530,7 +2530,7 @@ class Window : gtk.bin.Bin
   */
   void setRole(string role) nothrow
   {
-    const(char)* _role = role.toCString(No.Alloc);
+    const(char)* _role = role.toCString!(No.Malloc, No.Nullable);
     gtk_window_set_role(cast(GtkWindow*)this._cPtr, _role);
   }
 
@@ -2591,7 +2591,7 @@ class Window : gtk.bin.Bin
   */
   void setStartupId(string startupId) nothrow
   {
-    const(char)* _startupId = startupId.toCString(No.Alloc);
+    const(char)* _startupId = startupId.toCString!(No.Malloc, No.Nullable);
     gtk_window_set_startup_id(cast(GtkWindow*)this._cPtr, _startupId);
   }
 
@@ -2610,7 +2610,7 @@ class Window : gtk.bin.Bin
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_window_set_title(cast(GtkWindow*)this._cPtr, _title);
   }
 
@@ -2708,8 +2708,8 @@ class Window : gtk.bin.Bin
   */
   void setWmclass(string wmclassName, string wmclassClass) nothrow
   {
-    const(char)* _wmclassName = wmclassName.toCString(No.Alloc);
-    const(char)* _wmclassClass = wmclassClass.toCString(No.Alloc);
+    const(char)* _wmclassName = wmclassName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _wmclassClass = wmclassClass.toCString!(No.Malloc, No.Nullable);
     gtk_window_set_wmclass(cast(GtkWindow*)this._cPtr, _wmclassName, _wmclassClass);
   }
 

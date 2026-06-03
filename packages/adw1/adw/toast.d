@@ -412,7 +412,7 @@ class Toast : gobject.object.ObjectWrap
   this(string title) nothrow
   {
     AdwToast* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_toast_new(_title);
     this(_cretval, Yes.Take);
   }
@@ -436,7 +436,7 @@ class Toast : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = adw_toast_get_action_name(cast(AdwToast*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -460,7 +460,7 @@ class Toast : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = adw_toast_get_button_label(cast(AdwToast*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -510,7 +510,7 @@ class Toast : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = adw_toast_get_title(cast(AdwToast*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -537,7 +537,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setActionName(string actionName = null) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, Yes.Nullable);
     adw_toast_set_action_name(cast(AdwToast*)this._cPtr, _actionName);
   }
 
@@ -569,7 +569,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setButtonLabel(string buttonLabel = null) nothrow
   {
-    const(char)* _buttonLabel = buttonLabel.toCString(No.Alloc);
+    const(char)* _buttonLabel = buttonLabel.toCString!(No.Malloc, Yes.Nullable);
     adw_toast_set_button_label(cast(AdwToast*)this._cPtr, _buttonLabel);
   }
 
@@ -600,7 +600,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setDetailedActionName(string detailedActionName = null) nothrow
   {
-    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
+    const(char)* _detailedActionName = detailedActionName.toCString!(No.Malloc, Yes.Nullable);
     adw_toast_set_detailed_action_name(cast(AdwToast*)this._cPtr, _detailedActionName);
   }
 
@@ -654,7 +654,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_toast_set_title(cast(AdwToast*)this._cPtr, _title);
   }
 

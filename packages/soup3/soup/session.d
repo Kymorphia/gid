@@ -492,7 +492,7 @@ class Session : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_session_get_accept_language(cast(SoupSession*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Session : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_session_get_user_agent(cast(SoupSession*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1051,7 +1051,7 @@ class Session : gobject.object.ObjectWrap
   */
   void setAcceptLanguage(string acceptLanguage) nothrow
   {
-    const(char)* _acceptLanguage = acceptLanguage.toCString(No.Alloc);
+    const(char)* _acceptLanguage = acceptLanguage.toCString!(No.Malloc, No.Nullable);
     soup_session_set_accept_language(cast(SoupSession*)this._cPtr, _acceptLanguage);
   }
 
@@ -1156,7 +1156,7 @@ class Session : gobject.object.ObjectWrap
   */
   void setUserAgent(string userAgent) nothrow
   {
-    const(char)* _userAgent = userAgent.toCString(No.Alloc);
+    const(char)* _userAgent = userAgent.toCString!(No.Malloc, No.Nullable);
     soup_session_set_user_agent(cast(SoupSession*)this._cPtr, _userAgent);
   }
 
@@ -1205,10 +1205,10 @@ class Session : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.Alloc);
+      _tmpprotocols ~= s.toCString;
     _tmpprotocols ~= null;
     char** _protocols = _tmpprotocols.ptr;
 

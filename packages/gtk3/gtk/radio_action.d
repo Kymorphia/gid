@@ -132,10 +132,10 @@ class RadioAction : gtk.toggle_action.ToggleAction
   this(string name, string label, string tooltip, string stockId, int value) nothrow
   {
     GtkRadioAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_radio_action_new(_name, _label, _tooltip, _stockId, value);
     this(_cretval, Yes.Take);
   }

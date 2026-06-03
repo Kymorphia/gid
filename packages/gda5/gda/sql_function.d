@@ -65,7 +65,7 @@ class SqlFunction
   {
     char* _cretval;
     _cretval = gda_sql_function_serialize(cast(GdaSqlFunction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

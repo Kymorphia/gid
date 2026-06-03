@@ -67,7 +67,7 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
   static gda.data_model.DataModel new_(string basedir) nothrow
   {
     GdaDataModel* _cretval;
-    const(char)* _basedir = basedir.toCString(No.Alloc);
+    const(char)* _basedir = basedir.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_data_model_dir_new(_basedir);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model.DataModel)(cast(GdaDataModel*)_cretval, Yes.Take);
     return _retval;

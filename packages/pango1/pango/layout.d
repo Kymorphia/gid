@@ -713,7 +713,7 @@ class Layout : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = pango_layout_get_text(cast(PangoLayout*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1314,7 +1314,7 @@ class Layout : gobject.object.ObjectWrap
   bool writeToFile(pango.types.LayoutSerializeFlags flags, string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)pango_layout_write_to_file(cast(PangoLayout*)this._cPtr, flags, _filename, &_err);
     if (_err)

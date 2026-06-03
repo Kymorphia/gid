@@ -66,7 +66,7 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
   /** */
   void setFieldRef(string fieldRef)
   {
-    const(char)* _fieldRef = fieldRef.toCString(No.Alloc);
+    const(char)* _fieldRef = fieldRef.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     garrow_struct_field_options_set_field_ref(cast(GArrowStructFieldOptions*)this._cPtr, _fieldRef, &_err);
     if (_err)

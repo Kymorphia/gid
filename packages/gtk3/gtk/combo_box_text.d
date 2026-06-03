@@ -148,8 +148,8 @@ class ComboBoxText : gtk.combo_box.ComboBox
   */
   void append(string id, string text) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_combo_box_text_append(cast(GtkComboBoxText*)this._cPtr, _id, _text);
   }
 
@@ -164,7 +164,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
   */
   void appendText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_combo_box_text_append_text(cast(GtkComboBoxText*)this._cPtr, _text);
   }
 
@@ -180,7 +180,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
   {
     char* _cretval;
     _cretval = gtk_combo_box_text_get_active_text(cast(GtkComboBoxText*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -198,8 +198,8 @@ class ComboBoxText : gtk.combo_box.ComboBox
   */
   void insert(int position, string id, string text) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_combo_box_text_insert(cast(GtkComboBoxText*)this._cPtr, position, _id, _text);
   }
 
@@ -217,7 +217,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
   */
   void insertText(int position, string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_combo_box_text_insert_text(cast(GtkComboBoxText*)this._cPtr, position, _text);
   }
 
@@ -234,8 +234,8 @@ class ComboBoxText : gtk.combo_box.ComboBox
   */
   void prepend(string id, string text) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_combo_box_text_prepend(cast(GtkComboBoxText*)this._cPtr, _id, _text);
   }
 
@@ -250,7 +250,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
   */
   void prependText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_combo_box_text_prepend_text(cast(GtkComboBoxText*)this._cPtr, _text);
   }
 

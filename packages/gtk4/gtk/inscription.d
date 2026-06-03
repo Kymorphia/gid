@@ -370,7 +370,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   this(string text = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_inscription_new(_text);
     this(_cretval, No.Take);
   }
@@ -447,7 +447,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_inscription_get_text(cast(GtkInscription*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setMarkup(string markup = null) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, Yes.Nullable);
     gtk_inscription_set_markup(cast(GtkInscription*)this._cPtr, _markup);
   }
 
@@ -590,7 +590,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     gtk_inscription_set_text(cast(GtkInscription*)this._cPtr, _text);
   }
 

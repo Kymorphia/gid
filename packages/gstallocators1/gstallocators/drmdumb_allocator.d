@@ -76,7 +76,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithDevicePath(string drmDevicePath) nothrow
   {
     GstAllocator* _cretval;
-    const(char)* _drmDevicePath = drmDevicePath.toCString(No.Alloc);
+    const(char)* _drmDevicePath = drmDevicePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_drm_dumb_allocator_new_with_device_path(_drmDevicePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;

@@ -92,7 +92,7 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
     char* _cretval;
     GHashTable* _params;
     _cretval = soup_content_sniffer_sniff(cast(SoupContentSniffer*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null, &_params);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }

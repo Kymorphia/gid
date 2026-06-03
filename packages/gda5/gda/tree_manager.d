@@ -138,7 +138,7 @@ class TreeManager : gobject.object.ObjectWrap
   */
   void addNewNodeAttribute(string attribute, gobject.value.Value value = null) nothrow
   {
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     gda_tree_manager_add_new_node_attribute(cast(GdaTreeManager*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -157,7 +157,7 @@ class TreeManager : gobject.object.ObjectWrap
   gda.tree_node.TreeNode createNode(gda.tree_node.TreeNode parent = null, string name = null) nothrow
   {
     GdaTreeNode* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gda_tree_manager_create_node(cast(GdaTreeManager*)this._cPtr, parent ? cast(GdaTreeNode*)parent._cPtr(No.Dup) : null, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.tree_node.TreeNode)(cast(GdaTreeNode*)_cretval, Yes.Take);
     return _retval;

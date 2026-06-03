@@ -83,7 +83,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
     _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info)._cPtr(No.Dup) : null, _files);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -140,7 +140,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
     _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info)._cPtr(No.Dup) : null, _files);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   */
   void launchFailed(string startupNotifyId) nothrow
   {
-    const(char)* _startupNotifyId = startupNotifyId.toCString(No.Alloc);
+    const(char)* _startupNotifyId = startupNotifyId.toCString!(No.Malloc, No.Nullable);
     g_app_launch_context_launch_failed(cast(GAppLaunchContext*)this._cPtr, _startupNotifyId);
   }
 
@@ -167,8 +167,8 @@ class AppLaunchContext : gobject.object.ObjectWrap
   */
   void setenv(string variable, string value) nothrow
   {
-    const(char)* _variable = variable.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_app_launch_context_setenv(cast(GAppLaunchContext*)this._cPtr, _variable, _value);
   }
 
@@ -181,7 +181,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   */
   void unsetenv(string variable) nothrow
   {
-    const(char)* _variable = variable.toCString(No.Alloc);
+    const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
     g_app_launch_context_unsetenv(cast(GAppLaunchContext*)this._cPtr, _variable);
   }
 

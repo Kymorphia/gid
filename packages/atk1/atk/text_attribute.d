@@ -23,7 +23,7 @@ struct TextAttribute
   static atk.types.TextAttribute forName(string name) nothrow
   {
     AtkTextAttribute _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_text_attribute_for_name(_name);
     atk.types.TextAttribute _retval = cast(atk.types.TextAttribute)_cretval;
     return _retval;
@@ -40,7 +40,7 @@ struct TextAttribute
   {
     const(char)* _cretval;
     _cretval = atk_text_attribute_get_name(attr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ struct TextAttribute
   {
     const(char)* _cretval;
     _cretval = atk_text_attribute_get_value(attr, index);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ struct TextAttribute
   static atk.types.TextAttribute register(string name) nothrow
   {
     AtkTextAttribute _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_text_attribute_register(_name);
     atk.types.TextAttribute _retval = cast(atk.types.TextAttribute)_cretval;
     return _retval;

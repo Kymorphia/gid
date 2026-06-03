@@ -384,8 +384,8 @@ class AlertDialog : adw.dialog.Dialog
   this(string heading = null, string body_ = null) nothrow
   {
     AdwDialog* _cretval;
-    const(char)* _heading = heading.toCString(No.Alloc);
-    const(char)* _body_ = body_.toCString(No.Alloc);
+    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = adw_alert_dialog_new(_heading, _body_);
     this(_cretval, No.Take);
   }
@@ -414,8 +414,8 @@ class AlertDialog : adw.dialog.Dialog
   */
   void addResponse(string id, string label) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     adw_alert_dialog_add_response(cast(AdwAlertDialog*)this._cPtr, _id, _label);
   }
 
@@ -466,7 +466,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_choose_finish(cast(AdwAlertDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_body(cast(AdwAlertDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -501,7 +501,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_close_response(cast(AdwAlertDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -513,7 +513,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_default_response(cast(AdwAlertDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -537,7 +537,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_heading(cast(AdwAlertDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class AlertDialog : adw.dialog.Dialog
   adw.types.ResponseAppearance getResponseAppearance(string response) nothrow
   {
     AdwResponseAppearance _cretval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_alert_dialog_get_response_appearance(cast(AdwAlertDialog*)this._cPtr, _response);
     adw.types.ResponseAppearance _retval = cast(adw.types.ResponseAppearance)_cretval;
     return _retval;
@@ -582,7 +582,7 @@ class AlertDialog : adw.dialog.Dialog
   bool getResponseEnabled(string response) nothrow
   {
     bool _retval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)adw_alert_dialog_get_response_enabled(cast(AdwAlertDialog*)this._cPtr, _response);
     return _retval;
   }
@@ -599,9 +599,9 @@ class AlertDialog : adw.dialog.Dialog
   string getResponseLabel(string response) nothrow
   {
     const(char)* _cretval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_alert_dialog_get_response_label(cast(AdwAlertDialog*)this._cPtr, _response);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class AlertDialog : adw.dialog.Dialog
   bool hasResponse(string response) nothrow
   {
     bool _retval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)adw_alert_dialog_has_response(cast(AdwAlertDialog*)this._cPtr, _response);
     return _retval;
   }
@@ -628,7 +628,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void removeResponse(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     adw_alert_dialog_remove_response(cast(AdwAlertDialog*)this._cPtr, _id);
   }
 
@@ -640,7 +640,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setBody(string body_) nothrow
   {
-    const(char)* _body_ = body_.toCString(No.Alloc);
+    const(char)* _body_ = body_.toCString!(No.Malloc, No.Nullable);
     adw_alert_dialog_set_body(cast(AdwAlertDialog*)this._cPtr, _body_);
   }
 
@@ -672,7 +672,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setCloseResponse(string response) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     adw_alert_dialog_set_close_response(cast(AdwAlertDialog*)this._cPtr, _response);
   }
 
@@ -689,7 +689,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setDefaultResponse(string response = null) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, Yes.Nullable);
     adw_alert_dialog_set_default_response(cast(AdwAlertDialog*)this._cPtr, _response);
   }
 
@@ -714,7 +714,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setHeading(string heading = null) nothrow
   {
-    const(char)* _heading = heading.toCString(No.Alloc);
+    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
     adw_alert_dialog_set_heading(cast(AdwAlertDialog*)this._cPtr, _heading);
   }
 
@@ -756,7 +756,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setResponseAppearance(string response, adw.types.ResponseAppearance appearance) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     adw_alert_dialog_set_response_appearance(cast(AdwAlertDialog*)this._cPtr, _response, appearance);
   }
 
@@ -778,7 +778,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setResponseEnabled(string response, bool enabled) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     adw_alert_dialog_set_response_enabled(cast(AdwAlertDialog*)this._cPtr, _response, enabled);
   }
 
@@ -794,8 +794,8 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setResponseLabel(string response, string label) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     adw_alert_dialog_set_response_label(cast(AdwAlertDialog*)this._cPtr, _response, _label);
   }
 

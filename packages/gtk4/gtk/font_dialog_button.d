@@ -311,7 +311,7 @@ class FontDialogButton : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_font_dialog_button_get_font_features(cast(GtkFontDialogButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setFontFeatures(string fontFeatures = null) nothrow
   {
-    const(char)* _fontFeatures = fontFeatures.toCString(No.Alloc);
+    const(char)* _fontFeatures = fontFeatures.toCString!(No.Malloc, Yes.Nullable);
     gtk_font_dialog_button_set_font_features(cast(GtkFontDialogButton*)this._cPtr, _fontFeatures);
   }
 

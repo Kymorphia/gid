@@ -88,7 +88,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromFile(string filename)
   {
     GdkPixbufAnimation* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_file(_filename, &_err);
     if (_err)
@@ -111,7 +111,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromResource(string resourcePath)
   {
     GdkPixbufAnimation* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_resource(_resourcePath, &_err);
     if (_err)

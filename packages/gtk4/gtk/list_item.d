@@ -213,7 +213,7 @@ class ListItem : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_description(cast(GtkListItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class ListItem : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_label(cast(GtkListItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   void setAccessibleDescription(string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     gtk_list_item_set_accessible_description(cast(GtkListItem*)this._cPtr, _description);
   }
 
@@ -343,7 +343,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   void setAccessibleLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     gtk_list_item_set_accessible_label(cast(GtkListItem*)this._cPtr, _label);
   }
 

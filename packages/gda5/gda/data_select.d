@@ -389,7 +389,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool setModificationStatementSql(string sql)
   {
     bool _retval;
-    const(char)* _sql = sql.toCString(No.Alloc);
+    const(char)* _sql = sql.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_data_select_set_modification_statement_sql(cast(GdaDataSelect*)this._cPtr, _sql, &_err);
     if (_err)
@@ -420,7 +420,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool setRowSelectionConditionSql(string sqlWhere)
   {
     bool _retval;
-    const(char)* _sqlWhere = sqlWhere.toCString(No.Alloc);
+    const(char)* _sqlWhere = sqlWhere.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_data_select_set_row_selection_condition_sql(cast(GdaDataSelect*)this._cPtr, _sqlWhere, &_err);
     if (_err)

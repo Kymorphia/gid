@@ -138,7 +138,7 @@ class ExecutePlan : gobject.object.ObjectWrap
   arrow.execute_node.ExecuteNode buildNode(string factoryName, arrow.execute_node.ExecuteNode[] inputs, arrow.execute_node_options.ExecuteNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
-    const(char)* _factoryName = factoryName.toCString(No.Alloc);
+    const(char)* _factoryName = factoryName.toCString!(No.Malloc, No.Nullable);
     auto _inputs = gListFromD!(arrow.execute_node.ExecuteNode)(inputs);
     scope(exit) containerFree!(GList*, arrow.execute_node.ExecuteNode, GidOwnership.None)(_inputs);
     GError *_err;

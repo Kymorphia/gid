@@ -403,7 +403,7 @@ class FontDialog : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
-    fontFeatures = _fontFeatures.fromCString(Yes.Free);
+    fontFeatures = _fontFeatures.fromCString!(Yes.Free);
     language = new pango.language.Language(cast(void*)_language, Yes.Take);
     return _retval;
   }
@@ -488,7 +488,7 @@ class FontDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_font_dialog_get_title(cast(GtkFontDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -553,7 +553,7 @@ class FontDialog : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_font_dialog_set_title(cast(GtkFontDialog*)this._cPtr, _title);
   }
 }

@@ -1220,7 +1220,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void actionSetEnabled(string actionName, bool enabled) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     gtk_widget_action_set_enabled(cast(GtkWidget*)this._cPtr, _actionName, enabled);
   }
 
@@ -1269,7 +1269,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool activateAction(string name, glib.variant.Variant args = null) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_widget_activate_action_variant(cast(GtkWidget*)this._cPtr, _name, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -1312,7 +1312,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void addCssClass(string cssClass) nothrow
   {
-    const(char)* _cssClass = cssClass.toCString(No.Alloc);
+    const(char)* _cssClass = cssClass.toCString!(No.Malloc, No.Nullable);
     gtk_widget_add_css_class(cast(GtkWidget*)this._cPtr, _cssClass);
   }
 
@@ -1598,7 +1598,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   pango.layout.Layout createPangoLayout(string text = null) nothrow
   {
     PangoLayout* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)this._cPtr, _text);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
@@ -1881,7 +1881,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1895,7 +1895,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_css_name(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2255,7 +2255,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_name(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2621,7 +2621,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   gobject.object.ObjectWrap getTemplateChild(gobject.types.GType widgetType, string name) nothrow
   {
     GObject* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_widget_get_template_child(cast(GtkWidget*)this._cPtr, widgetType, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
@@ -2639,7 +2639,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2655,7 +2655,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2769,7 +2769,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool hasCssClass(string cssClass) nothrow
   {
     bool _retval;
-    const(char)* _cssClass = cssClass.toCString(No.Alloc);
+    const(char)* _cssClass = cssClass.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_widget_has_css_class(cast(GtkWidget*)this._cPtr, _cssClass);
     return _retval;
   }
@@ -2897,7 +2897,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void insertActionGroup(string name, gio.action_group.ActionGroup group = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_insert_action_group(cast(GtkWidget*)this._cPtr, _name, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null);
   }
 
@@ -3318,7 +3318,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void removeCssClass(string cssClass) nothrow
   {
-    const(char)* _cssClass = cssClass.toCString(No.Alloc);
+    const(char)* _cssClass = cssClass.toCString!(No.Malloc, No.Nullable);
     gtk_widget_remove_css_class(cast(GtkWidget*)this._cPtr, _cssClass);
   }
 
@@ -3425,7 +3425,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   {
     char*[] _tmpclasses;
     foreach (s; classes)
-      _tmpclasses ~= s.toCString(No.Alloc);
+      _tmpclasses ~= s.toCString;
     _tmpclasses ~= null;
     const(char*)* _classes = _tmpclasses.ptr;
 
@@ -3465,7 +3465,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void setCursorFromName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_widget_set_cursor_from_name(cast(GtkWidget*)this._cPtr, _name);
   }
 
@@ -3740,7 +3740,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_widget_set_name(cast(GtkWidget*)this._cPtr, _name);
   }
 
@@ -3923,7 +3923,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void setTooltipMarkup(string markup = null) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, Yes.Nullable);
     gtk_widget_set_tooltip_markup(cast(GtkWidget*)this._cPtr, _markup);
   }
 
@@ -3944,7 +3944,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   */
   void setTooltipText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     gtk_widget_set_tooltip_text(cast(GtkWidget*)this._cPtr, _text);
   }
 

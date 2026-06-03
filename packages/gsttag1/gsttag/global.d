@@ -26,7 +26,7 @@ import gsttag.types;
 bool tagCheckLanguageCode(string langCode) nothrow
 {
   bool _retval;
-  const(char)* _langCode = langCode.toCString(No.Alloc);
+  const(char)* _langCode = langCode.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_tag_check_language_code(_langCode);
   return _retval;
 }
@@ -56,12 +56,12 @@ string tagFreeformStringToUtf8(string data, string[] envVars) nothrow
   auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
   char*[] _tmpenvVars;
   foreach (s; envVars)
-    _tmpenvVars ~= s.toCString(No.Alloc);
+    _tmpenvVars ~= s.toCString;
   _tmpenvVars ~= null;
   const(char*)* _envVars = _tmpenvVars.ptr;
 
   _cretval = gst_tag_freeform_string_to_utf8(_data, _size, _envVars);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -75,9 +75,9 @@ string tagFreeformStringToUtf8(string data, string[] envVars) nothrow
 string tagFromId3Tag(string id3Tag) nothrow
 {
   const(char)* _cretval;
-  const(char)* _id3Tag = id3Tag.toCString(No.Alloc);
+  const(char)* _id3Tag = id3Tag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_from_id3_tag(_id3Tag);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -93,10 +93,10 @@ string tagFromId3Tag(string id3Tag) nothrow
 string tagFromId3UserTag(string type, string id3UserTag) nothrow
 {
   const(char)* _cretval;
-  const(char)* _type = type.toCString(No.Alloc);
-  const(char)* _id3UserTag = id3UserTag.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+  const(char)* _id3UserTag = id3UserTag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_from_id3_user_tag(_type, _id3UserTag);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -110,9 +110,9 @@ string tagFromId3UserTag(string type, string id3UserTag) nothrow
 string tagFromVorbisTag(string vorbisTag) nothrow
 {
   const(char)* _cretval;
-  const(char)* _vorbisTag = vorbisTag.toCString(No.Alloc);
+  const(char)* _vorbisTag = vorbisTag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_from_vorbis_tag(_vorbisTag);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -147,9 +147,9 @@ uint tagGetId3v2TagSize(gst.buffer.Buffer buffer) nothrow
 string tagGetLanguageCodeIso6391(string langCode) nothrow
 {
   const(char)* _cretval;
-  const(char)* _langCode = langCode.toCString(No.Alloc);
+  const(char)* _langCode = langCode.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_language_code_iso_639_1(_langCode);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -173,9 +173,9 @@ string tagGetLanguageCodeIso6391(string langCode) nothrow
 string tagGetLanguageCodeIso6392B(string langCode) nothrow
 {
   const(char)* _cretval;
-  const(char)* _langCode = langCode.toCString(No.Alloc);
+  const(char)* _langCode = langCode.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_language_code_iso_639_2B(_langCode);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -199,9 +199,9 @@ string tagGetLanguageCodeIso6392B(string langCode) nothrow
 string tagGetLanguageCodeIso6392T(string langCode) nothrow
 {
   const(char)* _cretval;
-  const(char)* _langCode = langCode.toCString(No.Alloc);
+  const(char)* _langCode = langCode.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_language_code_iso_639_2T(_langCode);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -226,7 +226,7 @@ string[] tagGetLanguageCodes() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -250,9 +250,9 @@ string[] tagGetLanguageCodes() nothrow
 string tagGetLanguageName(string languageCode) nothrow
 {
   const(char)* _cretval;
-  const(char)* _languageCode = languageCode.toCString(No.Alloc);
+  const(char)* _languageCode = languageCode.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_language_name(_languageCode);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -269,9 +269,9 @@ string tagGetLanguageName(string languageCode) nothrow
 string tagGetLicenseDescription(string licenseRef) nothrow
 {
   const(char)* _cretval;
-  const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
+  const(char)* _licenseRef = licenseRef.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_license_description(_licenseRef);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -287,7 +287,7 @@ string tagGetLicenseDescription(string licenseRef) nothrow
 gsttag.types.TagLicenseFlags tagGetLicenseFlags(string licenseRef) nothrow
 {
   GstTagLicenseFlags _cretval;
-  const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
+  const(char)* _licenseRef = licenseRef.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_license_flags(_licenseRef);
   gsttag.types.TagLicenseFlags _retval = cast(gsttag.types.TagLicenseFlags)_cretval;
   return _retval;
@@ -311,9 +311,9 @@ gsttag.types.TagLicenseFlags tagGetLicenseFlags(string licenseRef) nothrow
 string tagGetLicenseJurisdiction(string licenseRef) nothrow
 {
   const(char)* _cretval;
-  const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
+  const(char)* _licenseRef = licenseRef.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_license_jurisdiction(_licenseRef);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -329,9 +329,9 @@ string tagGetLicenseJurisdiction(string licenseRef) nothrow
 string tagGetLicenseNick(string licenseRef) nothrow
 {
   const(char)* _cretval;
-  const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
+  const(char)* _licenseRef = licenseRef.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_license_nick(_licenseRef);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -348,9 +348,9 @@ string tagGetLicenseNick(string licenseRef) nothrow
 string tagGetLicenseTitle(string licenseRef) nothrow
 {
   const(char)* _cretval;
-  const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
+  const(char)* _licenseRef = licenseRef.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_license_title(_licenseRef);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -366,9 +366,9 @@ string tagGetLicenseTitle(string licenseRef) nothrow
 string tagGetLicenseVersion(string licenseRef) nothrow
 {
   const(char)* _cretval;
-  const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
+  const(char)* _licenseRef = licenseRef.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_license_version(_licenseRef);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -393,7 +393,7 @@ string[] tagGetLicenses() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -422,7 +422,7 @@ string tagId3GenreGet(uint id) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_tag_id3_genre_get(id);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -574,7 +574,7 @@ gst.tag_list.TagList tagListFromVorbiscomment(ubyte[] data, ubyte[] idData, out 
   char* _vendorString;
   _cretval = gst_tag_list_from_vorbiscomment(_data, _size, _idData, _idDataLength, &_vendorString);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
-  vendorString = _vendorString.fromCString(Yes.Free);
+  vendorString = _vendorString.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -601,7 +601,7 @@ gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ub
   char* _vendorString;
   _cretval = gst_tag_list_from_vorbiscomment_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _idData, _idDataLength, &_vendorString);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
-  vendorString = _vendorString.fromCString(Yes.Free);
+  vendorString = _vendorString.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -690,7 +690,7 @@ gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[
     _idDataLength = cast(uint)idData.length;
 
   auto _idData = idData.ptr ? cast(const(ubyte)*)idData.ptr : [ubyte.init].ptr;
-  const(char)* _vendorString = vendorString.toCString(No.Alloc);
+  const(char)* _vendorString = vendorString.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_tag_list_to_vorbiscomment_buffer(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _idData, _idDataLength, _vendorString);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -712,7 +712,7 @@ gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, s
   GstBuffer* _cretval;
   char*[] _tmpschemas;
   foreach (s; schemas)
-    _tmpschemas ~= s.toCString(No.Alloc);
+    _tmpschemas ~= s.toCString;
   _tmpschemas ~= null;
   const(char*)* _schemas = _tmpschemas.ptr;
 
@@ -741,14 +741,14 @@ gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, s
 bool tagParseExtendedComment(string extComment, out string key, out string lang, out string value, bool failIfNoKey) nothrow
 {
   bool _retval;
-  const(char)* _extComment = extComment.toCString(No.Alloc);
+  const(char)* _extComment = extComment.toCString!(No.Malloc, No.Nullable);
   char* _key;
   char* _lang;
   char* _value;
   _retval = cast(bool)gst_tag_parse_extended_comment(_extComment, &_key, &_lang, &_value, failIfNoKey);
-  key = _key.fromCString(Yes.Free);
-  lang = _lang.fromCString(Yes.Free);
-  value = _value.fromCString(Yes.Free);
+  key = _key.fromCString!(Yes.Free);
+  lang = _lang.fromCString!(Yes.Free);
+  value = _value.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -772,9 +772,9 @@ void tagRegisterMusicbrainzTags() nothrow
 string tagToId3Tag(string gstTag) nothrow
 {
   const(char)* _cretval;
-  const(char)* _gstTag = gstTag.toCString(No.Alloc);
+  const(char)* _gstTag = gstTag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_to_id3_tag(_gstTag);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -792,7 +792,7 @@ string tagToId3Tag(string gstTag) nothrow
 string[] tagToVorbisComments(gst.tag_list.TagList list, string tag) nothrow
 {
   GList* _cretval;
-  const(char)* _tag = tag.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_to_vorbis_comments(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _tag);
   auto _retval = gListToD!(string, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
@@ -808,9 +808,9 @@ string[] tagToVorbisComments(gst.tag_list.TagList list, string tag) nothrow
 string tagToVorbisTag(string gstTag) nothrow
 {
   const(char)* _cretval;
-  const(char)* _gstTag = gstTag.toCString(No.Alloc);
+  const(char)* _gstTag = gstTag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_to_vorbis_tag(_gstTag);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -832,7 +832,7 @@ string[] tagXmpListSchemas() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -852,7 +852,7 @@ string[] tagXmpListSchemas() nothrow
 */
 void vorbisTagAdd(gst.tag_list.TagList list, string tag, string value) nothrow
 {
-  const(char)* _tag = tag.toCString(No.Alloc);
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   gst_vorbis_tag_add(list ? cast(GstTagList*)list._cPtr(No.Dup) : null, _tag, _value);
 }

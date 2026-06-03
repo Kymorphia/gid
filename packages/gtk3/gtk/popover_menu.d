@@ -164,7 +164,7 @@ class PopoverMenu : gtk.popover.Popover
   */
   void openSubmenu(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_popover_menu_open_submenu(cast(GtkPopoverMenu*)this._cPtr, _name);
   }
 }

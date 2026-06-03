@@ -72,7 +72,7 @@ class StructDataType : arrow.data_type.DataType
   arrow.field.Field getFieldByName(string name) nothrow
   {
     GArrowField* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_struct_data_type_get_field_by_name(cast(GArrowStructDataType*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
@@ -82,7 +82,7 @@ class StructDataType : arrow.data_type.DataType
   int getFieldIndex(string name) nothrow
   {
     int _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = garrow_struct_data_type_get_field_index(cast(GArrowStructDataType*)this._cPtr, _name);
     return _retval;
   }

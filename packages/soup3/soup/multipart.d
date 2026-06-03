@@ -73,7 +73,7 @@ class Multipart : gobject.boxed.Boxed
   this(string mimeType) nothrow
   {
     SoupMultipart* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_multipart_new(_mimeType);
     this(_cretval, Yes.Take);
   }
@@ -108,9 +108,9 @@ class Multipart : gobject.boxed.Boxed
   */
   void appendFormFile(string controlName, string filename, string contentType, glib.bytes.Bytes body_) nothrow
   {
-    const(char)* _controlName = controlName.toCString(No.Alloc);
-    const(char)* _filename = filename.toCString(No.Alloc);
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _controlName = controlName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, Yes.Nullable);
     soup_multipart_append_form_file(cast(SoupMultipart*)this._cPtr, _controlName, _filename, _contentType, body_ ? cast(GBytes*)body_._cPtr(No.Dup) : null);
   }
 
@@ -125,8 +125,8 @@ class Multipart : gobject.boxed.Boxed
   */
   void appendFormString(string controlName, string data) nothrow
   {
-    const(char)* _controlName = controlName.toCString(No.Alloc);
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _controlName = controlName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
     soup_multipart_append_form_string(cast(SoupMultipart*)this._cPtr, _controlName, _data);
   }
 

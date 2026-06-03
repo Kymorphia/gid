@@ -114,10 +114,10 @@ class DBusMessage : gobject.object.ObjectWrap
   static gio.dbus_message.DBusMessage newMethodCall(string name, string path, string interface_, string method) nothrow
   {
     GDBusMessage* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _interface_ = interface_.toCString(No.Alloc);
-    const(char)* _method = method.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interface_ = interface_.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_message_new_method_call(_name, _path, _interface_, _method);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
@@ -135,9 +135,9 @@ class DBusMessage : gobject.object.ObjectWrap
   static gio.dbus_message.DBusMessage newSignal(string path, string interface_, string signal) nothrow
   {
     GDBusMessage* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _interface_ = interface_.toCString(No.Alloc);
-    const(char)* _signal = signal.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interface_ = interface_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _signal = signal.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_message_new_signal(_path, _interface_, _signal);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
@@ -203,7 +203,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0_path(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_destination(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_error_name(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_interface(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_member(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_path(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -415,7 +415,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_sender(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -440,7 +440,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_signature(cast(GDBusMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -484,8 +484,8 @@ class DBusMessage : gobject.object.ObjectWrap
   gio.dbus_message.DBusMessage newMethodErrorLiteral(string errorName, string errorMessage) nothrow
   {
     GDBusMessage* _cretval;
-    const(char)* _errorName = errorName.toCString(No.Alloc);
-    const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
+    const(char)* _errorName = errorName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_message_new_method_error_literal(cast(GDBusMessage*)this._cPtr, _errorName, _errorMessage);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
@@ -545,7 +545,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_dbus_message_print(cast(GDBusMessage*)this._cPtr, indent);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -583,7 +583,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setDestination(string value = null) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     g_dbus_message_set_destination(cast(GDBusMessage*)this._cPtr, _value);
   }
 
@@ -595,7 +595,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setErrorName(string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_dbus_message_set_error_name(cast(GDBusMessage*)this._cPtr, _value);
   }
 
@@ -633,7 +633,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setInterface(string value = null) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     g_dbus_message_set_interface(cast(GDBusMessage*)this._cPtr, _value);
   }
 
@@ -645,7 +645,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setMember(string value = null) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     g_dbus_message_set_member(cast(GDBusMessage*)this._cPtr, _value);
   }
 
@@ -679,7 +679,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setPath(string value = null) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     g_dbus_message_set_path(cast(GDBusMessage*)this._cPtr, _value);
   }
 
@@ -702,7 +702,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setSender(string value = null) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     g_dbus_message_set_sender(cast(GDBusMessage*)this._cPtr, _value);
   }
 
@@ -725,7 +725,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setSignature(string value = null) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
     g_dbus_message_set_signature(cast(GDBusMessage*)this._cPtr, _value);
   }
 

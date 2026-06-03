@@ -99,7 +99,7 @@ class ShortcutAction : gobject.object.ObjectWrap
   static gtk.shortcut_action.ShortcutAction parseString(string string_) nothrow
   {
     GtkShortcutAction* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_shortcut_action_parse_string(_string_);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.Take);
     return _retval;
@@ -154,7 +154,7 @@ class ShortcutAction : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

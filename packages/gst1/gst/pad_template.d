@@ -173,7 +173,7 @@ class PadTemplate : gst.object.ObjectWrap
   this(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps) nothrow
   {
     GstPadTemplate* _cretval;
-    const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
+    const(char)* _nameTemplate = nameTemplate.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_pad_template_new(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
@@ -209,7 +209,7 @@ class PadTemplate : gst.object.ObjectWrap
   static gst.pad_template.PadTemplate newWithGtype(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps, gobject.types.GType padType) nothrow
   {
     GstPadTemplate* _cretval;
-    const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
+    const(char)* _nameTemplate = nameTemplate.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_pad_template_new_with_gtype(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, padType);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;

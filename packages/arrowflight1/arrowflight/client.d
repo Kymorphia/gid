@@ -84,16 +84,16 @@ class Client : gobject.object.ObjectWrap
   bool authenticateBasicToken(string user, string password, arrowflight.call_options.CallOptions options, out string bearerName, out string bearerValue)
   {
     bool _retval;
-    const(char)* _user = user.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _user = user.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
     char* _bearerName;
     char* _bearerValue;
     GError *_err;
     _retval = cast(bool)gaflight_client_authenticate_basic_token(cast(GAFlightClient*)this._cPtr, _user, _password, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_bearerName, &_bearerValue, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    bearerName = _bearerName.fromCString(Yes.Free);
-    bearerValue = _bearerValue.fromCString(Yes.Free);
+    bearerName = _bearerName.fromCString!(Yes.Free);
+    bearerValue = _bearerValue.fromCString!(Yes.Free);
     return _retval;
   }
 

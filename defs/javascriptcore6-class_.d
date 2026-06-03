@@ -54,13 +54,13 @@ class Class : gobject.object.ObjectWrap
       }
       catch (Exception e)
       {
-        jsc_context_throw(ctx, e.msg.toCString(No.Alloc));
+        jsc_context_throw(ctx, e.msg.toCString);
         return jsc_value_new_undefined(ctx);
       }
     }
 
     auto ctorVal = jsc_class_add_constructor_variadic(cast(JSCClass*)_cPtr,
-      name.length > 0 ? name.toCString(No.Alloc) : null, cast(GCallback)&ctorThunk,
+      name.length > 0 ? name.toCString : null, cast(GCallback)&ctorThunk,
       _cPtr, null, Value._getGType);
 
     return new Value(cast(void*)ctorVal, Yes.Take);
@@ -109,7 +109,7 @@ class Class : gobject.object.ObjectWrap
       }
       catch (Exception e)
       {
-        jsc_context_throw(ctx, e.msg.toCString(No.Alloc));
+        jsc_context_throw(ctx, e.msg.toCString);
         return jsc_value_new_undefined(ctx);
       }
     }
@@ -117,7 +117,7 @@ class Class : gobject.object.ObjectWrap
     if (name.length == 0)
       name = dMethodName;
 
-    jsc_class_add_method_variadic(cast(JSCClass*)_cPtr, name.toCString(No.Alloc), cast(GCallback)&methodThunk,
+    jsc_class_add_method_variadic(cast(JSCClass*)_cPtr, name.toCString, cast(GCallback)&methodThunk,
       null, null, Value._getGType);
   }
 
@@ -157,7 +157,7 @@ class Class : gobject.object.ObjectWrap
       }
       catch (Exception e)
       {
-        jsc_context_throw(ctx, e.msg.toCString(No.Alloc));
+        jsc_context_throw(ctx, e.msg.toCString);
         return jsc_value_new_undefined(ctx);
       }
     }
@@ -181,12 +181,12 @@ class Class : gobject.object.ObjectWrap
             __traits(getMember, dObj, setterName)(getJsVal!(Parameters!Setter[0])(value));
         }
         catch (Exception e)
-          jsc_context_throw(ctx, e.msg.toCString(No.Alloc));
+          jsc_context_throw(ctx, e.msg.toCString);
       }
 
-      jsc_class_add_property(cast(JSCClass*)_cPtr, name.toCString(No.Alloc), Value._getGType, cast(GCallback)&getterThunk, cast(GCallback)&setterThunk, null, null);
+      jsc_class_add_property(cast(JSCClass*)_cPtr, name.toCString, Value._getGType, cast(GCallback)&getterThunk, cast(GCallback)&setterThunk, null, null);
     }
     else
-      jsc_class_add_property(cast(JSCClass*)_cPtr, name.toCString(No.Alloc), Value._getGType, cast(GCallback)&getterThunk, null, null, null);
+      jsc_class_add_property(cast(JSCClass*)_cPtr, name.toCString, Value._getGType, cast(GCallback)&getterThunk, null, null, null);
   }
 }

@@ -22,7 +22,7 @@ struct DsdFormat
   static gstaudio.types.DsdFormat fromString(string str) nothrow
   {
     GstDsdFormat _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_dsd_format_from_string(_str);
     gstaudio.types.DsdFormat _retval = cast(gstaudio.types.DsdFormat)_cretval;
     return _retval;
@@ -48,7 +48,7 @@ struct DsdFormat
   {
     const(char)* _cretval;
     _cretval = gst_dsd_format_to_string(format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

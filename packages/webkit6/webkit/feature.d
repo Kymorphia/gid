@@ -88,7 +88,7 @@ class Feature : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_category(cast(WebKitFeature*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class Feature : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_details(cast(WebKitFeature*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Feature : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_identifier(cast(WebKitFeature*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Feature : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_name(cast(WebKitFeature*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

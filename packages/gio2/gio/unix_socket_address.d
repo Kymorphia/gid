@@ -114,7 +114,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   this(string path) nothrow
   {
     GSocketAddress* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = g_unix_socket_address_new(_path);
     this(_cretval, Yes.Take);
   }
@@ -242,7 +242,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   {
     const(char)* _cretval;
     _cretval = g_unix_socket_address_get_path(cast(GUnixSocketAddress*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

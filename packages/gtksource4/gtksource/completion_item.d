@@ -213,35 +213,35 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   /** */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_completion_item_set_icon_name(cast(GtkSourceCompletionItem*)this._cPtr, _iconName);
   }
 
   /** */
   void setInfo(string info = null) nothrow
   {
-    const(char)* _info = info.toCString(No.Alloc);
+    const(char)* _info = info.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_completion_item_set_info(cast(GtkSourceCompletionItem*)this._cPtr, _info);
   }
 
   /** */
   void setLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_completion_item_set_label(cast(GtkSourceCompletionItem*)this._cPtr, _label);
   }
 
   /** */
   void setMarkup(string markup = null) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_completion_item_set_markup(cast(GtkSourceCompletionItem*)this._cPtr, _markup);
   }
 
   /** */
   void setText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_completion_item_set_text(cast(GtkSourceCompletionItem*)this._cPtr, _text);
   }
 }

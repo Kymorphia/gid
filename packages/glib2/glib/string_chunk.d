@@ -88,9 +88,9 @@ class StringChunk
   string insert(string string_) nothrow
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_string_chunk_insert(cast(GStringChunk*)this._cPtr, _string_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -117,9 +117,9 @@ class StringChunk
   string insertConst(string string_) nothrow
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_string_chunk_insert_const(cast(GStringChunk*)this._cPtr, _string_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -143,9 +143,9 @@ class StringChunk
   string insertLen(string string_, ptrdiff_t len) nothrow
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = g_string_chunk_insert_len(cast(GStringChunk*)this._cPtr, _string_, len);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

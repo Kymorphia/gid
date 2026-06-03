@@ -15,7 +15,7 @@ struct VideoMultiviewMode
   static gstvideo.types.VideoMultiviewMode fromCapsString(string capsMviewMode) nothrow
   {
     GstVideoMultiviewMode _cretval;
-    const(char)* _capsMviewMode = capsMviewMode.toCString(No.Alloc);
+    const(char)* _capsMviewMode = capsMviewMode.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_video_multiview_mode_from_caps_string(_capsMviewMode);
     gstvideo.types.VideoMultiviewMode _retval = cast(gstvideo.types.VideoMultiviewMode)_cretval;
     return _retval;
@@ -33,7 +33,7 @@ struct VideoMultiviewMode
   {
     const(char)* _cretval;
     _cretval = gst_video_multiview_mode_to_caps_string(mviewMode);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

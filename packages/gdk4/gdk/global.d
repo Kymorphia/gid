@@ -173,7 +173,7 @@ void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeTyp
     }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-  const(char)* _mimeType = mimeType.toCString(No.Alloc);
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   gdk_content_deserialize_async(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, _mimeType, type, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
@@ -235,7 +235,7 @@ void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeTyp
     }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-  const(char)* _mimeType = mimeType.toCString(No.Alloc);
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   gdk_content_serialize_async(stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _mimeType, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
@@ -343,9 +343,9 @@ bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out doubl
 string internMimeType(string string_) nothrow
 {
   const(char)* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = gdk_intern_mime_type(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -379,7 +379,7 @@ void keyvalConvertCase(uint symbol, out uint lower, out uint upper) nothrow
 uint keyvalFromName(string keyvalName) nothrow
 {
   uint _retval;
-  const(char)* _keyvalName = keyvalName.toCString(No.Alloc);
+  const(char)* _keyvalName = keyvalName.toCString!(No.Malloc, No.Nullable);
   _retval = gdk_keyval_from_name(_keyvalName);
   return _retval;
 }
@@ -430,7 +430,7 @@ string keyvalName(uint keyval) nothrow
 {
   const(char)* _cretval;
   _cretval = gdk_keyval_name(keyval);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -575,7 +575,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture) nothro
 */
 void setAllowedBackends(string backends) nothrow
 {
-  const(char)* _backends = backends.toCString(No.Alloc);
+  const(char)* _backends = backends.toCString!(No.Malloc, No.Nullable);
   gdk_set_allowed_backends(_backends);
 }
 

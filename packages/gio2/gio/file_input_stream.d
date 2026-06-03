@@ -82,7 +82,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_file_input_stream_query_info(cast(GFileInputStream*)this._cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -128,7 +128,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_input_stream_query_info_async(cast(GFileInputStream*)this._cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

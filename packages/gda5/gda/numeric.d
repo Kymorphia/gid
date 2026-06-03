@@ -158,7 +158,7 @@ class Numeric : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gda_numeric_get_string(cast(const(GdaNumeric)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class Numeric : gobject.boxed.Boxed
   */
   void setFromString(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gda_numeric_set_from_string(cast(GdaNumeric*)this._cPtr, _str);
   }
 

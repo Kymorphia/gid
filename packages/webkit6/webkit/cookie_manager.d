@@ -299,7 +299,7 @@ class CookieManager : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_cookie_manager_get_cookies(cast(WebKitCookieManager*)this._cPtr, _uri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -413,7 +413,7 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void setPersistentStorage(string filename, webkit.types.CookiePersistentStorage storage) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     webkit_cookie_manager_set_persistent_storage(cast(WebKitCookieManager*)this._cPtr, _filename, storage);
   }
 

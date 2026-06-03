@@ -392,7 +392,7 @@ template EditableT()
   {
     char* _cretval;
     _cretval = gtk_editable_get_chars(cast(GtkEditable*)this._cPtr, startPos, endPos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -489,7 +489,7 @@ template EditableT()
   {
     const(char)* _cretval;
     _cretval = gtk_editable_get_text(cast(GtkEditable*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -641,7 +641,7 @@ template EditableT()
   */
   override void setText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_editable_set_text(cast(GtkEditable*)this._cPtr, _text);
   }
 

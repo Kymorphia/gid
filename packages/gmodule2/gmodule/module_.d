@@ -63,7 +63,7 @@ class Module
   {
     const(char)* _cretval;
     _cretval = g_module_name(cast(ModuleC*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class Module
   bool symbol(string symbolName, out void* symbol) nothrow
   {
     bool _retval;
-    const(char)* _symbolName = symbolName.toCString(No.Alloc);
+    const(char)* _symbolName = symbolName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_module_symbol(cast(ModuleC*)this._cPtr, _symbolName, cast(void**)&symbol);
     return _retval;
   }
@@ -113,10 +113,10 @@ class Module
   static string buildPath(string directory, string moduleName) nothrow
   {
     char* _cretval;
-    const(char)* _directory = directory.toCString(No.Alloc);
-    const(char)* _moduleName = moduleName.toCString(No.Alloc);
+    const(char)* _directory = directory.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _moduleName = moduleName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_module_build_path(_directory, _moduleName);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class Module
   {
     const(char)* _cretval;
     _cretval = g_module_error();
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -184,7 +184,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void addResourcePath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_icon_theme_add_resource_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -198,7 +198,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void addSearchPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_icon_theme_add_search_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -234,7 +234,7 @@ class IconTheme : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -257,7 +257,7 @@ class IconTheme : gobject.object.ObjectWrap
   int[] getIconSizes(string iconName) nothrow
   {
     int* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_theme_get_icon_sizes(cast(GtkIconTheme*)this._cPtr, _iconName);
     int[] _retval;
 
@@ -291,7 +291,7 @@ class IconTheme : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -316,7 +316,7 @@ class IconTheme : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -332,7 +332,7 @@ class IconTheme : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_icon_theme_get_theme_name(cast(GtkIconTheme*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class IconTheme : gobject.object.ObjectWrap
   bool hasIcon(string iconName) nothrow
   {
     bool _retval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_icon_theme_has_icon(cast(GtkIconTheme*)this._cPtr, _iconName);
     return _retval;
   }
@@ -422,10 +422,10 @@ class IconTheme : gobject.object.ObjectWrap
   gtk.icon_paintable.IconPaintable lookupIcon(string iconName, string[] fallbacks, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags) nothrow
   {
     GtkIconPaintable* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpfallbacks;
     foreach (s; fallbacks)
-      _tmpfallbacks ~= s.toCString(No.Alloc);
+      _tmpfallbacks ~= s.toCString;
     _tmpfallbacks ~= null;
     const(char*)* _fallbacks = _tmpfallbacks.ptr;
 
@@ -455,7 +455,7 @@ class IconTheme : gobject.object.ObjectWrap
   {
     const(char)*[] _tmppath;
     foreach (s; path)
-      _tmppath ~= s.toCString(No.Alloc);
+      _tmppath ~= s.toCString;
     _tmppath ~= null;
     const(char*)* _path = _tmppath.ptr;
 
@@ -487,7 +487,7 @@ class IconTheme : gobject.object.ObjectWrap
   {
     const(char)*[] _tmppath;
     foreach (s; path)
-      _tmppath ~= s.toCString(No.Alloc);
+      _tmppath ~= s.toCString;
     _tmppath ~= null;
     const(char*)* _path = _tmppath.ptr;
 
@@ -507,7 +507,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void setThemeName(string themeName = null) nothrow
   {
-    const(char)* _themeName = themeName.toCString(No.Alloc);
+    const(char)* _themeName = themeName.toCString!(No.Malloc, Yes.Nullable);
     gtk_icon_theme_set_theme_name(cast(GtkIconTheme*)this._cPtr, _themeName);
   }
 

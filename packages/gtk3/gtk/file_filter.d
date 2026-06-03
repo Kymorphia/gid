@@ -176,7 +176,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   */
   void addMimeType(string mimeType) nothrow
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     gtk_file_filter_add_mime_type(cast(GtkFileFilter*)this._cPtr, _mimeType);
   }
 
@@ -188,7 +188,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   */
   void addPattern(string pattern) nothrow
   {
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString!(No.Malloc, No.Nullable);
     gtk_file_filter_add_pattern(cast(GtkFileFilter*)this._cPtr, _pattern);
   }
 
@@ -232,7 +232,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   {
     const(char)* _cretval;
     _cretval = gtk_file_filter_get_name(cast(GtkFileFilter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   */
   void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_file_filter_set_name(cast(GtkFileFilter*)this._cPtr, _name);
   }
 

@@ -75,7 +75,7 @@ class FileFormat : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gadataset_file_format_get_type_name(cast(GADatasetFileFormat*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class FileFormat : gobject.object.ObjectWrap
   arrowdataset.file_writer.FileWriter openWriter(arrow.output_stream.OutputStream destination, arrow.file_system.FileSystem fileSystem, string path, arrow.schema.Schema schema, arrowdataset.file_write_options.FileWriteOptions options)
   {
     GADatasetFileWriter* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gadataset_file_format_open_writer(cast(GADatasetFileFormat*)this._cPtr, destination ? cast(GArrowOutputStream*)destination._cPtr(No.Dup) : null, fileSystem ? cast(GArrowFileSystem*)fileSystem._cPtr(No.Dup) : null, _path, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GADatasetFileWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)

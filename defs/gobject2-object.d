@@ -386,7 +386,7 @@ class ObjectWrap
   gulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After) nothrow
   {
     auto gclosure = cast(GClosure*)(cast(Closure)closure)._cPtr;
-    auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
+    auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString, gclosure, after == Yes.After);
     g_object_watch_closure(_cInstancePtr, gclosure); // Invalidate closure when object is finalized
 
     if (retval != 0)
@@ -406,7 +406,7 @@ class ObjectWrap
     GValue value;
     initVal!T(&value);
     setVal(&value, val);
-    g_object_set_property(_cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_set_property(_cInstancePtr, propertyName.toCString, &value);
     g_value_unset(&value);
   }
 
@@ -420,7 +420,7 @@ class ObjectWrap
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cast(GObject*)_cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_get_property(cast(GObject*)_cInstancePtr, propertyName.toCString, &value);
     T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;

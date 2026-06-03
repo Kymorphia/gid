@@ -62,7 +62,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   arrow.extension_data_type.ExtensionDataType lookup(string name) nothrow
   {
     GArrowExtensionDataType* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_extension_data_type_registry_lookup(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
     return _retval;
@@ -98,7 +98,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   bool unregister(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_extension_data_type_registry_unregister(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, _name, &_err);
     if (_err)

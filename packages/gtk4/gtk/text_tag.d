@@ -1560,7 +1560,7 @@ class TextTag : gobject.object.ObjectWrap
   this(string name = null) nothrow
   {
     GtkTextTag* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_text_tag_new(_name);
     this(_cretval, Yes.Take);
   }

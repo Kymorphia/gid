@@ -134,7 +134,7 @@ class Toc : gobject.boxed.Boxed
   gst.toc_entry.TocEntry findEntry(string uid) nothrow
   {
     GstTocEntry* _cretval;
-    const(char)* _uid = uid.toCString(No.Alloc);
+    const(char)* _uid = uid.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_toc_find_entry(cast(const(GstToc)*)this._cPtr, _uid);
     auto _retval = _cretval ? new gst.toc_entry.TocEntry(cast(void*)_cretval, No.Take) : null;
     return _retval;

@@ -64,7 +64,7 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
   this(string name) nothrow
   {
     GMimeInternetAddress* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = internet_address_group_new(_name);
     this(_cretval, Yes.Take);
   }

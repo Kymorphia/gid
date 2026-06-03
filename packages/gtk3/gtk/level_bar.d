@@ -311,7 +311,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void addOffsetValue(string name, double value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_level_bar_add_offset_value(cast(GtkLevelBar*)this._cPtr, _name, value);
   }
 
@@ -372,7 +372,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   bool getOffsetValue(string name, out double value) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)gtk_level_bar_get_offset_value(cast(GtkLevelBar*)this._cPtr, _name, cast(double*)&value);
     return _retval;
   }
@@ -398,7 +398,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void removeOffsetValue(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)this._cPtr, _name);
   }
 

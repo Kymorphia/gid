@@ -73,7 +73,7 @@ class TextPart : gmime.part.Part
   static gmime.text_part.TextPart newWithSubtype(string subtype) nothrow
   {
     GMimeTextPart* _cretval;
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_text_part_new_with_subtype(_subtype);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.text_part.TextPart)(cast(GMimeTextPart*)_cretval, Yes.Take);
     return _retval;
@@ -87,7 +87,7 @@ class TextPart : gmime.part.Part
   {
     const(char)* _cretval;
     _cretval = g_mime_text_part_get_charset(cast(GMimeTextPart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class TextPart : gmime.part.Part
   {
     char* _cretval;
     _cretval = g_mime_text_part_get_text(cast(GMimeTextPart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class TextPart : gmime.part.Part
   */
   void setCharset(string charset) nothrow
   {
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     g_mime_text_part_set_charset(cast(GMimeTextPart*)this._cPtr, _charset);
   }
 
@@ -123,7 +123,7 @@ class TextPart : gmime.part.Part
   */
   void setText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     g_mime_text_part_set_text(cast(GMimeTextPart*)this._cPtr, _text);
   }
 }

@@ -278,16 +278,16 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     _tmpargv ~= null;
     char** _argv = _tmpargv.ptr;
 
     char*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.Alloc);
+      _tmpenvv ~= s.toCString;
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
@@ -386,16 +386,16 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
     const(char)*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.Alloc);
+      _tmpenvv ~= s.toCString;
     _tmpenvv ~= null;
     const(char*)* _envv = _tmpenvv.ptr;
 

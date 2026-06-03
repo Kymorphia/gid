@@ -114,7 +114,7 @@ class Schema : gobject.object.ObjectWrap
   arrow.field.Field getFieldByName(string name) nothrow
   {
     GArrowField* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_schema_get_field_by_name(cast(GArrowSchema*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
@@ -124,7 +124,7 @@ class Schema : gobject.object.ObjectWrap
   int getFieldIndex(string name) nothrow
   {
     int _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = garrow_schema_get_field_index(cast(GArrowSchema*)this._cPtr, _name);
     return _retval;
   }
@@ -192,7 +192,7 @@ class Schema : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_schema_to_string(cast(GArrowSchema*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class Schema : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_schema_to_string_metadata(cast(GArrowSchema*)this._cPtr, showMetadata);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

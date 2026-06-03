@@ -197,7 +197,7 @@ class PreferencesPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_description(cast(AdwPreferencesPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class PreferencesPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_icon_name(cast(AdwPreferencesPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class PreferencesPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_name(cast(AdwPreferencesPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class PreferencesPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_title(cast(AdwPreferencesPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   void setDescription(string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     adw_preferences_page_set_description(cast(AdwPreferencesPage*)this._cPtr, _description);
   }
 
@@ -289,7 +289,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     adw_preferences_page_set_icon_name(cast(AdwPreferencesPage*)this._cPtr, _iconName);
   }
 
@@ -301,7 +301,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   override void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     adw_preferences_page_set_name(cast(AdwPreferencesPage*)this._cPtr, _name);
   }
 
@@ -313,7 +313,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_preferences_page_set_title(cast(AdwPreferencesPage*)this._cPtr, _title);
   }
 

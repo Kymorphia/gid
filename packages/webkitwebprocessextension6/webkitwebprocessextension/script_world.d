@@ -82,7 +82,7 @@ class ScriptWorld : gobject.object.ObjectWrap
   static webkitwebprocessextension.script_world.ScriptWorld newWithName(string name) nothrow
   {
     WebKitScriptWorld* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_script_world_new_with_name(_name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, Yes.Take);
     return _retval;
@@ -111,7 +111,7 @@ class ScriptWorld : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_script_world_get_name(cast(WebKitScriptWorld*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

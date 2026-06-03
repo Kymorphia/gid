@@ -170,7 +170,7 @@ gobject.enum_value.EnumValue enumGetValue(gobject.enum_class.EnumClass enumClass
 gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enumClass, string name) nothrow
 {
   GEnumValue* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _cretval = g_enum_get_value_by_name(cast(GEnumClass*)&enumClass, _name);
   gobject.enum_value.EnumValue _retval;
   if (_cretval)
@@ -191,7 +191,7 @@ gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enu
 gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enumClass, string nick) nothrow
 {
   GEnumValue* _cretval;
-  const(char)* _nick = nick.toCString(No.Alloc);
+  const(char)* _nick = nick.toCString!(No.Malloc, No.Nullable);
   _cretval = g_enum_get_value_by_nick(cast(GEnumClass*)&enumClass, _nick);
   gobject.enum_value.EnumValue _retval;
   if (_cretval)
@@ -217,7 +217,7 @@ gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enu
 gobject.types.GType enumRegisterStatic(string name, gobject.enum_value.EnumValue constStaticValues) nothrow
 {
   gobject.types.GType _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_enum_register_static(_name, cast(const(GEnumValue)*)&constStaticValues);
   return _retval;
 }
@@ -237,7 +237,7 @@ string enumToString(gobject.types.GType gEnumType, int value) nothrow
 {
   char* _cretval;
   _cretval = g_enum_to_string(gEnumType, value);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -272,7 +272,7 @@ gobject.flags_value.FlagsValue flagsGetFirstValue(gobject.flags_class.FlagsClass
 gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClass flagsClass, string name) nothrow
 {
   GFlagsValue* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _cretval = g_flags_get_value_by_name(cast(GFlagsClass*)&flagsClass, _name);
   gobject.flags_value.FlagsValue _retval;
   if (_cretval)
@@ -292,7 +292,7 @@ gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClas
 gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClass flagsClass, string nick) nothrow
 {
   GFlagsValue* _cretval;
-  const(char)* _nick = nick.toCString(No.Alloc);
+  const(char)* _nick = nick.toCString!(No.Malloc, No.Nullable);
   _cretval = g_flags_get_value_by_nick(cast(GFlagsClass*)&flagsClass, _nick);
   gobject.flags_value.FlagsValue _retval;
   if (_cretval)
@@ -317,7 +317,7 @@ gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClas
 gobject.types.GType flagsRegisterStatic(string name, gobject.flags_value.FlagsValue constStaticValues) nothrow
 {
   gobject.types.GType _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_flags_register_static(_name, cast(const(GFlagsValue)*)&constStaticValues);
   return _retval;
 }
@@ -338,7 +338,7 @@ string flagsToString(gobject.types.GType flagsType, uint value) nothrow
 {
   char* _cretval;
   _cretval = g_flags_to_string(flagsType, value);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -370,9 +370,9 @@ gobject.types.GType gtypeGetType() nothrow
 gobject.param_spec.ParamSpec paramSpecBoolean(string name, string nick, string blurb, bool defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_boolean(_name, _nick, _blurb, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -395,9 +395,9 @@ gobject.param_spec.ParamSpec paramSpecBoolean(string name, string nick, string b
 gobject.param_spec.ParamSpec paramSpecBoxed(string name, string nick, string blurb, gobject.types.GType boxedType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_boxed(_name, _nick, _blurb, boxedType, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -419,9 +419,9 @@ gobject.param_spec.ParamSpec paramSpecBoxed(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecChar(string name, string nick, string blurb, byte minimum, byte maximum, byte defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_char(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -446,9 +446,9 @@ gobject.param_spec.ParamSpec paramSpecChar(string name, string nick, string blur
 gobject.param_spec.ParamSpec paramSpecDouble(string name, string nick, string blurb, double minimum, double maximum, double defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_double(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -472,9 +472,9 @@ gobject.param_spec.ParamSpec paramSpecDouble(string name, string nick, string bl
 gobject.param_spec.ParamSpec paramSpecEnum(string name, string nick, string blurb, gobject.types.GType enumType, int defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_enum(_name, _nick, _blurb, enumType, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -498,9 +498,9 @@ gobject.param_spec.ParamSpec paramSpecEnum(string name, string nick, string blur
 gobject.param_spec.ParamSpec paramSpecFlags(string name, string nick, string blurb, gobject.types.GType flagsType, uint defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_flags(_name, _nick, _blurb, flagsType, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -524,9 +524,9 @@ gobject.param_spec.ParamSpec paramSpecFlags(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecFloat(string name, string nick, string blurb, float minimum, float maximum, float defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_float(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -550,9 +550,9 @@ gobject.param_spec.ParamSpec paramSpecFloat(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecGtype(string name, string nick, string blurb, gobject.types.GType isAType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_gtype(_name, _nick, _blurb, isAType, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -576,9 +576,9 @@ gobject.param_spec.ParamSpec paramSpecGtype(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecInt(string name, string nick, string blurb, int minimum, int maximum, int defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_int(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -602,9 +602,9 @@ gobject.param_spec.ParamSpec paramSpecInt(string name, string nick, string blurb
 gobject.param_spec.ParamSpec paramSpecInt64(string name, string nick, string blurb, long minimum, long maximum, long defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_int64(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -628,9 +628,9 @@ gobject.param_spec.ParamSpec paramSpecInt64(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecLong(string name, string nick, string blurb, glong minimum, glong maximum, glong defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_long(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -653,9 +653,9 @@ gobject.param_spec.ParamSpec paramSpecLong(string name, string nick, string blur
 gobject.param_spec.ParamSpec paramSpecObject(string name, string nick, string blurb, gobject.types.GType objectType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_object(_name, _nick, _blurb, objectType, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -678,9 +678,9 @@ gobject.param_spec.ParamSpec paramSpecObject(string name, string nick, string bl
 gobject.param_spec.ParamSpec paramSpecParam(string name, string nick, string blurb, gobject.types.GType paramType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_param(_name, _nick, _blurb, paramType, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -703,9 +703,9 @@ gobject.param_spec.ParamSpec paramSpecParam(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecPointer(string name, string nick, string blurb, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_pointer(_name, _nick, _blurb, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -727,10 +727,10 @@ gobject.param_spec.ParamSpec paramSpecPointer(string name, string nick, string b
 gobject.param_spec.ParamSpec paramSpecString(string name, string nick, string blurb, string defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
-  const(char)* _defaultValue = defaultValue.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _defaultValue = defaultValue.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_string(_name, _nick, _blurb, _defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -752,9 +752,9 @@ gobject.param_spec.ParamSpec paramSpecString(string name, string nick, string bl
 gobject.param_spec.ParamSpec paramSpecUchar(string name, string nick, string blurb, ubyte minimum, ubyte maximum, ubyte defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_uchar(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -778,9 +778,9 @@ gobject.param_spec.ParamSpec paramSpecUchar(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecUint(string name, string nick, string blurb, uint minimum, uint maximum, uint defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_uint(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -805,9 +805,9 @@ gobject.param_spec.ParamSpec paramSpecUint(string name, string nick, string blur
 gobject.param_spec.ParamSpec paramSpecUint64(string name, string nick, string blurb, ulong minimum, ulong maximum, ulong defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_uint64(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -832,9 +832,9 @@ gobject.param_spec.ParamSpec paramSpecUint64(string name, string nick, string bl
 gobject.param_spec.ParamSpec paramSpecUlong(string name, string nick, string blurb, gulong minimum, gulong maximum, gulong defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_ulong(_name, _nick, _blurb, minimum, maximum, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -858,9 +858,9 @@ gobject.param_spec.ParamSpec paramSpecUlong(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecUnichar(string name, string nick, string blurb, dchar defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_unichar(_name, _nick, _blurb, defaultValue, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -887,9 +887,9 @@ gobject.param_spec.ParamSpec paramSpecUnichar(string name, string nick, string b
 gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string blurb, glib.variant_type.VariantType type, glib.variant.Variant defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_param_spec_variant(_name, _nick, _blurb, type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null, defaultValue ? cast(GVariant*)defaultValue._cPtr(Yes.Dup) : null, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -911,7 +911,7 @@ gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string b
 gobject.types.GType paramTypeRegisterStatic(string name, gobject.types.ParamSpecTypeInfo pspecInfo) nothrow
 {
   gobject.types.GType _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_param_type_register_static(_name, &pspecInfo);
   return _retval;
 }
@@ -1035,7 +1035,7 @@ int paramValuesCmp(gobject.param_spec.ParamSpec pspec, gobject.value.Value value
 gobject.types.GType pointerTypeRegisterStatic(string name) nothrow
 {
   gobject.types.GType _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_pointer_type_register_static(_name);
   return _retval;
 }
@@ -1151,7 +1151,7 @@ gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.typ
 gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedSignal, gobject.closure.Closure closure, bool after) nothrow
 {
   gulong _retval;
-  const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
+  const(char)* _detailedSignal = detailedSignal.toCString!(No.Malloc, No.Nullable);
   _retval = g_signal_connect_closure(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, _detailedSignal, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, after);
   return _retval;
 }
@@ -1428,7 +1428,7 @@ bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, 
 bool signalIsValidName(string name) nothrow
 {
   bool _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_signal_is_valid_name(_name);
   return _retval;
 }
@@ -1478,7 +1478,7 @@ uint[] signalListIds(gobject.types.GType itype) nothrow
 uint signalLookup(string name, gobject.types.GType itype) nothrow
 {
   uint _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_signal_lookup(_name, itype);
   return _retval;
 }
@@ -1496,7 +1496,7 @@ string signalName(uint signalId) nothrow
 {
   const(char)* _cretval;
   _cretval = g_signal_name(signalId);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1566,7 +1566,7 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
   }
   auto _cMarshallerCB = cMarshaller ? &_cMarshallerCallback : null;
   uint _retval;
-  const(char)* _signalName = signalName.toCString(No.Alloc);
+  const(char)* _signalName = signalName.toCString!(No.Malloc, No.Nullable);
   auto _accumulator = accumulator ? freezeDelegate(cast(void*)&accumulator) : null;
   uint _nParams;
   if (paramTypes)
@@ -1612,7 +1612,7 @@ void signalOverrideClassClosure(uint signalId, gobject.types.GType instanceType,
 bool signalParseName(string detailedSignal, gobject.types.GType itype, out uint signalIdP, out glib.types.Quark detailP, bool forceDetailQuark) nothrow
 {
   bool _retval;
-  const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
+  const(char)* _detailedSignal = detailedSignal.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_signal_parse_name(_detailedSignal, itype, cast(uint*)&signalIdP, cast(GQuark*)&detailP, forceDetailQuark);
   return _retval;
 }
@@ -1681,7 +1681,7 @@ void signalStopEmission(gobject.object.ObjectWrap instance, uint signalId, glib.
 */
 void signalStopEmissionByName(gobject.object.ObjectWrap instance, string detailedSignal) nothrow
 {
-  const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
+  const(char)* _detailedSignal = detailedSignal.toCString!(No.Malloc, No.Nullable);
   g_signal_stop_emission_by_name(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, _detailedSignal);
 }
 
@@ -1718,7 +1718,7 @@ string strdupValueContents(gobject.value.Value value) nothrow
 {
   char* _cretval;
   _cretval = g_strdup_value_contents(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1895,7 +1895,7 @@ void typeFreeInstance(gobject.type_instance.TypeInstance instance) nothrow
 gobject.types.GType typeFromName(string name) nothrow
 {
   gobject.types.GType _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_type_from_name(_name);
   return _retval;
 }
@@ -2070,7 +2070,7 @@ string typeName(gobject.types.GType type) nothrow
 {
   const(char)* _cretval;
   _cretval = g_type_name(type);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2079,7 +2079,7 @@ string typeNameFromInstance(gobject.type_instance.TypeInstance instance) nothrow
 {
   const(char)* _cretval;
   _cretval = g_type_name_from_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 

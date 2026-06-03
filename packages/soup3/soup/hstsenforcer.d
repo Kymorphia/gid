@@ -135,7 +135,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   bool hasValidPolicy(string domain) nothrow
   {
     bool _retval;
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)soup_hsts_enforcer_has_valid_policy(cast(SoupHSTSEnforcer*)this._cPtr, _domain);
     return _retval;
   }
@@ -181,7 +181,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   */
   void setSessionPolicy(string domain, bool includeSubdomains) nothrow
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
     soup_hsts_enforcer_set_session_policy(cast(SoupHSTSEnforcer*)this._cPtr, _domain, includeSubdomains);
   }
 

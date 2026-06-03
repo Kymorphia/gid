@@ -111,7 +111,7 @@ class PartIter : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_mime_part_iter_get_path(cast(GMimePartIter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class PartIter : gobject.boxed.Boxed
   bool jumpTo(string path) nothrow
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_mime_part_iter_jump_to(cast(GMimePartIter*)this._cPtr, _path);
     return _retval;
   }

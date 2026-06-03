@@ -96,7 +96,7 @@ class ScriptDialog : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_script_dialog_get_message(cast(WebKitScriptDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class ScriptDialog : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_script_dialog_prompt_get_default_text(cast(WebKitScriptDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class ScriptDialog : gobject.boxed.Boxed
   */
   void promptSetText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     webkit_script_dialog_prompt_set_text(cast(WebKitScriptDialog*)this._cPtr, _text);
   }
 }

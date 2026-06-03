@@ -32,7 +32,7 @@ struct Status
   {
     const(char)* _cretval;
     _cretval = soup_status_get_phrase(statusCode);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

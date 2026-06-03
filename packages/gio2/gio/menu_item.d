@@ -72,8 +72,8 @@ class MenuItem : gobject.object.ObjectWrap
   this(string label = null, string detailedAction = null) nothrow
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_menu_item_new(_label, _detailedAction);
     this(_cretval, Yes.Take);
   }
@@ -168,7 +168,7 @@ class MenuItem : gobject.object.ObjectWrap
   static gio.menu_item.MenuItem newSection(string label, gio.menu_model.MenuModel section) nothrow
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_menu_item_new_section(_label, section ? cast(GMenuModel*)section._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
@@ -188,7 +188,7 @@ class MenuItem : gobject.object.ObjectWrap
   static gio.menu_item.MenuItem newSubmenu(string label, gio.menu_model.MenuModel submenu) nothrow
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_menu_item_new_submenu(_label, submenu ? cast(GMenuModel*)submenu._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
@@ -209,7 +209,7 @@ class MenuItem : gobject.object.ObjectWrap
   glib.variant.Variant getAttributeValue(string attribute, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)this._cPtr, _attribute, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -225,7 +225,7 @@ class MenuItem : gobject.object.ObjectWrap
   gio.menu_model.MenuModel getLink(string link) nothrow
   {
     GMenuModel* _cretval;
-    const(char)* _link = link.toCString(No.Alloc);
+    const(char)* _link = link.toCString!(No.Malloc, No.Nullable);
     _cretval = g_menu_item_get_link(cast(GMenuItem*)this._cPtr, _link);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
@@ -275,7 +275,7 @@ class MenuItem : gobject.object.ObjectWrap
   */
   void setActionAndTargetValue(string action = null, glib.variant.Variant targetValue = null) nothrow
   {
-    const(char)* _action = action.toCString(No.Alloc);
+    const(char)* _action = action.toCString!(No.Malloc, Yes.Nullable);
     g_menu_item_set_action_and_target_value(cast(GMenuItem*)this._cPtr, _action, targetValue ? cast(GVariant*)targetValue._cPtr(No.Dup) : null);
   }
 
@@ -306,7 +306,7 @@ class MenuItem : gobject.object.ObjectWrap
   */
   void setAttributeValue(string attribute, glib.variant.Variant value = null) nothrow
   {
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     g_menu_item_set_attribute_value(cast(GMenuItem*)this._cPtr, _attribute, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
@@ -328,7 +328,7 @@ class MenuItem : gobject.object.ObjectWrap
   */
   void setDetailedAction(string detailedAction) nothrow
   {
-    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, No.Nullable);
     g_menu_item_set_detailed_action(cast(GMenuItem*)this._cPtr, _detailedAction);
   }
 
@@ -365,7 +365,7 @@ class MenuItem : gobject.object.ObjectWrap
   */
   void setLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     g_menu_item_set_label(cast(GMenuItem*)this._cPtr, _label);
   }
 
@@ -387,7 +387,7 @@ class MenuItem : gobject.object.ObjectWrap
   */
   void setLink(string link, gio.menu_model.MenuModel model = null) nothrow
   {
-    const(char)* _link = link.toCString(No.Alloc);
+    const(char)* _link = link.toCString!(No.Malloc, No.Nullable);
     g_menu_item_set_link(cast(GMenuItem*)this._cPtr, _link, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
 

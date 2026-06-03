@@ -70,7 +70,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   static parquet.arrow_file_writer.ArrowFileWriter newPath(arrow.schema.Schema schema, string path, parquet.writer_properties.WriterProperties writerProperties = null)
   {
     GParquetArrowFileWriter* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gparquet_arrow_file_writer_new_path(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _path, writerProperties ? cast(GParquetWriterProperties*)writerProperties._cPtr(No.Dup) : null, &_err);
     if (_err)

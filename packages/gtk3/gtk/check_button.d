@@ -105,7 +105,7 @@ class CheckButton : gtk.toggle_button.ToggleButton
   static gtk.check_button.CheckButton newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_check_button_new_with_label(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -124,7 +124,7 @@ class CheckButton : gtk.toggle_button.ToggleButton
   static gtk.check_button.CheckButton newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_check_button_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

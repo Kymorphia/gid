@@ -74,8 +74,8 @@ class DBusMenuModel : gio.menu_model.MenuModel
   static gio.dbus_menu_model.DBusMenuModel get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath) nothrow
   {
     GDBusMenuModel* _cretval;
-    const(char)* _busName = busName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _busName = busName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _busName, _objectPath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
     return _retval;

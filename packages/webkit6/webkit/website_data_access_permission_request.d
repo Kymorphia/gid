@@ -67,7 +67,7 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_access_permission_request_get_current_domain(cast(WebKitWebsiteDataAccessPermissionRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_access_permission_request_get_requesting_domain(cast(WebKitWebsiteDataAccessPermissionRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

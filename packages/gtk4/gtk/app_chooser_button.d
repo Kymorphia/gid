@@ -191,7 +191,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   this(string contentType) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_app_chooser_button_new(_contentType);
     this(_cretval, No.Take);
   }
@@ -216,8 +216,8 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   void appendCustomItem(string name, string label, gio.icon.Icon icon) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)this._cPtr, _name, _label, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
@@ -243,7 +243,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_button_get_heading(cast(GtkAppChooserButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   void setActiveCustomItem(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_app_chooser_button_set_active_custom_item(cast(GtkAppChooserButton*)this._cPtr, _name);
   }
 
@@ -319,7 +319,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   void setHeading(string heading) nothrow
   {
-    const(char)* _heading = heading.toCString(No.Alloc);
+    const(char)* _heading = heading.toCString!(No.Malloc, No.Nullable);
     gtk_app_chooser_button_set_heading(cast(GtkAppChooserButton*)this._cPtr, _heading);
   }
 

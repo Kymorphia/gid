@@ -78,8 +78,8 @@ class Part : gmime.object.ObjectWrap
   static gmime.part.Part newWithType(string type, string subtype) nothrow
   {
     GMimePart* _cretval;
-    const(char)* _type = type.toCString(No.Alloc);
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_part_new_with_type(_type, _subtype);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.part.Part)(cast(GMimePart*)_cretval, Yes.Take);
     return _retval;
@@ -124,7 +124,7 @@ class Part : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_description(cast(GMimePart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class Part : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_id(cast(GMimePart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class Part : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_location(cast(GMimePart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Part : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_md5(cast(GMimePart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class Part : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_filename(cast(GMimePart*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Part : gmime.object.ObjectWrap
   gmime.decrypt_result.DecryptResult openpgpDecrypt(gmime.types.DecryptFlags flags, string sessionKey = null)
   {
     GMimeDecryptResult* _cretval;
-    const(char)* _sessionKey = sessionKey.toCString(No.Alloc);
+    const(char)* _sessionKey = sessionKey.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_mime_part_openpgp_decrypt(cast(GMimePart*)this._cPtr, flags, _sessionKey, &_err);
     if (_err)
@@ -256,7 +256,7 @@ class Part : gmime.object.ObjectWrap
   bool openpgpEncrypt(bool sign, string userid, gmime.types.EncryptFlags flags, string[] recipients)
   {
     bool _retval;
-    const(char)* _userid = userid.toCString(No.Alloc);
+    const(char)* _userid = userid.toCString!(No.Malloc, Yes.Nullable);
     auto _recipients = gPtrArrayFromD!(string, false)(recipients);
     scope(exit) containerFree!(GPtrArray*, string, GidOwnership.None)(_recipients);
     GError *_err;
@@ -278,7 +278,7 @@ class Part : gmime.object.ObjectWrap
   bool openpgpSign(string userid)
   {
     bool _retval;
-    const(char)* _userid = userid.toCString(No.Alloc);
+    const(char)* _userid = userid.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_mime_part_openpgp_sign(cast(GMimePart*)this._cPtr, _userid, &_err);
     if (_err)
@@ -325,7 +325,7 @@ class Part : gmime.object.ObjectWrap
   */
   void setContentDescription(string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     g_mime_part_set_content_description(cast(GMimePart*)this._cPtr, _description);
   }
 
@@ -348,7 +348,7 @@ class Part : gmime.object.ObjectWrap
   */
   override void setContentId(string contentId) nothrow
   {
-    const(char)* _contentId = contentId.toCString(No.Alloc);
+    const(char)* _contentId = contentId.toCString!(No.Malloc, No.Nullable);
     g_mime_part_set_content_id(cast(GMimePart*)this._cPtr, _contentId);
   }
 
@@ -360,7 +360,7 @@ class Part : gmime.object.ObjectWrap
   */
   void setContentLocation(string contentLocation) nothrow
   {
-    const(char)* _contentLocation = contentLocation.toCString(No.Alloc);
+    const(char)* _contentLocation = contentLocation.toCString!(No.Malloc, No.Nullable);
     g_mime_part_set_content_location(cast(GMimePart*)this._cPtr, _contentLocation);
   }
 
@@ -372,7 +372,7 @@ class Part : gmime.object.ObjectWrap
   */
   void setContentMd5(string contentMd5) nothrow
   {
-    const(char)* _contentMd5 = contentMd5.toCString(No.Alloc);
+    const(char)* _contentMd5 = contentMd5.toCString!(No.Malloc, No.Nullable);
     g_mime_part_set_content_md5(cast(GMimePart*)this._cPtr, _contentMd5);
   }
 
@@ -387,7 +387,7 @@ class Part : gmime.object.ObjectWrap
   */
   void setFilename(string filename) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     g_mime_part_set_filename(cast(GMimePart*)this._cPtr, _filename);
   }
 

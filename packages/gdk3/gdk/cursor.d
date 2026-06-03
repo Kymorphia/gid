@@ -150,7 +150,7 @@ class Cursor : gobject.object.ObjectWrap
   static gdk.cursor.Cursor newFromName(gdk.display.Display display, string name) nothrow
   {
     GdkCursor* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_cursor_new_from_name(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;

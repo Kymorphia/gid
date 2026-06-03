@@ -22,7 +22,7 @@ struct PadMode
   {
     const(char)* _cretval;
     _cretval = gst_pad_mode_get_name(mode);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

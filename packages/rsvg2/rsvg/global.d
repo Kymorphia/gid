@@ -45,7 +45,7 @@ void init_() nothrow
 gdkpixbuf.pixbuf.Pixbuf pixbufFromFile(string filename)
 {
   GdkPixbuf* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = rsvg_pixbuf_from_file(_filename, &_err);
   if (_err)
@@ -72,7 +72,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFile(string filename)
 gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtMaxSize(string filename, int maxWidth, int maxHeight)
 {
   GdkPixbuf* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_max_size(_filename, maxWidth, maxHeight, &_err);
   if (_err)
@@ -100,7 +100,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtMaxSize(string filename, int maxWidth, i
 gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtSize(string filename, int width, int height)
 {
   GdkPixbuf* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_size(_filename, width, height, &_err);
   if (_err)
@@ -127,7 +127,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtSize(string filename, int width, int hei
 gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoom(string filename, double xZoom, double yZoom)
 {
   GdkPixbuf* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_zoom(_filename, xZoom, yZoom, &_err);
   if (_err)
@@ -157,7 +157,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoom(string filename, double xZoom, doub
 gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoomWithMax(string filename, double xZoom, double yZoom, int maxWidth, int maxHeight)
 {
   GdkPixbuf* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = rsvg_pixbuf_from_file_at_zoom_with_max(_filename, xZoom, yZoom, maxWidth, maxHeight, &_err);
   if (_err)

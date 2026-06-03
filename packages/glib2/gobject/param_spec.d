@@ -67,7 +67,7 @@ class ParamSpec
   static bool isValidName(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_param_spec_is_valid_name(_name);
     return _retval;
   }
@@ -80,7 +80,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_blurb(cast(GParamSpec*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_name(cast(GParamSpec*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_nick(cast(GParamSpec*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

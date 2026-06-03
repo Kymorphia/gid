@@ -112,7 +112,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   static gtk.toggle_tool_button.ToggleToolButton newFromStock(string stockId) nothrow
   {
     GtkToolItem* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_toggle_tool_button_new_from_stock(_stockId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;

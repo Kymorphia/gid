@@ -268,7 +268,7 @@ class Reader : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = json_reader_get_member_name(cast(JsonReader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class Reader : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = json_reader_get_string_value(cast(JsonReader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class Reader : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -492,7 +492,7 @@ class Reader : gobject.object.ObjectWrap
   bool readMember(string memberName) nothrow
   {
     bool _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)json_reader_read_member(cast(JsonReader*)this._cPtr, _memberName);
     return _retval;
   }

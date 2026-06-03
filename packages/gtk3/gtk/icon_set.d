@@ -191,7 +191,7 @@ class IconSet : gobject.boxed.Boxed
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.style.Style style, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null) nothrow
   {
     GdkPixbuf* _cretval;
-    const(char)* _detail = detail.toCString(No.Alloc);
+    const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_icon_set_render_icon(cast(GtkIconSet*)this._cPtr, style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;

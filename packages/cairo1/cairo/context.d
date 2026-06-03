@@ -1375,7 +1375,7 @@ class Context : gobject.boxed.Boxed
   */
   void selectFontFace(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight) nothrow
   {
-    const(char)* _family = family.toCString(No.Alloc);
+    const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
     cairo_select_font_face(cast(cairo_t*)this._cPtr, _family, slant, weight);
   }
 
@@ -1857,7 +1857,7 @@ class Context : gobject.boxed.Boxed
   */
   void showText(string utf8) nothrow
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
     cairo_show_text(cast(cairo_t*)this._cPtr, _utf8);
   }
 
@@ -2029,8 +2029,8 @@ class Context : gobject.boxed.Boxed
   */
   void tagBegin(string tagName, string attributes) nothrow
   {
-    const(char)* _tagName = tagName.toCString(No.Alloc);
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _tagName = tagName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     cairo_tag_begin(cast(cairo_t*)this._cPtr, _tagName, _attributes);
   }
 
@@ -2047,7 +2047,7 @@ class Context : gobject.boxed.Boxed
   */
   void tagEnd(string tagName) nothrow
   {
-    const(char)* _tagName = tagName.toCString(No.Alloc);
+    const(char)* _tagName = tagName.toCString!(No.Malloc, No.Nullable);
     cairo_tag_end(cast(cairo_t*)this._cPtr, _tagName);
   }
 
@@ -2072,7 +2072,7 @@ class Context : gobject.boxed.Boxed
   */
   void textExtents(string utf8, out cairo.types.TextExtents extents) nothrow
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
     cairo_text_extents(cast(cairo_t*)this._cPtr, _utf8, &extents);
   }
 
@@ -2101,7 +2101,7 @@ class Context : gobject.boxed.Boxed
   */
   void textPath(string utf8) nothrow
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
     cairo_text_path(cast(cairo_t*)this._cPtr, _utf8);
   }
 

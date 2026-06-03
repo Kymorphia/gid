@@ -80,7 +80,7 @@ class Tracer : gst.object.ObjectWrap
   static bool register(gst.plugin.Plugin plugin, string name, gobject.types.GType type) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tracer_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, type);
     return _retval;
   }

@@ -83,7 +83,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   */
   void appendSearchPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_source_style_scheme_manager_append_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
   }
 
@@ -108,7 +108,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   gtksource.style_scheme.StyleScheme getScheme(string schemeId) nothrow
   {
     GtkSourceStyleScheme* _cretval;
-    const(char)* _schemeId = schemeId.toCString(No.Alloc);
+    const(char)* _schemeId = schemeId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_style_scheme_manager_get_scheme(cast(GtkSourceStyleSchemeManager*)this._cPtr, _schemeId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
@@ -134,7 +134,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -159,7 +159,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -174,7 +174,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   */
   void prependSearchPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_source_style_scheme_manager_prepend_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
   }
 
@@ -190,7 +190,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   {
     char*[] _tmppath;
     foreach (s; path)
-      _tmppath ~= s.toCString(No.Alloc);
+      _tmppath ~= s.toCString;
     _tmppath ~= null;
     char** _path = _tmppath.ptr;
 

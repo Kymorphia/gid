@@ -231,7 +231,7 @@ class SearchSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_source_search_settings_get_search_text(cast(GtkSourceSearchSettings*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   void setSearchText(string searchText = null) nothrow
   {
-    const(char)* _searchText = searchText.toCString(No.Alloc);
+    const(char)* _searchText = searchText.toCString!(No.Malloc, Yes.Nullable);
     gtk_source_search_settings_set_search_text(cast(GtkSourceSearchSettings*)this._cPtr, _searchText);
   }
 

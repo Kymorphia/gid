@@ -293,7 +293,7 @@ class Expander : gtk.widget.Widget
   this(string label = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_expander_new(_label);
     this(_cretval, No.Take);
   }
@@ -316,7 +316,7 @@ class Expander : gtk.widget.Widget
   static gtk.expander.Expander newWithMnemonic(string label = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_expander_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -362,7 +362,7 @@ class Expander : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_expander_get_label(cast(GtkExpander*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -448,7 +448,7 @@ class Expander : gtk.widget.Widget
   */
   void setLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     gtk_expander_set_label(cast(GtkExpander*)this._cPtr, _label);
   }
 

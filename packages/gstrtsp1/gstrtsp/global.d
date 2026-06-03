@@ -32,7 +32,7 @@ void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential cred
 gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header) nothrow
 {
   GstRTSPHeaderField _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtsp_find_header_field(_header);
   gstrtsp.types.RTSPHeaderField _retval = cast(gstrtsp.types.RTSPHeaderField)_cretval;
   return _retval;
@@ -49,7 +49,7 @@ gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header) nothrow
 gstrtsp.types.RTSPMethod rtspFindMethod(string method) nothrow
 {
   GstRTSPMethod _cretval;
-  const(char)* _method = method.toCString(No.Alloc);
+  const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtsp_find_method(_method);
   gstrtsp.types.RTSPMethod _retval = cast(gstrtsp.types.RTSPMethod)_cretval;
   return _retval;
@@ -74,15 +74,15 @@ gstrtsp.types.RTSPMethod rtspFindMethod(string method) nothrow
 string rtspGenerateDigestAuthResponse(string algorithm, string method, string realm, string username, string password, string uri, string nonce) nothrow
 {
   char* _cretval;
-  const(char)* _algorithm = algorithm.toCString(No.Alloc);
-  const(char)* _method = method.toCString(No.Alloc);
-  const(char)* _realm = realm.toCString(No.Alloc);
-  const(char)* _username = username.toCString(No.Alloc);
-  const(char)* _password = password.toCString(No.Alloc);
-  const(char)* _uri = uri.toCString(No.Alloc);
-  const(char)* _nonce = nonce.toCString(No.Alloc);
+  const(char)* _algorithm = algorithm.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
+  const(char)* _realm = realm.toCString!(No.Malloc, No.Nullable);
+  const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+  const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nonce = nonce.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtsp_generate_digest_auth_response(_algorithm, _method, _realm, _username, _password, _uri, _nonce);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -106,13 +106,13 @@ string rtspGenerateDigestAuthResponse(string algorithm, string method, string re
 string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, string md5, string uri, string nonce) nothrow
 {
   char* _cretval;
-  const(char)* _algorithm = algorithm.toCString(No.Alloc);
-  const(char)* _method = method.toCString(No.Alloc);
-  const(char)* _md5 = md5.toCString(No.Alloc);
-  const(char)* _uri = uri.toCString(No.Alloc);
-  const(char)* _nonce = nonce.toCString(No.Alloc);
+  const(char)* _algorithm = algorithm.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
+  const(char)* _md5 = md5.toCString!(No.Malloc, No.Nullable);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nonce = nonce.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtsp_generate_digest_auth_response_from_md5(_algorithm, _method, _md5, _uri, _nonce);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -141,7 +141,7 @@ string rtspHeaderAsText(gstrtsp.types.RTSPHeaderField field) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_rtsp_header_as_text(field);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -195,7 +195,7 @@ gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessa
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtsp_message_new_request(&_msg, method, _uri);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
   msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
@@ -222,7 +222,7 @@ gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMess
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
-  const(char)* _reason = reason.toCString(No.Alloc);
+  const(char)* _reason = reason.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_rtsp_message_new_response(&_msg, code, _reason, request ? cast(const(GstRTSPMessage)*)request._cPtr(No.Dup) : null);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
   msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
@@ -240,7 +240,7 @@ string rtspOptionsAsText(gstrtsp.types.RTSPMethod options) nothrow
 {
   char* _cretval;
   _cretval = gst_rtsp_options_as_text(options);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -255,7 +255,7 @@ string rtspOptionsAsText(gstrtsp.types.RTSPMethod options) nothrow
 gstrtsp.types.RTSPMethod rtspOptionsFromText(string options) nothrow
 {
   GstRTSPMethod _cretval;
-  const(char)* _options = options.toCString(No.Alloc);
+  const(char)* _options = options.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtsp_options_from_text(_options);
   gstrtsp.types.RTSPMethod _retval = cast(gstrtsp.types.RTSPMethod)_cretval;
   return _retval;
@@ -272,7 +272,7 @@ string rtspStatusAsText(gstrtsp.types.RTSPStatusCode code) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_rtsp_status_as_text(code);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -287,6 +287,6 @@ string rtspStrresult(gstrtsp.types.RTSPResult result) nothrow
 {
   char* _cretval;
   _cretval = gst_rtsp_strresult(result);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

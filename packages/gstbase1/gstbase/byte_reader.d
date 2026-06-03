@@ -175,7 +175,7 @@ class ByteReader
     bool _retval;
     char* _str;
     _retval = cast(bool)gst_byte_reader_dup_string_utf8(cast(GstByteReader*)this._cPtr, &_str);
-    str = _str.fromCString(Yes.Free);
+    str = _str.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class ByteReader
     bool _retval;
     char* _str;
     _retval = cast(bool)gst_byte_reader_get_string_utf8(cast(GstByteReader*)this._cPtr, &_str);
-    str = _str.fromCString(No.Free);
+    str = _str.fromCString!(No.Free);
     return _retval;
   }
 
@@ -873,7 +873,7 @@ class ByteReader
     bool _retval;
     char* _str;
     _retval = cast(bool)gst_byte_reader_peek_string_utf8(cast(const(GstByteReader)*)this._cPtr, &_str);
-    str = _str.fromCString(No.Free);
+    str = _str.fromCString!(No.Free);
     return _retval;
   }
 

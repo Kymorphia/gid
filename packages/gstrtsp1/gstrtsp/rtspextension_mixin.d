@@ -61,7 +61,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult getTransports(gstrtsp.types.RTSPLowerTrans protocols, string transport) nothrow
   {
     GstRTSPResult _cretval;
-    char* _transport = transport.toCString(No.Alloc);
+    char* _transport = transport.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_rtsp_extension_get_transports(cast(GstRTSPExtension*)this._cPtr, protocols, _transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;

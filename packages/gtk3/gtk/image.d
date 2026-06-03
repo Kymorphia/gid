@@ -402,7 +402,7 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromFile(string filename) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_new_from_file(_filename);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -441,7 +441,7 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromIconName(string iconName, gtk.types.IconSize size) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_image_new_from_icon_name(_iconName, size);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -522,7 +522,7 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromResource(string resourcePath) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_new_from_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -546,7 +546,7 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromStock(string stockId, gtk.types.IconSize size) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_new_from_stock(_stockId, size);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -632,7 +632,7 @@ class Image : gtk.misc.Misc
   {
     char* _iconName;
     gtk_image_get_icon_name(cast(GtkImage*)this._cPtr, &_iconName, &size);
-    iconName = _iconName.fromCString(No.Free);
+    iconName = _iconName.fromCString!(No.Free);
   }
 
   /**
@@ -702,7 +702,7 @@ class Image : gtk.misc.Misc
   {
     char* _stockId;
     gtk_image_get_stock(cast(GtkImage*)this._cPtr, &_stockId, &size);
-    stockId = _stockId.fromCString(No.Free);
+    stockId = _stockId.fromCString!(No.Free);
   }
 
   /**
@@ -739,7 +739,7 @@ class Image : gtk.misc.Misc
   */
   void setFromFile(string filename = null) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     gtk_image_set_from_file(cast(GtkImage*)this._cPtr, _filename);
   }
 
@@ -764,7 +764,7 @@ class Image : gtk.misc.Misc
   */
   void setFromIconName(string iconName, gtk.types.IconSize size) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     gtk_image_set_from_icon_name(cast(GtkImage*)this._cPtr, _iconName, size);
   }
 
@@ -801,7 +801,7 @@ class Image : gtk.misc.Misc
   */
   void setFromResource(string resourcePath = null) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     gtk_image_set_from_resource(cast(GtkImage*)this._cPtr, _resourcePath);
   }
 
@@ -816,7 +816,7 @@ class Image : gtk.misc.Misc
   */
   void setFromStock(string stockId, gtk.types.IconSize size) nothrow
   {
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     gtk_image_set_from_stock(cast(GtkImage*)this._cPtr, _stockId, size);
   }
 

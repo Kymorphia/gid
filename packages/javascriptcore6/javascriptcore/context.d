@@ -136,7 +136,7 @@ class Context : gobject.object.ObjectWrap
     auto parent = assumeWontThrow(classRegistry.get(ti.base, null));
     auto jscParent = parent ? cast(JSCClass*)parent._cPtr : null;
 
-    auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString(No.Alloc), jscParent, null, &classDestroyNotify);
+    auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString, jscParent, null, &classDestroyNotify);
 
     auto jsClass = new Class(cast(void*)jscClass, Yes.Take);
     classRegistry[ti] = jsClass;
@@ -363,7 +363,7 @@ class Context : gobject.object.ObjectWrap
       _length = cast(ptrdiff_t)code.length;
 
     auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     JSCException* _exception;
     _cretval = jsc_context_check_syntax(cast(JSCContext*)this._cPtr, _code, _length, mode, _uri, lineNumber, &_exception);
     javascriptcore.types.CheckSyntaxResult _retval = cast(javascriptcore.types.CheckSyntaxResult)_cretval;
@@ -423,7 +423,7 @@ class Context : gobject.object.ObjectWrap
       _length = cast(ptrdiff_t)code.length;
 
     auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     JSCValue* _object;
     _cretval = jsc_context_evaluate_in_object(cast(JSCContext*)this._cPtr, _code, _length, objectInstance, objectClass ? cast(JSCClass*)objectClass._cPtr(No.Dup) : null, _uri, lineNumber, &_object);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
@@ -450,7 +450,7 @@ class Context : gobject.object.ObjectWrap
       _length = cast(ptrdiff_t)code.length;
 
     auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = jsc_context_evaluate_with_source_uri(cast(JSCContext*)this._cPtr, _code, _length, _uri, lineNumber);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -491,7 +491,7 @@ class Context : gobject.object.ObjectWrap
   javascriptcore.value.Value getValue(string name) nothrow
   {
     JSCValue* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = jsc_context_get_value(cast(JSCContext*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -585,7 +585,7 @@ class Context : gobject.object.ObjectWrap
     }
     auto _destroyNotifyCB = destroyNotify ? &_destroyNotifyCallback : null;
     JSCClass* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = jsc_context_register_class(cast(JSCContext*)this._cPtr, _name, parentClass ? cast(JSCClass*)parentClass._cPtr(No.Dup) : null, &vtable, _destroyNotifyCB);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
     return _retval;
@@ -600,7 +600,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setValue(string name, javascriptcore.value.Value value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     jsc_context_set_value(cast(JSCContext*)this._cPtr, _name, value ? cast(JSCValue*)value._cPtr(No.Dup) : null);
   }
 
@@ -613,7 +613,7 @@ class Context : gobject.object.ObjectWrap
   */
   void throw_(string errorMessage) nothrow
   {
-    const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
+    const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
     jsc_context_throw(cast(JSCContext*)this._cPtr, _errorMessage);
   }
 
@@ -638,8 +638,8 @@ class Context : gobject.object.ObjectWrap
   */
   void throwWithName(string errorName, string errorMessage) nothrow
   {
-    const(char)* _errorName = errorName.toCString(No.Alloc);
-    const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
+    const(char)* _errorName = errorName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
     jsc_context_throw_with_name(cast(JSCContext*)this._cPtr, _errorName, _errorMessage);
   }
 }

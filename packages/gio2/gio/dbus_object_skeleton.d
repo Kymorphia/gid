@@ -89,7 +89,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   this(string objectPath) nothrow
   {
     GDBusObjectSkeleton* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_object_skeleton_new(_objectPath);
     this(_cretval, Yes.Take);
   }
@@ -143,7 +143,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   */
   void removeInterfaceByName(string interfaceName) nothrow
   {
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
     g_dbus_object_skeleton_remove_interface_by_name(cast(GDBusObjectSkeleton*)this._cPtr, _interfaceName);
   }
 
@@ -155,7 +155,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   */
   void setObjectPath(string objectPath) nothrow
   {
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     g_dbus_object_skeleton_set_object_path(cast(GDBusObjectSkeleton*)this._cPtr, _objectPath);
   }
 

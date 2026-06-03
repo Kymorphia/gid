@@ -66,7 +66,7 @@ class Function : gobject.object.ObjectWrap
   static arrow.function_.Function find(string name) nothrow
   {
     GArrowFunction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_function_find(_name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.function_.Function)(cast(GArrowFunction*)_cretval, Yes.Take);
     return _retval;
@@ -117,7 +117,7 @@ class Function : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = garrow_function_get_name(cast(GArrowFunction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class Function : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_function_to_string(cast(GArrowFunction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

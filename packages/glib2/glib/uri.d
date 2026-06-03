@@ -221,7 +221,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_auth_params(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_fragment(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_host(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_password(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_path(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_query(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_scheme(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -348,7 +348,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_user(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_userinfo(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class Uri : gobject.boxed.Boxed
   glib.uri.Uri parseRelative(string uriRef, glib.types.UriFlags flags)
   {
     GUri* _cretval;
-    const(char)* _uriRef = uriRef.toCString(No.Alloc);
+    const(char)* _uriRef = uriRef.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_uri_parse_relative(cast(GUri*)this._cPtr, _uriRef, flags, &_err);
     if (_err)
@@ -409,7 +409,7 @@ class Uri : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_uri_to_string(cast(GUri*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class Uri : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_uri_to_string_partial(cast(GUri*)this._cPtr, flags);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -450,12 +450,12 @@ class Uri : gobject.boxed.Boxed
   static glib.uri.Uri build(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     GUri* _cretval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
-    const(char)* _userinfo = userinfo.toCString(No.Alloc);
-    const(char)* _host = host.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _query = query.toCString(No.Alloc);
-    const(char)* _fragment = fragment.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
+    const(char)* _userinfo = userinfo.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _host = host.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _query = query.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _fragment = fragment.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_build(flags, _scheme, _userinfo, _host, port, _path, _query, _fragment);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -487,14 +487,14 @@ class Uri : gobject.boxed.Boxed
   static glib.uri.Uri buildWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     GUri* _cretval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
-    const(char)* _user = user.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
-    const(char)* _authParams = authParams.toCString(No.Alloc);
-    const(char)* _host = host.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _query = query.toCString(No.Alloc);
-    const(char)* _fragment = fragment.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
+    const(char)* _user = user.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _authParams = authParams.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _host = host.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _query = query.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _fragment = fragment.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_build_with_user(flags, _scheme, _user, _password, _authParams, _host, port, _path, _query, _fragment);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -536,9 +536,9 @@ class Uri : gobject.boxed.Boxed
       _length = cast(size_t)unescaped.length;
 
     auto _unescaped = unescaped.ptr ? cast(const(ubyte)*)unescaped.ptr : [ubyte.init].ptr;
-    const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.Alloc);
+    const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_escape_bytes(_unescaped, _length, _reservedCharsAllowed);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -563,10 +563,10 @@ class Uri : gobject.boxed.Boxed
   static string escapeString(string unescaped, string reservedCharsAllowed, bool allowUtf8) nothrow
   {
     char* _cretval;
-    const(char)* _unescaped = unescaped.toCString(No.Alloc);
-    const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.Alloc);
+    const(char)* _unescaped = unescaped.toCString!(No.Malloc, No.Nullable);
+    const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_escape_string(_unescaped, _reservedCharsAllowed, allowUtf8);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -589,7 +589,7 @@ class Uri : gobject.boxed.Boxed
   static bool isValid(string uriString, glib.types.UriFlags flags)
   {
     bool _retval;
-    const(char)* _uriString = uriString.toCString(No.Alloc);
+    const(char)* _uriString = uriString.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_uri_is_valid(_uriString, flags, &_err);
     if (_err)
@@ -627,14 +627,14 @@ class Uri : gobject.boxed.Boxed
   static string join(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     char* _cretval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
-    const(char)* _userinfo = userinfo.toCString(No.Alloc);
-    const(char)* _host = host.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _query = query.toCString(No.Alloc);
-    const(char)* _fragment = fragment.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _userinfo = userinfo.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _host = host.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _query = query.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _fragment = fragment.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_join(flags, _scheme, _userinfo, _host, port, _path, _query, _fragment);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -667,16 +667,16 @@ class Uri : gobject.boxed.Boxed
   static string joinWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     char* _cretval;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
-    const(char)* _user = user.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
-    const(char)* _authParams = authParams.toCString(No.Alloc);
-    const(char)* _host = host.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _query = query.toCString(No.Alloc);
-    const(char)* _fragment = fragment.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _user = user.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _authParams = authParams.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _host = host.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _query = query.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _fragment = fragment.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_join_with_user(flags, _scheme, _user, _password, _authParams, _host, port, _path, _query, _fragment);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class Uri : gobject.boxed.Boxed
   static string[] listExtractUris(string uriList) nothrow
   {
     char** _cretval;
-    const(char)* _uriList = uriList.toCString(No.Alloc);
+    const(char)* _uriList = uriList.toCString!(No.Malloc, No.Nullable);
     _cretval = g_uri_list_extract_uris(_uriList);
     string[] _retval;
 
@@ -705,7 +705,7 @@ class Uri : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -725,7 +725,7 @@ class Uri : gobject.boxed.Boxed
   static glib.uri.Uri parse(string uriString, glib.types.UriFlags flags)
   {
     GUri* _cretval;
-    const(char)* _uriString = uriString.toCString(No.Alloc);
+    const(char)* _uriString = uriString.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_uri_parse(_uriString, flags, &_err);
     if (_err)
@@ -781,7 +781,7 @@ class Uri : gobject.boxed.Boxed
       _length = cast(ptrdiff_t)params.length;
 
     auto _params = params.ptr ? cast(const(char)*)params.ptr : [char.init].ptr;
-    const(char)* _separators = separators.toCString(No.Alloc);
+    const(char)* _separators = separators.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_uri_parse_params(_params, _length, _separators, flags, &_err);
     if (_err)
@@ -807,9 +807,9 @@ class Uri : gobject.boxed.Boxed
   static string parseScheme(string uri) nothrow
   {
     char* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = g_uri_parse_scheme(_uri);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -834,9 +834,9 @@ class Uri : gobject.boxed.Boxed
   static string peekScheme(string uri) nothrow
   {
     const(char)* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = g_uri_peek_scheme(_uri);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -860,13 +860,13 @@ class Uri : gobject.boxed.Boxed
   static string resolveRelative(string baseUriString, string uriRef, glib.types.UriFlags flags)
   {
     char* _cretval;
-    const(char)* _baseUriString = baseUriString.toCString(No.Alloc);
-    const(char)* _uriRef = uriRef.toCString(No.Alloc);
+    const(char)* _baseUriString = baseUriString.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _uriRef = uriRef.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_uri_resolve_relative(_baseUriString, _uriRef, flags, &_err);
     if (_err)
       throw new UriException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -912,7 +912,7 @@ class Uri : gobject.boxed.Boxed
   static bool split(string uriRef, glib.types.UriFlags flags, out string scheme, out string userinfo, out string host, out int port, out string path, out string query, out string fragment)
   {
     bool _retval;
-    const(char)* _uriRef = uriRef.toCString(No.Alloc);
+    const(char)* _uriRef = uriRef.toCString!(No.Malloc, No.Nullable);
     char* _scheme;
     char* _userinfo;
     char* _host;
@@ -923,12 +923,12 @@ class Uri : gobject.boxed.Boxed
     _retval = cast(bool)g_uri_split(_uriRef, flags, &_scheme, &_userinfo, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
     if (_err)
       throw new UriException(_err);
-    scheme = _scheme.fromCString(Yes.Free);
-    userinfo = _userinfo.fromCString(Yes.Free);
-    host = _host.fromCString(Yes.Free);
-    path = _path.fromCString(Yes.Free);
-    query = _query.fromCString(Yes.Free);
-    fragment = _fragment.fromCString(Yes.Free);
+    scheme = _scheme.fromCString!(Yes.Free);
+    userinfo = _userinfo.fromCString!(Yes.Free);
+    host = _host.fromCString!(Yes.Free);
+    path = _path.fromCString!(Yes.Free);
+    query = _query.fromCString!(Yes.Free);
+    fragment = _fragment.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -956,15 +956,15 @@ class Uri : gobject.boxed.Boxed
   static bool splitNetwork(string uriString, glib.types.UriFlags flags, out string scheme, out string host, out int port)
   {
     bool _retval;
-    const(char)* _uriString = uriString.toCString(No.Alloc);
+    const(char)* _uriString = uriString.toCString!(No.Malloc, No.Nullable);
     char* _scheme;
     char* _host;
     GError *_err;
     _retval = cast(bool)g_uri_split_network(_uriString, flags, &_scheme, &_host, cast(int*)&port, &_err);
     if (_err)
       throw new UriException(_err);
-    scheme = _scheme.fromCString(Yes.Free);
-    host = _host.fromCString(Yes.Free);
+    scheme = _scheme.fromCString!(Yes.Free);
+    host = _host.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1009,7 +1009,7 @@ class Uri : gobject.boxed.Boxed
   static bool splitWithUser(string uriRef, glib.types.UriFlags flags, out string scheme, out string user, out string password, out string authParams, out string host, out int port, out string path, out string query, out string fragment)
   {
     bool _retval;
-    const(char)* _uriRef = uriRef.toCString(No.Alloc);
+    const(char)* _uriRef = uriRef.toCString!(No.Malloc, No.Nullable);
     char* _scheme;
     char* _user;
     char* _password;
@@ -1022,14 +1022,14 @@ class Uri : gobject.boxed.Boxed
     _retval = cast(bool)g_uri_split_with_user(_uriRef, flags, &_scheme, &_user, &_password, &_authParams, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
     if (_err)
       throw new UriException(_err);
-    scheme = _scheme.fromCString(Yes.Free);
-    user = _user.fromCString(Yes.Free);
-    password = _password.fromCString(Yes.Free);
-    authParams = _authParams.fromCString(Yes.Free);
-    host = _host.fromCString(Yes.Free);
-    path = _path.fromCString(Yes.Free);
-    query = _query.fromCString(Yes.Free);
-    fragment = _fragment.fromCString(Yes.Free);
+    scheme = _scheme.fromCString!(Yes.Free);
+    user = _user.fromCString!(Yes.Free);
+    password = _password.fromCString!(Yes.Free);
+    authParams = _authParams.fromCString!(Yes.Free);
+    host = _host.fromCString!(Yes.Free);
+    path = _path.fromCString!(Yes.Free);
+    query = _query.fromCString!(Yes.Free);
+    fragment = _fragment.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1062,7 +1062,7 @@ class Uri : gobject.boxed.Boxed
       _length = cast(ptrdiff_t)escapedString.length;
 
     auto _escapedString = escapedString.ptr ? cast(const(char)*)escapedString.ptr : [char.init].ptr;
-    const(char)* _illegalCharacters = illegalCharacters.toCString(No.Alloc);
+    const(char)* _illegalCharacters = illegalCharacters.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_uri_unescape_bytes(_escapedString, _length, _illegalCharacters, &_err);
     if (_err)
@@ -1097,11 +1097,11 @@ class Uri : gobject.boxed.Boxed
   static string unescapeSegment(string escapedString = null, string escapedStringEnd = null, string illegalCharacters = null) nothrow
   {
     char* _cretval;
-    const(char)* _escapedString = escapedString.toCString(No.Alloc);
-    const(char)* _escapedStringEnd = escapedStringEnd.toCString(No.Alloc);
-    const(char)* _illegalCharacters = illegalCharacters.toCString(No.Alloc);
+    const(char)* _escapedString = escapedString.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _escapedStringEnd = escapedStringEnd.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _illegalCharacters = illegalCharacters.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_unescape_segment(_escapedString, _escapedStringEnd, _illegalCharacters);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1124,10 +1124,10 @@ class Uri : gobject.boxed.Boxed
   static string unescapeString(string escapedString, string illegalCharacters = null) nothrow
   {
     char* _cretval;
-    const(char)* _escapedString = escapedString.toCString(No.Alloc);
-    const(char)* _illegalCharacters = illegalCharacters.toCString(No.Alloc);
+    const(char)* _escapedString = escapedString.toCString!(No.Malloc, No.Nullable);
+    const(char)* _illegalCharacters = illegalCharacters.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_uri_unescape_string(_escapedString, _illegalCharacters);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

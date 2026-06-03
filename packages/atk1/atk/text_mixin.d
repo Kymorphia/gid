@@ -209,7 +209,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_selection(cast(AtkText*)this._cPtr, selectionNum, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_string_at_offset(cast(AtkText*)this._cPtr, offset, granularity, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text(cast(AtkText*)this._cPtr, startOffset, endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text_after_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text_at_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -372,7 +372,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text_before_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

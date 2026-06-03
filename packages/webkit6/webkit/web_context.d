@@ -140,7 +140,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   void addPathToSandbox(string path, bool readOnly) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     webkit_web_context_add_path_to_sandbox(cast(WebKitWebContext*)this._cPtr, _path, readOnly);
   }
 
@@ -231,7 +231,7 @@ class WebContext : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -244,7 +244,7 @@ class WebContext : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_context_get_time_zone_override(cast(WebKitWebContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -351,7 +351,7 @@ class WebContext : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _scheme = scheme.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     webkit_web_context_register_uri_scheme(cast(WebKitWebContext*)this._cPtr, _scheme, _callbackCB, _callback, _callbackDestroyCB);
@@ -439,7 +439,7 @@ class WebContext : gobject.object.ObjectWrap
   {
     const(char)*[] _tmplanguages;
     foreach (s; languages)
-      _tmplanguages ~= s.toCString(No.Alloc);
+      _tmplanguages ~= s.toCString;
     _tmplanguages ~= null;
     const(char*)* _languages = _tmplanguages.ptr;
 
@@ -477,7 +477,7 @@ class WebContext : gobject.object.ObjectWrap
   {
     char*[] _tmplanguages;
     foreach (s; languages)
-      _tmplanguages ~= s.toCString(No.Alloc);
+      _tmplanguages ~= s.toCString;
     _tmplanguages ~= null;
     const(char*)* _languages = _tmplanguages.ptr;
 
@@ -500,7 +500,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   void setWebProcessExtensionsDirectory(string directory) nothrow
   {
-    const(char)* _directory = directory.toCString(No.Alloc);
+    const(char)* _directory = directory.toCString!(No.Malloc, No.Nullable);
     webkit_web_context_set_web_process_extensions_directory(cast(WebKitWebContext*)this._cPtr, _directory);
   }
 

@@ -462,8 +462,8 @@ class RTPBasePayload : gst.element.Element
   */
   void setOptions(string media, bool dynamic, string encodingName, uint clockRate) nothrow
   {
-    const(char)* _media = media.toCString(No.Alloc);
-    const(char)* _encodingName = encodingName.toCString(No.Alloc);
+    const(char)* _media = media.toCString!(No.Malloc, No.Nullable);
+    const(char)* _encodingName = encodingName.toCString!(No.Malloc, No.Nullable);
     gst_rtp_base_payload_set_options(cast(GstRTPBasePayload*)this._cPtr, _media, dynamic, _encodingName, clockRate);
   }
 

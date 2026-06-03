@@ -160,7 +160,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = g_action_get_name(cast(GAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

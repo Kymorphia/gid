@@ -138,7 +138,7 @@ class Printer : gobject.object.ObjectWrap
   this(string name, gtk.types.PrintBackend backend, bool virtual) nothrow
   {
     GtkPrinter* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_printer_new(_name, backend, virtual);
     this(_cretval, Yes.Take);
   }
@@ -233,7 +233,7 @@ class Printer : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_description(cast(GtkPrinter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class Printer : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_icon_name(cast(GtkPrinter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class Printer : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_location(cast(GtkPrinter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class Printer : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_name(cast(GtkPrinter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class Printer : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_state_message(cast(GtkPrinter*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

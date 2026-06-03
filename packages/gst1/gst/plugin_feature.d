@@ -151,7 +151,7 @@ class PluginFeature : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_plugin_feature_get_plugin_name(cast(GstPluginFeature*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

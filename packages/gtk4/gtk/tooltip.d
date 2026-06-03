@@ -130,7 +130,7 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setIconFromIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     gtk_tooltip_set_icon_from_icon_name(cast(GtkTooltip*)this._cPtr, _iconName);
   }
 
@@ -145,7 +145,7 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setMarkup(string markup = null) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, Yes.Nullable);
     gtk_tooltip_set_markup(cast(GtkTooltip*)this._cPtr, _markup);
   }
 
@@ -160,7 +160,7 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     gtk_tooltip_set_text(cast(GtkTooltip*)this._cPtr, _text);
   }
 

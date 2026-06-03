@@ -288,8 +288,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     {
       gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
-      string _objectPath = objectPath.fromCString(No.Free);
-      string _interfaceName = interfaceName.fromCString(No.Free);
+      string _objectPath = objectPath.fromCString!(No.Free);
+      string _interfaceName = interfaceName.fromCString!(No.Free);
 
       try
       {
@@ -305,8 +305,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
     GDBusObjectManager* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     GError *_err;
@@ -342,8 +342,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     {
       gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
-      string _objectPath = objectPath.fromCString(No.Free);
-      string _interfaceName = interfaceName.fromCString(No.Free);
+      string _objectPath = objectPath.fromCString!(No.Free);
+      string _interfaceName = interfaceName.fromCString!(No.Free);
 
       try
       {
@@ -359,8 +359,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
     GDBusObjectManager* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     GError *_err;
@@ -396,8 +396,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     {
       gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
-      string _objectPath = objectPath.fromCString(No.Free);
-      string _interfaceName = interfaceName.fromCString(No.Free);
+      string _objectPath = objectPath.fromCString!(No.Free);
+      string _interfaceName = interfaceName.fromCString!(No.Free);
 
       try
       {
@@ -427,8 +427,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -461,8 +461,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     {
       gobject.types.GType _dretval;
       auto _dlg = cast(gio.types.DBusProxyTypeFunc*)data;
-      string _objectPath = objectPath.fromCString(No.Free);
-      string _interfaceName = interfaceName.fromCString(No.Free);
+      string _objectPath = objectPath.fromCString!(No.Free);
+      string _interfaceName = interfaceName.fromCString!(No.Free);
 
       try
       {
@@ -492,8 +492,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -536,7 +536,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_manager_client_get_name(cast(GDBusObjectManagerClient*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -552,7 +552,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     char* _cretval;
     _cretval = g_dbus_object_manager_client_get_name_owner(cast(GDBusObjectManagerClient*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

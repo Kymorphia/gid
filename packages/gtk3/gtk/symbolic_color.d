@@ -134,7 +134,7 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newName(string name) nothrow
   {
     GtkSymbolicColor* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_symbolic_color_new_name(_name);
     auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -179,7 +179,7 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newWin32(string themeClass, int id) nothrow
   {
     GtkSymbolicColor* _cretval;
-    const(char)* _themeClass = themeClass.toCString(No.Alloc);
+    const(char)* _themeClass = themeClass.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_symbolic_color_new_win32(_themeClass, id);
     auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -224,7 +224,7 @@ class SymbolicColor : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_symbolic_color_to_string(cast(GtkSymbolicColor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

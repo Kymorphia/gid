@@ -567,10 +567,10 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
     GtkAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_action_new(_name, _label, _tooltip, _stockId);
     this(_cretval, Yes.Take);
   }
@@ -732,7 +732,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_accel_path(cast(GtkAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -779,7 +779,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_icon_name(cast(GtkAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -809,7 +809,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_label(cast(GtkAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -824,7 +824,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_name(cast(GtkAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -869,7 +869,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_short_label(cast(GtkAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -884,7 +884,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_stock_id(cast(GtkAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -899,7 +899,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_tooltip(cast(GtkAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1009,7 +1009,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setAccelPath(string accelPath) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
     gtk_action_set_accel_path(cast(GtkAction*)this._cPtr, _accelPath);
   }
 
@@ -1058,7 +1058,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setIconName(string iconName) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     gtk_action_set_icon_name(cast(GtkAction*)this._cPtr, _iconName);
   }
 
@@ -1090,7 +1090,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     gtk_action_set_label(cast(GtkAction*)this._cPtr, _label);
   }
 
@@ -1122,7 +1122,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setShortLabel(string shortLabel) nothrow
   {
-    const(char)* _shortLabel = shortLabel.toCString(No.Alloc);
+    const(char)* _shortLabel = shortLabel.toCString!(No.Malloc, No.Nullable);
     gtk_action_set_short_label(cast(GtkAction*)this._cPtr, _shortLabel);
   }
 
@@ -1137,7 +1137,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setStockId(string stockId) nothrow
   {
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     gtk_action_set_stock_id(cast(GtkAction*)this._cPtr, _stockId);
   }
 
@@ -1152,7 +1152,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setTooltip(string tooltip) nothrow
   {
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, No.Nullable);
     gtk_action_set_tooltip(cast(GtkAction*)this._cPtr, _tooltip);
   }
 

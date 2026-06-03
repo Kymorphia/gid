@@ -299,7 +299,7 @@ class SqlStatement : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gda_sql_statement_serialize(cast(GdaSqlStatement*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class SqlStatement : gobject.boxed.Boxed
   static gda.types.SqlStatementType stringToType(string type) nothrow
   {
     GdaSqlStatementType _cretval;
-    const(char)* _type = type.toCString(No.Alloc);
+    const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_sql_statement_string_to_type(_type);
     gda.types.SqlStatementType _retval = cast(gda.types.SqlStatementType)_cretval;
     return _retval;
@@ -390,7 +390,7 @@ class SqlStatement : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gda_sql_statement_type_to_string(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

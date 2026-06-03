@@ -202,7 +202,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font(cast(GtkFontChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font_features(cast(GtkFontChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_language(cast(GtkFontChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_preview_text(cast(GtkFontChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ template FontChooserT()
   */
   override void setFont(string fontname) nothrow
   {
-    const(char)* _fontname = fontname.toCString(No.Alloc);
+    const(char)* _fontname = fontname.toCString!(No.Malloc, No.Nullable);
     gtk_font_chooser_set_font(cast(GtkFontChooser*)this._cPtr, _fontname);
   }
 
@@ -492,7 +492,7 @@ template FontChooserT()
   */
   override void setLanguage(string language) nothrow
   {
-    const(char)* _language = language.toCString(No.Alloc);
+    const(char)* _language = language.toCString!(No.Malloc, No.Nullable);
     gtk_font_chooser_set_language(cast(GtkFontChooser*)this._cPtr, _language);
   }
 
@@ -523,7 +523,7 @@ template FontChooserT()
   */
   override void setPreviewText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_font_chooser_set_preview_text(cast(GtkFontChooser*)this._cPtr, _text);
   }
 

@@ -190,7 +190,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   static gdk.texture.Texture newFromFilename(string path)
   {
     GdkTexture* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_texture_new_from_filename(_path, &_err);
     if (_err)
@@ -221,7 +221,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   static gdk.texture.Texture newFromResource(string resourcePath) nothrow
   {
     GdkTexture* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_texture_new_from_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
@@ -285,7 +285,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   bool saveToPng(string filename) nothrow
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_texture_save_to_png(cast(GdkTexture*)this._cPtr, _filename);
     return _retval;
   }
@@ -327,7 +327,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   bool saveToTiff(string filename) nothrow
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_texture_save_to_tiff(cast(GdkTexture*)this._cPtr, _filename);
     return _retval;
   }

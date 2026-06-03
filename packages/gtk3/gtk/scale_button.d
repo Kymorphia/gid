@@ -131,7 +131,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
     GtkWidget* _cretval;
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(No.Alloc);
+      _tmpicons ~= s.toCString;
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
 
@@ -223,7 +223,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   {
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(No.Alloc);
+      _tmpicons ~= s.toCString;
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
 

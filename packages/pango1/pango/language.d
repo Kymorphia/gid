@@ -75,7 +75,7 @@ class Language : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = pango_language_get_sample_string(cast(PangoLanguage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Language : gobject.boxed.Boxed
   bool matches(string rangeList) nothrow
   {
     bool _retval;
-    const(char)* _rangeList = rangeList.toCString(No.Alloc);
+    const(char)* _rangeList = rangeList.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)pango_language_matches(cast(PangoLanguage*)this._cPtr, _rangeList);
     return _retval;
   }
@@ -185,7 +185,7 @@ class Language : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = pango_language_to_string(cast(PangoLanguage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class Language : gobject.boxed.Boxed
   static pango.language.Language fromString(string language = null) nothrow
   {
     PangoLanguage* _cretval;
-    const(char)* _language = language.toCString(No.Alloc);
+    const(char)* _language = language.toCString!(No.Malloc, Yes.Nullable);
     _cretval = pango_language_from_string(_language);
     auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
     return _retval;

@@ -22,7 +22,7 @@ struct StreamType
   {
     const(char)* _cretval;
     _cretval = gst_stream_type_get_name(stype);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

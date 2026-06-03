@@ -113,7 +113,7 @@ class Blob : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gda_blob_to_string(cast(GdaBlob*)this._cPtr, maxlen);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

@@ -75,7 +75,7 @@ class Tensor : gobject.object.ObjectWrap
 
     char*[] _tmpdimensionNames;
     foreach (s; dimensionNames)
-      _tmpdimensionNames ~= s.toCString(No.Alloc);
+      _tmpdimensionNames ~= s.toCString;
     char** _dimensionNames = _tmpdimensionNames.ptr;
 
     _cretval = garrow_tensor_new(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, _shape, _nDimensions, _strides, _nStrides, _dimensionNames, _nDimensionNames);
@@ -104,7 +104,7 @@ class Tensor : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = garrow_tensor_get_dimension_name(cast(GArrowTensor*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

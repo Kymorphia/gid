@@ -232,7 +232,7 @@ class IMContext : gobject.object.ObjectWrap
     char* _str;
     PangoAttrList* _attrs;
     gtk_im_context_get_preedit_string(cast(GtkIMContext*)this._cPtr, &_str, &_attrs, cast(int*)&cursorPos);
-    str = _str.fromCString(Yes.Free);
+    str = _str.fromCString!(Yes.Free);
     attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.Take);
   }
 
@@ -265,7 +265,7 @@ class IMContext : gobject.object.ObjectWrap
     bool _retval;
     char* _text;
     _retval = cast(bool)gtk_im_context_get_surrounding(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex);
-    text = _text.fromCString(Yes.Free);
+    text = _text.fromCString!(Yes.Free);
     return _retval;
   }
 

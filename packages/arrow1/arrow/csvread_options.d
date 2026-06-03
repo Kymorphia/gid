@@ -334,7 +334,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /** */
   void addColumnName(string columnName) nothrow
   {
-    const(char)* _columnName = columnName.toCString(No.Alloc);
+    const(char)* _columnName = columnName.toCString!(No.Malloc, No.Nullable);
     garrow_csv_read_options_add_column_name(cast(GArrowCSVReadOptions*)this._cPtr, _columnName);
   }
 
@@ -347,21 +347,21 @@ class CSVReadOptions : gobject.object.ObjectWrap
   */
   void addColumnType(string name, arrow.data_type.DataType dataType) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     garrow_csv_read_options_add_column_type(cast(GArrowCSVReadOptions*)this._cPtr, _name, dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null);
   }
 
   /** */
   void addFalseValue(string falseValue) nothrow
   {
-    const(char)* _falseValue = falseValue.toCString(No.Alloc);
+    const(char)* _falseValue = falseValue.toCString!(No.Malloc, No.Nullable);
     garrow_csv_read_options_add_false_value(cast(GArrowCSVReadOptions*)this._cPtr, _falseValue);
   }
 
   /** */
   void addNullValue(string nullValue) nothrow
   {
-    const(char)* _nullValue = nullValue.toCString(No.Alloc);
+    const(char)* _nullValue = nullValue.toCString!(No.Malloc, No.Nullable);
     garrow_csv_read_options_add_null_value(cast(GArrowCSVReadOptions*)this._cPtr, _nullValue);
   }
 
@@ -385,7 +385,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   /** */
   void addTrueValue(string trueValue) nothrow
   {
-    const(char)* _trueValue = trueValue.toCString(No.Alloc);
+    const(char)* _trueValue = trueValue.toCString!(No.Malloc, No.Nullable);
     garrow_csv_read_options_add_true_value(cast(GArrowCSVReadOptions*)this._cPtr, _trueValue);
   }
 
@@ -403,7 +403,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -432,7 +432,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -452,7 +452,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -481,7 +481,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -496,7 +496,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
 
     char*[] _tmpcolumnNames;
     foreach (s; columnNames)
-      _tmpcolumnNames ~= s.toCString(No.Alloc);
+      _tmpcolumnNames ~= s.toCString;
     const(char*)* _columnNames = _tmpcolumnNames.ptr;
 
     garrow_csv_read_options_set_column_names(cast(GArrowCSVReadOptions*)this._cPtr, _columnNames, _nColumnNames);
@@ -511,7 +511,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
 
     char*[] _tmpfalseValues;
     foreach (s; falseValues)
-      _tmpfalseValues ~= s.toCString(No.Alloc);
+      _tmpfalseValues ~= s.toCString;
     const(char*)* _falseValues = _tmpfalseValues.ptr;
 
     garrow_csv_read_options_set_false_values(cast(GArrowCSVReadOptions*)this._cPtr, _falseValues, _nFalseValues);
@@ -526,7 +526,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
 
     char*[] _tmpnullValues;
     foreach (s; nullValues)
-      _tmpnullValues ~= s.toCString(No.Alloc);
+      _tmpnullValues ~= s.toCString;
     const(char*)* _nullValues = _tmpnullValues.ptr;
 
     garrow_csv_read_options_set_null_values(cast(GArrowCSVReadOptions*)this._cPtr, _nullValues, _nNullValues);
@@ -549,7 +549,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
 
     char*[] _tmptrueValues;
     foreach (s; trueValues)
-      _tmptrueValues ~= s.toCString(No.Alloc);
+      _tmptrueValues ~= s.toCString;
     const(char*)* _trueValues = _tmptrueValues.ptr;
 
     garrow_csv_read_options_set_true_values(cast(GArrowCSVReadOptions*)this._cPtr, _trueValues, _nTrueValues);

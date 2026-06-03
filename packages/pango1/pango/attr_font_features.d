@@ -76,7 +76,7 @@ class AttrFontFeatures
   static pango.attribute.Attribute new_(string features) nothrow
   {
     PangoAttribute* _cretval;
-    const(char)* _features = features.toCString(No.Alloc);
+    const(char)* _features = features.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_attr_font_features_new(_features);
     auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

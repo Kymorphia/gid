@@ -267,7 +267,7 @@ class ViewStack : gtk.widget.Widget
   adw.view_stack_page.ViewStackPage addNamed(gtk.widget.Widget child, string name = null) nothrow
   {
     AdwViewStackPage* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = adw_view_stack_add_named(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
@@ -288,8 +288,8 @@ class ViewStack : gtk.widget.Widget
   adw.view_stack_page.ViewStackPage addTitled(gtk.widget.Widget child, string name, string title) nothrow
   {
     AdwViewStackPage* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_view_stack_add_titled(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name, _title);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
@@ -311,9 +311,9 @@ class ViewStack : gtk.widget.Widget
   adw.view_stack_page.ViewStackPage addTitledWithIcon(gtk.widget.Widget child, string name, string title, string iconName) nothrow
   {
     AdwViewStackPage* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _title = title.toCString(No.Alloc);
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_view_stack_add_titled_with_icon(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name, _title, _iconName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
@@ -329,7 +329,7 @@ class ViewStack : gtk.widget.Widget
   gtk.widget.Widget getChildByName(string name) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_view_stack_get_child_by_name(cast(AdwViewStack*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -408,7 +408,7 @@ class ViewStack : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_view_stack_get_visible_child_name(cast(AdwViewStack*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class ViewStack : gtk.widget.Widget
   */
   void setVisibleChildName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     adw_view_stack_set_visible_child_name(cast(AdwViewStack*)this._cPtr, _name);
   }
 }

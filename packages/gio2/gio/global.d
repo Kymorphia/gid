@@ -153,7 +153,7 @@ gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.can
 uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null) nothrow
 {
   uint _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_bus_own_name_on_connection_with_closures(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _name, flags, nameAcquiredClosure ? cast(GClosure*)nameAcquiredClosure._cPtr(No.Dup) : null, nameLostClosure ? cast(GClosure*)nameLostClosure._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -178,7 +178,7 @@ uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, strin
 uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure busAcquiredClosure = null, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null) nothrow
 {
   uint _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_bus_own_name_with_closures(busType, _name, flags, busAcquiredClosure ? cast(GClosure*)busAcquiredClosure._cPtr(No.Dup) : null, nameAcquiredClosure ? cast(GClosure*)nameAcquiredClosure._cPtr(No.Dup) : null, nameLostClosure ? cast(GClosure*)nameLostClosure._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -237,7 +237,7 @@ void busUnwatchName(uint watcherId) nothrow
 uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null) nothrow
 {
   uint _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_bus_watch_name_on_connection_with_closures(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _name, flags, nameAppearedClosure ? cast(GClosure*)nameAppearedClosure._cPtr(No.Dup) : null, nameVanishedClosure ? cast(GClosure*)nameVanishedClosure._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -260,7 +260,7 @@ uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, str
 uint busWatchName(gio.types.BusType busType, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null) nothrow
 {
   uint _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = g_bus_watch_name_with_closures(busType, _name, flags, nameAppearedClosure ? cast(GClosure*)nameAppearedClosure._cPtr(No.Dup) : null, nameVanishedClosure ? cast(GClosure*)nameVanishedClosure._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -277,7 +277,7 @@ uint busWatchName(gio.types.BusType busType, string name, gio.types.BusNameWatch
 bool contentTypeCanBeExecutable(string type) nothrow
 {
   bool _retval;
-  const(char)* _type = type.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_content_type_can_be_executable(_type);
   return _retval;
 }
@@ -294,8 +294,8 @@ bool contentTypeCanBeExecutable(string type) nothrow
 bool contentTypeEquals(string type1, string type2) nothrow
 {
   bool _retval;
-  const(char)* _type1 = type1.toCString(No.Alloc);
-  const(char)* _type2 = type2.toCString(No.Alloc);
+  const(char)* _type1 = type1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _type2 = type2.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_content_type_equals(_type1, _type2);
   return _retval;
 }
@@ -311,9 +311,9 @@ bool contentTypeEquals(string type1, string type2) nothrow
 string contentTypeFromMimeType(string mimeType) nothrow
 {
   char* _cretval;
-  const(char)* _mimeType = mimeType.toCString(No.Alloc);
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
   _cretval = g_content_type_from_mime_type(_mimeType);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -328,9 +328,9 @@ string contentTypeFromMimeType(string mimeType) nothrow
 string contentTypeGetDescription(string type) nothrow
 {
   char* _cretval;
-  const(char)* _type = type.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
   _cretval = g_content_type_get_description(_type);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -349,9 +349,9 @@ string contentTypeGetDescription(string type) nothrow
 string contentTypeGetGenericIconName(string type) nothrow
 {
   char* _cretval;
-  const(char)* _type = type.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
   _cretval = g_content_type_get_generic_icon_name(_type);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -366,7 +366,7 @@ string contentTypeGetGenericIconName(string type) nothrow
 gio.icon.Icon contentTypeGetIcon(string type) nothrow
 {
   GIcon* _cretval;
-  const(char)* _type = type.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
   _cretval = g_content_type_get_icon(_type);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
   return _retval;
@@ -392,7 +392,7 @@ string[] contentTypeGetMimeDirs() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -408,9 +408,9 @@ string[] contentTypeGetMimeDirs() nothrow
 string contentTypeGetMimeType(string type) nothrow
 {
   char* _cretval;
-  const(char)* _type = type.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
   _cretval = g_content_type_get_mime_type(_type);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -425,7 +425,7 @@ string contentTypeGetMimeType(string type) nothrow
 gio.icon.Icon contentTypeGetSymbolicIcon(string type) nothrow
 {
   GIcon* _cretval;
-  const(char)* _type = type.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
   _cretval = g_content_type_get_symbolic_icon(_type);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
   return _retval;
@@ -448,7 +448,7 @@ gio.icon.Icon contentTypeGetSymbolicIcon(string type) nothrow
 string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain) nothrow
 {
   char* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
   size_t _dataSize;
   if (data)
     _dataSize = cast(size_t)data.length;
@@ -456,7 +456,7 @@ string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain)
   auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   gboolean _resultUncertain;
   _cretval = g_content_type_guess(_filename, _data, _dataSize, &_resultUncertain);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   resultUncertain = cast(bool)_resultUncertain;
   return _retval;
 }
@@ -493,7 +493,7 @@ string[] contentTypeGuessForTree(gio.file.File root) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -511,8 +511,8 @@ string[] contentTypeGuessForTree(gio.file.File root) nothrow
 bool contentTypeIsA(string type, string supertype) nothrow
 {
   bool _retval;
-  const(char)* _type = type.toCString(No.Alloc);
-  const(char)* _supertype = supertype.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+  const(char)* _supertype = supertype.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_content_type_is_a(_type, _supertype);
   return _retval;
 }
@@ -530,8 +530,8 @@ bool contentTypeIsA(string type, string supertype) nothrow
 bool contentTypeIsMimeType(string type, string mimeType) nothrow
 {
   bool _retval;
-  const(char)* _type = type.toCString(No.Alloc);
-  const(char)* _mimeType = mimeType.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_content_type_is_mime_type(_type, _mimeType);
   return _retval;
 }
@@ -549,7 +549,7 @@ bool contentTypeIsMimeType(string type, string mimeType) nothrow
 bool contentTypeIsUnknown(string type) nothrow
 {
   bool _retval;
-  const(char)* _type = type.toCString(No.Alloc);
+  const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_content_type_is_unknown(_type);
   return _retval;
 }
@@ -588,7 +588,7 @@ void contentTypeSetMimeDirs(string[] dirs = null) nothrow
 {
   char*[] _tmpdirs;
   foreach (s; dirs)
-    _tmpdirs ~= s.toCString(No.Alloc);
+    _tmpdirs ~= s.toCString;
   _tmpdirs ~= null;
   const(char*)* _dirs = _tmpdirs.ptr;
 
@@ -628,9 +628,9 @@ string[] contentTypesGetRegistered() nothrow
 string dbusAddressEscapeValue(string string_) nothrow
 {
   char* _cretval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dbus_address_escape_value(_string_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -656,7 +656,7 @@ string dbusAddressGetForBusSync(gio.types.BusType busType, gio.cancellable.Cance
   _cretval = g_dbus_address_get_for_bus_sync(busType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -695,7 +695,7 @@ void dbusAddressGetStream(string address, gio.cancellable.Cancellable cancellabl
     }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
-  const(char)* _address = address.toCString(No.Alloc);
+  const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   g_dbus_address_get_stream(_address, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
@@ -721,7 +721,7 @@ gio.iostream.IOStream dbusAddressGetStreamFinish(gio.async_result.AsyncResult re
   if (_err)
     throw new ErrorWrap(_err);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
-  outGuid = _outGuid.fromCString(Yes.Free);
+  outGuid = _outGuid.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -747,14 +747,14 @@ gio.iostream.IOStream dbusAddressGetStreamFinish(gio.async_result.AsyncResult re
 gio.iostream.IOStream dbusAddressGetStreamSync(string address, out string outGuid, gio.cancellable.Cancellable cancellable = null)
 {
   GIOStream* _cretval;
-  const(char)* _address = address.toCString(No.Alloc);
+  const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
   char* _outGuid;
   GError *_err;
   _cretval = g_dbus_address_get_stream_sync(_address, &_outGuid, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
-  outGuid = _outGuid.fromCString(Yes.Free);
+  outGuid = _outGuid.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -768,9 +768,9 @@ gio.iostream.IOStream dbusAddressGetStreamSync(string address, out string outGui
 string dbusEscapeObjectPath(string s) nothrow
 {
   char* _cretval;
-  const(char)* _s = s.toCString(No.Alloc);
+  const(char)* _s = s.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dbus_escape_object_path(_s);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -801,7 +801,7 @@ string dbusEscapeObjectPathBytestring(ubyte[] bytes) nothrow
   char* _cretval;
   auto _bytes = bytes.ptr ? cast(const(ubyte)*)(bytes ~ ubyte.init).ptr : [ubyte.init].ptr;
   _cretval = g_dbus_escape_object_path_bytestring(_bytes);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -823,7 +823,7 @@ string dbusGenerateGuid() nothrow
 {
   char* _cretval;
   _cretval = g_dbus_generate_guid();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -911,7 +911,7 @@ void dbusGvariantToGvalue(glib.variant.Variant value, out gobject.value.Value ou
 bool dbusIsAddress(string string_) nothrow
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_dbus_is_address(_string_);
   return _retval;
 }
@@ -930,7 +930,7 @@ bool dbusIsAddress(string string_) nothrow
 bool dbusIsErrorName(string string_) nothrow
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_dbus_is_error_name(_string_);
   return _retval;
 }
@@ -948,7 +948,7 @@ bool dbusIsErrorName(string string_) nothrow
 bool dbusIsGuid(string string_) nothrow
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_dbus_is_guid(_string_);
   return _retval;
 }
@@ -963,7 +963,7 @@ bool dbusIsGuid(string string_) nothrow
 bool dbusIsInterfaceName(string string_) nothrow
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_dbus_is_interface_name(_string_);
   return _retval;
 }
@@ -978,7 +978,7 @@ bool dbusIsInterfaceName(string string_) nothrow
 bool dbusIsMemberName(string string_) nothrow
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_dbus_is_member_name(_string_);
   return _retval;
 }
@@ -993,7 +993,7 @@ bool dbusIsMemberName(string string_) nothrow
 bool dbusIsName(string string_) nothrow
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_dbus_is_name(_string_);
   return _retval;
 }
@@ -1013,7 +1013,7 @@ bool dbusIsName(string string_) nothrow
 bool dbusIsSupportedAddress(string string_)
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _retval = cast(bool)g_dbus_is_supported_address(_string_, &_err);
   if (_err)
@@ -1031,7 +1031,7 @@ bool dbusIsSupportedAddress(string string_)
 bool dbusIsUniqueName(string string_) nothrow
 {
   bool _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_dbus_is_unique_name(_string_);
   return _retval;
 }
@@ -1055,7 +1055,7 @@ bool dbusIsUniqueName(string string_) nothrow
 ubyte[] dbusUnescapeObjectPath(string s) nothrow
 {
   ubyte* _cretval;
-  const(char)* _s = s.toCString(No.Alloc);
+  const(char)* _s = s.toCString!(No.Malloc, No.Nullable);
   _cretval = g_dbus_unescape_object_path(_s);
   ubyte[] _retval;
 
@@ -1147,7 +1147,7 @@ glib.types.Quark ioErrorQuark() nothrow
 */
 void ioModulesScanAllInDirectory(string dirname) nothrow
 {
-  const(char)* _dirname = dirname.toCString(No.Alloc);
+  const(char)* _dirname = dirname.toCString!(No.Malloc, No.Nullable);
   g_io_modules_scan_all_in_directory(_dirname);
 }
 
@@ -1171,7 +1171,7 @@ void ioModulesScanAllInDirectory(string dirname) nothrow
 */
 void ioModulesScanAllInDirectoryWithScope(string dirname, gio.iomodule_scope.IOModuleScope scope_) nothrow
 {
-  const(char)* _dirname = dirname.toCString(No.Alloc);
+  const(char)* _dirname = dirname.toCString!(No.Malloc, No.Nullable);
   g_io_modules_scan_all_in_directory_with_scope(_dirname, scope_ ? cast(GIOModuleScope*)scope_._cPtr : null);
 }
 
@@ -1294,9 +1294,9 @@ void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gi
 gio.settings_backend.SettingsBackend keyfileSettingsBackendNew(string filename, string rootPath, string rootGroup = null) nothrow
 {
   GSettingsBackend* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
-  const(char)* _rootPath = rootPath.toCString(No.Alloc);
-  const(char)* _rootGroup = rootGroup.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+  const(char)* _rootPath = rootPath.toCString!(No.Malloc, No.Nullable);
+  const(char)* _rootGroup = rootGroup.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_keyfile_settings_backend_new(_filename, _rootPath, _rootGroup);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
   return _retval;
@@ -1518,7 +1518,7 @@ bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffe
 string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags lookupFlags)
 {
   char** _cretval;
-  const(char)* _path = path.toCString(No.Alloc);
+  const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_resources_enumerate_children(_path, lookupFlags, &_err);
   if (_err)
@@ -1532,7 +1532,7 @@ string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags l
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -1557,7 +1557,7 @@ string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags l
 bool resourcesGetInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
 {
   bool _retval;
-  const(char)* _path = path.toCString(No.Alloc);
+  const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _retval = cast(bool)g_resources_get_info(_path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
   if (_err)
@@ -1591,7 +1591,7 @@ bool resourcesGetInfo(string path, gio.types.ResourceLookupFlags lookupFlags, ou
 glib.bytes.Bytes resourcesLookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
 {
   GBytes* _cretval;
-  const(char)* _path = path.toCString(No.Alloc);
+  const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_resources_lookup_data(_path, lookupFlags, &_err);
   if (_err)
@@ -1617,7 +1617,7 @@ glib.bytes.Bytes resourcesLookupData(string path, gio.types.ResourceLookupFlags 
 gio.input_stream.InputStream resourcesOpenStream(string path, gio.types.ResourceLookupFlags lookupFlags)
 {
   GInputStream* _cretval;
-  const(char)* _path = path.toCString(No.Alloc);
+  const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = g_resources_open_stream(_path, lookupFlags, &_err);
   if (_err)
@@ -1697,7 +1697,7 @@ void simpleAsyncReportGerrorInIdle(gobject.object.ObjectWrap object, gio.types.A
 bool unixIsMountPathSystemInternal(string mountPath) nothrow
 {
   bool _retval;
-  const(char)* _mountPath = mountPath.toCString(No.Alloc);
+  const(char)* _mountPath = mountPath.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_unix_is_mount_path_system_internal(_mountPath);
   return _retval;
 }
@@ -1719,7 +1719,7 @@ bool unixIsMountPathSystemInternal(string mountPath) nothrow
 bool unixIsSystemDevicePath(string devicePath) nothrow
 {
   bool _retval;
-  const(char)* _devicePath = devicePath.toCString(No.Alloc);
+  const(char)* _devicePath = devicePath.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_unix_is_system_device_path(_devicePath);
   return _retval;
 }
@@ -1740,7 +1740,7 @@ bool unixIsSystemDevicePath(string devicePath) nothrow
 bool unixIsSystemFsType(string fsType) nothrow
 {
   bool _retval;
-  const(char)* _fsType = fsType.toCString(No.Alloc);
+  const(char)* _fsType = fsType.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_unix_is_system_fs_type(_fsType);
   return _retval;
 }
@@ -1763,7 +1763,7 @@ bool unixIsSystemFsType(string fsType) nothrow
 gio.unix_mount_entry.UnixMountEntry unixMountAt(string mountPath, out ulong timeRead) nothrow
 {
   GUnixMountEntry* _cretval;
-  const(char)* _mountPath = mountPath.toCString(No.Alloc);
+  const(char)* _mountPath = mountPath.toCString!(No.Malloc, No.Nullable);
   _cretval = g_unix_mount_at(_mountPath, cast(ulong*)&timeRead);
   auto _retval = _cretval ? new gio.unix_mount_entry.UnixMountEntry(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1819,7 +1819,7 @@ gio.unix_mount_entry.UnixMountEntry unixMountCopy(gio.unix_mount_entry.UnixMount
 gio.unix_mount_entry.UnixMountEntry unixMountFor(string filePath, out ulong timeRead) nothrow
 {
   GUnixMountEntry* _cretval;
-  const(char)* _filePath = filePath.toCString(No.Alloc);
+  const(char)* _filePath = filePath.toCString!(No.Malloc, No.Nullable);
   _cretval = g_unix_mount_for(_filePath, cast(ulong*)&timeRead);
   auto _retval = _cretval ? new gio.unix_mount_entry.UnixMountEntry(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1847,7 +1847,7 @@ string unixMountGetDevicePath(gio.unix_mount_entry.UnixMountEntry mountEntry) no
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_device_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1862,7 +1862,7 @@ string unixMountGetFsType(gio.unix_mount_entry.UnixMountEntry mountEntry) nothro
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_fs_type(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1877,7 +1877,7 @@ string unixMountGetMountPath(gio.unix_mount_entry.UnixMountEntry mountEntry) not
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_mount_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1897,7 +1897,7 @@ string unixMountGetOptions(gio.unix_mount_entry.UnixMountEntry mountEntry) nothr
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_options(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1917,7 +1917,7 @@ string unixMountGetRootPath(gio.unix_mount_entry.UnixMountEntry mountEntry) noth
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_root_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1963,7 +1963,7 @@ string unixMountGuessName(gio.unix_mount_entry.UnixMountEntry mountEntry) nothro
 {
   char* _cretval;
   _cretval = g_unix_mount_guess_name(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 

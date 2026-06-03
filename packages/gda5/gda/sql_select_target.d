@@ -111,7 +111,7 @@ class SqlSelectTarget
   {
     char* _cretval;
     _cretval = gda_sql_select_target_serialize(cast(GdaSqlSelectTarget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

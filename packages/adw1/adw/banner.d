@@ -185,7 +185,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   this(string title) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_banner_new(_title);
     this(_cretval, No.Take);
   }
@@ -198,7 +198,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = adw_banner_get_button_label(cast(AdwBanner*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = adw_banner_get_title(cast(AdwBanner*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setButtonLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     adw_banner_set_button_label(cast(AdwBanner*)this._cPtr, _label);
   }
 
@@ -274,7 +274,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_banner_set_title(cast(AdwBanner*)this._cPtr, _title);
   }
 

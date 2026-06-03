@@ -282,7 +282,7 @@ class PreferencesWindow : adw.window.Window
   {
     const(char)* _cretval;
     _cretval = adw_preferences_window_get_visible_page_name(cast(AdwPreferencesWindow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -395,7 +395,7 @@ class PreferencesWindow : adw.window.Window
   */
   void setVisiblePageName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     adw_preferences_window_set_visible_page_name(cast(AdwPreferencesWindow*)this._cPtr, _name);
   }
 }

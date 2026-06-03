@@ -153,7 +153,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawGlyphItem(string text, pango.glyph_item.GlyphItem glyphItem, int x, int y) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     pango_renderer_draw_glyph_item(cast(PangoRenderer*)this._cPtr, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, x, y);
   }
 

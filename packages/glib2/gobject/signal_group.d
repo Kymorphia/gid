@@ -136,7 +136,7 @@ class SignalGroup : gobject.object.ObjectWrap
   */
   void connectClosure(string detailedSignal, gobject.closure.Closure closure, bool after) nothrow
   {
-    const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
+    const(char)* _detailedSignal = detailedSignal.toCString!(No.Malloc, No.Nullable);
     g_signal_group_connect_closure(cast(GSignalGroup*)this._cPtr, _detailedSignal, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, after);
   }
 

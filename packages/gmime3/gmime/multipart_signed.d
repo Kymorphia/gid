@@ -82,7 +82,7 @@ class MultipartSigned : gmime.multipart.Multipart
   static gmime.multipart_signed.MultipartSigned sign(gmime.crypto_context.CryptoContext ctx, gmime.object.ObjectWrap entity, string userid)
   {
     GMimeMultipartSigned* _cretval;
-    const(char)* _userid = userid.toCString(No.Alloc);
+    const(char)* _userid = userid.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_mime_multipart_signed_sign(ctx ? cast(GMimeCryptoContext*)ctx._cPtr(No.Dup) : null, entity ? cast(GMimeObject*)entity._cPtr(No.Dup) : null, _userid, &_err);
     if (_err)

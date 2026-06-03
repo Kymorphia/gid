@@ -271,8 +271,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   static gda.connection.Connection newFromDsn(string dsn, string authString, gda.types.ConnectionOptions options)
   {
     GdaConnection* _cretval;
-    const(char)* _dsn = dsn.toCString(No.Alloc);
-    const(char)* _authString = authString.toCString(No.Alloc);
+    const(char)* _dsn = dsn.toCString!(No.Malloc, No.Nullable);
+    const(char)* _authString = authString.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gda_connection_new_from_dsn(_dsn, _authString, options, &_err);
     if (_err)
@@ -296,9 +296,9 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   static gda.connection.Connection newFromString(string providerName, string cncString, string authString, gda.types.ConnectionOptions options)
   {
     GdaConnection* _cretval;
-    const(char)* _providerName = providerName.toCString(No.Alloc);
-    const(char)* _cncString = cncString.toCString(No.Alloc);
-    const(char)* _authString = authString.toCString(No.Alloc);
+    const(char)* _providerName = providerName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _cncString = cncString.toCString!(No.Malloc, No.Nullable);
+    const(char)* _authString = authString.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gda_connection_new_from_string(_providerName, _cncString, _authString, options, &_err);
     if (_err)
@@ -348,8 +348,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   static gda.connection.Connection openFromDsn(string dsn, string authString, gda.types.ConnectionOptions options)
   {
     GdaConnection* _cretval;
-    const(char)* _dsn = dsn.toCString(No.Alloc);
-    const(char)* _authString = authString.toCString(No.Alloc);
+    const(char)* _dsn = dsn.toCString!(No.Malloc, No.Nullable);
+    const(char)* _authString = authString.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gda_connection_open_from_dsn(_dsn, _authString, options, &_err);
     if (_err)
@@ -408,9 +408,9 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   static gda.connection.Connection openFromString(string providerName, string cncString, string authString, gda.types.ConnectionOptions options)
   {
     GdaConnection* _cretval;
-    const(char)* _providerName = providerName.toCString(No.Alloc);
-    const(char)* _cncString = cncString.toCString(No.Alloc);
-    const(char)* _authString = authString.toCString(No.Alloc);
+    const(char)* _providerName = providerName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _cncString = cncString.toCString!(No.Malloc, No.Nullable);
+    const(char)* _authString = authString.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gda_connection_open_from_string(_providerName, _cncString, _authString, options, &_err);
     if (_err)
@@ -433,8 +433,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   static gda.connection.Connection openSqlite(string directory, string filename, bool autoUnlink) nothrow
   {
     GdaConnection* _cretval;
-    const(char)* _directory = directory.toCString(No.Alloc);
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _directory = directory.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_connection_open_sqlite(_directory, _filename, autoUnlink);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.connection.Connection)(cast(GdaConnection*)_cretval, Yes.Take);
     return _retval;
@@ -475,16 +475,16 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   static void stringSplit(string string_, out string outCncParams, out string outProvider, out string outUsername, out string outPassword) nothrow
   {
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     char* _outCncParams;
     char* _outProvider;
     char* _outUsername;
     char* _outPassword;
     gda_connection_string_split(_string_, &_outCncParams, &_outProvider, &_outUsername, &_outPassword);
-    outCncParams = _outCncParams.fromCString(No.Free);
-    outProvider = _outProvider.fromCString(No.Free);
-    outUsername = _outUsername.fromCString(No.Free);
-    outPassword = _outPassword.fromCString(No.Free);
+    outCncParams = _outCncParams.fromCString!(No.Free);
+    outProvider = _outProvider.fromCString!(No.Free);
+    outUsername = _outUsername.fromCString!(No.Free);
+    outPassword = _outPassword.fromCString!(No.Free);
   }
 
   /**
@@ -534,7 +534,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool addSavepoint(string name = null)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_connection_add_savepoint(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
@@ -635,7 +635,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool beginTransaction(string name, gda.types.TransactionIsolation level)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_connection_begin_transaction(cast(GdaConnection*)this._cPtr, _name, level, &_err);
     if (_err)
@@ -682,7 +682,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool commitTransaction(string name = null)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_connection_commit_transaction(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
@@ -756,8 +756,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool deleteRowFromTable(string table, string conditionColumnName, gobject.value.Value conditionValue)
   {
     bool _retval;
-    const(char)* _table = table.toCString(No.Alloc);
-    const(char)* _conditionColumnName = conditionColumnName.toCString(No.Alloc);
+    const(char)* _table = table.toCString!(No.Malloc, No.Nullable);
+    const(char)* _conditionColumnName = conditionColumnName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_connection_delete_row_from_table(cast(GdaConnection*)this._cPtr, _table, _conditionColumnName, conditionValue ? cast(GValue*)conditionValue._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -776,7 +776,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool deleteSavepoint(string name = null)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_connection_delete_savepoint(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
@@ -796,7 +796,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   int executeNonSelectCommand(string sql)
   {
     int _retval;
-    const(char)* _sql = sql.toCString(No.Alloc);
+    const(char)* _sql = sql.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = gda_connection_execute_non_select_command(cast(GdaConnection*)this._cPtr, _sql, &_err);
     if (_err)
@@ -815,7 +815,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   gda.data_model.DataModel executeSelectCommand(string sql)
   {
     GdaDataModel* _cretval;
-    const(char)* _sql = sql.toCString(No.Alloc);
+    const(char)* _sql = sql.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gda_connection_execute_select_command(cast(GdaConnection*)this._cPtr, _sql, &_err);
     if (_err)
@@ -832,7 +832,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_authentication(cast(GdaConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -848,7 +848,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_cnc_string(cast(GdaConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -878,7 +878,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_dsn(cast(GdaConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -980,7 +980,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_provider_name(cast(GdaConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1017,7 +1017,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool insertRowIntoTableV(string table, string[] colNames, gobject.value.Value[] values)
   {
     bool _retval;
-    const(char)* _table = table.toCString(No.Alloc);
+    const(char)* _table = table.toCString!(No.Malloc, No.Nullable);
     auto _colNames = gSListFromD!(string)(colNames);
     scope(exit) containerFree!(GSList*, string, GidOwnership.None)(_colNames);
     auto _values = gSListFromD!(gobject.value.Value)(values);
@@ -1067,7 +1067,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   gda.statement.Statement parseSqlString(string sql, out gda.set.Set params)
   {
     GdaStatement* _cretval;
-    const(char)* _sql = sql.toCString(No.Alloc);
+    const(char)* _sql = sql.toCString!(No.Malloc, No.Nullable);
     GdaSet* _params;
     GError *_err;
     _cretval = gda_connection_parse_sql_string(cast(GdaConnection*)this._cPtr, _sql, &_params, &_err);
@@ -1139,9 +1139,9 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   string quoteSqlIdentifier(string id) nothrow
   {
     char* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_connection_quote_sql_identifier(cast(GdaConnection*)this._cPtr, _id);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1156,7 +1156,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool rollbackSavepoint(string name = null)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_connection_rollback_savepoint(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
@@ -1178,7 +1178,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool rollbackTransaction(string name = null)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_connection_rollback_transaction(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
@@ -1371,7 +1371,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     _cretval = gda_connection_statement_to_sql(cast(GdaConnection*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, flags, &_paramsUsed, &_err);
     if (_err)
       throw new ConnectionException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     paramsUsed = gSListToD!(gda.holder.Holder, GidOwnership.Container)(_paramsUsed);
     return _retval;
   }
@@ -1466,8 +1466,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool updateRowInTableV(string table, string conditionColumnName, gobject.value.Value conditionValue, string[] colNames, gobject.value.Value[] values)
   {
     bool _retval;
-    const(char)* _table = table.toCString(No.Alloc);
-    const(char)* _conditionColumnName = conditionColumnName.toCString(No.Alloc);
+    const(char)* _table = table.toCString!(No.Malloc, No.Nullable);
+    const(char)* _conditionColumnName = conditionColumnName.toCString!(No.Malloc, No.Nullable);
     auto _colNames = gSListFromD!(string)(colNames);
     scope(exit) containerFree!(GSList*, string, GidOwnership.None)(_colNames);
     auto _values = gSListFromD!(gobject.value.Value)(values);
@@ -1490,7 +1490,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     char* _cretval;
     _cretval = gda_connection_value_to_sql_string(cast(GdaConnection*)this._cPtr, from ? cast(GValue*)from._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

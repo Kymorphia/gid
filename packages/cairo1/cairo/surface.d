@@ -339,7 +339,7 @@ class Surface : gobject.boxed.Boxed
   */
   void getMimeData(string mimeType, out ubyte[] data) nothrow
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     gulong _length;
     const(ubyte)* _data;
     cairo_surface_get_mime_data(cast(cairo_surface_t*)this._cPtr, _mimeType, &_data, &_length);
@@ -645,7 +645,7 @@ class Surface : gobject.boxed.Boxed
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     cairo_status_t _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     gulong _length;
     if (data)
       _length = cast(gulong)data.length;
@@ -696,7 +696,7 @@ class Surface : gobject.boxed.Boxed
   cairo.types.Bool supportsMimeType(string mimeType) nothrow
   {
     cairo.types.Bool _retval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     _retval = cairo_surface_supports_mime_type(cast(cairo_surface_t*)this._cPtr, _mimeType);
     return _retval;
   }
@@ -736,7 +736,7 @@ class Surface : gobject.boxed.Boxed
   cairo.types.Status writeToPng(string filename) nothrow
   {
     cairo_status_t _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = cairo_surface_write_to_png(cast(cairo_surface_t*)this._cPtr, _filename);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;

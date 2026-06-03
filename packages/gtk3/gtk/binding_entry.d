@@ -195,7 +195,7 @@ class BindingEntry
   static glib.types.TokenType addSignalFromString(gtk.binding_set.BindingSet bindingSet, string signalDesc) nothrow
   {
     GTokenType _cretval;
-    const(char)* _signalDesc = signalDesc.toCString(No.Alloc);
+    const(char)* _signalDesc = signalDesc.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_binding_entry_add_signal_from_string(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, _signalDesc);
     glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;

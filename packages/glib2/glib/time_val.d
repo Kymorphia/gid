@@ -93,7 +93,7 @@ struct TimeVal
   {
     char* _cretval;
     _cretval = g_time_val_to_iso8601(cast(GTimeVal*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ struct TimeVal
   static bool fromIso8601(string isoDate, out glib.time_val.TimeVal time) nothrow
   {
     bool _retval;
-    const(char)* _isoDate = isoDate.toCString(No.Alloc);
+    const(char)* _isoDate = isoDate.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_time_val_from_iso8601(_isoDate, cast(GTimeVal*)&time);
     return _retval;
   }

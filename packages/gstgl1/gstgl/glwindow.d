@@ -177,8 +177,8 @@ class GLWindow : gst.object.ObjectWrap
   /** */
   void sendKeyEvent(string eventType, string keyStr) nothrow
   {
-    const(char)* _eventType = eventType.toCString(No.Alloc);
-    const(char)* _keyStr = keyStr.toCString(No.Alloc);
+    const(char)* _eventType = eventType.toCString!(No.Malloc, No.Nullable);
+    const(char)* _keyStr = keyStr.toCString!(No.Malloc, No.Nullable);
     gst_gl_window_send_key_event(cast(GstGLWindow*)this._cPtr, _eventType, _keyStr);
   }
 
@@ -241,7 +241,7 @@ class GLWindow : gst.object.ObjectWrap
   /** */
   void sendMouseEvent(string eventType, int button, double posx, double posy) nothrow
   {
-    const(char)* _eventType = eventType.toCString(No.Alloc);
+    const(char)* _eventType = eventType.toCString!(No.Malloc, No.Nullable);
     gst_gl_window_send_mouse_event(cast(GstGLWindow*)this._cPtr, _eventType, button, posx, posy);
   }
 

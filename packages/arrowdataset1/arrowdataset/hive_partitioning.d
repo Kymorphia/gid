@@ -69,7 +69,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
   {
     char* _cretval;
     _cretval = gadataset_hive_partitioning_get_null_fallback(cast(GADatasetHivePartitioning*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

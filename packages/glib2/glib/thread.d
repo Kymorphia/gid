@@ -112,7 +112,7 @@ class Thread : gobject.boxed.Boxed
     }
     auto _funcCB = func ? &_funcCallback : null;
     GThread* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     _cretval = g_thread_new(_name, _funcCB, _func);
     this(_cretval, Yes.Take);
@@ -151,7 +151,7 @@ class Thread : gobject.boxed.Boxed
     }
     auto _funcCB = func ? &_funcCallback : null;
     GThread* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GError *_err;
     _cretval = g_thread_try_new(_name, _funcCB, _func, &_err);

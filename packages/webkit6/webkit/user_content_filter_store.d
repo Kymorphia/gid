@@ -91,7 +91,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   this(string storagePath) nothrow
   {
     WebKitUserContentFilterStore* _cretval;
-    const(char)* _storagePath = storagePath.toCString(No.Alloc);
+    const(char)* _storagePath = storagePath.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_user_content_filter_store_new(_storagePath);
     this(_cretval, Yes.Take);
   }
@@ -151,7 +151,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -165,7 +165,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_user_content_filter_store_get_path(cast(WebKitUserContentFilterStore*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _identifier = identifier.toCString(No.Alloc);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_user_content_filter_store_load(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -254,7 +254,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _identifier = identifier.toCString(No.Alloc);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_user_content_filter_store_remove(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -315,7 +315,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _identifier = identifier.toCString(No.Alloc);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_user_content_filter_store_save(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, source ? cast(GBytes*)source._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -373,7 +373,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _identifier = identifier.toCString(No.Alloc);
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_user_content_filter_store_save_from_file(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

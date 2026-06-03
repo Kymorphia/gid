@@ -226,7 +226,7 @@ class ScaledFont : gobject.boxed.Boxed
   */
   void textExtents(string utf8, out cairo.types.TextExtents extents) nothrow
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
     cairo_scaled_font_text_extents(cast(cairo_scaled_font_t*)this._cPtr, _utf8, &extents);
   }
 }

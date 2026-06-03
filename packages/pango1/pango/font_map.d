@@ -127,7 +127,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
   pango.font_family.FontFamily getFamily(string name) nothrow
   {
     PangoFontFamily* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_font_map_get_family(cast(PangoFontMap*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
@@ -231,7 +231,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
   pango.font.Font reloadFont(pango.font.Font font, double scale, pango.context.Context context = null, string variations = null) nothrow
   {
     PangoFont* _cretval;
-    const(char)* _variations = variations.toCString(No.Alloc);
+    const(char)* _variations = variations.toCString!(No.Malloc, Yes.Nullable);
     _cretval = pango_font_map_reload_font(cast(PangoFontMap*)this._cPtr, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, scale, context ? cast(PangoContext*)context._cPtr(No.Dup) : null, _variations);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;

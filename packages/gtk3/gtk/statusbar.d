@@ -114,7 +114,7 @@ class Statusbar : gtk.box.Box
   uint getContextId(string contextDescription) nothrow
   {
     uint _retval;
-    const(char)* _contextDescription = contextDescription.toCString(No.Alloc);
+    const(char)* _contextDescription = contextDescription.toCString!(No.Malloc, No.Nullable);
     _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)this._cPtr, _contextDescription);
     return _retval;
   }
@@ -160,7 +160,7 @@ class Statusbar : gtk.box.Box
   uint push(uint contextId, string text) nothrow
   {
     uint _retval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _retval = gtk_statusbar_push(cast(GtkStatusbar*)this._cPtr, contextId, _text);
     return _retval;
   }

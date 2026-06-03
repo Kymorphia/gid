@@ -166,7 +166,7 @@ class Gradient : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_gradient_to_string(cast(GtkGradient*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

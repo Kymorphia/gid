@@ -200,7 +200,7 @@ class PreferencesDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_preferences_dialog_get_visible_page_name(cast(AdwPreferencesDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   void setVisiblePageName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     adw_preferences_dialog_set_visible_page_name(cast(AdwPreferencesDialog*)this._cPtr, _name);
   }
 }

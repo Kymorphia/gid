@@ -111,7 +111,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _windowId = windowId.toCString(No.Alloc);
+    const(char)* _windowId = windowId.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_prompt_perform(cast(SecretPrompt*)this._cPtr, _windowId, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -166,7 +166,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
   glib.variant.Variant performSync(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
     GVariant* _cretval;
-    const(char)* _windowId = windowId.toCString(No.Alloc);
+    const(char)* _windowId = windowId.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = secret_prompt_perform_sync(cast(SecretPrompt*)this._cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -203,7 +203,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
   glib.variant.Variant run(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
     GVariant* _cretval;
-    const(char)* _windowId = windowId.toCString(No.Alloc);
+    const(char)* _windowId = windowId.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = secret_prompt_run(cast(SecretPrompt*)this._cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, &_err);
     if (_err)

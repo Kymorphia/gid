@@ -97,7 +97,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   */
   void add(string name, gio.types.FileAttributeType type, gio.types.FileAttributeInfoFlags flags) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     g_file_attribute_info_list_add(cast(GFileAttributeInfoList*)this._cPtr, _name, type, flags);
   }
 
@@ -124,7 +124,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   gio.file_attribute_info.FileAttributeInfo lookup(string name) nothrow
   {
     const(GFileAttributeInfo)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_attribute_info_list_lookup(cast(GFileAttributeInfoList*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval, No.Take) : null;
     return _retval;

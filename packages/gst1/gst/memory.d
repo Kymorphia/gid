@@ -337,7 +337,7 @@ class Memory : gobject.boxed.Boxed
   bool isType(string memType) nothrow
   {
     bool _retval;
-    const(char)* _memType = memType.toCString(No.Alloc);
+    const(char)* _memType = memType.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_memory_is_type(cast(GstMemory*)this._cPtr, _memType);
     return _retval;
   }

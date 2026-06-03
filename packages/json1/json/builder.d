@@ -222,7 +222,7 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder addStringValue(string value) nothrow
   {
     JsonBuilder* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     _cretval = json_builder_add_string_value(cast(JsonBuilder*)this._cPtr, _value);
     auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
@@ -358,7 +358,7 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder setMemberName(string memberName) nothrow
   {
     JsonBuilder* _cretval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString!(No.Malloc, No.Nullable);
     _cretval = json_builder_set_member_name(cast(JsonBuilder*)this._cPtr, _memberName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;

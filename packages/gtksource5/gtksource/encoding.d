@@ -70,7 +70,7 @@ class Encoding : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_source_encoding_get_charset(cast(const(GtkSourceEncoding)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class Encoding : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_source_encoding_get_name(cast(const(GtkSourceEncoding)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class Encoding : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_source_encoding_to_string(cast(const(GtkSourceEncoding)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Encoding : gobject.boxed.Boxed
   static gtksource.encoding.Encoding getFromCharset(string charset) nothrow
   {
     const(GtkSourceEncoding)* _cretval;
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_encoding_get_from_charset(_charset);
     auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;

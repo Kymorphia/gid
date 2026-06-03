@@ -643,7 +643,7 @@ string getDisplay() nothrow
 {
   char* _cretval;
   _cretval = gdk_get_display();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -658,7 +658,7 @@ string getDisplayArgName() nothrow
 {
   const(char)* _cretval;
   _cretval = gdk_get_display_arg_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -673,7 +673,7 @@ string getProgramClass() nothrow
 {
   const(char)* _cretval;
   _cretval = gdk_get_program_class();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -764,7 +764,7 @@ void keyvalConvertCase(uint symbol, out uint lower, out uint upper) nothrow
 uint keyvalFromName(string keyvalName) nothrow
 {
   uint _retval;
-  const(char)* _keyvalName = keyvalName.toCString(No.Alloc);
+  const(char)* _keyvalName = keyvalName.toCString!(No.Malloc, No.Nullable);
   _retval = gdk_keyval_from_name(_keyvalName);
   return _retval;
 }
@@ -816,7 +816,7 @@ string keyvalName(uint keyval) nothrow
 {
   char* _cretval;
   _cretval = gdk_keyval_name(keyval);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -916,7 +916,7 @@ void notifyStartupComplete() nothrow
 */
 void notifyStartupCompleteWithId(string startupId) nothrow
 {
-  const(char)* _startupId = startupId.toCString(No.Alloc);
+  const(char)* _startupId = startupId.toCString!(No.Malloc, No.Nullable);
   gdk_notify_startup_complete_with_id(_startupId);
 }
 
@@ -1517,7 +1517,7 @@ void selectionSendNotifyForDisplay(gdk.display.Display display, gdk.window.Windo
 */
 void setAllowedBackends(string backends) nothrow
 {
-  const(char)* _backends = backends.toCString(No.Alloc);
+  const(char)* _backends = backends.toCString!(No.Malloc, No.Nullable);
   gdk_set_allowed_backends(_backends);
 }
 
@@ -1549,7 +1549,7 @@ void setDoubleClickTime(uint msec) nothrow
 */
 void setProgramClass(string programClass) nothrow
 {
-  const(char)* _programClass = programClass.toCString(No.Alloc);
+  const(char)* _programClass = programClass.toCString!(No.Malloc, No.Nullable);
   gdk_set_program_class(_programClass);
 }
 
@@ -1580,7 +1580,7 @@ void setShowEvents(bool showEvents) nothrow
 bool settingGet(string name, gobject.value.Value value) nothrow
 {
   bool _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gdk_setting_get(_name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -1706,7 +1706,7 @@ int textPropertyToUtf8ListForDisplay(gdk.display.Display display, gdk.atom.Atom 
 
   list.length = _lenlist;
   foreach (i; 0 .. _lenlist)
-    list[i] = _list[i].fromCString(Yes.Free);
+    list[i] = _list[i].fromCString!(Yes.Free);
   gFree(cast(void*)_list);
   return _retval;
 }
@@ -1978,8 +1978,8 @@ uint unicodeToKeyval(uint wc) nothrow
 string utf8ToStringTarget(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = gdk_utf8_to_string_target(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

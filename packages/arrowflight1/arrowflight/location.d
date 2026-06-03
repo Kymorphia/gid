@@ -52,7 +52,7 @@ class Location : gobject.object.ObjectWrap
   this(string uri)
   {
     GAFlightLocation* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gaflight_location_new(_uri, &_err);
     if (_err)
@@ -73,7 +73,7 @@ class Location : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gaflight_location_get_scheme(cast(GAFlightLocation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class Location : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gaflight_location_to_string(cast(GAFlightLocation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

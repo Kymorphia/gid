@@ -170,7 +170,7 @@ class RenderNode
   bool writeToFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gsk_render_node_write_to_file(cast(GskRenderNode*)this._cPtr, _filename, &_err);
     if (_err)

@@ -122,7 +122,7 @@ class ParserOptions : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -212,7 +212,7 @@ class ParserOptions : gobject.boxed.Boxed
   {
     const(char)*[] _tmpcharsets;
     foreach (s; charsets)
-      _tmpcharsets ~= s.toCString(No.Alloc);
+      _tmpcharsets ~= s.toCString;
     _tmpcharsets ~= null;
     const(char*)* _charsets = _tmpcharsets.ptr;
 
@@ -269,7 +269,7 @@ class ParserOptions : gobject.boxed.Boxed
     extern(C) void _warningCbCallback(long offset, GMimeParserWarning errcode, const(char)* item, void* userData) nothrow
     {
       auto _dlg = cast(gmime.types.ParserWarningFunc*)userData;
-      string _item = item.fromCString(No.Free);
+      string _item = item.fromCString!(No.Free);
 
       try
       {

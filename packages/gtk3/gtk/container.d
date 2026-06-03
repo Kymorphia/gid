@@ -329,7 +329,7 @@ class Container : gtk.widget.Widget
   */
   void childGetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     gtk_container_child_get_property(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 
@@ -351,7 +351,7 @@ class Container : gtk.widget.Widget
   */
   void childNotify(gtk.widget.Widget child, string childProperty) nothrow
   {
-    const(char)* _childProperty = childProperty.toCString(No.Alloc);
+    const(char)* _childProperty = childProperty.toCString!(No.Malloc, No.Nullable);
     gtk_container_child_notify(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _childProperty);
   }
 
@@ -382,7 +382,7 @@ class Container : gtk.widget.Widget
   */
   void childSetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     gtk_container_child_set_property(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 

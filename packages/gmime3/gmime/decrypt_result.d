@@ -107,7 +107,7 @@ class DecryptResult : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_decrypt_result_get_session_key(cast(GMimeDecryptResult*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class DecryptResult : gobject.object.ObjectWrap
   */
   void setSessionKey(string sessionKey = null) nothrow
   {
-    const(char)* _sessionKey = sessionKey.toCString(No.Alloc);
+    const(char)* _sessionKey = sessionKey.toCString!(No.Malloc, Yes.Nullable);
     g_mime_decrypt_result_set_session_key(cast(GMimeDecryptResult*)this._cPtr, _sessionKey);
   }
 

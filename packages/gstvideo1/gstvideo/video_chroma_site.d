@@ -22,7 +22,7 @@ struct VideoChromaSite
   static gstvideo.types.VideoChromaSite fromString(string s) nothrow
   {
     GstVideoChromaSite _cretval;
-    const(char)* _s = s.toCString(No.Alloc);
+    const(char)* _s = s.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_video_chroma_site_from_string(_s);
     gstvideo.types.VideoChromaSite _retval = cast(gstvideo.types.VideoChromaSite)_cretval;
     return _retval;
@@ -41,7 +41,7 @@ struct VideoChromaSite
   {
     char* _cretval;
     _cretval = gst_video_chroma_site_to_string(site);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

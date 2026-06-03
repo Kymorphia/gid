@@ -102,8 +102,8 @@ class BindingGroup : gobject.object.ObjectWrap
   */
   void bind(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags) nothrow
   {
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
+    const(char)* _sourceProperty = sourceProperty.toCString!(No.Malloc, No.Nullable);
+    const(char)* _targetProperty = targetProperty.toCString!(No.Malloc, No.Nullable);
     g_binding_group_bind(cast(GBindingGroup*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags);
   }
 
@@ -133,8 +133,8 @@ class BindingGroup : gobject.object.ObjectWrap
   */
   void bindFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo = null, gobject.closure.Closure transformFrom = null) nothrow
   {
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
+    const(char)* _sourceProperty = sourceProperty.toCString!(No.Malloc, No.Nullable);
+    const(char)* _targetProperty = targetProperty.toCString!(No.Malloc, No.Nullable);
     g_binding_group_bind_with_closures(cast(GBindingGroup*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo._cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom._cPtr(No.Dup) : null);
   }
 

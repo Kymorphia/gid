@@ -273,7 +273,7 @@ class Dialog : gtk.window.Window
   gtk.widget.Widget addButton(string buttonText, int responseId) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _buttonText = buttonText.toCString(No.Alloc);
+    const(char)* _buttonText = buttonText.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_dialog_add_button(cast(GtkDialog*)this._cPtr, _buttonText, responseId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

@@ -72,7 +72,7 @@ class StringObject : gobject.object.ObjectWrap
   this(string string_) nothrow
   {
     GtkStringObject* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_string_object_new(_string_);
     this(_cretval, Yes.Take);
   }
@@ -85,7 +85,7 @@ class StringObject : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_string_object_get_string(cast(GtkStringObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

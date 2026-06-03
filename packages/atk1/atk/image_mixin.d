@@ -38,7 +38,7 @@ template ImageT()
   {
     const(char)* _cretval;
     _cretval = atk_image_get_image_description(cast(AtkImage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ template ImageT()
   {
     const(char)* _cretval;
     _cretval = atk_image_get_image_locale(cast(AtkImage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ template ImageT()
   override bool setImageDescription(string description) nothrow
   {
     bool _retval;
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)atk_image_set_image_description(cast(AtkImage*)this._cPtr, _description);
     return _retval;
   }

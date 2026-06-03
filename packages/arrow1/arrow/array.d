@@ -170,7 +170,7 @@ class Array : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_array_diff_unified(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -397,7 +397,7 @@ class Array : gobject.object.ObjectWrap
     _cretval = garrow_array_to_string(cast(GArrowArray*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

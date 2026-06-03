@@ -248,7 +248,7 @@ gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVid
 gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMeta(gst.buffer.Buffer buffer, string roiType, uint x, uint y, uint w, uint h) nothrow
 {
   GstVideoRegionOfInterestMeta* _cretval;
-  const(char)* _roiType = roiType.toCString(No.Alloc);
+  const(char)* _roiType = roiType.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_buffer_add_video_region_of_interest_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _roiType, x, y, w, h);
   auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval, No.Take) : null;
   return _retval;
@@ -577,7 +577,7 @@ void videoCenterRect(gstvideo.types.VideoRectangle src, gstvideo.types.VideoRect
 gstvideo.types.VideoChromaSite videoChromaFromString(string s) nothrow
 {
   GstVideoChromaSite _cretval;
-  const(char)* _s = s.toCString(No.Alloc);
+  const(char)* _s = s.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_video_chroma_from_string(_s);
   gstvideo.types.VideoChromaSite _retval = cast(gstvideo.types.VideoChromaSite)_cretval;
   return _retval;
@@ -596,7 +596,7 @@ string videoChromaToString(gstvideo.types.VideoChromaSite site) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_video_chroma_to_string(site);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -730,7 +730,7 @@ uint videoDmaDrmFourccFromFormat(gstvideo.types.VideoFormat format) nothrow
 uint videoDmaDrmFourccFromString(string formatStr, out ulong modifier) nothrow
 {
   uint _retval;
-  const(char)* _formatStr = formatStr.toCString(No.Alloc);
+  const(char)* _formatStr = formatStr.toCString!(No.Malloc, No.Nullable);
   _retval = gst_video_dma_drm_fourcc_from_string(_formatStr, cast(ulong*)&modifier);
   return _retval;
 }
@@ -765,7 +765,7 @@ string videoDmaDrmFourccToString(uint fourcc, ulong modifier) nothrow
 {
   char* _cretval;
   _cretval = gst_video_dma_drm_fourcc_to_string(fourcc, modifier);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 

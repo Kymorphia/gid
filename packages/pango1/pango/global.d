@@ -165,7 +165,7 @@ pango.attribute.Attribute attrFallbackNew(bool enableFallback) nothrow
 pango.attribute.Attribute attrFamilyNew(string family) nothrow
 {
   PangoAttribute* _cretval;
-  const(char)* _family = family.toCString(No.Alloc);
+  const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
   _cretval = pango_attr_family_new(_family);
   auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -854,7 +854,7 @@ bool isZeroWidth(dchar ch) nothrow
 pango.item.Item[] itemize(pango.context.Context context, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter = null) nothrow
 {
   GList* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = pango_itemize(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter._cPtr(No.Dup) : null);
   auto _retval = gListToD!(pango.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
@@ -884,7 +884,7 @@ pango.item.Item[] itemize(pango.context.Context context, string text, int startI
 pango.item.Item[] itemizeWithBaseDir(pango.context.Context context, pango.types.Direction baseDir, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter = null) nothrow
 {
   GList* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = pango_itemize_with_base_dir(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, baseDir, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter._cPtr(No.Dup) : null);
   auto _retval = gListToD!(pango.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
@@ -916,7 +916,7 @@ bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, ou
   if (_err)
     throw new ErrorWrap(_err);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
-  text = _text.fromCString(Yes.Free);
+  text = _text.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -981,10 +981,10 @@ glib.markup_parse_context.MarkupParseContext markupParserNew(dchar accelMarker) 
 bool parseEnum(gobject.types.GType type, string str, out int value, bool warn, out string possibleValues) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
   char* _possibleValues;
   _retval = cast(bool)pango_parse_enum(type, _str, cast(int*)&value, warn, &_possibleValues);
-  possibleValues = _possibleValues.fromCString(Yes.Free);
+  possibleValues = _possibleValues.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1031,7 +1031,7 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
   if (_err)
     throw new ErrorWrap(_err);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
-  text = _text.fromCString(Yes.Free);
+  text = _text.fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1053,7 +1053,7 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
 bool parseStretch(string str, out pango.types.Stretch stretch, bool warn) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)pango_parse_stretch(_str, &stretch, warn);
   return _retval;
 }
@@ -1074,7 +1074,7 @@ bool parseStretch(string str, out pango.types.Stretch stretch, bool warn) nothro
 bool parseStyle(string str, out pango.types.Style style, bool warn) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)pango_parse_style(_str, &style, warn);
   return _retval;
 }
@@ -1095,7 +1095,7 @@ bool parseStyle(string str, out pango.types.Style style, bool warn) nothrow
 bool parseVariant(string str, out pango.types.Variant variant, bool warn) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)pango_parse_variant(_str, &variant, warn);
   return _retval;
 }
@@ -1116,7 +1116,7 @@ bool parseVariant(string str, out pango.types.Variant variant, bool warn) nothro
 bool parseWeight(string str, out pango.types.Weight weight, bool warn) nothrow
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)pango_parse_weight(_str, &weight, warn);
   return _retval;
 }
@@ -1355,7 +1355,7 @@ void shapeWithFlags(string itemText, string paragraphText, pango.analysis.Analys
 string[] splitFileList(string str) nothrow
 {
   char** _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = pango_split_file_list(_str);
   string[] _retval;
 
@@ -1366,7 +1366,7 @@ string[] splitFileList(string str) nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -1416,9 +1416,9 @@ void tailorBreak(string text, pango.analysis.Analysis analysis, int offset, pang
 string trimString(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = pango_trim_string(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1525,7 +1525,7 @@ string versionCheck(int requiredMajor, int requiredMinor, int requiredMicro) not
 {
   const(char)* _cretval;
   _cretval = pango_version_check(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1542,6 +1542,6 @@ string versionString() nothrow
 {
   const(char)* _cretval;
   _cretval = pango_version_string();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }

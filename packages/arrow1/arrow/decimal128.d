@@ -62,7 +62,7 @@ class Decimal128 : gobject.object.ObjectWrap
   static arrow.decimal128.Decimal128 newString(string data)
   {
     GArrowDecimal128* _cretval;
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_decimal128_new_string(_data, &_err);
     if (_err)
@@ -219,7 +219,7 @@ class Decimal128 : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_decimal128_to_string(cast(GArrowDecimal128*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class Decimal128 : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_decimal128_to_string_scale(cast(GArrowDecimal128*)this._cPtr, scale);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

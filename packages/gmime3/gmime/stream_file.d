@@ -102,8 +102,8 @@ class StreamFile : gmime.stream.Stream
   static gmime.stream.Stream open(string path, string mode)
   {
     GMimeStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _mode = mode.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _mode = mode.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_mime_stream_file_open(_path, _mode, &_err);
     if (_err)

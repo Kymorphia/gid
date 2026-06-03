@@ -91,7 +91,7 @@ class FilterChecksum : gmime.filter.Filter
   {
     char* _cretval;
     _cretval = g_mime_filter_checksum_get_string(cast(GMimeFilterChecksum*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

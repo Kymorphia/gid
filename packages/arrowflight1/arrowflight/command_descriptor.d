@@ -51,7 +51,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   this(string command) nothrow
   {
     GAFlightCommandDescriptor* _cretval;
-    const(char)* _command = command.toCString(No.Alloc);
+    const(char)* _command = command.toCString!(No.Malloc, No.Nullable);
     _cretval = gaflight_command_descriptor_new(_command);
     this(_cretval, Yes.Take);
   }
@@ -61,7 +61,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   {
     char* _cretval;
     _cretval = gaflight_command_descriptor_get_command(cast(GAFlightCommandDescriptor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

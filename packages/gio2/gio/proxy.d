@@ -45,7 +45,7 @@ interface Proxy
   static gio.proxy.Proxy getDefaultForProtocol(string protocol) nothrow
   {
     GProxy* _cretval;
-    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
     _cretval = g_proxy_get_default_for_protocol(_protocol);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.proxy.Proxy)(cast(GProxy*)_cretval, Yes.Take);
     return _retval;

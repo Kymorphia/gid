@@ -85,7 +85,7 @@ class Context : gobject.boxed.Boxed
   this(string contextType, bool persistent) nothrow
   {
     GstContext* _cretval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_context_new(_contextType, persistent);
     this(_cretval, Yes.Take);
   }
@@ -98,7 +98,7 @@ class Context : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_context_get_context_type(cast(const(GstContext)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class Context : gobject.boxed.Boxed
   bool hasContextType(string contextType) nothrow
   {
     bool _retval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_context_has_context_type(cast(const(GstContext)*)this._cPtr, _contextType);
     return _retval;
   }

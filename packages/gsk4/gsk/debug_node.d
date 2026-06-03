@@ -35,7 +35,7 @@ class DebugNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, string message) nothrow
   {
     GskRenderNode* _cretval;
-    char* _message = message.toCString(Yes.Alloc);
+    char* _message = message.toCString!(Yes.Malloc, No.Nullable);
     _cretval = gsk_debug_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, _message);
     this(_cretval, Yes.Take);
   }
@@ -60,7 +60,7 @@ class DebugNode : gsk.render_node.RenderNode
   {
     const(char)* _cretval;
     _cretval = gsk_debug_node_get_message(cast(const(GskRenderNode)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

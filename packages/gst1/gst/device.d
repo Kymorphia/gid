@@ -96,7 +96,7 @@ class Device : gst.object.ObjectWrap
   gst.element.Element createElement(string name = null) nothrow
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_device_create_element(cast(GstDevice*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
@@ -125,7 +125,7 @@ class Device : gst.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gst_device_get_device_class(cast(GstDevice*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Device : gst.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gst_device_get_display_name(cast(GstDevice*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class Device : gst.object.ObjectWrap
   bool hasClasses(string classes) nothrow
   {
     bool _retval;
-    const(char)* _classes = classes.toCString(No.Alloc);
+    const(char)* _classes = classes.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_device_has_classes(cast(GstDevice*)this._cPtr, _classes);
     return _retval;
   }
@@ -183,7 +183,7 @@ class Device : gst.object.ObjectWrap
     bool _retval;
     char*[] _tmpclasses;
     foreach (s; classes)
-      _tmpclasses ~= s.toCString(No.Alloc);
+      _tmpclasses ~= s.toCString;
     _tmpclasses ~= null;
     char** _classes = _tmpclasses.ptr;
 

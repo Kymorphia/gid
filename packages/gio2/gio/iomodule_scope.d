@@ -43,7 +43,7 @@ class IOModuleScope
   */
   void block(string basename) nothrow
   {
-    const(char)* _basename = basename.toCString(No.Alloc);
+    const(char)* _basename = basename.toCString!(No.Malloc, No.Nullable);
     g_io_module_scope_block(cast(GIOModuleScope*)this._cPtr, _basename);
   }
 }

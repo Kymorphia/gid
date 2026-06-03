@@ -73,7 +73,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
   */
   void finish(gio.input_stream.InputStream stream, long streamLength, string contentType = null) nothrow
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, Yes.Nullable);
     webkit_uri_scheme_request_finish(cast(WebKitURISchemeRequest*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, streamLength, _contentType);
   }
 
@@ -131,7 +131,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_http_method(cast(WebKitURISchemeRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_path(cast(WebKitURISchemeRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_scheme(cast(WebKitURISchemeRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_uri(cast(WebKitURISchemeRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

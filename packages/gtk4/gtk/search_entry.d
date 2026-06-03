@@ -262,7 +262,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     const(char)* _cretval;
     _cretval = gtk_search_entry_get_placeholder_text(cast(GtkSearchEntry*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setPlaceholderText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     gtk_search_entry_set_placeholder_text(cast(GtkSearchEntry*)this._cPtr, _text);
   }
 

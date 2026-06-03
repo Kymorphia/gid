@@ -242,7 +242,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   this(string contentType) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_app_chooser_widget_new(_contentType);
     this(_cretval, No.Take);
   }
@@ -256,7 +256,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_widget_get_default_text(cast(GtkAppChooserWidget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   */
   void setDefaultText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_app_chooser_widget_set_default_text(cast(GtkAppChooserWidget*)this._cPtr, _text);
   }
 

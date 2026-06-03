@@ -1323,7 +1323,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     }
     auto _funcCB = func ? &_funcCallback : null;
     int _retval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _retval = gtk_tree_view_insert_column_with_data_func(cast(GtkTreeView*)this._cPtr, position, _title, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
@@ -1957,7 +1957,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewSearchEqualFunc*)searchData;
-      string _key = key.fromCString(No.Free);
+      string _key = key.fromCString!(No.Free);
 
       try
       {

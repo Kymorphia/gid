@@ -208,7 +208,7 @@ class GlyphItem : gobject.boxed.Boxed
   pango.glyph_item.GlyphItem[] applyAttrs(string text, pango.attr_list.AttrList list) nothrow
   {
     GSList* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)this._cPtr, _text, list ? cast(PangoAttrList*)list._cPtr(No.Dup) : null);
     auto _retval = gSListToD!(pango.glyph_item.GlyphItem, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
@@ -250,7 +250,7 @@ class GlyphItem : gobject.boxed.Boxed
   pango.glyph_item.GlyphItem split(string text, int splitIndex) nothrow
   {
     PangoGlyphItem* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_glyph_item_split(cast(PangoGlyphItem*)this._cPtr, _text, splitIndex);
     auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

@@ -148,7 +148,7 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = garrow_record_batch_get_column_name(cast(GArrowRecordBatch*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class RecordBatch : gobject.object.ObjectWrap
     _cretval = garrow_record_batch_to_string(cast(GArrowRecordBatch*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

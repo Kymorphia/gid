@@ -106,7 +106,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
   */
   void embed(string plugId) nothrow
   {
-    const(char)* _plugId = plugId.toCString(No.Alloc);
+    const(char)* _plugId = plugId.toCString!(No.Malloc, No.Nullable);
     atk_socket_embed(cast(AtkSocket*)this._cPtr, _plugId);
   }
 

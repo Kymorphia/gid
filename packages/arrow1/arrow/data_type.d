@@ -92,7 +92,7 @@ class DataType : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_data_type_get_name(cast(GArrowDataType*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class DataType : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_data_type_to_string(cast(GArrowDataType*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

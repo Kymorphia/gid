@@ -86,7 +86,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   this(gobject.object.ObjectWrap object, string propertyName) nothrow
   {
     AdwAnimationTarget* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_property_animation_target_new(object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
     this(_cretval, Yes.Take);
   }

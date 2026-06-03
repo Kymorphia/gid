@@ -42,7 +42,7 @@ template DesktopAppInfoLookupT()
   override gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme) nothrow
   {
     GAppInfo* _cretval;
-    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
+    const(char)* _uriScheme = uriScheme.toCString!(No.Malloc, No.Nullable);
     _cretval = g_desktop_app_info_lookup_get_default_for_uri_scheme(cast(GDesktopAppInfoLookup*)this._cPtr, _uriScheme);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;

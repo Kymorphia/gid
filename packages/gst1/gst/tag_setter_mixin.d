@@ -66,7 +66,7 @@ template TagSetterT()
   */
   override void addTagValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value) nothrow
   {
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     gst_tag_setter_add_tag_value(cast(GstTagSetter*)this._cPtr, mode, _tag, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 

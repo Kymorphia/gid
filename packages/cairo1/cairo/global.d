@@ -219,7 +219,7 @@ cairo.surface.Surface imageSurfaceCreate(cairo.types.Format format, int width, i
 cairo.surface.Surface imageSurfaceCreateFromPng(string filename) nothrow
 {
   cairo_surface_t* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _cretval = cairo_image_surface_create_from_png(_filename);
   auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1030,8 +1030,8 @@ void pdfGetVersions(out cairo.types.PdfVersion[] versions) nothrow
 int pdfSurfaceAddOutline(cairo.surface.Surface surface, int parentId, string utf8, string linkAttribs, cairo.types.PdfOutlineFlags flags) nothrow
 {
   int _retval;
-  const(char)* _utf8 = utf8.toCString(No.Alloc);
-  const(char)* _linkAttribs = linkAttribs.toCString(No.Alloc);
+  const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
+  const(char)* _linkAttribs = linkAttribs.toCString!(No.Malloc, No.Nullable);
   _retval = cairo_pdf_surface_add_outline(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, parentId, _utf8, _linkAttribs, flags);
   return _retval;
 }
@@ -1058,7 +1058,7 @@ int pdfSurfaceAddOutline(cairo.surface.Surface surface, int parentId, string utf
 cairo.surface.Surface pdfSurfaceCreate(string filename, double widthInPoints, double heightInPoints) nothrow
 {
   cairo_surface_t* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _cretval = cairo_pdf_surface_create(_filename, widthInPoints, heightInPoints);
   auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1151,8 +1151,8 @@ void pdfSurfaceRestrictToVersion(cairo.surface.Surface surface, cairo.types.PdfV
 */
 void pdfSurfaceSetCustomMetadata(cairo.surface.Surface surface, string name, string value) nothrow
 {
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   cairo_pdf_surface_set_custom_metadata(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, _name, _value);
 }
 
@@ -1176,7 +1176,7 @@ void pdfSurfaceSetCustomMetadata(cairo.surface.Surface surface, string name, str
 */
 void pdfSurfaceSetMetadata(cairo.surface.Surface surface, cairo.types.PdfMetadata metadata, string utf8) nothrow
 {
-  const(char)* _utf8 = utf8.toCString(No.Alloc);
+  const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
   cairo_pdf_surface_set_metadata(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, metadata, _utf8);
 }
 
@@ -1189,7 +1189,7 @@ void pdfSurfaceSetMetadata(cairo.surface.Surface surface, cairo.types.PdfMetadat
 */
 void pdfSurfaceSetPageLabel(cairo.surface.Surface surface, string utf8) nothrow
 {
-  const(char)* _utf8 = utf8.toCString(No.Alloc);
+  const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
   cairo_pdf_surface_set_page_label(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, _utf8);
 }
 
@@ -1241,7 +1241,7 @@ string pdfVersionToString(cairo.types.PdfVersion version_) nothrow
 {
   const(char)* _cretval;
   _cretval = cairo_pdf_version_to_string(version_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1274,7 +1274,7 @@ string psLevelToString(cairo.types.PsLevel level) nothrow
 {
   const(char)* _cretval;
   _cretval = cairo_ps_level_to_string(level);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1305,7 +1305,7 @@ string psLevelToString(cairo.types.PsLevel level) nothrow
 cairo.surface.Surface psSurfaceCreate(string filename, double widthInPoints, double heightInPoints) nothrow
 {
   cairo_surface_t* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _cretval = cairo_ps_surface_create(_filename, widthInPoints, heightInPoints);
   auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1493,7 +1493,7 @@ void psSurfaceDscBeginSetup(cairo.surface.Surface surface) nothrow
 */
 void psSurfaceDscComment(cairo.surface.Surface surface, string comment) nothrow
 {
-  const(char)* _comment = comment.toCString(No.Alloc);
+  const(char)* _comment = comment.toCString!(No.Malloc, No.Nullable);
   cairo_ps_surface_dsc_comment(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, _comment);
 }
 
@@ -1752,7 +1752,7 @@ cairo.scaled_font.ScaledFont scaledFontCreate(cairo.font_face.FontFace fontFace,
 cairo.device.Device scriptCreate(string filename) nothrow
 {
   cairo_device_t* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _cretval = cairo_script_create(_filename);
   auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1920,7 +1920,7 @@ string statusToString(cairo.types.Status status) nothrow
 {
   const(char)* _cretval;
   _cretval = cairo_status_to_string(status);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1981,7 +1981,7 @@ void svgGetVersions(out cairo.types.SvgVersion[] versions) nothrow
 cairo.surface.Surface svgSurfaceCreate(string filename, double widthInPoints, double heightInPoints) nothrow
 {
   cairo_surface_t* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   _cretval = cairo_svg_surface_create(_filename, widthInPoints, heightInPoints);
   auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -2112,7 +2112,7 @@ string svgVersionToString(cairo.types.SvgVersion version_) nothrow
 {
   const(char)* _cretval;
   _cretval = cairo_svg_version_to_string(version_);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2231,7 +2231,7 @@ cairo.text_cluster.TextCluster textClusterAllocate(int numClusters) nothrow
 cairo.font_face.FontFace toyFontFaceCreate(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight) nothrow
 {
   cairo_font_face_t* _cretval;
-  const(char)* _family = family.toCString(No.Alloc);
+  const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
   _cretval = cairo_toy_font_face_create(_family, slant, weight);
   auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -2249,7 +2249,7 @@ string toyFontFaceGetFamily(cairo.font_face.FontFace fontFace) nothrow
 {
   const(char)* _cretval;
   _cretval = cairo_toy_font_face_get_family(fontFace ? cast(cairo_font_face_t*)fontFace._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -2441,6 +2441,6 @@ string versionString() nothrow
 {
   const(char)* _cretval;
   _cretval = cairo_version_string();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }

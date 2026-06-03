@@ -264,7 +264,7 @@ class AlertDialog : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -299,7 +299,7 @@ class AlertDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_detail(cast(GtkAlertDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class AlertDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_message(cast(GtkAlertDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -337,7 +337,7 @@ class AlertDialog : gobject.object.ObjectWrap
   {
     char*[] _tmplabels;
     foreach (s; labels)
-      _tmplabels ~= s.toCString(No.Alloc);
+      _tmplabels ~= s.toCString;
     _tmplabels ~= null;
     const(char*)* _labels = _tmplabels.ptr;
 
@@ -380,7 +380,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void setDetail(string detail) nothrow
   {
-    const(char)* _detail = detail.toCString(No.Alloc);
+    const(char)* _detail = detail.toCString!(No.Malloc, No.Nullable);
     gtk_alert_dialog_set_detail(cast(GtkAlertDialog*)this._cPtr, _detail);
   }
 
@@ -392,7 +392,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void setMessage(string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     gtk_alert_dialog_set_message(cast(GtkAlertDialog*)this._cPtr, _message);
   }
 

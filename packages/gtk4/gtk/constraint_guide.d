@@ -261,7 +261,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   {
     const(char)* _cretval;
     _cretval = gtk_constraint_guide_get_name(cast(GtkConstraintGuide*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_constraint_guide_set_name(cast(GtkConstraintGuide*)this._cPtr, _name);
   }
 

@@ -87,7 +87,7 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   this(string title) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_color_selection_dialog_new(_title);
     this(_cretval, No.Take);
   }

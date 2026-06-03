@@ -269,7 +269,7 @@ class Generator : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = json_generator_to_data(cast(JsonGenerator*)this._cPtr, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class Generator : gobject.object.ObjectWrap
   bool toFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)json_generator_to_file(cast(JsonGenerator*)this._cPtr, _filename, &_err);
     if (_err)

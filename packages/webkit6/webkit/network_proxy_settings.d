@@ -90,10 +90,10 @@ class NetworkProxySettings : gobject.boxed.Boxed
   this(string defaultProxyUri = null, string[] ignoreHosts = null) nothrow
   {
     WebKitNetworkProxySettings* _cretval;
-    const(char)* _defaultProxyUri = defaultProxyUri.toCString(No.Alloc);
+    const(char)* _defaultProxyUri = defaultProxyUri.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString(No.Alloc);
+      _tmpignoreHosts ~= s.toCString;
     _tmpignoreHosts ~= null;
     const(char*)* _ignoreHosts = _tmpignoreHosts.ptr;
 
@@ -114,8 +114,8 @@ class NetworkProxySettings : gobject.boxed.Boxed
   */
   void addProxyForScheme(string scheme, string proxyUri) nothrow
   {
-    const(char)* _scheme = scheme.toCString(No.Alloc);
-    const(char)* _proxyUri = proxyUri.toCString(No.Alloc);
+    const(char)* _scheme = scheme.toCString!(No.Malloc, No.Nullable);
+    const(char)* _proxyUri = proxyUri.toCString!(No.Malloc, No.Nullable);
     webkit_network_proxy_settings_add_proxy_for_scheme(cast(WebKitNetworkProxySettings*)this._cPtr, _scheme, _proxyUri);
   }
 

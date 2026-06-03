@@ -100,10 +100,10 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
     GtkAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_recent_action_new(_name, _label, _tooltip, _stockId);
     this(_cretval, Yes.Take);
   }
@@ -127,10 +127,10 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   static gtk.recent_action.RecentAction newForManager(string name, string label = null, string tooltip = null, string stockId = null, gtk.recent_manager.RecentManager manager = null) nothrow
   {
     GtkAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_recent_action_new_for_manager(_name, _label, _tooltip, _stockId, manager ? cast(GtkRecentManager*)manager._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.Take);
     return _retval;

@@ -74,7 +74,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   this(string signalName) nothrow
   {
     GtkShortcutAction* _cretval;
-    const(char)* _signalName = signalName.toCString(No.Alloc);
+    const(char)* _signalName = signalName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_signal_action_new(_signalName);
     this(_cretval, Yes.Take);
   }
@@ -87,7 +87,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   {
     const(char)* _cretval;
     _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

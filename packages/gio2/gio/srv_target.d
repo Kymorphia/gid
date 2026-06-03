@@ -76,7 +76,7 @@ class SrvTarget : gobject.boxed.Boxed
   this(string hostname, ushort port, ushort priority, ushort weight) nothrow
   {
     GSrvTarget* _cretval;
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
     _cretval = g_srv_target_new(_hostname, port, priority, weight);
     this(_cretval, Yes.Take);
   }
@@ -104,7 +104,7 @@ class SrvTarget : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_srv_target_get_hostname(cast(GSrvTarget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

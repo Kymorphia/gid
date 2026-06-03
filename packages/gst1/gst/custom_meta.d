@@ -77,7 +77,7 @@ class CustomMeta
   bool hasName(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_custom_meta_has_name(cast(GstCustomMeta*)this._cPtr, _name);
     return _retval;
   }

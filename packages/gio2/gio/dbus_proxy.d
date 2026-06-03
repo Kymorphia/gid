@@ -327,9 +327,9 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   static gio.dbus_proxy.DBusProxy newForBusSync(gio.types.BusType busType, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusProxy* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dbus_proxy_new_for_bus_sync(busType, flags, info ? cast(GDBusInterfaceInfo*)info._cPtr(No.Dup) : null, _name, _objectPath, _interfaceName, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -377,9 +377,9 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   static gio.dbus_proxy.DBusProxy newSync(gio.dbus_connection.DBusConnection connection, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusProxy* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dbus_proxy_new_sync(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, flags, info ? cast(GDBusInterfaceInfo*)info._cPtr(No.Dup) : null, _name, _objectPath, _interfaceName, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -444,9 +444,9 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_proxy_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, flags, info ? cast(GDBusInterfaceInfo*)info._cPtr(No.Dup) : null, _name, _objectPath, _interfaceName, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -483,9 +483,9 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_proxy_new_for_bus(busType, flags, info ? cast(GDBusInterfaceInfo*)info._cPtr(No.Dup) : null, _name, _objectPath, _interfaceName, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -561,7 +561,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_proxy_call(cast(GDBusProxy*)this._cPtr, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, flags, timeoutMsec, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -637,7 +637,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   glib.variant.Variant callSync(string methodName, glib.variant.Variant parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null)
   {
     GVariant* _cretval;
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_dbus_proxy_call_sync(cast(GDBusProxy*)this._cPtr, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, flags, timeoutMsec, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -679,7 +679,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_proxy_call_with_unix_fd_list(cast(GDBusProxy*)this._cPtr, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, flags, timeoutMsec, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -729,7 +729,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   glib.variant.Variant callWithUnixFdListSync(string methodName, glib.variant.Variant parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, out gio.unix_fdlist.UnixFDList outFdList, gio.cancellable.Cancellable cancellable = null)
   {
     GVariant* _cretval;
-    const(char)* _methodName = methodName.toCString(No.Alloc);
+    const(char)* _methodName = methodName.toCString!(No.Malloc, No.Nullable);
     GUnixFDList* _outFdList;
     GError *_err;
     _cretval = g_dbus_proxy_call_with_unix_fd_list_sync(cast(GDBusProxy*)this._cPtr, _methodName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, flags, timeoutMsec, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null, &_outFdList, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
@@ -757,7 +757,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   glib.variant.Variant getCachedProperty(string propertyName) nothrow
   {
     GVariant* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_proxy_get_cached_property(cast(GDBusProxy*)this._cPtr, _propertyName);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -783,7 +783,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -851,7 +851,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   {
     const(char)* _cretval;
     _cretval = g_dbus_proxy_get_interface_name(cast(GDBusProxy*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -867,7 +867,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   {
     const(char)* _cretval;
     _cretval = g_dbus_proxy_get_name(cast(GDBusProxy*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -883,7 +883,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   {
     char* _cretval;
     _cretval = g_dbus_proxy_get_name_owner(cast(GDBusProxy*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -895,7 +895,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   {
     const(char)* _cretval;
     _cretval = g_dbus_proxy_get_object_path(cast(GDBusProxy*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -940,7 +940,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   */
   void setCachedProperty(string propertyName, glib.variant.Variant value = null) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     g_dbus_proxy_set_cached_property(cast(GDBusProxy*)this._cPtr, _propertyName, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 

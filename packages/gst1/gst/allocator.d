@@ -74,7 +74,7 @@ class Allocator : gst.object.ObjectWrap
   static gst.allocator.Allocator find(string name = null) nothrow
   {
     GstAllocator* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_allocator_find(_name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
@@ -89,7 +89,7 @@ class Allocator : gst.object.ObjectWrap
   */
   static void register(string name, gst.allocator.Allocator allocator) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gst_allocator_register(_name, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null);
   }
 

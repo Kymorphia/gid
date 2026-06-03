@@ -60,7 +60,7 @@ class Descriptor : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gaflight_descriptor_to_string(cast(GAFlightDescriptor*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

@@ -85,7 +85,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
   static gmime.multipart_encrypted.MultipartEncrypted encrypt(gmime.crypto_context.CryptoContext ctx, gmime.object.ObjectWrap entity, bool sign, string userid, gmime.types.EncryptFlags flags, string[] recipients)
   {
     GMimeMultipartEncrypted* _cretval;
-    const(char)* _userid = userid.toCString(No.Alloc);
+    const(char)* _userid = userid.toCString!(No.Malloc, Yes.Nullable);
     auto _recipients = gPtrArrayFromD!(string, false)(recipients);
     scope(exit) containerFree!(GPtrArray*, string, GidOwnership.None)(_recipients);
     GError *_err;
@@ -122,7 +122,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
   gmime.object.ObjectWrap decrypt(gmime.types.DecryptFlags flags, string sessionKey, out gmime.decrypt_result.DecryptResult result)
   {
     GMimeObject* _cretval;
-    const(char)* _sessionKey = sessionKey.toCString(No.Alloc);
+    const(char)* _sessionKey = sessionKey.toCString!(No.Malloc, Yes.Nullable);
     GMimeDecryptResult* _result;
     GError *_err;
     _cretval = g_mime_multipart_encrypted_decrypt(cast(GMimeMultipartEncrypted*)this._cPtr, flags, _sessionKey, &_result, &_err);

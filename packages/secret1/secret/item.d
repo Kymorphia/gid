@@ -162,7 +162,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_item_create(collection ? cast(SecretCollection*)collection._cPtr(No.Dup) : null, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -215,7 +215,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     SecretItem* _cretval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = secret_item_create_sync(collection ? cast(SecretCollection*)collection._cPtr(No.Dup) : null, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -441,7 +441,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   {
     char* _cretval;
     _cretval = secret_item_get_label(cast(SecretItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   {
     char* _cretval;
     _cretval = secret_item_get_schema_name(cast(SecretItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -722,7 +722,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_item_set_label(cast(SecretItem*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -760,7 +760,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)secret_item_set_label_sync(cast(SecretItem*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

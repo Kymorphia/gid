@@ -65,7 +65,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   this(string title) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_font_selection_dialog_new(_title);
     this(_cretval, No.Take);
   }
@@ -103,7 +103,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     char* _cretval;
     _cretval = gtk_font_selection_dialog_get_font_name(cast(GtkFontSelectionDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = gtk_font_selection_dialog_get_preview_text(cast(GtkFontSelectionDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   bool setFontName(string fontname) nothrow
   {
     bool _retval;
-    const(char)* _fontname = fontname.toCString(No.Alloc);
+    const(char)* _fontname = fontname.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_font_selection_dialog_set_font_name(cast(GtkFontSelectionDialog*)this._cPtr, _fontname);
     return _retval;
   }
@@ -180,7 +180,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   */
   void setPreviewText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_font_selection_dialog_set_preview_text(cast(GtkFontSelectionDialog*)this._cPtr, _text);
   }
 }

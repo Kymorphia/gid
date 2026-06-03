@@ -113,7 +113,7 @@ class Notification : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_notification_get_body(cast(WebKitNotification*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Notification : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_notification_get_tag(cast(WebKitNotification*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Notification : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_notification_get_title(cast(WebKitNotification*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -439,7 +439,7 @@ template ToplevelT()
   */
   override void setStartupId(string startupId) nothrow
   {
-    const(char)* _startupId = startupId.toCString(No.Alloc);
+    const(char)* _startupId = startupId.toCString!(No.Malloc, No.Nullable);
     gdk_toplevel_set_startup_id(cast(GdkToplevel*)this._cPtr, _startupId);
   }
 
@@ -454,7 +454,7 @@ template ToplevelT()
   */
   override void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gdk_toplevel_set_title(cast(GdkToplevel*)this._cPtr, _title);
   }
 

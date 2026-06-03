@@ -158,7 +158,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   gio.dbus_method_info.DBusMethodInfo lookupMethod(string name) nothrow
   {
     GDBusMethodInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_interface_info_lookup_method(cast(GDBusInterfaceInfo*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.dbus_method_info.DBusMethodInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -177,7 +177,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   gio.dbus_property_info.DBusPropertyInfo lookupProperty(string name) nothrow
   {
     GDBusPropertyInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_interface_info_lookup_property(cast(GDBusInterfaceInfo*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.dbus_property_info.DBusPropertyInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -196,7 +196,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   gio.dbus_signal_info.DBusSignalInfo lookupSignal(string name) nothrow
   {
     GDBusSignalInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_interface_info_lookup_signal(cast(GDBusInterfaceInfo*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.dbus_signal_info.DBusSignalInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;

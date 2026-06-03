@@ -180,7 +180,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   static gtk.font_button.FontButton newWithFont(string fontname) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _fontname = fontname.toCString(No.Alloc);
+    const(char)* _fontname = fontname.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_font_button_new_with_font(_fontname);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -210,7 +210,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   {
     const(char)* _cretval;
     _cretval = gtk_font_button_get_title(cast(GtkFontButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_font_button_set_title(cast(GtkFontButton*)this._cPtr, _title);
   }
 

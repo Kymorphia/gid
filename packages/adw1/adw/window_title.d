@@ -126,8 +126,8 @@ class WindowTitle : gtk.widget.Widget
   this(string title, string subtitle) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
-    const(char)* _subtitle = subtitle.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_window_title_new(_title, _subtitle);
     this(_cretval, No.Take);
   }
@@ -140,7 +140,7 @@ class WindowTitle : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_window_title_get_subtitle(cast(AdwWindowTitle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class WindowTitle : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_window_title_get_title(cast(AdwWindowTitle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class WindowTitle : gtk.widget.Widget
   */
   void setSubtitle(string subtitle) nothrow
   {
-    const(char)* _subtitle = subtitle.toCString(No.Alloc);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
     adw_window_title_set_subtitle(cast(AdwWindowTitle*)this._cPtr, _subtitle);
   }
 
@@ -181,7 +181,7 @@ class WindowTitle : gtk.widget.Widget
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_window_title_set_title(cast(AdwWindowTitle*)this._cPtr, _title);
   }
 }

@@ -99,7 +99,7 @@ class CapsFeatures : gobject.boxed.Boxed
   static gst.caps_features.CapsFeatures newSingle(string feature) nothrow
   {
     GstCapsFeatures* _cretval;
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_caps_features_new_single(_feature);
     auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -113,7 +113,7 @@ class CapsFeatures : gobject.boxed.Boxed
   */
   void add(string feature) nothrow
   {
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
     gst_caps_features_add(cast(GstCapsFeatures*)this._cPtr, _feature);
   }
 
@@ -138,7 +138,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool contains(string feature) nothrow
   {
     bool _retval;
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_caps_features_contains(cast(const(GstCapsFeatures)*)this._cPtr, _feature);
     return _retval;
   }
@@ -180,7 +180,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_caps_features_get_nth(cast(const(GstCapsFeatures)*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class CapsFeatures : gobject.boxed.Boxed
   */
   void remove(string feature) nothrow
   {
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
     gst_caps_features_remove(cast(GstCapsFeatures*)this._cPtr, _feature);
   }
 
@@ -273,7 +273,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_caps_features_to_string(cast(const(GstCapsFeatures)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class CapsFeatures : gobject.boxed.Boxed
   static gst.caps_features.CapsFeatures fromString(string features) nothrow
   {
     GstCapsFeatures* _cretval;
-    const(char)* _features = features.toCString(No.Alloc);
+    const(char)* _features = features.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_caps_features_from_string(_features);
     auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

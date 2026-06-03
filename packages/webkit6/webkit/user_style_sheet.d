@@ -67,16 +67,16 @@ class UserStyleSheet : gobject.boxed.Boxed
   this(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserStyleLevel level, string[] allowList = null, string[] blockList = null) nothrow
   {
     WebKitUserStyleSheet* _cretval;
-    const(char)* _source = source.toCString(No.Alloc);
+    const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpallowList;
     foreach (s; allowList)
-      _tmpallowList ~= s.toCString(No.Alloc);
+      _tmpallowList ~= s.toCString;
     _tmpallowList ~= null;
     const(char*)* _allowList = _tmpallowList.ptr;
 
     char*[] _tmpblockList;
     foreach (s; blockList)
-      _tmpblockList ~= s.toCString(No.Alloc);
+      _tmpblockList ~= s.toCString;
     _tmpblockList ~= null;
     const(char*)* _blockList = _tmpblockList.ptr;
 
@@ -102,17 +102,17 @@ class UserStyleSheet : gobject.boxed.Boxed
   static webkit.user_style_sheet.UserStyleSheet newForWorld(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserStyleLevel level, string worldName, string[] allowList = null, string[] blockList = null) nothrow
   {
     WebKitUserStyleSheet* _cretval;
-    const(char)* _source = source.toCString(No.Alloc);
-    const(char)* _worldName = worldName.toCString(No.Alloc);
+    const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
+    const(char)* _worldName = worldName.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpallowList;
     foreach (s; allowList)
-      _tmpallowList ~= s.toCString(No.Alloc);
+      _tmpallowList ~= s.toCString;
     _tmpallowList ~= null;
     const(char*)* _allowList = _tmpallowList.ptr;
 
     char*[] _tmpblockList;
     foreach (s; blockList)
-      _tmpblockList ~= s.toCString(No.Alloc);
+      _tmpblockList ~= s.toCString;
     _tmpblockList ~= null;
     const(char*)* _blockList = _tmpblockList.ptr;
 

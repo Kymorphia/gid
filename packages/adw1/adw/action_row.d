@@ -317,7 +317,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   {
     const(char)* _cretval;
     _cretval = adw_action_row_get_icon_name(cast(AdwActionRow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   {
     const(char)* _cretval;
     _cretval = adw_action_row_get_subtitle(cast(AdwActionRow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -409,7 +409,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     adw_action_row_set_icon_name(cast(AdwActionRow*)this._cPtr, _iconName);
   }
 
@@ -424,7 +424,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void setSubtitle(string subtitle) nothrow
   {
-    const(char)* _subtitle = subtitle.toCString(No.Alloc);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
     adw_action_row_set_subtitle(cast(AdwActionRow*)this._cPtr, _subtitle);
   }
 

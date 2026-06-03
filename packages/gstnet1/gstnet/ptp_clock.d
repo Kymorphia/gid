@@ -116,7 +116,7 @@ class PtpClock : gst.system_clock.SystemClock
   this(string name, uint domain) nothrow
   {
     GstClock* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_ptp_clock_new(_name, domain);
     this(_cretval, Yes.Take);
   }

@@ -404,7 +404,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = adw_split_button_get_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = adw_split_button_get_icon_name(cast(AdwSplitButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = adw_split_button_get_label(cast(AdwSplitButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -543,7 +543,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setDropdownTooltip(string tooltip) nothrow
   {
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, No.Nullable);
     adw_split_button_set_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr, _tooltip);
   }
 
@@ -558,7 +558,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setIconName(string iconName) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     adw_split_button_set_icon_name(cast(AdwSplitButton*)this._cPtr, _iconName);
   }
 
@@ -573,7 +573,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setLabel(string label) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     adw_split_button_set_label(cast(AdwSplitButton*)this._cPtr, _label);
   }
 

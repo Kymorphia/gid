@@ -379,7 +379,7 @@ class Transform : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gsk_transform_to_string(cast(GskTransform*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class Transform : gobject.boxed.Boxed
   static bool parse(string string_, out gsk.transform.Transform outTransform) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     GskTransform* _outTransform;
     _retval = cast(bool)gsk_transform_parse(_string_, &_outTransform);
     outTransform = new gsk.transform.Transform(cast(void*)_outTransform, Yes.Take);

@@ -22,7 +22,7 @@ struct Role
   static atk.types.Role forName(string name) nothrow
   {
     AtkRole _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_role_for_name(_name);
     atk.types.Role _retval = cast(atk.types.Role)_cretval;
     return _retval;
@@ -39,7 +39,7 @@ struct Role
   {
     const(char)* _cretval;
     _cretval = atk_role_get_localized_name(role);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ struct Role
   {
     const(char)* _cretval;
     _cretval = atk_role_get_name(role);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ struct Role
   static atk.types.Role register(string name) nothrow
   {
     AtkRole _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_role_register(_name);
     atk.types.Role _retval = cast(atk.types.Role)_cretval;
     return _retval;

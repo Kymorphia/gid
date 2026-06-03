@@ -63,7 +63,7 @@ class Range : gobject.boxed.Boxed
   this(double lowerLimit, double upperLimit, string description) nothrow
   {
     AtkRange* _cretval;
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_range_new(lowerLimit, upperLimit, _description);
     this(_cretval, Yes.Take);
   }
@@ -88,7 +88,7 @@ class Range : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = atk_range_get_description(cast(AtkRange*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

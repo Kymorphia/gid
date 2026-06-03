@@ -84,7 +84,7 @@ class EnumListItem : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = adw_enum_list_item_get_name(cast(AdwEnumListItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class EnumListItem : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = adw_enum_list_item_get_nick(cast(AdwEnumListItem*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

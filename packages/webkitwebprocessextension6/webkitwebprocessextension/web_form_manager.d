@@ -63,7 +63,7 @@ class WebFormManager : gobject.object.ObjectWrap
   */
   static void inputElementAutoFill(javascriptcore.value.Value element, string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     webkit_web_form_manager_input_element_auto_fill(element ? cast(JSCValue*)element._cPtr(No.Dup) : null, _value);
   }
 

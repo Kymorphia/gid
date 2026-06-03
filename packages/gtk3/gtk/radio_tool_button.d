@@ -114,7 +114,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     GtkToolItem* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_radio_tool_button_new_from_stock(_group, _stockId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
@@ -150,7 +150,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   static gtk.radio_tool_button.RadioToolButton newWithStockFromWidget(gtk.radio_tool_button.RadioToolButton group, string stockId) nothrow
   {
     GtkToolItem* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_radio_tool_button_new_with_stock_from_widget(group ? cast(GtkRadioToolButton*)group._cPtr(No.Dup) : null, _stockId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;

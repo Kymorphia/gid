@@ -129,7 +129,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
     extern(C) void _callbackCallback(GdaThreadWrapper* wrapper, void* instance, const(char)* signame, int nParamValues, const(GValue)* paramValues, void* gdaReserved, void* data) nothrow
     {
       auto _dlg = cast(gda.types.ThreadWrapperCallback*)data;
-      string _signame = signame.fromCString(No.Free);
+      string _signame = signame.fromCString!(No.Free);
 
       try
       {
@@ -142,7 +142,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     gulong _retval;
-    const(char)* _sigName = sigName.toCString(No.Alloc);
+    const(char)* _sigName = sigName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? cast(void*)&(callback) : null;
     _retval = gda_thread_wrapper_connect_raw(cast(GdaThreadWrapper*)this._cPtr, instance, _sigName, privateThread, privateJob, _callbackCB, _callback);
     return _retval;

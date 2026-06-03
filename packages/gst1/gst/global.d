@@ -50,13 +50,13 @@ void init_(ref string[] argv) nothrow
   scope(exit) gFree(_argv);
 
   foreach (i, a; argv)
-    _argv[i] = toCString(a, No.Alloc);
+    _argv[i] = a.toCString;
 
   gst_init(&_argc, &_argv);
 
   argv.length = _argc;
   foreach (i; 0 .. _argc)
-    argv[i] = fromCString(_argv[i], No.Free);
+    argv[i] = fromCString(_argv[i]);
 }
 
 /**
@@ -79,7 +79,7 @@ bool initCheck(ref string[] argv)
   scope(exit) gFree(_argv);
 
   foreach (i, a; argv)
-    _argv[i] = toCString(a, No.Alloc);
+    _argv[i] = a.toCString;
 
   GError *_err;
   gboolean _retval = gst_init_check(&_argc, &_argv, &_err);
@@ -89,7 +89,7 @@ bool initCheck(ref string[] argv)
 
   argv.length = _argc;
   foreach (i; 0 .. _argc)
-    argv[i] = fromCString(_argv[i], No.Free);
+    argv[i] = fromCString(_argv[i]);
 
   return cast(bool)_retval;
 }
@@ -107,8 +107,8 @@ void debugAddLogFunction(gst.types.LogFunction func) nothrow
   extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) nothrow
   {
     auto _dlg = cast(gst.types.LogFunction*)userData;
-    string _file = file.fromCString(No.Free);
-    string _function_ = function_.fromCString(No.Free);
+    string _file = file.fromCString!(No.Free);
+    string _function_ = function_.fromCString!(No.Free);
 
     try
     {
@@ -158,7 +158,7 @@ string debugBinToDotData(gst.bin.Bin bin, gst.types.DebugGraphDetails details) n
 {
   char* _cretval;
   _cretval = gst_debug_bin_to_dot_data(bin ? cast(GstBin*)bin._cPtr(No.Dup) : null, details);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -178,7 +178,7 @@ string debugBinToDotData(gst.bin.Bin bin, gst.types.DebugGraphDetails details) n
 */
 void debugBinToDotFile(gst.bin.Bin bin, gst.types.DebugGraphDetails details, string fileName) nothrow
 {
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   gst_debug_bin_to_dot_file(bin ? cast(GstBin*)bin._cPtr(No.Dup) : null, details, _fileName);
 }
 
@@ -193,7 +193,7 @@ void debugBinToDotFile(gst.bin.Bin bin, gst.types.DebugGraphDetails details, str
 */
 void debugBinToDotFileWithTs(gst.bin.Bin bin, gst.types.DebugGraphDetails details, string fileName) nothrow
 {
-  const(char)* _fileName = fileName.toCString(No.Alloc);
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
   gst_debug_bin_to_dot_file_with_ts(bin ? cast(GstBin*)bin._cPtr(No.Dup) : null, details, _fileName);
 }
 
@@ -211,7 +211,7 @@ string debugConstructTermColor(uint colorinfo) nothrow
 {
   char* _cretval;
   _cretval = gst_debug_construct_term_color(colorinfo);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -262,7 +262,7 @@ string debugGetStackTrace(gst.types.StackTraceFlags flags) nothrow
 {
   char* _cretval;
   _cretval = gst_debug_get_stack_trace(flags);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -312,8 +312,8 @@ bool debugIsColored() nothrow
 */
 void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, gst.debug_message.DebugMessage message, void* userData = null) nothrow
 {
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _function_ = function_.toCString(No.Alloc);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
   gst_debug_log_default(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, message ? cast(GstDebugMessage*)message._cPtr : null, userData);
 }
 
@@ -338,10 +338,10 @@ void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugL
 string debugLogGetLine(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, gst.debug_message.DebugMessage message) nothrow
 {
   char* _cretval;
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _function_ = function_.toCString(No.Alloc);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_debug_log_get_line(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, message ? cast(GstDebugMessage*)message._cPtr : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -360,10 +360,10 @@ string debugLogGetLine(gst.debug_category.DebugCategory category, gst.types.Debu
 */
 void debugLogIdLiteral(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, string id, string messageString) nothrow
 {
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _function_ = function_.toCString(No.Alloc);
-  const(char)* _id = id.toCString(No.Alloc);
-  const(char)* _messageString = messageString.toCString(No.Alloc);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _messageString = messageString.toCString!(No.Malloc, No.Nullable);
   gst_debug_log_id_literal(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, _id, _messageString);
 }
 
@@ -382,9 +382,9 @@ void debugLogIdLiteral(gst.debug_category.DebugCategory category, gst.types.Debu
 */
 void debugLogLiteral(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, string messageString) nothrow
 {
-  const(char)* _file = file.toCString(No.Alloc);
-  const(char)* _function_ = function_.toCString(No.Alloc);
-  const(char)* _messageString = messageString.toCString(No.Alloc);
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _messageString = messageString.toCString!(No.Malloc, No.Nullable);
   gst_debug_log_literal(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, _messageString);
 }
 
@@ -410,8 +410,8 @@ uint debugRemoveLogFunction(gst.types.LogFunction func = null) nothrow
   extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) nothrow
   {
     auto _dlg = cast(gst.types.LogFunction*)userData;
-    string _file = file.fromCString(No.Free);
-    string _function_ = function_.fromCString(No.Free);
+    string _file = file.fromCString!(No.Free);
+    string _function_ = function_.fromCString!(No.Free);
 
     try
     {
@@ -470,7 +470,7 @@ string[] debugRingBufferLoggerGetLogs() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -515,7 +515,7 @@ void debugSetColorMode(gst.types.DebugColorMode mode) nothrow
 */
 void debugSetColorModeFromString(string mode) nothrow
 {
-  const(char)* _mode = mode.toCString(No.Alloc);
+  const(char)* _mode = mode.toCString!(No.Malloc, No.Nullable);
   gst_debug_set_color_mode_from_string(_mode);
 }
 
@@ -558,7 +558,7 @@ void debugSetDefaultThreshold(gst.types.DebugLevel level) nothrow
 */
 void debugSetThresholdForName(string name, gst.types.DebugLevel level) nothrow
 {
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   gst_debug_set_threshold_for_name(_name, level);
 }
 
@@ -577,7 +577,7 @@ void debugSetThresholdForName(string name, gst.types.DebugLevel level) nothrow
 */
 void debugSetThresholdFromString(string list, bool reset) nothrow
 {
-  const(char)* _list = list.toCString(No.Alloc);
+  const(char)* _list = list.toCString!(No.Malloc, No.Nullable);
   gst_debug_set_threshold_from_string(_list, reset);
 }
 
@@ -589,7 +589,7 @@ void debugSetThresholdFromString(string list, bool reset) nothrow
 */
 void debugUnsetThresholdForName(string name) nothrow
 {
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   gst_debug_unset_threshold_for_name(_name);
 }
 
@@ -636,7 +636,7 @@ string errorGetMessage(glib.types.Quark domain, int code) nothrow
 {
   char* _cretval;
   _cretval = gst_error_get_message(domain, code);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -657,12 +657,12 @@ string errorGetMessage(glib.types.Quark domain, int code) nothrow
 string filenameToUri(string filename)
 {
   char* _cretval;
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = gst_filename_to_uri(_filename, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -677,7 +677,7 @@ string flowGetName(gst.types.FlowReturn ret) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_flow_get_name(ret);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -727,7 +727,7 @@ string getMainExecutablePath() nothrow
 {
   const(char)* _cretval;
   _cretval = gst_get_main_executable_path();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -774,9 +774,9 @@ bool isInitialized() nothrow
 gobject.param_spec.ParamSpec paramSpecArray(string name, string nick, string blurb, gobject.param_spec.ParamSpec elementSpec, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, No.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_param_spec_array(_name, _nick, _blurb, elementSpec ? cast(GParamSpec*)elementSpec._cPtr(No.Dup) : null, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -804,9 +804,9 @@ gobject.param_spec.ParamSpec paramSpecArray(string name, string nick, string blu
 gobject.param_spec.ParamSpec paramSpecFraction(string name, string nick, string blurb, int minNum, int minDenom, int maxNum, int maxDenom, int defaultNum, int defaultDenom, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _nick = nick.toCString(No.Alloc);
-  const(char)* _blurb = blurb.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _nick = nick.toCString!(No.Malloc, No.Nullable);
+  const(char)* _blurb = blurb.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_param_spec_fraction(_name, _nick, _blurb, minNum, minDenom, maxNum, maxDenom, defaultNum, defaultDenom, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
@@ -842,7 +842,7 @@ gobject.types.GType parentBufferMetaApiGetType() nothrow
 gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPads)
 {
   GstElement* _cretval;
-  const(char)* _binDescription = binDescription.toCString(No.Alloc);
+  const(char)* _binDescription = binDescription.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = gst_parse_bin_from_description(_binDescription, ghostUnlinkedPads, &_err);
   if (_err)
@@ -878,7 +878,7 @@ gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPad
 gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghostUnlinkedPads, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
   GstElement* _cretval;
-  const(char)* _binDescription = binDescription.toCString(No.Alloc);
+  const(char)* _binDescription = binDescription.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = gst_parse_bin_from_description_full(_binDescription, ghostUnlinkedPads, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
@@ -907,7 +907,7 @@ gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghos
 gst.element.Element parseLaunch(string pipelineDescription)
 {
   GstElement* _cretval;
-  const(char)* _pipelineDescription = pipelineDescription.toCString(No.Alloc);
+  const(char)* _pipelineDescription = pipelineDescription.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = gst_parse_launch(_pipelineDescription, &_err);
   if (_err)
@@ -940,7 +940,7 @@ gst.element.Element parseLaunch(string pipelineDescription)
 gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
   GstElement* _cretval;
-  const(char)* _pipelineDescription = pipelineDescription.toCString(No.Alloc);
+  const(char)* _pipelineDescription = pipelineDescription.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _cretval = gst_parse_launch_full(_pipelineDescription, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
@@ -965,7 +965,7 @@ gst.element.Element parseLaunchv(string[] argv)
   GstElement* _cretval;
   char*[] _tmpargv;
   foreach (s; argv)
-    _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= s.toCString;
   _tmpargv ~= null;
   const(char*)* _argv = _tmpargv.ptr;
 
@@ -999,7 +999,7 @@ gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseConte
   GstElement* _cretval;
   char*[] _tmpargv;
   foreach (s; argv)
-    _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= s.toCString;
   _tmpargv ~= null;
   const(char*)* _argv = _tmpargv.ptr;
 
@@ -1027,7 +1027,7 @@ string[] protectionFilterSystemsByAvailableDecryptors(string[] systemIdentifiers
   char** _cretval;
   char*[] _tmpsystemIdentifiers;
   foreach (s; systemIdentifiers)
-    _tmpsystemIdentifiers ~= s.toCString(No.Alloc);
+    _tmpsystemIdentifiers ~= s.toCString;
   _tmpsystemIdentifiers ~= null;
   const(char*)* _systemIdentifiers = _tmpsystemIdentifiers.ptr;
 
@@ -1041,7 +1041,7 @@ string[] protectionFilterSystemsByAvailableDecryptors(string[] systemIdentifiers
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
     gFree(cast(void*)_cretval);
   }
   return _retval;
@@ -1074,12 +1074,12 @@ string protectionSelectSystem(string[] systemIdentifiers) nothrow
   const(char)* _cretval;
   char*[] _tmpsystemIdentifiers;
   foreach (s; systemIdentifiers)
-    _tmpsystemIdentifiers ~= s.toCString(No.Alloc);
+    _tmpsystemIdentifiers ~= s.toCString;
   _tmpsystemIdentifiers ~= null;
   const(char*)* _systemIdentifiers = _tmpsystemIdentifiers.ptr;
 
   _cretval = gst_protection_select_system(_systemIdentifiers);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1146,7 +1146,7 @@ gobject.types.GType staticPadTemplateGetType() nothrow
 bool tagExists(string tag) nothrow
 {
   bool _retval;
-  const(char)* _tag = tag.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_tag_exists(_tag);
   return _retval;
 }
@@ -1162,9 +1162,9 @@ bool tagExists(string tag) nothrow
 string tagGetDescription(string tag) nothrow
 {
   const(char)* _cretval;
-  const(char)* _tag = tag.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_description(_tag);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1178,7 +1178,7 @@ string tagGetDescription(string tag) nothrow
 gst.types.TagFlag tagGetFlag(string tag) nothrow
 {
   GstTagFlag _cretval;
-  const(char)* _tag = tag.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_flag(_tag);
   gst.types.TagFlag _retval = cast(gst.types.TagFlag)_cretval;
   return _retval;
@@ -1195,9 +1195,9 @@ gst.types.TagFlag tagGetFlag(string tag) nothrow
 string tagGetNick(string tag) nothrow
 {
   const(char)* _cretval;
-  const(char)* _tag = tag.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_tag_get_nick(_tag);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -1211,7 +1211,7 @@ string tagGetNick(string tag) nothrow
 gobject.types.GType tagGetType(string tag) nothrow
 {
   gobject.types.GType _retval;
-  const(char)* _tag = tag.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
   _retval = gst_tag_get_type(_tag);
   return _retval;
 }
@@ -1227,7 +1227,7 @@ gobject.types.GType tagGetType(string tag) nothrow
 bool tagIsFixed(string tag) nothrow
 {
   bool _retval;
-  const(char)* _tag = tag.toCString(No.Alloc);
+  const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_tag_is_fixed(_tag);
   return _retval;
 }
@@ -1457,8 +1457,8 @@ void utilDumpMem(ubyte[] mem) nothrow
 int utilFilenameCompare(string a, string b) nothrow
 {
   int _retval;
-  const(char)* _a = a.toCString(No.Alloc);
-  const(char)* _b = b.toCString(No.Alloc);
+  const(char)* _a = a.toCString!(No.Malloc, No.Nullable);
+  const(char)* _b = b.toCString!(No.Malloc, No.Nullable);
   _retval = gst_util_filename_compare(_a, _b);
   return _retval;
 }
@@ -1556,7 +1556,7 @@ ulong utilGdoubleToGuint64(double value) nothrow
 bool utilGetObjectArray(gobject.object.ObjectWrap object, string name, out gobject.value_array.ValueArray array) nothrow
 {
   bool _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   GValueArray* _array;
   _retval = cast(bool)gst_util_get_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, &_array);
   array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
@@ -1684,8 +1684,8 @@ uint utilSeqnumNext() nothrow
 */
 void utilSetObjectArg(gobject.object.ObjectWrap object, string name, string value) nothrow
 {
-  const(char)* _name = name.toCString(No.Alloc);
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   gst_util_set_object_arg(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, _value);
 }
 
@@ -1703,7 +1703,7 @@ void utilSetObjectArg(gobject.object.ObjectWrap object, string name, string valu
 bool utilSetObjectArray(gobject.object.ObjectWrap object, string name, gobject.value_array.ValueArray array) nothrow
 {
   bool _retval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_util_set_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, array ? cast(const(GValueArray)*)array._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -1722,7 +1722,7 @@ bool utilSetObjectArray(gobject.object.ObjectWrap object, string name, gobject.v
 void utilSetValueFromString(out gobject.value.Value value, string valueStr) nothrow
 {
   GValue _value;
-  const(char)* _valueStr = valueStr.toCString(No.Alloc);
+  const(char)* _valueStr = valueStr.toCString!(No.Malloc, No.Nullable);
   gst_util_set_value_from_string(&_value, _valueStr);
   value = new gobject.value.Value(cast(void*)&_value, No.Take);
 }
@@ -1995,7 +1995,7 @@ bool valueDeserialize(out gobject.value.Value dest, string src) nothrow
 {
   bool _retval;
   GValue _dest;
-  const(char)* _src = src.toCString(No.Alloc);
+  const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_value_deserialize(&_dest, _src);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
@@ -2017,7 +2017,7 @@ bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject
 {
   bool _retval;
   GValue _dest;
-  const(char)* _src = src.toCString(No.Alloc);
+  const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)gst_value_deserialize_with_pspec(&_dest, _src, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
@@ -2430,7 +2430,7 @@ string valueSerialize(gobject.value.Value value) nothrow
 {
   char* _cretval;
   _cretval = gst_value_serialize(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -2673,6 +2673,6 @@ string versionString() nothrow
 {
   char* _cretval;
   _cretval = gst_version_string();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

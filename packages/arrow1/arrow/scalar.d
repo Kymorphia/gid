@@ -118,7 +118,7 @@ class Scalar : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_scalar_to_string(cast(GArrowScalar*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

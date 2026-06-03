@@ -158,8 +158,8 @@ class UserContentManager : gobject.object.ObjectWrap
   bool registerScriptMessageHandler(string name, string worldName = null) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _worldName = worldName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _worldName = worldName.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)webkit_user_content_manager_register_script_message_handler(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
     return _retval;
   }
@@ -189,8 +189,8 @@ class UserContentManager : gobject.object.ObjectWrap
   bool registerScriptMessageHandlerWithReply(string name, string worldName = null) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _worldName = worldName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _worldName = worldName.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)webkit_user_content_manager_register_script_message_handler_with_reply(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
     return _retval;
   }
@@ -246,7 +246,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void removeFilterById(string filterId) nothrow
   {
-    const(char)* _filterId = filterId.toCString(No.Alloc);
+    const(char)* _filterId = filterId.toCString!(No.Malloc, No.Nullable);
     webkit_user_content_manager_remove_filter_by_id(cast(WebKitUserContentManager*)this._cPtr, _filterId);
   }
 
@@ -293,8 +293,8 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void unregisterScriptMessageHandler(string name, string worldName = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _worldName = worldName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _worldName = worldName.toCString!(No.Malloc, Yes.Nullable);
     webkit_user_content_manager_unregister_script_message_handler(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
   }
 

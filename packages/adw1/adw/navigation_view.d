@@ -331,7 +331,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   adw.navigation_page.NavigationPage findPage(string tag) nothrow
   {
     AdwNavigationPage* _cretval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_navigation_view_find_page(cast(AdwNavigationView*)this._cPtr, _tag);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
@@ -471,7 +471,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool popToTag(string tag) nothrow
   {
     bool _retval;
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)adw_navigation_view_pop_to_tag(cast(AdwNavigationView*)this._cPtr, _tag);
     return _retval;
   }
@@ -509,7 +509,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void pushByTag(string tag) nothrow
   {
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     adw_navigation_view_push_by_tag(cast(AdwNavigationView*)this._cPtr, _tag);
   }
 
@@ -592,7 +592,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
 
     const(char)*[] _tmptags;
     foreach (s; tags)
-      _tmptags ~= s.toCString(No.Alloc);
+      _tmptags ~= s.toCString;
     const(char*)* _tags = _tmptags.ptr;
 
     adw_navigation_view_replace_with_tags(cast(AdwNavigationView*)this._cPtr, _tags, _nTags);

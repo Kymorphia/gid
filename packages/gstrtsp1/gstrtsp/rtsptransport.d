@@ -335,7 +335,7 @@ class RTSPTransport
   {
     char* _cretval;
     _cretval = gst_rtsp_transport_as_text(cast(GstRTSPTransport*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class RTSPTransport
     char* _mediaType;
     _cretval = gst_rtsp_transport_get_media_type(cast(GstRTSPTransport*)this._cPtr, &_mediaType);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    mediaType = _mediaType.fromCString(No.Free);
+    mediaType = _mediaType.fromCString!(No.Free);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ class RTSPTransport
     char* _manager;
     _cretval = gst_rtsp_transport_get_manager(trans, &_manager, option);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    manager = _manager.fromCString(No.Free);
+    manager = _manager.fromCString!(No.Free);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class RTSPTransport
     char* _mime;
     _cretval = gst_rtsp_transport_get_mime(trans, &_mime);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    mime = _mime.fromCString(No.Free);
+    mime = _mime.fromCString!(No.Free);
     return _retval;
   }
 
@@ -451,7 +451,7 @@ class RTSPTransport
   static gstrtsp.types.RTSPResult parse(string str, out gstrtsp.rtsptransport.RTSPTransport transport) nothrow
   {
     GstRTSPResult _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     GstRTSPTransport _transport;
     _cretval = gst_rtsp_transport_parse(_str, &_transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;

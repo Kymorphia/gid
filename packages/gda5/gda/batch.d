@@ -151,7 +151,7 @@ class Batch : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gda_batch_serialize(cast(GdaBatch*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

@@ -147,7 +147,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   this(string name, glib.variant_type.VariantType parameterType = null) nothrow
   {
     GSimpleAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_simple_action_new(_name, parameterType ? cast(const(GVariantType)*)parameterType._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
@@ -170,7 +170,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   static gio.simple_action.SimpleAction newStateful(string name, glib.variant_type.VariantType parameterType, glib.variant.Variant state) nothrow
   {
     GSimpleAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(const(GVariantType)*)parameterType._cPtr(No.Dup) : null, state ? cast(GVariant*)state._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.simple_action.SimpleAction)(cast(GSimpleAction*)_cretval, Yes.Take);
     return _retval;

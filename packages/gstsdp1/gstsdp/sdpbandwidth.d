@@ -92,7 +92,7 @@ class SDPBandwidth
   gstsdp.types.SDPResult set(string bwtype, uint bandwidth) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _bwtype = bwtype.toCString(No.Alloc);
+    const(char)* _bwtype = bwtype.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_bandwidth_set(cast(GstSDPBandwidth*)this._cPtr, _bwtype, bandwidth);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

@@ -85,7 +85,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
   */
   void setContentType(string contentType) nothrow
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     webkit_uri_scheme_response_set_content_type(cast(WebKitURISchemeResponse*)this._cPtr, _contentType);
   }
 
@@ -114,7 +114,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
   */
   void setStatus(uint statusCode, string reasonPhrase = null) nothrow
   {
-    const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
+    const(char)* _reasonPhrase = reasonPhrase.toCString!(No.Malloc, Yes.Nullable);
     webkit_uri_scheme_response_set_status(cast(WebKitURISchemeResponse*)this._cPtr, statusCode, _reasonPhrase);
   }
 }

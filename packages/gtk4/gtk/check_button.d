@@ -257,7 +257,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   static gtk.check_button.CheckButton newWithLabel(string label = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_check_button_new_with_label(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -274,7 +274,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   static gtk.check_button.CheckButton newWithMnemonic(string label = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_check_button_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -323,7 +323,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_check_button_get_label(cast(GtkCheckButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setLabel(string label = null) nothrow
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     gtk_check_button_set_label(cast(GtkCheckButton*)this._cPtr, _label);
   }
 

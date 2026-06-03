@@ -142,7 +142,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   */
   void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)this._cPtr, settings ? cast(GSettings*)settings._cPtr(No.Dup) : null, _key, flags);
   }
 

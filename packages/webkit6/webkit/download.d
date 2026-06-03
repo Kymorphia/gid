@@ -154,7 +154,7 @@ class Download : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_download_get_destination(cast(WebKitDownload*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Download : gobject.object.ObjectWrap
   */
   void setDestination(string destination) nothrow
   {
-    const(char)* _destination = destination.toCString(No.Alloc);
+    const(char)* _destination = destination.toCString!(No.Malloc, No.Nullable);
     webkit_download_set_destination(cast(WebKitDownload*)this._cPtr, _destination);
   }
 

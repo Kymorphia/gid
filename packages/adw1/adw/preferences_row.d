@@ -178,7 +178,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_row_get_title(cast(AdwPreferencesRow*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_preferences_row_set_title(cast(AdwPreferencesRow*)this._cPtr, _title);
   }
 

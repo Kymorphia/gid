@@ -58,7 +58,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmpleftKeys;
     foreach (s; leftKeys)
-      _tmpleftKeys ~= s.toCString(No.Alloc);
+      _tmpleftKeys ~= s.toCString;
     const(char*)* _leftKeys = _tmpleftKeys.ptr;
 
     size_t _nRightKeys;
@@ -67,7 +67,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmprightKeys;
     foreach (s; rightKeys)
-      _tmprightKeys ~= s.toCString(No.Alloc);
+      _tmprightKeys ~= s.toCString;
     const(char*)* _rightKeys = _tmprightKeys.ptr;
 
     GError *_err;
@@ -87,7 +87,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmpoutputs;
     foreach (s; outputs)
-      _tmpoutputs ~= s.toCString(No.Alloc);
+      _tmpoutputs ~= s.toCString;
     const(char*)* _outputs = _tmpoutputs.ptr;
 
     GError *_err;
@@ -107,7 +107,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmpoutputs;
     foreach (s; outputs)
-      _tmpoutputs ~= s.toCString(No.Alloc);
+      _tmpoutputs ~= s.toCString;
     const(char*)* _outputs = _tmpoutputs.ptr;
 
     GError *_err;

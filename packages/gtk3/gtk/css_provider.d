@@ -119,8 +119,8 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   static gtk.css_provider.CssProvider getNamed(string name, string variant = null) nothrow
   {
     GtkCssProvider* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _variant = variant.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _variant = variant.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_css_provider_get_named(_name, _variant);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
     return _retval;
@@ -190,7 +190,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   bool loadFromPath(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_css_provider_load_from_path(cast(GtkCssProvider*)this._cPtr, _path, &_err);
     if (_err)
@@ -210,7 +210,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void loadFromResource(string resourcePath) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     gtk_css_provider_load_from_resource(cast(GtkCssProvider*)this._cPtr, _resourcePath);
   }
 
@@ -228,7 +228,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     char* _cretval;
     _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

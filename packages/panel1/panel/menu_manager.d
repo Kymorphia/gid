@@ -81,7 +81,7 @@ class MenuManager : gobject.object.ObjectWrap
   uint addFilename(string filename)
   {
     uint _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = panel_menu_manager_add_filename(cast(PanelMenuManager*)this._cPtr, _filename, &_err);
     if (_err)
@@ -93,7 +93,7 @@ class MenuManager : gobject.object.ObjectWrap
   uint addResource(string resource)
   {
     uint _retval;
-    const(char)* _resource = resource.toCString(No.Alloc);
+    const(char)* _resource = resource.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = panel_menu_manager_add_resource(cast(PanelMenuManager*)this._cPtr, _resource, &_err);
     if (_err)
@@ -116,7 +116,7 @@ class MenuManager : gobject.object.ObjectWrap
   gio.menu.Menu findItemById(string id, out uint position) nothrow
   {
     GMenu* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_menu_manager_find_item_by_id(cast(PanelMenuManager*)this._cPtr, _id, cast(uint*)&position);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
@@ -126,7 +126,7 @@ class MenuManager : gobject.object.ObjectWrap
   gio.menu.Menu getMenuById(string menuId) nothrow
   {
     GMenu* _cretval;
-    const(char)* _menuId = menuId.toCString(No.Alloc);
+    const(char)* _menuId = menuId.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_menu_manager_get_menu_by_id(cast(PanelMenuManager*)this._cPtr, _menuId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
@@ -149,7 +149,7 @@ class MenuManager : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -165,7 +165,7 @@ class MenuManager : gobject.object.ObjectWrap
   uint merge(string menuId, gio.menu_model.MenuModel menuModel) nothrow
   {
     uint _retval;
-    const(char)* _menuId = menuId.toCString(No.Alloc);
+    const(char)* _menuId = menuId.toCString!(No.Malloc, No.Nullable);
     _retval = panel_menu_manager_merge(cast(PanelMenuManager*)this._cPtr, _menuId, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -198,8 +198,8 @@ class MenuManager : gobject.object.ObjectWrap
   */
   void setAttributeString(gio.menu.Menu menu, uint position, string attribute, string value) nothrow
   {
-    const(char)* _attribute = attribute.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     panel_menu_manager_set_attribute_string(cast(PanelMenuManager*)this._cPtr, menu ? cast(GMenu*)menu._cPtr(No.Dup) : null, position, _attribute, _value);
   }
 }

@@ -16,7 +16,7 @@ struct GLConfigSurfaceType
   {
     const(char)* _cretval;
     _cretval = gst_gl_config_surface_type_to_string(surfaceType);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

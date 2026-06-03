@@ -844,8 +844,8 @@ class AboutDialog : adw.dialog.Dialog
   static adw.about_dialog.AboutDialog newFromAppdata(string resourcePath, string releaseNotesVersion = null) nothrow
   {
     AdwDialog* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
-    const(char)* _releaseNotesVersion = releaseNotesVersion.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
+    const(char)* _releaseNotesVersion = releaseNotesVersion.toCString!(No.Malloc, Yes.Nullable);
     _cretval = adw_about_dialog_new_from_appdata(_resourcePath, _releaseNotesVersion);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.about_dialog.AboutDialog)(cast(AdwDialog*)_cretval, No.Take);
     return _retval;
@@ -876,10 +876,10 @@ class AboutDialog : adw.dialog.Dialog
   */
   void addAcknowledgementSection(string name, string[] people) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmppeople;
     foreach (s; people)
-      _tmppeople ~= s.toCString(No.Alloc);
+      _tmppeople ~= s.toCString;
     _tmppeople ~= null;
     const(char*)* _people = _tmppeople.ptr;
 
@@ -909,10 +909,10 @@ class AboutDialog : adw.dialog.Dialog
   */
   void addCreditSection(string name, string[] people) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmppeople;
     foreach (s; people)
-      _tmppeople ~= s.toCString(No.Alloc);
+      _tmppeople ~= s.toCString;
     _tmppeople ~= null;
     const(char*)* _people = _tmppeople.ptr;
 
@@ -969,9 +969,9 @@ class AboutDialog : adw.dialog.Dialog
   */
   void addLegalSection(string title, string copyright, gtk.types.License licenseType, string license = null) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
-    const(char)* _copyright = copyright.toCString(No.Alloc);
-    const(char)* _license = license.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    const(char)* _copyright = copyright.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _license = license.toCString!(No.Malloc, Yes.Nullable);
     adw_about_dialog_add_legal_section(cast(AdwAboutDialog*)this._cPtr, _title, _copyright, licenseType, _license);
   }
 
@@ -990,8 +990,8 @@ class AboutDialog : adw.dialog.Dialog
   */
   void addLink(string title, string url) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
-    const(char)* _url = url.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    const(char)* _url = url.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_add_link(cast(AdwAboutDialog*)this._cPtr, _title, _url);
   }
 
@@ -1003,7 +1003,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_application_icon(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1015,7 +1015,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_application_name(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1036,7 +1036,7 @@ class AboutDialog : adw.dialog.Dialog
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -1049,7 +1049,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_comments(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1061,7 +1061,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_copyright(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1073,7 +1073,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_debug_info(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1085,7 +1085,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_debug_info_filename(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1106,7 +1106,7 @@ class AboutDialog : adw.dialog.Dialog
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -1119,7 +1119,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_developer_name(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1140,7 +1140,7 @@ class AboutDialog : adw.dialog.Dialog
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -1162,7 +1162,7 @@ class AboutDialog : adw.dialog.Dialog
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -1175,7 +1175,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_issue_url(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1187,7 +1187,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_license(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1211,7 +1211,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_release_notes(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1223,7 +1223,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_release_notes_version(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1235,7 +1235,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_support_url(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1247,7 +1247,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_translator_credits(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1259,7 +1259,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_version(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1271,7 +1271,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_website(cast(AdwAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1285,7 +1285,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setApplicationIcon(string applicationIcon) nothrow
   {
-    const(char)* _applicationIcon = applicationIcon.toCString(No.Alloc);
+    const(char)* _applicationIcon = applicationIcon.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_application_icon(cast(AdwAboutDialog*)this._cPtr, _applicationIcon);
   }
 
@@ -1299,7 +1299,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setApplicationName(string applicationName) nothrow
   {
-    const(char)* _applicationName = applicationName.toCString(No.Alloc);
+    const(char)* _applicationName = applicationName.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_application_name(cast(AdwAboutDialog*)this._cPtr, _applicationName);
   }
 
@@ -1327,7 +1327,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     char*[] _tmpartists;
     foreach (s; artists)
-      _tmpartists ~= s.toCString(No.Alloc);
+      _tmpartists ~= s.toCString;
     _tmpartists ~= null;
     const(char*)* _artists = _tmpartists.ptr;
 
@@ -1347,7 +1347,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setComments(string comments) nothrow
   {
-    const(char)* _comments = comments.toCString(No.Alloc);
+    const(char)* _comments = comments.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_comments(cast(AdwAboutDialog*)this._cPtr, _comments);
   }
 
@@ -1368,7 +1368,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setCopyright(string copyright) nothrow
   {
-    const(char)* _copyright = copyright.toCString(No.Alloc);
+    const(char)* _copyright = copyright.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_copyright(cast(AdwAboutDialog*)this._cPtr, _copyright);
   }
 
@@ -1390,7 +1390,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setDebugInfo(string debugInfo) nothrow
   {
-    const(char)* _debugInfo = debugInfo.toCString(No.Alloc);
+    const(char)* _debugInfo = debugInfo.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_debug_info(cast(AdwAboutDialog*)this._cPtr, _debugInfo);
   }
 
@@ -1407,7 +1407,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setDebugInfoFilename(string filename) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_debug_info_filename(cast(AdwAboutDialog*)this._cPtr, _filename);
   }
 
@@ -1435,7 +1435,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     char*[] _tmpdesigners;
     foreach (s; designers)
-      _tmpdesigners ~= s.toCString(No.Alloc);
+      _tmpdesigners ~= s.toCString;
     _tmpdesigners ~= null;
     const(char*)* _designers = _tmpdesigners.ptr;
 
@@ -1457,7 +1457,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setDeveloperName(string developerName) nothrow
   {
-    const(char)* _developerName = developerName.toCString(No.Alloc);
+    const(char)* _developerName = developerName.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_developer_name(cast(AdwAboutDialog*)this._cPtr, _developerName);
   }
 
@@ -1485,7 +1485,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     char*[] _tmpdevelopers;
     foreach (s; developers)
-      _tmpdevelopers ~= s.toCString(No.Alloc);
+      _tmpdevelopers ~= s.toCString;
     _tmpdevelopers ~= null;
     const(char*)* _developers = _tmpdevelopers.ptr;
 
@@ -1516,7 +1516,7 @@ class AboutDialog : adw.dialog.Dialog
   {
     char*[] _tmpdocumenters;
     foreach (s; documenters)
-      _tmpdocumenters ~= s.toCString(No.Alloc);
+      _tmpdocumenters ~= s.toCString;
     _tmpdocumenters ~= null;
     const(char*)* _documenters = _tmpdocumenters.ptr;
 
@@ -1533,7 +1533,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setIssueUrl(string issueUrl) nothrow
   {
-    const(char)* _issueUrl = issueUrl.toCString(No.Alloc);
+    const(char)* _issueUrl = issueUrl.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_issue_url(cast(AdwAboutDialog*)this._cPtr, _issueUrl);
   }
 
@@ -1559,7 +1559,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setLicense(string license) nothrow
   {
-    const(char)* _license = license.toCString(No.Alloc);
+    const(char)* _license = license.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_license(cast(AdwAboutDialog*)this._cPtr, _license);
   }
 
@@ -1620,7 +1620,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setReleaseNotes(string releaseNotes) nothrow
   {
-    const(char)* _releaseNotes = releaseNotes.toCString(No.Alloc);
+    const(char)* _releaseNotes = releaseNotes.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_release_notes(cast(AdwAboutDialog*)this._cPtr, _releaseNotes);
   }
 
@@ -1643,7 +1643,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setReleaseNotesVersion(string version_) nothrow
   {
-    const(char)* _version_ = version_.toCString(No.Alloc);
+    const(char)* _version_ = version_.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_release_notes_version(cast(AdwAboutDialog*)this._cPtr, _version_);
   }
 
@@ -1657,7 +1657,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setSupportUrl(string supportUrl) nothrow
   {
-    const(char)* _supportUrl = supportUrl.toCString(No.Alloc);
+    const(char)* _supportUrl = supportUrl.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_support_url(cast(AdwAboutDialog*)this._cPtr, _supportUrl);
   }
 
@@ -1686,7 +1686,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setTranslatorCredits(string translatorCredits) nothrow
   {
-    const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
+    const(char)* _translatorCredits = translatorCredits.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_translator_credits(cast(AdwAboutDialog*)this._cPtr, _translatorCredits);
   }
 
@@ -1703,7 +1703,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setVersion(string version_) nothrow
   {
-    const(char)* _version_ = version_.toCString(No.Alloc);
+    const(char)* _version_ = version_.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_version(cast(AdwAboutDialog*)this._cPtr, _version_);
   }
 
@@ -1720,7 +1720,7 @@ class AboutDialog : adw.dialog.Dialog
   */
   void setWebsite(string website) nothrow
   {
-    const(char)* _website = website.toCString(No.Alloc);
+    const(char)* _website = website.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_set_website(cast(AdwAboutDialog*)this._cPtr, _website);
   }
 

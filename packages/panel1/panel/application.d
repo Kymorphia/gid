@@ -56,7 +56,7 @@ class Application : adw.application.Application
   this(string applicationId, gio.types.ApplicationFlags flags) nothrow
   {
     PanelApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_application_new(_applicationId, flags);
     this(_cretval, Yes.Take);
   }

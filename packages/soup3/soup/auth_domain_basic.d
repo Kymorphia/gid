@@ -114,8 +114,8 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
     {
       bool _dretval;
       auto _dlg = cast(soup.types.AuthDomainBasicAuthCallback*)userData;
-      string _username = username.fromCString(No.Free);
-      string _password = password.fromCString(No.Free);
+      string _username = username.fromCString!(No.Free);
+      string _password = password.fromCString!(No.Free);
 
       try
       {

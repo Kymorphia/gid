@@ -59,7 +59,7 @@ class SqlTable
   {
     char* _cretval;
     _cretval = gda_sql_table_serialize(cast(GdaSqlTable*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

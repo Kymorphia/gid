@@ -40,7 +40,7 @@ class Atom
   {
     char* _cretval;
     _cretval = gdk_atom_name(cast(GdkAtom)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class Atom
   static gdk.atom.Atom intern(string atomName, bool onlyIfExists) nothrow
   {
     GdkAtom _cretval;
-    const(char)* _atomName = atomName.toCString(No.Alloc);
+    const(char)* _atomName = atomName.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_atom_intern(_atomName, onlyIfExists);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
@@ -83,7 +83,7 @@ class Atom
   static gdk.atom.Atom internStaticString(string atomName) nothrow
   {
     GdkAtom _cretval;
-    const(char)* _atomName = atomName.toCString(No.Alloc);
+    const(char)* _atomName = atomName.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_atom_intern_static_string(_atomName);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;

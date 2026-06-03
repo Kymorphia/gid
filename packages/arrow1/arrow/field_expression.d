@@ -52,7 +52,7 @@ class FieldExpression : arrow.expression.Expression
   this(string reference)
   {
     GArrowFieldExpression* _cretval;
-    const(char)* _reference = reference.toCString(No.Alloc);
+    const(char)* _reference = reference.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_field_expression_new(_reference, &_err);
     if (_err)

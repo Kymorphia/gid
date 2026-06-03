@@ -90,7 +90,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   static gtk.theming_engine.ThemingEngine load(string name) nothrow
   {
     GtkThemingEngine* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_theming_engine_load(_name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.theming_engine.ThemingEngine)(cast(GtkThemingEngine*)_cretval, No.Take);
     return _retval;
@@ -242,7 +242,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     GValue _value;
     gtk_theming_engine_get_property(cast(GtkThemingEngine*)this._cPtr, _property, state, &_value);
     value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
@@ -282,7 +282,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   */
   void getStyleProperty(string propertyName, out gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     GValue _value;
     gtk_theming_engine_get_style_property(cast(GtkThemingEngine*)this._cPtr, _propertyName, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -299,7 +299,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   bool hasClass(string styleClass) nothrow
   {
     bool _retval;
-    const(char)* _styleClass = styleClass.toCString(No.Alloc);
+    const(char)* _styleClass = styleClass.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_theming_engine_has_class(cast(GtkThemingEngine*)this._cPtr, _styleClass);
     return _retval;
   }
@@ -317,7 +317,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   bool hasRegion(string styleRegion, out gtk.types.RegionFlags flags) nothrow
   {
     bool _retval;
-    const(char)* _styleRegion = styleRegion.toCString(No.Alloc);
+    const(char)* _styleRegion = styleRegion.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_theming_engine_has_region(cast(GtkThemingEngine*)this._cPtr, _styleRegion, &flags);
     return _retval;
   }
@@ -333,7 +333,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   bool lookupColor(string colorName, out gdk.rgba.RGBA color) nothrow
   {
     bool _retval;
-    const(char)* _colorName = colorName.toCString(No.Alloc);
+    const(char)* _colorName = colorName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)this._cPtr, _colorName, cast(GdkRGBA*)&color);
     return _retval;
   }

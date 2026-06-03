@@ -1010,7 +1010,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool joinMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)g_socket_join_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
@@ -1046,7 +1046,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool joinMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)g_socket_join_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
     if (_err)
@@ -1075,7 +1075,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool leaveMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)g_socket_leave_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
@@ -1102,7 +1102,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   bool leaveMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)g_socket_leave_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
     if (_err)

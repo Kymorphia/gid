@@ -80,9 +80,9 @@ class EncodingTarget : gobject.object.ObjectWrap
   this(string name, string category, string description, gstpbutils.encoding_profile.EncodingProfile[] profiles) nothrow
   {
     GstEncodingTarget* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _category = category.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     auto _profiles = gListFromD!(gstpbutils.encoding_profile.EncodingProfile)(profiles);
     scope(exit) containerFree!(const(GList)*, gstpbutils.encoding_profile.EncodingProfile, GidOwnership.None)(_profiles);
     _cretval = gst_encoding_target_new(_name, _category, _description, _profiles);
@@ -108,8 +108,8 @@ class EncodingTarget : gobject.object.ObjectWrap
   static gstpbutils.encoding_target.EncodingTarget load(string name, string category = null)
   {
     GstEncodingTarget* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gst_encoding_target_load(_name, _category, &_err);
     if (_err)
@@ -130,7 +130,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   static gstpbutils.encoding_target.EncodingTarget loadFromFile(string filepath)
   {
     GstEncodingTarget* _cretval;
-    const(char)* _filepath = filepath.toCString(No.Alloc);
+    const(char)* _filepath = filepath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gst_encoding_target_load_from_file(_filepath, &_err);
     if (_err)
@@ -163,7 +163,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_category(cast(GstEncodingTarget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_description(cast(GstEncodingTarget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_name(cast(GstEncodingTarget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_path(cast(GstEncodingTarget*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   gstpbutils.encoding_profile.EncodingProfile getProfile(string name) nothrow
   {
     GstEncodingProfile* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_encoding_target_get_profile(cast(GstEncodingTarget*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
@@ -239,7 +239,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   bool saveToFile(string filepath)
   {
     bool _retval;
-    const(char)* _filepath = filepath.toCString(No.Alloc);
+    const(char)* _filepath = filepath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gst_encoding_target_save_to_file(cast(GstEncodingTarget*)this._cPtr, _filepath, &_err);
     if (_err)

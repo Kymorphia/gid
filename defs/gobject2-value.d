@@ -147,7 +147,7 @@ T getVal(T)(const(GValue)* gval) nothrow
   else static if (is(T == enum)) // enum or flags
     return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
   else static if (is(T == string))
-    return g_value_get_string(gval).fromCString(No.Free);
+    return g_value_get_string(gval).fromCString;
   else static if (is(T == glib.variant.Variant))
   {
     auto v = g_value_get_variant(gval);
@@ -170,7 +170,7 @@ T getVal(T)(const(GValue)* gval) nothrow
 
       sa.length = len;
       foreach (i; len)
-        sa[i] = strv[i].fromCString(No.Free);
+        sa[i] = strv[i].fromCString;
     }
 
     return sa;
@@ -250,7 +250,7 @@ void setVal(T)(GValue* gval, T v) nothrow
       g_value_set_enum(gval, v);
   }
   else static if (is(T == string))
-    g_value_take_string(gval, v.toCString(Yes.Alloc));
+    g_value_take_string(gval, toCString!(Yes.Malloc)(v));
   else static if (is(T == glib.variant.Variant))
     g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
   else static if (is(T : ParamSpec))
@@ -259,7 +259,7 @@ void setVal(T)(GValue* gval, T v) nothrow
   {
     auto strv = cast(char**)gMalloc((v.length + 1) * (char*).sizeof);
     foreach(i; 0 .. v.length)
-      strv[i] = v[i].toCString(Yes.Alloc);
+      strv[i] = toCString!(Yes.Malloc)(v[i]);
 
     g_value_set_boxed(gval, strv);
   }

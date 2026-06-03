@@ -219,7 +219,7 @@ class TabArray : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_tab_array_to_string(cast(PangoTabArray*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class TabArray : gobject.boxed.Boxed
   static pango.tab_array.TabArray fromString(string text) nothrow
   {
     PangoTabArray* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_tab_array_from_string(_text);
     auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

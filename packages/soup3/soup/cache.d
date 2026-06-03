@@ -85,7 +85,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   this(string cacheDir, soup.types.CacheType cacheType) nothrow
   {
     SoupCache* _cretval;
-    const(char)* _cacheDir = cacheDir.toCString(No.Alloc);
+    const(char)* _cacheDir = cacheDir.toCString!(No.Malloc, Yes.Nullable);
     _cretval = soup_cache_new(_cacheDir, cacheType);
     this(_cretval, Yes.Take);
   }

@@ -423,7 +423,7 @@ class Buffer : gobject.boxed.Boxed
   gst.custom_meta.CustomMeta addCustomMeta(string name) nothrow
   {
     GstCustomMeta* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_buffer_add_custom_meta(cast(GstBuffer*)this._cPtr, _name);
     auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, No.Take) : null;
     return _retval;
@@ -742,7 +742,7 @@ class Buffer : gobject.boxed.Boxed
   gst.custom_meta.CustomMeta getCustomMeta(string name) nothrow
   {
     GstCustomMeta* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_buffer_get_custom_meta(cast(GstBuffer*)this._cPtr, _name);
     auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, No.Take) : null;
     return _retval;

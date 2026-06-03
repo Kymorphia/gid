@@ -88,9 +88,9 @@ class Aggregation : gobject.object.ObjectWrap
   this(string function_, arrow.function_options.FunctionOptions options, string input, string output) nothrow
   {
     GArrowAggregation* _cretval;
-    const(char)* _function_ = function_.toCString(No.Alloc);
-    const(char)* _input = input.toCString(No.Alloc);
-    const(char)* _output = output.toCString(No.Alloc);
+    const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _input = input.toCString!(No.Malloc, No.Nullable);
+    const(char)* _output = output.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_aggregation_new(_function_, options ? cast(GArrowFunctionOptions*)options._cPtr(No.Dup) : null, _input, _output);
     this(_cretval, Yes.Take);
   }

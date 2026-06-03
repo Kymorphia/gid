@@ -110,7 +110,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   bool getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
     bool _retval;
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     GValue _value;
     _retval = cast(bool)gtk_style_properties_get_property(cast(GtkStyleProperties*)this._cPtr, _property, state, &_value);
     value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
@@ -130,7 +130,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   gtk.symbolic_color.SymbolicColor lookupColor(string name) nothrow
   {
     GtkSymbolicColor* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_style_properties_lookup_color(cast(GtkStyleProperties*)this._cPtr, _name);
     auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -148,7 +148,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   */
   void mapColor(string name, gtk.symbolic_color.SymbolicColor color) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_style_properties_map_color(cast(GtkStyleProperties*)this._cPtr, _name, color ? cast(GtkSymbolicColor*)color._cPtr(No.Dup) : null);
   }
 
@@ -183,7 +183,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   */
   void setProperty(string property, gtk.types.StateFlags state, gobject.value.Value value) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     gtk_style_properties_set_property(cast(GtkStyleProperties*)this._cPtr, _property, state, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -198,7 +198,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   */
   void unsetProperty(string property, gtk.types.StateFlags state) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     gtk_style_properties_unset_property(cast(GtkStyleProperties*)this._cPtr, _property, state);
   }
 }

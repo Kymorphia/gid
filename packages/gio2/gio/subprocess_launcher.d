@@ -108,9 +108,9 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   string getenv(string variable) nothrow
   {
     const(char)* _cretval;
-    const(char)* _variable = variable.toCString(No.Alloc);
+    const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
     _cretval = g_subprocess_launcher_getenv(cast(GSubprocessLauncher*)this._cPtr, _variable);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void setCwd(string cwd) nothrow
   {
-    const(char)* _cwd = cwd.toCString(No.Alloc);
+    const(char)* _cwd = cwd.toCString!(No.Malloc, No.Nullable);
     g_subprocess_launcher_set_cwd(cast(GSubprocessLauncher*)this._cPtr, _cwd);
   }
 
@@ -158,7 +158,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   {
     char*[] _tmpenv;
     foreach (s; env)
-      _tmpenv ~= s.toCString(No.Alloc);
+      _tmpenv ~= s.toCString;
     _tmpenv ~= null;
     char** _env = _tmpenv.ptr;
 
@@ -208,7 +208,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void setStderrFilePath(string path = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     g_subprocess_launcher_set_stderr_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
   }
 
@@ -229,7 +229,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void setStdinFilePath(string path = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     g_subprocess_launcher_set_stdin_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
   }
 
@@ -251,7 +251,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void setStdoutFilePath(string path = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     g_subprocess_launcher_set_stdout_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
   }
 
@@ -271,8 +271,8 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void setenv(string variable, string value, bool overwrite) nothrow
   {
-    const(char)* _variable = variable.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_subprocess_launcher_setenv(cast(GSubprocessLauncher*)this._cPtr, _variable, _value, overwrite);
   }
 
@@ -289,7 +289,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
     GSubprocess* _cretval;
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
@@ -418,7 +418,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void unsetenv(string variable) nothrow
   {
-    const(char)* _variable = variable.toCString(No.Alloc);
+    const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
     g_subprocess_launcher_unsetenv(cast(GSubprocessLauncher*)this._cPtr, _variable);
   }
 }

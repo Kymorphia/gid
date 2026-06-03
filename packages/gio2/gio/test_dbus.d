@@ -172,7 +172,7 @@ class TestDBus : gobject.object.ObjectWrap
   */
   void addServiceDir(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     g_test_dbus_add_service_dir(cast(GTestDBus*)this._cPtr, _path);
   }
 
@@ -198,7 +198,7 @@ class TestDBus : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_test_dbus_get_bus_address(cast(GTestDBus*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

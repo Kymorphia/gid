@@ -313,9 +313,9 @@
   this(string name, string description, string helpDescription) nothrow
   {
     GOptionGroup* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _helpDescription = helpDescription.toCString(No.Alloc);
+    const(char)* _name = name.toCString;
+    const(char)* _description = description.toCString;
+    const(char)* _helpDescription = helpDescription.toCString;
     _cretval = g_option_group_new(_name, _description, _helpDescription, null, null);
     this(_cretval, Yes.Take);
   }
@@ -377,7 +377,7 @@
   string strftime(string format) nothrow
   {
     char[] buf;
-    const(char)* _format = format.toCString(No.Alloc);
+    const(char)* _format = format.toCString;
 
     for (buf.length = 32; buf.length <= 1024; buf.length *= 2) // Increase buffer until output fits
     {

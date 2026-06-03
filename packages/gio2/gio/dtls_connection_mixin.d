@@ -423,7 +423,7 @@ template DtlsConnectionT()
   {
     char* _cretval;
     _cretval = g_dtls_connection_get_ciphersuite_name(cast(GDtlsConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -468,7 +468,7 @@ template DtlsConnectionT()
   {
     const(char)* _cretval;
     _cretval = g_dtls_connection_get_negotiated_protocol(cast(GDtlsConnection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -658,7 +658,7 @@ template DtlsConnectionT()
   {
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.Alloc);
+      _tmpprotocols ~= s.toCString;
     _tmpprotocols ~= null;
     const(char*)* _protocols = _tmpprotocols.ptr;
 

@@ -269,7 +269,7 @@ class MessageDialog : gtk.dialog.Dialog
   */
   void setMarkup(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gtk_message_dialog_set_markup(cast(GtkMessageDialog*)this._cPtr, _str);
   }
 }

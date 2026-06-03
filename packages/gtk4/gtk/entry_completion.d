@@ -340,9 +340,9 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   string computePrefix(string key) nothrow
   {
     char* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_entry_completion_compute_prefix(cast(GtkEntryCompletion*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   {
     const(char)* _cretval;
     _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
-      string _key = key.fromCString(No.Free);
+      string _key = key.fromCString!(No.Free);
 
       try
       {

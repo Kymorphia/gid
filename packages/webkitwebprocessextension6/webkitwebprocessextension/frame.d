@@ -104,7 +104,7 @@ class Frame : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_frame_get_uri(cast(WebKitFrame*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

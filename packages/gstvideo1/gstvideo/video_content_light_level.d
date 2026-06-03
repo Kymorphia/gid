@@ -67,7 +67,7 @@ struct VideoContentLightLevel
   bool fromString(string level) nothrow
   {
     bool _retval;
-    const(char)* _level = level.toCString(No.Alloc);
+    const(char)* _level = level.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_video_content_light_level_from_string(cast(GstVideoContentLightLevel*)&this, _level);
     return _retval;
   }
@@ -102,7 +102,7 @@ struct VideoContentLightLevel
   {
     char* _cretval;
     _cretval = gst_video_content_light_level_to_string(cast(const(GstVideoContentLightLevel)*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

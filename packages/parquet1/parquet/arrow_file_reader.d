@@ -69,7 +69,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   static parquet.arrow_file_reader.ArrowFileReader newPath(string path)
   {
     GParquetArrowFileReader* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gparquet_arrow_file_reader_new_path(_path, &_err);
     if (_err)

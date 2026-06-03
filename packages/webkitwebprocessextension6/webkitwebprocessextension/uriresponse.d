@@ -142,7 +142,7 @@ class URIResponse : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_response_get_mime_type(cast(WebKitURIResponse*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class URIResponse : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_response_get_suggested_filename(cast(WebKitURIResponse*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class URIResponse : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_response_get_uri(cast(WebKitURIResponse*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

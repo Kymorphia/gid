@@ -74,7 +74,7 @@ class ContentDisposition : gobject.object.ObjectWrap
   static gmime.content_disposition.ContentDisposition parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeContentDisposition* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_content_disposition_parse(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _str);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.content_disposition.ContentDisposition)(cast(GMimeContentDisposition*)_cretval, Yes.Take);
     return _retval;
@@ -91,7 +91,7 @@ class ContentDisposition : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_mime_content_disposition_encode(cast(GMimeContentDisposition*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class ContentDisposition : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_content_disposition_get_disposition(cast(GMimeContentDisposition*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -120,9 +120,9 @@ class ContentDisposition : gobject.object.ObjectWrap
   string getParameter(string name) nothrow
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_content_disposition_get_parameter(cast(GMimeContentDisposition*)this._cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class ContentDisposition : gobject.object.ObjectWrap
   */
   void setDisposition(string value) nothrow
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_mime_content_disposition_set_disposition(cast(GMimeContentDisposition*)this._cPtr, _value);
   }
 
@@ -176,8 +176,8 @@ class ContentDisposition : gobject.object.ObjectWrap
   */
   void setParameter(string name, string value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     g_mime_content_disposition_set_parameter(cast(GMimeContentDisposition*)this._cPtr, _name, _value);
   }
 }

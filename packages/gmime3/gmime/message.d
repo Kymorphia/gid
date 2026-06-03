@@ -84,8 +84,8 @@ class Message : gmime.object.ObjectWrap
   */
   void addMailbox(gmime.types.AddressType type, string name, string addr) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _addr = addr.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _addr = addr.toCString!(No.Malloc, No.Nullable);
     g_mime_message_add_mailbox(cast(GMimeMessage*)this._cPtr, type, _name, _addr);
   }
 
@@ -175,7 +175,7 @@ class Message : gmime.object.ObjectWrap
   gmime.autocrypt_header_list.AutocryptHeaderList getAutocryptGossipHeaders(glib.date_time.DateTime now, gmime.types.DecryptFlags flags, string sessionKey = null)
   {
     GMimeAutocryptHeaderList* _cretval;
-    const(char)* _sessionKey = sessionKey.toCString(No.Alloc);
+    const(char)* _sessionKey = sessionKey.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_mime_message_get_autocrypt_gossip_headers(cast(GMimeMessage*)this._cPtr, now ? cast(GDateTime*)now._cPtr(No.Dup) : null, flags, _sessionKey, &_err);
     if (_err)
@@ -355,7 +355,7 @@ class Message : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_message_get_message_id(cast(GMimeMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class Message : gmime.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_message_get_subject(cast(GMimeMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -469,7 +469,7 @@ class Message : gmime.object.ObjectWrap
   */
   void setMessageId(string messageId) nothrow
   {
-    const(char)* _messageId = messageId.toCString(No.Alloc);
+    const(char)* _messageId = messageId.toCString!(No.Malloc, No.Nullable);
     g_mime_message_set_message_id(cast(GMimeMessage*)this._cPtr, _messageId);
   }
 
@@ -495,8 +495,8 @@ class Message : gmime.object.ObjectWrap
   */
   void setSubject(string subject, string charset = null) nothrow
   {
-    const(char)* _subject = subject.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _subject = subject.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
     g_mime_message_set_subject(cast(GMimeMessage*)this._cPtr, _subject, _charset);
   }
 }

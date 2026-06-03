@@ -156,7 +156,7 @@ class Stream : gst.object.ObjectWrap
   this(string streamId, gst.caps.Caps caps, gst.types.StreamType type, gst.types.StreamFlags flags) nothrow
   {
     GstStream* _cretval;
-    const(char)* _streamId = streamId.toCString(No.Alloc);
+    const(char)* _streamId = streamId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_stream_new(_streamId, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, type, flags);
     this(_cretval, Yes.Take);
   }
@@ -194,7 +194,7 @@ class Stream : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_stream_get_stream_id(cast(GstStream*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

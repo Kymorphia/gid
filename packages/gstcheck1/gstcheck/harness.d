@@ -271,8 +271,8 @@ class Harness
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _elementName = elementName.toCString(No.Alloc);
-    const(char)* _padName = padName.toCString(No.Alloc);
+    const(char)* _elementName = elementName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _padName = padName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gst_harness_add_probe(cast(GstHarness*)this._cPtr, _elementName, _padName, mask, _callbackCB, _callback, _callbackDestroyCB);
@@ -304,7 +304,7 @@ class Harness
   */
   void addSink(string sinkElementName) nothrow
   {
-    const(char)* _sinkElementName = sinkElementName.toCString(No.Alloc);
+    const(char)* _sinkElementName = sinkElementName.toCString!(No.Malloc, No.Nullable);
     gst_harness_add_sink(cast(GstHarness*)this._cPtr, _sinkElementName);
   }
 
@@ -339,7 +339,7 @@ class Harness
   */
   void addSinkParse(string launchline) nothrow
   {
-    const(char)* _launchline = launchline.toCString(No.Alloc);
+    const(char)* _launchline = launchline.toCString!(No.Malloc, No.Nullable);
     gst_harness_add_sink_parse(cast(GstHarness*)this._cPtr, _launchline);
   }
 
@@ -356,7 +356,7 @@ class Harness
   */
   void addSrc(string srcElementName, bool hasClockWait) nothrow
   {
-    const(char)* _srcElementName = srcElementName.toCString(No.Alloc);
+    const(char)* _srcElementName = srcElementName.toCString!(No.Malloc, No.Nullable);
     gst_harness_add_src(cast(GstHarness*)this._cPtr, _srcElementName, hasClockWait);
   }
 
@@ -399,7 +399,7 @@ class Harness
   */
   void addSrcParse(string launchline, bool hasClockWait) nothrow
   {
-    const(char)* _launchline = launchline.toCString(No.Alloc);
+    const(char)* _launchline = launchline.toCString!(No.Malloc, No.Nullable);
     gst_harness_add_src_parse(cast(GstHarness*)this._cPtr, _launchline, hasClockWait);
   }
 
@@ -501,7 +501,7 @@ class Harness
   */
   void dumpToFile(string filename) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     gst_harness_dump_to_file(cast(GstHarness*)this._cPtr, _filename);
   }
 
@@ -548,7 +548,7 @@ class Harness
   gst.element.Element findElement(string elementName) nothrow
   {
     GstElement* _cretval;
-    const(char)* _elementName = elementName.toCString(No.Alloc);
+    const(char)* _elementName = elementName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_harness_find_element(cast(GstHarness*)this._cPtr, _elementName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
@@ -839,8 +839,8 @@ class Harness
   */
   void setCapsStr(string in_, string out_) nothrow
   {
-    const(char)* _in_ = in_.toCString(No.Alloc);
-    const(char)* _out_ = out_.toCString(No.Alloc);
+    const(char)* _in_ = in_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _out_ = out_.toCString!(No.Malloc, No.Nullable);
     gst_harness_set_caps_str(cast(GstHarness*)this._cPtr, _in_, _out_);
   }
 
@@ -933,7 +933,7 @@ class Harness
   */
   void setSinkCapsStr(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gst_harness_set_sink_caps_str(cast(GstHarness*)this._cPtr, _str);
   }
 
@@ -962,7 +962,7 @@ class Harness
   */
   void setSrcCapsStr(string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     gst_harness_set_src_caps_str(cast(GstHarness*)this._cPtr, _str);
   }
 

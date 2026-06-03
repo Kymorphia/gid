@@ -372,7 +372,7 @@ class Clipboard : gobject.object.ObjectWrap
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardTextReceivedFunc*)data;
-      string _text = text.fromCString(No.Free);
+      string _text = text.fromCString!(No.Free);
 
       try
       {
@@ -414,7 +414,7 @@ class Clipboard : gobject.object.ObjectWrap
         break;
       _uris.length = _lenuris;
       foreach (i; 0 .. _lenuris)
-        _uris[i] = uris[i].fromCString(No.Free);
+        _uris[i] = uris[i].fromCString!(No.Free);
 
       try
       {
@@ -589,7 +589,7 @@ class Clipboard : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_clipboard_wait_for_text(cast(GtkClipboard*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class Clipboard : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;

@@ -157,7 +157,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_image_uri(cast(WebKitWebHitTestResult*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_link_label(cast(WebKitWebHitTestResult*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_link_title(cast(WebKitWebHitTestResult*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_link_uri(cast(WebKitWebHitTestResult*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_media_uri(cast(WebKitWebHitTestResult*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

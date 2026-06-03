@@ -85,7 +85,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_im_multicontext_get_context_id(cast(GtkIMMulticontext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   */
   void setContextId(string contextId) nothrow
   {
-    const(char)* _contextId = contextId.toCString(No.Alloc);
+    const(char)* _contextId = contextId.toCString!(No.Malloc, No.Nullable);
     gtk_im_multicontext_set_context_id(cast(GtkIMMulticontext*)this._cPtr, _contextId);
   }
 }

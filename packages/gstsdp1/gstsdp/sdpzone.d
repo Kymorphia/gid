@@ -94,8 +94,8 @@ class SDPZone
   gstsdp.types.SDPResult set(string adjTime, string typedTime) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _adjTime = adjTime.toCString(No.Alloc);
-    const(char)* _typedTime = typedTime.toCString(No.Alloc);
+    const(char)* _adjTime = adjTime.toCString!(No.Malloc, No.Nullable);
+    const(char)* _typedTime = typedTime.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_zone_set(cast(GstSDPZone*)this._cPtr, _adjTime, _typedTime);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

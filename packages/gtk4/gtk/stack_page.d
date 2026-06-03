@@ -205,7 +205,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_icon_name(cast(GtkStackPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_name(cast(GtkStackPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_title(cast(GtkStackPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setIconName(string setting) nothrow
   {
-    const(char)* _setting = setting.toCString(No.Alloc);
+    const(char)* _setting = setting.toCString!(No.Malloc, No.Nullable);
     gtk_stack_page_set_icon_name(cast(GtkStackPage*)this._cPtr, _setting);
   }
 
@@ -290,7 +290,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setName(string setting) nothrow
   {
-    const(char)* _setting = setting.toCString(No.Alloc);
+    const(char)* _setting = setting.toCString!(No.Malloc, No.Nullable);
     gtk_stack_page_set_name(cast(GtkStackPage*)this._cPtr, _setting);
   }
 
@@ -313,7 +313,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setTitle(string setting) nothrow
   {
-    const(char)* _setting = setting.toCString(No.Alloc);
+    const(char)* _setting = setting.toCString!(No.Malloc, No.Nullable);
     gtk_stack_page_set_title(cast(GtkStackPage*)this._cPtr, _setting);
   }
 

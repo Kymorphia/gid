@@ -355,9 +355,9 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void addUi(uint mergeId, string path, string name, string action, gtk.types.UIManagerItemType type, bool top) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _action = action.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _action = action.toCString!(No.Malloc, Yes.Nullable);
     gtk_ui_manager_add_ui(cast(GtkUIManager*)this._cPtr, mergeId, _path, _name, _action, type, top);
   }
 
@@ -375,7 +375,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   uint addUiFromFile(string filename)
   {
     uint _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_file(cast(GtkUIManager*)this._cPtr, _filename, &_err);
     if (_err)
@@ -397,7 +397,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   uint addUiFromResource(string resourcePath)
   {
     uint _retval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_resource(cast(GtkUIManager*)this._cPtr, _resourcePath, &_err);
     if (_err)
@@ -478,7 +478,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.action.Action getAction(string path) nothrow
   {
     GtkAction* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_ui_manager_get_action(cast(GtkUIManager*)this._cPtr, _path);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
@@ -540,7 +540,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     char* _cretval;
     _cretval = gtk_ui_manager_get_ui(cast(GtkUIManager*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -568,7 +568,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.widget.Widget getWidget(string path) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_ui_manager_get_widget(cast(GtkUIManager*)this._cPtr, _path);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

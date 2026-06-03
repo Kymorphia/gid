@@ -465,7 +465,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newError(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_error(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -487,7 +487,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newErrorWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -526,7 +526,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newInfo(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_info(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -546,7 +546,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newInfoWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -604,7 +604,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newNeedContext(gst.object.ObjectWrap src, string contextType) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_need_context(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _contextType);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -646,8 +646,8 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newProgress(gst.object.ObjectWrap src, gst.types.ProgressType type, string code, string text) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _code = code.toCString(No.Alloc);
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _code = code.toCString!(No.Malloc, No.Nullable);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_progress(src ? cast(GstObject*)src._cPtr(No.Dup) : null, type, _code, _text);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -657,7 +657,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newPropertyNotify(gst.object.ObjectWrap src, string propertyName, gobject.value.Value val = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_property_notify(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _propertyName, val ? cast(GValue*)val._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -734,7 +734,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newRedirect(gst.object.ObjectWrap src, string location, gst.tag_list.TagList tagList = null, gst.structure.Structure entryStruct = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _location = location.toCString(No.Alloc);
+    const(char)* _location = location.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_redirect(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1082,7 +1082,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newWarning(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_warning(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1102,7 +1102,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newWarningWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1121,7 +1121,7 @@ class Message : gobject.boxed.Boxed
   */
   void addRedirectEntry(string location, gst.tag_list.TagList tagList = null, gst.structure.Structure entryStruct = null) nothrow
   {
-    const(char)* _location = location.toCString(No.Alloc);
+    const(char)* _location = location.toCString!(No.Malloc, No.Nullable);
     gst_message_add_redirect_entry(cast(GstMessage*)this._cPtr, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
   }
 
@@ -1199,7 +1199,7 @@ class Message : gobject.boxed.Boxed
   bool hasName(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_message_has_name(cast(GstMessage*)this._cPtr, _name);
     return _retval;
   }
@@ -1294,7 +1294,7 @@ class Message : gobject.boxed.Boxed
     bool _retval;
     char* _contextType;
     _retval = cast(bool)gst_message_parse_context_type(cast(GstMessage*)this._cPtr, &_contextType);
-    contextType = _contextType.fromCString(No.Free);
+    contextType = _contextType.fromCString!(No.Free);
     return _retval;
   }
 
@@ -1389,7 +1389,7 @@ class Message : gobject.boxed.Boxed
     char* _debug_;
     gst_message_parse_error(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
     gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
-    debug_ = _debug_.fromCString(Yes.Free);
+    debug_ = _debug_.fromCString!(Yes.Free);
   }
 
   /**
@@ -1456,7 +1456,7 @@ class Message : gobject.boxed.Boxed
     char* _debug_;
     gst_message_parse_info(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
     gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
-    debug_ = _debug_.fromCString(Yes.Free);
+    debug_ = _debug_.fromCString!(Yes.Free);
   }
 
   /**
@@ -1514,8 +1514,8 @@ class Message : gobject.boxed.Boxed
     char* _code;
     char* _text;
     gst_message_parse_progress(cast(GstMessage*)this._cPtr, &type, &_code, &_text);
-    code = _code.fromCString(Yes.Free);
-    text = _text.fromCString(Yes.Free);
+    code = _code.fromCString!(Yes.Free);
+    text = _text.fromCString!(Yes.Free);
   }
 
   /**
@@ -1540,7 +1540,7 @@ class Message : gobject.boxed.Boxed
     const(GValue)* _propertyValue;
     gst_message_parse_property_notify(cast(GstMessage*)this._cPtr, &_object, &_propertyName, &_propertyValue);
     object = new gst.object.ObjectWrap(cast(void*)_object, No.Take);
-    propertyName = _propertyName.fromCString(No.Free);
+    propertyName = _propertyName.fromCString!(No.Free);
     propertyValue = new gobject.value.Value(cast(void*)_propertyValue, No.Take);
   }
 
@@ -1634,7 +1634,7 @@ class Message : gobject.boxed.Boxed
     GstTagList* _tagList;
     const(GstStructure)* _entryStruct;
     gst_message_parse_redirect_entry(cast(GstMessage*)this._cPtr, entryIndex, &_location, &_tagList, &_entryStruct);
-    location = _location.fromCString(No.Free);
+    location = _location.fromCString!(No.Free);
     tagList = new gst.tag_list.TagList(cast(void*)_tagList, No.Take);
     entryStruct = new gst.structure.Structure(cast(void*)_entryStruct, No.Take);
   }
@@ -1915,7 +1915,7 @@ class Message : gobject.boxed.Boxed
     char* _debug_;
     gst_message_parse_warning(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
     gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
-    debug_ = _debug_.fromCString(Yes.Free);
+    debug_ = _debug_.fromCString!(Yes.Free);
   }
 
   /**

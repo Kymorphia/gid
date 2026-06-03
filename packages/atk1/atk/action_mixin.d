@@ -60,7 +60,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_description(cast(AtkAction*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_keybinding(cast(AtkAction*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_localized_name(cast(AtkAction*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_name(cast(AtkAction*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ template ActionT()
   override bool setDescription(int i, string desc) nothrow
   {
     bool _retval;
-    const(char)* _desc = desc.toCString(No.Alloc);
+    const(char)* _desc = desc.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)atk_action_set_description(cast(AtkAction*)this._cPtr, i, _desc);
     return _retval;
   }

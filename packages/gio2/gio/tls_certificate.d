@@ -201,7 +201,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   static gio.tls_certificate.TlsCertificate newFromFile(string file)
   {
     GTlsCertificate* _cretval;
-    const(char)* _file = file.toCString(No.Alloc);
+    const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_tls_certificate_new_from_file(_file, &_err);
     if (_err)
@@ -229,8 +229,8 @@ class TlsCertificate : gobject.object.ObjectWrap
   static gio.tls_certificate.TlsCertificate newFromFileWithPassword(string file, string password)
   {
     GTlsCertificate* _cretval;
-    const(char)* _file = file.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_tls_certificate_new_from_file_with_password(_file, _password, &_err);
     if (_err)
@@ -266,8 +266,8 @@ class TlsCertificate : gobject.object.ObjectWrap
   static gio.tls_certificate.TlsCertificate newFromFiles(string certFile, string keyFile)
   {
     GTlsCertificate* _cretval;
-    const(char)* _certFile = certFile.toCString(No.Alloc);
-    const(char)* _keyFile = keyFile.toCString(No.Alloc);
+    const(char)* _certFile = certFile.toCString!(No.Malloc, No.Nullable);
+    const(char)* _keyFile = keyFile.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_tls_certificate_new_from_files(_certFile, _keyFile, &_err);
     if (_err)
@@ -348,8 +348,8 @@ class TlsCertificate : gobject.object.ObjectWrap
   static gio.tls_certificate.TlsCertificate newFromPkcs11Uris(string pkcs11Uri, string privateKeyPkcs11Uri = null)
   {
     GTlsCertificate* _cretval;
-    const(char)* _pkcs11Uri = pkcs11Uri.toCString(No.Alloc);
-    const(char)* _privateKeyPkcs11Uri = privateKeyPkcs11Uri.toCString(No.Alloc);
+    const(char)* _pkcs11Uri = pkcs11Uri.toCString!(No.Malloc, No.Nullable);
+    const(char)* _privateKeyPkcs11Uri = privateKeyPkcs11Uri.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_tls_certificate_new_from_pkcs11_uris(_pkcs11Uri, _privateKeyPkcs11Uri, &_err);
     if (_err)
@@ -391,7 +391,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       _length = cast(size_t)data.length;
 
     auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _password = password.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_tls_certificate_new_from_pkcs12(_data, _length, _password, &_err);
     if (_err)
@@ -417,7 +417,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   static gio.tls_certificate.TlsCertificate[] listNewFromFile(string file)
   {
     GList* _cretval;
-    const(char)* _file = file.toCString(No.Alloc);
+    const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_tls_certificate_list_new_from_file(_file, &_err);
     if (_err)
@@ -474,7 +474,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_tls_certificate_get_issuer_name(cast(GTlsCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -510,7 +510,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_tls_certificate_get_subject_name(cast(GTlsCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

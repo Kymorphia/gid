@@ -22,7 +22,7 @@ struct RTSPVersion
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_version_as_text(version_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

@@ -99,7 +99,7 @@ class ContentFormats : gobject.boxed.Boxed
 
     char*[] _tmpmimeTypes;
     foreach (s; mimeTypes)
-      _tmpmimeTypes ~= s.toCString(No.Alloc);
+      _tmpmimeTypes ~= s.toCString;
     const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
 
     _cretval = gdk_content_formats_new(_mimeTypes, _nMimeTypes);
@@ -145,7 +145,7 @@ class ContentFormats : gobject.boxed.Boxed
   bool containMimeType(string mimeType) nothrow
   {
     bool _retval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_content_formats_contain_mime_type(cast(const(GdkContentFormats)*)this._cPtr, _mimeType);
     return _retval;
   }
@@ -190,7 +190,7 @@ class ContentFormats : gobject.boxed.Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -240,7 +240,7 @@ class ContentFormats : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gdk_content_formats_match_mime_type(cast(const(GdkContentFormats)*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class ContentFormats : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_content_formats_to_string(cast(GdkContentFormats*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class ContentFormats : gobject.boxed.Boxed
   static gdk.content_formats.ContentFormats parse(string string_) nothrow
   {
     GdkContentFormats* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_content_formats_parse(_string_);
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

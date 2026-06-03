@@ -317,7 +317,7 @@ class Image : gtk.widget.Widget
   static gtk.image.Image newFromFile(string filename) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_new_from_file(_filename);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -356,7 +356,7 @@ class Image : gtk.widget.Widget
   static gtk.image.Image newFromIconName(string iconName = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_image_new_from_icon_name(_iconName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -435,7 +435,7 @@ class Image : gtk.widget.Widget
   static gtk.image.Image newFromResource(string resourcePath) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_image_new_from_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -479,7 +479,7 @@ class Image : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_image_get_icon_name(cast(GtkImage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -549,7 +549,7 @@ class Image : gtk.widget.Widget
   */
   void setFromFile(string filename = null) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     gtk_image_set_from_file(cast(GtkImage*)this._cPtr, _filename);
   }
 
@@ -576,7 +576,7 @@ class Image : gtk.widget.Widget
   */
   void setFromIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     gtk_image_set_from_icon_name(cast(GtkImage*)this._cPtr, _iconName);
   }
 
@@ -622,7 +622,7 @@ class Image : gtk.widget.Widget
   */
   void setFromResource(string resourcePath = null) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     gtk_image_set_from_resource(cast(GtkImage*)this._cPtr, _resourcePath);
   }
 

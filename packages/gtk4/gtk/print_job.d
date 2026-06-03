@@ -134,7 +134,7 @@ class PrintJob : gobject.object.ObjectWrap
   this(string title, gtk.printer.Printer printer, gtk.print_settings.PrintSettings settings, gtk.page_setup.PageSetup pageSetup) nothrow
   {
     GtkPrintJob* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
@@ -323,7 +323,7 @@ class PrintJob : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_print_job_get_title(cast(GtkPrintJob*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -513,7 +513,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool setSourceFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_print_job_set_source_file(cast(GtkPrintJob*)this._cPtr, _filename, &_err);
     if (_err)

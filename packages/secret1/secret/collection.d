@@ -216,8 +216,8 @@ class Collection : gio.dbus_proxy.DBusProxy
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_collection_create(service ? cast(SecretService*)service._cPtr(No.Dup) : null, _label, _alias_, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -271,8 +271,8 @@ class Collection : gio.dbus_proxy.DBusProxy
   static secret.collection.Collection createSync(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     SecretCollection* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = secret_collection_create_sync(service ? cast(SecretService*)service._cPtr(No.Dup) : null, _label, _alias_, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -314,7 +314,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_collection_for_alias(service ? cast(SecretService*)service._cPtr(No.Dup) : null, _alias_, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -359,7 +359,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   static secret.collection.Collection forAliasSync(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     SecretCollection* _cretval;
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = secret_collection_for_alias_sync(service ? cast(SecretService*)service._cPtr(No.Dup) : null, _alias_, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -495,7 +495,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   {
     char* _cretval;
     _cretval = secret_collection_get_label(cast(SecretCollection*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -764,7 +764,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_collection_set_label(cast(SecretCollection*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -802,7 +802,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)secret_collection_set_label_sync(cast(SecretCollection*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

@@ -150,7 +150,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   static gda.data_model.DataModel newFile(string filename, bool randomAccess, gda.set.Set options = null) nothrow
   {
     GdaDataModel* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_data_model_import_new_file(_filename, randomAccess, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model.DataModel)(cast(GdaDataModel*)_cretval, Yes.Take);
     return _retval;
@@ -171,7 +171,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   static gda.data_model.DataModel newMem(string data, bool randomAccess, gda.set.Set options = null) nothrow
   {
     GdaDataModel* _cretval;
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_data_model_import_new_mem(_data, randomAccess, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model.DataModel)(cast(GdaDataModel*)_cretval, Yes.Take);
     return _retval;

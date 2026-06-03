@@ -79,8 +79,8 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void append(string name, string value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     soup_message_headers_append(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
   }
 
@@ -122,8 +122,8 @@ class MessageHeaders : gobject.boxed.Boxed
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.MessageHeadersForeachFunc*)userData;
-      string _name = name.fromCString(No.Free);
-      string _value = value.fromCString(No.Free);
+      string _name = name.fromCString!(No.Free);
+      string _value = value.fromCString!(No.Free);
 
       try
       {
@@ -184,7 +184,7 @@ class MessageHeaders : gobject.boxed.Boxed
     char* _disposition;
     GHashTable* _params;
     _retval = cast(bool)soup_message_headers_get_content_disposition(cast(SoupMessageHeaders*)this._cPtr, &_disposition, &_params);
-    disposition = _disposition.fromCString(Yes.Free);
+    disposition = _disposition.fromCString!(Yes.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }
@@ -242,7 +242,7 @@ class MessageHeaders : gobject.boxed.Boxed
     const(char)* _cretval;
     GHashTable* _params;
     _cretval = soup_message_headers_get_content_type(cast(SoupMessageHeaders*)this._cPtr, &_params);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }
@@ -312,9 +312,9 @@ class MessageHeaders : gobject.boxed.Boxed
   string getList(string name) nothrow
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_message_headers_get_list(cast(SoupMessageHeaders*)this._cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -337,9 +337,9 @@ class MessageHeaders : gobject.boxed.Boxed
   string getOne(string name) nothrow
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_message_headers_get_one(cast(SoupMessageHeaders*)this._cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -409,8 +409,8 @@ class MessageHeaders : gobject.boxed.Boxed
   bool headerContains(string name, string token) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _token = token.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _token = token.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)soup_message_headers_header_contains(cast(SoupMessageHeaders*)this._cPtr, _name, _token);
     return _retval;
   }
@@ -428,8 +428,8 @@ class MessageHeaders : gobject.boxed.Boxed
   bool headerEquals(string name, string value) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)soup_message_headers_header_equals(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
     return _retval;
   }
@@ -444,7 +444,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void remove(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     soup_message_headers_remove(cast(SoupMessageHeaders*)this._cPtr, _name);
   }
 
@@ -462,8 +462,8 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void replace(string name, string value) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     soup_message_headers_replace(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
   }
 
@@ -480,7 +480,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setContentDisposition(string disposition, string[string] params = null) nothrow
   {
-    const(char)* _disposition = disposition.toCString(No.Alloc);
+    const(char)* _disposition = disposition.toCString!(No.Malloc, No.Nullable);
     auto _params = gHashTableFromD!(string, string)(params);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_params);
     soup_message_headers_set_content_disposition(cast(SoupMessageHeaders*)this._cPtr, _disposition, _params);
@@ -538,7 +538,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setContentType(string contentType, string[string] params = null) nothrow
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     auto _params = gHashTableFromD!(string, string)(params);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_params);
     soup_message_headers_set_content_type(cast(SoupMessageHeaders*)this._cPtr, _contentType, _params);

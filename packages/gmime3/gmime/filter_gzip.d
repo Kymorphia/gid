@@ -72,7 +72,7 @@ class FilterGZip : gmime.filter.Filter
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_gzip_get_comment(cast(GMimeFilterGZip*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class FilterGZip : gmime.filter.Filter
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_gzip_get_filename(cast(GMimeFilterGZip*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class FilterGZip : gmime.filter.Filter
   */
   void setComment(string comment) nothrow
   {
-    const(char)* _comment = comment.toCString(No.Alloc);
+    const(char)* _comment = comment.toCString!(No.Malloc, No.Nullable);
     g_mime_filter_gzip_set_comment(cast(GMimeFilterGZip*)this._cPtr, _comment);
   }
 
@@ -108,7 +108,7 @@ class FilterGZip : gmime.filter.Filter
   */
   void setFilename(string filename) nothrow
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     g_mime_filter_gzip_set_filename(cast(GMimeFilterGZip*)this._cPtr, _filename);
   }
 }

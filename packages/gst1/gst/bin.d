@@ -225,7 +225,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   this(string name = null) nothrow
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_bin_new(_name);
     this(_cretval, No.Take);
   }
@@ -307,7 +307,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.element.Element getByName(string name) nothrow
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_bin_get_by_name(cast(GstBin*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
@@ -325,7 +325,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.element.Element getByNameRecurseUp(string name) nothrow
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_bin_get_by_name_recurse_up(cast(GstBin*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
@@ -353,7 +353,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateAllByElementFactoryName(string factoryName) nothrow
   {
     GstIterator* _cretval;
-    const(char)* _factoryName = factoryName.toCString(No.Alloc);
+    const(char)* _factoryName = factoryName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_bin_iterate_all_by_element_factory_name(cast(GstBin*)this._cPtr, _factoryName);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

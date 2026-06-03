@@ -62,7 +62,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   this(string name = null) nothrow
   {
     GstGLDisplayWayland* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_gl_display_wayland_new(_name);
     this(_cretval, Yes.Take);
   }

@@ -107,7 +107,7 @@ string codecUtilsAacGetLevel(ubyte[] audioConfig) nothrow
 
   auto _audioConfig = audioConfig.ptr ? cast(const(ubyte)*)audioConfig.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_aac_get_level(_audioConfig, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -132,7 +132,7 @@ string codecUtilsAacGetProfile(ubyte[] audioConfig) nothrow
 
   auto _audioConfig = audioConfig.ptr ? cast(const(ubyte)*)audioConfig.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_aac_get_profile(_audioConfig, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -187,7 +187,7 @@ uint codecUtilsAacGetSampleRateFromIndex(uint srIdx) nothrow
 gst.caps.Caps codecUtilsCapsFromMimeCodec(string codecsField) nothrow
 {
   GstCaps* _cretval;
-  const(char)* _codecsField = codecsField.toCString(No.Alloc);
+  const(char)* _codecsField = codecsField.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_codec_utils_caps_from_mime_codec(_codecsField);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -209,7 +209,7 @@ string codecUtilsCapsGetMimeCodec(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_codec_utils_caps_get_mime_codec(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -253,7 +253,7 @@ string codecUtilsH264GetLevel(ubyte[] sps) nothrow
 
   auto _sps = sps.ptr ? cast(const(ubyte)*)sps.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_h264_get_level(_sps, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -267,7 +267,7 @@ string codecUtilsH264GetLevel(ubyte[] sps) nothrow
 ubyte codecUtilsH264GetLevelIdc(string level) nothrow
 {
   ubyte _retval;
-  const(char)* _level = level.toCString(No.Alloc);
+  const(char)* _level = level.toCString!(No.Malloc, No.Nullable);
   _retval = gst_codec_utils_h264_get_level_idc(_level);
   return _retval;
 }
@@ -301,7 +301,7 @@ string codecUtilsH264GetProfile(ubyte[] sps) nothrow
 
   auto _sps = sps.ptr ? cast(const(ubyte)*)sps.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_h264_get_profile(_sps, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -376,7 +376,7 @@ string codecUtilsH265GetLevel(ubyte[] profileTierLevel) nothrow
 
   auto _profileTierLevel = profileTierLevel.ptr ? cast(const(ubyte)*)profileTierLevel.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_h265_get_level(_profileTierLevel, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -390,7 +390,7 @@ string codecUtilsH265GetLevel(ubyte[] profileTierLevel) nothrow
 ubyte codecUtilsH265GetLevelIdc(string level) nothrow
 {
   ubyte _retval;
-  const(char)* _level = level.toCString(No.Alloc);
+  const(char)* _level = level.toCString!(No.Malloc, No.Nullable);
   _retval = gst_codec_utils_h265_get_level_idc(_level);
   return _retval;
 }
@@ -427,7 +427,7 @@ string codecUtilsH265GetProfile(ubyte[] profileTierLevel) nothrow
 
   auto _profileTierLevel = profileTierLevel.ptr ? cast(const(ubyte)*)profileTierLevel.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_h265_get_profile(_profileTierLevel, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -450,7 +450,7 @@ string codecUtilsH265GetTier(ubyte[] profileTierLevel) nothrow
 
   auto _profileTierLevel = profileTierLevel.ptr ? cast(const(ubyte)*)profileTierLevel.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_h265_get_tier(_profileTierLevel, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -498,7 +498,7 @@ string codecUtilsMpeg4videoGetLevel(ubyte[] visObjSeq) nothrow
 
   auto _visObjSeq = visObjSeq.ptr ? cast(const(ubyte)*)visObjSeq.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_mpeg4video_get_level(_visObjSeq, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -522,7 +522,7 @@ string codecUtilsMpeg4videoGetProfile(ubyte[] visObjSeq) nothrow
 
   auto _visObjSeq = visObjSeq.ptr ? cast(const(ubyte)*)visObjSeq.ptr : [ubyte.init].ptr;
   _cretval = gst_codec_utils_mpeg4video_get_profile(_visObjSeq, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -597,7 +597,7 @@ bool codecUtilsOpusParseHeader(gst.buffer.Buffer header, out uint rate, out ubyt
 gstpbutils.encoding_target.EncodingTarget[] encodingListAllTargets(string categoryname = null) nothrow
 {
   GList* _cretval;
-  const(char)* _categoryname = categoryname.toCString(No.Alloc);
+  const(char)* _categoryname = categoryname.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_encoding_list_all_targets(_categoryname);
   auto _retval = gListToD!(gstpbutils.encoding_target.EncodingTarget, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
@@ -661,7 +661,7 @@ gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstp
   GstInstallPluginsReturn _cretval;
   char*[] _tmpdetails;
   foreach (s; details)
-    _tmpdetails ~= s.toCString(No.Alloc);
+    _tmpdetails ~= s.toCString;
   _tmpdetails ~= null;
   const(char*)* _details = _tmpdetails.ptr;
 
@@ -718,7 +718,7 @@ gstpbutils.types.InstallPluginsReturn installPluginsSync(string[] details, gstpb
   GstInstallPluginsReturn _cretval;
   char*[] _tmpdetails;
   foreach (s; details)
-    _tmpdetails ~= s.toCString(No.Alloc);
+    _tmpdetails ~= s.toCString;
   _tmpdetails ~= null;
   const(char*)* _details = _tmpdetails.ptr;
 
@@ -760,7 +760,7 @@ string missingDecoderInstallerDetailNew(gst.caps.Caps decodeCaps) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_decoder_installer_detail_new(decodeCaps ? cast(const(GstCaps)*)decodeCaps._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -801,9 +801,9 @@ gst.message.Message missingDecoderMessageNew(gst.element.Element element, gst.ca
 string missingElementInstallerDetailNew(string factoryName) nothrow
 {
   char* _cretval;
-  const(char)* _factoryName = factoryName.toCString(No.Alloc);
+  const(char)* _factoryName = factoryName.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_missing_element_installer_detail_new(_factoryName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -821,7 +821,7 @@ string missingElementInstallerDetailNew(string factoryName) nothrow
 gst.message.Message missingElementMessageNew(gst.element.Element element, string factoryName) nothrow
 {
   GstMessage* _cretval;
-  const(char)* _factoryName = factoryName.toCString(No.Alloc);
+  const(char)* _factoryName = factoryName.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_missing_element_message_new(element ? cast(GstElement*)element._cPtr(No.Dup) : null, _factoryName);
   auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -846,7 +846,7 @@ string missingEncoderInstallerDetailNew(gst.caps.Caps encodeCaps) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_encoder_installer_detail_new(encodeCaps ? cast(const(GstCaps)*)encodeCaps._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -886,7 +886,7 @@ string missingPluginMessageGetDescription(gst.message.Message msg) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_plugin_message_get_description(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -907,7 +907,7 @@ string missingPluginMessageGetInstallerDetail(gst.message.Message msg) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_plugin_message_get_installer_detail(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -930,9 +930,9 @@ string missingPluginMessageGetInstallerDetail(gst.message.Message msg) nothrow
 string missingUriSinkInstallerDetailNew(string protocol) nothrow
 {
   char* _cretval;
-  const(char)* _protocol = protocol.toCString(No.Alloc);
+  const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_missing_uri_sink_installer_detail_new(_protocol);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -950,7 +950,7 @@ string missingUriSinkInstallerDetailNew(string protocol) nothrow
 gst.message.Message missingUriSinkMessageNew(gst.element.Element element, string protocol) nothrow
 {
   GstMessage* _cretval;
-  const(char)* _protocol = protocol.toCString(No.Alloc);
+  const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_missing_uri_sink_message_new(element ? cast(GstElement*)element._cPtr(No.Dup) : null, _protocol);
   auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -975,9 +975,9 @@ gst.message.Message missingUriSinkMessageNew(gst.element.Element element, string
 string missingUriSourceInstallerDetailNew(string protocol) nothrow
 {
   char* _cretval;
-  const(char)* _protocol = protocol.toCString(No.Alloc);
+  const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_missing_uri_source_installer_detail_new(_protocol);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -995,7 +995,7 @@ string missingUriSourceInstallerDetailNew(string protocol) nothrow
 gst.message.Message missingUriSourceMessageNew(gst.element.Element element, string protocol) nothrow
 {
   GstMessage* _cretval;
-  const(char)* _protocol = protocol.toCString(No.Alloc);
+  const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_missing_uri_source_message_new(element ? cast(GstElement*)element._cPtr(No.Dup) : null, _protocol);
   auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1015,7 +1015,7 @@ gst.message.Message missingUriSourceMessageNew(gst.element.Element element, stri
 bool pbUtilsAddCodecDescriptionToTagList(gst.tag_list.TagList taglist, string codecTag, gst.caps.Caps caps) nothrow
 {
   bool _retval;
-  const(char)* _codecTag = codecTag.toCString(No.Alloc);
+  const(char)* _codecTag = codecTag.toCString!(No.Malloc, Yes.Nullable);
   _retval = cast(bool)gst_pb_utils_add_codec_description_to_tag_list(taglist ? cast(GstTagList*)taglist._cPtr(No.Dup) : null, _codecTag, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -1054,7 +1054,7 @@ string pbUtilsGetCodecDescription(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_codec_description(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1075,7 +1075,7 @@ string pbUtilsGetDecoderDescription(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_decoder_description(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1095,9 +1095,9 @@ string pbUtilsGetDecoderDescription(gst.caps.Caps caps) nothrow
 string pbUtilsGetElementDescription(string factoryName) nothrow
 {
   char* _cretval;
-  const(char)* _factoryName = factoryName.toCString(No.Alloc);
+  const(char)* _factoryName = factoryName.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_pb_utils_get_element_description(_factoryName);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1118,7 +1118,7 @@ string pbUtilsGetEncoderDescription(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_encoder_description(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1134,7 +1134,7 @@ string pbUtilsGetFileExtensionFromCaps(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_file_extension_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1155,9 +1155,9 @@ string pbUtilsGetFileExtensionFromCaps(gst.caps.Caps caps) nothrow
 string pbUtilsGetSinkDescription(string protocol) nothrow
 {
   char* _cretval;
-  const(char)* _protocol = protocol.toCString(No.Alloc);
+  const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_pb_utils_get_sink_description(_protocol);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1178,9 +1178,9 @@ string pbUtilsGetSinkDescription(string protocol) nothrow
 string pbUtilsGetSourceDescription(string protocol) nothrow
 {
   char* _cretval;
-  const(char)* _protocol = protocol.toCString(No.Alloc);
+  const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_pb_utils_get_source_description(_protocol);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1221,6 +1221,6 @@ string pluginsBaseVersionString() nothrow
 {
   char* _cretval;
   _cretval = gst_plugins_base_version_string();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

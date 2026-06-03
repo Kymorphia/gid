@@ -239,7 +239,7 @@ template RecentChooserT()
   {
     char* _cretval;
     _cretval = gtk_recent_chooser_get_current_uri(cast(GtkRecentChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ template RecentChooserT()
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -444,7 +444,7 @@ template RecentChooserT()
   override bool selectUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
@@ -463,7 +463,7 @@ template RecentChooserT()
   override bool setCurrentUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
@@ -631,7 +631,7 @@ template RecentChooserT()
   */
   override void unselectUri(string uri) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     gtk_recent_chooser_unselect_uri(cast(GtkRecentChooser*)this._cPtr, _uri);
   }
 

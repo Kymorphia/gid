@@ -183,7 +183,7 @@ class PreferencesGroup : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_preferences_group_get_description(cast(AdwPreferencesGroup*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class PreferencesGroup : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_preferences_group_get_title(cast(AdwPreferencesGroup*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   void setDescription(string description = null) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
     adw_preferences_group_set_description(cast(AdwPreferencesGroup*)this._cPtr, _description);
   }
 
@@ -257,7 +257,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_preferences_group_set_title(cast(AdwPreferencesGroup*)this._cPtr, _title);
   }
 }

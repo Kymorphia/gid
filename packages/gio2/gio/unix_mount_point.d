@@ -83,7 +83,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_device_path(cast(GUnixMountPoint*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_fs_type(cast(GUnixMountPoint*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_mount_path(cast(GUnixMountPoint*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_options(cast(GUnixMountPoint*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_unix_mount_point_guess_name(cast(GUnixMountPoint*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   static gio.unix_mount_point.UnixMountPoint at(string mountPath, out ulong timeRead) nothrow
   {
     GUnixMountPoint* _cretval;
-    const(char)* _mountPath = mountPath.toCString(No.Alloc);
+    const(char)* _mountPath = mountPath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_unix_mount_point_at(_mountPath, cast(ulong*)&timeRead);
     auto _retval = _cretval ? new gio.unix_mount_point.UnixMountPoint(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

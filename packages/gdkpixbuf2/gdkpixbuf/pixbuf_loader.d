@@ -135,7 +135,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithMimeType(string mimeType)
   {
     GdkPixbufLoader* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_mime_type(_mimeType, &_err);
     if (_err)
@@ -168,7 +168,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithType(string imageType)
   {
     GdkPixbufLoader* _cretval;
-    const(char)* _imageType = imageType.toCString(No.Alloc);
+    const(char)* _imageType = imageType.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_type(_imageType, &_err);
     if (_err)

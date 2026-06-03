@@ -72,7 +72,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   gio.action_group.ActionGroup getActionGroup(string prefix) nothrow
   {
     GActionGroup* _cretval;
-    const(char)* _prefix = prefix.toCString(No.Alloc);
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_action_muxer_get_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
     return _retval;
@@ -81,7 +81,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   /** */
   void insertActionGroup(string prefix, gio.action_group.ActionGroup actionGroup) nothrow
   {
-    const(char)* _prefix = prefix.toCString(No.Alloc);
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
     panel_action_muxer_insert_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup)._cPtr(No.Dup) : null);
   }
 
@@ -102,7 +102,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -111,7 +111,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   /** */
   void removeActionGroup(string prefix) nothrow
   {
-    const(char)* _prefix = prefix.toCString(No.Alloc);
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
     panel_action_muxer_remove_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix);
   }
 

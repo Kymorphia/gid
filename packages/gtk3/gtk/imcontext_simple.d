@@ -83,7 +83,7 @@ class IMContextSimple : gtk.imcontext.IMContext
   */
   void addComposeFile(string composeFile) nothrow
   {
-    const(char)* _composeFile = composeFile.toCString(No.Alloc);
+    const(char)* _composeFile = composeFile.toCString!(No.Malloc, No.Nullable);
     gtk_im_context_simple_add_compose_file(cast(GtkIMContextSimple*)this._cPtr, _composeFile);
   }
 }

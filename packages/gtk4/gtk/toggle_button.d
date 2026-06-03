@@ -185,7 +185,7 @@ class ToggleButton : gtk.button.Button
   static gtk.toggle_button.ToggleButton newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_toggle_button_new_with_label(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -205,7 +205,7 @@ class ToggleButton : gtk.button.Button
   static gtk.toggle_button.ToggleButton newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_toggle_button_new_with_mnemonic(_label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

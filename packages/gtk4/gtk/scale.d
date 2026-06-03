@@ -283,7 +283,7 @@ class Scale : gtk.range.Range
   */
   void addMark(double value, gtk.types.PositionType position, string markup = null) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, Yes.Nullable);
     gtk_scale_add_mark(cast(GtkScale*)this._cPtr, value, position, _markup);
   }
 
@@ -440,7 +440,7 @@ class Scale : gtk.range.Range
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.ScaleFormatValueFunc");
       }
-      auto _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
 
       return _retval;
     }

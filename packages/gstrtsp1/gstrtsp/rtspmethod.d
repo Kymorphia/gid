@@ -22,7 +22,7 @@ struct RTSPMethod
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_method_as_text(method);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

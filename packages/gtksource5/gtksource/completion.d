@@ -197,8 +197,8 @@ class Completion : gobject.object.ObjectWrap
   static pango.attr_list.AttrList fuzzyHighlight(string haystack, string casefoldQuery) nothrow
   {
     PangoAttrList* _cretval;
-    const(char)* _haystack = haystack.toCString(No.Alloc);
-    const(char)* _casefoldQuery = casefoldQuery.toCString(No.Alloc);
+    const(char)* _haystack = haystack.toCString!(No.Malloc, No.Nullable);
+    const(char)* _casefoldQuery = casefoldQuery.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_completion_fuzzy_highlight(_haystack, _casefoldQuery);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -223,8 +223,8 @@ class Completion : gobject.object.ObjectWrap
   static bool fuzzyMatch(string haystack, string casefoldNeedle, out uint priority) nothrow
   {
     bool _retval;
-    const(char)* _haystack = haystack.toCString(No.Alloc);
-    const(char)* _casefoldNeedle = casefoldNeedle.toCString(No.Alloc);
+    const(char)* _haystack = haystack.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _casefoldNeedle = casefoldNeedle.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_source_completion_fuzzy_match(_haystack, _casefoldNeedle, cast(uint*)&priority);
     return _retval;
   }

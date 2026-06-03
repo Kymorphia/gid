@@ -206,7 +206,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_manager_get_base_cache_directory(cast(WebKitWebsiteDataManager*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_manager_get_base_data_directory(cast(WebKitWebsiteDataManager*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

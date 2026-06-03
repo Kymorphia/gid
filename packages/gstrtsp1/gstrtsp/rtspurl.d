@@ -267,7 +267,7 @@ class RTSPUrl : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -296,7 +296,7 @@ class RTSPUrl : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_rtsp_url_get_request_uri(cast(const(GstRTSPUrl)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -312,9 +312,9 @@ class RTSPUrl : gobject.boxed.Boxed
   string getRequestUriWithControl(string controlPath) nothrow
   {
     char* _cretval;
-    const(char)* _controlPath = controlPath.toCString(No.Alloc);
+    const(char)* _controlPath = controlPath.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_rtsp_url_get_request_uri_with_control(cast(const(GstRTSPUrl)*)this._cPtr, _controlPath);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class RTSPUrl : gobject.boxed.Boxed
   static gstrtsp.types.RTSPResult parse(string urlstr, out gstrtsp.rtspurl.RTSPUrl url) nothrow
   {
     GstRTSPResult _cretval;
-    const(char)* _urlstr = urlstr.toCString(No.Alloc);
+    const(char)* _urlstr = urlstr.toCString!(No.Malloc, No.Nullable);
     GstRTSPUrl* _url;
     _cretval = gst_rtsp_url_parse(_urlstr, &_url);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;

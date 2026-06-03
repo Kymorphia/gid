@@ -52,7 +52,7 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
   /** */
   void embed(string path) nothrow
   {
-    char* _path = path.toCString(No.Alloc);
+    char* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_socket_accessible_embed(cast(GtkSocketAccessible*)this._cPtr, _path);
   }
 }

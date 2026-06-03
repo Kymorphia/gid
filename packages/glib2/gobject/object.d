@@ -424,7 +424,7 @@ class ObjectWrap
   gulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After) nothrow
   {
     auto gclosure = cast(GClosure*)(cast(Closure)closure)._cPtr;
-    auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
+    auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString, gclosure, after == Yes.After);
     g_object_watch_closure(_cInstancePtr, gclosure); // Invalidate closure when object is finalized
 
     if (retval != 0)
@@ -444,7 +444,7 @@ class ObjectWrap
     GValue value;
     initVal!T(&value);
     setVal(&value, val);
-    g_object_set_property(_cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_set_property(_cInstancePtr, propertyName.toCString, &value);
     g_value_unset(&value);
   }
 
@@ -458,7 +458,7 @@ class ObjectWrap
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cast(GObject*)_cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_get_property(cast(GObject*)_cInstancePtr, propertyName.toCString, &value);
     T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;
@@ -517,8 +517,8 @@ class ObjectWrap
   gobject.binding.Binding bindProperty(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags) nothrow
   {
     GBinding* _cretval;
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
+    const(char)* _sourceProperty = sourceProperty.toCString!(No.Malloc, No.Nullable);
+    const(char)* _targetProperty = targetProperty.toCString!(No.Malloc, No.Nullable);
     _cretval = g_object_bind_property(cast(GObject*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
@@ -549,8 +549,8 @@ class ObjectWrap
   gobject.binding.Binding bindPropertyFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom) nothrow
   {
     GBinding* _cretval;
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
+    const(char)* _sourceProperty = sourceProperty.toCString!(No.Malloc, No.Nullable);
+    const(char)* _targetProperty = targetProperty.toCString!(No.Malloc, No.Nullable);
     _cretval = g_object_bind_property_with_closures(cast(GObject*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo._cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
@@ -593,7 +593,7 @@ class ObjectWrap
   */
   void* getData(string key) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     auto _retval = g_object_get_data(cast(GObject*)this._cPtr, _key);
     return _retval;
   }
@@ -622,7 +622,7 @@ class ObjectWrap
   */
   void getProperty(string propertyName, gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     g_object_get_property(cast(GObject*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 
@@ -658,7 +658,7 @@ class ObjectWrap
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString;
     const(char*)* _names = _tmpnames.ptr;
 
     if (values)
@@ -700,7 +700,7 @@ class ObjectWrap
   */
   void notify(string propertyName) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     g_object_notify(cast(GObject*)this._cPtr, _propertyName);
   }
 
@@ -802,7 +802,7 @@ class ObjectWrap
   */
   void setData(string key, void* data = null) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     g_object_set_data(cast(GObject*)this._cPtr, _key, data);
   }
 
@@ -815,7 +815,7 @@ class ObjectWrap
   */
   void setProperty(string propertyName, gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     g_object_set_property(cast(GObject*)this._cPtr, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -830,7 +830,7 @@ class ObjectWrap
   */
   void* stealData(string key) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     auto _retval = g_object_steal_data(cast(GObject*)this._cPtr, _key);
     return _retval;
   }

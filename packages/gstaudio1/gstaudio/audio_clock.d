@@ -86,7 +86,7 @@ class AudioClock : gst.system_clock.SystemClock
     }
     auto _funcCB = func ? &_funcCallback : null;
     GstClock* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _cretval = gst_audio_clock_new(_name, _funcCB, _func, _funcDestroyCB);

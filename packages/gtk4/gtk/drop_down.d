@@ -352,7 +352,7 @@ class DropDown : gtk.widget.Widget
     GtkWidget* _cretval;
     char*[] _tmpstrings;
     foreach (s; strings)
-      _tmpstrings ~= s.toCString(No.Alloc);
+      _tmpstrings ~= s.toCString;
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
 

@@ -53,7 +53,7 @@ class Field : gobject.object.ObjectWrap
   this(string name, arrow.data_type.DataType dataType) nothrow
   {
     GArrowField* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_field_new(_name, dataType ? cast(GArrowDataType*)dataType._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
@@ -62,7 +62,7 @@ class Field : gobject.object.ObjectWrap
   static arrow.field.Field newFull(string name, arrow.data_type.DataType dataType, bool nullable) nothrow
   {
     GArrowField* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = garrow_field_new_full(_name, dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, nullable);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
@@ -121,7 +121,7 @@ class Field : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = garrow_field_get_name(cast(GArrowField*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Field : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_field_to_string(cast(GArrowField*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Field : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_field_to_string_metadata(cast(GArrowField*)this._cPtr, showMetadata);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

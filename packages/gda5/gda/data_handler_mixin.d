@@ -39,7 +39,7 @@ template DataHandlerT()
   {
     const(char)* _cretval;
     _cretval = gda_data_handler_get_descr(cast(GdaDataHandler*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ template DataHandlerT()
   {
     char* _cretval;
     _cretval = gda_data_handler_get_sql_from_value(cast(GdaDataHandler*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ template DataHandlerT()
   {
     char* _cretval;
     _cretval = gda_data_handler_get_str_from_value(cast(GdaDataHandler*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ template DataHandlerT()
   override gobject.value.Value getValueFromSql(string sql, gobject.types.GType type) nothrow
   {
     GValue* _cretval;
-    const(char)* _sql = sql.toCString(No.Alloc);
+    const(char)* _sql = sql.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gda_data_handler_get_value_from_sql(cast(GdaDataHandler*)this._cPtr, _sql, type);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -142,7 +142,7 @@ template DataHandlerT()
   override gobject.value.Value getValueFromStr(string str, gobject.types.GType type) nothrow
   {
     GValue* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gda_data_handler_get_value_from_str(cast(GdaDataHandler*)this._cPtr, _str, type);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

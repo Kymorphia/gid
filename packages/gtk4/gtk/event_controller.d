@@ -198,7 +198,7 @@ class EventController : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_event_controller_get_name(cast(GtkEventController*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class EventController : gobject.object.ObjectWrap
   */
   void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_event_controller_set_name(cast(GtkEventController*)this._cPtr, _name);
   }
 
@@ -295,7 +295,7 @@ class EventController : gobject.object.ObjectWrap
   */
   void setStaticName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_event_controller_set_static_name(cast(GtkEventController*)this._cPtr, _name);
   }
 }

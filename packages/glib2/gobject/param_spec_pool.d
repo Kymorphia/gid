@@ -105,7 +105,7 @@ class ParamSpecPool
   gobject.param_spec.ParamSpec lookup(string paramName, gobject.types.GType ownerType, bool walkAncestors) nothrow
   {
     GParamSpec* _cretval;
-    const(char)* _paramName = paramName.toCString(No.Alloc);
+    const(char)* _paramName = paramName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_param_spec_pool_lookup(cast(GParamSpecPool*)this._cPtr, _paramName, ownerType, walkAncestors);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;

@@ -119,7 +119,7 @@ template TableT()
   {
     const(char)* _cretval;
     _cretval = atk_table_get_column_description(cast(AtkTable*)this._cPtr, column);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ template TableT()
   {
     const(char)* _cretval;
     _cretval = atk_table_get_row_description(cast(AtkTable*)this._cPtr, row);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -432,7 +432,7 @@ template TableT()
   */
   override void setColumnDescription(int column, string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     atk_table_set_column_description(cast(AtkTable*)this._cPtr, column, _description);
   }
 
@@ -458,7 +458,7 @@ template TableT()
   */
   override void setRowDescription(int row, string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     atk_table_set_row_description(cast(AtkTable*)this._cPtr, row, _description);
   }
 

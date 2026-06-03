@@ -137,7 +137,7 @@ class BreakpointCondition : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = adw_breakpoint_condition_to_string(cast(AdwBreakpointCondition*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class BreakpointCondition : gobject.boxed.Boxed
   static adw.breakpoint_condition.BreakpointCondition parse(string str) nothrow
   {
     AdwBreakpointCondition* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_breakpoint_condition_parse(_str);
     auto _retval = _cretval ? new adw.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

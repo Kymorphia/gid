@@ -130,7 +130,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   static gtk.builder_list_item_factory.BuilderListItemFactory newFromResource(gtk.builder_scope.BuilderScope scope_, string resourcePath) nothrow
   {
     GtkListItemFactory* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_builder_list_item_factory_new_from_resource(scope_ ? cast(GtkBuilderScope*)(cast(gobject.object.ObjectWrap)scope_)._cPtr(No.Dup) : null, _resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder_list_item_factory.BuilderListItemFactory)(cast(GtkListItemFactory*)_cretval, Yes.Take);
     return _retval;
@@ -157,7 +157,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   {
     const(char)* _cretval;
     _cretval = gtk_builder_list_item_factory_get_resource(cast(GtkBuilderListItemFactory*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

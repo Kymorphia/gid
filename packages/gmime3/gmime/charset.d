@@ -31,7 +31,7 @@ struct Charset
   {
     const(char)* _cretval;
     _cretval = g_mime_charset_best_name(cast(GMimeCharset*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -47,7 +47,7 @@ struct Charset
   bool canEncode(string charset, string text) nothrow
   {
     bool _retval;
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     size_t _len;
     if (text)
       _len = cast(size_t)text.length;
@@ -101,7 +101,7 @@ struct Charset
 
     auto _inbuf = inbuf.ptr ? cast(const(char)*)inbuf.ptr : [char.init].ptr;
     _cretval = g_mime_charset_best(_inbuf, _inlen);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -120,9 +120,9 @@ struct Charset
   static string canonName(string charset) nothrow
   {
     const(char)* _cretval;
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_charset_canon_name(_charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -136,9 +136,9 @@ struct Charset
   static string iconvName(string charset) nothrow
   {
     const(char)* _cretval;
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_charset_iconv_name(_charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -153,9 +153,9 @@ struct Charset
   static string isoToWindows(string isocharset) nothrow
   {
     const(char)* _cretval;
-    const(char)* _isocharset = isocharset.toCString(No.Alloc);
+    const(char)* _isocharset = isocharset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_charset_iso_to_windows(_isocharset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -172,9 +172,9 @@ struct Charset
   static string language(string charset) nothrow
   {
     const(char)* _cretval;
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_charset_language(_charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ struct Charset
   {
     const(char)* _cretval;
     _cretval = g_mime_charset_locale_name();
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -224,9 +224,9 @@ struct Charset
   static string name(string charset) nothrow
   {
     const(char)* _cretval;
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_charset_name(_charset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

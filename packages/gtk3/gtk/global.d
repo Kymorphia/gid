@@ -111,7 +111,7 @@ string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType accelerat
 {
   char* _cretval;
   _cretval = gtk_accelerator_get_label(acceleratorKey, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -135,7 +135,7 @@ string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint accelera
 {
   char* _cretval;
   _cretval = gtk_accelerator_get_label_with_keycode(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -156,7 +156,7 @@ string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMo
 {
   char* _cretval;
   _cretval = gtk_accelerator_name(acceleratorKey, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -178,7 +178,7 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
 {
   char* _cretval;
   _cretval = gtk_accelerator_name_with_keycode(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -205,7 +205,7 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
 */
 void acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods) nothrow
 {
-  const(char)* _accelerator = accelerator.toCString(No.Alloc);
+  const(char)* _accelerator = accelerator.toCString!(No.Malloc, No.Nullable);
   gtk_accelerator_parse(_accelerator, cast(uint*)&acceleratorKey, &acceleratorMods);
 }
 
@@ -234,7 +234,7 @@ void acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types
 */
 void acceleratorParseWithKeycode(string accelerator, out uint acceleratorKey, out uint[] acceleratorCodes, out gdk.types.ModifierType acceleratorMods) nothrow
 {
-  const(char)* _accelerator = accelerator.toCString(No.Alloc);
+  const(char)* _accelerator = accelerator.toCString!(No.Malloc, No.Nullable);
   uint* _acceleratorCodes;
   gtk_accelerator_parse_with_keycode(_accelerator, cast(uint*)&acceleratorKey, &_acceleratorCodes, &acceleratorMods);
   uint _lenacceleratorCodes;
@@ -430,7 +430,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) 
 {
   const(char)* _cretval;
   _cretval = gtk_check_version(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -605,7 +605,7 @@ void dragSetIconGicon(gdk.drag_context.DragContext context, gio.icon.Icon icon, 
 */
 void dragSetIconName(gdk.drag_context.DragContext context, string iconName, int hotX, int hotY) nothrow
 {
-  const(char)* _iconName = iconName.toCString(No.Alloc);
+  const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
   gtk_drag_set_icon_name(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, _iconName, hotX, hotY);
 }
 
@@ -638,7 +638,7 @@ void dragSetIconPixbuf(gdk.drag_context.DragContext context, gdkpixbuf.pixbuf.Pi
 */
 void dragSetIconStock(gdk.drag_context.DragContext context, string stockId, int hotX, int hotY) nothrow
 {
-  const(char)* _stockId = stockId.toCString(No.Alloc);
+  const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
   gtk_drag_set_icon_stock(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, _stockId, hotX, hotY);
 }
 
@@ -1145,7 +1145,7 @@ void mainQuit() nothrow
 */
 void paintArrow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, gtk.types.ArrowType arrowType, bool fill, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_arrow(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, arrowType, fill, x, y, width, height);
 }
 
@@ -1168,7 +1168,7 @@ void paintArrow(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_box(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1195,7 +1195,7 @@ void paintBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateTy
 */
 void paintBoxGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_box_gap(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
 }
 
@@ -1219,7 +1219,7 @@ void paintBoxGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintCheck(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_check(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1243,7 +1243,7 @@ void paintCheck(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintDiamond(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_diamond(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1274,7 +1274,7 @@ void paintDiamond(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 */
 void paintExpander(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, gtk.types.ExpanderStyle expanderStyle) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_expander(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, expanderStyle);
 }
 
@@ -1298,7 +1298,7 @@ void paintExpander(gtk.style.Style style, cairo.context.Context cr, gtk.types.St
 */
 void paintExtension(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_extension(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide);
 }
 
@@ -1321,7 +1321,7 @@ void paintExtension(gtk.style.Style style, cairo.context.Context cr, gtk.types.S
 */
 void paintFlatBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_flat_box(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1344,7 +1344,7 @@ void paintFlatBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 */
 void paintFocus(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_focus(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1368,7 +1368,7 @@ void paintFocus(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintHandle(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_handle(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, orientation);
 }
 
@@ -1390,7 +1390,7 @@ void paintHandle(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintHline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x1, int x2, int y) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_hline(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x1, x2, y);
 }
 
@@ -1413,7 +1413,7 @@ void paintHline(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintLayout(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, bool useText, gtk.widget.Widget widget, string detail, int x, int y, pango.layout.Layout layout) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_layout(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, useText, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
 }
 
@@ -1437,7 +1437,7 @@ void paintLayout(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintOption(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_option(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1461,7 +1461,7 @@ void paintOption(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintResizeGrip(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, gdk.types.WindowEdge edge, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_resize_grip(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, edge, x, y, width, height);
 }
 
@@ -1485,7 +1485,7 @@ void paintResizeGrip(gtk.style.Style style, cairo.context.Context cr, gtk.types.
 */
 void paintShadow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_shadow(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1513,7 +1513,7 @@ void paintShadow(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintShadowGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_shadow_gap(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
 }
 
@@ -1538,7 +1538,7 @@ void paintShadowGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.S
 */
 void paintSlider(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_slider(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, orientation);
 }
 
@@ -1562,7 +1562,7 @@ void paintSlider(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintSpinner(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, uint step, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_spinner(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, step, x, y, width, height);
 }
 
@@ -1586,7 +1586,7 @@ void paintSpinner(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 */
 void paintTab(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_tab(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
@@ -1608,7 +1608,7 @@ void paintTab(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateTy
 */
 void paintVline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int y1, int y2, int x) nothrow
 {
-  const(char)* _detail = detail.toCString(No.Alloc);
+  const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_vline(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, y1, y2, x);
 }
 
@@ -1712,7 +1712,7 @@ void propagateEvent(gtk.widget.Widget widget, gdk.event.Event event) nothrow
 */
 void rcAddDefaultFile(string filename) nothrow
 {
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   gtk_rc_add_default_file(_filename);
 }
 
@@ -1730,9 +1730,9 @@ void rcAddDefaultFile(string filename) nothrow
 string rcFindModuleInPath(string moduleFile) nothrow
 {
   char* _cretval;
-  const(char)* _moduleFile = moduleFile.toCString(No.Alloc);
+  const(char)* _moduleFile = moduleFile.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_rc_find_module_in_path(_moduleFile);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1753,9 +1753,9 @@ string rcFindModuleInPath(string moduleFile) nothrow
 string rcFindPixmapInPath(gtk.settings.Settings settings, glib.scanner.Scanner scanner, string pixmapFile) nothrow
 {
   char* _cretval;
-  const(char)* _pixmapFile = pixmapFile.toCString(No.Alloc);
+  const(char)* _pixmapFile = pixmapFile.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_rc_find_pixmap_in_path(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, scanner ? cast(GScanner*)scanner._cPtr : null, _pixmapFile);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1781,7 +1781,7 @@ string[] rcGetDefaultFiles() nothrow
       _cretlength++;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.Free);
+      _retval[i] = _cretval[i].fromCString!(No.Free);
   }
   return _retval;
 }
@@ -1799,7 +1799,7 @@ string rcGetImModuleFile() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_im_module_file();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1818,7 +1818,7 @@ string rcGetImModulePath() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_im_module_path();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1834,7 +1834,7 @@ string rcGetModuleDir() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_module_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1898,8 +1898,8 @@ gtk.style.Style rcGetStyle(gtk.widget.Widget widget) nothrow
 gtk.style.Style rcGetStyleByPaths(gtk.settings.Settings settings, string widgetPath, string classPath, gobject.types.GType type) nothrow
 {
   GtkStyle* _cretval;
-  const(char)* _widgetPath = widgetPath.toCString(No.Alloc);
-  const(char)* _classPath = classPath.toCString(No.Alloc);
+  const(char)* _widgetPath = widgetPath.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _classPath = classPath.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gtk_rc_get_style_by_paths(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, _widgetPath, _classPath, type);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
   return _retval;
@@ -1917,7 +1917,7 @@ string rcGetThemeDir() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_theme_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -1932,7 +1932,7 @@ string rcGetThemeDir() nothrow
 */
 void rcParse(string filename) nothrow
 {
-  const(char)* _filename = filename.toCString(No.Alloc);
+  const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
   gtk_rc_parse(_filename);
 }
 
@@ -2031,7 +2031,7 @@ uint rcParseState(glib.scanner.Scanner scanner, out gtk.types.StateType state) n
 */
 void rcParseString(string rcString) nothrow
 {
-  const(char)* _rcString = rcString.toCString(No.Alloc);
+  const(char)* _rcString = rcString.toCString!(No.Malloc, No.Nullable);
   gtk_rc_parse_string(_rcString);
 }
 
@@ -2105,7 +2105,7 @@ void rcSetDefaultFiles(string[] filenames) nothrow
 {
   char*[] _tmpfilenames;
   foreach (s; filenames)
-    _tmpfilenames ~= s.toCString(No.Alloc);
+    _tmpfilenames ~= s.toCString;
   _tmpfilenames ~= null;
   char** _filenames = _tmpfilenames.ptr;
 
@@ -2675,7 +2675,7 @@ void setDebugFlags(uint flags) nothrow
 bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
 {
   bool _retval;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _retval = cast(bool)gtk_show_uri(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
@@ -2710,7 +2710,7 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
 bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
 {
   bool _retval;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   GError *_err;
   _retval = cast(bool)gtk_show_uri_on_window(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
@@ -2744,7 +2744,7 @@ string[] stockListIds() nothrow
 bool stockLookup(string stockId, out gtk.stock_item.StockItem item) nothrow
 {
   bool _retval;
-  const(char)* _stockId = stockId.toCString(No.Alloc);
+  const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
   GtkStockItem _item;
   _retval = cast(bool)gtk_stock_lookup(_stockId, &_item);
   item = new gtk.stock_item.StockItem(cast(void*)&_item, No.Take);
@@ -2797,7 +2797,7 @@ void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func) nothrow
   {
     string _dretval;
     auto _dlg = cast(gtk.types.TranslateFunc*)funcData;
-    string _path = path.fromCString(No.Free);
+    string _path = path.fromCString!(No.Free);
 
     try
     {
@@ -2807,12 +2807,12 @@ void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func) nothrow
     {
       gidInvokeCallbackExceptionHandler(e, "gtk.types.TranslateFunc");
     }
-    auto _retval = _dretval.toCString(Yes.Alloc);
+    auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
 
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
-  const(char)* _domain = domain.toCString(No.Alloc);
+  const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   gtk_stock_set_translate_func(_domain, _funcCB, _func, _funcDestroyCB);
@@ -2882,8 +2882,8 @@ gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList
 gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText) nothrow
 {
   GtkWidget* _cretval;
-  const(char)* _windowTitle = windowTitle.toCString(No.Alloc);
-  const(char)* _dialogText = dialogText.toCString(No.Alloc);
+  const(char)* _windowTitle = windowTitle.toCString!(No.Malloc, No.Nullable);
+  const(char)* _dialogText = dialogText.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_test_create_simple_window(_windowTitle, _dialogText);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
@@ -2906,7 +2906,7 @@ gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText) 
 gtk.widget.Widget testFindLabel(gtk.widget.Widget widget, string labelPattern) nothrow
 {
   GtkWidget* _cretval;
-  const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
+  const(char)* _labelPattern = labelPattern.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_test_find_label(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _labelPattern);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
@@ -2952,7 +2952,7 @@ gtk.widget.Widget testFindSibling(gtk.widget.Widget baseWidget, gobject.types.GT
 gtk.widget.Widget testFindWidget(gtk.widget.Widget widget, string labelPattern, gobject.types.GType widgetType) nothrow
 {
   GtkWidget* _cretval;
-  const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
+  const(char)* _labelPattern = labelPattern.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_test_find_widget(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _labelPattern, widgetType);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
@@ -3059,7 +3059,7 @@ string testTextGet(gtk.widget.Widget widget) nothrow
 {
   char* _cretval;
   _cretval = gtk_test_text_get(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -3075,7 +3075,7 @@ string testTextGet(gtk.widget.Widget widget) nothrow
 */
 void testTextSet(gtk.widget.Widget widget, string string_) nothrow
 {
-  const(char)* _string_ = string_.toCString(No.Alloc);
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   gtk_test_text_set(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _string_);
 }
 

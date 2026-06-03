@@ -211,7 +211,7 @@ class StatusPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_status_page_get_description(cast(AdwStatusPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class StatusPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_status_page_get_icon_name(cast(AdwStatusPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class StatusPage : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_status_page_get_title(cast(AdwStatusPage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class StatusPage : gtk.widget.Widget
   */
   void setDescription(string description = null) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
     adw_status_page_set_description(cast(AdwStatusPage*)this._cPtr, _description);
   }
 
@@ -286,7 +286,7 @@ class StatusPage : gtk.widget.Widget
   */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     adw_status_page_set_icon_name(cast(AdwStatusPage*)this._cPtr, _iconName);
   }
 
@@ -313,7 +313,7 @@ class StatusPage : gtk.widget.Widget
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_status_page_set_title(cast(AdwStatusPage*)this._cPtr, _title);
   }
 }

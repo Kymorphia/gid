@@ -83,7 +83,7 @@ class URIRequest : gobject.object.ObjectWrap
   this(string uri) nothrow
   {
     WebKitURIRequest* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_uri_request_new(_uri);
     this(_cretval, Yes.Take);
   }
@@ -110,7 +110,7 @@ class URIRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_request_get_http_method(cast(WebKitURIRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class URIRequest : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_uri_request_get_uri(cast(WebKitURIRequest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class URIRequest : gobject.object.ObjectWrap
   */
   void setUri(string uri) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     webkit_uri_request_set_uri(cast(WebKitURIRequest*)this._cPtr, _uri);
   }
 }

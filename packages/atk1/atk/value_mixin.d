@@ -280,7 +280,7 @@ template ValueT()
   {
     char* _text;
     atk_value_get_value_and_text(cast(AtkValue*)this._cPtr, cast(double*)&value, &_text);
-    text = _text.fromCString(Yes.Free);
+    text = _text.fromCString!(Yes.Free);
   }
 
   /**

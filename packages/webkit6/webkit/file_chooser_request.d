@@ -131,7 +131,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -206,7 +206,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -223,7 +223,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
   {
     char*[] _tmpfiles;
     foreach (s; files)
-      _tmpfiles ~= s.toCString(No.Alloc);
+      _tmpfiles ~= s.toCString;
     _tmpfiles ~= null;
     const(char*)* _files = _tmpfiles.ptr;
 

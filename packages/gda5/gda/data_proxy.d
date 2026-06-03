@@ -274,7 +274,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   {
     const(char)* _cretval;
     _cretval = gda_data_proxy_get_filter_expr(cast(GdaDataProxy*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -521,7 +521,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   bool setFilterExpr(string filterExpr = null)
   {
     bool _retval;
-    const(char)* _filterExpr = filterExpr.toCString(No.Alloc);
+    const(char)* _filterExpr = filterExpr.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_data_proxy_set_filter_expr(cast(GdaDataProxy*)this._cPtr, _filterExpr, &_err);
     if (_err)

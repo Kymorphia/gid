@@ -89,7 +89,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_interface_name(cast(GDBusMethodInvocation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_method_name(cast(GDBusMethodInvocation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_object_path(cast(GDBusMethodInvocation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_sender(cast(GDBusMethodInvocation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -213,8 +213,8 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnDbusError(string errorName, string errorMessage) nothrow
   {
-    const(char)* _errorName = errorName.toCString(No.Alloc);
-    const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
+    const(char)* _errorName = errorName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
     g_dbus_method_invocation_return_dbus_error(cast(GDBusMethodInvocation*)this._cPtr, _errorName, _errorMessage);
   }
 
@@ -232,7 +232,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnErrorLiteral(glib.types.Quark domain, int code, string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     g_dbus_method_invocation_return_error_literal(cast(GDBusMethodInvocation*)this._cPtr, domain, code, _message);
   }
 

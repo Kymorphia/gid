@@ -142,7 +142,7 @@ class Hmac : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_hmac_get_string(cast(GHmac*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

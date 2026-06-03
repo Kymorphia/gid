@@ -71,7 +71,7 @@ class WebsiteData : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_get_name(cast(WebKitWebsiteData*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

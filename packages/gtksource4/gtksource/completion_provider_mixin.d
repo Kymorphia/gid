@@ -93,7 +93,7 @@ template CompletionProviderT()
   {
     const(char)* _cretval;
     _cretval = gtk_source_completion_provider_get_icon_name(cast(GtkSourceCompletionProvider*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ template CompletionProviderT()
   {
     char* _cretval;
     _cretval = gtk_source_completion_provider_get_name(cast(GtkSourceCompletionProvider*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

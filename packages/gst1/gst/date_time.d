@@ -121,7 +121,7 @@ class DateTime : gobject.boxed.Boxed
   static gst.date_time.DateTime newFromIso8601String(string string_) nothrow
   {
     GstDateTime* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_date_time_new_from_iso8601_string(_string_);
     auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -488,7 +488,7 @@ class DateTime : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_date_time_to_iso8601_string(cast(GstDateTime*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

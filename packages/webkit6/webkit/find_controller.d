@@ -112,7 +112,7 @@ class FindController : gobject.object.ObjectWrap
   */
   void countMatches(string searchText, uint findOptions, uint maxMatchCount) nothrow
   {
-    const(char)* _searchText = searchText.toCString(No.Alloc);
+    const(char)* _searchText = searchText.toCString!(No.Malloc, No.Nullable);
     webkit_find_controller_count_matches(cast(WebKitFindController*)this._cPtr, _searchText, findOptions, maxMatchCount);
   }
 
@@ -160,7 +160,7 @@ class FindController : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_find_controller_get_search_text(cast(WebKitFindController*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class FindController : gobject.object.ObjectWrap
   */
   void search(string searchText, uint findOptions, uint maxMatchCount) nothrow
   {
-    const(char)* _searchText = searchText.toCString(No.Alloc);
+    const(char)* _searchText = searchText.toCString!(No.Malloc, No.Nullable);
     webkit_find_controller_search(cast(WebKitFindController*)this._cPtr, _searchText, findOptions, maxMatchCount);
   }
 

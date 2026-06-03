@@ -97,7 +97,7 @@ class SqlSelectOrder
   {
     char* _cretval;
     _cretval = gda_sql_select_order_serialize(cast(GdaSqlSelectOrder*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

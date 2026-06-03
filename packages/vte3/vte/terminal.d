@@ -921,7 +921,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_check_hyperlink_at(cast(VteTerminal*)this._cPtr, x, y);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -946,7 +946,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_check_match_at(cast(VteTerminal*)this._cPtr, x, y, cast(int*)&tag);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -986,7 +986,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1231,7 +1231,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_directory_uri(cast(VteTerminal*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1240,7 +1240,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_file_uri(cast(VteTerminal*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1332,7 +1332,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_encoding(cast(VteTerminal*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1387,7 +1387,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_icon_title(cast(VteTerminal*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1513,7 +1513,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_format(cast(VteTerminal*)this._cPtr, format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1533,7 +1533,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_range_format(cast(VteTerminal*)this._cPtr, format, startRow, startCol, endRow, endCol, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1549,7 +1549,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected(cast(VteTerminal*)this._cPtr, format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1565,7 +1565,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected_full(cast(VteTerminal*)this._cPtr, format, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1574,7 +1574,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_window_title(cast(VteTerminal*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1590,7 +1590,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_word_char_exceptions(cast(VteTerminal*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1671,7 +1671,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_match_check(cast(VteTerminal*)this._cPtr, column, row, cast(int*)&tag);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1723,7 +1723,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void matchSetCursorName(int tag, string cursorName) nothrow
   {
-    const(char)* _cursorName = cursorName.toCString(No.Alloc);
+    const(char)* _cursorName = cursorName.toCString!(No.Malloc, No.Nullable);
     vte_terminal_match_set_cursor_name(cast(VteTerminal*)this._cPtr, tag, _cursorName);
   }
 
@@ -1758,7 +1758,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void pasteText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     vte_terminal_paste_text(cast(VteTerminal*)this._cPtr, _text);
   }
 
@@ -2253,7 +2253,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool setEncoding(string codeset = null)
   {
     bool _retval;
-    const(char)* _codeset = codeset.toCString(No.Alloc);
+    const(char)* _codeset = codeset.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)vte_terminal_set_encoding(cast(VteTerminal*)this._cPtr, _codeset, &_err);
     if (_err)
@@ -2468,7 +2468,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setWordCharExceptions(string exceptions) nothrow
   {
-    const(char)* _exceptions = exceptions.toCString(No.Alloc);
+    const(char)* _exceptions = exceptions.toCString!(No.Malloc, No.Nullable);
     vte_terminal_set_word_char_exceptions(cast(VteTerminal*)this._cPtr, _exceptions);
   }
 
@@ -2575,16 +2575,16 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     _tmpargv ~= null;
     char** _argv = _tmpargv.ptr;
 
     char*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.Alloc);
+      _tmpenvv ~= s.toCString;
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
@@ -2652,16 +2652,16 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
     bool _retval;
-    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     _tmpargv ~= null;
     char** _argv = _tmpargv.ptr;
 
     char*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.Alloc);
+      _tmpenvv ~= s.toCString;
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
@@ -2765,16 +2765,16 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString;
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
     const(char)*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.Alloc);
+      _tmpenvv ~= s.toCString;
     _tmpenvv ~= null;
     const(char*)* _envv = _tmpenvv.ptr;
 

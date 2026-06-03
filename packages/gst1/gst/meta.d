@@ -139,7 +139,7 @@ class Meta
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -171,10 +171,10 @@ class Meta
   static gobject.types.GType apiTypeRegister(string api, string[] tags) nothrow
   {
     gobject.types.GType _retval;
-    const(char)* _api = api.toCString(No.Alloc);
+    const(char)* _api = api.toCString!(No.Malloc, No.Nullable);
     char*[] _tmptags;
     foreach (s; tags)
-      _tmptags ~= s.toCString(No.Alloc);
+      _tmptags ~= s.toCString;
     _tmptags ~= null;
     const(char*)* _tags = _tmptags.ptr;
 
@@ -224,7 +224,7 @@ class Meta
   static gst.meta_info.MetaInfo getInfo(string impl) nothrow
   {
     const(GstMetaInfo)* _cretval;
-    const(char)* _impl = impl.toCString(No.Alloc);
+    const(char)* _impl = impl.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_meta_get_info(_impl);
     gst.meta_info.MetaInfo _retval;
     if (_cretval)
@@ -275,10 +275,10 @@ class Meta
     }
     auto _transformFuncCB = transformFunc ? &_transformFuncCallback : null;
     const(GstMetaInfo)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     char*[] _tmptags;
     foreach (s; tags)
-      _tmptags ~= s.toCString(No.Alloc);
+      _tmptags ~= s.toCString;
     _tmptags ~= null;
     const(char*)* _tags = _tmptags.ptr;
 
@@ -302,7 +302,7 @@ class Meta
   static gst.meta_info.MetaInfo registerCustomSimple(string name) nothrow
   {
     const(GstMetaInfo)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_meta_register_custom_simple(_name);
     gst.meta_info.MetaInfo _retval;
     if (_cretval)

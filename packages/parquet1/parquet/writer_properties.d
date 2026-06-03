@@ -59,14 +59,14 @@ class WriterProperties : gobject.object.ObjectWrap
   /** */
   void disableDictionary(string path = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     gparquet_writer_properties_disable_dictionary(cast(GParquetWriterProperties*)this._cPtr, _path);
   }
 
   /** */
   void enableDictionary(string path = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     gparquet_writer_properties_enable_dictionary(cast(GParquetWriterProperties*)this._cPtr, _path);
   }
 
@@ -82,7 +82,7 @@ class WriterProperties : gobject.object.ObjectWrap
   arrow.types.CompressionType getCompressionPath(string path) nothrow
   {
     GArrowCompressionType _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gparquet_writer_properties_get_compression_path(cast(GParquetWriterProperties*)this._cPtr, _path);
     arrow.types.CompressionType _retval = cast(arrow.types.CompressionType)_cretval;
     return _retval;
@@ -116,7 +116,7 @@ class WriterProperties : gobject.object.ObjectWrap
   bool isDictionaryEnabled(string path) nothrow
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gparquet_writer_properties_is_dictionary_enabled(cast(GParquetWriterProperties*)this._cPtr, _path);
     return _retval;
   }
@@ -130,7 +130,7 @@ class WriterProperties : gobject.object.ObjectWrap
   /** */
   void setCompression(arrow.types.CompressionType compressionType, string path = null) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     gparquet_writer_properties_set_compression(cast(GParquetWriterProperties*)this._cPtr, compressionType, _path);
   }
 

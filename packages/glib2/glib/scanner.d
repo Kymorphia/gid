@@ -391,7 +391,7 @@ class Scanner
   */
   void* lookupSymbol(string symbol) nothrow
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString!(No.Malloc, No.Nullable);
     auto _retval = g_scanner_lookup_symbol(cast(GScanner*)this._cPtr, _symbol);
     return _retval;
   }
@@ -428,7 +428,7 @@ class Scanner
   */
   void scopeAddSymbol(uint scopeId, string symbol, void* value = null) nothrow
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString!(No.Malloc, No.Nullable);
     g_scanner_scope_add_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol, value);
   }
 
@@ -474,7 +474,7 @@ class Scanner
   */
   void* scopeLookupSymbol(uint scopeId, string symbol) nothrow
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString!(No.Malloc, No.Nullable);
     auto _retval = g_scanner_scope_lookup_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol);
     return _retval;
   }
@@ -488,7 +488,7 @@ class Scanner
   */
   void scopeRemoveSymbol(uint scopeId, string symbol) nothrow
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString!(No.Malloc, No.Nullable);
     g_scanner_scope_remove_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol);
   }
 
@@ -545,10 +545,10 @@ class Scanner
   */
   void unexpToken(glib.types.TokenType expectedToken, string identifierSpec, string symbolSpec, string symbolName, string message, int isError) nothrow
   {
-    const(char)* _identifierSpec = identifierSpec.toCString(No.Alloc);
-    const(char)* _symbolSpec = symbolSpec.toCString(No.Alloc);
-    const(char)* _symbolName = symbolName.toCString(No.Alloc);
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _identifierSpec = identifierSpec.toCString!(No.Malloc, No.Nullable);
+    const(char)* _symbolSpec = symbolSpec.toCString!(No.Malloc, No.Nullable);
+    const(char)* _symbolName = symbolName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     g_scanner_unexp_token(cast(GScanner*)this._cPtr, expectedToken, _identifierSpec, _symbolSpec, _symbolName, _message, isError);
   }
 }

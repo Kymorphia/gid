@@ -160,7 +160,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   {
     char* _cretval;
     _cretval = atk_hyperlink_get_uri(cast(AtkHyperlink*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

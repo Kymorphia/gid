@@ -135,7 +135,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   bool allowMechanism(string mechanism) nothrow
   {
     bool _retval;
-    const(char)* _mechanism = mechanism.toCString(No.Alloc);
+    const(char)* _mechanism = mechanism.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_dbus_auth_observer_allow_mechanism(cast(GDBusAuthObserver*)this._cPtr, _mechanism);
     return _retval;
   }

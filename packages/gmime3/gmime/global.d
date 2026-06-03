@@ -39,7 +39,7 @@ bool checkVersion(uint major, uint minor, uint micro) nothrow
 gmime.types.ContentEncoding contentEncodingFromString(string str) nothrow
 {
   GMimeContentEncoding _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_content_encoding_from_string(_str);
   gmime.types.ContentEncoding _retval = cast(gmime.types.ContentEncoding)_cretval;
   return _retval;
@@ -61,7 +61,7 @@ string contentEncodingToString(gmime.types.ContentEncoding encoding) nothrow
 {
   const(char)* _cretval;
   _cretval = g_mime_content_encoding_to_string(encoding);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -75,9 +75,9 @@ string contentEncodingToString(gmime.types.ContentEncoding encoding) nothrow
 string iconvLocaleToUtf8(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_iconv_locale_to_utf8(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -94,9 +94,9 @@ string iconvLocaleToUtf8(string str) nothrow
 string iconvLocaleToUtf8Length(string str, size_t n) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_iconv_locale_to_utf8_length(_str, n);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -112,9 +112,9 @@ string iconvLocaleToUtf8Length(string str, size_t n) nothrow
 string iconvUtf8ToLocale(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_iconv_utf8_to_locale(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -131,9 +131,9 @@ string iconvUtf8ToLocale(string str) nothrow
 string iconvUtf8ToLocaleLength(string str, size_t n) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_iconv_utf8_to_locale_length(_str, n);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -153,7 +153,7 @@ string localeCharset() nothrow
 {
   const(char)* _cretval;
   _cretval = g_mime_locale_charset();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -165,7 +165,7 @@ string localeLanguage() nothrow
 {
   const(char)* _cretval;
   _cretval = g_mime_locale_language();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -222,7 +222,7 @@ string utilsDecode8bit(gmime.parser_options.ParserOptions options, ubyte[] text)
 
   auto _text = text.ptr ? cast(const(ubyte)*)text.ptr : [ubyte.init].ptr;
   _cretval = g_mime_utils_decode_8bit(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _text, _len);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -236,9 +236,9 @@ string utilsDecode8bit(gmime.parser_options.ParserOptions options, ubyte[] text)
 string utilsDecodeMessageId(string messageId) nothrow
 {
   char* _cretval;
-  const(char)* _messageId = messageId.toCString(No.Alloc);
+  const(char)* _messageId = messageId.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_decode_message_id(_messageId);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -253,9 +253,9 @@ string utilsDecodeMessageId(string messageId) nothrow
 string utilsGenerateMessageId(string fqdn) nothrow
 {
   char* _cretval;
-  const(char)* _fqdn = fqdn.toCString(No.Alloc);
+  const(char)* _fqdn = fqdn.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_generate_message_id(_fqdn);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -270,7 +270,7 @@ string utilsGenerateMessageId(string fqdn) nothrow
 glib.date_time.DateTime utilsHeaderDecodeDate(string str) nothrow
 {
   GDateTime* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_header_decode_date(_str);
   auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -288,9 +288,9 @@ glib.date_time.DateTime utilsHeaderDecodeDate(string str) nothrow
 string utilsHeaderDecodePhrase(gmime.parser_options.ParserOptions options, string phrase) nothrow
 {
   char* _cretval;
-  const(char)* _phrase = phrase.toCString(No.Alloc);
+  const(char)* _phrase = phrase.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_header_decode_phrase(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _phrase);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -306,9 +306,9 @@ string utilsHeaderDecodePhrase(gmime.parser_options.ParserOptions options, strin
 string utilsHeaderDecodeText(gmime.parser_options.ParserOptions options, string text) nothrow
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_header_decode_text(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _text);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -325,10 +325,10 @@ string utilsHeaderDecodeText(gmime.parser_options.ParserOptions options, string 
 string utilsHeaderEncodePhrase(gmime.format_options.FormatOptions options, string phrase, string charset = null) nothrow
 {
   char* _cretval;
-  const(char)* _phrase = phrase.toCString(No.Alloc);
-  const(char)* _charset = charset.toCString(No.Alloc);
+  const(char)* _phrase = phrase.toCString!(No.Malloc, No.Nullable);
+  const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_mime_utils_header_encode_phrase(options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _phrase, _charset);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -345,10 +345,10 @@ string utilsHeaderEncodePhrase(gmime.format_options.FormatOptions options, strin
 string utilsHeaderEncodeText(gmime.format_options.FormatOptions options, string text, string charset = null) nothrow
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
-  const(char)* _charset = charset.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+  const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
   _cretval = g_mime_utils_header_encode_text(options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, _text, _charset);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -364,7 +364,7 @@ string utilsHeaderFormatDate(glib.date_time.DateTime date) nothrow
 {
   char* _cretval;
   _cretval = g_mime_utils_header_format_date(date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -378,9 +378,9 @@ string utilsHeaderFormatDate(glib.date_time.DateTime date) nothrow
 string utilsHeaderUnfold(string value) nothrow
 {
   char* _cretval;
-  const(char)* _value = value.toCString(No.Alloc);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_header_unfold(_value);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -397,9 +397,9 @@ string utilsHeaderUnfold(string value) nothrow
 string utilsQuoteString(string str) nothrow
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_quote_string(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -415,9 +415,9 @@ string utilsQuoteString(string str) nothrow
 string utilsStructuredHeaderFold(gmime.parser_options.ParserOptions options, gmime.format_options.FormatOptions format, string header) nothrow
 {
   char* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_structured_header_fold(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, format ? cast(GMimeFormatOptions*)format._cPtr(No.Dup) : null, _header);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -450,7 +450,7 @@ bool utilsTextIs8bit(ubyte[] text) nothrow
 */
 void utilsUnquoteString(string str) nothrow
 {
-  char* _str = str.toCString(No.Alloc);
+  char* _str = str.toCString!(No.Malloc, No.Nullable);
   g_mime_utils_unquote_string(_str);
 }
 
@@ -466,9 +466,9 @@ void utilsUnquoteString(string str) nothrow
 string utilsUnstructuredHeaderFold(gmime.parser_options.ParserOptions options, gmime.format_options.FormatOptions format, string header) nothrow
 {
   char* _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
   _cretval = g_mime_utils_unstructured_header_fold(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, format ? cast(GMimeFormatOptions*)format._cPtr(No.Dup) : null, _header);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 

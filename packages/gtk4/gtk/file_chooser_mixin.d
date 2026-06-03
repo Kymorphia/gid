@@ -205,17 +205,17 @@ template FileChooserT()
   */
   override void addChoice(string id, string label, string[] options = null, string[] optionLabels = null) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpoptions;
     foreach (s; options)
-      _tmpoptions ~= s.toCString(No.Alloc);
+      _tmpoptions ~= s.toCString;
     _tmpoptions ~= null;
     const(char*)* _options = _tmpoptions.ptr;
 
     char*[] _tmpoptionLabels;
     foreach (s; optionLabels)
-      _tmpoptionLabels ~= s.toCString(No.Alloc);
+      _tmpoptionLabels ~= s.toCString;
     _tmpoptionLabels ~= null;
     const(char*)* _optionLabels = _tmpoptionLabels.ptr;
 
@@ -289,9 +289,9 @@ template FileChooserT()
   override string getChoice(string id) nothrow
   {
     const(char)* _cretval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_file_chooser_get_choice(cast(GtkFileChooser*)this._cPtr, _id);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_name(cast(GtkFileChooser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -458,7 +458,7 @@ template FileChooserT()
   */
   override void removeChoice(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_remove_choice(cast(GtkFileChooser*)this._cPtr, _id);
   }
 
@@ -529,8 +529,8 @@ template FileChooserT()
   */
   override void setChoice(string id, string option) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _option = option.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    const(char)* _option = option.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_set_choice(cast(GtkFileChooser*)this._cPtr, _id, _option);
   }
 
@@ -593,7 +593,7 @@ template FileChooserT()
   */
   override void setCurrentName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_set_current_name(cast(GtkFileChooser*)this._cPtr, _name);
   }
 

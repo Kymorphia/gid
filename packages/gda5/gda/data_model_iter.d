@@ -198,7 +198,7 @@ class DataModelIter : gda.set.Set
   gobject.value.Value getValueForField(string fieldName) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _fieldName = fieldName.toCString(No.Alloc);
+    const(char)* _fieldName = fieldName.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_data_model_iter_get_value_for_field(cast(GdaDataModelIter*)this._cPtr, _fieldName);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;

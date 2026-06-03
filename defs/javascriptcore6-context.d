@@ -69,7 +69,7 @@ class Context : gobject.object.ObjectWrap
     auto parent = assumeWontThrow(classRegistry.get(ti.base, null));
     auto jscParent = parent ? cast(JSCClass*)parent._cPtr : null;
 
-    auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString(No.Alloc), jscParent, null, &classDestroyNotify);
+    auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString, jscParent, null, &classDestroyNotify);
 
     auto jsClass = new Class(cast(void*)jscClass, Yes.Take);
     classRegistry[ti] = jsClass;

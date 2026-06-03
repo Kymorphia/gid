@@ -261,7 +261,7 @@ class Drop : gobject.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)*[] _tmpmimeTypes;
     foreach (s; mimeTypes)
-      _tmpmimeTypes ~= s.toCString(No.Alloc);
+      _tmpmimeTypes ~= s.toCString;
     _tmpmimeTypes ~= null;
     const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
 
@@ -294,7 +294,7 @@ class Drop : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
-    outMimeType = _outMimeType.fromCString(No.Free);
+    outMimeType = _outMimeType.fromCString!(No.Free);
     return _retval;
   }
 

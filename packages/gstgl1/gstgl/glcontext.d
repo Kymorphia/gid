@@ -126,7 +126,7 @@ class GLContext : gst.object.ObjectWrap
   */
   static void* defaultGetProcAddress(gstgl.types.GLAPI glApi, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     auto _retval = gst_gl_context_default_get_proc_address(glApi, _name);
     return _retval;
   }
@@ -184,7 +184,7 @@ class GLContext : gst.object.ObjectWrap
   */
   static void* getProcAddressWithPlatform(gstgl.types.GLPlatform contextType, gstgl.types.GLAPI glApi, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     auto _retval = gst_gl_context_get_proc_address_with_platform(contextType, glApi, _name);
     return _retval;
   }
@@ -235,7 +235,7 @@ class GLContext : gst.object.ObjectWrap
   bool checkFeature(string feature) nothrow
   {
     bool _retval;
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_gl_context_check_feature(cast(GstGLContext*)this._cPtr, _feature);
     return _retval;
   }
@@ -462,7 +462,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void* getProcAddress(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     auto _retval = gst_gl_context_get_proc_address(cast(GstGLContext*)this._cPtr, _name);
     return _retval;
   }

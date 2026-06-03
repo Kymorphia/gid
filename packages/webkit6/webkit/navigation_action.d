@@ -69,7 +69,7 @@ class NavigationAction : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_navigation_action_get_frame_name(cast(WebKitNavigationAction*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

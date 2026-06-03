@@ -122,7 +122,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   bool addPath(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gadataset_file_system_dataset_factory_add_path(cast(GADatasetFileSystemDatasetFactory*)this._cPtr, _path, &_err);
     if (_err)
@@ -157,7 +157,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   bool setFileSystemUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gadataset_file_system_dataset_factory_set_file_system_uri(cast(GADatasetFileSystemDatasetFactory*)this._cPtr, _uri, &_err);
     if (_err)

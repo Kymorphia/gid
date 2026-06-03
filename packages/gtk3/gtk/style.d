@@ -137,7 +137,7 @@ class Style : gobject.object.ObjectWrap
   */
   void getStyleProperty(gobject.types.GType widgetType, string propertyName, out gobject.value.Value value) nothrow
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
     GValue _value;
     gtk_style_get_style_property(cast(GtkStyle*)this._cPtr, widgetType, _propertyName, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -171,7 +171,7 @@ class Style : gobject.object.ObjectWrap
   bool lookupColor(string colorName, out gdk.color.Color color) nothrow
   {
     bool _retval;
-    const(char)* _colorName = colorName.toCString(No.Alloc);
+    const(char)* _colorName = colorName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_style_lookup_color(cast(GtkStyle*)this._cPtr, _colorName, cast(GdkColor*)&color);
     return _retval;
   }
@@ -190,7 +190,7 @@ class Style : gobject.object.ObjectWrap
   gtk.icon_set.IconSet lookupIconSet(string stockId) nothrow
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_style_lookup_icon_set(cast(GtkStyle*)this._cPtr, _stockId);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -218,7 +218,7 @@ class Style : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.icon_source.IconSource source, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null) nothrow
   {
     GdkPixbuf* _cretval;
-    const(char)* _detail = detail.toCString(No.Alloc);
+    const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_style_render_icon(cast(GtkStyle*)this._cPtr, source ? cast(const(GtkIconSource)*)source._cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;

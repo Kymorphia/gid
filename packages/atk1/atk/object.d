@@ -362,7 +362,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = atk_object_get_accessible_id(cast(AtkObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = atk_object_get_description(cast(AtkObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = atk_object_get_help_text(cast(AtkObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = atk_object_get_name(cast(AtkObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -468,7 +468,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = atk_object_get_object_locale(cast(AtkObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -637,7 +637,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void setAccessibleId(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     atk_object_set_accessible_id(cast(AtkObject*)this._cPtr, _id);
   }
 
@@ -652,7 +652,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void setDescription(string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     atk_object_set_description(cast(AtkObject*)this._cPtr, _description);
   }
 
@@ -666,7 +666,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void setHelpText(string helpText) nothrow
   {
-    const(char)* _helpText = helpText.toCString(No.Alloc);
+    const(char)* _helpText = helpText.toCString!(No.Malloc, No.Nullable);
     atk_object_set_help_text(cast(AtkObject*)this._cPtr, _helpText);
   }
 
@@ -681,7 +681,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     atk_object_set_name(cast(AtkObject*)this._cPtr, _name);
   }
 

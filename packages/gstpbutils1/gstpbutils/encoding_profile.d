@@ -111,9 +111,9 @@ class EncodingProfile : gobject.object.ObjectWrap
   static gstpbutils.encoding_profile.EncodingProfile find(string targetname, string profilename = null, string category = null) nothrow
   {
     GstEncodingProfile* _cretval;
-    const(char)* _targetname = targetname.toCString(No.Alloc);
-    const(char)* _profilename = profilename.toCString(No.Alloc);
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _targetname = targetname.toCString!(No.Malloc, No.Nullable);
+    const(char)* _profilename = profilename.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_encoding_profile_find(_targetname, _profilename, _category);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
@@ -165,7 +165,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_description(cast(GstEncodingProfile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_file_extension(cast(GstEncodingProfile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_name(cast(GstEncodingProfile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_preset(cast(GstEncodingProfile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_preset_name(cast(GstEncodingProfile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_type_nick(cast(GstEncodingProfile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setDescription(string description = null) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
     gst_encoding_profile_set_description(cast(GstEncodingProfile*)this._cPtr, _description);
   }
 
@@ -376,7 +376,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gst_encoding_profile_set_name(cast(GstEncodingProfile*)this._cPtr, _name);
   }
 
@@ -402,7 +402,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setPreset(string preset = null) nothrow
   {
-    const(char)* _preset = preset.toCString(No.Alloc);
+    const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
     gst_encoding_profile_set_preset(cast(GstEncodingProfile*)this._cPtr, _preset);
   }
 
@@ -414,7 +414,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setPresetName(string presetName = null) nothrow
   {
-    const(char)* _presetName = presetName.toCString(No.Alloc);
+    const(char)* _presetName = presetName.toCString!(No.Malloc, Yes.Nullable);
     gst_encoding_profile_set_preset_name(cast(GstEncodingProfile*)this._cPtr, _presetName);
   }
 

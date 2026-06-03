@@ -485,10 +485,10 @@ class AboutDialog : gtk.window.Window
   */
   void addCreditSection(string sectionName, string[] people) nothrow
   {
-    const(char)* _sectionName = sectionName.toCString(No.Alloc);
+    const(char)* _sectionName = sectionName.toCString!(No.Malloc, No.Nullable);
     char*[] _tmppeople;
     foreach (s; people)
-      _tmppeople ~= s.toCString(No.Alloc);
+      _tmppeople ~= s.toCString;
     _tmppeople ~= null;
     const(char*)* _people = _tmppeople.ptr;
 
@@ -514,7 +514,7 @@ class AboutDialog : gtk.window.Window
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -538,7 +538,7 @@ class AboutDialog : gtk.window.Window
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -551,7 +551,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_comments(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -563,7 +563,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_copyright(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -586,7 +586,7 @@ class AboutDialog : gtk.window.Window
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -599,7 +599,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_license(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -638,7 +638,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_logo_icon_name(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -650,7 +650,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_program_name(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -662,7 +662,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_system_information(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -675,7 +675,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_translator_credits(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -687,7 +687,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_version(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -699,7 +699,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_website(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -711,7 +711,7 @@ class AboutDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_website_label(cast(GtkAboutDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -739,7 +739,7 @@ class AboutDialog : gtk.window.Window
   {
     char*[] _tmpartists;
     foreach (s; artists)
-      _tmpartists ~= s.toCString(No.Alloc);
+      _tmpartists ~= s.toCString;
     _tmpartists ~= null;
     const(char*)* _artists = _tmpartists.ptr;
 
@@ -757,7 +757,7 @@ class AboutDialog : gtk.window.Window
   {
     char*[] _tmpauthors;
     foreach (s; authors)
-      _tmpauthors ~= s.toCString(No.Alloc);
+      _tmpauthors ~= s.toCString;
     _tmpauthors ~= null;
     const(char*)* _authors = _tmpauthors.ptr;
 
@@ -774,7 +774,7 @@ class AboutDialog : gtk.window.Window
   */
   void setComments(string comments = null) nothrow
   {
-    const(char)* _comments = comments.toCString(No.Alloc);
+    const(char)* _comments = comments.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_comments(cast(GtkAboutDialog*)this._cPtr, _comments);
   }
 
@@ -788,7 +788,7 @@ class AboutDialog : gtk.window.Window
   */
   void setCopyright(string copyright = null) nothrow
   {
-    const(char)* _copyright = copyright.toCString(No.Alloc);
+    const(char)* _copyright = copyright.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_copyright(cast(GtkAboutDialog*)this._cPtr, _copyright);
   }
 
@@ -804,7 +804,7 @@ class AboutDialog : gtk.window.Window
   {
     char*[] _tmpdocumenters;
     foreach (s; documenters)
-      _tmpdocumenters ~= s.toCString(No.Alloc);
+      _tmpdocumenters ~= s.toCString;
     _tmpdocumenters ~= null;
     const(char*)* _documenters = _tmpdocumenters.ptr;
 
@@ -822,7 +822,7 @@ class AboutDialog : gtk.window.Window
   */
   void setLicense(string license = null) nothrow
   {
-    const(char)* _license = license.toCString(No.Alloc);
+    const(char)* _license = license.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_license(cast(GtkAboutDialog*)this._cPtr, _license);
   }
 
@@ -860,7 +860,7 @@ class AboutDialog : gtk.window.Window
   */
   void setLogoIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_logo_icon_name(cast(GtkAboutDialog*)this._cPtr, _iconName);
   }
 
@@ -875,7 +875,7 @@ class AboutDialog : gtk.window.Window
   */
   void setProgramName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_program_name(cast(GtkAboutDialog*)this._cPtr, _name);
   }
 
@@ -893,7 +893,7 @@ class AboutDialog : gtk.window.Window
   */
   void setSystemInformation(string systemInformation = null) nothrow
   {
-    const(char)* _systemInformation = systemInformation.toCString(No.Alloc);
+    const(char)* _systemInformation = systemInformation.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_system_information(cast(GtkAboutDialog*)this._cPtr, _systemInformation);
   }
 
@@ -922,7 +922,7 @@ class AboutDialog : gtk.window.Window
   */
   void setTranslatorCredits(string translatorCredits = null) nothrow
   {
-    const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
+    const(char)* _translatorCredits = translatorCredits.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_translator_credits(cast(GtkAboutDialog*)this._cPtr, _translatorCredits);
   }
 
@@ -934,7 +934,7 @@ class AboutDialog : gtk.window.Window
   */
   void setVersion(string version_ = null) nothrow
   {
-    const(char)* _version_ = version_.toCString(No.Alloc);
+    const(char)* _version_ = version_.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_version(cast(GtkAboutDialog*)this._cPtr, _version_);
   }
 
@@ -946,7 +946,7 @@ class AboutDialog : gtk.window.Window
   */
   void setWebsite(string website = null) nothrow
   {
-    const(char)* _website = website.toCString(No.Alloc);
+    const(char)* _website = website.toCString!(No.Malloc, Yes.Nullable);
     gtk_about_dialog_set_website(cast(GtkAboutDialog*)this._cPtr, _website);
   }
 
@@ -958,7 +958,7 @@ class AboutDialog : gtk.window.Window
   */
   void setWebsiteLabel(string websiteLabel) nothrow
   {
-    const(char)* _websiteLabel = websiteLabel.toCString(No.Alloc);
+    const(char)* _websiteLabel = websiteLabel.toCString!(No.Malloc, No.Nullable);
     gtk_about_dialog_set_website_label(cast(GtkAboutDialog*)this._cPtr, _websiteLabel);
   }
 

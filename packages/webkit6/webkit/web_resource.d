@@ -198,7 +198,7 @@ class WebResource : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = webkit_web_resource_get_uri(cast(WebKitWebResource*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

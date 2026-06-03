@@ -56,7 +56,7 @@ ulong rtcpNtpToUnix(ulong ntptime) nothrow
 gstrtp.types.RTCPSDESType rtcpSdesNameToType(string name) nothrow
 {
   GstRTCPSDESType _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtcp_sdes_name_to_type(_name);
   gstrtp.types.RTCPSDESType _retval = cast(gstrtp.types.RTCPSDESType)_cretval;
   return _retval;
@@ -74,7 +74,7 @@ string rtcpSdesTypeToName(gstrtp.types.RTCPSDESType type) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_rtcp_sdes_type_to_name(type);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 

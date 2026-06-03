@@ -275,7 +275,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   this(string title = null, gtk.window.Window parent = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_print_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }

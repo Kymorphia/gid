@@ -15,7 +15,7 @@ struct GLSLVersion
   static gstgl.types.GLSLVersion fromString(string string_) nothrow
   {
     GstGLSLVersion _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_glsl_version_from_string(_string_);
     gstgl.types.GLSLVersion _retval = cast(gstgl.types.GLSLVersion)_cretval;
     return _retval;
@@ -34,7 +34,7 @@ struct GLSLVersion
   static bool profileFromString(string string_, out gstgl.types.GLSLVersion versionRet, out gstgl.types.GLSLProfile profileRet) nothrow
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_glsl_version_profile_from_string(_string_, &versionRet, &profileRet);
     return _retval;
   }
@@ -44,7 +44,7 @@ struct GLSLVersion
   {
     char* _cretval;
     _cretval = gst_glsl_version_profile_to_string(version_, profile);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -53,7 +53,7 @@ struct GLSLVersion
   {
     const(char)* _cretval;
     _cretval = gst_glsl_version_to_string(version_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

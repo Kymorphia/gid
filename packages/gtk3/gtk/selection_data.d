@@ -175,7 +175,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     ubyte* _cretval;
     _cretval = gtk_selection_data_get_text(cast(const(GtkSelectionData)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class SelectionData : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -287,7 +287,7 @@ class SelectionData : gobject.boxed.Boxed
     bool _retval;
     char*[] _tmpuris;
     foreach (s; uris)
-      _tmpuris ~= s.toCString(No.Alloc);
+      _tmpuris ~= s.toCString;
     _tmpuris ~= null;
     char** _uris = _tmpuris.ptr;
 

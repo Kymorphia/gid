@@ -15,7 +15,7 @@ struct GLSLProfile
   static gstgl.types.GLSLProfile fromString(string string_) nothrow
   {
     GstGLSLProfile _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_glsl_profile_from_string(_string_);
     gstgl.types.GLSLProfile _retval = cast(gstgl.types.GLSLProfile)_cretval;
     return _retval;
@@ -26,7 +26,7 @@ struct GLSLProfile
   {
     const(char)* _cretval;
     _cretval = gst_glsl_profile_to_string(profile);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

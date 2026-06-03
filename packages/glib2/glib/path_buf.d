@@ -68,7 +68,7 @@ struct PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_clear_to_path(cast(GPathBuf*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ struct PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_free_to_path(cast(GPathBuf*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ struct PathBuf
   glib.path_buf.PathBuf initFromPath(string path = null) nothrow
   {
     GPathBuf* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_path_buf_init_from_path(cast(GPathBuf*)&this, _path);
     glib.path_buf.PathBuf _retval;
     if (_cretval)
@@ -190,7 +190,7 @@ struct PathBuf
   glib.path_buf.PathBuf push(string path) nothrow
   {
     GPathBuf* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = g_path_buf_push(cast(GPathBuf*)&this, _path);
     glib.path_buf.PathBuf _retval;
     if (_cretval)
@@ -213,7 +213,7 @@ struct PathBuf
   bool setExtension(string extension = null) nothrow
   {
     bool _retval;
-    const(char)* _extension = extension.toCString(No.Alloc);
+    const(char)* _extension = extension.toCString!(No.Malloc, Yes.Nullable);
     _retval = cast(bool)g_path_buf_set_extension(cast(GPathBuf*)&this, _extension);
     return _retval;
   }
@@ -257,7 +257,7 @@ struct PathBuf
   bool setFilename(string fileName) nothrow
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(No.Alloc);
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_path_buf_set_filename(cast(GPathBuf*)&this, _fileName);
     return _retval;
   }
@@ -275,7 +275,7 @@ struct PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_to_path(cast(GPathBuf*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

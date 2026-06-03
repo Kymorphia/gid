@@ -74,7 +74,7 @@ class PaperSize : gobject.boxed.Boxed
   this(string name = null) nothrow
   {
     GtkPaperSize* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_paper_size_new(_name);
     this(_cretval, Yes.Take);
   }
@@ -95,8 +95,8 @@ class PaperSize : gobject.boxed.Boxed
   static gtk.paper_size.PaperSize newCustom(string name, string displayName, double width, double height, gtk.types.Unit unit) nothrow
   {
     GtkPaperSize* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _displayName = displayName.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _displayName = displayName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_paper_size_new_custom(_name, _displayName, width, height, unit);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -136,7 +136,7 @@ class PaperSize : gobject.boxed.Boxed
   static gtk.paper_size.PaperSize newFromIpp(string ippName, double width, double height) nothrow
   {
     GtkPaperSize* _cretval;
-    const(char)* _ippName = ippName.toCString(No.Alloc);
+    const(char)* _ippName = ippName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_paper_size_new_from_ipp(_ippName, width, height);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -157,7 +157,7 @@ class PaperSize : gobject.boxed.Boxed
   static gtk.paper_size.PaperSize newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     GtkPaperSize* _cretval;
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gtk_paper_size_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
@@ -185,8 +185,8 @@ class PaperSize : gobject.boxed.Boxed
   static gtk.paper_size.PaperSize newFromPpd(string ppdName, string ppdDisplayName, double width, double height) nothrow
   {
     GtkPaperSize* _cretval;
-    const(char)* _ppdName = ppdName.toCString(No.Alloc);
-    const(char)* _ppdDisplayName = ppdDisplayName.toCString(No.Alloc);
+    const(char)* _ppdName = ppdName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _ppdDisplayName = ppdDisplayName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_paper_size_new_from_ppd(_ppdName, _ppdDisplayName, width, height);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -268,7 +268,7 @@ class PaperSize : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_display_name(cast(GtkPaperSize*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class PaperSize : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_name(cast(GtkPaperSize*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class PaperSize : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_ppd_name(cast(GtkPaperSize*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class PaperSize : gobject.boxed.Boxed
   */
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName) nothrow
   {
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString!(No.Malloc, No.Nullable);
     gtk_paper_size_to_key_file(cast(GtkPaperSize*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
   }
 
@@ -412,7 +412,7 @@ class PaperSize : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_default();
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

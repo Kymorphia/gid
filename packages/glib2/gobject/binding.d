@@ -255,7 +255,7 @@ class Binding : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_binding_get_source_property(cast(GBinding*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class Binding : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_binding_get_target_property(cast(GBinding*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

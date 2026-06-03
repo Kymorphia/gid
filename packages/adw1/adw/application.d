@@ -110,7 +110,7 @@ class Application : gtk.application.Application
   this(string applicationId, gio.types.ApplicationFlags flags) nothrow
   {
     AdwApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
     _cretval = adw_application_new(_applicationId, flags);
     this(_cretval, Yes.Take);
   }

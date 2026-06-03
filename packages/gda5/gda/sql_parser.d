@@ -127,7 +127,7 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   gda.batch.Batch parseFileAsBatch(string filename)
   {
     GdaBatch* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gda_sql_parser_parse_file_as_batch(cast(GdaSqlParser*)this._cPtr, _filename, &_err);
     if (_err)
@@ -153,14 +153,14 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   gda.statement.Statement parseString(string sql, out string remain)
   {
     GdaStatement* _cretval;
-    const(char)* _sql = sql.toCString(No.Alloc);
+    const(char)* _sql = sql.toCString!(No.Malloc, No.Nullable);
     char* _remain;
     GError *_err;
     _cretval = gda_sql_parser_parse_string(cast(GdaSqlParser*)this._cPtr, _sql, &_remain, &_err);
     if (_err)
       throw new SqlParserException(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(cast(GdaStatement*)_cretval, Yes.Take);
-    remain = _remain.fromCString(Yes.Free);
+    remain = _remain.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -186,14 +186,14 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   gda.batch.Batch parseStringAsBatch(string sql, out string remain)
   {
     GdaBatch* _cretval;
-    const(char)* _sql = sql.toCString(No.Alloc);
+    const(char)* _sql = sql.toCString!(No.Malloc, No.Nullable);
     char* _remain;
     GError *_err;
     _cretval = gda_sql_parser_parse_string_as_batch(cast(GdaSqlParser*)this._cPtr, _sql, &_remain, &_err);
     if (_err)
       throw new SqlParserException(_err);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.batch.Batch)(cast(GdaBatch*)_cretval, Yes.Take);
-    remain = _remain.fromCString(Yes.Free);
+    remain = _remain.fromCString!(Yes.Free);
     return _retval;
   }
 

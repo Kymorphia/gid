@@ -24,7 +24,7 @@ struct IconSize
   static gtk.types.IconSize fromName(string name) nothrow
   {
     GtkIconSize _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_size_from_name(_name);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
@@ -44,7 +44,7 @@ struct IconSize
   {
     const(char)* _cretval;
     _cretval = gtk_icon_size_get_name(size);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ struct IconSize
   static gtk.types.IconSize register(string name, int width, int height) nothrow
   {
     GtkIconSize _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_size_register(_name, width, height);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
@@ -134,7 +134,7 @@ struct IconSize
   */
   static void registerAlias(string alias_, gtk.types.IconSize target) nothrow
   {
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, No.Nullable);
     gtk_icon_size_register_alias(_alias_, target);
   }
 }

@@ -128,7 +128,7 @@ class LinkButton : gtk.button.Button
   this(string uri) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_link_button_new(_uri);
     this(_cretval, No.Take);
   }
@@ -144,8 +144,8 @@ class LinkButton : gtk.button.Button
   static gtk.link_button.LinkButton newWithLabel(string uri, string label = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_link_button_new_with_label(_uri, _label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.link_button.LinkButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -160,7 +160,7 @@ class LinkButton : gtk.button.Button
   {
     const(char)* _cretval;
     _cretval = gtk_link_button_get_uri(cast(GtkLinkButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class LinkButton : gtk.button.Button
   */
   void setUri(string uri) nothrow
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     gtk_link_button_set_uri(cast(GtkLinkButton*)this._cPtr, _uri);
   }
 

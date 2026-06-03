@@ -156,7 +156,7 @@ class InputMethodContext : gobject.object.ObjectWrap
     char* _text;
     GList* _underlines;
     webkit_input_method_context_get_preedit(cast(WebKitInputMethodContext*)this._cPtr, &_text, &_underlines, cast(uint*)&cursorOffset);
-    text = _text.fromCString(Yes.Free);
+    text = _text.fromCString!(Yes.Free);
     underlines = gListToD!(webkit.input_method_underline.InputMethodUnderline, GidOwnership.Full)(_underlines);
   }
 

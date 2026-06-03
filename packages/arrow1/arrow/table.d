@@ -313,7 +313,7 @@ class Table : gobject.object.ObjectWrap
     _cretval = garrow_table_to_string(cast(GArrowTable*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

@@ -145,10 +145,10 @@ GVariant* createVariant(T)(T val) nothrow
   else static if (is(T == float) || is(T == double))
     return g_variant_new_double(val);
   else static if (isSomeString!T)
-    return g_variant_new_string(toCString(val.to!string, No.Alloc));
+    return g_variant_new_string(val.to!string.toCString);
   else static if (is(T : E[], E))
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -160,7 +160,7 @@ GVariant* createVariant(T)(T val) nothrow
   }
   else static if (is(T : V[K], V, K)) // Dictionary
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -271,7 +271,7 @@ T getVal(T)(GVariant* v) nothrow
   else static if (is(T == float) || is(T == double))
     return cast(T)g_variant_get_double(v);
   else static if (isSomeString!T)
-    return fromCString(g_variant_get_string(v, null), No.Free); // g_variant_get_string second argument is an optional output length parameter
+    return fromCString(g_variant_get_string(v, null)); // g_variant_get_string second argument is an optional output length parameter
   else static if (is(T : E[], E))
   {
     T valArray;

@@ -56,7 +56,7 @@ class TocEntry : gobject.boxed.Boxed
   this(gst.types.TocEntryType type, string uid) nothrow
   {
     GstTocEntry* _cretval;
-    const(char)* _uid = uid.toCString(No.Alloc);
+    const(char)* _uid = uid.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_toc_entry_new(type, _uid);
     this(_cretval, Yes.Take);
   }
@@ -177,7 +177,7 @@ class TocEntry : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_toc_entry_get_uid(cast(const(GstTocEntry)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

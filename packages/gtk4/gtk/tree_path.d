@@ -107,7 +107,7 @@ class TreePath : gobject.boxed.Boxed
   static gtk.tree_path.TreePath newFromString(string path) nothrow
   {
     GtkTreePath* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_tree_path_new_from_string(_path);
     auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -273,7 +273,7 @@ class TreePath : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_tree_path_to_string(cast(GtkTreePath*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

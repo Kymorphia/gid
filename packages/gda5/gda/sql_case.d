@@ -79,7 +79,7 @@ class SqlCase
   {
     char* _cretval;
     _cretval = gda_sql_case_serialize(cast(GdaSqlCase*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

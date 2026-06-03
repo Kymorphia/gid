@@ -84,7 +84,7 @@ class FilterBest : gmime.filter.Filter
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_best_charset(cast(GMimeFilterBest*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

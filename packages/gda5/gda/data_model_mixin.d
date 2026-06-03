@@ -226,7 +226,7 @@ template DataModelT()
   {
     char* _cretval;
     _cretval = gda_data_model_dump_as_string(cast(GdaDataModel*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ template DataModelT()
   override bool exportToFile(gda.types.DataModelIOFormat format, string file, int[] cols, int[] rows, gda.set.Set options)
   {
     bool _retval;
-    const(char)* _file = file.toCString(No.Alloc);
+    const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
     int _nbCols;
     if (cols)
       _nbCols = cast(int)cols.length;
@@ -330,7 +330,7 @@ template DataModelT()
 
     auto _rows = rows.ptr ? cast(const(int)*)rows.ptr : [int.init].ptr;
     _cretval = gda_data_model_export_to_string(cast(GdaDataModel*)this._cPtr, format, _cols, _nbCols, _rows, _nbRows, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ template DataModelT()
   override int getColumnIndex(string name) nothrow
   {
     int _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = gda_data_model_get_column_index(cast(GdaDataModel*)this._cPtr, _name);
     return _retval;
   }
@@ -395,7 +395,7 @@ template DataModelT()
   {
     const(char)* _cretval;
     _cretval = gda_data_model_get_column_name(cast(GdaDataModel*)this._cPtr, col);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -404,7 +404,7 @@ template DataModelT()
   {
     const(char)* _cretval;
     _cretval = gda_data_model_get_column_title(cast(GdaDataModel*)this._cPtr, col);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -676,7 +676,7 @@ template DataModelT()
   */
   override void setColumnName(int col, string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     gda_data_model_set_column_name(cast(GdaDataModel*)this._cPtr, col, _name);
   }
 
@@ -689,7 +689,7 @@ template DataModelT()
   */
   override void setColumnTitle(int col, string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gda_data_model_set_column_title(cast(GdaDataModel*)this._cPtr, col, _title);
   }
 

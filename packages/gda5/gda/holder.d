@@ -261,7 +261,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     char* _cretval;
     _cretval = gda_holder_get_alphanum_id(cast(GdaHolder*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   gobject.value.Value getAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_holder_get_attribute(cast(GdaHolder*)this._cPtr, _attribute);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -324,7 +324,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     const(char)* _cretval;
     _cretval = gda_holder_get_id(cast(GdaHolder*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   {
     char* _cretval;
     _cretval = gda_holder_get_value_str(cast(GdaHolder*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     gda_holder_set_attribute(cast(GdaHolder*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
 
@@ -565,7 +565,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   bool setValueStr(gda.data_handler.DataHandler dh, string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_holder_set_value_str(cast(GdaHolder*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null, _value, &_err);
     if (_err)

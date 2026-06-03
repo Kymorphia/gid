@@ -154,7 +154,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.text_tag.TextTag lookup(string name) nothrow
   {
     GtkTextTag* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_text_tag_table_lookup(cast(GtkTextTagTable*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.Take);
     return _retval;

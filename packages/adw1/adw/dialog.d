@@ -513,7 +513,7 @@ class Dialog : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_dialog_get_title(cast(AdwDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -667,7 +667,7 @@ class Dialog : gtk.widget.Widget
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_dialog_set_title(cast(AdwDialog*)this._cPtr, _title);
   }
 

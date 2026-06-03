@@ -67,8 +67,8 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
   this(gst.object.ObjectWrap object, string propertyName, gst.object.ObjectWrap refObject, string refPropertyName) nothrow
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    const(char)* _refPropertyName = refPropertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _refPropertyName = refPropertyName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, refObject ? cast(GstObject*)refObject._cPtr(No.Dup) : null, _refPropertyName);
     this(_cretval, No.Take);
   }

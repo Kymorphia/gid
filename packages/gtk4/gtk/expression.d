@@ -215,7 +215,7 @@ class Expression
   gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectWrap target, string property, gobject.object.ObjectWrap this_ = null) nothrow
   {
     GtkExpressionWatch* _cretval;
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_expression_bind(cast(GtkExpression*)this._cPtr, target ? cast(GObject*)target._cPtr(No.Dup) : null, _property, this_ ? cast(GObject*)this_._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.expression_watch.ExpressionWatch(cast(void*)_cretval, No.Take) : null;
     return _retval;

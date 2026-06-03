@@ -222,7 +222,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_description(cast(GdkPixbufFormat*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class PixbufFormat : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -262,7 +262,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_license(cast(GdkPixbufFormat*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class PixbufFormat : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -297,7 +297,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_name(cast(GdkPixbufFormat*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class PixbufFormat : gobject.boxed.Boxed
   bool isSaveOptionSupported(string optionKey) nothrow
   {
     bool _retval;
-    const(char)* _optionKey = optionKey.toCString(No.Alloc);
+    const(char)* _optionKey = optionKey.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_pixbuf_format_is_save_option_supported(cast(GdkPixbufFormat*)this._cPtr, _optionKey);
     return _retval;
   }

@@ -211,7 +211,7 @@ class GLShader : gobject.object.ObjectWrap
   static gsk.glshader.GLShader newFromResource(string resourcePath) nothrow
   {
     GskGLShader* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gsk_gl_shader_new_from_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
     return _retval;
@@ -257,7 +257,7 @@ class GLShader : gobject.object.ObjectWrap
   int findUniformByName(string name) nothrow
   {
     int _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = gsk_gl_shader_find_uniform_by_name(cast(GskGLShader*)this._cPtr, _name);
     return _retval;
   }
@@ -421,7 +421,7 @@ class GLShader : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_resource(cast(GskGLShader*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -448,7 +448,7 @@ class GLShader : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_uniform_name(cast(GskGLShader*)this._cPtr, idx);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

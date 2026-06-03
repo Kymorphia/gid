@@ -215,9 +215,9 @@ void schedulerRemove(size_t handlerId) nothrow
 string utilsEscapeSearchText(string text) nothrow
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_source_utils_escape_search_text(_text);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
 
@@ -238,8 +238,8 @@ string utilsEscapeSearchText(string text) nothrow
 string utilsUnescapeSearchText(string text) nothrow
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
+  const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
   _cretval = gtk_source_utils_unescape_search_text(_text);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }

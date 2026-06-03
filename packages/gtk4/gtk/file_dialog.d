@@ -266,7 +266,7 @@ class FileDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_accept_label(cast(GtkFileDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class FileDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_initial_name(cast(GtkFileDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class FileDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_title(cast(GtkFileDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -659,7 +659,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   void setAcceptLabel(string acceptLabel = null) nothrow
   {
-    const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
+    const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, Yes.Nullable);
     gtk_file_dialog_set_accept_label(cast(GtkFileDialog*)this._cPtr, _acceptLabel);
   }
 
@@ -732,7 +732,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   void setInitialName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     gtk_file_dialog_set_initial_name(cast(GtkFileDialog*)this._cPtr, _name);
   }
 
@@ -758,7 +758,7 @@ class FileDialog : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_file_dialog_set_title(cast(GtkFileDialog*)this._cPtr, _title);
   }
 }

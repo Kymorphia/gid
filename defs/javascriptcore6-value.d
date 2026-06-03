@@ -49,12 +49,12 @@ class Value : gobject.object.ObjectWrap
       }
       catch (Exception e)
       {
-        jsc_context_throw(ctx, e.msg.toCString(No.Alloc));
+        jsc_context_throw(ctx, e.msg.toCString);
         return jsc_value_new_undefined(ctx);
       }
     }
 
-    JSCValue* funcVal = jsc_value_new_function_variadic(cast(JSCContext*)context._cPtr, name.toCString(No.Alloc),
+    JSCValue* funcVal = jsc_value_new_function_variadic(cast(JSCContext*)context._cPtr, name.toCString,
       cast(GCallback)&_ccallback, freezeDelegate(cast(void*)&callback), &thawDelegate, _getGType);
 
     return new Value(cast(void*)funcVal, Yes.Take);
@@ -101,7 +101,7 @@ static T getJsVal(T)(JSCValue* jsval) nothrow
   else static if (is(T == double))
     return jsc_value_to_double(jsval);
   else static if (is(T == string))
-    return jsc_value_to_string(jsval).fromCString(Yes.Free);
+    return jsc_value_to_string(jsval).fromCString!(Yes.Free);
   else static if (is(T == Value))
     return gobject.object.ObjectWrap._getDObject!Value(jsval, No.Take);
   else static if (is(T == U[], U))
@@ -140,7 +140,7 @@ static T getJsVal(T)(JSCValue* jsval) nothrow
     {
       auto v = jsc_value_object_get_property(jsval, propNames[i]);
       scope(exit) if (v) g_object_unref(cast(GObject*)v);
-      obj[propNames[i].fromCString(No.Free)] = getJsVal!U(v); // Free the individual strings
+      obj[propNames[i].fromCString] = getJsVal!U(v); // Free the individual strings
     }
 
     return obj;
@@ -164,7 +164,7 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val) nothrow
   else static if (isNumeric!T)
     return jsc_value_new_number(ctx, val);
   else static if (is(T == string))
-    return jsc_value_new_string(ctx, val.toCString(No.Alloc));
+    return jsc_value_new_string(ctx, val.toCString);
   else static if (is(T == Value))
     return cast(JSCValue*)g_object_ref(cast(GObject*)val._cPtr);
   else static if (is(T == U[], U))
@@ -188,7 +188,7 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val) nothrow
     {
       auto itemVal = createJsVal(ctx, v);
       scope(exit) if (itemVal) g_object_unref(cast(GObject*)itemVal);
-      jsc_value_object_set_property(obj, k.toCString(No.Alloc), itemVal);
+      jsc_value_object_set_property(obj, k.toCString, itemVal);
     }
 
     return obj;

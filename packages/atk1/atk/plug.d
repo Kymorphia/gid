@@ -81,7 +81,7 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   {
     char* _cretval;
     _cretval = atk_plug_get_id(cast(AtkPlug*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

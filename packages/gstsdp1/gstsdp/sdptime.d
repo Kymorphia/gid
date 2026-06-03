@@ -98,11 +98,11 @@ class SDPTime
   gstsdp.types.SDPResult set(string start, string stop, string[] repeat) nothrow
   {
     GstSDPResult _cretval;
-    const(char)* _start = start.toCString(No.Alloc);
-    const(char)* _stop = stop.toCString(No.Alloc);
+    const(char)* _start = start.toCString!(No.Malloc, No.Nullable);
+    const(char)* _stop = stop.toCString!(No.Malloc, No.Nullable);
     char*[] _tmprepeat;
     foreach (s; repeat)
-      _tmprepeat ~= s.toCString(No.Alloc);
+      _tmprepeat ~= s.toCString;
     _tmprepeat ~= null;
     const(char*)* _repeat = _tmprepeat.ptr;
 

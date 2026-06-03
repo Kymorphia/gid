@@ -60,7 +60,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
   bool appendString(string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_large_string_array_builder_append_string(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _value, &_err);
     if (_err)
@@ -72,7 +72,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
   bool appendStringLen(string value, long length)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)garrow_large_string_array_builder_append_string_len(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _value, length, &_err);
     if (_err)
@@ -102,7 +102,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
 
     char*[] _tmpvalues;
     foreach (s; values)
-      _tmpvalues ~= s.toCString(No.Alloc);
+      _tmpvalues ~= s.toCString;
     const(char*)* _values = _tmpvalues.ptr;
 
     long _isValidsLength;

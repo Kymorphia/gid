@@ -179,7 +179,7 @@ class Pipeline : gst.bin.Bin
   this(string name = null) nothrow
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_pipeline_new(_name);
     this(_cretval, No.Take);
   }

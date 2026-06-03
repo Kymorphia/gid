@@ -169,7 +169,7 @@ class Parser : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_mime_parser_get_mbox_marker(cast(GMimeParser*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

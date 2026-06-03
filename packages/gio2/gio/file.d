@@ -144,7 +144,7 @@ interface File
     GFile* _cretval;
     const(char)*[] _tmpargs;
     foreach (s; args)
-      _tmpargs ~= s.toCString(No.Alloc);
+      _tmpargs ~= s.toCString;
     _tmpargs ~= null;
     const(char*)* _args = _tmpargs.ptr;
 
@@ -177,7 +177,7 @@ interface File
   static gio.file.File newForCommandlineArg(string arg) nothrow
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(No.Alloc);
+    const(char)* _arg = arg.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_new_for_commandline_arg(_arg);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
@@ -204,8 +204,8 @@ interface File
   static gio.file.File newForCommandlineArgAndCwd(string arg, string cwd) nothrow
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(No.Alloc);
-    const(char)* _cwd = cwd.toCString(No.Alloc);
+    const(char)* _arg = arg.toCString!(No.Malloc, No.Nullable);
+    const(char)* _cwd = cwd.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_new_for_commandline_arg_and_cwd(_arg, _cwd);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
@@ -225,7 +225,7 @@ interface File
   static gio.file.File newForPath(string path) nothrow
   {
     GFile* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_new_for_path(_path);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
@@ -245,7 +245,7 @@ interface File
   static gio.file.File newForUri(string uri) nothrow
   {
     GFile* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_new_for_uri(_uri);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
@@ -274,7 +274,7 @@ interface File
   static gio.file.File newTmp(string tmpl, out gio.file_iostream.FileIOStream iostream)
   {
     GFile* _cretval;
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString!(No.Malloc, Yes.Nullable);
     GFileIOStream* _iostream;
     GError *_err;
     _cretval = g_file_new_tmp(_tmpl, &_iostream, &_err);
@@ -317,7 +317,7 @@ interface File
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_new_tmp_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -354,7 +354,7 @@ interface File
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_new_tmp_dir_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -416,7 +416,7 @@ interface File
   static gio.file.File parseName(string parseName) nothrow
   {
     GFile* _cretval;
-    const(char)* _parseName = parseName.toCString(No.Alloc);
+    const(char)* _parseName = parseName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_parse_name(_parseName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;

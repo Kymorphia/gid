@@ -81,7 +81,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
   this(string filename, bool readOnly) nothrow
   {
     SoupCookieJar* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     _cretval = soup_cookie_jar_text_new(_filename, readOnly);
     this(_cretval, Yes.Take);
   }

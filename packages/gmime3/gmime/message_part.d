@@ -63,7 +63,7 @@ class MessagePart : gmime.object.ObjectWrap
   this(string subtype) nothrow
   {
     GMimeMessagePart* _cretval;
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_message_part_new(_subtype);
     this(_cretval, Yes.Take);
   }
@@ -81,7 +81,7 @@ class MessagePart : gmime.object.ObjectWrap
   static gmime.message_part.MessagePart newWithMessage(string subtype, gmime.message.Message message) nothrow
   {
     GMimeMessagePart* _cretval;
-    const(char)* _subtype = subtype.toCString(No.Alloc);
+    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_message_part_new_with_message(_subtype, message ? cast(GMimeMessage*)message._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.message_part.MessagePart)(cast(GMimeMessagePart*)_cretval, Yes.Take);
     return _retval;

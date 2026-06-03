@@ -61,7 +61,7 @@ template ActionableT()
   {
     const(char)* _cretval;
     _cretval = gtk_actionable_get_action_name(cast(GtkActionable*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ template ActionableT()
   */
   override void setActionName(string actionName = null) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, Yes.Nullable);
     gtk_actionable_set_action_name(cast(GtkActionable*)this._cPtr, _actionName);
   }
 
@@ -141,7 +141,7 @@ template ActionableT()
   */
   override void setDetailedActionName(string detailedActionName) nothrow
   {
-    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
+    const(char)* _detailedActionName = detailedActionName.toCString!(No.Malloc, No.Nullable);
     gtk_actionable_set_detailed_action_name(cast(GtkActionable*)this._cPtr, _detailedActionName);
   }
 }

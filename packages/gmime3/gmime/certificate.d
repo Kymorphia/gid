@@ -109,7 +109,7 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_email(cast(GMimeCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_fingerprint(cast(GMimeCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_issuer_name(cast(GMimeCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_issuer_serial(cast(GMimeCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_key_id(cast(GMimeCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_name(cast(GMimeCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class Certificate : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_user_id(cast(GMimeCertificate*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class Certificate : gobject.object.ObjectWrap
   */
   void setEmail(string email) nothrow
   {
-    const(char)* _email = email.toCString(No.Alloc);
+    const(char)* _email = email.toCString!(No.Malloc, No.Nullable);
     g_mime_certificate_set_email(cast(GMimeCertificate*)this._cPtr, _email);
   }
 
@@ -312,7 +312,7 @@ class Certificate : gobject.object.ObjectWrap
   */
   void setFingerprint(string fingerprint) nothrow
   {
-    const(char)* _fingerprint = fingerprint.toCString(No.Alloc);
+    const(char)* _fingerprint = fingerprint.toCString!(No.Malloc, No.Nullable);
     g_mime_certificate_set_fingerprint(cast(GMimeCertificate*)this._cPtr, _fingerprint);
   }
 
@@ -335,7 +335,7 @@ class Certificate : gobject.object.ObjectWrap
   */
   void setIssuerName(string issuerName) nothrow
   {
-    const(char)* _issuerName = issuerName.toCString(No.Alloc);
+    const(char)* _issuerName = issuerName.toCString!(No.Malloc, No.Nullable);
     g_mime_certificate_set_issuer_name(cast(GMimeCertificate*)this._cPtr, _issuerName);
   }
 
@@ -347,7 +347,7 @@ class Certificate : gobject.object.ObjectWrap
   */
   void setIssuerSerial(string issuerSerial) nothrow
   {
-    const(char)* _issuerSerial = issuerSerial.toCString(No.Alloc);
+    const(char)* _issuerSerial = issuerSerial.toCString!(No.Malloc, No.Nullable);
     g_mime_certificate_set_issuer_serial(cast(GMimeCertificate*)this._cPtr, _issuerSerial);
   }
 
@@ -359,7 +359,7 @@ class Certificate : gobject.object.ObjectWrap
   */
   void setKeyId(string keyId) nothrow
   {
-    const(char)* _keyId = keyId.toCString(No.Alloc);
+    const(char)* _keyId = keyId.toCString!(No.Malloc, No.Nullable);
     g_mime_certificate_set_key_id(cast(GMimeCertificate*)this._cPtr, _keyId);
   }
 
@@ -373,7 +373,7 @@ class Certificate : gobject.object.ObjectWrap
   */
   void setName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     g_mime_certificate_set_name(cast(GMimeCertificate*)this._cPtr, _name);
   }
 
@@ -409,7 +409,7 @@ class Certificate : gobject.object.ObjectWrap
   */
   void setUserId(string userId) nothrow
   {
-    const(char)* _userId = userId.toCString(No.Alloc);
+    const(char)* _userId = userId.toCString!(No.Malloc, No.Nullable);
     g_mime_certificate_set_user_id(cast(GMimeCertificate*)this._cPtr, _userId);
   }
 }

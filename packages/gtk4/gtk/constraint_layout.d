@@ -356,7 +356,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
 
     char*[] _tmplines;
     foreach (s; lines)
-      _tmplines ~= s.toCString(No.Alloc);
+      _tmplines ~= s.toCString;
     const(char*)* _lines = _tmplines.ptr;
 
     auto _views = gHashTableFromD!(string, gtk.constraint_target.ConstraintTarget)(views);

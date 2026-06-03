@@ -304,7 +304,7 @@ class MountOperation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_domain(cast(GMountOperation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class MountOperation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_password(cast(GMountOperation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class MountOperation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_username(cast(GMountOperation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -420,7 +420,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setDomain(string domain = null) nothrow
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
     g_mount_operation_set_domain(cast(GMountOperation*)this._cPtr, _domain);
   }
 
@@ -454,7 +454,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setPassword(string password = null) nothrow
   {
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _password = password.toCString!(No.Malloc, Yes.Nullable);
     g_mount_operation_set_password(cast(GMountOperation*)this._cPtr, _password);
   }
 
@@ -488,7 +488,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setUsername(string username = null) nothrow
   {
-    const(char)* _username = username.toCString(No.Alloc);
+    const(char)* _username = username.toCString!(No.Malloc, Yes.Nullable);
     g_mount_operation_set_username(cast(GMountOperation*)this._cPtr, _username);
   }
 

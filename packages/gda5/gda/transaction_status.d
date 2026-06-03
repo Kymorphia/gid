@@ -59,7 +59,7 @@ class TransactionStatus : gobject.object.ObjectWrap
   this(string name) nothrow
   {
     GdaTransactionStatus* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_transaction_status_new(_name);
     this(_cretval, Yes.Take);
   }
@@ -68,7 +68,7 @@ class TransactionStatus : gobject.object.ObjectWrap
   gda.transaction_status.TransactionStatus find(string str, gda.transaction_status_event.TransactionStatusEvent destev) nothrow
   {
     GdaTransactionStatus* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_transaction_status_find(cast(GdaTransactionStatus*)this._cPtr, _str, destev ? cast(GdaTransactionStatusEvent**)destev._cPtr : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.transaction_status.TransactionStatus)(cast(GdaTransactionStatus*)_cretval, Yes.Take);
     return _retval;

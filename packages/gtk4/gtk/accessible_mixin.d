@@ -86,7 +86,7 @@ template AccessibleT()
   */
   override void announce(string message, gtk.types.AccessibleAnnouncementPriority priority) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     gtk_accessible_announce(cast(GtkAccessible*)this._cPtr, _message, priority);
   }
 

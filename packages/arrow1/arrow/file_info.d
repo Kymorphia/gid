@@ -189,7 +189,7 @@ class FileInfo : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = garrow_file_info_to_string(cast(GArrowFileInfo*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

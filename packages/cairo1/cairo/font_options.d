@@ -203,7 +203,7 @@ class FontOptions : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = cairo_font_options_get_variations(cast(cairo_font_options_t*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setVariations(string variations) nothrow
   {
-    const(char)* _variations = variations.toCString(No.Alloc);
+    const(char)* _variations = variations.toCString!(No.Malloc, No.Nullable);
     cairo_font_options_set_variations(cast(cairo_font_options_t*)this._cPtr, _variations);
   }
 

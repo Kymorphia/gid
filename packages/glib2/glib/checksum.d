@@ -117,7 +117,7 @@ class Checksum : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_checksum_get_string(cast(GChecksum*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -119,7 +119,7 @@ class TlsPassword : gobject.object.ObjectWrap
   this(gio.types.TlsPasswordFlags flags, string description) nothrow
   {
     GTlsPassword* _cretval;
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     _cretval = g_tls_password_new(flags, _description);
     this(_cretval, Yes.Take);
   }
@@ -132,7 +132,7 @@ class TlsPassword : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_description(cast(GTlsPassword*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class TlsPassword : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_warning(cast(GTlsPassword*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class TlsPassword : gobject.object.ObjectWrap
   */
   void setDescription(string description) nothrow
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     g_tls_password_set_description(cast(GTlsPassword*)this._cPtr, _description);
   }
 
@@ -279,7 +279,7 @@ class TlsPassword : gobject.object.ObjectWrap
   */
   void setWarning(string warning) nothrow
   {
-    const(char)* _warning = warning.toCString(No.Alloc);
+    const(char)* _warning = warning.toCString!(No.Malloc, No.Nullable);
     g_tls_password_set_warning(cast(GTlsPassword*)this._cPtr, _warning);
   }
 }

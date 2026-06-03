@@ -164,7 +164,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   static gtk.icon_set.IconSet lookupDefault(string stockId) nothrow
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_factory_lookup_default(_stockId);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -190,7 +190,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void add(string stockId, gtk.icon_set.IconSet iconSet) nothrow
   {
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     gtk_icon_factory_add(cast(GtkIconFactory*)this._cPtr, _stockId, iconSet ? cast(GtkIconSet*)iconSet._cPtr(No.Dup) : null);
   }
 
@@ -225,7 +225,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.icon_set.IconSet lookup(string stockId) nothrow
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_factory_lookup(cast(GtkIconFactory*)this._cPtr, _stockId);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;

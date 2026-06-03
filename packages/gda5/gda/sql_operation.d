@@ -50,7 +50,7 @@ class SqlOperation
   {
     char* _cretval;
     _cretval = gda_sql_operation_serialize(cast(GdaSqlOperation*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class SqlOperation
   static gda.types.SqlOperatorType operatorFromString(string op) nothrow
   {
     GdaSqlOperatorType _cretval;
-    const(char)* _op = op.toCString(No.Alloc);
+    const(char)* _op = op.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_sql_operation_operator_from_string(_op);
     gda.types.SqlOperatorType _retval = cast(gda.types.SqlOperatorType)_cretval;
     return _retval;
@@ -82,7 +82,7 @@ class SqlOperation
   {
     const(char)* _cretval;
     _cretval = gda_sql_operation_operator_to_string(op);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

@@ -36,7 +36,7 @@ struct DBusError
   {
     char* _cretval;
     _cretval = g_dbus_error_encode_gerror(error ? cast(const(GError)*)error._cPtr : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -57,7 +57,7 @@ struct DBusError
   {
     char* _cretval;
     _cretval = g_dbus_error_get_remote_error(error ? cast(const(GError)*)error._cPtr : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -113,8 +113,8 @@ struct DBusError
   static glib.error.ErrorWrap newForDbusError(string dbusErrorName, string dbusErrorMessage) nothrow
   {
     GError* _cretval;
-    const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
-    const(char)* _dbusErrorMessage = dbusErrorMessage.toCString(No.Alloc);
+    const(char)* _dbusErrorName = dbusErrorName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _dbusErrorMessage = dbusErrorMessage.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_error_new_for_dbus_error(_dbusErrorName, _dbusErrorMessage);
     auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval, Yes.Take) : null;
     return _retval;
@@ -145,7 +145,7 @@ struct DBusError
   static bool registerError(glib.types.Quark errorDomain, int errorCode, string dbusErrorName) nothrow
   {
     bool _retval;
-    const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
+    const(char)* _dbusErrorName = dbusErrorName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_dbus_error_register_error(errorDomain, errorCode, _dbusErrorName);
     return _retval;
   }
@@ -163,7 +163,7 @@ struct DBusError
   */
   static void registerErrorDomain(string errorDomainQuarkName, out size_t quarkVolatile, gio.dbus_error_entry.DBusErrorEntry[] entries) nothrow
   {
-    const(char)* _errorDomainQuarkName = errorDomainQuarkName.toCString(No.Alloc);
+    const(char)* _errorDomainQuarkName = errorDomainQuarkName.toCString!(No.Malloc, No.Nullable);
     uint _numEntries;
     if (entries)
       _numEntries = cast(uint)entries.length;
@@ -207,7 +207,7 @@ struct DBusError
   static bool unregisterError(glib.types.Quark errorDomain, int errorCode, string dbusErrorName) nothrow
   {
     bool _retval;
-    const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
+    const(char)* _dbusErrorName = dbusErrorName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_dbus_error_unregister_error(errorDomain, errorCode, _dbusErrorName);
     return _retval;
   }

@@ -73,7 +73,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   this(string attributes) nothrow
   {
     GFileAttributeMatcher* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_attribute_matcher_new(_attributes);
     this(_cretval, Yes.Take);
   }
@@ -94,7 +94,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   bool enumerateNamespace(string ns) nothrow
   {
     bool _retval;
-    const(char)* _ns = ns.toCString(No.Alloc);
+    const(char)* _ns = ns.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_file_attribute_matcher_enumerate_namespace(cast(GFileAttributeMatcher*)this._cPtr, _ns);
     return _retval;
   }
@@ -108,7 +108,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_file_attribute_matcher_enumerate_next(cast(GFileAttributeMatcher*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   bool matches(string attribute) nothrow
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_file_attribute_matcher_matches(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
     return _retval;
   }
@@ -140,7 +140,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   bool matchesOnly(string attribute) nothrow
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_file_attribute_matcher_matches_only(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
     return _retval;
   }
@@ -180,7 +180,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_file_attribute_matcher_to_string(cast(GFileAttributeMatcher*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

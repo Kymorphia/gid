@@ -38,7 +38,7 @@ struct XaTransactionId
   {
     char* _cretval;
     _cretval = gda_xa_transaction_id_to_string(cast(const(GdaXaTransactionId)*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

@@ -86,7 +86,7 @@ struct Color
   bool parse(string spec) nothrow
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(No.Alloc);
+    const(char)* _spec = spec.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)pango_color_parse(cast(PangoColor*)&this, _spec);
     return _retval;
   }
@@ -117,7 +117,7 @@ struct Color
   bool parseWithAlpha(out ushort alpha, string spec) nothrow
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(No.Alloc);
+    const(char)* _spec = spec.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)pango_color_parse_with_alpha(cast(PangoColor*)&this, cast(ushort*)&alpha, _spec);
     return _retval;
   }
@@ -135,7 +135,7 @@ struct Color
   {
     char* _cretval;
     _cretval = pango_color_to_string(cast(const(PangoColor)*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

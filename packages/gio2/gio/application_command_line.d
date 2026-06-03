@@ -244,7 +244,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   gio.file.File createFileForArg(string arg) nothrow
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(No.Alloc);
+    const(char)* _arg = arg.toCString!(No.Malloc, No.Nullable);
     _cretval = g_application_command_line_create_file_for_arg(cast(GApplicationCommandLine*)this._cPtr, _arg);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
@@ -297,7 +297,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -318,7 +318,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = g_application_command_line_get_cwd(cast(GApplicationCommandLine*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -467,9 +467,9 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   string getenv(string name) nothrow
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_application_command_line_getenv(cast(GApplicationCommandLine*)this._cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   */
   void printLiteral(string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     g_application_command_line_print_literal(cast(GApplicationCommandLine*)this._cPtr, _message);
   }
 
@@ -501,7 +501,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   */
   void printerrLiteral(string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     g_application_command_line_printerr_literal(cast(GApplicationCommandLine*)this._cPtr, _message);
   }
 

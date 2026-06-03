@@ -201,7 +201,7 @@ class RadioButton : gtk.check_button.CheckButton
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_radio_button_new_with_label(_group, _label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -219,7 +219,7 @@ class RadioButton : gtk.check_button.CheckButton
   static gtk.radio_button.RadioButton newWithLabelFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_radio_button_new_with_label_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember._cPtr(No.Dup) : null, _label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -243,7 +243,7 @@ class RadioButton : gtk.check_button.CheckButton
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_radio_button_new_with_mnemonic(_group, _label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -263,7 +263,7 @@ class RadioButton : gtk.check_button.CheckButton
   static gtk.radio_button.RadioButton newWithMnemonicFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_radio_button_new_with_mnemonic_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember._cPtr(No.Dup) : null, _label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;

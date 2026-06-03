@@ -123,7 +123,7 @@ class ServerMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_server_message_get_method(cast(SoupServerMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class ServerMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_server_message_get_reason_phrase(cast(SoupServerMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class ServerMessage : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = soup_server_message_get_remote_host(cast(SoupServerMessage*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   void setRedirect(uint statusCode, string redirectUri) nothrow
   {
-    const(char)* _redirectUri = redirectUri.toCString(No.Alloc);
+    const(char)* _redirectUri = redirectUri.toCString!(No.Malloc, No.Nullable);
     soup_server_message_set_redirect(cast(SoupServerMessage*)this._cPtr, statusCode, _redirectUri);
   }
 
@@ -354,7 +354,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   void setResponse(string contentType, soup.types.MemoryUse respUse, ubyte[] respBody = null) nothrow
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, Yes.Nullable);
     size_t _respLength;
     if (respBody)
       _respLength = cast(size_t)respBody.length;
@@ -375,7 +375,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   void setStatus(uint statusCode, string reasonPhrase = null) nothrow
   {
-    const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
+    const(char)* _reasonPhrase = reasonPhrase.toCString!(No.Malloc, Yes.Nullable);
     soup_server_message_set_status(cast(SoupServerMessage*)this._cPtr, statusCode, _reasonPhrase);
   }
 

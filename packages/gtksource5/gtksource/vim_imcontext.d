@@ -127,7 +127,7 @@ class VimIMContext : gtk.imcontext.IMContext
   */
   void executeCommand(string command) nothrow
   {
-    const(char)* _command = command.toCString(No.Alloc);
+    const(char)* _command = command.toCString!(No.Malloc, No.Nullable);
     gtk_source_vim_im_context_execute_command(cast(GtkSourceVimIMContext*)this._cPtr, _command);
   }
 
@@ -139,7 +139,7 @@ class VimIMContext : gtk.imcontext.IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_bar_text(cast(GtkSourceVimIMContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class VimIMContext : gtk.imcontext.IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_text(cast(GtkSourceVimIMContext*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

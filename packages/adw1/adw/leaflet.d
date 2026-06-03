@@ -596,7 +596,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   gtk.widget.Widget getChildByName(string name) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_leaflet_get_child_by_name(cast(AdwLeaflet*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -759,7 +759,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   {
     const(char)* _cretval;
     _cretval = adw_leaflet_get_visible_child_name(cast(AdwLeaflet*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1037,7 +1037,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setVisibleChildName(string name) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     adw_leaflet_set_visible_child_name(cast(AdwLeaflet*)this._cPtr, _name);
   }
 }

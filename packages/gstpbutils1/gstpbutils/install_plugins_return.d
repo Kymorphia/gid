@@ -25,7 +25,7 @@ struct InstallPluginsReturn
   {
     const(char)* _cretval;
     _cretval = gst_install_plugins_return_get_name(ret);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

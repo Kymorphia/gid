@@ -68,8 +68,8 @@ class SecurityOrigin : gobject.boxed.Boxed
   this(string protocol, string host, ushort port) nothrow
   {
     WebKitSecurityOrigin* _cretval;
-    const(char)* _protocol = protocol.toCString(No.Alloc);
-    const(char)* _host = host.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
+    const(char)* _host = host.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_security_origin_new(_protocol, _host, port);
     this(_cretval, Yes.Take);
   }
@@ -88,7 +88,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   static webkit.security_origin.SecurityOrigin newForUri(string uri) nothrow
   {
     WebKitSecurityOrigin* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_security_origin_new_for_uri(_uri);
     auto _retval = _cretval ? new webkit.security_origin.SecurityOrigin(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -105,7 +105,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_security_origin_get_host(cast(WebKitSecurityOrigin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_security_origin_get_protocol(cast(WebKitSecurityOrigin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = webkit_security_origin_to_string(cast(WebKitSecurityOrigin*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

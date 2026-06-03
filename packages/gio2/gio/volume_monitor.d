@@ -151,7 +151,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   gio.mount.Mount getMountForUuid(string uuid) nothrow
   {
     GMount* _cretval;
-    const(char)* _uuid = uuid.toCString(No.Alloc);
+    const(char)* _uuid = uuid.toCString!(No.Malloc, No.Nullable);
     _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)this._cPtr, _uuid);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
@@ -183,7 +183,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   gio.volume.Volume getVolumeForUuid(string uuid) nothrow
   {
     GVolume* _cretval;
-    const(char)* _uuid = uuid.toCString(No.Alloc);
+    const(char)* _uuid = uuid.toCString!(No.Malloc, No.Nullable);
     _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)this._cPtr, _uuid);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;

@@ -176,7 +176,7 @@ class MenuShell : gtk.container.Container
   */
   void bindModel(gio.menu_model.MenuModel model, string actionNamespace, bool withSeparators) nothrow
   {
-    const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
+    const(char)* _actionNamespace = actionNamespace.toCString!(No.Malloc, Yes.Nullable);
     gtk_menu_shell_bind_model(cast(GtkMenuShell*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, _actionNamespace, withSeparators);
   }
 

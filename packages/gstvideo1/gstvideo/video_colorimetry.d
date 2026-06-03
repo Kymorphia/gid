@@ -45,7 +45,7 @@ struct VideoColorimetry
   bool fromString(string color) nothrow
   {
     bool _retval;
-    const(char)* _color = color.toCString(No.Alloc);
+    const(char)* _color = color.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)&this, _color);
     return _retval;
   }
@@ -92,7 +92,7 @@ struct VideoColorimetry
   bool matches(string color) nothrow
   {
     bool _retval;
-    const(char)* _color = color.toCString(No.Alloc);
+    const(char)* _color = color.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)&this, _color);
     return _retval;
   }
@@ -106,7 +106,7 @@ struct VideoColorimetry
   {
     char* _cretval;
     _cretval = gst_video_colorimetry_to_string(cast(const(GstVideoColorimetry)*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

@@ -23,7 +23,7 @@ struct StateChange
   {
     const(char)* _cretval;
     _cretval = gst_state_change_get_name(transition);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

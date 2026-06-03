@@ -107,10 +107,10 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   static gio.proxy_resolver.ProxyResolver new_(string defaultProxy = null, string[] ignoreHosts = null) nothrow
   {
     GProxyResolver* _cretval;
-    const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
+    const(char)* _defaultProxy = defaultProxy.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString(No.Alloc);
+      _tmpignoreHosts ~= s.toCString;
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
 
@@ -133,7 +133,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   */
   void setDefaultProxy(string defaultProxy = null) nothrow
   {
-    const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
+    const(char)* _defaultProxy = defaultProxy.toCString!(No.Malloc, Yes.Nullable);
     g_simple_proxy_resolver_set_default_proxy(cast(GSimpleProxyResolver*)this._cPtr, _defaultProxy);
   }
 
@@ -151,7 +151,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   {
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString(No.Alloc);
+      _tmpignoreHosts ~= s.toCString;
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
 
@@ -174,8 +174,8 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   */
   void setUriProxy(string uriScheme, string proxy) nothrow
   {
-    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
-    const(char)* _proxy = proxy.toCString(No.Alloc);
+    const(char)* _uriScheme = uriScheme.toCString!(No.Malloc, No.Nullable);
+    const(char)* _proxy = proxy.toCString!(No.Malloc, No.Nullable);
     g_simple_proxy_resolver_set_uri_proxy(cast(GSimpleProxyResolver*)this._cPtr, _uriScheme, _proxy);
   }
 }

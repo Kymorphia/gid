@@ -165,7 +165,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   static void addBuiltinIcon(string iconName, int size, gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     gtk_icon_theme_add_builtin_icon(_iconName, size, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
@@ -228,7 +228,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void addResourcePath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_icon_theme_add_resource_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -241,7 +241,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void appendSearchPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_icon_theme_append_search_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -270,7 +270,7 @@ class IconTheme : gobject.object.ObjectWrap
     GtkIconInfo* _cretval;
     char*[] _tmpiconNames;
     foreach (s; iconNames)
-      _tmpiconNames ~= s.toCString(No.Alloc);
+      _tmpiconNames ~= s.toCString;
     _tmpiconNames ~= null;
     const(char*)* _iconNames = _tmpiconNames.ptr;
 
@@ -305,7 +305,7 @@ class IconTheme : gobject.object.ObjectWrap
     GtkIconInfo* _cretval;
     char*[] _tmpiconNames;
     foreach (s; iconNames)
-      _tmpiconNames ~= s.toCString(No.Alloc);
+      _tmpiconNames ~= s.toCString;
     _tmpiconNames ~= null;
     const(char*)* _iconNames = _tmpiconNames.ptr;
 
@@ -325,7 +325,7 @@ class IconTheme : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = gtk_icon_theme_get_example_icon_name(cast(GtkIconTheme*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class IconTheme : gobject.object.ObjectWrap
   int[] getIconSizes(string iconName) nothrow
   {
     int* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_theme_get_icon_sizes(cast(GtkIconTheme*)this._cPtr, _iconName);
     int[] _retval;
 
@@ -374,7 +374,7 @@ class IconTheme : gobject.object.ObjectWrap
     gtk_icon_theme_get_search_path(cast(GtkIconTheme*)this._cPtr, &_path, &_nElements);
     path.length = _nElements;
     foreach (i; 0 .. _nElements)
-      path[i] = _path[i].fromCString(Yes.Free);
+      path[i] = _path[i].fromCString!(Yes.Free);
     gFree(cast(void*)_path);
   }
 
@@ -390,7 +390,7 @@ class IconTheme : gobject.object.ObjectWrap
   bool hasIcon(string iconName) nothrow
   {
     bool _retval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_icon_theme_has_icon(cast(GtkIconTheme*)this._cPtr, _iconName);
     return _retval;
   }
@@ -434,7 +434,7 @@ class IconTheme : gobject.object.ObjectWrap
   string[] listIcons(string context = null) nothrow
   {
     GList* _cretval;
-    const(char)* _context = context.toCString(No.Alloc);
+    const(char)* _context = context.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_icon_theme_list_icons(cast(GtkIconTheme*)this._cPtr, _context);
     auto _retval = gListToD!(string, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -468,7 +468,7 @@ class IconTheme : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf loadIcon(string iconName, int size, gtk.types.IconLookupFlags flags)
   {
     GdkPixbuf* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gtk_icon_theme_load_icon(cast(GtkIconTheme*)this._cPtr, _iconName, size, flags, &_err);
     if (_err)
@@ -507,7 +507,7 @@ class IconTheme : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf loadIconForScale(string iconName, int size, int scale, gtk.types.IconLookupFlags flags)
   {
     GdkPixbuf* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gtk_icon_theme_load_icon_for_scale(cast(GtkIconTheme*)this._cPtr, _iconName, size, scale, flags, &_err);
     if (_err)
@@ -544,7 +544,7 @@ class IconTheme : gobject.object.ObjectWrap
   cairo.surface.Surface loadSurface(string iconName, int size, int scale, gdk.window.Window forWindow, gtk.types.IconLookupFlags flags)
   {
     cairo_surface_t* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gtk_icon_theme_load_surface(cast(GtkIconTheme*)this._cPtr, _iconName, size, scale, forWindow ? cast(GdkWindow*)forWindow._cPtr(No.Dup) : null, flags, &_err);
     if (_err)
@@ -626,7 +626,7 @@ class IconTheme : gobject.object.ObjectWrap
   gtk.icon_info.IconInfo lookupIcon(string iconName, int size, gtk.types.IconLookupFlags flags) nothrow
   {
     GtkIconInfo* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_theme_lookup_icon(cast(GtkIconTheme*)this._cPtr, _iconName, size, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
@@ -651,7 +651,7 @@ class IconTheme : gobject.object.ObjectWrap
   gtk.icon_info.IconInfo lookupIconForScale(string iconName, int size, int scale, gtk.types.IconLookupFlags flags) nothrow
   {
     GtkIconInfo* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_icon_theme_lookup_icon_for_scale(cast(GtkIconTheme*)this._cPtr, _iconName, size, scale, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
@@ -666,7 +666,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void prependSearchPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_icon_theme_prepend_search_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -696,7 +696,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void setCustomTheme(string themeName = null) nothrow
   {
-    const(char)* _themeName = themeName.toCString(No.Alloc);
+    const(char)* _themeName = themeName.toCString!(No.Malloc, Yes.Nullable);
     gtk_icon_theme_set_custom_theme(cast(GtkIconTheme*)this._cPtr, _themeName);
   }
 
@@ -741,7 +741,7 @@ class IconTheme : gobject.object.ObjectWrap
 
     const(char)*[] _tmppath;
     foreach (s; path)
-      _tmppath ~= s.toCString(No.Alloc);
+      _tmppath ~= s.toCString;
     const(char*)* _path = _tmppath.ptr;
 
     gtk_icon_theme_set_search_path(cast(GtkIconTheme*)this._cPtr, _path, _nElements);

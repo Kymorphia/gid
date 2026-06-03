@@ -72,7 +72,7 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
   static gobject.types.GType load(string factoryname) nothrow
   {
     gobject.types.GType _retval;
-    const(char)* _factoryname = factoryname.toCString(No.Alloc);
+    const(char)* _factoryname = factoryname.toCString!(No.Malloc, No.Nullable);
     _retval = gst_dynamic_type_factory_load(_factoryname);
     return _retval;
   }

@@ -50,7 +50,7 @@ class DebugCategory
   {
     const(char)* _cretval;
     _cretval = gst_debug_category_get_description(cast(GstDebugCategory*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class DebugCategory
   {
     const(char)* _cretval;
     _cretval = gst_debug_category_get_name(cast(GstDebugCategory*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

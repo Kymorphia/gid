@@ -107,7 +107,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _pageUri = pageUri.toCString(No.Alloc);
+    const(char)* _pageUri = pageUri.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     webkit_favicon_database_get_favicon(cast(WebKitFaviconDatabase*)this._cPtr, _pageUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -142,9 +142,9 @@ class FaviconDatabase : gobject.object.ObjectWrap
   string getFaviconUri(string pageUri) nothrow
   {
     char* _cretval;
-    const(char)* _pageUri = pageUri.toCString(No.Alloc);
+    const(char)* _pageUri = pageUri.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_favicon_database_get_favicon_uri(cast(WebKitFaviconDatabase*)this._cPtr, _pageUri);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

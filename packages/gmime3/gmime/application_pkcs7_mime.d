@@ -109,7 +109,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
   static gmime.application_pkcs7_mime.ApplicationPkcs7Mime sign(gmime.object.ObjectWrap entity, string userid)
   {
     GMimeApplicationPkcs7Mime* _cretval;
-    const(char)* _userid = userid.toCString(No.Alloc);
+    const(char)* _userid = userid.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_mime_application_pkcs7_mime_sign(entity ? cast(GMimeObject*)entity._cPtr(No.Dup) : null, _userid, &_err);
     if (_err)
@@ -143,7 +143,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
   gmime.object.ObjectWrap decrypt(gmime.types.DecryptFlags flags, string sessionKey, gmime.decrypt_result.DecryptResult result)
   {
     GMimeObject* _cretval;
-    const(char)* _sessionKey = sessionKey.toCString(No.Alloc);
+    const(char)* _sessionKey = sessionKey.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_mime_application_pkcs7_mime_decrypt(cast(GMimeApplicationPkcs7Mime*)this._cPtr, flags, _sessionKey, result ? cast(GMimeDecryptResult**)result._cPtr(No.Dup) : null, &_err);
     if (_err)

@@ -773,7 +773,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   {
     const(char)* _cretval;
     _cretval = g_task_get_name(cast(GTask*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1014,7 +1014,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void returnNewErrorLiteral(glib.types.Quark domain, int code, string message) nothrow
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
     g_task_return_new_error_literal(cast(GTask*)this._cPtr, domain, code, _message);
   }
 
@@ -1209,7 +1209,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void setName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     g_task_set_name(cast(GTask*)this._cPtr, _name);
   }
 
@@ -1306,7 +1306,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void setStaticName(string name = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     g_task_set_static_name(cast(GTask*)this._cPtr, _name);
   }
 

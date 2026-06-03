@@ -144,7 +144,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   this(string title, gtk.types.FileChooserAction action) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_file_chooser_button_new(_title, action);
     this(_cretval, No.Take);
   }
@@ -197,7 +197,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_button_get_title(cast(GtkFileChooserButton*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_file_chooser_button_set_title(cast(GtkFileChooserButton*)this._cPtr, _title);
   }
 

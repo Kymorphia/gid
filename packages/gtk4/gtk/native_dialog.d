@@ -182,7 +182,7 @@ class NativeDialog : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gtk_native_dialog_get_title(cast(GtkNativeDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     gtk_native_dialog_set_title(cast(GtkNativeDialog*)this._cPtr, _title);
   }
 

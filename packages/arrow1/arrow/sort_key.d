@@ -74,7 +74,7 @@ class SortKey : gobject.object.ObjectWrap
   this(string target, arrow.types.SortOrder order)
   {
     GArrowSortKey* _cretval;
-    const(char)* _target = target.toCString(No.Alloc);
+    const(char)* _target = target.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = garrow_sort_key_new(_target, order, &_err);
     if (_err)

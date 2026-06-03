@@ -38,9 +38,9 @@ template DocumentT()
   override string getAttributeValue(string attributeName) nothrow
   {
     const(char)* _cretval;
-    const(char)* _attributeName = attributeName.toCString(No.Alloc);
+    const(char)* _attributeName = attributeName.toCString!(No.Malloc, No.Nullable);
     _cretval = atk_document_get_attribute_value(cast(AtkDocument*)this._cPtr, _attributeName);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ template DocumentT()
   {
     const(char)* _cretval;
     _cretval = atk_document_get_document_type(cast(AtkDocument*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ template DocumentT()
   {
     const(char)* _cretval;
     _cretval = atk_document_get_locale(cast(AtkDocument*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -133,8 +133,8 @@ template DocumentT()
   override bool setAttributeValue(string attributeName, string attributeValue) nothrow
   {
     bool _retval;
-    const(char)* _attributeName = attributeName.toCString(No.Alloc);
-    const(char)* _attributeValue = attributeValue.toCString(No.Alloc);
+    const(char)* _attributeName = attributeName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _attributeValue = attributeValue.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)atk_document_set_attribute_value(cast(AtkDocument*)this._cPtr, _attributeName, _attributeValue);
     return _retval;
   }

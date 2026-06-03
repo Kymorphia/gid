@@ -284,7 +284,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_view_switcher_title_get_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_view_switcher_title_get_title(cast(AdwViewSwitcherTitle*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   void setSubtitle(string subtitle) nothrow
   {
-    const(char)* _subtitle = subtitle.toCString(No.Alloc);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
     adw_view_switcher_title_set_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr, _subtitle);
   }
 
@@ -373,7 +373,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   void setTitle(string title) nothrow
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     adw_view_switcher_title_set_title(cast(AdwViewSwitcherTitle*)this._cPtr, _title);
   }
 

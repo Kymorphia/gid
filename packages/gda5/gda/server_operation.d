@@ -90,7 +90,7 @@ class ServerOperation : gobject.object.ObjectWrap
   this(gda.types.ServerOperationType opType, string xmlFile) nothrow
   {
     GdaServerOperation* _cretval;
-    const(char)* _xmlFile = xmlFile.toCString(No.Alloc);
+    const(char)* _xmlFile = xmlFile.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_new(opType, _xmlFile);
     this(_cretval, Yes.Take);
   }
@@ -114,7 +114,7 @@ class ServerOperation : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = gda_server_operation_op_type_to_string(type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -136,8 +136,8 @@ class ServerOperation : gobject.object.ObjectWrap
   static gda.server_operation.ServerOperation prepareCreateDatabase(string provider, string dbName = null)
   {
     GdaServerOperation* _cretval;
-    const(char)* _provider = provider.toCString(No.Alloc);
-    const(char)* _dbName = dbName.toCString(No.Alloc);
+    const(char)* _provider = provider.toCString!(No.Malloc, No.Nullable);
+    const(char)* _dbName = dbName.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gda_server_operation_prepare_create_database(_provider, _dbName, &_err);
     if (_err)
@@ -164,8 +164,8 @@ class ServerOperation : gobject.object.ObjectWrap
   static gda.server_operation.ServerOperation prepareDropDatabase(string provider, string dbName = null)
   {
     GdaServerOperation* _cretval;
-    const(char)* _provider = provider.toCString(No.Alloc);
-    const(char)* _dbName = dbName.toCString(No.Alloc);
+    const(char)* _provider = provider.toCString!(No.Malloc, No.Nullable);
+    const(char)* _dbName = dbName.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = gda_server_operation_prepare_drop_database(_provider, _dbName, &_err);
     if (_err)
@@ -187,7 +187,7 @@ class ServerOperation : gobject.object.ObjectWrap
   static gda.server_operation.ServerOperation prepareDropTable(gda.connection.Connection cnc, string tableName)
   {
     GdaServerOperation* _cretval;
-    const(char)* _tableName = tableName.toCString(No.Alloc);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = gda_server_operation_prepare_drop_table(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _tableName, &_err);
     if (_err)
@@ -207,7 +207,7 @@ class ServerOperation : gobject.object.ObjectWrap
   static gda.types.ServerOperationType stringToOpType(string str) nothrow
   {
     GdaServerOperationType _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_string_to_op_type(_str);
     gda.types.ServerOperationType _retval = cast(gda.types.ServerOperationType)_cretval;
     return _retval;
@@ -217,7 +217,7 @@ class ServerOperation : gobject.object.ObjectWrap
   uint addItemToSequence(string seqPath) nothrow
   {
     uint _retval;
-    const(char)* _seqPath = seqPath.toCString(No.Alloc);
+    const(char)* _seqPath = seqPath.toCString!(No.Malloc, No.Nullable);
     _retval = gda_server_operation_add_item_to_sequence(cast(GdaServerOperation*)this._cPtr, _seqPath);
     return _retval;
   }
@@ -226,7 +226,7 @@ class ServerOperation : gobject.object.ObjectWrap
   bool delItemFromSequence(string itemPath) nothrow
   {
     bool _retval;
-    const(char)* _itemPath = itemPath.toCString(No.Alloc);
+    const(char)* _itemPath = itemPath.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gda_server_operation_del_item_from_sequence(cast(GdaServerOperation*)this._cPtr, _itemPath);
     return _retval;
   }
@@ -241,9 +241,9 @@ class ServerOperation : gobject.object.ObjectWrap
   string getNodeParent(string path) nothrow
   {
     char* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_get_node_parent(cast(GdaServerOperation*)this._cPtr, _path);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -257,9 +257,9 @@ class ServerOperation : gobject.object.ObjectWrap
   string getNodePathPortion(string path) nothrow
   {
     char* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_get_node_path_portion(cast(GdaServerOperation*)this._cPtr, _path);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class ServerOperation : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -309,7 +309,7 @@ class ServerOperation : gobject.object.ObjectWrap
   string[] getSequenceItemNames(string path) nothrow
   {
     char** _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_get_sequence_item_names(cast(GdaServerOperation*)this._cPtr, _path);
     string[] _retval;
 
@@ -320,7 +320,7 @@ class ServerOperation : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -330,7 +330,7 @@ class ServerOperation : gobject.object.ObjectWrap
   uint getSequenceMaxSize(string path) nothrow
   {
     uint _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _retval = gda_server_operation_get_sequence_max_size(cast(GdaServerOperation*)this._cPtr, _path);
     return _retval;
   }
@@ -339,7 +339,7 @@ class ServerOperation : gobject.object.ObjectWrap
   uint getSequenceMinSize(string path) nothrow
   {
     uint _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _retval = gda_server_operation_get_sequence_min_size(cast(GdaServerOperation*)this._cPtr, _path);
     return _retval;
   }
@@ -348,9 +348,9 @@ class ServerOperation : gobject.object.ObjectWrap
   string getSequenceName(string path) nothrow
   {
     const(char)* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_get_sequence_name(cast(GdaServerOperation*)this._cPtr, _path);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -358,7 +358,7 @@ class ServerOperation : gobject.object.ObjectWrap
   uint getSequenceSize(string path) nothrow
   {
     uint _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _retval = gda_server_operation_get_sequence_size(cast(GdaServerOperation*)this._cPtr, _path);
     return _retval;
   }
@@ -380,9 +380,9 @@ class ServerOperation : gobject.object.ObjectWrap
   string getSqlIdentifierAt(gda.connection.Connection cnc, gda.server_provider.ServerProvider prov, string path) nothrow
   {
     char* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_get_sql_identifier_at_path(cast(GdaServerOperation*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, prov ? cast(GdaServerProvider*)prov._cPtr(No.Dup) : null, _path);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class ServerOperation : gobject.object.ObjectWrap
   gobject.value.Value getValueAt(string path) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_server_operation_get_value_at_path(cast(GdaServerOperation*)this._cPtr, _path);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -416,7 +416,7 @@ class ServerOperation : gobject.object.ObjectWrap
   bool isValid(string xmlFile = null)
   {
     bool _retval;
-    const(char)* _xmlFile = xmlFile.toCString(No.Alloc);
+    const(char)* _xmlFile = xmlFile.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_server_operation_is_valid(cast(GdaServerOperation*)this._cPtr, _xmlFile, &_err);
     if (_err)
@@ -455,7 +455,7 @@ class ServerOperation : gobject.object.ObjectWrap
   bool performCreateDatabase(string provider = null)
   {
     bool _retval;
-    const(char)* _provider = provider.toCString(No.Alloc);
+    const(char)* _provider = provider.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_server_operation_perform_create_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
     if (_err)
@@ -492,7 +492,7 @@ class ServerOperation : gobject.object.ObjectWrap
   bool performDropDatabase(string provider = null)
   {
     bool _retval;
-    const(char)* _provider = provider.toCString(No.Alloc);
+    const(char)* _provider = provider.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _retval = cast(bool)gda_server_operation_perform_drop_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
     if (_err)
@@ -555,8 +555,8 @@ class ServerOperation : gobject.object.ObjectWrap
   bool setValueAt(string value, string path)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)gda_server_operation_set_value_at_path(cast(GdaServerOperation*)this._cPtr, _value, _path, &_err);
     if (_err)

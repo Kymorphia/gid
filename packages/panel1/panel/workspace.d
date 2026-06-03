@@ -112,7 +112,7 @@ class Workspace : adw.application_window.ApplicationWindow
   /** */
   override void actionSetEnabled(string actionName, bool enabled) nothrow
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
     panel_workspace_action_set_enabled(cast(PanelWorkspace*)this._cPtr, _actionName, enabled);
   }
 
@@ -123,7 +123,7 @@ class Workspace : adw.application_window.ApplicationWindow
   {
     const(char)* _cretval;
     _cretval = panel_workspace_get_id(cast(PanelWorkspace*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class Workspace : adw.application_window.ApplicationWindow
   panel.inhibitor.Inhibitor inhibit(gtk.types.ApplicationInhibitFlags flags, string reason) nothrow
   {
     PanelInhibitor* _cretval;
-    const(char)* _reason = reason.toCString(No.Alloc);
+    const(char)* _reason = reason.toCString!(No.Malloc, No.Nullable);
     _cretval = panel_workspace_inhibit(cast(PanelWorkspace*)this._cPtr, flags, _reason);
     auto _retval = gobject.object.ObjectWrap._getDObject!(panel.inhibitor.Inhibitor)(cast(PanelInhibitor*)_cretval, Yes.Take);
     return _retval;
@@ -163,7 +163,7 @@ class Workspace : adw.application_window.ApplicationWindow
   /** */
   void setId(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     panel_workspace_set_id(cast(PanelWorkspace*)this._cPtr, _id);
   }
 }

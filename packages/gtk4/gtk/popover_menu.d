@@ -297,7 +297,7 @@ class PopoverMenu : gtk.popover.Popover
   bool addChild(gtk.widget.Widget child, string id) nothrow
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gtk_popover_menu_add_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _id);
     return _retval;
   }

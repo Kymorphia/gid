@@ -160,7 +160,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   this(string name = null, gdkpixbuf.pixbuf.Pixbuf icon = null) nothrow
   {
     GtkSourceCompletionWords* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_source_completion_words_new(_name, icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }

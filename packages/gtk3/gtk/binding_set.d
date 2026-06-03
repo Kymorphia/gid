@@ -143,7 +143,7 @@ class BindingSet
   */
   void addPath(gtk.types.PathType pathType, string pathPattern, gtk.types.PathPriorityType priority) nothrow
   {
-    const(char)* _pathPattern = pathPattern.toCString(No.Alloc);
+    const(char)* _pathPattern = pathPattern.toCString!(No.Malloc, No.Nullable);
     gtk_binding_set_add_path(cast(GtkBindingSet*)this._cPtr, pathType, _pathPattern, priority);
   }
 
@@ -160,7 +160,7 @@ class BindingSet
   static gtk.binding_set.BindingSet find(string setName) nothrow
   {
     GtkBindingSet* _cretval;
-    const(char)* _setName = setName.toCString(No.Alloc);
+    const(char)* _setName = setName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_binding_set_find(_setName);
     auto _retval = _cretval ? new gtk.binding_set.BindingSet(cast(GtkBindingSet*)_cretval, No.Take) : null;
     return _retval;

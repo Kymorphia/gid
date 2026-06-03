@@ -256,7 +256,7 @@ template FileT()
     _cretval = g_file_build_attribute_list_for_copy(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -925,7 +925,7 @@ template FileT()
   override gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileEnumerator* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_file_enumerate_children(cast(GFile*)this._cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -972,7 +972,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_enumerate_children_async(cast(GFile*)this._cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1130,7 +1130,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_basename(cast(GFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1151,7 +1151,7 @@ template FileT()
   override gio.file.File getChild(string name) nothrow
   {
     GFile* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_get_child(cast(GFile*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
@@ -1177,7 +1177,7 @@ template FileT()
   override gio.file.File getChildForDisplayName(string displayName)
   {
     GFile* _cretval;
-    const(char)* _displayName = displayName.toCString(No.Alloc);
+    const(char)* _displayName = displayName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_file_get_child_for_display_name(cast(GFile*)this._cPtr, _displayName, &_err);
     if (_err)
@@ -1227,7 +1227,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_parse_name(cast(GFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1244,7 +1244,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_path(cast(GFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1264,7 +1264,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_relative_path(cast(GFile*)this._cPtr, descendant ? cast(GFile*)(cast(gobject.object.ObjectWrap)descendant)._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1281,7 +1281,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_uri(cast(GFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1305,7 +1305,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_uri_scheme(cast(GFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1370,7 +1370,7 @@ template FileT()
   override bool hasUriScheme(string uriScheme) nothrow
   {
     bool _retval;
-    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
+    const(char)* _uriScheme = uriScheme.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_file_has_uri_scheme(cast(GFile*)this._cPtr, _uriScheme);
     return _retval;
   }
@@ -1441,7 +1441,7 @@ template FileT()
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
-    etagOut = _etagOut.fromCString(Yes.Free);
+    etagOut = _etagOut.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1510,7 +1510,7 @@ template FileT()
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
-    etagOut = _etagOut.fromCString(Yes.Free);
+    etagOut = _etagOut.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1546,7 +1546,7 @@ template FileT()
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(Yes.Free);
+    etagOut = _etagOut.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1619,7 +1619,7 @@ template FileT()
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(Yes.Free);
+    etagOut = _etagOut.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1652,7 +1652,7 @@ template FileT()
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(Yes.Free);
+    etagOut = _etagOut.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1789,7 +1789,7 @@ template FileT()
   override bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
+    const(char)* _symlinkValue = symlinkValue.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_make_symbolic_link(cast(GFile*)this._cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1827,7 +1827,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
+    const(char)* _symlinkValue = symlinkValue.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_make_symbolic_link_async(cast(GFile*)this._cPtr, _symlinkValue, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -2411,7 +2411,7 @@ template FileT()
   {
     const(char)* _cretval;
     _cretval = g_file_peek_path(cast(GFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -2647,7 +2647,7 @@ template FileT()
   override gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_file_query_filesystem_info(cast(GFile*)this._cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -2694,7 +2694,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_query_filesystem_info_async(cast(GFile*)this._cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -2765,7 +2765,7 @@ template FileT()
   override gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_file_query_info(cast(GFile*)this._cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -2811,7 +2811,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_query_info_async(cast(GFile*)this._cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -3043,7 +3043,7 @@ template FileT()
   override gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileOutputStream* _cretval;
-    const(char)* _etag = etag.toCString(No.Alloc);
+    const(char)* _etag = etag.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_file_replace(cast(GFile*)this._cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3091,7 +3091,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _etag = etag.toCString(No.Alloc);
+    const(char)* _etag = etag.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_replace_async(cast(GFile*)this._cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -3136,13 +3136,13 @@ template FileT()
       _length = cast(size_t)contents.length;
 
     auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
-    const(char)* _etag = etag.toCString(No.Alloc);
+    const(char)* _etag = etag.toCString!(No.Malloc, Yes.Nullable);
     char* _newEtag;
     GError *_err;
     _retval = cast(bool)g_file_replace_contents(cast(GFile*)this._cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    newEtag = _newEtag.fromCString(Yes.Free);
+    newEtag = _newEtag.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -3197,7 +3197,7 @@ template FileT()
       _length = cast(size_t)contents.length;
 
     auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
-    const(char)* _etag = etag.toCString(No.Alloc);
+    const(char)* _etag = etag.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_replace_contents_async(cast(GFile*)this._cPtr, _contents, _length, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -3237,7 +3237,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _etag = etag.toCString(No.Alloc);
+    const(char)* _etag = etag.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_replace_contents_bytes_async(cast(GFile*)this._cPtr, contents ? cast(GBytes*)contents._cPtr(No.Dup) : null, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -3263,7 +3263,7 @@ template FileT()
     _retval = cast(bool)g_file_replace_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_newEtag, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    newEtag = _newEtag.fromCString(Yes.Free);
+    newEtag = _newEtag.fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -3314,7 +3314,7 @@ template FileT()
   override gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileIOStream* _cretval;
-    const(char)* _etag = etag.toCString(No.Alloc);
+    const(char)* _etag = etag.toCString!(No.Malloc, Yes.Nullable);
     GError *_err;
     _cretval = g_file_replace_readwrite(cast(GFile*)this._cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3363,7 +3363,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _etag = etag.toCString(No.Alloc);
+    const(char)* _etag = etag.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_replace_readwrite_async(cast(GFile*)this._cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -3404,7 +3404,7 @@ template FileT()
   override gio.file.File resolveRelativePath(string relativePath) nothrow
   {
     GFile* _cretval;
-    const(char)* _relativePath = relativePath.toCString(No.Alloc);
+    const(char)* _relativePath = relativePath.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_resolve_relative_path(cast(GFile*)this._cPtr, _relativePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
@@ -3434,7 +3434,7 @@ template FileT()
   override bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_set_attribute(cast(GFile*)this._cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3464,8 +3464,8 @@ template FileT()
   override bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_byte_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3494,7 +3494,7 @@ template FileT()
   override bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_int32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3522,7 +3522,7 @@ template FileT()
   override bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_int64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3550,8 +3550,8 @@ template FileT()
   override bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3580,7 +3580,7 @@ template FileT()
   override bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_uint32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3609,7 +3609,7 @@ template FileT()
   override bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_uint64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3739,7 +3739,7 @@ template FileT()
   override gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable = null)
   {
     GFile* _cretval;
-    const(char)* _displayName = displayName.toCString(No.Alloc);
+    const(char)* _displayName = displayName.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_file_set_display_name(cast(GFile*)this._cPtr, _displayName, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -3783,7 +3783,7 @@ template FileT()
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _displayName = displayName.toCString(No.Alloc);
+    const(char)* _displayName = displayName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_set_display_name_async(cast(GFile*)this._cPtr, _displayName, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

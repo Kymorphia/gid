@@ -169,7 +169,7 @@ class AccelGroup : gobject.object.ObjectWrap
   */
   void connectByPath(string accelPath, gobject.closure.Closure closure) nothrow
   {
-    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
     gtk_accel_group_connect_by_path(cast(GtkAccelGroup*)this._cPtr, _accelPath, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
   }
 

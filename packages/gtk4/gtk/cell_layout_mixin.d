@@ -146,7 +146,7 @@ template CellLayoutT()
   */
   override void addAttribute(gtk.cell_renderer.CellRenderer cell, string attribute, int column) nothrow
   {
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     gtk_cell_layout_add_attribute(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _attribute, column);
   }
 

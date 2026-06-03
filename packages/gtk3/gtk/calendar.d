@@ -431,7 +431,7 @@ class Calendar : gtk.widget.Widget
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.CalendarDetailFunc");
       }
-      auto _retval = _dretval.toCString(Yes.Alloc);
+      auto _retval = toCString!(Yes.Malloc, Yes.Nullable)(_dretval);
 
       return _retval;
     }

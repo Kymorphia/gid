@@ -22,7 +22,7 @@ struct DebugLevel
   {
     const(char)* _cretval;
     _cretval = gst_debug_level_get_name(level);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 }

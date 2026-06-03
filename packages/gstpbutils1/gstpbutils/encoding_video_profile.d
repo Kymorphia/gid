@@ -74,7 +74,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   this(gst.caps.Caps format, string preset, gst.caps.Caps restriction, uint presence) nothrow
   {
     GstEncodingVideoProfile* _cretval;
-    const(char)* _preset = preset.toCString(No.Alloc);
+    const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_encoding_video_profile_new(format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction._cPtr(No.Dup) : null, presence);
     this(_cretval, Yes.Take);
   }

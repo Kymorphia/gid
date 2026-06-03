@@ -54,7 +54,7 @@ class ITPThirdParty : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = webkit_itp_third_party_get_domain(cast(WebKitITPThirdParty*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

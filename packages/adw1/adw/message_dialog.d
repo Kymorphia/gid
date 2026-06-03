@@ -390,8 +390,8 @@ class MessageDialog : gtk.window.Window
   this(gtk.window.Window parent = null, string heading = null, string body_ = null) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _heading = heading.toCString(No.Alloc);
-    const(char)* _body_ = body_.toCString(No.Alloc);
+    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = adw_message_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _heading, _body_);
     this(_cretval, No.Take);
   }
@@ -420,8 +420,8 @@ class MessageDialog : gtk.window.Window
   */
   void addResponse(string id, string label) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_add_response(cast(AdwMessageDialog*)this._cPtr, _id, _label);
   }
 
@@ -468,7 +468,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_choose_finish(cast(AdwMessageDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_body(cast(AdwMessageDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_close_response(cast(AdwMessageDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_default_response(cast(AdwMessageDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -539,7 +539,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_heading(cast(AdwMessageDialog*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -566,7 +566,7 @@ class MessageDialog : gtk.window.Window
   adw.types.ResponseAppearance getResponseAppearance(string response) nothrow
   {
     AdwResponseAppearance _cretval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_message_dialog_get_response_appearance(cast(AdwMessageDialog*)this._cPtr, _response);
     adw.types.ResponseAppearance _retval = cast(adw.types.ResponseAppearance)_cretval;
     return _retval;
@@ -584,7 +584,7 @@ class MessageDialog : gtk.window.Window
   bool getResponseEnabled(string response) nothrow
   {
     bool _retval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)adw_message_dialog_get_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response);
     return _retval;
   }
@@ -601,9 +601,9 @@ class MessageDialog : gtk.window.Window
   string getResponseLabel(string response) nothrow
   {
     const(char)* _cretval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _cretval = adw_message_dialog_get_response_label(cast(AdwMessageDialog*)this._cPtr, _response);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -617,7 +617,7 @@ class MessageDialog : gtk.window.Window
   bool hasResponse(string response) nothrow
   {
     bool _retval;
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)adw_message_dialog_has_response(cast(AdwMessageDialog*)this._cPtr, _response);
     return _retval;
   }
@@ -630,7 +630,7 @@ class MessageDialog : gtk.window.Window
   */
   void removeResponse(string id) nothrow
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_remove_response(cast(AdwMessageDialog*)this._cPtr, _id);
   }
 
@@ -644,7 +644,7 @@ class MessageDialog : gtk.window.Window
   */
   void response(string response) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_response(cast(AdwMessageDialog*)this._cPtr, _response);
   }
 
@@ -656,7 +656,7 @@ class MessageDialog : gtk.window.Window
   */
   void setBody(string body_) nothrow
   {
-    const(char)* _body_ = body_.toCString(No.Alloc);
+    const(char)* _body_ = body_.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_set_body(cast(AdwMessageDialog*)this._cPtr, _body_);
   }
 
@@ -688,7 +688,7 @@ class MessageDialog : gtk.window.Window
   */
   void setCloseResponse(string response) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_set_close_response(cast(AdwMessageDialog*)this._cPtr, _response);
   }
 
@@ -705,7 +705,7 @@ class MessageDialog : gtk.window.Window
   */
   void setDefaultResponse(string response = null) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, Yes.Nullable);
     adw_message_dialog_set_default_response(cast(AdwMessageDialog*)this._cPtr, _response);
   }
 
@@ -730,7 +730,7 @@ class MessageDialog : gtk.window.Window
   */
   void setHeading(string heading = null) nothrow
   {
-    const(char)* _heading = heading.toCString(No.Alloc);
+    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
     adw_message_dialog_set_heading(cast(AdwMessageDialog*)this._cPtr, _heading);
   }
 
@@ -772,7 +772,7 @@ class MessageDialog : gtk.window.Window
   */
   void setResponseAppearance(string response, adw.types.ResponseAppearance appearance) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_set_response_appearance(cast(AdwMessageDialog*)this._cPtr, _response, appearance);
   }
 
@@ -794,7 +794,7 @@ class MessageDialog : gtk.window.Window
   */
   void setResponseEnabled(string response, bool enabled) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_set_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response, enabled);
   }
 
@@ -810,8 +810,8 @@ class MessageDialog : gtk.window.Window
   */
   void setResponseLabel(string response, string label) nothrow
   {
-    const(char)* _response = response.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     adw_message_dialog_set_response_label(cast(AdwMessageDialog*)this._cPtr, _response, _label);
   }
 

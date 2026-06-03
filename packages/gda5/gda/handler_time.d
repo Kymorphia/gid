@@ -91,7 +91,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   {
     char* _cretval;
     _cretval = gda_handler_time_get_format(cast(GdaHandlerTime*)this._cPtr, type);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   {
     char* _cretval;
     _cretval = gda_handler_time_get_no_locale_str_from_value(cast(GdaHandlerTime*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

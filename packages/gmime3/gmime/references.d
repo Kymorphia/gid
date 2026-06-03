@@ -66,7 +66,7 @@ class References : gobject.boxed.Boxed
   */
   void append(string msgid) nothrow
   {
-    const(char)* _msgid = msgid.toCString(No.Alloc);
+    const(char)* _msgid = msgid.toCString!(No.Malloc, No.Nullable);
     g_mime_references_append(cast(GMimeReferences*)this._cPtr, _msgid);
   }
 
@@ -102,7 +102,7 @@ class References : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_mime_references_get_message_id(cast(GMimeReferences*)this._cPtr, index);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class References : gobject.boxed.Boxed
   */
   void setMessageId(int index, string msgid) nothrow
   {
-    const(char)* _msgid = msgid.toCString(No.Alloc);
+    const(char)* _msgid = msgid.toCString!(No.Malloc, No.Nullable);
     g_mime_references_set_message_id(cast(GMimeReferences*)this._cPtr, index, _msgid);
   }
 
@@ -142,7 +142,7 @@ class References : gobject.boxed.Boxed
   static gmime.references.References parse(gmime.parser_options.ParserOptions options, string text) nothrow
   {
     GMimeReferences* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_references_parse(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _text);
     auto _retval = _cretval ? new gmime.references.References(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

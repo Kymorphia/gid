@@ -143,7 +143,7 @@ class SettingsSchema : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_id(cast(GSettingsSchema*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class SettingsSchema : gobject.boxed.Boxed
   gio.settings_schema_key.SettingsSchemaKey getKey(string name) nothrow
   {
     GSettingsSchemaKey* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_schema_get_key(cast(GSettingsSchema*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.settings_schema_key.SettingsSchemaKey(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -182,7 +182,7 @@ class SettingsSchema : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_path(cast(GSettingsSchema*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class SettingsSchema : gobject.boxed.Boxed
   bool hasKey(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_schema_has_key(cast(GSettingsSchema*)this._cPtr, _name);
     return _retval;
   }
@@ -222,7 +222,7 @@ class SettingsSchema : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -250,7 +250,7 @@ class SettingsSchema : gobject.boxed.Boxed
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;

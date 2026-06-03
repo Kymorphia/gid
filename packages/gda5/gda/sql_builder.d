@@ -185,8 +185,8 @@ class SqlBuilder : gobject.object.ObjectWrap
   gda.types.SqlBuilderId addFieldId(string fieldName, string tableName = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
-    const(char)* _fieldName = fieldName.toCString(No.Alloc);
-    const(char)* _tableName = tableName.toCString(No.Alloc);
+    const(char)* _fieldName = fieldName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, Yes.Nullable);
     _retval = gda_sql_builder_add_field_id(cast(GdaSqlBuilder*)this._cPtr, _fieldName, _tableName);
     return _retval;
   }
@@ -203,7 +203,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   */
   void addFieldValueAsGvalue(string fieldName, gobject.value.Value value = null) nothrow
   {
-    const(char)* _fieldName = fieldName.toCString(No.Alloc);
+    const(char)* _fieldName = fieldName.toCString!(No.Malloc, No.Nullable);
     gda_sql_builder_add_field_value_as_gvalue(cast(GdaSqlBuilder*)this._cPtr, _fieldName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
@@ -243,7 +243,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   gda.types.SqlBuilderId addFunction(string funcName, gda.types.SqlBuilderId[] args) nothrow
   {
     gda.types.SqlBuilderId _retval;
-    const(char)* _funcName = funcName.toCString(No.Alloc);
+    const(char)* _funcName = funcName.toCString!(No.Malloc, No.Nullable);
     int _argsSize;
     if (args)
       _argsSize = cast(int)args.length;
@@ -283,7 +283,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   gda.types.SqlBuilderId addId(string str) nothrow
   {
     gda.types.SqlBuilderId _retval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _retval = gda_sql_builder_add_id(cast(GdaSqlBuilder*)this._cPtr, _str);
     return _retval;
   }
@@ -312,7 +312,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   gda.types.SqlBuilderId addParam(string paramName, gobject.types.GType type, bool nullok) nothrow
   {
     gda.types.SqlBuilderId _retval;
-    const(char)* _paramName = paramName.toCString(No.Alloc);
+    const(char)* _paramName = paramName.toCString!(No.Malloc, No.Nullable);
     _retval = gda_sql_builder_add_param(cast(GdaSqlBuilder*)this._cPtr, _paramName, type, nullok);
     return _retval;
   }
@@ -380,7 +380,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   */
   void joinAddField(gda.types.SqlBuilderId joinId, string fieldName) nothrow
   {
-    const(char)* _fieldName = fieldName.toCString(No.Alloc);
+    const(char)* _fieldName = fieldName.toCString!(No.Malloc, No.Nullable);
     gda_sql_builder_join_add_field(cast(GdaSqlBuilder*)this._cPtr, joinId, _fieldName);
   }
 
@@ -400,9 +400,9 @@ class SqlBuilder : gobject.object.ObjectWrap
   gda.types.SqlBuilderId selectAddField(string fieldName, string tableName = null, string alias_ = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
-    const(char)* _fieldName = fieldName.toCString(No.Alloc);
-    const(char)* _tableName = tableName.toCString(No.Alloc);
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _fieldName = fieldName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, Yes.Nullable);
     _retval = gda_sql_builder_select_add_field(cast(GdaSqlBuilder*)this._cPtr, _fieldName, _tableName, _alias_);
     return _retval;
   }
@@ -418,8 +418,8 @@ class SqlBuilder : gobject.object.ObjectWrap
   gda.types.SqlBuilderId selectAddTarget(string tableName, string alias_ = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
-    const(char)* _tableName = tableName.toCString(No.Alloc);
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, Yes.Nullable);
     _retval = gda_sql_builder_select_add_target(cast(GdaSqlBuilder*)this._cPtr, _tableName, _alias_);
     return _retval;
   }
@@ -437,7 +437,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   gda.types.SqlBuilderId selectAddTargetId(gda.types.SqlBuilderId tableId, string alias_ = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
-    const(char)* _alias_ = alias_.toCString(No.Alloc);
+    const(char)* _alias_ = alias_.toCString!(No.Malloc, Yes.Nullable);
     _retval = gda_sql_builder_select_add_target_id(cast(GdaSqlBuilder*)this._cPtr, tableId, _alias_);
     return _retval;
   }
@@ -465,7 +465,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   */
   void selectOrderBy(gda.types.SqlBuilderId exprId, bool asc, string collationName = null) nothrow
   {
-    const(char)* _collationName = collationName.toCString(No.Alloc);
+    const(char)* _collationName = collationName.toCString!(No.Malloc, Yes.Nullable);
     gda_sql_builder_select_order_by(cast(GdaSqlBuilder*)this._cPtr, exprId, asc, _collationName);
   }
 
@@ -528,7 +528,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   */
   void setTable(string tableName) nothrow
   {
-    const(char)* _tableName = tableName.toCString(No.Alloc);
+    const(char)* _tableName = tableName.toCString!(No.Malloc, No.Nullable);
     gda_sql_builder_set_table(cast(GdaSqlBuilder*)this._cPtr, _tableName);
   }
 

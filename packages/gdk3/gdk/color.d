@@ -119,7 +119,7 @@ struct Color
   {
     char* _cretval;
     _cretval = gdk_color_to_string(cast(const(GdkColor)*)&this);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ struct Color
   static bool parse(string spec, out gdk.color.Color color) nothrow
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(No.Alloc);
+    const(char)* _spec = spec.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gdk_color_parse(_spec, cast(GdkColor*)&color);
     return _retval;
   }

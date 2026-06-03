@@ -205,7 +205,7 @@ class Avatar : gtk.widget.Widget
   this(int size, string text, bool showInitials) nothrow
   {
     GtkWidget* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     _cretval = adw_avatar_new(size, _text, showInitials);
     this(_cretval, No.Take);
   }
@@ -247,7 +247,7 @@ class Avatar : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_avatar_get_icon_name(cast(AdwAvatar*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class Avatar : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = adw_avatar_get_text(cast(AdwAvatar*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class Avatar : gtk.widget.Widget
   */
   void setIconName(string iconName = null) nothrow
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
     adw_avatar_set_icon_name(cast(AdwAvatar*)this._cPtr, _iconName);
   }
 
@@ -350,7 +350,7 @@ class Avatar : gtk.widget.Widget
   */
   void setText(string text = null) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
     adw_avatar_set_text(cast(AdwAvatar*)this._cPtr, _text);
   }
 }

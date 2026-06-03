@@ -83,7 +83,7 @@ class FontFace : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     _cretval = pango_font_face_get_face_name(cast(PangoFontFace*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

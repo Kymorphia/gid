@@ -90,7 +90,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
   static gio.settings_schema_source.SettingsSchemaSource newFromDirectory(string directory, gio.settings_schema_source.SettingsSchemaSource parent, bool trusted)
   {
     GSettingsSchemaSource* _cretval;
-    const(char)* _directory = directory.toCString(No.Alloc);
+    const(char)* _directory = directory.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent._cPtr(No.Dup) : null, trusted, &_err);
     if (_err)
@@ -135,7 +135,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
 
     nonRelocatable.length = _lennonRelocatable;
     foreach (i; 0 .. _lennonRelocatable)
-      nonRelocatable[i] = _nonRelocatable[i].fromCString(Yes.Free);
+      nonRelocatable[i] = _nonRelocatable[i].fromCString!(Yes.Free);
     gFree(cast(void*)_nonRelocatable);
     uint _lenrelocatable;
     if (_relocatable)
@@ -147,7 +147,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
 
     relocatable.length = _lenrelocatable;
     foreach (i; 0 .. _lenrelocatable)
-      relocatable[i] = _relocatable[i].fromCString(Yes.Free);
+      relocatable[i] = _relocatable[i].fromCString!(Yes.Free);
     gFree(cast(void*)_relocatable);
   }
 
@@ -171,7 +171,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
   gio.settings_schema.SettingsSchema lookup(string schemaId, bool recursive) nothrow
   {
     GSettingsSchema* _cretval;
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_schema_source_lookup(cast(GSettingsSchemaSource*)this._cPtr, _schemaId, recursive);
     auto _retval = _cretval ? new gio.settings_schema.SettingsSchema(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

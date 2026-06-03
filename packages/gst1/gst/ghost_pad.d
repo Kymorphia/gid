@@ -80,7 +80,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   this(string name, gst.pad.Pad target) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_ghost_pad_new(_name, target ? cast(GstPad*)target._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
@@ -101,7 +101,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static gst.ghost_pad.GhostPad newFromTemplate(string name, gst.pad.Pad target, gst.pad_template.PadTemplate templ) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_ghost_pad_new_from_template(_name, target ? cast(GstPad*)target._cPtr(No.Dup) : null, templ ? cast(GstPadTemplate*)templ._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
@@ -123,7 +123,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static gst.ghost_pad.GhostPad newNoTarget(string name, gst.types.PadDirection dir) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_ghost_pad_new_no_target(_name, dir);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
@@ -142,7 +142,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static gst.ghost_pad.GhostPad newNoTargetFromTemplate(string name, gst.pad_template.PadTemplate templ) nothrow
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_ghost_pad_new_no_target_from_template(_name, templ ? cast(GstPadTemplate*)templ._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;

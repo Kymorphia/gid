@@ -165,8 +165,8 @@ class RTPPayloadInfo
   static gstrtp.rtppayload_info.RTPPayloadInfo forName(string media, string encodingName) nothrow
   {
     const(GstRTPPayloadInfo)* _cretval;
-    const(char)* _media = media.toCString(No.Alloc);
-    const(char)* _encodingName = encodingName.toCString(No.Alloc);
+    const(char)* _media = media.toCString!(No.Malloc, No.Nullable);
+    const(char)* _encodingName = encodingName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_rtp_payload_info_for_name(_media, _encodingName);
     auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval, No.Take) : null;
     return _retval;

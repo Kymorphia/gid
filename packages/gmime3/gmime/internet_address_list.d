@@ -76,7 +76,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   static gmime.internet_address_list.InternetAddressList parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeInternetAddressList* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = internet_address_list_parse(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _str);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.internet_address_list.InternetAddressList)(cast(GMimeInternetAddressList*)_cretval, Yes.Take);
     return _retval;
@@ -116,7 +116,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   */
   void appendParse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     internet_address_list_append_parse(cast(GMimeInternetAddressList*)this._cPtr, options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _str);
   }
 
@@ -282,7 +282,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = internet_address_list_to_string(cast(GMimeInternetAddressList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, encode);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

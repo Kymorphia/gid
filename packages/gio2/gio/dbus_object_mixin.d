@@ -33,7 +33,7 @@ template DBusObjectT()
   override gio.dbus_interface.DBusInterface getInterface(string interfaceName) nothrow
   {
     GDBusInterface* _cretval;
-    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
+    const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_object_get_interface(cast(GDBusObject*)this._cPtr, _interfaceName);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
@@ -61,7 +61,7 @@ template DBusObjectT()
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_get_object_path(cast(GDBusObject*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

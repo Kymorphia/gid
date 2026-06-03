@@ -61,7 +61,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
   {
     char* _cretval;
     _cretval = garrow_large_string_array_get_string(cast(GArrowLargeStringArray*)this._cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

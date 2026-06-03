@@ -448,7 +448,7 @@ class Settings : gobject.object.ObjectWrap
   this(string schemaId) nothrow
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_new(_schemaId);
     this(_cretval, Yes.Take);
   }
@@ -487,7 +487,7 @@ class Settings : gobject.object.ObjectWrap
   static gio.settings.Settings newFull(gio.settings_schema.SettingsSchema schema, gio.settings_backend.SettingsBackend backend = null, string path = null) nothrow
   {
     GSettings* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     _cretval = g_settings_new_full(schema ? cast(GSettingsSchema*)schema._cPtr(No.Dup) : null, backend ? cast(GSettingsBackend*)backend._cPtr(No.Dup) : null, _path);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
@@ -511,7 +511,7 @@ class Settings : gobject.object.ObjectWrap
   static gio.settings.Settings newWithBackend(string schemaId, gio.settings_backend.SettingsBackend backend) nothrow
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_new_with_backend(_schemaId, backend ? cast(GSettingsBackend*)backend._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
@@ -533,8 +533,8 @@ class Settings : gobject.object.ObjectWrap
   static gio.settings.Settings newWithBackendAndPath(string schemaId, gio.settings_backend.SettingsBackend backend, string path) nothrow
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_new_with_backend_and_path(_schemaId, backend ? cast(GSettingsBackend*)backend._cPtr(No.Dup) : null, _path);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
@@ -563,8 +563,8 @@ class Settings : gobject.object.ObjectWrap
   static gio.settings.Settings newWithPath(string schemaId, string path) nothrow
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_new_with_path(_schemaId, _path);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
@@ -591,7 +591,7 @@ class Settings : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -620,7 +620,7 @@ class Settings : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString!(No.Free);
     }
     return _retval;
   }
@@ -655,7 +655,7 @@ class Settings : gobject.object.ObjectWrap
   */
   static void unbind(gobject.object.ObjectWrap object, string property) nothrow
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     g_settings_unbind(object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
   }
 
@@ -700,8 +700,8 @@ class Settings : gobject.object.ObjectWrap
   */
   void bind(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     g_settings_bind(cast(GSettings*)this._cPtr, _key, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, flags);
   }
 
@@ -732,8 +732,8 @@ class Settings : gobject.object.ObjectWrap
   */
   void bindWritable(string key, gobject.object.ObjectWrap object, string property, bool inverted) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     g_settings_bind_writable(cast(GSettings*)this._cPtr, _key, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, inverted);
   }
 
@@ -760,7 +760,7 @@ class Settings : gobject.object.ObjectWrap
   gio.action.Action createAction(string key) nothrow
   {
     GAction* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_create_action(cast(GSettings*)this._cPtr, _key);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action.Action)(cast(GAction*)_cretval, Yes.Take);
     return _retval;
@@ -791,7 +791,7 @@ class Settings : gobject.object.ObjectWrap
   bool getBoolean(string key) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_get_boolean(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -814,7 +814,7 @@ class Settings : gobject.object.ObjectWrap
   gio.settings.Settings getChild(string name) nothrow
   {
     GSettings* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_get_child(cast(GSettings*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
@@ -850,7 +850,7 @@ class Settings : gobject.object.ObjectWrap
   glib.variant.Variant getDefaultValue(string key) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_get_default_value(cast(GSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -871,7 +871,7 @@ class Settings : gobject.object.ObjectWrap
   double getDouble(string key) nothrow
   {
     double _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = g_settings_get_double(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -897,7 +897,7 @@ class Settings : gobject.object.ObjectWrap
   int getEnum(string key) nothrow
   {
     int _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = g_settings_get_enum(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -923,7 +923,7 @@ class Settings : gobject.object.ObjectWrap
   uint getFlags(string key) nothrow
   {
     uint _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = g_settings_get_flags(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -955,7 +955,7 @@ class Settings : gobject.object.ObjectWrap
   int getInt(string key) nothrow
   {
     int _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = g_settings_get_int(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -975,7 +975,7 @@ class Settings : gobject.object.ObjectWrap
   long getInt64(string key) nothrow
   {
     long _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = g_settings_get_int64(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -1035,7 +1035,7 @@ class Settings : gobject.object.ObjectWrap
       return _retval;
     }
     auto _mappingCB = mapping ? &_mappingCallback : null;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     auto _mapping = mapping ? cast(void*)&(mapping) : null;
     auto _retval = g_settings_get_mapped(cast(GSettings*)this._cPtr, _key, _mappingCB, _mapping);
     return _retval;
@@ -1053,7 +1053,7 @@ class Settings : gobject.object.ObjectWrap
   glib.variant.Variant getRange(string key) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_get_range(cast(GSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1074,9 +1074,9 @@ class Settings : gobject.object.ObjectWrap
   string getString(string key) nothrow
   {
     char* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_get_string(cast(GSettings*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -1095,7 +1095,7 @@ class Settings : gobject.object.ObjectWrap
   string[] getStrv(string key) nothrow
   {
     char** _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_get_strv(cast(GSettings*)this._cPtr, _key);
     string[] _retval;
 
@@ -1106,7 +1106,7 @@ class Settings : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1128,7 +1128,7 @@ class Settings : gobject.object.ObjectWrap
   uint getUint(string key) nothrow
   {
     uint _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = g_settings_get_uint(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -1149,7 +1149,7 @@ class Settings : gobject.object.ObjectWrap
   ulong getUint64(string key) nothrow
   {
     ulong _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = g_settings_get_uint64(cast(GSettings*)this._cPtr, _key);
     return _retval;
   }
@@ -1181,7 +1181,7 @@ class Settings : gobject.object.ObjectWrap
   glib.variant.Variant getUserValue(string key) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_get_user_value(cast(GSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1200,7 +1200,7 @@ class Settings : gobject.object.ObjectWrap
   glib.variant.Variant getValue(string key) nothrow
   {
     GVariant* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = g_settings_get_value(cast(GSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1216,7 +1216,7 @@ class Settings : gobject.object.ObjectWrap
   bool isWritable(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_is_writable(cast(GSettings*)this._cPtr, _name);
     return _retval;
   }
@@ -1249,7 +1249,7 @@ class Settings : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1282,7 +1282,7 @@ class Settings : gobject.object.ObjectWrap
         _cretlength++;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
       gFree(cast(void*)_cretval);
     }
     return _retval;
@@ -1302,7 +1302,7 @@ class Settings : gobject.object.ObjectWrap
   bool rangeCheck(string key, glib.variant.Variant value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_range_check(cast(GSettings*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -1319,7 +1319,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void reset(string key) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     g_settings_reset(cast(GSettings*)this._cPtr, _key);
   }
 
@@ -1353,7 +1353,7 @@ class Settings : gobject.object.ObjectWrap
   bool setBoolean(string key, bool value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_boolean(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1375,7 +1375,7 @@ class Settings : gobject.object.ObjectWrap
   bool setDouble(string key, double value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_double(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1400,7 +1400,7 @@ class Settings : gobject.object.ObjectWrap
   bool setEnum(string key, int value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_enum(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1426,7 +1426,7 @@ class Settings : gobject.object.ObjectWrap
   bool setFlags(string key, uint value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_flags(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1448,7 +1448,7 @@ class Settings : gobject.object.ObjectWrap
   bool setInt(string key, int value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_int(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1470,7 +1470,7 @@ class Settings : gobject.object.ObjectWrap
   bool setInt64(string key, long value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_int64(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1492,8 +1492,8 @@ class Settings : gobject.object.ObjectWrap
   bool setString(string key, string value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_string(cast(GSettings*)this._cPtr, _key, _value);
     return _retval;
   }
@@ -1516,10 +1516,10 @@ class Settings : gobject.object.ObjectWrap
   bool setStrv(string key, string[] value = null) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     char*[] _tmpvalue;
     foreach (s; value)
-      _tmpvalue ~= s.toCString(No.Alloc);
+      _tmpvalue ~= s.toCString;
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
 
@@ -1545,7 +1545,7 @@ class Settings : gobject.object.ObjectWrap
   bool setUint(string key, uint value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_uint(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1568,7 +1568,7 @@ class Settings : gobject.object.ObjectWrap
   bool setUint64(string key, ulong value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_uint64(cast(GSettings*)this._cPtr, _key, value);
     return _retval;
   }
@@ -1591,7 +1591,7 @@ class Settings : gobject.object.ObjectWrap
   bool setValue(string key, glib.variant.Variant value) nothrow
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_settings_set_value(cast(GSettings*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
     return _retval;
   }

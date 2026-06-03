@@ -80,8 +80,8 @@ class NetworkSession : gobject.object.ObjectWrap
   this(string dataDirectory = null, string cacheDirectory = null) nothrow
   {
     WebKitNetworkSession* _cretval;
-    const(char)* _dataDirectory = dataDirectory.toCString(No.Alloc);
-    const(char)* _cacheDirectory = cacheDirectory.toCString(No.Alloc);
+    const(char)* _dataDirectory = dataDirectory.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _cacheDirectory = cacheDirectory.toCString!(No.Malloc, Yes.Nullable);
     _cretval = webkit_network_session_new(_dataDirectory, _cacheDirectory);
     this(_cretval, Yes.Take);
   }
@@ -146,7 +146,7 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   void allowTlsCertificateForHost(gio.tls_certificate.TlsCertificate certificate, string host) nothrow
   {
-    const(char)* _host = host.toCString(No.Alloc);
+    const(char)* _host = host.toCString!(No.Malloc, No.Nullable);
     webkit_network_session_allow_tls_certificate_for_host(cast(WebKitNetworkSession*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, _host);
   }
 
@@ -165,7 +165,7 @@ class NetworkSession : gobject.object.ObjectWrap
   webkit.download.Download downloadUri(string uri) nothrow
   {
     WebKitDownload* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_network_session_download_uri(cast(WebKitNetworkSession*)this._cPtr, _uri);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
     return _retval;
@@ -308,7 +308,7 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   void prefetchDns(string hostname) nothrow
   {
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
     webkit_network_session_prefetch_dns(cast(WebKitNetworkSession*)this._cPtr, _hostname);
   }
 

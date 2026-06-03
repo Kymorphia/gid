@@ -115,7 +115,7 @@ template IconT()
   {
     char* _cretval;
     _cretval = g_icon_to_string(cast(GIcon*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 }

@@ -106,7 +106,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   this(gtk.widget.Widget iconWidget = null, string label = null) nothrow
   {
     GtkToolItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gtk_menu_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget._cPtr(No.Dup) : null, _label);
     this(_cretval, No.Take);
   }
@@ -125,7 +125,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   static gtk.menu_tool_button.MenuToolButton newFromStock(string stockId) nothrow
   {
     GtkToolItem* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_menu_tool_button_new_from_stock(_stockId);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
@@ -154,7 +154,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   */
   void setArrowTooltipMarkup(string markup) nothrow
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString!(No.Malloc, No.Nullable);
     gtk_menu_tool_button_set_arrow_tooltip_markup(cast(GtkMenuToolButton*)this._cPtr, _markup);
   }
 
@@ -168,7 +168,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   */
   void setArrowTooltipText(string text) nothrow
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
     gtk_menu_tool_button_set_arrow_tooltip_text(cast(GtkMenuToolButton*)this._cPtr, _text);
   }
 

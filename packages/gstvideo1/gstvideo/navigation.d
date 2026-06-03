@@ -110,7 +110,7 @@ interface Navigation
   static gst.event.Event eventNewKeyPress(string key, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_navigation_event_new_key_press(_key, state);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -128,7 +128,7 @@ interface Navigation
   static gst.event.Event eventNewKeyRelease(string key, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_navigation_event_new_key_release(_key, state);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -348,7 +348,7 @@ interface Navigation
     bool _retval;
     char* _key;
     _retval = cast(bool)gst_navigation_event_parse_key_event(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, &_key);
-    key = _key.fromCString(No.Free);
+    key = _key.fromCString!(No.Free);
     return _retval;
   }
 

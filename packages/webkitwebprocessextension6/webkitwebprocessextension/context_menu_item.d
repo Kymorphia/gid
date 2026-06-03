@@ -74,7 +74,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromGaction(gio.action.Action action, string label, glib.variant.Variant target = null) nothrow
   {
     WebKitContextMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_context_menu_item_new_from_gaction(action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action)._cPtr(No.Dup) : null, _label, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
@@ -118,7 +118,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromStockActionWithLabel(webkitwebprocessextension.types.ContextMenuAction action, string label) nothrow
   {
     WebKitContextMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_context_menu_item_new_from_stock_action_with_label(action, _label);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
@@ -147,7 +147,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   static webkitwebprocessextension.context_menu_item.ContextMenuItem newWithSubmenu(string label, webkitwebprocessextension.context_menu.ContextMenu submenu) nothrow
   {
     WebKitContextMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_context_menu_item_new_with_submenu(_label, submenu ? cast(WebKitContextMenu*)submenu._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;

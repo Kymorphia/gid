@@ -84,9 +84,9 @@ class SnippetContext : gobject.object.ObjectWrap
   string expand(string input) nothrow
   {
     char* _cretval;
-    const(char)* _input = input.toCString(No.Alloc);
+    const(char)* _input = input.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_snippet_context_expand(cast(GtkSourceSnippetContext*)this._cPtr, _input);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -100,9 +100,9 @@ class SnippetContext : gobject.object.ObjectWrap
   string getVariable(string key) nothrow
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_source_snippet_context_get_variable(cast(GtkSourceSnippetContext*)this._cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -120,15 +120,15 @@ class SnippetContext : gobject.object.ObjectWrap
   */
   void setConstant(string key, string value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_context_set_constant(cast(GtkSourceSnippetContext*)this._cPtr, _key, _value);
   }
 
   /** */
   void setLinePrefix(string linePrefix) nothrow
   {
-    const(char)* _linePrefix = linePrefix.toCString(No.Alloc);
+    const(char)* _linePrefix = linePrefix.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_context_set_line_prefix(cast(GtkSourceSnippetContext*)this._cPtr, _linePrefix);
   }
 
@@ -156,8 +156,8 @@ class SnippetContext : gobject.object.ObjectWrap
   */
   void setVariable(string key, string value) nothrow
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
     gtk_source_snippet_context_set_variable(cast(GtkSourceSnippetContext*)this._cPtr, _key, _value);
   }
 

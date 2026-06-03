@@ -96,7 +96,7 @@ class ContentProvider : gobject.object.ObjectWrap
   static gdk.content_provider.ContentProvider newForBytes(string mimeType, glib.bytes.Bytes bytes) nothrow
   {
     GdkContentProvider* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_content_provider_new_for_bytes(_mimeType, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
@@ -219,7 +219,7 @@ class ContentProvider : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_content_provider_write_mime_type_async(cast(GdkContentProvider*)this._cPtr, _mimeType, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

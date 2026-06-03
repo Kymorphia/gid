@@ -79,9 +79,9 @@ class HeaderList : gobject.object.ObjectWrap
   */
   void append(string name, string value, string charset = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
     g_mime_header_list_append(cast(GMimeHeaderList*)this._cPtr, _name, _value, _charset);
   }
 
@@ -103,7 +103,7 @@ class HeaderList : gobject.object.ObjectWrap
   bool contains(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_mime_header_list_contains(cast(GMimeHeaderList*)this._cPtr, _name);
     return _retval;
   }
@@ -129,7 +129,7 @@ class HeaderList : gobject.object.ObjectWrap
   gmime.header.Header getHeader(string name) nothrow
   {
     GMimeHeader* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_mime_header_list_get_header(cast(GMimeHeaderList*)this._cPtr, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.header.Header)(cast(GMimeHeader*)_cretval, No.Take);
     return _retval;
@@ -162,9 +162,9 @@ class HeaderList : gobject.object.ObjectWrap
   */
   void prepend(string name, string value, string charset = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
     g_mime_header_list_prepend(cast(GMimeHeaderList*)this._cPtr, _name, _value, _charset);
   }
 
@@ -179,7 +179,7 @@ class HeaderList : gobject.object.ObjectWrap
   bool remove(string name) nothrow
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_mime_header_list_remove(cast(GMimeHeaderList*)this._cPtr, _name);
     return _retval;
   }
@@ -212,9 +212,9 @@ class HeaderList : gobject.object.ObjectWrap
   */
   void set(string name, string value, string charset = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
     g_mime_header_list_set(cast(GMimeHeaderList*)this._cPtr, _name, _value, _charset);
   }
 
@@ -230,7 +230,7 @@ class HeaderList : gobject.object.ObjectWrap
   {
     char* _cretval;
     _cretval = g_mime_header_list_to_string(cast(GMimeHeaderList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

@@ -160,7 +160,7 @@ class MetaTableColumn
     extern(C) void _funcCallback(const(char)* attName, const(GValue)* value, void* data) nothrow
     {
       auto _dlg = cast(gda.types.AttributesManagerFunc*)data;
-      string _attName = attName.fromCString(No.Free);
+      string _attName = attName.fromCString!(No.Free);
 
       try
       {
@@ -188,7 +188,7 @@ class MetaTableColumn
   gobject.value.Value getAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     _cretval = gda_meta_table_column_get_attribute(cast(GdaMetaTableColumn*)this._cPtr, _attribute);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
@@ -226,7 +226,7 @@ class MetaTableColumn
       }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
     gda_meta_table_column_set_attribute(cast(GdaMetaTableColumn*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
 }

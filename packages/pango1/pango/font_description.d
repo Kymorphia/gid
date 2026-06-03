@@ -153,7 +153,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_family(cast(const(PangoFontDescription)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_variations(cast(const(PangoFontDescription)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setFamily(string family) nothrow
   {
-    const(char)* _family = family.toCString(No.Alloc);
+    const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
     pango_font_description_set_family(cast(PangoFontDescription*)this._cPtr, _family);
   }
 
@@ -407,7 +407,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setFamilyStatic(string family) nothrow
   {
-    const(char)* _family = family.toCString(No.Alloc);
+    const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
     pango_font_description_set_family_static(cast(PangoFontDescription*)this._cPtr, _family);
   }
 
@@ -522,7 +522,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setVariations(string variations = null) nothrow
   {
-    const(char)* _variations = variations.toCString(No.Alloc);
+    const(char)* _variations = variations.toCString!(No.Malloc, Yes.Nullable);
     pango_font_description_set_variations(cast(PangoFontDescription*)this._cPtr, _variations);
   }
 
@@ -541,7 +541,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setVariationsStatic(string variations) nothrow
   {
-    const(char)* _variations = variations.toCString(No.Alloc);
+    const(char)* _variations = variations.toCString!(No.Malloc, No.Nullable);
     pango_font_description_set_variations_static(cast(PangoFontDescription*)this._cPtr, _variations);
   }
 
@@ -574,7 +574,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_font_description_to_filename(cast(const(PangoFontDescription)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_font_description_to_string(cast(const(PangoFontDescription)*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
@@ -661,7 +661,7 @@ class FontDescription : gobject.boxed.Boxed
   static pango.font_description.FontDescription fromString(string str) nothrow
   {
     PangoFontDescription* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
     _cretval = pango_font_description_from_string(_str);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

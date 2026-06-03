@@ -372,7 +372,7 @@ class Server : gobject.object.ObjectWrap
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.ServerCallback*)userData;
-      string _path = path.fromCString(No.Free);
+      string _path = path.fromCString!(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
       try
@@ -385,7 +385,7 @@ class Server : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_server_add_early_handler(cast(SoupServer*)this._cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
@@ -436,7 +436,7 @@ class Server : gobject.object.ObjectWrap
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.ServerCallback*)userData;
-      string _path = path.fromCString(No.Free);
+      string _path = path.fromCString!(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
       try
@@ -449,7 +449,7 @@ class Server : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_server_add_handler(cast(SoupServer*)this._cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
@@ -506,7 +506,7 @@ class Server : gobject.object.ObjectWrap
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, SoupWebsocketConnection* connection, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.ServerWebsocketCallback*)userData;
-      string _path = path.fromCString(No.Free);
+      string _path = path.fromCString!(No.Free);
 
       try
       {
@@ -518,11 +518,11 @@ class Server : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.Alloc);
+      _tmpprotocols ~= s.toCString;
     _tmpprotocols ~= null;
     char** _protocols = _tmpprotocols.ptr;
 
@@ -799,7 +799,7 @@ class Server : gobject.object.ObjectWrap
   */
   void removeHandler(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     soup_server_remove_handler(cast(SoupServer*)this._cPtr, _path);
   }
 

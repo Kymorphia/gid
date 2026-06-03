@@ -154,7 +154,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void loadFromPath(string path) nothrow
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
     gtk_css_provider_load_from_path(cast(GtkCssProvider*)this._cPtr, _path);
   }
 
@@ -169,7 +169,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void loadFromResource(string resourcePath) nothrow
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     gtk_css_provider_load_from_resource(cast(GtkCssProvider*)this._cPtr, _resourcePath);
   }
 
@@ -183,7 +183,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void loadFromString(string string_) nothrow
   {
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     gtk_css_provider_load_from_string(cast(GtkCssProvider*)this._cPtr, _string_);
   }
 
@@ -201,8 +201,8 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void loadNamed(string name, string variant = null) nothrow
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _variant = variant.toCString(No.Alloc);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _variant = variant.toCString!(No.Malloc, Yes.Nullable);
     gtk_css_provider_load_named(cast(GtkCssProvider*)this._cPtr, _name, _variant);
   }
 
@@ -220,7 +220,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     char* _cretval;
     _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 
