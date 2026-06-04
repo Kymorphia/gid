@@ -12,16 +12,14 @@ import std.string : fromStringz, toStringz;
 
 __gshared string[] gidUnresolvedLibs; /// Array of unresolved libraries
 __gshared string[] gidUnresolvedSymbols; /// Array of unresolved function symbols (for libs which were resolved)
+__gshared string gidLibraryPath; /// Override library path either from direct assignment or from GID_LIBRARY_PATH environment var
 
-debug
+debug private immutable bool gidLoaderDebug; // Set by GID_LOADER_DEBUG=1 to enable loader debugging
+
+shared static this()
 {
-  private immutable bool gidLoaderDebug; // Set by GID_LOADER_DEBUG=1 to enable loader debugging
-
-  shared static this()
-  {
-    import std.process : environment;
-    gidLoaderDebug = assumeWontThrow(environment.get("GID_LOADER_DEBUG", "0")) == "1";
-  }
+  gidLibraryPath = assumeWontThrow(environment.get("GID_LIBRARY_PATH"));
+  debug gidLoaderDebug = assumeWontThrow(environment.get("GID_LOADER_DEBUG")) == "1";
 }
 
 version(Windows)
@@ -39,7 +37,12 @@ version(Windows)
 
       foreach (lib; libVariations.splitter(";")) // Loop on library name variations (separated by ';' - windows only)
       {
-        handle = LoadLibraryA(cast(char*)toStringz(lib)); // Windows should search the executable directory, PATH, and other system paths
+        if (gidLibraryPath.length > 0) // First try loading the library using gidLibraryPath if set
+          handle = LoadLibraryA(cast(char*)buildPath(gidLibraryPath, lib).toStringz);
+
+        if (!handle)
+          handle = LoadLibraryA(cast(char*)toStringz(lib)); // Search the executable directory, PATH, and other system paths
+
         if (handle)
         {
           libHandles ~= handle;
@@ -49,11 +52,8 @@ version(Windows)
 
       if (!handle)
       {
-        debug
-        {
-          if (gidLoaderDebug)
-            assumeWontThrow(stderr.writeln("giD library '" ~ libVariations ~ "'not found"));
-        }
+        debug if (gidLoaderDebug)
+        assumeWontThrow(stderr.writeln("giD library '" ~ libVariations ~ "'not found"));
 
         gidUnresolvedLibs ~= libVariations;
       }
@@ -76,11 +76,8 @@ version(Windows)
     *funcPtr = &gidSymbolNotFound;
     gidUnresolvedSymbols ~= symbol;
 
-    debug
-    {
-      if (gidLoaderDebug)
-        assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
-    }
+    debug if (gidLoaderDebug)
+    assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
   }
 }
 else // Linux or OSX
@@ -90,14 +87,33 @@ else // Linux or OSX
 
   void*[] gidResolveLibs(immutable(string[]) libs) nothrow
   {
+    version (OSX)
+    {
+      if (gidLibraryPath.length == 0)
+      {
+        if (auto path = assumeWontThrow(environment.get("GTK_BASEPATH")))
+          gidLibraryPath = path;
+        else if (auto path = assumeWontThrow(environment.get("HOMEBREW_PREFIX")))
+          gidLibraryPath = buildPath(path, "lib");
+
+        debug if (gidLoaderDebug && gidLibraryPath.length > 0)
+        assumeWontThrow(stderr.writeln("Detected giD library path: ", gidLoaderDebug));
+      }
+    }
+
     void*[] libHandles;
 
     foreach (lib; libs)
     {
-      string libPath = lib;
-      version (OSX) libPath = buildPath(basePath, lib);
+      void* handle;
 
-      if (auto handle = dlopen(cast(char*)toStringz(libPath), RTLD_GLOBAL | RTLD_NOW))
+      if (gidLibraryPath.length > 0) // First try loading the library using gidLibraryPath if set
+        handle = dlopen(cast(char*)buildPath(gidLibraryPath, lib).toStringz, RTLD_GLOBAL | RTLD_NOW);
+
+      if (!handle) // Try to load from system paths
+        handle = dlopen(cast(char*)lib.toStringz, RTLD_GLOBAL | RTLD_NOW);
+
+      if (handle)
       {
         debug
         {
@@ -108,14 +124,11 @@ else // Linux or OSX
           {
             if (gidLoaderDebug)
             {
+              import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
               char[PATH_MAX + 1] path;
 
-              import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
-
               if (dlinfo(handle, RTLD_DI_ORIGIN, path.ptr) == 0)
-                assumeWontThrow(stderr.writeln("Found ", libPath, " at ", path.fromStringz.idup));
-              else
-                assumeWontThrow(stderr.writeln("dlinfo() returned error: ", dlerror().fromStringz.idup));
+                assumeWontThrow(stderr.writeln("Found ", lib, " at ", path.fromStringz.idup));
             }
           }
         }
@@ -124,11 +137,8 @@ else // Linux or OSX
       }
       else
       {
-        debug
-        {
-          if (gidLoaderDebug)
-            assumeWontThrow(stderr.writeln("giD library '" ~ lib ~ "' not found: " ~ dlerror().fromStringz.idup));
-        }
+        debug if (gidLoaderDebug)
+        assumeWontThrow(stderr.writeln("giD library '" ~ lib ~ "' not found: " ~ dlerror().fromStringz.idup));
 
         gidUnresolvedLibs ~= lib;
       }
@@ -151,40 +161,8 @@ else // Linux or OSX
     *funcPtr = &gidSymbolNotFound;
     gidUnresolvedSymbols ~= symbol;
 
-    debug
-    {
-      if (gidLoaderDebug)
-        assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
-    }
-  }
-
-  version(OSX)
-  {
-    string basePath() nothrow
-    {
-      static string path;
-
-      if (path is null)
-      {
-        path = assumeWontThrow(environment.get("GTK_BASEPATH"));
-
-        if(!path)
-        {
-          path = assumeWontThrow(environment.get("HOMEBREW_PREFIX"));
-
-          if (path)
-            path = buildPath(path, "lib");
-        }
-      }
-
-      debug
-      {
-        if (gidLoaderDebug)
-          assumeWontThrow(stderr.writeln("Found giD DLL path: ", path));
-      }
-
-      return path;
-    }
+    debug if (gidLoaderDebug)
+    assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
   }
 }
 
