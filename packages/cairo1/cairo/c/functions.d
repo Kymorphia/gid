@@ -7,12 +7,7 @@ import cairo.c.types;
 public import gobject.c.types;
 public import freetype2.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libcairo-gobject-2.dll;cairo-gobject-2.dll;cairo-gobject.dll", "libcairo-2.dll;cairo-2.dll;cairo.dll"];
-else version(OSX)
-  private immutable LIBS = ["libcairo-gobject.2.dylib", "libcairo.2.dylib"];
-else
-  private immutable LIBS = ["libcairo-gobject.so.2;libcairo-gobject.so", "libcairo.so.2;libcairo.so"];
+private immutable LIBS = ["cairo-gobject_2", "cairo_2"];
 
 __gshared extern(C) nothrow
 {

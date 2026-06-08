@@ -7,12 +7,7 @@ import gstvideo.c.types;
 public import gst.c.types;
 public import gstbase.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstvideo-1.0-0.dll;gstvideo-1.0-0.dll;gstvideo-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstvideo-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstvideo-1.0.so.0;libgstvideo-1.0.so"];
+private immutable LIBS = ["gstvideo-1.0_0"];
 
 __gshared extern(C) nothrow
 {

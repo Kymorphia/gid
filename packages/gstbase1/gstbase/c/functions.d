@@ -9,12 +9,7 @@ public import gmodule.c.types;
 public import gobject.c.types;
 public import gst.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstbase-1.0-0.dll;gstbase-1.0-0.dll;gstbase-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstbase-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstbase-1.0.so.0;libgstbase-1.0.so"];
+private immutable LIBS = ["gstbase-1.0_0"];
 
 __gshared extern(C) nothrow
 {

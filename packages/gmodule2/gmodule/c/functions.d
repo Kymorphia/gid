@@ -6,12 +6,7 @@ import gid.loader;
 import gmodule.c.types;
 public import glib.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgmodule-2.0-0.dll;gmodule-2.0-0.dll;gmodule-2.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgmodule-2.0.0.dylib"];
-else
-  private immutable LIBS = ["libgmodule-2.0.so.0;libgmodule-2.0.so"];
+private immutable LIBS = ["gmodule-2.0_0"];
 
 __gshared extern(C) nothrow
 {

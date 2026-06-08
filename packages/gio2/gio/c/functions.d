@@ -8,12 +8,7 @@ public import glib.c.types;
 public import gmodule.c.types;
 public import gobject.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgio-2.0-0.dll;gio-2.0-0.dll;gio-2.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgio-2.0.0.dylib"];
-else
-  private immutable LIBS = ["libgio-2.0.so.0;libgio-2.0.so"];
+private immutable LIBS = ["gio-2.0_0"];
 
 __gshared extern(C) nothrow
 {

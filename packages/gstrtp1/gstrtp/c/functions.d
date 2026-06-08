@@ -7,12 +7,7 @@ import gstrtp.c.types;
 public import gst.c.types;
 public import gstbase.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstrtp-1.0-0.dll;gstrtp-1.0-0.dll;gstrtp-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstrtp-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstrtp-1.0.so.0;libgstrtp-1.0.so"];
+private immutable LIBS = ["gstrtp-1.0_0"];
 
 __gshared extern(C) nothrow
 {

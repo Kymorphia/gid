@@ -7,12 +7,7 @@ import panel.c.types;
 public import adw.c.types;
 public import gtk.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libpanel-1-1.dll;panel-1-1.dll;panel-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libpanel-1.1.dylib"];
-else
-  private immutable LIBS = ["libpanel-1.so.1;libpanel-1.so"];
+private immutable LIBS = ["panel-1_1"];
 
 __gshared extern(C) nothrow
 {

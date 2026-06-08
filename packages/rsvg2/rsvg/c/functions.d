@@ -10,12 +10,7 @@ public import gdkpixbuf.c.types;
 public import gio.c.types;
 public import cairo.c.types;
 
-version(Windows)
-  private immutable LIBS = ["librsvg-2-2.dll;rsvg-2-2.dll;rsvg-2.dll"];
-else version(OSX)
-  private immutable LIBS = ["librsvg-2.2.dylib"];
-else
-  private immutable LIBS = ["librsvg-2.so.2;librsvg-2.so"];
+private immutable LIBS = ["rsvg-2_2"];
 
 __gshared extern(C) nothrow
 {

@@ -1,12 +1,15 @@
 //!kind loader Namespace
 //!inhibit imports init funcs
 
-import std.exception : assumeWontThrow;
+import std.algorithm : sort;
+import std.array : array, join;
+import std.ascii : isDigit;
+import std.exception : assumeWontThrow, ifThrown;
 import std.file : exists;
 import std.path : buildNormalizedPath, buildPath;
 import std.process : environment;
 import std.stdio : stderr, writeln;
-import std.string : fromStringz, toStringz;
+import std.string : fromStringz, indexOf, lastIndexOf, split, toStringz;
 
 __gshared string[] gidUnresolvedLibs; /// Array of unresolved libraries
 __gshared string[] gidUnresolvedSymbols; /// Array of unresolved function symbols (for libs which were resolved)
@@ -20,148 +23,239 @@ shared static this()
   debug gidLoaderDebug = assumeWontThrow(environment.get("GID_LOADER_DEBUG")) == "1";
 }
 
-version(Windows)
+void*[] gidResolveLibs(immutable(string[]) libs) nothrow
 {
-  import core.sys.windows.winbase : LoadLibraryA, GetProcAddress;
-  import std.algorithm : splitter;
-
-  void*[] gidResolveLibs(immutable(string[]) libs) nothrow
+  version (OSX) // Check for OSX specific library path environment variable hints
   {
-    void*[] libHandles;
-
-    foreach (libVariations; libs) // Loop on each library
+    if (gidLibraryPath.length == 0)
     {
-      void* handle;
+      if (auto path = assumeWontThrow(environment.get("GTK_BASEPATH")))
+        gidLibraryPath = path;
+      else if (auto path = assumeWontThrow(environment.get("HOMEBREW_PREFIX")))
+        gidLibraryPath = buildPath(path, "lib");
 
-      foreach (lib; libVariations.splitter(";")) // Loop on library name variations (separated by ';' - windows only)
-      {
-        if (gidLibraryPath.length > 0) // First try loading the library using gidLibraryPath if set
-          handle = LoadLibraryA(cast(char*)buildPath(gidLibraryPath, lib).toStringz);
-
-        if (!handle)
-          handle = LoadLibraryA(cast(char*)toStringz(lib)); // Search the executable directory, PATH, and other system paths
-
-        if (handle)
-        {
-          libHandles ~= handle;
-          break;
-        }
-      }
-
-      if (!handle)
-      {
-        debug if (gidLoaderDebug)
-          assumeWontThrow(stderr.writeln("giD library '" ~ libVariations ~ "'not found"));
-
-        gidUnresolvedLibs ~= libVariations;
-      }
+      debug if (gidLoaderDebug && gidLibraryPath.length > 0)
+        assumeWontThrow(stderr.writeln("Detected giD library path: ", gidLibraryPath));
     }
-
-    return libHandles;
   }
 
-  void gidLink(void** funcPtr, string symbol, void*[] libHandles) nothrow
+  void*[] libHandles;
+
+  foreach (baseName; libs)
   {
-    foreach (handle; libHandles) // Loop on each library handle
+    auto candidates = libraryCandidates(baseName);
+    string found;
+
+    if (auto handle = libraryOpen(candidates, found))
     {
+      debug if (gidLoaderDebug)
+      {
+        if (auto libPath = libraryPath(handle))
+          assumeWontThrow(stderr.writeln("Found ", found, " at ", libPath));
+        else
+          assumeWontThrow(stderr.writeln("Found ", found));
+      }
+
+      libHandles ~= handle;
+      break;
+    }
+    else
+    {
+      debug if (gidLoaderDebug)
+        assumeWontThrow(stderr.writeln("giD library '" ~ baseName ~ "' not found (tried: "
+          ~ candidates.join(", ") ~ ")"));
+
+      gidUnresolvedLibs ~= baseName;
+    }
+  }
+
+  return libHandles;
+}
+
+void gidLink(void** funcPtr, string symbol, void*[] libHandles) nothrow
+{
+  foreach (handle; libHandles)
+  {
+    version(Windows)
+    {
+      import core.sys.windows.winbase : GetProcAddress;
+
       if (auto symPtr = GetProcAddress(handle, cast(char*)toStringz(symbol)))
       {
         *funcPtr = symPtr;
         return;
       }
     }
-
-    *funcPtr = &gidSymbolNotFound;
-    gidUnresolvedSymbols ~= symbol;
-
-    debug if (gidLoaderDebug)
-      assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
-  }
-}
-else // Linux or OSX
-{
-  import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-  import core.stdc.limits : PATH_MAX;
-
-  void*[] gidResolveLibs(immutable(string[]) libs) nothrow
-  {
-    version (OSX)
+    else
     {
-      if (gidLibraryPath.length == 0)
-      {
-        if (auto path = assumeWontThrow(environment.get("GTK_BASEPATH")))
-          gidLibraryPath = path;
-        else if (auto path = assumeWontThrow(environment.get("HOMEBREW_PREFIX")))
-          gidLibraryPath = buildPath(path, "lib");
+      import core.sys.posix.dlfcn : dlsym;
 
-        debug if (gidLoaderDebug && gidLibraryPath.length > 0)
-          assumeWontThrow(stderr.writeln("Detected giD library path: ", gidLoaderDebug));
-      }
-    }
-
-    void*[] libHandles;
-
-    foreach (lib; libs)
-    {
-      void* handle;
-
-      if (gidLibraryPath.length > 0) // First try loading the library using gidLibraryPath if set
-        handle = dlopen(cast(char*)buildPath(gidLibraryPath, lib).toStringz, RTLD_GLOBAL | RTLD_NOW);
-
-      if (!handle) // Try to load from system paths
-        handle = dlopen(cast(char*)lib.toStringz, RTLD_GLOBAL | RTLD_NOW);
-
-      if (handle)
-      {
-        debug
-        {
-          version(Android) // Android doesn't have dlinfo
-          {
-          }
-          else version(linux)
-          {
-            if (gidLoaderDebug)
-            {
-              import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
-              char[PATH_MAX + 1] path;
-
-              if (dlinfo(handle, RTLD_DI_ORIGIN, path.ptr) == 0)
-                assumeWontThrow(stderr.writeln("Found ", lib, " at ", path.fromStringz.idup));
-            }
-          }
-        }
-
-        libHandles ~= handle;
-      }
-      else
-      {
-        debug if (gidLoaderDebug)
-          assumeWontThrow(stderr.writeln("giD library '" ~ lib ~ "' not found: " ~ dlerror().fromStringz.idup));
-
-        gidUnresolvedLibs ~= lib;
-      }
-    }
-
-    return libHandles;
-  }
-
-  void gidLink(void** funcPtr, string symbol, void*[] libHandles) nothrow
-  {
-    foreach (handle; libHandles)
-    {
       if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
       {
         *funcPtr = symPtr;
         return;
       }
     }
-
-    *funcPtr = &gidSymbolNotFound;
-    gidUnresolvedSymbols ~= symbol;
-
-    debug if (gidLoaderDebug)
-      assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
   }
+
+  *funcPtr = &gidSymbolNotFound;
+  gidUnresolvedSymbols ~= symbol;
+
+  debug if (gidLoaderDebug)
+    assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
+}
+
+/**
+ * Parse a giD library name to separate base and so version.
+ * Params:
+ *   libName = The giD library name
+ *   base = Output base name
+ *   ver = The so version (or empty, but not with any libraries currently)
+ */
+private void parseLibBaseAndVer(string libName, out string base, out string ver) nothrow
+{
+  auto idx = assumeWontThrow(libName.lastIndexOf('_'));
+  if (idx > 0)
+  {
+    string suffix = libName[idx + 1 .. $];
+    if (suffix.length > 0 && (suffix[0] >= '0' && suffix[0] <= '9'))
+    {
+      base = libName[0 .. idx];
+      ver = suffix;
+      return;
+    }
+  }
+  base = libName;
+  ver = "";
+}
+
+/**
+ * Attempt to open a library from a list of library candidate names.
+ * Params:
+ *   candidates = The list of library filename candidates.
+ *   found = Output string of the found candidate (only if return value is not null)
+ * Returns: The library handle or null if not found
+ */
+private void* libraryOpen(string[] candidates, out string found) nothrow
+{
+  foreach (lib; candidates)
+  {
+    void *handle;
+
+    version(Windows)
+    {
+      import core.sys.windows.winbase : LoadLibraryA;
+
+      if (gidLibraryPath.length > 0)
+        handle = LoadLibraryA(cast(char*)buildPath(gidLibraryPath, lib).toStringz);
+
+      if (!handle)
+        handle = LoadLibraryA(cast(char*)toStringz(lib));
+    }
+    else
+    {
+      import core.sys.posix.dlfcn : dlopen, RTLD_GLOBAL, RTLD_NOW;
+
+      if (gidLibraryPath.length > 0)
+        handle = dlopen(cast(char*)buildPath(gidLibraryPath, lib).toStringz, RTLD_GLOBAL | RTLD_NOW);
+
+      if (!handle)
+        handle = dlopen(cast(char*)lib.toStringz, RTLD_GLOBAL | RTLD_NOW);
+    }
+
+    if (handle)
+    {
+      found = lib;
+      return handle;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Get detailed library path from a handle.
+ * Params:
+ *   handle = The opened library handle
+ * Returns: The full path of the library or null if not supported
+ */
+private string libraryPath(void* handle) nothrow
+{
+  version(Android)
+  {
+  }
+  else version(linux)
+  {
+    import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
+    import core.stdc.limits : PATH_MAX;
+
+    char[PATH_MAX + 1] pathBuf;
+
+    if (dlinfo(handle, RTLD_DI_ORIGIN, pathBuf.ptr) == 0)
+      return pathBuf.fromStringz.idup;
+  }
+
+  return null;
+}
+
+private string[] libraryCandidates(string baseName) nothrow
+{
+  string base, soVer;
+  parseLibBaseAndVer(baseName, base, soVer);
+
+  string[] cands;
+
+  version(Windows)
+  {
+    if (soVer.length > 0)
+    {
+      cands ~= base ~ "-" ~ soVer ~ ".dll";
+      cands ~= "lib" ~ cands[$ - 1];
+      cands ~= base ~ "." ~ soVer ~ ".dll";
+      cands ~= "lib" ~ cands[$ - 1];
+    }
+
+    // Without so version
+    cands ~= base ~ ".dll";
+    cands ~= "lib" ~ cands[$ - 1];
+
+    auto splitLibVer = base.split(".");
+
+    foreach_reverse (i; 1 .. splitLibVer.length) // Add variations with stripped lib versions (from more specific to less)
+    { // Stop if component does not start with a digit
+      if (!splitLibVer[i][0].isDigit)
+        break;
+
+      cands ~= splitLibVer[0 .. i].join(".") ~ ".dll";
+      cands ~= "lib" ~ cands[$ - 1];
+    }
+  }
+  else version(OSX)
+  {
+    if (soVer.length > 0)
+      cands ~= "lib" ~ base ~ "." ~ soVer ~ ".dylib";
+
+    cands ~= "lib" ~ base ~ ".dylib";
+
+    if (soVer.length > 0)
+      cands ~= base ~ "." ~ soVer ~ ".dylib";
+
+    cands ~= base ~ ".dylib";
+  }
+  else // Other posix systems
+  {
+    if (soVer.length > 0)
+      cands ~= "lib" ~ base ~ ".so." ~ soVer;
+
+    cands ~= "lib" ~ base ~ ".so";
+
+    if (soVer.length > 0)
+      cands ~= base ~ ".so." ~ soVer;
+
+    cands ~= base ~ ".so";
+  }
+
+  return cands;
 }
 
 /// Return a giD unresolved lib/symbol report (might get called by multiple threads)
@@ -172,11 +266,6 @@ string gidLoaderUnresolvedReport() nothrow
 
   auto s = "giD unresolved symbol report:\n";
 
-  import std.algorithm : sort;
-  import std.array : array;
-  import std.string : join;
-
-  // dup to prevent multi-thread sort issues. gidUnresolvedLibs and gidUnresolvedSymbols should not change at this point.
   if (gidUnresolvedLibs.length > 0)
     s ~= "Unresolved libraries: " ~ gidUnresolvedLibs.dup.sort.array.join(", ") ~ "\n";
 

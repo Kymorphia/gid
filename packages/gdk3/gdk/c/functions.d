@@ -9,12 +9,7 @@ public import gio.c.types;
 public import pango.c.types;
 public import cairo.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgdk-3-0.dll;gdk-3-0.dll;gdk-3.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgdk-3.0.dylib"];
-else
-  private immutable LIBS = ["libgdk-3.so.0;libgdk-3.so"];
+private immutable LIBS = ["gdk-3_0"];
 
 __gshared extern(C) nothrow
 {

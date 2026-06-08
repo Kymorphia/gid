@@ -7,12 +7,7 @@ import adw.c.types;
 public import gio.c.types;
 public import gtk.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libadwaita-1-0.dll;adwaita-1-0.dll;adwaita-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libadwaita-1.0.dylib"];
-else
-  private immutable LIBS = ["libadwaita-1.so.0;libadwaita-1.so"];
+private immutable LIBS = ["adwaita-1_0"];
 
 __gshared extern(C) nothrow
 {

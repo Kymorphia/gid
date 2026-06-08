@@ -7,12 +7,7 @@ import gda.c.types;
 public import gobject.c.types;
 public import libxml2.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgda-5.0-4.dll;gda-5.0-4.dll;gda-5.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgda-5.0.4.dylib"];
-else
-  private immutable LIBS = ["libgda-5.0.so.4;libgda-5.0.so"];
+private immutable LIBS = ["gda-5.0_4"];
 
 __gshared extern(C) nothrow
 {

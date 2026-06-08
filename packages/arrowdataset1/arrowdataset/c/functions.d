@@ -6,12 +6,7 @@ import gid.loader;
 import arrowdataset.c.types;
 public import arrow.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libarrow-dataset-glib-2000.dll;arrow-dataset-glib-2000.dll;arrow-dataset-glib.dll"];
-else version(OSX)
-  private immutable LIBS = ["libarrow-dataset-glib.2000.dylib"];
-else
-  private immutable LIBS = ["libarrow-dataset-glib.so.2000;libarrow-dataset-glib.so"];
+private immutable LIBS = ["arrow-dataset-glib_2000"];
 
 __gshared extern(C) nothrow
 {

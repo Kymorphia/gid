@@ -8,12 +8,7 @@ public import atk.c.types;
 public import gdk.c.types;
 public import xlib.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgtk-3-0.dll;gtk-3-0.dll;gtk-3.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgtk-3.0.dylib"];
-else
-  private immutable LIBS = ["libgtk-3.so.0;libgtk-3.so"];
+private immutable LIBS = ["gtk-3_0"];
 
 __gshared extern(C) nothrow
 {

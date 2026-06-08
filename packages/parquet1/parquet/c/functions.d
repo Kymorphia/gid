@@ -6,12 +6,7 @@ import gid.loader;
 import parquet.c.types;
 public import arrow.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libparquet-glib-1900.dll;parquet-glib-1900.dll;parquet-glib.dll"];
-else version(OSX)
-  private immutable LIBS = ["libparquet-glib.1900.dylib"];
-else
-  private immutable LIBS = ["libparquet-glib.so.1900;libparquet-glib.so"];
+private immutable LIBS = ["parquet-glib_1900"];
 
 __gshared extern(C) nothrow
 {

@@ -9,12 +9,7 @@ public import gio.c.types;
 public import harfbuzz.c.types;
 public import cairo.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libpango-1.0-0.dll;pango-1.0-0.dll;pango-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libpango-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libpango-1.0.so.0;libpango-1.0.so"];
+private immutable LIBS = ["pango-1.0_0"];
 
 __gshared extern(C) nothrow
 {

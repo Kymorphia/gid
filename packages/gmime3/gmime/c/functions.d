@@ -7,12 +7,7 @@ import gmime.c.types;
 public import gobject.c.types;
 public import gio.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgmime-3.0-0.dll;gmime-3.0-0.dll;gmime-3.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgmime-3.0.0.dylib"];
-else
-  private immutable LIBS = ["libgmime-3.0.so.0;libgmime-3.0.so"];
+private immutable LIBS = ["gmime-3.0_0"];
 
 __gshared extern(C) nothrow
 {

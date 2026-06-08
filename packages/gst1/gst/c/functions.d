@@ -8,12 +8,7 @@ public import glib.c.types;
 public import gmodule.c.types;
 public import gobject.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstreamer-1.0-0.dll;gstreamer-1.0-0.dll;gstreamer-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstreamer-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstreamer-1.0.so.0;libgstreamer-1.0.so"];
+private immutable LIBS = ["gstreamer-1.0_0"];
 
 __gshared extern(C) nothrow
 {

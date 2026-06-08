@@ -7,12 +7,7 @@ import secret.c.types;
 public import gobject.c.types;
 public import gio.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libsecret-1-0.dll;secret-1-0.dll;secret-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libsecret-1.0.dylib"];
-else
-  private immutable LIBS = ["libsecret-1.so.0;libsecret-1.so"];
+private immutable LIBS = ["secret-1_0"];
 
 __gshared extern(C) nothrow
 {

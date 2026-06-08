@@ -6,12 +6,7 @@ import gid.loader;
 import javascriptcore.c.types;
 public import gobject.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libjavascriptcoregtk-6.0-1.dll;javascriptcoregtk-6.0-1.dll;javascriptcoregtk-6.dll"];
-else version(OSX)
-  private immutable LIBS = ["libjavascriptcoregtk-6.0.1.dylib"];
-else
-  private immutable LIBS = ["libjavascriptcoregtk-6.0.so.1;libjavascriptcoregtk-6.0.so"];
+private immutable LIBS = ["javascriptcoregtk-6.0_1"];
 
 __gshared extern(C) nothrow
 {

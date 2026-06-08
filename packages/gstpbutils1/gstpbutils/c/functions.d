@@ -9,12 +9,7 @@ public import gstaudio.c.types;
 public import gstbase.c.types;
 public import gstvideo.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstpbutils-1.0-0.dll;gstpbutils-1.0-0.dll;gstpbutils-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstpbutils-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstpbutils-1.0.so.0;libgstpbutils-1.0.so"];
+private immutable LIBS = ["gstpbutils-1.0_0"];
 
 __gshared extern(C) nothrow
 {

@@ -6,12 +6,7 @@ import gid.loader;
 import arrowflight.c.types;
 public import arrow.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libarrow-flight-glib-1900.dll;arrow-flight-glib-1900.dll;arrow-flight-glib.dll"];
-else version(OSX)
-  private immutable LIBS = ["libarrow-flight-glib.1900.dylib"];
-else
-  private immutable LIBS = ["libarrow-flight-glib.so.1900;libarrow-flight-glib.so"];
+private immutable LIBS = ["arrow-flight-glib_1900"];
 
 __gshared extern(C) nothrow
 {

@@ -7,12 +7,7 @@ import json.c.types;
 public import gobject.c.types;
 public import gio.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libjson-glib-1.0-0.dll;json-glib-1.0-0.dll;json-glib-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libjson-glib-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libjson-glib-1.0.so.0;libjson-glib-1.0.so"];
+private immutable LIBS = ["json-glib-1.0_0"];
 
 __gshared extern(C) nothrow
 {

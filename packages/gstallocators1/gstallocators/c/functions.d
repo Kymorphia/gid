@@ -6,12 +6,7 @@ import gid.loader;
 import gstallocators.c.types;
 public import gst.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstallocators-1.0-0.dll;gstallocators-1.0-0.dll;gstallocators-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstallocators-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstallocators-1.0.so.0;libgstallocators-1.0.so"];
+private immutable LIBS = ["gstallocators-1.0_0"];
 
 __gshared extern(C) nothrow
 {

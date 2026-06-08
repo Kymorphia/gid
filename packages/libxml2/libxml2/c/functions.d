@@ -6,12 +6,7 @@ import gid.loader;
 import libxml2.c.types;
 public import glib.c.types;
 
-version(Windows)
-  private immutable LIBS = [];
-else version(OSX)
-  private immutable LIBS = [];
-else
-  private immutable LIBS = [];
+private immutable LIBS = [""];
 
 __gshared extern(C) nothrow
 {

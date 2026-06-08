@@ -6,12 +6,7 @@ import gid.loader;
 import gtksource.c.types;
 public import gtk.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgtksourceview-5-0.dll;gtksourceview-5-0.dll;gtksourceview-5.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgtksourceview-5.0.dylib"];
-else
-  private immutable LIBS = ["libgtksourceview-5.so.0;libgtksourceview-5.so"];
+private immutable LIBS = ["gtksourceview-5_0"];
 
 __gshared extern(C) nothrow
 {

@@ -6,12 +6,7 @@ import gid.loader;
 import atk.c.types;
 public import gobject.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libatk-1.0-0.dll;atk-1.0-0.dll;atk-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libatk-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libatk-1.0.so.0;libatk-1.0.so"];
+private immutable LIBS = ["atk-1.0_0"];
 
 __gshared extern(C) nothrow
 {

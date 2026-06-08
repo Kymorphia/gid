@@ -6,12 +6,7 @@ import gid.loader;
 import gobject.c.types;
 public import glib.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgobject-2.0-0.dll;gobject-2.0-0.dll;gobject-2.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgobject-2.0.0.dylib"];
-else
-  private immutable LIBS = ["libgobject-2.0.so.0;libgobject-2.0.so"];
+private immutable LIBS = ["gobject-2.0_0"];
 
 __gshared extern(C) nothrow
 {

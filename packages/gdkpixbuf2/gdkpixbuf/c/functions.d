@@ -7,12 +7,7 @@ import gdkpixbuf.c.types;
 public import gmodule.c.types;
 public import gio.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgdk_pixbuf-2.0-0.dll;gdk_pixbuf-2.0-0.dll;gdk_pixbuf-2.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgdk_pixbuf-2.0.0.dylib"];
-else
-  private immutable LIBS = ["libgdk_pixbuf-2.0.so.0;libgdk_pixbuf-2.0.so"];
+private immutable LIBS = ["gdk_pixbuf-2.0_0"];
 
 __gshared extern(C) nothrow
 {

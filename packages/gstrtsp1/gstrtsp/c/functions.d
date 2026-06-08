@@ -9,12 +9,7 @@ public import gst.c.types;
 public import gstbase.c.types;
 public import gstsdp.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstrtsp-1.0-0.dll;gstrtsp-1.0-0.dll;gstrtsp-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstrtsp-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstrtsp-1.0.so.0;libgstrtsp-1.0.so"];
+private immutable LIBS = ["gstrtsp-1.0_0"];
 
 __gshared extern(C) nothrow
 {

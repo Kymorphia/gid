@@ -6,12 +6,7 @@ import gid.loader;
 import gstsdp.c.types;
 public import gst.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstsdp-1.0-0.dll;gstsdp-1.0-0.dll;gstsdp-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstsdp-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstsdp-1.0.so.0;libgstsdp-1.0.so"];
+private immutable LIBS = ["gstsdp-1.0_0"];
 
 __gshared extern(C) nothrow
 {

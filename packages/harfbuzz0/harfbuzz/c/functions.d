@@ -7,12 +7,7 @@ import harfbuzz.c.types;
 public import gobject.c.types;
 public import freetype2.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libharfbuzz-gobject-0.dll;harfbuzz-gobject-0.dll;harfbuzz-gobject.dll", "libharfbuzz-0.dll;harfbuzz-0.dll;harfbuzz.dll"];
-else version(OSX)
-  private immutable LIBS = ["libharfbuzz-gobject.0.dylib", "libharfbuzz.0.dylib"];
-else
-  private immutable LIBS = ["libharfbuzz-gobject.so.0;libharfbuzz-gobject.so", "libharfbuzz.so.0;libharfbuzz.so"];
+private immutable LIBS = ["harfbuzz-gobject_0", "harfbuzz_0"];
 
 __gshared extern(C) nothrow
 {

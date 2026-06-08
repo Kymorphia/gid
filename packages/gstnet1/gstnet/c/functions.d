@@ -10,12 +10,7 @@ public import gobject.c.types;
 public import gio.c.types;
 public import gst.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstnet-1.0-0.dll;gstnet-1.0-0.dll;gstnet-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstnet-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstnet-1.0.so.0;libgstnet-1.0.so"];
+private immutable LIBS = ["gstnet-1.0_0"];
 
 __gshared extern(C) nothrow
 {

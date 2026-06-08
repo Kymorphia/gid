@@ -7,12 +7,7 @@ import arrow.c.types;
 public import gobject.c.types;
 public import gio.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libarrow-glib-1900.dll;arrow-glib-1900.dll;arrow-glib.dll"];
-else version(OSX)
-  private immutable LIBS = ["libarrow-glib.1900.dylib"];
-else
-  private immutable LIBS = ["libarrow-glib.so.1900;libarrow-glib.so"];
+private immutable LIBS = ["arrow-glib_1900"];
 
 __gshared extern(C) nothrow
 {

@@ -8,12 +8,7 @@ public import gtk.c.types;
 public import javascriptcore.c.types;
 public import soup.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libwebkitgtk-6.0-4.dll;webkitgtk-6.0-4.dll;webkitgtk-6.dll", "libjavascriptcoregtk-6.0-1.dll;javascriptcoregtk-6.0-1.dll;javascriptcoregtk-6.dll"];
-else version(OSX)
-  private immutable LIBS = ["libwebkitgtk-6.0.4.dylib", "libjavascriptcoregtk-6.0.1.dylib"];
-else
-  private immutable LIBS = ["libwebkitgtk-6.0.so.4;libwebkitgtk-6.0.so", "libjavascriptcoregtk-6.0.so.1;libjavascriptcoregtk-6.0.so"];
+private immutable LIBS = ["webkitgtk-6.0_4", "javascriptcoregtk-6.0_1"];
 
 __gshared extern(C) nothrow
 {

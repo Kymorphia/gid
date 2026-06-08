@@ -6,12 +6,7 @@ import gid.loader;
 import soup.c.types;
 public import gio.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libsoup-3.0-0.dll;soup-3.0-0.dll;soup-3.dll"];
-else version(OSX)
-  private immutable LIBS = ["libsoup-3.0.0.dylib"];
-else
-  private immutable LIBS = ["libsoup-3.0.so.0;libsoup-3.0.so"];
+private immutable LIBS = ["soup-3.0_0"];
 
 __gshared extern(C) nothrow
 {

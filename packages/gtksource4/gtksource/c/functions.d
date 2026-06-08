@@ -7,12 +7,7 @@ import gtksource.c.types;
 public import gdk.c.types;
 public import gtk.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgtksourceview-4-0.dll;gtksourceview-4-0.dll;gtksourceview-4.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgtksourceview-4.0.dylib"];
-else
-  private immutable LIBS = ["libgtksourceview-4.so.0;libgtksourceview-4.so"];
+private immutable LIBS = ["gtksourceview-4_0"];
 
 __gshared extern(C) nothrow
 {

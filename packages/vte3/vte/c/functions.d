@@ -11,12 +11,7 @@ public import gtk.c.types;
 public import pango.c.types;
 public import cairo.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libvte-2.91-gtk4-0.dll;vte-2.91-gtk4-0.dll;vte-2.dll"];
-else version(OSX)
-  private immutable LIBS = ["libvte-2.91-gtk4.0.dylib"];
-else
-  private immutable LIBS = ["libvte-2.91-gtk4.so.0;libvte-2.91-gtk4.so"];
+private immutable LIBS = ["vte-2.91-gtk4_0"];
 
 __gshared extern(C) nothrow
 {

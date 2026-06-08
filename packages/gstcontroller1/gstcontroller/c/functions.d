@@ -9,12 +9,7 @@ public import gmodule.c.types;
 public import gobject.c.types;
 public import gst.c.types;
 
-version(Windows)
-  private immutable LIBS = ["libgstcontroller-1.0-0.dll;gstcontroller-1.0-0.dll;gstcontroller-1.dll"];
-else version(OSX)
-  private immutable LIBS = ["libgstcontroller-1.0.0.dylib"];
-else
-  private immutable LIBS = ["libgstcontroller-1.0.so.0;libgstcontroller-1.0.so"];
+private immutable LIBS = ["gstcontroller-1.0_0"];
 
 __gshared extern(C) nothrow
 {
