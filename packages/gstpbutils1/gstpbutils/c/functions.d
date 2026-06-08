@@ -14,7 +14,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgstpbutils-1.0.0.dylib"];
 else
-  private immutable LIBS = ["libgstpbutils-1.0.so.0"];
+  private immutable LIBS = ["libgstpbutils-1.0.so.0;libgstpbutils-1.0.so"];
 
 __gshared extern(C) nothrow
 {

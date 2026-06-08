@@ -14,7 +14,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libvte-2.91.0.dylib"];
 else
-  private immutable LIBS = ["libvte-2.91.so.0"];
+  private immutable LIBS = ["libvte-2.91.so.0;libvte-2.91.so"];
 
 __gshared extern(C) nothrow
 {

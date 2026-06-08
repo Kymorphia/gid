@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libharfbuzz-gobject.0.dylib", "libharfbuzz.0.dylib"];
 else
-  private immutable LIBS = ["libharfbuzz-gobject.so.0", "libharfbuzz.so.0"];
+  private immutable LIBS = ["libharfbuzz-gobject.so.0;libharfbuzz-gobject.so", "libharfbuzz.so.0;libharfbuzz.so"];
 
 __gshared extern(C) nothrow
 {

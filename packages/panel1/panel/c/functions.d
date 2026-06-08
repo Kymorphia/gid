@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libpanel-1.1.dylib"];
 else
-  private immutable LIBS = ["libpanel-1.so.1"];
+  private immutable LIBS = ["libpanel-1.so.1;libpanel-1.so"];
 
 __gshared extern(C) nothrow
 {

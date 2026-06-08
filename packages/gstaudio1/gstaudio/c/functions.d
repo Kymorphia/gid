@@ -15,7 +15,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgstaudio-1.0.0.dylib"];
 else
-  private immutable LIBS = ["libgstaudio-1.0.so.0"];
+  private immutable LIBS = ["libgstaudio-1.0.so.0;libgstaudio-1.0.so"];
 
 __gshared extern(C) nothrow
 {

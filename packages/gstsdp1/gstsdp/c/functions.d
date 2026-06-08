@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgstsdp-1.0.0.dylib"];
 else
-  private immutable LIBS = ["libgstsdp-1.0.so.0"];
+  private immutable LIBS = ["libgstsdp-1.0.so.0;libgstsdp-1.0.so"];
 
 __gshared extern(C) nothrow
 {

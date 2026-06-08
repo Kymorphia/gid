@@ -13,7 +13,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgstreamer-1.0.0.dylib"];
 else
-  private immutable LIBS = ["libgstreamer-1.0.so.0"];
+  private immutable LIBS = ["libgstreamer-1.0.so.0;libgstreamer-1.0.so"];
 
 __gshared extern(C) nothrow
 {

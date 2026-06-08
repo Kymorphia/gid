@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgtksourceview-5.0.dylib"];
 else
-  private immutable LIBS = ["libgtksourceview-5.so.0"];
+  private immutable LIBS = ["libgtksourceview-5.so.0;libgtksourceview-5.so"];
 
 __gshared extern(C) nothrow
 {

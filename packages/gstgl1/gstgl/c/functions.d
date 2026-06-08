@@ -13,7 +13,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgstgl-1.0.0.dylib"];
 else
-  private immutable LIBS = ["libgstgl-1.0.so.0"];
+  private immutable LIBS = ["libgstgl-1.0.so.0;libgstgl-1.0.so"];
 
 __gshared extern(C) nothrow
 {

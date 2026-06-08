@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libX11.6.dylib"];
 else
-  private immutable LIBS = ["libX11.so.6"];
+  private immutable LIBS = ["libX11.so.6;libX11.so"];
 
 __gshared extern(C) nothrow
 {

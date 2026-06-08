@@ -14,7 +14,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgdk-3.0.dylib"];
 else
-  private immutable LIBS = ["libgdk-3.so.0"];
+  private immutable LIBS = ["libgdk-3.so.0;libgdk-3.so"];
 
 __gshared extern(C) nothrow
 {

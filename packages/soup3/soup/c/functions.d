@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libsoup-3.0.0.dylib"];
 else
-  private immutable LIBS = ["libsoup-3.0.so.0"];
+  private immutable LIBS = ["libsoup-3.0.so.0;libsoup-3.0.so"];
 
 __gshared extern(C) nothrow
 {

@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libarrow-glib.1900.dylib"];
 else
-  private immutable LIBS = ["libarrow-glib.so.1900"];
+  private immutable LIBS = ["libarrow-glib.so.1900;libarrow-glib.so"];
 
 __gshared extern(C) nothrow
 {

@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libadwaita-1.0.dylib"];
 else
-  private immutable LIBS = ["libadwaita-1.so.0"];
+  private immutable LIBS = ["libadwaita-1.so.0;libadwaita-1.so"];
 
 __gshared extern(C) nothrow
 {

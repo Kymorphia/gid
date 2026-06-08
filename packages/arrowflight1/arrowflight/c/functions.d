@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libarrow-flight-glib.1900.dylib"];
 else
-  private immutable LIBS = ["libarrow-flight-glib.so.1900"];
+  private immutable LIBS = ["libarrow-flight-glib.so.1900;libarrow-flight-glib.so"];
 
 __gshared extern(C) nothrow
 {

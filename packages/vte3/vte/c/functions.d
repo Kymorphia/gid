@@ -16,7 +16,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libvte-2.91-gtk4.0.dylib"];
 else
-  private immutable LIBS = ["libvte-2.91-gtk4.so.0"];
+  private immutable LIBS = ["libvte-2.91-gtk4.so.0;libvte-2.91-gtk4.so"];
 
 __gshared extern(C) nothrow
 {

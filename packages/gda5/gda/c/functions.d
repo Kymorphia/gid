@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgda-5.0.4.dylib"];
 else
-  private immutable LIBS = ["libgda-5.0.so.4"];
+  private immutable LIBS = ["libgda-5.0.so.4;libgda-5.0.so"];
 
 __gshared extern(C) nothrow
 {

@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libjavascriptcoregtk-6.0.1.dylib"];
 else
-  private immutable LIBS = ["libjavascriptcoregtk-6.0.so.1"];
+  private immutable LIBS = ["libjavascriptcoregtk-6.0.so.1;libjavascriptcoregtk-6.0.so"];
 
 __gshared extern(C) nothrow
 {

@@ -13,7 +13,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgtk-3.0.dylib"];
 else
-  private immutable LIBS = ["libgtk-3.so.0"];
+  private immutable LIBS = ["libgtk-3.so.0;libgtk-3.so"];
 
 __gshared extern(C) nothrow
 {

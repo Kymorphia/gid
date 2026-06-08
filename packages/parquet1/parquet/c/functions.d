@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libparquet-glib.1900.dylib"];
 else
-  private immutable LIBS = ["libparquet-glib.so.1900"];
+  private immutable LIBS = ["libparquet-glib.so.1900;libparquet-glib.so"];
 
 __gshared extern(C) nothrow
 {

@@ -15,7 +15,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["librsvg-2.2.dylib"];
 else
-  private immutable LIBS = ["librsvg-2.so.2"];
+  private immutable LIBS = ["librsvg-2.so.2;librsvg-2.so"];
 
 __gshared extern(C) nothrow
 {

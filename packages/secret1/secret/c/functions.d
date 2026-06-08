@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libsecret-1.0.dylib"];
 else
-  private immutable LIBS = ["libsecret-1.so.0"];
+  private immutable LIBS = ["libsecret-1.so.0;libsecret-1.so"];
 
 __gshared extern(C) nothrow
 {

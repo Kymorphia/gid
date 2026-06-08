@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgdk_pixbuf-2.0.0.dylib"];
 else
-  private immutable LIBS = ["libgdk_pixbuf-2.0.so.0"];
+  private immutable LIBS = ["libgdk_pixbuf-2.0.so.0;libgdk_pixbuf-2.0.so"];
 
 __gshared extern(C) nothrow
 {

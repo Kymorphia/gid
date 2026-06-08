@@ -14,7 +14,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgstcheck-1.0.0.dylib"];
 else
-  private immutable LIBS = ["libgstcheck-1.0.so.0"];
+  private immutable LIBS = ["libgstcheck-1.0.so.0;libgstcheck-1.0.so"];
 
 __gshared extern(C) nothrow
 {

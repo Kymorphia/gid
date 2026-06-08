@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libarrow-dataset-glib.2000.dylib"];
 else
-  private immutable LIBS = ["libarrow-dataset-glib.so.2000"];
+  private immutable LIBS = ["libarrow-dataset-glib.so.2000;libarrow-dataset-glib.so"];
 
 __gshared extern(C) nothrow
 {

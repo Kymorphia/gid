@@ -11,7 +11,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgobject-2.0.0.dylib", "libglib-2.0.0.dylib"];
 else
-  private immutable LIBS = ["libgobject-2.0.so.0", "libglib-2.0.so.0"];
+  private immutable LIBS = ["libgobject-2.0.so.0;libgobject-2.0.so", "libglib-2.0.so.0;libglib-2.0.so"];
 
 __gshared extern(C) nothrow
 {

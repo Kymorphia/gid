@@ -12,7 +12,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libcairo-gobject.2.dylib", "libcairo.2.dylib"];
 else
-  private immutable LIBS = ["libcairo-gobject.so.2", "libcairo.so.2"];
+  private immutable LIBS = ["libcairo-gobject.so.2;libcairo-gobject.so", "libcairo.so.2;libcairo.so"];
 
 __gshared extern(C) nothrow
 {

@@ -14,7 +14,7 @@ version(Windows)
 else version(OSX)
   private immutable LIBS = ["libgstrtsp-1.0.0.dylib"];
 else
-  private immutable LIBS = ["libgstrtsp-1.0.so.0"];
+  private immutable LIBS = ["libgstrtsp-1.0.so.0;libgstrtsp-1.0.so"];
 
 __gshared extern(C) nothrow
 {
