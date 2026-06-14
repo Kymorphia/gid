@@ -5,6 +5,7 @@ public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.dbus_annotation_info;
 import gio.dbus_method_info;
 import gio.dbus_property_info;
 import gio.dbus_signal_info;
@@ -99,6 +100,86 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   {
     cValueFree!(string)(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GDBusInterfaceInfo*)this._cPtr).name);
+  }
+
+  /**
+      Get `methods` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusMethodInfo structures or null if there are no methods.
+  */
+  @property gio.dbus_method_info.DBusMethodInfo[] methods() nothrow
+  {
+    uint len;
+    if ((cast(GDBusInterfaceInfo*)this._cPtr).methods)
+    {
+      for (; (cast(GDBusInterfaceInfo*)this._cPtr).methods[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_method_info.DBusMethodInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_method_info.DBusMethodInfo(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).methods[i], No.Take);
+    return _retval;
+  }
+
+  /**
+      Get `signals` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusSignalInfo structures or null if there are no signals.
+  */
+  @property gio.dbus_signal_info.DBusSignalInfo[] signals() nothrow
+  {
+    uint len;
+    if ((cast(GDBusInterfaceInfo*)this._cPtr).signals)
+    {
+      for (; (cast(GDBusInterfaceInfo*)this._cPtr).signals[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_signal_info.DBusSignalInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_signal_info.DBusSignalInfo(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).signals[i], No.Take);
+    return _retval;
+  }
+
+  /**
+      Get `properties` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusPropertyInfo structures or null if there are no properties.
+  */
+  @property gio.dbus_property_info.DBusPropertyInfo[] properties() nothrow
+  {
+    uint len;
+    if ((cast(GDBusInterfaceInfo*)this._cPtr).properties)
+    {
+      for (; (cast(GDBusInterfaceInfo*)this._cPtr).properties[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_property_info.DBusPropertyInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_property_info.DBusPropertyInfo(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).properties[i], No.Take);
+    return _retval;
+  }
+
+  /**
+      Get `annotations` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusAnnotationInfo structures or null if there are no annotations.
+  */
+  @property gio.dbus_annotation_info.DBusAnnotationInfo[] annotations() nothrow
+  {
+    uint len;
+    if ((cast(GDBusInterfaceInfo*)this._cPtr).annotations)
+    {
+      for (; (cast(GDBusInterfaceInfo*)this._cPtr).annotations[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_annotation_info.DBusAnnotationInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_annotation_info.DBusAnnotationInfo(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).annotations[i], No.Take);
+    return _retval;
   }
 
   /**

@@ -5,6 +5,8 @@ public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.dbus_annotation_info;
+import gio.dbus_arg_info;
 import gio.types;
 import gobject.boxed;
 
@@ -95,5 +97,65 @@ class DBusMethodInfo : gobject.boxed.Boxed
   {
     cValueFree!(string)(cast(void*)(cast(GDBusMethodInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GDBusMethodInfo*)this._cPtr).name);
+  }
+
+  /**
+      Get `inArgs` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusArgInfo structures or null if there are no in arguments.
+  */
+  @property gio.dbus_arg_info.DBusArgInfo[] inArgs() nothrow
+  {
+    uint len;
+    if ((cast(GDBusMethodInfo*)this._cPtr).inArgs)
+    {
+      for (; (cast(GDBusMethodInfo*)this._cPtr).inArgs[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_arg_info.DBusArgInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_arg_info.DBusArgInfo(cast(void*)(cast(GDBusMethodInfo*)this._cPtr).inArgs[i], No.Take);
+    return _retval;
+  }
+
+  /**
+      Get `outArgs` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusArgInfo structures or null if there are no out arguments.
+  */
+  @property gio.dbus_arg_info.DBusArgInfo[] outArgs() nothrow
+  {
+    uint len;
+    if ((cast(GDBusMethodInfo*)this._cPtr).outArgs)
+    {
+      for (; (cast(GDBusMethodInfo*)this._cPtr).outArgs[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_arg_info.DBusArgInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_arg_info.DBusArgInfo(cast(void*)(cast(GDBusMethodInfo*)this._cPtr).outArgs[i], No.Take);
+    return _retval;
+  }
+
+  /**
+      Get `annotations` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusAnnotationInfo structures or null if there are no annotations.
+  */
+  @property gio.dbus_annotation_info.DBusAnnotationInfo[] annotations() nothrow
+  {
+    uint len;
+    if ((cast(GDBusMethodInfo*)this._cPtr).annotations)
+    {
+      for (; (cast(GDBusMethodInfo*)this._cPtr).annotations[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_annotation_info.DBusAnnotationInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_annotation_info.DBusAnnotationInfo(cast(void*)(cast(GDBusMethodInfo*)this._cPtr).annotations[i], No.Take);
+    return _retval;
   }
 }

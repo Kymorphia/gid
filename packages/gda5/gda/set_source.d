@@ -70,6 +70,15 @@ class SetSource : gobject.boxed.Boxed
   }
 
   /**
+      Get `nodes` field.
+      Returns: list of #GdaSetNode for which source_model == @data_model
+  */
+  @property gda.set_node.SetNode[] nodes() nothrow
+  {
+    return gSListToD!(gda.set_node.SetNode)((cast(GdaSetSource*)this._cPtr).nodes);
+  }
+
+  /**
       Creates a new #GdaSetSource struct.
   
       Params:

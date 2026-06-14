@@ -77,4 +77,13 @@ class MIKEYPayloadSP
   {
     (cast(GstMIKEYPayloadSP*)this._cPtr).proto = cast(GstMIKEYSecProto)propval;
   }
+
+  /**
+      Get `params` field.
+      Returns: array of #GstMIKEYPayloadSPParam
+  */
+  @property void*[] params() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstMIKEYPayloadSP*)this._cPtr).params);
+  }
 }

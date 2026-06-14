@@ -35,22 +35,13 @@ class ByteReader
   }
 
   /**
-      Get `size` field.
-      Returns: Size of @data in bytes
+      Get `data` field.
+      Returns: Data from which the bit reader will
+          read
   */
-  @property uint size() nothrow
+  @property ubyte[] data() nothrow
   {
-    return (cast(GstByteReader*)this._cPtr).size;
-  }
-
-  /**
-      Set `size` field.
-      Params:
-        propval = Size of @data in bytes
-  */
-  @property void size(uint propval) nothrow
-  {
-    (cast(GstByteReader*)this._cPtr).size = propval;
+    return (cast(GstByteReader*)this._cPtr).data[0 .. (cast(GstByteReader*)this._cPtr).size].dup;
   }
 
   /**

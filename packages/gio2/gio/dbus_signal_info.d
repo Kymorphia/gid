@@ -5,6 +5,8 @@ public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.dbus_annotation_info;
+import gio.dbus_arg_info;
 import gio.types;
 import gobject.boxed;
 
@@ -95,5 +97,45 @@ class DBusSignalInfo : gobject.boxed.Boxed
   {
     cValueFree!(string)(cast(void*)(cast(GDBusSignalInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GDBusSignalInfo*)this._cPtr).name);
+  }
+
+  /**
+      Get `args` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusArgInfo structures or null if there are no arguments.
+  */
+  @property gio.dbus_arg_info.DBusArgInfo[] args() nothrow
+  {
+    uint len;
+    if ((cast(GDBusSignalInfo*)this._cPtr).args)
+    {
+      for (; (cast(GDBusSignalInfo*)this._cPtr).args[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_arg_info.DBusArgInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_arg_info.DBusArgInfo(cast(void*)(cast(GDBusSignalInfo*)this._cPtr).args[i], No.Take);
+    return _retval;
+  }
+
+  /**
+      Get `annotations` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusAnnotationInfo structures or null if there are no annotations.
+  */
+  @property gio.dbus_annotation_info.DBusAnnotationInfo[] annotations() nothrow
+  {
+    uint len;
+    if ((cast(GDBusSignalInfo*)this._cPtr).annotations)
+    {
+      for (; (cast(GDBusSignalInfo*)this._cPtr).annotations[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_annotation_info.DBusAnnotationInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_annotation_info.DBusAnnotationInfo(cast(void*)(cast(GDBusSignalInfo*)this._cPtr).annotations[i], No.Take);
+    return _retval;
   }
 }

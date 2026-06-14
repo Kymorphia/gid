@@ -28,4 +28,13 @@ class SqlStatementUnknown
   {
     return cast(void*)&_cInstance;
   }
+
+  /**
+      Get `expressions` field.
+      Returns: a list of #GdaSqlExpr pointers
+  */
+  @property void*[] expressions() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementUnknown*)this._cPtr).expressions);
+  }
 }

@@ -5,6 +5,7 @@ public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;
+import gda.holder;
 import gda.server_provider;
 import gda.set;
 import gda.types;
@@ -69,6 +70,15 @@ class SqlRenderingContext
   {
     cValueFree!(gda.set.Set)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).params);
     dToC(propval, cast(void*)&(cast(GdaSqlRenderingContext*)this._cPtr).params);
+  }
+
+  /**
+      Get `paramsUsed` field.
+      Returns: When rendering is complete, contains the ordered list of parameters which have been used while doing the rendering
+  */
+  @property gda.holder.Holder[] paramsUsed() nothrow
+  {
+    return gSListToD!(gda.holder.Holder)((cast(GdaSqlRenderingContext*)this._cPtr).paramsUsed);
   }
 
   /**

@@ -38,4 +38,22 @@ class SqlStatementSelect
   {
     (cast(GdaSqlStatementSelect*)this._cPtr).distinct = propval;
   }
+
+  /** */
+  @property void*[] exprList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementSelect*)this._cPtr).exprList);
+  }
+
+  /** */
+  @property void*[] groupBy() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementSelect*)this._cPtr).groupBy);
+  }
+
+  /** */
+  @property void*[] orderBy() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementSelect*)this._cPtr).orderBy);
+  }
 }

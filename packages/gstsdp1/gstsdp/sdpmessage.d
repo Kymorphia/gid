@@ -163,6 +163,24 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /**
+      Get `emails` field.
+      Returns: array of #gchar with email addresses
+  */
+  @property void*[] emails() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).emails);
+  }
+
+  /**
+      Get `phones` field.
+      Returns: array of #gchar with phone numbers
+  */
+  @property void*[] phones() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).phones);
+  }
+
+  /**
       Get `connection` field.
       Returns: connection information for the session
   */
@@ -172,12 +190,57 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /**
+      Get `bandwidths` field.
+      Returns: array of #GstSDPBandwidth with bandwidth information
+  */
+  @property void*[] bandwidths() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).bandwidths);
+  }
+
+  /**
+      Get `times` field.
+      Returns: array of #GstSDPTime with time descriptions
+  */
+  @property void*[] times() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).times);
+  }
+
+  /**
+      Get `zones` field.
+      Returns: array of #GstSDPZone with time zone adjustments
+  */
+  @property void*[] zones() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).zones);
+  }
+
+  /**
       Get `key` field.
       Returns: encryption key
   */
   @property gstsdp.sdpkey.SDPKey key() nothrow
   {
     return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMessage*)this._cPtr).key, No.Take);
+  }
+
+  /**
+      Get `attributes` field.
+      Returns: array of #GstSDPAttribute with session attributes
+  */
+  @property void*[] attributes() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).attributes);
+  }
+
+  /**
+      Get `medias` field.
+      Returns: array of #GstSDPMedia with media descriptions
+  */
+  @property void*[] medias() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).medias);
   }
 
   /**

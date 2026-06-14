@@ -130,21 +130,17 @@ class SignalQuery
   }
 
   /**
-      Get `nParams` field.
-      Returns: The number of parameters that user callbacks take.
+      Get `paramTypes` field.
+      Returns: The individual parameter types for
+         user callbacks, note that the effective callback signature is:
+         ```c
+         @return_type callback (#gpointer     data1,
+         [param_types param_names,]
+         gpointer     data2);
+         ```
   */
-  @property uint nParams() nothrow
+  @property gobject.types.GType[] paramTypes() nothrow
   {
-    return (cast(GSignalQuery*)this._cPtr).nParams;
-  }
-
-  /**
-      Set `nParams` field.
-      Params:
-        propval = The number of parameters that user callbacks take.
-  */
-  @property void nParams(uint propval) nothrow
-  {
-    (cast(GSignalQuery*)this._cPtr).nParams = propval;
+    return (cast(GSignalQuery*)this._cPtr).paramTypes[0 .. (cast(GSignalQuery*)this._cPtr).nParams].dup;
   }
 }

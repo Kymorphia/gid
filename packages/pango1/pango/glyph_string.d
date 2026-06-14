@@ -52,25 +52,6 @@ class GlyphString : gobject.boxed.Boxed
   }
 
   /**
-      Get `numGlyphs` field.
-      Returns: number of glyphs in this glyph string
-  */
-  @property int numGlyphs() nothrow
-  {
-    return (cast(PangoGlyphString*)this._cPtr).numGlyphs;
-  }
-
-  /**
-      Set `numGlyphs` field.
-      Params:
-        propval = number of glyphs in this glyph string
-  */
-  @property void numGlyphs(int propval) nothrow
-  {
-    (cast(PangoGlyphString*)this._cPtr).numGlyphs = propval;
-  }
-
-  /**
       Create a new [pango.glyph_string.GlyphString].
       Returns: the newly allocated [pango.glyph_string.GlyphString], which
           should be freed with [pango.glyph_string.GlyphString.free].

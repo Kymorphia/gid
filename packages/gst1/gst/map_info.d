@@ -75,22 +75,12 @@ class MapInfo
   }
 
   /**
-      Get `size` field.
-      Returns: the valid size in @data
+      Get `data` field.
+      Returns: a pointer to the mapped data
   */
-  @property size_t size() nothrow
+  @property ubyte[] data() nothrow
   {
-    return (cast(GstMapInfo*)this._cPtr).size;
-  }
-
-  /**
-      Set `size` field.
-      Params:
-        propval = the valid size in @data
-  */
-  @property void size(size_t propval) nothrow
-  {
-    (cast(GstMapInfo*)this._cPtr).size = propval;
+    return (cast(GstMapInfo*)this._cPtr).data[0 .. (cast(GstMapInfo*)this._cPtr).size].dup;
   }
 
   /**

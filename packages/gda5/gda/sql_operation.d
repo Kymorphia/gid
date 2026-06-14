@@ -42,6 +42,15 @@ class SqlOperation
   }
 
   /**
+      Get `operands` field.
+      Returns: list of #GdaSqlExpr operands
+  */
+  @property void*[] operands() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlOperation*)this._cPtr).operands);
+  }
+
+  /**
       Creates a new string representing an operator. You need to free the returned string
       using [glib.global.gfree];
       Returns: a new string with the description of the operator or "null" in case operation is invalid.

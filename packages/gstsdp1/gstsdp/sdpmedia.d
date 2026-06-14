@@ -114,6 +114,15 @@ class SDPMedia
   }
 
   /**
+      Get `fmts` field.
+      Returns: an array of #gchar formats
+  */
+  @property void*[] fmts() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).fmts);
+  }
+
+  /**
       Get `information` field.
       Returns: the media title
   */
@@ -134,12 +143,39 @@ class SDPMedia
   }
 
   /**
+      Get `connections` field.
+      Returns: array of #GstSDPConnection with media connection information
+  */
+  @property void*[] connections() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).connections);
+  }
+
+  /**
+      Get `bandwidths` field.
+      Returns: array of #GstSDPBandwidth with media bandwidth information
+  */
+  @property void*[] bandwidths() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).bandwidths);
+  }
+
+  /**
       Get `key` field.
       Returns: the encryption key
   */
   @property gstsdp.sdpkey.SDPKey key() nothrow
   {
     return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMedia*)this._cPtr).key, No.Take);
+  }
+
+  /**
+      Get `attributes` field.
+      Returns: array of #GstSDPAttribute with the additional media attributes
+  */
+  @property void*[] attributes() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).attributes);
   }
 
   /**

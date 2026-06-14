@@ -72,4 +72,22 @@ class SqlStatementInsert
     cValueFree!(string)(cast(void*)(cast(GdaSqlStatementInsert*)this._cPtr).onConflict);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementInsert*)this._cPtr).onConflict);
   }
+
+  /**
+      Get `fieldsList` field.
+      Returns: list of #GdaSqlField fields which are valued for insertion
+  */
+  @property void*[] fieldsList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementInsert*)this._cPtr).fieldsList);
+  }
+
+  /**
+      Get `valuesList` field.
+      Returns: list of list of #GdaSqlExpr expressions (this is a list of list, not a simple list)
+  */
+  @property void*[] valuesList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementInsert*)this._cPtr).valuesList);
+  }
 }

@@ -147,4 +147,13 @@ class Analysis
     cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)this._cPtr).language);
     dToC(propval, cast(void*)&(cast(PangoAnalysis*)this._cPtr).language);
   }
+
+  /**
+      Get `extraAttrs` field.
+      Returns: extra attributes for this segment.
+  */
+  @property void*[] extraAttrs() nothrow
+  {
+    return gSListToD!(void*)((cast(PangoAnalysis*)this._cPtr).extraAttrs);
+  }
 }

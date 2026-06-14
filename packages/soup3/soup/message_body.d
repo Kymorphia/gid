@@ -59,22 +59,12 @@ class MessageBody : gobject.boxed.Boxed
   }
 
   /**
-      Get `length` field.
-      Returns: length of @data
+      Get `data` field.
+      Returns: the data
   */
-  @property long length() nothrow
+  @property ubyte[] data() nothrow
   {
-    return (cast(SoupMessageBody*)this._cPtr).length;
-  }
-
-  /**
-      Set `length` field.
-      Params:
-        propval = length of @data
-  */
-  @property void length(long propval) nothrow
-  {
-    (cast(SoupMessageBody*)this._cPtr).length = propval;
+    return (cast(SoupMessageBody*)this._cPtr).data[0 .. (cast(SoupMessageBody*)this._cPtr).length].dup;
   }
 
   /**

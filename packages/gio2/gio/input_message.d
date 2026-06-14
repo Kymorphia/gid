@@ -48,22 +48,13 @@ class InputMessage
   }
 
   /**
-      Get `numVectors` field.
-      Returns: the number of input vectors pointed to by @vectors
+      Get `vectors` field.
+      Returns: pointer to an
+          array of input vectors
   */
-  @property uint numVectors() nothrow
+  @property gio.types.InputVector[] vectors() nothrow
   {
-    return (cast(GInputMessage*)this._cPtr).numVectors;
-  }
-
-  /**
-      Set `numVectors` field.
-      Params:
-        propval = the number of input vectors pointed to by @vectors
-  */
-  @property void numVectors(uint propval) nothrow
-  {
-    (cast(GInputMessage*)this._cPtr).numVectors = propval;
+    return (cast(GInputMessage*)this._cPtr).vectors[0 .. (cast(GInputMessage*)this._cPtr).numVectors].dup;
   }
 
   /**

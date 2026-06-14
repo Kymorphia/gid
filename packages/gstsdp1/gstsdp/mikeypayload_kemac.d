@@ -76,4 +76,13 @@ class MIKEYPayloadKEMAC
   {
     (cast(GstMIKEYPayloadKEMAC*)this._cPtr).macAlg = cast(GstMIKEYMacAlg)propval;
   }
+
+  /**
+      Get `subpayloads` field.
+      Returns: the subpayloads
+  */
+  @property void*[] subpayloads() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstMIKEYPayloadKEMAC*)this._cPtr).subpayloads);
+  }
 }

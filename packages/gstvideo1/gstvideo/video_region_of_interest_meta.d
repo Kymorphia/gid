@@ -176,6 +176,16 @@ class VideoRegionOfInterestMeta
   }
 
   /**
+      Get `params` field.
+      Returns: list of #GstStructure containing element-specific params for downstream,
+                 see [gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta.addParam]. (Since: 1.14)
+  */
+  @property void*[] params() nothrow
+  {
+    return gListToD!(void*)((cast(GstVideoRegionOfInterestMeta*)this._cPtr).params);
+  }
+
+  /**
       Attach element-specific parameters to meta meant to be used by downstream
       elements which may handle this ROI.
       The name of `s` is used to identify the element these parameters are meant for.

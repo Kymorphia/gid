@@ -60,22 +60,12 @@ class VideoCaptionMeta
   }
 
   /**
-      Get `size` field.
-      Returns: The size in bytes of @data
+      Get `data` field.
+      Returns: The Closed Caption data.
   */
-  @property size_t size() nothrow
+  @property ubyte[] data() nothrow
   {
-    return (cast(GstVideoCaptionMeta*)this._cPtr).size;
-  }
-
-  /**
-      Set `size` field.
-      Params:
-        propval = The size in bytes of @data
-  */
-  @property void size(size_t propval) nothrow
-  {
-    (cast(GstVideoCaptionMeta*)this._cPtr).size = propval;
+    return (cast(GstVideoCaptionMeta*)this._cPtr).data[0 .. (cast(GstVideoCaptionMeta*)this._cPtr).size].dup;
   }
 
   /** */

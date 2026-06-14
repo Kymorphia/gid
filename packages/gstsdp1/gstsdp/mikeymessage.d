@@ -164,6 +164,24 @@ class MIKEYMessage : gobject.boxed.Boxed
   }
 
   /**
+      Get `mapInfo` field.
+      Returns: map info array of type depending on @map_type
+  */
+  @property void*[] mapInfo() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstMIKEYMessage*)this._cPtr).mapInfo);
+  }
+
+  /**
+      Get `payloads` field.
+      Returns: the payload array of #GstMIKEYPayload
+  */
+  @property void*[] payloads() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstMIKEYMessage*)this._cPtr).payloads);
+  }
+
+  /**
       Make a new MIKEY message.
       Returns: a new #GstMIKEYMessage on success
   */

@@ -120,6 +120,26 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   }
 
   /**
+      Get `annotations` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusAnnotationInfo structures or null if there are no annotations.
+  */
+  @property gio.dbus_annotation_info.DBusAnnotationInfo[] annotations() nothrow
+  {
+    uint len;
+    if ((cast(GDBusAnnotationInfo*)this._cPtr).annotations)
+    {
+      for (; (cast(GDBusAnnotationInfo*)this._cPtr).annotations[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_annotation_info.DBusAnnotationInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_annotation_info.DBusAnnotationInfo(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).annotations[i], No.Take);
+    return _retval;
+  }
+
+  /**
       Looks up the value of an annotation.
       
       The cost of this function is O(n) in number of annotations.

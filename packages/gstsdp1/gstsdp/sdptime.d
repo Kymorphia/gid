@@ -75,6 +75,15 @@ class SDPTime
   }
 
   /**
+      Get `repeat` field.
+      Returns: repeat times for a session
+  */
+  @property void*[] repeat() nothrow
+  {
+    return gArrayGToD!(void*)((cast(GstSDPTime*)this._cPtr).repeat);
+  }
+
+  /**
       Reset the time information in `t`.
       Returns: a #GstSDPResult.
   */

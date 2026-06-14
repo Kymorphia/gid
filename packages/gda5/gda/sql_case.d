@@ -51,6 +51,24 @@ class SqlCase
   }
 
   /**
+      Get `whenExprList` field.
+      Returns: list of #GdaSqlExpr, one for each WHEN clause
+  */
+  @property void*[] whenExprList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlCase*)this._cPtr).whenExprList);
+  }
+
+  /**
+      Get `thenExprList` field.
+      Returns: list of #GdaSqlExpr, one for each THEN clause
+  */
+  @property void*[] thenExprList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlCase*)this._cPtr).thenExprList);
+  }
+
+  /**
       Get `elseExpr` field.
       Returns: default expression for the CASE
   */

@@ -39,4 +39,16 @@ class SqlStatementUpdate
     cValueFree!(string)(cast(void*)(cast(GdaSqlStatementUpdate*)this._cPtr).onConflict);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementUpdate*)this._cPtr).onConflict);
   }
+
+  /** */
+  @property void*[] fieldsList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementUpdate*)this._cPtr).fieldsList);
+  }
+
+  /** */
+  @property void*[] exprList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementUpdate*)this._cPtr).exprList);
+  }
 }

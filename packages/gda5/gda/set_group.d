@@ -49,6 +49,15 @@ class SetGroup : gobject.boxed.Boxed
   }
 
   /**
+      Get `nodes` field.
+      Returns: list of GdaSetNode, at least one entry
+  */
+  @property gda.set_node.SetNode[] nodes() nothrow
+  {
+    return gSListToD!(gda.set_node.SetNode)((cast(GdaSetGroup*)this._cPtr).nodes);
+  }
+
+  /**
       Get `nodesSource` field.
       Returns: if NULL, then @nodes contains exactly one entry
   */

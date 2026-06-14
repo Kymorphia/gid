@@ -129,6 +129,16 @@ class LayoutLine : gobject.boxed.Boxed
   }
 
   /**
+      Get `runs` field.
+      Returns: list of runs in the
+          line, from left to right
+  */
+  @property pango.types.LayoutRun[] runs() nothrow
+  {
+    return gSListToD!(pango.types.LayoutRun)((cast(PangoLayoutLine*)this._cPtr).runs);
+  }
+
+  /**
       Get `isParagraphStart` field.
       Returns: #TRUE if this is the first line of the paragraph
   */

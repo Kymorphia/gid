@@ -5,6 +5,7 @@ public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.dbus_annotation_info;
 import gio.types;
 import gobject.boxed;
 
@@ -138,5 +139,25 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   @property void flags(gio.types.DBusPropertyInfoFlags propval) nothrow
   {
     (cast(GDBusPropertyInfo*)this._cPtr).flags = cast(GDBusPropertyInfoFlags)propval;
+  }
+
+  /**
+      Get `annotations` field.
+      Returns: A pointer to a null-terminated array of pointers to #GDBusAnnotationInfo structures or null if there are no annotations.
+  */
+  @property gio.dbus_annotation_info.DBusAnnotationInfo[] annotations() nothrow
+  {
+    uint len;
+    if ((cast(GDBusPropertyInfo*)this._cPtr).annotations)
+    {
+      for (; (cast(GDBusPropertyInfo*)this._cPtr).annotations[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gio.dbus_annotation_info.DBusAnnotationInfo[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gio.dbus_annotation_info.DBusAnnotationInfo(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).annotations[i], No.Take);
+    return _retval;
   }
 }

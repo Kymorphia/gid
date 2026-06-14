@@ -14,13 +14,10 @@ class Binary : gobject.boxed.Boxed
 
   /**
       Create a `binary.Binary` boxed type.
-      Params:
-        binaryLength = length of @data
   */
-  this(glong binaryLength = glong.init) nothrow
+  this() nothrow
   {
     super(gMalloc(GdaBinary.sizeof), Yes.Take);
-    this.binaryLength = binaryLength;
   }
 
   /** */
@@ -55,22 +52,12 @@ class Binary : gobject.boxed.Boxed
   }
 
   /**
-      Get `binaryLength` field.
-      Returns: length of @data
+      Get `data` field.
+      Returns: the actual data as an array
   */
-  @property glong binaryLength() nothrow
+  @property ubyte[] data() nothrow
   {
-    return (cast(GdaBinary*)this._cPtr).binaryLength;
-  }
-
-  /**
-      Set `binaryLength` field.
-      Params:
-        propval = length of @data
-  */
-  @property void binaryLength(glong propval) nothrow
-  {
-    (cast(GdaBinary*)this._cPtr).binaryLength = propval;
+    return (cast(GdaBinary*)this._cPtr).data[0 .. (cast(GdaBinary*)this._cPtr).binaryLength].dup;
   }
 
   /**

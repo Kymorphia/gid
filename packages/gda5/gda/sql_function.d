@@ -50,6 +50,15 @@ class SqlFunction
     dToC(propval, cast(void*)&(cast(GdaSqlFunction*)this._cPtr).functionName);
   }
 
+  /**
+      Get `argsList` field.
+      Returns: list of #GdaSqlExpr expressions, one for each argument
+  */
+  @property void*[] argsList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlFunction*)this._cPtr).argsList);
+  }
+
   /** */
   void checkClean() nothrow
   {

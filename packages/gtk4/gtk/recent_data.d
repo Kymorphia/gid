@@ -143,6 +143,27 @@ class RecentData
   }
 
   /**
+      Get `groups` field.
+      Returns: a vector of strings containing
+          groups names;
+  */
+  @property string[] groups() nothrow
+  {
+    uint len;
+    if ((cast(GtkRecentData*)this._cPtr).groups)
+    {
+      for (; (cast(GtkRecentData*)this._cPtr).groups[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new string[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = (cast(GtkRecentData*)this._cPtr).groups[i].fromCString;
+    return _retval;
+  }
+
+  /**
       Get `isPrivate` field.
       Returns: whether this resource should be displayed only by the
           applications that have registered it or not.

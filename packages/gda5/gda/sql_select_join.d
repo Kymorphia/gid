@@ -89,6 +89,15 @@ class SqlSelectJoin
   }
 
   /**
+      Get `use` field.
+      Returns: list of #GdaSqlField pointers to use when joining, or null
+  */
+  @property void*[] use() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlSelectJoin*)this._cPtr).use);
+  }
+
+  /**
       Creates a new string description of the join used in a SELECT statement.
       Returns: a new string with the description of the join or "null" in case join is invalid.
   */

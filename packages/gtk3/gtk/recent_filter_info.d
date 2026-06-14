@@ -112,6 +112,48 @@ class RecentFilterInfo
   }
 
   /**
+      Get `applications` field.
+      Returns: The list of
+           applications that have registered the file.
+  */
+  @property string[] applications() nothrow
+  {
+    uint len;
+    if ((cast(GtkRecentFilterInfo*)this._cPtr).applications)
+    {
+      for (; (cast(GtkRecentFilterInfo*)this._cPtr).applications[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new string[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = (cast(GtkRecentFilterInfo*)this._cPtr).applications[i].fromCString;
+    return _retval;
+  }
+
+  /**
+      Get `groups` field.
+      Returns: The groups to which
+           the file belongs to.
+  */
+  @property string[] groups() nothrow
+  {
+    uint len;
+    if ((cast(GtkRecentFilterInfo*)this._cPtr).groups)
+    {
+      for (; (cast(GtkRecentFilterInfo*)this._cPtr).groups[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new string[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = (cast(GtkRecentFilterInfo*)this._cPtr).groups[i].fromCString;
+    return _retval;
+  }
+
+  /**
       Get `age` field.
       Returns: The number of days elapsed since the file has been
            registered.

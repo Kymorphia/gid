@@ -6,7 +6,9 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;
+import gio.socket_control_message;
 import gio.types;
+import gobject.object;
 
 /**
     Structure used for scatter/gather data output when sending multiple
@@ -106,21 +108,15 @@ class OutputMessage
   }
 
   /**
-      Get `numControlMessages` field.
-      Returns: number of elements in @control_messages.
+      Get `controlMessages` field.
+      Returns: a pointer
+          to an array of #GSocketControlMessages, or null.
   */
-  @property uint numControlMessages() nothrow
+  @property gio.socket_control_message.SocketControlMessage[] controlMessages() nothrow
   {
-    return (cast(GOutputMessage*)this._cPtr).numControlMessages;
-  }
-
-  /**
-      Set `numControlMessages` field.
-      Params:
-        propval = number of elements in @control_messages.
-  */
-  @property void numControlMessages(uint propval) nothrow
-  {
-    (cast(GOutputMessage*)this._cPtr).numControlMessages = propval;
+    auto _retval = new gio.socket_control_message.SocketControlMessage[]((cast(GOutputMessage*)this._cPtr).numControlMessages);
+    foreach (i; 0 .. (cast(GOutputMessage*)this._cPtr).numControlMessages)
+      _retval[i] = gobject.object.ObjectWrap._getDObject!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GOutputMessage*)this._cPtr).controlMessages[i], No.Take);
+    return _retval;
   }
 }

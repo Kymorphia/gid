@@ -79,22 +79,27 @@ class MetaContext : gobject.boxed.Boxed
   }
 
   /**
-      Get `size` field.
-      Returns: the size of the @column_names and @column_values arrays
+      Get `columnNames` field.
+      Returns: an array of column names (columns of the @table_name table)
   */
-  @property int size() nothrow
+  @property string[] columnNames() nothrow
   {
-    return (cast(GdaMetaContext*)this._cPtr).size;
+    auto _retval = new string[]((cast(GdaMetaContext*)this._cPtr).size);
+    foreach (i; 0 .. (cast(GdaMetaContext*)this._cPtr).size)
+      _retval[i] = (cast(GdaMetaContext*)this._cPtr).columnNames[i].fromCString;
+    return _retval;
   }
 
   /**
-      Set `size` field.
-      Params:
-        propval = the size of the @column_names and @column_values arrays
+      Get `columnValues` field.
+      Returns: an array of values, one for each column named in @column_names
   */
-  @property void size(int propval) nothrow
+  @property gobject.value.Value[] columnValues() nothrow
   {
-    (cast(GdaMetaContext*)this._cPtr).size = propval;
+    auto _retval = new gobject.value.Value[]((cast(GdaMetaContext*)this._cPtr).size);
+    foreach (i; 0 .. (cast(GdaMetaContext*)this._cPtr).size)
+      _retval[i] = new gobject.value.Value(cast(void*)(cast(GdaMetaContext*)this._cPtr).columnValues[i], No.Take);
+    return _retval;
   }
 
   /**

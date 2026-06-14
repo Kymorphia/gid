@@ -142,6 +142,47 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
+      Get `mimeTypes` field.
+      Returns: the MIME types for the image format
+  */
+  @property string[] mimeTypes() nothrow
+  {
+    uint len;
+    if ((cast(GdkPixbufFormat*)this._cPtr).mimeTypes)
+    {
+      for (; (cast(GdkPixbufFormat*)this._cPtr).mimeTypes[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new string[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = (cast(GdkPixbufFormat*)this._cPtr).mimeTypes[i].fromCString;
+    return _retval;
+  }
+
+  /**
+      Get `extensions` field.
+      Returns: typical filename extensions for the
+          image format
+  */
+  @property string[] extensions() nothrow
+  {
+    uint len;
+    if ((cast(GdkPixbufFormat*)this._cPtr).extensions)
+    {
+      for (; (cast(GdkPixbufFormat*)this._cPtr).extensions[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new string[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = (cast(GdkPixbufFormat*)this._cPtr).extensions[i].fromCString;
+    return _retval;
+  }
+
+  /**
       Get `flags` field.
       Returns: a combination of [gdkpixbuf.types.PixbufFormatFlags]
   */

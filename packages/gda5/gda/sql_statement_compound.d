@@ -38,4 +38,10 @@ class SqlStatementCompound
   {
     (cast(GdaSqlStatementCompound*)this._cPtr).compoundType = cast(GdaSqlStatementCompoundType)propval;
   }
+
+  /** */
+  @property void*[] stmtList() nothrow
+  {
+    return gSListToD!(void*)((cast(GdaSqlStatementCompound*)this._cPtr).stmtList);
+  }
 }

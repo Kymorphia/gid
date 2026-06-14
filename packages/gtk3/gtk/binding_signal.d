@@ -59,23 +59,4 @@ class BindingSignal
     cValueFree!(string)(cast(void*)(cast(GtkBindingSignal*)this._cPtr).signalName);
     dToC(propval, cast(void*)&(cast(GtkBindingSignal*)this._cPtr).signalName);
   }
-
-  /**
-      Get `nArgs` field.
-      Returns: number of arguments specified for the signal
-  */
-  @property uint nArgs() nothrow
-  {
-    return (cast(GtkBindingSignal*)this._cPtr).nArgs;
-  }
-
-  /**
-      Set `nArgs` field.
-      Params:
-        propval = number of arguments specified for the signal
-  */
-  @property void nArgs(uint propval) nothrow
-  {
-    (cast(GtkBindingSignal*)this._cPtr).nArgs = propval;
-  }
 }

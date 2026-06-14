@@ -48,6 +48,15 @@ class References : gobject.boxed.Boxed
   }
 
   /**
+      Get `array` field.
+      Returns: the array of message-id references
+  */
+  @property void*[] array() nothrow
+  {
+    return gPtrArrayToD!(void*)((cast(GMimeReferences*)this._cPtr).array);
+  }
+
+  /**
       Creates a new #GMimeReferences.
       Returns: a new #GMimeReferences.
   */

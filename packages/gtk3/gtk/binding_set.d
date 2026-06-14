@@ -77,6 +77,33 @@ class BindingSet
   }
 
   /**
+      Get `widgetPathPspecs` field.
+      Returns: unused
+  */
+  @property void*[] widgetPathPspecs() nothrow
+  {
+    return gSListToD!(void*)((cast(GtkBindingSet*)this._cPtr).widgetPathPspecs);
+  }
+
+  /**
+      Get `widgetClassPspecs` field.
+      Returns: unused
+  */
+  @property void*[] widgetClassPspecs() nothrow
+  {
+    return gSListToD!(void*)((cast(GtkBindingSet*)this._cPtr).widgetClassPspecs);
+  }
+
+  /**
+      Get `classBranchPspecs` field.
+      Returns: unused
+  */
+  @property void*[] classBranchPspecs() nothrow
+  {
+    return gSListToD!(void*)((cast(GtkBindingSet*)this._cPtr).classBranchPspecs);
+  }
+
+  /**
       Get `entries` field.
       Returns: the key binding entries in this binding set
   */
