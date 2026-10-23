@@ -121,10 +121,23 @@ class ObjectWrap
 
   ~this() nothrow
   { // D object is being garbage collected. Only happens when there is only the toggle reference on GObject and there are no more pointers to the D proxy object.
+    static extern(C) gboolean finalUnref(void* cObj)
+    { // Remove destructor reference
+      g_object_unref(cast(GObject*)cObj);
+      return SOURCE_REMOVE;
+    }
+
     if (_cInstancePtr) // Might be null if an exception occurred during construction
     {
       debug objectDebugLog("dtor");
-      g_object_remove_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this); // Remove the toggle reference, which will likely lead to the destruction of the GObject
+      g_object_set_qdata(_cInstancePtr, gidObjectQuark, null); // Clear C object -> D object data pointer
+
+      // Ensure final D code unref occurs in main context so C object cleanup happens there, since some libraries such as GTK require this.
+      // NOTE: If we aren't in the main context thread, then call to finalUnref() will be deferred to run in the C mainloop.
+      // That wont happen, if the mainloop has already stopped during shutdown, resulting in leaks (better than crashing).
+      g_object_ref(_cInstancePtr); // Turn toggle reference into a normal ref
+      g_object_remove_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this);
+      g_main_context_invoke(null, &finalUnref, cast(void*)_cInstancePtr);
     }
   }
 
@@ -402,11 +415,10 @@ class ObjectWrap
           if (auto ifaceInfo = obj.getIface)
             ifaceProxyClasses[ifaceInfo] = c;
         }
-        else if (c && gobjClass.isBaseOf(c))
+        else if (c && gobjClass.isBaseOf(c) && (c.m_flags & TypeInfo_Class.ClassFlags.isAbstract) == 0) // Don't register abstract classes
         { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
-          auto obj = _d_newclass(c);
-
-          if (auto gType = (cast(ObjectWrap)obj)._gType)
+          if (auto obj = cast(ObjectWrap)_d_newclass(c))
+            if (auto gType = obj._gType)
             gtypeClasses[gType] = c;
         }
       }
