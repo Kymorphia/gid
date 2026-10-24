@@ -25,7 +25,7 @@ class Euler : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_euler_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_euler_t(_getGType), Yes.Take);
   }
 
   /** */

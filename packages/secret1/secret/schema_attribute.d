@@ -22,7 +22,7 @@ class SchemaAttribute : gobject.boxed.Boxed
   */
   this(string name = string.init, secret.types.SchemaAttributeType type = secret.types.SchemaAttributeType.init) nothrow
   {
-    super(gMalloc(SecretSchemaAttribute.sizeof), Yes.Take);
+    super(boxedNew!SecretSchemaAttribute(_getGType), Yes.Take);
     this.name = name;
     this.type = type;
   }

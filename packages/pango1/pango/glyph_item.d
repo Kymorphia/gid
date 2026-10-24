@@ -36,7 +36,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   this(pango.item.Item item = pango.item.Item.init, pango.glyph_string.GlyphString glyphs = pango.glyph_string.GlyphString.init, int yOffset = int.init, int startXOffset = int.init, int endXOffset = int.init) nothrow
   {
-    super(gMalloc(PangoGlyphItem.sizeof), Yes.Take);
+    super(boxedNew!PangoGlyphItem(_getGType), Yes.Take);
     this.item = item;
     this.glyphs = glyphs;
     this.yOffset = yOffset;

@@ -24,7 +24,7 @@ class RTSPMessage : gobject.boxed.Boxed
   */
   this(gstrtsp.types.RTSPMsgType type = gstrtsp.types.RTSPMsgType.init) nothrow
   {
-    super(gMalloc(GstRTSPMessage.sizeof), Yes.Take);
+    super(boxedNew!GstRTSPMessage(_getGType), Yes.Take);
     this.type = type;
   }
 

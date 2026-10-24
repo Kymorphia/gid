@@ -36,7 +36,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   */
   this(gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, gst.types.MapFlags mapFlags = gst.types.MapFlags.init, int mapCount = int.init, int glMapCount = int.init) nothrow
   {
-    super(gMalloc(GstGLBaseMemory.sizeof), Yes.Take);
+    super(boxedNew!GstGLBaseMemory(_getGType), Yes.Take);
     this.context = context;
     this.mapFlags = mapFlags;
     this.mapCount = mapCount;

@@ -25,7 +25,7 @@ class TreeIter : gobject.boxed.Boxed
   */
   this(int stamp = int.init) nothrow
   {
-    super(gMalloc(GtkTreeIter.sizeof), Yes.Take);
+    super(boxedNew!GtkTreeIter(_getGType), Yes.Take);
     this.stamp = stamp;
   }
 

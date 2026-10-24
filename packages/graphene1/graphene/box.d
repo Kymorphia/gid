@@ -23,7 +23,7 @@ class Box : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_box_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_box_t(_getGType), Yes.Take);
   }
 
   /** */

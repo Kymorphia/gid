@@ -24,7 +24,7 @@ class DBusArgInfo : gobject.boxed.Boxed
   */
   this(int refCount = int.init, string name = string.init, string signature = string.init) nothrow
   {
-    super(gMalloc(GDBusArgInfo.sizeof), Yes.Take);
+    super(boxedNew!GDBusArgInfo(_getGType), Yes.Take);
     this.refCount = refCount;
     this.name = name;
     this.signature = signature;

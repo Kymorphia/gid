@@ -65,7 +65,7 @@ class Memory : gobject.boxed.Boxed
   */
   this(gst.allocator.Allocator allocator = gst.allocator.Allocator.init, gst.memory.Memory parent = gst.memory.Memory.init, size_t maxsize = size_t.init, size_t align_ = size_t.init, size_t offset = size_t.init, size_t size = size_t.init) nothrow
   {
-    super(gMalloc(GstMemory.sizeof), Yes.Take);
+    super(boxedNew!GstMemory(_getGType), Yes.Take);
     this.allocator = allocator;
     this.parent = parent;
     this.maxsize = maxsize;

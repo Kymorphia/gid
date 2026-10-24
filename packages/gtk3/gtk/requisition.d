@@ -53,7 +53,10 @@ struct Requisition
     _cretval = gtk_requisition_copy(cast(const(GtkRequisition)*)&this);
     gtk.requisition.Requisition _retval;
     if (_cretval)
+    {
       _retval = *cast(gtk.requisition.Requisition*)_cretval;
+      cValueFree!(gtk.requisition.Requisition)(_cretval);
+    }
     return _retval;
   }
 }

@@ -24,7 +24,7 @@ class TextRange : gobject.boxed.Boxed
   */
   this(atk.types.TextRectangle bounds = atk.types.TextRectangle.init, int startOffset = int.init, int endOffset = int.init, string content = string.init) nothrow
   {
-    super(gMalloc(AtkTextRange.sizeof), Yes.Take);
+    super(boxedNew!AtkTextRange(_getGType), Yes.Take);
     this.bounds = bounds;
     this.startOffset = startOffset;
     this.endOffset = endOffset;

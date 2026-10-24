@@ -63,7 +63,10 @@ struct Border
     _cretval = gtk_border_copy(cast(const(GtkBorder)*)&this);
     gtk.border.Border _retval;
     if (_cretval)
+    {
       _retval = *cast(gtk.border.Border*)_cretval;
+      cValueFree!(gtk.border.Border)(_cretval);
+    }
     return _retval;
   }
 }

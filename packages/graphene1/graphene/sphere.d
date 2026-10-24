@@ -22,7 +22,7 @@ class Sphere : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_sphere_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_sphere_t(_getGType), Yes.Take);
   }
 
   /** */

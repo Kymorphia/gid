@@ -24,7 +24,7 @@ class Vec3 : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_vec3_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_vec3_t(_getGType), Yes.Take);
   }
 
   /** */

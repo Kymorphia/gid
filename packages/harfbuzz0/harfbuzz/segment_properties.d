@@ -24,7 +24,7 @@ class SegmentProperties : gobject.boxed.Boxed
   */
   this(harfbuzz.types.Direction direction = harfbuzz.types.Direction.init, harfbuzz.types.Script script = harfbuzz.types.Script.init) nothrow
   {
-    super(gMalloc(hb_segment_properties_t.sizeof), Yes.Take);
+    super(boxedNew!hb_segment_properties_t(_getGType), Yes.Take);
     this.direction = direction;
     this.script = script;
   }

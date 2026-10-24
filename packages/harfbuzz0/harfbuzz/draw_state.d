@@ -25,7 +25,7 @@ class DrawState : gobject.boxed.Boxed
   */
   this(harfbuzz.types.Bool pathOpen = harfbuzz.types.Bool.init, float pathStartX = 0.0, float pathStartY = 0.0, float currentX = 0.0, float currentY = 0.0) nothrow
   {
-    super(gMalloc(hb_draw_state_t.sizeof), Yes.Take);
+    super(boxedNew!hb_draw_state_t(_getGType), Yes.Take);
     this.pathOpen = pathOpen;
     this.pathStartX = pathStartX;
     this.pathStartY = pathStartY;

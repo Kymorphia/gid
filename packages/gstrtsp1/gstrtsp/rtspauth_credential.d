@@ -22,7 +22,7 @@ class RTSPAuthCredential : gobject.boxed.Boxed
   */
   this(gstrtsp.types.RTSPAuthMethod scheme = gstrtsp.types.RTSPAuthMethod.init, string authorization = string.init) nothrow
   {
-    super(gMalloc(GstRTSPAuthCredential.sizeof), Yes.Take);
+    super(boxedNew!GstRTSPAuthCredential(_getGType), Yes.Take);
     this.scheme = scheme;
     this.authorization = authorization;
   }

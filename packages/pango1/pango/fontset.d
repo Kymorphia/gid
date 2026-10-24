@@ -115,7 +115,10 @@ class Fontset : gobject.object.ObjectWrap
     _cretval = pango_fontset_get_metrics(cast(PangoFontset*)this._cPtr);
     pango.font_metrics.FontMetrics _retval;
     if (_cretval)
+    {
       _retval = *cast(pango.font_metrics.FontMetrics*)_cretval;
+      cValueFree!(pango.font_metrics.FontMetrics)(_cretval);
+    }
     return _retval;
   }
 }

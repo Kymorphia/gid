@@ -129,7 +129,10 @@ struct DsdInfo
     _cretval = gst_dsd_info_copy(cast(const(GstDsdInfo)*)&this);
     gstaudio.dsd_info.DsdInfo _retval;
     if (_cretval)
+    {
       _retval = *cast(gstaudio.dsd_info.DsdInfo*)_cretval;
+      cValueFree!(gstaudio.dsd_info.DsdInfo)(_cretval);
+    }
     return _retval;
   }
 

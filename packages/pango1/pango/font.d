@@ -262,7 +262,10 @@ class Font : gobject.object.ObjectWrap
     _cretval = pango_font_get_metrics(cast(PangoFont*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
     pango.font_metrics.FontMetrics _retval;
     if (_cretval)
+    {
       _retval = *cast(pango.font_metrics.FontMetrics*)_cretval;
+      cValueFree!(pango.font_metrics.FontMetrics)(_cretval);
+    }
     return _retval;
   }
 

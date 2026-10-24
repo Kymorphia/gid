@@ -64,7 +64,10 @@ struct AllocationParams
     _cretval = gst_allocation_params_copy(cast(const(GstAllocationParams)*)&this);
     gst.allocation_params.AllocationParams _retval;
     if (_cretval)
+    {
       _retval = *cast(gst.allocation_params.AllocationParams*)_cretval;
+      cValueFree!(gst.allocation_params.AllocationParams)(_cretval);
+    }
     return _retval;
   }
 

@@ -225,7 +225,10 @@ struct Segment
     _cretval = gst_segment_copy(cast(const(GstSegment)*)&this);
     gst.segment.Segment _retval;
     if (_cretval)
+    {
       _retval = *cast(gst.segment.Segment*)_cretval;
+      cValueFree!(gst.segment.Segment)(_cretval);
+    }
     return _retval;
   }
 

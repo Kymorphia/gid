@@ -17,7 +17,7 @@ class Binary : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GdaBinary.sizeof), Yes.Take);
+    super(boxedNew!GdaBinary(_getGType), Yes.Take);
   }
 
   /** */

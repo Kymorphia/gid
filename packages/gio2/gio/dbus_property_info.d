@@ -25,7 +25,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   this(int refCount = int.init, string name = string.init, string signature = string.init, gio.types.DBusPropertyInfoFlags flags = gio.types.DBusPropertyInfoFlags.init) nothrow
   {
-    super(gMalloc(GDBusPropertyInfo.sizeof), Yes.Take);
+    super(boxedNew!GDBusPropertyInfo(_getGType), Yes.Take);
     this.refCount = refCount;
     this.name = name;
     this.signature = signature;

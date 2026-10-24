@@ -25,7 +25,7 @@ class EGLImage : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GstEGLImage.sizeof), Yes.Take);
+    super(boxedNew!GstEGLImage(_getGType), Yes.Take);
   }
 
   /** */

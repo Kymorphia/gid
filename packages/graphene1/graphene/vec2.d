@@ -22,7 +22,7 @@ class Vec2 : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_vec2_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_vec2_t(_getGType), Yes.Take);
   }
 
   /** */

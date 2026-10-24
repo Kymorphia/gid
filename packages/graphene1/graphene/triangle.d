@@ -24,7 +24,7 @@ class Triangle : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_triangle_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_triangle_t(_getGType), Yes.Take);
   }
 
   /** */

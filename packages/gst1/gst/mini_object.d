@@ -54,7 +54,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   this(gobject.types.GType type = gobject.types.GType.init, int refcount = int.init, int lockstate = int.init, uint flags = uint.init, GstMiniObjectCopyFunction copy = GstMiniObjectCopyFunction.init, GstMiniObjectDisposeFunction dispose = GstMiniObjectDisposeFunction.init, GstMiniObjectFreeFunction free = GstMiniObjectFreeFunction.init) nothrow
   {
-    super(gMalloc(GstMiniObject.sizeof), Yes.Take);
+    super(boxedNew!GstMiniObject(_getGType), Yes.Take);
     this.type = type;
     this.refcount = refcount;
     this.lockstate = lockstate;

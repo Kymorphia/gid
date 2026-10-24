@@ -845,7 +845,7 @@ if (containerTypeIsSupported!T)
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
     gobject.object.ObjectWrap._unref(data);
   else static if (isBoxed!T)
-    boxedFree!T(data);
+    boxedFree(T._getGType, data);
   else static if (__traits(compiles, T._unref(data))) // Reffed types
     T._unref(data);
   else static if (is(T : string) || isTypeSimple!T)
@@ -865,27 +865,45 @@ bool isBoxed(T)() nothrow
 }
 
 /**
+* Allocate a new C boxed type.
+* Params:
+*   CT = The transparent C struct type
+*   type = Boxed GType
+* Returns: New allocated pointer to the C boxed value
+*/
+static void* boxedNew(CT)(GType type) nothrow
+{
+  CT tmp;
+  auto newBoxed = g_boxed_copy(type, cast(void*)&tmp); // Use g_boxed_copy() in case malloc is not used (such as g_slice)
+
+  if (!newBoxed || newBoxed is &tmp) // A reference counted boxed type will return a pointer to tmp, malloc in that case
+    newBoxed = gMalloc(CT.sizeof);
+
+  return newBoxed;
+}
+
+/**
 * Copy a C boxed value using g_boxed_copy.
 * Params:
-*   T = The D boxed type
+*   type = The boxed type
 *   cBoxed = The C boxed pointer
-* Returns: A copy of the boxed type
+* Returns: A copy of the boxed type (returns null if cBoxed is null)
 */
-static void* boxedCopy(T)(void* cBoxed) nothrow
+static void* boxedCopy(GType type, void* cBoxed) nothrow
 {
-  return cBoxed ? g_boxed_copy(T._getGType, cBoxed) : null;
+  return cBoxed ? g_boxed_copy(type, cBoxed) : null;
 }
 
 /**
 * Free a C boxed value using g_boxed_free.
 * Params:
-*   T = The D boxed type
-*   cBoxed = The C boxed pointer
+*   type = The boxed type
+*   cBoxed = The C boxed pointer (nothing is done if NULL)
 */
-static void boxedFree(T)(void* cBoxed) nothrow
+static void boxedFree(GType type, void* cBoxed) nothrow
 {
   if (cBoxed)
-    g_boxed_free(T._getGType, cBoxed);
+    g_boxed_free(type, cBoxed);
 }
 
 // User-replaceable callback exception handler

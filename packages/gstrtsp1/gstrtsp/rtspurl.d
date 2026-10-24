@@ -28,7 +28,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   this(gstrtsp.types.RTSPLowerTrans transports = gstrtsp.types.RTSPLowerTrans.init, gstrtsp.types.RTSPFamily family = gstrtsp.types.RTSPFamily.init, string user = string.init, string passwd = string.init, string host = string.init, ushort port = ushort.init, string abspath = string.init, string query = string.init) nothrow
   {
-    super(gMalloc(GstRTSPUrl.sizeof), Yes.Take);
+    super(boxedNew!GstRTSPUrl(_getGType), Yes.Take);
     this.transports = transports;
     this.family = family;
     this.user = user;

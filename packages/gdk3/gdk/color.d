@@ -71,7 +71,10 @@ struct Color
     _cretval = gdk_color_copy(cast(const(GdkColor)*)&this);
     gdk.color.Color _retval;
     if (_cretval)
+    {
       _retval = *cast(gdk.color.Color*)_cretval;
+      cValueFree!(gdk.color.Color)(_cretval);
+    }
     return _retval;
   }
 

@@ -27,7 +27,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, GDestroyNotify notify = GDestroyNotify.init) nothrow
   {
-    super(gMalloc(GstGLAllocationParams.sizeof), Yes.Take);
+    super(boxedNew!GstGLAllocationParams(_getGType), Yes.Take);
     this.structSize = structSize;
     this.free = free;
     this.allocFlags = allocFlags;

@@ -56,7 +56,10 @@ struct NetTimePacket
     _cretval = gst_net_time_packet_copy(cast(const(GstNetTimePacket)*)&this);
     gstnet.net_time_packet.NetTimePacket _retval;
     if (_cretval)
+    {
       _retval = *cast(gstnet.net_time_packet.NetTimePacket*)_cretval;
+      cValueFree!(gstnet.net_time_packet.NetTimePacket)(_cretval);
+    }
     return _retval;
   }
 
@@ -125,7 +128,10 @@ struct NetTimePacket
       throw new ErrorWrap(_err, Yes.Take);
     gstnet.net_time_packet.NetTimePacket _retval;
     if (_cretval)
+    {
       _retval = *cast(gstnet.net_time_packet.NetTimePacket*)_cretval;
+      cValueFree!(gstnet.net_time_packet.NetTimePacket)(_cretval);
+    }
     srcAddress = new gio.socket_address.SocketAddress(cast(void*)_srcAddress, Yes.Take);
     return _retval;
   }

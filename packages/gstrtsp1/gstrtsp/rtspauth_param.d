@@ -22,7 +22,7 @@ class RTSPAuthParam : gobject.boxed.Boxed
   */
   this(string name = string.init, string value = string.init) nothrow
   {
-    super(gMalloc(GstRTSPAuthParam.sizeof), Yes.Take);
+    super(boxedNew!GstRTSPAuthParam(_getGType), Yes.Take);
     this.name = name;
     this.value = value;
   }

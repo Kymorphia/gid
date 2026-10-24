@@ -164,7 +164,10 @@ cairo.glyph.Glyph glyphAllocate(int numGlyphs) nothrow
   _cretval = cairo_glyph_allocate(numGlyphs);
   cairo.glyph.Glyph _retval;
   if (_cretval)
+  {
     _retval = *cast(cairo.glyph.Glyph*)_cretval;
+    cValueFree!(cairo.glyph.Glyph)(_cretval);
+  }
   return _retval;
 }
 
@@ -2205,7 +2208,10 @@ cairo.text_cluster.TextCluster textClusterAllocate(int numClusters) nothrow
   _cretval = cairo_text_cluster_allocate(numClusters);
   cairo.text_cluster.TextCluster _retval;
   if (_cretval)
+  {
     _retval = *cast(cairo.text_cluster.TextCluster*)_cretval;
+    cValueFree!(cairo.text_cluster.TextCluster)(_cretval);
+  }
   return _retval;
 }
 

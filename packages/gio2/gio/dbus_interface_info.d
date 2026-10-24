@@ -27,7 +27,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   this(int refCount = int.init, string name = string.init) nothrow
   {
-    super(gMalloc(GDBusInterfaceInfo.sizeof), Yes.Take);
+    super(boxedNew!GDBusInterfaceInfo(_getGType), Yes.Take);
     this.refCount = refCount;
     this.name = name;
   }

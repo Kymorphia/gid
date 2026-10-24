@@ -25,7 +25,7 @@ class ControlPoint : gobject.boxed.Boxed
   */
   this(gst.types.ClockTime timestamp = gst.types.ClockTime.init, double value = 0.0) nothrow
   {
-    super(gMalloc(GstControlPoint.sizeof), Yes.Take);
+    super(boxedNew!GstControlPoint(_getGType), Yes.Take);
     this.timestamp = timestamp;
     this.value = value;
   }

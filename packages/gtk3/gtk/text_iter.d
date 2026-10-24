@@ -30,7 +30,7 @@ class TextIter : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GtkTextIter.sizeof), Yes.Take);
+    super(boxedNew!GtkTextIter(_getGType), Yes.Take);
   }
 
   /** */

@@ -92,7 +92,10 @@ struct Matrix
     _cretval = pango_matrix_copy(cast(const(PangoMatrix)*)&this);
     pango.matrix.Matrix _retval;
     if (_cretval)
+    {
       _retval = *cast(pango.matrix.Matrix*)_cretval;
+      cValueFree!(pango.matrix.Matrix)(_cretval);
+    }
     return _retval;
   }
 

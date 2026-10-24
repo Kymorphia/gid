@@ -38,7 +38,7 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   this(gst.caps.Caps caps = gst.caps.Caps.init, gst.buffer.Buffer codecData = gst.buffer.Buffer.init, gst.caps.Caps allocationCaps = gst.caps.Caps.init) nothrow
   {
-    super(gMalloc(GstVideoCodecState.sizeof), Yes.Take);
+    super(boxedNew!GstVideoCodecState(_getGType), Yes.Take);
     this.caps = caps;
     this.codecData = codecData;
     this.allocationCaps = allocationCaps;

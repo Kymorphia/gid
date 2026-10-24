@@ -52,7 +52,7 @@ class Message : gobject.boxed.Boxed
   */
   this(gst.types.MessageType type = gst.types.MessageType.init, ulong timestamp = ulong.init, gst.object.ObjectWrap src = gst.object.ObjectWrap.init, uint seqnum = uint.init) nothrow
   {
-    super(gMalloc(GstMessage.sizeof), Yes.Take);
+    super(boxedNew!GstMessage(_getGType), Yes.Take);
     this.type = type;
     this.timestamp = timestamp;
     this.src = src;

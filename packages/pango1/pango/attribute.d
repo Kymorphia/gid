@@ -39,7 +39,7 @@ class Attribute : gobject.boxed.Boxed
   */
   this(uint startIndex = uint.init, uint endIndex = uint.init) nothrow
   {
-    super(gMalloc(PangoAttribute.sizeof), Yes.Take);
+    super(boxedNew!PangoAttribute(_getGType), Yes.Take);
     this.startIndex = startIndex;
     this.endIndex = endIndex;
   }

@@ -26,7 +26,7 @@ class Plane : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_plane_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_plane_t(_getGType), Yes.Take);
   }
 
   /** */

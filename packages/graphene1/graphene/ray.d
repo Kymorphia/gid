@@ -28,7 +28,7 @@ class Ray : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_ray_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_ray_t(_getGType), Yes.Take);
   }
 
   /** */

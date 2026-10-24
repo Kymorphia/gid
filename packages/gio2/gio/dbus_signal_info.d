@@ -24,7 +24,7 @@ class DBusSignalInfo : gobject.boxed.Boxed
   */
   this(int refCount = int.init, string name = string.init) nothrow
   {
-    super(gMalloc(GDBusSignalInfo.sizeof), Yes.Take);
+    super(boxedNew!GDBusSignalInfo(_getGType), Yes.Take);
     this.refCount = refCount;
     this.name = name;
   }

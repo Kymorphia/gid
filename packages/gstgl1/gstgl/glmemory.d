@@ -48,7 +48,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   this(uint texId = uint.init, gstgl.types.GLTextureTarget texTarget = gstgl.types.GLTextureTarget.init, gstgl.types.GLFormat texFormat = gstgl.types.GLFormat.init, gstvideo.video_alignment.VideoAlignment valign = gstvideo.video_alignment.VideoAlignment.init, uint plane = uint.init, bool textureWrapped = bool.init, uint unpackLength = uint.init, uint texWidth = uint.init) nothrow
   {
-    super(gMalloc(GstGLMemory.sizeof), Yes.Take);
+    super(boxedNew!GstGLMemory(_getGType), Yes.Take);
     this.texId = texId;
     this.texTarget = texTarget;
     this.texFormat = texFormat;

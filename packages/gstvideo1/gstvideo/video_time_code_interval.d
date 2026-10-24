@@ -67,7 +67,10 @@ struct VideoTimeCodeInterval
     _cretval = gst_video_time_code_interval_copy(cast(const(GstVideoTimeCodeInterval)*)&this);
     gstvideo.video_time_code_interval.VideoTimeCodeInterval _retval;
     if (_cretval)
+    {
       _retval = *cast(gstvideo.video_time_code_interval.VideoTimeCodeInterval*)_cretval;
+      cValueFree!(gstvideo.video_time_code_interval.VideoTimeCodeInterval)(_cretval);
+    }
     return _retval;
   }
 

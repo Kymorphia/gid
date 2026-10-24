@@ -27,7 +27,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   this(uint id = uint.init, uint target = uint.init, uint usageHints = uint.init) nothrow
   {
-    super(gMalloc(GstGLBuffer.sizeof), Yes.Take);
+    super(boxedNew!GstGLBuffer(_getGType), Yes.Take);
     this.id = id;
     this.target = target;
     this.usageHints = usageHints;

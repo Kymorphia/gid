@@ -29,7 +29,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   this(uint renderbufferId = uint.init, gstgl.types.GLFormat renderbufferFormat = gstgl.types.GLFormat.init, uint width = uint.init, uint height = uint.init, bool renderbufferWrapped = bool.init) nothrow
   {
-    super(gMalloc(GstGLRenderbuffer.sizeof), Yes.Take);
+    super(boxedNew!GstGLRenderbuffer(_getGType), Yes.Take);
     this.renderbufferId = renderbufferId;
     this.renderbufferFormat = renderbufferFormat;
     this.width = width;

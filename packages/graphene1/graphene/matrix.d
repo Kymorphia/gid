@@ -33,7 +33,7 @@ class Matrix : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_matrix_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_matrix_t(_getGType), Yes.Take);
   }
 
   /** */

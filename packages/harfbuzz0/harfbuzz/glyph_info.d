@@ -34,7 +34,7 @@ class GlyphInfo : gobject.boxed.Boxed
   */
   this(harfbuzz.types.Codepoint codepoint = harfbuzz.types.Codepoint.init, uint cluster = uint.init) nothrow
   {
-    super(gMalloc(hb_glyph_info_t.sizeof), Yes.Take);
+    super(boxedNew!hb_glyph_info_t(_getGType), Yes.Take);
     this.codepoint = codepoint;
     this.cluster = cluster;
   }

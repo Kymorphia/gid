@@ -69,7 +69,7 @@ class Closure : gobject.boxed.Boxed
   */
   this(uint inMarshal = uint.init, uint isInvalid = uint.init) nothrow
   {
-    super(gMalloc(GClosure.sizeof), Yes.Take);
+    super(boxedNew!GClosure(_getGType), Yes.Take);
     this.inMarshal = inMarshal;
     this.isInvalid = isInvalid;
   }

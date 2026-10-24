@@ -68,7 +68,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   */
   this(pango.glyph_item.GlyphItem glyphItem = pango.glyph_item.GlyphItem.init, string text = string.init, int startGlyph = int.init, int startIndex = int.init, int startChar = int.init, int endGlyph = int.init, int endIndex = int.init, int endChar = int.init) nothrow
   {
-    super(gMalloc(PangoGlyphItemIter.sizeof), Yes.Take);
+    super(boxedNew!PangoGlyphItemIter(_getGType), Yes.Take);
     this.glyphItem = glyphItem;
     this.text = text;
     this.startGlyph = startGlyph;

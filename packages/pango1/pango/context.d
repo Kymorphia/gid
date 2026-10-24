@@ -248,7 +248,10 @@ class Context : gobject.object.ObjectWrap
     _cretval = pango_context_get_metrics(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
     pango.font_metrics.FontMetrics _retval;
     if (_cretval)
+    {
       _retval = *cast(pango.font_metrics.FontMetrics*)_cretval;
+      cValueFree!(pango.font_metrics.FontMetrics)(_cretval);
+    }
     return _retval;
   }
 

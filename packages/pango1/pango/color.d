@@ -63,7 +63,10 @@ struct Color
     _cretval = pango_color_copy(cast(const(PangoColor)*)&this);
     pango.color.Color _retval;
     if (_cretval)
+    {
       _retval = *cast(pango.color.Color*)_cretval;
+      cValueFree!(pango.color.Color)(_cretval);
+    }
     return _retval;
   }
 

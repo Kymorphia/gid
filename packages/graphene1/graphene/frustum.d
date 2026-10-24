@@ -27,7 +27,7 @@ class Frustum : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_frustum_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_frustum_t(_getGType), Yes.Take);
   }
 
   /** */

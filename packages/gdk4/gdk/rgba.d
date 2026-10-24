@@ -72,7 +72,10 @@ struct RGBA
     _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)&this);
     gdk.rgba.RGBA _retval;
     if (_cretval)
+    {
       _retval = *cast(gdk.rgba.RGBA*)_cretval;
+      cValueFree!(gdk.rgba.RGBA)(_cretval);
+    }
     return _retval;
   }
 

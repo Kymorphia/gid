@@ -22,7 +22,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GstGLMemoryPBO.sizeof), Yes.Take);
+    super(boxedNew!GstGLMemoryPBO(_getGType), Yes.Take);
   }
 
   /** */

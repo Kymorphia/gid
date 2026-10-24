@@ -44,7 +44,7 @@ class Value : Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GValue.sizeof), Yes.Take);
+    super(boxedNew!GValue(_getGType), Yes.Take);
   }
 
   /** */

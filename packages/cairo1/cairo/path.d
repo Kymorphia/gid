@@ -34,7 +34,7 @@ class Path : gobject.boxed.Boxed
   */
   this(cairo.types.Status status = cairo.types.Status.init, int numData = int.init) nothrow
   {
-    super(gMalloc(cairo_path_t.sizeof), Yes.Take);
+    super(boxedNew!cairo_path_t(_getGType), Yes.Take);
     this.status = status;
     this.numData = numData;
   }

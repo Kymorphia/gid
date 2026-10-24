@@ -24,7 +24,7 @@ class Quad : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(graphene_quad_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_quad_t(_getGType), Yes.Take);
   }
 
   /** */

@@ -32,7 +32,7 @@ class PixbufFormat : gobject.boxed.Boxed
   */
   this(string name = string.init, string domain = string.init, string description = string.init, uint flags = uint.init, bool disabled = bool.init, string license = string.init) nothrow
   {
-    super(gMalloc(GdkPixbufFormat.sizeof), Yes.Take);
+    super(boxedNew!GdkPixbufFormat(_getGType), Yes.Take);
     this.name = name;
     this.domain = domain;
     this.description = description;

@@ -74,7 +74,7 @@ class Event : gobject.boxed.Boxed
   */
   this(gst.types.EventType type = gst.types.EventType.init, ulong timestamp = ulong.init, uint seqnum = uint.init) nothrow
   {
-    super(gMalloc(GstEvent.sizeof), Yes.Take);
+    super(boxedNew!GstEvent(_getGType), Yes.Take);
     this.type = type;
     this.timestamp = timestamp;
     this.seqnum = seqnum;

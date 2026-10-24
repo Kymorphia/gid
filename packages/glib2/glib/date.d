@@ -240,7 +240,10 @@ struct Date
     _cretval = g_date_copy(cast(const(GDate)*)&this);
     glib.date.Date _retval;
     if (_cretval)
+    {
       _retval = *cast(glib.date.Date*)_cretval;
+      cValueFree!(glib.date.Date)(_cretval);
+    }
     return _retval;
   }
 

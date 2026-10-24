@@ -36,7 +36,7 @@ class Rect : gobject.boxed.Boxed
   */
   this(graphene.point.Point origin = graphene.point.Point.init, graphene.size.Size size = graphene.size.Size.init) nothrow
   {
-    super(gMalloc(graphene_rect_t.sizeof), Yes.Take);
+    super(boxedNew!graphene_rect_t(_getGType), Yes.Take);
     this.origin = origin;
     this.size = size;
   }

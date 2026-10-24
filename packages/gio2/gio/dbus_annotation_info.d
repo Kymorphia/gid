@@ -23,7 +23,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   */
   this(int refCount = int.init, string key = string.init, string value = string.init) nothrow
   {
-    super(gMalloc(GDBusAnnotationInfo.sizeof), Yes.Take);
+    super(boxedNew!GDBusAnnotationInfo(_getGType), Yes.Take);
     this.refCount = refCount;
     this.key = key;
     this.value = value;

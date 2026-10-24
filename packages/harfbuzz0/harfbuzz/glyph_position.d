@@ -30,7 +30,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   this(harfbuzz.types.Position xAdvance = harfbuzz.types.Position.init, harfbuzz.types.Position yAdvance = harfbuzz.types.Position.init, harfbuzz.types.Position xOffset = harfbuzz.types.Position.init, harfbuzz.types.Position yOffset = harfbuzz.types.Position.init) nothrow
   {
-    super(gMalloc(hb_glyph_position_t.sizeof), Yes.Take);
+    super(boxedNew!hb_glyph_position_t(_getGType), Yes.Take);
     this.xAdvance = xAdvance;
     this.yAdvance = yAdvance;
     this.xOffset = xOffset;

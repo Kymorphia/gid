@@ -31,7 +31,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   this(pango.layout.Layout layout = pango.layout.Layout.init, int startIndex = int.init, int length = int.init, uint isParagraphStart = uint.init, uint resolvedDir = uint.init) nothrow
   {
-    super(gMalloc(PangoLayoutLine.sizeof), Yes.Take);
+    super(boxedNew!PangoLayoutLine(_getGType), Yes.Take);
     this.layout = layout;
     this.startIndex = startIndex;
     this.length = length;

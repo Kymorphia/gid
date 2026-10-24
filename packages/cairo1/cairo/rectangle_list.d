@@ -23,7 +23,7 @@ class RectangleList : gobject.boxed.Boxed
   */
   this(cairo.types.Status status = cairo.types.Status.init, int numRectangles = int.init) nothrow
   {
-    super(gMalloc(cairo_rectangle_list_t.sizeof), Yes.Take);
+    super(boxedNew!cairo_rectangle_list_t(_getGType), Yes.Take);
     this.status = status;
     this.numRectangles = numRectangles;
   }

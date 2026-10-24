@@ -51,7 +51,7 @@ class Query : gobject.boxed.Boxed
   */
   this(gst.types.QueryType type = gst.types.QueryType.init) nothrow
   {
-    super(gMalloc(GstQuery.sizeof), Yes.Take);
+    super(boxedNew!GstQuery(_getGType), Yes.Take);
     this.type = type;
   }
 

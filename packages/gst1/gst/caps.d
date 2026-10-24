@@ -57,7 +57,7 @@ class Caps : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GstCaps.sizeof), Yes.Take);
+    super(boxedNew!GstCaps(_getGType), Yes.Take);
   }
 
   /** */

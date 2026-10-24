@@ -26,7 +26,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
   */
   this(int refCount = int.init, string path = string.init) nothrow
   {
-    super(gMalloc(GDBusNodeInfo.sizeof), Yes.Take);
+    super(boxedNew!GDBusNodeInfo(_getGType), Yes.Take);
     this.refCount = refCount;
     this.path = path;
   }

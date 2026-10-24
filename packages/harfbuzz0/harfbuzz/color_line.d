@@ -22,7 +22,7 @@ class ColorLine : gobject.boxed.Boxed
   */
   this(hb_color_line_get_color_stops_func_t getColorStops = hb_color_line_get_color_stops_func_t.init, hb_color_line_get_extend_func_t getExtend = hb_color_line_get_extend_func_t.init) nothrow
   {
-    super(gMalloc(hb_color_line_t.sizeof), Yes.Take);
+    super(boxedNew!hb_color_line_t(_getGType), Yes.Take);
     this.getColorStops = getColorStops;
     this.getExtend = getExtend;
   }

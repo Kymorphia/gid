@@ -42,7 +42,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   this(uint systemFrameNumber = uint.init, gst.types.ClockTime dts = gst.types.ClockTime.init, gst.types.ClockTime pts = gst.types.ClockTime.init, gst.types.ClockTime duration = gst.types.ClockTime.init, int distanceFromSync = int.init, gst.buffer.Buffer inputBuffer = gst.buffer.Buffer.init, gst.buffer.Buffer outputBuffer = gst.buffer.Buffer.init, gst.types.ClockTime deadline = gst.types.ClockTime.init) nothrow
   {
-    super(gMalloc(GstVideoCodecFrame.sizeof), Yes.Take);
+    super(boxedNew!GstVideoCodecFrame(_getGType), Yes.Take);
     this.systemFrameNumber = systemFrameNumber;
     this.dts = dts;
     this.pts = pts;

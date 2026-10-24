@@ -25,7 +25,7 @@ class BitsetIter : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GtkBitsetIter.sizeof), Yes.Take);
+    super(boxedNew!GtkBitsetIter(_getGType), Yes.Take);
   }
 
   /** */

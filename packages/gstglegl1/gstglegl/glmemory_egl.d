@@ -20,7 +20,7 @@ class GLMemoryEGL : gobject.boxed.Boxed
   */
   this() nothrow
   {
-    super(gMalloc(GstGLMemoryEGL.sizeof), Yes.Take);
+    super(boxedNew!GstGLMemoryEGL(_getGType), Yes.Take);
   }
 
   /** */

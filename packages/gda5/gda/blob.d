@@ -25,7 +25,7 @@ class Blob : gobject.boxed.Boxed
   */
   this(gda.blob_op.BlobOp op = gda.blob_op.BlobOp.init) nothrow
   {
-    super(gMalloc(GdaBlob.sizeof), Yes.Take);
+    super(boxedNew!GdaBlob(_getGType), Yes.Take);
     this.op = op;
   }
 

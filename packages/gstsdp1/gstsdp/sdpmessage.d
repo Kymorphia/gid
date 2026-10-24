@@ -35,7 +35,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   this(string version_ = string.init, string sessionName = string.init, string information = string.init, string uri = string.init) nothrow
   {
-    super(gMalloc(GstSDPMessage.sizeof), Yes.Take);
+    super(boxedNew!GstSDPMessage(_getGType), Yes.Take);
     this.version_ = version_;
     this.sessionName = sessionName;
     this.information = information;
