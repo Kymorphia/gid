@@ -59,7 +59,6 @@ void*[] gidResolveLibs(immutable(string[]) libs) nothrow
       }
 
       libHandles ~= handle;
-      break;
     }
     else
     {
