@@ -134,7 +134,7 @@ class ObjectWrap
 
       // Ensure final D code unref occurs in main context so C object cleanup happens there, since some libraries such as GTK require this.
       // NOTE: If we aren't in the main context thread, then call to finalUnref() will be deferred to run in the C mainloop.
-      // That wont happen, if the mainloop has already stopped during shutdown, resulting in leaks (better than crashing).
+      // That won't happen, if the mainloop has already stopped during shutdown, resulting in leaks (better than crashing).
       g_object_ref(_cInstancePtr); // Turn toggle reference into a normal ref
       g_object_remove_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this);
       g_main_context_invoke(null, &finalUnref, cast(void*)_cInstancePtr);

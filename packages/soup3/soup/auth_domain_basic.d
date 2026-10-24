@@ -55,25 +55,6 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   }
 
   /**
-      Get `authCallback` property.
-      Returns: The [soup.types.AuthDomainBasicAuthCallback].
-  */
-  @property soup.types.AuthDomainBasicAuthCallback authCallback() nothrow
-  {
-    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainBasicAuthCallback)("auth-callback");
-  }
-
-  /**
-      Set `authCallback` property.
-      Params:
-        propval = The [soup.types.AuthDomainBasicAuthCallback].
-  */
-  @property void authCallback(soup.types.AuthDomainBasicAuthCallback propval) nothrow
-  {
-    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainBasicAuthCallback)("auth-callback", propval);
-  }
-
-  /**
       Get `authData` property.
       Returns: The data to pass to the [soup.types.AuthDomainBasicAuthCallback].
   */
@@ -139,17 +120,6 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
 /// Fluent builder implementation template for [soup.auth_domain_basic.AuthDomainBasic]
 class AuthDomainBasicGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderImpl!T
 {
-
-  /**
-      Set `authCallback` property.
-      Params:
-        propval = The [soup.types.AuthDomainBasicAuthCallback].
-      Returns: Builder instance for fluent chaining
-  */
-  T authCallback(soup.types.AuthDomainBasicAuthCallback propval) nothrow
-  {
-    return setProperty("auth-callback", propval);
-  }
 
   /**
       Set `authData` property.

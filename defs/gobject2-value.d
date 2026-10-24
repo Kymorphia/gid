@@ -80,7 +80,7 @@ void initVal(T)(GValue* gval) nothrow
 {
   static if (is(T == bool))
     g_value_init(gval, GTypeEnum.Boolean);
-  else static if (is(T == byte))
+  else static if (is(T == byte) || is(T == char))
     g_value_init(gval, GTypeEnum.Char);
   else static if (is(T == ubyte))
     g_value_init(gval, GTypeEnum.Uchar);
@@ -114,7 +114,7 @@ void initVal(T)(GValue* gval) nothrow
   else static if (is(T : Object) || isPointer!T)
     g_value_init(gval, GTypeEnum.Pointer);
   else
-    assert(0, "Unsupported type " ~ T.stringof ~ " in Value.initVal");
+    static assert(0, "Unsupported type " ~ T.stringof ~ " in Value.initVal");
 }
 
 /**
@@ -128,7 +128,7 @@ T getVal(T)(const(GValue)* gval) nothrow
 {
   static if (is(T == bool))
     return cast(bool)g_value_get_boolean(gval);
-  else static if (is(T == byte))
+  else static if (is(T == byte) || is(T == char))
     return g_value_get_schar(gval);
   else static if (is(T == ubyte))
     return g_value_get_uchar(gval);
@@ -190,10 +190,15 @@ T getVal(T)(const(GValue)* gval) nothrow
     auto v = g_value_get_object(gval);
     return gobject.object.ObjectWrap._getDObject!T(v, No.Take);
   }
-  else static if (is(T : Object) || isPointer!T)
+  else static if (is(T == class) && __traits(compiles, new T(cast(void*)null, No.Take)))
+  {
+    auto v = g_type_check_value_holds(gval, GTypeEnum.Boxed) ? g_value_get_boxed(gval) : g_value_get_pointer(gval);
+    return v ? new T(v, No.Take) : null;
+  }
+  else static if (isPointer!T)
     return cast(T)g_value_get_pointer(gval);
   else
-    assert(0, "Unsupported type " ~ T.stringof ~ " in Value.getVal");
+    static assert(0, "Unsupported type " ~ T.stringof ~ " in Value.getVal");
 }
 
 /**
@@ -226,7 +231,7 @@ void setVal(T)(GValue* gval, T v) nothrow
 {
   static if (is(T == bool))
     g_value_set_boolean(gval, cast(gboolean)v);
-  else static if (is(T == byte))
+  else static if (is(T == byte) || is(T == char))
     g_value_set_schar(gval, v);
   else static if (is(T == ubyte))
     g_value_set_uchar(gval, v);
@@ -284,8 +289,17 @@ void setVal(T)(GValue* gval, T v) nothrow
     else
       assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectWrap in Value.setVal");
   }
-  else static if (is(T : Object) || isPointer!T)
+  else static if (is(T == class) && __traits(compiles, new T(cast(void*)null, No.Take)))
+  {
+    void* p = v ? cast(void*)v._cPtr : null;
+
+    if (g_type_check_value_holds(gval, GTypeEnum.Boxed))
+      g_value_set_boxed(gval, p);
+    else
+      g_value_set_pointer(gval, p);
+  }
+  else static if (isPointer!T)
     g_value_set_pointer(gval, cast(void*)v);
   else
-    assert(0, "Unsupported type " ~ T.stringof ~ " in Value.setVal");
+    static assert(0, "Unsupported type " ~ T.stringof ~ " in Value.setVal");
 }

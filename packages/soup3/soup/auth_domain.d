@@ -67,25 +67,6 @@ class AuthDomain : gobject.object.ObjectWrap
   }
 
   /**
-      Get `filter` property.
-      Returns: The [soup.types.AuthDomainFilter] for the domain.
-  */
-  @property soup.types.AuthDomainFilter filter() nothrow
-  {
-    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainFilter)("filter");
-  }
-
-  /**
-      Set `filter` property.
-      Params:
-        propval = The [soup.types.AuthDomainFilter] for the domain.
-  */
-  @property void filter(soup.types.AuthDomainFilter propval) nothrow
-  {
-    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainFilter)("filter", propval);
-  }
-
-  /**
       Get `filterData` property.
       Returns: Data to pass to the [soup.types.AuthDomainFilter].
   */
@@ -102,25 +83,6 @@ class AuthDomain : gobject.object.ObjectWrap
   @property void filterData(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("filter-data", propval);
-  }
-
-  /**
-      Get `genericAuthCallback` property.
-      Returns: The [soup.types.AuthDomainGenericAuthCallback].
-  */
-  @property soup.types.AuthDomainGenericAuthCallback genericAuthCallback() nothrow
-  {
-    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainGenericAuthCallback)("generic-auth-callback");
-  }
-
-  /**
-      Set `genericAuthCallback` property.
-      Params:
-        propval = The [soup.types.AuthDomainGenericAuthCallback].
-  */
-  @property void genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval) nothrow
-  {
-    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainGenericAuthCallback)("generic-auth-callback", propval);
   }
 
   /**
@@ -392,17 +354,6 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /**
-      Set `filter` property.
-      Params:
-        propval = The [soup.types.AuthDomainFilter] for the domain.
-      Returns: Builder instance for fluent chaining
-  */
-  T filter(soup.types.AuthDomainFilter propval) nothrow
-  {
-    return setProperty("filter", propval);
-  }
-
-  /**
       Set `filterData` property.
       Params:
         propval = Data to pass to the [soup.types.AuthDomainFilter].
@@ -411,17 +362,6 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   T filterData(void* propval) nothrow
   {
     return setProperty("filter-data", propval);
-  }
-
-  /**
-      Set `genericAuthCallback` property.
-      Params:
-        propval = The [soup.types.AuthDomainGenericAuthCallback].
-      Returns: Builder instance for fluent chaining
-  */
-  T genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval) nothrow
-  {
-    return setProperty("generic-auth-callback", propval);
   }
 
   /**

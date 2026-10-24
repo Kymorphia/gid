@@ -55,25 +55,6 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   }
 
   /**
-      Get `authCallback` property.
-      Returns: The [soup.types.AuthDomainDigestAuthCallback].
-  */
-  @property soup.types.AuthDomainDigestAuthCallback authCallback() nothrow
-  {
-    return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainDigestAuthCallback)("auth-callback");
-  }
-
-  /**
-      Set `authCallback` property.
-      Params:
-        propval = The [soup.types.AuthDomainDigestAuthCallback].
-  */
-  @property void authCallback(soup.types.AuthDomainDigestAuthCallback propval) nothrow
-  {
-    gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainDigestAuthCallback)("auth-callback", propval);
-  }
-
-  /**
       Get `authData` property.
       Returns: The data to pass to the [soup.types.AuthDomainDigestAuthCallback].
   */
@@ -172,17 +153,6 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
 /// Fluent builder implementation template for [soup.auth_domain_digest.AuthDomainDigest]
 class AuthDomainDigestGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderImpl!T
 {
-
-  /**
-      Set `authCallback` property.
-      Params:
-        propval = The [soup.types.AuthDomainDigestAuthCallback].
-      Returns: Builder instance for fluent chaining
-  */
-  T authCallback(soup.types.AuthDomainDigestAuthCallback propval) nothrow
-  {
-    return setProperty("auth-callback", propval);
-  }
 
   /**
       Set `authData` property.
