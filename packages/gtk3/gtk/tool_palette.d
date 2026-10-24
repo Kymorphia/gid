@@ -559,6 +559,6 @@ final class ToolPaletteGidBuilder : ToolPaletteGidBuilderImpl!ToolPaletteGidBuil
   */
   ToolPalette build() nothrow
   {
-    return new ToolPalette(cast(void*)createGObject(ToolPalette._getGType), No.Take);
+    return new ToolPalette(cast(void*)createGObject(ToolPalette._getGType), Yes.Take);
   }
 }

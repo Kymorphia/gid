@@ -87,6 +87,6 @@ final class ServerAuthReaderGidBuilder : ServerAuthReaderGidBuilderImpl!ServerAu
   */
   ServerAuthReader build() nothrow
   {
-    return new ServerAuthReader(cast(void*)createGObject(ServerAuthReader._getGType), No.Take);
+    return new ServerAuthReader(cast(void*)createGObject(ServerAuthReader._getGType), Yes.Take);
   }
 }

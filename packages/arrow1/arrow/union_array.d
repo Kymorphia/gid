@@ -101,6 +101,6 @@ final class UnionArrayGidBuilder : UnionArrayGidBuilderImpl!UnionArrayGidBuilder
   */
   UnionArray build() nothrow
   {
-    return new UnionArray(cast(void*)createGObject(UnionArray._getGType), No.Take);
+    return new UnionArray(cast(void*)createGObject(UnionArray._getGType), Yes.Take);
   }
 }

@@ -622,6 +622,6 @@ final class AdjustmentGidBuilder : AdjustmentGidBuilderImpl!AdjustmentGidBuilder
   */
   Adjustment build() nothrow
   {
-    return new Adjustment(cast(void*)createGObject(Adjustment._getGType), No.Take);
+    return new Adjustment(cast(void*)createGObject(Adjustment._getGType), Yes.Take);
   }
 }

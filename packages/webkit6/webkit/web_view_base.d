@@ -69,6 +69,6 @@ final class WebViewBaseGidBuilder : WebViewBaseGidBuilderImpl!WebViewBaseGidBuil
   */
   WebViewBase build() nothrow
   {
-    return new WebViewBase(cast(void*)createGObject(WebViewBase._getGType), No.Take);
+    return new WebViewBase(cast(void*)createGObject(WebViewBase._getGType), Yes.Take);
   }
 }

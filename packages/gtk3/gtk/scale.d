@@ -501,6 +501,6 @@ final class ScaleGidBuilder : ScaleGidBuilderImpl!ScaleGidBuilder
   */
   Scale build() nothrow
   {
-    return new Scale(cast(void*)createGObject(Scale._getGType), No.Take);
+    return new Scale(cast(void*)createGObject(Scale._getGType), Yes.Take);
   }
 }

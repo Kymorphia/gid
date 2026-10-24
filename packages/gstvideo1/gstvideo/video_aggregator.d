@@ -117,6 +117,6 @@ final class VideoAggregatorGidBuilder : VideoAggregatorGidBuilderImpl!VideoAggre
   */
   VideoAggregator build() nothrow
   {
-    return new VideoAggregator(cast(void*)createGObject(VideoAggregator._getGType), No.Take);
+    return new VideoAggregator(cast(void*)createGObject(VideoAggregator._getGType), Yes.Take);
   }
 }

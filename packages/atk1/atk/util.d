@@ -69,6 +69,6 @@ final class UtilGidBuilder : UtilGidBuilderImpl!UtilGidBuilder
   */
   Util build() nothrow
   {
-    return new Util(cast(void*)createGObject(Util._getGType), No.Take);
+    return new Util(cast(void*)createGObject(Util._getGType), Yes.Take);
   }
 }

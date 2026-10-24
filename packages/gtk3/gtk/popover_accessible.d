@@ -65,6 +65,6 @@ final class PopoverAccessibleGidBuilder : PopoverAccessibleGidBuilderImpl!Popove
   */
   PopoverAccessible build() nothrow
   {
-    return new PopoverAccessible(cast(void*)createGObject(PopoverAccessible._getGType), No.Take);
+    return new PopoverAccessible(cast(void*)createGObject(PopoverAccessible._getGType), Yes.Take);
   }
 }

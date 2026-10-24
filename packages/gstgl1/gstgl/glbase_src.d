@@ -86,6 +86,6 @@ final class GLBaseSrcGidBuilder : GLBaseSrcGidBuilderImpl!GLBaseSrcGidBuilder
   */
   GLBaseSrc build() nothrow
   {
-    return new GLBaseSrc(cast(void*)createGObject(GLBaseSrc._getGType), No.Take);
+    return new GLBaseSrc(cast(void*)createGObject(GLBaseSrc._getGType), Yes.Take);
   }
 }

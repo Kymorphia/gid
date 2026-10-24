@@ -204,6 +204,6 @@ final class EventBoxGidBuilder : EventBoxGidBuilderImpl!EventBoxGidBuilder
   */
   EventBox build() nothrow
   {
-    return new EventBox(cast(void*)createGObject(EventBox._getGType), No.Take);
+    return new EventBox(cast(void*)createGObject(EventBox._getGType), Yes.Take);
   }
 }

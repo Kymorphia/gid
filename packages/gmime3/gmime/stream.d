@@ -320,6 +320,6 @@ final class StreamGidBuilder : StreamGidBuilderImpl!StreamGidBuilder
   */
   Stream build() nothrow
   {
-    return new Stream(cast(void*)createGObject(Stream._getGType), No.Take);
+    return new Stream(cast(void*)createGObject(Stream._getGType), Yes.Take);
   }
 }

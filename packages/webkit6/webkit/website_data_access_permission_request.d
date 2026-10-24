@@ -100,6 +100,6 @@ final class WebsiteDataAccessPermissionRequestGidBuilder : WebsiteDataAccessPerm
   */
   WebsiteDataAccessPermissionRequest build() nothrow
   {
-    return new WebsiteDataAccessPermissionRequest(cast(void*)createGObject(WebsiteDataAccessPermissionRequest._getGType), No.Take);
+    return new WebsiteDataAccessPermissionRequest(cast(void*)createGObject(WebsiteDataAccessPermissionRequest._getGType), Yes.Take);
   }
 }

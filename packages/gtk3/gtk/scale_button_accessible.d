@@ -74,6 +74,6 @@ final class ScaleButtonAccessibleGidBuilder : ScaleButtonAccessibleGidBuilderImp
   */
   ScaleButtonAccessible build() nothrow
   {
-    return new ScaleButtonAccessible(cast(void*)createGObject(ScaleButtonAccessible._getGType), No.Take);
+    return new ScaleButtonAccessible(cast(void*)createGObject(ScaleButtonAccessible._getGType), Yes.Take);
   }
 }

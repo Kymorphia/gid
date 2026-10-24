@@ -86,6 +86,6 @@ final class PartitioningGidBuilder : PartitioningGidBuilderImpl!PartitioningGidB
   */
   Partitioning build() nothrow
   {
-    return new Partitioning(cast(void*)createGObject(Partitioning._getGType), No.Take);
+    return new Partitioning(cast(void*)createGObject(Partitioning._getGType), Yes.Take);
   }
 }

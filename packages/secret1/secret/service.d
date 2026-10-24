@@ -1424,6 +1424,6 @@ final class ServiceGidBuilder : ServiceGidBuilderImpl!ServiceGidBuilder
   */
   Service build() nothrow
   {
-    return new Service(cast(void*)createGObject(Service._getGType), No.Take);
+    return new Service(cast(void*)createGObject(Service._getGType), Yes.Take);
   }
 }

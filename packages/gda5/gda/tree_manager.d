@@ -218,7 +218,7 @@ final class TreeManagerGidBuilder : TreeManagerGidBuilderImpl!TreeManagerGidBuil
   */
   TreeManager build() nothrow
   {
-    return new TreeManager(cast(void*)createGObject(TreeManager._getGType), No.Take);
+    return new TreeManager(cast(void*)createGObject(TreeManager._getGType), Yes.Take);
   }
 }
 

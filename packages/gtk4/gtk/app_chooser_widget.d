@@ -624,6 +624,6 @@ final class AppChooserWidgetGidBuilder : AppChooserWidgetGidBuilderImpl!AppChoos
   */
   AppChooserWidget build() nothrow
   {
-    return new AppChooserWidget(cast(void*)createGObject(AppChooserWidget._getGType), No.Take);
+    return new AppChooserWidget(cast(void*)createGObject(AppChooserWidget._getGType), Yes.Take);
   }
 }

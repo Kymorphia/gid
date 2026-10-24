@@ -65,6 +65,6 @@ final class ListBoxRowAccessibleGidBuilder : ListBoxRowAccessibleGidBuilderImpl!
   */
   ListBoxRowAccessible build() nothrow
   {
-    return new ListBoxRowAccessible(cast(void*)createGObject(ListBoxRowAccessible._getGType), No.Take);
+    return new ListBoxRowAccessible(cast(void*)createGObject(ListBoxRowAccessible._getGType), Yes.Take);
   }
 }

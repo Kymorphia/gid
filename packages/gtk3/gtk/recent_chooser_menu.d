@@ -198,6 +198,6 @@ final class RecentChooserMenuGidBuilder : RecentChooserMenuGidBuilderImpl!Recent
   */
   RecentChooserMenu build() nothrow
   {
-    return new RecentChooserMenu(cast(void*)createGObject(RecentChooserMenu._getGType), No.Take);
+    return new RecentChooserMenu(cast(void*)createGObject(RecentChooserMenu._getGType), Yes.Take);
   }
 }

@@ -257,6 +257,6 @@ final class SearchBarGidBuilder : SearchBarGidBuilderImpl!SearchBarGidBuilder
   */
   SearchBar build() nothrow
   {
-    return new SearchBar(cast(void*)createGObject(SearchBar._getGType), No.Take);
+    return new SearchBar(cast(void*)createGObject(SearchBar._getGType), Yes.Take);
   }
 }

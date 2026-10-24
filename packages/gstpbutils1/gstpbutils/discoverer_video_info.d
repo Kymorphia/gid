@@ -152,6 +152,6 @@ final class DiscovererVideoInfoGidBuilder : DiscovererVideoInfoGidBuilderImpl!Di
   */
   DiscovererVideoInfo build() nothrow
   {
-    return new DiscovererVideoInfo(cast(void*)createGObject(DiscovererVideoInfo._getGType), No.Take);
+    return new DiscovererVideoInfo(cast(void*)createGObject(DiscovererVideoInfo._getGType), Yes.Take);
   }
 }

@@ -121,6 +121,6 @@ final class VScaleGidBuilder : VScaleGidBuilderImpl!VScaleGidBuilder
   */
   VScale build() nothrow
   {
-    return new VScale(cast(void*)createGObject(VScale._getGType), No.Take);
+    return new VScale(cast(void*)createGObject(VScale._getGType), Yes.Take);
   }
 }

@@ -378,6 +378,6 @@ final class ToggleButtonGidBuilder : ToggleButtonGidBuilderImpl!ToggleButtonGidB
   */
   ToggleButton build() nothrow
   {
-    return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), No.Take);
+    return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), Yes.Take);
   }
 }

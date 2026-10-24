@@ -96,6 +96,6 @@ final class DBusMenuModelGidBuilder : DBusMenuModelGidBuilderImpl!DBusMenuModelG
   */
   DBusMenuModel build() nothrow
   {
-    return new DBusMenuModel(cast(void*)createGObject(DBusMenuModel._getGType), No.Take);
+    return new DBusMenuModel(cast(void*)createGObject(DBusMenuModel._getGType), Yes.Take);
   }
 }

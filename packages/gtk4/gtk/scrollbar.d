@@ -188,6 +188,6 @@ final class ScrollbarGidBuilder : ScrollbarGidBuilderImpl!ScrollbarGidBuilder
   */
   Scrollbar build() nothrow
   {
-    return new Scrollbar(cast(void*)createGObject(Scrollbar._getGType), No.Take);
+    return new Scrollbar(cast(void*)createGObject(Scrollbar._getGType), Yes.Take);
   }
 }

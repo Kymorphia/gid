@@ -579,6 +579,6 @@ final class ClipboardGidBuilder : ClipboardGidBuilderImpl!ClipboardGidBuilder
   */
   Clipboard build() nothrow
   {
-    return new Clipboard(cast(void*)createGObject(Clipboard._getGType), No.Take);
+    return new Clipboard(cast(void*)createGObject(Clipboard._getGType), Yes.Take);
   }
 }

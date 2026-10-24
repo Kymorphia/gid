@@ -510,7 +510,7 @@ final class DataSelectGidBuilder : DataSelectGidBuilderImpl!DataSelectGidBuilder
   */
   DataSelect build() nothrow
   {
-    return new DataSelect(cast(void*)createGObject(DataSelect._getGType), No.Take);
+    return new DataSelect(cast(void*)createGObject(DataSelect._getGType), Yes.Take);
   }
 }
 

@@ -69,6 +69,6 @@ final class CheckMenuItemAccessibleGidBuilder : CheckMenuItemAccessibleGidBuilde
   */
   CheckMenuItemAccessible build() nothrow
   {
-    return new CheckMenuItemAccessible(cast(void*)createGObject(CheckMenuItemAccessible._getGType), No.Take);
+    return new CheckMenuItemAccessible(cast(void*)createGObject(CheckMenuItemAccessible._getGType), Yes.Take);
   }
 }

@@ -253,6 +253,6 @@ final class Decimal128GidBuilder : Decimal128GidBuilderImpl!Decimal128GidBuilder
   */
   Decimal128 build() nothrow
   {
-    return new Decimal128(cast(void*)createGObject(Decimal128._getGType), No.Take);
+    return new Decimal128(cast(void*)createGObject(Decimal128._getGType), Yes.Take);
   }
 }

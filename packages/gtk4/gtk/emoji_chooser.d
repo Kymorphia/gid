@@ -164,6 +164,6 @@ final class EmojiChooserGidBuilder : EmojiChooserGidBuilderImpl!EmojiChooserGidB
   */
   EmojiChooser build() nothrow
   {
-    return new EmojiChooser(cast(void*)createGObject(EmojiChooser._getGType), No.Take);
+    return new EmojiChooser(cast(void*)createGObject(EmojiChooser._getGType), Yes.Take);
   }
 }

@@ -326,6 +326,6 @@ final class StatusbarGidBuilder : StatusbarGidBuilderImpl!StatusbarGidBuilder
   */
   Statusbar build() nothrow
   {
-    return new Statusbar(cast(void*)createGObject(Statusbar._getGType), No.Take);
+    return new Statusbar(cast(void*)createGObject(Statusbar._getGType), Yes.Take);
   }
 }

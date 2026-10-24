@@ -236,6 +236,6 @@ final class ContextMenuItemGidBuilder : ContextMenuItemGidBuilderImpl!ContextMen
   */
   ContextMenuItem build() nothrow
   {
-    return new ContextMenuItem(cast(void*)createGObject(ContextMenuItem._getGType), No.Take);
+    return new ContextMenuItem(cast(void*)createGObject(ContextMenuItem._getGType), Yes.Take);
   }
 }

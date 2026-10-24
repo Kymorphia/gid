@@ -635,6 +635,6 @@ final class ComboRowGidBuilder : ComboRowGidBuilderImpl!ComboRowGidBuilder
   */
   ComboRow build() nothrow
   {
-    return new ComboRow(cast(void*)createGObject(ComboRow._getGType), No.Take);
+    return new ComboRow(cast(void*)createGObject(ComboRow._getGType), Yes.Take);
   }
 }

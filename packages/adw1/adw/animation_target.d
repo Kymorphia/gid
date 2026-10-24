@@ -64,6 +64,6 @@ final class AnimationTargetGidBuilder : AnimationTargetGidBuilderImpl!AnimationT
   */
   AnimationTarget build() nothrow
   {
-    return new AnimationTarget(cast(void*)createGObject(AnimationTarget._getGType), No.Take);
+    return new AnimationTarget(cast(void*)createGObject(AnimationTarget._getGType), Yes.Take);
   }
 }

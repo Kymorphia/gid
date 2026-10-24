@@ -65,6 +65,6 @@ final class StatusbarAccessibleGidBuilder : StatusbarAccessibleGidBuilderImpl!St
   */
   StatusbarAccessible build() nothrow
   {
-    return new StatusbarAccessible(cast(void*)createGObject(StatusbarAccessible._getGType), No.Take);
+    return new StatusbarAccessible(cast(void*)createGObject(StatusbarAccessible._getGType), Yes.Take);
   }
 }

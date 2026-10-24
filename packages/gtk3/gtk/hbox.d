@@ -106,6 +106,6 @@ final class HBoxGidBuilder : HBoxGidBuilderImpl!HBoxGidBuilder
   */
   HBox build() nothrow
   {
-    return new HBox(cast(void*)createGObject(HBox._getGType), No.Take);
+    return new HBox(cast(void*)createGObject(HBox._getGType), Yes.Take);
   }
 }

@@ -125,6 +125,6 @@ final class SystemClockGidBuilder : SystemClockGidBuilderImpl!SystemClockGidBuil
   */
   SystemClock build() nothrow
   {
-    return new SystemClock(cast(void*)createGObject(SystemClock._getGType), No.Take);
+    return new SystemClock(cast(void*)createGObject(SystemClock._getGType), Yes.Take);
   }
 }

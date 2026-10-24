@@ -277,6 +277,6 @@ final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
   */
   Layout build() nothrow
   {
-    return new Layout(cast(void*)createGObject(Layout._getGType), No.Take);
+    return new Layout(cast(void*)createGObject(Layout._getGType), Yes.Take);
   }
 }

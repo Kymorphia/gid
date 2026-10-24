@@ -89,6 +89,6 @@ final class HPanedGidBuilder : HPanedGidBuilderImpl!HPanedGidBuilder
   */
   HPaned build() nothrow
   {
-    return new HPaned(cast(void*)createGObject(HPaned._getGType), No.Take);
+    return new HPaned(cast(void*)createGObject(HPaned._getGType), Yes.Take);
   }
 }

@@ -83,6 +83,6 @@ final class DiscovererContainerInfoGidBuilder : DiscovererContainerInfoGidBuilde
   */
   DiscovererContainerInfo build() nothrow
   {
-    return new DiscovererContainerInfo(cast(void*)createGObject(DiscovererContainerInfo._getGType), No.Take);
+    return new DiscovererContainerInfo(cast(void*)createGObject(DiscovererContainerInfo._getGType), Yes.Take);
   }
 }

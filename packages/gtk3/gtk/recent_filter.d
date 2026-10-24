@@ -317,6 +317,6 @@ final class RecentFilterGidBuilder : RecentFilterGidBuilderImpl!RecentFilterGidB
   */
   RecentFilter build() nothrow
   {
-    return new RecentFilter(cast(void*)createGObject(RecentFilter._getGType), No.Take);
+    return new RecentFilter(cast(void*)createGObject(RecentFilter._getGType), Yes.Take);
   }
 }

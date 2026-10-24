@@ -96,6 +96,6 @@ final class GLBufferPoolGidBuilder : GLBufferPoolGidBuilderImpl!GLBufferPoolGidB
   */
   GLBufferPool build() nothrow
   {
-    return new GLBufferPool(cast(void*)createGObject(GLBufferPool._getGType), No.Take);
+    return new GLBufferPool(cast(void*)createGObject(GLBufferPool._getGType), Yes.Take);
   }
 }

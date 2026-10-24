@@ -381,6 +381,6 @@ final class IOStreamGidBuilder : IOStreamGidBuilderImpl!IOStreamGidBuilder
   */
   IOStream build() nothrow
   {
-    return new IOStream(cast(void*)createGObject(IOStream._getGType), No.Take);
+    return new IOStream(cast(void*)createGObject(IOStream._getGType), Yes.Take);
   }
 }

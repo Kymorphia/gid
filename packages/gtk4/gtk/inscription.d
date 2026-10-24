@@ -827,6 +827,6 @@ final class InscriptionGidBuilder : InscriptionGidBuilderImpl!InscriptionGidBuil
   */
   Inscription build() nothrow
   {
-    return new Inscription(cast(void*)createGObject(Inscription._getGType), No.Take);
+    return new Inscription(cast(void*)createGObject(Inscription._getGType), Yes.Take);
   }
 }

@@ -124,6 +124,6 @@ final class StatisticsGidBuilder : StatisticsGidBuilderImpl!StatisticsGidBuilder
   */
   Statistics build() nothrow
   {
-    return new Statistics(cast(void*)createGObject(Statistics._getGType), No.Take);
+    return new Statistics(cast(void*)createGObject(Statistics._getGType), Yes.Take);
   }
 }

@@ -221,6 +221,6 @@ final class ListHeaderGidBuilder : ListHeaderGidBuilderImpl!ListHeaderGidBuilder
   */
   ListHeader build() nothrow
   {
-    return new ListHeader(cast(void*)createGObject(ListHeader._getGType), No.Take);
+    return new ListHeader(cast(void*)createGObject(ListHeader._getGType), Yes.Take);
   }
 }

@@ -114,6 +114,6 @@ final class ListBaseGidBuilder : ListBaseGidBuilderImpl!ListBaseGidBuilder
   */
   ListBase build() nothrow
   {
-    return new ListBase(cast(void*)createGObject(ListBase._getGType), No.Take);
+    return new ListBase(cast(void*)createGObject(ListBase._getGType), Yes.Take);
   }
 }

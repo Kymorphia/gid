@@ -386,6 +386,6 @@ final class PadTemplateGidBuilder : PadTemplateGidBuilderImpl!PadTemplateGidBuil
   */
   PadTemplate build() nothrow
   {
-    return new PadTemplate(cast(void*)createGObject(PadTemplate._getGType), No.Take);
+    return new PadTemplate(cast(void*)createGObject(PadTemplate._getGType), Yes.Take);
   }
 }

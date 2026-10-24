@@ -104,6 +104,6 @@ final class PasswordEntryRowGidBuilder : PasswordEntryRowGidBuilderImpl!Password
   */
   PasswordEntryRow build() nothrow
   {
-    return new PasswordEntryRow(cast(void*)createGObject(PasswordEntryRow._getGType), No.Take);
+    return new PasswordEntryRow(cast(void*)createGObject(PasswordEntryRow._getGType), Yes.Take);
   }
 }

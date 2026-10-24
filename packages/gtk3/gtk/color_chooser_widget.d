@@ -143,6 +143,6 @@ final class ColorChooserWidgetGidBuilder : ColorChooserWidgetGidBuilderImpl!Colo
   */
   ColorChooserWidget build() nothrow
   {
-    return new ColorChooserWidget(cast(void*)createGObject(ColorChooserWidget._getGType), No.Take);
+    return new ColorChooserWidget(cast(void*)createGObject(ColorChooserWidget._getGType), Yes.Take);
   }
 }

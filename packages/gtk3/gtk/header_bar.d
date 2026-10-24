@@ -529,6 +529,6 @@ final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
   */
   HeaderBar build() nothrow
   {
-    return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);
+    return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), Yes.Take);
   }
 }

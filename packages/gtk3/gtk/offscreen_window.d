@@ -130,6 +130,6 @@ final class OffscreenWindowGidBuilder : OffscreenWindowGidBuilderImpl!OffscreenW
   */
   OffscreenWindow build() nothrow
   {
-    return new OffscreenWindow(cast(void*)createGObject(OffscreenWindow._getGType), No.Take);
+    return new OffscreenWindow(cast(void*)createGObject(OffscreenWindow._getGType), Yes.Take);
   }
 }

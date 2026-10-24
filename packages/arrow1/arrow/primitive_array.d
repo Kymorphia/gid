@@ -82,6 +82,6 @@ final class PrimitiveArrayGidBuilder : PrimitiveArrayGidBuilderImpl!PrimitiveArr
   */
   PrimitiveArray build() nothrow
   {
-    return new PrimitiveArray(cast(void*)createGObject(PrimitiveArray._getGType), No.Take);
+    return new PrimitiveArray(cast(void*)createGObject(PrimitiveArray._getGType), Yes.Take);
   }
 }

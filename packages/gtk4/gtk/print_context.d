@@ -284,6 +284,6 @@ final class PrintContextGidBuilder : PrintContextGidBuilderImpl!PrintContextGidB
   */
   PrintContext build() nothrow
   {
-    return new PrintContext(cast(void*)createGObject(PrintContext._getGType), No.Take);
+    return new PrintContext(cast(void*)createGObject(PrintContext._getGType), Yes.Take);
   }
 }

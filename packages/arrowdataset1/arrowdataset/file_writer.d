@@ -104,6 +104,6 @@ final class FileWriterGidBuilder : FileWriterGidBuilderImpl!FileWriterGidBuilder
   */
   FileWriter build() nothrow
   {
-    return new FileWriter(cast(void*)createGObject(FileWriter._getGType), No.Take);
+    return new FileWriter(cast(void*)createGObject(FileWriter._getGType), Yes.Take);
   }
 }

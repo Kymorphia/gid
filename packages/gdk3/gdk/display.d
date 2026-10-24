@@ -1088,6 +1088,6 @@ final class DisplayGidBuilder : DisplayGidBuilderImpl!DisplayGidBuilder
   */
   Display build() nothrow
   {
-    return new Display(cast(void*)createGObject(Display._getGType), No.Take);
+    return new Display(cast(void*)createGObject(Display._getGType), Yes.Take);
   }
 }

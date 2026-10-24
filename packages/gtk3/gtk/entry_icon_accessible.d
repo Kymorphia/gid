@@ -75,6 +75,6 @@ final class EntryIconAccessibleGidBuilder : EntryIconAccessibleGidBuilderImpl!En
   */
   EntryIconAccessible build() nothrow
   {
-    return new EntryIconAccessible(cast(void*)createGObject(EntryIconAccessible._getGType), No.Take);
+    return new EntryIconAccessible(cast(void*)createGObject(EntryIconAccessible._getGType), Yes.Take);
   }
 }

@@ -729,6 +729,6 @@ final class ResolverGidBuilder : ResolverGidBuilderImpl!ResolverGidBuilder
   */
   Resolver build() nothrow
   {
-    return new Resolver(cast(void*)createGObject(Resolver._getGType), No.Take);
+    return new Resolver(cast(void*)createGObject(Resolver._getGType), Yes.Take);
   }
 }

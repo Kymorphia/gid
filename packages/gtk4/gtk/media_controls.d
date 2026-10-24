@@ -144,6 +144,6 @@ final class MediaControlsGidBuilder : MediaControlsGidBuilderImpl!MediaControlsG
   */
   MediaControls build() nothrow
   {
-    return new MediaControls(cast(void*)createGObject(MediaControls._getGType), No.Take);
+    return new MediaControls(cast(void*)createGObject(MediaControls._getGType), Yes.Take);
   }
 }

@@ -2117,6 +2117,6 @@ final class AboutWindowGidBuilder : AboutWindowGidBuilderImpl!AboutWindowGidBuil
   */
   AboutWindow build() nothrow
   {
-    return new AboutWindow(cast(void*)createGObject(AboutWindow._getGType), No.Take);
+    return new AboutWindow(cast(void*)createGObject(AboutWindow._getGType), Yes.Take);
   }
 }

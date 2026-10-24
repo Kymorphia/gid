@@ -70,6 +70,6 @@ final class WindowAccessibleGidBuilder : WindowAccessibleGidBuilderImpl!WindowAc
   */
   WindowAccessible build() nothrow
   {
-    return new WindowAccessible(cast(void*)createGObject(WindowAccessible._getGType), No.Take);
+    return new WindowAccessible(cast(void*)createGObject(WindowAccessible._getGType), Yes.Take);
   }
 }

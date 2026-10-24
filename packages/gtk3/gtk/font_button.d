@@ -515,6 +515,6 @@ final class FontButtonGidBuilder : FontButtonGidBuilderImpl!FontButtonGidBuilder
   */
   FontButton build() nothrow
   {
-    return new FontButton(cast(void*)createGObject(FontButton._getGType), No.Take);
+    return new FontButton(cast(void*)createGObject(FontButton._getGType), Yes.Take);
   }
 }

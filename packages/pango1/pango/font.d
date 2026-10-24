@@ -315,6 +315,6 @@ final class FontGidBuilder : FontGidBuilderImpl!FontGidBuilder
   */
   Font build() nothrow
   {
-    return new Font(cast(void*)createGObject(Font._getGType), No.Take);
+    return new Font(cast(void*)createGObject(Font._getGType), Yes.Take);
   }
 }

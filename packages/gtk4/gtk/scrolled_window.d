@@ -1314,6 +1314,6 @@ final class ScrolledWindowGidBuilder : ScrolledWindowGidBuilderImpl!ScrolledWind
   */
   ScrolledWindow build() nothrow
   {
-    return new ScrolledWindow(cast(void*)createGObject(ScrolledWindow._getGType), No.Take);
+    return new ScrolledWindow(cast(void*)createGObject(ScrolledWindow._getGType), Yes.Take);
   }
 }

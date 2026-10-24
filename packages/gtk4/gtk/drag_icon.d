@@ -208,6 +208,6 @@ final class DragIconGidBuilder : DragIconGidBuilderImpl!DragIconGidBuilder
   */
   DragIcon build() nothrow
   {
-    return new DragIcon(cast(void*)createGObject(DragIcon._getGType), No.Take);
+    return new DragIcon(cast(void*)createGObject(DragIcon._getGType), Yes.Take);
   }
 }

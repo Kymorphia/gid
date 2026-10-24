@@ -121,6 +121,6 @@ final class GLOverlayCompositorGidBuilder : GLOverlayCompositorGidBuilderImpl!GL
   */
   GLOverlayCompositor build() nothrow
   {
-    return new GLOverlayCompositor(cast(void*)createGObject(GLOverlayCompositor._getGType), No.Take);
+    return new GLOverlayCompositor(cast(void*)createGObject(GLOverlayCompositor._getGType), Yes.Take);
   }
 }

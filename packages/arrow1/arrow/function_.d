@@ -159,6 +159,6 @@ final class FunctionGidBuilder : FunctionGidBuilderImpl!FunctionGidBuilder
   */
   Function build() nothrow
   {
-    return new Function(cast(void*)createGObject(Function._getGType), No.Take);
+    return new Function(cast(void*)createGObject(Function._getGType), Yes.Take);
   }
 }

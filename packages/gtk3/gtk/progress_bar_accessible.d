@@ -70,6 +70,6 @@ final class ProgressBarAccessibleGidBuilder : ProgressBarAccessibleGidBuilderImp
   */
   ProgressBarAccessible build() nothrow
   {
-    return new ProgressBarAccessible(cast(void*)createGObject(ProgressBarAccessible._getGType), No.Take);
+    return new ProgressBarAccessible(cast(void*)createGObject(ProgressBarAccessible._getGType), Yes.Take);
   }
 }

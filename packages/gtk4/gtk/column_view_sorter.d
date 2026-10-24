@@ -194,6 +194,6 @@ final class ColumnViewSorterGidBuilder : ColumnViewSorterGidBuilderImpl!ColumnVi
   */
   ColumnViewSorter build() nothrow
   {
-    return new ColumnViewSorter(cast(void*)createGObject(ColumnViewSorter._getGType), No.Take);
+    return new ColumnViewSorter(cast(void*)createGObject(ColumnViewSorter._getGType), Yes.Take);
   }
 }

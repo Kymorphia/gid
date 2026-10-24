@@ -93,6 +93,6 @@ final class FrameSwitcherGidBuilder : FrameSwitcherGidBuilderImpl!FrameSwitcherG
   */
   FrameSwitcher build() nothrow
   {
-    return new FrameSwitcher(cast(void*)createGObject(FrameSwitcher._getGType), No.Take);
+    return new FrameSwitcher(cast(void*)createGObject(FrameSwitcher._getGType), Yes.Take);
   }
 }

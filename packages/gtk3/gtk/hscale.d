@@ -122,6 +122,6 @@ final class HScaleGidBuilder : HScaleGidBuilderImpl!HScaleGidBuilder
   */
   HScale build() nothrow
   {
-    return new HScale(cast(void*)createGObject(HScale._getGType), No.Take);
+    return new HScale(cast(void*)createGObject(HScale._getGType), Yes.Take);
   }
 }

@@ -1657,6 +1657,6 @@ final class NotebookGidBuilder : NotebookGidBuilderImpl!NotebookGidBuilder
   */
   Notebook build() nothrow
   {
-    return new Notebook(cast(void*)createGObject(Notebook._getGType), No.Take);
+    return new Notebook(cast(void*)createGObject(Notebook._getGType), Yes.Take);
   }
 }

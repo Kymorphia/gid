@@ -88,6 +88,6 @@ final class VSeparatorGidBuilder : VSeparatorGidBuilderImpl!VSeparatorGidBuilder
   */
   VSeparator build() nothrow
   {
-    return new VSeparator(cast(void*)createGObject(VSeparator._getGType), No.Take);
+    return new VSeparator(cast(void*)createGObject(VSeparator._getGType), Yes.Take);
   }
 }

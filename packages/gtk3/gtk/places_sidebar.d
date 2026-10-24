@@ -1473,6 +1473,6 @@ final class PlacesSidebarGidBuilder : PlacesSidebarGidBuilderImpl!PlacesSidebarG
   */
   PlacesSidebar build() nothrow
   {
-    return new PlacesSidebar(cast(void*)createGObject(PlacesSidebar._getGType), No.Take);
+    return new PlacesSidebar(cast(void*)createGObject(PlacesSidebar._getGType), Yes.Take);
   }
 }

@@ -81,6 +81,6 @@ final class ByteArrayStatisticsGidBuilder : ByteArrayStatisticsGidBuilderImpl!By
   */
   ByteArrayStatistics build() nothrow
   {
-    return new ByteArrayStatistics(cast(void*)createGObject(ByteArrayStatistics._getGType), No.Take);
+    return new ByteArrayStatistics(cast(void*)createGObject(ByteArrayStatistics._getGType), Yes.Take);
   }
 }

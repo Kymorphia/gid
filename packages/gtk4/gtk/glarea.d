@@ -872,6 +872,6 @@ final class GLAreaGidBuilder : GLAreaGidBuilderImpl!GLAreaGidBuilder
   */
   GLArea build() nothrow
   {
-    return new GLArea(cast(void*)createGObject(GLArea._getGType), No.Take);
+    return new GLArea(cast(void*)createGObject(GLArea._getGType), Yes.Take);
   }
 }

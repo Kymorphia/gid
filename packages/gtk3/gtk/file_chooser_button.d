@@ -348,6 +348,6 @@ final class FileChooserButtonGidBuilder : FileChooserButtonGidBuilderImpl!FileCh
   */
   FileChooserButton build() nothrow
   {
-    return new FileChooserButton(cast(void*)createGObject(FileChooserButton._getGType), No.Take);
+    return new FileChooserButton(cast(void*)createGObject(FileChooserButton._getGType), Yes.Take);
   }
 }

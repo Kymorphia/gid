@@ -86,6 +86,6 @@ final class AudioAggregatorConvertPadGidBuilder : AudioAggregatorConvertPadGidBu
   */
   AudioAggregatorConvertPad build() nothrow
   {
-    return new AudioAggregatorConvertPad(cast(void*)createGObject(AudioAggregatorConvertPad._getGType), No.Take);
+    return new AudioAggregatorConvertPad(cast(void*)createGObject(AudioAggregatorConvertPad._getGType), Yes.Take);
   }
 }

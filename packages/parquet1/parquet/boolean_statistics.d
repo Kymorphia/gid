@@ -78,6 +78,6 @@ final class BooleanStatisticsGidBuilder : BooleanStatisticsGidBuilderImpl!Boolea
   */
   BooleanStatistics build() nothrow
   {
-    return new BooleanStatistics(cast(void*)createGObject(BooleanStatistics._getGType), No.Take);
+    return new BooleanStatistics(cast(void*)createGObject(BooleanStatistics._getGType), Yes.Take);
   }
 }

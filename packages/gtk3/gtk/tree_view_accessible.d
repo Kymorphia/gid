@@ -78,6 +78,6 @@ final class TreeViewAccessibleGidBuilder : TreeViewAccessibleGidBuilderImpl!Tree
   */
   TreeViewAccessible build() nothrow
   {
-    return new TreeViewAccessible(cast(void*)createGObject(TreeViewAccessible._getGType), No.Take);
+    return new TreeViewAccessible(cast(void*)createGObject(TreeViewAccessible._getGType), Yes.Take);
   }
 }

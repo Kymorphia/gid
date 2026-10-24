@@ -104,7 +104,7 @@ class ObjectWrap
   */
   final this(GType type) nothrow
   {
-    this(g_object_new(type, null), Yes.Take);
+    this(createGObject(type), Yes.Take);
   }
 
   /**
@@ -189,6 +189,22 @@ class ObjectWrap
       ptrThawGC(dObj);
     else // Toggle reference was the last reference, but now there is an additional one
       ptrFreezeGC(dObj);
+  }
+
+  /**
+  * Create a GObject of a given type with normal reference (no floating references).
+  * Params:
+  *   type = Type of GObject to create
+  * Returns: New GObject* of the given type or null on error
+  */
+  static void* createGObject(GType type) nothrow
+  {
+    auto obj = g_object_new(type, null);
+
+    if (g_object_is_floating(obj))
+      g_object_ref_sink(obj); // Convert floating ref to a strong owned ref (no count change)
+
+    return obj;
   }
 
   /**

@@ -269,6 +269,6 @@ final class GestureSingleGidBuilder : GestureSingleGidBuilderImpl!GestureSingleG
   */
   GestureSingle build() nothrow
   {
-    return new GestureSingle(cast(void*)createGObject(GestureSingle._getGType), No.Take);
+    return new GestureSingle(cast(void*)createGObject(GestureSingle._getGType), Yes.Take);
   }
 }

@@ -74,6 +74,6 @@ final class NumericArrayGidBuilder : NumericArrayGidBuilderImpl!NumericArrayGidB
   */
   NumericArray build() nothrow
   {
-    return new NumericArray(cast(void*)createGObject(NumericArray._getGType), No.Take);
+    return new NumericArray(cast(void*)createGObject(NumericArray._getGType), Yes.Take);
   }
 }

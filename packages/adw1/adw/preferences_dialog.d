@@ -326,6 +326,6 @@ final class PreferencesDialogGidBuilder : PreferencesDialogGidBuilderImpl!Prefer
   */
   PreferencesDialog build() nothrow
   {
-    return new PreferencesDialog(cast(void*)createGObject(PreferencesDialog._getGType), No.Take);
+    return new PreferencesDialog(cast(void*)createGObject(PreferencesDialog._getGType), Yes.Take);
   }
 }

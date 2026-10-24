@@ -191,6 +191,6 @@ final class ButtonBoxGidBuilder : ButtonBoxGidBuilderImpl!ButtonBoxGidBuilder
   */
   ButtonBox build() nothrow
   {
-    return new ButtonBox(cast(void*)createGObject(ButtonBox._getGType), No.Take);
+    return new ButtonBox(cast(void*)createGObject(ButtonBox._getGType), Yes.Take);
   }
 }

@@ -407,6 +407,6 @@ final class BannerGidBuilder : BannerGidBuilderImpl!BannerGidBuilder
   */
   Banner build() nothrow
   {
-    return new Banner(cast(void*)createGObject(Banner._getGType), No.Take);
+    return new Banner(cast(void*)createGObject(Banner._getGType), Yes.Take);
   }
 }

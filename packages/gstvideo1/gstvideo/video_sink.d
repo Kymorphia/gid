@@ -102,6 +102,6 @@ final class VideoSinkGidBuilder : VideoSinkGidBuilderImpl!VideoSinkGidBuilder
   */
   VideoSink build() nothrow
   {
-    return new VideoSink(cast(void*)createGObject(VideoSink._getGType), No.Take);
+    return new VideoSink(cast(void*)createGObject(VideoSink._getGType), Yes.Take);
   }
 }

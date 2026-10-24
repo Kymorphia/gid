@@ -69,6 +69,6 @@ final class LockButtonAccessibleGidBuilder : LockButtonAccessibleGidBuilderImpl!
   */
   LockButtonAccessible build() nothrow
   {
-    return new LockButtonAccessible(cast(void*)createGObject(LockButtonAccessible._getGType), No.Take);
+    return new LockButtonAccessible(cast(void*)createGObject(LockButtonAccessible._getGType), Yes.Take);
   }
 }

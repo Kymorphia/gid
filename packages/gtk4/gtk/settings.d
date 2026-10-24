@@ -2188,6 +2188,6 @@ final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
   */
   Settings build() nothrow
   {
-    return new Settings(cast(void*)createGObject(Settings._getGType), No.Take);
+    return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);
   }
 }

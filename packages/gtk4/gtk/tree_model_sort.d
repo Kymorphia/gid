@@ -328,6 +328,6 @@ final class TreeModelSortGidBuilder : TreeModelSortGidBuilderImpl!TreeModelSortG
   */
   TreeModelSort build() nothrow
   {
-    return new TreeModelSort(cast(void*)createGObject(TreeModelSort._getGType), No.Take);
+    return new TreeModelSort(cast(void*)createGObject(TreeModelSort._getGType), Yes.Take);
   }
 }

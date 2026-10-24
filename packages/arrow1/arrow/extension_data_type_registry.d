@@ -127,6 +127,6 @@ final class ExtensionDataTypeRegistryGidBuilder : ExtensionDataTypeRegistryGidBu
   */
   ExtensionDataTypeRegistry build() nothrow
   {
-    return new ExtensionDataTypeRegistry(cast(void*)createGObject(ExtensionDataTypeRegistry._getGType), No.Take);
+    return new ExtensionDataTypeRegistry(cast(void*)createGObject(ExtensionDataTypeRegistry._getGType), Yes.Take);
   }
 }

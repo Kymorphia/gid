@@ -586,6 +586,6 @@ final class ExpanderRowGidBuilder : ExpanderRowGidBuilderImpl!ExpanderRowGidBuil
   */
   ExpanderRow build() nothrow
   {
-    return new ExpanderRow(cast(void*)createGObject(ExpanderRow._getGType), No.Take);
+    return new ExpanderRow(cast(void*)createGObject(ExpanderRow._getGType), Yes.Take);
   }
 }

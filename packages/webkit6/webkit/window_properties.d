@@ -366,6 +366,6 @@ final class WindowPropertiesGidBuilder : WindowPropertiesGidBuilderImpl!WindowPr
   */
   WindowProperties build() nothrow
   {
-    return new WindowProperties(cast(void*)createGObject(WindowProperties._getGType), No.Take);
+    return new WindowProperties(cast(void*)createGObject(WindowProperties._getGType), Yes.Take);
   }
 }

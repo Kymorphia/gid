@@ -264,6 +264,6 @@ final class BackForwardListGidBuilder : BackForwardListGidBuilderImpl!BackForwar
   */
   BackForwardList build() nothrow
   {
-    return new BackForwardList(cast(void*)createGObject(BackForwardList._getGType), No.Take);
+    return new BackForwardList(cast(void*)createGObject(BackForwardList._getGType), Yes.Take);
   }
 }

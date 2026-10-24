@@ -176,6 +176,6 @@ final class DiscovererStreamInfoGidBuilder : DiscovererStreamInfoGidBuilderImpl!
   */
   DiscovererStreamInfo build() nothrow
   {
-    return new DiscovererStreamInfo(cast(void*)createGObject(DiscovererStreamInfo._getGType), No.Take);
+    return new DiscovererStreamInfo(cast(void*)createGObject(DiscovererStreamInfo._getGType), Yes.Take);
   }
 }

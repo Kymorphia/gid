@@ -107,6 +107,6 @@ final class AudioVisualizerGidBuilder : AudioVisualizerGidBuilderImpl!AudioVisua
   */
   AudioVisualizer build() nothrow
   {
-    return new AudioVisualizer(cast(void*)createGObject(AudioVisualizer._getGType), No.Take);
+    return new AudioVisualizer(cast(void*)createGObject(AudioVisualizer._getGType), Yes.Take);
   }
 }

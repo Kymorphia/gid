@@ -233,6 +233,6 @@ final class ContentSerializerGidBuilder : ContentSerializerGidBuilderImpl!Conten
   */
   ContentSerializer build() nothrow
   {
-    return new ContentSerializer(cast(void*)createGObject(ContentSerializer._getGType), No.Take);
+    return new ContentSerializer(cast(void*)createGObject(ContentSerializer._getGType), Yes.Take);
   }
 }

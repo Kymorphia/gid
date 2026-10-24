@@ -181,6 +181,6 @@ final class SaveDialogGidBuilder : SaveDialogGidBuilderImpl!SaveDialogGidBuilder
   */
   SaveDialog build() nothrow
   {
-    return new SaveDialog(cast(void*)createGObject(SaveDialog._getGType), No.Take);
+    return new SaveDialog(cast(void*)createGObject(SaveDialog._getGType), Yes.Take);
   }
 }

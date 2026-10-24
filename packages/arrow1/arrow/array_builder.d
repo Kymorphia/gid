@@ -231,6 +231,6 @@ final class ArrayBuilderGidBuilder : ArrayBuilderGidBuilderImpl!ArrayBuilderGidB
   */
   ArrayBuilder build() nothrow
   {
-    return new ArrayBuilder(cast(void*)createGObject(ArrayBuilder._getGType), No.Take);
+    return new ArrayBuilder(cast(void*)createGObject(ArrayBuilder._getGType), Yes.Take);
   }
 }

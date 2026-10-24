@@ -158,6 +158,6 @@ final class CarouselIndicatorLinesGidBuilder : CarouselIndicatorLinesGidBuilderI
   */
   CarouselIndicatorLines build() nothrow
   {
-    return new CarouselIndicatorLines(cast(void*)createGObject(CarouselIndicatorLines._getGType), No.Take);
+    return new CarouselIndicatorLines(cast(void*)createGObject(CarouselIndicatorLines._getGType), Yes.Take);
   }
 }

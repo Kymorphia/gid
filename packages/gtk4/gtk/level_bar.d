@@ -620,6 +620,6 @@ final class LevelBarGidBuilder : LevelBarGidBuilderImpl!LevelBarGidBuilder
   */
   LevelBar build() nothrow
   {
-    return new LevelBar(cast(void*)createGObject(LevelBar._getGType), No.Take);
+    return new LevelBar(cast(void*)createGObject(LevelBar._getGType), Yes.Take);
   }
 }

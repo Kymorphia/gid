@@ -607,6 +607,6 @@ final class FontDialogButtonGidBuilder : FontDialogButtonGidBuilderImpl!FontDial
   */
   FontDialogButton build() nothrow
   {
-    return new FontDialogButton(cast(void*)createGObject(FontDialogButton._getGType), No.Take);
+    return new FontDialogButton(cast(void*)createGObject(FontDialogButton._getGType), Yes.Take);
   }
 }

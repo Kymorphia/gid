@@ -449,6 +449,6 @@ final class CenterBoxGidBuilder : CenterBoxGidBuilderImpl!CenterBoxGidBuilder
   */
   CenterBox build() nothrow
   {
-    return new CenterBox(cast(void*)createGObject(CenterBox._getGType), No.Take);
+    return new CenterBox(cast(void*)createGObject(CenterBox._getGType), Yes.Take);
   }
 }

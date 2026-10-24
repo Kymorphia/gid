@@ -163,6 +163,6 @@ final class DataModelArrayGidBuilder : DataModelArrayGidBuilderImpl!DataModelArr
   */
   DataModelArray build() nothrow
   {
-    return new DataModelArray(cast(void*)createGObject(DataModelArray._getGType), No.Take);
+    return new DataModelArray(cast(void*)createGObject(DataModelArray._getGType), Yes.Take);
   }
 }

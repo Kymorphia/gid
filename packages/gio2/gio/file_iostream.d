@@ -202,6 +202,6 @@ final class FileIOStreamGidBuilder : FileIOStreamGidBuilderImpl!FileIOStreamGidB
   */
   FileIOStream build() nothrow
   {
-    return new FileIOStream(cast(void*)createGObject(FileIOStream._getGType), No.Take);
+    return new FileIOStream(cast(void*)createGObject(FileIOStream._getGType), Yes.Take);
   }
 }

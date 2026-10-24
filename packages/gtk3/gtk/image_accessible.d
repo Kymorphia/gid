@@ -70,6 +70,6 @@ final class ImageAccessibleGidBuilder : ImageAccessibleGidBuilderImpl!ImageAcces
   */
   ImageAccessible build() nothrow
   {
-    return new ImageAccessible(cast(void*)createGObject(ImageAccessible._getGType), No.Take);
+    return new ImageAccessible(cast(void*)createGObject(ImageAccessible._getGType), Yes.Take);
   }
 }

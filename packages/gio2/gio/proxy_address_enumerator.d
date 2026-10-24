@@ -168,6 +168,6 @@ final class ProxyAddressEnumeratorGidBuilder : ProxyAddressEnumeratorGidBuilderI
   */
   ProxyAddressEnumerator build() nothrow
   {
-    return new ProxyAddressEnumerator(cast(void*)createGObject(ProxyAddressEnumerator._getGType), No.Take);
+    return new ProxyAddressEnumerator(cast(void*)createGObject(ProxyAddressEnumerator._getGType), Yes.Take);
   }
 }

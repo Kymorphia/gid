@@ -68,6 +68,6 @@ final class WebsocketExtensionDeflateGidBuilder : WebsocketExtensionDeflateGidBu
   */
   WebsocketExtensionDeflate build() nothrow
   {
-    return new WebsocketExtensionDeflate(cast(void*)createGObject(WebsocketExtensionDeflate._getGType), No.Take);
+    return new WebsocketExtensionDeflate(cast(void*)createGObject(WebsocketExtensionDeflate._getGType), Yes.Take);
   }
 }

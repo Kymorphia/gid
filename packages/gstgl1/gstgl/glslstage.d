@@ -191,6 +191,6 @@ final class GLSLStageGidBuilder : GLSLStageGidBuilderImpl!GLSLStageGidBuilder
   */
   GLSLStage build() nothrow
   {
-    return new GLSLStage(cast(void*)createGObject(GLSLStage._getGType), No.Take);
+    return new GLSLStage(cast(void*)createGObject(GLSLStage._getGType), Yes.Take);
   }
 }

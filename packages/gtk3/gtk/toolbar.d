@@ -672,6 +672,6 @@ final class ToolbarGidBuilder : ToolbarGidBuilderImpl!ToolbarGidBuilder
   */
   Toolbar build() nothrow
   {
-    return new Toolbar(cast(void*)createGObject(Toolbar._getGType), No.Take);
+    return new Toolbar(cast(void*)createGObject(Toolbar._getGType), Yes.Take);
   }
 }

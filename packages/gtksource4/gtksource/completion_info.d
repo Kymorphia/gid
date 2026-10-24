@@ -92,6 +92,6 @@ final class CompletionInfoGidBuilder : CompletionInfoGidBuilderImpl!CompletionIn
   */
   CompletionInfo build() nothrow
   {
-    return new CompletionInfo(cast(void*)createGObject(CompletionInfo._getGType), No.Take);
+    return new CompletionInfo(cast(void*)createGObject(CompletionInfo._getGType), Yes.Take);
   }
 }

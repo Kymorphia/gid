@@ -69,6 +69,6 @@ final class BooleanCellAccessibleGidBuilder : BooleanCellAccessibleGidBuilderImp
   */
   BooleanCellAccessible build() nothrow
   {
-    return new BooleanCellAccessible(cast(void*)createGObject(BooleanCellAccessible._getGType), No.Take);
+    return new BooleanCellAccessible(cast(void*)createGObject(BooleanCellAccessible._getGType), Yes.Take);
   }
 }

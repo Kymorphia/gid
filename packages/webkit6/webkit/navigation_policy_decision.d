@@ -90,6 +90,6 @@ final class NavigationPolicyDecisionGidBuilder : NavigationPolicyDecisionGidBuil
   */
   NavigationPolicyDecision build() nothrow
   {
-    return new NavigationPolicyDecision(cast(void*)createGObject(NavigationPolicyDecision._getGType), No.Take);
+    return new NavigationPolicyDecision(cast(void*)createGObject(NavigationPolicyDecision._getGType), Yes.Take);
   }
 }

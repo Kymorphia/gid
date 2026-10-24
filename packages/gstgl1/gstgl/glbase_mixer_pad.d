@@ -62,6 +62,6 @@ final class GLBaseMixerPadGidBuilder : GLBaseMixerPadGidBuilderImpl!GLBaseMixerP
   */
   GLBaseMixerPad build() nothrow
   {
-    return new GLBaseMixerPad(cast(void*)createGObject(GLBaseMixerPad._getGType), No.Take);
+    return new GLBaseMixerPad(cast(void*)createGObject(GLBaseMixerPad._getGType), Yes.Take);
   }
 }

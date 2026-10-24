@@ -92,6 +92,6 @@ final class DynamicTypeFactoryGidBuilder : DynamicTypeFactoryGidBuilderImpl!Dyna
   */
   DynamicTypeFactory build() nothrow
   {
-    return new DynamicTypeFactory(cast(void*)createGObject(DynamicTypeFactory._getGType), No.Take);
+    return new DynamicTypeFactory(cast(void*)createGObject(DynamicTypeFactory._getGType), Yes.Take);
   }
 }

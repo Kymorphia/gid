@@ -206,6 +206,6 @@ final class FixedGidBuilder : FixedGidBuilderImpl!FixedGidBuilder
   */
   Fixed build() nothrow
   {
-    return new Fixed(cast(void*)createGObject(Fixed._getGType), No.Take);
+    return new Fixed(cast(void*)createGObject(Fixed._getGType), Yes.Take);
   }
 }

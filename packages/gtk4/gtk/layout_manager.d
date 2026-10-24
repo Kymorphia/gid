@@ -216,6 +216,6 @@ final class LayoutManagerGidBuilder : LayoutManagerGidBuilderImpl!LayoutManagerG
   */
   LayoutManager build() nothrow
   {
-    return new LayoutManager(cast(void*)createGObject(LayoutManager._getGType), No.Take);
+    return new LayoutManager(cast(void*)createGObject(LayoutManager._getGType), Yes.Take);
   }
 }

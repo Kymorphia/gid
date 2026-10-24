@@ -719,6 +719,6 @@ final class PanedGidBuilder : PanedGidBuilderImpl!PanedGidBuilder
   */
   Paned build() nothrow
   {
-    return new Paned(cast(void*)createGObject(Paned._getGType), No.Take);
+    return new Paned(cast(void*)createGObject(Paned._getGType), Yes.Take);
   }
 }

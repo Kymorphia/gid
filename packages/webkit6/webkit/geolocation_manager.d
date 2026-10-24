@@ -219,6 +219,6 @@ final class GeolocationManagerGidBuilder : GeolocationManagerGidBuilderImpl!Geol
   */
   GeolocationManager build() nothrow
   {
-    return new GeolocationManager(cast(void*)createGObject(GeolocationManager._getGType), No.Take);
+    return new GeolocationManager(cast(void*)createGObject(GeolocationManager._getGType), Yes.Take);
   }
 }

@@ -62,6 +62,6 @@ final class TemporalDataTypeGidBuilder : TemporalDataTypeGidBuilderImpl!Temporal
   */
   TemporalDataType build() nothrow
   {
-    return new TemporalDataType(cast(void*)createGObject(TemporalDataType._getGType), No.Take);
+    return new TemporalDataType(cast(void*)createGObject(TemporalDataType._getGType), Yes.Take);
   }
 }

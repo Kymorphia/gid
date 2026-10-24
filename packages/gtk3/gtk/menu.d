@@ -1341,6 +1341,6 @@ final class MenuGidBuilder : MenuGidBuilderImpl!MenuGidBuilder
   */
   Menu build() nothrow
   {
-    return new Menu(cast(void*)createGObject(Menu._getGType), No.Take);
+    return new Menu(cast(void*)createGObject(Menu._getGType), Yes.Take);
   }
 }

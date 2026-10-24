@@ -154,6 +154,6 @@ final class ScalarGidBuilder : ScalarGidBuilderImpl!ScalarGidBuilder
   */
   Scalar build() nothrow
   {
-    return new Scalar(cast(void*)createGObject(Scalar._getGType), No.Take);
+    return new Scalar(cast(void*)createGObject(Scalar._getGType), Yes.Take);
   }
 }

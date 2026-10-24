@@ -65,6 +65,6 @@ final class ScrolledWindowAccessibleGidBuilder : ScrolledWindowAccessibleGidBuil
   */
   ScrolledWindowAccessible build() nothrow
   {
-    return new ScrolledWindowAccessible(cast(void*)createGObject(ScrolledWindowAccessible._getGType), No.Take);
+    return new ScrolledWindowAccessible(cast(void*)createGObject(ScrolledWindowAccessible._getGType), Yes.Take);
   }
 }

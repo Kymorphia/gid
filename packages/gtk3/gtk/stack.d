@@ -580,6 +580,6 @@ final class StackGidBuilder : StackGidBuilderImpl!StackGidBuilder
   */
   Stack build() nothrow
   {
-    return new Stack(cast(void*)createGObject(Stack._getGType), No.Take);
+    return new Stack(cast(void*)createGObject(Stack._getGType), Yes.Take);
   }
 }

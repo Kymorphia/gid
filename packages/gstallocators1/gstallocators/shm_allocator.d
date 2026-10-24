@@ -97,6 +97,6 @@ final class ShmAllocatorGidBuilder : ShmAllocatorGidBuilderImpl!ShmAllocatorGidB
   */
   ShmAllocator build() nothrow
   {
-    return new ShmAllocator(cast(void*)createGObject(ShmAllocator._getGType), No.Take);
+    return new ShmAllocator(cast(void*)createGObject(ShmAllocator._getGType), Yes.Take);
   }
 }

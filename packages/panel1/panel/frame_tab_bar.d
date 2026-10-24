@@ -244,6 +244,6 @@ final class FrameTabBarGidBuilder : FrameTabBarGidBuilderImpl!FrameTabBarGidBuil
   */
   FrameTabBar build() nothrow
   {
-    return new FrameTabBar(cast(void*)createGObject(FrameTabBar._getGType), No.Take);
+    return new FrameTabBar(cast(void*)createGObject(FrameTabBar._getGType), Yes.Take);
   }
 }

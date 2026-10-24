@@ -62,6 +62,6 @@ final class KeyValuePartitioningGidBuilder : KeyValuePartitioningGidBuilderImpl!
   */
   KeyValuePartitioning build() nothrow
   {
-    return new KeyValuePartitioning(cast(void*)createGObject(KeyValuePartitioning._getGType), No.Take);
+    return new KeyValuePartitioning(cast(void*)createGObject(KeyValuePartitioning._getGType), Yes.Take);
   }
 }

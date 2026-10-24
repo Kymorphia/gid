@@ -1488,6 +1488,6 @@ final class AppSrcGidBuilder : AppSrcGidBuilderImpl!AppSrcGidBuilder
   */
   AppSrc build() nothrow
   {
-    return new AppSrc(cast(void*)createGObject(AppSrc._getGType), No.Take);
+    return new AppSrc(cast(void*)createGObject(AppSrc._getGType), Yes.Take);
   }
 }

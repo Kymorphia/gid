@@ -407,6 +407,6 @@ final class AuthDomainGidBuilder : AuthDomainGidBuilderImpl!AuthDomainGidBuilder
   */
   AuthDomain build() nothrow
   {
-    return new AuthDomain(cast(void*)createGObject(AuthDomain._getGType), No.Take);
+    return new AuthDomain(cast(void*)createGObject(AuthDomain._getGType), Yes.Take);
   }
 }

@@ -1514,6 +1514,6 @@ final class ComboBoxGidBuilder : ComboBoxGidBuilderImpl!ComboBoxGidBuilder
   */
   ComboBox build() nothrow
   {
-    return new ComboBox(cast(void*)createGObject(ComboBox._getGType), No.Take);
+    return new ComboBox(cast(void*)createGObject(ComboBox._getGType), Yes.Take);
   }
 }

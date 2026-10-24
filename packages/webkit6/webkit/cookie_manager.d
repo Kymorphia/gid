@@ -476,6 +476,6 @@ final class CookieManagerGidBuilder : CookieManagerGidBuilderImpl!CookieManagerG
   */
   CookieManager build() nothrow
   {
-    return new CookieManager(cast(void*)createGObject(CookieManager._getGType), No.Take);
+    return new CookieManager(cast(void*)createGObject(CookieManager._getGType), Yes.Take);
   }
 }

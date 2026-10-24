@@ -74,6 +74,6 @@ final class LinkButtonAccessibleGidBuilder : LinkButtonAccessibleGidBuilderImpl!
   */
   LinkButtonAccessible build() nothrow
   {
-    return new LinkButtonAccessible(cast(void*)createGObject(LinkButtonAccessible._getGType), No.Take);
+    return new LinkButtonAccessible(cast(void*)createGObject(LinkButtonAccessible._getGType), Yes.Take);
   }
 }

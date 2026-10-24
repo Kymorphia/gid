@@ -516,6 +516,6 @@ final class GLShaderGidBuilder : GLShaderGidBuilderImpl!GLShaderGidBuilder
   */
   GLShader build() nothrow
   {
-    return new GLShader(cast(void*)createGObject(GLShader._getGType), No.Take);
+    return new GLShader(cast(void*)createGObject(GLShader._getGType), Yes.Take);
   }
 }

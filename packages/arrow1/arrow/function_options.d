@@ -79,6 +79,6 @@ final class FunctionOptionsGidBuilder : FunctionOptionsGidBuilderImpl!FunctionOp
   */
   FunctionOptions build() nothrow
   {
-    return new FunctionOptions(cast(void*)createGObject(FunctionOptions._getGType), No.Take);
+    return new FunctionOptions(cast(void*)createGObject(FunctionOptions._getGType), Yes.Take);
   }
 }

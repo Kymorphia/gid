@@ -1418,6 +1418,6 @@ final class CellAreaGidBuilder : CellAreaGidBuilderImpl!CellAreaGidBuilder
   */
   CellArea build() nothrow
   {
-    return new CellArea(cast(void*)createGObject(CellArea._getGType), No.Take);
+    return new CellArea(cast(void*)createGObject(CellArea._getGType), Yes.Take);
   }
 }

@@ -78,6 +78,6 @@ final class Int32StatisticsGidBuilder : Int32StatisticsGidBuilderImpl!Int32Stati
   */
   Int32Statistics build() nothrow
   {
-    return new Int32Statistics(cast(void*)createGObject(Int32Statistics._getGType), No.Take);
+    return new Int32Statistics(cast(void*)createGObject(Int32Statistics._getGType), Yes.Take);
   }
 }

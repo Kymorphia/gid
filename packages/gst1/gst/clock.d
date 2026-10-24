@@ -853,6 +853,6 @@ final class ClockGidBuilder : ClockGidBuilderImpl!ClockGidBuilder
   */
   Clock build() nothrow
   {
-    return new Clock(cast(void*)createGObject(Clock._getGType), No.Take);
+    return new Clock(cast(void*)createGObject(Clock._getGType), Yes.Take);
   }
 }

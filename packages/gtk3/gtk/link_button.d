@@ -299,6 +299,6 @@ final class LinkButtonGidBuilder : LinkButtonGidBuilderImpl!LinkButtonGidBuilder
   */
   LinkButton build() nothrow
   {
-    return new LinkButton(cast(void*)createGObject(LinkButton._getGType), No.Take);
+    return new LinkButton(cast(void*)createGObject(LinkButton._getGType), Yes.Take);
   }
 }

@@ -651,6 +651,6 @@ final class AudioEncoderGidBuilder : AudioEncoderGidBuilderImpl!AudioEncoderGidB
   */
   AudioEncoder build() nothrow
   {
-    return new AudioEncoder(cast(void*)createGObject(AudioEncoder._getGType), No.Take);
+    return new AudioEncoder(cast(void*)createGObject(AudioEncoder._getGType), Yes.Take);
   }
 }

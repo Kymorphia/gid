@@ -222,6 +222,6 @@ final class AssistantPageGidBuilder : AssistantPageGidBuilderImpl!AssistantPageG
   */
   AssistantPage build() nothrow
   {
-    return new AssistantPage(cast(void*)createGObject(AssistantPage._getGType), No.Take);
+    return new AssistantPage(cast(void*)createGObject(AssistantPage._getGType), Yes.Take);
   }
 }

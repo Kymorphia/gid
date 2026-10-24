@@ -1363,6 +1363,6 @@ final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
   */
   ObjectWrap build() nothrow
   {
-    return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), No.Take);
+    return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), Yes.Take);
   }
 }

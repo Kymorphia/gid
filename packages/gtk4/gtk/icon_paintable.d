@@ -189,6 +189,6 @@ final class IconPaintableGidBuilder : IconPaintableGidBuilderImpl!IconPaintableG
   */
   IconPaintable build() nothrow
   {
-    return new IconPaintable(cast(void*)createGObject(IconPaintable._getGType), No.Take);
+    return new IconPaintable(cast(void*)createGObject(IconPaintable._getGType), Yes.Take);
   }
 }

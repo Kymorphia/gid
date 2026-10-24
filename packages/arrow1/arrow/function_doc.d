@@ -115,6 +115,6 @@ final class FunctionDocGidBuilder : FunctionDocGidBuilderImpl!FunctionDocGidBuil
   */
   FunctionDoc build() nothrow
   {
-    return new FunctionDoc(cast(void*)createGObject(FunctionDoc._getGType), No.Take);
+    return new FunctionDoc(cast(void*)createGObject(FunctionDoc._getGType), Yes.Take);
   }
 }

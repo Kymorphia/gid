@@ -78,6 +78,6 @@ final class ComboBoxAccessibleGidBuilder : ComboBoxAccessibleGidBuilderImpl!Comb
   */
   ComboBoxAccessible build() nothrow
   {
-    return new ComboBoxAccessible(cast(void*)createGObject(ComboBoxAccessible._getGType), No.Take);
+    return new ComboBoxAccessible(cast(void*)createGObject(ComboBoxAccessible._getGType), Yes.Take);
   }
 }

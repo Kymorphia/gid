@@ -133,6 +133,6 @@ final class InputStreamGidBuilder : InputStreamGidBuilderImpl!InputStreamGidBuil
   */
   InputStream build() nothrow
   {
-    return new InputStream(cast(void*)createGObject(InputStream._getGType), No.Take);
+    return new InputStream(cast(void*)createGObject(InputStream._getGType), Yes.Take);
   }
 }

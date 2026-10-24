@@ -437,6 +437,6 @@ final class StackPageGidBuilder : StackPageGidBuilderImpl!StackPageGidBuilder
   */
   StackPage build() nothrow
   {
-    return new StackPage(cast(void*)createGObject(StackPage._getGType), No.Take);
+    return new StackPage(cast(void*)createGObject(StackPage._getGType), Yes.Take);
   }
 }

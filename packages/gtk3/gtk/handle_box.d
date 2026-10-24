@@ -411,6 +411,6 @@ final class HandleBoxGidBuilder : HandleBoxGidBuilderImpl!HandleBoxGidBuilder
   */
   HandleBox build() nothrow
   {
-    return new HandleBox(cast(void*)createGObject(HandleBox._getGType), No.Take);
+    return new HandleBox(cast(void*)createGObject(HandleBox._getGType), Yes.Take);
   }
 }

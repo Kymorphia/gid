@@ -497,6 +497,6 @@ final class CellViewGidBuilder : CellViewGidBuilderImpl!CellViewGidBuilder
   */
   CellView build() nothrow
   {
-    return new CellView(cast(void*)createGObject(CellView._getGType), No.Take);
+    return new CellView(cast(void*)createGObject(CellView._getGType), Yes.Take);
   }
 }

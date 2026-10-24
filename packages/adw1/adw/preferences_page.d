@@ -399,6 +399,6 @@ final class PreferencesPageGidBuilder : PreferencesPageGidBuilderImpl!Preference
   */
   PreferencesPage build() nothrow
   {
-    return new PreferencesPage(cast(void*)createGObject(PreferencesPage._getGType), No.Take);
+    return new PreferencesPage(cast(void*)createGObject(PreferencesPage._getGType), Yes.Take);
   }
 }

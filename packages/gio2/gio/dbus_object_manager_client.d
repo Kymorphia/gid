@@ -827,6 +827,6 @@ final class DBusObjectManagerClientGidBuilder : DBusObjectManagerClientGidBuilde
   */
   DBusObjectManagerClient build() nothrow
   {
-    return new DBusObjectManagerClient(cast(void*)createGObject(DBusObjectManagerClient._getGType), No.Take);
+    return new DBusObjectManagerClient(cast(void*)createGObject(DBusObjectManagerClient._getGType), Yes.Take);
   }
 }

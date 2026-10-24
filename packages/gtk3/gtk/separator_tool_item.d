@@ -142,6 +142,6 @@ final class SeparatorToolItemGidBuilder : SeparatorToolItemGidBuilderImpl!Separa
   */
   SeparatorToolItem build() nothrow
   {
-    return new SeparatorToolItem(cast(void*)createGObject(SeparatorToolItem._getGType), No.Take);
+    return new SeparatorToolItem(cast(void*)createGObject(SeparatorToolItem._getGType), Yes.Take);
   }
 }

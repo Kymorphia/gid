@@ -121,6 +121,6 @@ final class FontChooserDialogGidBuilder : FontChooserDialogGidBuilderImpl!FontCh
   */
   FontChooserDialog build() nothrow
   {
-    return new FontChooserDialog(cast(void*)createGObject(FontChooserDialog._getGType), No.Take);
+    return new FontChooserDialog(cast(void*)createGObject(FontChooserDialog._getGType), Yes.Take);
   }
 }

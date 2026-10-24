@@ -588,6 +588,6 @@ final class ApplicationCommandLineGidBuilder : ApplicationCommandLineGidBuilderI
   */
   ApplicationCommandLine build() nothrow
   {
-    return new ApplicationCommandLine(cast(void*)createGObject(ApplicationCommandLine._getGType), No.Take);
+    return new ApplicationCommandLine(cast(void*)createGObject(ApplicationCommandLine._getGType), Yes.Take);
   }
 }

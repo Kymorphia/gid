@@ -162,6 +162,6 @@ final class HandlerTimeGidBuilder : HandlerTimeGidBuilderImpl!HandlerTimeGidBuil
   */
   HandlerTime build() nothrow
   {
-    return new HandlerTime(cast(void*)createGObject(HandlerTime._getGType), No.Take);
+    return new HandlerTime(cast(void*)createGObject(HandlerTime._getGType), Yes.Take);
   }
 }

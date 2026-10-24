@@ -290,6 +290,6 @@ final class BreakpointBinGidBuilder : BreakpointBinGidBuilderImpl!BreakpointBinG
   */
   BreakpointBin build() nothrow
   {
-    return new BreakpointBin(cast(void*)createGObject(BreakpointBin._getGType), No.Take);
+    return new BreakpointBin(cast(void*)createGObject(BreakpointBin._getGType), Yes.Take);
   }
 }

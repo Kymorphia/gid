@@ -86,6 +86,6 @@ final class GLBaseMixerGidBuilder : GLBaseMixerGidBuilderImpl!GLBaseMixerGidBuil
   */
   GLBaseMixer build() nothrow
   {
-    return new GLBaseMixer(cast(void*)createGObject(GLBaseMixer._getGType), No.Take);
+    return new GLBaseMixer(cast(void*)createGObject(GLBaseMixer._getGType), Yes.Take);
   }
 }

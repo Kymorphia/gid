@@ -328,6 +328,6 @@ final class VisualGidBuilder : VisualGidBuilderImpl!VisualGidBuilder
   */
   Visual build() nothrow
   {
-    return new Visual(cast(void*)createGObject(Visual._getGType), No.Take);
+    return new Visual(cast(void*)createGObject(Visual._getGType), Yes.Take);
   }
 }

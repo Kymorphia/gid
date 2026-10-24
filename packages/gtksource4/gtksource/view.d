@@ -1483,6 +1483,6 @@ final class ViewGidBuilder : ViewGidBuilderImpl!ViewGidBuilder
   */
   View build() nothrow
   {
-    return new View(cast(void*)createGObject(View._getGType), No.Take);
+    return new View(cast(void*)createGObject(View._getGType), Yes.Take);
   }
 }

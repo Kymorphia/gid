@@ -68,6 +68,6 @@ final class AuthNTLMGidBuilder : AuthNTLMGidBuilderImpl!AuthNTLMGidBuilder
   */
   AuthNTLM build() nothrow
   {
-    return new AuthNTLM(cast(void*)createGObject(AuthNTLM._getGType), No.Take);
+    return new AuthNTLM(cast(void*)createGObject(AuthNTLM._getGType), Yes.Take);
   }
 }

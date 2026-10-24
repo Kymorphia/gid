@@ -191,6 +191,6 @@ final class FileSelectorGidBuilder : FileSelectorGidBuilderImpl!FileSelectorGidB
   */
   FileSelector build() nothrow
   {
-    return new FileSelector(cast(void*)createGObject(FileSelector._getGType), No.Take);
+    return new FileSelector(cast(void*)createGObject(FileSelector._getGType), Yes.Take);
   }
 }

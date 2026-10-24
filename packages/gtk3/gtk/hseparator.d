@@ -93,6 +93,6 @@ final class HSeparatorGidBuilder : HSeparatorGidBuilderImpl!HSeparatorGidBuilder
   */
   HSeparator build() nothrow
   {
-    return new HSeparator(cast(void*)createGObject(HSeparator._getGType), No.Take);
+    return new HSeparator(cast(void*)createGObject(HSeparator._getGType), Yes.Take);
   }
 }

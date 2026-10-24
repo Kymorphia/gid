@@ -140,6 +140,6 @@ final class FileSystemDatasetGidBuilder : FileSystemDatasetGidBuilderImpl!FileSy
   */
   FileSystemDataset build() nothrow
   {
-    return new FileSystemDataset(cast(void*)createGObject(FileSystemDataset._getGType), No.Take);
+    return new FileSystemDataset(cast(void*)createGObject(FileSystemDataset._getGType), Yes.Take);
   }
 }

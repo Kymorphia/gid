@@ -80,6 +80,6 @@ final class HandlerBinGidBuilder : HandlerBinGidBuilderImpl!HandlerBinGidBuilder
   */
   HandlerBin build() nothrow
   {
-    return new HandlerBin(cast(void*)createGObject(HandlerBin._getGType), No.Take);
+    return new HandlerBin(cast(void*)createGObject(HandlerBin._getGType), Yes.Take);
   }
 }

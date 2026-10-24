@@ -347,6 +347,6 @@ final class NotebookPageGidBuilder : NotebookPageGidBuilderImpl!NotebookPageGidB
   */
   NotebookPage build() nothrow
   {
-    return new NotebookPage(cast(void*)createGObject(NotebookPage._getGType), No.Take);
+    return new NotebookPage(cast(void*)createGObject(NotebookPage._getGType), Yes.Take);
   }
 }

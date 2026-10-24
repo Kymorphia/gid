@@ -77,6 +77,6 @@ final class WebsocketExtensionManagerGidBuilder : WebsocketExtensionManagerGidBu
   */
   WebsocketExtensionManager build() nothrow
   {
-    return new WebsocketExtensionManager(cast(void*)createGObject(WebsocketExtensionManager._getGType), No.Take);
+    return new WebsocketExtensionManager(cast(void*)createGObject(WebsocketExtensionManager._getGType), Yes.Take);
   }
 }

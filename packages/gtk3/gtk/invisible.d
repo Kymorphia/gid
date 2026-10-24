@@ -143,6 +143,6 @@ final class InvisibleGidBuilder : InvisibleGidBuilderImpl!InvisibleGidBuilder
   */
   Invisible build() nothrow
   {
-    return new Invisible(cast(void*)createGObject(Invisible._getGType), No.Take);
+    return new Invisible(cast(void*)createGObject(Invisible._getGType), Yes.Take);
   }
 }

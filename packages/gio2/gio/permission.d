@@ -337,6 +337,6 @@ final class PermissionGidBuilder : PermissionGidBuilderImpl!PermissionGidBuilder
   */
   Permission build() nothrow
   {
-    return new Permission(cast(void*)createGObject(Permission._getGType), No.Take);
+    return new Permission(cast(void*)createGObject(Permission._getGType), Yes.Take);
   }
 }

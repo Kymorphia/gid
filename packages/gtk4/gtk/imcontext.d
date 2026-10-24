@@ -800,6 +800,6 @@ final class IMContextGidBuilder : IMContextGidBuilderImpl!IMContextGidBuilder
   */
   IMContext build() nothrow
   {
-    return new IMContext(cast(void*)createGObject(IMContext._getGType), No.Take);
+    return new IMContext(cast(void*)createGObject(IMContext._getGType), Yes.Take);
   }
 }

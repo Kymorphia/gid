@@ -150,6 +150,6 @@ final class WebsocketExtensionGidBuilder : WebsocketExtensionGidBuilderImpl!Webs
   */
   WebsocketExtension build() nothrow
   {
-    return new WebsocketExtension(cast(void*)createGObject(WebsocketExtension._getGType), No.Take);
+    return new WebsocketExtension(cast(void*)createGObject(WebsocketExtension._getGType), Yes.Take);
   }
 }

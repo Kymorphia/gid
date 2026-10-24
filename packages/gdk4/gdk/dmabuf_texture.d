@@ -76,6 +76,6 @@ final class DmabufTextureGidBuilder : DmabufTextureGidBuilderImpl!DmabufTextureG
   */
   DmabufTexture build() nothrow
   {
-    return new DmabufTexture(cast(void*)createGObject(DmabufTexture._getGType), No.Take);
+    return new DmabufTexture(cast(void*)createGObject(DmabufTexture._getGType), Yes.Take);
   }
 }

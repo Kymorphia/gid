@@ -231,6 +231,6 @@ final class SnippetManagerGidBuilder : SnippetManagerGidBuilderImpl!SnippetManag
   */
   SnippetManager build() nothrow
   {
-    return new SnippetManager(cast(void*)createGObject(SnippetManager._getGType), No.Take);
+    return new SnippetManager(cast(void*)createGObject(SnippetManager._getGType), Yes.Take);
   }
 }

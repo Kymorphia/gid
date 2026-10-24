@@ -1967,6 +1967,6 @@ final class DBusConnectionGidBuilder : DBusConnectionGidBuilderImpl!DBusConnecti
   */
   DBusConnection build() nothrow
   {
-    return new DBusConnection(cast(void*)createGObject(DBusConnection._getGType), No.Take);
+    return new DBusConnection(cast(void*)createGObject(DBusConnection._getGType), Yes.Take);
   }
 }

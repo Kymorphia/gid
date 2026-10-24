@@ -195,6 +195,6 @@ final class TypeFindFactoryGidBuilder : TypeFindFactoryGidBuilderImpl!TypeFindFa
   */
   TypeFindFactory build() nothrow
   {
-    return new TypeFindFactory(cast(void*)createGObject(TypeFindFactory._getGType), No.Take);
+    return new TypeFindFactory(cast(void*)createGObject(TypeFindFactory._getGType), Yes.Take);
   }
 }

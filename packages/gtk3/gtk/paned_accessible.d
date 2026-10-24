@@ -70,6 +70,6 @@ final class PanedAccessibleGidBuilder : PanedAccessibleGidBuilderImpl!PanedAcces
   */
   PanedAccessible build() nothrow
   {
-    return new PanedAccessible(cast(void*)createGObject(PanedAccessible._getGType), No.Take);
+    return new PanedAccessible(cast(void*)createGObject(PanedAccessible._getGType), Yes.Take);
   }
 }

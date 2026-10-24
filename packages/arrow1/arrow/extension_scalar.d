@@ -62,6 +62,6 @@ final class ExtensionScalarGidBuilder : ExtensionScalarGidBuilderImpl!ExtensionS
   */
   ExtensionScalar build() nothrow
   {
-    return new ExtensionScalar(cast(void*)createGObject(ExtensionScalar._getGType), No.Take);
+    return new ExtensionScalar(cast(void*)createGObject(ExtensionScalar._getGType), Yes.Take);
   }
 }

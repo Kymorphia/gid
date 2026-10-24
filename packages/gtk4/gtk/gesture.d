@@ -829,6 +829,6 @@ final class GestureGidBuilder : GestureGidBuilderImpl!GestureGidBuilder
   */
   Gesture build() nothrow
   {
-    return new Gesture(cast(void*)createGObject(Gesture._getGType), No.Take);
+    return new Gesture(cast(void*)createGObject(Gesture._getGType), Yes.Take);
   }
 }

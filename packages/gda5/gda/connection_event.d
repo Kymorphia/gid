@@ -228,6 +228,6 @@ final class ConnectionEventGidBuilder : ConnectionEventGidBuilderImpl!Connection
   */
   ConnectionEvent build() nothrow
   {
-    return new ConnectionEvent(cast(void*)createGObject(ConnectionEvent._getGType), No.Take);
+    return new ConnectionEvent(cast(void*)createGObject(ConnectionEvent._getGType), Yes.Take);
   }
 }

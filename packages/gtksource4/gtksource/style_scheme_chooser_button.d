@@ -87,6 +87,6 @@ final class StyleSchemeChooserButtonGidBuilder : StyleSchemeChooserButtonGidBuil
   */
   StyleSchemeChooserButton build() nothrow
   {
-    return new StyleSchemeChooserButton(cast(void*)createGObject(StyleSchemeChooserButton._getGType), No.Take);
+    return new StyleSchemeChooserButton(cast(void*)createGObject(StyleSchemeChooserButton._getGType), Yes.Take);
   }
 }

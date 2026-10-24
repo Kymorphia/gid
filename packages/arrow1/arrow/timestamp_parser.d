@@ -77,6 +77,6 @@ final class TimestampParserGidBuilder : TimestampParserGidBuilderImpl!TimestampP
   */
   TimestampParser build() nothrow
   {
-    return new TimestampParser(cast(void*)createGObject(TimestampParser._getGType), No.Take);
+    return new TimestampParser(cast(void*)createGObject(TimestampParser._getGType), Yes.Take);
   }
 }

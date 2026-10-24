@@ -242,6 +242,6 @@ final class SettingsBackendGidBuilder : SettingsBackendGidBuilderImpl!SettingsBa
   */
   SettingsBackend build() nothrow
   {
-    return new SettingsBackend(cast(void*)createGObject(SettingsBackend._getGType), No.Take);
+    return new SettingsBackend(cast(void*)createGObject(SettingsBackend._getGType), Yes.Take);
   }
 }

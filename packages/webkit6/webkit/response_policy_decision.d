@@ -148,6 +148,6 @@ final class ResponsePolicyDecisionGidBuilder : ResponsePolicyDecisionGidBuilderI
   */
   ResponsePolicyDecision build() nothrow
   {
-    return new ResponsePolicyDecision(cast(void*)createGObject(ResponsePolicyDecision._getGType), No.Take);
+    return new ResponsePolicyDecision(cast(void*)createGObject(ResponsePolicyDecision._getGType), Yes.Take);
   }
 }

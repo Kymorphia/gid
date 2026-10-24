@@ -66,6 +66,6 @@ final class SnapshotGidBuilder : SnapshotGidBuilderImpl!SnapshotGidBuilder
   */
   Snapshot build() nothrow
   {
-    return new Snapshot(cast(void*)createGObject(Snapshot._getGType), No.Take);
+    return new Snapshot(cast(void*)createGObject(Snapshot._getGType), Yes.Take);
   }
 }

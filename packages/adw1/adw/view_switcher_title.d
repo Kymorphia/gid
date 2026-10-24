@@ -477,6 +477,6 @@ final class ViewSwitcherTitleGidBuilder : ViewSwitcherTitleGidBuilderImpl!ViewSw
   */
   ViewSwitcherTitle build() nothrow
   {
-    return new ViewSwitcherTitle(cast(void*)createGObject(ViewSwitcherTitle._getGType), No.Take);
+    return new ViewSwitcherTitle(cast(void*)createGObject(ViewSwitcherTitle._getGType), Yes.Take);
   }
 }

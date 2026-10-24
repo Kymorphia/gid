@@ -1155,6 +1155,6 @@ final class TreeViewColumnGidBuilder : TreeViewColumnGidBuilderImpl!TreeViewColu
   */
   TreeViewColumn build() nothrow
   {
-    return new TreeViewColumn(cast(void*)createGObject(TreeViewColumn._getGType), No.Take);
+    return new TreeViewColumn(cast(void*)createGObject(TreeViewColumn._getGType), Yes.Take);
   }
 }

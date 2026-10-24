@@ -425,6 +425,6 @@ final class BaseTransformGidBuilder : BaseTransformGidBuilderImpl!BaseTransformG
   */
   BaseTransform build() nothrow
   {
-    return new BaseTransform(cast(void*)createGObject(BaseTransform._getGType), No.Take);
+    return new BaseTransform(cast(void*)createGObject(BaseTransform._getGType), Yes.Take);
   }
 }

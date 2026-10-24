@@ -80,6 +80,6 @@ final class NothingActionGidBuilder : NothingActionGidBuilderImpl!NothingActionG
   */
   NothingAction build() nothrow
   {
-    return new NothingAction(cast(void*)createGObject(NothingAction._getGType), No.Take);
+    return new NothingAction(cast(void*)createGObject(NothingAction._getGType), Yes.Take);
   }
 }

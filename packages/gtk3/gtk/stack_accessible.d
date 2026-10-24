@@ -65,6 +65,6 @@ final class StackAccessibleGidBuilder : StackAccessibleGidBuilderImpl!StackAcces
   */
   StackAccessible build() nothrow
   {
-    return new StackAccessible(cast(void*)createGObject(StackAccessible._getGType), No.Take);
+    return new StackAccessible(cast(void*)createGObject(StackAccessible._getGType), Yes.Take);
   }
 }

@@ -148,6 +148,6 @@ final class GridColumnGidBuilder : GridColumnGidBuilderImpl!GridColumnGidBuilder
   */
   GridColumn build() nothrow
   {
-    return new GridColumn(cast(void*)createGObject(GridColumn._getGType), No.Take);
+    return new GridColumn(cast(void*)createGObject(GridColumn._getGType), Yes.Take);
   }
 }

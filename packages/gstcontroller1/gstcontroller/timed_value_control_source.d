@@ -322,6 +322,6 @@ final class TimedValueControlSourceGidBuilder : TimedValueControlSourceGidBuilde
   */
   TimedValueControlSource build() nothrow
   {
-    return new TimedValueControlSource(cast(void*)createGObject(TimedValueControlSource._getGType), No.Take);
+    return new TimedValueControlSource(cast(void*)createGObject(TimedValueControlSource._getGType), Yes.Take);
   }
 }

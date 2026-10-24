@@ -247,6 +247,6 @@ final class AudioAggregatorGidBuilder : AudioAggregatorGidBuilderImpl!AudioAggre
   */
   AudioAggregator build() nothrow
   {
-    return new AudioAggregator(cast(void*)createGObject(AudioAggregator._getGType), No.Take);
+    return new AudioAggregator(cast(void*)createGObject(AudioAggregator._getGType), Yes.Take);
   }
 }

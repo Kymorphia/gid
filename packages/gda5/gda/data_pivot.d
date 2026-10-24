@@ -196,7 +196,7 @@ final class DataPivotGidBuilder : DataPivotGidBuilderImpl!DataPivotGidBuilder
   */
   DataPivot build() nothrow
   {
-    return new DataPivot(cast(void*)createGObject(DataPivot._getGType), No.Take);
+    return new DataPivot(cast(void*)createGObject(DataPivot._getGType), Yes.Take);
   }
 }
 

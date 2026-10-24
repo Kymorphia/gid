@@ -761,6 +761,6 @@ final class TabBarGidBuilder : TabBarGidBuilderImpl!TabBarGidBuilder
   */
   TabBar build() nothrow
   {
-    return new TabBar(cast(void*)createGObject(TabBar._getGType), No.Take);
+    return new TabBar(cast(void*)createGObject(TabBar._getGType), Yes.Take);
   }
 }

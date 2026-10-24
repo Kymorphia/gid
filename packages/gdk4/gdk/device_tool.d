@@ -205,6 +205,6 @@ final class DeviceToolGidBuilder : DeviceToolGidBuilderImpl!DeviceToolGidBuilder
   */
   DeviceTool build() nothrow
   {
-    return new DeviceTool(cast(void*)createGObject(DeviceTool._getGType), No.Take);
+    return new DeviceTool(cast(void*)createGObject(DeviceTool._getGType), Yes.Take);
   }
 }

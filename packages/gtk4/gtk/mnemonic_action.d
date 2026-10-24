@@ -80,6 +80,6 @@ final class MnemonicActionGidBuilder : MnemonicActionGidBuilderImpl!MnemonicActi
   */
   MnemonicAction build() nothrow
   {
-    return new MnemonicAction(cast(void*)createGObject(MnemonicAction._getGType), No.Take);
+    return new MnemonicAction(cast(void*)createGObject(MnemonicAction._getGType), Yes.Take);
   }
 }

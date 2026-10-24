@@ -583,6 +583,6 @@ final class DownloadGidBuilder : DownloadGidBuilderImpl!DownloadGidBuilder
   */
   Download build() nothrow
   {
-    return new Download(cast(void*)createGObject(Download._getGType), No.Take);
+    return new Download(cast(void*)createGObject(Download._getGType), Yes.Take);
   }
 }

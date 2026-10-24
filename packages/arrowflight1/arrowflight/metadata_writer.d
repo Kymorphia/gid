@@ -88,6 +88,6 @@ final class MetadataWriterGidBuilder : MetadataWriterGidBuilderImpl!MetadataWrit
   */
   MetadataWriter build() nothrow
   {
-    return new MetadataWriter(cast(void*)createGObject(MetadataWriter._getGType), No.Take);
+    return new MetadataWriter(cast(void*)createGObject(MetadataWriter._getGType), Yes.Take);
   }
 }

@@ -162,6 +162,6 @@ final class DRMDumbAllocatorGidBuilder : DRMDumbAllocatorGidBuilderImpl!DRMDumbA
   */
   DRMDumbAllocator build() nothrow
   {
-    return new DRMDumbAllocator(cast(void*)createGObject(DRMDumbAllocator._getGType), No.Take);
+    return new DRMDumbAllocator(cast(void*)createGObject(DRMDumbAllocator._getGType), Yes.Take);
   }
 }

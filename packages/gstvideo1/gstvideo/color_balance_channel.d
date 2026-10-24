@@ -117,6 +117,6 @@ final class ColorBalanceChannelGidBuilder : ColorBalanceChannelGidBuilderImpl!Co
   */
   ColorBalanceChannel build() nothrow
   {
-    return new ColorBalanceChannel(cast(void*)createGObject(ColorBalanceChannel._getGType), No.Take);
+    return new ColorBalanceChannel(cast(void*)createGObject(ColorBalanceChannel._getGType), Yes.Take);
   }
 }

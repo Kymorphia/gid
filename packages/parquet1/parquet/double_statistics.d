@@ -78,6 +78,6 @@ final class DoubleStatisticsGidBuilder : DoubleStatisticsGidBuilderImpl!DoubleSt
   */
   DoubleStatistics build() nothrow
   {
-    return new DoubleStatistics(cast(void*)createGObject(DoubleStatistics._getGType), No.Take);
+    return new DoubleStatistics(cast(void*)createGObject(DoubleStatistics._getGType), Yes.Take);
   }
 }

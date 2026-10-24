@@ -875,6 +875,6 @@ final class NavigationViewGidBuilder : NavigationViewGidBuilderImpl!NavigationVi
   */
   NavigationView build() nothrow
   {
-    return new NavigationView(cast(void*)createGObject(NavigationView._getGType), No.Take);
+    return new NavigationView(cast(void*)createGObject(NavigationView._getGType), Yes.Take);
   }
 }

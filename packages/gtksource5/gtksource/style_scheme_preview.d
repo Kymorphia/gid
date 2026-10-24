@@ -199,6 +199,6 @@ final class StyleSchemePreviewGidBuilder : StyleSchemePreviewGidBuilderImpl!Styl
   */
   StyleSchemePreview build() nothrow
   {
-    return new StyleSchemePreview(cast(void*)createGObject(StyleSchemePreview._getGType), No.Take);
+    return new StyleSchemePreview(cast(void*)createGObject(StyleSchemePreview._getGType), Yes.Take);
   }
 }

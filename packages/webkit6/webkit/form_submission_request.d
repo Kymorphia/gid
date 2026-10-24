@@ -105,6 +105,6 @@ final class FormSubmissionRequestGidBuilder : FormSubmissionRequestGidBuilderImp
   */
   FormSubmissionRequest build() nothrow
   {
-    return new FormSubmissionRequest(cast(void*)createGObject(FormSubmissionRequest._getGType), No.Take);
+    return new FormSubmissionRequest(cast(void*)createGObject(FormSubmissionRequest._getGType), Yes.Take);
   }
 }

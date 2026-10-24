@@ -151,6 +151,6 @@ final class FontFaceGidBuilder : FontFaceGidBuilderImpl!FontFaceGidBuilder
   */
   FontFace build() nothrow
   {
-    return new FontFace(cast(void*)createGObject(FontFace._getGType), No.Take);
+    return new FontFace(cast(void*)createGObject(FontFace._getGType), Yes.Take);
   }
 }

@@ -70,6 +70,6 @@ final class NotebookAccessibleGidBuilder : NotebookAccessibleGidBuilderImpl!Note
   */
   NotebookAccessible build() nothrow
   {
-    return new NotebookAccessible(cast(void*)createGObject(NotebookAccessible._getGType), No.Take);
+    return new NotebookAccessible(cast(void*)createGObject(NotebookAccessible._getGType), Yes.Take);
   }
 }

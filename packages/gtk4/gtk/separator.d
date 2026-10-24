@@ -105,6 +105,6 @@ final class SeparatorGidBuilder : SeparatorGidBuilderImpl!SeparatorGidBuilder
   */
   Separator build() nothrow
   {
-    return new Separator(cast(void*)createGObject(Separator._getGType), No.Take);
+    return new Separator(cast(void*)createGObject(Separator._getGType), Yes.Take);
   }
 }

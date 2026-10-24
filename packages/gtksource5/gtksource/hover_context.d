@@ -131,6 +131,6 @@ final class HoverContextGidBuilder : HoverContextGidBuilderImpl!HoverContextGidB
   */
   HoverContext build() nothrow
   {
-    return new HoverContext(cast(void*)createGObject(HoverContext._getGType), No.Take);
+    return new HoverContext(cast(void*)createGObject(HoverContext._getGType), Yes.Take);
   }
 }

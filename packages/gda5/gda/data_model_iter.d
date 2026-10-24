@@ -450,7 +450,7 @@ final class DataModelIterGidBuilder : DataModelIterGidBuilderImpl!DataModelIterG
   */
   DataModelIter build() nothrow
   {
-    return new DataModelIter(cast(void*)createGObject(DataModelIter._getGType), No.Take);
+    return new DataModelIter(cast(void*)createGObject(DataModelIter._getGType), Yes.Take);
   }
 }
 

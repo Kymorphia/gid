@@ -381,6 +381,6 @@ final class DBusInterfaceSkeletonGidBuilder : DBusInterfaceSkeletonGidBuilderImp
   */
   DBusInterfaceSkeleton build() nothrow
   {
-    return new DBusInterfaceSkeleton(cast(void*)createGObject(DBusInterfaceSkeleton._getGType), No.Take);
+    return new DBusInterfaceSkeleton(cast(void*)createGObject(DBusInterfaceSkeleton._getGType), Yes.Take);
   }
 }

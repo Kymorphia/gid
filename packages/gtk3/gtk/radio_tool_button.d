@@ -208,6 +208,6 @@ final class RadioToolButtonGidBuilder : RadioToolButtonGidBuilderImpl!RadioToolB
   */
   RadioToolButton build() nothrow
   {
-    return new RadioToolButton(cast(void*)createGObject(RadioToolButton._getGType), No.Take);
+    return new RadioToolButton(cast(void*)createGObject(RadioToolButton._getGType), Yes.Take);
   }
 }

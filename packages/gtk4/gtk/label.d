@@ -2086,6 +2086,6 @@ final class LabelGidBuilder : LabelGidBuilderImpl!LabelGidBuilder
   */
   Label build() nothrow
   {
-    return new Label(cast(void*)createGObject(Label._getGType), No.Take);
+    return new Label(cast(void*)createGObject(Label._getGType), Yes.Take);
   }
 }

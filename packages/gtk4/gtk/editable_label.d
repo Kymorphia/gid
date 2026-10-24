@@ -184,6 +184,6 @@ final class EditableLabelGidBuilder : EditableLabelGidBuilderImpl!EditableLabelG
   */
   EditableLabel build() nothrow
   {
-    return new EditableLabel(cast(void*)createGObject(EditableLabel._getGType), No.Take);
+    return new EditableLabel(cast(void*)createGObject(EditableLabel._getGType), Yes.Take);
   }
 }

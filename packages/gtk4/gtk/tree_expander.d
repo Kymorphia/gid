@@ -441,6 +441,6 @@ final class TreeExpanderGidBuilder : TreeExpanderGidBuilderImpl!TreeExpanderGidB
   */
   TreeExpander build() nothrow
   {
-    return new TreeExpander(cast(void*)createGObject(TreeExpander._getGType), No.Take);
+    return new TreeExpander(cast(void*)createGObject(TreeExpander._getGType), Yes.Take);
   }
 }

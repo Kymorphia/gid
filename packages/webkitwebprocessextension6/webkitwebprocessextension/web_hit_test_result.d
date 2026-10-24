@@ -241,6 +241,6 @@ final class WebHitTestResultGidBuilder : WebHitTestResultGidBuilderImpl!WebHitTe
   */
   WebHitTestResult build() nothrow
   {
-    return new WebHitTestResult(cast(void*)createGObject(WebHitTestResult._getGType), No.Take);
+    return new WebHitTestResult(cast(void*)createGObject(WebHitTestResult._getGType), Yes.Take);
   }
 }

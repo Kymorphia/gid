@@ -931,6 +931,6 @@ final class ToolbarViewGidBuilder : ToolbarViewGidBuilderImpl!ToolbarViewGidBuil
   */
   ToolbarView build() nothrow
   {
-    return new ToolbarView(cast(void*)createGObject(ToolbarView._getGType), No.Take);
+    return new ToolbarView(cast(void*)createGObject(ToolbarView._getGType), Yes.Take);
   }
 }

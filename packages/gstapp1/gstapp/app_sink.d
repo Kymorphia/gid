@@ -1272,6 +1272,6 @@ final class AppSinkGidBuilder : AppSinkGidBuilderImpl!AppSinkGidBuilder
   */
   AppSink build() nothrow
   {
-    return new AppSink(cast(void*)createGObject(AppSink._getGType), No.Take);
+    return new AppSink(cast(void*)createGObject(AppSink._getGType), Yes.Take);
   }
 }

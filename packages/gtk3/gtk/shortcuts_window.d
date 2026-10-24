@@ -291,6 +291,6 @@ final class ShortcutsWindowGidBuilder : ShortcutsWindowGidBuilderImpl!ShortcutsW
   */
   ShortcutsWindow build() nothrow
   {
-    return new ShortcutsWindow(cast(void*)createGObject(ShortcutsWindow._getGType), No.Take);
+    return new ShortcutsWindow(cast(void*)createGObject(ShortcutsWindow._getGType), Yes.Take);
   }
 }

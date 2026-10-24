@@ -117,6 +117,6 @@ final class AuthManagerGidBuilder : AuthManagerGidBuilderImpl!AuthManagerGidBuil
   */
   AuthManager build() nothrow
   {
-    return new AuthManager(cast(void*)createGObject(AuthManager._getGType), No.Take);
+    return new AuthManager(cast(void*)createGObject(AuthManager._getGType), Yes.Take);
   }
 }

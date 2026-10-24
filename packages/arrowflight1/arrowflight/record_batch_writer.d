@@ -126,6 +126,6 @@ final class RecordBatchWriterGidBuilder : RecordBatchWriterGidBuilderImpl!Record
   */
   RecordBatchWriter build() nothrow
   {
-    return new RecordBatchWriter(cast(void*)createGObject(RecordBatchWriter._getGType), No.Take);
+    return new RecordBatchWriter(cast(void*)createGObject(RecordBatchWriter._getGType), Yes.Take);
   }
 }

@@ -104,6 +104,6 @@ final class DataModelDirGidBuilder : DataModelDirGidBuilderImpl!DataModelDirGidB
   */
   DataModelDir build() nothrow
   {
-    return new DataModelDir(cast(void*)createGObject(DataModelDir._getGType), No.Take);
+    return new DataModelDir(cast(void*)createGObject(DataModelDir._getGType), Yes.Take);
   }
 }

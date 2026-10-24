@@ -92,6 +92,6 @@ final class GLBaseFilterGidBuilder : GLBaseFilterGidBuilderImpl!GLBaseFilterGidB
   */
   GLBaseFilter build() nothrow
   {
-    return new GLBaseFilter(cast(void*)createGObject(GLBaseFilter._getGType), No.Take);
+    return new GLBaseFilter(cast(void*)createGObject(GLBaseFilter._getGType), Yes.Take);
   }
 }

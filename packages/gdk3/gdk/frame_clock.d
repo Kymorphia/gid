@@ -571,6 +571,6 @@ final class FrameClockGidBuilder : FrameClockGidBuilderImpl!FrameClockGidBuilder
   */
   FrameClock build() nothrow
   {
-    return new FrameClock(cast(void*)createGObject(FrameClock._getGType), No.Take);
+    return new FrameClock(cast(void*)createGObject(FrameClock._getGType), Yes.Take);
   }
 }

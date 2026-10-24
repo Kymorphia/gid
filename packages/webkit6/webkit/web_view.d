@@ -4012,6 +4012,6 @@ final class WebViewGidBuilder : WebViewGidBuilderImpl!WebViewGidBuilder
   */
   WebView build() nothrow
   {
-    return new WebView(cast(void*)createGObject(WebView._getGType), No.Take);
+    return new WebView(cast(void*)createGObject(WebView._getGType), Yes.Take);
   }
 }

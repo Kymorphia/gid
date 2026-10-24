@@ -272,6 +272,6 @@ final class GridLayoutChildGidBuilder : GridLayoutChildGidBuilderImpl!GridLayout
   */
   GridLayoutChild build() nothrow
   {
-    return new GridLayoutChild(cast(void*)createGObject(GridLayoutChild._getGType), No.Take);
+    return new GridLayoutChild(cast(void*)createGObject(GridLayoutChild._getGType), Yes.Take);
   }
 }

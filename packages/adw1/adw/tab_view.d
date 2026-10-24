@@ -1400,6 +1400,6 @@ final class TabViewGidBuilder : TabViewGidBuilderImpl!TabViewGidBuilder
   */
   TabView build() nothrow
   {
-    return new TabView(cast(void*)createGObject(TabView._getGType), No.Take);
+    return new TabView(cast(void*)createGObject(TabView._getGType), Yes.Take);
   }
 }

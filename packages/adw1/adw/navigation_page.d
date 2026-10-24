@@ -622,6 +622,6 @@ final class NavigationPageGidBuilder : NavigationPageGidBuilderImpl!NavigationPa
   */
   NavigationPage build() nothrow
   {
-    return new NavigationPage(cast(void*)createGObject(NavigationPage._getGType), No.Take);
+    return new NavigationPage(cast(void*)createGObject(NavigationPage._getGType), Yes.Take);
   }
 }

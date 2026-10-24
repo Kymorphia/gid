@@ -100,6 +100,6 @@ final class PStmtGidBuilder : PStmtGidBuilderImpl!PStmtGidBuilder
   */
   PStmt build() nothrow
   {
-    return new PStmt(cast(void*)createGObject(PStmt._getGType), No.Take);
+    return new PStmt(cast(void*)createGObject(PStmt._getGType), Yes.Take);
   }
 }

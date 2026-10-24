@@ -886,6 +886,6 @@ final class ItemGidBuilder : ItemGidBuilderImpl!ItemGidBuilder
   */
   Item build() nothrow
   {
-    return new Item(cast(void*)createGObject(Item._getGType), No.Take);
+    return new Item(cast(void*)createGObject(Item._getGType), Yes.Take);
   }
 }

@@ -803,6 +803,6 @@ final class RTPBasePayloadGidBuilder : RTPBasePayloadGidBuilderImpl!RTPBasePaylo
   */
   RTPBasePayload build() nothrow
   {
-    return new RTPBasePayload(cast(void*)createGObject(RTPBasePayload._getGType), No.Take);
+    return new RTPBasePayload(cast(void*)createGObject(RTPBasePayload._getGType), Yes.Take);
   }
 }

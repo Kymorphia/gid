@@ -392,6 +392,6 @@ final class BindingGidBuilder : BindingGidBuilderImpl!BindingGidBuilder
   */
   Binding build() nothrow
   {
-    return new Binding(cast(void*)createGObject(Binding._getGType), No.Take);
+    return new Binding(cast(void*)createGObject(Binding._getGType), Yes.Take);
   }
 }

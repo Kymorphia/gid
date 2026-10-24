@@ -68,6 +68,6 @@ final class FragmentGidBuilder : FragmentGidBuilderImpl!FragmentGidBuilder
   */
   Fragment build() nothrow
   {
-    return new Fragment(cast(void*)createGObject(Fragment._getGType), No.Take);
+    return new Fragment(cast(void*)createGObject(Fragment._getGType), Yes.Take);
   }
 }

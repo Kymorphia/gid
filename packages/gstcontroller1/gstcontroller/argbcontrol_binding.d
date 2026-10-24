@@ -162,6 +162,6 @@ final class ARGBControlBindingGidBuilder : ARGBControlBindingGidBuilderImpl!ARGB
   */
   ARGBControlBinding build() nothrow
   {
-    return new ARGBControlBinding(cast(void*)createGObject(ARGBControlBinding._getGType), No.Take);
+    return new ARGBControlBinding(cast(void*)createGObject(ARGBControlBinding._getGType), Yes.Take);
   }
 }

@@ -68,6 +68,6 @@ final class InhibitorGidBuilder : InhibitorGidBuilderImpl!InhibitorGidBuilder
   */
   Inhibitor build() nothrow
   {
-    return new Inhibitor(cast(void*)createGObject(Inhibitor._getGType), No.Take);
+    return new Inhibitor(cast(void*)createGObject(Inhibitor._getGType), Yes.Take);
   }
 }

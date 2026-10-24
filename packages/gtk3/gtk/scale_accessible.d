@@ -67,6 +67,6 @@ final class ScaleAccessibleGidBuilder : ScaleAccessibleGidBuilderImpl!ScaleAcces
   */
   ScaleAccessible build() nothrow
   {
-    return new ScaleAccessible(cast(void*)createGObject(ScaleAccessible._getGType), No.Take);
+    return new ScaleAccessible(cast(void*)createGObject(ScaleAccessible._getGType), Yes.Take);
   }
 }

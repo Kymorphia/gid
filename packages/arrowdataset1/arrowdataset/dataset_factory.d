@@ -83,6 +83,6 @@ final class DatasetFactoryGidBuilder : DatasetFactoryGidBuilderImpl!DatasetFacto
   */
   DatasetFactory build() nothrow
   {
-    return new DatasetFactory(cast(void*)createGObject(DatasetFactory._getGType), No.Take);
+    return new DatasetFactory(cast(void*)createGObject(DatasetFactory._getGType), Yes.Take);
   }
 }

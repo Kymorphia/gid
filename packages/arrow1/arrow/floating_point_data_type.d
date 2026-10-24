@@ -62,6 +62,6 @@ final class FloatingPointDataTypeGidBuilder : FloatingPointDataTypeGidBuilderImp
   */
   FloatingPointDataType build() nothrow
   {
-    return new FloatingPointDataType(cast(void*)createGObject(FloatingPointDataType._getGType), No.Take);
+    return new FloatingPointDataType(cast(void*)createGObject(FloatingPointDataType._getGType), Yes.Take);
   }
 }

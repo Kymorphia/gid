@@ -170,6 +170,6 @@ final class ChangesDialogGidBuilder : ChangesDialogGidBuilderImpl!ChangesDialogG
   */
   ChangesDialog build() nothrow
   {
-    return new ChangesDialog(cast(void*)createGObject(ChangesDialog._getGType), No.Take);
+    return new ChangesDialog(cast(void*)createGObject(ChangesDialog._getGType), Yes.Take);
   }
 }

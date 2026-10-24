@@ -1223,6 +1223,6 @@ final class ListBoxGidBuilder : ListBoxGidBuilderImpl!ListBoxGidBuilder
   */
   ListBox build() nothrow
   {
-    return new ListBox(cast(void*)createGObject(ListBox._getGType), No.Take);
+    return new ListBox(cast(void*)createGObject(ListBox._getGType), Yes.Take);
   }
 }

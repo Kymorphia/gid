@@ -76,6 +76,6 @@ final class PlugAccessibleGidBuilder : PlugAccessibleGidBuilderImpl!PlugAccessib
   */
   PlugAccessible build() nothrow
   {
-    return new PlugAccessible(cast(void*)createGObject(PlugAccessible._getGType), No.Take);
+    return new PlugAccessible(cast(void*)createGObject(PlugAccessible._getGType), Yes.Take);
   }
 }

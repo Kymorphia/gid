@@ -145,6 +145,6 @@ final class GLFilterGidBuilder : GLFilterGidBuilderImpl!GLFilterGidBuilder
   */
   GLFilter build() nothrow
   {
-    return new GLFilter(cast(void*)createGObject(GLFilter._getGType), No.Take);
+    return new GLFilter(cast(void*)createGObject(GLFilter._getGType), Yes.Take);
   }
 }

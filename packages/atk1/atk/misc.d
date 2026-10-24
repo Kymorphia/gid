@@ -112,6 +112,6 @@ final class MiscGidBuilder : MiscGidBuilderImpl!MiscGidBuilder
   */
   Misc build() nothrow
   {
-    return new Misc(cast(void*)createGObject(Misc._getGType), No.Take);
+    return new Misc(cast(void*)createGObject(Misc._getGType), Yes.Take);
   }
 }

@@ -106,6 +106,6 @@ final class UnionDataTypeGidBuilder : UnionDataTypeGidBuilderImpl!UnionDataTypeG
   */
   UnionDataType build() nothrow
   {
-    return new UnionDataType(cast(void*)createGObject(UnionDataType._getGType), No.Take);
+    return new UnionDataType(cast(void*)createGObject(UnionDataType._getGType), Yes.Take);
   }
 }

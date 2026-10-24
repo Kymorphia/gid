@@ -386,6 +386,6 @@ final class ColorButtonGidBuilder : ColorButtonGidBuilderImpl!ColorButtonGidBuil
   */
   ColorButton build() nothrow
   {
-    return new ColorButton(cast(void*)createGObject(ColorButton._getGType), No.Take);
+    return new ColorButton(cast(void*)createGObject(ColorButton._getGType), Yes.Take);
   }
 }

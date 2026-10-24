@@ -801,6 +801,6 @@ final class AssistantGidBuilder : AssistantGidBuilderImpl!AssistantGidBuilder
   */
   Assistant build() nothrow
   {
-    return new Assistant(cast(void*)createGObject(Assistant._getGType), No.Take);
+    return new Assistant(cast(void*)createGObject(Assistant._getGType), Yes.Take);
   }
 }

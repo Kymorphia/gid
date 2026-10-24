@@ -1791,6 +1791,6 @@ final class ElementGidBuilder : ElementGidBuilderImpl!ElementGidBuilder
   */
   Element build() nothrow
   {
-    return new Element(cast(void*)createGObject(Element._getGType), No.Take);
+    return new Element(cast(void*)createGObject(Element._getGType), Yes.Take);
   }
 }

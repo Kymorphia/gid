@@ -470,6 +470,6 @@ final class FileEnumeratorGidBuilder : FileEnumeratorGidBuilderImpl!FileEnumerat
   */
   FileEnumerator build() nothrow
   {
-    return new FileEnumerator(cast(void*)createGObject(FileEnumerator._getGType), No.Take);
+    return new FileEnumerator(cast(void*)createGObject(FileEnumerator._getGType), Yes.Take);
   }
 }

@@ -149,6 +149,6 @@ final class WindowHandleGidBuilder : WindowHandleGidBuilderImpl!WindowHandleGidB
   */
   WindowHandle build() nothrow
   {
-    return new WindowHandle(cast(void*)createGObject(WindowHandle._getGType), No.Take);
+    return new WindowHandle(cast(void*)createGObject(WindowHandle._getGType), Yes.Take);
   }
 }

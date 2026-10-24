@@ -452,6 +452,6 @@ final class TableGidBuilder : TableGidBuilderImpl!TableGidBuilder
   */
   Table build() nothrow
   {
-    return new Table(cast(void*)createGObject(Table._getGType), No.Take);
+    return new Table(cast(void*)createGObject(Table._getGType), Yes.Take);
   }
 }

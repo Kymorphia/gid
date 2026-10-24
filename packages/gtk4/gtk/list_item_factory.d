@@ -111,6 +111,6 @@ final class ListItemFactoryGidBuilder : ListItemFactoryGidBuilderImpl!ListItemFa
   */
   ListItemFactory build() nothrow
   {
-    return new ListItemFactory(cast(void*)createGObject(ListItemFactory._getGType), No.Take);
+    return new ListItemFactory(cast(void*)createGObject(ListItemFactory._getGType), Yes.Take);
   }
 }

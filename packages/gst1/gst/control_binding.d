@@ -190,6 +190,6 @@ final class ControlBindingGidBuilder : ControlBindingGidBuilderImpl!ControlBindi
   */
   ControlBinding build() nothrow
   {
-    return new ControlBinding(cast(void*)createGObject(ControlBinding._getGType), No.Take);
+    return new ControlBinding(cast(void*)createGObject(ControlBinding._getGType), Yes.Take);
   }
 }

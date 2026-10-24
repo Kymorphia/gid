@@ -2062,6 +2062,6 @@ final class IconViewGidBuilder : IconViewGidBuilderImpl!IconViewGidBuilder
   */
   IconView build() nothrow
   {
-    return new IconView(cast(void*)createGObject(IconView._getGType), No.Take);
+    return new IconView(cast(void*)createGObject(IconView._getGType), Yes.Take);
   }
 }

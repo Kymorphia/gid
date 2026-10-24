@@ -558,6 +558,6 @@ final class InfoBarGidBuilder : InfoBarGidBuilderImpl!InfoBarGidBuilder
   */
   InfoBar build() nothrow
   {
-    return new InfoBar(cast(void*)createGObject(InfoBar._getGType), No.Take);
+    return new InfoBar(cast(void*)createGObject(InfoBar._getGType), Yes.Take);
   }
 }

@@ -203,6 +203,6 @@ final class OptionMenuGidBuilder : OptionMenuGidBuilderImpl!OptionMenuGidBuilder
   */
   OptionMenu build() nothrow
   {
-    return new OptionMenu(cast(void*)createGObject(OptionMenu._getGType), No.Take);
+    return new OptionMenu(cast(void*)createGObject(OptionMenu._getGType), Yes.Take);
   }
 }

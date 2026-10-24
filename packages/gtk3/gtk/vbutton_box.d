@@ -82,6 +82,6 @@ final class VButtonBoxGidBuilder : VButtonBoxGidBuilderImpl!VButtonBoxGidBuilder
   */
   VButtonBox build() nothrow
   {
-    return new VButtonBox(cast(void*)createGObject(VButtonBox._getGType), No.Take);
+    return new VButtonBox(cast(void*)createGObject(VButtonBox._getGType), Yes.Take);
   }
 }

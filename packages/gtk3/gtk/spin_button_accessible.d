@@ -76,6 +76,6 @@ final class SpinButtonAccessibleGidBuilder : SpinButtonAccessibleGidBuilderImpl!
   */
   SpinButtonAccessible build() nothrow
   {
-    return new SpinButtonAccessible(cast(void*)createGObject(SpinButtonAccessible._getGType), No.Take);
+    return new SpinButtonAccessible(cast(void*)createGObject(SpinButtonAccessible._getGType), Yes.Take);
   }
 }

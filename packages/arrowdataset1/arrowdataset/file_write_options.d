@@ -68,6 +68,6 @@ final class FileWriteOptionsGidBuilder : FileWriteOptionsGidBuilderImpl!FileWrit
   */
   FileWriteOptions build() nothrow
   {
-    return new FileWriteOptions(cast(void*)createGObject(FileWriteOptions._getGType), No.Take);
+    return new FileWriteOptions(cast(void*)createGObject(FileWriteOptions._getGType), Yes.Take);
   }
 }

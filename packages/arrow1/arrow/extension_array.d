@@ -84,6 +84,6 @@ final class ExtensionArrayGidBuilder : ExtensionArrayGidBuilderImpl!ExtensionArr
   */
   ExtensionArray build() nothrow
   {
-    return new ExtensionArray(cast(void*)createGObject(ExtensionArray._getGType), No.Take);
+    return new ExtensionArray(cast(void*)createGObject(ExtensionArray._getGType), Yes.Take);
   }
 }

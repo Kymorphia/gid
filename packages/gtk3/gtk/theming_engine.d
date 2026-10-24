@@ -394,6 +394,6 @@ final class ThemingEngineGidBuilder : ThemingEngineGidBuilderImpl!ThemingEngineG
   */
   ThemingEngine build() nothrow
   {
-    return new ThemingEngine(cast(void*)createGObject(ThemingEngine._getGType), No.Take);
+    return new ThemingEngine(cast(void*)createGObject(ThemingEngine._getGType), Yes.Take);
   }
 }

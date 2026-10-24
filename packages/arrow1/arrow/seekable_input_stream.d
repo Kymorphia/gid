@@ -126,6 +126,6 @@ final class SeekableInputStreamGidBuilder : SeekableInputStreamGidBuilderImpl!Se
   */
   SeekableInputStream build() nothrow
   {
-    return new SeekableInputStream(cast(void*)createGObject(SeekableInputStream._getGType), No.Take);
+    return new SeekableInputStream(cast(void*)createGObject(SeekableInputStream._getGType), Yes.Take);
   }
 }

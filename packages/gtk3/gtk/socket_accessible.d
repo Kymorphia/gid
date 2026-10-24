@@ -72,6 +72,6 @@ final class SocketAccessibleGidBuilder : SocketAccessibleGidBuilderImpl!SocketAc
   */
   SocketAccessible build() nothrow
   {
-    return new SocketAccessible(cast(void*)createGObject(SocketAccessible._getGType), No.Take);
+    return new SocketAccessible(cast(void*)createGObject(SocketAccessible._getGType), Yes.Take);
   }
 }

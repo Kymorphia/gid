@@ -96,6 +96,6 @@ final class StyleSchemeChooserWidgetGidBuilder : StyleSchemeChooserWidgetGidBuil
   */
   StyleSchemeChooserWidget build() nothrow
   {
-    return new StyleSchemeChooserWidget(cast(void*)createGObject(StyleSchemeChooserWidget._getGType), No.Take);
+    return new StyleSchemeChooserWidget(cast(void*)createGObject(StyleSchemeChooserWidget._getGType), Yes.Take);
   }
 }

@@ -331,6 +331,6 @@ final class HeaderGidBuilder : HeaderGidBuilderImpl!HeaderGidBuilder
   */
   Header build() nothrow
   {
-    return new Header(cast(void*)createGObject(Header._getGType), No.Take);
+    return new Header(cast(void*)createGObject(Header._getGType), Yes.Take);
   }
 }

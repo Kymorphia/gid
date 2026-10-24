@@ -232,6 +232,6 @@ final class DeviceProviderFactoryGidBuilder : DeviceProviderFactoryGidBuilderImp
   */
   DeviceProviderFactory build() nothrow
   {
-    return new DeviceProviderFactory(cast(void*)createGObject(DeviceProviderFactory._getGType), No.Take);
+    return new DeviceProviderFactory(cast(void*)createGObject(DeviceProviderFactory._getGType), Yes.Take);
   }
 }

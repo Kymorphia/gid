@@ -411,6 +411,6 @@ final class BoxGidBuilder : BoxGidBuilderImpl!BoxGidBuilder
   */
   Box build() nothrow
   {
-    return new Box(cast(void*)createGObject(Box._getGType), No.Take);
+    return new Box(cast(void*)createGObject(Box._getGType), Yes.Take);
   }
 }

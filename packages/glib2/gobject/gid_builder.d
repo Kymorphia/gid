@@ -48,7 +48,12 @@ abstract class GidBuilder(T)
   */
   GObject* createGObject(GType gtype) nothrow
   {
-    return g_object_new_with_properties(gtype, cast(uint)_propNames.length, _propNames.ptr, _propValues.ptr);
+    auto obj = g_object_new_with_properties(gtype, cast(uint)_propNames.length, _propNames.ptr, _propValues.ptr);
+
+    if (g_object_is_floating(obj))
+      g_object_ref_sink(obj); // Convert floating ref to a strong owned ref (no count change)
+
+    return obj;
   }
 
   private:

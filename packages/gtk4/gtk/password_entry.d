@@ -343,6 +343,6 @@ final class PasswordEntryGidBuilder : PasswordEntryGidBuilderImpl!PasswordEntryG
   */
   PasswordEntry build() nothrow
   {
-    return new PasswordEntry(cast(void*)createGObject(PasswordEntry._getGType), No.Take);
+    return new PasswordEntry(cast(void*)createGObject(PasswordEntry._getGType), Yes.Take);
   }
 }

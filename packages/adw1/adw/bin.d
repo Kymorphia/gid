@@ -147,6 +147,6 @@ final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
   */
   Bin build() nothrow
   {
-    return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);
+    return new Bin(cast(void*)createGObject(Bin._getGType), Yes.Take);
   }
 }

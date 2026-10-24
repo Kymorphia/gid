@@ -177,6 +177,6 @@ final class StyleSchemeGidBuilder : StyleSchemeGidBuilderImpl!StyleSchemeGidBuil
   */
   StyleScheme build() nothrow
   {
-    return new StyleScheme(cast(void*)createGObject(StyleScheme._getGType), No.Take);
+    return new StyleScheme(cast(void*)createGObject(StyleScheme._getGType), Yes.Take);
   }
 }

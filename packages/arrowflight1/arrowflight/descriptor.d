@@ -85,6 +85,6 @@ final class DescriptorGidBuilder : DescriptorGidBuilderImpl!DescriptorGidBuilder
   */
   Descriptor build() nothrow
   {
-    return new Descriptor(cast(void*)createGObject(Descriptor._getGType), No.Take);
+    return new Descriptor(cast(void*)createGObject(Descriptor._getGType), Yes.Take);
   }
 }

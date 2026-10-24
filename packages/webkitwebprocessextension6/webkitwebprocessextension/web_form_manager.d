@@ -318,6 +318,6 @@ final class WebFormManagerGidBuilder : WebFormManagerGidBuilderImpl!WebFormManag
   */
   WebFormManager build() nothrow
   {
-    return new WebFormManager(cast(void*)createGObject(WebFormManager._getGType), No.Take);
+    return new WebFormManager(cast(void*)createGObject(WebFormManager._getGType), Yes.Take);
   }
 }

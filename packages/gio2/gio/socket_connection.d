@@ -284,6 +284,6 @@ final class SocketConnectionGidBuilder : SocketConnectionGidBuilderImpl!SocketCo
   */
   SocketConnection build() nothrow
   {
-    return new SocketConnection(cast(void*)createGObject(SocketConnection._getGType), No.Take);
+    return new SocketConnection(cast(void*)createGObject(SocketConnection._getGType), Yes.Take);
   }
 }

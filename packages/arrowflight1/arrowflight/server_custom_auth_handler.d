@@ -107,6 +107,6 @@ final class ServerCustomAuthHandlerGidBuilder : ServerCustomAuthHandlerGidBuilde
   */
   ServerCustomAuthHandler build() nothrow
   {
-    return new ServerCustomAuthHandler(cast(void*)createGObject(ServerCustomAuthHandler._getGType), No.Take);
+    return new ServerCustomAuthHandler(cast(void*)createGObject(ServerCustomAuthHandler._getGType), Yes.Take);
   }
 }

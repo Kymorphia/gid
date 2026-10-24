@@ -77,6 +77,6 @@ final class NotificationPermissionRequestGidBuilder : NotificationPermissionRequ
   */
   NotificationPermissionRequest build() nothrow
   {
-    return new NotificationPermissionRequest(cast(void*)createGObject(NotificationPermissionRequest._getGType), No.Take);
+    return new NotificationPermissionRequest(cast(void*)createGObject(NotificationPermissionRequest._getGType), Yes.Take);
   }
 }

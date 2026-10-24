@@ -394,6 +394,6 @@ final class StatusPageGidBuilder : StatusPageGidBuilderImpl!StatusPageGidBuilder
   */
   StatusPage build() nothrow
   {
-    return new StatusPage(cast(void*)createGObject(StatusPage._getGType), No.Take);
+    return new StatusPage(cast(void*)createGObject(StatusPage._getGType), Yes.Take);
   }
 }

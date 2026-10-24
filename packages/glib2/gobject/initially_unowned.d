@@ -67,6 +67,6 @@ final class InitiallyUnownedGidBuilder : InitiallyUnownedGidBuilderImpl!Initiall
   */
   InitiallyUnowned build() nothrow
   {
-    return new InitiallyUnowned(cast(void*)createGObject(InitiallyUnowned._getGType), No.Take);
+    return new InitiallyUnowned(cast(void*)createGObject(InitiallyUnowned._getGType), Yes.Take);
   }
 }

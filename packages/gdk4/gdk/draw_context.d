@@ -223,6 +223,6 @@ final class DrawContextGidBuilder : DrawContextGidBuilderImpl!DrawContextGidBuil
   */
   DrawContext build() nothrow
   {
-    return new DrawContext(cast(void*)createGObject(DrawContext._getGType), No.Take);
+    return new DrawContext(cast(void*)createGObject(DrawContext._getGType), Yes.Take);
   }
 }

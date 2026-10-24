@@ -117,6 +117,6 @@ final class SourceNodeOptionsGidBuilder : SourceNodeOptionsGidBuilderImpl!Source
   */
   SourceNodeOptions build() nothrow
   {
-    return new SourceNodeOptions(cast(void*)createGObject(SourceNodeOptions._getGType), No.Take);
+    return new SourceNodeOptions(cast(void*)createGObject(SourceNodeOptions._getGType), Yes.Take);
   }
 }

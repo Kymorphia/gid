@@ -1763,6 +1763,6 @@ final class PadGidBuilder : PadGidBuilderImpl!PadGidBuilder
   */
   Pad build() nothrow
   {
-    return new Pad(cast(void*)createGObject(Pad._getGType), No.Take);
+    return new Pad(cast(void*)createGObject(Pad._getGType), Yes.Take);
   }
 }

@@ -77,6 +77,6 @@ final class DeviceInfoPermissionRequestGidBuilder : DeviceInfoPermissionRequestG
   */
   DeviceInfoPermissionRequest build() nothrow
   {
-    return new DeviceInfoPermissionRequest(cast(void*)createGObject(DeviceInfoPermissionRequest._getGType), No.Take);
+    return new DeviceInfoPermissionRequest(cast(void*)createGObject(DeviceInfoPermissionRequest._getGType), Yes.Take);
   }
 }

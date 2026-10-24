@@ -579,6 +579,6 @@ final class AggregatorGidBuilder : AggregatorGidBuilderImpl!AggregatorGidBuilder
   */
   Aggregator build() nothrow
   {
-    return new Aggregator(cast(void*)createGObject(Aggregator._getGType), No.Take);
+    return new Aggregator(cast(void*)createGObject(Aggregator._getGType), Yes.Take);
   }
 }

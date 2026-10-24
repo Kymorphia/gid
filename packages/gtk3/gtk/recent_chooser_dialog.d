@@ -114,6 +114,6 @@ final class RecentChooserDialogGidBuilder : RecentChooserDialogGidBuilderImpl!Re
   */
   RecentChooserDialog build() nothrow
   {
-    return new RecentChooserDialog(cast(void*)createGObject(RecentChooserDialog._getGType), No.Take);
+    return new RecentChooserDialog(cast(void*)createGObject(RecentChooserDialog._getGType), Yes.Take);
   }
 }

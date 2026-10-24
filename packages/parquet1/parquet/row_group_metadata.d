@@ -145,6 +145,6 @@ final class RowGroupMetadataGidBuilder : RowGroupMetadataGidBuilderImpl!RowGroup
   */
   RowGroupMetadata build() nothrow
   {
-    return new RowGroupMetadata(cast(void*)createGObject(RowGroupMetadata._getGType), No.Take);
+    return new RowGroupMetadata(cast(void*)createGObject(RowGroupMetadata._getGType), Yes.Take);
   }
 }

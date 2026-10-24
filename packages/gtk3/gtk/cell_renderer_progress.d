@@ -304,6 +304,6 @@ final class CellRendererProgressGidBuilder : CellRendererProgressGidBuilderImpl!
   */
   CellRendererProgress build() nothrow
   {
-    return new CellRendererProgress(cast(void*)createGObject(CellRendererProgress._getGType), No.Take);
+    return new CellRendererProgress(cast(void*)createGObject(CellRendererProgress._getGType), Yes.Take);
   }
 }

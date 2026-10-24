@@ -65,6 +65,6 @@ final class ThreadedResolverGidBuilder : ThreadedResolverGidBuilderImpl!Threaded
   */
   ThreadedResolver build() nothrow
   {
-    return new ThreadedResolver(cast(void*)createGObject(ThreadedResolver._getGType), No.Take);
+    return new ThreadedResolver(cast(void*)createGObject(ThreadedResolver._getGType), Yes.Take);
   }
 }

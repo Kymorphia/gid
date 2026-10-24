@@ -82,6 +82,6 @@ final class EntryAccessibleGidBuilder : EntryAccessibleGidBuilderImpl!EntryAcces
   */
   EntryAccessible build() nothrow
   {
-    return new EntryAccessible(cast(void*)createGObject(EntryAccessible._getGType), No.Take);
+    return new EntryAccessible(cast(void*)createGObject(EntryAccessible._getGType), Yes.Take);
   }
 }

@@ -5147,6 +5147,6 @@ final class TerminalGidBuilder : TerminalGidBuilderImpl!TerminalGidBuilder
   */
   Terminal build() nothrow
   {
-    return new Terminal(cast(void*)createGObject(Terminal._getGType), No.Take);
+    return new Terminal(cast(void*)createGObject(Terminal._getGType), Yes.Take);
   }
 }

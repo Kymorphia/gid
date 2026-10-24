@@ -3118,6 +3118,6 @@ final class TreeViewGidBuilder : TreeViewGidBuilderImpl!TreeViewGidBuilder
   */
   TreeView build() nothrow
   {
-    return new TreeView(cast(void*)createGObject(TreeView._getGType), No.Take);
+    return new TreeView(cast(void*)createGObject(TreeView._getGType), Yes.Take);
   }
 }

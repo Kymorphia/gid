@@ -584,6 +584,6 @@ final class PrintUnixDialogGidBuilder : PrintUnixDialogGidBuilderImpl!PrintUnixD
   */
   PrintUnixDialog build() nothrow
   {
-    return new PrintUnixDialog(cast(void*)createGObject(PrintUnixDialog._getGType), No.Take);
+    return new PrintUnixDialog(cast(void*)createGObject(PrintUnixDialog._getGType), Yes.Take);
   }
 }

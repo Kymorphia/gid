@@ -258,6 +258,6 @@ final class NotificationGidBuilder : NotificationGidBuilderImpl!NotificationGidB
   */
   Notification build() nothrow
   {
-    return new Notification(cast(void*)createGObject(Notification._getGType), No.Take);
+    return new Notification(cast(void*)createGObject(Notification._getGType), Yes.Take);
   }
 }

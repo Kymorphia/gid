@@ -332,6 +332,6 @@ final class RTPHeaderExtensionGidBuilder : RTPHeaderExtensionGidBuilderImpl!RTPH
   */
   RTPHeaderExtension build() nothrow
   {
-    return new RTPHeaderExtension(cast(void*)createGObject(RTPHeaderExtension._getGType), No.Take);
+    return new RTPHeaderExtension(cast(void*)createGObject(RTPHeaderExtension._getGType), Yes.Take);
   }
 }

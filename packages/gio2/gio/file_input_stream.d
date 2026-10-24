@@ -169,6 +169,6 @@ final class FileInputStreamGidBuilder : FileInputStreamGidBuilderImpl!FileInputS
   */
   FileInputStream build() nothrow
   {
-    return new FileInputStream(cast(void*)createGObject(FileInputStream._getGType), No.Take);
+    return new FileInputStream(cast(void*)createGObject(FileInputStream._getGType), Yes.Take);
   }
 }

@@ -185,6 +185,6 @@ final class AudioCdSrcGidBuilder : AudioCdSrcGidBuilderImpl!AudioCdSrcGidBuilder
   */
   AudioCdSrc build() nothrow
   {
-    return new AudioCdSrc(cast(void*)createGObject(AudioCdSrc._getGType), No.Take);
+    return new AudioCdSrc(cast(void*)createGObject(AudioCdSrc._getGType), Yes.Take);
   }
 }

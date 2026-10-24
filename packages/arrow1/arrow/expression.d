@@ -79,6 +79,6 @@ final class ExpressionGidBuilder : ExpressionGidBuilderImpl!ExpressionGidBuilder
   */
   Expression build() nothrow
   {
-    return new Expression(cast(void*)createGObject(Expression._getGType), No.Take);
+    return new Expression(cast(void*)createGObject(Expression._getGType), Yes.Take);
   }
 }

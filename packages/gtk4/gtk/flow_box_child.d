@@ -241,6 +241,6 @@ final class FlowBoxChildGidBuilder : FlowBoxChildGidBuilderImpl!FlowBoxChildGidB
   */
   FlowBoxChild build() nothrow
   {
-    return new FlowBoxChild(cast(void*)createGObject(FlowBoxChild._getGType), No.Take);
+    return new FlowBoxChild(cast(void*)createGObject(FlowBoxChild._getGType), Yes.Take);
   }
 }

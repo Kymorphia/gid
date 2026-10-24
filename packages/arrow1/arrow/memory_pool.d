@@ -106,6 +106,6 @@ final class MemoryPoolGidBuilder : MemoryPoolGidBuilderImpl!MemoryPoolGidBuilder
   */
   MemoryPool build() nothrow
   {
-    return new MemoryPool(cast(void*)createGObject(MemoryPool._getGType), No.Take);
+    return new MemoryPool(cast(void*)createGObject(MemoryPool._getGType), Yes.Take);
   }
 }

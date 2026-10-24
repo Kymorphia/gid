@@ -1262,6 +1262,6 @@ final class FlapGidBuilder : FlapGidBuilderImpl!FlapGidBuilder
   */
   Flap build() nothrow
   {
-    return new Flap(cast(void*)createGObject(Flap._getGType), No.Take);
+    return new Flap(cast(void*)createGObject(Flap._getGType), Yes.Take);
   }
 }

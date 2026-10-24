@@ -211,6 +211,6 @@ final class SorterGidBuilder : SorterGidBuilderImpl!SorterGidBuilder
   */
   Sorter build() nothrow
   {
-    return new Sorter(cast(void*)createGObject(Sorter._getGType), No.Take);
+    return new Sorter(cast(void*)createGObject(Sorter._getGType), Yes.Take);
   }
 }

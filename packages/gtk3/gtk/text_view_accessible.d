@@ -78,6 +78,6 @@ final class TextViewAccessibleGidBuilder : TextViewAccessibleGidBuilderImpl!Text
   */
   TextViewAccessible build() nothrow
   {
-    return new TextViewAccessible(cast(void*)createGObject(TextViewAccessible._getGType), No.Take);
+    return new TextViewAccessible(cast(void*)createGObject(TextViewAccessible._getGType), Yes.Take);
   }
 }

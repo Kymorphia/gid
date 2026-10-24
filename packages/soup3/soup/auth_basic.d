@@ -68,6 +68,6 @@ final class AuthBasicGidBuilder : AuthBasicGidBuilderImpl!AuthBasicGidBuilder
   */
   AuthBasic build() nothrow
   {
-    return new AuthBasic(cast(void*)createGObject(AuthBasic._getGType), No.Take);
+    return new AuthBasic(cast(void*)createGObject(AuthBasic._getGType), Yes.Take);
   }
 }

@@ -242,6 +242,6 @@ final class ShortcutsGroupGidBuilder : ShortcutsGroupGidBuilderImpl!ShortcutsGro
   */
   ShortcutsGroup build() nothrow
   {
-    return new ShortcutsGroup(cast(void*)createGObject(ShortcutsGroup._getGType), No.Take);
+    return new ShortcutsGroup(cast(void*)createGObject(ShortcutsGroup._getGType), Yes.Take);
   }
 }

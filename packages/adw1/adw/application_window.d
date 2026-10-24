@@ -270,6 +270,6 @@ final class ApplicationWindowGidBuilder : ApplicationWindowGidBuilderImpl!Applic
   */
   ApplicationWindow build() nothrow
   {
-    return new ApplicationWindow(cast(void*)createGObject(ApplicationWindow._getGType), No.Take);
+    return new ApplicationWindow(cast(void*)createGObject(ApplicationWindow._getGType), Yes.Take);
   }
 }

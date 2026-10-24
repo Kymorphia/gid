@@ -317,6 +317,6 @@ final class GutterLinesGidBuilder : GutterLinesGidBuilderImpl!GutterLinesGidBuil
   */
   GutterLines build() nothrow
   {
-    return new GutterLines(cast(void*)createGObject(GutterLines._getGType), No.Take);
+    return new GutterLines(cast(void*)createGObject(GutterLines._getGType), Yes.Take);
   }
 }

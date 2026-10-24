@@ -195,6 +195,6 @@ final class ToastOverlayGidBuilder : ToastOverlayGidBuilderImpl!ToastOverlayGidB
   */
   ToastOverlay build() nothrow
   {
-    return new ToastOverlay(cast(void*)createGObject(ToastOverlay._getGType), No.Take);
+    return new ToastOverlay(cast(void*)createGObject(ToastOverlay._getGType), Yes.Take);
   }
 }

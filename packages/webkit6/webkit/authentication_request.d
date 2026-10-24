@@ -372,6 +372,6 @@ final class AuthenticationRequestGidBuilder : AuthenticationRequestGidBuilderImp
   */
   AuthenticationRequest build() nothrow
   {
-    return new AuthenticationRequest(cast(void*)createGObject(AuthenticationRequest._getGType), No.Take);
+    return new AuthenticationRequest(cast(void*)createGObject(AuthenticationRequest._getGType), Yes.Take);
   }
 }

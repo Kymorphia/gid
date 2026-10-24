@@ -1195,6 +1195,6 @@ final class TabPageGidBuilder : TabPageGidBuilderImpl!TabPageGidBuilder
   */
   TabPage build() nothrow
   {
-    return new TabPage(cast(void*)createGObject(TabPage._getGType), No.Take);
+    return new TabPage(cast(void*)createGObject(TabPage._getGType), Yes.Take);
   }
 }

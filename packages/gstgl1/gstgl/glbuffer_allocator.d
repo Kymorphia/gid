@@ -64,6 +64,6 @@ final class GLBufferAllocatorGidBuilder : GLBufferAllocatorGidBuilderImpl!GLBuff
   */
   GLBufferAllocator build() nothrow
   {
-    return new GLBufferAllocator(cast(void*)createGObject(GLBufferAllocator._getGType), No.Take);
+    return new GLBufferAllocator(cast(void*)createGObject(GLBufferAllocator._getGType), Yes.Take);
   }
 }

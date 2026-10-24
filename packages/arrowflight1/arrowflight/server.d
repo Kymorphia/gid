@@ -180,6 +180,6 @@ final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
   */
   Server build() nothrow
   {
-    return new Server(cast(void*)createGObject(Server._getGType), No.Take);
+    return new Server(cast(void*)createGObject(Server._getGType), Yes.Take);
   }
 }

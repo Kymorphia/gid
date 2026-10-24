@@ -153,6 +153,6 @@ final class SocketAddressGidBuilder : SocketAddressGidBuilderImpl!SocketAddressG
   */
   SocketAddress build() nothrow
   {
-    return new SocketAddress(cast(void*)createGObject(SocketAddress._getGType), No.Take);
+    return new SocketAddress(cast(void*)createGObject(SocketAddress._getGType), Yes.Take);
   }
 }

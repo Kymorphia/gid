@@ -429,6 +429,6 @@ final class PipelineGidBuilder : PipelineGidBuilderImpl!PipelineGidBuilder
   */
   Pipeline build() nothrow
   {
-    return new Pipeline(cast(void*)createGObject(Pipeline._getGType), No.Take);
+    return new Pipeline(cast(void*)createGObject(Pipeline._getGType), Yes.Take);
   }
 }

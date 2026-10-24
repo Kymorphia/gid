@@ -194,6 +194,6 @@ final class EditorStateGidBuilder : EditorStateGidBuilderImpl!EditorStateGidBuil
   */
   EditorState build() nothrow
   {
-    return new EditorState(cast(void*)createGObject(EditorState._getGType), No.Take);
+    return new EditorState(cast(void*)createGObject(EditorState._getGType), Yes.Take);
   }
 }

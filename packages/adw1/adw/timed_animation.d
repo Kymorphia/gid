@@ -552,6 +552,6 @@ final class TimedAnimationGidBuilder : TimedAnimationGidBuilderImpl!TimedAnimati
   */
   TimedAnimation build() nothrow
   {
-    return new TimedAnimation(cast(void*)createGObject(TimedAnimation._getGType), No.Take);
+    return new TimedAnimation(cast(void*)createGObject(TimedAnimation._getGType), Yes.Take);
   }
 }

@@ -111,6 +111,6 @@ final class ColorChooserDialogGidBuilder : ColorChooserDialogGidBuilderImpl!Colo
   */
   ColorChooserDialog build() nothrow
   {
-    return new ColorChooserDialog(cast(void*)createGObject(ColorChooserDialog._getGType), No.Take);
+    return new ColorChooserDialog(cast(void*)createGObject(ColorChooserDialog._getGType), Yes.Take);
   }
 }

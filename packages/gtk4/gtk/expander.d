@@ -638,6 +638,6 @@ final class ExpanderGidBuilder : ExpanderGidBuilderImpl!ExpanderGidBuilder
   */
   Expander build() nothrow
   {
-    return new Expander(cast(void*)createGObject(Expander._getGType), No.Take);
+    return new Expander(cast(void*)createGObject(Expander._getGType), Yes.Take);
   }
 }

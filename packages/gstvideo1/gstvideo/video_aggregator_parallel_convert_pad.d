@@ -66,6 +66,6 @@ final class VideoAggregatorParallelConvertPadGidBuilder : VideoAggregatorParalle
   */
   VideoAggregatorParallelConvertPad build() nothrow
   {
-    return new VideoAggregatorParallelConvertPad(cast(void*)createGObject(VideoAggregatorParallelConvertPad._getGType), No.Take);
+    return new VideoAggregatorParallelConvertPad(cast(void*)createGObject(VideoAggregatorParallelConvertPad._getGType), Yes.Take);
   }
 }

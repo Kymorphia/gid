@@ -304,6 +304,6 @@ final class ContentProviderGidBuilder : ContentProviderGidBuilderImpl!ContentPro
   */
   ContentProvider build() nothrow
   {
-    return new ContentProvider(cast(void*)createGObject(ContentProvider._getGType), No.Take);
+    return new ContentProvider(cast(void*)createGObject(ContentProvider._getGType), Yes.Take);
   }
 }

@@ -96,6 +96,6 @@ final class ServerCallContextGidBuilder : ServerCallContextGidBuilderImpl!Server
   */
   ServerCallContext build() nothrow
   {
-    return new ServerCallContext(cast(void*)createGObject(ServerCallContext._getGType), No.Take);
+    return new ServerCallContext(cast(void*)createGObject(ServerCallContext._getGType), Yes.Take);
   }
 }

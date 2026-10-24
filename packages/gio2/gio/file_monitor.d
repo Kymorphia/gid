@@ -260,6 +260,6 @@ final class FileMonitorGidBuilder : FileMonitorGidBuilderImpl!FileMonitorGidBuil
   */
   FileMonitor build() nothrow
   {
-    return new FileMonitor(cast(void*)createGObject(FileMonitor._getGType), No.Take);
+    return new FileMonitor(cast(void*)createGObject(FileMonitor._getGType), Yes.Take);
   }
 }

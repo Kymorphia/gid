@@ -475,6 +475,6 @@ final class ElementFactoryGidBuilder : ElementFactoryGidBuilderImpl!ElementFacto
   */
   ElementFactory build() nothrow
   {
-    return new ElementFactory(cast(void*)createGObject(ElementFactory._getGType), No.Take);
+    return new ElementFactory(cast(void*)createGObject(ElementFactory._getGType), Yes.Take);
   }
 }

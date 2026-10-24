@@ -773,6 +773,6 @@ final class PopoverGidBuilder : PopoverGidBuilderImpl!PopoverGidBuilder
   */
   Popover build() nothrow
   {
-    return new Popover(cast(void*)createGObject(Popover._getGType), No.Take);
+    return new Popover(cast(void*)createGObject(Popover._getGType), Yes.Take);
   }
 }

@@ -312,6 +312,6 @@ final class UnixConnectionGidBuilder : UnixConnectionGidBuilderImpl!UnixConnecti
   */
   UnixConnection build() nothrow
   {
-    return new UnixConnection(cast(void*)createGObject(UnixConnection._getGType), No.Take);
+    return new UnixConnection(cast(void*)createGObject(UnixConnection._getGType), Yes.Take);
   }
 }

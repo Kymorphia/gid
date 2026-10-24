@@ -137,6 +137,6 @@ final class BlobOpGidBuilder : BlobOpGidBuilderImpl!BlobOpGidBuilder
   */
   BlobOp build() nothrow
   {
-    return new BlobOp(cast(void*)createGObject(BlobOp._getGType), No.Take);
+    return new BlobOp(cast(void*)createGObject(BlobOp._getGType), Yes.Take);
   }
 }

@@ -399,6 +399,6 @@ final class TreeModelFilterGidBuilder : TreeModelFilterGidBuilderImpl!TreeModelF
   */
   TreeModelFilter build() nothrow
   {
-    return new TreeModelFilter(cast(void*)createGObject(TreeModelFilter._getGType), No.Take);
+    return new TreeModelFilter(cast(void*)createGObject(TreeModelFilter._getGType), Yes.Take);
   }
 }

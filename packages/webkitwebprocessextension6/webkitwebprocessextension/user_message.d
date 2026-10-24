@@ -223,6 +223,6 @@ final class UserMessageGidBuilder : UserMessageGidBuilderImpl!UserMessageGidBuil
   */
   UserMessage build() nothrow
   {
-    return new UserMessage(cast(void*)createGObject(UserMessage._getGType), No.Take);
+    return new UserMessage(cast(void*)createGObject(UserMessage._getGType), Yes.Take);
   }
 }

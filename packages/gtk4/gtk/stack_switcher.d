@@ -174,6 +174,6 @@ final class StackSwitcherGidBuilder : StackSwitcherGidBuilderImpl!StackSwitcherG
   */
   StackSwitcher build() nothrow
   {
-    return new StackSwitcher(cast(void*)createGObject(StackSwitcher._getGType), No.Take);
+    return new StackSwitcher(cast(void*)createGObject(StackSwitcher._getGType), Yes.Take);
   }
 }

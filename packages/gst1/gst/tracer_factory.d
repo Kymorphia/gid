@@ -98,6 +98,6 @@ final class TracerFactoryGidBuilder : TracerFactoryGidBuilderImpl!TracerFactoryG
   */
   TracerFactory build() nothrow
   {
-    return new TracerFactory(cast(void*)createGObject(TracerFactory._getGType), No.Take);
+    return new TracerFactory(cast(void*)createGObject(TracerFactory._getGType), Yes.Take);
   }
 }

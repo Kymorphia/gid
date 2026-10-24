@@ -125,6 +125,6 @@ final class ColumnChunkMetadataGidBuilder : ColumnChunkMetadataGidBuilderImpl!Co
   */
   ColumnChunkMetadata build() nothrow
   {
-    return new ColumnChunkMetadata(cast(void*)createGObject(ColumnChunkMetadata._getGType), No.Take);
+    return new ColumnChunkMetadata(cast(void*)createGObject(ColumnChunkMetadata._getGType), Yes.Take);
   }
 }

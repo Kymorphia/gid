@@ -105,6 +105,6 @@ final class ExtensionDataTypeGidBuilder : ExtensionDataTypeGidBuilderImpl!Extens
   */
   ExtensionDataType build() nothrow
   {
-    return new ExtensionDataType(cast(void*)createGObject(ExtensionDataType._getGType), No.Take);
+    return new ExtensionDataType(cast(void*)createGObject(ExtensionDataType._getGType), Yes.Take);
   }
 }

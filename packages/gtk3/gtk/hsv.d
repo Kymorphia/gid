@@ -269,6 +269,6 @@ final class HSVGidBuilder : HSVGidBuilderImpl!HSVGidBuilder
   */
   HSV build() nothrow
   {
-    return new HSV(cast(void*)createGObject(HSV._getGType), No.Take);
+    return new HSV(cast(void*)createGObject(HSV._getGType), Yes.Take);
   }
 }

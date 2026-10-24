@@ -65,6 +65,6 @@ final class FrameAccessibleGidBuilder : FrameAccessibleGidBuilderImpl!FrameAcces
   */
   FrameAccessible build() nothrow
   {
-    return new FrameAccessible(cast(void*)createGObject(FrameAccessible._getGType), No.Take);
+    return new FrameAccessible(cast(void*)createGObject(FrameAccessible._getGType), Yes.Take);
   }
 }

@@ -74,6 +74,6 @@ final class ImageCellAccessibleGidBuilder : ImageCellAccessibleGidBuilderImpl!Im
   */
   ImageCellAccessible build() nothrow
   {
-    return new ImageCellAccessible(cast(void*)createGObject(ImageCellAccessible._getGType), No.Take);
+    return new ImageCellAccessible(cast(void*)createGObject(ImageCellAccessible._getGType), Yes.Take);
   }
 }

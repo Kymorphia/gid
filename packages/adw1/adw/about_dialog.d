@@ -2111,6 +2111,6 @@ final class AboutDialogGidBuilder : AboutDialogGidBuilderImpl!AboutDialogGidBuil
   */
   AboutDialog build() nothrow
   {
-    return new AboutDialog(cast(void*)createGObject(AboutDialog._getGType), No.Take);
+    return new AboutDialog(cast(void*)createGObject(AboutDialog._getGType), Yes.Take);
   }
 }

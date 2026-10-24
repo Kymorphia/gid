@@ -91,6 +91,6 @@ final class UnionScalarGidBuilder : UnionScalarGidBuilderImpl!UnionScalarGidBuil
   */
   UnionScalar build() nothrow
   {
-    return new UnionScalar(cast(void*)createGObject(UnionScalar._getGType), No.Take);
+    return new UnionScalar(cast(void*)createGObject(UnionScalar._getGType), Yes.Take);
   }
 }

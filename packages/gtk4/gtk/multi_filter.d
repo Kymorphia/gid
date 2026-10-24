@@ -120,6 +120,6 @@ final class MultiFilterGidBuilder : MultiFilterGidBuilderImpl!MultiFilterGidBuil
   */
   MultiFilter build() nothrow
   {
-    return new MultiFilter(cast(void*)createGObject(MultiFilter._getGType), No.Take);
+    return new MultiFilter(cast(void*)createGObject(MultiFilter._getGType), Yes.Take);
   }
 }

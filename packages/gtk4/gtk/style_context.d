@@ -481,6 +481,6 @@ final class StyleContextGidBuilder : StyleContextGidBuilderImpl!StyleContextGidB
   */
   StyleContext build() nothrow
   {
-    return new StyleContext(cast(void*)createGObject(StyleContext._getGType), No.Take);
+    return new StyleContext(cast(void*)createGObject(StyleContext._getGType), Yes.Take);
   }
 }

@@ -196,6 +196,6 @@ final class FileOutputStreamGidBuilder : FileOutputStreamGidBuilderImpl!FileOutp
   */
   FileOutputStream build() nothrow
   {
-    return new FileOutputStream(cast(void*)createGObject(FileOutputStream._getGType), No.Take);
+    return new FileOutputStream(cast(void*)createGObject(FileOutputStream._getGType), Yes.Take);
   }
 }

@@ -2760,6 +2760,6 @@ final class TextViewGidBuilder : TextViewGidBuilderImpl!TextViewGidBuilder
   */
   TextView build() nothrow
   {
-    return new TextView(cast(void*)createGObject(TextView._getGType), No.Take);
+    return new TextView(cast(void*)createGObject(TextView._getGType), Yes.Take);
   }
 }

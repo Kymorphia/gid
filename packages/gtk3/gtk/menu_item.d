@@ -848,6 +848,6 @@ final class MenuItemGidBuilder : MenuItemGidBuilderImpl!MenuItemGidBuilder
   */
   MenuItem build() nothrow
   {
-    return new MenuItem(cast(void*)createGObject(MenuItem._getGType), No.Take);
+    return new MenuItem(cast(void*)createGObject(MenuItem._getGType), Yes.Take);
   }
 }

@@ -140,6 +140,6 @@ final class ActionBarGidBuilder : ActionBarGidBuilderImpl!ActionBarGidBuilder
   */
   ActionBar build() nothrow
   {
-    return new ActionBar(cast(void*)createGObject(ActionBar._getGType), No.Take);
+    return new ActionBar(cast(void*)createGObject(ActionBar._getGType), Yes.Take);
   }
 }

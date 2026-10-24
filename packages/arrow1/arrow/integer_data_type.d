@@ -70,6 +70,6 @@ final class IntegerDataTypeGidBuilder : IntegerDataTypeGidBuilderImpl!IntegerDat
   */
   IntegerDataType build() nothrow
   {
-    return new IntegerDataType(cast(void*)createGObject(IntegerDataType._getGType), No.Take);
+    return new IntegerDataType(cast(void*)createGObject(IntegerDataType._getGType), Yes.Take);
   }
 }

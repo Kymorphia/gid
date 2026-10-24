@@ -68,6 +68,6 @@ final class WidgetAccessibleGidBuilder : WidgetAccessibleGidBuilderImpl!WidgetAc
   */
   WidgetAccessible build() nothrow
   {
-    return new WidgetAccessible(cast(void*)createGObject(WidgetAccessible._getGType), No.Take);
+    return new WidgetAccessible(cast(void*)createGObject(WidgetAccessible._getGType), Yes.Take);
   }
 }

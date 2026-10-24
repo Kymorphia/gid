@@ -80,6 +80,6 @@ final class ActivateActionGidBuilder : ActivateActionGidBuilderImpl!ActivateActi
   */
   ActivateAction build() nothrow
   {
-    return new ActivateAction(cast(void*)createGObject(ActivateAction._getGType), No.Take);
+    return new ActivateAction(cast(void*)createGObject(ActivateAction._getGType), Yes.Take);
   }
 }

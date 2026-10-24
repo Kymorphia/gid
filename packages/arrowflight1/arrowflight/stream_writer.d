@@ -74,6 +74,6 @@ final class StreamWriterGidBuilder : StreamWriterGidBuilderImpl!StreamWriterGidB
   */
   StreamWriter build() nothrow
   {
-    return new StreamWriter(cast(void*)createGObject(StreamWriter._getGType), No.Take);
+    return new StreamWriter(cast(void*)createGObject(StreamWriter._getGType), Yes.Take);
   }
 }

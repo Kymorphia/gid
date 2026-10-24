@@ -64,6 +64,6 @@ final class GLBaseMemoryAllocatorGidBuilder : GLBaseMemoryAllocatorGidBuilderImp
   */
   GLBaseMemoryAllocator build() nothrow
   {
-    return new GLBaseMemoryAllocator(cast(void*)createGObject(GLBaseMemoryAllocator._getGType), No.Take);
+    return new GLBaseMemoryAllocator(cast(void*)createGObject(GLBaseMemoryAllocator._getGType), Yes.Take);
   }
 }

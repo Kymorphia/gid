@@ -253,6 +253,6 @@ final class Decimal32GidBuilder : Decimal32GidBuilderImpl!Decimal32GidBuilder
   */
   Decimal32 build() nothrow
   {
-    return new Decimal32(cast(void*)createGObject(Decimal32._getGType), No.Take);
+    return new Decimal32(cast(void*)createGObject(Decimal32._getGType), Yes.Take);
   }
 }

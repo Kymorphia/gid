@@ -684,6 +684,6 @@ final class MediaStreamGidBuilder : MediaStreamGidBuilderImpl!MediaStreamGidBuil
   */
   MediaStream build() nothrow
   {
-    return new MediaStream(cast(void*)createGObject(MediaStream._getGType), No.Take);
+    return new MediaStream(cast(void*)createGObject(MediaStream._getGType), Yes.Take);
   }
 }

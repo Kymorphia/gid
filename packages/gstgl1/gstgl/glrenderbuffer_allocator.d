@@ -64,6 +64,6 @@ final class GLRenderbufferAllocatorGidBuilder : GLRenderbufferAllocatorGidBuilde
   */
   GLRenderbufferAllocator build() nothrow
   {
-    return new GLRenderbufferAllocator(cast(void*)createGObject(GLRenderbufferAllocator._getGType), No.Take);
+    return new GLRenderbufferAllocator(cast(void*)createGObject(GLRenderbufferAllocator._getGType), Yes.Take);
   }
 }

@@ -600,6 +600,6 @@ final class GridViewGidBuilder : GridViewGidBuilderImpl!GridViewGidBuilder
   */
   GridView build() nothrow
   {
-    return new GridView(cast(void*)createGObject(GridView._getGType), No.Take);
+    return new GridView(cast(void*)createGObject(GridView._getGType), Yes.Take);
   }
 }

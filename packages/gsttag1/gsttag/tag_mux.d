@@ -83,6 +83,6 @@ final class TagMuxGidBuilder : TagMuxGidBuilderImpl!TagMuxGidBuilder
   */
   TagMux build() nothrow
   {
-    return new TagMux(cast(void*)createGObject(TagMux._getGType), No.Take);
+    return new TagMux(cast(void*)createGObject(TagMux._getGType), Yes.Take);
   }
 }

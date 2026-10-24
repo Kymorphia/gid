@@ -236,6 +236,6 @@ final class Decimal256GidBuilder : Decimal256GidBuilderImpl!Decimal256GidBuilder
   */
   Decimal256 build() nothrow
   {
-    return new Decimal256(cast(void*)createGObject(Decimal256._getGType), No.Take);
+    return new Decimal256(cast(void*)createGObject(Decimal256._getGType), Yes.Take);
   }
 }

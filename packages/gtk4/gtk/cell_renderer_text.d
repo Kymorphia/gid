@@ -1154,6 +1154,6 @@ final class CellRendererTextGidBuilder : CellRendererTextGidBuilderImpl!CellRend
   */
   CellRendererText build() nothrow
   {
-    return new CellRendererText(cast(void*)createGObject(CellRendererText._getGType), No.Take);
+    return new CellRendererText(cast(void*)createGObject(CellRendererText._getGType), Yes.Take);
   }
 }

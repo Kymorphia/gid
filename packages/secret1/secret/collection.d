@@ -889,6 +889,6 @@ final class CollectionGidBuilder : CollectionGidBuilderImpl!CollectionGidBuilder
   */
   Collection build() nothrow
   {
-    return new Collection(cast(void*)createGObject(Collection._getGType), No.Take);
+    return new Collection(cast(void*)createGObject(Collection._getGType), Yes.Take);
   }
 }

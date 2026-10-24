@@ -65,6 +65,6 @@ final class HeaderBarAccessibleGidBuilder : HeaderBarAccessibleGidBuilderImpl!He
   */
   HeaderBarAccessible build() nothrow
   {
-    return new HeaderBarAccessible(cast(void*)createGObject(HeaderBarAccessible._getGType), No.Take);
+    return new HeaderBarAccessible(cast(void*)createGObject(HeaderBarAccessible._getGType), Yes.Take);
   }
 }

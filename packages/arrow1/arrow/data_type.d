@@ -126,6 +126,6 @@ final class DataTypeGidBuilder : DataTypeGidBuilderImpl!DataTypeGidBuilder
   */
   DataType build() nothrow
   {
-    return new DataType(cast(void*)createGObject(DataType._getGType), No.Take);
+    return new DataType(cast(void*)createGObject(DataType._getGType), Yes.Take);
   }
 }

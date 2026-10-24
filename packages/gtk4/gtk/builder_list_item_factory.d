@@ -221,6 +221,6 @@ final class BuilderListItemFactoryGidBuilder : BuilderListItemFactoryGidBuilderI
   */
   BuilderListItemFactory build() nothrow
   {
-    return new BuilderListItemFactory(cast(void*)createGObject(BuilderListItemFactory._getGType), No.Take);
+    return new BuilderListItemFactory(cast(void*)createGObject(BuilderListItemFactory._getGType), Yes.Take);
   }
 }

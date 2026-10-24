@@ -197,6 +197,6 @@ final class TooltipGidBuilder : TooltipGidBuilderImpl!TooltipGidBuilder
   */
   Tooltip build() nothrow
   {
-    return new Tooltip(cast(void*)createGObject(Tooltip._getGType), No.Take);
+    return new Tooltip(cast(void*)createGObject(Tooltip._getGType), Yes.Take);
   }
 }

@@ -90,6 +90,6 @@ final class StreamChunkGidBuilder : StreamChunkGidBuilderImpl!StreamChunkGidBuil
   */
   StreamChunk build() nothrow
   {
-    return new StreamChunk(cast(void*)createGObject(StreamChunk._getGType), No.Take);
+    return new StreamChunk(cast(void*)createGObject(StreamChunk._getGType), Yes.Take);
   }
 }

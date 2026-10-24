@@ -347,6 +347,6 @@ final class EventControllerGidBuilder : EventControllerGidBuilderImpl!EventContr
   */
   EventController build() nothrow
   {
-    return new EventController(cast(void*)createGObject(EventController._getGType), No.Take);
+    return new EventController(cast(void*)createGObject(EventController._getGType), Yes.Take);
   }
 }

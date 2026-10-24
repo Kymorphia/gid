@@ -136,6 +136,6 @@ final class InternetAddressGidBuilder : InternetAddressGidBuilderImpl!InternetAd
   */
   InternetAddress build() nothrow
   {
-    return new InternetAddress(cast(void*)createGObject(InternetAddress._getGType), No.Take);
+    return new InternetAddress(cast(void*)createGObject(InternetAddress._getGType), Yes.Take);
   }
 }

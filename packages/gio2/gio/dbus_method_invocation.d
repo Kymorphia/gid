@@ -327,6 +327,6 @@ final class DBusMethodInvocationGidBuilder : DBusMethodInvocationGidBuilderImpl!
   */
   DBusMethodInvocation build() nothrow
   {
-    return new DBusMethodInvocation(cast(void*)createGObject(DBusMethodInvocation._getGType), No.Take);
+    return new DBusMethodInvocation(cast(void*)createGObject(DBusMethodInvocation._getGType), Yes.Take);
   }
 }

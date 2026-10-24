@@ -74,6 +74,6 @@ final class TextCellAccessibleGidBuilder : TextCellAccessibleGidBuilderImpl!Text
   */
   TextCellAccessible build() nothrow
   {
-    return new TextCellAccessible(cast(void*)createGObject(TextCellAccessible._getGType), No.Take);
+    return new TextCellAccessible(cast(void*)createGObject(TextCellAccessible._getGType), Yes.Take);
   }
 }

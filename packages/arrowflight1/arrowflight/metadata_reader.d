@@ -82,6 +82,6 @@ final class MetadataReaderGidBuilder : MetadataReaderGidBuilderImpl!MetadataRead
   */
   MetadataReader build() nothrow
   {
-    return new MetadataReader(cast(void*)createGObject(MetadataReader._getGType), No.Take);
+    return new MetadataReader(cast(void*)createGObject(MetadataReader._getGType), Yes.Take);
   }
 }

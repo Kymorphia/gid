@@ -156,6 +156,6 @@ final class ArrowGidBuilder : ArrowGidBuilderImpl!ArrowGidBuilder
   */
   Arrow build() nothrow
   {
-    return new Arrow(cast(void*)createGObject(Arrow._getGType), No.Take);
+    return new Arrow(cast(void*)createGObject(Arrow._getGType), Yes.Take);
   }
 }

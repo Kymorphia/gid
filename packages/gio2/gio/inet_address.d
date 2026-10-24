@@ -452,6 +452,6 @@ final class InetAddressGidBuilder : InetAddressGidBuilderImpl!InetAddressGidBuil
   */
   InetAddress build() nothrow
   {
-    return new InetAddress(cast(void*)createGObject(InetAddress._getGType), No.Take);
+    return new InetAddress(cast(void*)createGObject(InetAddress._getGType), Yes.Take);
   }
 }

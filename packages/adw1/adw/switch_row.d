@@ -165,6 +165,6 @@ final class SwitchRowGidBuilder : SwitchRowGidBuilderImpl!SwitchRowGidBuilder
   */
   SwitchRow build() nothrow
   {
-    return new SwitchRow(cast(void*)createGObject(SwitchRow._getGType), No.Take);
+    return new SwitchRow(cast(void*)createGObject(SwitchRow._getGType), Yes.Take);
   }
 }

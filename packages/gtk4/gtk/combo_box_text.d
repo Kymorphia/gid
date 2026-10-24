@@ -322,6 +322,6 @@ final class ComboBoxTextGidBuilder : ComboBoxTextGidBuilderImpl!ComboBoxTextGidB
   */
   ComboBoxText build() nothrow
   {
-    return new ComboBoxText(cast(void*)createGObject(ComboBoxText._getGType), No.Take);
+    return new ComboBoxText(cast(void*)createGObject(ComboBoxText._getGType), Yes.Take);
   }
 }

@@ -82,6 +82,6 @@ final class HButtonBoxGidBuilder : HButtonBoxGidBuilderImpl!HButtonBoxGidBuilder
   */
   HButtonBox build() nothrow
   {
-    return new HButtonBox(cast(void*)createGObject(HButtonBox._getGType), No.Take);
+    return new HButtonBox(cast(void*)createGObject(HButtonBox._getGType), Yes.Take);
   }
 }

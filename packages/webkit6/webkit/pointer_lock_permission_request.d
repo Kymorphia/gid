@@ -77,6 +77,6 @@ final class PointerLockPermissionRequestGidBuilder : PointerLockPermissionReques
   */
   PointerLockPermissionRequest build() nothrow
   {
-    return new PointerLockPermissionRequest(cast(void*)createGObject(PointerLockPermissionRequest._getGType), No.Take);
+    return new PointerLockPermissionRequest(cast(void*)createGObject(PointerLockPermissionRequest._getGType), Yes.Take);
   }
 }

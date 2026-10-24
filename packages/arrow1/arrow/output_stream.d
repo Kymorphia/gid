@@ -115,6 +115,6 @@ final class OutputStreamGidBuilder : OutputStreamGidBuilderImpl!OutputStreamGidB
   */
   OutputStream build() nothrow
   {
-    return new OutputStream(cast(void*)createGObject(OutputStream._getGType), No.Take);
+    return new OutputStream(cast(void*)createGObject(OutputStream._getGType), Yes.Take);
   }
 }

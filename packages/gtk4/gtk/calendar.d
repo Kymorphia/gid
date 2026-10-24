@@ -770,6 +770,6 @@ final class CalendarGidBuilder : CalendarGidBuilderImpl!CalendarGidBuilder
   */
   Calendar build() nothrow
   {
-    return new Calendar(cast(void*)createGObject(Calendar._getGType), No.Take);
+    return new Calendar(cast(void*)createGObject(Calendar._getGType), Yes.Take);
   }
 }

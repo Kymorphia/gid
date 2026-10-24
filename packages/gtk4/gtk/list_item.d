@@ -503,6 +503,6 @@ final class ListItemGidBuilder : ListItemGidBuilderImpl!ListItemGidBuilder
   */
   ListItem build() nothrow
   {
-    return new ListItem(cast(void*)createGObject(ListItem._getGType), No.Take);
+    return new ListItem(cast(void*)createGObject(ListItem._getGType), Yes.Take);
   }
 }

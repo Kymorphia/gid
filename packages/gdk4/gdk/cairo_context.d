@@ -90,6 +90,6 @@ final class CairoContextGidBuilder : CairoContextGidBuilderImpl!CairoContextGidB
   */
   CairoContext build() nothrow
   {
-    return new CairoContext(cast(void*)createGObject(CairoContext._getGType), No.Take);
+    return new CairoContext(cast(void*)createGObject(CairoContext._getGType), Yes.Take);
   }
 }

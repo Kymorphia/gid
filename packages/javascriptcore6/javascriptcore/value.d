@@ -1034,7 +1034,7 @@ final class ValueGidBuilder : ValueGidBuilderImpl!ValueGidBuilder
   */
   Value build() nothrow
   {
-    return new Value(cast(void*)createGObject(Value._getGType), No.Take);
+    return new Value(cast(void*)createGObject(Value._getGType), Yes.Take);
   }
 }
 

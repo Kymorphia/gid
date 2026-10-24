@@ -145,6 +145,6 @@ final class ThemeSelectorGidBuilder : ThemeSelectorGidBuilderImpl!ThemeSelectorG
   */
   ThemeSelector build() nothrow
   {
-    return new ThemeSelector(cast(void*)createGObject(ThemeSelector._getGType), No.Take);
+    return new ThemeSelector(cast(void*)createGObject(ThemeSelector._getGType), Yes.Take);
   }
 }

@@ -645,6 +645,6 @@ final class ButtonGidBuilder : ButtonGidBuilderImpl!ButtonGidBuilder
   */
   Button build() nothrow
   {
-    return new Button(cast(void*)createGObject(Button._getGType), No.Take);
+    return new Button(cast(void*)createGObject(Button._getGType), Yes.Take);
   }
 }

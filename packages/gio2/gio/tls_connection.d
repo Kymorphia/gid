@@ -1015,6 +1015,6 @@ final class TlsConnectionGidBuilder : TlsConnectionGidBuilderImpl!TlsConnectionG
   */
   TlsConnection build() nothrow
   {
-    return new TlsConnection(cast(void*)createGObject(TlsConnection._getGType), No.Take);
+    return new TlsConnection(cast(void*)createGObject(TlsConnection._getGType), Yes.Take);
   }
 }

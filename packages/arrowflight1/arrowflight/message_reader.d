@@ -73,6 +73,6 @@ final class MessageReaderGidBuilder : MessageReaderGidBuilderImpl!MessageReaderG
   */
   MessageReader build() nothrow
   {
-    return new MessageReader(cast(void*)createGObject(MessageReader._getGType), No.Take);
+    return new MessageReader(cast(void*)createGObject(MessageReader._getGType), Yes.Take);
   }
 }

@@ -411,6 +411,6 @@ final class DeviceManagerGidBuilder : DeviceManagerGidBuilderImpl!DeviceManagerG
   */
   DeviceManager build() nothrow
   {
-    return new DeviceManager(cast(void*)createGObject(DeviceManager._getGType), No.Take);
+    return new DeviceManager(cast(void*)createGObject(DeviceManager._getGType), Yes.Take);
   }
 }

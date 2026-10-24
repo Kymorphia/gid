@@ -343,6 +343,6 @@ final class CursorGidBuilder : CursorGidBuilderImpl!CursorGidBuilder
   */
   Cursor build() nothrow
   {
-    return new Cursor(cast(void*)createGObject(Cursor._getGType), No.Take);
+    return new Cursor(cast(void*)createGObject(Cursor._getGType), Yes.Take);
   }
 }

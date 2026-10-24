@@ -249,6 +249,6 @@ final class ViewSwitcherBarGidBuilder : ViewSwitcherBarGidBuilderImpl!ViewSwitch
   */
   ViewSwitcherBar build() nothrow
   {
-    return new ViewSwitcherBar(cast(void*)createGObject(ViewSwitcherBar._getGType), No.Take);
+    return new ViewSwitcherBar(cast(void*)createGObject(ViewSwitcherBar._getGType), Yes.Take);
   }
 }

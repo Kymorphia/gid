@@ -1248,6 +1248,6 @@ final class LeafletGidBuilder : LeafletGidBuilderImpl!LeafletGidBuilder
   */
   Leaflet build() nothrow
   {
-    return new Leaflet(cast(void*)createGObject(Leaflet._getGType), No.Take);
+    return new Leaflet(cast(void*)createGObject(Leaflet._getGType), Yes.Take);
   }
 }

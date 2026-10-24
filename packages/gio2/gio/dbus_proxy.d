@@ -1247,6 +1247,6 @@ final class DBusProxyGidBuilder : DBusProxyGidBuilderImpl!DBusProxyGidBuilder
   */
   DBusProxy build() nothrow
   {
-    return new DBusProxy(cast(void*)createGObject(DBusProxy._getGType), No.Take);
+    return new DBusProxy(cast(void*)createGObject(DBusProxy._getGType), Yes.Take);
   }
 }

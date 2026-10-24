@@ -1005,6 +1005,6 @@ final class ServerMessageGidBuilder : ServerMessageGidBuilderImpl!ServerMessageG
   */
   ServerMessage build() nothrow
   {
-    return new ServerMessage(cast(void*)createGObject(ServerMessage._getGType), No.Take);
+    return new ServerMessage(cast(void*)createGObject(ServerMessage._getGType), Yes.Take);
   }
 }

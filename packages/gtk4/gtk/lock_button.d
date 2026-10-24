@@ -372,6 +372,6 @@ final class LockButtonGidBuilder : LockButtonGidBuilderImpl!LockButtonGidBuilder
   */
   LockButton build() nothrow
   {
-    return new LockButton(cast(void*)createGObject(LockButton._getGType), No.Take);
+    return new LockButton(cast(void*)createGObject(LockButton._getGType), Yes.Take);
   }
 }

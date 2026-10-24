@@ -119,6 +119,6 @@ final class FontChooserWidgetGidBuilder : FontChooserWidgetGidBuilderImpl!FontCh
   */
   FontChooserWidget build() nothrow
   {
-    return new FontChooserWidget(cast(void*)createGObject(FontChooserWidget._getGType), No.Take);
+    return new FontChooserWidget(cast(void*)createGObject(FontChooserWidget._getGType), Yes.Take);
   }
 }

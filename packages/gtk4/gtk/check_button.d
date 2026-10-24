@@ -628,6 +628,6 @@ final class CheckButtonGidBuilder : CheckButtonGidBuilderImpl!CheckButtonGidBuil
   */
   CheckButton build() nothrow
   {
-    return new CheckButton(cast(void*)createGObject(CheckButton._getGType), No.Take);
+    return new CheckButton(cast(void*)createGObject(CheckButton._getGType), Yes.Take);
   }
 }

@@ -981,6 +981,6 @@ final class GutterRendererGidBuilder : GutterRendererGidBuilderImpl!GutterRender
   */
   GutterRenderer build() nothrow
   {
-    return new GutterRenderer(cast(void*)createGObject(GutterRenderer._getGType), No.Take);
+    return new GutterRenderer(cast(void*)createGObject(GutterRenderer._getGType), Yes.Take);
   }
 }

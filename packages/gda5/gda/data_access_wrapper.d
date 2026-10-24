@@ -131,6 +131,6 @@ final class DataAccessWrapperGidBuilder : DataAccessWrapperGidBuilderImpl!DataAc
   */
   DataAccessWrapper build() nothrow
   {
-    return new DataAccessWrapper(cast(void*)createGObject(DataAccessWrapper._getGType), No.Take);
+    return new DataAccessWrapper(cast(void*)createGObject(DataAccessWrapper._getGType), Yes.Take);
   }
 }

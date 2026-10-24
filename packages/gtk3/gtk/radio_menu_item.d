@@ -348,6 +348,6 @@ final class RadioMenuItemGidBuilder : RadioMenuItemGidBuilderImpl!RadioMenuItemG
   */
   RadioMenuItem build() nothrow
   {
-    return new RadioMenuItem(cast(void*)createGObject(RadioMenuItem._getGType), No.Take);
+    return new RadioMenuItem(cast(void*)createGObject(RadioMenuItem._getGType), Yes.Take);
   }
 }

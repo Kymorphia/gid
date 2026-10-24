@@ -822,6 +822,6 @@ final class VolumeMonitorGidBuilder : VolumeMonitorGidBuilderImpl!VolumeMonitorG
   */
   VolumeMonitor build() nothrow
   {
-    return new VolumeMonitor(cast(void*)createGObject(VolumeMonitor._getGType), No.Take);
+    return new VolumeMonitor(cast(void*)createGObject(VolumeMonitor._getGType), Yes.Take);
   }
 }

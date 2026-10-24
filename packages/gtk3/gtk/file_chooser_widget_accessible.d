@@ -74,6 +74,6 @@ final class FileChooserWidgetAccessibleGidBuilder : FileChooserWidgetAccessibleG
   */
   FileChooserWidgetAccessible build() nothrow
   {
-    return new FileChooserWidgetAccessible(cast(void*)createGObject(FileChooserWidgetAccessible._getGType), No.Take);
+    return new FileChooserWidgetAccessible(cast(void*)createGObject(FileChooserWidgetAccessible._getGType), Yes.Take);
   }
 }

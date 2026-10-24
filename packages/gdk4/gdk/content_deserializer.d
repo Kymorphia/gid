@@ -232,6 +232,6 @@ final class ContentDeserializerGidBuilder : ContentDeserializerGidBuilderImpl!Co
   */
   ContentDeserializer build() nothrow
   {
-    return new ContentDeserializer(cast(void*)createGObject(ContentDeserializer._getGType), No.Take);
+    return new ContentDeserializer(cast(void*)createGObject(ContentDeserializer._getGType), Yes.Take);
   }
 }

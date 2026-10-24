@@ -81,6 +81,6 @@ final class NeverTriggerGidBuilder : NeverTriggerGidBuilderImpl!NeverTriggerGidB
   */
   NeverTrigger build() nothrow
   {
-    return new NeverTrigger(cast(void*)createGObject(NeverTrigger._getGType), No.Take);
+    return new NeverTrigger(cast(void*)createGObject(NeverTrigger._getGType), Yes.Take);
   }
 }

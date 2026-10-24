@@ -130,6 +130,6 @@ final class VolumeButtonGidBuilder : VolumeButtonGidBuilderImpl!VolumeButtonGidB
   */
   VolumeButton build() nothrow
   {
-    return new VolumeButton(cast(void*)createGObject(VolumeButton._getGType), No.Take);
+    return new VolumeButton(cast(void*)createGObject(VolumeButton._getGType), Yes.Take);
   }
 }

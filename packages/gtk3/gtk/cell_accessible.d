@@ -80,6 +80,6 @@ final class CellAccessibleGidBuilder : CellAccessibleGidBuilderImpl!CellAccessib
   */
   CellAccessible build() nothrow
   {
-    return new CellAccessible(cast(void*)createGObject(CellAccessible._getGType), No.Take);
+    return new CellAccessible(cast(void*)createGObject(CellAccessible._getGType), Yes.Take);
   }
 }

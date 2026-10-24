@@ -884,6 +884,6 @@ final class SqueezerGidBuilder : SqueezerGidBuilderImpl!SqueezerGidBuilder
   */
   Squeezer build() nothrow
   {
-    return new Squeezer(cast(void*)createGObject(Squeezer._getGType), No.Take);
+    return new Squeezer(cast(void*)createGObject(Squeezer._getGType), Yes.Take);
   }
 }

@@ -96,6 +96,6 @@ final class GSettingsActionGroupGidBuilder : GSettingsActionGroupGidBuilderImpl!
   */
   GSettingsActionGroup build() nothrow
   {
-    return new GSettingsActionGroup(cast(void*)createGObject(GSettingsActionGroup._getGType), No.Take);
+    return new GSettingsActionGroup(cast(void*)createGObject(GSettingsActionGroup._getGType), Yes.Take);
   }
 }

@@ -64,6 +64,6 @@ final class ConstraintLayoutChildGidBuilder : ConstraintLayoutChildGidBuilderImp
   */
   ConstraintLayoutChild build() nothrow
   {
-    return new ConstraintLayoutChild(cast(void*)createGObject(ConstraintLayoutChild._getGType), No.Take);
+    return new ConstraintLayoutChild(cast(void*)createGObject(ConstraintLayoutChild._getGType), Yes.Take);
   }
 }

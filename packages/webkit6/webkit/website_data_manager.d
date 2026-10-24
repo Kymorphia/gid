@@ -450,6 +450,6 @@ final class WebsiteDataManagerGidBuilder : WebsiteDataManagerGidBuilderImpl!Webs
   */
   WebsiteDataManager build() nothrow
   {
-    return new WebsiteDataManager(cast(void*)createGObject(WebsiteDataManager._getGType), No.Take);
+    return new WebsiteDataManager(cast(void*)createGObject(WebsiteDataManager._getGType), Yes.Take);
   }
 }

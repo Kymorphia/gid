@@ -162,6 +162,6 @@ final class DrawingAreaGidBuilder : DrawingAreaGidBuilderImpl!DrawingAreaGidBuil
   */
   DrawingArea build() nothrow
   {
-    return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), No.Take);
+    return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), Yes.Take);
   }
 }

@@ -93,6 +93,6 @@ final class ContentDecoderGidBuilder : ContentDecoderGidBuilderImpl!ContentDecod
   */
   ContentDecoder build() nothrow
   {
-    return new ContentDecoder(cast(void*)createGObject(ContentDecoder._getGType), No.Take);
+    return new ContentDecoder(cast(void*)createGObject(ContentDecoder._getGType), Yes.Take);
   }
 }

@@ -68,6 +68,6 @@ final class ServerAuthHandlerGidBuilder : ServerAuthHandlerGidBuilderImpl!Server
   */
   ServerAuthHandler build() nothrow
   {
-    return new ServerAuthHandler(cast(void*)createGObject(ServerAuthHandler._getGType), No.Take);
+    return new ServerAuthHandler(cast(void*)createGObject(ServerAuthHandler._getGType), Yes.Take);
   }
 }

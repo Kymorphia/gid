@@ -68,6 +68,6 @@ final class AuthDigestGidBuilder : AuthDigestGidBuilderImpl!AuthDigestGidBuilder
   */
   AuthDigest build() nothrow
   {
-    return new AuthDigest(cast(void*)createGObject(AuthDigest._getGType), No.Take);
+    return new AuthDigest(cast(void*)createGObject(AuthDigest._getGType), Yes.Take);
   }
 }

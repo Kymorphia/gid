@@ -661,6 +661,6 @@ final class ToolItemGidBuilder : ToolItemGidBuilderImpl!ToolItemGidBuilder
   */
   ToolItem build() nothrow
   {
-    return new ToolItem(cast(void*)createGObject(ToolItem._getGType), No.Take);
+    return new ToolItem(cast(void*)createGObject(ToolItem._getGType), Yes.Take);
   }
 }

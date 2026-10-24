@@ -502,6 +502,6 @@ final class WebInspectorGidBuilder : WebInspectorGidBuilderImpl!WebInspectorGidB
   */
   WebInspector build() nothrow
   {
-    return new WebInspector(cast(void*)createGObject(WebInspector._getGType), No.Take);
+    return new WebInspector(cast(void*)createGObject(WebInspector._getGType), Yes.Take);
   }
 }

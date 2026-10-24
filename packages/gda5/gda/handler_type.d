@@ -80,6 +80,6 @@ final class HandlerTypeGidBuilder : HandlerTypeGidBuilderImpl!HandlerTypeGidBuil
   */
   HandlerType build() nothrow
   {
-    return new HandlerType(cast(void*)createGObject(HandlerType._getGType), No.Take);
+    return new HandlerType(cast(void*)createGObject(HandlerType._getGType), Yes.Take);
   }
 }

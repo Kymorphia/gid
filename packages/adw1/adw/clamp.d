@@ -392,6 +392,6 @@ final class ClampGidBuilder : ClampGidBuilderImpl!ClampGidBuilder
   */
   Clamp build() nothrow
   {
-    return new Clamp(cast(void*)createGObject(Clamp._getGType), No.Take);
+    return new Clamp(cast(void*)createGObject(Clamp._getGType), Yes.Take);
   }
 }

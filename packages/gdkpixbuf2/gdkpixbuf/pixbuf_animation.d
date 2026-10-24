@@ -330,6 +330,6 @@ final class PixbufAnimationGidBuilder : PixbufAnimationGidBuilderImpl!PixbufAnim
   */
   PixbufAnimation build() nothrow
   {
-    return new PixbufAnimation(cast(void*)createGObject(PixbufAnimation._getGType), No.Take);
+    return new PixbufAnimation(cast(void*)createGObject(PixbufAnimation._getGType), Yes.Take);
   }
 }

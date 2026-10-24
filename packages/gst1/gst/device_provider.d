@@ -413,6 +413,6 @@ final class DeviceProviderGidBuilder : DeviceProviderGidBuilderImpl!DeviceProvid
   */
   DeviceProvider build() nothrow
   {
-    return new DeviceProvider(cast(void*)createGObject(DeviceProvider._getGType), No.Take);
+    return new DeviceProvider(cast(void*)createGObject(DeviceProvider._getGType), Yes.Take);
   }
 }

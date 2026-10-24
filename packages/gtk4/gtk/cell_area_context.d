@@ -365,6 +365,6 @@ final class CellAreaContextGidBuilder : CellAreaContextGidBuilderImpl!CellAreaCo
   */
   CellAreaContext build() nothrow
   {
-    return new CellAreaContext(cast(void*)createGObject(CellAreaContext._getGType), No.Take);
+    return new CellAreaContext(cast(void*)createGObject(CellAreaContext._getGType), Yes.Take);
   }
 }

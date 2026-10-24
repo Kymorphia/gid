@@ -1029,6 +1029,6 @@ final class TabOverviewGidBuilder : TabOverviewGidBuilderImpl!TabOverviewGidBuil
   */
   TabOverview build() nothrow
   {
-    return new TabOverview(cast(void*)createGObject(TabOverview._getGType), No.Take);
+    return new TabOverview(cast(void*)createGObject(TabOverview._getGType), Yes.Take);
   }
 }

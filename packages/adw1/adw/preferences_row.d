@@ -338,6 +338,6 @@ final class PreferencesRowGidBuilder : PreferencesRowGidBuilderImpl!PreferencesR
   */
   PreferencesRow build() nothrow
   {
-    return new PreferencesRow(cast(void*)createGObject(PreferencesRow._getGType), No.Take);
+    return new PreferencesRow(cast(void*)createGObject(PreferencesRow._getGType), Yes.Take);
   }
 }

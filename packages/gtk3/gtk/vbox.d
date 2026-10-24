@@ -113,6 +113,6 @@ final class VBoxGidBuilder : VBoxGidBuilderImpl!VBoxGidBuilder
   */
   VBox build() nothrow
   {
-    return new VBox(cast(void*)createGObject(VBox._getGType), No.Take);
+    return new VBox(cast(void*)createGObject(VBox._getGType), Yes.Take);
   }
 }

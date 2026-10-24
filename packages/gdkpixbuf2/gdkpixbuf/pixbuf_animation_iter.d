@@ -162,6 +162,6 @@ final class PixbufAnimationIterGidBuilder : PixbufAnimationIterGidBuilderImpl!Pi
   */
   PixbufAnimationIter build() nothrow
   {
-    return new PixbufAnimationIter(cast(void*)createGObject(PixbufAnimationIter._getGType), No.Take);
+    return new PixbufAnimationIter(cast(void*)createGObject(PixbufAnimationIter._getGType), Yes.Take);
   }
 }

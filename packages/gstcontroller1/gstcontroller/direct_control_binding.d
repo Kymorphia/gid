@@ -141,6 +141,6 @@ final class DirectControlBindingGidBuilder : DirectControlBindingGidBuilderImpl!
   */
   DirectControlBinding build() nothrow
   {
-    return new DirectControlBinding(cast(void*)createGObject(DirectControlBinding._getGType), No.Take);
+    return new DirectControlBinding(cast(void*)createGObject(DirectControlBinding._getGType), Yes.Take);
   }
 }

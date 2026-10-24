@@ -430,6 +430,6 @@ final class NativeDialogGidBuilder : NativeDialogGidBuilderImpl!NativeDialogGidB
   */
   NativeDialog build() nothrow
   {
-    return new NativeDialog(cast(void*)createGObject(NativeDialog._getGType), No.Take);
+    return new NativeDialog(cast(void*)createGObject(NativeDialog._getGType), Yes.Take);
   }
 }

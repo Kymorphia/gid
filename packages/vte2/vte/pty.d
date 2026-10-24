@@ -454,6 +454,6 @@ final class PtyGidBuilder : PtyGidBuilderImpl!PtyGidBuilder
   */
   Pty build() nothrow
   {
-    return new Pty(cast(void*)createGObject(Pty._getGType), No.Take);
+    return new Pty(cast(void*)createGObject(Pty._getGType), Yes.Take);
   }
 }

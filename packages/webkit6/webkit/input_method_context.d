@@ -533,6 +533,6 @@ final class InputMethodContextGidBuilder : InputMethodContextGidBuilderImpl!Inpu
   */
   InputMethodContext build() nothrow
   {
-    return new InputMethodContext(cast(void*)createGObject(InputMethodContext._getGType), No.Take);
+    return new InputMethodContext(cast(void*)createGObject(InputMethodContext._getGType), Yes.Take);
   }
 }

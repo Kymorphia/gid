@@ -587,6 +587,6 @@ final class PluginGidBuilder : PluginGidBuilderImpl!PluginGidBuilder
   */
   Plugin build() nothrow
   {
-    return new Plugin(cast(void*)createGObject(Plugin._getGType), No.Take);
+    return new Plugin(cast(void*)createGObject(Plugin._getGType), Yes.Take);
   }
 }

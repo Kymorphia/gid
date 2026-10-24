@@ -787,6 +787,6 @@ final class SpinRowGidBuilder : SpinRowGidBuilderImpl!SpinRowGidBuilder
   */
   SpinRow build() nothrow
   {
-    return new SpinRow(cast(void*)createGObject(SpinRow._getGType), No.Take);
+    return new SpinRow(cast(void*)createGObject(SpinRow._getGType), Yes.Take);
   }
 }

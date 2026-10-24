@@ -279,6 +279,6 @@ final class VfsGidBuilder : VfsGidBuilderImpl!VfsGidBuilder
   */
   Vfs build() nothrow
   {
-    return new Vfs(cast(void*)createGObject(Vfs._getGType), No.Take);
+    return new Vfs(cast(void*)createGObject(Vfs._getGType), Yes.Take);
   }
 }

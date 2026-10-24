@@ -253,6 +253,6 @@ final class Decimal64GidBuilder : Decimal64GidBuilderImpl!Decimal64GidBuilder
   */
   Decimal64 build() nothrow
   {
-    return new Decimal64(cast(void*)createGObject(Decimal64._getGType), No.Take);
+    return new Decimal64(cast(void*)createGObject(Decimal64._getGType), Yes.Take);
   }
 }

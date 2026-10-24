@@ -266,6 +266,6 @@ final class CellRendererPixbufGidBuilder : CellRendererPixbufGidBuilderImpl!Cell
   */
   CellRendererPixbuf build() nothrow
   {
-    return new CellRendererPixbuf(cast(void*)createGObject(CellRendererPixbuf._getGType), No.Take);
+    return new CellRendererPixbuf(cast(void*)createGObject(CellRendererPixbuf._getGType), Yes.Take);
   }
 }

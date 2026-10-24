@@ -339,6 +339,6 @@ final class MonitorWrapGidBuilder : MonitorWrapGidBuilderImpl!MonitorWrapGidBuil
   */
   MonitorWrap build() nothrow
   {
-    return new MonitorWrap(cast(void*)createGObject(MonitorWrap._getGType), No.Take);
+    return new MonitorWrap(cast(void*)createGObject(MonitorWrap._getGType), Yes.Take);
   }
 }

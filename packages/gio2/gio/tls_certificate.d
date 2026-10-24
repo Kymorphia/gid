@@ -700,6 +700,6 @@ final class TlsCertificateGidBuilder : TlsCertificateGidBuilderImpl!TlsCertifica
   */
   TlsCertificate build() nothrow
   {
-    return new TlsCertificate(cast(void*)createGObject(TlsCertificate._getGType), No.Take);
+    return new TlsCertificate(cast(void*)createGObject(TlsCertificate._getGType), Yes.Take);
   }
 }

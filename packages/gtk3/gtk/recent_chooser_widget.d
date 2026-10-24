@@ -116,6 +116,6 @@ final class RecentChooserWidgetGidBuilder : RecentChooserWidgetGidBuilderImpl!Re
   */
   RecentChooserWidget build() nothrow
   {
-    return new RecentChooserWidget(cast(void*)createGObject(RecentChooserWidget._getGType), No.Take);
+    return new RecentChooserWidget(cast(void*)createGObject(RecentChooserWidget._getGType), Yes.Take);
   }
 }

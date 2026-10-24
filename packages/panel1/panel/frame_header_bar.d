@@ -157,6 +157,6 @@ final class FrameHeaderBarGidBuilder : FrameHeaderBarGidBuilderImpl!FrameHeaderB
   */
   FrameHeaderBar build() nothrow
   {
-    return new FrameHeaderBar(cast(void*)createGObject(FrameHeaderBar._getGType), No.Take);
+    return new FrameHeaderBar(cast(void*)createGObject(FrameHeaderBar._getGType), Yes.Take);
   }
 }

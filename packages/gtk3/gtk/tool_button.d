@@ -493,6 +493,6 @@ final class ToolButtonGidBuilder : ToolButtonGidBuilderImpl!ToolButtonGidBuilder
   */
   ToolButton build() nothrow
   {
-    return new ToolButton(cast(void*)createGObject(ToolButton._getGType), No.Take);
+    return new ToolButton(cast(void*)createGObject(ToolButton._getGType), Yes.Take);
   }
 }

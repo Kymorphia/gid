@@ -80,6 +80,6 @@ final class HandlerBooleanGidBuilder : HandlerBooleanGidBuilderImpl!HandlerBoole
   */
   HandlerBoolean build() nothrow
   {
-    return new HandlerBoolean(cast(void*)createGObject(HandlerBoolean._getGType), No.Take);
+    return new HandlerBoolean(cast(void*)createGObject(HandlerBoolean._getGType), Yes.Take);
   }
 }

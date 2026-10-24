@@ -65,6 +65,6 @@ final class ContainerAccessibleGidBuilder : ContainerAccessibleGidBuilderImpl!Co
   */
   ContainerAccessible build() nothrow
   {
-    return new ContainerAccessible(cast(void*)createGObject(ContainerAccessible._getGType), No.Take);
+    return new ContainerAccessible(cast(void*)createGObject(ContainerAccessible._getGType), Yes.Take);
   }
 }

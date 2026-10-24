@@ -69,6 +69,6 @@ final class RadioButtonAccessibleGidBuilder : RadioButtonAccessibleGidBuilderImp
   */
   RadioButtonAccessible build() nothrow
   {
-    return new RadioButtonAccessible(cast(void*)createGObject(RadioButtonAccessible._getGType), No.Take);
+    return new RadioButtonAccessible(cast(void*)createGObject(RadioButtonAccessible._getGType), Yes.Take);
   }
 }

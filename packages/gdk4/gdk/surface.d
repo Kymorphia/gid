@@ -941,6 +941,6 @@ final class SurfaceGidBuilder : SurfaceGidBuilderImpl!SurfaceGidBuilder
   */
   Surface build() nothrow
   {
-    return new Surface(cast(void*)createGObject(Surface._getGType), No.Take);
+    return new Surface(cast(void*)createGObject(Surface._getGType), Yes.Take);
   }
 }

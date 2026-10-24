@@ -163,6 +163,6 @@ final class SocketControlMessageGidBuilder : SocketControlMessageGidBuilderImpl!
   */
   SocketControlMessage build() nothrow
   {
-    return new SocketControlMessage(cast(void*)createGObject(SocketControlMessage._getGType), No.Take);
+    return new SocketControlMessage(cast(void*)createGObject(SocketControlMessage._getGType), Yes.Take);
   }
 }

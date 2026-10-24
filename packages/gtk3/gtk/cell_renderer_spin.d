@@ -182,6 +182,6 @@ final class CellRendererSpinGidBuilder : CellRendererSpinGidBuilderImpl!CellRend
   */
   CellRendererSpin build() nothrow
   {
-    return new CellRendererSpin(cast(void*)createGObject(CellRendererSpin._getGType), No.Take);
+    return new CellRendererSpin(cast(void*)createGObject(CellRendererSpin._getGType), Yes.Take);
   }
 }

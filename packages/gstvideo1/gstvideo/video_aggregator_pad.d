@@ -183,6 +183,6 @@ final class VideoAggregatorPadGidBuilder : VideoAggregatorPadGidBuilderImpl!Vide
   */
   VideoAggregatorPad build() nothrow
   {
-    return new VideoAggregatorPad(cast(void*)createGObject(VideoAggregatorPad._getGType), No.Take);
+    return new VideoAggregatorPad(cast(void*)createGObject(VideoAggregatorPad._getGType), Yes.Take);
   }
 }

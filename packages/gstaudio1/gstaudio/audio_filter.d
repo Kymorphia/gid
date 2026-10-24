@@ -76,6 +76,6 @@ final class AudioFilterGidBuilder : AudioFilterGidBuilderImpl!AudioFilterGidBuil
   */
   AudioFilter build() nothrow
   {
-    return new AudioFilter(cast(void*)createGObject(AudioFilter._getGType), No.Take);
+    return new AudioFilter(cast(void*)createGObject(AudioFilter._getGType), Yes.Take);
   }
 }

@@ -62,6 +62,6 @@ final class S3FileSystemGidBuilder : S3FileSystemGidBuilderImpl!S3FileSystemGidB
   */
   S3FileSystem build() nothrow
   {
-    return new S3FileSystem(cast(void*)createGObject(S3FileSystem._getGType), No.Take);
+    return new S3FileSystem(cast(void*)createGObject(S3FileSystem._getGType), Yes.Take);
   }
 }

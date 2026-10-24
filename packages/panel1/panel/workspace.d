@@ -197,6 +197,6 @@ final class WorkspaceGidBuilder : WorkspaceGidBuilderImpl!WorkspaceGidBuilder
   */
   Workspace build() nothrow
   {
-    return new Workspace(cast(void*)createGObject(Workspace._getGType), No.Take);
+    return new Workspace(cast(void*)createGObject(Workspace._getGType), Yes.Take);
   }
 }

@@ -952,6 +952,6 @@ final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
   */
   Device build() nothrow
   {
-    return new Device(cast(void*)createGObject(Device._getGType), No.Take);
+    return new Device(cast(void*)createGObject(Device._getGType), Yes.Take);
   }
 }

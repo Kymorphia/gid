@@ -615,6 +615,6 @@ final class ActionRowGidBuilder : ActionRowGidBuilderImpl!ActionRowGidBuilder
   */
   ActionRow build() nothrow
   {
-    return new ActionRow(cast(void*)createGObject(ActionRow._getGType), No.Take);
+    return new ActionRow(cast(void*)createGObject(ActionRow._getGType), Yes.Take);
   }
 }

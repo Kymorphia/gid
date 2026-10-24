@@ -214,6 +214,6 @@ final class ToggleToolButtonGidBuilder : ToggleToolButtonGidBuilderImpl!ToggleTo
   */
   ToggleToolButton build() nothrow
   {
-    return new ToggleToolButton(cast(void*)createGObject(ToggleToolButton._getGType), No.Take);
+    return new ToggleToolButton(cast(void*)createGObject(ToggleToolButton._getGType), Yes.Take);
   }
 }

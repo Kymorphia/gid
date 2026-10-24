@@ -486,6 +486,6 @@ final class EncodingProfileGidBuilder : EncodingProfileGidBuilderImpl!EncodingPr
   */
   EncodingProfile build() nothrow
   {
-    return new EncodingProfile(cast(void*)createGObject(EncodingProfile._getGType), No.Take);
+    return new EncodingProfile(cast(void*)createGObject(EncodingProfile._getGType), Yes.Take);
   }
 }

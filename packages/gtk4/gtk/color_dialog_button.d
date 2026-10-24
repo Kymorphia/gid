@@ -295,6 +295,6 @@ final class ColorDialogButtonGidBuilder : ColorDialogButtonGidBuilderImpl!ColorD
   */
   ColorDialogButton build() nothrow
   {
-    return new ColorDialogButton(cast(void*)createGObject(ColorDialogButton._getGType), No.Take);
+    return new ColorDialogButton(cast(void*)createGObject(ColorDialogButton._getGType), Yes.Take);
   }
 }

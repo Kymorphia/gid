@@ -84,6 +84,6 @@ final class BaseBinaryScalarGidBuilder : BaseBinaryScalarGidBuilderImpl!BaseBina
   */
   BaseBinaryScalar build() nothrow
   {
-    return new BaseBinaryScalar(cast(void*)createGObject(BaseBinaryScalar._getGType), No.Take);
+    return new BaseBinaryScalar(cast(void*)createGObject(BaseBinaryScalar._getGType), Yes.Take);
   }
 }

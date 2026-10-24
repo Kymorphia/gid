@@ -82,6 +82,6 @@ final class PushSrcGidBuilder : PushSrcGidBuilderImpl!PushSrcGidBuilder
   */
   PushSrc build() nothrow
   {
-    return new PushSrc(cast(void*)createGObject(PushSrc._getGType), No.Take);
+    return new PushSrc(cast(void*)createGObject(PushSrc._getGType), Yes.Take);
   }
 }

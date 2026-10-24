@@ -88,6 +88,6 @@ final class ServerAuthSenderGidBuilder : ServerAuthSenderGidBuilderImpl!ServerAu
   */
   ServerAuthSender build() nothrow
   {
-    return new ServerAuthSender(cast(void*)createGObject(ServerAuthSender._getGType), No.Take);
+    return new ServerAuthSender(cast(void*)createGObject(ServerAuthSender._getGType), Yes.Take);
   }
 }

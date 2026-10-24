@@ -121,6 +121,6 @@ final class PolicyDecisionGidBuilder : PolicyDecisionGidBuilderImpl!PolicyDecisi
   */
   PolicyDecision build() nothrow
   {
-    return new PolicyDecision(cast(void*)createGObject(PolicyDecision._getGType), No.Take);
+    return new PolicyDecision(cast(void*)createGObject(PolicyDecision._getGType), Yes.Take);
   }
 }

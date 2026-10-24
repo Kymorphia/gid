@@ -171,6 +171,6 @@ final class ParamGidBuilder : ParamGidBuilderImpl!ParamGidBuilder
   */
   Param build() nothrow
   {
-    return new Param(cast(void*)createGObject(Param._getGType), No.Take);
+    return new Param(cast(void*)createGObject(Param._getGType), Yes.Take);
   }
 }

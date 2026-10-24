@@ -872,6 +872,6 @@ final class SplitButtonGidBuilder : SplitButtonGidBuilderImpl!SplitButtonGidBuil
   */
   SplitButton build() nothrow
   {
-    return new SplitButton(cast(void*)createGObject(SplitButton._getGType), No.Take);
+    return new SplitButton(cast(void*)createGObject(SplitButton._getGType), Yes.Take);
   }
 }

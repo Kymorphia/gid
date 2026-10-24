@@ -556,6 +556,6 @@ final class ProgressBarGidBuilder : ProgressBarGidBuilderImpl!ProgressBarGidBuil
   */
   ProgressBar build() nothrow
   {
-    return new ProgressBar(cast(void*)createGObject(ProgressBar._getGType), No.Take);
+    return new ProgressBar(cast(void*)createGObject(ProgressBar._getGType), Yes.Take);
   }
 }

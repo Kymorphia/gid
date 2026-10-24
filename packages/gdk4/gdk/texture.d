@@ -396,6 +396,6 @@ final class TextureGidBuilder : TextureGidBuilderImpl!TextureGidBuilder
   */
   Texture build() nothrow
   {
-    return new Texture(cast(void*)createGObject(Texture._getGType), No.Take);
+    return new Texture(cast(void*)createGObject(Texture._getGType), Yes.Take);
   }
 }

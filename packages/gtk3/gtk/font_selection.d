@@ -319,6 +319,6 @@ final class FontSelectionGidBuilder : FontSelectionGidBuilderImpl!FontSelectionG
   */
   FontSelection build() nothrow
   {
-    return new FontSelection(cast(void*)createGObject(FontSelection._getGType), No.Take);
+    return new FontSelection(cast(void*)createGObject(FontSelection._getGType), Yes.Take);
   }
 }

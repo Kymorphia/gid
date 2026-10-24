@@ -306,6 +306,6 @@ final class DiscovererInfoGidBuilder : DiscovererInfoGidBuilderImpl!DiscovererIn
   */
   DiscovererInfo build() nothrow
   {
-    return new DiscovererInfo(cast(void*)createGObject(DiscovererInfo._getGType), No.Take);
+    return new DiscovererInfo(cast(void*)createGObject(DiscovererInfo._getGType), Yes.Take);
   }
 }

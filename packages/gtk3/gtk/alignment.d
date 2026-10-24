@@ -487,6 +487,6 @@ final class AlignmentGidBuilder : AlignmentGidBuilderImpl!AlignmentGidBuilder
   */
   Alignment build() nothrow
   {
-    return new Alignment(cast(void*)createGObject(Alignment._getGType), No.Take);
+    return new Alignment(cast(void*)createGObject(Alignment._getGType), Yes.Take);
   }
 }

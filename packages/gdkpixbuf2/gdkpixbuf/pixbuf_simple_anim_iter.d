@@ -62,6 +62,6 @@ final class PixbufSimpleAnimIterGidBuilder : PixbufSimpleAnimIterGidBuilderImpl!
   */
   PixbufSimpleAnimIter build() nothrow
   {
-    return new PixbufSimpleAnimIter(cast(void*)createGObject(PixbufSimpleAnimIter._getGType), No.Take);
+    return new PixbufSimpleAnimIter(cast(void*)createGObject(PixbufSimpleAnimIter._getGType), Yes.Take);
   }
 }

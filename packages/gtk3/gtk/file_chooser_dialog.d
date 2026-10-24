@@ -228,6 +228,6 @@ final class FileChooserDialogGidBuilder : FileChooserDialogGidBuilderImpl!FileCh
   */
   FileChooserDialog build() nothrow
   {
-    return new FileChooserDialog(cast(void*)createGObject(FileChooserDialog._getGType), No.Take);
+    return new FileChooserDialog(cast(void*)createGObject(FileChooserDialog._getGType), Yes.Take);
   }
 }

@@ -195,6 +195,6 @@ final class AspectFrameGidBuilder : AspectFrameGidBuilderImpl!AspectFrameGidBuil
   */
   AspectFrame build() nothrow
   {
-    return new AspectFrame(cast(void*)createGObject(AspectFrame._getGType), No.Take);
+    return new AspectFrame(cast(void*)createGObject(AspectFrame._getGType), Yes.Take);
   }
 }

@@ -490,6 +490,6 @@ final class ModelButtonGidBuilder : ModelButtonGidBuilderImpl!ModelButtonGidBuil
   */
   ModelButton build() nothrow
   {
-    return new ModelButton(cast(void*)createGObject(ModelButton._getGType), No.Take);
+    return new ModelButton(cast(void*)createGObject(ModelButton._getGType), Yes.Take);
   }
 }

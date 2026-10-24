@@ -462,6 +462,6 @@ final class ImageMenuItemGidBuilder : ImageMenuItemGidBuilderImpl!ImageMenuItemG
   */
   ImageMenuItem build() nothrow
   {
-    return new ImageMenuItem(cast(void*)createGObject(ImageMenuItem._getGType), No.Take);
+    return new ImageMenuItem(cast(void*)createGObject(ImageMenuItem._getGType), Yes.Take);
   }
 }

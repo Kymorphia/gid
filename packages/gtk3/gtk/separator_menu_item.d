@@ -90,6 +90,6 @@ final class SeparatorMenuItemGidBuilder : SeparatorMenuItemGidBuilderImpl!Separa
   */
   SeparatorMenuItem build() nothrow
   {
-    return new SeparatorMenuItem(cast(void*)createGObject(SeparatorMenuItem._getGType), No.Take);
+    return new SeparatorMenuItem(cast(void*)createGObject(SeparatorMenuItem._getGType), Yes.Take);
   }
 }

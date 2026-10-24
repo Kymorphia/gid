@@ -111,6 +111,6 @@ final class DBusActionGroupGidBuilder : DBusActionGroupGidBuilderImpl!DBusAction
   */
   DBusActionGroup build() nothrow
   {
-    return new DBusActionGroup(cast(void*)createGObject(DBusActionGroup._getGType), No.Take);
+    return new DBusActionGroup(cast(void*)createGObject(DBusActionGroup._getGType), Yes.Take);
   }
 }

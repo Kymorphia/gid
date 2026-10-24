@@ -10498,6 +10498,6 @@ final class WidgetGidBuilder : WidgetGidBuilderImpl!WidgetGidBuilder
   */
   Widget build() nothrow
   {
-    return new Widget(cast(void*)createGObject(Widget._getGType), No.Take);
+    return new Widget(cast(void*)createGObject(Widget._getGType), Yes.Take);
   }
 }

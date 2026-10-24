@@ -257,6 +257,6 @@ final class MenuToolButtonGidBuilder : MenuToolButtonGidBuilderImpl!MenuToolButt
   */
   MenuToolButton build() nothrow
   {
-    return new MenuToolButton(cast(void*)createGObject(MenuToolButton._getGType), No.Take);
+    return new MenuToolButton(cast(void*)createGObject(MenuToolButton._getGType), Yes.Take);
   }
 }

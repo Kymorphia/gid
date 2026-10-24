@@ -613,6 +613,6 @@ final class SpringAnimationGidBuilder : SpringAnimationGidBuilderImpl!SpringAnim
   */
   SpringAnimation build() nothrow
   {
-    return new SpringAnimation(cast(void*)createGObject(SpringAnimation._getGType), No.Take);
+    return new SpringAnimation(cast(void*)createGObject(SpringAnimation._getGType), Yes.Take);
   }
 }

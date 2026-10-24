@@ -64,6 +64,6 @@ final class GLMemoryEGLAllocatorGidBuilder : GLMemoryEGLAllocatorGidBuilderImpl!
   */
   GLMemoryEGLAllocator build() nothrow
   {
-    return new GLMemoryEGLAllocator(cast(void*)createGObject(GLMemoryEGLAllocator._getGType), No.Take);
+    return new GLMemoryEGLAllocator(cast(void*)createGObject(GLMemoryEGLAllocator._getGType), Yes.Take);
   }
 }

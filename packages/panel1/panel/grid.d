@@ -281,6 +281,6 @@ final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
   */
   Grid build() nothrow
   {
-    return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);
+    return new Grid(cast(void*)createGObject(Grid._getGType), Yes.Take);
   }
 }

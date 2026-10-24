@@ -143,6 +143,6 @@ final class StackSidebarGidBuilder : StackSidebarGidBuilderImpl!StackSidebarGidB
   */
   StackSidebar build() nothrow
   {
-    return new StackSidebar(cast(void*)createGObject(StackSidebar._getGType), No.Take);
+    return new StackSidebar(cast(void*)createGObject(StackSidebar._getGType), Yes.Take);
   }
 }

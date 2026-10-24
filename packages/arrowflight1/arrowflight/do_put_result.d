@@ -88,6 +88,6 @@ final class DoPutResultGidBuilder : DoPutResultGidBuilderImpl!DoPutResultGidBuil
   */
   DoPutResult build() nothrow
   {
-    return new DoPutResult(cast(void*)createGObject(DoPutResult._getGType), No.Take);
+    return new DoPutResult(cast(void*)createGObject(DoPutResult._getGType), Yes.Take);
   }
 }

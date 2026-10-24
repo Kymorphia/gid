@@ -292,6 +292,6 @@ final class CellRendererToggleGidBuilder : CellRendererToggleGidBuilderImpl!Cell
   */
   CellRendererToggle build() nothrow
   {
-    return new CellRendererToggle(cast(void*)createGObject(CellRendererToggle._getGType), No.Take);
+    return new CellRendererToggle(cast(void*)createGObject(CellRendererToggle._getGType), Yes.Take);
   }
 }

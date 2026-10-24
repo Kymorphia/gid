@@ -67,6 +67,6 @@ final class VideoFilterGidBuilder : VideoFilterGidBuilderImpl!VideoFilterGidBuil
   */
   VideoFilter build() nothrow
   {
-    return new VideoFilter(cast(void*)createGObject(VideoFilter._getGType), No.Take);
+    return new VideoFilter(cast(void*)createGObject(VideoFilter._getGType), Yes.Take);
   }
 }

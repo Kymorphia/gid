@@ -972,6 +972,6 @@ final class MenuButtonGidBuilder : MenuButtonGidBuilderImpl!MenuButtonGidBuilder
   */
   MenuButton build() nothrow
   {
-    return new MenuButton(cast(void*)createGObject(MenuButton._getGType), No.Take);
+    return new MenuButton(cast(void*)createGObject(MenuButton._getGType), Yes.Take);
   }
 }

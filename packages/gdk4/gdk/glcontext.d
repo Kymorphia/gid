@@ -521,6 +521,6 @@ final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
   */
   GLContext build() nothrow
   {
-    return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);
+    return new GLContext(cast(void*)createGObject(GLContext._getGType), Yes.Take);
   }
 }

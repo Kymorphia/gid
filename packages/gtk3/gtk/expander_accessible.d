@@ -74,6 +74,6 @@ final class ExpanderAccessibleGidBuilder : ExpanderAccessibleGidBuilderImpl!Expa
   */
   ExpanderAccessible build() nothrow
   {
-    return new ExpanderAccessible(cast(void*)createGObject(ExpanderAccessible._getGType), No.Take);
+    return new ExpanderAccessible(cast(void*)createGObject(ExpanderAccessible._getGType), Yes.Take);
   }
 }

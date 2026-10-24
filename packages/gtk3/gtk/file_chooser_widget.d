@@ -745,6 +745,6 @@ final class FileChooserWidgetGidBuilder : FileChooserWidgetGidBuilderImpl!FileCh
   */
   FileChooserWidget build() nothrow
   {
-    return new FileChooserWidget(cast(void*)createGObject(FileChooserWidget._getGType), No.Take);
+    return new FileChooserWidget(cast(void*)createGObject(FileChooserWidget._getGType), Yes.Take);
   }
 }

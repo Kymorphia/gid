@@ -431,6 +431,6 @@ final class WebResourceGidBuilder : WebResourceGidBuilderImpl!WebResourceGidBuil
   */
   WebResource build() nothrow
   {
-    return new WebResource(cast(void*)createGObject(WebResource._getGType), No.Take);
+    return new WebResource(cast(void*)createGObject(WebResource._getGType), Yes.Take);
   }
 }

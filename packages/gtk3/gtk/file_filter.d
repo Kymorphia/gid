@@ -298,6 +298,6 @@ final class FileFilterGidBuilder : FileFilterGidBuilderImpl!FileFilterGidBuilder
   */
   FileFilter build() nothrow
   {
-    return new FileFilter(cast(void*)createGObject(FileFilter._getGType), No.Take);
+    return new FileFilter(cast(void*)createGObject(FileFilter._getGType), Yes.Take);
   }
 }

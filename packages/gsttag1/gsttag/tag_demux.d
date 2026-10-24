@@ -92,6 +92,6 @@ final class TagDemuxGidBuilder : TagDemuxGidBuilderImpl!TagDemuxGidBuilder
   */
   TagDemux build() nothrow
   {
-    return new TagDemux(cast(void*)createGObject(TagDemux._getGType), No.Take);
+    return new TagDemux(cast(void*)createGObject(TagDemux._getGType), Yes.Take);
   }
 }

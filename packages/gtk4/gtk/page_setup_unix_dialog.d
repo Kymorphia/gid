@@ -157,6 +157,6 @@ final class PageSetupUnixDialogGidBuilder : PageSetupUnixDialogGidBuilderImpl!Pa
   */
   PageSetupUnixDialog build() nothrow
   {
-    return new PageSetupUnixDialog(cast(void*)createGObject(PageSetupUnixDialog._getGType), No.Take);
+    return new PageSetupUnixDialog(cast(void*)createGObject(PageSetupUnixDialog._getGType), Yes.Take);
   }
 }

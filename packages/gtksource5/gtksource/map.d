@@ -169,6 +169,6 @@ final class MapGidBuilder : MapGidBuilderImpl!MapGidBuilder
   */
   Map build() nothrow
   {
-    return new Map(cast(void*)createGObject(Map._getGType), No.Take);
+    return new Map(cast(void*)createGObject(Map._getGType), Yes.Take);
   }
 }

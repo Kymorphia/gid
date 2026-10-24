@@ -78,6 +78,6 @@ final class Int64StatisticsGidBuilder : Int64StatisticsGidBuilderImpl!Int64Stati
   */
   Int64Statistics build() nothrow
   {
-    return new Int64Statistics(cast(void*)createGObject(Int64Statistics._getGType), No.Take);
+    return new Int64Statistics(cast(void*)createGObject(Int64Statistics._getGType), Yes.Take);
   }
 }

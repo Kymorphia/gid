@@ -702,6 +702,6 @@ final class AudioDecoderGidBuilder : AudioDecoderGidBuilderImpl!AudioDecoderGidB
   */
   AudioDecoder build() nothrow
   {
-    return new AudioDecoder(cast(void*)createGObject(AudioDecoder._getGType), No.Take);
+    return new AudioDecoder(cast(void*)createGObject(AudioDecoder._getGType), Yes.Take);
   }
 }

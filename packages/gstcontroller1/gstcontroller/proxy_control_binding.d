@@ -88,6 +88,6 @@ final class ProxyControlBindingGidBuilder : ProxyControlBindingGidBuilderImpl!Pr
   */
   ProxyControlBinding build() nothrow
   {
-    return new ProxyControlBinding(cast(void*)createGObject(ProxyControlBinding._getGType), No.Take);
+    return new ProxyControlBinding(cast(void*)createGObject(ProxyControlBinding._getGType), Yes.Take);
   }
 }

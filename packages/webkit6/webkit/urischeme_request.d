@@ -198,6 +198,6 @@ final class URISchemeRequestGidBuilder : URISchemeRequestGidBuilderImpl!URISchem
   */
   URISchemeRequest build() nothrow
   {
-    return new URISchemeRequest(cast(void*)createGObject(URISchemeRequest._getGType), No.Take);
+    return new URISchemeRequest(cast(void*)createGObject(URISchemeRequest._getGType), Yes.Take);
   }
 }

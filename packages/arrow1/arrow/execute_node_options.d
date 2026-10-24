@@ -68,6 +68,6 @@ final class ExecuteNodeOptionsGidBuilder : ExecuteNodeOptionsGidBuilderImpl!Exec
   */
   ExecuteNodeOptions build() nothrow
   {
-    return new ExecuteNodeOptions(cast(void*)createGObject(ExecuteNodeOptions._getGType), No.Take);
+    return new ExecuteNodeOptions(cast(void*)createGObject(ExecuteNodeOptions._getGType), Yes.Take);
   }
 }

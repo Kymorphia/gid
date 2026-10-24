@@ -70,6 +70,6 @@ final class MenuShellAccessibleGidBuilder : MenuShellAccessibleGidBuilderImpl!Me
   */
   MenuShellAccessible build() nothrow
   {
-    return new MenuShellAccessible(cast(void*)createGObject(MenuShellAccessible._getGType), No.Take);
+    return new MenuShellAccessible(cast(void*)createGObject(MenuShellAccessible._getGType), Yes.Take);
   }
 }

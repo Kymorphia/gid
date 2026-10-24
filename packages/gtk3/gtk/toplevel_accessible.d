@@ -72,6 +72,6 @@ final class ToplevelAccessibleGidBuilder : ToplevelAccessibleGidBuilderImpl!Topl
   */
   ToplevelAccessible build() nothrow
   {
-    return new ToplevelAccessible(cast(void*)createGObject(ToplevelAccessible._getGType), No.Take);
+    return new ToplevelAccessible(cast(void*)createGObject(ToplevelAccessible._getGType), Yes.Take);
   }
 }

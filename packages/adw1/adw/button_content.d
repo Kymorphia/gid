@@ -380,6 +380,6 @@ final class ButtonContentGidBuilder : ButtonContentGidBuilderImpl!ButtonContentG
   */
   ButtonContent build() nothrow
   {
-    return new ButtonContent(cast(void*)createGObject(ButtonContent._getGType), No.Take);
+    return new ButtonContent(cast(void*)createGObject(ButtonContent._getGType), Yes.Take);
   }
 }

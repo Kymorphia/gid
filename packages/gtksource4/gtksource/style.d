@@ -311,6 +311,6 @@ final class StyleGidBuilder : StyleGidBuilderImpl!StyleGidBuilder
   */
   Style build() nothrow
   {
-    return new Style(cast(void*)createGObject(Style._getGType), No.Take);
+    return new Style(cast(void*)createGObject(Style._getGType), Yes.Take);
   }
 }

@@ -591,6 +591,6 @@ final class CompletionGidBuilder : CompletionGidBuilderImpl!CompletionGidBuilder
   */
   Completion build() nothrow
   {
-    return new Completion(cast(void*)createGObject(Completion._getGType), No.Take);
+    return new Completion(cast(void*)createGObject(Completion._getGType), Yes.Take);
   }
 }

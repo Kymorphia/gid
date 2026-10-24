@@ -206,6 +206,6 @@ final class URIResponseGidBuilder : URIResponseGidBuilderImpl!URIResponseGidBuil
   */
   URIResponse build() nothrow
   {
-    return new URIResponse(cast(void*)createGObject(URIResponse._getGType), No.Take);
+    return new URIResponse(cast(void*)createGObject(URIResponse._getGType), Yes.Take);
   }
 }

@@ -621,6 +621,6 @@ final class IconInfoGidBuilder : IconInfoGidBuilderImpl!IconInfoGidBuilder
   */
   IconInfo build() nothrow
   {
-    return new IconInfo(cast(void*)createGObject(IconInfo._getGType), No.Take);
+    return new IconInfo(cast(void*)createGObject(IconInfo._getGType), Yes.Take);
   }
 }

@@ -1885,7 +1885,7 @@ final class ConnectionGidBuilder : ConnectionGidBuilderImpl!ConnectionGidBuilder
   */
   Connection build() nothrow
   {
-    return new Connection(cast(void*)createGObject(Connection._getGType), No.Take);
+    return new Connection(cast(void*)createGObject(Connection._getGType), Yes.Take);
   }
 }
 

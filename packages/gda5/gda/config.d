@@ -563,7 +563,7 @@ final class ConfigGidBuilder : ConfigGidBuilderImpl!ConfigGidBuilder
   */
   Config build() nothrow
   {
-    return new Config(cast(void*)createGObject(Config._getGType), No.Take);
+    return new Config(cast(void*)createGObject(Config._getGType), Yes.Take);
   }
 }
 

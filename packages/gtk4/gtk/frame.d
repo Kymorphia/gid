@@ -359,6 +359,6 @@ final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
   */
   Frame build() nothrow
   {
-    return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
+    return new Frame(cast(void*)createGObject(Frame._getGType), Yes.Take);
   }
 }

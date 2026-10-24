@@ -228,6 +228,6 @@ final class WindowTitleGidBuilder : WindowTitleGidBuilderImpl!WindowTitleGidBuil
   */
   WindowTitle build() nothrow
   {
-    return new WindowTitle(cast(void*)createGObject(WindowTitle._getGType), No.Take);
+    return new WindowTitle(cast(void*)createGObject(WindowTitle._getGType), Yes.Take);
   }
 }

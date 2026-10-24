@@ -984,6 +984,6 @@ final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogG
   */
   MessageDialog build() nothrow
   {
-    return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), No.Take);
+    return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), Yes.Take);
   }
 }

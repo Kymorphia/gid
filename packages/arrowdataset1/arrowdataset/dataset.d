@@ -117,6 +117,6 @@ final class DatasetGidBuilder : DatasetGidBuilderImpl!DatasetGidBuilder
   */
   Dataset build() nothrow
   {
-    return new Dataset(cast(void*)createGObject(Dataset._getGType), No.Take);
+    return new Dataset(cast(void*)createGObject(Dataset._getGType), Yes.Take);
   }
 }

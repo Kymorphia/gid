@@ -95,6 +95,6 @@ final class VScrollbarGidBuilder : VScrollbarGidBuilderImpl!VScrollbarGidBuilder
   */
   VScrollbar build() nothrow
   {
-    return new VScrollbar(cast(void*)createGObject(VScrollbar._getGType), No.Take);
+    return new VScrollbar(cast(void*)createGObject(VScrollbar._getGType), Yes.Take);
   }
 }

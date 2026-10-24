@@ -488,6 +488,6 @@ final class TreeSelectionGidBuilder : TreeSelectionGidBuilderImpl!TreeSelectionG
   */
   TreeSelection build() nothrow
   {
-    return new TreeSelection(cast(void*)createGObject(TreeSelection._getGType), No.Take);
+    return new TreeSelection(cast(void*)createGObject(TreeSelection._getGType), Yes.Take);
   }
 }

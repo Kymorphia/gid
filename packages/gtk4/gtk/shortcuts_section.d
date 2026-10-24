@@ -342,6 +342,6 @@ final class ShortcutsSectionGidBuilder : ShortcutsSectionGidBuilderImpl!Shortcut
   */
   ShortcutsSection build() nothrow
   {
-    return new ShortcutsSection(cast(void*)createGObject(ShortcutsSection._getGType), No.Take);
+    return new ShortcutsSection(cast(void*)createGObject(ShortcutsSection._getGType), Yes.Take);
   }
 }

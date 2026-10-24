@@ -146,6 +146,6 @@ final class AllocatorGidBuilder : AllocatorGidBuilderImpl!AllocatorGidBuilder
   */
   Allocator build() nothrow
   {
-    return new Allocator(cast(void*)createGObject(Allocator._getGType), No.Take);
+    return new Allocator(cast(void*)createGObject(Allocator._getGType), Yes.Take);
   }
 }

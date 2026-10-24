@@ -173,6 +173,6 @@ final class ShortcutActionGidBuilder : ShortcutActionGidBuilderImpl!ShortcutActi
   */
   ShortcutAction build() nothrow
   {
-    return new ShortcutAction(cast(void*)createGObject(ShortcutAction._getGType), No.Take);
+    return new ShortcutAction(cast(void*)createGObject(ShortcutAction._getGType), Yes.Take);
   }
 }

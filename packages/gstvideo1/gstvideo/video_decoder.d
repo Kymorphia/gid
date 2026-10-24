@@ -1082,6 +1082,6 @@ final class VideoDecoderGidBuilder : VideoDecoderGidBuilderImpl!VideoDecoderGidB
   */
   VideoDecoder build() nothrow
   {
-    return new VideoDecoder(cast(void*)createGObject(VideoDecoder._getGType), No.Take);
+    return new VideoDecoder(cast(void*)createGObject(VideoDecoder._getGType), Yes.Take);
   }
 }

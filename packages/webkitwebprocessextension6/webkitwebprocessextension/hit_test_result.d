@@ -371,6 +371,6 @@ final class HitTestResultGidBuilder : HitTestResultGidBuilderImpl!HitTestResultG
   */
   HitTestResult build() nothrow
   {
-    return new HitTestResult(cast(void*)createGObject(HitTestResult._getGType), No.Take);
+    return new HitTestResult(cast(void*)createGObject(HitTestResult._getGType), Yes.Take);
   }
 }

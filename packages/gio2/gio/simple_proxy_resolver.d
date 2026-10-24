@@ -213,6 +213,6 @@ final class SimpleProxyResolverGidBuilder : SimpleProxyResolverGidBuilderImpl!Si
   */
   SimpleProxyResolver build() nothrow
   {
-    return new SimpleProxyResolver(cast(void*)createGObject(SimpleProxyResolver._getGType), No.Take);
+    return new SimpleProxyResolver(cast(void*)createGObject(SimpleProxyResolver._getGType), Yes.Take);
   }
 }

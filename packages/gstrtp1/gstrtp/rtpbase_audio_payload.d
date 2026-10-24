@@ -222,6 +222,6 @@ final class RTPBaseAudioPayloadGidBuilder : RTPBaseAudioPayloadGidBuilderImpl!RT
   */
   RTPBaseAudioPayload build() nothrow
   {
-    return new RTPBaseAudioPayload(cast(void*)createGObject(RTPBaseAudioPayload._getGType), No.Take);
+    return new RTPBaseAudioPayload(cast(void*)createGObject(RTPBaseAudioPayload._getGType), Yes.Take);
   }
 }

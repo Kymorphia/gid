@@ -650,6 +650,6 @@ final class PictureGidBuilder : PictureGidBuilderImpl!PictureGidBuilder
   */
   Picture build() nothrow
   {
-    return new Picture(cast(void*)createGObject(Picture._getGType), No.Take);
+    return new Picture(cast(void*)createGObject(Picture._getGType), Yes.Take);
   }
 }

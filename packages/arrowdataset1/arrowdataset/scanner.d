@@ -95,6 +95,6 @@ final class ScannerGidBuilder : ScannerGidBuilderImpl!ScannerGidBuilder
   */
   Scanner build() nothrow
   {
-    return new Scanner(cast(void*)createGObject(Scanner._getGType), No.Take);
+    return new Scanner(cast(void*)createGObject(Scanner._getGType), Yes.Take);
   }
 }

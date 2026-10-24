@@ -470,6 +470,6 @@ final class VideoGidBuilder : VideoGidBuilderImpl!VideoGidBuilder
   */
   Video build() nothrow
   {
-    return new Video(cast(void*)createGObject(Video._getGType), No.Take);
+    return new Video(cast(void*)createGObject(Video._getGType), Yes.Take);
   }
 }

@@ -171,6 +171,6 @@ final class OverlayLayoutChildGidBuilder : OverlayLayoutChildGidBuilderImpl!Over
   */
   OverlayLayoutChild build() nothrow
   {
-    return new OverlayLayoutChild(cast(void*)createGObject(OverlayLayoutChild._getGType), No.Take);
+    return new OverlayLayoutChild(cast(void*)createGObject(OverlayLayoutChild._getGType), Yes.Take);
   }
 }

@@ -62,6 +62,6 @@ final class StreamReaderGidBuilder : StreamReaderGidBuilderImpl!StreamReaderGidB
   */
   StreamReader build() nothrow
   {
-    return new StreamReader(cast(void*)createGObject(StreamReader._getGType), No.Take);
+    return new StreamReader(cast(void*)createGObject(StreamReader._getGType), Yes.Take);
   }
 }

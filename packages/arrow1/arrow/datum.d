@@ -117,6 +117,6 @@ final class DatumGidBuilder : DatumGidBuilderImpl!DatumGidBuilder
   */
   Datum build() nothrow
   {
-    return new Datum(cast(void*)createGObject(Datum._getGType), No.Take);
+    return new Datum(cast(void*)createGObject(Datum._getGType), Yes.Take);
   }
 }

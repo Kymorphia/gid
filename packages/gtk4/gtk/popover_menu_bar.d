@@ -210,6 +210,6 @@ final class PopoverMenuBarGidBuilder : PopoverMenuBarGidBuilderImpl!PopoverMenuB
   */
   PopoverMenuBar build() nothrow
   {
-    return new PopoverMenuBar(cast(void*)createGObject(PopoverMenuBar._getGType), No.Take);
+    return new PopoverMenuBar(cast(void*)createGObject(PopoverMenuBar._getGType), Yes.Take);
   }
 }

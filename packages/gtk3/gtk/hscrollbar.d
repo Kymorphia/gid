@@ -95,6 +95,6 @@ final class HScrollbarGidBuilder : HScrollbarGidBuilderImpl!HScrollbarGidBuilder
   */
   HScrollbar build() nothrow
   {
-    return new HScrollbar(cast(void*)createGObject(HScrollbar._getGType), No.Take);
+    return new HScrollbar(cast(void*)createGObject(HScrollbar._getGType), Yes.Take);
   }
 }

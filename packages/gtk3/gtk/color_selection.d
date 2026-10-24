@@ -511,6 +511,6 @@ final class ColorSelectionGidBuilder : ColorSelectionGidBuilderImpl!ColorSelecti
   */
   ColorSelection build() nothrow
   {
-    return new ColorSelection(cast(void*)createGObject(ColorSelection._getGType), No.Take);
+    return new ColorSelection(cast(void*)createGObject(ColorSelection._getGType), Yes.Take);
   }
 }

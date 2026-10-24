@@ -459,6 +459,6 @@ final class AccelMapGidBuilder : AccelMapGidBuilderImpl!AccelMapGidBuilder
   */
   AccelMap build() nothrow
   {
-    return new AccelMap(cast(void*)createGObject(AccelMap._getGType), No.Take);
+    return new AccelMap(cast(void*)createGObject(AccelMap._getGType), Yes.Take);
   }
 }

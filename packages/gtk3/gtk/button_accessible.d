@@ -78,6 +78,6 @@ final class ButtonAccessibleGidBuilder : ButtonAccessibleGidBuilderImpl!ButtonAc
   */
   ButtonAccessible build() nothrow
   {
-    return new ButtonAccessible(cast(void*)createGObject(ButtonAccessible._getGType), No.Take);
+    return new ButtonAccessible(cast(void*)createGObject(ButtonAccessible._getGType), Yes.Take);
   }
 }

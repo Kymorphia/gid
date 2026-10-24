@@ -245,6 +245,6 @@ final class FileChooserRequestGidBuilder : FileChooserRequestGidBuilderImpl!File
   */
   FileChooserRequest build() nothrow
   {
-    return new FileChooserRequest(cast(void*)createGObject(FileChooserRequest._getGType), No.Take);
+    return new FileChooserRequest(cast(void*)createGObject(FileChooserRequest._getGType), Yes.Take);
   }
 }

@@ -224,6 +224,6 @@ final class FaviconDatabaseGidBuilder : FaviconDatabaseGidBuilderImpl!FaviconDat
   */
   FaviconDatabase build() nothrow
   {
-    return new FaviconDatabase(cast(void*)createGObject(FaviconDatabase._getGType), No.Take);
+    return new FaviconDatabase(cast(void*)createGObject(FaviconDatabase._getGType), Yes.Take);
   }
 }

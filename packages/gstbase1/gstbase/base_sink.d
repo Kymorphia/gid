@@ -1040,6 +1040,6 @@ final class BaseSinkGidBuilder : BaseSinkGidBuilderImpl!BaseSinkGidBuilder
   */
   BaseSink build() nothrow
   {
-    return new BaseSink(cast(void*)createGObject(BaseSink._getGType), No.Take);
+    return new BaseSink(cast(void*)createGObject(BaseSink._getGType), Yes.Take);
   }
 }

@@ -71,6 +71,6 @@ final class TimeDataTypeGidBuilder : TimeDataTypeGidBuilderImpl!TimeDataTypeGidB
   */
   TimeDataType build() nothrow
   {
-    return new TimeDataType(cast(void*)createGObject(TimeDataType._getGType), No.Take);
+    return new TimeDataType(cast(void*)createGObject(TimeDataType._getGType), Yes.Take);
   }
 }

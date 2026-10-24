@@ -218,6 +218,6 @@ final class ColorChooserRequestGidBuilder : ColorChooserRequestGidBuilderImpl!Co
   */
   ColorChooserRequest build() nothrow
   {
-    return new ColorChooserRequest(cast(void*)createGObject(ColorChooserRequest._getGType), No.Take);
+    return new ColorChooserRequest(cast(void*)createGObject(ColorChooserRequest._getGType), Yes.Take);
   }
 }

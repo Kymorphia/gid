@@ -369,6 +369,6 @@ final class TlsInteractionGidBuilder : TlsInteractionGidBuilderImpl!TlsInteracti
   */
   TlsInteraction build() nothrow
   {
-    return new TlsInteraction(cast(void*)createGObject(TlsInteraction._getGType), No.Take);
+    return new TlsInteraction(cast(void*)createGObject(TlsInteraction._getGType), Yes.Take);
   }
 }

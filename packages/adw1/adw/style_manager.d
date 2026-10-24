@@ -403,6 +403,6 @@ final class StyleManagerGidBuilder : StyleManagerGidBuilderImpl!StyleManagerGidB
   */
   StyleManager build() nothrow
   {
-    return new StyleManager(cast(void*)createGObject(StyleManager._getGType), No.Take);
+    return new StyleManager(cast(void*)createGObject(StyleManager._getGType), Yes.Take);
   }
 }

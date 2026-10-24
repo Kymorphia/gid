@@ -84,6 +84,6 @@ final class Decimal32ArrayGidBuilder : Decimal32ArrayGidBuilderImpl!Decimal32Arr
   */
   Decimal32Array build() nothrow
   {
-    return new Decimal32Array(cast(void*)createGObject(Decimal32Array._getGType), No.Take);
+    return new Decimal32Array(cast(void*)createGObject(Decimal32Array._getGType), Yes.Take);
   }
 }

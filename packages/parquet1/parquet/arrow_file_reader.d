@@ -183,6 +183,6 @@ final class ArrowFileReaderGidBuilder : ArrowFileReaderGidBuilderImpl!ArrowFileR
   */
   ArrowFileReader build() nothrow
   {
-    return new ArrowFileReader(cast(void*)createGObject(ArrowFileReader._getGType), No.Take);
+    return new ArrowFileReader(cast(void*)createGObject(ArrowFileReader._getGType), Yes.Take);
   }
 }

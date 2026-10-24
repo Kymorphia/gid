@@ -95,6 +95,6 @@ final class AudioAggregatorPadGidBuilder : AudioAggregatorPadGidBuilderImpl!Audi
   */
   AudioAggregatorPad build() nothrow
   {
-    return new AudioAggregatorPad(cast(void*)createGObject(AudioAggregatorPad._getGType), No.Take);
+    return new AudioAggregatorPad(cast(void*)createGObject(AudioAggregatorPad._getGType), Yes.Take);
   }
 }

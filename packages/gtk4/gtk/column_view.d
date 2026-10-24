@@ -854,6 +854,6 @@ final class ColumnViewGidBuilder : ColumnViewGidBuilderImpl!ColumnViewGidBuilder
   */
   ColumnView build() nothrow
   {
-    return new ColumnView(cast(void*)createGObject(ColumnView._getGType), No.Take);
+    return new ColumnView(cast(void*)createGObject(ColumnView._getGType), Yes.Take);
   }
 }

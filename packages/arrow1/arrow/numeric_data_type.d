@@ -62,6 +62,6 @@ final class NumericDataTypeGidBuilder : NumericDataTypeGidBuilderImpl!NumericDat
   */
   NumericDataType build() nothrow
   {
-    return new NumericDataType(cast(void*)createGObject(NumericDataType._getGType), No.Take);
+    return new NumericDataType(cast(void*)createGObject(NumericDataType._getGType), Yes.Take);
   }
 }

@@ -78,6 +78,6 @@ final class FloatStatisticsGidBuilder : FloatStatisticsGidBuilderImpl!FloatStati
   */
   FloatStatistics build() nothrow
   {
-    return new FloatStatistics(cast(void*)createGObject(FloatStatistics._getGType), No.Take);
+    return new FloatStatistics(cast(void*)createGObject(FloatStatistics._getGType), Yes.Take);
   }
 }

@@ -254,6 +254,6 @@ final class FontMapGidBuilder : FontMapGidBuilderImpl!FontMapGidBuilder
   */
   FontMap build() nothrow
   {
-    return new FontMap(cast(void*)createGObject(FontMap._getGType), No.Take);
+    return new FontMap(cast(void*)createGObject(FontMap._getGType), Yes.Take);
   }
 }

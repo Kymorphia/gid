@@ -775,6 +775,6 @@ final class NavigationSplitViewGidBuilder : NavigationSplitViewGidBuilderImpl!Na
   */
   NavigationSplitView build() nothrow
   {
-    return new NavigationSplitView(cast(void*)createGObject(NavigationSplitView._getGType), No.Take);
+    return new NavigationSplitView(cast(void*)createGObject(NavigationSplitView._getGType), Yes.Take);
   }
 }

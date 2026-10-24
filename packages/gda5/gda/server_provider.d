@@ -499,7 +499,7 @@ final class ServerProviderGidBuilder : ServerProviderGidBuilderImpl!ServerProvid
   */
   ServerProvider build() nothrow
   {
-    return new ServerProvider(cast(void*)createGObject(ServerProvider._getGType), No.Take);
+    return new ServerProvider(cast(void*)createGObject(ServerProvider._getGType), Yes.Take);
   }
 }
 

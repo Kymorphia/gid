@@ -547,6 +547,6 @@ final class DialogGidBuilder : DialogGidBuilderImpl!DialogGidBuilder
   */
   Dialog build() nothrow
   {
-    return new Dialog(cast(void*)createGObject(Dialog._getGType), No.Take);
+    return new Dialog(cast(void*)createGObject(Dialog._getGType), Yes.Take);
   }
 }

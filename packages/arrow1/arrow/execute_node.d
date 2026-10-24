@@ -100,6 +100,6 @@ final class ExecuteNodeGidBuilder : ExecuteNodeGidBuilderImpl!ExecuteNodeGidBuil
   */
   ExecuteNode build() nothrow
   {
-    return new ExecuteNode(cast(void*)createGObject(ExecuteNode._getGType), No.Take);
+    return new ExecuteNode(cast(void*)createGObject(ExecuteNode._getGType), Yes.Take);
   }
 }

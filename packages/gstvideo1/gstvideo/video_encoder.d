@@ -535,6 +535,6 @@ final class VideoEncoderGidBuilder : VideoEncoderGidBuilderImpl!VideoEncoderGidB
   */
   VideoEncoder build() nothrow
   {
-    return new VideoEncoder(cast(void*)createGObject(VideoEncoder._getGType), No.Take);
+    return new VideoEncoder(cast(void*)createGObject(VideoEncoder._getGType), Yes.Take);
   }
 }

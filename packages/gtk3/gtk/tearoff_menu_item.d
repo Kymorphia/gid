@@ -101,6 +101,6 @@ final class TearoffMenuItemGidBuilder : TearoffMenuItemGidBuilderImpl!TearoffMen
   */
   TearoffMenuItem build() nothrow
   {
-    return new TearoffMenuItem(cast(void*)createGObject(TearoffMenuItem._getGType), No.Take);
+    return new TearoffMenuItem(cast(void*)createGObject(TearoffMenuItem._getGType), Yes.Take);
   }
 }

@@ -434,6 +434,6 @@ final class AvatarGidBuilder : AvatarGidBuilderImpl!AvatarGidBuilder
   */
   Avatar build() nothrow
   {
-    return new Avatar(cast(void*)createGObject(Avatar._getGType), No.Take);
+    return new Avatar(cast(void*)createGObject(Avatar._getGType), Yes.Take);
   }
 }

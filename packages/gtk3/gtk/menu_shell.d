@@ -769,6 +769,6 @@ final class MenuShellGidBuilder : MenuShellGidBuilderImpl!MenuShellGidBuilder
   */
   MenuShell build() nothrow
   {
-    return new MenuShell(cast(void*)createGObject(MenuShell._getGType), No.Take);
+    return new MenuShell(cast(void*)createGObject(MenuShell._getGType), Yes.Take);
   }
 }

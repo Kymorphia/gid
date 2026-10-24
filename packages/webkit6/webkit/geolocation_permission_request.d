@@ -93,6 +93,6 @@ final class GeolocationPermissionRequestGidBuilder : GeolocationPermissionReques
   */
   GeolocationPermissionRequest build() nothrow
   {
-    return new GeolocationPermissionRequest(cast(void*)createGObject(GeolocationPermissionRequest._getGType), No.Take);
+    return new GeolocationPermissionRequest(cast(void*)createGObject(GeolocationPermissionRequest._getGType), Yes.Take);
   }
 }

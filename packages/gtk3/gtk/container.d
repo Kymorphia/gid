@@ -1028,6 +1028,6 @@ final class ContainerGidBuilder : ContainerGidBuilderImpl!ContainerGidBuilder
   */
   Container build() nothrow
   {
-    return new Container(cast(void*)createGObject(Container._getGType), No.Take);
+    return new Container(cast(void*)createGObject(Container._getGType), Yes.Take);
   }
 }

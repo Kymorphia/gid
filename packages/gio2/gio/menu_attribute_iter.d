@@ -148,6 +148,6 @@ final class MenuAttributeIterGidBuilder : MenuAttributeIterGidBuilderImpl!MenuAt
   */
   MenuAttributeIter build() nothrow
   {
-    return new MenuAttributeIter(cast(void*)createGObject(MenuAttributeIter._getGType), No.Take);
+    return new MenuAttributeIter(cast(void*)createGObject(MenuAttributeIter._getGType), Yes.Take);
   }
 }

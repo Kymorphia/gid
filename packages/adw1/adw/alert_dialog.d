@@ -968,6 +968,6 @@ final class AlertDialogGidBuilder : AlertDialogGidBuilderImpl!AlertDialogGidBuil
   */
   AlertDialog build() nothrow
   {
-    return new AlertDialog(cast(void*)createGObject(AlertDialog._getGType), No.Take);
+    return new AlertDialog(cast(void*)createGObject(AlertDialog._getGType), Yes.Take);
   }
 }

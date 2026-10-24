@@ -406,6 +406,6 @@ final class RadioButtonGidBuilder : RadioButtonGidBuilderImpl!RadioButtonGidBuil
   */
   RadioButton build() nothrow
   {
-    return new RadioButton(cast(void*)createGObject(RadioButton._getGType), No.Take);
+    return new RadioButton(cast(void*)createGObject(RadioButton._getGType), Yes.Take);
   }
 }

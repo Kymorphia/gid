@@ -351,6 +351,6 @@ final class OmniBarGidBuilder : OmniBarGidBuilderImpl!OmniBarGidBuilder
   */
   OmniBar build() nothrow
   {
-    return new OmniBar(cast(void*)createGObject(OmniBar._getGType), No.Take);
+    return new OmniBar(cast(void*)createGObject(OmniBar._getGType), Yes.Take);
   }
 }

@@ -69,6 +69,6 @@ final class MenuButtonAccessibleGidBuilder : MenuButtonAccessibleGidBuilderImpl!
   */
   MenuButtonAccessible build() nothrow
   {
-    return new MenuButtonAccessible(cast(void*)createGObject(MenuButtonAccessible._getGType), No.Take);
+    return new MenuButtonAccessible(cast(void*)createGObject(MenuButtonAccessible._getGType), Yes.Take);
   }
 }

@@ -825,6 +825,6 @@ final class RangeGidBuilder : RangeGidBuilderImpl!RangeGidBuilder
   */
   Range build() nothrow
   {
-    return new Range(cast(void*)createGObject(Range._getGType), No.Take);
+    return new Range(cast(void*)createGObject(Range._getGType), Yes.Take);
   }
 }

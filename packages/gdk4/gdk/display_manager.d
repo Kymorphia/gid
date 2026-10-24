@@ -260,6 +260,6 @@ final class DisplayManagerGidBuilder : DisplayManagerGidBuilderImpl!DisplayManag
   */
   DisplayManager build() nothrow
   {
-    return new DisplayManager(cast(void*)createGObject(DisplayManager._getGType), No.Take);
+    return new DisplayManager(cast(void*)createGObject(DisplayManager._getGType), Yes.Take);
   }
 }

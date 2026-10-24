@@ -172,6 +172,6 @@ final class SocketAddressEnumeratorGidBuilder : SocketAddressEnumeratorGidBuilde
   */
   SocketAddressEnumerator build() nothrow
   {
-    return new SocketAddressEnumerator(cast(void*)createGObject(SocketAddressEnumerator._getGType), No.Take);
+    return new SocketAddressEnumerator(cast(void*)createGObject(SocketAddressEnumerator._getGType), Yes.Take);
   }
 }

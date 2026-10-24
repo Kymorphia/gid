@@ -84,6 +84,6 @@ final class AudioSinkGidBuilder : AudioSinkGidBuilderImpl!AudioSinkGidBuilder
   */
   AudioSink build() nothrow
   {
-    return new AudioSink(cast(void*)createGObject(AudioSink._getGType), No.Take);
+    return new AudioSink(cast(void*)createGObject(AudioSink._getGType), Yes.Take);
   }
 }

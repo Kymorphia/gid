@@ -126,6 +126,6 @@ final class EnumListItemGidBuilder : EnumListItemGidBuilderImpl!EnumListItemGidB
   */
   EnumListItem build() nothrow
   {
-    return new EnumListItem(cast(void*)createGObject(EnumListItem._getGType), No.Take);
+    return new EnumListItem(cast(void*)createGObject(EnumListItem._getGType), Yes.Take);
   }
 }

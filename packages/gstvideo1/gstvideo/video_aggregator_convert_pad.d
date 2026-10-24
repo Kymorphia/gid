@@ -95,6 +95,6 @@ final class VideoAggregatorConvertPadGidBuilder : VideoAggregatorConvertPadGidBu
   */
   VideoAggregatorConvertPad build() nothrow
   {
-    return new VideoAggregatorConvertPad(cast(void*)createGObject(VideoAggregatorConvertPad._getGType), No.Take);
+    return new VideoAggregatorConvertPad(cast(void*)createGObject(VideoAggregatorConvertPad._getGType), Yes.Take);
   }
 }

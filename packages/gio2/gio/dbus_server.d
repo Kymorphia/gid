@@ -384,6 +384,6 @@ final class DBusServerGidBuilder : DBusServerGidBuilderImpl!DBusServerGidBuilder
   */
   DBusServer build() nothrow
   {
-    return new DBusServer(cast(void*)createGObject(DBusServer._getGType), No.Take);
+    return new DBusServer(cast(void*)createGObject(DBusServer._getGType), Yes.Take);
   }
 }

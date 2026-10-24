@@ -74,6 +74,6 @@ final class DiscovererSubtitleInfoGidBuilder : DiscovererSubtitleInfoGidBuilderI
   */
   DiscovererSubtitleInfo build() nothrow
   {
-    return new DiscovererSubtitleInfo(cast(void*)createGObject(DiscovererSubtitleInfo._getGType), No.Take);
+    return new DiscovererSubtitleInfo(cast(void*)createGObject(DiscovererSubtitleInfo._getGType), Yes.Take);
   }
 }

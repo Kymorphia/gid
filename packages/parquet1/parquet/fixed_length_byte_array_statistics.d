@@ -81,6 +81,6 @@ final class FixedLengthByteArrayStatisticsGidBuilder : FixedLengthByteArrayStati
   */
   FixedLengthByteArrayStatistics build() nothrow
   {
-    return new FixedLengthByteArrayStatistics(cast(void*)createGObject(FixedLengthByteArrayStatistics._getGType), No.Take);
+    return new FixedLengthByteArrayStatistics(cast(void*)createGObject(FixedLengthByteArrayStatistics._getGType), Yes.Take);
   }
 }

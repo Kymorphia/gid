@@ -112,6 +112,6 @@ final class SlowFileSystemGidBuilder : SlowFileSystemGidBuilderImpl!SlowFileSyst
   */
   SlowFileSystem build() nothrow
   {
-    return new SlowFileSystem(cast(void*)createGObject(SlowFileSystem._getGType), No.Take);
+    return new SlowFileSystem(cast(void*)createGObject(SlowFileSystem._getGType), Yes.Take);
   }
 }

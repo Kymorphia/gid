@@ -251,6 +251,6 @@ final class ATContextGidBuilder : ATContextGidBuilderImpl!ATContextGidBuilder
   */
   ATContext build() nothrow
   {
-    return new ATContext(cast(void*)createGObject(ATContext._getGType), No.Take);
+    return new ATContext(cast(void*)createGObject(ATContext._getGType), Yes.Take);
   }
 }

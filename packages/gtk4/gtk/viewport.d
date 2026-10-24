@@ -249,6 +249,6 @@ final class ViewportGidBuilder : ViewportGidBuilderImpl!ViewportGidBuilder
   */
   Viewport build() nothrow
   {
-    return new Viewport(cast(void*)createGObject(Viewport._getGType), No.Take);
+    return new Viewport(cast(void*)createGObject(Viewport._getGType), Yes.Take);
   }
 }

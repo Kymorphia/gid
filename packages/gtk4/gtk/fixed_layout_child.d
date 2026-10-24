@@ -118,6 +118,6 @@ final class FixedLayoutChildGidBuilder : FixedLayoutChildGidBuilderImpl!FixedLay
   */
   FixedLayoutChild build() nothrow
   {
-    return new FixedLayoutChild(cast(void*)createGObject(FixedLayoutChild._getGType), No.Take);
+    return new FixedLayoutChild(cast(void*)createGObject(FixedLayoutChild._getGType), Yes.Take);
   }
 }

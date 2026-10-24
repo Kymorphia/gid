@@ -70,6 +70,6 @@ final class IconViewAccessibleGidBuilder : IconViewAccessibleGidBuilderImpl!Icon
   */
   IconViewAccessible build() nothrow
   {
-    return new IconViewAccessible(cast(void*)createGObject(IconViewAccessible._getGType), No.Take);
+    return new IconViewAccessible(cast(void*)createGObject(IconViewAccessible._getGType), Yes.Take);
   }
 }

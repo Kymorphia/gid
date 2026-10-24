@@ -1845,6 +1845,6 @@ final class TextGidBuilder : TextGidBuilderImpl!TextGidBuilder
   */
   Text build() nothrow
   {
-    return new Text(cast(void*)createGObject(Text._getGType), No.Take);
+    return new Text(cast(void*)createGObject(Text._getGType), Yes.Take);
   }
 }

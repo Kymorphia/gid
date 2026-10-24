@@ -144,6 +144,6 @@ final class MenuLinkIterGidBuilder : MenuLinkIterGidBuilderImpl!MenuLinkIterGidB
   */
   MenuLinkIter build() nothrow
   {
-    return new MenuLinkIter(cast(void*)createGObject(MenuLinkIter._getGType), No.Take);
+    return new MenuLinkIter(cast(void*)createGObject(MenuLinkIter._getGType), Yes.Take);
   }
 }

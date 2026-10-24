@@ -215,6 +215,6 @@ final class AggregatorPadGidBuilder : AggregatorPadGidBuilderImpl!AggregatorPadG
   */
   AggregatorPad build() nothrow
   {
-    return new AggregatorPad(cast(void*)createGObject(AggregatorPad._getGType), No.Take);
+    return new AggregatorPad(cast(void*)createGObject(AggregatorPad._getGType), Yes.Take);
   }
 }

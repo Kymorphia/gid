@@ -739,6 +739,6 @@ final class DockGidBuilder : DockGidBuilderImpl!DockGidBuilder
   */
   Dock build() nothrow
   {
-    return new Dock(cast(void*)createGObject(Dock._getGType), No.Take);
+    return new Dock(cast(void*)createGObject(Dock._getGType), Yes.Take);
   }
 }

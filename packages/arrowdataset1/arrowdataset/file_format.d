@@ -113,6 +113,6 @@ final class FileFormatGidBuilder : FileFormatGidBuilderImpl!FileFormatGidBuilder
   */
   FileFormat build() nothrow
   {
-    return new FileFormat(cast(void*)createGObject(FileFormat._getGType), No.Take);
+    return new FileFormat(cast(void*)createGObject(FileFormat._getGType), Yes.Take);
   }
 }

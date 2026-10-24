@@ -113,6 +113,6 @@ final class ControlSourceGidBuilder : ControlSourceGidBuilderImpl!ControlSourceG
   */
   ControlSource build() nothrow
   {
-    return new ControlSource(cast(void*)createGObject(ControlSource._getGType), No.Take);
+    return new ControlSource(cast(void*)createGObject(ControlSource._getGType), Yes.Take);
   }
 }

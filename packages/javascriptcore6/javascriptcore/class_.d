@@ -332,6 +332,6 @@ final class ClassGidBuilder : ClassGidBuilderImpl!ClassGidBuilder
   */
   Class build() nothrow
   {
-    return new Class(cast(void*)createGObject(Class._getGType), No.Take);
+    return new Class(cast(void*)createGObject(Class._getGType), Yes.Take);
   }
 }

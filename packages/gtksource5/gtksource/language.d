@@ -283,6 +283,6 @@ final class LanguageGidBuilder : LanguageGidBuilderImpl!LanguageGidBuilder
   */
   Language build() nothrow
   {
-    return new Language(cast(void*)createGObject(Language._getGType), No.Take);
+    return new Language(cast(void*)createGObject(Language._getGType), Yes.Take);
   }
 }

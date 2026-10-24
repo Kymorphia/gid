@@ -206,6 +206,6 @@ final class ShortcutLabelGidBuilder : ShortcutLabelGidBuilderImpl!ShortcutLabelG
   */
   ShortcutLabel build() nothrow
   {
-    return new ShortcutLabel(cast(void*)createGObject(ShortcutLabel._getGType), No.Take);
+    return new ShortcutLabel(cast(void*)createGObject(ShortcutLabel._getGType), Yes.Take);
   }
 }

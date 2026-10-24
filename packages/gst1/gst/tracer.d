@@ -106,6 +106,6 @@ final class TracerGidBuilder : TracerGidBuilderImpl!TracerGidBuilder
   */
   Tracer build() nothrow
   {
-    return new Tracer(cast(void*)createGObject(Tracer._getGType), No.Take);
+    return new Tracer(cast(void*)createGObject(Tracer._getGType), Yes.Take);
   }
 }

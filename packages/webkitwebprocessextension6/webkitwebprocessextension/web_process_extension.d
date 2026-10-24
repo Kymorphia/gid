@@ -313,6 +313,6 @@ final class WebProcessExtensionGidBuilder : WebProcessExtensionGidBuilderImpl!We
   */
   WebProcessExtension build() nothrow
   {
-    return new WebProcessExtension(cast(void*)createGObject(WebProcessExtension._getGType), No.Take);
+    return new WebProcessExtension(cast(void*)createGObject(WebProcessExtension._getGType), Yes.Take);
   }
 }

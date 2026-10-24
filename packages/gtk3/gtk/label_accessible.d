@@ -74,6 +74,6 @@ final class LabelAccessibleGidBuilder : LabelAccessibleGidBuilderImpl!LabelAcces
   */
   LabelAccessible build() nothrow
   {
-    return new LabelAccessible(cast(void*)createGObject(LabelAccessible._getGType), No.Take);
+    return new LabelAccessible(cast(void*)createGObject(LabelAccessible._getGType), Yes.Take);
   }
 }

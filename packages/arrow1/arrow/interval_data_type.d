@@ -71,6 +71,6 @@ final class IntervalDataTypeGidBuilder : IntervalDataTypeGidBuilderImpl!Interval
   */
   IntervalDataType build() nothrow
   {
-    return new IntervalDataType(cast(void*)createGObject(IntervalDataType._getGType), No.Take);
+    return new IntervalDataType(cast(void*)createGObject(IntervalDataType._getGType), Yes.Take);
   }
 }

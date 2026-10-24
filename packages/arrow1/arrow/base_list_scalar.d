@@ -84,6 +84,6 @@ final class BaseListScalarGidBuilder : BaseListScalarGidBuilderImpl!BaseListScal
   */
   BaseListScalar build() nothrow
   {
-    return new BaseListScalar(cast(void*)createGObject(BaseListScalar._getGType), No.Take);
+    return new BaseListScalar(cast(void*)createGObject(BaseListScalar._getGType), Yes.Take);
   }
 }

@@ -248,6 +248,6 @@ final class PlugGidBuilder : PlugGidBuilderImpl!PlugGidBuilder
   */
   Plug build() nothrow
   {
-    return new Plug(cast(void*)createGObject(Plug._getGType), No.Take);
+    return new Plug(cast(void*)createGObject(Plug._getGType), Yes.Take);
   }
 }

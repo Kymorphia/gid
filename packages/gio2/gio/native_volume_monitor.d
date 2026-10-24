@@ -62,6 +62,6 @@ final class NativeVolumeMonitorGidBuilder : NativeVolumeMonitorGidBuilderImpl!Na
   */
   NativeVolumeMonitor build() nothrow
   {
-    return new NativeVolumeMonitor(cast(void*)createGObject(NativeVolumeMonitor._getGType), No.Take);
+    return new NativeVolumeMonitor(cast(void*)createGObject(NativeVolumeMonitor._getGType), Yes.Take);
   }
 }

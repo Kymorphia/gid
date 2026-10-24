@@ -261,6 +261,6 @@ final class TabButtonGidBuilder : TabButtonGidBuilderImpl!TabButtonGidBuilder
   */
   TabButton build() nothrow
   {
-    return new TabButton(cast(void*)createGObject(TabButton._getGType), No.Take);
+    return new TabButton(cast(void*)createGObject(TabButton._getGType), Yes.Take);
   }
 }

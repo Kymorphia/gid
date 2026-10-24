@@ -147,6 +147,6 @@ final class FileMetadataGidBuilder : FileMetadataGidBuilderImpl!FileMetadataGidB
   */
   FileMetadata build() nothrow
   {
-    return new FileMetadata(cast(void*)createGObject(FileMetadata._getGType), No.Take);
+    return new FileMetadata(cast(void*)createGObject(FileMetadata._getGType), Yes.Take);
   }
 }

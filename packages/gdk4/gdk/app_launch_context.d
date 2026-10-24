@@ -198,6 +198,6 @@ final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunc
   */
   AppLaunchContext build() nothrow
   {
-    return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), No.Take);
+    return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), Yes.Take);
   }
 }

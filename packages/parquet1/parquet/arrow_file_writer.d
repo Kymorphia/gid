@@ -211,6 +211,6 @@ final class ArrowFileWriterGidBuilder : ArrowFileWriterGidBuilderImpl!ArrowFileW
   */
   ArrowFileWriter build() nothrow
   {
-    return new ArrowFileWriter(cast(void*)createGObject(ArrowFileWriter._getGType), No.Take);
+    return new ArrowFileWriter(cast(void*)createGObject(ArrowFileWriter._getGType), Yes.Take);
   }
 }

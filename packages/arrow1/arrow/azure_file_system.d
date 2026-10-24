@@ -62,6 +62,6 @@ final class AzureFileSystemGidBuilder : AzureFileSystemGidBuilderImpl!AzureFileS
   */
   AzureFileSystem build() nothrow
   {
-    return new AzureFileSystem(cast(void*)createGObject(AzureFileSystem._getGType), No.Take);
+    return new AzureFileSystem(cast(void*)createGObject(AzureFileSystem._getGType), Yes.Take);
   }
 }

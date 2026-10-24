@@ -245,6 +245,6 @@ final class CompletionCellGidBuilder : CompletionCellGidBuilderImpl!CompletionCe
   */
   CompletionCell build() nothrow
   {
-    return new CompletionCell(cast(void*)createGObject(CompletionCell._getGType), No.Take);
+    return new CompletionCell(cast(void*)createGObject(CompletionCell._getGType), Yes.Take);
   }
 }

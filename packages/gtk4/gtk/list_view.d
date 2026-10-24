@@ -649,6 +649,6 @@ final class ListViewGidBuilder : ListViewGidBuilderImpl!ListViewGidBuilder
   */
   ListView build() nothrow
   {
-    return new ListView(cast(void*)createGObject(ListView._getGType), No.Take);
+    return new ListView(cast(void*)createGObject(ListView._getGType), Yes.Take);
   }
 }

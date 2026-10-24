@@ -114,6 +114,6 @@ final class ObjectFactoryGidBuilder : ObjectFactoryGidBuilderImpl!ObjectFactoryG
   */
   ObjectFactory build() nothrow
   {
-    return new ObjectFactory(cast(void*)createGObject(ObjectFactory._getGType), No.Take);
+    return new ObjectFactory(cast(void*)createGObject(ObjectFactory._getGType), Yes.Take);
   }
 }

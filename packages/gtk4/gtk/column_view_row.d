@@ -432,6 +432,6 @@ final class ColumnViewRowGidBuilder : ColumnViewRowGidBuilderImpl!ColumnViewRowG
   */
   ColumnViewRow build() nothrow
   {
-    return new ColumnViewRow(cast(void*)createGObject(ColumnViewRow._getGType), No.Take);
+    return new ColumnViewRow(cast(void*)createGObject(ColumnViewRow._getGType), Yes.Take);
   }
 }

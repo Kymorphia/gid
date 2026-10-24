@@ -534,6 +534,6 @@ final class RTPBaseDepayloadGidBuilder : RTPBaseDepayloadGidBuilderImpl!RTPBaseD
   */
   RTPBaseDepayload build() nothrow
   {
-    return new RTPBaseDepayload(cast(void*)createGObject(RTPBaseDepayload._getGType), No.Take);
+    return new RTPBaseDepayload(cast(void*)createGObject(RTPBaseDepayload._getGType), Yes.Take);
   }
 }

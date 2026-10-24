@@ -248,6 +248,6 @@ final class GhostPadGidBuilder : GhostPadGidBuilderImpl!GhostPadGidBuilder
   */
   GhostPad build() nothrow
   {
-    return new GhostPad(cast(void*)createGObject(GhostPad._getGType), No.Take);
+    return new GhostPad(cast(void*)createGObject(GhostPad._getGType), Yes.Take);
   }
 }

@@ -203,6 +203,6 @@ final class SqueezerPageGidBuilder : SqueezerPageGidBuilderImpl!SqueezerPageGidB
   */
   SqueezerPage build() nothrow
   {
-    return new SqueezerPage(cast(void*)createGObject(SqueezerPage._getGType), No.Take);
+    return new SqueezerPage(cast(void*)createGObject(SqueezerPage._getGType), Yes.Take);
   }
 }

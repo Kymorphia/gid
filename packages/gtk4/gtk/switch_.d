@@ -350,6 +350,6 @@ final class SwitchGidBuilder : SwitchGidBuilderImpl!SwitchGidBuilder
   */
   Switch build() nothrow
   {
-    return new Switch(cast(void*)createGObject(Switch._getGType), No.Take);
+    return new Switch(cast(void*)createGObject(Switch._getGType), Yes.Take);
   }
 }

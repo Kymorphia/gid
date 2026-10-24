@@ -62,6 +62,6 @@ final class MockFileSystemGidBuilder : MockFileSystemGidBuilderImpl!MockFileSyst
   */
   MockFileSystem build() nothrow
   {
-    return new MockFileSystem(cast(void*)createGObject(MockFileSystem._getGType), No.Take);
+    return new MockFileSystem(cast(void*)createGObject(MockFileSystem._getGType), Yes.Take);
   }
 }

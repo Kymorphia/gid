@@ -159,6 +159,6 @@ final class CarouselIndicatorDotsGidBuilder : CarouselIndicatorDotsGidBuilderImp
   */
   CarouselIndicatorDots build() nothrow
   {
-    return new CarouselIndicatorDots(cast(void*)createGObject(CarouselIndicatorDots._getGType), No.Take);
+    return new CarouselIndicatorDots(cast(void*)createGObject(CarouselIndicatorDots._getGType), Yes.Take);
   }
 }

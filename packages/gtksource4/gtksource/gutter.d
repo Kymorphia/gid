@@ -188,6 +188,6 @@ final class GutterGidBuilder : GutterGidBuilderImpl!GutterGidBuilder
   */
   Gutter build() nothrow
   {
-    return new Gutter(cast(void*)createGObject(Gutter._getGType), No.Take);
+    return new Gutter(cast(void*)createGObject(Gutter._getGType), Yes.Take);
   }
 }

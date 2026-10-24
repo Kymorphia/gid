@@ -206,6 +206,6 @@ final class FontFamilyGidBuilder : FontFamilyGidBuilderImpl!FontFamilyGidBuilder
   */
   FontFamily build() nothrow
   {
-    return new FontFamily(cast(void*)createGObject(FontFamily._getGType), No.Take);
+    return new FontFamily(cast(void*)createGObject(FontFamily._getGType), Yes.Take);
   }
 }

@@ -991,6 +991,6 @@ final class OverlaySplitViewGidBuilder : OverlaySplitViewGidBuilderImpl!OverlayS
   */
   OverlaySplitView build() nothrow
   {
-    return new OverlaySplitView(cast(void*)createGObject(OverlaySplitView._getGType), No.Take);
+    return new OverlaySplitView(cast(void*)createGObject(OverlaySplitView._getGType), Yes.Take);
   }
 }

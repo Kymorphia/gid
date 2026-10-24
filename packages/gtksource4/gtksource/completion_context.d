@@ -243,6 +243,6 @@ final class CompletionContextGidBuilder : CompletionContextGidBuilderImpl!Comple
   */
   CompletionContext build() nothrow
   {
-    return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), No.Take);
+    return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), Yes.Take);
   }
 }

@@ -225,6 +225,6 @@ final class AudioBaseSrcGidBuilder : AudioBaseSrcGidBuilderImpl!AudioBaseSrcGidB
   */
   AudioBaseSrc build() nothrow
   {
-    return new AudioBaseSrc(cast(void*)createGObject(AudioBaseSrc._getGType), No.Take);
+    return new AudioBaseSrc(cast(void*)createGObject(AudioBaseSrc._getGType), Yes.Take);
   }
 }

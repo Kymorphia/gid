@@ -80,6 +80,6 @@ final class MediaKeySystemPermissionRequestGidBuilder : MediaKeySystemPermission
   */
   MediaKeySystemPermissionRequest build() nothrow
   {
-    return new MediaKeySystemPermissionRequest(cast(void*)createGObject(MediaKeySystemPermissionRequest._getGType), No.Take);
+    return new MediaKeySystemPermissionRequest(cast(void*)createGObject(MediaKeySystemPermissionRequest._getGType), Yes.Take);
   }
 }

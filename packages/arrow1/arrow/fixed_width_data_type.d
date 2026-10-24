@@ -70,6 +70,6 @@ final class FixedWidthDataTypeGidBuilder : FixedWidthDataTypeGidBuilderImpl!Fixe
   */
   FixedWidthDataType build() nothrow
   {
-    return new FixedWidthDataType(cast(void*)createGObject(FixedWidthDataType._getGType), No.Take);
+    return new FixedWidthDataType(cast(void*)createGObject(FixedWidthDataType._getGType), Yes.Take);
   }
 }

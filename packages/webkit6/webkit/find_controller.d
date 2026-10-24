@@ -431,6 +431,6 @@ final class FindControllerGidBuilder : FindControllerGidBuilderImpl!FindControll
   */
   FindController build() nothrow
   {
-    return new FindController(cast(void*)createGObject(FindController._getGType), No.Take);
+    return new FindController(cast(void*)createGObject(FindController._getGType), Yes.Take);
   }
 }

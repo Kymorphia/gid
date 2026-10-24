@@ -315,6 +315,6 @@ final class PreferencesGroupGidBuilder : PreferencesGroupGidBuilderImpl!Preferen
   */
   PreferencesGroup build() nothrow
   {
-    return new PreferencesGroup(cast(void*)createGObject(PreferencesGroup._getGType), No.Take);
+    return new PreferencesGroup(cast(void*)createGObject(PreferencesGroup._getGType), Yes.Take);
   }
 }

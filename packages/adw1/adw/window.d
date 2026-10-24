@@ -305,6 +305,6 @@ final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
   */
   Window build() nothrow
   {
-    return new Window(cast(void*)createGObject(Window._getGType), No.Take);
+    return new Window(cast(void*)createGObject(Window._getGType), Yes.Take);
   }
 }

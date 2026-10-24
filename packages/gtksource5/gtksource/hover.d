@@ -119,6 +119,6 @@ final class HoverGidBuilder : HoverGidBuilderImpl!HoverGidBuilder
   */
   Hover build() nothrow
   {
-    return new Hover(cast(void*)createGObject(Hover._getGType), No.Take);
+    return new Hover(cast(void*)createGObject(Hover._getGType), Yes.Take);
   }
 }

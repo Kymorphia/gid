@@ -286,6 +286,6 @@ final class TreeListRowGidBuilder : TreeListRowGidBuilderImpl!TreeListRowGidBuil
   */
   TreeListRow build() nothrow
   {
-    return new TreeListRow(cast(void*)createGObject(TreeListRow._getGType), No.Take);
+    return new TreeListRow(cast(void*)createGObject(TreeListRow._getGType), Yes.Take);
   }
 }

@@ -136,6 +136,6 @@ final class AccessibleGidBuilder : AccessibleGidBuilderImpl!AccessibleGidBuilder
   */
   Accessible build() nothrow
   {
-    return new Accessible(cast(void*)createGObject(Accessible._getGType), No.Take);
+    return new Accessible(cast(void*)createGObject(Accessible._getGType), Yes.Take);
   }
 }

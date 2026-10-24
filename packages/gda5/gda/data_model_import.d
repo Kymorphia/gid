@@ -287,6 +287,6 @@ final class DataModelImportGidBuilder : DataModelImportGidBuilderImpl!DataModelI
   */
   DataModelImport build() nothrow
   {
-    return new DataModelImport(cast(void*)createGObject(DataModelImport._getGType), No.Take);
+    return new DataModelImport(cast(void*)createGObject(DataModelImport._getGType), Yes.Take);
   }
 }

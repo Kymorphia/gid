@@ -70,6 +70,6 @@ final class SpinnerAccessibleGidBuilder : SpinnerAccessibleGidBuilderImpl!Spinne
   */
   SpinnerAccessible build() nothrow
   {
-    return new SpinnerAccessible(cast(void*)createGObject(SpinnerAccessible._getGType), No.Take);
+    return new SpinnerAccessible(cast(void*)createGObject(SpinnerAccessible._getGType), Yes.Take);
   }
 }

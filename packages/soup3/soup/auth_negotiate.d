@@ -88,6 +88,6 @@ final class AuthNegotiateGidBuilder : AuthNegotiateGidBuilderImpl!AuthNegotiateG
   */
   AuthNegotiate build() nothrow
   {
-    return new AuthNegotiate(cast(void*)createGObject(AuthNegotiate._getGType), No.Take);
+    return new AuthNegotiate(cast(void*)createGObject(AuthNegotiate._getGType), Yes.Take);
   }
 }

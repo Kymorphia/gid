@@ -402,6 +402,6 @@ final class MenuModelGidBuilder : MenuModelGidBuilderImpl!MenuModelGidBuilder
   */
   MenuModel build() nothrow
   {
-    return new MenuModel(cast(void*)createGObject(MenuModel._getGType), No.Take);
+    return new MenuModel(cast(void*)createGObject(MenuModel._getGType), Yes.Take);
   }
 }

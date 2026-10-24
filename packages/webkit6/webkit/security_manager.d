@@ -263,6 +263,6 @@ final class SecurityManagerGidBuilder : SecurityManagerGidBuilderImpl!SecurityMa
   */
   SecurityManager build() nothrow
   {
-    return new SecurityManager(cast(void*)createGObject(SecurityManager._getGType), No.Take);
+    return new SecurityManager(cast(void*)createGObject(SecurityManager._getGType), Yes.Take);
   }
 }

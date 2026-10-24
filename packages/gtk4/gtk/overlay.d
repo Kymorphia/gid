@@ -334,6 +334,6 @@ final class OverlayGidBuilder : OverlayGidBuilderImpl!OverlayGidBuilder
   */
   Overlay build() nothrow
   {
-    return new Overlay(cast(void*)createGObject(Overlay._getGType), No.Take);
+    return new Overlay(cast(void*)createGObject(Overlay._getGType), Yes.Take);
   }
 }

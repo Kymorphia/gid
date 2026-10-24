@@ -70,6 +70,6 @@ final class ArrowAccessibleGidBuilder : ArrowAccessibleGidBuilderImpl!ArrowAcces
   */
   ArrowAccessible build() nothrow
   {
-    return new ArrowAccessible(cast(void*)createGObject(ArrowAccessible._getGType), No.Take);
+    return new ArrowAccessible(cast(void*)createGObject(ArrowAccessible._getGType), Yes.Take);
   }
 }

@@ -378,6 +378,6 @@ final class ListBoxRowGidBuilder : ListBoxRowGidBuilderImpl!ListBoxRowGidBuilder
   */
   ListBoxRow build() nothrow
   {
-    return new ListBoxRow(cast(void*)createGObject(ListBoxRow._getGType), No.Take);
+    return new ListBoxRow(cast(void*)createGObject(ListBoxRow._getGType), Yes.Take);
   }
 }

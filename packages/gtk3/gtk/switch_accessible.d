@@ -74,6 +74,6 @@ final class SwitchAccessibleGidBuilder : SwitchAccessibleGidBuilderImpl!SwitchAc
   */
   SwitchAccessible build() nothrow
   {
-    return new SwitchAccessible(cast(void*)createGObject(SwitchAccessible._getGType), No.Take);
+    return new SwitchAccessible(cast(void*)createGObject(SwitchAccessible._getGType), Yes.Take);
   }
 }

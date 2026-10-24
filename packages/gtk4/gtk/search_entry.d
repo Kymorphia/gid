@@ -718,6 +718,6 @@ final class SearchEntryGidBuilder : SearchEntryGidBuilderImpl!SearchEntryGidBuil
   */
   SearchEntry build() nothrow
   {
-    return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), No.Take);
+    return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), Yes.Take);
   }
 }

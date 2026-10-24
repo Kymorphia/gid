@@ -508,6 +508,6 @@ final class WebPageGidBuilder : WebPageGidBuilderImpl!WebPageGidBuilder
   */
   WebPage build() nothrow
   {
-    return new WebPage(cast(void*)createGObject(WebPage._getGType), No.Take);
+    return new WebPage(cast(void*)createGObject(WebPage._getGType), Yes.Take);
   }
 }

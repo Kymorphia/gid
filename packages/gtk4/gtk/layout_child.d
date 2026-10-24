@@ -139,6 +139,6 @@ final class LayoutChildGidBuilder : LayoutChildGidBuilderImpl!LayoutChildGidBuil
   */
   LayoutChild build() nothrow
   {
-    return new LayoutChild(cast(void*)createGObject(LayoutChild._getGType), No.Take);
+    return new LayoutChild(cast(void*)createGObject(LayoutChild._getGType), Yes.Take);
   }
 }

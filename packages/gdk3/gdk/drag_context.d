@@ -435,6 +435,6 @@ final class DragContextGidBuilder : DragContextGidBuilderImpl!DragContextGidBuil
   */
   DragContext build() nothrow
   {
-    return new DragContext(cast(void*)createGObject(DragContext._getGType), No.Take);
+    return new DragContext(cast(void*)createGObject(DragContext._getGType), Yes.Take);
   }
 }

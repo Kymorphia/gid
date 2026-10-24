@@ -266,6 +266,6 @@ final class HyperlinkGidBuilder : HyperlinkGidBuilderImpl!HyperlinkGidBuilder
   */
   Hyperlink build() nothrow
   {
-    return new Hyperlink(cast(void*)createGObject(Hyperlink._getGType), No.Take);
+    return new Hyperlink(cast(void*)createGObject(Hyperlink._getGType), Yes.Take);
   }
 }

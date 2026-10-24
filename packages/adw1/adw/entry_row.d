@@ -673,6 +673,6 @@ final class EntryRowGidBuilder : EntryRowGidBuilderImpl!EntryRowGidBuilder
   */
   EntryRow build() nothrow
   {
-    return new EntryRow(cast(void*)createGObject(EntryRow._getGType), No.Take);
+    return new EntryRow(cast(void*)createGObject(EntryRow._getGType), Yes.Take);
   }
 }

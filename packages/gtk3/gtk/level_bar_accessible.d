@@ -70,6 +70,6 @@ final class LevelBarAccessibleGidBuilder : LevelBarAccessibleGidBuilderImpl!Leve
   */
   LevelBarAccessible build() nothrow
   {
-    return new LevelBarAccessible(cast(void*)createGObject(LevelBarAccessible._getGType), No.Take);
+    return new LevelBarAccessible(cast(void*)createGObject(LevelBarAccessible._getGType), Yes.Take);
   }
 }

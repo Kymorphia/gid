@@ -102,6 +102,6 @@ final class HoverDisplayGidBuilder : HoverDisplayGidBuilderImpl!HoverDisplayGidB
   */
   HoverDisplay build() nothrow
   {
-    return new HoverDisplay(cast(void*)createGObject(HoverDisplay._getGType), No.Take);
+    return new HoverDisplay(cast(void*)createGObject(HoverDisplay._getGType), Yes.Take);
   }
 }

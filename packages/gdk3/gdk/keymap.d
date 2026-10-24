@@ -521,6 +521,6 @@ final class KeymapGidBuilder : KeymapGidBuilderImpl!KeymapGidBuilder
   */
   Keymap build() nothrow
   {
-    return new Keymap(cast(void*)createGObject(Keymap._getGType), No.Take);
+    return new Keymap(cast(void*)createGObject(Keymap._getGType), Yes.Take);
   }
 }

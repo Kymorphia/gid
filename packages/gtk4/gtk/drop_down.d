@@ -766,6 +766,6 @@ final class DropDownGidBuilder : DropDownGidBuilderImpl!DropDownGidBuilder
   */
   DropDown build() nothrow
   {
-    return new DropDown(cast(void*)createGObject(DropDown._getGType), No.Take);
+    return new DropDown(cast(void*)createGObject(DropDown._getGType), Yes.Take);
   }
 }

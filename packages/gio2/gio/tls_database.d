@@ -526,6 +526,6 @@ final class TlsDatabaseGidBuilder : TlsDatabaseGidBuilderImpl!TlsDatabaseGidBuil
   */
   TlsDatabase build() nothrow
   {
-    return new TlsDatabase(cast(void*)createGObject(TlsDatabase._getGType), No.Take);
+    return new TlsDatabase(cast(void*)createGObject(TlsDatabase._getGType), Yes.Take);
   }
 }

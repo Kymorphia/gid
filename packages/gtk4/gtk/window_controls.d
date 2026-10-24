@@ -292,6 +292,6 @@ final class WindowControlsGidBuilder : WindowControlsGidBuilderImpl!WindowContro
   */
   WindowControls build() nothrow
   {
-    return new WindowControls(cast(void*)createGObject(WindowControls._getGType), No.Take);
+    return new WindowControls(cast(void*)createGObject(WindowControls._getGType), Yes.Take);
   }
 }

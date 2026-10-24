@@ -95,6 +95,6 @@ final class UserMediaPermissionRequestGidBuilder : UserMediaPermissionRequestGid
   */
   UserMediaPermissionRequest build() nothrow
   {
-    return new UserMediaPermissionRequest(cast(void*)createGObject(UserMediaPermissionRequest._getGType), No.Take);
+    return new UserMediaPermissionRequest(cast(void*)createGObject(UserMediaPermissionRequest._getGType), Yes.Take);
   }
 }

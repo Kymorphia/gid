@@ -375,6 +375,6 @@ final class SeatGidBuilder : SeatGidBuilderImpl!SeatGidBuilder
   */
   Seat build() nothrow
   {
-    return new Seat(cast(void*)createGObject(Seat._getGType), No.Take);
+    return new Seat(cast(void*)createGObject(Seat._getGType), Yes.Take);
   }
 }

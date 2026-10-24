@@ -172,6 +172,6 @@ final class AppInfoMonitorGidBuilder : AppInfoMonitorGidBuilderImpl!AppInfoMonit
   */
   AppInfoMonitor build() nothrow
   {
-    return new AppInfoMonitor(cast(void*)createGObject(AppInfoMonitor._getGType), No.Take);
+    return new AppInfoMonitor(cast(void*)createGObject(AppInfoMonitor._getGType), Yes.Take);
   }
 }

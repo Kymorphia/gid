@@ -223,6 +223,6 @@ final class MenuBarGidBuilder : MenuBarGidBuilderImpl!MenuBarGidBuilder
   */
   MenuBar build() nothrow
   {
-    return new MenuBar(cast(void*)createGObject(MenuBar._getGType), No.Take);
+    return new MenuBar(cast(void*)createGObject(MenuBar._getGType), Yes.Take);
   }
 }

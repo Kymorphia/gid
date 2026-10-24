@@ -539,6 +539,6 @@ final class DragGidBuilder : DragGidBuilderImpl!DragGidBuilder
   */
   Drag build() nothrow
   {
-    return new Drag(cast(void*)createGObject(Drag._getGType), No.Take);
+    return new Drag(cast(void*)createGObject(Drag._getGType), Yes.Take);
   }
 }

@@ -228,6 +228,6 @@ final class PromptGidBuilder : PromptGidBuilderImpl!PromptGidBuilder
   */
   Prompt build() nothrow
   {
-    return new Prompt(cast(void*)createGObject(Prompt._getGType), No.Take);
+    return new Prompt(cast(void*)createGObject(Prompt._getGType), Yes.Take);
   }
 }

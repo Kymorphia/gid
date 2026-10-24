@@ -661,6 +661,6 @@ final class BaseSrcGidBuilder : BaseSrcGidBuilderImpl!BaseSrcGidBuilder
   */
   BaseSrc build() nothrow
   {
-    return new BaseSrc(cast(void*)createGObject(BaseSrc._getGType), No.Take);
+    return new BaseSrc(cast(void*)createGObject(BaseSrc._getGType), Yes.Take);
   }
 }

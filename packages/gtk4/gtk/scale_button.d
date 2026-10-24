@@ -521,6 +521,6 @@ final class ScaleButtonGidBuilder : ScaleButtonGidBuilderImpl!ScaleButtonGidBuil
   */
   ScaleButton build() nothrow
   {
-    return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), No.Take);
+    return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), Yes.Take);
   }
 }

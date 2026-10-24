@@ -454,6 +454,6 @@ final class DropGidBuilder : DropGidBuilderImpl!DropGidBuilder
   */
   Drop build() nothrow
   {
-    return new Drop(cast(void*)createGObject(Drop._getGType), No.Take);
+    return new Drop(cast(void*)createGObject(Drop._getGType), Yes.Take);
   }
 }

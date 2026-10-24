@@ -477,6 +477,6 @@ final class PreferencesWindowGidBuilder : PreferencesWindowGidBuilderImpl!Prefer
   */
   PreferencesWindow build() nothrow
   {
-    return new PreferencesWindow(cast(void*)createGObject(PreferencesWindow._getGType), No.Take);
+    return new PreferencesWindow(cast(void*)createGObject(PreferencesWindow._getGType), Yes.Take);
   }
 }

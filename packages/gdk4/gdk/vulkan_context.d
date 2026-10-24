@@ -126,6 +126,6 @@ final class VulkanContextGidBuilder : VulkanContextGidBuilderImpl!VulkanContextG
   */
   VulkanContext build() nothrow
   {
-    return new VulkanContext(cast(void*)createGObject(VulkanContext._getGType), No.Take);
+    return new VulkanContext(cast(void*)createGObject(VulkanContext._getGType), Yes.Take);
   }
 }

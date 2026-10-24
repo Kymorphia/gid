@@ -265,6 +265,6 @@ final class ShortcutTriggerGidBuilder : ShortcutTriggerGidBuilderImpl!ShortcutTr
   */
   ShortcutTrigger build() nothrow
   {
-    return new ShortcutTrigger(cast(void*)createGObject(ShortcutTrigger._getGType), No.Take);
+    return new ShortcutTrigger(cast(void*)createGObject(ShortcutTrigger._getGType), Yes.Take);
   }
 }

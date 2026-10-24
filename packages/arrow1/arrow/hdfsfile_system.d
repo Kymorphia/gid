@@ -62,6 +62,6 @@ final class HDFSFileSystemGidBuilder : HDFSFileSystemGidBuilderImpl!HDFSFileSyst
   */
   HDFSFileSystem build() nothrow
   {
-    return new HDFSFileSystem(cast(void*)createGObject(HDFSFileSystem._getGType), No.Take);
+    return new HDFSFileSystem(cast(void*)createGObject(HDFSFileSystem._getGType), Yes.Take);
   }
 }

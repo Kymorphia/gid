@@ -190,6 +190,6 @@ final class CellAreaBoxGidBuilder : CellAreaBoxGidBuilderImpl!CellAreaBoxGidBuil
   */
   CellAreaBox build() nothrow
   {
-    return new CellAreaBox(cast(void*)createGObject(CellAreaBox._getGType), No.Take);
+    return new CellAreaBox(cast(void*)createGObject(CellAreaBox._getGType), Yes.Take);
   }
 }

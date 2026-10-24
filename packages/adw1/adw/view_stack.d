@@ -556,6 +556,6 @@ final class ViewStackGidBuilder : ViewStackGidBuilderImpl!ViewStackGidBuilder
   */
   ViewStack build() nothrow
   {
-    return new ViewStack(cast(void*)createGObject(ViewStack._getGType), No.Take);
+    return new ViewStack(cast(void*)createGObject(ViewStack._getGType), Yes.Take);
   }
 }

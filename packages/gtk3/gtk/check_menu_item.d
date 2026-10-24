@@ -321,6 +321,6 @@ final class CheckMenuItemGidBuilder : CheckMenuItemGidBuilderImpl!CheckMenuItemG
   */
   CheckMenuItem build() nothrow
   {
-    return new CheckMenuItem(cast(void*)createGObject(CheckMenuItem._getGType), No.Take);
+    return new CheckMenuItem(cast(void*)createGObject(CheckMenuItem._getGType), Yes.Take);
   }
 }

@@ -426,6 +426,6 @@ final class FileSystemGidBuilder : FileSystemGidBuilderImpl!FileSystemGidBuilder
   */
   FileSystem build() nothrow
   {
-    return new FileSystem(cast(void*)createGObject(FileSystem._getGType), No.Take);
+    return new FileSystem(cast(void*)createGObject(FileSystem._getGType), Yes.Take);
   }
 }

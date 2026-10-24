@@ -99,6 +99,6 @@ final class HandlerStringGidBuilder : HandlerStringGidBuilderImpl!HandlerStringG
   */
   HandlerString build() nothrow
   {
-    return new HandlerString(cast(void*)createGObject(HandlerString._getGType), No.Take);
+    return new HandlerString(cast(void*)createGObject(HandlerString._getGType), Yes.Take);
   }
 }

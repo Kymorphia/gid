@@ -64,6 +64,6 @@ final class GLMemoryPBOAllocatorGidBuilder : GLMemoryPBOAllocatorGidBuilderImpl!
   */
   GLMemoryPBOAllocator build() nothrow
   {
-    return new GLMemoryPBOAllocator(cast(void*)createGObject(GLMemoryPBOAllocator._getGType), No.Take);
+    return new GLMemoryPBOAllocator(cast(void*)createGObject(GLMemoryPBOAllocator._getGType), Yes.Take);
   }
 }

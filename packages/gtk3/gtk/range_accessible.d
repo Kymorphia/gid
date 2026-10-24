@@ -70,6 +70,6 @@ final class RangeAccessibleGidBuilder : RangeAccessibleGidBuilderImpl!RangeAcces
   */
   RangeAccessible build() nothrow
   {
-    return new RangeAccessible(cast(void*)createGObject(RangeAccessible._getGType), No.Take);
+    return new RangeAccessible(cast(void*)createGObject(RangeAccessible._getGType), Yes.Take);
   }
 }

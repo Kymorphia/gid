@@ -121,6 +121,6 @@ final class DiscovererAudioInfoGidBuilder : DiscovererAudioInfoGidBuilderImpl!Di
   */
   DiscovererAudioInfo build() nothrow
   {
-    return new DiscovererAudioInfo(cast(void*)createGObject(DiscovererAudioInfo._getGType), No.Take);
+    return new DiscovererAudioInfo(cast(void*)createGObject(DiscovererAudioInfo._getGType), Yes.Take);
   }
 }

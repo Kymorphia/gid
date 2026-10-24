@@ -217,6 +217,6 @@ final class PluginFeatureGidBuilder : PluginFeatureGidBuilderImpl!PluginFeatureG
   */
   PluginFeature build() nothrow
   {
-    return new PluginFeature(cast(void*)createGObject(PluginFeature._getGType), No.Take);
+    return new PluginFeature(cast(void*)createGObject(PluginFeature._getGType), Yes.Take);
   }
 }

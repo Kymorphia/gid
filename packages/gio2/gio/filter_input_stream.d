@@ -153,6 +153,6 @@ final class FilterInputStreamGidBuilder : FilterInputStreamGidBuilderImpl!Filter
   */
   FilterInputStream build() nothrow
   {
-    return new FilterInputStream(cast(void*)createGObject(FilterInputStream._getGType), No.Take);
+    return new FilterInputStream(cast(void*)createGObject(FilterInputStream._getGType), Yes.Take);
   }
 }

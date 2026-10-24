@@ -77,6 +77,6 @@ final class ClipboardPermissionRequestGidBuilder : ClipboardPermissionRequestGid
   */
   ClipboardPermissionRequest build() nothrow
   {
-    return new ClipboardPermissionRequest(cast(void*)createGObject(ClipboardPermissionRequest._getGType), No.Take);
+    return new ClipboardPermissionRequest(cast(void*)createGObject(ClipboardPermissionRequest._getGType), Yes.Take);
   }
 }

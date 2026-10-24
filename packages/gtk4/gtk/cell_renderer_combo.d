@@ -287,6 +287,6 @@ final class CellRendererComboGidBuilder : CellRendererComboGidBuilderImpl!CellRe
   */
   CellRendererCombo build() nothrow
   {
-    return new CellRendererCombo(cast(void*)createGObject(CellRendererCombo._getGType), No.Take);
+    return new CellRendererCombo(cast(void*)createGObject(CellRendererCombo._getGType), Yes.Take);
   }
 }

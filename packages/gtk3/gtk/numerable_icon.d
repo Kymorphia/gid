@@ -359,6 +359,6 @@ final class NumerableIconGidBuilder : NumerableIconGidBuilderImpl!NumerableIconG
   */
   NumerableIcon build() nothrow
   {
-    return new NumerableIcon(cast(void*)createGObject(NumerableIcon._getGType), No.Take);
+    return new NumerableIcon(cast(void*)createGObject(NumerableIcon._getGType), Yes.Take);
   }
 }

@@ -164,6 +164,6 @@ final class SpinnerGidBuilder : SpinnerGidBuilderImpl!SpinnerGidBuilder
   */
   Spinner build() nothrow
   {
-    return new Spinner(cast(void*)createGObject(Spinner._getGType), No.Take);
+    return new Spinner(cast(void*)createGObject(Spinner._getGType), Yes.Take);
   }
 }

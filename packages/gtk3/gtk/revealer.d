@@ -245,6 +245,6 @@ final class RevealerGidBuilder : RevealerGidBuilderImpl!RevealerGidBuilder
   */
   Revealer build() nothrow
   {
-    return new Revealer(cast(void*)createGObject(Revealer._getGType), No.Take);
+    return new Revealer(cast(void*)createGObject(Revealer._getGType), Yes.Take);
   }
 }

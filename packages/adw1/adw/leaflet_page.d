@@ -254,6 +254,6 @@ final class LeafletPageGidBuilder : LeafletPageGidBuilderImpl!LeafletPageGidBuil
   */
   LeafletPage build() nothrow
   {
-    return new LeafletPage(cast(void*)createGObject(LeafletPage._getGType), No.Take);
+    return new LeafletPage(cast(void*)createGObject(LeafletPage._getGType), Yes.Take);
   }
 }

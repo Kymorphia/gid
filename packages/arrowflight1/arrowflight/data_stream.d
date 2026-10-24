@@ -68,6 +68,6 @@ final class DataStreamGidBuilder : DataStreamGidBuilderImpl!DataStreamGidBuilder
   */
   DataStream build() nothrow
   {
-    return new DataStream(cast(void*)createGObject(DataStream._getGType), No.Take);
+    return new DataStream(cast(void*)createGObject(DataStream._getGType), Yes.Take);
   }
 }

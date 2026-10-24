@@ -69,6 +69,6 @@ final class ToggleButtonAccessibleGidBuilder : ToggleButtonAccessibleGidBuilderI
   */
   ToggleButtonAccessible build() nothrow
   {
-    return new ToggleButtonAccessible(cast(void*)createGObject(ToggleButtonAccessible._getGType), No.Take);
+    return new ToggleButtonAccessible(cast(void*)createGObject(ToggleButtonAccessible._getGType), Yes.Take);
   }
 }

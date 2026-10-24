@@ -62,6 +62,6 @@ final class GCSFileSystemGidBuilder : GCSFileSystemGidBuilderImpl!GCSFileSystemG
   */
   GCSFileSystem build() nothrow
   {
-    return new GCSFileSystem(cast(void*)createGObject(GCSFileSystem._getGType), No.Take);
+    return new GCSFileSystem(cast(void*)createGObject(GCSFileSystem._getGType), Yes.Take);
   }
 }

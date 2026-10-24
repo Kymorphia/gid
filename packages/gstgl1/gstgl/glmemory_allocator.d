@@ -75,6 +75,6 @@ final class GLMemoryAllocatorGidBuilder : GLMemoryAllocatorGidBuilderImpl!GLMemo
   */
   GLMemoryAllocator build() nothrow
   {
-    return new GLMemoryAllocator(cast(void*)createGObject(GLMemoryAllocator._getGType), No.Take);
+    return new GLMemoryAllocator(cast(void*)createGObject(GLMemoryAllocator._getGType), Yes.Take);
   }
 }

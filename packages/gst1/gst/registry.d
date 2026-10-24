@@ -598,6 +598,6 @@ final class RegistryGidBuilder : RegistryGidBuilderImpl!RegistryGidBuilder
   */
   Registry build() nothrow
   {
-    return new Registry(cast(void*)createGObject(Registry._getGType), No.Take);
+    return new Registry(cast(void*)createGObject(Registry._getGType), Yes.Take);
   }
 }

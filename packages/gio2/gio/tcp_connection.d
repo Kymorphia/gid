@@ -126,6 +126,6 @@ final class TcpConnectionGidBuilder : TcpConnectionGidBuilderImpl!TcpConnectionG
   */
   TcpConnection build() nothrow
   {
-    return new TcpConnection(cast(void*)createGObject(TcpConnection._getGType), No.Take);
+    return new TcpConnection(cast(void*)createGObject(TcpConnection._getGType), Yes.Take);
   }
 }

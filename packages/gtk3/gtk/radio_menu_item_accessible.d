@@ -69,6 +69,6 @@ final class RadioMenuItemAccessibleGidBuilder : RadioMenuItemAccessibleGidBuilde
   */
   RadioMenuItemAccessible build() nothrow
   {
-    return new RadioMenuItemAccessible(cast(void*)createGObject(RadioMenuItemAccessible._getGType), No.Take);
+    return new RadioMenuItemAccessible(cast(void*)createGObject(RadioMenuItemAccessible._getGType), Yes.Take);
   }
 }

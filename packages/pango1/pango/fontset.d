@@ -134,6 +134,6 @@ final class FontsetGidBuilder : FontsetGidBuilderImpl!FontsetGidBuilder
   */
   Fontset build() nothrow
   {
-    return new Fontset(cast(void*)createGObject(Fontset._getGType), No.Take);
+    return new Fontset(cast(void*)createGObject(Fontset._getGType), Yes.Take);
   }
 }

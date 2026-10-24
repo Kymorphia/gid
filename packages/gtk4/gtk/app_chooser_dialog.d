@@ -255,6 +255,6 @@ final class AppChooserDialogGidBuilder : AppChooserDialogGidBuilderImpl!AppChoos
   */
   AppChooserDialog build() nothrow
   {
-    return new AppChooserDialog(cast(void*)createGObject(AppChooserDialog._getGType), No.Take);
+    return new AppChooserDialog(cast(void*)createGObject(AppChooserDialog._getGType), Yes.Take);
   }
 }

@@ -80,6 +80,6 @@ final class HandlerNumericalGidBuilder : HandlerNumericalGidBuilderImpl!HandlerN
   */
   HandlerNumerical build() nothrow
   {
-    return new HandlerNumerical(cast(void*)createGObject(HandlerNumerical._getGType), No.Take);
+    return new HandlerNumerical(cast(void*)createGObject(HandlerNumerical._getGType), Yes.Take);
   }
 }

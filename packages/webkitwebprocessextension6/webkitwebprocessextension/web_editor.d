@@ -128,6 +128,6 @@ final class WebEditorGidBuilder : WebEditorGidBuilderImpl!WebEditorGidBuilder
   */
   WebEditor build() nothrow
   {
-    return new WebEditor(cast(void*)createGObject(WebEditor._getGType), No.Take);
+    return new WebEditor(cast(void*)createGObject(WebEditor._getGType), Yes.Take);
   }
 }

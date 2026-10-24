@@ -120,6 +120,6 @@ final class StreamListenerGidBuilder : StreamListenerGidBuilderImpl!StreamListen
   */
   StreamListener build() nothrow
   {
-    return new StreamListener(cast(void*)createGObject(StreamListener._getGType), No.Take);
+    return new StreamListener(cast(void*)createGObject(StreamListener._getGType), Yes.Take);
   }
 }

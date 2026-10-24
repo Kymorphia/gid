@@ -924,6 +924,6 @@ final class SpinButtonGidBuilder : SpinButtonGidBuilderImpl!SpinButtonGidBuilder
   */
   SpinButton build() nothrow
   {
-    return new SpinButton(cast(void*)createGObject(SpinButton._getGType), No.Take);
+    return new SpinButton(cast(void*)createGObject(SpinButton._getGType), Yes.Take);
   }
 }

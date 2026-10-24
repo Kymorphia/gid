@@ -151,6 +151,6 @@ final class ViewStackPagesGidBuilder : ViewStackPagesGidBuilderImpl!ViewStackPag
   */
   ViewStackPages build() nothrow
   {
-    return new ViewStackPages(cast(void*)createGObject(ViewStackPages._getGType), No.Take);
+    return new ViewStackPages(cast(void*)createGObject(ViewStackPages._getGType), Yes.Take);
   }
 }

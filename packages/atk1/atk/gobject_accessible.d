@@ -99,6 +99,6 @@ final class GObjectAccessibleGidBuilder : GObjectAccessibleGidBuilderImpl!GObjec
   */
   GObjectAccessible build() nothrow
   {
-    return new GObjectAccessible(cast(void*)createGObject(GObjectAccessible._getGType), No.Take);
+    return new GObjectAccessible(cast(void*)createGObject(GObjectAccessible._getGType), Yes.Take);
   }
 }

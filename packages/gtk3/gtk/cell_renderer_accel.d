@@ -347,6 +347,6 @@ final class CellRendererAccelGidBuilder : CellRendererAccelGidBuilderImpl!CellRe
   */
   CellRendererAccel build() nothrow
   {
-    return new CellRendererAccel(cast(void*)createGObject(CellRendererAccel._getGType), No.Take);
+    return new CellRendererAccel(cast(void*)createGObject(CellRendererAccel._getGType), Yes.Take);
   }
 }

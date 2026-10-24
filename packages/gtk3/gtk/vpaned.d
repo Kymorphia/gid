@@ -89,6 +89,6 @@ final class VPanedGidBuilder : VPanedGidBuilderImpl!VPanedGidBuilder
   */
   VPaned build() nothrow
   {
-    return new VPaned(cast(void*)createGObject(VPaned._getGType), No.Take);
+    return new VPaned(cast(void*)createGObject(VPaned._getGType), Yes.Take);
   }
 }

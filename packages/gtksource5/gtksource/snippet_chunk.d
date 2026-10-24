@@ -368,6 +368,6 @@ final class SnippetChunkGidBuilder : SnippetChunkGidBuilderImpl!SnippetChunkGidB
   */
   SnippetChunk build() nothrow
   {
-    return new SnippetChunk(cast(void*)createGObject(SnippetChunk._getGType), No.Take);
+    return new SnippetChunk(cast(void*)createGObject(SnippetChunk._getGType), Yes.Take);
   }
 }

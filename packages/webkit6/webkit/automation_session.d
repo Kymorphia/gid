@@ -243,6 +243,6 @@ final class AutomationSessionGidBuilder : AutomationSessionGidBuilderImpl!Automa
   */
   AutomationSession build() nothrow
   {
-    return new AutomationSession(cast(void*)createGObject(AutomationSession._getGType), No.Take);
+    return new AutomationSession(cast(void*)createGObject(AutomationSession._getGType), Yes.Take);
   }
 }

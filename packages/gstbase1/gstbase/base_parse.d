@@ -532,6 +532,6 @@ final class BaseParseGidBuilder : BaseParseGidBuilderImpl!BaseParseGidBuilder
   */
   BaseParse build() nothrow
   {
-    return new BaseParse(cast(void*)createGObject(BaseParse._getGType), No.Take);
+    return new BaseParse(cast(void*)createGObject(BaseParse._getGType), Yes.Take);
   }
 }

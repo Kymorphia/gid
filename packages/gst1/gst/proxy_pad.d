@@ -158,6 +158,6 @@ final class ProxyPadGidBuilder : ProxyPadGidBuilderImpl!ProxyPadGidBuilder
   */
   ProxyPad build() nothrow
   {
-    return new ProxyPad(cast(void*)createGObject(ProxyPad._getGType), No.Take);
+    return new ProxyPad(cast(void*)createGObject(ProxyPad._getGType), Yes.Take);
   }
 }

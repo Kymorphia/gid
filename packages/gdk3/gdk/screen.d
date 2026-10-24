@@ -861,6 +861,6 @@ final class ScreenGidBuilder : ScreenGidBuilderImpl!ScreenGidBuilder
   */
   Screen build() nothrow
   {
-    return new Screen(cast(void*)createGObject(Screen._getGType), No.Take);
+    return new Screen(cast(void*)createGObject(Screen._getGType), Yes.Take);
   }
 }

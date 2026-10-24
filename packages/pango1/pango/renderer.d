@@ -422,6 +422,6 @@ final class RendererGidBuilder : RendererGidBuilderImpl!RendererGidBuilder
   */
   Renderer build() nothrow
   {
-    return new Renderer(cast(void*)createGObject(Renderer._getGType), No.Take);
+    return new Renderer(cast(void*)createGObject(Renderer._getGType), Yes.Take);
   }
 }

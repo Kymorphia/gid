@@ -65,6 +65,6 @@ final class FlowBoxChildAccessibleGidBuilder : FlowBoxChildAccessibleGidBuilderI
   */
   FlowBoxChildAccessible build() nothrow
   {
-    return new FlowBoxChildAccessible(cast(void*)createGObject(FlowBoxChildAccessible._getGType), No.Take);
+    return new FlowBoxChildAccessible(cast(void*)createGObject(FlowBoxChildAccessible._getGType), Yes.Take);
   }
 }

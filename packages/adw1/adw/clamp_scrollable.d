@@ -378,6 +378,6 @@ final class ClampScrollableGidBuilder : ClampScrollableGidBuilderImpl!ClampScrol
   */
   ClampScrollable build() nothrow
   {
-    return new ClampScrollable(cast(void*)createGObject(ClampScrollable._getGType), No.Take);
+    return new ClampScrollable(cast(void*)createGObject(ClampScrollable._getGType), Yes.Take);
   }
 }

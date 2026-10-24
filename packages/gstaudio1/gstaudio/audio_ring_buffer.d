@@ -564,6 +564,6 @@ final class AudioRingBufferGidBuilder : AudioRingBufferGidBuilderImpl!AudioRingB
   */
   AudioRingBuffer build() nothrow
   {
-    return new AudioRingBuffer(cast(void*)createGObject(AudioRingBuffer._getGType), No.Take);
+    return new AudioRingBuffer(cast(void*)createGObject(AudioRingBuffer._getGType), Yes.Take);
   }
 }

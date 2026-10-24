@@ -735,6 +735,6 @@ final class CarouselGidBuilder : CarouselGidBuilderImpl!CarouselGidBuilder
   */
   Carousel build() nothrow
   {
-    return new Carousel(cast(void*)createGObject(Carousel._getGType), No.Take);
+    return new Carousel(cast(void*)createGObject(Carousel._getGType), Yes.Take);
   }
 }

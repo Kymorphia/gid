@@ -280,6 +280,6 @@ final class AccelLabelGidBuilder : AccelLabelGidBuilderImpl!AccelLabelGidBuilder
   */
   AccelLabel build() nothrow
   {
-    return new AccelLabel(cast(void*)createGObject(AccelLabel._getGType), No.Take);
+    return new AccelLabel(cast(void*)createGObject(AccelLabel._getGType), Yes.Take);
   }
 }

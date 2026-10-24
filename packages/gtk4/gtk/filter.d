@@ -198,6 +198,6 @@ final class FilterGidBuilder : FilterGidBuilderImpl!FilterGidBuilder
   */
   Filter build() nothrow
   {
-    return new Filter(cast(void*)createGObject(Filter._getGType), No.Take);
+    return new Filter(cast(void*)createGObject(Filter._getGType), Yes.Take);
   }
 }

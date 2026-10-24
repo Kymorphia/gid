@@ -464,6 +464,6 @@ final class AnimationGidBuilder : AnimationGidBuilderImpl!AnimationGidBuilder
   */
   Animation build() nothrow
   {
-    return new Animation(cast(void*)createGObject(Animation._getGType), No.Take);
+    return new Animation(cast(void*)createGObject(Animation._getGType), Yes.Take);
   }
 }
