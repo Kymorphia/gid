@@ -63,7 +63,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_new(_chunks, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -74,7 +74,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_new_empty(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -86,7 +86,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_combine(cast(GArrowChunkedArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -106,7 +106,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_filter(cast(GArrowChunkedArray*)this._cPtr, filter ? cast(GArrowBooleanArray*)filter._cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -118,7 +118,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_filter_chunked_array(cast(GArrowChunkedArray*)this._cPtr, filter ? cast(GArrowChunkedArray*)filter._cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -207,7 +207,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_sort_indices(cast(GArrowChunkedArray*)this._cPtr, order, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
     return _retval;
   }
@@ -219,7 +219,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_take(cast(GArrowChunkedArray*)this._cPtr, indices ? cast(GArrowArray*)indices._cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -231,7 +231,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_take_chunked_array(cast(GArrowChunkedArray*)this._cPtr, indices ? cast(GArrowChunkedArray*)indices._cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -243,7 +243,7 @@ class ChunkedArray : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_chunked_array_to_string(cast(GArrowChunkedArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }

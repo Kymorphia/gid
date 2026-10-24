@@ -128,7 +128,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_listener_accept(cast(GSocketListener*)this._cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
@@ -182,7 +182,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_listener_accept_finish(cast(GSocketListener*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_sourceObject, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
@@ -217,7 +217,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_listener_accept_socket(cast(GSocketListener*)this._cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
     sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
@@ -271,7 +271,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_listener_accept_socket_finish(cast(GSocketListener*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_sourceObject, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
     sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
     return _retval;
@@ -318,7 +318,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_socket_listener_add_address(cast(GSocketListener*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, type, protocol, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_effectiveAddress, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     effectiveAddress = new gio.socket_address.SocketAddress(cast(void*)_effectiveAddress, Yes.Take);
     return _retval;
   }
@@ -346,7 +346,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_socket_listener_add_any_inet_port(cast(GSocketListener*)this._cPtr, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_socket_listener_add_inet_port(cast(GSocketListener*)this._cPtr, port, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class SocketListener : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_socket_listener_add_socket(cast(GSocketListener*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

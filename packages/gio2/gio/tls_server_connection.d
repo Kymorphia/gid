@@ -65,7 +65,7 @@ interface TlsServerConnection
     GError *_err;
     _cretval = g_tls_server_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream._cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_server_connection.TlsServerConnection)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }

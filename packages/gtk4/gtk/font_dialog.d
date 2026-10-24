@@ -238,7 +238,7 @@ class FontDialog : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_font_dialog_choose_face_finish(cast(GtkFontDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, Yes.Take);
     return _retval;
   }
@@ -297,7 +297,7 @@ class FontDialog : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_font_dialog_choose_family_finish(cast(GtkFontDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, Yes.Take);
     return _retval;
   }
@@ -401,7 +401,7 @@ class FontDialog : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_font_dialog_choose_font_and_features_finish(cast(GtkFontDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_fontDesc, &_fontFeatures, &_language, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
     fontFeatures = _fontFeatures.fromCString!(Yes.Free);
     language = new pango.language.Language(cast(void*)_language, Yes.Take);
@@ -423,7 +423,7 @@ class FontDialog : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_font_dialog_choose_font_finish(cast(GtkFontDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -101,7 +101,7 @@ class StreamFs : gmime.stream.Stream
     GError *_err;
     _cretval = g_mime_stream_fs_open(_path, flags, mode, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.stream.Stream)(cast(GMimeStream*)_cretval, Yes.Take);
     return _retval;
   }

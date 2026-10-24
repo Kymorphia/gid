@@ -55,7 +55,7 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
     GError *_err;
     _retval = garrow_numeric_array_mean(cast(GArrowNumericArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

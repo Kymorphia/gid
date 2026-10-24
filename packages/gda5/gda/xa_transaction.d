@@ -101,7 +101,7 @@ class XaTransaction : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_xa_transaction_begin(cast(GdaXaTransaction*)this._cPtr, &_err);
     if (_err)
-      throw new XaTransactionException(_err);
+      throw new XaTransactionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class XaTransaction : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_xa_transaction_commit(cast(GdaXaTransaction*)this._cPtr, &_cncToRecover, &_err);
     if (_err)
-      throw new XaTransactionException(_err);
+      throw new XaTransactionException(_err, Yes.Take);
     cncToRecover = gSListToD!(gda.connection.Connection, GidOwnership.Full)(_cncToRecover);
     return _retval;
   }
@@ -151,7 +151,7 @@ class XaTransaction : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_xa_transaction_commit_recovered(cast(GdaXaTransaction*)this._cPtr, &_cncToRecover, &_err);
     if (_err)
-      throw new XaTransactionException(_err);
+      throw new XaTransactionException(_err, Yes.Take);
     cncToRecover = gSListToD!(gda.connection.Connection, GidOwnership.Full)(_cncToRecover);
     return _retval;
   }
@@ -176,7 +176,7 @@ class XaTransaction : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_xa_transaction_register_connection(cast(GdaXaTransaction*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _branch, &_err);
     if (_err)
-      throw new XaTransactionException(_err);
+      throw new XaTransactionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class XaTransaction : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_xa_transaction_rollback(cast(GdaXaTransaction*)this._cPtr, &_err);
     if (_err)
-      throw new XaTransactionException(_err);
+      throw new XaTransactionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -240,9 +240,9 @@ final class XaTransactionGidBuilder : XaTransactionGidBuilderImpl!XaTransactionG
 
 class XaTransactionException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

@@ -92,7 +92,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_file(_filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -115,7 +115,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_resource(_resourcePath, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -146,7 +146,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_stream(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -166,7 +166,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)asyncResult)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }

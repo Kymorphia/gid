@@ -229,7 +229,7 @@ class Surface : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_surface_create_gl_context(cast(GdkSurface*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
@@ -283,7 +283,7 @@ class Surface : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_surface_create_vulkan_context(cast(GdkSurface*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.vulkan_context.VulkanContext)(cast(GdkVulkanContext*)_cretval, Yes.Take);
     return _retval;
   }

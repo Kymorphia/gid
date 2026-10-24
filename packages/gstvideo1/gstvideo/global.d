@@ -645,7 +645,7 @@ gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toC
   GError *_err;
   _cretval = gst_video_convert_sample(sample ? cast(GstSample*)sample._cPtr(No.Dup) : null, toCaps ? cast(const(GstCaps)*)toCaps._cPtr(No.Dup) : null, timeout, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }

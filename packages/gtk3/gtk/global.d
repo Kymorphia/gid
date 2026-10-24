@@ -2679,7 +2679,7 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
   GError *_err;
   _retval = cast(bool)gtk_show_uri(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -2714,7 +2714,7 @@ bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
   GError *_err;
   _retval = cast(bool)gtk_show_uri_on_window(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 

@@ -92,7 +92,7 @@ template InitableT()
     GError *_err;
     _retval = cast(bool)g_initable_init(cast(GInitable*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

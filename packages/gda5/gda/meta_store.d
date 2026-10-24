@@ -205,7 +205,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_declare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, _nbCols, _colnames, _refColnames, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_get_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, &_attValue, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     attValue = _attValue.fromCString!(Yes.Free);
     return _retval;
   }
@@ -306,7 +306,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_modify_v(cast(GdaMetaStore*)this._cPtr, _tableName, newData ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newData)._cPtr(No.Dup) : null, _condition, _nvalues, _valueNames, _values, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_modify_with_context(cast(GdaMetaStore*)this._cPtr, context ? cast(GdaMetaContext*)context._cPtr(No.Dup) : null, newData ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newData)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_schema_add_custom_object(cast(GdaMetaStore*)this._cPtr, _xmlDescription, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_meta_store_schema_get_structure(cast(GdaMetaStore*)this._cPtr, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.meta_struct.MetaStruct)(cast(GdaMetaStruct*)_cretval, Yes.Take);
     return _retval;
   }
@@ -462,7 +462,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_schema_remove_custom_object(cast(GdaMetaStore*)this._cPtr, _objName, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     return _retval;
   }
 
@@ -484,7 +484,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_set_attribute_value(cast(GdaMetaStore*)this._cPtr, _attName, _attValue, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     return _retval;
   }
 
@@ -575,7 +575,7 @@ class MetaStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_store_undeclare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, &_err);
     if (_err)
-      throw new MetaStoreException(_err);
+      throw new MetaStoreException(_err, Yes.Take);
     return _retval;
   }
 
@@ -726,9 +726,9 @@ final class MetaStoreGidBuilder : MetaStoreGidBuilderImpl!MetaStoreGidBuilder
 
 class MetaStoreException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

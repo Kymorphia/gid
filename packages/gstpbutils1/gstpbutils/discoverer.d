@@ -126,7 +126,7 @@ class Discoverer : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gst_discoverer_new(timeout, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -149,7 +149,7 @@ class Discoverer : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gst_discoverer_discover_uri(cast(GstDiscoverer*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
     return _retval;
   }

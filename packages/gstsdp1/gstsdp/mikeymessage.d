@@ -207,7 +207,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     GError *_err;
     _cretval = gst_mikey_message_new_from_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, info, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -253,7 +253,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     GError *_err;
     _cretval = gst_mikey_message_new_from_data(_data, _size, info, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -557,7 +557,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     GError *_err;
     _cretval = gst_mikey_message_to_bytes(cast(GstMIKEYMessage*)this._cPtr, info, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

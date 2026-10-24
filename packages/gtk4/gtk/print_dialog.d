@@ -327,7 +327,7 @@ class PrintDialog : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_print_dialog_print_file_finish(cast(GtkPrintDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class PrintDialog : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_print_dialog_print_finish(cast(GtkPrintDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -482,7 +482,7 @@ class PrintDialog : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_print_dialog_setup_finish(cast(GtkPrintDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gtk.print_setup.PrintSetup(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

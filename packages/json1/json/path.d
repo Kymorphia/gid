@@ -213,7 +213,7 @@ class Path : gobject.object.ObjectWrap
     GError *_err;
     _cretval = json_path_query(_expression, root ? cast(JsonNode*)root._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -237,7 +237,7 @@ class Path : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_path_compile(cast(JsonPath*)this._cPtr, _expression, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

@@ -147,7 +147,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     GError *_err;
     _cretval = soup_multipart_input_stream_next_part(cast(SoupMultipartInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -199,7 +199,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     GError *_err;
     _cretval = soup_multipart_input_stream_next_part_finish(cast(SoupMultipartInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }

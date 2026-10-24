@@ -95,7 +95,7 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_address_enumerator_next(cast(GSocketAddressEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
@@ -152,7 +152,7 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_address_enumerator_next_finish(cast(GSocketAddressEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }

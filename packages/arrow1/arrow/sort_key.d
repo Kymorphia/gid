@@ -78,7 +78,7 @@ class SortKey : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_sort_key_new(_target, order, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

@@ -515,7 +515,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
     GError *_err;
     _retval = cast(bool)g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)this._cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext._cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -579,7 +579,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
     GError *_err;
     _retval = cast(bool)g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)this._cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext._cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

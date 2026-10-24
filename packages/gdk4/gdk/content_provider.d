@@ -147,7 +147,7 @@ class ContentProvider : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gdk_content_provider_get_value(cast(GdkContentProvider*)this._cPtr, &_value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
@@ -241,7 +241,7 @@ class ContentProvider : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gdk_content_provider_write_mime_type_finish(cast(GdkContentProvider*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

@@ -236,7 +236,7 @@ class Part : gmime.object.ObjectWrap
     GError *_err;
     _cretval = g_mime_part_openpgp_decrypt(cast(GMimePart*)this._cPtr, flags, _sessionKey, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.decrypt_result.DecryptResult)(cast(GMimeDecryptResult*)_cretval, Yes.Take);
     return _retval;
   }
@@ -262,7 +262,7 @@ class Part : gmime.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_mime_part_openpgp_encrypt(cast(GMimePart*)this._cPtr, sign, _userid, flags, _recipients, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Part : gmime.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_mime_part_openpgp_sign(cast(GMimePart*)this._cPtr, _userid, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class Part : gmime.object.ObjectWrap
     GError *_err;
     _cretval = g_mime_part_openpgp_verify(cast(GMimePart*)this._cPtr, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
     return _retval;
   }

@@ -313,7 +313,7 @@ class GLContext : gst.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_gl_context_create(cast(GstGLContext*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -341,7 +341,7 @@ class GLContext : gst.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_gl_context_fill_info(cast(GstGLContext*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

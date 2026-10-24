@@ -154,7 +154,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_byte(cast(GDataInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_int16(cast(GDataInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_int32(cast(GDataInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_int64(cast(GDataInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -317,7 +317,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_line_utf8(cast(GDataInputStream*)this._cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -340,7 +340,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_uint16(cast(GDataInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_uint32(cast(GDataInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _retval = g_data_input_stream_read_uint64(cast(GDataInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_until(cast(GDataInputStream*)this._cPtr, _stopChars, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -504,7 +504,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -544,7 +544,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)this._cPtr, _stopChars, _stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -622,7 +622,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     GError *_err;
     _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }

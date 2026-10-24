@@ -128,7 +128,7 @@ bool computeDmlStatements(gda.connection.Connection cnc, gda.statement.Statement
   GError *_err;
   _retval = cast(bool)gda_compute_dml_statements(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, selectStmt ? cast(GdaStatement*)selectStmt._cPtr(No.Dup) : null, requirePk, insertStmt ? cast(GdaStatement**)insertStmt._cPtr(Yes.Dup) : null, updateStmt ? cast(GdaStatement**)updateStmt._cPtr(Yes.Dup) : null, deleteStmt ? cast(GdaStatement**)deleteStmt._cPtr(Yes.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -456,7 +456,7 @@ bool rewriteStatementForNullParameters(gda.statement.Statement stmt, gda.set.Set
   GError *_err;
   _retval = cast(bool)gda_rewrite_statement_for_null_parameters(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, outStmt ? cast(GdaStatement**)outStmt._cPtr(Yes.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -518,7 +518,7 @@ gda.statement.Statement selectAlterSelectForEmpty(gda.statement.Statement stmt)
   GError *_err;
   _cretval = gda_select_alter_select_for_empty(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(cast(GdaStatement*)_cretval, Yes.Take);
   return _retval;
 }
@@ -959,7 +959,7 @@ bool utilityHolderLoadAttributes(gda.holder.Holder holder, libxml2.types.NodePtr
   GError *_err;
   _retval = cast(bool)gda_utility_holder_load_attributes(holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null, node, _sources, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 

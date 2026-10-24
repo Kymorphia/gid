@@ -170,7 +170,7 @@ class ThreadPool
     GError *_err;
     _retval = cast(bool)g_thread_pool_push(cast(GThreadPool*)this._cPtr, data, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class ThreadPool
     GError *_err;
     _retval = cast(bool)g_thread_pool_set_max_threads(cast(GThreadPool*)this._cPtr, maxThreads, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

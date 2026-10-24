@@ -55,7 +55,7 @@ class Codec : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_codec_new(type, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

@@ -197,7 +197,7 @@ template RetrievableT()
     GError *_err;
     _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -223,7 +223,7 @@ template RetrievableT()
     GError *_err;
     _cretval = secret_retrievable_retrieve_secret_sync(cast(SecretRetrievable*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

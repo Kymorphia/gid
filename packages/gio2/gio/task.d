@@ -861,7 +861,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     GError *_err;
     _retval = cast(bool)g_task_propagate_boolean(cast(GTask*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -882,7 +882,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     GError *_err;
     _retval = g_task_propagate_int(cast(GTask*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -903,7 +903,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     GError *_err;
     auto _retval = g_task_propagate_pointer(cast(GTask*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -931,7 +931,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     GError *_err;
     _retval = cast(bool)g_task_propagate_value(cast(GTask*)this._cPtr, &_value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }

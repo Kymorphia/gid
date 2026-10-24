@@ -149,7 +149,7 @@ class Set : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_set_new_from_spec_node(xmlSpec, &_err);
     if (_err)
-      throw new SetException(_err);
+      throw new SetException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.set.Set)(cast(GdaSet*)_cretval, Yes.Take);
     return _retval;
   }
@@ -170,7 +170,7 @@ class Set : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_set_new_from_spec_string(_xmlSpec, &_err);
     if (_err)
-      throw new SetException(_err);
+      throw new SetException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.set.Set)(cast(GdaSet*)_cretval, Yes.Take);
     return _retval;
   }
@@ -357,7 +357,7 @@ class Set : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_set_is_valid(cast(GdaSet*)this._cPtr, &_err);
     if (_err)
-      throw new SetException(_err);
+      throw new SetException(_err, Yes.Take);
     return _retval;
   }
 
@@ -829,9 +829,9 @@ final class SetGidBuilder : SetGidBuilderImpl!SetGidBuilder
 
 class SetException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

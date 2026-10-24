@@ -123,7 +123,7 @@ class PageSetup : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_page_setup_new_from_file(_fileName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
@@ -163,7 +163,7 @@ class PageSetup : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_page_setup_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
@@ -348,7 +348,7 @@ class PageSetup : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_page_setup_load_file(cast(GtkPageSetup*)this._cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ class PageSetup : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_page_setup_load_key_file(cast(GtkPageSetup*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class PageSetup : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_page_setup_to_file(cast(GtkPageSetup*)this._cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

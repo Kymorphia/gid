@@ -94,7 +94,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent._cPtr(No.Dup) : null, trusted, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gio.settings_schema_source.SettingsSchemaSource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

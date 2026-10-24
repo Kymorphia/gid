@@ -111,7 +111,7 @@ gobject.object.ObjectWrap constructGobject(gobject.types.GType gtype, string dat
   GError *_err;
   _cretval = json_construct_gobject(gtype, _data, size_t.init, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
   return _retval;
 }
@@ -136,7 +136,7 @@ json.node.Node fromString(string str)
   GError *_err;
   _cretval = json_from_string(_str, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -187,7 +187,7 @@ gobject.object.ObjectWrap gobjectFromData(gobject.types.GType gtype, string data
   GError *_err;
   _cretval = json_gobject_from_data(gtype, _data, _length, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
   return _retval;
 }
@@ -270,7 +270,7 @@ glib.variant.Variant gvariantDeserialize(json.node.Node jsonNode, string signatu
   GError *_err;
   _cretval = json_gvariant_deserialize(jsonNode ? cast(JsonNode*)jsonNode._cPtr(No.Dup) : null, _signature, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
   return _retval;
 }
@@ -306,7 +306,7 @@ glib.variant.Variant gvariantDeserializeData(string json, string signature = nul
   GError *_err;
   _cretval = json_gvariant_deserialize_data(_json, _length, _signature, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
   return _retval;
 }

@@ -715,7 +715,7 @@ string tldGetBaseDomain(string hostname)
   GError *_err;
   _cretval = soup_tld_get_base_domain(_hostname, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
@@ -821,7 +821,7 @@ bool websocketClientVerifyHandshake(soup.message.Message msg, gobject.type_class
   GError *_err;
   _retval = cast(bool)soup_websocket_client_verify_handshake(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _supportedExtensions, &_acceptedExtensions, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   acceptedExtensions = gListToD!(soup.websocket_extension.WebsocketExtension, GidOwnership.Full)(_acceptedExtensions);
   return _retval;
 }
@@ -871,7 +871,7 @@ bool websocketServerCheckHandshake(soup.server_message.ServerMessage msg, string
   GError *_err;
   _retval = cast(bool)soup_websocket_server_check_handshake(msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null, _origin, _protocols, _supportedExtensions, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 

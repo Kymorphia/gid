@@ -43,7 +43,7 @@ template DataModelT()
     GError *_err;
     _retval = cast(bool)gda_data_model_add_data_from_xml_node(cast(GdaDataModel*)this._cPtr, node, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ template DataModelT()
     GError *_err;
     _retval = gda_data_model_append_row(cast(GdaDataModel*)this._cPtr, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ template DataModelT()
     GError *_err;
     _retval = gda_data_model_append_values(cast(GdaDataModel*)this._cPtr, _values, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ template DataModelT()
     GError *_err;
     _cretval = gda_data_model_array_copy_model(cast(GdaDataModel*)this._cPtr, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model_array.DataModelArray)(cast(GdaDataModelArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -128,7 +128,7 @@ template DataModelT()
     GError *_err;
     _cretval = gda_data_model_array_copy_model_ext(cast(GdaDataModel*)this._cPtr, _ncols, _cols, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model_array.DataModelArray)(cast(GdaDataModelArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -293,7 +293,7 @@ template DataModelT()
     GError *_err;
     _retval = cast(bool)gda_data_model_export_to_file(cast(GdaDataModel*)this._cPtr, format, _file, _cols, _nbCols, _rows, _nbRows, options ? cast(GdaSet*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 
@@ -463,7 +463,7 @@ template DataModelT()
     GError *_err;
     _cretval = gda_data_model_get_typed_value_at(cast(GdaDataModel*)this._cPtr, col, row, expectedType, nullok, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -506,7 +506,7 @@ template DataModelT()
     GError *_err;
     _cretval = gda_data_model_get_value_at(cast(GdaDataModel*)this._cPtr, col, row, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -578,7 +578,7 @@ template DataModelT()
     GError *_err;
     _retval = cast(bool)gda_data_model_iter_set_value(cast(GdaDataModel*)this._cPtr, iter ? cast(GdaDataModelIter*)iter._cPtr(No.Dup) : null, col, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 
@@ -599,7 +599,7 @@ template DataModelT()
     GError *_err;
     _retval = cast(bool)gda_data_model_remove_row(cast(GdaDataModel*)this._cPtr, row, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 
@@ -725,7 +725,7 @@ template DataModelT()
     GError *_err;
     _retval = cast(bool)gda_data_model_set_value_at(cast(GdaDataModel*)this._cPtr, col, row, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 
@@ -753,7 +753,7 @@ template DataModelT()
     GError *_err;
     _retval = cast(bool)gda_data_model_set_values(cast(GdaDataModel*)this._cPtr, row, _values, &_err);
     if (_err)
-      throw new DataModelException(_err);
+      throw new DataModelException(_err, Yes.Take);
     return _retval;
   }
 

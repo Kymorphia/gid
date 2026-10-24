@@ -131,7 +131,7 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_sql_parser_parse_file_as_batch(cast(GdaSqlParser*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new SqlParserException(_err);
+      throw new SqlParserException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.batch.Batch)(cast(GdaBatch*)_cretval, Yes.Take);
     return _retval;
   }
@@ -158,7 +158,7 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_sql_parser_parse_string(cast(GdaSqlParser*)this._cPtr, _sql, &_remain, &_err);
     if (_err)
-      throw new SqlParserException(_err);
+      throw new SqlParserException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(cast(GdaStatement*)_cretval, Yes.Take);
     remain = _remain.fromCString!(Yes.Free);
     return _retval;
@@ -191,7 +191,7 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_sql_parser_parse_string_as_batch(cast(GdaSqlParser*)this._cPtr, _sql, &_remain, &_err);
     if (_err)
-      throw new SqlParserException(_err);
+      throw new SqlParserException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.batch.Batch)(cast(GdaBatch*)_cretval, Yes.Take);
     remain = _remain.fromCString!(Yes.Free);
     return _retval;
@@ -244,9 +244,9 @@ final class SqlParserGidBuilder : SqlParserGidBuilderImpl!SqlParserGidBuilder
 
 class SqlParserException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

@@ -348,7 +348,7 @@ class FileSaver : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_source_file_saver_save_finish(cast(GtkSourceFileSaver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

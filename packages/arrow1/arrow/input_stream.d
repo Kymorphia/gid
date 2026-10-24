@@ -70,7 +70,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _retval = cast(bool)garrow_input_stream_advance(cast(GArrowInputStream*)this._cPtr, nBytes, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _retval = cast(bool)garrow_input_stream_align(cast(GArrowInputStream*)this._cPtr, alignment, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _cretval = garrow_input_stream_read_record_batch(cast(GArrowInputStream*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
@@ -104,7 +104,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     GError *_err;
     _cretval = garrow_input_stream_read_tensor(cast(GArrowInputStream*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
     return _retval;
   }

@@ -229,7 +229,7 @@ class Parser : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, _length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class Parser : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_parser_load_from_file(cast(JsonParser*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class Parser : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_parser_load_from_mapped_file(cast(JsonParser*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Parser : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_parser_load_from_stream(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class Parser : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_parser_load_from_stream_finish(cast(JsonParser*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

@@ -132,7 +132,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
     GError *_err;
     _retval = cast(bool)g_socket_address_to_native(cast(GSocketAddress*)this._cPtr, dest, destlen, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

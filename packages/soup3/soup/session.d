@@ -752,7 +752,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)soup_session_preconnect_finish(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -812,7 +812,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _cretval = soup_session_send(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -838,7 +838,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _cretval = soup_session_send_and_read(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -897,7 +897,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _cretval = soup_session_send_and_read_finish(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -921,7 +921,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _retval = soup_session_send_and_splice(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, outStream ? cast(GOutputStream*)outStream._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -975,7 +975,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _retval = soup_session_send_and_splice_finish(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1034,7 +1034,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _cretval = soup_session_send_finish(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1235,7 +1235,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _cretval = soup_session_websocket_connect_finish(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(soup.websocket_connection.WebsocketConnection)(cast(SoupWebsocketConnection*)_cretval, Yes.Take);
     return _retval;
   }

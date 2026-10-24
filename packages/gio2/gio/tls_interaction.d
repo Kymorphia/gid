@@ -100,7 +100,7 @@ class TlsInteraction : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_interaction_ask_password(cast(GTlsInteraction*)this._cPtr, password ? cast(GTlsPassword*)password._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
@@ -170,7 +170,7 @@ class TlsInteraction : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_interaction_ask_password_finish(cast(GTlsInteraction*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
@@ -208,7 +208,7 @@ class TlsInteraction : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_interaction_invoke_ask_password(cast(GTlsInteraction*)this._cPtr, password ? cast(GTlsPassword*)password._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
@@ -248,7 +248,7 @@ class TlsInteraction : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_interaction_invoke_request_certificate(cast(GTlsInteraction*)this._cPtr, connection ? cast(GTlsConnection*)connection._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
@@ -284,7 +284,7 @@ class TlsInteraction : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_interaction_request_certificate(cast(GTlsInteraction*)this._cPtr, connection ? cast(GTlsConnection*)connection._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
@@ -349,7 +349,7 @@ class TlsInteraction : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_interaction_request_certificate_finish(cast(GTlsInteraction*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }

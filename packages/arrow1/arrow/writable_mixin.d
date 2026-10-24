@@ -25,7 +25,7 @@ template WritableT()
     GError *_err;
     _retval = cast(bool)garrow_writable_flush(cast(GArrowWritable*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -41,7 +41,7 @@ template WritableT()
     GError *_err;
     _retval = cast(bool)garrow_writable_write(cast(GArrowWritable*)this._cPtr, _data, _nBytes, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

@@ -205,7 +205,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_certificate_new_from_file(_file, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -234,7 +234,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_certificate_new_from_file_with_password(_file, _password, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -271,7 +271,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_certificate_new_from_files(_certFile, _keyFile, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -308,7 +308,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_certificate_new_from_pem(_data, _length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -353,7 +353,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_certificate_new_from_pkcs11_uris(_pkcs11Uri, _privateKeyPkcs11Uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -395,7 +395,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_certificate_new_from_pkcs12(_data, _length, _password, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -421,7 +421,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_certificate_list_new_from_file(_file, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.tls_certificate.TlsCertificate, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

@@ -178,7 +178,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
     GError *_err;
     auto _retval = gda_thread_wrapper_fetch_result(cast(GdaThreadWrapper*)this._cPtr, mayLock, expId, &_err);
     if (_err)
-      throw new ThreadWrapperException(_err);
+      throw new ThreadWrapperException(_err, Yes.Take);
     return _retval;
   }
 
@@ -286,9 +286,9 @@ final class ThreadWrapperGidBuilder : ThreadWrapperGidBuilderImpl!ThreadWrapperG
 
 class ThreadWrapperException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

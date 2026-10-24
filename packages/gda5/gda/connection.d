@@ -276,7 +276,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_new_from_dsn(_dsn, _authString, options, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.connection.Connection)(cast(GdaConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -302,7 +302,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_new_from_string(_providerName, _cncString, _authString, options, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.connection.Connection)(cast(GdaConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -353,7 +353,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_open_from_dsn(_dsn, _authString, options, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.connection.Connection)(cast(GdaConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -414,7 +414,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_open_from_string(_providerName, _cncString, _authString, options, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.connection.Connection)(cast(GdaConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -538,7 +538,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_add_savepoint(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -558,7 +558,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_async_cancel(cast(GdaConnection*)this._cPtr, taskId, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -584,7 +584,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_async_fetch_result(cast(GdaConnection*)this._cPtr, taskId, &_lastInsertRow, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     lastInsertRow = new gda.set.Set(cast(void*)_lastInsertRow, Yes.Take);
     return _retval;
@@ -612,7 +612,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_batch_execute(cast(GdaConnection*)this._cPtr, batch ? cast(GdaBatch*)batch._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, modelUsage, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gSListToD!(gobject.object.ObjectWrap, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -639,7 +639,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_begin_transaction(cast(GdaConnection*)this._cPtr, _name, level, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -686,7 +686,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_commit_transaction(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -708,7 +708,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_create_operation(cast(GdaConnection*)this._cPtr, type, options ? cast(GdaSet*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.server_operation.ServerOperation)(cast(GdaServerOperation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -761,7 +761,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_delete_row_from_table(cast(GdaConnection*)this._cPtr, _table, _conditionColumnName, conditionValue ? cast(GValue*)conditionValue._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -780,7 +780,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_delete_savepoint(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -800,7 +800,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = gda_connection_execute_non_select_command(cast(GdaConnection*)this._cPtr, _sql, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -819,7 +819,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_execute_select_command(cast(GdaConnection*)this._cPtr, _sql, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model.DataModel)(cast(GdaDataModel*)_cretval, Yes.Take);
     return _retval;
   }
@@ -869,7 +869,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_get_date_format(cast(GdaConnection*)this._cPtr, &outFirst, &outSecond, &outThird, cast(char*)&outSep, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -927,7 +927,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_get_meta_store_data_v(cast(GdaConnection*)this._cPtr, metaType, _filters, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model.DataModel)(cast(GdaDataModel*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1025,7 +1025,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_insert_row_into_table_v(cast(GdaConnection*)this._cPtr, _table, _colNames, _values, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1051,7 +1051,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_open(cast(GdaConnection*)this._cPtr, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1072,7 +1072,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_parse_sql_string(cast(GdaConnection*)this._cPtr, _sql, &_params, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(cast(GdaStatement*)_cretval, Yes.Take);
     params = new gda.set.Set(cast(void*)_params, Yes.Take);
     return _retval;
@@ -1094,7 +1094,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_perform_operation(cast(GdaConnection*)this._cPtr, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1160,7 +1160,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_rollback_savepoint(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1182,7 +1182,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_rollback_transaction(cast(GdaConnection*)this._cPtr, _name, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1257,7 +1257,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_statement_execute(cast(GdaConnection*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, modelUsage, &_lastInsertRow, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     lastInsertRow = new gda.set.Set(cast(void*)_lastInsertRow, Yes.Take);
     return _retval;
@@ -1290,7 +1290,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = gda_connection_statement_execute_non_select(cast(GdaConnection*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, &_lastInsertRow, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     lastInsertRow = new gda.set.Set(cast(void*)_lastInsertRow, Yes.Take);
     return _retval;
   }
@@ -1320,7 +1320,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_statement_execute_select(cast(GdaConnection*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.data_model.DataModel)(cast(GdaDataModel*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1348,7 +1348,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_statement_prepare(cast(GdaConnection*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1370,7 +1370,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _cretval = gda_connection_statement_to_sql(cast(GdaConnection*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, flags, &_paramsUsed, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     paramsUsed = gSListToD!(gda.holder.Holder, GidOwnership.Container)(_paramsUsed);
     return _retval;
@@ -1442,7 +1442,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_update_meta_store(cast(GdaConnection*)this._cPtr, context ? cast(GdaMetaContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1475,7 +1475,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_connection_update_row_in_table_v(cast(GdaConnection*)this._cPtr, _table, _conditionColumnName, conditionValue ? cast(GValue*)conditionValue._cPtr(No.Dup) : null, _colNames, _values, &_err);
     if (_err)
-      throw new ConnectionException(_err);
+      throw new ConnectionException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1891,9 +1891,9 @@ final class ConnectionGidBuilder : ConnectionGidBuilderImpl!ConnectionGidBuilder
 
 class ConnectionException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

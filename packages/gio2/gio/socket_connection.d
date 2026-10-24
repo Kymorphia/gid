@@ -131,7 +131,7 @@ class SocketConnection : gio.iostream.IOStream
     GError *_err;
     _retval = cast(bool)g_socket_connection_connect(cast(GSocketConnection*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class SocketConnection : gio.iostream.IOStream
     GError *_err;
     _retval = cast(bool)g_socket_connection_connect_finish(cast(GSocketConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class SocketConnection : gio.iostream.IOStream
     GError *_err;
     _cretval = g_socket_connection_get_local_address(cast(GSocketConnection*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
@@ -227,7 +227,7 @@ class SocketConnection : gio.iostream.IOStream
     GError *_err;
     _cretval = g_socket_connection_get_remote_address(cast(GSocketConnection*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }

@@ -60,7 +60,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     GError *_err;
     _cretval = gadataset_hive_partitioning_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetHivePartitioningOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

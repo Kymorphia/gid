@@ -1041,7 +1041,7 @@ bool showUriFullFinish(gtk.window.Window parent, gio.async_result.AsyncResult re
   GError *_err;
   _retval = cast(bool)gtk_show_uri_full_finish(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 

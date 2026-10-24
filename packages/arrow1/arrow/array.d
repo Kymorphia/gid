@@ -99,7 +99,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_import(cAbiArray, dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -111,7 +111,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_cast(cast(GArrowArray*)this._cPtr, targetDataType ? cast(GArrowDataType*)targetDataType._cPtr(No.Dup) : null, options ? cast(GArrowCastOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -125,7 +125,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_concatenate(cast(GArrowArray*)this._cPtr, _otherArrays, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -137,7 +137,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _retval = garrow_array_count(cast(GArrowArray*)this._cPtr, options ? cast(GArrowCountOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_count_values(cast(GArrowArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.struct_array.StructArray)(cast(GArrowStructArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -160,7 +160,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_dictionary_encode(cast(GArrowArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.dictionary_array.DictionaryArray)(cast(GArrowDictionaryArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -213,7 +213,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_array_export(cast(GArrowArray*)this._cPtr, cast(void**)&cAbiArray, cast(void**)&cAbiSchema, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_filter(cast(GArrowArray*)this._cPtr, filter ? cast(GArrowBooleanArray*)filter._cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -287,7 +287,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_is_in(cast(GArrowArray*)this._cPtr, right ? cast(GArrowArray*)right._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -299,7 +299,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_is_in_chunked_array(cast(GArrowArray*)this._cPtr, right ? cast(GArrowChunkedArray*)right._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -327,7 +327,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_run_end_encode(cast(GArrowArray*)this._cPtr, options ? cast(GArrowRunEndEncodeOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.run_end_encoded_array.RunEndEncodedArray)(cast(GArrowRunEndEncodedArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -348,7 +348,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_sort_indices(cast(GArrowArray*)this._cPtr, order, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
     return _retval;
   }
@@ -360,7 +360,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_sort_to_indices(cast(GArrowArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
     return _retval;
   }
@@ -372,7 +372,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_take(cast(GArrowArray*)this._cPtr, indices ? cast(GArrowArray*)indices._cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -384,7 +384,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_take_chunked_array(cast(GArrowArray*)this._cPtr, indices ? cast(GArrowChunkedArray*)indices._cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -396,7 +396,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_to_string(cast(GArrowArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -408,7 +408,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_unique(cast(GArrowArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -420,7 +420,7 @@ class Array : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_view(cast(GArrowArray*)this._cPtr, returnType ? cast(GArrowDataType*)returnType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }

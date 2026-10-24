@@ -66,7 +66,7 @@ class Decimal256 : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_decimal256_new_string(_data, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
     return _retval;
   }
@@ -96,7 +96,7 @@ class Decimal256 : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_decimal256_divide(cast(GArrowDecimal256*)this._cPtr, right ? cast(GArrowDecimal256*)right._cPtr(No.Dup) : null, &_remainder, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
     remainder = new arrow.decimal256.Decimal256(cast(void*)_remainder, Yes.Take);
     return _retval;
@@ -183,7 +183,7 @@ class Decimal256 : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_decimal256_rescale(cast(GArrowDecimal256*)this._cPtr, originalScale, newScale, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
     return _retval;
   }

@@ -94,7 +94,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
@@ -140,7 +140,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
@@ -184,7 +184,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)vte_pty_get_size(cast(VtePty*)this._cPtr, cast(int*)&rows, cast(int*)&columns, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)vte_pty_set_size(cast(VtePty*)this._cPtr, rows, columns, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)vte_pty_set_utf8(cast(VtePty*)this._cPtr, utf8, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)vte_pty_spawn_finish(cast(VtePty*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

@@ -57,7 +57,7 @@ class RecordBatchWriter : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_record_batch_writer_close(cast(GArrowRecordBatchWriter*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class RecordBatchWriter : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_record_batch_writer_write_record_batch(cast(GArrowRecordBatchWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class RecordBatchWriter : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_record_batch_writer_write_table(cast(GArrowRecordBatchWriter*)this._cPtr, table ? cast(GArrowTable*)table._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

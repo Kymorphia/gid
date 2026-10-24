@@ -55,7 +55,7 @@ class DataType : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_data_type_import(cAbiSchema, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
@@ -74,7 +74,7 @@ class DataType : gobject.object.ObjectWrap
     GError *_err;
     auto _retval = garrow_data_type_export(cast(GArrowDataType*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

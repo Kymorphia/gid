@@ -135,7 +135,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
     GError *_err;
     _cretval = secret_prompt_perform_finish(cast(SecretPrompt*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -170,7 +170,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
     GError *_err;
     _cretval = secret_prompt_perform_sync(cast(SecretPrompt*)this._cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -207,7 +207,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
     GError *_err;
     _cretval = secret_prompt_run(cast(SecretPrompt*)this._cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -753,7 +753,7 @@ class Window : gtk.bin.Bin
     GError *_err;
     _retval = cast(bool)gtk_window_set_default_icon_from_file(_filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -2308,7 +2308,7 @@ class Window : gtk.bin.Bin
     GError *_err;
     _retval = cast(bool)gtk_window_set_icon_from_file(cast(GtkWindow*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

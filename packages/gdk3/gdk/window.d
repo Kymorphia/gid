@@ -474,7 +474,7 @@ class Window : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_window_create_gl_context(cast(GdkWindow*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }

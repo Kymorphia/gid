@@ -67,7 +67,7 @@ class Dir : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_dir_open(_path, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.dir.Dir(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -136,7 +136,7 @@ class Dir : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_dir_make_tmp(_tmpl, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }

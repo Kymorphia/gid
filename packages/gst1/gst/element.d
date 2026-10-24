@@ -134,7 +134,7 @@ class Element : gst.object.ObjectWrap
     GError *_err;
     _cretval = gst_element_make_from_uri(type, _uri, _elementname, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }

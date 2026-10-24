@@ -96,7 +96,7 @@ class DBusMessage : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_dbus_message_new_from_blob(_blob, _blobLen, capabilities, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
@@ -165,7 +165,7 @@ class DBusMessage : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_dbus_message_bytes_needed(_blob, _blobLen, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class DBusMessage : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_dbus_message_copy(cast(GDBusMessage*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
@@ -768,7 +768,7 @@ class DBusMessage : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_dbus_message_to_blob(cast(GDBusMessage*)this._cPtr, &_cretlength, capabilities, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     ubyte[] _retval;
 
     if (_cretval)
@@ -796,7 +796,7 @@ class DBusMessage : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_dbus_message_to_gerror(cast(GDBusMessage*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

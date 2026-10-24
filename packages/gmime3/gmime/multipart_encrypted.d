@@ -91,7 +91,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
     GError *_err;
     _cretval = g_mime_multipart_encrypted_encrypt(ctx ? cast(GMimeCryptoContext*)ctx._cPtr(No.Dup) : null, entity ? cast(GMimeObject*)entity._cPtr(No.Dup) : null, sign, _userid, flags, _recipients, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.multipart_encrypted.MultipartEncrypted)(cast(GMimeMultipartEncrypted*)_cretval, Yes.Take);
     return _retval;
   }
@@ -127,7 +127,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
     GError *_err;
     _cretval = g_mime_multipart_encrypted_decrypt(cast(GMimeMultipartEncrypted*)this._cPtr, flags, _sessionKey, &_result, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(GMimeObject*)_cretval, Yes.Take);
     result = new gmime.decrypt_result.DecryptResult(cast(void*)_result, Yes.Take);
     return _retval;

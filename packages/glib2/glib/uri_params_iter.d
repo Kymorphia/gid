@@ -122,7 +122,7 @@ class UriParamsIter
     GError *_err;
     _retval = cast(bool)g_uri_params_iter_next(cast(GUriParamsIter*)this._cPtr, &_attribute, &_value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     attribute = _attribute.fromCString!(Yes.Free);
     value = _value.fromCString!(Yes.Free);
     return _retval;

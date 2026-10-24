@@ -164,7 +164,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_append_to(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -225,7 +225,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_append_to_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -255,7 +255,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_build_attribute_list_for_copy(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -333,7 +333,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_copy(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_copy_attributes(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -439,7 +439,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_copy_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -479,7 +479,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_create(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -540,7 +540,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_create_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -585,7 +585,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_create_readwrite(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -646,7 +646,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_create_readwrite_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -686,7 +686,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_delete(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -737,7 +737,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_delete_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -822,7 +822,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_eject_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -882,7 +882,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_eject_mountable_with_operation_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -929,7 +929,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_enumerate_children(cast(GFile*)this._cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
@@ -994,7 +994,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_enumerate_children_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1044,7 +1044,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_find_enclosing_mount(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1103,7 +1103,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_find_enclosing_mount_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1181,7 +1181,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_get_child_for_display_name(cast(GFile*)this._cPtr, _displayName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1439,7 +1439,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_load_bytes(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_etagOut, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     etagOut = _etagOut.fromCString!(Yes.Free);
     return _retval;
@@ -1508,7 +1508,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_load_bytes_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_etagOut, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     etagOut = _etagOut.fromCString!(Yes.Free);
     return _retval;
@@ -1542,7 +1542,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_load_contents(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
@@ -1615,7 +1615,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_load_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
@@ -1648,7 +1648,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_load_partial_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     gFree(cast(void*)_contents);
@@ -1684,7 +1684,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_make_directory(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1734,7 +1734,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_make_directory_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1766,7 +1766,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_make_directory_with_parents(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1793,7 +1793,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_make_symbolic_link(cast(GFile*)this._cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1847,7 +1847,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_make_symbolic_link_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1903,7 +1903,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_measure_disk_usage(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1927,7 +1927,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_measure_disk_usage_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1954,7 +1954,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_monitor(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1987,7 +1987,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_monitor_directory(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2023,7 +2023,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_monitor_file(cast(GFile*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2086,7 +2086,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_mount_enclosing_volume_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -2151,7 +2151,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_mount_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2222,7 +2222,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_move(cast(GFile*)this._cPtr, destination ? cast(GFile*)(cast(gobject.object.ObjectWrap)destination)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -2298,7 +2298,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_move_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -2332,7 +2332,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_open_readwrite(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2391,7 +2391,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_open_readwrite_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2470,7 +2470,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_poll_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -2495,7 +2495,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_default_handler(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2545,7 +2545,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_default_handler_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2651,7 +2651,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_filesystem_info(cast(GFile*)this._cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2716,7 +2716,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_filesystem_info_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2769,7 +2769,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_info(cast(GFile*)this._cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2833,7 +2833,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_info_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2864,7 +2864,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_settable_attributes(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -2892,7 +2892,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_query_writable_namespaces(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -2922,7 +2922,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_read(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2981,7 +2981,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_read_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -3047,7 +3047,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_replace(cast(GFile*)this._cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -3141,7 +3141,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_replace_contents(cast(GFile*)this._cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     newEtag = _newEtag.fromCString!(Yes.Free);
     return _retval;
   }
@@ -3262,7 +3262,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_replace_contents_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_newEtag, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     newEtag = _newEtag.fromCString!(Yes.Free);
     return _retval;
   }
@@ -3283,7 +3283,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_replace_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -3318,7 +3318,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_replace_readwrite(cast(GFile*)this._cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -3384,7 +3384,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_replace_readwrite_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -3438,7 +3438,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attribute(cast(GFile*)this._cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3469,7 +3469,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_byte_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3498,7 +3498,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_int32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3526,7 +3526,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_int64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3555,7 +3555,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_string(cast(GFile*)this._cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3584,7 +3584,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_uint32(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3613,7 +3613,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attribute_uint64(cast(GFile*)this._cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3673,7 +3673,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attributes_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_info, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     info = new gio.file_info.FileInfo(cast(void*)_info, Yes.Take);
     return _retval;
   }
@@ -3706,7 +3706,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_set_attributes_from_info(cast(GFile*)this._cPtr, info ? cast(GFileInfo*)info._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3743,7 +3743,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_set_display_name(cast(GFile*)this._cPtr, _displayName, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
@@ -3804,7 +3804,7 @@ template FileT()
     GError *_err;
     _cretval = g_file_set_display_name_finish(cast(GFile*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
@@ -3867,7 +3867,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_start_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3930,7 +3930,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_stop_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3972,7 +3972,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_trash(cast(GFile*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -4022,7 +4022,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_trash_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -4088,7 +4088,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_unmount_mountable_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -4152,7 +4152,7 @@ template FileT()
     GError *_err;
     _retval = cast(bool)g_file_unmount_mountable_with_operation_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

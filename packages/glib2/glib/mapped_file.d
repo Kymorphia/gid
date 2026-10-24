@@ -82,7 +82,7 @@ class MappedFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_mapped_file_new(_filename, writable, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -112,7 +112,7 @@ class MappedFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_mapped_file_new_from_fd(fd, writable, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.mapped_file.MappedFile(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

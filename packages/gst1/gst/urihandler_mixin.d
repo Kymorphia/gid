@@ -92,7 +92,7 @@ template URIHandlerT()
     GError *_err;
     _retval = cast(bool)gst_uri_handler_set_uri(cast(GstURIHandler*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

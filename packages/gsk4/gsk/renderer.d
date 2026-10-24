@@ -153,7 +153,7 @@ class Renderer : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gsk_renderer_realize(cast(GskRenderer*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Renderer : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gsk_renderer_realize_for_display(cast(GskRenderer*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

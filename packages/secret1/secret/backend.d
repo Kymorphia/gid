@@ -86,7 +86,7 @@ interface Backend
     GError *_err;
     _cretval = secret_backend_get_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(secret.backend.Backend)(cast(SecretBackend*)_cretval, Yes.Take);
     return _retval;
   }

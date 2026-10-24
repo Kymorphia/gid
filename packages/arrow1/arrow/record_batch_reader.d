@@ -60,7 +60,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_reader_new(_recordBatches, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -71,7 +71,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_reader_import(cAbiArrayStream, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
@@ -82,7 +82,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     auto _retval = garrow_record_batch_reader_export(cast(GArrowRecordBatchReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_reader_get_next_record_batch(cast(GArrowRecordBatchReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
@@ -123,7 +123,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_reader_read_all(cast(GArrowRecordBatchReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
@@ -135,7 +135,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_reader_read_next(cast(GArrowRecordBatchReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
@@ -147,7 +147,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_reader_read_next_record_batch(cast(GArrowRecordBatchReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }

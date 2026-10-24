@@ -67,6 +67,7 @@
 //!set function[log_writer_journald][ignore] 1
 //!set function[log_writer_standard_streams][ignore] 1
 //!set function[log_writer_syslog][ignore] 1
+//!set function[propagate_error][ignore] 1
 //!set function[strfreev][ignore] 0
 //!set function[strlcat][ignore] 1
 //!set function[strlcpy][ignore] 1

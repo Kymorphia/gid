@@ -161,7 +161,7 @@ template AsyncResultT()
     GError *_err;
     _retval = cast(bool)g_async_result_legacy_propagate_error(cast(GAsyncResult*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

@@ -77,7 +77,7 @@ struct NetTimePacket
     GError *_err;
     _retval = cast(bool)gst_net_time_packet_send(cast(const(GstNetTimePacket)*)&this, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, destAddress ? cast(GSocketAddress*)destAddress._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ struct NetTimePacket
     GError *_err;
     _cretval = gst_net_time_packet_receive(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, &_srcAddress, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gstnet.net_time_packet.NetTimePacket _retval;
     if (_cretval)
       _retval = *cast(gstnet.net_time_packet.NetTimePacket*)_cretval;

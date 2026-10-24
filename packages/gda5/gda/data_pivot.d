@@ -119,7 +119,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _retval = cast(bool)gda_data_pivot_add_data(cast(GdaDataPivot*)this._cPtr, aggregateType, _field, _alias_, &_err);
     if (_err)
-      throw new DataPivotException(_err);
+      throw new DataPivotException(_err, Yes.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _retval = cast(bool)gda_data_pivot_add_field(cast(GdaDataPivot*)this._cPtr, fieldType, _field, _alias_, &_err);
     if (_err)
-      throw new DataPivotException(_err);
+      throw new DataPivotException(_err, Yes.Take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _retval = cast(bool)gda_data_pivot_populate(cast(GdaDataPivot*)this._cPtr, &_err);
     if (_err)
-      throw new DataPivotException(_err);
+      throw new DataPivotException(_err, Yes.Take);
     return _retval;
   }
 }
@@ -202,9 +202,9 @@ final class DataPivotGidBuilder : DataPivotGidBuilderImpl!DataPivotGidBuilder
 
 class DataPivotException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

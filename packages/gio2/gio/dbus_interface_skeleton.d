@@ -101,7 +101,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
     GError *_err;
     _retval = cast(bool)g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

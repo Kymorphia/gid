@@ -206,7 +206,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _retval = cast(bool)gda_data_proxy_apply_all_changes(cast(GdaDataProxy*)this._cPtr, &_err);
     if (_err)
-      throw new DataProxyException(_err);
+      throw new DataProxyException(_err, Yes.Take);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _retval = cast(bool)gda_data_proxy_apply_row_changes(cast(GdaDataProxy*)this._cPtr, proxyRow, &_err);
     if (_err)
-      throw new DataProxyException(_err);
+      throw new DataProxyException(_err, Yes.Take);
     return _retval;
   }
 
@@ -525,7 +525,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _retval = cast(bool)gda_data_proxy_set_filter_expr(cast(GdaDataProxy*)this._cPtr, _filterExpr, &_err);
     if (_err)
-      throw new DataProxyException(_err);
+      throw new DataProxyException(_err, Yes.Take);
     return _retval;
   }
 
@@ -543,7 +543,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _retval = cast(bool)gda_data_proxy_set_ordering_column(cast(GdaDataProxy*)this._cPtr, col, &_err);
     if (_err)
-      throw new DataProxyException(_err);
+      throw new DataProxyException(_err, Yes.Take);
     return _retval;
   }
 
@@ -981,9 +981,9 @@ final class DataProxyGidBuilder : DataProxyGidBuilderImpl!DataProxyGidBuilder
 
 class DataProxyException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

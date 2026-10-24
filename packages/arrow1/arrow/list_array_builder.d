@@ -57,7 +57,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _cretval = garrow_list_array_builder_new(dataType ? cast(GArrowListDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -68,7 +68,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = cast(bool)garrow_list_array_builder_append(cast(GArrowListArrayBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = cast(bool)garrow_list_array_builder_append_value(cast(GArrowListArrayBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

@@ -193,7 +193,7 @@ class ColorDialog : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gdk.rgba.RGBA _retval;
     if (_cretval)
       _retval = *cast(gdk.rgba.RGBA*)_cretval;

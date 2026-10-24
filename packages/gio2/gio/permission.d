@@ -124,7 +124,7 @@ class Permission : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_permission_acquire(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class Permission : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_permission_acquire_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class Permission : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_permission_release(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Permission : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_permission_release_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

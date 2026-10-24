@@ -64,7 +64,7 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = cast(bool)garrow_month_day_nano_interval_array_builder_append_value(cast(GArrowMonthDayNanoIntervalArrayBuilder*)this._cPtr, value ? cast(GArrowMonthDayNano*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = cast(bool)garrow_month_day_nano_interval_array_builder_append_values(cast(GArrowMonthDayNanoIntervalArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

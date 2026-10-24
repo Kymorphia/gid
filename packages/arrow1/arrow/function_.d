@@ -89,7 +89,7 @@ class Function : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_function_execute(cast(GArrowFunction*)this._cPtr, _args, options ? cast(GArrowFunctionOptions*)options._cPtr(No.Dup) : null, context ? cast(GArrowExecuteContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.datum.Datum)(cast(GArrowDatum*)_cretval, Yes.Take);
     return _retval;
   }

@@ -205,7 +205,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
     GError *_err;
     _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

@@ -59,7 +59,7 @@ class ScannerBuilder : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gadataset_scanner_builder_new(dataset ? cast(GADatasetDataset*)dataset._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -79,7 +79,7 @@ class ScannerBuilder : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gadataset_scanner_builder_finish(cast(GADatasetScannerBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.scanner.Scanner)(cast(GADatasetScanner*)_cretval, Yes.Take);
     return _retval;
   }
@@ -91,7 +91,7 @@ class ScannerBuilder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gadataset_scanner_builder_set_filter(cast(GADatasetScannerBuilder*)this._cPtr, expression ? cast(GArrowExpression*)expression._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

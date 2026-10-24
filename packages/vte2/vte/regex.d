@@ -73,7 +73,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_match(_pattern, _patternLength, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -112,7 +112,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_match_full(_pattern, _patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -145,7 +145,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_search(_pattern, _patternLength, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -183,7 +183,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_new_for_search_full(_pattern, _patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -203,7 +203,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)vte_regex_jit(cast(VteRegex*)this._cPtr, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class Regex : gobject.boxed.Boxed
     GError *_err;
     _cretval = vte_regex_substitute(cast(VteRegex*)this._cPtr, _subject, _replacement, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }

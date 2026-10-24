@@ -309,7 +309,7 @@ class Server : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)soup_server_accept_iostream(cast(SoupServer*)this._cPtr, stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, localAddr ? cast(GSocketAddress*)localAddr._cPtr(No.Dup) : null, remoteAddr ? cast(GSocketAddress*)remoteAddr._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -674,7 +674,7 @@ class Server : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)soup_server_listen(cast(SoupServer*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, options, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -704,7 +704,7 @@ class Server : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)soup_server_listen_all(cast(SoupServer*)this._cPtr, port, options, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -732,7 +732,7 @@ class Server : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)soup_server_listen_local(cast(SoupServer*)this._cPtr, port, options, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -754,7 +754,7 @@ class Server : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)soup_server_listen_socket(cast(SoupServer*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, options, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

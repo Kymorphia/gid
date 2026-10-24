@@ -107,7 +107,7 @@ class ServerProvider : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_server_provider_create_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, type, options ? cast(GdaSet*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ServerProviderException(_err);
+      throw new ServerProviderException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.server_operation.ServerOperation)(cast(GdaServerOperation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -338,7 +338,7 @@ class ServerProvider : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_provider_perform_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ServerProviderException(_err);
+      throw new ServerProviderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class ServerProvider : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_provider_perform_operation_default(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ServerProviderException(_err);
+      throw new ServerProviderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class ServerProvider : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_server_provider_render_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, op ? cast(GdaServerOperation*)op._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ServerProviderException(_err);
+      throw new ServerProviderException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -505,9 +505,9 @@ final class ServerProviderGidBuilder : ServerProviderGidBuilderImpl!ServerProvid
 
 class ServerProviderException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

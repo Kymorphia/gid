@@ -55,7 +55,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     GError *_err;
     _cretval = garrow_resizable_buffer_new(initialSize, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -66,7 +66,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     GError *_err;
     _retval = cast(bool)garrow_resizable_buffer_reserve(cast(GArrowResizableBuffer*)this._cPtr, newCapacity, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     GError *_err;
     _retval = cast(bool)garrow_resizable_buffer_resize(cast(GArrowResizableBuffer*)this._cPtr, newSize, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

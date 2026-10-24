@@ -73,7 +73,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _cretval = garrow_hash_join_node_options_new(type, _leftKeys, _nLeftKeys, _rightKeys, _nRightKeys, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -93,7 +93,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _retval = cast(bool)garrow_hash_join_node_options_set_left_outputs(cast(GArrowHashJoinNodeOptions*)this._cPtr, _outputs, _nOutputs, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _retval = cast(bool)garrow_hash_join_node_options_set_right_outputs(cast(GArrowHashJoinNodeOptions*)this._cPtr, _outputs, _nOutputs, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

@@ -378,7 +378,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_builder_add_from_file(cast(GtkBuilder*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -408,7 +408,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_builder_add_from_resource(cast(GtkBuilder*)this._cPtr, _resourcePath, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_builder_add_objects_from_file(cast(GtkBuilder*)this._cPtr, _filename, _objectIds, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -514,7 +514,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_builder_add_objects_from_resource(cast(GtkBuilder*)this._cPtr, _resourcePath, _objectIds, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -553,7 +553,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, _objectIds, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -657,7 +657,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, templateType, _buffer, _length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -801,7 +801,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_builder_value_from_string(cast(GtkBuilder*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _string_, &_value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
@@ -830,7 +830,7 @@ class Builder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_builder_value_from_string_type(cast(GtkBuilder*)this._cPtr, type, _string_, &_value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }

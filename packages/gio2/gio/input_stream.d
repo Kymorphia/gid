@@ -109,7 +109,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_input_stream_close(cast(GInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_input_stream_close_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_input_stream_read(cast(GInputStream*)this._cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_input_stream_read_all(cast(GInputStream*)this._cPtr, buffer.ptr, _count, cast(size_t*)&bytesRead, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_input_stream_read_all_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&bytesRead, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_input_stream_read_bytes(cast(GInputStream*)this._cPtr, count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -505,7 +505,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_input_stream_read_bytes_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -524,7 +524,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_input_stream_read_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -541,7 +541,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_input_stream_set_pending(cast(GInputStream*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -573,7 +573,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_input_stream_skip(cast(GInputStream*)this._cPtr, count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ class InputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_input_stream_skip_finish(cast(GInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

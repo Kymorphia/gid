@@ -116,7 +116,7 @@ class DataComparator : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_data_comparator_compute_diff(cast(GdaDataComparator*)this._cPtr, &_err);
     if (_err)
-      throw new DataComparatorException(_err);
+      throw new DataComparatorException(_err, Yes.Take);
     return _retval;
   }
 
@@ -250,9 +250,9 @@ final class DataComparatorGidBuilder : DataComparatorGidBuilderImpl!DataComparat
 
 class DataComparatorException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

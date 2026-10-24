@@ -104,7 +104,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_new_file(_filename, _mode, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.iochannel.IOChannel(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -170,7 +170,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_flush(cast(GIOChannel*)this._cPtr, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -331,7 +331,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_read_chars(cast(GIOChannel*)this._cPtr, buf.ptr, _count, cast(size_t*)&bytesRead, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -359,7 +359,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_read_line(cast(GIOChannel*)this._cPtr, &_strReturn, cast(size_t*)&length, cast(size_t*)&terminatorPos, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     strReturn = _strReturn.fromCString!(Yes.Free);
     return _retval;
@@ -382,7 +382,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_read_line_string(cast(GIOChannel*)this._cPtr, buffer ? cast(GString*)buffer._cPtr(No.Dup) : null, cast(size_t*)&terminatorPos, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -408,7 +408,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_read_to_end(cast(GIOChannel*)this._cPtr, &_strReturn, &_length, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     strReturn.length = _length;
     strReturn[0 .. $] = (cast(ubyte*)_strReturn)[0 .. _length];
@@ -431,7 +431,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_read_unichar(cast(GIOChannel*)this._cPtr, cast(dchar*)&thechar, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -476,7 +476,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_seek_position(cast(GIOChannel*)this._cPtr, offset, type, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -586,7 +586,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_set_encoding(cast(GIOChannel*)this._cPtr, _encoding, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -605,7 +605,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_set_flags(cast(GIOChannel*)this._cPtr, flags, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -646,7 +646,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_shutdown(cast(GIOChannel*)this._cPtr, flush, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -717,7 +717,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_write_chars(cast(GIOChannel*)this._cPtr, _buf, _count, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -737,7 +737,7 @@ class IOChannel : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_io_channel_write_unichar(cast(GIOChannel*)this._cPtr, thechar, &_err);
     if (_err)
-      throw new IOChannelException(_err);
+      throw new IOChannelException(_err, Yes.Take);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     return _retval;
   }
@@ -769,9 +769,9 @@ class IOChannel : gobject.boxed.Boxed
 
 class IOChannelException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

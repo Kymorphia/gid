@@ -113,7 +113,7 @@ class FileMetadata : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gparquet_file_metadata_get_row_group(cast(GParquetFileMetadata*)this._cPtr, index, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
     return _retval;
   }

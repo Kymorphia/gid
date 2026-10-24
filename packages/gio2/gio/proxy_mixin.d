@@ -48,7 +48,7 @@ template ProxyT()
     GError *_err;
     _cretval = g_proxy_connect(cast(GProxy*)this._cPtr, connection ? cast(GIOStream*)connection._cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -97,7 +97,7 @@ template ProxyT()
     GError *_err;
     _cretval = g_proxy_connect_finish(cast(GProxy*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }

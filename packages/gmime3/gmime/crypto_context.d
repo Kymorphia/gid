@@ -105,7 +105,7 @@ class CryptoContext : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_mime_crypto_context_decrypt(cast(GMimeCryptoContext*)this._cPtr, flags, _sessionKey, istream ? cast(GMimeStream*)istream._cPtr(No.Dup) : null, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.decrypt_result.DecryptResult)(cast(GMimeDecryptResult*)_cretval, Yes.Take);
     return _retval;
   }
@@ -164,7 +164,7 @@ class CryptoContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_mime_crypto_context_encrypt(cast(GMimeCryptoContext*)this._cPtr, sign, _userid, flags, _recipients, istream ? cast(GMimeStream*)istream._cPtr(No.Dup) : null, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class CryptoContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_mime_crypto_context_export_keys(cast(GMimeCryptoContext*)this._cPtr, _keys, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class CryptoContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_mime_crypto_context_import_keys(cast(GMimeCryptoContext*)this._cPtr, istream ? cast(GMimeStream*)istream._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class CryptoContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_mime_crypto_context_sign(cast(GMimeCryptoContext*)this._cPtr, detach, _userid, istream ? cast(GMimeStream*)istream._cPtr(No.Dup) : null, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class CryptoContext : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_mime_crypto_context_verify(cast(GMimeCryptoContext*)this._cPtr, flags, istream ? cast(GMimeStream*)istream._cPtr(No.Dup) : null, sigstream ? cast(GMimeStream*)sigstream._cPtr(No.Dup) : null, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
     return _retval;
   }

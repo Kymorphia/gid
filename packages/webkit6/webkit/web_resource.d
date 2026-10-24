@@ -136,7 +136,7 @@ class WebResource : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_web_resource_get_data_finish(cast(WebKitWebResource*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_cretlength, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     ubyte[] _retval;
 
     if (_cretval)

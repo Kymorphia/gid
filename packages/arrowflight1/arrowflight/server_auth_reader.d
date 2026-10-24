@@ -61,7 +61,7 @@ class ServerAuthReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gaflight_server_auth_reader_read(cast(GAFlightServerAuthReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -85,7 +85,7 @@ class MenuManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = panel_menu_manager_add_filename(cast(PanelMenuManager*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class MenuManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = panel_menu_manager_add_resource(cast(PanelMenuManager*)this._cPtr, _resource, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

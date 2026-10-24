@@ -179,7 +179,7 @@ class Message : gmime.object.ObjectWrap
     GError *_err;
     _cretval = g_mime_message_get_autocrypt_gossip_headers(cast(GMimeMessage*)this._cPtr, now ? cast(GDateTime*)now._cPtr(No.Dup) : null, flags, _sessionKey, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.autocrypt_header_list.AutocryptHeaderList)(cast(GMimeAutocryptHeaderList*)_cretval, Yes.Take);
     return _retval;
   }

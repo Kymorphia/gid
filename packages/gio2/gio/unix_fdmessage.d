@@ -121,7 +121,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
     GError *_err;
     _retval = cast(bool)g_unix_fd_message_append_fd(cast(GUnixFDMessage*)this._cPtr, fd, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

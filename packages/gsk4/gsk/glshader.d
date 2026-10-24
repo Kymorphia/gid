@@ -242,7 +242,7 @@ class GLShader : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gsk_gl_shader_compile(cast(GskGLShader*)this._cPtr, renderer ? cast(GskRenderer*)renderer._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

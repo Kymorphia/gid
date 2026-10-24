@@ -75,7 +75,7 @@ class Session : gobject.object.ObjectWrap
     GError *_err;
     _cretval = panel_session_new_from_variant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(panel.session.Session)(cast(PanelSession*)_cretval, Yes.Take);
     return _retval;
   }

@@ -472,7 +472,7 @@ class IconTheme : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_icon_theme_load_icon(cast(GtkIconTheme*)this._cPtr, _iconName, size, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
@@ -511,7 +511,7 @@ class IconTheme : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_icon_theme_load_icon_for_scale(cast(GtkIconTheme*)this._cPtr, _iconName, size, scale, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
@@ -548,7 +548,7 @@ class IconTheme : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_icon_theme_load_surface(cast(GtkIconTheme*)this._cPtr, _iconName, size, scale, forWindow ? cast(GdkWindow*)forWindow._cPtr(No.Dup) : null, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

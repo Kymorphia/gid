@@ -160,7 +160,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_by_address(cast(GResolver*)this._cPtr, address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -216,7 +216,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_by_address_finish(cast(GResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -262,7 +262,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_by_name(cast(GResolver*)this._cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -321,7 +321,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_by_name_finish(cast(GResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -348,7 +348,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_by_name_with_flags(cast(GResolver*)this._cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -408,7 +408,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_by_name_with_flags_finish(cast(GResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -442,7 +442,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_records(cast(GResolver*)this._cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(glib.variant.Variant, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -505,7 +505,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_records_finish(cast(GResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(glib.variant.Variant, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -553,7 +553,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_service(cast(GResolver*)this._cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.srv_target.SrvTarget, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -617,7 +617,7 @@ class Resolver : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_resolver_lookup_service_finish(cast(GResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.srv_target.SrvTarget, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

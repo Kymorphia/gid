@@ -57,7 +57,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _cretval = garrow_map_array_builder_new(dataType ? cast(GArrowMapDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -68,7 +68,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = cast(bool)garrow_map_array_builder_append_value(cast(GArrowMapArrayBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = cast(bool)garrow_map_array_builder_append_values(cast(GArrowMapArrayBuilder*)this._cPtr, _offsets, _offsetsLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

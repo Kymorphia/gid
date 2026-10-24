@@ -75,7 +75,7 @@ class Field : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_field_import(cAbiSchema, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
@@ -94,7 +94,7 @@ class Field : gobject.object.ObjectWrap
     GError *_err;
     auto _retval = garrow_field_export(cast(GArrowField*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

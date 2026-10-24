@@ -57,7 +57,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gaflight_record_batch_reader_read_all(cast(GAFlightRecordBatchReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
@@ -69,7 +69,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gaflight_record_batch_reader_read_next(cast(GAFlightRecordBatchReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.stream_chunk.StreamChunk)(cast(GAFlightStreamChunk*)_cretval, Yes.Take);
     return _retval;
   }

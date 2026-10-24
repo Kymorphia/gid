@@ -85,7 +85,7 @@ class GLShader : gst.object.ObjectWrap
     GError *_err;
     _cretval = gst_gl_shader_new_default(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glshader.GLShader)(cast(GstGLShader*)_cretval, Yes.Take);
     return _retval;
   }
@@ -210,7 +210,7 @@ class GLShader : gst.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_gl_shader_compile_attach_stage(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class GLShader : gst.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_gl_shader_link(cast(GstGLShader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

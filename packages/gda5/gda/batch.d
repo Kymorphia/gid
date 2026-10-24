@@ -114,7 +114,7 @@ class Batch : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_batch_get_parameters(cast(GdaBatch*)this._cPtr, &_outParams, &_err);
     if (_err)
-      throw new BatchException(_err);
+      throw new BatchException(_err, Yes.Take);
     outParams = new gda.set.Set(cast(void*)_outParams, Yes.Take);
     return _retval;
   }
@@ -226,9 +226,9 @@ final class BatchGidBuilder : BatchGidBuilderImpl!BatchGidBuilder
 
 class BatchException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

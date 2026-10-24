@@ -64,7 +64,7 @@ class CSVReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_csv_reader_new(input ? cast(GArrowInputStream*)input._cPtr(No.Dup) : null, options ? cast(GArrowCSVReadOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -75,7 +75,7 @@ class CSVReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_csv_reader_read(cast(GArrowCSVReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }

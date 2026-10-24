@@ -351,7 +351,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)this._cPtr, _destroyCB, data, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }

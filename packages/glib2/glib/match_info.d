@@ -79,7 +79,7 @@ class MatchInfo : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_match_info_expand_references(cast(const(GMatchInfo)*)this._cPtr, _stringToExpand, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -353,7 +353,7 @@ class MatchInfo : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_match_info_next(cast(GMatchInfo*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

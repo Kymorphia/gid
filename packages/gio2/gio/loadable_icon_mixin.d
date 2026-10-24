@@ -41,7 +41,7 @@ template LoadableIconT()
     GError *_err;
     _cretval = g_loadable_icon_load(cast(GLoadableIcon*)this._cPtr, size, &_type, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     type = _type.fromCString!(Yes.Free);
     return _retval;
@@ -96,7 +96,7 @@ template LoadableIconT()
     GError *_err;
     _cretval = g_loadable_icon_load_finish(cast(GLoadableIcon*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_type, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     type = _type.fromCString!(Yes.Free);
     return _retval;

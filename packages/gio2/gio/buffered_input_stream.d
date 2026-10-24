@@ -160,7 +160,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     GError *_err;
     _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)this._cPtr, count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     GError *_err;
     _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     GError *_err;
     _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

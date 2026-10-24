@@ -272,7 +272,7 @@ class RecentManager : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -298,7 +298,7 @@ class RecentManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_recent_manager_move_item(cast(GtkRecentManager*)this._cPtr, _uri, _newUri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class RecentManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_recent_manager_purge_items(cast(GtkRecentManager*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class RecentManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_recent_manager_remove_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

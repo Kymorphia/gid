@@ -64,7 +64,7 @@ interface TlsFileDatabase
     GError *_err;
     _cretval = g_tls_file_database_new(_anchors, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }

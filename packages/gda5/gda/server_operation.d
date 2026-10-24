@@ -141,7 +141,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_server_operation_prepare_create_database(_provider, _dbName, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.server_operation.ServerOperation)(cast(GdaServerOperation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -169,7 +169,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_server_operation_prepare_drop_database(_provider, _dbName, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.server_operation.ServerOperation)(cast(GdaServerOperation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -191,7 +191,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_server_operation_prepare_drop_table(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, _tableName, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.server_operation.ServerOperation)(cast(GdaServerOperation*)_cretval, Yes.Take);
     return _retval;
   }
@@ -420,7 +420,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_operation_is_valid(cast(GdaServerOperation*)this._cPtr, _xmlFile, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     return _retval;
   }
 
@@ -439,7 +439,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_operation_load_data_from_xml(cast(GdaServerOperation*)this._cPtr, node, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     return _retval;
   }
 
@@ -459,7 +459,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_operation_perform_create_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     return _retval;
   }
 
@@ -476,7 +476,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_operation_perform_create_table(cast(GdaServerOperation*)this._cPtr, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     return _retval;
   }
 
@@ -496,7 +496,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_operation_perform_drop_database(cast(GdaServerOperation*)this._cPtr, _provider, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_operation_perform_drop_table(cast(GdaServerOperation*)this._cPtr, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     return _retval;
   }
 
@@ -560,7 +560,7 @@ class ServerOperation : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_server_operation_set_value_at_path(cast(GdaServerOperation*)this._cPtr, _value, _path, &_err);
     if (_err)
-      throw new ServerOperationException(_err);
+      throw new ServerOperationException(_err, Yes.Take);
     return _retval;
   }
 
@@ -721,9 +721,9 @@ final class ServerOperationGidBuilder : ServerOperationGidBuilderImpl!ServerOper
 
 class ServerOperationException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

@@ -158,7 +158,7 @@ class Snippet : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_source_snippet_new_parsed(_text, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }

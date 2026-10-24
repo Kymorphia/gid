@@ -365,7 +365,7 @@ template FileChooserT()
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ template FileChooserT()
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_add_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -870,7 +870,7 @@ template FileChooserT()
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)this._cPtr, _folder, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -892,7 +892,7 @@ template FileChooserT()
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_remove_shortcut_folder_uri(cast(GtkFileChooser*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -919,7 +919,7 @@ template FileChooserT()
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_select_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1040,7 +1040,7 @@ template FileChooserT()
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_set_current_folder_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1165,7 +1165,7 @@ template FileChooserT()
     GError *_err;
     _retval = cast(bool)gtk_file_chooser_set_file(cast(GtkFileChooser*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

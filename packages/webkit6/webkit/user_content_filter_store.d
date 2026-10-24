@@ -220,7 +220,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_user_content_filter_store_load_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -274,7 +274,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)webkit_user_content_filter_store_remove_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_user_content_filter_store_save_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -393,7 +393,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_user_content_filter_store_save_from_file_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -58,7 +58,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_builder_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -69,7 +69,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_builder_flush(cast(GArrowRecordBatchBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }

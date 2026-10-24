@@ -122,7 +122,7 @@ class TaskPool : gst.object.ObjectWrap
     GError *_err;
     gst_task_pool_prepare(cast(GstTaskPool*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
   }
 
   /**
@@ -158,7 +158,7 @@ class TaskPool : gst.object.ObjectWrap
     GError *_err;
     auto _retval = gst_task_pool_push(cast(GstTaskPool*)this._cPtr, _funcCB, _func, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

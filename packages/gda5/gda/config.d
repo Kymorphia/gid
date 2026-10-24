@@ -120,7 +120,7 @@ class Config : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_config_define_dsn(info ? cast(const(GdaDsnInfo)*)info._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ConfigException(_err);
+      throw new ConfigException(_err, Yes.Take);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class Config : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_config_get_provider(_providerName, &_err);
     if (_err)
-      throw new ConfigException(_err);
+      throw new ConfigException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.server_provider.ServerProvider)(cast(GdaServerProvider*)_cretval, No.Take);
     return _retval;
   }
@@ -322,7 +322,7 @@ class Config : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_config_remove_dsn(_dsnName, &_err);
     if (_err)
-      throw new ConfigException(_err);
+      throw new ConfigException(_err, Yes.Take);
     return _retval;
   }
 
@@ -569,9 +569,9 @@ final class ConfigGidBuilder : ConfigGidBuilderImpl!ConfigGidBuilder
 
 class ConfigException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

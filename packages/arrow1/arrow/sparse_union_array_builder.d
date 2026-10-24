@@ -56,7 +56,7 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     GError *_err;
     _cretval = garrow_sparse_union_array_builder_new(dataType ? cast(GArrowSparseUnionDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 }

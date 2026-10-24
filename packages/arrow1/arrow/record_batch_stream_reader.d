@@ -56,7 +56,7 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
     GError *_err;
     _cretval = garrow_record_batch_stream_reader_new(stream ? cast(GArrowInputStream*)stream._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 }

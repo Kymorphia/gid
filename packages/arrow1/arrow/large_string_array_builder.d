@@ -64,7 +64,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     GError *_err;
     _retval = cast(bool)garrow_large_string_array_builder_append_string(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     GError *_err;
     _retval = cast(bool)garrow_large_string_array_builder_append_string_len(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _value, length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     GError *_err;
     _retval = cast(bool)garrow_large_string_array_builder_append_strings(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

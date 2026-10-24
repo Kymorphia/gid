@@ -289,7 +289,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = cast(bool)g_dtls_connection_close(cast(GDtlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = cast(bool)g_dtls_connection_close_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = cast(bool)g_dtls_connection_get_channel_binding_data(cast(GDtlsConnection*)this._cPtr, type, _data, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     data = gByteArrayToD!(GidOwnership.Full)(_data);
     return _retval;
   }
@@ -584,7 +584,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = cast(bool)g_dtls_connection_handshake(cast(GDtlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -634,7 +634,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = cast(bool)g_dtls_connection_handshake_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -814,7 +814,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = cast(bool)g_dtls_connection_shutdown(cast(GDtlsConnection*)this._cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -866,7 +866,7 @@ template DtlsConnectionT()
     GError *_err;
     _retval = cast(bool)g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

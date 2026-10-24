@@ -95,7 +95,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
     GError *_err;
     _cretval = webkit_web_extension_match_pattern_new_with_scheme(_scheme, _host, _path, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new webkit.web_extension_match_pattern.WebExtensionMatchPattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -116,7 +116,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
     GError *_err;
     _cretval = webkit_web_extension_match_pattern_new_with_string(_string_, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new webkit.web_extension_match_pattern.WebExtensionMatchPattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

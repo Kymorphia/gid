@@ -268,7 +268,7 @@ class RTSPConnection
     GError *_err;
     _cretval = gst_rtsp_connection_get_tls(cast(GstRTSPConnection*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_connection.TlsConnection)(cast(GTlsConnection*)_cretval, No.Take);
     return _retval;
   }

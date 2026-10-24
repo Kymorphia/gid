@@ -103,7 +103,7 @@ class Plugin : gst.object.ObjectWrap
     GError *_err;
     _cretval = gst_plugin_load_file(_filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }

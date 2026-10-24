@@ -120,7 +120,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_close(cast(GOutputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_close_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_flush(cast(GOutputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_flush_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_set_pending(cast(GOutputStream*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_output_stream_splice(cast(GOutputStream*)this._cPtr, source ? cast(GInputStream*)source._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_output_stream_splice_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_output_stream_write(cast(GOutputStream*)this._cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_write_all(cast(GOutputStream*)this._cPtr, _buffer, _count, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -558,7 +558,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_write_all_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -657,7 +657,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_output_stream_write_bytes(cast(GOutputStream*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -718,7 +718,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_output_stream_write_bytes_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -736,7 +736,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_output_stream_write_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -784,7 +784,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_writev(cast(GOutputStream*)this._cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -831,7 +831,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_writev_all(cast(GOutputStream*)this._cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -910,7 +910,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_writev_all_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -994,7 +994,7 @@ class OutputStream : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_output_stream_writev_finish(cast(GOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

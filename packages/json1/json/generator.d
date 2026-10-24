@@ -292,7 +292,7 @@ class Generator : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_generator_to_file(cast(JsonGenerator*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Generator : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)json_generator_to_stream(cast(JsonGenerator*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

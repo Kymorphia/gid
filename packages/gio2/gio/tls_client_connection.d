@@ -154,7 +154,7 @@ interface TlsClientConnection
     GError *_err;
     _cretval = g_tls_client_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream._cPtr(No.Dup) : null, serverIdentity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)serverIdentity)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_client_connection.TlsClientConnection)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }

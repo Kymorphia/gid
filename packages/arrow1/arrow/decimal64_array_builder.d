@@ -68,7 +68,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
     GError *_err;
     _retval = cast(bool)garrow_decimal64_array_builder_append_value(cast(GArrowDecimal64ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal64*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
     GError *_err;
     _retval = cast(bool)garrow_decimal64_array_builder_append_values(cast(GArrowDecimal64ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

@@ -93,7 +93,7 @@ class PrintSettings : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_print_settings_new_from_file(_fileName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
@@ -134,7 +134,7 @@ class PrintSettings : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
@@ -654,7 +654,7 @@ class PrintSettings : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_print_settings_load_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -677,7 +677,7 @@ class PrintSettings : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_print_settings_load_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1063,7 +1063,7 @@ class PrintSettings : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_print_settings_to_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

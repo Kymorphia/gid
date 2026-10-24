@@ -233,7 +233,7 @@ class Clipboard : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_clipboard_read_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_outMimeType, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     outMimeType = _outMimeType.fromCString!(No.Free);
     return _retval;
@@ -290,7 +290,7 @@ class Clipboard : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_clipboard_read_text_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -346,7 +346,7 @@ class Clipboard : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_clipboard_read_texture_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
@@ -405,7 +405,7 @@ class Clipboard : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_clipboard_read_value_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -505,7 +505,7 @@ class Clipboard : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gdk_clipboard_store_finish(cast(GdkClipboard*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

@@ -72,7 +72,7 @@ template ProxyResolverT()
     GError *_err;
     _cretval = g_proxy_resolver_lookup(cast(GProxyResolver*)this._cPtr, _uri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)
@@ -137,7 +137,7 @@ template ProxyResolverT()
     GError *_err;
     _cretval = g_proxy_resolver_lookup_finish(cast(GProxyResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)

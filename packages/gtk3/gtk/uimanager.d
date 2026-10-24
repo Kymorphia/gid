@@ -379,7 +379,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_file(cast(GtkUIManager*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_resource(cast(GtkUIManager*)this._cPtr, _resourcePath, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)this._cPtr, _buffer, _length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

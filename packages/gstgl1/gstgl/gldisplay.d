@@ -126,7 +126,7 @@ class GLDisplay : gst.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_gl_display_create_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_pContext, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     pContext = new gstgl.glcontext.GLContext(cast(void*)_pContext, Yes.Take);
     return _retval;
   }
@@ -156,7 +156,7 @@ class GLDisplay : gst.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_gl_display_ensure_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, context ? cast(GstGLContext**)context._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

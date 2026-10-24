@@ -92,7 +92,7 @@ gio.dbus_connection.DBusConnection busGetFinish(gio.async_result.AsyncResult res
   GError *_err;
   _cretval = g_bus_get_finish(res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, Yes.Take);
   return _retval;
 }
@@ -130,7 +130,7 @@ gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.can
   GError *_err;
   _cretval = g_bus_get_sync(busType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, Yes.Take);
   return _retval;
 }
@@ -655,7 +655,7 @@ string dbusAddressGetForBusSync(gio.types.BusType busType, gio.cancellable.Cance
   GError *_err;
   _cretval = g_dbus_address_get_for_bus_sync(busType, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
@@ -719,7 +719,7 @@ gio.iostream.IOStream dbusAddressGetStreamFinish(gio.async_result.AsyncResult re
   GError *_err;
   _cretval = g_dbus_address_get_stream_finish(res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_outGuid, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
   outGuid = _outGuid.fromCString!(Yes.Free);
   return _retval;
@@ -752,7 +752,7 @@ gio.iostream.IOStream dbusAddressGetStreamSync(string address, out string outGui
   GError *_err;
   _cretval = g_dbus_address_get_stream_sync(_address, &_outGuid, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
   outGuid = _outGuid.fromCString!(Yes.Free);
   return _retval;
@@ -1017,7 +1017,7 @@ bool dbusIsSupportedAddress(string string_)
   GError *_err;
   _retval = cast(bool)g_dbus_is_supported_address(_string_, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -1415,7 +1415,7 @@ ptrdiff_t pollableStreamRead(gio.input_stream.InputStream stream, ubyte[] buffer
   GError *_err;
   _retval = g_pollable_stream_read(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, _buffer, _count, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -1451,7 +1451,7 @@ ptrdiff_t pollableStreamWrite(gio.output_stream.OutputStream stream, ubyte[] buf
   GError *_err;
   _retval = g_pollable_stream_write(stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _buffer, _count, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -1497,7 +1497,7 @@ bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffe
   GError *_err;
   _retval = cast(bool)g_pollable_stream_write_all(stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _buffer, _count, blocking, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -1522,7 +1522,7 @@ string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags l
   GError *_err;
   _cretval = g_resources_enumerate_children(_path, lookupFlags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string[] _retval;
 
   if (_cretval)
@@ -1561,7 +1561,7 @@ bool resourcesGetInfo(string path, gio.types.ResourceLookupFlags lookupFlags, ou
   GError *_err;
   _retval = cast(bool)g_resources_get_info(_path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -1595,7 +1595,7 @@ glib.bytes.Bytes resourcesLookupData(string path, gio.types.ResourceLookupFlags 
   GError *_err;
   _cretval = g_resources_lookup_data(_path, lookupFlags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1621,7 +1621,7 @@ gio.input_stream.InputStream resourcesOpenStream(string path, gio.types.Resource
   GError *_err;
   _cretval = g_resources_open_stream(_path, lookupFlags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
   return _retval;
 }

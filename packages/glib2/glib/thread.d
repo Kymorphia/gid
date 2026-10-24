@@ -156,7 +156,7 @@ class Thread : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_thread_try_new(_name, _funcCB, _func, &_err);
     if (_err)
-      throw new ThreadException(_err);
+      throw new ThreadException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -251,9 +251,9 @@ class Thread : gobject.boxed.Boxed
 
 class ThreadException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

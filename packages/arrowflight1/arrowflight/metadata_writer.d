@@ -63,7 +63,7 @@ class MetadataWriter : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gaflight_metadata_writer_write(cast(GAFlightMetadataWriter*)this._cPtr, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

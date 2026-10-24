@@ -124,7 +124,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_meta_struct_complement(cast(GdaMetaStruct*)this._cPtr, type, catalog ? cast(const(GValue)*)catalog._cPtr(No.Dup) : null, schema ? cast(const(GValue)*)schema._cPtr(No.Dup) : null, name ? cast(const(GValue)*)name._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     auto _retval = _cretval ? new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -143,7 +143,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_struct_complement_all(cast(GdaMetaStruct*)this._cPtr, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_struct_complement_default(cast(GdaMetaStruct*)this._cPtr, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_struct_complement_depend(cast(GdaMetaStruct*)this._cPtr, dbo ? cast(GdaMetaDbObject*)dbo._cPtr : null, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_struct_complement_schema(cast(GdaMetaStruct*)this._cPtr, catalog ? cast(const(GValue)*)catalog._cPtr(No.Dup) : null, schema ? cast(const(GValue)*)schema._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_meta_struct_dump_as_graph(cast(GdaMetaStruct*)this._cPtr, info, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -272,7 +272,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_struct_load_from_xml_file(cast(GdaMetaStruct*)this._cPtr, _catalog, _schema, _xmlSpecFile, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class MetaStruct : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_meta_struct_sort_db_objects(cast(GdaMetaStruct*)this._cPtr, sortType, &_err);
     if (_err)
-      throw new MetaStructException(_err);
+      throw new MetaStructException(_err, Yes.Take);
     return _retval;
   }
 }
@@ -327,9 +327,9 @@ final class MetaStructGidBuilder : MetaStructGidBuilderImpl!MetaStructGidBuilder
 
 class MetaStructException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

@@ -86,7 +86,7 @@ class MultipartSigned : gmime.multipart.Multipart
     GError *_err;
     _cretval = g_mime_multipart_signed_sign(ctx ? cast(GMimeCryptoContext*)ctx._cPtr(No.Dup) : null, entity ? cast(GMimeObject*)entity._cPtr(No.Dup) : null, _userid, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.multipart_signed.MultipartSigned)(cast(GMimeMultipartSigned*)_cretval, Yes.Take);
     return _retval;
   }
@@ -109,7 +109,7 @@ class MultipartSigned : gmime.multipart.Multipart
     GError *_err;
     _cretval = g_mime_multipart_signed_verify(cast(GMimeMultipartSigned*)this._cPtr, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
     return _retval;
   }

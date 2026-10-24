@@ -445,7 +445,7 @@ class TextBuffer : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_text_buffer_deserialize(cast(GtkTextBuffer*)this._cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer._cPtr(No.Dup) : null, format ? cast(GdkAtom)format._cPtr : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _data, _length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

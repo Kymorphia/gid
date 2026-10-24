@@ -73,7 +73,7 @@ class CompressedInputStream : arrow.input_stream.InputStream
     GError *_err;
     _cretval = garrow_compressed_input_stream_new(codec ? cast(GArrowCodec*)codec._cPtr(No.Dup) : null, raw ? cast(GArrowInputStream*)raw._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 }

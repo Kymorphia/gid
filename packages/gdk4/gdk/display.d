@@ -192,7 +192,7 @@ class Display : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_display_create_gl_context(cast(GdkDisplay*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
@@ -565,7 +565,7 @@ class Display : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gdk_display_prepare_gl(cast(GdkDisplay*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

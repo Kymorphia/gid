@@ -187,7 +187,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = g_bookmark_file_get_added(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_added_date_time(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -250,7 +250,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_get_app_info(cast(GBookmarkFile*)this._cPtr, _uri, _name, &_exec, cast(uint*)&count, cast(long*)&stamp, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     exec = _exec.fromCString!(Yes.Free);
     return _retval;
   }
@@ -289,7 +289,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_get_application_info(cast(GBookmarkFile*)this._cPtr, _uri, _name, &_exec, cast(uint*)&count, &_stamp, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     exec = _exec.fromCString!(Yes.Free);
     stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
     return _retval;
@@ -316,7 +316,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_applications(cast(GBookmarkFile*)this._cPtr, _uri, &_cretlength, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)
@@ -348,7 +348,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_description(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -376,7 +376,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_groups(cast(GBookmarkFile*)this._cPtr, _uri, &_cretlength, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)
@@ -412,7 +412,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_get_icon(cast(GBookmarkFile*)this._cPtr, _uri, &_href, &_mimeType, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     href = _href.fromCString!(Yes.Free);
     mimeType = _mimeType.fromCString!(Yes.Free);
     return _retval;
@@ -438,7 +438,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_get_is_private(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -463,7 +463,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_mime_type(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -489,7 +489,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = g_bookmark_file_get_modified(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_modified_date_time(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -548,7 +548,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_title(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -598,7 +598,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = g_bookmark_file_get_visited(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -620,7 +620,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_get_visited_date_time(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -646,7 +646,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_has_application(cast(GBookmarkFile*)this._cPtr, _uri, _name, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -671,7 +671,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_has_group(cast(GBookmarkFile*)this._cPtr, _uri, _group, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -712,7 +712,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_load_from_data(cast(GBookmarkFile*)this._cPtr, _data, _length, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -738,7 +738,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_load_from_data_dirs(cast(GBookmarkFile*)this._cPtr, _file, &_fullPath, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     fullPath = _fullPath.fromCString!(Yes.Free);
     return _retval;
   }
@@ -761,7 +761,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_load_from_file(cast(GBookmarkFile*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -787,7 +787,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_move_item(cast(GBookmarkFile*)this._cPtr, _oldUri, _newUri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -815,7 +815,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_remove_application(cast(GBookmarkFile*)this._cPtr, _uri, _name, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -842,7 +842,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_remove_group(cast(GBookmarkFile*)this._cPtr, _uri, _group, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -861,7 +861,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_remove_item(cast(GBookmarkFile*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -950,7 +950,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_set_app_info(cast(GBookmarkFile*)this._cPtr, _uri, _name, _exec, count, stamp, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1003,7 +1003,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_set_application_info(cast(GBookmarkFile*)this._cPtr, _uri, _name, _exec, count, stamp ? cast(GDateTime*)stamp._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1221,7 +1221,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_bookmark_file_to_data(cast(GBookmarkFile*)this._cPtr, &_cretlength, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     ubyte[] _retval;
 
     if (_cretval)
@@ -1248,7 +1248,7 @@ class BookmarkFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_bookmark_file_to_file(cast(GBookmarkFile*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new BookmarkFileException(_err);
+      throw new BookmarkFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1263,9 +1263,9 @@ class BookmarkFile : gobject.boxed.Boxed
 
 class BookmarkFileException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

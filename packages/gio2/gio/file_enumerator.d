@@ -98,7 +98,7 @@ class FileEnumerator : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_file_enumerator_close(cast(GFileEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class FileEnumerator : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_file_enumerator_close_finish(cast(GFileEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class FileEnumerator : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_file_enumerator_iterate(cast(GFileEnumerator*)this._cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     outInfo = new gio.file_info.FileInfo(cast(void*)_outInfo, No.Take);
     outChild = gobject.object.ObjectWrap._getDObject!(gio.file.File)(_outChild, No.Take);
     return _retval;
@@ -313,7 +313,7 @@ class FileEnumerator : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_file_enumerator_next_file(cast(GFileEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -428,7 +428,7 @@ class FileEnumerator : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_file_enumerator_next_files_finish(cast(GFileEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

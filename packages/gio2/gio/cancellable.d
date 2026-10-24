@@ -273,7 +273,7 @@ class Cancellable : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)g_cancellable_set_error_if_cancelled(cast(GCancellable*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

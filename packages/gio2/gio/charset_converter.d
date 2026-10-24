@@ -112,7 +112,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
     GError *_err;
     _cretval = g_charset_converter_new(_toCharset, _fromCharset, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

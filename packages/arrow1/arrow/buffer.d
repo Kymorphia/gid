@@ -84,7 +84,7 @@ class Buffer : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_buffer_copy(cast(GArrowBuffer*)this._cPtr, start, size, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }

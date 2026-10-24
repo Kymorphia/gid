@@ -174,7 +174,7 @@ class RenderNode
     GError *_err;
     _retval = cast(bool)gsk_render_node_write_to_file(cast(GskRenderNode*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

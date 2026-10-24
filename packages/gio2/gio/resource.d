@@ -234,7 +234,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_new_from_data(data ? cast(GBytes*)data._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -262,7 +262,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_enumerate_children(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)
@@ -301,7 +301,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_resource_get_info(cast(GResource*)this._cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_lookup_data(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -360,7 +360,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_open_stream(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -389,7 +389,7 @@ class Resource : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_resource_load(_filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

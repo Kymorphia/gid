@@ -55,7 +55,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     GError *_err;
     _retval = cast(bool)gaflight_stream_writer_done_writing(cast(GAFlightStreamWriter*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

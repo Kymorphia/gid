@@ -55,7 +55,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     GError *_err;
     _cretval = garrow_decimal_data_type_new(precision, scale, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

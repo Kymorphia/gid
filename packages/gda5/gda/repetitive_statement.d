@@ -119,7 +119,7 @@ class RepetitiveStatement : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_repetitive_statement_get_template_set(cast(GdaRepetitiveStatement*)this._cPtr, set ? cast(GdaSet**)set._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

@@ -87,7 +87,7 @@ class UInt64Array : arrow.numeric_array.NumericArray
     GError *_err;
     _retval = garrow_uint64_array_sum(cast(GArrowUInt64Array*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

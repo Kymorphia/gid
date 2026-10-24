@@ -107,7 +107,7 @@ class CookieManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)webkit_cookie_manager_add_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class CookieManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)webkit_cookie_manager_delete_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class CookieManager : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_cookie_manager_get_accept_policy_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     webkit.types.CookieAcceptPolicy _retval = cast(webkit.types.CookieAcceptPolicy)_cretval;
     return _retval;
   }
@@ -263,7 +263,7 @@ class CookieManager : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_cookie_manager_get_all_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -321,7 +321,7 @@ class CookieManager : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_cookie_manager_get_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -374,7 +374,7 @@ class CookieManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)webkit_cookie_manager_replace_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

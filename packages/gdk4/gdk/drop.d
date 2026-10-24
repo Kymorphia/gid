@@ -292,7 +292,7 @@ class Drop : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_drop_read_finish(cast(GdkDrop*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_outMimeType, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     outMimeType = _outMimeType.fromCString!(No.Free);
     return _retval;
@@ -353,7 +353,7 @@ class Drop : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gdk_drop_read_value_finish(cast(GdkDrop*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

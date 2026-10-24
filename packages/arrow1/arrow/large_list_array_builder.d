@@ -57,7 +57,7 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _cretval = garrow_large_list_array_builder_new(dataType ? cast(GArrowLargeListDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -68,7 +68,7 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
     GError *_err;
     _retval = cast(bool)garrow_large_list_array_builder_append_value(cast(GArrowLargeListArrayBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

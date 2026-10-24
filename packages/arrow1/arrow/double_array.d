@@ -87,7 +87,7 @@ class DoubleArray : arrow.numeric_array.NumericArray
     GError *_err;
     _retval = garrow_double_array_sum(cast(GArrowDoubleArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

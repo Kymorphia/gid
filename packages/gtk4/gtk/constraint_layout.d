@@ -364,7 +364,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
     GError *_err;
     _cretval = gtk_constraint_layout_add_constraints_from_descriptionv(cast(GtkConstraintLayout*)this._cPtr, _lines, _nLines, hspacing, vspacing, _views, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gtk.constraint.Constraint, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }

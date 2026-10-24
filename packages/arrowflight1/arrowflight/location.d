@@ -56,7 +56,7 @@ class Location : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gaflight_location_new(_uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

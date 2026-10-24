@@ -87,7 +87,7 @@ class FloatArray : arrow.numeric_array.NumericArray
     GError *_err;
     _retval = garrow_float_array_sum(cast(GArrowFloatArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

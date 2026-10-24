@@ -404,7 +404,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
     GError *_err;
     _retval = cast(bool)g_simple_async_result_propagate_error(cast(GSimpleAsyncResult*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

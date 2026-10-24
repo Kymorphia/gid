@@ -448,7 +448,7 @@ template RecentChooserT()
     GError *_err;
     _retval = cast(bool)gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ template RecentChooserT()
     GError *_err;
     _retval = cast(bool)gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

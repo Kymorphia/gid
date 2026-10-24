@@ -26,7 +26,7 @@ template WritableFileT()
     GError *_err;
     _retval = cast(bool)garrow_writable_file_write_at(cast(GArrowWritableFile*)this._cPtr, position, _data, _nBytes, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

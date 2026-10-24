@@ -63,7 +63,7 @@ class ServerAuthSender : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gaflight_server_auth_sender_write(cast(GAFlightServerAuthSender*)this._cPtr, message ? cast(GBytes*)message._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

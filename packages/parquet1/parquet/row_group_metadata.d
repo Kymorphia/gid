@@ -73,7 +73,7 @@ class RowGroupMetadata : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gparquet_row_group_metadata_get_column_chunk(cast(GParquetRowGroupMetadata*)this._cPtr, index, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(parquet.column_chunk_metadata.ColumnChunkMetadata)(cast(GParquetColumnChunkMetadata*)_cretval, Yes.Take);
     return _retval;
   }

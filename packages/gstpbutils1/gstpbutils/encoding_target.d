@@ -113,7 +113,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gst_encoding_target_load(_name, _category, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
@@ -134,7 +134,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gst_encoding_target_load_from_file(_filepath, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
@@ -224,7 +224,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_encoding_target_save(cast(GstEncodingTarget*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_encoding_target_save_to_file(cast(GstEncodingTarget*)this._cPtr, _filepath, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

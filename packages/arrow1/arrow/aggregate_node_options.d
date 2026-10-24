@@ -67,7 +67,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     GError *_err;
     _cretval = garrow_aggregate_node_options_new(_aggregations, _keys, _nKeys, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 }

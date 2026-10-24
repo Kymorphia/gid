@@ -1539,7 +1539,7 @@ class Settings : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)webkit_settings_apply_from_key_file(cast(WebKitSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

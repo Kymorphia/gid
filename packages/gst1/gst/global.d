@@ -85,7 +85,7 @@ bool initCheck(ref string[] argv)
   gboolean _retval = gst_init_check(&_argc, &_argv, &_err);
 
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
 
   argv.length = _argc;
   foreach (i; 0 .. _argc)
@@ -661,7 +661,7 @@ string filenameToUri(string filename)
   GError *_err;
   _cretval = gst_filename_to_uri(_filename, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
@@ -846,7 +846,7 @@ gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPad
   GError *_err;
   _cretval = gst_parse_bin_from_description(_binDescription, ghostUnlinkedPads, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.bin.Bin)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
@@ -882,7 +882,7 @@ gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghos
   GError *_err;
   _cretval = gst_parse_bin_from_description_full(_binDescription, ghostUnlinkedPads, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
@@ -911,7 +911,7 @@ gst.element.Element parseLaunch(string pipelineDescription)
   GError *_err;
   _cretval = gst_parse_launch(_pipelineDescription, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
@@ -944,7 +944,7 @@ gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_contex
   GError *_err;
   _cretval = gst_parse_launch_full(_pipelineDescription, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
@@ -972,7 +972,7 @@ gst.element.Element parseLaunchv(string[] argv)
   GError *_err;
   _cretval = gst_parse_launchv(_argv, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
@@ -1006,7 +1006,7 @@ gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseConte
   GError *_err;
   _cretval = gst_parse_launchv_full(_argv, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }

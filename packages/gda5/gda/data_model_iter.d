@@ -183,7 +183,7 @@ class DataModelIter : gda.set.Set
     GError *_err;
     _cretval = gda_data_model_iter_get_value_at_e(cast(GdaDataModelIter*)this._cPtr, col, &_err);
     if (_err)
-      throw new DataModelIterException(_err);
+      throw new DataModelIterException(_err, Yes.Take);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -312,7 +312,7 @@ class DataModelIter : gda.set.Set
     GError *_err;
     _retval = cast(bool)gda_data_model_iter_set_value_at(cast(GdaDataModelIter*)this._cPtr, col, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new DataModelIterException(_err);
+      throw new DataModelIterException(_err, Yes.Take);
     return _retval;
   }
 
@@ -456,9 +456,9 @@ final class DataModelIterGidBuilder : DataModelIterGidBuilderImpl!DataModelIterG
 
 class DataModelIterException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

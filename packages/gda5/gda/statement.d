@@ -96,7 +96,7 @@ class Statement : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_statement_check_structure(cast(GdaStatement*)this._cPtr, &_err);
     if (_err)
-      throw new StatementException(_err);
+      throw new StatementException(_err, Yes.Take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class Statement : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_statement_check_validity(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new StatementException(_err);
+      throw new StatementException(_err, Yes.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Statement : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_statement_get_parameters(cast(GdaStatement*)this._cPtr, &_outParams, &_err);
     if (_err)
-      throw new StatementException(_err);
+      throw new StatementException(_err, Yes.Take);
     outParams = new gda.set.Set(cast(void*)_outParams, Yes.Take);
     return _retval;
   }
@@ -198,7 +198,7 @@ class Statement : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_statement_normalize(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new StatementException(_err);
+      throw new StatementException(_err, Yes.Take);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class Statement : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_statement_to_sql_extended(cast(GdaStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, flags, &_paramsUsed, &_err);
     if (_err)
-      throw new StatementException(_err);
+      throw new StatementException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     paramsUsed = gSListToD!(gda.holder.Holder, GidOwnership.Container)(_paramsUsed);
     return _retval;
@@ -259,7 +259,7 @@ class Statement : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_statement_to_sql_real(cast(GdaStatement*)this._cPtr, context ? cast(GdaSqlRenderingContext*)context._cPtr : null, &_err);
     if (_err)
-      throw new StatementException(_err);
+      throw new StatementException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -392,9 +392,9 @@ final class StatementGidBuilder : StatementGidBuilderImpl!StatementGidBuilder
 
 class StatementException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

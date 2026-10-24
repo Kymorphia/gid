@@ -139,7 +139,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _cretval = g_subprocess_newv(_argv, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }
@@ -203,7 +203,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_communicate(cast(GSubprocess*)this._cPtr, stdinBuf ? cast(GBytes*)stdinBuf._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
     stderrBuf = new glib.bytes.Bytes(cast(void*)_stderrBuf, Yes.Take);
     return _retval;
@@ -257,7 +257,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_communicate_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
     stderrBuf = new glib.bytes.Bytes(cast(void*)_stderrBuf, Yes.Take);
     return _retval;
@@ -287,7 +287,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_communicate_utf8(cast(GSubprocess*)this._cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     stdoutBuf = _stdoutBuf.fromCString!(Yes.Free);
     stderrBuf = _stderrBuf.fromCString!(Yes.Free);
     return _retval;
@@ -342,7 +342,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_communicate_utf8_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     stdoutBuf = _stdoutBuf.fromCString!(Yes.Free);
     stderrBuf = _stderrBuf.fromCString!(Yes.Free);
     return _retval;
@@ -571,7 +571,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_wait(cast(GSubprocess*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -620,7 +620,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_wait_check(cast(GSubprocess*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_wait_check_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -688,7 +688,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _retval = cast(bool)g_subprocess_wait_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

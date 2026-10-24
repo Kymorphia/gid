@@ -184,7 +184,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_dbus_node_info_new_for_xml(_xmlData, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new gio.dbus_node_info.DBusNodeInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

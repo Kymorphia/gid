@@ -196,7 +196,7 @@ bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.v
   GError *_err;
   _retval = cast(bool)gdk_content_deserialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_value, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   value = new gobject.value.Value(cast(void*)&_value, No.Take);
   return _retval;
 }
@@ -255,7 +255,7 @@ bool contentSerializeFinish(gio.async_result.AsyncResult result)
   GError *_err;
   _retval = cast(bool)gdk_content_serialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 

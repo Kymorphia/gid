@@ -222,7 +222,7 @@ class Tree : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_tree_update_all(cast(GdaTree*)this._cPtr, &_err);
     if (_err)
-      throw new TreeException(_err);
+      throw new TreeException(_err, Yes.Take);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class Tree : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_tree_update_children(cast(GdaTree*)this._cPtr, node ? cast(GdaTreeNode*)node._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new TreeException(_err);
+      throw new TreeException(_err, Yes.Take);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class Tree : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gda_tree_update_part(cast(GdaTree*)this._cPtr, node ? cast(GdaTreeNode*)node._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new TreeException(_err);
+      throw new TreeException(_err, Yes.Take);
     return _retval;
   }
 
@@ -486,9 +486,9 @@ final class TreeGidBuilder : TreeGidBuilderImpl!TreeGidBuilder
 
 class TreeException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

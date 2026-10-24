@@ -304,7 +304,7 @@ class SearchContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_source_search_context_backward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_matchStart, &_matchEnd, &_hasWrappedAround, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
     matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     hasWrappedAround = cast(bool)_hasWrappedAround;
@@ -404,7 +404,7 @@ class SearchContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_source_search_context_forward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_matchStart, &_matchEnd, &_hasWrappedAround, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
     matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     hasWrappedAround = cast(bool)_hasWrappedAround;
@@ -529,7 +529,7 @@ class SearchContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_source_search_context_replace(cast(GtkSourceSearchContext*)this._cPtr, matchStart ? cast(GtkTextIter*)matchStart._cPtr(No.Dup) : null, matchEnd ? cast(GtkTextIter*)matchEnd._cPtr(No.Dup) : null, _replace, _replaceLength, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -558,7 +558,7 @@ class SearchContext : gobject.object.ObjectWrap
     GError *_err;
     _retval = gtk_source_search_context_replace_all(cast(GtkSourceSearchContext*)this._cPtr, _replace, _replaceLength, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

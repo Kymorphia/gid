@@ -878,7 +878,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
     GError *_err;
     _retval = cast(bool)g_application_register(cast(GApplication*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

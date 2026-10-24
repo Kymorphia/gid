@@ -20,7 +20,7 @@ bool s3Finalize()
   GError *_err;
   _retval = cast(bool)garrow_s3_finalize(&_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -41,7 +41,7 @@ bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
   GError *_err;
   _retval = cast(bool)garrow_s3_initialize(options ? cast(GArrowS3GlobalOptions*)options._cPtr(No.Dup) : null, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 

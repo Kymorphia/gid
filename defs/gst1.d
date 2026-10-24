@@ -130,7 +130,7 @@ bool initCheck(ref string[] argv)
   gboolean _retval = gst_init_check(&_argc, &_argv, &_err);
 
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
 
   argv.length = _argc;
   foreach (i; 0 .. _argc)

@@ -384,7 +384,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_uri_parse_relative(cast(GUri*)this._cPtr, _uriRef, flags, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -593,7 +593,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_uri_is_valid(_uriString, flags, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     return _retval;
   }
 
@@ -729,7 +729,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_uri_parse(_uriString, flags, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -785,7 +785,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_uri_parse_params(_params, _length, _separators, flags, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
     return _retval;
   }
@@ -865,7 +865,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_uri_resolve_relative(_baseUriString, _uriRef, flags, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -922,7 +922,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_uri_split(_uriRef, flags, &_scheme, &_userinfo, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     scheme = _scheme.fromCString!(Yes.Free);
     userinfo = _userinfo.fromCString!(Yes.Free);
     host = _host.fromCString!(Yes.Free);
@@ -962,7 +962,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_uri_split_network(_uriString, flags, &_scheme, &_host, cast(int*)&port, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     scheme = _scheme.fromCString!(Yes.Free);
     host = _host.fromCString!(Yes.Free);
     return _retval;
@@ -1021,7 +1021,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_uri_split_with_user(_uriRef, flags, &_scheme, &_user, &_password, &_authParams, &_host, cast(int*)&port, &_path, &_query, &_fragment, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     scheme = _scheme.fromCString!(Yes.Free);
     user = _user.fromCString!(Yes.Free);
     password = _password.fromCString!(Yes.Free);
@@ -1066,7 +1066,7 @@ class Uri : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_uri_unescape_bytes(_escapedString, _length, _illegalCharacters, &_err);
     if (_err)
-      throw new UriException(_err);
+      throw new UriException(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1134,9 +1134,9 @@ class Uri : gobject.boxed.Boxed
 
 class UriException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

@@ -67,7 +67,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
     GError *_err;
     gaflight_server_custom_auth_handler_authenticate(cast(GAFlightServerCustomAuthHandler*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, sender ? cast(GAFlightServerAuthSender*)sender._cPtr(No.Dup) : null, reader ? cast(GAFlightServerAuthReader*)reader._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
   }
 
   /**
@@ -87,7 +87,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
     GError *_err;
     _cretval = gaflight_server_custom_auth_handler_is_valid(cast(GAFlightServerCustomAuthHandler*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, token ? cast(GBytes*)token._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

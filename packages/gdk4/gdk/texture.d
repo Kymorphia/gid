@@ -137,7 +137,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     GError *_err;
     _cretval = gdk_texture_new_from_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
@@ -165,7 +165,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     GError *_err;
     _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
@@ -194,7 +194,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     GError *_err;
     _cretval = gdk_texture_new_from_filename(_path, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }

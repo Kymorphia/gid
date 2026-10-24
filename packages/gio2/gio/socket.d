@@ -369,7 +369,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_new(family, type, protocol, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -400,7 +400,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_new_from_fd(fd, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
     return _retval;
   }
@@ -429,7 +429,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_accept(cast(GSocket*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
     return _retval;
   }
@@ -471,7 +471,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_bind(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, allowReuse, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_check_connect_result(cast(GSocket*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_close(cast(GSocket*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -597,7 +597,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_condition_timed_wait(cast(GSocket*)this._cPtr, condition, timeoutUs, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_condition_wait(cast(GSocket*)this._cPtr, condition, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -659,7 +659,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_connect(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -755,7 +755,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_get_credentials(cast(GSocket*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
     return _retval;
   }
@@ -825,7 +825,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_get_local_address(cast(GSocket*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
@@ -885,7 +885,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_get_option(cast(GSocket*)this._cPtr, level, optname, cast(int*)&value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -915,7 +915,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_get_remote_address(cast(GSocket*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1014,7 +1014,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_join_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1050,7 +1050,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_join_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1079,7 +1079,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_leave_multicast_group(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1106,7 +1106,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_leave_multicast_group_ssm(cast(GSocket*)this._cPtr, group ? cast(GInetAddress*)group._cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific._cPtr(No.Dup) : null, _iface, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1128,7 +1128,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_listen(cast(GSocket*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1172,7 +1172,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_receive(cast(GSocket*)this._cPtr, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1202,7 +1202,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_receive_bytes(cast(GSocket*)this._cPtr, size, timeoutUs, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1240,7 +1240,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_receive_bytes_from(cast(GSocket*)this._cPtr, &_address, size, timeoutUs, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
     return _retval;
@@ -1273,7 +1273,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_receive_from(cast(GSocket*)this._cPtr, &_address, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
     return _retval;
   }
@@ -1367,7 +1367,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_receive_message(cast(GSocket*)this._cPtr, &_address, _vectors, _numVectors, &_messages, &_numMessages, cast(int*)&flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
     messages.length = _numMessages;
     foreach (i; 0 .. _numMessages)
@@ -1397,7 +1397,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_receive_with_blocking(cast(GSocket*)this._cPtr, buffer.ptr, _size, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1436,7 +1436,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_send(cast(GSocket*)this._cPtr, _buffer, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1516,7 +1516,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_send_message(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1564,7 +1564,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _cretval = g_socket_send_message_with_timeout(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, timeoutUs, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.PollableReturn _retval = cast(gio.types.PollableReturn)_cretval;
     return _retval;
   }
@@ -1596,7 +1596,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_send_to(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, _buffer, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1625,7 +1625,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = g_socket_send_with_blocking(cast(GSocket*)this._cPtr, _buffer, _size, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1756,7 +1756,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_set_option(cast(GSocket*)this._cPtr, level, optname, value, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1830,7 +1830,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     GError *_err;
     _retval = cast(bool)g_socket_shutdown(cast(GSocket*)this._cPtr, shutdownRead, shutdownWrite, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

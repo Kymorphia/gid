@@ -68,7 +68,7 @@ class StructArray : arrow.array.Array
     GError *_err;
     _cretval = garrow_struct_array_flatten(cast(GArrowStructArray*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(arrow.array.Array, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

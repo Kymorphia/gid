@@ -87,7 +87,7 @@ class FileFormat : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gadataset_file_format_open_writer(cast(GADatasetFileFormat*)this._cPtr, destination ? cast(GArrowOutputStream*)destination._cPtr(No.Dup) : null, fileSystem ? cast(GArrowFileSystem*)fileSystem._cPtr(No.Dup) : null, _path, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GADatasetFileWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.Take);
     return _retval;
   }

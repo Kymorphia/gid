@@ -126,7 +126,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_favicon_database_get_favicon_finish(cast(WebKitFaviconDatabase*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }

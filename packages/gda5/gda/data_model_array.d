@@ -115,7 +115,7 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
     GError *_err;
     _cretval = gda_data_model_array_get_row(cast(GdaDataModelArray*)this._cPtr, row, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.row.Row)(cast(GdaRow*)_cretval, No.Take);
     return _retval;
   }

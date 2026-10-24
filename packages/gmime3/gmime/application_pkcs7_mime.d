@@ -89,7 +89,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
     GError *_err;
     _cretval = g_mime_application_pkcs7_mime_encrypt(entity ? cast(GMimeObject*)entity._cPtr(No.Dup) : null, flags, _recipients, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.application_pkcs7_mime.ApplicationPkcs7Mime)(cast(GMimeApplicationPkcs7Mime*)_cretval, Yes.Take);
     return _retval;
   }
@@ -113,7 +113,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
     GError *_err;
     _cretval = g_mime_application_pkcs7_mime_sign(entity ? cast(GMimeObject*)entity._cPtr(No.Dup) : null, _userid, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.application_pkcs7_mime.ApplicationPkcs7Mime)(cast(GMimeApplicationPkcs7Mime*)_cretval, Yes.Take);
     return _retval;
   }
@@ -147,7 +147,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
     GError *_err;
     _cretval = g_mime_application_pkcs7_mime_decrypt(cast(GMimeApplicationPkcs7Mime*)this._cPtr, flags, _sessionKey, result ? cast(GMimeDecryptResult**)result._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(GMimeObject*)_cretval, Yes.Take);
     return _retval;
   }
@@ -184,7 +184,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
     GError *_err;
     _cretval = g_mime_application_pkcs7_mime_verify(cast(GMimeApplicationPkcs7Mime*)this._cPtr, flags, &_entity, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
     entity = new gmime.object.ObjectWrap(cast(void*)_entity, Yes.Take);
     return _retval;

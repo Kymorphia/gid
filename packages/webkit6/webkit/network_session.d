@@ -244,7 +244,7 @@ class NetworkSession : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_network_session_get_itp_summary_finish(cast(WebKitNetworkSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(webkit.itpthird_party.ITPThirdParty, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

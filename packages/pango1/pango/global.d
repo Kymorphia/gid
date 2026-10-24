@@ -914,7 +914,7 @@ bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, ou
   GError *_err;
   _retval = cast(bool)pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context._cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
   text = _text.fromCString!(Yes.Free);
   return _retval;
@@ -1029,7 +1029,7 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
   GError *_err;
   _retval = cast(bool)pango_parse_markup(_markupText, _length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
   text = _text.fromCString!(Yes.Free);
   return _retval;

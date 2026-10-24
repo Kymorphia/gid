@@ -182,7 +182,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _cretval = secret_item_create_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
     return _retval;
   }
@@ -219,7 +219,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _cretval = secret_item_create_sync(collection ? cast(SecretCollection*)collection._cPtr(No.Dup) : null, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
     return _retval;
   }
@@ -276,7 +276,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_load_secrets_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_load_secrets_sync(_items, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_delete_finish(cast(SecretItem*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_delete_sync(cast(SecretItem*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -568,7 +568,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_load_secret_finish(cast(SecretItem*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -592,7 +592,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_load_secret_sync(cast(SecretItem*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -662,7 +662,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_set_attributes_finish(cast(SecretItem*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -691,7 +691,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_set_attributes_sync(cast(SecretItem*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_set_label_finish(cast(SecretItem*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -764,7 +764,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_set_label_sync(cast(SecretItem*)this._cPtr, _label, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -816,7 +816,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_set_secret_finish(cast(SecretItem*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -841,7 +841,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     GError *_err;
     _retval = cast(bool)secret_item_set_secret_sync(cast(SecretItem*)this._cPtr, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

@@ -279,7 +279,7 @@ interface File
     GError *_err;
     _cretval = g_file_new_tmp(_tmpl, &_iostream, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
     return _retval;
@@ -375,7 +375,7 @@ interface File
     GError *_err;
     _cretval = g_file_new_tmp_dir_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
@@ -397,7 +397,7 @@ interface File
     GError *_err;
     _cretval = g_file_new_tmp_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_iostream, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
     return _retval;

@@ -189,7 +189,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_web_process_extension_send_message_to_context_finish(cast(WebKitWebProcessExtension*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }

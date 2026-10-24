@@ -129,7 +129,7 @@ class SqlStatement : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)gda_sql_statement_check_structure(cast(GdaSqlStatement*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class SqlStatement : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)gda_sql_statement_check_validity(cast(GdaSqlStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class SqlStatement : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)gda_sql_statement_check_validity_m(cast(GdaSqlStatement*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class SqlStatement : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)gda_sql_statement_normalize(cast(GdaSqlStatement*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

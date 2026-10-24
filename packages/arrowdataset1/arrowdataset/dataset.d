@@ -58,7 +58,7 @@ class Dataset : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gadataset_dataset_begin_scan(cast(GADatasetDataset*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
     return _retval;
   }
@@ -79,7 +79,7 @@ class Dataset : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gadataset_dataset_to_record_batch_reader(cast(GADatasetDataset*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
@@ -91,7 +91,7 @@ class Dataset : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gadataset_dataset_to_table(cast(GADatasetDataset*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }

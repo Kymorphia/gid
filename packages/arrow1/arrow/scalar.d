@@ -63,7 +63,7 @@ class Scalar : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_scalar_parse(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, _data, _size, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
     return _retval;
   }
@@ -75,7 +75,7 @@ class Scalar : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_scalar_cast(cast(GArrowScalar*)this._cPtr, dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, options ? cast(GArrowCastOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
     return _retval;
   }

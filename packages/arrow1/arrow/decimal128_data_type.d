@@ -55,7 +55,7 @@ class Decimal128DataType : arrow.decimal_data_type.DecimalDataType
     GError *_err;
     _cretval = garrow_decimal128_data_type_new(precision, scale, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 

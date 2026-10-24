@@ -56,7 +56,7 @@ class MetadataReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gaflight_metadata_reader_read(cast(GAFlightMetadataReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }

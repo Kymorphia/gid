@@ -377,7 +377,7 @@ class GLContext : gdk.draw_context.DrawContext
     GError *_err;
     _retval = cast(bool)gdk_gl_context_realize(cast(GdkGLContext*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

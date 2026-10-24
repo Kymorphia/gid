@@ -429,7 +429,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _cretval = rsvg_handle_new_from_data(_data, _dataLen, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
@@ -452,7 +452,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _cretval = rsvg_handle_new_from_file(_filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
@@ -482,7 +482,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _cretval = rsvg_handle_new_from_gfile_sync(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
@@ -513,7 +513,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _cretval = rsvg_handle_new_from_stream_sync(inputStream ? cast(GInputStream*)inputStream._cPtr(No.Dup) : null, baseFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)baseFile)._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
@@ -559,7 +559,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_close(cast(RsvgHandle*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -684,7 +684,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_get_geometry_for_element(cast(RsvgHandle*)this._cPtr, _id, &outInkRect, &outLogicalRect, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -736,7 +736,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_get_geometry_for_layer(cast(RsvgHandle*)this._cPtr, _id, &viewport, &outInkRect, &outLogicalRect, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1036,7 +1036,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_read_stream_sync(cast(RsvgHandle*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1191,7 +1191,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_render_document(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, &viewport, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1236,7 +1236,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_render_element(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &elementViewport, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1284,7 +1284,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_render_layer(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _id, &viewport, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1425,7 +1425,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_set_stylesheet(cast(RsvgHandle*)this._cPtr, _css, _cssLen, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1463,7 +1463,7 @@ class Handle : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)rsvg_handle_write(cast(RsvgHandle*)this._cPtr, _buf, _count, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

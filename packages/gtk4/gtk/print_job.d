@@ -310,7 +310,7 @@ class PrintJob : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gtk_print_job_get_surface(cast(GtkPrintJob*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -492,7 +492,7 @@ class PrintJob : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_print_job_set_source_fd(cast(GtkPrintJob*)this._cPtr, fd, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -517,7 +517,7 @@ class PrintJob : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gtk_print_job_set_source_file(cast(GtkPrintJob*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

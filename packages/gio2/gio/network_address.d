@@ -176,7 +176,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
     GError *_err;
     _cretval = g_network_address_parse(_hostAndPort, defaultPort, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
@@ -203,7 +203,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
     GError *_err;
     _cretval = g_network_address_parse_uri(_uri, defaultPort, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }

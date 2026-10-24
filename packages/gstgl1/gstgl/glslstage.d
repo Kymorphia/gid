@@ -113,7 +113,7 @@ class GLSLStage : gst.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)gst_glsl_stage_compile(cast(GstGLSLStage*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

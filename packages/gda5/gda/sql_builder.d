@@ -350,7 +350,7 @@ class SqlBuilder : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gda_sql_builder_get_statement(cast(GdaSqlBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new SqlBuilderException(_err);
+      throw new SqlBuilderException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(cast(GdaStatement*)_cretval, Yes.Take);
     return _retval;
   }
@@ -566,9 +566,9 @@ final class SqlBuilderGidBuilder : SqlBuilderGidBuilderImpl!SqlBuilderGidBuilder
 
 class SqlBuilderException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

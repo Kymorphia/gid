@@ -131,7 +131,7 @@ class Layout : gobject.object.ObjectWrap
     GError *_err;
     _cretval = pango_layout_deserialize(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, flags, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1318,7 +1318,7 @@ class Layout : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)pango_layout_write_to_file(cast(PangoLayout*)this._cPtr, flags, _filename, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

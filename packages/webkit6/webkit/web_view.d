@@ -573,7 +573,7 @@ class WebView : webkit.web_view_base.WebViewBase
     GError *_err;
     _cretval = webkit_web_view_call_async_javascript_function_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
@@ -625,7 +625,7 @@ class WebView : webkit.web_view_base.WebViewBase
     GError *_err;
     _retval = cast(bool)webkit_web_view_can_execute_editing_command_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -789,7 +789,7 @@ class WebView : webkit.web_view_base.WebViewBase
     GError *_err;
     _cretval = webkit_web_view_evaluate_javascript_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1178,7 +1178,7 @@ class WebView : webkit.web_view_base.WebViewBase
     GError *_err;
     _cretval = webkit_web_view_get_snapshot_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1658,7 +1658,7 @@ class WebView : webkit.web_view_base.WebViewBase
     GError *_err;
     _cretval = webkit_web_view_save_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1715,7 +1715,7 @@ class WebView : webkit.web_view_base.WebViewBase
     GError *_err;
     _retval = cast(bool)webkit_web_view_save_to_file_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -1767,7 +1767,7 @@ class WebView : webkit.web_view_base.WebViewBase
     GError *_err;
     _cretval = webkit_web_view_send_message_to_page_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }

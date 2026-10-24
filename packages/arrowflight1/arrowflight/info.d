@@ -61,7 +61,7 @@ class Info : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gaflight_info_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, descriptor ? cast(GAFlightDescriptor*)descriptor._cPtr(No.Dup) : null, _endpoints, totalRecords, totalBytes, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -98,7 +98,7 @@ class Info : gobject.object.ObjectWrap
     GError *_err;
     _cretval = gaflight_info_get_schema(cast(GAFlightInfo*)this._cPtr, options ? cast(GArrowReadOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }

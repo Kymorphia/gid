@@ -665,7 +665,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
     GError *_err;
     gtk_print_operation_get_error(cast(GtkPrintOperation*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
   }
 
   /**
@@ -856,7 +856,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
     GError *_err;
     _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)this._cPtr, action, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gtk.types.PrintOperationResult _retval = cast(gtk.types.PrintOperationResult)_cretval;
     return _retval;
   }

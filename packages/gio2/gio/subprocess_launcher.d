@@ -296,7 +296,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)this._cPtr, _argv, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }

@@ -103,7 +103,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_add_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_launch(cast(GAppInfo*)this._cPtr, _files, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_launch_uris(cast(GAppInfo*)this._cPtr, _uris, context ? cast(GAppLaunchContext*)context._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -434,7 +434,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_launch_uris_finish(cast(GAppInfo*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_remove_supports_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_set_as_default_for_extension(cast(GAppInfo*)this._cPtr, _extension, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -492,7 +492,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_set_as_default_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -514,7 +514,7 @@ template AppInfoT()
     GError *_err;
     _retval = cast(bool)g_app_info_set_as_last_used_for_type(cast(GAppInfo*)this._cPtr, _contentType, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

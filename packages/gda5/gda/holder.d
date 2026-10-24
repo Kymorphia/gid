@@ -394,7 +394,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_holder_is_valid_e(cast(GdaHolder*)this._cPtr, &_err);
     if (_err)
-      throw new HolderException(_err);
+      throw new HolderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -459,7 +459,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_holder_set_bind(cast(GdaHolder*)this._cPtr, bindTo ? cast(GdaHolder*)bindTo._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new HolderException(_err);
+      throw new HolderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -509,7 +509,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_holder_set_source_model(cast(GdaHolder*)this._cPtr, model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, col, &_err);
     if (_err)
-      throw new HolderException(_err);
+      throw new HolderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -543,7 +543,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_holder_set_value(cast(GdaHolder*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new HolderException(_err);
+      throw new HolderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -569,7 +569,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_holder_set_value_str(cast(GdaHolder*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null, _value, &_err);
     if (_err)
-      throw new HolderException(_err);
+      throw new HolderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
     GError *_err;
     _retval = cast(bool)gda_holder_take_value(cast(GdaHolder*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null, &_err);
     if (_err)
-      throw new HolderException(_err);
+      throw new HolderException(_err, Yes.Take);
     return _retval;
   }
 
@@ -920,9 +920,9 @@ final class HolderGidBuilder : HolderGidBuilderImpl!HolderGidBuilder
 
 class HolderException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

@@ -160,7 +160,7 @@ interface Action
     GError *_err;
     _retval = cast(bool)g_action_parse_detailed_name(_detailedName, &_actionName, &_targetValue, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     actionName = _actionName.fromCString!(Yes.Free);
     targetValue = new glib.variant.Variant(cast(void*)_targetValue, Yes.Take);
     return _retval;

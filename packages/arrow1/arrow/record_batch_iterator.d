@@ -74,7 +74,7 @@ class RecordBatchIterator : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_iterator_next(cast(GArrowRecordBatchIterator*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
@@ -86,7 +86,7 @@ class RecordBatchIterator : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_record_batch_iterator_to_list(cast(GArrowRecordBatchIterator*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(arrow.record_batch.RecordBatch, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

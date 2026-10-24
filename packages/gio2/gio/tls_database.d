@@ -116,7 +116,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_lookup_certificate_for_handle(cast(GTlsDatabase*)this._cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -173,7 +173,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_lookup_certificate_for_handle_finish(cast(GTlsDatabase*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -215,7 +215,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_lookup_certificate_issuer(cast(GTlsDatabase*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -268,7 +268,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_lookup_certificate_issuer_finish(cast(GTlsDatabase*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
@@ -296,7 +296,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_lookup_certificates_issued_by(cast(GTlsDatabase*)this._cPtr, _issuerRawDn, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.tls_certificate.TlsCertificate, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -355,7 +355,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_lookup_certificates_issued_by_finish(cast(GTlsDatabase*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(gio.tls_certificate.TlsCertificate, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -440,7 +440,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_verify_chain(cast(GTlsDatabase*)this._cPtr, chain ? cast(GTlsCertificate*)chain._cPtr(No.Dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
@@ -506,7 +506,7 @@ class TlsDatabase : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_tls_database_verify_chain_finish(cast(GTlsDatabase*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }

@@ -61,7 +61,7 @@ class StreamListener : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_stream_listener_on_eos(cast(GArrowStreamListener*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class StreamListener : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_stream_listener_on_record_batch_decoded(cast(GArrowStreamListener*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, _metadata, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class StreamListener : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_stream_listener_on_schema_decoded(cast(GArrowStreamListener*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, filteredSchema ? cast(GArrowSchema*)filteredSchema._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

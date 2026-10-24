@@ -141,7 +141,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)webkit_website_data_manager_clear_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_website_data_manager_fetch_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(webkit.website_data.WebsiteData, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -296,7 +296,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
     GError *_err;
     _cretval = webkit_website_data_manager_get_itp_summary_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gListToD!(webkit.itpthird_party.ITPThirdParty, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -366,7 +366,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)webkit_website_data_manager_remove_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

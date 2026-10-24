@@ -121,7 +121,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr._cPtr(No.Dup) : null, length, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -144,7 +144,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
     GError *_err;
     _cretval = g_inet_address_mask_new_from_string(_maskString, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_address_mask.InetAddressMask)(cast(GInetAddressMask*)_cretval, Yes.Take);
     return _retval;
   }

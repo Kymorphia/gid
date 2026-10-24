@@ -2,6 +2,8 @@
 //!kind ErrorWrap Wrap
 //!inhibit init funcs
 
+public import std.typecons : Flag, No, Yes;
+
 import glib.types;
 
 class ErrorWrap : Exception
@@ -9,27 +11,28 @@ class ErrorWrap : Exception
   private GError* errPtr;
 
   /** */
-  this(void* err, bool unused=false) nothrow
+  this(void* err, Flag!"Take" take) nothrow
   {
-    errPtr = cast(GError*)err;
+    assert(err !is null);
+
+    if (take)
+      errPtr = cast(GError*)err;
+    else
+      errPtr = g_error_copy(cast(GError*)err);
+
     super(errPtr.message.fromCString);
   }
 
   /** */
   this(Quark domain, int code, string message) nothrow
   {
-    this(g_error_new_literal(domain, code, message.toCString));
-  }
-
-  /** */
-  this() nothrow
-  {
-    super("");
+    this(g_error_new_literal(domain, code, message.toCString), Yes.Take);
   }
 
   ~this() nothrow
   {
-    g_error_free(errPtr);
+    if (errPtr)
+      g_error_free(errPtr);
   }
 
   /**
@@ -108,22 +111,15 @@ class ErrorWrap : Exception
    */
   static ErrorWrap newLiteral(Quark domain, int code, string message) nothrow
   {
-    GError* _cretval;
-    const(char)* _message = message.toCString;
-    _cretval = g_error_new_literal(domain, code, _message);
-    ErrorWrap _retval = new ErrorWrap(cast(GError*)_cretval);
-    return _retval;
+    return new ErrorWrap(domain, code, message);
   }
 
   /**
-   * Copy a an `ErrorWrap` object.
+   * Copy an `ErrorWrap` object.
    */
   ErrorWrap copy() nothrow
   {
-    GError* _cretval;
-    _cretval = g_error_copy(errPtr);
-    ErrorWrap _retval = new ErrorWrap(cast(GError*)_cretval);
-    return _retval;
+    return new ErrorWrap(cast(void*)errPtr, No.Take);
   }
 
   /**

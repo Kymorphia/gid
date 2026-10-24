@@ -123,7 +123,7 @@ template NetworkMonitorT()
     GError *_err;
     _retval = cast(bool)g_network_monitor_can_reach(cast(GNetworkMonitor*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ template NetworkMonitorT()
     GError *_err;
     _retval = cast(bool)g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

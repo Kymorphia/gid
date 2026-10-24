@@ -66,7 +66,7 @@ class Schema : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_schema_import(cAbiSchema, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
@@ -78,7 +78,7 @@ class Schema : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_schema_add_field(cast(GArrowSchema*)this._cPtr, i, field ? cast(GArrowField*)field._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
@@ -97,7 +97,7 @@ class Schema : gobject.object.ObjectWrap
     GError *_err;
     auto _retval = garrow_schema_export(cast(GArrowSchema*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Schema : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_schema_remove_field(cast(GArrowSchema*)this._cPtr, i, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
@@ -182,7 +182,7 @@ class Schema : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_schema_replace_field(cast(GArrowSchema*)this._cPtr, i, field ? cast(GArrowField*)field._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }

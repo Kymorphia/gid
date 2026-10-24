@@ -316,7 +316,7 @@ class SaveDelegate : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)panel_save_delegate_save_finish(cast(PanelSaveDelegate*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

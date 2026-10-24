@@ -1898,7 +1898,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _cretval = vte_terminal_pty_new_sync(cast(VteTerminal*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
@@ -2408,7 +2408,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _retval = cast(bool)vte_terminal_set_encoding(cast(VteTerminal*)this._cPtr, _codeset, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -2834,7 +2834,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _retval = cast(bool)vte_terminal_spawn_sync(cast(VteTerminal*)this._cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -3015,7 +3015,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     GError *_err;
     _retval = cast(bool)vte_terminal_write_contents_sync(cast(VteTerminal*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

@@ -366,7 +366,7 @@ class TlsConnection : gio.iostream.IOStream
     GError *_err;
     _retval = cast(bool)g_tls_connection_get_channel_binding_data(cast(GTlsConnection*)this._cPtr, type, _data, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     data = gByteArrayToD!(GidOwnership.Full)(_data);
     return _retval;
   }
@@ -569,7 +569,7 @@ class TlsConnection : gio.iostream.IOStream
     GError *_err;
     _retval = cast(bool)g_tls_connection_handshake(cast(GTlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -619,7 +619,7 @@ class TlsConnection : gio.iostream.IOStream
     GError *_err;
     _retval = cast(bool)g_tls_connection_handshake_finish(cast(GTlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

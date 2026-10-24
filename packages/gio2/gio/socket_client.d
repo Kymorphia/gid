@@ -349,7 +349,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect(cast(GSocketClient*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -410,7 +410,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -461,7 +461,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect_to_host(cast(GSocketClient*)this._cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -515,7 +515,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect_to_host_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -551,7 +551,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect_to_service(cast(GSocketClient*)this._cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -603,7 +603,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect_to_service_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -645,7 +645,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect_to_uri(cast(GSocketClient*)this._cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
@@ -699,7 +699,7 @@ class SocketClient : gobject.object.ObjectWrap
     GError *_err;
     _cretval = g_socket_client_connect_to_uri_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }

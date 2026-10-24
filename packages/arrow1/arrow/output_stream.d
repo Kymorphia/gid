@@ -65,7 +65,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
     GError *_err;
     _retval = cast(bool)garrow_output_stream_align(cast(GArrowOutputStream*)this._cPtr, alignment, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
     GError *_err;
     _retval = garrow_output_stream_write_record_batch(cast(GArrowOutputStream*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
     GError *_err;
     _retval = garrow_output_stream_write_tensor(cast(GArrowOutputStream*)this._cPtr, tensor ? cast(GArrowTensor*)tensor._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

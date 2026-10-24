@@ -282,7 +282,7 @@ bool asciiStringToSigned(string str, uint base, long min, long max, out long out
   GError *_err;
   _retval = cast(bool)g_ascii_string_to_signed(_str, base, min, max, cast(long*)&outNum, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -326,7 +326,7 @@ bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulon
   GError *_err;
   _retval = cast(bool)g_ascii_string_to_unsigned(_str, base, min, max, cast(ulong*)&outNum, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -1827,7 +1827,7 @@ void clearError()
   GError *_err;
   g_clear_error(&_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
 }
 
 /**
@@ -1860,7 +1860,7 @@ bool close(int fd)
   GError *_err;
   _retval = cast(bool)g_close(fd, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -2100,7 +2100,7 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
   GError *_err;
   _cretval = g_convert(_str, _len, _toCodeset, _fromCodeset, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   ubyte[] _retval;
 
   if (_cretval)
@@ -2172,7 +2172,7 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
   GError *_err;
   _cretval = g_convert_with_fallback(_str, _len, _toCodeset, _fromCodeset, _fallback, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   ubyte[] _retval;
 
   if (_cretval)
@@ -2635,7 +2635,7 @@ bool fileGetContents(string filename, out ubyte[] contents)
   GError *_err;
   _retval = cast(bool)g_file_get_contents(_filename, &_contents, &_length, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   contents.length = _length;
   contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
   gFree(cast(void*)_contents);
@@ -2679,7 +2679,7 @@ int fileOpenTmp(string tmpl, out string nameUsed)
   GError *_err;
   _retval = g_file_open_tmp(_tmpl, &_nameUsed, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   nameUsed = _nameUsed.fromCString!(Yes.Free);
   return _retval;
 }
@@ -2722,7 +2722,7 @@ string fileReadLink(string filename)
   GError *_err;
   _cretval = g_file_read_link(_filename, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
@@ -2752,7 +2752,7 @@ bool fileSetContents(string filename, ubyte[] contents)
   GError *_err;
   _retval = cast(bool)g_file_set_contents(_filename, _contents, _length, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -2833,7 +2833,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
   GError *_err;
   _retval = cast(bool)g_file_set_contents_full(_filename, _contents, _length, flags, mode, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -3003,7 +3003,7 @@ string filenameFromUri(string uri, out string hostname)
   GError *_err;
   _cretval = g_filename_from_uri(_uri, &_hostname, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   hostname = _hostname.fromCString!(Yes.Free);
   return _retval;
@@ -3046,7 +3046,7 @@ ubyte[] filenameFromUtf8(ubyte[] utf8string, out size_t bytesRead)
   GError *_err;
   _cretval = g_filename_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   ubyte[] _retval;
 
   if (_cretval)
@@ -3078,7 +3078,7 @@ string filenameToUri(string filename, string hostname = null)
   GError *_err;
   _cretval = g_filename_to_uri(_filename, _hostname, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
@@ -3122,7 +3122,7 @@ string filenameToUtf8(ubyte[] opsysstring, out size_t bytesRead)
   GError *_err;
   _cretval = g_filename_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval;
 
   if (_cretval)
@@ -4644,7 +4644,7 @@ ubyte[] localeFromUtf8(ubyte[] utf8string, out size_t bytesRead)
   GError *_err;
   _cretval = g_locale_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   ubyte[] _retval;
 
   if (_cretval)
@@ -4695,7 +4695,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
   GError *_err;
   _cretval = g_locale_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval;
 
   if (_cretval)
@@ -5881,27 +5881,6 @@ int poll(glib.types.PollFD fds, uint nfds, int timeout) nothrow
 }
 
 /**
-    If dest is null, free src; otherwise, moves src into *dest.
-    The error variable dest points to must be null.
-    
-    src must be non-null.
-    
-    Note that src is no longer valid after this call. If you want
-    to keep using the same GError*, you need to set it to null
-    after calling this function on it.
-
-    Params:
-      dest = error return location
-      src = error to move into the return location
-*/
-void propagateError(out glib.error.ErrorWrap dest, glib.error.ErrorWrap src) nothrow
-{
-  GError* _dest;
-  g_propagate_error(&_dest, src ? cast(GError*)src._cPtr : null);
-  dest = new glib.error.ErrorWrap(cast(void*)_dest, Yes.Take);
-}
-
-/**
     This is just like the standard C qsort() function, but
     the comparison routine accepts a user data argument.
     
@@ -6659,7 +6638,7 @@ bool shellParseArgv(string commandLine, out string[] argvp)
   GError *_err;
   _retval = cast(bool)g_shell_parse_argv(_commandLine, &_argcp, &_argvp, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   argvp.length = _argcp;
   foreach (i; 0 .. _argcp)
     argvp[i] = _argvp[i].fromCString!(Yes.Free);
@@ -6733,7 +6712,7 @@ string shellUnquote(string quotedString)
   GError *_err;
   _cretval = g_shell_unquote(_quotedString, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
@@ -6959,7 +6938,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
   GError *_err;
   _retval = cast(bool)g_spawn_async(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -7019,7 +6998,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
   GError *_err;
   _retval = cast(bool)g_spawn_async_with_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, stdinFd, stdoutFd, stderrFd, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -7079,7 +7058,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
   GError *_err;
   _retval = cast(bool)g_spawn_async_with_pipes(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cast(int*)&standardInput, cast(int*)&standardOutput, cast(int*)&standardError, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -7347,7 +7326,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
   GError *_err;
   _retval = cast(bool)g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -7375,7 +7354,7 @@ bool spawnCheckExitStatus(int waitStatus)
   GError *_err;
   _retval = cast(bool)g_spawn_check_exit_status(waitStatus, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -7432,7 +7411,7 @@ bool spawnCheckWaitStatus(int waitStatus)
   GError *_err;
   _retval = cast(bool)g_spawn_check_wait_status(waitStatus, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -7474,7 +7453,7 @@ bool spawnCommandLineAsync(string commandLine)
   GError *_err;
   _retval = cast(bool)g_spawn_command_line_async(_commandLine, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -7526,7 +7505,7 @@ bool spawnCommandLineSync(string commandLine, out string standardOutput, out str
   GError *_err;
   _retval = cast(bool)g_spawn_command_line_sync(_commandLine, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   standardOutput = _standardOutput.fromCString!(Yes.Free);
   standardError = _standardError.fromCString!(Yes.Free);
   return _retval;
@@ -7623,7 +7602,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
   GError *_err;
   _retval = cast(bool)g_spawn_sync(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   standardOutput = _standardOutput.fromCString!(Yes.Free);
   standardError = _standardError.fromCString!(Yes.Free);
   return _retval;
@@ -9692,7 +9671,7 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
   GError *_err;
   _cretval = g_ucs4_to_utf16(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   ushort[] _retval;
 
   if (_cretval)
@@ -9734,7 +9713,7 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
   GError *_err;
   _cretval = g_ucs4_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
@@ -10468,7 +10447,7 @@ void* unixGetPasswdEntry(string userName)
   GError *_err;
   auto _retval = g_unix_get_passwd_entry(_userName, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -10507,7 +10486,7 @@ bool unixOpenPipe(int[] fds, int flags)
   GError *_err;
   _retval = cast(bool)g_unix_open_pipe(_fds, flags, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -10528,7 +10507,7 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
   GError *_err;
   _retval = cast(bool)g_unix_set_fd_nonblocking(fd, nonblock, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   return _retval;
 }
 
@@ -10704,7 +10683,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
   GError *_err;
   _cretval = g_utf16_to_ucs4(_str, _len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   dchar[] _retval;
 
   if (_cretval)
@@ -10756,7 +10735,7 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
   GError *_err;
   _cretval = g_utf16_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
 }
@@ -11358,7 +11337,7 @@ dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
   GError *_err;
   _cretval = g_utf8_to_ucs4(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   dchar[] _retval;
 
   if (_cretval)
@@ -11426,7 +11405,7 @@ ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
   GError *_err;
   _cretval = g_utf8_to_utf16(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
-    throw new ErrorWrap(_err);
+    throw new ErrorWrap(_err, Yes.Take);
   ushort[] _retval;
 
   if (_cretval)

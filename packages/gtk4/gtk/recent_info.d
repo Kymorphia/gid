@@ -71,7 +71,7 @@ class RecentInfo : gobject.boxed.Boxed
     GError *_err;
     _cretval = gtk_recent_info_create_app_info(cast(GtkRecentInfo*)this._cPtr, _appName, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }

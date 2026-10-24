@@ -57,7 +57,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_array_builder_append_empty_value(cast(GArrowArrayBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_array_builder_append_empty_values(cast(GArrowArrayBuilder*)this._cPtr, n, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_array_builder_append_null(cast(GArrowArrayBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_array_builder_append_nulls(cast(GArrowArrayBuilder*)this._cPtr, n, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_array_builder_finish(cast(GArrowArrayBuilder*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
@@ -189,7 +189,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_array_builder_reserve(cast(GArrowArrayBuilder*)this._cPtr, additionalCapacity, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
     GError *_err;
     _retval = cast(bool)garrow_array_builder_resize(cast(GArrowArrayBuilder*)this._cPtr, capacity, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 }

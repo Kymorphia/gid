@@ -61,7 +61,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     GError *_err;
     _cretval = garrow_file_input_stream_new(_path, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -72,7 +72,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     GError *_err;
     _cretval = garrow_file_input_stream_new_file_descriptor(fileDescriptor, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.file_input_stream.FileInputStream)(cast(GArrowFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }

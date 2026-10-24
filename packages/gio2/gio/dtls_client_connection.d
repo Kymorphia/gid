@@ -130,7 +130,7 @@ interface DtlsClientConnection
     GError *_err;
     _cretval = g_dtls_client_connection_new(baseSocket ? cast(GDatagramBased*)(cast(gobject.object.ObjectWrap)baseSocket)._cPtr(No.Dup) : null, serverIdentity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)serverIdentity)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dtls_client_connection.DtlsClientConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
     return _retval;
   }

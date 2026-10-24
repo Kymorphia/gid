@@ -215,7 +215,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_get_boolean(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_boolean_list(cast(GKeyFile*)this._cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     bool[] _retval;
 
     if (_cretval)
@@ -282,7 +282,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_comment(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -311,7 +311,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = g_key_file_get_double(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -341,7 +341,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_double_list(cast(GKeyFile*)this._cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     double[] _retval;
 
     if (_cretval)
@@ -396,7 +396,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = g_key_file_get_int64(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = g_key_file_get_integer(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -456,7 +456,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_integer_list(cast(GKeyFile*)this._cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     int[] _retval;
 
     if (_cretval)
@@ -488,7 +488,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_keys(cast(GKeyFile*)this._cPtr, _groupName, &_cretlength, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)
@@ -561,7 +561,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_locale_string(cast(GKeyFile*)this._cPtr, _groupName, _key, _locale, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -601,7 +601,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_locale_string_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _locale, &_cretlength, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)
@@ -651,7 +651,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_string(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -680,7 +680,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_string_list(cast(GKeyFile*)this._cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string[] _retval;
 
     if (_cretval)
@@ -713,7 +713,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = g_key_file_get_uint64(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_get_value(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -778,7 +778,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_bytes(cast(GKeyFile*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, flags, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -803,7 +803,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_data(cast(GKeyFile*)this._cPtr, _data, _length, flags, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -830,7 +830,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_data_dirs(cast(GKeyFile*)this._cPtr, _file, &_fullPath, flags, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     fullPath = _fullPath.fromCString!(Yes.Free);
     return _retval;
   }
@@ -869,7 +869,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_dirs(cast(GKeyFile*)this._cPtr, _file, _searchDirs, &_fullPath, flags, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     fullPath = _fullPath.fromCString!(Yes.Free);
     return _retval;
   }
@@ -897,7 +897,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_file(cast(GKeyFile*)this._cPtr, _file, flags, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -921,7 +921,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_remove_comment(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -941,7 +941,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_remove_group(cast(GKeyFile*)this._cPtr, _groupName, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -962,7 +962,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_remove_key(cast(GKeyFile*)this._cPtr, _groupName, _key, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -987,7 +987,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_save_to_file(cast(GKeyFile*)this._cPtr, _filename, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1055,7 +1055,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _retval = cast(bool)g_key_file_set_comment(cast(GKeyFile*)this._cPtr, _groupName, _key, _comment, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     return _retval;
   }
 
@@ -1310,7 +1310,7 @@ class KeyFile : gobject.boxed.Boxed
     GError *_err;
     _cretval = g_key_file_to_data(cast(GKeyFile*)this._cPtr, &_cretlength, &_err);
     if (_err)
-      throw new KeyFileException(_err);
+      throw new KeyFileException(_err, Yes.Take);
     string _retval;
 
     if (_cretval)
@@ -1332,9 +1332,9 @@ class KeyFile : gobject.boxed.Boxed
 
 class KeyFileException : ErrorWrap
 {
-  this(GError* err) nothrow
+  this(GError* err, Flag!"Take" take) nothrow
   {
-    super(err);
+    super(err, take);
   }
 
   this(Code code, string msg) nothrow

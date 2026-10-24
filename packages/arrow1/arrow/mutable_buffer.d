@@ -86,7 +86,7 @@ class MutableBuffer : arrow.buffer.Buffer
     GError *_err;
     _retval = cast(bool)garrow_mutable_buffer_set_data(cast(GArrowMutableBuffer*)this._cPtr, offset, _data, _size, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

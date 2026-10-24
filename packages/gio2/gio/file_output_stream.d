@@ -117,7 +117,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
     GError *_err;
     _cretval = g_file_output_stream_query_info(cast(GFileOutputStream*)this._cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
@@ -174,7 +174,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
     GError *_err;
     _cretval = g_file_output_stream_query_info_finish(cast(GFileOutputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }

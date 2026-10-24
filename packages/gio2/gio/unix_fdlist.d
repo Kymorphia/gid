@@ -127,7 +127,7 @@ class UnixFDList : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_unix_fd_list_append(cast(GUnixFDList*)this._cPtr, fd, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class UnixFDList : gobject.object.ObjectWrap
     GError *_err;
     _retval = g_unix_fd_list_get(cast(GUnixFDList*)this._cPtr, index, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 

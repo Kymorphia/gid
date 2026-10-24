@@ -57,7 +57,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_feather_file_reader_new(file ? cast(GArrowSeekableInputStream*)file._cPtr(No.Dup) : null, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     this(_cretval, Yes.Take);
   }
 
@@ -76,7 +76,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_feather_file_reader_read(cast(GArrowFeatherFileReader*)this._cPtr, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
@@ -93,7 +93,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_feather_file_reader_read_indices(cast(GArrowFeatherFileReader*)this._cPtr, _indices, _nIndices, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
@@ -114,7 +114,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
     GError *_err;
     _cretval = garrow_feather_file_reader_read_names(cast(GArrowFeatherFileReader*)this._cPtr, _names, _nNames, &_err);
     if (_err)
-      throw new ErrorWrap(_err);
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
