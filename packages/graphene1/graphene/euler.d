@@ -328,9 +328,9 @@ class Euler : gobject.boxed.Boxed
   */
   void reorder(graphene.types.EulerOrder order, out graphene.euler.Euler res) nothrow
   {
-    graphene_euler_t _res;
-    graphene_euler_reorder(cast(const(graphene_euler_t)*)this._cPtr, order, &_res);
-    res = new graphene.euler.Euler(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_euler_t(graphene.euler.Euler._getGType);
+    graphene_euler_reorder(cast(const(graphene_euler_t)*)this._cPtr, order, _res);
+    res = new graphene.euler.Euler(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -356,9 +356,9 @@ class Euler : gobject.boxed.Boxed
   */
   void toMatrix(out graphene.matrix.Matrix res) nothrow
   {
-    graphene_matrix_t _res;
-    graphene_euler_to_matrix(cast(const(graphene_euler_t)*)this._cPtr, &_res);
-    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    graphene_euler_to_matrix(cast(const(graphene_euler_t)*)this._cPtr, _res);
+    res = new graphene.matrix.Matrix(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -381,8 +381,8 @@ class Euler : gobject.boxed.Boxed
   */
   void toVec3(out graphene.vec3.Vec3 res) nothrow
   {
-    graphene_vec3_t _res;
-    graphene_euler_to_vec3(cast(const(graphene_euler_t)*)this._cPtr, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    graphene_euler_to_vec3(cast(const(graphene_euler_t)*)this._cPtr, _res);
+    res = new graphene.vec3.Vec3(cast(void*)_res, Yes.Take);
   }
 }

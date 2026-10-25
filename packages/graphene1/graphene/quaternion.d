@@ -334,9 +334,9 @@ struct Quaternion
   */
   void toAngleVec3(out float angle, out graphene.vec3.Vec3 axis) nothrow
   {
-    graphene_vec3_t _axis;
-    graphene_quaternion_to_angle_vec3(cast(const(graphene_quaternion_t)*)&this, cast(float*)&angle, &_axis);
-    axis = new graphene.vec3.Vec3(cast(void*)&_axis, No.Take);
+    auto _axis = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    graphene_quaternion_to_angle_vec3(cast(const(graphene_quaternion_t)*)&this, cast(float*)&angle, _axis);
+    axis = new graphene.vec3.Vec3(cast(void*)_axis, Yes.Take);
   }
 
   /**
@@ -366,9 +366,9 @@ struct Quaternion
   */
   void toMatrix(out graphene.matrix.Matrix m) nothrow
   {
-    graphene_matrix_t _m;
-    graphene_quaternion_to_matrix(cast(const(graphene_quaternion_t)*)&this, &_m);
-    m = new graphene.matrix.Matrix(cast(void*)&_m, No.Take);
+    auto _m = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    graphene_quaternion_to_matrix(cast(const(graphene_quaternion_t)*)&this, _m);
+    m = new graphene.matrix.Matrix(cast(void*)_m, Yes.Take);
   }
 
   /**
@@ -399,8 +399,8 @@ struct Quaternion
   */
   void toVec4(out graphene.vec4.Vec4 res) nothrow
   {
-    graphene_vec4_t _res;
-    graphene_quaternion_to_vec4(cast(const(graphene_quaternion_t)*)&this, &_res);
-    res = new graphene.vec4.Vec4(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_vec4_t(graphene.vec4.Vec4._getGType);
+    graphene_quaternion_to_vec4(cast(const(graphene_quaternion_t)*)&this, _res);
+    res = new graphene.vec4.Vec4(cast(void*)_res, Yes.Take);
   }
 }

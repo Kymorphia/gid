@@ -891,9 +891,9 @@ glib.variant.Variant dbusGvalueToGvariant(gobject.value.Value gvalue, glib.varia
 */
 void dbusGvariantToGvalue(glib.variant.Variant value, out gobject.value.Value outGvalue) nothrow
 {
-  GValue _outGvalue;
-  g_dbus_gvariant_to_gvalue(value ? cast(GVariant*)value._cPtr(No.Dup) : null, &_outGvalue);
-  outGvalue = new gobject.value.Value(cast(void*)&_outGvalue, No.Take);
+  auto _outGvalue = boxedNew!GValue(gobject.value.Value._getGType);
+  g_dbus_gvariant_to_gvalue(value ? cast(GVariant*)value._cPtr(No.Dup) : null, _outGvalue);
+  outGvalue = new gobject.value.Value(cast(void*)_outGvalue, Yes.Take);
 }
 
 /**

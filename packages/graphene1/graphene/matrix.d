@@ -99,15 +99,15 @@ class Matrix : gobject.boxed.Boxed
   bool decompose(out graphene.vec3.Vec3 translate, out graphene.vec3.Vec3 scale, out graphene.quaternion.Quaternion rotate, out graphene.vec3.Vec3 shear, out graphene.vec4.Vec4 perspective) nothrow
   {
     bool _retval;
-    graphene_vec3_t _translate;
-    graphene_vec3_t _scale;
-    graphene_vec3_t _shear;
-    graphene_vec4_t _perspective;
-    _retval = cast(bool)graphene_matrix_decompose(cast(const(graphene_matrix_t)*)this._cPtr, &_translate, &_scale, cast(graphene_quaternion_t*)&rotate, &_shear, &_perspective);
-    translate = new graphene.vec3.Vec3(cast(void*)&_translate, No.Take);
-    scale = new graphene.vec3.Vec3(cast(void*)&_scale, No.Take);
-    shear = new graphene.vec3.Vec3(cast(void*)&_shear, No.Take);
-    perspective = new graphene.vec4.Vec4(cast(void*)&_perspective, No.Take);
+    auto _translate = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    auto _scale = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    auto _shear = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    auto _perspective = boxedNew!graphene_vec4_t(graphene.vec4.Vec4._getGType);
+    _retval = cast(bool)graphene_matrix_decompose(cast(const(graphene_matrix_t)*)this._cPtr, _translate, _scale, cast(graphene_quaternion_t*)&rotate, _shear, _perspective);
+    translate = new graphene.vec3.Vec3(cast(void*)_translate, Yes.Take);
+    scale = new graphene.vec3.Vec3(cast(void*)_scale, Yes.Take);
+    shear = new graphene.vec3.Vec3(cast(void*)_shear, Yes.Take);
+    perspective = new graphene.vec4.Vec4(cast(void*)_perspective, Yes.Take);
     return _retval;
   }
 
@@ -182,9 +182,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void getRow(uint index, out graphene.vec4.Vec4 res) nothrow
   {
-    graphene_vec4_t _res;
-    graphene_matrix_get_row(cast(const(graphene_matrix_t)*)this._cPtr, index, &_res);
-    res = new graphene.vec4.Vec4(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_vec4_t(graphene.vec4.Vec4._getGType);
+    graphene_matrix_get_row(cast(const(graphene_matrix_t)*)this._cPtr, index, _res);
+    res = new graphene.vec4.Vec4(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -542,9 +542,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void interpolate(graphene.matrix.Matrix b, double factor, out graphene.matrix.Matrix res) nothrow
   {
-    graphene_matrix_t _res;
-    graphene_matrix_interpolate(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, factor, &_res);
-    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    graphene_matrix_interpolate(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, factor, _res);
+    res = new graphene.matrix.Matrix(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -558,9 +558,9 @@ class Matrix : gobject.boxed.Boxed
   bool inverse(out graphene.matrix.Matrix res) nothrow
   {
     bool _retval;
-    graphene_matrix_t _res;
-    _retval = cast(bool)graphene_matrix_inverse(cast(const(graphene_matrix_t)*)this._cPtr, &_res);
-    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    _retval = cast(bool)graphene_matrix_inverse(cast(const(graphene_matrix_t)*)this._cPtr, _res);
+    res = new graphene.matrix.Matrix(cast(void*)_res, Yes.Take);
     return _retval;
   }
 
@@ -623,9 +623,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void multiply(graphene.matrix.Matrix b, out graphene.matrix.Matrix res) nothrow
   {
-    graphene_matrix_t _res;
-    graphene_matrix_multiply(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, &_res);
-    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    graphene_matrix_multiply(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new graphene.matrix.Matrix(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -654,9 +654,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void normalize(out graphene.matrix.Matrix res) nothrow
   {
-    graphene_matrix_t _res;
-    graphene_matrix_normalize(cast(const(graphene_matrix_t)*)this._cPtr, &_res);
-    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    graphene_matrix_normalize(cast(const(graphene_matrix_t)*)this._cPtr, _res);
+    res = new graphene.matrix.Matrix(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -669,9 +669,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void perspective(float depth, out graphene.matrix.Matrix res) nothrow
   {
-    graphene_matrix_t _res;
-    graphene_matrix_perspective(cast(const(graphene_matrix_t)*)this._cPtr, depth, &_res);
-    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    graphene_matrix_perspective(cast(const(graphene_matrix_t)*)this._cPtr, depth, _res);
+    res = new graphene.matrix.Matrix(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -710,9 +710,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void projectRect(graphene.rect.Rect r, out graphene.quad.Quad res) nothrow
   {
-    graphene_quad_t _res;
-    graphene_matrix_project_rect(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
-    res = new graphene.quad.Quad(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_quad_t(graphene.quad.Quad._getGType);
+    graphene_matrix_project_rect(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, _res);
+    res = new graphene.quad.Quad(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -728,9 +728,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void projectRectBounds(graphene.rect.Rect r, out graphene.rect.Rect res) nothrow
   {
-    graphene_rect_t _res;
-    graphene_matrix_project_rect_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    graphene_matrix_project_rect_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, _res);
+    res = new graphene.rect.Rect(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -929,9 +929,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformBounds(graphene.rect.Rect r, out graphene.rect.Rect res) nothrow
   {
-    graphene_rect_t _res;
-    graphene_matrix_transform_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    graphene_matrix_transform_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, _res);
+    res = new graphene.rect.Rect(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -947,9 +947,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformBox(graphene.box.Box b, out graphene.box.Box res) nothrow
   {
-    graphene_box_t _res;
-    graphene_matrix_transform_box(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, &_res);
-    res = new graphene.box.Box(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_box_t(graphene.box.Box._getGType);
+    graphene_matrix_transform_box(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new graphene.box.Box(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -999,9 +999,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformRay(graphene.ray.Ray r, out graphene.ray.Ray res) nothrow
   {
-    graphene_ray_t _res;
-    graphene_matrix_transform_ray(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_ray_t)*)r._cPtr(No.Dup) : null, &_res);
-    res = new graphene.ray.Ray(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_ray_t(graphene.ray.Ray._getGType);
+    graphene_matrix_transform_ray(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_ray_t)*)r._cPtr(No.Dup) : null, _res);
+    res = new graphene.ray.Ray(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -1018,9 +1018,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformRect(graphene.rect.Rect r, out graphene.quad.Quad res) nothrow
   {
-    graphene_quad_t _res;
-    graphene_matrix_transform_rect(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
-    res = new graphene.quad.Quad(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_quad_t(graphene.quad.Quad._getGType);
+    graphene_matrix_transform_rect(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, _res);
+    res = new graphene.quad.Quad(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -1034,9 +1034,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformSphere(graphene.sphere.Sphere s, out graphene.sphere.Sphere res) nothrow
   {
-    graphene_sphere_t _res;
-    graphene_matrix_transform_sphere(cast(const(graphene_matrix_t)*)this._cPtr, s ? cast(const(graphene_sphere_t)*)s._cPtr(No.Dup) : null, &_res);
-    res = new graphene.sphere.Sphere(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_sphere_t(graphene.sphere.Sphere._getGType);
+    graphene_matrix_transform_sphere(cast(const(graphene_matrix_t)*)this._cPtr, s ? cast(const(graphene_sphere_t)*)s._cPtr(No.Dup) : null, _res);
+    res = new graphene.sphere.Sphere(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -1054,9 +1054,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformVec3(graphene.vec3.Vec3 v, out graphene.vec3.Vec3 res) nothrow
   {
-    graphene_vec3_t _res;
-    graphene_matrix_transform_vec3(cast(const(graphene_matrix_t)*)this._cPtr, v ? cast(const(graphene_vec3_t)*)v._cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    graphene_matrix_transform_vec3(cast(const(graphene_matrix_t)*)this._cPtr, v ? cast(const(graphene_vec3_t)*)v._cPtr(No.Dup) : null, _res);
+    res = new graphene.vec3.Vec3(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -1070,9 +1070,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformVec4(graphene.vec4.Vec4 v, out graphene.vec4.Vec4 res) nothrow
   {
-    graphene_vec4_t _res;
-    graphene_matrix_transform_vec4(cast(const(graphene_matrix_t)*)this._cPtr, v ? cast(const(graphene_vec4_t)*)v._cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec4.Vec4(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_vec4_t(graphene.vec4.Vec4._getGType);
+    graphene_matrix_transform_vec4(cast(const(graphene_matrix_t)*)this._cPtr, v ? cast(const(graphene_vec4_t)*)v._cPtr(No.Dup) : null, _res);
+    res = new graphene.vec4.Vec4(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -1099,9 +1099,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void transpose(out graphene.matrix.Matrix res) nothrow
   {
-    graphene_matrix_t _res;
-    graphene_matrix_transpose(cast(const(graphene_matrix_t)*)this._cPtr, &_res);
-    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    graphene_matrix_transpose(cast(const(graphene_matrix_t)*)this._cPtr, _res);
+    res = new graphene.matrix.Matrix(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -1132,9 +1132,9 @@ class Matrix : gobject.boxed.Boxed
   */
   void untransformBounds(graphene.rect.Rect r, graphene.rect.Rect bounds, out graphene.rect.Rect res) nothrow
   {
-    graphene_rect_t _res;
-    graphene_matrix_untransform_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    graphene_matrix_untransform_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, _res);
+    res = new graphene.rect.Rect(cast(void*)_res, Yes.Take);
   }
 
   /**

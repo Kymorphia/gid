@@ -147,10 +147,10 @@ class TreeSelection : gobject.object.ObjectWrap
   {
     bool _retval;
     GtkTreeModel* _model;
-    GtkTreeIter _iter;
-    _retval = cast(bool)gtk_tree_selection_get_selected(cast(GtkTreeSelection*)this._cPtr, &_model, &_iter);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)gtk_tree_selection_get_selected(cast(GtkTreeSelection*)this._cPtr, &_model, _iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 

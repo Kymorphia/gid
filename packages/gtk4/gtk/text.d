@@ -553,11 +553,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void computeCursorExtents(size_t position, out graphene.rect.Rect strong, out graphene.rect.Rect weak) nothrow
   {
-    graphene_rect_t _strong;
-    graphene_rect_t _weak;
-    gtk_text_compute_cursor_extents(cast(GtkText*)this._cPtr, position, &_strong, &_weak);
-    strong = new graphene.rect.Rect(cast(void*)&_strong, No.Take);
-    weak = new graphene.rect.Rect(cast(void*)&_weak, No.Take);
+    auto _strong = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    auto _weak = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    gtk_text_compute_cursor_extents(cast(GtkText*)this._cPtr, position, _strong, _weak);
+    strong = new graphene.rect.Rect(cast(void*)_strong, Yes.Take);
+    weak = new graphene.rect.Rect(cast(void*)_weak, Yes.Take);
   }
 
   /**

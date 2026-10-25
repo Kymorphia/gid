@@ -99,9 +99,9 @@ class ParamList : gobject.object.ObjectWrap
   */
   void encode(gmime.format_options.FormatOptions options, bool fold, out glib.string_.String str) nothrow
   {
-    GString _str;
-    g_mime_param_list_encode(cast(GMimeParamList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, fold, &_str);
-    str = new glib.string_.String(cast(void*)&_str, No.Take);
+    auto _str = boxedNew!GString(glib.string_.String._getGType);
+    g_mime_param_list_encode(cast(GMimeParamList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, fold, _str);
+    str = new glib.string_.String(cast(void*)_str, Yes.Take);
   }
 
   /**

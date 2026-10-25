@@ -271,10 +271,10 @@ class Iterator : gobject.boxed.Boxed
   gst.types.IteratorResult next(out gobject.value.Value elem) nothrow
   {
     GstIteratorResult _cretval;
-    GValue _elem;
-    _cretval = gst_iterator_next(cast(GstIterator*)this._cPtr, &_elem);
+    auto _elem = boxedNew!GValue(gobject.value.Value._getGType);
+    _cretval = gst_iterator_next(cast(GstIterator*)this._cPtr, _elem);
     gst.types.IteratorResult _retval = cast(gst.types.IteratorResult)_cretval;
-    elem = new gobject.value.Value(cast(void*)&_elem, No.Take);
+    elem = new gobject.value.Value(cast(void*)_elem, Yes.Take);
     return _retval;
   }
 

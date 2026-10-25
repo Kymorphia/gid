@@ -139,9 +139,9 @@ class Path : gobject.boxed.Boxed
   bool getBounds(out graphene.rect.Rect bounds) nothrow
   {
     bool _retval;
-    graphene_rect_t _bounds;
-    _retval = cast(bool)gsk_path_get_bounds(cast(GskPath*)this._cPtr, &_bounds);
-    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
+    auto _bounds = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    _retval = cast(bool)gsk_path_get_bounds(cast(GskPath*)this._cPtr, _bounds);
+    bounds = new graphene.rect.Rect(cast(void*)_bounds, Yes.Take);
     return _retval;
   }
 
@@ -163,9 +163,9 @@ class Path : gobject.boxed.Boxed
   bool getStrokeBounds(gsk.stroke.Stroke stroke, out graphene.rect.Rect bounds) nothrow
   {
     bool _retval;
-    graphene_rect_t _bounds;
-    _retval = cast(bool)gsk_path_get_stroke_bounds(cast(GskPath*)this._cPtr, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null, &_bounds);
-    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
+    auto _bounds = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    _retval = cast(bool)gsk_path_get_stroke_bounds(cast(GskPath*)this._cPtr, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null, _bounds);
+    bounds = new graphene.rect.Rect(cast(void*)_bounds, Yes.Take);
     return _retval;
   }
 

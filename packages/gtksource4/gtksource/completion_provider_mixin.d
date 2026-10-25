@@ -191,9 +191,9 @@ template CompletionProviderT()
   override bool getStartIter(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, out gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_source_completion_provider_get_start_iter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_source_completion_provider_get_start_iter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, _iter);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 

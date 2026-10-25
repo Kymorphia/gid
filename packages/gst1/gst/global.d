@@ -1243,9 +1243,9 @@ bool tagIsFixed(string tag) nothrow
 */
 void tagMergeStringsWithComma(out gobject.value.Value dest, gobject.value.Value src) nothrow
 {
-  GValue _dest;
-  gst_tag_merge_strings_with_comma(&_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
-  dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
+  gst_tag_merge_strings_with_comma(_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
 }
 
 /**
@@ -1258,9 +1258,9 @@ void tagMergeStringsWithComma(out gobject.value.Value dest, gobject.value.Value 
 */
 void tagMergeUseFirst(out gobject.value.Value dest, gobject.value.Value src) nothrow
 {
-  GValue _dest;
-  gst_tag_merge_use_first(&_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
-  dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
+  gst_tag_merge_use_first(_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
 }
 
 /**
@@ -1721,10 +1721,10 @@ bool utilSetObjectArray(gobject.object.ObjectWrap object, string name, gobject.v
 */
 void utilSetValueFromString(out gobject.value.Value value, string valueStr) nothrow
 {
-  GValue _value;
+  auto _value = boxedNew!GValue(gobject.value.Value._getGType);
   const(char)* _valueStr = valueStr.toCString!(No.Malloc, No.Nullable);
-  gst_util_set_value_from_string(&_value, _valueStr);
-  value = new gobject.value.Value(cast(void*)&_value, No.Take);
+  gst_util_set_value_from_string(_value, _valueStr);
+  value = new gobject.value.Value(cast(void*)_value, Yes.Take);
 }
 
 /**
@@ -1994,10 +1994,10 @@ int valueCompare(gobject.value.Value value1, gobject.value.Value value2) nothrow
 bool valueDeserialize(out gobject.value.Value dest, string src) nothrow
 {
   bool _retval;
-  GValue _dest;
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
   const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
-  _retval = cast(bool)gst_value_deserialize(&_dest, _src);
-  dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+  _retval = cast(bool)gst_value_deserialize(_dest, _src);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
   return _retval;
 }
 
@@ -2016,10 +2016,10 @@ bool valueDeserialize(out gobject.value.Value dest, string src) nothrow
 bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject.param_spec.ParamSpec pspec = null) nothrow
 {
   bool _retval;
-  GValue _dest;
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
   const(char)* _src = src.toCString!(No.Malloc, No.Nullable);
-  _retval = cast(bool)gst_value_deserialize_with_pspec(&_dest, _src, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
-  dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+  _retval = cast(bool)gst_value_deserialize_with_pspec(_dest, _src, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
   return _retval;
 }
 
@@ -2343,9 +2343,9 @@ gst.structure.Structure valueGetStructure(gobject.value.Value value) nothrow
 */
 void valueInitAndCopy(out gobject.value.Value dest, gobject.value.Value src) nothrow
 {
-  GValue _dest;
-  gst_value_init_and_copy(&_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
-  dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
+  gst_value_init_and_copy(_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
 }
 
 /**
@@ -2365,9 +2365,9 @@ void valueInitAndCopy(out gobject.value.Value dest, gobject.value.Value src) not
 bool valueIntersect(out gobject.value.Value dest, gobject.value.Value value1, gobject.value.Value value2) nothrow
 {
   bool _retval;
-  GValue _dest;
-  _retval = cast(bool)gst_value_intersect(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
-  dest = new gobject.value.Value(cast(void*)&_dest, Yes.Take);
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
+  _retval = cast(bool)gst_value_intersect(_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
   return _retval;
 }
 
@@ -2625,9 +2625,9 @@ void valueSetStructure(gobject.value.Value value, gst.structure.Structure struct
 bool valueSubtract(out gobject.value.Value dest, gobject.value.Value minuend, gobject.value.Value subtrahend) nothrow
 {
   bool _retval;
-  GValue _dest;
-  _retval = cast(bool)gst_value_subtract(&_dest, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
-  dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
+  _retval = cast(bool)gst_value_subtract(_dest, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
   return _retval;
 }
 
@@ -2643,9 +2643,9 @@ bool valueSubtract(out gobject.value.Value dest, gobject.value.Value minuend, go
 bool valueUnion(out gobject.value.Value dest, gobject.value.Value value1, gobject.value.Value value2) nothrow
 {
   bool _retval;
-  GValue _dest;
-  _retval = cast(bool)gst_value_union(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
-  dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+  auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
+  _retval = cast(bool)gst_value_union(_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
+  dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
   return _retval;
 }
 

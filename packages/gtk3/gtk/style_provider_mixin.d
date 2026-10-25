@@ -74,9 +74,9 @@ template StyleProviderT()
   override bool getStyleProperty(gtk.widget_path.WidgetPath path, gtk.types.StateFlags state, gobject.param_spec.ParamSpec pspec, out gobject.value.Value value) nothrow
   {
     bool _retval;
-    GValue _value;
-    _retval = cast(bool)gtk_style_provider_get_style_property(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null, state, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    _retval = cast(bool)gtk_style_provider_get_style_property(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null, state, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
     return _retval;
   }
 }

@@ -143,9 +143,9 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   bool getIter(out gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)this._cPtr, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)this._cPtr, _iter);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 

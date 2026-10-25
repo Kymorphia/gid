@@ -868,10 +868,10 @@ class TagList : gobject.boxed.Boxed
   static bool copyValue(out gobject.value.Value dest, gst.tag_list.TagList list, string tag) nothrow
   {
     bool _retval;
-    GValue _dest;
+    auto _dest = boxedNew!GValue(gobject.value.Value._getGType);
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
-    _retval = cast(bool)gst_tag_list_copy_value(&_dest, list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _tag);
-    dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
+    _retval = cast(bool)gst_tag_list_copy_value(_dest, list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _tag);
+    dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
     return _retval;
   }
 }

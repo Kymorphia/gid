@@ -138,9 +138,9 @@ class Style : gobject.object.ObjectWrap
   void getStyleProperty(gobject.types.GType widgetType, string propertyName, out gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
-    GValue _value;
-    gtk_style_get_style_property(cast(GtkStyle*)this._cPtr, widgetType, _propertyName, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    gtk_style_get_style_property(cast(GtkStyle*)this._cPtr, widgetType, _propertyName, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**

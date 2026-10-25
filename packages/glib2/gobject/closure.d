@@ -266,7 +266,7 @@ class Closure : gobject.boxed.Boxed
   */
   void invoke(out gobject.value.Value returnValue, gobject.value.Value[] paramValues, void* invocationHint = null) nothrow
   {
-    GValue _returnValue;
+    auto _returnValue = boxedNew!GValue(gobject.value.Value._getGType);
     uint _nParamValues;
     if (paramValues)
       _nParamValues = cast(uint)paramValues.length;
@@ -276,8 +276,8 @@ class Closure : gobject.boxed.Boxed
       _tmpparamValues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _paramValues = _tmpparamValues.ptr;
 
-    g_closure_invoke(cast(GClosure*)this._cPtr, &_returnValue, _nParamValues, _paramValues, invocationHint);
-    returnValue = new gobject.value.Value(cast(void*)&_returnValue, No.Take);
+    g_closure_invoke(cast(GClosure*)this._cPtr, _returnValue, _nParamValues, _paramValues, invocationHint);
+    returnValue = new gobject.value.Value(cast(void*)_returnValue, Yes.Take);
   }
 
   /**

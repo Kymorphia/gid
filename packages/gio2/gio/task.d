@@ -927,12 +927,12 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool propagateValue(out gobject.value.Value value)
   {
     bool _retval;
-    GValue _value;
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
     GError *_err;
-    _retval = cast(bool)g_task_propagate_value(cast(GTask*)this._cPtr, &_value, &_err);
+    _retval = cast(bool)g_task_propagate_value(cast(GTask*)this._cPtr, _value, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
     return _retval;
   }
 

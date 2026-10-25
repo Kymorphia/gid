@@ -362,9 +362,9 @@ class Transform : gobject.boxed.Boxed
   */
   void toMatrix(out graphene.matrix.Matrix outMatrix) nothrow
   {
-    graphene_matrix_t _outMatrix;
-    gsk_transform_to_matrix(cast(GskTransform*)this._cPtr, &_outMatrix);
-    outMatrix = new graphene.matrix.Matrix(cast(void*)&_outMatrix, No.Take);
+    auto _outMatrix = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    gsk_transform_to_matrix(cast(GskTransform*)this._cPtr, _outMatrix);
+    outMatrix = new graphene.matrix.Matrix(cast(void*)_outMatrix, Yes.Take);
   }
 
   /**
@@ -431,9 +431,9 @@ class Transform : gobject.boxed.Boxed
   */
   void transformBounds(graphene.rect.Rect rect, out graphene.rect.Rect outRect) nothrow
   {
-    graphene_rect_t _outRect;
-    gsk_transform_transform_bounds(cast(GskTransform*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null, &_outRect);
-    outRect = new graphene.rect.Rect(cast(void*)&_outRect, No.Take);
+    auto _outRect = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    gsk_transform_transform_bounds(cast(GskTransform*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null, _outRect);
+    outRect = new graphene.rect.Rect(cast(void*)_outRect, Yes.Take);
   }
 
   /**

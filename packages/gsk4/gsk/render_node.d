@@ -116,9 +116,9 @@ class RenderNode
   */
   void getBounds(out graphene.rect.Rect bounds) nothrow
   {
-    graphene_rect_t _bounds;
-    gsk_render_node_get_bounds(cast(GskRenderNode*)this._cPtr, &_bounds);
-    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
+    auto _bounds = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    gsk_render_node_get_bounds(cast(GskRenderNode*)this._cPtr, _bounds);
+    bounds = new graphene.rect.Rect(cast(void*)_bounds, Yes.Take);
   }
 
   /**

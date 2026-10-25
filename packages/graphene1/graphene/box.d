@@ -124,9 +124,9 @@ class Box : gobject.boxed.Boxed
   */
   void expand(graphene.point3_d.Point3D point, out graphene.box.Box res) nothrow
   {
-    graphene_box_t _res;
-    graphene_box_expand(cast(const(graphene_box_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, &_res);
-    res = new graphene.box.Box(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_box_t(graphene.box.Box._getGType);
+    graphene_box_expand(cast(const(graphene_box_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, _res);
+    res = new graphene.box.Box(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -141,9 +141,9 @@ class Box : gobject.boxed.Boxed
   */
   void expandScalar(float scalar, out graphene.box.Box res) nothrow
   {
-    graphene_box_t _res;
-    graphene_box_expand_scalar(cast(const(graphene_box_t)*)this._cPtr, scalar, &_res);
-    res = new graphene.box.Box(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_box_t(graphene.box.Box._getGType);
+    graphene_box_expand_scalar(cast(const(graphene_box_t)*)this._cPtr, scalar, _res);
+    res = new graphene.box.Box(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -156,9 +156,9 @@ class Box : gobject.boxed.Boxed
   */
   void expandVec3(graphene.vec3.Vec3 vec, out graphene.box.Box res) nothrow
   {
-    graphene_box_t _res;
-    graphene_box_expand_vec3(cast(const(graphene_box_t)*)this._cPtr, vec ? cast(const(graphene_vec3_t)*)vec._cPtr(No.Dup) : null, &_res);
-    res = new graphene.box.Box(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_box_t(graphene.box.Box._getGType);
+    graphene_box_expand_vec3(cast(const(graphene_box_t)*)this._cPtr, vec ? cast(const(graphene_vec3_t)*)vec._cPtr(No.Dup) : null, _res);
+    res = new graphene.box.Box(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -170,9 +170,9 @@ class Box : gobject.boxed.Boxed
   */
   void getBoundingSphere(out graphene.sphere.Sphere sphere) nothrow
   {
-    graphene_sphere_t _sphere;
-    graphene_box_get_bounding_sphere(cast(const(graphene_box_t)*)this._cPtr, &_sphere);
-    sphere = new graphene.sphere.Sphere(cast(void*)&_sphere, No.Take);
+    auto _sphere = boxedNew!graphene_sphere_t(graphene.sphere.Sphere._getGType);
+    graphene_box_get_bounding_sphere(cast(const(graphene_box_t)*)this._cPtr, _sphere);
+    sphere = new graphene.sphere.Sphere(cast(void*)_sphere, Yes.Take);
   }
 
   /**
@@ -242,9 +242,9 @@ class Box : gobject.boxed.Boxed
   */
   void getSize(out graphene.vec3.Vec3 size) nothrow
   {
-    graphene_vec3_t _size;
-    graphene_box_get_size(cast(const(graphene_box_t)*)this._cPtr, &_size);
-    size = new graphene.vec3.Vec3(cast(void*)&_size, No.Take);
+    auto _size = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    graphene_box_get_size(cast(const(graphene_box_t)*)this._cPtr, _size);
+    size = new graphene.vec3.Vec3(cast(void*)_size, Yes.Take);
   }
 
   /**
@@ -390,9 +390,9 @@ class Box : gobject.boxed.Boxed
   bool intersection(graphene.box.Box b, out graphene.box.Box res) nothrow
   {
     bool _retval;
-    graphene_box_t _res;
-    _retval = cast(bool)graphene_box_intersection(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, &_res);
-    res = new graphene.box.Box(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_box_t(graphene.box.Box._getGType);
+    _retval = cast(bool)graphene_box_intersection(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new graphene.box.Box(cast(void*)_res, Yes.Take);
     return _retval;
   }
 
@@ -405,9 +405,9 @@ class Box : gobject.boxed.Boxed
   */
   void union_(graphene.box.Box b, out graphene.box.Box res) nothrow
   {
-    graphene_box_t _res;
-    graphene_box_union(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, &_res);
-    res = new graphene.box.Box(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_box_t(graphene.box.Box._getGType);
+    graphene_box_union(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new graphene.box.Box(cast(void*)_res, Yes.Take);
   }
 
   /**

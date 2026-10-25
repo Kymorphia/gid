@@ -215,8 +215,8 @@ class PathPoint : gobject.boxed.Boxed
   */
   void getTangent(gsk.path.Path path, gsk.types.PathDirection direction, out graphene.vec2.Vec2 tangent) nothrow
   {
-    graphene_vec2_t _tangent;
-    gsk_path_point_get_tangent(cast(const(GskPathPoint)*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, direction, &_tangent);
-    tangent = new graphene.vec2.Vec2(cast(void*)&_tangent, No.Take);
+    auto _tangent = boxedNew!graphene_vec2_t(graphene.vec2.Vec2._getGType);
+    gsk_path_point_get_tangent(cast(const(GskPathPoint)*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, direction, _tangent);
+    tangent = new graphene.vec2.Vec2(cast(void*)_tangent, Yes.Take);
   }
 }

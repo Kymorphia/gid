@@ -248,9 +248,9 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void append(out gtk.tree_iter.TreeIter iter) nothrow
   {
-    GtkTreeIter _iter;
-    gtk_list_store_append(cast(GtkListStore*)this._cPtr, &_iter);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    gtk_list_store_append(cast(GtkListStore*)this._cPtr, _iter);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -278,9 +278,9 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void insert(out gtk.tree_iter.TreeIter iter, int position) nothrow
   {
-    GtkTreeIter _iter;
-    gtk_list_store_insert(cast(GtkListStore*)this._cPtr, &_iter, position);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    gtk_list_store_insert(cast(GtkListStore*)this._cPtr, _iter, position);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -297,9 +297,9 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter sibling = null) nothrow
   {
-    GtkTreeIter _iter;
-    gtk_list_store_insert_after(cast(GtkListStore*)this._cPtr, &_iter, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    gtk_list_store_insert_after(cast(GtkListStore*)this._cPtr, _iter, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -316,9 +316,9 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter sibling = null) nothrow
   {
-    GtkTreeIter _iter;
-    gtk_list_store_insert_before(cast(GtkListStore*)this._cPtr, &_iter, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    gtk_list_store_insert_before(cast(GtkListStore*)this._cPtr, _iter, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -338,7 +338,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void insertWithValues(out gtk.tree_iter.TreeIter iter, int position, int[] columns, gobject.value.Value[] values) nothrow
   {
-    GtkTreeIter _iter;
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
     int _nValues;
     if (columns)
       _nValues = cast(int)columns.length;
@@ -352,8 +352,8 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
       _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
 
-    gtk_list_store_insert_with_valuesv(cast(GtkListStore*)this._cPtr, &_iter, position, _columns, _values, _nValues);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    gtk_list_store_insert_with_valuesv(cast(GtkListStore*)this._cPtr, _iter, position, _columns, _values, _nValues);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -419,9 +419,9 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void prepend(out gtk.tree_iter.TreeIter iter) nothrow
   {
-    GtkTreeIter _iter;
-    gtk_list_store_prepend(cast(GtkListStore*)this._cPtr, &_iter);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    gtk_list_store_prepend(cast(GtkListStore*)this._cPtr, _iter);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
   }
 
   /**

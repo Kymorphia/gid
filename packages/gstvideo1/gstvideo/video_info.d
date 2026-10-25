@@ -471,9 +471,9 @@ class VideoInfo : gobject.boxed.Boxed
   static bool fromCaps(out gstvideo.video_info.VideoInfo info, gst.caps.Caps caps) nothrow
   {
     bool _retval;
-    GstVideoInfo _info;
-    _retval = cast(bool)gst_video_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-    info = new gstvideo.video_info.VideoInfo(cast(void*)&_info, No.Take);
+    auto _info = boxedNew!GstVideoInfo(gstvideo.video_info.VideoInfo._getGType);
+    _retval = cast(bool)gst_video_info_from_caps(_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    info = new gstvideo.video_info.VideoInfo(cast(void*)_info, Yes.Take);
     return _retval;
   }
 
@@ -485,8 +485,8 @@ class VideoInfo : gobject.boxed.Boxed
   */
   static void init_(out gstvideo.video_info.VideoInfo info) nothrow
   {
-    GstVideoInfo _info;
-    gst_video_info_init(&_info);
-    info = new gstvideo.video_info.VideoInfo(cast(void*)&_info, No.Take);
+    auto _info = boxedNew!GstVideoInfo(gstvideo.video_info.VideoInfo._getGType);
+    gst_video_info_init(_info);
+    info = new gstvideo.video_info.VideoInfo(cast(void*)_info, Yes.Take);
   }
 }

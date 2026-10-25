@@ -50,11 +50,11 @@ class RegionIter
   bool getSubregion(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
-    GtkTextIter _start;
-    GtkTextIter _end;
-    _retval = cast(bool)gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)this._cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    auto _start = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    auto _end = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)this._cPtr, _start, _end);
+    start = new gtk.text_iter.TextIter(cast(void*)_start, Yes.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)_end, Yes.Take);
     return _retval;
   }
 

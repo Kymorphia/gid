@@ -1285,7 +1285,7 @@ bool propertyGet(gdk.window.Window window, gdk.atom.Atom property, gdk.atom.Atom
   int _actualLength;
   ubyte* _data;
   _retval = cast(bool)gdk_property_get(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, property ? cast(GdkAtom)property._cPtr : null, type ? cast(GdkAtom)type._cPtr : null, offset, length, pdelete, &_actualPropertyType, cast(int*)&actualFormat, &_actualLength, &_data);
-  actualPropertyType = new gdk.atom.Atom(cast(void*)&_actualPropertyType, No.Take);
+  actualPropertyType = new gdk.atom.Atom(cast(void*)_actualPropertyType, No.Take);
   data.length = _actualLength;
   data[0 .. $] = (cast(ubyte*)_data)[0 .. _actualLength];
   gFree(cast(void*)_data);

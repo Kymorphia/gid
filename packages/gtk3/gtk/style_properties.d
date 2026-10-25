@@ -111,9 +111,9 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   {
     bool _retval;
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
-    GValue _value;
-    _retval = cast(bool)gtk_style_properties_get_property(cast(GtkStyleProperties*)this._cPtr, _property, state, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    _retval = cast(bool)gtk_style_properties_get_property(cast(GtkStyleProperties*)this._cPtr, _property, state, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
     return _retval;
   }
 

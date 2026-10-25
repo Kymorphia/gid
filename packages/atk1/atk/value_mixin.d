@@ -170,9 +170,9 @@ template ValueT()
   */
   override void getCurrentValue(out gobject.value.Value value) nothrow
   {
-    GValue _value;
-    atk_value_get_current_value(cast(AtkValue*)this._cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    atk_value_get_current_value(cast(AtkValue*)this._cPtr, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**
@@ -200,9 +200,9 @@ template ValueT()
   */
   override void getMaximumValue(out gobject.value.Value value) nothrow
   {
-    GValue _value;
-    atk_value_get_maximum_value(cast(AtkValue*)this._cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    atk_value_get_maximum_value(cast(AtkValue*)this._cPtr, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**
@@ -217,9 +217,9 @@ template ValueT()
   */
   override void getMinimumIncrement(out gobject.value.Value value) nothrow
   {
-    GValue _value;
-    atk_value_get_minimum_increment(cast(AtkValue*)this._cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    atk_value_get_minimum_increment(cast(AtkValue*)this._cPtr, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**
@@ -232,9 +232,9 @@ template ValueT()
   */
   override void getMinimumValue(out gobject.value.Value value) nothrow
   {
-    GValue _value;
-    atk_value_get_minimum_value(cast(AtkValue*)this._cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    atk_value_get_minimum_value(cast(AtkValue*)this._cPtr, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**

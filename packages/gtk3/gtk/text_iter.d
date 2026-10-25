@@ -226,11 +226,11 @@ class TextIter : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
-    GtkTextIter _matchStart;
-    GtkTextIter _matchEnd;
-    _retval = cast(bool)gtk_text_iter_backward_search(cast(const(GtkTextIter)*)this._cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
-    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
-    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
+    auto _matchStart = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    auto _matchEnd = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_text_iter_backward_search(cast(const(GtkTextIter)*)this._cPtr, _str, flags, _matchStart, _matchEnd, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)_matchStart, Yes.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)_matchEnd, Yes.Take);
     return _retval;
   }
 
@@ -757,11 +757,11 @@ class TextIter : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
-    GtkTextIter _matchStart;
-    GtkTextIter _matchEnd;
-    _retval = cast(bool)gtk_text_iter_forward_search(cast(const(GtkTextIter)*)this._cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
-    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
-    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
+    auto _matchStart = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    auto _matchEnd = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_text_iter_forward_search(cast(const(GtkTextIter)*)this._cPtr, _str, flags, _matchStart, _matchEnd, limit ? cast(const(GtkTextIter)*)limit._cPtr(No.Dup) : null);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)_matchStart, Yes.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)_matchEnd, Yes.Take);
     return _retval;
   }
 
@@ -980,9 +980,9 @@ class TextIter : gobject.boxed.Boxed
   bool getAttributes(out gtk.text_attributes.TextAttributes values) nothrow
   {
     bool _retval;
-    GtkTextAttributes _values;
-    _retval = cast(bool)gtk_text_iter_get_attributes(cast(const(GtkTextIter)*)this._cPtr, &_values);
-    values = new gtk.text_attributes.TextAttributes(cast(void*)&_values, No.Take);
+    auto _values = boxedNew!GtkTextAttributes(gtk.text_attributes.TextAttributes._getGType);
+    _retval = cast(bool)gtk_text_iter_get_attributes(cast(const(GtkTextIter)*)this._cPtr, _values);
+    values = new gtk.text_attributes.TextAttributes(cast(void*)_values, Yes.Take);
     return _retval;
   }
 

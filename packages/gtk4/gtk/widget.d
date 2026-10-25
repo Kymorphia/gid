@@ -1467,9 +1467,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool computeBounds(gtk.widget.Widget target, out graphene.rect.Rect outBounds) nothrow
   {
     bool _retval;
-    graphene_rect_t _outBounds;
-    _retval = cast(bool)gtk_widget_compute_bounds(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, &_outBounds);
-    outBounds = new graphene.rect.Rect(cast(void*)&_outBounds, No.Take);
+    auto _outBounds = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    _retval = cast(bool)gtk_widget_compute_bounds(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, _outBounds);
+    outBounds = new graphene.rect.Rect(cast(void*)_outBounds, Yes.Take);
     return _retval;
   }
 
@@ -1541,9 +1541,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   bool computeTransform(gtk.widget.Widget target, out graphene.matrix.Matrix outTransform) nothrow
   {
     bool _retval;
-    graphene_matrix_t _outTransform;
-    _retval = cast(bool)gtk_widget_compute_transform(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, &_outTransform);
-    outTransform = new graphene.matrix.Matrix(cast(void*)&_outTransform, No.Take);
+    auto _outTransform = boxedNew!graphene_matrix_t(graphene.matrix.Matrix._getGType);
+    _retval = cast(bool)gtk_widget_compute_transform(cast(GtkWidget*)this._cPtr, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null, _outTransform);
+    outTransform = new graphene.matrix.Matrix(cast(void*)_outTransform, Yes.Take);
     return _retval;
   }
 

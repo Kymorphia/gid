@@ -1237,10 +1237,10 @@ class SDPMessage : gobject.boxed.Boxed
   static gstsdp.types.SDPResult init_(out gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
-    GstSDPMessage _msg;
-    _cretval = gst_sdp_message_init(&_msg);
+    auto _msg = boxedNew!GstSDPMessage(gstsdp.sdpmessage.SDPMessage._getGType);
+    _cretval = gst_sdp_message_init(_msg);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    msg = new gstsdp.sdpmessage.SDPMessage(cast(void*)&_msg, No.Take);
+    msg = new gstsdp.sdpmessage.SDPMessage(cast(void*)_msg, Yes.Take);
     return _retval;
   }
 

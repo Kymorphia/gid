@@ -125,9 +125,9 @@ class Plane : gobject.boxed.Boxed
   */
   void getNormal(out graphene.vec3.Vec3 normal) nothrow
   {
-    graphene_vec3_t _normal;
-    graphene_plane_get_normal(cast(const(graphene_plane_t)*)this._cPtr, &_normal);
-    normal = new graphene.vec3.Vec3(cast(void*)&_normal, No.Take);
+    auto _normal = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    graphene_plane_get_normal(cast(const(graphene_plane_t)*)this._cPtr, _normal);
+    normal = new graphene.vec3.Vec3(cast(void*)_normal, Yes.Take);
   }
 
   /**
@@ -230,9 +230,9 @@ class Plane : gobject.boxed.Boxed
   */
   void negate(out graphene.plane.Plane res) nothrow
   {
-    graphene_plane_t _res;
-    graphene_plane_negate(cast(const(graphene_plane_t)*)this._cPtr, &_res);
-    res = new graphene.plane.Plane(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_plane_t(graphene.plane.Plane._getGType);
+    graphene_plane_negate(cast(const(graphene_plane_t)*)this._cPtr, _res);
+    res = new graphene.plane.Plane(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -244,9 +244,9 @@ class Plane : gobject.boxed.Boxed
   */
   void normalize(out graphene.plane.Plane res) nothrow
   {
-    graphene_plane_t _res;
-    graphene_plane_normalize(cast(const(graphene_plane_t)*)this._cPtr, &_res);
-    res = new graphene.plane.Plane(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_plane_t(graphene.plane.Plane._getGType);
+    graphene_plane_normalize(cast(const(graphene_plane_t)*)this._cPtr, _res);
+    res = new graphene.plane.Plane(cast(void*)_res, Yes.Take);
   }
 
   /**
@@ -266,8 +266,8 @@ class Plane : gobject.boxed.Boxed
   */
   void transform(graphene.matrix.Matrix matrix, graphene.matrix.Matrix normalMatrix, out graphene.plane.Plane res) nothrow
   {
-    graphene_plane_t _res;
-    graphene_plane_transform(cast(const(graphene_plane_t)*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null, normalMatrix ? cast(const(graphene_matrix_t)*)normalMatrix._cPtr(No.Dup) : null, &_res);
-    res = new graphene.plane.Plane(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_plane_t(graphene.plane.Plane._getGType);
+    graphene_plane_transform(cast(const(graphene_plane_t)*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null, normalMatrix ? cast(const(graphene_matrix_t)*)normalMatrix._cPtr(No.Dup) : null, _res);
+    res = new graphene.plane.Plane(cast(void*)_res, Yes.Take);
   }
 }

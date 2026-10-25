@@ -140,9 +140,9 @@ template ChildProxyT()
   override void getChildProxyProperty(string name, out gobject.value.Value value) nothrow
   {
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    GValue _value;
-    gst_child_proxy_get_property(cast(GstChildProxy*)this._cPtr, _name, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    gst_child_proxy_get_property(cast(GstChildProxy*)this._cPtr, _name, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**

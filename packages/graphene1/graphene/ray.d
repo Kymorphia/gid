@@ -113,9 +113,9 @@ class Ray : gobject.boxed.Boxed
   */
   void getDirection(out graphene.vec3.Vec3 direction) nothrow
   {
-    graphene_vec3_t _direction;
-    graphene_ray_get_direction(cast(const(graphene_ray_t)*)this._cPtr, &_direction);
-    direction = new graphene.vec3.Vec3(cast(void*)&_direction, No.Take);
+    auto _direction = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    graphene_ray_get_direction(cast(const(graphene_ray_t)*)this._cPtr, _direction);
+    direction = new graphene.vec3.Vec3(cast(void*)_direction, Yes.Take);
   }
 
   /**

@@ -124,9 +124,9 @@ class Sphere : gobject.boxed.Boxed
   */
   void getBoundingBox(out graphene.box.Box box) nothrow
   {
-    graphene_box_t _box;
-    graphene_sphere_get_bounding_box(cast(const(graphene_sphere_t)*)this._cPtr, &_box);
-    box = new graphene.box.Box(cast(void*)&_box, No.Take);
+    auto _box = boxedNew!graphene_box_t(graphene.box.Box._getGType);
+    graphene_sphere_get_bounding_box(cast(const(graphene_sphere_t)*)this._cPtr, _box);
+    box = new graphene.box.Box(cast(void*)_box, Yes.Take);
   }
 
   /**
@@ -244,8 +244,8 @@ class Sphere : gobject.boxed.Boxed
   */
   void translate(graphene.point3_d.Point3D point, out graphene.sphere.Sphere res) nothrow
   {
-    graphene_sphere_t _res;
-    graphene_sphere_translate(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, &_res);
-    res = new graphene.sphere.Sphere(cast(void*)&_res, No.Take);
+    auto _res = boxedNew!graphene_sphere_t(graphene.sphere.Sphere._getGType);
+    graphene_sphere_translate(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, _res);
+    res = new graphene.sphere.Sphere(cast(void*)_res, Yes.Take);
   }
 }

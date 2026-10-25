@@ -556,9 +556,9 @@ class StyleContext : gobject.object.ObjectWrap
   void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
-    GValue _value;
-    gtk_style_context_get_property(cast(GtkStyleContext*)this._cPtr, _property, state, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    gtk_style_context_get_property(cast(GtkStyleContext*)this._cPtr, _property, state, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**

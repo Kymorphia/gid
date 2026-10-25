@@ -511,11 +511,11 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end) nothrow
   {
-    GtkTextIter _start;
-    GtkTextIter _end;
-    gtk_text_buffer_get_bounds(cast(GtkTextBuffer*)this._cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    auto _start = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    auto _end = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_bounds(cast(GtkTextBuffer*)this._cPtr, _start, _end);
+    start = new gtk.text_iter.TextIter(cast(void*)_start, Yes.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)_end, Yes.Take);
   }
 
   /**
@@ -561,9 +561,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getEndIter(out gtk.text_iter.TextIter iter) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_end_iter(cast(GtkTextBuffer*)this._cPtr, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_end_iter(cast(GtkTextBuffer*)this._cPtr, _iter);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -601,9 +601,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getIterAtChildAnchor(out gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)this._cPtr, &_iter, anchor ? cast(GtkTextChildAnchor*)anchor._cPtr(No.Dup) : null);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)this._cPtr, _iter, anchor ? cast(GtkTextChildAnchor*)anchor._cPtr(No.Dup) : null);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -616,9 +616,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getIterAtLine(out gtk.text_iter.TextIter iter, int lineNumber) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)this._cPtr, _iter, lineNumber);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -639,9 +639,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getIterAtLineIndex(out gtk.text_iter.TextIter iter, int lineNumber, int byteIndex) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, byteIndex);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)this._cPtr, _iter, lineNumber, byteIndex);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -661,9 +661,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getIterAtLineOffset(out gtk.text_iter.TextIter iter, int lineNumber, int charOffset) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, charOffset);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)this._cPtr, _iter, lineNumber, charOffset);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -675,9 +675,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getIterAtMark(out gtk.text_iter.TextIter iter, gtk.text_mark.TextMark mark) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)this._cPtr, &_iter, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)this._cPtr, _iter, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -692,9 +692,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getIterAtOffset(out gtk.text_iter.TextIter iter, int charOffset) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_offset(cast(GtkTextBuffer*)this._cPtr, &_iter, charOffset);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_iter_at_offset(cast(GtkTextBuffer*)this._cPtr, _iter, charOffset);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**
@@ -794,11 +794,11 @@ class TextBuffer : gobject.object.ObjectWrap
   bool getSelectionBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
-    GtkTextIter _start;
-    GtkTextIter _end;
-    _retval = cast(bool)gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)this._cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    auto _start = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    auto _end = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)this._cPtr, _start, _end);
+    start = new gtk.text_iter.TextIter(cast(void*)_start, Yes.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)_end, Yes.Take);
     return _retval;
   }
 
@@ -838,9 +838,9 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void getStartIter(out gtk.text_iter.TextIter iter) nothrow
   {
-    GtkTextIter _iter;
-    gtk_text_buffer_get_start_iter(cast(GtkTextBuffer*)this._cPtr, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_buffer_get_start_iter(cast(GtkTextBuffer*)this._cPtr, _iter);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
   }
 
   /**

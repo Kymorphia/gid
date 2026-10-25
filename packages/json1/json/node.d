@@ -341,9 +341,9 @@ class Node : gobject.boxed.Boxed
   */
   void getValue(out gobject.value.Value value) nothrow
   {
-    GValue _value;
-    json_node_get_value(cast(JsonNode*)this._cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    json_node_get_value(cast(JsonNode*)this._cPtr, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**

@@ -869,15 +869,17 @@ bool isBoxed(T)() nothrow
  *   type = Boxed GType
  * Returns: New allocated pointer to the C boxed value
  */
-static void* boxedNew(CT)(GType type) nothrow
+static CT* boxedNew(CT)(GType type) nothrow
 {
+  // There is no function for allocating a boxed value, so stack allocate it and then copy it.
+  // NOTE: This could potentially result in a crash if a boxed copy function doesn't expect a zeroed instance.
   CT tmp;
   auto newBoxed = g_boxed_copy(type, cast(void*)&tmp); // Use g_boxed_copy() in case malloc is not used (such as g_slice)
 
   if (!newBoxed || newBoxed is &tmp) // A reference counted boxed type will return a pointer to tmp, malloc in that case
     newBoxed = gMalloc(CT.sizeof);
 
-  return newBoxed;
+  return cast(CT*)newBoxed;
 }
 
 /**

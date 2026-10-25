@@ -893,9 +893,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y) nothrow
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, &_iter, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_text_view_get_iter_at_location(cast(GtkTextView*)this._cPtr, _iter, x, y);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 
@@ -924,9 +924,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y) nothrow
   {
     bool _retval;
-    GtkTextIter _iter;
-    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, &_iter, cast(int*)&trailing, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_text_view_get_iter_at_position(cast(GtkTextView*)this._cPtr, _iter, cast(int*)&trailing, x, y);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 
@@ -989,9 +989,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop) nothrow
   {
-    GtkTextIter _targetIter;
-    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, &_targetIter, y, cast(int*)&lineTop);
-    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.Take);
+    auto _targetIter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, _targetIter, y, cast(int*)&lineTop);
+    targetIter = new gtk.text_iter.TextIter(cast(void*)_targetIter, Yes.Take);
   }
 
   /**

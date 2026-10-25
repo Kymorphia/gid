@@ -171,9 +171,9 @@ struct Point
   */
   void toVec2(out graphene.vec2.Vec2 v) nothrow
   {
-    graphene_vec2_t _v;
-    graphene_point_to_vec2(cast(const(graphene_point_t)*)&this, &_v);
-    v = new graphene.vec2.Vec2(cast(void*)&_v, No.Take);
+    auto _v = boxedNew!graphene_vec2_t(graphene.vec2.Vec2._getGType);
+    graphene_point_to_vec2(cast(const(graphene_point_t)*)&this, _v);
+    v = new graphene.vec2.Vec2(cast(void*)_v, Yes.Take);
   }
 
   /**

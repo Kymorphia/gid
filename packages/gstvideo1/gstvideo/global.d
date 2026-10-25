@@ -508,10 +508,10 @@ bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.Video
 */
 void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buffer srcBuffer, int destHeight, int destWidth, out gstvideo.video_info.VideoInfo dest, out gst.buffer.Buffer destBuffer) nothrow
 {
-  GstVideoInfo _dest;
+  auto _dest = boxedNew!GstVideoInfo(gstvideo.video_info.VideoInfo._getGType);
   GstBuffer* _destBuffer;
-  gst_video_blend_scale_linear_RGBA(src ? cast(GstVideoInfo*)src._cPtr(No.Dup) : null, srcBuffer ? cast(GstBuffer*)srcBuffer._cPtr(No.Dup) : null, destHeight, destWidth, &_dest, &_destBuffer);
-  dest = new gstvideo.video_info.VideoInfo(cast(void*)&_dest, No.Take);
+  gst_video_blend_scale_linear_RGBA(src ? cast(GstVideoInfo*)src._cPtr(No.Dup) : null, srcBuffer ? cast(GstBuffer*)srcBuffer._cPtr(No.Dup) : null, destHeight, destWidth, _dest, &_destBuffer);
+  dest = new gstvideo.video_info.VideoInfo(cast(void*)_dest, Yes.Take);
   destBuffer = new gst.buffer.Buffer(cast(void*)_destBuffer, Yes.Take);
 }
 

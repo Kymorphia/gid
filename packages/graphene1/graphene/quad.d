@@ -80,9 +80,9 @@ class Quad : gobject.boxed.Boxed
   */
   void bounds(out graphene.rect.Rect r) nothrow
   {
-    graphene_rect_t _r;
-    graphene_quad_bounds(cast(const(graphene_quad_t)*)this._cPtr, &_r);
-    r = new graphene.rect.Rect(cast(void*)&_r, No.Take);
+    auto _r = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    graphene_quad_bounds(cast(const(graphene_quad_t)*)this._cPtr, _r);
+    r = new graphene.rect.Rect(cast(void*)_r, Yes.Take);
   }
 
   /**

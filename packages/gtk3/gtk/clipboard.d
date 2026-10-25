@@ -569,7 +569,7 @@ class Clipboard : gobject.object.ObjectWrap
       _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
       gFree(cast(void*)_cretval);
     }
-    format = new gdk.atom.Atom(cast(void*)&_format, No.Take);
+    format = new gdk.atom.Atom(cast(void*)_format, No.Take);
     return _retval;
   }
 

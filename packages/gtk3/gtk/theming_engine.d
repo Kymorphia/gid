@@ -243,9 +243,9 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
-    GValue _value;
-    gtk_theming_engine_get_property(cast(GtkThemingEngine*)this._cPtr, _property, state, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    gtk_theming_engine_get_property(cast(GtkThemingEngine*)this._cPtr, _property, state, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**
@@ -283,9 +283,9 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getStyleProperty(string propertyName, out gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
-    GValue _value;
-    gtk_theming_engine_get_style_property(cast(GtkThemingEngine*)this._cPtr, _propertyName, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
+    gtk_theming_engine_get_style_property(cast(GtkThemingEngine*)this._cPtr, _propertyName, _value);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
   }
 
   /**

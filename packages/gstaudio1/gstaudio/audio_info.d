@@ -272,9 +272,9 @@ class AudioInfo : gobject.boxed.Boxed
   static bool fromCaps(out gstaudio.audio_info.AudioInfo info, gst.caps.Caps caps) nothrow
   {
     bool _retval;
-    GstAudioInfo _info;
-    _retval = cast(bool)gst_audio_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
-    info = new gstaudio.audio_info.AudioInfo(cast(void*)&_info, No.Take);
+    auto _info = boxedNew!GstAudioInfo(gstaudio.audio_info.AudioInfo._getGType);
+    _retval = cast(bool)gst_audio_info_from_caps(_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    info = new gstaudio.audio_info.AudioInfo(cast(void*)_info, Yes.Take);
     return _retval;
   }
 
@@ -286,8 +286,8 @@ class AudioInfo : gobject.boxed.Boxed
   */
   static void init_(out gstaudio.audio_info.AudioInfo info) nothrow
   {
-    GstAudioInfo _info;
-    gst_audio_info_init(&_info);
-    info = new gstaudio.audio_info.AudioInfo(cast(void*)&_info, No.Take);
+    auto _info = boxedNew!GstAudioInfo(gstaudio.audio_info.AudioInfo._getGType);
+    gst_audio_info_init(_info);
+    info = new gstaudio.audio_info.AudioInfo(cast(void*)_info, Yes.Take);
   }
 }

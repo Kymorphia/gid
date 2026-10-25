@@ -73,9 +73,9 @@ struct Point3D
   float distance(graphene.point3_d.Point3D b, out graphene.vec3.Vec3 delta) nothrow
   {
     float _retval;
-    graphene_vec3_t _delta;
-    _retval = graphene_point3d_distance(cast(const(graphene_point3d_t)*)&this, cast(const(graphene_point3d_t)*)&b, &_delta);
-    delta = new graphene.vec3.Vec3(cast(void*)&_delta, No.Take);
+    auto _delta = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    _retval = graphene_point3d_distance(cast(const(graphene_point3d_t)*)&this, cast(const(graphene_point3d_t)*)&b, _delta);
+    delta = new graphene.vec3.Vec3(cast(void*)_delta, Yes.Take);
     return _retval;
   }
 
@@ -261,9 +261,9 @@ struct Point3D
   */
   void toVec3(out graphene.vec3.Vec3 v) nothrow
   {
-    graphene_vec3_t _v;
-    graphene_point3d_to_vec3(cast(const(graphene_point3d_t)*)&this, &_v);
-    v = new graphene.vec3.Vec3(cast(void*)&_v, No.Take);
+    auto _v = boxedNew!graphene_vec3_t(graphene.vec3.Vec3._getGType);
+    graphene_point3d_to_vec3(cast(const(graphene_point3d_t)*)&this, _v);
+    v = new graphene.vec3.Vec3(cast(void*)_v, Yes.Take);
   }
 
   /**

@@ -829,9 +829,9 @@ harfbuzz.types.Script bufferGetScript(harfbuzz.buffer.Buffer buffer) nothrow
 */
 void bufferGetSegmentProperties(harfbuzz.buffer.Buffer buffer, out harfbuzz.segment_properties.SegmentProperties props) nothrow
 {
-  hb_segment_properties_t _props;
-  hb_buffer_get_segment_properties(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null, &_props);
-  props = new harfbuzz.segment_properties.SegmentProperties(cast(void*)&_props, No.Take);
+  auto _props = boxedNew!hb_segment_properties_t(harfbuzz.segment_properties.SegmentProperties._getGType);
+  hb_buffer_get_segment_properties(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null, _props);
+  props = new harfbuzz.segment_properties.SegmentProperties(cast(void*)_props, Yes.Take);
 }
 
 /**

@@ -143,12 +143,12 @@ class ContentProvider : gobject.object.ObjectWrap
   bool getValue(out gobject.value.Value value)
   {
     bool _retval;
-    GValue _value;
+    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
     GError *_err;
-    _retval = cast(bool)gdk_content_provider_get_value(cast(GdkContentProvider*)this._cPtr, &_value, &_err);
+    _retval = cast(bool)gdk_content_provider_get_value(cast(GdkContentProvider*)this._cPtr, _value, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
     return _retval;
   }
 

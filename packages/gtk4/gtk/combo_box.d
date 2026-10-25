@@ -468,9 +468,9 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   bool getActiveIter(out gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
-    GtkTreeIter _iter;
-    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, &_iter);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, _iter);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 

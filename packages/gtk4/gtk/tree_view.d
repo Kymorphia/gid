@@ -1220,11 +1220,11 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     bool _retval;
     GtkTreeModel* _model;
     GtkTreePath* _path;
-    GtkTreeIter _iter;
-    _retval = cast(bool)gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)this._cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
+    auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)this._cPtr, x, y, keyboardTip, &_model, &_path, _iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 

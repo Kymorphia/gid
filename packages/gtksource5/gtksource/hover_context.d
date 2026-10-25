@@ -79,11 +79,11 @@ class HoverContext : gobject.object.ObjectWrap
   bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
-    GtkTextIter _begin;
-    GtkTextIter _end;
-    _retval = cast(bool)gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)this._cPtr, &_begin, &_end);
-    begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    auto _begin = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    auto _end = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)this._cPtr, _begin, _end);
+    begin = new gtk.text_iter.TextIter(cast(void*)_begin, Yes.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)_end, Yes.Take);
     return _retval;
   }
 
