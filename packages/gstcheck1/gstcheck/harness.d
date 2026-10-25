@@ -117,6 +117,20 @@ class Harness
 {
   GstHarness _cInstance;
 
+  /**
+      Create a `harness.Harness` wrap type.
+      Params:
+        element = the element inside the harness
+        srcpad = the internal harness source pad
+        sinkpad = the internal harness sink pad
+  */
+  this(gst.element.Element element = gst.element.Element.init, gst.pad.Pad srcpad = gst.pad.Pad.init, gst.pad.Pad sinkpad = gst.pad.Pad.init) nothrow
+  {
+    this.element = element;
+    this.srcpad = srcpad;
+    this.sinkpad = sinkpad;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
@@ -905,9 +919,9 @@ class Harness
         allocator = a #GstAllocator
         params = a #GstAllocationParams
   */
-  void setProposeAllocator(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
+  void setProposeAllocator(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams* params = null) nothrow
   {
-    gst_harness_set_propose_allocator(cast(GstHarness*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null, cast(const(GstAllocationParams)*)&params);
+    gst_harness_set_propose_allocator(cast(GstHarness*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null, cast(const(GstAllocationParams)*)params);
   }
 
   /**

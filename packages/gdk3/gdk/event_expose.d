@@ -18,6 +18,29 @@ class EventExpose
 {
   GdkEventExpose _cInstance;
 
+  /**
+      Create a `event_expose.EventExpose` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.Expose] or [gdk.types.EventType.Damage]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        area = bounding box of @region.
+        region = the region that needs to be redrawn.
+        count = the number of contiguous [gdk.types.EventType.Expose] events following this one.
+            The only use for this is “exposure compression”, i.e. handling all
+            contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
+            exposure compression so this is not normally needed.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, gdk.rectangle.Rectangle area = gdk.rectangle.Rectangle.init, cairo.region.Region region = cairo.region.Region.init, int count = int.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.area = area;
+    this.region = region;
+    this.count = count;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

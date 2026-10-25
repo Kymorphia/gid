@@ -2790,7 +2790,7 @@ harfbuzz.font.Font fontGetEmpty() nothrow
 */
 void fontGetExtentsForDirection(harfbuzz.font.Font font, harfbuzz.types.Direction direction, out harfbuzz.types.FontExtents extents) nothrow
 {
-  hb_font_get_extents_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, &extents);
+  hb_font_get_extents_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, cast(hb_font_extents_t*)&extents);
 }
 
 /**
@@ -2904,7 +2904,7 @@ harfbuzz.types.Bool fontGetGlyphContourPointForOrigin(harfbuzz.font.Font font, h
 harfbuzz.types.Bool fontGetGlyphExtents(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.GlyphExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, &extents);
+  _retval = hb_font_get_glyph_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, cast(hb_glyph_extents_t*)&extents);
   return _retval;
 }
 
@@ -2926,7 +2926,7 @@ harfbuzz.types.Bool fontGetGlyphExtents(harfbuzz.font.Font font, harfbuzz.types.
 harfbuzz.types.Bool fontGetGlyphExtentsForOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.GlyphExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_extents_for_origin(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, &extents);
+  _retval = hb_font_get_glyph_extents_for_origin(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, cast(hb_glyph_extents_t*)&extents);
   return _retval;
 }
 
@@ -3129,7 +3129,7 @@ harfbuzz.types.Bool fontGetGlyphVOrigin(harfbuzz.font.Font font, harfbuzz.types.
 harfbuzz.types.Bool fontGetHExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_h_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, &extents);
+  _retval = hb_font_get_h_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, cast(hb_font_extents_t*)&extents);
   return _retval;
 }
 
@@ -3266,7 +3266,7 @@ float fontGetSyntheticSlant(harfbuzz.font.Font font) nothrow
 harfbuzz.types.Bool fontGetVExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_v_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, &extents);
+  _retval = hb_font_get_v_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, cast(hb_font_extents_t*)&extents);
   return _retval;
 }
 
@@ -4729,7 +4729,7 @@ void otLayoutGetBaselineWithFallback2(harfbuzz.font.Font font, harfbuzz.types.Ot
 harfbuzz.types.Bool otLayoutGetFontExtents(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_get_font_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, scriptTag, languageTag, &extents);
+  _retval = hb_ot_layout_get_font_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, scriptTag, languageTag, cast(hb_font_extents_t*)&extents);
   return _retval;
 }
 
@@ -4757,7 +4757,7 @@ harfbuzz.types.Bool otLayoutGetFontExtents(harfbuzz.font.Font font, harfbuzz.typ
 harfbuzz.types.Bool otLayoutGetFontExtents2(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, script, language, &extents);
+  _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, script, language, cast(hb_font_extents_t*)&extents);
   return _retval;
 }
 
@@ -5707,7 +5707,7 @@ void otTagsToScriptAndLanguage(harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag 
 harfbuzz.types.Bool otVarFindAxisInfo(harfbuzz.face.Face face, harfbuzz.types.Tag axisTag, out harfbuzz.types.OtVarAxisInfo axisInfo) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, axisTag, &axisInfo);
+  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, axisTag, cast(hb_ot_var_axis_info_t*)&axisInfo);
   return _retval;
 }
 
@@ -6392,9 +6392,9 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
       slant = the synthetic slant ratio to be applied to the image during rendering
       extents = the extents of the glyph
 */
-void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.blob.Blob image, uint width, uint height, harfbuzz.types.Tag format, float slant, harfbuzz.types.GlyphExtents extents) nothrow
+void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.blob.Blob image, uint width, uint height, harfbuzz.types.Tag format, float slant, harfbuzz.types.GlyphExtents* extents = null) nothrow
 {
-  hb_paint_image(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, image ? cast(hb_blob_t*)image._cPtr(No.Dup) : null, width, height, format, slant, &extents);
+  hb_paint_image(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, image ? cast(hb_blob_t*)image._cPtr(No.Dup) : null, width, height, format, slant, cast(hb_glyph_extents_t*)extents);
 }
 
 /**

@@ -14,6 +14,24 @@ class OpenPGPMarker
 {
   GMimeOpenPGPMarker _cInstance;
 
+  /**
+      Create a `open_pgpmarker.OpenPGPMarker` wrap type.
+      Params:
+        marker = The OpenPGP marker.
+        len = The length of the OpenPGP marker.
+        before = The #GMimeOpenPGPState that the state machine must be in before encountering this marker.
+        after = The #GMimeOpenPGPState that the state machine will transition into once this marker is found.
+        isEndMarker = true if the marker is an end marker; otherwise, false.
+  */
+  this(string marker = string.init, size_t len = size_t.init, gmime.types.OpenPGPState before = gmime.types.OpenPGPState.init, gmime.types.OpenPGPState after = gmime.types.OpenPGPState.init, bool isEndMarker = bool.init) nothrow
+  {
+    this.marker = marker;
+    this.len = len;
+    this.before = before;
+    this.after = after;
+    this.isEndMarker = isEndMarker;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

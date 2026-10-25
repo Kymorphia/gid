@@ -16,6 +16,16 @@ class VideoSEIUserDataUnregisteredMeta
 {
   GstVideoSEIUserDataUnregisteredMeta _cInstance;
 
+  /**
+      Create a `video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta` wrap type.
+      Params:
+        size = Size of the data buffer
+  */
+  this(size_t size = size_t.init) nothrow
+  {
+    this.size = size;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

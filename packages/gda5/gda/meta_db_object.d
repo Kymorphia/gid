@@ -21,6 +21,30 @@ class MetaDbObject
 {
   GdaMetaDbObject _cInstance;
 
+  /**
+      Create a `meta_db_object.MetaDbObject` wrap type.
+      Params:
+        objType = the type of object (table, view)
+        outdated = set to true if the information in this #GdaMetaDbObject may be outdated because the #GdaMetaStore has been updated
+        objCatalog = the catalog the object is in
+        objSchema = the schema the object is in
+        objName = the object's name
+        objShortName = the shortest way to name the object
+        objFullName = the full name of the object (in the &lt;schema&gt;.&lt;nameagt; notation
+        objOwner = object's owner
+  */
+  this(gda.types.MetaDbObjectType objType = gda.types.MetaDbObjectType.init, bool outdated = bool.init, string objCatalog = string.init, string objSchema = string.init, string objName = string.init, string objShortName = string.init, string objFullName = string.init, string objOwner = string.init) nothrow
+  {
+    this.objType = objType;
+    this.outdated = outdated;
+    this.objCatalog = objCatalog;
+    this.objSchema = objSchema;
+    this.objName = objName;
+    this.objShortName = objShortName;
+    this.objFullName = objFullName;
+    this.objOwner = objOwner;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

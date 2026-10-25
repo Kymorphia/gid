@@ -60,6 +60,35 @@ class PixbufModule
 {
   GdkPixbufModule _cInstance;
 
+  /**
+      Create a `pixbuf_module.PixbufModule` wrap type.
+      Params:
+        moduleName = the name of the module, usually the same as the
+           usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
+        modulePath = the path from which the module is loaded.
+        info = a [gdkpixbuf.pixbuf_format.PixbufFormat] holding information about the module.
+        load = loads an image from a file.
+        loadXpmData = loads an image from data in memory.
+        stopLoad = stops an incremental load.
+        loadIncrement = continues an incremental load.
+        loadAnimation = loads an animation from a file.
+        save = saves a [gdkpixbuf.pixbuf.Pixbuf] to a file.
+        isSaveOptionSupported = returns whether a save option key is supported by the module
+  */
+  this(string moduleName = string.init, string modulePath = string.init, gdkpixbuf.pixbuf_format.PixbufFormat info = gdkpixbuf.pixbuf_format.PixbufFormat.init, GdkPixbufModuleLoadFunc load = GdkPixbufModuleLoadFunc.init, GdkPixbufModuleLoadXpmDataFunc loadXpmData = GdkPixbufModuleLoadXpmDataFunc.init, GdkPixbufModuleStopLoadFunc stopLoad = GdkPixbufModuleStopLoadFunc.init, GdkPixbufModuleIncrementLoadFunc loadIncrement = GdkPixbufModuleIncrementLoadFunc.init, GdkPixbufModuleLoadAnimationFunc loadAnimation = GdkPixbufModuleLoadAnimationFunc.init, GdkPixbufModuleSaveFunc save = GdkPixbufModuleSaveFunc.init, GdkPixbufModuleSaveOptionSupportedFunc isSaveOptionSupported = GdkPixbufModuleSaveOptionSupportedFunc.init) nothrow
+  {
+    this.moduleName = moduleName;
+    this.modulePath = modulePath;
+    this.info = info;
+    this.load = load;
+    this.loadXpmData = loadXpmData;
+    this.stopLoad = stopLoad;
+    this.loadIncrement = loadIncrement;
+    this.loadAnimation = loadAnimation;
+    this.save = save;
+    this.isSaveOptionSupported = isSaveOptionSupported;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

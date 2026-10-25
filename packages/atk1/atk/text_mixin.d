@@ -66,7 +66,7 @@ template TextT()
   override atk.text_range.TextRange[] getBoundedRanges(atk.types.TextRectangle rect, atk.types.CoordType coordType, atk.types.TextClipType xClipType, atk.types.TextClipType yClipType) nothrow
   {
     AtkTextRange** _cretval;
-    _cretval = atk_text_get_bounded_ranges(cast(AtkText*)this._cPtr, &rect, coordType, xClipType, yClipType);
+    _cretval = atk_text_get_bounded_ranges(cast(AtkText*)this._cPtr, cast(AtkTextRectangle*)&rect, coordType, xClipType, yClipType);
     atk.text_range.TextRange[] _retval;
 
     if (_cretval)
@@ -187,7 +187,7 @@ template TextT()
   */
   override void getRangeExtents(int startOffset, int endOffset, atk.types.CoordType coordType, out atk.types.TextRectangle rect) nothrow
   {
-    atk_text_get_range_extents(cast(AtkText*)this._cPtr, startOffset, endOffset, coordType, &rect);
+    atk_text_get_range_extents(cast(AtkText*)this._cPtr, startOffset, endOffset, coordType, cast(AtkTextRectangle*)&rect);
   }
 
   /**

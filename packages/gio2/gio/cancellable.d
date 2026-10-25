@@ -199,7 +199,7 @@ class Cancellable : gobject.object.ObjectWrap
   bool makePollfd(glib.types.PollFD pollfd) nothrow
   {
     bool _retval;
-    _retval = cast(bool)g_cancellable_make_pollfd(cast(GCancellable*)this._cPtr, &pollfd);
+    _retval = cast(bool)g_cancellable_make_pollfd(cast(GCancellable*)this._cPtr, cast(GPollFD*)&pollfd);
     return _retval;
   }
 

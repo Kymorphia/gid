@@ -15,6 +15,21 @@ class Hook
 {
   GHook _cInstance;
 
+  /**
+      Create a `hook.Hook` wrap type.
+      Params:
+        refCount = the reference count of this hook
+        hookId = the id of this hook, which is unique within its list
+        flags = flags which are set for this hook. See #GHookFlagMask for
+              predefined flags
+  */
+  this(uint refCount = uint.init, gulong hookId = gulong.init, uint flags = uint.init) nothrow
+  {
+    this.refCount = refCount;
+    this.hookId = hookId;
+    this.flags = flags;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
@@ -105,28 +120,6 @@ class Hook
   @property void flags(uint propval) nothrow
   {
     (cast(GHook*)this._cPtr).flags = propval;
-  }
-
-  /**
-      Get `destroy` field.
-      Returns: the default @finalize_hook function of a #GHookList calls
-            this member of the hook that is being finalized
-  */
-  @property GDestroyNotify destroy() nothrow
-  {
-    return (cast(GHook*)this._cPtr).destroy;
-  }
-
-  /**
-      Set `destroy` field.
-      Params:
-        propval = the default @finalize_hook function of a #GHookList calls
-              this member of the hook that is being finalized
-  */
-
-  @property void destroy(GDestroyNotify propval) nothrow
-  {
-    (cast(GHook*)this._cPtr).destroy = propval;
   }
 
   /**

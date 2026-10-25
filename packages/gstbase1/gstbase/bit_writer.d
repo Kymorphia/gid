@@ -17,6 +17,16 @@ class BitWriter
 {
   GstBitWriter _cInstance;
 
+  /**
+      Create a `bit_writer.BitWriter` wrap type.
+      Params:
+        bitSize = Size of written @data in bits
+  */
+  this(uint bitSize = uint.init) nothrow
+  {
+    this.bitSize = bitSize;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

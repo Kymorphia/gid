@@ -390,9 +390,9 @@ class Renderer : gobject.object.ObjectWrap
         part = the part to change the color of
         color = the new color or null to unset the current color
   */
-  void setColor(pango.types.RenderPart part, pango.color.Color color) nothrow
+  void setColor(pango.types.RenderPart part, pango.color.Color* color = null) nothrow
   {
-    pango_renderer_set_color(cast(PangoRenderer*)this._cPtr, part, cast(const(PangoColor)*)&color);
+    pango_renderer_set_color(cast(PangoRenderer*)this._cPtr, part, cast(const(PangoColor)*)color);
   }
 
   /**
@@ -402,9 +402,9 @@ class Renderer : gobject.object.ObjectWrap
         matrix = a [pango.matrix.Matrix], or null to unset any existing matrix
            (No matrix set is the same as setting the identity matrix.)
   */
-  void setMatrix(pango.matrix.Matrix matrix) nothrow
+  void setMatrix(pango.matrix.Matrix* matrix = null) nothrow
   {
-    pango_renderer_set_matrix(cast(PangoRenderer*)this._cPtr, cast(const(PangoMatrix)*)&matrix);
+    pango_renderer_set_matrix(cast(PangoRenderer*)this._cPtr, cast(const(PangoMatrix)*)matrix);
   }
 }
 

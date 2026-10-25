@@ -2184,9 +2184,9 @@ class Window : gtk.bin.Bin
         geometry = struct containing geometry information or null
         geomMask = mask indicating which struct fields should be paid attention to
   */
-  void setGeometryHints(gtk.widget.Widget geometryWidget, gdk.types.Geometry geometry, gdk.types.WindowHints geomMask) nothrow
+  void setGeometryHints(gtk.widget.Widget geometryWidget, gdk.types.Geometry* geometry, gdk.types.WindowHints geomMask) nothrow
   {
-    gtk_window_set_geometry_hints(cast(GtkWindow*)this._cPtr, geometryWidget ? cast(GtkWidget*)geometryWidget._cPtr(No.Dup) : null, &geometry, geomMask);
+    gtk_window_set_geometry_hints(cast(GtkWindow*)this._cPtr, geometryWidget ? cast(GtkWidget*)geometryWidget._cPtr(No.Dup) : null, cast(GdkGeometry*)geometry, geomMask);
   }
 
   /**

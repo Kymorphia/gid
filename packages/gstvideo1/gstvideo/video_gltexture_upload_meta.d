@@ -19,6 +19,18 @@ class VideoGLTextureUploadMeta
 {
   GstVideoGLTextureUploadMeta _cInstance;
 
+  /**
+      Create a `video_gltexture_upload_meta.VideoGLTextureUploadMeta` wrap type.
+      Params:
+        textureOrientation = Orientation of the textures
+        nTextures = Number of textures that are generated
+  */
+  this(gstvideo.types.VideoGLTextureOrientation textureOrientation = gstvideo.types.VideoGLTextureOrientation.init, uint nTextures = uint.init) nothrow
+  {
+    this.textureOrientation = textureOrientation;
+    this.nTextures = nTextures;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

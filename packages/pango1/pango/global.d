@@ -686,7 +686,7 @@ void defaultBreak(string text, pango.analysis.Analysis analysis, pango.types.Log
     _length = cast(int)text.length;
 
   auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
-  pango_default_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, &attrs, attrsLen);
+  pango_default_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, cast(PangoLogAttr*)&attrs, attrsLen);
 }
 
 /**
@@ -712,9 +712,9 @@ void defaultBreak(string text, pango.analysis.Analysis analysis, pango.types.Log
       inclusive = rectangle to round to pixels inclusively
       nearest = rectangle to round to nearest pixels
 */
-void extentsToPixels(pango.types.Rectangle inclusive, pango.types.Rectangle nearest) nothrow
+void extentsToPixels(pango.types.Rectangle* inclusive = null, pango.types.Rectangle* nearest = null) nothrow
 {
-  pango_extents_to_pixels(&inclusive, &nearest);
+  pango_extents_to_pixels(cast(PangoRectangle*)inclusive, cast(PangoRectangle*)nearest);
 }
 
 /**
@@ -1291,14 +1291,14 @@ void shapeFull(string itemText, string paragraphText, pango.analysis.Analysis an
       glyphs = glyph string in which to store results
       flags = flags influencing the shaping process
 */
-void shapeItem(pango.item.Item item, string paragraphText, pango.types.LogAttr logAttrs, pango.glyph_string.GlyphString glyphs, pango.types.ShapeFlags flags) nothrow
+void shapeItem(pango.item.Item item, string paragraphText, pango.types.LogAttr* logAttrs, pango.glyph_string.GlyphString glyphs, pango.types.ShapeFlags flags) nothrow
 {
   int _paragraphLength;
   if (paragraphText)
     _paragraphLength = cast(int)paragraphText.length;
 
   auto _paragraphText = paragraphText.ptr ? cast(const(char)*)paragraphText.ptr : [char.init].ptr;
-  pango_shape_item(item ? cast(PangoItem*)item._cPtr(No.Dup) : null, _paragraphText, _paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, flags);
+  pango_shape_item(item ? cast(PangoItem*)item._cPtr(No.Dup) : null, _paragraphText, _paragraphLength, cast(PangoLogAttr*)logAttrs, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, flags);
 }
 
 /**

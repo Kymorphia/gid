@@ -372,7 +372,7 @@ class Surface : gobject.boxed.Boxed
   */
   void* getUserData(cairo.types.UserDataKey key) nothrow
   {
-    auto _retval = cairo_surface_get_user_data(cast(cairo_surface_t*)this._cPtr, &key);
+    auto _retval = cairo_surface_get_user_data(cast(cairo_surface_t*)this._cPtr, cast(const(cairo_user_data_key_t)*)&key);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class Surface : gobject.boxed.Boxed
   cairo.surface.Surface mapToImage(cairo.types.RectangleInt extents) nothrow
   {
     cairo_surface_t* _cretval;
-    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)this._cPtr, &extents);
+    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)this._cPtr, cast(const(cairo_rectangle_int_t)*)&extents);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -15,6 +15,26 @@ class RecentFilterInfo
 {
   GtkRecentFilterInfo _cInstance;
 
+  /**
+      Create a `recent_filter_info.RecentFilterInfo` wrap type.
+      Params:
+        contains = #GtkRecentFilterFlags to indicate which fields are set.
+        uri = The URI of the file being tested.
+        displayName = The string that will be used to display
+             the file in the recent chooser.
+        mimeType = MIME type of the file.
+        age = The number of days elapsed since the file has been
+             registered.
+  */
+  this(gtk.types.RecentFilterFlags contains = gtk.types.RecentFilterFlags.init, string uri = string.init, string displayName = string.init, string mimeType = string.init, int age = int.init) nothrow
+  {
+    this.contains = contains;
+    this.uri = uri;
+    this.displayName = displayName;
+    this.mimeType = mimeType;
+    this.age = age;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

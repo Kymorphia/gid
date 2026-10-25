@@ -14,6 +14,20 @@ class ServerProviderHandlerInfo
 {
   GdaServerProviderHandlerInfo _cInstance;
 
+  /**
+      Create a `server_provider_handler_info.ServerProviderHandlerInfo` wrap type.
+      Params:
+        cnc = 
+        gType = 
+        dbmsType = 
+  */
+  this(gda.connection.Connection cnc = gda.connection.Connection.init, gobject.types.GType gType = gobject.types.GType.init, string dbmsType = string.init) nothrow
+  {
+    this.cnc = cnc;
+    this.gType = gType;
+    this.dbmsType = dbmsType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

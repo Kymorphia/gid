@@ -15,6 +15,20 @@ class SDPTime
 {
   GstSDPTime _cInstance;
 
+  /**
+      Create a `sdptime.SDPTime` wrap type.
+      Params:
+        start = start time for the conference. The value is the decimal
+              representation of Network Time Protocol (NTP) time values in seconds
+        stop = stop time for the conference. The value is the decimal
+              representation of Network Time Protocol (NTP) time values in seconds
+  */
+  this(string start = string.init, string stop = string.init) nothrow
+  {
+    this.start = start;
+    this.stop = stop;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

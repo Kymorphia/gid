@@ -14,6 +14,20 @@ class TransactionStatusEvent
 {
   GdaTransactionStatusEvent _cInstance;
 
+  /**
+      Create a `transaction_status_event.TransactionStatusEvent` wrap type.
+      Params:
+        trans = 
+        type = 
+        connEvent = 
+  */
+  this(gda.transaction_status.TransactionStatus trans = gda.transaction_status.TransactionStatus.init, gda.types.TransactionStatusEventType type = gda.types.TransactionStatusEventType.init, gda.connection_event.ConnectionEvent connEvent = gda.connection_event.ConnectionEvent.init) nothrow
+  {
+    this.trans = trans;
+    this.type = type;
+    this.connEvent = connEvent;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

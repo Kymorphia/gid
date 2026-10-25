@@ -16,6 +16,16 @@ class RTCPPacket
 {
   GstRTCPPacket _cInstance;
 
+  /**
+      Create a `rtcppacket.RTCPPacket` wrap type.
+      Params:
+        offset = offset of packet in buffer data
+  */
+  this(uint offset = uint.init) nothrow
+  {
+    this.offset = offset;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

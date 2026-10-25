@@ -16,6 +16,16 @@ class AttrFloat
 {
   PangoAttrFloat _cInstance;
 
+  /**
+      Create a `attr_float.AttrFloat` wrap type.
+      Params:
+        value = the value of the attribute
+  */
+  this(double value = 0.0) nothrow
+  {
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -17,6 +17,13 @@ class RegionIter
 {
   GtkSourceRegionIter _cInstance;
 
+  /**
+      Create a `region_iter.RegionIter` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

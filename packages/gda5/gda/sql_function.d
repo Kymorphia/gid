@@ -15,6 +15,16 @@ class SqlFunction
 {
   GdaSqlFunction _cInstance;
 
+  /**
+      Create a `sql_function.SqlFunction` wrap type.
+      Params:
+        functionName = name of the function , in the form [[catalog.]schema.]function_name
+  */
+  this(string functionName = string.init) nothrow
+  {
+    this.functionName = functionName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -15,6 +15,25 @@ class EventWindowState
 {
   GdkEventWindowState _cInstance;
 
+  /**
+      Create a `event_window_state.EventWindowState` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.WindowState]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        changedMask = mask specifying what flags have changed.
+        newWindowState = the new window state, a combination of
+            #GdkWindowState bits.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, gdk.types.WindowState changedMask = gdk.types.WindowState.init, gdk.types.WindowState newWindowState = gdk.types.WindowState.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.changedMask = changedMask;
+    this.newWindowState = newWindowState;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

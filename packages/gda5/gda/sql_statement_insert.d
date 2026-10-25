@@ -38,6 +38,16 @@ class SqlStatementInsert
 {
   GdaSqlStatementInsert _cInstance;
 
+  /**
+      Create a `sql_statement_insert.SqlStatementInsert` wrap type.
+      Params:
+        onConflict = conflict resolution clause if there is one (such as "OR REPLACE")
+  */
+  this(string onConflict = string.init) nothrow
+  {
+    this.onConflict = onConflict;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -14,6 +14,20 @@ class FileAttributeInfo
 {
   GFileAttributeInfo _cInstance;
 
+  /**
+      Create a `file_attribute_info.FileAttributeInfo` wrap type.
+      Params:
+        name = the name of the attribute.
+        type = the #GFileAttributeType type of the attribute.
+        flags = a set of #GFileAttributeInfoFlags.
+  */
+  this(string name = string.init, gio.types.FileAttributeType type = gio.types.FileAttributeType.init, gio.types.FileAttributeInfoFlags flags = gio.types.FileAttributeInfoFlags.init) nothrow
+  {
+    this.name = name;
+    this.type = type;
+    this.flags = flags;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

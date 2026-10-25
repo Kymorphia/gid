@@ -19,6 +19,18 @@ class RTPBuffer
 {
   GstRTPBuffer _cInstance;
 
+  /**
+      Create a `rtpbuffer.RTPBuffer` wrap type.
+      Params:
+        buffer = pointer to RTP buffer
+        state = internal state
+  */
+  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init, uint state = uint.init) nothrow
+  {
+    this.buffer = buffer;
+    this.state = state;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

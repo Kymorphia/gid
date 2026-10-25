@@ -21,6 +21,20 @@ class ByteWriter
 {
   GstByteWriter _cInstance;
 
+  /**
+      Create a `byte_writer.ByteWriter` wrap type.
+      Params:
+        allocSize = Allocation size of the data
+        fixed = If true no reallocations are allowed
+        owned = If false no reallocations are allowed and copies of data are returned
+  */
+  this(uint allocSize = uint.init, bool fixed = bool.init, bool owned = bool.init) nothrow
+  {
+    this.allocSize = allocSize;
+    this.fixed = fixed;
+    this.owned = owned;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

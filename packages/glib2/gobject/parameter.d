@@ -18,6 +18,16 @@ class Parameter
 {
   GParameter _cInstance;
 
+  /**
+      Create a `parameter.Parameter` wrap type.
+      Params:
+        name = the parameter name
+  */
+  this(string name = string.init) nothrow
+  {
+    this.name = name;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

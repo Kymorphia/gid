@@ -336,7 +336,7 @@ class GLMemory : gobject.boxed.Boxed
         userData = user data to call notify with
         notify = a #GDestroyNotify
   */
-  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, gst.allocation_params.AllocationParams params, gstvideo.video_info.VideoInfo info, uint plane, gstvideo.video_alignment.VideoAlignment valign, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
+  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, gst.allocation_params.AllocationParams* params, gstvideo.video_info.VideoInfo info, uint plane, gstvideo.video_alignment.VideoAlignment* valign = null, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
@@ -353,7 +353,7 @@ class GLMemory : gobject.boxed.Boxed
       }
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_memory_init(cast(GstGLMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, target, texFormat, cast(const(GstAllocationParams)*)&params, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)&valign, userData, _notifyCB);
+    gst_gl_memory_init(cast(GstGLMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, target, texFormat, cast(const(GstAllocationParams)*)params, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)valign, userData, _notifyCB);
   }
 
   /**

@@ -17,6 +17,18 @@ class ObjectConstructParam
 {
   GObjectConstructParam _cInstance;
 
+  /**
+      Create a `object_construct_param.ObjectConstructParam` wrap type.
+      Params:
+        pspec = the #GParamSpec of the construct parameter
+        value = the value to set the parameter to
+  */
+  this(gobject.param_spec.ParamSpec pspec = gobject.param_spec.ParamSpec.init, gobject.value.Value value = gobject.value.Value.init) nothrow
+  {
+    this.pspec = pspec;
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

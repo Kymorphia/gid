@@ -25,6 +25,13 @@ class ObjectIter
 {
   JsonObjectIter _cInstance;
 
+  /**
+      Create a `object_iter.ObjectIter` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

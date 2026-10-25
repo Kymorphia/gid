@@ -17,6 +17,13 @@ class TypeFind
 {
   GstTypeFind _cInstance;
 
+  /**
+      Create a `type_find.TypeFind` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

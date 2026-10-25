@@ -16,6 +16,13 @@ class StaticResource
 {
   GStaticResource _cInstance;
 
+  /**
+      Create a `static_resource.StaticResource` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

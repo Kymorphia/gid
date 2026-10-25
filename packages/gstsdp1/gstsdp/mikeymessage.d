@@ -446,7 +446,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool insertCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_mikey_message_insert_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
+    _retval = cast(bool)gst_mikey_message_insert_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, cast(const(GstMIKEYMapSRTP)*)&map);
     return _retval;
   }
 
@@ -505,7 +505,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool replaceCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_mikey_message_replace_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
+    _retval = cast(bool)gst_mikey_message_replace_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, cast(const(GstMIKEYMapSRTP)*)&map);
     return _retval;
   }
 

@@ -107,9 +107,9 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
       Params:
         rect = rectangle to receive coordinates on
   */
-  void setArea(gdk.rectangle.Rectangle rect) nothrow
+  void setArea(gdk.rectangle.Rectangle* rect = null) nothrow
   {
-    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)this._cPtr, cast(const(GdkRectangle)*)&rect);
+    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)this._cPtr, cast(const(GdkRectangle)*)rect);
   }
 
   /**

@@ -16,6 +16,22 @@ class TypeQuery
 {
   GTypeQuery _cInstance;
 
+  /**
+      Create a `type_query.TypeQuery` wrap type.
+      Params:
+        type = the #GType value of the type
+        typeName = the name of the type
+        classSize = the size of the class structure
+        instanceSize = the size of the instance structure
+  */
+  this(gobject.types.GType type = gobject.types.GType.init, string typeName = string.init, uint classSize = uint.init, uint instanceSize = uint.init) nothrow
+  {
+    this.type = type;
+    this.typeName = typeName;
+    this.classSize = classSize;
+    this.instanceSize = instanceSize;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

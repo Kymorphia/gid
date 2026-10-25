@@ -19,6 +19,16 @@ class AudioMeta
 {
   GstAudioMeta _cInstance;
 
+  /**
+      Create a `audio_meta.AudioMeta` wrap type.
+      Params:
+        samples = the number of valid samples in the buffer
+  */
+  this(size_t samples = size_t.init) nothrow
+  {
+    this.samples = samples;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

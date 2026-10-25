@@ -21,6 +21,24 @@ class AudioCdSrcTrack
 {
   GstAudioCdSrcTrack _cInstance;
 
+  /**
+      Create a `audio_cd_src_track.AudioCdSrcTrack` wrap type.
+      Params:
+        isAudio = Whether this is an audio track
+        num = Track number in TOC (usually starts from 1, but not always)
+        start = The first sector of this track (LBA)
+        end = The last sector of this track (LBA)
+        tags = Track-specific tags (e.g. from cd-text information), or NULL
+  */
+  this(bool isAudio = bool.init, uint num = uint.init, uint start = uint.init, uint end = uint.init, gst.tag_list.TagList tags = gst.tag_list.TagList.init) nothrow
+  {
+    this.isAudio = isAudio;
+    this.num = num;
+    this.start = start;
+    this.end = end;
+    this.tags = tags;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

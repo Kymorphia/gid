@@ -26,6 +26,45 @@ class EventTouch
 {
   GdkEventTouch _cInstance;
 
+  /**
+      Create a `event_touch.EventTouch` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
+            [gdk.types.EventType.TouchEnd], [gdk.types.EventType.TouchCancel])
+        window = the window which received the event
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        x = the x coordinate of the pointer relative to the window
+        y = the y coordinate of the pointer relative to the window
+        state = a bit-mask representing the state of
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType
+        sequence = the event sequence that the event belongs to
+        emulatingPointer = whether the event should be used for emulating
+            pointer event
+        device = the master device that the event originated from. Use
+          [gdk.event.Event.getSourceDevice] to get the slave device.
+        xRoot = the x coordinate of the pointer relative to the root of the
+            screen
+        yRoot = the y coordinate of the pointer relative to the root of the
+            screen
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, double x = 0.0, double y = 0.0, gdk.types.ModifierType state = gdk.types.ModifierType.init, gdk.event_sequence.EventSequence sequence = gdk.event_sequence.EventSequence.init, bool emulatingPointer = bool.init, gdk.device.Device device = gdk.device.Device.init, double xRoot = 0.0, double yRoot = 0.0) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.x = x;
+    this.y = y;
+    this.state = state;
+    this.sequence = sequence;
+    this.emulatingPointer = emulatingPointer;
+    this.device = device;
+    this.xRoot = xRoot;
+    this.yRoot = yRoot;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

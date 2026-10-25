@@ -18,6 +18,24 @@ class CollectData
 {
   GstCollectData _cInstance;
 
+  /**
+      Create a `collect_data.CollectData` wrap type.
+      Params:
+        collect = owner #GstCollectPads
+        pad = #GstPad managed by this data
+        buffer = currently queued buffer.
+        pos = position in the buffer
+        segment = last segment received.
+  */
+  this(gstbase.collect_pads.CollectPads collect = gstbase.collect_pads.CollectPads.init, gst.pad.Pad pad = gst.pad.Pad.init, gst.buffer.Buffer buffer = gst.buffer.Buffer.init, uint pos = uint.init, gst.segment.Segment segment = gst.segment.Segment.init) nothrow
+  {
+    this.collect = collect;
+    this.pad = pad;
+    this.buffer = buffer;
+    this.pos = pos;
+    this.segment = segment;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

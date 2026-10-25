@@ -17,6 +17,40 @@ class AncillaryMeta
 {
   GstAncillaryMeta _cInstance;
 
+  /**
+      Create a `ancillary_meta.AncillaryMeta` wrap type.
+      Params:
+        field = The field where the ancillary data is located
+        cNotYChannel = Which channel (luminance or chrominance) the ancillary
+             data is located. 0 if content is SD or stored in the luminance channel
+             (default). 1 if HD and stored in the chrominance channel.
+        line = The line on which the ancillary data is located (max 11bit). There
+             are two special values: 0x7ff if no line is specified (default), 0x7fe
+             to specify the ancillary data is on any valid line before active video
+        offset = The location of the ancillary data packet in a SDI raster relative
+             to the start of active video (max 12bits). A value of 0 means the ADF of
+             the ancillary packet starts immediately following SAV. There are 3
+             special values: 0xfff: No specified location (default), 0xffe: within
+             HANC data space, 0xffd: within the ancillary data space located between
+             SAV and EAV
+        DID = Data Identified
+        SDIDBlockNumber = Secondary Data identification (if type 2) or Data block
+             number (if type 1)
+        dataCount = The amount of user data
+        checksum = The checksum of the ADF
+  */
+  this(gstvideo.types.AncillaryMetaField field = gstvideo.types.AncillaryMetaField.init, bool cNotYChannel = bool.init, ushort line = ushort.init, ushort offset = ushort.init, ushort DID = ushort.init, ushort SDIDBlockNumber = ushort.init, ushort dataCount = ushort.init, ushort checksum = ushort.init) nothrow
+  {
+    this.field = field;
+    this.cNotYChannel = cNotYChannel;
+    this.line = line;
+    this.offset = offset;
+    this.DID = DID;
+    this.SDIDBlockNumber = SDIDBlockNumber;
+    this.dataCount = dataCount;
+    this.checksum = checksum;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

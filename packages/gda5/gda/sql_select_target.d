@@ -21,6 +21,20 @@ class SqlSelectTarget
 {
   GdaSqlSelectTarget _cInstance;
 
+  /**
+      Create a `sql_select_target.SqlSelectTarget` wrap type.
+      Params:
+        expr = expression
+        tableName = table name part of @expr if @expr represents a table
+        as = alias
+  */
+  this(gda.sql_expr.SqlExpr expr = gda.sql_expr.SqlExpr.init, string tableName = string.init, string as = string.init) nothrow
+  {
+    this.expr = expr;
+    this.tableName = tableName;
+    this.as = as;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

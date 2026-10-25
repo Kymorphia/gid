@@ -9,7 +9,7 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   76    0    0   100 | 1256    1    9  99.3 |    0    0    0   100 |  145    0   11  92.9 |
+glib2                      |   76    0    0   100 | 1256    1    9  99.3 |    0    0    0   100 |  144    0   11  92.9 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   13    0    2  86.7 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  135    0    5  96.4 |
@@ -27,16 +27,16 @@ gstaudio1                  |   33    0    0   100 |  212    0   10  95.5 |    0 
 gstbase1                   |   23    0    0   100 |  305    0   10  96.8 |    2    0    0   100 |   30    0    1  96.8 |
 gstcheck1                  |    8    0    0   100 |  110    0    2  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   16    0    0   100 |    3    0    0   100 |    2    0    0   100 |
-gstgl1                     |   38    0    0   100 |  285    0   10  96.6 |    5    0    0   100 |   55    0    7  88.7 |
+gstgl1                     |   38    0    0   100 |  285    0   10  96.6 |    5    0    0   100 |   53    0    7  88.3 |
 gstglegl1                  |    7    0    0   100 |   14    0    6  70.0 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstnet1                    |    9    0    0   100 |   24    0    0   100 |    0    0    0   100 |    6    0    0   100 |
 gstpbutils1                |   16    0    0   100 |  169    0    2  98.8 |    5    0    0   100 |    0    0    0   100 |
-gstrtp1                    |   11    0    0   100 |  196    0    2  99.0 |    6    0    0   100 |   16    0    4  80.0 |
+gstrtp1                    |   11    0    0   100 |  196    0    2  99.0 |    6    0    0   100 |   15    0    3  83.3 |
 gstrtsp1                   |   15    0    0   100 |  138    0    2  98.6 |    1    0    0   100 |   50    0    1  98.0 |
 gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   81    0    8  91.0 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   58    0    0   100 |  371    0    8  97.9 |    2    0    0   100 |  160    0   29  84.7 |
+gstvideo1                  |   58    0    0   100 |  371    0    8  97.9 |    2    0    0   100 |  159    0   28  85.0 |
 gtk3                       |  345    0    0   100 | 3765    0   22  99.4 |  447    0    0   100 |  154    0    5  96.9 |
 gtk4                       |  320    0    0   100 | 3579    0   12  99.7 |  345    0    0   100 |   34    0    4  89.5 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
@@ -436,7 +436,6 @@ gstgl.glmemory.GLMemory.texScaling
 gstgl.glsync_meta.GLSyncMeta.data
 gstrtp.rtpbuffer.RTPBuffer.data
 gstrtp.rtpbuffer.RTPBuffer.size
-gstrtp.rtpbuffer.RTPBuffer.map
 gstrtp.rtpsource_meta.RTPSourceMeta.csrc
 gstrtsp.rtspauth_credential.RTSPAuthCredential.params
 gstsdp.mikeypayload_key_data.MIKEYPayloadKeyData.keyData
@@ -462,7 +461,6 @@ gstvideo.video_format_info.VideoFormatInfo.packFunc
 gstvideo.video_format_info.VideoFormatInfo.tileInfo
 gstvideo.video_frame.VideoFrame.meta
 gstvideo.video_frame.VideoFrame.data
-gstvideo.video_frame.VideoFrame.map
 gstvideo.video_gltexture_upload_meta.VideoGLTextureUploadMeta.textureType
 gstvideo.video_info.VideoInfo.offset
 gstvideo.video_info.VideoInfo.stride

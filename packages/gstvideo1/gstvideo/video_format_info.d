@@ -14,6 +14,46 @@ class VideoFormatInfo
 {
   GstVideoFormatInfo _cInstance;
 
+  /**
+      Create a `video_format_info.VideoFormatInfo` wrap type.
+      Params:
+        format = #GstVideoFormat
+        name = string representation of the format
+        description = use readable description of the format
+        flags = #GstVideoFormatFlags
+        bits = The number of bits used to pack data items. This can be less than 8
+             when multiple pixels are stored in a byte. for values > 8 multiple bytes
+             should be read according to the endianness flag before applying the shift
+             and mask.
+        nComponents = the number of components in the video format.
+        nPlanes = the number of planes for this format. The number of planes can be
+             less than the amount of components when multiple components are packed into
+             one plane.
+        unpackFormat = the format of the unpacked pixels. This format must have the
+              #GST_VIDEO_FORMAT_FLAG_UNPACK flag set.
+        packLines = the amount of lines that will be packed
+        tileMode = The tiling mode
+        tileWs = The width of a tile, in bytes, represented as a shift. DEPRECATED,
+          use tile_info[] array instead.
+        tileHs = The height of a tile, in bytes, represented as a shift. DEPREACTED,
+          use tile_info[] array instead.
+  */
+  this(gstvideo.types.VideoFormat format = gstvideo.types.VideoFormat.init, string name = string.init, string description = string.init, gstvideo.types.VideoFormatFlags flags = gstvideo.types.VideoFormatFlags.init, uint bits = uint.init, uint nComponents = uint.init, uint nPlanes = uint.init, gstvideo.types.VideoFormat unpackFormat = gstvideo.types.VideoFormat.init, int packLines = int.init, gstvideo.types.VideoTileMode tileMode = gstvideo.types.VideoTileMode.init, uint tileWs = uint.init, uint tileHs = uint.init) nothrow
+  {
+    this.format = format;
+    this.name = name;
+    this.description = description;
+    this.flags = flags;
+    this.bits = bits;
+    this.nComponents = nComponents;
+    this.nPlanes = nPlanes;
+    this.unpackFormat = unpackFormat;
+    this.packLines = packLines;
+    this.tileMode = tileMode;
+    this.tileWs = tileWs;
+    this.tileHs = tileHs;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

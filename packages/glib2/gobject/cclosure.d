@@ -16,6 +16,13 @@ class CClosure
 {
   GCClosure _cInstance;
 
+  /**
+      Create a `cclosure.CClosure` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

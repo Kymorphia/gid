@@ -12,6 +12,20 @@ class CheckABIStruct
 {
   GstCheckABIStruct _cInstance;
 
+  /**
+      Create a `check_abistruct.CheckABIStruct` wrap type.
+      Params:
+        name = The name of the structure
+        size = The current size of a structure
+        abiSize = The reference size of the structure
+  */
+  this(string name = string.init, int size = int.init, int abiSize = int.init) nothrow
+  {
+    this.name = name;
+    this.size = size;
+    this.abiSize = abiSize;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

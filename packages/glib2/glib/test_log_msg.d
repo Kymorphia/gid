@@ -12,6 +12,13 @@ class TestLogMsg
 {
   GTestLogMsg _cInstance;
 
+  /**
+      Create a `test_log_msg.TestLogMsg` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

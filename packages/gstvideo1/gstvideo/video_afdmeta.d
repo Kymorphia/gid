@@ -29,6 +29,20 @@ class VideoAFDMeta
 {
   GstVideoAFDMeta _cInstance;
 
+  /**
+      Create a `video_afdmeta.VideoAFDMeta` wrap type.
+      Params:
+        field = 0 for progressive or field 1 and 1 for field 2
+        spec = #GstVideoAFDSpec that applies to @afd
+        afd = #GstVideoAFDValue AFD value
+  */
+  this(ubyte field = ubyte.init, gstvideo.types.VideoAFDSpec spec = gstvideo.types.VideoAFDSpec.init, gstvideo.types.VideoAFDValue afd = gstvideo.types.VideoAFDValue.init) nothrow
+  {
+    this.field = field;
+    this.spec = spec;
+    this.afd = afd;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

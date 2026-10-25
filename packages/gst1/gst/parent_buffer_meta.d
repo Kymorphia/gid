@@ -24,6 +24,16 @@ class ParentBufferMeta
 {
   GstParentBufferMeta _cInstance;
 
+  /**
+      Create a `parent_buffer_meta.ParentBufferMeta` wrap type.
+      Params:
+        buffer = the #GstBuffer on which a reference is being held.
+  */
+  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init) nothrow
+  {
+    this.buffer = buffer;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

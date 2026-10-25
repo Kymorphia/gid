@@ -21,10 +21,10 @@ struct Gravity
       Returns: the gravity of matrix, which will never be
         [pango.types.Gravity.Auto], or [pango.types.Gravity.South] if matrix is null
   */
-  static pango.types.Gravity getForMatrix(pango.matrix.Matrix matrix) nothrow
+  static pango.types.Gravity getForMatrix(pango.matrix.Matrix* matrix) nothrow
   {
     PangoGravity _cretval;
-    _cretval = pango_gravity_get_for_matrix(cast(const(PangoMatrix)*)&matrix);
+    _cretval = pango_gravity_get_for_matrix(cast(const(PangoMatrix)*)matrix);
     pango.types.Gravity _retval = cast(pango.types.Gravity)_cretval;
     return _retval;
   }

@@ -15,6 +15,44 @@ class EventTouchpadSwipe
 {
   GdkEventTouchpadSwipe _cInstance;
 
+  /**
+      Create a `event_touchpad_swipe.EventTouchpadSwipe` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.TouchpadSwipe])
+        window = the window which received the event
+        sendEvent = true if the event was sent explicitly
+        phase = the current phase of the gesture
+        nFingers = The number of fingers triggering the swipe
+        time = the time of the event in milliseconds
+        x = The X coordinate of the pointer
+        y = The Y coordinate of the pointer
+        dx = Movement delta in the X axis of the swipe focal point
+        dy = Movement delta in the Y axis of the swipe focal point
+        xRoot = The X coordinate of the pointer, relative to the
+            root of the screen.
+        yRoot = The Y coordinate of the pointer, relative to the
+            root of the screen.
+        state = a bit-mask representing the state of
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, byte phase = byte.init, byte nFingers = byte.init, uint time = uint.init, double x = 0.0, double y = 0.0, double dx = 0.0, double dy = 0.0, double xRoot = 0.0, double yRoot = 0.0, gdk.types.ModifierType state = gdk.types.ModifierType.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.phase = phase;
+    this.nFingers = nFingers;
+    this.time = time;
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.xRoot = xRoot;
+    this.yRoot = yRoot;
+    this.state = state;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

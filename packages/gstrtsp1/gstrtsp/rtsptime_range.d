@@ -14,6 +14,24 @@ class RTSPTimeRange
 {
   GstRTSPTimeRange _cInstance;
 
+  /**
+      Create a `rtsptime_range.RTSPTimeRange` wrap type.
+      Params:
+        unit = the time units used
+        min = the minimum interval
+        max = the maximum interval
+        min2 = extra fields in the minimum interval (Since: 1.2)
+        max2 = extra fields in the maximum interval (Since: 1.2)
+  */
+  this(gstrtsp.types.RTSPRangeUnit unit = gstrtsp.types.RTSPRangeUnit.init, gstrtsp.types.RTSPTime min = gstrtsp.types.RTSPTime.init, gstrtsp.types.RTSPTime max = gstrtsp.types.RTSPTime.init, gstrtsp.types.RTSPTime2 min2 = gstrtsp.types.RTSPTime2.init, gstrtsp.types.RTSPTime2 max2 = gstrtsp.types.RTSPTime2.init) nothrow
+  {
+    this.unit = unit;
+    this.min = min;
+    this.max = max;
+    this.min2 = min2;
+    this.max2 = max2;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

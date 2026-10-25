@@ -19,6 +19,16 @@ class NetAddressMeta
 {
   GstNetAddressMeta _cInstance;
 
+  /**
+      Create a `net_address_meta.NetAddressMeta` wrap type.
+      Params:
+        addr = a #GSocketAddress stored as metadata
+  */
+  this(gio.socket_address.SocketAddress addr = gio.socket_address.SocketAddress.init) nothrow
+  {
+    this.addr = addr;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

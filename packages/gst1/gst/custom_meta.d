@@ -21,6 +21,13 @@ class CustomMeta
 {
   GstCustomMeta _cInstance;
 
+  /**
+      Create a `custom_meta.CustomMeta` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

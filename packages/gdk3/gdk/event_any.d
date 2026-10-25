@@ -17,6 +17,20 @@ class EventAny
 {
   GdkEventAny _cInstance;
 
+  /**
+      Create a `event_any.EventAny` wrap type.
+      Params:
+        type = the type of the event.
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

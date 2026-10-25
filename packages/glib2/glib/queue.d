@@ -15,6 +15,16 @@ class Queue
 {
   GQueue _cInstance;
 
+  /**
+      Create a `queue.Queue` wrap type.
+      Params:
+        length = the number of elements in the queue
+  */
+  this(uint length = uint.init) nothrow
+  {
+    this.length = length;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

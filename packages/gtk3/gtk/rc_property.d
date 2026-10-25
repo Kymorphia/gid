@@ -18,6 +18,21 @@ class RcProperty
 {
   GtkRcProperty _cInstance;
 
+  /**
+      Create a `rc_property.RcProperty` wrap type.
+      Params:
+        typeName = quark-ified type identifier
+        propertyName = quark-ified property identifier like
+            “GtkScrollbar::spacing”
+        origin = field similar to one found in #GtkSettingsValue
+  */
+  this(glib.types.Quark typeName = glib.types.Quark.init, glib.types.Quark propertyName = glib.types.Quark.init, string origin = string.init) nothrow
+  {
+    this.typeName = typeName;
+    this.propertyName = propertyName;
+    this.origin = origin;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

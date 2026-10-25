@@ -64,10 +64,10 @@ class Sample : gobject.boxed.Boxed
       Returns: the new #GstSample. gst_sample_unref()
             after usage.
   */
-  this(gst.buffer.Buffer buffer, gst.caps.Caps caps, gst.segment.Segment segment, gst.structure.Structure info = null) nothrow
+  this(gst.buffer.Buffer buffer = null, gst.caps.Caps caps = null, gst.segment.Segment* segment = null, gst.structure.Structure info = null) nothrow
   {
     GstSample* _cretval;
-    _cretval = gst_sample_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(const(GstSegment)*)&segment, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
+    _cretval = gst_sample_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(const(GstSegment)*)segment, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 

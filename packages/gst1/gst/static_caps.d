@@ -17,6 +17,18 @@ class StaticCaps
 {
   GstStaticCaps _cInstance;
 
+  /**
+      Create a `static_caps.StaticCaps` wrap type.
+      Params:
+        caps = the cached #GstCaps
+        string_ = a string describing a caps
+  */
+  this(gst.caps.Caps caps = gst.caps.Caps.init, string string_ = string.init) nothrow
+  {
+    this.caps = caps;
+    this.string_ = string_;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

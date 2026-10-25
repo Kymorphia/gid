@@ -24,6 +24,18 @@ class Attribute
 {
   AtkAttribute _cInstance;
 
+  /**
+      Create a `attribute.Attribute` wrap type.
+      Params:
+        name = The attribute name.
+        value = the value of the attribute, represented as a string.
+  */
+  this(string name = string.init, string value = string.init) nothrow
+  {
+    this.name = name;
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -15,6 +15,26 @@ class FileFilterInfo
 {
   GtkFileFilterInfo _cInstance;
 
+  /**
+      Create a `file_filter_info.FileFilterInfo` wrap type.
+      Params:
+        contains = Flags indicating which of the following fields need
+            are filled
+        filename = the filename of the file being tested
+        uri = the URI for the file being tested
+        displayName = the string that will be used to display the file
+            in the file chooser
+        mimeType = the mime type of the file
+  */
+  this(gtk.types.FileFilterFlags contains = gtk.types.FileFilterFlags.init, string filename = string.init, string uri = string.init, string displayName = string.init, string mimeType = string.init) nothrow
+  {
+    this.contains = contains;
+    this.filename = filename;
+    this.uri = uri;
+    this.displayName = displayName;
+    this.mimeType = mimeType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

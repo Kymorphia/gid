@@ -25,6 +25,13 @@ class VideoAffineTransformationMeta
 {
   GstVideoAffineTransformationMeta _cInstance;
 
+  /**
+      Create a `video_affine_transformation_meta.VideoAffineTransformationMeta` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

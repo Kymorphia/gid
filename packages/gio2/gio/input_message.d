@@ -32,6 +32,20 @@ class InputMessage
 {
   GInputMessage _cInstance;
 
+  /**
+      Create a `input_message.InputMessage` wrap type.
+      Params:
+        bytesReceived = will be set to the number of bytes that have been
+            received
+        flags = collection of #GSocketMsgFlags for the received message,
+            outputted by the call
+  */
+  this(size_t bytesReceived = size_t.init, int flags = int.init) nothrow
+  {
+    this.bytesReceived = bytesReceived;
+    this.flags = flags;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

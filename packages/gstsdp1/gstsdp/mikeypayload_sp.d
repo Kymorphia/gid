@@ -16,6 +16,18 @@ class MIKEYPayloadSP
 {
   GstMIKEYPayloadSP _cInstance;
 
+  /**
+      Create a `mikeypayload_sp.MIKEYPayloadSP` wrap type.
+      Params:
+        policy = the policy number
+        proto = the security protocol
+  */
+  this(uint policy = uint.init, gstsdp.types.MIKEYSecProto proto = gstsdp.types.MIKEYSecProto.init) nothrow
+  {
+    this.policy = policy;
+    this.proto = proto;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -3,6 +3,7 @@ module gstbase.data_queue_item;
 
 public import gid.basictypes;
 import gid.gid;
+import glib.types;
 import gst.mini_object;
 import gstbase.c.functions;
 import gstbase.c.types;
@@ -15,6 +16,27 @@ import gstbase.types;
 class DataQueueItem
 {
   GstDataQueueItem _cInstance;
+
+  /**
+      Create a `data_queue_item.DataQueueItem` wrap type.
+      Params:
+        object = the #GstMiniObject to queue.
+        size = the size in bytes of the miniobject.
+        duration = the duration in #GstClockTime of the miniobject. Can not be
+          [gst.types.CLOCK_TIME_NONE].
+        visible = true if @object should be considered as a visible object.
+        destroy = The #GDestroyNotify function to use to free the #GstDataQueueItem.
+          This function should also drop the reference to @object the owner of the
+          #GstDataQueueItem is assumed to hold.
+  */
+  this(gst.mini_object.MiniObject object = gst.mini_object.MiniObject.init, uint size = uint.init, ulong duration = ulong.init, bool visible = bool.init, GDestroyNotify destroy = GDestroyNotify.init) nothrow
+  {
+    this.object = object;
+    this.size = size;
+    this.duration = duration;
+    this.visible = visible;
+    this.destroy = destroy;
+  }
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow

@@ -15,6 +15,18 @@ class SDPKey
 {
   GstSDPKey _cInstance;
 
+  /**
+      Create a `sdpkey.SDPKey` wrap type.
+      Params:
+        type = the encryption type
+        data = the encryption data
+  */
+  this(string type = string.init, string data = string.init) nothrow
+  {
+    this.type = type;
+    this.data = data;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

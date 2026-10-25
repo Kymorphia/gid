@@ -16,6 +16,26 @@ class ServerOperationNode
 {
   GdaServerOperationNode _cInstance;
 
+  /**
+      Create a `server_operation_node.ServerOperationNode` wrap type.
+      Params:
+        type = 
+        status = 
+        plist = 
+        model = 
+        column = 
+        param = 
+  */
+  this(gda.types.ServerOperationNodeType type = gda.types.ServerOperationNodeType.init, gda.types.ServerOperationNodeStatus status = gda.types.ServerOperationNodeStatus.init, gda.set.Set plist = gda.set.Set.init, gda.data_model.DataModel model = gda.data_model.DataModel.init, gda.column.Column column = gda.column.Column.init, gda.holder.Holder param = gda.holder.Holder.init) nothrow
+  {
+    this.type = type;
+    this.status = status;
+    this.plist = plist;
+    this.model = model;
+    this.column = column;
+    this.param = param;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

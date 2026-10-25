@@ -324,6 +324,6 @@ class MarkupParseContext : gobject.boxed.Boxed
   */
   void push(glib.types.MarkupParser parser, void* userData = null) nothrow
   {
-    g_markup_parse_context_push(cast(GMarkupParseContext*)this._cPtr, &parser, userData);
+    g_markup_parse_context_push(cast(GMarkupParseContext*)this._cPtr, cast(const(GMarkupParser)*)&parser, userData);
   }
 }

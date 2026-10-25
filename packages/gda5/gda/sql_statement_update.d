@@ -12,6 +12,16 @@ class SqlStatementUpdate
 {
   GdaSqlStatementUpdate _cInstance;
 
+  /**
+      Create a `sql_statement_update.SqlStatementUpdate` wrap type.
+      Params:
+        onConflict = 
+  */
+  this(string onConflict = string.init) nothrow
+  {
+    this.onConflict = onConflict;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

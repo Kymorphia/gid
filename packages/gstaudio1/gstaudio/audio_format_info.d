@@ -14,6 +14,30 @@ class AudioFormatInfo
 {
   GstAudioFormatInfo _cInstance;
 
+  /**
+      Create a `audio_format_info.AudioFormatInfo` wrap type.
+      Params:
+        format = #GstAudioFormat
+        name = string representation of the format
+        description = user readable description of the format
+        flags = #GstAudioFormatFlags
+        endianness = the endianness
+        width = amount of bits used for one sample
+        depth = amount of valid bits in @width
+        unpackFormat = the format of the unpacked samples
+  */
+  this(gstaudio.types.AudioFormat format = gstaudio.types.AudioFormat.init, string name = string.init, string description = string.init, gstaudio.types.AudioFormatFlags flags = gstaudio.types.AudioFormatFlags.init, int endianness = int.init, int width = int.init, int depth = int.init, gstaudio.types.AudioFormat unpackFormat = gstaudio.types.AudioFormat.init) nothrow
+  {
+    this.format = format;
+    this.name = name;
+    this.description = description;
+    this.flags = flags;
+    this.endianness = endianness;
+    this.width = width;
+    this.depth = depth;
+    this.unpackFormat = unpackFormat;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

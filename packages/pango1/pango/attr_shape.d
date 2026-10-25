@@ -3,6 +3,7 @@ module pango.attr_shape;
 
 public import gid.basictypes;
 import gid.gid;
+import glib.types;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -15,6 +16,22 @@ import pango.types;
 class AttrShape
 {
   PangoAttrShape _cInstance;
+
+  /**
+      Create a `attr_shape.AttrShape` wrap type.
+      Params:
+        inkRect = the ink rectangle to restrict to
+        logicalRect = the logical rectangle to restrict to
+        copyFunc = copy function for the user data
+        destroyFunc = destroy function for the user data
+  */
+  this(pango.types.Rectangle inkRect = pango.types.Rectangle.init, pango.types.Rectangle logicalRect = pango.types.Rectangle.init, PangoAttrDataCopyFunc copyFunc = PangoAttrDataCopyFunc.init, GDestroyNotify destroyFunc = GDestroyNotify.init) nothrow
+  {
+    this.inkRect = inkRect;
+    this.logicalRect = logicalRect;
+    this.copyFunc = copyFunc;
+    this.destroyFunc = destroyFunc;
+  }
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
@@ -136,7 +153,7 @@ class AttrShape
   static pango.attribute.Attribute new_(pango.types.Rectangle inkRect, pango.types.Rectangle logicalRect) nothrow
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_shape_new(&inkRect, &logicalRect);
+    _cretval = pango_attr_shape_new(cast(const(PangoRectangle)*)&inkRect, cast(const(PangoRectangle)*)&logicalRect);
     auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

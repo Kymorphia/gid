@@ -16,6 +16,16 @@ class AttrString
 {
   PangoAttrString _cInstance;
 
+  /**
+      Create a `attr_string.AttrString` wrap type.
+      Params:
+        value = the string which is the value of the attribute
+  */
+  this(string value = string.init) nothrow
+  {
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

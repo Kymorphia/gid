@@ -18,6 +18,28 @@ class VideoRegionOfInterestMeta
 {
   GstVideoRegionOfInterestMeta _cInstance;
 
+  /**
+      Create a `video_region_of_interest_meta.VideoRegionOfInterestMeta` wrap type.
+      Params:
+        roiType = GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
+        id = identifier of this particular ROI
+        parentId = identifier of its parent ROI, used f.i. for ROI hierarchisation.
+        x = x component of upper-left corner
+        y = y component of upper-left corner
+        w = bounding box width
+        h = bounding box height
+  */
+  this(glib.types.Quark roiType = glib.types.Quark.init, int id = int.init, int parentId = int.init, uint x = uint.init, uint y = uint.init, uint w = uint.init, uint h = uint.init) nothrow
+  {
+    this.roiType = roiType;
+    this.id = id;
+    this.parentId = parentId;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

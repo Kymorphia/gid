@@ -15,6 +15,22 @@ class Shadow
 {
   GskShadow _cInstance;
 
+  /**
+      Create a `shadow.Shadow` wrap type.
+      Params:
+        color = the color of the shadow
+        dx = the horizontal offset of the shadow
+        dy = the vertical offset of the shadow
+        radius = the radius of the shadow
+  */
+  this(gdk.rgba.RGBA color = gdk.rgba.RGBA.init, float dx = 0.0, float dy = 0.0, float radius = 0.0) nothrow
+  {
+    this.color = color;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

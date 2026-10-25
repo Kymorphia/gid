@@ -14,6 +14,25 @@ class IMContextInfo
 {
   GtkIMContextInfo _cInstance;
 
+  /**
+      Create a `imcontext_info.IMContextInfo` wrap type.
+      Params:
+        contextId = The unique identification string of the input method.
+        contextName = The human-readable name of the input method.
+        domain = Translation domain to be used with dgettext()
+        domainDirname = Name of locale directory for use with bindtextdomain()
+        defaultLocales = A colon-separated list of locales where this input method
+            should be the default. The asterisk “*” sets the default for all locales.
+  */
+  this(string contextId = string.init, string contextName = string.init, string domain = string.init, string domainDirname = string.init, string defaultLocales = string.init) nothrow
+  {
+    this.contextId = contextId;
+    this.contextName = contextName;
+    this.domain = domain;
+    this.domainDirname = domainDirname;
+    this.defaultLocales = defaultLocales;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

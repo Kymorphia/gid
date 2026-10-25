@@ -16,6 +16,43 @@ class WindowAttr
 {
   GdkWindowAttr _cInstance;
 
+  /**
+      Create a `window_attr.WindowAttr` wrap type.
+      Params:
+        title = title of the window (for toplevel windows)
+        eventMask = event mask (see [gdk.window.Window.setEvents])
+        x = X coordinate relative to parent window (see [gdk.window.Window.move])
+        y = Y coordinate relative to parent window (see [gdk.window.Window.move])
+        width = width of window
+        height = height of window
+        wclass = #GDK_INPUT_OUTPUT (normal window) or #GDK_INPUT_ONLY (invisible
+           window that receives events)
+        visual = #GdkVisual for window
+        windowType = type of window
+        cursor = cursor for the window (see [gdk.window.Window.setCursor])
+        wmclassName = don’t use (see [gtk.window.Window.setWmclass])
+        wmclassClass = don’t use (see [gtk.window.Window.setWmclass])
+        overrideRedirect = true to bypass the window manager
+        typeHint = a hint of the function of the window
+  */
+  this(string title = string.init, int eventMask = int.init, int x = int.init, int y = int.init, int width = int.init, int height = int.init, gdk.types.WindowWindowClass wclass = gdk.types.WindowWindowClass.init, gdk.visual.Visual visual = gdk.visual.Visual.init, gdk.types.WindowType windowType = gdk.types.WindowType.init, gdk.cursor.Cursor cursor = gdk.cursor.Cursor.init, string wmclassName = string.init, string wmclassClass = string.init, bool overrideRedirect = bool.init, gdk.types.WindowTypeHint typeHint = gdk.types.WindowTypeHint.init) nothrow
+  {
+    this.title = title;
+    this.eventMask = eventMask;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.wclass = wclass;
+    this.visual = visual;
+    this.windowType = windowType;
+    this.cursor = cursor;
+    this.wmclassName = wmclassName;
+    this.wmclassClass = wmclassClass;
+    this.overrideRedirect = overrideRedirect;
+    this.typeHint = typeHint;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

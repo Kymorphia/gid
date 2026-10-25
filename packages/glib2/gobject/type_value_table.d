@@ -15,6 +15,40 @@ class TypeValueTable
 {
   GTypeValueTable _cInstance;
 
+  /**
+      Create a `type_value_table.TypeValueTable` wrap type.
+      Params:
+        valueInit = Function to initialize a GValue
+        valueFree = Function to free a GValue
+        valueCopy = Function to copy a GValue
+        valuePeekPointer = Function to peek the contents of a GValue if they fit
+            into a pointer
+        collectFormat = A string format describing how to collect the contents of
+            this value bit-by-bit. Each character in the format represents
+            an argument to be collected, and the characters themselves indicate
+            the type of the argument. Currently supported arguments are:
+             - `'i'`: Integers, passed as `collect_values[].v_int`
+             - `'l'`: Longs, passed as `collect_values[].v_long`
+             - `'d'`: Doubles, passed as `collect_values[].v_double`
+             - `'p'`: Pointers, passed as `collect_values[].v_pointer`
+            It should be noted that for variable argument list construction,
+            ANSI C promotes every type smaller than an integer to an int, and
+            floats to doubles. So for collection of short int or char, `'i'`
+            needs to be used, and for collection of floats `'d'`.
+        lcopyFormat = Format description of the arguments to collect for @lcopy_value,
+            analogous to @collect_format. Usually, @lcopy_format string consists
+            only of `'p'`s to provide lcopy_value() with pointers to storage locations.
+  */
+  this(GTypeValueInitFunc valueInit = GTypeValueInitFunc.init, GTypeValueFreeFunc valueFree = GTypeValueFreeFunc.init, GTypeValueCopyFunc valueCopy = GTypeValueCopyFunc.init, GTypeValuePeekPointerFunc valuePeekPointer = GTypeValuePeekPointerFunc.init, string collectFormat = string.init, string lcopyFormat = string.init) nothrow
+  {
+    this.valueInit = valueInit;
+    this.valueFree = valueFree;
+    this.valueCopy = valueCopy;
+    this.valuePeekPointer = valuePeekPointer;
+    this.collectFormat = collectFormat;
+    this.lcopyFormat = lcopyFormat;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

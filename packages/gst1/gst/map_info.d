@@ -20,6 +20,20 @@ class MapInfo
 {
   GstMapInfo _cInstance;
 
+  /**
+      Create a `map_info.MapInfo` wrap type.
+      Params:
+        memory = a pointer to the mapped memory
+        flags = flags used when mapping the memory
+        maxsize = the maximum bytes in @data
+  */
+  this(gst.memory.Memory memory = gst.memory.Memory.init, gst.types.MapFlags flags = gst.types.MapFlags.init, size_t maxsize = size_t.init) nothrow
+  {
+    this.memory = memory;
+    this.flags = flags;
+    this.maxsize = maxsize;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

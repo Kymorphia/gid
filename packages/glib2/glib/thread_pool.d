@@ -40,6 +40,18 @@ class ThreadPool
 {
   GThreadPool _cInstance;
 
+  /**
+      Create a `thread_pool.ThreadPool` wrap type.
+      Params:
+        func = the function to execute in the threads of this pool
+        exclusive = are all threads exclusive to this pool
+  */
+  this(GFunc func = GFunc.init, bool exclusive = bool.init) nothrow
+  {
+    this.func = func;
+    this.exclusive = exclusive;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

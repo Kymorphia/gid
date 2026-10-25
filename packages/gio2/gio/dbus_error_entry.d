@@ -14,6 +14,18 @@ class DBusErrorEntry
 {
   GDBusErrorEntry _cInstance;
 
+  /**
+      Create a `dbus_error_entry.DBusErrorEntry` wrap type.
+      Params:
+        errorCode = An error code.
+        dbusErrorName = The D-Bus error name to associate with @error_code.
+  */
+  this(int errorCode = int.init, string dbusErrorName = string.init) nothrow
+  {
+    this.errorCode = errorCode;
+    this.dbusErrorName = dbusErrorName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -17,6 +17,20 @@ class SqlStatementCheckValidityData
 {
   GdaSqlStatementCheckValidityData _cInstance;
 
+  /**
+      Create a `sql_statement_check_validity_data.SqlStatementCheckValidityData` wrap type.
+      Params:
+        cnc = 
+        store = 
+        mstruct = 
+  */
+  this(gda.connection.Connection cnc = gda.connection.Connection.init, gda.meta_store.MetaStore store = gda.meta_store.MetaStore.init, gda.meta_struct.MetaStruct mstruct = gda.meta_struct.MetaStruct.init) nothrow
+  {
+    this.cnc = cnc;
+    this.store = store;
+    this.mstruct = mstruct;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

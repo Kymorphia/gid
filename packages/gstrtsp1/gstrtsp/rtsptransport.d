@@ -15,6 +15,48 @@ class RTSPTransport
 {
   GstRTSPTransport _cInstance;
 
+  /**
+      Create a `rtsptransport.RTSPTransport` wrap type.
+      Params:
+        trans = the transport mode
+        profile = the tansport profile
+        lowerTransport = the lower transport
+        destination = the destination ip/hostname
+        source = the source ip/hostname
+        layers = the number of layers
+        modePlay = if play mode was selected
+        modeRecord = if record mode was selected
+        append = is append mode was selected
+        interleaved = the interleave range
+        ttl = the time to live for multicast UDP
+        port = the port pair for multicast sessions
+        clientPort = the client port pair for receiving data. For TCP
+            based transports, applications can use this field to store the
+            sender and receiver ports of the client.
+        serverPort = the server port pair for receiving data. For TCP
+            based transports, applications can use this field to store the
+            sender and receiver ports of the server.
+        ssrc = the ssrc that the sender/receiver will use
+  */
+  this(gstrtsp.types.RTSPTransMode trans = gstrtsp.types.RTSPTransMode.init, gstrtsp.types.RTSPProfile profile = gstrtsp.types.RTSPProfile.init, gstrtsp.types.RTSPLowerTrans lowerTransport = gstrtsp.types.RTSPLowerTrans.init, string destination = string.init, string source = string.init, uint layers = uint.init, bool modePlay = bool.init, bool modeRecord = bool.init, bool append = bool.init, gstrtsp.rtsprange.RTSPRange interleaved = gstrtsp.rtsprange.RTSPRange.init, uint ttl = uint.init, gstrtsp.rtsprange.RTSPRange port = gstrtsp.rtsprange.RTSPRange.init, gstrtsp.rtsprange.RTSPRange clientPort = gstrtsp.rtsprange.RTSPRange.init, gstrtsp.rtsprange.RTSPRange serverPort = gstrtsp.rtsprange.RTSPRange.init, uint ssrc = uint.init) nothrow
+  {
+    this.trans = trans;
+    this.profile = profile;
+    this.lowerTransport = lowerTransport;
+    this.destination = destination;
+    this.source = source;
+    this.layers = layers;
+    this.modePlay = modePlay;
+    this.modeRecord = modeRecord;
+    this.append = append;
+    this.interleaved = interleaved;
+    this.ttl = ttl;
+    this.port = port;
+    this.clientPort = clientPort;
+    this.serverPort = serverPort;
+    this.ssrc = ssrc;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

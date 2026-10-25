@@ -15,6 +15,23 @@ class HookList
 {
   GHookList _cInstance;
 
+  /**
+      Create a `hook_list.HookList` wrap type.
+      Params:
+        seqId = the next free #GHook id
+        hookSize = the size of the #GHookList elements, in bytes
+        isSetup = 1 if the #GHookList has been initialized
+        finalizeHook = the function to call to finalize a #GHook element.
+              The default behaviour is to call the hooks @destroy function
+  */
+  this(gulong seqId = gulong.init, uint hookSize = uint.init, uint isSetup = uint.init, GHookFinalizeFunc finalizeHook = GHookFinalizeFunc.init) nothrow
+  {
+    this.seqId = seqId;
+    this.hookSize = hookSize;
+    this.isSetup = isSetup;
+    this.finalizeHook = finalizeHook;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -16,6 +16,32 @@ class EventDND
 {
   GdkEventDND _cInstance;
 
+  /**
+      Create a `event_dnd.EventDND` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
+            [gdk.types.EventType.DragMotion], [gdk.types.EventType.DragStatus], [gdk.types.EventType.DropStart] or
+            [gdk.types.EventType.DropFinished]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        context = the #GdkDragContext for the current DND operation.
+        time = the time of the event in milliseconds.
+        xRoot = the x coordinate of the pointer relative to the root of the
+            screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+        yRoot = the y coordinate of the pointer relative to the root of the
+            screen, only set for [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart].
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, gdk.drag_context.DragContext context = gdk.drag_context.DragContext.init, uint time = uint.init, short xRoot = short.init, short yRoot = short.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.context = context;
+    this.time = time;
+    this.xRoot = xRoot;
+    this.yRoot = yRoot;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

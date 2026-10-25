@@ -65,7 +65,7 @@ class CssSection : gobject.boxed.Boxed
   this(gio.file.File file, gtk.types.CssLocation start, gtk.types.CssLocation end) nothrow
   {
     GtkCssSection* _cretval;
-    _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &start, &end);
+    _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, cast(const(GtkCssLocation)*)&start, cast(const(GtkCssLocation)*)&end);
     this(_cretval, Yes.Take);
   }
 

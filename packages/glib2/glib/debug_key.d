@@ -15,6 +15,18 @@ class DebugKey
 {
   GDebugKey _cInstance;
 
+  /**
+      Create a `debug_key.DebugKey` wrap type.
+      Params:
+        key = the string
+        value = the flag
+  */
+  this(string key = string.init, uint value = uint.init) nothrow
+  {
+    this.key = key;
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

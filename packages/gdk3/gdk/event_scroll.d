@@ -23,6 +23,49 @@ class EventScroll
 {
   GdkEventScroll _cInstance;
 
+  /**
+      Create a `event_scroll.EventScroll` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.Scroll]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        x = the x coordinate of the pointer relative to the window.
+        y = the y coordinate of the pointer relative to the window.
+        state = a bit-mask representing the state of
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
+        direction = the direction to scroll to (one of [gdk.types.ScrollDirection.Up],
+            [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
+            [gdk.types.ScrollDirection.Smooth]).
+        device = the master device that the event originated from. Use
+          [gdk.event.Event.getSourceDevice] to get the slave device.
+        xRoot = the x coordinate of the pointer relative to the root of the
+            screen.
+        yRoot = the y coordinate of the pointer relative to the root of the
+            screen.
+        deltaX = the x coordinate of the scroll delta
+        deltaY = the y coordinate of the scroll delta
+        isStop = 
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, double x = 0.0, double y = 0.0, gdk.types.ModifierType state = gdk.types.ModifierType.init, gdk.types.ScrollDirection direction = gdk.types.ScrollDirection.init, gdk.device.Device device = gdk.device.Device.init, double xRoot = 0.0, double yRoot = 0.0, double deltaX = 0.0, double deltaY = 0.0, uint isStop = uint.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.x = x;
+    this.y = y;
+    this.state = state;
+    this.direction = direction;
+    this.device = device;
+    this.xRoot = xRoot;
+    this.yRoot = yRoot;
+    this.deltaX = deltaX;
+    this.deltaY = deltaY;
+    this.isStop = isStop;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

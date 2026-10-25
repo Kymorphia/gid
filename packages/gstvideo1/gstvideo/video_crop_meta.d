@@ -16,6 +16,22 @@ class VideoCropMeta
 {
   GstVideoCropMeta _cInstance;
 
+  /**
+      Create a `video_crop_meta.VideoCropMeta` wrap type.
+      Params:
+        x = the horizontal offset
+        y = the vertical offset
+        width = the cropped width
+        height = the cropped height
+  */
+  this(uint x = uint.init, uint y = uint.init, uint width = uint.init, uint height = uint.init) nothrow
+  {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

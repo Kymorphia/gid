@@ -15,6 +15,28 @@ class EventConfigure
 {
   GdkEventConfigure _cInstance;
 
+  /**
+      Create a `event_configure.EventConfigure` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.Configure]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        x = the new x coordinate of the window, relative to its parent.
+        y = the new y coordinate of the window, relative to its parent.
+        width = the new width of the window.
+        height = the new height of the window.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, int x = int.init, int y = int.init, int width = int.init, int height = int.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

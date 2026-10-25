@@ -37,6 +37,13 @@ class WeakRef
 {
   GWeakRef _cInstance;
 
+  /**
+      Create a `weak_ref.WeakRef` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

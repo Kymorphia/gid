@@ -67,7 +67,7 @@ class Source : gobject.boxed.Boxed
   this(glib.types.SourceFuncs sourceFuncs, uint structSize) nothrow
   {
     GSource* _cretval;
-    _cretval = g_source_new(&sourceFuncs, structSize);
+    _cretval = g_source_new(cast(GSourceFuncs*)&sourceFuncs, structSize);
     this(_cretval, Yes.Take);
   }
 
@@ -118,7 +118,7 @@ class Source : gobject.boxed.Boxed
   */
   void addPoll(glib.types.PollFD fd) nothrow
   {
-    g_source_add_poll(cast(GSource*)this._cPtr, &fd);
+    g_source_add_poll(cast(GSource*)this._cPtr, cast(GPollFD*)&fd);
   }
 
   /**
@@ -471,7 +471,7 @@ class Source : gobject.boxed.Boxed
   */
   void removePoll(glib.types.PollFD fd) nothrow
   {
-    g_source_remove_poll(cast(GSource*)this._cPtr, &fd);
+    g_source_remove_poll(cast(GSource*)this._cPtr, cast(GPollFD*)&fd);
   }
 
   /**
@@ -563,7 +563,7 @@ class Source : gobject.boxed.Boxed
   */
   void setCallbackIndirect(void* callbackData, glib.types.SourceCallbackFuncs callbackFuncs) nothrow
   {
-    g_source_set_callback_indirect(cast(GSource*)this._cPtr, callbackData, &callbackFuncs);
+    g_source_set_callback_indirect(cast(GSource*)this._cPtr, callbackData, cast(GSourceCallbackFuncs*)&callbackFuncs);
   }
 
   /**
@@ -589,7 +589,7 @@ class Source : gobject.boxed.Boxed
   */
   void setFuncs(glib.types.SourceFuncs funcs) nothrow
   {
-    g_source_set_funcs(cast(GSource*)this._cPtr, &funcs);
+    g_source_set_funcs(cast(GSource*)this._cPtr, cast(GSourceFuncs*)&funcs);
   }
 
   /**
@@ -731,7 +731,7 @@ class Source : gobject.boxed.Boxed
   static bool removeByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null) nothrow
   {
     bool _retval;
-    _retval = cast(bool)g_source_remove_by_funcs_user_data(&funcs, userData);
+    _retval = cast(bool)g_source_remove_by_funcs_user_data(cast(GSourceFuncs*)&funcs, userData);
     return _retval;
   }
 

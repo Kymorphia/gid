@@ -83,7 +83,7 @@ class VideoVBIParser : gobject.boxed.Boxed
   gstvideo.types.VideoVBIParserResult getAncillary(out gstvideo.types.VideoAncillary anc) nothrow
   {
     GstVideoVBIParserResult _cretval;
-    _cretval = gst_video_vbi_parser_get_ancillary(cast(GstVideoVBIParser*)this._cPtr, &anc);
+    _cretval = gst_video_vbi_parser_get_ancillary(cast(GstVideoVBIParser*)this._cPtr, cast(GstVideoAncillary*)&anc);
     gstvideo.types.VideoVBIParserResult _retval = cast(gstvideo.types.VideoVBIParserResult)_cretval;
     return _retval;
   }

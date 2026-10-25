@@ -18,6 +18,24 @@ class SqlRenderingContext
 {
   GdaSqlRenderingContext _cInstance;
 
+  /**
+      Create a `sql_rendering_context.SqlRenderingContext` wrap type.
+      Params:
+        flags = Global rendering options
+        params = Parameters to be used while doing the rendering
+        provider = Pointer to the server provider to be used
+        cnc = Pointer to the connection to be used
+        renderValue = function to render a #GValue
+  */
+  this(gda.types.StatementSqlFlag flags = gda.types.StatementSqlFlag.init, gda.set.Set params = gda.set.Set.init, gda.server_provider.ServerProvider provider = gda.server_provider.ServerProvider.init, gda.connection.Connection cnc = gda.connection.Connection.init, GdaSqlRenderingValue renderValue = GdaSqlRenderingValue.init) nothrow
+  {
+    this.flags = flags;
+    this.params = params;
+    this.provider = provider;
+    this.cnc = cnc;
+    this.renderValue = renderValue;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

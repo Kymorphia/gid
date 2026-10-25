@@ -17,6 +17,16 @@ class AttrColor
 {
   PangoAttrColor _cInstance;
 
+  /**
+      Create a `attr_color.AttrColor` wrap type.
+      Params:
+        color = the [pango.color.Color] which is the value of the attribute
+  */
+  this(pango.color.Color color = pango.color.Color.init) nothrow
+  {
+    this.color = color;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

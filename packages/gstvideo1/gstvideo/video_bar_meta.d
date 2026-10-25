@@ -27,6 +27,28 @@ class VideoBarMeta
 {
   GstVideoBarMeta _cInstance;
 
+  /**
+      Create a `video_bar_meta.VideoBarMeta` wrap type.
+      Params:
+        field = 0 for progressive or field 1 and 1 for field 2
+        isLetterbox = if true then bar data specifies letterbox, otherwise pillarbox
+        barData1 = If @is_letterbox is true, then the value specifies the
+               last line of a horizontal letterbox bar area at top of reconstructed frame.
+               Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
+               bar area at the left side of the reconstructed frame
+        barData2 = If @is_letterbox is true, then the value specifies the
+               first line of a horizontal letterbox bar area at bottom of reconstructed frame.
+               Otherwise, it specifies the first horizontal
+               luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
+  */
+  this(ubyte field = ubyte.init, bool isLetterbox = bool.init, uint barData1 = uint.init, uint barData2 = uint.init) nothrow
+  {
+    this.field = field;
+    this.isLetterbox = isLetterbox;
+    this.barData1 = barData1;
+    this.barData2 = barData2;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

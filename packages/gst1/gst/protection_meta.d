@@ -18,6 +18,16 @@ class ProtectionMeta
 {
   GstProtectionMeta _cInstance;
 
+  /**
+      Create a `protection_meta.ProtectionMeta` wrap type.
+      Params:
+        info = the cryptographic information needed to decrypt the sample.
+  */
+  this(gst.structure.Structure info = gst.structure.Structure.init) nothrow
+  {
+    this.info = info;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

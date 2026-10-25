@@ -20,6 +20,23 @@ class EventVisibility
 {
   GdkEventVisibility _cInstance;
 
+  /**
+      Create a `event_visibility.EventVisibility` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.VisibilityNotify]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        state = the new visibility state ([gdk.types.VisibilityState.FullyObscured],
+            [gdk.types.VisibilityState.Partial] or [gdk.types.VisibilityState.Unobscured]).
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, gdk.types.VisibilityState state = gdk.types.VisibilityState.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.state = state;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

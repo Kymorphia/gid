@@ -24,6 +24,25 @@ class EventProximity
 {
   GdkEventProximity _cInstance;
 
+  /**
+      Create a `event_proximity.EventProximity` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.ProximityIn] or [gdk.types.EventType.ProximityOut]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        device = the master device that the event originated from. Use
+          [gdk.event.Event.getSourceDevice] to get the slave device.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, gdk.device.Device device = gdk.device.Device.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.device = device;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

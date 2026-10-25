@@ -1348,7 +1348,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     uint _retval;
     const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
-    _retval = g_dbus_connection_register_subtree(cast(GDBusConnection*)this._cPtr, _objectPath, &vtable, flags, userData, _userDataFreeFuncCB, &_err);
+    _retval = g_dbus_connection_register_subtree(cast(GDBusConnection*)this._cPtr, _objectPath, cast(const(GDBusSubtreeVTable)*)&vtable, flags, userData, _userDataFreeFuncCB, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     return _retval;

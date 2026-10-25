@@ -19,6 +19,30 @@ class EventGrabBroken
 {
   GdkEventGrabBroken _cInstance;
 
+  /**
+      Create a `event_grab_broken.EventGrabBroken` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.GrabBroken])
+        window = the window which received the event, i.e. the window
+            that previously owned the grab
+        sendEvent = true if the event was sent explicitly.
+        keyboard = true if a keyboard grab was broken, false if a pointer
+            grab was broken
+        implicit = true if the broken grab was implicit
+        grabWindow = If this event is caused by another grab in the same
+            application, @grab_window contains the new grab window. Otherwise
+            @grab_window is null.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, bool keyboard = bool.init, bool implicit = bool.init, gdk.window.Window grabWindow = gdk.window.Window.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.keyboard = keyboard;
+    this.implicit = implicit;
+    this.grabWindow = grabWindow;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

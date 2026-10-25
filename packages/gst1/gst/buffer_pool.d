@@ -219,9 +219,9 @@ class BufferPool : gst.object.ObjectWrap
         allocator = a #GstAllocator
         params = #GstAllocationParams
   */
-  static void configSetAllocator(gst.structure.Structure config, gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
+  static void configSetAllocator(gst.structure.Structure config, gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams* params = null) nothrow
   {
-    gst_buffer_pool_config_set_allocator(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
+    gst_buffer_pool_config_set_allocator(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)params);
   }
 
   /**
@@ -278,11 +278,11 @@ class BufferPool : gst.object.ObjectWrap
       Returns: a #GstFlowReturn such as [gst.types.FlowReturn.Flushing] when the pool is
         inactive.
   */
-  gst.types.FlowReturn acquireBuffer(out gst.buffer.Buffer buffer, gst.types.BufferPoolAcquireParams params) nothrow
+  gst.types.FlowReturn acquireBuffer(out gst.buffer.Buffer buffer, gst.types.BufferPoolAcquireParams* params = null) nothrow
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
-    _cretval = gst_buffer_pool_acquire_buffer(cast(GstBufferPool*)this._cPtr, &_buffer, &params);
+    _cretval = gst_buffer_pool_acquire_buffer(cast(GstBufferPool*)this._cPtr, &_buffer, cast(GstBufferPoolAcquireParams*)params);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;

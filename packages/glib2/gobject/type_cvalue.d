@@ -14,6 +14,22 @@ class TypeCValue
 {
   GTypeCValue _cInstance;
 
+  /**
+      Create a `type_cvalue.TypeCValue` wrap type.
+      Params:
+        vInt = the field for holding integer values
+        vLong = the field for holding long integer values
+        vInt64 = the field for holding 64 bit integer values
+        vDouble = the field for holding floating point values
+  */
+  this(int vInt = int.init, glong vLong = glong.init, long vInt64 = long.init, double vDouble = 0.0) nothrow
+  {
+    this.vInt = vInt;
+    this.vLong = vLong;
+    this.vInt64 = vInt64;
+    this.vDouble = vDouble;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

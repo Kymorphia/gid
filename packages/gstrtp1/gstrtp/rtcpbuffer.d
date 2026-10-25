@@ -4,7 +4,6 @@ module gstrtp.rtcpbuffer;
 public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
-import gst.map_info;
 import gst.types;
 import gstrtp.c.functions;
 import gstrtp.c.types;
@@ -26,6 +25,16 @@ import gstrtp.types;
 class RTCPBuffer
 {
   GstRTCPBuffer _cInstance;
+
+  /**
+      Create a `rtcpbuffer.RTCPBuffer` wrap type.
+      Params:
+        buffer = 
+  */
+  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init) nothrow
+  {
+    this.buffer = buffer;
+  }
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
@@ -53,12 +62,6 @@ class RTCPBuffer
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstRTCPBuffer*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstRTCPBuffer*)this._cPtr).buffer);
-  }
-
-  /** */
-  @property gst.map_info.MapInfo map() nothrow
-  {
-    return new gst.map_info.MapInfo(cast(GstMapInfo*)&(cast(GstRTCPBuffer*)this._cPtr).map, No.Take);
   }
 
   /**

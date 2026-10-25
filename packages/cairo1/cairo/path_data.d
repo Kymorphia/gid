@@ -75,6 +75,13 @@ class PathData
 {
   cairo_path_data_t _cInstance;
 
+  /**
+      Create a `path_data.PathData` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

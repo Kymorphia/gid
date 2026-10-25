@@ -17,6 +17,18 @@ class VideoMetaTransform
 {
   GstVideoMetaTransform _cInstance;
 
+  /**
+      Create a `video_meta_transform.VideoMetaTransform` wrap type.
+      Params:
+        inInfo = the input #GstVideoInfo
+        outInfo = the output #GstVideoInfo
+  */
+  this(gstvideo.video_info.VideoInfo inInfo = gstvideo.video_info.VideoInfo.init, gstvideo.video_info.VideoInfo outInfo = gstvideo.video_info.VideoInfo.init) nothrow
+  {
+    this.inInfo = inInfo;
+    this.outInfo = outInfo;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

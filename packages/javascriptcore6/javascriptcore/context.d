@@ -567,7 +567,7 @@ class Context : gobject.object.ObjectWrap
         destroyNotify = a destroy notifier for class instances
       Returns: a #JSCClass
   */
-  javascriptcore.class_.Class registerClass(string name, javascriptcore.class_.Class parentClass, javascriptcore.types.ClassVTable vtable, glib.types.DestroyNotify destroyNotify = null) nothrow
+  javascriptcore.class_.Class registerClass(string name, javascriptcore.class_.Class parentClass = null, javascriptcore.types.ClassVTable* vtable = null, glib.types.DestroyNotify destroyNotify = null) nothrow
   {
     extern(C) void _destroyNotifyCallback(void* data) nothrow
     {
@@ -586,7 +586,7 @@ class Context : gobject.object.ObjectWrap
     auto _destroyNotifyCB = destroyNotify ? &_destroyNotifyCallback : null;
     JSCClass* _cretval;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    _cretval = jsc_context_register_class(cast(JSCContext*)this._cPtr, _name, parentClass ? cast(JSCClass*)parentClass._cPtr(No.Dup) : null, &vtable, _destroyNotifyCB);
+    _cretval = jsc_context_register_class(cast(JSCContext*)this._cPtr, _name, parentClass ? cast(JSCClass*)parentClass._cPtr(No.Dup) : null, cast(JSCClassVTable*)vtable, _destroyNotifyCB);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
     return _retval;
   }

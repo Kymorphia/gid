@@ -332,7 +332,7 @@ class AccelMap : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _accelPath = accelPath.toCString!(No.Malloc, No.Nullable);
-    _retval = cast(bool)gtk_accel_map_lookup_entry(_accelPath, &key);
+    _retval = cast(bool)gtk_accel_map_lookup_entry(_accelPath, cast(GtkAccelKey*)&key);
     return _retval;
   }
 

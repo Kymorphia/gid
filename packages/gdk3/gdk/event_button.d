@@ -48,6 +48,45 @@ class EventButton
 {
   GdkEventButton _cInstance;
 
+  /**
+      Create a `event_button.EventButton` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.ButtonPress], [gdk.types.EventType._2buttonPress],
+            [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        x = the x coordinate of the pointer relative to the window.
+        y = the y coordinate of the pointer relative to the window.
+        state = a bit-mask representing the state of
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
+        button = the button which was pressed or released, numbered from 1 to 5.
+            Normally button 1 is the left mouse button, 2 is the middle button,
+            and 3 is the right button. On 2-button mice, the middle button can
+            often be simulated by pressing both mouse buttons together.
+        device = the master device that the event originated from. Use
+          [gdk.event.Event.getSourceDevice] to get the slave device.
+        xRoot = the x coordinate of the pointer relative to the root of the
+            screen.
+        yRoot = the y coordinate of the pointer relative to the root of the
+            screen.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, double x = 0.0, double y = 0.0, gdk.types.ModifierType state = gdk.types.ModifierType.init, uint button = uint.init, gdk.device.Device device = gdk.device.Device.init, double xRoot = 0.0, double yRoot = 0.0) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.x = x;
+    this.y = y;
+    this.state = state;
+    this.button = button;
+    this.device = device;
+    this.xRoot = xRoot;
+    this.yRoot = yRoot;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

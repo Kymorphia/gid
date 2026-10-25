@@ -23,6 +23,18 @@ class AudioDownmixMeta
 {
   GstAudioDownmixMeta _cInstance;
 
+  /**
+      Create a `audio_downmix_meta.AudioDownmixMeta` wrap type.
+      Params:
+        fromChannels = the number of channels of the source
+        toChannels = the number of channels of the destination
+  */
+  this(int fromChannels = int.init, int toChannels = int.init) nothrow
+  {
+    this.fromChannels = fromChannels;
+    this.toChannels = toChannels;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -371,9 +371,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
         width = location to return width needed to render a cell, or null
         height = location to return height needed to render a cell, or null
   */
-  void cellGetSize(gdk.rectangle.Rectangle cellArea, out int xOffset, out int yOffset, out int width, out int height) nothrow
+  void cellGetSize(gdk.rectangle.Rectangle* cellArea, out int xOffset, out int yOffset, out int width, out int height) nothrow
   {
-    gtk_tree_view_column_cell_get_size(cast(GtkTreeViewColumn*)this._cPtr, cast(const(GdkRectangle)*)&cellArea, cast(int*)&xOffset, cast(int*)&yOffset, cast(int*)&width, cast(int*)&height);
+    gtk_tree_view_column_cell_get_size(cast(GtkTreeViewColumn*)this._cPtr, cast(const(GdkRectangle)*)cellArea, cast(int*)&xOffset, cast(int*)&yOffset, cast(int*)&width, cast(int*)&height);
   }
 
   /**

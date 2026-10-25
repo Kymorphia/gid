@@ -912,7 +912,7 @@ gobject.types.GType paramTypeRegisterStatic(string name, gobject.types.ParamSpec
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-  _retval = g_param_type_register_static(_name, &pspecInfo);
+  _retval = g_param_type_register_static(_name, cast(const(GParamSpecTypeInfo)*)&pspecInfo);
   return _retval;
 }
 
@@ -1062,7 +1062,7 @@ gobject.types.GType pointerTypeRegisterStatic(string name) nothrow
 bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null) nothrow
 {
   bool _retval;
-  _retval = cast(bool)g_signal_accumulator_first_wins(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
+  _retval = cast(bool)g_signal_accumulator_first_wins(cast(GSignalInvocationHint*)&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
   return _retval;
 }
 
@@ -1085,7 +1085,7 @@ bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobjec
 bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null) nothrow
 {
   bool _retval;
-  _retval = cast(bool)g_signal_accumulator_true_handled(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
+  _retval = cast(bool)g_signal_accumulator_true_handled(cast(GSignalInvocationHint*)&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
   return _retval;
 }
 

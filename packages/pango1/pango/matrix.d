@@ -222,7 +222,7 @@ struct Matrix
   */
   void transformPixelRectangle(ref pango.types.Rectangle rect) nothrow
   {
-    pango_matrix_transform_pixel_rectangle(cast(const(PangoMatrix)*)&this, &rect);
+    pango_matrix_transform_pixel_rectangle(cast(const(PangoMatrix)*)&this, cast(PangoRectangle*)&rect);
   }
 
   /**
@@ -262,7 +262,7 @@ struct Matrix
   */
   void transformRectangle(ref pango.types.Rectangle rect) nothrow
   {
-    pango_matrix_transform_rectangle(cast(const(PangoMatrix)*)&this, &rect);
+    pango_matrix_transform_rectangle(cast(const(PangoMatrix)*)&this, cast(PangoRectangle*)&rect);
   }
 
   /**

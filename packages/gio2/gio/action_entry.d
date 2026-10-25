@@ -23,6 +23,26 @@ class ActionEntry
 {
   GActionEntry _cInstance;
 
+  /**
+      Create a `action_entry.ActionEntry` wrap type.
+      Params:
+        name = the name of the action
+        parameterType = the type of the parameter that must be passed to the
+                           activate function for this action, given as a single
+                           GVariant type string (or null for no parameter)
+        state = the initial state for this action, given in
+                  [GVariant text format][gvariant-text].  The state is parsed
+                  with no extra type information, so type tags must be added to
+                  the string if they are necessary.  Stateless actions should
+                  give null here.
+  */
+  this(string name = string.init, string parameterType = string.init, string state = string.init) nothrow
+  {
+    this.name = name;
+    this.parameterType = parameterType;
+    this.state = state;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

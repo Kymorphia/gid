@@ -17,6 +17,21 @@ class VideoFrame
 {
   GstVideoFrame _cInstance;
 
+  /**
+      Create a `video_frame.VideoFrame` wrap type.
+      Params:
+        flags = #GstVideoFrameFlags for the frame
+        buffer = the mapped buffer
+        id = id of the mapped frame. the id can for example be used to
+            identify the frame in case of multiview video.
+  */
+  this(gstvideo.types.VideoFrameFlags flags = gstvideo.types.VideoFrameFlags.init, gst.buffer.Buffer buffer = gst.buffer.Buffer.init, int id = int.init) nothrow
+  {
+    this.flags = flags;
+    this.buffer = buffer;
+    this.id = id;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

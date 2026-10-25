@@ -18,6 +18,41 @@ class PluginDesc
 {
   GstPluginDesc _cInstance;
 
+  /**
+      Create a `plugin_desc.PluginDesc` wrap type.
+      Params:
+        majorVersion = the major version number of core that plugin was compiled for
+        minorVersion = the minor version number of core that plugin was compiled for
+        name = a unique name of the plugin
+        description = description of plugin
+        pluginInit = pointer to the init function of this plugin.
+        version_ = version of the plugin
+        license = effective license of plugin
+        source = source module plugin belongs to
+        package_ = shipped package plugin belongs to
+        origin = URL to provider of plugin
+        releaseDatetime = date time string in ISO 8601
+              format (or rather, a subset thereof), or null. Allowed are the
+              following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+              'T' a separator and 'Z' indicating UTC/Zulu time). This field
+              should be set via the GST_PACKAGE_RELEASE_DATETIME
+              preprocessor macro.
+  */
+  this(int majorVersion = int.init, int minorVersion = int.init, string name = string.init, string description = string.init, GstPluginInitFunc pluginInit = GstPluginInitFunc.init, string version_ = string.init, string license = string.init, string source = string.init, string package_ = string.init, string origin = string.init, string releaseDatetime = string.init) nothrow
+  {
+    this.majorVersion = majorVersion;
+    this.minorVersion = minorVersion;
+    this.name = name;
+    this.description = description;
+    this.pluginInit = pluginInit;
+    this.version_ = version_;
+    this.license = license;
+    this.source = source;
+    this.package_ = package_;
+    this.origin = origin;
+    this.releaseDatetime = releaseDatetime;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

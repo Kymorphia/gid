@@ -15,6 +15,13 @@ class DebugCategory
 {
   GstDebugCategory _cInstance;
 
+  /**
+      Create a `debug_category.DebugCategory` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

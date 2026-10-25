@@ -14,6 +14,24 @@ class SqlParamSpec
 {
   GdaSqlParamSpec _cInstance;
 
+  /**
+      Create a `sql_param_spec.SqlParamSpec` wrap type.
+      Params:
+        name = 
+        descr = 
+        isParam = 
+        nullok = 
+        gType = 
+  */
+  this(string name = string.init, string descr = string.init, bool isParam = bool.init, bool nullok = bool.init, gobject.types.GType gType = gobject.types.GType.init) nothrow
+  {
+    this.name = name;
+    this.descr = descr;
+    this.isParam = isParam;
+    this.nullok = nullok;
+    this.gType = gType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

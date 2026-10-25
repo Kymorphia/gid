@@ -18,6 +18,16 @@ class GLSyncMeta
 {
   GstGLSyncMeta _cInstance;
 
+  /**
+      Create a `glsync_meta.GLSyncMeta` wrap type.
+      Params:
+        context = the #GstGLContext used to allocate the meta
+  */
+  this(gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init) nothrow
+  {
+    this.context = context;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
@@ -86,18 +96,6 @@ class GLSyncMeta
     return (cast(GstGLSyncMeta*)this._cPtr).setSyncGl;
   }
 
-  /** Function alias for field `wait` */
-  alias WaitFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
-
-  /**
-      Get `wait` field.
-      Returns: execute a wait on the previously set sync point into the OpenGL command stream
-  */
-  @property WaitFuncType wait() nothrow
-  {
-    return (cast(GstGLSyncMeta*)this._cPtr).wait;
-  }
-
   /** Function alias for field `waitGl` */
   alias WaitGlFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
 
@@ -108,18 +106,6 @@ class GLSyncMeta
   @property WaitGlFuncType waitGl() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).waitGl;
-  }
-
-  /** Function alias for field `waitCpu` */
-  alias WaitCpuFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
-
-  /**
-      Get `waitCpu` field.
-      Returns: wait for the previously set sync point to pass from the CPU
-  */
-  @property WaitCpuFuncType waitCpu() nothrow
-  {
-    return (cast(GstGLSyncMeta*)this._cPtr).waitCpu;
   }
 
   /** Function alias for field `waitCpuGl` */

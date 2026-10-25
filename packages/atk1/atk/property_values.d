@@ -17,6 +17,16 @@ class PropertyValues
 {
   AtkPropertyValues _cInstance;
 
+  /**
+      Create a `property_values.PropertyValues` wrap type.
+      Params:
+        propertyName = The name of the ATK property which has changed.
+  */
+  this(string propertyName = string.init) nothrow
+  {
+    this.propertyName = propertyName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

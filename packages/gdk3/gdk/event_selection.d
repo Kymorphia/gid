@@ -17,6 +17,25 @@ class EventSelection
 {
   GdkEventSelection _cInstance;
 
+  /**
+      Create a `event_selection.EventSelection` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.SelectionClear],
+            [gdk.types.EventType.SelectionNotify] or [gdk.types.EventType.SelectionRequest]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        requestor = the window on which to place @property or null if none.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, gdk.window.Window requestor = gdk.window.Window.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.requestor = requestor;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

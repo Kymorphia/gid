@@ -19,6 +19,16 @@ class ByteReader
 {
   GstByteReader _cInstance;
 
+  /**
+      Create a `byte_reader.ByteReader` wrap type.
+      Params:
+        byte_ = Current byte position
+  */
+  this(uint byte_ = uint.init) nothrow
+  {
+    this.byte_ = byte_;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

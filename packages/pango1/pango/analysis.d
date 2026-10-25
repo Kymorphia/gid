@@ -17,6 +17,26 @@ class Analysis
 {
   PangoAnalysis _cInstance;
 
+  /**
+      Create a `analysis.Analysis` wrap type.
+      Params:
+        font = the font for this segment.
+        level = the bidirectional level for this segment.
+        gravity = the glyph orientation for this segment (A [pango.types.Gravity]).
+        flags = boolean flags for this segment (Since: 1.16).
+        script = the detected script for this segment (A [pango.types.Script]) (Since: 1.18).
+        language = the detected language for this segment.
+  */
+  this(pango.font.Font font = pango.font.Font.init, ubyte level = ubyte.init, ubyte gravity = ubyte.init, ubyte flags = ubyte.init, ubyte script = ubyte.init, pango.language.Language language = pango.language.Language.init) nothrow
+  {
+    this.font = font;
+    this.level = level;
+    this.gravity = gravity;
+    this.flags = flags;
+    this.script = script;
+    this.language = language;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

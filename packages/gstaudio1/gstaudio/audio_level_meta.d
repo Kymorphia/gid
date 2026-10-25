@@ -16,6 +16,18 @@ class AudioLevelMeta
 {
   GstAudioLevelMeta _cInstance;
 
+  /**
+      Create a `audio_level_meta.AudioLevelMeta` wrap type.
+      Params:
+        level = the -dBov from 0-127 (127 is silence).
+        voiceActivity = whether the buffer contains voice activity
+  */
+  this(ubyte level = ubyte.init, bool voiceActivity = bool.init) nothrow
+  {
+    this.level = level;
+    this.voiceActivity = voiceActivity;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

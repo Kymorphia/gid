@@ -15,6 +15,16 @@ class MIKEYPayloadT
 {
   GstMIKEYPayloadT _cInstance;
 
+  /**
+      Create a `mikeypayload_t.MIKEYPayloadT` wrap type.
+      Params:
+        type = a #GstMIKEYTSType
+  */
+  this(gstsdp.types.MIKEYTSType type = gstsdp.types.MIKEYTSType.init) nothrow
+  {
+    this.type = type;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

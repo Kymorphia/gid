@@ -288,7 +288,7 @@ class Bus : gst.object.ObjectWrap
   */
   void getPollfd(out glib.types.PollFD fd) nothrow
   {
-    gst_bus_get_pollfd(cast(GstBus*)this._cPtr, &fd);
+    gst_bus_get_pollfd(cast(GstBus*)this._cPtr, cast(GPollFD*)&fd);
   }
 
   /**

@@ -15,6 +15,18 @@ class MetaTableForeignKey
 {
   GdaMetaTableForeignKey _cInstance;
 
+  /**
+      Create a `meta_table_foreign_key.MetaTableForeignKey` wrap type.
+      Params:
+        colsNb = the size of the @fk_cols_array, @fk_names_array, @ref_pk_cols_array and @ref_pk_names_array arrays
+        fkName = 
+  */
+  this(int colsNb = int.init, string fkName = string.init) nothrow
+  {
+    this.colsNb = colsNb;
+    this.fkName = fkName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

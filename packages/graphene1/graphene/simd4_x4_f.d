@@ -12,6 +12,13 @@ class Simd4X4F
 {
   graphene_simd4x4f_t _cInstance;
 
+  /**
+      Create a `simd4_x4_f.Simd4X4F` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

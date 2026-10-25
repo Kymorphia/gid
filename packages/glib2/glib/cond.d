@@ -78,6 +78,13 @@ class Cond
 {
   GCond _cInstance;
 
+  /**
+      Create a `cond.Cond` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

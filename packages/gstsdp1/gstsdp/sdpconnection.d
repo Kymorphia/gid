@@ -14,6 +14,25 @@ class SDPConnection
 {
   GstSDPConnection _cInstance;
 
+  /**
+      Create a `sdpconnection.SDPConnection` wrap type.
+      Params:
+        nettype = the type of network. "IN" is defined to have the meaning
+             "Internet".
+        addrtype = the type of @address.
+        address = the address
+        ttl = the time to live of the address
+        addrNumber = the number of layers
+  */
+  this(string nettype = string.init, string addrtype = string.init, string address = string.init, uint ttl = uint.init, uint addrNumber = uint.init) nothrow
+  {
+    this.nettype = nettype;
+    this.addrtype = addrtype;
+    this.address = address;
+    this.ttl = ttl;
+    this.addrNumber = addrNumber;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

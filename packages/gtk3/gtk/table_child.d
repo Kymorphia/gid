@@ -13,6 +13,40 @@ class TableChild
 {
   GtkTableChild _cInstance;
 
+  /**
+      Create a `table_child.TableChild` wrap type.
+      Params:
+        widget = 
+        leftAttach = 
+        rightAttach = 
+        topAttach = 
+        bottomAttach = 
+        xpadding = 
+        ypadding = 
+        xexpand = 
+        yexpand = 
+        xshrink = 
+        yshrink = 
+        xfill = 
+        yfill = 
+  */
+  this(gtk.widget.Widget widget = gtk.widget.Widget.init, ushort leftAttach = ushort.init, ushort rightAttach = ushort.init, ushort topAttach = ushort.init, ushort bottomAttach = ushort.init, ushort xpadding = ushort.init, ushort ypadding = ushort.init, uint xexpand = uint.init, uint yexpand = uint.init, uint xshrink = uint.init, uint yshrink = uint.init, uint xfill = uint.init, uint yfill = uint.init) nothrow
+  {
+    this.widget = widget;
+    this.leftAttach = leftAttach;
+    this.rightAttach = rightAttach;
+    this.topAttach = topAttach;
+    this.bottomAttach = bottomAttach;
+    this.xpadding = xpadding;
+    this.ypadding = ypadding;
+    this.xexpand = xexpand;
+    this.yexpand = yexpand;
+    this.xshrink = xshrink;
+    this.yshrink = yshrink;
+    this.xfill = xfill;
+    this.yfill = yfill;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

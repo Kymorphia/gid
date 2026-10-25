@@ -18,6 +18,13 @@ class GLQuery
 {
   GstGLQuery _cInstance;
 
+  /**
+      Create a `glquery.GLQuery` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

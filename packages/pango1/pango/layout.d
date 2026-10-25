@@ -234,7 +234,7 @@ class Layout : gobject.object.ObjectWrap
   */
   void getCaretPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos) nothrow
   {
-    pango_layout_get_caret_pos(cast(PangoLayout*)this._cPtr, index, &strongPos, &weakPos);
+    pango_layout_get_caret_pos(cast(PangoLayout*)this._cPtr, index, cast(PangoRectangle*)&strongPos, cast(PangoRectangle*)&weakPos);
   }
 
   /**
@@ -298,7 +298,7 @@ class Layout : gobject.object.ObjectWrap
   */
   void getCursorPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos) nothrow
   {
-    pango_layout_get_cursor_pos(cast(PangoLayout*)this._cPtr, index, &strongPos, &weakPos);
+    pango_layout_get_cursor_pos(cast(PangoLayout*)this._cPtr, index, cast(PangoRectangle*)&strongPos, cast(PangoRectangle*)&weakPos);
   }
 
   /**
@@ -353,7 +353,7 @@ class Layout : gobject.object.ObjectWrap
   */
   void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_get_extents(cast(PangoLayout*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_get_extents(cast(PangoLayout*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -604,7 +604,7 @@ class Layout : gobject.object.ObjectWrap
   */
   void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_get_pixel_extents(cast(PangoLayout*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_get_pixel_extents(cast(PangoLayout*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -794,7 +794,7 @@ class Layout : gobject.object.ObjectWrap
   */
   void indexToPos(int index, out pango.types.Rectangle pos) nothrow
   {
-    pango_layout_index_to_pos(cast(PangoLayout*)this._cPtr, index, &pos);
+    pango_layout_index_to_pos(cast(PangoLayout*)this._cPtr, index, cast(PangoRectangle*)&pos);
   }
 
   /**

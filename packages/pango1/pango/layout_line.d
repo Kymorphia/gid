@@ -190,7 +190,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_line_get_extents(cast(PangoLayoutLine*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_line_get_extents(cast(PangoLayoutLine*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -237,7 +237,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_line_get_pixel_extents(cast(PangoLayoutLine*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_line_get_pixel_extents(cast(PangoLayoutLine*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**

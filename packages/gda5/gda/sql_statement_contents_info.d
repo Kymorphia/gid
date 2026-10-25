@@ -14,6 +14,18 @@ class SqlStatementContentsInfo
 {
   GdaSqlStatementContentsInfo _cInstance;
 
+  /**
+      Create a `sql_statement_contents_info.SqlStatementContentsInfo` wrap type.
+      Params:
+        type = 
+        name = 
+  */
+  this(gda.types.SqlStatementType type = gda.types.SqlStatementType.init, string name = string.init) nothrow
+  {
+    this.type = type;
+    this.name = name;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

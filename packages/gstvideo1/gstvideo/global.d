@@ -561,7 +561,7 @@ gobject.types.GType videoCaptionMetaApiGetType() nothrow
 */
 void videoCenterRect(gstvideo.types.VideoRectangle src, gstvideo.types.VideoRectangle dst, out gstvideo.types.VideoRectangle result, bool scaling) nothrow
 {
-  gst_video_center_rect(&src, &dst, &result, scaling);
+  gst_video_center_rect(cast(const(GstVideoRectangle)*)&src, cast(const(GstVideoRectangle)*)&dst, cast(GstVideoRectangle*)&result, scaling);
 }
 
 /**

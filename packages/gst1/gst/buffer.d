@@ -321,10 +321,10 @@ class Buffer : gobject.boxed.Boxed
         params = optional parameters
       Returns: a new #GstBuffer
   */
-  static gst.buffer.Buffer newAllocate(gst.allocator.Allocator allocator, size_t size, gst.allocation_params.AllocationParams params) nothrow
+  static gst.buffer.Buffer newAllocate(gst.allocator.Allocator allocator, size_t size, gst.allocation_params.AllocationParams* params = null) nothrow
   {
     GstBuffer* _cretval;
-    _cretval = gst_buffer_new_allocate(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, size, cast(GstAllocationParams*)&params);
+    _cretval = gst_buffer_new_allocate(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, size, cast(GstAllocationParams*)params);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

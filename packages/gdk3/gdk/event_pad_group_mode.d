@@ -15,6 +15,29 @@ class EventPadGroupMode
 {
   GdkEventPadGroupMode _cInstance;
 
+  /**
+      Create a `event_pad_group_mode.EventPadGroupMode` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.PadGroupMode]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        group = the pad group that is switching mode. A [gdk.types.InputSource.TabletPad]
+            device may have one or more groups containing a set of buttons/rings/strips
+            each.
+        mode = The new mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
+            device may have different current modes.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, uint group = uint.init, uint mode = uint.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.group = group;
+    this.mode = mode;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

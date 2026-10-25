@@ -445,9 +445,9 @@ class Context : gobject.object.ObjectWrap
         matrix = a [pango.matrix.Matrix], or null to unset any existing
           matrix. (No matrix set is the same as setting the identity matrix.)
   */
-  void setMatrix(pango.matrix.Matrix matrix) nothrow
+  void setMatrix(pango.matrix.Matrix* matrix = null) nothrow
   {
-    pango_context_set_matrix(cast(PangoContext*)this._cPtr, cast(const(PangoMatrix)*)&matrix);
+    pango_context_set_matrix(cast(PangoContext*)this._cPtr, cast(const(PangoMatrix)*)matrix);
   }
 
   /**

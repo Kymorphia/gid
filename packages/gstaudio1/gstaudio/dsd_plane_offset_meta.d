@@ -34,6 +34,18 @@ class DsdPlaneOffsetMeta
 {
   GstDsdPlaneOffsetMeta _cInstance;
 
+  /**
+      Create a `dsd_plane_offset_meta.DsdPlaneOffsetMeta` wrap type.
+      Params:
+        numChannels = number of channels in the DSD data
+        numBytesPerChannel = the number of valid bytes per channel in the buffer
+  */
+  this(int numChannels = int.init, size_t numBytesPerChannel = size_t.init) nothrow
+  {
+    this.numChannels = numChannels;
+    this.numBytesPerChannel = numBytesPerChannel;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

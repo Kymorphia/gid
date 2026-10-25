@@ -459,7 +459,7 @@ class Context : gobject.boxed.Boxed
   */
   void fontExtents(out cairo.types.FontExtents extents) nothrow
   {
-    cairo_font_extents(cast(cairo_t*)this._cPtr, &extents);
+    cairo_font_extents(cast(cairo_t*)this._cPtr, cast(cairo_font_extents_t*)&extents);
   }
 
   /**
@@ -789,7 +789,7 @@ class Context : gobject.boxed.Boxed
   */
   void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, out cairo.types.TextExtents extents) nothrow
   {
-    cairo_glyph_extents(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, &extents);
+    cairo_glyph_extents(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(cairo_text_extents_t*)&extents);
   }
 
   /**
@@ -2073,7 +2073,7 @@ class Context : gobject.boxed.Boxed
   void textExtents(string utf8, out cairo.types.TextExtents extents) nothrow
   {
     const(char)* _utf8 = utf8.toCString!(No.Malloc, No.Nullable);
-    cairo_text_extents(cast(cairo_t*)this._cPtr, _utf8, &extents);
+    cairo_text_extents(cast(cairo_t*)this._cPtr, _utf8, cast(cairo_text_extents_t*)&extents);
   }
 
   /**

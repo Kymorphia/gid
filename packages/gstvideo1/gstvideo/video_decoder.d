@@ -376,7 +376,7 @@ class VideoDecoder : gst.element.Element
   gst.types.FlowReturn allocateOutputFrameWithParams(gstvideo.video_codec_frame.VideoCodecFrame frame, gst.types.BufferPoolAcquireParams params) nothrow
   {
     GstFlowReturn _cretval;
-    _cretval = gst_video_decoder_allocate_output_frame_with_params(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null, &params);
+    _cretval = gst_video_decoder_allocate_output_frame_with_params(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null, cast(GstBufferPoolAcquireParams*)&params);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }

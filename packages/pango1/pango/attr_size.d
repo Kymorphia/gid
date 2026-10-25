@@ -16,6 +16,22 @@ class AttrSize
 {
   PangoAttrSize _cInstance;
 
+  /**
+      Create a `attr_size.AttrSize` wrap type.
+      Params:
+        size = size of font, in units of 1/[pango.types.SCALE] of a point (for
+            [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
+        absolute = whether the font size is in device units or points.
+            This field is only present for compatibility with Pango-1.8.0
+            ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
+            be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
+  */
+  this(int size = int.init, uint absolute = uint.init) nothrow
+  {
+    this.size = size;
+    this.absolute = absolute;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

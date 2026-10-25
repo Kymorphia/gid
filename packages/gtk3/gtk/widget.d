@@ -4098,9 +4098,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
   */
-  void modifyBase(gtk.types.StateType state, gdk.color.Color color) nothrow
+  void modifyBase(gtk.types.StateType state, gdk.color.Color* color = null) nothrow
   {
-    gtk_widget_modify_base(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
+    gtk_widget_modify_base(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)color);
   }
 
   /**
@@ -4127,9 +4127,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
   */
-  void modifyBg(gtk.types.StateType state, gdk.color.Color color) nothrow
+  void modifyBg(gtk.types.StateType state, gdk.color.Color* color = null) nothrow
   {
-    gtk_widget_modify_bg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
+    gtk_widget_modify_bg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)color);
   }
 
   /**
@@ -4150,9 +4150,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideCursor] instead.
   */
-  void modifyCursor(gdk.color.Color primary, gdk.color.Color secondary) nothrow
+  void modifyCursor(gdk.color.Color* primary = null, gdk.color.Color* secondary = null) nothrow
   {
-    gtk_widget_modify_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkColor)*)&primary, cast(const(GdkColor)*)&secondary);
+    gtk_widget_modify_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkColor)*)primary, cast(const(GdkColor)*)secondary);
   }
 
   /**
@@ -4169,9 +4169,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideColor] instead
   */
-  void modifyFg(gtk.types.StateType state, gdk.color.Color color) nothrow
+  void modifyFg(gtk.types.StateType state, gdk.color.Color* color = null) nothrow
   {
-    gtk_widget_modify_fg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
+    gtk_widget_modify_fg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)color);
   }
 
   /**
@@ -4238,9 +4238,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideColor] instead
   */
-  void modifyText(gtk.types.StateType state, gdk.color.Color color) nothrow
+  void modifyText(gtk.types.StateType state, gdk.color.Color* color = null) nothrow
   {
-    gtk_widget_modify_text(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
+    gtk_widget_modify_text(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)color);
   }
 
   /**
@@ -4261,9 +4261,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           drawing of a widget through the #GtkWidget::draw signal, and use Cairo to
           draw a specific color, regardless of the CSS style.
   */
-  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color) nothrow
+  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA* color = null) nothrow
   {
-    gtk_widget_override_background_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)&color);
+    gtk_widget_override_background_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)color);
   }
 
   /**
@@ -4300,9 +4300,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use a custom style provider and style classes instead
   */
-  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color) nothrow
+  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA* color = null) nothrow
   {
-    gtk_widget_override_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)&color);
+    gtk_widget_override_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)color);
   }
 
   /**
@@ -4327,9 +4327,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           and secondary cursors you should use a custom CSS style, through an
           application-specific #GtkStyleProvider and a CSS style class.
   */
-  void overrideCursor(gdk.rgba.RGBA cursor, gdk.rgba.RGBA secondaryCursor) nothrow
+  void overrideCursor(gdk.rgba.RGBA* cursor = null, gdk.rgba.RGBA* secondaryCursor = null) nothrow
   {
-    gtk_widget_override_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkRGBA)*)&cursor, cast(const(GdkRGBA)*)&secondaryCursor);
+    gtk_widget_override_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkRGBA)*)cursor, cast(const(GdkRGBA)*)secondaryCursor);
   }
 
   /**
@@ -4368,10 +4368,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           you should use a custom CSS style, through an application-specific
           #GtkStyleProvider and a CSS style class.
   */
-  void overrideSymbolicColor(string name, gdk.rgba.RGBA color) nothrow
+  void overrideSymbolicColor(string name, gdk.rgba.RGBA* color = null) nothrow
   {
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    gtk_widget_override_symbolic_color(cast(GtkWidget*)this._cPtr, _name, cast(const(GdkRGBA)*)&color);
+    gtk_widget_override_symbolic_color(cast(GtkWidget*)this._cPtr, _name, cast(const(GdkRGBA)*)color);
   }
 
   /**

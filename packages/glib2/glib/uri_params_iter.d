@@ -23,6 +23,13 @@ class UriParamsIter
 {
   GUriParamsIter _cInstance;
 
+  /**
+      Create a `uri_params_iter.UriParamsIter` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

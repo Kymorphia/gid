@@ -137,11 +137,11 @@ class Triangle : gobject.boxed.Boxed
             with the barycentric coordinates
       Returns: `true` if the barycentric coordinates are valid
   */
-  bool getBarycoords(graphene.point3_d.Point3D p, out graphene.vec2.Vec2 res) nothrow
+  bool getBarycoords(graphene.point3_d.Point3D* p, out graphene.vec2.Vec2 res) nothrow
   {
     bool _retval;
     graphene_vec2_t _res;
-    _retval = cast(bool)graphene_triangle_get_barycoords(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p, &_res);
+    _retval = cast(bool)graphene_triangle_get_barycoords(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)p, &_res);
     res = new graphene.vec2.Vec2(cast(void*)&_res, No.Take);
     return _retval;
   }
@@ -240,11 +240,11 @@ class Triangle : gobject.boxed.Boxed
             of the given point `p`
       Returns: `true` if the coordinates are valid
   */
-  bool getUv(graphene.point3_d.Point3D p, graphene.vec2.Vec2 uvA, graphene.vec2.Vec2 uvB, graphene.vec2.Vec2 uvC, out graphene.vec2.Vec2 res) nothrow
+  bool getUv(graphene.point3_d.Point3D* p, graphene.vec2.Vec2 uvA, graphene.vec2.Vec2 uvB, graphene.vec2.Vec2 uvC, out graphene.vec2.Vec2 res) nothrow
   {
     bool _retval;
     graphene_vec2_t _res;
-    _retval = cast(bool)graphene_triangle_get_uv(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p, uvA ? cast(const(graphene_vec2_t)*)uvA._cPtr(No.Dup) : null, uvB ? cast(const(graphene_vec2_t)*)uvB._cPtr(No.Dup) : null, uvC ? cast(const(graphene_vec2_t)*)uvC._cPtr(No.Dup) : null, &_res);
+    _retval = cast(bool)graphene_triangle_get_uv(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)p, uvA ? cast(const(graphene_vec2_t)*)uvA._cPtr(No.Dup) : null, uvB ? cast(const(graphene_vec2_t)*)uvB._cPtr(No.Dup) : null, uvC ? cast(const(graphene_vec2_t)*)uvC._cPtr(No.Dup) : null, &_res);
     res = new graphene.vec2.Vec2(cast(void*)&_res, No.Take);
     return _retval;
   }
@@ -302,10 +302,10 @@ class Triangle : gobject.boxed.Boxed
         c = a #graphene_point3d_t
       Returns: the initialized #graphene_triangle_t
   */
-  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c) nothrow
+  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D* a = null, graphene.point3_d.Point3D* b = null, graphene.point3_d.Point3D* c = null) nothrow
   {
     graphene_triangle_t* _cretval;
-    _cretval = graphene_triangle_init_from_point3d(cast(graphene_triangle_t*)this._cPtr, cast(const(graphene_point3d_t)*)&a, cast(const(graphene_point3d_t)*)&b, cast(const(graphene_point3d_t)*)&c);
+    _cretval = graphene_triangle_init_from_point3d(cast(graphene_triangle_t*)this._cPtr, cast(const(graphene_point3d_t)*)a, cast(const(graphene_point3d_t)*)b, cast(const(graphene_point3d_t)*)c);
     auto _retval = _cretval ? new graphene.triangle.Triangle(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

@@ -12,6 +12,16 @@ class SqlStatementSelect
 {
   GdaSqlStatementSelect _cInstance;
 
+  /**
+      Create a `sql_statement_select.SqlStatementSelect` wrap type.
+      Params:
+        distinct = 
+  */
+  this(bool distinct = bool.init) nothrow
+  {
+    this.distinct = distinct;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

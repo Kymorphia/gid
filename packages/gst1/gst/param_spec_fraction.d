@@ -16,6 +16,28 @@ class ParamSpecFraction
 {
   GstParamSpecFraction _cInstance;
 
+  /**
+      Create a `param_spec_fraction.ParamSpecFraction` wrap type.
+      Params:
+        parentInstance = super class
+        minNum = minimal numerator
+        minDen = minimal denominator
+        maxNum = maximal numerator
+        maxDen = maximal denominator
+        defNum = default numerator
+        defDen = default denominator
+  */
+  this(gobject.param_spec.ParamSpec parentInstance = gobject.param_spec.ParamSpec.init, int minNum = int.init, int minDen = int.init, int maxNum = int.init, int maxDen = int.init, int defNum = int.init, int defDen = int.init) nothrow
+  {
+    this.parentInstance = parentInstance;
+    this.minNum = minNum;
+    this.minDen = minDen;
+    this.maxNum = maxNum;
+    this.maxDen = maxDen;
+    this.defNum = defNum;
+    this.defDen = defDen;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

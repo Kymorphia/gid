@@ -17,6 +17,16 @@ class AttrFontDesc
 {
   PangoAttrFontDesc _cInstance;
 
+  /**
+      Create a `attr_font_desc.AttrFontDesc` wrap type.
+      Params:
+        desc = the font description which is the value of this attribute
+  */
+  this(pango.font_description.FontDescription desc = pango.font_description.FontDescription.init) nothrow
+  {
+    this.desc = desc;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

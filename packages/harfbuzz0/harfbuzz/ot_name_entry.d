@@ -14,6 +14,16 @@ class OtNameEntry
 {
   hb_ot_name_entry_t _cInstance;
 
+  /**
+      Create a `ot_name_entry.OtNameEntry` wrap type.
+      Params:
+        nameId = name ID
+  */
+  this(harfbuzz.types.OtNameId nameId = harfbuzz.types.OtNameId.init) nothrow
+  {
+    this.nameId = nameId;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

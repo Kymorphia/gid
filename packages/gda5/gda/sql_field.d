@@ -17,6 +17,16 @@ class SqlField
 {
   GdaSqlField _cInstance;
 
+  /**
+      Create a `sql_field.SqlField` wrap type.
+      Params:
+        fieldName = 
+  */
+  this(string fieldName = string.init) nothrow
+  {
+    this.fieldName = fieldName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -15,6 +15,18 @@ class MIKEYPayloadKEMAC
 {
   GstMIKEYPayloadKEMAC _cInstance;
 
+  /**
+      Create a `mikeypayload_kemac.MIKEYPayloadKEMAC` wrap type.
+      Params:
+        encAlg = the #GstMIKEYEncAlg
+        macAlg = the #GstMIKEYMacAlg
+  */
+  this(gstsdp.types.MIKEYEncAlg encAlg = gstsdp.types.MIKEYEncAlg.init, gstsdp.types.MIKEYMacAlg macAlg = gstsdp.types.MIKEYMacAlg.init) nothrow
+  {
+    this.encAlg = encAlg;
+    this.macAlg = macAlg;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -76,6 +76,13 @@ class RWLock
 {
   GRWLock _cInstance;
 
+  /**
+      Create a `rwlock.RWLock` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

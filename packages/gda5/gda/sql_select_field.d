@@ -21,6 +21,22 @@ class SqlSelectField
 {
   GdaSqlSelectField _cInstance;
 
+  /**
+      Create a `sql_select_field.SqlSelectField` wrap type.
+      Params:
+        expr = expression
+        fieldName = field name part of @expr if @expr represents a field
+        tableName = table name part of @expr if @expr represents a field
+        as = alias
+  */
+  this(gda.sql_expr.SqlExpr expr = gda.sql_expr.SqlExpr.init, string fieldName = string.init, string tableName = string.init, string as = string.init) nothrow
+  {
+    this.expr = expr;
+    this.fieldName = fieldName;
+    this.tableName = tableName;
+    this.as = as;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

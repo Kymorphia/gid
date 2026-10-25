@@ -17,6 +17,16 @@ class BindingArg
 {
   GtkBindingArg _cInstance;
 
+  /**
+      Create a `binding_arg.BindingArg` wrap type.
+      Params:
+        argType = implementation detail
+  */
+  this(gobject.types.GType argType = gobject.types.GType.init) nothrow
+  {
+    this.argType = argType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -16,6 +16,16 @@ class AttrInt
 {
   PangoAttrInt _cInstance;
 
+  /**
+      Create a `attr_int.AttrInt` wrap type.
+      Params:
+        value = the value of the attribute
+  */
+  this(int value = int.init) nothrow
+  {
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

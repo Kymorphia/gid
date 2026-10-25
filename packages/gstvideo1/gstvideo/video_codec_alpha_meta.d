@@ -22,6 +22,16 @@ class VideoCodecAlphaMeta
 {
   GstVideoCodecAlphaMeta _cInstance;
 
+  /**
+      Create a `video_codec_alpha_meta.VideoCodecAlphaMeta` wrap type.
+      Params:
+        buffer = the encoded alpha frame
+  */
+  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init) nothrow
+  {
+    this.buffer = buffer;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

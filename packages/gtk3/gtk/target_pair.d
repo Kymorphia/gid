@@ -17,6 +17,21 @@ class TargetPair
 {
   GtkTargetPair _cInstance;
 
+  /**
+      Create a `target_pair.TargetPair` wrap type.
+      Params:
+        flags = #GtkTargetFlags for DND
+        info = an application-assigned integer ID which will
+              get passed as a parameter to e.g the #GtkWidget::selection-get
+              signal. It allows the application to identify the target
+              type without extensive string compares.
+  */
+  this(uint flags = uint.init, uint info = uint.init) nothrow
+  {
+    this.flags = flags;
+    this.info = info;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

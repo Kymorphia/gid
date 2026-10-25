@@ -207,7 +207,7 @@ class Font : gobject.object.ObjectWrap
   */
   void getGlyphExtents(pango.types.Glyph glyph, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_font_get_glyph_extents(cast(PangoFont*)this._cPtr, glyph, &inkRect, &logicalRect);
+    pango_font_get_glyph_extents(cast(PangoFont*)this._cPtr, glyph, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**

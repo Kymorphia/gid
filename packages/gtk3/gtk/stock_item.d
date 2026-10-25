@@ -13,6 +13,24 @@ class StockItem
 {
   GtkStockItem _cInstance;
 
+  /**
+      Create a `stock_item.StockItem` wrap type.
+      Params:
+        stockId = Identifier.
+        label = User visible label.
+        modifier = Modifier type for keyboard accelerator
+        keyval = Keyboard accelerator
+        translationDomain = Translation domain of the menu or toolbar item
+  */
+  this(string stockId = string.init, string label = string.init, gdk.types.ModifierType modifier = gdk.types.ModifierType.init, uint keyval = uint.init, string translationDomain = string.init) nothrow
+  {
+    this.stockId = stockId;
+    this.label = label;
+    this.modifier = modifier;
+    this.keyval = keyval;
+    this.translationDomain = translationDomain;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

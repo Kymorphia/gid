@@ -16,6 +16,13 @@ class VariantIter
 {
   GVariantIter _cInstance;
 
+  /**
+      Create a `variant_iter.VariantIter` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

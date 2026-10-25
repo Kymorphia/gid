@@ -3,6 +3,7 @@ module gtk.action_entry;
 
 public import gid.basictypes;
 import gid.gid;
+import gobject.types;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -14,6 +15,31 @@ import gtk.types;
 class ActionEntry
 {
   GtkActionEntry _cInstance;
+
+  /**
+      Create a `action_entry.ActionEntry` wrap type.
+      Params:
+        name = The name of the action.
+        stockId = The stock id for the action, or the name of an icon from the
+           icon theme.
+        label = The label for the action. This field should typically be marked
+           for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
+           @label is null, the label of the stock item with id @stock_id is used.
+        accelerator = The accelerator for the action, in the format understood by
+           [gtk.global.acceleratorParse].
+        tooltip = The tooltip for the action. This field should typically be
+           marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+        callback = The function to call when the action is activated.
+  */
+  this(string name = string.init, string stockId = string.init, string label = string.init, string accelerator = string.init, string tooltip = string.init, GCallback callback = GCallback.init) nothrow
+  {
+    this.name = name;
+    this.stockId = stockId;
+    this.label = label;
+    this.accelerator = accelerator;
+    this.tooltip = tooltip;
+    this.callback = callback;
+  }
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow

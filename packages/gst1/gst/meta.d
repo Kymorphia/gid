@@ -37,6 +37,16 @@ class Meta
 {
   GstMeta _cInstance;
 
+  /**
+      Create a `meta.Meta` wrap type.
+      Params:
+        flags = extra flags for the metadata
+  */
+  this(gst.types.MetaFlags flags = gst.types.MetaFlags.init) nothrow
+  {
+    this.flags = flags;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

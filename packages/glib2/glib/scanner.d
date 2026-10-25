@@ -29,6 +29,34 @@ class Scanner
 {
   GScanner _cInstance;
 
+  /**
+      Create a `scanner.Scanner` wrap type.
+      Params:
+        maxParseErrors = unused
+        parseErrors = [glib.scanner.Scanner.error] increments this field
+        inputName = name of input stream, featured by the default message handler
+        token = token parsed by the last [glib.scanner.Scanner.getNextToken]
+        line = line number of the last token from [glib.scanner.Scanner.getNextToken]
+        position = char number of the last token from [glib.scanner.Scanner.getNextToken]
+        nextToken = token parsed by the last [glib.scanner.Scanner.peekNextToken]
+        nextLine = line number of the last token from [glib.scanner.Scanner.peekNextToken]
+        nextPosition = char number of the last token from [glib.scanner.Scanner.peekNextToken]
+        msgHandler = handler function for _warn and _error
+  */
+  this(uint maxParseErrors = uint.init, uint parseErrors = uint.init, string inputName = string.init, glib.types.TokenType token = glib.types.TokenType.init, uint line = uint.init, uint position = uint.init, glib.types.TokenType nextToken = glib.types.TokenType.init, uint nextLine = uint.init, uint nextPosition = uint.init, GScannerMsgFunc msgHandler = GScannerMsgFunc.init) nothrow
+  {
+    this.maxParseErrors = maxParseErrors;
+    this.parseErrors = parseErrors;
+    this.inputName = inputName;
+    this.token = token;
+    this.line = line;
+    this.position = position;
+    this.nextToken = nextToken;
+    this.nextLine = nextLine;
+    this.nextPosition = nextPosition;
+    this.msgHandler = msgHandler;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

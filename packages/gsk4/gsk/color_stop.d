@@ -15,6 +15,18 @@ class ColorStop
 {
   GskColorStop _cInstance;
 
+  /**
+      Create a `color_stop.ColorStop` wrap type.
+      Params:
+        offset = the offset of the color stop
+        color = the color at the given offset
+  */
+  this(float offset = 0.0, gdk.rgba.RGBA color = gdk.rgba.RGBA.init) nothrow
+  {
+    this.offset = offset;
+    this.color = color;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

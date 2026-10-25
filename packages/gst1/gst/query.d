@@ -457,9 +457,9 @@ class Query : gobject.boxed.Boxed
         allocator = the memory allocator
         params = a #GstAllocationParams
   */
-  void addAllocationParam(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
+  void addAllocationParam(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams* params = null) nothrow
   {
-    gst_query_add_allocation_param(cast(GstQuery*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
+    gst_query_add_allocation_param(cast(GstQuery*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)params);
   }
 
   /**
@@ -1273,9 +1273,9 @@ class Query : gobject.boxed.Boxed
         allocator = new allocator to set
         params = parameters for the allocator
   */
-  void setNthAllocationParam(uint index, gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
+  void setNthAllocationParam(uint index, gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams* params = null) nothrow
   {
-    gst_query_set_nth_allocation_param(cast(GstQuery*)this._cPtr, index, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
+    gst_query_set_nth_allocation_param(cast(GstQuery*)this._cPtr, index, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)params);
   }
 
   /**

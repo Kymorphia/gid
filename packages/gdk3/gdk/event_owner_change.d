@@ -18,6 +18,29 @@ class EventOwnerChange
 {
   GdkEventOwnerChange _cInstance;
 
+  /**
+      Create a `event_owner_change.EventOwnerChange` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.OwnerChange]).
+        window = the window which received the event
+        sendEvent = true if the event was sent explicitly.
+        owner = the new owner of the selection, or null if there is none
+        reason = the reason for the ownership change as a #GdkOwnerChange value
+        time = the timestamp of the event
+        selectionTime = the time at which the selection ownership was taken
+            over
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, gdk.window.Window owner = gdk.window.Window.init, gdk.types.OwnerChange reason = gdk.types.OwnerChange.init, uint time = uint.init, uint selectionTime = uint.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.owner = owner;
+    this.reason = reason;
+    this.time = time;
+    this.selectionTime = selectionTime;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

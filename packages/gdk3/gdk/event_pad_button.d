@@ -15,6 +15,30 @@ class EventPadButton
 {
   GdkEventPadButton _cInstance;
 
+  /**
+      Create a `event_pad_button.EventPadButton` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.PadButtonPress] or [gdk.types.EventType.PadButtonRelease]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        group = the pad group the button belongs to. A [gdk.types.InputSource.TabletPad] device
+            may have one or more groups containing a set of buttons/rings/strips each.
+        button = The pad button that was pressed.
+        mode = The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
+            device may have different current modes.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, uint group = uint.init, uint button = uint.init, uint mode = uint.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.group = group;
+    this.button = button;
+    this.mode = mode;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

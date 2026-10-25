@@ -18,6 +18,20 @@ class StaticPadTemplate
 {
   GstStaticPadTemplate _cInstance;
 
+  /**
+      Create a `static_pad_template.StaticPadTemplate` wrap type.
+      Params:
+        nameTemplate = the name of the template
+        direction = the direction of the template
+        presence = the presence of the template
+  */
+  this(string nameTemplate = string.init, gst.types.PadDirection direction = gst.types.PadDirection.init, gst.types.PadPresence presence = gst.types.PadPresence.init) nothrow
+  {
+    this.nameTemplate = nameTemplate;
+    this.direction = direction;
+    this.presence = presence;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

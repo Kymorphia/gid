@@ -17,6 +17,16 @@ class AttrLanguage
 {
   PangoAttrLanguage _cInstance;
 
+  /**
+      Create a `attr_language.AttrLanguage` wrap type.
+      Params:
+        value = the [pango.language.Language] which is the value of the attribute
+  */
+  this(pango.language.Language value = pango.language.Language.init) nothrow
+  {
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

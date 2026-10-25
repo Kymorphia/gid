@@ -106,15 +106,15 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height) nothrow
+  this(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height) nothrow
   {
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, renderbufferFormat, width, height);
+    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, renderbufferFormat, width, height);
     this(_cretval, Yes.Take);
   }
 
   /** */
-  static gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams newWrapped(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height, void* glHandle = null, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
+  static gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams newWrapped(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height, void* glHandle = null, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
@@ -132,7 +132,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&allocParams, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
+    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
     auto _retval = _cretval ? new gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

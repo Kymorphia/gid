@@ -156,7 +156,7 @@ class ColorDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void chooseRgba(gtk.window.Window parent, gdk.rgba.RGBA initialColor, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+  void chooseRgba(gtk.window.Window parent = null, gdk.rgba.RGBA* initialColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
@@ -174,7 +174,7 @@ class ColorDialog : gobject.object.ObjectWrap
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&initialColor, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)initialColor, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

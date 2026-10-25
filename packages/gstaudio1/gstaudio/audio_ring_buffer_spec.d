@@ -20,6 +20,29 @@ class AudioRingBufferSpec
 {
   GstAudioRingBufferSpec _cInstance;
 
+  /**
+      Create a `audio_ring_buffer_spec.AudioRingBufferSpec` wrap type.
+      Params:
+        caps = The caps that generated the Spec.
+        type = the sample type
+        latencyTime = the latency in microseconds
+        bufferTime = the total buffer size in microseconds
+        segsize = the size of one segment in bytes
+        segtotal = the total number of segments
+        seglatency = number of segments queued in the lower level device,
+           defaults to segtotal
+  */
+  this(gst.caps.Caps caps = gst.caps.Caps.init, gstaudio.types.AudioRingBufferFormatType type = gstaudio.types.AudioRingBufferFormatType.init, ulong latencyTime = ulong.init, ulong bufferTime = ulong.init, int segsize = int.init, int segtotal = int.init, int seglatency = int.init) nothrow
+  {
+    this.caps = caps;
+    this.type = type;
+    this.latencyTime = latencyTime;
+    this.bufferTime = bufferTime;
+    this.segsize = segsize;
+    this.segtotal = segtotal;
+    this.seglatency = seglatency;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -15,6 +15,16 @@ class MIKEYPayloadRAND
 {
   GstMIKEYPayloadRAND _cInstance;
 
+  /**
+      Create a `mikeypayload_rand.MIKEYPayloadRAND` wrap type.
+      Params:
+        len = the length of @rand
+  */
+  this(ubyte len = ubyte.init) nothrow
+  {
+    this.len = len;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

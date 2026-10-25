@@ -16,6 +16,18 @@ class MetaView
 {
   GdaMetaView _cInstance;
 
+  /**
+      Create a `meta_view.MetaView` wrap type.
+      Params:
+        viewDef = views' definition
+        isUpdatable = tells if the view's contents can be updated
+  */
+  this(string viewDef = string.init, bool isUpdatable = bool.init) nothrow
+  {
+    this.viewDef = viewDef;
+    this.isUpdatable = isUpdatable;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

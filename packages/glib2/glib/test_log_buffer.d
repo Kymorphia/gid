@@ -12,6 +12,13 @@ class TestLogBuffer
 {
   GTestLogBuffer _cInstance;
 
+  /**
+      Create a `test_log_buffer.TestLogBuffer` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

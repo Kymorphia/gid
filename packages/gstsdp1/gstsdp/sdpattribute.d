@@ -14,6 +14,18 @@ class SDPAttribute
 {
   GstSDPAttribute _cInstance;
 
+  /**
+      Create a `sdpattribute.SDPAttribute` wrap type.
+      Params:
+        key = the attribute key
+        value = the attribute value or NULL when it was a property attribute
+  */
+  this(string key = string.init, string value = string.init) nothrow
+  {
+    this.key = key;
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

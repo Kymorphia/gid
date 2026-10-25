@@ -20,6 +20,24 @@ class SDPMedia
 {
   GstSDPMedia _cInstance;
 
+  /**
+      Create a `sdpmedia.SDPMedia` wrap type.
+      Params:
+        media = the media type
+        port = the transport port to which the media stream will be sent
+        numPorts = the number of ports or -1 if only one port was specified
+        proto = the transport protocol
+        information = the media title
+  */
+  this(string media = string.init, uint port = uint.init, uint numPorts = uint.init, string proto = string.init, string information = string.init) nothrow
+  {
+    this.media = media;
+    this.port = port;
+    this.numPorts = numPorts;
+    this.proto = proto;
+    this.information = information;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

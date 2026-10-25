@@ -82,7 +82,7 @@ class FontFace : gobject.boxed.Boxed
   */
   void* getUserData(cairo.types.UserDataKey key) nothrow
   {
-    auto _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)this._cPtr, &key);
+    auto _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)this._cPtr, cast(const(cairo_user_data_key_t)*)&key);
     return _retval;
   }
 

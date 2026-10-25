@@ -98,7 +98,7 @@ template BuildableT()
   {
     bool _retval;
     const(char)* _tagname = tagname.toCString!(No.Malloc, No.Nullable);
-    _retval = cast(bool)gtk_buildable_custom_tag_start(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _tagname, &parser, cast(void**)&data);
+    _retval = cast(bool)gtk_buildable_custom_tag_start(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _tagname, cast(GMarkupParser*)&parser, cast(void**)&data);
     return _retval;
   }
 

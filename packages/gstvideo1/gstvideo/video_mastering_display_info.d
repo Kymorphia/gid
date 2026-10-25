@@ -16,6 +16,23 @@ class VideoMasteringDisplayInfo
 {
   GstVideoMasteringDisplayInfo _cInstance;
 
+  /**
+      Create a `video_mastering_display_info.VideoMasteringDisplayInfo` wrap type.
+      Params:
+        whitePoint = the xy coordinates of white point in the CIE 1931 color space.
+            each value is normalized to 50000 (meaning that in unit of 0.00002)
+        maxDisplayMasteringLuminance = the maximum value of display luminance
+            in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
+        minDisplayMasteringLuminance = the minimum value of display luminance
+            in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
+  */
+  this(gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint = gstvideo.types.VideoMasteringDisplayInfoCoordinates.init, uint maxDisplayMasteringLuminance = uint.init, uint minDisplayMasteringLuminance = uint.init) nothrow
+  {
+    this.whitePoint = whitePoint;
+    this.maxDisplayMasteringLuminance = maxDisplayMasteringLuminance;
+    this.minDisplayMasteringLuminance = minDisplayMasteringLuminance;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

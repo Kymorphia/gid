@@ -15,6 +15,23 @@ class EventFocus
 {
   GdkEventFocus _cInstance;
 
+  /**
+      Create a `event_focus.EventFocus` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.FocusChange]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        in_ = true if the window has gained the keyboard focus, false if
+            it has lost the focus.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, short in_ = short.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.in_ = in_;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

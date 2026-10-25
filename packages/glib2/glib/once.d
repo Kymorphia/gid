@@ -16,6 +16,16 @@ class Once
 {
   GOnce _cInstance;
 
+  /**
+      Create a `once.Once` wrap type.
+      Params:
+        status = the status of the #GOnce
+  */
+  this(glib.types.OnceStatus status = glib.types.OnceStatus.init) nothrow
+  {
+    this.status = status;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

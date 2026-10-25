@@ -14,6 +14,26 @@ class PadActionEntry
 {
   GtkPadActionEntry _cInstance;
 
+  /**
+      Create a `pad_action_entry.PadActionEntry` wrap type.
+      Params:
+        type = the type of pad feature that will trigger this action entry.
+        index = the 0-indexed button/ring/strip number that will trigger this action
+            entry.
+        mode = the mode that will trigger this action entry, or -1 for all modes.
+        label = Human readable description of this action entry, this string should
+            be deemed user-visible.
+        actionName = action name that will be activated in the #GActionGroup.
+  */
+  this(gtk.types.PadActionType type = gtk.types.PadActionType.init, int index = int.init, int mode = int.init, string label = string.init, string actionName = string.init) nothrow
+  {
+    this.type = type;
+    this.index = index;
+    this.mode = mode;
+    this.label = label;
+    this.actionName = actionName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

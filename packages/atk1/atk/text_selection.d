@@ -33,6 +33,26 @@ class TextSelection
 {
   AtkTextSelection _cInstance;
 
+  /**
+      Create a `text_selection.TextSelection` wrap type.
+      Params:
+        startObject = the AtkText containing the start of the selection.
+        startOffset = the text offset of the beginning of the selection within
+                         @start_object.
+        endObject = the AtkText containing the end of the selection.
+        endOffset = the text offset of the end of the selection within @end_object.
+        startIsActive = a gboolean indicating whether the start of the selection
+                           is the active point.
+  */
+  this(atk.object.ObjectWrap startObject = atk.object.ObjectWrap.init, int startOffset = int.init, atk.object.ObjectWrap endObject = atk.object.ObjectWrap.init, int endOffset = int.init, bool startIsActive = bool.init) nothrow
+  {
+    this.startObject = startObject;
+    this.startOffset = startOffset;
+    this.endObject = endObject;
+    this.endOffset = endOffset;
+    this.startIsActive = startIsActive;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

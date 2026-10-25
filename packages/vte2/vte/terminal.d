@@ -1406,7 +1406,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void getGeometryHints(out gdk.types.Geometry hints, int minRows, int minColumns) nothrow
   {
-    vte_terminal_get_geometry_hints(cast(VteTerminal*)this._cPtr, &hints, minRows, minColumns);
+    vte_terminal_get_geometry_hints(cast(VteTerminal*)this._cPtr, cast(GdkGeometry*)&hints, minRows, minColumns);
   }
 
   /**
@@ -2157,9 +2157,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         bold = the new bold color or null
   */
-  void setColorBold(gdk.rgba.RGBA bold) nothrow
+  void setColorBold(gdk.rgba.RGBA* bold = null) nothrow
   {
-    vte_terminal_set_color_bold(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&bold);
+    vte_terminal_set_color_bold(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)bold);
   }
 
   /**
@@ -2170,9 +2170,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         cursorBackground = the new color to use for the text cursor, or null
   */
-  void setColorCursor(gdk.rgba.RGBA cursorBackground) nothrow
+  void setColorCursor(gdk.rgba.RGBA* cursorBackground = null) nothrow
   {
-    vte_terminal_set_color_cursor(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&cursorBackground);
+    vte_terminal_set_color_cursor(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)cursorBackground);
   }
 
   /**
@@ -2183,9 +2183,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         cursorForeground = the new color to use for the text cursor, or null
   */
-  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground) nothrow
+  void setColorCursorForeground(gdk.rgba.RGBA* cursorForeground = null) nothrow
   {
-    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&cursorForeground);
+    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)cursorForeground);
   }
 
   /**
@@ -2208,9 +2208,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         highlightBackground = the new color to use for highlighted text, or null
   */
-  void setColorHighlight(gdk.rgba.RGBA highlightBackground) nothrow
+  void setColorHighlight(gdk.rgba.RGBA* highlightBackground = null) nothrow
   {
-    vte_terminal_set_color_highlight(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&highlightBackground);
+    vte_terminal_set_color_highlight(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)highlightBackground);
   }
 
   /**
@@ -2222,9 +2222,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         highlightForeground = the new color to use for highlighted text, or null
   */
-  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground) nothrow
+  void setColorHighlightForeground(gdk.rgba.RGBA* highlightForeground = null) nothrow
   {
-    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&highlightForeground);
+    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)highlightForeground);
   }
 
   /**
@@ -2243,14 +2243,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         background = the new background color, or null
         palette = the color palette
   */
-  void setColors(gdk.rgba.RGBA foreground, gdk.rgba.RGBA background, gdk.rgba.RGBA[] palette = null) nothrow
+  void setColors(gdk.rgba.RGBA* foreground = null, gdk.rgba.RGBA* background = null, gdk.rgba.RGBA[] palette = null) nothrow
   {
     size_t _paletteSize;
     if (palette)
       _paletteSize = cast(size_t)palette.length;
 
     auto _palette = palette.ptr ? cast(const(GdkRGBA)*)palette.ptr : [GdkRGBA.init].ptr;
-    vte_terminal_set_colors(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&foreground, cast(const(GdkRGBA)*)&background, _palette, _paletteSize);
+    vte_terminal_set_colors(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)foreground, cast(const(GdkRGBA)*)background, _palette, _paletteSize);
   }
 
   /**

@@ -104,7 +104,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getCharExtents(out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_iter_get_char_extents(cast(PangoLayoutIter*)this._cPtr, &logicalRect);
+    pango_layout_iter_get_char_extents(cast(PangoLayoutIter*)this._cPtr, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -118,7 +118,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getClusterExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_iter_get_cluster_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_cluster_extents(cast(PangoLayoutIter*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -158,7 +158,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getLayoutExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_iter_get_layout_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_layout_extents(cast(PangoLayoutIter*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -191,7 +191,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getLineExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_iter_get_line_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_line_extents(cast(PangoLayoutIter*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -281,7 +281,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getRunExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_layout_iter_get_run_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_run_extents(cast(PangoLayoutIter*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**

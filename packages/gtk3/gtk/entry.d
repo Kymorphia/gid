@@ -338,7 +338,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   @property void innerBorder(gtk.border.Border propval) nothrow
   {
-    setInnerBorder(propval);
+    setInnerBorder(&propval);
   }
 
   /**
@@ -2085,9 +2085,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           objects like #GtkStyleContext and #GtkCssProvider); the value set with
           this function is ignored by #GtkEntry.
   */
-  void setInnerBorder(gtk.border.Border border) nothrow
+  void setInnerBorder(gtk.border.Border* border = null) nothrow
   {
-    gtk_entry_set_inner_border(cast(GtkEntry*)this._cPtr, cast(const(GtkBorder)*)&border);
+    gtk_entry_set_inner_border(cast(GtkEntry*)this._cPtr, cast(const(GtkBorder)*)border);
   }
 
   /**

@@ -17,6 +17,26 @@ class MetaTableColumn
 {
   GdaMetaTableColumn _cInstance;
 
+  /**
+      Create a `meta_table_column.MetaTableColumn` wrap type.
+      Params:
+        columnName = the column's name
+        columnType = the column's DBMS's type
+        gtype = the detected column's #GType
+        pkey = tells if the column is part of a primary key
+        nullok = tells if the column can be null
+        defaultValue = the column's default value, represented as a valid SQL value (surrounded by simple quotes for strings, ...), or null if column has no default value
+  */
+  this(string columnName = string.init, string columnType = string.init, gobject.types.GType gtype = gobject.types.GType.init, bool pkey = bool.init, bool nullok = bool.init, string defaultValue = string.init) nothrow
+  {
+    this.columnName = columnName;
+    this.columnType = columnType;
+    this.gtype = gtype;
+    this.pkey = pkey;
+    this.nullok = nullok;
+    this.defaultValue = defaultValue;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

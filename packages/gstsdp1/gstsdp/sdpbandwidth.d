@@ -15,6 +15,18 @@ class SDPBandwidth
 {
   GstSDPBandwidth _cInstance;
 
+  /**
+      Create a `sdpbandwidth.SDPBandwidth` wrap type.
+      Params:
+        bwtype = the bandwidth modifier type
+        bandwidth = the bandwidth in kilobits per second
+  */
+  this(string bwtype = string.init, uint bandwidth = uint.init) nothrow
+  {
+    this.bwtype = bwtype;
+    this.bandwidth = bandwidth;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

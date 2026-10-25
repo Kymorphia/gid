@@ -14,6 +14,18 @@ class MIKEYPayloadSPParam
 {
   GstMIKEYPayloadSPParam _cInstance;
 
+  /**
+      Create a `mikeypayload_spparam.MIKEYPayloadSPParam` wrap type.
+      Params:
+        type = specifies the type of the parameter
+        len = specifies the length of @val
+  */
+  this(ubyte type = ubyte.init, ubyte len = ubyte.init) nothrow
+  {
+    this.type = type;
+    this.len = len;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

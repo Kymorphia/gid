@@ -15,6 +15,22 @@ class FormatDefinition
 {
   GstFormatDefinition _cInstance;
 
+  /**
+      Create a `format_definition.FormatDefinition` wrap type.
+      Params:
+        value = The unique id of this format
+        nick = A short nick of the format
+        description = A longer description of the format
+        quark = A quark for the nick
+  */
+  this(gst.types.Format value = gst.types.Format.init, string nick = string.init, string description = string.init, glib.types.Quark quark = glib.types.Quark.init) nothrow
+  {
+    this.value = value;
+    this.nick = nick;
+    this.description = description;
+    this.quark = quark;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -276,7 +276,7 @@ class Keymap : gobject.object.ObjectWrap
   uint lookupKey(gdk.types.KeymapKey key) nothrow
   {
     uint _retval;
-    _retval = gdk_keymap_lookup_key(cast(GdkKeymap*)this._cPtr, &key);
+    _retval = gdk_keymap_lookup_key(cast(GdkKeymap*)this._cPtr, cast(const(GdkKeymapKey)*)&key);
     return _retval;
   }
 

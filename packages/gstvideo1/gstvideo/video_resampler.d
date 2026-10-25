@@ -16,6 +16,22 @@ class VideoResampler
 {
   GstVideoResampler _cInstance;
 
+  /**
+      Create a `video_resampler.VideoResampler` wrap type.
+      Params:
+        inSize = the input size
+        outSize = the output size
+        maxTaps = the maximum number of taps
+        nPhases = the number of phases
+  */
+  this(int inSize = int.init, int outSize = int.init, uint maxTaps = uint.init, uint nPhases = uint.init) nothrow
+  {
+    this.inSize = inSize;
+    this.outSize = outSize;
+    this.maxTaps = maxTaps;
+    this.nPhases = nPhases;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

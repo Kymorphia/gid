@@ -15,6 +15,18 @@ class SqlCase
 {
   GdaSqlCase _cInstance;
 
+  /**
+      Create a `sql_case.SqlCase` wrap type.
+      Params:
+        baseExpr = expression to test
+        elseExpr = default expression for the CASE
+  */
+  this(gda.sql_expr.SqlExpr baseExpr = gda.sql_expr.SqlExpr.init, gda.sql_expr.SqlExpr elseExpr = gda.sql_expr.SqlExpr.init) nothrow
+  {
+    this.baseExpr = baseExpr;
+    this.elseExpr = elseExpr;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

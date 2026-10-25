@@ -37,6 +37,20 @@ class ReferenceTimestampMeta
 {
   GstReferenceTimestampMeta _cInstance;
 
+  /**
+      Create a `reference_timestamp_meta.ReferenceTimestampMeta` wrap type.
+      Params:
+        reference = identifier for the timestamp reference.
+        timestamp = timestamp
+        duration = duration, or [gst.types.CLOCK_TIME_NONE]
+  */
+  this(gst.caps.Caps reference = gst.caps.Caps.init, gst.types.ClockTime timestamp = gst.types.ClockTime.init, gst.types.ClockTime duration = gst.types.ClockTime.init) nothrow
+  {
+    this.reference = reference;
+    this.timestamp = timestamp;
+    this.duration = duration;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

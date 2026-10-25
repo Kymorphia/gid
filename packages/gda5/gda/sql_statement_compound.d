@@ -12,6 +12,16 @@ class SqlStatementCompound
 {
   GdaSqlStatementCompound _cInstance;
 
+  /**
+      Create a `sql_statement_compound.SqlStatementCompound` wrap type.
+      Params:
+        compoundType = 
+  */
+  this(gda.types.SqlStatementCompoundType compoundType = gda.types.SqlStatementCompoundType.init) nothrow
+  {
+    this.compoundType = compoundType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

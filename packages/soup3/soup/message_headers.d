@@ -147,7 +147,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void freeRanges(soup.types.Range ranges) nothrow
   {
-    soup_message_headers_free_ranges(cast(SoupMessageHeaders*)this._cPtr, &ranges);
+    soup_message_headers_free_ranges(cast(SoupMessageHeaders*)this._cPtr, cast(SoupRange*)&ranges);
   }
 
   /**
@@ -607,6 +607,6 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setRanges(soup.types.Range ranges, int length) nothrow
   {
-    soup_message_headers_set_ranges(cast(SoupMessageHeaders*)this._cPtr, &ranges, length);
+    soup_message_headers_set_ranges(cast(SoupMessageHeaders*)this._cPtr, cast(SoupRange*)&ranges, length);
   }
 }

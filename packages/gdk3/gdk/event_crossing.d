@@ -15,6 +15,48 @@ class EventCrossing
 {
   GdkEventCrossing _cInstance;
 
+  /**
+      Create a `event_crossing.EventCrossing` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.EnterNotify] or [gdk.types.EventType.LeaveNotify]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        subwindow = the window that was entered or left.
+        time = the time of the event in milliseconds.
+        x = the x coordinate of the pointer relative to the window.
+        y = the y coordinate of the pointer relative to the window.
+        xRoot = the x coordinate of the pointer relative to the root of the screen.
+        yRoot = the y coordinate of the pointer relative to the root of the screen.
+        mode = the crossing mode ([gdk.types.CrossingMode.Normal], [gdk.types.CrossingMode.Grab],
+           [gdk.types.CrossingMode.Ungrab], [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab] or
+           [gdk.types.CrossingMode.StateChanged]).  [gdk.types.CrossingMode.GtkGrab], [gdk.types.CrossingMode.GtkUngrab],
+           and [gdk.types.CrossingMode.StateChanged] were added in 2.14 and are always synthesized,
+           never native.
+        detail = the kind of crossing that happened ([gdk.types.NotifyType.Inferior],
+           [gdk.types.NotifyType.Ancestor], [gdk.types.NotifyType.Virtual], [gdk.types.NotifyType.Nonlinear] or
+           [gdk.types.NotifyType.NonlinearVirtual]).
+        focus = true if @window is the focus window or an inferior.
+        state = a bit-mask representing the state of
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, gdk.window.Window subwindow = gdk.window.Window.init, uint time = uint.init, double x = 0.0, double y = 0.0, double xRoot = 0.0, double yRoot = 0.0, gdk.types.CrossingMode mode = gdk.types.CrossingMode.init, gdk.types.NotifyType detail = gdk.types.NotifyType.init, bool focus = bool.init, gdk.types.ModifierType state = gdk.types.ModifierType.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.subwindow = subwindow;
+    this.time = time;
+    this.x = x;
+    this.y = y;
+    this.xRoot = xRoot;
+    this.yRoot = yRoot;
+    this.mode = mode;
+    this.detail = detail;
+    this.focus = focus;
+    this.state = state;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

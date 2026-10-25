@@ -16,6 +16,25 @@ class SignalQuery
 {
   GSignalQuery _cInstance;
 
+  /**
+      Create a `signal_query.SignalQuery` wrap type.
+      Params:
+        signalId = The signal id of the signal being queried, or 0 if the
+           signal to be queried was unknown.
+        signalName = The signal name.
+        itype = The interface/instance type that this signal can be emitted for.
+        signalFlags = The signal flags as passed in to [gobject.global.signalNew].
+        returnType = The return type for user callbacks.
+  */
+  this(uint signalId = uint.init, string signalName = string.init, gobject.types.GType itype = gobject.types.GType.init, gobject.types.SignalFlags signalFlags = gobject.types.SignalFlags.init, gobject.types.GType returnType = gobject.types.GType.init) nothrow
+  {
+    this.signalId = signalId;
+    this.signalName = signalName;
+    this.itype = itype;
+    this.signalFlags = signalFlags;
+    this.returnType = returnType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

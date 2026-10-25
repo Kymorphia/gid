@@ -16,6 +16,20 @@ class RTPSourceMeta
 {
   GstRTPSourceMeta _cInstance;
 
+  /**
+      Create a `rtpsource_meta.RTPSourceMeta` wrap type.
+      Params:
+        ssrc = the SSRC
+        ssrcValid = whether @ssrc is set and valid
+        csrcCount = number of elements in @csrc
+  */
+  this(uint ssrc = uint.init, bool ssrcValid = bool.init, uint csrcCount = uint.init) nothrow
+  {
+    this.ssrc = ssrc;
+    this.ssrcValid = ssrcValid;
+    this.csrcCount = csrcCount;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

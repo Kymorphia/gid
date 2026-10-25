@@ -25,6 +25,20 @@ class AudioBuffer
 {
   GstAudioBuffer _cInstance;
 
+  /**
+      Create a `audio_buffer.AudioBuffer` wrap type.
+      Params:
+        nSamples = the size of the buffer in samples
+        nPlanes = the number of planes available
+        buffer = the mapped buffer
+  */
+  this(size_t nSamples = size_t.init, int nPlanes = int.init, gst.buffer.Buffer buffer = gst.buffer.Buffer.init) nothrow
+  {
+    this.nSamples = nSamples;
+    this.nPlanes = nPlanes;
+    this.buffer = buffer;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

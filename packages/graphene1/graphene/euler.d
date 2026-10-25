@@ -248,10 +248,10 @@ class Euler : gobject.boxed.Boxed
         order = the order used to apply the rotations
       Returns: the initialized #graphene_euler_t
   */
-  graphene.euler.Euler initFromQuaternion(graphene.quaternion.Quaternion q, graphene.types.EulerOrder order) nothrow
+  graphene.euler.Euler initFromQuaternion(graphene.quaternion.Quaternion* q, graphene.types.EulerOrder order) nothrow
   {
     graphene_euler_t* _cretval;
-    _cretval = graphene_euler_init_from_quaternion(cast(graphene_euler_t*)this._cPtr, cast(const(graphene_quaternion_t)*)&q, order);
+    _cretval = graphene_euler_init_from_quaternion(cast(graphene_euler_t*)this._cPtr, cast(const(graphene_quaternion_t)*)q, order);
     auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

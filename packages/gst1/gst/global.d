@@ -2412,7 +2412,7 @@ bool valueIsSubset(gobject.value.Value value1, gobject.value.Value value2) nothr
 */
 void valueRegister(gst.types.ValueTable table) nothrow
 {
-  gst_value_register(&table);
+  gst_value_register(cast(const(GstValueTable)*)&table);
 }
 
 /**

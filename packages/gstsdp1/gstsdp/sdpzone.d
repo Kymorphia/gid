@@ -16,6 +16,18 @@ class SDPZone
 {
   GstSDPZone _cInstance;
 
+  /**
+      Create a `sdpzone.SDPZone` wrap type.
+      Params:
+        time = the NTP time that a time zone adjustment happens
+        typedTime = the offset from the time when the session was first scheduled
+  */
+  this(string time = string.init, string typedTime = string.init) nothrow
+  {
+    this.time = time;
+    this.typedTime = typedTime;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -15,6 +15,13 @@ class GLAsyncDebug
 {
   GstGLAsyncDebug _cInstance;
 
+  /**
+      Create a `glasync_debug.GLAsyncDebug` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

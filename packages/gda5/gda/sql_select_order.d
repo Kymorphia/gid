@@ -15,6 +15,20 @@ class SqlSelectOrder
 {
   GdaSqlSelectOrder _cInstance;
 
+  /**
+      Create a `sql_select_order.SqlSelectOrder` wrap type.
+      Params:
+        expr = expression to order on
+        asc = TRUE is ordering is ascending
+        collationName = name of the collation to use for ordering
+  */
+  this(gda.sql_expr.SqlExpr expr = gda.sql_expr.SqlExpr.init, bool asc = bool.init, string collationName = string.init) nothrow
+  {
+    this.expr = expr;
+    this.asc = asc;
+    this.collationName = collationName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

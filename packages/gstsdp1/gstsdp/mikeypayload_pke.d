@@ -18,6 +18,18 @@ class MIKEYPayloadPKE
 {
   GstMIKEYPayloadPKE _cInstance;
 
+  /**
+      Create a `mikeypayload_pke.MIKEYPayloadPKE` wrap type.
+      Params:
+        C = envelope key cache indicator
+        dataLen = length of @data
+  */
+  this(gstsdp.types.MIKEYCacheType C = gstsdp.types.MIKEYCacheType.init, ushort dataLen = ushort.init) nothrow
+  {
+    this.C = C;
+    this.dataLen = dataLen;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

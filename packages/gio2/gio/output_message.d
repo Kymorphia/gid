@@ -23,6 +23,21 @@ class OutputMessage
 {
   GOutputMessage _cInstance;
 
+  /**
+      Create a `output_message.OutputMessage` wrap type.
+      Params:
+        address = a #GSocketAddress, or null
+        numVectors = the number of output vectors pointed to by @vectors.
+        bytesSent = initialize to 0. Will be set to the number of bytes
+              that have been sent
+  */
+  this(gio.socket_address.SocketAddress address = gio.socket_address.SocketAddress.init, uint numVectors = uint.init, uint bytesSent = uint.init) nothrow
+  {
+    this.address = address;
+    this.numVectors = numVectors;
+    this.bytesSent = bytesSent;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

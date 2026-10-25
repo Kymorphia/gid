@@ -479,9 +479,9 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   
       Deprecated: Use [gtk.cell_renderer.CellRenderer.getPreferredSize] instead.
   */
-  void getSize(gtk.widget.Widget widget, gdk.rectangle.Rectangle cellArea, out int xOffset, out int yOffset, out int width, out int height) nothrow
+  void getSize(gtk.widget.Widget widget, gdk.rectangle.Rectangle* cellArea, out int xOffset, out int yOffset, out int width, out int height) nothrow
   {
-    gtk_cell_renderer_get_size(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&cellArea, cast(int*)&xOffset, cast(int*)&yOffset, cast(int*)&width, cast(int*)&height);
+    gtk_cell_renderer_get_size(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)cellArea, cast(int*)&xOffset, cast(int*)&yOffset, cast(int*)&width, cast(int*)&height);
   }
 
   /**

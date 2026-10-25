@@ -20,6 +20,13 @@ class VideoTimeCodeMeta
 {
   GstVideoTimeCodeMeta _cInstance;
 
+  /**
+      Create a `video_time_code_meta.VideoTimeCodeMeta` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

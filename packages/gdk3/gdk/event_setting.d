@@ -15,6 +15,25 @@ class EventSetting
 {
   GdkEventSetting _cInstance;
 
+  /**
+      Create a `event_setting.EventSetting` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.Setting]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        action = what happened to the setting ([gdk.types.SettingAction.New],
+            [gdk.types.SettingAction.Changed] or [gdk.types.SettingAction.Deleted]).
+        name = the name of the setting.
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, gdk.types.SettingAction action = gdk.types.SettingAction.init, string name = string.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.action = action;
+    this.name = name;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

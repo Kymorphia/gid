@@ -16,6 +16,16 @@ class AttrFontFeatures
 {
   PangoAttrFontFeatures _cInstance;
 
+  /**
+      Create a `attr_font_features.AttrFontFeatures` wrap type.
+      Params:
+        features = the features, as a string in CSS syntax
+  */
+  this(string features = string.init) nothrow
+  {
+    this.features = features;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

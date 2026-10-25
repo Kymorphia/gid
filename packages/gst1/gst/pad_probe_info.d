@@ -18,6 +18,24 @@ class PadProbeInfo
 {
   GstPadProbeInfo _cInstance;
 
+  /**
+      Create a `pad_probe_info.PadProbeInfo` wrap type.
+      Params:
+        type = the current probe type
+        id = the id of the probe
+        offset = offset of pull probe, this field is valid when @type contains
+             #GST_PAD_PROBE_TYPE_PULL
+        size = size of pull probe, this field is valid when @type contains
+             #GST_PAD_PROBE_TYPE_PULL
+  */
+  this(gst.types.PadProbeType type = gst.types.PadProbeType.init, gulong id = gulong.init, ulong offset = ulong.init, uint size = uint.init) nothrow
+  {
+    this.type = type;
+    this.id = id;
+    this.offset = offset;
+    this.size = size;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

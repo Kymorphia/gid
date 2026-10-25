@@ -15,6 +15,20 @@ class SqlSelectJoin
 {
   GdaSqlSelectJoin _cInstance;
 
+  /**
+      Create a `sql_select_join.SqlSelectJoin` wrap type.
+      Params:
+        type = type of join
+        position = represents a join between a target at (pos &lt; @position) and the one at @position
+        expr = joining expression, or null
+  */
+  this(gda.types.SqlSelectJoinType type = gda.types.SqlSelectJoinType.init, int position = int.init, gda.sql_expr.SqlExpr expr = gda.sql_expr.SqlExpr.init) nothrow
+  {
+    this.type = type;
+    this.position = position;
+    this.expr = expr;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -742,10 +742,10 @@ class Snapshot : gdk.snapshot.Snapshot
             or null to use the bounds of the snapshot
       Returns: a new [gdk.paintable.Paintable]
   */
-  gdk.paintable.Paintable toPaintable(graphene.size.Size size) nothrow
+  gdk.paintable.Paintable toPaintable(graphene.size.Size* size = null) nothrow
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_snapshot_to_paintable(cast(GtkSnapshot*)this._cPtr, cast(const(graphene_size_t)*)&size);
+    _cretval = gtk_snapshot_to_paintable(cast(GtkSnapshot*)this._cPtr, cast(const(graphene_size_t)*)size);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }

@@ -272,7 +272,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   @property void pointingTo(gdk.rectangle.Rectangle propval) nothrow
   {
-    setPointingTo(propval);
+    setPointingTo(&propval);
   }
 
   /**
@@ -552,9 +552,9 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         rect = rectangle to point to
   */
-  void setPointingTo(gdk.rectangle.Rectangle rect) nothrow
+  void setPointingTo(gdk.rectangle.Rectangle* rect = null) nothrow
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, cast(const(GdkRectangle)*)&rect);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, cast(const(GdkRectangle)*)rect);
   }
 
   /**

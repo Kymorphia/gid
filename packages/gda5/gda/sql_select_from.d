@@ -14,6 +14,13 @@ class SqlSelectFrom
 {
   GdaSqlSelectFrom _cInstance;
 
+  /**
+      Create a `sql_select_from.SqlSelectFrom` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

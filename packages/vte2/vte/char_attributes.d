@@ -12,6 +12,13 @@ class CharAttributes
 {
   VteCharAttributes _cInstance;
 
+  /**
+      Create a `char_attributes.CharAttributes` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

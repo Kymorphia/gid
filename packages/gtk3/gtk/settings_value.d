@@ -13,6 +13,17 @@ class SettingsValue
 {
   GtkSettingsValue _cInstance;
 
+  /**
+      Create a `settings_value.SettingsValue` wrap type.
+      Params:
+        origin = Origin should be something like “filename:linenumber” for
+             rc files, or e.g. “XProperty” for other sources.
+  */
+  this(string origin = string.init) nothrow
+  {
+    this.origin = origin;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

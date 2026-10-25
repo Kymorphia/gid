@@ -18,6 +18,22 @@ class VideoTimeCodeConfig
 {
   GstVideoTimeCodeConfig _cInstance;
 
+  /**
+      Create a `video_time_code_config.VideoTimeCodeConfig` wrap type.
+      Params:
+        fpsN = Numerator of the frame rate
+        fpsD = Denominator of the frame rate
+        flags = the corresponding #GstVideoTimeCodeFlags
+        latestDailyJam = The latest daily jam information, if present, or NULL
+  */
+  this(uint fpsN = uint.init, uint fpsD = uint.init, gstvideo.types.VideoTimeCodeFlags flags = gstvideo.types.VideoTimeCodeFlags.init, glib.date_time.DateTime latestDailyJam = glib.date_time.DateTime.init) nothrow
+  {
+    this.fpsN = fpsN;
+    this.fpsD = fpsD;
+    this.flags = flags;
+    this.latestDailyJam = latestDailyJam;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -187,10 +187,10 @@ class Ray : gobject.boxed.Boxed
         direction = the direction vector
       Returns: the initialized ray
   */
-  graphene.ray.Ray init_(graphene.point3_d.Point3D origin, graphene.vec3.Vec3 direction = null) nothrow
+  graphene.ray.Ray init_(graphene.point3_d.Point3D* origin = null, graphene.vec3.Vec3 direction = null) nothrow
   {
     graphene_ray_t* _cretval;
-    _cretval = graphene_ray_init(cast(graphene_ray_t*)this._cPtr, cast(const(graphene_point3d_t)*)&origin, direction ? cast(const(graphene_vec3_t)*)direction._cPtr(No.Dup) : null);
+    _cretval = graphene_ray_init(cast(graphene_ray_t*)this._cPtr, cast(const(graphene_point3d_t)*)origin, direction ? cast(const(graphene_vec3_t)*)direction._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

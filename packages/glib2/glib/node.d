@@ -14,6 +14,13 @@ class Node
 {
   GNode _cInstance;
 
+  /**
+      Create a `node.Node` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

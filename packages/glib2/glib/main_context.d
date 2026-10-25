@@ -112,7 +112,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void addPoll(glib.types.PollFD fd, int priority) nothrow
   {
-    g_main_context_add_poll(cast(GMainContext*)this._cPtr, &fd, priority);
+    g_main_context_add_poll(cast(GMainContext*)this._cPtr, cast(GPollFD*)&fd, priority);
   }
 
   /**
@@ -172,7 +172,7 @@ class MainContext : gobject.boxed.Boxed
   glib.source.Source findSourceByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null) nothrow
   {
     GSource* _cretval;
-    _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)this._cPtr, &funcs, userData);
+    _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)this._cPtr, cast(GSourceFuncs*)&funcs, userData);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -434,7 +434,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void removePoll(glib.types.PollFD fd) nothrow
   {
-    g_main_context_remove_poll(cast(GMainContext*)this._cPtr, &fd);
+    g_main_context_remove_poll(cast(GMainContext*)this._cPtr, cast(GPollFD*)&fd);
   }
 
   /**

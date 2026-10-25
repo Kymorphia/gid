@@ -38,6 +38,33 @@ class VideoMeta
 {
   GstVideoMeta _cInstance;
 
+  /**
+      Create a `video_meta.VideoMeta` wrap type.
+      Params:
+        buffer = the buffer this metadata belongs to
+        flags = additional video flags
+        format = the video format
+        id = identifier of the frame
+        width = the video width
+        height = the video height
+        nPlanes = the number of planes in the image
+        alignment = the paddings and alignment constraints of the video buffer.
+          It is up to the caller of `[gstvideo.global.bufferAddVideoMetaFull]` to set it
+          using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
+          to no padding and no alignment. Since: 1.18
+  */
+  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init, gstvideo.types.VideoFrameFlags flags = gstvideo.types.VideoFrameFlags.init, gstvideo.types.VideoFormat format = gstvideo.types.VideoFormat.init, int id = int.init, uint width = uint.init, uint height = uint.init, uint nPlanes = uint.init, gstvideo.video_alignment.VideoAlignment alignment = gstvideo.video_alignment.VideoAlignment.init) nothrow
+  {
+    this.buffer = buffer;
+    this.flags = flags;
+    this.format = format;
+    this.id = id;
+    this.width = width;
+    this.height = height;
+    this.nPlanes = nPlanes;
+    this.alignment = alignment;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
@@ -194,18 +221,6 @@ class VideoMeta
   @property void nPlanes(uint propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).nPlanes = propval;
-  }
-
-  /** Function alias for field `unmap` */
-  alias UnmapFuncType = extern(C) gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info);
-
-  /**
-      Get `unmap` field.
-      Returns: unmap the memory of a plane
-  */
-  @property UnmapFuncType unmap() nothrow
-  {
-    return (cast(GstVideoMeta*)this._cPtr).unmap;
   }
 
   /**

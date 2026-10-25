@@ -19,6 +19,16 @@ class MetaTable
 {
   GdaMetaTable _cInstance;
 
+  /**
+      Create a `meta_table.MetaTable` wrap type.
+      Params:
+        pkColsNb = size of the @pk_cols_array array
+  */
+  this(int pkColsNb = int.init) nothrow
+  {
+    this.pkColsNb = pkColsNb;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

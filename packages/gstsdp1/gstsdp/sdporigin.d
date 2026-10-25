@@ -16,6 +16,31 @@ class SDPOrigin
 {
   GstSDPOrigin _cInstance;
 
+  /**
+      Create a `sdporigin.SDPOrigin` wrap type.
+      Params:
+        username = the user's login on the originating host, or it is "-"
+             if the originating host does not support the concept of user ids.
+        sessId = is a numeric string such that the tuple of @username, @sess_id,
+             @nettype, @addrtype and @addr form a globally unique identifier for the
+             session.
+        sessVersion = a version number for this announcement
+        nettype = the type of network. "IN" is defined to have the meaning
+             "Internet".
+        addrtype = the type of @addr.
+        addr = the globally unique address of the machine from which the session was
+              created.
+  */
+  this(string username = string.init, string sessId = string.init, string sessVersion = string.init, string nettype = string.init, string addrtype = string.init, string addr = string.init) nothrow
+  {
+    this.username = username;
+    this.sessId = sessId;
+    this.sessVersion = sessVersion;
+    this.nettype = nettype;
+    this.addrtype = addrtype;
+    this.addr = addr;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

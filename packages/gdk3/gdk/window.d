@@ -149,7 +149,7 @@ class Window : gobject.object.ObjectWrap
   */
   static void constrainSize(gdk.types.Geometry geometry, gdk.types.WindowHints flags, int width, int height, out int newWidth, out int newHeight) nothrow
   {
-    gdk_window_constrain_size(&geometry, flags, width, height, cast(int*)&newWidth, cast(int*)&newHeight);
+    gdk_window_constrain_size(cast(GdkGeometry*)&geometry, flags, width, height, cast(int*)&newWidth, cast(int*)&newHeight);
   }
 
   /**
@@ -1615,9 +1615,9 @@ class Window : gobject.object.ObjectWrap
                window
         invalidateChildren = whether to also invalidate child windows
   */
-  void invalidateRect(gdk.rectangle.Rectangle rect, bool invalidateChildren) nothrow
+  void invalidateRect(gdk.rectangle.Rectangle* rect, bool invalidateChildren) nothrow
   {
-    gdk_window_invalidate_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)&rect, invalidateChildren);
+    gdk_window_invalidate_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)rect, invalidateChildren);
   }
 
   /**
@@ -2338,7 +2338,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setGeometryHints(gdk.types.Geometry geometry, gdk.types.WindowHints geomMask) nothrow
   {
-    gdk_window_set_geometry_hints(cast(GdkWindow*)this._cPtr, &geometry, geomMask);
+    gdk_window_set_geometry_hints(cast(GdkWindow*)this._cPtr, cast(const(GdkGeometry)*)&geometry, geomMask);
   }
 
   /**

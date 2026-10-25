@@ -14,6 +14,16 @@ class SqlOperation
 {
   GdaSqlOperation _cInstance;
 
+  /**
+      Create a `sql_operation.SqlOperation` wrap type.
+      Params:
+        operatorType = 
+  */
+  this(gda.types.SqlOperatorType operatorType = gda.types.SqlOperatorType.init) nothrow
+  {
+    this.operatorType = operatorType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

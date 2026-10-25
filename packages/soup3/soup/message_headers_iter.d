@@ -21,6 +21,13 @@ class MessageHeadersIter
 {
   SoupMessageHeadersIter _cInstance;
 
+  /**
+      Create a `message_headers_iter.MessageHeadersIter` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

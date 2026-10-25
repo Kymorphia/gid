@@ -15,6 +15,20 @@ class GlyphInfo
 {
   PangoGlyphInfo _cInstance;
 
+  /**
+      Create a `glyph_info.GlyphInfo` wrap type.
+      Params:
+        glyph = the glyph itself.
+        geometry = the positional information about the glyph.
+        attr = the visual attributes of the glyph.
+  */
+  this(pango.types.Glyph glyph = pango.types.Glyph.init, pango.types.GlyphGeometry geometry = pango.types.GlyphGeometry.init, pango.types.GlyphVisAttr attr = pango.types.GlyphVisAttr.init) nothrow
+  {
+    this.glyph = glyph;
+    this.geometry = geometry;
+    this.attr = attr;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

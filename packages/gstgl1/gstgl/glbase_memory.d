@@ -170,7 +170,7 @@ class GLBaseMemory : gobject.boxed.Boxed
         userData = user data to call notify with
         notify = a #GDestroyNotify
   */
-  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams params, size_t size, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
+  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* params, size_t size, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
@@ -187,7 +187,7 @@ class GLBaseMemory : gobject.boxed.Boxed
       }
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_base_memory_init(cast(GstGLBaseMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params, size, userData, _notifyCB);
+    gst_gl_base_memory_init(cast(GstGLBaseMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)params, size, userData, _notifyCB);
   }
 
   /** */

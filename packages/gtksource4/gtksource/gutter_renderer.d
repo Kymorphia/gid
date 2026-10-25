@@ -510,9 +510,9 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         color = a #GdkRGBA or null
   */
-  void setBackground(gdk.rgba.RGBA color) nothrow
+  void setBackground(gdk.rgba.RGBA* color = null) nothrow
   {
-    gtk_source_gutter_renderer_set_background(cast(GtkSourceGutterRenderer*)this._cPtr, cast(const(GdkRGBA)*)&color);
+    gtk_source_gutter_renderer_set_background(cast(GtkSourceGutterRenderer*)this._cPtr, cast(const(GdkRGBA)*)color);
   }
 
   /**

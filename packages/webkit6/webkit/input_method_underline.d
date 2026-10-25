@@ -82,8 +82,8 @@ class InputMethodUnderline : gobject.boxed.Boxed
       Params:
         rgba = a #GdkRGBA or null
   */
-  void setColor(gdk.rgba.RGBA rgba) nothrow
+  void setColor(gdk.rgba.RGBA* rgba = null) nothrow
   {
-    webkit_input_method_underline_set_color(cast(WebKitInputMethodUnderline*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
+    webkit_input_method_underline_set_color(cast(WebKitInputMethodUnderline*)this._cPtr, cast(const(GdkRGBA)*)rgba);
   }
 }

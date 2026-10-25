@@ -94,10 +94,10 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context, size_t allocSize, gst.allocation_params.AllocationParams allocParams, uint glTarget, uint glUsage) nothrow
+  this(gstgl.glcontext.GLContext context, size_t allocSize, gst.allocation_params.AllocationParams* allocParams, uint glTarget, uint glUsage) nothrow
   {
     GstGLBufferAllocationParams* _cretval;
-    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocSize, cast(const(GstAllocationParams)*)&allocParams, glTarget, glUsage);
+    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocSize, cast(const(GstAllocationParams)*)allocParams, glTarget, glUsage);
     this(_cretval, Yes.Take);
   }
 }

@@ -27,6 +27,20 @@ class AudioClippingMeta
 {
   GstAudioClippingMeta _cInstance;
 
+  /**
+      Create a `audio_clipping_meta.AudioClippingMeta` wrap type.
+      Params:
+        format = GstFormat of @start and @stop, GST_FORMAT_DEFAULT is samples
+        start = Amount of audio to clip from start of buffer
+        end = Amount of  to clip from end of buffer
+  */
+  this(gst.types.Format format = gst.types.Format.init, ulong start = ulong.init, ulong end = ulong.init) nothrow
+  {
+    this.format = format;
+    this.start = start;
+    this.end = end;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

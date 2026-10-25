@@ -17,6 +17,20 @@ class SqlStatementTransaction
 {
   GdaSqlStatementTransaction _cInstance;
 
+  /**
+      Create a `sql_statement_transaction.SqlStatementTransaction` wrap type.
+      Params:
+        isolationLevel = isolation level as a #GdaTransactionIsolation
+        transMode = transaction mode (DEFERRED, IMMEDIATE, EXCLUSIVE, READ_WRITE, READ_ONLY)
+        transName = transaction name
+  */
+  this(gda.types.TransactionIsolation isolationLevel = gda.types.TransactionIsolation.init, string transMode = string.init, string transName = string.init) nothrow
+  {
+    this.isolationLevel = isolationLevel;
+    this.transMode = transMode;
+    this.transName = transName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

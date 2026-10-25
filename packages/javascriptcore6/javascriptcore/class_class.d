@@ -12,6 +12,13 @@ class ClassClass
 {
   JSCClassClass _cInstance;
 
+  /**
+      Create a `class_class.ClassClass` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

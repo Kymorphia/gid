@@ -14,6 +14,20 @@ class AccelGroupEntry
 {
   GtkAccelGroupEntry _cInstance;
 
+  /**
+      Create a `accel_group_entry.AccelGroupEntry` wrap type.
+      Params:
+        key = 
+        closure = 
+        accelPathQuark = 
+  */
+  this(gtk.types.AccelKey key = gtk.types.AccelKey.init, gobject.closure.Closure closure = gobject.closure.Closure.init, glib.types.Quark accelPathQuark = glib.types.Quark.init) nothrow
+  {
+    this.key = key;
+    this.closure = closure;
+    this.accelPathQuark = accelPathQuark;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

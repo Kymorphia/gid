@@ -92,7 +92,7 @@ class GlyphString : gobject.boxed.Boxed
   */
   void extents(pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_glyph_string_extents(cast(PangoGlyphString*)this._cPtr, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, &inkRect, &logicalRect);
+    pango_glyph_string_extents(cast(PangoGlyphString*)this._cPtr, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -114,7 +114,7 @@ class GlyphString : gobject.boxed.Boxed
   */
   void extentsRange(int start, int end, pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
-    pango_glyph_string_extents_range(cast(PangoGlyphString*)this._cPtr, start, end, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, &inkRect, &logicalRect);
+    pango_glyph_string_extents_range(cast(PangoGlyphString*)this._cPtr, start, end, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
   }
 
   /**
@@ -181,14 +181,14 @@ class GlyphString : gobject.boxed.Boxed
             or end (true) of the character.
         xPos = location to store result
   */
-  void indexToXFull(string text, pango.analysis.Analysis analysis, pango.types.LogAttr attrs, int index, bool trailing, out int xPos) nothrow
+  void indexToXFull(string text, pango.analysis.Analysis analysis, pango.types.LogAttr* attrs, int index, bool trailing, out int xPos) nothrow
   {
     int _length;
     if (text)
       _length = cast(int)text.length;
 
     auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
-    pango_glyph_string_index_to_x_full(cast(PangoGlyphString*)this._cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, &attrs, index, trailing, cast(int*)&xPos);
+    pango_glyph_string_index_to_x_full(cast(PangoGlyphString*)this._cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, cast(PangoLogAttr*)attrs, index, trailing, cast(int*)&xPos);
   }
 
   /**

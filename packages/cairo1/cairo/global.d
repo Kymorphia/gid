@@ -137,7 +137,7 @@ int formatStrideForWidth(cairo.types.Format format, int width) nothrow
 */
 void* getUserData(cairo.context.Context cr, cairo.types.UserDataKey key) nothrow
 {
-  auto _retval = cairo_get_user_data(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, &key);
+  auto _retval = cairo_get_user_data(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(cairo_user_data_key_t)*)&key);
   return _retval;
 }
 
@@ -1618,7 +1618,7 @@ void rasterSourcePatternSetCallbackData(cairo.pattern.Pattern pattern, void* dat
 cairo.surface.Surface recordingSurfaceCreate(cairo.types.Content content, cairo.types.Rectangle extents) nothrow
 {
   cairo_surface_t* _cretval;
-  _cretval = cairo_recording_surface_create(content, &extents);
+  _cretval = cairo_recording_surface_create(content, cast(const(cairo_rectangle_t)*)&extents);
   auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1635,7 +1635,7 @@ cairo.surface.Surface recordingSurfaceCreate(cairo.types.Content content, cairo.
 cairo.types.Bool recordingSurfaceGetExtents(cairo.surface.Surface surface, out cairo.types.Rectangle extents) nothrow
 {
   cairo.types.Bool _retval;
-  _retval = cairo_recording_surface_get_extents(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, &extents);
+  _retval = cairo_recording_surface_get_extents(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, cast(cairo_rectangle_t*)&extents);
   return _retval;
 }
 
@@ -1686,7 +1686,7 @@ cairo.region.Region regionCreate() nothrow
 cairo.region.Region regionCreateRectangle(cairo.types.RectangleInt rectangle) nothrow
 {
   cairo_region_t* _cretval;
-  _cretval = cairo_region_create_rectangle(&rectangle);
+  _cretval = cairo_region_create_rectangle(cast(const(cairo_rectangle_int_t)*)&rectangle);
   auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1706,7 +1706,7 @@ cairo.region.Region regionCreateRectangle(cairo.types.RectangleInt rectangle) no
 cairo.region.Region regionCreateRectangles(cairo.types.RectangleInt rects, int count) nothrow
 {
   cairo_region_t* _cretval;
-  _cretval = cairo_region_create_rectangles(&rects, count);
+  _cretval = cairo_region_create_rectangles(cast(const(cairo_rectangle_int_t)*)&rects, count);
   auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }

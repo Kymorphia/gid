@@ -216,7 +216,7 @@ class Poll
   */
   void getReadGpollfd(glib.types.PollFD fd) nothrow
   {
-    gst_poll_get_read_gpollfd(cast(GstPoll*)this._cPtr, &fd);
+    gst_poll_get_read_gpollfd(cast(GstPoll*)this._cPtr, cast(GPollFD*)&fd);
   }
 
   /**

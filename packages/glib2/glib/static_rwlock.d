@@ -87,6 +87,13 @@ class StaticRWLock
 {
   GStaticRWLock _cInstance;
 
+  /**
+      Create a `static_rwlock.StaticRWLock` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

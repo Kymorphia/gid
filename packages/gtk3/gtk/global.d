@@ -500,7 +500,7 @@ void disableSetlocale() nothrow
 int distributeNaturalAllocation(int extraSpace, uint nRequestedSizes, gtk.types.RequestedSize sizes) nothrow
 {
   int _retval;
-  _retval = gtk_distribute_natural_allocation(extraSpace, nRequestedSizes, &sizes);
+  _retval = gtk_distribute_natural_allocation(extraSpace, nRequestedSizes, cast(GtkRequestedSize*)&sizes);
   return _retval;
 }
 

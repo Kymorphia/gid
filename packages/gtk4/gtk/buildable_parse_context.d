@@ -141,6 +141,6 @@ class BuildableParseContext
   */
   void push(gtk.types.BuildableParser parser, void* userData = null) nothrow
   {
-    gtk_buildable_parse_context_push(cast(GtkBuildableParseContext*)this._cPtr, &parser, userData);
+    gtk_buildable_parse_context_push(cast(GtkBuildableParseContext*)this._cPtr, cast(const(GtkBuildableParser)*)&parser, userData);
   }
 }

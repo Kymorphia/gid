@@ -14,6 +14,13 @@ class SqlStatementUnknown
 {
   GdaSqlStatementUnknown _cInstance;
 
+  /**
+      Create a `sql_statement_unknown.SqlStatementUnknown` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

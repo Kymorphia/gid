@@ -15,6 +15,51 @@ class EventKey
 {
   GdkEventKey _cInstance;
 
+  /**
+      Create a `event_key.EventKey` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.KeyPress] or [gdk.types.EventType.KeyRelease]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        state = a bit-mask representing the state of
+            the modifier keys (e.g. Control, Shift and Alt) and the pointer
+            buttons. See #GdkModifierType.
+        keyval = the key that was pressed or released. See the
+            `gdk/gdkkeysyms.h` header file for a
+            complete list of GDK key codes.
+        length = the length of @string.
+        string_ = a string containing an approximation of the text that
+            would result from this keypress. The only correct way to handle text
+            input of text is using input methods (see #GtkIMContext), so this
+            field is deprecated and should never be used.
+            ([gdk.global.unicodeToKeyval] provides a non-deprecated way of getting
+            an approximate translation for a key.) The string is encoded in the
+            encoding of the current locale (Note: this for backwards compatibility:
+            strings in GTK+ and GDK are typically in UTF-8.) and NUL-terminated.
+            In some cases, the translation of the key code will be a single
+            NUL byte, in which case looking at @length is necessary to distinguish
+            it from the an empty translation.
+        hardwareKeycode = the raw code of the key that was pressed or released.
+        group = the keyboard group.
+        isModifier = a flag that indicates if @hardware_keycode is mapped to a
+            modifier. Since 2.10
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, gdk.types.ModifierType state = gdk.types.ModifierType.init, uint keyval = uint.init, int length = int.init, string string_ = string.init, ushort hardwareKeycode = ushort.init, ubyte group = ubyte.init, uint isModifier = uint.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.state = state;
+    this.keyval = keyval;
+    this.length = length;
+    this.string_ = string_;
+    this.hardwareKeycode = hardwareKeycode;
+    this.group = group;
+    this.isModifier = isModifier;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

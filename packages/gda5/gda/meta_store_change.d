@@ -12,6 +12,18 @@ class MetaStoreChange
 {
   GdaMetaStoreChange _cInstance;
 
+  /**
+      Create a `meta_store_change.MetaStoreChange` wrap type.
+      Params:
+        cType = 
+        tableName = 
+  */
+  this(gda.types.MetaStoreChangeType cType = gda.types.MetaStoreChangeType.init, string tableName = string.init) nothrow
+  {
+    this.cType = cType;
+    this.tableName = tableName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

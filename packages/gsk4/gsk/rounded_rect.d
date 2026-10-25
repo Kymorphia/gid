@@ -29,6 +29,13 @@ class RoundedRect
 {
   GskRoundedRect _cInstance;
 
+  /**
+      Create a `rounded_rect.RoundedRect` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

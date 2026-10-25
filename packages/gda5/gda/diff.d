@@ -12,6 +12,20 @@ class Diff
 {
   GdaDiff _cInstance;
 
+  /**
+      Create a `diff.Diff` wrap type.
+      Params:
+        type = 
+        oldRow = 
+        newRow = 
+  */
+  this(gda.types.DiffType type = gda.types.DiffType.init, int oldRow = int.init, int newRow = int.init) nothrow
+  {
+    this.type = type;
+    this.oldRow = oldRow;
+    this.newRow = newRow;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

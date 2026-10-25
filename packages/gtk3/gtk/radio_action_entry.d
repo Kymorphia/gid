@@ -15,6 +15,31 @@ class RadioActionEntry
 {
   GtkRadioActionEntry _cInstance;
 
+  /**
+      Create a `radio_action_entry.RadioActionEntry` wrap type.
+      Params:
+        name = The name of the action.
+        stockId = The stock id for the action, or the name of an icon from the
+           icon theme.
+        label = The label for the action. This field should typically be marked
+           for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+        accelerator = The accelerator for the action, in the format understood by
+           [gtk.global.acceleratorParse].
+        tooltip = The tooltip for the action. This field should typically be
+           marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
+        value = The value to set on the radio action. See
+           [gtk.radio_action.RadioAction.getCurrentValue].
+  */
+  this(string name = string.init, string stockId = string.init, string label = string.init, string accelerator = string.init, string tooltip = string.init, int value = int.init) nothrow
+  {
+    this.name = name;
+    this.stockId = stockId;
+    this.label = label;
+    this.accelerator = accelerator;
+    this.tooltip = tooltip;
+    this.value = value;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

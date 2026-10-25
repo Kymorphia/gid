@@ -21,6 +21,16 @@ class NetControlMessageMeta
 {
   GstNetControlMessageMeta _cInstance;
 
+  /**
+      Create a `net_control_message_meta.NetControlMessageMeta` wrap type.
+      Params:
+        message = a #GSocketControlMessage stored as metadata
+  */
+  this(gio.socket_control_message.SocketControlMessage message = gio.socket_control_message.SocketControlMessage.init) nothrow
+  {
+    this.message = message;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

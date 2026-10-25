@@ -13,6 +13,20 @@ class FixedChild
 {
   GtkFixedChild _cInstance;
 
+  /**
+      Create a `fixed_child.FixedChild` wrap type.
+      Params:
+        widget = 
+        x = 
+        y = 
+  */
+  this(gtk.widget.Widget widget = gtk.widget.Widget.init, int x = int.init, int y = int.init) nothrow
+  {
+    this.widget = widget;
+    this.x = x;
+    this.y = y;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

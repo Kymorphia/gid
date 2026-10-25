@@ -16,6 +16,96 @@ class ScannerConfig
 {
   GScannerConfig _cInstance;
 
+  /**
+      Create a `scanner_config.ScannerConfig` wrap type.
+      Params:
+        csetSkipCharacters = specifies which characters should be skipped
+              by the scanner (the default is the whitespace characters: space,
+              tab, carriage-return and line-feed).
+        csetIdentifierFirst = specifies the characters which can start
+              identifiers (the default is [glib.types.CSET_a_2_z], "_", and [glib.types.CSET_A_2_Z]).
+        csetIdentifierNth = specifies the characters which can be used
+              in identifiers, after the first character (the default is
+              [glib.types.CSET_a_2_z], "_0123456789", [glib.types.CSET_A_2_Z], `G_CSET_LATINS`,
+              `G_CSET_LATINC`).
+        cpairCommentSingle = specifies the characters at the start and
+              end of single-line comments. The default is "#\n" which means
+              that single-line comments start with a '#' and continue until
+              a '\n' (end of line).
+        caseSensitive = specifies if symbols are case sensitive (the
+              default is false).
+        skipCommentMulti = specifies if multi-line comments are skipped
+              and not returned as tokens (the default is true).
+        skipCommentSingle = specifies if single-line comments are skipped
+              and not returned as tokens (the default is true).
+        scanCommentMulti = specifies if multi-line comments are recognized
+              (the default is true).
+        scanIdentifier = specifies if identifiers are recognized (the
+              default is true).
+        scanIdentifier1char = specifies if single-character
+              identifiers are recognized (the default is false).
+        scanIdentifierNULL = specifies if null is reported as
+              `G_TOKEN_IDENTIFIER_NULL` (the default is false).
+        scanSymbols = specifies if symbols are recognized (the default
+              is true).
+        scanBinary = specifies if binary numbers are recognized (the
+              default is false).
+        scanOctal = specifies if octal numbers are recognized (the
+              default is true).
+        scanFloat = specifies if floating point numbers are recognized
+              (the default is true).
+        scanHex = specifies if hexadecimal numbers are recognized (the
+              default is true).
+        scanHexDollar = specifies if '$' is recognized as a prefix for
+              hexadecimal numbers (the default is false).
+        scanStringSq = specifies if strings can be enclosed in single
+              quotes (the default is true).
+        scanStringDq = specifies if strings can be enclosed in double
+              quotes (the default is true).
+        numbers2Int = specifies if binary, octal and hexadecimal numbers
+              are reported as `G_TOKEN_INT` (the default is true).
+        int2Float = specifies if all numbers are reported as `G_TOKEN_FLOAT`
+              (the default is false).
+        identifier2String = specifies if identifiers are reported as strings
+              (the default is false).
+        char2Token = specifies if characters are reported by setting
+              `token = ch` or as `G_TOKEN_CHAR` (the default is true).
+        symbol2Token = specifies if symbols are reported by setting
+              `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
+        scope0Fallback = specifies if a symbol is searched for in the
+              default scope in addition to the current scope (the default is false).
+        storeInt64 = use value.v_int64 rather than v_int
+  */
+  this(string csetSkipCharacters = string.init, string csetIdentifierFirst = string.init, string csetIdentifierNth = string.init, string cpairCommentSingle = string.init, uint caseSensitive = uint.init, uint skipCommentMulti = uint.init, uint skipCommentSingle = uint.init, uint scanCommentMulti = uint.init, uint scanIdentifier = uint.init, uint scanIdentifier1char = uint.init, uint scanIdentifierNULL = uint.init, uint scanSymbols = uint.init, uint scanBinary = uint.init, uint scanOctal = uint.init, uint scanFloat = uint.init, uint scanHex = uint.init, uint scanHexDollar = uint.init, uint scanStringSq = uint.init, uint scanStringDq = uint.init, uint numbers2Int = uint.init, uint int2Float = uint.init, uint identifier2String = uint.init, uint char2Token = uint.init, uint symbol2Token = uint.init, uint scope0Fallback = uint.init, uint storeInt64 = uint.init) nothrow
+  {
+    this.csetSkipCharacters = csetSkipCharacters;
+    this.csetIdentifierFirst = csetIdentifierFirst;
+    this.csetIdentifierNth = csetIdentifierNth;
+    this.cpairCommentSingle = cpairCommentSingle;
+    this.caseSensitive = caseSensitive;
+    this.skipCommentMulti = skipCommentMulti;
+    this.skipCommentSingle = skipCommentSingle;
+    this.scanCommentMulti = scanCommentMulti;
+    this.scanIdentifier = scanIdentifier;
+    this.scanIdentifier1char = scanIdentifier1char;
+    this.scanIdentifierNULL = scanIdentifierNULL;
+    this.scanSymbols = scanSymbols;
+    this.scanBinary = scanBinary;
+    this.scanOctal = scanOctal;
+    this.scanFloat = scanFloat;
+    this.scanHex = scanHex;
+    this.scanHexDollar = scanHexDollar;
+    this.scanStringSq = scanStringSq;
+    this.scanStringDq = scanStringDq;
+    this.numbers2Int = numbers2Int;
+    this.int2Float = int2Float;
+    this.identifier2String = identifier2String;
+    this.char2Token = char2Token;
+    this.symbol2Token = symbol2Token;
+    this.scope0Fallback = scope0Fallback;
+    this.storeInt64 = storeInt64;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

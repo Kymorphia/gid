@@ -19,6 +19,24 @@ class BindingEntry
 {
   GtkBindingEntry _cInstance;
 
+  /**
+      Create a `binding_entry.BindingEntry` wrap type.
+      Params:
+        keyval = key value to match
+        modifiers = key modifiers to match
+        destroyed = implementation detail
+        inEmission = implementation detail
+        marksUnbound = implementation detail
+  */
+  this(uint keyval = uint.init, gdk.types.ModifierType modifiers = gdk.types.ModifierType.init, uint destroyed = uint.init, uint inEmission = uint.init, uint marksUnbound = uint.init) nothrow
+  {
+    this.keyval = keyval;
+    this.modifiers = modifiers;
+    this.destroyed = destroyed;
+    this.inEmission = inEmission;
+    this.marksUnbound = marksUnbound;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

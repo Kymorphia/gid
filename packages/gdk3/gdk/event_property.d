@@ -16,6 +16,25 @@ class EventProperty
 {
   GdkEventProperty _cInstance;
 
+  /**
+      Create a `event_property.EventProperty` wrap type.
+      Params:
+        type = the type of the event ([gdk.types.EventType.PropertyNotify]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        time = the time of the event in milliseconds.
+        state = whether the property was changed
+            ([gdk.types.PropertyState.NewValue]) or deleted ([gdk.types.PropertyState.Delete]).
+  */
+  this(gdk.types.EventType type = gdk.types.EventType.init, gdk.window.Window window = gdk.window.Window.init, byte sendEvent = byte.init, uint time = uint.init, gdk.types.PropertyState state = gdk.types.PropertyState.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.time = time;
+    this.state = state;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

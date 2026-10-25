@@ -16,6 +16,16 @@ class SqlTable
 {
   GdaSqlTable _cInstance;
 
+  /**
+      Create a `sql_table.SqlTable` wrap type.
+      Params:
+        tableName = 
+  */
+  this(string tableName = string.init) nothrow
+  {
+    this.tableName = tableName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

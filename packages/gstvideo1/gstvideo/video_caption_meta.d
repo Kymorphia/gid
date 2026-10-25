@@ -16,6 +16,16 @@ class VideoCaptionMeta
 {
   GstVideoCaptionMeta _cInstance;
 
+  /**
+      Create a `video_caption_meta.VideoCaptionMeta` wrap type.
+      Params:
+        captionType = The type of Closed Caption contained in the meta.
+  */
+  this(gstvideo.types.VideoCaptionType captionType = gstvideo.types.VideoCaptionType.init) nothrow
+  {
+    this.captionType = captionType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

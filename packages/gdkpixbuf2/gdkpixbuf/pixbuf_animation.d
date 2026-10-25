@@ -258,10 +258,10 @@ class PixbufAnimation : gobject.object.ObjectWrap
         startTime = time when the animation starts playing
       Returns: an iterator to move over the animation
   */
-  gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal startTime) nothrow
+  gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal* startTime = null) nothrow
   {
     GdkPixbufAnimationIter* _cretval;
-    _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)this._cPtr, cast(const(GTimeVal)*)&startTime);
+    _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)this._cPtr, cast(const(GTimeVal)*)startTime);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
     return _retval;
   }

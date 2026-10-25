@@ -17,6 +17,16 @@ class ClockEntry
 {
   GstClockEntry _cInstance;
 
+  /**
+      Create a `clock_entry.ClockEntry` wrap type.
+      Params:
+        refcount = reference counter (read-only)
+  */
+  this(int refcount = int.init) nothrow
+  {
+    this.refcount = refcount;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

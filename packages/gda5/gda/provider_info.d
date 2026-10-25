@@ -15,6 +15,24 @@ class ProviderInfo
 {
   GdaProviderInfo _cInstance;
 
+  /**
+      Create a `provider_info.ProviderInfo` wrap type.
+      Params:
+        id = the unique identifier of the database provider
+        location = the complete path to the shared library implementing the database provider
+        description = provider's description
+        dsnParams = a #GdaSet containing all the parameters which can/must be specified when opening a connection or defining a named data source (DSN)
+        authParams = a #GdaSet containing all the authentication parameters
+  */
+  this(string id = string.init, string location = string.init, string description = string.init, gda.set.Set dsnParams = gda.set.Set.init, gda.set.Set authParams = gda.set.Set.init) nothrow
+  {
+    this.id = id;
+    this.location = location;
+    this.description = description;
+    this.dsnParams = dsnParams;
+    this.authParams = authParams;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

@@ -17,6 +17,16 @@ class VideoOverlayCompositionMeta
 {
   GstVideoOverlayCompositionMeta _cInstance;
 
+  /**
+      Create a `video_overlay_composition_meta.VideoOverlayCompositionMeta` wrap type.
+      Params:
+        overlay = the attached #GstVideoOverlayComposition
+  */
+  this(gstvideo.video_overlay_composition.VideoOverlayComposition overlay = gstvideo.video_overlay_composition.VideoOverlayComposition.init) nothrow
+  {
+    this.overlay = overlay;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

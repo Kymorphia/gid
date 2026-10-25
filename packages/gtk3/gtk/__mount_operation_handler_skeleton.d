@@ -14,6 +14,13 @@ class MountOperationHandlerSkeleton
 {
   _GtkMountOperationHandlerSkeleton _cInstance;
 
+  /**
+      Create a `__mount_operation_handler_skeleton.MountOperationHandlerSkeleton` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

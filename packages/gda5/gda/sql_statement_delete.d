@@ -12,6 +12,13 @@ class SqlStatementDelete
 {
   GdaSqlStatementDelete _cInstance;
 
+  /**
+      Create a `sql_statement_delete.SqlStatementDelete` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

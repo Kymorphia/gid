@@ -14,6 +14,28 @@ class RTPPayloadInfo
 {
   GstRTPPayloadInfo _cInstance;
 
+  /**
+      Create a `rtppayload_info.RTPPayloadInfo` wrap type.
+      Params:
+        payloadType = payload type, -1 means dynamic
+        media = the media type(s), usually "audio", "video", "application", "text",
+          "message".
+        encodingName = the encoding name of @pt
+        clockRate = default clock rate, 0 = unknown/variable
+        encodingParameters = encoding parameters. For audio this is the number of
+          channels. NULL = not applicable.
+        bitrate = the bitrate of the media. 0 = unknown/variable.
+  */
+  this(ubyte payloadType = ubyte.init, string media = string.init, string encodingName = string.init, uint clockRate = uint.init, string encodingParameters = string.init, uint bitrate = uint.init) nothrow
+  {
+    this.payloadType = payloadType;
+    this.media = media;
+    this.encodingName = encodingName;
+    this.clockRate = clockRate;
+    this.encodingParameters = encodingParameters;
+    this.bitrate = bitrate;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

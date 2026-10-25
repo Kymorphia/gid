@@ -5369,7 +5369,7 @@ void memProfile() nothrow
 */
 void memSetVtable(glib.types.MemVTable vtable) nothrow
 {
-  g_mem_set_vtable(&vtable);
+  g_mem_set_vtable(cast(GMemVTable*)&vtable);
 }
 
 /**
@@ -5876,7 +5876,7 @@ void pointerBitUnlockAndSet(void* address, uint lockBit, void* ptr, size_t prese
 int poll(glib.types.PollFD fds, uint nfds, int timeout) nothrow
 {
   int _retval;
-  _retval = g_poll(&fds, nfds, timeout);
+  _retval = g_poll(cast(GPollFD*)&fds, nfds, timeout);
   return _retval;
 }
 

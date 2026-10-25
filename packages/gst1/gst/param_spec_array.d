@@ -15,6 +15,18 @@ class ParamSpecArray
 {
   GstParamSpecArray _cInstance;
 
+  /**
+      Create a `param_spec_array.ParamSpecArray` wrap type.
+      Params:
+        parentInstance = super class
+        elementSpec = the #GParamSpec of the type of values in the array
+  */
+  this(gobject.param_spec.ParamSpec parentInstance = gobject.param_spec.ParamSpec.init, gobject.param_spec.ParamSpec elementSpec = gobject.param_spec.ParamSpec.init) nothrow
+  {
+    this.parentInstance = parentInstance;
+    this.elementSpec = elementSpec;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

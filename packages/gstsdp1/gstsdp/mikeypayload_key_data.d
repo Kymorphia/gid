@@ -16,6 +16,22 @@ class MIKEYPayloadKeyData
 {
   GstMIKEYPayloadKeyData _cInstance;
 
+  /**
+      Create a `mikeypayload_key_data.MIKEYPayloadKeyData` wrap type.
+      Params:
+        keyType = the #GstMIKEYKeyDataType of @key_data
+        keyLen = length of @key_data
+        saltLen = the length of @salt_data, can be 0
+        kvType = the Key Validity type
+  */
+  this(gstsdp.types.MIKEYKeyDataType keyType = gstsdp.types.MIKEYKeyDataType.init, ushort keyLen = ushort.init, ushort saltLen = ushort.init, gstsdp.types.MIKEYKVType kvType = gstsdp.types.MIKEYKVType.init) nothrow
+  {
+    this.keyType = keyType;
+    this.keyLen = keyLen;
+    this.saltLen = saltLen;
+    this.kvType = kvType;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

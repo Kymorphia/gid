@@ -16,6 +16,16 @@ class BindingSignal
 {
   GtkBindingSignal _cInstance;
 
+  /**
+      Create a `binding_signal.BindingSignal` wrap type.
+      Params:
+        signalName = the action signal to be emitted
+  */
+  this(string signalName = string.init) nothrow
+  {
+    this.signalName = signalName;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

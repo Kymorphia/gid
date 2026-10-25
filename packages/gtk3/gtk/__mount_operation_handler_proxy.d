@@ -14,6 +14,13 @@ class MountOperationHandlerProxy
 {
   _GtkMountOperationHandlerProxy _cInstance;
 
+  /**
+      Create a `__mount_operation_handler_proxy.MountOperationHandlerProxy` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

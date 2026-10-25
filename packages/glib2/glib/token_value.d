@@ -14,6 +14,36 @@ class TokenValue
 {
   GTokenValue _cInstance;
 
+  /**
+      Create a `token_value.TokenValue` wrap type.
+      Params:
+        vIdentifier = token identifier value
+        vBinary = token binary integer value
+        vOctal = octal integer value
+        vInt = integer value
+        vInt64 = 64-bit integer value
+        vFloat = floating point value
+        vHex = hex integer value
+        vString = string value
+        vComment = comment value
+        vChar = character value
+        vError = error value
+  */
+  this(string vIdentifier = string.init, gulong vBinary = gulong.init, gulong vOctal = gulong.init, gulong vInt = gulong.init, ulong vInt64 = ulong.init, double vFloat = 0.0, gulong vHex = gulong.init, string vString = string.init, string vComment = string.init, ubyte vChar = ubyte.init, uint vError = uint.init) nothrow
+  {
+    this.vIdentifier = vIdentifier;
+    this.vBinary = vBinary;
+    this.vOctal = vOctal;
+    this.vInt = vInt;
+    this.vInt64 = vInt64;
+    this.vFloat = vFloat;
+    this.vHex = vHex;
+    this.vString = vString;
+    this.vComment = vComment;
+    this.vChar = vChar;
+    this.vError = vError;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

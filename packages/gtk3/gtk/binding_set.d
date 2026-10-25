@@ -22,6 +22,20 @@ class BindingSet
 {
   GtkBindingSet _cInstance;
 
+  /**
+      Create a `binding_set.BindingSet` wrap type.
+      Params:
+        setName = unique name of this binding set
+        priority = unused
+        parsed = whether this binding set stems from a CSS file and is reset upon theme changes
+  */
+  this(string setName = string.init, int priority = int.init, uint parsed = uint.init) nothrow
+  {
+    this.setName = setName;
+    this.priority = priority;
+    this.parsed = parsed;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

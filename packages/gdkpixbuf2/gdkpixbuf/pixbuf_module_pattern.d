@@ -43,6 +43,21 @@ class PixbufModulePattern
 {
   GdkPixbufModulePattern _cInstance;
 
+  /**
+      Create a `pixbuf_module_pattern.PixbufModulePattern` wrap type.
+      Params:
+        prefix = the prefix for this pattern
+        mask = mask containing bytes which modify how the prefix is matched against
+           test data
+        relevance = relevance of this pattern
+  */
+  this(string prefix = string.init, string mask = string.init, int relevance = int.init) nothrow
+  {
+    this.prefix = prefix;
+    this.mask = mask;
+    this.relevance = relevance;
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {

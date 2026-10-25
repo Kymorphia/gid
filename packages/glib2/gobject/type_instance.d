@@ -14,6 +14,13 @@ class TypeInstance
 {
   GTypeInstance _cInstance;
 
+  /**
+      Create a `type_instance.TypeInstance` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
