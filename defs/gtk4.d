@@ -54,6 +54,11 @@
 //!set class[TextBuffer].glib:signal[insert-text].parameters.parameter[text].type '<array length="2" c:type="gchar*"><type name="char" c:type="char"/></array>'
 //!set interface[Editable].glib:signal[insert-text].parameters.parameter[text].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
 
+//# Fix scope of function pointer arguments
+//!set class[CustomLayout].constructor[new].parameters.parameter[request_mode][scope] forever
+//!set class[CustomLayout].constructor[new].parameters.parameter[measure][scope] forever
+//!set class[CustomLayout].constructor[new].parameters.parameter[allocate][scope] forever
+
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][ignore] 1
 //!set class[CustomSorter].method[set_sort_func][ignore] 1
