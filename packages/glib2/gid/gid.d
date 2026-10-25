@@ -15,6 +15,7 @@ import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
 import glib.c.functions;
 import glib.c.types;
+import glib.types : SOURCE_REMOVE;
 import gobject.object;
 import gobject.c.functions;
 
@@ -852,6 +853,44 @@ if (containerTypeIsSupported!T)
     gFree(data);
 }
 
+/**
+* Free a value in the GLib main context thread using a custom free function.
+* NOTE: This is necessary for many data types which expect to be freed in the main thread.
+* If we aren't in the main context thread, then call to freeCb() will be deferred to run in the C mainloop.
+* That won't happen, if the mainloop is not run again (such as on shutdown), resulting in leaks (preferable to crashing).
+*
+* Params:
+*   value = Pointer to the C value
+*   freeFunc = Function to call to free the data
+*/
+void cValueFreeInMainContext(void* value, GDestroyNotify freeFunc) nothrow
+{
+  alias CFreeFunc = extern(C) void function(void*) nothrow;
+
+  struct ValueAndFunc
+  {
+    void* value;
+    CFreeFunc freeFunc;
+  }
+
+  static extern(C) gboolean freeCb(void* data) nothrow
+  {
+    auto vaf = cast(ValueAndFunc*)data;
+    vaf.freeFunc(vaf.value);
+    gFree(vaf);
+    return SOURCE_REMOVE;
+  }
+
+  if (!g_main_context_is_owner(g_main_context_default())) // Not in main context?
+  {
+    auto vaf = cast(ValueAndFunc*)gMalloc(ValueAndFunc.sizeof);
+    vaf.value = value;
+    vaf.freeFunc = cast(CFreeFunc)freeFunc;
+    g_main_context_invoke(null, &freeCb, cast(void*)vaf); // Free later in main context
+  }
+  else
+    (cast(CFreeFunc)freeFunc)(value); // Free now
+}
 
 /**
 * Check if a type is a boxed struct or class.
@@ -871,7 +910,7 @@ bool isBoxed(T)() nothrow
 *   type = Boxed GType
 * Returns: New allocated pointer to the C boxed value
 */
-static CT* boxedNew(CT)(GType type) nothrow
+CT* boxedNew(CT)(GType type) nothrow
 {
   // There is no function for allocating a boxed value, so stack allocate it and then copy it.
   // NOTE: This could potentially result in a crash if a boxed copy function doesn't expect a zeroed instance.
@@ -891,7 +930,7 @@ static CT* boxedNew(CT)(GType type) nothrow
 *   cBoxed = The C boxed pointer
 * Returns: A copy of the boxed type (returns null if cBoxed is null)
 */
-static void* boxedCopy(GType type, void* cBoxed) nothrow
+void* boxedCopy(GType type, void* cBoxed) nothrow
 {
   return cBoxed ? g_boxed_copy(type, cBoxed) : null;
 }
@@ -902,7 +941,7 @@ static void* boxedCopy(GType type, void* cBoxed) nothrow
 *   type = The boxed type
 *   cBoxed = The C boxed pointer (nothing is done if NULL)
 */
-static void boxedFree(GType type, void* cBoxed) nothrow
+void boxedFree(GType type, void* cBoxed) nothrow
 {
   if (cBoxed)
     g_boxed_free(type, cBoxed);

@@ -29,7 +29,7 @@ class OptionContext
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      g_option_context_free(_cInstancePtr);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_option_context_free);
   }
 
   /** */

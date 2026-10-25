@@ -178,7 +178,7 @@ class Expression
   ~this() nothrow
   {
     if (_cInstancePtr)
-      gtk_expression_unref(_cInstancePtr);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&gtk_expression_unref);
   }
 
 

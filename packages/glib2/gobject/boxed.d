@@ -8,6 +8,9 @@ import gobject.c.types;
 import gobject.types;
 
 
+import glib.c.functions;
+import glib.types;
+
 /// Class wrapper for boxed types
 /** */
 abstract class Boxed
@@ -36,8 +39,34 @@ abstract class Boxed
 
   ~this() nothrow
   {
-    if (_cInstancePtr) // Might be null if an exception occurred during construction
-      g_boxed_free(_gType, _cInstancePtr);
+    if (!_cInstancePtr) // Might be null if an exception occurred during construction
+      return;
+
+    struct TypeAndBoxed
+    {
+      GType type;
+      void* boxedPtr;
+    }
+
+    static extern(C) gboolean freeCb(void* data) nothrow
+    {
+      auto tab = cast(TypeAndBoxed*)data;
+      g_boxed_free(tab.type, tab.boxedPtr);
+      gFree(tab);
+      return SOURCE_REMOVE;
+    }
+
+    // Ensure boxed free occurs in main context as some types are sensitive to this.
+    // NOTE: If the main context is not executed again (such as during shutdown), this could leak (preferable to crashing).
+    if (!g_main_context_is_owner(g_main_context_default())) // Not in main context?
+    {
+      auto tab = cast(TypeAndBoxed*)gMalloc(TypeAndBoxed.sizeof);
+      tab.type = _gType;
+      tab.boxedPtr = _cInstancePtr;
+      g_main_context_invoke(null, &freeCb, cast(void*)tab); // Free later in main context
+    }
+    else
+      g_boxed_free(_gType, _cInstancePtr); // Free now
   }
 
   /**

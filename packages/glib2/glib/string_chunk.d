@@ -48,7 +48,7 @@ class StringChunk
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      g_string_chunk_free(_cInstancePtr);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_string_chunk_free);
   }
 
   /** */

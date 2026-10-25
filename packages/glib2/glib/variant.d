@@ -282,7 +282,7 @@ class Variant
   ~this() nothrow
   {
     if (_cInstancePtr)
-      g_variant_unref(_cInstancePtr);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_variant_unref);
   }
 
 
