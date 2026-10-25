@@ -5,7 +5,6 @@
 //!info capi https://docs.gtk.org/glib/
 
 //!kind OptionEntry StructAlias
-//!kind VariantIter Wrap
 
 //# Disable binding of container types
 //!set record[Array][ignore] 1

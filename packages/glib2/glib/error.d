@@ -47,10 +47,13 @@ class ErrorWrap : Exception
 
   /**
   * Get wrapped C GError pointer.
+  * Params:
+  *   dup = Yes.Dup to duplicate the GError, No.Dup to get it directly (default)
   */
-  void* _cPtr() nothrow @nogc
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow @nogc
   {
-    return cast(void*)errPtr;
+    auto copyFn = cast(GError* function(const(GError)*) @nogc nothrow)&g_error_copy;
+    return cast(void*)((dup && errPtr) ? copyFn(errPtr) : errPtr);
   }
 
   /**

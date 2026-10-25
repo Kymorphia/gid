@@ -6,7 +6,6 @@ public import gid.basictypes;
 public import std.typecons : Flag, No, Tuple, Yes;
 public import std.traits : isCallable, Parameters, ParameterStorageClass, ParameterStorageClassTuple, ReturnType;
 
-import core.exception : OutOfMemoryError;
 import core.memory : GC;
 import core.stdc.string : strlen;
 public import core.stdc.string : memset;
@@ -112,11 +111,7 @@ char* toCString(Flag!"Malloc" malloc = No.Malloc, Flag!"Nullable" nullable = No.
 
   static if (malloc)
   {
-    char* cstr = cast(char*)g_try_malloc(dstr.length + 1);
-
-    if (!cstr)
-      throw new OutOfMemoryError();
-
+    char* cstr = cast(char*)gMalloc(dstr.length + 1);
     cstr[0 .. dstr.length] = dstr[];
     cstr[dstr.length] = '\0';
     return cstr;
@@ -160,7 +155,6 @@ alias gFree = g_free;
 * Params:
 *   s = The zero terminated string to duplicate
 * Returns: The duplicate string
-* Throws: OutOfMemoryError
 */
 char* strdup(const(char)* s) nothrow
 {
@@ -169,13 +163,23 @@ char* strdup(const(char)* s) nothrow
 
   auto len = strlen(s);
 
-  if (auto dup = cast(char*)g_try_malloc(len))
-  {
-    dup[0 .. len] = s[0 .. len];
-    return dup;
-  }
+  auto dup = cast(char*)gMalloc(len);
+  dup[0 .. len] = s[0 .. len];
+  return dup;
+}
 
-  throw new OutOfMemoryError;
+/**
+* Duplicate a struct type to a new gMalloc'd memory buffer.
+* Params:
+*   T = The struct type
+*   data = Pointer to the struct to duplicate
+* Returns: Pointer to a new duplicate structure allocated with gMalloc
+*/
+T* mallocDup(T)(T* data) nothrow
+{
+  auto dup = cast(T*)gMalloc(T.sizeof);
+  *dup = *data;
+  return dup;
 }
 
 /**
@@ -198,16 +202,11 @@ T* arrayDtoC(T, Flag!"Malloc" malloc = No.Malloc, Flag!"ZeroTerm" zeroTerm = No.
   {
     static if (zeroTerm)
     {
-      retArray = cast(T*)g_try_malloc((array.length + 1) * T.sizeof);
-
-      if (retArray)
-        memset(cast(void*)&retArray[array.length], 0, T.sizeof);
+      retArray = cast(T*)gMalloc((array.length + 1) * T.sizeof);
+      memset(cast(void*)&retArray[array.length], 0, T.sizeof);
     }
     else
-      retArray = cast(T*)g_try_malloc(array.length * T.sizeof);
-
-    if (!retArray)
-      throw new OutOfMemoryError;
+      retArray = cast(T*)gMalloc(array.length * T.sizeof);
   }
   else // No.Malloc, local D allocation
   {

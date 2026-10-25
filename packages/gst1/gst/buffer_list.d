@@ -106,46 +106,6 @@ class BufferList : gobject.boxed.Boxed
   }
 
   /**
-      Calls func with data for each buffer in list.
-      
-      func can modify the passed buffer pointer or its contents. The return value
-      of func defines if this function returns or if the remaining buffers in
-      the list should be skipped.
-  
-      Params:
-        func = a #GstBufferListFunc to call
-      Returns: true when func returned true for each buffer in list or when
-        list is empty.
-  */
-  bool foreach_(gst.types.BufferListFunc func) nothrow
-  {
-    extern(C) gboolean _funcCallback(GstBuffer** buffer, uint idx, void* userData) nothrow
-    {
-      bool _dretval;
-      auto _dlg = cast(gst.types.BufferListFunc*)userData;
-      auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
-
-      try
-      {
-        _dretval = (*_dlg)(_buffer, idx);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gst.types.BufferListFunc");
-      }
-      auto _retval = cast(gboolean)_dretval;
-      *buffer = *cast(GstBuffer**)_buffer._cPtr;
-
-      return _retval;
-    }
-    auto _funcCB = func ? &_funcCallback : null;
-    bool _retval;
-    auto _func = func ? cast(void*)&(func) : null;
-    _retval = cast(bool)gst_buffer_list_foreach(cast(GstBufferList*)this._cPtr, _funcCB, _func);
-    return _retval;
-  }
-
-  /**
       Gets the buffer at idx.
       
       You must make sure that idx does not exceed the number of

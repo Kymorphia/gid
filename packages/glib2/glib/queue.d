@@ -13,55 +13,27 @@ import glib.types;
 */
 class Queue
 {
-  GQueue _cInstance;
-
-  /**
-      Create a `queue.Queue` wrap type.
-      Params:
-        length = the number of elements in the queue
-  */
-  this(uint length = uint.init) nothrow
-  {
-    this.length = length;
-  }
+  GQueue* _cInstancePtr;
+  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GQueue*)ptr;
+    _cInstancePtr = cast(GQueue*)ptr;
 
-    if (take)
-      gFree(ptr);
+    owned = take;
   }
 
   ~this() nothrow
   {
-    g_queue_free(&_cInstance);
+    if (owned && _cInstancePtr)
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_queue_free);
   }
 
   /** */
   void* _cPtr() nothrow
   {
-    return cast(void*)&_cInstance;
-  }
-
-  /**
-      Get `length` field.
-      Returns: the number of elements in the queue
-  */
-  @property uint length() nothrow
-  {
-    return (cast(GQueue*)this._cPtr).length;
-  }
-
-  /**
-      Set `length` field.
-      Params:
-        propval = the number of elements in the queue
-  */
-  @property void length(uint propval) nothrow
-  {
-    (cast(GQueue*)this._cPtr).length = propval;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

@@ -5,8 +5,6 @@ public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;
-import glib.scanner_config;
-import glib.token_value;
 import glib.types;
 
 /**
@@ -27,282 +25,27 @@ import glib.types;
 */
 class Scanner
 {
-  GScanner _cInstance;
-
-  /**
-      Create a `scanner.Scanner` wrap type.
-      Params:
-        maxParseErrors = unused
-        parseErrors = [glib.scanner.Scanner.error] increments this field
-        inputName = name of input stream, featured by the default message handler
-        token = token parsed by the last [glib.scanner.Scanner.getNextToken]
-        line = line number of the last token from [glib.scanner.Scanner.getNextToken]
-        position = char number of the last token from [glib.scanner.Scanner.getNextToken]
-        nextToken = token parsed by the last [glib.scanner.Scanner.peekNextToken]
-        nextLine = line number of the last token from [glib.scanner.Scanner.peekNextToken]
-        nextPosition = char number of the last token from [glib.scanner.Scanner.peekNextToken]
-        msgHandler = handler function for _warn and _error
-  */
-  this(uint maxParseErrors = uint.init, uint parseErrors = uint.init, string inputName = string.init, glib.types.TokenType token = glib.types.TokenType.init, uint line = uint.init, uint position = uint.init, glib.types.TokenType nextToken = glib.types.TokenType.init, uint nextLine = uint.init, uint nextPosition = uint.init, GScannerMsgFunc msgHandler = GScannerMsgFunc.init) nothrow
-  {
-    this.maxParseErrors = maxParseErrors;
-    this.parseErrors = parseErrors;
-    this.inputName = inputName;
-    this.token = token;
-    this.line = line;
-    this.position = position;
-    this.nextToken = nextToken;
-    this.nextLine = nextLine;
-    this.nextPosition = nextPosition;
-    this.msgHandler = msgHandler;
-  }
+  GScanner* _cInstancePtr;
+  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GScanner*)ptr;
+    _cInstancePtr = cast(GScanner*)ptr;
 
-    if (take)
-      gFree(ptr);
+    owned = take;
   }
 
   ~this() nothrow
   {
-    g_scanner_destroy(&_cInstance);
+    if (owned && _cInstancePtr)
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_scanner_destroy);
   }
 
   /** */
   void* _cPtr() nothrow
   {
-    return cast(void*)&_cInstance;
-  }
-
-  /**
-      Get `maxParseErrors` field.
-      Returns: unused
-  */
-  @property uint maxParseErrors() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).maxParseErrors;
-  }
-
-  /**
-      Set `maxParseErrors` field.
-      Params:
-        propval = unused
-  */
-  @property void maxParseErrors(uint propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).maxParseErrors = propval;
-  }
-
-  /**
-      Get `parseErrors` field.
-      Returns: [glib.scanner.Scanner.error] increments this field
-  */
-  @property uint parseErrors() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).parseErrors;
-  }
-
-  /**
-      Set `parseErrors` field.
-      Params:
-        propval = [glib.scanner.Scanner.error] increments this field
-  */
-  @property void parseErrors(uint propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).parseErrors = propval;
-  }
-
-  /**
-      Get `inputName` field.
-      Returns: name of input stream, featured by the default message handler
-  */
-  @property string inputName() nothrow
-  {
-    return cToD!(string)(cast(void*)(cast(GScanner*)this._cPtr).inputName);
-  }
-
-  /**
-      Set `inputName` field.
-      Params:
-        propval = name of input stream, featured by the default message handler
-  */
-  @property void inputName(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GScanner*)this._cPtr).inputName);
-    dToC(propval, cast(void*)&(cast(GScanner*)this._cPtr).inputName);
-  }
-
-  /**
-      Get `qdata` field.
-      Returns: quarked data
-  */
-  @property glib.types.Data qdata() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).qdata;
-  }
-
-  /**
-      Get `config` field.
-      Returns: link into the scanner configuration
-  */
-  @property glib.scanner_config.ScannerConfig config() nothrow
-  {
-    return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)this._cPtr).config, No.Take);
-  }
-
-  /**
-      Get `token` field.
-      Returns: token parsed by the last [glib.scanner.Scanner.getNextToken]
-  */
-  @property glib.types.TokenType token() nothrow
-  {
-    return cast(glib.types.TokenType)(cast(GScanner*)this._cPtr).token;
-  }
-
-  /**
-      Set `token` field.
-      Params:
-        propval = token parsed by the last [glib.scanner.Scanner.getNextToken]
-  */
-  @property void token(glib.types.TokenType propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).token = cast(GTokenType)propval;
-  }
-
-  /**
-      Get `value` field.
-      Returns: value of the last token from [glib.scanner.Scanner.getNextToken]
-  */
-  @property glib.token_value.TokenValue value() nothrow
-  {
-    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).value, No.Take);
-  }
-
-  /**
-      Get `line` field.
-      Returns: line number of the last token from [glib.scanner.Scanner.getNextToken]
-  */
-  @property uint line() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).line;
-  }
-
-  /**
-      Set `line` field.
-      Params:
-        propval = line number of the last token from [glib.scanner.Scanner.getNextToken]
-  */
-  @property void line(uint propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).line = propval;
-  }
-
-  /**
-      Get `position` field.
-      Returns: char number of the last token from [glib.scanner.Scanner.getNextToken]
-  */
-  @property uint position() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).position;
-  }
-
-  /**
-      Set `position` field.
-      Params:
-        propval = char number of the last token from [glib.scanner.Scanner.getNextToken]
-  */
-  @property void position(uint propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).position = propval;
-  }
-
-  /**
-      Get `nextToken` field.
-      Returns: token parsed by the last [glib.scanner.Scanner.peekNextToken]
-  */
-  @property glib.types.TokenType nextToken() nothrow
-  {
-    return cast(glib.types.TokenType)(cast(GScanner*)this._cPtr).nextToken;
-  }
-
-  /**
-      Set `nextToken` field.
-      Params:
-        propval = token parsed by the last [glib.scanner.Scanner.peekNextToken]
-  */
-  @property void nextToken(glib.types.TokenType propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).nextToken = cast(GTokenType)propval;
-  }
-
-  /**
-      Get `nextValue` field.
-      Returns: value of the last token from [glib.scanner.Scanner.peekNextToken]
-  */
-  @property glib.token_value.TokenValue nextValue() nothrow
-  {
-    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).nextValue, No.Take);
-  }
-
-  /**
-      Get `nextLine` field.
-      Returns: line number of the last token from [glib.scanner.Scanner.peekNextToken]
-  */
-  @property uint nextLine() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).nextLine;
-  }
-
-  /**
-      Set `nextLine` field.
-      Params:
-        propval = line number of the last token from [glib.scanner.Scanner.peekNextToken]
-  */
-  @property void nextLine(uint propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).nextLine = propval;
-  }
-
-  /**
-      Get `nextPosition` field.
-      Returns: char number of the last token from [glib.scanner.Scanner.peekNextToken]
-  */
-  @property uint nextPosition() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).nextPosition;
-  }
-
-  /**
-      Set `nextPosition` field.
-      Params:
-        propval = char number of the last token from [glib.scanner.Scanner.peekNextToken]
-  */
-  @property void nextPosition(uint propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).nextPosition = propval;
-  }
-
-  /**
-      Get `msgHandler` field.
-      Returns: handler function for _warn and _error
-  */
-  @property GScannerMsgFunc msgHandler() nothrow
-  {
-    return (cast(GScanner*)this._cPtr).msgHandler;
-  }
-
-  /**
-      Set `msgHandler` field.
-      Params:
-        propval = handler function for _warn and _error
-  */
-
-  @property void msgHandler(GScannerMsgFunc propval) nothrow
-  {
-    (cast(GScanner*)this._cPtr).msgHandler = propval;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

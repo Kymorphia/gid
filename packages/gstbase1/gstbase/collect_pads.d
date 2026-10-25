@@ -336,7 +336,7 @@ class CollectPads : gst.object.ObjectWrap
     {
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsClipFunction*)userData;
-      auto _outbuffer = new gst.buffer.Buffer(outbuffer, No.Take);
+      gst.buffer.Buffer _outbuffer;
 
       try
       {
@@ -347,7 +347,7 @@ class CollectPads : gst.object.ObjectWrap
         gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsClipFunction");
       }
       auto _retval = cast(GstFlowReturn)_dretval;
-      *outbuffer = *cast(GstBuffer**)_outbuffer._cPtr;
+      *outbuffer = _outbuffer ? cast(GstBuffer*)_outbuffer._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

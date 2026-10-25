@@ -38,9 +38,9 @@ class MetaView
   }
 
   /** */
-  void* _cPtr() nothrow
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return cast(void*)&_cInstance;
+    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
   /**

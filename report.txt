@@ -9,7 +9,7 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   76    0    0   100 | 1256    1    9  99.3 |    0    0    0   100 |  144    0   11  92.9 |
+glib2                      |   76    0    0   100 | 1256    1    9  99.3 |    0    0    0   100 |  127    0    9  93.4 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   13    0    2  86.7 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  135    0    5  96.4 |
@@ -20,7 +20,7 @@ gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4 
 gio2                       |  178    0    0   100 | 1727    0   17  99.0 |   81    0    0   100 |   63    0    5  92.6 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   51    0    0   100 |  257    0   14  94.8 |    0    0    0   100 |   12    0    1  92.3 |
-gst1                       |   89    0    0   100 | 1396    0   23  98.4 |   23    0    0   100 |  129    0    4  97.0 |
+gst1                       |   89    0    0   100 | 1394    0   25  98.2 |   23    0    0   100 |  129    0    4  97.0 |
 gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    6    0    0   100 |   48    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  212    0   10  95.5 |    0    0    0   100 |   54    0   11  83.1 |
@@ -156,6 +156,8 @@ gsk.shadow_node.ShadowNode.new_
 gsk.text_node.TextNode.getGlyphs
 gst.buffer.Buffer.newWrapped
 gst.buffer.Buffer.extract
+gst.buffer.Buffer.foreachMeta
+gst.buffer_list.BufferList.foreach_
 gst.caps_features.CapsFeatures.setParentRefcount
 gst.element_factory.ElementFactory.getStaticPadTemplates
 gst.iterator.Iterator.findCustom
@@ -354,10 +356,8 @@ glib.hook.Hook.func
 glib.node.Node.data
 glib.once.Once.retval
 glib.types.OptionEntry.argData
-glib.scanner.Scanner.userData
 glib.types.ThreadFunctions.threadCreate
 glib.types.ThreadFunctions.threadSetPriority
-glib.thread_pool.ThreadPool.userData
 glib.token_value.TokenValue.vSymbol
 glib.types.UnixPipe.fds
 gmime.encoding.Encoding.uubuf

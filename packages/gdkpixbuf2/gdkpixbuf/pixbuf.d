@@ -1512,7 +1512,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       ubyte[] _buf;
       _buf.length = count;
       _buf[0 .. count] = buf[0 .. count];
-      auto _error = new glib.error.ErrorWrap(error, No.Take);
+      glib.error.ErrorWrap _error;
 
       try
       {
@@ -1523,7 +1523,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         gidInvokeCallbackExceptionHandler(e, "gdkpixbuf.types.PixbufSaveFunc");
       }
       auto _retval = cast(gboolean)_dretval;
-      *error = *cast(GError**)_error._cPtr;
+      *error = _error ? cast(GError*)_error._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

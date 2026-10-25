@@ -14,33 +14,27 @@ import glib.variant;
 */
 class VariantIter
 {
-  GVariantIter _cInstance;
-
-  /**
-      Create a `variant_iter.VariantIter` wrap type.
-  */
-  this() nothrow
-  {
-  }
+  GVariantIter* _cInstancePtr;
+  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GVariantIter*)ptr;
+    _cInstancePtr = cast(GVariantIter*)ptr;
 
-    if (take)
-      gFree(ptr);
+    owned = take;
   }
 
   ~this() nothrow
   {
-    g_variant_iter_free(&_cInstance);
+    if (owned && _cInstancePtr)
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_variant_iter_free);
   }
 
   /** */
   void* _cPtr() nothrow
   {
-    return cast(void*)&_cInstance;
+    return cast(void*)_cInstancePtr;
   }
 
   /**

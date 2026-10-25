@@ -335,43 +335,6 @@ alias ValueTable = GstValueTable;
 // Callbacks
 
 /**
-    A function that will be called from [gst.buffer.Buffer.foreachMeta]. The meta
-    field will point to a the reference of the meta.
-    
-    buffer should not be modified from this callback.
-    
-    When this function returns true, the next meta will be
-    returned. When false is returned, [gst.buffer.Buffer.foreachMeta] will return.
-    
-    When meta is set to null, the item will be removed from the buffer.
-
-    Params:
-      buffer = a #GstBuffer
-      meta = a pointer to a #GstMeta
-    Returns: false when [gst.buffer.Buffer.foreachMeta] should stop
-*/
-alias BufferForeachMetaFunc = bool delegate(gst.buffer.Buffer buffer, out gst.meta.Meta meta);
-
-/**
-    A function that will be called from [gst.buffer_list.BufferList.foreach_]. The buffer
-    field will point to a the reference of the buffer at idx.
-    
-    When this function returns true, the next buffer will be
-    returned. When false is returned, [gst.buffer_list.BufferList.foreach_] will return.
-    
-    When buffer is set to null, the item will be removed from the bufferlist.
-    When buffer has been made writable, the new buffer reference can be assigned
-    to buffer. This function is responsible for unreffing the old buffer when
-    removing or modifying.
-
-    Params:
-      buffer = pointer to the buffer
-      idx = the index of buffer
-    Returns: false when [gst.buffer_list.BufferList.foreach_] should stop
-*/
-alias BufferListFunc = bool delegate(out gst.buffer.Buffer buffer, uint idx);
-
-/**
     Specifies the type of function passed to [gst.bus.Bus.addWatch] or
     [gst.bus.Bus.addWatchFull], which is called from the mainloop when a message
     is available on the bus.

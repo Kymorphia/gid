@@ -306,7 +306,7 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.Objec
   extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
   {
     gst.types.FlowReturn _dretval;
-    auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
+    gst.buffer.Buffer _buffer;
 
     try
     {
@@ -317,7 +317,7 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.Objec
       gidInvokeCallbackExceptionHandler(e, "gstbase.types.TypeFindHelperGetRangeFunction");
     }
     auto _retval = cast(GstFlowReturn)_dretval;
-    *buffer = *cast(GstBuffer**)_buffer._cPtr;
+    *buffer = _buffer ? cast(GstBuffer*)_buffer._cPtr(Yes.Dup) : null;
 
     return _retval;
   }
@@ -365,7 +365,7 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
   extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
   {
     gst.types.FlowReturn _dretval;
-    auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
+    gst.buffer.Buffer _buffer;
 
     try
     {
@@ -376,7 +376,7 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
       gidInvokeCallbackExceptionHandler(e, "gstbase.types.TypeFindHelperGetRangeFunction");
     }
     auto _retval = cast(GstFlowReturn)_dretval;
-    *buffer = *cast(GstBuffer**)_buffer._cPtr;
+    *buffer = _buffer ? cast(GstBuffer*)_buffer._cPtr(Yes.Dup) : null;
 
     return _retval;
   }

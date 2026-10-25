@@ -38,77 +38,27 @@ import glib.types;
 */
 class ThreadPool
 {
-  GThreadPool _cInstance;
-
-  /**
-      Create a `thread_pool.ThreadPool` wrap type.
-      Params:
-        func = the function to execute in the threads of this pool
-        exclusive = are all threads exclusive to this pool
-  */
-  this(GFunc func = GFunc.init, bool exclusive = bool.init) nothrow
-  {
-    this.func = func;
-    this.exclusive = exclusive;
-  }
+  GThreadPool* _cInstancePtr;
+  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GThreadPool*)ptr;
+    _cInstancePtr = cast(GThreadPool*)ptr;
 
-    if (take)
-      gFree(ptr);
+    owned = take;
   }
 
   ~this() nothrow
   {
-    freePool(&_cInstance);
+    if (owned && _cInstancePtr)
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&freePool);
   }
 
   /** */
   void* _cPtr() nothrow
   {
-    return cast(void*)&_cInstance;
-  }
-
-  /**
-      Get `func` field.
-      Returns: the function to execute in the threads of this pool
-  */
-  @property GFunc func() nothrow
-  {
-    return (cast(GThreadPool*)this._cPtr).func;
-  }
-
-  /**
-      Set `func` field.
-      Params:
-        propval = the function to execute in the threads of this pool
-  */
-
-  @property void func(GFunc propval) nothrow
-  {
-    (cast(GThreadPool*)this._cPtr).func = propval;
-  }
-
-  /**
-      Get `exclusive` field.
-      Returns: are all threads exclusive to this pool
-  */
-  @property bool exclusive() nothrow
-  {
-    return cast(bool)(cast(GThreadPool*)this._cPtr).exclusive;
-  }
-
-  /**
-      Set `exclusive` field.
-      Params:
-        propval = are all threads exclusive to this pool
-  */
-  @property void exclusive(bool propval) nothrow
-  {
-    (cast(GThreadPool*)this._cPtr).exclusive = propval;
+    return cast(void*)_cInstancePtr;
   }
 
   private static void freePool(GThreadPool* pool) nothrow

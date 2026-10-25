@@ -266,7 +266,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.TreeModelFilterModifyFunc*)data;
-      auto _value = new gobject.value.Value(value, No.Take);
+      gobject.value.Value _value;
 
       try
       {
@@ -276,7 +276,12 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeModelFilterModifyFunc");
       }
-      *value = *cast(GValue*)_value._cPtr;
+      if (_value)
+      {
+        auto p_ = _value._cPtr(Yes.Dup);
+        *value = *cast(GValue*)p_;
+        gFree(p_);
+      }
 
     }
     auto _funcCB = func ? &_funcCallback : null;
