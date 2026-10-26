@@ -26,7 +26,7 @@ class TestSuite
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_test_suite_free);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_test_suite_free)());
   }
 
   /** */

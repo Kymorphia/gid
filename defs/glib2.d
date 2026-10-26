@@ -324,7 +324,7 @@
 //!set record[ThreadPool][free-function] freePool
 //!class ThreadPool
 
-  private static void freePool(GThreadPool* pool) nothrow
+  private static extern(C) void freePool(GThreadPool* pool) nothrow
   {
     g_thread_pool_free(pool, true, false); // immediate, wait
   }

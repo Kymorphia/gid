@@ -28,7 +28,7 @@ class VariantIter
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_variant_iter_free);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_variant_iter_free)());
   }
 
   /** */

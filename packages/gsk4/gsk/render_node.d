@@ -42,7 +42,7 @@ class RenderNode
   ~this() nothrow
   {
     if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&gsk_render_node_unref);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(gsk_render_node_unref)());
   }
 
 

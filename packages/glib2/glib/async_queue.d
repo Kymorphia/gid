@@ -29,7 +29,7 @@ class AsyncQueue
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_async_queue_unref);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_async_queue_unref)());
   }
 
   /** */

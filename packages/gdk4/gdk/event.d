@@ -38,7 +38,7 @@ class Event
   ~this() nothrow
   {
     if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&gdk_event_unref);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(gdk_event_unref)());
   }
 
 

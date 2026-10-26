@@ -39,7 +39,7 @@ class ParamSpec
   ~this() nothrow
   {
     if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_param_spec_unref);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_param_spec_unref)());
   }
 
 

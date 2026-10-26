@@ -28,7 +28,7 @@ class Sequence
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_sequence_free);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_sequence_free)());
   }
 
   /** */

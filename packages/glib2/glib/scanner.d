@@ -39,7 +39,7 @@ class Scanner
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&g_scanner_destroy);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_scanner_destroy)());
   }
 
   /** */

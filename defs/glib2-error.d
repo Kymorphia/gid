@@ -42,7 +42,7 @@ class ErrorWrap : Exception
    */
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow @nogc
   {
-    auto copyFn = cast(GError* function(const(GError)*) @nogc nothrow)&g_error_copy;
+    auto copyFn = cast(GError* function(const(GError)*) @nogc nothrow)g_error_copy;
     return cast(void*)((dup && errPtr) ? copyFn(errPtr) : errPtr);
   }
 

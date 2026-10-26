@@ -24,6 +24,15 @@ enum GidOwnership
   Full, /// Owns container and the items in it
 }
 
+/// Get a C function pointer from either a gid C function variable or a real (extern(C)/static) D function
+auto cFuncPtr(alias f)() nothrow @nogc
+{
+  static if (is(typeof(f) == function))
+    return cast(void*)&f; // Real function: take its address
+  else
+    return cast(void*)f; // Function pointer variable: use its value
+}
+
 /**
  * Prevent the garbage collector from freeing or moving a memory region.
  * Necessary when passing data to C which might not have any remaining pointers to it in D heap memory.

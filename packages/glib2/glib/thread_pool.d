@@ -52,7 +52,7 @@ class ThreadPool
   ~this() nothrow
   {
     if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)&freePool);
+      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(freePool)());
   }
 
   /** */
@@ -61,7 +61,7 @@ class ThreadPool
     return cast(void*)_cInstancePtr;
   }
 
-  private static void freePool(GThreadPool* pool) nothrow
+  private static extern(C) void freePool(GThreadPool* pool) nothrow
   {
     g_thread_pool_free(pool, true, false); // immediate, wait
   }
