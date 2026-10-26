@@ -37,7 +37,7 @@ gstrtsp1                   |   15    0    0   100 |  138    0    2  98.6 |    1 
 gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   81    0    8  91.0 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   58    0    0   100 |  371    0    8  97.9 |    2    0    0   100 |  159    0   28  85.0 |
-gtk3                       |  345    0    0   100 | 3765    0   22  99.4 |  447    0    0   100 |  154    0    5  96.9 |
+gtk3                       |  345    0    0   100 | 3763    0   23  99.4 |  447    0    0   100 |  154    0    5  96.9 |
 gtk4                       |  320    0    0   100 | 3578    0   13  99.6 |  345    0    0   100 |   34    0    4  89.5 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   49    0    0   100 |  448    0    0   100 |   30    0    0   100 |    0    0    0   100 |
@@ -251,6 +251,7 @@ gtk.global.initWithArgs
 gtk.global.parseArgs
 gtk.global.stockAdd
 gtk.global.stockAddStatic
+gtk.global.targetTableNewFromList
 gtk.global.targetsIncludeImage
 gtk.global.targetsIncludeRichText
 gtk.global.targetsIncludeText

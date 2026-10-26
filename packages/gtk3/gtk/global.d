@@ -36,7 +36,6 @@ import gtk.stock_item;
 import gtk.style;
 import gtk.style_context;
 import gtk.target_entry;
-import gtk.target_list;
 import gtk.tree_model;
 import gtk.tree_path;
 import gtk.types;
@@ -2816,54 +2815,6 @@ void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func) nothrow
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   gtk_stock_set_translate_func(_domain, _funcCB, _func, _funcDestroyCB);
-}
-
-/**
-    This function frees a target table as returned by
-    [gtk.global.targetTableNewFromList]
-
-    Params:
-      targets = a #GtkTargetEntry array
-*/
-void targetTableFree(gtk.target_entry.TargetEntry[] targets) nothrow
-{
-  int _nTargets;
-  if (targets)
-    _nTargets = cast(int)targets.length;
-
-  GtkTargetEntry[] _tmptargets;
-  foreach (obj; targets)
-    _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
-  GtkTargetEntry* _targets = _tmptargets.ptr;
-
-  gtk_target_table_free(_targets, _nTargets);
-}
-
-/**
-    This function creates an #GtkTargetEntry array that contains the
-    same targets as the passed `list`. The returned table is newly
-    allocated and should be freed using [gtk.global.targetTableFree] when no
-    longer needed.
-
-    Params:
-      list = a #GtkTargetList
-    Returns: the new table.
-*/
-gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList list) nothrow
-{
-  GtkTargetEntry* _cretval;
-  int _cretlength;
-  _cretval = gtk_target_table_new_from_list(list ? cast(GtkTargetList*)list._cPtr(No.Dup) : null, &_cretlength);
-  gtk.target_entry.TargetEntry[] _retval;
-
-  if (_cretval)
-  {
-    _retval = new gtk.target_entry.TargetEntry[_cretlength];
-    foreach (i; 0 .. _cretlength)
-      _retval[i] = new gtk.target_entry.TargetEntry(cast(void*)&_cretval[i], Yes.Take);
-    gFree(cast(void*)_cretval);
-  }
-  return _retval;
 }
 
 /**

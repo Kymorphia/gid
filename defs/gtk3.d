@@ -29,6 +29,7 @@
 
 //# Ignore unimportant APIs
 //!set callback[ModuleInitFunc][ignore] 1
+//!set function[target_table_free][ignore] 1
 
 //# Ignore user data parameter
 //!set interface[Buildable].method[custom_tag_end][ignore] 1
