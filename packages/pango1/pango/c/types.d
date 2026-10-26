@@ -2057,13 +2057,16 @@ struct PangoAttrSize
   */
   int size;
 
+  mixin(bitfields!(
   /**
       whether the font size is in device units or points.
         This field is only present for compatibility with Pango-1.8.0
         ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
         be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
   */
-  uint absolute;
+  uint, "absolute", 1,
+  uint, "", 31));
+
 }
 
 /**
@@ -2659,15 +2662,17 @@ struct PangoGlyphString
 */
 struct PangoGlyphVisAttr
 {
+  mixin(bitfields!(
   /**
       set for the first logical glyph in each cluster.
   */
-  uint isClusterStart;
-
+  uint, "isClusterStart", 1,
   /**
       set if the the font will render this glyph with color. Since 1.50
   */
-  uint isColor;
+  uint, "isColor", 1,
+  uint, "", 30));
+
 }
 
 /**
@@ -2794,15 +2799,17 @@ struct PangoLayoutLine
   */
   GSList* runs;
 
+  mixin(bitfields!(
   /**
       #TRUE if this is the first line of the paragraph
   */
-  uint isParagraphStart;
-
+  uint, "isParagraphStart", 1,
   /**
       #Resolved PangoDirection of line
   */
-  uint resolvedDir;
+  uint, "resolvedDir", 3,
+  uint, "", 28));
+
 }
 
 /**
@@ -2811,26 +2818,23 @@ struct PangoLayoutLine
 */
 struct PangoLogAttr
 {
+  mixin(bitfields!(
   /**
       if set, can break line in front of character
   */
-  uint isLineBreak;
-
+  uint, "isLineBreak", 1,
   /**
       if set, must break line in front of character
   */
-  uint isMandatoryBreak;
-
+  uint, "isMandatoryBreak", 1,
   /**
       if set, can break here when doing character wrapping
   */
-  uint isCharBreak;
-
+  uint, "isCharBreak", 1,
   /**
       is whitespace character
   */
-  uint isWhite;
-
+  uint, "isWhite", 1,
   /**
       if set, cursor can appear in front of character.
         i.e. this is a grapheme boundary, or the first character in the text.
@@ -2838,20 +2842,17 @@ struct PangoLogAttr
         [Grapheme Cluster Boundaries](http://www.unicode.org/reports/tr29/)
         semantics.
   */
-  uint isCursorPosition;
-
+  uint, "isCursorPosition", 1,
   /**
       is first character in a word
   */
-  uint isWordStart;
-
+  uint, "isWordStart", 1,
   /**
       is first non-word char after a word
         Note that in degenerate cases, you could have both @is_word_start
         and @is_word_end set for some character.
   */
-  uint isWordEnd;
-
+  uint, "isWordEnd", 1,
   /**
       is a sentence boundary.
         There are two ways to divide sentences. The first assigns all
@@ -2861,21 +2862,18 @@ struct PangoLogAttr
         between-sentence spaces, etc. to any sentence, so
         @is_sentence_start/@is_sentence_end mark the boundaries of those sentences.
   */
-  uint isSentenceBoundary;
-
+  uint, "isSentenceBoundary", 1,
   /**
       is first character in a sentence
   */
-  uint isSentenceStart;
-
+  uint, "isSentenceStart", 1,
   /**
       is first char after a sentence.
         Note that in degenerate cases, you could have both @is_sentence_start
         and @is_sentence_end set for some character. (e.g. no space after a
         period, so the next sentence starts right away)
   */
-  uint isSentenceEnd;
-
+  uint, "isSentenceEnd", 1,
   /**
       if set, backspace deletes one character
         rather than the entire grapheme cluster. This field is only meaningful
@@ -2885,14 +2883,12 @@ struct PangoLogAttr
         implementation of `func@break`, this bit is set on all grapheme boundaries
         except those following Latin, Cyrillic or Greek base characters.
   */
-  uint backspaceDeletesCharacter;
-
+  uint, "backspaceDeletesCharacter", 1,
   /**
       is a whitespace character that can possibly be
         expanded for justification purposes. (Since: 1.18)
   */
-  uint isExpandableSpace;
-
+  uint, "isExpandableSpace", 1,
   /**
       is a word boundary, as defined by UAX#29.
         More specifically, means that this is not a position in the middle of a word.
@@ -2901,22 +2897,19 @@ struct PangoLogAttr
         implements Unicode's [Word Boundaries](http://www.unicode.org/reports/tr29/)
         semantics. (Since: 1.22)
   */
-  uint isWordBoundary;
-
+  uint, "isWordBoundary", 1,
   /**
       when breaking lines before this char, insert a hyphen.
         Since: 1.50
   */
-  uint breakInsertsHyphen;
-
+  uint, "breakInsertsHyphen", 1,
   /**
       when breaking lines before this char, remove the
         preceding char. Since 1.50
   */
-  uint breakRemovesPreceding;
+  uint, "breakRemovesPreceding", 1,
+  uint, "reserved", 17));
 
-  /** */
-  uint reserved;
 }
 
 /**

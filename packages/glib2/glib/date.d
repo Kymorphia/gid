@@ -56,32 +56,31 @@ struct Date
   */
   uint julianDays;
 
+  mixin(bitfields!(
   /**
       this bit is set if @julian_days is valid
   */
-  uint julian;
-
+  uint, "julian", 1,
   /**
       this is set if @day, @month and @year are valid
   */
-  uint dmy;
-
+  uint, "dmy", 1,
   /**
       the day of the day-month-year representation of the date,
         as a number between 1 and 31
   */
-  uint day;
-
+  uint, "day", 6,
   /**
       the month of the day-month-year representation of the date,
         as a number between 1 and 12
   */
-  uint month;
-
+  uint, "month", 4,
   /**
       the year of the day-month-year representation of the date
   */
-  uint year;
+  uint, "year", 16,
+  uint, "", 4));
+
 
   /** */
   static GType _getGType() nothrow

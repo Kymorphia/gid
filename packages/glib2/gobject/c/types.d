@@ -538,41 +538,25 @@ struct GCClosure
 */
 struct GClosure
 {
-  /** */
-  uint refCount;
-
-  /** */
-  uint metaMarshalNouse;
-
-  /** */
-  uint nGuards;
-
-  /** */
-  uint nFnotifiers;
-
-  /** */
-  uint nInotifiers;
-
-  /** */
-  uint inInotify;
-
-  /** */
-  uint floating;
-
-  /** */
-  uint derivativeFlag;
-
+  mixin(bitfields!(
+  uint, "refCount", 15,
+  uint, "metaMarshalNouse", 1,
+  uint, "nGuards", 1,
+  uint, "nFnotifiers", 2,
+  uint, "nInotifiers", 8,
+  uint, "inInotify", 1,
+  uint, "floating", 1,
+  uint, "derivativeFlag", 1,
   /**
       Indicates whether the closure is currently being invoked with
         [gobject.closure.Closure.invoke]
   */
-  uint inMarshal;
-
+  uint, "inMarshal", 1,
   /**
       Indicates whether the closure has been invalidated by
         [gobject.closure.Closure.invalidate]
   */
-  uint isInvalid;
+  uint, "isInvalid", 1));
 
   /** */
   extern(C) void function(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData) marshal;
@@ -1463,15 +1447,17 @@ struct GParamSpecString
   */
   char substitutor;
 
+  mixin(bitfields!(
   /**
       replace empty string by null
   */
-  uint nullFoldIfEmpty;
-
+  uint, "nullFoldIfEmpty", 1,
   /**
       replace null strings by an empty string
   */
-  uint ensureNonNull;
+  uint, "ensureNonNull", 1,
+  uint, "", 30));
+
 }
 
 /**

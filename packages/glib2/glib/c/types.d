@@ -4966,32 +4966,31 @@ struct GDate
   */
   uint julianDays;
 
+  mixin(bitfields!(
   /**
       this bit is set if @julian_days is valid
   */
-  uint julian;
-
+  uint, "julian", 1,
   /**
       this is set if @day, @month and @year are valid
   */
-  uint dmy;
-
+  uint, "dmy", 1,
   /**
       the day of the day-month-year representation of the date,
         as a number between 1 and 31
   */
-  uint day;
-
+  uint, "day", 6,
   /**
       the month of the day-month-year representation of the date,
         as a number between 1 and 12
   */
-  uint month;
-
+  uint, "month", 4,
   /**
       the year of the day-month-year representation of the date
   */
-  uint year;
+  uint, "year", 16,
+  uint, "", 4));
+
 }
 
 /**
@@ -5182,15 +5181,16 @@ struct GHookList
   */
   gulong seqId;
 
+  mixin(bitfields!(
   /**
       the size of the #GHookList elements, in bytes
   */
-  uint hookSize;
-
+  uint, "hookSize", 16,
   /**
       1 if the #GHookList has been initialized
   */
-  uint isSetup;
+  uint, "isSetup", 1,
+  uint, "", 15));
 
   /**
       the first #GHook element in the list
@@ -6356,136 +6356,117 @@ struct GScannerConfig
   */
   char* cpairCommentSingle;
 
+  mixin(bitfields!(
   /**
       specifies if symbols are case sensitive (the
           default is false).
   */
-  uint caseSensitive;
-
+  uint, "caseSensitive", 1,
   /**
       specifies if multi-line comments are skipped
           and not returned as tokens (the default is true).
   */
-  uint skipCommentMulti;
-
+  uint, "skipCommentMulti", 1,
   /**
       specifies if single-line comments are skipped
           and not returned as tokens (the default is true).
   */
-  uint skipCommentSingle;
-
+  uint, "skipCommentSingle", 1,
   /**
       specifies if multi-line comments are recognized
           (the default is true).
   */
-  uint scanCommentMulti;
-
+  uint, "scanCommentMulti", 1,
   /**
       specifies if identifiers are recognized (the
           default is true).
   */
-  uint scanIdentifier;
-
+  uint, "scanIdentifier", 1,
   /**
       specifies if single-character
           identifiers are recognized (the default is false).
   */
-  uint scanIdentifier1char;
-
+  uint, "scanIdentifier1char", 1,
   /**
       specifies if null is reported as
           `G_TOKEN_IDENTIFIER_NULL` (the default is false).
   */
-  uint scanIdentifierNULL;
-
+  uint, "scanIdentifierNULL", 1,
   /**
       specifies if symbols are recognized (the default
           is true).
   */
-  uint scanSymbols;
-
+  uint, "scanSymbols", 1,
   /**
       specifies if binary numbers are recognized (the
           default is false).
   */
-  uint scanBinary;
-
+  uint, "scanBinary", 1,
   /**
       specifies if octal numbers are recognized (the
           default is true).
   */
-  uint scanOctal;
-
+  uint, "scanOctal", 1,
   /**
       specifies if floating point numbers are recognized
           (the default is true).
   */
-  uint scanFloat;
-
+  uint, "scanFloat", 1,
   /**
       specifies if hexadecimal numbers are recognized (the
           default is true).
   */
-  uint scanHex;
-
+  uint, "scanHex", 1,
   /**
       specifies if '$' is recognized as a prefix for
           hexadecimal numbers (the default is false).
   */
-  uint scanHexDollar;
-
+  uint, "scanHexDollar", 1,
   /**
       specifies if strings can be enclosed in single
           quotes (the default is true).
   */
-  uint scanStringSq;
-
+  uint, "scanStringSq", 1,
   /**
       specifies if strings can be enclosed in double
           quotes (the default is true).
   */
-  uint scanStringDq;
-
+  uint, "scanStringDq", 1,
   /**
       specifies if binary, octal and hexadecimal numbers
           are reported as `G_TOKEN_INT` (the default is true).
   */
-  uint numbers2Int;
-
+  uint, "numbers2Int", 1,
   /**
       specifies if all numbers are reported as `G_TOKEN_FLOAT`
           (the default is false).
   */
-  uint int2Float;
-
+  uint, "int2Float", 1,
   /**
       specifies if identifiers are reported as strings
           (the default is false).
   */
-  uint identifier2String;
-
+  uint, "identifier2String", 1,
   /**
       specifies if characters are reported by setting
           `token = ch` or as `G_TOKEN_CHAR` (the default is true).
   */
-  uint char2Token;
-
+  uint, "char2Token", 1,
   /**
       specifies if symbols are reported by setting
           `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
   */
-  uint symbol2Token;
-
+  uint, "symbol2Token", 1,
   /**
       specifies if a symbol is searched for in the
           default scope in addition to the current scope (the default is false).
   */
-  uint scope0Fallback;
-
+  uint, "scope0Fallback", 1,
   /**
       use value.v_int64 rather than v_int
   */
-  uint storeInt64;
+  uint, "storeInt64", 1,
+  uint, "", 10));
 
   /** */
   uint paddingDummy;

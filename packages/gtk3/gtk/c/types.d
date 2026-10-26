@@ -4564,10 +4564,13 @@ struct GtkAccelKey
   */
   GdkModifierType accelMods;
 
+  mixin(bitfields!(
   /**
       The accelerator flags
   */
-  uint accelFlags;
+  uint, "accelFlags", 16,
+  uint, "", 16));
+
 }
 
 /**
@@ -6190,20 +6193,20 @@ struct GtkBindingEntry
   */
   GtkBindingSet* bindingSet;
 
+  mixin(bitfields!(
   /**
       implementation detail
   */
-  uint destroyed;
-
+  uint, "destroyed", 1,
   /**
       implementation detail
   */
-  uint inEmission;
-
+  uint, "inEmission", 1,
   /**
       implementation detail
   */
-  uint marksUnbound;
+  uint, "marksUnbound", 1,
+  uint, "", 29));
 
   /**
       linked list of entries maintained by binding set
@@ -6266,10 +6269,13 @@ struct GtkBindingSet
   */
   GtkBindingEntry* current;
 
+  mixin(bitfields!(
   /**
       whether this binding set stems from a CSS file and is reset upon theme changes
   */
-  uint parsed;
+  uint, "parsed", 1,
+  uint, "", 31));
+
 }
 
 /**
@@ -9379,8 +9385,9 @@ struct GtkContainerClass
   */
   extern(C) GtkWidgetPath* function(GtkContainer* container, GtkWidget* child) getPathForChild;
 
-  /** */
-  uint HandleBorderWidth;
+  mixin(bitfields!(
+  uint, "HandleBorderWidth", 1,
+  uint, "", 31));
 
   /** */
   extern(C) void function() GtkReserved1;
@@ -14898,12 +14905,14 @@ struct GtkMenuItemClass
   */
   GtkBinClass parentClass;
 
+  mixin(bitfields!(
   /**
       If true, then we should always
          hide the menu when the [gtk.menu_item.MenuItem] is activated. Otherwise,
          it is up to the caller.
   */
-  uint hideOnActivate;
+  uint, "hideOnActivate", 1,
+  uint, "", 31));
 
   /**
       Signal emitted when the item is activated.
@@ -15025,8 +15034,9 @@ struct GtkMenuShellClass
   /** */
   GtkContainerClass parentClass;
 
-  /** */
-  uint submenuPlacement;
+  mixin(bitfields!(
+  uint, "submenuPlacement", 1,
+  uint, "", 31));
 
   /** */
   extern(C) void function(GtkMenuShell* menuShell) deactivate;
@@ -17416,8 +17426,10 @@ struct GtkRcStyle
   /** */
   GSList* iconFactories;
 
-  /** */
-  uint engineSpecified;
+  mixin(bitfields!(
+  uint, "engineSpecified", 1,
+  uint, "", 31));
+
 }
 
 /** */
@@ -20348,23 +20360,15 @@ struct GtkTableChild
   /** */
   ushort ypadding;
 
-  /** */
-  uint xexpand;
+  mixin(bitfields!(
+  uint, "xexpand", 1,
+  uint, "yexpand", 1,
+  uint, "xshrink", 1,
+  uint, "yshrink", 1,
+  uint, "xfill", 1,
+  uint, "yfill", 1,
+  uint, "", 26));
 
-  /** */
-  uint yexpand;
-
-  /** */
-  uint xshrink;
-
-  /** */
-  uint yshrink;
-
-  /** */
-  uint xfill;
-
-  /** */
-  uint yfill;
 }
 
 /** */
@@ -20401,20 +20405,14 @@ struct GtkTableRowCol
   /** */
   ushort spacing;
 
-  /** */
-  uint needExpand;
+  mixin(bitfields!(
+  uint, "needExpand", 1,
+  uint, "needShrink", 1,
+  uint, "expand", 1,
+  uint, "shrink", 1,
+  uint, "empty", 1,
+  uint, "", 27));
 
-  /** */
-  uint needShrink;
-
-  /** */
-  uint expand;
-
-  /** */
-  uint shrink;
-
-  /** */
-  uint empty;
 }
 
 /**
@@ -20544,37 +20542,35 @@ struct GtkTextAppearance
   */
   int rise;
 
+  mixin(bitfields!(
   /**
       #PangoUnderline
   */
-  uint underline;
-
+  uint, "underline", 4,
   /**
       Strikethrough style
   */
-  uint strikethrough;
-
+  uint, "strikethrough", 1,
   /**
       Whether to use background-related values; this is
         irrelevant for the values struct when in a tag, but is used for
         the composite values struct; it’s true if any of the tags being
         composited had background stuff set.
   */
-  uint drawBg;
-
+  uint, "drawBg", 1,
   /**
       This are only used when we are actually laying
         out and rendering a paragraph; not when a #GtkTextAppearance is
         part of a #GtkTextAttributes.
   */
-  uint insideSelection;
-
+  uint, "insideSelection", 1,
   /**
       This are only used when we are actually laying
         out and rendering a paragraph; not when a #GtkTextAppearance is
         part of a #GtkTextAttributes.
   */
-  uint isText;
+  uint, "isText", 1,
+  uint, "", 24));
 
   /** */
   /** */
@@ -20674,26 +20670,25 @@ struct GtkTextAttributes
   /** */
   GdkColor* pgBgColor;
 
+  mixin(bitfields!(
   /**
       Hide the text.
   */
-  uint invisible;
-
+  uint, "invisible", 1,
   /**
       Background is fit to full line height rather than
          baseline +/- ascent/descent (font height).
   */
-  uint bgFullHeight;
-
+  uint, "bgFullHeight", 1,
   /**
       Can edit this text.
   */
-  uint editable;
-
+  uint, "editable", 1,
   /**
       Whether to disable font fallback.
   */
-  uint noFallback;
+  uint, "noFallback", 1,
+  uint, "", 28));
 
   /** */
   GdkRGBA* pgBgRgba;

@@ -290,14 +290,12 @@ struct VteCharAttributes
   /** */
   PangoColor back;
 
-  /** */
-  uint underline;
+  mixin(bitfields!(
+  uint, "underline", 1,
+  uint, "strikethrough", 1,
+  uint, "columns", 4,
+  uint, "", 26));
 
-  /** */
-  uint strikethrough;
-
-  /** */
-  uint columns;
 }
 
 /**

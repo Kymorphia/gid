@@ -1509,25 +1509,25 @@ struct GMimeFilterBest
   */
   ubyte[6] frombuf;
 
+  mixin(bitfields!(
   /**
       length of bytes in @frombuf
   */
-  uint fromlen;
-
+  uint, "fromlen", 4,
   /**
       true if any line started with "From "
   */
-  uint hadfrom;
-
+  uint, "hadfrom", 1,
   /**
       start line state
   */
-  uint startline;
-
+  uint, "startline", 1,
   /**
       mid-line state
   */
-  uint midline;
+  uint, "midline", 1,
+  uint, "", 25));
+
 }
 
 /** */
@@ -1754,15 +1754,15 @@ struct GMimeFilterHTML
   */
   uint colour;
 
+  mixin(bitfields!(
   /**
       current column
   */
-  uint column;
-
+  uint, "column", 31,
   /**
       currently inside of a 'pre' tag.
   */
-  uint preOpen;
+  uint, "preOpen", 1));
 
   /**
       current citation depth level.

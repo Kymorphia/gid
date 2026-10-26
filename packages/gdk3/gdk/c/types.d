@@ -3708,11 +3708,14 @@ struct GdkEventKey
   */
   ubyte group;
 
+  mixin(bitfields!(
   /**
       a flag that indicates if @hardware_keycode is mapped to a
         modifier. Since 2.10
   */
-  uint isModifier;
+  uint, "isModifier", 1,
+  uint, "", 31));
+
 }
 
 /**
@@ -4129,8 +4132,10 @@ struct GdkEventScroll
   */
   double deltaY;
 
-  /** */
-  uint isStop;
+  mixin(bitfields!(
+  uint, "isStop", 1,
+  uint, "", 31));
+
 }
 
 /**
