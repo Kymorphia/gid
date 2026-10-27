@@ -73,6 +73,10 @@
 
 //!set function[init][ignore] 1
 //!set function[init_check][ignore] 1
+
+//# Pointer fields owned by the structure (freed by its free function), enables setters
+//!set record[Message].field[src][owned] 1
+
 //!class global pre
 
 /**

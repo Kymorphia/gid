@@ -75,8 +75,7 @@ class TokenValue
   */
   @property void vIdentifier(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vIdentifier);
-    dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vIdentifier);
+    (cast(GTokenValue*)this._cPtr).vIdentifier = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -209,8 +208,7 @@ class TokenValue
   */
   @property void vString(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vString);
-    dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vString);
+    (cast(GTokenValue*)this._cPtr).vString = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -229,8 +227,7 @@ class TokenValue
   */
   @property void vComment(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vComment);
-    dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vComment);
+    (cast(GTokenValue*)this._cPtr).vComment = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -44,6 +44,8 @@ class SqlSelectOrder
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gda.sql_expr.SqlExpr _exprRef; // Keeps borrowed field value alive
+
   /**
       Get `expr` field.
       Returns: expression to order on
@@ -60,8 +62,8 @@ class SqlSelectOrder
   */
   @property void expr(gda.sql_expr.SqlExpr propval) nothrow
   {
-    cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectOrder*)this._cPtr).expr);
-    dToC(propval, cast(void*)&(cast(GdaSqlSelectOrder*)this._cPtr).expr);
+    _exprRef = propval;
+    (cast(GdaSqlSelectOrder*)this._cPtr).expr = propval ? cast(GdaSqlExpr*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -99,8 +101,7 @@ class SqlSelectOrder
   */
   @property void collationName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlSelectOrder*)this._cPtr).collationName);
-    dToC(propval, cast(void*)&(cast(GdaSqlSelectOrder*)this._cPtr).collationName);
+    (cast(GdaSqlSelectOrder*)this._cPtr).collationName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

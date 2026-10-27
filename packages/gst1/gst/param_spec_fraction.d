@@ -19,7 +19,6 @@ class ParamSpecFraction
   /**
       Create a `param_spec_fraction.ParamSpecFraction` wrap type.
       Params:
-        parentInstance = super class
         minNum = minimal numerator
         minDen = minimal denominator
         maxNum = maximal numerator
@@ -27,9 +26,8 @@ class ParamSpecFraction
         defNum = default numerator
         defDen = default denominator
   */
-  this(gobject.param_spec.ParamSpec parentInstance = gobject.param_spec.ParamSpec.init, int minNum = int.init, int minDen = int.init, int maxNum = int.init, int maxDen = int.init, int defNum = int.init, int defDen = int.init) nothrow
+  this(int minNum = int.init, int minDen = int.init, int maxNum = int.init, int maxDen = int.init, int defNum = int.init, int defDen = int.init) nothrow
   {
-    this.parentInstance = parentInstance;
     this.minNum = minNum;
     this.minDen = minDen;
     this.maxNum = maxNum;
@@ -60,17 +58,6 @@ class ParamSpecFraction
   @property gobject.param_spec.ParamSpec parentInstance() nothrow
   {
     return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
-  }
-
-  /**
-      Set `parentInstance` field.
-      Params:
-        propval = super class
-  */
-  @property void parentInstance(gobject.param_spec.ParamSpec propval) nothrow
-  {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
-    dToC(propval, cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
   }
 
   /**

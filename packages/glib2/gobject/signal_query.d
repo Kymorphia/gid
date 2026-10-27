@@ -87,8 +87,7 @@ class SignalQuery
   */
   @property void signalName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GSignalQuery*)this._cPtr).signalName);
-    dToC(propval, cast(void*)&(cast(GSignalQuery*)this._cPtr).signalName);
+    (cast(GSignalQuery*)this._cPtr).signalName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

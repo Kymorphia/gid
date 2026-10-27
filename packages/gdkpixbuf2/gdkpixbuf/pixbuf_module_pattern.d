@@ -89,8 +89,7 @@ class PixbufModulePattern
   */
   @property void prefix(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
+    (cast(GdkPixbufModulePattern*)this._cPtr).prefix = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -111,8 +110,7 @@ class PixbufModulePattern
   */
   @property void mask(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).mask);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)this._cPtr).mask);
+    (cast(GdkPixbufModulePattern*)this._cPtr).mask = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

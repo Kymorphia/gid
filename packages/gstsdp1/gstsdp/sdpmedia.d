@@ -69,8 +69,7 @@ class SDPMedia
   */
   @property void media(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).media);
-    dToC(propval, cast(void*)&(cast(GstSDPMedia*)this._cPtr).media);
+    (cast(GstSDPMedia*)this._cPtr).media = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -127,8 +126,7 @@ class SDPMedia
   */
   @property void proto(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).proto);
-    dToC(propval, cast(void*)&(cast(GstSDPMedia*)this._cPtr).proto);
+    (cast(GstSDPMedia*)this._cPtr).proto = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -156,8 +154,7 @@ class SDPMedia
   */
   @property void information(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).information);
-    dToC(propval, cast(void*)&(cast(GstSDPMedia*)this._cPtr).information);
+    (cast(GstSDPMedia*)this._cPtr).information = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -51,8 +51,7 @@ class SqlField
   /** */
   @property void fieldName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlField*)this._cPtr).fieldName);
-    dToC(propval, cast(void*)&(cast(GdaSqlField*)this._cPtr).fieldName);
+    (cast(GdaSqlField*)this._cPtr).fieldName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** */

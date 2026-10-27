@@ -84,8 +84,7 @@ class WindowAttr
   */
   @property void title(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).title);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).title);
+    (cast(GdkWindowAttr*)this._cPtr).title = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -204,6 +203,8 @@ class WindowAttr
     (cast(GdkWindowAttr*)this._cPtr).wclass = cast(GdkWindowWindowClass)propval;
   }
 
+  private gdk.visual.Visual _visualRef; // Keeps borrowed field value alive
+
   /**
       Get `visual` field.
       Returns: #GdkVisual for window
@@ -220,8 +221,8 @@ class WindowAttr
   */
   @property void visual(gdk.visual.Visual propval) nothrow
   {
-    cValueFree!(gdk.visual.Visual)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).visual);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).visual);
+    _visualRef = propval;
+    (cast(GdkWindowAttr*)this._cPtr).visual = propval ? cast(GdkVisual*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -243,6 +244,8 @@ class WindowAttr
     (cast(GdkWindowAttr*)this._cPtr).windowType = cast(GdkWindowType)propval;
   }
 
+  private gdk.cursor.Cursor _cursorRef; // Keeps borrowed field value alive
+
   /**
       Get `cursor` field.
       Returns: cursor for the window (see [gdk.window.Window.setCursor])
@@ -259,8 +262,8 @@ class WindowAttr
   */
   @property void cursor(gdk.cursor.Cursor propval) nothrow
   {
-    cValueFree!(gdk.cursor.Cursor)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).cursor);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).cursor);
+    _cursorRef = propval;
+    (cast(GdkWindowAttr*)this._cPtr).cursor = propval ? cast(GdkCursor*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -279,8 +282,7 @@ class WindowAttr
   */
   @property void wmclassName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassName);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).wmclassName);
+    (cast(GdkWindowAttr*)this._cPtr).wmclassName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -299,8 +301,7 @@ class WindowAttr
   */
   @property void wmclassClass(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
+    (cast(GdkWindowAttr*)this._cPtr).wmclassClass = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -62,8 +62,7 @@ class SDPTime
   */
   @property void start(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).start);
-    dToC(propval, cast(void*)&(cast(GstSDPTime*)this._cPtr).start);
+    (cast(GstSDPTime*)this._cPtr).start = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -84,8 +83,7 @@ class SDPTime
   */
   @property void stop(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).stop);
-    dToC(propval, cast(void*)&(cast(GstSDPTime*)this._cPtr).stop);
+    (cast(GstSDPTime*)this._cPtr).stop = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

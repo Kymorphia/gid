@@ -104,8 +104,7 @@ class RcProperty
   */
   @property void origin(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRcProperty*)this._cPtr).origin);
-    dToC(propval, cast(void*)&(cast(GtkRcProperty*)this._cPtr).origin);
+    (cast(GtkRcProperty*)this._cPtr).origin = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -67,19 +67,6 @@ class String : gobject.boxed.Boxed
   }
 
   /**
-      Set `str` field.
-      Params:
-        propval = points to the character data. It may move as text is added.
-            The @str field is null-terminated and so
-            can be used as an ordinary C string.
-  */
-  @property void str(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GString*)this._cPtr).str);
-    dToC(propval, cast(void*)&(cast(GString*)this._cPtr).str);
-  }
-
-  /**
       Get `len` field.
       Returns: contains the length of the string, not including the
           terminating nul byte.

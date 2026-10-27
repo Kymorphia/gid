@@ -72,6 +72,8 @@ class EventSelection
     (cast(GdkEventSelection*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event.
@@ -88,8 +90,8 @@ class EventSelection
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventSelection*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventSelection*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -157,6 +159,8 @@ class EventSelection
     (cast(GdkEventSelection*)this._cPtr).time = propval;
   }
 
+  private gdk.window.Window _requestorRef; // Keeps borrowed field value alive
+
   /**
       Get `requestor` field.
       Returns: the window on which to place @property or null if none.
@@ -173,7 +177,7 @@ class EventSelection
   */
   @property void requestor(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).requestor);
-    dToC(propval, cast(void*)&(cast(GdkEventSelection*)this._cPtr).requestor);
+    _requestorRef = propval;
+    (cast(GdkEventSelection*)this._cPtr).requestor = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 }

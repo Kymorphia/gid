@@ -59,34 +59,12 @@ class SetNode : gobject.boxed.Boxed
   }
 
   /**
-      Set `holder` field.
-      Params:
-        propval = a #GdaHolder. It can't be NULL
-  */
-  @property void holder(gda.holder.Holder propval) nothrow
-  {
-    cValueFree!(gda.holder.Holder)(cast(void*)(cast(GdaSetNode*)this._cPtr).holder);
-    dToC(propval, cast(void*)&(cast(GdaSetNode*)this._cPtr).holder);
-  }
-
-  /**
       Get `sourceModel` field.
       Returns: a #GdaDataModel. It could be NULL
   */
   @property gda.data_model.DataModel sourceModel() nothrow
   {
     return cToD!(gda.data_model.DataModel)(cast(void*)(cast(GdaSetNode*)this._cPtr).sourceModel);
-  }
-
-  /**
-      Set `sourceModel` field.
-      Params:
-        propval = a #GdaDataModel. It could be NULL
-  */
-  @property void sourceModel(gda.data_model.DataModel propval) nothrow
-  {
-    cValueFree!(gda.data_model.DataModel)(cast(void*)(cast(GdaSetNode*)this._cPtr).sourceModel);
-    dToC(propval, cast(void*)&(cast(GdaSetNode*)this._cPtr).sourceModel);
   }
 
   /**

@@ -93,6 +93,8 @@ class EventTouchpadPinch
     (cast(GdkEventTouchpadPinch*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event
@@ -109,8 +111,8 @@ class EventTouchpadPinch
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventTouchpadPinch*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**

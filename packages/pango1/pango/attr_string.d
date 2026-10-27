@@ -66,7 +66,6 @@ class AttrString
   */
   @property void value(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(PangoAttrString*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(PangoAttrString*)this._cPtr).value);
+    (cast(PangoAttrString*)this._cPtr).value = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

@@ -57,8 +57,7 @@ class CheckABIStruct
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstCheckABIStruct*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstCheckABIStruct*)this._cPtr).name);
+    (cast(GstCheckABIStruct*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

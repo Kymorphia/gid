@@ -141,8 +141,7 @@ class ScannerConfig
   */
   @property void csetSkipCharacters(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
+    (cast(GScannerConfig*)this._cPtr).csetSkipCharacters = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -163,8 +162,7 @@ class ScannerConfig
   */
   @property void csetIdentifierFirst(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
+    (cast(GScannerConfig*)this._cPtr).csetIdentifierFirst = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -189,8 +187,7 @@ class ScannerConfig
   */
   @property void csetIdentifierNth(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
+    (cast(GScannerConfig*)this._cPtr).csetIdentifierNth = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -215,8 +212,7 @@ class ScannerConfig
   */
   @property void cpairCommentSingle(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
+    (cast(GScannerConfig*)this._cPtr).cpairCommentSingle = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

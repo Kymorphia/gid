@@ -55,13 +55,6 @@ class SqlStatement : gobject.boxed.Boxed
     return cToD!(string)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).sql);
   }
 
-  /** */
-  @property void sql(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).sql);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatement*)this._cPtr).sql);
-  }
-
   /**
       Get `stmtType` field.
       Returns: type of statement
@@ -85,13 +78,6 @@ class SqlStatement : gobject.boxed.Boxed
   @property gda.meta_struct.MetaStruct validityMetaStruct() nothrow
   {
     return cToD!(gda.meta_struct.MetaStruct)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).validityMetaStruct);
-  }
-
-  /** */
-  @property void validityMetaStruct(gda.meta_struct.MetaStruct propval) nothrow
-  {
-    cValueFree!(gda.meta_struct.MetaStruct)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).validityMetaStruct);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatement*)this._cPtr).validityMetaStruct);
   }
 
   /**

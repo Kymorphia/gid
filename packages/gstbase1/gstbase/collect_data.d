@@ -51,6 +51,8 @@ class CollectData
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gstbase.collect_pads.CollectPads _collectRef; // Keeps borrowed field value alive
+
   /**
       Get `collect` field.
       Returns: owner #GstCollectPads
@@ -67,9 +69,11 @@ class CollectData
   */
   @property void collect(gstbase.collect_pads.CollectPads propval) nothrow
   {
-    cValueFree!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)this._cPtr).collect);
-    dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).collect);
+    _collectRef = propval;
+    (cast(GstCollectData*)this._cPtr).collect = propval ? cast(GstCollectPads*)propval._cPtr(No.Dup) : null;
   }
+
+  private gst.pad.Pad _padRef; // Keeps borrowed field value alive
 
   /**
       Get `pad` field.
@@ -87,9 +91,11 @@ class CollectData
   */
   @property void pad(gst.pad.Pad propval) nothrow
   {
-    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)this._cPtr).pad);
-    dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).pad);
+    _padRef = propval;
+    (cast(GstCollectData*)this._cPtr).pad = propval ? cast(GstPad*)propval._cPtr(No.Dup) : null;
   }
+
+  private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
 
   /**
       Get `buffer` field.
@@ -107,8 +113,8 @@ class CollectData
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)this._cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).buffer);
+    _bufferRef = propval;
+    (cast(GstCollectData*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
 
   /**

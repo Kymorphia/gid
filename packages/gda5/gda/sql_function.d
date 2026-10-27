@@ -56,8 +56,7 @@ class SqlFunction
   */
   @property void functionName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlFunction*)this._cPtr).functionName);
-    dToC(propval, cast(void*)&(cast(GdaSqlFunction*)this._cPtr).functionName);
+    (cast(GdaSqlFunction*)this._cPtr).functionName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

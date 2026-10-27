@@ -145,8 +145,7 @@ class RTSPTransport
   */
   @property void destination(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).destination);
-    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)this._cPtr).destination);
+    (cast(GstRTSPTransport*)this._cPtr).destination = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -165,8 +164,7 @@ class RTSPTransport
   */
   @property void source(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).source);
-    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)this._cPtr).source);
+    (cast(GstRTSPTransport*)this._cPtr).source = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

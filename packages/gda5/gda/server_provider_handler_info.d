@@ -43,6 +43,8 @@ class ServerProviderHandlerInfo
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gda.connection.Connection _cncRef; // Keeps borrowed field value alive
+
   /** */
   @property gda.connection.Connection cnc() nothrow
   {
@@ -52,8 +54,8 @@ class ServerProviderHandlerInfo
   /** */
   @property void cnc(gda.connection.Connection propval) nothrow
   {
-    cValueFree!(gda.connection.Connection)(cast(void*)(cast(GdaServerProviderHandlerInfo*)this._cPtr).cnc);
-    dToC(propval, cast(void*)&(cast(GdaServerProviderHandlerInfo*)this._cPtr).cnc);
+    _cncRef = propval;
+    (cast(GdaServerProviderHandlerInfo*)this._cPtr).cnc = propval ? cast(GdaConnection*)propval._cPtr(No.Dup) : null;
   }
 
   /** */
@@ -77,7 +79,6 @@ class ServerProviderHandlerInfo
   /** */
   @property void dbmsType(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaServerProviderHandlerInfo*)this._cPtr).dbmsType);
-    dToC(propval, cast(void*)&(cast(GdaServerProviderHandlerInfo*)this._cPtr).dbmsType);
+    (cast(GdaServerProviderHandlerInfo*)this._cPtr).dbmsType = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

@@ -126,8 +126,7 @@ class PadActionEntry
   */
   @property void label(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)this._cPtr).label);
+    (cast(GtkPadActionEntry*)this._cPtr).label = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -146,7 +145,6 @@ class PadActionEntry
   */
   @property void actionName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).actionName);
-    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)this._cPtr).actionName);
+    (cast(GtkPadActionEntry*)this._cPtr).actionName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

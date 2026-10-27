@@ -98,6 +98,19 @@
 //!set class[ListStore].method[find_with_equal_func][ignore] 1
 //!set class[ListStore].method[insert_sorted][ignore] 1
 //!set class[ListStore].method[sort][ignore] 1
+
+//# Pointer fields owned by the structure (freed by its free function), enables setters
+//!set record[DBusAnnotationInfo].field[key][owned] 1
+//!set record[DBusAnnotationInfo].field[value][owned] 1
+//!set record[DBusArgInfo].field[name][owned] 1
+//!set record[DBusArgInfo].field[signature][owned] 1
+//!set record[DBusMethodInfo].field[name][owned] 1
+//!set record[DBusSignalInfo].field[name][owned] 1
+//!set record[DBusPropertyInfo].field[name][owned] 1
+//!set record[DBusPropertyInfo].field[signature][owned] 1
+//!set record[DBusInterfaceInfo].field[name][owned] 1
+//!set record[DBusNodeInfo].field[path][owned] 1
+
 //!class ListStore
 
   //# Override findWithEqualFunc to handle ObjectWrap parameters instead of GObject pointers

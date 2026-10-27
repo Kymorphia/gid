@@ -58,8 +58,7 @@ class SDPKey
   */
   @property void type(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).type);
-    dToC(propval, cast(void*)&(cast(GstSDPKey*)this._cPtr).type);
+    (cast(GstSDPKey*)this._cPtr).type = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -78,7 +77,6 @@ class SDPKey
   */
   @property void data(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).data);
-    dToC(propval, cast(void*)&(cast(GstSDPKey*)this._cPtr).data);
+    (cast(GstSDPKey*)this._cPtr).data = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

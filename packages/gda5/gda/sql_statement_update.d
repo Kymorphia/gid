@@ -46,8 +46,7 @@ class SqlStatementUpdate
   /** */
   @property void onConflict(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlStatementUpdate*)this._cPtr).onConflict);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementUpdate*)this._cPtr).onConflict);
+    (cast(GdaSqlStatementUpdate*)this._cPtr).onConflict = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** */

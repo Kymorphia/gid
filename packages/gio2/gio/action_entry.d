@@ -74,8 +74,7 @@ class ActionEntry
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).name);
+    (cast(GActionEntry*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** Function alias for field `activate` */
@@ -116,8 +115,7 @@ class ActionEntry
   */
   @property void parameterType(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).parameterType);
-    dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).parameterType);
+    (cast(GActionEntry*)this._cPtr).parameterType = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -144,8 +142,7 @@ class ActionEntry
   */
   @property void state(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).state);
-    dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).state);
+    (cast(GActionEntry*)this._cPtr).state = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** Function alias for field `changeState` */

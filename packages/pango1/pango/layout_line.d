@@ -23,16 +23,14 @@ class LayoutLine : gobject.boxed.Boxed
   /**
       Create a `layout_line.LayoutLine` boxed type.
       Params:
-        layout = the layout this line belongs to, might be null
         startIndex = start of line as byte index into layout->text
         length = length of line in bytes
         isParagraphStart = #TRUE if this is the first line of the paragraph
         resolvedDir = #Resolved PangoDirection of line
   */
-  this(pango.layout.Layout layout = pango.layout.Layout.init, int startIndex = int.init, int length = int.init, uint isParagraphStart = uint.init, uint resolvedDir = uint.init) nothrow
+  this(int startIndex = int.init, int length = int.init, uint isParagraphStart = uint.init, uint resolvedDir = uint.init) nothrow
   {
     super(boxedNew!PangoLayoutLine(_getGType), Yes.Take);
-    this.layout = layout;
     this.startIndex = startIndex;
     this.length = length;
     this.isParagraphStart = isParagraphStart;
@@ -77,17 +75,6 @@ class LayoutLine : gobject.boxed.Boxed
   @property pango.layout.Layout layout() nothrow
   {
     return cToD!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)this._cPtr).layout);
-  }
-
-  /**
-      Set `layout` field.
-      Params:
-        propval = the layout this line belongs to, might be null
-  */
-  @property void layout(pango.layout.Layout propval) nothrow
-  {
-    cValueFree!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)this._cPtr).layout);
-    dToC(propval, cast(void*)&(cast(PangoLayoutLine*)this._cPtr).layout);
   }
 
   /**

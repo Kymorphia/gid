@@ -122,8 +122,7 @@ class PluginDesc
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).name);
+    (cast(GstPluginDesc*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -142,8 +141,7 @@ class PluginDesc
   */
   @property void description(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).description);
+    (cast(GstPluginDesc*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -182,8 +180,7 @@ class PluginDesc
   */
   @property void version_(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).version_);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).version_);
+    (cast(GstPluginDesc*)this._cPtr).version_ = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -202,8 +199,7 @@ class PluginDesc
   */
   @property void license(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).license);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).license);
+    (cast(GstPluginDesc*)this._cPtr).license = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -222,8 +218,7 @@ class PluginDesc
   */
   @property void source(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).source);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).source);
+    (cast(GstPluginDesc*)this._cPtr).source = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -242,8 +237,7 @@ class PluginDesc
   */
   @property void package_(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).package_);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).package_);
+    (cast(GstPluginDesc*)this._cPtr).package_ = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -262,8 +256,7 @@ class PluginDesc
   */
   @property void origin(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).origin);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).origin);
+    (cast(GstPluginDesc*)this._cPtr).origin = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -292,7 +285,6 @@ class PluginDesc
   */
   @property void releaseDatetime(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
+    (cast(GstPluginDesc*)this._cPtr).releaseDatetime = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

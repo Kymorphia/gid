@@ -100,6 +100,8 @@ class EventScroll
     (cast(GdkEventScroll*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event.
@@ -116,8 +118,8 @@ class EventScroll
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventScroll*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventScroll*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -242,6 +244,8 @@ class EventScroll
     (cast(GdkEventScroll*)this._cPtr).direction = cast(GdkScrollDirection)propval;
   }
 
+  private gdk.device.Device _deviceRef; // Keeps borrowed field value alive
+
   /**
       Get `device` field.
       Returns: the master device that the event originated from. Use
@@ -260,8 +264,8 @@ class EventScroll
   */
   @property void device(gdk.device.Device propval) nothrow
   {
-    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)this._cPtr).device);
-    dToC(propval, cast(void*)&(cast(GdkEventScroll*)this._cPtr).device);
+    _deviceRef = propval;
+    (cast(GdkEventScroll*)this._cPtr).device = propval ? cast(GdkDevice*)propval._cPtr(No.Dup) : null;
   }
 
   /**

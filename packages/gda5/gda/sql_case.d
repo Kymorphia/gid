@@ -42,6 +42,8 @@ class SqlCase
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gda.sql_expr.SqlExpr _baseExprRef; // Keeps borrowed field value alive
+
   /**
       Get `baseExpr` field.
       Returns: expression to test
@@ -58,8 +60,8 @@ class SqlCase
   */
   @property void baseExpr(gda.sql_expr.SqlExpr propval) nothrow
   {
-    cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlCase*)this._cPtr).baseExpr);
-    dToC(propval, cast(void*)&(cast(GdaSqlCase*)this._cPtr).baseExpr);
+    _baseExprRef = propval;
+    (cast(GdaSqlCase*)this._cPtr).baseExpr = propval ? cast(GdaSqlExpr*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -80,6 +82,8 @@ class SqlCase
     return gSListToD!(void*)((cast(GdaSqlCase*)this._cPtr).thenExprList);
   }
 
+  private gda.sql_expr.SqlExpr _elseExprRef; // Keeps borrowed field value alive
+
   /**
       Get `elseExpr` field.
       Returns: default expression for the CASE
@@ -96,8 +100,8 @@ class SqlCase
   */
   @property void elseExpr(gda.sql_expr.SqlExpr propval) nothrow
   {
-    cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlCase*)this._cPtr).elseExpr);
-    dToC(propval, cast(void*)&(cast(GdaSqlCase*)this._cPtr).elseExpr);
+    _elseExprRef = propval;
+    (cast(GdaSqlCase*)this._cPtr).elseExpr = propval ? cast(GdaSqlExpr*)propval._cPtr(No.Dup) : null;
   }
 
   /**

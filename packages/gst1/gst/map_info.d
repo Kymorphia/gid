@@ -49,6 +49,8 @@ class MapInfo
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gst.memory.Memory _memoryRef; // Keeps borrowed field value alive
+
   /**
       Get `memory` field.
       Returns: a pointer to the mapped memory
@@ -65,8 +67,8 @@ class MapInfo
   */
   @property void memory(gst.memory.Memory propval) nothrow
   {
-    cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)this._cPtr).memory);
-    dToC(propval, cast(void*)&(cast(GstMapInfo*)this._cPtr).memory);
+    _memoryRef = propval;
+    (cast(GstMapInfo*)this._cPtr).memory = propval ? cast(GstMemory*)propval._cPtr(No.Dup) : null;
   }
 
   /**

@@ -59,8 +59,7 @@ class SDPZone
   */
   @property void time(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).time);
-    dToC(propval, cast(void*)&(cast(GstSDPZone*)this._cPtr).time);
+    (cast(GstSDPZone*)this._cPtr).time = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -79,8 +78,7 @@ class SDPZone
   */
   @property void typedTime(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).typedTime);
-    dToC(propval, cast(void*)&(cast(GstSDPZone*)this._cPtr).typedTime);
+    (cast(GstSDPZone*)this._cPtr).typedTime = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

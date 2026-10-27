@@ -27,19 +27,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Create a `sdpmessage.SDPMessage` boxed type.
-      Params:
-        version_ = the protocol version
-        sessionName = session name
-        information = session information
-        uri = URI of description
   */
-  this(string version_ = string.init, string sessionName = string.init, string information = string.init, string uri = string.init) nothrow
+  this() nothrow
   {
     super(boxedNew!GstSDPMessage(_getGType), Yes.Take);
-    this.version_ = version_;
-    this.sessionName = sessionName;
-    this.information = information;
-    this.uri = uri;
   }
 
   /** */
@@ -83,17 +74,6 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /**
-      Set `version_` field.
-      Params:
-        propval = the protocol version
-  */
-  @property void version_(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).version_);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).version_);
-  }
-
-  /**
       Get `origin` field.
       Returns: owner/creator and session identifier
   */
@@ -112,17 +92,6 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /**
-      Set `sessionName` field.
-      Params:
-        propval = session name
-  */
-  @property void sessionName(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).sessionName);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).sessionName);
-  }
-
-  /**
       Get `information` field.
       Returns: session information
   */
@@ -132,34 +101,12 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /**
-      Set `information` field.
-      Params:
-        propval = session information
-  */
-  @property void information(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).information);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).information);
-  }
-
-  /**
       Get `uri` field.
       Returns: URI of description
   */
   @property string uri() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).uri);
-  }
-
-  /**
-      Set `uri` field.
-      Params:
-        propval = URI of description
-  */
-  @property void uri(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).uri);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).uri);
   }
 
   /**

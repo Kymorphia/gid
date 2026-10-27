@@ -71,6 +71,8 @@ class EventVisibility
     (cast(GdkEventVisibility*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event.
@@ -87,8 +89,8 @@ class EventVisibility
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventVisibility*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventVisibility*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventVisibility*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**

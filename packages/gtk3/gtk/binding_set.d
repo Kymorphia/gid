@@ -67,8 +67,7 @@ class BindingSet
   */
   @property void setName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkBindingSet*)this._cPtr).setName);
-    dToC(propval, cast(void*)&(cast(GtkBindingSet*)this._cPtr).setName);
+    (cast(GtkBindingSet*)this._cPtr).setName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

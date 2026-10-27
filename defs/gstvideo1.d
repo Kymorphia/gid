@@ -34,3 +34,10 @@
 
 //# Disable interface APIs
 //!set interface[VideoOverlay].function[install_properties][ignore] 1
+
+//# Pointer fields owned by the structure (freed by its free function), enables setters
+//!set record[VideoCodecFrame].field[input_buffer][owned] 1
+//!set record[VideoCodecFrame].field[output_buffer][owned] 1
+//!set record[VideoCodecState].field[caps][owned] 1
+//!set record[VideoCodecState].field[allocation_caps][owned] 1
+//!set record[VideoCodecState].field[codec_data][owned] 1

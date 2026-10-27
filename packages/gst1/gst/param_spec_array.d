@@ -18,12 +18,10 @@ class ParamSpecArray
   /**
       Create a `param_spec_array.ParamSpecArray` wrap type.
       Params:
-        parentInstance = super class
         elementSpec = the #GParamSpec of the type of values in the array
   */
-  this(gobject.param_spec.ParamSpec parentInstance = gobject.param_spec.ParamSpec.init, gobject.param_spec.ParamSpec elementSpec = gobject.param_spec.ParamSpec.init) nothrow
+  this(gobject.param_spec.ParamSpec elementSpec = gobject.param_spec.ParamSpec.init) nothrow
   {
-    this.parentInstance = parentInstance;
     this.elementSpec = elementSpec;
   }
 
@@ -51,16 +49,7 @@ class ParamSpecArray
     return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
   }
 
-  /**
-      Set `parentInstance` field.
-      Params:
-        propval = super class
-  */
-  @property void parentInstance(gobject.param_spec.ParamSpec propval) nothrow
-  {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
-    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
-  }
+  private gobject.param_spec.ParamSpec _elementSpecRef; // Keeps borrowed field value alive
 
   /**
       Get `elementSpec` field.
@@ -78,7 +67,7 @@ class ParamSpecArray
   */
   @property void elementSpec(gobject.param_spec.ParamSpec propval) nothrow
   {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)this._cPtr).elementSpec);
-    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)this._cPtr).elementSpec);
+    _elementSpecRef = propval;
+    (cast(GstParamSpecArray*)this._cPtr).elementSpec = propval ? cast(GParamSpec*)propval._cPtr(No.Dup) : null;
   }
 }

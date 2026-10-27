@@ -101,6 +101,8 @@ class EventTouch
     (cast(GdkEventTouch*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event
@@ -117,8 +119,8 @@ class EventTouch
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventTouch*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -220,6 +222,8 @@ class EventTouch
     (cast(GdkEventTouch*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 
+  private gdk.event_sequence.EventSequence _sequenceRef; // Keeps borrowed field value alive
+
   /**
       Get `sequence` field.
       Returns: the event sequence that the event belongs to
@@ -236,8 +240,8 @@ class EventTouch
   */
   @property void sequence(gdk.event_sequence.EventSequence propval) nothrow
   {
-    cValueFree!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)this._cPtr).sequence);
-    dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).sequence);
+    _sequenceRef = propval;
+    (cast(GdkEventTouch*)this._cPtr).sequence = propval ? cast(GdkEventSequence*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -261,6 +265,8 @@ class EventTouch
     (cast(GdkEventTouch*)this._cPtr).emulatingPointer = propval;
   }
 
+  private gdk.device.Device _deviceRef; // Keeps borrowed field value alive
+
   /**
       Get `device` field.
       Returns: the master device that the event originated from. Use
@@ -279,8 +285,8 @@ class EventTouch
   */
   @property void device(gdk.device.Device propval) nothrow
   {
-    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)this._cPtr).device);
-    dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).device);
+    _deviceRef = propval;
+    (cast(GdkEventTouch*)this._cPtr).device = propval ? cast(GdkDevice*)propval._cPtr(No.Dup) : null;
   }
 
   /**

@@ -101,6 +101,8 @@ class AudioBuffer
     (cast(GstAudioBuffer*)this._cPtr).nPlanes = propval;
   }
 
+  private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
+
   /**
       Get `buffer` field.
       Returns: the mapped buffer
@@ -117,8 +119,8 @@ class AudioBuffer
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)this._cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstAudioBuffer*)this._cPtr).buffer);
+    _bufferRef = propval;
+    (cast(GstAudioBuffer*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
 
   /**

@@ -55,6 +55,8 @@ class AccelGroupEntry
     (cast(GtkAccelGroupEntry*)this._cPtr).key = cast(GtkAccelKey)propval;
   }
 
+  private gobject.closure.Closure _closureRef; // Keeps borrowed field value alive
+
   /** */
   @property gobject.closure.Closure closure() nothrow
   {
@@ -64,8 +66,8 @@ class AccelGroupEntry
   /** */
   @property void closure(gobject.closure.Closure propval) nothrow
   {
-    cValueFree!(gobject.closure.Closure)(cast(void*)(cast(GtkAccelGroupEntry*)this._cPtr).closure);
-    dToC(propval, cast(void*)&(cast(GtkAccelGroupEntry*)this._cPtr).closure);
+    _closureRef = propval;
+    (cast(GtkAccelGroupEntry*)this._cPtr).closure = propval ? cast(GClosure*)propval._cPtr(No.Dup) : null;
   }
 
   /** */

@@ -58,8 +58,7 @@ class PropertyValues
   */
   @property void propertyName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(AtkPropertyValues*)this._cPtr).propertyName);
-    dToC(propval, cast(void*)&(cast(AtkPropertyValues*)this._cPtr).propertyName);
+    (cast(AtkPropertyValues*)this._cPtr).propertyName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

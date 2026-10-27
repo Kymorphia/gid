@@ -52,6 +52,8 @@ class GLSyncMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)this._cPtr).parent, No.Take);
   }
 
+  private gstgl.glcontext.GLContext _contextRef; // Keeps borrowed field value alive
+
   /**
       Get `context` field.
       Returns: the #GstGLContext used to allocate the meta
@@ -68,8 +70,8 @@ class GLSyncMeta
   */
   @property void context(gstgl.glcontext.GLContext propval) nothrow
   {
-    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)this._cPtr).context);
-    dToC(propval, cast(void*)&(cast(GstGLSyncMeta*)this._cPtr).context);
+    _contextRef = propval;
+    (cast(GstGLSyncMeta*)this._cPtr).context = propval ? cast(GstGLContext*)propval._cPtr(No.Dup) : null;
   }
 
   /** Function alias for field `setSync` */

@@ -18,3 +18,7 @@
 //!set record[ByteReader].method[dup_string_utf32].parameters.parameter[str].array[][zero-terminated] 1
 //!set record[ByteWriter].method[put_string_utf16].parameters.parameter[data].array[][zero-terminated] 1
 //!set record[ByteWriter].method[put_string_utf32].parameters.parameter[data].array[][zero-terminated] 1
+
+//# Pointer fields owned by the structure (freed by its free function), enables setters
+//!set record[BaseParseFrame].field[buffer][owned] 1
+//!set record[BaseParseFrame].field[out_buffer][owned] 1

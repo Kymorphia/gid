@@ -75,8 +75,7 @@ class RecentData
   */
   @property void displayName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).displayName);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).displayName);
+    (cast(GtkRecentData*)this._cPtr).displayName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -97,8 +96,7 @@ class RecentData
   */
   @property void description(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).description);
+    (cast(GtkRecentData*)this._cPtr).description = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -117,8 +115,7 @@ class RecentData
   */
   @property void mimeType(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).mimeType);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).mimeType);
+    (cast(GtkRecentData*)this._cPtr).mimeType = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -139,8 +136,7 @@ class RecentData
   */
   @property void appName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appName);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).appName);
+    (cast(GtkRecentData*)this._cPtr).appName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -165,8 +161,7 @@ class RecentData
   */
   @property void appExec(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appExec);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).appExec);
+    (cast(GtkRecentData*)this._cPtr).appExec = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

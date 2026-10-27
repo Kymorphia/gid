@@ -88,7 +88,6 @@ class MetaTableForeignKey
   /** */
   @property void fkName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaTableForeignKey*)this._cPtr).fkName);
-    dToC(propval, cast(void*)&(cast(GdaMetaTableForeignKey*)this._cPtr).fkName);
+    (cast(GdaMetaTableForeignKey*)this._cPtr).fkName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

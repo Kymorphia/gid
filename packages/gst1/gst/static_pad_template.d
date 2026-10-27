@@ -63,8 +63,7 @@ class StaticPadTemplate
   */
   @property void nameTemplate(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
-    dToC(propval, cast(void*)&(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
+    (cast(GstStaticPadTemplate*)this._cPtr).nameTemplate = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

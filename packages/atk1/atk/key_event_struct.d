@@ -166,8 +166,7 @@ class KeyEventStruct
   */
   @property void string_(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(AtkKeyEventStruct*)this._cPtr).string_);
-    dToC(propval, cast(void*)&(cast(AtkKeyEventStruct*)this._cPtr).string_);
+    (cast(AtkKeyEventStruct*)this._cPtr).string_ = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

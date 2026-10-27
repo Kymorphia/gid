@@ -52,6 +52,8 @@ class SqlSelectField
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gda.sql_expr.SqlExpr _exprRef; // Keeps borrowed field value alive
+
   /**
       Get `expr` field.
       Returns: expression
@@ -68,8 +70,8 @@ class SqlSelectField
   */
   @property void expr(gda.sql_expr.SqlExpr propval) nothrow
   {
-    cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).expr);
-    dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).expr);
+    _exprRef = propval;
+    (cast(GdaSqlSelectField*)this._cPtr).expr = propval ? cast(GdaSqlExpr*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -88,8 +90,7 @@ class SqlSelectField
   */
   @property void fieldName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).fieldName);
-    dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).fieldName);
+    (cast(GdaSqlSelectField*)this._cPtr).fieldName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -108,8 +109,7 @@ class SqlSelectField
   */
   @property void tableName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).tableName);
-    dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).tableName);
+    (cast(GdaSqlSelectField*)this._cPtr).tableName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -128,8 +128,7 @@ class SqlSelectField
   */
   @property void as(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).as);
-    dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).as);
+    (cast(GdaSqlSelectField*)this._cPtr).as = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** */

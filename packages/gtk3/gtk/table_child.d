@@ -62,6 +62,8 @@ class TableChild
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gtk.widget.Widget _widgetRef; // Keeps borrowed field value alive
+
   /** */
   @property gtk.widget.Widget widget() nothrow
   {
@@ -71,8 +73,8 @@ class TableChild
   /** */
   @property void widget(gtk.widget.Widget propval) nothrow
   {
-    cValueFree!(gtk.widget.Widget)(cast(void*)(cast(GtkTableChild*)this._cPtr).widget);
-    dToC(propval, cast(void*)&(cast(GtkTableChild*)this._cPtr).widget);
+    _widgetRef = propval;
+    (cast(GtkTableChild*)this._cPtr).widget = propval ? cast(GtkWidget*)propval._cPtr(No.Dup) : null;
   }
 
   /** */

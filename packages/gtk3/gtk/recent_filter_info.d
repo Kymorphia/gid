@@ -85,8 +85,7 @@ class RecentFilterInfo
   */
   @property void uri(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).uri);
-    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).uri);
+    (cast(GtkRecentFilterInfo*)this._cPtr).uri = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -107,8 +106,7 @@ class RecentFilterInfo
   */
   @property void displayName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
-    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
+    (cast(GtkRecentFilterInfo*)this._cPtr).displayName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -127,8 +125,7 @@ class RecentFilterInfo
   */
   @property void mimeType(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
-    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
+    (cast(GtkRecentFilterInfo*)this._cPtr).mimeType = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

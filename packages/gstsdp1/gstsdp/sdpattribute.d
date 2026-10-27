@@ -57,8 +57,7 @@ class SDPAttribute
   */
   @property void key(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).key);
-    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)this._cPtr).key);
+    (cast(GstSDPAttribute*)this._cPtr).key = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -77,8 +76,7 @@ class SDPAttribute
   */
   @property void value(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)this._cPtr).value);
+    (cast(GstSDPAttribute*)this._cPtr).value = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -57,8 +57,6 @@ class GlyphItemIter : gobject.boxed.Boxed
   /**
       Create a `glyph_item_iter.GlyphItemIter` boxed type.
       Params:
-        glyphItem = 
-        text = 
         startGlyph = 
         startIndex = 
         startChar = 
@@ -66,11 +64,9 @@ class GlyphItemIter : gobject.boxed.Boxed
         endIndex = 
         endChar = 
   */
-  this(pango.glyph_item.GlyphItem glyphItem = pango.glyph_item.GlyphItem.init, string text = string.init, int startGlyph = int.init, int startIndex = int.init, int startChar = int.init, int endGlyph = int.init, int endIndex = int.init, int endChar = int.init) nothrow
+  this(int startGlyph = int.init, int startIndex = int.init, int startChar = int.init, int endGlyph = int.init, int endIndex = int.init, int endChar = int.init) nothrow
   {
     super(boxedNew!PangoGlyphItemIter(_getGType), Yes.Take);
-    this.glyphItem = glyphItem;
-    this.text = text;
     this.startGlyph = startGlyph;
     this.startIndex = startIndex;
     this.startChar = startChar;
@@ -117,23 +113,9 @@ class GlyphItemIter : gobject.boxed.Boxed
   }
 
   /** */
-  @property void glyphItem(pango.glyph_item.GlyphItem propval) nothrow
-  {
-    cValueFree!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
-  }
-
-  /** */
   @property string text() nothrow
   {
     return cToD!(string)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).text);
-  }
-
-  /** */
-  @property void text(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).text);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)this._cPtr).text);
   }
 
   /** */

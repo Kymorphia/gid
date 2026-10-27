@@ -17,13 +17,11 @@ class SchemaAttribute : gobject.boxed.Boxed
   /**
       Create a `schema_attribute.SchemaAttribute` boxed type.
       Params:
-        name = name of the attribute
         type = the type of the attribute
   */
-  this(string name = string.init, secret.types.SchemaAttributeType type = secret.types.SchemaAttributeType.init) nothrow
+  this(secret.types.SchemaAttributeType type = secret.types.SchemaAttributeType.init) nothrow
   {
     super(boxedNew!SecretSchemaAttribute(_getGType), Yes.Take);
-    this.name = name;
     this.type = type;
   }
 
@@ -65,17 +63,6 @@ class SchemaAttribute : gobject.boxed.Boxed
   @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(SecretSchemaAttribute*)this._cPtr).name);
-  }
-
-  /**
-      Set `name` field.
-      Params:
-        propval = name of the attribute
-  */
-  @property void name(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(SecretSchemaAttribute*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(SecretSchemaAttribute*)this._cPtr).name);
   }
 
   /**

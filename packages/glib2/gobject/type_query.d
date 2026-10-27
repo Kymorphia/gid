@@ -82,8 +82,7 @@ class TypeQuery
   */
   @property void typeName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GTypeQuery*)this._cPtr).typeName);
-    dToC(propval, cast(void*)&(cast(GTypeQuery*)this._cPtr).typeName);
+    (cast(GTypeQuery*)this._cPtr).typeName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -29,15 +29,13 @@ class GLBaseMemory : gobject.boxed.Boxed
   /**
       Create a `glbase_memory.GLBaseMemory` boxed type.
       Params:
-        context = the #GstGLContext to use for GL operations
         mapFlags = 
         mapCount = 
         glMapCount = 
   */
-  this(gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, gst.types.MapFlags mapFlags = gst.types.MapFlags.init, int mapCount = int.init, int glMapCount = int.init) nothrow
+  this(gst.types.MapFlags mapFlags = gst.types.MapFlags.init, int mapCount = int.init, int glMapCount = int.init) nothrow
   {
     super(boxedNew!GstGLBaseMemory(_getGType), Yes.Take);
-    this.context = context;
     this.mapFlags = mapFlags;
     this.mapCount = mapCount;
     this.glMapCount = glMapCount;
@@ -90,17 +88,6 @@ class GLBaseMemory : gobject.boxed.Boxed
   @property gstgl.glcontext.GLContext context() nothrow
   {
     return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLBaseMemory*)this._cPtr).context);
-  }
-
-  /**
-      Set `context` field.
-      Params:
-        propval = the #GstGLContext to use for GL operations
-  */
-  @property void context(gstgl.glcontext.GLContext propval) nothrow
-  {
-    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLBaseMemory*)this._cPtr).context);
-    dToC(propval, cast(void*)&(cast(GstGLBaseMemory*)this._cPtr).context);
   }
 
   /** */

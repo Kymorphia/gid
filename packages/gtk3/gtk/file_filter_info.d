@@ -87,8 +87,7 @@ class FileFilterInfo
   */
   @property void filename(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).filename);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).filename);
+    (cast(GtkFileFilterInfo*)this._cPtr).filename = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -107,8 +106,7 @@ class FileFilterInfo
   */
   @property void uri(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).uri);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).uri);
+    (cast(GtkFileFilterInfo*)this._cPtr).uri = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -129,8 +127,7 @@ class FileFilterInfo
   */
   @property void displayName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).displayName);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).displayName);
+    (cast(GtkFileFilterInfo*)this._cPtr).displayName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -149,7 +146,6 @@ class FileFilterInfo
   */
   @property void mimeType(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).mimeType);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).mimeType);
+    (cast(GtkFileFilterInfo*)this._cPtr).mimeType = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

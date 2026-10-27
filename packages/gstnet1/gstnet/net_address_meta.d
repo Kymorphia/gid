@@ -53,6 +53,8 @@ class NetAddressMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)this._cPtr).meta, No.Take);
   }
 
+  private gio.socket_address.SocketAddress _addrRef; // Keeps borrowed field value alive
+
   /**
       Get `addr` field.
       Returns: a #GSocketAddress stored as metadata
@@ -69,8 +71,8 @@ class NetAddressMeta
   */
   @property void addr(gio.socket_address.SocketAddress propval) nothrow
   {
-    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)this._cPtr).addr);
-    dToC(propval, cast(void*)&(cast(GstNetAddressMeta*)this._cPtr).addr);
+    _addrRef = propval;
+    (cast(GstNetAddressMeta*)this._cPtr).addr = propval ? cast(GSocketAddress*)propval._cPtr(No.Dup) : null;
   }
 
   /** */

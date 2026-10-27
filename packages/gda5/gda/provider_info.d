@@ -64,8 +64,7 @@ class ProviderInfo
   */
   @property void id(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).id);
-    dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).id);
+    (cast(GdaProviderInfo*)this._cPtr).id = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -84,8 +83,7 @@ class ProviderInfo
   */
   @property void location(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).location);
-    dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).location);
+    (cast(GdaProviderInfo*)this._cPtr).location = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -104,9 +102,10 @@ class ProviderInfo
   */
   @property void description(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).description);
+    (cast(GdaProviderInfo*)this._cPtr).description = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
+
+  private gda.set.Set _dsnParamsRef; // Keeps borrowed field value alive
 
   /**
       Get `dsnParams` field.
@@ -124,9 +123,11 @@ class ProviderInfo
   */
   @property void dsnParams(gda.set.Set propval) nothrow
   {
-    cValueFree!(gda.set.Set)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).dsnParams);
-    dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).dsnParams);
+    _dsnParamsRef = propval;
+    (cast(GdaProviderInfo*)this._cPtr).dsnParams = propval ? cast(GdaSet*)propval._cPtr(No.Dup) : null;
   }
+
+  private gda.set.Set _authParamsRef; // Keeps borrowed field value alive
 
   /**
       Get `authParams` field.
@@ -144,7 +145,7 @@ class ProviderInfo
   */
   @property void authParams(gda.set.Set propval) nothrow
   {
-    cValueFree!(gda.set.Set)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).authParams);
-    dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).authParams);
+    _authParamsRef = propval;
+    (cast(GdaProviderInfo*)this._cPtr).authParams = propval ? cast(GdaSet*)propval._cPtr(No.Dup) : null;
   }
 }

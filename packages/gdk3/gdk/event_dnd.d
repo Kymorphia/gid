@@ -80,6 +80,8 @@ class EventDND
     (cast(GdkEventDND*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event.
@@ -96,8 +98,8 @@ class EventDND
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventDND*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventDND*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -119,6 +121,8 @@ class EventDND
     (cast(GdkEventDND*)this._cPtr).sendEvent = propval;
   }
 
+  private gdk.drag_context.DragContext _contextRef; // Keeps borrowed field value alive
+
   /**
       Get `context` field.
       Returns: the #GdkDragContext for the current DND operation.
@@ -135,8 +139,8 @@ class EventDND
   */
   @property void context(gdk.drag_context.DragContext propval) nothrow
   {
-    cValueFree!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)this._cPtr).context);
-    dToC(propval, cast(void*)&(cast(GdkEventDND*)this._cPtr).context);
+    _contextRef = propval;
+    (cast(GdkEventDND*)this._cPtr).context = propval ? cast(GdkDragContext*)propval._cPtr(No.Dup) : null;
   }
 
   /**

@@ -68,17 +68,6 @@ class MetaContext : gobject.boxed.Boxed
   }
 
   /**
-      Set `tableName` field.
-      Params:
-        propval = the name of the table <emphasis>in the GdaMetaStore's internal database</emphasis>
-  */
-  @property void tableName(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaContext*)this._cPtr).tableName);
-    dToC(propval, cast(void*)&(cast(GdaMetaContext*)this._cPtr).tableName);
-  }
-
-  /**
       Get `columnNames` field.
       Returns: an array of column names (columns of the @table_name table)
   */

@@ -52,6 +52,8 @@ class ProtectionMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstProtectionMeta*)this._cPtr).meta, No.Take);
   }
 
+  private gst.structure.Structure _infoRef; // Keeps borrowed field value alive
+
   /**
       Get `info` field.
       Returns: the cryptographic information needed to decrypt the sample.
@@ -68,8 +70,8 @@ class ProtectionMeta
   */
   @property void info(gst.structure.Structure propval) nothrow
   {
-    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)this._cPtr).info);
-    dToC(propval, cast(void*)&(cast(GstProtectionMeta*)this._cPtr).info);
+    _infoRef = propval;
+    (cast(GstProtectionMeta*)this._cPtr).info = propval ? cast(GstStructure*)propval._cPtr(No.Dup) : null;
   }
 
   /** */

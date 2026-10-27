@@ -67,8 +67,7 @@ class Attribute
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(AtkAttribute*)this._cPtr).name);
+    (cast(AtkAttribute*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -87,7 +86,6 @@ class Attribute
   */
   @property void value(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(AtkAttribute*)this._cPtr).value);
+    (cast(AtkAttribute*)this._cPtr).value = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

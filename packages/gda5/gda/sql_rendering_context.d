@@ -70,6 +70,8 @@ class SqlRenderingContext
     (cast(GdaSqlRenderingContext*)this._cPtr).flags = cast(GdaStatementSqlFlag)propval;
   }
 
+  private gda.set.Set _paramsRef; // Keeps borrowed field value alive
+
   /**
       Get `params` field.
       Returns: Parameters to be used while doing the rendering
@@ -86,8 +88,8 @@ class SqlRenderingContext
   */
   @property void params(gda.set.Set propval) nothrow
   {
-    cValueFree!(gda.set.Set)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).params);
-    dToC(propval, cast(void*)&(cast(GdaSqlRenderingContext*)this._cPtr).params);
+    _paramsRef = propval;
+    (cast(GdaSqlRenderingContext*)this._cPtr).params = propval ? cast(GdaSet*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -98,6 +100,8 @@ class SqlRenderingContext
   {
     return gSListToD!(gda.holder.Holder)((cast(GdaSqlRenderingContext*)this._cPtr).paramsUsed);
   }
+
+  private gda.server_provider.ServerProvider _providerRef; // Keeps borrowed field value alive
 
   /**
       Get `provider` field.
@@ -115,9 +119,11 @@ class SqlRenderingContext
   */
   @property void provider(gda.server_provider.ServerProvider propval) nothrow
   {
-    cValueFree!(gda.server_provider.ServerProvider)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).provider);
-    dToC(propval, cast(void*)&(cast(GdaSqlRenderingContext*)this._cPtr).provider);
+    _providerRef = propval;
+    (cast(GdaSqlRenderingContext*)this._cPtr).provider = propval ? cast(GdaServerProvider*)propval._cPtr(No.Dup) : null;
   }
+
+  private gda.connection.Connection _cncRef; // Keeps borrowed field value alive
 
   /**
       Get `cnc` field.
@@ -135,8 +141,8 @@ class SqlRenderingContext
   */
   @property void cnc(gda.connection.Connection propval) nothrow
   {
-    cValueFree!(gda.connection.Connection)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).cnc);
-    dToC(propval, cast(void*)&(cast(GdaSqlRenderingContext*)this._cPtr).cnc);
+    _cncRef = propval;
+    (cast(GdaSqlRenderingContext*)this._cPtr).cnc = propval ? cast(GdaConnection*)propval._cPtr(No.Dup) : null;
   }
 
   /**

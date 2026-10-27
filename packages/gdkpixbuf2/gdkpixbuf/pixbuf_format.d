@@ -22,23 +22,14 @@ class PixbufFormat : gobject.boxed.Boxed
   /**
       Create a `pixbuf_format.PixbufFormat` boxed type.
       Params:
-        name = the name of the image format
-        domain = the message domain for the `description`
-        description = a description of the image format
         flags = a combination of [gdkpixbuf.types.PixbufFormatFlags]
         disabled = a boolean determining whether the loader is disabled`
-        license = a string containing license information, typically set to
-            shorthands like "GPL", "LGPL", etc.
   */
-  this(string name = string.init, string domain = string.init, string description = string.init, uint flags = uint.init, bool disabled = bool.init, string license = string.init) nothrow
+  this(uint flags = uint.init, bool disabled = bool.init) nothrow
   {
     super(boxedNew!GdkPixbufFormat(_getGType), Yes.Take);
-    this.name = name;
-    this.domain = domain;
-    this.description = description;
     this.flags = flags;
     this.disabled = disabled;
-    this.license = license;
   }
 
   /** */
@@ -82,17 +73,6 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-      Set `name` field.
-      Params:
-        propval = the name of the image format
-  */
-  @property void name(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).name);
-  }
-
-  /**
       Get `signature` field.
       Returns: the signature of the module
   */
@@ -111,34 +91,12 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-      Set `domain` field.
-      Params:
-        propval = the message domain for the `description`
-  */
-  @property void domain(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).domain);
-    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).domain);
-  }
-
-  /**
       Get `description` field.
       Returns: a description of the image format
   */
   @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).description);
-  }
-
-  /**
-      Set `description` field.
-      Params:
-        propval = a description of the image format
-  */
-  @property void description(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).description);
   }
 
   /**
@@ -228,18 +186,6 @@ class PixbufFormat : gobject.boxed.Boxed
   @property string license() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).license);
-  }
-
-  /**
-      Set `license` field.
-      Params:
-        propval = a string containing license information, typically set to
-            shorthands like "GPL", "LGPL", etc.
-  */
-  @property void license(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).license);
-    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).license);
   }
 
   /**

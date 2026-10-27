@@ -114,8 +114,7 @@ class MetaDbObject
   */
   @property void objCatalog(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objCatalog);
-    dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objCatalog);
+    (cast(GdaMetaDbObject*)this._cPtr).objCatalog = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -134,8 +133,7 @@ class MetaDbObject
   */
   @property void objSchema(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objSchema);
-    dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objSchema);
+    (cast(GdaMetaDbObject*)this._cPtr).objSchema = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -154,8 +152,7 @@ class MetaDbObject
   */
   @property void objName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objName);
-    dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objName);
+    (cast(GdaMetaDbObject*)this._cPtr).objName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -174,8 +171,7 @@ class MetaDbObject
   */
   @property void objShortName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objShortName);
-    dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objShortName);
+    (cast(GdaMetaDbObject*)this._cPtr).objShortName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -194,8 +190,7 @@ class MetaDbObject
   */
   @property void objFullName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objFullName);
-    dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objFullName);
+    (cast(GdaMetaDbObject*)this._cPtr).objFullName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -214,7 +209,6 @@ class MetaDbObject
   */
   @property void objOwner(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objOwner);
-    dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objOwner);
+    (cast(GdaMetaDbObject*)this._cPtr).objOwner = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

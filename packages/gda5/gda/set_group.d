@@ -67,17 +67,6 @@ class SetGroup : gobject.boxed.Boxed
   }
 
   /**
-      Set `nodesSource` field.
-      Params:
-        propval = if NULL, then @nodes contains exactly one entry
-  */
-  @property void nodesSource(gda.set_source.SetSource propval) nothrow
-  {
-    cValueFree!(gda.set_source.SetSource)(cast(void*)(cast(GdaSetGroup*)this._cPtr).nodesSource);
-    dToC(propval, cast(void*)&(cast(GdaSetGroup*)this._cPtr).nodesSource);
-  }
-
-  /**
       Creates a new #GdaSetGroup struct. If source is null then new group contains
       just one #GdaSetNode.
   

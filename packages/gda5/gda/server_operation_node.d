@@ -10,6 +10,7 @@ import gda.holder;
 import gda.set;
 import gda.types;
 import gid.gid;
+import gobject.object;
 
 /** */
 class ServerOperationNode
@@ -75,6 +76,8 @@ class ServerOperationNode
     (cast(GdaServerOperationNode*)this._cPtr).status = cast(GdaServerOperationNodeStatus)propval;
   }
 
+  private gda.set.Set _plistRef; // Keeps borrowed field value alive
+
   /** */
   @property gda.set.Set plist() nothrow
   {
@@ -84,9 +87,11 @@ class ServerOperationNode
   /** */
   @property void plist(gda.set.Set propval) nothrow
   {
-    cValueFree!(gda.set.Set)(cast(void*)(cast(GdaServerOperationNode*)this._cPtr).plist);
-    dToC(propval, cast(void*)&(cast(GdaServerOperationNode*)this._cPtr).plist);
+    _plistRef = propval;
+    (cast(GdaServerOperationNode*)this._cPtr).plist = propval ? cast(GdaSet*)propval._cPtr(No.Dup) : null;
   }
+
+  private gda.data_model.DataModel _modelRef; // Keeps borrowed field value alive
 
   /** */
   @property gda.data_model.DataModel model() nothrow
@@ -97,9 +102,11 @@ class ServerOperationNode
   /** */
   @property void model(gda.data_model.DataModel propval) nothrow
   {
-    cValueFree!(gda.data_model.DataModel)(cast(void*)(cast(GdaServerOperationNode*)this._cPtr).model);
-    dToC(propval, cast(void*)&(cast(GdaServerOperationNode*)this._cPtr).model);
+    _modelRef = propval;
+    (cast(GdaServerOperationNode*)this._cPtr).model = propval ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)propval)._cPtr(No.Dup) : null;
   }
+
+  private gda.column.Column _columnRef; // Keeps borrowed field value alive
 
   /** */
   @property gda.column.Column column() nothrow
@@ -110,9 +117,11 @@ class ServerOperationNode
   /** */
   @property void column(gda.column.Column propval) nothrow
   {
-    cValueFree!(gda.column.Column)(cast(void*)(cast(GdaServerOperationNode*)this._cPtr).column);
-    dToC(propval, cast(void*)&(cast(GdaServerOperationNode*)this._cPtr).column);
+    _columnRef = propval;
+    (cast(GdaServerOperationNode*)this._cPtr).column = propval ? cast(GdaColumn*)propval._cPtr(No.Dup) : null;
   }
+
+  private gda.holder.Holder _paramRef; // Keeps borrowed field value alive
 
   /** */
   @property gda.holder.Holder param() nothrow
@@ -123,7 +132,7 @@ class ServerOperationNode
   /** */
   @property void param(gda.holder.Holder propval) nothrow
   {
-    cValueFree!(gda.holder.Holder)(cast(void*)(cast(GdaServerOperationNode*)this._cPtr).param);
-    dToC(propval, cast(void*)&(cast(GdaServerOperationNode*)this._cPtr).param);
+    _paramRef = propval;
+    (cast(GdaServerOperationNode*)this._cPtr).param = propval ? cast(GdaHolder*)propval._cPtr(No.Dup) : null;
   }
 }

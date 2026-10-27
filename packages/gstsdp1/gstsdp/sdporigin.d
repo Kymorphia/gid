@@ -74,8 +74,7 @@ class SDPOrigin
   */
   @property void username(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).username);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).username);
+    (cast(GstSDPOrigin*)this._cPtr).username = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -98,8 +97,7 @@ class SDPOrigin
   */
   @property void sessId(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessId);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).sessId);
+    (cast(GstSDPOrigin*)this._cPtr).sessId = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -118,8 +116,7 @@ class SDPOrigin
   */
   @property void sessVersion(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessVersion);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).sessVersion);
+    (cast(GstSDPOrigin*)this._cPtr).sessVersion = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -140,8 +137,7 @@ class SDPOrigin
   */
   @property void nettype(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).nettype);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).nettype);
+    (cast(GstSDPOrigin*)this._cPtr).nettype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -160,8 +156,7 @@ class SDPOrigin
   */
   @property void addrtype(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addrtype);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).addrtype);
+    (cast(GstSDPOrigin*)this._cPtr).addrtype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -182,7 +177,6 @@ class SDPOrigin
   */
   @property void addr(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addr);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).addr);
+    (cast(GstSDPOrigin*)this._cPtr).addr = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

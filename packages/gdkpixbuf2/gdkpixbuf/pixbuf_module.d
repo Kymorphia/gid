@@ -122,8 +122,7 @@ class PixbufModule
   */
   @property void moduleName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).moduleName);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)this._cPtr).moduleName);
+    (cast(GdkPixbufModule*)this._cPtr).moduleName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -142,8 +141,7 @@ class PixbufModule
   */
   @property void modulePath(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).modulePath);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)this._cPtr).modulePath);
+    (cast(GdkPixbufModule*)this._cPtr).modulePath = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -154,6 +152,8 @@ class PixbufModule
   {
     return new gmodule.module_.Module(cast(ModuleC*)(cast(GdkPixbufModule*)this._cPtr).module_, No.Take);
   }
+
+  private gdkpixbuf.pixbuf_format.PixbufFormat _infoRef; // Keeps borrowed field value alive
 
   /**
       Get `info` field.
@@ -171,8 +171,8 @@ class PixbufModule
   */
   @property void info(gdkpixbuf.pixbuf_format.PixbufFormat propval) nothrow
   {
-    cValueFree!(gdkpixbuf.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).info);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)this._cPtr).info);
+    _infoRef = propval;
+    (cast(GdkPixbufModule*)this._cPtr).info = propval ? cast(GdkPixbufFormat*)propval._cPtr(No.Dup) : null;
   }
 
   /**

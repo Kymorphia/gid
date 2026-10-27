@@ -63,8 +63,7 @@ class OpenPGPMarker
   */
   @property void marker(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GMimeOpenPGPMarker*)this._cPtr).marker);
-    dToC(propval, cast(void*)&(cast(GMimeOpenPGPMarker*)this._cPtr).marker);
+    (cast(GMimeOpenPGPMarker*)this._cPtr).marker = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

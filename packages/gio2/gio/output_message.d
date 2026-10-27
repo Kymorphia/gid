@@ -53,6 +53,8 @@ class OutputMessage
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gio.socket_address.SocketAddress _addressRef; // Keeps borrowed field value alive
+
   /**
       Get `address` field.
       Returns: a #GSocketAddress, or null
@@ -69,8 +71,8 @@ class OutputMessage
   */
   @property void address(gio.socket_address.SocketAddress propval) nothrow
   {
-    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)this._cPtr).address);
-    dToC(propval, cast(void*)&(cast(GOutputMessage*)this._cPtr).address);
+    _addressRef = propval;
+    (cast(GOutputMessage*)this._cPtr).address = propval ? cast(GSocketAddress*)propval._cPtr(No.Dup) : null;
   }
 
   /**

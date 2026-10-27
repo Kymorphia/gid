@@ -22,17 +22,15 @@ class GLAllocationParams : gobject.boxed.Boxed
         free = a #GstGLAllocationParamsFreeFunc
         allocFlags = allocation flags
         allocSize = the allocation size
-        context = a #GstGLContext
         notify = a #GDestroyNotify
   */
-  this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, GDestroyNotify notify = GDestroyNotify.init) nothrow
+  this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, GDestroyNotify notify = GDestroyNotify.init) nothrow
   {
     super(boxedNew!GstGLAllocationParams(_getGType), Yes.Take);
     this.structSize = structSize;
     this.free = free;
     this.allocFlags = allocFlags;
     this.allocSize = allocSize;
-    this.context = context;
     this.notify = notify;
   }
 
@@ -160,17 +158,6 @@ class GLAllocationParams : gobject.boxed.Boxed
   @property gstgl.glcontext.GLContext context() nothrow
   {
     return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).context);
-  }
-
-  /**
-      Set `context` field.
-      Params:
-        propval = a #GstGLContext
-  */
-  @property void context(gstgl.glcontext.GLContext propval) nothrow
-  {
-    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).context);
-    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)this._cPtr).context);
   }
 
   /**

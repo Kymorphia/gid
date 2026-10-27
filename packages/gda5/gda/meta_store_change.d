@@ -60,7 +60,6 @@ class MetaStoreChange
   /** */
   @property void tableName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaStoreChange*)this._cPtr).tableName);
-    dToC(propval, cast(void*)&(cast(GdaMetaStoreChange*)this._cPtr).tableName);
+    (cast(GdaMetaStoreChange*)this._cPtr).tableName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

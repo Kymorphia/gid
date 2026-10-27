@@ -58,17 +58,6 @@ class Numeric : gobject.boxed.Boxed
   }
 
   /**
-      Set `number` field.
-      Params:
-        propval = a string representing a number
-  */
-  @property void number(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaNumeric*)this._cPtr).number);
-    dToC(propval, cast(void*)&(cast(GdaNumeric*)this._cPtr).number);
-  }
-
-  /**
       Get `precision` field.
       Returns: precision to use when @number is converted (not implemented jet)
   */

@@ -68,8 +68,7 @@ class MetaTableColumn
   */
   @property void columnName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).columnName);
-    dToC(propval, cast(void*)&(cast(GdaMetaTableColumn*)this._cPtr).columnName);
+    (cast(GdaMetaTableColumn*)this._cPtr).columnName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -88,8 +87,7 @@ class MetaTableColumn
   */
   @property void columnType(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).columnType);
-    dToC(propval, cast(void*)&(cast(GdaMetaTableColumn*)this._cPtr).columnType);
+    (cast(GdaMetaTableColumn*)this._cPtr).columnType = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -165,8 +163,7 @@ class MetaTableColumn
   */
   @property void defaultValue(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).defaultValue);
-    dToC(propval, cast(void*)&(cast(GdaMetaTableColumn*)this._cPtr).defaultValue);
+    (cast(GdaMetaTableColumn*)this._cPtr).defaultValue = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

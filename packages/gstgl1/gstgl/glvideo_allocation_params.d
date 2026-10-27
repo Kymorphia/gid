@@ -68,17 +68,6 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
   }
 
   /**
-      Set `vInfo` field.
-      Params:
-        propval = the #GstVideoInfo to allocate
-  */
-  @property void vInfo(gstvideo.video_info.VideoInfo propval) nothrow
-  {
-    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstGLVideoAllocationParams*)this._cPtr).vInfo);
-    dToC(propval, cast(void*)&(cast(GstGLVideoAllocationParams*)this._cPtr).vInfo);
-  }
-
-  /**
       Get `plane` field.
       Returns: the video plane index to allocate
   */

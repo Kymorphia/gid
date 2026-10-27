@@ -88,8 +88,7 @@ class RTPPayloadInfo
   */
   @property void media(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).media);
-    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).media);
+    (cast(GstRTPPayloadInfo*)this._cPtr).media = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -108,8 +107,7 @@ class RTPPayloadInfo
   */
   @property void encodingName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
-    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
+    (cast(GstRTPPayloadInfo*)this._cPtr).encodingName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -149,8 +147,7 @@ class RTPPayloadInfo
   */
   @property void encodingParameters(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
-    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
+    (cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

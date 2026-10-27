@@ -20,15 +20,13 @@ class TextRange : gobject.boxed.Boxed
         bounds = A rectangle giving the bounds of the text range
         startOffset = The start offset of a AtkTextRange
         endOffset = The end offset of a AtkTextRange
-        content = The text in the text range
   */
-  this(atk.types.TextRectangle bounds = atk.types.TextRectangle.init, int startOffset = int.init, int endOffset = int.init, string content = string.init) nothrow
+  this(atk.types.TextRectangle bounds = atk.types.TextRectangle.init, int startOffset = int.init, int endOffset = int.init) nothrow
   {
     super(boxedNew!AtkTextRange(_getGType), Yes.Take);
     this.bounds = bounds;
     this.startOffset = startOffset;
     this.endOffset = endOffset;
-    this.content = content;
   }
 
   /** */
@@ -126,16 +124,5 @@ class TextRange : gobject.boxed.Boxed
   @property string content() nothrow
   {
     return cToD!(string)(cast(void*)(cast(AtkTextRange*)this._cPtr).content);
-  }
-
-  /**
-      Set `content` field.
-      Params:
-        propval = The text in the text range
-  */
-  @property void content(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(AtkTextRange*)this._cPtr).content);
-    dToC(propval, cast(void*)&(cast(AtkTextRange*)this._cPtr).content);
   }
 }

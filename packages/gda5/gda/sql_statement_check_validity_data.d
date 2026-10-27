@@ -46,6 +46,8 @@ class SqlStatementCheckValidityData
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gda.connection.Connection _cncRef; // Keeps borrowed field value alive
+
   /** */
   @property gda.connection.Connection cnc() nothrow
   {
@@ -55,9 +57,11 @@ class SqlStatementCheckValidityData
   /** */
   @property void cnc(gda.connection.Connection propval) nothrow
   {
-    cValueFree!(gda.connection.Connection)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).cnc);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementCheckValidityData*)this._cPtr).cnc);
+    _cncRef = propval;
+    (cast(GdaSqlStatementCheckValidityData*)this._cPtr).cnc = propval ? cast(GdaConnection*)propval._cPtr(No.Dup) : null;
   }
+
+  private gda.meta_store.MetaStore _storeRef; // Keeps borrowed field value alive
 
   /** */
   @property gda.meta_store.MetaStore store() nothrow
@@ -68,9 +72,11 @@ class SqlStatementCheckValidityData
   /** */
   @property void store(gda.meta_store.MetaStore propval) nothrow
   {
-    cValueFree!(gda.meta_store.MetaStore)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).store);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementCheckValidityData*)this._cPtr).store);
+    _storeRef = propval;
+    (cast(GdaSqlStatementCheckValidityData*)this._cPtr).store = propval ? cast(GdaMetaStore*)propval._cPtr(No.Dup) : null;
   }
+
+  private gda.meta_struct.MetaStruct _mstructRef; // Keeps borrowed field value alive
 
   /** */
   @property gda.meta_struct.MetaStruct mstruct() nothrow
@@ -81,7 +87,7 @@ class SqlStatementCheckValidityData
   /** */
   @property void mstruct(gda.meta_struct.MetaStruct propval) nothrow
   {
-    cValueFree!(gda.meta_struct.MetaStruct)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).mstruct);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementCheckValidityData*)this._cPtr).mstruct);
+    _mstructRef = propval;
+    (cast(GdaSqlStatementCheckValidityData*)this._cPtr).mstruct = propval ? cast(GdaMetaStruct*)propval._cPtr(No.Dup) : null;
   }
 }

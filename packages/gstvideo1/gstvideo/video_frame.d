@@ -75,6 +75,8 @@ class VideoFrame
     (cast(GstVideoFrame*)this._cPtr).flags = cast(GstVideoFrameFlags)propval;
   }
 
+  private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
+
   /**
       Get `buffer` field.
       Returns: the mapped buffer
@@ -91,8 +93,8 @@ class VideoFrame
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)this._cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstVideoFrame*)this._cPtr).buffer);
+    _bufferRef = propval;
+    (cast(GstVideoFrame*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
 
   /**

@@ -75,6 +75,8 @@ class EventExpose
     (cast(GdkEventExpose*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event.
@@ -91,8 +93,8 @@ class EventExpose
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventExpose*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventExpose*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -133,6 +135,8 @@ class EventExpose
     (cast(GdkEventExpose*)this._cPtr).area = cast(GdkRectangle)propval;
   }
 
+  private cairo.region.Region _regionRef; // Keeps borrowed field value alive
+
   /**
       Get `region` field.
       Returns: the region that needs to be redrawn.
@@ -149,8 +153,8 @@ class EventExpose
   */
   @property void region(cairo.region.Region propval) nothrow
   {
-    cValueFree!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)this._cPtr).region);
-    dToC(propval, cast(void*)&(cast(GdkEventExpose*)this._cPtr).region);
+    _regionRef = propval;
+    (cast(GdkEventExpose*)this._cPtr).region = propval ? cast(cairo_region_t*)propval._cPtr(No.Dup) : null;
   }
 
   /**

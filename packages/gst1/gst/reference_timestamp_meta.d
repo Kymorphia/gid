@@ -75,6 +75,8 @@ class ReferenceTimestampMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstReferenceTimestampMeta*)this._cPtr).parent, No.Take);
   }
 
+  private gst.caps.Caps _referenceRef; // Keeps borrowed field value alive
+
   /**
       Get `reference` field.
       Returns: identifier for the timestamp reference.
@@ -91,8 +93,8 @@ class ReferenceTimestampMeta
   */
   @property void reference(gst.caps.Caps propval) nothrow
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
-    dToC(propval, cast(void*)&(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
+    _referenceRef = propval;
+    (cast(GstReferenceTimestampMeta*)this._cPtr).reference = propval ? cast(GstCaps*)propval._cPtr(No.Dup) : null;
   }
 
   /**

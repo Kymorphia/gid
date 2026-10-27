@@ -16,15 +16,10 @@ class RTSPAuthParam : gobject.boxed.Boxed
 
   /**
       Create a `rtspauth_param.RTSPAuthParam` boxed type.
-      Params:
-        name = The name of the parameter
-        value = The value of the parameter
   */
-  this(string name = string.init, string value = string.init) nothrow
+  this() nothrow
   {
     super(boxedNew!GstRTSPAuthParam(_getGType), Yes.Take);
-    this.name = name;
-    this.value = value;
   }
 
   /** */
@@ -68,34 +63,12 @@ class RTSPAuthParam : gobject.boxed.Boxed
   }
 
   /**
-      Set `name` field.
-      Params:
-        propval = The name of the parameter
-  */
-  @property void name(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)this._cPtr).name);
-  }
-
-  /**
       Get `value` field.
       Returns: The value of the parameter
   */
   @property string value() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)this._cPtr).value);
-  }
-
-  /**
-      Set `value` field.
-      Params:
-        propval = The value of the parameter
-  */
-  @property void value(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)this._cPtr).value);
   }
 
   /** */

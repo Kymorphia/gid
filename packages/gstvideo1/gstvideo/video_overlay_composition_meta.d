@@ -51,6 +51,8 @@ class VideoOverlayCompositionMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).meta, No.Take);
   }
 
+  private gstvideo.video_overlay_composition.VideoOverlayComposition _overlayRef; // Keeps borrowed field value alive
+
   /**
       Get `overlay` field.
       Returns: the attached #GstVideoOverlayComposition
@@ -67,8 +69,8 @@ class VideoOverlayCompositionMeta
   */
   @property void overlay(gstvideo.video_overlay_composition.VideoOverlayComposition propval) nothrow
   {
-    cValueFree!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
-    dToC(propval, cast(void*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
+    _overlayRef = propval;
+    (cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay = propval ? cast(GstVideoOverlayComposition*)propval._cPtr(No.Dup) : null;
   }
 
   /** */

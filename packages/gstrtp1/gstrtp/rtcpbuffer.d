@@ -51,6 +51,8 @@ class RTCPBuffer
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
+
   /** */
   @property gst.buffer.Buffer buffer() nothrow
   {
@@ -60,8 +62,8 @@ class RTCPBuffer
   /** */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstRTCPBuffer*)this._cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstRTCPBuffer*)this._cPtr).buffer);
+    _bufferRef = propval;
+    (cast(GstRTCPBuffer*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
 
   /**

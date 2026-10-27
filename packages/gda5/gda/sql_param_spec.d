@@ -56,8 +56,7 @@ class SqlParamSpec
   /** */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlParamSpec*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GdaSqlParamSpec*)this._cPtr).name);
+    (cast(GdaSqlParamSpec*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** */
@@ -69,8 +68,7 @@ class SqlParamSpec
   /** */
   @property void descr(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlParamSpec*)this._cPtr).descr);
-    dToC(propval, cast(void*)&(cast(GdaSqlParamSpec*)this._cPtr).descr);
+    (cast(GdaSqlParamSpec*)this._cPtr).descr = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** */

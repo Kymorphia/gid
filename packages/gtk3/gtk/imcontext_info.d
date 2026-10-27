@@ -64,8 +64,7 @@ class IMContextInfo
   */
   @property void contextId(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextId);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).contextId);
+    (cast(GtkIMContextInfo*)this._cPtr).contextId = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -84,8 +83,7 @@ class IMContextInfo
   */
   @property void contextName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextName);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).contextName);
+    (cast(GtkIMContextInfo*)this._cPtr).contextName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -104,8 +102,7 @@ class IMContextInfo
   */
   @property void domain(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domain);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).domain);
+    (cast(GtkIMContextInfo*)this._cPtr).domain = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -124,8 +121,7 @@ class IMContextInfo
   */
   @property void domainDirname(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
+    (cast(GtkIMContextInfo*)this._cPtr).domainDirname = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -146,7 +142,6 @@ class IMContextInfo
   */
   @property void defaultLocales(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);
+    (cast(GtkIMContextInfo*)this._cPtr).defaultLocales = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

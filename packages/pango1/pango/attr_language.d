@@ -51,6 +51,8 @@ class AttrLanguage
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrLanguage*)this._cPtr).attr);
   }
 
+  private pango.language.Language _valueRef; // Keeps borrowed field value alive
+
   /**
       Get `value` field.
       Returns: the [pango.language.Language] which is the value of the attribute
@@ -67,8 +69,8 @@ class AttrLanguage
   */
   @property void value(pango.language.Language propval) nothrow
   {
-    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(PangoAttrLanguage*)this._cPtr).value);
+    _valueRef = propval;
+    (cast(PangoAttrLanguage*)this._cPtr).value = propval ? cast(PangoLanguage*)propval._cPtr(No.Dup) : null;
   }
 
   /**

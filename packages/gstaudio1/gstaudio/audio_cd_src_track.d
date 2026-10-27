@@ -130,6 +130,8 @@ class AudioCdSrcTrack
     (cast(GstAudioCdSrcTrack*)this._cPtr).end = propval;
   }
 
+  private gst.tag_list.TagList _tagsRef; // Keeps borrowed field value alive
+
   /**
       Get `tags` field.
       Returns: Track-specific tags (e.g. from cd-text information), or NULL
@@ -146,7 +148,7 @@ class AudioCdSrcTrack
   */
   @property void tags(gst.tag_list.TagList propval) nothrow
   {
-    cValueFree!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)this._cPtr).tags);
-    dToC(propval, cast(void*)&(cast(GstAudioCdSrcTrack*)this._cPtr).tags);
+    _tagsRef = propval;
+    (cast(GstAudioCdSrcTrack*)this._cPtr).tags = propval ? cast(GstTagList*)propval._cPtr(No.Dup) : null;
   }
 }

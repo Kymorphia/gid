@@ -59,8 +59,7 @@ class Parameter
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GParameter*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GParameter*)this._cPtr).name);
+    (cast(GParameter*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

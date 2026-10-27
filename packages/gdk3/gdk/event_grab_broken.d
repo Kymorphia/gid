@@ -77,6 +77,8 @@ class EventGrabBroken
     (cast(GdkEventGrabBroken*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event, i.e. the window
@@ -95,8 +97,8 @@ class EventGrabBroken
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -158,6 +160,8 @@ class EventGrabBroken
     (cast(GdkEventGrabBroken*)this._cPtr).implicit = propval;
   }
 
+  private gdk.window.Window _grabWindowRef; // Keeps borrowed field value alive
+
   /**
       Get `grabWindow` field.
       Returns: If this event is caused by another grab in the same
@@ -178,7 +182,7 @@ class EventGrabBroken
   */
   @property void grabWindow(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
-    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
+    _grabWindowRef = propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).grabWindow = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 }

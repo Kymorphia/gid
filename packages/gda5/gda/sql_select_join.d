@@ -82,6 +82,8 @@ class SqlSelectJoin
     (cast(GdaSqlSelectJoin*)this._cPtr).position = propval;
   }
 
+  private gda.sql_expr.SqlExpr _exprRef; // Keeps borrowed field value alive
+
   /**
       Get `expr` field.
       Returns: joining expression, or null
@@ -98,8 +100,8 @@ class SqlSelectJoin
   */
   @property void expr(gda.sql_expr.SqlExpr propval) nothrow
   {
-    cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectJoin*)this._cPtr).expr);
-    dToC(propval, cast(void*)&(cast(GdaSqlSelectJoin*)this._cPtr).expr);
+    _exprRef = propval;
+    (cast(GdaSqlSelectJoin*)this._cPtr).expr = propval ? cast(GdaSqlExpr*)propval._cPtr(No.Dup) : null;
   }
 
   /**

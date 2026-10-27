@@ -18,13 +18,11 @@ class RTSPAuthCredential : gobject.boxed.Boxed
       Create a `rtspauth_credential.RTSPAuthCredential` boxed type.
       Params:
         scheme = a #GstRTSPAuthMethod
-        authorization = The authorization for the basic schem
   */
-  this(gstrtsp.types.RTSPAuthMethod scheme = gstrtsp.types.RTSPAuthMethod.init, string authorization = string.init) nothrow
+  this(gstrtsp.types.RTSPAuthMethod scheme = gstrtsp.types.RTSPAuthMethod.init) nothrow
   {
     super(boxedNew!GstRTSPAuthCredential(_getGType), Yes.Take);
     this.scheme = scheme;
-    this.authorization = authorization;
   }
 
   /** */
@@ -84,16 +82,5 @@ class RTSPAuthCredential : gobject.boxed.Boxed
   @property string authorization() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPAuthCredential*)this._cPtr).authorization);
-  }
-
-  /**
-      Set `authorization` field.
-      Params:
-        propval = The authorization for the basic schem
-  */
-  @property void authorization(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthCredential*)this._cPtr).authorization);
-    dToC(propval, cast(void*)&(cast(GstRTSPAuthCredential*)this._cPtr).authorization);
   }
 }

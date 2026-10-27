@@ -66,8 +66,7 @@ class AttrFontFeatures
   */
   @property void features(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(PangoAttrFontFeatures*)this._cPtr).features);
-    dToC(propval, cast(void*)&(cast(PangoAttrFontFeatures*)this._cPtr).features);
+    (cast(PangoAttrFontFeatures*)this._cPtr).features = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

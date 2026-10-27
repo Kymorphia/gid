@@ -81,8 +81,7 @@ class FormatDefinition
   */
   @property void nick(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).nick);
-    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)this._cPtr).nick);
+    (cast(GstFormatDefinition*)this._cPtr).nick = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -101,8 +100,7 @@ class FormatDefinition
   */
   @property void description(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)this._cPtr).description);
+    (cast(GstFormatDefinition*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

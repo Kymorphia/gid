@@ -146,6 +146,8 @@ class Harness
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gst.element.Element _elementRef; // Keeps borrowed field value alive
+
   /**
       Get `element` field.
       Returns: the element inside the harness
@@ -162,9 +164,11 @@ class Harness
   */
   @property void element(gst.element.Element propval) nothrow
   {
-    cValueFree!(gst.element.Element)(cast(void*)(cast(GstHarness*)this._cPtr).element);
-    dToC(propval, cast(void*)&(cast(GstHarness*)this._cPtr).element);
+    _elementRef = propval;
+    (cast(GstHarness*)this._cPtr).element = propval ? cast(GstElement*)propval._cPtr(No.Dup) : null;
   }
+
+  private gst.pad.Pad _srcpadRef; // Keeps borrowed field value alive
 
   /**
       Get `srcpad` field.
@@ -182,9 +186,11 @@ class Harness
   */
   @property void srcpad(gst.pad.Pad propval) nothrow
   {
-    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)this._cPtr).srcpad);
-    dToC(propval, cast(void*)&(cast(GstHarness*)this._cPtr).srcpad);
+    _srcpadRef = propval;
+    (cast(GstHarness*)this._cPtr).srcpad = propval ? cast(GstPad*)propval._cPtr(No.Dup) : null;
   }
+
+  private gst.pad.Pad _sinkpadRef; // Keeps borrowed field value alive
 
   /**
       Get `sinkpad` field.
@@ -202,8 +208,8 @@ class Harness
   */
   @property void sinkpad(gst.pad.Pad propval) nothrow
   {
-    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)this._cPtr).sinkpad);
-    dToC(propval, cast(void*)&(cast(GstHarness*)this._cPtr).sinkpad);
+    _sinkpadRef = propval;
+    (cast(GstHarness*)this._cPtr).sinkpad = propval ? cast(GstPad*)propval._cPtr(No.Dup) : null;
   }
 
   /**

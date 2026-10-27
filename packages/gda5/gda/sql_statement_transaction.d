@@ -81,8 +81,7 @@ class SqlStatementTransaction
   */
   @property void transMode(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlStatementTransaction*)this._cPtr).transMode);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementTransaction*)this._cPtr).transMode);
+    (cast(GdaSqlStatementTransaction*)this._cPtr).transMode = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -101,7 +100,6 @@ class SqlStatementTransaction
   */
   @property void transName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlStatementTransaction*)this._cPtr).transName);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementTransaction*)this._cPtr).transName);
+    (cast(GdaSqlStatementTransaction*)this._cPtr).transName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

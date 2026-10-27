@@ -55,34 +55,12 @@ class DsnInfo : gobject.boxed.Boxed
   }
 
   /**
-      Set `name` field.
-      Params:
-        propval = the (unique) name of the DSN (plain text, not RFC 1738 encoded)
-  */
-  @property void name(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).name);
-  }
-
-  /**
       Get `provider` field.
       Returns: the ID of the database provider to be used (plain text, not RFC 1738 encoded)
   */
   @property string provider() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).provider);
-  }
-
-  /**
-      Set `provider` field.
-      Params:
-        propval = the ID of the database provider to be used (plain text, not RFC 1738 encoded)
-  */
-  @property void provider(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).provider);
-    dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).provider);
   }
 
   /**
@@ -95,17 +73,6 @@ class DsnInfo : gobject.boxed.Boxed
   }
 
   /**
-      Set `description` field.
-      Params:
-        propval = a descriptive string (plain text, not RFC 1738 encoded), can be null.
-  */
-  @property void description(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).description);
-  }
-
-  /**
       Get `cncString` field.
       Returns: the connection string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded
   */
@@ -115,34 +82,12 @@ class DsnInfo : gobject.boxed.Boxed
   }
 
   /**
-      Set `cncString` field.
-      Params:
-        propval = the connection string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded
-  */
-  @property void cncString(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).cncString);
-    dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).cncString);
-  }
-
-  /**
       Get `authString` field.
       Returns: the authentication string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded. Can be null.
   */
   @property string authString() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).authString);
-  }
-
-  /**
-      Set `authString` field.
-      Params:
-        propval = the authentication string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded. Can be null.
-  */
-  @property void authString(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).authString);
-    dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).authString);
   }
 
   /**

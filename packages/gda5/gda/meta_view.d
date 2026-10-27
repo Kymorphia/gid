@@ -68,8 +68,7 @@ class MetaView
   */
   @property void viewDef(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaMetaView*)this._cPtr).viewDef);
-    dToC(propval, cast(void*)&(cast(GdaMetaView*)this._cPtr).viewDef);
+    (cast(GdaMetaView*)this._cPtr).viewDef = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

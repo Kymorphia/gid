@@ -89,6 +89,8 @@ class VideoMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoMeta*)this._cPtr).meta, No.Take);
   }
 
+  private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
+
   /**
       Get `buffer` field.
       Returns: the buffer this metadata belongs to
@@ -105,8 +107,8 @@ class VideoMeta
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)this._cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstVideoMeta*)this._cPtr).buffer);
+    _bufferRef = propval;
+    (cast(GstVideoMeta*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
 
   /**

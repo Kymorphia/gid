@@ -62,8 +62,7 @@ class StockItem
   */
   @property void stockId(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).stockId);
-    dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).stockId);
+    (cast(GtkStockItem*)this._cPtr).stockId = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -82,8 +81,7 @@ class StockItem
   */
   @property void label(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).label);
+    (cast(GtkStockItem*)this._cPtr).label = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -140,7 +138,6 @@ class StockItem
   */
   @property void translationDomain(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).translationDomain);
-    dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).translationDomain);
+    (cast(GtkStockItem*)this._cPtr).translationDomain = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

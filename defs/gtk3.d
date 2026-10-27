@@ -63,3 +63,6 @@
 //!set class[TextBuffer].glib:signal[insert-text].parameters.parameter[text].type '<array length="2" c:type="gchar*"><type name="char" c:type="char"/></array>'
 //!set class[UIManager].method[add_ui_from_string].parameters.parameter[buffer].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set interface[Editable].glib:signal[insert-text].parameters.parameter[new_text].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
+
+//# Pointer fields owned by the structure (freed by its free function), enables setters
+//!set record[TargetEntry].field[target][owned] 1

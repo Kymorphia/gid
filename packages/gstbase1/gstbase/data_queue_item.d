@@ -53,6 +53,8 @@ class DataQueueItem
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gst.mini_object.MiniObject _objectRef; // Keeps borrowed field value alive
+
   /**
       Get `object` field.
       Returns: the #GstMiniObject to queue.
@@ -69,8 +71,8 @@ class DataQueueItem
   */
   @property void object(gst.mini_object.MiniObject propval) nothrow
   {
-    cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
-    dToC(propval, cast(void*)&(cast(GstDataQueueItem*)this._cPtr).object);
+    _objectRef = propval;
+    (cast(GstDataQueueItem*)this._cPtr).object = propval ? cast(GstMiniObject*)propval._cPtr(No.Dup) : null;
   }
 
   /**

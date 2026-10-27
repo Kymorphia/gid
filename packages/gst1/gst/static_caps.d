@@ -44,6 +44,8 @@ class StaticCaps
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gst.caps.Caps _capsRef; // Keeps borrowed field value alive
+
   /**
       Get `caps` field.
       Returns: the cached #GstCaps
@@ -60,8 +62,8 @@ class StaticCaps
   */
   @property void caps(gst.caps.Caps propval) nothrow
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)this._cPtr).caps);
-    dToC(propval, cast(void*)&(cast(GstStaticCaps*)this._cPtr).caps);
+    _capsRef = propval;
+    (cast(GstStaticCaps*)this._cPtr).caps = propval ? cast(GstCaps*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -80,8 +82,7 @@ class StaticCaps
   */
   @property void string_(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstStaticCaps*)this._cPtr).string_);
-    dToC(propval, cast(void*)&(cast(GstStaticCaps*)this._cPtr).string_);
+    (cast(GstStaticCaps*)this._cPtr).string_ = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

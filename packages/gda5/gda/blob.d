@@ -20,13 +20,10 @@ class Blob : gobject.boxed.Boxed
 
   /**
       Create a `blob.Blob` boxed type.
-      Params:
-        op = a pointer to a #GdaBlopOp, or null
   */
-  this(gda.blob_op.BlobOp op = gda.blob_op.BlobOp.init) nothrow
+  this() nothrow
   {
     super(boxedNew!GdaBlob(_getGType), Yes.Take);
-    this.op = op;
   }
 
   /** */
@@ -76,17 +73,6 @@ class Blob : gobject.boxed.Boxed
   @property gda.blob_op.BlobOp op() nothrow
   {
     return cToD!(gda.blob_op.BlobOp)(cast(void*)(cast(GdaBlob*)this._cPtr).op);
-  }
-
-  /**
-      Set `op` field.
-      Params:
-        propval = a pointer to a #GdaBlopOp, or null
-  */
-  @property void op(gda.blob_op.BlobOp propval) nothrow
-  {
-    cValueFree!(gda.blob_op.BlobOp)(cast(void*)(cast(GdaBlob*)this._cPtr).op);
-    dToC(propval, cast(void*)&(cast(GdaBlob*)this._cPtr).op);
   }
 
   /**

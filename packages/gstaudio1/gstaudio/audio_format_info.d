@@ -88,8 +88,7 @@ class AudioFormatInfo
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)this._cPtr).name);
+    (cast(GstAudioFormatInfo*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -108,8 +107,7 @@ class AudioFormatInfo
   */
   @property void description(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)this._cPtr).description);
+    (cast(GstAudioFormatInfo*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

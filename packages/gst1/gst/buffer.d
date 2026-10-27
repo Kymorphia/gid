@@ -169,17 +169,6 @@ class Buffer : gobject.boxed.Boxed
   }
 
   /**
-      Set `pool` field.
-      Params:
-        propval = pointer to the pool owner of the buffer
-  */
-  @property void pool(gst.buffer_pool.BufferPool propval) nothrow
-  {
-    cValueFree!(gst.buffer_pool.BufferPool)(cast(void*)(cast(GstBuffer*)this._cPtr).pool);
-    dToC(propval, cast(void*)&(cast(GstBuffer*)this._cPtr).pool);
-  }
-
-  /**
       Get `pts` field.
       Returns: presentation timestamp of the buffer, can be #GST_CLOCK_TIME_NONE when the
             pts is not known or relevant. The pts contains the timestamp when the

@@ -55,6 +55,8 @@ class NetControlMessageMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetControlMessageMeta*)this._cPtr).meta, No.Take);
   }
 
+  private gio.socket_control_message.SocketControlMessage _messageRef; // Keeps borrowed field value alive
+
   /**
       Get `message` field.
       Returns: a #GSocketControlMessage stored as metadata
@@ -71,8 +73,8 @@ class NetControlMessageMeta
   */
   @property void message(gio.socket_control_message.SocketControlMessage propval) nothrow
   {
-    cValueFree!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)this._cPtr).message);
-    dToC(propval, cast(void*)&(cast(GstNetControlMessageMeta*)this._cPtr).message);
+    _messageRef = propval;
+    (cast(GstNetControlMessageMeta*)this._cPtr).message = propval ? cast(GSocketControlMessage*)propval._cPtr(No.Dup) : null;
   }
 
   /** */

@@ -101,17 +101,6 @@ class ValueArray : gobject.boxed.Boxed
   }
 
   /**
-      Set `values` field.
-      Params:
-        propval = array of values
-  */
-  @property void values(gobject.value.Value propval) nothrow
-  {
-    cValueFree!(gobject.value.Value)(cast(void*)(cast(GValueArray*)this._cPtr).values);
-    dToC(propval, cast(void*)&(cast(GValueArray*)this._cPtr).values);
-  }
-
-  /**
       Allocate and initialize a new #GValueArray, optionally preserve space
       for n_prealloced elements. New arrays always contain 0 elements,
       regardless of the value of n_prealloced.

@@ -58,6 +58,8 @@ class AudioRingBufferSpec
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gst.caps.Caps _capsRef; // Keeps borrowed field value alive
+
   /**
       Get `caps` field.
       Returns: The caps that generated the Spec.
@@ -74,8 +76,8 @@ class AudioRingBufferSpec
   */
   @property void caps(gst.caps.Caps propval) nothrow
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)this._cPtr).caps);
-    dToC(propval, cast(void*)&(cast(GstAudioRingBufferSpec*)this._cPtr).caps);
+    _capsRef = propval;
+    (cast(GstAudioRingBufferSpec*)this._cPtr).caps = propval ? cast(GstCaps*)propval._cPtr(No.Dup) : null;
   }
 
   /**

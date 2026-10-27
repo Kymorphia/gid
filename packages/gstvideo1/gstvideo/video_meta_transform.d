@@ -44,6 +44,8 @@ class VideoMetaTransform
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gstvideo.video_info.VideoInfo _inInfoRef; // Keeps borrowed field value alive
+
   /**
       Get `inInfo` field.
       Returns: the input #GstVideoInfo
@@ -60,9 +62,11 @@ class VideoMetaTransform
   */
   @property void inInfo(gstvideo.video_info.VideoInfo propval) nothrow
   {
-    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
-    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
+    _inInfoRef = propval;
+    (cast(GstVideoMetaTransform*)this._cPtr).inInfo = propval ? cast(GstVideoInfo*)propval._cPtr(No.Dup) : null;
   }
+
+  private gstvideo.video_info.VideoInfo _outInfoRef; // Keeps borrowed field value alive
 
   /**
       Get `outInfo` field.
@@ -80,8 +84,8 @@ class VideoMetaTransform
   */
   @property void outInfo(gstvideo.video_info.VideoInfo propval) nothrow
   {
-    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
-    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
+    _outInfoRef = propval;
+    (cast(GstVideoMetaTransform*)this._cPtr).outInfo = propval ? cast(GstVideoInfo*)propval._cPtr(No.Dup) : null;
   }
 
   /**

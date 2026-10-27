@@ -104,8 +104,7 @@ class VideoFormatInfo
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)this._cPtr).name);
+    (cast(GstVideoFormatInfo*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -124,8 +123,7 @@ class VideoFormatInfo
   */
   @property void description(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)this._cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)this._cPtr).description);
+    (cast(GstVideoFormatInfo*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

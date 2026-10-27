@@ -59,17 +59,6 @@ class SetSource : gobject.boxed.Boxed
   }
 
   /**
-      Set `dataModel` field.
-      Params:
-        propval = Can't be NULL
-  */
-  @property void dataModel(gda.data_model.DataModel propval) nothrow
-  {
-    cValueFree!(gda.data_model.DataModel)(cast(void*)(cast(GdaSetSource*)this._cPtr).dataModel);
-    dToC(propval, cast(void*)&(cast(GdaSetSource*)this._cPtr).dataModel);
-  }
-
-  /**
       Get `nodes` field.
       Returns: list of #GdaSetNode for which source_model == @data_model
   */

@@ -25,8 +25,6 @@ class GlyphItem : gobject.boxed.Boxed
   /**
       Create a `glyph_item.GlyphItem` boxed type.
       Params:
-        item = corresponding [pango.item.Item]
-        glyphs = corresponding [pango.glyph_string.GlyphString]
         yOffset = shift of the baseline, relative to the baseline
             of the containing line. Positive values shift upwards
         startXOffset = horizontal displacement to apply before the
@@ -34,11 +32,9 @@ class GlyphItem : gobject.boxed.Boxed
         endXOffset = horizontal displacement to apply after th
             glyph item. Positive values shift right
   */
-  this(pango.item.Item item = pango.item.Item.init, pango.glyph_string.GlyphString glyphs = pango.glyph_string.GlyphString.init, int yOffset = int.init, int startXOffset = int.init, int endXOffset = int.init) nothrow
+  this(int yOffset = int.init, int startXOffset = int.init, int endXOffset = int.init) nothrow
   {
     super(boxedNew!PangoGlyphItem(_getGType), Yes.Take);
-    this.item = item;
-    this.glyphs = glyphs;
     this.yOffset = yOffset;
     this.startXOffset = startXOffset;
     this.endXOffset = endXOffset;
@@ -85,34 +81,12 @@ class GlyphItem : gobject.boxed.Boxed
   }
 
   /**
-      Set `item` field.
-      Params:
-        propval = corresponding [pango.item.Item]
-  */
-  @property void item(pango.item.Item propval) nothrow
-  {
-    cValueFree!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).item);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)this._cPtr).item);
-  }
-
-  /**
       Get `glyphs` field.
       Returns: corresponding [pango.glyph_string.GlyphString]
   */
   @property pango.glyph_string.GlyphString glyphs() nothrow
   {
     return cToD!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).glyphs);
-  }
-
-  /**
-      Set `glyphs` field.
-      Params:
-        propval = corresponding [pango.glyph_string.GlyphString]
-  */
-  @property void glyphs(pango.glyph_string.GlyphString propval) nothrow
-  {
-    cValueFree!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).glyphs);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)this._cPtr).glyphs);
   }
 
   /**

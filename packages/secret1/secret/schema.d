@@ -107,17 +107,6 @@ class Schema : gobject.boxed.Boxed
   }
 
   /**
-      Set `name` field.
-      Params:
-        propval = the dotted name of the schema
-  */
-  @property void name(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(SecretSchema*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(SecretSchema*)this._cPtr).name);
-  }
-
-  /**
       Get `flags` field.
       Returns: flags for the schema
   */

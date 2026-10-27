@@ -79,8 +79,7 @@ class SqlStatementInsert
   */
   @property void onConflict(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlStatementInsert*)this._cPtr).onConflict);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementInsert*)this._cPtr).onConflict);
+    (cast(GdaSqlStatementInsert*)this._cPtr).onConflict = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

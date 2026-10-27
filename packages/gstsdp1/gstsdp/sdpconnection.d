@@ -66,8 +66,7 @@ class SDPConnection
   */
   @property void nettype(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).nettype);
-    dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).nettype);
+    (cast(GstSDPConnection*)this._cPtr).nettype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -86,8 +85,7 @@ class SDPConnection
   */
   @property void addrtype(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).addrtype);
-    dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).addrtype);
+    (cast(GstSDPConnection*)this._cPtr).addrtype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -106,8 +104,7 @@ class SDPConnection
   */
   @property void address(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).address);
-    dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).address);
+    (cast(GstSDPConnection*)this._cPtr).address = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

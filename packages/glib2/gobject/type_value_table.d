@@ -184,8 +184,7 @@ class TypeValueTable
   */
   @property void collectFormat(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
-    dToC(propval, cast(void*)&(cast(GTypeValueTable*)this._cPtr).collectFormat);
+    (cast(GTypeValueTable*)this._cPtr).collectFormat = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -208,7 +207,6 @@ class TypeValueTable
   */
   @property void lcopyFormat(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
-    dToC(propval, cast(void*)&(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
+    (cast(GTypeValueTable*)this._cPtr).lcopyFormat = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

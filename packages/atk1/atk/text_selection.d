@@ -68,6 +68,8 @@ class TextSelection
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private atk.object.ObjectWrap _startObjectRef; // Keeps borrowed field value alive
+
   /**
       Get `startObject` field.
       Returns: the AtkText containing the start of the selection.
@@ -84,8 +86,8 @@ class TextSelection
   */
   @property void startObject(atk.object.ObjectWrap propval) nothrow
   {
-    cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).startObject);
-    dToC(propval, cast(void*)&(cast(AtkTextSelection*)this._cPtr).startObject);
+    _startObjectRef = propval;
+    (cast(AtkTextSelection*)this._cPtr).startObject = propval ? cast(AtkObject*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -109,6 +111,8 @@ class TextSelection
     (cast(AtkTextSelection*)this._cPtr).startOffset = propval;
   }
 
+  private atk.object.ObjectWrap _endObjectRef; // Keeps borrowed field value alive
+
   /**
       Get `endObject` field.
       Returns: the AtkText containing the end of the selection.
@@ -125,8 +129,8 @@ class TextSelection
   */
   @property void endObject(atk.object.ObjectWrap propval) nothrow
   {
-    cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).endObject);
-    dToC(propval, cast(void*)&(cast(AtkTextSelection*)this._cPtr).endObject);
+    _endObjectRef = propval;
+    (cast(AtkTextSelection*)this._cPtr).endObject = propval ? cast(AtkObject*)propval._cPtr(No.Dup) : null;
   }
 
   /**

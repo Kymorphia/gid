@@ -62,8 +62,7 @@ class SqlStatementContentsInfo
   /** */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlStatementContentsInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GdaSqlStatementContentsInfo*)this._cPtr).name);
+    (cast(GdaSqlStatementContentsInfo*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** Function alias for field `construct` */

@@ -43,6 +43,8 @@ class TransactionStatusEvent
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gda.transaction_status.TransactionStatus _transRef; // Keeps borrowed field value alive
+
   /** */
   @property gda.transaction_status.TransactionStatus trans() nothrow
   {
@@ -52,8 +54,8 @@ class TransactionStatusEvent
   /** */
   @property void trans(gda.transaction_status.TransactionStatus propval) nothrow
   {
-    cValueFree!(gda.transaction_status.TransactionStatus)(cast(void*)(cast(GdaTransactionStatusEvent*)this._cPtr).trans);
-    dToC(propval, cast(void*)&(cast(GdaTransactionStatusEvent*)this._cPtr).trans);
+    _transRef = propval;
+    (cast(GdaTransactionStatusEvent*)this._cPtr).trans = propval ? cast(GdaTransactionStatus*)propval._cPtr(No.Dup) : null;
   }
 
   /** */
@@ -68,6 +70,8 @@ class TransactionStatusEvent
     (cast(GdaTransactionStatusEvent*)this._cPtr).type = cast(GdaTransactionStatusEventType)propval;
   }
 
+  private gda.connection_event.ConnectionEvent _connEventRef; // Keeps borrowed field value alive
+
   /** */
   @property gda.connection_event.ConnectionEvent connEvent() nothrow
   {
@@ -77,7 +81,7 @@ class TransactionStatusEvent
   /** */
   @property void connEvent(gda.connection_event.ConnectionEvent propval) nothrow
   {
-    cValueFree!(gda.connection_event.ConnectionEvent)(cast(void*)(cast(GdaTransactionStatusEvent*)this._cPtr).connEvent);
-    dToC(propval, cast(void*)&(cast(GdaTransactionStatusEvent*)this._cPtr).connEvent);
+    _connEventRef = propval;
+    (cast(GdaTransactionStatusEvent*)this._cPtr).connEvent = propval ? cast(GdaConnectionEvent*)propval._cPtr(No.Dup) : null;
   }
 }

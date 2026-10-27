@@ -76,7 +76,6 @@ class DBusErrorEntry
   */
   @property void dbusErrorName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusErrorEntry*)this._cPtr).dbusErrorName);
-    dToC(propval, cast(void*)&(cast(GDBusErrorEntry*)this._cPtr).dbusErrorName);
+    (cast(GDBusErrorEntry*)this._cPtr).dbusErrorName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

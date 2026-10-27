@@ -50,8 +50,7 @@ class SqlTable
   /** */
   @property void tableName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlTable*)this._cPtr).tableName);
-    dToC(propval, cast(void*)&(cast(GdaSqlTable*)this._cPtr).tableName);
+    (cast(GdaSqlTable*)this._cPtr).tableName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /** */

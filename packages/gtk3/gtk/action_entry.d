@@ -72,8 +72,7 @@ class ActionEntry
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).name);
+    (cast(GtkActionEntry*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -94,8 +93,7 @@ class ActionEntry
   */
   @property void stockId(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).stockId);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).stockId);
+    (cast(GtkActionEntry*)this._cPtr).stockId = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -118,8 +116,7 @@ class ActionEntry
   */
   @property void label(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).label);
+    (cast(GtkActionEntry*)this._cPtr).label = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -140,8 +137,7 @@ class ActionEntry
   */
   @property void accelerator(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).accelerator);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).accelerator);
+    (cast(GtkActionEntry*)this._cPtr).accelerator = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -162,8 +158,7 @@ class ActionEntry
   */
   @property void tooltip(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).tooltip);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).tooltip);
+    (cast(GtkActionEntry*)this._cPtr).tooltip = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -57,8 +57,7 @@ class SettingsValue
   */
   @property void origin(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkSettingsValue*)this._cPtr).origin);
-    dToC(propval, cast(void*)&(cast(GtkSettingsValue*)this._cPtr).origin);
+    (cast(GtkSettingsValue*)this._cPtr).origin = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

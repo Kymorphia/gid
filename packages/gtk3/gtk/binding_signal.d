@@ -66,7 +66,6 @@ class BindingSignal
   */
   @property void signalName(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkBindingSignal*)this._cPtr).signalName);
-    dToC(propval, cast(void*)&(cast(GtkBindingSignal*)this._cPtr).signalName);
+    (cast(GtkBindingSignal*)this._cPtr).signalName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

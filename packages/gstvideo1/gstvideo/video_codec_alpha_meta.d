@@ -56,6 +56,8 @@ class VideoCodecAlphaMeta
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).meta, No.Take);
   }
 
+  private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
+
   /**
       Get `buffer` field.
       Returns: the encoded alpha frame
@@ -72,8 +74,8 @@ class VideoCodecAlphaMeta
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
+    _bufferRef = propval;
+    (cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
 
   /** */

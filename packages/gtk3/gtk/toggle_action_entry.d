@@ -73,8 +73,7 @@ class ToggleActionEntry
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).name);
+    (cast(GtkToggleActionEntry*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -95,8 +94,7 @@ class ToggleActionEntry
   */
   @property void stockId(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).stockId);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).stockId);
+    (cast(GtkToggleActionEntry*)this._cPtr).stockId = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -117,8 +115,7 @@ class ToggleActionEntry
   */
   @property void label(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).label);
+    (cast(GtkToggleActionEntry*)this._cPtr).label = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -139,8 +136,7 @@ class ToggleActionEntry
   */
   @property void accelerator(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
+    (cast(GtkToggleActionEntry*)this._cPtr).accelerator = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -161,8 +157,7 @@ class ToggleActionEntry
   */
   @property void tooltip(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
+    (cast(GtkToggleActionEntry*)this._cPtr).tooltip = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

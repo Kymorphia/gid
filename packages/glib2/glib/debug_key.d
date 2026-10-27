@@ -58,8 +58,7 @@ class DebugKey
   */
   @property void key(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GDebugKey*)this._cPtr).key);
-    dToC(propval, cast(void*)&(cast(GDebugKey*)this._cPtr).key);
+    (cast(GDebugKey*)this._cPtr).key = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

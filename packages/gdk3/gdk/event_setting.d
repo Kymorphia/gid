@@ -68,6 +68,8 @@ class EventSetting
     (cast(GdkEventSetting*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event.
@@ -84,8 +86,8 @@ class EventSetting
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSetting*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventSetting*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventSetting*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -144,7 +146,6 @@ class EventSetting
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GdkEventSetting*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GdkEventSetting*)this._cPtr).name);
+    (cast(GdkEventSetting*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 }

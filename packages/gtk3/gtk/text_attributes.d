@@ -109,17 +109,6 @@ class TextAttributes : gobject.boxed.Boxed
   }
 
   /**
-      Set `font` field.
-      Params:
-        propval = #PangoFontDescription for text.
-  */
-  @property void font(pango.font_description.FontDescription propval) nothrow
-  {
-    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).font);
-    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).font);
-  }
-
-  /**
       Get `fontScale` field.
       Returns: Font scale factor.
   */
@@ -264,17 +253,6 @@ class TextAttributes : gobject.boxed.Boxed
   }
 
   /**
-      Set `tabs` field.
-      Params:
-        propval = Custom #PangoTabArray for this text.
-  */
-  @property void tabs(pango.tab_array.TabArray propval) nothrow
-  {
-    cValueFree!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).tabs);
-    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).tabs);
-  }
-
-  /**
       Get `wrapMode` field.
       Returns: #GtkWrapMode for text.
   */
@@ -300,17 +278,6 @@ class TextAttributes : gobject.boxed.Boxed
   @property pango.language.Language language() nothrow
   {
     return cToD!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).language);
-  }
-
-  /**
-      Set `language` field.
-      Params:
-        propval = #PangoLanguage for text.
-  */
-  @property void language(pango.language.Language propval) nothrow
-  {
-    cValueFree!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).language);
-    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).language);
   }
 
   /**

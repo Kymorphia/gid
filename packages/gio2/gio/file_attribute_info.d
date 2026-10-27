@@ -59,8 +59,7 @@ class FileAttributeInfo
   */
   @property void name(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GFileAttributeInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GFileAttributeInfo*)this._cPtr).name);
+    (cast(GFileAttributeInfo*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

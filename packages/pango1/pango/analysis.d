@@ -52,6 +52,8 @@ class Analysis
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private pango.font.Font _fontRef; // Keeps borrowed field value alive
+
   /**
       Get `font` field.
       Returns: the font for this segment.
@@ -68,8 +70,8 @@ class Analysis
   */
   @property void font(pango.font.Font propval) nothrow
   {
-    cValueFree!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)this._cPtr).font);
-    dToC(propval, cast(void*)&(cast(PangoAnalysis*)this._cPtr).font);
+    _fontRef = propval;
+    (cast(PangoAnalysis*)this._cPtr).font = propval ? cast(PangoFont*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -148,6 +150,8 @@ class Analysis
     (cast(PangoAnalysis*)this._cPtr).script = propval;
   }
 
+  private pango.language.Language _languageRef; // Keeps borrowed field value alive
+
   /**
       Get `language` field.
       Returns: the detected language for this segment.
@@ -164,8 +168,8 @@ class Analysis
   */
   @property void language(pango.language.Language propval) nothrow
   {
-    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)this._cPtr).language);
-    dToC(propval, cast(void*)&(cast(PangoAnalysis*)this._cPtr).language);
+    _languageRef = propval;
+    (cast(PangoAnalysis*)this._cPtr).language = propval ? cast(PangoLanguage*)propval._cPtr(No.Dup) : null;
   }
 
   /**

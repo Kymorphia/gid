@@ -44,6 +44,8 @@ class ObjectConstructParam
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
   }
 
+  private gobject.param_spec.ParamSpec _pspecRef; // Keeps borrowed field value alive
+
   /**
       Get `pspec` field.
       Returns: the #GParamSpec of the construct parameter
@@ -60,9 +62,11 @@ class ObjectConstructParam
   */
   @property void pspec(gobject.param_spec.ParamSpec propval) nothrow
   {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).pspec);
-    dToC(propval, cast(void*)&(cast(GObjectConstructParam*)this._cPtr).pspec);
+    _pspecRef = propval;
+    (cast(GObjectConstructParam*)this._cPtr).pspec = propval ? cast(GParamSpec*)propval._cPtr(No.Dup) : null;
   }
+
+  private gobject.value.Value _valueRef; // Keeps borrowed field value alive
 
   /**
       Get `value` field.
@@ -80,7 +84,7 @@ class ObjectConstructParam
   */
   @property void value(gobject.value.Value propval) nothrow
   {
-    cValueFree!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(GObjectConstructParam*)this._cPtr).value);
+    _valueRef = propval;
+    (cast(GObjectConstructParam*)this._cPtr).value = propval ? cast(GValue*)propval._cPtr(No.Dup) : null;
   }
 }

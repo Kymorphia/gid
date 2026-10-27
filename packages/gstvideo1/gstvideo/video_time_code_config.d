@@ -106,6 +106,8 @@ class VideoTimeCodeConfig
     (cast(GstVideoTimeCodeConfig*)this._cPtr).flags = cast(GstVideoTimeCodeFlags)propval;
   }
 
+  private glib.date_time.DateTime _latestDailyJamRef; // Keeps borrowed field value alive
+
   /**
       Get `latestDailyJam` field.
       Returns: The latest daily jam information, if present, or NULL
@@ -122,7 +124,7 @@ class VideoTimeCodeConfig
   */
   @property void latestDailyJam(glib.date_time.DateTime propval) nothrow
   {
-    cValueFree!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
-    dToC(propval, cast(void*)&(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
+    _latestDailyJamRef = propval;
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam = propval ? cast(GDateTime*)propval._cPtr(No.Dup) : null;
   }
 }

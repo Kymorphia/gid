@@ -51,6 +51,8 @@ class AttrFontDesc
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontDesc*)this._cPtr).attr);
   }
 
+  private pango.font_description.FontDescription _descRef; // Keeps borrowed field value alive
+
   /**
       Get `desc` field.
       Returns: the font description which is the value of this attribute
@@ -67,8 +69,8 @@ class AttrFontDesc
   */
   @property void desc(pango.font_description.FontDescription propval) nothrow
   {
-    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)this._cPtr).desc);
-    dToC(propval, cast(void*)&(cast(PangoAttrFontDesc*)this._cPtr).desc);
+    _descRef = propval;
+    (cast(PangoAttrFontDesc*)this._cPtr).desc = propval ? cast(PangoFontDescription*)propval._cPtr(No.Dup) : null;
   }
 
   /**

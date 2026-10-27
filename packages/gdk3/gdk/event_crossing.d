@@ -91,6 +91,8 @@ class EventCrossing
     (cast(GdkEventCrossing*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event.
@@ -107,8 +109,8 @@ class EventCrossing
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventCrossing*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -130,6 +132,8 @@ class EventCrossing
     (cast(GdkEventCrossing*)this._cPtr).sendEvent = propval;
   }
 
+  private gdk.window.Window _subwindowRef; // Keeps borrowed field value alive
+
   /**
       Get `subwindow` field.
       Returns: the window that was entered or left.
@@ -146,8 +150,8 @@ class EventCrossing
   */
   @property void subwindow(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).subwindow);
-    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)this._cPtr).subwindow);
+    _subwindowRef = propval;
+    (cast(GdkEventCrossing*)this._cPtr).subwindow = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**

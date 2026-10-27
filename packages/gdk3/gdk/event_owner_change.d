@@ -75,6 +75,8 @@ class EventOwnerChange
     (cast(GdkEventOwnerChange*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
+  private gdk.window.Window _windowRef; // Keeps borrowed field value alive
+
   /**
       Get `window` field.
       Returns: the window which received the event
@@ -91,8 +93,8 @@ class EventOwnerChange
   */
   @property void window(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)this._cPtr).window);
+    _windowRef = propval;
+    (cast(GdkEventOwnerChange*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**
@@ -114,6 +116,8 @@ class EventOwnerChange
     (cast(GdkEventOwnerChange*)this._cPtr).sendEvent = propval;
   }
 
+  private gdk.window.Window _ownerRef; // Keeps borrowed field value alive
+
   /**
       Get `owner` field.
       Returns: the new owner of the selection, or null if there is none
@@ -130,8 +134,8 @@ class EventOwnerChange
   */
   @property void owner(gdk.window.Window propval) nothrow
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).owner);
-    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)this._cPtr).owner);
+    _ownerRef = propval;
+    (cast(GdkEventOwnerChange*)this._cPtr).owner = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
 
   /**

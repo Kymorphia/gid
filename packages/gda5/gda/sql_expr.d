@@ -73,17 +73,6 @@ class SqlExpr : gobject.boxed.Boxed
   }
 
   /**
-      Set `value` field.
-      Params:
-        propval = a #GValue, or null. Please see specific note about this field.
-  */
-  @property void value(gobject.value.Value propval) nothrow
-  {
-    cValueFree!(gobject.value.Value)(cast(void*)(cast(GdaSqlExpr*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(GdaSqlExpr*)this._cPtr).value);
-  }
-
-  /**
       Get `paramSpec` field.
       Returns: a #GdaSqlParamSpec, or null if this is not a variable
   */
@@ -126,17 +115,6 @@ class SqlExpr : gobject.boxed.Boxed
   @property string castAs() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlExpr*)this._cPtr).castAs);
-  }
-
-  /**
-      Set `castAs` field.
-      Params:
-        propval = not null if expression must be cast to another data type
-  */
-  @property void castAs(string propval) nothrow
-  {
-    cValueFree!(string)(cast(void*)(cast(GdaSqlExpr*)this._cPtr).castAs);
-    dToC(propval, cast(void*)&(cast(GdaSqlExpr*)this._cPtr).castAs);
   }
 
   /**

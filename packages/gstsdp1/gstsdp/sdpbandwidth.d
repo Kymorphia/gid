@@ -58,8 +58,7 @@ class SDPBandwidth
   */
   @property void bwtype(string propval) nothrow
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPBandwidth*)this._cPtr).bwtype);
-    dToC(propval, cast(void*)&(cast(GstSDPBandwidth*)this._cPtr).bwtype);
+    (cast(GstSDPBandwidth*)this._cPtr).bwtype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
