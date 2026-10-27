@@ -216,7 +216,11 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GDate* _value;
     _retval = cast(bool)gst_tag_list_get_date(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
-    value = *cast(Date*)_value;
+    if (_value)
+    {
+      value = *cast(glib.date.Date*)_value;
+      cValueFree!(glib.date.Date)(cast(void*)_value);
+    }
     return _retval;
   }
 
@@ -240,7 +244,11 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GDate* _value;
     _retval = cast(bool)gst_tag_list_get_date_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
-    value = *cast(Date*)_value;
+    if (_value)
+    {
+      value = *cast(glib.date.Date*)_value;
+      cValueFree!(glib.date.Date)(cast(void*)_value);
+    }
     return _retval;
   }
 

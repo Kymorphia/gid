@@ -1184,7 +1184,8 @@ class Event : gobject.boxed.Boxed
   {
     const(GstSegment)* _segment;
     gst_event_parse_segment(cast(GstEvent*)this._cPtr, &_segment);
-    segment = *cast(Segment*)_segment;
+    if (_segment)
+      segment = *cast(gst.segment.Segment*)_segment;
   }
 
   /**

@@ -561,7 +561,11 @@ class Structure : gobject.boxed.Boxed
     const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
     GDate* _value;
     _retval = cast(bool)gst_structure_get_date(cast(const(GstStructure)*)this._cPtr, _fieldname, &_value);
-    value = *cast(Date*)_value;
+    if (_value)
+    {
+      value = *cast(glib.date.Date*)_value;
+      cValueFree!(glib.date.Date)(cast(void*)_value);
+    }
     return _retval;
   }
 
