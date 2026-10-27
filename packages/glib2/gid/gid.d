@@ -824,13 +824,12 @@ void dToC(T)(T val, void* data) nothrow
 if (containerTypeIsSupported!T)
 {
   static if (is(T : gobject.object.ObjectWrap) || isTypeCopyableStruct!T)
-    *(cast(void**)data) = val._cPtr(Yes.Dup);
+    *(cast(void**)data) = val ? val._cPtr(Yes.Dup) : null;
   else static if (is(T == interface))
   {
-    if (auto objG = cast(gobject.object.ObjectWrap)val)
-      *(cast(void**)data) = objG._cPtr(Yes.Dup);
-    else
-      assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectWrap");
+    auto objG = cast(gobject.object.ObjectWrap)val;
+    assert(!val || objG, "Object implementing " ~ T.stringof ~ " interface is not an ObjectWrap");
+    *(cast(void**)data) = objG ? objG._cPtr(Yes.Dup) : null;
   }
   else static if (is(T == string))
     *cast(char**)data = toCString!(Yes.Malloc)(val); // Transfer the string to C (use g_malloc)
