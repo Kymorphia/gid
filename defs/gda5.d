@@ -21,3 +21,13 @@
 //!set class[ServerProvider].method[string_to_value].parameters.parameter[dbms_type][direction] out
 
 //!set record[Binary].field[data].array[][length] 1
+
+//# Pointer-to-pointer output parameters missing out annotations
+//!set function[compute_dml_statements].parameters.parameter[insert_stmt][direction] out
+//!set function[compute_dml_statements].parameters.parameter[update_stmt][direction] out
+//!set function[compute_dml_statements].parameters.parameter[delete_stmt][direction] out
+//!set function[rewrite_statement_for_null_parameters].parameters.parameter[out_stmt][direction] out
+//!set class[RepetitiveStatement].method[get_template_set].parameters.parameter[set][direction] out
+//!set class[RepetitiveStatement].method[get_template_set].parameters.parameter[set][transfer-ownership] full
+//!set class[TransactionStatus].method[find].parameters.parameter[destev][direction] out
+//!set class[TransactionStatus].method[find_current].parameters.parameter[destev][direction] out

@@ -134,3 +134,7 @@
 
 //!set record[Encoding].function[uuencode_close].parameters.parameter[uubuf][direction] inout
 //!set record[Encoding].function[uuencode_step].parameters.parameter[uubuf][direction] inout
+
+//# Output parameter missing out annotation
+//!set class[ApplicationPkcs7Mime].method[decrypt].parameters.parameter[result][direction] out
+//!set class[ApplicationPkcs7Mime].method[decrypt].parameters.parameter[result][transfer-ownership] full

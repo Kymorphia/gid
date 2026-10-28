@@ -390,10 +390,12 @@ class MiniObject : gobject.boxed.Boxed
         newdata = pointer to new mini-object
       Returns: true if newdata was different from olddata
   */
-  static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null) nothrow
+  static bool replace(ref gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata = null) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
+    GstMiniObject* _olddata = olddata ? cast(GstMiniObject*)olddata._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_mini_object_replace(&_olddata, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
+    olddata = _olddata ? new gst.mini_object.MiniObject(cast(void*)_olddata, Yes.Take) : null;
     return _retval;
   }
 
@@ -411,10 +413,12 @@ class MiniObject : gobject.boxed.Boxed
         newdata = pointer to new mini-object
       Returns: true if newdata was different from olddata
   */
-  static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata) nothrow
+  static bool take(ref gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
+    GstMiniObject* _olddata = olddata ? cast(GstMiniObject*)olddata._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_mini_object_take(&_olddata, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
+    olddata = _olddata ? new gst.mini_object.MiniObject(cast(void*)_olddata, Yes.Take) : null;
     return _retval;
   }
 }

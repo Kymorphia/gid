@@ -65,12 +65,14 @@ class TransactionStatus : gobject.object.ObjectWrap
   }
 
   /** */
-  gda.transaction_status.TransactionStatus find(string str, gda.transaction_status_event.TransactionStatusEvent destev) nothrow
+  gda.transaction_status.TransactionStatus find(string str, out gda.transaction_status_event.TransactionStatusEvent destev) nothrow
   {
     GdaTransactionStatus* _cretval;
     const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
-    _cretval = gda_transaction_status_find(cast(GdaTransactionStatus*)this._cPtr, _str, destev ? cast(GdaTransactionStatusEvent**)destev._cPtr : null);
+    GdaTransactionStatusEvent* _destev;
+    _cretval = gda_transaction_status_find(cast(GdaTransactionStatus*)this._cPtr, _str, &_destev);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.transaction_status.TransactionStatus)(cast(GdaTransactionStatus*)_cretval, Yes.Take);
+    destev = new gda.transaction_status_event.TransactionStatusEvent(cast(void*)_destev, No.Take);
     return _retval;
   }
 
@@ -83,11 +85,13 @@ class TransactionStatus : gobject.object.ObjectWrap
         unnamedOnly = 
       Returns: 
   */
-  gda.transaction_status.TransactionStatus findCurrent(gda.transaction_status_event.TransactionStatusEvent destev, bool unnamedOnly) nothrow
+  gda.transaction_status.TransactionStatus findCurrent(out gda.transaction_status_event.TransactionStatusEvent destev, bool unnamedOnly) nothrow
   {
     GdaTransactionStatus* _cretval;
-    _cretval = gda_transaction_status_find_current(cast(GdaTransactionStatus*)this._cPtr, destev ? cast(GdaTransactionStatusEvent**)destev._cPtr : null, unnamedOnly);
+    GdaTransactionStatusEvent* _destev;
+    _cretval = gda_transaction_status_find_current(cast(GdaTransactionStatus*)this._cPtr, &_destev, unnamedOnly);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.transaction_status.TransactionStatus)(cast(GdaTransactionStatus*)_cretval, Yes.Take);
+    destev = new gda.transaction_status_event.TransactionStatusEvent(cast(void*)_destev, No.Take);
     return _retval;
   }
 

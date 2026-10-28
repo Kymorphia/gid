@@ -2,6 +2,7 @@
 module gstgl.global;
 
 import gid.gid;
+import gobject.object;
 import gobject.types;
 import gobject.value;
 import gst.buffer;
@@ -160,10 +161,14 @@ void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldispl
       otherContextPtr = the resulting #GstGLContext
     Returns: whether a #GstGLDisplay exists in display_ptr
 */
-bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay displayPtr, gstgl.glcontext.GLContext otherContextPtr) nothrow
+bool glEnsureElementData(gst.element.Element element, ref gstgl.gldisplay.GLDisplay displayPtr, ref gstgl.glcontext.GLContext otherContextPtr) nothrow
 {
   bool _retval;
-  _retval = cast(bool)gst_gl_ensure_element_data(element ? cast(GstElement*)element._cPtr(No.Dup) : null, displayPtr ? cast(GstGLDisplay**)displayPtr._cPtr(No.Dup) : null, otherContextPtr ? cast(GstGLContext**)otherContextPtr._cPtr(No.Dup) : null);
+  GstGLDisplay* _displayPtr = displayPtr ? cast(GstGLDisplay*)displayPtr._cPtr(Yes.Dup) : null;
+  GstGLContext* _otherContextPtr = otherContextPtr ? cast(GstGLContext*)otherContextPtr._cPtr(Yes.Dup) : null;
+  _retval = cast(bool)gst_gl_ensure_element_data(element ? cast(GstElement*)element._cPtr(No.Dup) : null, &_displayPtr, &_otherContextPtr);
+  displayPtr = gobject.object.ObjectWrap._getDObject!(gstgl.gldisplay.GLDisplay)(_displayPtr, Yes.Take);
+  otherContextPtr = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(_otherContextPtr, Yes.Take);
   return _retval;
 }
 

@@ -1290,10 +1290,12 @@ class Structure : gobject.boxed.Boxed
         newstr = a new #GstStructure
       Returns: true if newstr was different from oldstr_ptr
   */
-  static bool take(gst.structure.Structure oldstrPtr = null, gst.structure.Structure newstr = null) nothrow
+  static bool take(ref gst.structure.Structure oldstrPtr, gst.structure.Structure newstr = null) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_structure_take(oldstrPtr ? cast(GstStructure**)oldstrPtr._cPtr(No.Dup) : null, newstr ? cast(GstStructure*)newstr._cPtr(Yes.Dup) : null);
+    GstStructure* _oldstrPtr = oldstrPtr ? cast(GstStructure*)oldstrPtr._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_structure_take(&_oldstrPtr, newstr ? cast(GstStructure*)newstr._cPtr(Yes.Dup) : null);
+    oldstrPtr = _oldstrPtr ? new gst.structure.Structure(cast(void*)_oldstrPtr, Yes.Take) : null;
     return _retval;
   }
 }

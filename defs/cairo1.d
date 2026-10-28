@@ -95,6 +95,7 @@
 //!set record[Pattern].method[get_rgba].parameters.parameter[green][direction] out
 //!set record[Pattern].method[get_rgba].parameters.parameter[blue][direction] out
 //!set record[Pattern].method[get_rgba].parameters.parameter[alpha][direction] out
+//!set record[Pattern].method[get_surface].parameters.parameter[surface][direction] out
 //!set record[Region].method[get_extents].parameters.parameter[extents][direction] out
 //!set record[Region].method[get_rectangle].parameters.parameter[rectangle][direction] out
 //!set record[ScaledFont].method[extents].parameters.parameter[extents][direction] out

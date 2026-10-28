@@ -140,15 +140,17 @@ class ApplicationPkcs7Mime : gmime.part.Part
         err to provide information as to why the failure occurred.
       Throws: [ErrorWrap]
   */
-  gmime.object.ObjectWrap decrypt(gmime.types.DecryptFlags flags, string sessionKey, gmime.decrypt_result.DecryptResult result)
+  gmime.object.ObjectWrap decrypt(gmime.types.DecryptFlags flags, string sessionKey, out gmime.decrypt_result.DecryptResult result)
   {
     GMimeObject* _cretval;
     const(char)* _sessionKey = sessionKey.toCString!(No.Malloc, No.Nullable);
+    GMimeDecryptResult* _result;
     GError *_err;
-    _cretval = g_mime_application_pkcs7_mime_decrypt(cast(GMimeApplicationPkcs7Mime*)this._cPtr, flags, _sessionKey, result ? cast(GMimeDecryptResult**)result._cPtr(No.Dup) : null, &_err);
+    _cretval = g_mime_application_pkcs7_mime_decrypt(cast(GMimeApplicationPkcs7Mime*)this._cPtr, flags, _sessionKey, &_result, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(GMimeObject*)_cretval, Yes.Take);
+    result = new gmime.decrypt_result.DecryptResult(cast(void*)_result, Yes.Take);
     return _retval;
   }
 

@@ -208,10 +208,12 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         newobj = a new #GstObject
       Returns: true if newobj was different from oldobj
   */
-  static bool replace(gst.object.ObjectWrap oldobj = null, gst.object.ObjectWrap newobj = null) nothrow
+  static bool replace(ref gst.object.ObjectWrap oldobj, gst.object.ObjectWrap newobj = null) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_object_replace(oldobj ? cast(GstObject**)oldobj._cPtr(No.Dup) : null, newobj ? cast(GstObject*)newobj._cPtr(No.Dup) : null);
+    GstObject* _oldobj = oldobj ? cast(GstObject*)oldobj._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_object_replace(&_oldobj, newobj ? cast(GstObject*)newobj._cPtr(No.Dup) : null);
+    oldobj = gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(_oldobj, Yes.Take);
     return _retval;
   }
 

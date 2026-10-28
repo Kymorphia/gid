@@ -297,11 +297,13 @@ class Pattern : gobject.boxed.Boxed
         [cairo.types.Status.PatternTypeMismatch] if the pattern is not a surface
         pattern.
   */
-  cairo.types.Status getSurface(cairo.surface.Surface surface) nothrow
+  cairo.types.Status getSurface(out cairo.surface.Surface surface) nothrow
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)this._cPtr, surface ? cast(cairo_surface_t**)surface._cPtr(No.Dup) : null);
+    cairo_surface_t* _surface;
+    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)this._cPtr, &_surface);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
+    surface = new cairo.surface.Surface(cast(void*)_surface, No.Take);
     return _retval;
   }
 

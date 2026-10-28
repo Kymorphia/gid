@@ -1527,38 +1527,6 @@ class Pad : gst.object.ObjectWrap
   }
 
   /**
-      Iterates all sticky events on pad and calls foreach_func for every
-      event. If foreach_func returns false the iteration is immediately stopped.
-  
-      Params:
-        foreachFunc = the #GstPadStickyEventsForeachFunction that
-                         should be called for every event.
-  */
-  void stickyEventsForeach(gst.types.PadStickyEventsForeachFunction foreachFunc) nothrow
-  {
-    extern(C) gboolean _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData) nothrow
-    {
-      bool _dretval;
-      auto _dlg = cast(gst.types.PadStickyEventsForeachFunction*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gst.types.PadStickyEventsForeachFunction");
-      }
-      auto _retval = cast(gboolean)_dretval;
-
-      return _retval;
-    }
-    auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
-    auto _foreachFunc = foreachFunc ? cast(void*)&(foreachFunc) : null;
-    gst_pad_sticky_events_foreach(cast(GstPad*)this._cPtr, _foreachFuncCB, _foreachFunc);
-  }
-
-  /**
       Stop the task of pad. This function will also make sure that the
       function executed by the task will effectively stop if not called
       from the GstTaskFunction.

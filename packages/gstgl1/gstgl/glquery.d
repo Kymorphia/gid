@@ -3,6 +3,7 @@ module gstgl.glquery;
 
 public import gid.basictypes;
 import gid.gid;
+import gobject.object;
 import gst.element;
 import gst.types;
 import gstgl.c.functions;
@@ -98,10 +99,12 @@ class GLQuery
                                #GstGLContext
       Returns: whether context_ptr contains a #GstGLContext
   */
-  static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, gstgl.glcontext.GLContext contextPtr) nothrow
+  static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, ref gstgl.glcontext.GLContext contextPtr) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_gl_query_local_gl_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr._cPtr(No.Dup) : null);
+    GstGLContext* _contextPtr = contextPtr ? cast(GstGLContext*)contextPtr._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_gl_query_local_gl_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, direction, &_contextPtr);
+    contextPtr = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(_contextPtr, Yes.Take);
     return _retval;
   }
 }

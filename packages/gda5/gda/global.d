@@ -122,13 +122,19 @@ string[] completionListGet(gda.connection.Connection cnc, string sql, int start,
     Returns: true if no error occurred
     Throws: [ErrorWrap]
 */
-bool computeDmlStatements(gda.connection.Connection cnc, gda.statement.Statement selectStmt, bool requirePk, gda.statement.Statement insertStmt = null, gda.statement.Statement updateStmt = null, gda.statement.Statement deleteStmt = null)
+bool computeDmlStatements(gda.connection.Connection cnc, gda.statement.Statement selectStmt, bool requirePk, out gda.statement.Statement insertStmt, out gda.statement.Statement updateStmt, out gda.statement.Statement deleteStmt)
 {
   bool _retval;
+  GdaStatement* _insertStmt;
+  GdaStatement* _updateStmt;
+  GdaStatement* _deleteStmt;
   GError *_err;
-  _retval = cast(bool)gda_compute_dml_statements(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, selectStmt ? cast(GdaStatement*)selectStmt._cPtr(No.Dup) : null, requirePk, insertStmt ? cast(GdaStatement**)insertStmt._cPtr(Yes.Dup) : null, updateStmt ? cast(GdaStatement**)updateStmt._cPtr(Yes.Dup) : null, deleteStmt ? cast(GdaStatement**)deleteStmt._cPtr(Yes.Dup) : null, &_err);
+  _retval = cast(bool)gda_compute_dml_statements(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, selectStmt ? cast(GdaStatement*)selectStmt._cPtr(No.Dup) : null, requirePk, &_insertStmt, &_updateStmt, &_deleteStmt, &_err);
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
+  insertStmt = new gda.statement.Statement(cast(void*)_insertStmt, Yes.Take);
+  updateStmt = new gda.statement.Statement(cast(void*)_updateStmt, Yes.Take);
+  deleteStmt = new gda.statement.Statement(cast(void*)_deleteStmt, Yes.Take);
   return _retval;
 }
 
@@ -450,13 +456,15 @@ bool parseIso8601Timestamp(gda.timestamp.Timestamp timestamp, string value) noth
     Returns: true if stmt needs to be transformed to handle NULL parameters, and false otherwise
     Throws: [ErrorWrap]
 */
-bool rewriteStatementForNullParameters(gda.statement.Statement stmt, gda.set.Set params, gda.statement.Statement outStmt = null)
+bool rewriteStatementForNullParameters(gda.statement.Statement stmt, gda.set.Set params, out gda.statement.Statement outStmt)
 {
   bool _retval;
+  GdaStatement* _outStmt;
   GError *_err;
-  _retval = cast(bool)gda_rewrite_statement_for_null_parameters(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, outStmt ? cast(GdaStatement**)outStmt._cPtr(Yes.Dup) : null, &_err);
+  _retval = cast(bool)gda_rewrite_statement_for_null_parameters(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, &_outStmt, &_err);
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
+  outStmt = new gda.statement.Statement(cast(void*)_outStmt, Yes.Take);
   return _retval;
 }
 

@@ -113,13 +113,15 @@ class RepetitiveStatement : gobject.object.ObjectWrap
       Returns: true on success, false on error
       Throws: [ErrorWrap]
   */
-  bool getTemplateSet(gda.set.Set set)
+  bool getTemplateSet(out gda.set.Set set)
   {
     bool _retval;
+    GdaSet* _set;
     GError *_err;
-    _retval = cast(bool)gda_repetitive_statement_get_template_set(cast(GdaRepetitiveStatement*)this._cPtr, set ? cast(GdaSet**)set._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gda_repetitive_statement_get_template_set(cast(GdaRepetitiveStatement*)this._cPtr, &_set, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
+    set = new gda.set.Set(cast(void*)_set, Yes.Take);
     return _retval;
   }
 }

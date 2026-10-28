@@ -17,10 +17,10 @@ gda5                       |  112    0    3  97.4 |  664    0   23  96.7 |   53 
 gdk3                       |   57    0    0   100 |  539    0    9  98.4 |   39    0    0   100 |  263    0    4  98.5 |
 gdk4                       |   63    0    0   100 |  483    0    5  99.0 |   35    0    0   100 |   13    0    1  92.9 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  178    0    0   100 | 1727    0   17  99.0 |   81    0    0   100 |   63    0    5  92.6 |
+gio2                       |  178    0    0   100 | 1727    0   17  99.0 |   81    0    0   100 |   61    0    7  89.7 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   51    0    0   100 |  257    0   14  94.8 |    0    0    0   100 |   12    0    1  92.3 |
-gst1                       |   89    0    0   100 | 1394    0   25  98.2 |   23    0    0   100 |  129    0    4  97.0 |
+gst1                       |   89    0    0   100 | 1393    0   26  98.2 |   23    0    0   100 |  129    0    4  97.0 |
 gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    6    0    0   100 |   48    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  212    0   10  95.5 |    0    0    0   100 |   54    0   11  83.1 |
@@ -33,7 +33,7 @@ gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0 
 gstnet1                    |    9    0    0   100 |   24    0    0   100 |    0    0    0   100 |    6    0    0   100 |
 gstpbutils1                |   16    0    0   100 |  169    0    2  98.8 |    5    0    0   100 |    0    0    0   100 |
 gstrtp1                    |   11    0    0   100 |  196    0    2  99.0 |    6    0    0   100 |   15    0    3  83.3 |
-gstrtsp1                   |   15    0    0   100 |  138    0    2  98.6 |    1    0    0   100 |   50    0    1  98.0 |
+gstrtsp1                   |   15    0    0   100 |  137    1    2  98.6 |    1    0    0   100 |   50    0    1  98.0 |
 gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   81    0    8  91.0 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   58    0    0   100 |  371    0    8  97.9 |    2    0    0   100 |  159    0   28  85.0 |
@@ -172,6 +172,7 @@ gst.pad.Pad.setIterateInternalLinksFunctionFull
 gst.pad.Pad.setLinkFunctionFull
 gst.pad.Pad.setQueryFunctionFull
 gst.pad.Pad.setUnlinkFunctionFull
+gst.pad.Pad.stickyEventsForeach
 gst.plugin.Plugin.listFree
 gst.plugin_feature.PluginFeature.listFree
 gst.structure.Structure.setParentRefcount
@@ -407,6 +408,8 @@ gdk.event_motion.EventMotion.axes
 gdk.event_touch.EventTouch.axes
 gdk.types.TimeCoord.axes
 gdk.types.TimeCoord.axes
+gio.types.DBusInterfaceVTable.getProperty
+gio.types.DBusInterfaceVTable.setProperty
 gio.input_message.InputMessage.address
 gio.input_message.InputMessage.controlMessages
 gio.input_message.InputMessage.numControlMessages

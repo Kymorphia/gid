@@ -1616,9 +1616,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         widgetPointer = address of a variable that contains widget
   */
-  void destroyed(gtk.widget.Widget widgetPointer) nothrow
+  void destroyed(ref gtk.widget.Widget widgetPointer) nothrow
   {
-    gtk_widget_destroyed(cast(GtkWidget*)this._cPtr, widgetPointer ? cast(GtkWidget**)widgetPointer._cPtr(No.Dup) : null);
+    GtkWidget* _widgetPointer = widgetPointer ? cast(GtkWidget*)widgetPointer._cPtr(No.Dup) : null;
+    gtk_widget_destroyed(cast(GtkWidget*)this._cPtr, &_widgetPointer);
+    widgetPointer = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(_widgetPointer, No.Take);
   }
 
   /**

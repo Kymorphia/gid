@@ -150,13 +150,15 @@ class GLDisplay : gst.object.ObjectWrap
       Returns: wether context contains a valid context.
       Throws: [ErrorWrap]
   */
-  bool ensureContext(gstgl.glcontext.GLContext otherContext = null, gstgl.glcontext.GLContext context = null)
+  bool ensureContext(gstgl.glcontext.GLContext otherContext, ref gstgl.glcontext.GLContext context)
   {
     bool _retval;
+    GstGLContext* _context = context ? cast(GstGLContext*)context._cPtr(Yes.Dup) : null;
     GError *_err;
-    _retval = cast(bool)gst_gl_display_ensure_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, context ? cast(GstGLContext**)context._cPtr(No.Dup) : null, &_err);
+    _retval = cast(bool)gst_gl_display_ensure_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_context, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
+    context = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(_context, Yes.Take);
     return _retval;
   }
 

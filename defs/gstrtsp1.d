@@ -16,3 +16,6 @@
 //!set record[RTSPUrl].field[host][owned] 1
 //!set record[RTSPUrl].field[abspath][owned] 1
 //!set record[RTSPUrl].field[query][owned] 1
+
+//# Takes a NULL-terminated array of credentials, not a single one
+//!set function[rtsp_auth_credentials_free][disable] 1

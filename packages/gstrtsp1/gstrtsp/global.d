@@ -4,22 +4,9 @@ module gstrtsp.global;
 import gid.gid;
 import gstrtsp.c.functions;
 import gstrtsp.c.types;
-import gstrtsp.rtspauth_credential;
 import gstrtsp.rtspmessage;
 import gstrtsp.types;
 
-
-/**
-    Free a null-terminated array of credentials returned from
-    [gstrtsp.rtspmessage.RTSPMessage.parseAuthCredentials].
-
-    Params:
-      credentials = a null-terminated array of #GstRTSPAuthCredential
-*/
-void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential credentials) nothrow
-{
-  gst_rtsp_auth_credentials_free(credentials ? cast(GstRTSPAuthCredential**)credentials._cPtr(No.Dup) : null);
-}
 
 /**
     Convert header to a #GstRTSPHeaderField.
