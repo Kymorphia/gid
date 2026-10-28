@@ -349,7 +349,8 @@ class RTSPUrl : gobject.boxed.Boxed
     GstRTSPUrl* _url;
     _cretval = gst_rtsp_url_parse(_urlstr, &_url);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    url = new gstrtsp.rtspurl.RTSPUrl(cast(void*)_url, Yes.Take);
+    if (_url)
+      url = new gstrtsp.rtspurl.RTSPUrl(cast(void*)_url, Yes.Take);
     return _retval;
   }
 }

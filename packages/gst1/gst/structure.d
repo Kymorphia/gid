@@ -492,7 +492,8 @@ class Structure : gobject.boxed.Boxed
     const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
     GValueArray* _array;
     _retval = cast(bool)gst_structure_get_array(cast(GstStructure*)this._cPtr, _fieldname, &_array);
-    array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
+    if (_array)
+      array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
     return _retval;
   }
 
@@ -592,7 +593,8 @@ class Structure : gobject.boxed.Boxed
     const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
     GstDateTime* _value;
     _retval = cast(bool)gst_structure_get_date_time(cast(const(GstStructure)*)this._cPtr, _fieldname, &_value);
-    value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
+    if (_value)
+      value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -775,7 +777,8 @@ class Structure : gobject.boxed.Boxed
     const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
     GValueArray* _array;
     _retval = cast(bool)gst_structure_get_list(cast(GstStructure*)this._cPtr, _fieldname, &_array);
-    array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
+    if (_array)
+      array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
     return _retval;
   }
 

@@ -4,6 +4,7 @@ module gst.query;
 public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
+import gobject.object;
 import gobject.types;
 import gst.allocation_params;
 import gst.allocator;
@@ -647,7 +648,8 @@ class Query : gobject.boxed.Boxed
   {
     GstCaps* _caps;
     gst_query_parse_accept_caps(cast(GstQuery*)this._cPtr, &_caps);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
+    if (_caps)
+      caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
   /**
@@ -680,7 +682,8 @@ class Query : gobject.boxed.Boxed
     GstCaps* _caps;
     gboolean _needPool;
     gst_query_parse_allocation(cast(GstQuery*)this._cPtr, &_caps, &_needPool);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
+    if (_caps)
+      caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
     needPool = cast(bool)_needPool;
   }
 
@@ -754,7 +757,8 @@ class Query : gobject.boxed.Boxed
   {
     GstCaps* _filter;
     gst_query_parse_caps(cast(GstQuery*)this._cPtr, &_filter);
-    filter = new gst.caps.Caps(cast(void*)_filter, No.Take);
+    if (_filter)
+      filter = new gst.caps.Caps(cast(void*)_filter, No.Take);
   }
 
   /**
@@ -768,7 +772,8 @@ class Query : gobject.boxed.Boxed
   {
     GstCaps* _caps;
     gst_query_parse_caps_result(cast(GstQuery*)this._cPtr, &_caps);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
+    if (_caps)
+      caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
   /**
@@ -782,7 +787,8 @@ class Query : gobject.boxed.Boxed
   {
     GstContext* _context;
     gst_query_parse_context(cast(GstQuery*)this._cPtr, &_context);
-    context = new gst.context.Context(cast(void*)_context, No.Take);
+    if (_context)
+      context = new gst.context.Context(cast(void*)_context, No.Take);
   }
 
   /**
@@ -873,7 +879,8 @@ class Query : gobject.boxed.Boxed
     gobject.types.GType _retval;
     const(GstStructure)* _params;
     _retval = gst_query_parse_nth_allocation_meta(cast(GstQuery*)this._cPtr, index, &_params);
-    params = new gst.structure.Structure(cast(void*)_params, No.Take);
+    if (_params)
+      params = new gst.structure.Structure(cast(void*)_params, No.Take);
     return _retval;
   }
 
@@ -890,7 +897,7 @@ class Query : gobject.boxed.Boxed
   {
     GstAllocator* _allocator;
     gst_query_parse_nth_allocation_param(cast(GstQuery*)this._cPtr, index, &_allocator, cast(GstAllocationParams*)&params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    allocator = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(_allocator, Yes.Take);
   }
 
   /**
@@ -909,7 +916,7 @@ class Query : gobject.boxed.Boxed
   {
     GstBufferPool* _pool;
     gst_query_parse_nth_allocation_pool(cast(GstQuery*)this._cPtr, index, &_pool, cast(uint*)&size, cast(uint*)&minBuffers, cast(uint*)&maxBuffers);
-    pool = new gst.buffer_pool.BufferPool(cast(void*)_pool, Yes.Take);
+    pool = gobject.object.ObjectWrap._getDObject!(gst.buffer_pool.BufferPool)(_pool, Yes.Take);
   }
 
   /**

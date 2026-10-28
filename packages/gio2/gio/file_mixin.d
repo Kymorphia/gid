@@ -3674,7 +3674,7 @@ template FileT()
     _retval = cast(bool)g_file_set_attributes_finish(cast(GFile*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_info, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    info = new gio.file_info.FileInfo(cast(void*)_info, Yes.Take);
+    info = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(_info, Yes.Take);
     return _retval;
   }
 

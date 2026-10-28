@@ -4,6 +4,7 @@ module gst.buffer_pool;
 public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
+import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
 import gst.buffer;
@@ -128,7 +129,7 @@ class BufferPool : gst.object.ObjectWrap
     bool _retval;
     GstAllocator* _allocator;
     _retval = cast(bool)gst_buffer_pool_config_get_allocator(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, &_allocator, cast(GstAllocationParams*)&params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, No.Take);
+    allocator = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(_allocator, No.Take);
     return _retval;
   }
 
@@ -165,7 +166,8 @@ class BufferPool : gst.object.ObjectWrap
     bool _retval;
     GstCaps* _caps;
     _retval = cast(bool)gst_buffer_pool_config_get_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, &_caps, cast(uint*)&size, cast(uint*)&minBuffers, cast(uint*)&maxBuffers);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
+    if (_caps)
+      caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
     return _retval;
   }
 
@@ -284,7 +286,8 @@ class BufferPool : gst.object.ObjectWrap
     GstBuffer* _buffer;
     _cretval = gst_buffer_pool_acquire_buffer(cast(GstBufferPool*)this._cPtr, &_buffer, cast(GstBufferPoolAcquireParams*)params);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    if (_buffer)
+      buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
   }
 

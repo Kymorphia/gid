@@ -291,7 +291,8 @@ class BookmarkFile : gobject.boxed.Boxed
     if (_err)
       throw new BookmarkFileException(_err, Yes.Take);
     exec = _exec.fromCString!(Yes.Free);
-    stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
+    if (_stamp)
+      stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
     return _retval;
   }
 

@@ -380,7 +380,8 @@ class SDPMessage : gobject.boxed.Boxed
     GstSDPMessage* _copy;
     _cretval = gst_sdp_message_copy(cast(const(GstSDPMessage)*)this._cPtr, &_copy);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    copy = new gstsdp.sdpmessage.SDPMessage(cast(void*)_copy, Yes.Take);
+    if (_copy)
+      copy = new gstsdp.sdpmessage.SDPMessage(cast(void*)_copy, Yes.Take);
     return _retval;
   }
 
@@ -762,7 +763,8 @@ class SDPMessage : gobject.boxed.Boxed
     GstMIKEYMessage* _mikey;
     _cretval = gst_sdp_message_parse_keymgmt(cast(const(GstSDPMessage)*)this._cPtr, &_mikey);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    mikey = new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_mikey, Yes.Take);
+    if (_mikey)
+      mikey = new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_mikey, Yes.Take);
     return _retval;
   }
 
@@ -1204,7 +1206,8 @@ class SDPMessage : gobject.boxed.Boxed
     GstSDPMessage* _msg;
     _cretval = gst_sdp_message_new(&_msg);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    msg = new gstsdp.sdpmessage.SDPMessage(cast(void*)_msg, Yes.Take);
+    if (_msg)
+      msg = new gstsdp.sdpmessage.SDPMessage(cast(void*)_msg, Yes.Take);
     return _retval;
   }
 
@@ -1223,7 +1226,8 @@ class SDPMessage : gobject.boxed.Boxed
     GstSDPMessage* _msg;
     _cretval = gst_sdp_message_new_from_text(_text, &_msg);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    msg = new gstsdp.sdpmessage.SDPMessage(cast(void*)_msg, Yes.Take);
+    if (_msg)
+      msg = new gstsdp.sdpmessage.SDPMessage(cast(void*)_msg, Yes.Take);
     return _retval;
   }
 

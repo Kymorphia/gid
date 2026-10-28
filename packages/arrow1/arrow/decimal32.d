@@ -98,7 +98,7 @@ class Decimal32 : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
-    remainder = new arrow.decimal32.Decimal32(cast(void*)_remainder, Yes.Take);
+    remainder = gobject.object.ObjectWrap._getDObject!(arrow.decimal32.Decimal32)(_remainder, Yes.Take);
     return _retval;
   }
 

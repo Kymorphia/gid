@@ -185,7 +185,7 @@ class BaseTransform : gst.element.Element
   {
     GstAllocator* _allocator;
     gst_base_transform_get_allocator(cast(GstBaseTransform*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    allocator = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(_allocator, Yes.Take);
   }
 
   /** */

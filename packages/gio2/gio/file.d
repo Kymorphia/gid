@@ -281,7 +281,7 @@ interface File
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
-    iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
+    iostream = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(_iostream, Yes.Take);
     return _retval;
   }
 
@@ -399,7 +399,7 @@ interface File
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
-    iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
+    iostream = gobject.object.ObjectWrap._getDObject!(gio.file_iostream.FileIOStream)(_iostream, Yes.Take);
     return _retval;
   }
 

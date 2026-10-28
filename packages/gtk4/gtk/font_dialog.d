@@ -402,9 +402,11 @@ class FontDialog : gobject.object.ObjectWrap
     _retval = cast(bool)gtk_font_dialog_choose_font_and_features_finish(cast(GtkFontDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_fontDesc, &_fontFeatures, &_language, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
+    if (_fontDesc)
+      fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
     fontFeatures = _fontFeatures.fromCString!(Yes.Free);
-    language = new pango.language.Language(cast(void*)_language, Yes.Take);
+    if (_language)
+      language = new pango.language.Language(cast(void*)_language, Yes.Take);
     return _retval;
   }
 

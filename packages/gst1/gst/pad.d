@@ -677,7 +677,8 @@ class Pad : gst.object.ObjectWrap
     GstBuffer* _buffer;
     _cretval = gst_pad_get_range(cast(GstPad*)this._cPtr, offset, size, &_buffer);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    if (_buffer)
+      buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
   }
 
@@ -1183,7 +1184,8 @@ class Pad : gst.object.ObjectWrap
     GstBuffer* _buffer;
     _cretval = gst_pad_pull_range(cast(GstPad*)this._cPtr, offset, size, &_buffer);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    if (_buffer)
+      buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
   }
 

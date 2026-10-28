@@ -303,7 +303,8 @@ class Pattern : gobject.boxed.Boxed
     cairo_surface_t* _surface;
     _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)this._cPtr, &_surface);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
-    surface = new cairo.surface.Surface(cast(void*)_surface, No.Take);
+    if (_surface)
+      surface = new cairo.surface.Surface(cast(void*)_surface, No.Take);
     return _retval;
   }
 

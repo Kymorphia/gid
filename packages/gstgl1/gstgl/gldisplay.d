@@ -127,7 +127,7 @@ class GLDisplay : gst.object.ObjectWrap
     _retval = cast(bool)gst_gl_display_create_context(cast(GstGLDisplay*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_pContext, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    pContext = new gstgl.glcontext.GLContext(cast(void*)_pContext, Yes.Take);
+    pContext = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(_pContext, Yes.Take);
     return _retval;
   }
 

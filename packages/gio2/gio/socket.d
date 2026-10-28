@@ -1242,7 +1242,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
-    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
+    address = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(_address, Yes.Take);
     return _retval;
   }
 
@@ -1274,7 +1274,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     _retval = g_socket_receive_from(cast(GSocket*)this._cPtr, &_address, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
+    address = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(_address, Yes.Take);
     return _retval;
   }
 
@@ -1368,7 +1368,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     _retval = g_socket_receive_message(cast(GSocket*)this._cPtr, &_address, _vectors, _numVectors, &_messages, &_numMessages, cast(int*)&flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
+    address = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(_address, Yes.Take);
     messages.length = _numMessages;
     foreach (i; 0 .. _numMessages)
       messages[i] = gobject.object.ObjectWrap._getDObject!(gio.socket_control_message.SocketControlMessage)(_messages[i], Yes.Take);

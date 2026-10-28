@@ -3121,7 +3121,8 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
   GtkTreePath* _path;
   _retval = cast(bool)gtk_tree_get_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, &_treeModel, &_path);
   treeModel = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
-  path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+  if (_path)
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   return _retval;
 }
 

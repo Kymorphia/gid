@@ -162,7 +162,8 @@ interface Action
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     actionName = _actionName.fromCString!(Yes.Free);
-    targetValue = new glib.variant.Variant(cast(void*)_targetValue, Yes.Take);
+    if (_targetValue)
+      targetValue = new glib.variant.Variant(cast(void*)_targetValue, Yes.Take);
     return _retval;
   }
 

@@ -11,6 +11,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -123,8 +124,8 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     _retval = cast(bool)garrow_string_dictionary_array_builder_finish_delta(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr, &_outIndices, &_outDelta, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    outIndices = new arrow.array.Array(cast(void*)_outIndices, Yes.Take);
-    outDelta = new arrow.array.Array(cast(void*)_outDelta, Yes.Take);
+    outIndices = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(_outIndices, Yes.Take);
+    outDelta = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(_outDelta, Yes.Take);
     return _retval;
   }
 

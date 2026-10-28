@@ -12,6 +12,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.gid_builder;
+import gobject.object;
 
 /** */
 class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
@@ -139,8 +140,8 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     _retval = cast(bool)garrow_binary_dictionary_array_builder_finish_delta(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, &_outIndices, &_outDelta, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    outIndices = new arrow.array.Array(cast(void*)_outIndices, Yes.Take);
-    outDelta = new arrow.array.Array(cast(void*)_outDelta, Yes.Take);
+    outIndices = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(_outIndices, Yes.Take);
+    outDelta = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(_outDelta, Yes.Take);
     return _retval;
   }
 

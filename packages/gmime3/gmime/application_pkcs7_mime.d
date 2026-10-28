@@ -150,7 +150,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(GMimeObject*)_cretval, Yes.Take);
-    result = new gmime.decrypt_result.DecryptResult(cast(void*)_result, Yes.Take);
+    result = gobject.object.ObjectWrap._getDObject!(gmime.decrypt_result.DecryptResult)(_result, Yes.Take);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.signature_list.SignatureList)(cast(GMimeSignatureList*)_cretval, Yes.Take);
-    entity = new gmime.object.ObjectWrap(cast(void*)_entity, Yes.Take);
+    entity = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(_entity, Yes.Take);
     return _retval;
   }
 }

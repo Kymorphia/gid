@@ -1259,7 +1259,7 @@ class Message : gobject.boxed.Boxed
   {
     GstClock* _clock;
     gst_message_parse_clock_lost(cast(GstMessage*)this._cPtr, &_clock);
-    clock = new gst.clock.Clock(cast(void*)_clock, No.Take);
+    clock = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(_clock, No.Take);
   }
 
   /**
@@ -1278,7 +1278,7 @@ class Message : gobject.boxed.Boxed
     GstClock* _clock;
     gboolean _ready;
     gst_message_parse_clock_provide(cast(GstMessage*)this._cPtr, &_clock, &_ready);
-    clock = new gst.clock.Clock(cast(void*)_clock, No.Take);
+    clock = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(_clock, No.Take);
     ready = cast(bool)_ready;
   }
 
@@ -1311,7 +1311,7 @@ class Message : gobject.boxed.Boxed
   {
     GstDevice* _device;
     gst_message_parse_device_added(cast(GstMessage*)this._cPtr, &_device);
-    device = new gst.device.Device(cast(void*)_device, Yes.Take);
+    device = gobject.object.ObjectWrap._getDObject!(gst.device.Device)(_device, Yes.Take);
   }
 
   /**
@@ -1331,8 +1331,8 @@ class Message : gobject.boxed.Boxed
     GstDevice* _device;
     GstDevice* _changedDevice;
     gst_message_parse_device_changed(cast(GstMessage*)this._cPtr, &_device, &_changedDevice);
-    device = new gst.device.Device(cast(void*)_device, Yes.Take);
-    changedDevice = new gst.device.Device(cast(void*)_changedDevice, Yes.Take);
+    device = gobject.object.ObjectWrap._getDObject!(gst.device.Device)(_device, Yes.Take);
+    changedDevice = gobject.object.ObjectWrap._getDObject!(gst.device.Device)(_changedDevice, Yes.Take);
   }
 
   /**
@@ -1348,7 +1348,7 @@ class Message : gobject.boxed.Boxed
   {
     GstDevice* _device;
     gst_message_parse_device_removed(cast(GstMessage*)this._cPtr, &_device);
-    device = new gst.device.Device(cast(void*)_device, Yes.Take);
+    device = gobject.object.ObjectWrap._getDObject!(gst.device.Device)(_device, Yes.Take);
   }
 
   /**
@@ -1388,7 +1388,8 @@ class Message : gobject.boxed.Boxed
     GError* _gerror;
     char* _debug_;
     gst_message_parse_error(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
-    gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
+    if (_gerror)
+      gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
     debug_ = _debug_.fromCString!(Yes.Free);
   }
 
@@ -1403,7 +1404,8 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _structure;
     gst_message_parse_error_details(cast(GstMessage*)this._cPtr, &_structure);
-    structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+    if (_structure)
+      structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
   }
 
   /**
@@ -1436,7 +1438,8 @@ class Message : gobject.boxed.Boxed
   {
     GstContext* _context;
     gst_message_parse_have_context(cast(GstMessage*)this._cPtr, &_context);
-    context = new gst.context.Context(cast(void*)_context, Yes.Take);
+    if (_context)
+      context = new gst.context.Context(cast(void*)_context, Yes.Take);
   }
 
   /**
@@ -1455,7 +1458,8 @@ class Message : gobject.boxed.Boxed
     GError* _gerror;
     char* _debug_;
     gst_message_parse_info(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
-    gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
+    if (_gerror)
+      gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
     debug_ = _debug_.fromCString!(Yes.Free);
   }
 
@@ -1470,7 +1474,8 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _structure;
     gst_message_parse_info_details(cast(GstMessage*)this._cPtr, &_structure);
-    structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+    if (_structure)
+      structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
   }
 
   /**
@@ -1498,7 +1503,7 @@ class Message : gobject.boxed.Boxed
   {
     GstClock* _clock;
     gst_message_parse_new_clock(cast(GstMessage*)this._cPtr, &_clock);
-    clock = new gst.clock.Clock(cast(void*)_clock, No.Take);
+    clock = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(_clock, No.Take);
   }
 
   /**
@@ -1539,9 +1544,10 @@ class Message : gobject.boxed.Boxed
     char* _propertyName;
     const(GValue)* _propertyValue;
     gst_message_parse_property_notify(cast(GstMessage*)this._cPtr, &_object, &_propertyName, &_propertyValue);
-    object = new gst.object.ObjectWrap(cast(void*)_object, No.Take);
+    object = gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(_object, No.Take);
     propertyName = _propertyName.fromCString!(No.Free);
-    propertyValue = new gobject.value.Value(cast(void*)_propertyValue, No.Take);
+    if (_propertyValue)
+      propertyValue = new gobject.value.Value(cast(void*)_propertyValue, No.Take);
   }
 
   /**
@@ -1635,8 +1641,10 @@ class Message : gobject.boxed.Boxed
     const(GstStructure)* _entryStruct;
     gst_message_parse_redirect_entry(cast(GstMessage*)this._cPtr, entryIndex, &_location, &_tagList, &_entryStruct);
     location = _location.fromCString!(No.Free);
-    tagList = new gst.tag_list.TagList(cast(void*)_tagList, No.Take);
-    entryStruct = new gst.structure.Structure(cast(void*)_entryStruct, No.Take);
+    if (_tagList)
+      tagList = new gst.tag_list.TagList(cast(void*)_tagList, No.Take);
+    if (_entryStruct)
+      entryStruct = new gst.structure.Structure(cast(void*)_entryStruct, No.Take);
   }
 
   /**
@@ -1788,7 +1796,7 @@ class Message : gobject.boxed.Boxed
   {
     GstStreamCollection* _collection;
     gst_message_parse_stream_collection(cast(GstMessage*)this._cPtr, &_collection);
-    collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.Take);
+    collection = gobject.object.ObjectWrap._getDObject!(gst.stream_collection.StreamCollection)(_collection, Yes.Take);
   }
 
   /**
@@ -1806,7 +1814,7 @@ class Message : gobject.boxed.Boxed
   {
     GstElement* _owner;
     gst_message_parse_stream_status(cast(GstMessage*)this._cPtr, &type, &_owner);
-    owner = new gst.element.Element(cast(void*)_owner, No.Take);
+    owner = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(_owner, No.Take);
   }
 
   /**
@@ -1820,7 +1828,7 @@ class Message : gobject.boxed.Boxed
   {
     GstStreamCollection* _collection;
     gst_message_parse_streams_selected(cast(GstMessage*)this._cPtr, &_collection);
-    collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.Take);
+    collection = gobject.object.ObjectWrap._getDObject!(gst.stream_collection.StreamCollection)(_collection, Yes.Take);
   }
 
   /**
@@ -1840,7 +1848,7 @@ class Message : gobject.boxed.Boxed
     GstElement* _owner;
     gboolean _busy;
     gst_message_parse_structure_change(cast(GstMessage*)this._cPtr, &type, &_owner, &_busy);
-    owner = new gst.element.Element(cast(void*)_owner, No.Take);
+    owner = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(_owner, No.Take);
     busy = cast(bool)_busy;
   }
 
@@ -1875,7 +1883,8 @@ class Message : gobject.boxed.Boxed
   {
     GstTagList* _tagList;
     gst_message_parse_tag(cast(GstMessage*)this._cPtr, &_tagList);
-    tagList = new gst.tag_list.TagList(cast(void*)_tagList, Yes.Take);
+    if (_tagList)
+      tagList = new gst.tag_list.TagList(cast(void*)_tagList, Yes.Take);
   }
 
   /**
@@ -1894,7 +1903,8 @@ class Message : gobject.boxed.Boxed
     GstToc* _toc;
     gboolean _updated;
     gst_message_parse_toc(cast(GstMessage*)this._cPtr, &_toc, &_updated);
-    toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
+    if (_toc)
+      toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
     updated = cast(bool)_updated;
   }
 
@@ -1914,7 +1924,8 @@ class Message : gobject.boxed.Boxed
     GError* _gerror;
     char* _debug_;
     gst_message_parse_warning(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
-    gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
+    if (_gerror)
+      gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
     debug_ = _debug_.fromCString!(Yes.Free);
   }
 
@@ -1929,7 +1940,8 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _structure;
     gst_message_parse_warning_details(cast(GstMessage*)this._cPtr, &_structure);
-    structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+    if (_structure)
+      structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
   }
 
   /**

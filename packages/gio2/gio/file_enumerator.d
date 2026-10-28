@@ -282,7 +282,7 @@ class FileEnumerator : gobject.object.ObjectWrap
     _retval = cast(bool)g_file_enumerator_iterate(cast(GFileEnumerator*)this._cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    outInfo = new gio.file_info.FileInfo(cast(void*)_outInfo, No.Take);
+    outInfo = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(_outInfo, No.Take);
     outChild = gobject.object.ObjectWrap._getDObject!(gio.file.File)(_outChild, No.Take);
     return _retval;
   }

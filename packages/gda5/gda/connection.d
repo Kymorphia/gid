@@ -586,7 +586,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     if (_err)
       throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
-    lastInsertRow = new gda.set.Set(cast(void*)_lastInsertRow, Yes.Take);
+    lastInsertRow = gobject.object.ObjectWrap._getDObject!(gda.set.Set)(_lastInsertRow, Yes.Take);
     return _retval;
   }
 
@@ -1074,7 +1074,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     if (_err)
       throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(cast(GdaStatement*)_cretval, Yes.Take);
-    params = new gda.set.Set(cast(void*)_params, Yes.Take);
+    params = gobject.object.ObjectWrap._getDObject!(gda.set.Set)(_params, Yes.Take);
     return _retval;
   }
 
@@ -1259,7 +1259,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     if (_err)
       throw new ConnectionException(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
-    lastInsertRow = new gda.set.Set(cast(void*)_lastInsertRow, Yes.Take);
+    lastInsertRow = gobject.object.ObjectWrap._getDObject!(gda.set.Set)(_lastInsertRow, Yes.Take);
     return _retval;
   }
 
@@ -1291,7 +1291,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
     _retval = gda_connection_statement_execute_non_select(cast(GdaConnection*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, &_lastInsertRow, &_err);
     if (_err)
       throw new ConnectionException(_err, Yes.Take);
-    lastInsertRow = new gda.set.Set(cast(void*)_lastInsertRow, Yes.Take);
+    lastInsertRow = gobject.object.ObjectWrap._getDObject!(gda.set.Set)(_lastInsertRow, Yes.Take);
     return _retval;
   }
 

@@ -589,7 +589,7 @@ class Harness
   {
     GstAllocator* _allocator;
     gst_harness_get_allocator(cast(GstHarness*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, No.Take);
+    allocator = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(_allocator, No.Take);
   }
 
   /**
@@ -685,7 +685,8 @@ class Harness
     bool _retval;
     GstBuffer* _buf;
     _retval = cast(bool)gst_harness_pull_until_eos(cast(GstHarness*)this._cPtr, &_buf);
-    buf = new gst.buffer.Buffer(cast(void*)_buf, Yes.Take);
+    if (_buf)
+      buf = new gst.buffer.Buffer(cast(void*)_buf, Yes.Take);
     return _retval;
   }
 

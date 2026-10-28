@@ -154,7 +154,7 @@ class Statement : gobject.object.ObjectWrap
     _retval = cast(bool)gda_statement_get_parameters(cast(GdaStatement*)this._cPtr, &_outParams, &_err);
     if (_err)
       throw new StatementException(_err, Yes.Take);
-    outParams = new gda.set.Set(cast(void*)_outParams, Yes.Take);
+    outParams = gobject.object.ObjectWrap._getDObject!(gda.set.Set)(_outParams, Yes.Take);
     return _retval;
   }
 

@@ -130,7 +130,7 @@ class SocketListener : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
+    sourceObject = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(_sourceObject, No.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class SocketListener : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
+    sourceObject = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(_sourceObject, No.Take);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class SocketListener : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
+    sourceObject = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(_sourceObject, No.Take);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class SocketListener : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectWrap(cast(void*)_sourceObject, No.Take);
+    sourceObject = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(_sourceObject, No.Take);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class SocketListener : gobject.object.ObjectWrap
     _retval = cast(bool)g_socket_listener_add_address(cast(GSocketListener*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, type, protocol, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, &_effectiveAddress, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    effectiveAddress = new gio.socket_address.SocketAddress(cast(void*)_effectiveAddress, Yes.Take);
+    effectiveAddress = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(_effectiveAddress, Yes.Take);
     return _retval;
   }
 

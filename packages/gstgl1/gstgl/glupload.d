@@ -96,8 +96,10 @@ class GLUpload : gst.object.ObjectWrap
     GstCaps* _inCaps;
     GstCaps* _outCaps;
     gst_gl_upload_get_caps(cast(GstGLUpload*)this._cPtr, &_inCaps, &_outCaps);
-    inCaps = new gst.caps.Caps(cast(void*)_inCaps, Yes.Take);
-    outCaps = new gst.caps.Caps(cast(void*)_outCaps, Yes.Take);
+    if (_inCaps)
+      inCaps = new gst.caps.Caps(cast(void*)_inCaps, Yes.Take);
+    if (_outCaps)
+      outCaps = new gst.caps.Caps(cast(void*)_outCaps, Yes.Take);
   }
 
   /**
@@ -115,7 +117,8 @@ class GLUpload : gst.object.ObjectWrap
     GstBuffer* _outbufPtr;
     _cretval = gst_gl_upload_perform_with_buffer(cast(GstGLUpload*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, &_outbufPtr);
     gstgl.types.GLUploadReturn _retval = cast(gstgl.types.GLUploadReturn)_cretval;
-    outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.Take);
+    if (_outbufPtr)
+      outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.Take);
     return _retval;
   }
 

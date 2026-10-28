@@ -129,7 +129,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(GMimeObject*)_cretval, Yes.Take);
-    result = new gmime.decrypt_result.DecryptResult(cast(void*)_result, Yes.Take);
+    result = gobject.object.ObjectWrap._getDObject!(gmime.decrypt_result.DecryptResult)(_result, Yes.Take);
     return _retval;
   }
 }

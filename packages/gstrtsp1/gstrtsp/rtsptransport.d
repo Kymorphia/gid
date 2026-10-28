@@ -476,7 +476,8 @@ class RTSPTransport
     GstRTSPTransport* _transport;
     _cretval = gst_rtsp_transport_new(&_transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)_transport, Yes.Take);
+    if (_transport)
+      transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)_transport, Yes.Take);
     return _retval;
   }
 

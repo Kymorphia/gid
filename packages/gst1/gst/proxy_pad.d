@@ -106,7 +106,8 @@ class ProxyPad : gst.pad.Pad
     GstBuffer* _buffer;
     _cretval = gst_proxy_pad_getrange_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, offset, size, &_buffer);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    if (_buffer)
+      buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
   }
 

@@ -250,7 +250,7 @@ class BaseSrc : gst.element.Element
   {
     GstAllocator* _allocator;
     gst_base_src_get_allocator(cast(GstBaseSrc*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    allocator = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(_allocator, Yes.Take);
   }
 
   /**

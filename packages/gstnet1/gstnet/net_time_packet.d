@@ -6,6 +6,7 @@ import gid.gid;
 import gio.socket;
 import gio.socket_address;
 import glib.error;
+import gobject.object;
 import gst.types;
 import gstnet.c.functions;
 import gstnet.c.types;
@@ -132,7 +133,7 @@ struct NetTimePacket
       _retval = *cast(gstnet.net_time_packet.NetTimePacket*)_cretval;
       cValueFree!(gstnet.net_time_packet.NetTimePacket)(_cretval);
     }
-    srcAddress = new gio.socket_address.SocketAddress(cast(void*)_srcAddress, Yes.Take);
+    srcAddress = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(_srcAddress, Yes.Take);
     return _retval;
   }
 }

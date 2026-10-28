@@ -5,6 +5,7 @@ public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;
+import gobject.object;
 import gst.buffer;
 import gst.c.functions;
 import gst.c.types;
@@ -1010,7 +1011,8 @@ class Event : gobject.boxed.Boxed
   {
     GstCaps* _caps;
     gst_event_parse_caps(cast(GstEvent*)this._cPtr, &_caps);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
+    if (_caps)
+      caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
   /**
@@ -1122,7 +1124,8 @@ class Event : gobject.boxed.Boxed
     char* _origin;
     gst_event_parse_protection(cast(GstEvent*)this._cPtr, &_systemId, &_data, &_origin);
     systemId = _systemId.fromCString!(No.Free);
-    data = new gst.buffer.Buffer(cast(void*)_data, No.Take);
+    if (_data)
+      data = new gst.buffer.Buffer(cast(void*)_data, No.Take);
     origin = _origin.fromCString!(No.Free);
   }
 
@@ -1223,7 +1226,8 @@ class Event : gobject.boxed.Boxed
   {
     GstMessage* _msg;
     gst_event_parse_sink_message(cast(GstEvent*)this._cPtr, &_msg);
-    msg = new gst.message.Message(cast(void*)_msg, Yes.Take);
+    if (_msg)
+      msg = new gst.message.Message(cast(void*)_msg, Yes.Take);
   }
 
   /**
@@ -1256,7 +1260,7 @@ class Event : gobject.boxed.Boxed
   {
     GstStream* _stream;
     gst_event_parse_stream(cast(GstEvent*)this._cPtr, &_stream);
-    stream = new gst.stream.Stream(cast(void*)_stream, Yes.Take);
+    stream = gobject.object.ObjectWrap._getDObject!(gst.stream.Stream)(_stream, Yes.Take);
   }
 
   /**
@@ -1269,7 +1273,7 @@ class Event : gobject.boxed.Boxed
   {
     GstStreamCollection* _collection;
     gst_event_parse_stream_collection(cast(GstEvent*)this._cPtr, &_collection);
-    collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.Take);
+    collection = gobject.object.ObjectWrap._getDObject!(gst.stream_collection.StreamCollection)(_collection, Yes.Take);
   }
 
   /** */
@@ -1319,7 +1323,8 @@ class Event : gobject.boxed.Boxed
   {
     GstTagList* _taglist;
     gst_event_parse_tag(cast(GstEvent*)this._cPtr, &_taglist);
-    taglist = new gst.tag_list.TagList(cast(void*)_taglist, No.Take);
+    if (_taglist)
+      taglist = new gst.tag_list.TagList(cast(void*)_taglist, No.Take);
   }
 
   /**
@@ -1334,7 +1339,8 @@ class Event : gobject.boxed.Boxed
     GstToc* _toc;
     gboolean _updated;
     gst_event_parse_toc(cast(GstEvent*)this._cPtr, &_toc, &_updated);
-    toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
+    if (_toc)
+      toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
     updated = cast(bool)_updated;
   }
 

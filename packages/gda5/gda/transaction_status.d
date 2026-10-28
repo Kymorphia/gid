@@ -72,7 +72,8 @@ class TransactionStatus : gobject.object.ObjectWrap
     GdaTransactionStatusEvent* _destev;
     _cretval = gda_transaction_status_find(cast(GdaTransactionStatus*)this._cPtr, _str, &_destev);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.transaction_status.TransactionStatus)(cast(GdaTransactionStatus*)_cretval, Yes.Take);
-    destev = new gda.transaction_status_event.TransactionStatusEvent(cast(void*)_destev, No.Take);
+    if (_destev)
+      destev = new gda.transaction_status_event.TransactionStatusEvent(cast(void*)_destev, No.Take);
     return _retval;
   }
 
@@ -91,7 +92,8 @@ class TransactionStatus : gobject.object.ObjectWrap
     GdaTransactionStatusEvent* _destev;
     _cretval = gda_transaction_status_find_current(cast(GdaTransactionStatus*)this._cPtr, &_destev, unnamedOnly);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gda.transaction_status.TransactionStatus)(cast(GdaTransactionStatus*)_cretval, Yes.Take);
-    destev = new gda.transaction_status_event.TransactionStatusEvent(cast(void*)_destev, No.Take);
+    if (_destev)
+      destev = new gda.transaction_status_event.TransactionStatusEvent(cast(void*)_destev, No.Take);
     return _retval;
   }
 

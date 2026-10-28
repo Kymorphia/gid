@@ -105,7 +105,7 @@ bool contextGetGlDisplay(gst.context.Context context, out gstgl.gldisplay.GLDisp
   bool _retval;
   GstGLDisplay* _display;
   _retval = cast(bool)gst_context_get_gl_display(context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display);
-  display = new gstgl.gldisplay.GLDisplay(cast(void*)_display, Yes.Take);
+  display = gobject.object.ObjectWrap._getDObject!(gstgl.gldisplay.GLDisplay)(_display, Yes.Take);
   return _retval;
 }
 
@@ -242,8 +242,8 @@ bool glHandleSetContext(gst.element.Element element, gst.context.Context context
   GstGLDisplay* _display;
   GstGLContext* _otherContext;
   _retval = cast(bool)gst_gl_handle_set_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display, &_otherContext);
-  display = new gstgl.gldisplay.GLDisplay(cast(void*)_display, Yes.Take);
-  otherContext = new gstgl.glcontext.GLContext(cast(void*)_otherContext, Yes.Take);
+  display = gobject.object.ObjectWrap._getDObject!(gstgl.gldisplay.GLDisplay)(_display, Yes.Take);
+  otherContext = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(_otherContext, Yes.Take);
   return _retval;
 }
 

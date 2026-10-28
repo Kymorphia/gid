@@ -71,7 +71,7 @@ class Context : gobject.object.ObjectWrap
 
     auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString, jscParent, null, &classDestroyNotify);
 
-    auto jsClass = new Class(cast(void*)jscClass, Yes.Take);
+    auto jsClass = new Class(cast(void*)jscClass, No.Take);
     classRegistry[ti] = jsClass;
     classNameToType[className] = ti;
 

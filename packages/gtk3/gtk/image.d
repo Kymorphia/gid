@@ -652,7 +652,8 @@ class Image : gtk.misc.Misc
   {
     GtkIconSet* _iconSet;
     gtk_image_get_icon_set(cast(GtkImage*)this._cPtr, &_iconSet, &size);
-    iconSet = new gtk.icon_set.IconSet(cast(void*)_iconSet, No.Take);
+    if (_iconSet)
+      iconSet = new gtk.icon_set.IconSet(cast(void*)_iconSet, No.Take);
   }
 
   /**

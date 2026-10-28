@@ -153,7 +153,8 @@ class GLViewConvert : gst.object.ObjectWrap
     GstBuffer* _outbufPtr;
     _cretval = gst_gl_view_convert_get_output(cast(GstGLViewConvert*)this._cPtr, &_outbufPtr);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.Take);
+    if (_outbufPtr)
+      outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.Take);
     return _retval;
   }
 

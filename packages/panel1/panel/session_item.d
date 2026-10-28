@@ -217,7 +217,8 @@ class SessionItem : gobject.object.ObjectWrap
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     const(GVariantType)* _valueType;
     _retval = cast(bool)panel_session_item_has_metadata(cast(PanelSessionItem*)this._cPtr, _key, &_valueType);
-    valueType = new glib.variant_type.VariantType(cast(void*)_valueType, Yes.Take);
+    if (_valueType)
+      valueType = new glib.variant_type.VariantType(cast(void*)_valueType, Yes.Take);
     return _retval;
   }
 

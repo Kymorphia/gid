@@ -794,7 +794,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
-    outFdList = new gio.unix_fdlist.UnixFDList(cast(void*)_outFdList, Yes.Take);
+    outFdList = gobject.object.ObjectWrap._getDObject!(gio.unix_fdlist.UnixFDList)(_outFdList, Yes.Take);
     return _retval;
   }
 
@@ -837,7 +837,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
-    outFdList = new gio.unix_fdlist.UnixFDList(cast(void*)_outFdList, Yes.Take);
+    outFdList = gobject.object.ObjectWrap._getDObject!(gio.unix_fdlist.UnixFDList)(_outFdList, Yes.Take);
     return _retval;
   }
 

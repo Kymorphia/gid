@@ -1227,7 +1227,7 @@ class WebView : webkit.web_view_base.WebViewBase
     bool _retval;
     GTlsCertificate* _certificate;
     _retval = cast(bool)webkit_web_view_get_tls_info(cast(WebKitWebView*)this._cPtr, &_certificate, &errors);
-    certificate = new gio.tls_certificate.TlsCertificate(cast(void*)_certificate, No.Take);
+    certificate = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(_certificate, No.Take);
     return _retval;
   }
 

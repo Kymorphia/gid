@@ -389,7 +389,7 @@ class Display : gobject.object.ObjectWrap
   {
     GdkScreen* _screen;
     gdk_display_get_pointer(cast(GdkDisplay*)this._cPtr, &_screen, cast(int*)&x, cast(int*)&y, &mask);
-    screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
+    screen = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(_screen, No.Take);
   }
 
   /**

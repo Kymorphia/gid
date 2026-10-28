@@ -989,7 +989,7 @@ class Window : gobject.object.ObjectWrap
     GdkWindow* _target;
     _cretval = gdk_window_get_drag_protocol(cast(GdkWindow*)this._cPtr, &_target);
     gdk.types.DragProtocol _retval = cast(gdk.types.DragProtocol)_cretval;
-    target = new gdk.window.Window(cast(void*)_target, Yes.Take);
+    target = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(_target, Yes.Take);
     return _retval;
   }
 

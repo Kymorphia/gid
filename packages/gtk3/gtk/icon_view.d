@@ -636,8 +636,9 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = cast(bool)gtk_icon_view_get_cursor(cast(GtkIconView*)this._cPtr, &_path, &_cell);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
-    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
+    if (_path)
+      path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    cell = gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(_cell, No.Take);
     return _retval;
   }
 
@@ -657,7 +658,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     bool _retval;
     GtkTreePath* _path;
     _retval = cast(bool)gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)this._cPtr, dragX, dragY, &_path, &pos);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    if (_path)
+      path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
 
@@ -673,7 +675,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   {
     GtkTreePath* _path;
     gtk_icon_view_get_drag_dest_item(cast(GtkIconView*)this._cPtr, &_path, &pos);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    if (_path)
+      path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   }
 
   /**
@@ -698,8 +701,9 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = cast(bool)gtk_icon_view_get_item_at_pos(cast(GtkIconView*)this._cPtr, x, y, &_path, &_cell);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
-    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
+    if (_path)
+      path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    cell = gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(_cell, No.Take);
     return _retval;
   }
 
@@ -957,7 +961,8 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     auto _iter = boxedNew!GtkTreeIter(gtk.tree_iter.TreeIter._getGType);
     _retval = cast(bool)gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, cast(int*)&x, cast(int*)&y, keyboardTip, &_model, &_path, _iter);
     model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    if (_path)
+      path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
@@ -980,8 +985,10 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
     _retval = cast(bool)gtk_icon_view_get_visible_range(cast(GtkIconView*)this._cPtr, &_startPath, &_endPath);
-    startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.Take);
-    endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.Take);
+    if (_startPath)
+      startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.Take);
+    if (_endPath)
+      endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
   }
 

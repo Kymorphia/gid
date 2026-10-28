@@ -132,9 +132,9 @@ bool computeDmlStatements(gda.connection.Connection cnc, gda.statement.Statement
   _retval = cast(bool)gda_compute_dml_statements(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, selectStmt ? cast(GdaStatement*)selectStmt._cPtr(No.Dup) : null, requirePk, &_insertStmt, &_updateStmt, &_deleteStmt, &_err);
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
-  insertStmt = new gda.statement.Statement(cast(void*)_insertStmt, Yes.Take);
-  updateStmt = new gda.statement.Statement(cast(void*)_updateStmt, Yes.Take);
-  deleteStmt = new gda.statement.Statement(cast(void*)_deleteStmt, Yes.Take);
+  insertStmt = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(_insertStmt, Yes.Take);
+  updateStmt = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(_updateStmt, Yes.Take);
+  deleteStmt = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(_deleteStmt, Yes.Take);
   return _retval;
 }
 
@@ -464,7 +464,7 @@ bool rewriteStatementForNullParameters(gda.statement.Statement stmt, gda.set.Set
   _retval = cast(bool)gda_rewrite_statement_for_null_parameters(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null, &_outStmt, &_err);
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
-  outStmt = new gda.statement.Statement(cast(void*)_outStmt, Yes.Take);
+  outStmt = gobject.object.ObjectWrap._getDObject!(gda.statement.Statement)(_outStmt, Yes.Take);
   return _retval;
 }
 

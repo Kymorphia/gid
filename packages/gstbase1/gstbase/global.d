@@ -388,7 +388,8 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
   _cretval = gst_type_find_helper_get_range_full(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, _funcCB, size, _extension, &_caps, &prob);
   _static_func = null;
   gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-  caps = new gst.caps.Caps(cast(void*)_caps, Yes.Take);
+  if (_caps)
+    caps = new gst.caps.Caps(cast(void*)_caps, Yes.Take);
   return _retval;
 }
 

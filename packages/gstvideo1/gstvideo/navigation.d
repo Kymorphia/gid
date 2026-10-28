@@ -611,7 +611,8 @@ interface Navigation
     bool _retval;
     GstEvent* _event;
     _retval = cast(bool)gst_navigation_message_parse_event(message ? cast(GstMessage*)message._cPtr(No.Dup) : null, &_event);
-    event = new gst.event.Event(cast(void*)_event, Yes.Take);
+    if (_event)
+      event = new gst.event.Event(cast(void*)_event, Yes.Take);
     return _retval;
   }
 

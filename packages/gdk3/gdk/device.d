@@ -234,7 +234,7 @@ class Device : gobject.object.ObjectWrap
     GdkWindow* _grabWindow;
     gboolean _ownerEvents;
     _retval = cast(bool)gdk_device_grab_info_libgtk_only(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, &_grabWindow, &_ownerEvents);
-    grabWindow = new gdk.window.Window(cast(void*)_grabWindow, No.Take);
+    grabWindow = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(_grabWindow, No.Take);
     ownerEvents = cast(bool)_ownerEvents;
     return _retval;
   }
@@ -419,7 +419,7 @@ class Device : gobject.object.ObjectWrap
   {
     GdkScreen* _screen;
     gdk_device_get_position(cast(GdkDevice*)this._cPtr, &_screen, cast(int*)&x, cast(int*)&y);
-    screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
+    screen = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(_screen, No.Take);
   }
 
   /**
@@ -438,7 +438,7 @@ class Device : gobject.object.ObjectWrap
   {
     GdkScreen* _screen;
     gdk_device_get_position_double(cast(GdkDevice*)this._cPtr, &_screen, cast(double*)&x, cast(double*)&y);
-    screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
+    screen = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(_screen, No.Take);
   }
 
   /**

@@ -98,7 +98,7 @@ class Decimal128 : gobject.object.ObjectWrap
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal128.Decimal128)(cast(GArrowDecimal128*)_cretval, Yes.Take);
-    remainder = new arrow.decimal128.Decimal128(cast(void*)_remainder, Yes.Take);
+    remainder = gobject.object.ObjectWrap._getDObject!(arrow.decimal128.Decimal128)(_remainder, Yes.Take);
     return _retval;
   }
 

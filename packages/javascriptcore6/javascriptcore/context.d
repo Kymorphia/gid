@@ -138,7 +138,7 @@ class Context : gobject.object.ObjectWrap
 
     auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString, jscParent, null, &classDestroyNotify);
 
-    auto jsClass = new Class(cast(void*)jscClass, Yes.Take);
+    auto jsClass = new Class(cast(void*)jscClass, No.Take);
     classRegistry[ti] = jsClass;
     classNameToType[className] = ti;
 
@@ -367,7 +367,7 @@ class Context : gobject.object.ObjectWrap
     JSCException* _exception;
     _cretval = jsc_context_check_syntax(cast(JSCContext*)this._cPtr, _code, _length, mode, _uri, lineNumber, &_exception);
     javascriptcore.types.CheckSyntaxResult _retval = cast(javascriptcore.types.CheckSyntaxResult)_cretval;
-    exception = new javascriptcore.exception.ExceptionWrap(cast(void*)_exception, Yes.Take);
+    exception = gobject.object.ObjectWrap._getDObject!(javascriptcore.exception.ExceptionWrap)(_exception, Yes.Take);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class Context : gobject.object.ObjectWrap
     JSCValue* _object;
     _cretval = jsc_context_evaluate_in_object(cast(JSCContext*)this._cPtr, _code, _length, objectInstance, objectClass ? cast(JSCClass*)objectClass._cPtr(No.Dup) : null, _uri, lineNumber, &_object);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
-    object = new javascriptcore.value.Value(cast(void*)_object, Yes.Take);
+    object = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(_object, Yes.Take);
     return _retval;
   }
 

@@ -500,7 +500,8 @@ class Transform : gobject.boxed.Boxed
     const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     GskTransform* _outTransform;
     _retval = cast(bool)gsk_transform_parse(_string_, &_outTransform);
-    outTransform = new gsk.transform.Transform(cast(void*)_outTransform, Yes.Take);
+    if (_outTransform)
+      outTransform = new gsk.transform.Transform(cast(void*)_outTransform, Yes.Take);
     return _retval;
   }
 }

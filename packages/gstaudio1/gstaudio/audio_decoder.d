@@ -286,7 +286,7 @@ class AudioDecoder : gst.element.Element
   {
     GstAllocator* _allocator;
     gst_audio_decoder_get_allocator(cast(GstAudioDecoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    allocator = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(_allocator, Yes.Take);
   }
 
   /** */

@@ -1559,7 +1559,8 @@ bool utilGetObjectArray(gobject.object.ObjectWrap object, string name, out gobje
   const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
   GValueArray* _array;
   _retval = cast(bool)gst_util_get_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, &_array);
-  array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
+  if (_array)
+    array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
   return _retval;
 }
 

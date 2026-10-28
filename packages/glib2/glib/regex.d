@@ -283,7 +283,8 @@ class Regex : gobject.boxed.Boxed
     const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     GMatchInfo* _matchInfo;
     _retval = cast(bool)g_regex_match(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
-    matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
+    if (_matchInfo)
+      matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
     return _retval;
   }
 
@@ -316,7 +317,8 @@ class Regex : gobject.boxed.Boxed
     const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
     GMatchInfo* _matchInfo;
     _retval = cast(bool)g_regex_match_all(cast(const(GRegex)*)this._cPtr, _string_, matchOptions, &_matchInfo);
-    matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
+    if (_matchInfo)
+      matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
     return _retval;
   }
 
@@ -382,7 +384,8 @@ class Regex : gobject.boxed.Boxed
     _retval = cast(bool)g_regex_match_all_full(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, matchOptions, &_matchInfo, &_err);
     if (_err)
       throw new RegexException(_err, Yes.Take);
-    matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
+    if (_matchInfo)
+      matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
     return _retval;
   }
 
@@ -461,7 +464,8 @@ class Regex : gobject.boxed.Boxed
     _retval = cast(bool)g_regex_match_full(cast(const(GRegex)*)this._cPtr, _string_, _stringLen, startPosition, matchOptions, &_matchInfo, &_err);
     if (_err)
       throw new RegexException(_err, Yes.Take);
-    matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
+    if (_matchInfo)
+      matchInfo = new glib.match_info.MatchInfo(cast(void*)_matchInfo, Yes.Take);
     return _retval;
   }
 

@@ -272,7 +272,8 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstDateTime* _value;
     _retval = cast(bool)gst_tag_list_get_date_time(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
-    value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
+    if (_value)
+      value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -296,7 +297,8 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstDateTime* _value;
     _retval = cast(bool)gst_tag_list_get_date_time_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
-    value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
+    if (_value)
+      value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -507,7 +509,8 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstSample* _sample;
     _retval = cast(bool)gst_tag_list_get_sample(cast(const(GstTagList)*)this._cPtr, _tag, &_sample);
-    sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
+    if (_sample)
+      sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
     return _retval;
   }
 
@@ -534,7 +537,8 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     GstSample* _sample;
     _retval = cast(bool)gst_tag_list_get_sample_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_sample);
-    sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
+    if (_sample)
+      sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
     return _retval;
   }
 

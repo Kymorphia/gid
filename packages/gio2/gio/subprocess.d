@@ -204,8 +204,10 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     _retval = cast(bool)g_subprocess_communicate(cast(GSubprocess*)this._cPtr, stdinBuf ? cast(GBytes*)stdinBuf._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
-    stderrBuf = new glib.bytes.Bytes(cast(void*)_stderrBuf, Yes.Take);
+    if (_stdoutBuf)
+      stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
+    if (_stderrBuf)
+      stderrBuf = new glib.bytes.Bytes(cast(void*)_stderrBuf, Yes.Take);
     return _retval;
   }
 
@@ -258,8 +260,10 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     _retval = cast(bool)g_subprocess_communicate_finish(cast(GSubprocess*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
-    stderrBuf = new glib.bytes.Bytes(cast(void*)_stderrBuf, Yes.Take);
+    if (_stdoutBuf)
+      stdoutBuf = new glib.bytes.Bytes(cast(void*)_stdoutBuf, Yes.Take);
+    if (_stderrBuf)
+      stderrBuf = new glib.bytes.Bytes(cast(void*)_stderrBuf, Yes.Take);
     return _retval;
   }
 

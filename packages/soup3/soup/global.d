@@ -236,7 +236,8 @@ string[string] formDecodeMultipart(soup.multipart.Multipart multipart, string fi
   auto _retval = gHashTableToD!(string, string, GidOwnership.Container)(cast(GHashTable*)_cretval);
   filename = _filename.fromCString!(Yes.Free);
   contentType = _contentType.fromCString!(Yes.Free);
-  file = new glib.bytes.Bytes(cast(void*)_file, Yes.Take);
+  if (_file)
+    file = new glib.bytes.Bytes(cast(void*)_file, Yes.Take);
   return _retval;
 }
 

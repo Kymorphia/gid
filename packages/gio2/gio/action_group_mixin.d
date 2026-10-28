@@ -411,10 +411,14 @@ template ActionGroupT()
     GVariant* _state;
     _retval = cast(bool)g_action_group_query_action(cast(GActionGroup*)this._cPtr, _actionName, &_enabled, &_parameterType, &_stateType, &_stateHint, &_state);
     enabled = cast(bool)_enabled;
-    parameterType = new glib.variant_type.VariantType(cast(void*)_parameterType, No.Take);
-    stateType = new glib.variant_type.VariantType(cast(void*)_stateType, No.Take);
-    stateHint = new glib.variant.Variant(cast(void*)_stateHint, Yes.Take);
-    state = new glib.variant.Variant(cast(void*)_state, Yes.Take);
+    if (_parameterType)
+      parameterType = new glib.variant_type.VariantType(cast(void*)_parameterType, No.Take);
+    if (_stateType)
+      stateType = new glib.variant_type.VariantType(cast(void*)_stateType, No.Take);
+    if (_stateHint)
+      stateHint = new glib.variant.Variant(cast(void*)_stateHint, Yes.Take);
+    if (_state)
+      state = new glib.variant.Variant(cast(void*)_state, Yes.Take);
     return _retval;
   }
 

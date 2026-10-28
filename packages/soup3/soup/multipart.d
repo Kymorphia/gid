@@ -175,8 +175,10 @@ class Multipart : gobject.boxed.Boxed
     SoupMessageHeaders* _headers;
     GBytes* _body_;
     _retval = cast(bool)soup_multipart_get_part(cast(SoupMultipart*)this._cPtr, part, &_headers, &_body_);
-    headers = new soup.message_headers.MessageHeaders(cast(void*)_headers, No.Take);
-    body_ = new glib.bytes.Bytes(cast(void*)_body_, No.Take);
+    if (_headers)
+      headers = new soup.message_headers.MessageHeaders(cast(void*)_headers, No.Take);
+    if (_body_)
+      body_ = new glib.bytes.Bytes(cast(void*)_body_, No.Take);
     return _retval;
   }
 
@@ -191,6 +193,7 @@ class Multipart : gobject.boxed.Boxed
   {
     GBytes* _destBody;
     soup_multipart_to_message(cast(SoupMultipart*)this._cPtr, destHeaders ? cast(SoupMessageHeaders*)destHeaders._cPtr(No.Dup) : null, &_destBody);
-    destBody = new glib.bytes.Bytes(cast(void*)_destBody, Yes.Take);
+    if (_destBody)
+      destBody = new glib.bytes.Bytes(cast(void*)_destBody, Yes.Take);
   }
 }

@@ -341,7 +341,8 @@ class SDPMedia
     GstSDPMedia* _copy;
     _cretval = gst_sdp_media_copy(cast(const(GstSDPMedia)*)this._cPtr, &_copy);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    copy = new gstsdp.sdpmedia.SDPMedia(cast(void*)_copy, Yes.Take);
+    if (_copy)
+      copy = new gstsdp.sdpmedia.SDPMedia(cast(void*)_copy, Yes.Take);
     return _retval;
   }
 
@@ -625,7 +626,8 @@ class SDPMedia
     GstMIKEYMessage* _mikey;
     _cretval = gst_sdp_media_parse_keymgmt(cast(const(GstSDPMedia)*)this._cPtr, &_mikey);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    mikey = new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_mikey, Yes.Take);
+    if (_mikey)
+      mikey = new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_mikey, Yes.Take);
     return _retval;
   }
 
@@ -885,7 +887,8 @@ class SDPMedia
     GstSDPMedia* _media;
     _cretval = gst_sdp_media_new(&_media);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)_media, Yes.Take);
+    if (_media)
+      media = new gstsdp.sdpmedia.SDPMedia(cast(void*)_media, Yes.Take);
     return _retval;
   }
 

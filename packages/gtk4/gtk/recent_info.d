@@ -143,7 +143,8 @@ class RecentInfo : gobject.boxed.Boxed
     GDateTime* _stamp;
     _retval = cast(bool)gtk_recent_info_get_application_info(cast(GtkRecentInfo*)this._cPtr, _appName, &_appExec, cast(uint*)&count, &_stamp);
     appExec = _appExec.fromCString!(No.Free);
-    stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
+    if (_stamp)
+      stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
     return _retval;
   }
 

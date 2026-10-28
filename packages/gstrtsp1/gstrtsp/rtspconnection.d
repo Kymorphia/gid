@@ -949,7 +949,8 @@ class RTSPConnection
     GstRTSPConnection* _conn;
     _cretval = gst_rtsp_connection_accept(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, &_conn, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
+    if (_conn)
+      conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
     return _retval;
   }
 
@@ -971,7 +972,8 @@ class RTSPConnection
     GstRTSPConnection* _conn;
     _cretval = gst_rtsp_connection_create(url ? cast(const(GstRTSPUrl)*)url._cPtr(No.Dup) : null, &_conn);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
+    if (_conn)
+      conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
     return _retval;
   }
 
@@ -996,7 +998,8 @@ class RTSPConnection
     GstRTSPConnection* _conn;
     _cretval = gst_rtsp_connection_create_from_socket(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, _ip, port, _initialBuffer, &_conn);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
+    if (_conn)
+      conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
     return _retval;
   }
 }

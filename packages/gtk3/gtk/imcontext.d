@@ -233,7 +233,8 @@ class IMContext : gobject.object.ObjectWrap
     PangoAttrList* _attrs;
     gtk_im_context_get_preedit_string(cast(GtkIMContext*)this._cPtr, &_str, &_attrs, cast(int*)&cursorPos);
     str = _str.fromCString!(Yes.Free);
-    attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.Take);
+    if (_attrs)
+      attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.Take);
   }
 
   /**

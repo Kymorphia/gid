@@ -145,7 +145,8 @@ gstrtsp.types.RTSPResult rtspMessageNew(out gstrtsp.rtspmessage.RTSPMessage msg)
   GstRTSPMessage* _msg;
   _cretval = gst_rtsp_message_new(&_msg);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  if (_msg)
+    msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
   return _retval;
 }
 
@@ -164,7 +165,8 @@ gstrtsp.types.RTSPResult rtspMessageNewData(out gstrtsp.rtspmessage.RTSPMessage 
   GstRTSPMessage* _msg;
   _cretval = gst_rtsp_message_new_data(&_msg, channel);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  if (_msg)
+    msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
   return _retval;
 }
 
@@ -185,7 +187,8 @@ gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessa
   const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_rtsp_message_new_request(&_msg, method, _uri);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  if (_msg)
+    msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
   return _retval;
 }
 
@@ -212,7 +215,8 @@ gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMess
   const(char)* _reason = reason.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_rtsp_message_new_response(&_msg, code, _reason, request ? cast(const(GstRTSPMessage)*)request._cPtr(No.Dup) : null);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  if (_msg)
+    msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
   return _retval;
 }
 

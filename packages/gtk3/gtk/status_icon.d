@@ -535,7 +535,7 @@ class StatusIcon : gobject.object.ObjectWrap
     bool _retval;
     GdkScreen* _screen;
     _retval = cast(bool)gtk_status_icon_get_geometry(cast(GtkStatusIcon*)this._cPtr, &_screen, cast(GdkRectangle*)&area, &orientation);
-    screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
+    screen = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(_screen, No.Take);
     return _retval;
   }
 

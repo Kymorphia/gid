@@ -96,7 +96,8 @@ class MenuAttributeIter : gobject.object.ObjectWrap
     GVariant* _value;
     _retval = cast(bool)g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)this._cPtr, &_outName, &_value);
     outName = _outName.fromCString!(No.Free);
-    value = new glib.variant.Variant(cast(void*)_value, Yes.Take);
+    if (_value)
+      value = new glib.variant.Variant(cast(void*)_value, Yes.Take);
     return _retval;
   }
 

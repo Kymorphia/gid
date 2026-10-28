@@ -138,7 +138,8 @@ class AttrIterator : gobject.boxed.Boxed
     PangoLanguage* _language;
     GSList* _extraAttrs;
     pango_attr_iterator_get_font(cast(PangoAttrIterator*)this._cPtr, desc ? cast(PangoFontDescription*)desc._cPtr(No.Dup) : null, &_language, &_extraAttrs);
-    language = new pango.language.Language(cast(void*)_language, Yes.Take);
+    if (_language)
+      language = new pango.language.Language(cast(void*)_language, Yes.Take);
     extraAttrs = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(_extraAttrs);
   }
 

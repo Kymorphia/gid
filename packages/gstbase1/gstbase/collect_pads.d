@@ -144,7 +144,8 @@ class CollectPads : gst.object.ObjectWrap
     GstBuffer* _outbuf;
     _cretval = gst_collect_pads_clip_running_time(cast(GstCollectPads*)this._cPtr, cdata ? cast(GstCollectData*)cdata._cPtr : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, &_outbuf, userData);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    outbuf = new gst.buffer.Buffer(cast(void*)_outbuf, Yes.Take);
+    if (_outbuf)
+      outbuf = new gst.buffer.Buffer(cast(void*)_outbuf, Yes.Take);
     return _retval;
   }
 

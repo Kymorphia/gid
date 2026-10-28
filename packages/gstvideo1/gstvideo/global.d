@@ -512,7 +512,8 @@ void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buf
   GstBuffer* _destBuffer;
   gst_video_blend_scale_linear_RGBA(src ? cast(GstVideoInfo*)src._cPtr(No.Dup) : null, srcBuffer ? cast(GstBuffer*)srcBuffer._cPtr(No.Dup) : null, destHeight, destWidth, _dest, &_destBuffer);
   dest = new gstvideo.video_info.VideoInfo(cast(void*)_dest, Yes.Take);
-  destBuffer = new gst.buffer.Buffer(cast(void*)_destBuffer, Yes.Take);
+  if (_destBuffer)
+    destBuffer = new gst.buffer.Buffer(cast(void*)_destBuffer, Yes.Take);
 }
 
 /**
