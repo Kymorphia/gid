@@ -881,11 +881,6 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Tuple!(Parameters!T) _paramTuple;
       int _retval;
 
-      Parameters!T[0] newValue;
-
-      static if (Parameters!T.length > 0)
-        _paramTuple[0] = newValue;
-
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
@@ -901,7 +896,10 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       setVal!(int)(_returnValue, _retval);
 
       static if (Parameters!T.length > 0)
-        *getVal!(Parameters!T[0]*)(&_paramVals[1]) = newValue;
+      {
+        if (auto _p = getVal!(Parameters!T[0]*)(&_paramVals[1]))
+          *_p = _paramTuple[0];
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

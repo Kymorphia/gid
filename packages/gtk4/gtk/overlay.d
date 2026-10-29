@@ -280,11 +280,6 @@ class Overlay : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
-      Parameters!T[1] allocation;
-
-      static if (Parameters!T.length > 1)
-        _paramTuple[1] = allocation;
-
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
@@ -300,7 +295,10 @@ class Overlay : gtk.widget.Widget
       setVal!(bool)(_returnValue, _retval);
 
       static if (Parameters!T.length > 1)
-        *getVal!(Parameters!T[1]*)(&_paramVals[2]) = allocation;
+      {
+        if (auto _p = getVal!(Parameters!T[1]*)(&_paramVals[2]))
+          *_p = _paramTuple[1];
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

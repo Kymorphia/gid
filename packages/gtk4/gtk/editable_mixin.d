@@ -818,10 +818,11 @@ template EditableT()
       Tuple!(Parameters!T) _paramTuple;
       auto length = getVal!(int)(&_paramVals[2]);
 
-      Parameters!T[1] position = *getVal!(Parameters!T[1]*)(&_paramVals[3]);
-
       static if (Parameters!T.length > 1)
-        _paramTuple[1] = position;
+      {
+        if (auto _p = getVal!(Parameters!T[1]*)(&_paramVals[3]))
+          _paramTuple[1] = *_p;
+      }
 
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
@@ -839,7 +840,10 @@ template EditableT()
       }
 
       static if (Parameters!T.length > 1)
-        *getVal!(Parameters!T[1]*)(&_paramVals[3]) = position;
+      {
+        if (auto _p = getVal!(Parameters!T[1]*)(&_paramVals[3]))
+          *_p = _paramTuple[1];
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

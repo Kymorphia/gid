@@ -1409,10 +1409,11 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
-      Parameters!T[1] location = *getVal!(Parameters!T[1]*)(&_paramVals[2]);
-
       static if (Parameters!T.length > 1)
-        _paramTuple[1] = location;
+      {
+        if (auto _p = getVal!(Parameters!T[1]*)(&_paramVals[2]))
+          _paramTuple[1] = *_p;
+      }
 
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
@@ -1427,7 +1428,10 @@ class View : gtk.text_view.TextView
       }
 
       static if (Parameters!T.length > 1)
-        *getVal!(Parameters!T[1]*)(&_paramVals[2]) = location;
+      {
+        if (auto _p = getVal!(Parameters!T[1]*)(&_paramVals[2]))
+          *_p = _paramTuple[1];
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
