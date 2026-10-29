@@ -1649,7 +1649,7 @@ class Settings : gobject.object.ObjectWrap
 
       static if (Parameters!T.length > 0)
       {
-        auto _cArray = getVal!(uint**)(&_paramVals[1]);
+        auto _cArray = getVal!(uint*)(&_paramVals[1]);
         glib.types.Quark[] _dArray;
         _dArray = cast(glib.types.Quark[])_cArray[0 .. nKeys];
         _paramTuple[0] = _dArray;
