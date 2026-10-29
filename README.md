@@ -73,12 +73,9 @@ Once v1.0.0 is released, an increment in the micro version will be backwards com
 
 ## API Reference Documentation
 
-Documentation is now being generated with [adrdox](https://github.com/adamdruppe/adrdox) and can be found at [https://www.kymorphia.com/gid/](https://www.kymorphia.com/gid/).
+Documentation is now being generated with [dejadoc](https://codeberg.org/ddn/dejadoc) and can be found at [https://www.kymorphia.com/gid/](https://www.kymorphia.com/gid/).
 
 The generated top-level [packages README.md](packages) also contains a list of the sub-package library bindings and links to the project's websites, D, and C API documentation.
-
-**NOTE:** Currently only the newest versions of the following libraries are generated: gtk4, gdk4, vte3, and gtksource5.
-This is due to existing limitations with adrdox with multiple versions of libraries using the same module path.
 
 The C API reference docs can also be used with some added understanding of the D binding differences.
 And finally the D binding source code itself can be used as a reference.
