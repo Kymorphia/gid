@@ -51,8 +51,11 @@ class DClosure : Closure
     auto dClosure = cast(DGClosure!T*)closure;
 
     if (Parameters!T.length > nParams)
-      gidInvokeCallbackExceptionHandler(new Exception("DClosure has " ~ nParams.to!string ~ ", expected at least "
-    ~ Parameters!T.length.to!string));
+    {
+      gidInvokeCallbackExceptionHandler(new Exception("DClosure has " ~ nParams.to!string
+      ~ " parameters, expected at least " ~ Parameters!T.length.to!string));
+      return;
+    }
 
     GValue[] swapParams;
 
