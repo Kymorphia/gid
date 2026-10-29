@@ -263,7 +263,7 @@ class TestClock : gst.clock.Clock
   {
     gst.types.ClockTime _retval;
     auto _pendingList = gListFromD!(gst.types.ClockID)(pendingList);
-    scope(exit) containerFree!(const(GList)*, gst.types.ClockID, GidOwnership.None)(_pendingList);
+    scope(exit) containerFree!(GList*, gst.types.ClockID, GidOwnership.None)(_pendingList);
     _retval = gst_test_clock_id_list_get_latest_time(_pendingList);
     return _retval;
   }
@@ -398,7 +398,7 @@ class TestClock : gst.clock.Clock
   {
     uint _retval;
     auto _pendingList = gListFromD!(gst.types.ClockID)(pendingList);
-    scope(exit) containerFree!(const(GList)*, gst.types.ClockID, GidOwnership.None)(_pendingList);
+    scope(exit) containerFree!(GList*, gst.types.ClockID, GidOwnership.None)(_pendingList);
     _retval = gst_test_clock_process_id_list(cast(GstTestClock*)this._cPtr, _pendingList);
     return _retval;
   }

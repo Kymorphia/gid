@@ -284,7 +284,7 @@ class Uri : gobject.boxed.Boxed
   {
     char* _cretval;
     auto _keys = gListFromD!(string)(keys);
-    scope(exit) containerFree!(const(GList)*, string, GidOwnership.None)(_keys);
+    scope(exit) containerFree!(GList*, string, GidOwnership.None)(_keys);
     _cretval = gst_uri_get_query_string_ordered(cast(const(GstUri)*)this._cPtr, _keys);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
@@ -689,7 +689,7 @@ class Uri : gobject.boxed.Boxed
   {
     char* _cretval;
     auto _keys = gListFromD!(string)(keys);
-    scope(exit) containerFree!(const(GList)*, string, GidOwnership.None)(_keys);
+    scope(exit) containerFree!(GList*, string, GidOwnership.None)(_keys);
     _cretval = gst_uri_to_string_with_keys(cast(const(GstUri)*)this._cPtr, _keys);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;

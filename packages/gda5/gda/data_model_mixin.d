@@ -84,7 +84,7 @@ template DataModelT()
   {
     int _retval;
     auto _values = gListFromD!(gobject.value.Value)(values);
-    scope(exit) containerFree!(const(GList)*, gobject.value.Value, GidOwnership.None)(_values);
+    scope(exit) containerFree!(GList*, gobject.value.Value, GidOwnership.None)(_values);
     GError *_err;
     _retval = gda_data_model_append_values(cast(GdaDataModel*)this._cPtr, _values, &_err);
     if (_err)

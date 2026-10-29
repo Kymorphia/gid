@@ -129,7 +129,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   {
     bool _retval;
     auto _timedvalues = gSListFromD!(gst.types.TimedValue)(timedvalues);
-    scope(exit) containerFree!(const(GSList)*, gst.types.TimedValue, GidOwnership.None)(_timedvalues);
+    scope(exit) containerFree!(GSList*, gst.types.TimedValue, GidOwnership.None)(_timedvalues);
     _retval = cast(bool)gst_timed_value_control_source_set_from_list(cast(GstTimedValueControlSource*)this._cPtr, _timedvalues);
     return _retval;
   }

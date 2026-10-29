@@ -764,7 +764,7 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
     g_hash_table_destroy(container);
   }
   else
-    assert(0, "containerFree: unsupported container type " ~ CT.stringof);
+    static assert(0, "containerFree: unsupported container type " ~ CT.stringof);
 }
 
 /**

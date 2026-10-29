@@ -84,7 +84,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
     const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     auto _profiles = gListFromD!(gstpbutils.encoding_profile.EncodingProfile)(profiles);
-    scope(exit) containerFree!(const(GList)*, gstpbutils.encoding_profile.EncodingProfile, GidOwnership.None)(_profiles);
+    scope(exit) containerFree!(GList*, gstpbutils.encoding_profile.EncodingProfile, GidOwnership.None)(_profiles);
     _cretval = gst_encoding_target_new(_name, _category, _description, _profiles);
     this(_cretval, Yes.Take);
   }
