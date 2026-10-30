@@ -88,7 +88,7 @@ class DClosure : Closure
     cb ~= ");\n";
 
     static if (!is(ReturnType!T == void))
-      cb ~= "setVal!(" ~ ReturnType!T.stringof ~ ")(returnValue, ret);\n";
+      cb ~= "setVal!(ReturnType!T)(returnValue, ret);\n";
 
     return cb;
   }
