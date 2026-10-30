@@ -440,6 +440,9 @@ V[K] gHashTableToD(K, V, GidOwnership ownership = GidOwnership.None)(GHashTable*
   void* value;
   V[K] map;
 
+  if (!hash)
+    return map;
+
   for (g_hash_table_iter_init(&iter, hash); g_hash_table_iter_next(&iter, &key, &value); )
     map[cToD!K(key)] = cToD!V(value);
 
