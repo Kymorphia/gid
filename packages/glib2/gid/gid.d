@@ -261,10 +261,8 @@ ubyte[] gByteArrayToD(GidOwnership ownership = GidOwnership.None)(GByteArray* gB
   a.length = gByteArray.len;
   a[0 .. $] = gByteArray.data[0 .. gByteArray.len];
 
-  static if (ownership == GidOwnership.Full)
+  static if (ownership != GidOwnership.None)
     g_byte_array_unref(gByteArray);
-  else static if (ownership == GidOwnership.Container)
-    g_byte_array_free(gByteArray, false); // Don't free the data (container only)
 
   return a;
 }
@@ -319,10 +317,8 @@ if (containerTypeIsSupported!T)
   else
     a[0 .. $] = (cast(T*)gArray.data)[0 .. gArray.len];
 
-  static if (ownership == GidOwnership.Full)
+  static if (ownership != GidOwnership.None)
     g_array_unref(gArray);
-  else static if (ownership == GidOwnership.Container)
-    g_array_free(gArray, false); // Don't free the data (container only)
 
   return a;
 }
@@ -348,10 +344,8 @@ if (containerTypeIsSupported!T)
   foreach (i; 0 .. ptrArray.len)
     a[i] = cToD!T(ptrArray.pdata[i]);
 
-  static if (ownership == GidOwnership.Full)
-    g_ptr_array_unref(ptrArray);
-  else static if (ownership == GidOwnership.Container)
-    g_ptr_array_free(ptrArray, false); // Don't free the data (container only)
+  static if (ownership != GidOwnership.None)
+    g_ptr_array_unref(ptrArray); // The array's own free func (if any) handles the items
 
   return a;
 }
@@ -695,7 +689,7 @@ if (containerTypeIsSupported!T)
 *   CT = The C struct type pointer of the container type
 *   T = The type of the item stored in the container
 *   ownership = The ownership of the container from the perspective of a called C function
-*     (None is the default and frees container and items, Container frees only the container, Full does nothing)
+*     (None is the default and frees container and items, Container results in an assertion error, Full does nothing)
 *   container = The GLib C container pointer
 */
 void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT container) nothrow
@@ -703,69 +697,38 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
   static if (ownership == GidOwnership.Full)
     return;
 
+  static assert(ownership != GidOwnership.Container, "gid.containerFree does not support GidOwnership.Container");
+
   static if (is(CT == GByteArray*))
-  {
-    if (ownership == GidOwnership.None)
-      g_byte_array_unref(container);
-    else // GidOwnership.Container
-      g_byte_array_free(container, false);
-  }
+    g_byte_array_unref(container);
   else static if (is(CT == GBytes*))
-  {
-    if (ownership != GidOwnership.None)
-      g_bytes_unref(container);
-  }
+    g_bytes_unref(container);
   else static if (is(CT == GArray*))
-  {
-    if (ownership == GidOwnership.None)
-      g_array_unref(container);
-    else // GidOwnership.Container
-      g_array_free(container, false);
-  }
+    g_array_unref(container);
   else static if (is(CT == GPtrArray*))
-  {
-    if (ownership == GidOwnership.None)
-      g_ptr_array_unref(container);
-    else // GidOwnership.Container
-      g_ptr_array_free(container, false);
-  }
+    g_ptr_array_unref(container);
   else static if (is(CT == GList*))
   {
-    static if (ownership == GidOwnership.None)
+    for (auto n = container; n; )
     {
-      for (auto n = container; n; )
-      {
-        auto tmp = n;
-        n = n.next;
-        cValueFree!T(tmp.data);
-        g_list_free_1(tmp);
-      }
+      auto tmp = n;
+      n = n.next;
+      cValueFree!T(tmp.data);
+      g_list_free_1(tmp);
     }
-    else
-      g_list_free(container);
   }
   else static if (is(CT == GSList*))
   {
-    static if (ownership == GidOwnership.None)
+    for (auto n = container; n; )
     {
-      for (auto n = container; n; )
-      {
-        auto tmp = n;
-        n = n.next;
-        cValueFree!T(tmp.data);
-        g_slist_free_1(tmp);
-      }
+      auto tmp = n;
+      n = n.next;
+      cValueFree!T(tmp.data);
+      g_slist_free_1(tmp);
     }
-    else
-      g_slist_free(container);
   }
   else static if (is(CT == GHashTable*))
-  {
-    static if (ownership == GidOwnership.Container)
-      g_hash_table_steal_all(container);
-
     g_hash_table_destroy(container);
-  }
   else
     static assert(0, "containerFree: unsupported container type " ~ CT.stringof);
 }
