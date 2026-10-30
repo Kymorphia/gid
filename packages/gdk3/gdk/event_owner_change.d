@@ -163,7 +163,7 @@ class EventOwnerChange
   */
   @property gdk.atom.Atom selection() nothrow
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventOwnerChange*)this._cPtr).selection, No.Take);
+    return new gdk.atom.Atom(cast(GdkAtom)(cast(GdkEventOwnerChange*)this._cPtr).selection, No.Take);
   }
 
   /**

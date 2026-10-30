@@ -53,7 +53,7 @@ class TargetPair
   */
   @property gdk.atom.Atom target() nothrow
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GtkTargetPair*)this._cPtr).target, No.Take);
+    return new gdk.atom.Atom(cast(GdkAtom)(cast(GtkTargetPair*)this._cPtr).target, No.Take);
   }
 
   /**

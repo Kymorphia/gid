@@ -119,7 +119,7 @@ class EventSelection
   */
   @property gdk.atom.Atom selection() nothrow
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).selection, No.Take);
+    return new gdk.atom.Atom(cast(GdkAtom)(cast(GdkEventSelection*)this._cPtr).selection, No.Take);
   }
 
   /**
@@ -128,7 +128,7 @@ class EventSelection
   */
   @property gdk.atom.Atom target() nothrow
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).target, No.Take);
+    return new gdk.atom.Atom(cast(GdkAtom)(cast(GdkEventSelection*)this._cPtr).target, No.Take);
   }
 
   /**
@@ -137,7 +137,7 @@ class EventSelection
   */
   @property gdk.atom.Atom property() nothrow
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).property, No.Take);
+    return new gdk.atom.Atom(cast(GdkAtom)(cast(GdkEventSelection*)this._cPtr).property, No.Take);
   }
 
   /**

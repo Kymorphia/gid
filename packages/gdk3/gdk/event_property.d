@@ -116,7 +116,7 @@ class EventProperty
   */
   @property gdk.atom.Atom atom() nothrow
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventProperty*)this._cPtr).atom, No.Take);
+    return new gdk.atom.Atom(cast(GdkAtom)(cast(GdkEventProperty*)this._cPtr).atom, No.Take);
   }
 
   /**
