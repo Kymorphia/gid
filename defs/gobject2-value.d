@@ -96,8 +96,8 @@ void initVal(T)(GValue* gval) nothrow
     g_value_init(gval, GTypeEnum.Float);
   else static if (is(T == double))
     g_value_init(gval, GTypeEnum.Double);
-  else static if (is(T == enum)) // FIXME enum or flags
-    g_value_init(gval, GTypeEnum.Enum);
+  else static if (is(T == enum))
+    static assert(0, "initVal: enums/flags need an explicit GType");
   else static if (is(T == string))
     g_value_init(gval, GTypeEnum.String);
   else static if (is(T == glib.variant.Variant))
@@ -161,7 +161,7 @@ T getVal(T)(const(GValue)* gval) nothrow
   else static if (is(T == string[]))
   {
     string[] sa;
-    char **strv = g_value_get_boxed(gval);
+    auto strv = cast(char **)g_value_get_boxed(gval);
 
     if (strv)
     {
@@ -169,7 +169,7 @@ T getVal(T)(const(GValue)* gval) nothrow
       for (len = 0; strv[len]; len++) {}
 
       sa.length = len;
-      foreach (i; len)
+      foreach (i; 0 .. len)
         sa[i] = strv[i].fromCString;
     }
 
@@ -266,7 +266,7 @@ void setVal(T)(GValue* gval, T v) nothrow
     foreach(i; 0 .. v.length)
       strv[i] = toCString!(Yes.Malloc)(v[i]);
 
-    g_value_set_boxed(gval, strv);
+    g_value_take_boxed(gval, strv);
   }
   else static if (is(T : Boxed))
   {

@@ -9,12 +9,6 @@ import gobject.value;
 /// giD GObject builder base class
 abstract class GidBuilder(T)
 {
-  ~this() nothrow
-  {
-    foreach (ref val; _propValues)
-      g_value_unset(&val);
-  }
-
   protected T _self() nothrow
   {
     return cast(T)this;
@@ -29,9 +23,7 @@ abstract class GidBuilder(T)
   T setProperty(V)(immutable(char)* name, V val) nothrow
   {
     _propNames ~= name;
-    _propValues ~= GValue();
-    initVal!V(&_propValues[$ - 1]);
-    setVal(&_propValues[$ - 1], val);
+    _propSetters ~= (GValue* gval) nothrow { setVal(gval, val); }; // GValue initialized from the property's GType in createGObject
     return _self;
   }
 
@@ -41,7 +33,28 @@ abstract class GidBuilder(T)
    */
   GObject* createGObject(GType gtype) nothrow
   {
-    auto obj = g_object_new_with_properties(gtype, cast(uint)_propNames.length, _propNames.ptr, _propValues.ptr);
+    auto typeClass = g_type_class_ref(gtype);
+    scope(exit) g_type_class_unref(typeClass);
+    auto klass = cast(GObjectClass*)typeClass;
+    immutable(char)*[] names;
+    GValue[] values;
+
+    foreach (i, name; _propNames)
+    {
+      auto pspec = g_object_class_find_property(klass, name);
+      if (!pspec) // Unknown property, g_object_new_with_properties would just warn and ignore it too
+        continue;
+
+      names ~= name;
+      values ~= GValue();
+      g_value_init(&values[$ - 1], pspec.valueType);
+      _propSetters[i](&values[$ - 1]);
+    }
+
+    auto obj = g_object_new_with_properties(gtype, cast(uint)names.length, names.ptr, values.ptr);
+
+    foreach (ref val; values)
+      g_value_unset(&val);
 
     if (g_object_is_floating(obj))
       g_object_ref_sink(obj); // Convert floating ref to a strong owned ref (no count change)
@@ -51,5 +64,5 @@ abstract class GidBuilder(T)
 
 private:
   immutable(char)*[] _propNames;
-  GValue[] _propValues;
+  void delegate(GValue*) nothrow[] _propSetters;
 }

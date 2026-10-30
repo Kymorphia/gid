@@ -483,10 +483,14 @@ class ObjectWrap
   */
   void setProperty(T)(string propertyName, T val) nothrow
   {
+    auto cPropName = propertyName.toCString;
+    auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
+    if (!pspec) return;
+
     GValue value;
-    initVal!T(&value);
+    g_value_init(&value, pspec.valueType);
     setVal(&value, val);
-    g_object_set_property(_cInstancePtr, propertyName.toCString, &value);
+    g_object_set_property(_cInstancePtr, cPropName, &value);
     g_value_unset(&value);
   }
 
@@ -498,9 +502,13 @@ class ObjectWrap
   */
   T getProperty(T)(string propertyName) const nothrow
   {
+    auto cPropName = propertyName.toCString;
+    auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
+    if (!pspec) return T.init;
+
     GValue value;
-    initVal!T(&value);
-    g_object_get_property(cast(GObject*)_cInstancePtr, propertyName.toCString, &value);
+    g_value_init(&value, pspec.valueType);
+    g_object_get_property(cast(GObject*)_cInstancePtr, cPropName, &value);
     T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;
