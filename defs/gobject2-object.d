@@ -99,7 +99,12 @@ class ObjectWrap
       // That won't happen, if the mainloop has already stopped during shutdown, resulting in leaks (better than crashing).
       g_object_ref(_cInstancePtr); // Turn toggle reference into a normal ref
       g_object_remove_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this);
-      g_main_context_invoke(null, &finalUnref, cast(void*)_cInstancePtr);
+
+      import core.memory : GC;
+      if (GC.inFinalizer) // Don't do final unref if in finalizer, since object D callbacks could get invoked and allocate memory
+        g_idle_add(&finalUnref, cast(void*)_cInstancePtr); // Defer to glib main loop (same note applies: if main loop does not run then a leak will result)
+      else
+        g_main_context_invoke(null, &finalUnref, cast(void*)_cInstancePtr);
     }
   }
 
