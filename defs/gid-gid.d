@@ -170,7 +170,7 @@ char* strdup(const(char)* s) nothrow
 
   auto len = strlen(s);
 
-  auto dup = cast(char*)gMalloc(len);
+  auto dup = cast(char*)gMalloc(len + 1);
   dup[0 .. len] = s[0 .. len];
   return dup;
 }
@@ -234,7 +234,7 @@ T* arrayDtoC(T, Flag!"Malloc" malloc = No.Malloc, Flag!"ZeroTerm" zeroTerm = No.
   else static if (is(T : string))
   {
     foreach(i, elem; array)
-      retarray[i] = toCString!(malloc)(array[i]);
+      retArray[i] = toCString!(malloc)(array[i]);
   }
   else
     retArray[0 .. array.length] = array[0 .. $];
