@@ -479,16 +479,24 @@ class ObjectWrap
   * Template for setting a GObject property.
   * Params:
   *   propertyName = Name of the GObject property
-  *   val = The value to assign (must match the property value type)
+  *   val = The value to assign
   */
   void setProperty(T)(string propertyName, T val) nothrow
   {
     auto cPropName = propertyName.toCString;
-    auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
-    if (!pspec) return;
-
     GValue value;
-    g_value_init(&value, pspec.valueType);
+
+    static if (is(T == enum)) // Enums and flags use the property GType, since the D enum has no GType of its own
+    {
+      auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
+      if (!pspec)
+        return;
+
+      g_value_init(&value, pspec.valueType);
+    }
+    else
+      initVal!T(&value); // g_object_set_property transforms the value to the property type if needed
+
     setVal(&value, val);
     g_object_set_property(_cInstancePtr, cPropName, &value);
     g_value_unset(&value);
@@ -498,16 +506,24 @@ class ObjectWrap
   * Template for getting a GObject property.
   * Params:
   *   propertyName = Name of the GObject property
-  * Returns: The property value (must match the property value type)
+  * Returns: The property value
   */
   T getProperty(T)(string propertyName) const nothrow
   {
     auto cPropName = propertyName.toCString;
-    auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
-    if (!pspec) return T.init;
-
     GValue value;
-    g_value_init(&value, pspec.valueType);
+
+    static if (is(T == enum)) // Enums and flags use the property GType, since the D enum has no GType of its own
+    {
+      auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
+      if (!pspec)
+        return T.init;
+
+      g_value_init(&value, pspec.valueType);
+    }
+    else
+      initVal!T(&value); // g_object_get_property transforms the value from the property type if needed
+
     g_object_get_property(cast(GObject*)_cInstancePtr, cPropName, &value);
     T retval = getVal!T(&value);
     g_value_unset(&value);

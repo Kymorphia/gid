@@ -30,7 +30,15 @@ abstract class GidBuilder(T)
   T setProperty(V)(immutable(char)* name, V val) nothrow
   {
     _propNames ~= name;
-    _propSetters ~= (GValue* gval) nothrow { setVal(gval, val); }; // GValue initialized from the property's GType in createGObject
+    _propSetters ~= (GValue* gval, GType propType) nothrow
+    {
+      static if (is(V == enum)) // Enums and flags use the property GType, since the D enum has no GType of its own
+        g_value_init(gval, propType);
+      else
+        initVal!V(gval); // g_object_new_with_properties transforms the value to the property type if needed
+
+      setVal(gval, val);
+    };
     return _self;
   }
 
@@ -54,8 +62,7 @@ abstract class GidBuilder(T)
 
       names ~= name;
       values ~= GValue();
-      g_value_init(&values[$ - 1], pspec.valueType);
-      _propSetters[i](&values[$ - 1]);
+      _propSetters[i](&values[$ - 1], pspec.valueType);
     }
 
     auto obj = g_object_new_with_properties(gtype, cast(uint)names.length, names.ptr, values.ptr);
@@ -71,5 +78,5 @@ abstract class GidBuilder(T)
 
   private:
   immutable(char)*[] _propNames;
-  void delegate(GValue*) nothrow[] _propSetters;
+  void delegate(GValue*, GType) nothrow[] _propSetters;
 }
