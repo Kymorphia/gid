@@ -410,8 +410,12 @@ class Clipboard : gobject.object.ObjectWrap
       string[] _uris;
       uint _lenuris;
       if (uris)
+      {
         for (; uris[_lenuris] !is null; _lenuris++)
-        break;
+        {
+        }
+      }
+
       _uris.length = _lenuris;
       foreach (i; 0 .. _lenuris)
         _uris[i] = uris[i].fromCString!(No.Free);
