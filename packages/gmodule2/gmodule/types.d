@@ -18,19 +18,6 @@ alias ModuleFlags = GModuleFlags;
 // Callbacks
 
 /**
-    Specifies the type of the module initialization function.
-    If a module contains a function named g_module_check_init() it is called
-    automatically when the module is loaded. It is passed the #GModule structure
-    and should return null on success or a string describing the initialization
-    error.
-
-    Params:
-      module_ = the #GModule corresponding to the module which has just been loaded
-    Returns: null on success, or a string describing the initialization error
-*/
-alias ModuleCheckInit = string delegate(gmodule.module_.Module module_);
-
-/**
     Specifies the type of the module function called when it is unloaded.
     If a module contains a function named g_module_unload() it is called
     automatically when the module is unloaded.

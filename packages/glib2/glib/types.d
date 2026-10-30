@@ -944,17 +944,6 @@ alias TestLogFatalFunc = bool delegate(string logDomain, glib.types.LogLevelFlag
 alias ThreadFunc = void* delegate();
 
 /**
-    The type of functions which are used to translate user-visible
-    strings, for <option>--help</option> output.
-
-    Params:
-      str = the untranslated string
-    Returns: a translation of the string for the current locale.
-       The returned string is owned by GLib and must not be freed.
-*/
-alias TranslateFunc = string delegate(string str);
-
-/**
     Specifies the type of function passed to [glib.tree.Tree.traverse]. It is
     passed the key and value of each node, together with the user_data
     parameter passed to [glib.tree.Tree.traverse]. If the function returns

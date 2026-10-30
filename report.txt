@@ -9,7 +9,7 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   76    0    0   100 | 1256    1    9  99.3 |    0    0    0   100 |  127    0    9  93.4 |
+glib2                      |   76    0    0   100 | 1254    1   11  99.1 |    0    0    0   100 |  127    0    9  93.4 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   13    0    2  86.7 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  135    0    5  96.4 |
@@ -79,6 +79,8 @@ glib.cond.Cond.waitUntil
 glib.main_context.MainContext.wait
 glib.option_context.OptionContext.parse
 glib.option_context.OptionContext.parseStrv
+glib.option_context.OptionContext.setTranslateFunc
+glib.option_group.OptionGroup.setTranslateFunc
 glib.global.environSetenv
 glib.global.environUnsetenv
 glib.global.parseDebugString

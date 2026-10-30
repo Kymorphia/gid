@@ -76,43 +76,6 @@ class OptionGroup : gobject.boxed.Boxed
   }
 
   /**
-      Sets the function which is used to translate user-visible strings,
-      for `--help` output. Different groups can use different
-      #GTranslateFuncs. If func is null, strings are not translated.
-      
-      If you are using gettext(), you only need to set the translation
-      domain, see [glib.option_group.OptionGroup.setTranslationDomain].
-  
-      Params:
-        func = the #GTranslateFunc, or null
-  */
-  void setTranslateFunc(glib.types.TranslateFunc func = null) nothrow
-  {
-    extern(C) const(char)* _funcCallback(const(char)* str, void* data) nothrow
-    {
-      string _dretval;
-      auto _dlg = cast(glib.types.TranslateFunc*)data;
-      string _str = str.fromCString!(No.Free);
-
-      try
-      {
-        _dretval = (*_dlg)(_str);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.TranslateFunc");
-      }
-      auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
-
-      return _retval;
-    }
-    auto _funcCB = func ? &_funcCallback : null;
-    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
-    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    g_option_group_set_translate_func(cast(GOptionGroup*)this._cPtr, _funcCB, _func, _funcDestroyCB);
-  }
-
-  /**
       A convenience function to use gettext() for translating
       user-visible strings.
   
