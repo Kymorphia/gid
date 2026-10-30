@@ -2511,41 +2511,6 @@ void fontFuncsSetGlyphHOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
 }
 
 /**
-    Sets the implementation function for #hb_font_get_glyph_name_func_t.
-
-    Params:
-      ffuncs = A font-function structure
-      func = The callback function to assign
-*/
-void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphNameFunc func) nothrow
-{
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, char* name, uint size, void* userData) nothrow
-  {
-    harfbuzz.types.Bool _dretval;
-    auto _dlg = cast(harfbuzz.types.FontGetGlyphNameFunc*)userData;
-    char[] _name;
-
-    try
-    {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, _name);
-    }
-    catch (Exception e)
-    {
-      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphNameFunc");
-    }
-    auto _retval = cast(hb_bool_t)_dretval;
-    size = cast(uint)_name.length;
-    name = arrayDtoC!(char, Yes.Malloc, No.ZeroTerm)(_name);
-
-    return _retval;
-  }
-  auto _funcCB = func ? &_funcCallback : null;
-  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
-  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
-}
-
-/**
     Sets the implementation function for #hb_font_get_glyph_shape_func_t,
     which is the same as #hb_font_draw_glyph_func_t.
 

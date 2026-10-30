@@ -437,18 +437,6 @@ alias ControlBindingConvert = void delegate(gst.control_binding.ControlBinding b
 alias ControlSourceGetValue = bool delegate(gst.control_source.ControlSource self, gst.types.ClockTime timestamp, out double value);
 
 /**
-    Function for returning an array of values starting at a given timestamp.
-
-    Params:
-      self = the #GstControlSource instance
-      timestamp = timestamp for which a value should be calculated
-      interval = the time spacing between subsequent values
-      values = array to put control-values in
-    Returns: true if the values were successfully calculated.
-*/
-alias ControlSourceGetValueArray = bool delegate(gst.control_source.ControlSource self, gst.types.ClockTime timestamp, gst.types.ClockTime interval, ref double[] values);
-
-/**
     Function called for each meta in buffer as a result of performing a
     transformation that yields transbuf. Additional type specific transform
     data is passed to the function as data.

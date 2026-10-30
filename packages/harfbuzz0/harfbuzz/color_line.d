@@ -17,13 +17,11 @@ class ColorLine : gobject.boxed.Boxed
   /**
       Create a `color_line.ColorLine` boxed type.
       Params:
-        getColorStops = 
         getExtend = 
   */
-  this(hb_color_line_get_color_stops_func_t getColorStops = hb_color_line_get_color_stops_func_t.init, hb_color_line_get_extend_func_t getExtend = hb_color_line_get_extend_func_t.init) nothrow
+  this(hb_color_line_get_extend_func_t getExtend = hb_color_line_get_extend_func_t.init) nothrow
   {
     super(boxedNew!hb_color_line_t(_getGType), Yes.Take);
-    this.getColorStops = getColorStops;
     this.getExtend = getExtend;
   }
 
@@ -56,19 +54,6 @@ class ColorLine : gobject.boxed.Boxed
   override ColorLine self() nothrow
   {
     return this;
-  }
-
-  /** */
-  @property hb_color_line_get_color_stops_func_t getColorStops() nothrow
-  {
-    return (cast(hb_color_line_t*)this._cPtr).getColorStops;
-  }
-
-  /** */
-
-  @property void getColorStops(hb_color_line_get_color_stops_func_t propval) nothrow
-  {
-    (cast(hb_color_line_t*)this._cPtr).getColorStops = propval;
   }
 
   /** */

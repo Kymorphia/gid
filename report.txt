@@ -41,7 +41,7 @@ gtk3                       |  345    0    0   100 | 3763    0   23  99.4 |  447 
 gtk4                       |  320    0    0   100 | 3578    0   13  99.6 |  345    0    0   100 |   34    0    4  89.5 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   49    0    0   100 |  448    0    0   100 |   30    0    0   100 |    0    0    0   100 |
-harfbuzz0                  |   35    0    0   100 |  408    0   41  90.9 |    0    0    0   100 |   65    0   11  85.5 |
+harfbuzz0                  |   35    0    0   100 |  407    0   42  90.6 |    0    0    0   100 |   64    0   12  84.2 |
 javascriptcore6            |   10    0    0   100 |  104    0    9  92.0 |    1    0    0   100 |    5    0    1  83.3 |
 json1                      |   12    0    0   100 |  200    0    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  311    0    0   100 |   17    0    0   100 |    0    0    0   100 |
@@ -279,6 +279,7 @@ harfbuzz.global.faceCollectVariationSelectors
 harfbuzz.global.faceCollectVariationUnicodes
 harfbuzz.global.featureToString
 harfbuzz.global.fontFuncsSetGlyphHAdvancesFunc
+harfbuzz.global.fontFuncsSetGlyphNameFunc
 harfbuzz.global.fontFuncsSetGlyphVAdvancesFunc
 harfbuzz.global.fontFuncsSetNominalGlyphsFunc
 harfbuzz.global.fontGetGlyphAdvancesForDirection
@@ -489,6 +490,7 @@ gtk.tree_iter.TreeIter.userData
 gtk.tree_iter.TreeIter.userData2
 gtk.tree_iter.TreeIter.userData3
 harfbuzz.color_line.ColorLine.data
+harfbuzz.color_line.ColorLine.getColorStops
 harfbuzz.color_line.ColorLine.getColorStopsUserData
 harfbuzz.color_line.ColorLine.getExtendUserData
 harfbuzz.types.VarInt.u16

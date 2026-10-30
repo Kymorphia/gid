@@ -207,18 +207,6 @@ alias VarNum = hb_var_num_t;
 alias BufferMessageFunc = harfbuzz.types.Bool delegate(harfbuzz.buffer.Buffer buffer, harfbuzz.font.Font font, string message);
 
 /**
-    A virtual method for the #hb_color_line_t to fetch color stops.
-
-    Params:
-      colorLine = a #hb_color_line_t object
-      colorLineData = the data accompanying color_line
-      start = the index of the first color stop to return
-      colorStops = Array of #hb_color_stop_t to populate
-    Returns: the total number of color stops in color_line
-*/
-alias ColorLineGetColorStopsFunc = uint delegate(harfbuzz.color_line.ColorLine colorLine, void* colorLineData, uint start, ref harfbuzz.types.ColorStop[] colorStops);
-
-/**
     A virtual method for the hb_color_line_t to fetches the extend mode.
 
     Params:
@@ -415,21 +403,6 @@ alias FontGetGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, v
     Returns: 
 */
 alias FontGetGlyphKerningFunc = harfbuzz.types.Position delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint firstGlyph, harfbuzz.types.Codepoint secondGlyph);
-
-/**
-    A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-    
-    This method should retrieve the glyph name that corresponds to a
-    glyph ID. The name should be returned in a string output parameter.
-
-    Params:
-      font = #hb_font_t to work upon
-      fontData = font user data pointer
-      glyph = The glyph ID to query
-      name = Name string retrieved for the glyph ID
-    Returns: `true` if data found, `false` otherwise
-*/
-alias FontGetGlyphNameFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, ref char[] name);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
