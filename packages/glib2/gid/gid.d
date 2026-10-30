@@ -637,7 +637,7 @@ if ((is(K == string) || is(K == const(void)*))
 {
   GDestroyNotify valDestroyFunc;
 
-  static if (is(V : gobject.object.ObjectWrap) || is(T == interface))
+  static if (is(V : gobject.object.ObjectWrap) || is(V == interface))
     valDestroyFunc = cast(GDestroyNotify)g_object_unref;
   else static if (is(V : string))
     valDestroyFunc = g_free;
