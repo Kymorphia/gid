@@ -396,8 +396,22 @@ class ObjectWrap
         else if (c && gobjClass.isBaseOf(c) && (c.m_flags & TypeInfo_Class.ClassFlags.isAbstract) == 0) // Don't register abstract classes
         { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
           if (auto obj = cast(ObjectWrap)_d_newclass(c))
-            if (auto gType = obj._gType)
-              gtypeClasses[gType] = c;
+          {
+            auto gType = obj._gType;
+            if (!gType)
+              continue;
+
+            if (c.base && c.base !is gobjClass && gobjClass.isBaseOf(c.base))
+            {
+              if (auto baseObj = cast(ObjectWrap)_d_newclass(c.base))
+              {
+                if (baseObj._gType == gType) // D subclass without its own GType
+                  continue;
+              }
+            }
+
+            gtypeClasses[gType] = c;
+          }
         }
       }
     }
