@@ -135,7 +135,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.MapListModelMapFunc");
       }
-      auto _retval = cast(GObject*)_dretval._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GObject*)_dretval._cPtr(Yes.Dup) : null;
 
       return _retval;
     }
@@ -201,7 +201,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.MapListModelMapFunc");
       }
-      auto _retval = cast(GObject*)_dretval._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GObject*)_dretval._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

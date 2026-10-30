@@ -202,7 +202,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       {
         gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindSetMapping");
       }
-      auto _retval = cast(GVariant*)_dretval._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

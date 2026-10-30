@@ -213,7 +213,7 @@ class Vfs : gobject.object.ObjectWrap
       {
         gidInvokeCallbackExceptionHandler(e, "gio.types.VfsFileLookupFunc");
       }
-      auto _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
 
       return _retval;
     }
@@ -232,7 +232,7 @@ class Vfs : gobject.object.ObjectWrap
       {
         gidInvokeCallbackExceptionHandler(e, "gio.types.VfsFileLookupFunc");
       }
-      auto _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

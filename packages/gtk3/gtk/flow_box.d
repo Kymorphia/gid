@@ -302,7 +302,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.FlowBoxCreateWidgetFunc");
       }
-      auto _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

@@ -1802,7 +1802,7 @@ harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referen
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.ReferenceTableFunc");
     }
-    auto _retval = cast(hb_blob_t*)_dretval._cPtr(Yes.Dup);
+    auto _retval = _dretval ? cast(hb_blob_t*)_dretval._cPtr(Yes.Dup) : null;
 
     return _retval;
   }

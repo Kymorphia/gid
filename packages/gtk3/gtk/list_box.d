@@ -169,7 +169,7 @@ class ListBox : gtk.container.Container
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.ListBoxCreateWidgetFunc");
       }
-      auto _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

@@ -511,7 +511,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       {
         gidInvokeCallbackExceptionHandler(e, "gio.types.DBusMessageFilterFunction");
       }
-      auto _retval = cast(GDBusMessage*)_dretval._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GDBusMessage*)_dretval._cPtr(Yes.Dup) : null;
 
       return _retval;
     }

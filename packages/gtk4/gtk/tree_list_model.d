@@ -141,7 +141,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeListModelCreateModelFunc");
       }
-      auto _retval = cast(GListModel*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
+      auto _retval = _dretval ? cast(GListModel*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
 
       return _retval;
     }
