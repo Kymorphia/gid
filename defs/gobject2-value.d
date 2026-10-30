@@ -270,8 +270,13 @@ void setVal(T)(GValue* gval, T v) nothrow
   }
   else static if (is(T : Boxed))
   {
-    g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
-    g_value_set_boxed(gval, v._cInstancePtr);
+    if (!gval.gType)
+    {
+      if (!v) return;
+      g_value_init(gval, v._gType);
+    }
+
+    g_value_set_boxed(gval, v ? v._cInstancePtr : null);
   }
   else static if (isBoxed!T)
   {
