@@ -300,7 +300,7 @@ class Variant
   *   T = The D type to create the variant from
   *   val = The value to assign
   */
-  this(T)(T val) nothrow
+  this(T)(T val)
   if (isTypeTuple!T && !is(T == void*))
   { // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
     this(cast(void*)createVariant(val), No.Take);
@@ -312,7 +312,7 @@ class Variant
   *   T = The D types to create the variant from
   *   vals = The values to assign
   */
-  this(T...)(T vals) nothrow
+  this(T...)(T vals)
   if (isTypeTuple!T && vals.length > 1 && !is(T[0] == void*))
   {
     this(createVariant!T(vals), No.Take);
@@ -324,7 +324,7 @@ class Variant
   *   T = The D types to create the tuple variant from
   *   vals = The values to assign
   */
-  static Variant newTuple(T...)(T vals) nothrow
+  static Variant newTuple(T...)(T vals)
   if (isTypeTuple!T)
   {
     return new Variant(createVariantTuple!T(vals), No.Take);
@@ -366,7 +366,7 @@ class Variant
   *   T = The D type of the value to get
   * Returns: The single value of the Variant of type `T`
   */
-  T get(T)() nothrow
+  T get(T)()
   {
     return getVal!T(cast(GVariant*)_cInstancePtr);
   }
@@ -377,7 +377,7 @@ class Variant
   *   T = The D types of the values to get
   * Returns: A tuple containing the values from the Variant of the specified types
   */
-  auto get(T...)() nothrow
+  auto get(T...)()
   if (T.length > 1)
   {
     return getItems!T;
@@ -389,7 +389,7 @@ class Variant
   *   T = The D types of the values to get
   * Returns: A tuple containing the values from the Variant of the specified types
   */
-  auto getItems(T...)() nothrow
+  auto getItems(T...)()
   {
     Tuple!T vals;
 
@@ -2014,7 +2014,7 @@ class VariantParseException : ErrorWrap
 *   val = The value to assign to the new Variant.
 * Returns: New variant C instance with floating reference
 */
-GVariant* createVariant(T)(T val) nothrow
+GVariant* createVariant(T)(T val)
 {
   static if (is(T == bool))
     return g_variant_new_boolean(val);
@@ -2107,7 +2107,7 @@ GVariant* createVariant(T)(T val) nothrow
 *   vals = The values to assign
 * Returns: New variant C instance with floating reference
 */
-GVariant* createVariant(T...)(T vals) nothrow
+GVariant* createVariant(T...)(T vals)
 if (vals.length > 1)
 {
   return createVariantTuple!T(vals);
@@ -2120,7 +2120,7 @@ if (vals.length > 1)
 *   vals = The values to assign
 * Returns: New variant C instance with floating reference
 */
-GVariant* createVariantTuple(T...)(T vals) nothrow
+GVariant* createVariantTuple(T...)(T vals)
 {
   auto variantType = g_variant_type_new("r"); // ++ new
   GVariantBuilder builder;
@@ -2140,10 +2140,10 @@ GVariant* createVariantTuple(T...)(T vals) nothrow
 *   v = GVariant struct pointer
 * Returns: The single variant value of type `T`
 */
-T getVal(T)(GVariant* v) nothrow
+T getVal(T)(GVariant* v)
 {
   static if (is(T == bool))
-    return g_variant_get_boolean(v);
+    return cast(bool)g_variant_get_boolean(v);
   else static if (is(T == byte) || is(T == ubyte))
     return cast(T)g_variant_get_byte(v);
   else static if (is(T == short))
@@ -2168,7 +2168,11 @@ T getVal(T)(GVariant* v) nothrow
     valArray.length = g_variant_n_children(v);
 
     foreach (i; 0 .. valArray.length)
-      valArray[i] = getVal!E(g_variant_get_child_value(v, i));
+    {
+      auto child = g_variant_get_child_value(v, i);
+      valArray[i] = getVal!E(child);
+      g_variant_unref(child);
+    }
 
     return valArray;
   }
@@ -2179,7 +2183,12 @@ T getVal(T)(GVariant* v) nothrow
     foreach (i; 0 .. g_variant_n_children(v))
     {
       auto dv = g_variant_get_child_value(v, i);
-      dict[getVal!K(g_variant_get_child_value(dv, 0))] = getVal!V(g_variant_get_child_value(dv, 1)); // GVariant dict entries hold 2 values (key, value)
+      auto key = g_variant_get_child_value(dv, 0);
+      auto val = g_variant_get_child_value(dv, 1);
+      dict[getVal!K(key)] = getVal!V(val); // GVariant dict entries hold 2 values (key, value)
+      g_variant_unref(val);
+      g_variant_unref(key);
+      g_variant_unref(dv);
     }
 
     return dict;
@@ -2195,32 +2204,34 @@ T getVal(T)(GVariant* v) nothrow
       switch (g_variant_get_type_string(v)[0])
       {
         case 'b':
-        return Variant(getVal!bool(v));
+        return StdVariant(getVal!bool(v));
         case 'y':
-        return Variant(cast(T)getVal!byte(v));
+        return StdVariant(getVal!ubyte(v));
         case 'n':
-        return Variant(getVal!short(v));
+        return StdVariant(getVal!short(v));
         case 'q':
-        return Variant(getVal!ushort(v));
+        return StdVariant(getVal!ushort(v));
         case 'i':
-        return Variant(getVal!int(v));
+        return StdVariant(getVal!int(v));
         case 'u':
-        return Variant(getVal!uint(v));
+        return StdVariant(getVal!uint(v));
         case 'x':
-        return Variant(getVal!long(v));
+        return StdVariant(getVal!long(v));
         case 't':
-        return Variant(getVal!ulong(v));
+        return StdVariant(getVal!ulong(v));
         case 'd':
-        return Variant(getVal!double(v));
+        return StdVariant(getVal!double(v));
         case 's':
-        return Variant(getVal!string(v));
+        return StdVariant(getVal!string(v));
         default:
-        assert(false, "Variant.getVal has unexpected type string");
+        return StdVariant.init; // Return an uninitialized std.variant on unexpected basic type
       }
     }
+    else
+      return StdVariant.init; // Return an uninitialized std.variant if not a basic type
   }
-  else static if (isTypeTuple!T)
-    return getVal(val.expand);
+  else static if (is(T : Tuple!Types, Types...))
+    return getValTuple!Types(v);
   else
     static assert(false, "Unsupported type for Variant.getVal: " ~ T.stringof);
 }
@@ -2232,7 +2243,7 @@ T getVal(T)(GVariant* v) nothrow
 *   v = GVariant struct pointer
 * Returns: A tuple containing the values from the Variant of the specified types
 */
-auto getVal(T...)(GVariant* v) nothrow
+auto getVal(T...)(GVariant* v)
 if (T.length > 1)
 {
   return getValTuple!T(v);
@@ -2245,12 +2256,16 @@ if (T.length > 1)
 *   v = GVariant struct pointer
 * Returns: A tuple containing the values from the container Variant of the specified types
 */
-auto getValTuple(T...)(GVariant* v) nothrow
+auto getValTuple(T...)(GVariant* v)
 {
   Tuple!T vals;
 
   foreach (i, E; T)
-    vals[i] = getVal!E(g_variant_get_child_value(v, i));
+  {
+    auto child = g_variant_get_child_value(v, i);
+    vals[i] = getVal!E(child);
+    g_variant_unref(child);
+  }
 
   return vals;
 }
