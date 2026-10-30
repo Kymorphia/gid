@@ -1978,7 +1978,7 @@ class Variant
   {
     char* _cretval;
     const(char)* _sourceStr = sourceStr.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_variant_parse_error_print_context(error ? cast(GError*)error._cPtr : null, _sourceStr);
+    _cretval = g_variant_parse_error_print_context(error ? cast(GError*)error._cPtr(No.Dup) : null, _sourceStr);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }

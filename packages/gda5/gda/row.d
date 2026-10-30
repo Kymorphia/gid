@@ -117,7 +117,7 @@ class Row : gobject.object.ObjectWrap
   */
   void invalidateValueE(gobject.value.Value value, glib.error.ErrorWrap error = null) nothrow
   {
-    gda_row_invalidate_value_e(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null);
+    gda_row_invalidate_value_e(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(Yes.Dup) : null);
   }
 
   /**

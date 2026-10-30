@@ -246,7 +246,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   void forceInvalidE(glib.error.ErrorWrap error = null) nothrow
   {
-    gda_holder_force_invalid_e(cast(GdaHolder*)this._cPtr, error ? cast(GError*)error._cPtr : null);
+    gda_holder_force_invalid_e(cast(GdaHolder*)this._cPtr, error ? cast(GError*)error._cPtr(Yes.Dup) : null);
   }
 
   /**

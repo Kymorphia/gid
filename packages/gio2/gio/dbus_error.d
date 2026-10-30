@@ -35,7 +35,7 @@ struct DBusError
   static string encodeGerror(glib.error.ErrorWrap error) nothrow
   {
     char* _cretval;
-    _cretval = g_dbus_error_encode_gerror(error ? cast(const(GError)*)error._cPtr : null);
+    _cretval = g_dbus_error_encode_gerror(error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -56,7 +56,7 @@ struct DBusError
   static string getRemoteError(glib.error.ErrorWrap error) nothrow
   {
     char* _cretval;
-    _cretval = g_dbus_error_get_remote_error(error ? cast(const(GError)*)error._cPtr : null);
+    _cretval = g_dbus_error_get_remote_error(error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -73,7 +73,7 @@ struct DBusError
   static bool isRemoteError(glib.error.ErrorWrap error) nothrow
   {
     bool _retval;
-    _retval = cast(bool)g_dbus_error_is_remote_error(error ? cast(const(GError)*)error._cPtr : null);
+    _retval = cast(bool)g_dbus_error_is_remote_error(error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ struct DBusError
   static bool stripRemoteError(glib.error.ErrorWrap error) nothrow
   {
     bool _retval;
-    _retval = cast(bool)g_dbus_error_strip_remote_error(error ? cast(GError*)error._cPtr : null);
+    _retval = cast(bool)g_dbus_error_strip_remote_error(error ? cast(GError*)error._cPtr(No.Dup) : null);
     return _retval;
   }
 

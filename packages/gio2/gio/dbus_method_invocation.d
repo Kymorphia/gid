@@ -249,7 +249,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnGerror(glib.error.ErrorWrap error) nothrow
   {
-    g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
+    g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)this._cPtr, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
   }
 
   /**

@@ -549,6 +549,9 @@ if (containerTypeIsSupported!T)
       gPtrArray.pdata[i] = g_memdup2(cast(void*)&a[i], T.sizeof);
   }
 
+  static if (zeroTerminated)
+    g_ptr_array_add(gPtrArray, null);
+
   return gPtrArray;
 }
 

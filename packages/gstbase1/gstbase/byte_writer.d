@@ -147,35 +147,6 @@ class ByteWriter
   }
 
   /**
-      Frees writer and all memory allocated by it except
-      the current data, which is returned as #GstBuffer.
-      
-      Free-function: gst_buffer_unref
-      Returns: the current data as buffer. gst_buffer_unref()
-            after usage.
-  */
-  gst.buffer.Buffer freeAndGetBuffer() nothrow
-  {
-    GstBuffer* _cretval;
-    _cretval = gst_byte_writer_free_and_get_buffer(cast(GstByteWriter*)this._cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
-    return _retval;
-  }
-
-  /**
-      Frees writer and all memory allocated by it except
-      the current data, which is returned.
-      
-      Free-function: g_free
-      Returns: the current data. [glib.global.gfree] after usage.
-  */
-  ubyte* freeAndGetData() nothrow
-  {
-    auto _retval = gst_byte_writer_free_and_get_data(cast(GstByteWriter*)this._cPtr);
-    return _retval;
-  }
-
-  /**
       Returns the remaining size of data that can still be written. If
       -1 is returned the remaining size is only limited by system resources.
       Returns: the remaining size of data that can still be written

@@ -538,7 +538,7 @@ class GLArea : gtk.widget.Widget
   */
   void setError(glib.error.ErrorWrap error = null) nothrow
   {
-    gtk_gl_area_set_error(cast(GtkGLArea*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
+    gtk_gl_area_set_error(cast(GtkGLArea*)this._cPtr, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
   }
 
   /**

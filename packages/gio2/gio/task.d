@@ -707,7 +707,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_task_report_error(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error._cPtr : null);
+    g_task_report_error(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -968,7 +968,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void returnError(glib.error.ErrorWrap error) nothrow
   {
-    g_task_return_error(cast(GTask*)this._cPtr, error ? cast(GError*)error._cPtr : null);
+    g_task_return_error(cast(GTask*)this._cPtr, error ? cast(GError*)error._cPtr(Yes.Dup) : null);
   }
 
   /**

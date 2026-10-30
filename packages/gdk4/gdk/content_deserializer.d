@@ -177,7 +177,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   */
   void returnError(glib.error.ErrorWrap error) nothrow
   {
-    gdk_content_deserializer_return_error(cast(GdkContentDeserializer*)this._cPtr, error ? cast(GError*)error._cPtr : null);
+    gdk_content_deserializer_return_error(cast(GdkContentDeserializer*)this._cPtr, error ? cast(GError*)error._cPtr(Yes.Dup) : null);
   }
 
   /**

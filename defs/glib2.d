@@ -43,6 +43,10 @@
 //# Ignore unnecessary dup_string method (get_string does the same thing)
 //!set record[Variant].method[dup_string][ignore] 1
 
+//# Set copy and free functions for Error
+//!set record[Error][copy-function] g_error_copy
+//!set record[Error][free-function] g_error_free
+
 //# Error conflicts with the base D Error type, rename to ErrorG
 //!subtype Error ErrorWrap
 

@@ -293,7 +293,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
     auto _callbackCB = callback ? &_callbackCallback : null;
     GSimpleAsyncResult* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error._cPtr : null);
+    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
     return _retval;
   }
@@ -445,7 +445,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void setFromError(glib.error.ErrorWrap error) nothrow
   {
-    g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
+    g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)this._cPtr, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
   }
 
   /**

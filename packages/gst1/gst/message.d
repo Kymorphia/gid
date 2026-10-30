@@ -466,7 +466,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_message_new_error(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
+    _cretval = gst_message_new_error(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -488,7 +488,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -527,7 +527,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_message_new_info(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
+    _cretval = gst_message_new_info(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -547,7 +547,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1083,7 +1083,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_message_new_warning(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
+    _cretval = gst_message_new_warning(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1103,7 +1103,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -329,26 +329,6 @@ class Harness
   }
 
   /**
-      Similar to gst_harness_add_src, this allows you to send the data coming out
-      of your harnessed #GstElement to a sink-element, allowing to test different
-      responses the element output might create in sink elements. An example might
-      be an existing sink providing some analytical data on the input it receives that
-      can be useful to your testing. If the goal is to test a sink-element itself,
-      this is better achieved using gst_harness_new directly on the sink.
-      
-      If a sink-harness already exists it will be replaced.
-      
-      MT safe.
-  
-      Params:
-        sinkHarness = a #GstHarness to be added as a sink-harness.
-  */
-  void addSinkHarness(gstcheck.harness.Harness sinkHarness) nothrow
-  {
-    gst_harness_add_sink_harness(cast(GstHarness*)this._cPtr, sinkHarness ? cast(GstHarness*)sinkHarness._cPtr : null);
-  }
-
-  /**
       Similar to gst_harness_add_sink, this allows you to specify a launch-line
       instead of just an element name. See gst_harness_add_src_parse for details.
       
@@ -378,29 +358,6 @@ class Harness
   {
     const(char)* _srcElementName = srcElementName.toCString!(No.Malloc, No.Nullable);
     gst_harness_add_src(cast(GstHarness*)this._cPtr, _srcElementName, hasClockWait);
-  }
-
-  /**
-      A src-harness is a great way of providing the #GstHarness with data.
-      By adding a src-type #GstElement, it is then easy to use functions like
-      gst_harness_push_from_src or gst_harness_src_crank_and_push_many
-      to provide your harnessed element with input. The `h`as_clock_wait variable
-      is a great way to control you src-element with, in that you can have it
-      produce a buffer for you by simply cranking the clock, and not have it
-      spin out of control producing buffers as fast as possible.
-      
-      If a src-harness already exists it will be replaced.
-      
-      MT safe.
-  
-      Params:
-        srcHarness = a #GstHarness to be added as a src-harness.
-        hasClockWait = a #gboolean specifying if the #GstElement uses
-          gst_clock_wait_id internally.
-  */
-  void addSrcHarness(gstcheck.harness.Harness srcHarness, bool hasClockWait) nothrow
-  {
-    gst_harness_add_src_harness(cast(GstHarness*)this._cPtr, srcHarness ? cast(GstHarness*)srcHarness._cPtr : null, hasClockWait);
   }
 
   /**

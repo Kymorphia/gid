@@ -1680,7 +1680,7 @@ void simpleAsyncReportGerrorInIdle(gobject.object.ObjectWrap object, gio.types.A
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-  g_simple_async_report_gerror_in_idle(object ? cast(GObject*)object._cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error._cPtr : null);
+  g_simple_async_report_gerror_in_idle(object ? cast(GObject*)object._cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
 }
 
 /**

@@ -202,7 +202,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void gerror(glib.error.ErrorWrap error) nothrow
   {
-    gtk_media_stream_gerror(cast(GtkMediaStream*)this._cPtr, error ? cast(GError*)error._cPtr : null);
+    gtk_media_stream_gerror(cast(GtkMediaStream*)this._cPtr, error ? cast(GError*)error._cPtr(Yes.Dup) : null);
   }
 
   /**

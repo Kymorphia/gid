@@ -24,8 +24,8 @@ gst1                       |   89    0    0   100 | 1393    0   26  98.2 |   23 
 gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    6    0    0   100 |   48    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  212    0   10  95.5 |    0    0    0   100 |   54    0   11  83.1 |
-gstbase1                   |   23    0    0   100 |  305    0   10  96.8 |    2    0    0   100 |   30    0    1  96.8 |
-gstcheck1                  |    8    0    0   100 |  110    0    2  98.2 |    0    0    0   100 |    8    0    0   100 |
+gstbase1                   |   23    0    0   100 |  302    0   13  95.9 |    2    0    0   100 |   30    0    1  96.8 |
+gstcheck1                  |    8    0    0   100 |  108    0    4  96.4 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   16    0    0   100 |    3    0    0   100 |    2    0    0   100 |
 gstgl1                     |   38    0    0   100 |  285    0   10  96.6 |    5    0    0   100 |   53    0    7  88.3 |
 gstglegl1                  |    7    0    0   100 |   14    0    6  70.0 |    0    0    0   100 |    0    0    0   100 |
@@ -194,14 +194,19 @@ gstaudio.global.bufferAddDsdPlaneOffsetMeta
 gstaudio.global.dsdConvert
 gstbase.adapter.Adapter.map
 gstbase.adapter.Adapter.take
+gstbase.bit_writer.BitWriter.freeAndGetBuffer
 gstbase.bit_writer.BitWriter.freeAndGetData
 gstbase.bit_writer.BitWriter.getData
 gstbase.bit_writer.BitWriter.resetAndGetData
 gstbase.byte_reader.ByteReader.dupData
 gstbase.byte_reader.ByteReader.getData
 gstbase.byte_reader.ByteReader.peekData
+gstbase.byte_writer.ByteWriter.freeAndGetBuffer
+gstbase.byte_writer.ByteWriter.freeAndGetData
 gstbase.byte_writer.ByteWriter.resetAndGetData
 gstbase.collect_pads.CollectPads.addPad
+gstcheck.harness.Harness.addSinkHarness
+gstcheck.harness.Harness.addSrcHarness
 gstcheck.global.checkElementPushBufferList
 gstcheck.global.checkInit
 gstgl.glframebuffer.GLFramebuffer.drawToTexture

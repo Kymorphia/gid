@@ -85,7 +85,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
   */
   void finishError(glib.error.ErrorWrap error) nothrow
   {
-    webkit_uri_scheme_request_finish_error(cast(WebKitURISchemeRequest*)this._cPtr, error ? cast(GError*)error._cPtr : null);
+    webkit_uri_scheme_request_finish_error(cast(WebKitURISchemeRequest*)this._cPtr, error ? cast(GError*)error._cPtr(No.Dup) : null);
   }
 
   /**

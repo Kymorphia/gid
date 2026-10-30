@@ -249,7 +249,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   void defaultError(glib.error.ErrorWrap error, string debug_ = null) nothrow
   {
     const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
-    gst_object_default_error(cast(GstObject*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null, _debug_);
+    gst_object_default_error(cast(GstObject*)this._cPtr, error ? cast(const(GError)*)error._cPtr(No.Dup) : null, _debug_);
   }
 
   /**

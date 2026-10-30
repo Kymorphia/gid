@@ -76,22 +76,6 @@ class BitWriter
     return _retval;
   }
 
-  /**
-      Frees bitwriter without destroying the internal data, which is
-      returned as #GstBuffer.
-      
-      Free-function: gst_buffer_unref
-      Returns: a new allocated #GstBuffer wrapping the
-            data inside. gst_buffer_unref() after usage.
-  */
-  gst.buffer.Buffer freeAndGetBuffer() nothrow
-  {
-    GstBuffer* _cretval;
-    _cretval = gst_bit_writer_free_and_get_buffer(cast(GstBitWriter*)this._cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
-    return _retval;
-  }
-
   /** */
   uint getRemaining() nothrow
   {

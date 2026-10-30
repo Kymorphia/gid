@@ -644,7 +644,7 @@ void assertionMessageError(string domain, string file, int line, string func, st
   const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
   const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
   const(char)* _expr = expr.toCString!(No.Malloc, No.Nullable);
-  g_assertion_message_error(_domain, _file, line, _func, _expr, error ? cast(const(GError)*)error._cPtr : null, errorDomain, errorCode);
+  g_assertion_message_error(_domain, _file, line, _func, _expr, error ? cast(const(GError)*)error._cPtr(No.Dup) : null, errorDomain, errorCode);
 }
 
 /**
