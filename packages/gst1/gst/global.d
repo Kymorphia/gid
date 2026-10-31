@@ -26,76 +26,6 @@ import gst.types;
 
 
 /**
-* Initializes the GStreamer library, setting up internal path lists,
-* registering built-in elements, and loading standard plugins.
-*
-* Unless the plugin registry is disabled at compile time, the registry will be
-* loaded. By default this will also check if the registry cache needs to be
-* updated and rescan all plugins if needed. See gst_update_registry() for
-* details and section
-* &lt;link linkend="gst-running"&gt;Running GStreamer Applications&lt;/link&gt;
-* for how to disable automatic registry updates.
-*
-* WARNING: This function will terminate your program if it was unable to
-* initialize GStreamer for some reason. If you want your program to fall back,
-* use gst_init_check() instead.
-*
-* Params:
-*   argv = Array of program arguments or null to not process them.
-*/
-void init_(ref string[] argv) nothrow
-{
-  int _argc = cast(int)argv.length;
-  char** _argv = cast(char**)gMalloc(_argc * (char*).sizeof);
-  scope(exit) gFree(_argv);
-
-  foreach (i, a; argv)
-    _argv[i] = a.toCString;
-
-  gst_init(&_argc, &_argv);
-
-  argv.length = _argc;
-  foreach (i; 0 .. _argc)
-    argv[i] = fromCString(_argv[i]);
-}
-
-/**
-* Initializes the GStreamer library, setting up internal path lists,
-* registering built-in elements, and loading standard plugins.
-*
-* This function will return %FALSE if GStreamer could not be initialized
-* for some reason.  If you want your program to fail fatally,
-* use gst_init() instead.
-*
-* Params:
-*   argv = Array of program arguments or null to not process them.
-* Returns: true if GStreamer could be initialized.
-* Throws: [ErrorWrap]
-*/
-bool initCheck(ref string[] argv)
-{
-  int _argc = cast(int)argv.length;
-  char** _argv = cast(char**)gMalloc(_argc * (char*).sizeof);
-  scope(exit) gFree(_argv);
-
-  foreach (i, a; argv)
-    _argv[i] = a.toCString;
-
-  GError *_err;
-  gboolean _retval = gst_init_check(&_argc, &_argv, &_err);
-
-  if (_err)
-    throw new ErrorWrap(_err, Yes.Take);
-
-  argv.length = _argc;
-  foreach (i; 0 .. _argc)
-    argv[i] = fromCString(_argv[i]);
-
-  return cast(bool)_retval;
-}
-
-
-/**
     Adds the logging function to the list of logging functions.
     Be sure to use #G_GNUC_NO_INSTRUMENT on that function, it is needed.
 
@@ -744,6 +674,72 @@ string getMainExecutablePath() nothrow
   const(char)* _cretval;
   _cretval = gst_get_main_executable_path();
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Initializes the GStreamer library, setting up internal path lists,
+    registering built-in elements, and loading standard plugins.
+    
+    Unless the plugin registry is disabled at compile time, the registry will be
+    loaded. By default this will also check if the registry cache needs to be
+    updated and rescan all plugins if needed. See [gst.global.updateRegistry] for
+    details and section
+    <link linkend="gst-running">Running GStreamer Applications</link>
+    for how to disable automatic registry updates.
+    
+    WARNING: This function will terminate your program if it was unable to
+    initialize GStreamer for some reason. If you want your program to fall back,
+    use [gst.global.initCheck] instead.
+
+    Params:
+      argv = pointer to application's argv
+*/
+void init_(ref string[] argv) nothrow
+{
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  gst_init(&_argc, &_argv);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
+}
+
+/**
+    Initializes the GStreamer library, setting up internal path lists,
+    registering built-in elements, and loading standard plugins.
+    
+    This function will return false if GStreamer could not be initialized
+    for some reason.  If you want your program to fail fatally,
+    use [gst.global.init_] instead.
+
+    Params:
+      argv = pointer to application's argv
+    Returns: true if GStreamer could be initialized.
+    Throws: [ErrorWrap]
+*/
+bool initCheck(ref string[] argv)
+{
+  bool _retval;
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  GError *_err;
+  _retval = cast(bool)gst_init_check(&_argc, &_argv, &_err);
+  if (_err)
+    throw new ErrorWrap(_err, Yes.Take);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
   return _retval;
 }
 

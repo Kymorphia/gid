@@ -5,6 +5,7 @@ public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;
+import glib.error;
 import glib.option_group;
 import glib.types;
 
@@ -163,6 +164,106 @@ class OptionContext
     const(char)* _cretval;
     _cretval = g_option_context_get_summary(cast(GOptionContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Parses the command line arguments, recognizing options
+      which have been added to context. A side-effect of
+      calling this function is that [glib.global.setPrgname] will be
+      called.
+      
+      If the parsing is successful, any parsed arguments are
+      removed from the array and argc and argv are updated
+      accordingly. A '--' option is stripped from argv
+      unless there are unparsed options before and after it,
+      or some of the options after it start with '-'. In case
+      of an error, argc and argv are left unmodified.
+      
+      If automatic `--help` support is enabled
+      (see [glib.option_context.OptionContext.setHelpEnabled]), and the
+      argv array contains one of the recognized help options,
+      this function will produce help output to stdout and
+      call `exit (0)`.
+      
+      Note that function depends on the [current locale][setlocale] for
+      automatic character set conversion of string and filename
+      arguments.
+  
+      Params:
+        argv = a pointer to the array of command line arguments
+      Returns: true if the parsing was successful,
+                      false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool parse(ref string[] argv)
+  {
+    bool _retval;
+    int _argc;
+    if (argv)
+      _argc = cast(int)argv.length;
+
+    auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+    foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+    GError *_err;
+    _retval = cast(bool)g_option_context_parse(cast(GOptionContext*)this._cPtr, &_argc, &_argv, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    argv.length = _argc;
+    foreach (i; 0 .. _argc)
+      argv[i] = _argv[i].fromCString!(Yes.Free);
+    gFree(cast(void*)_argv);
+    return _retval;
+  }
+
+  /**
+      Parses the command line arguments.
+      
+      This function is similar to [glib.option_context.OptionContext.parse] except that it
+      respects the normal memory rules when dealing with a strv instead of
+      assuming that the passed-in array is the argv of the main function.
+      
+      In particular, strings that are removed from the arguments list will
+      be freed using [glib.global.gfree].
+      
+      On Windows, the strings are expected to be in UTF-8.  This is in
+      contrast to [glib.option_context.OptionContext.parse] which expects them to be in the
+      system codepage, which is how they are passed as argv to main().
+      See g_win32_get_command_line() for a solution.
+      
+      This function is useful if you are trying to use #GOptionContext with
+      #GApplication.
+  
+      Params:
+        arguments = a pointer
+             to the command line arguments (which must be in UTF-8 on Windows).
+             Starting with GLib 2.62, arguments can be null, which matches
+             [glib.option_context.OptionContext.parse].
+      Returns: true if the parsing was successful,
+                 false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool parseStrv(ref string[] arguments)
+  {
+    bool _retval;
+    auto _arguments = cast(char**)gMalloc((arguments.length + 1) * (char*).sizeof);
+    foreach (i, s; arguments) _arguments[i] = s.toCString!(Yes.Malloc);
+    GError *_err;
+    _retval = cast(bool)g_option_context_parse_strv(cast(GOptionContext*)this._cPtr, &_arguments, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    uint _lenarguments;
+    if (_arguments)
+    {
+      for (; _arguments[_lenarguments] !is null; _lenarguments++)
+      {
+      }
+    }
+
+    arguments.length = _lenarguments;
+    foreach (i; 0 .. _lenarguments)
+      arguments[i] = _arguments[i].fromCString!(Yes.Free);
+    gFree(cast(void*)_arguments);
     return _retval;
   }
 

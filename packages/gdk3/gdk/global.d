@@ -689,6 +689,66 @@ bool getShowEvents() nothrow
 }
 
 /**
+    Initializes the GDK library and connects to the windowing system.
+    If initialization fails, a warning message is output and the application
+    terminates with a call to `exit(1)`.
+    
+    Any arguments used by GDK are removed from the array and argc and argv
+    are updated accordingly.
+    
+    GTK+ initializes GDK in [gtk.global.init_] and so this function is not usually
+    needed by GTK+ applications.
+
+    Params:
+      argv = the array of command line arguments.
+*/
+void init_(ref string[] argv) nothrow
+{
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  gdk_init(&_argc, &_argv);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
+}
+
+/**
+    Initializes the GDK library and connects to the windowing system,
+    returning true on success.
+    
+    Any arguments used by GDK are removed from the array and argc and argv
+    are updated accordingly.
+    
+    GTK+ initializes GDK in [gtk.global.init_] and so this function is not usually
+    needed by GTK+ applications.
+
+    Params:
+      argv = the array of command line arguments.
+    Returns: true if initialization succeeded.
+*/
+bool initCheck(ref string[] argv) nothrow
+{
+  bool _retval;
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  _retval = cast(bool)gdk_init_check(&_argc, &_argv);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
+  return _retval;
+}
+
+/**
     Grabs the keyboard so that all events are passed to this
     application until the keyboard is ungrabbed with [gdk.global.keyboardUngrab].
     This overrides any previous keyboard grab by this client.
@@ -1047,6 +1107,34 @@ pango.context.Context pangoContextGetForScreen(gdk.screen.Screen screen) nothrow
   _cretval = gdk_pango_context_get_for_screen(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   auto _retval = gobject.object.ObjectWrap._getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
   return _retval;
+}
+
+/**
+    Parse command line arguments, and store for future
+    use by calls to [gdk.display.Display.open].
+    
+    Any arguments used by GDK are removed from the array and argc and argv are
+    updated accordingly.
+    
+    You shouldn’t call this function explicitly if you are using
+    [gtk.global.init_], [gtk.global.initCheck], [gdk.global.init_], or [gdk.global.initCheck].
+
+    Params:
+      argv = the array of command line arguments.
+*/
+void parseArgs(ref string[] argv) nothrow
+{
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  gdk_parse_args(&_argc, &_argv);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
 }
 
 /**

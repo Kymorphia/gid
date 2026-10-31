@@ -9,18 +9,18 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   76    0    0   100 | 1256    1    8  99.4 |    0    0    0   100 |  128    0    8  94.1 |
+glib2                      |   76    0    0   100 | 1258    1    6  99.5 |    0    0    0   100 |  128    0    8  94.1 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   14    0    1  93.3 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  137    0    3  97.9 |
 gda5                       |  112    0    3  97.4 |  662    0   25  96.4 |   54    0    0   100 |  197    0   26  88.3 |
-gdk3                       |   57    0    0   100 |  539    0    9  98.4 |   39    0    0   100 |  264    0    3  98.9 |
+gdk3                       |   57    0    0   100 |  542    0    6  98.9 |   39    0    0   100 |  264    0    3  98.9 |
 gdk4                       |   63    0    0   100 |  479    0    9  98.2 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4    0    0   100 |   23    0    0   100 |
 gio2                       |  178    0    0   100 | 1729    0   15  99.1 |   81    0    0   100 |   61    0    7  89.7 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   51    0    0   100 |  267    0    4  98.5 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   89    0    0   100 | 1396    0   21  98.5 |   23    0    0   100 |  129    0    4  97.0 |
+gst1                       |   89    0    0   100 | 1398    0   21  98.5 |   23    0    0   100 |  129    0    4  97.0 |
 gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    6    0    0   100 |   48    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  213    0    9  95.9 |    0    0    0   100 |   57    0    8  87.7 |
@@ -37,7 +37,7 @@ gstrtsp1                   |   15    0    0   100 |  139    1    0   100 |    1 
 gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   82    0    7  92.1 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   58    0    0   100 |  372    0    7  98.2 |    2    0    0   100 |  176    0   11  94.1 |
-gtk3                       |  345    0    0   100 | 3767    1   18  99.5 |  447    0    0   100 |  155    0    4  97.5 |
+gtk3                       |  345    0    0   100 | 3771    1   14  99.6 |  447    0    0   100 |  155    0    4  97.5 |
 gtk4                       |  320    0    0   100 | 3587    0    4  99.9 |  345    0    0   100 |   34    0    4  89.5 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   49    0    0   100 |  448    0    0   100 |   30    0    0   100 |    0    0    0   100 |
@@ -77,8 +77,6 @@ atk.text.Text.getRunAttributes
 glib.cond.Cond.wait
 glib.cond.Cond.waitUntil
 glib.main_context.MainContext.wait
-glib.option_context.OptionContext.parse
-glib.option_context.OptionContext.parseStrv
 glib.option_context.OptionContext.setTranslateFunc
 glib.option_group.OptionGroup.setTranslateFunc
 glib.global.testAddDataFunc
@@ -115,9 +113,6 @@ gdk.drag_context.DragContext.listTargets
 gdk.global.dragBegin
 gdk.global.dragBeginForDevice
 gdk.global.dragBeginFromPoint
-gdk.global.init_
-gdk.global.initCheck
-gdk.global.parseArgs
 gdk.content_deserializer.ContentDeserializer.setTaskData
 gdk.content_serializer.ContentSerializer.setTaskData
 gdk.dmabuf_texture_builder.DmabufTextureBuilder.build
@@ -236,10 +231,6 @@ gtk.selection_data.SelectionData.getTargets
 gtk.text_buffer.TextBuffer.getDeserializeFormats
 gtk.text_buffer.TextBuffer.getSerializeFormats
 gtk.window.Window.setDefaultIconList
-gtk.global.init_
-gtk.global.initCheck
-gtk.global.initWithArgs
-gtk.global.parseArgs
 gtk.global.targetTableNewFromList
 gtk.global.targetsIncludeImage
 gtk.global.targetsIncludeRichText

@@ -20,6 +20,7 @@ import gio.icon;
 import glib.error;
 import glib.option_group;
 import glib.scanner;
+import glib.types;
 import gobject.object;
 import gobject.types;
 import gtk.accel_group;
@@ -997,6 +998,146 @@ gtk.widget.Widget grabGetCurrent() nothrow
 }
 
 /**
+    Call this function before using any other GTK+ functions in your GUI
+    applications.  It will initialize everything needed to operate the
+    toolkit and parses some standard command line options.
+    
+    Although you are expected to pass the argc, argv parameters from main() to
+    this function, it is possible to pass null if argv is not available or
+    commandline handling is not required.
+    
+    argc and argv are adjusted accordingly so your own code will
+    never see those standard arguments.
+    
+    Note that there are some alternative ways to initialize GTK+:
+    if you are calling [gtk.global.parseArgs], [gtk.global.initCheck],
+    [gtk.global.initWithArgs] or [glib.option_context.OptionContext.parse] with
+    the option group returned by [gtk.global.getOptionGroup],
+    you don’t have to call [gtk.global.init_].
+    
+    And if you are using #GtkApplication, you don't have to call any of the
+    initialization functions either; the #GtkApplication::startup handler
+    does it for you.
+    
+    This function will terminate your program if it was unable to
+    initialize the windowing system for some reason. If you want
+    your program to fall back to a textual interface you want to
+    call [gtk.global.initCheck] instead.
+    
+    Since 2.18, GTK+ calls `signal (SIGPIPE, SIG_IGN)`
+    during initialization, to ignore SIGPIPE signals, since these are
+    almost never wanted in graphical applications. If you do need to
+    handle SIGPIPE for some reason, reset the handler after [gtk.global.init_],
+    but notice that other libraries (e.g. libdbus or gvfs) might do
+    similar things.
+
+    Params:
+      argv = Address of the
+            `argv` parameter of main(), or null. Any options
+            understood by GTK+ are stripped before return.
+*/
+void init_(ref string[] argv) nothrow
+{
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  gtk_init(&_argc, &_argv);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
+}
+
+/**
+    This function does the same work as [gtk.global.init_] with only a single
+    change: It does not terminate the program if the commandline
+    arguments couldn’t be parsed or the windowing system can’t be
+    initialized. Instead it returns false on failure.
+    
+    This way the application can fall back to some other means of
+    communication with the user - for example a curses or command line
+    interface.
+    
+    Note that calling any GTK function or instantiating any GTK type after
+    this function returns false results in undefined behavior.
+
+    Params:
+      argv = Address of the
+            `argv` parameter of main(), or null. Any options
+            understood by GTK+ are stripped before return.
+    Returns: true if the commandline arguments (if any) were valid and
+          the windowing system has been successfully initialized, false
+          otherwise
+*/
+bool initCheck(ref string[] argv) nothrow
+{
+  bool _retval;
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  _retval = cast(bool)gtk_init_check(&_argc, &_argv);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
+  return _retval;
+}
+
+/**
+    This function does the same work as [gtk.global.initCheck].
+    Additionally, it allows you to add your own commandline options,
+    and it automatically generates nicely formatted
+    `--help` output. Note that your program will
+    be terminated after writing out the help output.
+
+    Params:
+      argv = Address of the
+            `argv` parameter of main(), or null. Any options
+            understood by GTK+ are stripped before return.
+      parameterString = a string which is displayed in
+           the first line of `--help` output, after
+           `programname [OPTION...]`
+      entries = a null-terminated array
+           of #GOptionEntrys describing the options of your program
+      translationDomain = a translation domain to use for translating
+           the `--help` output for the options in entries
+           and the parameter_string with gettext(), or null
+    Returns: true if the commandline arguments (if any) were valid and
+          if the windowing system has been successfully initialized,
+          false otherwise
+    Throws: [ErrorWrap]
+*/
+bool initWithArgs(ref string[] argv, string parameterString, glib.types.OptionEntry[] entries, string translationDomain = null)
+{
+  bool _retval;
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  const(char)* _parameterString = parameterString.toCString!(No.Malloc, Yes.Nullable);
+  auto _entries_arr = entries ~ GOptionEntry.init;
+  auto _entries = _entries_arr.ptr;
+  const(char)* _translationDomain = translationDomain.toCString!(No.Malloc, Yes.Nullable);
+  GError *_err;
+  _retval = cast(bool)gtk_init_with_args(&_argc, &_argv, _parameterString, _entries, _translationDomain, &_err);
+  if (_err)
+    throw new ErrorWrap(_err, Yes.Take);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
+  return _retval;
+}
+
+/**
     Removes the key snooper function with the given id.
 
     Params:
@@ -1609,6 +1750,43 @@ void paintVline(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 {
   const(char)* _detail = detail.toCString!(No.Malloc, Yes.Nullable);
   gtk_paint_vline(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, y1, y2, x);
+}
+
+/**
+    Parses command line arguments, and initializes global
+    attributes of GTK+, but does not actually open a connection
+    to a display. (See [gdk.display.Display.open], [gdk.global.getDisplayArgName])
+    
+    Any arguments used by GTK+ or GDK are removed from the array and
+    argc and argv are updated accordingly.
+    
+    There is no need to call this function explicitly if you are using
+    [gtk.global.init_], or [gtk.global.initCheck].
+    
+    Note that many aspects of GTK+ require a display connection to
+    function, so this way of initializing GTK+ is really only useful
+    for specialized use cases.
+
+    Params:
+      argv = a pointer to the array of
+            command line arguments
+    Returns: true if initialization succeeded, otherwise false
+*/
+bool parseArgs(ref string[] argv) nothrow
+{
+  bool _retval;
+  int _argc;
+  if (argv)
+    _argc = cast(int)argv.length;
+
+  auto _argv = cast(char**)gMalloc((argv.length) * (char*).sizeof);
+  foreach (i, s; argv) _argv[i] = s.toCString!(Yes.Malloc);
+  _retval = cast(bool)gtk_parse_args(&_argc, &_argv);
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = _argv[i].fromCString!(Yes.Free);
+  gFree(cast(void*)_argv);
+  return _retval;
 }
 
 /**
