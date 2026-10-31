@@ -19,10 +19,12 @@ class VideoSEIUserDataUnregisteredMeta
   /**
       Create a `video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta` wrap type.
       Params:
+        uuid = User Data Unregistered UUID
         size = Size of the data buffer
   */
-  this(size_t size = size_t.init) nothrow
+  this(ubyte[16] uuid = (ubyte[16]).init, size_t size = size_t.init) nothrow
   {
+    this.uuid = uuid;
     this.size = size;
   }
 
@@ -48,6 +50,25 @@ class VideoSEIUserDataUnregisteredMeta
   @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).meta, No.Take);
+  }
+
+  /**
+      Get `uuid` field.
+      Returns: User Data Unregistered UUID
+  */
+  @property ubyte[16] uuid() nothrow
+  {
+    return *cast(ubyte[16]*)&(cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).uuid;
+  }
+
+  /**
+      Set `uuid` field.
+      Params:
+        propval = User Data Unregistered UUID
+  */
+  @property void uuid(ubyte[16] propval) nothrow
+  {
+    (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).uuid = *cast(ubyte[16]*)&propval;
   }
 
   /**

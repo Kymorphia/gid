@@ -42,11 +42,12 @@ class GLMemory : gobject.boxed.Boxed
         texFormat = the texture type
         valign = data alignment for system memory mapping
         plane = data plane in @info
+        texScaling = GL shader scaling parameters for @valign and/or width/height
         textureWrapped = 
         unpackLength = 
         texWidth = 
   */
-  this(uint texId = uint.init, gstgl.types.GLTextureTarget texTarget = gstgl.types.GLTextureTarget.init, gstgl.types.GLFormat texFormat = gstgl.types.GLFormat.init, gstvideo.video_alignment.VideoAlignment valign = gstvideo.video_alignment.VideoAlignment.init, uint plane = uint.init, bool textureWrapped = bool.init, uint unpackLength = uint.init, uint texWidth = uint.init) nothrow
+  this(uint texId = uint.init, gstgl.types.GLTextureTarget texTarget = gstgl.types.GLTextureTarget.init, gstgl.types.GLFormat texFormat = gstgl.types.GLFormat.init, gstvideo.video_alignment.VideoAlignment valign = gstvideo.video_alignment.VideoAlignment.init, uint plane = uint.init, float[2] texScaling = (float[2]).init, bool textureWrapped = bool.init, uint unpackLength = uint.init, uint texWidth = uint.init) nothrow
   {
     super(boxedNew!GstGLMemory(_getGType), Yes.Take);
     this.texId = texId;
@@ -54,6 +55,7 @@ class GLMemory : gobject.boxed.Boxed
     this.texFormat = texFormat;
     this.valign = valign;
     this.plane = plane;
+    this.texScaling = texScaling;
     this.textureWrapped = textureWrapped;
     this.unpackLength = unpackLength;
     this.texWidth = texWidth;
@@ -201,6 +203,25 @@ class GLMemory : gobject.boxed.Boxed
   @property void plane(uint propval) nothrow
   {
     (cast(GstGLMemory*)this._cPtr).plane = propval;
+  }
+
+  /**
+      Get `texScaling` field.
+      Returns: GL shader scaling parameters for @valign and/or width/height
+  */
+  @property float[2] texScaling() nothrow
+  {
+    return *cast(float[2]*)&(cast(GstGLMemory*)this._cPtr).texScaling;
+  }
+
+  /**
+      Set `texScaling` field.
+      Params:
+        propval = GL shader scaling parameters for @valign and/or width/height
+  */
+  @property void texScaling(float[2] propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).texScaling = *cast(float[2]*)&propval;
   }
 
   /** */

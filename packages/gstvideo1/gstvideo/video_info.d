@@ -293,6 +293,44 @@ class VideoInfo : gobject.boxed.Boxed
   }
 
   /**
+      Get `offset` field.
+      Returns: offsets of the planes
+  */
+  @property size_t[4] offset() nothrow
+  {
+    return *cast(size_t[4]*)&(cast(GstVideoInfo*)this._cPtr).offset;
+  }
+
+  /**
+      Set `offset` field.
+      Params:
+        propval = offsets of the planes
+  */
+  @property void offset(size_t[4] propval) nothrow
+  {
+    (cast(GstVideoInfo*)this._cPtr).offset = *cast(size_t[4]*)&propval;
+  }
+
+  /**
+      Get `stride` field.
+      Returns: strides of the planes
+  */
+  @property int[4] stride() nothrow
+  {
+    return *cast(int[4]*)&(cast(GstVideoInfo*)this._cPtr).stride;
+  }
+
+  /**
+      Set `stride` field.
+      Params:
+        propval = strides of the planes
+  */
+  @property void stride(int[4] propval) nothrow
+  {
+    (cast(GstVideoInfo*)this._cPtr).stride = *cast(int[4]*)&propval;
+  }
+
+  /**
       Allocate a new #GstVideoInfo that is also initialized with
       [gstvideo.video_info.VideoInfo.init_].
       Returns: a new #GstVideoInfo. free with [gstvideo.video_info.VideoInfo.free].

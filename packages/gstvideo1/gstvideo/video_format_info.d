@@ -26,9 +26,22 @@ class VideoFormatInfo
              should be read according to the endianness flag before applying the shift
              and mask.
         nComponents = the number of components in the video format.
+        shift = the number of bits to shift away to get the component data
+        depth = the depth in bits for each component
+        pixelStride = the pixel stride of each component. This is the amount of
+             bytes to the pixel immediately to the right. When bits < 8, the stride is
+             expressed in bits. For 24-bit RGB, this would be 3 bytes, for example,
+             while it would be 4 bytes for RGBx or ARGB.
         nPlanes = the number of planes for this format. The number of planes can be
              less than the amount of components when multiple components are packed into
              one plane.
+        plane = the plane number where a component can be found
+        poffset = the offset in the plane where the first pixel of the components
+             can be found.
+        wSub = subsampling factor of the width for the component. Use
+              GST_VIDEO_SUB_SCALE to scale a width.
+        hSub = subsampling factor of the height for the component. Use
+              GST_VIDEO_SUB_SCALE to scale a height.
         unpackFormat = the format of the unpacked pixels. This format must have the
               #GST_VIDEO_FORMAT_FLAG_UNPACK flag set.
         packLines = the amount of lines that will be packed
@@ -37,8 +50,9 @@ class VideoFormatInfo
           use tile_info[] array instead.
         tileHs = The height of a tile, in bytes, represented as a shift. DEPREACTED,
           use tile_info[] array instead.
+        tileInfo = Information about the tiles for each of the planes.
   */
-  this(gstvideo.types.VideoFormat format = gstvideo.types.VideoFormat.init, string name = string.init, string description = string.init, gstvideo.types.VideoFormatFlags flags = gstvideo.types.VideoFormatFlags.init, uint bits = uint.init, uint nComponents = uint.init, uint nPlanes = uint.init, gstvideo.types.VideoFormat unpackFormat = gstvideo.types.VideoFormat.init, int packLines = int.init, gstvideo.types.VideoTileMode tileMode = gstvideo.types.VideoTileMode.init, uint tileWs = uint.init, uint tileHs = uint.init) nothrow
+  this(gstvideo.types.VideoFormat format = gstvideo.types.VideoFormat.init, string name = string.init, string description = string.init, gstvideo.types.VideoFormatFlags flags = gstvideo.types.VideoFormatFlags.init, uint bits = uint.init, uint nComponents = uint.init, uint[4] shift = (uint[4]).init, uint[4] depth = (uint[4]).init, int[4] pixelStride = (int[4]).init, uint nPlanes = uint.init, uint[4] plane = (uint[4]).init, uint[4] poffset = (uint[4]).init, uint[4] wSub = (uint[4]).init, uint[4] hSub = (uint[4]).init, gstvideo.types.VideoFormat unpackFormat = gstvideo.types.VideoFormat.init, int packLines = int.init, gstvideo.types.VideoTileMode tileMode = gstvideo.types.VideoTileMode.init, uint tileWs = uint.init, uint tileHs = uint.init, gstvideo.types.VideoTileInfo[4] tileInfo = (gstvideo.types.VideoTileInfo[4]).init) nothrow
   {
     this.format = format;
     this.name = name;
@@ -46,12 +60,20 @@ class VideoFormatInfo
     this.flags = flags;
     this.bits = bits;
     this.nComponents = nComponents;
+    this.shift = shift;
+    this.depth = depth;
+    this.pixelStride = pixelStride;
     this.nPlanes = nPlanes;
+    this.plane = plane;
+    this.poffset = poffset;
+    this.wSub = wSub;
+    this.hSub = hSub;
     this.unpackFormat = unpackFormat;
     this.packLines = packLines;
     this.tileMode = tileMode;
     this.tileWs = tileWs;
     this.tileHs = tileHs;
+    this.tileInfo = tileInfo;
   }
 
   /** */
@@ -190,6 +212,69 @@ class VideoFormatInfo
   }
 
   /**
+      Get `shift` field.
+      Returns: the number of bits to shift away to get the component data
+  */
+  @property uint[4] shift() nothrow
+  {
+    return *cast(uint[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).shift;
+  }
+
+  /**
+      Set `shift` field.
+      Params:
+        propval = the number of bits to shift away to get the component data
+  */
+  @property void shift(uint[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).shift = *cast(uint[4]*)&propval;
+  }
+
+  /**
+      Get `depth` field.
+      Returns: the depth in bits for each component
+  */
+  @property uint[4] depth() nothrow
+  {
+    return *cast(uint[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).depth;
+  }
+
+  /**
+      Set `depth` field.
+      Params:
+        propval = the depth in bits for each component
+  */
+  @property void depth(uint[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).depth = *cast(uint[4]*)&propval;
+  }
+
+  /**
+      Get `pixelStride` field.
+      Returns: the pixel stride of each component. This is the amount of
+           bytes to the pixel immediately to the right. When bits < 8, the stride is
+           expressed in bits. For 24-bit RGB, this would be 3 bytes, for example,
+           while it would be 4 bytes for RGBx or ARGB.
+  */
+  @property int[4] pixelStride() nothrow
+  {
+    return *cast(int[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).pixelStride;
+  }
+
+  /**
+      Set `pixelStride` field.
+      Params:
+        propval = the pixel stride of each component. This is the amount of
+             bytes to the pixel immediately to the right. When bits < 8, the stride is
+             expressed in bits. For 24-bit RGB, this would be 3 bytes, for example,
+             while it would be 4 bytes for RGBx or ARGB.
+  */
+  @property void pixelStride(int[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).pixelStride = *cast(int[4]*)&propval;
+  }
+
+  /**
       Get `nPlanes` field.
       Returns: the number of planes for this format. The number of planes can be
            less than the amount of components when multiple components are packed into
@@ -210,6 +295,88 @@ class VideoFormatInfo
   @property void nPlanes(uint propval) nothrow
   {
     (cast(GstVideoFormatInfo*)this._cPtr).nPlanes = propval;
+  }
+
+  /**
+      Get `plane` field.
+      Returns: the plane number where a component can be found
+  */
+  @property uint[4] plane() nothrow
+  {
+    return *cast(uint[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).plane;
+  }
+
+  /**
+      Set `plane` field.
+      Params:
+        propval = the plane number where a component can be found
+  */
+  @property void plane(uint[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).plane = *cast(uint[4]*)&propval;
+  }
+
+  /**
+      Get `poffset` field.
+      Returns: the offset in the plane where the first pixel of the components
+           can be found.
+  */
+  @property uint[4] poffset() nothrow
+  {
+    return *cast(uint[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).poffset;
+  }
+
+  /**
+      Set `poffset` field.
+      Params:
+        propval = the offset in the plane where the first pixel of the components
+             can be found.
+  */
+  @property void poffset(uint[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).poffset = *cast(uint[4]*)&propval;
+  }
+
+  /**
+      Get `wSub` field.
+      Returns: subsampling factor of the width for the component. Use
+            GST_VIDEO_SUB_SCALE to scale a width.
+  */
+  @property uint[4] wSub() nothrow
+  {
+    return *cast(uint[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).wSub;
+  }
+
+  /**
+      Set `wSub` field.
+      Params:
+        propval = subsampling factor of the width for the component. Use
+              GST_VIDEO_SUB_SCALE to scale a width.
+  */
+  @property void wSub(uint[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).wSub = *cast(uint[4]*)&propval;
+  }
+
+  /**
+      Get `hSub` field.
+      Returns: subsampling factor of the height for the component. Use
+            GST_VIDEO_SUB_SCALE to scale a height.
+  */
+  @property uint[4] hSub() nothrow
+  {
+    return *cast(uint[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).hSub;
+  }
+
+  /**
+      Set `hSub` field.
+      Params:
+        propval = subsampling factor of the height for the component. Use
+              GST_VIDEO_SUB_SCALE to scale a height.
+  */
+  @property void hSub(uint[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).hSub = *cast(uint[4]*)&propval;
   }
 
   /**
@@ -311,6 +478,25 @@ class VideoFormatInfo
   @property void tileHs(uint propval) nothrow
   {
     (cast(GstVideoFormatInfo*)this._cPtr).tileHs = propval;
+  }
+
+  /**
+      Get `tileInfo` field.
+      Returns: Information about the tiles for each of the planes.
+  */
+  @property gstvideo.types.VideoTileInfo[4] tileInfo() nothrow
+  {
+    return *cast(gstvideo.types.VideoTileInfo[4]*)&(cast(GstVideoFormatInfo*)this._cPtr).tileInfo;
+  }
+
+  /**
+      Set `tileInfo` field.
+      Params:
+        propval = Information about the tiles for each of the planes.
+  */
+  @property void tileInfo(gstvideo.types.VideoTileInfo[4] propval) nothrow
+  {
+    (cast(GstVideoFormatInfo*)this._cPtr).tileInfo = *cast(GstVideoTileInfo[4]*)&propval;
   }
 
   /**

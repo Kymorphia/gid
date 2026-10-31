@@ -6,6 +6,7 @@ import gid.gid;
 import gobject.boxed;
 import secret.c.functions;
 import secret.c.types;
+import secret.schema_attribute;
 import secret.types;
 
 /**
@@ -123,5 +124,17 @@ class Schema : gobject.boxed.Boxed
   @property void flags(secret.types.SchemaFlags propval) nothrow
   {
     (cast(SecretSchema*)this._cPtr).flags = cast(SecretSchemaFlags)propval;
+  }
+
+  /**
+      Get `attributes` field.
+      Returns: the attribute names and types of those attributes
+  */
+  @property secret.schema_attribute.SchemaAttribute[32] attributes() nothrow
+  {
+    secret.schema_attribute.SchemaAttribute[32] _retval;
+    foreach (i; 0 .. 32)
+      _retval[i] = new secret.schema_attribute.SchemaAttribute(cast(void*)&(cast(SecretSchema*)this._cPtr).attributes[i], No.Take);
+    return _retval;
   }
 }

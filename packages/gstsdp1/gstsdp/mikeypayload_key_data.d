@@ -23,13 +23,15 @@ class MIKEYPayloadKeyData
         keyLen = length of @key_data
         saltLen = the length of @salt_data, can be 0
         kvType = the Key Validity type
+        kvLen = length of @kv_data
   */
-  this(gstsdp.types.MIKEYKeyDataType keyType = gstsdp.types.MIKEYKeyDataType.init, ushort keyLen = ushort.init, ushort saltLen = ushort.init, gstsdp.types.MIKEYKVType kvType = gstsdp.types.MIKEYKVType.init) nothrow
+  this(gstsdp.types.MIKEYKeyDataType keyType = gstsdp.types.MIKEYKeyDataType.init, ushort keyLen = ushort.init, ushort saltLen = ushort.init, gstsdp.types.MIKEYKVType kvType = gstsdp.types.MIKEYKVType.init, ubyte[2] kvLen = (ubyte[2]).init) nothrow
   {
     this.keyType = keyType;
     this.keyLen = keyLen;
     this.saltLen = saltLen;
     this.kvType = kvType;
+    this.kvLen = kvLen;
   }
 
   /** */
@@ -130,5 +132,24 @@ class MIKEYPayloadKeyData
   @property void kvType(gstsdp.types.MIKEYKVType propval) nothrow
   {
     (cast(GstMIKEYPayloadKeyData*)this._cPtr).kvType = cast(GstMIKEYKVType)propval;
+  }
+
+  /**
+      Get `kvLen` field.
+      Returns: length of @kv_data
+  */
+  @property ubyte[2] kvLen() nothrow
+  {
+    return *cast(ubyte[2]*)&(cast(GstMIKEYPayloadKeyData*)this._cPtr).kvLen;
+  }
+
+  /**
+      Set `kvLen` field.
+      Params:
+        propval = length of @kv_data
+  */
+  @property void kvLen(ubyte[2] propval) nothrow
+  {
+    (cast(GstMIKEYPayloadKeyData*)this._cPtr).kvLen = *cast(ubyte[2]*)&propval;
   }
 }

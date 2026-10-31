@@ -24,11 +24,13 @@ class VideoGLTextureUploadMeta
       Params:
         textureOrientation = Orientation of the textures
         nTextures = Number of textures that are generated
+        textureType = Type of each texture
   */
-  this(gstvideo.types.VideoGLTextureOrientation textureOrientation = gstvideo.types.VideoGLTextureOrientation.init, uint nTextures = uint.init) nothrow
+  this(gstvideo.types.VideoGLTextureOrientation textureOrientation = gstvideo.types.VideoGLTextureOrientation.init, uint nTextures = uint.init, gstvideo.types.VideoGLTextureType[4] textureType = (gstvideo.types.VideoGLTextureType[4]).init) nothrow
   {
     this.textureOrientation = textureOrientation;
     this.nTextures = nTextures;
+    this.textureType = textureType;
   }
 
   /** */
@@ -91,6 +93,25 @@ class VideoGLTextureUploadMeta
   @property void nTextures(uint propval) nothrow
   {
     (cast(GstVideoGLTextureUploadMeta*)this._cPtr).nTextures = propval;
+  }
+
+  /**
+      Get `textureType` field.
+      Returns: Type of each texture
+  */
+  @property gstvideo.types.VideoGLTextureType[4] textureType() nothrow
+  {
+    return *cast(gstvideo.types.VideoGLTextureType[4]*)&(cast(GstVideoGLTextureUploadMeta*)this._cPtr).textureType;
+  }
+
+  /**
+      Set `textureType` field.
+      Params:
+        propval = Type of each texture
+  */
+  @property void textureType(gstvideo.types.VideoGLTextureType[4] propval) nothrow
+  {
+    (cast(GstVideoGLTextureUploadMeta*)this._cPtr).textureType = *cast(GstVideoGLTextureType[4]*)&propval;
   }
 
   /**

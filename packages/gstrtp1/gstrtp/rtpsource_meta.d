@@ -21,12 +21,14 @@ class RTPSourceMeta
       Params:
         ssrc = the SSRC
         ssrcValid = whether @ssrc is set and valid
+        csrc = pointer to the CSRCs
         csrcCount = number of elements in @csrc
   */
-  this(uint ssrc = uint.init, bool ssrcValid = bool.init, uint csrcCount = uint.init) nothrow
+  this(uint ssrc = uint.init, bool ssrcValid = bool.init, uint[15] csrc = (uint[15]).init, uint csrcCount = uint.init) nothrow
   {
     this.ssrc = ssrc;
     this.ssrcValid = ssrcValid;
+    this.csrc = csrc;
     this.csrcCount = csrcCount;
   }
 
@@ -90,6 +92,25 @@ class RTPSourceMeta
   @property void ssrcValid(bool propval) nothrow
   {
     (cast(GstRTPSourceMeta*)this._cPtr).ssrcValid = propval;
+  }
+
+  /**
+      Get `csrc` field.
+      Returns: pointer to the CSRCs
+  */
+  @property uint[15] csrc() nothrow
+  {
+    return *cast(uint[15]*)&(cast(GstRTPSourceMeta*)this._cPtr).csrc;
+  }
+
+  /**
+      Set `csrc` field.
+      Params:
+        propval = pointer to the CSRCs
+  */
+  @property void csrc(uint[15] propval) nothrow
+  {
+    (cast(GstRTPSourceMeta*)this._cPtr).csrc = *cast(uint[15]*)&propval;
   }
 
   /**

@@ -19,6 +19,9 @@ class VideoMasteringDisplayInfo
   /**
       Create a `video_mastering_display_info.VideoMasteringDisplayInfo` wrap type.
       Params:
+        displayPrimaries = the xy coordinates of primaries in the CIE 1931 color space.
+            the index 0 contains red, 1 is for green and 2 is for blue.
+            each value is normalized to 50000 (meaning that in unit of 0.00002)
         whitePoint = the xy coordinates of white point in the CIE 1931 color space.
             each value is normalized to 50000 (meaning that in unit of 0.00002)
         maxDisplayMasteringLuminance = the maximum value of display luminance
@@ -26,8 +29,9 @@ class VideoMasteringDisplayInfo
         minDisplayMasteringLuminance = the minimum value of display luminance
             in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
   */
-  this(gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint = gstvideo.types.VideoMasteringDisplayInfoCoordinates.init, uint maxDisplayMasteringLuminance = uint.init, uint minDisplayMasteringLuminance = uint.init) nothrow
+  this(gstvideo.types.VideoMasteringDisplayInfoCoordinates[3] displayPrimaries = (gstvideo.types.VideoMasteringDisplayInfoCoordinates[3]).init, gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint = gstvideo.types.VideoMasteringDisplayInfoCoordinates.init, uint maxDisplayMasteringLuminance = uint.init, uint minDisplayMasteringLuminance = uint.init) nothrow
   {
+    this.displayPrimaries = displayPrimaries;
     this.whitePoint = whitePoint;
     this.maxDisplayMasteringLuminance = maxDisplayMasteringLuminance;
     this.minDisplayMasteringLuminance = minDisplayMasteringLuminance;
@@ -46,6 +50,29 @@ class VideoMasteringDisplayInfo
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+  }
+
+  /**
+      Get `displayPrimaries` field.
+      Returns: the xy coordinates of primaries in the CIE 1931 color space.
+          the index 0 contains red, 1 is for green and 2 is for blue.
+          each value is normalized to 50000 (meaning that in unit of 0.00002)
+  */
+  @property gstvideo.types.VideoMasteringDisplayInfoCoordinates[3] displayPrimaries() nothrow
+  {
+    return *cast(gstvideo.types.VideoMasteringDisplayInfoCoordinates[3]*)&(cast(GstVideoMasteringDisplayInfo*)this._cPtr).displayPrimaries;
+  }
+
+  /**
+      Set `displayPrimaries` field.
+      Params:
+        propval = the xy coordinates of primaries in the CIE 1931 color space.
+            the index 0 contains red, 1 is for green and 2 is for blue.
+            each value is normalized to 50000 (meaning that in unit of 0.00002)
+  */
+  @property void displayPrimaries(gstvideo.types.VideoMasteringDisplayInfoCoordinates[3] propval) nothrow
+  {
+    (cast(GstVideoMasteringDisplayInfo*)this._cPtr).displayPrimaries = *cast(GstVideoMasteringDisplayInfoCoordinates[3]*)&propval;
   }
 
   /**

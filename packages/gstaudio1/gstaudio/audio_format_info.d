@@ -24,9 +24,10 @@ class AudioFormatInfo
         endianness = the endianness
         width = amount of bits used for one sample
         depth = amount of valid bits in @width
+        silence = @width/8 bytes with 1 silent sample
         unpackFormat = the format of the unpacked samples
   */
-  this(gstaudio.types.AudioFormat format = gstaudio.types.AudioFormat.init, string name = string.init, string description = string.init, gstaudio.types.AudioFormatFlags flags = gstaudio.types.AudioFormatFlags.init, int endianness = int.init, int width = int.init, int depth = int.init, gstaudio.types.AudioFormat unpackFormat = gstaudio.types.AudioFormat.init) nothrow
+  this(gstaudio.types.AudioFormat format = gstaudio.types.AudioFormat.init, string name = string.init, string description = string.init, gstaudio.types.AudioFormatFlags flags = gstaudio.types.AudioFormatFlags.init, int endianness = int.init, int width = int.init, int depth = int.init, ubyte[8] silence = (ubyte[8]).init, gstaudio.types.AudioFormat unpackFormat = gstaudio.types.AudioFormat.init) nothrow
   {
     this.format = format;
     this.name = name;
@@ -35,6 +36,7 @@ class AudioFormatInfo
     this.endianness = endianness;
     this.width = width;
     this.depth = depth;
+    this.silence = silence;
     this.unpackFormat = unpackFormat;
   }
 
@@ -184,6 +186,25 @@ class AudioFormatInfo
   @property void depth(int propval) nothrow
   {
     (cast(GstAudioFormatInfo*)this._cPtr).depth = propval;
+  }
+
+  /**
+      Get `silence` field.
+      Returns: @width/8 bytes with 1 silent sample
+  */
+  @property ubyte[8] silence() nothrow
+  {
+    return *cast(ubyte[8]*)&(cast(GstAudioFormatInfo*)this._cPtr).silence;
+  }
+
+  /**
+      Set `silence` field.
+      Params:
+        propval = @width/8 bytes with 1 silent sample
+  */
+  @property void silence(ubyte[8] propval) nothrow
+  {
+    (cast(GstAudioFormatInfo*)this._cPtr).silence = *cast(ubyte[8]*)&propval;
   }
 
   /**

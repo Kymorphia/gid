@@ -27,9 +27,12 @@ class VideoAffineTransformationMeta
 
   /**
       Create a `video_affine_transformation_meta.VideoAffineTransformationMeta` wrap type.
+      Params:
+        matrix = the column-major 4x4 transformation matrix
   */
-  this() nothrow
+  this(float[16] matrix = (float[16]).init) nothrow
   {
+    this.matrix = matrix;
   }
 
   /** */
@@ -54,6 +57,25 @@ class VideoAffineTransformationMeta
   @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAffineTransformationMeta*)this._cPtr).meta, No.Take);
+  }
+
+  /**
+      Get `matrix` field.
+      Returns: the column-major 4x4 transformation matrix
+  */
+  @property float[16] matrix() nothrow
+  {
+    return *cast(float[16]*)&(cast(GstVideoAffineTransformationMeta*)this._cPtr).matrix;
+  }
+
+  /**
+      Set `matrix` field.
+      Params:
+        propval = the column-major 4x4 transformation matrix
+  */
+  @property void matrix(float[16] propval) nothrow
+  {
+    (cast(GstVideoAffineTransformationMeta*)this._cPtr).matrix = *cast(float[16]*)&propval;
   }
 
   /**

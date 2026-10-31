@@ -31,9 +31,12 @@ class RoundedRect
 
   /**
       Create a `rounded_rect.RoundedRect` wrap type.
+      Params:
+        corner = the size of the 4 rounded corners
   */
-  this() nothrow
+  this(graphene.size.Size[4] corner = (graphene.size.Size[4]).init) nothrow
   {
+    this.corner = corner;
   }
 
   /** */
@@ -58,6 +61,25 @@ class RoundedRect
   @property graphene.rect.Rect bounds() nothrow
   {
     return cToD!(graphene.rect.Rect)(cast(void*)&(cast(GskRoundedRect*)this._cPtr).bounds);
+  }
+
+  /**
+      Get `corner` field.
+      Returns: the size of the 4 rounded corners
+  */
+  @property graphene.size.Size[4] corner() nothrow
+  {
+    return *cast(graphene.size.Size[4]*)&(cast(GskRoundedRect*)this._cPtr).corner;
+  }
+
+  /**
+      Set `corner` field.
+      Params:
+        propval = the size of the 4 rounded corners
+  */
+  @property void corner(graphene.size.Size[4] propval) nothrow
+  {
+    (cast(GskRoundedRect*)this._cPtr).corner = *cast(graphene_size_t[4]*)&propval;
   }
 
   /**

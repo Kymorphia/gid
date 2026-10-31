@@ -24,11 +24,13 @@ class RTPBuffer
       Params:
         buffer = pointer to RTP buffer
         state = internal state
+        size = array of size
   */
-  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init, uint state = uint.init) nothrow
+  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init, uint state = uint.init, size_t[4] size = (size_t[4]).init) nothrow
   {
     this.buffer = buffer;
     this.state = state;
+    this.size = size;
   }
 
   /** */
@@ -85,6 +87,25 @@ class RTPBuffer
   @property void state(uint propval) nothrow
   {
     (cast(GstRTPBuffer*)this._cPtr).state = propval;
+  }
+
+  /**
+      Get `size` field.
+      Returns: array of size
+  */
+  @property size_t[4] size() nothrow
+  {
+    return *cast(size_t[4]*)&(cast(GstRTPBuffer*)this._cPtr).size;
+  }
+
+  /**
+      Set `size` field.
+      Params:
+        propval = array of size
+  */
+  @property void size(size_t[4] propval) nothrow
+  {
+    (cast(GstRTPBuffer*)this._cPtr).size = *cast(size_t[4]*)&propval;
   }
 
   /**

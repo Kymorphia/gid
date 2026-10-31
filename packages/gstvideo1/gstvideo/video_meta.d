@@ -48,12 +48,16 @@ class VideoMeta
         width = the video width
         height = the video height
         nPlanes = the number of planes in the image
+        offset = array of offsets for the planes. This field might not always be
+                   valid, it is used by the default implementation of @map.
+        stride = array of strides for the planes. This field might not always be
+                   valid, it is used by the default implementation of @map.
         alignment = the paddings and alignment constraints of the video buffer.
           It is up to the caller of `[gstvideo.global.bufferAddVideoMetaFull]` to set it
           using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
           to no padding and no alignment. Since: 1.18
   */
-  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init, gstvideo.types.VideoFrameFlags flags = gstvideo.types.VideoFrameFlags.init, gstvideo.types.VideoFormat format = gstvideo.types.VideoFormat.init, int id = int.init, uint width = uint.init, uint height = uint.init, uint nPlanes = uint.init, gstvideo.video_alignment.VideoAlignment alignment = gstvideo.video_alignment.VideoAlignment.init) nothrow
+  this(gst.buffer.Buffer buffer = gst.buffer.Buffer.init, gstvideo.types.VideoFrameFlags flags = gstvideo.types.VideoFrameFlags.init, gstvideo.types.VideoFormat format = gstvideo.types.VideoFormat.init, int id = int.init, uint width = uint.init, uint height = uint.init, uint nPlanes = uint.init, size_t[4] offset = (size_t[4]).init, int[4] stride = (int[4]).init, gstvideo.video_alignment.VideoAlignment alignment = gstvideo.video_alignment.VideoAlignment.init) nothrow
   {
     this.buffer = buffer;
     this.flags = flags;
@@ -62,6 +66,8 @@ class VideoMeta
     this.width = width;
     this.height = height;
     this.nPlanes = nPlanes;
+    this.offset = offset;
+    this.stride = stride;
     this.alignment = alignment;
   }
 
@@ -223,6 +229,48 @@ class VideoMeta
   @property void nPlanes(uint propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).nPlanes = propval;
+  }
+
+  /**
+      Get `offset` field.
+      Returns: array of offsets for the planes. This field might not always be
+                 valid, it is used by the default implementation of @map.
+  */
+  @property size_t[4] offset() nothrow
+  {
+    return *cast(size_t[4]*)&(cast(GstVideoMeta*)this._cPtr).offset;
+  }
+
+  /**
+      Set `offset` field.
+      Params:
+        propval = array of offsets for the planes. This field might not always be
+                   valid, it is used by the default implementation of @map.
+  */
+  @property void offset(size_t[4] propval) nothrow
+  {
+    (cast(GstVideoMeta*)this._cPtr).offset = *cast(size_t[4]*)&propval;
+  }
+
+  /**
+      Get `stride` field.
+      Returns: array of strides for the planes. This field might not always be
+                 valid, it is used by the default implementation of @map.
+  */
+  @property int[4] stride() nothrow
+  {
+    return *cast(int[4]*)&(cast(GstVideoMeta*)this._cPtr).stride;
+  }
+
+  /**
+      Set `stride` field.
+      Params:
+        propval = array of strides for the planes. This field might not always be
+                   valid, it is used by the default implementation of @map.
+  */
+  @property void stride(int[4] propval) nothrow
+  {
+    (cast(GstVideoMeta*)this._cPtr).stride = *cast(int[4]*)&propval;
   }
 
   /**

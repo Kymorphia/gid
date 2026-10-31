@@ -158,6 +158,25 @@ class AudioInfo : gobject.boxed.Boxed
   }
 
   /**
+      Get `position` field.
+      Returns: the positions for each channel
+  */
+  @property gstaudio.types.AudioChannelPosition[64] position() nothrow
+  {
+    return *cast(gstaudio.types.AudioChannelPosition[64]*)&(cast(GstAudioInfo*)this._cPtr).position;
+  }
+
+  /**
+      Set `position` field.
+      Params:
+        propval = the positions for each channel
+  */
+  @property void position(gstaudio.types.AudioChannelPosition[64] propval) nothrow
+  {
+    (cast(GstAudioInfo*)this._cPtr).position = *cast(GstAudioChannelPosition[64]*)&propval;
+  }
+
+  /**
       Allocate a new #GstAudioInfo that is also initialized with
       [gstaudio.audio_info.AudioInfo.init_].
       Returns: a new #GstAudioInfo. free with [gstaudio.audio_info.AudioInfo.free].
