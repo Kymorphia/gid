@@ -13,13 +13,12 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
-    [gtk.accessible.Accessible] is an interface for describing UI elements for
-    Assistive Technologies.
+    An interface for describing UI elements for Assistive Technologies.
     
     Every accessible implementation has:
     
      - a “role”, represented by a value of the [gtk.types.AccessibleRole] enumeration
-     - an “attribute”, represented by a set of [gtk.types.AccessibleState],
+     - “attributes”, represented by a set of [gtk.types.AccessibleState],
        [gtk.types.AccessibleProperty] and [gtk.types.AccessibleRelation] values
     
     The role cannot be changed after instantiating a [gtk.accessible.Accessible]
@@ -35,8 +34,10 @@ public import gtk.types;
     by reimplementing the `vfunc@Gtk.Accessible.get_accessible_parent`,
     `vfunc@Gtk.Accessible.get_first_accessible_child` and
     `vfunc@Gtk.Accessible.get_next_accessible_sibling` virtual functions.
+    
     Note that you can not create a top-level accessible object as of now,
     which means that you must always have a parent accessible object.
+    
     Also note that when an accessible object does not correspond to a widget,
     and it has children, whose implementation you don't control,
     it is necessary to ensure the correct shape of the a11y tree
@@ -91,6 +92,24 @@ template AccessibleT()
   }
 
   /**
+      Retrieves the accessible identifier for the accessible object.
+      
+      This functionality can be overridden by [gtk.accessible.Accessible]
+      implementations.
+      
+      It is left to the accessible implementation to define the scope
+      and uniqueness of the identifier.
+      Returns: the accessible identifier
+  */
+  override string getAccessibleId() nothrow
+  {
+    char* _cretval;
+    _cretval = gtk_accessible_get_accessible_id(cast(GtkAccessible*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
       Retrieves the accessible parent for an accessible object.
       
       This function returns `NULL` for top level widgets.
@@ -117,7 +136,7 @@ template AccessibleT()
   }
 
   /**
-      Retrieves the accessible implementation for the given [gtk.accessible.Accessible].
+      Retrieves the implementation for the given accessible object.
       Returns: the accessible implementation object
   */
   override gtk.atcontext.ATContext getAtContext() nothrow
@@ -174,9 +193,7 @@ template AccessibleT()
   }
 
   /**
-      Query a platform state, such as focus.
-      
-      See gtk_accessible_platform_changed().
+      Queries a platform state, such as focus.
       
       This functionality can be overridden by [gtk.accessible.Accessible]
       implementations, e.g. to get platform state from an ignored
@@ -197,7 +214,7 @@ template AccessibleT()
       Resets the accessible property to its default value.
   
       Params:
-        property = a [gtk.types.AccessibleProperty]
+        property = the accessible property
   */
   override void resetProperty(gtk.types.AccessibleProperty property) nothrow
   {
@@ -208,7 +225,7 @@ template AccessibleT()
       Resets the accessible relation to its default value.
   
       Params:
-        relation = a [gtk.types.AccessibleRelation]
+        relation = the accessible relation
   */
   override void resetRelation(gtk.types.AccessibleRelation relation) nothrow
   {
@@ -219,7 +236,7 @@ template AccessibleT()
       Resets the accessible state to its default value.
   
       Params:
-        state = a [gtk.types.AccessibleState]
+        state = the accessible state
   */
   override void resetState(gtk.types.AccessibleState state) nothrow
   {
@@ -247,9 +264,9 @@ template AccessibleT()
   }
 
   /**
-      Updates the next accessible sibling of self.
+      Updates the next accessible sibling.
       
-      That might be useful when a new child of a custom [gtk.accessible.Accessible]
+      That might be useful when a new child of a custom accessible
       is created, and it needs to be linked to a previous child.
   
       Params:
@@ -261,6 +278,21 @@ template AccessibleT()
   }
 
   /**
+      Informs ATs that the platform state has changed.
+      
+      This function should be used by [gtk.accessible.Accessible] implementations that
+      have a platform state but are not widgets. Widgets handle platform
+      states automatically.
+  
+      Params:
+        state = the platform state to update
+  */
+  override void updatePlatformState(gtk.types.AccessiblePlatformState state) nothrow
+  {
+    gtk_accessible_update_platform_state(cast(GtkAccessible*)this._cPtr, state);
+  }
+
+  /**
       Updates an array of accessible properties.
       
       This function should be called by [gtk.widget.Widget] types whenever an accessible
@@ -269,7 +301,7 @@ template AccessibleT()
       This function is meant to be used by language bindings.
   
       Params:
-        properties = an array of [gtk.types.AccessibleProperty]
+        properties = an array of accessible properties
         values = an array of `GValues`, one for each property
   */
   override void updateProperty(gtk.types.AccessibleProperty[] properties, gobject.value.Value[] values) nothrow
@@ -297,7 +329,7 @@ template AccessibleT()
       This function is meant to be used by language bindings.
   
       Params:
-        relations = an array of [gtk.types.AccessibleRelation]
+        relations = an array of accessible relations
         values = an array of `GValues`, one for each relation
   */
   override void updateRelation(gtk.types.AccessibleRelation[] relations, gobject.value.Value[] values) nothrow
@@ -325,7 +357,7 @@ template AccessibleT()
       This function is meant to be used by language bindings.
   
       Params:
-        states = an array of [gtk.types.AccessibleState]
+        states = an array of accessible states
         values = an array of `GValues`, one for each state
   */
   override void updateState(gtk.types.AccessibleState[] states, gobject.value.Value[] values) nothrow

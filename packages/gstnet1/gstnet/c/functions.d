@@ -20,6 +20,7 @@ __gshared extern(C) nothrow
   // NetClientClock
   GType function() c_gst_net_client_clock_get_type; ///
   GstClock* function(const(char)* name, const(char)* remoteAddress, int remotePort, GstClockTime baseTime) c_gst_net_client_clock_new; ///
+  void function() c_gst_net_client_clock_deinit; ///
 
   // NetControlMessageMeta
   const(GstMetaInfo)* function() c_gst_net_control_message_meta_get_info; ///
@@ -73,6 +74,9 @@ alias gst_net_client_clock_get_type = c_gst_net_client_clock_get_type;
 
 /** */
 alias gst_net_client_clock_new = c_gst_net_client_clock_new;
+
+/** */
+alias gst_net_client_clock_deinit = c_gst_net_client_clock_deinit;
 
 // NetControlMessageMeta
 
@@ -177,6 +181,7 @@ shared static this()
   // NetClientClock
   gidLink(cast(void**)&gst_net_client_clock_get_type, "gst_net_client_clock_get_type", libs);
   gidLink(cast(void**)&gst_net_client_clock_new, "gst_net_client_clock_new", libs);
+  gidLink(cast(void**)&gst_net_client_clock_deinit, "gst_net_client_clock_deinit", libs);
 
   // NetControlMessageMeta
   gidLink(cast(void**)&gst_net_control_message_meta_get_info, "gst_net_control_message_meta_get_info", libs);

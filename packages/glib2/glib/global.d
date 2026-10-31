@@ -814,7 +814,7 @@ int atomicIntExchangeAndAdd(ref int atomic, int val) nothrow
     Gets the current value of atomic.
     
     This call acts as a full compiler and hardware
-    memory barrier (before the get).
+    memory barrier.
     
     While atomic has a `volatile` qualifier, this is a historical artifact and
     the pointer passed to it should not be `volatile`.
@@ -876,7 +876,7 @@ uint atomicIntOr(ref uint atomic, uint val) nothrow
     Sets the value of atomic to newval.
     
     This call acts as a full compiler and hardware
-    memory barrier (after the set).
+    memory barrier.
     
     While atomic has a `volatile` qualifier, this is a historical artifact and
     the pointer passed to it should not be `volatile`.
@@ -1049,7 +1049,7 @@ void* atomicPointerExchange(void* atomic = null, void* newval = null) nothrow
     Gets the current value of atomic.
     
     This call acts as a full compiler and hardware
-    memory barrier (before the get).
+    memory barrier.
     
     While atomic has a `volatile` qualifier, this is a historical artifact and
     the pointer passed to it should not be `volatile`.
@@ -1096,7 +1096,7 @@ size_t atomicPointerOr(void* atomic, size_t val) nothrow
     Sets the value of atomic to newval.
     
     This call acts as a full compiler and hardware
-    memory barrier (after the set).
+    memory barrier.
     
     While atomic has a `volatile` qualifier, this is a historical artifact and
     the pointer passed to it should not be `volatile`.
@@ -1245,6 +1245,11 @@ void atomicRcBoxRelease(void* memBlock) nothrow
     If the reference was the last one, it will call clear_func
     to clear the contents of mem_block, and then will free the
     resources allocated for mem_block.
+    
+    Note that implementing weak references via clear_func is not thread-safe:
+    clearing a pointer to the memory from the callback can race with another
+    thread trying to access it as mem_block already has a reference count of 0
+    when the callback is called and will be freed.
 
     Params:
       memBlock = a pointer to reference counted data
@@ -1419,7 +1424,7 @@ string basename(string fileName) nothrow
       address = a pointer to an integer
       lockBit = a bit value between 0 and 31
 */
-void bitLock(ref int address, int lockBit) nothrow
+void bitLock(ref void* address, int lockBit) nothrow
 {
   g_bit_lock(cast(int*)&address, lockBit);
 }
@@ -1498,7 +1503,7 @@ uint bitStorage(gulong number) nothrow
       lockBit = a bit value between 0 and 31
     Returns: true if the lock was acquired
 */
-bool bitTrylock(ref int address, int lockBit) nothrow
+bool bitTrylock(ref void* address, int lockBit) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_bit_trylock(cast(int*)&address, lockBit);
@@ -1519,7 +1524,7 @@ bool bitTrylock(ref int address, int lockBit) nothrow
       address = a pointer to an integer
       lockBit = a bit value between 0 and 31
 */
-void bitUnlock(ref int address, int lockBit) nothrow
+void bitUnlock(ref void* address, int lockBit) nothrow
 {
   g_bit_unlock(cast(int*)&address, lockBit);
 }
@@ -1564,7 +1569,7 @@ string buildFilenamev(string[] args) nothrow
     This function is mainly meant for language bindings.
 
     Params:
-      separator = a string used to separator the elements of the path.
+      separator = a string used to separate the elements of the path.
       args = null-terminated
           array of strings containing the path elements.
     Returns: a newly-allocated string that
@@ -1672,35 +1677,38 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) 
     Sets a function to be called when the child indicated by pid
     exits, at the priority priority.
     
-    If you obtain pid from [glib.global.spawnAsync] or [glib.global.spawnAsyncWithPipes]
-    you will need to pass [glib.types.SpawnFlags.DoNotReapChild] as flag to
-    the spawn function for the child watching to work.
+    If you obtain pid from `funcGLib.spawn_async` or
+    `funcGLib.spawn_async_with_pipes` you will need to pass
+    `flagsGLib.SpawnFlags.DO_NOT_REAP_CHILD` as a flag to the spawn function for
+    the child watching to work.
     
-    In many programs, you will want to call [glib.global.spawnCheckWaitStatus]
+    In many programs, you will want to call `funcGLib.spawn_check_wait_status`
     in the callback to determine whether or not the child exited
     successfully.
     
-    Also, note that on platforms where #GPid must be explicitly closed
-    (see [glib.global.spawnClosePid]) pid must not be closed while the source
-    is still active.  Typically, you should invoke [glib.global.spawnClosePid]
+    Also, note that on platforms where [glib.types.int] must be explicitly closed
+    (see `funcGLib.spawn_close_pid`) pid must not be closed while the source
+    is still active.  Typically, you should invoke `funcGLib.spawn_close_pid`
     in the callback function for the source.
     
-    GLib supports only a single callback per process id.
+    GLib supports only a single callback per process ID.
     On POSIX platforms, the same restrictions mentioned for
-    [glib.global.childWatchSourceNew] apply to this function.
+    `funcGLib.child_watch_source_new` apply to this function.
     
     This internally creates a main loop source using
-    [glib.global.childWatchSourceNew] and attaches it to the main loop context
+    `funcGLib.child_watch_source_new` and attaches it to the main loop context
     using [glib.source.Source.attach]. You can do these steps manually if you
     need greater control.
 
     Params:
-      priority = the priority of the idle source. Typically this will be in the
-          range between [glib.types.PRIORITY_DEFAULT_IDLE] and [glib.types.PRIORITY_HIGH_IDLE].
-      pid = process to watch. On POSIX the positive pid of a child process. On
-        Windows a handle for a process (which doesn't have to be a child).
+      priority = the priority of the idle source; typically this will be in the
+          range between [glib.types.PRIORITY_DEFAULT_IDLE] and
+          [glib.types.PRIORITY_HIGH_IDLE]
+      pid = process to watch — on POSIX systems, this is the positive PID of a
+          child process; on Windows it is a handle for a process (which doesn’t have
+          to be a child)
       function_ = function to call
-    Returns: the ID (greater than 0) of the event source.
+    Returns: the ID (greater than 0) of the event source
 */
 uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc function_) nothrow
 {
@@ -1726,50 +1734,51 @@ uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc f
 }
 
 /**
-    Creates a new child_watch source.
+    Creates a new child watch source.
     
-    The source will not initially be associated with any #GMainContext
-    and must be added to one with [glib.source.Source.attach] before it will be
-    executed.
+    The source will not initially be associated with any
+    [glib.main_context.MainContext] and must be added to one with
+    [glib.source.Source.attach] before it will be executed.
     
     Note that child watch sources can only be used in conjunction with
-    `g_spawn...` when the [glib.types.SpawnFlags.DoNotReapChild] flag is used.
+    `g_spawn...` when the `flagsGLib.SpawnFlags.DO_NOT_REAP_CHILD` flag is used.
     
-    Note that on platforms where #GPid must be explicitly closed
-    (see [glib.global.spawnClosePid]) pid must not be closed while the
+    Note that on platforms where [glib.types.int] must be explicitly closed
+    (see `funcGLib.spawn_close_pid`) pid must not be closed while the
     source is still active. Typically, you will want to call
-    [glib.global.spawnClosePid] in the callback function for the source.
+    `funcGLib.spawn_close_pid` in the callback function for the source.
     
     On POSIX platforms, the following restrictions apply to this API
     due to limitations in POSIX process interfaces:
     
-    * pid must be a child of this process
-    * pid must be positive
-    * the application must not call `waitpid` with a non-positive
-      first argument, for instance in another thread
-    * the application must not wait for pid to exit by any other
+    * pid must be a child of this process.
+    * pid must be positive.
+    * The application must not call [`waitpid()`](man:waitpid(1)) with a
+      non-positive first argument, for instance in another thread.
+    * The application must not wait for pid to exit by any other
       mechanism, including `waitpid(pid, ...)` or a second child-watch
-      source for the same pid
-    * the application must not ignore `SIGCHLD`
-    * Before 2.78, the application could not send a signal (`kill()`) to the
+      source for the same pid.
+    * The application must not ignore `SIGCHLD`.
+    * Before 2.78, the application could not send a signal ([`kill()`](man:kill(2))) to the
       watched pid in a race free manner. Since 2.78, you can do that while the
-      associated #GMainContext is acquired.
-    * Before 2.78, even after destroying the #GSource, you could not
-      be sure that pid wasn't already reaped. Hence, it was also not
+      associated [glib.main_context.MainContext] is acquired.
+    * Before 2.78, even after destroying the [glib.source.Source], you could not
+      be sure that pid wasn’t already reaped. Hence, it was also not
       safe to `kill()` or `waitpid()` on the process ID after the child watch
       source was gone. Destroying the source before it fired made it
       impossible to reliably reap the process.
     
     If any of those conditions are not met, this and related APIs will
     not work correctly. This can often be diagnosed via a GLib warning
-    stating that `ECHILD` was received by `waitpid`.
+    stating that `ECHILD` was received by `waitpid()`.
     
-    Calling `waitpid` for specific processes other than pid remains a
-    valid thing to do.
+    Calling [`waitpid()`](man:waitpid(2)) for specific processes other than pid
+    remains a valid thing to do.
 
     Params:
-      pid = process to watch. On POSIX the positive pid of a child process. On
-        Windows a handle for a process (which doesn't have to be a child).
+      pid = process to watch — on POSIX systems, this is the positive PID of a
+          child process; on Windows it is a handle for a process (which doesn’t have
+          to be a child)
     Returns: the newly-created child watch source
 */
 glib.source.Source childWatchSourceNew(glib.types.Pid pid) nothrow
@@ -1807,8 +1816,8 @@ int chmod(string filename, int mode) nothrow
 }
 
 /**
-    If err or *err is null, does nothing. Otherwise,
-    calls [glib.error.ErrorWrap.free] on *err and sets *err to null.
+    If err or `*err` is null, does nothing. Otherwise,
+    calls [glib.error.ErrorWrap.free] on `*err` and sets `*err` to null.
     Throws: [ErrorWrap]
 */
 void clearError()
@@ -1850,34 +1859,6 @@ bool close(int fd)
   _retval = cast(bool)g_close(fd, &_err);
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
-  return _retval;
-}
-
-/**
-    Close every file descriptor equal to or greater than lowfd.
-    
-    Typically lowfd will be 3, to leave standard input, standard output
-    and standard error open.
-    
-    This is the same as Linux `close_range (lowfd, ~0U, 0)`,
-    but portable to other OSs and to older versions of Linux.
-    Equivalently, it is the same as BSD `closefrom (lowfd)`, but portable,
-    and async-signal-safe on all OSs.
-    
-    This function is async-signal safe, making it safe to call from a
-    signal handler or a [glib.types.SpawnChildSetupFunc], as long as lowfd is
-    non-negative.
-    See [`signal(7)`](man:signal(7)) and
-    [`signal-safety(7)`](man:signal-safety(7)) for more details.
-
-    Params:
-      lowfd = Minimum fd to close, which must be non-negative
-    Returns: 0 on success, -1 with errno set on error
-*/
-int closefrom(int lowfd) nothrow
-{
-  int _retval;
-  _retval = g_closefrom(lowfd);
   return _retval;
 }
 
@@ -2606,33 +2587,6 @@ string[] environUnsetenv(string[] envp, string variable) nothrow
 }
 
 /**
-    Mark every file descriptor equal to or greater than lowfd to be closed
-    at the next `execve()` or similar, as if via the `FD_CLOEXEC` flag.
-    
-    Typically lowfd will be 3, to leave standard input, standard output
-    and standard error open after exec.
-    
-    This is the same as Linux `close_range (lowfd, ~0U, CLOSE_RANGE_CLOEXEC)`,
-    but portable to other OSs and to older versions of Linux.
-    
-    This function is async-signal safe, making it safe to call from a
-    signal handler or a [glib.types.SpawnChildSetupFunc], as long as lowfd is
-    non-negative.
-    See [`signal(7)`](man:signal(7)) and
-    [`signal-safety(7)`](man:signal-safety(7)) for more details.
-
-    Params:
-      lowfd = Minimum fd to act on, which must be non-negative
-    Returns: 0 on success, -1 with errno set on error
-*/
-int fdwalkSetCloexec(int lowfd) nothrow
-{
-  int _retval;
-  _retval = g_fdwalk_set_cloexec(lowfd);
-  return _retval;
-}
-
-/**
     Gets a #GFileError constant based on the passed-in err_no.
     
     For example, if you pass in `EEXIST` this function returns
@@ -2865,8 +2819,8 @@ bool fileSetContents(string filename, ubyte[] contents)
     to 7 characters to filename.
     
     If the file didn’t exist before and is created, it will be given the
-    permissions from mode. Otherwise, the permissions of the existing file may
-    be changed to mode depending on flags, or they may remain unchanged.
+    permissions from mode. Otherwise, the permissions of the existing file will
+    remain unchanged.
 
     Params:
       filename = name of a file to write contents to, in the GLib file name
@@ -3069,7 +3023,7 @@ string filenameFromUri(string uri, out string hostname)
     Converts a string from UTF-8 to the encoding GLib uses for
     filenames. Note that on Windows GLib uses UTF-8 for filenames;
     on other platforms, this function indirectly depends on the
-    [current locale][setlocale].
+    [current locale](running.html#locale).
     
     The input string shall not contain nul characters even if the len
     argument is positive. A nul character found inside the string will result
@@ -3143,7 +3097,7 @@ string filenameToUri(string filename, string hostname = null)
     Converts a string which is in the encoding used by GLib for
     filenames into a UTF-8 string. Note that on Windows GLib uses UTF-8
     for filenames; on other platforms, this function indirectly depends on
-    the [current locale][setlocale].
+    the [current locale](running.html#locale).
     
     The input string shall not contain nul characters even if the len
     argument is positive. A nul character found inside the string will result
@@ -3239,6 +3193,13 @@ string findProgramInPath(string program) nothrow
     currently impossible to close a file if the application C library and the C library
     used by GLib are different. Convenience functions like [glib.global.fileSetContentsFull]
     avoid this problem.
+    
+    Since GLib 2.86, the `e` option is supported in mode on all platforms. On
+    Unix platforms it will set `O_CLOEXEC` on the opened file descriptor. On
+    Windows platforms it will be converted to the
+    [`N` modifier](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen?view=msvc-170).
+    It is recommended to set `e` unconditionally, unless you know the returned
+    file should be shared between this process and a new fork.
 
     Params:
       filename = a pathname in the GLib file name encoding
@@ -3380,6 +3341,9 @@ void freeSized(void* mem, size_t size) nothrow
     opens a file and associates it with an existing stream.
     
     See your C library manual for more details about freopen().
+    
+    Since GLib 2.86, the `e` option is supported in mode on all platforms. See
+    the documentation for `funcGLib.fopen` for more details.
 
     Params:
       filename = a pathname in the GLib file name encoding
@@ -3439,8 +3403,8 @@ string getApplicationName() nothrow
 }
 
 /**
-    Obtains the character set for the [current locale][setlocale]; you
-    might use this character set as an argument to [glib.global.convert], to convert
+    Obtains the character set for the [current locale](running.html#locale);
+    you might use this character set as an argument to [glib.global.convert], to convert
     from the current locale's encoding to some other encoding. (Frequently
     [glib.global.localeToUtf8] and [glib.global.localeFromUtf8] are nice shortcuts, though.)
     
@@ -3543,15 +3507,18 @@ string getCurrentDir() nothrow
 }
 
 /**
-    Equivalent to the UNIX gettimeofday() function, but portable.
+    Queries the system wall-clock time.
     
-    You may find [glib.global.getRealTime] to be more convenient.
+    This is equivalent to the UNIX [`gettimeofday()`](man:gettimeofday(2))
+    function, but portable.
+    
+    You may find `funcGLib.get_real_time` to be more convenient.
 
     Params:
-      result = #GTimeVal structure in which to store current time.
+      result = [glib.time_val.TimeVal] structure in which to store current time
 
-    Deprecated: #GTimeVal is not year-2038-safe. Use [glib.global.getRealTime]
-         instead.
+    Deprecated: [glib.time_val.TimeVal] is not year-2038-safe. Use
+         `funcGLib.get_real_time` instead.
 */
 void getCurrentTime(out glib.time_val.TimeVal result) nothrow
 {
@@ -3602,8 +3569,8 @@ string[] getEnviron() nothrow
     and said environment variables have no effect.
     
     `G_FILENAME_ENCODING` may be set to a comma-separated list of
-    character set names. The special token "\locale" is taken
-    to  mean the character set for the [current locale][setlocale].
+    character set names. The special token `locale` is taken to mean the
+    character set for the [current locale](running.html#locale).
     If `G_FILENAME_ENCODING` is not set, but `G_BROKEN_FILENAMES` is,
     the character set of the current locale is taken as the filename
     encoding. If neither environment variable  is set, UTF-8 is taken
@@ -3809,22 +3776,51 @@ string[] getLocaleVariants(string locale) nothrow
 }
 
 /**
-    Queries the system monotonic time.
+    Queries the system monotonic time in microseconds.
     
-    The monotonic clock will always increase and doesn't suffer
+    The monotonic clock will always increase and doesn’t suffer
     discontinuities when the user (or NTP) changes the system time.  It
     may or may not continue to tick during times where the machine is
     suspended.
     
     We try to use the clock that corresponds as closely as possible to
-    the passage of time as measured by system calls such as poll() but it
+    the passage of time as measured by system calls such as
+    [`poll()`](man:poll(2)) but it
     may not always be possible to do this.
+    
+    A more accurate version of this function exists.
+    `funcGLib.get_monotonic_time_ns` returns the time in nanoseconds.
     Returns: the monotonic time, in microseconds
 */
 long getMonotonicTime() nothrow
 {
   long _retval;
   _retval = g_get_monotonic_time();
+  return _retval;
+}
+
+/**
+    Queries the system monotonic time in nanoseconds.
+    
+    The monotonic clock will always increase and doesn’t suffer
+    discontinuities when the user (or NTP) changes the system time.  It
+    may or may not continue to tick during times where the machine is
+    suspended.
+    
+    We try to use the clock that corresponds as closely as possible to
+    the passage of time as measured by system calls such as
+    [`poll()`](man:poll(2)) but it
+    may not always be possible to do this.
+    
+    Another version of this function exists.
+    `funcGLib.get_monotonic_time` returns the time in microseconds.
+    If you want to support older GLib versions, it is an alternative.
+    Returns: the monotonic time, in nanoseconds
+*/
+ulong getMonotonicTimeNs() nothrow
+{
+  ulong _retval;
+  _retval = g_get_monotonic_time_ns();
   return _retval;
 }
 
@@ -3906,14 +3902,14 @@ string getRealName() nothrow
 /**
     Queries the system wall-clock time.
     
-    This call is functionally equivalent to [glib.global.getCurrentTime] except
-    that the return value is often more convenient than dealing with a
-    #GTimeVal.
+    This is equivalent to the UNIX [`gettimeofday()`](man:gettimeofday(2))
+    function, but portable.
     
     You should only use this call if you are actually interested in the real
-    wall-clock time.  [glib.global.getMonotonicTime] is probably more useful for
+    wall-clock time. `funcGLib.get_monotonic_time` is probably more useful for
     measuring intervals.
-    Returns: the number of microseconds since January 1, 1970 UTC.
+    Returns: the number of microseconds since
+        [January 1, 1970 UTC](https://en.wikipedia.org/wiki/Unix_time)
 */
 long getRealTime() nothrow
 {
@@ -4359,23 +4355,24 @@ string hostnameToUnicode(string hostname) nothrow
     Adds a function to be called whenever there are no higher priority
     events pending.
     
-    If the function returns [glib.types.SOURCE_REMOVE] or false it is automatically
+    If the function returns [glib.types.SOURCE_REMOVE] it is automatically
     removed from the list of event sources and will not be called again.
     
-    See [memory management of sources][mainloop-memory-management] for details
+    See [main loop memory management](main-loop.html#memory-management-of-sources) for details
     on how to handle the return value and memory management of data.
     
-    This internally creates a main loop source using [glib.global.idleSourceNew]
-    and attaches it to the global #GMainContext using [glib.source.Source.attach], so
-    the callback will be invoked in whichever thread is running that main
-    context. You can do these steps manually if you need greater control or to
-    use a custom main context.
+    This internally creates a main loop source using `funcGLib.idle_source_new`
+    and attaches it to the global [glib.main_context.MainContext] using
+    [glib.source.Source.attach], so the callback will be invoked in whichever
+    thread is running that main context. You can do these steps manually if you
+    need greater control or to use a custom main context.
 
     Params:
-      priority = the priority of the idle source. Typically this will be in the
-          range between [glib.types.PRIORITY_DEFAULT_IDLE] and [glib.types.PRIORITY_HIGH_IDLE].
+      priority = the priority of the idle source; typically this will be in the
+          range between [glib.types.PRIORITY_DEFAULT_IDLE] and
+          [glib.types.PRIORITY_HIGH_IDLE]
       function_ = function to call
-    Returns: the ID (greater than 0) of the event source.
+    Returns: the ID (greater than 0) of the event source
 */
 uint idleAdd(int priority, glib.types.SourceFunc function_) nothrow
 {
@@ -4408,8 +4405,8 @@ uint idleAdd(int priority, glib.types.SourceFunc function_) nothrow
     Removes the idle function with the given data.
 
     Params:
-      data = the data for the idle source's callback.
-    Returns: true if an idle source was found and removed.
+      data = the data for the idle source’s callback.
+    Returns: true if an idle source was found and removed, false otherwise
 */
 bool idleRemoveByData(void* data = null) nothrow
 {
@@ -4421,11 +4418,12 @@ bool idleRemoveByData(void* data = null) nothrow
 /**
     Creates a new idle source.
     
-    The source will not initially be associated with any #GMainContext
-    and must be added to one with [glib.source.Source.attach] before it will be
-    executed. Note that the default priority for idle sources is
-    [glib.types.PRIORITY_DEFAULT_IDLE], as compared to other sources which
-    have a default priority of [glib.types.PRIORITY_DEFAULT].
+    The source will not initially be associated with any
+    [glib.main_context.MainContext] and must be added to one with
+    [glib.source.Source.attach] before it will be executed. Note that the
+    default priority for idle sources is [glib.types.PRIORITY_DEFAULT_IDLE], as
+    compared to other sources which have a default priority of
+    [glib.types.PRIORITY_DEFAULT].
     Returns: the newly-created idle source
 */
 glib.source.Source idleSourceNew() nothrow
@@ -4666,8 +4664,8 @@ string[] listenv() nothrow
 /**
     Converts a string from UTF-8 to the encoding used for strings by
     the C runtime (usually the same as that used by the operating
-    system) in the [current locale][setlocale]. On Windows this means
-    the system codepage.
+    system) in the [current locale](running.html#locale).
+    On Windows this means the system codepage.
     
     The input string shall not contain nul characters even if the len
     argument is positive. A nul character found inside the string will result
@@ -4714,7 +4712,7 @@ ubyte[] localeFromUtf8(ubyte[] utf8string, out size_t bytesRead)
 /**
     Converts a string which is in the encoding used for strings by
     the C runtime (usually the same as that used by the operating
-    system) in the [current locale][setlocale] into a UTF-8 string.
+    system) in the [current locale](running.html#locale) into a UTF-8 string.
     
     If the source encoding is not UTF-8 and the conversion output contains a
     nul character, the error [glib.types.ConvertError.EmbeddedNul] is set and the
@@ -4782,6 +4780,9 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
         which debug and informational messages are printed. By default
         these messages are not printed. If you need to set the allowed
         domains at runtime, use `funcGLib.log_writer_default_set_debug_domains`.
+      - `DEBUG_INVOCATION`: If set to `1`, this is equivalent to
+        `G_MESSAGES_DEBUG=all`. `DEBUG_INVOCATION` is a standard environment
+        variable set by systemd to prompt debug output. (Since: 2.84)
     
     `stderr` is used for levels `flagsGLib.LogLevelFlags.LEVEL_ERROR`,
     `flagsGLib.LogLevelFlags.LEVEL_CRITICAL`, `flagsGLib.LogLevelFlags.LEVEL_WARNING` and
@@ -4807,6 +4808,45 @@ void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, stri
 }
 
 /**
+    Gets the current fatal mask.
+    
+    This is mostly used by custom log writers to make fatal messages
+    (`fatal-warnings`, `fatal-criticals`) work as expected, when using the
+    `G_DEBUG` environment variable (see [Running GLib Applications](running.html)).
+    
+    An example usage is shown below:
+    
+    ```c
+    static GLogWriterOutput
+    my_custom_log_writer_fn (GLogLevelFlags log_level,
+                             const GLogField *fields,
+                             gsize n_fields,
+                             gpointer user_data)
+    {
+    
+       // abort if the message was fatal
+       if (log_level & g_log_get_always_fatal ())
+         g_abort ();
+    
+       // custom log handling code
+       ...
+       ...
+    
+       // success
+       return G_LOG_WRITER_HANDLED;
+    }
+    ```
+    Returns: the current fatal mask
+*/
+glib.types.LogLevelFlags logGetAlwaysFatal() nothrow
+{
+  GLogLevelFlags _cretval;
+  _cretval = g_log_get_always_fatal();
+  glib.types.LogLevelFlags _retval = cast(glib.types.LogLevelFlags)_cretval;
+  return _retval;
+}
+
+/**
     Return whether debug output from the GLib logging system is enabled.
     
     Note that this should not be used to conditionalise calls to `funcGLib.debug` or
@@ -4814,7 +4854,8 @@ void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, stri
     implementations.
     
     Note also that the value of this does not depend on `G_MESSAGES_DEBUG`, nor
-    `funcGLib.log_writer_default_set_debug_domains`; see the docs for `funcGLib.log_set_debug_enabled`.
+    `DEBUG_INVOCATION`, nor `funcGLib.log_writer_default_set_debug_domains`; see
+    the docs for `funcGLib.log_set_debug_enabled`.
     Returns: `TRUE` if debug output is enabled, `FALSE` otherwise
 */
 bool logGetDebugEnabled() nothrow
@@ -4850,7 +4891,7 @@ void logRemoveHandler(string logDomain, uint handlerId) nothrow
     
     You can also make some message levels fatal at runtime by setting
     the `G_DEBUG` environment variable (see
-    [Running GLib Applications](glib-running.html)).
+    [Running GLib Applications](running.html)).
     
     Libraries should not call this function, as it affects all messages logged
     by a process, including those from other libraries.
@@ -4876,7 +4917,7 @@ glib.types.LogLevelFlags logSetAlwaysFatal(glib.types.LogLevelFlags fatalMask) n
 /**
     Enable or disable debug output from the GLib logging system for all domains.
     
-    This value interacts disjunctively with `G_MESSAGES_DEBUG` and
+    This value interacts disjunctively with `G_MESSAGES_DEBUG`, `DEBUG_INVOCATION` and
     `funcGLib.log_writer_default_set_debug_domains` — if any of them would allow
     a debug message to be outputted, it will be.
     
@@ -4926,9 +4967,12 @@ glib.types.LogLevelFlags logSetFatalMask(string logDomain, glib.types.LogLevelFl
     
     This has no effect if structured logging is enabled; see
     [Using Structured Logging](logging.html#using-structured-logging).
+    
+    The `log_domain` parameter can be set to `NULL` or an empty string to use the default
+    application domain.
 
     Params:
-      logDomain = the log domain, or `NULL` for the default `""`
+      logDomain = the log domain
           application domain
       logLevels = the log levels to apply the log handler for.
           To handle fatal and recursive messages as well, combine
@@ -4995,7 +5039,7 @@ void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.varian
 
 /**
     Reset the list of domains to be logged, that might be initially set by the
-    `G_MESSAGES_DEBUG` environment variable.
+    `G_MESSAGES_DEBUG` or `DEBUG_INVOCATION` environment variables.
     
     This function is thread-safe.
 
@@ -5043,7 +5087,8 @@ void logWriterDefaultSetUseStderr(bool useStderr) nothrow
     
     As with `funcGLib.log_default_handler`, this function drops debug and informational
     messages unless their log domain (or `all`) is listed in the space-separated
-    `G_MESSAGES_DEBUG` environment variable, or by `funcGLib.log_writer_default_set_debug_domains`.
+    `G_MESSAGES_DEBUG` environment variable, or `DEBUG_INVOCATION=1` is set in
+    the environment, or by `funcGLib.log_writer_default_set_debug_domains`.
     
     This can be used when implementing log writers with the same filtering
     behaviour as the default, but a different destination or output format:
@@ -5054,7 +5099,7 @@ void logWriterDefaultSetUseStderr(bool useStderr) nothrow
     ]|
     
     or to skip an expensive computation if it is only needed for a debugging
-    message, and `G_MESSAGES_DEBUG` is not set:
+    message, and `G_MESSAGES_DEBUG` and `DEBUG_INVOCATION` are not set:
     
     ```c
     if (!g_log_writer_default_would_drop (G_LOG_LEVEL_DEBUG, G_LOG_DOMAIN))
@@ -5146,7 +5191,8 @@ int lstat(string filename, glib.types.StatBuf buf) nothrow
 
 /**
     Returns the currently firing source for this thread.
-    Returns: The currently firing source or null.
+    Returns: the currently firing source, or `NULL`
+        if none is firing
 */
 glib.source.Source mainCurrentSource() nothrow
 {
@@ -5159,14 +5205,15 @@ glib.source.Source mainCurrentSource() nothrow
 /**
     Returns the depth of the stack of calls to
     [glib.main_context.MainContext.dispatch] on any #GMainContext in the current thread.
-    That is, when called from the toplevel, it gives 0. When
+    
+    That is, when called from the top level, it gives `0`. When
     called from within a callback from [glib.main_context.MainContext.iteration]
-    (or [glib.main_loop.MainLoop.run], etc.) it returns 1. When called from within
+    (or [glib.main_loop.MainLoop.run], etc.) it returns `1`. When called from within
     a callback to a recursive call to [glib.main_context.MainContext.iteration],
-    it returns 2. And so forth.
+    it returns `2`. And so forth.
     
     This function is useful in a situation like the following:
-    Imagine an extremely simple "garbage collected" system.
+    Imagine an extremely simple ‘garbage collected’ system.
     
     ```c
     static GList *free_list;
@@ -5201,9 +5248,9 @@ glib.source.Source mainCurrentSource() nothrow
     This works from an application, however, if you want to do the same
     thing from a library, it gets more difficult, since you no longer
     control the main loop. You might think you can simply use an idle
-    function to make the call to free_allocated_memory(), but that
-    doesn't work, since the idle function could be called from a
-    recursive callback. This can be fixed by using [glib.global.mainDepth]
+    function to make the call to `free_allocated_memory()`, but that
+    doesn’t work, since the idle function could be called from a
+    recursive callback. This can be fixed by using `funcGLib.main_depth`
     
     ```c
     gpointer
@@ -5238,27 +5285,27 @@ glib.source.Source mainCurrentSource() nothrow
       }
     ```
     
-    There is a temptation to use [glib.global.mainDepth] to solve
+    There is a temptation to use `funcGLib.main_depth` to solve
     problems with reentrancy. For instance, while waiting for data
     to be received from the network in response to a menu item,
     the menu item might be selected again. It might seem that
-    one could make the menu item's callback return immediately
-    and do nothing if [glib.global.mainDepth] returns a value greater than 1.
+    one could make the menu item’s callback return immediately
+    and do nothing if `funcGLib.main_depth` returns a value greater than 1.
     However, this should be avoided since the user then sees selecting
-    the menu item do nothing. Furthermore, you'll find yourself adding
+    the menu item do nothing. Furthermore, you’ll find yourself adding
     these checks all over your code, since there are doubtless many,
     many things that the user could do. Instead, you can use the
     following techniques:
     
-    1. Use [gtk.widget.Widget.setSensitive] or modal dialogs to prevent
+    1. Use `[gtk.widget.Widget.setSensitive]` or modal dialogs to prevent
        the user from interacting with elements while the main
        loop is recursing.
     
-    2. Avoid main loop recursion in situations where you can't handle
+    2. Avoid main loop recursion in situations where you can’t handle
        arbitrary  callbacks. Instead, structure your code so that you
        simply return to the main loop and then get called again when
        there is more work to do.
-    Returns: The main loop recursion level in the current thread
+    Returns: the main loop recursion level in the current thread
 */
 int mainDepth() nothrow
 {
@@ -5566,7 +5613,7 @@ glib.types.Quark numberParserErrorQuark() nothrow
     This function may cause different actions on non-UNIX platforms.
     
     On Windows consider using the `G_DEBUGGER` environment
-    variable (see [Running GLib Applications](glib-running.html)) and
+    variable (see [Running GLib Applications](running.html)) and
     calling [glib.global.onErrorStackTrace] instead.
 
     Params:
@@ -5594,15 +5641,15 @@ void onErrorQuery(string prgName) nothrow
     [glib.global.onErrorQuery]. If called directly, it will raise an
     exception, which will crash the program. If the `G_DEBUGGER` environment
     variable is set, a debugger will be invoked to attach and
-    handle that exception (see [Running GLib Applications](glib-running.html)).
+    handle that exception (see [Running GLib Applications](running.html)).
 
     Params:
-      prgName = the program name, needed by gdb for the "[S]tack trace"
-            option
+      prgName = the program name, needed by gdb for the
+          "[S]tack trace" option, or `NULL` to use a default string
 */
-void onErrorStackTrace(string prgName) nothrow
+void onErrorStackTrace(string prgName = null) nothrow
 {
-  const(char)* _prgName = prgName.toCString!(No.Malloc, No.Nullable);
+  const(char)* _prgName = prgName.toCString!(No.Malloc, Yes.Nullable);
   g_on_error_stack_trace(_prgName);
 }
 
@@ -5788,10 +5835,12 @@ string pathSkipRoot(string fileName) nothrow
 }
 
 /**
-    Matches a string against a pattern given as a string. If this
-    function is to be called in a loop, it's more efficient to compile
+    Matches a string against a pattern given as a string.
+    
+    If this
+    function is to be called in a loop, it’s more efficient to compile
     the pattern once with [glib.pattern_spec.PatternSpec.new_] and call
-    [glib.global.patternMatchString] repeatedly.
+    [glib.pattern_spec.PatternSpec.matchString] repeatedly.
 
     Params:
       pattern = the UTF-8 encoded pattern
@@ -5927,8 +5976,8 @@ void pointerBitUnlock(void* address, int lockBit) nothrow
       ptr = the new pointer value to set
       preserveMask = if non-zero, those bits of the current pointer in address
           are preserved.
-          Note that the lock_bit bit will be always set according to set,
-          regardless of preserve_mask and the currently set value in address.
+          Note that the lock_bit bit will be always unset regardless of
+          ptr, preserve_mask and the currently set value in address.
 */
 void pointerBitUnlockAndSet(void* address, uint lockBit, void* ptr, size_t preserveMask) nothrow
 {
@@ -5970,16 +6019,20 @@ int poll(glib.types.PollFD fds, uint nfds, int timeout) nothrow
 }
 
 /**
-    This is just like the standard C qsort() function, but
-    the comparison routine accepts a user data argument.
+    This is just like the standard C [`qsort()`](man:qsort(3)) function, but
+    the comparison routine accepts a user data argument
+    (like [`qsort_r()`](man:qsort_r(3))).
     
-    This is guaranteed to be a stable sort since version 2.32.
+    Unlike `qsort()`, this is guaranteed to be a stable sort (since GLib 2.32).
 
     Params:
       pbase = start of array to sort
       totalElems = elements in the array
       size = size of each element
       compareFunc = function to compare elements
+
+    Deprecated: `total_elems` is too small to represent larger arrays; use
+        `funcGLib.sort_array` instead
 */
 void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.CompareDataFunc compareFunc) nothrow
 {
@@ -6403,6 +6456,28 @@ string refStringAcquire(string str) nothrow
 }
 
 /**
+    Compares two ref-counted strings for byte-by-byte equality.
+    
+    It can be passed to [glib.hash_table.HashTable.new_] as the key equality function,
+    and behaves exactly the same as `funcGLib.str_equal` (or `strcmp()`), but
+    can return slightly faster as it can check the string lengths before checking
+    all the bytes.
+
+    Params:
+      str1 = a reference counted string
+      str2 = a reference counted string
+    Returns: `TRUE` if the strings are equal, otherwise `FALSE`
+*/
+bool refStringEqual(string str1, string str2) nothrow
+{
+  bool _retval;
+  const(char)* _str1 = str1.toCString!(No.Malloc, No.Nullable);
+  const(char)* _str2 = str2.toCString!(No.Malloc, No.Nullable);
+  _retval = cast(bool)g_ref_string_equal(_str1, _str2);
+  return _retval;
+}
+
+/**
     Retrieves the length of str.
 
     Params:
@@ -6604,8 +6679,8 @@ void setApplicationName(string applicationName) nothrow
 }
 
 /**
-    Does nothing if err is null; if err is non-null, then *err
-    must be null. A new #GError is created and assigned to *err.
+    Does nothing if err is null; if err is non-null, then `*err`
+    must be null. A new #GError is created and assigned to `*err`.
     Unlike [glib.global.setError], message is not a printf()-style format string.
     Use this function if message contains text you don't have control over,
     that could include printf() escape sequences.
@@ -6632,12 +6707,15 @@ void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int 
     If you are using #GApplication the program name is set in
     [gio.application.Application.run]. In case of GDK or GTK it is set in
     [gdk.global.init_], which is called by [gtk.global.init_] and the
-    #GtkApplication::startup handler. The program name is found by
-    taking the last component of argv[0].
+    #GtkApplication::startup handler. By default, the program name is
+    found by taking the last component of argv[0].
     
     Since GLib 2.72, this function can be called multiple times
     and is fully thread safe. Prior to GLib 2.72, this function
     could only be called once per process.
+    
+    See the [GTK documentation](https://docs.gtk.org/gtk4/migrating-3to4.html#set-a-proper-application-id)
+    for requirements on integrating [glib.global.setPrgname] with GTK applications.
 
     Params:
       prgname = the name of the program.
@@ -6872,7 +6950,7 @@ void* sliceCopy(size_t blockSize, const(void)* memBlock = null) nothrow
     The memory must have been allocated via [glib.global.sliceAlloc] or
     [glib.global.sliceAlloc0] and the block_size has to match the size
     specified upon allocation. Note that the exact release behaviour
-    can be changed with the [`G_DEBUG=gc-friendly`][G_DEBUG] environment
+    can be changed with the [`G_DEBUG=gc-friendly`](running.html#environment-variables) environment
     variable.
     
     If mem_block is null, this function does nothing.
@@ -6897,7 +6975,7 @@ void sliceFree1(size_t blockSize, void* memBlock = null) nothrow
     next pointer (similar to #GSList). The offset of the next
     field in each block is passed as third argument.
     Note that the exact release behaviour can be changed with the
-    [`G_DEBUG=gc-friendly`][G_DEBUG] environment variable.
+    [`G_DEBUG=gc-friendly`](running.html#environment-variables) environment variable.
     
     If mem_chain is null, this function does nothing.
     
@@ -6966,8 +7044,9 @@ uint spacedPrimesClosest(uint num) nothrow
 /**
     Executes a child program asynchronously.
     
-    See [glib.global.spawnAsyncWithPipes] for a full description; this function
-    simply calls the [glib.global.spawnAsyncWithPipes] without any pipes.
+    See [glib.global.spawnAsyncWithPipesAndFds] for a full description; this function
+    simply calls the [glib.global.spawnAsyncWithPipes] without any pipes, which in turn
+    calls [glib.global.spawnAsyncWithPipesAndFds].
     
     You should call [glib.global.spawnClosePid] on the returned child process
     reference when you don't need it any more.
@@ -8063,14 +8142,16 @@ string strchug(string string_) nothrow
 }
 
 /**
-    Compares str1 and str2 like strcmp(). Handles null
-    gracefully by sorting it before non-null strings.
-    Comparing two null pointers returns 0.
+    Compares str1 and str2 like `strcmp()`.
+    
+    Handles `NULL` gracefully by sorting it before non-`NULL` strings.
+    Comparing two `NULL` pointers returns 0.
 
     Params:
-      str1 = a C string or null
-      str2 = another C string or null
-    Returns: an integer less than, equal to, or greater than zero, if str1 is <, == or > than str2.
+      str1 = a string
+      str2 = another string
+    Returns: an integer less than, equal to, or greater than zero,
+        if str1 is <, == or > than str2
 */
 int strcmp0(string str1 = null, string str2 = null) nothrow
 {
@@ -8082,9 +8163,20 @@ int strcmp0(string str1 = null, string str2 = null) nothrow
 }
 
 /**
-    Replaces all escaped characters with their one byte equivalent.
+    Makes a copy of a string replacing C string-style escape
+    sequences with their one byte equivalent:
     
-    This function does the reverse conversion of `funcGLib.strescape`.
+    - `\b` → [U+0008 Backspace](https://en.wikipedia.org/wiki/Backspace)
+    - `\f` → [U+000C Form Feed](https://en.wikipedia.org/wiki/Form_feed)
+    - `\n` → [U+000A Line Feed](https://en.wikipedia.org/wiki/Newline)
+    - `\r` → [U+000D Carriage Return](https://en.wikipedia.org/wiki/Carriage_return)
+    - `\t` → [U+0009 Horizontal Tabulation](https://en.wikipedia.org/wiki/Tab_character)
+    - `\v` → [U+000B Vertical Tabulation](https://en.wikipedia.org/wiki/Vertical_Tab)
+    - `\` followed by one to three octal digits → the numeric value (mod 256)
+    - `\` followed by any other character → the character as is.
+      For example, `\\` will turn into a backslash (`\`) and `\"` into a double quote (`"`).
+    
+    `funcGLib.strescape` does the reverse conversion.
 
     Params:
       source = a string to compress
@@ -8241,11 +8333,22 @@ string strerror(int errnum) nothrow
 }
 
 /**
-    Escapes the special characters '\b', '\f', '\n', '\r', '\t', '\v', '\'
-    and '"' in the string source by inserting a '\' before
-    them. Additionally all characters in the range 0x01-0x1F (everything
+    It replaces the following special characters in the string source
+    with their corresponding C escape sequence:
+    
+    | Symbol                                                                      | Escape |
+    |-----------------------------------------------------------------------------|--------|
+    | [U+0008 Backspace](https://en.wikipedia.org/wiki/Backspace)                 | `\b`   |
+    | [U+000C Form Feed](https://en.wikipedia.org/wiki/Form_feed)                 | `\f`   |
+    | [U+000A Line Feed](https://en.wikipedia.org/wiki/Newline)                   | `\n`   |
+    | [U+000D Carriage Return](https://en.wikipedia.org/wiki/Carriage_return)     | `\r`   |
+    | [U+0009 Horizontal Tabulation](https://en.wikipedia.org/wiki/Tab_character) | `\t`   |
+    | [U+000B Vertical Tabulation](https://en.wikipedia.org/wiki/Vertical_Tab)    | `\v`   |
+    
+    It also inserts a backslash (`\`) before any backslash or a double quote (`"`).
+    Additionally all characters in the range 0x01-0x1F (everything
     below SPACE) and in the range 0x7F-0xFF (all non-ASCII chars) are
-    replaced with a '\' followed by their octal representation.
+    replaced with a backslash followed by their octal representation.
     Characters supplied in exceptions are not escaped.
     
     `funcGLib.strcompress` does the reverse conversion.
@@ -8412,11 +8515,15 @@ string strreverse(string string_) nothrow
 /**
     Searches the string haystack for the last occurrence
     of the string needle.
+    
+    The fact that this function returns `gchar *` rather than `const gchar *` is
+    a historical artifact.
 
     Params:
       haystack = a string to search in
       needle = the string to search for
-    Returns: a pointer to the found occurrence, or `NULL` if not found
+    Returns: a pointer to the found occurrence, or
+         `NULL` if not found
 */
 string strrstr(string haystack, string needle) nothrow
 {
@@ -8424,7 +8531,7 @@ string strrstr(string haystack, string needle) nothrow
   const(char)* _haystack = haystack.toCString!(No.Malloc, No.Nullable);
   const(char)* _needle = needle.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strrstr(_haystack, _needle);
-  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
 }
 
@@ -8479,58 +8586,6 @@ string[] strsplit(string string_, string delimiter, int maxTokens) nothrow
   const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   const(char)* _delimiter = delimiter.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strsplit(_string_, _delimiter, maxTokens);
-  string[] _retval;
-
-  if (_cretval)
-  {
-    uint _cretlength;
-    while (_cretval[_cretlength] !is null)
-      _cretlength++;
-    _retval = new string[_cretlength];
-    foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString!(Yes.Free);
-    gFree(cast(void*)_cretval);
-  }
-  return _retval;
-}
-
-/**
-    Splits string into a number of tokens not containing any of the characters
-    in delimiters. A token is the (possibly empty) longest string that does not
-    contain any of the characters in delimiters. If max_tokens is reached, the
-    remainder is appended to the last token.
-    
-    For example, the result of g_strsplit_set ("abc:def/ghi", ":/", -1) is an
-    array containing the three strings "abc", "def", and "ghi".
-    
-    The result of g_strsplit_set (":def/ghi:", ":/", -1) is an array containing
-    the four strings "", "def", "ghi", and "".
-    
-    As a special case, the result of splitting the empty string "" is an empty
-    array, not an array containing a single string. The reason for this
-    special case is that being able to represent an empty array is typically
-    more useful than consistent handling of empty elements. If you do need
-    to represent empty elements, you'll need to check for the empty string
-    before calling `[glib.global.strsplitSet]`.
-    
-    Note that this function works on bytes not characters, so it can't be used
-    to delimit UTF-8 strings for anything but ASCII characters.
-
-    Params:
-      string_ = a string to split
-      delimiters = a string containing characters that are used to split the
-          string. Can be empty, which will result in no string splitting
-      maxTokens = the maximum number of tokens to split string into.
-          If this is less than 1, the string is split completely
-    Returns: a newly-allocated array of strings. Use
-        `funcGLib.strfreev` to free it.
-*/
-string[] strsplitSet(string string_, string delimiters, int maxTokens) nothrow
-{
-  char** _cretval;
-  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
-  const(char)* _delimiters = delimiters.toCString!(No.Malloc, No.Nullable);
-  _cretval = g_strsplit_set(_string_, _delimiters, maxTokens);
   string[] _retval;
 
   if (_cretval)
@@ -8624,10 +8679,6 @@ bool strvContains(string[] strv, string str) nothrow
     of order, sort the arrays first (using `funcGLib.qsort_with_data`
     or similar).
     
-    Elements are compared using `funcGLib.str_equal`. To match independently
-    of order, sort the arrays first (using `funcGLib.qsort_with_data`
-    or similar).
-    
     Two empty arrays are considered equal. Neither strv1 nor strv2 may be
     `NULL`.
 
@@ -8684,21 +8735,20 @@ void testAssertExpectedMessagesInternal(string domain, string file, int line, st
 }
 
 /**
-    This function adds a message to test reports that
-    associates a bug URI with a test case.
+    Adds a message to test reports that associates a bug URI with a test case.
     
-    Bug URIs are constructed from a base URI set with [glib.global.testBugBase]
-    and bug_uri_snippet. If [glib.global.testBugBase] has not been called, it is
+    Bug URIs are constructed from a base URI set with `funcGLib.test_bug_base`
+    and bug_uri_snippet. If `funcGLib.test_bug_base` has not been called, it is
     assumed to be the empty string, so a full URI can be provided to
-    [glib.global.testBug] instead.
+    `funcGLib.test_bug` instead.
     
-    Since GLib 2.70, the base URI is not prepended to bug_uri_snippet if it
-    is already a valid URI.
+    See also `funcGLib.test_summary`.
+    
+    Since GLib 2.70, the base URI is not prepended to bug_uri_snippet
+    if it is already a valid URI.
 
     Params:
       bugUriSnippet = Bug specific bug tracker URI or URI portion.
-
-    Version: See also: g_test_summary()
 */
 void testBug(string bugUriSnippet) nothrow
 {
@@ -8707,10 +8757,10 @@ void testBug(string bugUriSnippet) nothrow
 }
 
 /**
-    Specify the base URI for bug reports.
+    Specifies the base URI for bug reports.
     
     The base URI is used to construct bug report messages for
-    [glib.global.testMessage] when [glib.global.testBug] is called.
+    `funcGLib.test_message` when `funcGLib.test_bug` is called.
     Calling this function outside of a test case sets the
     default base URI for all test cases. Calling it from within
     a test case changes the base URI for the scope of the test
@@ -8719,8 +8769,8 @@ void testBug(string bugUriSnippet) nothrow
     portion to uri_pattern, or by replacing the special string
     `%s` within uri_pattern if that is present.
     
-    If [glib.global.testBugBase] is not called, bug URIs are formed solely
-    from the value provided by [glib.global.testBug].
+    If `funcGLib.test_bug_base` is not called, bug URIs are formed
+    solely from the value provided by `funcGLib.test_bug`.
 
     Params:
       uriPattern = the base pattern for bug URIs
@@ -8732,7 +8782,7 @@ void testBugBase(string uriPattern) nothrow
 }
 
 /**
-    Attempt to disable system crash reporting infrastructure.
+    Attempts to disable system crash reporting infrastructure.
     
     This function should be called before exercising code paths that are
     expected or intended to crash, to avoid wasting resources in system-wide
@@ -8793,9 +8843,10 @@ void testExpectMessage(string logDomain, glib.types.LogLevelFlags logLevel, stri
 }
 
 /**
-    Indicates that a test failed. This function can be called
-    multiple times from the same test. You can use this function
-    if your test failed in a recoverable way.
+    Indicates that a test failed.
+    
+    This function can be called multiple times from the same test.
+    You can use this function if your test failed in a recoverable way.
     
     Do not use this function if the failure of a test could cause
     other tests to malfunction.
@@ -8807,11 +8858,11 @@ void testExpectMessage(string logDomain, glib.types.LogLevelFlags logLevel, stri
     
     If not called from inside a test, this function does nothing.
     
-    Note that unlike [glib.global.testSkip] and [glib.global.testIncomplete], this
-    function does not log a message alongside the test failure.
+    Note that unlike `funcGLib.test_skip` and `funcGLib.test_incomplete`,
+    this function does not log a message alongside the test failure.
     If details of the test failure are available, either log them with
-    [glib.global.testMessage] before [glib.global.testFail], or use [glib.global.testFailPrintf]
-    instead.
+    `funcGLib.test_message` before `funcGLib.test_fail`, or use
+    `funcGLib.test_fail_printf` instead.
 */
 void testFail() nothrow
 {
@@ -8819,10 +8870,11 @@ void testFail() nothrow
 }
 
 /**
-    Returns whether a test has already failed. This will
-    be the case when [glib.global.testFail], [glib.global.testIncomplete]
-    or [glib.global.testSkip] have been called, but also if an
-    assertion has failed.
+    Returns whether a test has already failed.
+    
+    This will be the case when `funcGLib.test_fail`,
+    `funcGLib.test_incomplete` or `funcGLib.test_skip` have
+    been called, but also if an assertion has failed.
     
     This can be useful to return early from a test if
     continuing after a failed assertion might be harmful.
@@ -8842,7 +8894,7 @@ bool testFailed() nothrow
     Gets the pathname of the directory containing test files of the type
     specified by file_type.
     
-    This is approximately the same as calling g_test_build_filename("."),
+    This is approximately the same as calling `g_test_build_filename(".")`,
     but you don't need to free the return value.
 
     Params:
@@ -8860,8 +8912,8 @@ string testGetDir(glib.types.TestFileType fileType) nothrow
 /**
     Gets the test path for the test currently being run.
     
-    In essence, it will be the same string passed as the first argument to
-    e.g. g_test_add() when the test was added.
+    In essence, it will be the same string passed as the first argument
+    to e.g. `funcGLib.test_add` when the test was added.
     
     This function returns a valid string only within a test function.
     
@@ -8878,8 +8930,9 @@ string testGetPath() nothrow
 
 /**
     Indicates that a test failed because of some incomplete
-    functionality. This function can be called multiple times
-    from the same test.
+    functionality.
+    
+    This function can be called multiple times from the same test.
     
     Calling this function will not stop the test from running, you
     need to return from the test function yourself. So you can
@@ -8907,12 +8960,14 @@ string testLogTypeName(glib.types.TestLogType logType) nothrow
 }
 
 /**
-    Enqueue a pointer to be released with [glib.global.gfree] during the next
-    teardown phase. This is equivalent to calling [glib.global.testQueueDestroy]
-    with a destroy callback of [glib.global.gfree].
+    Enqueues a pointer to be released with `funcGLib.free`
+    during the next teardown phase.
+    
+    This is equivalent to calling `funcGLib.test_queue_destroy`
+    with a destroy callback of `funcGLib.free`.
 
     Params:
-      gfreePointer = the pointer to be stored.
+      gfreePointer = the pointer to be stored
 */
 void testQueueFree(void* gfreePointer = null) nothrow
 {
@@ -8920,9 +8975,10 @@ void testQueueFree(void* gfreePointer = null) nothrow
 }
 
 /**
-    Get a reproducible random floating point number,
-    see [glib.global.testRandInt] for details on test case random numbers.
-    Returns: a random number from the seeded random number generator.
+    Gets a reproducible random floating point number.
+    
+    See `funcGLib.test_rand_int` for details on test case random numbers.
+    Returns: a random number from the seeded random number generator
 */
 double testRandDouble() nothrow
 {
@@ -8932,13 +8988,14 @@ double testRandDouble() nothrow
 }
 
 /**
-    Get a reproducible random floating pointer number out of a specified range,
-    see [glib.global.testRandInt] for details on test case random numbers.
+    Gets a reproducible random floating point number out of a specified range.
+    
+    See `funcGLib.test_rand_int` for details on test case random numbers.
 
     Params:
       rangeStart = the minimum value returned by this function
       rangeEnd = the minimum value not returned by this function
-    Returns: a number with range_start <= number < range_end.
+    Returns: a number with range_start <= number < range_end
 */
 double testRandDoubleRange(double rangeStart, double rangeEnd) nothrow
 {
@@ -8948,7 +9005,7 @@ double testRandDoubleRange(double rangeStart, double rangeEnd) nothrow
 }
 
 /**
-    Get a reproducible random integer number.
+    Gets a reproducible random integer number.
     
     The random numbers generated by the g_test_rand_*() family of functions
     change with every new test program start, unless the --seed option is
@@ -8957,7 +9014,7 @@ double testRandDoubleRange(double rangeStart, double rangeEnd) nothrow
     For individual test cases however, the random number generator is
     reseeded, to avoid dependencies between tests and to make --seed
     effective for all test cases.
-    Returns: a random number from the seeded random number generator.
+    Returns: a random number from the seeded random number generator
 */
 int testRandInt() nothrow
 {
@@ -8967,13 +9024,14 @@ int testRandInt() nothrow
 }
 
 /**
-    Get a reproducible random integer number out of a specified range,
-    see [glib.global.testRandInt] for details on test case random numbers.
+    Gets a reproducible random integer number out of a specified range.
+    
+    See `funcGLib.test_rand_int` for details on test case random numbers.
 
     Params:
       begin = the minimum value returned by this function
       end = the smallest value not to be returned by this function
-    Returns: a number with begin <= number < end.
+    Returns: a number with begin <= number < end
 */
 int testRandIntRange(int begin, int end) nothrow
 {
@@ -8983,12 +9041,14 @@ int testRandIntRange(int begin, int end) nothrow
 }
 
 /**
-    Runs all tests under the toplevel suite which can be retrieved
-    with [glib.global.testGetRoot]. Similar to [glib.global.testRunSuite], the test
-    cases to be run are filtered according to test path arguments
-    (`-p testpath` and `-s testpath`) as parsed by [glib.global.testInit].
-    [glib.global.testRunSuite] or [glib.global.testRun] may only be called once in a
-    program.
+    Runs all tests under the toplevel suite.
+    
+    The toplevel suite can be retrieved with `funcGLib.test_get_root`.
+    
+    Similar to `funcGLib.test_run_suite`, the test cases to be run are
+    filtered according to test path arguments (`-p testpath` and `-s testpath`)
+    as parsed by `funcGLib.test_init`. `funcGLib.test_run_suite` or
+    `funcGLib.test_run` may only be called once in a program.
     
     In general, the tests and sub-suites within each suite are run in
     the order in which they are defined. However, note that prior to
@@ -8996,7 +9056,7 @@ int testRandIntRange(int begin, int end) nothrow
     functions which caused them to create multiple suites with the same
     name, meaning that if you created tests "/foo/simple",
     "/bar/simple", and "/foo/using-bar" in that order, they would get
-    run in that order (since [glib.global.testRun] would run the first "/foo"
+    run in that order (since `funcGLib.test_run` would run the first "/foo"
     suite, then the "/bar" suite, then the second "/foo" suite). As of
     2.36, this bug is fixed, and adding the tests in that order would
     result in a running order of "/foo/simple", "/foo/using-bar",
@@ -9010,14 +9070,13 @@ int testRandIntRange(int begin, int end) nothrow
     However, you should never make the actual result of a test depend
     on the order that tests are run in. If you need to ensure that some
     particular code runs before or after a given test case, use
-    g_test_add(), which lets you specify setup and teardown functions.
+    `funcGLib.test_add`, which lets you specify setup and teardown functions.
     
     If all tests are skipped or marked as incomplete (expected failures),
     this function will return 0 if producing TAP output, or 77 (treated
     as "skip test" by Automake) otherwise.
     Returns: 0 on success, 1 on failure (assuming it returns at all),
-        0 or 77 if all tests were skipped with [glib.global.testSkip] and/or
-        [glib.global.testIncomplete]
+        0 or 77 if all tests were skipped or marked as incomplete
 */
 int testRun() nothrow
 {
@@ -9027,17 +9086,18 @@ int testRun() nothrow
 }
 
 /**
-    Execute the tests within suite and all nested #GTestSuites.
+    Executes the tests within suite and all nested test suites.
+    
     The test suites to be executed are filtered according to
     test path arguments (`-p testpath` and `-s testpath`) as parsed by
-    [glib.global.testInit]. See the [glib.global.testRun] documentation for more
-    information on the order that tests are run in.
+    `funcGLib.test_init`. See the `funcGLib.test_run` documentation
+    for more information on the order that tests are run in.
     
-    [glib.global.testRunSuite] or [glib.global.testRun] may only be called once
-    in a program.
+    `funcGLib.test_run_suite` or `funcGLib.test_run` may only be
+    called once in a program.
 
     Params:
-      suite = a #GTestSuite
+      suite = a test suite
     Returns: 0 on success
 */
 int testRunSuite(glib.test_suite.TestSuite suite) nothrow
@@ -9048,17 +9108,21 @@ int testRunSuite(glib.test_suite.TestSuite suite) nothrow
 }
 
 /**
-    Changes the behaviour of the various `g_assert_*()` macros,
-    g_test_assert_expected_messages() and the various
-    `g_test_trap_assert_*()` macros to not abort to program, but instead
-    call [glib.global.testFail] and continue. (This also changes the behavior of
-    [glib.global.testFail] so that it will not cause the test program to abort
-    after completing the failed test.)
+    Changes the behaviour of the various assertion macros.
     
-    Note that the g_assert_not_reached() and g_assert() macros are not
-    affected by this.
+    The `g_assert_*()` macros, `g_test_assert_expected_messages()`
+    and the various `g_test_trap_assert_*()` macros are changed
+    to not abort to program.
     
-    This function can only be called after [glib.global.testInit].
+    Instead, they will call `funcGLib.test_fail` and continue.
+    (This also changes the behavior of `funcGLib.test_fail` so that
+    it will not cause the test program to abort after completing
+    the failed test.)
+    
+    Note that the `funcGLib.assert_not_reached` and `funcGLib.assert`
+    macros are not affected by this.
+    
+    This function can only be called after `funcGLib.test_init`.
 */
 void testSetNonfatalAssertions() nothrow
 {
@@ -9085,10 +9149,8 @@ void testSkip(string msg = null) nothrow
 }
 
 /**
-    Returns true (after [glib.global.testInit] has been called) if the test
-    program is running under [glib.global.testTrapSubprocess].
-    Returns: true if the test program is running under
-      [glib.global.testTrapSubprocess].
+    Returns true if the test program is running under `funcGLib.test_trap_subprocess`.
+    Returns: true if the test program is running under `funcGLib.test_trap_subprocess`
 */
 bool testSubprocess() nothrow
 {
@@ -9098,14 +9160,16 @@ bool testSubprocess() nothrow
 }
 
 /**
-    Set the summary for a test, which describes what the test checks, and how it
-    goes about checking it. This may be included in test report output, and is
-    useful documentation for anyone reading the source code or modifying a test
-    in future. It must be a single line.
+    Sets the summary for a test.
+    
+    This may be included in test report output, and is useful documentation for
+    anyone reading the source code or modifying a test in future. It must be a
+    single line, and it should summarise what the test checks, and how.
     
     This should be called at the top of a test function.
     
     For example:
+    
     ```c
     static void
     test_array_sort (void)
@@ -9113,15 +9177,14 @@ bool testSubprocess() nothrow
       g_test_summary ("Test my_array_sort() sorts the array correctly and stably, "
                       "including testing zero length and one-element arrays.");
     
-      …
+      // ...
     }
     ```
+    
+    See also `funcGLib.test_bug`.
 
     Params:
-      summary = One or two sentences summarising what the test checks, and how it
-           checks it.
-
-    Version: See also: g_test_bug()
+      summary = summary of the test purpose
 */
 void testSummary(string summary) nothrow
 {
@@ -9130,9 +9193,9 @@ void testSummary(string summary) nothrow
 }
 
 /**
-    Get the number of seconds since the last start of the timer with
-    [glib.global.testTimerStart].
-    Returns: the time since the last start of the timer in seconds, as a double
+    Gets the number of seconds since the last start of the timer with
+    `funcGLib.test_timer_start`.
+    Returns: the time since the last start of the timer in seconds
 */
 double testTimerElapsed() nothrow
 {
@@ -9142,8 +9205,8 @@ double testTimerElapsed() nothrow
 }
 
 /**
-    Report the last result of [glib.global.testTimerElapsed].
-    Returns: the last result of [glib.global.testTimerElapsed], as a double
+    Reports the last result of `funcGLib.test_timer_elapsed`.
+    Returns: the last result of `funcGLib.test_timer_elapsed`
 */
 double testTimerLast() nothrow
 {
@@ -9153,7 +9216,9 @@ double testTimerLast() nothrow
 }
 
 /**
-    Start a timing test. Call [glib.global.testTimerElapsed] when the task is supposed
+    Starts a timing test.
+    
+    Call `funcGLib.test_timer_elapsed` when the task is supposed
     to be done. Call this function again to restart the timer.
 */
 void testTimerStart() nothrow
@@ -9172,13 +9237,14 @@ void testTrapAssertions(string domain, string file, int line, string func, ulong
 }
 
 /**
-    Fork the current test program to execute a test case that might
+    Forks the current test program to execute a test case that might
     not return or that might abort.
     
     If usec_timeout is non-0, the forked test case is aborted and
     considered failing if its run time exceeds it.
     
-    The forking behavior can be configured with the #GTestTrapFlags flags.
+    The forking behavior can be configured with [glib.types.TestTrapFlags]
+    flags.
     
     In the following example, the test code forks, the forked child
     process produces some sample output and exits successfully.
@@ -9191,8 +9257,10 @@ void testTrapAssertions(string domain, string file, int line, string func, ulong
       {
         if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
           {
-            g_print ("some stdout text: somagic17\n");
-            g_printerr ("some stderr text: semagic43\n");
+            g_print ("some stdout text: somagic17
+    ");
+            g_printerr ("some stderr text: semagic43
+    ");
             exit (0); // successful test run
           }
         g_test_trap_assert_passed ();
@@ -9202,14 +9270,14 @@ void testTrapAssertions(string domain, string file, int line, string func, ulong
     ```
 
     Params:
-      usecTimeout = Timeout for the forked test in micro seconds.
-      testTrapFlags = Flags to modify forking behaviour.
+      usecTimeout = timeout for the forked test in microseconds
+      testTrapFlags = flags to modify forking behaviour
     Returns: true for the forked child and false for the executing parent process.
 
     Deprecated: This function is implemented only on Unix platforms,
       is not always reliable due to problems inherent in fork-without-exec
       and doesn't set close-on-exec flag on its file descriptors.
-      Use [glib.global.testTrapSubprocess] instead.
+      Use funcGLib.test_trap_subprocess] instead.
 */
 bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags) nothrow
 {
@@ -9219,8 +9287,8 @@ bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags) not
 }
 
 /**
-    Check the result of the last [glib.global.testTrapSubprocess] call.
-    Returns: true if the last test subprocess terminated successfully.
+    Checks the result of the last `funcGLib.test_trap_subprocess` call.
+    Returns: true if the last test subprocess terminated successfully
 */
 bool testTrapHasPassed() nothrow
 {
@@ -9230,8 +9298,19 @@ bool testTrapHasPassed() nothrow
 }
 
 /**
-    Check the result of the last [glib.global.testTrapSubprocess] call.
-    Returns: true if the last test subprocess got killed due to a timeout.
+    Checks the result of the last `funcGLib.test_trap_subprocess` call.
+    Returns: true if the last test subprocess was skipped
+*/
+bool testTrapHasSkipped() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)g_test_trap_has_skipped();
+  return _retval;
+}
+
+/**
+    Checks the result of the last `funcGLib.test_trap_subprocess` call.
+    Returns: true if the last test subprocess got killed due to a timeout
 */
 bool testTrapReachedTimeout() nothrow
 {
@@ -9243,13 +9322,14 @@ bool testTrapReachedTimeout() nothrow
 /**
     Respawns the test program to run only test_path in a subprocess.
     
-    This is equivalent to calling [glib.global.testTrapSubprocessWithEnvp] with `envp`
-    set to null. See the documentation for that function for full details.
+    This is equivalent to calling `funcGLib.test_trap_subprocess_with_envp`
+    with `envp` set to `NULL`. See the documentation for that function
+    for full details.
 
     Params:
-      testPath = Test to run in a subprocess
-      usecTimeout = Timeout for the subprocess test in micro seconds.
-      testFlags = Flags to modify subprocess behaviour.
+      testPath = test to run in a subprocess
+      usecTimeout = timeout for the subprocess test in microseconds.
+      testFlags = flags to modify subprocess behaviour
 */
 void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags) nothrow
 {
@@ -9258,15 +9338,15 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubpr
 }
 
 /**
-    Respawns the test program to run only test_path in a subprocess with the
-    given envp environment.
+    Respawns the test program to run only test_path in a subprocess with
+    a given environment.
     
     This can be used for a test case that might not return, or that
     might abort.
     
-    If test_path is null then the same test is re-run in a subprocess.
-    You can use [glib.global.testSubprocess] to determine whether the test is in
-    a subprocess or not.
+    If test_path is `NULL` then the same test is re-run in a subprocess.
+    You can use `funcGLib.test_subprocess` to determine whether the test
+    is in a subprocess or not.
     
     test_path can also be the name of the parent test, followed by
     "`/subprocess/`" and then a name for the specific subtest (or just
@@ -9274,33 +9354,32 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubpr
     tests with names of this form will automatically be skipped in the
     parent process.
     
-    If envp is null, the parent process’ environment will be inherited.
+    If envp is `NULL`, the parent process’ environment will be inherited.
     
     If usec_timeout is non-0, the test subprocess is aborted and
     considered failing if its run time exceeds it.
     
-    The subprocess behavior can be configured with the
-    #GTestSubprocessFlags flags.
+    The subprocess behavior can be configured with [glib.types.TestSubprocessFlags]
+    flags.
     
-    You can use methods such as g_test_trap_assert_passed(),
-    g_test_trap_assert_failed(), and g_test_trap_assert_stderr() to
+    You can use methods such as `funcGLib.test_trap_assert_passed`,
+    `funcGLib.test_trap_assert_failed`, and `funcGLib.test_trap_assert_stderr` to
     check the results of the subprocess. (But note that
-    g_test_trap_assert_stdout() and g_test_trap_assert_stderr()
+    `funcGLib.test_trap_assert_stdout` and `funcGLib.test_trap_assert_stderr`
     cannot be used if test_flags specifies that the child should
     inherit the parent stdout/stderr.)
     
-    If your `main ()` needs to behave differently in
-    the subprocess, you can call [glib.global.testSubprocess] (after calling
-    [glib.global.testInit]) to see whether you are in a subprocess.
+    If your `main ()` needs to behave differently in the subprocess, you can
+    call `funcGLib.test_subprocess` (after calling `funcGLib.test_init`)
+    to see whether you are in a subprocess.
     
     Internally, this function tracks the child process using
-    [glib.global.childWatchSourceNew], so your process must not ignore `SIGCHLD`, and
-    must not attempt to watch or wait for the child process via another
-    mechanism.
+    `funcGLib.child_watch_source_new`, so your process must not ignore
+    `SIGCHLD`, and must not attempt to watch or wait for the child process
+    via another mechanism.
     
-    The following example tests that calling
-    `my_object_new(1000000)` will abort with an error
-    message.
+    The following example tests that calling `my_object_new(1000000)` will
+    abort with an error message.
     
     ```c
       static void
@@ -9329,7 +9408,7 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubpr
           }
     
         // Reruns this same test in a subprocess
-        g_autoptr(GStrv) envp = g_get_environ ();
+        g_auto(GStrv) envp = g_get_environ ();
         envp = g_environ_setenv (g_steal_pointer (&envp), "USER", "charlie", TRUE);
         g_test_trap_subprocess_with_envp (NULL, envp, 0, G_TEST_SUBPROCESS_DEFAULT);
         g_test_trap_assert_passed ();
@@ -9350,12 +9429,11 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubpr
     ```
 
     Params:
-      testPath = Test to run in a subprocess
-      envp = Environment
-          to run the test in, or null to inherit the parent’s environment. This must
-          be in the GLib filename encoding.
-      usecTimeout = Timeout for the subprocess test in micro seconds.
-      testFlags = Flags to modify subprocess behaviour.
+      testPath = test to run in a subprocess
+      envp = environment
+          to run the test in
+      usecTimeout = timeout for the subprocess test in microseconds
+      testFlags = flags to modify subprocess behaviour
 */
 void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags) nothrow
 {
@@ -9368,8 +9446,11 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
 
 /**
     Sets a function to be called at regular intervals, with the given
-    priority.  The function is called repeatedly until it returns
-    false, at which point the timeout is automatically destroyed and
+    priority.
+    
+    The function is called repeatedly until it returns
+    [glib.types.SOURCE_REMOVE], at which point the timeout is automatically
+    destroyed and
     the function will not be called again.  The notify function is
     called when the timeout is destroyed.  The first call to the
     function will be at the end of the first interval.
@@ -9378,27 +9459,28 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
     event sources. Thus they should not be relied on for precise timing.
     After each call to the timeout function, the time of the next
     timeout is recalculated based on the current time and the given interval
-    (it does not try to 'catch up' time lost in delays).
+    (it does not try to ‘catch up’ time lost in delays).
     
-    See [memory management of sources][mainloop-memory-management] for details
+    See [main loop memory management](main-loop.html#memory-management-of-sources) for details
     on how to handle the return value and memory management of data.
     
-    This internally creates a main loop source using [glib.global.timeoutSourceNew]
-    and attaches it to the global #GMainContext using [glib.source.Source.attach], so
-    the callback will be invoked in whichever thread is running that main
-    context. You can do these steps manually if you need greater control or to
-    use a custom main context.
+    This internally creates a main loop source using
+    `funcGLib.timeout_source_new` and attaches it to the global
+    [glib.main_context.MainContext] using [glib.source.Source.attach], so the callback
+    will be invoked in whichever thread is running that main context. You can do
+    these steps manually if you need greater control or to use a custom main
+    context.
     
     The interval given is in terms of monotonic time, not wall clock time.
-    See [glib.global.getMonotonicTime].
+    See `funcGLib.get_monotonic_time`.
 
     Params:
-      priority = the priority of the timeout source. Typically this will be in
-          the range between [glib.types.PRIORITY_DEFAULT] and [glib.types.PRIORITY_HIGH].
+      priority = the priority of the timeout source; typically this will be in
+          the range between [glib.types.PRIORITY_DEFAULT] and
+          [glib.types.PRIORITY_HIGH]
       interval = the time between calls to the function, in milliseconds
-          (1/1000ths of a second)
       function_ = function to call
-    Returns: the ID (greater than 0) of the event source.
+    Returns: the ID (greater than 0) of the event source
 */
 uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_) nothrow
 {
@@ -9430,50 +9512,52 @@ uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_) no
 /**
     Sets a function to be called at regular intervals, with priority.
     
-    The function is called repeatedly until it returns [glib.types.SOURCE_REMOVE]
-    or false, at which point the timeout is automatically destroyed and
+    The function is called repeatedly until it returns [glib.types.SOURCE_REMOVE],
+    at which point the timeout is automatically destroyed and
     the function will not be called again.
     
-    Unlike [glib.global.timeoutAdd], this function operates at whole second granularity.
-    The initial starting point of the timer is determined by the implementation
-    and the implementation is expected to group multiple timers together so that
-    they fire all at the same time. To allow this grouping, the interval to the
-    first timer is rounded and can deviate up to one second from the specified
-    interval. Subsequent timer iterations will generally run at the specified
-    interval.
+    Unlike `funcGLib.timeout_add`, this function operates at whole second
+    granularity. The initial starting point of the timer is determined by the
+    implementation and the implementation is expected to group multiple timers
+    together so that they fire all at the same time. To allow this grouping,
+    the interval to the first timer is rounded and can deviate up to one second
+    from the specified interval. Subsequent timer iterations will generally run
+    at the specified interval.
     
     Note that timeout functions may be delayed, due to the processing of other
     event sources. Thus they should not be relied on for precise timing.
     After each call to the timeout function, the time of the next
     timeout is recalculated based on the current time and the given interval
     
-    See [memory management of sources][mainloop-memory-management] for details
+    See [main loop memory management](main-loop.html#memory-management-of-sources) for details
     on how to handle the return value and memory management of data.
     
-    If you want timing more precise than whole seconds, use [glib.global.timeoutAdd]
-    instead.
+    If you want timing more precise than whole seconds, use
+    `funcGLib.timeout_add` instead.
     
     The grouping of timers to fire at the same time results in a more power
     and CPU efficient behavior so if your timer is in multiples of seconds
-    and you don't require the first timer exactly one second from now, the
-    use of [glib.global.timeoutAddSeconds] is preferred over [glib.global.timeoutAdd].
+    and you don’t require the first timer exactly one second from now, the
+    use of `funcGLib.timeout_add_seconds` is preferred over
+    `funcGLib.timeout_add`.
     
     This internally creates a main loop source using
-    [glib.global.timeoutSourceNewSeconds] and attaches it to the main loop context
-    using [glib.source.Source.attach]. You can do these steps manually if you need
-    greater control.
+    `funcGLib.timeout_source_new_seconds` and attaches it to the main loop
+    context using [glib.source.Source.attach]. You can do these steps manually
+    if you need greater control.
     
     It is safe to call this function from any thread.
     
     The interval given is in terms of monotonic time, not wall clock
-    time.  See [glib.global.getMonotonicTime].
+    time. See `funcGLib.get_monotonic_time`.
 
     Params:
-      priority = the priority of the timeout source. Typically this will be in
-          the range between [glib.types.PRIORITY_DEFAULT] and [glib.types.PRIORITY_HIGH].
+      priority = the priority of the timeout source; typically this will be in
+          the range between [glib.types.PRIORITY_DEFAULT] and
+          [glib.types.PRIORITY_HIGH]
       interval = the time between calls to the function, in seconds
       function_ = function to call
-    Returns: the ID (greater than 0) of the event source.
+    Returns: the ID (greater than 0) of the event source
 */
 uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc function_) nothrow
 {
@@ -9505,15 +9589,15 @@ uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc functi
 /**
     Creates a new timeout source.
     
-    The source will not initially be associated with any #GMainContext
+    The source will not initially be associated with any [glib.main_context.MainContext]
     and must be added to one with [glib.source.Source.attach] before it will be
     executed.
     
     The interval given is in terms of monotonic time, not wall clock
-    time.  See [glib.global.getMonotonicTime].
+    time.  See `funcGLib.get_monotonic_time`.
 
     Params:
-      interval = the timeout interval in milliseconds.
+      interval = the timeout interval in milliseconds
     Returns: the newly-created timeout source
 */
 glib.source.Source timeoutSourceNew(uint interval) nothrow
@@ -9527,15 +9611,15 @@ glib.source.Source timeoutSourceNew(uint interval) nothrow
 /**
     Creates a new timeout source.
     
-    The source will not initially be associated with any #GMainContext
-    and must be added to one with [glib.source.Source.attach] before it will be
-    executed.
+    The source will not initially be associated with any
+    [glib.main_context.MainContext] and must be added to one with
+    [glib.source.Source.attach] before it will be executed.
     
     The scheduling granularity/accuracy of this timeout source will be
     in seconds.
     
     The interval given is in terms of monotonic time, not wall clock time.
-    See [glib.global.getMonotonicTime].
+    See `funcGLib.get_monotonic_time`.
 
     Params:
       interval = the timeout interval in seconds
@@ -9642,20 +9726,20 @@ void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes) nothrow
 }
 
 /**
-    Convert a string from UCS-4 to UTF-16. A 0 character will be
-    added to the result after the converted text.
+    Convert a string from UCS-4 to UTF-16.
+    
+    A nul character (U+0000) will be added to the result after the converted text.
 
     Params:
       str = a UCS-4 encoded string
-      itemsRead = location to store number of
-            bytes read, or null. If an error occurs then the index of the invalid
-            input is stored here.
+      itemsRead = location to store number of bytes read, or
+          `NULL` to ignore. If an error occurs then the index of the invalid input is
+          stored here. The value stored here will never be negative.
       itemsWritten = location to store number
-            of #gunichar2  written, or null. The value stored here does not include
-            the trailing 0.
+          of `gunichar2` written, or `NULL` to ignore. The value stored here does not
+          include the trailing nul, and will never be negative.
     Returns: a pointer to a newly allocated UTF-16 string.
-          This value must be freed with [glib.global.gfree]. If an error occurs,
-          null will be returned and error set.
+        This value must be freed with `funcGLib.free`.
     Throws: [ErrorWrap]
 */
 ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
@@ -9685,19 +9769,20 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
 
 /**
     Convert a string from a 32-bit fixed width representation as UCS-4.
-    to UTF-8. The result will be terminated with a 0 byte.
+    to UTF-8.
+    
+    The result will be terminated with a nul byte.
 
     Params:
       str = a UCS-4 encoded string
-      itemsRead = location to store number of
-            characters read, or null.
+      itemsRead = location to store number of characters read,
+          or `NULL` to ignore. If an error occurs then the index of the invalid input
+          is stored here. The value stored here will never be negative.
       itemsWritten = location to store number
-            of bytes written or null. The value here stored does not include the
-            trailing 0 byte.
+          of bytes written, or `NULL` to ignore. The value stored here does not
+          include the trailing nul, and will never be negative.
     Returns: a pointer to a newly allocated UTF-8 string.
-          This value must be freed with [glib.global.gfree]. If an error occurs,
-          null will be returned and error set. In that case, items_read
-          will be set to the position of the first invalid input character.
+        This value must be freed with `funcGLib.free`.
     Throws: [ErrorWrap]
 */
 string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
@@ -9789,10 +9874,10 @@ bool unicharCompose(dchar a, dchar b, out dchar ch) nothrow
     decompositions. It does, however, include algorithmic
     Hangul Jamo decomposition, as well as 'singleton'
     decompositions which replace a character by a single
-    other character. In the case of singletons *`b` will
+    other character. In the case of singletons `*b` will
     be set to zero.
     
-    If ch is not decomposable, *`a` is set to ch and *`b`
+    If ch is not decomposable, `*a` is set to ch and `*b`
     is set to zero.
     
     Note that the way Unicode decomposition pairs are
@@ -10273,13 +10358,14 @@ glib.types.UnicodeType unicharType(dchar c) nothrow
 }
 
 /**
-    Checks whether ch is a valid Unicode character. Some possible
-    integer values of ch will not be valid. 0 is considered a valid
-    character, though it's normally a string terminator.
+    Checks whether ch is a valid Unicode character.
+    
+    Some possible integer values of ch will not be valid. U+0000 is considered a
+    valid character, though it’s normally a string terminator.
 
     Params:
       ch = a Unicode character
-    Returns: true if ch is a valid Unicode character
+    Returns: `TRUE` if ch is a valid Unicode character
 */
 bool unicharValidate(dchar ch) nothrow
 {
@@ -10346,243 +10432,6 @@ void unicodeCanonicalOrdering(dchar[] string_) nothrow
 
   auto _string_ = cast(dchar*)string_.ptr;
   g_unicode_canonical_ordering(_string_, _len);
-}
-
-/** */
-glib.types.Quark unixErrorQuark() nothrow
-{
-  glib.types.Quark _retval;
-  _retval = g_unix_error_quark();
-  return _retval;
-}
-
-/**
-    Sets a function to be called when the IO condition, as specified by
-    condition becomes true for fd.
-    
-    This is the same as [glib.global.unixFdAdd], except that it allows you to
-    specify a non-default priority and a provide a #GDestroyNotify for
-    user_data.
-
-    Params:
-      priority = the priority of the source
-      fd = a file descriptor
-      condition = IO conditions to watch for on fd
-      function_ = a #GUnixFDSourceFunc
-    Returns: the ID (greater than 0) of the event source
-*/
-uint unixFdAddFull(int priority, int fd, glib.types.IOCondition condition, glib.types.UnixFDSourceFunc function_) nothrow
-{
-  extern(C) gboolean _function_Callback(int fd, GIOCondition condition, void* userData) nothrow
-  {
-    bool _dretval;
-    auto _dlg = cast(glib.types.UnixFDSourceFunc*)userData;
-
-    try
-    {
-      _dretval = (*_dlg)(fd, condition);
-    }
-    catch (Exception e)
-    {
-      gidInvokeCallbackExceptionHandler(e, "glib.types.UnixFDSourceFunc");
-    }
-    auto _retval = cast(gboolean)_dretval;
-
-    return _retval;
-  }
-  auto _function_CB = function_ ? &_function_Callback : null;
-  uint _retval;
-  auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
-  GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
-  _retval = g_unix_fd_add_full(priority, fd, condition, _function_CB, _function_, _function_DestroyCB);
-  return _retval;
-}
-
-/**
-    Creates a #GSource to watch for a particular I/O condition on a file
-    descriptor.
-    
-    The source will never close the fd — you must do it yourself.
-    
-    Any callback attached to the returned #GSource must have type
-    #GUnixFDSourceFunc.
-
-    Params:
-      fd = a file descriptor
-      condition = I/O conditions to watch for on fd
-    Returns: the newly created #GSource
-*/
-glib.source.Source unixFdSourceNew(int fd, glib.types.IOCondition condition) nothrow
-{
-  GSource* _cretval;
-  _cretval = g_unix_fd_source_new(fd, condition);
-  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
-  return _retval;
-}
-
-/**
-    Get the `passwd` file entry for the given user_name using `getpwnam_r()`.
-    This can fail if the given user_name doesn’t exist.
-    
-    The returned `struct passwd` has been allocated using [glib.global.gmalloc] and should
-    be freed using [glib.global.gfree]. The strings referenced by the returned struct are
-    included in the same allocation, so are valid until the `struct passwd` is
-    freed.
-    
-    This function is safe to call from multiple threads concurrently.
-    
-    You will need to include `pwd.h` to get the definition of `struct passwd`.
-
-    Params:
-      userName = the username to get the passwd file entry for
-    Returns: passwd entry, or null on error; free the returned
-         value with [glib.global.gfree]
-    Throws: [ErrorWrap]
-*/
-void* unixGetPasswdEntry(string userName)
-{
-  const(char)* _userName = userName.toCString!(No.Malloc, No.Nullable);
-  GError *_err;
-  auto _retval = g_unix_get_passwd_entry(_userName, &_err);
-  if (_err)
-    throw new ErrorWrap(_err, Yes.Take);
-  return _retval;
-}
-
-/**
-    Similar to the UNIX pipe() call, but on modern systems like Linux
-    uses the pipe2() system call, which atomically creates a pipe with
-    the configured flags.
-    
-    As of GLib 2.78, the supported flags are `O_CLOEXEC`/`FD_CLOEXEC` (see below)
-    and `O_NONBLOCK`. Prior to GLib 2.78, only `FD_CLOEXEC` was supported — if
-    you wanted to configure `O_NONBLOCK` then that had to be done separately with
-    `fcntl()`.
-    
-    Since GLib 2.80, the constants [glib.types.UnixPipeEnd.Read] and
-    [glib.types.UnixPipeEnd.Write] can be used as mnemonic indexes in fds.
-    
-    It is a programmer error to call this function with unsupported flags, and a
-    critical warning will be raised.
-    
-    As of GLib 2.78, it is preferred to pass `O_CLOEXEC` in, rather than
-    `FD_CLOEXEC`, as that matches the underlying `pipe()` API more closely. Prior
-    to 2.78, only `FD_CLOEXEC` was supported. Support for `FD_CLOEXEC` may be
-    deprecated and removed in future.
-
-    Params:
-      fds = Array of two integers
-      flags = Bitfield of file descriptor flags, as for fcntl()
-    Returns: true on success, false if not (and errno will be set).
-    Throws: [ErrorWrap]
-*/
-bool unixOpenPipe(int[] fds, int flags)
-{
-  bool _retval;
-  assert(!fds || fds.length == 2);
-  auto _fds = cast(int*)fds.ptr;
-  GError *_err;
-  _retval = cast(bool)g_unix_open_pipe(_fds, flags, &_err);
-  if (_err)
-    throw new ErrorWrap(_err, Yes.Take);
-  return _retval;
-}
-
-/**
-    Control the non-blocking state of the given file descriptor,
-    according to nonblock. On most systems this uses `O_NONBLOCK`, but
-    on some older ones may use `O_NDELAY`.
-
-    Params:
-      fd = A file descriptor
-      nonblock = If true, set the descriptor to be non-blocking
-    Returns: true if successful
-    Throws: [ErrorWrap]
-*/
-bool unixSetFdNonblocking(int fd, bool nonblock)
-{
-  bool _retval;
-  GError *_err;
-  _retval = cast(bool)g_unix_set_fd_nonblocking(fd, nonblock, &_err);
-  if (_err)
-    throw new ErrorWrap(_err, Yes.Take);
-  return _retval;
-}
-
-/**
-    A convenience function for [glib.global.unixSignalSourceNew], which
-    attaches to the default #GMainContext.  You can remove the watch
-    using [glib.source.Source.remove].
-
-    Params:
-      priority = the priority of the signal source. Typically this will be in
-                   the range between [glib.types.PRIORITY_DEFAULT] and [glib.types.PRIORITY_HIGH].
-      signum = Signal number
-      handler = Callback
-    Returns: An ID (greater than 0) for the event source
-*/
-uint unixSignalAdd(int priority, int signum, glib.types.SourceFunc handler) nothrow
-{
-  extern(C) gboolean _handlerCallback(void* userData) nothrow
-  {
-    bool _dretval;
-    auto _dlg = cast(glib.types.SourceFunc*)userData;
-
-    try
-    {
-      _dretval = (*_dlg)();
-    }
-    catch (Exception e)
-    {
-      gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
-    }
-    auto _retval = cast(gboolean)_dretval;
-
-    return _retval;
-  }
-  auto _handlerCB = handler ? &_handlerCallback : null;
-  uint _retval;
-  auto _handler = handler ? freezeDelegate(cast(void*)&handler) : null;
-  GDestroyNotify _handlerDestroyCB = handler ? &thawDelegate : null;
-  _retval = g_unix_signal_add_full(priority, signum, _handlerCB, _handler, _handlerDestroyCB);
-  return _retval;
-}
-
-/**
-    Create a #GSource that will be dispatched upon delivery of the UNIX
-    signal signum.  In GLib versions before 2.36, only `SIGHUP`, `SIGINT`,
-    `SIGTERM` can be monitored.  In GLib 2.36, `SIGUSR1` and `SIGUSR2`
-    were added. In GLib 2.54, `SIGWINCH` was added.
-    
-    Note that unlike the UNIX default, all sources which have created a
-    watch will be dispatched, regardless of which underlying thread
-    invoked [glib.global.unixSignalSourceNew].
-    
-    For example, an effective use of this function is to handle `SIGTERM`
-    cleanly; flushing any outstanding files, and then calling
-    [glib.main_loop.MainLoop.quit].  It is not safe to do any of this from a regular
-    UNIX signal handler; such a handler may be invoked while malloc() or
-    another library function is running, causing reentrancy issues if the
-    handler attempts to use those functions.  None of the GLib/GObject
-    API is safe against this kind of reentrancy.
-    
-    The interaction of this source when combined with native UNIX
-    functions like sigprocmask() is not defined.
-    
-    The source will not initially be associated with any #GMainContext
-    and must be added to one with [glib.source.Source.attach] before it will be
-    executed.
-
-    Params:
-      signum = A signal number
-    Returns: A newly created #GSource
-*/
-glib.source.Source unixSignalSourceNew(int signum) nothrow
-{
-  GSource* _cretval;
-  _cretval = g_unix_signal_source_new(signum);
-  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
-  return _retval;
 }
 
 /**
@@ -10655,18 +10504,19 @@ void usleep(gulong microseconds) nothrow
 }
 
 /**
-    Convert a string from UTF-16 to UCS-4. The result will be
-    nul-terminated.
+    Convert a string from UTF-16 to UCS-4.
+    
+    The result will be nul-terminated.
 
     Params:
       str = a UTF-16 encoded string
-      itemsRead = location to store number of
-            words read, or null. If null, then [glib.types.ConvertError.PartialInput] will
-            be returned in case str contains a trailing partial character. If
-            an error occurs then the index of the invalid input is stored here.
+      itemsRead = location to store number of `gunichar2` read,
+          or `NULL` to ignore. If `NULL`, then `errorGLib.ConvertError.PARTIAL_INPUT`
+          will be returned in case str contains a trailing partial character. If
+          an error occurs then the index of the invalid input is stored here. The
+          value stored here will never be negative.
     Returns: a pointer to a newly allocated UCS-4 string.
-          This value must be freed with [glib.global.gfree]. If an error occurs,
-          null will be returned and error set.
+        This value must be freed with `funcGLib.free`.
     Throws: [ErrorWrap]
 */
 dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
@@ -10693,33 +10543,33 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
 }
 
 /**
-    Convert a string from UTF-16 to UTF-8. The result will be
-    terminated with a 0 byte.
+    Convert a string from UTF-16 to UTF-8.
+    
+    The result will be terminated with a nul byte.
     
     Note that the input is expected to be already in native endianness,
     an initial byte-order-mark character is not handled specially.
-    [glib.global.convert] can be used to convert a byte buffer of UTF-16 data of
+    `funcGLib.convert` can be used to convert a byte buffer of UTF-16 data of
     ambiguous endianness.
     
     Further note that this function does not validate the result
-    string; it may e.g. include embedded NUL characters. The only
+    string; it may (for example) include embedded nul characters. The only
     validation done by this function is to ensure that the input can
-    be correctly interpreted as UTF-16, i.e. it doesn't contain
+    be correctly interpreted as UTF-16, i.e. it doesn’t contain
     unpaired surrogates or partial character sequences.
 
     Params:
       str = a UTF-16 encoded string
-      itemsRead = location to store number of
-            words read, or null. If null, then [glib.types.ConvertError.PartialInput] will
-            be returned in case str contains a trailing partial character. If
-            an error occurs then the index of the invalid input is stored here.
-            It’s guaranteed to be non-negative.
+      itemsRead = location to store number of `gunichar2` read,
+          or `NULL` to ignore. If `NULL`, then `errorGLib.ConvertError.PARTIAL_INPUT`
+          will be returned in case str contains a trailing partial character. If
+          an error occurs then the index of the invalid input is stored here. The
+          value stored here will never be negative.
       itemsWritten = location to store number
-            of bytes written, or null. The value stored here does not include the
-            trailing 0 byte. It’s guaranteed to be non-negative.
+          of bytes written, or `NULL` to ignore. The value stored here does not
+          include the trailing nul, and will never be negative.
     Returns: a pointer to a newly allocated UTF-8 string.
-          This value must be freed with [glib.global.gfree]. If an error occurs,
-          null will be returned and error set.
+        This value must be freed with `funcGLib.free`.
     Throws: [ErrorWrap]
 */
 string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
@@ -10771,7 +10621,7 @@ string utf8Casefold(string str) nothrow
 
 /**
     Compares two strings for ordering using the linguistically
-    correct rules for the [current locale][setlocale].
+    correct rules for the [current locale](running.html#locale).
     When sorting a large number of strings, it will be significantly
     faster to obtain collation keys with [glib.global.utf8CollateKey] and
     compare the keys with strcmp() when sorting instead of sorting
@@ -10805,12 +10655,17 @@ int utf8Collate(string str1, string str2) nothrow
     with strcmp() will always be the same as comparing the two
     original keys with [glib.global.utf8Collate].
     
-    Note that this function depends on the [current locale][setlocale].
+    Note that this function depends on the [current locale](running.html#locale).
+    
+    Note that the returned string is not guaranteed to be in any
+    encoding, especially UTF-8. The returned value is meant to be
+    used only for comparisons.
 
     Params:
       str = a UTF-8 encoded string.
-    Returns: a newly allocated string. This string should
-        be freed with [glib.global.gfree] when you are done with it.
+    Returns: a newly allocated string.
+        The contents of the string are only meant to be used when sorting.
+        This string should be freed with [glib.global.gfree] when you are done with it.
 */
 string utf8CollateKey(string str) nothrow
 {
@@ -10836,12 +10691,17 @@ string utf8CollateKey(string str) nothrow
     would like to treat numbers intelligently so that "file1" "file10" "file5"
     is sorted as "file1" "file5" "file10".
     
-    Note that this function depends on the [current locale][setlocale].
+    Note that this function depends on the [current locale](running.html#locale).
+    
+    Note that the returned string is not guaranteed to be in any
+    encoding, especially UTF-8. The returned value is meant to be
+    used only for comparisons.
 
     Params:
       str = a UTF-8 encoded string.
-    Returns: a newly allocated string. This string should
-        be freed with [glib.global.gfree] when you are done with it.
+    Returns: a newly allocated string.
+        The contents of the string are only meant to be used when sorting.
+        This string should be freed with [glib.global.gfree] when you are done with it.
 */
 string utf8CollateKeyForFilename(string str) nothrow
 {
@@ -10863,16 +10723,16 @@ string utf8CollateKeyForFilename(string str) nothrow
     is made to see if the character found is actually valid other than
     it starts with an appropriate byte.
     
-    If end is null, the return value will never be null: if the end of the
+    If end is `NULL`, the return value will never be `NULL`: if the end of the
     string is reached, a pointer to the terminating nul byte is returned. If
-    end is non-null, the return value will be null if the end of the string
+    end is non-`NULL`, the return value will be `NULL` if the end of the string
     is reached.
 
     Params:
       p = a pointer to a position within a UTF-8 encoded string
       end = a pointer to the byte following the end of the string,
-            or null to indicate that the string is nul-terminated
-    Returns: a pointer to the found character or null if end is
+            or `NULL` to indicate that the string is nul-terminated
+    Returns: a pointer to the found character or `NULL` if end is
          set and is reached
 */
 string utf8FindNextChar(string p, string end = null) nothrow
@@ -10887,7 +10747,7 @@ string utf8FindNextChar(string p, string end = null) nothrow
 
 /**
     Given a position `p` with a UTF-8 encoded string str, find the start
-    of the previous UTF-8 character starting before `p`. Returns null if no
+    of the previous UTF-8 character starting before `p`. Returns `NULL` if no
     UTF-8 characters are present in str before `p`.
     
     `p` does not have to be at the beginning of a UTF-8 character. No check
@@ -10897,7 +10757,7 @@ string utf8FindNextChar(string p, string end = null) nothrow
     Params:
       str = pointer to the beginning of a UTF-8 encoded string
       p = pointer to some position within str
-    Returns: a pointer to the found character or null.
+    Returns: a pointer to the found character
 */
 string utf8FindPrevChar(string str, string p) nothrow
 {
@@ -10914,7 +10774,7 @@ string utf8FindPrevChar(string str, string p) nothrow
     
     If `p` does not point to a valid UTF-8 encoded character, results
     are undefined. If you are not sure that the bytes are complete
-    valid Unicode characters, you should use [glib.global.utf8GetCharValidated]
+    valid Unicode characters, you should use `funcGLib.utf8_get_char_validated`
     instead.
 
     Params:
@@ -10931,21 +10791,22 @@ dchar utf8GetChar(string p) nothrow
 
 /**
     Convert a sequence of bytes encoded as UTF-8 to a Unicode character.
+    
     This function checks for incomplete characters, for invalid characters
     such as characters that are out of the range of Unicode, and for
     overlong encodings of valid characters.
     
-    Note that [glib.global.utf8GetCharValidated] returns (gunichar)-2 if
+    Note that `funcGLib.utf8_get_char_validated` returns `(gunichar)-2` if
     max_len is positive and any of the bytes in the first UTF-8 character
     sequence are nul.
 
     Params:
       p = a pointer to Unicode character encoded as UTF-8
     Returns: the resulting character. If `p` points to a partial
-          sequence at the end of a string that could begin a valid
-          character (or if max_len is zero), returns (gunichar)-2;
-          otherwise, if `p` does not point to a valid UTF-8 encoded
-          Unicode character, returns (gunichar)-1.
+        sequence at the end of a string that could begin a valid
+        character (or if max_len is zero), returns `(gunichar)-2`;
+        otherwise, if `p` does not point to a valid UTF-8 encoded
+        Unicode character, returns `(gunichar)-1`.
 */
 dchar utf8GetCharValidated(string p) nothrow
 {
@@ -11043,9 +10904,9 @@ string utf8Normalize(string str, glib.types.NormalizeMode mode) nothrow
     instead of forwards if offset is in the last fourth of the string,
     since moving forward is about 3 times faster than moving backward.
     
-    Note that this function doesn't abort when reaching the end of str.
+    Note that this function doesn’t abort when reaching the end of str.
     Therefore you should be sure that offset is within string boundaries
-    before calling that function. Call [glib.global.utf8Strlen] when unsure.
+    before calling that function. Call `funcGLib.utf8_strlen` when unsure.
     This limitation exists as this function is called frequently during
     text rendering and therefore has to be as fast as possible.
 
@@ -11090,7 +10951,8 @@ glong utf8PointerToOffset(string str, string pos) nothrow
     `p` does not have to be at the beginning of a UTF-8 character. No check
     is made to see if the character found is actually valid other than
     it starts with an appropriate byte. If `p` might be the first
-    character of the string, you must use [glib.global.utf8FindPrevChar] instead.
+    character of the string, you must use `funcGLib.utf8_find_prev_char`
+    instead.
 
     Params:
       p = a pointer to a position within a UTF-8 encoded string
@@ -11108,14 +10970,15 @@ string utf8PrevChar(string p) nothrow
 /**
     Finds the leftmost occurrence of the given Unicode character
     in a UTF-8 encoded string, while limiting the search to len bytes.
-    If len is -1, allow unbounded search.
+    
+    If len is `-1`, allow unbounded search.
 
     Params:
       p = a nul-terminated UTF-8 encoded string
       c = a Unicode character
-    Returns: null if the string does not contain the character,
-          otherwise, a pointer to the start of the leftmost occurrence
-          of the character in the string.
+    Returns: `NULL` if the string does not contain
+        the character, otherwise, a pointer to the start of the leftmost occurrence
+        of the character in the string.
 */
 string utf8Strchr(string p, dchar c) nothrow
 {
@@ -11156,16 +11019,16 @@ string utf8Strdown(string str) nothrow
 
 /**
     Computes the length of the string in characters, not including
-    the terminating nul character. If the max'th byte falls in the
+    the terminating nul character. If the max’th byte falls in the
     middle of a character, the last (partial) character is not counted.
 
     Params:
       p = pointer to the start of a UTF-8 encoded string
       max = the maximum number of bytes to examine. If max
-              is less than 0, then the string is assumed to be
-              nul-terminated. If max is 0, `p` will not be examined and
-              may be null. If max is greater than 0, up to max
-              bytes are examined
+          is less than 0, then the string is assumed to be
+          nul-terminated. If max is 0, `p` will not be examined and
+          may be `NULL`. If max is greater than 0, up to max
+          bytes are examined
     Returns: the length of the string in characters
 */
 glong utf8Strlen(string p, ptrdiff_t max) nothrow
@@ -11177,10 +11040,12 @@ glong utf8Strlen(string p, ptrdiff_t max) nothrow
 }
 
 /**
-    Like the standard C strncpy() function, but copies a given number
-    of characters instead of a given number of bytes. The src string
-    must be valid UTF-8 encoded text. (Use [glib.global.utf8Validate] on all
-    text before trying to use UTF-8 utility functions with it.)
+    Like the standard C [`strncpy()`](man:strncpy) function, but copies a given
+    number of characters instead of a given number of bytes.
+    
+    The src string must be valid UTF-8 encoded text. (Use
+    `funcGLib.utf8_validate` on all text before trying to use UTF-8 utility
+    functions with it.)
     
     Note you must ensure dest is at least 4 * `n` + 1 to fit the
     largest possible UTF-8 characters
@@ -11204,14 +11069,15 @@ string utf8Strncpy(string dest, string src, size_t n) nothrow
 /**
     Find the rightmost occurrence of the given Unicode character
     in a UTF-8 encoded string, while limiting the search to len bytes.
-    If len is -1, allow unbounded search.
+    
+    If len is `-1`, allow unbounded search.
 
     Params:
       p = a nul-terminated UTF-8 encoded string
       c = a Unicode character
-    Returns: null if the string does not contain the character,
-          otherwise, a pointer to the start of the rightmost occurrence
-          of the character in the string.
+    Returns: `NULL` if the string does not contain
+        the character, otherwise, a pointer to the start of the rightmost
+        occurrence of the character in the string.
 */
 string utf8Strrchr(string p, dchar c) nothrow
 {
@@ -11227,9 +11093,10 @@ string utf8Strrchr(string p, dchar c) nothrow
 }
 
 /**
-    Reverses a UTF-8 string. str must be valid UTF-8 encoded text.
-    (Use [glib.global.utf8Validate] on all text before trying to use UTF-8
-    utility functions with it.)
+    Reverses a UTF-8 string.
+    
+    str must be valid UTF-8 encoded text. (Use `funcGLib.utf8_validate` on all
+    text before trying to use UTF-8 utility functions with it.)
     
     This function is intended for programmatic uses of reversed strings.
     It pays no attention to decomposed characters, combining marks, byte
@@ -11237,8 +11104,8 @@ string utf8Strrchr(string p, dchar c) nothrow
     characters which might need special handling when reversing a string
     for display purposes.
     
-    Note that unlike [glib.global.strreverse], this function returns
-    newly-allocated memory, which should be freed with [glib.global.gfree] when
+    Note that unlike `funcGLib.strreverse`, this function returns
+    newly-allocated memory, which should be freed with `funcGLib.free` when
     no longer needed.
 
     Params:
@@ -11296,7 +11163,7 @@ string utf8Strup(string str) nothrow
       endPos = another character offset within str,
           or `-1` to indicate the end of the string
     Returns: a newly allocated copy of the requested
-          substring. Free with [glib.global.gfree] when no longer needed.
+        substring. Free with `funcGLib.free` when no longer needed.
 */
 string utf8Substring(string str, glong startPos, glong endPos) nothrow
 {
@@ -11308,23 +11175,22 @@ string utf8Substring(string str, glong startPos, glong endPos) nothrow
 }
 
 /**
-    Convert a string from UTF-8 to a 32-bit fixed width
-    representation as UCS-4. A trailing 0 character will be added to the
-    string after the converted text.
+    Convert a string from UTF-8 to a 32-bit fixed width representation as UCS-4.
+    
+    A trailing nul character (U+0000) will be added to the string after the
+    converted text.
 
     Params:
       str = a UTF-8 encoded string
-      len = the maximum length of str to use, in bytes. If len < 0,
-            then the string is nul-terminated.
-      itemsRead = location to store number of
-           bytes read, or null.
-            If null, then [glib.types.ConvertError.PartialInput] will be
-            returned in case str contains a trailing partial
-            character. If an error occurs then the index of the
-            invalid input is stored here.
+      len = the maximum length of str to use, in bytes. If len is negative,
+          then the string is nul-terminated.
+      itemsRead = location to store number of bytes read, or
+          `NULL` to ignore. If `NULL`, then `errorGLib.ConvertError.PARTIAL_INPUT`
+          will be returned in case str contains a trailing partial character. If
+          an error occurs then the index of the invalid input is stored here. The
+          value stored here will never be negative.
     Returns: a pointer to a newly allocated UCS-4 string.
-          This value must be freed with [glib.global.gfree]. If an error occurs,
-          null will be returned and error set.
+        This value must be freed with `funcGLib.free`.
     Throws: [ErrorWrap]
 */
 dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
@@ -11349,14 +11215,15 @@ dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
 /**
     Convert a string from UTF-8 to a 32-bit fixed width
     representation as UCS-4, assuming valid UTF-8 input.
-    This function is roughly twice as fast as [glib.global.utf8ToUcs4]
-    but does no error checking on the input. A trailing 0 character
+    
+    This function is roughly twice as fast as `funcGLib.utf8_to_ucs4`
+    but does no error checking on the input. A trailing nul character (U+0000)
     will be added to the string after the converted text.
 
     Params:
       str = a UTF-8 encoded string
     Returns: a pointer to a newly allocated UCS-4 string.
-          This value must be freed with [glib.global.gfree].
+        This value must be freed with `funcGLib.free`.
 */
 dchar[] utf8ToUcs4Fast(string str) nothrow
 {
@@ -11380,20 +11247,21 @@ dchar[] utf8ToUcs4Fast(string str) nothrow
 }
 
 /**
-    Convert a string from UTF-8 to UTF-16. A 0 character will be
-    added to the result after the converted text.
+    Convert a string from UTF-8 to UTF-16.
+    
+    A nul character (U+0000) will be added to the result after the converted text.
 
     Params:
       str = a UTF-8 encoded string
       len = the maximum length (number of bytes) of str to use.
-            If len < 0, then the string is nul-terminated.
-      itemsRead = location to store number of
-            bytes read, or null. If null, then [glib.types.ConvertError.PartialInput] will
-            be returned in case str contains a trailing partial character. If
-            an error occurs then the index of the invalid input is stored here.
+          If len is negative, then the string is nul-terminated.
+      itemsRead = location to store number of bytes read, or
+          `NULL` to ignore. If `NULL`, then `errorGLib.ConvertError.PARTIAL_INPUT`
+          will be returned in case str contains a trailing partial character. If
+          an error occurs then the index of the invalid input is stored here. The
+          value stored here will never be negative.
     Returns: a pointer to a newly allocated UTF-16 string.
-          This value must be freed with [glib.global.gfree]. If an error occurs,
-          null will be returned and error set.
+        This value must be freed with `funcGLib.free`.
     Throws: [ErrorWrap]
 */
 ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
@@ -11437,26 +11305,28 @@ string utf8TruncateMiddle(string string_, size_t truncateLength) nothrow
 }
 
 /**
-    Validates UTF-8 encoded text. str is the text to validate;
-    if str is nul-terminated, then max_len can be -1, otherwise
-    max_len should be the number of bytes to validate.
-    If end is non-null, then the end of the valid range
-    will be stored there (i.e. the start of the first invalid
-    character if some bytes were invalid, or the end of the text
-    being validated otherwise).
+    Validates UTF-8 encoded text.
     
-    Note that [glib.global.utf8Validate] returns false if max_len is
-    positive and any of the max_len bytes are nul.
+    str is the text to validate; if str is nul-terminated, then max_len can be
+    `-1`, otherwise max_len should be the number of bytes to validate.
     
-    Returns true if all of str was valid. Many GLib and GTK
+    If end is non-`NULL`, then the end of the valid range will be stored there.
+    This is the first byte of the first invalid character if some bytes were
+    invalid, or the end of the text being validated otherwise — either the
+    trailing nul byte, or the first byte beyond max_len (if it’s positive).
+    
+    Note that `[glib.global.utf8Validate]` returns `FALSE` if max_len is  positive and
+    any of the max_len bytes are nul.
+    
+    Returns `TRUE` if all of str was valid. Many GLib and GTK
     routines require valid UTF-8 as input; so data read from a file
-    or the network should be checked with [glib.global.utf8Validate] before
+    or the network should be checked with `[glib.global.utf8Validate]` before
     doing anything else with it.
 
     Params:
       str = a pointer to character data
       end = return location for end of valid data
-    Returns: true if the text was valid UTF-8
+    Returns: `TRUE` if the text was valid UTF-8
 */
 bool utf8Validate(ubyte[] str, out string end) nothrow
 {
@@ -11475,13 +11345,13 @@ bool utf8Validate(ubyte[] str, out string end) nothrow
 /**
     Validates UTF-8 encoded text.
     
-    As with [glib.global.utf8Validate], but max_len must be set, and hence this function
-    will always return false if any of the bytes of str are nul.
+    As with `funcGLib.utf8_validate`, but max_len must be set, and hence this
+    function will always return `FALSE` if any of the bytes of str are nul.
 
     Params:
       str = a pointer to character data
       end = return location for end of valid data
-    Returns: true if the text was valid UTF-8
+    Returns: `TRUE` if the text was valid UTF-8
 */
 bool utf8ValidateLen(ubyte[] str, out string end) nothrow
 {

@@ -10107,6 +10107,9 @@ struct GtkEntryClass
   extern(C) void function(GtkEntry* entry) insertEmoji;
 
   /** */
+  extern(C) void function(GtkEntry* entry) toggleDirection;
+
+  /** */
   extern(C) void function() GtkReserved1;
 
   /** */
@@ -10120,9 +10123,6 @@ struct GtkEntryClass
 
   /** */
   extern(C) void function() GtkReserved5;
-
-  /** */
-  extern(C) void function() GtkReserved6;
 }
 
 /**

@@ -82,6 +82,29 @@ class FdAllocator : gst.allocator.Allocator
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
+
+  /**
+      Return a [gst.memory.Memory] that wraps a generic file descriptor.
+  
+      Params:
+        allocator = allocator to be used for this memory
+        fd = file descriptor
+        maxsize = the total size of the memory represented by fd
+        offset = the offset of valid data in the memory
+        size = the size of valid data in the memory
+        flags = extra #GstFdMemoryFlags
+      Returns: a GstMemory based on allocator.
+        When the buffer will be released the allocator will close the fd unless
+        the [gstallocators.types.FdMemoryFlags.DontClose] flag is specified.
+        The memory is only mmapped on [gst.buffer.Buffer.map] request.
+  */
+  static gst.memory.Memory allocFull(gst.allocator.Allocator allocator, int fd, size_t maxsize, size_t offset, size_t size, gstallocators.types.FdMemoryFlags flags) nothrow
+  {
+    GstMemory* _cretval;
+    _cretval = gst_fd_allocator_alloc_full(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, maxsize, offset, size, flags);
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
 }
 
 /// Fluent builder implementation template for [gstallocators.fd_allocator.FdAllocator]

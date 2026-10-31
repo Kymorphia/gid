@@ -18,7 +18,7 @@ public import gobject.gid_builder;
 public import gobject.object;
 
 /**
-    A [gdk.toplevel.Toplevel] is a freestanding toplevel surface.
+    A freestanding toplevel surface.
     
     The [gdk.toplevel.Toplevel] interface provides useful APIs for interacting with
     the windowing system, such as controlling maximization and size of the
@@ -26,6 +26,15 @@ public import gobject.object;
 */
 template ToplevelT()
 {
+
+  /**
+      Get `capabilities` property.
+      Returns: The capabilities that are available for this toplevel.
+  */
+  @property gdk.types.ToplevelCapabilities capabilities() nothrow
+  {
+    return getCapabilities();
+  }
 
   /**
       Get `decorated` property.
@@ -82,6 +91,43 @@ template ToplevelT()
   @property void fullscreenMode(gdk.types.FullscreenMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.FullscreenMode)("fullscreen-mode", propval);
+  }
+
+  /**
+      Get `gravity` property.
+      Returns: The gravity to use when resizing a surface programmatically.
+        
+        Gravity describes which point of the surface we want to keep
+        fixed (meaning that the surface will grow in the opposite direction).
+        For example, a gravity of [gdk.types.Gravity.NorthEast] means that we
+        want to fix top right corner of the surface.
+        
+        This property is just a hint that may affect the result when negotiating
+        toplevel sizes with the windowing system. It does not affect interactive
+        resizes started with [gdk.toplevel.Toplevel.beginResize].
+  */
+  @property gdk.types.Gravity gravity() nothrow
+  {
+    return getGravity();
+  }
+
+  /**
+      Set `gravity` property.
+      Params:
+        propval = The gravity to use when resizing a surface programmatically.
+          
+          Gravity describes which point of the surface we want to keep
+          fixed (meaning that the surface will grow in the opposite direction).
+          For example, a gravity of [gdk.types.Gravity.NorthEast] means that we
+          want to fix top right corner of the surface.
+          
+          This property is just a hint that may affect the result when negotiating
+          toplevel sizes with the windowing system. It does not affect interactive
+          resizes started with [gdk.toplevel.Toplevel.beginResize].
+  */
+  @property void gravity(gdk.types.Gravity propval) nothrow
+  {
+    setGravity(propval);
   }
 
   /**
@@ -256,6 +302,31 @@ template ToplevelT()
   }
 
   /**
+      The capabilities that are available for this toplevel.
+      Returns: the capabilities of the [gdk.toplevel.Toplevel].
+  */
+  override gdk.types.ToplevelCapabilities getCapabilities() nothrow
+  {
+    GdkToplevelCapabilities _cretval;
+    _cretval = gdk_toplevel_get_capabilities(cast(GdkToplevel*)this._cPtr);
+    gdk.types.ToplevelCapabilities _retval = cast(gdk.types.ToplevelCapabilities)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns the gravity that is used when changing the toplevel
+      size programmatically.
+      Returns: the gravity
+  */
+  override gdk.types.Gravity getGravity() nothrow
+  {
+    GdkGravity _cretval;
+    _cretval = gdk_toplevel_get_gravity(cast(GdkToplevel*)this._cPtr);
+    gdk.types.Gravity _retval = cast(gdk.types.Gravity)_cretval;
+    return _retval;
+  }
+
+  /**
       Gets the bitwise or of the currently active surface state flags,
       from the [gdk.types.ToplevelState] enumeration.
       Returns: surface state bitfield
@@ -388,6 +459,18 @@ template ToplevelT()
   }
 
   /**
+      Sets the gravity that is used when changing the toplevel
+      size programmatically.
+  
+      Params:
+        gravity = the new gravity
+  */
+  override void setGravity(gdk.types.Gravity gravity) nothrow
+  {
+    gdk_toplevel_set_gravity(cast(GdkToplevel*)this._cPtr, gravity);
+  }
+
+  /**
       Sets a list of icons for the surface.
       
       One of these will be used to represent the surface in iconic form.
@@ -508,7 +591,13 @@ template ToplevelT()
     return _retval;
   }
 
-  /** */
+  /**
+      Performs a title bar gesture.
+  
+      Params:
+        gesture = a [gdk.types.TitlebarGesture]
+      Returns: whether the gesture was performed
+  */
   override bool titlebarGesture(gdk.types.TitlebarGesture gesture) nothrow
   {
     bool _retval;
@@ -614,6 +703,26 @@ template ToplevelGidBuilderT()
   T fullscreenMode(gdk.types.FullscreenMode propval) nothrow
   {
     return setProperty("fullscreen-mode", propval);
+  }
+
+  /**
+      Set `gravity` property.
+      Params:
+        propval = The gravity to use when resizing a surface programmatically.
+          
+          Gravity describes which point of the surface we want to keep
+          fixed (meaning that the surface will grow in the opposite direction).
+          For example, a gravity of [gdk.types.Gravity.NorthEast] means that we
+          want to fix top right corner of the surface.
+          
+          This property is just a hint that may affect the result when negotiating
+          toplevel sizes with the windowing system. It does not affect interactive
+          resizes started with [gdk.toplevel.Toplevel.beginResize].
+      Returns: Builder instance for fluent chaining
+  */
+  T gravity(gdk.types.Gravity propval) nothrow
+  {
+    return setProperty("gravity", propval);
   }
 
   /**

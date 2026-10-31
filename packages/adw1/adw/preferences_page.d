@@ -2,12 +2,14 @@
 module adw.preferences_page;
 
 public import gid.basictypes;
+import adw.banner;
 import adw.c.functions;
 import adw.c.types;
 import adw.preferences_group;
 import adw.types;
 import gid.gid;
 import gobject.gid_builder;
+import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -73,6 +75,25 @@ class PreferencesPage : gtk.widget.Widget
   }
 
   /**
+      Get `banner` property.
+      Returns: A [adw.banner.Banner] displayed at the top of the page.
+  */
+  @property adw.banner.Banner banner() nothrow
+  {
+    return getBanner();
+  }
+
+  /**
+      Set `banner` property.
+      Params:
+        propval = A [adw.banner.Banner] displayed at the top of the page.
+  */
+  @property void banner(adw.banner.Banner propval) nothrow
+  {
+    setBanner(propval);
+  }
+
+  /**
       Get `description` property.
       Returns: The description to be displayed at the top of the page.
   */
@@ -89,6 +110,25 @@ class PreferencesPage : gtk.widget.Widget
   @property void description(string propval) nothrow
   {
     setDescription(propval);
+  }
+
+  /**
+      Get `descriptionCentered` property.
+      Returns: Whether the description should be centered.
+  */
+  @property bool descriptionCentered() nothrow
+  {
+    return getDescriptionCentered();
+  }
+
+  /**
+      Set `descriptionCentered` property.
+      Params:
+        propval = Whether the description should be centered.
+  */
+  @property void descriptionCentered(bool propval) nothrow
+  {
+    setDescriptionCentered(propval);
   }
 
   /**
@@ -190,6 +230,18 @@ class PreferencesPage : gtk.widget.Widget
   }
 
   /**
+      Gets the banner displayed at the top of the page.
+      Returns: the banner for self
+  */
+  adw.banner.Banner getBanner() nothrow
+  {
+    AdwBanner* _cretval;
+    _cretval = adw_preferences_page_get_banner(cast(AdwPreferencesPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.banner.Banner)(cast(AdwBanner*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
       Gets the description of self.
       Returns: the description of self.
   */
@@ -198,6 +250,34 @@ class PreferencesPage : gtk.widget.Widget
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_description(cast(AdwPreferencesPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the description is centered.
+      Returns: whether the description is centered.
+  */
+  bool getDescriptionCentered() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_preferences_page_get_description_centered(cast(AdwPreferencesPage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the group at index.
+      
+      Can return `NULL` if index is larger than the number of groups in the page.
+  
+      Params:
+        index = a group index
+      Returns: the group at index
+  */
+  adw.preferences_group.PreferencesGroup getGroup(uint index) nothrow
+  {
+    AdwPreferencesGroup* _cretval;
+    _cretval = adw_preferences_page_get_group(cast(AdwPreferencesPage*)this._cPtr, index);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.preferences_group.PreferencesGroup)(cast(AdwPreferencesGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -249,6 +329,21 @@ class PreferencesPage : gtk.widget.Widget
   }
 
   /**
+      Inserts a preferences group to self at index.
+      
+      If index is negative or larger than the number of groups, appends the group,
+      same as [adw.preferences_page.PreferencesPage.add].
+  
+      Params:
+        group = the group to add
+        index = the index to insert group a
+  */
+  void insert(adw.preferences_group.PreferencesGroup group, int index) nothrow
+  {
+    adw_preferences_page_insert(cast(AdwPreferencesPage*)this._cPtr, group ? cast(AdwPreferencesGroup*)group._cPtr(No.Dup) : null, index);
+  }
+
+  /**
       Removes a group from self.
   
       Params:
@@ -268,6 +363,17 @@ class PreferencesPage : gtk.widget.Widget
   }
 
   /**
+      Sets the banner displayed at the top of the page.
+  
+      Params:
+        banner = the banner to display at the top of the page
+  */
+  void setBanner(adw.banner.Banner banner = null) nothrow
+  {
+    adw_preferences_page_set_banner(cast(AdwPreferencesPage*)this._cPtr, banner ? cast(AdwBanner*)banner._cPtr(No.Dup) : null);
+  }
+
+  /**
       Sets the description of self.
       
       The description is displayed at the top of the page.
@@ -279,6 +385,17 @@ class PreferencesPage : gtk.widget.Widget
   {
     const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
     adw_preferences_page_set_description(cast(AdwPreferencesPage*)this._cPtr, _description);
+  }
+
+  /**
+      Sets whether the description should be centered.
+  
+      Params:
+        centered = If the description should be centered
+  */
+  void setDescriptionCentered(bool centered) nothrow
+  {
+    adw_preferences_page_set_description_centered(cast(AdwPreferencesPage*)this._cPtr, centered);
   }
 
   /**
@@ -335,6 +452,17 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /**
+      Set `banner` property.
+      Params:
+        propval = A [adw.banner.Banner] displayed at the top of the page.
+      Returns: Builder instance for fluent chaining
+  */
+  T banner(adw.banner.Banner propval) nothrow
+  {
+    return setProperty("banner", propval);
+  }
+
+  /**
       Set `description` property.
       Params:
         propval = The description to be displayed at the top of the page.
@@ -343,6 +471,17 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   T description(string propval) nothrow
   {
     return setProperty("description", propval);
+  }
+
+  /**
+      Set `descriptionCentered` property.
+      Params:
+        propval = Whether the description should be centered.
+      Returns: Builder instance for fluent chaining
+  */
+  T descriptionCentered(bool propval) nothrow
+  {
+    return setProperty("description-centered", propval);
   }
 
   /**

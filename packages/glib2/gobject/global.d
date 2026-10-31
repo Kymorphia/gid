@@ -200,29 +200,6 @@ gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enu
 }
 
 /**
-    Registers a new static enumeration type with the name name.
-    
-    It is normally more convenient to let [glib-mkenums][glib-mkenums],
-    generate a my_enum_get_type() function from a usual C enumeration
-    definition  than to write one yourself using [gobject.global.enumRegisterStatic].
-
-    Params:
-      name = A nul-terminated string used as the name of the new type.
-      constStaticValues = An array of #GEnumValue structs for the possible
-         enumeration values. The array is terminated by a struct with all
-         members being 0. GObject keeps a reference to the data, so it cannot
-         be stack-allocated.
-    Returns: The new type identifier.
-*/
-gobject.types.GType enumRegisterStatic(string name, gobject.enum_value.EnumValue constStaticValues) nothrow
-{
-  gobject.types.GType _retval;
-  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-  _retval = g_enum_register_static(_name, cast(const(GEnumValue)*)&constStaticValues);
-  return _retval;
-}
-
-/**
     Pretty-prints value in the form of the enum’s name.
     
     This is intended to be used for debugging purposes. The format of the output
@@ -297,28 +274,6 @@ gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClas
   gobject.flags_value.FlagsValue _retval;
   if (_cretval)
     _retval = *cast(gobject.flags_value.FlagsValue*)_cretval;
-  return _retval;
-}
-
-/**
-    Registers a new static flags type with the name name.
-    
-    It is normally more convenient to let [glib-mkenums][glib-mkenums]
-    generate a my_flags_get_type() function from a usual C enumeration
-    definition than to write one yourself using [gobject.global.flagsRegisterStatic].
-
-    Params:
-      name = A nul-terminated string used as the name of the new type.
-      constStaticValues = An array of #GFlagsValue structs for the possible
-         flags values. The array is terminated by a struct with all members being 0.
-         GObject keeps a reference to the data, so it cannot be stack-allocated.
-    Returns: The new type identifier.
-*/
-gobject.types.GType flagsRegisterStatic(string name, gobject.flags_value.FlagsValue constStaticValues) nothrow
-{
-  gobject.types.GType _retval;
-  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-  _retval = g_flags_register_static(_name, cast(const(GFlagsValue)*)&constStaticValues);
   return _retval;
 }
 
@@ -1137,8 +1092,13 @@ gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.typ
     If closure is a floating reference (see [gobject.closure.Closure.sink]), this function
     takes ownership of closure.
     
-    This function cannot fail. If the given signal doesn’t exist, a critical
-    warning is emitted.
+    This function cannot fail. If the given signal name doesn’t exist,
+    a critical warning is emitted. No validation is performed on the
+    ‘detail’ string when specified in detailed_signal, other than a
+    non-empty check.
+    
+    Refer to the [signals documentation](signals.html) for more
+    details.
 
     Params:
       instance = the instance to connect to.
@@ -1162,8 +1122,13 @@ gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedS
     If closure is a floating reference (see [gobject.closure.Closure.sink]), this function
     takes ownership of closure.
     
-    This function cannot fail. If the given signal doesn’t exist, a critical
-    warning is emitted.
+    This function cannot fail. If the given signal name doesn’t exist,
+    a critical warning is emitted. No validation is performed on the
+    ‘detail’ string when specified in detailed_signal, other than a
+    non-empty check.
+    
+    Refer to the [signals documentation](signals.html) for more
+    details.
 
     Params:
       instance = the instance to connect to.
@@ -1233,12 +1198,13 @@ void signalHandlerBlock(gobject.object.ObjectWrap instance, gulong handlerId) no
       detail = Signal detail the handler has to be connected to.
       closure = The closure the handler will invoke.
       func = The C closure callback of the handler (useless for non-C closures).
+      data = The closure data of the handler's closure.
     Returns: A valid non-0 signal handler id for a successful match.
 */
-gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
+gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null, void* data = null) nothrow
 {
   gulong _retval;
-  _retval = g_signal_handler_find(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handler_find(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, data);
   return _retval;
 }
 
@@ -1304,12 +1270,13 @@ void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId) 
       detail = Signal detail the handlers have to be connected to.
       closure = The closure the handlers will invoke.
       func = The C closure callback of the handlers (useless for non-C closures).
+      data = The closure data of the handlers' closures.
     Returns: The number of handlers that matched.
 */
-uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
+uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null, void* data = null) nothrow
 {
   uint _retval;
-  _retval = g_signal_handlers_block_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handlers_block_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, data);
   return _retval;
 }
 
@@ -1337,12 +1304,13 @@ uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.type
       detail = Signal detail the handlers have to be connected to.
       closure = The closure the handlers will invoke.
       func = The C closure callback of the handlers (useless for non-C closures).
+      data = The closure data of the handlers' closures.
     Returns: The number of handlers that matched.
 */
-uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
+uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null, void* data = null) nothrow
 {
   uint _retval;
-  _retval = g_signal_handlers_disconnect_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handlers_disconnect_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, data);
   return _retval;
 }
 
@@ -1371,12 +1339,13 @@ uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject
       detail = Signal detail the handlers have to be connected to.
       closure = The closure the handlers will invoke.
       func = The C closure callback of the handlers (useless for non-C closures).
+      data = The closure data of the handlers' closures.
     Returns: The number of handlers that matched.
 */
-uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
+uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null, void* data = null) nothrow
 {
   uint _retval;
-  _retval = g_signal_handlers_unblock_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handlers_unblock_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, data);
   return _retval;
 }
 
@@ -1417,9 +1386,8 @@ bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, 
     Validate a signal name. This can be useful for dynamically-generated signals
     which need to be validated at run-time before actually trying to create them.
     
-    See [canonical parameter names][canonical-parameter-names] for details of
-    the rules for valid names. The rules for signal names are the same as those
-    for property names.
+    See `funcGObject.signal_new` for details of the rules for valid names.
+    The rules for signal names are the same as those for property names.
 
     Params:
       name = the canonical name of the signal
@@ -1979,11 +1947,12 @@ bool typeIsA(gobject.types.GType type, gobject.types.GType isAType) nothrow
 }
 
 /**
-    Get the unique name that is assigned to a type ID.  Note that this
-    function (like all other GType API) cannot cope with invalid type
-    IDs. `G_TYPE_INVALID` may be passed to this function, as may be any
-    other validly registered type ID, but randomized type IDs should
-    not be passed in and will most likely lead to a crash.
+    Get the unique name that is assigned to a type ID.
+    
+    Note that this function (like all other GType API) cannot cope with
+    invalid type IDs. `G_TYPE_INVALID` may be passed to this function, as
+    may be any other validly registered type ID, but randomized type IDs
+    should not be passed in and will most likely lead to a crash.
 
     Params:
       type = type to return name for

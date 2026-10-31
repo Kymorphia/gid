@@ -7,6 +7,7 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
+import glib.bytes;
 import glib.error;
 import gobject.gid_builder;
 
@@ -129,6 +130,18 @@ interface Converter
       Throws: [ErrorWrap]
   */
   gio.types.ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, gio.types.ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten);
+
+  /**
+      Applies converter to the data in bytes.
+  
+      Params:
+        bytes = the data to convert
+      Returns: A newly-allocated
+          [glib.bytes.Bytes] with the converted data, or `NULL` if an error
+          occurred
+      Throws: [ErrorWrap]
+  */
+  glib.bytes.Bytes convertBytes(glib.bytes.Bytes bytes);
 
   /**
       Resets all internal state in the converter, making it behave

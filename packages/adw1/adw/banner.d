@@ -36,7 +36,13 @@ import gtk.widget;
     
     Banners can optionally have a button with text on it, set through
     [adw.banner.Banner.buttonLabel]. The button can be used with a [gio.action.Action],
-    or with the [adw.banner.Banner.buttonClicked] signal.
+    or with the [adw.banner.Banner.buttonClicked] signal. The button can have
+    different styles, a gray style and a suggested style.
+    
+    <picture>
+      <source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="banner-suggested.png" alt="banner with suggested button style">
+    </picture>
     
     ## CSS nodes
     
@@ -106,6 +112,43 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   @property void buttonLabel(string propval) nothrow
   {
     setButtonLabel(propval);
+  }
+
+  /**
+      Get `buttonStyle` property.
+      Returns: The style class to use for the banner button.
+        
+        When set to [adw.types.BannerButtonStyle.Default], the button is grey.
+        When set to [adw.types.BannerButtonStyle.Suggested], the button uses the
+        [`.suggested-action`](style-classes.html#suggested-action) appearance.
+        
+        <picture>
+          <source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="banner-suggested.png" alt="banner with suggested button style">
+        </picture>
+  */
+  @property adw.types.BannerButtonStyle buttonStyle() nothrow
+  {
+    return getButtonStyle();
+  }
+
+  /**
+      Set `buttonStyle` property.
+      Params:
+        propval = The style class to use for the banner button.
+          
+          When set to [adw.types.BannerButtonStyle.Default], the button is grey.
+          When set to [adw.types.BannerButtonStyle.Suggested], the button uses the
+          [`.suggested-action`](style-classes.html#suggested-action) appearance.
+          
+          <picture>
+            <source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)">
+            <img src="banner-suggested.png" alt="banner with suggested button style">
+          </picture>
+  */
+  @property void buttonStyle(adw.types.BannerButtonStyle propval) nothrow
+  {
+    setButtonStyle(propval);
   }
 
   /**
@@ -203,6 +246,18 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+      Gets the style class in use for the banner button.
+      Returns: the current button style
+  */
+  adw.types.BannerButtonStyle getButtonStyle() nothrow
+  {
+    AdwBannerButtonStyle _cretval;
+    _cretval = adw_banner_get_button_style(cast(AdwBanner*)this._cPtr);
+    adw.types.BannerButtonStyle _retval = cast(adw.types.BannerButtonStyle)_cretval;
+    return _retval;
+  }
+
+  /**
       Gets if a banner is revealed
       Returns: Whether a banner is revealed
   */
@@ -251,6 +306,26 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
     adw_banner_set_button_label(cast(AdwBanner*)this._cPtr, _label);
+  }
+
+  /**
+      Sets the style class to use for the banner button.
+      
+      When set to [adw.types.BannerButtonStyle.Default], the button is grey.
+      When set to [adw.types.BannerButtonStyle.Suggested], the button uses the
+      [`.suggested-action`](style-classes.html#suggested-action) appearance.
+      
+      <picture>
+        <source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)">
+        <img src="banner-suggested.png" alt="banner with suggested button style">
+      </picture>
+  
+      Params:
+        style = a button style
+  */
+  void setButtonStyle(adw.types.BannerButtonStyle style) nothrow
+  {
+    adw_banner_set_button_style(cast(AdwBanner*)this._cPtr, style);
   }
 
   /**
@@ -358,6 +433,26 @@ class BannerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
   T buttonLabel(string propval) nothrow
   {
     return setProperty("button-label", propval);
+  }
+
+  /**
+      Set `buttonStyle` property.
+      Params:
+        propval = The style class to use for the banner button.
+          
+          When set to [adw.types.BannerButtonStyle.Default], the button is grey.
+          When set to [adw.types.BannerButtonStyle.Suggested], the button uses the
+          [`.suggested-action`](style-classes.html#suggested-action) appearance.
+          
+          <picture>
+            <source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)">
+            <img src="banner-suggested.png" alt="banner with suggested button style">
+          </picture>
+      Returns: Builder instance for fluent chaining
+  */
+  T buttonStyle(adw.types.BannerButtonStyle propval) nothrow
+  {
+    return setProperty("button-style", propval);
   }
 
   /**

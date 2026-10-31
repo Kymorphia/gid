@@ -335,6 +335,16 @@ enum GstAudioChannelPosition
       Surround right (between rear right and side right)
   */
   SurroundRight = 27,
+
+  /**
+      Top surround left (between rear left and side left).
+  */
+  TopSurroundLeft = 28,
+
+  /**
+      Top surround right (between rear right and side right).
+  */
+  TopSurroundRight = 29,
 }
 
 /**
@@ -569,6 +579,26 @@ enum GstAudioFormat
   F64be = 31,
 
   /**
+      20 bits in 32 bits, signed, little endian.
+  */
+  S2032le = 32,
+
+  /**
+      20 bits in 32 bits, signed, big endian.
+  */
+  S2032be = 33,
+
+  /**
+      20 bits in 32 bits, unsigned, little endian.
+  */
+  U2032le = 34,
+
+  /**
+      20 bits in 32 bits, unsigned, big endian.
+  */
+  U2032be = 35,
+
+  /**
       16 bits in 16 bits, signed, native endianness
   */
   S16 = 4,
@@ -617,6 +647,16 @@ enum GstAudioFormat
       20 bits in 24 bits, unsigned, native endianness
   */
   U20 = 22,
+
+  /**
+      20 bits in 32 bits, signed, native endian.
+  */
+  S2032 = 32,
+
+  /**
+      20 bits in 32 bits, unsigned, native endian.
+  */
+  U2032 = 34,
 
   /**
       18 bits in 24 bits, signed, native endianness
@@ -2548,7 +2588,10 @@ struct GstAudioRingBuffer
   GDestroyNotify cbDataNotify;
 
   /** */
-  void*[3] GstReserved;
+  GstAudioRingBufferPrivate* priv;
+
+  /** */
+  void*[2] GstReserved;
 }
 
 /**
@@ -2628,6 +2671,9 @@ struct GstAudioRingBufferClass
   /** */
   void*[4] GstReserved;
 }
+
+/** */
+struct GstAudioRingBufferPrivate;
 
 /**
     The structure containing the format specification of the ringbuffer.

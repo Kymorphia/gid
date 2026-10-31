@@ -17,8 +17,7 @@ import gsk.render_node;
 import gsk.types;
 
 /**
-    [gsk.renderer.Renderer] is a class that renders a scene graph defined via a
-    tree of [gsk.render_node.RenderNode] instances.
+    Renders a scene graph defined via a tree of [gsk.render_node.RenderNode] instances.
     
     Typically you will use a [gsk.renderer.Renderer] instance to repeatedly call
     [gsk.renderer.Renderer.render] to update the contents of its associated
@@ -94,8 +93,8 @@ class Renderer : gobject.object.ObjectWrap
       The renderer will be realized before it is returned.
   
       Params:
-        surface = a [gdk.surface.Surface]
-      Returns: a [gsk.renderer.Renderer]
+        surface = a surface
+      Returns: the realized renderer
   */
   static gsk.renderer.Renderer newForSurface(gdk.surface.Surface surface) nothrow
   {
@@ -106,10 +105,10 @@ class Renderer : gobject.object.ObjectWrap
   }
 
   /**
-      Retrieves the [gdk.surface.Surface] set using gsk_enderer_realize().
+      Retrieves the surface that the renderer is associated with.
       
-      If the renderer has not been realized yet, null will be returned.
-      Returns: a [gdk.surface.Surface]
+      If the renderer has not been realized yet, `NULL` will be returned.
+      Returns: the surface
   */
   gdk.surface.Surface getSurface() nothrow
   {
@@ -121,7 +120,7 @@ class Renderer : gobject.object.ObjectWrap
 
   /**
       Checks whether the renderer is realized or not.
-      Returns: true if the [gsk.renderer.Renderer] was realized, and false otherwise
+      Returns: true if the renderer was realized, false otherwise
   */
   bool isRealized() nothrow
   {
@@ -131,20 +130,19 @@ class Renderer : gobject.object.ObjectWrap
   }
 
   /**
-      Creates the resources needed by the renderer to render the scene
-      graph.
+      Creates the resources needed by the renderer.
       
       Since GTK 4.6, the surface may be `NULL`, which allows using
-      renderers without having to create a surface.
-      Since GTK 4.14, it is recommended to use [gsk.renderer.Renderer.realizeForDisplay]
-      instead.
+      renderers without having to create a surface. Since GTK 4.14,
+      it is recommended to use [gsk.renderer.Renderer.realizeForDisplay]
+      for this case.
       
-      Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
-      destroying the renderer.
+      Note that it is mandatory to call [gsk.renderer.Renderer.unrealize]
+      before destroying the renderer.
   
       Params:
-        surface = the [gdk.surface.Surface] renderer will be used on
-      Returns: Whether the renderer was successfully realized
+        surface = the surface that renderer will be used on
+      Returns: whether the renderer was successfully realized
       Throws: [ErrorWrap]
   */
   bool realize(gdk.surface.Surface surface = null)
@@ -158,15 +156,14 @@ class Renderer : gobject.object.ObjectWrap
   }
 
   /**
-      Creates the resources needed by the renderer to render the scene
-      graph.
+      Creates the resources needed by the renderer.
       
-      Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
-      destroying the renderer.
+      Note that it is mandatory to call [gsk.renderer.Renderer.unrealize]
+      before destroying the renderer.
   
       Params:
-        display = the [gdk.display.Display] renderer will be used on
-      Returns: Whether the renderer was successfully realized
+        display = the display that the renderer will be used on
+      Returns: whether the renderer was successfully realized
       Throws: [ErrorWrap]
   */
   bool realizeForDisplay(gdk.display.Display display)
@@ -181,7 +178,7 @@ class Renderer : gobject.object.ObjectWrap
 
   /**
       Renders the scene graph, described by a tree of [gsk.render_node.RenderNode] instances
-      to the renderer's surface,  ensuring that the given region gets redrawn.
+      to the renderer's surface, ensuring that the given region gets redrawn.
       
       If the renderer has no associated surface, this function does nothing.
       
@@ -194,9 +191,9 @@ class Renderer : gobject.object.ObjectWrap
       the rendering is in progress.
   
       Params:
-        root = a [gsk.render_node.RenderNode]
-        region = the [cairo.region.Region] that must be redrawn or null
-            for the whole window
+        root = the render node to render
+        region = the [cairo.region.Region] that must be redrawn or `NULL`
+            for the whole surface
   */
   void render(gsk.render_node.RenderNode root, cairo.region.Region region = null) nothrow
   {
@@ -204,8 +201,8 @@ class Renderer : gobject.object.ObjectWrap
   }
 
   /**
-      Renders the scene graph, described by a tree of [gsk.render_node.RenderNode] instances,
-      to a [gdk.texture.Texture].
+      Renders a scene graph, described by a tree of [gsk.render_node.RenderNode] instances,
+      to a texture.
       
       The renderer will acquire a reference on the [gsk.render_node.RenderNode] tree while
       the rendering is in progress.
@@ -214,9 +211,9 @@ class Renderer : gobject.object.ObjectWrap
       transform node and pass that node instead.
   
       Params:
-        root = a [gsk.render_node.RenderNode]
-        viewport = the section to draw or null to use root's bounds
-      Returns: a [gdk.texture.Texture] with the rendered contents of root.
+        root = the render node to render
+        viewport = the section to draw or `NULL` to use root's bounds
+      Returns: a texture with the rendered contents of root
   */
   gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport = null) nothrow
   {

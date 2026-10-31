@@ -6,6 +6,7 @@ import adw.c.functions;
 import adw.c.types;
 import adw.types;
 import gid.gid;
+import gio.list_model;
 import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
@@ -14,6 +15,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.types;
 import gtk.widget;
 
 /**
@@ -30,6 +32,11 @@ import gtk.widget;
     To summarize the role of the preferences it gathers, a group can have both a
     title and a description. The title will be used by [adw.preferences_dialog.PreferencesDialog]
     to let the user look for a preference.
+    
+    The [adw.preferences_group.PreferencesGroup.separateRows] property can be used to
+    separate the rows within the group, same as when using the
+    [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+    instead of `.boxed-list`.
     
     ## AdwPreferencesGroup as GtkBuildable
     
@@ -135,6 +142,33 @@ class PreferencesGroup : gtk.widget.Widget
   }
 
   /**
+      Get `separateRows` property.
+      Returns: Whether to separate rows.
+        
+        Equivalent to using the
+        [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+        on a [gtk.list_box.ListBox] instead of `.boxed-list`.
+  */
+  @property bool separateRows() nothrow
+  {
+    return getSeparateRows();
+  }
+
+  /**
+      Set `separateRows` property.
+      Params:
+        propval = Whether to separate rows.
+          
+          Equivalent to using the
+          [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+          on a [gtk.list_box.ListBox] instead of `.boxed-list`.
+  */
+  @property void separateRows(bool propval) nothrow
+  {
+    setSeparateRows(propval);
+  }
+
+  /**
       Get `title` property.
       Returns: The title for this group of preferences.
   */
@@ -176,6 +210,40 @@ class PreferencesGroup : gtk.widget.Widget
   }
 
   /**
+      Binds model to self.
+      
+      See [gtk.list_box.ListBox.bindModel].
+  
+      Params:
+        model = a list model to bind
+        createRowFunc = a function creating a row for each item, or `NULL` in case model is `NULL`
+  */
+  void bindModel(gio.list_model.ListModel model = null, gtk.types.ListBoxCreateWidgetFunc createRowFunc = null) nothrow
+  {
+    extern(C) GtkWidget* _createRowFuncCallback(GObject* item, void* userData) nothrow
+    {
+      gtk.widget.Widget _dretval;
+      auto _dlg = cast(gtk.types.ListBoxCreateWidgetFunc*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ListBoxCreateWidgetFunc");
+      }
+      auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(Yes.Dup) : null;
+
+      return _retval;
+    }
+    auto _createRowFuncCB = createRowFunc ? &_createRowFuncCallback : null;
+    auto _createRowFunc = createRowFunc ? freezeDelegate(cast(void*)&createRowFunc) : null;
+    GDestroyNotify _createRowFuncDestroyCB = createRowFunc ? &thawDelegate : null;
+    adw_preferences_group_bind_model(cast(AdwPreferencesGroup*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, _createRowFuncCB, _createRowFunc, _createRowFuncDestroyCB);
+  }
+
+  /**
       Gets the description of self.
       Returns: the description of self
   */
@@ -196,6 +264,34 @@ class PreferencesGroup : gtk.widget.Widget
     GtkWidget* _cretval;
     _cretval = adw_preferences_group_get_header_suffix(cast(AdwPreferencesGroup*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the row at index.
+      
+      Can return `NULL` if index is larger than the number of rows in the group.
+  
+      Params:
+        index = a row index
+      Returns: the row at index
+  */
+  gtk.widget.Widget getRow(uint index) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_preferences_group_get_row(cast(AdwPreferencesGroup*)this._cPtr, index);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets whether self's rows are separated.
+      Returns: whether rows are separated
+  */
+  bool getSeparateRows() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_preferences_group_get_separate_rows(cast(AdwPreferencesGroup*)this._cPtr);
     return _retval;
   }
 
@@ -250,6 +346,21 @@ class PreferencesGroup : gtk.widget.Widget
   }
 
   /**
+      Sets whether self's rows are separated.
+      
+      Equivalent to using the
+      [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+      on a [gtk.list_box.ListBox] instead of `.boxed-list`.
+  
+      Params:
+        separateRows = whether to separate rows
+  */
+  void setSeparateRows(bool separateRows) nothrow
+  {
+    adw_preferences_group_set_separate_rows(cast(AdwPreferencesGroup*)this._cPtr, separateRows);
+  }
+
+  /**
       Sets the title for self.
   
       Params:
@@ -292,6 +403,21 @@ class PreferencesGroupGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   T headerSuffix(gtk.widget.Widget propval) nothrow
   {
     return setProperty("header-suffix", propval);
+  }
+
+  /**
+      Set `separateRows` property.
+      Params:
+        propval = Whether to separate rows.
+          
+          Equivalent to using the
+          [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+          on a [gtk.list_box.ListBox] instead of `.boxed-list`.
+      Returns: Builder instance for fluent chaining
+  */
+  T separateRows(bool propval) nothrow
+  {
+    return setProperty("separate-rows", propval);
   }
 
   /**

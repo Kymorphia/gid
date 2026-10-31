@@ -129,15 +129,20 @@ enum MAJOR_VERSION = 1;
 /**
     Json micro version component (e.g. 3 if `JSON_VERSION` is "1.2.3")
 */
-enum MICRO_VERSION = 0;
+enum MICRO_VERSION = 8;
 
 /**
     Json minor version component (e.g. 2 if `JSON_VERSION` is "1.2.3")
 */
-enum MINOR_VERSION = 8;
+enum MINOR_VERSION = 10;
+
+/**
+    The maximum recursion depth for a JSON tree.
+*/
+enum PARSER_MAX_RECURSION_DEPTH = 1024;
 
 /**
     The version of JSON-GLib, encoded as a string, useful for printing and
     concatenation.
 */
-enum VERSION_S = "1.8.0";
+enum VERSION_S = "1.10.8";

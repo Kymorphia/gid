@@ -16,8 +16,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    A [gtk.builder.Builder] reads XML descriptions of a user interface and
-    instantiates the described objects.
+    Reads XML descriptions of a user interface and instantiates the described objects.
     
     To create a [gtk.builder.Builder] from a user interface description, call
     [gtk.builder.Builder.newFromFile], [gtk.builder.Builder.newFromResource]
@@ -66,7 +65,7 @@ import gtk.types;
     For example:
     
     ```xml
-    <?xml version="1.0" encoding="UTF-8">
+    <?xml version="1.0" encoding="UTF-8"?>
     <interface domain="your-app">
       ...
     </interface>
@@ -81,7 +80,7 @@ import gtk.types;
     error out if the version requirements are not met. For example:
     
     ```xml
-    <?xml version="1.0" encoding="UTF-8">
+    <?xml version="1.0" encoding="UTF-8"?>
     <interface domain="your-app">
       <requires lib="gtk" version="4.0" />
     </interface>
@@ -134,9 +133,15 @@ import gtk.types;
     
     ```xml
     <object class="GtkButton">
-      <property name="label" translatable="yes" context="button">Hello, world</property>
+      <property name="label"
+                translatable="yes"
+                context="button"
+                comments="A classic">Hello, world</property>
     </object>
     ```
+    
+    The xgettext tool that is part of gettext can extract these strings,
+    but note that it only looks for translatable="yes".
     
     [gtk.builder.Builder] can parse textual representations for the most common
     property types:
@@ -148,15 +153,20 @@ import gtk.types;
     - booleans (strings like “TRUE”, “t”, “yes”, “y”, “1” are interpreted
       as true values, strings like “FALSE”, “f”, “no”, “n”, “0” are interpreted
       as false values)
+    - string lists (separated by newlines)
     - enumeration types (can be specified by their full C identifier their short
       name used when registering the enumeration type, or their integer value)
-    - flag types (can be specified by their C identifier, short name, integer
-      value, and optionally combined with “|” for bitwise OR, e.g.
-      “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
-    - colors (in a format understood by [gdk.rgba.RGBA.parse])
-    - [glib.variant.Variant] (can be specified in the format understood by
-       [glib.variant.Variant.parse])
-    - pixbufs (can be specified as a filename of an image file to load)
+    - flag types (can be specified by their C identifier or short name,
+      optionally combined with “|” for bitwise OR, or a single integer value
+      e.g., “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase” or 520).
+    - colors (in the format understood by [gdk.rgba.RGBA.parse])
+    - transforms (in the format understood by [gsk.transform.Transform.parse])
+    - Pango attribute lists (in the format understood by [pango.attr_list.AttrList.toString_])
+    - Pango tab arrays (in the format understood by [pango.tab_array.TabArray.toString_])
+    - Pango font descriptions (in the format understood by [pango.font_description.FontDescription.fromString])
+    - [glib.variant.Variant] (in the format understood by [glib.variant.Variant.parse])
+    - textures (can be specified as an object id, a resource path or a filename of an image file to load relative to the Builder file or the CWD if [gtk.builder.Builder.addFromString] was used)
+    - GFile (like textures, can be specified as an object id, a URI or a filename of a file to load relative to the Builder file or the CWD if [gtk.builder.Builder.addFromString] was used)
     
     Objects can be referred to by their name and by default refer to
     objects declared in the local XML fragment and objects exposed via
@@ -345,6 +355,14 @@ import gtk.types;
     Objects can implement the [gtk.buildable.Buildable] interface to add custom
     elements and attributes to the XML. Typically, any extension will be
     documented in each type that implements the interface.
+    
+    ## Menus
+    
+    In addition to objects with properties that are created with `<object>` and
+    `<property>` elements, [gtk.builder.Builder] also allows to parse XML menu definitions
+    as used by [gio.menu.Menu] when exporting menu models over D-Bus, and as
+    described in the [gtk.popover_menu.PopoverMenu] documentation. Menus can be defined
+    as toplevel elements, or as property values for properties of type [gio.menu_model.MenuModel].
     
     ## Templates
     
@@ -772,7 +790,7 @@ class Builder : gobject.object.ObjectWrap
     _cretval = gtk_builder_create_closure(cast(GtkBuilder*)this._cPtr, _functionName, flags, object ? cast(GObject*)object._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -11,6 +11,7 @@ import gio.settings_schema;
 import gio.types;
 import glib.types;
 import glib.variant;
+import gobject.closure;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
@@ -213,6 +214,31 @@ import gobject.object;
     `glib-compile-schemas` expects schema files to have the extension
     `.gschema.override`.
     
+    ## Delay-apply mode
+    
+    By default, values set on a [gio.settings.Settings] instance immediately start
+    to be written to the backend (although these writes may not complete by the
+    time that [gio.settings.Settings.set]) returns; see [gio.settings.Settings.sync]).
+    
+    In order to allow groups of settings to be changed simultaneously and
+    atomically, GSettings also supports a ‘delay-apply’ mode. In this mode,
+    updated values are kept locally in the [gio.settings.Settings] instance until
+    they are explicitly applied by calling [gio.settings.Settings.apply].
+    
+    For example, this could be useful for a preferences dialog where the
+    preferences all need to be applied simultaneously when the user clicks ‘Save’.
+    
+    Switching a [gio.settings.Settings] instance to ‘delay-apply’ mode is a one-time
+    irreversible operation: from that point onwards, *all* changes made to that
+    [gio.settings.Settings] have to be explicitly applied by calling
+    [gio.settings.Settings.apply]. The ‘delay-apply’ mode is also propagated to any
+    child settings objects subsequently created using
+    [gio.settings.Settings.getChild].
+    
+    At any point, the set of unapplied changes can be queried using
+    [gio.settings.Settings.hasUnapplied], and discarded by calling
+    [gio.settings.Settings.revert].
+    
     ## Binding
     
     A very convenient feature of GSettings lets you bind [gobject.object.ObjectWrap]
@@ -254,6 +280,70 @@ import gobject.object;
     
     ## Build system integration
     
+    ### Meson
+    
+    GSettings is natively supported by Meson’s [GNOME module](https://mesonbuild.com/Gnome-module.html).
+    
+    You can install the schemas as any other data file:
+    
+    ```
+    install_data(
+      'org.foo.MyApp.gschema.xml',
+      install_dir: get_option('datadir') / 'glib-2.0/schemas',
+    )
+    ```
+    
+    You can use `gnome.post_install()` function to compile the schemas on
+    installation:
+    
+    ```
+    gnome = import('gnome')
+    gnome.post_install(
+      glib_compile_schemas: true,
+    )
+    ```
+    
+    If an enumerated type defined in a C header file is to be used in a GSettings
+    schema, it can either be defined manually using an `<enum>` element in the
+    schema XML, or it can be extracted automatically from the C header. This
+    approach is preferred, as it ensures the two representations are always
+    synchronised. To do so, you will need to use the `gnome.mkenums()` function
+    with the following templates:
+    
+    ```
+    schemas_enums = gnome.mkenums('org.foo.MyApp.enums.xml',
+      comments: '<!-- @comment@ -->',
+      fhead: '<schemalist>',
+      vhead: '  <@type@ id="org.foo.MyApp.@EnumName@">',
+      vprod: '    <value nick="@valuenick@" value="@valuenum@"/>',
+      vtail: '  </@type@>',
+      ftail: '</schemalist>',
+      sources: enum_sources,
+      install_header: true,
+      install_dir: get_option('datadir') / 'glib-2.0/schemas',
+    )
+    ```
+    
+    It is recommended to validate your schemas as part of the test suite for
+    your application:
+    
+    ```
+    test('validate-schema',
+      find_program('glib-compile-schemas'),
+      args: ['--strict', '--dry-run', meson.current_source_dir()],
+    )
+    ```
+    
+    If your application allows running uninstalled, you should also use the
+    `gnome.compile_schemas()` function to compile the schemas in the current
+    build directory:
+    
+    ```
+    gnome.compile_schemas()
+    ```
+    
+    ### Autotools
+    
     GSettings comes with autotools integration to simplify compiling and
     installing schemas. To add GSettings support to an application, add the
     following to your `configure.ac`:
@@ -269,25 +359,6 @@ import gobject.object;
     
     @GSETTINGS_RULES@
     ```
-    
-    No changes are needed to the build system to mark a schema XML file for
-    translation. Assuming it sets the `gettext-domain` attribute, a schema may
-    be marked for translation by adding it to `POTFILES.in`, assuming gettext
-    0.19 is in use (the preferred method for translation):
-    ```
-    data/org.foo.MyApp.gschema.xml
-    ```
-    
-    Alternatively, if intltool 0.50.1 is in use:
-    ```
-    [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
-    ```
-    
-    GSettings will use gettext to look up translations for the `<summary>` and
-    `<description>` elements, and also any `<default>` elements which have a
-    `l10n` attribute set. Translations must not be included in the `.gschema.xml`
-    file by the build system, for example by using intltool XML rules with a
-    `.gschema.xml.in` template.
     
     If an enumerated type defined in a C header file is to be used in a GSettings
     schema, it can either be defined manually using an `<enum>` element in the
@@ -305,6 +376,28 @@ import gobject.object;
     automatically included in the schema compilation, install and uninstall
     rules. It should not be committed to version control or included in
     `EXTRA_DIST`.
+    
+    ## Localization
+    
+    No changes are needed to the build system to mark a schema XML file for
+    translation. Assuming it sets the `gettext-domain` attribute, a schema may
+    be marked for translation by adding it to `POTFILES.in`, assuming gettext
+    0.19 or newer is in use (the preferred method for translation):
+    ```
+    data/org.foo.MyApp.gschema.xml
+    ```
+    
+    Alternatively, if intltool 0.50.1 is in use:
+    ```
+    [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
+    ```
+    
+    GSettings will use gettext to look up translations for the `<summary>` and
+    `<description>` elements, and also any `<default>` elements which have a
+    `l10n` attribute set.
+    
+    Translations **must not** be included in the `.gschema.xml` file by the build
+    system, for example by using a rule to generate the XML file from a template.
 */
 class Settings : gobject.object.ObjectWrap
 {
@@ -354,8 +447,8 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get `delayApply` property.
-      Returns: Whether the #GSettings object is in 'delay-apply' mode. See
-        [gio.settings.Settings.delay] for details.
+      Returns: Whether the [gio.settings.Settings] object is in
+        [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
   */
   @property bool delayApply() nothrow
   {
@@ -364,8 +457,9 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get `hasUnapplied` property.
-      Returns: If this property is true, the #GSettings object has outstanding
-        changes that will be applied when [gio.settings.Settings.apply] is called.
+      Returns: Whether the [gio.settings.Settings] object has outstanding changes.
+        
+        These changes will be applied when [gio.settings.Settings.apply] is called.
   */
   @property bool hasUnapplied() nothrow
   {
@@ -384,17 +478,17 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `schema` property.
       Returns: The name of the schema that describes the types of keys
-        for this #GSettings object.
+        for this [gio.settings.Settings] object.
         
-        The type of this property is *not* #GSettingsSchema.
-        #GSettingsSchema has only existed since version 2.32 and
+        The type of this property is *not* [gio.settings_schema.SettingsSchema].
+        [gio.settings_schema.SettingsSchema] has only existed since version 2.32 and
         unfortunately this name was used in previous versions to refer to
         the schema ID rather than the schema itself.  Take care to use the
-        'settings-schema' property if you wish to pass in a
-        #GSettingsSchema.
+        [gio.settings.Settings.settingsSchema] property if you wish to pass in a
+        [gio.settings_schema.SettingsSchema].
   
-      Deprecated: Use the 'schema-id' property instead.  In a future
-        version, this property may instead refer to a #GSettingsSchema.
+      Deprecated: Use the [gio.settings.Settings.schemaId] property instead.
+          In a future version, this property may instead refer to a [gio.settings_schema.SettingsSchema].
   */
   @property string schema() nothrow
   {
@@ -404,7 +498,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Get `schemaId` property.
       Returns: The name of the schema that describes the types of keys
-        for this #GSettings object.
+        for this [gio.settings.Settings] object.
   */
   @property string schemaId() nothrow
   {
@@ -413,12 +507,13 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get `settingsSchema` property.
-      Returns: The #GSettingsSchema describing the types of keys for this
-        #GSettings object.
+      Returns: The [gio.settings_schema.SettingsSchema] describing the types of keys for this
+        [gio.settings.Settings] object.
         
-        Ideally, this property would be called 'schema'.  #GSettingsSchema
+        Ideally, this property would be called [gio.settings.Settings.schema].
+        [gio.settings_schema.SettingsSchema]
         has only existed since version 2.32, however, and before then the
-        'schema' property was used to refer to the ID of the schema rather
+        [gio.settings.Settings.schema] property was used to refer to the ID of the schema rather
         than the schema itself.  Take care.
   */
   @property gio.settings_schema.SettingsSchema settingsSchema() nothrow
@@ -427,7 +522,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #GSettings object with the schema specified by
+      Creates a new [gio.settings.Settings] object with the schema specified by
       schema_id.
       
       It is an error for the schema to not exist: schemas are an
@@ -436,14 +531,14 @@ class Settings : gobject.object.ObjectWrap
       optional runtime dependency), [gio.settings_schema_source.SettingsSchemaSource.lookup]
       can be used to test for their existence before loading them.
       
-      Signals on the newly created #GSettings object will be dispatched
-      via the thread-default #GMainContext in effect at the time of the
-      call to [gio.settings.Settings.new_].  The new #GSettings will hold a reference
+      Signals on the newly created [gio.settings.Settings] object will be dispatched
+      via the thread-default [glib.main_context.MainContext] in effect at the time of the
+      call to [gio.settings.Settings.new_].  The new [gio.settings.Settings] will hold a reference
       on the context.  See [glib.main_context.MainContext.pushThreadDefault].
   
       Params:
-        schemaId = the id of the schema
-      Returns: a new #GSettings object
+        schemaId = the ID of the schema
+      Returns: a new [gio.settings.Settings] object
   */
   this(string schemaId) nothrow
   {
@@ -454,7 +549,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #GSettings object with a given schema, backend and
+      Creates a new [gio.settings.Settings] object with a given schema, backend and
       path.
       
       It should be extremely rare that you ever want to use this function.
@@ -462,27 +557,27 @@ class Settings : gobject.object.ObjectWrap
       that want to provide access to schemas loaded from custom locations,
       etc).
       
-      At the most basic level, a #GSettings object is a pure composition of
-      4 things: a #GSettingsSchema, a #GSettingsBackend, a path within that
-      backend, and a #GMainContext to which signals are dispatched.
+      At the most basic level, a [gio.settings.Settings] object is a pure composition of
+      four things: a [gio.settings_schema.SettingsSchema], a [gio.settings_backend.SettingsBackend], a path within that
+      backend, and a [glib.main_context.MainContext] to which signals are dispatched.
       
       This constructor therefore gives you full control over constructing
-      #GSettings instances.  The first 3 parameters are given directly as
+      [gio.settings.Settings] instances.  The first 3 parameters are given directly as
       schema, backend and path, and the main context is taken from the
       thread-default (as per [gio.settings.Settings.new_]).
       
-      If backend is null then the default backend is used.
+      If backend is `NULL` then the default backend is used.
       
-      If path is null then the path from the schema is used.  It is an
-      error if path is null and the schema has no path of its own or if
-      path is non-null and not equal to the path that the schema does
+      If path is `NULL` then the path from the schema is used.  It is an
+      error if path is `NULL` and the schema has no path of its own or if
+      path is non-`NULL` and not equal to the path that the schema does
       have.
   
       Params:
-        schema = a #GSettingsSchema
-        backend = a #GSettingsBackend
+        schema = the schema describing the settings
+        backend = the settings backend to use
         path = the path to use
-      Returns: a new #GSettings object
+      Returns: a new [gio.settings.Settings] object
   */
   static gio.settings.Settings newFull(gio.settings_schema.SettingsSchema schema, gio.settings_backend.SettingsBackend backend = null, string path = null) nothrow
   {
@@ -494,19 +589,19 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #GSettings object with the schema specified by
-      schema_id and a given #GSettingsBackend.
+      Creates a new [gio.settings.Settings] object with the schema specified by
+      schema_id and a given [gio.settings_backend.SettingsBackend].
       
-      Creating a #GSettings object with a different backend allows accessing
+      Creating a [gio.settings.Settings] object with a different backend allows accessing
       settings from a database other than the usual one. For example, it may make
-      sense to pass a backend corresponding to the "defaults" settings database on
+      sense to pass a backend corresponding to the ‘defaults’ settings database on
       the system to get a settings object that modifies the system default
       settings instead of the settings for this user.
   
       Params:
-        schemaId = the id of the schema
-        backend = the #GSettingsBackend to use
-      Returns: a new #GSettings object
+        schemaId = the ID of the schema
+        backend = the settings backend to use
+      Returns: a new [gio.settings.Settings] object
   */
   static gio.settings.Settings newWithBackend(string schemaId, gio.settings_backend.SettingsBackend backend) nothrow
   {
@@ -518,17 +613,17 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #GSettings object with the schema specified by
-      schema_id and a given #GSettingsBackend and path.
+      Creates a new [gio.settings.Settings] object with the schema specified by
+      schema_id and a given [gio.settings_backend.SettingsBackend] and path.
       
       This is a mix of [gio.settings.Settings.newWithBackend] and
       [gio.settings.Settings.newWithPath].
   
       Params:
-        schemaId = the id of the schema
-        backend = the #GSettingsBackend to use
+        schemaId = the ID of the schema
+        backend = the settings backend to use
         path = the path to use
-      Returns: a new #GSettings object
+      Returns: a new [gio.settings.Settings] object
   */
   static gio.settings.Settings newWithBackendAndPath(string schemaId, gio.settings_backend.SettingsBackend backend, string path) nothrow
   {
@@ -541,24 +636,24 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #GSettings object with the relocatable schema specified
+      Creates a new [gio.settings.Settings] object with the relocatable schema specified
       by schema_id and a given path.
       
       You only need to do this if you want to directly create a settings
-      object with a schema that doesn't have a specified path of its own.
-      That's quite rare.
+      object with a schema that doesn’t have a specified path of its own.
+      That’s quite rare.
       
       It is a programmer error to call this function for a schema that
       has an explicitly specified path.
       
       It is a programmer error if path is not a valid path.  A valid path
-      begins and ends with '/' and does not contain two consecutive '/'
+      begins and ends with `/` and does not contain two consecutive `/`
       characters.
   
       Params:
-        schemaId = the id of the schema
+        schemaId = the ID of the schema
         path = the path to use
-      Returns: a new #GSettings object
+      Returns: a new [gio.settings.Settings] object
   */
   static gio.settings.Settings newWithPath(string schemaId, string path) nothrow
   {
@@ -628,12 +723,12 @@ class Settings : gobject.object.ObjectWrap
   /**
       Ensures that all pending operations are complete for the default backend.
       
-      Writes made to a #GSettings are handled asynchronously.  For this
+      Writes made to a [gio.settings.Settings] are handled asynchronously.  For this
       reason, it is very unlikely that the changes have it to disk by the
       time [gio.settings.Settings.set] returns.
       
       This call will block until all of the writes have made it to the
-      backend.  Since the mainloop is not running, no change notifications
+      backend.  Since the main loop is not running, no change notifications
       will be dispatched during this call (but some may be queued by the
       time the call is done).
   */
@@ -650,7 +745,7 @@ class Settings : gobject.object.ObjectWrap
       function.
   
       Params:
-        object = the object
+        object = the object with property to unbind
         property = the property whose binding is removed
   */
   static void unbind(gobject.object.ObjectWrap object, string property) nothrow
@@ -660,10 +755,11 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Applies any changes that have been made to the settings.  This
-      function does nothing unless settings is in 'delay-apply' mode;
-      see [gio.settings.Settings.delay].  In the normal case settings are always
-      applied immediately.
+      Applies any changes that have been made to the settings.
+      
+      This function does nothing unless settings is in
+      [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+      case settings are always applied immediately.
   */
   void apply() nothrow
   {
@@ -681,9 +777,9 @@ class Settings : gobject.object.ObjectWrap
       you need a custom mapping, or map between types that are not
       supported by the default mapping functions.
       
-      Unless the flags include [gio.types.SettingsBindFlags.NoSensitivity], this
+      Unless the flags include `flagsGio.SettingsBindFlags.NO_SENSITIVITY`, this
       function also establishes a binding between the writability of
-      key and the "sensitive" property of object (if object has
+      key and the `sensitive` property of object (if object has
       a boolean property by that name). See [gio.settings.Settings.bindWritable]
       for more details about writable bindings.
       
@@ -694,7 +790,7 @@ class Settings : gobject.object.ObjectWrap
   
       Params:
         key = the key to bind
-        object = a #GObject
+        object = the object with property to bind
         property = the name of the property to bind
         flags = flags for the binding
   */
@@ -706,9 +802,31 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
+      Version of [gio.settings.Settings.bindWithMapping] using closures instead of
+      callbacks for easier binding in other languages.
+  
+      Params:
+        key = the key to bind
+        object = the object with property to bind
+        property = the name of the property to bind
+        flags = flags for the binding
+        getMapping = a function that gets called to convert values
+            from settings to object, or `NULL` to use the default GIO mapping
+        setMapping = a function that gets called to convert values
+            from object to settings, or `NULL` to use the default GIO mapping
+  */
+  void bindWithMapping(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags, gobject.closure.Closure getMapping = null, gobject.closure.Closure setMapping = null) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
+    g_settings_bind_with_mapping_closures(cast(GSettings*)this._cPtr, _key, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, flags, getMapping ? cast(GClosure*)getMapping._cPtr(No.Dup) : null, setMapping ? cast(GClosure*)setMapping._cPtr(No.Dup) : null);
+  }
+
+  /**
       Create a binding between the writability of key in the
       settings object and the property property of object.
-      The property must be boolean; "sensitive" or "visible"
+      
+      The property must be boolean; `sensitive` or `visible`
       properties of widgets are the most likely candidates.
       
       Writable bindings are always uni-directional; changes of the
@@ -726,9 +844,9 @@ class Settings : gobject.object.ObjectWrap
   
       Params:
         key = the key to bind
-        object = a #GObject
+        object = the object with property to bind
         property = the name of a boolean property to bind
-        inverted = whether to 'invert' the value
+        inverted = whether to ‘invert’ the value
   */
   void bindWritable(string key, gobject.object.ObjectWrap object, string property, bool inverted) nothrow
   {
@@ -738,7 +856,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a #GAction corresponding to a given #GSettings key.
+      Creates a [gio.action.Action] corresponding to a given [gio.settings.Settings] key.
       
       The action has the same name as the key.
       
@@ -755,7 +873,7 @@ class Settings : gobject.object.ObjectWrap
   
       Params:
         key = the name of a key in settings
-      Returns: a new #GAction
+      Returns: a new [gio.action.Action]
   */
   gio.action.Action createAction(string key) nothrow
   {
@@ -767,7 +885,10 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Changes the #GSettings object into 'delay-apply' mode. In this
+      Changes the [gio.settings.Settings] object into
+      [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+      
+      In this
       mode, changes to settings are not immediately propagated to the
       backend, but kept locally until [gio.settings.Settings.apply] is called.
   */
@@ -781,8 +902,8 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.get] for booleans.
       
-      It is a programmer error to give a key that isn't specified as
-      having a boolean type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `b` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
@@ -799,17 +920,17 @@ class Settings : gobject.object.ObjectWrap
   /**
       Creates a child settings object which has a base path of
       `base-path/name`, where `base-path` is the base path of
-      settings.
+      settings and `name` is as specified by the caller.
       
       The schema for the child settings object must have been declared
       in the schema of settings using a `<child>` element.
       
-      The created child settings object will inherit the #GSettings:delay-apply
-      mode from settings.
+      The created child settings object will inherit the
+      [gio.settings.Settings.delayApply] mode from settings.
   
       Params:
         name = the name of the child schema
-      Returns: a 'child' settings object
+      Returns: a ‘child’ settings object
   */
   gio.settings.Settings getChild(string name) nothrow
   {
@@ -821,7 +942,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the "default value" of a key.
+      Gets the ‘default value’ of a key.
       
       This is the value that would be read if [gio.settings.Settings.reset] were to be
       called on the key.
@@ -834,13 +955,13 @@ class Settings : gobject.object.ObjectWrap
       [gio.settings.Settings.getValue] is not sufficient for determining if a value
       has been set because the user may have explicitly set the value to
       something that happens to be equal to the default.  The difference
-      here is that if the default changes in the future, the user's key
+      here is that if the default changes in the future, the user’s key
       will still be set.
       
       This function may be useful for adding an indication to a UI of what
       the default value was before the user set it.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings.
   
       Params:
@@ -861,8 +982,8 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.get] for doubles.
       
-      It is a programmer error to give a key that isn't specified as
-      having a 'double' type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `d` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
@@ -883,7 +1004,7 @@ class Settings : gobject.object.ObjectWrap
       In order to use this function the type of the value must be a string
       and it must be marked in the schema file as an enumerated type.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings or is not marked as an enumerated type.
       
       If the value stored in the configuration database is not a valid
@@ -909,7 +1030,7 @@ class Settings : gobject.object.ObjectWrap
       In order to use this function the type of the value must be an array
       of strings and it must be marked in the schema file as a flags type.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings or is not marked as a flags type.
       
       If the value stored in the configuration database is not a valid
@@ -929,9 +1050,12 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Returns whether the #GSettings object has any unapplied
-      changes.  This can only be the case if it is in 'delayed-apply' mode.
-      Returns: true if settings has unapplied changes
+      Returns whether the [gio.settings.Settings] object has any unapplied
+      changes.
+      
+      This can only be the case if it is in
+      [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+      Returns: true if settings has unapplied changes, false otherwise
   */
   bool getHasUnapplied() nothrow
   {
@@ -945,8 +1069,8 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.get] for 32-bit integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a int32 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `i` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
@@ -965,8 +1089,8 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.get] for 64-bit integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a int64 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `x` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
@@ -990,30 +1114,30 @@ class Settings : gobject.object.ObjectWrap
       indicates that the processing was unsuccessful (due to a parse error,
       for example) then the mapping is tried again with another value.
       
-      This allows a robust 'fall back to defaults' behaviour to be
+      This allows a robust ‘fall back to defaults’ behaviour to be
       implemented somewhat automatically.
       
-      The first value that is tried is the user's setting for the key.  If
+      The first value that is tried is the user’s setting for the key.  If
       the mapping function fails to map this value, other values may be
       tried in an unspecified order (system or site defaults, translated
       schema default values, untranslated schema default values, etc).
       
       If the mapping function fails for all possible values, one additional
-      attempt is made: the mapping function is called with a null value.
+      attempt is made: the mapping function is called with a `NULL` value.
       If the mapping function still indicates failure at this point then
       the application will be aborted.
       
       The result parameter for the mapping function is pointed to a
-      #gpointer which is initially set to null.  The same pointer is given
-      to each invocation of mapping.  The final value of that #gpointer is
-      what is returned by this function.  null is valid; it is returned
+      [xlib.types.void*] which is initially set to `NULL`.  The same pointer is given
+      to each invocation of mapping.  The final value of that [xlib.types.void*] is
+      what is returned by this function.  `NULL` is valid; it is returned
       just as any other value would be.
   
       Params:
         key = the key to get the value for
         mapping = the function to map the value in the
-                    settings database to the value used by the application
-      Returns: the result, which may be null
+            settings database to the value used by the application
+      Returns: the result, which may be `NULL`
   */
   void* getMapped(string key, gio.types.SettingsGetMapping mapping) nothrow
   {
@@ -1064,8 +1188,8 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.get] for strings.
       
-      It is a programmer error to give a key that isn't specified as
-      having a string type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `s` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
@@ -1083,14 +1207,14 @@ class Settings : gobject.object.ObjectWrap
   /**
       A convenience variant of [gio.settings.Settings.get] for string arrays.
       
-      It is a programmer error to give a key that isn't specified as
-      having an array of strings type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `as` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
       Returns: a
-        newly-allocated, null-terminated array of strings, the value that
-        is stored at key in settings.
+          newly-allocated, `NULL`-terminated array of strings, the value that
+          is stored at key in settings.
   */
   string[] getStrv(string key) nothrow
   {
@@ -1118,8 +1242,8 @@ class Settings : gobject.object.ObjectWrap
       A convenience variant of [gio.settings.Settings.get] for 32-bit unsigned
       integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a uint32 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `u` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
@@ -1139,8 +1263,8 @@ class Settings : gobject.object.ObjectWrap
       A convenience variant of [gio.settings.Settings.get] for 64-bit unsigned
       integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a uint64 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `t` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
         key = the key to get the value for
@@ -1155,28 +1279,28 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Checks the "user value" of a key, if there is one.
+      Checks the ‘user value’ of a key, if there is one.
       
       The user value of a key is the last value that was set by the user.
       
       After calling [gio.settings.Settings.reset] this function should always return
-      null (assuming something is not wrong with the system
+      `NULL` (assuming something is not wrong with the system
       configuration).
       
       It is possible that [gio.settings.Settings.getValue] will return a different
       value than this function.  This can happen in the case that the user
       set a value for a key that was subsequently locked down by the system
-      administrator -- this function will return the user's old value.
+      administrator — this function will return the user’s old value.
       
-      This function may be useful for adding a "reset" option to a UI or
+      This function may be useful for adding a ‘reset’ option to a UI or
       for providing indication that a particular value has been changed.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings.
   
       Params:
         key = the key to get the user value for
-      Returns: the user's value, if set
+      Returns: the user’s value, if set
   */
   glib.variant.Variant getUserValue(string key) nothrow
   {
@@ -1190,12 +1314,12 @@ class Settings : gobject.object.ObjectWrap
   /**
       Gets the value that is stored in settings for key.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings.
   
       Params:
         key = the key to get the value for
-      Returns: a new #GVariant
+      Returns: a new [glib.variant.Variant]
   */
   glib.variant.Variant getValue(string key) nothrow
   {
@@ -1207,11 +1331,11 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Finds out if a key can be written or not
+      Finds out if a key can be written.
   
       Params:
         name = the name of a key
-      Returns: true if the key name is writable
+      Returns: true if the key name is writable, false otherwise
   */
   bool isWritable(string name) nothrow
   {
@@ -1227,14 +1351,14 @@ class Settings : gobject.object.ObjectWrap
       The list is exactly the list of strings for which it is not an error
       to call [gio.settings.Settings.getChild].
       
-      There is little reason to call this function from "normal" code, since
+      There is little reason to call this function from ‘normal’ code, since
       you should already know what children are in your schema. This function
       may still be useful there for introspection reasons, however.
       
-      You should free the return value with [glib.global.strfreev] when you are done
+      You should free the return value with `funcGLib.strfreev` when you are done
       with it.
       Returns: a list of the children
-           on settings, in no defined order
+          on settings, in no defined order
   */
   string[] listChildren() nothrow
   {
@@ -1258,14 +1382,14 @@ class Settings : gobject.object.ObjectWrap
   /**
       Introspects the list of keys on settings.
       
-      You should probably not be calling this function from "normal" code
+      You should probably not be calling this function from ‘normal’ code
       (since you should already know what keys are in your schema).  This
       function is intended for introspection reasons.
       
-      You should free the return value with [glib.global.strfreev] when you are done
+      You should free the return value with `funcGLib.strfreev` when you are done
       with it.
       Returns: a list
-           of the keys on settings, in no defined order
+          of the keys on settings, in no defined order
   
       Deprecated: Use [gio.settings_schema.SettingsSchema.listKeys] instead.
   */
@@ -1295,7 +1419,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         key = the key to check
         value = the value to check
-      Returns: true if value is valid for key
+      Returns: true if value is valid for key, false otherwise
   
       Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.rangeCheck] instead.
   */
@@ -1324,10 +1448,11 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Reverts all non-applied changes to the settings.  This function
-      does nothing unless settings is in 'delay-apply' mode; see
-      [gio.settings.Settings.delay].  In the normal case settings are always applied
-      immediately.
+      Reverts all unapplied changes to the settings.
+      
+      This function does nothing unless settings is in
+      [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+      case settings are always applied immediately.
       
       Change notifications will be emitted for affected keys.
   */
@@ -1341,14 +1466,14 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.set] for booleans.
       
-      It is a programmer error to give a key that isn't specified as
-      having a boolean type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `b` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
+        key = the key to set the value for
         value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setBoolean(string key, bool value) nothrow
   {
@@ -1363,14 +1488,14 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.set] for doubles.
       
-      It is a programmer error to give a key that isn't specified as
-      having a 'double' type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `d` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
+        key = the key to set the value for
         value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setDouble(string key, double value) nothrow
   {
@@ -1384,18 +1509,18 @@ class Settings : gobject.object.ObjectWrap
       Looks up the enumerated type nick for value and writes it to key,
       within settings.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings or is not marked as an enumerated type, or for
       value not to be a valid value for the named type.
       
       After performing the write, accessing key directly with
-      [gio.settings.Settings.getString] will return the 'nick' associated with
+      [gio.settings.Settings.getString] will return the ‘nick’ associated with
       value.
   
       Params:
-        key = a key, within settings
+        key = the key to set the value for
         value = an enumerated value
-      Returns: true, if the set succeeds
+      Returns: true if the set succeeds, false otherwise
   */
   bool setEnum(string key, int value) nothrow
   {
@@ -1410,18 +1535,18 @@ class Settings : gobject.object.ObjectWrap
       them in an array of strings and writes the array to key, within
       settings.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings or is not marked as a flags type, or for value
       to contain any bits that are not value for the named type.
       
       After performing the write, accessing key directly with
-      [gio.settings.Settings.getStrv] will return an array of 'nicks'; one for each
+      [gio.settings.Settings.getStrv] will return an array of ‘nicks’; one for each
       bit in value.
   
       Params:
-        key = a key, within settings
+        key = the key to set the value for
         value = a flags value
-      Returns: true, if the set succeeds
+      Returns: true if the set succeeds, false otherwise
   */
   bool setFlags(string key, uint value) nothrow
   {
@@ -1436,14 +1561,14 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.set] for 32-bit integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a int32 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `i` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
+        key = the key to set the value for
         value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setInt(string key, int value) nothrow
   {
@@ -1458,14 +1583,14 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.set] for 64-bit integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a int64 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `x` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
+        key = the key to set the value for
         value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setInt64(string key, long value) nothrow
   {
@@ -1480,14 +1605,14 @@ class Settings : gobject.object.ObjectWrap
       
       A convenience variant of [gio.settings.Settings.set] for strings.
       
-      It is a programmer error to give a key that isn't specified as
-      having a string type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `s` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
+        key = the key to set the value for
         value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setString(string key, string value) nothrow
   {
@@ -1502,16 +1627,16 @@ class Settings : gobject.object.ObjectWrap
       Sets key in settings to value.
       
       A convenience variant of [gio.settings.Settings.set] for string arrays.  If
-      value is null, then key is set to be the empty array.
+      value is `NULL`, then key is set to be the empty array.
       
-      It is a programmer error to give a key that isn't specified as
-      having an array of strings type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having an `as` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
-        value = the value to set it to, or null
+        key = the key to set the value for
+        value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setStrv(string key, string[] value = null) nothrow
   {
@@ -1530,14 +1655,14 @@ class Settings : gobject.object.ObjectWrap
       A convenience variant of [gio.settings.Settings.set] for 32-bit unsigned
       integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a uint32 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `u` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
+        key = the key to set the value for
         value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setUint(string key, uint value) nothrow
   {
@@ -1553,14 +1678,14 @@ class Settings : gobject.object.ObjectWrap
       A convenience variant of [gio.settings.Settings.set] for 64-bit unsigned
       integers.
       
-      It is a programmer error to give a key that isn't specified as
-      having a uint64 type in the schema for settings.
+      It is a programmer error to give a key that isn’t specified as
+      having a `t` type in the schema for settings (see [glib.variant_type.VariantType]).
   
       Params:
-        key = the name of the key to set
+        key = the key to set the value for
         value = the value to set it to
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setUint64(string key, ulong value) nothrow
   {
@@ -1573,17 +1698,17 @@ class Settings : gobject.object.ObjectWrap
   /**
       Sets key in settings to value.
       
-      It is a programmer error to give a key that isn't contained in the
+      It is a programmer error to give a key that isn’t contained in the
       schema for settings or for value to have the incorrect type, per
       the schema.
       
       If value is floating then this function consumes the reference.
   
       Params:
-        key = the name of the key to set
-        value = a #GVariant of the correct type
+        key = the key to set the value for
+        value = a [glib.variant.Variant] of the correct type
       Returns: true if setting the key succeeded,
-            false if the key was not writable
+          false if the key was not writable
   */
   bool setValue(string key, glib.variant.Variant value) nothrow
   {
@@ -1596,19 +1721,20 @@ class Settings : gobject.object.ObjectWrap
   /**
       Connect to `ChangeEvent` signal.
   
-      The "change-event" signal is emitted once per change event that
-        affects this settings object.  You should connect to this signal
+      Emitted once per change event that affects this settings object.
+        
+        You should connect to this signal
         only if you are interested in viewing groups of changes before they
-        are split out into multiple emissions of the "changed" signal.
-        For most use cases it is more appropriate to use the "changed" signal.
+        are split out into multiple emissions of the [gio.settings.Settings.changed] signal.
+        For most use cases it is more appropriate to use the [gio.settings.Settings.changed] signal.
         
         In the event that the change event applies to one or more specified
-        keys, keys will be an array of #GQuark of length n_keys.  In the
-        event that the change event applies to the #GSettings object as a
+        keys, keys will be an array of [glib.types.uint]s of length n_keys.  In the
+        event that the change event applies to the [gio.settings.Settings] object as a
         whole (ie: potentially every key has been changed) then keys will
-        be null and n_keys will be 0.
+        be `NULL` and n_keys will be `0`.
         
-        The default handler for this signal invokes the "changed" signal
+        The default handler for this signal invokes the [gio.settings.Settings.changed] signal
         for each affected key.  If any other connected handler returns
         true then this default functionality will be suppressed.
   
@@ -1617,12 +1743,13 @@ class Settings : gobject.object.ObjectWrap
   
           `bool callback(glib.types.Quark[] keys, gio.settings.Settings settings)`
   
-          `keys` an array of #GQuarks for the changed keys, or null (optional)
+          `keys` array of the
+              keys which have changed (optional)
   
           `settings` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the
-                     event. FALSE to propagate the event further.
+              event, false to propagate the event further
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1671,13 +1798,14 @@ class Settings : gobject.object.ObjectWrap
   /**
       Connect to `Changed` signal.
   
-      The "changed" signal is emitted when a key has potentially changed.
+      Emitted when a key has potentially changed.
+        
         You should call one of the [gio.settings.Settings.get] calls to check the new
         value.
         
         This signal supports detailed connections.  You can connect to the
-        detailed signal "changed::x" in order to only receive callbacks
-        when key "x" changes.
+        detailed signal `changed::x` in order to only receive callbacks
+        when key `x` changes.
         
         Note that settings only emits this signal if you have read key at
         least once while a signal handler was already connected for key.
@@ -1731,20 +1859,21 @@ class Settings : gobject.object.ObjectWrap
   /**
       Connect to `WritableChangeEvent` signal.
   
-      The "writable-change-event" signal is emitted once per writability
-        change event that affects this settings object.  You should connect
+      Emitted once per writability change event that affects this settings object.
+        
+        You should connect
         to this signal if you are interested in viewing groups of changes
         before they are split out into multiple emissions of the
-        "writable-changed" signal.  For most use cases it is more
-        appropriate to use the "writable-changed" signal.
+        [gio.settings.Settings.writableChanged] signal.  For most use cases it is more
+        appropriate to use the [gio.settings.Settings.writableChanged] signal.
         
         In the event that the writability change applies only to a single
-        key, key will be set to the #GQuark for that key.  In the event
+        key, key will be set to the [glib.types.uint] for that key.  In the event
         that the writability change affects the entire settings object,
-        key will be 0.
+        key will be `0`.
         
-        The default handler for this signal invokes the "writable-changed"
-        and "changed" signals for each affected key.  This is done because
+        The default handler for this signal invokes the [gio.settings.Settings.writableChanged]
+        and [gio.settings.Settings.changed] signals for each affected key.  This is done because
         changes in writability might also imply changes in value (if for
         example, a new mandatory setting is introduced).  If any other
         connected handler returns true then this default functionality
@@ -1755,12 +1884,12 @@ class Settings : gobject.object.ObjectWrap
   
           `bool callback(uint key, gio.settings.Settings settings)`
   
-          `key` the quark of the key, or 0 (optional)
+          `key` the quark of the key, or `0` (optional)
   
           `settings` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the
-                     event. FALSE to propagate the event further.
+              event, false to propagate the event further
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1803,13 +1932,14 @@ class Settings : gobject.object.ObjectWrap
   /**
       Connect to `WritableChanged` signal.
   
-      The "writable-changed" signal is emitted when the writability of a
-        key has potentially changed.  You should call
-        [gio.settings.Settings.isWritable] in order to determine the new status.
+      Emitted when the writability of a key has potentially changed.
+        
+        You should call [gio.settings.Settings.isWritable] in order to determine the
+        new status.
         
         This signal supports detailed connections.  You can connect to the
-        detailed signal "writable-changed::x" in order to only receive
-        callbacks when the writability of "x" changes.
+        detailed signal `writable-changed::x` in order to only receive
+        callbacks when the writability of `x` changes.
   
       Params:
         detail = Signal detail or null (default)
@@ -1888,18 +2018,18 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `schema` property.
       Params:
         propval = The name of the schema that describes the types of keys
-          for this #GSettings object.
+          for this [gio.settings.Settings] object.
           
-          The type of this property is *not* #GSettingsSchema.
-          #GSettingsSchema has only existed since version 2.32 and
+          The type of this property is *not* [gio.settings_schema.SettingsSchema].
+          [gio.settings_schema.SettingsSchema] has only existed since version 2.32 and
           unfortunately this name was used in previous versions to refer to
           the schema ID rather than the schema itself.  Take care to use the
-          'settings-schema' property if you wish to pass in a
-          #GSettingsSchema.
+          [gio.settings.Settings.settingsSchema] property if you wish to pass in a
+          [gio.settings_schema.SettingsSchema].
       Returns: Builder instance for fluent chaining
   
-      Deprecated: Use the 'schema-id' property instead.  In a future
-        version, this property may instead refer to a #GSettingsSchema.
+      Deprecated: Use the [gio.settings.Settings.schemaId] property instead.
+          In a future version, this property may instead refer to a [gio.settings_schema.SettingsSchema].
   */
   T schema(string propval) nothrow
   {
@@ -1910,7 +2040,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `schemaId` property.
       Params:
         propval = The name of the schema that describes the types of keys
-          for this #GSettings object.
+          for this [gio.settings.Settings] object.
       Returns: Builder instance for fluent chaining
   */
   T schemaId(string propval) nothrow
@@ -1921,12 +2051,13 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `settingsSchema` property.
       Params:
-        propval = The #GSettingsSchema describing the types of keys for this
-          #GSettings object.
+        propval = The [gio.settings_schema.SettingsSchema] describing the types of keys for this
+          [gio.settings.Settings] object.
           
-          Ideally, this property would be called 'schema'.  #GSettingsSchema
+          Ideally, this property would be called [gio.settings.Settings.schema].
+          [gio.settings_schema.SettingsSchema]
           has only existed since version 2.32, however, and before then the
-          'schema' property was used to refer to the ID of the schema rather
+          [gio.settings.Settings.schema] property was used to refer to the ID of the schema rather
           than the schema itself.  Take care.
       Returns: Builder instance for fluent chaining
   */

@@ -13,8 +13,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.widget_paintable.WidgetPaintable] is a [gdk.paintable.Paintable] that displays the contents
-    of a widget.
+    A [gdk.paintable.Paintable] that displays the contents of a widget.
     
     [gtk.widget_paintable.WidgetPaintable] will also take care of the widget not being in a
     state where it can be drawn (like when it isn't shown) and just draw

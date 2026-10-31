@@ -25,8 +25,7 @@ import gtk.types;
 import gtk.window;
 
 /**
-    The [gtk.about_dialog.AboutDialog] offers a simple way to display information about
-    a program.
+    Displays information about a program.
     
     The shown information includes the programs' logo, name, copyright,
     website and license. It is also possible to give credits to the authors,
@@ -35,7 +34,10 @@ import gtk.window;
     An about dialog is typically opened when the user selects the `About`
     option from the `Help` menu. All parts of the dialog are optional.
     
-    ![An example GtkAboutDialog](aboutdialog.png)
+    <picture>
+      <source srcset="aboutdialot-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkAboutDialog" src="aboutdialog.png">
+    </picture>
     
     About dialogs often contain links and email addresses. [gtk.about_dialog.AboutDialog]
     displays these as clickable links. By default, it calls [gtk.file_launcher.FileLauncher.launch]
@@ -46,14 +48,14 @@ import gtk.window;
     `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title,
     use a string like `GTK team https://www.gtk.org`.
     
-    To make constructing a [gtk.about_dialog.AboutDialog] as convenient as possible, you can
+    To make constructing an about dialog as convenient as possible, you can
     use the function `func@Gtk.show_about_dialog` which constructs and shows
     a dialog and keeps it around so that it can be shown again.
     
     Note that GTK sets a default title of `_("About %s")` on the dialog
     window (where `%s` is replaced by the name of the application, but in
     order to ensure proper translation of the title, applications should
-    set the title property explicitly when constructing a [gtk.about_dialog.AboutDialog],
+    set the title property explicitly when constructing an about dialog,
     as shown in the following example:
     
     ```c
@@ -67,6 +69,12 @@ import gtk.window;
                            "title", _("About ExampleCode"),
                            NULL);
     ```
+    
+    ## Shortcuts and Gestures
+    
+    [gtk.about_dialog.AboutDialog] supports the following keyboard shortcuts:
+    
+    - <kbd>Escape</kbd> closes the window.
     
     ## CSS nodes
     
@@ -112,8 +120,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Get `artists` property.
-      Returns: The people who contributed artwork to the program, as a `NULL`-terminated
-        array of strings.
+      Returns: The people who contributed artwork to the program.
         
         Each string may contain email addresses and URLs, which will be displayed
         as links.
@@ -126,8 +133,7 @@ class AboutDialog : gtk.window.Window
   /**
       Set `artists` property.
       Params:
-        propval = The people who contributed artwork to the program, as a `NULL`-terminated
-          array of strings.
+        propval = The people who contributed artwork to the program.
           
           Each string may contain email addresses and URLs, which will be displayed
           as links.
@@ -139,7 +145,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Get `authors` property.
-      Returns: The authors of the program, as a `NULL`-terminated array of strings.
+      Returns: The authors of the program.
         
         Each string may contain email addresses and URLs, which will be displayed
         as links, see the introduction for more details.
@@ -152,7 +158,7 @@ class AboutDialog : gtk.window.Window
   /**
       Set `authors` property.
       Params:
-        propval = The authors of the program, as a `NULL`-terminated array of strings.
+        propval = The authors of the program.
           
           Each string may contain email addresses and URLs, which will be displayed
           as links, see the introduction for more details.
@@ -210,7 +216,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Get `documenters` property.
-      Returns: The people documenting the program, as a `NULL`-terminated array of strings.
+      Returns: The people documenting the program.
         
         Each string may contain email addresses and URLs, which will be displayed
         as links, see the introduction for more details.
@@ -223,7 +229,7 @@ class AboutDialog : gtk.window.Window
   /**
       Set `documenters` property.
       Params:
-        propval = The people documenting the program, as a `NULL`-terminated array of strings.
+        propval = The people documenting the program.
           
           Each string may contain email addresses and URLs, which will be displayed
           as links, see the introduction for more details.
@@ -293,8 +299,8 @@ class AboutDialog : gtk.window.Window
         [gtk.about_dialog.AboutDialog.license] property are used.
         
         For any other [gtk.types.License] value, the contents of the
-        [gtk.about_dialog.AboutDialog.license] property are also set by this property as
-        a side effect.
+        [gtk.about_dialog.AboutDialog.license] property are also set by
+        this property as a side effect.
   */
   @property gtk.types.License licenseType() nothrow
   {
@@ -317,8 +323,8 @@ class AboutDialog : gtk.window.Window
           [gtk.about_dialog.AboutDialog.license] property are used.
           
           For any other [gtk.types.License] value, the contents of the
-          [gtk.about_dialog.AboutDialog.license] property are also set by this property as
-          a side effect.
+          [gtk.about_dialog.AboutDialog.license] property are also set by
+          this property as a side effect.
   */
   @property void licenseType(gtk.types.License propval) nothrow
   {
@@ -378,7 +384,7 @@ class AboutDialog : gtk.window.Window
       Returns: The name of the program.
         
         If this is not set, it defaults to the value returned by
-        `[glib.global.getApplicationName]`.
+        `func@GLib.get_application_name`.
   */
   @property string programName() nothrow
   {
@@ -391,7 +397,7 @@ class AboutDialog : gtk.window.Window
         propval = The name of the program.
           
           If this is not set, it defaults to the value returned by
-          `[glib.global.getApplicationName]`.
+          `func@GLib.get_application_name`.
   */
   @property void programName(string propval) nothrow
   {
@@ -558,7 +564,7 @@ class AboutDialog : gtk.window.Window
   
       Params:
         sectionName = The name of the section
-        people = The people who belong to that section
+        people = the people who belong to that section
   */
   void addCreditSection(string sectionName, string[] people) nothrow
   {
@@ -718,7 +724,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the program name displayed in the about dialog.
-      Returns: The program name
+      Returns: the program name
   */
   string getProgramName() nothrow
   {
@@ -892,8 +898,8 @@ class AboutDialog : gtk.window.Window
   }
 
   /**
-      Sets the license of the application showing the about dialog from a
-      list of known licenses.
+      Sets the license of the application showing the about dialog
+      from a list of known licenses.
       
       This function overrides the license set using
       [gtk.about_dialog.AboutDialog.setLicense].
@@ -1105,8 +1111,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
   /**
       Set `artists` property.
       Params:
-        propval = The people who contributed artwork to the program, as a `NULL`-terminated
-          array of strings.
+        propval = The people who contributed artwork to the program.
           
           Each string may contain email addresses and URLs, which will be displayed
           as links.
@@ -1120,7 +1125,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
   /**
       Set `authors` property.
       Params:
-        propval = The authors of the program, as a `NULL`-terminated array of strings.
+        propval = The authors of the program.
           
           Each string may contain email addresses and URLs, which will be displayed
           as links, see the introduction for more details.
@@ -1160,7 +1165,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
   /**
       Set `documenters` property.
       Params:
-        propval = The people documenting the program, as a `NULL`-terminated array of strings.
+        propval = The people documenting the program.
           
           Each string may contain email addresses and URLs, which will be displayed
           as links, see the introduction for more details.
@@ -1211,8 +1216,8 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           [gtk.about_dialog.AboutDialog.license] property are used.
           
           For any other [gtk.types.License] value, the contents of the
-          [gtk.about_dialog.AboutDialog.license] property are also set by this property as
-          a side effect.
+          [gtk.about_dialog.AboutDialog.license] property are also set by
+          this property as a side effect.
       Returns: Builder instance for fluent chaining
   */
   T licenseType(gtk.types.License propval) nothrow
@@ -1253,7 +1258,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
         propval = The name of the program.
           
           If this is not set, it defaults to the value returned by
-          `[glib.global.getApplicationName]`.
+          `func@GLib.get_application_name`.
       Returns: Builder instance for fluent chaining
   */
   T programName(string propval) nothrow

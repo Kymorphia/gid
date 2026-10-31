@@ -257,6 +257,20 @@ class Generator : gobject.object.ObjectWrap
   }
 
   /**
+      Sets the root of the JSON data stream to be serialized by
+      the given generator.
+      
+      The ownership of the passed `node` is transferred to the generator object.
+  
+      Params:
+        node = the root node
+  */
+  void takeRoot(json.node.Node node = null) nothrow
+  {
+    json_generator_take_root(cast(JsonGenerator*)this._cPtr, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
+  }
+
+  /**
       Generates a JSON data stream from generator and returns it as a
       buffer.
   

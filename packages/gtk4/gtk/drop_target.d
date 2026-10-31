@@ -17,7 +17,7 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
-    [gtk.drop_target.DropTarget] is an event controller to receive Drag-and-Drop operations.
+    An event controller to receive Drag-and-Drop operations.
     
     The most basic way to use a [gtk.drop_target.DropTarget] to receive drops on a
     widget is to create it via [gtk.drop_target.DropTarget.new_], passing in the
@@ -152,6 +152,17 @@ class DropTarget : gtk.event_controller.EventController
   @property gdk.drop.Drop currentDrop() nothrow
   {
     return getCurrentDrop();
+  }
+
+  /**
+      Get `drop` property.
+      Returns: The [gdk.drop.Drop] that is currently being performed.
+  
+      Deprecated: Use [gtk.drop_target.DropTarget.currentDrop] instead
+  */
+  @property gdk.drop.Drop drop() nothrow
+  {
+    return getDrop();
   }
 
   /**
@@ -567,7 +578,7 @@ class DropTarget : gtk.event_controller.EventController
   
           `dropTarget` the instance the signal is connected to (optional)
   
-          `Returns` Preferred action for this drag operation or 0 if
+          `Returns` Preferred action for this drag operation or [gdk.types.DragAction.None] if
               dropping is not supported at the current `x`,`y` location.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
@@ -675,7 +686,7 @@ class DropTarget : gtk.event_controller.EventController
   
           `dropTarget` the instance the signal is connected to (optional)
   
-          `Returns` Preferred action for this drag operation or 0 if
+          `Returns` Preferred action for this drag operation or [gdk.types.DragAction.None] if
               dropping is not supported at the current `x`,`y` location.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID

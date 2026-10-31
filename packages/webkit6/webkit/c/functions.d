@@ -84,6 +84,7 @@ __gshared extern(C) nothrow
   WebKitContextMenuItem* function(WebKitContextMenu* menu, uint position) c_webkit_context_menu_get_item_at_position; ///
   GList* function(WebKitContextMenu* menu) c_webkit_context_menu_get_items; ///
   uint function(WebKitContextMenu* menu) c_webkit_context_menu_get_n_items; ///
+  gboolean function(WebKitContextMenu* menu, int* x, int* y) c_webkit_context_menu_get_position; ///
   GVariant* function(WebKitContextMenu* menu) c_webkit_context_menu_get_user_data; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_insert; ///
   WebKitContextMenuItem* function(WebKitContextMenu* menu) c_webkit_context_menu_last; ///
@@ -101,8 +102,10 @@ __gshared extern(C) nothrow
   WebKitContextMenuItem* function() c_webkit_context_menu_item_new_separator; ///
   WebKitContextMenuItem* function(const(char)* label, WebKitContextMenu* submenu) c_webkit_context_menu_item_new_with_submenu; ///
   GAction* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_gaction; ///
+  GVariant* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_gaction_target; ///
   WebKitContextMenuAction function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_stock_action; ///
   WebKitContextMenu* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_submenu; ///
+  const(char)* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_title; ///
   gboolean function(WebKitContextMenuItem* item) c_webkit_context_menu_item_is_separator; ///
   void function(WebKitContextMenuItem* item, WebKitContextMenu* submenu) c_webkit_context_menu_item_set_submenu; ///
 
@@ -521,6 +524,7 @@ __gshared extern(C) nothrow
   gboolean function(WebKitSettings* settings) c_webkit_settings_get_javascript_can_access_clipboard; ///
   gboolean function(WebKitSettings* settings) c_webkit_settings_get_javascript_can_open_windows_automatically; ///
   gboolean function(WebKitSettings* settings) c_webkit_settings_get_load_icons_ignoring_image_load_setting; ///
+  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_math_font_family; ///
   const(char)* function(WebKitSettings* settings) c_webkit_settings_get_media_content_types_requiring_hardware_support; ///
   gboolean function(WebKitSettings* settings) c_webkit_settings_get_media_playback_allows_inline; ///
   gboolean function(WebKitSettings* settings) c_webkit_settings_get_media_playback_requires_user_gesture; ///
@@ -579,6 +583,7 @@ __gshared extern(C) nothrow
   void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_javascript_can_access_clipboard; ///
   void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_javascript_can_open_windows_automatically; ///
   void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_load_icons_ignoring_image_load_setting; ///
+  void function(WebKitSettings* settings, const(char)* mathFontFamily) c_webkit_settings_set_math_font_family; ///
   void function(WebKitSettings* settings, const(char)* contentTypes) c_webkit_settings_set_media_content_types_requiring_hardware_support; ///
   void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_media_playback_allows_inline; ///
   void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_media_playback_requires_user_gesture; ///
@@ -718,6 +723,34 @@ __gshared extern(C) nothrow
   void function(WebKitWebContext* context, const(char)* directory) c_webkit_web_context_set_web_process_extensions_directory; ///
   void function(WebKitWebContext* context, GVariant* userData) c_webkit_web_context_set_web_process_extensions_initialization_user_data; ///
 
+  // WebExtension
+  GType function() c_webkit_web_extension_get_type; ///
+  WebKitWebExtension* function(const(char)* extensionPath, GError** _err) c_webkit_web_extension_new; ///
+  GIcon* function(WebKitWebExtension* extension, double width, double height) c_webkit_web_extension_get_action_icon; ///
+  WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) c_webkit_web_extension_get_all_requested_match_patterns; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_default_locale; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_action_label; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_description; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_name; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_short_name; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_version; ///
+  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_background_content; ///
+  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_commands; ///
+  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_content_modification_rules; ///
+  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_injected_content; ///
+  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_options_page; ///
+  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_override_new_tab_page; ///
+  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_persistent_background_content; ///
+  GIcon* function(WebKitWebExtension* extension, double width, double height) c_webkit_web_extension_get_icon; ///
+  double function(WebKitWebExtension* extension) c_webkit_web_extension_get_manifest_version; ///
+  WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) c_webkit_web_extension_get_optional_permission_match_patterns; ///
+  const(char*)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_optional_permissions; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_path; ///
+  WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) c_webkit_web_extension_get_requested_permission_match_patterns; ///
+  const(char*)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_requested_permissions; ///
+  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_version; ///
+  gboolean function(WebKitWebExtension* extension, double manifestVersion) c_webkit_web_extension_supports_manifest_version; ///
+
   // WebExtensionMatchPattern
   GType function() c_webkit_web_extension_match_pattern_get_type; ///
   WebKitWebExtensionMatchPattern* function() c_webkit_web_extension_match_pattern_new_all_hosts_and_schemes; ///
@@ -735,6 +768,7 @@ __gshared extern(C) nothrow
   WebKitWebExtensionMatchPattern* function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_ref; ///
   void function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_unref; ///
   void function(const(char)* urlScheme) c_webkit_web_extension_match_pattern_register_custom_URL_scheme; ///
+  void function(const(char)* urlScheme) c_webkit_web_extension_match_pattern_register_custom_url_scheme; ///
 
   // WebInspector
   GType function() c_webkit_web_inspector_get_type; ///
@@ -794,6 +828,7 @@ __gshared extern(C) nothrow
   WebKitSettings* function(WebKitWebView* webView) c_webkit_web_view_get_settings; ///
   void function(WebKitWebView* webView, WebKitSnapshotRegion region, WebKitSnapshotOptions options, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_get_snapshot; ///
   GdkTexture* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_get_snapshot_finish; ///
+  gboolean function(WebKitWebView* webView, GdkRGBA* rgba) c_webkit_web_view_get_theme_color; ///
   const(char)* function(WebKitWebView* webView) c_webkit_web_view_get_title; ///
   gboolean function(WebKitWebView* webView, GTlsCertificate** certificate, GTlsCertificateFlags* errors) c_webkit_web_view_get_tls_info; ///
   const(char)* function(WebKitWebView* webView) c_webkit_web_view_get_uri; ///
@@ -807,8 +842,10 @@ __gshared extern(C) nothrow
   void function(WebKitWebView* webView, WebKitBackForwardListItem* listItem) c_webkit_web_view_go_to_back_forward_list_item; ///
   gboolean function(WebKitWebView* webView) c_webkit_web_view_is_controlled_by_automation; ///
   gboolean function(WebKitWebView* webView) c_webkit_web_view_is_editable; ///
+  gboolean function(WebKitWebView* webView) c_webkit_web_view_is_immersive_mode_enabled; ///
   gboolean function(WebKitWebView* webView) c_webkit_web_view_is_loading; ///
   gboolean function(WebKitWebView* webView) c_webkit_web_view_is_playing_audio; ///
+  void function(WebKitWebView* webView) c_webkit_web_view_leave_immersive_mode; ///
   void function(WebKitWebView* webView, const(char)* content, const(char)* contentUri, const(char)* baseUri) c_webkit_web_view_load_alternate_html; ///
   void function(WebKitWebView* webView, GBytes* bytes, const(char)* mimeType, const(char)* encoding, const(char)* baseUri) c_webkit_web_view_load_bytes; ///
   void function(WebKitWebView* webView, const(char)* content, const(char)* baseUri) c_webkit_web_view_load_html; ///
@@ -896,6 +933,17 @@ __gshared extern(C) nothrow
   gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_statusbar_visible; ///
   gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_toolbar_visible; ///
 
+  // XRPermissionRequest
+  GType function() c_webkit_xr_permission_request_get_type; ///
+  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_consent_optional_features; ///
+  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_consent_required_features; ///
+  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_granted_features; ///
+  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_optional_features_requested; ///
+  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_required_features_requested; ///
+  WebKitSecurityOrigin* function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_security_origin; ///
+  WebKitXRSessionMode function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_session_mode; ///
+  void function(WebKitXRPermissionRequest* request, WebKitXRSessionFeatures granted) c_webkit_xr_permission_request_set_granted_optional_features; ///
+
   // global
   uint function() c_webkit_get_major_version; ///
   uint function() c_webkit_get_micro_version; ///
@@ -935,6 +983,9 @@ __gshared extern(C) nothrow
 
   // UserMessageError
   GQuark function() c_webkit_user_message_error_quark; ///
+
+  // WebExtensionError
+  GQuark function() c_webkit_web_extension_error_quark; ///
 
   // WebExtensionMatchPatternError
   GQuark function() c_webkit_web_extension_match_pattern_error_quark; ///
@@ -1128,6 +1179,9 @@ alias webkit_context_menu_get_items = c_webkit_context_menu_get_items;
 alias webkit_context_menu_get_n_items = c_webkit_context_menu_get_n_items;
 
 /** */
+alias webkit_context_menu_get_position = c_webkit_context_menu_get_position;
+
+/** */
 alias webkit_context_menu_get_user_data = c_webkit_context_menu_get_user_data;
 
 /** */
@@ -1175,10 +1229,16 @@ alias webkit_context_menu_item_new_with_submenu = c_webkit_context_menu_item_new
 alias webkit_context_menu_item_get_gaction = c_webkit_context_menu_item_get_gaction;
 
 /** */
+alias webkit_context_menu_item_get_gaction_target = c_webkit_context_menu_item_get_gaction_target;
+
+/** */
 alias webkit_context_menu_item_get_stock_action = c_webkit_context_menu_item_get_stock_action;
 
 /** */
 alias webkit_context_menu_item_get_submenu = c_webkit_context_menu_item_get_submenu;
+
+/** */
+alias webkit_context_menu_item_get_title = c_webkit_context_menu_item_get_title;
 
 /** */
 alias webkit_context_menu_item_is_separator = c_webkit_context_menu_item_is_separator;
@@ -2275,6 +2335,9 @@ alias webkit_settings_get_javascript_can_open_windows_automatically = c_webkit_s
 alias webkit_settings_get_load_icons_ignoring_image_load_setting = c_webkit_settings_get_load_icons_ignoring_image_load_setting;
 
 /** */
+alias webkit_settings_get_math_font_family = c_webkit_settings_get_math_font_family;
+
+/** */
 alias webkit_settings_get_media_content_types_requiring_hardware_support = c_webkit_settings_get_media_content_types_requiring_hardware_support;
 
 /** */
@@ -2447,6 +2510,9 @@ alias webkit_settings_set_javascript_can_open_windows_automatically = c_webkit_s
 
 /** */
 alias webkit_settings_set_load_icons_ignoring_image_load_setting = c_webkit_settings_set_load_icons_ignoring_image_load_setting;
+
+/** */
+alias webkit_settings_set_math_font_family = c_webkit_settings_set_math_font_family;
 
 /** */
 alias webkit_settings_set_media_content_types_requiring_hardware_support = c_webkit_settings_set_media_content_types_requiring_hardware_support;
@@ -2814,6 +2880,86 @@ alias webkit_web_context_set_web_process_extensions_directory = c_webkit_web_con
 /** */
 alias webkit_web_context_set_web_process_extensions_initialization_user_data = c_webkit_web_context_set_web_process_extensions_initialization_user_data;
 
+// WebExtension
+
+/** */
+alias webkit_web_extension_get_type = c_webkit_web_extension_get_type;
+
+/** */
+alias webkit_web_extension_new = c_webkit_web_extension_new;
+
+/** */
+alias webkit_web_extension_get_action_icon = c_webkit_web_extension_get_action_icon;
+
+/** */
+alias webkit_web_extension_get_all_requested_match_patterns = c_webkit_web_extension_get_all_requested_match_patterns;
+
+/** */
+alias webkit_web_extension_get_default_locale = c_webkit_web_extension_get_default_locale;
+
+/** */
+alias webkit_web_extension_get_display_action_label = c_webkit_web_extension_get_display_action_label;
+
+/** */
+alias webkit_web_extension_get_display_description = c_webkit_web_extension_get_display_description;
+
+/** */
+alias webkit_web_extension_get_display_name = c_webkit_web_extension_get_display_name;
+
+/** */
+alias webkit_web_extension_get_display_short_name = c_webkit_web_extension_get_display_short_name;
+
+/** */
+alias webkit_web_extension_get_display_version = c_webkit_web_extension_get_display_version;
+
+/** */
+alias webkit_web_extension_get_has_background_content = c_webkit_web_extension_get_has_background_content;
+
+/** */
+alias webkit_web_extension_get_has_commands = c_webkit_web_extension_get_has_commands;
+
+/** */
+alias webkit_web_extension_get_has_content_modification_rules = c_webkit_web_extension_get_has_content_modification_rules;
+
+/** */
+alias webkit_web_extension_get_has_injected_content = c_webkit_web_extension_get_has_injected_content;
+
+/** */
+alias webkit_web_extension_get_has_options_page = c_webkit_web_extension_get_has_options_page;
+
+/** */
+alias webkit_web_extension_get_has_override_new_tab_page = c_webkit_web_extension_get_has_override_new_tab_page;
+
+/** */
+alias webkit_web_extension_get_has_persistent_background_content = c_webkit_web_extension_get_has_persistent_background_content;
+
+/** */
+alias webkit_web_extension_get_icon = c_webkit_web_extension_get_icon;
+
+/** */
+alias webkit_web_extension_get_manifest_version = c_webkit_web_extension_get_manifest_version;
+
+/** */
+alias webkit_web_extension_get_optional_permission_match_patterns = c_webkit_web_extension_get_optional_permission_match_patterns;
+
+/** */
+alias webkit_web_extension_get_optional_permissions = c_webkit_web_extension_get_optional_permissions;
+
+/** */
+alias webkit_web_extension_get_path = c_webkit_web_extension_get_path;
+
+/** */
+alias webkit_web_extension_get_requested_permission_match_patterns = c_webkit_web_extension_get_requested_permission_match_patterns;
+
+/** */
+alias webkit_web_extension_get_requested_permissions = c_webkit_web_extension_get_requested_permissions;
+
+/** */
+alias webkit_web_extension_get_version = c_webkit_web_extension_get_version;
+
+/** */
+alias webkit_web_extension_supports_manifest_version = c_webkit_web_extension_supports_manifest_version;
+
 // WebExtensionMatchPattern
 
 /** */
@@ -2863,6 +3009,9 @@ alias webkit_web_extension_match_pattern_unref = c_webkit_web_extension_match_pa
 
 /** */
 alias webkit_web_extension_match_pattern_register_custom_URL_scheme = c_webkit_web_extension_match_pattern_register_custom_URL_scheme;
+
+/** */
+alias webkit_web_extension_match_pattern_register_custom_url_scheme = c_webkit_web_extension_match_pattern_register_custom_url_scheme;
 
 // WebInspector
 
@@ -3030,6 +3179,9 @@ alias webkit_web_view_get_snapshot = c_webkit_web_view_get_snapshot;
 alias webkit_web_view_get_snapshot_finish = c_webkit_web_view_get_snapshot_finish;
 
 /** */
+alias webkit_web_view_get_theme_color = c_webkit_web_view_get_theme_color;
+
+/** */
 alias webkit_web_view_get_title = c_webkit_web_view_get_title;
 
 /** */
@@ -3069,10 +3221,16 @@ alias webkit_web_view_is_controlled_by_automation = c_webkit_web_view_is_control
 alias webkit_web_view_is_editable = c_webkit_web_view_is_editable;
 
 /** */
+alias webkit_web_view_is_immersive_mode_enabled = c_webkit_web_view_is_immersive_mode_enabled;
+
+/** */
 alias webkit_web_view_is_loading = c_webkit_web_view_is_loading;
 
 /** */
 alias webkit_web_view_is_playing_audio = c_webkit_web_view_is_playing_audio;
+
+/** */
+alias webkit_web_view_leave_immersive_mode = c_webkit_web_view_leave_immersive_mode;
 
 /** */
 alias webkit_web_view_load_alternate_html = c_webkit_web_view_load_alternate_html;
@@ -3304,6 +3462,35 @@ alias webkit_window_properties_get_statusbar_visible = c_webkit_window_propertie
 /** */
 alias webkit_window_properties_get_toolbar_visible = c_webkit_window_properties_get_toolbar_visible;
 
+// XRPermissionRequest
+
+/** */
+alias webkit_xr_permission_request_get_type = c_webkit_xr_permission_request_get_type;
+
+/** */
+alias webkit_xr_permission_request_get_consent_optional_features = c_webkit_xr_permission_request_get_consent_optional_features;
+
+/** */
+alias webkit_xr_permission_request_get_consent_required_features = c_webkit_xr_permission_request_get_consent_required_features;
+
+/** */
+alias webkit_xr_permission_request_get_granted_features = c_webkit_xr_permission_request_get_granted_features;
+
+/** */
+alias webkit_xr_permission_request_get_optional_features_requested = c_webkit_xr_permission_request_get_optional_features_requested;
+
+/** */
+alias webkit_xr_permission_request_get_required_features_requested = c_webkit_xr_permission_request_get_required_features_requested;
+
+/** */
+alias webkit_xr_permission_request_get_security_origin = c_webkit_xr_permission_request_get_security_origin;
+
+/** */
+alias webkit_xr_permission_request_get_session_mode = c_webkit_xr_permission_request_get_session_mode;
+
+/** */
+alias webkit_xr_permission_request_set_granted_optional_features = c_webkit_xr_permission_request_set_granted_optional_features;
+
 // global
 
 /** */
@@ -3379,6 +3566,11 @@ alias webkit_user_content_filter_error_quark = c_webkit_user_content_filter_erro
 
 /** */
 alias webkit_user_message_error_quark = c_webkit_user_message_error_quark;
+
+// WebExtensionError
+
+/** */
+alias webkit_web_extension_error_quark = c_webkit_web_extension_error_quark;
 
 // WebExtensionMatchPatternError
 
@@ -3461,6 +3653,7 @@ shared static this()
   gidLink(cast(void**)&webkit_context_menu_get_item_at_position, "webkit_context_menu_get_item_at_position", libs);
   gidLink(cast(void**)&webkit_context_menu_get_items, "webkit_context_menu_get_items", libs);
   gidLink(cast(void**)&webkit_context_menu_get_n_items, "webkit_context_menu_get_n_items", libs);
+  gidLink(cast(void**)&webkit_context_menu_get_position, "webkit_context_menu_get_position", libs);
   gidLink(cast(void**)&webkit_context_menu_get_user_data, "webkit_context_menu_get_user_data", libs);
   gidLink(cast(void**)&webkit_context_menu_insert, "webkit_context_menu_insert", libs);
   gidLink(cast(void**)&webkit_context_menu_last, "webkit_context_menu_last", libs);
@@ -3478,8 +3671,10 @@ shared static this()
   gidLink(cast(void**)&webkit_context_menu_item_new_separator, "webkit_context_menu_item_new_separator", libs);
   gidLink(cast(void**)&webkit_context_menu_item_new_with_submenu, "webkit_context_menu_item_new_with_submenu", libs);
   gidLink(cast(void**)&webkit_context_menu_item_get_gaction, "webkit_context_menu_item_get_gaction", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_get_gaction_target, "webkit_context_menu_item_get_gaction_target", libs);
   gidLink(cast(void**)&webkit_context_menu_item_get_stock_action, "webkit_context_menu_item_get_stock_action", libs);
   gidLink(cast(void**)&webkit_context_menu_item_get_submenu, "webkit_context_menu_item_get_submenu", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_get_title, "webkit_context_menu_item_get_title", libs);
   gidLink(cast(void**)&webkit_context_menu_item_is_separator, "webkit_context_menu_item_is_separator", libs);
   gidLink(cast(void**)&webkit_context_menu_item_set_submenu, "webkit_context_menu_item_set_submenu", libs);
 
@@ -3898,6 +4093,7 @@ shared static this()
   gidLink(cast(void**)&webkit_settings_get_javascript_can_access_clipboard, "webkit_settings_get_javascript_can_access_clipboard", libs);
   gidLink(cast(void**)&webkit_settings_get_javascript_can_open_windows_automatically, "webkit_settings_get_javascript_can_open_windows_automatically", libs);
   gidLink(cast(void**)&webkit_settings_get_load_icons_ignoring_image_load_setting, "webkit_settings_get_load_icons_ignoring_image_load_setting", libs);
+  gidLink(cast(void**)&webkit_settings_get_math_font_family, "webkit_settings_get_math_font_family", libs);
   gidLink(cast(void**)&webkit_settings_get_media_content_types_requiring_hardware_support, "webkit_settings_get_media_content_types_requiring_hardware_support", libs);
   gidLink(cast(void**)&webkit_settings_get_media_playback_allows_inline, "webkit_settings_get_media_playback_allows_inline", libs);
   gidLink(cast(void**)&webkit_settings_get_media_playback_requires_user_gesture, "webkit_settings_get_media_playback_requires_user_gesture", libs);
@@ -3956,6 +4152,7 @@ shared static this()
   gidLink(cast(void**)&webkit_settings_set_javascript_can_access_clipboard, "webkit_settings_set_javascript_can_access_clipboard", libs);
   gidLink(cast(void**)&webkit_settings_set_javascript_can_open_windows_automatically, "webkit_settings_set_javascript_can_open_windows_automatically", libs);
   gidLink(cast(void**)&webkit_settings_set_load_icons_ignoring_image_load_setting, "webkit_settings_set_load_icons_ignoring_image_load_setting", libs);
+  gidLink(cast(void**)&webkit_settings_set_math_font_family, "webkit_settings_set_math_font_family", libs);
   gidLink(cast(void**)&webkit_settings_set_media_content_types_requiring_hardware_support, "webkit_settings_set_media_content_types_requiring_hardware_support", libs);
   gidLink(cast(void**)&webkit_settings_set_media_playback_allows_inline, "webkit_settings_set_media_playback_allows_inline", libs);
   gidLink(cast(void**)&webkit_settings_set_media_playback_requires_user_gesture, "webkit_settings_set_media_playback_requires_user_gesture", libs);
@@ -4095,6 +4292,34 @@ shared static this()
   gidLink(cast(void**)&webkit_web_context_set_web_process_extensions_directory, "webkit_web_context_set_web_process_extensions_directory", libs);
   gidLink(cast(void**)&webkit_web_context_set_web_process_extensions_initialization_user_data, "webkit_web_context_set_web_process_extensions_initialization_user_data", libs);
 
+  // WebExtension
+  gidLink(cast(void**)&webkit_web_extension_get_type, "webkit_web_extension_get_type", libs);
+  gidLink(cast(void**)&webkit_web_extension_new, "webkit_web_extension_new", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_action_icon, "webkit_web_extension_get_action_icon", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_all_requested_match_patterns, "webkit_web_extension_get_all_requested_match_patterns", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_default_locale, "webkit_web_extension_get_default_locale", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_display_action_label, "webkit_web_extension_get_display_action_label", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_display_description, "webkit_web_extension_get_display_description", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_display_name, "webkit_web_extension_get_display_name", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_display_short_name, "webkit_web_extension_get_display_short_name", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_display_version, "webkit_web_extension_get_display_version", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_has_background_content, "webkit_web_extension_get_has_background_content", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_has_commands, "webkit_web_extension_get_has_commands", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_has_content_modification_rules, "webkit_web_extension_get_has_content_modification_rules", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_has_injected_content, "webkit_web_extension_get_has_injected_content", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_has_options_page, "webkit_web_extension_get_has_options_page", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_has_override_new_tab_page, "webkit_web_extension_get_has_override_new_tab_page", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_has_persistent_background_content, "webkit_web_extension_get_has_persistent_background_content", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_icon, "webkit_web_extension_get_icon", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_manifest_version, "webkit_web_extension_get_manifest_version", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_optional_permission_match_patterns, "webkit_web_extension_get_optional_permission_match_patterns", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_optional_permissions, "webkit_web_extension_get_optional_permissions", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_path, "webkit_web_extension_get_path", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_requested_permission_match_patterns, "webkit_web_extension_get_requested_permission_match_patterns", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_requested_permissions, "webkit_web_extension_get_requested_permissions", libs);
+  gidLink(cast(void**)&webkit_web_extension_get_version, "webkit_web_extension_get_version", libs);
+  gidLink(cast(void**)&webkit_web_extension_supports_manifest_version, "webkit_web_extension_supports_manifest_version", libs);
+
   // WebExtensionMatchPattern
   gidLink(cast(void**)&webkit_web_extension_match_pattern_get_type, "webkit_web_extension_match_pattern_get_type", libs);
   gidLink(cast(void**)&webkit_web_extension_match_pattern_new_all_hosts_and_schemes, "webkit_web_extension_match_pattern_new_all_hosts_and_schemes", libs);
@@ -4112,6 +4337,7 @@ shared static this()
   gidLink(cast(void**)&webkit_web_extension_match_pattern_ref, "webkit_web_extension_match_pattern_ref", libs);
   gidLink(cast(void**)&webkit_web_extension_match_pattern_unref, "webkit_web_extension_match_pattern_unref", libs);
   gidLink(cast(void**)&webkit_web_extension_match_pattern_register_custom_URL_scheme, "webkit_web_extension_match_pattern_register_custom_URL_scheme", libs);
+  gidLink(cast(void**)&webkit_web_extension_match_pattern_register_custom_url_scheme, "webkit_web_extension_match_pattern_register_custom_url_scheme", libs);
 
   // WebInspector
   gidLink(cast(void**)&webkit_web_inspector_get_type, "webkit_web_inspector_get_type", libs);
@@ -4171,6 +4397,7 @@ shared static this()
   gidLink(cast(void**)&webkit_web_view_get_settings, "webkit_web_view_get_settings", libs);
   gidLink(cast(void**)&webkit_web_view_get_snapshot, "webkit_web_view_get_snapshot", libs);
   gidLink(cast(void**)&webkit_web_view_get_snapshot_finish, "webkit_web_view_get_snapshot_finish", libs);
+  gidLink(cast(void**)&webkit_web_view_get_theme_color, "webkit_web_view_get_theme_color", libs);
   gidLink(cast(void**)&webkit_web_view_get_title, "webkit_web_view_get_title", libs);
   gidLink(cast(void**)&webkit_web_view_get_tls_info, "webkit_web_view_get_tls_info", libs);
   gidLink(cast(void**)&webkit_web_view_get_uri, "webkit_web_view_get_uri", libs);
@@ -4184,8 +4411,10 @@ shared static this()
   gidLink(cast(void**)&webkit_web_view_go_to_back_forward_list_item, "webkit_web_view_go_to_back_forward_list_item", libs);
   gidLink(cast(void**)&webkit_web_view_is_controlled_by_automation, "webkit_web_view_is_controlled_by_automation", libs);
   gidLink(cast(void**)&webkit_web_view_is_editable, "webkit_web_view_is_editable", libs);
+  gidLink(cast(void**)&webkit_web_view_is_immersive_mode_enabled, "webkit_web_view_is_immersive_mode_enabled", libs);
   gidLink(cast(void**)&webkit_web_view_is_loading, "webkit_web_view_is_loading", libs);
   gidLink(cast(void**)&webkit_web_view_is_playing_audio, "webkit_web_view_is_playing_audio", libs);
+  gidLink(cast(void**)&webkit_web_view_leave_immersive_mode, "webkit_web_view_leave_immersive_mode", libs);
   gidLink(cast(void**)&webkit_web_view_load_alternate_html, "webkit_web_view_load_alternate_html", libs);
   gidLink(cast(void**)&webkit_web_view_load_bytes, "webkit_web_view_load_bytes", libs);
   gidLink(cast(void**)&webkit_web_view_load_html, "webkit_web_view_load_html", libs);
@@ -4273,6 +4502,17 @@ shared static this()
   gidLink(cast(void**)&webkit_window_properties_get_statusbar_visible, "webkit_window_properties_get_statusbar_visible", libs);
   gidLink(cast(void**)&webkit_window_properties_get_toolbar_visible, "webkit_window_properties_get_toolbar_visible", libs);
 
+  // XRPermissionRequest
+  gidLink(cast(void**)&webkit_xr_permission_request_get_type, "webkit_xr_permission_request_get_type", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_get_consent_optional_features, "webkit_xr_permission_request_get_consent_optional_features", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_get_consent_required_features, "webkit_xr_permission_request_get_consent_required_features", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_get_granted_features, "webkit_xr_permission_request_get_granted_features", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_get_optional_features_requested, "webkit_xr_permission_request_get_optional_features_requested", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_get_required_features_requested, "webkit_xr_permission_request_get_required_features_requested", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_get_security_origin, "webkit_xr_permission_request_get_security_origin", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_get_session_mode, "webkit_xr_permission_request_get_session_mode", libs);
+  gidLink(cast(void**)&webkit_xr_permission_request_set_granted_optional_features, "webkit_xr_permission_request_set_granted_optional_features", libs);
+
   // global
   gidLink(cast(void**)&webkit_get_major_version, "webkit_get_major_version", libs);
   gidLink(cast(void**)&webkit_get_micro_version, "webkit_get_micro_version", libs);
@@ -4312,6 +4552,9 @@ shared static this()
 
   // UserMessageError
   gidLink(cast(void**)&webkit_user_message_error_quark, "webkit_user_message_error_quark", libs);
+
+  // WebExtensionError
+  gidLink(cast(void**)&webkit_web_extension_error_quark, "webkit_web_extension_error_quark", libs);
 
   // WebExtensionMatchPatternError
   gidLink(cast(void**)&webkit_web_extension_match_pattern_error_quark, "webkit_web_extension_match_pattern_error_quark", libs);

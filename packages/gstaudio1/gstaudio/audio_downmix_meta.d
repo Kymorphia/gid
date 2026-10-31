@@ -25,14 +25,9 @@ class AudioDownmixMeta
 
   /**
       Create a `audio_downmix_meta.AudioDownmixMeta` wrap type.
-      Params:
-        fromChannels = the number of channels of the source
-        toChannels = the number of channels of the destination
   */
-  this(int fromChannels = int.init, int toChannels = int.init) nothrow
+  this() nothrow
   {
-    this.fromChannels = fromChannels;
-    this.toChannels = toChannels;
   }
 
   /** */
@@ -60,41 +55,21 @@ class AudioDownmixMeta
   }
 
   /**
-      Get `fromChannels` field.
-      Returns: the number of channels of the source
+      Get `fromPosition` field.
+      Returns: the channel positions of the source
   */
-  @property int fromChannels() nothrow
+  @property gstaudio.types.AudioChannelPosition[] fromPosition() nothrow
   {
-    return (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels;
+    return (cast(GstAudioDownmixMeta*)this._cPtr).fromPosition[0 .. (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels].dup;
   }
 
   /**
-      Set `fromChannels` field.
-      Params:
-        propval = the number of channels of the source
+      Get `toPosition` field.
+      Returns: the channel positions of the destination
   */
-  @property void fromChannels(int propval) nothrow
+  @property gstaudio.types.AudioChannelPosition[] toPosition() nothrow
   {
-    (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels = propval;
-  }
-
-  /**
-      Get `toChannels` field.
-      Returns: the number of channels of the destination
-  */
-  @property int toChannels() nothrow
-  {
-    return (cast(GstAudioDownmixMeta*)this._cPtr).toChannels;
-  }
-
-  /**
-      Set `toChannels` field.
-      Params:
-        propval = the number of channels of the destination
-  */
-  @property void toChannels(int propval) nothrow
-  {
-    (cast(GstAudioDownmixMeta*)this._cPtr).toChannels = propval;
+    return (cast(GstAudioDownmixMeta*)this._cPtr).toPosition[0 .. (cast(GstAudioDownmixMeta*)this._cPtr).toChannels].dup;
   }
 
   /** */

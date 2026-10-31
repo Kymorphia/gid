@@ -5,6 +5,7 @@ public import gid.basictypes;
 import cairo.region;
 import gdk.c.functions;
 import gdk.c.types;
+import gdk.color_state;
 import gdk.display;
 import gdk.texture;
 import gdk.types;
@@ -13,8 +14,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [gdk.dmabuf_texture_builder.DmabufTextureBuilder] is a builder used to construct [gdk.texture.Texture]
-    objects from DMA buffers.
+    Constructs [gdk.texture.Texture] objects from DMA buffers.
     
     DMA buffers are commonly called **_dma-bufs_**.
     
@@ -37,8 +37,10 @@ import gobject.object;
     multiple planes, by specifying offsets from the beginning of the data.
     
     DMA buffers are exposed to user-space as file descriptors allowing to pass them
-    between processes. If a DMA buffer has multiple planes, there is one file
-    descriptor per plane.
+    between processes. If a DMA buffer has multiple planes, more than one file
+    descriptor may be present, up to the number of planes. If the number of file
+    descriptors is less than the number of planes, the remaining ones should be set to
+    -1.
     
     The format of the data (for graphics data, essentially its colorspace) is described
     by a 32-bit integer. These format identifiers are defined in the header file `drm_fourcc.h`
@@ -106,6 +108,25 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   static DmabufTextureBuilderGidBuilder builder() nothrow
   {
     return new DmabufTextureBuilderGidBuilder;
+  }
+
+  /**
+      Get `colorState` property.
+      Returns: The color state of the texture.
+  */
+  @property gdk.color_state.ColorState colorState() nothrow
+  {
+    return getColorState();
+  }
+
+  /**
+      Set `colorState` property.
+      Params:
+        propval = The color state of the texture.
+  */
+  @property void colorState(gdk.color_state.ColorState propval) nothrow
+  {
+    setColorState(propval);
   }
 
   /**
@@ -234,7 +255,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
 
   /**
       Get `updateRegion` property.
-      Returns: The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
+      Returns: The update region for [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateTexture].
   */
   @property cairo.region.Region updateRegion() nothrow
   {
@@ -244,7 +265,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Set `updateRegion` property.
       Params:
-        propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
+        propval = The update region for [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateTexture].
   */
   @property void updateRegion(cairo.region.Region propval) nothrow
   {
@@ -301,6 +322,18 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
+      Gets the color state previously set via [gdk.dmabuf_texture_builder.DmabufTextureBuilder.setColorState].
+      Returns: the color state
+  */
+  gdk.color_state.ColorState getColorState() nothrow
+  {
+    GdkColorState* _cretval;
+    _cretval = gdk_dmabuf_texture_builder_get_color_state(cast(GdkDmabufTextureBuilder*)this._cPtr);
+    auto _retval = _cretval ? new gdk.color_state.ColorState(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
       Returns the display that this texture builder is
       associated with.
       Returns: the display
@@ -314,7 +347,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the file descriptor for a plane.
+      Gets the file descriptor for a plane or -1 if none.
   
       Params:
         plane = the plane to get the fd for
@@ -453,6 +486,21 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
+      Sets the color state for the texture.
+      
+      By default, the colorstate is `NULL`. In that case, GTK will choose the
+      correct colorstate based on the format.
+      If you don't know what colorstates are, this is probably the right thing.
+  
+      Params:
+        colorState = a [gdk.color_state.ColorState] or `NULL` to unset the colorstate.
+  */
+  void setColorState(gdk.color_state.ColorState colorState = null) nothrow
+  {
+    gdk_dmabuf_texture_builder_set_color_state(cast(GdkDmabufTextureBuilder*)this._cPtr, colorState ? cast(GdkColorState*)colorState._cPtr(No.Dup) : null);
+  }
+
+  /**
       Sets the display that this texture builder is
       associated with.
       
@@ -468,7 +516,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the file descriptor for a plane.
+      Sets the file descriptor for a plane or to -1 to unset it.
   
       Params:
         plane = the plane to set the fd for
@@ -484,7 +532,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       
       The format is specified as a fourcc code.
       
-      The format must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
+      The format must be set before calling [gdk.dmabuf_texture_builder.DmabufTextureBuilder.build].
   
       Params:
         fourcc = the texture's format or 0 to unset
@@ -497,7 +545,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Sets the height of the texture.
       
-      The height must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
+      The height must be set before calling [gdk.dmabuf_texture_builder.DmabufTextureBuilder.build].
   
       Params:
         height = the texture's height or 0 to unset
@@ -558,7 +606,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Sets the stride for a plane.
       
-      The stride must be set for all planes before calling [gdk.gltexture_builder.GLTextureBuilder.build].
+      The stride must be set for all planes before calling [gdk.dmabuf_texture_builder.DmabufTextureBuilder.build].
   
       Params:
         plane = the plane to set the stride for
@@ -604,7 +652,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Sets the width of the texture.
       
-      The width must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
+      The width must be set before calling [gdk.dmabuf_texture_builder.DmabufTextureBuilder.build].
   
       Params:
         width = The texture's width or 0 to unset
@@ -618,6 +666,17 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
 /// Fluent builder implementation template for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
 class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
+
+  /**
+      Set `colorState` property.
+      Params:
+        propval = The color state of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T colorState(gdk.color_state.ColorState propval) nothrow
+  {
+    return setProperty("color-state", propval);
+  }
 
   /**
       Set `display` property.
@@ -693,7 +752,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
   /**
       Set `updateRegion` property.
       Params:
-        propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
+        propval = The update region for [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateTexture].
       Returns: Builder instance for fluent chaining
   */
   T updateRegion(cairo.region.Region propval) nothrow

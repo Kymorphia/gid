@@ -16,8 +16,7 @@ import gobject.object;
 import pango.types;
 
 /**
-    The [gdk.device.Device] object represents an input device, such
-    as a keyboard, a mouse, or a touchpad.
+    Represents an input device, such as a keyboard, mouse or touchpad.
     
     See the [gdk.seat.Seat] documentation for more information
     about the various kinds of devices, and their relationships.
@@ -60,6 +59,19 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
+      Get `activeLayoutIndex` property.
+      Returns: The index of the keyboard active layout of a [gdk.device.Device].
+        
+        Will be -1 if there is no valid active layout.
+        
+        This is only relevant for keyboard devices.
+  */
+  @property int activeLayoutIndex() nothrow
+  {
+    return getActiveLayoutIndex();
+  }
+
+  /**
       Get `capsLockState` property.
       Returns: Whether Caps Lock is on.
         
@@ -97,6 +109,17 @@ class Device : gobject.object.ObjectWrap
   @property bool hasCursor() nothrow
   {
     return getHasCursor();
+  }
+
+  /**
+      Get `layoutNames` property.
+      Returns: The names of the keyboard layouts of a [gdk.device.Device].
+        
+        This is only relevant for keyboard devices.
+  */
+  @property string[] layoutNames() nothrow
+  {
+    return getLayoutNames();
   }
 
   /**
@@ -222,6 +245,22 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
+      Retrieves the index of the active layout of the keyboard.
+      
+      If there is no valid active layout for the [gdk.device.Device], this function will
+      return -1;
+      
+      This is only relevant for keyboard devices.
+      Returns: The layout index of the active layout or -1.
+  */
+  int getActiveLayoutIndex() nothrow
+  {
+    int _retval;
+    _retval = gdk_device_get_active_layout_index(cast(GdkDevice*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Retrieves whether the Caps Lock modifier of the keyboard is locked.
       
       This is only relevant for keyboard devices.
@@ -288,6 +327,31 @@ class Device : gobject.object.ObjectWrap
   {
     bool _retval;
     _retval = cast(bool)gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the names of the layouts of the keyboard.
+      
+      This is only relevant for keyboard devices.
+      Returns: null-terminated array of strings of layouts,
+  */
+  string[] getLayoutNames() nothrow
+  {
+    char** _cretval;
+    _cretval = gdk_device_get_layout_names(cast(GdkDevice*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
     return _retval;
   }
 

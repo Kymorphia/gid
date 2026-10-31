@@ -11,7 +11,9 @@ import gobject.value;
 import gobject.value_array;
 import gst.c.functions;
 import gst.c.types;
+import gst.caps;
 import gst.date_time;
+import gst.id_str;
 import gst.types;
 
 /**
@@ -80,14 +82,17 @@ import gst.types;
     
     Some types have special delimiters:
     
-    - [GstValueArray](GST_TYPE_ARRAY) are inside curly brackets (`{` and `}`).
-      For example `a-structure, array={1, 2, 3}`
+    - [GstValueArray](GST_TYPE_ARRAY) are inside "less and greater than" (`<` and
+      `>`). For example `a-structure, array=<1, 2, 3>
     - Ranges are inside brackets (`[` and `]`). For example `a-structure,
       range=[1, 6, 2]` 1 being the min value, 6 the maximum and 2 the step. To
       specify a #GST_TYPE_INT64_RANGE you need to explicitly specify it like:
       `a-structure, a-int64-range=(gint64) [1, 5]`
-    - [GstValueList](GST_TYPE_LIST) are inside "less and greater than" (`<` and
-      `>`). For example `a-structure, list=<1, 2, 3>
+    - [GstValueList](GST_TYPE_LIST) are inside curly brackets (`{` and `}`).
+      For example `a-structure, list={1, 2, 3}`
+    - [GStrv](G_TYPE_STRV) are inside "less and greater than" (`<` and
+      `>`) and each string is double-quoted.
+      For example `a-structure, strv=(GStrv)<"foo", "bar">`. Since 1.26.0.
     
     Structures are delimited either by a null character `\0` or a semicolon `;`
     the latter allowing to store multiple structures in the same string (see
@@ -253,11 +258,53 @@ class Structure : gobject.boxed.Boxed
       Params:
         quark = name of new structure
       Returns: a new, empty #GstStructure
+  
+      Deprecated: Use [gst.structure.Structure.newIdStrEmpty].
   */
   static gst.structure.Structure newIdEmpty(glib.types.Quark quark) nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_structure_new_id_empty(quark);
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a new, empty #GstStructure with the given name.
+      
+      Free-function: gst_structure_free
+  
+      Params:
+        name = name of new structure
+      Returns: a new, empty #GstStructure
+  */
+  static gst.structure.Structure newIdStrEmpty(gst.id_str.IdStr name) nothrow
+  {
+    GstStructure* _cretval;
+    _cretval = gst_structure_new_id_str_empty(name ? cast(const(GstIdStr)*)name._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a new, empty #GstStructure with the given name.
+      
+      See [gst.structure.Structure.setName] for constraints on the name parameter.
+      
+      name needs to be valid for the remaining lifetime of the process, e.g. has
+      to be a static string.
+      
+      Free-function: gst_structure_free
+  
+      Params:
+        name = name of new structure
+      Returns: a new, empty #GstStructure
+  */
+  static gst.structure.Structure newStaticStrEmpty(string name) nothrow
+  {
+    GstStructure* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_structure_new_static_str_empty(_name);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -300,6 +347,8 @@ class Structure : gobject.boxed.Boxed
   
       Params:
         func = a function to call for each field
+  
+      Deprecated: Use [gst.structure.Structure.filterAndMapInPlaceIdStr].
   */
   void filterAndMapInPlace(gst.types.StructureFilterMapFunc func) nothrow
   {
@@ -323,6 +372,40 @@ class Structure : gobject.boxed.Boxed
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
     gst_structure_filter_and_map_in_place(cast(GstStructure*)this._cPtr, _funcCB, _func);
+  }
+
+  /**
+      Calls the provided function once for each field in the #GstStructure. In
+      contrast to [gst.structure.Structure.foreachIdStr], the function may modify the fields.
+      In contrast to [gst.structure.Structure.mapInPlaceIdStr], the field is removed from
+      the structure if false is returned from the function.
+      The structure must be mutable.
+  
+      Params:
+        func = a function to call for each field
+  */
+  void filterAndMapInPlaceIdStr(gst.types.StructureFilterMapIdStrFunc func) nothrow
+  {
+    extern(C) gboolean _funcCallback(const(GstIdStr)* fieldname, GValue* value, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.StructureFilterMapIdStrFunc*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)(fieldname ? new gst.id_str.IdStr(cast(void*)fieldname, No.Take) : null, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.StructureFilterMapIdStrFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? cast(void*)&(func) : null;
+    gst_structure_filter_and_map_in_place_id_str(cast(GstStructure*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -446,6 +529,8 @@ class Structure : gobject.boxed.Boxed
         func = a function to call for each field
       Returns: true if the supplied function returns true For each of the fields,
         false otherwise.
+  
+      Deprecated: Use [gst.structure.Structure.foreachIdStr].
   */
   bool foreach_(gst.types.StructureForeachFunc func) nothrow
   {
@@ -470,6 +555,42 @@ class Structure : gobject.boxed.Boxed
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_structure_foreach(cast(const(GstStructure)*)this._cPtr, _funcCB, _func);
+    return _retval;
+  }
+
+  /**
+      Calls the provided function once for each field in the #GstStructure. The
+      function must not modify the fields. Also see [gst.structure.Structure.mapInPlaceIdStr]
+      and [gst.structure.Structure.filterAndMapInPlaceIdStr].
+  
+      Params:
+        func = a function to call for each field
+      Returns: true if the supplied function returns true For each of the fields,
+        false otherwise.
+  */
+  bool foreachIdStr(gst.types.StructureForeachIdStrFunc func) nothrow
+  {
+    extern(C) gboolean _funcCallback(const(GstIdStr)* fieldname, const(GValue)* value, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.StructureForeachIdStrFunc*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)(fieldname ? new gst.id_str.IdStr(cast(void*)fieldname, No.Take) : null, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.StructureForeachIdStrFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    bool _retval;
+    auto _func = func ? cast(void*)&(func) : null;
+    _retval = cast(bool)gst_structure_foreach_id_str(cast(const(GstStructure)*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -516,6 +637,29 @@ class Structure : gobject.boxed.Boxed
     gboolean _value;
     _retval = cast(bool)gst_structure_get_boolean(cast(const(GstStructure)*)this._cPtr, _fieldname, &_value);
     value = cast(bool)_value;
+    return _retval;
+  }
+
+  /**
+      Set pointer pointed by caps to the address of the value of type caps
+      correspondind to field with fieldname fieldname. Caller is responsible
+      for making sure the field exists and has the correct type.
+  
+      Params:
+        fieldname = the name of the field
+        caps = a pointer to a pointer on caps
+      Returns: true if could be set correctly. If there was no field with
+        fieldname or the existing field did not contain a caps, this function return
+        false.
+  */
+  bool getCaps(string fieldname, out gst.caps.Caps caps) nothrow
+  {
+    bool _retval;
+    const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
+    const(GstCaps)* _caps;
+    _retval = cast(bool)gst_structure_get_caps(cast(const(GstStructure)*)this._cPtr, _fieldname, &_caps);
+    if (_caps)
+      caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
     return _retval;
   }
 
@@ -797,11 +941,25 @@ class Structure : gobject.boxed.Boxed
   /**
       Get the name of structure as a GQuark.
       Returns: the quark representing the name of the structure.
+  
+      Deprecated: Use [gst.structure.Structure.getNameIdStr].
   */
   glib.types.Quark getNameId() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_structure_get_name_id(cast(const(GstStructure)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the name of structure as a GstIdStr.
+      Returns: the name of the structure.
+  */
+  gst.id_str.IdStr getNameIdStr() nothrow
+  {
+    const(GstIdStr)* _cretval;
+    _cretval = gst_structure_get_name_id_str(cast(const(GstStructure)*)this._cPtr);
+    auto _retval = _cretval ? new gst.id_str.IdStr(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -952,6 +1110,8 @@ class Structure : gobject.boxed.Boxed
       Params:
         field = #GQuark of the field name
       Returns: true if the structure contains a field with the given name
+  
+      Deprecated: Use [gst.structure.Structure.idStrHasField].
   */
   bool idHasField(glib.types.Quark field) nothrow
   {
@@ -967,6 +1127,8 @@ class Structure : gobject.boxed.Boxed
         field = #GQuark of the field name
         type = the type of a value
       Returns: true if the structure contains a field with the given name and type
+  
+      Deprecated: Use [gst.structure.Structure.idStrHasFieldTyped].
   */
   bool idHasFieldTyped(glib.types.Quark field, gobject.types.GType type) nothrow
   {
@@ -983,10 +1145,129 @@ class Structure : gobject.boxed.Boxed
       Params:
         field = a #GQuark representing a field
         value = the new value of the field
+  
+      Deprecated: Use [gst.structure.Structure.idStrSetValue].
   */
   void idSetValue(glib.types.Quark field, gobject.value.Value value) nothrow
   {
     gst_structure_id_set_value(cast(GstStructure*)this._cPtr, field, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Finds the field with the given name, and returns the type of the
+      value it contains.  If the field is not found, G_TYPE_INVALID is
+      returned.
+  
+      Params:
+        fieldname = the name of the field
+      Returns: the #GValue of the field
+  */
+  gobject.types.GType idStrGetFieldType(gst.id_str.IdStr fieldname) nothrow
+  {
+    gobject.types.GType _retval;
+    _retval = gst_structure_id_str_get_field_type(cast(const(GstStructure)*)this._cPtr, fieldname ? cast(const(GstIdStr)*)fieldname._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Get the value of the field with name fieldname.
+  
+      Params:
+        fieldname = the name of the field to get
+      Returns: the #GValue corresponding to the field with the given
+        name.
+  */
+  gobject.value.Value idStrGetValue(gst.id_str.IdStr fieldname) nothrow
+  {
+    const(GValue)* _cretval;
+    _cretval = gst_structure_id_str_get_value(cast(const(GstStructure)*)this._cPtr, fieldname ? cast(const(GstIdStr)*)fieldname._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Check if structure contains a field named fieldname.
+  
+      Params:
+        fieldname = the name of a field
+      Returns: true if the structure contains a field with the given name
+  */
+  bool idStrHasField(gst.id_str.IdStr fieldname) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_structure_id_str_has_field(cast(const(GstStructure)*)this._cPtr, fieldname ? cast(const(GstIdStr)*)fieldname._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Check if structure contains a field named fieldname and with GType type.
+  
+      Params:
+        fieldname = the name of a field
+        type = the type of a value
+      Returns: true if the structure contains a field with the given name and type
+  */
+  bool idStrHasFieldTyped(gst.id_str.IdStr fieldname, gobject.types.GType type) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_structure_id_str_has_field_typed(cast(const(GstStructure)*)this._cPtr, fieldname ? cast(const(GstIdStr)*)fieldname._cPtr(No.Dup) : null, type);
+    return _retval;
+  }
+
+  /**
+      Get the name (as a GstIdStr) of the given field number,
+      counting from 0 onwards.
+  
+      Params:
+        index = the index to get the name of
+      Returns: the name of the given field number
+  */
+  gst.id_str.IdStr idStrNthFieldName(uint index) nothrow
+  {
+    const(GstIdStr)* _cretval;
+    _cretval = gst_structure_id_str_nth_field_name(cast(const(GstStructure)*)this._cPtr, index);
+    auto _retval = _cretval ? new gst.id_str.IdStr(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Removes the field with the given name.  If the field with the given
+      name does not exist, the structure is unchanged.
+  
+      Params:
+        fieldname = the name of the field to remove
+  */
+  void idStrRemoveField(gst.id_str.IdStr fieldname) nothrow
+  {
+    gst_structure_id_str_remove_field(cast(GstStructure*)this._cPtr, fieldname ? cast(const(GstIdStr)*)fieldname._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the field with the given name field to value.  If the field
+      does not exist, it is created.  If the field exists, the previous
+      value is replaced and freed.
+  
+      Params:
+        fieldname = the name of the field to set
+        value = the new value of the field
+  */
+  void idStrSetValue(gst.id_str.IdStr fieldname, gobject.value.Value value) nothrow
+  {
+    gst_structure_id_str_set_value(cast(GstStructure*)this._cPtr, fieldname ? cast(const(GstIdStr)*)fieldname._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the field with the given GstIdStr field to value.  If the field
+      does not exist, it is created.  If the field exists, the previous
+      value is replaced and freed.
+  
+      Params:
+        fieldname = the name of the field to set
+        value = the new value of the field
+  */
+  void idStrTakeValue(gst.id_str.IdStr fieldname, gobject.value.Value value) nothrow
+  {
+    gst_structure_id_str_take_value(cast(GstStructure*)this._cPtr, fieldname ? cast(const(GstIdStr)*)fieldname._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -997,6 +1278,8 @@ class Structure : gobject.boxed.Boxed
       Params:
         field = a #GQuark representing a field
         value = the new value of the field
+  
+      Deprecated: Use [gst.structure.Structure.idStrTakeValue].
   */
   void idTakeValue(glib.types.Quark field, gobject.value.Value value) nothrow
   {
@@ -1049,6 +1332,18 @@ class Structure : gobject.boxed.Boxed
   }
 
   /**
+      Checks if the structure is writable. true if parent
+      is not set or its refcount is 1, false otherwise.
+      Returns: true if the structure is writable.
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_structure_is_writable(cast(const(GstStructure)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Calls the provided function once for each field in the #GstStructure. In
       contrast to [gst.structure.Structure.foreach_], the function may modify but not delete the
       fields. The structure must be mutable.
@@ -1057,6 +1352,8 @@ class Structure : gobject.boxed.Boxed
         func = a function to call for each field
       Returns: true if the supplied function returns true For each of the fields,
         false otherwise.
+  
+      Deprecated: Use [gst.structure.Structure.mapInPlaceIdStr].
   */
   bool mapInPlace(gst.types.StructureMapFunc func) nothrow
   {
@@ -1081,6 +1378,42 @@ class Structure : gobject.boxed.Boxed
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
     _retval = cast(bool)gst_structure_map_in_place(cast(GstStructure*)this._cPtr, _funcCB, _func);
+    return _retval;
+  }
+
+  /**
+      Calls the provided function once for each field in the #GstStructure. In
+      contrast to [gst.structure.Structure.foreachIdStr], the function may modify but not delete the
+      fields. The structure must be mutable.
+  
+      Params:
+        func = a function to call for each field
+      Returns: true if the supplied function returns true For each of the fields,
+        false otherwise.
+  */
+  bool mapInPlaceIdStr(gst.types.StructureMapIdStrFunc func) nothrow
+  {
+    extern(C) gboolean _funcCallback(const(GstIdStr)* fieldname, GValue* value, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.StructureMapIdStrFunc*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)(fieldname ? new gst.id_str.IdStr(cast(void*)fieldname, No.Take) : null, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.StructureMapIdStrFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    bool _retval;
+    auto _func = func ? cast(void*)&(func) : null;
+    _retval = cast(bool)gst_structure_map_in_place_id_str(cast(GstStructure*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -1224,6 +1557,36 @@ class Structure : gobject.boxed.Boxed
   }
 
   /**
+      Sets the name of the structure to the given name.  The string
+      provided is copied before being used. It must not be empty, start with a
+      letter and can be followed by letters, numbers and any of "/-_.:".
+  
+      Params:
+        name = the new name of the structure
+  */
+  void setNameIdStr(gst.id_str.IdStr name) nothrow
+  {
+    gst_structure_set_name_id_str(cast(GstStructure*)this._cPtr, name ? cast(const(GstIdStr)*)name._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the name of the structure to the given name.  The string
+      provided is copied before being used. It must not be empty, start with a
+      letter and can be followed by letters, numbers and any of "/-_.:".
+      
+      name needs to be valid for the remaining lifetime of the process, e.g. has
+      to be a static string.
+  
+      Params:
+        name = the new name of the structure
+  */
+  void setNameStaticStr(string name) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gst_structure_set_name_static_str(cast(GstStructure*)this._cPtr, _name);
+  }
+
+  /**
       Sets the field with the given name field to value.  If the field
       does not exist, it is created.  If the field exists, the previous
       value is replaced and freed.
@@ -1241,6 +1604,24 @@ class Structure : gobject.boxed.Boxed
   /**
       Sets the field with the given name field to value.  If the field
       does not exist, it is created.  If the field exists, the previous
+      value is replaced and freed.
+      
+      fieldname needs to be valid for the remaining lifetime of the process, e.g.
+      has to be a static string.
+  
+      Params:
+        fieldname = the name of the field to set
+        value = the new value of the field
+  */
+  void setValueStaticStr(string fieldname, gobject.value.Value value) nothrow
+  {
+    const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
+    gst_structure_set_value_static_str(cast(GstStructure*)this._cPtr, _fieldname, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the field with the given name field to value.  If the field
+      does not exist, it is created.  If the field exists, the previous
       value is replaced and freed. The function will take ownership of value.
   
       Params:
@@ -1251,6 +1632,24 @@ class Structure : gobject.boxed.Boxed
   {
     const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
     gst_structure_take_value(cast(GstStructure*)this._cPtr, _fieldname, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Sets the field with the given name field to value.  If the field
+      does not exist, it is created.  If the field exists, the previous
+      value is replaced and freed. The function will take ownership of value.
+      
+      fieldname needs to be valid for the remaining lifetime of the process, e.g.
+      has to be a static string.
+  
+      Params:
+        fieldname = the name of the field to set
+        value = the new value of the field
+  */
+  void takeValueStaticStr(string fieldname, gobject.value.Value value) nothrow
+  {
+    const(char)* _fieldname = fieldname.toCString!(No.Malloc, No.Nullable);
+    gst_structure_take_value_static_str(cast(GstStructure*)this._cPtr, _fieldname, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 
   /**

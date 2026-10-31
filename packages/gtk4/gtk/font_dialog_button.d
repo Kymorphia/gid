@@ -21,10 +21,12 @@ import pango.font_description;
 import pango.language;
 
 /**
-    The [gtk.font_dialog_button.FontDialogButton] is wrapped around a [gtk.font_dialog.FontDialog]
-    and allows to open a font chooser dialog to change the font.
+    Opens a font chooser dialog to select a font.
     
-    ![An example GtkFontDialogButton](font-button.png)
+    <picture>
+      <source srcset="font-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFontDialogButton" src="font-button.png">
+    </picture>
     
     It is suitable widget for selecting a font in a preference dialog.
     

@@ -285,8 +285,8 @@ class FileSaver : gobject.object.ObjectWrap
         ioPriority = the I/O priority of the request. E.g. [glib.types.PRIORITY_LOW],
             [glib.types.PRIORITY_DEFAULT] or [glib.types.PRIORITY_HIGH].
         cancellable = optional #GCancellable object, null to ignore.
-        progressCallback = function to call back with
-            progress information, or null if progress information is not needed.
+        progressCallback = function to call back with progress information, or null if progress
+            information is not needed.
         callback = a #GAsyncReadyCallback to call when the request is
             satisfied.
   */

@@ -187,7 +187,7 @@ class BitWriter
       
       Free-function: gst_buffer_unref
       Returns: a new allocated #GstBuffer wrapping the
-            current data. gst_buffer_unref() after usage.
+            current data. [gst.buffer.Buffer.unref] after usage.
   */
   gst.buffer.Buffer resetAndGetBuffer() nothrow
   {

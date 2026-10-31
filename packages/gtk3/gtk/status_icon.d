@@ -96,7 +96,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   @property bool embedded() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("embedded");
+    return isEmbedded();
   }
 
   /** */

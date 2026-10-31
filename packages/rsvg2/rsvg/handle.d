@@ -90,7 +90,12 @@ import rsvg.types;
        example, librsvg will not load `http` resources, to keep
        malicious SVG data from "phoning home".
     
-    7. A relative URL must resolve to the same directory as the base URL, or to
+    7. URLs with a `file` scheme are rejected if they contain a hostname, as in
+       `file://hostname/some/directory/foo.svg`.  Windows UNC paths with a hostname are
+       also rejected.  This is to prevent documents from trying to access resources on
+       other machines.
+    
+    8. A relative URL must resolve to the same directory as the base URL, or to
        one of its subdirectories.  Librsvg will canonicalize filenames, by
        removing ".." path components and resolving symbolic links, to decide whether
        files meet these conditions.
@@ -141,6 +146,10 @@ import rsvg.types;
     (DPI) of your target device.  You can call [rsvg.handle.Handle.setDpi] or
     [rsvg.handle.Handle.setDpiXY] on an [rsvg.handle.Handle] to set the DPI before rendering
     it.
+    
+    For historical reasons, the default DPI is 90.  Current CSS assumes a default DPI of 96, so
+    you may want to set the DPI of a [rsvg.handle.Handle] immediately after creating it with
+    [rsvg.handle.Handle.setDpi].
     
     # Rendering
     
@@ -247,6 +256,9 @@ class Handle : gobject.object.ObjectWrap
   /**
       Get `dpiX` property.
       Returns: Horizontal resolution in dots per inch.
+        
+        The default is 90.  Note that current CSS assumes a default of 96,
+        so you may want to set it to `96.0` before rendering the handle.
   */
   @property double dpiX() nothrow
   {
@@ -257,6 +269,9 @@ class Handle : gobject.object.ObjectWrap
       Set `dpiX` property.
       Params:
         propval = Horizontal resolution in dots per inch.
+          
+          The default is 90.  Note that current CSS assumes a default of 96,
+          so you may want to set it to `96.0` before rendering the handle.
   */
   @property void dpiX(double propval) nothrow
   {
@@ -266,6 +281,9 @@ class Handle : gobject.object.ObjectWrap
   /**
       Get `dpiY` property.
       Returns: Horizontal resolution in dots per inch.
+        
+        The default is 90.  Note that current CSS assumes a default of 96,
+        so you may want to set it to `96.0` before rendering the handle.
   */
   @property double dpiY() nothrow
   {
@@ -276,6 +294,9 @@ class Handle : gobject.object.ObjectWrap
       Set `dpiY` property.
       Params:
         propval = Horizontal resolution in dots per inch.
+          
+          The default is 90.  Note that current CSS assumes a default of 96,
+          so you may want to set it to `96.0` before rendering the handle.
   */
   @property void dpiY(double propval) nothrow
   {
@@ -817,6 +838,10 @@ class Handle : gobject.object.ObjectWrap
       uses the computed value of the `font-size` property for the toplevel
       `<svg>` element.  In those cases, this function returns `TRUE`.
       
+      For historical reasons, the default DPI is 90.  Current CSS assumes a default DPI of 96, so
+      you may want to set the DPI of a [rsvg.handle.Handle] immediately after creating it with
+      [rsvg.handle.Handle.setDpi].
+      
       This function is not able to extract the size in pixels directly from the intrinsic
       dimensions of the SVG document if the `width` or
       `height` are in percentage units (or if they do not exist, in which
@@ -890,13 +915,40 @@ class Handle : gobject.object.ObjectWrap
       This function depends on the [rsvg.handle.Handle]'s dots-per-inch value (DPI) to compute the
       "natural size" of the document in pixels, so you should call [rsvg.handle.Handle.setDpi]
       beforehand.
-      Returns: A pixbuf, or null on error.
+      Returns: A pixbuf, or null on error
         during rendering.
+  
+      Deprecated: Use [rsvg.handle.Handle.getPixbufAndError].
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = rsvg_handle_get_pixbuf(cast(RsvgHandle*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the pixbuf loaded by handle.  The pixbuf returned will be reffed, so
+      the caller of this function must assume that ref.
+      
+      API ordering: This function must be called on a fully-loaded handle.  See
+      the section "[API ordering](class.Handle.html#api-ordering)" for details.
+      
+      This function depends on the [rsvg.handle.Handle]'s dots-per-inch value (DPI) to compute the
+      "natural size" of the document in pixels, so you should call [rsvg.handle.Handle.setDpi]
+      beforehand.
+      Returns: A pixbuf, or null on error
+        during rendering.
+      Throws: [ErrorWrap]
+  */
+  gdkpixbuf.pixbuf.Pixbuf getPixbufAndError()
+  {
+    GdkPixbuf* _cretval;
+    GError *_err;
+    _cretval = rsvg_handle_get_pixbuf_and_error(cast(RsvgHandle*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
@@ -1318,6 +1370,26 @@ class Handle : gobject.object.ObjectWrap
   }
 
   /**
+      Sets a cancellable object that can be used to interrupt rendering
+      while the handle is being rendered in another thread.  For example,
+      you can set a cancellable from your main thread, spawn a thread to
+      do the rendering, and interrupt the rendering from the main thread
+      by calling [gio.cancellable.Cancellable.cancel].
+      
+      If rendering is interrupted, the corresponding call to
+      [rsvg.handle.Handle.renderDocument] (or any of the other rendering
+      functions) will return an error with domain `G_IO_ERROR`, and code
+      [gio.types.IOErrorEnum.Cancelled].
+  
+      Params:
+        cancellable = A [gio.cancellable.Cancellable] or `NULL`.
+  */
+  void setCancellableForRendering(gio.cancellable.Cancellable cancellable = null) nothrow
+  {
+    rsvg_handle_set_cancellable_for_rendering(cast(RsvgHandle*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
+  }
+
+  /**
       Sets the DPI at which the handle will be rendered. Common values are
       75, 90, and 300 DPI.
       
@@ -1488,6 +1560,9 @@ class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `dpiX` property.
       Params:
         propval = Horizontal resolution in dots per inch.
+          
+          The default is 90.  Note that current CSS assumes a default of 96,
+          so you may want to set it to `96.0` before rendering the handle.
       Returns: Builder instance for fluent chaining
   */
   T dpiX(double propval) nothrow
@@ -1499,6 +1574,9 @@ class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `dpiY` property.
       Params:
         propval = Horizontal resolution in dots per inch.
+          
+          The default is 90.  Note that current CSS assumes a default of 96,
+          so you may want to set it to `96.0` before rendering the handle.
       Returns: Builder instance for fluent chaining
   */
   T dpiY(double propval) nothrow

@@ -12,8 +12,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.layout_child.LayoutChild] is the base class for objects that are meant to hold
-    layout properties.
+    The base class for objects that are meant to hold layout properties.
     
     If a [gtk.layout_manager.LayoutManager] has per-child properties, like their packing type,
     or the horizontal and vertical span, or the icon name, then the layout

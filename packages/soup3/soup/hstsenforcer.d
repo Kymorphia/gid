@@ -16,24 +16,24 @@ import soup.types;
 /**
     Automatic HTTP Strict Transport Security enforcing for [soup.session.Session].
     
-    A #SoupHSTSEnforcer stores HSTS policies and enforces them when
-    required. #SoupHSTSEnforcer implements [soup.session_feature.SessionFeature], so you
+    A [soup.hstsenforcer.HSTSEnforcer] stores HSTS policies and enforces them when
+    required. [soup.hstsenforcer.HSTSEnforcer] implements [soup.session_feature.SessionFeature], so you
     can add an HSTS enforcer to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
     
-    #SoupHSTSEnforcer keeps track of all the HTTPS destinations that,
+    [soup.hstsenforcer.HSTSEnforcer] keeps track of all the HTTPS destinations that,
     when connected to, return the Strict-Transport-Security header with
-    valid values. #SoupHSTSEnforcer will forget those destinations
+    valid values. [soup.hstsenforcer.HSTSEnforcer] will forget those destinations
     upon expiry or when the server requests it.
     
-    When the [soup.session.Session] the #SoupHSTSEnforcer is attached to queues or
-    restarts a message, the #SoupHSTSEnforcer will rewrite the URI to HTTPS if
+    When the [soup.session.Session] the [soup.hstsenforcer.HSTSEnforcer] is attached to queues or
+    restarts a message, the [soup.hstsenforcer.HSTSEnforcer] will rewrite the URI to HTTPS if
     the destination is a known HSTS host and is contacted over an insecure
-    transport protocol (HTTP). Users of #SoupHSTSEnforcer are advised to listen
+    transport protocol (HTTP). Users of [soup.hstsenforcer.HSTSEnforcer] are advised to listen
     to changes in the [soup.message.Message.uri] property in order to be aware of
     changes in the message URI.
     
-    Note that #SoupHSTSEnforcer does not support any form of long-term
+    Note that [soup.hstsenforcer.HSTSEnforcer] does not support any form of long-term
     HSTS policy persistence. See [soup.hstsenforcer_db.HSTSEnforcerDB] for a persistent
     enforcer.
 */
@@ -77,9 +77,9 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   mixin SessionFeatureT!();
 
   /**
-      Creates a new #SoupHSTSEnforcer.
+      Creates a new [soup.hstsenforcer.HSTSEnforcer].
       
-      The base #SoupHSTSEnforcer class does not support persistent storage of HSTS
+      The base [soup.hstsenforcer.HSTSEnforcer] class does not support persistent storage of HSTS
       policies, see [soup.hstsenforcer_db.HSTSEnforcerDB] for that.
       Returns: a new #SoupHSTSEnforcer
   */

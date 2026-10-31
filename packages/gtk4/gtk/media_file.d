@@ -15,7 +15,7 @@ import gtk.media_stream;
 import gtk.types;
 
 /**
-    [gtk.media_file.MediaFile] implements [gtk.media_stream.MediaStream] for files.
+    Implements the [gtk.media_stream.MediaStream] interface for files.
     
     This provides a simple way to play back video files with GTK.
     
@@ -237,7 +237,7 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-      Sets the `GtkMediaFile to play the given file.
+      Sets the [gtk.media_file.MediaFile] to play the given file.
       
       This is a utility function that converts the given filename
       to a [gio.file.File] and calls [gtk.media_file.MediaFile.setFile].
@@ -268,7 +268,7 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-      Sets the `GtkMediaFile to play the given resource.
+      Sets the [gtk.media_file.MediaFile] to play the given resource.
       
       This is a utility function that converts the given resource_path
       to a [gio.file.File] and calls [gtk.media_file.MediaFile.setFile].

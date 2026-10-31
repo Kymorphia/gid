@@ -17,7 +17,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.revealer.Revealer] animates the transition of its child from invisible to visible.
+    Animates the transition of its child from invisible to visible.
     
     The style of transition can be controlled with
     [gtk.revealer.Revealer.setTransitionType].

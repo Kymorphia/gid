@@ -15,7 +15,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.directory_list.DirectoryList] is a list model that wraps [gio.file.File.enumerateChildrenAsync].
+    A list model that wraps [gio.file.File.enumerateChildrenAsync].
     
     It presents a [gio.list_model.ListModel] and fills it asynchronously with the [gio.file_info.FileInfo]s
     returned from that function.

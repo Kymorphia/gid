@@ -12,7 +12,7 @@ import gobject.dclosure;
 import gobject.gid_builder;
 
 /**
-    A [gdk.drag_surface.DragSurface] is an interface for surfaces used during DND.
+    A surface that is used during DND.
 */
 interface DragSurface
 {

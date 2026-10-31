@@ -11,7 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    A boxed type which wraps a list of references to GtkAccessible objects.
+    Wraps a list of references to [gtk.accessible.Accessible] objects.
 */
 class AccessibleList : gobject.boxed.Boxed
 {
@@ -48,11 +48,11 @@ class AccessibleList : gobject.boxed.Boxed
   }
 
   /**
-      Allocates a new list of accessible instances.
+      Allocates a new list of accessible objects.
   
       Params:
-        accessibles = array of GtkAccessible
-      Returns: the newly created list of accessible instances
+        accessibles = array of accessible objects
+      Returns: the newly created list of accessible objects
   */
   static gtk.accessible_list.AccessibleList newFromArray(gtk.accessible.Accessible[] accessibles) nothrow
   {
@@ -70,12 +70,13 @@ class AccessibleList : gobject.boxed.Boxed
   }
 
   /**
-      Allocates a new [gtk.accessible_list.AccessibleList], doing a shallow copy of the
-      passed list of [gtk.accessible.Accessible] instances.
+      Allocates a new [gtk.accessible_list.AccessibleList], doing a shallow copy
+      of the passed list of accessible objects
   
       Params:
-        list = a reference to a [glib.list.List] containing a list of accessible values
-      Returns: the list of accessible instances
+        list = a list
+            of accessible objects
+      Returns: the list of accessible objects
   */
   static gtk.accessible_list.AccessibleList newFromList(gtk.accessible.Accessible[] list) nothrow
   {
@@ -88,8 +89,9 @@ class AccessibleList : gobject.boxed.Boxed
   }
 
   /**
-      Gets the list of objects this boxed type holds
-      Returns: a shallow copy of the objects
+      Gets the list of objects this boxed type holds.
+      Returns: a shallow copy
+          of the objects
   */
   gtk.accessible.Accessible[] getObjects() nothrow
   {

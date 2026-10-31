@@ -13,8 +13,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [gdk.monitor.MonitorWrap] objects represent the individual outputs that are
-    associated with a [gdk.display.Display].
+    Represents the individual outputs that are associated with a [gdk.display.Display].
     
     [gdk.display.Display] keeps a [gio.list_model.ListModel] to enumerate and monitor
     monitors with [gdk.display.Display.getMonitors]. You can use

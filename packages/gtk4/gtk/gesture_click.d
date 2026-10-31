@@ -12,7 +12,7 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
-    [gtk.gesture_click.GestureClick] is a [gtk.gesture.Gesture] implementation for clicks.
+    Recognizes click gestures.
     
     It is able to recognize multiple clicks on a nearby zone, which
     can be listened for through the [gtk.gesture_click.GestureClick.pressed]

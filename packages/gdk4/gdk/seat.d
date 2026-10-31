@@ -14,8 +14,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    The [gdk.seat.Seat] object represents a collection of input devices
-    that belong to a user.
+    Represents a collection of input devices that belong to a user.
 */
 class Seat : gobject.object.ObjectWrap
 {

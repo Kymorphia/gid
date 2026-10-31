@@ -54,6 +54,10 @@ enum RsvgHandleFlags : uint
 /**
     Units for the [rsvg.types.Length] struct.  These have the same meaning as [CSS length
     units](https://www.w3.org/TR/CSS21/syndata.html#length-units).
+    
+    If you test for the values of this enum, please note that librsvg may add other units in the future
+    as its support for CSS improves.  Please make your code handle unknown units gracefully (e.g. with
+    a `default` case in a `switch()` statement).
 */
 enum RsvgUnit
 {
@@ -101,6 +105,11 @@ enum RsvgUnit
       picas, or 1/6 inch (12 points)
   */
   Pc = 8,
+
+  /**
+      advance measure of a '0' character (depends on the text orientation)
+  */
+  Ch = 9,
 }
 
 /**
@@ -209,7 +218,12 @@ struct RsvgDimensionData
        example, librsvg will not load `http` resources, to keep
        malicious SVG data from "phoning home".
     
-    7. A relative URL must resolve to the same directory as the base URL, or to
+    7. URLs with a `file` scheme are rejected if they contain a hostname, as in
+       `file://hostname/some/directory/foo.svg`.  Windows UNC paths with a hostname are
+       also rejected.  This is to prevent documents from trying to access resources on
+       other machines.
+    
+    8. A relative URL must resolve to the same directory as the base URL, or to
        one of its subdirectories.  Librsvg will canonicalize filenames, by
        removing ".." path components and resolving symbolic links, to decide whether
        files meet these conditions.
@@ -260,6 +274,10 @@ struct RsvgDimensionData
     (DPI) of your target device.  You can call [rsvg.handle.Handle.setDpi] or
     [rsvg.handle.Handle.setDpiXY] on an [rsvg.handle.Handle] to set the DPI before rendering
     it.
+    
+    For historical reasons, the default DPI is 90.  Current CSS assumes a default DPI of 96, so
+    you may want to set the DPI of a [rsvg.handle.Handle] immediately after creating it with
+    [rsvg.handle.Handle.setDpi].
     
     # Rendering
     

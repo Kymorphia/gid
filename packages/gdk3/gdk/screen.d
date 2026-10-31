@@ -169,7 +169,7 @@ class Screen : gobject.object.ObjectWrap
       
       On X11, this is done by inspecting the _NET_ACTIVE_WINDOW property
       on the root window, as described in the
-      [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec).
+      [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/).
       If there is no currently currently active
       window, or the window manager does not support the
       _NET_ACTIVE_WINDOW hint, this function returns null.
@@ -597,7 +597,7 @@ class Screen : gobject.object.ObjectWrap
       
       On X11, this is done by inspecting the _NET_CLIENT_LIST_STACKING
       property on the root window, as described in the
-      [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec).
+      [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/).
       If the window manager does not support the
       _NET_CLIENT_LIST_STACKING hint, this function returns null.
       

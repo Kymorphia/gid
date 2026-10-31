@@ -4,6 +4,7 @@ module gtk.css_section;
 public import gid.basictypes;
 import gid.gid;
 import gio.file;
+import glib.bytes;
 import glib.string_;
 import gobject.boxed;
 import gobject.object;
@@ -70,6 +71,39 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /**
+      Creates a new [gtk.css_section.CssSection] referring to the section
+      in the given `file` or the given `bytes` from the `start` location to the
+      `end` location.
+  
+      Params:
+        file = The file this section refers to
+        bytes = The bytes this sections refers to
+        start = The start location
+        end = The end location
+      Returns: a new [gtk.css_section.CssSection]
+  */
+  static gtk.css_section.CssSection newWithBytes(gio.file.File file, glib.bytes.Bytes bytes, gtk.types.CssLocation start, gtk.types.CssLocation end) nothrow
+  {
+    GtkCssSection* _cretval;
+    _cretval = gtk_css_section_new_with_bytes(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, cast(const(GtkCssLocation)*)&start, cast(const(GtkCssLocation)*)&end);
+    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the bytes that section was parsed from.
+      Returns: the [glib.bytes.Bytes] from which the `section`
+          was parsed
+  */
+  glib.bytes.Bytes getBytes() nothrow
+  {
+    GBytes* _cretval;
+    _cretval = gtk_css_section_get_bytes(cast(const(GtkCssSection)*)this._cPtr);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
       Returns the location in the CSS document where this section ends.
       Returns: The end location of
           this section
@@ -104,7 +138,7 @@ class CssSection : gobject.boxed.Boxed
       Gets the parent section for the given `section`.
       
       The parent section is the section that contains this `section`. A special
-      case are sections of  type `GTK_CSS_SECTION_DOCUMEN`T. Their parent will
+      case are sections of  type [gtk.types.CssSectionType.Document]. Their parent will
       either be `NULL` if they are the original CSS document that was loaded by
       [gtk.css_provider.CssProvider.loadFromFile] or a section of type
       [gtk.types.CssSectionType.Import] if it was loaded with an `import` rule from

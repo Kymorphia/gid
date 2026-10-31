@@ -10,8 +10,8 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
-    The [gtk.constraint_target.ConstraintTarget] interface is implemented by objects that
-    can be used as source or target in [gtk.constraint.Constraint]s.
+    Makes it possible to use an object as source or target in a
+    [gtk.constraint.Constraint].
     
     Besides [gtk.widget.Widget], it is also implemented by [gtk.constraint_guide.ConstraintGuide].
 */

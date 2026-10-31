@@ -7,6 +7,8 @@ import gobject.gid_builder;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
+import gtk.accessible_range;
+import gtk.accessible_range_mixin;
 import gtk.adjustment;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -20,9 +22,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    The [gtk.scrollbar.Scrollbar] widget is a horizontal or vertical scrollbar.
+    Shows a horizontal or vertical scrollbar.
     
-    ![An example GtkScrollbar](scrollbar.png)
+    <picture>
+      <source srcset="scrollbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkScrollbar" src="scrollbar.png">
+    </picture>
     
     Its position and movement are controlled by the adjustment that is passed to
     or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
@@ -63,7 +68,7 @@ import gtk.widget;
     
     [gtk.scrollbar.Scrollbar] uses the [gtk.types.AccessibleRole.Scrollbar] role.
 */
-class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
+class Scrollbar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
   /** */
@@ -119,6 +124,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
     setAdjustment(propval);
   }
 
+  mixin AccessibleRangeT!();
   mixin OrientableT!();
 
   /**
@@ -162,9 +168,10 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
 }
 
 /// Fluent builder implementation template for [gtk.scrollbar.Scrollbar]
-class ScrollbarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
+class ScrollbarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
+  mixin AccessibleRangeGidBuilderT!();
   mixin OrientableGidBuilderT!();
 
   /**

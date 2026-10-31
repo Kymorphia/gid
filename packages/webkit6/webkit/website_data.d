@@ -78,8 +78,9 @@ class WebsiteData : gobject.boxed.Boxed
   /**
       Gets the size of the data of types types in a #WebKitWebsiteData.
       
-      Note that currently the data size is only known for [webkit.types.WebsiteDataTypes.DiskCache] data type
-      so for all other types 0 will be returned.
+      Note that currently the data size is only known for the [webkit.types.WebsiteDataTypes.DiskCache],
+      [webkit.types.WebsiteDataTypes.LocalStorage], [webkit.types.WebsiteDataTypes.IndexeddbDatabases] and
+      [webkit.types.WebsiteDataTypes.DomCache] data types, so for all other types 0 will be returned.
   
       Params:
         types = a bitmask  of #WebKitWebsiteDataTypes

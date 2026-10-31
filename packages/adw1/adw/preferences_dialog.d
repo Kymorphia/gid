@@ -18,6 +18,8 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.shortcut_manager;
+import gtk.shortcut_manager_mixin;
 import gtk.widget;
 
 /**
@@ -30,6 +32,12 @@ import gtk.widget;
     
     The [adw.preferences_dialog.PreferencesDialog] widget presents an application's preferences
     gathered into pages and groups. The preferences are searchable by the user.
+    
+    ## Actions
+    
+    `AdwPrefencesDialog` defines the `navigation.pop` action, it doesn't take any
+    parameters and pops the current subpage from the navigation stack, equivalent
+    to calling [adw.preferences_dialog.PreferencesDialog.popSubpage].
     
     ## CSS nodes
     

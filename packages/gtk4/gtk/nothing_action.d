@@ -11,7 +11,7 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that does nothing.
+    Does nothing.
 */
 class NothingAction : gtk.shortcut_action.ShortcutAction
 {

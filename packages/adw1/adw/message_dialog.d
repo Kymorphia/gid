@@ -83,8 +83,7 @@ import gtk.window;
     ## Async API
     
     [adw.message_dialog.MessageDialog] can also be used via the [adw.message_dialog.MessageDialog.choose]
-    method. This API follows the GIO async pattern, and the result can be
-    obtained by calling [adw.message_dialog.MessageDialog.chooseFinish], for example:
+    method. This API follows the GIO async pattern, for example:
     
     ```c
     static void
@@ -126,7 +125,7 @@ import gtk.window;
     
     [adw.message_dialog.MessageDialog] supports adding responses in UI definitions by via the
     `<responses>` element that may contain multiple `<response>` elements, each
-    respresenting a response.
+    representing a response.
     
     Each of the `<response>` elements must have the `id` attribute specifying the
     response ID. The contents of the element are used as the response label.
@@ -158,6 +157,8 @@ import gtk.window;
     ## Accessibility
     
     [adw.message_dialog.MessageDialog] uses the [gtk.types.AccessibleRole.Dialog] role.
+
+    Deprecated: Use [adw.alert_dialog.AlertDialog].
 */
 class MessageDialog : gtk.window.Window
 {
@@ -199,6 +200,8 @@ class MessageDialog : gtk.window.Window
   /**
       Get `body_` property.
       Returns: The body text of the dialog.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property string body_() nothrow
   {
@@ -209,6 +212,8 @@ class MessageDialog : gtk.window.Window
       Set `body_` property.
       Params:
         propval = The body text of the dialog.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property void body_(string propval) nothrow
   {
@@ -220,6 +225,8 @@ class MessageDialog : gtk.window.Window
       Returns: Whether the body text includes Pango markup.
         
         See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property bool bodyUseMarkup() nothrow
   {
@@ -232,6 +239,8 @@ class MessageDialog : gtk.window.Window
         propval = Whether the body text includes Pango markup.
           
           See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property void bodyUseMarkup(bool propval) nothrow
   {
@@ -248,6 +257,8 @@ class MessageDialog : gtk.window.Window
         It doesn't have to correspond to any of the responses in the dialog.
         
         The default close response is `close`.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property string closeResponse() nothrow
   {
@@ -265,6 +276,8 @@ class MessageDialog : gtk.window.Window
           It doesn't have to correspond to any of the responses in the dialog.
           
           The default close response is `close`.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property void closeResponse(string propval) nothrow
   {
@@ -275,10 +288,15 @@ class MessageDialog : gtk.window.Window
       Get `defaultResponse` property.
       Returns: The response ID of the default response.
         
-        If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+        The button corresponding to this response will be set as the default widget
+        of the dialog.
         
-        If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-        will do nothing.
+        If not set, the default widget will not be set, and the last added response
+        will be focused by default.
+        
+        See [gtk.window.Window.defaultWidget].
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property string defaultResponse() nothrow
   {
@@ -290,10 +308,15 @@ class MessageDialog : gtk.window.Window
       Params:
         propval = The response ID of the default response.
           
-          If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+          The button corresponding to this response will be set as the default widget
+          of the dialog.
           
-          If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-          will do nothing.
+          If not set, the default widget will not be set, and the last added response
+          will be focused by default.
+          
+          See [gtk.window.Window.defaultWidget].
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property void defaultResponse(string propval) nothrow
   {
@@ -305,6 +328,8 @@ class MessageDialog : gtk.window.Window
       Returns: The child widget.
         
         Displayed below the heading and body.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property gtk.widget.Widget extraChild() nothrow
   {
@@ -317,6 +342,8 @@ class MessageDialog : gtk.window.Window
         propval = The child widget.
           
           Displayed below the heading and body.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property void extraChild(gtk.widget.Widget propval) nothrow
   {
@@ -326,6 +353,8 @@ class MessageDialog : gtk.window.Window
   /**
       Get `heading` property.
       Returns: The heading of the dialog.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property string heading() nothrow
   {
@@ -336,6 +365,8 @@ class MessageDialog : gtk.window.Window
       Set `heading` property.
       Params:
         propval = The heading of the dialog.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property void heading(string propval) nothrow
   {
@@ -347,6 +378,8 @@ class MessageDialog : gtk.window.Window
       Returns: Whether the heading includes Pango markup.
         
         See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property bool headingUseMarkup() nothrow
   {
@@ -359,6 +392,8 @@ class MessageDialog : gtk.window.Window
         propval = Whether the heading includes Pango markup.
           
           See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   @property void headingUseMarkup(bool propval) nothrow
   {
@@ -386,6 +421,8 @@ class MessageDialog : gtk.window.Window
         heading = the heading
         body_ = the body text
       Returns: the newly created [adw.message_dialog.MessageDialog]
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   this(gtk.window.Window parent = null, string heading = null, string body_ = null) nothrow
   {
@@ -417,6 +454,8 @@ class MessageDialog : gtk.window.Window
       Params:
         id = the response ID
         label = the response label
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void addResponse(string id, string label) nothrow
   {
@@ -427,13 +466,12 @@ class MessageDialog : gtk.window.Window
 
   /**
       This function shows self to the user.
-      
-      The callback will be called when the alert is dismissed. It should call
-      [adw.message_dialog.MessageDialog.chooseFinish] to obtain the result.
   
       Params:
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void choose(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -463,6 +501,8 @@ class MessageDialog : gtk.window.Window
         result = a [gio.async_result.AsyncResult]
       Returns: the ID of the response that was selected, or
           [adw.message_dialog.MessageDialog.closeResponse] if the call was cancelled.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   string chooseFinish(gio.async_result.AsyncResult result) nothrow
   {
@@ -475,6 +515,8 @@ class MessageDialog : gtk.window.Window
   /**
       Gets the body text of self.
       Returns: the body of self.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   string getBody() nothrow
   {
@@ -487,6 +529,8 @@ class MessageDialog : gtk.window.Window
   /**
       Gets whether the body text of self includes Pango markup.
       Returns: whether self uses markup for body text
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   bool getBodyUseMarkup() nothrow
   {
@@ -498,6 +542,8 @@ class MessageDialog : gtk.window.Window
   /**
       Gets the ID of the close response of self.
       Returns: the close response ID
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   string getCloseResponse() nothrow
   {
@@ -510,6 +556,8 @@ class MessageDialog : gtk.window.Window
   /**
       Gets the ID of the default response of self.
       Returns: the default response ID
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   string getDefaultResponse() nothrow
   {
@@ -522,6 +570,8 @@ class MessageDialog : gtk.window.Window
   /**
       Gets the child widget of self.
       Returns: the child widget of self.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   gtk.widget.Widget getExtraChild() nothrow
   {
@@ -534,6 +584,8 @@ class MessageDialog : gtk.window.Window
   /**
       Gets the heading of self.
       Returns: the heading of self.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   string getHeading() nothrow
   {
@@ -546,6 +598,8 @@ class MessageDialog : gtk.window.Window
   /**
       Gets whether the heading of self includes Pango markup.
       Returns: whether self uses markup for heading
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   bool getHeadingUseMarkup() nothrow
   {
@@ -562,6 +616,8 @@ class MessageDialog : gtk.window.Window
       Params:
         response = a response ID
       Returns: the appearance of response
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   adw.types.ResponseAppearance getResponseAppearance(string response) nothrow
   {
@@ -580,6 +636,8 @@ class MessageDialog : gtk.window.Window
       Params:
         response = a response ID
       Returns: whether response is enabled
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   bool getResponseEnabled(string response) nothrow
   {
@@ -597,6 +655,8 @@ class MessageDialog : gtk.window.Window
       Params:
         response = a response ID
       Returns: the label of response
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   string getResponseLabel(string response) nothrow
   {
@@ -613,6 +673,8 @@ class MessageDialog : gtk.window.Window
       Params:
         response = response ID
       Returns: whether self has a response with the ID response.
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   bool hasResponse(string response) nothrow
   {
@@ -627,6 +689,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         id = the response ID
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void removeResponse(string id) nothrow
   {
@@ -641,6 +705,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         response = response ID
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void response(string response) nothrow
   {
@@ -653,6 +719,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         body_ = the body of self
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setBody(string body_) nothrow
   {
@@ -667,6 +735,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         useMarkup = whether to use markup for body text
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setBodyUseMarkup(bool useMarkup) nothrow
   {
@@ -685,6 +755,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         response = the close response ID
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setCloseResponse(string response) nothrow
   {
@@ -695,13 +767,18 @@ class MessageDialog : gtk.window.Window
   /**
       Sets the ID of the default response of self.
       
-      If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+      The button corresponding to this response will be set as the default widget
+      of self.
       
-      If set to `NULL` or to a non-existent response ID, pressing <kbd>Enter</kbd>
-      will do nothing.
+      If not set, the default widget will not be set, and the last added response
+      will be focused by default.
+      
+      See [gtk.window.Window.defaultWidget].
   
       Params:
         response = the default response ID
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setDefaultResponse(string response = null) nothrow
   {
@@ -716,6 +793,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         child = the child widget
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setExtraChild(gtk.widget.Widget child = null) nothrow
   {
@@ -727,6 +806,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         heading = the heading of self
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setHeading(string heading = null) nothrow
   {
@@ -741,6 +822,8 @@ class MessageDialog : gtk.window.Window
   
       Params:
         useMarkup = whether to use markup for heading
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setHeadingUseMarkup(bool useMarkup) nothrow
   {
@@ -755,12 +838,13 @@ class MessageDialog : gtk.window.Window
         <img src="message-dialog-appearance.png" alt="message-dialog-appearance">
       </picture>
       
-      Use [adw.types.ResponseAppearance.Suggested] to mark important responses such as the
-      affirmative action, like the Save button in the example.
+      Use [adw.types.ResponseAppearance.Suggested] to mark important responses such
+      as the affirmative action, like the Save button in the example.
       
-      Use [adw.types.ResponseAppearance.Destructive] to draw attention to the potentially damaging
-      consequences of using response. This appearance acts as a warning to the
-      user. The Discard button in the example is using this appearance.
+      Use [adw.types.ResponseAppearance.Destructive] to draw attention to the
+      potentially damaging consequences of using response. This appearance acts as
+      a warning to the user. The Discard button in the example is using this
+      appearance.
       
       The default appearance is [adw.types.ResponseAppearance.Default].
       
@@ -769,6 +853,8 @@ class MessageDialog : gtk.window.Window
       Params:
         response = a response ID
         appearance = appearance for response
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setResponseAppearance(string response, adw.types.ResponseAppearance appearance) nothrow
   {
@@ -791,6 +877,8 @@ class MessageDialog : gtk.window.Window
       Params:
         response = a response ID
         enabled = whether to enable response
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setResponseEnabled(string response, bool enabled) nothrow
   {
@@ -807,6 +895,8 @@ class MessageDialog : gtk.window.Window
       Params:
         response = a response ID
         label = the label of response
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   void setResponseLabel(string response, string label) nothrow
   {
@@ -839,6 +929,8 @@ class MessageDialog : gtk.window.Window
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   gulong connectResponse(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -884,6 +976,8 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
       Params:
         propval = The body text of the dialog.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   T body_(string propval) nothrow
   {
@@ -897,6 +991,8 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   T bodyUseMarkup(bool propval) nothrow
   {
@@ -915,6 +1011,8 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           
           The default close response is `close`.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   T closeResponse(string propval) nothrow
   {
@@ -926,11 +1024,16 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
       Params:
         propval = The response ID of the default response.
           
-          If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+          The button corresponding to this response will be set as the default widget
+          of the dialog.
           
-          If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-          will do nothing.
+          If not set, the default widget will not be set, and the last added response
+          will be focused by default.
+          
+          See [gtk.window.Window.defaultWidget].
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   T defaultResponse(string propval) nothrow
   {
@@ -944,6 +1047,8 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           
           Displayed below the heading and body.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   T extraChild(gtk.widget.Widget propval) nothrow
   {
@@ -955,6 +1060,8 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
       Params:
         propval = The heading of the dialog.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   T heading(string propval) nothrow
   {
@@ -968,6 +1075,8 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.alert_dialog.AlertDialog].
   */
   T headingUseMarkup(bool propval) nothrow
   {

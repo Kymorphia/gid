@@ -17,7 +17,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    Buffered input stream implements #GFilterInputStream and provides
+    Buffered input stream implements [gio.filter_input_stream.FilterInputStream] and provides
     for buffered reads.
     
     By default, [gio.buffered_input_stream.BufferedInputStream]'s buffer size is set at 4 kilobytes.
@@ -90,12 +90,12 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   mixin SeekableT!();
 
   /**
-      Creates a new #GInputStream from the given base_stream, with
+      Creates a new [gio.input_stream.InputStream] from the given base_stream, with
       a buffer set to the default size (4 kilobytes).
   
       Params:
-        baseStream = a #GInputStream
-      Returns: a #GInputStream for the given base_stream.
+        baseStream = a [gio.input_stream.InputStream]
+      Returns: a [gio.input_stream.InputStream] for the given base_stream.
   */
   this(gio.input_stream.InputStream baseStream) nothrow
   {
@@ -105,13 +105,13 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   }
 
   /**
-      Creates a new #GBufferedInputStream from the given base_stream,
+      Creates a new [gio.buffered_input_stream.BufferedInputStream] from the given base_stream,
       with a buffer set to size.
   
       Params:
-        baseStream = a #GInputStream
+        baseStream = a [gio.input_stream.InputStream]
         size = a #gsize
-      Returns: a #GInputStream.
+      Returns: a [gio.input_stream.InputStream].
   */
   static gio.buffered_input_stream.BufferedInputStream newSized(gio.input_stream.InputStream baseStream, size_t size) nothrow
   {
@@ -126,7 +126,8 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Will block during this read.
       
       If count is zero, returns zero and does nothing. A value of count
-      larger than `G_MAXSSIZE` will cause a [gio.types.IOErrorEnum.InvalidArgument] error.
+      larger than `G_MAXSSIZE` will cause a
+      `errorGio.IOErrorEnum.INVALID_ARGUMENT` error.
       
       On success, the number of bytes read into the buffer is returned.
       It is not an error if this is not the same as the requested size, as it
@@ -136,22 +137,22 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       If count is -1 then the attempted read size is equal to the number of
       bytes that are required to fill the buffer.
       
-      If cancellable is not null, then the operation can be cancelled by
+      If cancellable is not `NULL`, then the operation can be cancelled by
       triggering the cancellable object from another thread. If the operation
-      was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
-      operation was partially finished when the operation was cancelled the
+      was cancelled, the error `errorGio.IOErrorEnum.CANCELLED` will be returned.
+      If an operation was partially finished when the operation was cancelled the
       partial result will be returned, without an error.
       
-      On error -1 is returned and error is set accordingly.
+      On error `-1` is returned and error is set accordingly.
       
       For the asynchronous, non-blocking, version of this function, see
       [gio.buffered_input_stream.BufferedInputStream.fillAsync].
   
       Params:
         count = the number of bytes that will be read from the stream
-        cancellable = optional #GCancellable object, null to ignore
+        cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
       Returns: the number of bytes read into stream's buffer, up to count,
-            or -1 on error.
+            or `-1` on error.
       Throws: [ErrorWrap]
   */
   ptrdiff_t fill(ptrdiff_t count, gio.cancellable.Cancellable cancellable = null)
@@ -169,14 +170,14 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       io_priority can be used to prioritize reads. For the synchronous
       version of this function, see [gio.buffered_input_stream.BufferedInputStream.fill].
       
-      If count is -1 then the attempted read size is equal to the number
+      If count is `-1` then the attempted read size is equal to the number
       of bytes that are required to fill the buffer.
   
       Params:
         count = the number of bytes that will be read from the stream
-        ioPriority = the [I/O priority][io-priority] of the request
-        cancellable = optional #GCancellable object
-        callback = a #GAsyncReadyCallback
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
+        cancellable = optional [gio.cancellable.Cancellable] object
+        callback = a [gio.types.AsyncReadyCallback]
   */
   void fillAsync(ptrdiff_t count, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -203,7 +204,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Finishes an asynchronous read.
   
       Params:
-        result = a #GAsyncResult
+        result = a [gio.async_result.AsyncResult]
       Returns: a #gssize of the read stream, or `-1` on an error.
       Throws: [ErrorWrap]
   */
@@ -240,14 +241,15 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   }
 
   /**
-      Peeks in the buffer, copying data of size count into buffer,
-      offset offset bytes.
+      Peeks in the buffered input, copying count bytes of data from offset bytes
+      in the buffered input into buffer.
   
       Params:
         buffer = a pointer to
-            an allocated chunk of memory
-        offset = a #gsize
-      Returns: a #gsize of the number of bytes peeked, or -1 on error.
+            an allocated chunk of memory, which must be at least count bytes long
+        offset = offset into the buffered input to peek from, or zero to peek from
+            the next byte in the buffered input onwards
+      Returns: the number of bytes copied, which may be zero
   */
   size_t peek(ubyte[] buffer, size_t offset) nothrow
   {
@@ -286,19 +288,19 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       during this read.
       
       On success, the byte read from the stream is returned. On end of stream
-      -1 is returned but it's not an exceptional error and error is not set.
+      `-1` is returned but it's not an exceptional error and error is not set.
       
-      If cancellable is not null, then the operation can be cancelled by
+      If cancellable is not `NULL`, then the operation can be cancelled by
       triggering the cancellable object from another thread. If the operation
-      was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
-      operation was partially finished when the operation was cancelled the
+      was cancelled, the error `errorGio.IOErrorEnum.CANCELLED` will be returned.
+      If an operation was partially finished when the operation was cancelled the
       partial result will be returned, without an error.
       
-      On error -1 is returned and error is set accordingly.
+      On error `-1` is returned and error is set accordingly.
   
       Params:
-        cancellable = optional #GCancellable object, null to ignore
-      Returns: the byte read from the stream, or -1 on end of stream or error.
+        cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
+      Returns: the byte read from the stream, or `-1` on end of stream or error.
       Throws: [ErrorWrap]
   */
   int readByte(gio.cancellable.Cancellable cancellable = null)

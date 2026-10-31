@@ -15,7 +15,7 @@ import gsk.c.types;
 import gsk.types;
 
 /**
-    [gsk.transform.Transform] is an object to describe transform matrices.
+    Describes a 3D transform.
     
     Unlike [graphene.matrix.Matrix], [gsk.transform.Transform] retains the steps in how
     a transform was constructed, and allows inspecting them. It is modeled
@@ -59,7 +59,13 @@ class Transform : gobject.boxed.Boxed
     return this;
   }
 
-  /** */
+  /**
+      Creates a new identity transform.
+      
+      This function is meant to be used by language
+      bindings. For C code, this is equivalent to using `NULL`.
+      Returns: A new identity transform
+  */
   this() nothrow
   {
     GskTransform* _cretval;
@@ -96,11 +102,14 @@ class Transform : gobject.boxed.Boxed
   /**
       Inverts the given transform.
       
-      If self is not invertible, null is returned.
-      Note that inverting null also returns null, which is
-      the correct inverse of null. If you need to differentiate
-      between those cases, you should check self is not null
+      If self is not invertible, `NULL` is returned.
+      Note that inverting `NULL` also returns `NULL`, which is
+      the correct inverse of `NULL`. If you need to differentiate
+      between those cases, you should check self is not `NULL`
       before calling this function.
+      
+      This function consumes self. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
       Returns: The inverted transform
   */
   gsk.transform.Transform invert() nothrow
@@ -113,6 +122,9 @@ class Transform : gobject.boxed.Boxed
 
   /**
       Multiplies next with the given matrix.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         matrix = the matrix to multiply next with
@@ -127,12 +139,42 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
+      Multiplies next with the matrix [ xx yx x0; xy yy y0; 0 0 1 ].
+      
+      The result of calling [gsk.transform.Transform.to2d] on the returned
+      [gsk.transform.Transform] should match the input passed to this
+      function.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
+  
+      Params:
+        xx = the xx member
+        yx = the yx member
+        xy = the xy member
+        yy = the yy member
+        dx = the x0 member
+        dy = the y0 member
+      Returns: The new transform
+  */
+  gsk.transform.Transform matrix2d(float xx, float yx, float xy, float yy, float dx, float dy) nothrow
+  {
+    GskTransform* _cretval;
+    _cretval = gsk_transform_matrix_2d(cast(GskTransform*)this._cPtr, xx, yx, xy, yy, dx, dy);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Applies a perspective projection transform.
       
       This transform scales points in X and Y based on their Z value,
       scaling points with positive Z values away from the origin, and
       those with negative Z values towards the origin. Points
       on the z=0 plane are unchanged.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         depth = distance of the z=0 plane. Lower values give a more
@@ -149,8 +191,7 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Converts self into a human-readable string representation suitable
-      for printing.
+      Converts the transform into a human-readable representation.
       
       The result of this function can later be parsed with
       [gsk.transform.Transform.parse].
@@ -164,8 +205,12 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Rotates next angle degrees in 2D - or in 3D-speak, around the Z axis.
+      Rotates next by an angle around the Z axis.
+      
       The rotation happens around the origin point of (0, 0).
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         angle = the rotation angle, in degrees (clockwise)
@@ -183,6 +228,9 @@ class Transform : gobject.boxed.Boxed
       Rotates next angle degrees around axis.
       
       For a rotation in 2D space, use [gsk.transform.Transform.rotate]
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         angle = the rotation angle, in degrees (clockwise)
@@ -201,6 +249,9 @@ class Transform : gobject.boxed.Boxed
       Scales next in 2-dimensional space by the given factors.
       
       Use [gsk.transform.Transform.scale3d] to scale in all 3 dimensions.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         factorX = scaling factor on the X axis
@@ -217,6 +268,9 @@ class Transform : gobject.boxed.Boxed
 
   /**
       Scales next by the given factors.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         factorX = scaling factor on the X axis
@@ -234,6 +288,9 @@ class Transform : gobject.boxed.Boxed
 
   /**
       Applies a skew transform.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         skewX = skew factor, in degrees, on the X axis
@@ -249,13 +306,18 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Converts a [gsk.transform.Transform] to a 2D transformation matrix.
+      Converts a transform to a 2D transformation matrix.
       
       self must be a 2D transformation. If you are not
-      sure, use [gsk.transform.Transform.getCategory] >=
-      [gsk.types.TransformCategory._2d] to check.
+      sure, use
       
-      The returned values have the following layout:
+          [gsk.transform.Transform.getCategory] >= GSK_TRANSFORM_CATEGORY_2D
+      
+      to check.
+      
+      The returned values are a subset of the full 4x4 matrix that
+      is computed by [gsk.transform.Transform.toMatrix] and have the
+      following layout:
       
       ```
         | xx yx |   |  a  b  0 |
@@ -281,7 +343,7 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Converts a [gsk.transform.Transform] to 2D transformation factors.
+      Converts a transform to 2D transformation factors.
       
       To recreate an equivalent transform from the factors returned
       by this function, use
@@ -289,14 +351,14 @@ class Transform : gobject.boxed.Boxed
           gsk_transform_skew (
               gsk_transform_scale (
                   gsk_transform_rotate (
-                      gsk_transform_translate (NULL, &GRAPHENE_POINT_T (dx, dy)),
+                      gsk_transform_translate (NULL, &GRAPHENE_POINT_INIT (dx, dy)),
                       angle),
                   scale_x, scale_y),
               skew_x, skew_y)
       
       self must be a 2D transformation. If you are not sure, use
       
-          [gsk.transform.Transform.getCategory] >= [gsk.types.TransformCategory._2d]
+          [gsk.transform.Transform.getCategory] >= GSK_TRANSFORM_CATEGORY_2D
       
       to check.
   
@@ -321,19 +383,21 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Converts a [gsk.transform.Transform] to 2D affine transformation factors.
+      Converts a transform to 2D affine transformation factors.
       
       To recreate an equivalent transform from the factors returned
       by this function, use
       
-          gsk_transform_scale (gsk_transform_translate (NULL,
-                                                        &GRAPHENE_POINT_T (dx, dy)),
-                               sx, sy)
+          gsk_transform_scale (
+              gsk_transform_translate (
+                  NULL,
+                  &GRAPHENE_POINT_T (dx, dy)),
+              sx, sy)
       
       self must be a 2D affine transformation. If you are not
       sure, use
       
-          [gsk.transform.Transform.getCategory] >= [gsk.types.TransformCategory._2dAffine]
+          [gsk.transform.Transform.getCategory] >= GSK_TRANSFORM_CATEGORY_2D_AFFINE
       
       to check.
   
@@ -353,12 +417,12 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Computes the actual value of self and stores it in out_matrix.
+      Computes the 4x4 matrix for the transform.
       
       The previous value of out_matrix will be ignored.
   
       Params:
-        outMatrix = The matrix to set
+        outMatrix = return location for the matrix
   */
   void toMatrix(out graphene.matrix.Matrix outMatrix) nothrow
   {
@@ -368,7 +432,7 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Converts a matrix into a string that is suitable for printing.
+      Converts the transform into a human-readable string.
       
       The resulting string can be parsed with [gsk.transform.Transform.parse].
       
@@ -384,12 +448,12 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Converts a [gsk.transform.Transform] to a translation operation.
+      Converts a transform to a translation operation.
       
       self must be a 2D transformation. If you are not
       sure, use
       
-          [gsk.transform.Transform.getCategory] >= [gsk.types.TransformCategory._2dTranslate]
+          [gsk.transform.Transform.getCategory] >= GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
       
       to check.
   
@@ -406,9 +470,12 @@ class Transform : gobject.boxed.Boxed
 
   /**
       Applies all the operations from other to next.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
-        other = Transform to apply
+        other = transform to apply
       Returns: The new transform
   */
   gsk.transform.Transform transform(gsk.transform.Transform other = null) nothrow
@@ -420,12 +487,14 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Transforms a [graphene.rect.Rect] using the given transform self.
+      Transforms a rectangle using the given transform.
       
       The result is the bounding box containing the coplanar quad.
+      
+      The input and output rect may point to the same rectangle.
   
       Params:
-        rect = a [graphene.rect.Rect]
+        rect = the rectangle to transform
         outRect = return location for the bounds
             of the transformed rectangle
   */
@@ -437,10 +506,10 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Transforms a [graphene.point.Point] using the given transform self.
+      Transforms a point using the given transform.
   
       Params:
-        point = a [graphene.point.Point]
+        point = the point to transform
         outPoint = return location for
             the transformed point
   */
@@ -451,6 +520,9 @@ class Transform : gobject.boxed.Boxed
 
   /**
       Translates next in 2-dimensional space by point.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         point = the point to translate the transform by
@@ -466,6 +538,9 @@ class Transform : gobject.boxed.Boxed
 
   /**
       Translates next by point.
+      
+      This function consumes next. Use [gsk.transform.Transform.ref_] first
+      if you want to keep it around.
   
       Params:
         point = the point to translate the transform by
@@ -480,19 +555,18 @@ class Transform : gobject.boxed.Boxed
   }
 
   /**
-      Parses the given string into a transform and puts it in
-      out_transform.
+      Parses a given into a transform.
       
       Strings printed via [gsk.transform.Transform.toString_]
       can be read in again successfully using this function.
       
-      If string does not describe a valid transform, false is
-      returned and null is put in out_transform.
+      If string does not describe a valid transform, false
+      is returned and `NULL` is put in out_transform.
   
       Params:
         string_ = the string to parse
-        outTransform = The location to put the transform in
-      Returns: true if string described a valid transform.
+        outTransform = return location for the transform
+      Returns: true if string described a valid transform
   */
   static bool parse(string string_, out gsk.transform.Transform outTransform) nothrow
   {

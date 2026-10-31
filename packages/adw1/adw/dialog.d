@@ -16,6 +16,8 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.shortcut_manager;
+import gtk.shortcut_manager_mixin;
 import gtk.widget;
 
 /**
@@ -55,6 +57,10 @@ import gtk.widget;
     Use [adw.dialog.Dialog.forceClose] to close the dialog even when `can-close` is set to
     `FALSE`.
     
+    [adw.dialog.Dialog] is transient and doesn't integrate with the window below it, for
+    example it's not possible to collapse it into a bottom bar. See
+    [adw.bottom_sheet.BottomSheet] for persistent and more tightly integrated bottom sheets.
+    
     ## Header Bar Integration
     
     When placed inside an [adw.dialog.Dialog], [adw.header_bar.HeaderBar] will display the dialog
@@ -73,7 +79,7 @@ import gtk.widget;
     minimum size, and [gtk.widget.Widget.widthRequest] and
     [gtk.widget.Widget.heightRequest] properties must be set manually.
 */
-class Dialog : gtk.widget.Widget
+class Dialog : gtk.widget.Widget, gtk.shortcut_manager.ShortcutManager
 {
 
   /** */
@@ -298,13 +304,14 @@ class Dialog : gtk.widget.Widget
       Get `presentationMode` property.
       Returns: The dialog's presentation mode.
         
-        When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
-        the following condition is met: `max-width: 450px or max-height: 360px`,
-        and as a floating window otherwise.
+        When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a
+        bottom sheet when the following condition is met:
+        `max-width: 450px or max-height: 360px`, and as a floating window otherwise.
         
-        Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
-        present it a floating window or a bottom sheet respectively, regardless of
-        available size.
+        Set it to [adw.types.DialogPresentationMode.Floating] or
+        `enum@Adw.DialogPresentationMode.bottom-sheet` to always present it a
+        floating window or a bottom sheet respectively, regardless of available
+        size.
         
         Presentation mode does nothing for dialogs presented as a window.
   */
@@ -318,13 +325,14 @@ class Dialog : gtk.widget.Widget
       Params:
         propval = The dialog's presentation mode.
           
-          When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
-          the following condition is met: `max-width: 450px or max-height: 360px`,
-          and as a floating window otherwise.
+          When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a
+          bottom sheet when the following condition is met:
+          `max-width: 450px or max-height: 360px`, and as a floating window otherwise.
           
-          Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
-          present it a floating window or a bottom sheet respectively, regardless of
-          available size.
+          Set it to [adw.types.DialogPresentationMode.Floating] or
+          `enum@Adw.DialogPresentationMode.bottom-sheet` to always present it a
+          floating window or a bottom sheet respectively, regardless of available
+          size.
           
           Presentation mode does nothing for dialogs presented as a window.
   */
@@ -351,6 +359,8 @@ class Dialog : gtk.widget.Widget
   {
     setTitle(propval);
   }
+
+  mixin ShortcutManagerT!();
 
   /**
       Creates a new [adw.dialog.Dialog].
@@ -641,13 +651,13 @@ class Dialog : gtk.widget.Widget
   /**
       Sets presentation mode for self.
       
-      When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when the
-      following condition is met: `max-width: 450px or max-height: 360px`, and as a
-      floating window otherwise.
+      When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a
+      bottom sheet when the following condition is met:
+      `max-width: 450px or max-height: 360px`, and as a floating window otherwise.
       
-      Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
-      present it a floating window or a bottom sheet respectively, regardless of
-      available size.
+      Set it to [adw.types.DialogPresentationMode.Floating] or
+      `enumAdw.DialogPresentationMode.bottom-sheet` to always present it a
+      floating window or a bottom sheet respectively, regardless of available size.
       
       Presentation mode does nothing for dialogs presented as a window.
   
@@ -763,9 +773,10 @@ class Dialog : gtk.widget.Widget
 }
 
 /// Fluent builder implementation template for [adw.dialog.Dialog]
-class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
+class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.shortcut_manager.ShortcutManagerGidBuilderImpl!T
 {
 
+  mixin ShortcutManagerGidBuilderT!();
 
   /**
       Set `canClose` property.
@@ -870,13 +881,14 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The dialog's presentation mode.
           
-          When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a bottom sheet when
-          the following condition is met: `max-width: 450px or max-height: 360px`,
-          and as a floating window otherwise.
+          When set to [adw.types.DialogPresentationMode.Auto], the dialog appears as a
+          bottom sheet when the following condition is met:
+          `max-width: 450px or max-height: 360px`, and as a floating window otherwise.
           
-          Set it to [adw.types.DialogPresentationMode.Floating] or [adw.types.DialogPresentationMode.BottomSheet] to always
-          present it a floating window or a bottom sheet respectively, regardless of
-          available size.
+          Set it to [adw.types.DialogPresentationMode.Floating] or
+          `enum@Adw.DialogPresentationMode.bottom-sheet` to always present it a
+          floating window or a bottom sheet respectively, regardless of available
+          size.
           
           Presentation mode does nothing for dialogs presented as a window.
       Returns: Builder instance for fluent chaining

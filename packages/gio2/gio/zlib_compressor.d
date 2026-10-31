@@ -55,9 +55,14 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
 
   /**
       Get `fileInfo` property.
-      Returns: If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
-        [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
-        and modification time from the file info to the GZIP header.
+      Returns: A [gio.file_info.FileInfo] containing file information to put into the gzip
+        header.
+        
+        The file name and modification time from the file info will be used.
+        
+        This will only be used if non-`NULL` and
+        [gio.zlib_compressor.ZlibCompressor.format] is
+        `enum@Gio.ZlibCompressorFormat.GZIP`.
   */
   @property gio.file_info.FileInfo fileInfo() nothrow
   {
@@ -67,9 +72,14 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   /**
       Set `fileInfo` property.
       Params:
-        propval = If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
-          [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
-          and modification time from the file info to the GZIP header.
+        propval = A [gio.file_info.FileInfo] containing file information to put into the gzip
+          header.
+          
+          The file name and modification time from the file info will be used.
+          
+          This will only be used if non-`NULL` and
+          [gio.zlib_compressor.ZlibCompressor.format] is
+          `enum@Gio.ZlibCompressorFormat.GZIP`.
   */
   @property void fileInfo(gio.file_info.FileInfo propval) nothrow
   {
@@ -88,22 +98,61 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   /**
       Get `level` property.
       Returns: The level of compression from `0` (no compression) to `9` (most
-        compression). `-1` for the default level.
+        compression).
+        
+        `-1` for the default level.
   */
   @property int level() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("level");
   }
 
+  /**
+      Get `os` property.
+      Returns: The OS code of the gzip header.
+        
+        This will be used if set to a non-negative value, and if
+        [gio.zlib_compressor.ZlibCompressor.format] is
+        `enum@Gio.ZlibCompressorFormat.GZIP`, the compressor will set the OS code of
+        the gzip header to this value.
+        
+        If the value is unset, zlib will set the OS code depending on the platform.
+        This may be undesirable when reproducible output is desired. In that case setting
+        the OS code to `3` (for Unix) is recommended.
+  */
+  @property int os() nothrow
+  {
+    return getOs();
+  }
+
+  /**
+      Set `os` property.
+      Params:
+        propval = The OS code of the gzip header.
+          
+          This will be used if set to a non-negative value, and if
+          [gio.zlib_compressor.ZlibCompressor.format] is
+          `enum@Gio.ZlibCompressorFormat.GZIP`, the compressor will set the OS code of
+          the gzip header to this value.
+          
+          If the value is unset, zlib will set the OS code depending on the platform.
+          This may be undesirable when reproducible output is desired. In that case setting
+          the OS code to `3` (for Unix) is recommended.
+  */
+  @property void os(int propval) nothrow
+  {
+    setOs(propval);
+  }
+
   mixin ConverterT!();
 
   /**
-      Creates a new #GZlibCompressor.
+      Creates a compressor.
   
       Params:
-        format = The format to use for the compressed data
-        level = compression level (0-9), -1 for default
-      Returns: a new #GZlibCompressor
+        format = the format to use for the compressed data
+        level = compression level (`0`-`9`), `-1` for default
+      Returns: a new [gio.zlib_compressor.ZlibCompressor]
   */
   this(gio.types.ZlibCompressorFormat format, int level) nothrow
   {
@@ -113,8 +162,8 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /**
-      Returns the #GZlibCompressor:file-info property.
-      Returns: a #GFileInfo, or null
+      Gets the [gio.zlib_compressor.ZlibCompressor.fileInfo] property.
+      Returns: file info for the gzip header, if set
   */
   gio.file_info.FileInfo getFileInfo() nothrow
   {
@@ -125,21 +174,44 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /**
-      Sets file_info in compressor. If non-null, and compressor's
-      #GZlibCompressor:format property is [gio.types.ZlibCompressorFormat.Gzip],
-      it will be used to set the file name and modification time in
-      the GZIP header of the compressed data.
+      Gets the [gio.zlib_compressor.ZlibCompressor.os] property.
+      Returns: the previously set OS value, or `-1` if unset
+  */
+  int getOs() nothrow
+  {
+    int _retval;
+    _retval = g_zlib_compressor_get_os(cast(GZlibCompressor*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the [gio.zlib_compressor.ZlibCompressor.fileInfo] property.
       
       Note: it is an error to call this function while a compression is in
       progress; it may only be called immediately after creation of compressor,
       or after resetting it with [gio.converter.Converter.reset].
   
       Params:
-        fileInfo = a #GFileInfo
+        fileInfo = file info for the gzip header
   */
   void setFileInfo(gio.file_info.FileInfo fileInfo = null) nothrow
   {
     g_zlib_compressor_set_file_info(cast(GZlibCompressor*)this._cPtr, fileInfo ? cast(GFileInfo*)fileInfo._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the [gio.zlib_compressor.ZlibCompressor.os] property.
+      
+      Note: it is an error to call this function while a compression is in
+      progress; it may only be called immediately after creation of compressor,
+      or after resetting it with [gio.converter.Converter.reset].
+  
+      Params:
+        os = the OS code to use, or `-1` to unset
+  */
+  void setOs(int os) nothrow
+  {
+    g_zlib_compressor_set_os(cast(GZlibCompressor*)this._cPtr, os);
   }
 }
 
@@ -152,9 +224,14 @@ class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
   /**
       Set `fileInfo` property.
       Params:
-        propval = If set to a non-null #GFileInfo object, and #GZlibCompressor:format is
-          [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
-          and modification time from the file info to the GZIP header.
+        propval = A [gio.file_info.FileInfo] containing file information to put into the gzip
+          header.
+          
+          The file name and modification time from the file info will be used.
+          
+          This will only be used if non-`NULL` and
+          [gio.zlib_compressor.ZlibCompressor.format] is
+          `enum@Gio.ZlibCompressorFormat.GZIP`.
       Returns: Builder instance for fluent chaining
   */
   T fileInfo(gio.file_info.FileInfo propval) nothrow
@@ -177,12 +254,34 @@ class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
       Set `level` property.
       Params:
         propval = The level of compression from `0` (no compression) to `9` (most
-          compression). `-1` for the default level.
+          compression).
+          
+          `-1` for the default level.
       Returns: Builder instance for fluent chaining
   */
   T level(int propval) nothrow
   {
     return setProperty("level", propval);
+  }
+
+  /**
+      Set `os` property.
+      Params:
+        propval = The OS code of the gzip header.
+          
+          This will be used if set to a non-negative value, and if
+          [gio.zlib_compressor.ZlibCompressor.format] is
+          `enum@Gio.ZlibCompressorFormat.GZIP`, the compressor will set the OS code of
+          the gzip header to this value.
+          
+          If the value is unset, zlib will set the OS code depending on the platform.
+          This may be undesirable when reproducible output is desired. In that case setting
+          the OS code to `3` (for Unix) is recommended.
+      Returns: Builder instance for fluent chaining
+  */
+  T os(int propval) nothrow
+  {
+    return setProperty("os", propval);
   }
 }
 

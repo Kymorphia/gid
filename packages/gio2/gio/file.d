@@ -21,6 +21,7 @@ import gio.mount_operation;
 import gio.types;
 import glib.bytes;
 import glib.error;
+import gobject.closure;
 import gobject.gid_builder;
 import gobject.object;
 
@@ -113,9 +114,9 @@ import gobject.object;
     short. Entity tags are somewhat like a more abstract version of the
     traditional mtime, and can be used to quickly determine if the file
     has been modified from the version on the file system. See the
-    HTTP 1.1
-    [specification](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
-    for HTTP `ETag` headers, which are a very similar concept.
+    description of HTTP ETags in
+    [RFC9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-etag).
+    [gio.file.File] Entity Tags are a very similar concept.
 */
 interface File
 {
@@ -293,7 +294,7 @@ interface File
       Params:
         tmpl = Template for the file
             name, as in [glib.global.fileOpenTmp], or null for a default template
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback to call when the request is done
   */
@@ -330,7 +331,7 @@ interface File
       Params:
         tmpl = Template for the file
             name, as in [glib.dir.Dir.makeTmp], or null for a default template
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback to call when the request is done
   */
@@ -460,7 +461,7 @@ interface File
   
       Params:
         flags = a set of #GFileCreateFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -557,29 +558,20 @@ interface File
   bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null);
 
   /**
-      Copies the file source to the location specified by destination
-      asynchronously. For details of the behaviour, see [gio.file.File.copy].
-      
-      If progress_callback is not null, then that function that will be called
-      just like in [gio.file.File.copy]. The callback will run in the default main context
-      of the thread calling [gio.file.File.copyAsync] — the same context as callback is
-      run in.
-      
-      When the operation is finished, callback will be called. You can then call
-      [gio.file.File.copyFinish] to get the result of the operation.
+      Version of [gio.file.File.copyAsync] using closures instead of callbacks for
+      easier binding in other languages.
   
       Params:
-        destination = destination #GFile
-        flags = set of #GFileCopyFlags
-        ioPriority = the [I/O priority][io-priority] of the request
-        cancellable = optional #GCancellable object,
-            null to ignore
-        progressCallback = function to callback with progress information, or null if
-            progress information is not needed
-        callback = a #GAsyncReadyCallback
-            to call when the request is satisfied
+        destination = destination [gio.file.File]
+        flags = set of [gio.types.FileCopyFlags]
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
+        cancellable = optional [gio.cancellable.Cancellable] object,
+            `NULL` to ignore
+        progressCallbackClosure = [gobject.closure.Closure] to invoke with progress
+            information, or `NULL` if progress information is not needed
+        readyCallbackClosure = [gobject.closure.Closure] to invoke when the request is satisfied
   */
-  void copyAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null);
+  void copyAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gobject.closure.Closure progressCallbackClosure, gobject.closure.Closure readyCallbackClosure);
 
   /**
       Copies the file attributes from source to destination.
@@ -657,7 +649,7 @@ interface File
   
       Params:
         flags = a set of #GFileCreateFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -726,7 +718,7 @@ interface File
   
       Params:
         flags = a set of #GFileCreateFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -783,7 +775,7 @@ interface File
       [glib.global.unlink].
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback to call
@@ -888,29 +880,29 @@ interface File
 
   /**
       Gets the requested information about the files in a directory.
-      The result is a #GFileEnumerator object that will give out
-      #GFileInfo objects for all the files in the directory.
+      The result is a [gio.file_enumerator.FileEnumerator] object that will give out
+      [gio.file_info.FileInfo] objects for all the files in the directory.
       
       The attributes value is a string that specifies the file
       attributes that should be gathered. It is not an error if
       it's not possible to read a particular requested attribute
       from a file - it just won't be set. attributes should
       be a comma-separated list of attributes or attribute wildcards.
-      The wildcard "*" means all attributes, and a wildcard like
-      "standard::*" means all attributes in the standard namespace.
-      An example attribute query be "standard::*,owner::user".
+      The wildcard `*` means all attributes, and a wildcard like
+      `"standard::*"` means all attributes in the standard namespace.
+      An example attribute query be `"standard::*,owner::user"`.
       The standard attributes are available as defines, like
       [gio.types.FILE_ATTRIBUTE_STANDARD_NAME]. [gio.types.FILE_ATTRIBUTE_STANDARD_NAME] should
       always be specified if you plan to call [gio.file_enumerator.FileEnumerator.getChild] or
       [gio.file_enumerator.FileEnumerator.iterate] on the returned enumerator.
       
-      If cancellable is not null, then the operation can be cancelled
+      If cancellable is not `NULL`, then the operation can be cancelled
       by triggering the cancellable object from another thread. If the
-      operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+      operation was cancelled, the error `errorGio.IOErrorEnum.CANCELLED` will be
       returned.
       
-      If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will
-      be returned. If the file is not a directory, the [gio.types.IOErrorEnum.NotDirectory]
+      If the file does not exist, the `errorGio.IOErrorEnum.NOT_FOUND` error will
+      be returned. If the file is not a directory, the `errorGio.IOErrorEnum.NOT_DIRECTORY`
       error will be returned. Other errors are possible too.
   
       Params:
@@ -939,7 +931,7 @@ interface File
       Params:
         attributes = an attribute query string
         flags = a set of #GFileQueryInfoFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -963,9 +955,17 @@ interface File
   /**
       Checks if the two given #GFiles refer to the same file.
       
+      This function can be used with [gio.file.File.hash] to insert
+      [gio.file.File]s efficiently in a hash table.
+      
       Note that two #GFiles that differ can still refer to the same
       file on the filesystem due to various forms of filename
-      aliasing.
+      aliasing. For local files, this function essentially compares the file paths,
+      so two [gio.file.File]s which point to different hard or soft links will not
+      be considered equal, despite pointing to the same content.
+      
+      For determining whether two files are hardlinked, see
+      [gio.types.FILE_ATTRIBUTE_ID_FILE].
       
       This call does no blocking I/O.
   
@@ -1007,7 +1007,7 @@ interface File
       get the result of the operation.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -1386,13 +1386,17 @@ interface File
   bool loadPartialContentsFinish(gio.async_result.AsyncResult res, out ubyte[] contents, out string etagOut);
 
   /**
-      Creates a directory. Note that this will only create a child directory
+      Creates a directory.
+      
+      Note that this will only create a child directory
       of the immediate parent directory of the path or URI given by the #GFile.
       To recursively create directories, see [gio.file.File.makeDirectoryWithParents].
+      
       This function will fail if the parent directory does not exist, setting
       error to [gio.types.IOErrorEnum.NotFound]. If the file system doesn't support
       creating directories, this function will fail, setting error to
-      [gio.types.IOErrorEnum.NotSupported].
+      [gio.types.IOErrorEnum.NotSupported]. If the directory already exists,
+      `errorGio.IOErrorEnum.EXISTS` will be returned.
       
       For a local #GFile the newly created directory will have the default
       (current) ownership and permissions of the current process.
@@ -1413,7 +1417,7 @@ interface File
       Asynchronously creates a directory.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback to call
@@ -1481,7 +1485,7 @@ interface File
       Params:
         symlinkValue = a string with the path for the target
             of the new symlink
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback to call
@@ -1740,27 +1744,20 @@ interface File
   bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null);
 
   /**
-      Asynchronously moves a file source to the location of destination. For details of the behaviour, see [gio.file.File.move].
-      
-      If progress_callback is not null, then that function that will be called
-      just like in [gio.file.File.move]. The callback will run in the default main context
-      of the thread calling [gio.file.File.moveAsync] — the same context as callback is
-      run in.
-      
-      When the operation is finished, callback will be called. You can then call
-      [gio.file.File.moveFinish] to get the result of the operation.
+      Version of [gio.file.File.moveAsync] using closures instead of callbacks for
+      easier binding in other languages.
   
       Params:
-        destination = #GFile pointing to the destination location
-        flags = set of #GFileCopyFlags
-        ioPriority = the [I/O priority][io-priority] of the request
-        cancellable = optional #GCancellable object,
-            null to ignore
-        progressCallback = #GFileProgressCallback function for updates
-        callback = a #GAsyncReadyCallback
-            to call when the request is satisfied
+        destination = destination [gio.file.File]
+        flags = set of [gio.types.FileCopyFlags]
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
+        cancellable = optional [gio.cancellable.Cancellable] object,
+            `NULL` to ignore
+        progressCallbackClosure = [gobject.closure.Closure] to invoke with progress
+            information, or `NULL` if progress information is not needed
+        readyCallbackClosure = [gobject.closure.Closure] to invoke when the request is satisfied
   */
-  void moveAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null);
+  void moveAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gobject.closure.Closure progressCallbackClosure, gobject.closure.Closure readyCallbackClosure);
 
   /**
       Finishes an asynchronous file movement, started with
@@ -1810,7 +1807,7 @@ interface File
       the result of the operation.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -1896,7 +1893,7 @@ interface File
       Async version of [gio.file.File.queryDefaultHandler].
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback to call when the request is done
   */
@@ -1915,8 +1912,11 @@ interface File
   gio.app_info.AppInfo queryDefaultHandlerFinish(gio.async_result.AsyncResult result);
 
   /**
-      Utility function to check if a particular file exists. This is
-      implemented using [gio.file.File.queryInfo] and as such does blocking I/O.
+      Utility function to check if a particular file exists.
+      
+      The fallback implementation of this API is using [gio.file.File.queryInfo]
+      and therefore may do blocking I/O. To asynchronously query the existence
+      of a file, use [gio.file.File.queryInfoAsync].
       
       Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
       and then execute something based on the outcome of that, because the
@@ -1972,7 +1972,7 @@ interface File
       that should be gathered. It is not an error if it's not possible
       to read a particular requested attribute from a file - it just
       won't be set. attributes should be a comma-separated list of
-      attributes or attribute wildcards. The wildcard "*" means all
+      attributes or attribute wildcards. The wildcard "\*" means all
       attributes, and a wildcard like "filesystem::*" means all attributes
       in the filesystem namespace. The standard namespace for filesystem
       attributes is "filesystem". Common attributes of interest are
@@ -2014,7 +2014,7 @@ interface File
   
       Params:
         attributes = an attribute query string
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -2037,43 +2037,54 @@ interface File
 
   /**
       Gets the requested information about specified file.
-      The result is a #GFileInfo object that contains key-value
+      
+      The result is a [gio.file_info.FileInfo] object that contains key-value
       attributes (such as the type or size of the file).
       
       The attributes value is a string that specifies the file
       attributes that should be gathered. It is not an error if
-      it's not possible to read a particular requested attribute
-      from a file - it just won't be set. attributes should be a
-      comma-separated list of attributes or attribute wildcards.
-      The wildcard "*" means all attributes, and a wildcard like
-      "standard::*" means all attributes in the standard namespace.
-      An example attribute query be "standard::*,owner::user".
+      it’s not possible to read a particular requested attribute
+      from a file — it just won't be set. In particular this means that if a file
+      is inaccessible (due to being in a folder with restrictive permissions), for
+      example, you can expect the returned [gio.file_info.FileInfo] to have very few
+      attributes set. You should check whether an attribute is set using
+      [gio.file_info.FileInfo.hasAttribute] before trying to retrieve its value.
+      
+      It is guaranteed that if any of the following attributes are listed in
+      attributes, they will always be set in the returned [gio.file_info.FileInfo],
+      even if the user doesn’t have permissions to access the file:
+      
+       - [gio.types.FILE_ATTRIBUTE_STANDARD_NAME]
+       - [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME]
+      
+      attributes should be a comma-separated list of attributes or attribute
+      wildcards. The wildcard `"\*"` means all attributes, and a wildcard like
+      `"standard::*"` means all attributes in the standard namespace.
+      An example attribute query might be `"standard::*,owner::user"`.
       The standard attributes are available as defines, like
       [gio.types.FILE_ATTRIBUTE_STANDARD_NAME].
       
-      If cancellable is not null, then the operation can be cancelled
+      If cancellable is not `NULL`, then the operation can be cancelled
       by triggering the cancellable object from another thread. If the
-      operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+      operation was cancelled, the error `errorGio.IOErrorEnum.CANCELLED` will be
       returned.
       
       For symlinks, normally the information about the target of the
       symlink is returned, rather than information about the symlink
-      itself. However if you pass [gio.types.FileQueryInfoFlags.NofollowSymlinks]
+      itself. However if you pass `flagsGio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS`
       in flags the information about the symlink itself will be returned.
       Also, for symlinks that point to non-existing files the information
       about the symlink itself will be returned.
       
-      If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will be
+      If the file does not exist, the `errorGio.IOErrorEnum.NOT_FOUND` error will be
       returned. Other errors are possible too, and depend on what kind of
-      filesystem the file is on.
+      file system the file is on.
   
       Params:
         attributes = an attribute query string
-        flags = a set of #GFileQueryInfoFlags
-        cancellable = optional #GCancellable object,
-            null to ignore
-      Returns: a #GFileInfo for the given file, or null
-          on error. Free the returned object with [gobject.object.ObjectWrap.unref].
+        flags = flags to affect the query operation
+        cancellable = optional cancellable object
+      Returns: a [gio.file_info.FileInfo] for the given file
       Throws: [ErrorWrap]
   */
   gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
@@ -2092,7 +2103,7 @@ interface File
       Params:
         attributes = an attribute query string
         flags = a set of #GFileQueryInfoFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -2186,7 +2197,7 @@ interface File
       of the operation.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -2278,7 +2289,7 @@ interface File
             or null to ignore
         makeBackup = true if a backup should be created
         flags = a set of #GFileCreateFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -2440,7 +2451,7 @@ interface File
             or null to ignore
         makeBackup = true if a backup should be created
         flags = a set of #GFileCreateFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -2629,7 +2640,7 @@ interface File
       Params:
         info = a #GFileInfo
         flags = a #GFileQueryInfoFlags
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -2712,7 +2723,7 @@ interface File
   
       Params:
         displayName = a string
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback
@@ -2804,8 +2815,8 @@ interface File
   bool stopMountableFinish(gio.async_result.AsyncResult result);
 
   /**
-      Checks if file supports
-      [thread-default contexts][g-main-context-push-thread-default-context].
+      Checks if file supports thread-default main contexts
+      (see [glib.main_context.MainContext.pushThreadDefault])
       If this returns false, you cannot perform asynchronous operations on
       file in a thread that has a thread-default context.
       Returns: Whether or not file supports thread-default contexts.
@@ -2815,10 +2826,13 @@ interface File
   /**
       Sends file to the "Trashcan", if possible. This is similar to
       deleting it, but the user can recover it before emptying the trashcan.
-      Not all file systems support trashing, so this call can return the
+      Trashing is disabled for system mounts by default (see
+      [giounix.mount_entry.MountEntry.isSystemInternal]), so this call can return the
       [gio.types.IOErrorEnum.NotSupported] error. Since GLib 2.66, the `x-gvfs-notrash` unix
-      mount option can be used to disable [gio.file.File.trash] support for certain
+      mount option can be used to disable [gio.file.File.trash] support for particular
       mounts, the [gio.types.IOErrorEnum.NotSupported] error will be returned in that case.
+      Since 2.82, the `x-gvfs-trash` unix mount option can be used to enable
+      [gio.file.File.trash] support for particular system mounts.
       
       If cancellable is not null, then the operation can be cancelled by
       triggering the cancellable object from another thread. If the operation
@@ -2836,7 +2850,7 @@ interface File
       Asynchronously sends file to the Trash location, if possible.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object,
             null to ignore
         callback = a #GAsyncReadyCallback to call

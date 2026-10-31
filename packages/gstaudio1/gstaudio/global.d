@@ -167,14 +167,6 @@ gobject.types.GType audioDownmixMetaApiGetType() nothrow
   return _retval;
 }
 
-/** */
-gobject.types.GType audioFormatInfoGetType() nothrow
-{
-  gobject.types.GType _retval;
-  _retval = gst_audio_format_info_get_type();
-  return _retval;
-}
-
 /**
     Return all the raw audio formats supported by GStreamer.
     Returns: an array of #GstAudioFormat
@@ -326,6 +318,12 @@ gobject.types.GType audioMetaApiGetType() nothrow
     positions to. from and to must contain the same number of
     positions and the same positions, only in a different order.
     
+    This function internally calls [gstaudio.global.audioGetChannelReorderMap] and
+    [gstaudio.global.audioReorderChannelsWithReorderMap]. It is more efficient to call
+    [gstaudio.global.audioGetChannelReorderMap] once to retrieve the reorder map and
+    then call [gstaudio.global.audioReorderChannelsWithReorderMap] with the same
+    reorder map until the channel positions change.
+    
     Note: this function assumes the audio data is in interleaved layout
 
     Params:
@@ -355,6 +353,35 @@ bool audioReorderChannels(ubyte[] data, gstaudio.types.AudioFormat format, gstau
   auto _to = cast(GstAudioChannelPosition*)to.ptr;
   _retval = cast(bool)gst_audio_reorder_channels(_data, _size, format, _channels, _from, _to);
   return _retval;
+}
+
+/**
+    Reorders data with the given reorder_map.
+    
+    The reorder map can be retrieved for example with
+    [gstaudio.global.audioGetChannelReorderMap].
+    
+    Note: this function assumes the audio data is in interleaved layout
+
+    Params:
+      data = The pointer to
+          the memory.
+      bps = The number of bytes per sample.
+      reorderMap = The channel reorder map.
+*/
+void audioReorderChannelsWithReorderMap(ubyte[] data, int bps, int[] reorderMap) nothrow
+{
+  size_t _size;
+  if (data)
+    _size = cast(size_t)data.length;
+
+  auto _data = cast(ubyte*)data.ptr;
+  int _channels;
+  if (reorderMap)
+    _channels = cast(int)reorderMap.length;
+
+  auto _reorderMap = cast(int*)reorderMap.ptr;
+  gst_audio_reorder_channels_with_reorder_map(_data, _size, bps, _channels, _reorderMap);
 }
 
 /**

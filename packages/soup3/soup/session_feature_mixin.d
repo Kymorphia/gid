@@ -12,7 +12,7 @@ public import soup.types;
 /**
     Interface for miscellaneous [soup.session.Session] features.
     
-    #SoupSessionFeature is the interface used by classes that extend
+    [soup.session_feature.SessionFeature] is the interface used by classes that extend
     the functionality of a [soup.session.Session]. Some features like HTTP
     authentication handling are implemented internally via
     [soup.session_feature.SessionFeature]s. Other features can be added to the session

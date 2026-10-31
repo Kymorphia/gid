@@ -27,10 +27,10 @@ import soup.types;
 /**
     Represents an HTTP message being sent or received.
     
-    A #SoupMessage represents an HTTP message that is being sent or
+    A [soup.message.Message] represents an HTTP message that is being sent or
     received.
     
-    You would create a #SoupMessage with [soup.message.Message.new_] or
+    You would create a [soup.message.Message] with [soup.message.Message.new_] or
     [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
     
     [soup.message.Message.statusCode] will normally be a [soup.types.Status] value, eg,
@@ -45,7 +45,7 @@ import soup.types;
     
     Note that libsoup's terminology here does not quite match the HTTP
     specification: in RFC 2616, an "HTTP-message" is *either* a Request, *or* a
-    Response. In libsoup, a #SoupMessage combines both the request and the
+    Response. In libsoup, a [soup.message.Message] combines both the request and the
     response.
 */
 class Message : gobject.object.ObjectWrap
@@ -138,7 +138,7 @@ class Message : gobject.object.ObjectWrap
       Get `isOptionsPing` property.
       Returns: Whether the message is an OPTIONS ping.
         
-        The #SoupMessage is intended to be used to send
+        The [soup.message.Message] is intended to be used to send
         `OPTIONS *` to a server. When set to true, the
         path of [soup.message.Message.uri] will be ignored and
         [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
@@ -153,7 +153,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         propval = Whether the message is an OPTIONS ping.
           
-          The #SoupMessage is intended to be used to send
+          The [soup.message.Message] is intended to be used to send
           `OPTIONS *` to a server. When set to true, the
           path of [soup.message.Message.uri] will be ignored and
           [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
@@ -203,7 +203,7 @@ class Message : gobject.object.ObjectWrap
 
   /**
       Get `priority` property.
-      Returns: Sets the priority of the #SoupMessage. See
+      Returns: Sets the priority of the [soup.message.Message]. See
         [soup.message.Message.setPriority] for further details.
   */
   @property soup.types.MessagePriority priority() nothrow
@@ -214,7 +214,7 @@ class Message : gobject.object.ObjectWrap
   /**
       Set `priority` property.
       Params:
-        propval = Sets the priority of the #SoupMessage. See
+        propval = Sets the priority of the [soup.message.Message]. See
           [soup.message.Message.setPriority] for further details.
   */
   @property void priority(soup.types.MessagePriority propval) nothrow
@@ -343,7 +343,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new empty #SoupMessage, which will connect to uri.
+      Creates a new empty [soup.message.Message], which will connect to uri.
   
       Params:
         method = the HTTP method for the created request
@@ -361,7 +361,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #SoupMessage and sets it up to send the given encoded_form
+      Creates a new [soup.message.Message] and sets it up to send the given encoded_form
       to uri via method. If method is "GET", it will include the form data
       into uri's query field, and if method is "POST" or "PUT", it will be set as
       request body.
@@ -389,7 +389,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #SoupMessage and sets it up to send multipart to
+      Creates a new [soup.message.Message] and sets it up to send multipart to
       uri_string via POST.
   
       Params:
@@ -408,7 +408,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new empty #SoupMessage, which will connect to uri.
+      Creates a new empty [soup.message.Message], which will connect to uri.
   
       Params:
         method = the HTTP method for the created request
@@ -425,7 +425,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #SoupMessage to send `OPTIONS *` to a server. The path of
+      Creates a new [soup.message.Message] to send `OPTIONS *` to a server. The path of
       base_uri will be ignored.
   
       Params:
@@ -465,7 +465,7 @@ class Message : gobject.object.ObjectWrap
       redirect or authentication.
   
       Params:
-        featureType = the #GType of a #SoupSessionFeature
+        featureType = the #GType of a [soup.session_feature.SessionFeature]
   */
   void disableFeature(gobject.types.GType featureType) nothrow
   {
@@ -635,7 +635,7 @@ class Message : gobject.object.ObjectWrap
 
   /**
       Returns the headers sent with the request.
-      Returns: The #SoupMessageHeaders
+      Returns: The [soup.message_headers.MessageHeaders]
   */
   soup.message_headers.MessageHeaders getRequestHeaders() nothrow
   {
@@ -647,7 +647,7 @@ class Message : gobject.object.ObjectWrap
 
   /**
       Returns the headers recieved with the response.
-      Returns: The #SoupMessageHeaders
+      Returns: The [soup.message_headers.MessageHeaders]
   */
   soup.message_headers.MessageHeaders getResponseHeaders() nothrow
   {
@@ -757,7 +757,7 @@ class Message : gobject.object.ObjectWrap
       See [soup.message.Message.disableFeature].
   
       Params:
-        featureType = the #GType of a #SoupSessionFeature
+        featureType = the #GType of a [soup.session_feature.SessionFeature]
       Returns: true if feature is disabled, or false otherwise.
   */
   bool isFeatureDisabled(gobject.types.GType featureType) nothrow
@@ -908,7 +908,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Set the request body of a #SoupMessage.
+      Set the request body of a [soup.message.Message].
       
       If content_type is null and stream is not null the Content-Type header will
       not be changed if present.
@@ -927,7 +927,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Set the request body of a #SoupMessage from [glib.bytes.Bytes].
+      Set the request body of a [soup.message.Message] from [glib.bytes.Bytes].
       
       If content_type is null and bytes is not null the Content-Type header will
       not be changed if present.
@@ -1971,7 +1971,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = Whether the message is an OPTIONS ping.
           
-          The #SoupMessage is intended to be used to send
+          The [soup.message.Message] is intended to be used to send
           `OPTIONS *` to a server. When set to true, the
           path of [soup.message.Message.uri] will be ignored and
           [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
@@ -2007,7 +2007,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `priority` property.
       Params:
-        propval = Sets the priority of the #SoupMessage. See
+        propval = Sets the priority of the [soup.message.Message]. See
           [soup.message.Message.setPriority] for further details.
       Returns: Builder instance for fluent chaining
   */

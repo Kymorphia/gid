@@ -350,6 +350,31 @@ struct Date
   }
 
   /**
+      Calculates the week of the year during which this date falls.
+      
+      The result depends on which day is considered the first day of the week,
+      which varies by locale. Both `date` and `first_day_of_week` must be valid.
+      
+      If date is before the start of the first week of the year (for example,
+      before the first Monday in January if first_day_of_week is
+      `enumGLib.DateWeekday.MONDAY`) then zero will be returned.
+  
+      Params:
+        firstDayOfWeek = the day which is considered the first day of the week
+             (for example, this would be `enumGLib.DateWeekday.SUNDAY` in US locales,
+             `enumGLib.DateWeekday.MONDAY` in British locales, and
+             `enumGLib.DateWeekday.SATURDAY` in Egyptian locales
+      Returns: week number (starting from 1), or `0` if date is before the start
+           of the first week of the year
+  */
+  uint getWeekOfYear(glib.types.DateWeekday firstDayOfWeek) nothrow
+  {
+    uint _retval;
+    _retval = g_date_get_week_of_year(cast(const(GDate)*)&this, firstDayOfWeek);
+    return _retval;
+  }
+
+  /**
       Returns the day of the week for a #GDate. The date must be valid.
       Returns: day of the week as a #GDateWeekday.
   */
@@ -461,10 +486,10 @@ struct Date
 
   /**
       Parses a user-inputted string str, and try to figure out what date it
-      represents, taking the [current locale][setlocale] into account. If the
-      string is successfully parsed, the date will be valid after the call.
-      Otherwise, it will be invalid. You should check using [glib.date.Date.valid]
-      to see whether the parsing succeeded.
+      represents, taking the [current locale](running.html#locale)
+      into account. If the string is successfully parsed, the date will be
+      valid after the call. Otherwise, it will be invalid. You should check
+      using [glib.date.Date.valid] to see whether the parsing succeeded.
       
       This function is not appropriate for file formats and the like; it
       isn't very precise, and its exact behavior varies with the locale.
@@ -666,6 +691,32 @@ struct Date
   {
     ubyte _retval;
     _retval = g_date_get_sunday_weeks_in_year(year);
+    return _retval;
+  }
+
+  /**
+      Calculates the number of weeks in the year.
+      
+      The result depends on which day is considered the first day of the week,
+      which varies by locale. `first_day_of_week` must be valid.
+      
+      The result will be either 52 or 53. Years always have 52 seven-day periods,
+      plus one or two extra days depending on whether it’s a leap year. This
+      function effectively calculates how many first_day_of_week days there are in
+      the year.
+  
+      Params:
+        year = year to count weeks in
+        firstDayOfWeek = the day which is considered the first day of the week
+             (for example, this would be `enumGLib.DateWeekday.SUNDAY` in US locales,
+             `enumGLib.DateWeekday.MONDAY` in British locales, and
+             `enumGLib.DateWeekday.SATURDAY` in Egyptian locales
+      Returns: the number of weeks in year
+  */
+  static ubyte getWeeksInYear(glib.types.DateYear year, glib.types.DateWeekday firstDayOfWeek) nothrow
+  {
+    ubyte _retval;
+    _retval = g_date_get_weeks_in_year(year, firstDayOfWeek);
     return _retval;
   }
 

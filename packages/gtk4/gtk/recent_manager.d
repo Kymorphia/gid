@@ -14,7 +14,7 @@ import gtk.recent_info;
 import gtk.types;
 
 /**
-    [gtk.recent_manager.RecentManager] manages and looks up recently used files.
+    Manages and looks up recently used files.
     
     Each recently used file is identified by its URI, and has meta-data
     associated to it, like the names and command lines of the applications

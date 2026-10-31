@@ -50,6 +50,10 @@ class GLShaderNode : gsk.render_node.RenderNode
         children = array of child nodes,
             these will be rendered to textures and used as input.
       Returns: A new [gsk.render_node.RenderNode]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   this(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes args, gsk.render_node.RenderNode[] children = null) nothrow
   {
@@ -68,6 +72,10 @@ class GLShaderNode : gsk.render_node.RenderNode
   /**
       Gets args for the node.
       Returns: A [glib.bytes.Bytes] with the uniform arguments
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   glib.bytes.Bytes getArgs() nothrow
   {
@@ -83,6 +91,10 @@ class GLShaderNode : gsk.render_node.RenderNode
       Params:
         idx = the position of the child to get
       Returns: the idx'th child of node
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   gsk.render_node.RenderNode getChild(uint idx) nothrow
   {
@@ -95,6 +107,10 @@ class GLShaderNode : gsk.render_node.RenderNode
   /**
       Returns the number of children
       Returns: The number of children
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   uint getNChildren() nothrow
   {

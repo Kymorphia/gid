@@ -39,6 +39,11 @@ interface DBusInterface
   /**
       Gets D-Bus introspection information for the D-Bus interface
       implemented by interface_.
+      
+      This can return null if no #GDBusInterfaceInfo was provided during
+      construction of interface_ and is also not made available otherwise.
+      For example, #GDBusProxy implements #GDBusInterface but allows for a null
+      #GDBusInterfaceInfo.
       Returns: A #GDBusInterfaceInfo. Do not free.
   */
   gio.dbus_interface_info.DBusInterfaceInfo getInfo();

@@ -16,8 +16,7 @@ import gsk.renderer;
 import gsk.types;
 
 /**
-    A [gsk.glshader.GLShader] is a snippet of GLSL that is meant to run in the
-    fragment shader of the rendering pipeline.
+    Implements a fragment shader using GLSL.
     
     A fragment shader gets the coordinates being rendered as input and
     produces the pixel values for that particular pixel. Additionally,
@@ -129,6 +128,13 @@ import gsk.types;
       fragColor = position * source1 + (1.0 - position) * source2;
     }
     ```
+
+    Deprecated: This feature was deprecated in GTK 4.16 after the new
+      rendering infrastructure introduced in 4.14 did not support it. The lack
+      of Vulkan integration would have made it a very hard feature to support.
+      If you want to use OpenGL directly, you should look at
+      [GtkGLArea](../gtk4/class.GLArea.html), which uses a different approach
+      and is still well-supported.
 */
 class GLShader : gobject.object.ObjectWrap
 {
@@ -179,7 +185,10 @@ class GLShader : gobject.object.ObjectWrap
     return getResource();
   }
 
-  /** */
+  /**
+      Get `source` property.
+      Returns: The source code for the shader, as a [glib.bytes.Bytes].
+  */
   @property glib.bytes.Bytes source() nothrow
   {
     return getSource();
@@ -191,6 +200,10 @@ class GLShader : gobject.object.ObjectWrap
       Params:
         sourcecode = GLSL sourcecode for the shader, as a [glib.bytes.Bytes]
       Returns: A new [gsk.glshader.GLShader]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   static gsk.glshader.GLShader newFromBytes(glib.bytes.Bytes sourcecode) nothrow
   {
@@ -207,6 +220,10 @@ class GLShader : gobject.object.ObjectWrap
         resourcePath = path to a resource that contains the GLSL sourcecode for
               the shader
       Returns: A new [gsk.glshader.GLShader]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   static gsk.glshader.GLShader newFromResource(string resourcePath) nothrow
   {
@@ -235,6 +252,10 @@ class GLShader : gobject.object.ObjectWrap
         renderer = a [gsk.renderer.Renderer]
       Returns: true on success, false if an error occurred
       Throws: [ErrorWrap]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   bool compile(gsk.renderer.Renderer renderer)
   {
@@ -253,6 +274,10 @@ class GLShader : gobject.object.ObjectWrap
       Params:
         name = uniform name
       Returns: The index of the uniform, or -1
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   int findUniformByName(string name) nothrow
   {
@@ -271,6 +296,10 @@ class GLShader : gobject.object.ObjectWrap
         args = uniform arguments
         idx = index of the uniform
       Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   bool getArgBool(glib.bytes.Bytes args, int idx) nothrow
   {
@@ -288,6 +317,10 @@ class GLShader : gobject.object.ObjectWrap
         args = uniform arguments
         idx = index of the uniform
       Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   float getArgFloat(glib.bytes.Bytes args, int idx) nothrow
   {
@@ -305,6 +338,10 @@ class GLShader : gobject.object.ObjectWrap
         args = uniform arguments
         idx = index of the uniform
       Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   int getArgInt(glib.bytes.Bytes args, int idx) nothrow
   {
@@ -322,6 +359,10 @@ class GLShader : gobject.object.ObjectWrap
         args = uniform arguments
         idx = index of the uniform
       Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   uint getArgUint(glib.bytes.Bytes args, int idx) nothrow
   {
@@ -339,6 +380,10 @@ class GLShader : gobject.object.ObjectWrap
         args = uniform arguments
         idx = index of the uniform
         outValue = location to store the uniform value in
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void getArgVec2(glib.bytes.Bytes args, int idx, graphene.vec2.Vec2 outValue) nothrow
   {
@@ -354,6 +399,10 @@ class GLShader : gobject.object.ObjectWrap
         args = uniform arguments
         idx = index of the uniform
         outValue = location to store the uniform value in
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void getArgVec3(glib.bytes.Bytes args, int idx, graphene.vec3.Vec3 outValue) nothrow
   {
@@ -369,6 +418,10 @@ class GLShader : gobject.object.ObjectWrap
         args = uniform arguments
         idx = index of the uniform
         outValue = location to store set the uniform value in
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void getArgVec4(glib.bytes.Bytes args, int idx, graphene.vec4.Vec4 outValue) nothrow
   {
@@ -378,6 +431,10 @@ class GLShader : gobject.object.ObjectWrap
   /**
       Get the size of the data block used to specify arguments for this shader.
       Returns: The size of the data block
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   size_t getArgsSize() nothrow
   {
@@ -393,6 +450,10 @@ class GLShader : gobject.object.ObjectWrap
       in your usecase. It is determined by looking at the highest
       u_textureN value that the shader defines.
       Returns: The number of texture inputs required by shader
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   int getNTextures() nothrow
   {
@@ -404,6 +465,10 @@ class GLShader : gobject.object.ObjectWrap
   /**
       Get the number of declared uniforms for this shader.
       Returns: The number of declared uniforms
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   int getNUniforms() nothrow
   {
@@ -416,6 +481,10 @@ class GLShader : gobject.object.ObjectWrap
       Gets the resource path for the GLSL sourcecode being used
       to render this shader.
       Returns: The resource path for the shader
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   string getResource() nothrow
   {
@@ -428,6 +497,10 @@ class GLShader : gobject.object.ObjectWrap
   /**
       Gets the GLSL sourcecode being used to render this shader.
       Returns: The source code for the shader
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   glib.bytes.Bytes getSource() nothrow
   {
@@ -443,6 +516,10 @@ class GLShader : gobject.object.ObjectWrap
       Params:
         idx = index of the uniform
       Returns: The name of the declared uniform
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   string getUniformName(int idx) nothrow
   {
@@ -458,6 +535,10 @@ class GLShader : gobject.object.ObjectWrap
       Params:
         idx = index of the uniform
       Returns: The data offset
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   int getUniformOffset(int idx) nothrow
   {
@@ -472,6 +553,10 @@ class GLShader : gobject.object.ObjectWrap
       Params:
         idx = index of the uniform
       Returns: The type of the declared uniform
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   gsk.types.GLUniformType getUniformType(int idx) nothrow
   {
@@ -500,7 +585,12 @@ class GLShaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("resource", propval);
   }
 
-  /** */
+  /**
+      Set `source` property.
+      Params:
+        propval = The source code for the shader, as a [glib.bytes.Bytes].
+      Returns: Builder instance for fluent chaining
+  */
   T source(glib.bytes.Bytes propval) nothrow
   {
     return setProperty("source", propval);

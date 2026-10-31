@@ -198,8 +198,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
         
         Determines when the squeezer will switch children.
         
-        If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when the
-        visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+        If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when
+        the visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
         it will switch as soon as the visible child doesn't get their natural size.
         
         This can be useful if you have a long ellipsizing label and want to let it
@@ -219,8 +219,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
           
           Determines when the squeezer will switch children.
           
-          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when the
-          visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when
+          the visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
           it will switch as soon as the visible child doesn't get their natural size.
           
           This can be useful if you have a long ellipsizing label and want to let it
@@ -648,8 +648,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
       
       Determines when the squeezer will switch children.
       
-      If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when the
-      visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+      If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when
+      the visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
       it will switch as soon as the visible child doesn't get their natural size.
       
       This can be useful if you have a long ellipsizing label and want to let it
@@ -795,8 +795,8 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
           
           Determines when the squeezer will switch children.
           
-          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when the
-          visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only switch when
+          the visible child cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
           it will switch as soon as the visible child doesn't get their natural size.
           
           This can be useful if you have a long ellipsizing label and want to let it

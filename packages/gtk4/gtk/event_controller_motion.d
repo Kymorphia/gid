@@ -11,8 +11,7 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
-    [gtk.event_controller_motion.EventControllerMotion] is an event controller tracking the pointer
-    position.
+    Tracks the pointer position.
     
     The event controller offers [gtk.event_controller_motion.EventControllerMotion.enter]
     and [gtk.event_controller_motion.EventControllerMotion.leave] signals, as well as

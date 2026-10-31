@@ -9,8 +9,7 @@ import gid.gid;
 import gobject.boxed;
 
 /**
-    The [gdk.dmabuf_formats.DmabufFormats] struct provides information about
-    supported DMA buffer formats.
+    Provides information about supported DMA buffer formats.
     
     You can query whether a given format is supported with
     [gdk.dmabuf_formats.DmabufFormats.contains] and you can iterate

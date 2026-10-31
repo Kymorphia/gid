@@ -24,11 +24,17 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.scale_button.ScaleButton] provides a button which pops up a scale widget.
+    Provides a button which pops up a scale widget.
     
     This kind of widget is commonly used for volume controls in multimedia
     applications, and GTK provides a [gtk.volume_button.VolumeButton] subclass that
     is tailored for this use case.
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.scale_button.ScaleButton.popup]
     
     # CSS nodes
     

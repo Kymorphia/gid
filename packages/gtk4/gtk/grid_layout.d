@@ -11,8 +11,7 @@ import gtk.layout_manager;
 import gtk.types;
 
 /**
-    [gtk.grid_layout.GridLayout] is a layout manager which arranges child widgets in
-    rows and columns.
+    Arranges child widgets in rows and columns.
     
     Children have an "attach point" defined by the horizontal and vertical
     index of the cell they occupy; children can span multiple rows or columns.

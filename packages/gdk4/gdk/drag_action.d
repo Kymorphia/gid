@@ -15,7 +15,7 @@ struct DragAction
       Checks if action represents a single action or includes
       multiple actions.
       
-      When action is 0 - ie no action was given, true
+      When action is [gdk.types.DragAction.None] - ie no action was given, `TRUE`
       is returned.
   
       Params:

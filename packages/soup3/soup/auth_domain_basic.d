@@ -14,7 +14,7 @@ import soup.types;
 /**
     Server-side "Basic" authentication.
     
-    #SoupAuthDomainBasic handles the server side of HTTP "Basic" (ie,
+    [soup.auth_domain_basic.AuthDomainBasic] handles the server side of HTTP "Basic" (ie,
     cleartext password) authentication.
 */
 class AuthDomainBasic : soup.auth_domain.AuthDomain

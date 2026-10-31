@@ -207,7 +207,7 @@ class Builder : gobject.object.ObjectWrap
   }
 
   /**
-      Adds a boolean value to the currently open object member or array.
+      Adds a string value to the currently open object member or array.
       
       If called after [json.builder.Builder.setMemberName], sets the given value
       as the value of the current member in the open object; otherwise, the value

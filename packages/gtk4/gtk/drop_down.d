@@ -21,10 +21,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.drop_down.DropDown] is a widget that allows the user to choose an item
-    from a list of options.
+    Allows the user to choose an item from a list of options.
     
-    ![An example GtkDropDown](drop-down.png)
+    <picture>
+      <source srcset="drop-down-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkDropDown" src="drop-down.png">
+    </picture>
     
     The [gtk.drop_down.DropDown] displays the [selected][gtk.drop_down.DropDown.selected]
     choice.
@@ -450,7 +452,7 @@ class DropDown : gtk.widget.Widget
   /**
       Gets the position of the selected item.
       Returns: the position of the selected item, or [gtk.types.INVALID_LIST_POSITION]
-          if not item is selected
+          if no item is selected
   */
   uint getSelected() nothrow
   {

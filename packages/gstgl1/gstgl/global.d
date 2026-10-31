@@ -131,6 +131,44 @@ bool glCheckExtension(string name, string ext) nothrow
   return _retval;
 }
 
+/**
+    Given the DRM formats in src #GValue, collect corresponding GST formats to
+    dst #GValue. This function returns false if  the context is not an EGL
+    context.
+
+    Params:
+      context = a #GstContext
+      src = value of "drm-format" field in #GstCaps as #GValue
+      flags = transformation flags
+      dst = empty destination #GValue
+    Returns: whether any valid GST video formats were found and stored in dst
+*/
+bool glDmaBufTransformDrmFormatsToGstFormats(gstgl.glcontext.GLContext context, gobject.value.Value src, gstgl.types.GLDrmFormatFlags flags, gobject.value.Value dst) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_dma_buf_transform_drm_formats_to_gst_formats(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null, flags, dst ? cast(GValue*)dst._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Given the video formats in src #GValue, collect corresponding drm formats
+    supported by context into dst #GValue. This function returns false if
+    the context is not an EGL context.
+
+    Params:
+      context = a #GstContext
+      src = value of "format" field in #GstCaps as #GValue
+      flags = transformation flags
+      dst = empty destination #GValue
+    Returns: whether any valid drm formats were found and stored in dst
+*/
+bool glDmaBufTransformGstFormatsToDrmFormats(gstgl.glcontext.GLContext context, gobject.value.Value src, gstgl.types.GLDrmFormatFlags flags, gobject.value.Value dst) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_dma_buf_transform_gst_formats_to_drm_formats(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null, flags, dst ? cast(GValue*)dst._cPtr(No.Dup) : null);
+  return _retval;
+}
+
 /** */
 void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldisplay.GLDisplay display) nothrow
 {

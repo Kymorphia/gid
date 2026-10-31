@@ -525,7 +525,7 @@ class Context : gobject.object.ObjectWrap
       [javascriptcore.context.Context.throwException] in handler like the default one does.
       The last exception handler pushed is the only one used by the #JSCContext, use
       [javascriptcore.context.Context.popExceptionHandler] to remove it and set the previous one. When handler
-      is removed from the context, destroy_notify i called with user_data as parameter.
+      is removed from the context, destroy_notify is called with user_data as parameter.
   
       Params:
         handler = a #JSCExceptionHandler

@@ -11,8 +11,7 @@ import gobject.boxed;
 import gobject.types;
 
 /**
-    A [gdk.content_formats_builder.ContentFormatsBuilder] is an auxiliary struct used to create
-    new [gdk.content_formats.ContentFormats], and should not be kept around.
+    Creates [gdk.content_formats.ContentFormats] objects.
 */
 class ContentFormatsBuilder : gobject.boxed.Boxed
 {

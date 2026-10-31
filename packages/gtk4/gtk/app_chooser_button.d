@@ -23,7 +23,10 @@ import gtk.widget;
 /**
     The [gtk.app_chooser_button.AppChooserButton] lets the user select an application.
     
-    ![An example GtkAppChooserButton](appchooserbutton.png)
+    <picture>
+      <source srcset="appchooserbutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkAppChooserButton" src="appchooserbutton.png">
+    </picture>
     
     Initially, a [gtk.app_chooser_button.AppChooserButton] selects the first application
     in its list, which will either be the most-recently used application

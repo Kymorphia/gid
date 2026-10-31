@@ -11,8 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.style_provider.StyleProvider] is an interface for style information used by
-    [gtk.style_context.StyleContext].
+    An interface for style information used by [gtk.style_context.StyleContext].
     
     See [gtk.style_context.StyleContext.addProvider] and
     [gtk.style_context.StyleContext.addProviderForDisplay] for

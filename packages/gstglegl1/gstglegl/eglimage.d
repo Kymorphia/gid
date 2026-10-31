@@ -8,6 +8,7 @@ import gstgl.glcontext;
 import gstglegl.c.functions;
 import gstglegl.c.types;
 import gstglegl.types;
+import gstvideo.types;
 import gstvideo.video_info;
 
 /**
@@ -63,6 +64,24 @@ class EGLImage : gobject.boxed.Boxed
   void* getImage() nothrow
   {
     auto _retval = gst_egl_image_get_image(cast(GstEGLImage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Checks if the given context can emulate format using a limited subset of
+      RGB texture formats. Such format is then suitable for importing using
+      [gstglegl.eglimage.EGLImage.fromDmabuf] even when GL supports the video format as
+      external-only or not at all.
+  
+      Params:
+        context = a #GstGLContext (must be an EGL context)
+        format = a #GstVideoFormat
+      Returns: #TRUE if format can be emulated
+  */
+  static bool canEmulate(gstgl.glcontext.GLContext context, gstvideo.types.VideoFormat format) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_egl_image_can_emulate(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, format);
     return _retval;
   }
 

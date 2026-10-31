@@ -10,8 +10,7 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
-    The [gtk.orientable.Orientable] interface is implemented by all widgets that can be
-    oriented horizontally or vertically.
+    An interface for widgets that can be oriented horizontally or vertically.
     
     [gtk.orientable.Orientable] is more flexible in that it allows the orientation to be
     changed at runtime, allowing the widgets to “flip”.

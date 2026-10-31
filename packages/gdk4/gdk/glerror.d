@@ -13,7 +13,10 @@ struct GLError
 {
   alias Enum = gdk.types.GLError; ///
 
-  /** */
+  /**
+      Registers an error quark for [gdk.glcontext.GLContext] errors.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

@@ -11,7 +11,7 @@ import gtk.text_buffer;
 import gtk.types;
 
 /**
-    A [gtk.text_mark.TextMark] is a position in a `GtkTextbuffer` that is preserved
+    Marks a position in a `GtkTextbuffer` that is preserved
     across modifications.
     
     You may wish to begin by reading the
@@ -196,7 +196,19 @@ class TextMark : gobject.object.ObjectWrap
     return _retval;
   }
 
-  /** */
+  /**
+      Sets the visibility of mark.
+      
+      The insertion point is normally visible, i.e. you can see it as
+      a vertical bar. Also, the text widget uses a visible mark to
+      indicate where a drop will occur when dragging-and-dropping text.
+      Most other marks are not visible.
+      
+      Marks are not visible by default.
+  
+      Params:
+        setting = visibility of mark
+  */
   void setVisible(bool setting) nothrow
   {
     gtk_text_mark_set_visible(cast(GtkTextMark*)this._cPtr, setting);

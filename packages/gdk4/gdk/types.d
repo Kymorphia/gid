@@ -5,6 +5,8 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_deserializer;
 import gdk.content_serializer;
+import gdk.cursor;
+import gdk.texture;
 import gid.gid;
 
 
@@ -18,6 +20,12 @@ alias AxisFlags = GdkAxisFlags;
 
 /** */
 alias AxisUse = GdkAxisUse;
+
+/** */
+alias CicpRange = GdkCicpRange;
+
+/** */
+alias ColorChannel = GdkColorChannel;
 
 /** */
 alias CrossingMode = GdkCrossingMode;
@@ -77,6 +85,9 @@ alias PaintableFlags = GdkPaintableFlags;
 alias ScrollDirection = GdkScrollDirection;
 
 /** */
+alias ScrollRelativeDirection = GdkScrollRelativeDirection;
+
+/** */
 alias ScrollUnit = GdkScrollUnit;
 
 /** */
@@ -93,6 +104,9 @@ alias TextureError = GdkTextureError;
 
 /** */
 alias TitlebarGesture = GdkTitlebarGesture;
+
+/** */
+alias ToplevelCapabilities = GdkToplevelCapabilities;
 
 /** */
 alias ToplevelState = GdkToplevelState;
@@ -136,6 +150,37 @@ alias ContentDeserializeFunc = void delegate(gdk.content_deserializer.ContentDes
       serializer = a [gdk.content_serializer.ContentSerializer]
 */
 alias ContentSerializeFunc = void delegate(gdk.content_serializer.ContentSerializer serializer);
+
+/**
+    The type of callback used by a dynamic [gdk.cursor.Cursor] to generate
+    a texture for the cursor image at the given cursor_size
+    and scale.
+    
+    The actual cursor size in application pixels may be different
+    from cursor_size x cursor_size, and will be returned in
+    width, height. The returned texture should have a size that
+    corresponds to the actual cursor size, in device pixels (i.e.
+    application pixels, multiplied by scale).
+    
+    This function may fail and return `NULL`, in which case
+    the fallback cursor will be used.
+
+    Params:
+      cursor = the [gdk.cursor.Cursor]
+      cursorSize = the nominal cursor size, in application pixels
+      scale = the device scale
+      width = return location for the actual cursor width,
+          in application pixels
+      height = return location for the actual cursor height,
+          in application pixels
+      hotspotX = return location for the hotspot X position,
+          in application pixels
+      hotspotY = return location for the hotspot Y position,
+          in application pixels
+    Returns: the cursor image, or
+        `NULL` if none could be produced.
+*/
+alias CursorGetTextureCallback = gdk.texture.Texture delegate(gdk.cursor.Cursor cursor, int cursorSize, double scale, out int width, out int height, out int hotspotX, out int hotspotY);
 
 /**
     Defines all possible DND actions.
@@ -184,6 +229,12 @@ enum KEY_0 = 48;
 
 /** */
 enum KEY_1 = 49;
+
+/** */
+enum KEY_10ChannelsDown = 268964281;
+
+/** */
+enum KEY_10ChannelsUp = 268964280;
 
 /** */
 enum KEY_2 = 50;
@@ -282,6 +333,9 @@ enum KEY_3270_Setup = 64791;
 enum KEY_3270_Test = 64781;
 
 /** */
+enum KEY_3DMode = 268964463;
+
+/** */
 enum KEY_4 = 52;
 
 /** */
@@ -304,6 +358,9 @@ enum KEY_A = 65;
 
 /** */
 enum KEY_AE = 198;
+
+/** */
+enum KEY_ALSToggle = 268964400;
 
 /** */
 enum KEY_Aacute = 193;
@@ -336,6 +393,9 @@ enum KEY_AccessX_Enable = 65136;
 enum KEY_AccessX_Feedback_Enable = 65137;
 
 /** */
+enum KEY_Accessibility = 268964430;
+
+/** */
 enum KEY_Acircumflex = 194;
 
 /** */
@@ -357,6 +417,9 @@ enum KEY_Acircumflextilde = 16785066;
 enum KEY_AddFavorite = 269025081;
 
 /** */
+enum KEY_Addressbook = 268964269;
+
+/** */
 enum KEY_Adiaeresis = 196;
 
 /** */
@@ -376,6 +439,9 @@ enum KEY_Amacron = 960;
 
 /** */
 enum KEY_Aogonek = 417;
+
+/** */
+enum KEY_AppSelect = 268964420;
 
 /** */
 enum KEY_ApplicationLeft = 269025104;
@@ -897,13 +963,34 @@ enum KEY_Armenian_za = 16778598;
 enum KEY_Armenian_zhe = 16778602;
 
 /** */
+enum KEY_AspectRatio = 268964215;
+
+/** */
+enum KEY_Assistant = 268964423;
+
+/** */
 enum KEY_Atilde = 195;
+
+/** */
+enum KEY_AttendantOff = 268964380;
+
+/** */
+enum KEY_AttendantOn = 268964379;
+
+/** */
+enum KEY_AttendantToggle = 268964381;
 
 /** */
 enum KEY_AudibleBell_Enable = 65146;
 
 /** */
+enum KEY_Audio = 268964232;
+
+/** */
 enum KEY_AudioCycleTrack = 269025179;
+
+/** */
+enum KEY_AudioDesc = 268964462;
 
 /** */
 enum KEY_AudioForward = 269025175;
@@ -954,6 +1041,9 @@ enum KEY_AudioRewind = 269025086;
 enum KEY_AudioStop = 269025045;
 
 /** */
+enum KEY_AutopilotEngageToggle = 268964477;
+
+/** */
 enum KEY_Away = 269025165;
 
 /** */
@@ -996,6 +1086,18 @@ enum KEY_Break = 65387;
 enum KEY_BrightnessAdjust = 269025083;
 
 /** */
+enum KEY_BrightnessAuto = 268964084;
+
+/** */
+enum KEY_BrightnessMax = 268964433;
+
+/** */
+enum KEY_BrightnessMin = 268964432;
+
+/** */
+enum KEY_Buttonconfig = 268964416;
+
+/** */
 enum KEY_Byelorussian_SHORTU = 1726;
 
 /** */
@@ -1029,6 +1131,36 @@ enum KEY_Calculator = 269025053;
 enum KEY_Calendar = 269025056;
 
 /** */
+enum KEY_CameraAccessDisable = 268964428;
+
+/** */
+enum KEY_CameraAccessEnable = 268964427;
+
+/** */
+enum KEY_CameraAccessToggle = 268964429;
+
+/** */
+enum KEY_CameraDown = 268964376;
+
+/** */
+enum KEY_CameraFocus = 268964368;
+
+/** */
+enum KEY_CameraLeft = 268964377;
+
+/** */
+enum KEY_CameraRight = 268964378;
+
+/** */
+enum KEY_CameraUp = 268964375;
+
+/** */
+enum KEY_CameraZoomIn = 268964373;
+
+/** */
+enum KEY_CameraZoomOut = 268964374;
+
+/** */
 enum KEY_Cancel = 65385;
 
 /** */
@@ -1047,10 +1179,19 @@ enum KEY_Ccircumflex = 710;
 enum KEY_Ch = 65185;
 
 /** */
+enum KEY_ChannelDown = 268964243;
+
+/** */
+enum KEY_ChannelUp = 268964242;
+
+/** */
 enum KEY_Clear = 65291;
 
 /** */
 enum KEY_ClearGrab = 269024801;
+
+/** */
+enum KEY_ClearvuSonar = 268964486;
 
 /** */
 enum KEY_Close = 269025110;
@@ -1065,7 +1206,13 @@ enum KEY_ColonSign = 16785569;
 enum KEY_Community = 269025085;
 
 /** */
+enum KEY_ContextMenu = 268964278;
+
+/** */
 enum KEY_ContrastAdjust = 269025058;
+
+/** */
+enum KEY_ControlPanel = 268964419;
 
 /** */
 enum KEY_Control_L = 65507;
@@ -1404,7 +1551,16 @@ enum KEY_D = 68;
 enum KEY_DOS = 269025114;
 
 /** */
+enum KEY_DVD = 268964229;
+
+/** */
 enum KEY_Dabovedot = 16784906;
+
+/** */
+enum KEY_Data = 268964471;
+
+/** */
+enum KEY_Database = 268964266;
 
 /** */
 enum KEY_Dcaron = 463;
@@ -1413,7 +1569,19 @@ enum KEY_Dcaron = 463;
 enum KEY_Delete = 65535;
 
 /** */
+enum KEY_Dictate = 268964426;
+
+/** */
 enum KEY_Display = 269025113;
+
+/** */
+enum KEY_DisplayOff = 268964085;
+
+/** */
+enum KEY_DisplayToggle = 268964271;
+
+/** */
+enum KEY_DoNotDisturb = 268964431;
 
 /** */
 enum KEY_Documents = 269025115;
@@ -1426,6 +1594,9 @@ enum KEY_Down = 65364;
 
 /** */
 enum KEY_Dstroke = 464;
+
+/** */
+enum KEY_DualRangeRadar = 268964483;
 
 /** */
 enum KEY_E = 69;
@@ -1476,6 +1647,9 @@ enum KEY_EcuSign = 16785568;
 enum KEY_Ediaeresis = 203;
 
 /** */
+enum KEY_Editor = 268964262;
+
+/** */
 enum KEY_Egrave = 200;
 
 /** */
@@ -1492,6 +1666,9 @@ enum KEY_Eject = 269025068;
 
 /** */
 enum KEY_Emacron = 938;
+
+/** */
+enum KEY_EmojiPicker = 268964425;
 
 /** */
 enum KEY_End = 65367;
@@ -1668,6 +1845,9 @@ enum KEY_Farsi_9 = 16779001;
 enum KEY_Farsi_yeh = 16778956;
 
 /** */
+enum KEY_FastReverse = 268964469;
+
+/** */
 enum KEY_Favorites = 269025072;
 
 /** */
@@ -1680,6 +1860,18 @@ enum KEY_Find = 65384;
 enum KEY_First_Virtual_Screen = 65232;
 
 /** */
+enum KEY_FishingChart = 268964481;
+
+/** */
+enum KEY_Fn = 268964304;
+
+/** */
+enum KEY_FnRightShift = 268964325;
+
+/** */
+enum KEY_Fn_Esc = 268964305;
+
+/** */
 enum KEY_Forward = 269025063;
 
 /** */
@@ -1687,6 +1879,9 @@ enum KEY_FrameBack = 269025181;
 
 /** */
 enum KEY_FrameForward = 269025182;
+
+/** */
+enum KEY_FullScreen = 269025208;
 
 /** */
 enum KEY_G = 71;
@@ -1828,6 +2023,9 @@ enum KEY_Georgian_zhar = 16781535;
 
 /** */
 enum KEY_Go = 269025119;
+
+/** */
+enum KEY_GraphicsEditor = 268964264;
 
 /** */
 enum KEY_Greek_ALPHA = 1985;
@@ -2379,6 +2577,9 @@ enum KEY_Hangul_YeorinHieuh = 3829;
 enum KEY_Hangul_switch = 65406;
 
 /** */
+enum KEY_HangupPhone = 268964286;
+
+/** */
 enum KEY_Hankaku = 65321;
 
 /** */
@@ -2577,6 +2778,12 @@ enum KEY_Ihook = 16785096;
 enum KEY_Imacron = 975;
 
 /** */
+enum KEY_Images = 268964282;
+
+/** */
+enum KEY_Info = 268964198;
+
+/** */
 enum KEY_Insert = 65379;
 
 /** */
@@ -2590,6 +2797,9 @@ enum KEY_J = 74;
 
 /** */
 enum KEY_Jcircumflex = 684;
+
+/** */
+enum KEY_Journal = 268964418;
 
 /** */
 enum KEY_K = 75;
@@ -2727,6 +2937,39 @@ enum KEY_KbdBrightnessDown = 269025030;
 enum KEY_KbdBrightnessUp = 269025029;
 
 /** */
+enum KEY_KbdInputAssistAccept = 268964452;
+
+/** */
+enum KEY_KbdInputAssistCancel = 268964453;
+
+/** */
+enum KEY_KbdInputAssistNext = 268964449;
+
+/** */
+enum KEY_KbdInputAssistNextgroup = 268964451;
+
+/** */
+enum KEY_KbdInputAssistPrev = 268964448;
+
+/** */
+enum KEY_KbdInputAssistPrevgroup = 268964450;
+
+/** */
+enum KEY_KbdLcdMenu1 = 268964536;
+
+/** */
+enum KEY_KbdLcdMenu2 = 268964537;
+
+/** */
+enum KEY_KbdLcdMenu3 = 268964538;
+
+/** */
+enum KEY_KbdLcdMenu4 = 268964539;
+
+/** */
+enum KEY_KbdLcdMenu5 = 268964540;
+
+/** */
 enum KEY_KbdLightOnOff = 269025028;
 
 /** */
@@ -2838,7 +3081,16 @@ enum KEY_Lcedilla = 934;
 enum KEY_Left = 65361;
 
 /** */
+enum KEY_LeftDown = 268964457;
+
+/** */
+enum KEY_LeftUp = 268964456;
+
+/** */
 enum KEY_LightBulb = 269025077;
+
+/** */
+enum KEY_LightsToggle = 268964382;
 
 /** */
 enum KEY_Linefeed = 65290;
@@ -2883,6 +3135,114 @@ enum KEY_Macedonia_gje = 1698;
 enum KEY_Macedonia_kje = 1708;
 
 /** */
+enum KEY_Macro1 = 268964496;
+
+/** */
+enum KEY_Macro10 = 268964505;
+
+/** */
+enum KEY_Macro11 = 268964506;
+
+/** */
+enum KEY_Macro12 = 268964507;
+
+/** */
+enum KEY_Macro13 = 268964508;
+
+/** */
+enum KEY_Macro14 = 268964509;
+
+/** */
+enum KEY_Macro15 = 268964510;
+
+/** */
+enum KEY_Macro16 = 268964511;
+
+/** */
+enum KEY_Macro17 = 268964512;
+
+/** */
+enum KEY_Macro18 = 268964513;
+
+/** */
+enum KEY_Macro19 = 268964514;
+
+/** */
+enum KEY_Macro2 = 268964497;
+
+/** */
+enum KEY_Macro20 = 268964515;
+
+/** */
+enum KEY_Macro21 = 268964516;
+
+/** */
+enum KEY_Macro22 = 268964517;
+
+/** */
+enum KEY_Macro23 = 268964518;
+
+/** */
+enum KEY_Macro24 = 268964519;
+
+/** */
+enum KEY_Macro25 = 268964520;
+
+/** */
+enum KEY_Macro26 = 268964521;
+
+/** */
+enum KEY_Macro27 = 268964522;
+
+/** */
+enum KEY_Macro28 = 268964523;
+
+/** */
+enum KEY_Macro29 = 268964524;
+
+/** */
+enum KEY_Macro3 = 268964498;
+
+/** */
+enum KEY_Macro30 = 268964525;
+
+/** */
+enum KEY_Macro4 = 268964499;
+
+/** */
+enum KEY_Macro5 = 268964500;
+
+/** */
+enum KEY_Macro6 = 268964501;
+
+/** */
+enum KEY_Macro7 = 268964502;
+
+/** */
+enum KEY_Macro8 = 268964503;
+
+/** */
+enum KEY_Macro9 = 268964504;
+
+/** */
+enum KEY_MacroPreset1 = 268964531;
+
+/** */
+enum KEY_MacroPreset2 = 268964532;
+
+/** */
+enum KEY_MacroPreset3 = 268964533;
+
+/** */
+enum KEY_MacroPresetCycle = 268964530;
+
+/** */
+enum KEY_MacroRecordStart = 268964528;
+
+/** */
+enum KEY_MacroRecordStop = 268964529;
+
+/** */
 enum KEY_Mae_Koho = 65342;
 
 /** */
@@ -2892,10 +3252,19 @@ enum KEY_Mail = 269025049;
 enum KEY_MailForward = 269025168;
 
 /** */
+enum KEY_MarkWaypoint = 268964478;
+
+/** */
 enum KEY_Market = 269025122;
 
 /** */
 enum KEY_Massyo = 65324;
+
+/** */
+enum KEY_MediaRepeat = 268964279;
+
+/** */
+enum KEY_MediaTopMenu = 268964459;
 
 /** */
 enum KEY_Meeting = 269025123;
@@ -2929,6 +3298,9 @@ enum KEY_ModeLock = 269025025;
 
 /** */
 enum KEY_Mode_switch = 65406;
+
+/** */
+enum KEY_MonBrightnessCycle = 269025031;
 
 /** */
 enum KEY_MonBrightnessDown = 269025027;
@@ -2970,6 +3342,12 @@ enum KEY_Nacute = 465;
 enum KEY_NairaSign = 16785574;
 
 /** */
+enum KEY_NavChart = 268964480;
+
+/** */
+enum KEY_NavInfo = 268964488;
+
+/** */
 enum KEY_Ncaron = 466;
 
 /** */
@@ -2988,16 +3366,79 @@ enum KEY_News = 269025129;
 enum KEY_Next = 65366;
 
 /** */
+enum KEY_NextElement = 268964475;
+
+/** */
+enum KEY_NextFavorite = 268964464;
+
+/** */
 enum KEY_Next_VMode = 269024802;
 
 /** */
 enum KEY_Next_Virtual_Screen = 65234;
 
 /** */
+enum KEY_NotificationCenter = 268964284;
+
+/** */
 enum KEY_Ntilde = 209;
 
 /** */
 enum KEY_Num_Lock = 65407;
+
+/** */
+enum KEY_Numeric0 = 268964352;
+
+/** */
+enum KEY_Numeric1 = 268964353;
+
+/** */
+enum KEY_Numeric11 = 268964460;
+
+/** */
+enum KEY_Numeric12 = 268964461;
+
+/** */
+enum KEY_Numeric2 = 268964354;
+
+/** */
+enum KEY_Numeric3 = 268964355;
+
+/** */
+enum KEY_Numeric4 = 268964356;
+
+/** */
+enum KEY_Numeric5 = 268964357;
+
+/** */
+enum KEY_Numeric6 = 268964358;
+
+/** */
+enum KEY_Numeric7 = 268964359;
+
+/** */
+enum KEY_Numeric8 = 268964360;
+
+/** */
+enum KEY_Numeric9 = 268964361;
+
+/** */
+enum KEY_NumericA = 268964364;
+
+/** */
+enum KEY_NumericB = 268964365;
+
+/** */
+enum KEY_NumericC = 268964366;
+
+/** */
+enum KEY_NumericD = 268964367;
+
+/** */
+enum KEY_NumericPound = 268964363;
+
+/** */
+enum KEY_NumericStar = 268964362;
 
 /** */
 enum KEY_O = 79;
@@ -3072,6 +3513,9 @@ enum KEY_Ohorntilde = 16785120;
 enum KEY_Omacron = 978;
 
 /** */
+enum KEY_OnScreenKeyboard = 268964472;
+
+/** */
 enum KEY_Ooblique = 216;
 
 /** */
@@ -3114,10 +3558,16 @@ enum KEY_Paste = 269025133;
 enum KEY_Pause = 65299;
 
 /** */
+enum KEY_PauseRecord = 268964466;
+
+/** */
 enum KEY_PesetaSign = 16785575;
 
 /** */
 enum KEY_Phone = 269025134;
+
+/** */
+enum KEY_PickupPhone = 268964285;
 
 /** */
 enum KEY_Pictures = 269025169;
@@ -3219,6 +3669,9 @@ enum KEY_PowerDown = 269025057;
 enum KEY_PowerOff = 269025066;
 
 /** */
+enum KEY_Presentation = 268964265;
+
+/** */
 enum KEY_Prev_VMode = 269024803;
 
 /** */
@@ -3228,10 +3681,16 @@ enum KEY_Prev_Virtual_Screen = 65233;
 enum KEY_PreviousCandidate = 65342;
 
 /** */
+enum KEY_PreviousElement = 268964476;
+
+/** */
 enum KEY_Print = 65377;
 
 /** */
 enum KEY_Prior = 65365;
+
+/** */
+enum KEY_PrivacyScreenToggle = 268964473;
 
 /** */
 enum KEY_Q = 81;
@@ -3291,6 +3750,9 @@ enum KEY_RFKill = 269025205;
 enum KEY_Racute = 448;
 
 /** */
+enum KEY_RadarOverlay = 268964484;
+
+/** */
 enum KEY_Rcaron = 472;
 
 /** */
@@ -3304,6 +3766,9 @@ enum KEY_Redo = 65382;
 
 /** */
 enum KEY_Refresh = 269025065;
+
+/** */
+enum KEY_RefreshRateToggle = 268964402;
 
 /** */
 enum KEY_Reload = 269025139;
@@ -3321,6 +3786,12 @@ enum KEY_Return = 65293;
 enum KEY_Right = 65363;
 
 /** */
+enum KEY_RightDown = 268964455;
+
+/** */
+enum KEY_RightUp = 268964454;
+
+/** */
 enum KEY_RockerDown = 269025060;
 
 /** */
@@ -3333,10 +3804,16 @@ enum KEY_RockerUp = 269025059;
 enum KEY_Romaji = 65316;
 
 /** */
+enum KEY_RootMenu = 268964458;
+
+/** */
 enum KEY_RotateWindows = 269025140;
 
 /** */
 enum KEY_RotationKB = 269025142;
+
+/** */
+enum KEY_RotationLockToggle = 269025207;
 
 /** */
 enum KEY_RotationPB = 269025141;
@@ -3372,6 +3849,9 @@ enum KEY_Scircumflex = 734;
 enum KEY_ScreenSaver = 269025069;
 
 /** */
+enum KEY_Screensaver = 268964421;
+
+/** */
 enum KEY_ScrollClick = 269025146;
 
 /** */
@@ -3391,6 +3871,9 @@ enum KEY_Select = 65376;
 
 /** */
 enum KEY_SelectButton = 269025184;
+
+/** */
+enum KEY_SelectiveScreenshot = 268964474;
 
 /** */
 enum KEY_Send = 269025147;
@@ -3444,7 +3927,13 @@ enum KEY_Shift_R = 65506;
 enum KEY_Shop = 269025078;
 
 /** */
+enum KEY_SidevuSonar = 268964487;
+
+/** */
 enum KEY_SingleCandidate = 65340;
+
+/** */
+enum KEY_SingleRangeRadar = 268964482;
 
 /** */
 enum KEY_Sinh_a = 16780677;
@@ -3693,7 +4182,16 @@ enum KEY_Sleep = 269025071;
 enum KEY_SlowKeys_Enable = 65139;
 
 /** */
+enum KEY_SlowReverse = 268964470;
+
+/** */
+enum KEY_Sos = 268964479;
+
+/** */
 enum KEY_Spell = 269025148;
+
+/** */
+enum KEY_SpellCheck = 268964272;
 
 /** */
 enum KEY_SplitScreen = 269025149;
@@ -3709,6 +4207,9 @@ enum KEY_StickyKeys_Enable = 65141;
 
 /** */
 enum KEY_Stop = 269025064;
+
+/** */
+enum KEY_StopRecord = 268964465;
 
 /** */
 enum KEY_Subtitle = 269025178;
@@ -3778,6 +4279,9 @@ enum KEY_Tabovedot = 16785002;
 
 /** */
 enum KEY_TaskPane = 269025151;
+
+/** */
+enum KEY_Taskmanager = 268964417;
 
 /** */
 enum KEY_Tcaron = 427;
@@ -4071,6 +4575,9 @@ enum KEY_TouchpadToggle = 269025193;
 enum KEY_Touroku = 65323;
 
 /** */
+enum KEY_TraditionalSonar = 268964485;
+
+/** */
 enum KEY_Travel = 269025154;
 
 /** */
@@ -4176,6 +4683,9 @@ enum KEY_Undo = 65381;
 enum KEY_Ungrab = 269024800;
 
 /** */
+enum KEY_Unmute = 268964468;
+
+/** */
 enum KEY_Uogonek = 985;
 
 /** */
@@ -4200,13 +4710,25 @@ enum KEY_Utilde = 989;
 enum KEY_V = 86;
 
 /** */
+enum KEY_VOD = 268964467;
+
+/** */
 enum KEY_VendorHome = 269025076;
 
 /** */
 enum KEY_Video = 269025159;
 
 /** */
+enum KEY_VideoPhone = 268964256;
+
+/** */
 enum KEY_View = 269025185;
+
+/** */
+enum KEY_VoiceCommand = 268964422;
+
+/** */
+enum KEY_Voicemail = 268964268;
 
 /** */
 enum KEY_VoidSymbol = 16777215;
@@ -4216,6 +4738,9 @@ enum KEY_W = 87;
 
 /** */
 enum KEY_WLAN = 269025173;
+
+/** */
+enum KEY_WPSButton = 268964369;
 
 /** */
 enum KEY_WWAN = 269025204;
@@ -4315,6 +4840,9 @@ enum KEY_ZoomIn = 269025163;
 
 /** */
 enum KEY_ZoomOut = 269025164;
+
+/** */
+enum KEY_ZoomReset = 268964260;
 
 /** */
 enum KEY_Zstroke = 16777653;
@@ -5337,6 +5865,21 @@ enum KEY_club = 2796;
 enum KEY_colon = 58;
 
 /** */
+enum KEY_combining_acute = 16777985;
+
+/** */
+enum KEY_combining_belowdot = 16778019;
+
+/** */
+enum KEY_combining_grave = 16777984;
+
+/** */
+enum KEY_combining_hook = 16777993;
+
+/** */
+enum KEY_combining_tilde = 16777987;
+
+/** */
 enum KEY_comma = 44;
 
 /** */
@@ -5383,6 +5926,9 @@ enum KEY_dead_I = 65157;
 
 /** */
 enum KEY_dead_O = 65159;
+
+/** */
+enum KEY_dead_SCHWA = 65163;
 
 /** */
 enum KEY_dead_U = 65161;
@@ -5475,6 +6021,9 @@ enum KEY_dead_grave = 65104;
 enum KEY_dead_greek = 65164;
 
 /** */
+enum KEY_dead_hamza = 65165;
+
+/** */
 enum KEY_dead_hook = 65121;
 
 /** */
@@ -5509,6 +6058,9 @@ enum KEY_dead_perispomeni = 65107;
 
 /** */
 enum KEY_dead_psili = 65124;
+
+/** */
+enum KEY_dead_schwa = 65162;
 
 /** */
 enum KEY_dead_semivoiced_sound = 65119;
@@ -5791,6 +6343,12 @@ enum KEY_greater = 62;
 
 /** */
 enum KEY_greaterthanequal = 2238;
+
+/** */
+enum KEY_guillemetleft = 171;
+
+/** */
+enum KEY_guillemetright = 187;
 
 /** */
 enum KEY_guillemotleft = 171;
@@ -6520,6 +7078,9 @@ enum KEY_opentribulletup = 2787;
 
 /** */
 enum KEY_ordfeminine = 170;
+
+/** */
+enum KEY_ordmasculine = 186;
 
 /** */
 enum KEY_oslash = 248;

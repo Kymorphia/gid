@@ -142,6 +142,21 @@ class FontDescription : gobject.boxed.Boxed
   }
 
   /**
+      Returns the color field of the font description.
+      
+      This field determines whether the font description should
+      match fonts that have color glyphs, or fonts that don't.
+      Returns: 
+  */
+  pango.types.FontColor getColor() nothrow
+  {
+    PangoFontColor _cretval;
+    _cretval = pango_font_description_get_color(cast(const(PangoFontDescription)*)this._cPtr);
+    pango.types.FontColor _retval = cast(pango.types.FontColor)_cretval;
+    return _retval;
+  }
+
+  /**
       Gets the family name field of a font description.
       
       See [pango.font_description.FontDescription.setFamily].
@@ -153,6 +168,22 @@ class FontDescription : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_family(cast(const(PangoFontDescription)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the features field of a font description.
+      
+      See [pango.font_description.FontDescription.setFeatures].
+      Returns: the features field for the font
+          description, or null if not previously set. This has the same
+          life-time as the font description itself and should not be freed.
+  */
+  string getFeatures() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = pango_font_description_get_features(cast(const(PangoFontDescription)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
@@ -376,6 +407,20 @@ class FontDescription : gobject.boxed.Boxed
   }
 
   /**
+      Sets the color field of a font description.
+      
+      This field determines whether the font description should
+      match fonts that have color glyphs, or fonts that don't.
+  
+      Params:
+        color = the [pango.types.FontColor] value
+  */
+  void setColor(pango.types.FontColor color) nothrow
+  {
+    pango_font_description_set_color(cast(PangoFontDescription*)this._cPtr, color);
+  }
+
+  /**
       Sets the family name field of a font description.
       
       The family
@@ -409,6 +454,60 @@ class FontDescription : gobject.boxed.Boxed
   {
     const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
     pango_font_description_set_family_static(cast(PangoFontDescription*)this._cPtr, _family);
+  }
+
+  /**
+      Sets the features field of a font description.
+      
+      OpenType font features allow to enable or disable certain optional
+      features of a font, such as tabular numbers.
+      
+      The format of the features string is comma-separated list of
+      feature assignments, with each assignment being one of these forms:
+      
+          FEATURE=n
+      
+      where FEATURE must be a 4 character tag that identifies and OpenType
+      feature, and n an integer (depending on the feature, the allowed
+      values may be 0, 1 or bigger numbers). Unknown features are ignored.
+      
+      Note that font features set in this way are enabled for the entire text
+      that is using the font, which is not appropriate for all OpenType features.
+      The intended use case is to select character variations (features cv01 - c99),
+      style sets (ss01 - ss20) and the like.
+      
+      Pango does not currently have a way to find supported OpenType features
+      of a font. Both harfbuzz and freetype have API for this. See for example
+      [hb_ot_layout_table_get_feature_tags](https://harfbuzz.github.io/harfbuzz-hb-ot-layout.html#hb-ot-layout-table-get-feature-tags).
+      
+      Features that are not supported by the font are silently ignored.
+  
+      Params:
+        features = a string representing the features
+  */
+  void setFeatures(string features = null) nothrow
+  {
+    const(char)* _features = features.toCString!(No.Malloc, Yes.Nullable);
+    pango_font_description_set_features(cast(PangoFontDescription*)this._cPtr, _features);
+  }
+
+  /**
+      Sets the features field of a font description.
+      
+      This is like [pango.font_description.FontDescription.setFeatures], except
+      that no copy of featuresis made. The caller must make sure that
+      the string passed in stays around until desc has been freed
+      or the name is set again. This function can be used if
+      features is a static string such as a C string literal,
+      or if desc is only needed temporarily.
+  
+      Params:
+        features = a string representing the features
+  */
+  void setFeaturesStatic(string features) nothrow
+  {
+    const(char)* _features = features.toCString!(No.Malloc, No.Nullable);
+    pango_font_description_set_features_static(cast(PangoFontDescription*)this._cPtr, _features);
   }
 
   /**
@@ -613,15 +712,13 @@ class FontDescription : gobject.boxed.Boxed
       
       The string must have the form
       
-          "\[FAMILY-LIST] \[STYLE-OPTIONS] \[SIZE] \[VARIATIONS]",
+          [FAMILY-LIST] [STYLE-OPTIONS] [SIZE] [VARIATIONS] [FEATURES]
       
       where FAMILY-LIST is a comma-separated list of families optionally
       terminated by a comma, STYLE_OPTIONS is a whitespace-separated list
       of words where each word describes one of style, variant, weight,
       stretch, or gravity, and SIZE is a decimal number (size in points)
       or optionally followed by the unit modifier "px" for absolute size.
-      VARIATIONS is a comma-separated list of font variation
-      specifications of the form "\axis=value" (the = sign is optional).
       
       The following words are understood as styles:
       "Normal", "Roman", "Oblique", "Italic".
@@ -644,6 +741,16 @@ class FontDescription : gobject.boxed.Boxed
       "Not-Rotated", "South", "Upside-Down", "North", "Rotated-Left",
       "East", "Rotated-Right", "West".
       
+      The following words are understood as color values:
+      "With-Color", "Without-Color".
+      
+      VARIATIONS is a comma-separated list of font variations
+      of the form @‍axis1=value,axis2=value,...
+      
+      FEATURES is a comma-separated list of font features of the form
+      \#‍feature1=value,feature2=value,...
+      The =value part can be ommitted if the value is 1.
+      
       Any one of the options may be absent. If FAMILY-LIST is absent, then
       the family_name field of the resulting font description will be
       initialized to null. If STYLE-OPTIONS is missing, then all style
@@ -652,7 +759,7 @@ class FontDescription : gobject.boxed.Boxed
       
       A typical example:
       
-          "Cantarell Italic Light 15 \wght=200"
+          Cantarell Italic Light 15 @‍wght=200 #‍tnum=1
   
       Params:
         str = string representation of a font description.

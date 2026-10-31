@@ -636,8 +636,8 @@ alias TypeValuePeekPointerFunc = void* delegate(gobject.value.Value value);
     dest_value will be initialized to the correct destination type.
 
     Params:
-      srcValue = Source value.
-      destValue = Target value.
+      srcValue = source value
+      destValue = target value
 */
 alias ValueTransform = void delegate(gobject.value.Value srcValue, gobject.value.Value destValue);
 
@@ -744,16 +744,30 @@ enum TYPE_RESERVED_USER_FIRST = 49;
 enum VALUE_COLLECT_FORMAT_MAX_LENGTH = 8;
 
 /**
-    For string values, indicates that the string contained is canonical and will
-    exist for the duration of the process. See [gobject.value.Value.setInternedString].
+    Flag to indicate that a string in a [gobject.value.Value] is canonical and
+    will exist for the duration of the process.
+    
+    See [gobject.value.Value.setInternedString].
+    
+    This flag should be checked by implementations of
+    [gobject.types.TypeValueFreeFunc], [gobject.types.TypeValueCollectFunc]
+    and [gobject.types.TypeValueLCopyFunc].
 */
 enum VALUE_INTERNED_STRING = 268435456;
 
 /**
-    If passed to G_VALUE_COLLECT(), allocated data won't be copied
-    but used verbatim. This does not affect ref-counted types like
-    objects. This does not affect usage of [gobject.value.Value.copy], the data will
+    Flag to indicate that allocated data in a [gobject.value.Value] shouldn’t be
+    copied.
+    
+    If passed to `func@GObject.VALUE_COLLECT`, allocated data won’t be copied
+    but used verbatim. This does not affect ref-counted types like objects.
+    
+    This does not affect usage of [gobject.value.Value.copy]: the data will
     be copied if it is not ref-counted.
+    
+    This flag should be checked by implementations of
+    [gobject.types.TypeValueFreeFunc], [gobject.types.TypeValueCollectFunc]
+    and [gobject.types.TypeValueLCopyFunc].
 */
 enum VALUE_NOCOPY_CONTENTS = 134217728;
 

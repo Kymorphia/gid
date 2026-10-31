@@ -20,14 +20,22 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    The [gtk.button.Button] widget is generally used to trigger a callback function that is
-    called when the button is pressed.
+    Calls a callback function when the button is clicked.
     
-    ![An example GtkButton](button.png)
+    <picture>
+      <source srcset="button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkButton" src="button.png">
+    </picture>
     
     The [gtk.button.Button] widget can hold any valid child widget. That is, it can hold
     almost any other standard [gtk.widget.Widget]. The most commonly used child is the
     [gtk.label.Label].
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.button.Button.activate]
     
     # CSS nodes
     

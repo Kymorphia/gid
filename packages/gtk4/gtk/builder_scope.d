@@ -10,8 +10,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.builder_scope.BuilderScope] is an interface to provide language binding support
-    to [gtk.builder.Builder].
+    Provides language binding support to [gtk.builder.Builder].
     
     The goal of [gtk.builder_scope.BuilderScope] is to look up programming-language-specific
     values for strings that are given in a [gtk.builder.Builder] UI file.

@@ -99,6 +99,14 @@ class GLWindow : gst.object.ObjectWrap
   }
 
   /** */
+  bool getRequestOutputSurface() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_window_get_request_output_surface(cast(GstGLWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
   void getSurfaceDimensions(out uint width, out uint height) nothrow
   {
     gst_gl_window_get_surface_dimensions(cast(GstGLWindow*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
@@ -343,6 +351,17 @@ class GLWindow : gst.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gst_gl_window_set_render_rectangle(cast(GstGLWindow*)this._cPtr, x, y, width, height);
     return _retval;
+  }
+
+  /**
+      Configure whether a visible output surface is requested.
+  
+      Params:
+        outputSurface = whether to request an output surface.
+  */
+  void setRequestOutputSurface(bool outputSurface) nothrow
+  {
+    gst_gl_window_set_request_output_surface(cast(GstGLWindow*)this._cPtr, outputSurface);
   }
 
   /**

@@ -18,7 +18,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.tree_expander.TreeExpander] is a widget that provides an expander for a list.
+    Provides an expander for a tree-like list.
     
     It is typically placed as a bottommost child into a [gtk.list_view.ListView]
     to allow users to expand and collapse children in a list with a
@@ -49,6 +49,28 @@ import gtk.widget;
     the [gtk.tree_expander.TreeExpander.hideExpander] property to the item count of
     the model of the treelistrow, to hide the expander for rows without children,
     even if the row is expandable.
+    
+    ## Shortcuts and Gestures
+    
+    [gtk.tree_expander.TreeExpander] supports the following keyboard shortcuts:
+    
+    - <kbd>+</kbd> or <kbd>*</kbd> expands the expander.
+    - <kbd>-</kbd> or <kbd>/</kbd> collapses the expander.
+    - Left and right arrow keys, when combined with <kbd>Shift</kbd> or
+      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>, will expand or collapse, depending on
+      the locale's text direction.
+    - <kbd>Ctrl</kbd>+<kbd>␣</kbd> toggles the expander state.
+    
+    The row can also expand on drag gestures.
+    
+    ## Actions
+    
+    [gtk.tree_expander.TreeExpander] defines a set of built-in actions:
+    
+    - `listitem.expand` expands the expander if it can be expanded.
+    - `listitem.collapse` collapses the expander.
+    - `listitem.toggle-expand` tries to expand the expander if it was collapsed
+      or collapses it if it was expanded.
     
     ## CSS nodes
     

@@ -11,7 +11,7 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
-    A [gtk.shortcut_trigger.ShortcutTrigger] that triggers when a specific keyval and modifiers are pressed.
+    Triggers when a specific keyval and modifiers are pressed.
 */
 class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {

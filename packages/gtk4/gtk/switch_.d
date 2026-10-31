@@ -19,22 +19,32 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.switch_.Switch] is a "light switch" that has two states: on or off.
+    Shows a "light switch" that has two states: on or off.
     
-    ![An example GtkSwitch](switch.png)
+    <picture>
+      <source srcset="switch-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSwitch" src="switch.png">
+    </picture>
     
     The user can control which state should be active by clicking the
-    empty area, or by dragging the handle.
+    empty area, or by dragging the slider.
     
-    [gtk.switch_.Switch] can also handle situations where the underlying state
-    changes with a delay. In this case, the slider position indicates
-    the user's recent change (as indicated by the [gtk.switch_.Switch.active]
-    property), and the color indicates whether the underlying state (represented
-    by the [gtk.switch_.Switch.state] property) has been updated yet.
+    [gtk.switch_.Switch] can also express situations where the underlying state changes
+    with a delay. In this case, the slider position indicates the user's recent
+    change (represented by the [gtk.switch_.Switch.active] property), while the
+    trough color indicates the present underlying state (represented by the
+    [gtk.switch_.Switch.state] property).
     
-    ![GtkSwitch with delayed state change](switch-state.png)
+    <picture>
+      <source srcset="switch-state-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="GtkSwitch with delayed state change" src="switch-state.png">
+    </picture>
     
     See [gtk.switch_.Switch.stateSet] for details.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.switch_.Switch] supports pan and drag gestures to move the slider.
     
     # CSS nodes
     
@@ -113,6 +123,10 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Get `state` property.
       Returns: The backend state that is controlled by the switch.
         
+        Applications should usually set the [gtk.switch_.Switch.active] property,
+        except when indicating a change to the backend state which occurs
+        separately from the user's interaction.
+        
         See [gtk.switch_.Switch.stateSet] for details.
   */
   @property bool state() nothrow
@@ -124,6 +138,10 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Set `state` property.
       Params:
         propval = The backend state that is controlled by the switch.
+          
+          Applications should usually set the [gtk.switch_.Switch.active] property,
+          except when indicating a change to the backend state which occurs
+          separately from the user's interaction.
           
           See [gtk.switch_.Switch.stateSet] for details.
   */
@@ -247,18 +265,14 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Emitted to change the underlying state.
         
         The ::state-set signal is emitted when the user changes the switch
-        position. The default handler keeps the state in sync with the
-        [gtk.switch_.Switch.active] property.
+        position. The default handler calls [gtk.switch_.Switch.setState] with the
+        value of state.
         
         To implement delayed state change, applications can connect to this
         signal, initiate the change of the underlying state, and call
         [gtk.switch_.Switch.setState] when the underlying state change is
         complete. The signal handler should return true to prevent the
         default handler from running.
-        
-        Visually, the underlying state is represented by the trough color of
-        the switch, while the [gtk.switch_.Switch.active] property is
-        represented by the position of the switch.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -331,6 +345,10 @@ class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
       Set `state` property.
       Params:
         propval = The backend state that is controlled by the switch.
+          
+          Applications should usually set the [gtk.switch_.Switch.active] property,
+          except when indicating a change to the backend state which occurs
+          separately from the user's interaction.
           
           See [gtk.switch_.Switch.stateSet] for details.
       Returns: Builder instance for fluent chaining

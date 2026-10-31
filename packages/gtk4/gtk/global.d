@@ -34,6 +34,29 @@ import pango.layout;
 
 
 /**
+    Generates an accessible description of an accelerator.
+    
+    This function is similar to `funcGtk.accelerator_get_label` but it is meant
+    for accessibility layers labels rather than user-facing labels. The output
+    of this function is fit for `enumGtk.AccessibleProperty.KEY_SHORTCUTS`.
+    
+    For more information, see the [WAI-ARIA](https://www.w3.org/TR/wai-aria/#aria-keyshortcuts)
+    reference.
+
+    Params:
+      acceleratorKey = accelerator keyval
+      acceleratorMods = accelerator modifier mask
+    Returns: a newly-allocated string representing the accelerator
+*/
+string acceleratorGetAccessibleLabel(uint acceleratorKey, gdk.types.ModifierType acceleratorMods) nothrow
+{
+  char* _cretval;
+  _cretval = gtk_accelerator_get_accessible_label(acceleratorKey, acceleratorMods);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+  return _retval;
+}
+
+/**
     Gets the modifier mask.
     
     The modifier mask determines which modifiers are considered significant
@@ -78,7 +101,7 @@ string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType accelerat
     instead.
 
     Params:
-      display = a [gdk.display.Display] or null to use the default display
+      display = a [gdk.display.Display]
       acceleratorKey = accelerator keyval
       keycode = accelerator keycode
       acceleratorMods = accelerator modifier mask
@@ -94,7 +117,7 @@ string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint accelera
 
 /**
     Converts an accelerator keyval and modifier mask into a string
-    parseable by [gtk.global.acceleratorParse].
+    that can be parsed by `funcGtk.accelerator_parse`.
     
     For example, if you pass in [gdk.types.KEY_q] and [gdk.types.ModifierType.ControlMask],
     this function returns `<Control>q`.
@@ -117,14 +140,14 @@ string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMo
 
 /**
     Converts an accelerator keyval and modifier mask
-    into a string parseable by [gtk.global.acceleratorParseWithKeycode].
+    into a string that can be parsed by `funcGtk.accelerator_parse_with_keycode`.
     
     This is similar to `funcGtk.accelerator_name` but handling keycodes.
     This is only useful for system-level components, applications
     should use `funcGtk.accelerator_name` instead.
 
     Params:
-      display = a [gdk.display.Display] or null to use the default display
+      display = a [gdk.display.Display]
       acceleratorKey = accelerator keyval
       keycode = accelerator keycode
       acceleratorMods = accelerator modifier mask
@@ -168,7 +191,7 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
       acceleratorKey = return location for accelerator keyval
       acceleratorMods = return location for accelerator
           modifier mask
-    Returns: 
+    Returns: whether parsing succeeded
 */
 bool acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods) nothrow
 {
@@ -227,7 +250,7 @@ bool acceleratorParseWithKeycode(string accelerator, gdk.display.Display display
     Determines whether a given keyval and modifier mask constitute
     a valid keyboard accelerator.
     
-    For example, the [gdk.types.KEY_a] keyval plus [gdk.types.ModifierType.ControlMask] mark is valid,
+    For example, the [gdk.types.KEY_a] keyval plus [gdk.types.ModifierType.ControlMask] mask is valid,
     and matches the “Ctrl+a” accelerator. But, you can't, for instance, use
     the [gdk.types.KEY_Control_L] keyval as an accelerator.
 
@@ -285,7 +308,10 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) 
   return _retval;
 }
 
-/** */
+/**
+    Registers an error quark for CSS parsing errors.
+    Returns: the error quark
+*/
 glib.types.Quark cssParserErrorQuark() nothrow
 {
   glib.types.Quark _retval;
@@ -293,7 +319,10 @@ glib.types.Quark cssParserErrorQuark() nothrow
   return _retval;
 }
 
-/** */
+/**
+    Registers an error quark for CSS parsing warnings.
+    Returns: the warning quark
+*/
 glib.types.Quark cssParserWarningQuark() nothrow
 {
   glib.types.Quark _retval;
@@ -302,12 +331,39 @@ glib.types.Quark cssParserWarningQuark() nothrow
 }
 
 /**
-    Prevents `funcGtk.init` and `funcGtk.init_check` from automatically calling
-    `setlocale (LC_ALL, "")`.
+    Prevents GTK from using the specified portals.
+    
+    This should only be used in portal implementations, apps must not call it.
+
+    Params:
+      portalInterfaces = a null-terminated array of portal interface names to disable
+*/
+void disablePortalInterfaces(string[] portalInterfaces) nothrow
+{
+  auto _portalInterfaces_arr = new char*[](portalInterfaces.length + 1);
+  auto _portalInterfaces = cast(char**)_portalInterfaces_arr.ptr;
+  foreach (i, s; portalInterfaces) _portalInterfaces[i] = s.toCString!(No.Malloc);
+  gtk_disable_portal_interfaces(_portalInterfaces);
+}
+
+/**
+    Prevents GTK from using portals.
+    
+    This is equivalent to setting `GDK_DEBUG=no-portals` in the environment.
+    
+    This should only be used in portal implementations, apps must not call it.
+*/
+void disablePortals() nothrow
+{
+  gtk_disable_portals();
+}
+
+/**
+    Prevents `funcGtk.init` and `funcGtk.init_check` from calling `setlocale()`.
     
     You would want to use this function if you wanted to set the locale for
-    your program to something other than the user’s locale, or if
-    you wanted to set different values for different locale categories.
+    your program to something other than the user’s locale, or if you wanted
+    to set different values for different locale categories.
     
     Most programs should not need to call this function.
 */
@@ -345,7 +401,7 @@ int distributeNaturalAllocation(int extraSpace, gtk.types.RequestedSize[] sizes)
 }
 
 /**
-    Calls a function for all [gtk.printer.Printer]s.
+    Calls a function for all printers that are known to GTK.
     
     If func returns true, the enumeration is stopped.
 
@@ -444,17 +500,17 @@ uint getInterfaceAge() nothrow
 }
 
 /**
-    Get the direction of the current locale. This is the expected
-    reading direction for text and UI.
+    Gets the direction of the current locale.
+    
+    This is the expected reading direction for text and UI.
     
     This function depends on the current locale being set with
-    setlocale() and will default to setting the [gtk.types.TextDirection.Ltr]
+    `setlocale()` and will default to setting the [gtk.types.TextDirection.Ltr]
     direction otherwise. [gtk.types.TextDirection.None] will never be returned.
     
-    GTK sets the default text direction according to the locale
-    during [gtk.global.init_], and you should normally use
-    [gtk.widget.Widget.getDirection] or [gtk.widget.Widget.getDefaultDirection]
-    to obtain the current direction.
+    GTK sets the default text direction according to the locale during
+    `funcGtk.init`, and you should normally use [gtk.widget.Widget.getDirection]
+    or [gtk.widget.Widget.getDefaultDirection] to obtain the current direction.
     
     This function is only needed rare cases when the locale is
     changed after GTK has already been initialized. In this case,
@@ -554,19 +610,22 @@ void hsvToRgb(float h, float s, float v, out float r, out float g, out float b) 
 }
 
 /**
-    Call this function before using any other GTK functions in your GUI
-    applications. It will initialize everything needed to operate the
-    toolkit.
+    Initializes GTK.
+    
+    This function must be called before using any other GTK functions
+    in your GUI applications.
+    
+    It will initialize everything needed to operate the toolkit. In particular,
+    it will open the default display (see [gdk.display.Display.getDefault]).
     
     If you are using [gtk.application.Application], you usually don't have to call this
-    function; the `GApplication::startup` handler does it for you. Though,
-    if you are using GApplication methods that will be invoked before `startup`,
-    such as `local_command_line`, you may need to initialize stuff explicitly.
+    function; the `vfuncGio.Application.startup` handler does it for you. Though,
+    if you are using [gio.application.Application] methods that will be invoked before `startup`,
+    such as `local_command_line`, you may need to initialize GTK explicitly.
     
-    This function will terminate your program if it was unable to
-    initialize the windowing system for some reason. If you want
-    your program to fall back to a textual interface, call
-    `funcGtk.init_check` instead.
+    This function will terminate your program if it was unable to initialize
+    the windowing system for some reason. If you want your program to fall back
+    to a textual interface, call `funcGtk.init_check` instead.
     
     GTK calls `signal (SIGPIPE, SIG_IGN)` during initialization, to ignore
     SIGPIPE signals, since these are almost never wanted in graphical
@@ -580,9 +639,11 @@ void init_() nothrow
 }
 
 /**
-    This function does the same work as [gtk.global.init_] with only a single
-    change: It does not terminate the program if the windowing system
-    can’t be initialized. Instead it returns false on failure.
+    Initializes GTK.
+    
+    This function does the same work as `funcGtk.init` with only a
+    single change: It does not terminate the program if the windowing
+    system can’t be initialized. Instead it returns false on failure.
     
     This way the application can fall back to some other means of
     communication with the user - for example a curses or command line
@@ -598,7 +659,7 @@ bool initCheck() nothrow
 }
 
 /**
-    Use this function to check if GTK has been initialized.
+    Returns whether GTK has been initialized.
     
     See `funcGtk.init`.
     Returns: the initialization status
@@ -634,13 +695,14 @@ gobject.param_spec.ParamSpec paramSpecExpression(string name, string nick, strin
 }
 
 /**
-    Runs a page setup dialog, letting the user modify the values from
-    page_setup. If the user cancels the dialog, the returned [gtk.page_setup.PageSetup]
-    is identical to the passed in page_setup, otherwise it contains the
-    modifications done in the dialog.
+    Runs a page setup dialog, letting the user modify the values from page_setup.
+    
+    If the user cancels the dialog, the returned [gtk.page_setup.PageSetup] is identical
+    to the passed in page_setup, otherwise it contains the modifications
+    done in the dialog.
     
     Note that this function may use a recursive mainloop to show the page
-    setup dialog. See [gtk.global.printRunPageSetupDialogAsync] if this is
+    setup dialog. See `funcGtk.print_run_page_setup_dialog_async` if this is
     a problem.
 
     Params:
@@ -660,9 +722,9 @@ gtk.page_setup.PageSetup printRunPageSetupDialog(gtk.window.Window parent, gtk.p
 /**
     Runs a page setup dialog, letting the user modify the values from page_setup.
     
-    In contrast to [gtk.global.printRunPageSetupDialog], this function  returns after
-    showing the page setup dialog on platforms that support this, and calls done_cb
-    from a signal handler for the ::response signal of the dialog.
+    In contrast to `funcGtk.print_run_page_setup_dialog`, this function  returns
+    after showing the page setup dialog on platforms that support this, and calls
+    done_cb from a signal handler for the ::response signal of the dialog.
 
     Params:
       parent = transient parent
@@ -984,7 +1046,6 @@ void showUri(gtk.window.Window parent, string uri, uint timestamp) nothrow
     a given uri.
     
     The callback will be called when the launch is completed.
-    It should call [gtk.global.showUriFullFinish] to obtain the result.
     
     This is the recommended call to be used as it passes information
     necessary for sandbox helpers to parent their dialogs properly.
@@ -1032,8 +1093,8 @@ void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cance
         Otherwise, false is returned and error is set
     Throws: [ErrorWrap]
 
-    Deprecated: Use [gtk.file_launcher.FileLauncher.launchFinish] or
-        [gtk.uri_launcher.UriLauncher.launchFinish] instead
+    Deprecated: Use [gtk.file_launcher.FileLauncher.launch] or
+        [gtk.uri_launcher.UriLauncher.launch] instead
 */
 bool showUriFullFinish(gtk.window.Window parent, gio.async_result.AsyncResult result)
 {
@@ -1045,7 +1106,19 @@ bool showUriFullFinish(gtk.window.Window parent, gio.async_result.AsyncResult re
   return _retval;
 }
 
-/** */
+/**
+    Prints an assertion message for gtk_test_accessible_assert_role().
+
+    Params:
+      domain = a domain
+      file = a file name
+      line = the line in file
+      func = a function name in file
+      expr = the expression being tested
+      accessible = a [gtk.accessible.Accessible]
+      expectedRole = the expected [gtk.types.AccessibleRole]
+      actualRole = the actual [gtk.types.AccessibleRole]
+*/
 void testAccessibleAssertionMessageRole(string domain, string file, int line, string func, string expr, gtk.accessible.Accessible accessible, gtk.types.AccessibleRole expectedRole, gtk.types.AccessibleRole actualRole) nothrow
 {
   const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);

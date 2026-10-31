@@ -11,7 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    A [gtk.entry_buffer.EntryBuffer] hold the text displayed in a [gtk.text.Text] widget.
+    Holds the text that is displayed in a single-line text entry widget.
     
     A single [gtk.entry_buffer.EntryBuffer] object can be shared by multiple widgets
     which will then share the same text content, but not the cursor

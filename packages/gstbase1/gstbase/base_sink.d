@@ -464,7 +464,7 @@ class BaseSink : gst.element.Element
       The #GstCaps on the sample can be used to determine the type of the buffer.
       
       Free-function: gst_sample_unref
-      Returns: a #GstSample. gst_sample_unref() after
+      Returns: a #GstSample. [gst.sample.Sample.unref] after
             usage.  This function returns null when no buffer has arrived in the
             sink yet or when the sink is not in PAUSED or PLAYING.
   */

@@ -60,8 +60,6 @@ import gtk.widget;
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <property name="default-width">800</property>
       <property name="default-height">800</property>
       <child>
@@ -412,8 +410,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get `sidebarPosition` property.
       Returns: The sidebar position.
         
-        If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
-        if [gtk.types.PackType.End], it's displayed after the content.
+        If it's set to [gtk.types.PackType.Start], the sidebar is displayed before
+        the content; if [gtk.types.PackType.End], it's displayed after the content.
   */
   @property gtk.types.PackType sidebarPosition() nothrow
   {
@@ -425,8 +423,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         propval = The sidebar position.
           
-          If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
-          if [gtk.types.PackType.End], it's displayed after the content.
+          If it's set to [gtk.types.PackType.Start], the sidebar is displayed before
+          the content; if [gtk.types.PackType.End], it's displayed after the content.
   */
   @property void sidebarPosition(gtk.types.PackType propval) nothrow
   {
@@ -763,8 +761,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Sets the sidebar position for self.
       
-      If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
-      if [gtk.types.PackType.End], it's displayed after the content.
+      If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the
+      content; if [gtk.types.PackType.End], it's displayed after the content.
   
       Params:
         position = the new position
@@ -940,8 +938,8 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
       Params:
         propval = The sidebar position.
           
-          If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
-          if [gtk.types.PackType.End], it's displayed after the content.
+          If it's set to [gtk.types.PackType.Start], the sidebar is displayed before
+          the content; if [gtk.types.PackType.End], it's displayed after the content.
       Returns: Builder instance for fluent chaining
   */
   T sidebarPosition(gtk.types.PackType propval) nothrow

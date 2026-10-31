@@ -9,11 +9,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    The [gtk.scroll_info.ScrollInfo] can be used to provide more accurate data on how a scroll
-    operation should be performed.
+    Provides detailed information on how a scroll operation should be performed.
     
-    Scrolling functions usually allow passing a null scroll info which will cause
-    the default values to be used and just scroll the element into view.
+    Scrolling functions usually allow passing a `NULL` scroll info which will
+    cause the default values to be used and just scroll the element into view.
 */
 class ScrollInfo : gobject.boxed.Boxed
 {

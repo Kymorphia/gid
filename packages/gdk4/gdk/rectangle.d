@@ -8,7 +8,7 @@ import gdk.types;
 import gid.gid;
 
 /**
-    A [gtk.types.Rectangle] data type for representing rectangles.
+    Represents a rectangle.
     
     [gtk.types.Rectangle] is identical to [cairo.types.Rectangle]. Together with Cairo’s
     [cairo.region.Region] data type, these are the central types for representing

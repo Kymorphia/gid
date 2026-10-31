@@ -44,6 +44,7 @@ __gshared extern(C) nothrow
   GSequenceIter* function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_find_control_point_iter; ///
   GList* function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_all; ///
   int function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_count; ///
+  GstTimedValue* function(GstTimedValueControlSource* self, size_t* nControlPoints) c_gst_timed_value_control_source_list_control_points; ///
   gboolean function(GstTimedValueControlSource* self, GstClockTime timestamp, double value) c_gst_timed_value_control_source_set; ///
   gboolean function(GstTimedValueControlSource* self, const(GSList)* timedvalues) c_gst_timed_value_control_source_set_from_list; ///
   gboolean function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_unset; ///
@@ -126,6 +127,9 @@ alias gst_timed_value_control_source_get_all = c_gst_timed_value_control_source_
 alias gst_timed_value_control_source_get_count = c_gst_timed_value_control_source_get_count;
 
 /** */
+alias gst_timed_value_control_source_list_control_points = c_gst_timed_value_control_source_list_control_points;
+
+/** */
 alias gst_timed_value_control_source_set = c_gst_timed_value_control_source_set;
 
 /** */
@@ -185,6 +189,7 @@ shared static this()
   gidLink(cast(void**)&gst_timed_value_control_source_find_control_point_iter, "gst_timed_value_control_source_find_control_point_iter", libs);
   gidLink(cast(void**)&gst_timed_value_control_source_get_all, "gst_timed_value_control_source_get_all", libs);
   gidLink(cast(void**)&gst_timed_value_control_source_get_count, "gst_timed_value_control_source_get_count", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_list_control_points, "gst_timed_value_control_source_list_control_points", libs);
   gidLink(cast(void**)&gst_timed_value_control_source_set, "gst_timed_value_control_source_set", libs);
   gidLink(cast(void**)&gst_timed_value_control_source_set_from_list, "gst_timed_value_control_source_set_from_list", libs);
   gidLink(cast(void**)&gst_timed_value_control_source_unset, "gst_timed_value_control_source_unset", libs);

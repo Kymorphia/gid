@@ -10,8 +10,7 @@ import gsk.path;
 import gsk.types;
 
 /**
-    [gsk.path_measure.PathMeasure] is an object that allows measurements
-    on [gsk.path.Path]s such as determining the length of the path.
+    Performs measurements on paths such as determining the length of the path.
     
     Many measuring operations require sampling the path length
     at intermediate points. Therefore, a [gsk.path_measure.PathMeasure] has
@@ -90,7 +89,7 @@ class PathMeasure : gobject.boxed.Boxed
       Gets the length of the path being measured.
       
       The length is cached, so this function does not do any work.
-      Returns: The length of the path measured by self
+      Returns: the length of the path measured by self
   */
   float getLength() nothrow
   {

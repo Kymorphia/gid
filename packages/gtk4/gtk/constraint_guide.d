@@ -12,8 +12,7 @@ import gtk.constraint_target_mixin;
 import gtk.types;
 
 /**
-    A [gtk.constraint_guide.ConstraintGuide] is an invisible layout element in a
-    [gtk.constraint_layout.ConstraintLayout].
+    An invisible layout element in a [gtk.constraint_layout.ConstraintLayout].
     
     The [gtk.constraint_layout.ConstraintLayout] treats guides like widgets. They
     can be used as the source or target of a [gtk.constraint.Constraint].

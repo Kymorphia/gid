@@ -9,7 +9,11 @@ import gsk.c.types;
 import gsk.renderer;
 import gsk.types;
 
-/** */
+/**
+    A Broadway based renderer.
+    
+    See [gsk.renderer.Renderer].
+*/
 class BroadwayRenderer : gsk.renderer.Renderer
 {
 
@@ -57,6 +61,8 @@ class BroadwayRenderer : gsk.renderer.Renderer
       This function is only available when GTK was compiled with Broadway
       support.
       Returns: a new Broadway renderer.
+  
+      Deprecated: Broadway will be retired in GTK 5
   */
   this() nothrow
   {

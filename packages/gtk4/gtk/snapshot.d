@@ -19,6 +19,7 @@ import graphene.size;
 import graphene.vec3;
 import graphene.vec4;
 import gsk.color_stop;
+import gsk.component_transfer;
 import gsk.glshader;
 import gsk.path;
 import gsk.render_node;
@@ -35,7 +36,7 @@ import pango.layout;
 import pango.types;
 
 /**
-    [gtk.snapshot.Snapshot] assists in creating [gsk.render_node.RenderNode]s for widgets.
+    Assists in creating [gsk.render_node.RenderNode]s for widgets.
     
     It functions in a similar way to a cairo context, and maintains a stack
     of render nodes and their associated transformations.
@@ -47,6 +48,11 @@ import pango.types;
     The typical way to obtain a [gtk.snapshot.Snapshot] object is as an argument to
     the `vfunc@Gtk.Widget.snapshot` vfunc. If you need to create your own
     [gtk.snapshot.Snapshot], use [gtk.snapshot.Snapshot.new_].
+    
+    Note that [gtk.snapshot.Snapshot] applies some optimizations, so the node
+    it produces may not match the API calls 1:1. For example, it will
+    omit clip nodes if the child node is entirely contained within the
+    clip rectangle.
 */
 class Snapshot : gdk.snapshot.Snapshot
 {
@@ -206,7 +212,19 @@ class Snapshot : gdk.snapshot.Snapshot
     gtk_snapshot_append_inset_shadow(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, cast(const(GdkRGBA)*)&color, dx, dy, spread, blurRadius);
   }
 
-  /** */
+  /**
+      Creates render nodes for rendering layout in the given foregound color
+      and appends them to the current node of snapshot without changing the
+      current node. The current theme's foreground color for a widget can be
+      obtained with [gtk.widget.Widget.getColor].
+      
+      Note that if the layout does not produce any visible output, then nodes
+      may not be added to the snapshot.
+  
+      Params:
+        layout = the [pango.layout.Layout] to render
+        color = the foreground color to render the layout in
+  */
   void appendLayout(pango.layout.Layout layout, gdk.rgba.RGBA color) nothrow
   {
     gtk_snapshot_append_layout(cast(GtkSnapshot*)this._cPtr, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&color);
@@ -262,6 +280,20 @@ class Snapshot : gdk.snapshot.Snapshot
   void appendOutsetShadow(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius) nothrow
   {
     gtk_snapshot_append_outset_shadow(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, cast(const(GdkRGBA)*)&color, dx, dy, spread, blurRadius);
+  }
+
+  /**
+      Creates a new render node that pastes the contents
+      copied by a previous call to [gtk.snapshot.Snapshot.pushCopy]
+  
+      Params:
+        bounds = the bounds for the new node
+        nth = the index of the copy, with 0 being the latest
+           copy, 1 being the copy before that, and so on.
+  */
+  void appendPaste(graphene.rect.Rect bounds, size_t nth) nothrow
+  {
+    gtk_snapshot_append_paste(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, nth);
   }
 
   /**
@@ -394,6 +426,10 @@ class Snapshot : gdk.snapshot.Snapshot
       This must be called the same number of times as the number
       of textures is needed for the shader in
       [gtk.snapshot.Snapshot.pushGlShader].
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [gtk.glarea.GLArea] for
+          OpenGL rendering.
   */
   void glShaderPopTexture() nothrow
   {
@@ -490,6 +526,53 @@ class Snapshot : gdk.snapshot.Snapshot
   }
 
   /**
+      Modifies the colors of an image by applying a transfer
+      function for each component.
+      
+      The transfer functions operate on unpremultiplied colors.
+      
+      The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
+  
+      Params:
+        red = the transfer for the red component
+        green = the transfer for the green component
+        blue = the transfer for the blue component
+        alpha = the transfer for the alpha component
+  */
+  void pushComponentTransfer(gsk.component_transfer.ComponentTransfer red, gsk.component_transfer.ComponentTransfer green, gsk.component_transfer.ComponentTransfer blue, gsk.component_transfer.ComponentTransfer alpha) nothrow
+  {
+    gtk_snapshot_push_component_transfer(cast(GtkSnapshot*)this._cPtr, red ? cast(const(GskComponentTransfer)*)red._cPtr(No.Dup) : null, green ? cast(const(GskComponentTransfer)*)green._cPtr(No.Dup) : null, blue ? cast(const(GskComponentTransfer)*)blue._cPtr(No.Dup) : null, alpha ? cast(const(GskComponentTransfer)*)alpha._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Until the first call to [gtk.snapshot.Snapshot.pop], the
+      mask image for the mask operation will be recorded.
+      
+      After that call, the child image will be recorded until
+      the second call to [gtk.snapshot.Snapshot.pop].
+      
+      Calling this function requires 2 subsequent calls to [gtk.snapshot.Snapshot.pop].
+  
+      Params:
+        op = The Porter/Duff compositing operator to use
+  */
+  void pushComposite(gsk.types.PorterDuff op) nothrow
+  {
+    gtk_snapshot_push_composite(cast(GtkSnapshot*)this._cPtr, op);
+  }
+
+  /**
+      Stores the current rendering state for later pasting via
+      [gtk.snapshot.Snapshot.appendPaste].
+      
+      Pasting is possible until the matching call to [gtk.snapshot.Snapshot.pop].
+  */
+  void pushCopy() nothrow
+  {
+    gtk_snapshot_push_copy(cast(GtkSnapshot*)this._cPtr);
+  }
+
+  /**
       Snapshots a cross-fade operation between two images with the
       given progress.
       
@@ -515,6 +598,7 @@ class Snapshot : gdk.snapshot.Snapshot
       The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
       
       If you want to fill the path with a color, [gtk.snapshot.Snapshot.appendFill]
+      than rendering new ones, use [gtk.snapshot.Snapshot.appendFill]
       may be more convenient.
   
       Params:
@@ -566,10 +650,34 @@ class Snapshot : gdk.snapshot.Snapshot
         shader = The code to run
         bounds = the rectangle to render into
         takeArgs = Data block with arguments for the shader.
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [gtk.glarea.GLArea] for
+          OpenGL rendering.
   */
   void pushGlShader(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes takeArgs) nothrow
   {
     gtk_snapshot_push_gl_shader(cast(GtkSnapshot*)this._cPtr, shader ? cast(GskGLShader*)shader._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, takeArgs ? cast(GBytes*)takeArgs._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Isolates the following drawing operations from previous ones.
+      
+      You can express "everything but these flags" in a forward compatible
+      way by using bit math:
+      `GSK_ISOLATION_ALL & ~(GSK_ISOLATION_BACKGROUND | GSK_ISOLATION_COPY_PASTE)`
+      will isolate everything but background and copy/paste.
+      
+      For what isolation features exist, see [gsk.types.Isolation].
+      
+      Content is isolated until the next call to [gtk.snapshot.Snapshot.pop].
+  
+      Params:
+        features = features that are isolated
+  */
+  void pushIsolation(gsk.types.Isolation features) nothrow
+  {
+    gtk_snapshot_push_isolation(cast(GtkSnapshot*)this._cPtr, features);
   }
 
   /**

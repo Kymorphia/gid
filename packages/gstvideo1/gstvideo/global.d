@@ -285,7 +285,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
       data = SEI User Data Unregistered buffer
     Returns: the #GstVideoSEIUserDataUnregisteredMeta on buffer.
 */
-gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta bufferAddVideoSeiUserDataUnregisteredMeta(gst.buffer.Buffer buffer, ubyte[] uuid, ubyte[] data) nothrow
+gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta bufferAddVideoSeiUserDataUnregisteredMeta(gst.buffer.Buffer buffer, ubyte[] uuid, ubyte[] data = null) nothrow
 {
   GstVideoSEIUserDataUnregisteredMeta* _cretval;
   assert(!uuid || uuid.length == 16);
@@ -415,7 +415,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
 bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_) nothrow
 {
   bool _retval;
-  _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, cast(GstVideoAlignment*)&align_);
+  _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(config ? cast(const(GstStructure)*)config._cPtr(No.Dup) : null, cast(GstVideoAlignment*)&align_);
   return _retval;
 }
 
@@ -698,6 +698,41 @@ gobject.types.GType videoCropMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_crop_meta_api_get_type();
+  return _retval;
+}
+
+/**
+    Converting the video format into dma drm fourcc/modifier pair.
+    If no matching fourcc found, then DRM_FORMAT_INVALID is returned
+    and modifier will be set to DRM_FORMAT_MOD_INVALID.
+
+    Params:
+      format = a #GstVideoFormat
+      modifier = return location for the modifier
+    Returns: the DRM_FORMAT_* corresponding to format.
+*/
+uint videoDmaDrmFormatFromGstFormat(gstvideo.types.VideoFormat format, out ulong modifier) nothrow
+{
+  uint _retval;
+  _retval = gst_video_dma_drm_format_from_gst_format(format, cast(ulong*)&modifier);
+  return _retval;
+}
+
+/**
+    Converting a dma drm fourcc and modifier pair into a #GstVideoFormat. If
+    no matching video format is found, then GST_VIDEO_FORMAT_UNKNOWN is returned.
+
+    Params:
+      fourcc = the dma drm fourcc value.
+      modifier = the dma drm modifier.
+    Returns: the GST_VIDEO_FORMAT_* corresponding to the fourcc and modifier
+               pair.
+*/
+gstvideo.types.VideoFormat videoDmaDrmFormatToGstFormat(uint fourcc, ulong modifier) nothrow
+{
+  GstVideoFormat _cretval;
+  _cretval = gst_video_dma_drm_format_to_gst_format(fourcc, modifier);
+  gstvideo.types.VideoFormat _retval = cast(gstvideo.types.VideoFormat)_cretval;
   return _retval;
 }
 

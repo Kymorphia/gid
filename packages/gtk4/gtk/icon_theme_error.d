@@ -13,7 +13,10 @@ struct IconThemeError
 {
   alias Enum = gtk.types.IconThemeError; ///
 
-  /** */
+  /**
+      Registers an error quark for [gtk.icon_theme.IconTheme] errors.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

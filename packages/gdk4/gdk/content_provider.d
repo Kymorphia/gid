@@ -19,8 +19,8 @@ import gobject.object;
 import gobject.value;
 
 /**
-    A [gdk.content_provider.ContentProvider] is used to provide content for the clipboard or
-    for drag-and-drop operations in a number of formats.
+    Provides content for the clipboard or for drag-and-drop operations
+    in a number of formats.
     
     To create a [gdk.content_provider.ContentProvider], use [gdk.content_provider.ContentProvider.newForValue]
     or [gdk.content_provider.ContentProvider.newForBytes].
@@ -130,7 +130,7 @@ class ContentProvider : gobject.object.ObjectWrap
       ```c
       gdk_content_provider_new_union ((GdkContentProvider *[2]) {
                                         gdk_content_provider_new_typed (G_TYPE_FILE, file),
-                                        gdk_content_provider_new_typed (G_TYPE_TEXTURE, texture)
+                                        gdk_content_provider_new_typed (GDK_TYPE_TEXTURE, texture)
                                       }, 2);
       ```
   
@@ -219,10 +219,6 @@ class ContentProvider : gobject.object.ObjectWrap
   /**
       Asynchronously writes the contents of provider to stream in the given
       mime_type.
-      
-      When the operation is finished callback will be called. You must then call
-      [gdk.content_provider.ContentProvider.writeMimeTypeFinish] to get the result
-      of the operation.
       
       The given mime type does not need to be listed in the formats returned by
       [gdk.content_provider.ContentProvider.refFormats]. However, if the given `GType` is

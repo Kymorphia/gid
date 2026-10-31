@@ -20,10 +20,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.notebook.Notebook] is a container whose children are pages switched
-    between using tabs.
+    Switches between children using tabs.
     
-    ![An example GtkNotebook](notebook.png)
+    <picture>
+      <source srcset="notebook-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkNotebook" src="notebook.png">
+    </picture>
     
     There are many configuration options for [gtk.notebook.Notebook]. Among
     other things, you can choose on which edge the tabs appear
@@ -62,6 +64,31 @@ import gtk.widget;
       </child>
     </object>
     ```
+    
+    # Shortcuts and Gestures
+    
+    [gtk.notebook.Notebook] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    - <kbd>Home</kbd> moves the focus to the first tab.
+    - <kbd>End</kbd> moves the focus to the last tab.
+    
+    Additionally, the following signals have default keybindings:
+    
+    - [gtk.notebook.Notebook.changeCurrentPage]
+    - [gtk.notebook.Notebook.focusTab]
+    - [gtk.notebook.Notebook.moveFocusOut]
+    - [gtk.notebook.Notebook.reorderTab]
+    - [gtk.notebook.Notebook.selectPage]
+    
+    Tabs support drag-and-drop between notebooks sharing the same `group-name`,
+    or to new windows by handling the `::create-window` signal.
+    
+    # Actions
+    
+    [gtk.notebook.Notebook] defines a set of built-in actions:
+    
+    - `menu.popup` opens the tabs context menu.
     
     # CSS nodes
     
@@ -1006,18 +1033,23 @@ class Notebook : gtk.widget.Widget
   /**
       Connect to `ChangeCurrentPage` signal.
   
-      
+      Emitted when the current page should be changed.
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>PgUp</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>PgDn</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>PgUp</kbd> and <kbd>Ctrl</kbd>+<kbd>PgDn</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          `bool callback(int object, gtk.notebook.Notebook notebook)`
+          `bool callback(int page, gtk.notebook.Notebook notebook)`
   
-          `object`  (optional)
+          `page` the page index (optional)
   
           `notebook` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the page was changed
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1122,18 +1154,18 @@ class Notebook : gtk.widget.Widget
   /**
       Connect to `FocusTab` signal.
   
-      
+      Emitted when a tab should be focused.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          `bool callback(gtk.types.NotebookTab object, gtk.notebook.Notebook notebook)`
+          `bool callback(gtk.types.NotebookTab tab, gtk.notebook.Notebook notebook)`
   
-          `object`  (optional)
+          `tab` the notebook tab (optional)
   
           `notebook` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the tab has been focused
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1176,14 +1208,20 @@ class Notebook : gtk.widget.Widget
   /**
       Connect to `MoveFocusOut` signal.
   
-      
+      Emitted when focus was moved out.
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>Tab</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>←</kbd>, <kbd>Ctrl</kbd>+<kbd>→</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>↑</kbd> and <kbd>Ctrl</kbd>+<kbd>↓</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          `void callback(gtk.types.DirectionType object, gtk.notebook.Notebook notebook)`
+          `void callback(gtk.types.DirectionType direction, gtk.notebook.Notebook notebook)`
   
-          `object`  (optional)
+          `direction` the direction to move the focus (optional)
   
           `notebook` the instance the signal is connected to (optional)
   
@@ -1397,20 +1435,26 @@ class Notebook : gtk.widget.Widget
   /**
       Connect to `ReorderTab` signal.
   
-      
+      Emitted when the tab should be reordered.
+        
+        The default bindings for this signal are
+        <kbd>Alt</kbd>+<kbd>Home</kbd>, <kbd>Alt</kbd>+<kbd>End</kbd>,
+        <kbd>Alt</kbd>+<kbd>PgUp</kbd>, <kbd>Alt</kbd>+<kbd>PgDn</kbd>,
+        <kbd>Alt</kbd>+<kbd>←</kbd>, <kbd>Alt</kbd>+<kbd>→</kbd>,
+        <kbd>Alt</kbd>+<kbd>↑</kbd> and <kbd>Alt</kbd>+<kbd>↓</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          `bool callback(gtk.types.DirectionType object, bool p0, gtk.notebook.Notebook notebook)`
+          `bool callback(gtk.types.DirectionType direction, bool moveToLast, gtk.notebook.Notebook notebook)`
   
-          `object`  (optional)
+          `direction` the direction to move the tab (optional)
   
-          `p0`  (optional)
+          `moveToLast` whether to move to the last position (optional)
   
           `notebook` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the tab was moved.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1457,18 +1501,20 @@ class Notebook : gtk.widget.Widget
   /**
       Connect to `SelectPage` signal.
   
-      
+      Emitted when a page should be selected.
+        
+        The default binding for this signal is <kbd>␣</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          `bool callback(bool object, gtk.notebook.Notebook notebook)`
+          `bool callback(bool moveFocus, gtk.notebook.Notebook notebook)`
   
-          `object`  (optional)
+          `moveFocus` whether to move focus (optional)
   
           `notebook` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the page was selected
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

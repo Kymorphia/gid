@@ -104,7 +104,7 @@ interface Initable
       If the object is not initialized, or initialization returns with an
       error, then all operations on the object except [gobject.object.ObjectWrap.ref_] and
       [gobject.object.ObjectWrap.unref] are considered to be invalid, and have undefined
-      behaviour. See the [introduction][ginitable] for more details.
+      behaviour. See the [description][gio.initable.Initable] for more details.
       
       Callers should not assume that a class which implements #GInitable can be
       initialized multiple times, unless the class explicitly documents itself as

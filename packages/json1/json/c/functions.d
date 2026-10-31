@@ -72,6 +72,7 @@ __gshared extern(C) nothrow
   void function(JsonGenerator* generator, dchar indentChar) c_json_generator_set_indent_char; ///
   void function(JsonGenerator* generator, gboolean isPretty) c_json_generator_set_pretty; ///
   void function(JsonGenerator* generator, JsonNode* node) c_json_generator_set_root; ///
+  void function(JsonGenerator* generator, JsonNode* node) c_json_generator_take_root; ///
   char* function(JsonGenerator* generator, size_t* length) c_json_generator_to_data; ///
   gboolean function(JsonGenerator* generator, const(char)* filename, GError** _err) c_json_generator_to_file; ///
   GString* function(JsonGenerator* generator, GString* string_) c_json_generator_to_gstring; ///
@@ -174,6 +175,7 @@ __gshared extern(C) nothrow
   uint function(JsonParser* parser) c_json_parser_get_current_line; ///
   uint function(JsonParser* parser) c_json_parser_get_current_pos; ///
   JsonNode* function(JsonParser* parser) c_json_parser_get_root; ///
+  gboolean function(JsonParser* parser) c_json_parser_get_strict; ///
   gboolean function(JsonParser* parser, char** variableName) c_json_parser_has_assignment; ///
   gboolean function(JsonParser* parser, const(char)* data, ptrdiff_t length, GError** _err) c_json_parser_load_from_data; ///
   gboolean function(JsonParser* parser, const(char)* filename, GError** _err) c_json_parser_load_from_file; ///
@@ -181,6 +183,7 @@ __gshared extern(C) nothrow
   gboolean function(JsonParser* parser, GInputStream* stream, GCancellable* cancellable, GError** _err) c_json_parser_load_from_stream; ///
   void function(JsonParser* parser, GInputStream* stream, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_json_parser_load_from_stream_async; ///
   gboolean function(JsonParser* parser, GAsyncResult* result, GError** _err) c_json_parser_load_from_stream_finish; ///
+  void function(JsonParser* parser, gboolean strict) c_json_parser_set_strict; ///
   JsonNode* function(JsonParser* parser) c_json_parser_steal_root; ///
 
   // Path
@@ -431,6 +434,9 @@ alias json_generator_set_pretty = c_json_generator_set_pretty;
 
 /** */
 alias json_generator_set_root = c_json_generator_set_root;
+
+/** */
+alias json_generator_take_root = c_json_generator_take_root;
 
 /** */
 alias json_generator_to_data = c_json_generator_to_data;
@@ -723,6 +729,9 @@ alias json_parser_get_current_pos = c_json_parser_get_current_pos;
 alias json_parser_get_root = c_json_parser_get_root;
 
 /** */
+alias json_parser_get_strict = c_json_parser_get_strict;
+
+/** */
 alias json_parser_has_assignment = c_json_parser_has_assignment;
 
 /** */
@@ -742,6 +751,9 @@ alias json_parser_load_from_stream_async = c_json_parser_load_from_stream_async;
 
 /** */
 alias json_parser_load_from_stream_finish = c_json_parser_load_from_stream_finish;
+
+/** */
+alias json_parser_set_strict = c_json_parser_set_strict;
 
 /** */
 alias json_parser_steal_root = c_json_parser_steal_root;
@@ -1005,6 +1017,7 @@ shared static this()
   gidLink(cast(void**)&json_generator_set_indent_char, "json_generator_set_indent_char", libs);
   gidLink(cast(void**)&json_generator_set_pretty, "json_generator_set_pretty", libs);
   gidLink(cast(void**)&json_generator_set_root, "json_generator_set_root", libs);
+  gidLink(cast(void**)&json_generator_take_root, "json_generator_take_root", libs);
   gidLink(cast(void**)&json_generator_to_data, "json_generator_to_data", libs);
   gidLink(cast(void**)&json_generator_to_file, "json_generator_to_file", libs);
   gidLink(cast(void**)&json_generator_to_gstring, "json_generator_to_gstring", libs);
@@ -1107,6 +1120,7 @@ shared static this()
   gidLink(cast(void**)&json_parser_get_current_line, "json_parser_get_current_line", libs);
   gidLink(cast(void**)&json_parser_get_current_pos, "json_parser_get_current_pos", libs);
   gidLink(cast(void**)&json_parser_get_root, "json_parser_get_root", libs);
+  gidLink(cast(void**)&json_parser_get_strict, "json_parser_get_strict", libs);
   gidLink(cast(void**)&json_parser_has_assignment, "json_parser_has_assignment", libs);
   gidLink(cast(void**)&json_parser_load_from_data, "json_parser_load_from_data", libs);
   gidLink(cast(void**)&json_parser_load_from_file, "json_parser_load_from_file", libs);
@@ -1114,6 +1128,7 @@ shared static this()
   gidLink(cast(void**)&json_parser_load_from_stream, "json_parser_load_from_stream", libs);
   gidLink(cast(void**)&json_parser_load_from_stream_async, "json_parser_load_from_stream_async", libs);
   gidLink(cast(void**)&json_parser_load_from_stream_finish, "json_parser_load_from_stream_finish", libs);
+  gidLink(cast(void**)&json_parser_set_strict, "json_parser_set_strict", libs);
   gidLink(cast(void**)&json_parser_steal_root, "json_parser_steal_root", libs);
 
   // Path

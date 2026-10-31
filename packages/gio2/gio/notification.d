@@ -57,6 +57,9 @@ import gobject.object;
     clicked.
     
     A notification can be sent with [gio.application.Application.sendNotification].
+    
+    In Windows, notification actions are unsupported, when sending the notification
+    a warning will be printed if a default action or action buttons were added.
 */
 class Notification : gobject.object.ObjectWrap
 {

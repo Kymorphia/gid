@@ -62,7 +62,7 @@ import gst.types;
     Each element has a state (see #GstState).  You can get and set the state
     of an element with [gst.element.Element.getState] and [gst.element.Element.setState].
     Setting a state triggers a #GstStateChange. To get a string representation
-    of a #GstState, use [gst.element.Element.stateGetName].
+    of a #GstState, use [gst.global.stateGetName].
     
     You can get and set a #GstClock on an element using [gst.element.Element.getClock]
     and [gst.element.Element.setClock].
@@ -166,6 +166,8 @@ class Element : gst.object.ObjectWrap
         stateRet = a #GstStateChangeReturn to get the name of.
       Returns: a string with the name of the state
            result.
+  
+      Deprecated: Use [gst.global.stateChangeReturnGetName] instead.
   */
   static string stateChangeReturnGetName(gst.types.StateChangeReturn stateRet) nothrow
   {
@@ -181,6 +183,8 @@ class Element : gst.object.ObjectWrap
       Params:
         state = a #GstState to get the name of.
       Returns: a string with the name of the state.
+  
+      Deprecated: Use [gst.global.stateGetName] instead.
   */
   static string stateGetName(gst.types.State state) nothrow
   {
@@ -275,6 +279,8 @@ class Element : gst.object.ObjectWrap
     return _retval;
   }
 
+  alias callAsync = gst.object.ObjectWrap.callAsync;
+
   /**
       Calls func from another thread and passes user_data to it. This is to be
       used for cases when a state change has to be performed from a streaming
@@ -289,6 +295,8 @@ class Element : gst.object.ObjectWrap
   
       Params:
         func = Function to call asynchronously from another thread
+  
+      Deprecated: Use [gst.object.ObjectWrap.callAsync] or [gst.global.callAsync] instead.
   */
   void callAsync(gst.types.ElementCallAsyncFunc func) nothrow
   {
@@ -1431,7 +1439,7 @@ class Element : gst.object.ObjectWrap
       downstream events or a random linked source pad for upstream events.
       
       This function takes ownership of the provided event so you should
-      gst_event_ref() it if you want to reuse the event after this call.
+      [gst.event.Event.ref_] it if you want to reuse the event after this call.
       
       MT safe.
   

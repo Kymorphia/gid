@@ -241,6 +241,37 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
+      Get `hhomogeneous` property.
+      Returns: Whether the view is horizontally homogeneous.
+        
+        If the view is horizontally homogeneous, it allocates the same width for
+        all pages.
+        
+        If it's not, the page may change width when a different page becomes
+        visible.
+  */
+  @property bool hhomogeneous() nothrow
+  {
+    return getHhomogeneous();
+  }
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = Whether the view is horizontally homogeneous.
+          
+          If the view is horizontally homogeneous, it allocates the same width for
+          all pages.
+          
+          If it's not, the page may change width when a different page becomes
+          visible.
+  */
+  @property void hhomogeneous(bool propval) nothrow
+  {
+    setHhomogeneous(propval);
+  }
+
+  /**
       Get `navigationStack` property.
       Returns: A list model that contains the pages in navigation stack.
         
@@ -279,12 +310,52 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
+      Get `vhomogeneous` property.
+      Returns: Whether the view is vertically homogeneous.
+        
+        If the view is vertically homogeneous, it allocates the same height for
+        all pages.
+        
+        If it's not, the view may change height when a different page becomes
+        visible.
+  */
+  @property bool vhomogeneous() nothrow
+  {
+    return getVhomogeneous();
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = Whether the view is vertically homogeneous.
+          
+          If the view is vertically homogeneous, it allocates the same height for
+          all pages.
+          
+          If it's not, the view may change height when a different page becomes
+          visible.
+  */
+  @property void vhomogeneous(bool propval) nothrow
+  {
+    setVhomogeneous(propval);
+  }
+
+  /**
       Get `visiblePage` property.
       Returns: The currently visible page.
   */
   @property adw.navigation_page.NavigationPage visiblePage() nothrow
   {
     return getVisiblePage();
+  }
+
+  /**
+      Get `visiblePageTag` property.
+      Returns: The tag of the currently visible page.
+  */
+  @property string visiblePageTag() nothrow
+  {
+    return getVisiblePageTag();
   }
 
   mixin SwipeableT!();
@@ -349,6 +420,17 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
+      Gets whether self is horizontally homogeneous.
+      Returns: whether self is horizontally homogeneous
+  */
+  bool getHhomogeneous() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_navigation_view_get_hhomogeneous(cast(AdwNavigationView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Returns a [gio.list_model.ListModel] that contains the pages in navigation stack.
       
       The pages are sorted from root page to visible page.
@@ -396,6 +478,17 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
+      Gets whether self is vertically homogeneous.
+      Returns: whether self is vertically homogeneous
+  */
+  bool getVhomogeneous() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_navigation_view_get_vhomogeneous(cast(AdwNavigationView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Gets the currently visible page in self.
       Returns: the currently visible page
   */
@@ -404,6 +497,18 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_view_get_visible_page(cast(AdwNavigationView*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the tag of the currently visible page in self.
+      Returns: the tag of the currently visible page
+  */
+  string getVisiblePageTag() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_navigation_view_get_visible_page_tag(cast(AdwNavigationView*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -608,6 +713,22 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
+      Sets self to be horizontally homogeneous or not.
+      
+      If the view is horizontally homogeneous, it allocates the same width for
+      all pages.
+      
+      If it's not, the view may change width when a different page becomes visible.
+  
+      Params:
+        hhomogeneous = whether to make self horizontally homogeneous
+  */
+  void setHhomogeneous(bool hhomogeneous) nothrow
+  {
+    adw_navigation_view_set_hhomogeneous(cast(AdwNavigationView*)this._cPtr, hhomogeneous);
+  }
+
+  /**
       Sets whether pressing Escape pops the current page on self.
       
       Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
@@ -619,6 +740,23 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   void setPopOnEscape(bool popOnEscape) nothrow
   {
     adw_navigation_view_set_pop_on_escape(cast(AdwNavigationView*)this._cPtr, popOnEscape);
+  }
+
+  /**
+      Sets self to be vertically homogeneous or not.
+      
+      If the view is vertically homogeneous, it allocates the same height for
+      all pages.
+      
+      If it's not, the view may change height when a different page becomes
+      visible.
+  
+      Params:
+        vhomogeneous = whether to make self vertically homogeneous
+  */
+  void setVhomogeneous(bool vhomogeneous) nothrow
+  {
+    adw_navigation_view_set_vhomogeneous(cast(AdwNavigationView*)this._cPtr, vhomogeneous);
   }
 
   /**
@@ -848,6 +986,23 @@ class NavigationViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.s
   }
 
   /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = Whether the view is horizontally homogeneous.
+          
+          If the view is horizontally homogeneous, it allocates the same width for
+          all pages.
+          
+          If it's not, the page may change width when a different page becomes
+          visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T hhomogeneous(bool propval) nothrow
+  {
+    return setProperty("hhomogeneous", propval);
+  }
+
+  /**
       Set `popOnEscape` property.
       Params:
         propval = Whether pressing Escape pops the current page.
@@ -859,6 +1014,23 @@ class NavigationViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.s
   T popOnEscape(bool propval) nothrow
   {
     return setProperty("pop-on-escape", propval);
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = Whether the view is vertically homogeneous.
+          
+          If the view is vertically homogeneous, it allocates the same height for
+          all pages.
+          
+          If it's not, the view may change height when a different page becomes
+          visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T vhomogeneous(bool propval) nothrow
+  {
+    return setProperty("vhomogeneous", propval);
   }
 }
 

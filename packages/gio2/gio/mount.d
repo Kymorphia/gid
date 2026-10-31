@@ -20,14 +20,15 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    The [gio.mount.Mount] interface represents user-visible mounts. Note, when
-    [porting from GnomeVFS](migrating-gnome-vfs.html), [gio.mount.Mount] is the moral
-    equivalent of `GnomeVFSVolume`.
+    The [gio.mount.Mount] interface represents a user-visible mount, such as a mounted
+    file system.
     
     [gio.mount.Mount] is a ‘mounted’ filesystem that you can access. Mounted is in
     quotes because it’s not the same as a UNIX mount, it might be a GVFS
-    mount, but you can still access the files on it if you use GIO. Might or
-    might not be related to a volume object.
+    mount, but you can still access the files on it if you use GIO.
+    
+    A [gio.mount.Mount] might be associated with a [gio.volume.Volume] (such as a USB flash
+    drive) which hosts it.
     
     Unmounting a [gio.mount.Mount] instance is an asynchronous operation. For
     more information about asynchronous operations, see [gio.async_result.AsyncResult]
@@ -41,6 +42,9 @@ import gobject.object;
     operation was completed successfully.  If an `error` is present when
     [gio.mount.Mount.unmountWithOperationFinish] is called, then it will be
     filled with any error information.
+    
+    Note, when [porting from GnomeVFS](migrating-gnome-vfs.html), [gio.mount.Mount] is the
+    moral equivalent of `GnomeVFSVolume`.
 */
 interface Mount
 {

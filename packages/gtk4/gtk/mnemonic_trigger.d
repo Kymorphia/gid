@@ -10,7 +10,7 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
-    A [gtk.shortcut_trigger.ShortcutTrigger] that triggers when a specific mnemonic is pressed.
+    Triggers when a specific mnemonic is pressed.
     
     Mnemonics require a *mnemonic modifier* (typically <kbd>Alt</kbd>) to be
     pressed together with the mnemonic key.

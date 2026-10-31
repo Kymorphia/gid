@@ -13,7 +13,11 @@ struct DialogError
 {
   alias Enum = gtk.types.DialogError; ///
 
-  /** */
+  /**
+      Registers an error quark for an operation that requires a dialog if
+      necessary.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

@@ -13,6 +13,7 @@ import gst.sample;
 import gst.types;
 import gst.urihandler;
 import gst.urihandler_mixin;
+import gstapp.app_src_simple_callbacks;
 import gstapp.c.functions;
 import gstapp.c.types;
 import gstapp.types;
@@ -194,6 +195,15 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   }
 
   /**
+      Get `dropped` property.
+      Returns: Number of buffers that were dropped.
+  */
+  @property ulong dropped() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("dropped");
+  }
+
+  /**
       Get `duration` property.
       Returns: The total duration in nanoseconds of the data stream. If the total duration is known, it
         is recommended to configure it with this property.
@@ -289,6 +299,15 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   @property void handleSegmentChange(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("handle-segment-change", propval);
+  }
+
+  /**
+      Get `in_` property.
+      Returns: Number of input buffers that were queued.
+  */
+  @property ulong in_() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("in");
   }
 
   /**
@@ -463,6 +482,34 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   }
 
   /**
+      Get `out_` property.
+      Returns: Number of output buffers that were dequeued.
+  */
+  @property ulong out_() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("out");
+  }
+
+  /**
+      Get `silent` property.
+      Returns: Don't emit notify for input, output and dropped buffers.
+  */
+  @property bool silent() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("silent");
+  }
+
+  /**
+      Set `silent` property.
+      Params:
+        propval = Don't emit notify for input, output and dropped buffers.
+  */
+  @property void silent(bool propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("silent", propval);
+  }
+
+  /**
       Get `size` property.
       Returns: The total size in bytes of the data stream. If the total size is known, it
         is recommended to configure it with this property.
@@ -522,7 +569,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
 
   /**
       Get the configured caps on appsrc.
-      Returns: the #GstCaps produced by the source. gst_caps_unref() after usage.
+      Returns: the #GstCaps produced by the source. [gst.caps.Caps.unref] after usage.
   */
   gst.caps.Caps getCaps() nothrow
   {
@@ -847,6 +894,30 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   void setMaxTime(gst.types.ClockTime max) nothrow
   {
     gst_app_src_set_max_time(cast(GstAppSrc*)this._cPtr, max);
+  }
+
+  /**
+      Set callbacks which will be executed when data is needed, enough data has
+      been collected or when a seek should be performed.
+      This is an alternative to using the signals, it has lower overhead and is thus
+      less expensive, but also less flexible.
+      
+      If callbacks are installed, no signals will be emitted for performance
+      reasons.
+      
+      Once cb is set on an #GstAppSrc it is not possible anymore to change any of
+      the callbacks inside it.
+      
+      Note that [gstapp.app_src.AppSrc.setCallbacks] and
+      [gstapp.app_src.AppSrc.setSimpleCallbacks] are mutually exclusive and setting one
+      will unset the other.
+  
+      Params:
+        cb = the callbacks
+  */
+  void setSimpleCallbacks(gstapp.app_src_simple_callbacks.AppSrcSimpleCallbacks cb = null) nothrow
+  {
+    gst_app_src_set_simple_callbacks(cast(GstAppSrc*)this._cPtr, cb ? cast(GstAppSrcSimpleCallbacks*)cb._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -1452,6 +1523,17 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
   T minPercent(uint propval) nothrow
   {
     return setProperty("min-percent", propval);
+  }
+
+  /**
+      Set `silent` property.
+      Params:
+        propval = Don't emit notify for input, output and dropped buffers.
+      Returns: Builder instance for fluent chaining
+  */
+  T silent(bool propval) nothrow
+  {
+    return setProperty("silent", propval);
   }
 
   /**

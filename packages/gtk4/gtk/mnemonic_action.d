@@ -11,7 +11,9 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that calls [gtk.widget.Widget.mnemonicActivate].
+    Activates a widget with a mnemonic.
+    
+    This means that [gtk.widget.Widget.mnemonicActivate] is called.
 */
 class MnemonicAction : gtk.shortcut_action.ShortcutAction
 {

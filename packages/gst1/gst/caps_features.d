@@ -7,6 +7,7 @@ import glib.types;
 import gobject.boxed;
 import gst.c.functions;
 import gst.c.types;
+import gst.id_str;
 import gst.types;
 
 /**
@@ -106,6 +107,25 @@ class CapsFeatures : gobject.boxed.Boxed
   }
 
   /**
+      Creates a new #GstCapsFeatures with a single feature.
+      
+      feature needs to be valid for the remaining lifetime of the process, e.g. has
+      to be a static string.
+  
+      Params:
+        feature = The feature
+      Returns: a new #GstCapsFeatures
+  */
+  static gst.caps_features.CapsFeatures newSingleStaticStr(string feature) nothrow
+  {
+    GstCapsFeatures* _cretval;
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_caps_features_new_single_static_str(_feature);
+    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Adds feature to features.
   
       Params:
@@ -122,10 +142,38 @@ class CapsFeatures : gobject.boxed.Boxed
   
       Params:
         feature = a feature.
+  
+      Deprecated: Use [gst.caps_features.CapsFeatures.addIdStr].
   */
   void addId(glib.types.Quark feature) nothrow
   {
     gst_caps_features_add_id(cast(GstCapsFeatures*)this._cPtr, feature);
+  }
+
+  /**
+      Adds feature to features.
+  
+      Params:
+        feature = a feature.
+  */
+  void addIdStr(gst.id_str.IdStr feature) nothrow
+  {
+    gst_caps_features_add_id_str(cast(GstCapsFeatures*)this._cPtr, feature ? cast(const(GstIdStr)*)feature._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Adds feature to features.
+      
+      feature needs to be valid for the remaining lifetime of the process, e.g. has
+      to be a static string.
+  
+      Params:
+        feature = a feature.
+  */
+  void addStaticStr(string feature) nothrow
+  {
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
+    gst_caps_features_add_static_str(cast(GstCapsFeatures*)this._cPtr, _feature);
   }
 
   /**
@@ -149,11 +197,27 @@ class CapsFeatures : gobject.boxed.Boxed
       Params:
         feature = a feature
       Returns: true if features contains feature.
+  
+      Deprecated: Use [gst.caps_features.CapsFeatures.containsIdStr].
   */
   bool containsId(glib.types.Quark feature) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_features_contains_id(cast(const(GstCapsFeatures)*)this._cPtr, feature);
+    return _retval;
+  }
+
+  /**
+      Checks if features contains feature.
+  
+      Params:
+        feature = a feature
+      Returns: true if features contains feature.
+  */
+  bool containsIdStr(gst.id_str.IdStr feature) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_caps_features_contains_id_str(cast(const(GstCapsFeatures)*)this._cPtr, feature ? cast(const(GstIdStr)*)feature._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -190,11 +254,28 @@ class CapsFeatures : gobject.boxed.Boxed
       Params:
         i = index of the feature
       Returns: The `i`-th feature of features.
+  
+      Deprecated: Use [gst.caps_features.CapsFeatures.getNthIdStr].
   */
   glib.types.Quark getNthId(uint i) nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_caps_features_get_nth_id(cast(const(GstCapsFeatures)*)this._cPtr, i);
+    return _retval;
+  }
+
+  /**
+      Returns the `i`-th feature of features.
+  
+      Params:
+        i = index of the feature
+      Returns: The `i`-th feature of features.
+  */
+  gst.id_str.IdStr getNthIdStr(uint i) nothrow
+  {
+    const(GstIdStr)* _cretval;
+    _cretval = gst_caps_features_get_nth_id_str(cast(const(GstCapsFeatures)*)this._cPtr, i);
+    auto _retval = _cretval ? new gst.id_str.IdStr(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -251,10 +332,23 @@ class CapsFeatures : gobject.boxed.Boxed
   
       Params:
         feature = a feature.
+  
+      Deprecated: Use [gst.caps_features.CapsFeatures.removeIdStr].
   */
   void removeId(glib.types.Quark feature) nothrow
   {
     gst_caps_features_remove_id(cast(GstCapsFeatures*)this._cPtr, feature);
+  }
+
+  /**
+      Removes feature from features.
+  
+      Params:
+        feature = a feature.
+  */
+  void removeIdStr(gst.id_str.IdStr feature) nothrow
+  {
+    gst_caps_features_remove_id_str(cast(GstCapsFeatures*)this._cPtr, feature ? cast(const(GstIdStr)*)feature._cPtr(No.Dup) : null);
   }
 
   /**

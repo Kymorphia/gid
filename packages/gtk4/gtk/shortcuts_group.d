@@ -37,6 +37,8 @@ import gtk.types;
     
     If you need to add a shortcut programmatically, use
     [gtk.shortcuts_group.ShortcutsGroup.addShortcut].
+
+    Deprecated: This widget will be removed in GTK 5
 */
 class ShortcutsGroup : gtk.box.Box
 {
@@ -81,6 +83,8 @@ class ShortcutsGroup : gtk.box.Box
         propval = The size group for the accelerator portion of shortcuts in this group.
           
           This is used internally by GTK, and must not be modified by applications.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
@@ -92,6 +96,8 @@ class ShortcutsGroup : gtk.box.Box
       Returns: A rough measure for the number of lines in this group.
         
         This is used internally by GTK, and is not useful for applications.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property uint height() nothrow
   {
@@ -101,6 +107,8 @@ class ShortcutsGroup : gtk.box.Box
   /**
       Get `title` property.
       Returns: The title for this group of shortcuts.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string title() nothrow
   {
@@ -111,6 +119,8 @@ class ShortcutsGroup : gtk.box.Box
       Set `title` property.
       Params:
         propval = The title for this group of shortcuts.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void title(string propval) nothrow
   {
@@ -123,6 +133,8 @@ class ShortcutsGroup : gtk.box.Box
         propval = The size group for the textual portion of shortcuts in this group.
           
           This is used internally by GTK, and must not be modified by applications.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
@@ -137,6 +149,8 @@ class ShortcutsGroup : gtk.box.Box
         property does not match the view of this group.
         
         Set this to null to make the group always visible.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string view() nothrow
   {
@@ -152,6 +166,8 @@ class ShortcutsGroup : gtk.box.Box
           property does not match the view of this group.
           
           Set this to null to make the group always visible.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void view(string propval) nothrow
   {
@@ -167,6 +183,8 @@ class ShortcutsGroup : gtk.box.Box
   
       Params:
         shortcut = the [gtk.shortcuts_shortcut.ShortcutsShortcut] to add
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   void addShortcut(gtk.shortcuts_shortcut.ShortcutsShortcut shortcut) nothrow
   {
@@ -186,6 +204,8 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           
           This is used internally by GTK, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
@@ -197,6 +217,8 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
       Params:
         propval = The title for this group of shortcuts.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T title(string propval) nothrow
   {
@@ -210,6 +232,8 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           
           This is used internally by GTK, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
@@ -226,6 +250,8 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           
           Set this to null to make the group always visible.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T view(string propval) nothrow
   {

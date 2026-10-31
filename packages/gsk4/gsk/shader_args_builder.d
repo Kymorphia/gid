@@ -14,7 +14,7 @@ import gsk.glshader;
 import gsk.types;
 
 /**
-    An object to build the uniforms data for a [gsk.glshader.GLShader].
+    Builds the uniforms data for a [gsk.glshader.GLShader].
 */
 class ShaderArgsBuilder : gobject.boxed.Boxed
 {
@@ -59,6 +59,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         initialValues = optional [glib.bytes.Bytes] with initial values
       Returns: The newly allocated builder, free with
             [gsk.shader_args_builder.ShaderArgsBuilder.unref]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null) nothrow
   {
@@ -75,6 +79,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Params:
         idx = index of the uniform
         value = value to set the uniform to
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void setBool(int idx, bool value) nothrow
   {
@@ -103,6 +111,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Params:
         idx = index of the uniform
         value = value to set the uniform to
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void setInt(int idx, int value) nothrow
   {
@@ -117,6 +129,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Params:
         idx = index of the uniform
         value = value to set the uniform to
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void setUint(int idx, uint value) nothrow
   {
@@ -131,6 +147,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Params:
         idx = index of the uniform
         value = value to set the uniform too
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void setVec2(int idx, graphene.vec2.Vec2 value) nothrow
   {
@@ -145,6 +165,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Params:
         idx = index of the uniform
         value = value to set the uniform too
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void setVec3(int idx, graphene.vec3.Vec3 value) nothrow
   {
@@ -159,6 +183,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Params:
         idx = index of the uniform
         value = value to set the uniform too
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   void setVec4(int idx, graphene.vec4.Vec4 value) nothrow
   {
@@ -179,6 +207,10 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       [gsk.shader_args_builder.ShaderArgsBuilder.freeToArgs].
       Returns: the newly allocated buffer with
           all the args added to builder
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
   */
   glib.bytes.Bytes toArgs() nothrow
   {

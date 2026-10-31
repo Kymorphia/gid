@@ -10,8 +10,7 @@ import gtk.layout_manager;
 import gtk.types;
 
 /**
-    [gtk.bin_layout.BinLayout] is a [gtk.layout_manager.LayoutManager] subclass useful for create "bins" of
-    widgets.
+    A layout manager for widgets with a single child.
     
     [gtk.bin_layout.BinLayout] will stack each child of a widget on top of each other,
     using the [gtk.widget.Widget.hexpand], [gtk.widget.Widget.vexpand],

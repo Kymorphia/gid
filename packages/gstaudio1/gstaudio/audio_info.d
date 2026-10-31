@@ -57,7 +57,7 @@ class AudioInfo : gobject.boxed.Boxed
   */
   @property gstaudio.audio_format_info.AudioFormatInfo finfo() nothrow
   {
-    return new gstaudio.audio_format_info.AudioFormatInfo(cast(GstAudioFormatInfo*)(cast(GstAudioInfo*)this._cPtr).finfo, No.Take);
+    return cToD!(gstaudio.audio_format_info.AudioFormatInfo)(cast(void*)(cast(GstAudioInfo*)this._cPtr).finfo);
   }
 
   /**

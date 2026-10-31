@@ -11,10 +11,9 @@ import gtk.filter;
 import gtk.types;
 
 /**
-    [gtk.string_filter.StringFilter] determines whether to include items by comparing
-    strings to a fixed search term.
+    Determines whether to include items by comparing strings to a fixed search term.
     
-    The strings are obtained from the items by evaluating a [gtk.expression.Expression]
+    The strings are obtained from the items by evaluating an expression
     set with [gtk.string_filter.StringFilter.setExpression], and they are
     compared against a search term set with [gtk.string_filter.StringFilter.setSearch].
     
@@ -64,7 +63,8 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Get `expression` property.
-      Returns: The expression to evaluate on item to get a string to compare with.
+      Returns: The expression to evaluate on each item to get a
+        string to compare with.
   */
   @property gtk.expression.Expression expression() nothrow
   {
@@ -74,7 +74,8 @@ class StringFilter : gtk.filter.Filter
   /**
       Set `expression` property.
       Params:
-        propval = The expression to evaluate on item to get a string to compare with.
+        propval = The expression to evaluate on each item to get a
+          string to compare with.
   */
   @property void expression(gtk.expression.Expression propval) nothrow
   {
@@ -145,7 +146,7 @@ class StringFilter : gtk.filter.Filter
       and by providing a property to look up on the item.
   
       Params:
-        expression = The expression to evaluate
+        expression = the expression to evaluate
       Returns: a new [gtk.string_filter.StringFilter]
   */
   this(gtk.expression.Expression expression = null) nothrow
@@ -158,7 +159,7 @@ class StringFilter : gtk.filter.Filter
   /**
       Gets the expression that the string filter uses to
       obtain strings from items.
-      Returns: a [gtk.expression.Expression]
+      Returns: the expression
   */
   gtk.expression.Expression getExpression() nothrow
   {
@@ -193,7 +194,7 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Gets the search term.
-      Returns: The search term
+      Returns: the search term
   */
   string getSearch() nothrow
   {
@@ -210,7 +211,7 @@ class StringFilter : gtk.filter.Filter
       The expression must have a value type of `G_TYPE_STRING`.
   
       Params:
-        expression = a [gtk.expression.Expression]
+        expression = the expression
   */
   void setExpression(gtk.expression.Expression expression = null) nothrow
   {
@@ -243,8 +244,7 @@ class StringFilter : gtk.filter.Filter
       Sets the string to search for.
   
       Params:
-        search = The string to search for
-            or null to clear the search
+        search = the string to search for
   */
   void setSearch(string search = null) nothrow
   {
@@ -260,7 +260,8 @@ class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
   /**
       Set `expression` property.
       Params:
-        propval = The expression to evaluate on item to get a string to compare with.
+        propval = The expression to evaluate on each item to get a
+          string to compare with.
       Returns: Builder instance for fluent chaining
   */
   T expression(gtk.expression.Expression propval) nothrow

@@ -163,7 +163,8 @@ class ObjectWrap : gobject.boxed.Boxed
   /**
       Convenience function that retrieves the array
       stored in member_name of object. It is an error to specify a
-      member_name which does not exist.
+      member_name which does not exist or which holds a non-`null`, non-array
+      value.
       
       If member_name contains `null`, then this function will return `NULL`.
       
@@ -185,7 +186,8 @@ class ObjectWrap : gobject.boxed.Boxed
   /**
       Convenience function that retrieves the boolean value
       stored in member_name of object. It is an error to specify a
-      member_name which does not exist.
+      member_name which does not exist or which holds a non-scalar,
+      non-`null` value.
       
       See also: [json.object.ObjectWrap.getBooleanMemberWithDefault],
         [json.object.ObjectWrap.getMember], [json.object.ObjectWrap.hasMember]
@@ -207,7 +209,9 @@ class ObjectWrap : gobject.boxed.Boxed
       stored in member_name of object.
       
       If member_name does not exist, does not contain a scalar value,
-      or contains `null`, then default_value is returned instead.
+      or contains `null`, then default_value is returned instead. If
+      member_name contains a non-boolean, non-`null` scalar value, then
+      whatever [json.node.Node.getBoolean] would return is returned.
   
       Params:
         memberName = the name of the object member
@@ -226,7 +230,8 @@ class ObjectWrap : gobject.boxed.Boxed
   /**
       Convenience function that retrieves the floating point value
       stored in member_name of object. It is an error to specify a
-      member_name which does not exist.
+      member_name which does not exist or which holds a non-scalar,
+      non-`null` value.
       
       See also: [json.object.ObjectWrap.getDoubleMemberWithDefault],
         [json.object.ObjectWrap.getMember], [json.object.ObjectWrap.hasMember]
@@ -248,7 +253,9 @@ class ObjectWrap : gobject.boxed.Boxed
       stored in member_name of object.
       
       If member_name does not exist, does not contain a scalar value,
-      or contains `null`, then default_value is returned instead.
+      or contains `null`, then default_value is returned instead. If
+      member_name contains a non-double, non-`null` scalar value, then
+      whatever [json.node.Node.getDouble] would return is returned.
   
       Params:
         memberName = the name of the object member
@@ -267,7 +274,8 @@ class ObjectWrap : gobject.boxed.Boxed
   /**
       Convenience function that retrieves the integer value
       stored in member_name of object. It is an error to specify a
-      member_name which does not exist.
+      member_name which does not exist or which holds a non-scalar,
+      non-`null` value.
       
       See also: [json.object.ObjectWrap.getIntMemberWithDefault],
         [json.object.ObjectWrap.getMember], [json.object.ObjectWrap.hasMember]
@@ -289,7 +297,9 @@ class ObjectWrap : gobject.boxed.Boxed
       stored in member_name of object.
       
       If member_name does not exist, does not contain a scalar value,
-      or contains `null`, then default_value is returned instead.
+      or contains `null`, then default_value is returned instead. If
+      member_name contains a non-integer, non-`null` scalar value, then whatever
+      [json.node.Node.getInt] would return is returned.
   
       Params:
         memberName = the name of the object member
@@ -360,7 +370,7 @@ class ObjectWrap : gobject.boxed.Boxed
   /**
       Convenience function that retrieves the object
       stored in member_name of object. It is an error to specify a member_name
-      which does not exist.
+      which does not exist or which holds a non-`null`, non-object value.
       
       If member_name contains `null`, then this function will return `NULL`.
       
@@ -393,7 +403,8 @@ class ObjectWrap : gobject.boxed.Boxed
   /**
       Convenience function that retrieves the string value
       stored in member_name of object. It is an error to specify a
-      member_name that does not exist.
+      member_name that does not exist or which holds a non-scalar,
+      non-`null` value.
       
       See also: [json.object.ObjectWrap.getStringMemberWithDefault],
         [json.object.ObjectWrap.getMember], [json.object.ObjectWrap.hasMember]
@@ -416,7 +427,9 @@ class ObjectWrap : gobject.boxed.Boxed
       stored in member_name of object.
       
       If member_name does not exist, does not contain a scalar value,
-      or contains `null`, then default_value is returned instead.
+      or contains `null`, then default_value is returned instead. If
+      member_name contains a non-string, non-`null` scalar value, then
+      null is returned.
   
       Params:
         memberName = the name of the object member

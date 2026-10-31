@@ -20,7 +20,10 @@ import gtk.widget;
     A [gtk.statusbar.Statusbar] widget is usually placed along the bottom of an application's
     main [gtk.window.Window].
     
-    ![An example GtkStatusbar](statusbar.png)
+    <picture>
+      <source srcset="statusbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStatusbar" src="statusbar.png">
+    </picture>
     
     A `GtkStatusBar` may provide a regular commentary of the application's
     status (as is usually the case in a web browser, for example), or may be

@@ -17,8 +17,7 @@ import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
-    [gtk.no_selection.NoSelection] is a [gtk.selection_model.SelectionModel] that does not allow selecting
-    anything.
+    A selection model that does not allow selecting anything.
     
     This model is meant to be used as a simple wrapper around a [gio.list_model.ListModel]
     when a [gtk.selection_model.SelectionModel] is required.

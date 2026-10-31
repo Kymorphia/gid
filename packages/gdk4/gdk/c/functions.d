@@ -30,6 +30,19 @@ __gshared extern(C) nothrow
   GType function() c_gdk_cairo_context_get_type; ///
   cairo_t* function(GdkCairoContext* self) c_gdk_cairo_context_cairo_create; ///
 
+  // CicpParams
+  GType function() c_gdk_cicp_params_get_type; ///
+  GdkCicpParams* function() c_gdk_cicp_params_new; ///
+  GdkColorState* function(GdkCicpParams* self, GError** _err) c_gdk_cicp_params_build_color_state; ///
+  uint function(GdkCicpParams* self) c_gdk_cicp_params_get_color_primaries; ///
+  uint function(GdkCicpParams* self) c_gdk_cicp_params_get_matrix_coefficients; ///
+  GdkCicpRange function(GdkCicpParams* self) c_gdk_cicp_params_get_range; ///
+  uint function(GdkCicpParams* self) c_gdk_cicp_params_get_transfer_function; ///
+  void function(GdkCicpParams* self, uint colorPrimaries) c_gdk_cicp_params_set_color_primaries; ///
+  void function(GdkCicpParams* self, uint matrixCoefficients) c_gdk_cicp_params_set_matrix_coefficients; ///
+  void function(GdkCicpParams* self, GdkCicpRange range) c_gdk_cicp_params_set_range; ///
+  void function(GdkCicpParams* self, uint transferFunction) c_gdk_cicp_params_set_transfer_function; ///
+
   // Clipboard
   GType function() c_gdk_clipboard_get_type; ///
   GdkContentProvider* function(GdkClipboard* clipboard) c_gdk_clipboard_get_content; ///
@@ -53,6 +66,20 @@ __gshared extern(C) nothrow
   void function(GdkClipboard* clipboard, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_clipboard_store_async; ///
   gboolean function(GdkClipboard* clipboard, GAsyncResult* result, GError** _err) c_gdk_clipboard_store_finish; ///
 
+  // ColorState
+  GType function() c_gdk_color_state_get_type; ///
+  GdkCicpParams* function(GdkColorState* self) c_gdk_color_state_create_cicp_params; ///
+  gboolean function(GdkColorState* self, GdkColorState* other) c_gdk_color_state_equal; ///
+  gboolean function(GdkColorState* self, GdkColorState* other) c_gdk_color_state_equivalent; ///
+  GdkColorState* function(GdkColorState* self) c_gdk_color_state_ref; ///
+  void function(GdkColorState* self) c_gdk_color_state_unref; ///
+  GdkColorState* function() c_gdk_color_state_get_oklab; ///
+  GdkColorState* function() c_gdk_color_state_get_oklch; ///
+  GdkColorState* function() c_gdk_color_state_get_rec2100_linear; ///
+  GdkColorState* function() c_gdk_color_state_get_rec2100_pq; ///
+  GdkColorState* function() c_gdk_color_state_get_srgb; ///
+  GdkColorState* function() c_gdk_color_state_get_srgb_linear; ///
+
   // ContentDeserializer
   GType function() c_gdk_content_deserializer_get_type; ///
   GCancellable* function(GdkContentDeserializer* deserializer) c_gdk_content_deserializer_get_cancellable; ///
@@ -75,6 +102,7 @@ __gshared extern(C) nothrow
   gboolean function(const(GdkContentFormats)* formats, const(char)* mimeType) c_gdk_content_formats_contain_mime_type; ///
   const(GType)* function(const(GdkContentFormats)* formats, size_t* nGtypes) c_gdk_content_formats_get_gtypes; ///
   const(char*)* function(const(GdkContentFormats)* formats, size_t* nMimeTypes) c_gdk_content_formats_get_mime_types; ///
+  gboolean function(GdkContentFormats* formats) c_gdk_content_formats_is_empty; ///
   gboolean function(const(GdkContentFormats)* first, const(GdkContentFormats)* second) c_gdk_content_formats_match; ///
   GType function(const(GdkContentFormats)* first, const(GdkContentFormats)* second) c_gdk_content_formats_match_gtype; ///
   const(char)* function(const(GdkContentFormats)* first, const(GdkContentFormats)* second) c_gdk_content_formats_match_mime_type; ///
@@ -135,6 +163,7 @@ __gshared extern(C) nothrow
 
   // Cursor
   GType function() c_gdk_cursor_get_type; ///
+  GdkCursor* function(GdkCursorGetTextureCallback callback, void* data, GDestroyNotify destroy, GdkCursor* fallback) c_gdk_cursor_new_from_callback; ///
   GdkCursor* function(const(char)* name, GdkCursor* fallback) c_gdk_cursor_new_from_name; ///
   GdkCursor* function(GdkTexture* texture, int hotspotX, int hotspotY, GdkCursor* fallback) c_gdk_cursor_new_from_texture; ///
   GdkCursor* function(GdkCursor* cursor) c_gdk_cursor_get_fallback; ///
@@ -152,11 +181,13 @@ __gshared extern(C) nothrow
 
   // Device
   GType function() c_gdk_device_get_type; ///
+  int function(GdkDevice* device) c_gdk_device_get_active_layout_index; ///
   gboolean function(GdkDevice* device) c_gdk_device_get_caps_lock_state; ///
   GdkDeviceTool* function(GdkDevice* device) c_gdk_device_get_device_tool; ///
   PangoDirection function(GdkDevice* device) c_gdk_device_get_direction; ///
   GdkDisplay* function(GdkDevice* device) c_gdk_device_get_display; ///
   gboolean function(GdkDevice* device) c_gdk_device_get_has_cursor; ///
+  char** function(GdkDevice* device) c_gdk_device_get_layout_names; ///
   GdkModifierType function(GdkDevice* device) c_gdk_device_get_modifier_state; ///
   const(char)* function(GdkDevice* device) c_gdk_device_get_name; ///
   gboolean function(GdkDevice* device) c_gdk_device_get_num_lock_state; ///
@@ -241,6 +272,7 @@ __gshared extern(C) nothrow
   GType function() c_gdk_dmabuf_texture_builder_get_type; ///
   GdkDmabufTextureBuilder* function() c_gdk_dmabuf_texture_builder_new; ///
   GdkTexture* function(GdkDmabufTextureBuilder* self, GDestroyNotify destroy, void* data, GError** _err) c_gdk_dmabuf_texture_builder_build; ///
+  GdkColorState* function(GdkDmabufTextureBuilder* self) c_gdk_dmabuf_texture_builder_get_color_state; ///
   GdkDisplay* function(GdkDmabufTextureBuilder* self) c_gdk_dmabuf_texture_builder_get_display; ///
   int function(GdkDmabufTextureBuilder* self, uint plane) c_gdk_dmabuf_texture_builder_get_fd; ///
   uint function(GdkDmabufTextureBuilder* self) c_gdk_dmabuf_texture_builder_get_fourcc; ///
@@ -253,6 +285,7 @@ __gshared extern(C) nothrow
   cairo_region_t* function(GdkDmabufTextureBuilder* self) c_gdk_dmabuf_texture_builder_get_update_region; ///
   GdkTexture* function(GdkDmabufTextureBuilder* self) c_gdk_dmabuf_texture_builder_get_update_texture; ///
   uint function(GdkDmabufTextureBuilder* self) c_gdk_dmabuf_texture_builder_get_width; ///
+  void function(GdkDmabufTextureBuilder* self, GdkColorState* colorState) c_gdk_dmabuf_texture_builder_set_color_state; ///
   void function(GdkDmabufTextureBuilder* self, GdkDisplay* display) c_gdk_dmabuf_texture_builder_set_display; ///
   void function(GdkDmabufTextureBuilder* self, uint plane, int fd) c_gdk_dmabuf_texture_builder_set_fd; ///
   void function(GdkDmabufTextureBuilder* self, uint fourcc) c_gdk_dmabuf_texture_builder_set_fourcc; ///
@@ -285,6 +318,7 @@ __gshared extern(C) nothrow
   gboolean function(GdkDragSurface* dragSurface, int width, int height) c_gdk_drag_surface_present; ///
 
   // DragSurfaceSize
+  GType function() c_gdk_drag_surface_size_get_type; ///
   void function(GdkDragSurfaceSize* size, int width, int height) c_gdk_drag_surface_size_set_size; ///
 
   // DrawContext
@@ -401,6 +435,7 @@ __gshared extern(C) nothrow
   GType function() c_gdk_gl_texture_builder_get_type; ///
   GdkGLTextureBuilder* function() c_gdk_gl_texture_builder_new; ///
   GdkTexture* function(GdkGLTextureBuilder* self, GDestroyNotify destroy, void* data) c_gdk_gl_texture_builder_build; ///
+  GdkColorState* function(GdkGLTextureBuilder* self) c_gdk_gl_texture_builder_get_color_state; ///
   GdkGLContext* function(GdkGLTextureBuilder* self) c_gdk_gl_texture_builder_get_context; ///
   GdkMemoryFormat function(GdkGLTextureBuilder* self) c_gdk_gl_texture_builder_get_format; ///
   gboolean function(GdkGLTextureBuilder* self) c_gdk_gl_texture_builder_get_has_mipmap; ///
@@ -410,6 +445,7 @@ __gshared extern(C) nothrow
   cairo_region_t* function(GdkGLTextureBuilder* self) c_gdk_gl_texture_builder_get_update_region; ///
   GdkTexture* function(GdkGLTextureBuilder* self) c_gdk_gl_texture_builder_get_update_texture; ///
   int function(GdkGLTextureBuilder* self) c_gdk_gl_texture_builder_get_width; ///
+  void function(GdkGLTextureBuilder* self, GdkColorState* colorState) c_gdk_gl_texture_builder_set_color_state; ///
   void function(GdkGLTextureBuilder* self, GdkGLContext* context) c_gdk_gl_texture_builder_set_context; ///
   void function(GdkGLTextureBuilder* self, GdkMemoryFormat format) c_gdk_gl_texture_builder_set_format; ///
   void function(GdkGLTextureBuilder* self, gboolean hasMipmap) c_gdk_gl_texture_builder_set_has_mipmap; ///
@@ -439,6 +475,31 @@ __gshared extern(C) nothrow
   // MemoryTexture
   GType function() c_gdk_memory_texture_get_type; ///
   GdkTexture* function(int width, int height, GdkMemoryFormat format, GBytes* bytes, size_t stride) c_gdk_memory_texture_new; ///
+
+  // MemoryTextureBuilder
+  GType function() c_gdk_memory_texture_builder_get_type; ///
+  GdkMemoryTextureBuilder* function() c_gdk_memory_texture_builder_new; ///
+  GdkTexture* function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_build; ///
+  GBytes* function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_bytes; ///
+  GdkColorState* function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_color_state; ///
+  GdkMemoryFormat function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_format; ///
+  int function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_height; ///
+  size_t function(GdkMemoryTextureBuilder* self, uint plane) c_gdk_memory_texture_builder_get_offset; ///
+  size_t function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_stride; ///
+  size_t function(GdkMemoryTextureBuilder* self, uint plane) c_gdk_memory_texture_builder_get_stride_for_plane; ///
+  cairo_region_t* function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_update_region; ///
+  GdkTexture* function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_update_texture; ///
+  int function(GdkMemoryTextureBuilder* self) c_gdk_memory_texture_builder_get_width; ///
+  void function(GdkMemoryTextureBuilder* self, GBytes* bytes) c_gdk_memory_texture_builder_set_bytes; ///
+  void function(GdkMemoryTextureBuilder* self, GdkColorState* colorState) c_gdk_memory_texture_builder_set_color_state; ///
+  void function(GdkMemoryTextureBuilder* self, GdkMemoryFormat format) c_gdk_memory_texture_builder_set_format; ///
+  void function(GdkMemoryTextureBuilder* self, int height) c_gdk_memory_texture_builder_set_height; ///
+  void function(GdkMemoryTextureBuilder* self, uint plane, size_t offset) c_gdk_memory_texture_builder_set_offset; ///
+  void function(GdkMemoryTextureBuilder* self, size_t stride) c_gdk_memory_texture_builder_set_stride; ///
+  void function(GdkMemoryTextureBuilder* self, uint plane, size_t stride) c_gdk_memory_texture_builder_set_stride_for_plane; ///
+  void function(GdkMemoryTextureBuilder* self, cairo_region_t* region) c_gdk_memory_texture_builder_set_update_region; ///
+  void function(GdkMemoryTextureBuilder* self, GdkTexture* texture) c_gdk_memory_texture_builder_set_update_texture; ///
+  void function(GdkMemoryTextureBuilder* self, int width) c_gdk_memory_texture_builder_set_width; ///
 
   // MonitorWrap
   GType function() c_gdk_monitor_get_type; ///
@@ -520,6 +581,7 @@ __gshared extern(C) nothrow
   gboolean function(const(GdkRGBA)* rgba) c_gdk_rgba_is_clear; ///
   gboolean function(const(GdkRGBA)* rgba) c_gdk_rgba_is_opaque; ///
   gboolean function(GdkRGBA* rgba, const(char)* spec) c_gdk_rgba_parse; ///
+  GString* function(const(GdkRGBA)* rgba, GString* string_) c_gdk_rgba_print; ///
   char* function(const(GdkRGBA)* rgba) c_gdk_rgba_to_string; ///
 
   // Rectangle
@@ -533,6 +595,7 @@ __gshared extern(C) nothrow
   GType function() c_gdk_scroll_event_get_type; ///
   void function(GdkEvent* event, double* deltaX, double* deltaY) c_gdk_scroll_event_get_deltas; ///
   GdkScrollDirection function(GdkEvent* event) c_gdk_scroll_event_get_direction; ///
+  GdkScrollRelativeDirection function(GdkEvent* event) c_gdk_scroll_event_get_relative_direction; ///
   GdkScrollUnit function(GdkEvent* event) c_gdk_scroll_event_get_unit; ///
   gboolean function(GdkEvent* event) c_gdk_scroll_event_is_stop; ///
 
@@ -586,6 +649,7 @@ __gshared extern(C) nothrow
   GdkTexture* function(const(char)* path, GError** _err) c_gdk_texture_new_from_filename; ///
   GdkTexture* function(const(char)* resourcePath) c_gdk_texture_new_from_resource; ///
   void function(GdkTexture* texture, ubyte* data, size_t stride) c_gdk_texture_download; ///
+  GdkColorState* function(GdkTexture* self) c_gdk_texture_get_color_state; ///
   GdkMemoryFormat function(GdkTexture* self) c_gdk_texture_get_format; ///
   int function(GdkTexture* texture) c_gdk_texture_get_height; ///
   int function(GdkTexture* texture) c_gdk_texture_get_width; ///
@@ -599,10 +663,13 @@ __gshared extern(C) nothrow
   GdkTextureDownloader* function(GdkTexture* texture) c_gdk_texture_downloader_new; ///
   GdkTextureDownloader* function(const(GdkTextureDownloader)* self) c_gdk_texture_downloader_copy; ///
   GBytes* function(const(GdkTextureDownloader)* self, size_t* outStride) c_gdk_texture_downloader_download_bytes; ///
+  GBytes* function(const(GdkTextureDownloader)* self, size_t* outOffsets, size_t* outStrides) c_gdk_texture_downloader_download_bytes_with_planes; ///
   void function(const(GdkTextureDownloader)* self, ubyte* data, size_t stride) c_gdk_texture_downloader_download_into; ///
   void function(GdkTextureDownloader* self) c_gdk_texture_downloader_free; ///
+  GdkColorState* function(const(GdkTextureDownloader)* self) c_gdk_texture_downloader_get_color_state; ///
   GdkMemoryFormat function(const(GdkTextureDownloader)* self) c_gdk_texture_downloader_get_format; ///
   GdkTexture* function(const(GdkTextureDownloader)* self) c_gdk_texture_downloader_get_texture; ///
+  void function(GdkTextureDownloader* self, GdkColorState* colorState) c_gdk_texture_downloader_set_color_state; ///
   void function(GdkTextureDownloader* self, GdkMemoryFormat format) c_gdk_texture_downloader_set_format; ///
   void function(GdkTextureDownloader* self, GdkTexture* texture) c_gdk_texture_downloader_set_texture; ///
 
@@ -611,6 +678,8 @@ __gshared extern(C) nothrow
   void function(GdkToplevel* toplevel, GdkDevice* device, int button, double x, double y, uint timestamp) c_gdk_toplevel_begin_move; ///
   void function(GdkToplevel* toplevel, GdkSurfaceEdge edge, GdkDevice* device, int button, double x, double y, uint timestamp) c_gdk_toplevel_begin_resize; ///
   void function(GdkToplevel* toplevel, uint timestamp) c_gdk_toplevel_focus; ///
+  GdkToplevelCapabilities function(GdkToplevel* toplevel) c_gdk_toplevel_get_capabilities; ///
+  GdkGravity function(GdkToplevel* toplevel) c_gdk_toplevel_get_gravity; ///
   GdkToplevelState function(GdkToplevel* toplevel) c_gdk_toplevel_get_state; ///
   void function(GdkToplevel* toplevel, GdkEvent* event) c_gdk_toplevel_inhibit_system_shortcuts; ///
   gboolean function(GdkToplevel* toplevel) c_gdk_toplevel_lower; ///
@@ -619,6 +688,7 @@ __gshared extern(C) nothrow
   void function(GdkToplevel* toplevel) c_gdk_toplevel_restore_system_shortcuts; ///
   void function(GdkToplevel* toplevel, gboolean decorated) c_gdk_toplevel_set_decorated; ///
   void function(GdkToplevel* toplevel, gboolean deletable) c_gdk_toplevel_set_deletable; ///
+  void function(GdkToplevel* toplevel, GdkGravity gravity) c_gdk_toplevel_set_gravity; ///
   void function(GdkToplevel* toplevel, GList* surfaces) c_gdk_toplevel_set_icon_list; ///
   void function(GdkToplevel* toplevel, gboolean modal) c_gdk_toplevel_set_modal; ///
   void function(GdkToplevel* toplevel, const(char)* startupId) c_gdk_toplevel_set_startup_id; ///
@@ -644,6 +714,7 @@ __gshared extern(C) nothrow
   void function(GdkToplevelLayout* layout) c_gdk_toplevel_layout_unref; ///
 
   // ToplevelSize
+  GType function() c_gdk_toplevel_size_get_type; ///
   void function(GdkToplevelSize* size, int* boundsWidth, int* boundsHeight) c_gdk_toplevel_size_get_bounds; ///
   void function(GdkToplevelSize* size, int minWidth, int minHeight) c_gdk_toplevel_size_set_min_size; ///
   void function(GdkToplevelSize* size, int left, int right, int top, int bottom) c_gdk_toplevel_size_set_shadow_width; ///
@@ -677,7 +748,6 @@ __gshared extern(C) nothrow
   void function(GType type, const(char)* mimeType, GdkContentSerializeFunc serialize, void* data, GDestroyNotify notify) c_gdk_content_register_serializer; ///
   void function(GOutputStream* stream, const(char)* mimeType, const(GValue)* value, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_content_serialize_async; ///
   gboolean function(GAsyncResult* result, GError** _err) c_gdk_content_serialize_finish; ///
-  GType function() c_gdk_drag_surface_size_get_type; ///
   gboolean function(GdkEvent* event1, GdkEvent* event2, double* angle) c_gdk_events_get_angle; ///
   gboolean function(GdkEvent* event1, GdkEvent* event2, double* x, double* y) c_gdk_events_get_center; ///
   gboolean function(GdkEvent* event1, GdkEvent* event2, double* distance) c_gdk_events_get_distance; ///
@@ -695,7 +765,6 @@ __gshared extern(C) nothrow
   GdkPixbuf* function(cairo_surface_t* surface, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_surface; ///
   GdkPixbuf* function(GdkTexture* texture) c_gdk_pixbuf_get_from_texture; ///
   void function(const(char)* backends) c_gdk_set_allowed_backends; ///
-  GType function() c_gdk_toplevel_size_get_type; ///
   uint function(uint wc) c_gdk_unicode_to_keyval; ///
 
   // DmabufError
@@ -749,6 +818,41 @@ alias gdk_cairo_context_get_type = c_gdk_cairo_context_get_type;
 
 /** */
 alias gdk_cairo_context_cairo_create = c_gdk_cairo_context_cairo_create;
+
+// CicpParams
+
+/** */
+alias gdk_cicp_params_get_type = c_gdk_cicp_params_get_type;
+
+/** */
+alias gdk_cicp_params_new = c_gdk_cicp_params_new;
+
+/** */
+alias gdk_cicp_params_build_color_state = c_gdk_cicp_params_build_color_state;
+
+/** */
+alias gdk_cicp_params_get_color_primaries = c_gdk_cicp_params_get_color_primaries;
+
+/** */
+alias gdk_cicp_params_get_matrix_coefficients = c_gdk_cicp_params_get_matrix_coefficients;
+
+/** */
+alias gdk_cicp_params_get_range = c_gdk_cicp_params_get_range;
+
+/** */
+alias gdk_cicp_params_get_transfer_function = c_gdk_cicp_params_get_transfer_function;
+
+/** */
+alias gdk_cicp_params_set_color_primaries = c_gdk_cicp_params_set_color_primaries;
+
+/** */
+alias gdk_cicp_params_set_matrix_coefficients = c_gdk_cicp_params_set_matrix_coefficients;
+
+/** */
+alias gdk_cicp_params_set_range = c_gdk_cicp_params_set_range;
+
+/** */
+alias gdk_cicp_params_set_transfer_function = c_gdk_cicp_params_set_transfer_function;
 
 // Clipboard
 
@@ -815,6 +919,44 @@ alias gdk_clipboard_store_async = c_gdk_clipboard_store_async;
 /** */
 alias gdk_clipboard_store_finish = c_gdk_clipboard_store_finish;
 
+// ColorState
+
+/** */
+alias gdk_color_state_get_type = c_gdk_color_state_get_type;
+
+/** */
+alias gdk_color_state_create_cicp_params = c_gdk_color_state_create_cicp_params;
+
+/** */
+alias gdk_color_state_equal = c_gdk_color_state_equal;
+
+/** */
+alias gdk_color_state_equivalent = c_gdk_color_state_equivalent;
+
+/** */
+alias gdk_color_state_ref = c_gdk_color_state_ref;
+
+/** */
+alias gdk_color_state_unref = c_gdk_color_state_unref;
+
+/** */
+alias gdk_color_state_get_oklab = c_gdk_color_state_get_oklab;
+
+/** */
+alias gdk_color_state_get_oklch = c_gdk_color_state_get_oklch;
+
+/** */
+alias gdk_color_state_get_rec2100_linear = c_gdk_color_state_get_rec2100_linear;
+
+/** */
+alias gdk_color_state_get_rec2100_pq = c_gdk_color_state_get_rec2100_pq;
+
+/** */
+alias gdk_color_state_get_srgb = c_gdk_color_state_get_srgb;
+
+/** */
+alias gdk_color_state_get_srgb_linear = c_gdk_color_state_get_srgb_linear;
+
 // ContentDeserializer
 
 /** */
@@ -875,6 +1017,9 @@ alias gdk_content_formats_get_gtypes = c_gdk_content_formats_get_gtypes;
 
 /** */
 alias gdk_content_formats_get_mime_types = c_gdk_content_formats_get_mime_types;
+
+/** */
+alias gdk_content_formats_is_empty = c_gdk_content_formats_is_empty;
 
 /** */
 alias gdk_content_formats_match = c_gdk_content_formats_match;
@@ -1037,6 +1182,9 @@ alias gdk_crossing_event_get_mode = c_gdk_crossing_event_get_mode;
 alias gdk_cursor_get_type = c_gdk_cursor_get_type;
 
 /** */
+alias gdk_cursor_new_from_callback = c_gdk_cursor_new_from_callback;
+
+/** */
 alias gdk_cursor_new_from_name = c_gdk_cursor_new_from_name;
 
 /** */
@@ -1076,6 +1224,9 @@ alias gdk_delete_event_get_type = c_gdk_delete_event_get_type;
 alias gdk_device_get_type = c_gdk_device_get_type;
 
 /** */
+alias gdk_device_get_active_layout_index = c_gdk_device_get_active_layout_index;
+
+/** */
 alias gdk_device_get_caps_lock_state = c_gdk_device_get_caps_lock_state;
 
 /** */
@@ -1089,6 +1240,9 @@ alias gdk_device_get_display = c_gdk_device_get_display;
 
 /** */
 alias gdk_device_get_has_cursor = c_gdk_device_get_has_cursor;
+
+/** */
+alias gdk_device_get_layout_names = c_gdk_device_get_layout_names;
 
 /** */
 alias gdk_device_get_modifier_state = c_gdk_device_get_modifier_state;
@@ -1315,6 +1469,9 @@ alias gdk_dmabuf_texture_builder_new = c_gdk_dmabuf_texture_builder_new;
 alias gdk_dmabuf_texture_builder_build = c_gdk_dmabuf_texture_builder_build;
 
 /** */
+alias gdk_dmabuf_texture_builder_get_color_state = c_gdk_dmabuf_texture_builder_get_color_state;
+
+/** */
 alias gdk_dmabuf_texture_builder_get_display = c_gdk_dmabuf_texture_builder_get_display;
 
 /** */
@@ -1349,6 +1506,9 @@ alias gdk_dmabuf_texture_builder_get_update_texture = c_gdk_dmabuf_texture_build
 
 /** */
 alias gdk_dmabuf_texture_builder_get_width = c_gdk_dmabuf_texture_builder_get_width;
+
+/** */
+alias gdk_dmabuf_texture_builder_set_color_state = c_gdk_dmabuf_texture_builder_set_color_state;
 
 /** */
 alias gdk_dmabuf_texture_builder_set_display = c_gdk_dmabuf_texture_builder_set_display;
@@ -1433,6 +1593,9 @@ alias gdk_drag_surface_get_type = c_gdk_drag_surface_get_type;
 alias gdk_drag_surface_present = c_gdk_drag_surface_present;
 
 // DragSurfaceSize
+
+/** */
+alias gdk_drag_surface_size_get_type = c_gdk_drag_surface_size_get_type;
 
 /** */
 alias gdk_drag_surface_size_set_size = c_gdk_drag_surface_size_set_size;
@@ -1739,6 +1902,9 @@ alias gdk_gl_texture_builder_new = c_gdk_gl_texture_builder_new;
 alias gdk_gl_texture_builder_build = c_gdk_gl_texture_builder_build;
 
 /** */
+alias gdk_gl_texture_builder_get_color_state = c_gdk_gl_texture_builder_get_color_state;
+
+/** */
 alias gdk_gl_texture_builder_get_context = c_gdk_gl_texture_builder_get_context;
 
 /** */
@@ -1764,6 +1930,9 @@ alias gdk_gl_texture_builder_get_update_texture = c_gdk_gl_texture_builder_get_u
 
 /** */
 alias gdk_gl_texture_builder_get_width = c_gdk_gl_texture_builder_get_width;
+
+/** */
+alias gdk_gl_texture_builder_set_color_state = c_gdk_gl_texture_builder_set_color_state;
 
 /** */
 alias gdk_gl_texture_builder_set_context = c_gdk_gl_texture_builder_set_context;
@@ -1839,6 +2008,77 @@ alias gdk_memory_texture_get_type = c_gdk_memory_texture_get_type;
 
 /** */
 alias gdk_memory_texture_new = c_gdk_memory_texture_new;
+
+// MemoryTextureBuilder
+
+/** */
+alias gdk_memory_texture_builder_get_type = c_gdk_memory_texture_builder_get_type;
+
+/** */
+alias gdk_memory_texture_builder_new = c_gdk_memory_texture_builder_new;
+
+/** */
+alias gdk_memory_texture_builder_build = c_gdk_memory_texture_builder_build;
+
+/** */
+alias gdk_memory_texture_builder_get_bytes = c_gdk_memory_texture_builder_get_bytes;
+
+/** */
+alias gdk_memory_texture_builder_get_color_state = c_gdk_memory_texture_builder_get_color_state;
+
+/** */
+alias gdk_memory_texture_builder_get_format = c_gdk_memory_texture_builder_get_format;
+
+/** */
+alias gdk_memory_texture_builder_get_height = c_gdk_memory_texture_builder_get_height;
+
+/** */
+alias gdk_memory_texture_builder_get_offset = c_gdk_memory_texture_builder_get_offset;
+
+/** */
+alias gdk_memory_texture_builder_get_stride = c_gdk_memory_texture_builder_get_stride;
+
+/** */
+alias gdk_memory_texture_builder_get_stride_for_plane = c_gdk_memory_texture_builder_get_stride_for_plane;
+
+/** */
+alias gdk_memory_texture_builder_get_update_region = c_gdk_memory_texture_builder_get_update_region;
+
+/** */
+alias gdk_memory_texture_builder_get_update_texture = c_gdk_memory_texture_builder_get_update_texture;
+
+/** */
+alias gdk_memory_texture_builder_get_width = c_gdk_memory_texture_builder_get_width;
+
+/** */
+alias gdk_memory_texture_builder_set_bytes = c_gdk_memory_texture_builder_set_bytes;
+
+/** */
+alias gdk_memory_texture_builder_set_color_state = c_gdk_memory_texture_builder_set_color_state;
+
+/** */
+alias gdk_memory_texture_builder_set_format = c_gdk_memory_texture_builder_set_format;
+
+/** */
+alias gdk_memory_texture_builder_set_height = c_gdk_memory_texture_builder_set_height;
+
+/** */
+alias gdk_memory_texture_builder_set_offset = c_gdk_memory_texture_builder_set_offset;
+
+/** */
+alias gdk_memory_texture_builder_set_stride = c_gdk_memory_texture_builder_set_stride;
+
+/** */
+alias gdk_memory_texture_builder_set_stride_for_plane = c_gdk_memory_texture_builder_set_stride_for_plane;
+
+/** */
+alias gdk_memory_texture_builder_set_update_region = c_gdk_memory_texture_builder_set_update_region;
+
+/** */
+alias gdk_memory_texture_builder_set_update_texture = c_gdk_memory_texture_builder_set_update_texture;
+
+/** */
+alias gdk_memory_texture_builder_set_width = c_gdk_memory_texture_builder_set_width;
 
 // MonitorWrap
 
@@ -2052,6 +2292,9 @@ alias gdk_rgba_is_opaque = c_gdk_rgba_is_opaque;
 alias gdk_rgba_parse = c_gdk_rgba_parse;
 
 /** */
+alias gdk_rgba_print = c_gdk_rgba_print;
+
+/** */
 alias gdk_rgba_to_string = c_gdk_rgba_to_string;
 
 // Rectangle
@@ -2081,6 +2324,9 @@ alias gdk_scroll_event_get_deltas = c_gdk_scroll_event_get_deltas;
 
 /** */
 alias gdk_scroll_event_get_direction = c_gdk_scroll_event_get_direction;
+
+/** */
+alias gdk_scroll_event_get_relative_direction = c_gdk_scroll_event_get_relative_direction;
 
 /** */
 alias gdk_scroll_event_get_unit = c_gdk_scroll_event_get_unit;
@@ -2226,6 +2472,9 @@ alias gdk_texture_new_from_resource = c_gdk_texture_new_from_resource;
 alias gdk_texture_download = c_gdk_texture_download;
 
 /** */
+alias gdk_texture_get_color_state = c_gdk_texture_get_color_state;
+
+/** */
 alias gdk_texture_get_format = c_gdk_texture_get_format;
 
 /** */
@@ -2261,16 +2510,25 @@ alias gdk_texture_downloader_copy = c_gdk_texture_downloader_copy;
 alias gdk_texture_downloader_download_bytes = c_gdk_texture_downloader_download_bytes;
 
 /** */
+alias gdk_texture_downloader_download_bytes_with_planes = c_gdk_texture_downloader_download_bytes_with_planes;
+
+/** */
 alias gdk_texture_downloader_download_into = c_gdk_texture_downloader_download_into;
 
 /** */
 alias gdk_texture_downloader_free = c_gdk_texture_downloader_free;
 
 /** */
+alias gdk_texture_downloader_get_color_state = c_gdk_texture_downloader_get_color_state;
+
+/** */
 alias gdk_texture_downloader_get_format = c_gdk_texture_downloader_get_format;
 
 /** */
 alias gdk_texture_downloader_get_texture = c_gdk_texture_downloader_get_texture;
+
+/** */
+alias gdk_texture_downloader_set_color_state = c_gdk_texture_downloader_set_color_state;
 
 /** */
 alias gdk_texture_downloader_set_format = c_gdk_texture_downloader_set_format;
@@ -2291,6 +2549,12 @@ alias gdk_toplevel_begin_resize = c_gdk_toplevel_begin_resize;
 
 /** */
 alias gdk_toplevel_focus = c_gdk_toplevel_focus;
+
+/** */
+alias gdk_toplevel_get_capabilities = c_gdk_toplevel_get_capabilities;
+
+/** */
+alias gdk_toplevel_get_gravity = c_gdk_toplevel_get_gravity;
 
 /** */
 alias gdk_toplevel_get_state = c_gdk_toplevel_get_state;
@@ -2315,6 +2579,9 @@ alias gdk_toplevel_set_decorated = c_gdk_toplevel_set_decorated;
 
 /** */
 alias gdk_toplevel_set_deletable = c_gdk_toplevel_set_deletable;
+
+/** */
+alias gdk_toplevel_set_gravity = c_gdk_toplevel_set_gravity;
 
 /** */
 alias gdk_toplevel_set_icon_list = c_gdk_toplevel_set_icon_list;
@@ -2382,6 +2649,9 @@ alias gdk_toplevel_layout_set_resizable = c_gdk_toplevel_layout_set_resizable;
 alias gdk_toplevel_layout_unref = c_gdk_toplevel_layout_unref;
 
 // ToplevelSize
+
+/** */
+alias gdk_toplevel_size_get_type = c_gdk_toplevel_size_get_type;
 
 /** */
 alias gdk_toplevel_size_get_bounds = c_gdk_toplevel_size_get_bounds;
@@ -2467,9 +2737,6 @@ alias gdk_content_serialize_async = c_gdk_content_serialize_async;
 alias gdk_content_serialize_finish = c_gdk_content_serialize_finish;
 
 /** */
-alias gdk_drag_surface_size_get_type = c_gdk_drag_surface_size_get_type;
-
-/** */
 alias gdk_events_get_angle = c_gdk_events_get_angle;
 
 /** */
@@ -2521,9 +2788,6 @@ alias gdk_pixbuf_get_from_texture = c_gdk_pixbuf_get_from_texture;
 alias gdk_set_allowed_backends = c_gdk_set_allowed_backends;
 
 /** */
-alias gdk_toplevel_size_get_type = c_gdk_toplevel_size_get_type;
-
-/** */
 alias gdk_unicode_to_keyval = c_gdk_unicode_to_keyval;
 
 // DmabufError
@@ -2571,6 +2835,19 @@ shared static this()
   gidLink(cast(void**)&gdk_cairo_context_get_type, "gdk_cairo_context_get_type", libs);
   gidLink(cast(void**)&gdk_cairo_context_cairo_create, "gdk_cairo_context_cairo_create", libs);
 
+  // CicpParams
+  gidLink(cast(void**)&gdk_cicp_params_get_type, "gdk_cicp_params_get_type", libs);
+  gidLink(cast(void**)&gdk_cicp_params_new, "gdk_cicp_params_new", libs);
+  gidLink(cast(void**)&gdk_cicp_params_build_color_state, "gdk_cicp_params_build_color_state", libs);
+  gidLink(cast(void**)&gdk_cicp_params_get_color_primaries, "gdk_cicp_params_get_color_primaries", libs);
+  gidLink(cast(void**)&gdk_cicp_params_get_matrix_coefficients, "gdk_cicp_params_get_matrix_coefficients", libs);
+  gidLink(cast(void**)&gdk_cicp_params_get_range, "gdk_cicp_params_get_range", libs);
+  gidLink(cast(void**)&gdk_cicp_params_get_transfer_function, "gdk_cicp_params_get_transfer_function", libs);
+  gidLink(cast(void**)&gdk_cicp_params_set_color_primaries, "gdk_cicp_params_set_color_primaries", libs);
+  gidLink(cast(void**)&gdk_cicp_params_set_matrix_coefficients, "gdk_cicp_params_set_matrix_coefficients", libs);
+  gidLink(cast(void**)&gdk_cicp_params_set_range, "gdk_cicp_params_set_range", libs);
+  gidLink(cast(void**)&gdk_cicp_params_set_transfer_function, "gdk_cicp_params_set_transfer_function", libs);
+
   // Clipboard
   gidLink(cast(void**)&gdk_clipboard_get_type, "gdk_clipboard_get_type", libs);
   gidLink(cast(void**)&gdk_clipboard_get_content, "gdk_clipboard_get_content", libs);
@@ -2594,6 +2871,20 @@ shared static this()
   gidLink(cast(void**)&gdk_clipboard_store_async, "gdk_clipboard_store_async", libs);
   gidLink(cast(void**)&gdk_clipboard_store_finish, "gdk_clipboard_store_finish", libs);
 
+  // ColorState
+  gidLink(cast(void**)&gdk_color_state_get_type, "gdk_color_state_get_type", libs);
+  gidLink(cast(void**)&gdk_color_state_create_cicp_params, "gdk_color_state_create_cicp_params", libs);
+  gidLink(cast(void**)&gdk_color_state_equal, "gdk_color_state_equal", libs);
+  gidLink(cast(void**)&gdk_color_state_equivalent, "gdk_color_state_equivalent", libs);
+  gidLink(cast(void**)&gdk_color_state_ref, "gdk_color_state_ref", libs);
+  gidLink(cast(void**)&gdk_color_state_unref, "gdk_color_state_unref", libs);
+  gidLink(cast(void**)&gdk_color_state_get_oklab, "gdk_color_state_get_oklab", libs);
+  gidLink(cast(void**)&gdk_color_state_get_oklch, "gdk_color_state_get_oklch", libs);
+  gidLink(cast(void**)&gdk_color_state_get_rec2100_linear, "gdk_color_state_get_rec2100_linear", libs);
+  gidLink(cast(void**)&gdk_color_state_get_rec2100_pq, "gdk_color_state_get_rec2100_pq", libs);
+  gidLink(cast(void**)&gdk_color_state_get_srgb, "gdk_color_state_get_srgb", libs);
+  gidLink(cast(void**)&gdk_color_state_get_srgb_linear, "gdk_color_state_get_srgb_linear", libs);
+
   // ContentDeserializer
   gidLink(cast(void**)&gdk_content_deserializer_get_type, "gdk_content_deserializer_get_type", libs);
   gidLink(cast(void**)&gdk_content_deserializer_get_cancellable, "gdk_content_deserializer_get_cancellable", libs);
@@ -2616,6 +2907,7 @@ shared static this()
   gidLink(cast(void**)&gdk_content_formats_contain_mime_type, "gdk_content_formats_contain_mime_type", libs);
   gidLink(cast(void**)&gdk_content_formats_get_gtypes, "gdk_content_formats_get_gtypes", libs);
   gidLink(cast(void**)&gdk_content_formats_get_mime_types, "gdk_content_formats_get_mime_types", libs);
+  gidLink(cast(void**)&gdk_content_formats_is_empty, "gdk_content_formats_is_empty", libs);
   gidLink(cast(void**)&gdk_content_formats_match, "gdk_content_formats_match", libs);
   gidLink(cast(void**)&gdk_content_formats_match_gtype, "gdk_content_formats_match_gtype", libs);
   gidLink(cast(void**)&gdk_content_formats_match_mime_type, "gdk_content_formats_match_mime_type", libs);
@@ -2676,6 +2968,7 @@ shared static this()
 
   // Cursor
   gidLink(cast(void**)&gdk_cursor_get_type, "gdk_cursor_get_type", libs);
+  gidLink(cast(void**)&gdk_cursor_new_from_callback, "gdk_cursor_new_from_callback", libs);
   gidLink(cast(void**)&gdk_cursor_new_from_name, "gdk_cursor_new_from_name", libs);
   gidLink(cast(void**)&gdk_cursor_new_from_texture, "gdk_cursor_new_from_texture", libs);
   gidLink(cast(void**)&gdk_cursor_get_fallback, "gdk_cursor_get_fallback", libs);
@@ -2693,11 +2986,13 @@ shared static this()
 
   // Device
   gidLink(cast(void**)&gdk_device_get_type, "gdk_device_get_type", libs);
+  gidLink(cast(void**)&gdk_device_get_active_layout_index, "gdk_device_get_active_layout_index", libs);
   gidLink(cast(void**)&gdk_device_get_caps_lock_state, "gdk_device_get_caps_lock_state", libs);
   gidLink(cast(void**)&gdk_device_get_device_tool, "gdk_device_get_device_tool", libs);
   gidLink(cast(void**)&gdk_device_get_direction, "gdk_device_get_direction", libs);
   gidLink(cast(void**)&gdk_device_get_display, "gdk_device_get_display", libs);
   gidLink(cast(void**)&gdk_device_get_has_cursor, "gdk_device_get_has_cursor", libs);
+  gidLink(cast(void**)&gdk_device_get_layout_names, "gdk_device_get_layout_names", libs);
   gidLink(cast(void**)&gdk_device_get_modifier_state, "gdk_device_get_modifier_state", libs);
   gidLink(cast(void**)&gdk_device_get_name, "gdk_device_get_name", libs);
   gidLink(cast(void**)&gdk_device_get_num_lock_state, "gdk_device_get_num_lock_state", libs);
@@ -2782,6 +3077,7 @@ shared static this()
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_type, "gdk_dmabuf_texture_builder_get_type", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_new, "gdk_dmabuf_texture_builder_new", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_build, "gdk_dmabuf_texture_builder_build", libs);
+  gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_color_state, "gdk_dmabuf_texture_builder_get_color_state", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_display, "gdk_dmabuf_texture_builder_get_display", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_fd, "gdk_dmabuf_texture_builder_get_fd", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_fourcc, "gdk_dmabuf_texture_builder_get_fourcc", libs);
@@ -2794,6 +3090,7 @@ shared static this()
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_update_region, "gdk_dmabuf_texture_builder_get_update_region", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_update_texture, "gdk_dmabuf_texture_builder_get_update_texture", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_get_width, "gdk_dmabuf_texture_builder_get_width", libs);
+  gidLink(cast(void**)&gdk_dmabuf_texture_builder_set_color_state, "gdk_dmabuf_texture_builder_set_color_state", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_set_display, "gdk_dmabuf_texture_builder_set_display", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_set_fd, "gdk_dmabuf_texture_builder_set_fd", libs);
   gidLink(cast(void**)&gdk_dmabuf_texture_builder_set_fourcc, "gdk_dmabuf_texture_builder_set_fourcc", libs);
@@ -2826,6 +3123,7 @@ shared static this()
   gidLink(cast(void**)&gdk_drag_surface_present, "gdk_drag_surface_present", libs);
 
   // DragSurfaceSize
+  gidLink(cast(void**)&gdk_drag_surface_size_get_type, "gdk_drag_surface_size_get_type", libs);
   gidLink(cast(void**)&gdk_drag_surface_size_set_size, "gdk_drag_surface_size_set_size", libs);
 
   // DrawContext
@@ -2942,6 +3240,7 @@ shared static this()
   gidLink(cast(void**)&gdk_gl_texture_builder_get_type, "gdk_gl_texture_builder_get_type", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_new, "gdk_gl_texture_builder_new", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_build, "gdk_gl_texture_builder_build", libs);
+  gidLink(cast(void**)&gdk_gl_texture_builder_get_color_state, "gdk_gl_texture_builder_get_color_state", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_get_context, "gdk_gl_texture_builder_get_context", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_get_format, "gdk_gl_texture_builder_get_format", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_get_has_mipmap, "gdk_gl_texture_builder_get_has_mipmap", libs);
@@ -2951,6 +3250,7 @@ shared static this()
   gidLink(cast(void**)&gdk_gl_texture_builder_get_update_region, "gdk_gl_texture_builder_get_update_region", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_get_update_texture, "gdk_gl_texture_builder_get_update_texture", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_get_width, "gdk_gl_texture_builder_get_width", libs);
+  gidLink(cast(void**)&gdk_gl_texture_builder_set_color_state, "gdk_gl_texture_builder_set_color_state", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_set_context, "gdk_gl_texture_builder_set_context", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_set_format, "gdk_gl_texture_builder_set_format", libs);
   gidLink(cast(void**)&gdk_gl_texture_builder_set_has_mipmap, "gdk_gl_texture_builder_set_has_mipmap", libs);
@@ -2980,6 +3280,31 @@ shared static this()
   // MemoryTexture
   gidLink(cast(void**)&gdk_memory_texture_get_type, "gdk_memory_texture_get_type", libs);
   gidLink(cast(void**)&gdk_memory_texture_new, "gdk_memory_texture_new", libs);
+
+  // MemoryTextureBuilder
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_type, "gdk_memory_texture_builder_get_type", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_new, "gdk_memory_texture_builder_new", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_build, "gdk_memory_texture_builder_build", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_bytes, "gdk_memory_texture_builder_get_bytes", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_color_state, "gdk_memory_texture_builder_get_color_state", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_format, "gdk_memory_texture_builder_get_format", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_height, "gdk_memory_texture_builder_get_height", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_offset, "gdk_memory_texture_builder_get_offset", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_stride, "gdk_memory_texture_builder_get_stride", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_stride_for_plane, "gdk_memory_texture_builder_get_stride_for_plane", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_update_region, "gdk_memory_texture_builder_get_update_region", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_update_texture, "gdk_memory_texture_builder_get_update_texture", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_get_width, "gdk_memory_texture_builder_get_width", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_bytes, "gdk_memory_texture_builder_set_bytes", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_color_state, "gdk_memory_texture_builder_set_color_state", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_format, "gdk_memory_texture_builder_set_format", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_height, "gdk_memory_texture_builder_set_height", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_offset, "gdk_memory_texture_builder_set_offset", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_stride, "gdk_memory_texture_builder_set_stride", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_stride_for_plane, "gdk_memory_texture_builder_set_stride_for_plane", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_update_region, "gdk_memory_texture_builder_set_update_region", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_update_texture, "gdk_memory_texture_builder_set_update_texture", libs);
+  gidLink(cast(void**)&gdk_memory_texture_builder_set_width, "gdk_memory_texture_builder_set_width", libs);
 
   // MonitorWrap
   gidLink(cast(void**)&gdk_monitor_get_type, "gdk_monitor_get_type", libs);
@@ -3061,6 +3386,7 @@ shared static this()
   gidLink(cast(void**)&gdk_rgba_is_clear, "gdk_rgba_is_clear", libs);
   gidLink(cast(void**)&gdk_rgba_is_opaque, "gdk_rgba_is_opaque", libs);
   gidLink(cast(void**)&gdk_rgba_parse, "gdk_rgba_parse", libs);
+  gidLink(cast(void**)&gdk_rgba_print, "gdk_rgba_print", libs);
   gidLink(cast(void**)&gdk_rgba_to_string, "gdk_rgba_to_string", libs);
 
   // Rectangle
@@ -3074,6 +3400,7 @@ shared static this()
   gidLink(cast(void**)&gdk_scroll_event_get_type, "gdk_scroll_event_get_type", libs);
   gidLink(cast(void**)&gdk_scroll_event_get_deltas, "gdk_scroll_event_get_deltas", libs);
   gidLink(cast(void**)&gdk_scroll_event_get_direction, "gdk_scroll_event_get_direction", libs);
+  gidLink(cast(void**)&gdk_scroll_event_get_relative_direction, "gdk_scroll_event_get_relative_direction", libs);
   gidLink(cast(void**)&gdk_scroll_event_get_unit, "gdk_scroll_event_get_unit", libs);
   gidLink(cast(void**)&gdk_scroll_event_is_stop, "gdk_scroll_event_is_stop", libs);
 
@@ -3127,6 +3454,7 @@ shared static this()
   gidLink(cast(void**)&gdk_texture_new_from_filename, "gdk_texture_new_from_filename", libs);
   gidLink(cast(void**)&gdk_texture_new_from_resource, "gdk_texture_new_from_resource", libs);
   gidLink(cast(void**)&gdk_texture_download, "gdk_texture_download", libs);
+  gidLink(cast(void**)&gdk_texture_get_color_state, "gdk_texture_get_color_state", libs);
   gidLink(cast(void**)&gdk_texture_get_format, "gdk_texture_get_format", libs);
   gidLink(cast(void**)&gdk_texture_get_height, "gdk_texture_get_height", libs);
   gidLink(cast(void**)&gdk_texture_get_width, "gdk_texture_get_width", libs);
@@ -3140,10 +3468,13 @@ shared static this()
   gidLink(cast(void**)&gdk_texture_downloader_new, "gdk_texture_downloader_new", libs);
   gidLink(cast(void**)&gdk_texture_downloader_copy, "gdk_texture_downloader_copy", libs);
   gidLink(cast(void**)&gdk_texture_downloader_download_bytes, "gdk_texture_downloader_download_bytes", libs);
+  gidLink(cast(void**)&gdk_texture_downloader_download_bytes_with_planes, "gdk_texture_downloader_download_bytes_with_planes", libs);
   gidLink(cast(void**)&gdk_texture_downloader_download_into, "gdk_texture_downloader_download_into", libs);
   gidLink(cast(void**)&gdk_texture_downloader_free, "gdk_texture_downloader_free", libs);
+  gidLink(cast(void**)&gdk_texture_downloader_get_color_state, "gdk_texture_downloader_get_color_state", libs);
   gidLink(cast(void**)&gdk_texture_downloader_get_format, "gdk_texture_downloader_get_format", libs);
   gidLink(cast(void**)&gdk_texture_downloader_get_texture, "gdk_texture_downloader_get_texture", libs);
+  gidLink(cast(void**)&gdk_texture_downloader_set_color_state, "gdk_texture_downloader_set_color_state", libs);
   gidLink(cast(void**)&gdk_texture_downloader_set_format, "gdk_texture_downloader_set_format", libs);
   gidLink(cast(void**)&gdk_texture_downloader_set_texture, "gdk_texture_downloader_set_texture", libs);
 
@@ -3152,6 +3483,8 @@ shared static this()
   gidLink(cast(void**)&gdk_toplevel_begin_move, "gdk_toplevel_begin_move", libs);
   gidLink(cast(void**)&gdk_toplevel_begin_resize, "gdk_toplevel_begin_resize", libs);
   gidLink(cast(void**)&gdk_toplevel_focus, "gdk_toplevel_focus", libs);
+  gidLink(cast(void**)&gdk_toplevel_get_capabilities, "gdk_toplevel_get_capabilities", libs);
+  gidLink(cast(void**)&gdk_toplevel_get_gravity, "gdk_toplevel_get_gravity", libs);
   gidLink(cast(void**)&gdk_toplevel_get_state, "gdk_toplevel_get_state", libs);
   gidLink(cast(void**)&gdk_toplevel_inhibit_system_shortcuts, "gdk_toplevel_inhibit_system_shortcuts", libs);
   gidLink(cast(void**)&gdk_toplevel_lower, "gdk_toplevel_lower", libs);
@@ -3160,6 +3493,7 @@ shared static this()
   gidLink(cast(void**)&gdk_toplevel_restore_system_shortcuts, "gdk_toplevel_restore_system_shortcuts", libs);
   gidLink(cast(void**)&gdk_toplevel_set_decorated, "gdk_toplevel_set_decorated", libs);
   gidLink(cast(void**)&gdk_toplevel_set_deletable, "gdk_toplevel_set_deletable", libs);
+  gidLink(cast(void**)&gdk_toplevel_set_gravity, "gdk_toplevel_set_gravity", libs);
   gidLink(cast(void**)&gdk_toplevel_set_icon_list, "gdk_toplevel_set_icon_list", libs);
   gidLink(cast(void**)&gdk_toplevel_set_modal, "gdk_toplevel_set_modal", libs);
   gidLink(cast(void**)&gdk_toplevel_set_startup_id, "gdk_toplevel_set_startup_id", libs);
@@ -3185,6 +3519,7 @@ shared static this()
   gidLink(cast(void**)&gdk_toplevel_layout_unref, "gdk_toplevel_layout_unref", libs);
 
   // ToplevelSize
+  gidLink(cast(void**)&gdk_toplevel_size_get_type, "gdk_toplevel_size_get_type", libs);
   gidLink(cast(void**)&gdk_toplevel_size_get_bounds, "gdk_toplevel_size_get_bounds", libs);
   gidLink(cast(void**)&gdk_toplevel_size_set_min_size, "gdk_toplevel_size_set_min_size", libs);
   gidLink(cast(void**)&gdk_toplevel_size_set_shadow_width, "gdk_toplevel_size_set_shadow_width", libs);
@@ -3218,7 +3553,6 @@ shared static this()
   gidLink(cast(void**)&gdk_content_register_serializer, "gdk_content_register_serializer", libs);
   gidLink(cast(void**)&gdk_content_serialize_async, "gdk_content_serialize_async", libs);
   gidLink(cast(void**)&gdk_content_serialize_finish, "gdk_content_serialize_finish", libs);
-  gidLink(cast(void**)&gdk_drag_surface_size_get_type, "gdk_drag_surface_size_get_type", libs);
   gidLink(cast(void**)&gdk_events_get_angle, "gdk_events_get_angle", libs);
   gidLink(cast(void**)&gdk_events_get_center, "gdk_events_get_center", libs);
   gidLink(cast(void**)&gdk_events_get_distance, "gdk_events_get_distance", libs);
@@ -3236,7 +3570,6 @@ shared static this()
   gidLink(cast(void**)&gdk_pixbuf_get_from_surface, "gdk_pixbuf_get_from_surface", libs);
   gidLink(cast(void**)&gdk_pixbuf_get_from_texture, "gdk_pixbuf_get_from_texture", libs);
   gidLink(cast(void**)&gdk_set_allowed_backends, "gdk_set_allowed_backends", libs);
-  gidLink(cast(void**)&gdk_toplevel_size_get_type, "gdk_toplevel_size_get_type", libs);
   gidLink(cast(void**)&gdk_unicode_to_keyval, "gdk_unicode_to_keyval", libs);
 
   // DmabufError

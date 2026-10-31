@@ -117,8 +117,10 @@ struct VideoFormat
   }
 
   /**
-      Returns a string containing a descriptive name for
-      the #GstVideoFormat if there is one, or NULL otherwise.
+      Returns a string containing a descriptive name for the #GstVideoFormat.
+      
+      Since 1.26 this can also be used with [gstvideo.types.VideoFormat.Unknown], previous
+      versions were printing a critical warning and returned null.
   
       Params:
         format = a #GstVideoFormat video format

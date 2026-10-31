@@ -3,6 +3,7 @@ module gstvideo.video_converter;
 
 public import gid.basictypes;
 import gid.gid;
+import gst.buffer;
 import gst.structure;
 import gstvideo.c.functions;
 import gstvideo.c.types;
@@ -110,6 +111,21 @@ class VideoConverter
   {
     bool _retval;
     _retval = cast(bool)gst_video_converter_set_config(cast(GstVideoConverter*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Transform the GstMeta of src into dest using convert.
+  
+      Params:
+        src = a #GstBuffer
+        dest = a writable #GstBuffer
+      Returns: TRUE if any meta was copied
+  */
+  bool transformMetas(gst.buffer.Buffer src, gst.buffer.Buffer dest) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_video_converter_transform_metas(cast(GstVideoConverter*)this._cPtr, src ? cast(GstBuffer*)src._cPtr(No.Dup) : null, dest ? cast(GstBuffer*)dest._cPtr(No.Dup) : null);
     return _retval;
   }
 }

@@ -26,8 +26,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.column_view.ColumnView] presents a large dynamic list of items using multiple columns
-    with headers.
+    Presents a large dynamic list of items using multiple columns with headers.
     
     [gtk.column_view.ColumnView] uses the factories of its columns to generate a cell widget for
     each column, for each visible item and displays them together as the row for
@@ -160,6 +159,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `headerFactory` property.
       Returns: Factory for creating header widgets.
+        
+        The factory must be for configuring [gtk.list_header.ListHeader] objects.
   */
   @property gtk.list_item_factory.ListItemFactory headerFactory() nothrow
   {
@@ -170,6 +171,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `headerFactory` property.
       Params:
         propval = Factory for creating header widgets.
+          
+          The factory must be for configuring [gtk.list_header.ListHeader] objects.
   */
   @property void headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
@@ -217,6 +220,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `rowFactory` property.
       Returns: The factory used for configuring rows.
+        
+        The factory must be for configuring [gtk.column_view_row.ColumnViewRow] objects.
   */
   @property gtk.list_item_factory.ListItemFactory rowFactory() nothrow
   {
@@ -227,6 +232,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Set `rowFactory` property.
       Params:
         propval = The factory used for configuring rows.
+          
+          The factory must be for configuring [gtk.column_view_row.ColumnViewRow] objects.
   */
   @property void rowFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
@@ -341,8 +348,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Appends the column to the end of the columns in self.
   
       Params:
-        column = a [gtk.column_view_column.ColumnViewColumn] that hasn't been added to a
-            [gtk.column_view.ColumnView] yet
+        column = a column that hasn't been added to a [gtk.column_view.ColumnView] yet
   */
   void appendColumn(gtk.column_view_column.ColumnViewColumn column) nothrow
   {
@@ -354,7 +360,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       
       This list is constant over the lifetime of self and can be used to
       monitor changes to the columns of self by connecting to the
-      ::items-changed signal.
+      [gio.list_model.ListModel.itemsChanged] signal.
       Returns: The list managing the columns
   */
   gio.list_model.ListModel getColumns() nothrow
@@ -424,8 +430,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-      Returns whether the list should show separators
-      between columns.
+      Returns whether the list should show separators between columns.
       Returns: true if the list shows column separators
   */
   bool getShowColumnSeparators() nothrow
@@ -436,8 +441,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-      Returns whether the list should show separators
-      between rows.
+      Returns whether the list should show separators between rows.
       Returns: true if the list shows separators
   */
   bool getShowRowSeparators() nothrow
@@ -508,7 +512,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Params:
         position = the position to insert column at
-        column = the [gtk.column_view_column.ColumnViewColumn] to insert
+        column = the column to insert
   */
   void insertColumn(uint position, gtk.column_view_column.ColumnViewColumn column) nothrow
   {
@@ -519,7 +523,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Removes the column from the list of columns of self.
   
       Params:
-        column = a [gtk.column_view_column.ColumnViewColumn] that's part of self
+        column = a column that's part of self
   */
   void removeColumn(gtk.column_view_column.ColumnViewColumn column) nothrow
   {
@@ -530,13 +534,14 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Scroll to the row at the given position - or cell if a column is
       given - and performs the actions specified in flags.
       
-      This function works no matter if the listview is shown or focused.
+      This function works no matter if the columnview is shown or focused.
       If it isn't, then the changes will take effect once that happens.
   
       Params:
-        pos = position of the item
+        pos = position of the item. Must be less than the number of
+            items in the view.
         column = The column to scroll to
-            or null to not scroll columns.
+            or `NULL` to not scroll columns
         flags = actions to perform
         scroll = details of how to perform
             the scroll operation or null to scroll into view
@@ -550,7 +555,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Sets whether selections can be changed by dragging with the mouse.
   
       Params:
-        enableRubberband = true to enable rubberband selection
+        enableRubberband = whether to enable rubberband selection
   */
   void setEnableRubberband(bool enableRubberband) nothrow
   {
@@ -558,10 +563,10 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-      Sets the [gtk.list_item_factory.ListItemFactory] to use for populating the
+      Sets the factory to use for populating the
       [gtk.list_header.ListHeader] objects used in section headers.
       
-      If this factory is set to null, the list will not show
+      If this factory is set to `NULL`, the list will not show
       section headers.
   
       Params:
@@ -597,13 +602,16 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-      Sets the factory used for configuring rows. The factory must be for configuring
-      [gtk.column_view_row.ColumnViewRow] objects.
+      Sets the factory used for configuring rows.
       
-      If this factory is not set - which is the default - then the defaults will be used.
+      The factory must be for configuring [gtk.column_view_row.ColumnViewRow] objects.
       
-      This factory is not used to set the widgets displayed in the individual cells. For
-      that see `methodGtkColumnViewColumn.set_factory` and `classGtkColumnViewCell`.
+      If this factory is not set - which is the default - then the defaults
+      will be used.
+      
+      This factory is not used to set the widgets displayed in the individual
+      cells. For that see `methodGtkColumnViewColumn.set_factory` and
+      `classGtkColumnViewCell`.
   
       Params:
         factory = The row factory
@@ -614,11 +622,10 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-      Sets whether the list should show separators
-      between columns.
+      Sets whether the list should show separators between columns.
   
       Params:
-        showColumnSeparators = true to show column separators
+        showColumnSeparators = whether to show column separators
   */
   void setShowColumnSeparators(bool showColumnSeparators) nothrow
   {
@@ -626,11 +633,10 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-      Sets whether the list should show separators
-      between rows.
+      Sets whether the list should show separators between rows.
   
       Params:
-        showRowSeparators = true to show row separators
+        showRowSeparators = whether to show row separators
   */
   void setShowRowSeparators(bool showRowSeparators) nothrow
   {
@@ -642,7 +648,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       selected on hover.
   
       Params:
-        singleClickActivate = true to activate items on single click
+        singleClickActivate = whether to activate items on single click
   */
   void setSingleClickActivate(bool singleClickActivate) nothrow
   {
@@ -650,7 +656,11 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-      Sets the behavior of the <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> keys.
+      Sets the <kbd>Tab</kbd> key behavior.
+      
+      This influences how the <kbd>Tab</kbd> and
+      <kbd>Shift</kbd>+<kbd>Tab</kbd> keys move the
+      focus in the columnview.
   
       Params:
         tabBehavior = The desired tab behavior
@@ -672,10 +682,10 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       and [gtk.column_view_column.ColumnViewColumn.setSorter] has been called
       on column to associate a sorter with the column.
       
-      If column is null, the view will be unsorted.
+      If column is unset, the view will be unsorted.
   
       Params:
-        column = the [gtk.column_view_column.ColumnViewColumn] to sort by
+        column = the column to sort by
         direction = the direction to sort in
   */
   void sortByColumn(gtk.column_view_column.ColumnViewColumn column, gtk.types.SortType direction) nothrow
@@ -760,6 +770,8 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
       Set `headerFactory` property.
       Params:
         propval = Factory for creating header widgets.
+          
+          The factory must be for configuring [gtk.list_header.ListHeader] objects.
       Returns: Builder instance for fluent chaining
   */
   T headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
@@ -793,6 +805,8 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
       Set `rowFactory` property.
       Params:
         propval = The factory used for configuring rows.
+          
+          The factory must be for configuring [gtk.column_view_row.ColumnViewRow] objects.
       Returns: Builder instance for fluent chaining
   */
   T rowFactory(gtk.list_item_factory.ListItemFactory propval) nothrow

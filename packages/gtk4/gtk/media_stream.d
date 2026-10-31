@@ -14,7 +14,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.media_stream.MediaStream] is the integration point for media playback inside GTK.
+    The integration point for media playback inside GTK.
     
     GTK provides an implementation of the [gtk.media_stream.MediaStream] interface that
     is called [gtk.media_file.MediaFile].

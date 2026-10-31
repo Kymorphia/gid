@@ -9,7 +9,11 @@ import gsk.c.types;
 import gsk.renderer;
 import gsk.types;
 
-/** */
+/**
+    A GL based renderer.
+    
+    See [gsk.renderer.Renderer].
+*/
 class NglRenderer : gsk.renderer.Renderer
 {
 
@@ -47,7 +51,12 @@ class NglRenderer : gsk.renderer.Renderer
     return new NglRendererGidBuilder;
   }
 
-  /** */
+  /**
+      Same as [gsk.glrenderer.GLRenderer.new_].
+      Returns: a GL renderer
+  
+      Deprecated: Use [gsk.glrenderer.GLRenderer.new_]
+  */
   this() nothrow
   {
     GskRenderer* _cretval;

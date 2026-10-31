@@ -255,9 +255,18 @@ class DeviceMonitor : gst.object.ObjectWrap
   }
 
   /**
-      Starts monitoring the devices, one this has succeeded, the
+      Starts monitoring the devices, once this has succeeded, the
       [gst.types.MessageType.DeviceAdded] and [gst.types.MessageType.DeviceRemoved] messages
       will be emitted on the bus when the list of devices changes.
+      
+      Since 1.28, device providers are started asynchronously and
+      [gst.types.MessageType.DeviceMonitorStarted] will be emitted once the initial list
+      of devices has been populated, signalling that monitor startup has
+      completed.
+      
+      The monitor will hold a strong reference to itself while it is populating
+      devices asynchronously, so you must call [gst.device_monitor.DeviceMonitor.stop] before
+      unreffing if you want monitoring to stop immediately.
       Returns: true if the device monitoring could be started, i.e. at least a
             single device provider was started successfully.
   */

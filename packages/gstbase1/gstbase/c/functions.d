@@ -57,6 +57,7 @@ __gshared extern(C) nothrow
   GstClockTime function(GstAggregator* self) c_gst_aggregator_get_latency; ///
   gboolean function(GstAggregator* self) c_gst_aggregator_negotiate; ///
   GstSample* function(GstAggregator* self, GstAggregatorPad* pad) c_gst_aggregator_peek_next_sample; ///
+  gboolean function(GstAggregator* aggregator, GstEvent* event) c_gst_aggregator_push_src_event; ///
   void function(GstAggregator* self, GstClockTime pts, GstClockTime dts, GstClockTime duration, GstStructure* info) c_gst_aggregator_selected_samples; ///
   void function(GstAggregator* self, gboolean forceLive) c_gst_aggregator_set_force_live; ///
   void function(GstAggregator* self, gboolean ignore) c_gst_aggregator_set_ignore_inactive_pads; ///
@@ -568,6 +569,9 @@ alias gst_aggregator_negotiate = c_gst_aggregator_negotiate;
 
 /** */
 alias gst_aggregator_peek_next_sample = c_gst_aggregator_peek_next_sample;
+
+/** */
+alias gst_aggregator_push_src_event = c_gst_aggregator_push_src_event;
 
 /** */
 alias gst_aggregator_selected_samples = c_gst_aggregator_selected_samples;
@@ -1698,6 +1702,7 @@ shared static this()
   gidLink(cast(void**)&gst_aggregator_get_latency, "gst_aggregator_get_latency", libs);
   gidLink(cast(void**)&gst_aggregator_negotiate, "gst_aggregator_negotiate", libs);
   gidLink(cast(void**)&gst_aggregator_peek_next_sample, "gst_aggregator_peek_next_sample", libs);
+  gidLink(cast(void**)&gst_aggregator_push_src_event, "gst_aggregator_push_src_event", libs);
   gidLink(cast(void**)&gst_aggregator_selected_samples, "gst_aggregator_selected_samples", libs);
   gidLink(cast(void**)&gst_aggregator_set_force_live, "gst_aggregator_set_force_live", libs);
   gidLink(cast(void**)&gst_aggregator_set_ignore_inactive_pads, "gst_aggregator_set_ignore_inactive_pads", libs);

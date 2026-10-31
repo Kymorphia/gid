@@ -17,8 +17,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A widget that allows to bypass gsk rendering for its child by passing the content
-    directly to the compositor.
+    Bypasses gsk rendering by passing the content of its child directly to the compositor.
     
     Graphics offload is an optimization to reduce overhead and battery use that is
     most useful for video content. It only works on some platforms and in certain
@@ -92,6 +91,25 @@ class GraphicsOffload : gtk.widget.Widget
   }
 
   /**
+      Get `blackBackground` property.
+      Returns: Whether to draw a black background.
+  */
+  @property bool blackBackground() nothrow
+  {
+    return getBlackBackground();
+  }
+
+  /**
+      Set `blackBackground` property.
+      Params:
+        propval = Whether to draw a black background.
+  */
+  @property void blackBackground(bool propval) nothrow
+  {
+    setBlackBackground(propval);
+  }
+
+  /**
       Get `child` property.
       Returns: The child widget.
   */
@@ -140,7 +158,20 @@ class GraphicsOffload : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Returns whether the widget draws a black background.
+      
+      See [gtk.graphics_offload.GraphicsOffload.setBlackBackground].
+      Returns: `TRUE` if black background is drawn
+  */
+  bool getBlackBackground() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_graphics_offload_get_black_background(cast(GtkGraphicsOffload*)this._cPtr);
+    return _retval;
   }
 
   /**
@@ -165,6 +196,30 @@ class GraphicsOffload : gtk.widget.Widget
     _cretval = gtk_graphics_offload_get_enabled(cast(GtkGraphicsOffload*)this._cPtr);
     gtk.types.GraphicsOffloadEnabled _retval = cast(gtk.types.GraphicsOffloadEnabled)_cretval;
     return _retval;
+  }
+
+  /**
+      Sets whether this GtkGraphicsOffload widget will draw a black
+      background.
+      
+      A main use case for this is **_letterboxing_** where black bars are
+      visible next to the content if the aspect ratio of the content does
+      not match the dimensions of the monitor.
+      
+      Using this property for letterboxing instead of CSS allows compositors
+      to show content with maximum efficiency, using direct scanout to avoid
+      extra copies in the compositor.
+      
+      On Wayland, this is implemented using the
+      [single-pixel buffer](https://wayland.app/protocols/single-pixel-buffer-v1)
+      protocol.
+  
+      Params:
+        value = whether to draw a black background behind the content
+  */
+  void setBlackBackground(bool value) nothrow
+  {
+    gtk_graphics_offload_set_black_background(cast(GtkGraphicsOffload*)this._cPtr, value);
   }
 
   /**
@@ -195,6 +250,17 @@ class GraphicsOffload : gtk.widget.Widget
 class GraphicsOffloadGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
+
+  /**
+      Set `blackBackground` property.
+      Params:
+        propval = Whether to draw a black background.
+      Returns: Builder instance for fluent chaining
+  */
+  T blackBackground(bool propval) nothrow
+  {
+    return setProperty("black-background", propval);
+  }
 
   /**
       Set `child` property.

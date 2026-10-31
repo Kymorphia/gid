@@ -218,8 +218,8 @@ class RTSPConnection
 
   /**
       Retrieve the IP address of the other end of conn.
-      Returns: The IP address as a string. this value remains valid until the
-        connection is closed.
+      Returns: The IP address as a string.
+        This value remains valid until the connection is closed.
   */
   string getIp() nothrow
   {
@@ -347,7 +347,7 @@ class RTSPConnection
   {
     GstRTSPUrl* _cretval;
     _cretval = gst_rtsp_connection_get_url(cast(const(GstRTSPConnection)*)this._cPtr);
-    auto _retval = _cretval ? new gstrtsp.rtspurl.RTSPUrl(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstrtsp.rtspurl.RTSPUrl(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

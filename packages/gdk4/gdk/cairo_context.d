@@ -11,8 +11,7 @@ import gid.gid;
 import gobject.gid_builder;
 
 /**
-    [gdk.cairo_context.CairoContext] is an object representing the platform-specific
-    draw context.
+    Represents the platform-specific draw context.
     
     [gdk.cairo_context.CairoContext]s are created for a surface using
     [gdk.surface.Surface.createCairoContext], and the context
@@ -66,6 +65,9 @@ class CairoContext : gdk.draw_context.DrawContext
       [gdk.draw_context.DrawContext.endFrame] is called.
       Returns: a Cairo context
           to draw on `GdkSurface
+  
+      Deprecated: Drawing content with Cairo should be done via
+          Cairo rendernodes, not by using renderers.
   */
   cairo.context.Context cairoCreate() nothrow
   {

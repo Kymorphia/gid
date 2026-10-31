@@ -15,6 +15,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.types;
 import gtk.widget;
 
 /**
@@ -44,8 +45,6 @@ import gtk.widget;
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">280</property>
-      <property name="height-request">200</property>
       <property name="default-width">800</property>
       <property name="default-height">800</property>
       <child>
@@ -355,6 +354,37 @@ class NavigationSplitView : gtk.widget.Widget
   }
 
   /**
+      Get `sidebarPosition` property.
+      Returns: The sidebar position.
+        
+        If set to [gtk.types.PackType.Start], the sidebar is displayed before the
+        content, and the sidebar will be the root page when collapsed.
+        
+        If set to [gtk.types.PackType.End], the sidebar is displayed after the
+        content, and the content will be the root page.
+  */
+  @property gtk.types.PackType sidebarPosition() nothrow
+  {
+    return getSidebarPosition();
+  }
+
+  /**
+      Set `sidebarPosition` property.
+      Params:
+        propval = The sidebar position.
+          
+          If set to [gtk.types.PackType.Start], the sidebar is displayed before the
+          content, and the sidebar will be the root page when collapsed.
+          
+          If set to [gtk.types.PackType.End], the sidebar is displayed after the
+          content, and the content will be the root page.
+  */
+  @property void sidebarPosition(gtk.types.PackType propval) nothrow
+  {
+    setSidebarPosition(propval);
+  }
+
+  /**
       Get `sidebarWidthFraction` property.
       Returns: The preferred sidebar width as a fraction of the total width.
         
@@ -492,6 +522,18 @@ class NavigationSplitView : gtk.widget.Widget
   }
 
   /**
+      Gets the sidebar position for self.
+      Returns: the sidebar position for self
+  */
+  gtk.types.PackType getSidebarPosition() nothrow
+  {
+    GtkPackType _cretval;
+    _cretval = adw_navigation_split_view_get_sidebar_position(cast(AdwNavigationSplitView*)this._cPtr);
+    gtk.types.PackType _retval = cast(gtk.types.PackType)_cretval;
+    return _retval;
+  }
+
+  /**
       Gets the preferred sidebar width fraction for self.
       Returns: the preferred width fraction
   */
@@ -602,6 +644,23 @@ class NavigationSplitView : gtk.widget.Widget
   void setSidebar(adw.navigation_page.NavigationPage sidebar = null) nothrow
   {
     adw_navigation_split_view_set_sidebar(cast(AdwNavigationSplitView*)this._cPtr, sidebar ? cast(AdwNavigationPage*)sidebar._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the sidebar position for self.
+      
+      If set to [gtk.types.PackType.Start], the sidebar is displayed before the
+      content, and the sidebar will be the root page when collapsed.
+      
+      If set to [gtk.types.PackType.End], the sidebar is displayed after the
+      content, and the content will be the root page.
+  
+      Params:
+        position = the new position
+  */
+  void setSidebarPosition(gtk.types.PackType position) nothrow
+  {
+    adw_navigation_split_view_set_sidebar_position(cast(AdwNavigationSplitView*)this._cPtr, position);
   }
 
   /**
@@ -731,6 +790,23 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   T sidebar(adw.navigation_page.NavigationPage propval) nothrow
   {
     return setProperty("sidebar", propval);
+  }
+
+  /**
+      Set `sidebarPosition` property.
+      Params:
+        propval = The sidebar position.
+          
+          If set to [gtk.types.PackType.Start], the sidebar is displayed before the
+          content, and the sidebar will be the root page when collapsed.
+          
+          If set to [gtk.types.PackType.End], the sidebar is displayed after the
+          content, and the content will be the root page.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarPosition(gtk.types.PackType propval) nothrow
+  {
+    return setProperty("sidebar-position", propval);
   }
 
   /**

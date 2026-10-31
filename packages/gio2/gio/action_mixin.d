@@ -22,7 +22,7 @@ public import gobject.gid_builder;
     parameter type (which is given at construction time).
     
     An action may optionally have a state, in which case the state may be
-    set with [gio.action.Action.changeState]. This call takes a #GVariant. The
+    set with [gio.action.Action.changeState]. This call takes a [glib.variant.Variant]. The
     correct type for the state is determined by a static state type
     (which is given at construction time).
     
@@ -61,7 +61,7 @@ template ActionT()
   /**
       Get `name` property.
       Returns: The name of the action.  This is mostly meaningful for identifying
-        the action once it has been added to a #GActionGroup. It is immutable.
+        the action once it has been added to a [gio.action_group.ActionGroup]. It is immutable.
   */
   @property string name() nothrow
   {
@@ -71,7 +71,7 @@ template ActionT()
   /**
       Get `parameterType` property.
       Returns: The type of the parameter that must be given when activating the
-        action. This is immutable, and may be null if no parameter is needed when
+        action. This is immutable, and may be `NULL` if no parameter is needed when
         activating the action.
   */
   @property glib.variant_type.VariantType parameterType() nothrow
@@ -81,7 +81,7 @@ template ActionT()
 
   /**
       Get `state` property.
-      Returns: The state of the action, or null if the action is stateless.
+      Returns: The state of the action, or `NULL` if the action is stateless.
   */
   @property glib.variant.Variant state() nothrow
   {
@@ -90,7 +90,7 @@ template ActionT()
 
   /**
       Get `stateType` property.
-      Returns: The #GVariantType of the state that the action has, or null if the
+      Returns: The [glib.variant_type.VariantType] of the state that the action has, or `NULL` if the
         action is stateless. This is immutable.
   */
   @property glib.variant_type.VariantType stateType() nothrow
@@ -106,9 +106,9 @@ template ActionT()
       
       parameter must be the correct type of parameter for the action (ie:
       the parameter type given at construction time).  If the parameter
-      type was null then parameter must also be null.
+      type was `NULL` then parameter must also be `NULL`.
       
-      If the parameter GVariant is floating, it is consumed.
+      If the parameter [glib.variant.Variant] is floating, it is consumed.
   
       Params:
         parameter = the parameter to the activation
@@ -128,7 +128,7 @@ template ActionT()
       its state or may change its state to something other than value.
       See [gio.action.Action.getStateHint].
       
-      If the value GVariant is floating, it is consumed.
+      If the value [glib.variant.Variant] is floating, it is consumed.
   
       Params:
         value = the new state
@@ -168,11 +168,12 @@ template ActionT()
       Queries the type of the parameter that must be given when activating
       action.
       
-      When activating the action using [gio.action.Action.activate], the #GVariant
-      given to that function must be of the type returned by this function.
+      When activating the action using [gio.action.Action.activate], the
+      [glib.variant.Variant] given to that function must be of the type returned by
+      this function.
       
-      In the case that this function returns null, you must not give any
-      #GVariant, but null instead.
+      In the case that this function returns `NULL`, you must not give any
+      [glib.variant.Variant], but `NULL` instead.
       Returns: the parameter type
   */
   override glib.variant_type.VariantType getParameterType() nothrow
@@ -186,11 +187,11 @@ template ActionT()
   /**
       Queries the current state of action.
       
-      If the action is not stateful then null will be returned.  If the
+      If the action is not stateful then `NULL` will be returned.  If the
       action is stateful then the type of the return value is the type
       given by [gio.action.Action.getStateType].
       
-      The return value (if non-null) should be freed with
+      The return value (if non-`NULL`) should be freed with
       [glib.variant.Variant.unref] when it is no longer required.
       Returns: the current state of the action
   */
@@ -206,12 +207,12 @@ template ActionT()
       Requests a hint about the valid range of values for the state of
       action.
       
-      If null is returned it either means that the action is not stateful
+      If `NULL` is returned it either means that the action is not stateful
       or that there is no hint about the valid range of values for the
       state of the action.
       
-      If a #GVariant array is returned then each item in the array is a
-      possible value for the state.  If a #GVariant pair (ie: two-tuple) is
+      If a [glib.variant.Variant] array is returned then each item in the array is a
+      possible value for the state.  If a [glib.variant.Variant] pair (ie: two-tuple) is
       returned then the tuple specifies the inclusive lower and upper bound
       of valid values for the state.
       
@@ -219,7 +220,7 @@ template ActionT()
       have a state value outside of the hinted range and setting a value
       within the range may fail.
       
-      The return value (if non-null) should be freed with
+      The return value (if non-`NULL`) should be freed with
       [glib.variant.Variant.unref] when it is no longer required.
       Returns: the state range hint
   */
@@ -236,14 +237,14 @@ template ActionT()
       
       If the action is stateful (e.g. created with
       [gio.simple_action.SimpleAction.newStateful]) then this function returns the
-      #GVariantType of the state.  This is the type of the initial value
+      [glib.variant_type.VariantType] of the state.  This is the type of the initial value
       given as the state. All calls to [gio.action.Action.changeState] must give a
-      #GVariant of this type and [gio.action.Action.getState] will return a
-      #GVariant of the same type.
+      [glib.variant.Variant] of this type and [gio.action.Action.getState] will return a
+      [glib.variant.Variant] of the same type.
       
       If the action is not stateful (e.g. created with [gio.simple_action.SimpleAction.new_])
-      then this function will return null. In that case, [gio.action.Action.getState]
-      will return null and you must not call [gio.action.Action.changeState].
+      then this function will return `NULL`. In that case, [gio.action.Action.getState]
+      will return `NULL` and you must not call [gio.action.Action.changeState].
       Returns: the state type, if the action is stateful
   */
   override glib.variant_type.VariantType getStateType() nothrow

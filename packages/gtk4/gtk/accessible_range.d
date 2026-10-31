@@ -10,11 +10,15 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    This interface describes ranged controls, e.g. controls which have a single
-    value within an allowed range and that can optionally be changed by the user.
+    An interface for accessible objects containing a numeric value.
     
-    This interface is expected to be implemented by controls using the following
-    roles:
+    [gtk.accessible_range.AccessibleRange] describes ranged controls for Assistive Technologies.
+    
+    Ranged controls have a single value within an allowed range that can
+    optionally be changed by the user.
+    
+    This interface is expected to be implemented by controls using the
+    following roles:
     
     - [gtk.types.AccessibleRole.Meter]
     - [gtk.types.AccessibleRole.ProgressBar]

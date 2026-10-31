@@ -659,7 +659,9 @@ class ObjectWrap : gobject.object.ObjectWrap
   /**
       Sets the help text associated with the accessible. This can be used to
       expose context-sensitive information to help a user understand how to
-      interact with the object.
+      interact with the object. You can't set the help text to NULL.
+      This is reserved for the initial value. If you want to set the name to
+      an empty value, you can use "".
   
       Params:
         helpText = a character string to be set as the accessible's help text

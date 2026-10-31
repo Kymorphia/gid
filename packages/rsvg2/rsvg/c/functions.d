@@ -34,6 +34,7 @@ __gshared extern(C) nothrow
   gboolean function(RsvgHandle* handle, double* outWidth, double* outHeight) c_rsvg_handle_get_intrinsic_size_in_pixels; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_metadata; ///
   GdkPixbuf* function(RsvgHandle* handle) c_rsvg_handle_get_pixbuf; ///
+  GdkPixbuf* function(RsvgHandle* handle, GError** _err) c_rsvg_handle_get_pixbuf_and_error; ///
   GdkPixbuf* function(RsvgHandle* handle, const(char)* id) c_rsvg_handle_get_pixbuf_sub; ///
   gboolean function(RsvgHandle* handle, RsvgPositionData* positionData, const(char)* id) c_rsvg_handle_get_position_sub; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_title; ///
@@ -47,6 +48,7 @@ __gshared extern(C) nothrow
   gboolean function(RsvgHandle* handle, cairo_t* cr, const(char)* id, const(RsvgRectangle)* viewport, GError** _err) c_rsvg_handle_render_layer; ///
   void function(RsvgHandle* handle, GFile* baseFile) c_rsvg_handle_set_base_gfile; ///
   void function(RsvgHandle* handle, const(char)* baseUri) c_rsvg_handle_set_base_uri; ///
+  void function(RsvgHandle* handle, GCancellable* cancellable) c_rsvg_handle_set_cancellable_for_rendering; ///
   void function(RsvgHandle* handle, double dpi) c_rsvg_handle_set_dpi; ///
   void function(RsvgHandle* handle, double dpiX, double dpiY) c_rsvg_handle_set_dpi_x_y; ///
   void function(RsvgHandle* handle, RsvgSizeFunc sizeFunc, void* userData, GDestroyNotify userDataDestroy) c_rsvg_handle_set_size_callback; ///
@@ -129,6 +131,9 @@ alias rsvg_handle_get_metadata = c_rsvg_handle_get_metadata;
 alias rsvg_handle_get_pixbuf = c_rsvg_handle_get_pixbuf;
 
 /** */
+alias rsvg_handle_get_pixbuf_and_error = c_rsvg_handle_get_pixbuf_and_error;
+
+/** */
 alias rsvg_handle_get_pixbuf_sub = c_rsvg_handle_get_pixbuf_sub;
 
 /** */
@@ -166,6 +171,9 @@ alias rsvg_handle_set_base_gfile = c_rsvg_handle_set_base_gfile;
 
 /** */
 alias rsvg_handle_set_base_uri = c_rsvg_handle_set_base_uri;
+
+/** */
+alias rsvg_handle_set_cancellable_for_rendering = c_rsvg_handle_set_cancellable_for_rendering;
 
 /** */
 alias rsvg_handle_set_dpi = c_rsvg_handle_set_dpi;
@@ -243,6 +251,7 @@ shared static this()
   gidLink(cast(void**)&rsvg_handle_get_intrinsic_size_in_pixels, "rsvg_handle_get_intrinsic_size_in_pixels", libs);
   gidLink(cast(void**)&rsvg_handle_get_metadata, "rsvg_handle_get_metadata", libs);
   gidLink(cast(void**)&rsvg_handle_get_pixbuf, "rsvg_handle_get_pixbuf", libs);
+  gidLink(cast(void**)&rsvg_handle_get_pixbuf_and_error, "rsvg_handle_get_pixbuf_and_error", libs);
   gidLink(cast(void**)&rsvg_handle_get_pixbuf_sub, "rsvg_handle_get_pixbuf_sub", libs);
   gidLink(cast(void**)&rsvg_handle_get_position_sub, "rsvg_handle_get_position_sub", libs);
   gidLink(cast(void**)&rsvg_handle_get_title, "rsvg_handle_get_title", libs);
@@ -256,6 +265,7 @@ shared static this()
   gidLink(cast(void**)&rsvg_handle_render_layer, "rsvg_handle_render_layer", libs);
   gidLink(cast(void**)&rsvg_handle_set_base_gfile, "rsvg_handle_set_base_gfile", libs);
   gidLink(cast(void**)&rsvg_handle_set_base_uri, "rsvg_handle_set_base_uri", libs);
+  gidLink(cast(void**)&rsvg_handle_set_cancellable_for_rendering, "rsvg_handle_set_cancellable_for_rendering", libs);
   gidLink(cast(void**)&rsvg_handle_set_dpi, "rsvg_handle_set_dpi", libs);
   gidLink(cast(void**)&rsvg_handle_set_dpi_x_y, "rsvg_handle_set_dpi_x_y", libs);
   gidLink(cast(void**)&rsvg_handle_set_size_callback, "rsvg_handle_set_size_callback", libs);

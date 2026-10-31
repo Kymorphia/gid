@@ -32,11 +32,11 @@ import soup.websocket_extension;
     WebSocket handshake, and `func@websocket_server_process_handshake` for
     handling the server side.)
     
-    #SoupWebsocketConnection handles the details of WebSocket communication. You
+    [soup.websocket_connection.WebsocketConnection] handles the details of WebSocket communication. You
     can use [soup.websocket_connection.WebsocketConnection.sendText] and
     [soup.websocket_connection.WebsocketConnection.sendBinary] to send data, and the
     [soup.websocket_connection.WebsocketConnection.message] signal to receive data.
-    (#SoupWebsocketConnection currently only supports asynchronous I/O.)
+    ([soup.websocket_connection.WebsocketConnection] currently only supports asynchronous I/O.)
 */
 class WebsocketConnection : gobject.object.ObjectWrap
 {
@@ -131,6 +131,35 @@ class WebsocketConnection : gobject.object.ObjectWrap
   }
 
   /**
+      Get `keepalivePongTimeout` property.
+      Returns: Timeout in seconds for when the absence of a pong from a keepalive
+        ping is assumed to be caused by a faulty connection. The WebSocket
+        will be transitioned to a closed state when this happens.
+        
+        If set to 0 then the absence of pongs from keepalive pings is
+        ignored.
+  */
+  @property uint keepalivePongTimeout() nothrow
+  {
+    return getKeepalivePongTimeout();
+  }
+
+  /**
+      Set `keepalivePongTimeout` property.
+      Params:
+        propval = Timeout in seconds for when the absence of a pong from a keepalive
+          ping is assumed to be caused by a faulty connection. The WebSocket
+          will be transitioned to a closed state when this happens.
+          
+          If set to 0 then the absence of pongs from keepalive pings is
+          ignored.
+  */
+  @property void keepalivePongTimeout(uint propval) nothrow
+  {
+    setKeepalivePongTimeout(propval);
+  }
+
+  /**
       Get `maxIncomingPayloadSize` property.
       Returns: The maximum payload size for incoming packets.
         
@@ -194,7 +223,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a #SoupWebsocketConnection on stream with the given active extensions.
+      Creates a [soup.websocket_connection.WebsocketConnection] on stream with the given active extensions.
       
       This should be called after completing the handshake to begin using the WebSocket
       protocol.
@@ -316,6 +345,17 @@ class WebsocketConnection : gobject.object.ObjectWrap
   {
     uint _retval;
     _retval = soup_websocket_connection_get_keepalive_interval(cast(SoupWebsocketConnection*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the keepalive pong timeout in seconds or 0 if disabled.
+      Returns: the keepalive pong timeout.
+  */
+  uint getKeepalivePongTimeout() nothrow
+  {
+    uint _retval;
+    _retval = soup_websocket_connection_get_keepalive_pong_timeout(cast(SoupWebsocketConnection*)this._cPtr);
     return _retval;
   }
 
@@ -448,6 +488,20 @@ class WebsocketConnection : gobject.object.ObjectWrap
   void setKeepaliveInterval(uint interval) nothrow
   {
     soup_websocket_connection_set_keepalive_interval(cast(SoupWebsocketConnection*)this._cPtr, interval);
+  }
+
+  /**
+      Set the timeout in seconds for when the absence of a pong from a keepalive
+      ping is assumed to be caused by a faulty connection.
+      
+      If set to 0 then the absence of pongs from keepalive pings is ignored.
+  
+      Params:
+        pongTimeout = the timeout in seconds
+  */
+  void setKeepalivePongTimeout(uint pongTimeout) nothrow
+  {
+    soup_websocket_connection_set_keepalive_pong_timeout(cast(SoupWebsocketConnection*)this._cPtr, pongTimeout);
   }
 
   /**
@@ -778,6 +832,22 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
   T keepaliveInterval(uint propval) nothrow
   {
     return setProperty("keepalive-interval", propval);
+  }
+
+  /**
+      Set `keepalivePongTimeout` property.
+      Params:
+        propval = Timeout in seconds for when the absence of a pong from a keepalive
+          ping is assumed to be caused by a faulty connection. The WebSocket
+          will be transitioned to a closed state when this happens.
+          
+          If set to 0 then the absence of pongs from keepalive pings is
+          ignored.
+      Returns: Builder instance for fluent chaining
+  */
+  T keepalivePongTimeout(uint propval) nothrow
+  {
+    return setProperty("keepalive-pong-timeout", propval);
   }
 
   /**

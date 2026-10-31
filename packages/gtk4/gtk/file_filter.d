@@ -14,10 +14,10 @@ import gtk.filter;
 import gtk.types;
 
 /**
-    [gtk.file_filter.FileFilter] filters files by name or mime type.
+    Filters files by name or mime type.
     
     [gtk.file_filter.FileFilter] can be used to restrict the files being shown in a
-    [gtk.file_chooser.FileChooser]. Files can be filtered based on their name (with
+    file chooser. Files can be filtered based on their name (with
     [gtk.file_filter.FileFilter.addPattern] or [gtk.file_filter.FileFilter.addSuffix])
     or on their mime type (with [gtk.file_filter.FileFilter.addMimeType]).
     
@@ -27,8 +27,8 @@ import gtk.types;
     text/plain. Note that [gtk.file_filter.FileFilter] allows wildcards for the
     subtype of a mime type, so you can e.g. filter for image/\*.
     
-    Normally, file filters are used by adding them to a [gtk.file_chooser.FileChooser]
-    (see [gtk.file_chooser.FileChooser.addFilter]), but it is also possible to
+    Normally, file filters are used by adding them to a file chooser
+    (see [gtk.file_dialog.FileDialog.setFilters]), but it is also possible to
     manually use a file filter on any [gtk.filter_list_model.FilterListModel] containing
     [gio.file_info.FileInfo] objects.
     
@@ -102,8 +102,8 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Get `name` property.
       Returns: The human-readable name of the filter.
         
-        This is the string that will be displayed in the file chooser
-        user interface if there is a selectable list of filters.
+        This is the string that will be displayed in the user interface
+        if there is a selectable list of filters.
   */
   @property string name() nothrow
   {
@@ -115,8 +115,8 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Params:
         propval = The human-readable name of the filter.
           
-          This is the string that will be displayed in the file chooser
-          user interface if there is a selectable list of filters.
+          This is the string that will be displayed in the user interface
+          if there is a selectable list of filters.
   */
   @property void name(string propval) nothrow
   {
@@ -168,7 +168,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   }
 
   /**
-      Adds a rule allowing a given mime type to filter.
+      Adds a rule allowing a given mime type.
   
       Params:
         mimeType = name of a MIME type
@@ -180,14 +180,33 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   }
 
   /**
-      Adds a rule allowing a shell style glob to a filter.
+      Adds a rule allowing a given array of mime types.
+      It can for example be used with
+      [Gly.Loader.get_mime_types](https://gnome.pages.gitlab.gnome.org/glycin/libglycin/type_func.Loader.get_mime_types.html).
+      
+      This is equivalent to calling [gtk.file_filter.FileFilter.addMimeType]
+      for all the supported mime types.
+  
+      Params:
+        mimeTypes = a null-terminated array of mime types
+  */
+  void addMimeTypes(string[] mimeTypes) nothrow
+  {
+    auto _mimeTypes_arr = new char*[](mimeTypes.length + 1);
+    auto _mimeTypes = cast(char**)_mimeTypes_arr.ptr;
+    foreach (i, s; mimeTypes) _mimeTypes[i] = s.toCString!(No.Malloc);
+    gtk_file_filter_add_mime_types(cast(GtkFileFilter*)this._cPtr, _mimeTypes);
+  }
+
+  /**
+      Adds a rule allowing a shell style glob pattern.
       
       Note that it depends on the platform whether pattern
       matching ignores case or not. On Windows, it does, on
       other platforms, it doesn't.
   
       Params:
-        pattern = a shell style glob
+        pattern = a shell style glob pattern
   */
   void addPattern(string pattern) nothrow
   {
@@ -196,11 +215,13 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   }
 
   /**
-      Adds a rule allowing image files in the formats supported
-      by GdkPixbuf.
+      Adds a rule allowing image files in the formats supported by [gdkpixbuf.pixbuf.Pixbuf].
       
       This is equivalent to calling [gtk.file_filter.FileFilter.addMimeType]
       for all the supported mime types.
+  
+      Deprecated: Use the api of your image loading framework (e.g. glycin)
+          to enumerate supported formats
   */
   void addPixbufFormats() nothrow
   {
@@ -210,8 +231,14 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   /**
       Adds a suffix match rule to a filter.
       
-      This is similar to adding a match for the pattern
-      "*.suffix".
+      This is similar to adding a match for the pattern "*.suffix"
+      
+      An exaple to filter files with the suffix ".sub":
+      ```c
+      gtk_file_filter_add_suffix (filter, "sub");
+      ```
+      
+      Filters with multiple dots are allowed.
       
       In contrast to pattern matches, suffix matches
       are *always* case-insensitive.
@@ -230,8 +257,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       passed to this filter.
       
       This function will not typically be used by applications;
-      it is intended principally for use in the implementation
-      of [gtk.file_chooser.FileChooser].
+      it is intended for use in file chooser implementation.
       Returns: the attributes
   */
   string[] getAttributes() nothrow
@@ -256,7 +282,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Gets the human-readable name for the filter.
       
       See [gtk.file_filter.FileFilter.setName].
-      Returns: The human-readable name of the filter
+      Returns: the human-readable name of the filter
   */
   string getName() nothrow
   {
@@ -269,12 +295,11 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   /**
       Sets a human-readable name of the filter.
       
-      This is the string that will be displayed in the file chooser
+      This is the string that will be displayed in the user interface
       if there is a selectable list of filters.
   
       Params:
-        name = the human-readable-name for the filter, or null
-            to remove any existing name.
+        name = the human-readable name for the filter
   */
   void setName(string name = null) nothrow
   {
@@ -317,8 +342,8 @@ class FileFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gtk.build
       Params:
         propval = The human-readable name of the filter.
           
-          This is the string that will be displayed in the file chooser
-          user interface if there is a selectable list of filters.
+          This is the string that will be displayed in the user interface
+          if there is a selectable list of filters.
       Returns: Builder instance for fluent chaining
   */
   T name(string propval) nothrow

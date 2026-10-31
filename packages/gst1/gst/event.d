@@ -28,7 +28,7 @@ import gst.types;
     specific parameters as arguments.
     To send an event application will usually use [gst.element.Element.sendEvent] and
     elements will use [gst.pad.Pad.sendEvent] or [gst.pad.Pad.pushEvent].
-    The event should be unreffed with gst_event_unref() if it has not been sent.
+    The event should be unreffed with [gst.event.Event.unref] if it has not been sent.
     
     Events that have been received can be parsed with their respective
     gst_event_parse_*() functions. It is valid to pass null for unwanted details.
@@ -976,11 +976,48 @@ class Event : gobject.boxed.Boxed
       Params:
         name = name to check as a GQuark
       Returns: true if name matches the name of the event structure.
+  
+      Deprecated: Use [gst.event.Event.hasName].
   */
   bool hasNameId(glib.types.Quark name) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_event_has_name_id(cast(GstEvent*)this._cPtr, name);
+    return _retval;
+  }
+
+  /**
+      Tests if you can safely modify event. It is only safe to modify event when
+      there is only one owner of the event - ie, the object is writable.
+      Returns: 
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_event_is_writable(cast(const(GstEvent)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns a writable copy of event.
+      
+      If there is only one reference count on event, the caller must be the owner,
+      and so this function will return the event object unchanged. If on the other
+      hand there is more than one reference on the object, a new event object will
+      be returned. The caller's reference on event will be removed, and instead the
+      caller will own a reference to the returned object.
+      
+      In short, this function unrefs the event in the argument and refs the event
+      that it returns. Don't access the argument after calling this function. See
+      also: [gst.event.Event.ref_].
+      Returns: a writable event which may or may not be the
+            same as event
+  */
+  gst.event.Event makeWritable() nothrow
+  {
+    GstEvent* _cretval;
+    _cretval = gst_event_make_writable(cast(GstEvent*)this._cPtr);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

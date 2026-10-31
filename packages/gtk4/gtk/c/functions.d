@@ -57,6 +57,7 @@ __gshared extern(C) nothrow
   // Accessible
   GType function() c_gtk_accessible_get_type; ///
   void function(GtkAccessible* self, const(char)* message, GtkAccessibleAnnouncementPriority priority) c_gtk_accessible_announce; ///
+  char* function(GtkAccessible* self) c_gtk_accessible_get_accessible_id; ///
   GtkAccessible* function(GtkAccessible* self) c_gtk_accessible_get_accessible_parent; ///
   GtkAccessibleRole function(GtkAccessible* self) c_gtk_accessible_get_accessible_role; ///
   GtkATContext* function(GtkAccessible* self) c_gtk_accessible_get_at_context; ///
@@ -69,12 +70,21 @@ __gshared extern(C) nothrow
   void function(GtkAccessible* self, GtkAccessibleState state) c_gtk_accessible_reset_state; ///
   void function(GtkAccessible* self, GtkAccessible* parent, GtkAccessible* nextSibling) c_gtk_accessible_set_accessible_parent; ///
   void function(GtkAccessible* self, GtkAccessible* newSibling) c_gtk_accessible_update_next_accessible_sibling; ///
+  void function(GtkAccessible* self, GtkAccessiblePlatformState state) c_gtk_accessible_update_platform_state; ///
   void function(GtkAccessible* self, GtkAccessibleProperty firstProperty,  ...) c_gtk_accessible_update_property; ///
   void function(GtkAccessible* self, int nProperties, GtkAccessibleProperty* properties, const(GValue)* values) c_gtk_accessible_update_property_value; ///
   void function(GtkAccessible* self, GtkAccessibleRelation firstRelation,  ...) c_gtk_accessible_update_relation; ///
   void function(GtkAccessible* self, int nRelations, GtkAccessibleRelation* relations, const(GValue)* values) c_gtk_accessible_update_relation_value; ///
   void function(GtkAccessible* self, GtkAccessibleState firstState,  ...) c_gtk_accessible_update_state; ///
   void function(GtkAccessible* self, int nStates, GtkAccessibleState* states, const(GValue)* values) c_gtk_accessible_update_state_value; ///
+
+  // AccessibleHyperlink
+  GType function() c_gtk_accessible_hyperlink_get_type; ///
+  GtkAccessibleHyperlink* function(GtkAccessibleHypertext* parent, uint index, const(char)* uri, GtkAccessibleTextRange* bounds) c_gtk_accessible_hyperlink_new; ///
+  void function(GtkAccessibleHyperlink* self, GtkAccessiblePlatformState state, gboolean enabled) c_gtk_accessible_hyperlink_set_platform_state; ///
+
+  // AccessibleHypertext
+  GType function() c_gtk_accessible_hypertext_get_type; ///
 
   // AccessibleList
   GType function() c_gtk_accessible_list_get_type; ///
@@ -472,6 +482,7 @@ __gshared extern(C) nothrow
   int function(GtkCalendar* self) c_gtk_calendar_get_year; ///
   void function(GtkCalendar* calendar, uint day) c_gtk_calendar_mark_day; ///
   void function(GtkCalendar* self, GDateTime* date) c_gtk_calendar_select_day; ///
+  void function(GtkCalendar* self, GDateTime* date) c_gtk_calendar_set_date; ///
   void function(GtkCalendar* self, int day) c_gtk_calendar_set_day; ///
   void function(GtkCalendar* self, int month) c_gtk_calendar_set_month; ///
   void function(GtkCalendar* self, gboolean value) c_gtk_calendar_set_show_day_names; ///
@@ -957,6 +968,8 @@ __gshared extern(C) nothrow
   // CssSection
   GType function() c_gtk_css_section_get_type; ///
   GtkCssSection* function(GFile* file, const(GtkCssLocation)* start, const(GtkCssLocation)* end) c_gtk_css_section_new; ///
+  GtkCssSection* function(GFile* file, GBytes* bytes, const(GtkCssLocation)* start, const(GtkCssLocation)* end) c_gtk_css_section_new_with_bytes; ///
+  GBytes* function(const(GtkCssSection)* section) c_gtk_css_section_get_bytes; ///
   const(GtkCssLocation)* function(const(GtkCssSection)* section) c_gtk_css_section_get_end_location; ///
   GFile* function(const(GtkCssSection)* section) c_gtk_css_section_get_file; ///
   GtkCssSection* function(const(GtkCssSection)* section) c_gtk_css_section_get_parent; ///
@@ -1011,8 +1024,8 @@ __gshared extern(C) nothrow
 
   // DragIcon
   GType function() c_gtk_drag_icon_get_type; ///
-  GtkWidget* function(const(GValue)* value) c_gtk_drag_icon_create_widget_for_value; ///
   GtkWidget* function(GdkDrag* drag) c_gtk_drag_icon_get_for_drag; ///
+  GtkWidget* function(const(GValue)* value) c_gtk_drag_icon_create_widget_for_value; ///
   void function(GdkDrag* drag, GdkPaintable* paintable, int hotX, int hotY) c_gtk_drag_icon_set_from_paintable; ///
   GtkWidget* function(GtkDragIcon* self) c_gtk_drag_icon_get_child; ///
   void function(GtkDragIcon* self, GtkWidget* child) c_gtk_drag_icon_set_child; ///
@@ -1159,6 +1172,7 @@ __gshared extern(C) nothrow
   GtkInputPurpose function(GtkEntry* entry) c_gtk_entry_get_input_purpose; ///
   dchar function(GtkEntry* entry) c_gtk_entry_get_invisible_char; ///
   int function(GtkEntry* entry) c_gtk_entry_get_max_length; ///
+  const(char)* function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_menu_entry_icon_text; ///
   gboolean function(GtkEntry* entry) c_gtk_entry_get_overwrite_mode; ///
   const(char)* function(GtkEntry* entry) c_gtk_entry_get_placeholder_text; ///
   double function(GtkEntry* entry) c_gtk_entry_get_progress_fraction; ///
@@ -1188,6 +1202,7 @@ __gshared extern(C) nothrow
   void function(GtkEntry* entry, GtkInputPurpose purpose) c_gtk_entry_set_input_purpose; ///
   void function(GtkEntry* entry, dchar ch) c_gtk_entry_set_invisible_char; ///
   void function(GtkEntry* entry, int max) c_gtk_entry_set_max_length; ///
+  void function(GtkEntry* entry, GtkEntryIconPosition iconPos, const(char)* text) c_gtk_entry_set_menu_entry_icon_text; ///
   void function(GtkEntry* entry, gboolean overwrite) c_gtk_entry_set_overwrite_mode; ///
   void function(GtkEntry* entry, const(char)* text) c_gtk_entry_set_placeholder_text; ///
   void function(GtkEntry* entry, double fraction) c_gtk_entry_set_progress_fraction; ///
@@ -1383,8 +1398,14 @@ __gshared extern(C) nothrow
   GFile* function(GtkFileDialog* self, GAsyncResult* result, GError** _err) c_gtk_file_dialog_open_finish; ///
   void function(GtkFileDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_file_dialog_open_multiple; ///
   GListModel* function(GtkFileDialog* self, GAsyncResult* result, GError** _err) c_gtk_file_dialog_open_multiple_finish; ///
+  void function(GtkFileDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_file_dialog_open_multiple_text_files; ///
+  GListModel* function(GtkFileDialog* self, GAsyncResult* result, const(char*)* encoding, GError** _err) c_gtk_file_dialog_open_multiple_text_files_finish; ///
+  void function(GtkFileDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_file_dialog_open_text_file; ///
+  GFile* function(GtkFileDialog* self, GAsyncResult* result, const(char*)* encoding, GError** _err) c_gtk_file_dialog_open_text_file_finish; ///
   void function(GtkFileDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_file_dialog_save; ///
   GFile* function(GtkFileDialog* self, GAsyncResult* result, GError** _err) c_gtk_file_dialog_save_finish; ///
+  void function(GtkFileDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_file_dialog_save_text_file; ///
+  GFile* function(GtkFileDialog* self, GAsyncResult* result, const(char*)* encoding, const(char*)* lineEnding, GError** _err) c_gtk_file_dialog_save_text_file_finish; ///
   void function(GtkFileDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_file_dialog_select_folder; ///
   GFile* function(GtkFileDialog* self, GAsyncResult* result, GError** _err) c_gtk_file_dialog_select_folder_finish; ///
   void function(GtkFileDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_file_dialog_select_multiple_folders; ///
@@ -1403,6 +1424,7 @@ __gshared extern(C) nothrow
   GtkFileFilter* function() c_gtk_file_filter_new; ///
   GtkFileFilter* function(GVariant* variant) c_gtk_file_filter_new_from_gvariant; ///
   void function(GtkFileFilter* filter, const(char)* mimeType) c_gtk_file_filter_add_mime_type; ///
+  void function(GtkFileFilter* filter, const(char*)* mimeTypes) c_gtk_file_filter_add_mime_types; ///
   void function(GtkFileFilter* filter, const(char)* pattern) c_gtk_file_filter_add_pattern; ///
   void function(GtkFileFilter* filter) c_gtk_file_filter_add_pixbuf_formats; ///
   void function(GtkFileFilter* filter, const(char)* suffix) c_gtk_file_filter_add_suffix; ///
@@ -1438,9 +1460,11 @@ __gshared extern(C) nothrow
   gboolean function(GtkFilterListModel* self) c_gtk_filter_list_model_get_incremental; ///
   GListModel* function(GtkFilterListModel* self) c_gtk_filter_list_model_get_model; ///
   uint function(GtkFilterListModel* self) c_gtk_filter_list_model_get_pending; ///
+  gboolean function(GtkFilterListModel* self) c_gtk_filter_list_model_get_watch_items; ///
   void function(GtkFilterListModel* self, GtkFilter* filter) c_gtk_filter_list_model_set_filter; ///
   void function(GtkFilterListModel* self, gboolean incremental) c_gtk_filter_list_model_set_incremental; ///
   void function(GtkFilterListModel* self, GListModel* model) c_gtk_filter_list_model_set_model; ///
+  void function(GtkFilterListModel* self, gboolean watchItems) c_gtk_filter_list_model_set_watch_items; ///
 
   // Fixed
   GType function() c_gtk_fixed_get_type; ///
@@ -1714,8 +1738,10 @@ __gshared extern(C) nothrow
   // GraphicsOffload
   GType function() c_gtk_graphics_offload_get_type; ///
   GtkWidget* function(GtkWidget* child) c_gtk_graphics_offload_new; ///
+  gboolean function(GtkGraphicsOffload* self) c_gtk_graphics_offload_get_black_background; ///
   GtkWidget* function(GtkGraphicsOffload* self) c_gtk_graphics_offload_get_child; ///
   GtkGraphicsOffloadEnabled function(GtkGraphicsOffload* self) c_gtk_graphics_offload_get_enabled; ///
+  void function(GtkGraphicsOffload* self, gboolean value) c_gtk_graphics_offload_set_black_background; ///
   void function(GtkGraphicsOffload* self, GtkWidget* child) c_gtk_graphics_offload_set_child; ///
   void function(GtkGraphicsOffload* self, GtkGraphicsOffloadEnabled enabled) c_gtk_graphics_offload_set_enabled; ///
 
@@ -1797,12 +1823,14 @@ __gshared extern(C) nothrow
   const(char)* function(GtkHeaderBar* bar) c_gtk_header_bar_get_decoration_layout; ///
   gboolean function(GtkHeaderBar* bar) c_gtk_header_bar_get_show_title_buttons; ///
   GtkWidget* function(GtkHeaderBar* bar) c_gtk_header_bar_get_title_widget; ///
+  gboolean function(GtkHeaderBar* bar) c_gtk_header_bar_get_use_native_controls; ///
   void function(GtkHeaderBar* bar, GtkWidget* child) c_gtk_header_bar_pack_end; ///
   void function(GtkHeaderBar* bar, GtkWidget* child) c_gtk_header_bar_pack_start; ///
   void function(GtkHeaderBar* bar, GtkWidget* child) c_gtk_header_bar_remove; ///
   void function(GtkHeaderBar* bar, const(char)* layout) c_gtk_header_bar_set_decoration_layout; ///
   void function(GtkHeaderBar* bar, gboolean setting) c_gtk_header_bar_set_show_title_buttons; ///
   void function(GtkHeaderBar* bar, GtkWidget* titleWidget) c_gtk_header_bar_set_title_widget; ///
+  void function(GtkHeaderBar* bar, gboolean setting) c_gtk_header_bar_set_use_native_controls; ///
 
   // IMContext
   GType function() c_gtk_im_context_get_type; ///
@@ -2116,6 +2144,7 @@ __gshared extern(C) nothrow
   GList* function(GtkListBox* box) c_gtk_list_box_get_selected_rows; ///
   GtkSelectionMode function(GtkListBox* box) c_gtk_list_box_get_selection_mode; ///
   gboolean function(GtkListBox* box) c_gtk_list_box_get_show_separators; ///
+  GtkListTabBehavior function(GtkListBox* box) c_gtk_list_box_get_tab_behavior; ///
   void function(GtkListBox* box, GtkWidget* child, int position) c_gtk_list_box_insert; ///
   void function(GtkListBox* box) c_gtk_list_box_invalidate_filter; ///
   void function(GtkListBox* box) c_gtk_list_box_invalidate_headers; ///
@@ -2134,6 +2163,7 @@ __gshared extern(C) nothrow
   void function(GtkListBox* box, GtkSelectionMode mode) c_gtk_list_box_set_selection_mode; ///
   void function(GtkListBox* box, gboolean showSeparators) c_gtk_list_box_set_show_separators; ///
   void function(GtkListBox* box, GtkListBoxSortFunc sortFunc, void* userData, GDestroyNotify destroy) c_gtk_list_box_set_sort_func; ///
+  void function(GtkListBox* box, GtkListTabBehavior behavior) c_gtk_list_box_set_tab_behavior; ///
   void function(GtkListBox* box) c_gtk_list_box_unselect_all; ///
   void function(GtkListBox* box, GtkListBoxRow* row) c_gtk_list_box_unselect_row; ///
 
@@ -2625,6 +2655,7 @@ __gshared extern(C) nothrow
   gboolean function(GtkPicture* self) c_gtk_picture_get_can_shrink; ///
   GtkContentFit function(GtkPicture* self) c_gtk_picture_get_content_fit; ///
   GFile* function(GtkPicture* self) c_gtk_picture_get_file; ///
+  gboolean function(GtkPicture* self) c_gtk_picture_get_isolate_contents; ///
   gboolean function(GtkPicture* self) c_gtk_picture_get_keep_aspect_ratio; ///
   GdkPaintable* function(GtkPicture* self) c_gtk_picture_get_paintable; ///
   void function(GtkPicture* self, const(char)* alternativeText) c_gtk_picture_set_alternative_text; ///
@@ -2632,6 +2663,7 @@ __gshared extern(C) nothrow
   void function(GtkPicture* self, GtkContentFit contentFit) c_gtk_picture_set_content_fit; ///
   void function(GtkPicture* self, GFile* file) c_gtk_picture_set_file; ///
   void function(GtkPicture* self, const(char)* filename) c_gtk_picture_set_filename; ///
+  void function(GtkPicture* self, gboolean isolateContents) c_gtk_picture_set_isolate_contents; ///
   void function(GtkPicture* self, gboolean keepAspectRatio) c_gtk_picture_set_keep_aspect_ratio; ///
   void function(GtkPicture* self, GdkPaintable* paintable) c_gtk_picture_set_paintable; ///
   void function(GtkPicture* self, GdkPixbuf* pixbuf) c_gtk_picture_set_pixbuf; ///
@@ -2660,6 +2692,20 @@ __gshared extern(C) nothrow
   void function(GtkPopover* popover, int xOffset, int yOffset) c_gtk_popover_set_offset; ///
   void function(GtkPopover* popover, const(GdkRectangle)* rect) c_gtk_popover_set_pointing_to; ///
   void function(GtkPopover* popover, GtkPositionType position) c_gtk_popover_set_position; ///
+
+  // PopoverBin
+  GType function() c_gtk_popover_bin_get_type; ///
+  GtkWidget* function() c_gtk_popover_bin_new; ///
+  GtkWidget* function(GtkPopoverBin* self) c_gtk_popover_bin_get_child; ///
+  gboolean function(GtkPopoverBin* self) c_gtk_popover_bin_get_handle_input; ///
+  GMenuModel* function(GtkPopoverBin* self) c_gtk_popover_bin_get_menu_model; ///
+  GtkWidget* function(GtkPopoverBin* self) c_gtk_popover_bin_get_popover; ///
+  void function(GtkPopoverBin* self) c_gtk_popover_bin_popdown; ///
+  void function(GtkPopoverBin* self) c_gtk_popover_bin_popup; ///
+  void function(GtkPopoverBin* self, GtkWidget* child) c_gtk_popover_bin_set_child; ///
+  void function(GtkPopoverBin* self, gboolean handleInput) c_gtk_popover_bin_set_handle_input; ///
+  void function(GtkPopoverBin* self, GMenuModel* model) c_gtk_popover_bin_set_menu_model; ///
+  void function(GtkPopoverBin* self, GtkWidget* popover) c_gtk_popover_bin_set_popover; ///
 
   // PopoverMenu
   GType function() c_gtk_popover_menu_get_type; ///
@@ -3313,6 +3359,7 @@ __gshared extern(C) nothrow
   void function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds, const(graphene_point_t)* startPoint, const(graphene_point_t)* endPoint, const(GskColorStop)* stops, size_t nStops) c_gtk_snapshot_append_linear_gradient; ///
   void function(GtkSnapshot* snapshot, GskRenderNode* node) c_gtk_snapshot_append_node; ///
   void function(GtkSnapshot* snapshot, const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) c_gtk_snapshot_append_outset_shadow; ///
+  void function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds, size_t nth) c_gtk_snapshot_append_paste; ///
   void function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* stops, size_t nStops) c_gtk_snapshot_append_radial_gradient; ///
   void function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds, const(graphene_point_t)* startPoint, const(graphene_point_t)* endPoint, const(GskColorStop)* stops, size_t nStops) c_gtk_snapshot_append_repeating_linear_gradient; ///
   void function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* stops, size_t nStops) c_gtk_snapshot_append_repeating_radial_gradient; ///
@@ -3328,10 +3375,14 @@ __gshared extern(C) nothrow
   void function(GtkSnapshot* snapshot, double radius) c_gtk_snapshot_push_blur; ///
   void function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds) c_gtk_snapshot_push_clip; ///
   void function(GtkSnapshot* snapshot, const(graphene_matrix_t)* colorMatrix, const(graphene_vec4_t)* colorOffset) c_gtk_snapshot_push_color_matrix; ///
+  void function(GtkSnapshot* snapshot, const(GskComponentTransfer)* red, const(GskComponentTransfer)* green, const(GskComponentTransfer)* blue, const(GskComponentTransfer)* alpha) c_gtk_snapshot_push_component_transfer; ///
+  void function(GtkSnapshot* snapshot, GskPorterDuff op) c_gtk_snapshot_push_composite; ///
+  void function(GtkSnapshot* snapshot) c_gtk_snapshot_push_copy; ///
   void function(GtkSnapshot* snapshot, double progress) c_gtk_snapshot_push_cross_fade; ///
   void function(GtkSnapshot* snapshot, const(char)* message,  ...) c_gtk_snapshot_push_debug; ///
   void function(GtkSnapshot* snapshot, GskPath* path, GskFillRule fillRule) c_gtk_snapshot_push_fill; ///
   void function(GtkSnapshot* snapshot, GskGLShader* shader, const(graphene_rect_t)* bounds, GBytes* takeArgs) c_gtk_snapshot_push_gl_shader; ///
+  void function(GtkSnapshot* snapshot, GskIsolation features) c_gtk_snapshot_push_isolation; ///
   void function(GtkSnapshot* snapshot, GskMaskMode maskMode) c_gtk_snapshot_push_mask; ///
   void function(GtkSnapshot* snapshot, double opacity) c_gtk_snapshot_push_opacity; ///
   void function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds, const(graphene_rect_t)* childBounds) c_gtk_snapshot_push_repeat; ///
@@ -3494,6 +3545,7 @@ __gshared extern(C) nothrow
   GType function() c_gtk_string_list_get_type; ///
   GtkStringList* function(const(char*)* strings) c_gtk_string_list_new; ///
   void function(GtkStringList* self, const(char)* string_) c_gtk_string_list_append; ///
+  uint function(GtkStringList* self, const(char)* string_) c_gtk_string_list_find; ///
   const(char)* function(GtkStringList* self, uint position) c_gtk_string_list_get_string; ///
   void function(GtkStringList* self, uint position) c_gtk_string_list_remove; ///
   void function(GtkStringList* self, uint position, uint nRemovals, const(char*)* additions) c_gtk_string_list_splice; ///
@@ -3541,6 +3593,26 @@ __gshared extern(C) nothrow
   // StyleProvider
   GType function() c_gtk_style_provider_get_type; ///
 
+  // Svg
+  GType function() c_gtk_svg_get_type; ///
+  GtkSvg* function() c_gtk_svg_new; ///
+  GtkSvg* function(GBytes* bytes) c_gtk_svg_new_from_bytes; ///
+  GtkSvg* function(const(char)* path) c_gtk_svg_new_from_resource; ///
+  GtkSvgFeatures function(GtkSvg* self) c_gtk_svg_get_features; ///
+  uint function(GtkSvg* self) c_gtk_svg_get_state; ///
+  const(char*)* function(GtkSvg* self, uint* length) c_gtk_svg_get_state_names; ///
+  double function(GtkSvg* self) c_gtk_svg_get_weight; ///
+  void function(GtkSvg* self, GBytes* bytes) c_gtk_svg_load_from_bytes; ///
+  void function(GtkSvg* self, const(char)* path) c_gtk_svg_load_from_resource; ///
+  void function(GtkSvg* self) c_gtk_svg_pause; ///
+  void function(GtkSvg* self) c_gtk_svg_play; ///
+  GBytes* function(GtkSvg* self) c_gtk_svg_serialize; ///
+  void function(GtkSvg* self, GtkSvgFeatures features) c_gtk_svg_set_features; ///
+  void function(GtkSvg* self, GdkFrameClock* clock) c_gtk_svg_set_frame_clock; ///
+  void function(GtkSvg* self, uint state) c_gtk_svg_set_state; ///
+  void function(GtkSvg* self, double weight) c_gtk_svg_set_weight; ///
+  gboolean function(GtkSvg* self, const(char)* filename, GError** _err) c_gtk_svg_write_to_file; ///
+
   // Switch
   GType function() c_gtk_switch_get_type; ///
   GtkWidget* function() c_gtk_switch_new; ///
@@ -3552,6 +3624,7 @@ __gshared extern(C) nothrow
   // SymbolicPaintable
   GType function() c_gtk_symbolic_paintable_get_type; ///
   void function(GtkSymbolicPaintable* paintable, GdkSnapshot* snapshot, double width, double height, const(GdkRGBA)* colors, size_t nColors) c_gtk_symbolic_paintable_snapshot_symbolic; ///
+  void function(GtkSymbolicPaintable* paintable, GdkSnapshot* snapshot, double width, double height, const(GdkRGBA)* colors, size_t nColors, double weight) c_gtk_symbolic_paintable_snapshot_with_weight; ///
 
   // Text
   GType function() c_gtk_text_get_type; ///
@@ -3595,6 +3668,7 @@ __gshared extern(C) nothrow
   // TextBuffer
   GType function() c_gtk_text_buffer_get_type; ///
   GtkTextBuffer* function(GtkTextTagTable* table) c_gtk_text_buffer_new; ///
+  uint function(GtkTextBuffer* buffer, GtkTextBufferNotifyFlags flags, GtkTextBufferCommitNotify commitNotify, void* userData, GDestroyNotify destroy) c_gtk_text_buffer_add_commit_notify; ///
   void function(GtkTextBuffer* buffer, GtkTextMark* mark, const(GtkTextIter)* where) c_gtk_text_buffer_add_mark; ///
   void function(GtkTextBuffer* buffer, GdkClipboard* clipboard) c_gtk_text_buffer_add_selection_clipboard; ///
   void function(GtkTextBuffer* buffer, GtkTextTag* tag, const(GtkTextIter)* start, const(GtkTextIter)* end) c_gtk_text_buffer_apply_tag; ///
@@ -3656,6 +3730,7 @@ __gshared extern(C) nothrow
   void function(GtkTextBuffer* buffer, const(GtkTextIter)* where) c_gtk_text_buffer_place_cursor; ///
   void function(GtkTextBuffer* buffer) c_gtk_text_buffer_redo; ///
   void function(GtkTextBuffer* buffer, const(GtkTextIter)* start, const(GtkTextIter)* end) c_gtk_text_buffer_remove_all_tags; ///
+  void function(GtkTextBuffer* buffer, uint commitNotifyHandler) c_gtk_text_buffer_remove_commit_notify; ///
   void function(GtkTextBuffer* buffer, GdkClipboard* clipboard) c_gtk_text_buffer_remove_selection_clipboard; ///
   void function(GtkTextBuffer* buffer, GtkTextTag* tag, const(GtkTextIter)* start, const(GtkTextIter)* end) c_gtk_text_buffer_remove_tag; ///
   void function(GtkTextBuffer* buffer, const(char)* name, const(GtkTextIter)* start, const(GtkTextIter)* end) c_gtk_text_buffer_remove_tag_by_name; ///
@@ -3831,6 +3906,7 @@ __gshared extern(C) nothrow
   PangoContext* function(GtkTextView* textView) c_gtk_text_view_get_rtl_context; ///
   PangoTabArray* function(GtkTextView* textView) c_gtk_text_view_get_tabs; ///
   int function(GtkTextView* textView) c_gtk_text_view_get_top_margin; ///
+  void function(GtkTextView* textView, double* xOffset, double* yOffset) c_gtk_text_view_get_visible_offset; ///
   void function(GtkTextView* textView, GdkRectangle* visibleRect) c_gtk_text_view_get_visible_rect; ///
   GtkWrapMode function(GtkTextView* textView) c_gtk_text_view_get_wrap_mode; ///
   gboolean function(GtkTextView* textView, GdkEvent* event) c_gtk_text_view_im_context_filter_keypress; ///
@@ -4247,9 +4323,14 @@ __gshared extern(C) nothrow
   void function(GtkTreeViewColumn* treeColumn, gboolean visible) c_gtk_tree_view_column_set_visible; ///
   void function(GtkTreeViewColumn* treeColumn, GtkWidget* widget) c_gtk_tree_view_column_set_widget; ///
 
+  // TryExpression
+  GType function() c_gtk_try_expression_get_type; ///
+  GtkExpression* function(uint nExpressions, GtkExpression** expressions) c_gtk_try_expression_new; ///
+
   // UriLauncher
   GType function() c_gtk_uri_launcher_get_type; ///
   GtkUriLauncher* function(const(char)* uri) c_gtk_uri_launcher_new; ///
+  gboolean function(GtkUriLauncher* self, GtkWindow* parent) c_gtk_uri_launcher_can_launch; ///
   const(char)* function(GtkUriLauncher* self) c_gtk_uri_launcher_get_uri; ///
   void function(GtkUriLauncher* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_uri_launcher_launch; ///
   gboolean function(GtkUriLauncher* self, GAsyncResult* result, GError** _err) c_gtk_uri_launcher_launch_finish; ///
@@ -4343,6 +4424,7 @@ __gshared extern(C) nothrow
   gboolean function(GtkWidget* widget) c_gtk_widget_get_hexpand_set; ///
   GtkWidget* function(GtkWidget* widget) c_gtk_widget_get_last_child; ///
   GtkLayoutManager* function(GtkWidget* widget) c_gtk_widget_get_layout_manager; ///
+  gboolean function(GtkWidget* widget) c_gtk_widget_get_limit_events; ///
   gboolean function(GtkWidget* widget) c_gtk_widget_get_mapped; ///
   int function(GtkWidget* widget) c_gtk_widget_get_margin_bottom; ///
   int function(GtkWidget* widget) c_gtk_widget_get_margin_end; ///
@@ -4426,6 +4508,7 @@ __gshared extern(C) nothrow
   void function(GtkWidget* widget, gboolean expand) c_gtk_widget_set_hexpand; ///
   void function(GtkWidget* widget, gboolean set) c_gtk_widget_set_hexpand_set; ///
   void function(GtkWidget* widget, GtkLayoutManager* layoutManager) c_gtk_widget_set_layout_manager; ///
+  void function(GtkWidget* widget, gboolean limitEvents) c_gtk_widget_set_limit_events; ///
   void function(GtkWidget* widget, int margin) c_gtk_widget_set_margin_bottom; ///
   void function(GtkWidget* widget, int margin) c_gtk_widget_set_margin_end; ///
   void function(GtkWidget* widget, int margin) c_gtk_widget_set_margin_start; ///
@@ -4506,6 +4589,7 @@ __gshared extern(C) nothrow
   gboolean function(GtkWindow* window) c_gtk_window_get_destroy_with_parent; ///
   GtkWidget* function(GtkWindow* window) c_gtk_window_get_focus; ///
   gboolean function(GtkWindow* window) c_gtk_window_get_focus_visible; ///
+  GtkWindowGravity function(GtkWindow* window) c_gtk_window_get_gravity; ///
   GtkWindowGroup* function(GtkWindow* window) c_gtk_window_get_group; ///
   gboolean function(GtkWindow* window) c_gtk_window_get_handle_menubar_accel; ///
   gboolean function(GtkWindow* window) c_gtk_window_get_hide_on_close; ///
@@ -4535,6 +4619,7 @@ __gshared extern(C) nothrow
   void function(GtkWindow* window, GdkDisplay* display) c_gtk_window_set_display; ///
   void function(GtkWindow* window, GtkWidget* focus) c_gtk_window_set_focus; ///
   void function(GtkWindow* window, gboolean setting) c_gtk_window_set_focus_visible; ///
+  void function(GtkWindow* window, GtkWindowGravity gravity) c_gtk_window_set_gravity; ///
   void function(GtkWindow* window, gboolean handleMenubarAccel) c_gtk_window_set_handle_menubar_accel; ///
   void function(GtkWindow* window, gboolean setting) c_gtk_window_set_hide_on_close; ///
   void function(GtkWindow* window, const(char)* name) c_gtk_window_set_icon_name; ///
@@ -4555,8 +4640,10 @@ __gshared extern(C) nothrow
   const(char)* function(GtkWindowControls* self) c_gtk_window_controls_get_decoration_layout; ///
   gboolean function(GtkWindowControls* self) c_gtk_window_controls_get_empty; ///
   GtkPackType function(GtkWindowControls* self) c_gtk_window_controls_get_side; ///
+  gboolean function(GtkWindowControls* self) c_gtk_window_controls_get_use_native_controls; ///
   void function(GtkWindowControls* self, const(char)* layout) c_gtk_window_controls_set_decoration_layout; ///
   void function(GtkWindowControls* self, GtkPackType side) c_gtk_window_controls_set_side; ///
+  void function(GtkWindowControls* self, gboolean setting) c_gtk_window_controls_set_use_native_controls; ///
 
   // WindowGroup
   GType function() c_gtk_window_group_get_type; ///
@@ -4572,6 +4659,7 @@ __gshared extern(C) nothrow
   void function(GtkWindowHandle* self, GtkWidget* child) c_gtk_window_handle_set_child; ///
 
   // global
+  char* function(uint acceleratorKey, GdkModifierType acceleratorMods) c_gtk_accelerator_get_accessible_label; ///
   GdkModifierType function() c_gtk_accelerator_get_default_mod_mask; ///
   char* function(uint acceleratorKey, GdkModifierType acceleratorMods) c_gtk_accelerator_get_label; ///
   char* function(GdkDisplay* display, uint acceleratorKey, uint keycode, GdkModifierType acceleratorMods) c_gtk_accelerator_get_label_with_keycode; ///
@@ -4583,6 +4671,8 @@ __gshared extern(C) nothrow
   const(char)* function(uint requiredMajor, uint requiredMinor, uint requiredMicro) c_gtk_check_version; ///
   GQuark function() c_gtk_css_parser_error_quark; ///
   GQuark function() c_gtk_css_parser_warning_quark; ///
+  void function(const(char*)* portalInterfaces) c_gtk_disable_portal_interfaces; ///
+  void function() c_gtk_disable_portals; ///
   void function() c_gtk_disable_setlocale; ///
   int function(int extraSpace, uint nRequestedSizes, GtkRequestedSize* sizes) c_gtk_distribute_natural_allocation; ///
   void function(GtkPrinterFunc func, void* data, GDestroyNotify destroy, gboolean wait) c_gtk_enumerate_printers; ///
@@ -4670,6 +4760,13 @@ __gshared extern(C) nothrow
 
   // RecentManagerError
   GQuark function() c_gtk_recent_manager_error_quark; ///
+
+  // SvgError
+  const(char)* function(const(GError)* error) c_gtk_svg_error_get_attribute; ///
+  const(char)* function(const(GError)* error) c_gtk_svg_error_get_element; ///
+  const(GtkSvgLocation)* function(const(GError)* error) c_gtk_svg_error_get_end; ///
+  const(GtkSvgLocation)* function(const(GError)* error) c_gtk_svg_error_get_start; ///
+  GQuark function() c_gtk_svg_error_quark; ///
 }
 
 // ATContext
@@ -4802,6 +4899,9 @@ alias gtk_accessible_get_type = c_gtk_accessible_get_type;
 alias gtk_accessible_announce = c_gtk_accessible_announce;
 
 /** */
+alias gtk_accessible_get_accessible_id = c_gtk_accessible_get_accessible_id;
+
+/** */
 alias gtk_accessible_get_accessible_parent = c_gtk_accessible_get_accessible_parent;
 
 /** */
@@ -4838,6 +4938,9 @@ alias gtk_accessible_set_accessible_parent = c_gtk_accessible_set_accessible_par
 alias gtk_accessible_update_next_accessible_sibling = c_gtk_accessible_update_next_accessible_sibling;
 
 /** */
+alias gtk_accessible_update_platform_state = c_gtk_accessible_update_platform_state;
+
+/** */
 alias gtk_accessible_update_property = c_gtk_accessible_update_property;
 
 /** */
@@ -4854,6 +4957,22 @@ alias gtk_accessible_update_state = c_gtk_accessible_update_state;
 
 /** */
 alias gtk_accessible_update_state_value = c_gtk_accessible_update_state_value;
+
+// AccessibleHyperlink
+
+/** */
+alias gtk_accessible_hyperlink_get_type = c_gtk_accessible_hyperlink_get_type;
+
+/** */
+alias gtk_accessible_hyperlink_new = c_gtk_accessible_hyperlink_new;
+
+/** */
+alias gtk_accessible_hyperlink_set_platform_state = c_gtk_accessible_hyperlink_set_platform_state;
+
+// AccessibleHypertext
+
+/** */
+alias gtk_accessible_hypertext_get_type = c_gtk_accessible_hypertext_get_type;
 
 // AccessibleList
 
@@ -5901,6 +6020,9 @@ alias gtk_calendar_mark_day = c_gtk_calendar_mark_day;
 
 /** */
 alias gtk_calendar_select_day = c_gtk_calendar_select_day;
+
+/** */
+alias gtk_calendar_set_date = c_gtk_calendar_set_date;
 
 /** */
 alias gtk_calendar_set_day = c_gtk_calendar_set_day;
@@ -7190,6 +7312,12 @@ alias gtk_css_section_get_type = c_gtk_css_section_get_type;
 alias gtk_css_section_new = c_gtk_css_section_new;
 
 /** */
+alias gtk_css_section_new_with_bytes = c_gtk_css_section_new_with_bytes;
+
+/** */
+alias gtk_css_section_get_bytes = c_gtk_css_section_get_bytes;
+
+/** */
 alias gtk_css_section_get_end_location = c_gtk_css_section_get_end_location;
 
 /** */
@@ -7328,10 +7456,10 @@ alias gtk_directory_list_set_monitored = c_gtk_directory_list_set_monitored;
 alias gtk_drag_icon_get_type = c_gtk_drag_icon_get_type;
 
 /** */
-alias gtk_drag_icon_create_widget_for_value = c_gtk_drag_icon_create_widget_for_value;
+alias gtk_drag_icon_get_for_drag = c_gtk_drag_icon_get_for_drag;
 
 /** */
-alias gtk_drag_icon_get_for_drag = c_gtk_drag_icon_get_for_drag;
+alias gtk_drag_icon_create_widget_for_value = c_gtk_drag_icon_create_widget_for_value;
 
 /** */
 alias gtk_drag_icon_set_from_paintable = c_gtk_drag_icon_set_from_paintable;
@@ -7732,6 +7860,9 @@ alias gtk_entry_get_invisible_char = c_gtk_entry_get_invisible_char;
 alias gtk_entry_get_max_length = c_gtk_entry_get_max_length;
 
 /** */
+alias gtk_entry_get_menu_entry_icon_text = c_gtk_entry_get_menu_entry_icon_text;
+
+/** */
 alias gtk_entry_get_overwrite_mode = c_gtk_entry_get_overwrite_mode;
 
 /** */
@@ -7817,6 +7948,9 @@ alias gtk_entry_set_invisible_char = c_gtk_entry_set_invisible_char;
 
 /** */
 alias gtk_entry_set_max_length = c_gtk_entry_set_max_length;
+
+/** */
+alias gtk_entry_set_menu_entry_icon_text = c_gtk_entry_set_menu_entry_icon_text;
 
 /** */
 alias gtk_entry_set_overwrite_mode = c_gtk_entry_set_overwrite_mode;
@@ -8336,10 +8470,28 @@ alias gtk_file_dialog_open_multiple = c_gtk_file_dialog_open_multiple;
 alias gtk_file_dialog_open_multiple_finish = c_gtk_file_dialog_open_multiple_finish;
 
 /** */
+alias gtk_file_dialog_open_multiple_text_files = c_gtk_file_dialog_open_multiple_text_files;
+
+/** */
+alias gtk_file_dialog_open_multiple_text_files_finish = c_gtk_file_dialog_open_multiple_text_files_finish;
+
+/** */
+alias gtk_file_dialog_open_text_file = c_gtk_file_dialog_open_text_file;
+
+/** */
+alias gtk_file_dialog_open_text_file_finish = c_gtk_file_dialog_open_text_file_finish;
+
+/** */
 alias gtk_file_dialog_save = c_gtk_file_dialog_save;
 
 /** */
 alias gtk_file_dialog_save_finish = c_gtk_file_dialog_save_finish;
+
+/** */
+alias gtk_file_dialog_save_text_file = c_gtk_file_dialog_save_text_file;
+
+/** */
+alias gtk_file_dialog_save_text_file_finish = c_gtk_file_dialog_save_text_file_finish;
 
 /** */
 alias gtk_file_dialog_select_folder = c_gtk_file_dialog_select_folder;
@@ -8390,6 +8542,9 @@ alias gtk_file_filter_new_from_gvariant = c_gtk_file_filter_new_from_gvariant;
 
 /** */
 alias gtk_file_filter_add_mime_type = c_gtk_file_filter_add_mime_type;
+
+/** */
+alias gtk_file_filter_add_mime_types = c_gtk_file_filter_add_mime_types;
 
 /** */
 alias gtk_file_filter_add_pattern = c_gtk_file_filter_add_pattern;
@@ -8485,6 +8640,9 @@ alias gtk_filter_list_model_get_model = c_gtk_filter_list_model_get_model;
 alias gtk_filter_list_model_get_pending = c_gtk_filter_list_model_get_pending;
 
 /** */
+alias gtk_filter_list_model_get_watch_items = c_gtk_filter_list_model_get_watch_items;
+
+/** */
 alias gtk_filter_list_model_set_filter = c_gtk_filter_list_model_set_filter;
 
 /** */
@@ -8492,6 +8650,9 @@ alias gtk_filter_list_model_set_incremental = c_gtk_filter_list_model_set_increm
 
 /** */
 alias gtk_filter_list_model_set_model = c_gtk_filter_list_model_set_model;
+
+/** */
+alias gtk_filter_list_model_set_watch_items = c_gtk_filter_list_model_set_watch_items;
 
 // Fixed
 
@@ -9213,10 +9374,16 @@ alias gtk_graphics_offload_get_type = c_gtk_graphics_offload_get_type;
 alias gtk_graphics_offload_new = c_gtk_graphics_offload_new;
 
 /** */
+alias gtk_graphics_offload_get_black_background = c_gtk_graphics_offload_get_black_background;
+
+/** */
 alias gtk_graphics_offload_get_child = c_gtk_graphics_offload_get_child;
 
 /** */
 alias gtk_graphics_offload_get_enabled = c_gtk_graphics_offload_get_enabled;
+
+/** */
+alias gtk_graphics_offload_set_black_background = c_gtk_graphics_offload_set_black_background;
 
 /** */
 alias gtk_graphics_offload_set_child = c_gtk_graphics_offload_set_child;
@@ -9442,6 +9609,9 @@ alias gtk_header_bar_get_show_title_buttons = c_gtk_header_bar_get_show_title_bu
 alias gtk_header_bar_get_title_widget = c_gtk_header_bar_get_title_widget;
 
 /** */
+alias gtk_header_bar_get_use_native_controls = c_gtk_header_bar_get_use_native_controls;
+
+/** */
 alias gtk_header_bar_pack_end = c_gtk_header_bar_pack_end;
 
 /** */
@@ -9458,6 +9628,9 @@ alias gtk_header_bar_set_show_title_buttons = c_gtk_header_bar_set_show_title_bu
 
 /** */
 alias gtk_header_bar_set_title_widget = c_gtk_header_bar_set_title_widget;
+
+/** */
+alias gtk_header_bar_set_use_native_controls = c_gtk_header_bar_set_use_native_controls;
 
 // IMContext
 
@@ -10331,6 +10504,9 @@ alias gtk_list_box_get_selection_mode = c_gtk_list_box_get_selection_mode;
 alias gtk_list_box_get_show_separators = c_gtk_list_box_get_show_separators;
 
 /** */
+alias gtk_list_box_get_tab_behavior = c_gtk_list_box_get_tab_behavior;
+
+/** */
 alias gtk_list_box_insert = c_gtk_list_box_insert;
 
 /** */
@@ -10383,6 +10559,9 @@ alias gtk_list_box_set_show_separators = c_gtk_list_box_set_show_separators;
 
 /** */
 alias gtk_list_box_set_sort_func = c_gtk_list_box_set_sort_func;
+
+/** */
+alias gtk_list_box_set_tab_behavior = c_gtk_list_box_set_tab_behavior;
 
 /** */
 alias gtk_list_box_unselect_all = c_gtk_list_box_unselect_all;
@@ -11690,6 +11869,9 @@ alias gtk_picture_get_content_fit = c_gtk_picture_get_content_fit;
 alias gtk_picture_get_file = c_gtk_picture_get_file;
 
 /** */
+alias gtk_picture_get_isolate_contents = c_gtk_picture_get_isolate_contents;
+
+/** */
 alias gtk_picture_get_keep_aspect_ratio = c_gtk_picture_get_keep_aspect_ratio;
 
 /** */
@@ -11709,6 +11891,9 @@ alias gtk_picture_set_file = c_gtk_picture_set_file;
 
 /** */
 alias gtk_picture_set_filename = c_gtk_picture_set_filename;
+
+/** */
+alias gtk_picture_set_isolate_contents = c_gtk_picture_set_isolate_contents;
 
 /** */
 alias gtk_picture_set_keep_aspect_ratio = c_gtk_picture_set_keep_aspect_ratio;
@@ -11789,6 +11974,44 @@ alias gtk_popover_set_pointing_to = c_gtk_popover_set_pointing_to;
 
 /** */
 alias gtk_popover_set_position = c_gtk_popover_set_position;
+
+// PopoverBin
+
+/** */
+alias gtk_popover_bin_get_type = c_gtk_popover_bin_get_type;
+
+/** */
+alias gtk_popover_bin_new = c_gtk_popover_bin_new;
+
+/** */
+alias gtk_popover_bin_get_child = c_gtk_popover_bin_get_child;
+
+/** */
+alias gtk_popover_bin_get_handle_input = c_gtk_popover_bin_get_handle_input;
+
+/** */
+alias gtk_popover_bin_get_menu_model = c_gtk_popover_bin_get_menu_model;
+
+/** */
+alias gtk_popover_bin_get_popover = c_gtk_popover_bin_get_popover;
+
+/** */
+alias gtk_popover_bin_popdown = c_gtk_popover_bin_popdown;
+
+/** */
+alias gtk_popover_bin_popup = c_gtk_popover_bin_popup;
+
+/** */
+alias gtk_popover_bin_set_child = c_gtk_popover_bin_set_child;
+
+/** */
+alias gtk_popover_bin_set_handle_input = c_gtk_popover_bin_set_handle_input;
+
+/** */
+alias gtk_popover_bin_set_menu_model = c_gtk_popover_bin_set_menu_model;
+
+/** */
+alias gtk_popover_bin_set_popover = c_gtk_popover_bin_set_popover;
 
 // PopoverMenu
 
@@ -13558,6 +13781,9 @@ alias gtk_snapshot_append_node = c_gtk_snapshot_append_node;
 alias gtk_snapshot_append_outset_shadow = c_gtk_snapshot_append_outset_shadow;
 
 /** */
+alias gtk_snapshot_append_paste = c_gtk_snapshot_append_paste;
+
+/** */
 alias gtk_snapshot_append_radial_gradient = c_gtk_snapshot_append_radial_gradient;
 
 /** */
@@ -13603,6 +13829,15 @@ alias gtk_snapshot_push_clip = c_gtk_snapshot_push_clip;
 alias gtk_snapshot_push_color_matrix = c_gtk_snapshot_push_color_matrix;
 
 /** */
+alias gtk_snapshot_push_component_transfer = c_gtk_snapshot_push_component_transfer;
+
+/** */
+alias gtk_snapshot_push_composite = c_gtk_snapshot_push_composite;
+
+/** */
+alias gtk_snapshot_push_copy = c_gtk_snapshot_push_copy;
+
+/** */
 alias gtk_snapshot_push_cross_fade = c_gtk_snapshot_push_cross_fade;
 
 /** */
@@ -13613,6 +13848,9 @@ alias gtk_snapshot_push_fill = c_gtk_snapshot_push_fill;
 
 /** */
 alias gtk_snapshot_push_gl_shader = c_gtk_snapshot_push_gl_shader;
+
+/** */
+alias gtk_snapshot_push_isolation = c_gtk_snapshot_push_isolation;
 
 /** */
 alias gtk_snapshot_push_mask = c_gtk_snapshot_push_mask;
@@ -14057,6 +14295,9 @@ alias gtk_string_list_new = c_gtk_string_list_new;
 alias gtk_string_list_append = c_gtk_string_list_append;
 
 /** */
+alias gtk_string_list_find = c_gtk_string_list_find;
+
+/** */
 alias gtk_string_list_get_string = c_gtk_string_list_get_string;
 
 /** */
@@ -14178,6 +14419,62 @@ alias gtk_style_context_to_string = c_gtk_style_context_to_string;
 /** */
 alias gtk_style_provider_get_type = c_gtk_style_provider_get_type;
 
+// Svg
+
+/** */
+alias gtk_svg_get_type = c_gtk_svg_get_type;
+
+/** */
+alias gtk_svg_new = c_gtk_svg_new;
+
+/** */
+alias gtk_svg_new_from_bytes = c_gtk_svg_new_from_bytes;
+
+/** */
+alias gtk_svg_new_from_resource = c_gtk_svg_new_from_resource;
+
+/** */
+alias gtk_svg_get_features = c_gtk_svg_get_features;
+
+/** */
+alias gtk_svg_get_state = c_gtk_svg_get_state;
+
+/** */
+alias gtk_svg_get_state_names = c_gtk_svg_get_state_names;
+
+/** */
+alias gtk_svg_get_weight = c_gtk_svg_get_weight;
+
+/** */
+alias gtk_svg_load_from_bytes = c_gtk_svg_load_from_bytes;
+
+/** */
+alias gtk_svg_load_from_resource = c_gtk_svg_load_from_resource;
+
+/** */
+alias gtk_svg_pause = c_gtk_svg_pause;
+
+/** */
+alias gtk_svg_play = c_gtk_svg_play;
+
+/** */
+alias gtk_svg_serialize = c_gtk_svg_serialize;
+
+/** */
+alias gtk_svg_set_features = c_gtk_svg_set_features;
+
+/** */
+alias gtk_svg_set_frame_clock = c_gtk_svg_set_frame_clock;
+
+/** */
+alias gtk_svg_set_state = c_gtk_svg_set_state;
+
+/** */
+alias gtk_svg_set_weight = c_gtk_svg_set_weight;
+
+/** */
+alias gtk_svg_write_to_file = c_gtk_svg_write_to_file;
+
 // Switch
 
 /** */
@@ -14205,6 +14502,9 @@ alias gtk_symbolic_paintable_get_type = c_gtk_symbolic_paintable_get_type;
 
 /** */
 alias gtk_symbolic_paintable_snapshot_symbolic = c_gtk_symbolic_paintable_snapshot_symbolic;
+
+/** */
+alias gtk_symbolic_paintable_snapshot_with_weight = c_gtk_symbolic_paintable_snapshot_with_weight;
 
 // Text
 
@@ -14326,6 +14626,9 @@ alias gtk_text_buffer_get_type = c_gtk_text_buffer_get_type;
 
 /** */
 alias gtk_text_buffer_new = c_gtk_text_buffer_new;
+
+/** */
+alias gtk_text_buffer_add_commit_notify = c_gtk_text_buffer_add_commit_notify;
 
 /** */
 alias gtk_text_buffer_add_mark = c_gtk_text_buffer_add_mark;
@@ -14509,6 +14812,9 @@ alias gtk_text_buffer_redo = c_gtk_text_buffer_redo;
 
 /** */
 alias gtk_text_buffer_remove_all_tags = c_gtk_text_buffer_remove_all_tags;
+
+/** */
+alias gtk_text_buffer_remove_commit_notify = c_gtk_text_buffer_remove_commit_notify;
 
 /** */
 alias gtk_text_buffer_remove_selection_clipboard = c_gtk_text_buffer_remove_selection_clipboard;
@@ -15010,6 +15316,9 @@ alias gtk_text_view_get_tabs = c_gtk_text_view_get_tabs;
 
 /** */
 alias gtk_text_view_get_top_margin = c_gtk_text_view_get_top_margin;
+
+/** */
+alias gtk_text_view_get_visible_offset = c_gtk_text_view_get_visible_offset;
 
 /** */
 alias gtk_text_view_get_visible_rect = c_gtk_text_view_get_visible_rect;
@@ -16180,6 +16489,14 @@ alias gtk_tree_view_column_set_visible = c_gtk_tree_view_column_set_visible;
 /** */
 alias gtk_tree_view_column_set_widget = c_gtk_tree_view_column_set_widget;
 
+// TryExpression
+
+/** */
+alias gtk_try_expression_get_type = c_gtk_try_expression_get_type;
+
+/** */
+alias gtk_try_expression_new = c_gtk_try_expression_new;
+
 // UriLauncher
 
 /** */
@@ -16187,6 +16504,9 @@ alias gtk_uri_launcher_get_type = c_gtk_uri_launcher_get_type;
 
 /** */
 alias gtk_uri_launcher_new = c_gtk_uri_launcher_new;
+
+/** */
+alias gtk_uri_launcher_can_launch = c_gtk_uri_launcher_can_launch;
 
 /** */
 alias gtk_uri_launcher_get_uri = c_gtk_uri_launcher_get_uri;
@@ -16452,6 +16772,9 @@ alias gtk_widget_get_last_child = c_gtk_widget_get_last_child;
 alias gtk_widget_get_layout_manager = c_gtk_widget_get_layout_manager;
 
 /** */
+alias gtk_widget_get_limit_events = c_gtk_widget_get_limit_events;
+
+/** */
 alias gtk_widget_get_mapped = c_gtk_widget_get_mapped;
 
 /** */
@@ -16701,6 +17024,9 @@ alias gtk_widget_set_hexpand_set = c_gtk_widget_set_hexpand_set;
 alias gtk_widget_set_layout_manager = c_gtk_widget_set_layout_manager;
 
 /** */
+alias gtk_widget_set_limit_events = c_gtk_widget_set_limit_events;
+
+/** */
 alias gtk_widget_set_margin_bottom = c_gtk_widget_set_margin_bottom;
 
 /** */
@@ -16929,6 +17255,9 @@ alias gtk_window_get_focus = c_gtk_window_get_focus;
 alias gtk_window_get_focus_visible = c_gtk_window_get_focus_visible;
 
 /** */
+alias gtk_window_get_gravity = c_gtk_window_get_gravity;
+
+/** */
 alias gtk_window_get_group = c_gtk_window_get_group;
 
 /** */
@@ -17016,6 +17345,9 @@ alias gtk_window_set_focus = c_gtk_window_set_focus;
 alias gtk_window_set_focus_visible = c_gtk_window_set_focus_visible;
 
 /** */
+alias gtk_window_set_gravity = c_gtk_window_set_gravity;
+
+/** */
 alias gtk_window_set_handle_menubar_accel = c_gtk_window_set_handle_menubar_accel;
 
 /** */
@@ -17072,10 +17404,16 @@ alias gtk_window_controls_get_empty = c_gtk_window_controls_get_empty;
 alias gtk_window_controls_get_side = c_gtk_window_controls_get_side;
 
 /** */
+alias gtk_window_controls_get_use_native_controls = c_gtk_window_controls_get_use_native_controls;
+
+/** */
 alias gtk_window_controls_set_decoration_layout = c_gtk_window_controls_set_decoration_layout;
 
 /** */
 alias gtk_window_controls_set_side = c_gtk_window_controls_set_side;
+
+/** */
+alias gtk_window_controls_set_use_native_controls = c_gtk_window_controls_set_use_native_controls;
 
 // WindowGroup
 
@@ -17111,6 +17449,9 @@ alias gtk_window_handle_set_child = c_gtk_window_handle_set_child;
 // global
 
 /** */
+alias gtk_accelerator_get_accessible_label = c_gtk_accelerator_get_accessible_label;
+
+/** */
 alias gtk_accelerator_get_default_mod_mask = c_gtk_accelerator_get_default_mod_mask;
 
 /** */
@@ -17142,6 +17483,12 @@ alias gtk_css_parser_error_quark = c_gtk_css_parser_error_quark;
 
 /** */
 alias gtk_css_parser_warning_quark = c_gtk_css_parser_warning_quark;
+
+/** */
+alias gtk_disable_portal_interfaces = c_gtk_disable_portal_interfaces;
+
+/** */
+alias gtk_disable_portals = c_gtk_disable_portals;
 
 /** */
 alias gtk_disable_setlocale = c_gtk_disable_setlocale;
@@ -17360,6 +17707,23 @@ alias gtk_print_error_quark = c_gtk_print_error_quark;
 /** */
 alias gtk_recent_manager_error_quark = c_gtk_recent_manager_error_quark;
 
+// SvgError
+
+/** */
+alias gtk_svg_error_get_attribute = c_gtk_svg_error_get_attribute;
+
+/** */
+alias gtk_svg_error_get_element = c_gtk_svg_error_get_element;
+
+/** */
+alias gtk_svg_error_get_end = c_gtk_svg_error_get_end;
+
+/** */
+alias gtk_svg_error_get_start = c_gtk_svg_error_get_start;
+
+/** */
+alias gtk_svg_error_quark = c_gtk_svg_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -17410,6 +17774,7 @@ shared static this()
   // Accessible
   gidLink(cast(void**)&gtk_accessible_get_type, "gtk_accessible_get_type", libs);
   gidLink(cast(void**)&gtk_accessible_announce, "gtk_accessible_announce", libs);
+  gidLink(cast(void**)&gtk_accessible_get_accessible_id, "gtk_accessible_get_accessible_id", libs);
   gidLink(cast(void**)&gtk_accessible_get_accessible_parent, "gtk_accessible_get_accessible_parent", libs);
   gidLink(cast(void**)&gtk_accessible_get_accessible_role, "gtk_accessible_get_accessible_role", libs);
   gidLink(cast(void**)&gtk_accessible_get_at_context, "gtk_accessible_get_at_context", libs);
@@ -17422,12 +17787,21 @@ shared static this()
   gidLink(cast(void**)&gtk_accessible_reset_state, "gtk_accessible_reset_state", libs);
   gidLink(cast(void**)&gtk_accessible_set_accessible_parent, "gtk_accessible_set_accessible_parent", libs);
   gidLink(cast(void**)&gtk_accessible_update_next_accessible_sibling, "gtk_accessible_update_next_accessible_sibling", libs);
+  gidLink(cast(void**)&gtk_accessible_update_platform_state, "gtk_accessible_update_platform_state", libs);
   gidLink(cast(void**)&gtk_accessible_update_property, "gtk_accessible_update_property", libs);
   gidLink(cast(void**)&gtk_accessible_update_property_value, "gtk_accessible_update_property_value", libs);
   gidLink(cast(void**)&gtk_accessible_update_relation, "gtk_accessible_update_relation", libs);
   gidLink(cast(void**)&gtk_accessible_update_relation_value, "gtk_accessible_update_relation_value", libs);
   gidLink(cast(void**)&gtk_accessible_update_state, "gtk_accessible_update_state", libs);
   gidLink(cast(void**)&gtk_accessible_update_state_value, "gtk_accessible_update_state_value", libs);
+
+  // AccessibleHyperlink
+  gidLink(cast(void**)&gtk_accessible_hyperlink_get_type, "gtk_accessible_hyperlink_get_type", libs);
+  gidLink(cast(void**)&gtk_accessible_hyperlink_new, "gtk_accessible_hyperlink_new", libs);
+  gidLink(cast(void**)&gtk_accessible_hyperlink_set_platform_state, "gtk_accessible_hyperlink_set_platform_state", libs);
+
+  // AccessibleHypertext
+  gidLink(cast(void**)&gtk_accessible_hypertext_get_type, "gtk_accessible_hypertext_get_type", libs);
 
   // AccessibleList
   gidLink(cast(void**)&gtk_accessible_list_get_type, "gtk_accessible_list_get_type", libs);
@@ -17825,6 +18199,7 @@ shared static this()
   gidLink(cast(void**)&gtk_calendar_get_year, "gtk_calendar_get_year", libs);
   gidLink(cast(void**)&gtk_calendar_mark_day, "gtk_calendar_mark_day", libs);
   gidLink(cast(void**)&gtk_calendar_select_day, "gtk_calendar_select_day", libs);
+  gidLink(cast(void**)&gtk_calendar_set_date, "gtk_calendar_set_date", libs);
   gidLink(cast(void**)&gtk_calendar_set_day, "gtk_calendar_set_day", libs);
   gidLink(cast(void**)&gtk_calendar_set_month, "gtk_calendar_set_month", libs);
   gidLink(cast(void**)&gtk_calendar_set_show_day_names, "gtk_calendar_set_show_day_names", libs);
@@ -18310,6 +18685,8 @@ shared static this()
   // CssSection
   gidLink(cast(void**)&gtk_css_section_get_type, "gtk_css_section_get_type", libs);
   gidLink(cast(void**)&gtk_css_section_new, "gtk_css_section_new", libs);
+  gidLink(cast(void**)&gtk_css_section_new_with_bytes, "gtk_css_section_new_with_bytes", libs);
+  gidLink(cast(void**)&gtk_css_section_get_bytes, "gtk_css_section_get_bytes", libs);
   gidLink(cast(void**)&gtk_css_section_get_end_location, "gtk_css_section_get_end_location", libs);
   gidLink(cast(void**)&gtk_css_section_get_file, "gtk_css_section_get_file", libs);
   gidLink(cast(void**)&gtk_css_section_get_parent, "gtk_css_section_get_parent", libs);
@@ -18364,8 +18741,8 @@ shared static this()
 
   // DragIcon
   gidLink(cast(void**)&gtk_drag_icon_get_type, "gtk_drag_icon_get_type", libs);
-  gidLink(cast(void**)&gtk_drag_icon_create_widget_for_value, "gtk_drag_icon_create_widget_for_value", libs);
   gidLink(cast(void**)&gtk_drag_icon_get_for_drag, "gtk_drag_icon_get_for_drag", libs);
+  gidLink(cast(void**)&gtk_drag_icon_create_widget_for_value, "gtk_drag_icon_create_widget_for_value", libs);
   gidLink(cast(void**)&gtk_drag_icon_set_from_paintable, "gtk_drag_icon_set_from_paintable", libs);
   gidLink(cast(void**)&gtk_drag_icon_get_child, "gtk_drag_icon_get_child", libs);
   gidLink(cast(void**)&gtk_drag_icon_set_child, "gtk_drag_icon_set_child", libs);
@@ -18512,6 +18889,7 @@ shared static this()
   gidLink(cast(void**)&gtk_entry_get_input_purpose, "gtk_entry_get_input_purpose", libs);
   gidLink(cast(void**)&gtk_entry_get_invisible_char, "gtk_entry_get_invisible_char", libs);
   gidLink(cast(void**)&gtk_entry_get_max_length, "gtk_entry_get_max_length", libs);
+  gidLink(cast(void**)&gtk_entry_get_menu_entry_icon_text, "gtk_entry_get_menu_entry_icon_text", libs);
   gidLink(cast(void**)&gtk_entry_get_overwrite_mode, "gtk_entry_get_overwrite_mode", libs);
   gidLink(cast(void**)&gtk_entry_get_placeholder_text, "gtk_entry_get_placeholder_text", libs);
   gidLink(cast(void**)&gtk_entry_get_progress_fraction, "gtk_entry_get_progress_fraction", libs);
@@ -18541,6 +18919,7 @@ shared static this()
   gidLink(cast(void**)&gtk_entry_set_input_purpose, "gtk_entry_set_input_purpose", libs);
   gidLink(cast(void**)&gtk_entry_set_invisible_char, "gtk_entry_set_invisible_char", libs);
   gidLink(cast(void**)&gtk_entry_set_max_length, "gtk_entry_set_max_length", libs);
+  gidLink(cast(void**)&gtk_entry_set_menu_entry_icon_text, "gtk_entry_set_menu_entry_icon_text", libs);
   gidLink(cast(void**)&gtk_entry_set_overwrite_mode, "gtk_entry_set_overwrite_mode", libs);
   gidLink(cast(void**)&gtk_entry_set_placeholder_text, "gtk_entry_set_placeholder_text", libs);
   gidLink(cast(void**)&gtk_entry_set_progress_fraction, "gtk_entry_set_progress_fraction", libs);
@@ -18736,8 +19115,14 @@ shared static this()
   gidLink(cast(void**)&gtk_file_dialog_open_finish, "gtk_file_dialog_open_finish", libs);
   gidLink(cast(void**)&gtk_file_dialog_open_multiple, "gtk_file_dialog_open_multiple", libs);
   gidLink(cast(void**)&gtk_file_dialog_open_multiple_finish, "gtk_file_dialog_open_multiple_finish", libs);
+  gidLink(cast(void**)&gtk_file_dialog_open_multiple_text_files, "gtk_file_dialog_open_multiple_text_files", libs);
+  gidLink(cast(void**)&gtk_file_dialog_open_multiple_text_files_finish, "gtk_file_dialog_open_multiple_text_files_finish", libs);
+  gidLink(cast(void**)&gtk_file_dialog_open_text_file, "gtk_file_dialog_open_text_file", libs);
+  gidLink(cast(void**)&gtk_file_dialog_open_text_file_finish, "gtk_file_dialog_open_text_file_finish", libs);
   gidLink(cast(void**)&gtk_file_dialog_save, "gtk_file_dialog_save", libs);
   gidLink(cast(void**)&gtk_file_dialog_save_finish, "gtk_file_dialog_save_finish", libs);
+  gidLink(cast(void**)&gtk_file_dialog_save_text_file, "gtk_file_dialog_save_text_file", libs);
+  gidLink(cast(void**)&gtk_file_dialog_save_text_file_finish, "gtk_file_dialog_save_text_file_finish", libs);
   gidLink(cast(void**)&gtk_file_dialog_select_folder, "gtk_file_dialog_select_folder", libs);
   gidLink(cast(void**)&gtk_file_dialog_select_folder_finish, "gtk_file_dialog_select_folder_finish", libs);
   gidLink(cast(void**)&gtk_file_dialog_select_multiple_folders, "gtk_file_dialog_select_multiple_folders", libs);
@@ -18756,6 +19141,7 @@ shared static this()
   gidLink(cast(void**)&gtk_file_filter_new, "gtk_file_filter_new", libs);
   gidLink(cast(void**)&gtk_file_filter_new_from_gvariant, "gtk_file_filter_new_from_gvariant", libs);
   gidLink(cast(void**)&gtk_file_filter_add_mime_type, "gtk_file_filter_add_mime_type", libs);
+  gidLink(cast(void**)&gtk_file_filter_add_mime_types, "gtk_file_filter_add_mime_types", libs);
   gidLink(cast(void**)&gtk_file_filter_add_pattern, "gtk_file_filter_add_pattern", libs);
   gidLink(cast(void**)&gtk_file_filter_add_pixbuf_formats, "gtk_file_filter_add_pixbuf_formats", libs);
   gidLink(cast(void**)&gtk_file_filter_add_suffix, "gtk_file_filter_add_suffix", libs);
@@ -18791,9 +19177,11 @@ shared static this()
   gidLink(cast(void**)&gtk_filter_list_model_get_incremental, "gtk_filter_list_model_get_incremental", libs);
   gidLink(cast(void**)&gtk_filter_list_model_get_model, "gtk_filter_list_model_get_model", libs);
   gidLink(cast(void**)&gtk_filter_list_model_get_pending, "gtk_filter_list_model_get_pending", libs);
+  gidLink(cast(void**)&gtk_filter_list_model_get_watch_items, "gtk_filter_list_model_get_watch_items", libs);
   gidLink(cast(void**)&gtk_filter_list_model_set_filter, "gtk_filter_list_model_set_filter", libs);
   gidLink(cast(void**)&gtk_filter_list_model_set_incremental, "gtk_filter_list_model_set_incremental", libs);
   gidLink(cast(void**)&gtk_filter_list_model_set_model, "gtk_filter_list_model_set_model", libs);
+  gidLink(cast(void**)&gtk_filter_list_model_set_watch_items, "gtk_filter_list_model_set_watch_items", libs);
 
   // Fixed
   gidLink(cast(void**)&gtk_fixed_get_type, "gtk_fixed_get_type", libs);
@@ -19067,8 +19455,10 @@ shared static this()
   // GraphicsOffload
   gidLink(cast(void**)&gtk_graphics_offload_get_type, "gtk_graphics_offload_get_type", libs);
   gidLink(cast(void**)&gtk_graphics_offload_new, "gtk_graphics_offload_new", libs);
+  gidLink(cast(void**)&gtk_graphics_offload_get_black_background, "gtk_graphics_offload_get_black_background", libs);
   gidLink(cast(void**)&gtk_graphics_offload_get_child, "gtk_graphics_offload_get_child", libs);
   gidLink(cast(void**)&gtk_graphics_offload_get_enabled, "gtk_graphics_offload_get_enabled", libs);
+  gidLink(cast(void**)&gtk_graphics_offload_set_black_background, "gtk_graphics_offload_set_black_background", libs);
   gidLink(cast(void**)&gtk_graphics_offload_set_child, "gtk_graphics_offload_set_child", libs);
   gidLink(cast(void**)&gtk_graphics_offload_set_enabled, "gtk_graphics_offload_set_enabled", libs);
 
@@ -19150,12 +19540,14 @@ shared static this()
   gidLink(cast(void**)&gtk_header_bar_get_decoration_layout, "gtk_header_bar_get_decoration_layout", libs);
   gidLink(cast(void**)&gtk_header_bar_get_show_title_buttons, "gtk_header_bar_get_show_title_buttons", libs);
   gidLink(cast(void**)&gtk_header_bar_get_title_widget, "gtk_header_bar_get_title_widget", libs);
+  gidLink(cast(void**)&gtk_header_bar_get_use_native_controls, "gtk_header_bar_get_use_native_controls", libs);
   gidLink(cast(void**)&gtk_header_bar_pack_end, "gtk_header_bar_pack_end", libs);
   gidLink(cast(void**)&gtk_header_bar_pack_start, "gtk_header_bar_pack_start", libs);
   gidLink(cast(void**)&gtk_header_bar_remove, "gtk_header_bar_remove", libs);
   gidLink(cast(void**)&gtk_header_bar_set_decoration_layout, "gtk_header_bar_set_decoration_layout", libs);
   gidLink(cast(void**)&gtk_header_bar_set_show_title_buttons, "gtk_header_bar_set_show_title_buttons", libs);
   gidLink(cast(void**)&gtk_header_bar_set_title_widget, "gtk_header_bar_set_title_widget", libs);
+  gidLink(cast(void**)&gtk_header_bar_set_use_native_controls, "gtk_header_bar_set_use_native_controls", libs);
 
   // IMContext
   gidLink(cast(void**)&gtk_im_context_get_type, "gtk_im_context_get_type", libs);
@@ -19469,6 +19861,7 @@ shared static this()
   gidLink(cast(void**)&gtk_list_box_get_selected_rows, "gtk_list_box_get_selected_rows", libs);
   gidLink(cast(void**)&gtk_list_box_get_selection_mode, "gtk_list_box_get_selection_mode", libs);
   gidLink(cast(void**)&gtk_list_box_get_show_separators, "gtk_list_box_get_show_separators", libs);
+  gidLink(cast(void**)&gtk_list_box_get_tab_behavior, "gtk_list_box_get_tab_behavior", libs);
   gidLink(cast(void**)&gtk_list_box_insert, "gtk_list_box_insert", libs);
   gidLink(cast(void**)&gtk_list_box_invalidate_filter, "gtk_list_box_invalidate_filter", libs);
   gidLink(cast(void**)&gtk_list_box_invalidate_headers, "gtk_list_box_invalidate_headers", libs);
@@ -19487,6 +19880,7 @@ shared static this()
   gidLink(cast(void**)&gtk_list_box_set_selection_mode, "gtk_list_box_set_selection_mode", libs);
   gidLink(cast(void**)&gtk_list_box_set_show_separators, "gtk_list_box_set_show_separators", libs);
   gidLink(cast(void**)&gtk_list_box_set_sort_func, "gtk_list_box_set_sort_func", libs);
+  gidLink(cast(void**)&gtk_list_box_set_tab_behavior, "gtk_list_box_set_tab_behavior", libs);
   gidLink(cast(void**)&gtk_list_box_unselect_all, "gtk_list_box_unselect_all", libs);
   gidLink(cast(void**)&gtk_list_box_unselect_row, "gtk_list_box_unselect_row", libs);
 
@@ -19978,6 +20372,7 @@ shared static this()
   gidLink(cast(void**)&gtk_picture_get_can_shrink, "gtk_picture_get_can_shrink", libs);
   gidLink(cast(void**)&gtk_picture_get_content_fit, "gtk_picture_get_content_fit", libs);
   gidLink(cast(void**)&gtk_picture_get_file, "gtk_picture_get_file", libs);
+  gidLink(cast(void**)&gtk_picture_get_isolate_contents, "gtk_picture_get_isolate_contents", libs);
   gidLink(cast(void**)&gtk_picture_get_keep_aspect_ratio, "gtk_picture_get_keep_aspect_ratio", libs);
   gidLink(cast(void**)&gtk_picture_get_paintable, "gtk_picture_get_paintable", libs);
   gidLink(cast(void**)&gtk_picture_set_alternative_text, "gtk_picture_set_alternative_text", libs);
@@ -19985,6 +20380,7 @@ shared static this()
   gidLink(cast(void**)&gtk_picture_set_content_fit, "gtk_picture_set_content_fit", libs);
   gidLink(cast(void**)&gtk_picture_set_file, "gtk_picture_set_file", libs);
   gidLink(cast(void**)&gtk_picture_set_filename, "gtk_picture_set_filename", libs);
+  gidLink(cast(void**)&gtk_picture_set_isolate_contents, "gtk_picture_set_isolate_contents", libs);
   gidLink(cast(void**)&gtk_picture_set_keep_aspect_ratio, "gtk_picture_set_keep_aspect_ratio", libs);
   gidLink(cast(void**)&gtk_picture_set_paintable, "gtk_picture_set_paintable", libs);
   gidLink(cast(void**)&gtk_picture_set_pixbuf, "gtk_picture_set_pixbuf", libs);
@@ -20013,6 +20409,20 @@ shared static this()
   gidLink(cast(void**)&gtk_popover_set_offset, "gtk_popover_set_offset", libs);
   gidLink(cast(void**)&gtk_popover_set_pointing_to, "gtk_popover_set_pointing_to", libs);
   gidLink(cast(void**)&gtk_popover_set_position, "gtk_popover_set_position", libs);
+
+  // PopoverBin
+  gidLink(cast(void**)&gtk_popover_bin_get_type, "gtk_popover_bin_get_type", libs);
+  gidLink(cast(void**)&gtk_popover_bin_new, "gtk_popover_bin_new", libs);
+  gidLink(cast(void**)&gtk_popover_bin_get_child, "gtk_popover_bin_get_child", libs);
+  gidLink(cast(void**)&gtk_popover_bin_get_handle_input, "gtk_popover_bin_get_handle_input", libs);
+  gidLink(cast(void**)&gtk_popover_bin_get_menu_model, "gtk_popover_bin_get_menu_model", libs);
+  gidLink(cast(void**)&gtk_popover_bin_get_popover, "gtk_popover_bin_get_popover", libs);
+  gidLink(cast(void**)&gtk_popover_bin_popdown, "gtk_popover_bin_popdown", libs);
+  gidLink(cast(void**)&gtk_popover_bin_popup, "gtk_popover_bin_popup", libs);
+  gidLink(cast(void**)&gtk_popover_bin_set_child, "gtk_popover_bin_set_child", libs);
+  gidLink(cast(void**)&gtk_popover_bin_set_handle_input, "gtk_popover_bin_set_handle_input", libs);
+  gidLink(cast(void**)&gtk_popover_bin_set_menu_model, "gtk_popover_bin_set_menu_model", libs);
+  gidLink(cast(void**)&gtk_popover_bin_set_popover, "gtk_popover_bin_set_popover", libs);
 
   // PopoverMenu
   gidLink(cast(void**)&gtk_popover_menu_get_type, "gtk_popover_menu_get_type", libs);
@@ -20666,6 +21076,7 @@ shared static this()
   gidLink(cast(void**)&gtk_snapshot_append_linear_gradient, "gtk_snapshot_append_linear_gradient", libs);
   gidLink(cast(void**)&gtk_snapshot_append_node, "gtk_snapshot_append_node", libs);
   gidLink(cast(void**)&gtk_snapshot_append_outset_shadow, "gtk_snapshot_append_outset_shadow", libs);
+  gidLink(cast(void**)&gtk_snapshot_append_paste, "gtk_snapshot_append_paste", libs);
   gidLink(cast(void**)&gtk_snapshot_append_radial_gradient, "gtk_snapshot_append_radial_gradient", libs);
   gidLink(cast(void**)&gtk_snapshot_append_repeating_linear_gradient, "gtk_snapshot_append_repeating_linear_gradient", libs);
   gidLink(cast(void**)&gtk_snapshot_append_repeating_radial_gradient, "gtk_snapshot_append_repeating_radial_gradient", libs);
@@ -20681,10 +21092,14 @@ shared static this()
   gidLink(cast(void**)&gtk_snapshot_push_blur, "gtk_snapshot_push_blur", libs);
   gidLink(cast(void**)&gtk_snapshot_push_clip, "gtk_snapshot_push_clip", libs);
   gidLink(cast(void**)&gtk_snapshot_push_color_matrix, "gtk_snapshot_push_color_matrix", libs);
+  gidLink(cast(void**)&gtk_snapshot_push_component_transfer, "gtk_snapshot_push_component_transfer", libs);
+  gidLink(cast(void**)&gtk_snapshot_push_composite, "gtk_snapshot_push_composite", libs);
+  gidLink(cast(void**)&gtk_snapshot_push_copy, "gtk_snapshot_push_copy", libs);
   gidLink(cast(void**)&gtk_snapshot_push_cross_fade, "gtk_snapshot_push_cross_fade", libs);
   gidLink(cast(void**)&gtk_snapshot_push_debug, "gtk_snapshot_push_debug", libs);
   gidLink(cast(void**)&gtk_snapshot_push_fill, "gtk_snapshot_push_fill", libs);
   gidLink(cast(void**)&gtk_snapshot_push_gl_shader, "gtk_snapshot_push_gl_shader", libs);
+  gidLink(cast(void**)&gtk_snapshot_push_isolation, "gtk_snapshot_push_isolation", libs);
   gidLink(cast(void**)&gtk_snapshot_push_mask, "gtk_snapshot_push_mask", libs);
   gidLink(cast(void**)&gtk_snapshot_push_opacity, "gtk_snapshot_push_opacity", libs);
   gidLink(cast(void**)&gtk_snapshot_push_repeat, "gtk_snapshot_push_repeat", libs);
@@ -20847,6 +21262,7 @@ shared static this()
   gidLink(cast(void**)&gtk_string_list_get_type, "gtk_string_list_get_type", libs);
   gidLink(cast(void**)&gtk_string_list_new, "gtk_string_list_new", libs);
   gidLink(cast(void**)&gtk_string_list_append, "gtk_string_list_append", libs);
+  gidLink(cast(void**)&gtk_string_list_find, "gtk_string_list_find", libs);
   gidLink(cast(void**)&gtk_string_list_get_string, "gtk_string_list_get_string", libs);
   gidLink(cast(void**)&gtk_string_list_remove, "gtk_string_list_remove", libs);
   gidLink(cast(void**)&gtk_string_list_splice, "gtk_string_list_splice", libs);
@@ -20894,6 +21310,26 @@ shared static this()
   // StyleProvider
   gidLink(cast(void**)&gtk_style_provider_get_type, "gtk_style_provider_get_type", libs);
 
+  // Svg
+  gidLink(cast(void**)&gtk_svg_get_type, "gtk_svg_get_type", libs);
+  gidLink(cast(void**)&gtk_svg_new, "gtk_svg_new", libs);
+  gidLink(cast(void**)&gtk_svg_new_from_bytes, "gtk_svg_new_from_bytes", libs);
+  gidLink(cast(void**)&gtk_svg_new_from_resource, "gtk_svg_new_from_resource", libs);
+  gidLink(cast(void**)&gtk_svg_get_features, "gtk_svg_get_features", libs);
+  gidLink(cast(void**)&gtk_svg_get_state, "gtk_svg_get_state", libs);
+  gidLink(cast(void**)&gtk_svg_get_state_names, "gtk_svg_get_state_names", libs);
+  gidLink(cast(void**)&gtk_svg_get_weight, "gtk_svg_get_weight", libs);
+  gidLink(cast(void**)&gtk_svg_load_from_bytes, "gtk_svg_load_from_bytes", libs);
+  gidLink(cast(void**)&gtk_svg_load_from_resource, "gtk_svg_load_from_resource", libs);
+  gidLink(cast(void**)&gtk_svg_pause, "gtk_svg_pause", libs);
+  gidLink(cast(void**)&gtk_svg_play, "gtk_svg_play", libs);
+  gidLink(cast(void**)&gtk_svg_serialize, "gtk_svg_serialize", libs);
+  gidLink(cast(void**)&gtk_svg_set_features, "gtk_svg_set_features", libs);
+  gidLink(cast(void**)&gtk_svg_set_frame_clock, "gtk_svg_set_frame_clock", libs);
+  gidLink(cast(void**)&gtk_svg_set_state, "gtk_svg_set_state", libs);
+  gidLink(cast(void**)&gtk_svg_set_weight, "gtk_svg_set_weight", libs);
+  gidLink(cast(void**)&gtk_svg_write_to_file, "gtk_svg_write_to_file", libs);
+
   // Switch
   gidLink(cast(void**)&gtk_switch_get_type, "gtk_switch_get_type", libs);
   gidLink(cast(void**)&gtk_switch_new, "gtk_switch_new", libs);
@@ -20905,6 +21341,7 @@ shared static this()
   // SymbolicPaintable
   gidLink(cast(void**)&gtk_symbolic_paintable_get_type, "gtk_symbolic_paintable_get_type", libs);
   gidLink(cast(void**)&gtk_symbolic_paintable_snapshot_symbolic, "gtk_symbolic_paintable_snapshot_symbolic", libs);
+  gidLink(cast(void**)&gtk_symbolic_paintable_snapshot_with_weight, "gtk_symbolic_paintable_snapshot_with_weight", libs);
 
   // Text
   gidLink(cast(void**)&gtk_text_get_type, "gtk_text_get_type", libs);
@@ -20948,6 +21385,7 @@ shared static this()
   // TextBuffer
   gidLink(cast(void**)&gtk_text_buffer_get_type, "gtk_text_buffer_get_type", libs);
   gidLink(cast(void**)&gtk_text_buffer_new, "gtk_text_buffer_new", libs);
+  gidLink(cast(void**)&gtk_text_buffer_add_commit_notify, "gtk_text_buffer_add_commit_notify", libs);
   gidLink(cast(void**)&gtk_text_buffer_add_mark, "gtk_text_buffer_add_mark", libs);
   gidLink(cast(void**)&gtk_text_buffer_add_selection_clipboard, "gtk_text_buffer_add_selection_clipboard", libs);
   gidLink(cast(void**)&gtk_text_buffer_apply_tag, "gtk_text_buffer_apply_tag", libs);
@@ -21009,6 +21447,7 @@ shared static this()
   gidLink(cast(void**)&gtk_text_buffer_place_cursor, "gtk_text_buffer_place_cursor", libs);
   gidLink(cast(void**)&gtk_text_buffer_redo, "gtk_text_buffer_redo", libs);
   gidLink(cast(void**)&gtk_text_buffer_remove_all_tags, "gtk_text_buffer_remove_all_tags", libs);
+  gidLink(cast(void**)&gtk_text_buffer_remove_commit_notify, "gtk_text_buffer_remove_commit_notify", libs);
   gidLink(cast(void**)&gtk_text_buffer_remove_selection_clipboard, "gtk_text_buffer_remove_selection_clipboard", libs);
   gidLink(cast(void**)&gtk_text_buffer_remove_tag, "gtk_text_buffer_remove_tag", libs);
   gidLink(cast(void**)&gtk_text_buffer_remove_tag_by_name, "gtk_text_buffer_remove_tag_by_name", libs);
@@ -21184,6 +21623,7 @@ shared static this()
   gidLink(cast(void**)&gtk_text_view_get_rtl_context, "gtk_text_view_get_rtl_context", libs);
   gidLink(cast(void**)&gtk_text_view_get_tabs, "gtk_text_view_get_tabs", libs);
   gidLink(cast(void**)&gtk_text_view_get_top_margin, "gtk_text_view_get_top_margin", libs);
+  gidLink(cast(void**)&gtk_text_view_get_visible_offset, "gtk_text_view_get_visible_offset", libs);
   gidLink(cast(void**)&gtk_text_view_get_visible_rect, "gtk_text_view_get_visible_rect", libs);
   gidLink(cast(void**)&gtk_text_view_get_wrap_mode, "gtk_text_view_get_wrap_mode", libs);
   gidLink(cast(void**)&gtk_text_view_im_context_filter_keypress, "gtk_text_view_im_context_filter_keypress", libs);
@@ -21600,9 +22040,14 @@ shared static this()
   gidLink(cast(void**)&gtk_tree_view_column_set_visible, "gtk_tree_view_column_set_visible", libs);
   gidLink(cast(void**)&gtk_tree_view_column_set_widget, "gtk_tree_view_column_set_widget", libs);
 
+  // TryExpression
+  gidLink(cast(void**)&gtk_try_expression_get_type, "gtk_try_expression_get_type", libs);
+  gidLink(cast(void**)&gtk_try_expression_new, "gtk_try_expression_new", libs);
+
   // UriLauncher
   gidLink(cast(void**)&gtk_uri_launcher_get_type, "gtk_uri_launcher_get_type", libs);
   gidLink(cast(void**)&gtk_uri_launcher_new, "gtk_uri_launcher_new", libs);
+  gidLink(cast(void**)&gtk_uri_launcher_can_launch, "gtk_uri_launcher_can_launch", libs);
   gidLink(cast(void**)&gtk_uri_launcher_get_uri, "gtk_uri_launcher_get_uri", libs);
   gidLink(cast(void**)&gtk_uri_launcher_launch, "gtk_uri_launcher_launch", libs);
   gidLink(cast(void**)&gtk_uri_launcher_launch_finish, "gtk_uri_launcher_launch_finish", libs);
@@ -21696,6 +22141,7 @@ shared static this()
   gidLink(cast(void**)&gtk_widget_get_hexpand_set, "gtk_widget_get_hexpand_set", libs);
   gidLink(cast(void**)&gtk_widget_get_last_child, "gtk_widget_get_last_child", libs);
   gidLink(cast(void**)&gtk_widget_get_layout_manager, "gtk_widget_get_layout_manager", libs);
+  gidLink(cast(void**)&gtk_widget_get_limit_events, "gtk_widget_get_limit_events", libs);
   gidLink(cast(void**)&gtk_widget_get_mapped, "gtk_widget_get_mapped", libs);
   gidLink(cast(void**)&gtk_widget_get_margin_bottom, "gtk_widget_get_margin_bottom", libs);
   gidLink(cast(void**)&gtk_widget_get_margin_end, "gtk_widget_get_margin_end", libs);
@@ -21779,6 +22225,7 @@ shared static this()
   gidLink(cast(void**)&gtk_widget_set_hexpand, "gtk_widget_set_hexpand", libs);
   gidLink(cast(void**)&gtk_widget_set_hexpand_set, "gtk_widget_set_hexpand_set", libs);
   gidLink(cast(void**)&gtk_widget_set_layout_manager, "gtk_widget_set_layout_manager", libs);
+  gidLink(cast(void**)&gtk_widget_set_limit_events, "gtk_widget_set_limit_events", libs);
   gidLink(cast(void**)&gtk_widget_set_margin_bottom, "gtk_widget_set_margin_bottom", libs);
   gidLink(cast(void**)&gtk_widget_set_margin_end, "gtk_widget_set_margin_end", libs);
   gidLink(cast(void**)&gtk_widget_set_margin_start, "gtk_widget_set_margin_start", libs);
@@ -21859,6 +22306,7 @@ shared static this()
   gidLink(cast(void**)&gtk_window_get_destroy_with_parent, "gtk_window_get_destroy_with_parent", libs);
   gidLink(cast(void**)&gtk_window_get_focus, "gtk_window_get_focus", libs);
   gidLink(cast(void**)&gtk_window_get_focus_visible, "gtk_window_get_focus_visible", libs);
+  gidLink(cast(void**)&gtk_window_get_gravity, "gtk_window_get_gravity", libs);
   gidLink(cast(void**)&gtk_window_get_group, "gtk_window_get_group", libs);
   gidLink(cast(void**)&gtk_window_get_handle_menubar_accel, "gtk_window_get_handle_menubar_accel", libs);
   gidLink(cast(void**)&gtk_window_get_hide_on_close, "gtk_window_get_hide_on_close", libs);
@@ -21888,6 +22336,7 @@ shared static this()
   gidLink(cast(void**)&gtk_window_set_display, "gtk_window_set_display", libs);
   gidLink(cast(void**)&gtk_window_set_focus, "gtk_window_set_focus", libs);
   gidLink(cast(void**)&gtk_window_set_focus_visible, "gtk_window_set_focus_visible", libs);
+  gidLink(cast(void**)&gtk_window_set_gravity, "gtk_window_set_gravity", libs);
   gidLink(cast(void**)&gtk_window_set_handle_menubar_accel, "gtk_window_set_handle_menubar_accel", libs);
   gidLink(cast(void**)&gtk_window_set_hide_on_close, "gtk_window_set_hide_on_close", libs);
   gidLink(cast(void**)&gtk_window_set_icon_name, "gtk_window_set_icon_name", libs);
@@ -21908,8 +22357,10 @@ shared static this()
   gidLink(cast(void**)&gtk_window_controls_get_decoration_layout, "gtk_window_controls_get_decoration_layout", libs);
   gidLink(cast(void**)&gtk_window_controls_get_empty, "gtk_window_controls_get_empty", libs);
   gidLink(cast(void**)&gtk_window_controls_get_side, "gtk_window_controls_get_side", libs);
+  gidLink(cast(void**)&gtk_window_controls_get_use_native_controls, "gtk_window_controls_get_use_native_controls", libs);
   gidLink(cast(void**)&gtk_window_controls_set_decoration_layout, "gtk_window_controls_set_decoration_layout", libs);
   gidLink(cast(void**)&gtk_window_controls_set_side, "gtk_window_controls_set_side", libs);
+  gidLink(cast(void**)&gtk_window_controls_set_use_native_controls, "gtk_window_controls_set_use_native_controls", libs);
 
   // WindowGroup
   gidLink(cast(void**)&gtk_window_group_get_type, "gtk_window_group_get_type", libs);
@@ -21925,6 +22376,7 @@ shared static this()
   gidLink(cast(void**)&gtk_window_handle_set_child, "gtk_window_handle_set_child", libs);
 
   // global
+  gidLink(cast(void**)&gtk_accelerator_get_accessible_label, "gtk_accelerator_get_accessible_label", libs);
   gidLink(cast(void**)&gtk_accelerator_get_default_mod_mask, "gtk_accelerator_get_default_mod_mask", libs);
   gidLink(cast(void**)&gtk_accelerator_get_label, "gtk_accelerator_get_label", libs);
   gidLink(cast(void**)&gtk_accelerator_get_label_with_keycode, "gtk_accelerator_get_label_with_keycode", libs);
@@ -21936,6 +22388,8 @@ shared static this()
   gidLink(cast(void**)&gtk_check_version, "gtk_check_version", libs);
   gidLink(cast(void**)&gtk_css_parser_error_quark, "gtk_css_parser_error_quark", libs);
   gidLink(cast(void**)&gtk_css_parser_warning_quark, "gtk_css_parser_warning_quark", libs);
+  gidLink(cast(void**)&gtk_disable_portal_interfaces, "gtk_disable_portal_interfaces", libs);
+  gidLink(cast(void**)&gtk_disable_portals, "gtk_disable_portals", libs);
   gidLink(cast(void**)&gtk_disable_setlocale, "gtk_disable_setlocale", libs);
   gidLink(cast(void**)&gtk_distribute_natural_allocation, "gtk_distribute_natural_allocation", libs);
   gidLink(cast(void**)&gtk_enumerate_printers, "gtk_enumerate_printers", libs);
@@ -22023,4 +22477,11 @@ shared static this()
 
   // RecentManagerError
   gidLink(cast(void**)&gtk_recent_manager_error_quark, "gtk_recent_manager_error_quark", libs);
+
+  // SvgError
+  gidLink(cast(void**)&gtk_svg_error_get_attribute, "gtk_svg_error_get_attribute", libs);
+  gidLink(cast(void**)&gtk_svg_error_get_element, "gtk_svg_error_get_element", libs);
+  gidLink(cast(void**)&gtk_svg_error_get_end, "gtk_svg_error_get_end", libs);
+  gidLink(cast(void**)&gtk_svg_error_get_start, "gtk_svg_error_get_start", libs);
+  gidLink(cast(void**)&gtk_svg_error_quark, "gtk_svg_error_quark", libs);
 }

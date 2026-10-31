@@ -64,12 +64,12 @@ enum JsonParserError
   InvalidBareword = 4,
 
   /**
-      empty member name (Since: 0.16)
+      Empty member name.
   */
   EmptyMemberName = 5,
 
   /**
-      invalid data (Since: 0.18)
+      Invalid data.
   */
   InvalidData = 6,
 
@@ -77,6 +77,21 @@ enum JsonParserError
       unknown error
   */
   Unknown = 7,
+
+  /**
+      Too many levels of nesting.
+  */
+  Nesting = 8,
+
+  /**
+      Invalid structure.
+  */
+  InvalidStructure = 9,
+
+  /**
+      Invalid assignment.
+  */
+  InvalidAssignment = 10,
 }
 
 /**
@@ -394,31 +409,49 @@ struct JsonParserClass
   /** */
   GObjectClass parentClass;
 
-  /** */
+  /**
+      class handler for the JsonParser::parse-start signal
+  */
   extern(C) void function(JsonParser* parser) parseStart;
 
-  /** */
+  /**
+      class handler for the JsonParser::object-start signal
+  */
   extern(C) void function(JsonParser* parser) objectStart;
 
-  /** */
+  /**
+      class handler for the JsonParser::object-member signal
+  */
   extern(C) void function(JsonParser* parser, JsonObject* object, const(char)* memberName) objectMember;
 
-  /** */
+  /**
+      class handler for the JsonParser::object-end signal
+  */
   extern(C) void function(JsonParser* parser, JsonObject* object) objectEnd;
 
-  /** */
+  /**
+      class handler for the JsonParser::array-start signal
+  */
   extern(C) void function(JsonParser* parser) arrayStart;
 
-  /** */
+  /**
+      class handler for the JsonParser::array-element signal
+  */
   extern(C) void function(JsonParser* parser, JsonArray* array, int index) arrayElement;
 
-  /** */
+  /**
+      class handler for the JsonParser::array-end signal
+  */
   extern(C) void function(JsonParser* parser, JsonArray* array) arrayEnd;
 
-  /** */
+  /**
+      class handler for the JsonParser::parse-end signal
+  */
   extern(C) void function(JsonParser* parser) parseEnd;
 
-  /** */
+  /**
+      class handler for the JsonParser::error signal
+  */
   extern(C) void function(JsonParser* parser, const(GError)* error) error;
 
   /** */
@@ -588,26 +621,42 @@ struct JsonPathClass;
     
     It is similar, in spirit, to the XML Reader API.
     
+    The cursor is moved by the `json_reader_read_*` and the `json_reader_end_*`
+    functions. You can enter a JSON object using [json.reader.Reader.readMember]
+    with the name of the object member, access the value at that position, and
+    move the cursor back one level using [json.reader.Reader.endMember]; arrays
+    work in a similar way, using [json.reader.Reader.readElement] with the
+    index of the element, and using [json.reader.Reader.endElement] to move
+    the cursor back.
+    
     ## Using [json.reader.Reader]
     
     ```c
     g_autoptr(JsonParser) parser = json_parser_new ();
     
-    // str is defined elsewhere
+    // str is defined elsewhere and contains:
+    // { "url" : "http://www.gnome.org/img/flash/two-thirty.png", "size" : [ 652, 242 ] }
     json_parser_load_from_data (parser, str, -1, NULL);
     
     g_autoptr(JsonReader) reader = json_reader_new (json_parser_get_root (parser));
     
+    // Enter the "url" member of the object
     json_reader_read_member (reader, "url");
       const char *url = json_reader_get_string_value (reader);
+      // url now contains "http://www.gnome.org/img/flash/two-thirty.png"
       json_reader_end_member (reader);
     
+    // Enter the "size" member of the object
     json_reader_read_member (reader, "size");
+      // Enter the first element of the array
       json_reader_read_element (reader, 0);
         int width = json_reader_get_int_value (reader);
+        // width now contains 652
         json_reader_end_element (reader);
+      // Enter the second element of the array
       json_reader_read_element (reader, 1);
         int height = json_reader_get_int_value (reader);
+        // height now contains 242
         json_reader_end_element (reader);
       json_reader_end_member (reader);
     ```
@@ -702,22 +751,38 @@ struct JsonSerializableIface
   /** */
   GTypeInterface gIface;
 
-  /** */
+  /**
+      virtual function for serializing an object property
+        into JSON
+  */
   extern(C) JsonNode* function(JsonSerializable* serializable, const(char)* propertyName, const(GValue)* value, GParamSpec* pspec) serializeProperty;
 
-  /** */
+  /**
+      virtual function for deserializing JSON
+        into an object property
+  */
   extern(C) gboolean function(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) deserializeProperty;
 
-  /** */
+  /**
+      virtual function for finding a property definition using
+        its name
+  */
   extern(C) GParamSpec* function(JsonSerializable* serializable, const(char)* name) findProperty;
 
-  /** */
+  /**
+      virtual function for listing the installed property
+        definitions
+  */
   extern(C) GParamSpec** function(JsonSerializable* serializable, uint* nPspecs) listProperties;
 
-  /** */
+  /**
+      virtual function for setting a property
+  */
   extern(C) void function(JsonSerializable* serializable, GParamSpec* pspec, const(GValue)* value) setProperty;
 
-  /** */
+  /**
+      virtual function for getting a property
+  */
   extern(C) void function(JsonSerializable* serializable, GParamSpec* pspec, GValue* value) getProperty;
 }
 

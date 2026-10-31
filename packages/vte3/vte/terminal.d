@@ -3,20 +3,29 @@ module vte.terminal;
 
 public import gid.basictypes;
 import cairo.font_options;
+import cairo.surface;
 import gdk.cursor;
 import gdk.rectangle;
 import gdk.rgba;
+import gdk.texture;
 import gid.gid;
 import gio.cancellable;
 import gio.menu_model;
 import gio.output_stream;
+import glib.bytes;
 import glib.error;
 import glib.types;
+import glib.uri;
+import glib.variant;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
+import gobject.types;
+import gobject.value;
 import gtk.accessible;
 import gtk.accessible_mixin;
+import gtk.accessible_text;
+import gtk.accessible_text_mixin;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
@@ -32,9 +41,10 @@ import vte.event_context;
 import vte.pty;
 import vte.regex;
 import vte.types;
+import vte.uuid;
 
 /** */
-class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
+class Terminal : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scrollable.Scrollable
 {
 
   /** */
@@ -298,6 +308,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `currentDirectoryUri` property.
       Returns: The current directory URI, or null if unset.
+  
+      Deprecated: Use the [vte.types.TERMPROP_CURRENT_DIRECTORY_URI] termprop.
   */
   @property string currentDirectoryUri() nothrow
   {
@@ -307,6 +319,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `currentFileUri` property.
       Returns: The current file URI, or null if unset.
+  
+      Deprecated: Use the [vte.types.TERMPROP_CURRENT_FILE_URI] termprop.
   */
   @property string currentFileUri() nothrow
   {
@@ -375,6 +389,25 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+      Get `enableA11y` property.
+      Returns: Controls whether or not a11y is enabled for the widget.
+  */
+  @property bool enableA11y() nothrow
+  {
+    return getEnableA11y();
+  }
+
+  /**
+      Set `enableA11y` property.
+      Params:
+        propval = Controls whether or not a11y is enabled for the widget.
+  */
+  @property void enableA11y(bool propval) nothrow
+  {
+    setEnableA11y(propval);
+  }
+
+  /**
       Get `enableBidi` property.
       Returns: Controls whether or not the terminal will perform bidirectional text rendering.
   */
@@ -403,6 +436,27 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   @property void enableFallbackScrolling(bool propval) nothrow
   {
     setEnableFallbackScrolling(propval);
+  }
+
+  /**
+      Get `enableLegacyOsc777` property.
+      Returns: Whether legacy OSC 777 sequences are translated to
+        their corresponding termprops.
+  */
+  @property bool enableLegacyOsc777() nothrow
+  {
+    return getEnableLegacyOsc777();
+  }
+
+  /**
+      Set `enableLegacyOsc777` property.
+      Params:
+        propval = Whether legacy OSC 777 sequences are translated to
+          their corresponding termprops.
+  */
+  @property void enableLegacyOsc777(bool propval) nothrow
+  {
+    setEnableLegacyOsc777(propval);
   }
 
   /**
@@ -746,6 +800,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         scrollback.  Note that this setting only affects the normal screen buffer.
         For terminal types which have an alternate screen buffer, no scrollback is
         allowed on the alternate screen buffer.
+        
+        Note that any value greater or equal to `G_MAXINT` is interpreted as unlimited
+        scrollback, i.e. like `-1` when passed to [vte.terminal.Terminal.setScrollbackLines],
+        and the value of this property for unlimited scrollback is `G_MAXUINT`.
   */
   @property uint scrollbackLines() nothrow
   {
@@ -761,6 +819,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           scrollback.  Note that this setting only affects the normal screen buffer.
           For terminal types which have an alternate screen buffer, no scrollback is
           allowed on the alternate screen buffer.
+          
+          Note that any value greater or equal to `G_MAXINT` is interpreted as unlimited
+          scrollback, i.e. like `-1` when passed to [vte.terminal.Terminal.setScrollbackLines],
+          and the value of this property for unlimited scrollback is `G_MAXUINT`.
   */
   @property void scrollbackLines(uint propval) nothrow
   {
@@ -789,6 +851,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Get `windowTitle` property.
       Returns: The terminal's title.
+  
+      Deprecated: Use the [vte.types.TERMPROP_XTERM_TITLE] termprop.
   */
   @property string windowTitle() nothrow
   {
@@ -890,6 +954,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     setYfill(propval);
   }
 
+  mixin AccessibleTextT!();
   mixin ScrollableT!();
 
   /**
@@ -1028,6 +1093,74 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void copyPrimary() nothrow
   {
     vte_terminal_copy_primary(cast(VteTerminal*)this._cPtr);
+  }
+
+  /**
+      Returns the value of a [vte.types.PropertyType.String] termprop, or null if
+        prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+        size = a location to store the string length, or null
+      Returns: the property's value, or null
+  */
+  string dupTermpropString(string prop, out size_t size) nothrow
+  {
+    char* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_dup_termprop_string(cast(VteTerminal*)this._cPtr, _prop, cast(size_t*)&size);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.dupTermpropString] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        size = a location to store the string length, or null
+      Returns: the property's value, or null
+  */
+  string dupTermpropStringById(int prop, out size_t size) nothrow
+  {
+    char* _cretval;
+    _cretval = vte_terminal_dup_termprop_string_by_id(cast(VteTerminal*)this._cPtr, prop, cast(size_t*)&size);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the value of a [vte.types.PropertyType.Uuid] termprop as a #VteUuid, or null if
+        prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+      Returns: the property's value as a #VteUuid, or null
+  */
+  vte.uuid.Uuid dupTermpropUuid(string prop) nothrow
+  {
+    VteUuid* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_dup_termprop_uuid(cast(VteTerminal*)this._cPtr, _prop);
+    auto _retval = _cretval ? new vte.uuid.Uuid(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.dupTermpropUuid] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+      Returns: the property's value as a #VteUuid, or null
+  */
+  vte.uuid.Uuid dupTermpropUuidById(int prop) nothrow
+  {
+    VteUuid* _cretval;
+    _cretval = vte_terminal_dup_termprop_uuid_by_id(cast(VteTerminal*)this._cPtr, prop);
+    auto _retval = _cretval ? new vte.uuid.Uuid(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
   }
 
   /**
@@ -1282,6 +1415,17 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+      Checks whether the terminal communicates with a11y backends
+      Returns: true if a11y is enabled, false if not
+  */
+  bool getEnableA11y() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_enable_a11y(cast(VteTerminal*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Checks whether the terminal performs bidirectional text rendering.
       Returns: true if BiDi is enabled, false if not
   */
@@ -1297,6 +1441,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  bool getEnableLegacyOsc777() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_enable_legacy_osc777(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1482,6 +1634,399 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     glong _retval;
     _retval = vte_terminal_get_scrollback_lines(cast(VteTerminal*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      For a [vte.types.PropertyType.Bool] termprop, sets value to prop's value,
+        or to false if prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropBool(string prop, out bool valuep) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    gboolean _valuep;
+    _retval = cast(bool)vte_terminal_get_termprop_bool(cast(VteTerminal*)this._cPtr, _prop, &_valuep);
+    valuep = cast(bool)_valuep;
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropBool] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropBoolById(int prop, out bool valuep) nothrow
+  {
+    bool _retval;
+    gboolean _valuep;
+    _retval = cast(bool)vte_terminal_get_termprop_bool_by_id(cast(VteTerminal*)this._cPtr, prop, &_valuep);
+    valuep = cast(bool)_valuep;
+    return _retval;
+  }
+
+  /**
+      Returns the value of a [vte.types.PropertyType.Data] termprop, or null if
+        prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+      Returns: the property's value, or null
+  */
+  ubyte[] getTermpropData(string prop) nothrow
+  {
+    const(ubyte)* _cretval;
+    size_t _cretlength;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_get_termprop_data(cast(VteTerminal*)this._cPtr, _prop, &_cretlength);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropData] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+      Returns: the property's value, or null
+  */
+  ubyte[] getTermpropDataById(int prop) nothrow
+  {
+    const(ubyte)* _cretval;
+    size_t _cretlength;
+    _cretval = vte_terminal_get_termprop_data_by_id(cast(VteTerminal*)this._cPtr, prop, &_cretlength);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /**
+      For a [vte.types.PropertyType.Double] termprop, sets value to prop's value,
+        which is finite; or to 0.0 if prop is unset, or prop is not a
+        registered property.
+  
+      Params:
+        prop = a termprop name
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropDouble(string prop, out double valuep) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)vte_terminal_get_termprop_double(cast(VteTerminal*)this._cPtr, _prop, cast(double*)&valuep);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropDouble] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropDoubleById(int prop, out double valuep) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_termprop_double_by_id(cast(VteTerminal*)this._cPtr, prop, cast(double*)&valuep);
+    return _retval;
+  }
+
+  /**
+      See vte_properties_get_property_enum() for more information.
+  
+      Params:
+        prop = a property name of a [vte.types.PropertyType.String] property
+        gtype = a #GType of an enum type
+        valuep = a location to store the value, or null
+      Returns: true iff the property was set and could be parsed a
+          a value of the enumeration type
+  */
+  bool getTermpropEnum(string prop, gobject.types.GType gtype, out long valuep) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)vte_terminal_get_termprop_enum(cast(VteTerminal*)this._cPtr, _prop, gtype, cast(long*)&valuep);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropEnum] except that it takes the property
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a property ID of a [vte.types.PropertyType.String] property
+        gtype = a #GType of an enum type
+        valuep = a location to store the value, or null
+      Returns: true iff the property was set and could be parsed a
+          a value of enumeration type type
+  */
+  bool getTermpropEnumById(int prop, gobject.types.GType gtype, out long valuep) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_termprop_enum_by_id(cast(VteTerminal*)this._cPtr, prop, gtype, cast(long*)&valuep);
+    return _retval;
+  }
+
+  /**
+      See vte_properties_get_property_flags() for more information.
+  
+      Params:
+        prop = 
+        gtype = a #GType of a flags type
+        ignoreUnknownFlags = whether to ignore unknown flags
+        valuep = a location to store the value, or null
+      Returns: true iff the property was set and could be parsed a
+          a value of the flags type
+  */
+  bool getTermpropFlags(string prop, gobject.types.GType gtype, bool ignoreUnknownFlags, out ulong valuep) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)vte_terminal_get_termprop_flags(cast(VteTerminal*)this._cPtr, _prop, gtype, ignoreUnknownFlags, cast(ulong*)&valuep);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropFlags] except that it takes the property
+      by ID. See that function for more information.
+  
+      Params:
+        prop = 
+        gtype = a #GType of a flags type
+        ignoreUnknownFlags = whether to ignore unknown flags
+        valuep = a location to store the value, or null
+      Returns: true iff the property was set and could be parsed a
+          a value of flags type type
+  */
+  bool getTermpropFlagsById(int prop, gobject.types.GType gtype, bool ignoreUnknownFlags, out ulong valuep) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_termprop_flags_by_id(cast(VteTerminal*)this._cPtr, prop, gtype, ignoreUnknownFlags, cast(ulong*)&valuep);
+    return _retval;
+  }
+
+  /**
+      For a [vte.types.PropertyType.Int] termprop, sets value to prop's value,
+      or to 0 if prop is unset, or if prop is not a registered property.
+      
+      If only a subset or range of values are acceptable for the given property,
+      the caller must validate the returned value and treat any out-of-bounds
+      value as if the termprop had no value; in particular it *must not* clamp
+      the values to the expected range.
+  
+      Params:
+        prop = a termprop name
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropInt(string prop, out long valuep) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)vte_terminal_get_termprop_int(cast(VteTerminal*)this._cPtr, _prop, cast(long*)&valuep);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropInt] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropIntById(int prop, out long valuep) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_termprop_int_by_id(cast(VteTerminal*)this._cPtr, prop, cast(long*)&valuep);
+    return _retval;
+  }
+
+  /**
+      Stores the value of a [vte.types.PropertyType.Rgb] or [vte.types.PropertyType.Rgba] termprop in color and
+      returns true if the termprop is set, or stores rgb(0,0,0) or rgba(0,0,0,1) in color
+      and returns false if the termprop is unset.
+  
+      Params:
+        prop = a termprop name
+        color = a #GdkRGBA to fill in
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropRgba(string prop, out gdk.rgba.RGBA color) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)vte_terminal_get_termprop_rgba(cast(VteTerminal*)this._cPtr, _prop, cast(GdkRGBA*)&color);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropRgba] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        color = a #GdkRGBA to fill in
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropRgbaById(int prop, out gdk.rgba.RGBA color) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_termprop_rgba_by_id(cast(VteTerminal*)this._cPtr, prop, cast(GdkRGBA*)&color);
+    return _retval;
+  }
+
+  /**
+      Returns the value of a [vte.types.PropertyType.String] termprop, or null if
+        prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+        size = a location to store the string length, or null
+      Returns: the property's value, or null
+  */
+  string getTermpropString(string prop, out size_t size) nothrow
+  {
+    const(char)* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_get_termprop_string(cast(VteTerminal*)this._cPtr, _prop, cast(size_t*)&size);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropString] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        size = a location to store the string length, or null
+      Returns: the property's value, or null
+  */
+  string getTermpropStringById(int prop, out size_t size) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = vte_terminal_get_termprop_string_by_id(cast(VteTerminal*)this._cPtr, prop, cast(size_t*)&size);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      For a [vte.types.PropertyType.Uint] termprop, sets value to prop's value,
+      or to 0 if prop is unset, or prop is not a registered property.
+      
+      If only a subset or range of values are acceptable for the given property,
+      the caller must validate the returned value and treat any out-of-bounds
+      value as if the termprop had no value; in particular it *must not* clamp
+      the values to the expected range.
+  
+      Params:
+        prop = a termprop name
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropUint(string prop, out ulong valuep) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)vte_terminal_get_termprop_uint(cast(VteTerminal*)this._cPtr, _prop, cast(ulong*)&valuep);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropUint] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        valuep = a location to store the value, or null
+      Returns: true iff the termprop is set
+  */
+  bool getTermpropUintById(int prop, out ulong valuep) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)vte_terminal_get_termprop_uint_by_id(cast(VteTerminal*)this._cPtr, prop, cast(ulong*)&valuep);
+    return _retval;
+  }
+
+  /**
+      Returns true with the value of prop stored in value (if not null) if,
+        the termprop has a value, or false if prop is unset, or prop is not
+        a registered property; in that case value will not be set.
+      
+      The value type returned depends on the termprop type:
+      * A [vte.types.PropertyType.Valueless] termprop stores no value, and returns false
+        from this function.
+      * A [vte.types.PropertyType.Bool] termprop stores a `G_TYPE_BOOLEAN` value.
+      * A [vte.types.PropertyType.Int] termprop stores a `G_TYPE_INT64` value.
+      * A [vte.types.PropertyType.Uint] termprop stores a `G_TYPE_UINT64` value.
+      * A [vte.types.PropertyType.Double] termprop stores a `G_TYPE_DOUBLE` value.
+      * A [vte.types.PropertyType.Rgb] termprop stores a boxed #GdkRGBA value with alpha 1.0 on gtk3,
+         and nothing on gtk4.
+      * A [vte.types.PropertyType.Rgba] termprop stores a boxed #GdkRGBA value on gtk3,
+         and nothing on gtk4.
+      * A [vte.types.PropertyType.String] termprop stores a `G_TYPE_STRING` value.
+      * A [vte.types.PropertyType.Data] termprop stores a boxed #GBytes value.
+      * A [vte.types.PropertyType.Uuid] termprop stores a boxed #VteUuid value.
+      * A [vte.types.PropertyType.Uri] termprop stores a boxed #GUri value.
+      * A [vte.types.PropertyType.Image] termprop stores a boxed #cairo_surface_t value on gtk3,
+          and a boxed #GdkTexture on gtk4
+  
+      Params:
+        prop = a termprop name
+        gvalue = a #GValue to be filled in, or null
+      Returns: true iff the property has a value, with gvalue containig
+          the property's value.
+  */
+  bool getTermpropValue(string prop, out gobject.value.Value gvalue) nothrow
+  {
+    bool _retval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    auto _gvalue = boxedNew!GValue(gobject.value.Value._getGType);
+    _retval = cast(bool)vte_terminal_get_termprop_value(cast(VteTerminal*)this._cPtr, _prop, _gvalue);
+    gvalue = new gobject.value.Value(cast(void*)_gvalue, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.getTermpropValue] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+        gvalue = a #GValue to be filled in
+      Returns: true iff the property has a value, with gvalue containig
+          the property's value.
+  */
+  bool getTermpropValueById(int prop, out gobject.value.Value gvalue) nothrow
+  {
+    bool _retval;
+    auto _gvalue = boxedNew!GValue(gobject.value.Value._getGType);
+    _retval = cast(bool)vte_terminal_get_termprop_value_by_id(cast(VteTerminal*)this._cPtr, prop, _gvalue);
+    gvalue = new gobject.value.Value(cast(void*)_gvalue, Yes.Take);
     return _retval;
   }
 
@@ -1785,6 +2330,195 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+      Returns the value of a [vte.types.PropertyType.Data] termprop as a #GBytes, or null if
+        prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+      Returns: the property's value as a #GBytes, or null
+  */
+  glib.bytes.Bytes refTermpropDataBytes(string prop) nothrow
+  {
+    GBytes* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_ref_termprop_data_bytes(cast(VteTerminal*)this._cPtr, _prop);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.refTermpropDataBytes] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+      Returns: the property's value as a #GBytes, or null
+  */
+  glib.bytes.Bytes refTermpropDataBytesById(int prop) nothrow
+  {
+    GBytes* _cretval;
+    _cretval = vte_terminal_ref_termprop_data_bytes_by_id(cast(VteTerminal*)this._cPtr, prop);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the value of a [vte.types.PropertyType.Image] termprop as a #cairo_surface_t,
+        or null if prop is unset, or prop is not a registered property.
+      
+      The surface will be a [cairo.types.SurfaceType.Image] with format
+      [cairo.types.Format.Argb32] or [cairo.types.Format.Rgb24].
+      
+      Note that the returned surface is owned by terminal and its contents
+      must not be modified.
+  
+      Params:
+        prop = a termprop name
+      Returns: the property's value as a #cairo_surface_t, or null
+  */
+  cairo.surface.Surface refTermpropImageSurface(string prop) nothrow
+  {
+    cairo_surface_t* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_ref_termprop_image_surface(cast(VteTerminal*)this._cPtr, _prop);
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.refTermpropImageSurface] except that it takes the
+      termprop by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+      Returns: the property's value as a #cairo_surface_t, or null
+  */
+  cairo.surface.Surface refTermpropImageSurfaceById(int prop) nothrow
+  {
+    cairo_surface_t* _cretval;
+    _cretval = vte_terminal_ref_termprop_image_surface_by_id(cast(VteTerminal*)this._cPtr, prop);
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the value of a [vte.types.PropertyType.Image] termprop as a #GdkTexture, or null if
+        prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+      Returns: the property's value as a #GdkTexture, or null
+  */
+  gdk.texture.Texture refTermpropImageTexture(string prop) nothrow
+  {
+    GdkTexture* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_ref_termprop_image_texture(cast(VteTerminal*)this._cPtr, _prop);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.refTermpropImageTexture] except that it takes the
+      termprop by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+      Returns: the property's value as a #GdkTexture, or null
+  */
+  gdk.texture.Texture refTermpropImageTextureById(int prop) nothrow
+  {
+    GdkTexture* _cretval;
+    _cretval = vte_terminal_ref_termprop_image_texture_by_id(cast(VteTerminal*)this._cPtr, prop);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the value of a [vte.types.PropertyType.Uri] termprop as a #GUri, or null if
+        prop is unset, or prop is not a registered property.
+  
+      Params:
+        prop = a termprop name
+      Returns: the property's value as a #GUri, or null
+  */
+  glib.uri.Uri refTermpropUri(string prop) nothrow
+  {
+    GUri* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_ref_termprop_uri(cast(VteTerminal*)this._cPtr, _prop);
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.refTermpropUri] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+      Returns: the property's value as a #GUri, or null
+  */
+  glib.uri.Uri refTermpropUriById(int prop) nothrow
+  {
+    GUri* _cretval;
+    _cretval = vte_terminal_ref_termprop_uri_by_id(cast(VteTerminal*)this._cPtr, prop);
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the value of prop as a #GVariant, or null if
+        prop unset, or prop is not a registered property.
+      
+      The #GVariantType of the returned #GVariant depends on the termprop type:
+      * A [vte.types.PropertyType.Valueless] termprop returns a `G_VARIANT_TYPE_UNIT` variant.
+      * A [vte.types.PropertyType.Bool] termprop returns a `G_VARIANT_TYPE_BOOLEAN` variant.
+      * A [vte.types.PropertyType.Int] termprop returns a `G_VARIANT_TYPE_INT64` variant.
+      * A [vte.types.PropertyType.Uint] termprop returns a `G_VARIANT_TYPE_UINT64` variant.
+      * A [vte.types.PropertyType.Double] termprop returns a `G_VARIANT_TYPE_DOUBLE` variant.
+      * A [vte.types.PropertyType.Rgb] or [vte.types.PropertyType.Rgba] termprop returns a "(ddddv)"
+        tuple containing the red, green, blue, and alpha (1.0 for [vte.types.PropertyType.Rgb])
+        components of the color and a variant of unspecified contents
+      * A [vte.types.PropertyType.String] termprop returns a `G_VARIANT_TYPE_STRING` variant.
+      * A [vte.types.PropertyType.Data] termprop returns a "ay" variant (which is *not* a bytestring!).
+      * A [vte.types.PropertyType.Uuid] termprop returns a `G_VARIANT_TYPE_STRING` variant
+        containing a string representation of the UUID in simple form.
+      * A [vte.types.PropertyType.Uri] termprop returns a `G_VARIANT_TYPE_STRING` variant
+        containing a string representation of the URI
+      * A [vte.types.PropertyType.Image] termprop returns null since an image has no
+        variant representation.
+  
+      Params:
+        prop = a termprop name
+      Returns: a floating #GVariant, or null
+  */
+  glib.variant.Variant refTermpropVariant(string prop) nothrow
+  {
+    GVariant* _cretval;
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _cretval = vte_terminal_ref_termprop_variant(cast(VteTerminal*)this._cPtr, _prop);
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Like [vte.terminal.Terminal.refTermpropVariant] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+      Returns: a floating #GVariant, or null
+  */
+  glib.variant.Variant refTermpropVariantById(int prop) nothrow
+  {
+    GVariant* _cretval;
+    _cretval = vte_terminal_ref_termprop_variant_by_id(cast(VteTerminal*)this._cPtr, prop);
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Resets as much of the terminal's internal state as possible, discarding any
       unprocessed input data, resetting character attributes, cursor state,
       national character set state, status line, terminal modes (insert/delete),
@@ -1797,6 +2531,30 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void reset(bool clearTabstops, bool clearHistory) nothrow
   {
     vte_terminal_reset(cast(VteTerminal*)this._cPtr, clearTabstops, clearHistory);
+  }
+
+  /**
+      Resets the termprop prop to its default value.
+  
+      Params:
+        prop = a termprop name
+  */
+  void resetTermprop(string prop) nothrow
+  {
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    vte_terminal_reset_termprop(cast(VteTerminal*)this._cPtr, _prop);
+  }
+
+  /**
+      Like [vte.terminal.Terminal.resetTermprop] except that it takes the termprop
+      by ID. See that function for more information.
+  
+      Params:
+        prop = a termprop ID
+  */
+  void resetTermpropById(int prop) nothrow
+  {
+    vte_terminal_reset_termprop_by_id(cast(VteTerminal*)this._cPtr, prop);
   }
 
   /**
@@ -2183,6 +2941,17 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+      Controls whether or not the terminal will communicate with a11y backends.
+  
+      Params:
+        enableA11y = true to enable a11y support
+  */
+  void setEnableA11y(bool enableA11y) nothrow
+  {
+    vte_terminal_set_enable_a11y(cast(VteTerminal*)this._cPtr, enableA11y);
+  }
+
+  /**
       Controls whether or not the terminal will perform bidirectional text rendering.
   
       Params:
@@ -2207,6 +2976,18 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void setEnableFallbackScrolling(bool enable) nothrow
   {
     vte_terminal_set_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr, enable);
+  }
+
+  /**
+      Sets whether legacy OSC 777 sequences are translated to
+      their corresponding termprops.
+  
+      Params:
+        enable = whether to enable legacy OSC 777
+  */
+  void setEnableLegacyOsc777(bool enable) nothrow
+  {
+    vte_terminal_set_enable_legacy_osc777(cast(VteTerminal*)this._cPtr, enable);
   }
 
   /**
@@ -2436,6 +3217,15 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void setSize(glong columns, glong rows) nothrow
   {
     vte_terminal_set_size(cast(VteTerminal*)this._cPtr, columns, rows);
+  }
+
+  /**
+      Suppress emissions of signals and property notifications
+      that are deprecated.
+  */
+  void setSuppressLegacySignals() nothrow
+  {
+    vte_terminal_set_suppress_legacy_signals(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -3144,6 +3934,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Use the #VteTerminal:termprop-changed signal
+          for the [vte.types.TERMPROP_CURRENT_DIRECTORY_URI] termprop.
   */
   gulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -3188,6 +3981,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Use the #VteTerminal:termprop-changed signal
+          for the [vte.types.TERMPROP_CURRENT_FILE_URI] termprop.
   */
   gulong connectCurrentFileUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -3457,11 +4253,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          `void callback(string uri, gdk.rectangle.Rectangle bbox, vte.terminal.Terminal terminal)`
+          `void callback(string object, gdk.rectangle.Rectangle p0, vte.terminal.Terminal terminal)`
   
-          `uri` the nonempty target URI under the mouse, or NULL (optional)
+          `object`  (optional)
   
-          `bbox` the bounding box of the hyperlink anchor text, or NULL (optional)
+          `p0`  (optional)
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -4066,7 +4862,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         The handler may set either a menu model using
         [vte.terminal.Terminal.setContextMenuModel], or a menu using
         [vte.terminal.Terminal.setContextMenu], which will then be used as context
-        menu.
+        menu, or keep a previously set context menu or context menu model,
+        but update the menu and/or its #GAction:s visibility and sensitivity.
         If neither a menu model nor a menu are set, a context menu
         will not be shown.
         
@@ -4121,6 +4918,144 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+      Connect to `TermpropChanged` signal.
+  
+      The "termprop-changed" signal is emitted when a termprop
+        has changed or been reset.
+        
+        The handler may use the vte_terminal_get_termprop_*()
+        functions (and their by-ID variants), to retrieve the value of
+        any termprop (not just name); but it must *not* call *any*
+        other API on terminal, including API of its parent classes.
+        
+        This signal supports detailed connections, so e.g. subscribing
+        to "termprop-changed::name" only runs the callback when the
+        termprop "name" has changed.
+  
+      Params:
+        detail = Signal detail or null (default)
+        callback = signal callback delegate or function to connect
+  
+          `void callback(string name, vte.terminal.Terminal terminal)`
+  
+          `name` the name of the changed property (optional)
+  
+          `terminal` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectTermpropChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.termpropChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("termprop-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Connect to `TermpropsChanged` signal.
+  
+      Emitted when termprops have changed. props is an array containing
+        the IDs of the terminal properties that may have changed since
+        the last emission of this signal, in an undefined order.
+        Note that emission of this signal is delayed from the receipt of the
+        OSC sequences, and a termprop may have been changed more than once
+        inbetween signal emissions, but only the value set last is retrievable.
+        
+        The default handler for this signal emits the "termprop-changed"
+        signal for each changed property. Returning true from a handler
+        running before the default will prevent this.
+        
+        The handler may use the vte_terminal_get_termprop_*()
+        functions (and their by-ID variants), to retrieve the value of
+        any termprop, as well as call [vte.terminal.Terminal.resetTermprop]
+        (and its by-ID variant) to reset any termprop, or emit the
+        VteTerminal::termprop-changed signal; but it must *not*
+        call *any* other API on terminal, including API of its parent classes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `bool callback(int[] props, vte.terminal.Terminal terminal)`
+  
+          `props` an array of termprop IDs (optional)
+  
+          `terminal` the instance the signal is connected to (optional)
+  
+          `Returns` true to stop further handlers being invoked for this signal,
+              or false to continue signal emission
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectTermpropsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int[])))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
+      auto nProps = getVal!(int)(&_paramVals[2]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      static if (Parameters!T.length > 0)
+      {
+        auto _cArray = getVal!(int*)(&_paramVals[1]);
+        int[] _dArray;
+        _dArray = cast(int[])_cArray[0 .. nProps];
+        _paramTuple[0] = _dArray;
+      }
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.termpropsChanged");
+      }
+
+      setVal!(bool)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("termprops-changed", closure, after);
+  }
+
+  /**
       Connect to `WindowTitleChanged` signal.
   
       Emitted when the #VteTerminal:window-title property is modified.
@@ -4134,6 +5069,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Use the #VteTerminal:termprop-changed signal
+          for the [vte.types.TERMPROP_XTERM_TITLE] termprop.
   */
   gulong connectWindowTitleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -4166,9 +5104,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 }
 
 /// Fluent builder implementation template for [vte.terminal.Terminal]
-class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
+class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
+  mixin AccessibleTextGidBuilderT!();
   mixin ScrollableGidBuilderT!();
 
   /**
@@ -4334,6 +5273,17 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
   }
 
   /**
+      Set `enableA11y` property.
+      Params:
+        propval = Controls whether or not a11y is enabled for the widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableA11y(bool propval) nothrow
+  {
+    return setProperty("enable-a11y", propval);
+  }
+
+  /**
       Set `enableBidi` property.
       Params:
         propval = Controls whether or not the terminal will perform bidirectional text rendering.
@@ -4348,6 +5298,18 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
   T enableFallbackScrolling(bool propval) nothrow
   {
     return setProperty("enable-fallback-scrolling", propval);
+  }
+
+  /**
+      Set `enableLegacyOsc777` property.
+      Params:
+        propval = Whether legacy OSC 777 sequences are translated to
+          their corresponding termprops.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableLegacyOsc777(bool propval) nothrow
+  {
+    return setProperty("enable-legacy-osc777", propval);
   }
 
   /**
@@ -4539,6 +5501,10 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           scrollback.  Note that this setting only affects the normal screen buffer.
           For terminal types which have an alternate screen buffer, no scrollback is
           allowed on the alternate screen buffer.
+          
+          Note that any value greater or equal to `G_MAXINT` is interpreted as unlimited
+          scrollback, i.e. like `-1` when passed to [vte.terminal.Terminal.setScrollbackLines],
+          and the value of this property for unlimited scrollback is `G_MAXUINT`.
       Returns: Builder instance for fluent chaining
   */
   T scrollbackLines(uint propval) nothrow

@@ -11,8 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    A [gtk.filter.Filter] object describes the filtering to be performed by a
-    [gtk.filter_list_model.FilterListModel].
+    Describes the filtering to be performed by a [gtk.filter_list_model.FilterListModel].
     
     The model will use the filter to determine if it should include items
     or not by calling [gtk.filter.Filter.match] for each item and only
@@ -82,7 +81,7 @@ class Filter : gobject.object.ObjectWrap
       subclasses and should not be called from other functions.
   
       Params:
-        change = How the filter changed
+        change = how the filter changed
   */
   void changed(gtk.types.FilterChange change) nothrow
   {
@@ -90,14 +89,14 @@ class Filter : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the known strictness of filters.
+      Gets the known strictness of a filter.
       
       If the strictness is not known, [gtk.types.FilterMatch.Some] is returned.
       
       This value may change after emission of the [gtk.filter.Filter.changed]
       signal.
       
-      This function is meant purely for optimization purposes, filters can
+      This function is meant purely for optimization purposes. Filters can
       choose to omit implementing it, but [gtk.filter_list_model.FilterListModel] uses it.
       Returns: the strictness of self
   */
@@ -114,8 +113,7 @@ class Filter : gobject.object.ObjectWrap
   
       Params:
         item = The item to check
-      Returns: true if the filter matches the item and a filter model should
-          keep it, false if not.
+      Returns: true if the filter matches the item
   */
   bool match(gobject.object.ObjectWrap item) nothrow
   {

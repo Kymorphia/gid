@@ -18,7 +18,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.stack_sidebar.StackSidebar] uses a sidebar to switch between [gtk.stack.Stack] pages.
+    Uses a sidebar to switch between [gtk.stack.Stack] pages.
+    
+    <picture>
+      <source srcset="sidebar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStackSidebar" src="sidebar.png">
+    </picture>
     
     In order to use a [gtk.stack_sidebar.StackSidebar], you simply use a [gtk.stack.Stack] to
     organize your UI flow, and add the sidebar to your sidebar area. You

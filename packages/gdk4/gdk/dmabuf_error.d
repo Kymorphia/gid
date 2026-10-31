@@ -13,7 +13,10 @@ struct DmabufError
 {
   alias Enum = gdk.types.DmabufError; ///
 
-  /** */
+  /**
+      Registers an error quark for [gdk.dmabuf_texture.DmabufTexture] errors.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

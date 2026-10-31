@@ -11,7 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.sorter.Sorter] is an object to describe sorting criteria.
+    Describes sorting criteria for a [gtk.sort_list_model.SortListModel].
     
     Its primary user is [gtk.sort_list_model.SortListModel]
     

@@ -12,8 +12,7 @@ import gtk.print_settings;
 import gtk.types;
 
 /**
-    A [gtk.print_setup.PrintSetup] is an auxiliary object for printing that allows decoupling
-    the setup from the printing.
+    An auxiliary object for printing that allows decoupling the setup from the printing.
     
     A print setup is obtained by calling [gtk.print_dialog.PrintDialog.setup],
     and can later be passed to print functions such as [gtk.print_dialog.PrintDialog.print].

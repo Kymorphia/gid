@@ -101,7 +101,8 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
       You can use this to allocate memory to pass to
       [gio.socket_address.SocketAddress.toNative].
       Returns: the size of the native struct sockaddr that
-            address represents
+            address represents, or `-1` if address
+            is not valid
   */
   ptrdiff_t getNativeSize() nothrow
   {

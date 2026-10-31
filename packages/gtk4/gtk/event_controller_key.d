@@ -15,8 +15,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.event_controller_key.EventControllerKey] is an event controller that provides access
-    to key events.
+    Provides access to key events.
 */
 class EventControllerKey : gtk.event_controller.EventController
 {
@@ -312,7 +311,7 @@ class EventControllerKey : gtk.event_controller.EventController
   
           `eventControllerKey` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether to ignore modifiers
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

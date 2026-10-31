@@ -14,8 +14,7 @@ import gtk.pad_action_entry;
 import gtk.types;
 
 /**
-    [gtk.pad_controller.PadController] is an event controller for the pads found in drawing
-    tablets.
+    Handles input from the pads found in drawing tablets.
     
     Pads are the collection of buttons and tactile sensors often found around
     the stylus-sensitive area.
@@ -58,9 +57,16 @@ import gtk.types;
     pad_controller = gtk_pad_controller_new (action_group, NULL);
     ```
     
-    The actions belonging to rings/strips will be activated with a parameter
+    The actions belonging to rings/strips/dials will be activated with a parameter
     of type `G_VARIANT_TYPE_DOUBLE` bearing the value of the given axis, it
     is required that those are made stateful and accepting this [glib.variant_type.VariantType].
+    For rings the value is the angle of the ring position in degrees with 0
+    facing up. For strips the value is the absolute position on the strip, normalized
+    to the [0.0, 1.0] range.
+    For dials the value is the relative movement of the dial, normalized so that the
+    value 120 represents one logical scroll wheel detent in the positive direction.
+    Devices that support high-resolution scrolling may send events with fractions of
+    120 to signify a smaller motion.
 */
 class PadController : gtk.event_controller.EventController
 {
@@ -99,13 +105,19 @@ class PadController : gtk.event_controller.EventController
     return new PadControllerGidBuilder;
   }
 
-  /** */
+  /**
+      Get `actionGroup` property.
+      Returns: The action group of the controller.
+  */
   @property gio.action_group.ActionGroup actionGroup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.action_group.ActionGroup)("action-group");
   }
 
-  /** */
+  /**
+      Get `pad` property.
+      Returns: The pad of the controller.
+  */
   @property gdk.device.Device pad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.device.Device)("pad");
@@ -191,13 +203,23 @@ class PadController : gtk.event_controller.EventController
 class PadControllerGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 
-  /** */
+  /**
+      Set `actionGroup` property.
+      Params:
+        propval = The action group of the controller.
+      Returns: Builder instance for fluent chaining
+  */
   T actionGroup(gio.action_group.ActionGroup propval) nothrow
   {
     return setProperty("action-group", propval);
   }
 
-  /** */
+  /**
+      Set `pad` property.
+      Params:
+        propval = The pad of the controller.
+      Returns: Builder instance for fluent chaining
+  */
   T pad(gdk.device.Device propval) nothrow
   {
     return setProperty("pad", propval);

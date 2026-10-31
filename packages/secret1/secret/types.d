@@ -70,7 +70,7 @@ enum MAJOR_VERSION = 0;
 /**
     The micro version of libsecret.
 */
-enum MICRO_VERSION = 4;
+enum MICRO_VERSION = 7;
 
 /**
     The minor version of libsecret.

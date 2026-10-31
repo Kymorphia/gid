@@ -22,9 +22,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A widget with two panes, arranged either horizontally or vertically.
+    Arranges its children in two panes, horizontally or vertically.
     
-    ![An example GtkPaned](panes.png)
+    <picture>
+      <source srcset="panes-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPaned" src="panes.png">
+    </picture>
     
     The division between the two panes is adjustable by the user
     by dragging a handle.
@@ -51,6 +54,17 @@ import gtk.widget;
     
     The application can set the position of the slider as if it were set
     by the user, by calling [gtk.paned.Paned.setPosition].
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.paned.Paned.acceptPosition]
+    - [gtk.paned.Paned.cancelPosition]
+    - [gtk.paned.Paned.cycleChildFocus]
+    - [gtk.paned.Paned.cycleHandleFocus]
+    - [gtk.paned.Paned.moveHandle]
+    - [gtk.paned.Paned.toggleHandleFocus]
     
     # CSS nodes
     
@@ -556,7 +570,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   
           `paned` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the position was accepted
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -612,7 +626,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   
           `paned` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the position was canceled
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -666,7 +680,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   
           `paned` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the behavior was cycled
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -725,7 +739,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   
           `paned` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the behavior was cycled
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -771,6 +785,13 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Emitted to move the handle with key bindings.
         
         This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>←</kbd>, <kbd>←</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>→</kbd>, <kbd>→</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>↑</kbd>, <kbd>↑</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>↓</kbd>, <kbd>↓</kbd>,
+        <kbd>PgUp</kbd>, <kbd>PgDn</kbd>, <kbd>Home</kbd>, <kbd>End</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -781,7 +802,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   
           `paned` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the handle was moved
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -838,7 +859,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   
           `paned` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether handle focus was toggled
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

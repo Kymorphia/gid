@@ -321,7 +321,7 @@ template DtlsConnectionT()
       more information.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = a #GCancellable, or null
         callback = callback to call when the close operation is complete
   */
@@ -616,7 +616,7 @@ template DtlsConnectionT()
       [gio.dtls_connection.DtlsConnection.handshake] for more information.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = a #GCancellable, or null
         callback = callback to call when the handshake is complete
   */
@@ -845,7 +845,7 @@ template DtlsConnectionT()
       Params:
         shutdownRead = true to stop reception of incoming datagrams
         shutdownWrite = true to stop sending outgoing datagrams
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = a #GCancellable, or null
         callback = callback to call when the shutdown operation is complete
   */

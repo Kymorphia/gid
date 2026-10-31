@@ -12,7 +12,7 @@ import gtk.expression_watch;
 import gtk.types;
 
 /**
-    [gtk.expression.Expression] provides a way to describe references to values.
+    Provides a way to describe references to values.
     
     An important aspect of expressions is that the value can be obtained
     from a source that is several steps away. For example, an expression
@@ -111,8 +111,9 @@ import gtk.types;
     
     To create a property expression, use the `<lookup>` element. It can have a `type`
     attribute to specify the object type, and a `name` attribute to specify the property
-    to look up. The content of `<lookup>` can either be an element specifying the expression
-    to use the object, or a string that specifies the name of the object to use.
+    to look up. The content of `<lookup>` can either be a string that specifies the name
+    of the object to use, an element specifying an expression to provide an object, or
+    empty to use the `this` object.
     
     Example:
     
@@ -126,12 +127,32 @@ import gtk.types;
     [gtk.builder_list_item_factory.BuilderListItemFactory] for an example of this technique.
     
     To create a constant expression, use the `<constant>` element. If the type attribute
-    is specified, the element content is interpreted as a value of that type. Otherwise,
+    is specified, the element content is interpreted as a value of that type, and the
+    initial attribute can be specified to get the initial value for that type. Otherwise,
     it is assumed to be an object. For instance:
     
     ```xml
       <constant>string_filter</constant>
       <constant type='gchararray'>Hello, world</constant>
+      <constant type='gchararray' initial='true' /> <!-- NULL -->
+    ```
+    
+    String (`type='gchararray'`) constants can be marked for translation with the
+    `translatable=` attribute, and will then be looked up in the
+    [gtk.builder.Builder.translationDomain] when the expression is constructed.
+    
+    ```xml
+      <constant type='gchararray' translatable='yes'>I'm translatable!</constant>
+    ```
+    
+    As with other translatable strings in [gtk.builder.Builder], constants can
+    also have a context and/or translation comment:
+    
+    ```xml
+      <constant type='gchararray'
+                translatable='yes'
+                context='example'
+                comments='A sample string'>I'm translatable!</constant>
     ```
     
     To create a closure expression, use the `<closure>` element. The `function`
@@ -144,6 +165,19 @@ import gtk.types;
         <constant type='gchararray'>File size:</constant>
         <lookup type='GFile' name='size'>myfile</lookup>
       </closure>
+    ```
+    
+    If an expression can fail, a `<try>` element can be used to provide fallbacks.
+    The expressions are tried from top to bottom until one of them succeeds.
+    If none of the expressions succeed, the expression fails as normal:
+    
+    ```xml
+      <try>
+        <lookup type='GtkWindow' name='title'>
+          <lookup type='GtkLabel' name='root'></lookup>
+        </lookup>
+        <constant type='gchararray'>Hello World</constant>
+      </try>
     ```
     
     To create a property binding, use the `<binding>` element in place of where a
@@ -199,8 +233,7 @@ class Expression
       the object's property stays synchronized with `self`.
       
       If `self`'s evaluation fails, `target`'s `property` is not updated.
-      You can ensure that this doesn't happen by using a fallback
-      expression.
+      Use a [gtk.try_expression.TryExpression] to provide a fallback for this case.
       
       Note that this function takes ownership of `self`. If you want
       to keep it around, you should [gtk.expression.Expression.ref_] it beforehand.

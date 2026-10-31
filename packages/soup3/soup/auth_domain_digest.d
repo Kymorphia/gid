@@ -14,7 +14,7 @@ import soup.types;
 /**
     Server-side "Digest" authentication.
     
-    #SoupAuthDomainDigest handles the server side of HTTP "Digest"
+    [soup.auth_domain_digest.AuthDomainDigest] handles the server side of HTTP "Digest"
     authentication.
 */
 class AuthDomainDigest : soup.auth_domain.AuthDomain
@@ -80,7 +80,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       That is, it returns a stringified MD5 hash of
       username, realm, and password concatenated together. This is
       the form that is needed as the return value of
-      #SoupAuthDomainDigest's auth handler.
+      [soup.auth_domain_digest.AuthDomainDigest]'s auth handler.
       
       For security reasons, you should store the encoded hash, rather
       than storing the cleartext password itself and calling this method

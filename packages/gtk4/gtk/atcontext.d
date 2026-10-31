@@ -13,8 +13,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.atcontext.ATContext] is an abstract class provided by GTK to communicate to
-    platform-specific assistive technologies API.
+    Communicates with platform-specific assistive technologies API.
     
     Each platform supported by GTK implements a [gtk.atcontext.ATContext] subclass, and
     is responsible for updating the accessible state in response to state
@@ -108,6 +107,15 @@ class ATContext : gobject.object.ObjectWrap
   @property void display(gdk.display.Display propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.display.Display)("display", propval);
+  }
+
+  /**
+      Get `realized` property.
+      Returns: Whether the [gtk.atcontext.ATContext] has been realized or not.
+  */
+  @property bool realized() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("realized");
   }
 
   /**

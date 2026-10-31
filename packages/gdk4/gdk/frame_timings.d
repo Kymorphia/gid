@@ -9,8 +9,7 @@ import gid.gid;
 import gobject.boxed;
 
 /**
-    A [gdk.frame_timings.FrameTimings] object holds timing information for a single frame
-    of the application’s displays.
+    Holds timing information for a single frame of the application’s displays.
     
     To retrieve [gdk.frame_timings.FrameTimings] objects, use [gdk.frame_clock.FrameClock.getTimings]
     or [gdk.frame_clock.FrameClock.getCurrentTimings]. The information in

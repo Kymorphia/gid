@@ -209,6 +209,10 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       style scheme files.
       
       If path is null, the search path is reset to default.
+      
+      Since GtkSourceView 5.16 this function will allow you to provide
+      paths in the form of "resource:///" URIs to embedded [gio.resource.Resource]s.
+      They must contain the path of a directory within the [gio.resource.Resource].
   
       Params:
         path = a null-terminated array of

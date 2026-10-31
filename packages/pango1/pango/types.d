@@ -45,6 +45,9 @@ alias Direction = PangoDirection;
 alias EllipsizeMode = PangoEllipsizeMode;
 
 /** */
+alias FontColor = PangoFontColor;
+
+/** */
 alias FontMask = PangoFontMask;
 
 /** */
@@ -224,14 +227,14 @@ enum VERSION_MAJOR = 1;
 /**
     The micro component of the version of Pango available at compile-time.
 */
-enum VERSION_MICRO = 1;
+enum VERSION_MICRO = 0;
 
 /**
     The minor component of the version of Pango available at compile-time.
 */
-enum VERSION_MINOR = 52;
+enum VERSION_MINOR = 57;
 
 /**
     A string literal containing the version of Pango available at compile-time.
 */
-enum VERSION_STRING = "1.52.1";
+enum VERSION_STRING = "1.57.0";

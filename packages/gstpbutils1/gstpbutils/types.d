@@ -86,12 +86,12 @@ enum PLUGINS_BASE_VERSION_MAJOR = 1;
 /**
     The micro version of GStreamer's gst-plugins-base libraries at compile time.
 */
-enum PLUGINS_BASE_VERSION_MICRO = 8;
+enum PLUGINS_BASE_VERSION_MICRO = 2;
 
 /**
     The minor version of GStreamer's gst-plugins-base libraries at compile time.
 */
-enum PLUGINS_BASE_VERSION_MINOR = 24;
+enum PLUGINS_BASE_VERSION_MINOR = 28;
 
 /**
     The nano version of GStreamer's gst-plugins-base libraries at compile time.

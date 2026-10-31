@@ -27,29 +27,74 @@ import pango.attr_list;
 import pango.tab_array;
 
 /**
-    The [gtk.text.Text] widget is a single-line text entry widget.
+    A single-line text entry.
     
     [gtk.text.Text] is the common implementation of single-line text editing
     that is shared between [gtk.entry.Entry], [gtk.password_entry.PasswordEntry],
-    [gtk.spin_button.SpinButton], and other widgets. In all of these, [gtk.text.Text] is
-    used as the delegate for the [gtk.editable.Editable] implementation.
+    [gtk.spin_button.SpinButton], and other widgets. In all of these, a [gtk.text.Text]
+    instance is used as the delegate for the [gtk.editable.Editable] implementation.
     
-    A fairly large set of key bindings are supported by default. If the
-    entered text is longer than the allocation of the widget, the widget
-    will scroll so that the cursor position is visible.
+    A large number of key bindings s supported by default. If the entered
+    text is longer than the allocation of the widget, the widget will scroll
+    so that the cursor position is visible.
     
     When using an entry for passwords and other sensitive information,
     it can be put into “password mode” using [gtk.text.Text.setVisibility].
-    In this mode, entered text is displayed using a “invisible” character.
+    In this mode, entered text is displayed using an “invisible” character.
     By default, GTK picks the best invisible character that is available
     in the current font, but it can be changed with
     [gtk.text.Text.setInvisibleChar].
     
-    If you are looking to add icons or progress display in an entry, look
-    at [gtk.entry.Entry]. There other alternatives for more specialized use
-    cases, such as [gtk.search_entry.SearchEntry].
+    If you want to add icons or progress display in an entry, look at
+    [gtk.entry.Entry]. There are other alternatives for more specialized
+    use cases, such as [gtk.search_entry.SearchEntry].
     
-    If you need multi-line editable text, look at [gtk.text_view.TextView].
+    If you need multi-line editable text, use [gtk.text_view.TextView].
+    
+    # Shortcuts and Gestures
+    
+    [gtk.text.Text] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    - <kbd>Ctrl</kbd>+<kbd>A</kbd> or <kbd>Ctrl</kbd>+<kbd>&sol;</kbd>
+      selects all the text.
+    - <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> or
+      <kbd>Ctrl</kbd>+<kbd>&bsol;</kbd> unselects all.
+    - <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes the last modification.
+    - <kbd>Ctrl</kbd>+<kbd>Y</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
+      redoes the last undone modification.
+    - <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> toggles the text direction.
+    - <kbd>Clear</kbd> clears the content.
+    
+    Additionally, the following signals have default keybindings:
+    
+    - [gtk.text.Text.activate]
+    - [gtk.text.Text.backspace]
+    - [gtk.text.Text.copyClipboard]
+    - [gtk.text.Text.cutClipboard]
+    - [gtk.text.Text.deleteFromCursor]
+    - [gtk.text.Text.insertEmoji]
+    - [gtk.text.Text.moveCursor]
+    - [gtk.text.Text.pasteClipboard]
+    - [gtk.text.Text.toggleOverwrite]
+    
+    # Actions
+    
+    [gtk.text.Text] defines a set of built-in actions:
+    
+    - `clipboard.copy` copies the contents to the clipboard.
+    - `clipboard.cut` copies the contents to the clipboard and deletes it from
+      the widget.
+    - `clipboard.paste` inserts the contents of the clipboard into the widget.
+    - `menu.popup` opens the context menu.
+    - `misc.insert-emoji` opens the Emoji chooser.
+    - `misc.toggle-visibility` toggles the [gtk.text.Text]:visibility property.
+    - `misc.toggle-direction` toggles the text direction.
+    - `selection.delete` deletes the current selection.
+    - `selection.select-all` selects all of the widgets content.
+    - `text.redo` redoes the last change to the contents.
+    - `text.undo` undoes the last change to the contents.
+    - `text.clear` removes all content.
     
     # CSS nodes
     
@@ -59,7 +104,10 @@ import pango.tab_array;
     ├── undershoot.left
     ├── undershoot.right
     ├── [selection]
+    ├── [cursor-handle[.top]
+    ├── [cursor-handle.bottom]
     ├── [block-cursor]
+    ├── [cursor-handle[.top/.bottom][.insertion-cursor]]
     ╰── [window.popup]
     ```
     
@@ -129,7 +177,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Get `activatesDefault` property.
-      Returns: Whether to activate the default widget when Enter is pressed.
+      Returns: Whether to activate the default widget when <kbd>Enter</kbd> is pressed.
   */
   @property bool activatesDefault() nothrow
   {
@@ -139,7 +187,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Set `activatesDefault` property.
       Params:
-        propval = Whether to activate the default widget when Enter is pressed.
+        propval = Whether to activate the default widget when <kbd>Enter</kbd> is pressed.
   */
   @property void activatesDefault(bool propval) nothrow
   {
@@ -148,7 +196,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Get `attributes` property.
-      Returns: A list of Pango attributes to apply to the text of the [gtk.text.Text].
+      Returns: A list of Pango attributes to apply to the text.
         
         This is mainly useful to change the size or weight of the text.
         
@@ -163,7 +211,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Set `attributes` property.
       Params:
-        propval = A list of Pango attributes to apply to the text of the [gtk.text.Text].
+        propval = A list of Pango attributes to apply to the text.
           
           This is mainly useful to change the size or weight of the text.
           
@@ -215,8 +263,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Get `extraMenu` property.
-      Returns: A menu model whose contents will be appended to
-        the context menu.
+      Returns: A menu model whose contents will be appended to the context menu.
   */
   @property gio.menu_model.MenuModel extraMenu() nothrow
   {
@@ -226,8 +273,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Set `extraMenu` property.
       Params:
-        propval = A menu model whose contents will be appended to
-          the context menu.
+        propval = A menu model whose contents will be appended to the context menu.
   */
   @property void extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
@@ -236,13 +282,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Get `imModule` property.
-      Returns: Which IM (input method) module should be used for this self.
+      Returns: Which input method module should be used.
         
         See [gtk.immulticontext.IMMulticontext].
         
-        Setting this to a non-null value overrides the system-wide
-        IM module setting. See the [gtk.settings.Settings.gtkImModule]
-        property.
+        Setting this to a non-`NULL` value overrides the system-wide
+        input method. See the [gtk.settings.Settings.gtkImModule]
+        setting.
   */
   @property string imModule() nothrow
   {
@@ -252,13 +298,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Set `imModule` property.
       Params:
-        propval = Which IM (input method) module should be used for this self.
+        propval = Which input method module should be used.
           
           See [gtk.immulticontext.IMMulticontext].
           
-          Setting this to a non-null value overrides the system-wide
-          IM module setting. See the [gtk.settings.Settings.gtkImModule]
-          property.
+          Setting this to a non-`NULL` value overrides the system-wide
+          input method. See the [gtk.settings.Settings.gtkImModule]
+          setting.
   */
   @property void imModule(string propval) nothrow
   {
@@ -290,11 +336,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `inputPurpose` property.
       Returns: The purpose of this text field.
         
-        This property can be used by on-screen keyboards and other input
+        This information can be used by on-screen keyboards and other input
         methods to adjust their behaviour.
         
-        Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-        [gtk.types.InputPurpose.Pin] is independent from setting
+        Note that setting the purpose to [gtk.types.InputPurpose.Password]
+        or [gtk.types.InputPurpose.Pin] is independent from setting
         [gtk.text.Text.visibility].
   */
   @property gtk.types.InputPurpose inputPurpose() nothrow
@@ -307,11 +353,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = The purpose of this text field.
           
-          This property can be used by on-screen keyboards and other input
+          This information can be used by on-screen keyboards and other input
           methods to adjust their behaviour.
           
-          Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-          [gtk.types.InputPurpose.Pin] is independent from setting
+          Note that setting the purpose to [gtk.types.InputPurpose.Password]
+          or [gtk.types.InputPurpose.Pin] is independent from setting
           [gtk.text.Text.visibility].
   */
   @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
@@ -340,7 +386,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Get `invisibleCharSet` property.
-      Returns: Whether the invisible char has been set for the [gtk.text.Text].
+      Returns: Whether the invisible char has been set.
   */
   @property bool invisibleCharSet() nothrow
   {
@@ -350,7 +396,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Set `invisibleCharSet` property.
       Params:
-        propval = Whether the invisible char has been set for the [gtk.text.Text].
+        propval = Whether the invisible char has been set.
   */
   @property void invisibleCharSet(bool propval) nothrow
   {
@@ -382,7 +428,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Get `overwriteMode` property.
-      Returns: If text is overwritten when typing in the [gtk.text.Text].
+      Returns: If text is overwritten when typing.
   */
   @property bool overwriteMode() nothrow
   {
@@ -392,7 +438,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Set `overwriteMode` property.
       Params:
-        propval = If text is overwritten when typing in the [gtk.text.Text].
+        propval = If text is overwritten when typing.
   */
   @property void overwriteMode(bool propval) nothrow
   {
@@ -450,7 +496,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Get `tabs` property.
-      Returns: A list of tabstops to apply to the text of the [gtk.text.Text].
+      Returns: Custom tabs for this text widget.
   */
   @property pango.tab_array.TabArray tabs() nothrow
   {
@@ -460,7 +506,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Set `tabs` property.
       Params:
-        propval = A list of tabstops to apply to the text of the [gtk.text.Text].
+        propval = Custom tabs for this text widget.
   */
   @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
@@ -510,7 +556,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 
   /**
       Creates a new [gtk.text.Text].
-      Returns: a new [gtk.text.Text].
+      Returns: the new [gtk.text.Text]
   */
   this() nothrow
   {
@@ -520,10 +566,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Creates a new [gtk.text.Text] with the specified text buffer.
+      Creates a new [gtk.text.Text] with the specified buffer.
   
       Params:
-        buffer = The buffer to use for the new [gtk.text.Text].
+        buffer = the buffer to use
       Returns: a new [gtk.text.Text]
   */
   static gtk.text.Text newWithBuffer(gtk.entry_buffer.EntryBuffer buffer) nothrow
@@ -535,8 +581,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Determine the positions of the strong and weak cursors if the
-      insertion point in the layout is at position.
+      Determines the positions of the strong and weak cursors for a
+      given character position.
       
       The position of each cursor is stored as a zero-width rectangle.
       The strong cursor location is the location where characters of
@@ -561,11 +607,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Returns whether pressing Enter will activate
-      the default widget for the window containing self.
+      Returns whether pressing <kbd>Enter</kbd> will activate
+      the default widget for the window containing the widget.
       
       See [gtk.text.Text.setActivatesDefault].
-      Returns: true if the [gtk.text.Text] will activate the default widget
+      Returns: true if self will activate the default widget
   */
   bool getActivatesDefault() nothrow
   {
@@ -575,7 +621,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Gets the attribute list that was set on the [gtk.text.Text].
+      Gets the attribute list that was set on the text widget.
       
       See [gtk.text.Text.setAttributes].
       Returns: the attribute list
@@ -589,9 +635,9 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Get the [gtk.entry_buffer.EntryBuffer] object which holds the text for
+      Get the entry buffer object which holds the text for
       this widget.
-      Returns: A [gtk.entry_buffer.EntryBuffer] object.
+      Returns: the entry buffer object
   */
   gtk.entry_buffer.EntryBuffer getBuffer() nothrow
   {
@@ -602,8 +648,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Returns whether Emoji completion is enabled for this
-      [gtk.text.Text] widget.
+      Returns whether Emoji completion is enabled.
       Returns: true if Emoji completion is enabled
   */
   bool getEnableEmojiCompletion() nothrow
@@ -614,7 +659,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Gets the menu model for extra items in the context menu.
+      Gets the extra menu model of the text widget.
       
       See [gtk.text.Text.setExtraMenu].
       Returns: the menu model
@@ -628,8 +673,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Gets the input hints of the [gtk.text.Text].
-      Returns: 
+      Gets the input hints of the text widget.
+      Returns: the input hints
   */
   gtk.types.InputHints getInputHints() nothrow
   {
@@ -640,8 +685,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Gets the input purpose of the [gtk.text.Text].
-      Returns: 
+      Gets the input purpose of the text widget.
+      Returns: the input purpose
   */
   gtk.types.InputPurpose getInputPurpose() nothrow
   {
@@ -658,7 +703,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       so the value returned by this function is not very useful unless
       it has been explicitly set with [gtk.text.Text.setInvisibleChar].
       Returns: the current invisible char, or 0, if text does not
-          show invisible text at all.
+          show invisible text at all
   */
   dchar getInvisibleChar() nothrow
   {
@@ -668,14 +713,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Retrieves the maximum allowed length of the text in self.
+      Retrieves the maximum allowed length of the contents.
       
       See [gtk.text.Text.setMaxLength].
       
       This is equivalent to getting self's [gtk.entry_buffer.EntryBuffer] and
       calling [gtk.entry_buffer.EntryBuffer.getMaxLength] on it.
-      Returns: the maximum allowed number of characters
-          in [gtk.text.Text], or 0 if there is no maximum.
+      Returns: the maximum allowed number of characters, or 0 if
+          there is no limit
   */
   int getMaxLength() nothrow
   {
@@ -685,10 +730,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Gets whether text is overwritten when typing in the [gtk.text.Text].
+      Gets whether text is overwritten when typing.
       
       See [gtk.text.Text.setOverwriteMode].
-      Returns: whether the text is overwritten when typing
+      Returns: whether text is overwritten when typing
   */
   bool getOverwriteMode() nothrow
   {
@@ -698,10 +743,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Retrieves the text that will be displayed when
-      self is empty and unfocused
+      Retrieves the text that will be displayed when the text widget
+      is empty and unfocused
       
-      If no placeholder text has been set, null will be returned.
+      See [gtk.text.Text.setPlaceholderText].
       Returns: the placeholder text
   */
   string getPlaceholderText() nothrow
@@ -713,7 +758,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Returns whether the [gtk.text.Text] will grow and shrink
+      Returns whether the text widget will grow and shrink
       with the content.
       Returns: true if self will propagate the text width
   */
@@ -725,10 +770,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Gets the tabstops that were set on the [gtk.text.Text].
+      Gets the tab stops for the text widget.
       
       See [gtk.text.Text.setTabs].
-      Returns: the tabstops
+      Returns: the tab stops
   */
   pango.tab_array.TabArray getTabs() nothrow
   {
@@ -739,12 +784,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Retrieves the current length of the text in self.
+      Retrieves the length of the contents.
       
       This is equivalent to getting self's [gtk.entry_buffer.EntryBuffer]
       and calling [gtk.entry_buffer.EntryBuffer.getLength] on it.
-      Returns: the current number of characters
-          in [gtk.text.Text], or 0 if there are none.
+      Returns: the length of the contents, in characters
   */
   ushort getTextLength() nothrow
   {
@@ -754,9 +798,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Returns whether the [gtk.text.Text] will truncate multi-line text
-      that is pasted into the widget
-      Returns: true if self will truncate multi-line text
+      Returns whether pasted text will be truncated to the first line.
+      Returns: true if self will truncate pasted multi-line text
   */
   bool getTruncateMultiline() nothrow
   {
@@ -766,8 +809,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Retrieves whether the text in self is visible.
-      Returns: true if the text is currently visible
+      Retrieves whether the text is visible.
+      Returns: true if the text is visible
   */
   bool getVisibility() nothrow
   {
@@ -777,13 +820,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Causes self to have keyboard focus.
+      Causes the text widget to have the keyboard focus.
       
       It behaves like [gtk.widget.Widget.grabFocus],
-      except that it doesn't select the contents of self.
+      except that it does not select the contents of self.
+      
       You only want to call this on some special entries
-      which the user usually doesn't want to replace all text in,
-      such as search-as-you-type entries.
+      which the user usually doesn't want to replace all
+      text in, such as search-as-you-type entries.
       Returns: true if focus is now inside self
   */
   bool grabFocusWithoutSelecting() nothrow
@@ -794,15 +838,16 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      If activates is true, pressing Enter will activate
-      the default widget for the window containing self.
+      Sets whether pressing <kbd>Enter</kbd> will activate
+      the default widget.
       
-      This usually means that the dialog containing the [gtk.text.Text]
-      will be closed, since the default widget is usually one of
+      This usually means that the dialog containing self will
+      be closed, since the default widget is usually one of
       the dialog buttons.
   
       Params:
-        activates = true to activate window’s default widget on Enter keypress
+        activates = true to activate window’s default widget on
+            <kbd>Enter</kbd> keypress
   */
   void setActivatesDefault(bool activates) nothrow
   {
@@ -810,10 +855,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets attributes that are applied to the text.
+      Apply attributes to the contents of the text widget.
   
       Params:
-        attrs = a [pango.attr_list.AttrList]
+        attrs = a list of style attributes
   */
   void setAttributes(pango.attr_list.AttrList attrs = null) nothrow
   {
@@ -821,11 +866,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Set the [gtk.entry_buffer.EntryBuffer] object which holds the text for
+      Set the entry buffer object which holds the text for
       this widget.
   
       Params:
-        buffer = a [gtk.entry_buffer.EntryBuffer]
+        buffer = an entry buffer object
   */
   void setBuffer(gtk.entry_buffer.EntryBuffer buffer) nothrow
   {
@@ -848,11 +893,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets a menu model to add when constructing
-      the context menu for self.
+      Sets a menu model to add to the context menu of the text widget.
   
       Params:
-        model = a [gio.menu_model.MenuModel]
+        model = a menu model
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null) nothrow
   {
@@ -860,11 +904,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets input hints that allow input methods
-      to fine-tune their behaviour.
+      Sets hints that allow input methods to fine-tune their behaviour.
   
       Params:
-        hints = the hints
+        hints = input hints
   */
   void setInputHints(gtk.types.InputHints hints) nothrow
   {
@@ -872,13 +915,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets the input purpose of the [gtk.text.Text].
+      Sets the input purpose of the text widget.
       
-      This can be used by on-screen keyboards and other
-      input methods to adjust their behaviour.
+      The input purpose can be used by on-screen keyboards
+      and other input methods to adjust their behaviour.
   
       Params:
-        purpose = the purpose
+        purpose = the input purpose
   */
   void setInputPurpose(gtk.types.InputPurpose purpose) nothrow
   {
@@ -902,18 +945,18 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets the maximum allowed length of the contents of the widget.
+      Sets the maximum allowed length of the contents.
       
-      If the current contents are longer than the given length, then
+      If the current contents are longer than the given length,
       they will be truncated to fit.
       
       This is equivalent to getting self's [gtk.entry_buffer.EntryBuffer] and
       calling [gtk.entry_buffer.EntryBuffer.setMaxLength] on it.
   
       Params:
-        length = the maximum length of the [gtk.text.Text], or 0 for no maximum.
+        length = the maximum length of the text, or 0 for no maximum.
             (other than the maximum length of entries.) The value passed
-            in will be clamped to the range 0-65536.
+            in will be clamped to the range 0-65536
   */
   void setMaxLength(int length) nothrow
   {
@@ -921,8 +964,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets whether the text is overwritten when typing
-      in the [gtk.text.Text].
+      Sets whether the text is overwritten when typing.
   
       Params:
         overwrite = new value
@@ -933,10 +975,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets text to be displayed in self when it is empty.
+      Sets the text to be displayed when the text widget is
+      empty and unfocused.
       
       This can be used to give a visual hint of the expected
-      contents of the [gtk.text.Text].
+      contents of the text widget.
   
       Params:
         text = a string to be displayed when self
@@ -949,7 +992,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets whether the [gtk.text.Text] should grow and shrink with the content.
+      Sets whether the text widget should grow and shrink with the content.
   
       Params:
         propagateTextWidth = true to propagate the text width
@@ -960,10 +1003,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets tabstops that are applied to the text.
+      Sets tab stops for the text widget.
   
       Params:
-        tabs = a [pango.tab_array.TabArray]
+        tabs = tab stops
   */
   void setTabs(pango.tab_array.TabArray tabs = null) nothrow
   {
@@ -971,8 +1014,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets whether the [gtk.text.Text] should truncate multi-line text
-      that is pasted into the widget.
+      Sets whether pasted text should be truncated to the first line.
   
       Params:
         truncateMultiline = true to truncate multi-line text
@@ -983,10 +1025,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-      Sets whether the contents of the [gtk.text.Text] are visible or not.
+      Sets whether the contents of the text widget are visible or not.
       
       When visibility is set to false, characters are displayed
-      as the invisible char, and will also appear that way when
+      as the invisible char, and it will also appear that way when
       the text in the widget is copied to the clipboard.
       
       By default, GTK picks the best invisible character available
@@ -994,13 +1036,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       [gtk.text.Text.setInvisibleChar].
       
       Note that you probably want to set [gtk.text.Text.inputPurpose]
-      to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin] to
-      inform input methods about the purpose of this self,
-      in addition to setting visibility to false.
+      to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin]
+      to inform input methods about the purpose of this widget, in addition
+      to setting visibility to false.
   
       Params:
-        visible = true if the contents of the [gtk.text.Text] are displayed
-            as plaintext
+        visible = true if the contents of the text widget are displayed
+            as plain text
   */
   void setVisibility(bool visible) nothrow
   {
@@ -1010,8 +1052,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Unsets the invisible char.
       
-      After calling this, the default invisible
-      char is used again.
+      After calling this, the default invisible char is used again.
   */
   void unsetInvisibleChar() nothrow
   {
@@ -1221,9 +1262,9 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         
         This is a [keybinding signal](class.SignalAction.html).
         
-        If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
-        if there is one, otherwise it deletes the requested number
-        of characters.
+        If the type is [gtk.types.DeleteType.Chars], GTK deletes the
+        selection if there is one, otherwise it deletes the requested
+        number of characters.
         
         The default bindings for this signal are <kbd>Delete</kbd>
         for deleting a character and <kbd>Ctrl</kbd>+<kbd>Delete</kbd>
@@ -1234,7 +1275,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   
           `void callback(gtk.types.DeleteType type, int count, gtk.text.Text text)`
   
-          `type` the granularity of the deletion, as a [gtk.types.DeleteType] (optional)
+          `type` the granularity of the deletion (optional)
   
           `count` the number of type units to delete (optional)
   
@@ -1338,7 +1379,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Connect to `InsertEmoji` signal.
   
-      Emitted to present the Emoji chooser for the widget.
+      Emitted to present the Emoji chooser.
         
         This is a [keybinding signal](class.SignalAction.html).
         
@@ -1396,8 +1437,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         This is a [keybinding signal](class.SignalAction.html).
         
         Applications should not connect to it, but may emit it with
-        [gobject.global.signalEmitByName] if they need to control the cursor
-        programmatically.
+        `funcGObject.signal_emit_by_name` if they need to control
+        the cursor programmatically.
         
         The default bindings for this signal come in two variants,
         the variant with the <kbd>Shift</kbd> modifier extends the
@@ -1414,7 +1455,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   
           `void callback(gtk.types.MovementStep step, int count, bool extend, gtk.text.Text text)`
   
-          `step` the granularity of the move, as a [gtk.types.MovementStep] (optional)
+          `step` the granularity of the move (optional)
   
           `count` the number of step units to move (optional)
   
@@ -1572,7 +1613,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   /**
       Connect to `ToggleOverwrite` signal.
   
-      Emitted to toggle the overwrite mode of the [gtk.text.Text].
+      Emitted to toggle the overwrite mode.
         
         This is a [keybinding signal](class.SignalAction.html).
         
@@ -1628,7 +1669,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
   /**
       Set `activatesDefault` property.
       Params:
-        propval = Whether to activate the default widget when Enter is pressed.
+        propval = Whether to activate the default widget when <kbd>Enter</kbd> is pressed.
       Returns: Builder instance for fluent chaining
   */
   T activatesDefault(bool propval) nothrow
@@ -1639,7 +1680,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
   /**
       Set `attributes` property.
       Params:
-        propval = A list of Pango attributes to apply to the text of the [gtk.text.Text].
+        propval = A list of Pango attributes to apply to the text.
           
           This is mainly useful to change the size or weight of the text.
           
@@ -1677,8 +1718,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
   /**
       Set `extraMenu` property.
       Params:
-        propval = A menu model whose contents will be appended to
-          the context menu.
+        propval = A menu model whose contents will be appended to the context menu.
       Returns: Builder instance for fluent chaining
   */
   T extraMenu(gio.menu_model.MenuModel propval) nothrow
@@ -1689,13 +1729,13 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
   /**
       Set `imModule` property.
       Params:
-        propval = Which IM (input method) module should be used for this self.
+        propval = Which input method module should be used.
           
           See [gtk.immulticontext.IMMulticontext].
           
-          Setting this to a non-null value overrides the system-wide
-          IM module setting. See the [gtk.settings.Settings.gtkImModule]
-          property.
+          Setting this to a non-`NULL` value overrides the system-wide
+          input method. See the [gtk.settings.Settings.gtkImModule]
+          setting.
       Returns: Builder instance for fluent chaining
   */
   T imModule(string propval) nothrow
@@ -1720,11 +1760,11 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
       Params:
         propval = The purpose of this text field.
           
-          This property can be used by on-screen keyboards and other input
+          This information can be used by on-screen keyboards and other input
           methods to adjust their behaviour.
           
-          Note that setting the purpose to [gtk.types.InputPurpose.Password] or
-          [gtk.types.InputPurpose.Pin] is independent from setting
+          Note that setting the purpose to [gtk.types.InputPurpose.Password]
+          or [gtk.types.InputPurpose.Pin] is independent from setting
           [gtk.text.Text.visibility].
       Returns: Builder instance for fluent chaining
   */
@@ -1747,7 +1787,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
   /**
       Set `invisibleCharSet` property.
       Params:
-        propval = Whether the invisible char has been set for the [gtk.text.Text].
+        propval = Whether the invisible char has been set.
       Returns: Builder instance for fluent chaining
   */
   T invisibleCharSet(bool propval) nothrow
@@ -1771,7 +1811,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
   /**
       Set `overwriteMode` property.
       Params:
-        propval = If text is overwritten when typing in the [gtk.text.Text].
+        propval = If text is overwritten when typing.
       Returns: Builder instance for fluent chaining
   */
   T overwriteMode(bool propval) nothrow
@@ -1805,7 +1845,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
   /**
       Set `tabs` property.
       Params:
-        propval = A list of tabstops to apply to the text of the [gtk.text.Text].
+        propval = Custom tabs for this text widget.
       Returns: Builder instance for fluent chaining
   */
   T tabs(pango.tab_array.TabArray propval) nothrow

@@ -10,8 +10,7 @@ import gsk.c.types;
 import gsk.types;
 
 /**
-    A [gsk.stroke.Stroke] struct collects the parameters that influence
-    the operation of stroking a path.
+    Collects the parameters that are needed when stroking a path.
 */
 class Stroke : gobject.boxed.Boxed
 {
@@ -62,7 +61,7 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /**
-      Creates a copy of the given other stroke.
+      Creates a copy of a [gsk.stroke.Stroke].
       Returns: a new [gsk.stroke.Stroke]. Use [gsk.stroke.Stroke.free] to free it
   */
   gsk.stroke.Stroke copy() nothrow
@@ -74,8 +73,8 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /**
-      Gets the dash array in use or `NULL` if dashing is disabled.
-      Returns: The dash array or `NULL` if the dash array is empty.
+      Gets the dash array in use.
+      Returns: the dash array or `NULL` if the dash array is empty
   */
   float[] getDash() nothrow
   {
@@ -92,8 +91,8 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /**
-      Returns the dash_offset of a [gsk.stroke.Stroke].
-      Returns: 
+      Gets the dash offset.
+      Returns: the dash offset
   */
   float getDashOffset() nothrow
   {
@@ -106,7 +105,7 @@ class Stroke : gobject.boxed.Boxed
       Gets the line cap used.
       
       See [gsk.types.LineCap] for details.
-      Returns: The line cap
+      Returns: the line cap
   */
   gsk.types.LineCap getLineCap() nothrow
   {
@@ -120,7 +119,7 @@ class Stroke : gobject.boxed.Boxed
       Gets the line join used.
       
       See [gsk.types.LineJoin] for details.
-      Returns: The line join
+      Returns: the line join
   */
   gsk.types.LineJoin getLineJoin() nothrow
   {
@@ -132,7 +131,7 @@ class Stroke : gobject.boxed.Boxed
 
   /**
       Gets the line width used.
-      Returns: The line width
+      Returns: the line width
   */
   float getLineWidth() nothrow
   {
@@ -142,8 +141,8 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /**
-      Returns the miter limit of a [gsk.stroke.Stroke].
-      Returns: 
+      Gets the miter limit.
+      Returns: the miter limit
   */
   float getMiterLimit() nothrow
   {
@@ -153,7 +152,7 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /**
-      Sets the dash pattern to use by this stroke.
+      Sets the dash pattern to use.
       
       A dash pattern is specified by an array of alternating non-negative
       values. Each value provides the length of alternate "on" and "off"
@@ -161,8 +160,8 @@ class Stroke : gobject.boxed.Boxed
       
       Each "on" segment will have caps applied as if the segment were a
       separate contour. In particular, it is valid to use an "on" length
-      of 0 with [gsk.types.LineCap.Round] or [gsk.types.LineCap.Square] to draw dots
-      or squares along a path.
+      of 0 with [gsk.types.LineCap.Round] or [gsk.types.LineCap.Square]
+      to draw dots or squares along a path.
       
       If n_dash is 0, if all elements in dash are 0, or if there are
       negative values in dash, then dashing is disabled.
@@ -212,7 +211,7 @@ class Stroke : gobject.boxed.Boxed
       See [gsk.types.LineCap] for details.
   
       Params:
-        lineCap = the [gsk.types.LineCap]
+        lineCap = the line cap
   */
   void setLineCap(gsk.types.LineCap lineCap) nothrow
   {
@@ -225,7 +224,7 @@ class Stroke : gobject.boxed.Boxed
       See [gsk.types.LineJoin] for details.
   
       Params:
-        lineJoin = The line join to use
+        lineJoin = the line join to use
   */
   void setLineJoin(gsk.types.LineJoin lineJoin) nothrow
   {
@@ -235,7 +234,7 @@ class Stroke : gobject.boxed.Boxed
   /**
       Sets the line width to be used when stroking.
       
-      The line width must be > 0.
+      The line width must be >= 0.
   
       Params:
         lineWidth = width of the line in pixels
@@ -246,14 +245,15 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /**
-      Sets the limit for the distance from the corner where sharp
+      Sets the miter limit to be used when stroking.
+      
+      The miter limit is the distance from the corner where sharp
       turns of joins get cut off.
       
-      The miter limit is in units of line width and must be non-negative.
+      The limit is specfied in units of line width and must be non-negative.
       
-      For joins of type [gsk.types.LineJoin.Miter] that exceed the miter
-      limit, the join gets rendered as if it was of type
-      [gsk.types.LineJoin.Bevel].
+      For joins of type [gsk.types.LineJoin.Miter] that exceed the miter limit,
+      the join gets rendered as if it was of type [gsk.types.LineJoin.Bevel].
   
       Params:
         limit = the miter limit
@@ -265,7 +265,7 @@ class Stroke : gobject.boxed.Boxed
 
   /**
       A helper function that sets the stroke parameters
-      of cr from the values found in self.
+      of a cairo context from a [gsk.stroke.Stroke].
   
       Params:
         cr = the cairo context to configure
@@ -276,12 +276,12 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /**
-      Checks if 2 strokes are identical.
+      Checks if two strokes are identical.
   
       Params:
-        stroke1 = the first [gsk.stroke.Stroke]
-        stroke2 = the second [gsk.stroke.Stroke]
-      Returns: `TRUE` if the 2 strokes are equal, `FALSE` otherwise
+        stroke1 = the first stroke
+        stroke2 = the second stroke
+      Returns: true if the two strokes are equal, false otherwise
   */
   static bool equal(const(void)* stroke1 = null, const(void)* stroke2 = null) nothrow
   {

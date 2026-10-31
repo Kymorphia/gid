@@ -228,9 +228,6 @@ alias UnicodeScript = GUnicodeScript;
 alias UnicodeType = GUnicodeType;
 
 /** */
-alias UnixPipeEnd = GUnixPipeEnd;
-
-/** */
 alias UriError = GUriError;
 
 /** */
@@ -292,9 +289,6 @@ alias TestConfig = GTestConfig;
 /** */
 alias ThreadFunctions = GThreadFunctions;
 
-/** */
-alias UnixPipe = GUnixPipe;
-
 // Callbacks
 
 /**
@@ -342,8 +336,8 @@ alias CacheNewFunc = void* delegate(void* key);
     Prototype of a #GChildWatchSource callback, called when a child
     process has exited.
     
-    To interpret wait_status, see the documentation
-    for [glib.global.spawnCheckWaitStatus]. In particular,
+    To interpret wait_status, see the documentation for
+    `funcGLib.spawn_check_wait_status`. In particular,
     on Unix platforms, note that it is usually not equal
     to the integer passed to `exit()` or returned from `main()`.
 
@@ -355,9 +349,9 @@ alias CacheNewFunc = void* delegate(void* key);
 alias ChildWatchFunc = void delegate(glib.types.Pid pid, int waitStatus);
 
 /**
-    Specifies the type of function passed to [glib.global.clearHandleId].
-    The implementation is expected to free the resource identified
-    by handle_id; for instance, if handle_id is a #GSource ID,
+    Specifies the type of function passed to `funcGLib.clear_handle_id` The
+    implementation is expected to free the resource identified by handle_id;
+    for instance, if handle_id is a [glib.source.Source] ID,
     [glib.source.Source.remove] can be used.
 
     Params:
@@ -563,30 +557,36 @@ alias HFunc = void delegate(void* key, void* value);
 
 /**
     Specifies the type of the function passed to
-    [glib.hash_table.HashTable.foreachRemove]. It is called with each key/value
-    pair, together with the user_data parameter passed to
-    [glib.hash_table.HashTable.foreachRemove]. It should return true if the
-    key/value pair should be removed from the #GHashTable.
+    [glib.hash_table.HashTable.find], [glib.hash_table.HashTable.foreachRemove], and
+    [glib.hash_table.HashTable.foreachSteal].
+    
+    The function is called with each key/value pair, together with
+    the user_data parameter passed to the calling function.
+    
+    The function should return true if the key/value pair should be
+    selected, meaning it has been found or it should be removed from the
+    [glib.hash_table.HashTable], depending on the calling function.
 
     Params:
       key = a key
       value = the value associated with the key
-    Returns: true if the key/value pair should be removed from the
-          #GHashTable
+    Returns: true if the key/value pair should be selected, and
+        false otherwise
 */
 alias HRFunc = bool delegate(void* key, void* value);
 
 /**
     Specifies the type of the hash function which is passed to
-    [glib.hash_table.HashTable.new_] when a #GHashTable is created.
+    [glib.hash_table.HashTable.new_] when a [glib.hash_table.HashTable] is created.
     
-    The function is passed a key and should return a #guint hash value.
-    The functions [glib.global.directHash], [glib.global.intHash] and [glib.global.strHash] provide
-    hash functions which can be used when the key is a #gpointer, #gint*,
-    and #gchar* respectively.
+    The function is passed a key and should return an `unsigned int` hash value.
+    The functions `funcdirect_hash`, `funcint_hash` and `funcstr_hash` provide
+    hash functions which can be used when the key is a `void*`, `int*`,
+    and `char*` respectively.
     
-    [glib.global.directHash] is also the appropriate hash function for keys
-    of the form `GINT_TO_POINTER (n)` (or similar macros).
+    `funcdirect_hash` is also the appropriate hash function for keys
+    of the form [`GINT_TO_POINTER (n)`](conversion-macros.html#gint-to-pointer)
+    (or similar macros).
     
     A good hash functions should produce
     hash values that are evenly distributed over a fairly large range.
@@ -597,9 +597,9 @@ alias HRFunc = bool delegate(void* key, void* value);
     Note that the hash functions provided by GLib have these qualities,
     but are not particularly robust against manufactured keys that
     cause hash collisions. Therefore, you should consider choosing
-    a more secure hash function when using a GHashTable with keys
+    a more secure hash function when using a [glib.hash_table.HashTable] with keys
     that originate in untrusted data (such as HTTP requests).
-    Using [glib.global.strHash] in that situation might make your application
+    Using `funcstr_hash` in that situation might make your application
     vulnerable to
     [Algorithmic Complexity Attacks](https://lwn.net/Articles/474912/).
     
@@ -695,6 +695,9 @@ alias IOFunc = bool delegate(glib.iochannel.IOChannel source, glib.types.IOCondi
     custom log handler functions behave similarly, so that logging calls in user
     code do not need modifying to add a new-line character to the message if the
     log handler is changed.
+    
+    The `log_domain` parameter can be set to `NULL` or an empty string to use the default
+    application domain.
     
     This is not used if structured logging is enabled; see
     [Using Structured Logging](logging.html#using-structured-logging).
@@ -829,8 +832,8 @@ alias ScannerMsgFunc = void delegate(glib.scanner.Scanner scanner, string messag
 alias SequenceIterCompareFunc = int delegate(glib.sequence_iter.SequenceIter a, glib.sequence_iter.SequenceIter b);
 
 /**
-    Dispose function for source. See [glib.source.Source.setDisposeFunction] for
-    details.
+    Dispose function for source. See [glib.source.Source.setDisposeFunction]
+    for details.
 
     Params:
       source = #GSource that is currently being disposed
@@ -844,22 +847,77 @@ alias SourceDisposeFunc = void delegate(glib.source.Source source);
 alias SourceDummyMarshal = void delegate();
 
 /**
-    Specifies the type of function passed to [glib.global.timeoutAdd],
-    [glib.global.timeoutAddFull], [glib.global.idleAdd], and [glib.global.idleAddFull].
+    Specifies the type of function passed to `funcGLib.timeout_add`,
+    `funcGLib.timeout_add_full`, `funcGLib.idle_add`, and
+    `funcGLib.idle_add_full`.
     
-    When calling [glib.source.Source.setCallback], you may need to cast a function of a
-    different type to this type. Use G_SOURCE_FUNC() to avoid warnings about
-    incompatible function types.
-    Returns: false if the source should be removed. [glib.types.SOURCE_CONTINUE] and
-      [glib.types.SOURCE_REMOVE] are more memorable names for the return value.
+    When calling [glib.source.Source.setCallback], you may need to cast a
+    function of a different type to this type. Use `funcGLib.SOURCE_FUNC` to
+    avoid warnings about incompatible function types.
+    Returns: false if the source should be removed.
+      [glib.types.SOURCE_CONTINUE] and [glib.types.SOURCE_REMOVE] are more
+      memorable names for the return value.
 */
 alias SourceFunc = bool delegate();
+
+/**
+    Checks if the source is ready to be dispatched.
+    
+    Called after all the file descriptors are polled. The source
+    should return true if it is ready to be dispatched. Note that some
+    time may have passed since the previous prepare function was called,
+    so the source should be checked again here.
+    
+    Since 2.36 this may be `NULL`, in which case the effect is
+    as if the function always returns `FALSE`.
+
+    Params:
+      source = The #GSource
+    Returns: true if ready to be dispatched, false otherwise
+*/
+alias SourceFuncsCheckFunc = bool delegate(glib.source.Source source);
+
+/**
+    Finalizes the source.
+    
+    Called when the source is finalized. At this point, the source
+    will have been destroyed, had its callback cleared, and have been removed
+    from its [glib.main_context.MainContext], but it will still have its final reference
+    count, so methods can be called on it from within this function.
+
+    Params:
+      source = The #GSource
+*/
+alias SourceFuncsFinalizeFunc = void delegate(glib.source.Source source);
+
+/**
+    Checks the source for readiness.
+    
+    Called before all the file descriptors are polled. If the
+    source can determine that it is ready here (without waiting for the
+    results of the poll call) it should return true. It can also return
+    a timeout_ value which should be the maximum timeout (in milliseconds)
+    which should be passed to the poll call. The actual timeout used will
+    be `-1` if all sources returned `-1`, or it will be the minimum of all
+    the timeout_ values returned which were greater than or equal to `0`.
+    If the prepare function returns a timeout and the source also has a
+    ready time set, then the lower of the two will be used.
+    
+    Since 2.36 this may be `NULL`, in which case the effect is as if the
+    function always returns `FALSE` with a timeout of `-1`.
+
+    Params:
+      source = The #GSource
+      timeout = the maximum timeout (in milliseconds) which should be passed to the poll call
+    Returns: true if the source is ready, false otherwise
+*/
+alias SourceFuncsPrepareFunc = bool delegate(glib.source.Source source, out int timeout);
 
 /**
     A source function that is only called once before being removed from the main
     context automatically.
     
-    See: [glib.global.idleAddOnce], [glib.global.timeoutAddOnce]
+    See: `funcGLib.idle_add_once`, `funcGLib.timeout_add_once`
 */
 alias SourceOnceFunc = void delegate();
 
@@ -904,12 +962,13 @@ alias SpawnChildSetupFunc = void delegate();
 alias TestDataFunc = void delegate();
 
 /**
-    The type used for functions that operate on test fixtures.  This is
-    used for the fixture setup and teardown functions as well as for the
-    testcases themselves.
+    The type used for functions that operate on test fixtures.
     
-    user_data is a pointer to the data that was given when registering
-    the test case.
+    This is used for the fixture setup and teardown functions
+    as well as for the testcases themselves.
+    
+    user_data is a pointer to the data that was given when
+    registering the test case.
     
     fixture will be a pointer to the area of memory allocated by the
     test framework, of the size requested.  If the requested size was
@@ -967,17 +1026,6 @@ alias TraverseFunc = bool delegate(void* key, void* value);
     Returns: true to stop the traversal
 */
 alias TraverseNodeFunc = bool delegate(glib.tree_node.TreeNode node);
-
-/**
-    The type of functions to be called when a UNIX fd watch source
-    triggers.
-
-    Params:
-      fd = the fd that triggered the event
-      condition = the IO conditions reported on fd
-    Returns: false if the source should be removed
-*/
-alias UnixFDSourceFunc = bool delegate(int fd, glib.types.IOCondition condition);
 
 /**
     Declares a type of function which takes no arguments
@@ -1040,7 +1088,10 @@ enum ASCII_DTOSTR_BUF_SIZE = 39;
 */
 enum ATOMIC_REF_COUNT_INIT = 1;
 
-/** */
+/**
+    Specifies one of the possible types of byte order.
+    See `G_BYTE_ORDER`.
+*/
 enum BIG_ENDIAN = 4321;
 
 /**
@@ -1064,7 +1115,17 @@ enum CSET_DIGITS = "0123456789";
 */
 enum CSET_a_2_z = "abcdefghijklmnopqrstuvwxyz";
 
-/** */
+/**
+    The C standard version the code is compiling against, it's normally
+    defined with the same value of `__STDC_VERSION__` for C standard
+    compatible compilers, while it uses the lowest standard version
+    in pure MSVC, given that in such compiler the definition depends on
+    a compilation flag.
+    
+    This is granted to be undefined when compiling with a C++ compiler.
+    
+    See also: `G_C_STD_CHECK_VERSION` and `G_CXX_STD_VERSION`
+*/
 enum C_STD_VERSION = 199000;
 
 /**
@@ -1089,13 +1150,23 @@ enum DATE_BAD_JULIAN = 0;
 */
 enum DATE_BAD_YEAR = 0;
 
-/** */
+/**
+    The directory separator character.
+    
+    This is `'/'` on UNIX machines and `'\'` under Windows.
+*/
 enum DIR_SEPARATOR = 47;
 
-/** */
+/**
+    The directory separator as a string.
+    
+    This is `"/"` on UNIX machines and `"\"` under Windows.
+*/
 enum DIR_SEPARATOR_S = "/";
 
-/** */
+/**
+    The base of natural logarithms.
+*/
 enum E = 2.718282;
 
 /** */
@@ -1168,7 +1239,9 @@ enum HAVE_GINT64 = 1;
 /** */
 enum HAVE_GNUC_VARARGS = 1;
 
-/** */
+/**
+    Defined to 1 if gcc-style visibility handling is supported.
+*/
 enum HAVE_GNUC_VISIBILITY = 1;
 
 /** */
@@ -1185,15 +1258,20 @@ enum HAVE_ISO_VARARGS = 1;
 */
 enum HOOK_FLAG_USER_SHIFT = 4;
 
-/** */
+/**
+    The bias by which exponents in double-precision floats are offset.
+*/
 enum IEEE754_DOUBLE_BIAS = 1023;
 
-/** */
+/**
+    The bias by which exponents in single-precision floats are offset.
+*/
 enum IEEE754_FLOAT_BIAS = 127;
 
 /**
     The name of the main group of a desktop entry file, as defined in the
-    [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec).
+    [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/).
+    
     Consult the specification for more
     details about the meanings of the keys below.
 */
@@ -1226,8 +1304,9 @@ enum KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE = "DBusActivatable";
 
 /**
     A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
-    giving the command line to execute. It is only valid for desktop
-    entries with the `Application` type.
+    giving the command line to execute.
+    
+    It is only valid for desktop entries with the `Application` type.
 */
 enum KEY_FILE_DESKTOP_KEY_EXEC = "Exec";
 
@@ -1284,23 +1363,25 @@ enum KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN = "OnlyShowIn";
 
 /**
     A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
-    containing the working directory to run the program in. It is only
-    valid for desktop entries with the `Application` type.
+    containing the working directory to run the program in.
+    
+    It is only valid for desktop entries with the `Application` type.
 */
 enum KEY_FILE_DESKTOP_KEY_PATH = "Path";
 
 /**
     A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a boolean
     stating whether the application supports the
-    [Startup Notification Protocol Specification](http://www.freedesktop.org/Standards/startup-notification-spec).
+    [Startup Notification Protocol Specification](https://specifications.freedesktop.org/startup-notification-spec/latest/).
 */
 enum KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY = "StartupNotify";
 
 /**
     A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is string
     identifying the WM class or name hint of a window that the application
-    will create, which can be used to emulate Startup Notification with
-    older applications.
+    will create, which can be used to emulate
+    [Startup Notification](https://specifications.freedesktop.org/startup-notification-spec/latest/)
+    with older applications.
 */
 enum KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS = "StartupWMClass";
 
@@ -1315,8 +1396,9 @@ enum KEY_FILE_DESKTOP_KEY_TERMINAL = "Terminal";
 /**
     A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
     giving the file name of a binary on disk used to determine if the
-    program is actually installed. It is only valid for desktop entries
-    with the `Application` type.
+    program is actually installed.
+    
+    It is only valid for desktop entries with the `Application` type.
 */
 enum KEY_FILE_DESKTOP_KEY_TRY_EXEC = "TryExec";
 
@@ -1332,8 +1414,9 @@ enum KEY_FILE_DESKTOP_KEY_TYPE = "Type";
 
 /**
     A key under [glib.types.KEY_FILE_DESKTOP_GROUP], whose value is a string
-    giving the URL to access. It is only valid for desktop entries
-    with the `Link` type.
+    giving the URL to access.
+    
+    It is only valid for desktop entries with the `Link` type.
 */
 enum KEY_FILE_DESKTOP_KEY_URL = "URL";
 
@@ -1362,16 +1445,25 @@ enum KEY_FILE_DESKTOP_TYPE_DIRECTORY = "Directory";
 */
 enum KEY_FILE_DESKTOP_TYPE_LINK = "Link";
 
-/** */
+/**
+    Specifies one of the possible types of byte order.
+    See `G_BYTE_ORDER`.
+*/
 enum LITTLE_ENDIAN = 1234;
 
-/** */
+/**
+    The natural logarithm of 10.
+*/
 enum LN10 = 2.302585;
 
-/** */
+/**
+    The natural logarithm of 2.
+*/
 enum LN2 = 0.693147;
 
-/** */
+/**
+    Multiplying the base 2 exponent by this number yields the base 10 exponent.
+*/
 enum LOG_2_BASE_10 = 0.301030;
 
 /**
@@ -1484,10 +1576,16 @@ enum MININT8 = -128;
     application compile time, rather than from the library
     linked against at application run time.
 */
-enum MINOR_VERSION = 80;
+enum MINOR_VERSION = 88;
 
 /** */
 enum MODULE_SUFFIX = "so";
+
+/**
+    Number of nanoseconds in one second (1 billion).
+    This macro is provided for code readability.
+*/
+enum NSEC_PER_SEC = 1000000000;
 
 /**
     If a long option in the main group has this name, it is not treated as a
@@ -1503,10 +1601,15 @@ enum MODULE_SUFFIX = "so";
 */
 enum OPTION_REMAINING = "";
 
-/** */
+/**
+    Specifies one of the possible types of byte order
+    (currently unused). See `G_BYTE_ORDER`.
+*/
 enum PDP_ENDIAN = 3412;
 
-/** */
+/**
+    The value of pi (ratio of circle's circumference to its diameter).
+*/
 enum PI = 3.141593;
 
 /**
@@ -1515,10 +1618,14 @@ enum PI = 3.141593;
 */
 enum PID_FORMAT = "i";
 
-/** */
+/**
+    Pi divided by 2.
+*/
 enum PI_2 = 1.570796;
 
-/** */
+/**
+    Pi divided by 4.
+*/
 enum PI_4 = 0.785398;
 
 /**
@@ -1531,7 +1638,7 @@ enum POLLFD_FORMAT = "%d";
     Use this for default priority event sources.
     
     In GLib this priority is used when adding timeout functions
-    with [glib.global.timeoutAdd]. In GDK this priority is used for events
+    with `func@GLib.timeout_add`. In GDK this priority is used for events
     from the X server.
 */
 enum PRIORITY_DEFAULT = 0;
@@ -1540,7 +1647,7 @@ enum PRIORITY_DEFAULT = 0;
     Use this for default priority idle functions.
     
     In GLib this priority is used when adding idle functions with
-    [glib.global.idleAdd].
+    `func@GLib.idle_add`.
 */
 enum PRIORITY_DEFAULT_IDLE = 200;
 
@@ -1590,10 +1697,16 @@ enum PRIORITY_LOW = 300;
 */
 enum REF_COUNT_INIT = -1;
 
-/** */
+/**
+    The search path separator character.
+    This is ':' on UNIX machines and ';' under Windows.
+*/
 enum SEARCHPATH_SEPARATOR = 58;
 
-/** */
+/**
+    The search path separator as a string.
+    This is ":" on UNIX machines and ";" under Windows.
+*/
 enum SEARCHPATH_SEPARATOR_S = ":";
 
 /** */
@@ -1609,18 +1722,20 @@ enum SIZEOF_SSIZE_T = 8;
 enum SIZEOF_VOID_P = 8;
 
 /**
-    Use this macro as the return value of a #GSourceFunc to leave
-    the #GSource in the main loop.
+    Use this macro as the return value of a [glib.types.SourceFunc] to leave
+    the [glib.source.Source] in the main loop.
 */
 enum SOURCE_CONTINUE = true;
 
 /**
-    Use this macro as the return value of a #GSourceFunc to remove
-    the #GSource from the main loop.
+    Use this macro as the return value of a [glib.types.SourceFunc] to remove
+    the [glib.source.Source] from the main loop.
 */
 enum SOURCE_REMOVE = false;
 
-/** */
+/**
+    The square root of two.
+*/
 enum SQRT2 = 1.414214;
 
 /**
@@ -1647,31 +1762,50 @@ enum SYSDEF_MSG_OOB = 1;
 enum SYSDEF_MSG_PEEK = 2;
 
 /**
-    Creates a unique temporary directory for each unit test and uses
-    g_set_user_dirs() to set XDG directories to point into subdirectories of it
-    for the duration of the unit test. The directory tree is cleaned up after the
-    test finishes successfully. Note that this doesn’t take effect until
-    [glib.global.testRun] is called, so calls to (for example) g_get_user_home_dir() will
-    return the system-wide value when made in a test program’s main() function.
+    A value that can be passed as an option to `func@GLib.test_init`.
+    
+    Creates a unique temporary directory for each unit test and uses sets
+    XDG directories to point into subdirectories of it for the duration of
+    the unit test. The directory tree is cleaned up after the test finishes
+    successfully.
+    
+    Note that this doesn’t take effect until `func@GLib.test_run` is called,
+    so calls to (for example) `func@GLib.get_home_dir` will return the
+    system-wide value when made in a test program’s main() function.
     
     The following functions will return subdirectories of the temporary directory
     when this option is used. The specific subdirectory paths in use are not
     guaranteed to be stable API — always use a getter function to retrieve them.
     
-     - [glib.global.getHomeDir]
-     - [glib.global.getUserCacheDir]
-     - [glib.global.getSystemConfigDirs]
-     - [glib.global.getUserConfigDir]
-     - [glib.global.getSystemDataDirs]
-     - [glib.global.getUserDataDir]
-     - [glib.global.getUserStateDir]
-     - [glib.global.getUserRuntimeDir]
+     - `func@GLib.get_home_dir`
+     - `func@GLib.get_user_cache_dir`
+     - `func@GLib.get_system_config_dirs`
+     - `func@GLib.get_user_config_dir`
+     - `func@GLib.get_system_data_dirs`
+     - `func@GLib.get_user_data_dir`
+     - `func@GLib.get_user_state_dir`
+     - `func@GLib.get_user_runtime_dir`
     
     The subdirectories may not be created by the test harness; as with normal
-    calls to functions like [glib.global.getUserCacheDir], the caller must be prepared
-    to create the directory if it doesn’t exist.
+    calls to functions like `func@GLib.get_user_cache_dir`, the caller must
+    be prepared to create the directory if it doesn’t exist.
 */
 enum TEST_OPTION_ISOLATE_DIRS = "isolate_dirs";
+
+/**
+    A value that can be passed as an option to `func@GLib.test_init`.
+    
+    If this option is given, assertions will not abort the process, but
+    call `func@GLib.test_fail`. Equivalent to `func@GLib.test_set_nonfatal_assertions`.
+*/
+enum TEST_OPTION_NONFATAL_ASSERTIONS = "nonfatal-assertions";
+
+/**
+    A value that can be passed as an option to `func@GLib.test_init`.
+    
+    If this option is given, `func@GLib.test_init` will not call `func@GLib.set_prgname`.
+*/
+enum TEST_OPTION_NO_PRGNAME = "no_g_set_prgname";
 
 /**
     Evaluates to a time span of one day.
@@ -1748,3 +1882,9 @@ enum WIN32_MSG_HANDLE = 19981206;
 
 /** */
 enum macro__has_attribute___noreturn__ = 0;
+
+/** */
+enum macro__has_attribute_ifunc = 0;
+
+/** */
+enum macro__has_attribute_no_sanitize_address = 0;

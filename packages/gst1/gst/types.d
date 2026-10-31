@@ -21,6 +21,7 @@ import gst.debug_category;
 import gst.debug_message;
 import gst.element;
 import gst.event;
+import gst.id_str;
 import gst.iterator;
 import gst.map_info;
 import gst.memory;
@@ -149,6 +150,12 @@ alias LibraryError = GstLibraryError;
 
 /** */
 alias LockFlags = GstLockFlags;
+
+/** */
+alias LogContextFlags = GstLogContextFlags;
+
+/** */
+alias LogContextHashFlags = GstLogContextHashFlags;
 
 /** */
 alias MapFlags = GstMapFlags;
@@ -324,6 +331,9 @@ alias URIType = GstURIType;
 alias BufferPoolAcquireParams = GstBufferPoolAcquireParams;
 
 /** */
+alias LogContextBuilder = GstLogContextBuilder*;
+
+/** */
 alias MetaTransformCopy = GstMetaTransformCopy;
 
 /** */
@@ -331,6 +341,9 @@ alias TimedValue = GstTimedValue;
 
 /** */
 alias ValueTable = GstValueTable;
+
+/** */
+alias VecDeque = GstVecDeque*;
 
 // Callbacks
 
@@ -366,6 +379,11 @@ alias BusFunc = bool delegate(gst.bus.Bus bus, gst.message.Message message);
     Returns: #GstBusSyncReply stating what to do with the message
 */
 alias BusSyncHandler = gst.types.BusSyncReply delegate(gst.bus.Bus bus, gst.message.Message message);
+
+/**
+    Callback prototype used in #gst_call_async
+*/
+alias CallAsyncFunc = void delegate();
 
 /**
     A function that will be called in [gst.caps.Caps.filterAndMapInPlace].
@@ -467,6 +485,9 @@ alias DebugFuncPtr = void delegate();
 
     Params:
       element = The #GstElement this function has been called against
+
+    Deprecated: Use #GstObjectCallAsyncFunc with [gst.object.ObjectWrap.callAsync]
+      or #GstCallAsyncFunc with [gst.global.callAsync] instead.
 */
 alias ElementCallAsyncFunc = void delegate(gst.element.Element element);
 
@@ -769,6 +790,14 @@ alias MiniObjectFreeFunction = void delegate(gst.mini_object.MiniObject obj);
 alias MiniObjectNotify = void delegate(gst.mini_object.MiniObject obj);
 
 /**
+    Callback prototype used in #gst_object_call_async
+
+    Params:
+      object = A #GstObject this function has been called against
+*/
+alias ObjectCallAsyncFunc = void delegate(gst.object.ObjectWrap object);
+
+/**
     This function is called when the pad is activated during the element
     READY to PAUSED state change. By default this function will call the
     activate function that puts the pad in push mode but elements can
@@ -799,7 +828,7 @@ alias PadActivateModeFunction = bool delegate(gst.pad.Pad pad, gst.object.Object
     either consumes the data or passes it on to the internally linked pad(s).
     
     The implementer of this function receives a refcount to buffer and should
-    gst_buffer_unref() when the buffer is no longer needed.
+    [gst.buffer.Buffer.unref] when the buffer is no longer needed.
     
     When a chain function detects an error in the data stream, it must post an
     error on the bus and return an appropriate #GstFlowReturn value.
@@ -820,7 +849,7 @@ alias PadChainFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.obje
     either consumes the data or passes it on to the internally linked pad(s).
     
     The implementer of this function receives a refcount to list and
-    should gst_buffer_list_unref() when the list is no longer needed.
+    should [gst.buffer_list.BufferList.unref] when the list is no longer needed.
     
     When a chainlist function detects an error in the data stream, it must
     post an error on the bus and return an appropriate #GstFlowReturn value.
@@ -1006,6 +1035,19 @@ alias PromiseChangeFunc = void delegate(gst.promise.Promise promise);
 alias StructureFilterMapFunc = bool delegate(glib.types.Quark fieldId, gobject.value.Value value);
 
 /**
+    A function that will be called in [gst.structure.Structure.filterAndMapInPlaceIdStr].
+    The function may modify value, and the value will be removed from the
+    structure if false is returned.
+
+    Params:
+      fieldname = the #GstIdStr field name
+      value = the #GValue of the field
+    Returns: true if the field should be preserved, false if it
+      should be removed.
+*/
+alias StructureFilterMapIdStrFunc = bool delegate(gst.id_str.IdStr fieldname, gobject.value.Value value);
+
+/**
     A function that will be called in [gst.structure.Structure.foreach_]. The function may
     not modify value.
 
@@ -1018,6 +1060,18 @@ alias StructureFilterMapFunc = bool delegate(glib.types.Quark fieldId, gobject.v
 alias StructureForeachFunc = bool delegate(glib.types.Quark fieldId, gobject.value.Value value);
 
 /**
+    A function that will be called in [gst.structure.Structure.foreachIdStr]. The
+    function may not modify value.
+
+    Params:
+      fieldname = the #GstIdStr field name
+      value = the #GValue of the field
+    Returns: true if the foreach operation should continue, false if
+      the foreach operation should stop with false.
+*/
+alias StructureForeachIdStrFunc = bool delegate(gst.id_str.IdStr fieldname, gobject.value.Value value);
+
+/**
     A function that will be called in [gst.structure.Structure.mapInPlace]. The function
     may modify value.
 
@@ -1028,6 +1082,18 @@ alias StructureForeachFunc = bool delegate(glib.types.Quark fieldId, gobject.val
       the map operation should stop with false.
 */
 alias StructureMapFunc = bool delegate(glib.types.Quark fieldId, gobject.value.Value value);
+
+/**
+    A function that will be called in [gst.structure.Structure.mapInPlaceIdStr]. The
+    function may modify value.
+
+    Params:
+      fieldname = the #GstIdStr field name
+      value = the #GValue of the field
+    Returns: true if the map operation should continue, false if
+      the map operation should stop with false.
+*/
+alias StructureMapIdStrFunc = bool delegate(gst.id_str.IdStr fieldname, gobject.value.Value value);
 
 /**
     A function that will be called in [gst.tag_list.TagList.foreach_]. The function may
@@ -1108,6 +1174,16 @@ alias ValueDeserializeFunc = bool delegate(gobject.value.Value dest, string s);
     Returns: true for success
 */
 alias ValueDeserializeWithPSpecFunc = bool delegate(gobject.value.Value dest, string s, gobject.param_spec.ParamSpec pspec);
+
+/**
+    Used by [gst.global.valueHash] to calculate a hash of value.
+
+    Params:
+      value = a #GValue
+      res = a location to store the hash value
+    Returns: true, or false if value cannot be hashed.
+*/
+alias ValueHashFunc = bool delegate(gobject.value.Value value, out uint res);
 
 /**
     Used by [gst.global.valueSerialize] to obtain a non-binary form of the #GValue.
@@ -1593,9 +1669,14 @@ enum TAG_ALBUM_ARTIST = "album-artist";
 enum TAG_ALBUM_ARTIST_SORTNAME = "album-artist-sortname";
 
 /**
-    album gain in db (double)
+    album gain in dB (double)
 */
 enum TAG_ALBUM_GAIN = "replaygain-album-gain";
+
+/**
+    track gain in dB (double)
+*/
+enum TAG_ALBUM_GAIN_R128 = "r128-album-gain";
 
 /**
     peak of the album (double)
@@ -2074,9 +2155,14 @@ enum TAG_TITLE_SORTNAME = "title-sortname";
 enum TAG_TRACK_COUNT = "track-count";
 
 /**
-    track gain in db (double)
+    track gain in dB (double)
 */
 enum TAG_TRACK_GAIN = "replaygain-track-gain";
+
+/**
+    track gain in dB (double)
+*/
+enum TAG_TRACK_GAIN_R128 = "r128-track-gain";
 
 /**
     track number inside a collection (unsigned integer)
@@ -2104,6 +2190,18 @@ enum TAG_VERSION = "version";
     codec the video data is stored in (string)
 */
 enum TAG_VIDEO_CODEC = "video-codec";
+
+/**
+    The well-known context type for sharing a #GstTaskPool between elements
+    in a pipeline.
+    
+    Elements that support this context will post a [gst.types.MessageType.NeedContext]
+    message on the bus when they need a task pool. Applications can respond
+    by setting the context on the element or the pipeline. Elements will not
+    query neighbors for this context type as the task pool is optional and
+    elements will fall back to their default behavior if no pool is provided.
+*/
+enum TASK_POOL_CONTEXT_TYPE = "gst.task.pool";
 
 /**
     printf format type used to debug GStreamer ClockTime pointers. You can use
@@ -2175,12 +2273,12 @@ enum VERSION_MAJOR = 1;
 /**
     The micro version of GStreamer at compile time:
 */
-enum VERSION_MICRO = 8;
+enum VERSION_MICRO = 2;
 
 /**
     The minor version of GStreamer at compile time:
 */
-enum VERSION_MINOR = 24;
+enum VERSION_MINOR = 28;
 
 /**
     The nano version of GStreamer at compile time:

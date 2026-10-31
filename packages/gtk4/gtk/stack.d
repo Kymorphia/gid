@@ -19,8 +19,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.stack.Stack] is a container which only shows one of its children
-    at a time.
+    Shows one of its children at a time.
+    
+    <picture>
+      <source srcset="stack-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStack" src="stack.png">
+    </picture>
     
     In contrast to [gtk.notebook.Notebook], [gtk.stack.Stack] does not provide a means
     for users to change the visible child. Instead, a separate widget
@@ -64,7 +68,7 @@ import gtk.widget;
     
     # Accessibility
     
-    [gtk.stack.Stack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack
+    [gtk.stack.Stack] uses the [gtk.types.AccessibleRole.TabPanel] role for the stack
     pages, which are the accessible parent objects of the child widgets.
 */
 class Stack : gtk.widget.Widget

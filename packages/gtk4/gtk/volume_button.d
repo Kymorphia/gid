@@ -24,7 +24,10 @@ import gtk.types;
     [gtk.volume_button.VolumeButton] is a [gtk.scale_button.ScaleButton] subclass tailored for
     volume control.
     
-    ![An example GtkVolumeButton](volumebutton.png)
+    <picture>
+      <source srcset="volumebutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkVolumeButton" src="volumebutton.png">
+    </picture>
 
     Deprecated: This widget will be removed in GTK 5
 */

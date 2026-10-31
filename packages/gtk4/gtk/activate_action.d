@@ -11,7 +11,9 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that calls [gtk.widget.Widget.activate].
+    Activates a widget.
+    
+    Widgets are activated by calling [gtk.widget.Widget.activate].
 */
 class ActivateAction : gtk.shortcut_action.ShortcutAction
 {

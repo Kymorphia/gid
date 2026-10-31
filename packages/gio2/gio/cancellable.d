@@ -105,6 +105,9 @@ class Cancellable : gobject.object.ObjectWrap
       cancel the operation from the same thread in which it is running,
       then the operation's #GAsyncReadyCallback will not be invoked until
       the application returns to the main loop.
+      
+      It is safe (although useless, since it will be a no-op) to call
+      this function from a [gio.cancellable.Cancellable.cancelled] signal handler.
   */
   void cancel() nothrow
   {
@@ -190,6 +193,11 @@ class Cancellable : gobject.object.ObjectWrap
       You are not supposed to read from the fd yourself, just check for
       readable status. Reading to unset the readable status is done
       with [gio.cancellable.Cancellable.reset].
+      
+      Note that in the event that a [gio.cancellable.Cancellable.cancelled] signal handler is
+      currently running, this call will block until the handler has finished.
+      Calling this function from a signal handler will therefore result in a
+      deadlock.
   
       Params:
         pollfd = a pointer to a #GPollFD
@@ -237,6 +245,11 @@ class Cancellable : gobject.object.ObjectWrap
       block scarce file descriptors until it is finalized if this function
       is not called. This can cause the application to run out of file
       descriptors when many #GCancellables are used at the same time.
+      
+      Note that in the event that a [gio.cancellable.Cancellable.cancelled] signal handler is
+      currently running, this call will block until the handler has finished.
+      Calling this function from a signal handler will therefore result in a
+      deadlock.
   */
   void releaseFd() nothrow
   {
@@ -255,6 +268,11 @@ class Cancellable : gobject.object.ObjectWrap
       is to drop the reference to a cancellable after cancelling it,
       and let it die with the outstanding async operations. You should
       create a fresh cancellable for further async operations.
+      
+      In the event that a [gio.cancellable.Cancellable.cancelled] signal handler is currently
+      running, this call will block until the handler has finished.
+      Calling this function from a signal handler will therefore result in a
+      deadlock.
   */
   void reset() nothrow
   {

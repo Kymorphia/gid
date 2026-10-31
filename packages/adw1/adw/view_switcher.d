@@ -40,8 +40,6 @@ import gtk.widget;
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <child>
         <object class="AdwBreakpoint">
           <condition>max-width: 550sp</condition>
@@ -86,8 +84,11 @@ import gtk.widget;
     
     ## Accessibility
     
-    [adw.view_switcher.ViewSwitcher] uses the [gtk.types.AccessibleRole.TabList] role and uses the
-    [gtk.types.AccessibleRole.Tab] for its buttons.
+    [adw.view_switcher.ViewSwitcher] uses the `enum@Gtk.AccessibleRole.tab-list` role and the
+    [gtk.types.AccessibleRole.Tab] role for its buttons.
+    
+    See also: [adw.view_switcher_bar.ViewSwitcherBar], [adw.inline_view_switcher.InlineViewSwitcher],
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar].
 */
 class ViewSwitcher : gtk.widget.Widget
 {

@@ -18,7 +18,7 @@ import gtk.widget;
 import pango.attr_list;
 
 /**
-    [gtk.imcontext.IMContext] defines the interface for GTK input methods.
+    The interface for GTK input methods.
     
     [gtk.imcontext.IMContext] is used by GTK text input widgets like [gtk.text.Text]
     to map from key events to Unicode character strings.
@@ -568,6 +568,60 @@ class IMContext : gobject.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("delete-surrounding", closure, after);
+  }
+
+  /**
+      Connect to `InvalidComposition` signal.
+  
+      Emitted when the filtered keys do not compose to a single valid character.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `bool callback(string str, gtk.imcontext.IMContext iMContext)`
+  
+          `str` the completed character(s) entered by the user (optional)
+  
+          `iMContext` the instance the signal is connected to (optional)
+  
+          `Returns` true if the IM context avoid beeping on invalid composition
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectInvalidComposition(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.imcontext.IMContext)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.imcontext.IMContext.invalidComposition");
+      }
+
+      setVal!(bool)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("invalid-composition", closure, after);
   }
 
   /**

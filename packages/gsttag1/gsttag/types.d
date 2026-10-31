@@ -127,6 +127,35 @@ enum TAG_CAPTURING_GAIN_ADJUSTMENT = "capturing-gain-adjustment";
 enum TAG_CAPTURING_ISO_SPEED = "capturing-iso-speed";
 
 /**
+    Light source used when capturing an image. (string)
+    
+    The allowed values are:
+      "unknown"
+      "daylight"
+      "fluorescent"
+      "tungsten"
+      "flash"
+      "fine-weather"
+      "cloudy-weather"
+      "shade"
+      "daylight-fluorescent"
+      "day-white-fluorescent"
+      "cool-white-fluorescent"
+      "white-fluorescent"
+      "warm-white-fluorescent"
+      "standard-light-A"
+      "standard-light-B"
+      "standard-light-C"
+      "D55"
+      "D65"
+      "D75"
+      "D50"
+      "iso-studio-tungsten"
+      "other"
+*/
+enum TAG_CAPTURING_LIGHT_SOURCE = "capturing-light-source";
+
+/**
     Defines the way a camera determines the exposure. (string)
     
     The allowed values are:

@@ -162,6 +162,23 @@ class Item : gobject.boxed.Boxed
   }
 
   /**
+      Returns the character offset of the item from the beginning
+      of the itemized text.
+      
+      If the item has not been obtained from Pango's itemization
+      machinery, then the character offset is not available. In
+      that case, this function returns -1.
+      Returns: the character offset of the item from the beginning
+          of the itemized text, or -1
+  */
+  int getCharOffset() nothrow
+  {
+    int _retval;
+    _retval = pango_item_get_char_offset(cast(PangoItem*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Modifies orig to cover only the text after split_index, and
       returns a new item that covers the text before split_index that
       used to be in orig.

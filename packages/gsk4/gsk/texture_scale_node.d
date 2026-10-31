@@ -12,7 +12,7 @@ import gsk.render_node;
 import gsk.types;
 
 /**
-    A render node for a [gdk.texture.Texture].
+    A render node for a [gdk.texture.Texture], with control over scaling.
 */
 class TextureScaleNode : gsk.render_node.RenderNode
 {

@@ -11,7 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.adjustment.Adjustment] is a model for a numeric value.
+    A model for a numeric value.
     
     The [gtk.adjustment.Adjustment] has an associated lower and upper bound.
     It also contains step and page increments, and a page size.
@@ -208,8 +208,8 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-      Updates the value property to ensure that the range
-      between lower and upper is in the current page.
+      Updates the value of the adjustment to ensure that the
+      given range is contained in the current page.
       
       The current page goes from `value` to `value` + `page-size`.
       If the range is larger than the page size, then only the
@@ -251,7 +251,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Retrieves the minimum value of the adjustment.
-      Returns: The current minimum value of the adjustment
+      Returns: the minimum value
   */
   double getLower() nothrow
   {
@@ -262,7 +262,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Gets the smaller of step increment and page increment.
-      Returns: the minimum increment of adjustment
+      Returns: the minimum increment
   */
   double getMinimumIncrement() nothrow
   {
@@ -273,7 +273,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Retrieves the page increment of the adjustment.
-      Returns: The current page increment of the adjustment
+      Returns: the page increment
   */
   double getPageIncrement() nothrow
   {
@@ -284,7 +284,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Retrieves the page size of the adjustment.
-      Returns: The current page size of the adjustment
+      Returns: the page size
   */
   double getPageSize() nothrow
   {
@@ -295,7 +295,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Retrieves the step increment of the adjustment.
-      Returns: The current step increment of the adjustment.
+      Returns: the step increment
   */
   double getStepIncrement() nothrow
   {
@@ -306,7 +306,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Retrieves the maximum value of the adjustment.
-      Returns: The current maximum value of the adjustment
+      Returns: the maximum value
   */
   double getUpper() nothrow
   {
@@ -317,7 +317,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Gets the current value of the adjustment.
-      Returns: The current value of the adjustment
+      Returns: the current value
   */
   double getValue() nothrow
   {

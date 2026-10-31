@@ -57,8 +57,8 @@ class ParamSpec
       dynamically-generated properties which need to be validated at run-time
       before actually trying to create them.
       
-      See [canonical parameter names][canonical-parameter-names] for details of
-      the rules for valid names.
+      See [canonical parameter names][gobject.param_spec.ParamSpec]
+      for details of the rules for valid names.
   
       Params:
         name = the canonical name of the property

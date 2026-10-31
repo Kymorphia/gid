@@ -71,6 +71,26 @@ import gtk.widget;
     If search and window buttons are disabled, and secondary menu is not set, the
     header bar will be hidden.
     
+    ## Drag-and-Drop
+    
+    [adw.tab_overview.TabOverview] thumbnails can have an additional drop target for arbitrary
+    content.
+    
+    Use [adw.tab_overview.TabOverview.setupExtraDropTarget] to set it up, specifying the
+    supported content types and drag actions, then connect to
+    [adw.tab_overview.TabOverview.extraDragDrop] to handle a drop.
+    
+    In some cases, it may be necessary to determine the used action based on the
+    content. In that case, set [adw.tab_overview.TabOverview.extraDragPreload] to
+    `TRUE` and connect to [adw.tab_overview.TabOverview.extraDragValue] signal, then
+    return the action from its handler. To access this action from the
+    [adw.tab_overview.TabOverview.extraDragDrop] handler, use the
+    [adw.tab_overview.TabOverview.extraDragPreferredAction] property.
+    
+    [adw.tab_overview.TabOverview.extraDragValue] is also always emitted when starting to
+    hover an item, with a `NULL` value. This happens even when
+    [adw.tab_overview.TabOverview.extraDragPreload] is `FALSE`.
+    
     ## Actions
     
     [adw.tab_overview.TabOverview] defines the `overview.open` and `overview.close` actions for
@@ -199,12 +219,13 @@ class TabOverview : gtk.widget.Widget
 
   /**
       Get `extraDragPreferredAction` property.
-      Returns: The unique action on the `current-drop` of the
-        [adw.tab_overview.TabOverview.extraDragDrop].
+      Returns: The current drag action during a drop.
         
-        This property should only be used during a
-        [adw.tab_overview.TabOverview.extraDragDrop] and is always a subset of what was
-        originally passed to [adw.tab_overview.TabOverview.setupExtraDropTarget].
+        This property should only be used from inside a
+        [adw.tab_overview.TabOverview.extraDragDrop] handler.
+        
+        The action will be a subset of what was originally passed to
+        [adw.tab_overview.TabOverview.setupExtraDropTarget].
   */
   @property gdk.types.DragAction extraDragPreferredAction() nothrow
   {
@@ -439,8 +460,14 @@ class TabOverview : gtk.widget.Widget
   }
 
   /**
-      Gets whether drop data should be preloaded on hover.
-      Returns: whether drop data should be preloaded on hover
+      Gets the current drag action during a drop.
+      
+      This method should only be used from inside a
+      [adw.tab_overview.TabOverview.extraDragDrop] handler.
+      
+      The action will be a subset of what was originally passed to
+      [adw.tab_overview.TabOverview.setupExtraDropTarget].
+      Returns: the drag action of the current drop
   */
   bool getExtraDragPreload() nothrow
   {
@@ -665,8 +692,6 @@ class TabOverview : gtk.widget.Widget
   }
 
   /**
-      Sets the supported types for this drop target.
-      
       Sets up an extra drop target on tabs.
       
       This allows to drag arbitrary content onto tabs, for example URLs in a web
@@ -749,7 +774,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Connect to `ExtraDragDrop` signal.
   
-      This signal is emitted when content is dropped onto a tab.
+      Emitted when content is dropped onto a tab.
         
         The content must be of one of the types set up via
         [adw.tab_overview.TabOverview.setupExtraDropTarget].
@@ -767,7 +792,7 @@ class TabOverview : gtk.widget.Widget
   
           `tabOverview` the instance the signal is connected to (optional)
   
-          `Returns` whether the drop was accepted for page
+          `Returns` whether the drop was accepted
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -814,7 +839,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Connect to `ExtraDragValue` signal.
   
-      This signal is emitted when the dropped content is preloaded.
+      Emitted when the dropped content is preloaded.
         
         In order for data to be preloaded, [adw.tab_overview.TabOverview.extraDragPreload]
         must be set to `TRUE`.
@@ -835,7 +860,7 @@ class TabOverview : gtk.widget.Widget
   
           `tabOverview` the instance the signal is connected to (optional)
   
-          `Returns` the preferred action for the drop on page
+          `Returns` the preferred action for the drop
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

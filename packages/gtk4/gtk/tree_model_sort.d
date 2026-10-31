@@ -154,7 +154,10 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
     return new TreeModelSortGidBuilder;
   }
 
-  /** */
+  /**
+      Get `model` property.
+      Returns: The model of the tree model sort.
+  */
   @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
@@ -312,7 +315,12 @@ class TreeModelSortGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   mixin TreeModelGidBuilderT!();
   mixin TreeSortableGidBuilderT!();
 
-  /** */
+  /**
+      Set `model` property.
+      Params:
+        propval = The model of the tree model sort.
+      Returns: Builder instance for fluent chaining
+  */
   T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);

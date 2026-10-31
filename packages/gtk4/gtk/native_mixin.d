@@ -13,8 +13,7 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
-    [gtk.native.Native] is the interface implemented by all widgets that have
-    their own [gdk.surface.Surface].
+    An interface for widgets that have their own [gdk.surface.Surface].
     
     The obvious example of a [gtk.native.Native] is [gtk.window.Window].
     

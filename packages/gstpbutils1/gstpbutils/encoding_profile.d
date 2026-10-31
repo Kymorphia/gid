@@ -137,6 +137,25 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /**
+      Converts a string in the "encoding profile serialization format" into a
+      GstEncodingProfile. Refer to the encoding-profile documentation for details
+      on the format.
+  
+      Params:
+        string_ = The string to convert into a GstEncodingProfile.
+      Returns: A newly created GstEncodingProfile or NULL if the
+        input string is not a valid encoding profile serialization format.
+  */
+  static gstpbutils.encoding_profile.EncodingProfile fromString(string string_) nothrow
+  {
+    GstEncodingProfile* _cretval;
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_encoding_profile_from_string(_string_);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
       Makes a deep copy of self
       Returns: The copy of self
   */
@@ -199,7 +218,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   /**
       Computes the full output caps that this profile will be able to consume.
       Returns: The full caps the given profile can consume. Call
-        gst_caps_unref() when you are done with the caps.
+        [gst.caps.Caps.unref] when you are done with the caps.
   */
   gst.caps.Caps getInputCaps() nothrow
   {
@@ -393,9 +412,26 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the name of the #GstElement that implements the #GstPreset interface
-      to use for the profile.
+      Sets the name of the preset to be used in the profile.
       This is the name that has been set when saving the preset.
+      You can list the available presets for a specific element factory
+      using  `$ gst-inspect-1.0 element-factory-name`, for example for
+      `x264enc`:
+      
+      ``` bash
+      $ gst-inspect-1.0 x264enc
+      ...
+      Presets:
+       "Profile Baseline": Baseline Profile
+       "Profile High": High Profile
+       "Profile Main": Main Profile
+       "Profile YouTube": YouTube recommended settings (https://support.google.com/youtube/answer/1722171)
+       "Quality High": High quality
+       "Quality Low": Low quality
+       "Quality Normal": Normal quality
+       "Zero Latency"
+      ```
+       }
   
       Params:
         preset = the element preset to use
@@ -407,10 +443,12 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the name of the #GstPreset's factory to be used in the profile.
+      Sets the name of the #GstPreset's factory to be used in the profile. This
+      is the name of the **element factory** that implements the #GstPreset interface not
+      the name of the preset itself (see #gst_encoding_profile_set_preset).
   
       Params:
-        presetName = The name of the preset to use in this profile.
+        presetName = The name of the element factory to use in this profile.
   */
   void setPresetName(string presetName = null) nothrow
   {
@@ -445,6 +483,19 @@ class EncodingProfile : gobject.object.ObjectWrap
   void setSingleSegment(bool singleSegment) nothrow
   {
     gst_encoding_profile_set_single_segment(cast(GstEncodingProfile*)this._cPtr, singleSegment);
+  }
+
+  /**
+      Converts a GstEncodingProfile to a string in the "Encoding Profile
+      serialization format".
+      Returns: A string representation of the GstEncodingProfile.
+  */
+  string toString_() nothrow
+  {
+    char* _cretval;
+    _cretval = gst_encoding_profile_to_string(cast(GstEncodingProfile*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
   }
 }
 

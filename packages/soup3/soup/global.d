@@ -45,7 +45,7 @@ bool checkVersion(uint major, uint minor, uint micro) nothrow
     [soup.cookie.Cookie]s.
     
     As the "Cookie" header, unlike "Set-Cookie", only contains cookie names and
-    values, none of the other #SoupCookie fields will be filled in. (Thus, you
+    values, none of the other [soup.cookie.Cookie] fields will be filled in. (Thus, you
     can't generally pass a cookie returned from this method directly to
     `funccookies_to_response`.)
 
@@ -83,11 +83,11 @@ soup.cookie.Cookie[] cookiesFromResponse(soup.message.Message msg) nothrow
 }
 
 /**
-    Serializes a [glib.slist.SList] of #SoupCookie into a string suitable for
+    Serializes a [glib.slist.SList] of [soup.cookie.Cookie] into a string suitable for
     setting as the value of the "Cookie" header.
 
     Params:
-      cookies = a #GSList of #SoupCookie
+      cookies = a #GSList of [soup.cookie.Cookie]
     Returns: the serialization of cookies
 */
 string cookiesToCookieHeader(soup.cookie.Cookie[] cookies) nothrow
@@ -109,7 +109,7 @@ string cookiesToCookieHeader(soup.cookie.Cookie[] cookies) nothrow
     cookies twice, eg, when requeuing a message.
 
     Params:
-      cookies = a #GSList of #SoupCookie
+      cookies = a #GSList of [soup.cookie.Cookie]
       msg = a #SoupMessage
 */
 void cookiesToRequest(soup.cookie.Cookie[] cookies, soup.message.Message msg) nothrow
@@ -127,7 +127,7 @@ void cookiesToRequest(soup.cookie.Cookie[] cookies, soup.message.Message msg) no
     msg may already have.
 
     Params:
-      cookies = a #GSList of #SoupCookie
+      cookies = a #GSList of [soup.cookie.Cookie]
       msg = a #SoupMessage
 */
 void cookiesToResponse(soup.cookie.Cookie[] cookies, soup.message.Message msg) nothrow
@@ -232,7 +232,7 @@ string[string] formDecodeMultipart(soup.multipart.Multipart multipart, string fi
   char* _filename;
   char* _contentType;
   GBytes* _file;
-  _cretval = soup_form_decode_multipart(multipart ? cast(SoupMultipart*)multipart._cPtr(No.Dup) : null, _fileControlName, &_filename, &_contentType, &_file);
+  _cretval = soup_form_decode_multipart(multipart ? cast(SoupMultipart*)multipart._cPtr(Yes.Dup) : null, _fileControlName, &_filename, &_contentType, &_file);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Container)(cast(GHashTable*)_cretval);
   filename = _filename.fromCString!(Yes.Free);
   contentType = _contentType.fromCString!(Yes.Free);
@@ -805,7 +805,7 @@ void websocketClientPrepareHandshake(soup.message.Message msg, string origin = n
       supportedExtensions = list
           of supported extension types
       acceptedExtensions = a
-          #GList of #SoupWebsocketExtension objects
+          #GList of [soup.websocket_extension.WebsocketExtension] objects
     Returns: true if msg contains a completed valid WebSocket
         handshake, false and an error if not.
     Throws: [ErrorWrap]
@@ -895,7 +895,7 @@ bool websocketServerCheckHandshake(soup.server_message.ServerMessage msg, string
       supportedExtensions = list
           of supported extension types
       acceptedExtensions = a
-          #GList of #SoupWebsocketExtension objects
+          #GList of [soup.websocket_extension.WebsocketExtension] objects
     Returns: true if msg contained a valid WebSocket handshake
         request and was updated to contain a handshake response. false if not.
 */

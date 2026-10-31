@@ -12,8 +12,7 @@ import gtk.sorter;
 import gtk.types;
 
 /**
-    [gtk.column_view_sorter.ColumnViewSorter] is a sorter implementation that
-    is geared towards the needs of [gtk.column_view.ColumnView].
+    Sorts [gtk.column_view.ColumnView] columns.
     
     The sorter returned by [gtk.column_view.ColumnView.getSorter] is
     a [gtk.column_view_sorter.ColumnViewSorter].
@@ -135,7 +134,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
         position = the position of the sort column to retrieve (0 for the
               primary sort column)
         sortOrder = return location for the sort order
-      Returns: the positions sort column
+      Returns: the sort column at the position
   */
   gtk.column_view_column.ColumnViewColumn getNthSortColumn(uint position, out gtk.types.SortType sortOrder) nothrow
   {

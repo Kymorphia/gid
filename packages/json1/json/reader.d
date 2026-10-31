@@ -16,26 +16,42 @@ import json.types;
     
     It is similar, in spirit, to the XML Reader API.
     
+    The cursor is moved by the `json_reader_read_*` and the `json_reader_end_*`
+    functions. You can enter a JSON object using [json.reader.Reader.readMember]
+    with the name of the object member, access the value at that position, and
+    move the cursor back one level using [json.reader.Reader.endMember]; arrays
+    work in a similar way, using [json.reader.Reader.readElement] with the
+    index of the element, and using [json.reader.Reader.endElement] to move
+    the cursor back.
+    
     ## Using [json.reader.Reader]
     
     ```c
     g_autoptr(JsonParser) parser = json_parser_new ();
     
-    // str is defined elsewhere
+    // str is defined elsewhere and contains:
+    // { "url" : "http://www.gnome.org/img/flash/two-thirty.png", "size" : [ 652, 242 ] }
     json_parser_load_from_data (parser, str, -1, NULL);
     
     g_autoptr(JsonReader) reader = json_reader_new (json_parser_get_root (parser));
     
+    // Enter the "url" member of the object
     json_reader_read_member (reader, "url");
       const char *url = json_reader_get_string_value (reader);
+      // url now contains "http://www.gnome.org/img/flash/two-thirty.png"
       json_reader_end_member (reader);
     
+    // Enter the "size" member of the object
     json_reader_read_member (reader, "size");
+      // Enter the first element of the array
       json_reader_read_element (reader, 0);
         int width = json_reader_get_int_value (reader);
+        // width now contains 652
         json_reader_end_element (reader);
+      // Enter the second element of the array
       json_reader_read_element (reader, 1);
         int height = json_reader_get_int_value (reader);
+        // height now contains 242
         json_reader_end_element (reader);
       json_reader_end_member (reader);
     ```

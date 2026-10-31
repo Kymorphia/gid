@@ -34,6 +34,11 @@ import gtk.widget;
 /**
     A widget for displaying both trees and lists
     
+    <picture>
+      <source srcset="list-and-tree-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkTreeView" src="list-and-tree.png">
+    </picture>
+    
     Widget that displays any object that implements the [gtk.tree_model.TreeModel] interface.
     
     Please refer to the [tree widget conceptual overview](section-tree-widget.html)

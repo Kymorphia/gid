@@ -48,15 +48,15 @@ class MainLoop : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new #GMainLoop structure.
+      Creates a new [glib.main_loop.MainLoop] structure.
   
       Params:
-        context = a #GMainContext  (if null, the global-default
+        context = a main context  (if `NULL`, the global-default
             main context will be used).
         isRunning = set to true to indicate that the loop is running. This
-          is not very important since calling [glib.main_loop.MainLoop.run] will set this to
-          true anyway.
-      Returns: a new #GMainLoop.
+            is not very important since calling [glib.main_loop.MainLoop.run] will set this
+            to true anyway.
+      Returns: a new main loop
   */
   this(glib.main_context.MainContext context, bool isRunning) nothrow
   {
@@ -66,8 +66,8 @@ class MainLoop : gobject.boxed.Boxed
   }
 
   /**
-      Returns the #GMainContext of loop.
-      Returns: the #GMainContext of loop
+      Returns the [glib.main_context.MainContext] of loop.
+      Returns: the [glib.main_context.MainContext] of loop
   */
   glib.main_context.MainContext getContext() nothrow
   {
@@ -78,8 +78,9 @@ class MainLoop : gobject.boxed.Boxed
   }
 
   /**
-      Checks to see if the main loop is currently being run via [glib.main_loop.MainLoop.run].
-      Returns: true if the mainloop is currently being run.
+      Checks to see if the main loop is currently being run via
+      [glib.main_loop.MainLoop.run].
+      Returns: true if the main loop is currently being run, false otherwise
   */
   bool isRunning() nothrow
   {
@@ -89,8 +90,8 @@ class MainLoop : gobject.boxed.Boxed
   }
 
   /**
-      Stops a #GMainLoop from running. Any calls to [glib.main_loop.MainLoop.run]
-      for the loop will return.
+      Stops a [glib.main_loop.MainLoop] from running. Any calls to
+      [glib.main_loop.MainLoop.run] for the loop will return.
       
       Note that sources that have already been dispatched when
       [glib.main_loop.MainLoop.quit] is called will still be executed.
@@ -102,7 +103,8 @@ class MainLoop : gobject.boxed.Boxed
 
   /**
       Runs a main loop until [glib.main_loop.MainLoop.quit] is called on the loop.
-      If this is called for the thread of the loop's #GMainContext,
+      
+      If this is called from the thread of the loop’s [glib.main_context.MainContext],
       it will process events from the loop, otherwise it will
       simply wait.
   */

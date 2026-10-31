@@ -41,6 +41,8 @@ import gtk.widget;
     
     [adw.preferences_window.PreferencesWindow] has a main CSS node with the name `window` and the
     style class `.preferences`.
+
+    Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
 */
 class PreferencesWindow : adw.window.Window
 {
@@ -93,11 +95,11 @@ class PreferencesWindow : adw.window.Window
         <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
         
         For right-to-left locales, gestures and shortcuts are reversed.
-  
-      Deprecated: Use [adw.navigation_page.NavigationPage.canPop] instead.
         
         Has no effect for subpages added with
         [adw.preferences_window.PreferencesWindow.pushSubpage].
+  
+      Deprecated: Use [adw.navigation_page.NavigationPage.canPop] instead.
   */
   @property bool canNavigateBack() nothrow
   {
@@ -119,11 +121,11 @@ class PreferencesWindow : adw.window.Window
           <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
           
           For right-to-left locales, gestures and shortcuts are reversed.
+          
+          Has no effect for subpages added with
+          [adw.preferences_window.PreferencesWindow.pushSubpage].
   
       Deprecated: Use [adw.navigation_page.NavigationPage.canPop] instead.
-        
-        Has no effect for subpages added with
-        [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
   @property void canNavigateBack(bool propval) nothrow
   {
@@ -133,6 +135,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Get `searchEnabled` property.
       Returns: Whether search is enabled.
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   @property bool searchEnabled() nothrow
   {
@@ -143,6 +147,8 @@ class PreferencesWindow : adw.window.Window
       Set `searchEnabled` property.
       Params:
         propval = Whether search is enabled.
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   @property void searchEnabled(bool propval) nothrow
   {
@@ -152,6 +158,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Get `visiblePage` property.
       Returns: The currently visible page.
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   @property gtk.widget.Widget visiblePage() nothrow
   {
@@ -162,6 +170,8 @@ class PreferencesWindow : adw.window.Window
       Set `visiblePage` property.
       Params:
         propval = The currently visible page.
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   @property void visiblePage(gtk.widget.Widget propval) nothrow
   {
@@ -173,6 +183,8 @@ class PreferencesWindow : adw.window.Window
       Returns: The name of the currently visible page.
         
         See [adw.preferences_window.PreferencesWindow.visiblePage].
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   @property string visiblePageName() nothrow
   {
@@ -185,6 +197,8 @@ class PreferencesWindow : adw.window.Window
         propval = The name of the currently visible page.
           
           See [adw.preferences_window.PreferencesWindow.visiblePage].
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   @property void visiblePageName(string propval) nothrow
   {
@@ -194,6 +208,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Creates a new [adw.preferences_window.PreferencesWindow].
       Returns: the newly created [adw.preferences_window.PreferencesWindow]
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   this() nothrow
   {
@@ -207,6 +223,8 @@ class PreferencesWindow : adw.window.Window
   
       Params:
         page = the page to add
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   void add(adw.preferences_page.PreferencesPage page) nothrow
   {
@@ -220,6 +238,8 @@ class PreferencesWindow : adw.window.Window
   
       Params:
         toast = a toast
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   void addToast(adw.toast.Toast toast) nothrow
   {
@@ -254,6 +274,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Gets whether search is enabled for self.
       Returns: whether search is enabled for self.
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   bool getSearchEnabled() nothrow
   {
@@ -265,6 +287,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Gets the currently visible page of self.
       Returns: the visible page
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   adw.preferences_page.PreferencesPage getVisiblePage() nothrow
   {
@@ -277,6 +301,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Gets the name of currently visible page of self.
       Returns: the name of the visible page
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   string getVisiblePageName() nothrow
   {
@@ -289,6 +315,8 @@ class PreferencesWindow : adw.window.Window
   /**
       Pop the visible page from the subpage stack of self.
       Returns: `TRUE` if a page has been popped
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   bool popSubpage() nothrow
   {
@@ -320,6 +348,8 @@ class PreferencesWindow : adw.window.Window
   
       Params:
         page = the subpage
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   void pushSubpage(adw.navigation_page.NavigationPage page) nothrow
   {
@@ -331,6 +361,8 @@ class PreferencesWindow : adw.window.Window
   
       Params:
         page = the page to remove
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   void remove(adw.preferences_page.PreferencesPage page) nothrow
   {
@@ -350,13 +382,13 @@ class PreferencesWindow : adw.window.Window
       <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
       
       For right-to-left locales, gestures and shortcuts are reversed.
+      
+      Has no effect for subpages added with [adw.preferences_window.PreferencesWindow.pushSubpage].
   
       Params:
         canNavigateBack = the new value
   
       Deprecated: Use [adw.navigation_page.NavigationPage.setCanPop] instead.
-        
-        Has no effect for subpages added with [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
   void setCanNavigateBack(bool canNavigateBack) nothrow
   {
@@ -368,6 +400,8 @@ class PreferencesWindow : adw.window.Window
   
       Params:
         searchEnabled = whether search is enabled
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   void setSearchEnabled(bool searchEnabled) nothrow
   {
@@ -379,6 +413,8 @@ class PreferencesWindow : adw.window.Window
   
       Params:
         page = a page of self
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   void setVisiblePage(adw.preferences_page.PreferencesPage page) nothrow
   {
@@ -392,6 +428,8 @@ class PreferencesWindow : adw.window.Window
   
       Params:
         name = the name of the page to make visible
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   void setVisiblePageName(string name) nothrow
   {
@@ -420,12 +458,12 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
           
           For right-to-left locales, gestures and shortcuts are reversed.
+          
+          Has no effect for subpages added with
+          [adw.preferences_window.PreferencesWindow.pushSubpage].
       Returns: Builder instance for fluent chaining
   
       Deprecated: Use [adw.navigation_page.NavigationPage.canPop] instead.
-        
-        Has no effect for subpages added with
-        [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
   T canNavigateBack(bool propval) nothrow
   {
@@ -437,6 +475,8 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
       Params:
         propval = Whether search is enabled.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   T searchEnabled(bool propval) nothrow
   {
@@ -448,6 +488,8 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
       Params:
         propval = The currently visible page.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   T visiblePage(gtk.widget.Widget propval) nothrow
   {
@@ -461,6 +503,8 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           See [adw.preferences_window.PreferencesWindow.visiblePage].
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
   */
   T visiblePageName(string propval) nothrow
   {

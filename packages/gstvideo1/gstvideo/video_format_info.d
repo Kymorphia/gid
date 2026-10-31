@@ -500,7 +500,7 @@ class VideoFormatInfo
   }
 
   /**
-      Fill components with the number of all the components packed in plane p
+      Fill components with the number of all the components packed in plane
       for the format info. A value of -1 in components indicates that no more
       components are packed in the plane.
   

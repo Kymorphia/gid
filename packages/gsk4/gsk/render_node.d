@@ -12,8 +12,7 @@ import gsk.c.types;
 import gsk.types;
 
 /**
-    [gsk.render_node.RenderNode] is the basic block in a scene graph to be
-    rendered using [gsk.renderer.Renderer].
+    The basic block in a scene graph to be rendered using [gsk.renderer.Renderer].
     
     Each node has a parent, except the top-level node; each node may have
     children nodes.
@@ -62,8 +61,8 @@ class RenderNode
   
       Params:
         bytes = the bytes containing the data
-        errorFunc = Callback on parsing errors
-      Returns: a new [gsk.render_node.RenderNode]
+        errorFunc = callback on parsing errors
+      Returns: a new render node
   */
   static gsk.render_node.RenderNode deserialize(glib.bytes.Bytes bytes, gsk.types.ParseErrorFunc errorFunc = null) nothrow
   {
@@ -89,10 +88,10 @@ class RenderNode
   }
 
   /**
-      Draw the contents of node to the given cairo context.
+      Draws the contents of a render node on a cairo context.
       
       Typically, you'll use this function to implement fallback rendering
-      of [gsk.render_node.RenderNode]s on an intermediate Cairo context, instead of using
+      of render nodes on an intermediate Cairo context, instead of using
       the drawing context associated to a [gdk.surface.Surface]'s rendering buffer.
       
       For advanced nodes that cannot be supported using Cairo, in particular
@@ -122,14 +121,62 @@ class RenderNode
   }
 
   /**
-      Returns the type of the node.
-      Returns: the type of the [gsk.render_node.RenderNode]
+      Gets a list of all children nodes of the rendernode.
+      
+      Keep in mind that for various rendernodes, their children have different
+      semantics, like the mask vs the source of a mask node. If you care about
+      thse semantics, don't use this function, use the specific getters instead.
+      Returns: The children
+  */
+  gsk.render_node.RenderNode[] getChildren() nothrow
+  {
+    GskRenderNode** _cretval;
+    size_t _cretlength;
+    _cretval = gsk_render_node_get_children(cast(GskRenderNode*)this._cPtr, &_cretlength);
+    gsk.render_node.RenderNode[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gsk.render_node.RenderNode[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new gsk.render_node.RenderNode(cast(void*)_cretval[i], No.Take);
+    }
+    return _retval;
+  }
+
+  /**
+      Returns the type of the render node.
+      Returns: the type of node
   */
   gsk.types.RenderNodeType getNodeType() nothrow
   {
     GskRenderNodeType _cretval;
     _cretval = gsk_render_node_get_node_type(cast(const(GskRenderNode)*)this._cPtr);
     gsk.types.RenderNodeType _retval = cast(gsk.types.RenderNodeType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets an opaque rectangle inside the node that GTK can determine to
+      be fully opaque.
+      
+      There is no guarantee that this is indeed the largest opaque rectangle or
+      that regions outside the rectangle are not opaque. This function is a best
+      effort with that goal.
+      
+      The rectangle will be fully contained in the bounds of the node.
+  
+      Params:
+        outOpaque = return location for the opaque rect
+      Returns: true if part or all of the rendernode is opaque, false if no
+          opaque region could be found.
+  */
+  bool getOpaqueRect(out graphene.rect.Rect outOpaque) nothrow
+  {
+    bool _retval;
+    auto _outOpaque = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    _retval = cast(bool)gsk_render_node_get_opaque_rect(cast(GskRenderNode*)this._cPtr, _outOpaque);
+    outOpaque = new graphene.rect.Rect(cast(void*)_outOpaque, Yes.Take);
     return _retval;
   }
 
@@ -163,7 +210,7 @@ class RenderNode
       node to a file for later inspection.
   
       Params:
-        filename = the file to save it to.
+        filename = the file to save it to
       Returns: true if saving was successful
       Throws: [ErrorWrap]
   */

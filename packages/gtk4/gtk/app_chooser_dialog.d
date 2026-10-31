@@ -30,7 +30,10 @@ import gtk.window;
 /**
     [gtk.app_chooser_dialog.AppChooserDialog] shows a [gtk.app_chooser_widget.AppChooserWidget] inside a [gtk.dialog.Dialog].
     
-    ![An example GtkAppChooserDialog](appchooserdialog.png)
+    <picture>
+      <source srcset="appchooserdialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkAppChooserDialog" src="appchooserdialog.png">
+    </picture>
     
     Note that [gtk.app_chooser_dialog.AppChooserDialog] does not have any interesting methods
     of its own. Instead, you should get the embedded [gtk.app_chooser_widget.AppChooserWidget]

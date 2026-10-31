@@ -278,9 +278,9 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Get `foldThresholdPolicy` property.
       Returns: Determines when the leaflet will fold.
         
-        If set to [adw.types.FoldThresholdPolicy.Minimum], it will only fold when the
-        children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural], it
-        will fold as soon as children don't get their natural size.
+        If set to [adw.types.FoldThresholdPolicy.Minimum], it will only fold when
+        the children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+        it will fold as soon as children don't get their natural size.
         
         This can be useful if you have a long ellipsizing label and want to let it
         ellipsize instead of immediately folding.
@@ -297,9 +297,9 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Params:
         propval = Determines when the leaflet will fold.
           
-          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only fold when the
-          children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural], it
-          will fold as soon as children don't get their natural size.
+          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only fold when
+          the children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+          it will fold as soon as children don't get their natural size.
           
           This can be useful if you have a long ellipsizing label and want to let it
           ellipsize instead of immediately folding.
@@ -1144,9 +1144,9 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
       Params:
         propval = Determines when the leaflet will fold.
           
-          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only fold when the
-          children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural], it
-          will fold as soon as children don't get their natural size.
+          If set to [adw.types.FoldThresholdPolicy.Minimum], it will only fold when
+          the children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+          it will fold as soon as children don't get their natural size.
           
           This can be useful if you have a long ellipsizing label and want to let it
           ellipsize instead of immediately folding.

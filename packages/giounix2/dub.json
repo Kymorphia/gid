@@ -1,0 +1,16 @@
+{
+  "name": "giounix2",
+  "description": "D binding for the GioUnix library - Portable API for dynamically loading modules",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "homepage": "https://gtk.org",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["giounix"],
+  "dependencies": {
+    "gid:gio2": "*",
+    "gid:glib2": "*",
+    "gid:gmodule2": "*"
+  }
+}

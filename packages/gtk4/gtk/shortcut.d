@@ -13,7 +13,7 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
-    A [gtk.shortcut.Shortcut] describes a keyboard shortcut.
+    Describes a keyboard shortcut.
     
     It contains a description of how to trigger the shortcut via a
     [gtk.shortcut_trigger.ShortcutTrigger] and a way to activate the shortcut

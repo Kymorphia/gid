@@ -151,7 +151,7 @@ class Once
       Params:
         location = location of a static initializable variable
              containing 0
-        result = new non-0 value for *value_location
+        result = new non-0 value for `*value_location`
   */
   static void initLeave(ref void* location, size_t result) nothrow
   {

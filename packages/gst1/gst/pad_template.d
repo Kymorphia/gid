@@ -189,7 +189,7 @@ class PadTemplate : gst.object.ObjectWrap
   static gst.pad_template.PadTemplate newFromStaticPadTemplateWithGtype(gst.static_pad_template.StaticPadTemplate padTemplate, gobject.types.GType padType) nothrow
   {
     GstPadTemplate* _cretval;
-    _cretval = gst_pad_template_new_from_static_pad_template_with_gtype(padTemplate ? cast(GstStaticPadTemplate*)padTemplate._cPtr : null, padType);
+    _cretval = gst_pad_template_new_from_static_pad_template_with_gtype(padTemplate ? cast(GstStaticPadTemplate*)padTemplate._cPtr(No.Dup) : null, padType);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }

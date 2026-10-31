@@ -16,10 +16,10 @@ import soup.types;
 /**
     HTTP client-side authentication handler.
     
-    #SoupAuthManager is the [soup.session_feature.SessionFeature] that handles HTTP
+    [soup.auth_manager.AuthManager] is the [soup.session_feature.SessionFeature] that handles HTTP
     authentication for a [soup.session.Session].
     
-    A #SoupAuthManager is added to the session by default, and normally
+    A [soup.auth_manager.AuthManager] is added to the session by default, and normally
     you don't need to worry about it at all. However, if you want to
     disable HTTP authentication, you can remove the feature from the
     session with [soup.session.Session.removeFeatureByType] or disable it on
@@ -30,7 +30,7 @@ import soup.types;
     
     (Although this type has only been publicly visible since libsoup 2.42, it has
     always existed in the background, and you can use `g_type_from_name
-    ("SoupAuthManager")` to get its `alias@GLib.Type` in earlier releases.)
+    ("SoupAuthManager")` to get its [gobject.types.size_t] in earlier releases.)
 */
 class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {

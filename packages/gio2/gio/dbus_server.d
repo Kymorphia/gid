@@ -81,7 +81,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   */
   @property bool active() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+    return isActive();
   }
 
   /**
@@ -150,7 +150,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       The returned #GDBusServer isn't active - you have to start it with
       [gio.dbus_server.DBusServer.start].
       
-      #GDBusServer is used in this [example][gdbus-peer-to-peer].
+      #GDBusServer is used in this [example](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
       
       This is a synchronous failable constructor. There is currently no
       asynchronous version.
@@ -262,8 +262,8 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
         
         If #GDBusServer:flags contains [gio.types.DBusServerFlags.RunInThread]
         then the signal is emitted in a new thread dedicated to the
-        connection. Otherwise the signal is emitted in the
-        [thread-default main context][g-main-context-push-thread-default]
+        connection. Otherwise the signal is emitted in the thread-default
+        main context (see [glib.main_context.MainContext.pushThreadDefault])
         of the thread that server was constructed in.
         
         You are guaranteed that signal handlers for this signal runs

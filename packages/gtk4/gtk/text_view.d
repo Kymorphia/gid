@@ -31,13 +31,55 @@ import pango.context;
 import pango.tab_array;
 
 /**
-    A widget that displays the contents of a [gtk.text_buffer.TextBuffer].
+    Displays the contents of a [gtk.text_buffer.TextBuffer].
     
-    ![An example GtkTextview](multiline-text.png)
+    <picture>
+      <source srcset="multiline-text-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkTextView" src="multiline-text.png">
+    </picture>
     
     You may wish to begin by reading the [conceptual overview](section-text-widget.html),
     which gives an overview of all the objects and data types related to the
     text widget and how they work together.
+    
+    ## Shortcuts and Gestures
+    
+    [gtk.text_view.TextView] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    - <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes the last modification.
+    - <kbd>Ctrl</kbd>+<kbd>Y</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
+       redoes the last undone modification.
+    - <kbd>Clear</kbd> clears the content.
+    
+    Additionally, the following signals have default keybindings:
+    
+    - [gtk.text_view.TextView.backspace]
+    - [gtk.text_view.TextView.copyClipboard]
+    - [gtk.text_view.TextView.cutClipboard]
+    - [gtk.text_view.TextView.deleteFromCursor]
+    - [gtk.text_view.TextView.insertEmoji]
+    - [gtk.text_view.TextView.moveCursor]
+    - [gtk.text_view.TextView.pasteClipboard]
+    - [gtk.text_view.TextView.selectAll]
+    - [gtk.text_view.TextView.toggleCursorVisible]
+    - [gtk.text_view.TextView.toggleOverwrite]
+    
+    ## Actions
+    
+    [gtk.text_view.TextView] defines a set of built-in actions:
+    
+    - `clipboard.copy` copies the contents to the clipboard.
+    - `clipboard.cut` copies the contents to the clipboard and deletes it from
+      the widget.
+    - `clipboard.paste` inserts the contents of the clipboard into the widget.
+    - `menu.popup` opens the context menu.
+    - `misc.insert-emoji` opens the Emoji chooser.
+    - `selection.delete` deletes the current selection.
+    - `selection.select-all` selects all of the widgets content.
+    - `text.redo` redoes the last change to the contents.
+    - `text.undo` undoes the last change to the contents.
+    - `text.clear` clears the content.
     
     ## CSS nodes
     
@@ -191,13 +233,20 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     setCursorVisible(propval);
   }
 
-  /** */
+  /**
+      Get `editable` property.
+      Returns: Whether the text can be modified by the user.
+  */
   @property bool editable() nothrow
   {
     return getEditable();
   }
 
-  /** */
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the text can be modified by the user.
+  */
   @property void editable(bool propval) nothrow
   {
     setEditable(propval);
@@ -324,13 +373,20 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     setInputPurpose(propval);
   }
 
-  /** */
+  /**
+      Get `justification` property.
+      Returns: Left, right, or center justification.
+  */
   @property gtk.types.Justification justification() nothrow
   {
     return getJustification();
   }
 
-  /** */
+  /**
+      Set `justification` property.
+      Params:
+        propval = Left, right, or center justification.
+  */
   @property void justification(gtk.types.Justification propval) nothrow
   {
     setJustification(propval);
@@ -411,37 +467,58 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     setOverwrite(propval);
   }
 
-  /** */
+  /**
+      Get `pixelsAboveLines` property.
+      Returns: Pixels of blank space above paragraphs.
+  */
   @property int pixelsAboveLines() nothrow
   {
     return getPixelsAboveLines();
   }
 
-  /** */
+  /**
+      Set `pixelsAboveLines` property.
+      Params:
+        propval = Pixels of blank space above paragraphs.
+  */
   @property void pixelsAboveLines(int propval) nothrow
   {
     setPixelsAboveLines(propval);
   }
 
-  /** */
+  /**
+      Get `pixelsBelowLines` property.
+      Returns: Pixels of blank space below paragraphs.
+  */
   @property int pixelsBelowLines() nothrow
   {
     return getPixelsBelowLines();
   }
 
-  /** */
+  /**
+      Set `pixelsBelowLines` property.
+      Params:
+        propval = Pixels of blank space below paragraphs.
+  */
   @property void pixelsBelowLines(int propval) nothrow
   {
     setPixelsBelowLines(propval);
   }
 
-  /** */
+  /**
+      Get `pixelsInsideWrap` property.
+      Returns: Pixels of blank space between wrapped lines in a paragraph.
+  */
   @property int pixelsInsideWrap() nothrow
   {
     return getPixelsInsideWrap();
   }
 
-  /** */
+  /**
+      Set `pixelsInsideWrap` property.
+      Params:
+        propval = Pixels of blank space between wrapped lines in a paragraph.
+  */
   @property void pixelsInsideWrap(int propval) nothrow
   {
     setPixelsInsideWrap(propval);
@@ -478,13 +555,20 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     setRightMargin(propval);
   }
 
-  /** */
+  /**
+      Get `tabs` property.
+      Returns: Custom tabs for this text.
+  */
   @property pango.tab_array.TabArray tabs() nothrow
   {
     return getTabs();
   }
 
-  /** */
+  /**
+      Set `tabs` property.
+      Params:
+        propval = Custom tabs for this text.
+  */
   @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     setTabs(propval);
@@ -521,13 +605,20 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     setTopMargin(propval);
   }
 
-  /** */
+  /**
+      Get `wrapMode` property.
+      Returns: Whether to wrap lines never, at word boundaries, or at character boundaries.
+  */
   @property gtk.types.WrapMode wrapMode() nothrow
   {
     return getWrapMode();
   }
 
-  /** */
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Whether to wrap lines never, at word boundaries, or at character boundaries.
+  */
   @property void wrapMode(gtk.types.WrapMode propval) nothrow
   {
     setWrapMode(propval);
@@ -854,7 +945,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the `input-hints` of the [gtk.text_view.TextView].
-      Returns: 
+      Returns: the input hints
   */
   gtk.types.InputHints getInputHints() nothrow
   {
@@ -866,7 +957,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the `input-purpose` of the [gtk.text_view.TextView].
-      Returns: 
+      Returns: the input purpose
   */
   gtk.types.InputPurpose getInputPurpose() nothrow
   {
@@ -1143,6 +1234,26 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     int _retval;
     _retval = gtk_text_view_get_top_margin(cast(GtkTextView*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Gets the X,Y offset in buffer coordinates of the top-left corner of
+      the textview's text contents.
+      
+      This allows for more-precise positioning than what is provided by
+      [gtk.text_view.TextView.getVisibleRect] as you can discover what
+      device pixel is being quantized for text positioning.
+      
+      You might want this when making ulterior widgets align with quantized
+      device pixels of the textview contents such as line numbers.
+  
+      Params:
+        xOffset = a location for the X offset
+        yOffset = a location for the Y offset
+  */
+  void getVisibleOffset(out double xOffset, out double yOffset) nothrow
+  {
+    gtk_text_view_get_visible_offset(cast(GtkTextView*)this._cPtr, cast(double*)&xOffset, cast(double*)&yOffset);
   }
 
   /**
@@ -2633,7 +2744,12 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
     return setProperty("cursor-visible", propval);
   }
 
-  /** */
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the text can be modified by the user.
+      Returns: Builder instance for fluent chaining
+  */
   T editable(bool propval) nothrow
   {
     return setProperty("editable", propval);
@@ -2707,7 +2823,12 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
     return setProperty("input-purpose", propval);
   }
 
-  /** */
+  /**
+      Set `justification` property.
+      Params:
+        propval = Left, right, or center justification.
+      Returns: Builder instance for fluent chaining
+  */
   T justification(gtk.types.Justification propval) nothrow
   {
     return setProperty("justification", propval);
@@ -2755,19 +2876,34 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
     return setProperty("overwrite", propval);
   }
 
-  /** */
+  /**
+      Set `pixelsAboveLines` property.
+      Params:
+        propval = Pixels of blank space above paragraphs.
+      Returns: Builder instance for fluent chaining
+  */
   T pixelsAboveLines(int propval) nothrow
   {
     return setProperty("pixels-above-lines", propval);
   }
 
-  /** */
+  /**
+      Set `pixelsBelowLines` property.
+      Params:
+        propval = Pixels of blank space below paragraphs.
+      Returns: Builder instance for fluent chaining
+  */
   T pixelsBelowLines(int propval) nothrow
   {
     return setProperty("pixels-below-lines", propval);
   }
 
-  /** */
+  /**
+      Set `pixelsInsideWrap` property.
+      Params:
+        propval = Pixels of blank space between wrapped lines in a paragraph.
+      Returns: Builder instance for fluent chaining
+  */
   T pixelsInsideWrap(int propval) nothrow
   {
     return setProperty("pixels-inside-wrap", propval);
@@ -2790,7 +2926,12 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
     return setProperty("right-margin", propval);
   }
 
-  /** */
+  /**
+      Set `tabs` property.
+      Params:
+        propval = Custom tabs for this text.
+      Returns: Builder instance for fluent chaining
+  */
   T tabs(pango.tab_array.TabArray propval) nothrow
   {
     return setProperty("tabs", propval);
@@ -2813,7 +2954,12 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
     return setProperty("top-margin", propval);
   }
 
-  /** */
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Whether to wrap lines never, at word boundaries, or at character boundaries.
+      Returns: Builder instance for fluent chaining
+  */
   T wrapMode(gtk.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);

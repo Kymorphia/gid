@@ -9,7 +9,7 @@ import glib.types;
 
 /**
     Contains the public fields of a
-    [Queue][glib-Double-ended-Queues].
+    [Queue](data-structures.html#double-ended-queues).
 */
 class Queue
 {

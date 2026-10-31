@@ -601,7 +601,7 @@ class TlsConnection : gio.iostream.IOStream
       [gio.tls_connection.TlsConnection.handshake] for more information.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = a #GCancellable, or null
         callback = callback to call when the handshake is complete
   */

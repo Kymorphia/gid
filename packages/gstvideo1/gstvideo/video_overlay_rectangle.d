@@ -164,7 +164,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
              global_alpha is applied internally before returning the pixel-data.
       Returns: a #GstBuffer holding the ARGB pixel data with
            #GstVideoMeta set. This function does not return a reference, the caller
-           should obtain a reference of her own with gst_buffer_ref() if needed.
+           should obtain a reference of her own with [gst.buffer.Buffer.ref_] if needed.
   */
   gst.buffer.Buffer getPixelsUnscaledArgb(gstvideo.types.VideoOverlayFormatFlags flags) nothrow
   {
@@ -188,7 +188,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
              global_alpha is applied internally before returning the pixel-data.
       Returns: a #GstBuffer holding the AYUV pixel data with
            #GstVideoMeta set. This function does not return a reference, the caller
-           should obtain a reference of her own with gst_buffer_ref() if needed.
+           should obtain a reference of her own with [gst.buffer.Buffer.ref_] if needed.
   */
   gst.buffer.Buffer getPixelsUnscaledAyuv(gstvideo.types.VideoOverlayFormatFlags flags) nothrow
   {
@@ -212,7 +212,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
              global_alpha is applied internally before returning the pixel-data.
       Returns: a #GstBuffer holding the pixel data with
            #GstVideoMeta set. This function does not return a reference, the caller
-           should obtain a reference of her own with gst_buffer_ref() if needed.
+           should obtain a reference of her own with [gst.buffer.Buffer.ref_] if needed.
   */
   gst.buffer.Buffer getPixelsUnscaledRaw(gstvideo.types.VideoOverlayFormatFlags flags) nothrow
   {

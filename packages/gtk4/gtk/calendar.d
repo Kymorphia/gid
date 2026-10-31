@@ -18,28 +18,35 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.calendar.Calendar] is a widget that displays a Gregorian calendar, one month
-    at a time.
+    Displays a Gregorian calendar, one month at a time.
     
-    ![An example GtkCalendar](calendar.png)
+    <picture>
+      <source srcset="calendar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkCalendar" src="calendar.png">
+    </picture>
     
     A [gtk.calendar.Calendar] can be created with [gtk.calendar.Calendar.new_].
     
-    The date that is currently displayed can be altered with
-    [gtk.calendar.Calendar.selectDay].
+    The selected date can be retrieved from a [gtk.calendar.Calendar] using
+    [gtk.calendar.Calendar.getDate].
+    It can be altered with [gtk.calendar.Calendar.setDate].
     
     To place a visual marker on a particular day, use
     [gtk.calendar.Calendar.markDay] and to remove the marker,
     [gtk.calendar.Calendar.unmarkDay]. Alternative, all
     marks can be cleared with [gtk.calendar.Calendar.clearMarks].
     
-    The selected date can be retrieved from a [gtk.calendar.Calendar] using
-    [gtk.calendar.Calendar.getDate].
-    
     Users should be aware that, although the Gregorian calendar is the
     legal calendar in most countries, it was adopted progressively
     between 1582 and 1929. Display before these dates is likely to be
     historically incorrect.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.calendar.Calendar] supports the following gestures:
+    
+    - Scrolling up or down will switch to the previous or next month.
+    - Date strings can be dropped for setting the current day.
     
     # CSS nodes
     
@@ -106,8 +113,34 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Get `date` property.
+      Returns: The selected date.
+        
+        This property gets initially set to the current date.
+  */
+  @property glib.date_time.DateTime date() nothrow
+  {
+    return getDate();
+  }
+
+  /**
+      Set `date` property.
+      Params:
+        propval = The selected date.
+          
+          This property gets initially set to the current date.
+  */
+  @property void date(glib.date_time.DateTime propval) nothrow
+  {
+    setDate(propval);
+  }
+
+  /**
       Get `day` property.
       Returns: The selected day (as a number between 1 and 31).
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   @property int day() nothrow
   {
@@ -118,6 +151,9 @@ class Calendar : gtk.widget.Widget
       Set `day` property.
       Params:
         propval = The selected day (as a number between 1 and 31).
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   @property void day(int propval) nothrow
   {
@@ -129,6 +165,9 @@ class Calendar : gtk.widget.Widget
       Returns: The selected month (as a number between 0 and 11).
         
         This property gets initially set to the current month.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   @property int month() nothrow
   {
@@ -141,6 +180,9 @@ class Calendar : gtk.widget.Widget
         propval = The selected month (as a number between 0 and 11).
           
           This property gets initially set to the current month.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   @property void month(int propval) nothrow
   {
@@ -209,6 +251,9 @@ class Calendar : gtk.widget.Widget
       Returns: The selected year.
         
         This property gets initially set to the current year.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   @property int year() nothrow
   {
@@ -221,6 +266,9 @@ class Calendar : gtk.widget.Widget
         propval = The selected year.
           
           This property gets initially set to the current year.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   @property void year(int propval) nothrow
   {
@@ -251,7 +299,7 @@ class Calendar : gtk.widget.Widget
       year, month and the selected day.
       
       The returned date is in the local time zone.
-      Returns: the [glib.date_time.DateTime] representing the shown date
+      Returns: the [glib.date_time.DateTime] representing the selected date
   */
   glib.date_time.DateTime getDate() nothrow
   {
@@ -368,6 +416,8 @@ class Calendar : gtk.widget.Widget
   
       Params:
         date = a [glib.date_time.DateTime] representing the day to select
+  
+      Deprecated: Use [gtk.calendar.Calendar.setDate] instead.
   */
   void selectDay(glib.date_time.DateTime date) nothrow
   {
@@ -375,10 +425,21 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Switches to date's year and month and selects its day.
+  
+      Params:
+        date = a [glib.date_time.DateTime] representing the day to select
+  */
+  void setDate(glib.date_time.DateTime date) nothrow
+  {
+    gtk_calendar_set_date(cast(GtkCalendar*)this._cPtr, date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
+  }
+
+  /**
       Sets the day for the selected date.
       
-      The new date must be valid. For example, setting 31 for the day when the
-      month is February, fails.
+      The new date must be valid. For example, setting the day to 31 when the
+      month is February will fail.
   
       Params:
         day = The desired day for the selected date (as a number between 1 and 31).
@@ -391,8 +452,8 @@ class Calendar : gtk.widget.Widget
   /**
       Sets the month for the selected date.
       
-      The new date must be valid. For example, setting 1 (February) for the month
-      when the day is 31, fails.
+      The new date must be valid. For example, setting the month to 1 (February)
+      when the day is 31 will fail.
   
       Params:
         month = The desired month for the selected date (as a number between 0 and 11).
@@ -431,7 +492,7 @@ class Calendar : gtk.widget.Widget
       Sets whether week numbers are shown in the calendar.
   
       Params:
-        value = whether to show week numbers on the left of the days
+        value = whether to show week numbers alongside the days
   */
   void setShowWeekNumbers(bool value) nothrow
   {
@@ -441,8 +502,8 @@ class Calendar : gtk.widget.Widget
   /**
       Sets the year for the selected date.
       
-      The new date must be valid. For example, setting 2023 for the year when then
-      the date is 2024-02-29, fails.
+      The new date must be valid. For example, setting the year to 2023 when the
+      date is February 29 will fail.
   
       Params:
         year = The desired year for the selected date (within [glib.date_time.DateTime]
@@ -511,7 +572,7 @@ class Calendar : gtk.widget.Widget
   /**
       Connect to `NextMonth` signal.
   
-      Emitted when the user switched to the next month.
+      Emitted when the user switches to the next month.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -555,7 +616,7 @@ class Calendar : gtk.widget.Widget
   /**
       Connect to `NextYear` signal.
   
-      Emitted when user switched to the next year.
+      Emitted when user switches to the next year.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -599,7 +660,7 @@ class Calendar : gtk.widget.Widget
   /**
       Connect to `PrevMonth` signal.
   
-      Emitted when the user switched to the previous month.
+      Emitted when the user switches to the previous month.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -643,7 +704,7 @@ class Calendar : gtk.widget.Widget
   /**
       Connect to `PrevYear` signal.
   
-      Emitted when user switched to the previous year.
+      Emitted when user switches to the previous year.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -691,10 +752,26 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /**
+      Set `date` property.
+      Params:
+        propval = The selected date.
+          
+          This property gets initially set to the current date.
+      Returns: Builder instance for fluent chaining
+  */
+  T date(glib.date_time.DateTime propval) nothrow
+  {
+    return setProperty("date", propval);
+  }
+
+  /**
       Set `day` property.
       Params:
         propval = The selected day (as a number between 1 and 31).
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   T day(int propval) nothrow
   {
@@ -708,6 +785,9 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           This property gets initially set to the current month.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   T month(int propval) nothrow
   {
@@ -754,6 +834,9 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           This property gets initially set to the current year.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gtk.calendar.Calendar.date] instead.
   */
   T year(int propval) nothrow
   {

@@ -18,7 +18,7 @@ class PadActionEntry
       Create a `pad_action_entry.PadActionEntry` wrap type.
       Params:
         type = the type of pad feature that will trigger this action entry.
-        index = the 0-indexed button/ring/strip number that will trigger this action
+        index = the 0-indexed button/ring/strip/dial number that will trigger this action
             entry.
         mode = the mode that will trigger this action entry, or -1 for all modes.
         label = Human readable description of this action entry, this string should
@@ -70,7 +70,7 @@ class PadActionEntry
 
   /**
       Get `index` field.
-      Returns: the 0-indexed button/ring/strip number that will trigger this action
+      Returns: the 0-indexed button/ring/strip/dial number that will trigger this action
           entry.
   */
   @property int index() nothrow
@@ -81,7 +81,7 @@ class PadActionEntry
   /**
       Set `index` field.
       Params:
-        propval = the 0-indexed button/ring/strip number that will trigger this action
+        propval = the 0-indexed button/ring/strip/dial number that will trigger this action
             entry.
   */
   @property void index(int propval) nothrow

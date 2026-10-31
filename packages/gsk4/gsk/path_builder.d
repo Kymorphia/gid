@@ -16,8 +16,7 @@ import gsk.types;
 import pango.layout;
 
 /**
-    [gsk.path_builder.PathBuilder] is an auxiliary object for constructing
-    [gsk.path.Path] objects.
+    Constructs [gsk.path.Path] objects.
     
     A path is constructed like this:
     
@@ -111,7 +110,7 @@ class PathBuilder : gobject.boxed.Boxed
       from a Cairo context.
   
       Params:
-        path = 
+        path = a path
   */
   void addCairoPath(cairo.path.Path path) nothrow
   {
@@ -119,7 +118,7 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /**
-      Adds a circle with the center and radius.
+      Adds a circle as a new contour.
       
       The path is going around the circle in clockwise direction.
       
@@ -157,7 +156,7 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /**
-      Adds rect as a new contour to the path built by the builder.
+      Adds a rectangle as a new contour.
       
       The path is going around the rectangle in clockwise direction.
       
@@ -165,7 +164,7 @@ class PathBuilder : gobject.boxed.Boxed
       horizontal or vertical line. If both are 0, it'll be a closed dot.
   
       Params:
-        rect = The rectangle to create a path for
+        rect = the rectangle to create a path for
   */
   void addRect(graphene.rect.Rect rect) nothrow
   {
@@ -184,7 +183,7 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /**
-      Adds rect as a new contour to the path built in self.
+      Adds a rounded rectangle as a new contour.
       
       The path is going around the rectangle in clockwise direction.
   
@@ -197,7 +196,7 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /**
-      Adds to self the segment of path from start to end.
+      Adds a segment of a path to the builder.
       
       If start is equal to or after end, the path will first add the
       segment from start to the end of the path, and then add the segment
@@ -208,7 +207,7 @@ class PathBuilder : gobject.boxed.Boxed
       and end point. To add a closed path, use [gsk.path_builder.PathBuilder.addPath].
   
       Params:
-        path = the [gsk.path.Path] to take the segment to
+        path = the path to take the segment to
         start = the point on path to start at
         end = the point on path to end at
   */
@@ -218,10 +217,10 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /**
-      Adds an elliptical arc from the current point to x3, y3
+      Adds an elliptical arc from the current point to x2, y2
       with x1, y1 determining the tangent directions.
       
-      After this, x3, y3 will be the new current point.
+      After this, x2, y2 will be the new current point.
       
       Note: Two points and their tangents do not determine
       a unique ellipse, so GSK just picks one. If you need more
@@ -322,7 +321,7 @@ class PathBuilder : gobject.boxed.Boxed
       When the builder is created, the default current point is set
       to `0, 0`. Note that this is different from cairo, which starts
       out without a current point.
-      Returns: The current point
+      Returns: the current point
   */
   graphene.point.Point getCurrentPoint() nothrow
   {
@@ -346,11 +345,11 @@ class PathBuilder : gobject.boxed.Boxed
       x1, y1 to x2, y2.
   
       Params:
-        x1 = X coordinate of first control point
-        y1 = Y coordinate of first control point
-        x2 = X coordinate of second control point
-        y2 = Y coordinate of second control point
-        radius = Radius of the circle
+        x1 = x coordinate of first control point
+        y1 = y coordinate of first control point
+        x2 = x coordinate of second control point
+        y2 = y coordinate of second control point
+        radius = radius of the circle
   */
   void htmlArcTo(float x1, float y1, float x2, float y2, float radius) nothrow
   {
@@ -414,7 +413,7 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /**
-      Adds an elliptical arc from the current point to x3, y3
+      Adds an elliptical arc from the current point to x2, y2
       with x1, y1 determining the tangent directions.
       
       All coordinates are given relative to the current point.
@@ -483,11 +482,11 @@ class PathBuilder : gobject.boxed.Boxed
       This is the relative version of [gsk.path_builder.PathBuilder.htmlArcTo].
   
       Params:
-        x1 = X coordinate of first control point
-        y1 = Y coordinate of first control point
-        x2 = X coordinate of second control point
-        y2 = Y coordinate of second control point
-        radius = Radius of the circle
+        x1 = x coordinate of first control point
+        y1 = y coordinate of first control point
+        x2 = x coordinate of second control point
+        y2 = y coordinate of second control point
+        radius = radius of the circle
   */
   void relHtmlArcTo(float x1, float y1, float x2, float y2, float radius) nothrow
   {
@@ -551,13 +550,13 @@ class PathBuilder : gobject.boxed.Boxed
       This is the relative version of [gsk.path_builder.PathBuilder.svgArcTo].
   
       Params:
-        rx = X radius
-        ry = Y radius
+        rx = x radius
+        ry = y radius
         xAxisRotation = the rotation of the ellipsis
         largeArc = whether to add the large arc
         positiveSweep = whether to sweep in the positive direction
-        x = the X coordinate of the endpoint
-        y = the Y coordinate of the endpoint
+        x = x coordinate of the endpoint
+        y = y coordinate of the endpoint
   */
   void relSvgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y) nothrow
   {
@@ -574,13 +573,13 @@ class PathBuilder : gobject.boxed.Boxed
       After this, `x`, `y` will be the new current point.
   
       Params:
-        rx = X radius
-        ry = Y radius
+        rx = x radius
+        ry = y radius
         xAxisRotation = the rotation of the ellipsis
         largeArc = whether to add the large arc
         positiveSweep = whether to sweep in the positive direction
-        x = the X coordinate of the endpoint
-        y = the Y coordinate of the endpoint
+        x = x coordinate of the endpoint
+        y = y coordinate of the endpoint
   */
   void svgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y) nothrow
   {
@@ -588,15 +587,16 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new [gsk.path.Path] from the given builder.
+      Creates a new path from the given builder.
       
-      The given [gsk.path_builder.PathBuilder] is reset once this function returns;
-      you cannot call this function multiple times on the same builder
-      instance.
+      The given [gsk.path_builder.PathBuilder] is reset to the initial state once this
+      function returns. Calling this function again on the same builder
+      instance will therefore produce an empty path, not a copy of the same
+      path.
       
       This function is intended primarily for language bindings.
       C code should use [gsk.path_builder.PathBuilder.freeToPath].
-      Returns: the newly created [gsk.path.Path]
+      Returns: the newly created path
           with all the contours added to the builder
   */
   gsk.path.Path toPath() nothrow

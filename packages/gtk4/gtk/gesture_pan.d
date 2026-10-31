@@ -11,7 +11,7 @@ import gtk.gesture_drag;
 import gtk.types;
 
 /**
-    [gtk.gesture_pan.GesturePan] is a [gtk.gesture.Gesture] for pan gestures.
+    Recognizes pan gestures.
     
     These are drags that are locked to happen along one axis. The axis
     that a [gtk.gesture_pan.GesturePan] handles is defined at construct time, and

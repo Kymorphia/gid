@@ -162,6 +162,20 @@ class Thread : gobject.boxed.Boxed
   }
 
   /**
+      Gets the name of the thread.
+      
+      This function is intended for debugging purposes.
+      Returns: the name of the thread
+  */
+  string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_thread_get_name(cast(GThread*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
       Waits until thread finishes, i.e. the function func, as
       given to [glib.thread.Thread.new_], returns or [glib.thread.Thread.exit] is called.
       If thread has already terminated, then [glib.thread.Thread.join]

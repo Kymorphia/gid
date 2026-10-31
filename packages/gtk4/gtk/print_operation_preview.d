@@ -13,8 +13,7 @@ import gtk.print_context;
 import gtk.types;
 
 /**
-    [gtk.print_operation_preview.PrintOperationPreview] is the interface that is used to
-    implement print preview.
+    The interface that is used to implement print preview.
     
     A [gtk.print_operation_preview.PrintOperationPreview] object is passed to the
     [gtk.print_operation.PrintOperation.preview] signal by

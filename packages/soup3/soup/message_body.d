@@ -10,7 +10,7 @@ import soup.c.types;
 import soup.types;
 
 /**
-    #SoupMessageBody represents the request or response body of a
+    [soup.message_body.MessageBody] represents the request or response body of a
     [soup.message.Message].
     
     Note that while @length always reflects the full length of the
@@ -68,7 +68,7 @@ class MessageBody : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new #SoupMessageBody.
+      Creates a new [soup.message_body.MessageBody]
       
       [soup.message.Message] uses this internally; you
       will not normally need to call it yourself.
@@ -184,7 +184,7 @@ class MessageBody : gobject.boxed.Boxed
   }
 
   /**
-      Handles the #SoupMessageBody part of receiving a chunk of data from
+      Handles the [soup.message_body.MessageBody] part of receiving a chunk of data from
       the network.
       
       Normally this means appending chunk to body, exactly as with
@@ -234,7 +234,7 @@ class MessageBody : gobject.boxed.Boxed
   }
 
   /**
-      Handles the #SoupMessageBody part of writing a chunk of data to the
+      Handles the [soup.message_body.MessageBody] part of writing a chunk of data to the
       network.
       
       Normally this is a no-op, but if you have set body's accumulate flag to

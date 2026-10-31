@@ -1273,6 +1273,57 @@ enum WebKitUserStyleLevel
 }
 
 /**
+    Enum values used to denote errors happening when parsing a #WebKitWebExtension
+*/
+enum WebKitWebExtensionError
+{
+  /**
+      An unknown error occured.
+  */
+  Unknown = 899,
+
+  /**
+      A specified resource was not found on disk.
+  */
+  ResourceNotFound = 800,
+
+  /**
+      A resource failed the bundle's code signature checks.
+  */
+  InvalidResourceCodeSignature = 801,
+
+  /**
+      An invalid `manifest.json` was encountered.
+  */
+  InvalidManifest = 802,
+
+  /**
+      The manifest version is not supported.
+  */
+  UnsupportedManifestVersion = 803,
+
+  /**
+      An invalid manifest entry was encountered.
+  */
+  InvalidManifestEntry = 804,
+
+  /**
+      An invalid declarative net request entry was encountered.
+  */
+  InvalidDeclarativeNetRequestEntry = 805,
+
+  /**
+      The extension specified background persistence that was not compatible with the platform or features requested.
+  */
+  InvalidBackgroundPersistence = 806,
+
+  /**
+      The archive file is invalid or corrupt.
+  */
+  InvalidArchive = 807,
+}
+
+/**
     Enum values used to denote errors happening when creating a #WebKitWebExtensionMatchPattern
 */
 enum WebKitWebExtensionMatchPatternError
@@ -1436,6 +1487,78 @@ enum WebKitWebsiteDataTypes : uint
       All types.
   */
   All = 4095,
+}
+
+/**
+    Enum values representing the XR session features.
+    
+    See <https://immersive-web.github.io/webxr/#xrreferencespace-interface>.
+    And, see <https://immersive-web.github.io/webxr-hand-input/> for hand tracking.
+*/
+enum WebKitXRSessionFeatures : uint
+{
+  /**
+      viewer feature.
+  */
+  Viewer = 1,
+
+  /**
+      local feature.
+  */
+  Local = 2,
+
+  /**
+      local-floor feature.
+  */
+  LocalFloor = 4,
+
+  /**
+      bounded-floor feature.
+  */
+  BoundedFloor = 8,
+
+  /**
+      unbounded feature.
+  */
+  Unbounded = 16,
+
+  /**
+      hand tracking feature.
+  */
+  HandTracking = 32,
+
+  /**
+      hit test feature.
+  */
+  HitTest = 64,
+
+  /**
+      WebXR Layers feature.
+  */
+  Layers = 128,
+}
+
+/**
+    Enum values representing the XR session mode.
+    
+    See <https://immersive-web.github.io/webxr/#xrsessionmode-enum>
+*/
+enum WebKitXRSessionMode
+{
+  /**
+      inline session mode.
+  */
+  Inline = 0,
+
+  /**
+      immersive-vr session mode.
+  */
+  ImmersiveVr = 1,
+
+  /**
+      immersive-ar session mode.
+  */
+  ImmersiveAr = 2,
 }
 
 /**
@@ -1639,11 +1762,12 @@ struct WebKitCookieManagerClass
 struct WebKitCredential;
 
 /**
-    A permission request for accessing user's audio/video devices.
+    A permission request for enumerating the user's media devices
     
-    WebKitUserMediaPermissionRequest represents a request for
+    WebKitDeviceInfoPermissionRequest represents a request for
     permission to whether WebKit should be allowed to access the user's
-    devices information when requested through the enumerateDevices API.
+    devices information when requested through the MediaDevices.enumerateDevices
+    API.
     
     When a WebKitDeviceInfoPermissionRequest is not handled by the user,
     it is denied by default.
@@ -2174,7 +2298,7 @@ struct WebKitNavigationPolicyDecisionClass
     Configures network proxies.
     
     WebKitNetworkProxySettings can be used to provide a custom proxy configuration
-    to a #WebKitWebContext. You need to call webkit_web_context_set_network_proxy_settings()
+    to a #WebKitNetworkSession. You need to call webkit_network_session_set_network_proxy_settings()
     with [webkit.types.NetworkProxyMode.Custom] and a WebKitNetworkProxySettings.
 */
 struct WebKitNetworkProxySettings;
@@ -2679,6 +2803,24 @@ struct WebKitWebContextClass
 }
 
 /**
+    Represents a [WebExtension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions).
+    
+    A #WebKitWebExtension object encapsulates a web extension’s
+    resources that are defined by a [`manifest.json` file](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json).
+    
+    This class handles the reading and parsing of the manifest file
+    along with the supporting resources like icons and localizations.
+*/
+struct WebKitWebExtension;
+
+/** */
+struct WebKitWebExtensionClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
     Represents a way to specify a group of URLs for use in WebExtensions.
     
     All match patterns are specified as strings. Apart from the special `<all_urls>` pattern, match patterns
@@ -3126,6 +3268,27 @@ struct WebKitWindowProperties;
 
 /** */
 struct WebKitWindowPropertiesClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    A permission request for accessing virtual reality (VR) and
+    augmented reality (AR) devices, including sensors and head-mounted
+    displays.
+    
+    WebKitXRPermissionRequest represents a request for permission to
+    decide whether WebKit can initialize an XR session through the
+    WebXR API.
+    
+    When a WebKitXRPermissionRequest is not handled by the user,
+    it is denied by default.
+*/
+struct WebKitXRPermissionRequest;
+
+/** */
+struct WebKitXRPermissionRequestClass
 {
   /** */
   GObjectClass parentClass;

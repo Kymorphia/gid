@@ -33,9 +33,9 @@ class AsyncQueue
   }
 
   /** */
-  void* _cPtr() nothrow
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return cast(void*)_cInstancePtr;
+    return dup ? cast(void*)g_async_queue_ref(_cInstancePtr) : cast(void*)_cInstancePtr;
   }
 
   /**
@@ -290,7 +290,7 @@ class AsyncQueue
         item = the data to remove from the queue
       Returns: true if the item was removed
   */
-  bool removeUnlocked(void* item = null) nothrow
+  bool removeUnlocked(void* item) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_async_queue_remove_unlocked(cast(GAsyncQueue*)this._cPtr, item);
@@ -393,8 +393,8 @@ class AsyncQueue
   
       Params:
         endTime = a #GTimeVal, determining the final time
-      Returns: data from the queue or null, when no data is
-          received before end_time.
+      Returns: data from the queue or null, when no
+          data is received before end_time.
   
       Deprecated: use [glib.async_queue.AsyncQueue.timeoutPop].
   */
@@ -417,8 +417,8 @@ class AsyncQueue
   
       Params:
         endTime = a #GTimeVal, determining the final time
-      Returns: data from the queue or null, when no data is
-          received before end_time.
+      Returns: data from the queue or null, when no
+          data is received before end_time.
   
       Deprecated: use [glib.async_queue.AsyncQueue.timeoutPopUnlocked].
   */
@@ -436,8 +436,8 @@ class AsyncQueue
   
       Params:
         timeout = the number of microseconds to wait
-      Returns: data from the queue or null, when no data is
-          received before the timeout.
+      Returns: data from the queue or null, when no
+          data is received before the timeout.
   */
   void* timeoutPop(ulong timeout) nothrow
   {
@@ -455,8 +455,8 @@ class AsyncQueue
   
       Params:
         timeout = the number of microseconds to wait
-      Returns: data from the queue or null, when no data is
-          received before the timeout.
+      Returns: data from the queue or null, when no
+          data is received before the timeout.
   */
   void* timeoutPopUnlocked(ulong timeout) nothrow
   {
@@ -467,8 +467,8 @@ class AsyncQueue
   /**
       Tries to pop data from the queue. If no data is available,
       null is returned.
-      Returns: data from the queue or null, when no data is
-          available immediately.
+      Returns: data from the queue or null, when no
+          data is available immediately.
   */
   void* tryPop() nothrow
   {
@@ -481,8 +481,8 @@ class AsyncQueue
       null is returned.
       
       This function must be called while holding the queue's lock.
-      Returns: data from the queue or null, when no data is
-          available immediately.
+      Returns: data from the queue or null, when no
+          data is available immediately.
   */
   void* tryPopUnlocked() nothrow
   {
@@ -515,5 +515,17 @@ class AsyncQueue
   void unrefAndUnlock() nothrow
   {
     g_async_queue_unref_and_unlock(cast(GAsyncQueue*)this._cPtr);
+  }
+
+  /**
+      Creates a new asynchronous queue.
+      Returns: a new #GAsyncQueue. Free with [glib.async_queue.AsyncQueue.unref]
+  */
+  static glib.async_queue.AsyncQueue new_() nothrow
+  {
+    GAsyncQueue* _cretval;
+    _cretval = g_async_queue_new();
+    auto _retval = _cretval ? new glib.async_queue.AsyncQueue(cast(GAsyncQueue*)_cretval, Yes.Take) : null;
+    return _retval;
   }
 }

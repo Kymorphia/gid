@@ -21,15 +21,14 @@ import pango.font_map;
 import pango.language;
 
 /**
-    A [gtk.font_dialog.FontDialog] object collects the arguments that
-    are needed to present a font chooser dialog to the
-    user, such as a title for the dialog and whether it
-    should be modal.
+    Asynchronous API to present a font chooser dialog.
+    
+    [gtk.font_dialog.FontDialog] collects the arguments that are needed to present
+    the dialog to the user, such as a title for the dialog and whether
+    it should be modal.
     
     The dialog is shown with the [gtk.font_dialog.FontDialog.chooseFont]
-    function or its variants. This API follows the GIO async pattern,
-    and the result can be obtained by calling the corresponding
-    finish function, such as [gtk.font_dialog.FontDialog.chooseFontFinish].
+    function or its variants.
     
     See [gtk.font_dialog_button.FontDialogButton] for a convenient control
     that uses [gtk.font_dialog.FontDialog] and presents the results.
@@ -73,8 +72,7 @@ class FontDialog : gobject.object.ObjectWrap
 
   /**
       Get `filter` property.
-      Returns: Sets a filter to restrict what fonts are shown
-        in the font chooser dialog.
+      Returns: A filter to restrict what fonts are shown in the font chooser dialog.
   */
   @property gtk.filter.Filter filter() nothrow
   {
@@ -84,8 +82,7 @@ class FontDialog : gobject.object.ObjectWrap
   /**
       Set `filter` property.
       Params:
-        propval = Sets a filter to restrict what fonts are shown
-          in the font chooser dialog.
+        propval = A filter to restrict what fonts are shown in the font chooser dialog.
   */
   @property void filter(gtk.filter.Filter propval) nothrow
   {
@@ -94,7 +91,7 @@ class FontDialog : gobject.object.ObjectWrap
 
   /**
       Get `fontMap` property.
-      Returns: Sets a custom font map to select fonts from.
+      Returns: A custom font map to select fonts from.
         
         A custom font map can be used to present application-specific
         fonts instead of or in addition to the normal system fonts.
@@ -107,7 +104,7 @@ class FontDialog : gobject.object.ObjectWrap
   /**
       Set `fontMap` property.
       Params:
-        propval = Sets a custom font map to select fonts from.
+        propval = A custom font map to select fonts from.
           
           A custom font map can be used to present application-specific
           fonts instead of or in addition to the normal system fonts.
@@ -188,19 +185,18 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a font selection operation by
-      presenting a dialog to the user for selecting a font face
-      (i.e. a font family and style, but not a specific font size).
+      Presents a font chooser dialog to the user.
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.font_dialog.FontDialog.chooseFaceFinish]
-      to obtain the result.
+      The font chooser dialog will be set up for selecting a font face.
+      
+      A font face represents a font family and style, but no specific font size.
   
       Params:
-        parent = the parent [gtk.window.Window]
+        parent = the parent window
         initialValue = the initial value
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void chooseFace(gtk.window.Window parent = null, pango.font_face.FontFace initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -224,12 +220,14 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.font_dialog.FontDialog.chooseFace] call
-      and returns the resulting font face.
+      Finishes the [gtk.font_dialog.FontDialog.chooseFace] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the selected font face
+        result = the result
+      Returns: the selected [pango.font_face.FontFace]
       Throws: [ErrorWrap]
   */
   pango.font_face.FontFace chooseFaceFinish(gio.async_result.AsyncResult result)
@@ -244,18 +242,16 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a font selection operation by
-      presenting a dialog to the user for selecting a font family.
+      Presents a font chooser dialog to the user.
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.font_dialog.FontDialog.chooseFamilyFinish]
-      to obtain the result.
+      The font chooser dialog will be set up for selecting a font family.
   
       Params:
-        parent = the parent [gtk.window.Window]
+        parent = the parent window
         initialValue = the initial value
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void chooseFamily(gtk.window.Window parent = null, pango.font_family.FontFamily initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -279,16 +275,14 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.font_dialog.FontDialog.chooseFamily] call
-      and returns the resulting family.
+      Finishes the [gtk.font_dialog.FontDialog.chooseFamily] call.
       
-      This function never returns an error. If the operation is
-      not finished successfully, the value passed as initial_value
-      to [gtk.font_dialog.FontDialog.chooseFamily] is returned.
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the selected family
+        result = the result
+      Returns: the selected [pango.font_family.FontFamily]
       Throws: [ErrorWrap]
   */
   pango.font_family.FontFamily chooseFamilyFinish(gio.async_result.AsyncResult result)
@@ -303,21 +297,19 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a font selection operation by
-      presenting a dialog to the user for selecting a font.
+      Presents a font chooser dialog to the user.
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.font_dialog.FontDialog.chooseFontFinish]
-      to obtain the result.
+      The font chooser dialog will be set up for selecting a font.
       
       If you want to let the user select font features as well,
       use [gtk.font_dialog.FontDialog.chooseFontAndFeatures] instead.
   
       Params:
-        parent = the parent [gtk.window.Window]
+        parent = the parent window
         initialValue = the font to select initially
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void chooseFont(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -341,22 +333,20 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a font selection operation by
-      presenting a dialog to the user for selecting a font and
-      font features.
+      Presents a font chooser dialog to the user.
+      
+      The font chooser dialog will be set up for selecting a font
+      and specify features for the selected font.
       
       Font features affect how the font is rendered, for example
       enabling glyph variants or ligatures.
-      
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.font_dialog.FontDialog.chooseFontAndFeaturesFinish]
-      to obtain the result.
   
       Params:
-        parent = the parent [gtk.window.Window]
+        parent = the parent window
         initialValue = the font to select initially
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void chooseFontAndFeatures(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -380,16 +370,20 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.font_dialog.FontDialog.chooseFontAndFeatures]
-      call and returns the resulting font description and font features.
+      Finishes the [gtk.font_dialog.FontDialog.chooseFontAndFeatures] call.
+      
+      The selected font and features are returned in font_desc and
+      font_features.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
+        result = the result
         fontDesc = return location for font description
         fontFeatures = return location for font features
         language = return location for the language
-      Returns: `TRUE` if a font was selected. Otherwise `FALSE` is returned
-          and error is set
+      Returns: true if a font was selected
       Throws: [ErrorWrap]
   */
   bool chooseFontAndFeaturesFinish(gio.async_result.AsyncResult result, out pango.font_description.FontDescription fontDesc, out string fontFeatures, out pango.language.Language language)
@@ -411,12 +405,15 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.font_dialog.FontDialog.chooseFont] call
-      and returns the resulting font description.
+      Finishes the [gtk.font_dialog.FontDialog.chooseFont] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the selected font
+        result = the result
+      Returns: a [pango.font_description.FontDescription] describing
+          the selected font
       Throws: [ErrorWrap]
   */
   pango.font_description.FontDescription chooseFontFinish(gio.async_result.AsyncResult result)
@@ -469,10 +466,9 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Returns whether the font chooser dialog
-      blocks interaction with the parent window
-      while it is presented.
-      Returns: `TRUE` if the font chooser dialog is modal
+      Returns whether the font chooser dialog blocks interaction
+      with the parent window while it is presented.
+      Returns: true if the font chooser dialog is modal
   */
   bool getModal() nothrow
   {
@@ -482,8 +478,7 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Returns the title that will be shown on the
-      font chooser dialog.
+      Returns the title that will be shown on the font chooser dialog.
       Returns: the title
   */
   string getTitle() nothrow
@@ -498,11 +493,11 @@ class FontDialog : gobject.object.ObjectWrap
       Adds a filter that decides which fonts to display
       in the font chooser dialog.
       
-      The [gtk.filter.Filter] must be able to handle both [pango.font_family.FontFamily]
+      The filter must be able to handle both [pango.font_family.FontFamily]
       and [pango.font_face.FontFace] objects.
   
       Params:
-        filter = a [gtk.filter.Filter]
+        filter = the filter
   */
   void setFilter(gtk.filter.Filter filter = null) nothrow
   {
@@ -534,9 +529,8 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Sets whether the font chooser dialog
-      blocks interaction with the parent window
-      while it is presented.
+      Sets whether the font chooser dialog blocks interaction
+      with the parent window while it is presented.
   
       Params:
         modal = the new value
@@ -547,8 +541,7 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the title that will be shown on the
-      font chooser dialog.
+      Sets the title that will be shown on the font chooser dialog.
   
       Params:
         title = the new title
@@ -567,8 +560,7 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `filter` property.
       Params:
-        propval = Sets a filter to restrict what fonts are shown
-          in the font chooser dialog.
+        propval = A filter to restrict what fonts are shown in the font chooser dialog.
       Returns: Builder instance for fluent chaining
   */
   T filter(gtk.filter.Filter propval) nothrow
@@ -579,7 +571,7 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `fontMap` property.
       Params:
-        propval = Sets a custom font map to select fonts from.
+        propval = A custom font map to select fonts from.
           
           A custom font map can be used to present application-specific
           fonts instead of or in addition to the normal system fonts.

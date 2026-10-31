@@ -136,7 +136,7 @@ import gobject.object;
     
     To parse commandline arguments you may handle the
     [gio.application.Application.commandLine] signal or override the
-    `vfunc@Gio.Application.local_command_line` virtual funcion, to parse them in
+    `vfunc@Gio.Application.local_command_line` virtual function, to parse them in
     either the primary instance or the local instance, respectively.
     
     For an example of opening files with a [gio.application.Application], see
@@ -189,6 +189,10 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Set `actionGroup` property.
       Params:
         propval = The group of actions that the application exports.
+  
+      Deprecated: Use the [gio.action_map.ActionMap] interface instead.
+          Never ever mix use of this API with use of [gio.action_map.ActionMap] on the
+          same @application or things will go very badly wrong.
   */
   @property void actionGroup(gio.action_group.ActionGroup propval) nothrow
   {
@@ -500,8 +504,8 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       was to send all of the commandline arguments (options and all) to the
       primary instance for handling.  #GApplication ignored them completely
       on the local side.  Calling this function "opts in" to the new
-      behaviour, and in particular, means that unrecognised options will be
-      treated as errors.  Unrecognised options have never been ignored when
+      behaviour, and in particular, means that unrecognized options will be
+      treated as errors.  Unrecognized options have never been ignored when
       [gio.types.ApplicationFlags.HandlesCommandLine] is unset.
       
       If #GApplication::handle-local-options needs to see the list of
@@ -558,7 +562,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       
       Calling this function will cause the options in the supplied option
       group to be parsed, but it does not cause you to be "opted in" to the
-      new functionality whereby unrecognised options are rejected even if
+      new functionality whereby unrecognized options are rejected even if
       [gio.types.ApplicationFlags.HandlesCommandLine] was given.
   
       Params:
@@ -933,7 +937,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       and override local_command_line(). In this case, you most likely want
       to return true from your local_command_line() implementation to
       suppress the default handling. See
-      [gapplication-example-cmdline2.c][https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c]
+      [gapplication-example-cmdline2.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c)
       for an example.
       
       If, after the above is done, the use count of the application is zero
@@ -1011,7 +1015,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       notification. This works even for notifications sent from a previous
       execution of the application, as long as id is the same string.
       
-      id may be null, but it is impossible to replace or withdraw
+      id may be `NULL`, but it is impossible to replace or withdraw
       notifications without an id.
       
       If notification is no longer relevant, it can be withdrawn with
@@ -1164,10 +1168,10 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   /**
       Sets (or unsets) the base resource path of application.
       
-      The path is used to automatically load various [application
-      resources][gresource] such as menu layouts and action descriptions.
-      The various types of resources will be found at fixed names relative
-      to the given base path.
+      The path is used to automatically load various
+      [application resources][gio.resource.Resource] such as menu layouts and
+      action descriptions. The various types of resources will be found at
+      fixed names relative to the given base path.
       
       By default, the resource base path is determined from the application
       ID by prefixing '/' and replacing each '.' with '/'.  This is done at
@@ -1693,6 +1697,10 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
       Params:
         propval = The group of actions that the application exports.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use the [gio.action_map.ActionMap] interface instead.
+          Never ever mix use of this API with use of [gio.action_map.ActionMap] on the
+          same @application or things will go very badly wrong.
   */
   T actionGroup(gio.action_group.ActionGroup propval) nothrow
   {

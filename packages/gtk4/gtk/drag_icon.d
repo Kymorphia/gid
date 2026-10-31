@@ -24,7 +24,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.drag_icon.DragIcon] is a [gtk.root.Root] implementation for drag icons.
+    A [gtk.root.Root] implementation for drag icons.
     
     A drag icon moves with the pointer during a Drag-and-Drop operation
     and is destroyed when the drag ends.
@@ -96,6 +96,24 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   mixin RootT!();
 
   /**
+      Gets the [gtk.drag_icon.DragIcon] in use with drag.
+      
+      If no drag icon exists yet, a new one will be created
+      and shown.
+  
+      Params:
+        drag = a [gdk.drag.Drag]
+      Returns: the [gtk.drag_icon.DragIcon]
+  */
+  static gtk.drag_icon.DragIcon getForDrag(gdk.drag.Drag drag) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_drag_icon_get_for_drag(drag ? cast(GdkDrag*)drag._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.drag_icon.DragIcon)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
       Creates a widget that can be used as a drag icon for the given
       value.
       
@@ -117,24 +135,6 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
     GtkWidget* _cretval;
     _cretval = gtk_drag_icon_create_widget_for_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, Yes.Take);
-    return _retval;
-  }
-
-  /**
-      Gets the [gtk.drag_icon.DragIcon] in use with drag.
-      
-      If no drag icon exists yet, a new one will be created
-      and shown.
-  
-      Params:
-        drag = a [gdk.drag.Drag]
-      Returns: the [gtk.drag_icon.DragIcon]
-  */
-  static gtk.widget.Widget getForDrag(gdk.drag.Drag drag) nothrow
-  {
-    GtkWidget* _cretval;
-    _cretval = gtk_drag_icon_get_for_drag(drag ? cast(GdkDrag*)drag._cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

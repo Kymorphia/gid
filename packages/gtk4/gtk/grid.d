@@ -19,10 +19,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.grid.Grid] is a container which arranges its child widgets in
-    rows and columns.
+    Arranges its child widgets in rows and columns.
     
-    ![An example GtkGrid](grid.png)
+    <picture>
+      <source srcset="grid-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkGrid" src="grid.png">
+    </picture>
     
     It supports arbitrary positions and horizontal/vertical spans.
     

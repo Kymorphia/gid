@@ -155,8 +155,8 @@ class DeviceProvider : gst.object.ObjectWrap
       Gets a list of devices that this provider understands. This may actually
       probe the hardware if the provider is not currently started.
       
-      If the provider has been started, this will returned the same #GstDevice
-      objedcts that have been returned by the #GST_MESSAGE_DEVICE_ADDED messages.
+      If the provider has been started, this will return the same #GstDevice
+      objects that have been returned by the #GST_MESSAGE_DEVICE_ADDED messages.
       Returns: a #GList of
           #GstDevice
   */

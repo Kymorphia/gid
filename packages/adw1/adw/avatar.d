@@ -34,14 +34,18 @@ import gtk.widget;
     The color is picked based on the hash of the [adw.avatar.Avatar.text].
     
     If [adw.avatar.Avatar.showInitials] is set to `FALSE`,
-    [adw.avatar.Avatar.iconName] or `avatar-default-symbolic` is shown instead of
-    the initials.
+    [adw.avatar.Avatar.iconName] or `adw-avatar-default-symbolic` is shown instead
+    of the initials.
     
     Use [adw.avatar.Avatar.customImage] to set a custom image.
     
     ## CSS nodes
     
     [adw.avatar.Avatar] has a single CSS node with name `avatar`.
+    
+    ## Accessibility
+    
+    [adw.avatar.Avatar] uses the [gtk.types.AccessibleRole.Img] role.
 */
 class Avatar : gtk.widget.Widget
 {
@@ -107,7 +111,7 @@ class Avatar : gtk.widget.Widget
       Get `iconName` property.
       Returns: The name of an icon to use as a fallback.
         
-        If no name is set, `avatar-default-symbolic` will be used.
+        If no name is set, `adw-avatar-default-symbolic` will be used.
   */
   @property string iconName() nothrow
   {
@@ -119,7 +123,7 @@ class Avatar : gtk.widget.Widget
       Params:
         propval = The name of an icon to use as a fallback.
           
-          If no name is set, `avatar-default-symbolic` will be used.
+          If no name is set, `adw-avatar-default-symbolic` will be used.
   */
   @property void iconName(string propval) nothrow
   {
@@ -304,7 +308,7 @@ class Avatar : gtk.widget.Widget
   /**
       Sets the name of an icon to use as a fallback.
       
-      If no name is set, `avatar-default-symbolic` will be used.
+      If no name is set, `adw-avatar-default-symbolic` will be used.
   
       Params:
         iconName = the icon name
@@ -378,7 +382,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The name of an icon to use as a fallback.
           
-          If no name is set, `avatar-default-symbolic` will be used.
+          If no name is set, `adw-avatar-default-symbolic` will be used.
       Returns: Builder instance for fluent chaining
   */
   T iconName(string propval) nothrow

@@ -4,6 +4,7 @@ module adw.global;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
+import gdk.rgba;
 import gid.gid;
 import gtk.widget;
 
@@ -123,4 +124,20 @@ double lerp(double a, double b, double t) nothrow
   double _retval;
   _retval = adw_lerp(a, b, t);
   return _retval;
+}
+
+/**
+    Adjusts rgba to be suitable as a standalone color.
+    
+    It will typically be darker for light background, and lighter for dark
+    background, ensuring contrast.
+
+    Params:
+      rgba = a background color
+      dark = Whether to calculate standalone color for light or dark background
+      standaloneRgba = return location for the standalone color
+*/
+void rgbaToStandalone(gdk.rgba.RGBA rgba, bool dark, out gdk.rgba.RGBA standaloneRgba) nothrow
+{
+  adw_rgba_to_standalone(cast(const(GdkRGBA)*)&rgba, dark, cast(GdkRGBA*)&standaloneRgba);
 }

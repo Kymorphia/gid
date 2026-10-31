@@ -10,8 +10,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.column_view_row.ColumnViewRow] is used by [gtk.column_view.ColumnView] to allow configuring
-    how rows are displayed.
+    Configures how rows are displayed in a [gtk.column_view.ColumnView].
     
     It is not used to set the widgets displayed in the individual cells. For that
     see `method@GtkColumnViewColumn.set_factory` and `class@GtkColumnViewCell`.

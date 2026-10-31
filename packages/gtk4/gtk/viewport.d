@@ -21,8 +21,8 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.viewport.Viewport] implements scrollability for widgets that lack their
-    own scrolling capabilities.
+    Implements scrollability for widgets that don't support scrolling
+    on their own.
     
     Use [gtk.viewport.Viewport] to scroll child widgets such as [gtk.grid.Grid],
     [gtk.box.Box], and so on.

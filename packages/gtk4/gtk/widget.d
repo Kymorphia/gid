@@ -46,8 +46,7 @@ import pango.layout;
 /**
     The base class for all widgets.
     
-    [gtk.widget.Widget] is the base class all widgets in GTK derive from. It manages the
-    widget lifecycle, layout, states and style.
+    It manages the widget lifecycle, layout, states and style.
     
     ### Height-for-width Geometry Management
     
@@ -104,7 +103,7 @@ import pango.layout;
     Each widget, once allocated a size, will go on to first share the
     space in one orientation among its children and then request each child's
     height for its target allocated width or its width for allocated height,
-    depending. In this way a [gtk.widget.Widget] will typically be requested its size
+    depending. In this way a widget will typically be requested its size
     a number of times before actually being allocated a size. The size a
     widget is finally allocated can of course differ from the size it has
     requested. For this reason, [gtk.widget.Widget] caches a  small number of results
@@ -634,9 +633,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
   /**
       Get `hasTooltip` property.
-      Returns: Enables or disables the emission of the ::query-tooltip signal on @widget.
+      Returns: Enables or disables the emission of the [gtk.widget.Widget.queryTooltip]
+        signal on @widget.
         
-        A value of true indicates that @widget can have a tooltip, in this case
+        A true value indicates that @widget can have a tooltip, in this case
         the widget will be queried using [gtk.widget.Widget.queryTooltip] to
         determine whether it will provide a tooltip or not.
   */
@@ -648,9 +648,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Set `hasTooltip` property.
       Params:
-        propval = Enables or disables the emission of the ::query-tooltip signal on @widget.
+        propval = Enables or disables the emission of the [gtk.widget.Widget.queryTooltip]
+          signal on @widget.
           
-          A value of true indicates that @widget can have a tooltip, in this case
+          A true value indicates that @widget can have a tooltip, in this case
           the widget will be queried using [gtk.widget.Widget.queryTooltip] to
           determine whether it will provide a tooltip or not.
   */
@@ -661,7 +662,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
   /**
       Get `heightRequest` property.
-      Returns: Override for height request of the widget.
+      Returns: Overrides for height request of the widget.
         
         If this is -1, the natural request will be used.
   */
@@ -673,7 +674,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Set `heightRequest` property.
       Params:
-        propval = Override for height request of the widget.
+        propval = Overrides for height request of the widget.
           
           If this is -1, the natural request will be used.
   */
@@ -722,8 +723,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
   /**
       Get `layoutManager` property.
-      Returns: The [gtk.layout_manager.LayoutManager] instance to use to compute the preferred size
-        of the widget, and allocate its children.
+      Returns: The [gtk.layout_manager.LayoutManager] instance to use to compute
+        the preferred size of the widget, and allocate its children.
         
         This property is meant to be set by widget implementations,
         typically in their instance init function.
@@ -736,8 +737,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Set `layoutManager` property.
       Params:
-        propval = The [gtk.layout_manager.LayoutManager] instance to use to compute the preferred size
-          of the widget, and allocate its children.
+        propval = The [gtk.layout_manager.LayoutManager] instance to use to compute
+          the preferred size of the widget, and allocate its children.
           
           This property is meant to be set by widget implementations,
           typically in their instance init function.
@@ -745,6 +746,35 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   @property void layoutManager(gtk.layout_manager.LayoutManager propval) nothrow
   {
     setLayoutManager(propval);
+  }
+
+  /**
+      Get `limitEvents` property.
+      Returns: Makes this widget act like a modal dialog, with respect to
+        event delivery.
+        
+        Global event controllers will not handle events with targets
+        inside the widget, unless they are set up to ignore propagation
+        limits. See [gtk.event_controller.EventController.setPropagationLimit].
+  */
+  @property bool limitEvents() nothrow
+  {
+    return getLimitEvents();
+  }
+
+  /**
+      Set `limitEvents` property.
+      Params:
+        propval = Makes this widget act like a modal dialog, with respect to
+          event delivery.
+          
+          Global event controllers will not handle events with targets
+          inside the widget, unless they are set up to ignore propagation
+          limits. See [gtk.event_controller.EventController.setPropagationLimit].
+  */
+  @property void limitEvents(bool propval) nothrow
+  {
+    setLimitEvents(propval);
   }
 
   /**
@@ -962,7 +992,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Get `root` property.
       Returns: The [gtk.root.Root] widget of the widget tree containing this widget.
         
-        This will be null if the widget is not contained in a root widget.
+        This will be `NULL` if the widget is not contained in a root widget.
   */
   @property gtk.root.Root root() nothrow
   {
@@ -1005,7 +1035,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         Also see [gtk.tooltip.Tooltip.setMarkup].
         
         This is a convenience property which will take care of getting the
-        tooltip shown if the given string is not null:
+        tooltip shown if the given string is not `NULL`:
         [gtk.widget.Widget.hasTooltip] will automatically be set to true
         and there will be taken care of [gtk.widget.Widget.queryTooltip] in
         the default signal handler.
@@ -1027,7 +1057,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
           Also see [gtk.tooltip.Tooltip.setMarkup].
           
           This is a convenience property which will take care of getting the
-          tooltip shown if the given string is not null:
+          tooltip shown if the given string is not `NULL`:
           [gtk.widget.Widget.hasTooltip] will automatically be set to true
           and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
@@ -1047,7 +1077,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         Also see [gtk.tooltip.Tooltip.setText].
         
         This is a convenience property which will take care of getting the
-        tooltip shown if the given string is not null:
+        tooltip shown if the given string is not `NULL`:
         [gtk.widget.Widget.hasTooltip] will automatically be set to true
         and there will be taken care of [gtk.widget.Widget.queryTooltip] in
         the default signal handler.
@@ -1068,7 +1098,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
           Also see [gtk.tooltip.Tooltip.setText].
           
           This is a convenience property which will take care of getting the
-          tooltip shown if the given string is not null:
+          tooltip shown if the given string is not `NULL`:
           [gtk.widget.Widget.hasTooltip] will automatically be set to true
           and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
@@ -1159,7 +1189,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
   /**
       Get `widthRequest` property.
-      Returns: Override for width request of the widget.
+      Returns: Overrides for width request of the widget.
         
         If this is -1, the natural request will be used.
   */
@@ -1171,7 +1201,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Set `widthRequest` property.
       Params:
-        propval = Override for width request of the widget.
+        propval = Overrides for width request of the widget.
           
           If this is -1, the natural request will be used.
   */
@@ -1203,10 +1233,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
 
   /**
-      Obtains the current default reading direction.
+      Obtains the default reading direction.
       
       See [gtk.widget.Widget.setDefaultDirection].
-      Returns: the current default direction.
+      Returns: the current default direction
   */
   static gtk.types.TextDirection getDefaultDirection() nothrow
   {
@@ -1222,7 +1252,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       See [gtk.widget.Widget.setDirection].
   
       Params:
-        dir = the new default direction. This cannot be [gtk.types.TextDirection.None].
+        dir = the new default direction, either [gtk.types.TextDirection.Ltr]
+            or [gtk.types.TextDirection.Rtl]
   */
   static void setDefaultDirection(gtk.types.TextDirection dir) nothrow
   {
@@ -1230,7 +1261,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Enable or disable an action installed with
+      Enables or disables an action installed with
       [gtk.widget_class.WidgetClass.installAction].
   
       Params:
@@ -1244,21 +1275,21 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      For widgets that can be “activated” (buttons, menu items, etc.),
-      this function activates them.
+      Activates the widget.
       
       The activation will emit the signal set using
-      [gtk.widget_class.WidgetClass.setActivateSignal] during class initialization.
+      [gtk.widget_class.WidgetClass.setActivateSignal]
+      during class initialization.
       
       Activation is what happens when you press <kbd>Enter</kbd>
-      on a widget during key navigation.
+      on a widget.
       
-      If you wish to handle the activation keybinding yourself, it is
-      recommended to use [gtk.widget_class.WidgetClass.addShortcut] with an action
-      created with [gtk.signal_action.SignalAction.new_].
+      If you wish to handle the activation keybinding yourself,
+      it is recommended to use [gtk.widget_class.WidgetClass.addShortcut]
+      with an action created with [gtk.signal_action.SignalAction.new_].
       
-      If widget isn't activatable, the function returns false.
-      Returns: true if the widget was activatable
+      If widget is not activatable, the function returns false.
+      Returns: true if the widget was activated
   */
   bool activate() nothrow
   {
@@ -1268,8 +1299,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Looks up the action in the action groups associated with
-      widget and its ancestors, and activates it.
+      Activates an action for the widget.
+      
+      The action is looked up in the action groups associated with
+      widget and its ancestors.
       
       If the action is in an action group added with
       [gtk.widget.Widget.insertActionGroup], the name is expected
@@ -1277,13 +1310,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       inserted.
       
       The arguments must match the actions expected parameter type,
-      as returned by `[gio.action.Action.getParameterType]`.
+      as returned by [gio.action.Action.getParameterType].
   
       Params:
         name = the name of the action to activate
         args = parameters to use
-      Returns: true if the action was activated, false if the
-          action does not exist.
+      Returns: true if the action was activated
   */
   bool activateAction(string name, glib.variant.Variant args = null) nothrow
   {
@@ -1294,7 +1326,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Activates the `default.activate` action from widget.
+      Activates the `default.activate` action for the widget.
+      
+      The action is looked up in the same was as for
+      [gtk.widget.Widget.activateAction].
   */
   void activateDefault() nothrow
   {
@@ -1302,13 +1337,16 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Adds controller to widget so that it will receive events.
+      Adds an event controller to the widget.
+      
+      The event controllers of a widget handle the events that are
+      propagated to the widget.
       
       You will usually want to call this function right after
       creating any kind of [gtk.event_controller.EventController].
   
       Params:
-        controller = a [gtk.event_controller.EventController] that hasn't been
+        controller = an event controller that hasn't been
             added to a widget yet
   */
   void addController(gtk.event_controller.EventController controller) nothrow
@@ -1317,7 +1355,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Adds a style class to widget.
+      Adds a style class to the widget.
       
       After calling this function, the widget’s style will match
       for css_class, according to CSS matching rules.
@@ -1326,8 +1364,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       style again.
   
       Params:
-        cssClass = The style class to add to widget, without
-            the leading '.' used for notation of style classes
+        cssClass = style class to add to widget, without the leading period
   */
   void addCssClass(string cssClass) nothrow
   {
@@ -1338,13 +1375,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Adds a widget to the list of mnemonic labels for this widget.
       
-      See [gtk.widget.Widget.listMnemonicLabels]. Note the
-      list of mnemonic labels for the widget is cleared when the
-      widget is destroyed, so the caller must make sure to update
-      its internal state at this point as well.
+      See [gtk.widget.Widget.listMnemonicLabels].
+      
+      Note that the list of mnemonic labels for the widget is cleared
+      when the widget is destroyed, so the caller must make sure
+      to update its internal state at this point as well.
   
       Params:
-        label = a [gtk.widget.Widget] that acts as a mnemonic label for widget
+        label = a widget that acts as a mnemonic label for widget
   */
   void addMnemonicLabel(gtk.widget.Widget label) nothrow
   {
@@ -1359,27 +1397,30 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       (usually at the frame rate of the output device or as quickly as
       the application can be repainted, whichever is slower). For this
       reason, is most suitable for handling graphics that change every
-      frame or every few frames. The tick callback does not automatically
-      imply a relayout or repaint. If you want a repaint or relayout, and
-      aren’t changing widget properties that would trigger that (for example,
-      changing the text of a [gtk.label.Label]), then you will have to call
-      [gtk.widget.Widget.queueResize] or [gtk.widget.Widget.queueDraw]
-      yourself.
+      frame or every few frames.
+      
+      The tick callback does not automatically imply a relayout or repaint.
+      If you want a repaint or relayout, and aren’t changing widget properties
+      that would trigger that (for example, changing the text of a label),
+      then you will have to call [gtk.widget.Widget.queueResize] or
+      [gtk.widget.Widget.queueDraw] yourself.
       
       [gdk.frame_clock.FrameClock.getFrameTime] should generally be used
       for timing continuous animations and
-      [gdk.frame_timings.FrameTimings.getPredictedPresentationTime] if you are
-      trying to display isolated frames at particular times.
+      [gdk.frame_timings.FrameTimings.getPredictedPresentationTime] should be
+      used if you are trying to display isolated frames at particular times.
       
       This is a more convenient alternative to connecting directly to the
-      [gdk.frame_clock.FrameClock.update] signal of [gdk.frame_clock.FrameClock], since you
-      don't have to worry about when a [gdk.frame_clock.FrameClock] is assigned to a widget.
+      [gdk.frame_clock.FrameClock.update] signal of the frame clock, since you
+      don't have to worry about when a frame clock is assigned to a widget.
+      
+      To remove a tick callback, pass the ID that is returned by this function
+      to [gtk.widget.Widget.removeTickCallback].
   
       Params:
-        callback = function to call for updating animations
-      Returns: an id for the connection of this callback. Remove the callback
-          by passing the id returned from this function to
-          [gtk.widget.Widget.removeTickCallback]
+        callback = function
+            to call for updating animations
+      Returns: an ID for this callback
   */
   uint addTickCallback(gtk.types.TickCallback callback) nothrow
   {
@@ -1409,22 +1450,23 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      This function is only used by [gtk.widget.Widget] subclasses, to
-      assign a size, position and (optionally) baseline to their
-      child widgets.
+      Assigns size, position, (optionally) a baseline and transform
+      to a child widget.
       
       In this function, the allocation and baseline may be adjusted.
       The given allocation will be forced to be bigger than the
       widget's minimum size, as well as at least 0×0 in size.
       
+      This function is only used by widget implementations.
+      
       For a version that does not take a transform, see
       [gtk.widget.Widget.sizeAllocate].
   
       Params:
-        width = New width of widget
-        height = New height of widget
-        baseline = New baseline of widget, or -1
-        transform = Transformation to be applied to widget
+        width = new width
+        height = new height
+        baseline = new baseline, or -1
+        transform = transformation to be applied
   */
   void allocate(int width, int height, int baseline, gsk.transform.Transform transform = null) nothrow
   {
@@ -1435,19 +1477,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Called by widgets as the user moves around the window using
       keyboard shortcuts.
       
-      The direction argument indicates what kind of motion is taking place (up,
-      down, left, right, tab forward, tab backward).
+      The direction argument indicates what kind of motion is taking
+      place (up, down, left, right, tab forward, tab backward).
       
-      This function calls the `vfuncGtk.Widget.focus` virtual function; widgets
-      can override the virtual function in order to implement appropriate focus
-      behavior.
+      This function calls the `vfuncGtk.Widget.focus` virtual function;
+      widgets can override the virtual function in order to implement
+      appropriate focus behavior.
       
-      The default `focus()` virtual function for a widget should return `TRUE` if
-      moving in direction left the focus on a focusable location inside that
-      widget, and `FALSE` if moving in direction moved the focus outside the
-      widget. When returning `TRUE`, widgets normally call [gtk.widget.Widget.grabFocus]
-      to place the focus accordingly; when returning `FALSE`, they don’t modify
-      the current focus location.
+      The default `focus()` virtual function for a widget should return
+      true if moving in direction left the focus on a focusable location
+      inside that widget, and false if moving in direction moved the focus
+      outside the widget. When returning true, widgets normally call
+      [gtk.widget.Widget.grabFocus] to place the focus accordingly;
+      when returning false, they don’t modify the current focus location.
       
       This function is used by custom widget implementations; if you're
       writing an app, you’d use [gtk.widget.Widget.grabFocus] to move
@@ -1479,7 +1521,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       It is valid for widget and target to be the same widget.
   
       Params:
-        target = the [gtk.widget.Widget]
+        target = the target widget
         outBounds = the rectangle taking the bounds
       Returns: true if the bounds could be computed
   */
@@ -1493,10 +1535,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Computes whether a container should give this widget
+      Computes whether a parent widget should give this widget
       extra space when possible.
       
-      Containers should check this, rather than looking at
+      Widgets with children should check this, rather than looking at
       [gtk.widget.Widget.getHexpand] or [gtk.widget.Widget.getVexpand].
       
       This function already checks whether the widget is visible, so
@@ -1520,18 +1562,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
   /**
       Translates the given point in widget's coordinates to coordinates
-      relative to target’s coordinate system.
+      in target’s coordinate system.
       
       In order to perform this operation, both widgets must share a
-      common ancestor.
+      a common ancestor. If that is not the case, out_point is set
+      to (0, 0) and false is returned.
   
       Params:
-        target = the [gtk.widget.Widget] to transform into
+        target = the widget to transform into
         point = a point in widget's coordinate system
-        outPoint = Set to the corresponding coordinates in
+        outPoint = set to the corresponding coordinates in
             target's coordinate system
-      Returns: true if the point could be determined, false on failure.
-          In this case, 0 is stored in out_point.
+      Returns: true if src_widget and dest_widget have a common
+          ancestor, false otherwise
   */
   bool computePoint(gtk.widget.Widget target, graphene.point.Point point, out graphene.point.Point outPoint) nothrow
   {
@@ -1555,7 +1598,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         target = the target widget that the matrix will transform to
         outTransform = location to
             store the final transformation
-      Returns: true if the transform could be computed, false otherwise
+      Returns: true if the transform could be computed
   */
   bool computeTransform(gtk.widget.Widget target, out graphene.matrix.Matrix outTransform) nothrow
   {
@@ -1567,15 +1610,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Tests if the point at (`x`, `y`) is contained in widget.
+      Tests if a given point is contained in the widget.
       
-      The coordinates for (`x`, `y`) must be in widget coordinates, so
+      The coordinates for (x, y) must be in widget coordinates, so
       (0, 0) is assumed to be the top left of widget's content area.
   
       Params:
         x = X coordinate to test, relative to widget's origin
         y = Y coordinate to test, relative to widget's origin
-      Returns: true if widget contains (`x`, `y`).
+      Returns: true if widget contains the point (x, y)
   */
   bool contains(double x, double y) nothrow
   {
@@ -1585,9 +1628,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Creates a new [pango.context.Context] with the appropriate font map,
-      font options, font description, and base direction for drawing
-      text for this widget.
+      Creates a new [pango.context.Context] that is configured for the widget.
+      
+      The [pango.context.Context] will have the appropriate font map,
+      font options, font description, and base direction set.
       
       See also [gtk.widget.Widget.getPangoContext].
       Returns: the new [pango.context.Context]
@@ -1601,12 +1645,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Creates a new [pango.layout.Layout] with the appropriate font map,
-      font description, and base direction for drawing text for
-      this widget.
+      Creates a new [pango.layout.Layout] that is configured for the widget.
+      
+      The [pango.layout.Layout] will have the appropriate font map,
+      font description, and base direction set.
       
       If you keep a [pango.layout.Layout] created in this way around,
-      you need to re-create it when the widget [pango.context.Context]
+      you need to re-create it when the widgets [pango.context.Context]
       is replaced. This can be tracked by listening to changes
       of the [gtk.widget.Widget.root] property on the widget.
   
@@ -1624,16 +1669,16 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Clears the template children for the given widget.
+      Clears the template children for the widget.
       
-      This function is the opposite of [gtk.widget.Widget.initTemplate], and
-      it is used to clear all the template children from a widget instance.
-      If you bound a template child to a field in the instance structure, or
-      in the instance private data structure, the field will be set to `NULL`
-      after this function returns.
+      This function is the opposite of [gtk.widget.Widget.initTemplate],
+      and it is used to clear all the template children from a widget
+      instance. If you bound a template child to a field in the instance
+      structure, or in the instance private data structure, the field will
+      be set to `NULL` after this function returns.
       
       You should call this function inside the `GObjectClass.dispose()`
-      implementation of any widget that called `[gtk.widget.Widget.initTemplate]`.
+      implementation of any widget that called [gtk.widget.Widget.initTemplate].
       Typically, you will want to call this function last, right before
       chaining up to the parent type's dispose implementation, e.g.
       
@@ -1666,7 +1711,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         startY = Y coordinate of start of drag
         currentX = current X coordinate
         currentY = current Y coordinate
-      Returns: true if the drag threshold has been passed.
+      Returns: true if the drag threshold has been passed
   */
   bool dragCheckThreshold(int startX, int startY, int currentX, int currentY) nothrow
   {
@@ -1676,7 +1721,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Notifies the user about an input-related error on this widget.
+      Notifies the user about an input-related error on the widget.
       
       If the [gtk.settings.Settings.gtkErrorBell] setting is true,
       it calls [gdk.surface.Surface.beep], otherwise it does nothing.
@@ -1691,7 +1736,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the baseline that has currently been allocated to widget.
+      Returns the baseline that has currently been allocated to the widget.
       
       This function is intended to be used when implementing handlers
       for the [gtk.widget.Widget]Class.snapshot() function, and when allocating
@@ -1708,7 +1753,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the height that has currently been allocated to widget.
+      Returns the height that has currently been allocated to the widget.
       
       To learn more about widget sizes, see the coordinate
       system [overview](coordinates.html).
@@ -1724,7 +1769,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the width that has currently been allocated to widget.
+      Returns the width that has currently been allocated to the widget.
       
       To learn more about widget sizes, see the coordinate
       system [overview](coordinates.html).
@@ -1742,7 +1787,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Retrieves the widget’s allocation.
       
-      Note, when implementing a layout container: a widget’s allocation
+      Note, when implementing a layout widget: a widget’s allocation
       will be its “adjusted” allocation, that is, the widget’s parent
       typically calls [gtk.widget.Widget.sizeAllocate] with an allocation,
       and that allocation is then adjusted (to handle margin
@@ -1752,9 +1797,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       guaranteed to be completely contained within the
       [gtk.widget.Widget.sizeAllocate] allocation, however.
       
-      So a layout container is guaranteed that its children stay inside
+      So a layout widget is guaranteed that its children stay inside
       the assigned bounds, but not that they have exactly the bounds the
-      container assigned.
+      widget assigned.
   
       Params:
         allocation = a pointer to a `GtkAllocation` to copy to
@@ -1768,7 +1813,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the first ancestor of widget with type widget_type.
+      Gets the first ancestor of the widget with type widget_type.
       
       For example, `gtk_widget_get_ancestor (widget, GTK_TYPE_BOX)`
       gets the first [gtk.box.Box] that’s an ancestor of widget. No
@@ -1791,11 +1836,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the baseline that has currently been allocated to widget.
+      Returns the baseline that has currently been allocated to the widget.
       
       This function is intended to be used when implementing handlers
-      for the [gtk.widget.Widget]Class.snapshot() function, and when allocating
-      child widgets in [gtk.widget.Widget]Class.size_allocate().
+      for the `GtkWidgetClass.snapshot()` function, and when allocating
+      child widgets in `GtkWidgetClass.size_allocate()`.
       Returns: the baseline of the widget, or -1 if none
   */
   int getBaseline() nothrow
@@ -1806,11 +1851,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Determines whether the input focus can enter widget or any
+      Determines whether the input focus can enter the widget or any
       of its children.
       
-      See [gtk.widget.Widget.setFocusable].
-      Returns: true if the input focus can enter widget, false otherwise
+      See [gtk.widget.Widget.setCanFocus].
+      Returns: true if the input focus can enter widget
   */
   bool getCanFocus() nothrow
   {
@@ -1820,7 +1865,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Queries whether widget can be the target of pointer events.
+      Queries whether the widget can be the target of pointer events.
       Returns: true if widget can receive pointer events
   */
   bool getCanTarget() nothrow
@@ -1836,9 +1881,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       If you feel a need to use this function, your code probably
       needs reorganization.
       
-      This function is only useful for container implementations
+      This function is only useful for widget implementations
       and should never be called by an application.
-      Returns: true if the widget is mapped with the parent.
+      Returns: true if the widget is mapped with the parent
   */
   bool getChildVisible() nothrow
   {
@@ -1848,10 +1893,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the clipboard object for widget.
+      Gets the clipboard object for the widget.
       
       This is a utility function to get the clipboard object for the
-      [gdk.display.Display] that widget is using.
+      display that widget is using.
       
       Note that this function always works, even when widget is not
       realized yet.
@@ -1866,12 +1911,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the current foreground color for the widget’s
-      CSS style.
+      Gets the current foreground color for the widget’s style.
       
       This function should only be used in snapshot
-      implementations that need to do custom
-      drawing with the foreground color.
+      implementations that need to do custom drawing
+      with the foreground color.
   
       Params:
         color = return location for the color
@@ -1882,10 +1926,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the list of style classes applied to widget.
-      Returns: a null-terminated list of
-          css classes currently applied to widget. The returned
-          list must freed using [glib.global.strfreev].
+      Returns the list of style classes applied to the widget.
+      Returns: a `NULL`-terminated list of
+          css classes currently applied to widget
   */
   string[] getCssClasses() nothrow
   {
@@ -1907,7 +1950,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the CSS name that is used for self.
+      Returns the CSS name of the widget.
       Returns: the CSS name
   */
   string getCssName() nothrow
@@ -1919,11 +1962,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Queries the cursor set on widget.
+      Gets the cursor set on the widget.
       
       See [gtk.widget.Widget.setCursor] for details.
       Returns: the cursor
-          currently in use or null if the cursor is inherited
+          that is set on widget
   */
   gdk.cursor.Cursor getCursor() nothrow
   {
@@ -1934,10 +1977,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the reading direction for a particular widget.
+      Gets the reading direction for the widget.
       
       See [gtk.widget.Widget.setDirection].
-      Returns: the reading direction for the widget.
+      Returns: the reading direction for the widget
   */
   gtk.types.TextDirection getDirection() nothrow
   {
@@ -1948,17 +1991,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Get the [gdk.display.Display] for the toplevel window associated with
-      this widget.
+      Get the display for the window that the widget belongs to.
       
       This function can only be called after the widget has been
-      added to a widget hierarchy with a [gtk.window.Window] at the top.
+      added to a widget hierarchy with a [gtk.root.Root] at the top.
       
-      In general, you should only create display specific
+      In general, you should only create display-specific
       resources when a widget has been realized, and you should
       free those resources when the widget is unrealized.
-      Returns: the [gdk.display.Display] for the toplevel
-          for this widget.
+      Returns: the display for this widget
   */
   gdk.display.Display getDisplay() nothrow
   {
@@ -1971,8 +2012,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Returns the widget’s first child.
       
-      This API is primarily meant for widget implementations.
-      Returns: The widget's first child
+      This function is primarily meant for widget implementations.
+      Returns: the widget's first child
   */
   gtk.widget.Widget getFirstChild() nothrow
   {
@@ -1983,8 +2024,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the current focus child of widget.
-      Returns: The current focus
+      Returns the focus child of the widget.
+      Returns: the current focus
           child of widget
   */
   gtk.widget.Widget getFocusChild() nothrow
@@ -2011,10 +2052,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Determines whether widget can own the input focus.
+      Determines whether the widget can own the input focus.
       
       See [gtk.widget.Widget.setFocusable].
-      Returns: true if widget can own the input focus, false otherwise
+      Returns: true if widget can own the input focus
   */
   bool getFocusable() nothrow
   {
@@ -2024,10 +2065,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the font map of widget.
+      Gets the font map of the widget.
       
       See [gtk.widget.Widget.setFontMap].
-      Returns: A [pango.font_map.FontMap]
+      Returns: the font map of widget
   */
   pango.font_map.FontMap getFontMap() nothrow
   {
@@ -2038,11 +2079,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the [cairo.font_options.FontOptions] of widget.
+      Returns the [cairo.font_options.FontOptions] of the widget.
       
       Seee [gtk.widget.Widget.setFontOptions].
-      Returns: the [cairo.font_options.FontOptions]
-          of widget
+      Returns: the [cairo.font_options.FontOptions] of widget
   */
   cairo.font_options.FontOptions getFontOptions() nothrow
   {
@@ -2064,18 +2104,18 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       by calling [gdk.frame_clock.FrameClock.getFrameTime] again during each repaint.
       
       [gdk.frame_clock.FrameClock.requestPhase] will result in a new frame on the
-      clock, but won’t necessarily repaint any widgets. To repaint a
-      widget, you have to use [gtk.widget.Widget.queueDraw] which invalidates
-      the widget (thus scheduling it to receive a draw on the next
-      frame). [gtk.widget.Widget.queueDraw] will also end up requesting a frame
+      clock, but won’t necessarily repaint any widgets. To repaint a widget,
+      you have to use [gtk.widget.Widget.queueDraw] which invalidates the
+      widget (thus scheduling it to receive a draw on the next frame).
+      [gtk.widget.Widget.queueDraw] will also end up requesting a frame
       on the appropriate frame clock.
       
-      A widget’s frame clock will not change while the widget is
-      mapped. Reparenting a widget (which implies a temporary unmap) can
-      change the widget’s frame clock.
+      A widget’s frame clock will not change while the widget is mapped.
+      Reparenting a widget (which implies a temporary unmap) can change
+      the widget’s frame clock.
       
       Unrealized widgets do not have a frame clock.
-      Returns: a [gdk.frame_clock.FrameClock]
+      Returns: the frame clock
   */
   gdk.frame_clock.FrameClock getFrameClock() nothrow
   {
@@ -2086,7 +2126,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the horizontal alignment of widget.
+      Gets the horizontal alignment of the widget.
       
       For backwards compatibility reasons this method will never return
       one of the baseline alignments, but instead it will convert it to
@@ -2105,7 +2145,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
   /**
       Returns the current value of the `has-tooltip` property.
-      Returns: current value of `has-tooltip` on widget.
+      Returns: current value of `has-tooltip` on widget
   */
   bool getHasTooltip() nothrow
   {
@@ -2138,13 +2178,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Gets whether the widget would like any available extra horizontal
       space.
       
-      When a user resizes a [gtk.window.Window], widgets with expand=TRUE
-      generally receive the extra space. For example, a list or
-      scrollable area or document in your window would often be set to
-      expand.
+      When a user resizes a window, widgets with expand set to true generally
+      receive the extra space. For example, a list or scrollable area
+      or document in your window would often be set to expand.
       
-      Containers should use [gtk.widget.Widget.computeExpand] rather
-      than this function, to see whether a widget, or any of its children,
+      Widgets with children should use [gtk.widget.Widget.computeExpand]
+      rather than this function, to see whether any of its children,
       has the expand flag set. If any child of a widget wants to
       expand, the parent may ask to expand also.
       
@@ -2161,8 +2200,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets whether [gtk.widget.Widget.setHexpand] has been used
-      to explicitly set the expand flag on this widget.
+      Gets whether the `hexpand` flag has been explicitly set.
       
       If [gtk.widget.Widget.hexpand] property is set, then it
       overrides any computed expand value based on child widgets.
@@ -2183,8 +2221,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Returns the widget’s last child.
       
-      This API is primarily meant for widget implementations.
-      Returns: The widget's last child
+      This function is primarily meant for widget implementations.
+      Returns: the widget's last child
   */
   gtk.widget.Widget getLastChild() nothrow
   {
@@ -2195,10 +2233,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Retrieves the layout manager used by widget.
+      Retrieves the layout manager of the widget.
       
       See [gtk.widget.Widget.setLayoutManager].
-      Returns: a [gtk.layout_manager.LayoutManager]
+      Returns: the layout manager of widget
   */
   gtk.layout_manager.LayoutManager getLayoutManager() nothrow
   {
@@ -2209,8 +2247,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Whether the widget is mapped.
-      Returns: true if the widget is mapped, false otherwise.
+      Gets the value of the [gtk.widget.Widget.limitEvents] property.
+      Returns: 
+  */
+  bool getLimitEvents() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_widget_get_limit_events(cast(GtkWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the widget is mapped.
+      Returns: true if the widget is mapped
   */
   bool getMapped() nothrow
   {
@@ -2220,7 +2269,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the bottom margin of widget.
+      Gets the bottom margin of the widget.
       Returns: The bottom margin of widget
   */
   int getMarginBottom() nothrow
@@ -2231,7 +2280,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the end margin of widget.
+      Gets the end margin of the widget.
       Returns: The end margin of widget
   */
   int getMarginEnd() nothrow
@@ -2242,7 +2291,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the start margin of widget.
+      Gets the start margin of the widget.
       Returns: The start margin of widget
   */
   int getMarginStart() nothrow
@@ -2253,7 +2302,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the top margin of widget.
+      Gets the top margin of the widget.
       Returns: The top margin of widget
   */
   int getMarginTop() nothrow
@@ -2267,8 +2316,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Retrieves the name of a widget.
       
       See [gtk.widget.Widget.setName] for the significance of widget names.
-      Returns: name of the widget. This string is owned by GTK and
-          should not be modified or freed
+      Returns: name of the widget
   */
   string getName() nothrow
   {
@@ -2279,9 +2327,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the nearest [gtk.native.Native] ancestor of widget.
+      Returns the nearest [gtk.native.Native] ancestor of the widget.
       
-      This function will return null if the widget is not
+      This function will return `NULL` if the widget is not
       contained inside a widget tree with a native ancestor.
       
       [gtk.native.Native] widgets will return themselves here.
@@ -2298,8 +2346,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Returns the widget’s next sibling.
       
-      This API is primarily meant for widget implementations.
-      Returns: The widget's next sibling
+      This function is primarily meant for widget implementations.
+      Returns: the widget's next sibling
   */
   gtk.widget.Widget getNextSibling() nothrow
   {
@@ -2310,10 +2358,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      #Fetches the requested opacity for this widget.
+      Fetches the requested opacity for the widget.
       
       See [gtk.widget.Widget.setOpacity].
-      Returns: the requested opacity for this widget.
+      Returns: the requested opacity for this widget
   */
   double getOpacity() nothrow
   {
@@ -2324,7 +2372,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 
   /**
       Returns the widget’s overflow value.
-      Returns: The widget's overflow.
+      Returns: The widget's overflow value
   */
   gtk.types.Overflow getOverflow() nothrow
   {
@@ -2335,8 +2383,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets a [pango.context.Context] with the appropriate font map, font description,
-      and base direction for this widget.
+      Gets a [pango.context.Context] that is configured for the widget.
+      
+      The [pango.context.Context] will have the appropriate font map, font description,
+      and base direction set.
       
       Unlike the context returned by [gtk.widget.Widget.createPangoContext],
       this context is owned by the widget (it can be used until the screen
@@ -2344,7 +2394,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       and will be updated to match any changes to the widget’s attributes.
       This can be tracked by listening to changes of the
       [gtk.widget.Widget.root] property on the widget.
-      Returns: the [pango.context.Context] for the widget.
+      Returns: the [pango.context.Context] for the widget
   */
   pango.context.Context getPangoContext() nothrow
   {
@@ -2355,7 +2405,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the parent widget of widget.
+      Returns the parent widget of the widget.
       Returns: the parent widget of widget
   */
   gtk.widget.Widget getParent() nothrow
@@ -2394,8 +2444,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Returns the widget’s previous sibling.
       
-      This API is primarily meant for widget implementations.
-      Returns: The widget's previous sibling
+      This function is primarily meant for widget implementations.
+      Returns: the widget's previous sibling
   */
   gtk.widget.Widget getPrevSibling() nothrow
   {
@@ -2406,10 +2456,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the primary clipboard of widget.
+      Gets the primary clipboard of the widget.
       
       This is a utility function to get the primary clipboard object
-      for the [gdk.display.Display] that widget is using.
+      for the display that widget is using.
       
       Note that this function always works, even when widget is not
       realized yet.
@@ -2424,8 +2474,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Determines whether widget is realized.
-      Returns: true if widget is realized, false otherwise
+      Determines whether the widget is realized.
+      Returns: true if widget is realized
   */
   bool getRealized() nothrow
   {
@@ -2435,13 +2485,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Determines whether widget is always treated as the default widget
+      Determines whether the widget is always treated as the default widget
       within its toplevel when it has the focus, even if another widget
       is the default.
       
       See [gtk.widget.Widget.setReceivesDefault].
-      Returns: true if widget acts as the default widget when focused,
-          false otherwise
+      Returns: true if widget acts as the default widget when focused
   */
   bool getReceivesDefault() nothrow
   {
@@ -2469,9 +2518,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the [gtk.root.Root] widget of widget.
+      Returns the [gtk.root.Root] widget of the widget.
       
-      This function will return null if the widget is not contained
+      This function will return `NULL` if the widget is not contained
       inside a widget tree with a root widget.
       
       [gtk.root.Root] widgets will return themselves here.
@@ -2493,6 +2542,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       it can be a higher value (typically 2).
       
       See [gdk.surface.Surface.getScaleFactor].
+      
+      Note that modern systems may support *fractional* scaling,
+      where the scale factor is not an integer. On such systems,
+      this function will return the next higher integer value,
+      but you probably want to use [gdk.surface.Surface.getScale]
+      to get the fractional scale value.
       Returns: the scale factor for widget
   */
   int getScaleFactor() nothrow
@@ -2521,13 +2576,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the settings object holding the settings used for this widget.
+      Gets the settings object holding the settings used for the widget.
       
       Note that this function can only be called when the [gtk.widget.Widget]
       is attached to a toplevel, since the settings object is specific
-      to a particular [gdk.display.Display]. If you want to monitor the widget for
+      to a particular display. If you want to monitor the widget for
       changes in its settings, connect to the `notify::display` signal.
-      Returns: the relevant [gtk.settings.Settings] object
+      Returns: the relevant settings object
   */
   gtk.settings.Settings getSettings() nothrow
   {
@@ -2553,7 +2608,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
       Params:
         orientation = the orientation to query
-      Returns: The size of widget in orientation.
+      Returns: the size of widget in orientation
   */
   int getSize(gtk.types.Orientation orientation) nothrow
   {
@@ -2563,15 +2618,16 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the size request that was explicitly set for the widget using
-      [gtk.widget.Widget.setSizeRequest].
+      Gets the size request that was explicitly set for the widget.
       
       A value of -1 stored in width or height indicates that that
       dimension has not been set explicitly and the natural requisition
-      of the widget will be used instead. See
-      [gtk.widget.Widget.setSizeRequest]. To get the size a widget will
-      actually request, call [gtk.widget.Widget.measure] instead of
-      this function.
+      of the widget will be used instead.
+      
+      See [gtk.widget.Widget.setSizeRequest].
+      
+      To get the size a widget will actually request, call
+      [gtk.widget.Widget.measure] instead of this function.
   
       Params:
         width = return location for width
@@ -2592,7 +2648,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Also note that if you are looking for a way to obtain the
       [gtk.types.StateFlags] to pass to a [gtk.style_context.StyleContext]
       method, you should look at [gtk.style_context.StyleContext.getState].
-      Returns: The state flags for widget
+      Returns: the state flags of widget
   */
   gtk.types.StateFlags getStateFlags() nothrow
   {
@@ -2603,11 +2659,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns the style context associated to widget.
+      Returns the style context associated to the widget.
       
       The returned object is guaranteed to be the same
       for the lifetime of widget.
-      Returns: the widget’s [gtk.style_context.StyleContext]
+      Returns: the widgets style context
   
       Deprecated: Style contexts will be removed in GTK 5
   */
@@ -2620,8 +2676,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Fetch an object build from the template XML for widget_type in
-      this widget instance.
+      Fetches an object build from the template XML for widget_type in
+      the widget.
       
       This will only report children which were previously declared
       with [gtk.widget_class.WidgetClass.bindTemplateChildFull] or one of its
@@ -2632,9 +2688,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       bindings which cannot easily make use of the GObject structure offsets.
   
       Params:
-        widgetType = The `GType` to get a template child for
-        name = The “id” of the child defined in the template XML
-      Returns: The object built in the template XML with
+        widgetType = The type of the widget class that defines the child in the template
+        name = ID of the child defined in the template XML
+      Returns: the object built in the template XML with
           the id name
   */
   gobject.object.ObjectWrap getTemplateChild(gobject.types.GType widgetType, string name) nothrow
@@ -2647,11 +2703,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the contents of the tooltip for widget.
+      Gets the contents of the tooltip for the widget.
       
       If the tooltip has not been set using
       [gtk.widget.Widget.setTooltipMarkup], this
-      function returns null.
+      function returns `NULL`.
       Returns: the tooltip text
   */
   string getTooltipMarkup() nothrow
@@ -2663,7 +2719,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the contents of the tooltip for widget.
+      Gets the contents of the tooltip for the widget.
       
       If the widget's tooltip was set using
       [gtk.widget.Widget.setTooltipMarkup],
@@ -2679,7 +2735,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets the vertical alignment of widget.
+      Gets the vertical alignment of the widget.
       Returns: the vertical alignment of widget
   */
   gtk.types.Align getValign() nothrow
@@ -2705,8 +2761,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Gets whether [gtk.widget.Widget.setVexpand] has been used to
-      explicitly set the expand flag on this widget.
+      Gets whether the `vexpand` flag has been explicitly set.
       
       See [gtk.widget.Widget.getHexpandSet] for more detail.
       Returns: whether vexpand has been explicitly set
@@ -2759,7 +2814,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Causes widget to have the keyboard focus for the [gtk.window.Window] it's inside.
+      Causes widget to have the keyboard focus for the window
+      that it belongs to.
       
       If widget is not focusable, or its `vfuncGtk.Widget.grab_focus`
       implementation cannot transfer the focus to a descendant of widget
@@ -2767,7 +2823,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       
       Calling [gtk.widget.Widget.grabFocus] on an already focused widget
       is allowed, should not have an effect, and return true.
-      Returns: true if focus is now inside widget.
+      Returns: true if focus is now inside widget
   */
   bool grabFocus() nothrow
   {
@@ -2777,13 +2833,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns whether css_class is currently applied to widget.
+      Returns whether a style class is currently applied to the widget.
   
       Params:
-        cssClass = A style class, without the leading '.'
-            used for notation of style classes
-      Returns: true if css_class is currently applied to widget,
-          false otherwise.
+        cssClass = style class, without the leading period
+      Returns: true if css_class is currently applied to widget
   */
   bool hasCssClass(string cssClass) nothrow
   {
@@ -2794,10 +2848,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Determines whether widget is the current default widget
+      Determines whether the widget is the current default widget
       within its toplevel.
       Returns: true if widget is the current default widget
-          within its toplevel, false otherwise
+          within its toplevel
   */
   bool hasDefault() nothrow
   {
@@ -2812,7 +2866,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       See [gtk.widget.Widget.isFocus] for the difference between
       having the global input focus, and only having the focus
       within a toplevel.
-      Returns: true if the widget has the global input focus.
+      Returns: true if the widget has the global input focus
   */
   bool hasFocus() nothrow
   {
@@ -2842,7 +2896,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Reverses the effects of [gtk.widget.Widget.show].
+      Reverses the effects of [method.Gtk.Widget.show].
       
       This is causing the widget to be hidden (invisible to the user).
   
@@ -2875,7 +2929,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       [gtk.widget_class.WidgetClass.setTemplate].
       
       It is important to call this function in the instance initializer
-      of a [gtk.widget.Widget] subclass and not in `GObject.constructed()` or
+      of a widget subclass and not in `GObject.constructed()` or
       `GObject.constructor()` for two reasons:
       
        - derived widgets will assume that the composite widgets
@@ -2895,7 +2949,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Inserts group into widget.
+      Inserts an action group into the widget's actions.
       
       Children of widget that implement [gtk.actionable.Actionable] can
       then be associated with actions in group by setting their
@@ -2906,13 +2960,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       the same prefix will still be inherited from the parent, unless
       the group contains an action with the same name.
       
-      If group is null, a previously inserted group for name is
+      If group is `NULL`, a previously inserted group for name is
       removed from widget.
   
       Params:
         name = the prefix for actions in group
-        group = a [gio.action_group.ActionGroup], or null to remove
-            the previously inserted group for name
+        group = an action group
   */
   void insertActionGroup(string name, gio.action_group.ActionGroup group = null) nothrow
   {
@@ -2921,23 +2974,27 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Inserts widget into the child widget list of parent.
+      Sets the parent widget of the widget.
+      
+      In contrast to [gtk.widget.Widget.setParent], this function
+      inserts widget at a specific position into the list of children
+      of the parent widget.
       
       It will be placed after previous_sibling, or at the beginning if
-      previous_sibling is null.
+      previous_sibling is `NULL`.
       
-      After calling this function, `gtk_widget_get_prev_sibling(widget)`
+      After calling this function, `gtk_widget_get_prev_sibling (widget)`
       will return previous_sibling.
       
       If parent is already set as the parent widget of widget, this
       function can also be used to reorder widget in the child widget
       list of parent.
       
-      This API is primarily meant for widget implementations; if you are
+      This function is primarily meant for widget implementations; if you are
       just using a widget, you *must* use its own API for adding children.
   
       Params:
-        parent = the parent [gtk.widget.Widget] to insert widget into
+        parent = the parent widget to insert widget into
         previousSibling = the new previous sibling of widget
   */
   void insertAfter(gtk.widget.Widget parent, gtk.widget.Widget previousSibling = null) nothrow
@@ -2946,22 +3003,26 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Inserts widget into the child widget list of parent.
+      Sets the parent widget of the widget.
+      
+      In contrast to [gtk.widget.Widget.setParent], this function
+      inserts widget at a specific position into the list of children
+      of the parent widget.
       
       It will be placed before next_sibling, or at the end if
-      next_sibling is null.
+      next_sibling is `NULL`.
       
-      After calling this function, `gtk_widget_get_next_sibling(widget)`
+      After calling this function, `gtk_widget_get_next_sibling (widget)`
       will return next_sibling.
       
       If parent is already set as the parent widget of widget, this function
       can also be used to reorder widget in the child widget list of parent.
       
-      This API is primarily meant for widget implementations; if you are
+      This function is primarily meant for widget implementations; if you are
       just using a widget, you *must* use its own API for adding children.
   
       Params:
-        parent = the parent [gtk.widget.Widget] to insert widget into
+        parent = the parent widget to insert widget into
         nextSibling = the new next sibling of widget
   */
   void insertBefore(gtk.widget.Widget parent, gtk.widget.Widget nextSibling = null) nothrow
@@ -2970,13 +3031,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Determines whether widget is somewhere inside ancestor,
-      possibly with intermediate containers.
+      Determines whether the widget is a descendent of ancestor.
   
       Params:
         ancestor = another [gtk.widget.Widget]
       Returns: true if ancestor contains widget as a child,
-          grandchild, great grandchild, etc.
+          grandchild, great grandchild, etc
   */
   bool isAncestor(gtk.widget.Widget ancestor) nothrow
   {
@@ -2986,10 +3046,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Determines whether widget can be drawn to.
+      Determines whether the widget can be drawn to.
       
       A widget can be drawn if it is mapped and visible.
-      Returns: true if widget is drawable, false otherwise
+      Returns: true if widget is drawable
   */
   bool isDrawable() nothrow
   {
@@ -3006,7 +3066,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       property is necessarily set; [gtk.widget.Widget.hasFocus]
       will only be set if the toplevel widget additionally has the
       global input focus.
-      Returns: true if the widget is the focus widget.
+      Returns: true if the widget is the focus widget
   */
   bool isFocus() nothrow
   {
@@ -3047,7 +3107,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Emits the `::keynav-failed` signal on the widget.
+      Emits the [gtk.widget.Widget.keynavFailed] signal on the widget.
       
       This function should be called whenever keyboard navigation
       within a single widget hits a boundary.
@@ -3055,21 +3115,22 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       The return value of this function should be interpreted
       in a way similar to the return value of
       [gtk.widget.Widget.childFocus]. When true is returned,
-      stay in the widget, the failed keyboard  navigation is OK
+      stay in the widget, the failed keyboard navigation is ok
       and/or there is nowhere we can/should move the focus to.
       When false is returned, the caller should continue with
       keyboard navigation outside the widget, e.g. by calling
       [gtk.widget.Widget.childFocus] on the widget’s toplevel.
       
       The default [gtk.widget.Widget.keynavFailed] handler returns
-      false for [gtk.types.DirectionType.TabForward] and [gtk.types.DirectionType.TabBackward].
-      For the other values of [gtk.types.DirectionType] it returns true.
+      false for `enumGtk.DirectionType.tab-forward` and
+      `enumGtk.DirectionType.tab-backward`. For the other values
+      of [gtk.types.DirectionType] it returns true.
       
       Whenever the default handler returns true, it also calls
       [gtk.widget.Widget.errorBell] to notify the user of the
       failed keyboard navigation.
       
-      A use case for providing an own implementation of ::keynav-failed
+      A use case for providing an own implementation of `::keynav-failed`
       (either by connecting to it or by overriding it) would be a row of
       [gtk.entry.Entry] widgets where the user should be able to navigate
       the entire row with the cursor keys, as e.g. known from user
@@ -3079,7 +3140,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         direction = direction of focus movement
       Returns: true if stopping keyboard navigation is fine, false
           if the emitting widget should try to handle the keyboard
-          navigation attempt in its parent container(s).
+          navigation attempt in its parent widget
   */
   bool keynavFailed(gtk.types.DirectionType direction) nothrow
   {
@@ -3101,8 +3162,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       must call `g_list_foreach (result, (GFunc)g_object_ref, NULL)`
       first, and then unref all the widgets afterwards.
       Returns: the list
-          of mnemonic labels; free this list with [glib.list.List.free] when you
-          are done with it.
+          of mnemonic labels
   */
   gtk.widget.Widget[] listMnemonicLabels() nothrow
   {
@@ -3152,9 +3212,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Emits the ::mnemonic-activate signal.
-      
-      See [gtk.widget.Widget.mnemonicActivate].
+      Emits the [gtk.widget.Widget.mnemonicActivate] signal.
   
       Params:
         groupCycling = true if there are other widgets with the same mnemonic
@@ -3168,7 +3226,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns a [gio.list_model.ListModel] to track the children of widget.
+      Returns a list model to track the children of the widget.
       
       Calling this function will enable extra internal bookkeeping
       to track children and emit signals on the returned listmodel.
@@ -3176,7 +3234,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       
       Applications should try hard to avoid calling this function
       because of the slowdowns.
-      Returns: a [gio.list_model.ListModel] tracking widget's children
+      Returns: a list model tracking widget's children
   */
   gio.list_model.ListModel observeChildren() nothrow
   {
@@ -3187,8 +3245,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns a [gio.list_model.ListModel] to track the [gtk.event_controller.EventController]s
-      of widget.
+      Returns a list model to track the event controllers of the widget.
       
       Calling this function will enable extra internal bookkeeping
       to track controllers and emit signals on the returned listmodel.
@@ -3196,7 +3253,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       
       Applications should try hard to avoid calling this function
       because of the slowdowns.
-      Returns: a [gio.list_model.ListModel] tracking widget's controllers
+      Returns: a list model tracking widget's controllers
   */
   gio.list_model.ListModel observeControllers() nothrow
   {
@@ -3207,15 +3264,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Finds the descendant of widget closest to the point (`x`, `y`).
+      Finds the descendant of the widget closest to a point.
       
-      The point must be given in widget coordinates, so (0, 0) is assumed
-      to be the top left of widget's content area.
+      The point (x, y) must be given in widget coordinates, so (0, 0)
+      is assumed to be the top left of widget's content area.
       
-      Usually widgets will return null if the given coordinate is not
+      Usually widgets will return `NULL` if the given coordinate is not
       contained in widget checked via [gtk.widget.Widget.contains].
       Otherwise they will recursively try to find a child that does
-      not return null. Widgets are however free to customize their
+      not return `NULL`. Widgets are however free to customize their
       picking algorithm.
       
       This function is used on the toplevel to determine the widget
@@ -3223,11 +3280,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       delivering events.
   
       Params:
-        x = X coordinate to test, relative to widget's origin
-        y = Y coordinate to test, relative to widget's origin
-        flags = Flags to influence what is picked
-      Returns: The widget descendant at
-          the given point
+        x = x coordinate to test, relative to widget's origin
+        y = y coordinate to test, relative to widget's origin
+        flags = flags to influence what is picked
+      Returns: the widget's descendant at (x, y)
   */
   gtk.widget.Widget pick(double x, double y, gtk.types.PickFlags flags) nothrow
   {
@@ -3255,7 +3311,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Schedules this widget to be redrawn in the paint phase
+      Schedules this widget to be redrawn.
+      
+      The redraw will happen in the paint phase
       of the current or the next frame.
       
       This means widget's `vfuncGtk.Widget.snapshot`
@@ -3310,16 +3368,16 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Removes controller from widget, so that it doesn't process
-      events anymore.
+      Removes an event controller from the widget.
       
-      It should not be used again.
+      The removed event controller will not receive any more events,
+      and should not be used again.
       
       Widgets will remove all event controllers automatically when they
       are destroyed, there is normally no need to call this function.
   
       Params:
-        controller = a [gtk.event_controller.EventController]
+        controller = an event controller
   */
   void removeController(gtk.event_controller.EventController controller) nothrow
   {
@@ -3327,13 +3385,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Removes a style from widget.
+      Removes a style from the widget.
       
       After this, the style of widget will stop matching for css_class.
   
       Params:
-        cssClass = The style class to remove from widget, without
-            the leading '.' used for notation of style classes
+        cssClass = style class to remove from widget, without the leading period
   */
   void removeCssClass(string cssClass) nothrow
   {
@@ -3344,13 +3401,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Removes a widget from the list of mnemonic labels for this widget.
       
-      See [gtk.widget.Widget.listMnemonicLabels]. The widget must
-      have previously been added to the list with
+      See [gtk.widget.Widget.listMnemonicLabels].
+      
+      The widget must have previously been added to the list with
       [gtk.widget.Widget.addMnemonicLabel].
   
       Params:
-        label = a [gtk.widget.Widget] that was previously set as a mnemonic
-            label for widget with [gtk.widget.Widget.addMnemonicLabel]
+        label = a widget that is a mnemonic label for widget
   */
   void removeMnemonicLabel(gtk.widget.Widget label) nothrow
   {
@@ -3362,7 +3419,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       [gtk.widget.Widget.addTickCallback].
   
       Params:
-        id = an id returned by [gtk.widget.Widget.addTickCallback]
+        id = an ID returned by [gtk.widget.Widget.addTickCallback]
   */
   void removeTickCallback(uint id) nothrow
   {
@@ -3370,8 +3427,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Specifies whether the input focus can enter the widget
-      or any of its children.
+      Sets whether the input focus can enter the widget or
+      any of its children.
       
       Applications should set can_focus to false to mark a
       widget as for pointer/touch use only.
@@ -3386,7 +3443,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       the input focus on a widget.
   
       Params:
-        canFocus = whether or not the input focus can enter
+        canFocus = whether the input focus can enter
             the widget or any of its children
   */
   void setCanFocus(bool canFocus) nothrow
@@ -3395,7 +3452,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets whether widget can be the target of pointer events.
+      Sets whether the widget can be the target of pointer events.
   
       Params:
         canTarget = whether this widget should be able to
@@ -3407,7 +3464,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets whether widget should be mapped along with its parent.
+      Sets whether the widget should be mapped along with its parent.
       
       The child visibility can be set for widget before it is added
       to a container with [gtk.widget.Widget.setParent], to avoid
@@ -3421,12 +3478,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       not they are mapped. If this is not the case, the container
       can queue a resize itself.
       
-      This function is only useful for container implementations
+      This function is only useful for widget implementations
       and should never be called by an application.
   
       Params:
-        childVisible = if true, widget should be mapped along
-            with its parent.
+        childVisible = whether widget should be mapped along
+            with its parent
   */
   void setChildVisible(bool childVisible) nothrow
   {
@@ -3434,11 +3491,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Clear all style classes applied to widget
-      and replace them with classes.
+      Replaces the current style classes of the widget with classes.
   
       Params:
-        classes = null-terminated list of style classes to apply to widget.
+        classes = `NULL`-terminated list of style classes
   */
   void setCssClasses(string[] classes) nothrow
   {
@@ -3449,11 +3505,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the cursor to be shown when pointer devices point
-      towards widget.
+      Sets the cursor to be shown when the pointer hovers over
+      the widget.
       
-      If the cursor is NULL, widget will use the cursor
-      inherited from the parent widget.
+      If the cursor is `NULL`, widget will use the cursor
+      inherited from its parent.
   
       Params:
         cursor = the new cursor
@@ -3464,20 +3520,20 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets a named cursor to be shown when pointer devices point
-      towards widget.
+      Sets the cursor to be shown when the pointer hovers over
+      the widget.
       
       This is a utility function that creates a cursor via
       [gdk.cursor.Cursor.newFromName] and then sets it on widget
       with [gtk.widget.Widget.setCursor]. See those functions for
       details.
       
-      On top of that, this function allows name to be null, which
+      On top of that, this function allows name to be `NULL`, which
       will do the same as calling [gtk.widget.Widget.setCursor]
-      with a null cursor.
+      with a `NULL` cursor.
   
       Params:
-        name = The name of the cursor
+        name = the name of the cursor
   */
   void setCursorFromName(string name = null) nothrow
   {
@@ -3486,19 +3542,21 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the reading direction on a particular widget.
+      Sets the reading direction on the widget.
       
       This direction controls the primary direction for widgets
       containing text, and also the direction in which the children
       of a container are packed. The ability to set the direction is
       present in order so that correct localization into languages with
-      right-to-left reading directions can be done. Generally, applications
-      will let the default reading direction present, except for containers
-      where the containers are arranged in an order that is explicitly
-      visual rather than logical (such as buttons for text justification).
+      right-to-left reading directions can be done.
       
-      If the direction is set to [gtk.types.TextDirection.None], then the value
-      set by [gtk.widget.Widget.setDefaultDirection] will be used.
+      Generally, applications will let the default reading direction
+      prevail, except for widgets where the children are arranged in
+      an order that is explicitly visual rather than logical (such as
+      buttons for text justification).
+      
+      If the direction is set to [gtk.types.TextDirection.None], then
+      the value set by [gtk.widget.Widget.setDefaultDirection] will be used.
   
       Params:
         dir = the new direction
@@ -3509,15 +3567,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Set child as the current focus child of widget.
+      Set the focus child of the widget.
       
       This function is only suitable for widget implementations.
       If you want a certain widget to get the input focus, call
       [gtk.widget.Widget.grabFocus] on it.
   
       Params:
-        child = a direct child widget of widget or null
-            to unset the focus child of widget
+        child = a direct child widget of widget
+            or `NULL` to unset the focus child
   */
   void setFocusChild(gtk.widget.Widget child = null) nothrow
   {
@@ -3542,7 +3600,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Specifies whether widget can own the input focus.
+      Sets whether the widget can own the input focus.
       
       Widget implementations should set focusable to true in
       their init() function if they want to receive keyboard input.
@@ -3565,7 +3623,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the font map to use for Pango rendering.
+      Sets the font map to use for text rendering in the widget.
       
       The font map is the object that is used to look up fonts.
       Setting a custom font map can be useful in special situations,
@@ -3575,8 +3633,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       When not set, the widget will inherit the font map from its parent.
   
       Params:
-        fontMap = a [pango.font_map.FontMap], or null to unset any
-            previously set font map
+        fontMap = a [pango.font_map.FontMap]
   */
   void setFontMap(pango.font_map.FontMap fontMap = null) nothrow
   {
@@ -3584,14 +3641,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the [cairo.font_options.FontOptions] used for Pango rendering
-      in this widget.
+      Sets the [cairo.font_options.FontOptions] used for text rendering
+      in the widget.
       
       When not set, the default font options for the [gdk.display.Display]
       will be used.
   
       Params:
-        options = a [cairo.font_options.FontOptions]
+        options = a [cairo.font_options.FontOptions] struct
             to unset any previously set default font options
   */
   void setFontOptions(cairo.font_options.FontOptions options = null) nothrow
@@ -3600,7 +3657,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the horizontal alignment of widget.
+      Sets the horizontal alignment of the widget.
   
       Params:
         align_ = the horizontal alignment
@@ -3611,10 +3668,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the `has-tooltip` property on widget to has_tooltip.
+      Sets the `has-tooltip` property on the widget.
   
       Params:
-        hasTooltip = whether or not widget has a tooltip.
+        hasTooltip = whether or not widget has a tooltip
   */
   void setHasTooltip(bool hasTooltip) nothrow
   {
@@ -3625,10 +3682,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Sets whether the widget would like any available extra horizontal
       space.
       
-      When a user resizes a [gtk.window.Window], widgets with expand=TRUE
-      generally receive the extra space. For example, a list or
-      scrollable area or document in your window would often be set to
-      expand.
+      When a user resizes a window, widgets with expand set to true generally
+      receive the extra space. For example, a list or scrollable area
+      or document in your window would often be set to expand.
       
       Call this function to set the expand flag if you would like your
       widget to become larger horizontally when the window has extra
@@ -3637,15 +3693,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       By default, widgets automatically expand if any of their children
       want to expand. (To see if a widget will automatically expand given
       its current children and state, call [gtk.widget.Widget.computeExpand].
-      A container can decide how the expandability of children affects the
-      expansion of the container by overriding the compute_expand virtual
-      method on [gtk.widget.Widget].).
+      A widget can decide how the expandability of children affects its
+      own expansion by overriding the `compute_expand` virtual method on
+      [gtk.widget.Widget].).
       
       Setting hexpand explicitly with this function will override the
       automatic expand behavior.
       
       This function forces the widget to expand or not to expand,
-      regardless of children.  The override occurs because
+      regardless of children. The override occurs because
       [gtk.widget.Widget.setHexpand] sets the hexpand-set property (see
       [gtk.widget.Widget.setHexpandSet]) which causes the widget’s hexpand
       value to be used, rather than looking at children and widget state.
@@ -3683,11 +3739,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the layout manager delegate instance that provides an
-      implementation for measuring and allocating the children of widget.
+      Sets the layout manager to use for measuring and allocating children
+      of the widget.
   
       Params:
-        layoutManager = a [gtk.layout_manager.LayoutManager]
+        layoutManager = a layout manager
   */
   void setLayoutManager(gtk.layout_manager.LayoutManager layoutManager = null) nothrow
   {
@@ -3695,7 +3751,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the bottom margin of widget.
+      Sets whether the widget acts like a modal dialog,
+      with respect to event delivery.
+  
+      Params:
+        limitEvents = whether to limit events
+  */
+  void setLimitEvents(bool limitEvents) nothrow
+  {
+    gtk_widget_set_limit_events(cast(GtkWidget*)this._cPtr, limitEvents);
+  }
+
+  /**
+      Sets the bottom margin of the widget.
   
       Params:
         margin = the bottom margin
@@ -3706,7 +3774,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the end margin of widget.
+      Sets the end margin of the widget.
   
       Params:
         margin = the end margin
@@ -3717,7 +3785,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the start margin of widget.
+      Sets the start margin of the widget.
   
       Params:
         margin = the start margin
@@ -3728,7 +3796,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the top margin of widget.
+      Sets the top margin of the widget.
   
       Params:
         margin = the top margin
@@ -3761,7 +3829,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Request the widget to be rendered partially transparent.
+      Requests the widget to be rendered partially transparent.
       
       An opacity of 0 is fully transparent and an opacity of 1
       is fully opaque.
@@ -3769,8 +3837,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Opacity works on both toplevel widgets and child widgets, although
       there are some limitations: For toplevel widgets, applying opacity
       depends on the capabilities of the windowing system. On X11, this
-      has any effect only on X displays with a compositing manager,
-      see [gdk.display.Display.isComposited]. On Windows and Wayland it should
+      has any effect only on X displays with a compositing manager, see
+      [gdk.display.Display.isComposited]. On Windows and Wayland it will
       always work, although setting a window’s opacity after the window
       has been shown may cause some flicker.
       
@@ -3779,10 +3847,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       appear translucent, since it is ultimatively rendered on that
       toplevel. The opacity value itself is not inherited by child
       widgets (since that would make widgets deeper in the hierarchy
-      progressively more translucent). As a consequence, [gtk.popover.Popover]s
-      and other [gtk.native.Native] widgets with their own surface will use their
-      own opacity value, and thus by default appear non-translucent,
-      even if they are attached to a toplevel that is translucent.
+      progressively more translucent). As a consequence, [gtk.popover.Popover]
+      instances and other [gtk.native.Native] widgets with their own surface
+      will use their own opacity value, and thus by default appear
+      non-translucent, even if they are attached to a toplevel that
+      is translucent.
   
       Params:
         opacity = desired opacity, between 0 and 1
@@ -3793,8 +3862,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets how widget treats content that is drawn outside the
-      widget's content area.
+      Sets how the widget treats content that is drawn outside the
+      it's content area.
       
       See the definition of [gtk.types.Overflow] for details.
       
@@ -3804,7 +3873,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       The default value is [gtk.types.Overflow.Visible].
   
       Params:
-        overflow = desired overflow
+        overflow = desired overflow value
   */
   void setOverflow(gtk.types.Overflow overflow) nothrow
   {
@@ -3812,7 +3881,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets parent as the parent widget of widget.
+      Sets the parent widget of the widget.
       
       This takes care of details such as updating the state and style
       of the child to reflect its new location and resizing the parent.
@@ -3830,12 +3899,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Specifies whether widget will be treated as the default
+      Sets whether the widget will be treated as the default
       widget within its toplevel when it has the focus, even if
       another widget is the default.
   
       Params:
-        receivesDefault = whether or not widget can be a default widget.
+        receivesDefault = whether or not widget can be a default widget
   */
   void setReceivesDefault(bool receivesDefault) nothrow
   {
@@ -3843,7 +3912,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the sensitivity of a widget.
+      Sets the sensitivity of the widget.
       
       A widget is sensitive if the user can interact with it.
       Insensitive widgets are “grayed out” and the user can’t
@@ -3859,7 +3928,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the minimum size of a widget.
+      Sets the minimum size of the widget.
       
       That is, the widget’s size request will be at least width
       by height. You can use this function to force a widget to
@@ -3873,9 +3942,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       
       Note the inherent danger of setting any fixed size - themes,
       translations into other languages, different fonts, and user action
-      can all change the appropriate size for a given widget. So, it's
-      basically impossible to hardcode a size that will always be
-      correct.
+      can all change the appropriate size for a given widget. So, it is
+      basically impossible to hardcode a size that will always work.
       
       The size request of a widget is the smallest size a widget can
       accept while still functioning well and drawing itself correctly.
@@ -3909,15 +3977,15 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       
       Typical widget states are insensitive, prelighted, etc.
       
-      This function accepts the values [gtk.types.StateFlags.DirLtr] and
-      [gtk.types.StateFlags.DirRtl] but ignores them. If you want to set
+      This function accepts the values `flagsGtk.StateFlags.dir-ltr` and
+      `flagsGtk.StateFlags.dir-rtl` but ignores them. If you want to set
       the widget's direction, use [gtk.widget.Widget.setDirection].
       
       This function is for use in widget implementations.
   
       Params:
-        flags = State flags to turn on
-        clear = Whether to clear state before turning on flags
+        flags = state flags to turn on
+        clear = whether to clear state before turning on flags
   */
   void setStateFlags(gtk.types.StateFlags flags, bool clear) nothrow
   {
@@ -3925,8 +3993,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets markup as the contents of the tooltip, which is marked
-      up with Pango markup.
+      Sets the contents of the tooltip for widget.
+      
+      markup must contain Pango markup.
       
       This function will take care of setting the
       [gtk.widget.Widget.hasTooltip] as a side effect, and of the
@@ -3944,7 +4013,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets text as the contents of the tooltip.
+      Sets the contents of the tooltip for the widget.
       
       If text contains any markup, it will be escaped.
       
@@ -3965,7 +4034,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Sets the vertical alignment of widget.
+      Sets the vertical alignment of the widget.
   
       Params:
         align_ = the vertical alignment
@@ -4017,11 +4086,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Returns whether widget should contribute to
+      Returns whether the widget should contribute to
       the measuring and allocation of its parent.
       
       This is false for invisible children, but also
-      for children that have their own surface.
+      for children that have their own surface, such
+      as [gtk.popover.Popover] instances.
       Returns: true if child should be included in
           measuring and allocating
   */
@@ -4040,9 +4110,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Remember that you have to show the containers containing a widget,
       in addition to the widget itself, before it will appear onscreen.
       
-      When a toplevel container is shown, it is immediately realized and
+      When a toplevel widget is shown, it is immediately realized and
       mapped; other shown widgets are realized and mapped when their
-      toplevel container is realized and mapped.
+      toplevel widget is realized and mapped.
   
       Deprecated: Use [gtk.widget.Widget.setVisible] instead
   */
@@ -4059,7 +4129,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
       Params:
         allocation = position and size to be allocated to widget
-        baseline = The baseline of the child, or -1
+        baseline = the baseline of the child, or -1
   */
   void sizeAllocate(gtk.types.Allocation allocation, int baseline) nothrow
   {
@@ -4067,7 +4137,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Snapshot the a child of widget.
+      Snapshots a child of the widget.
       
       When a widget receives a call to the snapshot function,
       it must send synthetic `vfuncGtk.Widget.snapshot` calls
@@ -4077,16 +4147,16 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       [gtk.widget.Widget.snapshotChild] once for each child, passing in
       the snapshot the widget received.
       
-      [gtk.widget.Widget.snapshotChild] takes care of translating the origin of
-      snapshot, and deciding whether the child needs to be snapshot.
+      This function takes care of translating the origin of snapshot,
+      and deciding whether the child needs to be snapshot.
       
-      This function does nothing for children that implement [gtk.native.Native].
+      It does nothing for children that implement [gtk.native.Native].
   
       Params:
         child = a child of widget
-        snapshot = [gtk.snapshot.Snapshot] as passed to the widget. In particular, no
-            calls to [gtk.snapshot.Snapshot.translate] or other transform calls should
-            have been made.
+        snapshot = snapshot as passed to the widget. In particular, no
+            calls to [gtk.snapshot.Snapshot.translate] or other transform calls
+            should have been made
   */
   void snapshotChild(gtk.widget.Widget child, gtk.snapshot.Snapshot snapshot) nothrow
   {
@@ -4094,21 +4164,21 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Translate coordinates relative to src_widget’s allocation
+      Translates coordinates relative to src_widget’s allocation
       to coordinates relative to dest_widget’s allocations.
       
       In order to perform this operation, both widget must share
-      a common ancestor.
+      a common ancestor. If that is not the case, dest_x and dest_y
+      are set to 0 and false is returned.
   
       Params:
-        destWidget = a [gtk.widget.Widget]
-        srcX = X position relative to src_widget
-        srcY = Y position relative to src_widget
-        destX = location to store X position relative to dest_widget
-        destY = location to store Y position relative to dest_widget
-      Returns: false if src_widget and dest_widget have no common
-          ancestor. In this case, 0 is stored in *dest_x and *dest_y.
-          Otherwise true.
+        destWidget = another widget
+        srcX = X position in widget coordinates of src_widget
+        srcY = Y position in widget coordinates of src_widget
+        destX = location to store X position in widget coordinates of dest_widget
+        destY = location to store Y position in widget coordinates of dest_widget
+      Returns: true if src_widget and dest_widget have a common
+          ancestor, false otherwise
   
       Deprecated: Use [gtk.widget.Widget.computePoint] instead
   */
@@ -4120,8 +4190,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Triggers a tooltip query on the display where the toplevel
-      of widget is located.
+      Triggers a tooltip query on the display of the widget.
   */
   void triggerTooltipQuery() nothrow
   {
@@ -4139,7 +4208,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Dissociate widget from its parent.
+      Removes widget from its parent.
       
       This function is only for use in widget implementations,
       typically in dispose.
@@ -4150,8 +4219,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
-      Causes a widget to be unrealized (frees all GDK resources
-      associated with the widget).
+      Causes a widget to be unrealized.
+      
+      This frees all GDK resources associated with the widget.
       
       This function is only useful in widget implementations.
   */
@@ -4168,7 +4238,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       This function is for use in widget implementations.
   
       Params:
-        flags = State flags to turn off
+        flags = state flags to turn off
   */
   void unsetStateFlags(gtk.types.StateFlags flags) nothrow
   {
@@ -4234,7 +4304,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
           `void callback(gtk.types.TextDirection previousDirection, gtk.widget.Widget widget)`
   
-          `previousDirection` the previous text direction of widget (optional)
+          `previousDirection` the previous text direction (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4336,7 +4406,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
           `Returns` true if stopping keyboard navigation is fine, false
               if the emitting widget should try to handle the keyboard
-              navigation attempt in its parent widget(s).
+              navigation attempt in its parent widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -4385,7 +4455,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         [gtk.widget.Widget.visible]) and all its parents up to the toplevel widget
         are also visible.
         
-        The ::map signal can be used to determine whether a widget will be drawn,
+        The `::map` signal can be used to determine whether a widget will be drawn,
         for instance it can resume an animation that was stopped during the
         emission of [gtk.widget.Widget.unmap].
   
@@ -4445,8 +4515,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
           `widget` the instance the signal is connected to (optional)
   
-          `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+          `Returns` true to stop other handlers from being invoked for the event,
+              false to propagate the event further
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -4491,7 +4561,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
       Emitted when the focus is moved.
         
-        The ::move-focus signal is a [keybinding signal](class.SignalAction.html).
+        The `::move-focus` signal is a [keybinding signal](class.SignalAction.html).
         
         The default bindings for this signal are <kbd>Tab</kbd> to move forward,
         and <kbd>Shift</kbd>+<kbd>Tab</kbd> to move backward.
@@ -4548,13 +4618,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         
         This happens when the [gtk.widget.Widget.hasTooltip] property
         is true and the hover timeout has expired with the cursor hovering
-        "above" widget; or emitted when widget got focus in keyboard mode.
+        above widget; or emitted when widget got focus in keyboard mode.
         
         Using the given coordinates, the signal handler should determine
         whether a tooltip should be shown for widget. If this is the case
-        true should be returned, false otherwise.  Note that if
-        keyboard_mode is true, the values of `x` and `y` are undefined and
-        should not be used.
+        true should be returned, false otherwise. Note that if keyboard_mode
+        is true, the values of `x` and `y` are undefined and should not be used.
         
         The signal handler is free to manipulate tooltip with the therefore
         destined function calls.
@@ -4564,11 +4633,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
           `bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget)`
   
-          `x` the x coordinate of the cursor position where the request has
-              been emitted, relative to widget's left side (optional)
+          `x` the x coordinate of the cursor position in widget coordinates (optional)
   
-          `y` the y coordinate of the cursor position where the request has
-              been emitted, relative to widget's top (optional)
+          `y` the y coordinate of the cursor position in widget coordinates (optional)
   
           `keyboardMode` true if the tooltip was triggered using the keyboard (optional)
   
@@ -4576,7 +4643,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
           `widget` the instance the signal is connected to (optional)
   
-          `Returns` true if tooltip should be shown right now, false otherwise.
+          `Returns` true if tooltip should be shown right now, false otherwise
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -4731,7 +4798,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
           `void callback(gtk.types.StateFlags flags, gtk.widget.Widget widget)`
   
-          `flags` The previous state flags. (optional)
+          `flags` the previous state flags (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4779,7 +4846,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         A widget is unmapped when either it or any of its parents up to the
         toplevel widget have been set as hidden.
         
-        As ::unmap indicates that a widget will not be shown any longer,
+        As `::unmap` indicates that a widget will not be shown any longer,
         it can be used to, for example, stop an animation on the widget.
   
       Params:
@@ -4995,9 +5062,10 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   /**
       Set `hasTooltip` property.
       Params:
-        propval = Enables or disables the emission of the ::query-tooltip signal on @widget.
+        propval = Enables or disables the emission of the [gtk.widget.Widget.queryTooltip]
+          signal on @widget.
           
-          A value of true indicates that @widget can have a tooltip, in this case
+          A true value indicates that @widget can have a tooltip, in this case
           the widget will be queried using [gtk.widget.Widget.queryTooltip] to
           determine whether it will provide a tooltip or not.
       Returns: Builder instance for fluent chaining
@@ -5010,7 +5078,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   /**
       Set `heightRequest` property.
       Params:
-        propval = Override for height request of the widget.
+        propval = Overrides for height request of the widget.
           
           If this is -1, the natural request will be used.
       Returns: Builder instance for fluent chaining
@@ -5045,8 +5113,8 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   /**
       Set `layoutManager` property.
       Params:
-        propval = The [gtk.layout_manager.LayoutManager] instance to use to compute the preferred size
-          of the widget, and allocate its children.
+        propval = The [gtk.layout_manager.LayoutManager] instance to use to compute
+          the preferred size of the widget, and allocate its children.
           
           This property is meant to be set by widget implementations,
           typically in their instance init function.
@@ -5055,6 +5123,22 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   T layoutManager(gtk.layout_manager.LayoutManager propval) nothrow
   {
     return setProperty("layout-manager", propval);
+  }
+
+  /**
+      Set `limitEvents` property.
+      Params:
+        propval = Makes this widget act like a modal dialog, with respect to
+          event delivery.
+          
+          Global event controllers will not handle events with targets
+          inside the widget, unless they are set up to ignore propagation
+          limits. See [gtk.event_controller.EventController.setPropagationLimit].
+      Returns: Builder instance for fluent chaining
+  */
+  T limitEvents(bool propval) nothrow
+  {
+    return setProperty("limit-events", propval);
   }
 
   /**
@@ -5190,7 +5274,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           Also see [gtk.tooltip.Tooltip.setMarkup].
           
           This is a convenience property which will take care of getting the
-          tooltip shown if the given string is not null:
+          tooltip shown if the given string is not `NULL`:
           [gtk.widget.Widget.hasTooltip] will automatically be set to true
           and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
@@ -5212,7 +5296,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           Also see [gtk.tooltip.Tooltip.setText].
           
           This is a convenience property which will take care of getting the
-          tooltip shown if the given string is not null:
+          tooltip shown if the given string is not `NULL`:
           [gtk.widget.Widget.hasTooltip] will automatically be set to true
           and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
@@ -5273,7 +5357,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   /**
       Set `widthRequest` property.
       Params:
-        propval = Override for width request of the widget.
+        propval = Overrides for width request of the widget.
           
           If this is -1, the natural request will be used.
       Returns: Builder instance for fluent chaining

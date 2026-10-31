@@ -19,7 +19,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.scrolled_window.ScrolledWindow] is a container that makes its child scrollable.
+    Makes its child scrollable.
+    
+    <picture>
+      <source srcset="scrolledwindow-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkScrolledWindow" src="scrolledwindow.png">
+    </picture>
     
     It does so using either internally added scrollbars or externally
     associated adjustments, and optionally draws a frame around the child.
@@ -65,6 +70,12 @@ import gtk.widget;
     can be turned off with the [gtk.scrolled_window.ScrolledWindow.overlayScrolling]
     property.
     
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.scrolled_window.ScrolledWindow.scrollChild]
+    
     # CSS nodes
     
     [gtk.scrolled_window.ScrolledWindow] has a main CSS node with name scrolledwindow.
@@ -86,7 +97,8 @@ import gtk.widget;
     
     Until GTK 4.10, [gtk.scrolled_window.ScrolledWindow] used the [gtk.types.AccessibleRole.Group] role.
     
-    Starting from GTK 4.12, [gtk.scrolled_window.ScrolledWindow] uses the [gtk.types.AccessibleRole.Generic] role.
+    Starting from GTK 4.12, [gtk.scrolled_window.ScrolledWindow] uses the [gtk.types.AccessibleRole.Generic]
+    role.
 */
 class ScrolledWindow : gtk.widget.Widget
 {
@@ -152,13 +164,20 @@ class ScrolledWindow : gtk.widget.Widget
     setChild(propval);
   }
 
-  /** */
+  /**
+      Get `hadjustment` property.
+      Returns: The [gtk.adjustment.Adjustment] for the horizontal position.
+  */
   @property gtk.adjustment.Adjustment hadjustment() nothrow
   {
     return getHadjustment();
   }
 
-  /** */
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] for the horizontal position.
+  */
   @property void hadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setHadjustment(propval);
@@ -394,13 +413,20 @@ class ScrolledWindow : gtk.widget.Widget
     setPropagateNaturalWidth(propval);
   }
 
-  /** */
+  /**
+      Get `vadjustment` property.
+      Returns: The [gtk.adjustment.Adjustment] for the vertical position.
+  */
   @property gtk.adjustment.Adjustment vadjustment() nothrow
   {
     return getVadjustment();
   }
 
-  /** */
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] for the vertical position.
+  */
   @property void vadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setVadjustment(propval);
@@ -1001,8 +1027,8 @@ class ScrolledWindow : gtk.widget.Widget
         This is a [keybinding signal](class.SignalAction.html).
         
         The default bindings for this signal are
-        `Ctrl + Tab` to move forward and `Ctrl + Shift + Tab` to
-        move backward.
+        <kbd>Ctrl</kbd>+<kbd>Tab</kbd> to move forward and
+        <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>` to move backward.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1072,7 +1098,7 @@ class ScrolledWindow : gtk.widget.Widget
   
           `scrolledWindow` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the scroll happened
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1137,7 +1163,12 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
     return setProperty("child", propval);
   }
 
-  /** */
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] for the horizontal position.
+      Returns: Builder instance for fluent chaining
+  */
   T hadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("hadjustment", propval);
@@ -1273,7 +1304,12 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
     return setProperty("propagate-natural-width", propval);
   }
 
-  /** */
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = The [gtk.adjustment.Adjustment] for the vertical position.
+      Returns: Builder instance for fluent chaining
+  */
   T vadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("vadjustment", propval);

@@ -173,6 +173,49 @@ class TextBuffer : gobject.object.ObjectWrap
   }
 
   /**
+      Adds a [gtk.types.TextBufferCommitNotify] to be called when a change
+      is to be made to the [gtk.text_buffer.TextBuffer].
+      
+      Functions are explicitly forbidden from making changes to the
+      [gtk.text_buffer.TextBuffer] from this callback. It is intended for tracking
+      changes to the buffer only.
+      
+      It may be advantageous to use [gtk.types.TextBufferCommitNotify] over
+      connecting to the [gtk.text_buffer.TextBuffer.insertText] or
+      [gtk.text_buffer.TextBuffer.deleteRange] signals to avoid ordering issues with
+      other signal handlers which may further modify the [gtk.text_buffer.TextBuffer].
+  
+      Params:
+        flags = which notifications should be dispatched to callback
+        commitNotify = a
+            [gtk.types.TextBufferCommitNotify] to call for commit notifications
+      Returns: a handler id which may be used to remove the commit notify
+          callback using [gtk.text_buffer.TextBuffer.removeCommitNotify].
+  */
+  uint addCommitNotify(gtk.types.TextBufferNotifyFlags flags, gtk.types.TextBufferCommitNotify commitNotify) nothrow
+  {
+    extern(C) void _commitNotifyCallback(GtkTextBuffer* buffer, GtkTextBufferNotifyFlags flags, uint position, uint length, void* userData) nothrow
+    {
+      auto _dlg = cast(gtk.types.TextBufferCommitNotify*)userData;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)buffer, No.Take), flags, position, length);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TextBufferCommitNotify");
+      }
+    }
+    auto _commitNotifyCB = commitNotify ? &_commitNotifyCallback : null;
+    uint _retval;
+    auto _commitNotify = commitNotify ? freezeDelegate(cast(void*)&commitNotify) : null;
+    GDestroyNotify _commitNotifyDestroyCB = commitNotify ? &thawDelegate : null;
+    _retval = gtk_text_buffer_add_commit_notify(cast(GtkTextBuffer*)this._cPtr, flags, _commitNotifyCB, _commitNotify, _commitNotifyDestroyCB);
+    return _retval;
+  }
+
+  /**
       Adds the mark at position where.
       
       The mark must not be added to another buffer, and if its name
@@ -1262,6 +1305,22 @@ class TextBuffer : gobject.object.ObjectWrap
   void removeAllTags(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Removes the [gtk.types.TextBufferCommitNotify] handler previously registered
+      with [gtk.text_buffer.TextBuffer.addCommitNotify].
+      
+      This may result in the `user_data_destroy` being called that was passed when registering
+      the commit notify functions.
+  
+      Params:
+        commitNotifyHandler = the notify handler identifier returned from
+            [gtk.text_buffer.TextBuffer.addCommitNotify].
+  */
+  void removeCommitNotify(uint commitNotifyHandler) nothrow
+  {
+    gtk_text_buffer_remove_commit_notify(cast(GtkTextBuffer*)this._cPtr, commitNotifyHandler);
   }
 
   /**

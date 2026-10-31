@@ -134,6 +134,9 @@ class Font : gobject.object.ObjectWrap
 
   /**
       Gets the [pango.font_face.FontFace] to which font belongs.
+      
+      Note that this function can return `NULL` in cases
+      where the font outlives its font map.
       Returns: the [pango.font_face.FontFace]
   */
   pango.font_face.FontFace getFace() nothrow

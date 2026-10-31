@@ -23,7 +23,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.flow_box.FlowBox] puts child widgets in reflowing grid.
+    Puts child widgets in a reflowing grid.
+    
+    <picture>
+      <source srcset="flow-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFlowBox" src="flow-box.png">
+    </picture>
     
     For instance, with the horizontal orientation, the widgets will be
     arranged from left to right, starting a new row under the previous
@@ -48,6 +53,15 @@ import gtk.widget;
     and the widget.
     
     Also see [gtk.list_box.ListBox].
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.flow_box.FlowBox.moveCursor]
+    - [gtk.flow_box.FlowBox.selectAll]
+    - [gtk.flow_box.FlowBox.toggleCursorChild]
+    - [gtk.flow_box.FlowBox.unselectAll]
     
     # CSS nodes
     
@@ -107,13 +121,20 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     return new FlowBoxGidBuilder;
   }
 
-  /** */
+  /**
+      Get `acceptUnpairedRelease` property.
+      Returns: Whether to accept unpaired release events.
+  */
   @property bool acceptUnpairedRelease() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("accept-unpaired-release");
   }
 
-  /** */
+  /**
+      Set `acceptUnpairedRelease` property.
+      Params:
+        propval = Whether to accept unpaired release events.
+  */
   @property void acceptUnpairedRelease(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("accept-unpaired-release", propval);
@@ -316,7 +337,8 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   
       Params:
         model = the [gio.list_model.ListModel] to be bound to box
-        createWidgetFunc = a function that creates widgets for items
+        createWidgetFunc = a function
+            that creates widgets for items
   */
   void bindModel(gio.list_model.ListModel model, gtk.types.FlowBoxCreateWidgetFunc createWidgetFunc) nothrow
   {
@@ -641,8 +663,8 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       (see [gtk.flow_box.FlowBox.bindModel]).
   
       Params:
-        filterFunc = callback that
-            lets you filter which children to show
+        filterFunc = callback
+            that lets you filter which children to show
   */
   void setFilterFunc(gtk.types.FlowBoxFilterFunc filterFunc = null) nothrow
   {
@@ -968,7 +990,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
           `flowBox` the instance the signal is connected to (optional)
   
           `Returns` true to stop other handlers from being invoked for the event.
-            false to propagate the event further.
+              false to propagate the event further.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1221,7 +1243,12 @@ class FlowBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientab
 
   mixin OrientableGidBuilderT!();
 
-  /** */
+  /**
+      Set `acceptUnpairedRelease` property.
+      Params:
+        propval = Whether to accept unpaired release events.
+      Returns: Builder instance for fluent chaining
+  */
   T acceptUnpairedRelease(bool propval) nothrow
   {
     return setProperty("accept-unpaired-release", propval);

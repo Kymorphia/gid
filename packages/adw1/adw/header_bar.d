@@ -31,7 +31,7 @@ import gtk.widget;
     ## Dialog Integration
     
     When placed inside an [adw.dialog.Dialog], [adw.header_bar.HeaderBar] will display the dialog
-    title intead of window title. It will also adjust the decoration layout to
+    title instead of window title. It will also adjust the decoration layout to
     ensure it always has a close button and nothing else. Set
     [adw.header_bar.HeaderBar.showStartTitleButtons] and
     [adw.header_bar.HeaderBar.showEndTitleButtons] to `FALSE` to remove it if it's
@@ -55,6 +55,13 @@ import gtk.widget;
     When placed inside [adw.navigation_split_view.NavigationSplitView] or [adw.overlay_split_view.OverlaySplitView],
     [adw.header_bar.HeaderBar] will automatically hide the title buttons other than at the
     edges of the window.
+    
+    ## Bottom Sheet Integration
+    
+    When played inside [adw.bottom_sheet.BottomSheet], [adw.header_bar.HeaderBar] will not show the title
+    unless [adw.bottom_sheet.BottomSheet.showDragHandle] is set to `FALSE`, regardless
+    of [adw.header_bar.HeaderBar.showTitle]. This only applies to the default title,
+    titles set with [adw.header_bar.HeaderBar.titleWidget] will still be shown.
     
     ## Centering Policy
     
@@ -91,7 +98,7 @@ import gtk.widget;
     [adw.header_bar.HeaderBar]'s CSS node is called `headerbar`. It contains a `windowhandle`
     subnode, which contains a `box` subnode, which contains three `widget`
     subnodes at the start, center and end of the header bar. The start and end
-    subnotes contain a `box` subnode with the `.start` and `.end` style classes
+    subnodes contain a `box` subnode with the `.start` and `.end` style classes
     respectively, and the center node contains a node that represents the title.
     
     Each of the boxes contains a `windowcontrols` subnode, see

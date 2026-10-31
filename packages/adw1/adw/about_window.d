@@ -177,7 +177,7 @@ import gtk.types;
                              "application-icon", "org.example.App",
                              "version", "1.2.3",
                              "copyright", "© 2022 Angela Avery",
-                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/new",
+                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/",
                              "license-type", GTK_LICENSE_GPL_3_0,
                              "developers", developers,
                              "designers", designers,
@@ -190,6 +190,8 @@ import gtk.types;
     
     [adw.about_window.AboutWindow] has a main CSS node with the name `window` and the
     style class `.about`.
+
+    Deprecated: Use [adw.about_dialog.AboutDialog].
 */
 class AboutWindow : adw.window.Window
 {
@@ -233,6 +235,8 @@ class AboutWindow : adw.window.Window
       Returns: The name of the application icon.
         
         The icon is displayed at the top of the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string applicationIcon() nothrow
   {
@@ -245,6 +249,8 @@ class AboutWindow : adw.window.Window
         propval = The name of the application icon.
           
           The icon is displayed at the top of the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void applicationIcon(string propval) nothrow
   {
@@ -256,6 +262,8 @@ class AboutWindow : adw.window.Window
       Returns: The name of the application.
         
         The name is displayed at the top of the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string applicationName() nothrow
   {
@@ -268,6 +276,8 @@ class AboutWindow : adw.window.Window
         propval = The name of the application.
           
           The name is displayed at the top of the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void applicationName(string propval) nothrow
   {
@@ -291,6 +301,8 @@ class AboutWindow : adw.window.Window
         * [adw.about_window.AboutWindow.translatorCredits]
         * [adw.about_window.AboutWindow.addCreditSection]
         * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string[] artists() nothrow
   {
@@ -315,6 +327,8 @@ class AboutWindow : adw.window.Window
           * [adw.about_window.AboutWindow.translatorCredits]
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void artists(string[] propval) nothrow
   {
@@ -329,6 +343,8 @@ class AboutWindow : adw.window.Window
         
         Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
         detailed. It can also contain links and Pango markup.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string comments() nothrow
   {
@@ -344,6 +360,8 @@ class AboutWindow : adw.window.Window
           
           Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
           detailed. It can also contain links and Pango markup.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void comments(string propval) nothrow
   {
@@ -362,6 +380,8 @@ class AboutWindow : adw.window.Window
         
         [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
         information for the application dependencies or other components.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string copyright() nothrow
   {
@@ -381,6 +401,8 @@ class AboutWindow : adw.window.Window
           
           [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
           information for the application dependencies or other components.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void copyright(string propval) nothrow
   {
@@ -400,6 +422,8 @@ class AboutWindow : adw.window.Window
         the suggested filename.
         
         Debug information cannot contain markup or links.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string debugInfo() nothrow
   {
@@ -420,6 +444,8 @@ class AboutWindow : adw.window.Window
           the suggested filename.
           
           Debug information cannot contain markup or links.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void debugInfo(string propval) nothrow
   {
@@ -434,6 +460,8 @@ class AboutWindow : adw.window.Window
         a file.
         
         See [adw.about_window.AboutWindow.debugInfo].
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string debugInfoFilename() nothrow
   {
@@ -449,6 +477,8 @@ class AboutWindow : adw.window.Window
           a file.
           
           See [adw.about_window.AboutWindow.debugInfo].
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void debugInfoFilename(string propval) nothrow
   {
@@ -472,6 +502,8 @@ class AboutWindow : adw.window.Window
         * [adw.about_window.AboutWindow.translatorCredits]
         * [adw.about_window.AboutWindow.addCreditSection]
         * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string[] designers() nothrow
   {
@@ -496,6 +528,8 @@ class AboutWindow : adw.window.Window
           * [adw.about_window.AboutWindow.translatorCredits]
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void designers(string[] propval) nothrow
   {
@@ -514,6 +548,8 @@ class AboutWindow : adw.window.Window
         "The AppName project", and the individual contributors can be listed on the
         Credits page, with [adw.about_window.AboutWindow.developers] and related
         properties.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string developerName() nothrow
   {
@@ -533,6 +569,8 @@ class AboutWindow : adw.window.Window
           "The AppName project", and the individual contributors can be listed on the
           Credits page, with [adw.about_window.AboutWindow.developers] and related
           properties.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void developerName(string propval) nothrow
   {
@@ -556,6 +594,8 @@ class AboutWindow : adw.window.Window
         * [adw.about_window.AboutWindow.translatorCredits]
         * [adw.about_window.AboutWindow.addCreditSection]
         * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string[] developers() nothrow
   {
@@ -580,6 +620,8 @@ class AboutWindow : adw.window.Window
           * [adw.about_window.AboutWindow.translatorCredits]
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void developers(string[] propval) nothrow
   {
@@ -603,6 +645,8 @@ class AboutWindow : adw.window.Window
         * [adw.about_window.AboutWindow.translatorCredits]
         * [adw.about_window.AboutWindow.addCreditSection]
         * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string[] documenters() nothrow
   {
@@ -627,6 +671,8 @@ class AboutWindow : adw.window.Window
           * [adw.about_window.AboutWindow.translatorCredits]
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void documenters(string[] propval) nothrow
   {
@@ -638,6 +684,8 @@ class AboutWindow : adw.window.Window
       Returns: The URL for the application's issue tracker.
         
         The issue tracker link is displayed on the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string issueUrl() nothrow
   {
@@ -650,6 +698,8 @@ class AboutWindow : adw.window.Window
         propval = The URL for the application's issue tracker.
           
           The issue tracker link is displayed on the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void issueUrl(string propval) nothrow
   {
@@ -673,6 +723,8 @@ class AboutWindow : adw.window.Window
         
         [adw.about_window.AboutWindow.addLegalSection] can be used to add license
         information for the application dependencies or other components.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string license() nothrow
   {
@@ -697,6 +749,8 @@ class AboutWindow : adw.window.Window
           
           [adw.about_window.AboutWindow.addLegalSection] can be used to add license
           information for the application dependencies or other components.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void license(string propval) nothrow
   {
@@ -723,6 +777,8 @@ class AboutWindow : adw.window.Window
         
         [adw.about_window.AboutWindow.addLegalSection] can be used to add license
         information for the application dependencies or other components.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property gtk.types.License licenseType() nothrow
   {
@@ -750,6 +806,8 @@ class AboutWindow : adw.window.Window
           
           [adw.about_window.AboutWindow.addLegalSection] can be used to add license
           information for the application dependencies or other components.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void licenseType(gtk.types.License propval) nothrow
   {
@@ -782,6 +840,8 @@ class AboutWindow : adw.window.Window
         [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
         [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
         as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string releaseNotes() nothrow
   {
@@ -815,6 +875,8 @@ class AboutWindow : adw.window.Window
           [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
           [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
           as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void releaseNotes(string propval) nothrow
   {
@@ -835,6 +897,8 @@ class AboutWindow : adw.window.Window
         accordingly.
         
         See [adw.about_window.AboutWindow.releaseNotes].
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string releaseNotesVersion() nothrow
   {
@@ -856,6 +920,8 @@ class AboutWindow : adw.window.Window
           accordingly.
           
           See [adw.about_window.AboutWindow.releaseNotes].
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void releaseNotesVersion(string propval) nothrow
   {
@@ -867,6 +933,8 @@ class AboutWindow : adw.window.Window
       Returns: The URL of the application's support page.
         
         The support page link is displayed on the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string supportUrl() nothrow
   {
@@ -879,6 +947,8 @@ class AboutWindow : adw.window.Window
         propval = The URL of the application's support page.
           
           The support page link is displayed on the main page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void supportUrl(string propval) nothrow
   {
@@ -905,6 +975,8 @@ class AboutWindow : adw.window.Window
         * [adw.about_window.AboutWindow.documenters]
         * [adw.about_window.AboutWindow.addCreditSection]
         * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string translatorCredits() nothrow
   {
@@ -932,6 +1004,8 @@ class AboutWindow : adw.window.Window
           * [adw.about_window.AboutWindow.documenters]
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void translatorCredits(string propval) nothrow
   {
@@ -946,6 +1020,8 @@ class AboutWindow : adw.window.Window
         
         If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
         will also be displayed above the release notes on the What's New page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string version_() nothrow
   {
@@ -961,6 +1037,8 @@ class AboutWindow : adw.window.Window
           
           If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void version_(string propval) nothrow
   {
@@ -975,6 +1053,8 @@ class AboutWindow : adw.window.Window
         page if the Details page doesn't have any other content.
         
         Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property string website() nothrow
   {
@@ -990,6 +1070,8 @@ class AboutWindow : adw.window.Window
           page if the Details page doesn't have any other content.
           
           Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   @property void website(string propval) nothrow
   {
@@ -999,6 +1081,8 @@ class AboutWindow : adw.window.Window
   /**
       Creates a new [adw.about_window.AboutWindow].
       Returns: the newly created [adw.about_window.AboutWindow]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   this() nothrow
   {
@@ -1023,7 +1107,7 @@ class AboutWindow : adw.window.Window
       * [adw.about_window.AboutWindow.issueUrl] is set from the `<url type="bugtracker">`
       * [adw.about_window.AboutWindow.licenseType] is set from the `<project_license>`.
           If the license type retrieved from AppStream is not listed in
-          [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
+          [gtk.types.License], it will be set to [gtk.types.License.Custom].
       
       If release_notes_version is not `NULL`,
       [adw.about_window.AboutWindow.releaseNotesVersion] is set to match it, while
@@ -1034,6 +1118,8 @@ class AboutWindow : adw.window.Window
         resourcePath = The resource to use
         releaseNotesVersion = The version to retrieve release notes for
       Returns: the newly created [adw.about_window.AboutWindow]
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   static adw.about_window.AboutWindow newFromAppdata(string resourcePath, string releaseNotesVersion = null) nothrow
   {
@@ -1067,6 +1153,8 @@ class AboutWindow : adw.window.Window
       Params:
         name = the section name
         people = the list of names
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void addAcknowledgementSection(string name, string[] people) nothrow
   {
@@ -1097,6 +1185,8 @@ class AboutWindow : adw.window.Window
       Params:
         name = the section name
         people = the list of names
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void addCreditSection(string name, string[] people) nothrow
   {
@@ -1154,6 +1244,8 @@ class AboutWindow : adw.window.Window
         copyright = a copyright string
         licenseType = the type of license
         license = custom license information
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void addLegalSection(string title, string copyright, gtk.types.License licenseType, string license = null) nothrow
   {
@@ -1175,6 +1267,8 @@ class AboutWindow : adw.window.Window
       Params:
         title = the link title
         url = the link URL
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void addLink(string title, string url) nothrow
   {
@@ -1186,6 +1280,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the name of the application icon for self.
       Returns: the application icon name
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getApplicationIcon() nothrow
   {
@@ -1198,6 +1294,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the application name for self.
       Returns: the application name
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getApplicationName() nothrow
   {
@@ -1210,6 +1308,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the list of artists of the application.
       Returns: The list of artists
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string[] getArtists() nothrow
   {
@@ -1232,6 +1332,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the comments about the application.
       Returns: the comments
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getComments() nothrow
   {
@@ -1244,6 +1346,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the copyright information for self.
       Returns: the copyright information
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getCopyright() nothrow
   {
@@ -1256,6 +1360,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the debug information for self.
       Returns: the debug information
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getDebugInfo() nothrow
   {
@@ -1268,6 +1374,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the debug information filename for self.
       Returns: the debug information filename
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getDebugInfoFilename() nothrow
   {
@@ -1280,6 +1388,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the list of designers of the application.
       Returns: The list of designers
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string[] getDesigners() nothrow
   {
@@ -1302,6 +1412,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the developer name for self.
       Returns: the developer_name
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getDeveloperName() nothrow
   {
@@ -1314,6 +1426,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the list of developers of the application.
       Returns: The list of developers
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string[] getDevelopers() nothrow
   {
@@ -1336,6 +1450,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the list of documenters of the application.
       Returns: The list of documenters
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string[] getDocumenters() nothrow
   {
@@ -1358,6 +1474,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the issue tracker URL for self.
       Returns: the issue tracker URL
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getIssueUrl() nothrow
   {
@@ -1370,6 +1488,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the license for self.
       Returns: the license
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getLicense() nothrow
   {
@@ -1382,6 +1502,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the license type for self.
       Returns: the license type
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   gtk.types.License getLicenseType() nothrow
   {
@@ -1394,6 +1516,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the release notes for self.
       Returns: the release notes
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getReleaseNotes() nothrow
   {
@@ -1406,6 +1530,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the version described by the application's release notes.
       Returns: the release notes version
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getReleaseNotesVersion() nothrow
   {
@@ -1418,6 +1544,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the URL of the support page for self.
       Returns: the support page URL
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getSupportUrl() nothrow
   {
@@ -1430,6 +1558,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the translator credits string.
       Returns: The translator credits string
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getTranslatorCredits() nothrow
   {
@@ -1442,6 +1572,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the version for self.
       Returns: the version
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getVersion() nothrow
   {
@@ -1454,6 +1586,8 @@ class AboutWindow : adw.window.Window
   /**
       Gets the application website URL for self.
       Returns: the website URL
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   string getWebsite() nothrow
   {
@@ -1470,6 +1604,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         applicationIcon = the application icon name
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setApplicationIcon(string applicationIcon) nothrow
   {
@@ -1484,6 +1620,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         applicationName = the application name
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setApplicationName(string applicationName) nothrow
   {
@@ -1510,6 +1648,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         artists = the list of artists
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setArtists(string[] artists = null) nothrow
   {
@@ -1529,6 +1669,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         comments = the comments
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setComments(string comments) nothrow
   {
@@ -1550,6 +1692,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         copyright = the copyright information
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setCopyright(string copyright) nothrow
   {
@@ -1572,6 +1716,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         debugInfo = the debug information
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setDebugInfo(string debugInfo) nothrow
   {
@@ -1589,6 +1735,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         filename = the debug info filename
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setDebugInfoFilename(string filename) nothrow
   {
@@ -1615,6 +1763,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         designers = the list of designers
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setDesigners(string[] designers = null) nothrow
   {
@@ -1636,6 +1786,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         developerName = the developer name
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setDeveloperName(string developerName) nothrow
   {
@@ -1662,6 +1814,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         developers = the list of developers
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setDevelopers(string[] developers = null) nothrow
   {
@@ -1690,6 +1844,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         documenters = the list of documenters
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setDocumenters(string[] documenters = null) nothrow
   {
@@ -1706,6 +1862,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         issueUrl = the issue tracker URL
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setIssueUrl(string issueUrl) nothrow
   {
@@ -1732,6 +1890,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         license = the license
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setLicense(string license) nothrow
   {
@@ -1759,6 +1919,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         licenseType = the license type
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setLicenseType(gtk.types.License licenseType) nothrow
   {
@@ -1793,6 +1955,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         releaseNotes = the release notes
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setReleaseNotes(string releaseNotes) nothrow
   {
@@ -1816,6 +1980,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         version_ = the release notes version
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setReleaseNotesVersion(string version_) nothrow
   {
@@ -1830,6 +1996,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         supportUrl = the support page URL
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setSupportUrl(string supportUrl) nothrow
   {
@@ -1846,7 +2014,8 @@ class AboutWindow : adw.window.Window
       should be marked as translatable.
       
       The string may contain email addresses and URLs, see the introduction for
-      more details.
+      more details. When there is more than one translator, they must be
+      separated by a newline in the same string.
       
       See also:
       
@@ -1859,6 +2028,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         translatorCredits = the translator credits
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setTranslatorCredits(string translatorCredits) nothrow
   {
@@ -1876,6 +2047,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         version_ = the version
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setVersion(string version_) nothrow
   {
@@ -1893,6 +2066,8 @@ class AboutWindow : adw.window.Window
   
       Params:
         website = the website URL
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   void setWebsite(string website) nothrow
   {
@@ -1920,6 +2095,8 @@ class AboutWindow : adw.window.Window
           `Returns` `TRUE` if the link has been activated
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -1970,6 +2147,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           The icon is displayed at the top of the main page.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T applicationIcon(string propval) nothrow
   {
@@ -1983,6 +2162,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           The name is displayed at the top of the main page.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T applicationName(string propval) nothrow
   {
@@ -2008,6 +2189,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T artists(string[] propval) nothrow
   {
@@ -2024,6 +2207,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
           detailed. It can also contain links and Pango markup.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T comments(string propval) nothrow
   {
@@ -2044,6 +2229,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T copyright(string propval) nothrow
   {
@@ -2065,6 +2252,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           Debug information cannot contain markup or links.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T debugInfo(string propval) nothrow
   {
@@ -2081,6 +2270,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           See [adw.about_window.AboutWindow.debugInfo].
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T debugInfoFilename(string propval) nothrow
   {
@@ -2106,6 +2297,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T designers(string[] propval) nothrow
   {
@@ -2126,6 +2319,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           Credits page, with [adw.about_window.AboutWindow.developers] and related
           properties.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T developerName(string propval) nothrow
   {
@@ -2151,6 +2346,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T developers(string[] propval) nothrow
   {
@@ -2176,6 +2373,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T documenters(string[] propval) nothrow
   {
@@ -2189,6 +2388,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           The issue tracker link is displayed on the main page.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T issueUrl(string propval) nothrow
   {
@@ -2214,6 +2415,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           [adw.about_window.AboutWindow.addLegalSection] can be used to add license
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T license(string propval) nothrow
   {
@@ -2242,6 +2445,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           [adw.about_window.AboutWindow.addLegalSection] can be used to add license
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T licenseType(gtk.types.License propval) nothrow
   {
@@ -2276,6 +2481,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
           as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T releaseNotes(string propval) nothrow
   {
@@ -2298,6 +2505,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           See [adw.about_window.AboutWindow.releaseNotes].
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T releaseNotesVersion(string propval) nothrow
   {
@@ -2311,6 +2520,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           The support page link is displayed on the main page.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T supportUrl(string propval) nothrow
   {
@@ -2339,6 +2550,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T translatorCredits(string propval) nothrow
   {
@@ -2355,6 +2568,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T version_(string propval) nothrow
   {
@@ -2371,6 +2586,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [adw.about_dialog.AboutDialog].
   */
   T website(string propval) nothrow
   {

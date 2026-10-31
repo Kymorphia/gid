@@ -14,7 +14,7 @@ import gtk.icon_paintable;
 import gtk.types;
 
 /**
-    [gtk.icon_theme.IconTheme] provides a facility for loading themed icons.
+    Loads themed icons.
     
     The main reason for using a name rather than simply providing a filename
     is to allow different icons to be used depending on what “icon theme” is
@@ -397,9 +397,7 @@ class IconTheme : gobject.object.ObjectWrap
 
   /**
       Gets the current icon theme name.
-      
-      Returns (transfer full): the current icon theme name,
-      Returns: 
+      Returns: the current icon theme name,
   */
   string getThemeName() nothrow
   {
@@ -449,7 +447,7 @@ class IconTheme : gobject.object.ObjectWrap
   
       Params:
         icon = the [gio.icon.Icon] to look up
-        size = desired icon size
+        size = desired icon size, in application pixels
         scale = the desired scale
         direction = text direction the icon will be displayed in
         flags = flags modifying the behavior of the icon lookup
@@ -484,8 +482,8 @@ class IconTheme : gobject.object.ObjectWrap
   
       Params:
         iconName = the name of the icon to lookup
-        fallbacks = 
-        size = desired icon size.
+        fallbacks = fallback names
+        size = desired icon size, in application pixels
         scale = the window scale this will be displayed on
         direction = text direction the icon will be displayed in
         flags = flags modifying the behavior of the icon lookup

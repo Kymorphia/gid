@@ -7095,7 +7095,7 @@ enum MAJOR_VERSION = 3;
 enum MAX_TIMECOORD_AXES = 128;
 
 /** */
-enum MICRO_VERSION = 43;
+enum MICRO_VERSION = 52;
 
 /** */
 enum MINOR_VERSION = 24;

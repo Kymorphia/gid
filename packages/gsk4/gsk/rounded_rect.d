@@ -97,7 +97,7 @@ class RoundedRect
   }
 
   /**
-      Checks if the given rect is contained inside the rounded rectangle.
+      Checks if the given rectangle is contained inside the rounded rectangle.
   
       Params:
         rect = the rectangle to check
@@ -111,9 +111,9 @@ class RoundedRect
   }
 
   /**
-      Initializes the given [gsk.rounded_rect.RoundedRect] with the given values.
+      Initializes a rounded rectangle with the given values.
       
-      This function will implicitly normalize the [gsk.rounded_rect.RoundedRect]
+      This function will implicitly normalize the rounded rectangle
       before returning.
   
       Params:
@@ -122,7 +122,7 @@ class RoundedRect
         topRight = the rounding radius of the top right corner
         bottomRight = the rounding radius of the bottom right corner
         bottomLeft = the rounding radius of the bottom left corner
-      Returns: the initialized rectangle
+      Returns: the initialized rounded rectangle
   */
   gsk.rounded_rect.RoundedRect init_(graphene.rect.Rect bounds, graphene.size.Size topLeft, graphene.size.Size topRight, graphene.size.Size bottomRight, graphene.size.Size bottomLeft) nothrow
   {
@@ -133,14 +133,14 @@ class RoundedRect
   }
 
   /**
-      Initializes self using the given src rectangle.
+      Initializes a rounded rectangle with a copy.
       
-      This function will not normalize the [gsk.rounded_rect.RoundedRect],
+      This function will not normalize the rounded rectangle,
       so make sure the source is normalized.
   
       Params:
-        src = a [gsk.rounded_rect.RoundedRect]
-      Returns: the initialized rectangle
+        src = another rounded rectangle
+      Returns: the initialized rounded rectangle
   */
   gsk.rounded_rect.RoundedRect initCopy(gsk.rounded_rect.RoundedRect src) nothrow
   {
@@ -151,13 +151,13 @@ class RoundedRect
   }
 
   /**
-      Initializes self to the given bounds and sets the radius
-      of all four corners to radius.
+      Initializes a rounded rectangle to the given bounds
+      and sets the radius of all four corners equally.
   
       Params:
         bounds = a [graphene.rect.Rect]
         radius = the border radius
-      Returns: the initialized rectangle
+      Returns: the initialized rounded rectangle
   */
   gsk.rounded_rect.RoundedRect initFromRect(graphene.rect.Rect bounds, float radius) nothrow
   {
@@ -168,7 +168,8 @@ class RoundedRect
   }
 
   /**
-      Checks if part of the given rect is contained inside the rounded rectangle.
+      Checks if part a rectangle is contained
+      inside the rounded rectangle.
   
       Params:
         rect = the rectangle to check
@@ -182,12 +183,12 @@ class RoundedRect
   }
 
   /**
-      Checks if all corners of self are right angles and the
-      rectangle covers all of its bounds.
+      Checks if all corners of a rounded rectangle are right angles
+      and the rectangle covers all of its bounds.
       
       This information can be used to decide if [gsk.clip_node.ClipNode.new_]
       or [gsk.rounded_clip_node.RoundedClipNode.new_] should be called.
-      Returns: true if the rectangle is rectilinear
+      Returns: true if the rounded rectangle is rectilinear
   */
   bool isRectilinear() nothrow
   {
@@ -197,12 +198,12 @@ class RoundedRect
   }
 
   /**
-      Normalizes the passed rectangle.
+      Normalizes a rounded rectangle.
       
-      This function will ensure that the bounds of the rectangle
+      This function will ensure that the bounds of the rounded rectangle
       are normalized and ensure that the corner values are positive
       and the corners do not overlap.
-      Returns: the normalized rectangle
+      Returns: the normalized rounded rectangle
   */
   gsk.rounded_rect.RoundedRect normalize() nothrow
   {
@@ -213,14 +214,14 @@ class RoundedRect
   }
 
   /**
-      Offsets the bound's origin by dx and dy.
+      Offsets the rounded rectangle's origin by dx and dy.
       
-      The size and corners of the rectangle are unchanged.
+      The size and corners of the rounded rectangle are unchanged.
   
       Params:
         dx = the horizontal offset
         dy = the vertical offset
-      Returns: the offset rectangle
+      Returns: the offset rounded rectangle
   */
   gsk.rounded_rect.RoundedRect offset(float dx, float dy) nothrow
   {
@@ -231,21 +232,21 @@ class RoundedRect
   }
 
   /**
-      Shrinks (or grows) the given rectangle by moving the 4 sides
+      Shrinks (or grows) a rounded rectangle by moving the 4 sides
       according to the offsets given.
       
       The corner radii will be changed in a way that tries to keep
       the center of the corner circle intact. This emulates CSS behavior.
       
-      This function also works for growing rectangles if you pass
-      negative values for the top, right, bottom or left.
+      This function also works for growing rounded rectangles
+      if you pass negative values for the top, right, bottom or left.
   
       Params:
-        top = How far to move the top side downwards
-        right = How far to move the right side to the left
-        bottom = How far to move the bottom side upwards
-        left = How far to move the left side to the right
-      Returns: the resized [gsk.rounded_rect.RoundedRect]
+        top = how far to move the top side downwards
+        right = how far to move the right side to the left
+        bottom = how far to move the bottom side upwards
+        left = how far to move the left side to the right
+      Returns: the resized rounded rectangle
   */
   gsk.rounded_rect.RoundedRect shrink(float top, float right, float bottom, float left) nothrow
   {

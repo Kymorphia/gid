@@ -15,7 +15,7 @@ import gtk.section_model_mixin;
 import gtk.types;
 
 /**
-    [gtk.flatten_list_model.FlattenListModel] is a list model that concatenates other list models.
+    A list model that concatenates other list models.
     
     [gtk.flatten_list_model.FlattenListModel] takes a list model containing list models, and flattens
     it into a single model. Each list model becomes a section in the single model.

@@ -16,7 +16,7 @@ import gtk.types;
 import pango.language;
 
 /**
-    An iterator for the contents of a [gtk.text_buffer.TextBuffer].
+    Iterates over the contents of a [gtk.text_buffer.TextBuffer].
     
     You may wish to begin by reading the
     [text widget conceptual overview](section-text-widget.html),

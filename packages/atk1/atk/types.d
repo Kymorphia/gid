@@ -152,7 +152,7 @@ alias PropertyChangeHandler = void delegate(atk.object.ObjectWrap obj, atk.prope
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum BINARY_AGE = 25210;
+enum BINARY_AGE = 26014;
 
 /**
     Like [atk.global.getInterfaceAge], but from the headers used at
@@ -173,14 +173,14 @@ enum MAJOR_VERSION = 2;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 0;
+enum MICRO_VERSION = 4;
 
 /**
     Like [atk.global.getMinorVersion], but from the headers used at
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MINOR_VERSION = 52;
+enum MINOR_VERSION = 60;
 
 /**
     A macro that should be defined by the user prior to including

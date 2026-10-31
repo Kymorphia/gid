@@ -118,6 +118,22 @@ class MarkupParseContext : gobject.boxed.Boxed
   }
 
   /**
+      Retrieves the current offset from the beginning of the document,
+      in bytes.
+      
+      The information is meant to accompany the values returned by
+      [glib.markup_parse_context.MarkupParseContext.getPosition], and comes with the
+      same accuracy guarantees.
+      Returns: the offset
+  */
+  size_t getOffset() nothrow
+  {
+    size_t _retval;
+    _retval = g_markup_parse_context_get_offset(cast(GMarkupParseContext*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Retrieves the current line number and the number of the character on
       that line. Intended for use in error messages; there are no strict
       semantics for what constitutes the "current" line number other than
@@ -130,6 +146,31 @@ class MarkupParseContext : gobject.boxed.Boxed
   void getPosition(out int lineNumber, out int charNumber) nothrow
   {
     g_markup_parse_context_get_position(cast(GMarkupParseContext*)this._cPtr, cast(int*)&lineNumber, cast(int*)&charNumber);
+  }
+
+  /**
+      Retrieves the start position of the current start or end tag.
+      
+      This function can be used in the `start_element` or `end_element`
+      callbacks to obtain location information for error reporting.
+      
+      Note that line_number and char_number are intended for human
+      readable error messages and are therefore 1-based and in Unicode
+      characters. offset on the other hand is meant for programmatic
+      use, and thus is 0-based and in bytes.
+      
+      The information is meant to accompany the values returned by
+      [glib.markup_parse_context.MarkupParseContext.getPosition], and comes with the
+      same accuracy guarantees.
+  
+      Params:
+        lineNumber = return location for the line number
+        charNumber = return location for the character number
+        offset = return location for offset from the beginning of the document
+  */
+  void getTagStart(out size_t lineNumber, out size_t charNumber, out size_t offset) nothrow
+  {
+    g_markup_parse_context_get_tag_start(cast(GMarkupParseContext*)this._cPtr, cast(size_t*)&lineNumber, cast(size_t*)&charNumber, cast(size_t*)&offset);
   }
 
   /**

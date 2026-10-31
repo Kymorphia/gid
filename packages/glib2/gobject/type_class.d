@@ -98,16 +98,18 @@ struct TypeClass
   }
 
   /**
+      Retrieves the class structure of the immediate parent type of the
+      class passed in.
+      
       This is a convenience function often needed in class initializers.
-      It returns the class structure of the immediate parent type of the
-      class passed in.  Since derived classes hold a reference count on
-      their parent classes as long as they are instantiated, the returned
-      class will always exist.
+      
+      Since derived classes hold a reference on their parent classes as
+      long as they are instantiated, the returned class will always exist.
       
       This function is essentially equivalent to:
       g_type_class_peek (g_type_parent (G_TYPE_FROM_CLASS (g_class)))
       Returns: the parent class
-            of g_class
+          of g_class
   */
   gobject.type_class.TypeClass peekParent() nothrow
   {
@@ -120,17 +122,43 @@ struct TypeClass
   }
 
   /**
-      This function is essentially the same as [gobject.type_class.TypeClass.ref_],
-      except that the classes reference count isn't incremented.
+      Retrieves the type class of the given type.
+      
+      This function will create the class on demand if it does not exist
+      already.
+      
+      If you don't want to create the class, use [gobject.type_class.TypeClass.peek] instead.
+  
+      Params:
+        type = type ID of a classed type
+      Returns: the class structure
+          for the type
+  */
+  static gobject.type_class.TypeClass get(gobject.types.GType type) nothrow
+  {
+    GTypeClass* _cretval;
+    _cretval = g_type_class_get(type);
+    gobject.type_class.TypeClass _retval;
+    if (_cretval)
+      _retval = *cast(gobject.type_class.TypeClass*)_cretval;
+    return _retval;
+  }
+
+  /**
+      Retrieves the class for a give type.
+      
+      This function is essentially the same as [gobject.type_class.TypeClass.get],
+      except that the class may have not been instantiated yet.
+      
       As a consequence, this function may return null if the class
       of the type passed in does not currently exist (hasn't been
       referenced before).
   
       Params:
         type = type ID of a classed type
-      Returns: the #GTypeClass
-            structure for the given type ID or null if the class does not
-            currently exist
+      Returns: the
+          #GTypeClass structure for the given type ID or null if the class
+          does not currently exist
   */
   static gobject.type_class.TypeClass peek(gobject.types.GType type) nothrow
   {
@@ -148,9 +176,9 @@ struct TypeClass
   
       Params:
         type = type ID of a classed type
-      Returns: the #GTypeClass
-            structure for the given type ID or null if the class does not
-            currently exist or is dynamically loaded
+      Returns: the
+          #GTypeClass structure for the given type ID or null if the class
+          does not currently exist or is dynamically loaded
   */
   static gobject.type_class.TypeClass peekStatic(gobject.types.GType type) nothrow
   {
@@ -164,13 +192,16 @@ struct TypeClass
 
   /**
       Increments the reference count of the class structure belonging to
-      type. This function will demand-create the class if it doesn't
-      exist already.
+      type.
+      
+      This function will demand-create the class if it doesn't exist already.
   
       Params:
         type = type ID of a classed type
       Returns: the #GTypeClass
-            structure for the given type ID
+          structure for the given type ID
+  
+      Deprecated: Use [gobject.type_class.TypeClass.get] instead
   */
   static gobject.type_class.TypeClass ref_(gobject.types.GType type) nothrow
   {

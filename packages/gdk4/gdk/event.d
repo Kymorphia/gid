@@ -15,12 +15,13 @@ import gid.gid;
 import gobject.object;
 
 /**
-    [gdk.event.Event]s are immutable data structures, created by GDK to
-    represent windowing system events.
+    Represents windowing system events.
     
     In GTK applications the events are handled automatically by toplevel
     widgets and passed on to the event controllers of appropriate widgets,
     so using [gdk.event.Event] and its related API is rarely needed.
+    
+    [gdk.event.Event] structs are immutable.
 */
 class Event
 {
@@ -226,7 +227,7 @@ class Event
       Params:
         x = location to put event surface x coordinate
         y = location to put event surface y coordinate
-      Returns: 
+      Returns: whether the positions were set
   */
   bool getPosition(out double x, out double y) nothrow
   {
@@ -278,9 +279,13 @@ class Event
       according to platform conventions.
       
       The right mouse button typically triggers context menus.
+      On macOS, Control+left mouse button also triggers.
       
       This function should always be used instead of simply checking for
-      event->button == [gdk.types.BUTTON_SECONDARY].
+      
+      ```c
+      event->button == GDK_BUTTON_SECONDARY
+      ```
       Returns: true if the event should trigger a context menu.
   */
   bool triggersContextMenu() nothrow

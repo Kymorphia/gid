@@ -15,7 +15,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.string_list.StringList] is a list model that wraps an array of strings.
+    A list model that wraps an array of strings.
     
     The objects in the model are of type [gtk.string_object.StringObject] and have
     a "string" property that can be used inside expressions.
@@ -134,6 +134,23 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   }
 
   /**
+      Gets the position of the string in self.
+      
+      If self does not contain string item, `G_MAXUINT` is returned.
+  
+      Params:
+        string_ = the string to find
+      Returns: the position of the string
+  */
+  uint find(string string_) nothrow
+  {
+    uint _retval;
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+    _retval = gtk_string_list_find(cast(GtkStringList*)this._cPtr, _string_);
+    return _retval;
+  }
+
+  /**
       Gets the string that is at position in self.
       
       If self does not contain position items, null is returned.
@@ -222,7 +239,12 @@ class StringListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
   mixin ListModelGidBuilderT!();
   mixin BuildableGidBuilderT!();
 
-  /** */
+  /**
+      Set `strings` property.
+      Params:
+        propval = The strings in the model.
+      Returns: Builder instance for fluent chaining
+  */
   T strings(string[] propval) nothrow
   {
     return setProperty("strings", propval);

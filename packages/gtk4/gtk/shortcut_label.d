@@ -19,6 +19,8 @@ import gtk.widget;
     [gtk.shortcut_label.ShortcutLabel] displays a single keyboard shortcut or gesture.
     
     The main use case for [gtk.shortcut_label.ShortcutLabel] is inside a [gtk.shortcuts_window.ShortcutsWindow].
+
+    Deprecated: This widget will be removed in GTK 5
 */
 class ShortcutLabel : gtk.widget.Widget
 {
@@ -63,6 +65,8 @@ class ShortcutLabel : gtk.widget.Widget
         
         See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
         for the accepted syntax.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string accelerator() nothrow
   {
@@ -76,6 +80,8 @@ class ShortcutLabel : gtk.widget.Widget
           
           See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
           for the accepted syntax.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void accelerator(string propval) nothrow
   {
@@ -85,6 +91,8 @@ class ShortcutLabel : gtk.widget.Widget
   /**
       Get `disabledText` property.
       Returns: The text that is displayed when no accelerator is set.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string disabledText() nothrow
   {
@@ -95,6 +103,8 @@ class ShortcutLabel : gtk.widget.Widget
       Set `disabledText` property.
       Params:
         propval = The text that is displayed when no accelerator is set.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void disabledText(string propval) nothrow
   {
@@ -107,6 +117,8 @@ class ShortcutLabel : gtk.widget.Widget
       Params:
         accelerator = the initial accelerator
       Returns: a newly-allocated [gtk.shortcut_label.ShortcutLabel]
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   this(string accelerator) nothrow
   {
@@ -119,6 +131,8 @@ class ShortcutLabel : gtk.widget.Widget
   /**
       Retrieves the current accelerator of self.
       Returns: the current accelerator.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   string getAccelerator() nothrow
   {
@@ -132,6 +146,8 @@ class ShortcutLabel : gtk.widget.Widget
       Retrieves the text that is displayed when no accelerator is set.
       Returns: the current text displayed when no
         accelerator is set.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   string getDisabledText() nothrow
   {
@@ -146,6 +162,8 @@ class ShortcutLabel : gtk.widget.Widget
   
       Params:
         accelerator = the new accelerator
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   void setAccelerator(string accelerator) nothrow
   {
@@ -158,6 +176,8 @@ class ShortcutLabel : gtk.widget.Widget
   
       Params:
         disabledText = the text to be displayed when no accelerator is set
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   void setDisabledText(string disabledText) nothrow
   {
@@ -179,6 +199,8 @@ class ShortcutLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
           for the accepted syntax.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T accelerator(string propval) nothrow
   {
@@ -190,6 +212,8 @@ class ShortcutLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The text that is displayed when no accelerator is set.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T disabledText(string propval) nothrow
   {

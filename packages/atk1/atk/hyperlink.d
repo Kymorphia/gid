@@ -81,7 +81,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   */
   @property bool selectedLink() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("selected-link");
+    return isSelectedLink();
   }
 
   /** */

@@ -9,7 +9,11 @@ import gsk.c.types;
 import gsk.renderer;
 import gsk.types;
 
-/** */
+/**
+    Renders a GSK rendernode tree with OpenGL.
+    
+    See [gsk.renderer.Renderer].
+*/
 class GLRenderer : gsk.renderer.Renderer
 {
 
@@ -48,8 +52,8 @@ class GLRenderer : gsk.renderer.Renderer
   }
 
   /**
-      Creates a new [gsk.renderer.Renderer] using the new OpenGL renderer.
-      Returns: a new GL renderer
+      Creates an instance of the GL renderer.
+      Returns: a GL renderer
   */
   this() nothrow
   {

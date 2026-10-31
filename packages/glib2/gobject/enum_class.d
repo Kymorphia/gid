@@ -5,7 +5,6 @@ public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
-import gobject.enum_value;
 import gobject.type_class;
 import gobject.types;
 
@@ -39,5 +38,5 @@ struct EnumClass
       an array of #GEnumValue structs describing the
        individual values.
   */
-  EnumValue* values;
+  GEnumValue* values;
 }

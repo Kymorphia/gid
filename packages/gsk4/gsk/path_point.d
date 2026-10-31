@@ -13,10 +13,10 @@ import gsk.path_measure;
 import gsk.types;
 
 /**
-    [gsk.path_point.PathPoint] is an opaque type representing a point on a path.
+    Represents a point on a path.
     
-    It can be queried for properties of the path at that point, such as
-    its tangent or its curvature.
+    It can be queried for properties of the path at that point,
+    such as its tangent or its curvature.
     
     To obtain a [gsk.path_point.PathPoint], use [gsk.path.Path.getClosestPoint],
     [gsk.path.Path.getStartPoint], [gsk.path.Path.getEndPoint]
@@ -65,7 +65,7 @@ class PathPoint : gobject.boxed.Boxed
       Returns whether point1 is before or after point2.
   
       Params:
-        point2 = another [gsk.path_point.PathPoint]
+        point2 = another path point
       Returns: -1 if point1 is before point2,
           1 if point1 is after point2,
           0 if they are equal
@@ -77,7 +77,10 @@ class PathPoint : gobject.boxed.Boxed
     return _retval;
   }
 
-  /** */
+  /**
+      Copies a path point.
+      Returns: the copied point
+  */
   gsk.path_point.PathPoint copy() nothrow
   {
     GskPathPoint* _cretval;
@@ -97,8 +100,8 @@ class PathPoint : gobject.boxed.Boxed
       same location.
   
       Params:
-        point2 = another [gsk.path_point.PathPoint]
-      Returns: `TRUE` if point1 and point2 are equal
+        point2 = another path point
+      Returns: true if point1 and point2 are equal
   */
   bool equal(gsk.path_point.PathPoint point2) nothrow
   {
@@ -114,15 +117,15 @@ class PathPoint : gobject.boxed.Boxed
       The curvature is the inverse of the radius of the osculating circle.
       
       Lines have a curvature of zero (indicating an osculating circle of
-      infinite radius. In this case, the center is not modified.
+      infinite radius). In this case, the center is not modified.
       
       Circles with a radius of zero have `INFINITY` as curvature
       
       Note that certain points on a path may not have a single curvature,
-      such as sharp turns. At such points, there are two curvatures --
-      the (limit of) the curvature of the path going into the point,
-      and the (limit of) the curvature of the path coming out of it.
-      The direction argument lets you choose which one to get.
+      such as sharp turns. At such points, there are two curvatures — the
+      (limit of) the curvature of the path going into the point, and the
+      (limit of) the curvature of the path coming out of it. The direction
+      argument lets you choose which one to get.
       
       <picture>
         <source srcset="curvature-dark.png" media="(prefers-color-scheme: dark)">
@@ -132,9 +135,9 @@ class PathPoint : gobject.boxed.Boxed
       Params:
         path = the path that point is on
         direction = the direction for which to return the curvature
-        center = Return location for
+        center = return location for
             the center of the osculating circle
-      Returns: The curvature of the path at the given point
+      Returns: the curvature of the path at the given point
   */
   float getCurvature(gsk.path.Path path, gsk.types.PathDirection direction, out graphene.point.Point center) nothrow
   {
@@ -145,10 +148,10 @@ class PathPoint : gobject.boxed.Boxed
 
   /**
       Returns the distance from the beginning of the path
-      to point.
+      to the point.
   
       Params:
-        measure = a [gsk.path_measure.PathMeasure] for the path
+        measure = a path measure for the path
       Returns: the distance of point
   */
   float getDistance(gsk.path_measure.PathMeasure measure) nothrow
@@ -196,12 +199,12 @@ class PathPoint : gobject.boxed.Boxed
       
       Note that certain points on a path may not have a single
       tangent, such as sharp turns. At such points, there are
-      two tangents -- the direction of the path going into the
+      two tangents — the direction of the path going into the
       point, and the direction coming out of it. The direction
       argument lets you choose which one to get.
       
       If the path is just a single point (e.g. a circle with
-      radius zero), then tangent is set to `0, 0`.
+      radius zero), then the tangent is set to `0, 0`.
       
       If you want to orient something in the direction of the
       path, [gsk.path_point.PathPoint.getRotation] may be more

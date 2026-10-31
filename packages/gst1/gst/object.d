@@ -234,6 +234,34 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
+      Equivalent to [gst.element.Element.callAsync] but this API allows func to be called
+      with #GstObject. See also [gst.element.Element.callAsync]
+  
+      Params:
+        func = function to call asynchronously from another thread
+  */
+  void callAsync(gst.types.ObjectCallAsyncFunc func) nothrow
+  {
+    extern(C) void _funcCallback(GstObject* object, void* userData) nothrow
+    {
+      ptrThawGC(userData);
+      auto _dlg = cast(gst.types.ObjectCallAsyncFunc*)userData;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)object, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.ObjectCallAsyncFunc");
+      }
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    gst_object_call_async(cast(GstObject*)this._cPtr, _funcCB, _func);
+  }
+
+  /**
       A default error function that uses [glib.global.printerr] to display the error message
       and the optional debug string..
       
@@ -369,6 +397,22 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
     char* _cretval;
     _cretval = gst_object_get_path_string(cast(GstObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the toplevel parent of object. This function increases the refcount
+      of the toplevel object so you should [gst.object.ObjectWrap.unref] it after usage.
+      Returns: toplevel of object, or object itself if it has no
+          parent. unref after usage.
+        
+        MT safe. Grabs and releases object's LOCK.
+  */
+  gst.object.ObjectWrap getToplevel() nothrow
+  {
+    GstObject* _cretval;
+    _cretval = gst_object_get_toplevel(cast(GstObject*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(GstObject*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -8,7 +8,7 @@ import glib.c.types;
 import glib.types;
 
 /**
-    The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
+    The #GNode struct represents one node in a [n-ary tree](data-structures.html#n-ary-trees).
 */
 class Node
 {

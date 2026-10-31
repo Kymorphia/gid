@@ -67,12 +67,19 @@ class VideoScaler
       Params:
         outOffset = an output offset
         inOffset = result input offset
-        nTaps = result n_taps
-      Returns: an array of n_tap gdouble values with filter coefficients.
+      Returns: an array of n_taps gdouble values with filter coefficients.
   */
-  const(double)* getCoeff(uint outOffset, out uint inOffset, out uint nTaps) nothrow
+  double[] getCoeff(uint outOffset, out uint inOffset) nothrow
   {
-    auto _retval = gst_video_scaler_get_coeff(cast(GstVideoScaler*)this._cPtr, outOffset, cast(uint*)&inOffset, cast(uint*)&nTaps);
+    const(double)* _cretval;
+    uint _cretlength;
+    _cretval = gst_video_scaler_get_coeff(cast(GstVideoScaler*)this._cPtr, outOffset, cast(uint*)&inOffset, &_cretlength);
+    double[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(double[])_cretval[0 .. _cretlength].dup;
+    }
     return _retval;
   }
 

@@ -17,14 +17,14 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.aspect_frame.AspectFrame] preserves the aspect ratio of its child.
+    Preserves the aspect ratio of its child.
     
     The frame can respect the aspect ratio of the child widget,
     or use its own aspect ratio.
     
     # CSS nodes
     
-    [gtk.aspect_frame.AspectFrame] uses a CSS node with name `frame`.
+    [gtk.aspect_frame.AspectFrame] uses a CSS node with name `aspectframe`.
     
     # Accessibility
     

@@ -14,7 +14,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.recent_info.RecentInfo] contains the metadata associated with an item in the
+    Contains the metadata associated with an item in the
     recently used files list.
 */
 class RecentInfo : gobject.boxed.Boxed

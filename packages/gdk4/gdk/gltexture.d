@@ -16,7 +16,7 @@ import gio.loadable_icon_mixin;
 import gobject.gid_builder;
 
 /**
-    A GdkTexture representing a GL texture object.
+    A [gdk.texture.Texture] representing a GL texture object.
 */
 class GLTexture : gdk.texture.Texture
 {

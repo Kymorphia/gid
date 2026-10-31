@@ -24,7 +24,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    A [gdk.surface.Surface] is a rectangular region on the screen.
+    Represents a rectangular region on the screen.
     
     It’s a low-level object, used to implement high-level objects
     such as [GtkWindow](../gtk4/class.Window.html).
@@ -204,6 +204,9 @@ class Surface : gobject.object.ObjectWrap
   /**
       Creates a new [gdk.cairo_context.CairoContext] for rendering on surface.
       Returns: the newly created [gdk.cairo_context.CairoContext]
+  
+      Deprecated: Drawing content with Cairo should be done via
+          Cairo rendernodes, not by using the Cairo renderer.
   */
   gdk.cairo_context.CairoContext createCairoContext() nothrow
   {
@@ -573,9 +576,10 @@ class Surface : gobject.object.ObjectWrap
       a particular backend supports input regions.
   
       Params:
-        region = region of surface to be reactive
+        region = region of surface to be reactive,
+            or null to make the entire surface reactive
   */
-  void setInputRegion(cairo.region.Region region) nothrow
+  void setInputRegion(cairo.region.Region region = null) nothrow
   {
     gdk_surface_set_input_region(cast(GdkSurface*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -600,6 +604,9 @@ class Surface : gobject.object.ObjectWrap
       Params:
         region = a region, or null to make the entire
             surface opaque
+  
+      Deprecated: GDK can figure out the opaque parts of a window itself
+          by inspecting the contents that are drawn.
   */
   void setOpaqueRegion(cairo.region.Region region = null) nothrow
   {

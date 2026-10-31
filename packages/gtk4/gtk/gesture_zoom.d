@@ -11,7 +11,7 @@ import gtk.gesture;
 import gtk.types;
 
 /**
-    [gtk.gesture_zoom.GestureZoom] is a [gtk.gesture.Gesture] for 2-finger pinch/zoom gestures.
+    Recognizes 2-finger pinch/zoom gestures.
     
     Whenever the distance between both tracked sequences changes, the
     [gtk.gesture_zoom.GestureZoom.scaleChanged] signal is emitted to report

@@ -20,9 +20,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.check_button.CheckButton] places a label next to an indicator.
+    Places a label next to an indicator.
     
-    ![Example GtkCheckButtons](check-button.png)
+    <picture>
+      <source srcset="check-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Example GtkCheckButtons" src="check-button.png">
+    </picture>
     
     A [gtk.check_button.CheckButton] is created by calling either [gtk.check_button.CheckButton.new_]
     or [gtk.check_button.CheckButton.newWithLabel].
@@ -51,7 +54,10 @@ import gtk.widget;
     Grouped check buttons use a different indicator, and are commonly referred
     to as *radio buttons*.
     
-    ![Example GtkCheckButtons](radio-button.png)
+    <picture>
+      <source srcset="radio-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Example GtkRadioButtons" src="radio-button.png">
+    </picture>
     
     To add a [gtk.check_button.CheckButton] to a group, use [gtk.check_button.CheckButton.setGroup].
     
@@ -60,10 +66,16 @@ import gtk.widget;
     [gio.action.Action] with a target for each button. Using the `toggled` signals to keep
     track of the group changes and state is discouraged.
     
+    # Shortcuts and Gestures
+    
+    [gtk.check_button.CheckButton] supports the following keyboard shortcuts:
+    
+    - <kbd>␣</kbd> or <kbd>Enter</kbd> activates the button.
+    
     # CSS nodes
     
     ```
-    checkbutton[.text-button]
+    checkbutton[.text-button][.grouped]
     ├── check
     ╰── [label]
     ```

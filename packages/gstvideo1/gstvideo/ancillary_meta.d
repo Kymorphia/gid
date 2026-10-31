@@ -36,10 +36,9 @@ class AncillaryMeta
         DID = Data Identified
         SDIDBlockNumber = Secondary Data identification (if type 2) or Data block
              number (if type 1)
-        dataCount = The amount of user data
         checksum = The checksum of the ADF
   */
-  this(gstvideo.types.AncillaryMetaField field = gstvideo.types.AncillaryMetaField.init, bool cNotYChannel = bool.init, ushort line = ushort.init, ushort offset = ushort.init, ushort DID = ushort.init, ushort SDIDBlockNumber = ushort.init, ushort dataCount = ushort.init, ushort checksum = ushort.init) nothrow
+  this(gstvideo.types.AncillaryMetaField field = gstvideo.types.AncillaryMetaField.init, bool cNotYChannel = bool.init, ushort line = ushort.init, ushort offset = ushort.init, ushort DID = ushort.init, ushort SDIDBlockNumber = ushort.init, ushort checksum = ushort.init) nothrow
   {
     this.field = field;
     this.cNotYChannel = cNotYChannel;
@@ -47,7 +46,6 @@ class AncillaryMeta
     this.offset = offset;
     this.DID = DID;
     this.SDIDBlockNumber = SDIDBlockNumber;
-    this.dataCount = dataCount;
     this.checksum = checksum;
   }
 
@@ -210,22 +208,12 @@ class AncillaryMeta
   }
 
   /**
-      Get `dataCount` field.
-      Returns: The amount of user data
+      Get `data` field.
+      Returns: The User data
   */
-  @property ushort dataCount() nothrow
+  @property ushort[] data() nothrow
   {
-    return (cast(GstAncillaryMeta*)this._cPtr).dataCount;
-  }
-
-  /**
-      Set `dataCount` field.
-      Params:
-        propval = The amount of user data
-  */
-  @property void dataCount(ushort propval) nothrow
-  {
-    (cast(GstAncillaryMeta*)this._cPtr).dataCount = propval;
+    return (cast(GstAncillaryMeta*)this._cPtr).data[0 .. (cast(GstAncillaryMeta*)this._cPtr).dataCount].dup;
   }
 
   /**

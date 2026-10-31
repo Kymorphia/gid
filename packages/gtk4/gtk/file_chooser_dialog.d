@@ -144,7 +144,7 @@ import gtk.types;
     - To save a file under a different name, use [gtk.types.FileChooserAction.Save],
       and set the existing file with [gtk.file_chooser.FileChooser.setFile].
     
-    - To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
+    - To choose a folder instead of a file, use [gtk.types.FileChooserAction.SelectFolder].
     
     In general, you should only cause the file chooser to show a specific
     folder when it is appropriate to use [gtk.file_chooser.FileChooser.setFile],

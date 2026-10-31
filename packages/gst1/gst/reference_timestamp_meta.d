@@ -8,6 +8,7 @@ import gst.c.types;
 import gst.caps;
 import gst.meta;
 import gst.meta_info;
+import gst.structure;
 import gst.types;
 
 /**
@@ -32,6 +33,13 @@ import gst.types;
     
     Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
     [gst.meta.Meta.deserialize].
+    
+    Since 1.28 additional information about the timestamp can be provided via the
+    optional @info structure. This should only be used for information about the
+    timestamp and not for information about the clock source. The latter should
+    be stored in the @reference instead.
+    
+    Interpretation of the fields of @info depends on the @reference.
 */
 class ReferenceTimestampMeta
 {
@@ -43,12 +51,14 @@ class ReferenceTimestampMeta
         reference = identifier for the timestamp reference.
         timestamp = timestamp
         duration = duration, or [gst.types.CLOCK_TIME_NONE]
+        info = Additional information about the timestamp.
   */
-  this(gst.caps.Caps reference = gst.caps.Caps.init, gst.types.ClockTime timestamp = gst.types.ClockTime.init, gst.types.ClockTime duration = gst.types.ClockTime.init) nothrow
+  this(gst.caps.Caps reference = gst.caps.Caps.init, gst.types.ClockTime timestamp = gst.types.ClockTime.init, gst.types.ClockTime duration = gst.types.ClockTime.init, gst.structure.Structure info = gst.structure.Structure.init) nothrow
   {
     this.reference = reference;
     this.timestamp = timestamp;
     this.duration = duration;
+    this.info = info;
   }
 
   /** */
@@ -133,6 +143,28 @@ class ReferenceTimestampMeta
   @property void duration(gst.types.ClockTime propval) nothrow
   {
     (cast(GstReferenceTimestampMeta*)this._cPtr).duration = propval;
+  }
+
+  private gst.structure.Structure _infoRef; // Keeps borrowed field value alive
+
+  /**
+      Get `info` field.
+      Returns: Additional information about the timestamp.
+  */
+  @property gst.structure.Structure info() nothrow
+  {
+    return cToD!(gst.structure.Structure)(cast(void*)(cast(GstReferenceTimestampMeta*)this._cPtr).info);
+  }
+
+  /**
+      Set `info` field.
+      Params:
+        propval = Additional information about the timestamp.
+  */
+  @property void info(gst.structure.Structure propval) nothrow
+  {
+    _infoRef = propval;
+    (cast(GstReferenceTimestampMeta*)this._cPtr).info = propval ? cast(GstStructure*)propval._cPtr(No.Dup) : null;
   }
 
   /**

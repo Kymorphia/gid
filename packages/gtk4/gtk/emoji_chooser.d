@@ -21,13 +21,28 @@ import gtk.shortcut_manager_mixin;
 import gtk.types;
 
 /**
-    The [gtk.emoji_chooser.EmojiChooser] is used by text widgets such as [gtk.entry.Entry] or
-    [gtk.text_view.TextView] to let users insert Emoji characters.
+    Used by text widgets to let users insert Emoji characters.
     
-    ![An example GtkEmojiChooser](emojichooser.png)
+    <picture>
+      <source srcset="emojichooser-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkEmojiChooser" src="emojichooser.png">
+    </picture>
     
     [gtk.emoji_chooser.EmojiChooser] emits the [gtk.emoji_chooser.EmojiChooser.emojiPicked]
     signal when an Emoji is selected.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.emoji_chooser.EmojiChooser] supports the following keyboard shortcuts:
+    
+    - <kbd>Ctrl</kbd>+<kbd>N</kbd> scrolls th the next section.
+    - <kbd>Ctrl</kbd>+<kbd>P</kbd> scrolls th the previous section.
+    
+    # Actions
+    
+    [gtk.emoji_chooser.EmojiChooser] defines a set of built-in actions:
+    
+    - `scroll.section` scrolls to the next or previous section.
     
     # CSS nodes
     

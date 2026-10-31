@@ -135,7 +135,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   */
   @property bool closed() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("closed");
+    return isClosed();
   }
 
   /**
@@ -559,8 +559,8 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       ```
       
       This is an asynchronous method. When the operation is finished,
-      callback will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
+      callback will be invoked in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread you are calling this method from. You can then call
       [gio.dbus_connection.DBusConnection.callFinish] to get the result of the operation.
       See [gio.dbus_connection.DBusConnection.callSync] for the synchronous version of this
@@ -854,13 +854,13 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       [gio.types.IOErrorEnum.Closed].
       
       When connection has been closed, the #GDBusConnection::closed
-      signal is emitted in the
-      [thread-default main context][g-main-context-push-thread-default]
+      signal is emitted in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread that connection was constructed in.
       
       This is an asynchronous method. When the operation is finished,
-      callback will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
+      callback will be invoked in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread you are calling this method from. You can
       then call [gio.dbus_connection.DBusConnection.closeFinish] to get the result of the
       operation. See [gio.dbus_connection.DBusConnection.closeSync] for the synchronous
@@ -991,7 +991,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   
       Params:
         objectPath = a D-Bus object path
-        actionGroup = a #GActionGroup
+        actionGroup = an action group
       Returns: the ID of the export (never zero), or 0 in case of failure
       Throws: [ErrorWrap]
   */
@@ -1043,15 +1043,15 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
 
   /**
       Asynchronously flushes connection, that is, writes all queued
-      outgoing message to the transport and then flushes the transport
+      outgoing messages to the transport and then flushes the transport
       (using [gio.output_stream.OutputStream.flushAsync]). This is useful in programs
-      that wants to emit a D-Bus signal and then exit immediately. Without
-      flushing the connection, there is no guaranteed that the message has
+      that want to emit a D-Bus signal and then exit immediately. Without
+      flushing the connection, there is no guarantee that the message has
       been sent to the networking buffers in the OS kernel.
       
       This is an asynchronous method. When the operation is finished,
-      callback will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
+      callback will be invoked in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread you are calling this method from. You can
       then call [gio.dbus_connection.DBusConnection.flushFinish] to get the result of the
       operation. See [gio.dbus_connection.DBusConnection.flushSync] for the synchronous
@@ -1258,6 +1258,11 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   /**
       Version of [gio.dbus_connection.DBusConnection.registerObject] using closures instead of a
       #GDBusInterfaceVTable for easier binding in other languages.
+      
+      Note that the reference counting semantics of the function wrapped by
+      method_call_closure are the same as those of
+      [gio.types.DBusInterfaceMethodCallFunc]: ownership of a reference to the
+      [gio.dbus_method_invocation.DBusMethodInvocation] is transferred to the function.
   
       Params:
         objectPath = The object path to register at.
@@ -1268,6 +1273,10 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: 0 if error is set, otherwise a registration ID (never 0)
         that can be used with [gio.dbus_connection.DBusConnection.unregisterObject] .
       Throws: [ErrorWrap]
+  
+      Deprecated: Deprecated in favour of
+           [gio.dbus_connection.DBusConnection.registerObjectWithClosures2], which has more
+           binding-friendly reference counting semantics.
   */
   uint registerObject(string objectPath, gio.dbus_interface_info.DBusInterfaceInfo interfaceInfo, gobject.closure.Closure methodCallClosure = null, gobject.closure.Closure getPropertyClosure = null, gobject.closure.Closure setPropertyClosure = null)
   {
@@ -1275,6 +1284,41 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
     GError *_err;
     _retval = g_dbus_connection_register_object_with_closures(cast(GDBusConnection*)this._cPtr, _objectPath, interfaceInfo ? cast(GDBusInterfaceInfo*)interfaceInfo._cPtr(No.Dup) : null, methodCallClosure ? cast(GClosure*)methodCallClosure._cPtr(No.Dup) : null, getPropertyClosure ? cast(GClosure*)getPropertyClosure._cPtr(No.Dup) : null, setPropertyClosure ? cast(GClosure*)setPropertyClosure._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Version of [gio.dbus_connection.DBusConnection.registerObject] using closures instead
+      of a [gio.types.DBusInterfaceVTable] for easier binding in other languages.
+      
+      In contrast to [gio.dbus_connection.DBusConnection.registerObject] and
+      [gio.dbus_connection.DBusConnection.registerObjectWithClosures], the reference
+      counting semantics of the function wrapped by method_call_closure are *not*
+      the same as those of [gio.types.DBusInterfaceMethodCallFunc]. Ownership of
+      a reference to the [gio.dbus_method_invocation.DBusMethodInvocation] is *not* transferred to
+      the function. Bindings must ensure that they add a reference to the
+      [gio.dbus_method_invocation.DBusMethodInvocation] before calling any
+      `g_dbus_method_invocation_return_*()` methods on it. This should be automatic
+      as a result of the introspection annotations on those methods.
+  
+      Params:
+        objectPath = The object path to register at.
+        interfaceInfo = Introspection data for the interface.
+        methodCallClosure = [gobject.closure.Closure] for handling incoming method calls.
+        getPropertyClosure = [gobject.closure.Closure] for getting a property.
+        setPropertyClosure = [gobject.closure.Closure] for setting a property.
+      Returns: `0` if error is set, otherwise a registration ID (never `0`)
+        that can be used with [gio.dbus_connection.DBusConnection.unregisterObject].
+      Throws: [ErrorWrap]
+  */
+  uint registerObjectWithClosures2(string objectPath, gio.dbus_interface_info.DBusInterfaceInfo interfaceInfo, gobject.closure.Closure methodCallClosure = null, gobject.closure.Closure getPropertyClosure = null, gobject.closure.Closure setPropertyClosure = null)
+  {
+    uint _retval;
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = g_dbus_connection_register_object_with_closures2(cast(GDBusConnection*)this._cPtr, _objectPath, interfaceInfo ? cast(GDBusInterfaceInfo*)interfaceInfo._cPtr(No.Dup) : null, methodCallClosure ? cast(GClosure*)methodCallClosure._cPtr(No.Dup) : null, getPropertyClosure ? cast(GClosure*)getPropertyClosure._cPtr(No.Dup) : null, setPropertyClosure ? cast(GClosure*)setPropertyClosure._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     return _retval;
@@ -1314,7 +1358,8 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       [gio.types.IOErrorEnum.Closed]. If message is not well-formed,
       the operation fails with [gio.types.IOErrorEnum.InvalidArgument].
       
-      See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+      See this [server][gio.dbus_connection.DBusConnection]
+      and [client][gio.dbus_connection.DBusConnection]
       for an example of how to use this low-level API to send and receive
       UNIX file descriptors.
       
@@ -1358,8 +1403,8 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       the operation fails with [gio.types.IOErrorEnum.InvalidArgument].
       
       This is an asynchronous method. When the operation is finished, callback
-      will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
+      will be invoked in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread you are calling this method from. You can then call
       [gio.dbus_connection.DBusConnection.sendMessageWithReplyFinish] to get the result of the operation.
       See [gio.dbus_connection.DBusConnection.sendMessageWithReplySync] for the synchronous version.
@@ -1367,7 +1412,8 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Note that message must be unlocked, unless flags contain the
       [gio.types.DBusSendMessageFlags.PreserveSerial] flag.
       
-      See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+      See this [server][gio.dbus_connection.DBusConnection]
+      and [client][gio.dbus_connection.DBusConnection]
       for an example of how to use this low-level API to send and receive
       UNIX file descriptors.
   
@@ -1411,7 +1457,8 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       be of type [gio.types.DBusMessageType.Error]. Use
       [gio.dbus_message.DBusMessage.toGerror] to transcode this to a #GError.
       
-      See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+      See this [server][gio.dbus_connection.DBusConnection]
+      and [client][gio.dbus_connection.DBusConnection]
       for an example of how to use this low-level API to send and receive
       UNIX file descriptors.
   
@@ -1457,7 +1504,8 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       be of type [gio.types.DBusMessageType.Error]. Use
       [gio.dbus_message.DBusMessage.toGerror] to transcode this to a #GError.
       
-      See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+      See this [server][gio.dbus_connection.DBusConnection]
+      and [client][gio.dbus_connection.DBusConnection]
       for an example of how to use this low-level API to send and receive
       UNIX file descriptors.
       
@@ -1511,7 +1559,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   /**
       Subscribes to signals on connection and invokes callback whenever
       the signal is received. Note that callback will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
+      thread-default main context (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread you are calling this method from.
       
       If connection is not a message bus connection, sender must be
@@ -1645,9 +1693,9 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Reverses the effect of a previous call to
       [gio.dbus_connection.DBusConnection.exportActionGroup].
       
-      It is an error to call this function with an ID that wasn't returned
-      from [gio.dbus_connection.DBusConnection.exportActionGroup] or to call it with the
-      same ID more than once.
+      It is an error to call this function with an ID that wasn’t returned from
+      [gio.dbus_connection.DBusConnection.exportActionGroup] or to call it with the same
+      ID more than once.
   
       Params:
         exportId = the ID from [gio.dbus_connection.DBusConnection.exportActionGroup]

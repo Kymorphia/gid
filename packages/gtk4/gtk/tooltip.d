@@ -14,7 +14,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.tooltip.Tooltip] is an object representing a widget tooltip.
+    Represents a widget tooltip.
     
     Basic tooltips can be realized simply by using
     [gtk.widget.Widget.setTooltipText] or

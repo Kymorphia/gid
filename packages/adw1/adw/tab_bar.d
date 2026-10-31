@@ -40,9 +40,40 @@ import gtk.widget;
     them. Pinned tabs always stay visible and aren't a part of the scrollable
     area.
     
+    ## Drag-and-Drop
+    
+    [adw.tab_bar.TabBar] tabs can have an additional drop target for arbitrary content.
+    
+    Use [adw.tab_bar.TabBar.setupExtraDropTarget] to set it up, specifying the
+    supported content types and drag actions, then connect to
+    [adw.tab_bar.TabBar.extraDragDrop] to handle a drop.
+    
+    In some cases, it may be necessary to determine the used action based on the
+    content. In that case, set [adw.tab_bar.TabBar.extraDragPreload] to `TRUE`
+    and connect to [adw.tab_bar.TabBar.extraDragValue] signal, then return the
+    action from its handler. To access this action from the
+    [adw.tab_bar.TabBar.extraDragDrop] handler, use the
+    [adw.tab_bar.TabBar.extraDragPreferredAction] property.
+    
+    [adw.tab_bar.TabBar.extraDragValue] is also always emitted when starting to
+    hover an item, with a `NULL` value. This happens even when
+    [adw.tab_bar.TabBar.extraDragPreload] is `FALSE`.
+    
     ## CSS nodes
     
     [adw.tab_bar.TabBar] has a single CSS node with name `tabbar`.
+    
+    ## Style classes
+    
+    By default [adw.tab_bar.TabBar] look like a part of an [adw.header_bar.HeaderBar] and is intended
+    to be used directly attached to one or used as a [adw.toolbar_view.ToolbarView] toolbar.
+    The [`.inline`](style-classes.html#inline) style class removes its background,
+    so that it can be used in different contexts instead.
+    
+    <picture>
+      <source srcset="tab-bar-inline-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="tab-bar-inline.png" alt="tab-bar-inline">
+    </picture>
 */
 class TabBar : gtk.widget.Widget
 {
@@ -156,11 +187,12 @@ class TabBar : gtk.widget.Widget
 
   /**
       Get `extraDragPreferredAction` property.
-      Returns: The unique action on the `current-drop` of the
-        [adw.tab_bar.TabBar.extraDragDrop].
+      Returns: The current drag action during a drop.
         
-        This property should only be used during a [adw.tab_bar.TabBar.extraDragDrop]
-        and is always a subset of what was originally passed to
+        This property should only be used from inside a
+        [adw.tab_bar.TabBar.extraDragDrop] handler.
+        
+        The action will be a subset of what was originally passed to
         [adw.tab_bar.TabBar.setupExtraDropTarget].
   */
   @property gdk.types.DragAction extraDragPreferredAction() nothrow
@@ -322,8 +354,14 @@ class TabBar : gtk.widget.Widget
   }
 
   /**
-      Gets the current action during a drop on the extra_drop_target.
-      Returns: the drag action of the current drop.
+      Gets the current drag action during a drop.
+      
+      This method should only be used from inside a
+      [adw.tab_bar.TabBar.extraDragDrop] handler.
+      
+      The action will be a subset of what was originally passed to
+      [adw.tab_bar.TabBar.setupExtraDropTarget].
+      Returns: the drag action of the current drop
   */
   gdk.types.DragAction getExtraDragPreferredAction() nothrow
   {
@@ -496,8 +534,6 @@ class TabBar : gtk.widget.Widget
   }
 
   /**
-      Sets the supported types for this drop target.
-      
       Sets up an extra drop target on tabs.
       
       This allows to drag arbitrary content onto tabs, for example URLs in a web
@@ -525,7 +561,7 @@ class TabBar : gtk.widget.Widget
   /**
       Connect to `ExtraDragDrop` signal.
   
-      This signal is emitted when content is dropped onto a tab.
+      Emitted when content is dropped onto a tab.
         
         The content must be of one of the types set up via
         [adw.tab_bar.TabBar.setupExtraDropTarget].
@@ -543,7 +579,7 @@ class TabBar : gtk.widget.Widget
   
           `tabBar` the instance the signal is connected to (optional)
   
-          `Returns` whether the drop was accepted for page
+          `Returns` whether the drop was accepted
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -590,7 +626,7 @@ class TabBar : gtk.widget.Widget
   /**
       Connect to `ExtraDragValue` signal.
   
-      This signal is emitted when the dropped content is preloaded.
+      Emitted when the dropped content is preloaded.
         
         In order for data to be preloaded, [adw.tab_bar.TabBar.extraDragPreload]
         must be set to `TRUE`.
@@ -611,7 +647,7 @@ class TabBar : gtk.widget.Widget
   
           `tabBar` the instance the signal is connected to (optional)
   
-          `Returns` the preferred action for the drop on page
+          `Returns` the preferred action for the drop
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

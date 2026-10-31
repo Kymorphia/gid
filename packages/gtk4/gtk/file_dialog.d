@@ -18,16 +18,14 @@ import gtk.types;
 import gtk.window;
 
 /**
-    A [gtk.file_dialog.FileDialog] object collects the arguments that
-    are needed to present a file chooser dialog to the
-    user, such as a title for the dialog and whether it
-    should be modal.
+    Asynchronous API to present a file chooser dialog.
+    
+    [gtk.file_dialog.FileDialog] collects the arguments that are needed to present
+    the dialog to the user, such as a title for the dialog and whether
+    it should be modal.
     
     The dialog is shown with [gtk.file_dialog.FileDialog.open],
-    [gtk.file_dialog.FileDialog.save], etc. These APIs follow the
-    GIO async pattern, and the result can be obtained by calling
-    the corresponding finish function, for example
-    [gtk.file_dialog.FileDialog.openFinish].
+    [gtk.file_dialog.FileDialog.save], etc.
 */
 class FileDialog : gobject.object.ObjectWrap
 {
@@ -87,15 +85,16 @@ class FileDialog : gobject.object.ObjectWrap
 
   /**
       Get `defaultFilter` property.
-      Returns: The default filter, that is, the filter that is initially
-        active in the file chooser dialog.
+      Returns: The default filter.
         
-        If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+        This filter is initially active in the file chooser dialog.
+        
+        If the default filter is `NULL`, the first filter of [gtk.file_dialog.FileDialog.filters]
         is used as the default filter. If that property contains no filter, the dialog will
         be unfiltered.
         
-        If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
-        of the list. If it is not, the dialog may choose to not make it available.
+        If [gtk.file_dialog.FileDialog.filters] is not `NULL`, the default filter should be
+        part of the list. If it is not, the dialog may choose to not make it available.
   */
   @property gtk.file_filter.FileFilter defaultFilter() nothrow
   {
@@ -105,15 +104,16 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Set `defaultFilter` property.
       Params:
-        propval = The default filter, that is, the filter that is initially
-          active in the file chooser dialog.
+        propval = The default filter.
           
-          If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+          This filter is initially active in the file chooser dialog.
+          
+          If the default filter is `NULL`, the first filter of [gtk.file_dialog.FileDialog.filters]
           is used as the default filter. If that property contains no filter, the dialog will
           be unfiltered.
           
-          If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
-          of the list. If it is not, the dialog may choose to not make it available.
+          If [gtk.file_dialog.FileDialog.filters] is not `NULL`, the default filter should be
+          part of the list. If it is not, the dialog may choose to not make it available.
   */
   @property void defaultFilter(gtk.file_filter.FileFilter propval) nothrow
   {
@@ -124,7 +124,8 @@ class FileDialog : gobject.object.ObjectWrap
       Get `filters` property.
       Returns: The list of filters.
         
-        See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
+        See [gtk.file_dialog.FileDialog.defaultFilter] about how these
+        two properties interact.
   */
   @property gio.list_model.ListModel filters() nothrow
   {
@@ -136,7 +137,8 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         propval = The list of filters.
           
-          See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
+          See [gtk.file_dialog.FileDialog.defaultFilter] about how these
+          two properties interact.
   */
   @property void filters(gio.list_model.ListModel propval) nothrow
   {
@@ -145,11 +147,12 @@ class FileDialog : gobject.object.ObjectWrap
 
   /**
       Get `initialFile` property.
-      Returns: The initial file, that is, the file that is initially selected
-        in the file chooser dialog
+      Returns: The initial file.
         
-        This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
-        [gtk.file_dialog.FileDialog.initialName].
+        This file is initially selected in the file chooser dialog
+        
+        This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder]
+        and [gtk.file_dialog.FileDialog.initialName].
   */
   @property gio.file.File initialFile() nothrow
   {
@@ -159,11 +162,12 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Set `initialFile` property.
       Params:
-        propval = The initial file, that is, the file that is initially selected
-          in the file chooser dialog
+        propval = The initial file.
           
-          This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
-          [gtk.file_dialog.FileDialog.initialName].
+          This file is initially selected in the file chooser dialog
+          
+          This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder]
+          and [gtk.file_dialog.FileDialog.initialName].
   */
   @property void initialFile(gio.file.File propval) nothrow
   {
@@ -172,8 +176,9 @@ class FileDialog : gobject.object.ObjectWrap
 
   /**
       Get `initialFolder` property.
-      Returns: The initial folder, that is, the directory that is initially
-        opened in the file chooser dialog
+      Returns: The initial folder.
+        
+        This is the directory that is initially opened in the file chooser dialog.
   */
   @property gio.file.File initialFolder() nothrow
   {
@@ -183,8 +188,9 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Set `initialFolder` property.
       Params:
-        propval = The initial folder, that is, the directory that is initially
-          opened in the file chooser dialog
+        propval = The initial folder.
+          
+          This is the directory that is initially opened in the file chooser dialog.
   */
   @property void initialFolder(gio.file.File propval) nothrow
   {
@@ -193,8 +199,9 @@ class FileDialog : gobject.object.ObjectWrap
 
   /**
       Get `initialName` property.
-      Returns: The initial name, that is, the filename that is initially
-        selected in the file chooser dialog.
+      Returns: The initial name.
+        
+        This is the name of the file that is initially selected in the file chooser dialog.
   */
   @property string initialName() nothrow
   {
@@ -204,8 +211,9 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Set `initialName` property.
       Params:
-        propval = The initial name, that is, the filename that is initially
-          selected in the file chooser dialog.
+        propval = The initial name.
+          
+          This is the name of the file that is initially selected in the file chooser dialog.
   */
   @property void initialName(string propval) nothrow
   {
@@ -261,7 +269,10 @@ class FileDialog : gobject.object.ObjectWrap
     this(_cretval, Yes.Take);
   }
 
-  /** */
+  /**
+      Retrieves the text used by the dialog on its accept button.
+      Returns: the label shown on the file chooser's accept button
+  */
   string getAcceptLabel() nothrow
   {
     const(char)* _cretval;
@@ -273,7 +284,7 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Gets the filter that will be selected by default
       in the file chooser dialog.
-      Returns: the current filter
+      Returns: the default filter
   */
   gtk.file_filter.FileFilter getDefaultFilter() nothrow
   {
@@ -286,8 +297,8 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Gets the filters that will be offered to the user
       in the file chooser dialog.
-      Returns: the filters, as
-          a [gio.list_model.ListModel] of `GtkFileFilters`
+      Returns: the filters,
+          as a list model of [gtk.file_filter.FileFilter]
   */
   gio.list_model.ListModel getFilters() nothrow
   {
@@ -324,7 +335,7 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the name for the file that should be initially set.
+      Gets the filename that will be initially selected.
       Returns: the name
   */
   string getInitialName() nothrow
@@ -336,10 +347,9 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Returns whether the file chooser dialog
-      blocks interaction with the parent window
-      while it is presented.
-      Returns: `TRUE` if the file chooser dialog is modal
+      Returns whether the file chooser dialog blocks interaction
+      with the parent window while it is presented.
+      Returns: true if the file chooser dialog is modal
   */
   bool getModal() nothrow
   {
@@ -349,8 +359,7 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Returns the title that will be shown on the
-      file chooser dialog.
+      Returns the title that will be shown on the file chooser dialog.
       Returns: the title
   */
   string getTitle() nothrow
@@ -362,17 +371,17 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a file selection operation by
-      presenting a file chooser dialog to the user.
+      Presents a file chooser dialog to the user.
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.file_dialog.FileDialog.openFinish]
-      to obtain the result.
+      The file chooser dialog will be set up to select a single file.
+      
+      The callback will be called when the dialog is closed.
   
       Params:
-        parent = the parent [gtk.window.Window]
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void open(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -396,13 +405,14 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.file_dialog.FileDialog.open] call and
-      returns the resulting file.
+      Finishes the [gtk.file_dialog.FileDialog.open] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the file that was selected.
-          Otherwise, `NULL` is returned and error is set
+        result = the result
+      Returns: the file that was selected
       Throws: [ErrorWrap]
   */
   gio.file.File openFinish(gio.async_result.AsyncResult result)
@@ -417,20 +427,20 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a multi-file selection operation by
-      presenting a file chooser dialog to the user.
+      Presents a file chooser dialog to the user.
       
-      The file chooser will initially be opened in the directory
+      The file chooser dialog will be set up to select multiple files.
+      
+      The file chooser dialog will initially be opened in the directory
       [gtk.file_dialog.FileDialog.initialFolder].
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.file_dialog.FileDialog.openMultipleFinish]
-      to obtain the result.
+      The callback will be called when the dialog is closed.
   
       Params:
-        parent = the parent [gtk.window.Window]
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void openMultiple(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -454,14 +464,15 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.file_dialog.FileDialog.open] call and
-      returns the resulting files in a [gio.list_model.ListModel].
+      Finishes the [gtk.file_dialog.FileDialog.open] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the file that was selected,
-          as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
-          and error is set
+        result = the result
+      Returns: the files that were selected,
+          as a list model of [gio.file.File]
       Throws: [ErrorWrap]
   */
   gio.list_model.ListModel openMultipleFinish(gio.async_result.AsyncResult result)
@@ -476,17 +487,150 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a file save operation by
-      presenting a file chooser dialog to the user.
+      Presents a file chooser dialog to the user.
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.file_dialog.FileDialog.saveFinish]
-      to obtain the result.
+      The file chooser dialog will be set up to select multiple files.
+      
+      The file chooser dialog will initially be opened in the directory
+      [gtk.file_dialog.FileDialog.initialFolder].
+      
+      In contrast to [gtk.file_dialog.FileDialog.open], this function
+      lets the user select the text encoding for the files, if possible.
+      
+      The callback will be called when the dialog is closed.
+  
+      Params:
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
+  */
+  void openMultipleTextFiles(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_file_dialog_open_multiple_text_files(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes the [gtk.file_dialog.FileDialog.open] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
+  
+      Params:
+        result = the result
+        encoding = return location for the text encoding to use
+      Returns: the files that were selected,
+          as a list model of [gio.file.File]
+      Throws: [ErrorWrap]
+  */
+  gio.list_model.ListModel openMultipleTextFilesFinish(gio.async_result.AsyncResult result, out string encoding)
+  {
+    GListModel* _cretval;
+    char* _encoding;
+    GError *_err;
+    _cretval = gtk_file_dialog_open_multiple_text_files_finish(cast(GtkFileDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_encoding, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    encoding = _encoding.fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Initiates a file selection operation by presenting a file chooser
+      dialog to the user.
+      
+      In contrast to [gtk.file_dialog.FileDialog.open], this function
+      lets the user select the text encoding for the file, if possible.
+      
+      The callback will be called when the dialog is closed.
   
       Params:
         parent = the parent [gtk.window.Window]
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        callback = a callback to call when the
+            operation is complete
+  */
+  void openTextFile(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_file_dialog_open_text_file(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes the [gtk.file_dialog.FileDialog.openTextFile] call
+      and returns the resulting file and text encoding.
+      
+      If the user has explicitly selected a text encoding to use
+      for the file, then encoding will be set to a codeset name that
+      is suitable for passing to iconv_open(). Otherwise, it will
+      be `NULL`.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+        encoding = return location for the text encoding to use
+      Returns: the file that was selected
+      Throws: [ErrorWrap]
+  */
+  gio.file.File openTextFileFinish(gio.async_result.AsyncResult result, out string encoding)
+  {
+    GFile* _cretval;
+    char* _encoding;
+    GError *_err;
+    _cretval = gtk_file_dialog_open_text_file_finish(cast(GtkFileDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_encoding, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    encoding = _encoding.fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Presents a file chooser dialog to the user.
+      
+      The file chooser dialog will be save mode.
+      
+      The callback will be called when the dialog is closed.
+  
+      Params:
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void save(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -510,13 +654,14 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.file_dialog.FileDialog.save] call and
-      returns the resulting file.
+      Finishes the [gtk.file_dialog.FileDialog.save] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the file that was selected.
-          Otherwise, `NULL` is returned and error is set
+        result = the result
+      Returns: the file that was selected
       Throws: [ErrorWrap]
   */
   gio.file.File saveFinish(gio.async_result.AsyncResult result)
@@ -531,21 +676,95 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a directory selection operation by
-      presenting a file chooser dialog to the user.
+      Initiates a file save operation by presenting a file chooser
+      dialog to the user.
       
-      If you pass initial_folder, the file chooser will initially be
-      opened in the parent directory of that folder, otherwise, it
-      will be in the directory [gtk.file_dialog.FileDialog.initialFolder].
+      In contrast to [gtk.file_dialog.FileDialog.save], this function
+      lets the user select the text encoding and line endings for
+      the text file, if possible.
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.file_dialog.FileDialog.selectFolderFinish]
-      to obtain the result.
+      The callback will be called when the dialog is closed.
   
       Params:
         parent = the parent [gtk.window.Window]
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        callback = a callback to call when the
+            operation is complete
+  */
+  void saveTextFile(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_file_dialog_save_text_file(cast(GtkFileDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes the [gtk.file_dialog.FileDialog.saveTextFile] call
+      and returns the resulting file, text encoding and line endings.
+      
+      If the user has explicitly selected a text encoding to use
+      for the file, then encoding will be set to a codeset name that
+      is suitable for passing to iconv_open(). Otherwise, it will
+      be `NULL`.
+      
+      The line_ending will be set to one of "\n", "\r\n", "\r" or "",
+      where the latter means to preserve existing line endings.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+        encoding = return location for the text encoding to use
+        lineEnding = return location for the line endings to use
+      Returns: the file that was selected.
+      Throws: [ErrorWrap]
+  */
+  gio.file.File saveTextFileFinish(gio.async_result.AsyncResult result, out string encoding, out string lineEnding)
+  {
+    GFile* _cretval;
+    char* _encoding;
+    char* _lineEnding;
+    GError *_err;
+    _cretval = gtk_file_dialog_save_text_file_finish(cast(GtkFileDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_encoding, &_lineEnding, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    encoding = _encoding.fromCString!(No.Free);
+    lineEnding = _lineEnding.fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Presents a file chooser dialog to the user.
+      
+      The file chooser dialog will be set up to select a single folder.
+      
+      If you pass initial_folder, the file chooser dialog will initially
+      be opened in the parent directory of that folder, otherwise, it
+      will be in the directory [gtk.file_dialog.FileDialog.initialFolder].
+      
+      The callback will be called when the dialog is closed.
+  
+      Params:
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void selectFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -569,13 +788,14 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.file_dialog.FileDialog.selectFolder] call and
-      returns the resulting file.
+      Finishes the [gtk.file_dialog.FileDialog.selectFolder] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the file that was selected.
-          Otherwise, `NULL` is returned and error is set
+        result = the result
+      Returns: the folder that was selected
       Throws: [ErrorWrap]
   */
   gio.file.File selectFolderFinish(gio.async_result.AsyncResult result)
@@ -590,20 +810,21 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a multi-directory selection operation by
-      presenting a file chooser dialog to the user.
+      Presents a file chooser dialog to the user.
       
-      The file chooser will initially be opened in the directory
-      [gtk.file_dialog.FileDialog.initialFolder].
+      The file chooser dialog will be set up to allow selecting
+      multiple folders.
       
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.file_dialog.FileDialog.selectMultipleFoldersFinish]
-      to obtain the result.
+      The file chooser dialog will initially be opened in the
+      directory [gtk.file_dialog.FileDialog.initialFolder].
+      
+      The callback will be called when the dialog is closed.
   
       Params:
-        parent = the parent [gtk.window.Window]
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void selectMultipleFolders(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -627,14 +848,15 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.file_dialog.FileDialog.selectMultipleFolders]
-      call and returns the resulting files in a [gio.list_model.ListModel].
+      Finishes the [gtk.file_dialog.FileDialog.selectMultipleFolders] call.
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the file that was selected,
-          as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
-          and error is set
+        result = the result
+      Returns: the folders that were selected,
+          as a list model of [gio.file.File]
       Throws: [ErrorWrap]
   */
   gio.list_model.ListModel selectMultipleFoldersFinish(gio.async_result.AsyncResult result)
@@ -651,8 +873,9 @@ class FileDialog : gobject.object.ObjectWrap
   /**
       Sets the label shown on the file chooser's accept button.
       
-      Leaving the accept label unset or setting it as `NULL` will fall back to
-      a default label, depending on what API is used to launch the file dialog.
+      Leaving the accept label unset or setting it as `NULL` will
+      fall back to a default label, depending on what API is used
+      to launch the file dialog.
   
       Params:
         acceptLabel = the new accept label
@@ -667,12 +890,12 @@ class FileDialog : gobject.object.ObjectWrap
       Sets the filter that will be selected by default
       in the file chooser dialog.
       
-      If set to null, the first item in [gtk.file_dialog.FileDialog.filters]
+      If set to `NULL`, the first item in [gtk.file_dialog.FileDialog.filters]
       will be used as the default filter. If that list is empty, the dialog
       will be unfiltered.
   
       Params:
-        filter = a [gtk.file_filter.FileFilter]
+        filter = the file filter
   */
   void setDefaultFilter(gtk.file_filter.FileFilter filter = null) nothrow
   {
@@ -684,7 +907,7 @@ class FileDialog : gobject.object.ObjectWrap
       in the file chooser dialog.
   
       Params:
-        filters = a [gio.list_model.ListModel] of `GtkFileFilters`
+        filters = a list model of [gtk.file_filter.FileFilter]
   */
   void setFilters(gio.list_model.ListModel filters = null) nothrow
   {
@@ -697,11 +920,11 @@ class FileDialog : gobject.object.ObjectWrap
       
       This function is a shortcut for calling both
       [gtk.file_dialog.FileDialog.setInitialFolder] and
-      [gtk.file_dialog.FileDialog.setInitialName] with the directory and
-      name of file respectively.
+      [gtk.file_dialog.FileDialog.setInitialName] with the
+      directory and name of file, respectively.
   
       Params:
-        file = a [gio.file.File]
+        file = a file
   */
   void setInitialFile(gio.file.File file = null) nothrow
   {
@@ -713,7 +936,7 @@ class FileDialog : gobject.object.ObjectWrap
       initial folder in the file chooser dialog.
   
       Params:
-        folder = a [gio.file.File]
+        folder = a file
   */
   void setInitialFolder(gio.file.File folder = null) nothrow
   {
@@ -721,14 +944,17 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the name for the file that should be initially set.
-      For saving dialogs, this will usually be pre-entered into the name field.
+      Sets the filename that will be initially selected.
       
-      If a file with this name already exists in the directory set via
-      [gtk.file_dialog.FileDialog.initialFolder], the dialog should preselect it.
+      For save dialogs, name will usually be pre-entered into the
+      name field.
+      
+      If a file with this name already exists in the directory set
+      via [gtk.file_dialog.FileDialog.initialFolder], the dialog will
+      preselect it.
   
       Params:
-        name = a UTF8 string
+        name = a string
   */
   void setInitialName(string name = null) nothrow
   {
@@ -737,9 +963,8 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Sets whether the file chooser dialog
-      blocks interaction with the parent window
-      while it is presented.
+      Sets whether the file chooser dialog blocks interaction
+      with the parent window while it is presented.
   
       Params:
         modal = the new value
@@ -750,8 +975,7 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the title that will be shown on the
-      file chooser dialog.
+      Sets the title that will be shown on the file chooser dialog.
   
       Params:
         title = the new title
@@ -781,15 +1005,16 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `defaultFilter` property.
       Params:
-        propval = The default filter, that is, the filter that is initially
-          active in the file chooser dialog.
+        propval = The default filter.
           
-          If the default filter is null, the first filter of [gtk.file_dialog.FileDialog.filters]
+          This filter is initially active in the file chooser dialog.
+          
+          If the default filter is `NULL`, the first filter of [gtk.file_dialog.FileDialog.filters]
           is used as the default filter. If that property contains no filter, the dialog will
           be unfiltered.
           
-          If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
-          of the list. If it is not, the dialog may choose to not make it available.
+          If [gtk.file_dialog.FileDialog.filters] is not `NULL`, the default filter should be
+          part of the list. If it is not, the dialog may choose to not make it available.
       Returns: Builder instance for fluent chaining
   */
   T defaultFilter(gtk.file_filter.FileFilter propval) nothrow
@@ -802,7 +1027,8 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = The list of filters.
           
-          See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
+          See [gtk.file_dialog.FileDialog.defaultFilter] about how these
+          two properties interact.
       Returns: Builder instance for fluent chaining
   */
   T filters(gio.list_model.ListModel propval) nothrow
@@ -813,11 +1039,12 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `initialFile` property.
       Params:
-        propval = The initial file, that is, the file that is initially selected
-          in the file chooser dialog
+        propval = The initial file.
           
-          This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
-          [gtk.file_dialog.FileDialog.initialName].
+          This file is initially selected in the file chooser dialog
+          
+          This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder]
+          and [gtk.file_dialog.FileDialog.initialName].
       Returns: Builder instance for fluent chaining
   */
   T initialFile(gio.file.File propval) nothrow
@@ -828,8 +1055,9 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `initialFolder` property.
       Params:
-        propval = The initial folder, that is, the directory that is initially
-          opened in the file chooser dialog
+        propval = The initial folder.
+          
+          This is the directory that is initially opened in the file chooser dialog.
       Returns: Builder instance for fluent chaining
   */
   T initialFolder(gio.file.File propval) nothrow
@@ -840,8 +1068,9 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `initialName` property.
       Params:
-        propval = The initial name, that is, the filename that is initially
-          selected in the file chooser dialog.
+        propval = The initial name.
+          
+          This is the name of the file that is initially selected in the file chooser dialog.
       Returns: Builder instance for fluent chaining
   */
   T initialName(string propval) nothrow

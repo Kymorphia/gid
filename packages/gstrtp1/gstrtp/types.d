@@ -73,7 +73,7 @@ enum RTCP_VALID_MASK = 57598;
     Valid value for the first two bytes of an RTCP packet after applying
     #GST_RTCP_VALID_MASK to them.
 */
-enum RTCP_VALID_VALUE = 200;
+enum RTCP_VALID_VALUE = 32968;
 
 /**
     The supported RTCP version 2.

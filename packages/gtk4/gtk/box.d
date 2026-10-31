@@ -18,15 +18,18 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    The [gtk.box.Box] widget arranges child widgets into a single row or column.
+    Arranges child widgets into a single row or column.
     
-    ![An example GtkBox](box.png)
+    <picture>
+      <source srcset="box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkBox" src="box.png">
+    </picture>
     
     Whether it is a row or column depends on the value of its
     [gtk.orientable.Orientable.orientation] property. Within the other
-    dimension, all children are allocated the same size. Of course, the
-    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign] properties
-    can be used on the children to influence their allocation.
+    dimension, all children are allocated the same size. The
+    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
+    properties can be used on the children to influence their allocation.
     
     Use repeated calls to [gtk.box.Box.append] to pack widgets into a
     [gtk.box.Box] from start to end. Use [gtk.box.Box.remove] to remove widgets
@@ -92,7 +95,9 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Get `baselineChild` property.
-      Returns: The child that determines the baseline, in vertical orientation.
+      Returns: The position of the child that determines the baseline.
+        
+        This is only relevant if the box is in vertical orientation.
   */
   @property int baselineChild() nothrow
   {
@@ -102,7 +107,9 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Set `baselineChild` property.
       Params:
-        propval = The child that determines the baseline, in vertical orientation.
+        propval = The position of the child that determines the baseline.
+          
+          This is only relevant if the box is in vertical orientation.
   */
   @property void baselineChild(int propval) nothrow
   {
@@ -111,7 +118,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Get `baselinePosition` property.
-      Returns: The position of the baseline aligned widgets if extra space is available.
+      Returns: How to position baseline-aligned widgets if extra space is available.
   */
   @property gtk.types.BaselinePosition baselinePosition() nothrow
   {
@@ -121,7 +128,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Set `baselinePosition` property.
       Params:
-        propval = The position of the baseline aligned widgets if extra space is available.
+        propval = How to position baseline-aligned widgets if extra space is available.
   */
   @property void baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
@@ -169,11 +176,11 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   mixin OrientableT!();
 
   /**
-      Creates a new [gtk.box.Box].
+      Creates a new box.
   
       Params:
         orientation = the box’s orientation
-        spacing = the number of pixels to place by default between children
+        spacing = the number of pixels to place between children
       Returns: a new [gtk.box.Box].
   */
   this(gtk.types.Orientation orientation, int spacing) nothrow
@@ -184,10 +191,10 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Adds child as the last child to box.
+      Adds a child at the end.
   
       Params:
-        child = the [gtk.widget.Widget] to append
+        child = the widget to append
   */
   void append(gtk.widget.Widget child) nothrow
   {
@@ -218,9 +225,10 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Returns whether the box is homogeneous (all children are the
-      same size).
-      Returns: true if the box is homogeneous.
+      Returns whether the box is homogeneous.
+      
+      In a homogeneous box all children are the same size.
+      Returns: true if the box is homogeneous
   */
   bool getHomogeneous() nothrow
   {
@@ -241,13 +249,14 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Inserts child in the position after sibling in the list
-      of box children.
+      Inserts a child at a specific position.
       
-      If sibling is null, insert child at the first position.
+      The child is added after sibling in the list of box children.
+      
+      If sibling is `NULL`, the child is placed at the beginning.
   
       Params:
-        child = the [gtk.widget.Widget] to insert
+        child = the widget to insert
         sibling = the sibling after which to insert child
   */
   void insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null) nothrow
@@ -256,10 +265,10 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Adds child as the first child to box.
+      Adds a child at the beginning.
   
       Params:
-        child = the [gtk.widget.Widget] to prepend
+        child = the widget to prepend
   */
   void prepend(gtk.widget.Widget child) nothrow
   {
@@ -267,7 +276,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Removes a child widget from box.
+      Removes a child widget from the box.
       
       The child must have been added before with
       [gtk.box.Box.append], [gtk.box.Box.prepend], or
@@ -282,13 +291,15 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Moves child to the position after sibling in the list
+      Moves a child to a different position.
+      
+      The child is moved to the position after sibling in the list
       of box children.
       
-      If sibling is null, move child to the first position.
+      If sibling is `NULL`, the child is placed at the beginning.
   
       Params:
-        child = the [gtk.widget.Widget] to move, must be a child of box
+        child = the widget to move, must be a child of box
         sibling = the sibling to move child after
   */
   void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null) nothrow
@@ -302,7 +313,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       This affects only vertical boxes.
   
       Params:
-        child = a child, or -1
+        child = a child position, or -1
   */
   void setBaselineChild(int child) nothrow
   {
@@ -319,7 +330,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       extra space available.
   
       Params:
-        position = a [gtk.types.BaselinePosition]
+        position = the baseline position
   */
   void setBaselinePosition(gtk.types.BaselinePosition position) nothrow
   {
@@ -327,11 +338,11 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Sets whether or not all children of box are given equal space
+      Sets whether or not all children are given equal space
       in the box.
   
       Params:
-        homogeneous = a boolean value, true to create equal allotments,
+        homogeneous = true to create equal allotments,
             false for variable allotments
   */
   void setHomogeneous(bool homogeneous) nothrow
@@ -340,7 +351,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Sets the number of pixels to place between children of box.
+      Sets the number of pixels to place between children.
   
       Params:
         spacing = the number of pixels to put between children
@@ -360,7 +371,9 @@ class BoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.O
   /**
       Set `baselineChild` property.
       Params:
-        propval = The child that determines the baseline, in vertical orientation.
+        propval = The position of the child that determines the baseline.
+          
+          This is only relevant if the box is in vertical orientation.
       Returns: Builder instance for fluent chaining
   */
   T baselineChild(int propval) nothrow
@@ -371,7 +384,7 @@ class BoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.O
   /**
       Set `baselinePosition` property.
       Params:
-        propval = The position of the baseline aligned widgets if extra space is available.
+        propval = How to position baseline-aligned widgets if extra space is available.
       Returns: Builder instance for fluent chaining
   */
   T baselinePosition(gtk.types.BaselinePosition propval) nothrow

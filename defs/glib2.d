@@ -103,7 +103,6 @@
 //# Set field callback parameters to out
 //!set record[IOFuncs].field[io_read].callback[io_read].parameters.parameter[bytes_read][direction] out
 //!set record[IOFuncs].field[io_write].callback[io_write].parameters.parameter[bytes_written][direction] out
-//!set record[SourceFuncs].field[prepare].callback[prepare].parameters.parameter[timeout_][direction] out
 
 //# FIXME - This contains a union which isn't currently supported
 //!set record[VariantDict][opaque] 1
@@ -184,6 +183,20 @@
 //!set function[atomic_ref_count_dec].parameters.parameter[arc][direction] inout
 //!set function[atomic_ref_count_inc].parameters.parameter[arc][direction] inout
 //!set function[atomic_ref_count_init].parameters.parameter[arc][direction] inout
+
+//# Newer GLib GIR types atomic int parameters as gpointer, restore the integer types
+//!set function[atomic_int_add].parameters.parameter[atomic].type '<type name="gint" c:type="volatile gint*"/>'
+//!set function[atomic_int_and].parameters.parameter[atomic].type '<type name="guint" c:type="volatile guint*"/>'
+//!set function[atomic_int_compare_and_exchange].parameters.parameter[atomic].type '<type name="gint" c:type="volatile gint*"/>'
+//!set function[atomic_int_compare_and_exchange_full].parameters.parameter[atomic].type '<type name="gint" c:type="gint*"/>'
+//!set function[atomic_int_dec_and_test].parameters.parameter[atomic].type '<type name="gint" c:type="volatile gint*"/>'
+//!set function[atomic_int_exchange].parameters.parameter[atomic].type '<type name="gint" c:type="gint*"/>'
+//!set function[atomic_int_exchange_and_add].parameters.parameter[atomic].type '<type name="gint" c:type="volatile gint*"/>'
+//!set function[atomic_int_get].parameters.parameter[atomic].type '<type name="gint" c:type="volatile const gint*"/>'
+//!set function[atomic_int_inc].parameters.parameter[atomic].type '<type name="gint" c:type="volatile gint*"/>'
+//!set function[atomic_int_or].parameters.parameter[atomic].type '<type name="guint" c:type="volatile guint*"/>'
+//!set function[atomic_int_set].parameters.parameter[atomic].type '<type name="gint" c:type="volatile gint*"/>'
+//!set function[atomic_int_xor].parameters.parameter[atomic].type '<type name="guint" c:type="volatile guint*"/>'
 //!set function[bit_lock].parameters.parameter[address][direction] inout
 //!set function[bit_trylock].parameters.parameter[address][direction] inout
 //!set function[bit_unlock].parameters.parameter[address][direction] inout

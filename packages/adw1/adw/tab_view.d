@@ -61,8 +61,8 @@ import gtk.widget;
     
     ## Accessibility
     
-    [adw.tab_view.TabView] uses the [gtk.types.AccessibleRole.TabPanel] for the tab pages which
-    are the accessible parent objects of the child widgets.
+    [adw.tab_view.TabView] uses the `enum@Gtk.AccessibleRole.tab-panel` role for the tab
+    pages which are the accessible parent objects of the child widgets.
 */
 class TabView : gtk.widget.Widget
 {
@@ -210,11 +210,15 @@ class TabView : gtk.widget.Widget
 
   /**
       Get `pages` property.
-      Returns: A selection model with the tab view's pages.
+      Returns: A list model with the tab view's pages.
         
-        This can be used to keep an up-to-date view. The model also implements
-        [gtk.selection_model.SelectionModel] and can be used to track and change the selected
-        page.
+        This can be used to keep an up-to-date view.
+        
+        The model implements [gtk.section_model.SectionModel], with one section for pinned
+        pages and one for the rest of the pages.
+        
+        It also implements [gtk.selection_model.SelectionModel] and can be used to track and
+        change the selected page.
   */
   @property gtk.selection_model.SelectionModel pages() nothrow
   {
@@ -543,9 +547,13 @@ class TabView : gtk.widget.Widget
   /**
       Returns a [gio.list_model.ListModel] that contains the pages of self.
       
-      This can be used to keep an up-to-date view. The model also implements
-      [gtk.selection_model.SelectionModel] and can be used to track and change the selected
-      page.
+      This can be used to keep an up-to-date view.
+      
+      The model implements [gtk.section_model.SectionModel], with one section for pinned
+      pages and one for the rest of the pages.
+      
+      It also implements [gtk.selection_model.SelectionModel] and can be used to track and
+      change the selected page.
       Returns: a [gtk.selection_model.SelectionModel] for the pages of self
   */
   gtk.selection_model.SelectionModel getPages() nothrow
@@ -665,7 +673,7 @@ class TabView : gtk.widget.Widget
       See [adw.tab_view.TabView.shortcuts] for details.
   
       Params:
-        shortcuts = the shortcuts to reomve
+        shortcuts = the shortcuts to remove
   */
   void removeShortcuts(adw.types.TabViewShortcuts shortcuts) nothrow
   {
@@ -925,8 +933,8 @@ class TabView : gtk.widget.Widget
         A typical reason to connect to this signal is to show a confirmation dialog
         for closing a tab.
         
-        The signal handler should return [gdk.types.EVENT_STOP] to stop propagation or
-        `GDK_EVENT_CONTINUE` to invoke the default handler.
+        The signal handler should return [gdk.types.EVENT_STOP] to stop propagation
+        or [gdk.types.EVENT_PROPAGATE] to invoke the default handler.
   
       Params:
         callback = signal callback delegate or function to connect

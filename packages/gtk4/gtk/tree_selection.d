@@ -161,6 +161,7 @@ class TreeSelection : gobject.object.ObjectWrap
       To do this, you can use [gtk.tree_row_reference.TreeRowReference.new_].
       
       To free the return value, use:
+      
       ```c
       g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
       ```

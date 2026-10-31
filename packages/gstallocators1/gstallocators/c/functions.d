@@ -27,6 +27,7 @@ __gshared extern(C) nothrow
   GType function() c_gst_fd_allocator_get_type; ///
   GstAllocator* function() c_gst_fd_allocator_new; ///
   GstMemory* function(GstAllocator* allocator, int fd, size_t size, GstFdMemoryFlags flags) c_gst_fd_allocator_alloc; ///
+  GstMemory* function(GstAllocator* allocator, int fd, size_t maxsize, size_t offset, size_t size, GstFdMemoryFlags flags) c_gst_fd_allocator_alloc_full; ///
 
   // PhysMemoryAllocator
   GType function() c_gst_phys_memory_allocator_get_type; ///
@@ -35,6 +36,11 @@ __gshared extern(C) nothrow
   GType function() c_gst_shm_allocator_get_type; ///
   GstAllocator* function() c_gst_shm_allocator_get; ///
   void function() c_gst_shm_allocator_init_once; ///
+
+  // UdmabufAllocator
+  GType function() c_gst_udmabuf_allocator_get_type; ///
+  GstAllocator* function() c_gst_udmabuf_allocator_get; ///
+  void function() c_gst_udmabuf_allocator_init_once; ///
 
   // global
   int function(GstMemory* mem) c_gst_dmabuf_memory_get_fd; ///
@@ -90,6 +96,9 @@ alias gst_fd_allocator_new = c_gst_fd_allocator_new;
 /** */
 alias gst_fd_allocator_alloc = c_gst_fd_allocator_alloc;
 
+/** */
+alias gst_fd_allocator_alloc_full = c_gst_fd_allocator_alloc_full;
+
 // PhysMemoryAllocator
 
 /** */
@@ -105,6 +114,17 @@ alias gst_shm_allocator_get = c_gst_shm_allocator_get;
 
 /** */
 alias gst_shm_allocator_init_once = c_gst_shm_allocator_init_once;
+
+// UdmabufAllocator
+
+/** */
+alias gst_udmabuf_allocator_get_type = c_gst_udmabuf_allocator_get_type;
+
+/** */
+alias gst_udmabuf_allocator_get = c_gst_udmabuf_allocator_get;
+
+/** */
+alias gst_udmabuf_allocator_init_once = c_gst_udmabuf_allocator_init_once;
 
 // global
 
@@ -156,6 +176,7 @@ shared static this()
   gidLink(cast(void**)&gst_fd_allocator_get_type, "gst_fd_allocator_get_type", libs);
   gidLink(cast(void**)&gst_fd_allocator_new, "gst_fd_allocator_new", libs);
   gidLink(cast(void**)&gst_fd_allocator_alloc, "gst_fd_allocator_alloc", libs);
+  gidLink(cast(void**)&gst_fd_allocator_alloc_full, "gst_fd_allocator_alloc_full", libs);
 
   // PhysMemoryAllocator
   gidLink(cast(void**)&gst_phys_memory_allocator_get_type, "gst_phys_memory_allocator_get_type", libs);
@@ -164,6 +185,11 @@ shared static this()
   gidLink(cast(void**)&gst_shm_allocator_get_type, "gst_shm_allocator_get_type", libs);
   gidLink(cast(void**)&gst_shm_allocator_get, "gst_shm_allocator_get", libs);
   gidLink(cast(void**)&gst_shm_allocator_init_once, "gst_shm_allocator_init_once", libs);
+
+  // UdmabufAllocator
+  gidLink(cast(void**)&gst_udmabuf_allocator_get_type, "gst_udmabuf_allocator_get_type", libs);
+  gidLink(cast(void**)&gst_udmabuf_allocator_get, "gst_udmabuf_allocator_get", libs);
+  gidLink(cast(void**)&gst_udmabuf_allocator_init_once, "gst_udmabuf_allocator_init_once", libs);
 
   // global
   gidLink(cast(void**)&gst_dmabuf_memory_get_fd, "gst_dmabuf_memory_get_fd", libs);

@@ -112,11 +112,11 @@ class TagList : gobject.boxed.Boxed
       will have a refcount of 1, owned by the caller, and will be writable as
       a result.
       
-      Note that this function is the semantic equivalent of a gst_tag_list_ref()
-      followed by a gst_tag_list_make_writable(). If you only want to hold on to a
-      reference to the data, you should use gst_tag_list_ref().
+      Note that this function is the semantic equivalent of a [gst.tag_list.TagList.ref_]
+      followed by a [gst.tag_list.TagList.makeWritable]. If you only want to hold on to a
+      reference to the data, you should use [gst.tag_list.TagList.ref_].
       
-      When you are finished with the taglist, call gst_tag_list_unref() on it.
+      When you are finished with the taglist, call [gst.tag_list.TagList.unref] on it.
       Returns: the new #GstTagList
   */
   gst.tag_list.TagList copy() nothrow
@@ -489,7 +489,7 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the first sample for the given tag in the taglist into the variable
-      pointed to by sample. Free the sample with gst_sample_unref() when it is
+      pointed to by sample. Free the sample with [gst.sample.Sample.unref] when it is
       no longer needed. You can retrieve the buffer from the sample using
       [gst.sample.Sample.getBuffer] and the associated caps (if any) with
       [gst.sample.Sample.getCaps].
@@ -517,7 +517,7 @@ class TagList : gobject.boxed.Boxed
   /**
       Gets the sample that is at the given index for the given tag in the given
       list and copies it into the variable pointed to by sample. Free the sample
-      with gst_sample_unref() when it is no longer needed. You can retrieve the
+      with [gst.sample.Sample.unref] when it is no longer needed. You can retrieve the
       buffer from the sample using [gst.sample.Sample.getBuffer] and the associated
       caps (if any) with [gst.sample.Sample.getCaps].
       
@@ -757,6 +757,41 @@ class TagList : gobject.boxed.Boxed
   }
 
   /**
+      Tests if you can safely modify taglist. It is only safe to modify taglist when
+      there is only one owner of the taglist - ie, the object is writable.
+      Returns: 
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_tag_list_is_writable(cast(const(GstTagList)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns a writable copy of taglist.
+      
+      If there is only one reference count on taglist, the caller must be the owner,
+      and so this function will return the taglist object unchanged. If on the other
+      hand there is more than one reference on the object, a new taglist object will
+      be returned. The caller's reference on taglist will be removed, and instead the
+      caller will own a reference to the returned object.
+      
+      In short, this function unrefs the taglist in the argument and refs the taglist
+      that it returns. Don't access the argument after calling this function. See
+      also: [gst.tag_list.TagList.ref_].
+      Returns: a writable taglist which may or may not be the
+            same as taglist
+  */
+  gst.tag_list.TagList makeWritable() nothrow
+  {
+    GstTagList* _cretval;
+    _cretval = gst_tag_list_make_writable(cast(GstTagList*)this._cPtr);
+    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Merges the two given lists into a new list. If one of the lists is null, a
       copy of the other is returned. If both lists are null, null is returned.
       
@@ -884,6 +919,52 @@ class TagList : gobject.boxed.Boxed
     const(char)* _tag = tag.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_tag_list_copy_value(_dest, list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _tag);
     dest = new gobject.value.Value(cast(void*)_dest, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Modifies a pointer to a #GstTagList to point to a different #GstTagList. The
+      modification is done atomically (so this is useful for ensuring thread
+      safety in some cases), and the reference counts are updated appropriately
+      (the old tag list is unreffed, the new is reffed).
+      
+      Either new_taglist or the #GstTagList pointed to by old_taglist may be
+      null.
+  
+      Params:
+        oldTaglist = pointer to a pointer to a
+              #GstTagList to be replaced.
+        newTaglist = pointer to a #GstTagList that
+              will replace the tag list pointed to by old_taglist.
+      Returns: true if new_taglist was different from old_taglist
+  */
+  static bool replace(ref gst.tag_list.TagList oldTaglist, gst.tag_list.TagList newTaglist = null) nothrow
+  {
+    bool _retval;
+    GstTagList* _oldTaglist = oldTaglist ? cast(GstTagList*)oldTaglist._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_tag_list_replace(&_oldTaglist, newTaglist ? cast(GstTagList*)newTaglist._cPtr(No.Dup) : null);
+    oldTaglist = _oldTaglist ? new gst.tag_list.TagList(cast(void*)_oldTaglist, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Modifies a pointer to a #GstTagList to point to a different #GstTagList.
+      This function is similar to [gst.tag_list.TagList.replace] except that it takes
+      ownership of new_taglist.
+  
+      Params:
+        oldTaglist = pointer to a pointer to a #GstTagList
+              to be replaced.
+        newTaglist = pointer to a #GstTagList that
+              will replace the taglist pointed to by old_taglist.
+      Returns: true if new_taglist was different from old_taglist
+  */
+  static bool take(ref gst.tag_list.TagList oldTaglist, gst.tag_list.TagList newTaglist = null) nothrow
+  {
+    bool _retval;
+    GstTagList* _oldTaglist = oldTaglist ? cast(GstTagList*)oldTaglist._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_tag_list_take(&_oldTaglist, newTaglist ? cast(GstTagList*)newTaglist._cPtr(Yes.Dup) : null);
+    oldTaglist = _oldTaglist ? new gst.tag_list.TagList(cast(void*)_oldTaglist, Yes.Take) : null;
     return _retval;
   }
 }

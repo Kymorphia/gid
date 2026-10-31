@@ -24,7 +24,10 @@ import gtk.types;
     A [gtk.combo_box_text.ComboBoxText] is a simple variant of [gtk.combo_box.ComboBox] for text-only
     use cases.
     
-    ![An example GtkComboBoxText](combo-box-text.png)
+    <picture>
+      <source srcset="combo-box-text-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkComboBoxText" src="combo-box-text.png">
+    </picture>
     
     [gtk.combo_box_text.ComboBoxText] hides the model-view complexity of [gtk.combo_box.ComboBox].
     

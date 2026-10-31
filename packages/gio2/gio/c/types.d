@@ -38,13 +38,14 @@ enum GAppInfoCreateFlags : uint
 enum GApplicationFlags : uint
 {
   /**
-      Default. Deprecated in 2.74, use
-        [gio.types.ApplicationFlags.DefaultFlags] instead
+      Default flags.
+  
+      Deprecated: Use `flags@Gio.ApplicationFlags.DEFAULT_FLAGS`.
   */
   FlagsNone = 0,
 
   /**
-      Default flags. Since: 2.74
+      Default flags.
   */
   DefaultFlags = 0,
 
@@ -181,8 +182,9 @@ enum GBusNameOwnerFlags : uint
   Replace = 2,
 
   /**
-      If another message bus connection owns the name, immediately
-      return an error from [gio.global.busOwnName] rather than entering the waiting queue for that name. (Since 2.54)
+      If another message bus connection owns the name, immediately return an error
+      from `func@Gio.bus_own_name` rather than entering the waiting queue for that
+      name.
   */
   DoNotQueue = 4,
 }
@@ -1090,10 +1092,39 @@ enum GDriveStartStopType
 
   /**
       The start/stop methods will
-         unlock/lock the disk (for example using the ATA <quote>SECURITY
-         UNLOCK DEVICE</quote> command)
+         unlock/lock the disk (for example using the ATA `SECURITY UNLOCK
+         DEVICE` command)
   */
   Password = 4,
+}
+
+/**
+    Possible values of Explicit Congestion Notification code points.
+    
+    These appear in `TOS` (IPv4) or `TCLASS` (IPv6) packet headers and
+    are described in [RFC 3168](https://www.rfc-editor.org/rfc/rfc3168#section-5).
+*/
+enum GEcnCodePoint
+{
+  /**
+      Not ECN-capable transport
+  */
+  NoEcn = 0,
+
+  /**
+      ECN Capable Transport(1)
+  */
+  Ect1 = 1,
+
+  /**
+      ECN Capable Transport(0)
+  */
+  Ect0 = 2,
+
+  /**
+      Congestion Experienced
+  */
+  EctCe = 3,
 }
 
 /**
@@ -1822,7 +1853,7 @@ enum GIOErrorEnum
 /**
     Flags for use with [gio.iomodule_scope.IOModuleScope.new_].
 */
-enum GIOModuleScopeFlags
+enum GIOModuleScopeFlags : uint
 {
   /**
       No module scan flags
@@ -2246,9 +2277,10 @@ enum GResourceLookupFlags : uint
 }
 
 /**
-    Flags used when creating a binding. These flags determine in which
-    direction the binding works. The default is to synchronize in both
-    directions.
+    Flags used when creating a binding.
+    
+    These flags determine in which direction the binding works. The default is to
+    synchronize in both directions.
 */
 enum GSettingsBindFlags : uint
 {
@@ -2258,32 +2290,34 @@ enum GSettingsBindFlags : uint
   Default = 0,
 
   /**
-      Update the #GObject property when the setting changes.
-          It is an error to use this flag if the property is not writable.
+      Update the [gobject.object.ObjectWrap] property when the setting changes.
+        It is an error to use this flag if the property is not writable.
   */
   Get = 1,
 
   /**
-      Update the setting when the #GObject property changes.
-          It is an error to use this flag if the property is not readable.
+      Update the setting when the [gobject.object.ObjectWrap] property changes.
+        It is an error to use this flag if the property is not readable.
   */
   Set = 2,
 
   /**
-      Do not try to bind a "sensitivity" property to the writability of the setting
+      Do not try to bind a ‘sensitivity’ property to the writability of the setting
   */
   NoSensitivity = 4,
 
   /**
-      When set in addition to [gio.types.SettingsBindFlags.Get], set the #GObject property
-          value initially from the setting, but do not listen for changes of the setting
+      When set in addition to `flags@Gio.SettingsBindFlags.GET`,
+        set the [gobject.object.ObjectWrap] property
+        value initially from the setting, but do not listen for changes of the setting
   */
   GetNoChanges = 8,
 
   /**
-      When passed to [gio.settings.Settings.bind], uses a pair of mapping functions that invert
-          the boolean value when mapping between the setting and the property.  The setting and property must both
-          be booleans.  You cannot pass this flag to [gio.settings.Settings.bindWithMapping].
+      When passed to [gio.settings.Settings.bind],
+        uses a pair of mapping functions that invert
+        the boolean value when mapping between the setting and the property.  The setting and property must both
+        be booleans.  You cannot pass this flag to [gio.settings.Settings.bindWithMapping].
   */
   InvertBoolean = 16,
 }
@@ -2691,7 +2725,7 @@ enum GTlsCertificateFlags : uint
     [gio.tls_interaction.TlsInteraction.requestCertificateAsync], and
     [gio.tls_interaction.TlsInteraction.invokeRequestCertificate].
 */
-enum GTlsCertificateRequestFlags
+enum GTlsCertificateRequestFlags : uint
 {
   /**
       No flags
@@ -2774,7 +2808,7 @@ enum GTlsChannelBindingType
     [gio.tls_database.TlsDatabase.lookupCertificateIssuer],
     and [gio.tls_database.TlsDatabase.lookupCertificatesIssuedBy].
 */
-enum GTlsDatabaseLookupFlags
+enum GTlsDatabaseLookupFlags : uint
 {
   /**
       No lookup flags
@@ -3088,7 +3122,7 @@ enum GZlibCompressorFormat
     parameter type (which is given at construction time).
     
     An action may optionally have a state, in which case the state may be
-    set with [gio.action.Action.changeState]. This call takes a #GVariant. The
+    set with [gio.action.Action.changeState]. This call takes a [glib.variant.Variant]. The
     correct type for the state is determined by a static state type
     (which is given at construction time).
     
@@ -3117,7 +3151,7 @@ struct GAction;
     
     The order of the items in the structure are intended to reflect
     frequency of use.  It is permissible to use an incomplete initialiser
-    in order to leave some of the later values as null.  All values
+    in order to leave some of the later values as `NULL`.  All values
     after @name are optional.  Additional optional fields may be added in
     the future.
     
@@ -3131,36 +3165,34 @@ struct GActionEntry
   const(char)* name;
 
   /**
-      the callback to connect to the "activate" signal of the
-                 action.  Since GLib 2.40, this can be null for stateful
-                 actions, in which case the default handler is used.  For
-                 boolean-stated actions with no parameter, this is a
-                 toggle.  For other state types (and parameter type equal
-                 to the state type) this will be a function that
-                 just calls @change_state (which you should provide).
+      the callback to connect to the "activate" signal of the action.
+        Since GLib 2.40, this can be `NULL` for stateful actions, in which case
+        the default handler is used. For boolean-stated actions with no
+        parameter, this is a toggle. For other state types (and parameter type
+        equal to the state type) this will be a function that just calls
+        @change_state (which you should provide).
   */
   extern(C) void function(GSimpleAction* action, GVariant* parameter, void* userData) activate;
 
   /**
       the type of the parameter that must be passed to the
-                       activate function for this action, given as a single
-                       GVariant type string (or null for no parameter)
+        activate function for this action, given as a single GVariant type string
+        (or `NULL` for no parameter)
   */
   const(char)* parameterType;
 
   /**
       the initial state for this action, given in
-              [GVariant text format][gvariant-text].  The state is parsed
-              with no extra type information, so type tags must be added to
-              the string if they are necessary.  Stateless actions should
-              give null here.
+        [GVariant text format](../glib/gvariant-text-format.html).  The state is parsed
+        with no extra type information, so type tags must be added to the string
+        if they are necessary.  Stateless actions should give `NULL` here.
   */
   const(char)* state;
 
   /**
-      the callback to connect to the "change-state" signal
-                     of the action.  All stateful actions should provide a
-                     handler here; stateless actions should not.
+      the callback to connect to the "change-state" signal of the
+        action.  All stateful actions should provide a handler here; stateless
+        actions should not.
   */
   extern(C) void function(GSimpleAction* action, GVariant* value, void* userData) changeState;
 
@@ -3183,13 +3215,13 @@ struct GActionEntry
     Actions may be disabled, see [gio.action_group.ActionGroup.getActionEnabled].
     Activating a disabled action has no effect.
     
-    Actions may optionally have a state in the form of a #GVariant. The current
+    Actions may optionally have a state in the form of a [glib.variant.Variant]. The current
     state of an action can be inquired with [gio.action_group.ActionGroup.getActionState].
     Activating a stateful action may change its state, but it is also possible to
     set the state by calling [gio.action_group.ActionGroup.changeActionState].
     
     As typical example, consider a text editing application which has an
-    option to change the current font to 'bold'. A good way to represent
+    option to change the current font to ‘bold’. A good way to represent
     this would be a stateful action, with a boolean state. Activating the
     action would toggle the state.
     
@@ -3197,13 +3229,13 @@ struct GActionEntry
     method calls, except [gio.action_group.ActionGroup.listActions] take the name of
     an action as an argument.
     
-    The [gio.action_group.ActionGroup] API is meant to be the 'public' API to the action
-    group. The calls here are exactly the interaction that 'external
-    forces' (eg: UI, incoming D-Bus messages, etc.) are supposed to have
-    with actions. 'Internal' APIs (ie: ones meant only to be accessed by
+    The [gio.action_group.ActionGroup] API is meant to be the ‘public’ API to the action
+    group. The calls here are exactly the interaction that ‘external
+    forces’ (eg: UI, incoming D-Bus messages, etc.) are supposed to have
+    with actions. ‘Internal’ APIs (ie: ones meant only to be accessed by
     the action group implementation) are found on subclasses. This is
-    why you will find - for example - [gio.action_group.ActionGroup.getActionEnabled]
-    but not an equivalent set() call.
+    why you will find – for example – [gio.action_group.ActionGroup.getActionEnabled]
+    but not an equivalent `set_action_enabled()` method.
     
     Signals are emitted on the action group in response to state changes
     on individual actions.
@@ -3211,13 +3243,13 @@ struct GActionEntry
     Implementations of [gio.action_group.ActionGroup] should provide implementations for
     the virtual functions [gio.action_group.ActionGroup.listActions] and
     [gio.action_group.ActionGroup.queryAction]. The other virtual functions should
-    not be implemented - their "wrappers" are actually implemented with
+    not be implemented — their ‘wrappers’ are actually implemented with
     calls to [gio.action_group.ActionGroup.queryAction].
 */
 struct GActionGroup;
 
 /**
-    The virtual function table for #GActionGroup.
+    The virtual function table for [gio.action_group.ActionGroup].
 */
 struct GActionGroupInterface
 {
@@ -3270,22 +3302,22 @@ struct GActionGroupInterface
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* parameter) activateAction;
 
   /**
-      the class closure for the #GActionGroup::action-added signal
+      the class closure for the [gio.action_group.ActionGroup.actionAdded] signal
   */
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName) actionAdded;
 
   /**
-      the class closure for the #GActionGroup::action-removed signal
+      the class closure for the [gio.action_group.ActionGroup.actionRemoved] signal
   */
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName) actionRemoved;
 
   /**
-      the class closure for the #GActionGroup::action-enabled-changed signal
+      the class closure for the [gio.action_group.ActionGroup.actionEnabledChanged] signal
   */
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, gboolean enabled) actionEnabledChanged;
 
   /**
-      the class closure for the #GActionGroup::action-enabled-changed signal
+      the class closure for the [gio.action_group.ActionGroup.actionEnabledChanged] signal
   */
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* state) actionStateChanged;
 
@@ -3296,7 +3328,7 @@ struct GActionGroupInterface
 }
 
 /**
-    The virtual function table for #GAction.
+    The virtual function table for [gio.action.Action].
 */
 struct GActionInterface
 {
@@ -3339,7 +3371,7 @@ struct GActionInterface
   extern(C) void function(GAction* action, GVariant* value) changeState;
 
   /**
-      the virtual function pointer for [gio.action.Action.activate].  Note that #GAction does not have an
+      the virtual function pointer for [gio.action.Action.activate].  Note that [gio.action.Action] does not have an
                  'activate' signal but that implementations of it may have one.
   */
   extern(C) void function(GAction* action, GVariant* parameter) activate;
@@ -3355,13 +3387,13 @@ struct GActionInterface
     One useful application of this interface is to map the
     names of actions from various action groups to unique,
     prefixed names (e.g. by prepending "app." or "win.").
-    This is the motivation for the 'Map' part of the interface
+    This is the motivation for the ‘Map’ part of the interface
     name.
 */
 struct GActionMap;
 
 /**
-    The virtual function table for #GActionMap.
+    The virtual function table for [gio.action_map.ActionMap].
 */
 struct GActionMapInterface
 {
@@ -3369,17 +3401,20 @@ struct GActionMapInterface
   GTypeInterface gIface;
 
   /**
-      the virtual function pointer for [gio.action_map.ActionMap.lookupAction]
+      the virtual function pointer for
+        [gio.action_map.ActionMap.lookupAction]
   */
   extern(C) GAction* function(GActionMap* actionMap, const(char)* actionName) lookupAction;
 
   /**
-      the virtual function pointer for [gio.action_map.ActionMap.addAction]
+      the virtual function pointer for
+        [gio.action_map.ActionMap.addAction]
   */
   extern(C) void function(GActionMap* actionMap, GAction* action) addAction;
 
   /**
-      the virtual function pointer for [gio.action_map.ActionMap.removeAction]
+      the virtual function pointer for
+        [gio.action_map.ActionMap.removeAction]
   */
   extern(C) void function(GActionMap* actionMap, const(char)* actionName) removeAction;
 }
@@ -3394,15 +3429,19 @@ struct GActionMapInterface
     As of GLib 2.20, URIs will always be converted to POSIX paths
     (using [gio.file.File.getPath]) when using [gio.app_info.AppInfo.launch]
     even if the application requested an URI and not a POSIX path. For example
-    for a desktop-file based application with Exec key `totem
-    `U`` and a single URI, `sftp://foo/file.avi`, then
-    `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will
-    only work if a set of suitable GIO extensions (such as GVfs 2.26
-    compiled with FUSE support), is available and operational; if this
-    is not the case, the URI will be passed unmodified to the application.
-    Some URIs, such as `mailto:`, of course cannot be mapped to a POSIX
-    path (in GVfs there's no FUSE mount for it); such URIs will be
-    passed unmodified to the application.
+    for a desktop-file based application with the following Exec key:
+    
+    ```
+    Exec=totem %U
+    ```
+    
+    and a single URI, `sftp://foo/file.avi`, then
+    `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will only work
+    if a set of suitable GIO extensions (such as GVfs 2.26 compiled with FUSE
+    support), is available and operational; if this is not the case, the URI
+    will be passed unmodified to the application. Some URIs, such as `mailto:`,
+    of course cannot be mapped to a POSIX path (in GVfs there’s no FUSE mount
+    for it); such URIs will be passed unmodified to the application.
     
     Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
     back to the GIO URI in the [gio.file.File] constructors (since GVfs
@@ -3432,7 +3471,7 @@ struct GActionMapInterface
     
     This code will work when both `cdda://sr0/Track 1.wav` and
     `/home/user/.gvfs/cdda on sr0/Track 1.wav` is passed to the
-    application. It should be noted that it's generally not safe
+    application. It should be noted that it’s generally not safe
     for applications to rely on the format of a particular URIs.
     Different launcher applications (e.g. file managers) may have
     different ideas of what a given URI means.
@@ -3450,52 +3489,55 @@ struct GAppInfoIface
   GTypeInterface gIface;
 
   /**
-      Copies a #GAppInfo.
+      Copies a [gio.app_info.AppInfo].
   */
   extern(C) GAppInfo* function(GAppInfo* appinfo) dup;
 
   /**
-      Checks two #GAppInfos for equality.
+      Checks two [gio.app_info.AppInfo]s for equality.
   */
   extern(C) gboolean function(GAppInfo* appinfo1, GAppInfo* appinfo2) equal;
 
   /**
-      Gets a string identifier for a #GAppInfo.
+      Gets a string identifier for a [gio.app_info.AppInfo].
   */
   extern(C) const(char)* function(GAppInfo* appinfo) getId;
 
   /**
-      Gets the name of the application for a #GAppInfo.
+      Gets the name of the application for a [gio.app_info.AppInfo].
   */
   extern(C) const(char)* function(GAppInfo* appinfo) getName;
 
   /**
-      Gets a short description for the application described by the #GAppInfo.
+      Gets a short description for the application described by
+        the [gio.app_info.AppInfo].
   */
   extern(C) const(char)* function(GAppInfo* appinfo) getDescription;
 
   /**
-      Gets the executable name for the #GAppInfo.
+      Gets the executable name for the [gio.app_info.AppInfo].
   */
   extern(C) const(char)* function(GAppInfo* appinfo) getExecutable;
 
   /**
-      Gets the #GIcon for the #GAppInfo.
+      Gets the [gio.icon.Icon] for the [gio.app_info.AppInfo].
   */
   extern(C) GIcon* function(GAppInfo* appinfo) getIcon;
 
   /**
-      Launches an application specified by the #GAppInfo.
+      Launches an application specified by the [gio.app_info.AppInfo].
   */
   extern(C) gboolean function(GAppInfo* appinfo, GList* files, GAppLaunchContext* context, GError** _err) launch;
 
   /**
-      Indicates whether the application specified supports launching URIs.
+      Indicates whether the application specified supports
+        launching URIs.
   */
   extern(C) gboolean function(GAppInfo* appinfo) supportsUris;
 
   /**
-      Indicates whether the application specified accepts filename arguments.
+      Indicates whether the application specified accepts
+        filename arguments.
   */
   extern(C) gboolean function(GAppInfo* appinfo) supportsFiles;
 
@@ -3505,73 +3547,85 @@ struct GAppInfoIface
   extern(C) gboolean function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GError** _err) launchUris;
 
   /**
-      Returns whether an application should be shown (e.g. when getting a list of installed applications).
-      [FreeDesktop.Org Startup Notification Specification](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
+      Returns whether an application should be shown (e.g. when
+        getting a list of installed applications).
+        [FreeDesktop.Org Startup Notification Specification](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
   */
   extern(C) gboolean function(GAppInfo* appinfo) shouldShow;
 
   /**
-      Sets an application as default for a given content type.
+      Sets an application as default for a given content
+        type.
   */
   extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) setAsDefaultForType;
 
   /**
-      Sets an application as default for a given file extension.
+      Sets an application as default for a given
+        file extension.
   */
   extern(C) gboolean function(GAppInfo* appinfo, const(char)* extension, GError** _err) setAsDefaultForExtension;
 
   /**
-      Adds to the #GAppInfo information about supported file types.
+      Adds to the [gio.app_info.AppInfo] information about
+        supported file types.
   */
   extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) addSupportsType;
 
   /**
-      Checks for support for removing supported file types from a #GAppInfo.
+      Checks for support for removing supported file
+        types from a [gio.app_info.AppInfo].
   */
   extern(C) gboolean function(GAppInfo* appinfo) canRemoveSupportsType;
 
   /**
-      Removes a supported application type from a #GAppInfo.
+      Removes a supported application type from a
+        [gio.app_info.AppInfo].
   */
   extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) removeSupportsType;
 
   /**
-      Checks if a #GAppInfo can be deleted. Since 2.20
+      Checks if a [gio.app_info.AppInfo] can be deleted. (Since 2.20)
   */
   extern(C) gboolean function(GAppInfo* appinfo) canDelete;
 
   /**
-      Deletes a #GAppInfo. Since 2.20
+      Deletes a [gio.app_info.AppInfo]. (Since 2.20)
   */
   extern(C) gboolean function(GAppInfo* appinfo) doDelete;
 
   /**
-      Gets the commandline for the #GAppInfo. Since 2.20
+      Gets the commandline for the [gio.app_info.AppInfo].
+        (Since 2.20)
   */
   extern(C) const(char)* function(GAppInfo* appinfo) getCommandline;
 
   /**
-      Gets the display name for the #GAppInfo. Since 2.24
+      Gets the display name for the [gio.app_info.AppInfo].
+        (Since 2.24)
   */
   extern(C) const(char)* function(GAppInfo* appinfo) getDisplayName;
 
   /**
-      Sets the application as the last used. See [gio.app_info.AppInfo.setAsLastUsedForType].
+      Sets the application as the last used. See
+        [gio.app_info.AppInfo.setAsLastUsedForType].
   */
   extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) setAsLastUsedForType;
 
   /**
-      Retrieves the list of content types that @app_info claims to support.
+      Retrieves the list of content types that @app_info
+        claims to support.
   */
   extern(C) const(char*)* function(GAppInfo* appinfo) getSupportedTypes;
 
   /**
-      Asynchronously launches an application with a list of URIs. (Since: 2.60)
+      Asynchronously launches an application with a list of
+        URIs. (Since: 2.60)
   */
   extern(C) void function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) launchUrisAsync;
 
   /**
-      Finishes an operation started with @launch_uris_async. (Since: 2.60)
+      Finishes an operation started with @launch_uris_async.
+        (Since: 2.60)
   */
   extern(C) gboolean function(GAppInfo* appinfo, GAsyncResult* result, GError** _err) launchUrisFinish;
 }
@@ -3596,14 +3650,14 @@ struct GAppInfoIface
      - [gio.app_info.AppInfo.getDefaultForType]
      - [gio.app_info.AppInfo.getFallbackForType]
      - [gio.app_info.AppInfo.getRecommendedForType]
-     - [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
     
     The latter functions are available if using
-    [[gio.desktop_app_info.DesktopAppInfo]](../gio-unix/class.DesktopAppInfo.html) from
+    [[giounix.desktop_app_info.DesktopAppInfo]](../gio-unix/class.DesktopAppInfo.html) from
     `gio-unix-2.0.pc` (GIR namespace `GioUnix-2.0`).
     
     In the usual case, applications should try to make note of the change
@@ -3780,7 +3834,7 @@ struct GAppLaunchContextPrivate;
     
     To parse commandline arguments you may handle the
     [gio.application.Application.commandLine] signal or override the
-    `vfunc@Gio.Application.local_command_line` virtual funcion, to parse them in
+    `vfunc@Gio.Application.local_command_line` virtual function, to parse them in
     either the primary instance or the local instance, respectively.
     
     For an example of opening files with a [gio.application.Application], see
@@ -3842,20 +3896,20 @@ struct GApplicationClass
   /**
       invoked on the primary instance before 'activate', 'open',
           'command-line' or any action invocation, gets the 'platform data' from
-          the calling instance
+          the calling instance. Must chain up
   */
   extern(C) void function(GApplication* application, GVariant* platformData) beforeEmit;
 
   /**
       invoked on the primary instance after 'activate', 'open',
           'command-line' or any action invocation, gets the 'platform data' from
-          the calling instance
+          the calling instance. Must chain up
   */
   extern(C) void function(GApplication* application, GVariant* platformData) afterEmit;
 
   /**
       invoked (locally) to add 'platform data' to be sent to
-          the primary instance when activating, opening or invoking actions
+          the primary instance when activating, opening or invoking actions. Must chain up
   */
   extern(C) void function(GApplication* application, GVariantBuilder* builder) addPlatformData;
 
@@ -3929,7 +3983,7 @@ struct GApplicationClass
     The [gio.application_command_line.ApplicationCommandLine] object can provide the @argc and @argv
     parameters for use with the [glib.option_context.OptionContext] command-line parsing API,
     with the [gio.application_command_line.ApplicationCommandLine.getArguments] function. See
-    [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
+    [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
     for an example.
     
     The exit status of the originally-invoked process may be set and
@@ -4340,7 +4394,7 @@ struct GAsyncInitableIface
 struct GAsyncResult;
 
 /**
-    Interface definition for #GAsyncResult.
+    Interface definition for [gio.async_result.AsyncResult].
 */
 struct GAsyncResultIface
 {
@@ -4366,7 +4420,7 @@ struct GAsyncResultIface
 }
 
 /**
-    Buffered input stream implements #GFilterInputStream and provides
+    Buffered input stream implements [gio.filter_input_stream.FilterInputStream] and provides
     for buffered reads.
     
     By default, [gio.buffered_input_stream.BufferedInputStream]'s buffer size is set at 4 kilobytes.
@@ -4873,17 +4927,17 @@ struct GDBusAuthObserver;
 struct GDBusConnection;
 
 /**
-    Struct used in [gio.global.dbusErrorRegisterErrorDomain].
+    Struct used in `func@Gio.DBusError.register_error_domain`.
 */
 struct GDBusErrorEntry
 {
   /**
-      An error code.
+      an error code
   */
   int errorCode;
 
   /**
-      The D-Bus error name to associate with @error_code.
+      the D-Bus error name to associate with @error_code
   */
   const(char)* dbusErrorName;
 }
@@ -5006,8 +5060,13 @@ struct GDBusInterfaceSkeletonClass
   */
   extern(C) void function(GDBusInterfaceSkeleton* interface_) flush;
 
+  /**
+      Dispatches a method invocation. (Since: 2.88)
+  */
+  extern(C) void function(GDBusInterfaceSkeleton* interface_, GDBusInterfaceMethodCallFunc methodCallFunc, GDBusMethodInvocation* invocation, GDBusInterfaceSkeletonFlags flags, GDBusObject* object) methodDispatch;
+
   /** */
-  void*[8] vfuncPadding;
+  void*[7] vfuncPadding;
 
   /**
       Signal class handler for the #GDBusInterfaceSkeleton::g-authorize-method signal.
@@ -5099,7 +5158,7 @@ struct GDBusMenuModel;
 struct GDBusMessage;
 
 /**
-    Information about a method on an D-Bus interface.
+    Information about a method on a D-Bus interface.
 */
 struct GDBusMethodInfo
 {
@@ -5589,6 +5648,8 @@ struct GDBusPropertyInfo
     context (see [glib.main_context.MainContext.pushThreadDefault]) of the thread
     where the instance was constructed.
     
+    
+    ## A watch proxy example
     An example using a proxy for a well-known name can be found in
     [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
 */
@@ -5948,7 +6009,7 @@ struct GDebugController;
       debug_controller = G_DEBUG_CONTROLLER (g_debug_controller_dbus_new (priv->connection, NULL, &child_error));
       if (debug_controller == NULL)
         {
-          g_error ("Could not register debug controller on bus: %s"),
+          g_error ("Could not register debug controller on bus: %s",
                    child_error->message);
         }
     
@@ -6039,51 +6100,9 @@ struct GDebugControllerInterface
 }
 
 /**
-    [gio.desktop_app_info.DesktopAppInfo] is an implementation of [gio.app_info.AppInfo] based on
-    desktop files.
-    
-    Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
-    GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-    file or the `GioUnix-2.0` GIR namespace when using it.
-*/
-struct GDesktopAppInfo;
-
-/** */
-struct GDesktopAppInfoClass
-{
-  /** */
-  GObjectClass parentClass;
-}
-
-/**
-    #GDesktopAppInfoLookup is an opaque data structure and can only be accessed
-    using the following functions.
-
-    Deprecated: The #GDesktopAppInfoLookup interface is deprecated and
-         unused by GIO.
-*/
-struct GDesktopAppInfoLookup;
-
-/**
-    Interface that is used by backends to associate default
-    handlers with URI schemes.
-*/
-struct GDesktopAppInfoLookupIface
-{
-  /** */
-  GTypeInterface gIface;
-
-  /**
-      Virtual method for
-       [gio.desktop_app_info_lookup.DesktopAppInfoLookup.getDefaultForUriScheme].
-  */
-  extern(C) GAppInfo* function(GDesktopAppInfoLookup* lookup, const(char)* uriScheme) getDefaultForUriScheme;
-}
-
-/**
     [gio.drive.Drive] represents a piece of hardware connected to the machine.
     It’s generally only created for removable hardware or hardware with
-    removable media.
+    removable media. For example, an optical disc drive, or a USB flash drive.
     
     [gio.drive.Drive] is a container class for [gio.volume.Volume] objects that stem from
     the same piece of media. As such, [gio.drive.Drive] abstracts a drive with
@@ -6532,9 +6551,9 @@ struct GEmblemedIconPrivate;
     short. Entity tags are somewhat like a more abstract version of the
     traditional mtime, and can be used to quickly determine if the file
     has been modified from the version on the file system. See the
-    HTTP 1.1
-    [specification](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
-    for HTTP `ETag` headers, which are a very similar concept.
+    description of HTTP ETags in
+    [RFC9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-etag).
+    [gio.file.File] Entity Tags are a very similar concept.
 */
 struct GFile;
 
@@ -6580,34 +6599,6 @@ struct GFileAttributeInfoList
     Determines if a string matches a file attribute.
 */
 struct GFileAttributeMatcher;
-
-/**
-    [gio.file_descriptor_based.FileDescriptorBased] is an interface for file descriptor based IO.
-    
-    It is implemented by streams (implementations of [gio.input_stream.InputStream] or
-    [gio.output_stream.OutputStream]) that are based on file descriptors.
-    
-    Note that `<gio/gfiledescriptorbased.h>` belongs to the UNIX-specific
-    GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-    file or the `GioUnix-2.0` GIR namespace when using it.
-*/
-struct GFileDescriptorBased;
-
-/**
-    An interface for file descriptor based io objects.
-*/
-struct GFileDescriptorBasedIface
-{
-  /**
-      The parent interface.
-  */
-  GTypeInterface gIface;
-
-  /**
-      Gets the underlying file descriptor.
-  */
-  extern(C) int function(GFileDescriptorBased* fdBased) getFd;
-}
 
 /**
     [gio.file_enumerator.FileEnumerator] allows you to operate on a set of [gio.file.File] objects,
@@ -7315,6 +7306,11 @@ struct GFileIface
       Finishes an asynchronous recursive measurement of the disk usage of @file. Since 2.38
   */
   extern(C) gboolean function(GFile* file, GAsyncResult* result, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) measureDiskUsageFinish;
+
+  /**
+      Queries whether a file exists. Since 2.84
+  */
+  extern(C) gboolean function(GFile* file, GCancellable* cancellable) queryExists;
 }
 
 /**
@@ -7324,8 +7320,8 @@ struct GFileIface
     implements methods for getting information that all files should
     contain, and allows for manipulation of extended attributes.
     
-    See [file-attributes.html](file attributes) for more information on how GIO
-    handles file attributes.
+    See the [file attributes](file-attributes.html) document for more
+    information on how GIO handles file attributes.
     
     To obtain a [gio.file_info.FileInfo] for a [gio.file.File], use
     [gio.file.File.queryInfo] (or its async variant). To obtain a [gio.file_info.FileInfo]
@@ -7847,6 +7843,56 @@ struct GIOStreamClass
 
 /** */
 struct GIOStreamPrivate;
+
+/**
+    Contains the type of service (ToS) byte of an IPv4 header.
+    
+    This consists of the DSCP field as per
+    [RFC 2474](https://www.rfc-editor.org/rfc/rfc2474#section-3),
+    and the ECN field as per
+    [RFC 3168](https://www.rfc-editor.org/rfc/rfc3168#section-5).
+    
+    It may be received using [gio.socket.Socket.receiveMessage] over UDP sockets
+    (i.e. sockets in the [gio.types.SocketFamily.Ipv4] family with
+    [gio.types.SocketType.Datagram] type). The message is not meant for sending. To set
+    ToS field to be used in datagrams sent on a [gio.socket.Socket] use:
+    ```c
+    g_socket_set_option (socket, IPPROTO_IP, IP_TOS, <ToS value>, &error);
+    ```
+*/
+struct GIPTosMessage;
+
+/** */
+struct GIPTosMessageClass
+{
+  /** */
+  GSocketControlMessageClass parentClass;
+}
+
+/**
+    Contains the Traffic Class byte of an IPv6 header.
+    
+    This consists of the DSCP field as per
+    [RFC 2474](https://www.rfc-editor.org/rfc/rfc2474#section-3),
+    and the ECN field as per
+    [RFC 3168](https://www.rfc-editor.org/rfc/rfc3168#section-5).
+    
+    It may be received using [gio.socket.Socket.receiveMessage] over UDP sockets
+    (i.e. sockets in the [gio.types.SocketFamily.Ipv6] family with
+    [gio.types.SocketType.Datagram] type). The message is not meant for sending. To set
+    Traffic Class field to be used in datagrams sent on a [gio.socket.Socket] use:
+    ```c
+    g_socket_set_option (socket, IPPROTO_IPV6, IPV6_TCLASS, <TC value>, &error);
+    ```
+*/
+struct GIPv6TclassMessage;
+
+/** */
+struct GIPv6TclassMessageClass
+{
+  /** */
+  GSocketControlMessageClass parentClass;
+}
 
 /**
     [gio.icon.Icon] is a very minimal interface for icons. It provides functions
@@ -8602,6 +8648,8 @@ struct GMenuLinkIterPrivate;
     
     ![](menu-example.png)
     
+    While this kind of deeply nested menu is no longer considered good UI
+    practice, it serves as a good example of the concepts in [gio.menu_model.MenuModel].
     There are 8 ‘menus’ visible in the screenshot: one menubar, two
     submenus and 5 sections:
     
@@ -8621,7 +8669,10 @@ struct GMenuLinkIterPrivate;
     
     ## A menu example
     
-    ![](menu-model.png)
+    <picture>
+      <source srcset="menu-model-dark.svg" media="(prefers-color-scheme: dark)">
+      <img src="menu-model-light.svg" alt="menu model">
+    </picture>
     
     Notice that the separators visible in the [example](#an-example-menu)
     appear nowhere in the [menu model](#a-menu-example). This is because
@@ -8740,14 +8791,15 @@ struct GMenuModelClass
 struct GMenuModelPrivate;
 
 /**
-    The [gio.mount.Mount] interface represents user-visible mounts. Note, when
-    [porting from GnomeVFS](migrating-gnome-vfs.html), [gio.mount.Mount] is the moral
-    equivalent of `GnomeVFSVolume`.
+    The [gio.mount.Mount] interface represents a user-visible mount, such as a mounted
+    file system.
     
     [gio.mount.Mount] is a ‘mounted’ filesystem that you can access. Mounted is in
     quotes because it’s not the same as a UNIX mount, it might be a GVFS
-    mount, but you can still access the files on it if you use GIO. Might or
-    might not be related to a volume object.
+    mount, but you can still access the files on it if you use GIO.
+    
+    A [gio.mount.Mount] might be associated with a [gio.volume.Volume] (such as a USB flash
+    drive) which hosts it.
     
     Unmounting a [gio.mount.Mount] instance is an asynchronous operation. For
     more information about asynchronous operations, see [gio.async_result.AsyncResult]
@@ -8761,6 +8813,9 @@ struct GMenuModelPrivate;
     operation was completed successfully.  If an `error` is present when
     [gio.mount.Mount.unmountWithOperationFinish] is called, then it will be
     filled with any error information.
+    
+    Note, when [porting from GnomeVFS](migrating-gnome-vfs.html), [gio.mount.Mount] is the
+    moral equivalent of `GnomeVFSVolume`.
 */
 struct GMount;
 
@@ -9193,6 +9248,9 @@ struct GNetworkServicePrivate;
     clicked.
     
     A notification can be sent with [gio.application.Application.sendNotification].
+    
+    In Windows, notification actions are unsupported, when sending the notification
+    a warning will be printed if a default action or action buttons were added.
 */
 struct GNotification;
 
@@ -9541,6 +9599,7 @@ struct GPollableOutputStreamInterface
     “Low Power” mode on some systems).
     
     When in “Low Power” mode, it is recommended that applications:
+    
     - disable automatic downloads;
     - reduce the rate of refresh from online sources such as calendar or
       email synchronisation;
@@ -10084,9 +10143,9 @@ struct GResolverPrivate;
     supported.
     
     Substitutions must start with a slash, and must not contain a trailing slash
-    before the `=`.  The path after the slash should ideally be absolute, but
-    this is not strictly required.  It is possible to overlay the location of a
-    single resource with an individual file.
+    before the `=`.  The filesystem path after the `=` should ideally be absolute,
+    but this is not strictly required.  It is possible to overlay the location of
+    a single resource with an individual file.
 */
 struct GResource;
 
@@ -10342,6 +10401,31 @@ struct GSeekableIface
     `glib-compile-schemas` expects schema files to have the extension
     `.gschema.override`.
     
+    ## Delay-apply mode
+    
+    By default, values set on a [gio.settings.Settings] instance immediately start
+    to be written to the backend (although these writes may not complete by the
+    time that [gio.settings.Settings.set]) returns; see [gio.settings.Settings.sync]).
+    
+    In order to allow groups of settings to be changed simultaneously and
+    atomically, GSettings also supports a ‘delay-apply’ mode. In this mode,
+    updated values are kept locally in the [gio.settings.Settings] instance until
+    they are explicitly applied by calling [gio.settings.Settings.apply].
+    
+    For example, this could be useful for a preferences dialog where the
+    preferences all need to be applied simultaneously when the user clicks ‘Save’.
+    
+    Switching a [gio.settings.Settings] instance to ‘delay-apply’ mode is a one-time
+    irreversible operation: from that point onwards, *all* changes made to that
+    [gio.settings.Settings] have to be explicitly applied by calling
+    [gio.settings.Settings.apply]. The ‘delay-apply’ mode is also propagated to any
+    child settings objects subsequently created using
+    [gio.settings.Settings.getChild].
+    
+    At any point, the set of unapplied changes can be queried using
+    [gio.settings.Settings.hasUnapplied], and discarded by calling
+    [gio.settings.Settings.revert].
+    
     ## Binding
     
     A very convenient feature of GSettings lets you bind [gobject.object.ObjectWrap]
@@ -10383,6 +10467,70 @@ struct GSeekableIface
     
     ## Build system integration
     
+    ### Meson
+    
+    GSettings is natively supported by Meson’s [GNOME module](https://mesonbuild.com/Gnome-module.html).
+    
+    You can install the schemas as any other data file:
+    
+    ```
+    install_data(
+      'org.foo.MyApp.gschema.xml',
+      install_dir: get_option('datadir') / 'glib-2.0/schemas',
+    )
+    ```
+    
+    You can use `gnome.post_install()` function to compile the schemas on
+    installation:
+    
+    ```
+    gnome = import('gnome')
+    gnome.post_install(
+      glib_compile_schemas: true,
+    )
+    ```
+    
+    If an enumerated type defined in a C header file is to be used in a GSettings
+    schema, it can either be defined manually using an `<enum>` element in the
+    schema XML, or it can be extracted automatically from the C header. This
+    approach is preferred, as it ensures the two representations are always
+    synchronised. To do so, you will need to use the `gnome.mkenums()` function
+    with the following templates:
+    
+    ```
+    schemas_enums = gnome.mkenums('org.foo.MyApp.enums.xml',
+      comments: '<!-- @comment@ -->',
+      fhead: '<schemalist>',
+      vhead: '  <@type@ id="org.foo.MyApp.@EnumName@">',
+      vprod: '    <value nick="@valuenick@" value="@valuenum@"/>',
+      vtail: '  </@type@>',
+      ftail: '</schemalist>',
+      sources: enum_sources,
+      install_header: true,
+      install_dir: get_option('datadir') / 'glib-2.0/schemas',
+    )
+    ```
+    
+    It is recommended to validate your schemas as part of the test suite for
+    your application:
+    
+    ```
+    test('validate-schema',
+      find_program('glib-compile-schemas'),
+      args: ['--strict', '--dry-run', meson.current_source_dir()],
+    )
+    ```
+    
+    If your application allows running uninstalled, you should also use the
+    `gnome.compile_schemas()` function to compile the schemas in the current
+    build directory:
+    
+    ```
+    gnome.compile_schemas()
+    ```
+    
+    ### Autotools
+    
     GSettings comes with autotools integration to simplify compiling and
     installing schemas. To add GSettings support to an application, add the
     following to your `configure.ac`:
@@ -10398,25 +10546,6 @@ struct GSeekableIface
     
     @GSETTINGS_RULES@
     ```
-    
-    No changes are needed to the build system to mark a schema XML file for
-    translation. Assuming it sets the `gettext-domain` attribute, a schema may
-    be marked for translation by adding it to `POTFILES.in`, assuming gettext
-    0.19 is in use (the preferred method for translation):
-    ```
-    data/org.foo.MyApp.gschema.xml
-    ```
-    
-    Alternatively, if intltool 0.50.1 is in use:
-    ```
-    [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
-    ```
-    
-    GSettings will use gettext to look up translations for the `<summary>` and
-    `<description>` elements, and also any `<default>` elements which have a
-    `l10n` attribute set. Translations must not be included in the `.gschema.xml`
-    file by the build system, for example by using intltool XML rules with a
-    `.gschema.xml.in` template.
     
     If an enumerated type defined in a C header file is to be used in a GSettings
     schema, it can either be defined manually using an `<enum>` element in the
@@ -10434,6 +10563,28 @@ struct GSeekableIface
     automatically included in the schema compilation, install and uninstall
     rules. It should not be committed to version control or included in
     `EXTRA_DIST`.
+    
+    ## Localization
+    
+    No changes are needed to the build system to mark a schema XML file for
+    translation. Assuming it sets the `gettext-domain` attribute, a schema may
+    be marked for translation by adding it to `POTFILES.in`, assuming gettext
+    0.19 or newer is in use (the preferred method for translation):
+    ```
+    data/org.foo.MyApp.gschema.xml
+    ```
+    
+    Alternatively, if intltool 0.50.1 is in use:
+    ```
+    [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
+    ```
+    
+    GSettings will use gettext to look up translations for the `<summary>` and
+    `<description>` elements, and also any `<default>` elements which have a
+    `l10n` attribute set.
+    
+    Translations **must not** be included in the `.gschema.xml` file by the build
+    system, for example by using a rule to generate the XML file from a template.
 */
 struct GSettings
 {
@@ -10888,7 +11039,7 @@ struct GSimpleAsyncResultClass;
     This is useful when you obtained a [gio.input_stream.InputStream] and a
     [gio.output_stream.OutputStream] by other means, for instance creating them with
     platform specific methods as
-    [`[gio.unix_input_stream.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
+    [`[giounix.input_stream.InputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
     (from `gio-unix-2.0.pc` / `GioUnix-2.0`), and you want to
     take advantage of the methods provided by [gio.iostream.IOStream].
 */
@@ -11347,7 +11498,7 @@ struct GSocketConnectionPrivate;
     These messages are sent with [gio.socket.Socket.sendMessage] and received
     with [gio.socket.Socket.receiveMessage].
     
-    To extend the set of control message that can be sent, subclass this
+    To extend the set of control messages that can be sent, subclass this
     class and override the `get_size`, `get_level`, `get_type` and `serialize`
     methods.
     
@@ -11574,7 +11725,7 @@ struct GSocketServicePrivate;
 struct GSrvTarget;
 
 /**
-    #GStaticResource is an opaque data structure and can only be accessed
+    [gio.static_resource.StaticResource] is an opaque data structure and can only be accessed
     using the following functions.
 */
 struct GStaticResource
@@ -11653,6 +11804,12 @@ struct GStaticResource
     [gio.subprocess.Subprocess.wait].  After the process exits, the status can be
     checked using functions such as [gio.subprocess.Subprocess.getIfExited] (which
     are similar to the familiar `WIFEXITED`-style POSIX macros).
+    
+    Note that as of GLib 2.82, creating a [gio.subprocess.Subprocess] causes the signal
+    `SIGPIPE` to be ignored for the remainder of the program. If you are writing
+    a command-line utility that uses [gio.subprocess.Subprocess], you may need to take into
+    account the fact that your program will not automatically be killed
+    if it tries to write to `stdout` after it has been closed.
 */
 struct GSubprocess;
 
@@ -11937,9 +12094,9 @@ struct GSubprocessLauncher;
     
     You can use [gio.task.Task.runInThread] to turn a synchronous
     operation into an asynchronous one, by running it in a thread.
-    When it completes, the result will be dispatched to the thread-default main
-    context (see [glib.main_context.MainContext.pushThreadDefault]) where the [gio.task.Task]
-    was created.
+    When it completes, the result will be dispatched to the thread-default
+    main context (see [glib.main_context.MainContext.pushThreadDefault])
+    where the [gio.task.Task] was created.
     
     Running a task in a thread:
     ```c
@@ -12980,7 +13137,7 @@ struct GUnixCredentialsMessagePrivate;
     descriptors that it contains, closing them when finalized.
     
     It may be wrapped in a
-    [[gio.unix_fdmessage.UnixFDMessage]](../gio-unix/class.UnixFDMessage.html) and sent over a
+    [[giounix.fdmessage.FDMessage]](../gio-unix/class.UnixFDMessage.html) and sent over a
     [gio.socket.Socket] in the [gio.types.SocketFamily.Unix] family by using
     [gio.socket.Socket.sendMessage] and received using
     [gio.socket.Socket.receiveMessage].
@@ -13024,156 +13181,6 @@ struct GUnixFDListClass
 
 /** */
 struct GUnixFDListPrivate;
-
-/**
-    This [gio.socket_control_message.SocketControlMessage] contains a [gio.unix_fdlist.UnixFDList].
-    It may be sent using [gio.socket.Socket.sendMessage] and received using
-    [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in the
-    [gio.types.SocketFamily.Unix] family). The file descriptors are copied
-    between processes by the kernel.
-    
-    For an easier way to send and receive file descriptors over
-    stream-oriented UNIX sockets, see [gio.unix_connection.UnixConnection.sendFd] and
-    [gio.unix_connection.UnixConnection.receiveFd].
-    
-    Note that `<gio/gunixfdmessage.h>` belongs to the UNIX-specific GIO
-    interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-    file or the `GioUnix-2.0` GIR namespace when using it.
-*/
-struct GUnixFDMessage
-{
-  /** */
-  GSocketControlMessage parentInstance;
-
-  /** */
-  GUnixFDMessagePrivate* priv;
-}
-
-/** */
-struct GUnixFDMessageClass
-{
-  /** */
-  GSocketControlMessageClass parentClass;
-
-  /** */
-  extern(C) void function() GReserved1;
-
-  /** */
-  extern(C) void function() GReserved2;
-}
-
-/** */
-struct GUnixFDMessagePrivate;
-
-/**
-    [gio.unix_input_stream.UnixInputStream] implements [gio.input_stream.InputStream] for reading from a UNIX
-    file descriptor, including asynchronous operations. (If the file
-    descriptor refers to a socket or pipe, this will use `poll()` to do
-    asynchronous I/O. If it refers to a regular file, it will fall back
-    to doing asynchronous I/O in another thread.)
-    
-    Note that `<gio/gunixinputstream.h>` belongs to the UNIX-specific GIO
-    interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-    file or the `GioUnix-2.0` GIR namespace when using it.
-*/
-struct GUnixInputStream
-{
-  /** */
-  GInputStream parentInstance;
-
-  /** */
-  GUnixInputStreamPrivate* priv;
-}
-
-/** */
-struct GUnixInputStreamClass
-{
-  /** */
-  GInputStreamClass parentClass;
-
-  /** */
-  extern(C) void function() GReserved1;
-
-  /** */
-  extern(C) void function() GReserved2;
-
-  /** */
-  extern(C) void function() GReserved3;
-
-  /** */
-  extern(C) void function() GReserved4;
-
-  /** */
-  extern(C) void function() GReserved5;
-}
-
-/** */
-struct GUnixInputStreamPrivate;
-
-/**
-    Defines a Unix mount entry (e.g. <filename>/media/cdrom</filename>).
-    This corresponds roughly to a mtab entry.
-*/
-struct GUnixMountEntry;
-
-/**
-    Watches #GUnixMounts for changes.
-*/
-struct GUnixMountMonitor;
-
-/** */
-struct GUnixMountMonitorClass;
-
-/**
-    Defines a Unix mount point (e.g. <filename>/dev</filename>).
-    This corresponds roughly to a fstab entry.
-*/
-struct GUnixMountPoint;
-
-/**
-    [gio.unix_output_stream.UnixOutputStream] implements [gio.output_stream.OutputStream] for writing to a UNIX
-    file descriptor, including asynchronous operations. (If the file
-    descriptor refers to a socket or pipe, this will use `poll()` to do
-    asynchronous I/O. If it refers to a regular file, it will fall back
-    to doing asynchronous I/O in another thread.)
-    
-    Note that `<gio/gunixoutputstream.h>` belongs to the UNIX-specific GIO
-    interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config file
-    file or the `GioUnix-2.0` GIR namespace when using it.
-*/
-struct GUnixOutputStream
-{
-  /** */
-  GOutputStream parentInstance;
-
-  /** */
-  GUnixOutputStreamPrivate* priv;
-}
-
-/** */
-struct GUnixOutputStreamClass
-{
-  /** */
-  GOutputStreamClass parentClass;
-
-  /** */
-  extern(C) void function() GReserved1;
-
-  /** */
-  extern(C) void function() GReserved2;
-
-  /** */
-  extern(C) void function() GReserved3;
-
-  /** */
-  extern(C) void function() GReserved4;
-
-  /** */
-  extern(C) void function() GReserved5;
-}
-
-/** */
-struct GUnixOutputStreamPrivate;
 
 /**
     Support for UNIX-domain (also known as local) sockets, corresponding to
@@ -13284,8 +13291,11 @@ struct GVfsClass
 
 /**
     The [gio.volume.Volume] interface represents user-visible objects that can be
-    mounted. Note, when [porting from GnomeVFS](migrating-gnome-vfs.html),
-    [gio.volume.Volume] is the moral equivalent of `GnomeVFSDrive`.
+    mounted. For example, a file system partition on a USB flash drive, or an
+    optical disc inserted into a disc drive.
+    
+    If a [gio.volume.Volume] is currently mounted, the corresponding [gio.mount.Mount] can
+    be retrieved using [gio.volume.Volume.getMount].
     
     Mounting a [gio.volume.Volume] instance is an asynchronous operation. For more
     information about asynchronous operations, see [gio.async_result.AsyncResult] and
@@ -13306,6 +13316,9 @@ struct GVfsClass
     successfully.  If a [glib.error.ErrorWrap] is present when
     [gio.volume.Volume.mountFinish] is called, then it will be filled with any
     error information.
+    
+    Note, when [porting from GnomeVFS](migrating-gnome-vfs.html),
+    [gio.volume.Volume] is the moral equivalent of `GnomeVFSDrive`.
     
     ## Volume Identifiers
     
@@ -13612,8 +13625,6 @@ alias extern(C) char** function(GDBusConnection* connection, const(char)* sender
 alias extern(C) GDBusInterfaceInfo** function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* node, void* userData) GDBusSubtreeIntrospectFunc;
 
 alias extern(C) gboolean function(GDatagramBased* datagramBased, GIOCondition condition, void* data) GDatagramBasedSourceFunc;
-
-alias extern(C) void function(GDesktopAppInfo* appinfo, GPid pid, void* userData) GDesktopAppLaunchCallback;
 
 alias extern(C) void function(gboolean reporting, ulong currentSize, ulong numDirs, ulong numFiles, void* data) GFileMeasureProgressCallback;
 

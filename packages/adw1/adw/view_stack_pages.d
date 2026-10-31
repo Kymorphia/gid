@@ -11,6 +11,9 @@ import gio.list_model;
 import gio.list_model_mixin;
 import gobject.gid_builder;
 import gobject.object;
+import gobject.types;
+import gtk.section_model;
+import gtk.section_model_mixin;
 import gtk.selection_model;
 import gtk.selection_model_mixin;
 
@@ -19,7 +22,7 @@ import gtk.selection_model_mixin;
     
     See [adw.view_stack.ViewStack.pages].
 */
-class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.selection_model.SelectionModel
+class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
   /** */
@@ -57,6 +60,24 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
+      Get `itemType` property.
+      Returns: The type of the items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  /**
       Get `selectedPage` property.
       Returns: The selected [adw.view_stack_page.ViewStackPage] within the [adw.view_stack_pages.ViewStackPages].
         
@@ -86,6 +107,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   mixin ListModelT!();
+  mixin SectionModelT!();
   mixin SelectionModelT!();
 
   /**
@@ -119,10 +141,11 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
 }
 
 /// Fluent builder implementation template for [adw.view_stack_pages.ViewStackPages]
-class ViewStackPagesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
+class ViewStackPagesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
 {
 
   mixin ListModelGidBuilderT!();
+  mixin SectionModelGidBuilderT!();
   mixin SelectionModelGidBuilderT!();
 
   /**

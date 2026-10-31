@@ -11,8 +11,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.list_item.ListItem] is used by list widgets to represent items in a
-    [gio.list_model.ListModel].
+    Used by list widgets to represent items in a [gio.list_model.ListModel].
     
     [gtk.list_item.ListItem] objects are managed by the list widget (with its factory)
     and cannot be created by applications, but they need to be populated
@@ -22,10 +21,10 @@ import gtk.widget;
     
     1. The unbound stage where the listitem is not currently connected to
        an item in the list. In that case, the [gtk.list_item.ListItem.item]
-       property is set to null.
+       property is set to `NULL`.
     
     2. The bound stage where the listitem references an item from the list.
-       The [gtk.list_item.ListItem.item] property is not null.
+       The [gtk.list_item.ListItem.item] property is not `NULL`.
 */
 class ListItem : gobject.object.ObjectWrap
 {
@@ -66,7 +65,7 @@ class ListItem : gobject.object.ObjectWrap
 
   /**
       Get `accessibleDescription` property.
-      Returns: The accessible description to set on the list item.
+      Returns: The accessible description to set on the listitem.
   */
   @property string accessibleDescription() nothrow
   {
@@ -76,7 +75,7 @@ class ListItem : gobject.object.ObjectWrap
   /**
       Set `accessibleDescription` property.
       Params:
-        propval = The accessible description to set on the list item.
+        propval = The accessible description to set on the listitem.
   */
   @property void accessibleDescription(string propval) nothrow
   {
@@ -85,7 +84,7 @@ class ListItem : gobject.object.ObjectWrap
 
   /**
       Get `accessibleLabel` property.
-      Returns: The accessible label to set on the list item.
+      Returns: The accessible label to set on the listitem.
   */
   @property string accessibleLabel() nothrow
   {
@@ -95,7 +94,7 @@ class ListItem : gobject.object.ObjectWrap
   /**
       Set `accessibleLabel` property.
       Params:
-        propval = The accessible label to set on the list item.
+        propval = The accessible label to set on the listitem.
   */
   @property void accessibleLabel(string propval) nothrow
   {
@@ -230,7 +229,7 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
-      Checks if a list item has been set to be activatable via
+      Checks if a listitem has been set to be activatable via
       [gtk.list_item.ListItem.setActivatable].
       Returns: true if the item is activatable
   */
@@ -242,8 +241,8 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the child previously set via [gtk.list_item.ListItem.setChild] or
-      null if none was set.
+      Gets the child previously set via [gtk.list_item.ListItem.setChild]
+      or `NULL` if none was set.
       Returns: The child
   */
   gtk.widget.Widget getChild() nothrow
@@ -255,7 +254,7 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
-      Checks if a list item has been set to be focusable via
+      Checks if a listitem has been set to be focusable via
       [gtk.list_item.ListItem.setFocusable].
       Returns: true if the item is focusable
   */
@@ -269,7 +268,7 @@ class ListItem : gobject.object.ObjectWrap
   /**
       Gets the model item that associated with self.
       
-      If self is unbound, this function returns null.
+      If self is unbound, this function returns `NULL`.
       Returns: The item displayed
   */
   gobject.object.ObjectWrap getItem() nothrow
@@ -294,7 +293,7 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
-      Checks if a list item has been set to be selectable via
+      Checks if a listitem has been set to be selectable via
       [gtk.list_item.ListItem.setSelectable].
       
       Do not confuse this function with [gtk.list_item.ListItem.getSelected].
@@ -310,7 +309,7 @@ class ListItem : gobject.object.ObjectWrap
   /**
       Checks if the item is displayed as selected.
       
-      The selected state is maintained by the liste widget and its model
+      The selected state is maintained by the list widget and its model
       and cannot be set otherwise.
       Returns: true if the item is selected.
   */
@@ -322,8 +321,9 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the accessible description for the list item,
-      which may be used by e.g. screen readers.
+      Sets the accessible description for the listitem.
+      
+      The accessible description may be used by e.g. screen readers.
   
       Params:
         description = the description
@@ -335,8 +335,9 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the accessible label for the list item,
-      which may be used by e.g. screen readers.
+      Sets the accessible label for the listitem.
+      
+      The accessible label may be used by e.g. screen readers.
   
       Params:
         label = the label
@@ -356,7 +357,7 @@ class ListItem : gobject.object.ObjectWrap
       activation. [gtk.list_view.ListView] for example will be emitting the
       [gtk.list_view.ListView.activate] signal.
       
-      By default, list items are activatable.
+      By default, listitems are activatable.
   
       Params:
         activatable = if the item should be activatable
@@ -374,7 +375,7 @@ class ListItem : gobject.object.ObjectWrap
       binding it multiple times.
   
       Params:
-        child = The list item's child or null to unset
+        child = The listitem's child or `NULL` to unset
   */
   void setChild(gtk.widget.Widget child = null) nothrow
   {
@@ -390,7 +391,7 @@ class ListItem : gobject.object.ObjectWrap
       Note that if items are not focusable, the keyboard cannot be used to activate
       them and selecting only works if one of the listitem's children is focusable.
       
-      By default, list items are focusable.
+      By default, listitems are focusable.
   
       Params:
         focusable = if the item should be focusable
@@ -411,7 +412,7 @@ class ListItem : gobject.object.ObjectWrap
       influence on the selected state at all. A non-selectable item
       may still be selected.
       
-      By default, list items are selectable. When rebinding them to
+      By default, listitems are selectable. When rebinding them to
       a new item, they will also be reset to be selectable by GTK.
   
       Params:
@@ -430,7 +431,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `accessibleDescription` property.
       Params:
-        propval = The accessible description to set on the list item.
+        propval = The accessible description to set on the listitem.
       Returns: Builder instance for fluent chaining
   */
   T accessibleDescription(string propval) nothrow
@@ -441,7 +442,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `accessibleLabel` property.
       Params:
-        propval = The accessible label to set on the list item.
+        propval = The accessible label to set on the listitem.
       Returns: Builder instance for fluent chaining
   */
   T accessibleLabel(string propval) nothrow

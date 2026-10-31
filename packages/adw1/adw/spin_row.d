@@ -58,7 +58,7 @@ import gtk.types;
     ## Accessibility
     
     [adw.spin_row.SpinRow] uses an internal [gtk.spin_button.SpinButton] with the
-    [gtk.types.AccessibleRole.SpinButton] role.
+    `enum@Gtk.AccessibleRole.spin-button` role.
 */
 class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 {

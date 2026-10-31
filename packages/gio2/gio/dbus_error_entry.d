@@ -8,7 +8,7 @@ import gio.c.types;
 import gio.types;
 
 /**
-    Struct used in [gio.global.dbusErrorRegisterErrorDomain].
+    Struct used in `func@Gio.DBusError.register_error_domain`.
 */
 class DBusErrorEntry
 {
@@ -17,8 +17,8 @@ class DBusErrorEntry
   /**
       Create a `dbus_error_entry.DBusErrorEntry` wrap type.
       Params:
-        errorCode = An error code.
-        dbusErrorName = The D-Bus error name to associate with @error_code.
+        errorCode = an error code
+        dbusErrorName = the D-Bus error name to associate with @error_code
   */
   this(int errorCode = int.init, string dbusErrorName = string.init) nothrow
   {
@@ -43,7 +43,7 @@ class DBusErrorEntry
 
   /**
       Get `errorCode` field.
-      Returns: An error code.
+      Returns: an error code
   */
   @property int errorCode() nothrow
   {
@@ -53,7 +53,7 @@ class DBusErrorEntry
   /**
       Set `errorCode` field.
       Params:
-        propval = An error code.
+        propval = an error code
   */
   @property void errorCode(int propval) nothrow
   {
@@ -62,7 +62,7 @@ class DBusErrorEntry
 
   /**
       Get `dbusErrorName` field.
-      Returns: The D-Bus error name to associate with @error_code.
+      Returns: the D-Bus error name to associate with @error_code
   */
   @property string dbusErrorName() nothrow
   {
@@ -72,7 +72,7 @@ class DBusErrorEntry
   /**
       Set `dbusErrorName` field.
       Params:
-        propval = The D-Bus error name to associate with @error_code.
+        propval = the D-Bus error name to associate with @error_code
   */
   @property void dbusErrorName(string propval) nothrow
   {

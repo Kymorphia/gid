@@ -167,6 +167,20 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
+      Gets the target #GVariant associated with item.
+      Returns: the target #GVariant of the #WebKitContextMenuItem,
+           or null if item was not created with [webkitwebprocessextension.context_menu_item.ContextMenuItem.newFromGaction]
+           or if no target was specified.
+  */
+  glib.variant.Variant getGactionTarget() nothrow
+  {
+    GVariant* _cretval;
+    _cretval = webkit_context_menu_item_get_gaction_target(cast(WebKitContextMenuItem*)this._cPtr);
+    auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
       Gets the #WebKitContextMenuAction of item.
       
       If the #WebKitContextMenuItem was not
@@ -193,6 +207,18 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
     WebKitContextMenu* _cretval;
     _cretval = webkit_context_menu_item_get_submenu(cast(WebKitContextMenuItem*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the title of item.
+      Returns: the title of item, or null if item is a separator.
+  */
+  string getTitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_context_menu_item_get_title(cast(WebKitContextMenuItem*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

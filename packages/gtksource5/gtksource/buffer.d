@@ -67,6 +67,12 @@ import gtksource.types;
     tag_table = gtk_text_buffer_get_tag_table (buffer);
     tag = gtk_text_tag_table_lookup (tag_table, "gtksourceview:context-classes:string");
     ```
+    ```python
+    buffer = GtkSource.Buffer()
+    
+    tag_table = buffer.get_tag_table()
+    tag = tag_table.lookup(name="gtksourceview:context-classes:string")
+    ```
     
     The tag must be used for read-only purposes.
     
@@ -451,6 +457,29 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     bool _retval;
     _retval = cast(bool)gtk_source_buffer_get_loading(cast(GtkSourceBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the text in the specified range converting any text formatting
+      to equivalent Pango markup tags.
+      This allows the styled text to be displayed in other widgets that support
+      Pango markup, such as #GtkLabel.
+      
+      For very long ranges this function can take long enough that you could
+      potentially miss frame renderings.
+  
+      Params:
+        start = start of range as a #GtkTextIter
+        end = end of range as a #GtkTextIter
+      Returns: a newly-allocated string containing the text
+          with Pango markup, or null if start and end are invalid.
+  */
+  string getMarkup(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
+  {
+    char* _cretval;
+    _cretval = gtk_source_buffer_get_markup(cast(GtkSourceBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
 

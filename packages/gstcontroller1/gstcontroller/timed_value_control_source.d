@@ -78,16 +78,18 @@ class TimedValueControlSource : gst.control_source.ControlSource
   }
 
   /**
-      Returns a read-only copy of the list of #GstTimedValue for the given property.
+      Returns a read-only copy of the list of #GstControlPoint for the given property.
       Free the list after done with it.
       Returns: a copy
         of the list, or null if the property isn't handled by the controller
+  
+      Deprecated: Use [gstcontroller.timed_value_control_source.TimedValueControlSource.listControlPoints] instead.
   */
-  gst.types.TimedValue[] getAll() nothrow
+  gstcontroller.control_point.ControlPoint[] getAll() nothrow
   {
     GList* _cretval;
     _cretval = gst_timed_value_control_source_get_all(cast(GstTimedValueControlSource*)this._cPtr);
-    auto _retval = gListToD!(gst.types.TimedValue, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gstcontroller.control_point.ControlPoint, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -99,6 +101,30 @@ class TimedValueControlSource : gst.control_source.ControlSource
   {
     int _retval;
     _retval = gst_timed_value_control_source_get_count(cast(GstTimedValueControlSource*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns an array of #GstTimedValue representing the control points
+      that have been set on this control source. To modify the value of a
+      control point, use #gst_timed_value_control_source_set.
+      Returns: an array of
+        control points, or null if no control points are set.
+  */
+  gst.types.TimedValue[] listControlPoints() nothrow
+  {
+    GstTimedValue* _cretval;
+    size_t _cretlength;
+    _cretval = gst_timed_value_control_source_list_control_points(cast(GstTimedValueControlSource*)this._cPtr, &_cretlength);
+    gst.types.TimedValue[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gst.types.TimedValue[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i];
+      gFree(cast(void*)_cretval);
+    }
     return _retval;
   }
 

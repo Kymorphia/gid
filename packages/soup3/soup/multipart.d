@@ -17,12 +17,12 @@ import soup.types;
     Of particular interest to HTTP are `multipart/byte-ranges` and
     `multipart/form-data`,
     
-    Although the headers of a #SoupMultipart body part will contain the
+    Although the headers of a [soup.multipart.Multipart] body part will contain the
     full headers from that body part, libsoup does not interpret them
     according to MIME rules. For example, each body part is assumed to
     have "binary" Content-Transfer-Encoding, even if its headers
     explicitly state otherwise. In other words, don't try to use
-    #SoupMultipart for handling real MIME multiparts.
+    [soup.multipart.Multipart] for handling real MIME multiparts.
 */
 class Multipart : gobject.boxed.Boxed
 {
@@ -59,7 +59,7 @@ class Multipart : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new empty #SoupMultipart with a randomly-generated
+      Creates a new empty [soup.multipart.Multipart] with a randomly-generated
       boundary string.
       
       Note that mime_type must be the full MIME type, including "multipart/".
@@ -79,7 +79,7 @@ class Multipart : gobject.boxed.Boxed
   }
 
   /**
-      Parses headers and body to form a new #SoupMultipart
+      Parses headers and body to form a new [soup.multipart.Multipart]
   
       Params:
         headers = the headers of the HTTP message to parse

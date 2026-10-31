@@ -109,7 +109,7 @@ class MenuItem : gobject.object.ObjectWrap
       the menu that menu_item is added to.
       
       Visual separation is typically displayed between two non-empty
-      sections.  If label is non-null then it will be encorporated into
+      sections.  If label is non-null then it will be incorporated into
       this visual indication.  This allows for labeled subsections of a
       menu.
       

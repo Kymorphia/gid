@@ -11,8 +11,7 @@ import gtk.filter;
 import gtk.types;
 
 /**
-    [gtk.bool_filter.BoolFilter] evaluates a boolean [gtk.expression.Expression]
-    to determine whether to include items.
+    Evaluates a boolean expression to determine whether to include items.
 */
 class BoolFilter : gtk.filter.Filter
 {
@@ -53,7 +52,7 @@ class BoolFilter : gtk.filter.Filter
 
   /**
       Get `expression` property.
-      Returns: The boolean expression to evaluate on item.
+      Returns: The boolean expression to evaluate on each item.
   */
   @property gtk.expression.Expression expression() nothrow
   {
@@ -63,7 +62,7 @@ class BoolFilter : gtk.filter.Filter
   /**
       Set `expression` property.
       Params:
-        propval = The boolean expression to evaluate on item.
+        propval = The boolean expression to evaluate on each item.
   */
   @property void expression(gtk.expression.Expression propval) nothrow
   {
@@ -93,7 +92,7 @@ class BoolFilter : gtk.filter.Filter
       Creates a new bool filter.
   
       Params:
-        expression = The expression to evaluate
+        expression = the expression to evaluate
       Returns: a new [gtk.bool_filter.BoolFilter]
   */
   this(gtk.expression.Expression expression = null) nothrow
@@ -104,9 +103,9 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /**
-      Gets the expression that the filter uses to evaluate if
-      an item should be filtered.
-      Returns: a [gtk.expression.Expression]
+      Gets the expression that the filter evaluates for
+      each item.
+      Returns: the expression
   */
   gtk.expression.Expression getExpression() nothrow
   {
@@ -134,7 +133,7 @@ class BoolFilter : gtk.filter.Filter
       The expression must have a value type of `G_TYPE_BOOLEAN`.
   
       Params:
-        expression = a [gtk.expression.Expression]
+        expression = the expression
   */
   void setExpression(gtk.expression.Expression expression = null) nothrow
   {
@@ -160,7 +159,7 @@ class BoolFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
   /**
       Set `expression` property.
       Params:
-        propval = The boolean expression to evaluate on item.
+        propval = The boolean expression to evaluate on each item.
       Returns: Builder instance for fluent chaining
   */
   T expression(gtk.expression.Expression propval) nothrow

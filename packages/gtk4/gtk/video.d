@@ -19,9 +19,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.video.Video] is a widget to show a [gtk.media_stream.MediaStream] with media controls.
+    Shows a [gtk.media_stream.MediaStream] with media controls.
     
-    ![An example GtkVideo](video.png)
+    <picture>
+      <source srcset="video-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkVideo" src="video.png">
+    </picture>
     
     The controls are available separately as [gtk.media_controls.MediaControls].
     If you just want to display a video without controls, you can treat it

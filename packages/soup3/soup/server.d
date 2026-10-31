@@ -23,9 +23,11 @@ import soup.types;
 import soup.websocket_connection;
 
 /**
-    A HTTP server.
-    
-    #SoupServer implements a simple HTTP server.
+    [soup.server.Server] provides a basic implementation of an HTTP server. The
+    recommended usage of this server is for internal use, tasks like
+    a mock server for tests, a private service for IPC, etc. It is not
+    recommended to be exposed to untrusted clients as it may be vulnerable
+    to denial of service attacks or other exploits.
     
     To begin, create a server using [soup.server.Server.new_]. Add at least one
     handler by calling [soup.server.Server.addHandler] or
@@ -35,20 +37,20 @@ import soup.websocket_connection;
     the path.)
     
     When a new connection is accepted (or a new request is started on
-    an existing persistent connection), the #SoupServer will emit
+    an existing persistent connection), the [soup.server.Server] will emit
     [soup.server.Server.requestStarted] and then begin processing the request
     as described below, but note that once the message is assigned a
     status-code, then callbacks after that point will be
     skipped. Note also that it is not defined when the callbacks happen
     relative to various [soup.server_message.ServerMessage] signals.
     
-    Once the headers have been read, #SoupServer will check if there is
+    Once the headers have been read, [soup.server.Server] will check if there is
     a [soup.auth_domain.AuthDomain] `(qv)` covering the Request-URI; if so, and if the
     message does not contain suitable authorization, then the
     [soup.auth_domain.AuthDomain] will set a status of [soup.types.Status.Unauthorized] on
     the message.
     
-    After checking for authorization, #SoupServer will look for "early"
+    After checking for authorization, [soup.server.Server] will look for "early"
     handlers (added with [soup.server.Server.addEarlyHandler]) matching the
     Request-URI. If one is found, it will be run; in particular, this
     can be used to connect to signals to do a streaming read of the
@@ -56,10 +58,10 @@ import soup.websocket_connection;
     
     (At this point, if the request headers contain `Expect:
     100-continue`, and a status code has been set, then
-    #SoupServer will skip the remaining steps and return the response.
+    [soup.server.Server] will skip the remaining steps and return the response.
     If the request headers contain `Expect:
     100-continue` and no status code has been set,
-    #SoupServer will return a [soup.types.Status.Continue] status before
+    [soup.server.Server] will return a [soup.types.Status.Continue] status before
     continuing.)
     
     The server will then read in the response body (if present). At
@@ -73,7 +75,7 @@ import soup.websocket_connection;
     run.
     
     Then, if the path has a WebSocket handler registered (and has
-    not yet been assigned a status), #SoupServer will attempt to
+    not yet been assigned a status), [soup.server.Server] will attempt to
     validate the WebSocket handshake, filling in the response and
     setting a status of [soup.types.Status.SwitchingProtocols] or
     [soup.types.Status.BadRequest] accordingly.
@@ -98,13 +100,13 @@ import soup.websocket_connection;
     Once the server is set up, make one or more calls to
     [soup.server.Server.listen], [soup.server.Server.listenLocal], or
     [soup.server.Server.listenAll] to tell it where to listen for
-    connections. (All ports on a #SoupServer use the same handlers; if
+    connections. (All ports on a [soup.server.Server] use the same handlers; if
     you need to handle some ports differently, such as returning
     different data for http and https, you'll need to create multiple
     [soup.server.Server]s, or else check the passed-in URI in the handler
     function.).
     
-    #SoupServer will begin processing connections as soon as you return
+    [soup.server.Server] will begin processing connections as soon as you return
     to (or start) the main loop for the current thread-default
     [glib.main_context.MainContext].
 */
@@ -180,7 +182,7 @@ class Server : gobject.object.ObjectWrap
         
         As with `property@Session:user_agent`, if you set a
         [soup.server.Server.serverHeader] property that has trailing
-        whitespace, #SoupServer will append its own product token (eg,
+        whitespace, [soup.server.Server] will append its own product token (eg,
         `libsoup/2.3.2`) to the end of the header for you.
   */
   @property string serverHeader() nothrow
@@ -214,7 +216,7 @@ class Server : gobject.object.ObjectWrap
           
           As with `property@Session:user_agent`, if you set a
           [soup.server.Server.serverHeader] property that has trailing
-          whitespace, #SoupServer will append its own product token (eg,
+          whitespace, [soup.server.Server] will append its own product token (eg,
           `libsoup/2.3.2`) to the end of the header for you.
   */
   @property void serverHeader(string propval) nothrow
@@ -605,8 +607,8 @@ class Server : gobject.object.ObjectWrap
       Note that if you used [soup.server.Server.listenAll] the returned URIs will use
       the addresses `0.0.0.0` and `::`, rather than actually returning separate
       URIs for each interface on the system.
-      Returns: a list of #GUris, which you
-          must free when you are done with it.
+      Returns: a list of [glib.uri.Uri], which you
+          must free with each element with [glib.uri.Uri.unref] when you are done with it.
   */
   glib.uri.Uri[] getUris() nothrow
   {
@@ -625,7 +627,7 @@ class Server : gobject.object.ObjectWrap
       certificate to use.
       
       If you are using the deprecated single-listener APIs, then a return value of
-      true indicates that the #SoupServer serves https exclusively. If you are
+      true indicates that the [soup.server.Server] serves https exclusively. If you are
       using [soup.server.Server.listen], etc, then a true return value merely indicates
       that the server is *able* to do https, regardless of whether it actually
       currently is or not. Use [soup.server.Server.getUris] to see if it currently has
@@ -763,7 +765,7 @@ class Server : gobject.object.ObjectWrap
       resume I/O.
       
       This must only be called on a [soup.server_message.ServerMessage] which was created by the
-      #SoupServer and are currently doing I/O, such as those passed into a
+      [soup.server.Server] and are currently doing I/O, such as those passed into a
       [soup.types.ServerCallback] or emitted in a [soup.server.Server.requestRead]
       signal.
   
@@ -854,7 +856,7 @@ class Server : gobject.object.ObjectWrap
       I/O won't actually resume until you return to the main loop.
       
       This must only be called on a [soup.server_message.ServerMessage] which was created by the
-      #SoupServer and are currently doing I/O, such as those passed into a
+      [soup.server.Server] and are currently doing I/O, such as those passed into a
       [soup.types.ServerCallback] or emitted in a [soup.server.Server.requestRead]
       signal.
   
@@ -1140,7 +1142,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           
           As with `property@Session:user_agent`, if you set a
           [soup.server.Server.serverHeader] property that has trailing
-          whitespace, #SoupServer will append its own product token (eg,
+          whitespace, [soup.server.Server] will append its own product token (eg,
           `libsoup/2.3.2`) to the end of the header for you.
       Returns: Builder instance for fluent chaining
   */

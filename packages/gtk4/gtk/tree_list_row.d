@@ -11,7 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.tree_list_row.TreeListRow] is used by [gtk.tree_list_model.TreeListModel] to represent items.
+    The type of item used by [gtk.tree_list_model.TreeListModel].
     
     It allows navigating the model as a tree and modify the state of rows.
     

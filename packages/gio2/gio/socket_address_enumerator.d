@@ -77,7 +77,7 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
       If enumerator is expected to yield addresses, but for some reason
       is unable to (eg, because of a DNS error), then the first call to
       [gio.socket_address_enumerator.SocketAddressEnumerator.next] will return an appropriate error
-      in *error. However, if the first call to
+      in `*error`. However, if the first call to
       [gio.socket_address_enumerator.SocketAddressEnumerator.next] succeeds, then any further
       internal errors (other than cancellable being triggered) will be
       ignored.
@@ -85,7 +85,7 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
       Params:
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GSocketAddress (owned by the caller), or null on
-            error (in which case *error will be set) or if there are no
+            error (in which case `*error` will be set) or if there are no
             more addresses.
       Throws: [ErrorWrap]
   */
@@ -142,7 +142,7 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
       Params:
         result = a #GAsyncResult
       Returns: a #GSocketAddress (owned by the caller), or null on
-            error (in which case *error will be set) or if there are no
+            error (in which case `*error` will be set) or if there are no
             more addresses.
       Throws: [ErrorWrap]
   */

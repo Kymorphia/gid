@@ -4,6 +4,7 @@ module gdk.texture;
 public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
+import gdk.color_state;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.types;
@@ -20,7 +21,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [gdk.texture.Texture] is the basic element used to refer to pixel data.
+    Refers to pixel data in various forms.
     
     It is primarily meant for pixel data that will not change over
     multiple frames, and will be used for a long time.
@@ -34,7 +35,18 @@ import gobject.object;
     
     [gdk.texture.Texture] is an immutable object: That means you cannot change
     anything about it other than increasing the reference count via
-    [gobject.object.ObjectWrap.ref_], and consequently, it is a thread-safe object.
+    [gobject.object.ObjectWrap.ref_], and consequently, it is a threadsafe object.
+    
+    GDK provides a number of threadsafe texture loading functions:
+    [gdk.texture.Texture.newFromResource],
+    [gdk.texture.Texture.newFromBytes],
+    [gdk.texture.Texture.newFromFile],
+    [gdk.texture.Texture.newFromFilename],
+    [gdk.texture.Texture.newForPixbuf]. Note that these are meant for loading
+    icons and resources that are shipped with the toolkit or application. It
+    is recommended that you use a dedicated image loading framework such as
+    [glycin](https://lib.rs/crates/glycin), if you need to load untrusted image
+    data.
 */
 class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
@@ -74,6 +86,15 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   }
 
   /**
+      Get `colorState` property.
+      Returns: The color state of the texture.
+  */
+  @property gdk.color_state.ColorState colorState() nothrow
+  {
+    return getColorState();
+  }
+
+  /**
       Get `height` property.
       Returns: The height of the texture, in pixels.
   */
@@ -99,12 +120,15 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       Creates a new texture object representing the [gdkpixbuf.pixbuf.Pixbuf].
       
       This function is threadsafe, so that you can e.g. use GTask
-      and [gio.task.Task.runInThread] to avoid blocking the main thread
-      while loading a big image.
+      and [gio.task.Task.runInThread] to avoid blocking the main
+      thread while loading a big image.
   
       Params:
         pixbuf = a [gdkpixbuf.pixbuf.Pixbuf]
       Returns: a new [gdk.texture.Texture]
+  
+      Deprecated: Use e.g. libglycin, which can load many image
+          formats into a [gdk.texture.Texture]
   */
   static gdk.texture.Texture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
@@ -120,11 +144,16 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       The file format is detected automatically. The supported formats
       are PNG, JPEG and TIFF, though more formats might be available.
       
-      If null is returned, then error will be set.
+      If `NULL` is returned, then error will be set.
       
       This function is threadsafe, so that you can e.g. use GTask
       and [gio.task.Task.runInThread] to avoid blocking the main thread
       while loading a big image.
+      
+      ::: warning
+          Note that this function should not be used with untrusted data.
+          Use a proper image loading framework such as libglycin, which can
+          load many image formats into a [gdk.texture.Texture].
   
       Params:
         bytes = a [glib.bytes.Bytes] containing the data to load
@@ -148,11 +177,16 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       The file format is detected automatically. The supported formats
       are PNG, JPEG and TIFF, though more formats might be available.
       
-      If null is returned, then error will be set.
+      If `NULL` is returned, then error will be set.
       
       This function is threadsafe, so that you can e.g. use GTask
       and [gio.task.Task.runInThread] to avoid blocking the main thread
       while loading a big image.
+      
+      ::: warning
+          Note that this function should not be used with untrusted data.
+          Use a proper image loading framework such as libglycin, which can
+          load many image formats into a [gdk.texture.Texture].
   
       Params:
         file = [gio.file.File] to load
@@ -176,11 +210,16 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       The file format is detected automatically. The supported formats
       are PNG, JPEG and TIFF, though more formats might be available.
       
-      If null is returned, then error will be set.
+      If `NULL` is returned, then error will be set.
       
       This function is threadsafe, so that you can e.g. use GTask
       and [gio.task.Task.runInThread] to avoid blocking the main thread
       while loading a big image.
+      
+      ::: warning
+          Note that this function should not be used with untrusted data.
+          Use a proper image loading framework such as libglycin, which can
+          load many image formats into a [gdk.texture.Texture].
   
       Params:
         path = the filename to load
@@ -203,7 +242,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       Creates a new texture by loading an image from a resource.
       
       The file format is detected automatically. The supported formats
-      are PNG and JPEG, though more formats might be available.
+      are PNG, JPEG and TIFF, though more formats might be available.
       
       It is a fatal error if resource_path does not specify a valid
       image resource and the program will abort if that happens.
@@ -224,6 +263,18 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
     _cretval = gdk_texture_new_from_resource(_resourcePath);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the color state associated with the texture.
+      Returns: the color state of the [gdk.texture.Texture]
+  */
+  gdk.color_state.ColorState getColorState() nothrow
+  {
+    GdkColorState* _cretval;
+    _cretval = gdk_texture_get_color_state(cast(GdkTexture*)this._cPtr);
+    auto _retval = _cretval ? new gdk.color_state.ColorState(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -274,9 +325,9 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       
       This is a utility function intended for debugging and testing.
       If you want more control over formats, proper error handling or
-      want to store to a [gio.file.File] or other location, you might want to
-      use [gdk.texture.Texture.saveToPngBytes] or look into the
-      gdk-pixbuf library.
+      want to store to a [gio.file.File] or other location, you might
+      want to use [gdk.texture.Texture.saveToPngBytes] or look into
+      the libglycin library.
   
       Params:
         filename = the filename to store to
@@ -300,7 +351,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       
       If you need more control over the generated image, such as
       attaching metadata, you should look into an image handling
-      library such as the gdk-pixbuf library.
+      library such as the libglycin library.
       
       If you are dealing with high dynamic range float data, you
       might also want to consider [gdk.texture.Texture.saveToTiffBytes]
@@ -363,6 +414,17 @@ class TextureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.
   mixin PaintableGidBuilderT!();
   mixin IconGidBuilderT!();
   mixin LoadableIconGidBuilderT!();
+
+  /**
+      Set `colorState` property.
+      Params:
+        propval = The color state of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T colorState(gdk.color_state.ColorState propval) nothrow
+  {
+    return setProperty("color-state", propval);
+  }
 
   /**
       Set `height` property.

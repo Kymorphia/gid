@@ -300,7 +300,7 @@ void checkSetupEventsWithStreamId(gst.pad.Pad srcpad, gst.element.Element elemen
 gst.pad.Pad checkSetupSinkPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl) nothrow
 {
   GstPad* _cretval;
-  _cretval = gst_check_setup_sink_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null);
+  _cretval = gst_check_setup_sink_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr(No.Dup) : null);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
@@ -320,7 +320,7 @@ gst.pad.Pad checkSetupSinkPadByName(gst.element.Element element, gst.static_pad_
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-  _cretval = gst_check_setup_sink_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null, _name);
+  _cretval = gst_check_setup_sink_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr(No.Dup) : null, _name);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
@@ -355,7 +355,7 @@ gst.pad.Pad checkSetupSinkPadFromTemplate(gst.element.Element element, gst.pad_t
 gst.pad.Pad checkSetupSrcPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl) nothrow
 {
   GstPad* _cretval;
-  _cretval = gst_check_setup_src_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null);
+  _cretval = gst_check_setup_src_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr(No.Dup) : null);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
@@ -405,7 +405,7 @@ gst.pad.Pad checkSetupSrcPadByName(gst.element.Element element, gst.static_pad_t
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-  _cretval = gst_check_setup_src_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null, _name);
+  _cretval = gst_check_setup_src_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr(No.Dup) : null, _name);
   auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }

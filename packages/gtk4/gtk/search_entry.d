@@ -20,13 +20,15 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.search_entry.SearchEntry] is an entry widget that has been tailored for use
-    as a search entry.
+    A single-line text entry widget for use as a search entry.
     
     The main API for interacting with a [gtk.search_entry.SearchEntry] as entry
     is the [gtk.editable.Editable] interface.
     
-    ![An example GtkSearchEntry](search-entry.png)
+    <picture>
+      <source srcset="search-entry-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSearchEntry" src="search-entry.png">
+    </picture>
     
     It will show an inactive symbolic “find” icon when the search
     entry is empty, and a symbolic “clear” icon when there is text.
@@ -50,6 +52,15 @@ import gtk.widget;
     
     [gtk.search_entry.SearchEntry] provides only minimal API and should be used with
     the [gtk.editable.Editable] API.
+    
+    ## Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.search_entry.SearchEntry.activate]
+    - [gtk.search_entry.SearchEntry.nextMatch]
+    - [gtk.search_entry.SearchEntry.previousMatch]
+    - [gtk.search_entry.SearchEntry.stopSearch]
     
     ## CSS Nodes
     
@@ -161,6 +172,29 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     setInputPurpose(propval);
+  }
+
+  /**
+      Get `keyCaptureWidget` property.
+      Returns: The widget that the entry will use to capture key events.
+        
+        Key events are consumed by the search entry to start or continue a search.
+  */
+  @property gtk.widget.Widget keyCaptureWidget() nothrow
+  {
+    return getKeyCaptureWidget();
+  }
+
+  /**
+      Set `keyCaptureWidget` property.
+      Params:
+        propval = The widget that the entry will use to capture key events.
+          
+          Key events are consumed by the search entry to start or continue a search.
+  */
+  @property void keyCaptureWidget(gtk.widget.Widget propval) nothrow
+  {
+    setKeyCaptureWidget(propval);
   }
 
   /**
@@ -356,7 +390,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   
       Emitted when the entry is activated.
         
-        The keybindings for this signal are all forms of the Enter key.
+        The keybindings for this signal are all forms of the <kbd>Enter</kbd> key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -408,7 +442,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         Applications should connect to it, to implement moving
         between matches.
         
-        The default bindings for this signal is Ctrl-g.
+        The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>g</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -460,7 +494,8 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         Applications should connect to it, to implement moving
         between matches.
         
-        The default bindings for this signal is Ctrl-Shift-g.
+        The default bindings for this signal is
+        <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>g</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -601,7 +636,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         Applications should connect to it, to implement hiding
         the search entry in this case.
         
-        The default bindings for this signal is Escape.
+        The default bindings for this signal is <kbd>Escape</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -682,6 +717,19 @@ class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.edit
   T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
+  }
+
+  /**
+      Set `keyCaptureWidget` property.
+      Params:
+        propval = The widget that the entry will use to capture key events.
+          
+          Key events are consumed by the search entry to start or continue a search.
+      Returns: Builder instance for fluent chaining
+  */
+  T keyCaptureWidget(gtk.widget.Widget propval) nothrow
+  {
+    return setProperty("key-capture-widget", propval);
   }
 
   /**

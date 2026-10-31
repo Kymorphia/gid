@@ -14,7 +14,7 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
-    [gtk.editable.Editable] is an interface for text editing widgets.
+    Interface for single-line text editing widgets.
     
     Typical examples of editable widgets are [gtk.entry.Entry] and
     [gtk.spin_button.SpinButton]. It contains functions for generically manipulating
@@ -308,10 +308,19 @@ template EditableT()
         return gtk_editable_delegate_get_accessible_platform_state (GTK_EDITABLE (accessible), state);
       }
       ```
+      
+      Note that the widget which is the delegate *must* be a direct child of
+      this widget, otherwise your implementation of `vfuncGtk.Accessible.get_platform_state`
+      might not even be called, as the platform change will originate from
+      the parent of the delegate, and, as a result, will not work properly.
+      
+      So, if you can't ensure the direct child condition, you should give the
+      delegate the [gtk.types.AccessibleRole.TextBox] role, or you can
+      change your tree to allow this function to work.
   
       Params:
         state = what kind of accessible state to retrieve
-      Returns: 
+      Returns: the accessible platform state of the delegate
   */
   override bool delegateGetAccessiblePlatformState(gtk.types.AccessiblePlatformState state) nothrow
   {

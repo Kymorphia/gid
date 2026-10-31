@@ -10,12 +10,12 @@ import graphene.point;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;
+import gsk.path_point;
 import gsk.stroke;
 import gsk.types;
 
 /**
-    A [gsk.path.Path] describes lines and curves that are more complex
-    than simple rectangles.
+    Describes lines and curves that are more complex than simple rectangles.
     
     Paths can used for rendering (filling or stroking) and for animations
     (e.g. as trajectories).
@@ -69,6 +69,23 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
+      Returns whether two paths have identical structure.
+      
+      Note that it is possible to construct paths that render
+      identical even though they don't have the same structure.
+  
+      Params:
+        path2 = another path
+      Returns: true if path1 and path2 have identical structure
+  */
+  bool equal(gsk.path.Path path2) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gsk_path_equal(cast(const(GskPath)*)this._cPtr, path2 ? cast(const(GskPath)*)path2._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
       Calls func for every operation of the path.
       
       Note that this may only approximate self, because paths can contain
@@ -84,10 +101,9 @@ class Path : gobject.boxed.Boxed
         an approximation of the path using just the allowed operations.
   
       Params:
-        flags = flags to pass to the foreach function. See [gsk.types.PathForeachFlags]
-            for details about flags
+        flags = flags to pass to the foreach function
         func = the function to call for operations
-      Returns: `FALSE` if func returned FALSE`, `TRUE` otherwise.
+      Returns: false if func returned false, true otherwise.
   */
   bool foreach_(gsk.types.PathForeachFlags flags, gsk.types.PathForeachFunc func) nothrow
   {
@@ -95,10 +111,13 @@ class Path : gobject.boxed.Boxed
     {
       bool _dretval;
       auto _dlg = cast(gsk.types.PathForeachFunc*)userData;
+      graphene.point.Point[] _pts;
+      _pts.length = nPts;
+      _pts[0 .. nPts] = (cast(graphene.point.Point*)pts)[0 .. nPts];
 
       try
       {
-        _dretval = (*_dlg)(op, *cast(graphene.point.Point*)pts, nPts, weight);
+        _dretval = (*_dlg)(op, _pts, weight);
       }
       catch (Exception e)
       {
@@ -116,25 +135,74 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
+      Finds intersections between two paths.
+      
+      This function finds intersections between path1 and path2,
+      and calls func for each of them, in increasing order for path1.
+      
+      If path2 is not provided or equal to path1, the function finds
+      non-trivial self-intersections of path1.
+      
+      When segments of the paths coincide, the callback is called once
+      for the start of the segment, with GSK_PATH_INTERSECTION_START, and
+      once for the end of the segment, with GSK_PATH_INTERSECTION_END.
+      Note that other intersections may occur between the start and end
+      of such a segment.
+      
+      If func returns `FALSE`, the iteration is stopped.
+  
+      Params:
+        path2 = the second path
+        func = the function to call for intersections
+      Returns: `FALSE` if func returned FALSE`, `TRUE` otherwise.
+  */
+  bool foreachIntersection(gsk.path.Path path2, gsk.types.PathIntersectionFunc func) nothrow
+  {
+    extern(C) gboolean _funcCallback(GskPath* path1, const(GskPathPoint)* point1, GskPath* path2, const(GskPathPoint)* point2, GskPathIntersection kind, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gsk.types.PathIntersectionFunc*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)(path1 ? new gsk.path.Path(cast(void*)path1, No.Take) : null, point1 ? new gsk.path_point.PathPoint(cast(void*)point1, No.Take) : null, path2 ? new gsk.path.Path(cast(void*)path2, No.Take) : null, point2 ? new gsk.path_point.PathPoint(cast(void*)point2, No.Take) : null, kind);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gsk.types.PathIntersectionFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    bool _retval;
+    auto _func = func ? cast(void*)&(func) : null;
+    _retval = cast(bool)gsk_path_foreach_intersection(cast(GskPath*)this._cPtr, path2 ? cast(GskPath*)path2._cPtr(No.Dup) : null, _funcCB, _func);
+    return _retval;
+  }
+
+  /**
       Computes the bounds of the given path.
       
       The returned bounds may be larger than necessary, because this
       function aims to be fast, not accurate. The bounds are guaranteed
-      to contain the path.
+      to contain the path. For accurate bounds, use
+      [gsk.path.Path.getTightBounds].
       
       It is possible that the returned rectangle has 0 width and/or height.
       This can happen when the path only describes a point or an
       axis-aligned line.
       
-      If the path is empty, `FALSE` is returned and bounds are set to
+      If the path is empty, false is returned and bounds are set to
       [graphene.rect.Rect.zero]. This is different from the case where the path
       is a single point at the origin, where the bounds will also be set to
-      the zero rectangle but `TRUE` will be returned.
+      the zero rectangle but true will be returned.
   
       Params:
-        bounds = the bounds of the given path
-      Returns: `TRUE` if the path has bounds, `FALSE` if the path is known
-          to be empty and have no bounds.
+        bounds = return location for the bounds
+      Returns: true if the path has bounds, false if the path is known
+          to be empty and have no bounds
   */
   bool getBounds(out graphene.rect.Rect bounds) nothrow
   {
@@ -146,8 +214,42 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
+      Moves point to the next vertex.
+      
+      An empty path has no points, so false
+      is returned in this case.
+  
+      Params:
+        point = the current point
+      Returns: true if point was set
+  */
+  bool getNext(gsk.path_point.PathPoint point) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gsk_path_get_next(cast(GskPath*)this._cPtr, point ? cast(GskPathPoint*)point._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Moves point to the previous vertex.
+      
+      An empty path has no points, so false
+      is returned in this case.
+  
+      Params:
+        point = the current point
+      Returns: true if point was set
+  */
+  bool getPrevious(gsk.path_point.PathPoint point) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gsk_path_get_previous(cast(GskPath*)this._cPtr, point ? cast(GskPathPoint*)point._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
       Computes the bounds for stroking the given path with the
-      parameters in stroke.
+      given parameters.
       
       The returned bounds may be larger than necessary, because this
       function aims to be fast, not accurate. The bounds are guaranteed
@@ -157,7 +259,7 @@ class Path : gobject.boxed.Boxed
       Params:
         stroke = stroke parameters
         bounds = the bounds to fill in
-      Returns: `TRUE` if the path has bounds, `FALSE` if the path is known
+      Returns: true if the path has bounds, false if the path is known
           to be empty and have no bounds.
   */
   bool getStrokeBounds(gsk.stroke.Stroke stroke, out graphene.rect.Rect bounds) nothrow
@@ -170,9 +272,27 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
-      Returns whether the given point is inside the area
-      that would be affected if the path was filled according
-      to fill_rule.
+      Computes the tight bounds of the given path.
+      
+      This function works harder than [gsk.path.Path.getBounds] to
+      produce the smallest possible bounds.
+  
+      Params:
+        bounds = return location for the bounds
+      Returns: true if the path has bounds, false if the path is known
+          to be empty and have no bounds
+  */
+  bool getTightBounds(out graphene.rect.Rect bounds) nothrow
+  {
+    bool _retval;
+    auto _bounds = boxedNew!graphene_rect_t(graphene.rect.Rect._getGType);
+    _retval = cast(bool)gsk_path_get_tight_bounds(cast(GskPath*)this._cPtr, _bounds);
+    bounds = new graphene.rect.Rect(cast(void*)_bounds, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether a point is inside the fill area of a path.
       
       Note that this function assumes that filling a contour
       implicitly closes it.
@@ -180,7 +300,7 @@ class Path : gobject.boxed.Boxed
       Params:
         point = the point to test
         fillRule = the fill rule to follow
-      Returns: `TRUE` if point is inside
+      Returns: true if point is inside
   */
   bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule) nothrow
   {
@@ -190,9 +310,8 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
-      Returns if the path represents a single closed
-      contour.
-      Returns: `TRUE` if the path is closed
+      Returns if the path represents a single closed contour.
+      Returns: true if the path is closed
   */
   bool isClosed() nothrow
   {
@@ -203,7 +322,7 @@ class Path : gobject.boxed.Boxed
 
   /**
       Checks if the path is empty, i.e. contains no lines or curves.
-      Returns: `TRUE` if the path is empty
+      Returns: true if the path is empty
   */
   bool isEmpty() nothrow
   {
@@ -213,15 +332,14 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
-      Converts self into a human-readable string representation suitable
-      for printing.
+      Converts the path into a human-readable representation.
       
       The string is compatible with (a superset of)
       [SVG path syntax](https://www.w3.org/TR/SVG11/paths.html#PathData),
       see [gsk.path.Path.parse] for a summary of the syntax.
   
       Params:
-        string_ = The string to print into
+        string_ = the string to print into
   */
   void print(glib.string_.String string_) nothrow
   {
@@ -229,8 +347,7 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
-      Appends the given path to the given cairo context for drawing
-      with Cairo.
+      Appends the path to a cairo context for drawing with Cairo.
       
       This may cause some suboptimal conversions to be performed as
       Cairo does not support all features of [gsk.path.Path].
@@ -247,14 +364,14 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
-      Converts the path into a string that is suitable for printing.
+      Converts the path into a human-readable string.
       
       You can use this function in a debugger to get a quick overview
       of the path.
       
       This is a wrapper around [gsk.path.Path.print], see that function
       for details.
-      Returns: A new string for self
+      Returns: a new string for self
   */
   string toString_() nothrow
   {
@@ -265,8 +382,7 @@ class Path : gobject.boxed.Boxed
   }
 
   /**
-      This is a convenience function that constructs a [gsk.path.Path]
-      from a serialized form.
+      Constructs a path from a serialized form.
       
       The string is expected to be in (a superset of)
       [SVG path syntax](https://www.w3.org/TR/SVG11/paths.html#PathData),

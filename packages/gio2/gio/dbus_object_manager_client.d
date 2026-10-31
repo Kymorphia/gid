@@ -375,10 +375,10 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       Asynchronously creates a new #GDBusObjectManagerClient object.
       
       This is an asynchronous failable constructor. When the result is
-      ready, callback will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
-      of the thread you are calling this method from. You can
-      then call [gio.dbus_object_manager_client.DBusObjectManagerClient.newFinish] to get the result. See
+      ready, callback will be invoked in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
+      of the thread you are calling this method from. You can then call
+      [gio.dbus_object_manager_client.DBusObjectManagerClient.newFinish] to get the result. See
       [gio.dbus_object_manager_client.DBusObjectManagerClient.newSync] for the synchronous version.
   
       Params:
@@ -440,8 +440,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       #GDBusConnection.
       
       This is an asynchronous failable constructor. When the result is
-      ready, callback will be invoked in the
-      [thread-default main loop][g-main-context-push-thread-default]
+      ready, callback will be invoked in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread you are calling this method from. You can
       then call [gio.dbus_object_manager_client.DBusObjectManagerClient.newForBusFinish] to get the result. See
       [gio.dbus_object_manager_client.DBusObjectManagerClient.newForBusSync] for the synchronous version.
@@ -567,8 +567,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
         This signal exists purely as a convenience to avoid having to
         connect signals to all interface proxies managed by manager.
         
-        This signal is emitted in the
-        [thread-default main context][g-main-context-push-thread-default]
+        This signal is emitted in the thread-default main context
+        (see [glib.main_context.MainContext.pushThreadDefault])
         that manager was constructed in.
   
       Params:
@@ -643,8 +643,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
         This signal exists purely as a convenience to avoid having to
         connect signals to all interface proxies managed by manager.
         
-        This signal is emitted in the
-        [thread-default main context][g-main-context-push-thread-default]
+        This signal is emitted in the thread-default main context
+        (see [glib.main_context.MainContext.pushThreadDefault])
         that manager was constructed in.
   
       Params:

@@ -153,6 +153,11 @@ harfbuzz.blob.Blob blobCopyWritableOrFail(harfbuzz.blob.Blob blob) nothrow
 /**
     Creates a new blob containing the data from the
     specified binary font file.
+    
+    The filename is passed directly to the system on all platforms,
+    except on Windows, where the filename is interpreted as UTF-8.
+    Only if the filename is not valid UTF-8, it will be interpreted
+    according to the system codepage.
 
     Params:
       fileName = A font filename
@@ -169,11 +174,15 @@ harfbuzz.blob.Blob blobCreateFromFile(string fileName) nothrow
 }
 
 /**
-    Creates a new blob containing the data from the
-    specified binary font file.
+    Creates a new blob containing the data from the specified file.
+    
+    The filename is passed directly to the system on all platforms,
+    except on Windows, where the filename is interpreted as UTF-8.
+    Only if the filename is not valid UTF-8, it will be interpreted
+    according to the system codepage.
 
     Params:
-      fileName = A font filename
+      fileName = A filename
     Returns: An #hb_blob_t pointer with the content of the file,
       or `NULL` if failed.
 */
@@ -479,7 +488,7 @@ harfbuzz.types.Bool bufferAllocationSuccessful(harfbuzz.buffer.Buffer buffer) no
       buffer = An #hb_buffer_t
       source = source #hb_buffer_t
       start = start index into source buffer to copy.  Use 0 to copy from start of buffer.
-      end = end index into source buffer to copy.  Use HB_FEATURE_GLOBAL_END to copy to end of buffer.
+      end = end index into source buffer to copy.  Use UINT_MAX (or ((unsigned int) -1)) to copy to end of buffer.
 */
 void bufferAppend(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer source, uint start, uint end) nothrow
 {
@@ -541,8 +550,7 @@ harfbuzz.buffer.Buffer bufferCreateSimilar(harfbuzz.buffer.Buffer src) nothrow
                                       consumed one.
       font = font for getting glyph IDs
       format = the #hb_buffer_serialize_format_t of the input buf
-    Returns: `true` if parse was successful, `false` if an error
-      occurred.
+    Returns: `true` if the full string was parsed, `false` otherwise.
 */
 harfbuzz.types.Bool bufferDeserializeGlyphs(harfbuzz.buffer.Buffer buffer, string buf, out string endPtr, harfbuzz.font.Font font, harfbuzz.types.BufferSerializeFormat format) nothrow
 {
@@ -568,8 +576,7 @@ harfbuzz.types.Bool bufferDeserializeGlyphs(harfbuzz.buffer.Buffer buffer, strin
       endPtr = output pointer to the character after last
                                       consumed one.
       format = the #hb_buffer_serialize_format_t of the input buf
-    Returns: `true` if parse was successful, `false` if an error
-      occurred.
+    Returns: `true` if the full string was parsed, `false` otherwise.
 */
 harfbuzz.types.Bool bufferDeserializeUnicode(harfbuzz.buffer.Buffer buffer, string buf, out string endPtr, harfbuzz.types.BufferSerializeFormat format) nothrow
 {
@@ -788,6 +795,34 @@ harfbuzz.types.Codepoint bufferGetNotFoundGlyph(harfbuzz.buffer.Buffer buffer) n
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_buffer_get_not_found_glyph(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    See [harfbuzz.global.bufferSetNotFoundVariationSelectorGlyph].
+
+    Params:
+      buffer = An #hb_buffer_t
+    Returns: The buffer not-found-variation-selector #hb_codepoint_t
+*/
+harfbuzz.types.Codepoint bufferGetNotFoundVariationSelectorGlyph(harfbuzz.buffer.Buffer buffer) nothrow
+{
+  harfbuzz.types.Codepoint _retval;
+  _retval = hb_buffer_get_not_found_variation_selector_glyph(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    See [harfbuzz.global.bufferSetRandomState].
+
+    Params:
+      buffer = An #hb_buffer_t
+    Returns: The buffer random state
+*/
+uint bufferGetRandomState(harfbuzz.buffer.Buffer buffer) nothrow
+{
+  uint _retval;
+  _retval = hb_buffer_get_random_state(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1219,6 +1254,45 @@ void bufferSetNotFoundGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepo
 }
 
 /**
+    Sets the #hb_codepoint_t that replaces variation-selector characters not resolved
+    in the font during shaping.
+    
+    The not-found-variation-selector glyph defaults to #HB_CODEPOINT_INVALID,
+    in which case an unresolved variation-selector will be removed from the glyph
+    string during shaping. This API allows for changing that and retaining a glyph,
+    such that the situation can be detected by the client and handled accordingly
+    (e.g. by using a different font).
+
+    Params:
+      buffer = An #hb_buffer_t
+      notFoundVariationSelector = the not-found-variation-selector #hb_codepoint_t
+*/
+void bufferSetNotFoundVariationSelectorGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint notFoundVariationSelector) nothrow
+{
+  hb_buffer_set_not_found_variation_selector_glyph(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, notFoundVariationSelector);
+}
+
+/**
+    Sets the random state of the buffer. The state changes
+    every time a glyph uses randomness (eg. the `rand`
+    OpenType feature). This function together with
+    [harfbuzz.global.bufferGetRandomState] allow for transferring
+    the current random state to a subsequent buffer, to
+    get better randomness distribution.
+    
+    Defaults to 1 and when buffer contents are cleared.
+    A value of 0 disables randomness during shaping.
+
+    Params:
+      buffer = An #hb_buffer_t
+      state = the new random state
+*/
+void bufferSetRandomState(harfbuzz.buffer.Buffer buffer, uint state) nothrow
+{
+  hb_buffer_set_random_state(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, state);
+}
+
+/**
     Sets the #hb_codepoint_t that replaces invalid entries for a given encoding
     when adding text to buffer.
     
@@ -1278,6 +1352,21 @@ void bufferSetSegmentProperties(harfbuzz.buffer.Buffer buffer, harfbuzz.segment_
 void bufferSetUnicodeFuncs(harfbuzz.buffer.Buffer buffer, harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncs) nothrow
 {
   hb_buffer_set_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, unicodeFuncs ? cast(hb_unicode_funcs_t*)unicodeFuncs._cPtr(No.Dup) : null);
+}
+
+/**
+    Allocates nmemb elements of size bytes each, initialized to zero,
+    using the allocator set at compile-time. Typically just calloc().
+
+    Params:
+      nmemb = The number of elements to allocate.
+      size = The size of each element.
+    Returns: A pointer to the allocated memory.
+*/
+void* calloc(size_t nmemb, size_t size) nothrow
+{
+  auto _retval = hb_calloc(nmemb, size);
+  return _retval;
 }
 
 /**
@@ -1779,8 +1868,9 @@ harfbuzz.face.Face faceCreate(harfbuzz.blob.Blob blob, uint index) nothrow
 /**
     Variant of [harfbuzz.global.faceCreate], built for those cases where it is more
     convenient to provide data for individual tables instead of the whole font
-    data. With the caveat that [harfbuzz.global.faceGetTableTags] does not currently work
-    with faces created this way.
+    data. With the caveat that [harfbuzz.global.faceGetTableTags] would not work
+    with faces created this way. You can address that by calling the
+    [harfbuzz.global.faceSetGetTableTagsFunc] function and setting the appropriate callback.
     
     Creates a new face object from the specified user_data and reference_table_func,
     with the destroy callback.
@@ -1813,6 +1903,94 @@ harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referen
   auto _referenceTableFunc = referenceTableFunc ? freezeDelegate(cast(void*)&referenceTableFunc) : null;
   GDestroyNotify _referenceTableFuncDestroyCB = referenceTableFunc ? &thawDelegate : null;
   _cretval = hb_face_create_for_tables(_referenceTableFuncCB, _referenceTableFunc, _referenceTableFuncDestroyCB);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    A thin wrapper around [harfbuzz.global.blobCreateFromFileOrFail]
+    followed by [harfbuzz.global.faceCreateOrFail].
+
+    Params:
+      fileName = A font filename
+      index = The index of the face within the file
+    Returns: The new face object, or `NULL` if
+      no face is found at the specified index or the file cannot be read.
+*/
+harfbuzz.face.Face faceCreateFromFileOrFail(string fileName, uint index) nothrow
+{
+  hb_face_t* _cretval;
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
+  _cretval = hb_face_create_from_file_or_fail(_fileName, index);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    A thin wrapper around the face loader functions registered with HarfBuzz.
+    If loader_name is `NULL` or the empty string, the first available loader
+    is used.
+    
+    For example, the FreeType ("ft") loader might be able to load
+    WOFF and WOFF2 files if FreeType is built with those features,
+    whereas the OpenType ("ot") loader will not.
+
+    Params:
+      fileName = A font filename
+      index = The index of the face within the file
+      loaderName = The name of the loader to use, or `NULL`
+    Returns: The new face object, or `NULL` if
+      the file cannot be read or the loader fails to load the face.
+*/
+harfbuzz.face.Face faceCreateFromFileOrFailUsing(string fileName, uint index, string loaderName = null) nothrow
+{
+  hb_face_t* _cretval;
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
+  const(char)* _loaderName = loaderName.toCString!(No.Malloc, Yes.Nullable);
+  _cretval = hb_face_create_from_file_or_fail_using(_fileName, index, _loaderName);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    Like [harfbuzz.global.faceCreate], but returns `NULL` if the blob data
+    contains no usable font face at the specified index.
+
+    Params:
+      blob = #hb_blob_t to work upon
+      index = The index of the face within blob
+    Returns: The new face object, or `NULL` if
+      no face is found at the specified index.
+*/
+harfbuzz.face.Face faceCreateOrFail(harfbuzz.blob.Blob blob, uint index) nothrow
+{
+  hb_face_t* _cretval;
+  _cretval = hb_face_create_or_fail(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null, index);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    A thin wrapper around the face loader functions registered with HarfBuzz.
+    If loader_name is `NULL` or the empty string, the first available loader
+    is used.
+    
+    For example, the FreeType ("ft") loader might be able to load
+    WOFF and WOFF2 files if FreeType is built with those features,
+    whereas the OpenType ("ot") loader will not.
+
+    Params:
+      blob = #hb_blob_t to work upon
+      index = The index of the face within blob
+      loaderName = The name of the loader to use, or `NULL`
+    Returns: The new face object, or `NULL` if
+      the loader fails to load the face.
+*/
+harfbuzz.face.Face faceCreateOrFailUsing(harfbuzz.blob.Blob blob, uint index, string loaderName = null) nothrow
+{
+  hb_face_t* _cretval;
+  const(char)* _loaderName = loaderName.toCString!(No.Malloc, Yes.Nullable);
+  _cretval = hb_face_create_or_fail_using(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null, index, _loaderName);
   auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1905,7 +2083,32 @@ uint faceGetUpem(harfbuzz.face.Face face) nothrow
 harfbuzz.types.Bool faceIsImmutable(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_face_is_immutable(face ? cast(const(hb_face_t)*)face._cPtr(No.Dup) : null);
+  _retval = hb_face_is_immutable(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Retrieves the list of face loaders supported by HarfBuzz.
+    Returns: a
+         `NULL`-terminated array of supported face loaders
+         constant strings. The returned array is owned by HarfBuzz
+         and should not be modified or freed.
+*/
+string[] faceListLoaders() nothrow
+{
+  const(char*)* _cretval;
+  _cretval = hb_face_list_loaders();
+  string[] _retval;
+
+  if (_cretval)
+  {
+    uint _cretlength;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
+    _retval = new string[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = _cretval[i].fromCString!(No.Free);
+  }
   return _retval;
 }
 
@@ -1921,9 +2124,10 @@ void faceMakeImmutable(harfbuzz.face.Face face) nothrow
 }
 
 /**
-    Fetches a pointer to the binary blob that contains the
-    specified face. Returns an empty blob if referencing face data is not
-    possible.
+    Fetches a pointer to the binary blob that contains the specified face.
+    If referencing the face data is not possible, this function creates a blob
+    out of individual table blobs if [harfbuzz.global.faceGetTableTags] works with this
+    face, otherwise it returns an empty blob.
 
     Params:
       face = A face object
@@ -1939,7 +2143,8 @@ harfbuzz.blob.Blob faceReferenceBlob(harfbuzz.face.Face face) nothrow
 
 /**
     Fetches a reference to the specified table within
-    the specified face.
+    the specified face. Returns an empty blob if referencing table data is not
+    possible.
 
     Params:
       face = A face object
@@ -2129,6 +2334,9 @@ harfbuzz.font.Font fontCreateSubFont(harfbuzz.font.Font parent) nothrow
 /**
     Draws the outline that corresponds to a glyph in the specified font.
     
+    This is an older name for [harfbuzz.global.fontDrawGlyphOrFail], with no
+    return value.
+    
     The outline is returned by way of calls to the callbacks of the dfuncs
     objects, with draw_data passed to them.
 
@@ -2141,6 +2349,29 @@ harfbuzz.font.Font fontCreateSubFont(harfbuzz.font.Font parent) nothrow
 void fontDrawGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null) nothrow
 {
   hb_font_draw_glyph(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData);
+}
+
+/**
+    Draws the outline that corresponds to a glyph in the specified font.
+    
+    This is a newer name for [harfbuzz.global.fontDrawGlyph], that returns `false`
+    if the font has no outlines for the glyph.
+    
+    The outline is returned by way of calls to the callbacks of the dfuncs
+    objects, with draw_data passed to them.
+
+    Params:
+      font = #hb_font_t to work upon
+      glyph = The glyph ID
+      dfuncs = #hb_draw_funcs_t to draw to
+      drawData = User data to pass to draw callbacks
+    Returns: `true` if glyph was drawn, `false` otherwise
+*/
+harfbuzz.types.Bool fontDrawGlyphOrFail(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null) nothrow
+{
+  harfbuzz.types.Bool _retval;
+  _retval = hb_font_draw_glyph_or_fail(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData);
+  return _retval;
 }
 
 /**
@@ -2198,6 +2429,8 @@ void fontFuncsMakeImmutable(harfbuzz.font_funcs.FontFuncs ffuncs) nothrow
     Params:
       ffuncs = A font-function structure
       func = The callback function to assign
+
+    Deprecated: Use hb_font_funcs_set_draw_glyph_or_fail_func instead.
 */
 void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontDrawGlyphFunc func) nothrow
 {
@@ -2218,6 +2451,38 @@ void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
+}
+
+/**
+    Sets the implementation function for #hb_font_draw_glyph_or_fail_func_t.
+
+    Params:
+      ffuncs = A font-function structure
+      func = The callback function to assign
+*/
+void fontFuncsSetDrawGlyphOrFailFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontDrawGlyphOrFailFunc func) nothrow
+{
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
+  {
+    harfbuzz.types.Bool _dretval;
+    auto _dlg = cast(harfbuzz.types.FontDrawGlyphOrFailFunc*)userData;
+
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontDrawGlyphOrFailFunc");
+    }
+    auto _retval = cast(hb_bool_t)_dretval;
+
+    return _retval;
+  }
+  auto _funcCB = func ? &_funcCallback : null;
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_draw_glyph_or_fail_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2677,26 +2942,64 @@ void fontFuncsSetNominalGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
     Params:
       ffuncs = A font-function structure
       func = The callback function to assign
+
+    Deprecated: Use [harfbuzz.global.fontFuncsSetPaintGlyphOrFailFunc] instead.
 */
 void fontFuncsSetPaintGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontPaintGlyphFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) nothrow
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) nothrow
   {
+    harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontPaintGlyphFunc*)userData;
 
     try
     {
-      (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontPaintGlyphFunc");
     }
+    auto _retval = cast(hb_bool_t)_dretval;
+
+    return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
+}
+
+/**
+    Sets the implementation function for #hb_font_paint_glyph_or_fail_func_t.
+
+    Params:
+      ffuncs = A font-function structure
+      func = The callback function to assign
+*/
+void fontFuncsSetPaintGlyphOrFailFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontPaintGlyphOrFailFunc func) nothrow
+{
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) nothrow
+  {
+    harfbuzz.types.Bool _dretval;
+    auto _dlg = cast(harfbuzz.types.FontPaintGlyphOrFailFunc*)userData;
+
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontPaintGlyphOrFailFunc");
+    }
+    auto _retval = cast(hb_bool_t)_dretval;
+
+    return _retval;
+  }
+  auto _funcCB = func ? &_funcCallback : null;
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_paint_glyph_or_fail_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -3241,9 +3544,12 @@ harfbuzz.types.Bool fontGetVExtents(harfbuzz.font.Font font, out harfbuzz.types.
     Fetches the list of variation coordinates (in design-space units) currently
     set on a font.
     
-    Note that this returned array may only contain values for some
-    (or none) of the axes; omitted axes effectively have their default
-    values.
+    <note>Note that if no variation coordinates are set, this function may
+    return null.</note>
+    
+    <note>If variations have been set on the font using normalized coordinates
+    (i.e. via [harfbuzz.global.fontSetVarCoordsNormalized]), the design coordinates will
+    have NaN (Not a Number) values.</note>
     
     Return value is valid as long as variation coordinates of the font
     are not modified.
@@ -3270,8 +3576,8 @@ float[] fontGetVarCoordsDesign(harfbuzz.font.Font font) nothrow
     Fetches the list of normalized variation coordinates currently
     set on a font.
     
-    Note that this returned array may only contain values for some
-    (or none) of the axes; omitted axes effectively have zero values.
+    <note>Note that if no variation coordinates are set, this function may
+    return null.</note>
     
     Return value is valid as long as variation coordinates of the font
     are not modified.
@@ -3366,6 +3672,46 @@ harfbuzz.types.Bool fontIsImmutable(harfbuzz.font.Font font) nothrow
 }
 
 /**
+    Tests whether a font is synthetic. A synthetic font is one
+    that has either synthetic slant or synthetic bold set on it.
+
+    Params:
+      font = #hb_font_t to work upon
+    Returns: `true` if the font is synthetic, `false` otherwise.
+*/
+harfbuzz.types.Bool fontIsSynthetic(harfbuzz.font.Font font) nothrow
+{
+  harfbuzz.types.Bool _retval;
+  _retval = hb_font_is_synthetic(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Retrieves the list of font functions supported by HarfBuzz.
+    Returns: a
+         `NULL`-terminated array of supported font functions
+         constant strings. The returned array is owned by HarfBuzz
+         and should not be modified or freed.
+*/
+string[] fontListFuncs() nothrow
+{
+  const(char*)* _cretval;
+  _cretval = hb_font_list_funcs();
+  string[] _retval;
+
+  if (_cretval)
+  {
+    uint _cretlength;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
+    _retval = new string[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = _cretval[i].fromCString!(No.Free);
+  }
+  return _retval;
+}
+
+/**
     Makes font immutable.
 
     Params:
@@ -3377,7 +3723,10 @@ void fontMakeImmutable(harfbuzz.font.Font font) nothrow
 }
 
 /**
-    Paints the glyph.
+    Paints the glyph. This function is similar to
+    [harfbuzz.global.fontPaintGlyphOrFail], but if painting a color glyph
+    failed, it will fall back to painting an outline monochrome
+    glyph.
     
     The painting instructions are returned by way of calls to
     the callbacks of the funcs object, with paint_data passed
@@ -3401,6 +3750,39 @@ void fontPaintGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, har
 }
 
 /**
+    Paints a color glyph.
+    
+    This function is similar to, but lower-level than,
+    [harfbuzz.global.fontPaintGlyph]. It is suitable for clients that
+    need more control.  If there are no color glyphs available,
+    it will return `false`. The client can then fall back to
+    [harfbuzz.global.fontDrawGlyphOrFail] for the monochrome outline glyph.
+    
+    The painting instructions are returned by way of calls to
+    the callbacks of the funcs object, with paint_data passed
+    to them.
+    
+    If the font has color palettes (see [harfbuzz.global.otColorHasPalettes]),
+    then palette_index selects the palette to use. If the font only
+    has one palette, this will be 0.
+
+    Params:
+      font = #hb_font_t to work upon
+      glyph = The glyph ID
+      pfuncs = #hb_paint_funcs_t to paint with
+      paintData = User data to pass to paint callbacks
+      paletteIndex = The index of the font's color palette to use
+      foreground = The foreground color, unpremultipled
+    Returns: `true` if glyph was painted, `false` otherwise
+*/
+harfbuzz.types.Bool fontPaintGlyphOrFail(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs pfuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground) nothrow
+{
+  harfbuzz.types.Bool _retval;
+  _retval = hb_font_paint_glyph_or_fail(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, pfuncs ? cast(hb_paint_funcs_t*)pfuncs._cPtr(No.Dup) : null, paintData, paletteIndex, foreground);
+  return _retval;
+}
+
+/**
     Sets face as the font-face value of font.
 
     Params:
@@ -3410,6 +3792,27 @@ void fontPaintGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, har
 void fontSetFace(harfbuzz.font.Font font, harfbuzz.face.Face face) nothrow
 {
   hb_font_set_face(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
+}
+
+/**
+    Sets the font-functions structure to use for a font, based on the
+    specified name.
+    
+    If name is `NULL` or the empty string, the default (first) functioning font-functions
+    are used.  This default can be changed by setting the `HB_FONT_FUNCS` environment
+    variable to the name of the desired font-functions.
+
+    Params:
+      font = #hb_font_t to work upon
+      name = The name of the font-functions structure to use, or `NULL`
+    Returns: `true` if the font-functions was found and set, `false` otherwise
+*/
+harfbuzz.types.Bool fontSetFuncsUsing(harfbuzz.font.Font font, string name) nothrow
+{
+  harfbuzz.types.Bool _retval;
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  _retval = hb_font_set_funcs_using(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, _name);
+  return _retval;
 }
 
 /**
@@ -3505,7 +3908,7 @@ void fontSetScale(harfbuzz.font.Font font, int xScale, int yScale) nothrow
     points of the glyph shape.
     
     Synthetic boldness is applied when rendering a glyph via
-    [harfbuzz.global.fontDrawGlyph].
+    [harfbuzz.global.fontDrawGlyphOrFail].
     
     If in_place is `false`, then glyph advance-widths are also
     adjusted, otherwise they are not.  The in-place mode is
@@ -3530,7 +3933,7 @@ void fontSetSyntheticBold(harfbuzz.font.Font font, float xEmbolden, float yEmbol
     HarfBuzz needs to know this value to adjust shaping results,
     metrics, and style values to match the slanted rendering.
     
-    <note>Note: The glyph shape fetched via the [harfbuzz.global.fontDrawGlyph]
+    <note>Note: The glyph shape fetched via the [harfbuzz.global.fontDrawGlyphOrFail]
     function is slanted to reflect this value as well.</note>
     
     <note>Note: The slant value is a ratio.  For example, a
@@ -3663,6 +4066,18 @@ void fontSubtractGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types
 }
 
 /**
+    Frees the memory pointed to by ptr, using the allocator set at
+    compile-time. Typically just free().
+
+    Params:
+      ptr = The pointer to the memory to free.
+*/
+void free(void* ptr = null) nothrow
+{
+  hb_free(ptr);
+}
+
+/**
     Creates an #hb_face_t face object from the specified FT_Face.
     
     Note that this is using the FT_Face object just to get at the underlying
@@ -3686,6 +4101,51 @@ harfbuzz.face.Face ftFaceCreateCached(freetype2.types.Face ftFace) nothrow
 {
   hb_face_t* _cretval;
   _cretval = hb_ft_face_create_cached(ftFace);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    Creates an #hb_face_t face object from the specified
+    font blob and face index.
+    
+    This is similar in functionality to hb_face_create_from_blob_or_fail(),
+    but uses the FreeType library for loading the font blob. This can
+    be useful, for example, to load WOFF and WOFF2 font data.
+
+    Params:
+      blob = A blob
+      index = The index of the face within the blob
+    Returns: The new face object, or `NULL` if
+      loading fails (eg. blob does not contain valid font data).
+*/
+harfbuzz.face.Face ftFaceCreateFromBlobOrFail(harfbuzz.blob.Blob blob, uint index) nothrow
+{
+  hb_face_t* _cretval;
+  _cretval = hb_ft_face_create_from_blob_or_fail(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null, index);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    Creates an #hb_face_t face object from the specified
+    font file and face index.
+    
+    This is similar in functionality to [harfbuzz.global.faceCreateFromFileOrFail],
+    but uses the FreeType library for loading the font file. This can
+    be useful, for example, to load WOFF and WOFF2 font data.
+
+    Params:
+      fileName = A font filename
+      index = The index of the face within the file
+    Returns: The new face object, or `NULL` if
+      no face is found at the specified index or the file cannot be read.
+*/
+harfbuzz.face.Face ftFaceCreateFromFileOrFail(string fileName, uint index) nothrow
+{
+  hb_face_t* _cretval;
+  const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
+  _cretval = hb_ft_face_create_from_file_or_fail(_fileName, index);
   auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -3829,6 +4289,10 @@ void ftFontSetLoadFlags(harfbuzz.font.Font font, int loadFlags) nothrow
     This function should be called after changing the size or
     variation-axis settings on the font.
     This call is fast if nothing has changed on font.
+    
+    Note that as of version 11.0.0, calling this function is not necessary,
+    as HarfBuzz will automatically detect changes to the font and update
+    the underlying FT_Face as needed.
 
     Params:
       font = #hb_font_t to work upon
@@ -3985,6 +4449,20 @@ string languageToString(harfbuzz.types.Language language) nothrow
   const(char)* _cretval;
   _cretval = hb_language_to_string(language);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Allocates size bytes of memory, using the allocator set at
+    compile-time. Typically just malloc().
+
+    Params:
+      size = The size of the memory to allocate.
+    Returns: A pointer to the allocated memory.
+*/
+void* malloc(size_t size) nothrow
+{
+  auto _retval = hb_malloc(size);
   return _retval;
 }
 
@@ -4469,7 +4947,9 @@ harfbuzz.types.OtNameId otColorPaletteGetNameId(harfbuzz.face.Face face, uint pa
 }
 
 /**
-    Sets the font functions to use when working with font.
+    Sets the font functions to use when working with font to
+    the HarfBuzz's native implementation. This is the default
+    for fonts newly created.
 
     Params:
       font = #hb_font_t to work upon
@@ -4533,13 +5013,13 @@ uint otLayoutFeatureGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag table
       tableTag = table tag to query, "GSUB" or "GPOS".
       featureIndex = index of feature to query.
       labelId = The ‘name’ table name ID that specifies a string
-                   for a user-interface label for this feature. (May be NULL.)
+                   for a user-interface label for this feature.
       tooltipId = The ‘name’ table name ID that specifies a string
                      that an application can use for tooltip text for this
-                     feature. (May be NULL.)
+                     feature.
       sampleId = The ‘name’ table name ID that specifies sample text
-                    that illustrates the effect of this feature. (May be NULL.)
-      numNamedParameters = Number of named parameters. (May be zero.)
+                    that illustrates the effect of this feature.
+      numNamedParameters = Number of named parameters.
       firstParamId = The first ‘name’ table name ID used to specify
                          strings for user-interface labels for the feature
                          parameters. (Must be zero if numParameters is zero.)
@@ -4962,7 +5442,42 @@ harfbuzz.types.Bool otLayoutLanguageGetRequiredFeatureIndex(harfbuzz.face.Face f
 }
 
 /**
-    Fetches alternates of a glyph from a given GSUB lookup index.
+    Collects alternates of glyphs from a given GSUB lookup index.
+    
+    For one-to-one GSUB glyph substitutions, this function collects the
+    substituted glyph.
+    
+    For lookups that assign multiple alternates to a glyph, all alternate glyphs are collected.
+    
+    For other lookup types, nothing is performed and `false` is returned.
+    
+    The `alternate_count` mapping will contain the number of alternates for each glyph id.
+    Upon entry, this mapping should contain the glyph ids as keys, and the number of alternates
+    currently known for each glyph id as values.
+    
+    The `alternate_glyphs` mapping will contain the alternate glyph ids for each glyph id.
+    The mapping is encoded in the following way, upon entry and after processing:
+    If G is the glyph id, and A0, A1, ..., A(n-1) are the alternate glyph ids,
+    the mapping will contain the following entries: (G + (i << 24)) -> A(i)
+    for i = 0, 1, ..., n-1 where n is the number of alternates for G as per `alternate_count`.
+
+    Params:
+      face = a face.
+      lookupIndex = index of the feature lookup to query.
+      alternateCount = mapping from glyph index to number of alternates for that glyph.
+      alternateGlyphs = mapping from encoded glyph index and alternate index, to alternate glyph ids.
+    Returns: `true` if alternates were collected, `false` otherwise.
+*/
+harfbuzz.types.Bool otLayoutLookupCollectGlyphAlternates(harfbuzz.face.Face face, uint lookupIndex, harfbuzz.map.Map alternateCount, harfbuzz.map.Map alternateGlyphs) nothrow
+{
+  harfbuzz.types.Bool _retval;
+  _retval = hb_ot_layout_lookup_collect_glyph_alternates(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, lookupIndex, alternateCount ? cast(hb_map_t*)alternateCount._cPtr(No.Dup) : null, alternateGlyphs ? cast(hb_map_t*)alternateGlyphs._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Fetches alternates of a glyph from a given GSUB lookup index. Note that for one-to-one GSUB
+    glyph substitutions, this function fetches the substituted glyph.
 
     Params:
       face = a face.
@@ -5846,6 +6361,10 @@ harfbuzz.types.OtNameId otVarNamedInstanceGetSubfamilyNameId(harfbuzz.face.Face 
     
     Any additional scaling defined in the face's `avar` table is also
     applied, as described at https://docs.microsoft.com/en-us/typography/opentype/spec/avar
+    
+    Note: coords_length must be the same as the number of axes in the face, as
+    for example returned by [harfbuzz.global.otVarGetAxisCount].
+    Otherwise, the behavior is undefined.
 
     Params:
       face = The #hb_face_t to work on
@@ -6381,7 +6900,7 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
       width = width of the raster image in pixels, or 0
       height = height of the raster image in pixels, or 0
       format = the image format as a tag
-      slant = the synthetic slant ratio to be applied to the image during rendering
+      slant = Deprecated. set to 0.0
       extents = the extents of the glyph
 */
 void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.blob.Blob image, uint width, uint height, harfbuzz.types.Tag format, float slant, harfbuzz.types.GlyphExtents* extents = null) nothrow
@@ -6476,6 +6995,20 @@ void paintPushClipRectangle(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintDa
 }
 
 /**
+    Push the transform reflecting the font's scale and slant
+    settings onto the paint functions.
+
+    Params:
+      funcs = paint functions
+      paintData = associated data passed by the caller
+      font = a font
+*/
+void paintPushFontTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.font.Font font) nothrow
+{
+  hb_paint_push_font_transform(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, font ? cast(const(hb_font_t)*)font._cPtr(No.Dup) : null);
+}
+
+/**
     Perform a "push-group" paint operation.
 
     Params:
@@ -6485,6 +7018,20 @@ void paintPushClipRectangle(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintDa
 void paintPushGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null) nothrow
 {
   hb_paint_push_group(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData);
+}
+
+/**
+    Push the inverse of the transform reflecting the font's
+    scale and slant settings onto the paint functions.
+
+    Params:
+      funcs = paint functions
+      paintData = associated data passed by the caller
+      font = a font
+*/
+void paintPushInverseFontTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.font.Font font) nothrow
+{
+  hb_paint_push_inverse_font_transform(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, font ? cast(const(hb_font_t)*)font._cPtr(No.Dup) : null);
 }
 
 /**
@@ -6542,6 +7089,21 @@ void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
 }
 
 /**
+    Reallocates the memory pointed to by ptr to size bytes, using the
+    allocator set at compile-time. Typically just realloc().
+
+    Params:
+      ptr = The pointer to the memory to reallocate.
+      size = The new size of the memory.
+    Returns: A pointer to the reallocated memory.
+*/
+void* realloc(void* ptr, size_t size) nothrow
+{
+  auto _retval = hb_realloc(ptr, size);
+  return _retval;
+}
+
+/**
     Converts an ISO 15924 script tag to a corresponding #hb_script_t.
 
     Params:
@@ -6583,8 +7145,11 @@ harfbuzz.types.Script scriptFromString(ubyte[] str) nothrow
     Fetches the #hb_direction_t of a script when it is
     set horizontally. All right-to-left scripts will return
     #HB_DIRECTION_RTL. All left-to-right scripts will return
-    #HB_DIRECTION_LTR.  Scripts that can be written either
-    horizontally or vertically will return #HB_DIRECTION_INVALID.
+    #HB_DIRECTION_LTR.
+    
+    Scripts that can be written either right-to-left or
+    left-to-right will return #HB_DIRECTION_INVALID.
+    
     Unknown scripts will return #HB_DIRECTION_LTR.
 
     Params:
@@ -7156,53 +7721,11 @@ harfbuzz.types.Bool shapeFull(harfbuzz.font.Font font, harfbuzz.buffer.Buffer bu
 }
 
 /**
-    See [harfbuzz.global.shapeFull] for basic details. If shaper_list is not `NULL`, the specified
-    shapers will be used in the given order, otherwise the default shapers list
-    will be used.
-    
-    In addition, justify the shaping results such that the shaping results reach
-    the target advance width/height, depending on the buffer direction.
-    
-    If the advance of the buffer shaped with [harfbuzz.global.shapeFull] is already known,
-    put that in *advance. Otherwise set *advance to zero.
-    
-    This API is currently experimental and will probably change in the future.
-
-    Params:
-      font = a mutable #hb_font_t to use for shaping
-      buffer = an #hb_buffer_t to shape
-      features = an array of user
-           specified #hb_feature_t or `NULL`
-      shaperList = a `NULL`-terminated
-           array of shapers to use or `NULL`
-      minTargetAdvance = Minimum advance width/height to aim for.
-      maxTargetAdvance = Maximum advance width/height to aim for.
-      advance = Input/output advance width/height of the buffer.
-      varTag = Variation-axis tag used for justification.
-      varValue = Variation-axis value used to reach target justification.
-    Returns: false if all shapers failed, true otherwise
-      
-      XSince: EXPERIMENTAL
-*/
-harfbuzz.types.Bool shapeJustify(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features, string[] shaperList, float minTargetAdvance, float maxTargetAdvance, ref float advance, out harfbuzz.types.Tag varTag, out float varValue) nothrow
-{
-  harfbuzz.types.Bool _retval;
-  uint _numFeatures;
-  if (features)
-    _numFeatures = cast(uint)features.length;
-
-  auto _features = cast(hb_feature_t*)features.ptr;
-  auto _shaperList_arr = new char*[](shaperList.length + 1);
-  auto _shaperList = cast(char**)_shaperList_arr.ptr;
-  foreach (i, s; shaperList) _shaperList[i] = s.toCString!(No.Malloc);
-  _retval = hb_shape_justify(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _features, _numFeatures, _shaperList, minTargetAdvance, maxTargetAdvance, cast(float*)&advance, cast(hb_tag_t*)&varTag, cast(float*)&varValue);
-  return _retval;
-}
-
-/**
     Retrieves the list of shapers supported by HarfBuzz.
-    Returns: an array of
-         constant strings
+    Returns: a
+         `NULL`-terminated array of supported shapers constant string.
+         The returned array is owned by HarfBuzz and should not be
+         modified or freed.
 */
 string[] shapeListShapers() nothrow
 {
@@ -7397,8 +7920,8 @@ string shapePlanGetShaper(harfbuzz.shape_plan.ShapePlan shapePlan) nothrow
 
 /**
     Searches variation axes of a #hb_font_t object for a specific axis first,
-    if not set, then tries to get default style values from different
-    tables of the font.
+    if not set, first tries to get default style values in `STAT` table
+    then tries to polyfill from different tables of the font.
 
     Params:
       font = a #hb_font_t object.

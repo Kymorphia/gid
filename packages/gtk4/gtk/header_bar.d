@@ -17,9 +17,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.header_bar.HeaderBar] is a widget for creating custom title bars for windows.
+    Creates a custom titlebar for a window.
     
-    ![An example GtkHeaderBar](headerbar.png)
+    <picture>
+      <source srcset="headerbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkHeaderBar" src="headerbar.png">
+    </picture>
     
     [gtk.header_bar.HeaderBar] is similar to a horizontal [gtk.center_box.CenterBox]. It allows
     children to be placed at the start or the end. In addition, it allows
@@ -180,16 +183,56 @@ class HeaderBar : gtk.widget.Widget
     setShowTitleButtons(propval);
   }
 
-  /** */
+  /**
+      Get `titleWidget` property.
+      Returns: The title widget to display.
+  */
   @property gtk.widget.Widget titleWidget() nothrow
   {
     return getTitleWidget();
   }
 
-  /** */
+  /**
+      Set `titleWidget` property.
+      Params:
+        propval = The title widget to display.
+  */
   @property void titleWidget(gtk.widget.Widget propval) nothrow
   {
     setTitleWidget(propval);
+  }
+
+  /**
+      Get `useNativeControls` property.
+      Returns: Whether to show platform native close/minimize/maximize buttons.
+        
+        For macOS, the [gtk.header_bar.HeaderBar.decorationLayout] property
+        can be used to enable/disable controls.
+        
+        On Linux, this option has no effect.
+        
+        See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+  */
+  @property bool useNativeControls() nothrow
+  {
+    return getUseNativeControls();
+  }
+
+  /**
+      Set `useNativeControls` property.
+      Params:
+        propval = Whether to show platform native close/minimize/maximize buttons.
+          
+          For macOS, the [gtk.header_bar.HeaderBar.decorationLayout] property
+          can be used to enable/disable controls.
+          
+          On Linux, this option has no effect.
+          
+          See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+  */
+  @property void useNativeControls(bool propval) nothrow
+  {
+    setUseNativeControls(propval);
   }
 
   /**
@@ -204,7 +247,7 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
-      Gets the decoration layout of the [gtk.header_bar.HeaderBar].
+      Gets the decoration layout of the header bar.
       Returns: the decoration layout
   */
   string getDecorationLayout() nothrow
@@ -228,10 +271,10 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
-      Retrieves the title widget of the header.
+      Retrieves the title widget of the header bar.
       
       See [gtk.header_bar.HeaderBar.setTitleWidget].
-      Returns: the title widget of the header
+      Returns: the title widget
   */
   gtk.widget.Widget getTitleWidget() nothrow
   {
@@ -242,11 +285,22 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
-      Adds child to bar, packed with reference to the
-      end of the bar.
+      Returns whether this header bar shows platform
+      native window controls.
+      Returns: true if native window controls are shown
+  */
+  bool getUseNativeControls() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_header_bar_get_use_native_controls(cast(GtkHeaderBar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Adds a child to the header bar, packed with reference to the end.
   
       Params:
-        child = the [gtk.widget.Widget] to be added to bar
+        child = the widget to be added to bar
   */
   void packEnd(gtk.widget.Widget child) nothrow
   {
@@ -254,11 +308,10 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
-      Adds child to bar, packed with reference to the
-      start of the bar.
+      Adds a child to the header bar, packed with reference to the start.
   
       Params:
-        child = the [gtk.widget.Widget] to be added to bar
+        child = the widget to be added to bar
   */
   void packStart(gtk.widget.Widget child) nothrow
   {
@@ -266,7 +319,7 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
-      Removes a child from the [gtk.header_bar.HeaderBar].
+      Removes a child from the header bar.
       
       The child must have been added with
       [gtk.header_bar.HeaderBar.packStart],
@@ -301,7 +354,7 @@ class HeaderBar : gtk.widget.Widget
       on the left, and minimize, maximize and close buttons on the right.
   
       Params:
-        layout = a decoration layout, or null to unset the layout
+        layout = a decoration layout
   */
   void setDecorationLayout(string layout = null) nothrow
   {
@@ -322,16 +375,16 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
-      Sets the title for the [gtk.header_bar.HeaderBar].
+      Sets the title for the header bar.
       
-      When set to null, the headerbar will display the title of
+      When set to `NULL`, the headerbar will display the title of
       the window it is contained in.
       
       The title should help a user identify the current view.
       To achieve the same style as the builtin title, use the
       “title” style class.
       
-      You should set the title widget to null, for the window
+      You should set the title widget to `NULL`, for the window
       title label to be visible again.
   
       Params:
@@ -340,6 +393,22 @@ class HeaderBar : gtk.widget.Widget
   void setTitleWidget(gtk.widget.Widget titleWidget = null) nothrow
   {
     gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether this header bar shows native window controls.
+      
+      This option shows the "stoplight" buttons on macOS.
+      For Linux, this option has no effect.
+      
+      See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+  
+      Params:
+        setting = true to show native window controls
+  */
+  void setUseNativeControls(bool setting) nothrow
+  {
+    gtk_header_bar_set_use_native_controls(cast(GtkHeaderBar*)this._cPtr, setting);
   }
 }
 
@@ -378,10 +447,33 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
     return setProperty("show-title-buttons", propval);
   }
 
-  /** */
+  /**
+      Set `titleWidget` property.
+      Params:
+        propval = The title widget to display.
+      Returns: Builder instance for fluent chaining
+  */
   T titleWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("title-widget", propval);
+  }
+
+  /**
+      Set `useNativeControls` property.
+      Params:
+        propval = Whether to show platform native close/minimize/maximize buttons.
+          
+          For macOS, the [gtk.header_bar.HeaderBar.decorationLayout] property
+          can be used to enable/disable controls.
+          
+          On Linux, this option has no effect.
+          
+          See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+      Returns: Builder instance for fluent chaining
+  */
+  T useNativeControls(bool propval) nothrow
+  {
+    return setProperty("use-native-controls", propval);
   }
 }
 

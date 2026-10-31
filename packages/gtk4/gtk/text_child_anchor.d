@@ -11,8 +11,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.text_child_anchor.TextChildAnchor] is a spot in a [gtk.text_buffer.TextBuffer] where child widgets can
-    be “anchored”.
+    Marks a spot in a [gtk.text_buffer.TextBuffer] where child widgets can be “anchored”.
     
     The anchor can have multiple widgets anchored, to allow for multiple views.
 */
@@ -76,7 +75,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
       [gtk.text_buffer.TextBuffer.insertChildAnchor].
   
       Params:
-        character = 
+        character = a replacement character
       Returns: a new [gtk.text_child_anchor.TextChildAnchor]
   */
   static gtk.text_child_anchor.TextChildAnchor newWithReplacement(string character) nothrow

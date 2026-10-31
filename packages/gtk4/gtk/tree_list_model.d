@@ -14,7 +14,7 @@ import gtk.tree_list_row;
 import gtk.types;
 
 /**
-    [gtk.tree_list_model.TreeListModel] is a list model that can create child models on demand.
+    A list model that can create child models on demand.
 */
 class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
@@ -122,8 +122,8 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
         root = The [gio.list_model.ListModel] to use as root
         passthrough = true to pass through items from the models
         autoexpand = true to set the autoexpand property and expand the root model
-        createFunc = Function to call to create the [gio.list_model.ListModel] for the children
-            of an item
+        createFunc = function to
+            call to create the [gio.list_model.ListModel] for the children of an item
       Returns: a newly created [gtk.tree_list_model.TreeListModel].
   */
   this(gio.list_model.ListModel root, bool passthrough, bool autoexpand, gtk.types.TreeListModelCreateModelFunc createFunc) nothrow

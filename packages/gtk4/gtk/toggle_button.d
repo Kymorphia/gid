@@ -20,8 +20,12 @@ import gtk.constraint_target_mixin;
 import gtk.types;
 
 /**
-    A [gtk.toggle_button.ToggleButton] is a button which remains “pressed-in” when
-    clicked.
+    Shows a button which remains “pressed-in” when clicked.
+    
+    <picture>
+      <source srcset="toggle-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Example GtkToggleButtons" src="toggle-button.png">
+    </picture>
     
     Clicking again will cause the toggle button to return to its normal state.
     
@@ -33,9 +37,6 @@ import gtk.types;
     The state of a [gtk.toggle_button.ToggleButton] can be set specifically using
     [gtk.toggle_button.ToggleButton.setActive], and retrieved using
     [gtk.toggle_button.ToggleButton.getActive].
-    
-    To simply switch the state of a toggle button, use
-    [gtk.toggle_button.ToggleButton.toggled].
     
     ## Grouping
     

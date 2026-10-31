@@ -12,7 +12,6 @@ import gio.dbus_interface_info;
 import gio.dbus_message;
 import gio.dbus_method_invocation;
 import gio.dbus_object_manager_client;
-import gio.desktop_app_info;
 import gio.file;
 import gio.ioscheduler_job;
 import gio.simple_async_result;
@@ -115,6 +114,9 @@ alias DriveStartFlags = GDriveStartFlags;
 
 /** */
 alias DriveStartStopType = GDriveStartStopType;
+
+/** */
+alias EcnCodePoint = GEcnCodePoint;
 
 /** */
 alias EmblemOrigin = GEmblemOrigin;
@@ -298,8 +300,8 @@ alias OutputVector = GOutputVector;
     Type definition for a function that will be called back when an asynchronous
     operation within GIO has been completed. #GAsyncReadyCallback
     callbacks from #GTask are guaranteed to be invoked in a later
-    iteration of the
-    [thread-default main context][g-main-context-push-thread-default]
+    iteration of the thread-default main context
+    (see [glib.main_context.MainContext.pushThreadDefault])
     where the #GTask was created. All other users of
     #GAsyncReadyCallback must likewise call it asynchronously in a
     later iteration of the main context.
@@ -318,8 +320,8 @@ alias AsyncReadyCallback = void delegate(gobject.object.ObjectWrap sourceObject,
     Invoked when a connection to a message bus has been obtained.
 
     Params:
-      connection = The #GDBusConnection to a message bus.
-      name = The name that is requested to be owned.
+      connection = the connection to a message bus
+      name = the name that is requested to be owned
 */
 alias BusAcquiredCallback = void delegate(gio.dbus_connection.DBusConnection connection, string name);
 
@@ -327,8 +329,8 @@ alias BusAcquiredCallback = void delegate(gio.dbus_connection.DBusConnection con
     Invoked when the name is acquired.
 
     Params:
-      connection = The #GDBusConnection on which to acquired the name.
-      name = The name being owned.
+      connection = the connection on which to acquired the name
+      name = the name being owned
 */
 alias BusNameAcquiredCallback = void delegate(gio.dbus_connection.DBusConnection connection, string name);
 
@@ -346,9 +348,9 @@ alias BusNameAppearedCallback = void delegate(gio.dbus_connection.DBusConnection
     Invoked when the name is lost or connection has been closed.
 
     Params:
-      connection = The #GDBusConnection on which to acquire the name or null if
-        the connection was disconnected.
-      name = The name being owned.
+      connection = the connect on which to acquire the name or `NULL` if
+          the connection was disconnected
+      name = the name being owned
 */
 alias BusNameLostCallback = void delegate(gio.dbus_connection.DBusConnection connection, string name);
 
@@ -378,12 +380,21 @@ alias CancellableSourceFunc = bool delegate(gio.cancellable.Cancellable cancella
 
 /**
     The type of the method_call function in #GDBusInterfaceVTable.
+    
+    interface_name may be `NULL` if not specified by the sender, although it’s
+    encouraged for the sender to set it. If unset, and the object has only one
+    method (across all interfaces) matching method_name, that method is invoked.
+    Otherwise, behaviour is implementation defined. See the
+    [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-types-method).
+    It is recommended to return `errorGio.DBusError.UNKNOWN_METHOD`.
 
     Params:
       connection = A #GDBusConnection.
-      sender = The unique bus name of the remote caller.
+      sender = The unique bus name of the remote caller, or `NULL` if
+            not specified by the caller, e.g. on peer-to-peer connections.
       objectPath = The object path that the method was invoked on.
-      interfaceName = The D-Bus interface name the method was invoked on.
+      interfaceName = The D-Bus interface name the method was invoked on,
+            or `NULL` if not specified by the sender.
       methodName = The name of the method that was invoked.
       parameters = A #GVariant tuple with parameters.
       invocation = A #GDBusMethodInvocation object that must be used to return a value or error.
@@ -467,8 +478,8 @@ alias DBusMessageFilterFunction = gio.dbus_message.DBusMessage delegate(gio.dbus
     use for an interface proxy (if interface_name is not null) or
     object proxy (if interface_name is null).
     
-    This function is called in the
-    [thread-default main loop][g-main-context-push-thread-default]
+    This function is called in the thread-default main context
+    (see [glib.main_context.MainContext.pushThreadDefault])
     that manager was constructed in.
 
     Params:
@@ -575,17 +586,6 @@ alias DBusSubtreeIntrospectFunc = gio.dbus_interface_info.DBusInterfaceInfo[] de
 alias DatagramBasedSourceFunc = bool delegate(gio.datagram_based.DatagramBased datagramBased, glib.types.IOCondition condition);
 
 /**
-    During invocation, [gio.desktop_app_info.DesktopAppInfo.launchUrisAsManager] may
-    create one or more child processes.  This callback is invoked once
-    for each, providing the process ID.
-
-    Params:
-      appinfo = a #GDesktopAppInfo
-      pid = Process identifier
-*/
-alias DesktopAppLaunchCallback = void delegate(gio.desktop_app_info.DesktopAppInfo appinfo, glib.types.Pid pid);
-
-/**
     This callback type is used by [gio.file.File.measureDiskUsage] to make
     periodic progress reports when measuring the amount of disk spaced
     used by a directory.
@@ -687,43 +687,44 @@ alias PollableSourceFunc = bool delegate(gobject.object.ObjectWrap pollableStrea
 alias ReallocFunc = void* delegate(size_t size);
 
 /**
-    The type for the function that is used to convert from #GSettings to
-    an object property. The value is already initialized to hold values
-    of the appropriate type.
+    The type for the function that is used to convert from [gio.settings.Settings]
+    to an object property.
+    
+    The value is already initialized to hold values of the appropriate type.
 
     Params:
       value = return location for the property value
-      variant = the #GVariant
+      variant = variant to map to the property value
     Returns: true if the conversion succeeded, false in case of an error
 */
 alias SettingsBindGetMapping = bool delegate(gobject.value.Value value, glib.variant.Variant variant);
 
 /**
     The type for the function that is used to convert an object property
-    value to a #GVariant for storing it in #GSettings.
+    value to a [glib.variant.Variant] for storing it in [gio.settings.Settings].
 
     Params:
-      value = a #GValue containing the property value to map
-      expectedType = the #GVariantType to create
-    Returns: a new #GVariant holding the data from value,
-          or null in case of an error
+      value = the property value to map
+      expectedType = expected type of the result
+    Returns: a new [glib.variant.Variant] holding the data from value,
+        or `NULL` in case of an error
 */
 alias SettingsBindSetMapping = glib.variant.Variant delegate(gobject.value.Value value, glib.variant_type.VariantType expectedType);
 
 /**
     The type of the function that is used to convert from a value stored
-    in a #GSettings to a value that is useful to the application.
+    in a [gio.settings.Settings] to a value that is useful to the application.
     
     If the value is successfully mapped, the result should be stored at
     result and true returned.  If mapping fails (for example, if value
     is not in the right format) then false should be returned.
     
-    If value is null then it means that the mapping function is being
-    given a "last chance" to successfully return a valid value.  true
+    If value is `NULL` then it means that the mapping function is being
+    given a ‘last chance’ to successfully return a valid value.  True
     must be returned in this case.
 
     Params:
-      value = the #GVariant to map, or null
+      value = variant to map to the application value
       result = the result of the mapping
     Returns: true if the conversion succeeded, false in case of an error
 */
@@ -777,7 +778,7 @@ alias TaskThreadFunc = void delegate(gio.task.Task task, gobject.object.ObjectWr
 
 /**
     This function type is used by [gio.vfs.Vfs.registerUriScheme] to make it
-    possible for a client to associate an URI scheme to a different #GFile
+    possible for a client to associate a URI scheme to a different #GFile
     implementation.
     
     The client should return a reference to the new file that has been
@@ -786,7 +787,7 @@ alias TaskThreadFunc = void delegate(gio.task.Task task, gobject.object.ObjectWr
     Params:
       vfs = a #GVfs
       identifier = the identifier to look up a #GFile for. This can either
-            be an URI or a parse name as returned by [gio.file.File.getParseName]
+            be a URI or a parse name as returned by [gio.file.File.getParseName]
     Returns: a #GFile for identifier.
 */
 alias VfsFileLookupFunc = gio.file.File delegate(gio.vfs.Vfs vfs, string identifier);
@@ -820,18 +821,9 @@ enum DBUS_METHOD_INVOCATION_UNHANDLED = false;
 
 /**
     Extension point for debug control functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum DEBUG_CONTROLLER_EXTENSION_POINT_NAME = "gio-debug-controller";
-
-/**
-    Extension point for default handler to URI association. See
-    [Extending GIO][extending-gio].
-
-    Deprecated: The #GDesktopAppInfoLookup interface is deprecated and
-         unused by GIO.
-*/
-enum DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME = "gio-desktop-app-info-lookup";
 
 /**
     The string used to obtain a Unix device path with [gio.drive.Drive.getIdentifier].
@@ -1025,6 +1017,13 @@ enum FILE_ATTRIBUTE_GVFS_BACKEND = "gvfs::backend";
     
     An example use would be during listing files, to avoid recursive
     directory scanning.
+    
+    For local files on Linux, this is a combination of the file’s device number
+    and inode, so is invariant with respect to hard linking. The format used by
+    other VFS implementations may vary, and some VFS backends may not set it.
+    
+    For simply seeing if two [gio.file.File] instances refer to the same path
+    on disk, see [gio.file.File.equal].
 */
 enum FILE_ATTRIBUTE_ID_FILE = "id::file";
 
@@ -1276,6 +1275,11 @@ enum FILE_ATTRIBUTE_STANDARD_ICON = "standard::icon";
 
 /**
     A key in the "standard" namespace for checking if a file is a backup file.
+    
+    The exact semantics of what constitutes a backup file are backend-specific.
+    For local files, a file is considered a backup if its name ends with `~`
+    and it is a regular file. This follows the POSIX convention used by text
+    editors such as Emacs.
     
     Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
 */
@@ -1802,7 +1806,7 @@ enum FILE_ATTRIBUTE_UNIX_UID = "unix::uid";
 
 /**
     Extension point for memory usage monitoring functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum MEMORY_MONITOR_EXTENSION_POINT_NAME = "gio-memory-monitor";
 
@@ -1875,25 +1879,25 @@ enum NATIVE_VOLUME_MONITOR_EXTENSION_POINT_NAME = "gio-native-volume-monitor";
 
 /**
     Extension point for network status monitoring functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum NETWORK_MONITOR_EXTENSION_POINT_NAME = "gio-network-monitor";
 
 /**
     Extension point for power profile usage monitoring functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum POWER_PROFILE_MONITOR_EXTENSION_POINT_NAME = "gio-power-profile-monitor";
 
 /**
     Extension point for proxy functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum PROXY_EXTENSION_POINT_NAME = "gio-proxy";
 
 /**
     Extension point for proxy resolving functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum PROXY_RESOLVER_EXTENSION_POINT_NAME = "gio-proxy-resolver";
 
@@ -1904,7 +1908,7 @@ enum SETTINGS_BACKEND_EXTENSION_POINT_NAME = "gsettings-backend";
 
 /**
     Extension point for TLS functionality via #GTlsBackend.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum TLS_BACKEND_EXTENSION_POINT_NAME = "gio-tls-backend";
 
@@ -1922,7 +1926,7 @@ enum TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER = "1.3.6.1.5.5.7.3.1";
 
 /**
     Extension point for #GVfs functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum VFS_EXTENSION_POINT_NAME = "gio-vfs";
 
@@ -1968,6 +1972,6 @@ enum VOLUME_IDENTIFIER_KIND_UUID = "uuid";
 
 /**
     Extension point for volume monitor functionality.
-    See [Extending GIO][extending-gio].
+    See [Extending GIO](overview.html#extending-gio).
 */
 enum VOLUME_MONITOR_EXTENSION_POINT_NAME = "gio-volume-monitor";

@@ -13,7 +13,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.bookmark_list.BookmarkList] is a list model that wraps [glib.bookmark_file.BookmarkFile].
+    A list model that wraps [glib.bookmark_file.BookmarkFile].
     
     It presents a [gio.list_model.ListModel] and fills it asynchronously with the
     [gio.file_info.FileInfo]s returned from that function.

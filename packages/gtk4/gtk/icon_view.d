@@ -34,6 +34,11 @@ import gtk.widget;
 /**
     [gtk.icon_view.IconView] is a widget which displays data in a grid of icons.
     
+    <picture>
+      <source srcset="icon-view-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkIconView" src="icon-view.png">
+    </picture>
+    
     [gtk.icon_view.IconView] provides an alternative view on a [gtk.tree_model.TreeModel].
     It displays the model as a grid of icons with labels. Like
     [gtk.tree_view.TreeView], it allows to select one or multiple items
@@ -264,13 +269,20 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     setMarkupColumn(propval);
   }
 
-  /** */
+  /**
+      Get `model` property.
+      Returns: The model of the icon view.
+  */
   @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
 
-  /** */
+  /**
+      Set `model` property.
+      Params:
+        propval = The model of the icon view.
+  */
   @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
@@ -412,13 +424,22 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     setTextColumn(propval);
   }
 
-  /** */
+  /**
+      Get `tooltipColumn` property.
+      Returns: The column of the icon view model which is being used for displaying
+        tooltips on it's rows.
+  */
   @property int tooltipColumn() nothrow
   {
     return getTooltipColumn();
   }
 
-  /** */
+  /**
+      Set `tooltipColumn` property.
+      Params:
+        propval = The column of the icon view model which is being used for displaying
+          tooltips on it's rows.
+  */
   @property void tooltipColumn(int propval) nothrow
   {
     setTooltipColumn(propval);
@@ -863,6 +884,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
       To do this, you can use [gtk.tree_row_reference.TreeRowReference.new_].
       
       To free the return value, use [glib.list.List.freeFull]:
+      
       ```c
       GtkWidget *icon_view = gtk_icon_view_new ();
       // Use icon_view
@@ -1503,7 +1525,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   
           `iconView` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the item was activated
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -1628,7 +1650,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   
           `iconView` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the cursor was moved
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
@@ -2043,7 +2065,12 @@ class IconViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
     return setProperty("markup-column", propval);
   }
 
-  /** */
+  /**
+      Set `model` property.
+      Params:
+        propval = The model of the icon view.
+      Returns: Builder instance for fluent chaining
+  */
   T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
@@ -2126,7 +2153,13 @@ class IconViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
     return setProperty("text-column", propval);
   }
 
-  /** */
+  /**
+      Set `tooltipColumn` property.
+      Params:
+        propval = The column of the icon view model which is being used for displaying
+          tooltips on it's rows.
+      Returns: Builder instance for fluent chaining
+  */
   T tooltipColumn(int propval) nothrow
   {
     return setProperty("tooltip-column", propval);

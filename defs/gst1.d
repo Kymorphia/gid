@@ -61,9 +61,6 @@
 //# Set MetaDeserializeFunction.data parameter to array with length
 //!set callback[MetaDeserializeFunction].parameters.parameter[data].type '<array length="3" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
 
-//# Set Meta.deserialize.data parameter to array with length
-//!set record[Meta].function[deserialize].parameters.parameter[data].type '<array length="2" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
-
 //# utilSimplifyFraction.direction/denominator are inout params
 //!set function[util_simplify_fraction].parameters.parameter[numerator][direction] inout
 //!set function[util_simplify_fraction].parameters.parameter[denominator][direction] inout

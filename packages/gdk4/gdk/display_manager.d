@@ -12,8 +12,9 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    A singleton object that offers notification when displays appear or
-    disappear.
+    Offers notification when displays appear or disappear.
+    
+    [gdk.display_manager.DisplayManager] is a singleton object.
     
     You can use [gdk.display_manager.DisplayManager.get] to obtain the [gdk.display_manager.DisplayManager]
     singleton, but that should be rarely necessary. Typically, initializing

@@ -11,8 +11,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.list_header.ListHeader] is used by list widgets to represent the headers they
-    display.
+    Used by list widgets to represent the headers they display.
     
     [gtk.list_header.ListHeader] objects are managed just like [gtk.list_item.ListItem]
     objects via their factory, but provide a different set of properties suitable

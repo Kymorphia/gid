@@ -161,7 +161,7 @@ template AsyncInitableT()
       any interface methods.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the operation
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the operation
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */

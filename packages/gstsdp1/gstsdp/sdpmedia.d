@@ -4,6 +4,7 @@ module gstsdp.sdpmedia;
 public import gid.basictypes;
 import gid.gid;
 import gst.caps;
+import gst.structure;
 import gstsdp.c.functions;
 import gstsdp.c.types;
 import gstsdp.mikeymessage;
@@ -853,6 +854,35 @@ class SDPMedia
   }
 
   /**
+      Mapping of structure fields to SDP attributes:
+      
+      a=rtpmap:(payload) (encoding_name) or (clock_rate)[or (encoding_params)]
+      
+      a=framesize:(payload) (width)-(height)
+      
+      a=fmtp:(payload) (param)[=(value)];...
+      
+      a=rtcp-fb:(payload) (param1) [param2]...
+      
+      a=extmap:(id)[/direction] (extensionname) (extensionattributes)
+  
+      Params:
+        structure = a #GstStructure belonging to a #GstCaps SDP mapping, see also
+          `[gstsdp.sdpmedia.SDPMedia.getCapsFromMedia]`
+        media = a #GstSDPMedia
+      Returns: a #GstSDPResult.
+  */
+  static gstsdp.types.SDPResult addMediaFromStructure(gst.structure.Structure structure, out gstsdp.sdpmedia.SDPMedia media) nothrow
+  {
+    GstSDPResult _cretval;
+    GstSDPMedia _media;
+    _cretval = gst_sdp_media_add_media_from_structure(structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, &_media);
+    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
+    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media, No.Take);
+    return _retval;
+  }
+
+  /**
       Initialize media so that its contents are as if it was freshly allocated
       with [gstsdp.sdpmedia.SDPMedia.new_]. This function is mostly used to initialize a media
       allocated on the stack. [gstsdp.sdpmedia.SDPMedia.uninit] undoes this operation.
@@ -904,6 +934,8 @@ class SDPMedia
       a=rtcp-fb:(payload) (param1) [param2]...
       
       a=extmap:(id)[/direction] (extensionname) (extensionattributes)
+      
+      Only the first #GstStructure of the caps is used.
   
       Params:
         caps = a #GstCaps

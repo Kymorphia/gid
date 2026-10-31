@@ -345,7 +345,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
 
   /**
       Completes an asynchronous function in an idle handler in the
-      [thread-default main context][g-main-context-push-thread-default]
+      thread-default main context (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread that simple was initially created in
       (and re-pushes that context around the invocation of the callback).
       

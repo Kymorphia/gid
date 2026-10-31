@@ -25,7 +25,7 @@ import gtk.selection_model;
 import gtk.types;
 
 /**
-    [gtk.grid_view.GridView] presents a large dynamic grid of items.
+    Presents a large dynamic grid of items.
     
     [gtk.grid_view.GridView] uses its factory to generate one child widget for each
     visible item and shows them in a grid. The orientation of the grid view
@@ -38,6 +38,13 @@ import gtk.types;
     
     To learn more about the list widget framework, see the
     [overview](section-list-widget.html).
+    
+    # Actions
+    
+    [gtk.grid_view.GridView] defines a set of built-in actions:
+    
+    - `list.activate-item` activates the item at given position by emitting the
+      the [gtk.grid_view.GridView.activate] signal.
     
     # CSS nodes
     
@@ -120,6 +127,8 @@ class GridView : gtk.list_base.ListBase
   /**
       Get `factory` property.
       Returns: Factory for populating list items.
+        
+        The factory must be for configuring [gtk.list_item.ListItem] objects.
   */
   @property gtk.list_item_factory.ListItemFactory factory() nothrow
   {
@@ -130,6 +139,8 @@ class GridView : gtk.list_base.ListBase
       Set `factory` property.
       Params:
         propval = Factory for populating list items.
+          
+          The factory must be for configuring [gtk.list_item.ListItem] objects.
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
@@ -349,7 +360,8 @@ class GridView : gtk.list_base.ListBase
       If it isn't, then the changes will take effect once that happens.
   
       Params:
-        pos = position of the item
+        pos = position of the item. Must be less than the number of
+            items in the view.
         flags = actions to perform
         scroll = details of how to perform
             the scroll operation or null to scroll into view
@@ -525,6 +537,8 @@ class GridViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
       Set `factory` property.
       Params:
         propval = Factory for populating list items.
+          
+          The factory must be for configuring [gtk.list_item.ListItem] objects.
       Returns: Builder instance for fluent chaining
   */
   T factory(gtk.list_item_factory.ListItemFactory propval) nothrow

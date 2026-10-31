@@ -106,6 +106,9 @@ class DrawContext : gobject.object.ObjectWrap
   
       Params:
         region = minimum region that should be drawn
+  
+      Deprecated: Drawing directly to the surface is no longer recommended.
+          Use [gsk.render_node.RenderNode] and [gsk.renderer.Renderer].
   */
   void beginFrame(cairo.region.Region region) nothrow
   {
@@ -121,6 +124,9 @@ class DrawContext : gobject.object.ObjectWrap
       When using a [gdk.glcontext.GLContext], this function may call `glFlush()`
       implicitly before returning; it is not recommended to call `glFlush()`
       explicitly before calling this function.
+  
+      Deprecated: Drawing directly to the surface is no longer recommended.
+          Use [gsk.render_node.RenderNode] and [gsk.renderer.Renderer].
   */
   void endFrame() nothrow
   {
@@ -149,6 +155,9 @@ class DrawContext : gobject.object.ObjectWrap
       If context is not in between calls to [gdk.draw_context.DrawContext.beginFrame]
       and [gdk.draw_context.DrawContext.endFrame], null will be returned.
       Returns: a Cairo region
+  
+      Deprecated: Drawing directly to the surface is no longer recommended.
+          Use [gsk.render_node.RenderNode] and [gsk.renderer.Renderer].
   */
   cairo.region.Region getFrameRegion() nothrow
   {
@@ -178,6 +187,9 @@ class DrawContext : gobject.object.ObjectWrap
       may be effecting the contents of the context's surface.
       Returns: true if the context is between [gdk.draw_context.DrawContext.beginFrame]
           and [gdk.draw_context.DrawContext.endFrame] calls.
+  
+      Deprecated: Drawing directly to the surface is no longer recommended.
+          Use [gsk.render_node.RenderNode] and [gsk.renderer.Renderer].
   */
   bool isInFrame() nothrow
   {

@@ -96,44 +96,13 @@ uint getMinorVersion() nothrow
     
     This function can be called several times, but is meant to be called at the
     beginning of main(), before any other GtkSourceView function call.
+    
+    The counterpart to this function is `funcfinalize` which can be convenient
+    when using memory debugging tools.
 */
 void init_() nothrow
 {
   gtk_source_init();
-}
-
-/**
-    Simplified version of `funcscheduler_add_full`.
-
-    Params:
-      callback = the callback to execute
-    Returns: 
-*/
-size_t schedulerAdd(gtksource.types.SchedulerCallback callback) nothrow
-{
-  extern(C) gboolean _callbackCallback(long deadline, void* userData) nothrow
-  {
-    ptrThawGC(userData);
-    bool _dretval;
-    auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
-
-    try
-    {
-      _dretval = (*_dlg)(deadline);
-    }
-    catch (Exception e)
-    {
-      gidInvokeCallbackExceptionHandler(e, "gtksource.types.SchedulerCallback");
-    }
-    auto _retval = cast(gboolean)_dretval;
-
-    return _retval;
-  }
-  auto _callbackCB = callback ? &_callbackCallback : null;
-  size_t _retval;
-  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-  _retval = gtk_source_scheduler_add(_callbackCB, _callback);
-  return _retval;
 }
 
 /**
@@ -151,7 +120,7 @@ size_t schedulerAdd(gtksource.types.SchedulerCallback callback) nothrow
       callback = the callback to execute
     Returns: 
 */
-size_t schedulerAddFull(gtksource.types.SchedulerCallback callback) nothrow
+size_t schedulerAdd(gtksource.types.SchedulerCallback callback) nothrow
 {
   extern(C) gboolean _callbackCallback(long deadline, void* userData) nothrow
   {

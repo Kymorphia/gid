@@ -19,6 +19,8 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.shortcut_manager;
+import gtk.shortcut_manager_mixin;
 import gtk.widget;
 
 /**
@@ -79,8 +81,7 @@ import gtk.widget;
     ## Async API
     
     [adw.alert_dialog.AlertDialog] can also be used via the [adw.alert_dialog.AlertDialog.choose] method.
-    This API follows the GIO async pattern, and the result can be obtained by
-    calling [adw.alert_dialog.AlertDialog.chooseFinish], for example:
+    This API follows the GIO async pattern, for example:
     
     ```c
     static void
@@ -125,7 +126,7 @@ import gtk.widget;
     
     [adw.alert_dialog.AlertDialog] supports adding responses in UI definitions by via the
     `<responses>` element that may contain multiple `<response>` elements, each
-    respresenting a response.
+    representing a response.
     
     Each of the `<response>` elements must have the `id` attribute specifying the
     response ID. The contents of the element are used as the response label.
@@ -270,10 +271,13 @@ class AlertDialog : adw.dialog.Dialog
       Get `defaultResponse` property.
       Returns: The response ID of the default response.
         
-        If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+        The button corresponding to this response will be set as the default widget
+        of the dialog.
         
-        If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-        will do nothing.
+        If not set, the default widget will not be set, and the last added response
+        will be focused by default.
+        
+        See [adw.dialog.Dialog.defaultWidget].
   */
   @property string defaultResponse() nothrow
   {
@@ -285,10 +289,13 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         propval = The response ID of the default response.
           
-          If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+          The button corresponding to this response will be set as the default widget
+          of the dialog.
           
-          If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-          will do nothing.
+          If not set, the default widget will not be set, and the last added response
+          will be focused by default.
+          
+          See [adw.dialog.Dialog.defaultWidget].
   */
   @property void defaultResponse(string propval) nothrow
   {
@@ -361,6 +368,53 @@ class AlertDialog : adw.dialog.Dialog
   }
 
   /**
+      Get `preferWideLayout` property.
+      Returns: Whether to prefer horizontal button layout.
+        
+        [adw.alert_dialog.AlertDialog] can present buttons horizontally or vertically depending
+        on available space, how many buttons there are and how wide they are.
+        
+        By default it will prefer to stack buttons vertically at medium sizes.
+        
+        Set to `TRUE` to prefer horizontal layout in these cases instead. This will
+        make the dialog slightly wider as well.
+        
+        Vertical layout may still be used if the dialog would get too wide
+        otherwise.
+        
+        Does nothing with just one button, or when the buttons are already
+        horizontal.
+  */
+  @property bool preferWideLayout() nothrow
+  {
+    return getPreferWideLayout();
+  }
+
+  /**
+      Set `preferWideLayout` property.
+      Params:
+        propval = Whether to prefer horizontal button layout.
+          
+          [adw.alert_dialog.AlertDialog] can present buttons horizontally or vertically depending
+          on available space, how many buttons there are and how wide they are.
+          
+          By default it will prefer to stack buttons vertically at medium sizes.
+          
+          Set to `TRUE` to prefer horizontal layout in these cases instead. This will
+          make the dialog slightly wider as well.
+          
+          Vertical layout may still be used if the dialog would get too wide
+          otherwise.
+          
+          Does nothing with just one button, or when the buttons are already
+          horizontal.
+  */
+  @property void preferWideLayout(bool propval) nothrow
+  {
+    setPreferWideLayout(propval);
+  }
+
+  /**
       Creates a new [adw.alert_dialog.AlertDialog].
       
       heading and body can be set to `NULL`. This can be useful if they need to
@@ -421,9 +475,6 @@ class AlertDialog : adw.dialog.Dialog
 
   /**
       This function shows self to the user.
-      
-      The callback will be called when the alert is dismissed. It should call
-      [adw.alert_dialog.AlertDialog.chooseFinish] to obtain the result.
       
       If the window is an [adw.window.Window] or [adw.application_window.ApplicationWindow], the dialog
       will be shown within it. Otherwise, it will be a separate window.
@@ -549,6 +600,17 @@ class AlertDialog : adw.dialog.Dialog
   {
     bool _retval;
     _retval = cast(bool)adw_alert_dialog_get_heading_use_markup(cast(AdwAlertDialog*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self prefers horizontal button layout.
+      Returns: whether to prefer wide layout
+  */
+  bool getPreferWideLayout() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_alert_dialog_get_prefer_wide_layout(cast(AdwAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -679,10 +741,13 @@ class AlertDialog : adw.dialog.Dialog
   /**
       Sets the ID of the default response of self.
       
-      If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+      The button corresponding to this response will be set as the default widget
+      of self.
       
-      If set to `NULL` or to a non-existent response ID, pressing <kbd>Enter</kbd>
-      will do nothing.
+      If not set, the default widget will not be set, and the last added response
+      will be focused by default.
+      
+      See [adw.dialog.Dialog.defaultWidget].
   
       Params:
         response = the default response ID
@@ -732,6 +797,31 @@ class AlertDialog : adw.dialog.Dialog
   }
 
   /**
+      Whether to prefer horizontal button layout.
+      
+      [adw.alert_dialog.AlertDialog] can present buttons horizontally or vertically depending
+      on available space, how many buttons there are and how wide they are.
+      
+      By default it will prefer to stack buttons vertically at medium sizes.
+      
+      Set to `TRUE` to prefer horizontal layout in these cases instead. This will
+      make the dialog slightly wider as well.
+      
+      Vertical layout may still be used if the dialog would get too wide
+      otherwise.
+      
+      Does nothing with just one button, or when the buttons are already
+      horizontal.
+  
+      Params:
+        preferWideLayout = whether to prefer wide layout
+  */
+  void setPreferWideLayout(bool preferWideLayout) nothrow
+  {
+    adw_alert_dialog_set_prefer_wide_layout(cast(AdwAlertDialog*)this._cPtr, preferWideLayout);
+  }
+
+  /**
       Sets the appearance for response.
       
       <picture>
@@ -739,12 +829,13 @@ class AlertDialog : adw.dialog.Dialog
         <img src="alert-dialog-appearance.png" alt="alert-dialog-appearance">
       </picture>
       
-      Use [adw.types.ResponseAppearance.Suggested] to mark important responses such as the
-      affirmative action, like the Save button in the example.
+      Use [adw.types.ResponseAppearance.Suggested] to mark important responses such
+      as the affirmative action, like the Save button in the example.
       
-      Use [adw.types.ResponseAppearance.Destructive] to draw attention to the potentially damaging
-      consequences of using response. This appearance acts as a warning to the
-      user. The Discard button in the example is using this appearance.
+      Use [adw.types.ResponseAppearance.Destructive] to draw attention to the
+      potentially damaging consequences of using response. This appearance acts as
+      a warning to the user. The Discard button in the example is using this
+      appearance.
       
       The default appearance is [adw.types.ResponseAppearance.Default].
       
@@ -910,10 +1001,13 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
       Params:
         propval = The response ID of the default response.
           
-          If set, pressing <kbd>Enter</kbd> will activate the corresponding button.
+          The button corresponding to this response will be set as the default widget
+          of the dialog.
           
-          If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
-          will do nothing.
+          If not set, the default widget will not be set, and the last added response
+          will be focused by default.
+          
+          See [adw.dialog.Dialog.defaultWidget].
       Returns: Builder instance for fluent chaining
   */
   T defaultResponse(string propval) nothrow
@@ -956,6 +1050,31 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
   T headingUseMarkup(bool propval) nothrow
   {
     return setProperty("heading-use-markup", propval);
+  }
+
+  /**
+      Set `preferWideLayout` property.
+      Params:
+        propval = Whether to prefer horizontal button layout.
+          
+          [adw.alert_dialog.AlertDialog] can present buttons horizontally or vertically depending
+          on available space, how many buttons there are and how wide they are.
+          
+          By default it will prefer to stack buttons vertically at medium sizes.
+          
+          Set to `TRUE` to prefer horizontal layout in these cases instead. This will
+          make the dialog slightly wider as well.
+          
+          Vertical layout may still be used if the dialog would get too wide
+          otherwise.
+          
+          Does nothing with just one button, or when the buttons are already
+          horizontal.
+      Returns: Builder instance for fluent chaining
+  */
+  T preferWideLayout(bool propval) nothrow
+  {
+    return setProperty("prefer-wide-layout", propval);
   }
 }
 

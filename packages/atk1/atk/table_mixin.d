@@ -310,7 +310,7 @@ template TableT()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_summary(cast(AtkTable*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 

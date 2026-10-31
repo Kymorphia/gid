@@ -24,10 +24,6 @@
 //!set callback[VideoGLTextureUpload].parameters.parameter[texture_id].type '<array zero-terminated="0" fixed-size="4" c:type="guint*"><type name="guint" c:type="guint"/></array>'
 //!set record[VideoGLTextureUploadMeta].method[upload].parameters.parameter[texture_id].type '<array zero-terminated="0" fixed-size="4" c:type="guint*"><type name="guint" c:type="guint"/></array>'
 //!set function[buffer_add_video_gl_texture_upload_meta].parameters.parameter[texture_type].type '<array zero-terminated="0" fixed-size="4" c:type="GstVideoGLTextureType*"><type name="VideoGLTextureType" c:type="GstVideoGLTextureType"/></array>'
-//!set function[buffer_add_video_sei_user_data_unregistered_meta].parameters.parameter[uuid].type '<array zero-terminated="0" fixed-size="16" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
-
-//# Fix array length
-//!set function[buffer_add_video_sei_user_data_unregistered_meta].parameters.parameter[data].type '<array length="3" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
 
 //# Set basic parameters to out
 //!set interface[Navigation].function[event_parse_modifier_state].parameters.parameter[state][direction] out

@@ -9,15 +9,15 @@ import glib.types;
 import gobject.boxed;
 
 /**
-    A [glib.pattern_spec.PatternSpec] struct is the 'compiled' form of a glob-style pattern.
+    A [glib.pattern_spec.PatternSpec] struct is the ‘compiled’ form of a glob-style pattern.
     
     The `func@GLib.pattern_match_simple` and [glib.pattern_spec.PatternSpec.match] functions
-    match a string against a pattern containing '*' and '?' wildcards with similar
-    semantics as the standard `glob()` function: '*' matches an arbitrary,
-    possibly empty, string, '?' matches an arbitrary character.
+    match a string against a pattern containing `*` and `?` wildcards with similar
+    semantics as the standard `glob()` function: `*` matches an arbitrary,
+    possibly empty, string, `?` matches an arbitrary character.
     
-    Note that in contrast to `glob()`, the '/' character can be matched by
-    the wildcards, there are no '[...]' character ranges and '*' and '?'
+    Note that in contrast to [`glob()`](man:glob(3)), the `/` character can be
+    matched by the wildcards, there are no `[…]` character ranges and `*` and `?`
     can not be escaped to include them literally in a pattern.
     
     When multiple strings must be matched against the same pattern, it is better
@@ -61,11 +61,11 @@ class PatternSpec : gobject.boxed.Boxed
   }
 
   /**
-      Compiles a pattern to a #GPatternSpec.
+      Compiles a pattern to a [glib.pattern_spec.PatternSpec].
   
       Params:
         pattern = a zero-terminated UTF-8 encoded string
-      Returns: a newly-allocated #GPatternSpec
+      Returns: a newly-allocated [glib.pattern_spec.PatternSpec]
   */
   this(string pattern) nothrow
   {
@@ -76,7 +76,7 @@ class PatternSpec : gobject.boxed.Boxed
   }
 
   /**
-      Copies pspec in a new #GPatternSpec.
+      Copies pspec in a new [glib.pattern_spec.PatternSpec].
       Returns: a copy of pspec.
   */
   glib.pattern_spec.PatternSpec copy() nothrow
@@ -103,27 +103,29 @@ class PatternSpec : gobject.boxed.Boxed
   }
 
   /**
-      Matches a string against a compiled pattern. Passing the correct
+      Matches a string against a compiled pattern.
+      
+      Passing the correct
       length of the string given is mandatory. The reversed string can be
-      omitted by passing null, this is more efficient if the reversed
+      omitted by passing `NULL`, this is more efficient if the reversed
       version of the string to be matched is not at hand, as
-      [glib.global.patternMatch] will only construct it if the compiled pattern
+      [glib.pattern_spec.PatternSpec.match] will only construct it if the compiled pattern
       requires reverse matches.
       
       Note that, if the user code will (possibly) match a string against a
       multitude of patterns containing wildcards, chances are high that
-      some patterns will require a reversed string. In this case, it's
+      some patterns will require a reversed string. In this case, it’s
       more efficient to provide the reversed string to avoid multiple
-      constructions thereof in the various calls to [glib.global.patternMatch].
+      constructions thereof in the various calls to [glib.pattern_spec.PatternSpec.match].
       
       Note also that the reverse of a UTF-8 encoded string can in general
-      not be obtained by [glib.global.strreverse]. This works only if the string
+      not be obtained by `funcGLib.strreverse`. This works only if the string
       does not contain any multibyte characters. GLib offers the
-      [glib.global.utf8Strreverse] function to reverse UTF-8 encoded strings.
+      `funcGLib.utf8_strreverse` function to reverse UTF-8 encoded strings.
   
       Params:
         string_ = the UTF-8 encoded string to match
-        stringReversed = the reverse of string or null
+        stringReversed = the reverse of string
       Returns: true if string matches pspec
   */
   bool match(string string_, string stringReversed = null) nothrow
@@ -140,9 +142,11 @@ class PatternSpec : gobject.boxed.Boxed
   }
 
   /**
-      Matches a string against a compiled pattern. If the string is to be
+      Matches a string against a compiled pattern.
+      
+      If the string is to be
       matched against more than one pattern, consider using
-      [glib.global.patternMatch] instead while supplying the reversed string.
+      [glib.pattern_spec.PatternSpec.match] instead while supplying the reversed string.
   
       Params:
         string_ = the UTF-8 encoded string to match

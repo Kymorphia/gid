@@ -68,11 +68,20 @@ alias hb_font_get_glyph_h_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
     
-    This method should retrieve the (X,Y) coordinates (in font units) of the
+    This method should retrieve the (X,Y) coordinates (in scaled units) of the
     origin for a glyph, for horizontal-direction text segments. Each
     coordinate must be returned in an #hb_position_t output parameter.
 */
 alias hb_font_get_glyph_h_origin_func_t = hb_font_get_glyph_origin_func_t;
+
+/**
+    A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
+    
+    This method should retrieve the (X,Y) coordinates (in scaled units) of the
+    origin for requested glyph, for horizontal-direction text segments. Each
+    coordinate must be returned in a the x/y #hb_position_t output parameters.
+*/
+alias hb_font_get_glyph_h_origins_func_t = hb_font_get_glyph_origins_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
@@ -102,11 +111,20 @@ alias hb_font_get_glyph_v_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
     
-    This method should retrieve the (X,Y) coordinates (in font units) of the
+    This method should retrieve the (X,Y) coordinates (in scaled units) of the
     origin for a glyph, for vertical-direction text segments. Each coordinate
     must be returned in an #hb_position_t output parameter.
 */
 alias hb_font_get_glyph_v_origin_func_t = hb_font_get_glyph_origin_func_t;
+
+/**
+    A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
+    
+    This method should retrieve the (X,Y) coordinates (in scaled units) of the
+    origin for requested glyph, for vertical-direction text segments. Each
+    coordinate must be returned in a the x/y #hb_position_t output parameters.
+*/
+alias hb_font_get_glyph_v_origins_func_t = hb_font_get_glyph_origins_func_t;
 
 /**
     Data type for bitmasks.
@@ -1611,11 +1629,26 @@ enum hb_aat_layout_feature_type_t
     
     In @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES, non-base
     characters are merged into the cluster of the base character that precedes them.
+    There is also cluster merging every time the clusters will otherwise become non-monotone.
     
     In @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS, non-base characters are initially
     assigned their own cluster values, which are not merged into preceding base
     clusters. This allows HarfBuzz to perform additional operations like reorder
-    sequences of adjacent marks.
+    sequences of adjacent marks. The output is still monotone, but the cluster
+    values are more granular.
+    
+    In @HB_BUFFER_CLUSTER_LEVEL_CHARACTERS, non-base characters are assigned their
+    own cluster values, which are not merged into preceding base clusters. Moreover,
+    the cluster values are not merged into monotone order. This is the most granular
+    cluster level, and it is useful for clients that need to know the exact cluster
+    values of each character, but is harder to use for clients, since clusters
+    might appear in any order.
+    
+    In @HB_BUFFER_CLUSTER_LEVEL_GRAPHEMES, non-base characters are merged into the
+    cluster of the base character that precedes them. This is similar to the Unicode
+    Grapheme Cluster algorithm, but it is not exactly the same. The output is
+    not forced to be monotone. This is useful for clients that want to use HarfBuzz
+    as a cheap implementation of the Unicode Grapheme Cluster algorithm.
     
     @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES is the default, because it maintains
     backward compatibility with older versions of HarfBuzz. New client programs that
@@ -1639,6 +1672,11 @@ enum hb_buffer_cluster_level_t
       Don't group cluster values.
   */
   Characters = 2,
+
+  /**
+      Only group clusters, but don't enforce monotone order.
+  */
+  Graphemes = 3,
 
   /**
       Default cluster level,
@@ -3873,6 +3911,61 @@ enum hb_script_t
   NagMundari = 1315006317,
 
   /**
+      `Gara`, Since: 10.0.0
+  */
+  Garay = 1197568609,
+
+  /**
+      `Gukh`, Since: 10.0.0
+  */
+  GurungKhema = 1198877544,
+
+  /**
+      `Krai`, Since: 10.0.0
+  */
+  KiratRai = 1265787241,
+
+  /**
+      `Onao`, Since: 10.0.0
+  */
+  OlOnal = 1332633967,
+
+  /**
+      `Sunu`, Since: 10.0.0
+  */
+  Sunuwar = 1400204917,
+
+  /**
+      `Todr`, Since: 10.0.0
+  */
+  Todhri = 1416586354,
+
+  /**
+      `Tutg`, Since: 10.0.0
+  */
+  TuluTigalari = 1416983655,
+
+  /**
+      `Berf`, Since: 11.5.0
+  */
+  BeriaErfe = 1113944678,
+
+  /**
+      `Sidt`, Since: 11.5.0
+  */
+  Sidetic = 1399415924,
+
+  /**
+      `Tayo`, Since: 11.5.0
+  */
+  TaiYo = 1415674223,
+
+  /**
+      `Tols`, Since: 11.5.0
+  */
+  TolongSiki = 1416588403,
+
+  /**
       No script set
   */
   Invalid = 0,
@@ -4544,7 +4637,7 @@ struct hb_feature_t
 struct hb_font_t;
 
 /**
-    Font-wide extent values, measured in font units.
+    Font-wide extent values, measured in scaled units.
     
     Note that typically @ascender is positive and @descender
     negative, in coordinate systems that grow up.
@@ -5135,6 +5228,8 @@ alias extern(C) void function(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_s
 
 alias extern(C) void function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) hb_font_draw_glyph_func_t;
 
+alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) hb_font_draw_glyph_or_fail_func_t;
+
 alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData) hb_font_get_font_extents_func_t;
 
 alias extern(C) hb_position_t function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData) hb_font_get_glyph_advance_func_t;
@@ -5155,6 +5250,8 @@ alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_codepoint
 
 alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData) hb_font_get_glyph_origin_func_t;
 
+alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, uint count, const(hb_codepoint_t)* firstGlyph, uint glyphStride, hb_position_t* firstX, uint xStride, hb_position_t* firstY, uint yStride, void* userData) hb_font_get_glyph_origins_func_t;
+
 alias extern(C) void function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) hb_font_get_glyph_shape_func_t;
 
 alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t* glyph, void* userData) hb_font_get_nominal_glyph_func_t;
@@ -5163,7 +5260,11 @@ alias extern(C) uint function(hb_font_t* font, void* fontData, uint count, const
 
 alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData) hb_font_get_variation_glyph_func_t;
 
-alias extern(C) void function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) hb_font_paint_glyph_func_t;
+alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) hb_font_paint_glyph_func_t;
+
+alias extern(C) hb_bool_t function(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) hb_font_paint_glyph_or_fail_func_t;
+
+alias extern(C) uint function(const(hb_face_t)* face, uint startOffset, uint* tableCount, hb_tag_t* tableTags, void* userData) hb_get_table_tags_func_t;
 
 alias extern(C) void function(hb_paint_funcs_t* funcs, void* paintData, hb_bool_t isForeground, hb_color_t color, void* userData) hb_paint_color_func_t;
 

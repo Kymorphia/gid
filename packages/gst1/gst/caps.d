@@ -8,6 +8,7 @@ import gobject.value;
 import gst.c.functions;
 import gst.c.types;
 import gst.caps_features;
+import gst.id_str;
 import gst.mini_object;
 import gst.structure;
 import gst.types;
@@ -145,6 +146,42 @@ class Caps : gobject.boxed.Boxed
   }
 
   /**
+      Creates a new #GstCaps that contains one #GstStructure with name
+      media_type.
+  
+      Params:
+        mediaType = the media type of the structure
+      Returns: the new #GstCaps
+  */
+  static gst.caps.Caps newIdStrEmptySimple(gst.id_str.IdStr mediaType) nothrow
+  {
+    GstCaps* _cretval;
+    _cretval = gst_caps_new_id_str_empty_simple(mediaType ? cast(const(GstIdStr)*)mediaType._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a new #GstCaps that contains one #GstStructure with name
+      media_type.
+      
+      media_type needs to be valid for the remaining lifetime of the process, e.g.
+      has to be a static string.
+  
+      Params:
+        mediaType = the media type of the structure
+      Returns: the new #GstCaps
+  */
+  static gst.caps.Caps newStaticStrEmptySimple(string mediaType) nothrow
+  {
+    GstCaps* _cretval;
+    const(char)* _mediaType = mediaType.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_caps_new_static_str_empty_simple(_mediaType);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Appends the structures contained in caps2 to caps1. The structures in
       caps2 are not copied -- they are transferred to caps1, and then caps2 is
       freed. If either caps is ANY, the resulting caps will be ANY.
@@ -201,9 +238,9 @@ class Caps : gobject.boxed.Boxed
       Creates a new #GstCaps as a copy of the old caps. The new caps will have a
       refcount of 1, owned by the caller. The structures are copied as well.
       
-      Note that this function is the semantic equivalent of a gst_caps_ref()
-      followed by a gst_caps_make_writable(). If you only want to hold on to a
-      reference to the data, you should use gst_caps_ref().
+      Note that this function is the semantic equivalent of a [gst.caps.Caps.ref_]
+      followed by a [gst.caps.Caps.makeWritable]. If you only want to hold on to a
+      reference to the data, you should use [gst.caps.Caps.ref_].
       Returns: the new #GstCaps
   */
   gst.caps.Caps copy() nothrow
@@ -269,9 +306,9 @@ class Caps : gobject.boxed.Boxed
       values. First the caps will be truncated and then the first structure will be
       fixated with [gst.structure.Structure.fixate].
       
-      This function takes ownership of caps and will call gst_caps_make_writable()
+      This function takes ownership of caps and will call [gst.caps.Caps.makeWritable]
       on it so you must not use caps afterwards unless you keep an additional
-      reference to it with gst_caps_ref().
+      reference to it with [gst.caps.Caps.ref_].
       
       Note that it is not guaranteed that the returned caps have exactly one
       structure. If caps are empty caps then the returned caps will be
@@ -332,7 +369,7 @@ class Caps : gobject.boxed.Boxed
       the caller should be aware that features inside a constant
       #GstCaps should not be modified. However, if you know the caps
       are writable, either because you have just copied them or made
-      them writable with gst_caps_make_writable(), you may modify the
+      them writable with [gst.caps.Caps.makeWritable], you may modify the
       features returned in the usual way, e.g. with functions like
       [gst.caps_features.CapsFeatures.add].
   
@@ -368,7 +405,7 @@ class Caps : gobject.boxed.Boxed
       the caller should be aware that structures inside a constant
       #GstCaps should not be modified. However, if you know the caps
       are writable, either because you have just copied them or made
-      them writable with gst_caps_make_writable(), you may modify the
+      them writable with [gst.caps.Caps.makeWritable], you may modify the
       structure returned in the usual way, e.g. with functions like
       [gst.structure.Structure.set].
   
@@ -383,6 +420,20 @@ class Caps : gobject.boxed.Boxed
     _cretval = gst_caps_get_structure(cast(const(GstCaps)*)this._cPtr, index);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+
+  /**
+      Sets the given field on all structures of caps to the given value.
+      This is a convenience function for calling [gst.structure.Structure.setValue] on
+      all structures of caps.
+  
+      Params:
+        field = name of the field to set
+        value = value to set the field to
+  */
+  void idStrSetValue(gst.id_str.IdStr field, gobject.value.Value value) nothrow
+  {
+    gst_caps_id_str_set_value(cast(GstCaps*)this._cPtr, field ? cast(const(GstIdStr)*)field._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -559,6 +610,41 @@ class Caps : gobject.boxed.Boxed
   }
 
   /**
+      Tests if you can safely modify caps. It is only safe to modify caps when
+      there is only one owner of the caps - ie, the object is writable.
+      Returns: 
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_caps_is_writable(cast(const(GstCaps)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns a writable copy of caps.
+      
+      If there is only one reference count on caps, the caller must be the owner,
+      and so this function will return the caps object unchanged. If on the other
+      hand there is more than one reference on the object, a new caps object will
+      be returned. The caller's reference on caps will be removed, and instead the
+      caller will own a reference to the returned object.
+      
+      In short, this function unrefs the caps in the argument and refs the caps
+      that it returns. Don't access the argument after calling this function. See
+      also: [gst.caps.Caps.ref_].
+      Returns: a writable caps which may or may not be the
+            same as caps
+  */
+  gst.caps.Caps makeWritable() nothrow
+  {
+    GstCaps* _cretval;
+    _cretval = gst_caps_make_writable(cast(GstCaps*)this._cPtr);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Calls the provided function once for each structure and caps feature in the
       #GstCaps. In contrast to [gst.caps.Caps.foreach_], the function may modify but not
       delete the structures and features. The caps must be mutable.
@@ -648,9 +734,9 @@ class Caps : gobject.boxed.Boxed
       caps, but contains no lists.  Each list is expanded into separate
       #GstStructure.
       
-      This function takes ownership of caps and will call gst_caps_make_writable()
+      This function takes ownership of caps and will call [gst.caps.Caps.makeWritable]
       on it so you must not use caps afterwards unless you keep an additional
-      reference to it with gst_caps_ref().
+      reference to it with [gst.caps.Caps.ref_].
       Returns: the normalized #GstCaps
   */
   gst.caps.Caps normalize() nothrow
@@ -735,14 +821,32 @@ class Caps : gobject.boxed.Boxed
   }
 
   /**
+      Sets the given field on all structures of caps to the given value.
+      This is a convenience function for calling [gst.structure.Structure.setValue] on
+      all structures of caps.
+      
+      field needs to be valid for the remaining lifetime of the process, e.g.
+      has to be a static string.
+  
+      Params:
+        field = name of the field to set
+        value = value to set the field to
+  */
+  void setValueStaticStr(string field, gobject.value.Value value) nothrow
+  {
+    const(char)* _field = field.toCString!(No.Malloc, No.Nullable);
+    gst_caps_set_value_static_str(cast(GstCaps*)this._cPtr, _field, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
       Converts the given caps into a representation that represents the
       same set of formats, but in a simpler form.  Component structures that are
       identical are merged.  Component structures that have values that can be
       merged are also merged.
       
-      This function takes ownership of caps and will call gst_caps_make_writable()
+      This function takes ownership of caps and will call [gst.caps.Caps.makeWritable]
       on it if necessary, so you must not use caps afterwards unless you keep an
-      additional reference to it with gst_caps_ref().
+      additional reference to it with [gst.caps.Caps.ref_].
       
       This method does not preserve the original order of caps.
       Returns: The simplified caps.
@@ -817,9 +921,9 @@ class Caps : gobject.boxed.Boxed
       Discards all but the first structure from caps. Useful when
       fixating.
       
-      This function takes ownership of caps and will call gst_caps_make_writable()
+      This function takes ownership of caps and will call [gst.caps.Caps.makeWritable]
       on it if necessary, so you must not use caps afterwards unless you keep an
-      additional reference to it with gst_caps_ref().
+      additional reference to it with [gst.caps.Caps.ref_].
       
       Note that it is not guaranteed that the returned caps have exactly one
       structure. If caps is any or empty caps then the returned caps will be

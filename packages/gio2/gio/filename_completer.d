@@ -64,13 +64,15 @@ class FilenameCompleter : gobject.object.ObjectWrap
   }
 
   /**
-      Obtains a completion for initial_text from completer.
+      Obtains a suffix completion for initial_text from completer.
+      
+      Suffix will be an empty string if there's no shared suffix among matching
+      completions. If there's no matching completions anyway, `NULL` is returned.
   
       Params:
         initialText = text to be completed.
-      Returns: a completed string, or null if no
-            completion exists. This string is not owned by GIO, so remember to [glib.global.gfree]
-            it when finished.
+      Returns: a suffix completion string, or `NULL` if no
+            completion exists.
   */
   string getCompletionSuffix(string initialText) nothrow
   {
@@ -112,6 +114,9 @@ class FilenameCompleter : gobject.object.ObjectWrap
   /**
       If dirs_only is true, completer will only
       complete directory names, and not file names.
+      
+      This function needs to be called before waiting for results from the
+      completer to be populated.
   
       Params:
         dirsOnly = a #gboolean.

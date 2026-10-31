@@ -172,6 +172,7 @@ __gshared extern(C) nothrow
   void function(GstAudioFilterClass* klass, GstCaps* allowedCaps) c_gst_audio_filter_class_add_pad_templates; ///
 
   // AudioFormatInfo
+  GType function() c_gst_audio_format_info_get_type; ///
   void function(const(GstAudioFormatInfo)* info, void* dest, size_t length) c_gst_audio_format_info_fill_silence; ///
 
   // AudioInfo
@@ -225,6 +226,8 @@ __gshared extern(C) nothrow
   gboolean function(GstAudioRingBuffer* buf, GstFormat srcFmt, long srcVal, GstFormat destFmt, long* destVal) c_gst_audio_ring_buffer_convert; ///
   uint function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_delay; ///
   gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_device_is_open; ///
+  ulong function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_get_segbase; ///
+  ulong function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_get_segdone; ///
   gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_acquired; ///
   gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_active; ///
   gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_is_flushing; ///
@@ -241,6 +244,7 @@ __gshared extern(C) nothrow
   void function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_set_errored; ///
   void function(GstAudioRingBuffer* buf, gboolean flushing) c_gst_audio_ring_buffer_set_flushing; ///
   void function(GstAudioRingBuffer* buf, ulong sample) c_gst_audio_ring_buffer_set_sample; ///
+  void function(GstAudioRingBuffer* buf, ulong segdone) c_gst_audio_ring_buffer_set_segdone; ///
   void function(GstAudioRingBuffer* buf, int readseg, GstClockTime timestamp) c_gst_audio_ring_buffer_set_timestamp; ///
   gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_start; ///
   gboolean function(GstAudioRingBuffer* buf) c_gst_audio_ring_buffer_stop; ///
@@ -299,7 +303,6 @@ __gshared extern(C) nothrow
   gboolean function(const(GstAudioChannelPosition)* position, int channels, gboolean forceOrder) c_gst_audio_check_valid_channel_positions; ///
   GType function() c_gst_audio_clipping_meta_api_get_type; ///
   GType function() c_gst_audio_downmix_meta_api_get_type; ///
-  GType function() c_gst_audio_format_info_get_type; ///
   const(GstAudioFormat)* function(uint* len) c_gst_audio_formats_raw; ///
   gboolean function(int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to, int* reorderMap) c_gst_audio_get_channel_reorder_map; ///
   uint function(const(GstAudioRingBufferSpec)* spec) c_gst_audio_iec61937_frame_size; ///
@@ -308,6 +311,7 @@ __gshared extern(C) nothrow
   GstCaps* function(const(GstAudioFormat)* formats, uint len, GstAudioLayout layout) c_gst_audio_make_raw_caps; ///
   GType function() c_gst_audio_meta_api_get_type; ///
   gboolean function(void* data, size_t size, GstAudioFormat format, int channels, const(GstAudioChannelPosition)* from, const(GstAudioChannelPosition)* to) c_gst_audio_reorder_channels; ///
+  void function(void* data, size_t size, int bps, int channels, const(int)* reorderMap) c_gst_audio_reorder_channels_with_reorder_map; ///
   GstAudioClippingMeta* function(GstBuffer* buffer, GstFormat format, ulong start, ulong end) c_gst_buffer_add_audio_clipping_meta; ///
   GstAudioDownmixMeta* function(GstBuffer* buffer, const(GstAudioChannelPosition)* fromPosition, int fromChannels, const(GstAudioChannelPosition)* toPosition, int toChannels, const(float*)* matrix) c_gst_buffer_add_audio_downmix_meta; ///
   GstAudioLevelMeta* function(GstBuffer* buffer, ubyte level, gboolean voiceActivity) c_gst_buffer_add_audio_level_meta; ///
@@ -741,6 +745,9 @@ alias gst_audio_filter_class_add_pad_templates = c_gst_audio_filter_class_add_pa
 // AudioFormatInfo
 
 /** */
+alias gst_audio_format_info_get_type = c_gst_audio_format_info_get_type;
+
+/** */
 alias gst_audio_format_info_fill_silence = c_gst_audio_format_info_fill_silence;
 
 // AudioInfo
@@ -876,6 +883,12 @@ alias gst_audio_ring_buffer_delay = c_gst_audio_ring_buffer_delay;
 alias gst_audio_ring_buffer_device_is_open = c_gst_audio_ring_buffer_device_is_open;
 
 /** */
+alias gst_audio_ring_buffer_get_segbase = c_gst_audio_ring_buffer_get_segbase;
+
+/** */
+alias gst_audio_ring_buffer_get_segdone = c_gst_audio_ring_buffer_get_segdone;
+
+/** */
 alias gst_audio_ring_buffer_is_acquired = c_gst_audio_ring_buffer_is_acquired;
 
 /** */
@@ -922,6 +935,9 @@ alias gst_audio_ring_buffer_set_flushing = c_gst_audio_ring_buffer_set_flushing;
 
 /** */
 alias gst_audio_ring_buffer_set_sample = c_gst_audio_ring_buffer_set_sample;
+
+/** */
+alias gst_audio_ring_buffer_set_segdone = c_gst_audio_ring_buffer_set_segdone;
 
 /** */
 alias gst_audio_ring_buffer_set_timestamp = c_gst_audio_ring_buffer_set_timestamp;
@@ -1070,9 +1086,6 @@ alias gst_audio_clipping_meta_api_get_type = c_gst_audio_clipping_meta_api_get_t
 alias gst_audio_downmix_meta_api_get_type = c_gst_audio_downmix_meta_api_get_type;
 
 /** */
-alias gst_audio_format_info_get_type = c_gst_audio_format_info_get_type;
-
-/** */
 alias gst_audio_formats_raw = c_gst_audio_formats_raw;
 
 /** */
@@ -1095,6 +1108,9 @@ alias gst_audio_meta_api_get_type = c_gst_audio_meta_api_get_type;
 
 /** */
 alias gst_audio_reorder_channels = c_gst_audio_reorder_channels;
+
+/** */
+alias gst_audio_reorder_channels_with_reorder_map = c_gst_audio_reorder_channels_with_reorder_map;
 
 /** */
 alias gst_buffer_add_audio_clipping_meta = c_gst_buffer_add_audio_clipping_meta;
@@ -1313,6 +1329,7 @@ shared static this()
   gidLink(cast(void**)&gst_audio_filter_class_add_pad_templates, "gst_audio_filter_class_add_pad_templates", libs);
 
   // AudioFormatInfo
+  gidLink(cast(void**)&gst_audio_format_info_get_type, "gst_audio_format_info_get_type", libs);
   gidLink(cast(void**)&gst_audio_format_info_fill_silence, "gst_audio_format_info_fill_silence", libs);
 
   // AudioInfo
@@ -1366,6 +1383,8 @@ shared static this()
   gidLink(cast(void**)&gst_audio_ring_buffer_convert, "gst_audio_ring_buffer_convert", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_delay, "gst_audio_ring_buffer_delay", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_device_is_open, "gst_audio_ring_buffer_device_is_open", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_get_segbase, "gst_audio_ring_buffer_get_segbase", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_get_segdone, "gst_audio_ring_buffer_get_segdone", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_is_acquired, "gst_audio_ring_buffer_is_acquired", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_is_active, "gst_audio_ring_buffer_is_active", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_is_flushing, "gst_audio_ring_buffer_is_flushing", libs);
@@ -1382,6 +1401,7 @@ shared static this()
   gidLink(cast(void**)&gst_audio_ring_buffer_set_errored, "gst_audio_ring_buffer_set_errored", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_set_flushing, "gst_audio_ring_buffer_set_flushing", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_set_sample, "gst_audio_ring_buffer_set_sample", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_segdone, "gst_audio_ring_buffer_set_segdone", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_set_timestamp, "gst_audio_ring_buffer_set_timestamp", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_start, "gst_audio_ring_buffer_start", libs);
   gidLink(cast(void**)&gst_audio_ring_buffer_stop, "gst_audio_ring_buffer_stop", libs);
@@ -1440,7 +1460,6 @@ shared static this()
   gidLink(cast(void**)&gst_audio_check_valid_channel_positions, "gst_audio_check_valid_channel_positions", libs);
   gidLink(cast(void**)&gst_audio_clipping_meta_api_get_type, "gst_audio_clipping_meta_api_get_type", libs);
   gidLink(cast(void**)&gst_audio_downmix_meta_api_get_type, "gst_audio_downmix_meta_api_get_type", libs);
-  gidLink(cast(void**)&gst_audio_format_info_get_type, "gst_audio_format_info_get_type", libs);
   gidLink(cast(void**)&gst_audio_formats_raw, "gst_audio_formats_raw", libs);
   gidLink(cast(void**)&gst_audio_get_channel_reorder_map, "gst_audio_get_channel_reorder_map", libs);
   gidLink(cast(void**)&gst_audio_iec61937_frame_size, "gst_audio_iec61937_frame_size", libs);
@@ -1449,6 +1468,7 @@ shared static this()
   gidLink(cast(void**)&gst_audio_make_raw_caps, "gst_audio_make_raw_caps", libs);
   gidLink(cast(void**)&gst_audio_meta_api_get_type, "gst_audio_meta_api_get_type", libs);
   gidLink(cast(void**)&gst_audio_reorder_channels, "gst_audio_reorder_channels", libs);
+  gidLink(cast(void**)&gst_audio_reorder_channels_with_reorder_map, "gst_audio_reorder_channels_with_reorder_map", libs);
   gidLink(cast(void**)&gst_buffer_add_audio_clipping_meta, "gst_buffer_add_audio_clipping_meta", libs);
   gidLink(cast(void**)&gst_buffer_add_audio_downmix_meta, "gst_buffer_add_audio_downmix_meta", libs);
   gidLink(cast(void**)&gst_buffer_add_audio_level_meta, "gst_buffer_add_audio_level_meta", libs);

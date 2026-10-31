@@ -14,7 +14,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.shortcut_trigger.ShortcutTrigger] tracks how a [gtk.shortcut.Shortcut] should be activated.
+    Tracks how a [gtk.shortcut.Shortcut] can be activated.
     
     To find out if a [gtk.shortcut_trigger.ShortcutTrigger] triggers, you can call
     [gtk.shortcut_trigger.ShortcutTrigger.trigger] on a [gdk.event.Event].

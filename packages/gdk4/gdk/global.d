@@ -26,7 +26,7 @@ import gobject.value;
 
 
 /**
-    The main way to not draw GL content in GTK.
+    Draws GL content onto a cairo context.
     
     It takes a render buffer ID (source_type == GL_RENDERBUFFER) or a texture
     id (source_type == GL_TEXTURE) and draws it onto cr with an OVER operation,
@@ -121,6 +121,8 @@ cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface) 
       pixbuf = a [gdkpixbuf.pixbuf.Pixbuf]
       pixbufX = X coordinate of location to place upper left corner of pixbuf
       pixbufY = Y coordinate of location to place upper left corner of pixbuf
+
+    Deprecated: Use [cairo.context.Context.setSourceSurface] and [gdk.texture.Texture.download]
 */
 void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY) nothrow
 {
@@ -140,13 +142,10 @@ void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba) nothrow
 }
 
 /**
-    Read content from the given input stream and deserialize it, asynchronously.
+    Reads content from the given input stream and deserialize it, asynchronously.
     
     The default I/O priority is [glib.types.PRIORITY_DEFAULT] (i.e. 0), and lower numbers
     indicate a higher priority.
-    
-    When the operation is finished, callback will be called. You must then
-    call `funcGdk.content_deserialize_finish` to get the result of the operation.
 
     Params:
       stream = a [gio.input_stream.InputStream] to read the serialized content from
@@ -206,9 +205,6 @@ bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.v
     
     The default I/O priority is [glib.types.PRIORITY_DEFAULT] (i.e. 0), and lower numbers
     indicate a higher priority.
-    
-    When the operation is finished, callback will be called. You must then
-    call `funcGdk.content_serialize_finish` to get the result of the operation.
 
     Params:
       stream = a [gio.output_stream.OutputStream] to write the serialized content to
@@ -256,14 +252,6 @@ bool contentSerializeFinish(gio.async_result.AsyncResult result)
   _retval = cast(bool)gdk_content_serialize_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
-  return _retval;
-}
-
-/** */
-gobject.types.GType dragSurfaceSizeGetType() nothrow
-{
-  gobject.types.GType _retval;
-  _retval = gdk_drag_surface_size_get_type();
   return _retval;
 }
 
@@ -450,7 +438,7 @@ uint keyvalToLower(uint keyval) nothrow
 }
 
 /**
-    Convert from a GDK key symbol to the corresponding Unicode
+    Converts from a GDK key symbol to the corresponding Unicode
     character.
     
     Note that the conversion does not take the current locale
@@ -579,21 +567,13 @@ void setAllowedBackends(string backends) nothrow
   gdk_set_allowed_backends(_backends);
 }
 
-/** */
-gobject.types.GType toplevelSizeGetType() nothrow
-{
-  gobject.types.GType _retval;
-  _retval = gdk_toplevel_size_get_type();
-  return _retval;
-}
-
 /**
-    Convert from a Unicode character to a key symbol.
+    Converts from a Unicode character to a key symbol.
 
     Params:
       wc = a Unicode character
-    Returns: the corresponding GDK key symbol, if one exists.
-        or, if there is no corresponding symbol, wc | 0x01000000
+    Returns: the corresponding GDK key symbol, if one exists,
+        or, if there is no corresponding symbol, `wc | 0x01000000`
 */
 uint unicodeToKeyval(uint wc) nothrow
 {

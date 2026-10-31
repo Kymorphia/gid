@@ -81,6 +81,7 @@ template NavigationT()
 
 
 
+
   /**
       Sends the indicated command to the navigation interface.
   
@@ -125,7 +126,7 @@ template NavigationT()
   
       Params:
         event = The type of mouse event, as a text string. Recognised values are
-          "mouse-button-press", "mouse-button-release" and "mouse-move".
+          "mouse-button-press", "mouse-button-release", "mouse-move" and "mouse-double-click".
         button = The button number of the button being pressed or released. Pass 0
           for mouse-move events.
         x = The x coordinate of the mouse event.

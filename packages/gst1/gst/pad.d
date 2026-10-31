@@ -199,7 +199,7 @@ class Pad : gst.object.ObjectWrap
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_pad_new_from_static_template(templ ? cast(GstStaticPadTemplate*)templ._cPtr : null, _name);
+    _cretval = gst_pad_new_from_static_template(templ ? cast(GstStaticPadTemplate*)templ._cPtr(No.Dup) : null, _name);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
@@ -272,8 +272,8 @@ class Pad : gst.object.ObjectWrap
   
       Params:
         mask = the probe mask
-        callback = #GstPadProbeCallback that will be called with notifications of
-                    the pad state
+        callback = #GstPadProbeCallback that will be called with
+                    notifications of the pad state
       Returns: an id or 0 if no probe is pending. The id can be used to remove the
         probe with [gst.pad.Pad.removeProbe]. When using GST_PAD_PROBE_TYPE_IDLE it can
         happen that the probe can be run immediately and if the probe returns
@@ -645,7 +645,7 @@ class Pad : gst.object.ObjectWrap
       
       If buffer points to a variable holding null, a valid new #GstBuffer will be
       placed in buffer when this function returns #GST_FLOW_OK. The new buffer
-      must be freed with gst_buffer_unref() after usage.
+      must be freed with [gst.buffer.Buffer.unref] after usage.
       
       When buffer points to a variable that points to a valid #GstBuffer, the
       buffer will be filled with the result data when this function returns
@@ -1155,7 +1155,7 @@ class Pad : gst.object.ObjectWrap
       
       If buffer points to a variable holding null, a valid new #GstBuffer will be
       placed in buffer when this function returns #GST_FLOW_OK. The new buffer
-      must be freed with gst_buffer_unref() after usage. When this function
+      must be freed with [gst.buffer.Buffer.unref] after usage. When this function
       returns any other result value, buffer will still point to null.
       
       When buffer points to a variable that points to a valid #GstBuffer, the
@@ -1223,10 +1223,10 @@ class Pad : gst.object.ObjectWrap
       elements.
       
       This function takes ownership of the provided event so you should
-      gst_event_ref() it if you want to reuse the event after this call.
+      [gst.event.Event.ref_] it if you want to reuse the event after this call.
   
       Params:
-        event = the #GstEvent to send to the pad.
+        event = the #GstEvent to push out of the pad.
       Returns: true if the event was handled.
         
         MT safe.
@@ -1320,7 +1320,7 @@ class Pad : gst.object.ObjectWrap
       if it is not null the returned caps will be a subset of filter.
       
       Note that this function does not return writable #GstCaps, use
-      gst_caps_make_writable() before modifying the caps.
+      [gst.caps.Caps.makeWritable] before modifying the caps.
   
       Params:
         filter = suggested #GstCaps, or null
@@ -1434,7 +1434,7 @@ class Pad : gst.object.ObjectWrap
       all necessary locks and checks.
       
       This function takes ownership of the provided event so you should
-      gst_event_ref() it if you want to reuse the event after this call.
+      [gst.event.Event.ref_] it if you want to reuse the event after this call.
   
       Params:
         event = the #GstEvent to send to the pad.
@@ -1485,7 +1485,10 @@ class Pad : gst.object.ObjectWrap
   }
 
   /**
-      Set the offset that will be applied to the running time of pad.
+      Set the offset that will be applied to the running time of pad. Upon next
+      buffer, every sticky events (notably segment) will be pushed again with
+      their running time adjusted. For that reason this is only reliable on
+      source pads.
   
       Params:
         offset = the offset

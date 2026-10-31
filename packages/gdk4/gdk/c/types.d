@@ -210,6 +210,57 @@ enum GdkAxisUse
 }
 
 /**
+    The values of this enumeration describe whether image data uses
+    the full range of 8-bit values.
+    
+    In digital broadcasting, it is common to reserve the lowest and
+    highest values. Typically the allowed values for the narrow range
+    are 16-235 for Y and 16-240 for u,v (when dealing with YUV data).
+*/
+enum GdkCicpRange
+{
+  /**
+      The values use the range of 16-235 (for Y) and 16-240 for u and v.
+  */
+  Narrow = 0,
+
+  /**
+      The values use the full range.
+  */
+  Full = 1,
+}
+
+/**
+    Enumerates the color channels of RGBA values as used in
+    [gdk.color.Color] and OpenGL/Vulkan shaders.
+    
+    Note that this is not the order of pixel values in Cairo
+    and [gdk.types.MemoryFormat] can have many different orders.
+*/
+enum GdkColorChannel
+{
+  /**
+      The red color channel, aka 0
+  */
+  Red = 0,
+
+  /**
+      The green color channel, aka 1
+  */
+  Green = 1,
+
+  /**
+      The blue color channel, aka 2
+  */
+  Blue = 2,
+
+  /**
+      The alpha color channel, aka 3
+  */
+  Alpha = 3,
+}
+
+/**
     Specifies the crossing mode for enter and leave events.
 */
 enum GdkCrossingMode
@@ -362,6 +413,11 @@ enum GdkDmabufError
 */
 enum GdkDragAction : uint
 {
+  /**
+      No action.
+  */
+  None = 0,
+
   /**
       Copy the data.
   */
@@ -566,9 +622,14 @@ enum GdkEventType
   TouchpadHold = 28,
 
   /**
+      A tablet pad axis event from a "dial".
+  */
+  PadDial = 29,
+
+  /**
       marks the end of the GdkEventType enumeration.
   */
-  EventLast = 29,
+  EventLast = 30,
 }
 
 /**
@@ -809,7 +870,7 @@ enum GdkKeyMatch
 }
 
 /**
-    [gdk.types.MemoryFormat] describes formats that image data can have in memory.
+    Describes formats that image data can have in memory.
     
     It describes formats by listing the contents of the memory passed to it.
     So [gdk.types.MemoryFormat.A8r8g8b8] will be 1 byte (8 bits) of alpha, followed by a
@@ -998,10 +1059,554 @@ enum GdkMemoryFormat
   X8b8g8r8 = 32,
 
   /**
+      Multiplane format with 2 planes.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cb followed by Cr.
+      Subsampled in both the X and Y direction.
+      
+      Commonly known by the fourcc "NV12".
+  */
+  G8B8r8420 = 33,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cr followed by Cb.
+      Subsampled in both the X and Y direction.
+      
+      Commonly known by the fourcc "NV21".
+  */
+  G8R8b8420 = 34,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cb followed by Cr.
+      Subsampled in the X direction.
+      
+      Commonly known by the fourcc "NV16".
+  */
+  G8B8r8422 = 35,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cr followed by Cb.
+      Subsampled in the X direction.
+      
+      Commonly known by the fourcc "NV61".
+  */
+  G8R8b8422 = 36,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cb followed by Cr.
+      This format is not subsampled.
+      
+      Commonly known by the fourcc "NV24".
+  */
+  G8B8r8444 = 37,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cr followed by Cb.
+      This format is not subsampled.
+      
+      Commonly known by the fourcc "NV42".
+  */
+  G8R8b8444 = 38,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      Each channel is a 16 bit integer, but only the highest 10 bits are used.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cr followed by Cb.
+      This format is not subsampled.
+      
+      Commonly known by the fourcc "P010".
+  */
+  G10x6B10x6r10x6420 = 39,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      Each channel is a 16 bit integer, but only the highest 10 bits are used.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cr followed by Cb.
+      This format is not subsampled.
+      
+      Commonly known by the fourcc "P012".
+  */
+  G12x4B12x4r12x4420 = 40,
+
+  /**
+      Multiplane format with 2 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      The first plane contains the first channel, usually containing
+      luma values.
+      The second plane with interleaved chroma values, Cr followed by Cb.
+      This format is not subsampled.
+      
+      Commonly known by the fourcc "P016".
+  */
+  G16B16r16420 = 41,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in both the X and Y direction with 4:1 ratio. It is
+      mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in both the X and Y direction with 4:1 ratio. It is
+      mapped into the 1st channel.
+      
+      Commonly known by the fourcc "YUV410".
+  */
+  G8B8R8410 = 42,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the second chroma chanel.
+      Subsampled in both the X and Y direction with 4:1 ratio. It is
+      mapped into the 1st channel.
+      
+      The third plane usually contains the first chroma channel.
+      Subsampled in both the X and Y direction with 4:1 ratio. It is
+      mapped into the 3rd channel.
+      
+      Commonly known by the fourcc "YVU410".
+  */
+  G8R8B8410 = 43,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in the X direction with 4:1 ratio. It is
+      mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in the X direction with 4:1 ratio. It is
+      mapped into the 1st channel.
+      
+      Commonly known by the fourcc "YUV411".
+  */
+  G8B8R8411 = 44,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the second chroma chanel.
+      Subsampled in the X direction with 4:1 ratio. It is
+      mapped into the 1st channel.
+      
+      The third plane usually contains the first chroma channel.
+      Subsampled in the X direction with 4:1 ratio. It is
+      mapped into the 3rd channel.
+      
+      Commonly known by the fourcc "YVU411".
+  */
+  G8R8B8411 = 45,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      1st channel.
+      
+      Commonly known by the fourcc "YUV420".
+  */
+  G8B8R8420 = 46,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the second chroma chanel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      1st channel.
+      
+      The third plane usually contains the first chroma channel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      3rd channel.
+      
+      Commonly known by the fourcc "YVU420".
+  */
+  G8R8B8420 = 47,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in the X direction. It is mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in the X direction. It is mapped into the 1st channel.
+      
+      Commonly known by the fourcc "YUV422".
+  */
+  G8B8R8422 = 48,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the second chroma chanel.
+      Subsampled in the X direction. It is mapped into the 1st channel.
+      
+      The third plane usually contains the first chroma channel.
+      Subsampled in the X direction. It is mapped into the 3rd channel.
+      
+      Commonly known by the fourcc "YVU422".
+  */
+  G8R8B8422 = 49,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel. It is
+      mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel. It is
+      mapped into the 1st channel.
+      
+      Commonly known by the fourcc "YUV444".
+  */
+  G8B8R8444 = 50,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 8 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the second chroma chanel.
+      Subsampled in the X direction. It is mapped into the 1st channel.
+      
+      The third plane usually contains the first chroma channel.
+      Subsampled in the X direction. It is mapped into the 3rd channel.
+      
+      Commonly known by the fourcc "YVU444".
+  */
+  G8R8B8444 = 51,
+
+  /**
+      Packed format with subsampled channels.
+      
+      Each channel is a 8 bit integer. The red and blue/chroma channels
+      are subsampled and interleaved with the green/luma channel.
+      
+      Each block contains 2 pixels, so the width must be a multiple of
+      2.
+      
+      Commonly known by the fourcc "YUYV".
+  */
+  G8b8g8r8422 = 52,
+
+  /**
+      Packed format with subsampled channels.
+      
+      Each channel is a 8 bit integer. The red and blue/chroma channels
+      are subsampled and interleaved with the green/luma channel.
+      
+      Each block contains 2 pixels, so the width must be a multiple of
+      2.
+      
+      Commonly known by the fourcc "YVYU".
+  */
+  G8r8g8b8422 = 53,
+
+  /**
+      Packed format with subsampled channels.
+      
+      Each channel is a 8 bit integer. The red and blue/chroma channels
+      are subsampled and interleaved with the green/luma channel.
+      
+      Each block contains 2 pixels, so the width must be a multiple of
+      2.
+      
+      Commonly known by the fourcc "VYUY".
+  */
+  R8g8b8g8422 = 54,
+
+  /**
+      Packed format with subsampled channels.
+      
+      Each channel is a 8 bit integer. The red and blue/chroma channels
+      are subsampled and interleaved with the green/luma channel.
+      
+      Each block contains 2 pixels, so the width must be a multiple of
+      2.
+      
+      Commonly known by the fourcc "UYVY".
+  */
+  B8g8r8g8422 = 55,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      Only the 10 lower bits are used. The remaining ones must be set to 0 by the
+      producer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      1st channel.
+      
+      Commonly known by the fourcc "S010".
+  */
+  X6g10X6b10X6r10420 = 56,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      Only the 10 lower bits are used. The remaining ones must be set to 0 by the
+      producer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in the X direction. It is mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in the X direction. It is mapped into the 1st channel.
+      
+      Commonly known by the fourcc "S210".
+  */
+  X6g10X6b10X6r10422 = 57,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      Only the 10 lower bits are used. The remaining ones must be set to 0 by the
+      producer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel. It is
+      mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel. It is
+      mapped into the 1st channel.
+      
+      Commonly known by the fourcc "S410".
+  */
+  X6g10X6b10X6r10444 = 58,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      Only the 12 lower bits are used. The remaining ones must be set to 0 by the
+      producer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      1st channel.
+      
+      Commonly known by the fourcc "S012".
+  */
+  X4g12X4b12X4r12420 = 59,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      Only the 12 lower bits are used. The remaining ones must be set to 0 by the
+      producer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in the X direction. It is mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in the X direction. It is mapped into the 1st channel.
+      
+      Commonly known by the fourcc "S212".
+  */
+  X4g12X4b12X4r12422 = 60,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      Only the 12 lower bits are used. The remaining ones must be set to 0 by the
+      producer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel. It is
+      mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel. It is
+      mapped into the 1st channel.
+      
+      Commonly known by the fourcc "S412".
+  */
+  X4g12X4b12X4r12444 = 61,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in both the X and Y direction. It is mapped into the
+      1st channel.
+      
+      Commonly known by the fourcc "S016".
+  */
+  G16B16R16420 = 62,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel.
+      Subsampled in the X direction. It is mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel.
+      Subsampled in the X direction. It is mapped into the 1st channel.
+      
+      Commonly known by the fourcc "S216".
+  */
+  G16B16R16422 = 63,
+
+  /**
+      Multiplane format with 3 planes.
+      
+      Each channel is a 16 bit integer.
+      
+      The first plane usually contains the luma channel. It is mapped
+      into the 2nd channel.
+      
+      The second plane usually contains the first chroma chanel. It is
+      mapped into the 3rd channel.
+      
+      The third plane usually contains the second chroma channel. It is
+      mapped into the 1st channel.
+      
+      Commonly known by the fourcc "S416".
+  */
+  G16B16R16444 = 64,
+
+  /**
       The number of formats. This value will change as
         more formats get added, so do not rely on its concrete integer.
   */
-  NFormats = 33,
+  NFormats = 65,
 }
 
 /**
@@ -1012,7 +1617,7 @@ enum GdkMemoryFormat
     Apple, CapsLock or ShiftLock.
     
     Note that GDK may add internal values to events which include values outside
-    of this enumeration. Your code should preserve and ignore them.  You can use
+    of this enumeration. Your code should preserve and ignore them. You can use
     [gdk.types.MODIFIER_MASK] to remove all private values.
 */
 enum GdkModifierType : uint
@@ -1028,8 +1633,8 @@ enum GdkModifierType : uint
   ShiftMask = 1,
 
   /**
-      a Lock key (depending on the modifier mapping of the
-       X server this may either be CapsLock or ShiftLock).
+      a Lock key (depending on the Windowing System configuration,
+         this may either be <kbd>CapsLock</kbd> or <kbd>ShiftLock</kbd>).
   */
   LockMask = 2,
 
@@ -1039,9 +1644,9 @@ enum GdkModifierType : uint
   ControlMask = 4,
 
   /**
-      the fourth modifier key (it depends on the modifier
-       mapping of the X server which key is interpreted as this modifier, but
-       normally it is the Alt key).
+      the fourth modifier key (it depends on the Windowing System
+         configuration which key is interpreted as this modifier, but normally it
+         is the <kbd>Alt</kbd> key).
   */
   AltMask = 8,
 
@@ -1071,17 +1676,17 @@ enum GdkModifierType : uint
   Button5Mask = 4096,
 
   /**
-      the Super modifier
+      the Super modifier.
   */
   SuperMask = 67108864,
 
   /**
-      the Hyper modifier
+      the Hyper modifier.
   */
   HyperMask = 134217728,
 
   /**
-      the Meta modifier
+      the Meta modifier. Maps to Command on macOS.
   */
   MetaMask = 268435456,
 }
@@ -1144,14 +1749,14 @@ enum GdkPaintableFlags : uint
         The [gdk.paintable.Paintable.invalidateSize] signal will never be
         emitted.
   */
-  Size = 1,
+  StaticSize = 1,
 
   /**
       The content is immutable.
         The [gdk.paintable.Paintable.invalidateContents] signal will never be
         emitted.
   */
-  Contents = 2,
+  StaticContents = 2,
 }
 
 /**
@@ -1184,6 +1789,28 @@ enum GdkScrollDirection
         in scroll events. See [gdk.scroll_event.ScrollEvent.getDeltas]
   */
   Smooth = 4,
+}
+
+/**
+    Used in scroll events, to announce the direction relative
+    to physical motion.
+*/
+enum GdkScrollRelativeDirection
+{
+  /**
+      Physical motion and event motion are the same
+  */
+  Identical = 0,
+
+  /**
+      Physical motion is inverted relative to event motion
+  */
+  Inverted = 1,
+
+  /**
+      Relative motion is unknown on this device or backend
+  */
+  Unknown = 2,
 }
 
 /**
@@ -1374,17 +2001,77 @@ enum GdkTextureError
   UnsupportedFormat = 3,
 }
 
-/** */
+/**
+    The kind of title bar gesture to emit with
+    [gdk.toplevel.Toplevel.titlebarGesture].
+*/
 enum GdkTitlebarGesture
 {
-  /** */
+  /**
+      double click gesture
+  */
   DoubleClick = 1,
 
-  /** */
+  /**
+      right click gesture
+  */
   RightClick = 2,
 
-  /** */
+  /**
+      middle click gesture
+  */
   MiddleClick = 3,
+}
+
+/**
+    Reflects what features a [gdk.toplevel.Toplevel] supports.
+*/
+enum GdkToplevelCapabilities : uint
+{
+  /**
+      Whether tiled window states are supported.
+  */
+  EdgeConstraints = 1,
+
+  /**
+      Whether inhibiting system shortcuts is supported.
+      See [gdk.toplevel.Toplevel.inhibitSystemShortcuts].
+  */
+  InhibitShortcuts = 2,
+
+  /**
+      Whether titlebar gestures are supported.
+      See [gdk.toplevel.Toplevel.titlebarGesture].
+  */
+  TitlebarGestures = 4,
+
+  /**
+      Whether showing the window menu is supported.
+      See [gdk.toplevel.Toplevel.showWindowMenu].
+  */
+  WindowMenu = 8,
+
+  /**
+      Whether the toplevel can be maximized.
+  */
+  Maximize = 16,
+
+  /**
+      Whether the toplevel can be made fullscreen.
+  */
+  Fullscreen = 32,
+
+  /**
+      Whether the toplevel can be minimized.
+      See [gdk.toplevel.Toplevel.minimize].
+  */
+  Minimize = 64,
+
+  /**
+      Whether the toplevel can be lowered.
+      See [gdk.toplevel.Toplevel.lower].
+  */
+  Lower = 128,
 }
 
 /**
@@ -1479,7 +2166,7 @@ enum GdkToplevelState : uint
   LeftResizable = 32768,
 
   /**
-      the surface is not visible to the user
+      The surface is not visible to the user.
   */
   Suspended = 65536,
 }
@@ -1547,7 +2234,7 @@ enum GdkVulkanError
 }
 
 /**
-    [gdk.app_launch_context.AppLaunchContext] handles launching an application in a graphical context.
+    Handles launching an application in a graphical context.
     
     It is an implementation of [gio.app_launch_context.AppLaunchContext] that provides startup
     notification and allows to launch applications on a specific workspace.
@@ -1575,8 +2262,7 @@ struct GdkAppLaunchContext;
 struct GdkButtonEvent;
 
 /**
-    [gdk.cairo_context.CairoContext] is an object representing the platform-specific
-    draw context.
+    Represents the platform-specific draw context.
     
     [gdk.cairo_context.CairoContext]s are created for a surface using
     [gdk.surface.Surface.createCairoContext], and the context
@@ -1585,8 +2271,33 @@ struct GdkButtonEvent;
 struct GdkCairoContext;
 
 /**
-    The [gdk.clipboard.Clipboard] object represents data shared between applications or
-    inside an application.
+    Contains the parameters that define a colorstate with cicp parameters.
+    
+    Cicp parameters are specified in the ITU-T H.273
+    [specification](https://www.itu.int/rec/T-REC-H.273/en).
+    
+    See the documentation of individual properties for supported values.
+    
+    The 'unspecified' value (2) is not treated in any special way, and
+    must be replaced by a different value before creating a color state.
+    
+    [gdk.cicp_params.CicpParams] can be used as a builder object to construct a color
+    state from Cicp data with [gdk.cicp_params.CicpParams.buildColorState].
+    The function will return an error if the given parameters are not
+    supported.
+    
+    You can obtain a [gdk.cicp_params.CicpParams] object from a color state with
+    [gdk.color_state.ColorState.createCicpParams]. This can be used to
+    create a variant of a color state, by changing just one of the cicp
+    parameters, or just to obtain information about the color state.
+*/
+struct GdkCicpParams;
+
+/** */
+struct GdkCicpParamsClass;
+
+/**
+    Represents data shared between applications or inside an application.
     
     To get a [gdk.clipboard.Clipboard] object, use [gdk.display.Display.getClipboard] or
     [gdk.display.Display.getPrimaryClipboard]. You can find out about the data
@@ -1606,8 +2317,20 @@ struct GdkCairoContext;
 struct GdkClipboard;
 
 /**
-    A [gdk.content_deserializer.ContentDeserializer] is used to deserialize content received via
-    inter-application data transfers.
+    Provides information to interpret colors and pixels in a variety of ways.
+    
+    They are also known as
+    [*color spaces*](https://en.wikipedia.org/wiki/Color_space).
+    
+    Crucially, GTK knows how to convert colors from one color
+    state to another.
+    
+    [gdk.color_state.ColorState] objects are immutable and therefore threadsafe.
+*/
+struct GdkColorState;
+
+/**
+    Deserializes content received via inter-application data transfers.
     
     The [gdk.content_deserializer.ContentDeserializer] transforms serialized content that is
     identified by a mime type into an object identified by a GType.
@@ -1621,8 +2344,7 @@ struct GdkClipboard;
 struct GdkContentDeserializer;
 
 /**
-    The [gdk.content_formats.ContentFormats] structure is used to advertise and negotiate the
-    format of content.
+    Used to advertise and negotiate the format of content.
     
     You will encounter [gdk.content_formats.ContentFormats] when interacting with objects
     controlling operations that pass data between different widgets, window
@@ -1657,14 +2379,13 @@ struct GdkContentDeserializer;
 struct GdkContentFormats;
 
 /**
-    A [gdk.content_formats_builder.ContentFormatsBuilder] is an auxiliary struct used to create
-    new [gdk.content_formats.ContentFormats], and should not be kept around.
+    Creates [gdk.content_formats.ContentFormats] objects.
 */
 struct GdkContentFormatsBuilder;
 
 /**
-    A [gdk.content_provider.ContentProvider] is used to provide content for the clipboard or
-    for drag-and-drop operations in a number of formats.
+    Provides content for the clipboard or for drag-and-drop operations
+    in a number of formats.
     
     To create a [gdk.content_provider.ContentProvider], use [gdk.content_provider.ContentProvider.newForValue]
     or [gdk.content_provider.ContentProvider.newForBytes].
@@ -1718,8 +2439,7 @@ struct GdkContentProviderClass
 }
 
 /**
-    A [gdk.content_serializer.ContentSerializer] is used to serialize content for
-    inter-application data transfers.
+    Serializes content for inter-application data transfers.
     
     The [gdk.content_serializer.ContentSerializer] transforms an object that is identified
     by a GType into a serialized form (i.e. a byte stream) that is
@@ -1739,7 +2459,7 @@ struct GdkContentSerializer;
 struct GdkCrossingEvent;
 
 /**
-    [gdk.cursor.Cursor] is used to create and destroy cursors.
+    Used to create and destroy cursors.
     
     Cursors are immutable objects, so once you created them, there is no way
     to modify them later. You should create a new cursor when you want to change
@@ -1787,8 +2507,7 @@ struct GdkDNDEvent;
 struct GdkDeleteEvent;
 
 /**
-    The [gdk.device.Device] object represents an input device, such
-    as a keyboard, a mouse, or a touchpad.
+    Represents an input device, such as a keyboard, mouse or touchpad.
     
     See the [gdk.seat.Seat] documentation for more information
     about the various kinds of devices, and their relationships.
@@ -1796,8 +2515,7 @@ struct GdkDeleteEvent;
 struct GdkDevice;
 
 /**
-    [gdk.device_pad.DevicePad] is an interface implemented by devices of type
-    [gdk.types.InputSource.TabletPad]
+    An interface for tablet pad devices.
     
     It allows querying the features provided by the pad device.
     
@@ -1825,7 +2543,7 @@ struct GdkDevicePadInterface;
 struct GdkDeviceTool;
 
 /**
-    [gdk.display.Display] objects are the GDK representation of a workstation.
+    A representation of a workstation.
     
     Their purpose are two-fold:
     
@@ -1843,8 +2561,9 @@ struct GdkDeviceTool;
 struct GdkDisplay;
 
 /**
-    A singleton object that offers notification when displays appear or
-    disappear.
+    Offers notification when displays appear or disappear.
+    
+    [gdk.display_manager.DisplayManager] is a singleton object.
     
     You can use [gdk.display_manager.DisplayManager.get] to obtain the [gdk.display_manager.DisplayManager]
     singleton, but that should be rarely necessary. Typically, initializing
@@ -1889,8 +2608,7 @@ struct GdkDisplay;
 struct GdkDisplayManager;
 
 /**
-    The [gdk.dmabuf_formats.DmabufFormats] struct provides information about
-    supported DMA buffer formats.
+    Provides information about supported DMA buffer formats.
     
     You can query whether a given format is supported with
     [gdk.dmabuf_formats.DmabufFormats.contains] and you can iterate
@@ -1923,8 +2641,7 @@ struct GdkDmabufFormats;
 struct GdkDmabufTexture;
 
 /**
-    [gdk.dmabuf_texture_builder.DmabufTextureBuilder] is a builder used to construct [gdk.texture.Texture]
-    objects from DMA buffers.
+    Constructs [gdk.texture.Texture] objects from DMA buffers.
     
     DMA buffers are commonly called **_dma-bufs_**.
     
@@ -1947,8 +2664,10 @@ struct GdkDmabufTexture;
     multiple planes, by specifying offsets from the beginning of the data.
     
     DMA buffers are exposed to user-space as file descriptors allowing to pass them
-    between processes. If a DMA buffer has multiple planes, there is one file
-    descriptor per plane.
+    between processes. If a DMA buffer has multiple planes, more than one file
+    descriptor may be present, up to the number of planes. If the number of file
+    descriptors is less than the number of planes, the remaining ones should be set to
+    -1.
     
     The format of the data (for graphics data, essentially its colorspace) is described
     by a 32-bit integer. These format identifiers are defined in the header file `drm_fourcc.h`
@@ -1990,7 +2709,7 @@ struct GdkDmabufTextureBuilderClass;
 struct GdkDmabufTextureClass;
 
 /**
-    The [gdk.drag.Drag] object represents the source of an ongoing DND operation.
+    Represents the source of an ongoing DND operation.
     
     A [gdk.drag.Drag] is created when a drag is started, and stays alive for duration of
     the DND operation. After a drag has been started with [gdk.drag.Drag.begin],
@@ -2004,7 +2723,7 @@ struct GdkDmabufTextureClass;
 struct GdkDrag;
 
 /**
-    A [gdk.drag_surface.DragSurface] is an interface for surfaces used during DND.
+    A surface that is used during DND.
 */
 struct GdkDragSurface;
 
@@ -2014,8 +2733,7 @@ struct GdkDragSurface;
 struct GdkDragSurfaceInterface;
 
 /**
-    The [gdk.drag_surface_size.DragSurfaceSize] struct contains information that is useful
-    to compute the size of a drag surface.
+    Contains information that is useful to compute the size of a drag surface.
 */
 struct GdkDragSurfaceSize;
 
@@ -2033,7 +2751,7 @@ struct GdkDragSurfaceSize;
 struct GdkDrawContext;
 
 /**
-    The [gdk.drop.Drop] object represents the target of an ongoing DND operation.
+    Represents the target of an ongoing DND operation.
     
     Possible drop sites get informed about the status of the ongoing drag
     operation with events of type [gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
@@ -2051,18 +2769,18 @@ struct GdkDrawContext;
 struct GdkDrop;
 
 /**
-    [gdk.event.Event]s are immutable data structures, created by GDK to
-    represent windowing system events.
+    Represents windowing system events.
     
     In GTK applications the events are handled automatically by toplevel
     widgets and passed on to the event controllers of appropriate widgets,
     so using [gdk.event.Event] and its related API is rarely needed.
+    
+    [gdk.event.Event] structs are immutable.
 */
 struct GdkEvent;
 
 /**
-    [gdk.event_sequence.EventSequence] is an opaque type representing a sequence
-    of related touch events.
+    An opaque type representing a sequence of related events.
 */
 struct GdkEventSequence;
 
@@ -2077,8 +2795,7 @@ struct GdkFileList;
 struct GdkFocusEvent;
 
 /**
-    A [gdk.frame_clock.FrameClock] tells the application when to update and repaint
-    a surface.
+    Tells the application when to update and repaint a surface.
     
     This may be synced to the vertical refresh rate of the monitor, for example.
     Even when the frame clock uses a simple timer rather than a hardware-based
@@ -2120,8 +2837,7 @@ struct GdkFrameClockClass;
 struct GdkFrameClockPrivate;
 
 /**
-    A [gdk.frame_timings.FrameTimings] object holds timing information for a single frame
-    of the application’s displays.
+    Holds timing information for a single frame of the application’s displays.
     
     To retrieve [gdk.frame_timings.FrameTimings] objects, use [gdk.frame_clock.FrameClock.getTimings]
     or [gdk.frame_clock.FrameClock.getCurrentTimings]. The information in
@@ -2132,8 +2848,7 @@ struct GdkFrameClockPrivate;
 struct GdkFrameTimings;
 
 /**
-    [gdk.glcontext.GLContext] is an object representing a platform-specific
-    OpenGL draw context.
+    Represents a platform-specific OpenGL draw context.
     
     [gdk.glcontext.GLContext]s are created for a surface using
     [gdk.surface.Surface.createGlContext], and the context will match
@@ -2185,13 +2900,12 @@ struct GdkFrameTimings;
 struct GdkGLContext;
 
 /**
-    A GdkTexture representing a GL texture object.
+    A [gdk.texture.Texture] representing a GL texture object.
 */
 struct GdkGLTexture;
 
 /**
-    [gdk.gltexture_builder.GLTextureBuilder] is a builder used to construct [gdk.texture.Texture] objects from
-    GL textures.
+    Constructs [gdk.texture.Texture] objects from GL textures.
     
     The operation is quite simple: Create a texture builder, set all the necessary
     properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.context],
@@ -2221,7 +2935,7 @@ struct GdkGrabBrokenEvent;
 struct GdkKeyEvent;
 
 /**
-    A [gdk.types.KeymapKey] is a hardware key that can be mapped to a keyval.
+    Represents a hardware key that can be mapped to a keyval.
 */
 struct GdkKeymapKey
 {
@@ -2255,6 +2969,24 @@ struct GdkKeymapKey
 */
 struct GdkMemoryTexture;
 
+/**
+    Constructs [gdk.texture.Texture] objects from system memory provided
+    via [glib.bytes.Bytes].
+    
+    The operation is quite simple: Create a texture builder, set all the necessary
+    properties - keep in mind that the properties [gdk.memory_texture_builder.MemoryTextureBuilder.bytes],
+    [gdk.memory_texture_builder.MemoryTextureBuilder.stride], [gdk.memory_texture_builder.MemoryTextureBuilder.width],
+    and [gdk.memory_texture_builder.MemoryTextureBuilder.height] are mandatory - and then call
+    [gdk.memory_texture_builder.MemoryTextureBuilder.build] to create the new texture.
+    
+    [gdk.memory_texture_builder.MemoryTextureBuilder] can be used for quick one-shot construction of
+    textures as well as kept around and reused to construct multiple textures.
+*/
+struct GdkMemoryTextureBuilder;
+
+/** */
+struct GdkMemoryTextureBuilderClass;
+
 /** */
 struct GdkMemoryTextureClass;
 
@@ -2262,8 +2994,7 @@ struct GdkMemoryTextureClass;
 struct GdkMonitorClass;
 
 /**
-    [gdk.monitor.MonitorWrap] objects represent the individual outputs that are
-    associated with a [gdk.display.Display].
+    Represents the individual outputs that are associated with a [gdk.display.Display].
     
     [gdk.display.Display] keeps a [gio.list_model.ListModel] to enumerate and monitor
     monitors with [gdk.display.Display.getMonitors]. You can use
@@ -2283,8 +3014,7 @@ struct GdkMotionEvent;
 struct GdkPadEvent;
 
 /**
-    [gdk.paintable.Paintable] is a simple interface used by GTK to represent content that
-    can be painted.
+    An interface for content that can be painted.
     
     The content of a [gdk.paintable.Paintable] can be painted anywhere at any size
     without requiring any sort of layout. The interface is inspired by
@@ -2309,7 +3039,7 @@ struct GdkPadEvent;
     a different output with the same snapshot. Once that happens, it will call
     [gdk.paintable.Paintable.invalidateContents] which will emit the
     [gdk.paintable.Paintable.invalidateContents] signal. If a paintable is known
-    to never change its contents, it will set the [gdk.types.PaintableFlags.Contents]
+    to never change its contents, it will set the [gdk.types.PaintableFlags.StaticContents]
     flag. If a consumer cannot deal with changing contents, it may call
     [gdk.paintable.Paintable.getCurrentImage] which will return a static
     paintable and use that.
@@ -2321,7 +3051,7 @@ struct GdkPadEvent;
     by calling [gdk.paintable.Paintable.invalidateSize] which will emit the
     [gdk.paintable.Paintable.invalidateSize] signal. And just like for contents,
     if a paintable is known to never change its size, it will set the
-    [gdk.types.PaintableFlags.Size] flag.
+    [gdk.types.PaintableFlags.StaticSize] flag.
     
     Besides API for applications, there are some functions that are only
     useful for implementing subclasses and should not be used by applications:
@@ -2357,8 +3087,8 @@ struct GdkPaintableInterface
 
   /**
       return a [gdk.paintable.Paintable] that does not change over
-        time. This means the [gdk.types.PaintableFlags.Size] and
-        [gdk.types.PaintableFlags.Contents] flag are set.
+        time. This means the [gdk.types.PaintableFlags.StaticSize] and
+        [gdk.types.PaintableFlags.StaticContents] flag are set.
   */
   extern(C) GdkPaintable* function(GdkPaintable* paintable) getCurrentImage;
 
@@ -2392,7 +3122,7 @@ struct GdkPaintableInterface
 }
 
 /**
-    A [gdk.popup.Popup] is a surface that is attached to another surface.
+    A surface that is attached to another surface.
     
     The [gdk.popup.Popup] is positioned relative to its parent surface.
     
@@ -2406,8 +3136,8 @@ struct GdkPopup;
 struct GdkPopupInterface;
 
 /**
-    The [gdk.popup_layout.PopupLayout] struct contains information that is
-    necessary position a [gdk.popup.Popup] relative to its parent.
+    Contains information that is necessary position a [gdk.popup.Popup]
+    relative to its parent.
     
     The positioning requires a negotiation with the windowing system,
     since it depends on external constraints, such as the position of
@@ -2448,8 +3178,7 @@ struct GdkPopupLayout;
 struct GdkProximityEvent;
 
 /**
-    A [gdk.rgba.RGBA] is used to represent a color, in a way that is compatible
-    with cairo’s notion of color.
+    Represents a color, in a way that is compatible with cairo’s notion of color.
     
     [gdk.rgba.RGBA] is a convenient way to pass colors around. It’s based on
     cairo’s way to deal with colors and mirrors its behavior. All values
@@ -2483,7 +3212,7 @@ struct GdkRGBA
 }
 
 /**
-    A [gtk.types.Rectangle] data type for representing rectangles.
+    Represents a rectangle.
     
     [gtk.types.Rectangle] is identical to [cairo.types.Rectangle]. Together with Cairo’s
     [cairo.region.Region] data type, these are the central types for representing
@@ -2528,8 +3257,7 @@ struct GdkRectangle
 struct GdkScrollEvent;
 
 /**
-    The [gdk.seat.Seat] object represents a collection of input devices
-    that belong to a user.
+    Represents a collection of input devices that belong to a user.
 */
 struct GdkSeat
 {
@@ -2548,7 +3276,7 @@ struct GdkSnapshot;
 struct GdkSnapshotClass;
 
 /**
-    A [gdk.surface.Surface] is a rectangular region on the screen.
+    Represents a rectangular region on the screen.
     
     It’s a low-level object, used to implement high-level objects
     such as [GtkWindow](../gtk4/class.Window.html).
@@ -2564,7 +3292,7 @@ struct GdkSurface;
 struct GdkSurfaceClass;
 
 /**
-    [gdk.texture.Texture] is the basic element used to refer to pixel data.
+    Refers to pixel data in various forms.
     
     It is primarily meant for pixel data that will not change over
     multiple frames, and will be used for a long time.
@@ -2578,7 +3306,18 @@ struct GdkSurfaceClass;
     
     [gdk.texture.Texture] is an immutable object: That means you cannot change
     anything about it other than increasing the reference count via
-    [gobject.object.ObjectWrap.ref_], and consequently, it is a thread-safe object.
+    [gobject.object.ObjectWrap.ref_], and consequently, it is a threadsafe object.
+    
+    GDK provides a number of threadsafe texture loading functions:
+    [gdk.texture.Texture.newFromResource],
+    [gdk.texture.Texture.newFromBytes],
+    [gdk.texture.Texture.newFromFile],
+    [gdk.texture.Texture.newFromFilename],
+    [gdk.texture.Texture.newForPixbuf]. Note that these are meant for loading
+    icons and resources that are shipped with the toolkit or application. It
+    is recommended that you use a dedicated image loading framework such as
+    [glycin](https://lib.rs/crates/glycin), if you need to load untrusted image
+    data.
 */
 struct GdkTexture;
 
@@ -2586,8 +3325,7 @@ struct GdkTexture;
 struct GdkTextureClass;
 
 /**
-    The [gdk.texture_downloader.TextureDownloader] is used to download the contents of a
-    [gdk.texture.Texture].
+    Used to download the contents of a [gdk.texture.Texture].
     
     It is intended to be created as a short-term object for a single download,
     but can be used for multiple downloads of different textures or with different
@@ -2600,7 +3338,7 @@ struct GdkTextureClass;
 struct GdkTextureDownloader;
 
 /**
-    A [gdk.types.TimeCoord] stores a single event in a motion history.
+    Stores a single event in a motion history.
     
     To check whether an axis is present, check whether the corresponding
     flag from the [gdk.types.AxisFlags] enumeration is set in the @flags
@@ -2626,7 +3364,7 @@ struct GdkTimeCoord
 }
 
 /**
-    A [gdk.toplevel.Toplevel] is a freestanding toplevel surface.
+    A freestanding toplevel surface.
     
     The [gdk.toplevel.Toplevel] interface provides useful APIs for interacting with
     the windowing system, such as controlling maximization and size of the
@@ -2638,8 +3376,8 @@ struct GdkToplevel;
 struct GdkToplevelInterface;
 
 /**
-    The [gdk.toplevel_layout.ToplevelLayout] struct contains information that
-    is necessary to present a sovereign window on screen.
+    Contains information that is necessary to present a sovereign
+    window on screen.
     
     The [gdk.toplevel_layout.ToplevelLayout] struct is necessary for using
     [gdk.toplevel.Toplevel.present].
@@ -2651,8 +3389,7 @@ struct GdkToplevelInterface;
 struct GdkToplevelLayout;
 
 /**
-    The [gdk.toplevel_size.ToplevelSize] struct contains information that is useful
-    to compute the size of a toplevel.
+    Contains information that is useful to compute the size of a toplevel.
 */
 struct GdkToplevelSize;
 
@@ -2672,8 +3409,7 @@ struct GdkTouchEvent;
 struct GdkTouchpadEvent;
 
 /**
-    [gdk.vulkan_context.VulkanContext] is an object representing the platform-specific
-    Vulkan draw context.
+    Represents the platform-specific Vulkan draw context.
     
     [gdk.vulkan_context.VulkanContext]s are created for a surface using
     [gdk.surface.Surface.createVulkanContext], and the context will match
@@ -2681,10 +3417,15 @@ struct GdkTouchpadEvent;
     
     Support for [gdk.vulkan_context.VulkanContext] is platform-specific and context creation
     can fail, returning null context.
+
+    Deprecated: GTK does not expose any Vulkan internals. This
+        struct is a leftover that was accidentally exposed.
 */
 struct GdkVulkanContext;
 
 alias extern(C) void function(GdkContentDeserializer* deserializer) GdkContentDeserializeFunc;
 
 alias extern(C) void function(GdkContentSerializer* serializer) GdkContentSerializeFunc;
+
+alias extern(C) GdkTexture* function(GdkCursor* cursor, int cursorSize, double scale, int* width, int* height, int* hotspotX, int* hotspotY, void* data) GdkCursorGetTextureCallback;
 

@@ -11,9 +11,9 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
-    A [gtk.shortcut_trigger.ShortcutTrigger] that combines two triggers.
+    Combines two shortcut triggers.
     
-    The [gtk.alternative_trigger.AlternativeTrigger] triggers when either of two trigger.
+    The [gtk.alternative_trigger.AlternativeTrigger] triggers when either of the two trigger.
     
     This can be cascaded to combine more than two triggers.
 */

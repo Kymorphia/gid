@@ -120,6 +120,8 @@ __gshared extern(C) nothrow
   hb_language_t function(const(hb_buffer_t)* buffer) c_hb_buffer_get_language; ///
   uint function(const(hb_buffer_t)* buffer) c_hb_buffer_get_length; ///
   hb_codepoint_t function(const(hb_buffer_t)* buffer) c_hb_buffer_get_not_found_glyph; ///
+  hb_codepoint_t function(const(hb_buffer_t)* buffer) c_hb_buffer_get_not_found_variation_selector_glyph; ///
+  uint function(const(hb_buffer_t)* buffer) c_hb_buffer_get_random_state; ///
   hb_codepoint_t function(const(hb_buffer_t)* buffer) c_hb_buffer_get_replacement_codepoint; ///
   hb_script_t function(const(hb_buffer_t)* buffer) c_hb_buffer_get_script; ///
   void function(const(hb_buffer_t)* buffer, hb_segment_properties_t* props) c_hb_buffer_get_segment_properties; ///
@@ -149,11 +151,14 @@ __gshared extern(C) nothrow
   hb_bool_t function(hb_buffer_t* buffer, uint length) c_hb_buffer_set_length; ///
   void function(hb_buffer_t* buffer, hb_buffer_message_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_buffer_set_message_func; ///
   void function(hb_buffer_t* buffer, hb_codepoint_t notFound) c_hb_buffer_set_not_found_glyph; ///
+  void function(hb_buffer_t* buffer, hb_codepoint_t notFoundVariationSelector) c_hb_buffer_set_not_found_variation_selector_glyph; ///
+  void function(hb_buffer_t* buffer, uint state) c_hb_buffer_set_random_state; ///
   void function(hb_buffer_t* buffer, hb_codepoint_t replacement) c_hb_buffer_set_replacement_codepoint; ///
   void function(hb_buffer_t* buffer, hb_script_t script) c_hb_buffer_set_script; ///
   void function(hb_buffer_t* buffer, const(hb_segment_properties_t)* props) c_hb_buffer_set_segment_properties; ///
   void function(hb_buffer_t* buffer, hb_unicode_funcs_t* unicodeFuncs) c_hb_buffer_set_unicode_funcs; ///
   hb_bool_t function(hb_buffer_t* buffer, hb_user_data_key_t* key, void* data, hb_destroy_func_t destroy, hb_bool_t replace) c_hb_buffer_set_user_data; ///
+  void* function(size_t nmemb, size_t size) c_hb_calloc; ///
   ubyte function(hb_color_t color) c_hb_color_get_alpha; ///
   ubyte function(hb_color_t color) c_hb_color_get_blue; ///
   ubyte function(hb_color_t color) c_hb_color_get_green; ///
@@ -190,6 +195,10 @@ __gshared extern(C) nothrow
   uint function(hb_blob_t* blob) c_hb_face_count; ///
   hb_face_t* function(hb_blob_t* blob, uint index) c_hb_face_create; ///
   hb_face_t* function(hb_reference_table_func_t referenceTableFunc, void* userData, hb_destroy_func_t destroy) c_hb_face_create_for_tables; ///
+  hb_face_t* function(const(char)* fileName, uint index) c_hb_face_create_from_file_or_fail; ///
+  hb_face_t* function(const(char)* fileName, uint index, const(char)* loaderName) c_hb_face_create_from_file_or_fail_using; ///
+  hb_face_t* function(hb_blob_t* blob, uint index) c_hb_face_create_or_fail; ///
+  hb_face_t* function(hb_blob_t* blob, uint index, const(char)* loaderName) c_hb_face_create_or_fail_using; ///
   void function(hb_face_t* face) c_hb_face_destroy; ///
   hb_face_t* function() c_hb_face_get_empty; ///
   uint function(const(hb_face_t)* face) c_hb_face_get_glyph_count; ///
@@ -197,11 +206,13 @@ __gshared extern(C) nothrow
   uint function(const(hb_face_t)* face, uint startOffset, uint* tableCount, hb_tag_t* tableTags) c_hb_face_get_table_tags; ///
   uint function(const(hb_face_t)* face) c_hb_face_get_upem; ///
   void* function(const(hb_face_t)* face, hb_user_data_key_t* key) c_hb_face_get_user_data; ///
-  hb_bool_t function(const(hb_face_t)* face) c_hb_face_is_immutable; ///
+  hb_bool_t function(hb_face_t* face) c_hb_face_is_immutable; ///
+  const(char*)* function() c_hb_face_list_loaders; ///
   void function(hb_face_t* face) c_hb_face_make_immutable; ///
   hb_face_t* function(hb_face_t* face) c_hb_face_reference; ///
   hb_blob_t* function(hb_face_t* face) c_hb_face_reference_blob; ///
   hb_blob_t* function(const(hb_face_t)* face, hb_tag_t tag) c_hb_face_reference_table; ///
+  void function(hb_face_t* face, hb_get_table_tags_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_face_set_get_table_tags_func; ///
   void function(hb_face_t* face, uint glyphCount) c_hb_face_set_glyph_count; ///
   void function(hb_face_t* face, uint index) c_hb_face_set_index; ///
   void function(hb_face_t* face, uint upem) c_hb_face_set_upem; ///
@@ -214,6 +225,7 @@ __gshared extern(C) nothrow
   hb_font_t* function(hb_font_t* parent) c_hb_font_create_sub_font; ///
   void function(hb_font_t* font) c_hb_font_destroy; ///
   void function(hb_font_t* font, hb_codepoint_t glyph, hb_draw_funcs_t* dfuncs, void* drawData) c_hb_font_draw_glyph; ///
+  hb_bool_t function(hb_font_t* font, hb_codepoint_t glyph, hb_draw_funcs_t* dfuncs, void* drawData) c_hb_font_draw_glyph_or_fail; ///
   hb_font_funcs_t* function() c_hb_font_funcs_create; ///
   void function(hb_font_funcs_t* ffuncs) c_hb_font_funcs_destroy; ///
   hb_font_funcs_t* function() c_hb_font_funcs_get_empty; ///
@@ -222,6 +234,7 @@ __gshared extern(C) nothrow
   void function(hb_font_funcs_t* ffuncs) c_hb_font_funcs_make_immutable; ///
   hb_font_funcs_t* function(hb_font_funcs_t* ffuncs) c_hb_font_funcs_reference; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_draw_glyph_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_draw_glyph_func; ///
+  void function(hb_font_funcs_t* ffuncs, hb_font_draw_glyph_or_fail_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_draw_glyph_or_fail_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_font_h_extents_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_font_h_extents_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_font_v_extents_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_font_v_extents_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_contour_point_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_contour_point_func; ///
@@ -232,15 +245,18 @@ __gshared extern(C) nothrow
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_advances_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_h_advances_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_kerning_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_h_kerning_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_origin_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_h_origin_func; ///
+  void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_h_origins_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_h_origins_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_name_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_name_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_shape_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_shape_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_advance_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_v_advance_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_advances_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_v_advances_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_kerning_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_v_kerning_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_origin_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_v_origin_func; ///
+  void function(hb_font_funcs_t* ffuncs, hb_font_get_glyph_v_origins_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_glyph_v_origins_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_nominal_glyph_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_nominal_glyph_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_nominal_glyphs_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_nominal_glyphs_func; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_paint_glyph_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_paint_glyph_func; ///
+  void function(hb_font_funcs_t* ffuncs, hb_font_paint_glyph_or_fail_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_paint_glyph_or_fail_func; ///
   hb_bool_t function(hb_font_funcs_t* ffuncs, hb_user_data_key_t* key, void* data, hb_destroy_func_t destroy, hb_bool_t replace) c_hb_font_funcs_set_user_data; ///
   void function(hb_font_funcs_t* ffuncs, hb_font_get_variation_glyph_func_t func, void* userData, hb_destroy_func_t destroy) c_hb_font_funcs_set_variation_glyph_func; ///
   hb_font_t* function() c_hb_font_get_empty; ///
@@ -258,6 +274,7 @@ __gshared extern(C) nothrow
   void function(hb_font_t* font, uint count, const(hb_codepoint_t)* firstGlyph, uint glyphStride, hb_position_t* firstAdvance, uint advanceStride) c_hb_font_get_glyph_h_advances; ///
   hb_position_t function(hb_font_t* font, hb_codepoint_t leftGlyph, hb_codepoint_t rightGlyph) c_hb_font_get_glyph_h_kerning; ///
   hb_bool_t function(hb_font_t* font, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y) c_hb_font_get_glyph_h_origin; ///
+  hb_bool_t function(hb_font_t* font, uint count, const(hb_codepoint_t)* firstGlyph, uint glyphStride, hb_position_t* firstX, uint xStride, hb_position_t* firstY, uint yStride) c_hb_font_get_glyph_h_origins; ///
   void function(hb_font_t* font, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, hb_direction_t direction, hb_position_t* x, hb_position_t* y) c_hb_font_get_glyph_kerning_for_direction; ///
   hb_bool_t function(hb_font_t* font, hb_codepoint_t glyph, char* name, uint size) c_hb_font_get_glyph_name; ///
   void function(hb_font_t* font, hb_codepoint_t glyph, hb_direction_t direction, hb_position_t* x, hb_position_t* y) c_hb_font_get_glyph_origin_for_direction; ///
@@ -266,6 +283,7 @@ __gshared extern(C) nothrow
   void function(hb_font_t* font, uint count, const(hb_codepoint_t)* firstGlyph, uint glyphStride, hb_position_t* firstAdvance, uint advanceStride) c_hb_font_get_glyph_v_advances; ///
   hb_position_t function(hb_font_t* font, hb_codepoint_t topGlyph, hb_codepoint_t bottomGlyph) c_hb_font_get_glyph_v_kerning; ///
   hb_bool_t function(hb_font_t* font, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y) c_hb_font_get_glyph_v_origin; ///
+  hb_bool_t function(hb_font_t* font, uint count, const(hb_codepoint_t)* firstGlyph, uint glyphStride, hb_position_t* firstX, uint xStride, hb_position_t* firstY, uint yStride) c_hb_font_get_glyph_v_origins; ///
   hb_bool_t function(hb_font_t* font, hb_font_extents_t* extents) c_hb_font_get_h_extents; ///
   hb_bool_t function(hb_font_t* font, hb_codepoint_t unicode, hb_codepoint_t* glyph) c_hb_font_get_nominal_glyph; ///
   uint function(hb_font_t* font, uint count, const(hb_codepoint_t)* firstUnicode, uint unicodeStride, hb_codepoint_t* firstGlyph, uint glyphStride) c_hb_font_get_nominal_glyphs; ///
@@ -285,12 +303,16 @@ __gshared extern(C) nothrow
   hb_bool_t function(hb_font_t* font, const(ubyte)* s, int len, hb_codepoint_t* glyph) c_hb_font_glyph_from_string; ///
   void function(hb_font_t* font, hb_codepoint_t glyph, char* s, uint size) c_hb_font_glyph_to_string; ///
   hb_bool_t function(hb_font_t* font) c_hb_font_is_immutable; ///
+  hb_bool_t function(hb_font_t* font) c_hb_font_is_synthetic; ///
+  const(char*)* function() c_hb_font_list_funcs; ///
   void function(hb_font_t* font) c_hb_font_make_immutable; ///
   void function(hb_font_t* font, hb_codepoint_t glyph, hb_paint_funcs_t* pfuncs, void* paintData, uint paletteIndex, hb_color_t foreground) c_hb_font_paint_glyph; ///
+  hb_bool_t function(hb_font_t* font, hb_codepoint_t glyph, hb_paint_funcs_t* pfuncs, void* paintData, uint paletteIndex, hb_color_t foreground) c_hb_font_paint_glyph_or_fail; ///
   hb_font_t* function(hb_font_t* font) c_hb_font_reference; ///
   void function(hb_font_t* font, hb_face_t* face) c_hb_font_set_face; ///
   void function(hb_font_t* font, hb_font_funcs_t* klass, void* fontData, hb_destroy_func_t destroy) c_hb_font_set_funcs; ///
   void function(hb_font_t* font, void* fontData, hb_destroy_func_t destroy) c_hb_font_set_funcs_data; ///
+  hb_bool_t function(hb_font_t* font, const(char)* name) c_hb_font_set_funcs_using; ///
   void function(hb_font_t* font, hb_font_t* parent) c_hb_font_set_parent; ///
   void function(hb_font_t* font, uint xPpem, uint yPpem) c_hb_font_set_ppem; ///
   void function(hb_font_t* font, float ptem) c_hb_font_set_ptem; ///
@@ -304,13 +326,17 @@ __gshared extern(C) nothrow
   void function(hb_font_t* font, hb_tag_t tag, float value) c_hb_font_set_variation; ///
   void function(hb_font_t* font, const(hb_variation_t)* variations, uint variationsLength) c_hb_font_set_variations; ///
   void function(hb_font_t* font, hb_codepoint_t glyph, hb_direction_t direction, hb_position_t* x, hb_position_t* y) c_hb_font_subtract_glyph_origin_for_direction; ///
+  void function(void* ptr) c_hb_free; ///
   hb_face_t* function(FT_Face ftFace, hb_destroy_func_t destroy) c_hb_ft_face_create; ///
   hb_face_t* function(FT_Face ftFace) c_hb_ft_face_create_cached; ///
+  hb_face_t* function(hb_blob_t* blob, uint index) c_hb_ft_face_create_from_blob_or_fail; ///
+  hb_face_t* function(const(char)* fileName, uint index) c_hb_ft_face_create_from_file_or_fail; ///
   hb_face_t* function(FT_Face ftFace) c_hb_ft_face_create_referenced; ///
   void function(hb_font_t* font) c_hb_ft_font_changed; ///
   hb_font_t* function(FT_Face ftFace, hb_destroy_func_t destroy) c_hb_ft_font_create; ///
   hb_font_t* function(FT_Face ftFace) c_hb_ft_font_create_referenced; ///
   FT_Face function(hb_font_t* font) c_hb_ft_font_get_face; ///
+  FT_Face function(hb_font_t* font) c_hb_ft_font_get_ft_face; ///
   int function(hb_font_t* font) c_hb_ft_font_get_load_flags; ///
   FT_Face function(hb_font_t* font) c_hb_ft_font_lock_face; ///
   void function(hb_font_t* font) c_hb_ft_font_set_funcs; ///
@@ -326,6 +352,7 @@ __gshared extern(C) nothrow
   hb_language_t function() c_hb_language_get_default; ///
   hb_bool_t function(hb_language_t language, hb_language_t specific) c_hb_language_matches; ///
   const(char)* function(hb_language_t language) c_hb_language_to_string; ///
+  void* function(size_t size) c_hb_malloc; ///
   hb_bool_t function(const(hb_map_t)* map) c_hb_map_allocation_successful; ///
   void function(hb_map_t* map) c_hb_map_clear; ///
   hb_map_t* function(const(hb_map_t)* map) c_hb_map_copy; ///
@@ -389,6 +416,7 @@ __gshared extern(C) nothrow
   uint function(hb_face_t* face, hb_tag_t tableTag, uint scriptIndex, uint languageIndex, uint startOffset, uint* featureCount, hb_tag_t* featureTags) c_hb_ot_layout_language_get_feature_tags; ///
   hb_bool_t function(hb_face_t* face, hb_tag_t tableTag, uint scriptIndex, uint languageIndex, uint* featureIndex, hb_tag_t* featureTag) c_hb_ot_layout_language_get_required_feature; ///
   hb_bool_t function(hb_face_t* face, hb_tag_t tableTag, uint scriptIndex, uint languageIndex, uint* featureIndex) c_hb_ot_layout_language_get_required_feature_index; ///
+  hb_bool_t function(hb_face_t* face, uint lookupIndex, hb_map_t* alternateCount, hb_map_t* alternateGlyphs) c_hb_ot_layout_lookup_collect_glyph_alternates; ///
   void function(hb_face_t* face, hb_tag_t tableTag, uint lookupIndex, hb_set_t* glyphsBefore, hb_set_t* glyphsInput, hb_set_t* glyphsAfter, hb_set_t* glyphsOutput) c_hb_ot_layout_lookup_collect_glyphs; ///
   uint function(hb_face_t* face, uint lookupIndex, hb_codepoint_t glyph, uint startOffset, uint* alternateCount, hb_codepoint_t* alternateGlyphs) c_hb_ot_layout_lookup_get_glyph_alternates; ///
   hb_position_t function(hb_font_t* font, uint lookupIndex, hb_direction_t direction, hb_codepoint_t glyph) c_hb_ot_layout_lookup_get_optical_bound; ///
@@ -429,6 +457,7 @@ __gshared extern(C) nothrow
   const(hb_ot_name_entry_t)* function(hb_face_t* face, uint* numEntries) c_hb_ot_name_list_names; ///
   void function(hb_font_t* font, hb_buffer_t* buffer, const(hb_feature_t)* features, uint numFeatures, hb_set_t* glyphs) c_hb_ot_shape_glyphs_closure; ///
   void function(hb_shape_plan_t* shapePlan, hb_tag_t tableTag, hb_set_t* lookupIndexes) c_hb_ot_shape_plan_collect_lookups; ///
+  uint function(hb_shape_plan_t* shapePlan, uint startOffset, uint* tagCount, hb_tag_t* tags) c_hb_ot_shape_plan_get_feature_tags; ///
   hb_tag_t function(hb_language_t language) c_hb_ot_tag_from_language; ///
   hb_language_t function(hb_tag_t tag) c_hb_ot_tag_to_language; ///
   hb_script_t function(hb_tag_t tag) c_hb_ot_tag_to_script; ///
@@ -479,10 +508,13 @@ __gshared extern(C) nothrow
   void function(hb_paint_funcs_t* funcs, void* paintData) c_hb_paint_pop_transform; ///
   void function(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font) c_hb_paint_push_clip_glyph; ///
   void function(hb_paint_funcs_t* funcs, void* paintData, float xmin, float ymin, float xmax, float ymax) c_hb_paint_push_clip_rectangle; ///
+  void function(hb_paint_funcs_t* funcs, void* paintData, const(hb_font_t)* font) c_hb_paint_push_font_transform; ///
   void function(hb_paint_funcs_t* funcs, void* paintData) c_hb_paint_push_group; ///
+  void function(hb_paint_funcs_t* funcs, void* paintData, const(hb_font_t)* font) c_hb_paint_push_inverse_font_transform; ///
   void function(hb_paint_funcs_t* funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy) c_hb_paint_push_transform; ///
   void function(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float r0, float x1, float y1, float r1) c_hb_paint_radial_gradient; ///
   void function(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float startAngle, float endAngle) c_hb_paint_sweep_gradient; ///
+  void* function(void* ptr, size_t size) c_hb_realloc; ///
   hb_script_t function(hb_tag_t tag) c_hb_script_from_iso15924_tag; ///
   hb_script_t function(const(ubyte)* str, int len) c_hb_script_from_string; ///
   hb_direction_t function(hb_script_t script) c_hb_script_get_horizontal_direction; ///
@@ -526,7 +558,6 @@ __gshared extern(C) nothrow
   void function(hb_set_t* set, const(hb_set_t)* other) c_hb_set_union; ///
   void function(hb_font_t* font, hb_buffer_t* buffer, const(hb_feature_t)* features, uint numFeatures) c_hb_shape; ///
   hb_bool_t function(hb_font_t* font, hb_buffer_t* buffer, const(hb_feature_t)* features, uint numFeatures, const(char*)* shaperList) c_hb_shape_full; ///
-  hb_bool_t function(hb_font_t* font, hb_buffer_t* buffer, const(hb_feature_t)* features, uint numFeatures, const(char*)* shaperList, float minTargetAdvance, float maxTargetAdvance, float* advance, hb_tag_t* varTag, float* varValue) c_hb_shape_justify; ///
   const(char*)* function() c_hb_shape_list_shapers; ///
   hb_shape_plan_t* function(hb_face_t* face, const(hb_segment_properties_t)* props, const(hb_feature_t)* userFeatures, uint numUserFeatures, const(char*)* shaperList) c_hb_shape_plan_create; ///
   hb_shape_plan_t* function(hb_face_t* face, const(hb_segment_properties_t)* props, const(hb_feature_t)* userFeatures, uint numUserFeatures, const(int)* coords, uint numCoords, const(char*)* shaperList) c_hb_shape_plan_create2; ///
@@ -825,6 +856,12 @@ alias hb_buffer_get_length = c_hb_buffer_get_length;
 alias hb_buffer_get_not_found_glyph = c_hb_buffer_get_not_found_glyph;
 
 /** */
+alias hb_buffer_get_not_found_variation_selector_glyph = c_hb_buffer_get_not_found_variation_selector_glyph;
+
+/** */
+alias hb_buffer_get_random_state = c_hb_buffer_get_random_state;
+
+/** */
 alias hb_buffer_get_replacement_codepoint = c_hb_buffer_get_replacement_codepoint;
 
 /** */
@@ -912,6 +949,12 @@ alias hb_buffer_set_message_func = c_hb_buffer_set_message_func;
 alias hb_buffer_set_not_found_glyph = c_hb_buffer_set_not_found_glyph;
 
 /** */
+alias hb_buffer_set_not_found_variation_selector_glyph = c_hb_buffer_set_not_found_variation_selector_glyph;
+
+/** */
+alias hb_buffer_set_random_state = c_hb_buffer_set_random_state;
+
+/** */
 alias hb_buffer_set_replacement_codepoint = c_hb_buffer_set_replacement_codepoint;
 
 /** */
@@ -925,6 +968,9 @@ alias hb_buffer_set_unicode_funcs = c_hb_buffer_set_unicode_funcs;
 
 /** */
 alias hb_buffer_set_user_data = c_hb_buffer_set_user_data;
+
+/** */
+alias hb_calloc = c_hb_calloc;
 
 /** */
 alias hb_color_get_alpha = c_hb_color_get_alpha;
@@ -1035,6 +1081,18 @@ alias hb_face_create = c_hb_face_create;
 alias hb_face_create_for_tables = c_hb_face_create_for_tables;
 
 /** */
+alias hb_face_create_from_file_or_fail = c_hb_face_create_from_file_or_fail;
+
+/** */
+alias hb_face_create_from_file_or_fail_using = c_hb_face_create_from_file_or_fail_using;
+
+/** */
+alias hb_face_create_or_fail = c_hb_face_create_or_fail;
+
+/** */
+alias hb_face_create_or_fail_using = c_hb_face_create_or_fail_using;
+
+/** */
 alias hb_face_destroy = c_hb_face_destroy;
 
 /** */
@@ -1059,6 +1117,9 @@ alias hb_face_get_user_data = c_hb_face_get_user_data;
 alias hb_face_is_immutable = c_hb_face_is_immutable;
 
 /** */
+alias hb_face_list_loaders = c_hb_face_list_loaders;
+
+/** */
 alias hb_face_make_immutable = c_hb_face_make_immutable;
 
 /** */
@@ -1069,6 +1130,9 @@ alias hb_face_reference_blob = c_hb_face_reference_blob;
 
 /** */
 alias hb_face_reference_table = c_hb_face_reference_table;
+
+/** */
+alias hb_face_set_get_table_tags_func = c_hb_face_set_get_table_tags_func;
 
 /** */
 alias hb_face_set_glyph_count = c_hb_face_set_glyph_count;
@@ -1107,6 +1171,9 @@ alias hb_font_destroy = c_hb_font_destroy;
 alias hb_font_draw_glyph = c_hb_font_draw_glyph;
 
 /** */
+alias hb_font_draw_glyph_or_fail = c_hb_font_draw_glyph_or_fail;
+
+/** */
 alias hb_font_funcs_create = c_hb_font_funcs_create;
 
 /** */
@@ -1129,6 +1196,9 @@ alias hb_font_funcs_reference = c_hb_font_funcs_reference;
 
 /** */
 alias hb_font_funcs_set_draw_glyph_func = c_hb_font_funcs_set_draw_glyph_func;
+
+/** */
+alias hb_font_funcs_set_draw_glyph_or_fail_func = c_hb_font_funcs_set_draw_glyph_or_fail_func;
 
 /** */
 alias hb_font_funcs_set_font_h_extents_func = c_hb_font_funcs_set_font_h_extents_func;
@@ -1161,6 +1231,9 @@ alias hb_font_funcs_set_glyph_h_kerning_func = c_hb_font_funcs_set_glyph_h_kerni
 alias hb_font_funcs_set_glyph_h_origin_func = c_hb_font_funcs_set_glyph_h_origin_func;
 
 /** */
+alias hb_font_funcs_set_glyph_h_origins_func = c_hb_font_funcs_set_glyph_h_origins_func;
+
+/** */
 alias hb_font_funcs_set_glyph_name_func = c_hb_font_funcs_set_glyph_name_func;
 
 /** */
@@ -1179,6 +1252,9 @@ alias hb_font_funcs_set_glyph_v_kerning_func = c_hb_font_funcs_set_glyph_v_kerni
 alias hb_font_funcs_set_glyph_v_origin_func = c_hb_font_funcs_set_glyph_v_origin_func;
 
 /** */
+alias hb_font_funcs_set_glyph_v_origins_func = c_hb_font_funcs_set_glyph_v_origins_func;
+
+/** */
 alias hb_font_funcs_set_nominal_glyph_func = c_hb_font_funcs_set_nominal_glyph_func;
 
 /** */
@@ -1186,6 +1262,9 @@ alias hb_font_funcs_set_nominal_glyphs_func = c_hb_font_funcs_set_nominal_glyphs
 
 /** */
 alias hb_font_funcs_set_paint_glyph_func = c_hb_font_funcs_set_paint_glyph_func;
+
+/** */
+alias hb_font_funcs_set_paint_glyph_or_fail_func = c_hb_font_funcs_set_paint_glyph_or_fail_func;
 
 /** */
 alias hb_font_funcs_set_user_data = c_hb_font_funcs_set_user_data;
@@ -1239,6 +1318,9 @@ alias hb_font_get_glyph_h_kerning = c_hb_font_get_glyph_h_kerning;
 alias hb_font_get_glyph_h_origin = c_hb_font_get_glyph_h_origin;
 
 /** */
+alias hb_font_get_glyph_h_origins = c_hb_font_get_glyph_h_origins;
+
+/** */
 alias hb_font_get_glyph_kerning_for_direction = c_hb_font_get_glyph_kerning_for_direction;
 
 /** */
@@ -1261,6 +1343,9 @@ alias hb_font_get_glyph_v_kerning = c_hb_font_get_glyph_v_kerning;
 
 /** */
 alias hb_font_get_glyph_v_origin = c_hb_font_get_glyph_v_origin;
+
+/** */
+alias hb_font_get_glyph_v_origins = c_hb_font_get_glyph_v_origins;
 
 /** */
 alias hb_font_get_h_extents = c_hb_font_get_h_extents;
@@ -1320,10 +1405,19 @@ alias hb_font_glyph_to_string = c_hb_font_glyph_to_string;
 alias hb_font_is_immutable = c_hb_font_is_immutable;
 
 /** */
+alias hb_font_is_synthetic = c_hb_font_is_synthetic;
+
+/** */
+alias hb_font_list_funcs = c_hb_font_list_funcs;
+
+/** */
 alias hb_font_make_immutable = c_hb_font_make_immutable;
 
 /** */
 alias hb_font_paint_glyph = c_hb_font_paint_glyph;
+
+/** */
+alias hb_font_paint_glyph_or_fail = c_hb_font_paint_glyph_or_fail;
 
 /** */
 alias hb_font_reference = c_hb_font_reference;
@@ -1336,6 +1430,9 @@ alias hb_font_set_funcs = c_hb_font_set_funcs;
 
 /** */
 alias hb_font_set_funcs_data = c_hb_font_set_funcs_data;
+
+/** */
+alias hb_font_set_funcs_using = c_hb_font_set_funcs_using;
 
 /** */
 alias hb_font_set_parent = c_hb_font_set_parent;
@@ -1377,10 +1474,19 @@ alias hb_font_set_variations = c_hb_font_set_variations;
 alias hb_font_subtract_glyph_origin_for_direction = c_hb_font_subtract_glyph_origin_for_direction;
 
 /** */
+alias hb_free = c_hb_free;
+
+/** */
 alias hb_ft_face_create = c_hb_ft_face_create;
 
 /** */
 alias hb_ft_face_create_cached = c_hb_ft_face_create_cached;
+
+/** */
+alias hb_ft_face_create_from_blob_or_fail = c_hb_ft_face_create_from_blob_or_fail;
+
+/** */
+alias hb_ft_face_create_from_file_or_fail = c_hb_ft_face_create_from_file_or_fail;
 
 /** */
 alias hb_ft_face_create_referenced = c_hb_ft_face_create_referenced;
@@ -1396,6 +1502,9 @@ alias hb_ft_font_create_referenced = c_hb_ft_font_create_referenced;
 
 /** */
 alias hb_ft_font_get_face = c_hb_ft_font_get_face;
+
+/** */
+alias hb_ft_font_get_ft_face = c_hb_ft_font_get_ft_face;
 
 /** */
 alias hb_ft_font_get_load_flags = c_hb_ft_font_get_load_flags;
@@ -1441,6 +1550,9 @@ alias hb_language_matches = c_hb_language_matches;
 
 /** */
 alias hb_language_to_string = c_hb_language_to_string;
+
+/** */
+alias hb_malloc = c_hb_malloc;
 
 /** */
 alias hb_map_allocation_successful = c_hb_map_allocation_successful;
@@ -1632,6 +1744,9 @@ alias hb_ot_layout_language_get_required_feature = c_hb_ot_layout_language_get_r
 alias hb_ot_layout_language_get_required_feature_index = c_hb_ot_layout_language_get_required_feature_index;
 
 /** */
+alias hb_ot_layout_lookup_collect_glyph_alternates = c_hb_ot_layout_lookup_collect_glyph_alternates;
+
+/** */
 alias hb_ot_layout_lookup_collect_glyphs = c_hb_ot_layout_lookup_collect_glyphs;
 
 /** */
@@ -1750,6 +1865,9 @@ alias hb_ot_shape_glyphs_closure = c_hb_ot_shape_glyphs_closure;
 
 /** */
 alias hb_ot_shape_plan_collect_lookups = c_hb_ot_shape_plan_collect_lookups;
+
+/** */
+alias hb_ot_shape_plan_get_feature_tags = c_hb_ot_shape_plan_get_feature_tags;
 
 /** */
 alias hb_ot_tag_from_language = c_hb_ot_tag_from_language;
@@ -1902,7 +2020,13 @@ alias hb_paint_push_clip_glyph = c_hb_paint_push_clip_glyph;
 alias hb_paint_push_clip_rectangle = c_hb_paint_push_clip_rectangle;
 
 /** */
+alias hb_paint_push_font_transform = c_hb_paint_push_font_transform;
+
+/** */
 alias hb_paint_push_group = c_hb_paint_push_group;
+
+/** */
+alias hb_paint_push_inverse_font_transform = c_hb_paint_push_inverse_font_transform;
 
 /** */
 alias hb_paint_push_transform = c_hb_paint_push_transform;
@@ -1912,6 +2036,9 @@ alias hb_paint_radial_gradient = c_hb_paint_radial_gradient;
 
 /** */
 alias hb_paint_sweep_gradient = c_hb_paint_sweep_gradient;
+
+/** */
+alias hb_realloc = c_hb_realloc;
 
 /** */
 alias hb_script_from_iso15924_tag = c_hb_script_from_iso15924_tag;
@@ -2041,9 +2168,6 @@ alias hb_shape = c_hb_shape;
 
 /** */
 alias hb_shape_full = c_hb_shape_full;
-
-/** */
-alias hb_shape_justify = c_hb_shape_justify;
 
 /** */
 alias hb_shape_list_shapers = c_hb_shape_list_shapers;
@@ -2297,6 +2421,8 @@ shared static this()
   gidLink(cast(void**)&hb_buffer_get_language, "hb_buffer_get_language", libs);
   gidLink(cast(void**)&hb_buffer_get_length, "hb_buffer_get_length", libs);
   gidLink(cast(void**)&hb_buffer_get_not_found_glyph, "hb_buffer_get_not_found_glyph", libs);
+  gidLink(cast(void**)&hb_buffer_get_not_found_variation_selector_glyph, "hb_buffer_get_not_found_variation_selector_glyph", libs);
+  gidLink(cast(void**)&hb_buffer_get_random_state, "hb_buffer_get_random_state", libs);
   gidLink(cast(void**)&hb_buffer_get_replacement_codepoint, "hb_buffer_get_replacement_codepoint", libs);
   gidLink(cast(void**)&hb_buffer_get_script, "hb_buffer_get_script", libs);
   gidLink(cast(void**)&hb_buffer_get_segment_properties, "hb_buffer_get_segment_properties", libs);
@@ -2326,11 +2452,14 @@ shared static this()
   gidLink(cast(void**)&hb_buffer_set_length, "hb_buffer_set_length", libs);
   gidLink(cast(void**)&hb_buffer_set_message_func, "hb_buffer_set_message_func", libs);
   gidLink(cast(void**)&hb_buffer_set_not_found_glyph, "hb_buffer_set_not_found_glyph", libs);
+  gidLink(cast(void**)&hb_buffer_set_not_found_variation_selector_glyph, "hb_buffer_set_not_found_variation_selector_glyph", libs);
+  gidLink(cast(void**)&hb_buffer_set_random_state, "hb_buffer_set_random_state", libs);
   gidLink(cast(void**)&hb_buffer_set_replacement_codepoint, "hb_buffer_set_replacement_codepoint", libs);
   gidLink(cast(void**)&hb_buffer_set_script, "hb_buffer_set_script", libs);
   gidLink(cast(void**)&hb_buffer_set_segment_properties, "hb_buffer_set_segment_properties", libs);
   gidLink(cast(void**)&hb_buffer_set_unicode_funcs, "hb_buffer_set_unicode_funcs", libs);
   gidLink(cast(void**)&hb_buffer_set_user_data, "hb_buffer_set_user_data", libs);
+  gidLink(cast(void**)&hb_calloc, "hb_calloc", libs);
   gidLink(cast(void**)&hb_color_get_alpha, "hb_color_get_alpha", libs);
   gidLink(cast(void**)&hb_color_get_blue, "hb_color_get_blue", libs);
   gidLink(cast(void**)&hb_color_get_green, "hb_color_get_green", libs);
@@ -2367,6 +2496,10 @@ shared static this()
   gidLink(cast(void**)&hb_face_count, "hb_face_count", libs);
   gidLink(cast(void**)&hb_face_create, "hb_face_create", libs);
   gidLink(cast(void**)&hb_face_create_for_tables, "hb_face_create_for_tables", libs);
+  gidLink(cast(void**)&hb_face_create_from_file_or_fail, "hb_face_create_from_file_or_fail", libs);
+  gidLink(cast(void**)&hb_face_create_from_file_or_fail_using, "hb_face_create_from_file_or_fail_using", libs);
+  gidLink(cast(void**)&hb_face_create_or_fail, "hb_face_create_or_fail", libs);
+  gidLink(cast(void**)&hb_face_create_or_fail_using, "hb_face_create_or_fail_using", libs);
   gidLink(cast(void**)&hb_face_destroy, "hb_face_destroy", libs);
   gidLink(cast(void**)&hb_face_get_empty, "hb_face_get_empty", libs);
   gidLink(cast(void**)&hb_face_get_glyph_count, "hb_face_get_glyph_count", libs);
@@ -2375,10 +2508,12 @@ shared static this()
   gidLink(cast(void**)&hb_face_get_upem, "hb_face_get_upem", libs);
   gidLink(cast(void**)&hb_face_get_user_data, "hb_face_get_user_data", libs);
   gidLink(cast(void**)&hb_face_is_immutable, "hb_face_is_immutable", libs);
+  gidLink(cast(void**)&hb_face_list_loaders, "hb_face_list_loaders", libs);
   gidLink(cast(void**)&hb_face_make_immutable, "hb_face_make_immutable", libs);
   gidLink(cast(void**)&hb_face_reference, "hb_face_reference", libs);
   gidLink(cast(void**)&hb_face_reference_blob, "hb_face_reference_blob", libs);
   gidLink(cast(void**)&hb_face_reference_table, "hb_face_reference_table", libs);
+  gidLink(cast(void**)&hb_face_set_get_table_tags_func, "hb_face_set_get_table_tags_func", libs);
   gidLink(cast(void**)&hb_face_set_glyph_count, "hb_face_set_glyph_count", libs);
   gidLink(cast(void**)&hb_face_set_index, "hb_face_set_index", libs);
   gidLink(cast(void**)&hb_face_set_upem, "hb_face_set_upem", libs);
@@ -2391,6 +2526,7 @@ shared static this()
   gidLink(cast(void**)&hb_font_create_sub_font, "hb_font_create_sub_font", libs);
   gidLink(cast(void**)&hb_font_destroy, "hb_font_destroy", libs);
   gidLink(cast(void**)&hb_font_draw_glyph, "hb_font_draw_glyph", libs);
+  gidLink(cast(void**)&hb_font_draw_glyph_or_fail, "hb_font_draw_glyph_or_fail", libs);
   gidLink(cast(void**)&hb_font_funcs_create, "hb_font_funcs_create", libs);
   gidLink(cast(void**)&hb_font_funcs_destroy, "hb_font_funcs_destroy", libs);
   gidLink(cast(void**)&hb_font_funcs_get_empty, "hb_font_funcs_get_empty", libs);
@@ -2399,6 +2535,7 @@ shared static this()
   gidLink(cast(void**)&hb_font_funcs_make_immutable, "hb_font_funcs_make_immutable", libs);
   gidLink(cast(void**)&hb_font_funcs_reference, "hb_font_funcs_reference", libs);
   gidLink(cast(void**)&hb_font_funcs_set_draw_glyph_func, "hb_font_funcs_set_draw_glyph_func", libs);
+  gidLink(cast(void**)&hb_font_funcs_set_draw_glyph_or_fail_func, "hb_font_funcs_set_draw_glyph_or_fail_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_font_h_extents_func, "hb_font_funcs_set_font_h_extents_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_font_v_extents_func, "hb_font_funcs_set_font_v_extents_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_contour_point_func, "hb_font_funcs_set_glyph_contour_point_func", libs);
@@ -2409,15 +2546,18 @@ shared static this()
   gidLink(cast(void**)&hb_font_funcs_set_glyph_h_advances_func, "hb_font_funcs_set_glyph_h_advances_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_h_kerning_func, "hb_font_funcs_set_glyph_h_kerning_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_h_origin_func, "hb_font_funcs_set_glyph_h_origin_func", libs);
+  gidLink(cast(void**)&hb_font_funcs_set_glyph_h_origins_func, "hb_font_funcs_set_glyph_h_origins_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_name_func, "hb_font_funcs_set_glyph_name_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_shape_func, "hb_font_funcs_set_glyph_shape_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_v_advance_func, "hb_font_funcs_set_glyph_v_advance_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_v_advances_func, "hb_font_funcs_set_glyph_v_advances_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_v_kerning_func, "hb_font_funcs_set_glyph_v_kerning_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_glyph_v_origin_func, "hb_font_funcs_set_glyph_v_origin_func", libs);
+  gidLink(cast(void**)&hb_font_funcs_set_glyph_v_origins_func, "hb_font_funcs_set_glyph_v_origins_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_nominal_glyph_func, "hb_font_funcs_set_nominal_glyph_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_nominal_glyphs_func, "hb_font_funcs_set_nominal_glyphs_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_paint_glyph_func, "hb_font_funcs_set_paint_glyph_func", libs);
+  gidLink(cast(void**)&hb_font_funcs_set_paint_glyph_or_fail_func, "hb_font_funcs_set_paint_glyph_or_fail_func", libs);
   gidLink(cast(void**)&hb_font_funcs_set_user_data, "hb_font_funcs_set_user_data", libs);
   gidLink(cast(void**)&hb_font_funcs_set_variation_glyph_func, "hb_font_funcs_set_variation_glyph_func", libs);
   gidLink(cast(void**)&hb_font_get_empty, "hb_font_get_empty", libs);
@@ -2435,6 +2575,7 @@ shared static this()
   gidLink(cast(void**)&hb_font_get_glyph_h_advances, "hb_font_get_glyph_h_advances", libs);
   gidLink(cast(void**)&hb_font_get_glyph_h_kerning, "hb_font_get_glyph_h_kerning", libs);
   gidLink(cast(void**)&hb_font_get_glyph_h_origin, "hb_font_get_glyph_h_origin", libs);
+  gidLink(cast(void**)&hb_font_get_glyph_h_origins, "hb_font_get_glyph_h_origins", libs);
   gidLink(cast(void**)&hb_font_get_glyph_kerning_for_direction, "hb_font_get_glyph_kerning_for_direction", libs);
   gidLink(cast(void**)&hb_font_get_glyph_name, "hb_font_get_glyph_name", libs);
   gidLink(cast(void**)&hb_font_get_glyph_origin_for_direction, "hb_font_get_glyph_origin_for_direction", libs);
@@ -2443,6 +2584,7 @@ shared static this()
   gidLink(cast(void**)&hb_font_get_glyph_v_advances, "hb_font_get_glyph_v_advances", libs);
   gidLink(cast(void**)&hb_font_get_glyph_v_kerning, "hb_font_get_glyph_v_kerning", libs);
   gidLink(cast(void**)&hb_font_get_glyph_v_origin, "hb_font_get_glyph_v_origin", libs);
+  gidLink(cast(void**)&hb_font_get_glyph_v_origins, "hb_font_get_glyph_v_origins", libs);
   gidLink(cast(void**)&hb_font_get_h_extents, "hb_font_get_h_extents", libs);
   gidLink(cast(void**)&hb_font_get_nominal_glyph, "hb_font_get_nominal_glyph", libs);
   gidLink(cast(void**)&hb_font_get_nominal_glyphs, "hb_font_get_nominal_glyphs", libs);
@@ -2462,12 +2604,16 @@ shared static this()
   gidLink(cast(void**)&hb_font_glyph_from_string, "hb_font_glyph_from_string", libs);
   gidLink(cast(void**)&hb_font_glyph_to_string, "hb_font_glyph_to_string", libs);
   gidLink(cast(void**)&hb_font_is_immutable, "hb_font_is_immutable", libs);
+  gidLink(cast(void**)&hb_font_is_synthetic, "hb_font_is_synthetic", libs);
+  gidLink(cast(void**)&hb_font_list_funcs, "hb_font_list_funcs", libs);
   gidLink(cast(void**)&hb_font_make_immutable, "hb_font_make_immutable", libs);
   gidLink(cast(void**)&hb_font_paint_glyph, "hb_font_paint_glyph", libs);
+  gidLink(cast(void**)&hb_font_paint_glyph_or_fail, "hb_font_paint_glyph_or_fail", libs);
   gidLink(cast(void**)&hb_font_reference, "hb_font_reference", libs);
   gidLink(cast(void**)&hb_font_set_face, "hb_font_set_face", libs);
   gidLink(cast(void**)&hb_font_set_funcs, "hb_font_set_funcs", libs);
   gidLink(cast(void**)&hb_font_set_funcs_data, "hb_font_set_funcs_data", libs);
+  gidLink(cast(void**)&hb_font_set_funcs_using, "hb_font_set_funcs_using", libs);
   gidLink(cast(void**)&hb_font_set_parent, "hb_font_set_parent", libs);
   gidLink(cast(void**)&hb_font_set_ppem, "hb_font_set_ppem", libs);
   gidLink(cast(void**)&hb_font_set_ptem, "hb_font_set_ptem", libs);
@@ -2481,13 +2627,17 @@ shared static this()
   gidLink(cast(void**)&hb_font_set_variation, "hb_font_set_variation", libs);
   gidLink(cast(void**)&hb_font_set_variations, "hb_font_set_variations", libs);
   gidLink(cast(void**)&hb_font_subtract_glyph_origin_for_direction, "hb_font_subtract_glyph_origin_for_direction", libs);
+  gidLink(cast(void**)&hb_free, "hb_free", libs);
   gidLink(cast(void**)&hb_ft_face_create, "hb_ft_face_create", libs);
   gidLink(cast(void**)&hb_ft_face_create_cached, "hb_ft_face_create_cached", libs);
+  gidLink(cast(void**)&hb_ft_face_create_from_blob_or_fail, "hb_ft_face_create_from_blob_or_fail", libs);
+  gidLink(cast(void**)&hb_ft_face_create_from_file_or_fail, "hb_ft_face_create_from_file_or_fail", libs);
   gidLink(cast(void**)&hb_ft_face_create_referenced, "hb_ft_face_create_referenced", libs);
   gidLink(cast(void**)&hb_ft_font_changed, "hb_ft_font_changed", libs);
   gidLink(cast(void**)&hb_ft_font_create, "hb_ft_font_create", libs);
   gidLink(cast(void**)&hb_ft_font_create_referenced, "hb_ft_font_create_referenced", libs);
   gidLink(cast(void**)&hb_ft_font_get_face, "hb_ft_font_get_face", libs);
+  gidLink(cast(void**)&hb_ft_font_get_ft_face, "hb_ft_font_get_ft_face", libs);
   gidLink(cast(void**)&hb_ft_font_get_load_flags, "hb_ft_font_get_load_flags", libs);
   gidLink(cast(void**)&hb_ft_font_lock_face, "hb_ft_font_lock_face", libs);
   gidLink(cast(void**)&hb_ft_font_set_funcs, "hb_ft_font_set_funcs", libs);
@@ -2503,6 +2653,7 @@ shared static this()
   gidLink(cast(void**)&hb_language_get_default, "hb_language_get_default", libs);
   gidLink(cast(void**)&hb_language_matches, "hb_language_matches", libs);
   gidLink(cast(void**)&hb_language_to_string, "hb_language_to_string", libs);
+  gidLink(cast(void**)&hb_malloc, "hb_malloc", libs);
   gidLink(cast(void**)&hb_map_allocation_successful, "hb_map_allocation_successful", libs);
   gidLink(cast(void**)&hb_map_clear, "hb_map_clear", libs);
   gidLink(cast(void**)&hb_map_copy, "hb_map_copy", libs);
@@ -2566,6 +2717,7 @@ shared static this()
   gidLink(cast(void**)&hb_ot_layout_language_get_feature_tags, "hb_ot_layout_language_get_feature_tags", libs);
   gidLink(cast(void**)&hb_ot_layout_language_get_required_feature, "hb_ot_layout_language_get_required_feature", libs);
   gidLink(cast(void**)&hb_ot_layout_language_get_required_feature_index, "hb_ot_layout_language_get_required_feature_index", libs);
+  gidLink(cast(void**)&hb_ot_layout_lookup_collect_glyph_alternates, "hb_ot_layout_lookup_collect_glyph_alternates", libs);
   gidLink(cast(void**)&hb_ot_layout_lookup_collect_glyphs, "hb_ot_layout_lookup_collect_glyphs", libs);
   gidLink(cast(void**)&hb_ot_layout_lookup_get_glyph_alternates, "hb_ot_layout_lookup_get_glyph_alternates", libs);
   gidLink(cast(void**)&hb_ot_layout_lookup_get_optical_bound, "hb_ot_layout_lookup_get_optical_bound", libs);
@@ -2606,6 +2758,7 @@ shared static this()
   gidLink(cast(void**)&hb_ot_name_list_names, "hb_ot_name_list_names", libs);
   gidLink(cast(void**)&hb_ot_shape_glyphs_closure, "hb_ot_shape_glyphs_closure", libs);
   gidLink(cast(void**)&hb_ot_shape_plan_collect_lookups, "hb_ot_shape_plan_collect_lookups", libs);
+  gidLink(cast(void**)&hb_ot_shape_plan_get_feature_tags, "hb_ot_shape_plan_get_feature_tags", libs);
   gidLink(cast(void**)&hb_ot_tag_from_language, "hb_ot_tag_from_language", libs);
   gidLink(cast(void**)&hb_ot_tag_to_language, "hb_ot_tag_to_language", libs);
   gidLink(cast(void**)&hb_ot_tag_to_script, "hb_ot_tag_to_script", libs);
@@ -2656,10 +2809,13 @@ shared static this()
   gidLink(cast(void**)&hb_paint_pop_transform, "hb_paint_pop_transform", libs);
   gidLink(cast(void**)&hb_paint_push_clip_glyph, "hb_paint_push_clip_glyph", libs);
   gidLink(cast(void**)&hb_paint_push_clip_rectangle, "hb_paint_push_clip_rectangle", libs);
+  gidLink(cast(void**)&hb_paint_push_font_transform, "hb_paint_push_font_transform", libs);
   gidLink(cast(void**)&hb_paint_push_group, "hb_paint_push_group", libs);
+  gidLink(cast(void**)&hb_paint_push_inverse_font_transform, "hb_paint_push_inverse_font_transform", libs);
   gidLink(cast(void**)&hb_paint_push_transform, "hb_paint_push_transform", libs);
   gidLink(cast(void**)&hb_paint_radial_gradient, "hb_paint_radial_gradient", libs);
   gidLink(cast(void**)&hb_paint_sweep_gradient, "hb_paint_sweep_gradient", libs);
+  gidLink(cast(void**)&hb_realloc, "hb_realloc", libs);
   gidLink(cast(void**)&hb_script_from_iso15924_tag, "hb_script_from_iso15924_tag", libs);
   gidLink(cast(void**)&hb_script_from_string, "hb_script_from_string", libs);
   gidLink(cast(void**)&hb_script_get_horizontal_direction, "hb_script_get_horizontal_direction", libs);
@@ -2703,7 +2859,6 @@ shared static this()
   gidLink(cast(void**)&hb_set_union, "hb_set_union", libs);
   gidLink(cast(void**)&hb_shape, "hb_shape", libs);
   gidLink(cast(void**)&hb_shape_full, "hb_shape_full", libs);
-  gidLink(cast(void**)&hb_shape_justify, "hb_shape_justify", libs);
   gidLink(cast(void**)&hb_shape_list_shapers, "hb_shape_list_shapers", libs);
   gidLink(cast(void**)&hb_shape_plan_create, "hb_shape_plan_create", libs);
   gidLink(cast(void**)&hb_shape_plan_create2, "hb_shape_plan_create2", libs);

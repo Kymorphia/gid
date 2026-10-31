@@ -55,6 +55,33 @@ class AggregatorPad : gst.pad.Pad
   }
 
   /**
+      Get `currentLevelBuffers` property.
+      Returns: The number of currently queued buffers inside this pad
+  */
+  @property ulong currentLevelBuffers() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-buffers");
+  }
+
+  /**
+      Get `currentLevelBytes` property.
+      Returns: The number of currently queued bytes inside this pad
+  */
+  @property ulong currentLevelBytes() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-bytes");
+  }
+
+  /**
+      Get `currentLevelTime` property.
+      Returns: The amount of currently queued time inside this pad
+  */
+  @property ulong currentLevelTime() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-time");
+  }
+
+  /**
       Get `emitSignals` property.
       Returns: Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
   */

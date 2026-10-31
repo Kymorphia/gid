@@ -434,6 +434,38 @@ class Value : gobject.object.ObjectWrap
   }
 
   /**
+      Gets a pointer to memory that contains the array buffer data.
+      
+      Obtains a pointer to the memory region that holds the contents of the
+      `ArrayBuffer`; modifications done to the data will be visible to JavaScript
+      code. If size is not null, the size in bytes of the memory region
+      will also be stored in the pointed location.
+      
+      Note that the pointer returned by this function is not guaranteed to remain
+      the same after calls to other JSC API functions. If you plan to access the
+      data of the `ArrayBuffer` later, you can keep a reference to the value and
+      obtain the data pointer at a later point. Keep in mind that if JavaScript
+      code has a chance to run, for example due to main loop events that result
+      in JSC being called, the contents of the memory region might be modified in
+      the meantime. Consider taking a copy of the data and using the copy instead
+      in asynchronous code.
+      Returns: pointer to memory.
+  */
+  ubyte[] arrayBufferGetData() nothrow
+  {
+    void* _cretval;
+    size_t _cretlength;
+    _cretval = jsc_value_array_buffer_get_data(cast(JSCValue*)this._cPtr, &_cretlength);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /**
       Gets the size in bytes of the array buffer.
       
       Obtains the size in bytes of the memory region that holds the contents of

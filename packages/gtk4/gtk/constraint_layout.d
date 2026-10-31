@@ -18,7 +18,7 @@ import gtk.layout_manager;
 import gtk.types;
 
 /**
-    A layout manager using constraints to describe relations between widgets.
+    Uses constraints to describe relations between widgets.
     
     [gtk.constraint_layout.ConstraintLayout] is a layout manager that uses relations between
     widget attributes, expressed via [gtk.constraint.Constraint] instances, to

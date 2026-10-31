@@ -9,8 +9,7 @@ import soup.message_headers;
 import soup.types;
 
 /**
-    An opaque type used to iterate over a [soup.message_headers.MessageHeaders]
-    structure.
+    An opaque type used to iterate over a [soup.message_headers.MessageHeaders] structure
     
     After intializing the iterator with [soup.message_headers_iter.MessageHeadersIter.init_], call
     [soup.message_headers_iter.MessageHeadersIter.next] to fetch data from it.
@@ -44,6 +43,20 @@ class MessageHeadersIter
   }
 
   /**
+      Initializes iter for iterating hdrs.
+  
+      Params:
+        iter = a pointer to a #SoupMessageHeadersIter structure
+        hdrs = a #SoupMessageHeaders
+  */
+  static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs) nothrow
+  {
+    SoupMessageHeadersIter _iter;
+    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs._cPtr(No.Dup) : null);
+    iter = new soup.message_headers_iter.MessageHeadersIter(cast(void*)&_iter, No.Take);
+  }
+
+  /**
       Yields the next name/value pair in the [soup.message_headers.MessageHeaders] being
       iterated by iter.
       
@@ -52,6 +65,7 @@ class MessageHeadersIter
       will be unchanged.
   
       Params:
+        iter = a #SoupMessageHeadersIter
         name = pointer to a variable to return
             the header name in
         value = pointer to a variable to return
@@ -59,29 +73,14 @@ class MessageHeadersIter
       Returns: true if another name and value were returned, false
           if the end of the headers has been reached.
   */
-  bool next(out string name, out string value) nothrow
+  static bool next(soup.message_headers_iter.MessageHeadersIter iter, out string name, out string value) nothrow
   {
     bool _retval;
     char* _name;
     char* _value;
-    _retval = cast(bool)soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)this._cPtr, &_name, &_value);
+    _retval = cast(bool)soup_message_headers_iter_next(iter ? cast(SoupMessageHeadersIter*)iter._cPtr : null, &_name, &_value);
     name = _name.fromCString!(No.Free);
     value = _value.fromCString!(No.Free);
     return _retval;
-  }
-
-  /**
-      Initializes iter for iterating hdrs.
-  
-      Params:
-        iter = a pointer to a [soup.message_headers_iter.MessageHeadersIter]
-            structure
-        hdrs = a [soup.message_headers.MessageHeaders]
-  */
-  static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs) nothrow
-  {
-    SoupMessageHeadersIter _iter;
-    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs._cPtr(No.Dup) : null);
-    iter = new soup.message_headers_iter.MessageHeadersIter(cast(void*)&_iter, No.Take);
   }
 }

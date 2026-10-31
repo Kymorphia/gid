@@ -10,7 +10,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    A [gtk.list_item_factory.ListItemFactory] creates widgets for the items taken from a [gio.list_model.ListModel].
+    Creates widgets for the items taken from a [gio.list_model.ListModel].
     
     This is one of the core concepts of handling list widgets such
     as [gtk.list_view.ListView] or [gtk.grid_view.GridView].
@@ -54,10 +54,9 @@ import gtk.types;
     If you intend to do changes to the behavior, it is recommended that you create
     a new [gtk.list_item_factory.ListItemFactory] which will allow the views to recreate its widgets.
     
-    Once you have chosen your factory and created it, you need to set it
-    on the view widget you want to use it with, such as via
-    [gtk.list_view.ListView.setFactory]. Reusing factories across different
-    views is allowed, but very uncommon.
+    Once you have chosen your factory and created it, you need to set it on the view
+    widget you want to use it with, such as via [gtk.list_view.ListView.setFactory].
+    Reusing factories across different views is allowed, but very uncommon.
 */
 class ListItemFactory : gobject.object.ObjectWrap
 {

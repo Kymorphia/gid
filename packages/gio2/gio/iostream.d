@@ -107,7 +107,7 @@ class IOStream : gobject.object.ObjectWrap
   */
   @property bool closed() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("closed");
+    return isClosed();
   }
 
   /**

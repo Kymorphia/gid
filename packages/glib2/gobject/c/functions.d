@@ -212,6 +212,7 @@ __gshared extern(C) nothrow
   void function(GTypeClass* gClass) c_g_type_class_unref; ///
   void function(GTypeClass* gClass) c_g_type_class_unref_uncached; ///
   void function(void* gClass, int* privateSizeOrOffset) c_g_type_class_adjust_private_offset; ///
+  GTypeClass* function(GType type) c_g_type_class_get; ///
   GTypeClass* function(GType type) c_g_type_class_peek; ///
   GTypeClass* function(GType type) c_g_type_class_peek_static; ///
   GTypeClass* function(GType type) c_g_type_class_ref; ///
@@ -452,6 +453,7 @@ __gshared extern(C) nothrow
   gboolean function(const(GValue)* value, GType type) c_g_type_check_value_holds; ///
   GType* function(GType type, uint* nChildren) c_g_type_children; ///
   GTypeInstance* function(GType type) c_g_type_create_instance; ///
+  GTypeInterface* function(GType gType) c_g_type_default_interface_get; ///
   GTypeInterface* function(GType gType) c_g_type_default_interface_peek; ///
   GTypeInterface* function(GType gType) c_g_type_default_interface_ref; ///
   void function(GTypeInterface* gIface) c_g_type_default_interface_unref; ///
@@ -1050,6 +1052,9 @@ alias g_type_class_unref_uncached = c_g_type_class_unref_uncached;
 
 /** */
 alias g_type_class_adjust_private_offset = c_g_type_class_adjust_private_offset;
+
+/** */
+alias g_type_class_get = c_g_type_class_get;
 
 /** */
 alias g_type_class_peek = c_g_type_class_peek;
@@ -1736,6 +1741,9 @@ alias g_type_children = c_g_type_children;
 alias g_type_create_instance = c_g_type_create_instance;
 
 /** */
+alias g_type_default_interface_get = c_g_type_default_interface_get;
+
+/** */
 alias g_type_default_interface_peek = c_g_type_default_interface_peek;
 
 /** */
@@ -2037,6 +2045,7 @@ shared static this()
   gidLink(cast(void**)&g_type_class_unref, "g_type_class_unref", libs);
   gidLink(cast(void**)&g_type_class_unref_uncached, "g_type_class_unref_uncached", libs);
   gidLink(cast(void**)&g_type_class_adjust_private_offset, "g_type_class_adjust_private_offset", libs);
+  gidLink(cast(void**)&g_type_class_get, "g_type_class_get", libs);
   gidLink(cast(void**)&g_type_class_peek, "g_type_class_peek", libs);
   gidLink(cast(void**)&g_type_class_peek_static, "g_type_class_peek_static", libs);
   gidLink(cast(void**)&g_type_class_ref, "g_type_class_ref", libs);
@@ -2277,6 +2286,7 @@ shared static this()
   gidLink(cast(void**)&g_type_check_value_holds, "g_type_check_value_holds", libs);
   gidLink(cast(void**)&g_type_children, "g_type_children", libs);
   gidLink(cast(void**)&g_type_create_instance, "g_type_create_instance", libs);
+  gidLink(cast(void**)&g_type_default_interface_get, "g_type_default_interface_get", libs);
   gidLink(cast(void**)&g_type_default_interface_peek, "g_type_default_interface_peek", libs);
   gidLink(cast(void**)&g_type_default_interface_ref, "g_type_default_interface_ref", libs);
   gidLink(cast(void**)&g_type_default_interface_unref, "g_type_default_interface_unref", libs);

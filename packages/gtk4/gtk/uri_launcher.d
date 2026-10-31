@@ -15,16 +15,15 @@ import gtk.types;
 import gtk.window;
 
 /**
-    A [gtk.uri_launcher.UriLauncher] object collects the arguments that are needed to open a uri
-    with an application.
+    Asynchronous API to open a uri with an application.
+    
+    [gtk.uri_launcher.UriLauncher] collects the arguments that are needed to open the uri.
     
     Depending on system configuration, user preferences and available APIs, this
     may or may not show an app chooser dialog or launch the default application
     right away.
     
     The operation is started with the [gtk.uri_launcher.UriLauncher.launch] function.
-    This API follows the GIO async pattern, and the result can be obtained by
-    calling [gtk.uri_launcher.UriLauncher.launchFinish].
     
     To launch a file, use [gtk.file_launcher.FileLauncher].
 */
@@ -100,6 +99,25 @@ class UriLauncher : gobject.object.ObjectWrap
   }
 
   /**
+      Returns whether the launcher is likely to succeed
+      in launching an application for its uri.
+      
+      This can be used to disable controls that trigger
+      the launcher when they are known not to work.
+  
+      Params:
+        parent = the parent window
+      Returns: false if the launcher is known not to support
+          the uri, true otherwise
+  */
+  bool canLaunch(gtk.window.Window parent = null) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_uri_launcher_can_launch(cast(GtkUriLauncher*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
       Gets the uri that will be opened.
       Returns: the uri
   */
@@ -112,18 +130,15 @@ class UriLauncher : gobject.object.ObjectWrap
   }
 
   /**
-      Launch an application to open the uri.
+      Launches an application to open the uri.
       
       This may present an app chooser dialog to the user.
-      
-      The callback will be called when the operation is completed.
-      It should call [gtk.uri_launcher.UriLauncher.launchFinish] to obtain
-      the result.
   
       Params:
-        parent = the parent [gtk.window.Window]
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -151,9 +166,8 @@ class UriLauncher : gobject.object.ObjectWrap
       returns the result.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: `TRUE` if an application was launched,
-            or `FALSE` and error is set
+        result = the result
+      Returns: true if an application was launched
       Throws: [ErrorWrap]
   */
   bool launchFinish(gio.async_result.AsyncResult result)

@@ -5,7 +5,6 @@ public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.thread;
-import glib.types;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
@@ -177,46 +176,6 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /**
-      Execute compare_func over the list of windows stored by display.  The
-      first argument to compare_func is the #GstGLWindow being checked and the
-      second argument is data.
-  
-      Params:
-        data = some data to pass to compare_func
-        compareFunc = a comparison function to run
-      Returns: The first #GstGLWindow that causes a match
-                 from compare_func
-  
-      Deprecated: Use [gstgl.gldisplay.GLDisplay.retrieveWindow] instead.
-  */
-  gstgl.glwindow.GLWindow findWindow(void* data, glib.types.CompareFunc compareFunc) nothrow
-  {
-    static glib.types.CompareFunc _static_compareFunc;
-
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b) nothrow
-    {
-      int _retval;
-
-      try
-      {
-        _retval = _static_compareFunc(a, b);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareFunc");
-      }
-      return _retval;
-    }
-    auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
-    _static_compareFunc = compareFunc;
-    GstGLWindow* _cretval;
-    _cretval = gst_gl_display_find_window(cast(GstGLDisplay*)this._cPtr, data, _compareFuncCB);
-    _static_compareFunc = null;
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, No.Take);
-    return _retval;
-  }
-
-  /**
       see [gstgl.gldisplay.GLDisplay.filterGlApi] for what the returned value represents
       Returns: the #GstGLAPI configured for display
   */
@@ -279,44 +238,6 @@ class GLDisplay : gst.object.ObjectWrap
   {
     bool _retval;
     _retval = cast(bool)gst_gl_display_remove_window(cast(GstGLDisplay*)this._cPtr, window ? cast(GstGLWindow*)window._cPtr(No.Dup) : null);
-    return _retval;
-  }
-
-  /**
-      Execute compare_func over the list of windows stored by display.  The
-      first argument to compare_func is the #GstGLWindow being checked and the
-      second argument is data.
-  
-      Params:
-        data = some data to pass to compare_func
-        compareFunc = a comparison function to run
-      Returns: The first #GstGLWindow that causes a match
-                 from compare_func
-  */
-  gstgl.glwindow.GLWindow retrieveWindow(void* data, glib.types.CompareFunc compareFunc) nothrow
-  {
-    static glib.types.CompareFunc _static_compareFunc;
-
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b) nothrow
-    {
-      int _retval;
-
-      try
-      {
-        _retval = _static_compareFunc(a, b);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareFunc");
-      }
-      return _retval;
-    }
-    auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
-    _static_compareFunc = compareFunc;
-    GstGLWindow* _cretval;
-    _cretval = gst_gl_display_retrieve_window(cast(GstGLDisplay*)this._cPtr, data, _compareFuncCB);
-    _static_compareFunc = null;
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
     return _retval;
   }
 

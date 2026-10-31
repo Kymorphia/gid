@@ -11,7 +11,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.assistant_page.AssistantPage] is an auxiliary object used by `GtkAssistant.
+    [gtk.assistant_page.AssistantPage] is an auxiliary object used by [gtk.assistant.Assistant].
 
     Deprecated: This object will be removed in GTK 5
 */

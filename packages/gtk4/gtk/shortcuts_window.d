@@ -46,7 +46,10 @@ import gtk.window;
     
     # A simple example:
     
-    ![](gedit-shortcuts.png)
+    <picture>
+      <source srcset="gedit-shortcuts-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="A simple example" src="gedit-shortcuts.png">
+    </picture>
     
     This example has as single section. As you can see, the shortcut groups
     are arranged in columns, and spread across several pages if there are too
@@ -56,26 +59,41 @@ import gtk.window;
     
     # An example with multiple views:
     
-    ![](clocks-shortcuts.png)
+    <picture>
+      <source srcset="clocks-shortcuts-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example with multiple views" src="clocks-shortcuts.png">
+    </picture>
     
     This example shows a [gtk.shortcuts_window.ShortcutsWindow] that has been configured to show only
-    the shortcuts relevant to the "stopwatch" view.
+    the shortcuts relevant to the “Stopwatch” view.
     
     The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-clocks.ui).
     
     # An example with multiple sections:
     
-    ![](builder-shortcuts.png)
+    <picture>
+      <source srcset="builder-shortcuts-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example with multiple sections" src="builder-shortcuts.png">
+    </picture>
     
-    This example shows a [gtk.shortcuts_window.ShortcutsWindow] with two sections, "Editor Shortcuts"
-    and "Terminal Shortcuts".
+    This example shows a [gtk.shortcuts_window.ShortcutsWindow] with two sections, “Editor Shortcuts”
+    and “Terminal Shortcuts”.
     
     The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-builder.ui).
     
-    ## CSS nodes
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.shortcuts_window.ShortcutsWindow.close]
+    - [gtk.shortcuts_window.ShortcutsWindow.search]
+    
+    # CSS nodes
     
     [gtk.shortcuts_window.ShortcutsWindow] has a single CSS node with the name `window` and style
     class `.shortcuts`.
+
+    Deprecated: This widget will be removed in GTK 5
 */
 class ShortcutsWindow : gtk.window.Window
 {
@@ -120,6 +138,8 @@ class ShortcutsWindow : gtk.window.Window
         
         This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
         objects that are in this shortcuts window.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string sectionName() nothrow
   {
@@ -133,6 +153,8 @@ class ShortcutsWindow : gtk.window.Window
           
           This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
           objects that are in this shortcuts window.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void sectionName(string propval) nothrow
   {
@@ -148,6 +170,8 @@ class ShortcutsWindow : gtk.window.Window
         are inside this shortcuts window.
         
         Set this to null to show all groups.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string viewName() nothrow
   {
@@ -164,6 +188,8 @@ class ShortcutsWindow : gtk.window.Window
           are inside this shortcuts window.
           
           Set this to null to show all groups.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void viewName(string propval) nothrow
   {
@@ -181,6 +207,8 @@ class ShortcutsWindow : gtk.window.Window
   
       Params:
         section = the [gtk.shortcuts_section.ShortcutsSection] to add
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   void addSection(gtk.shortcuts_section.ShortcutsSection section) nothrow
   {
@@ -194,7 +222,7 @@ class ShortcutsWindow : gtk.window.Window
         
         This is a [keybinding signal](class.SignalAction.html).
         
-        The default binding for this signal is the Escape key.
+        The default binding for this signal is the <kbd>Escape</kbd> key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -205,6 +233,8 @@ class ShortcutsWindow : gtk.window.Window
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -242,7 +272,7 @@ class ShortcutsWindow : gtk.window.Window
         
         This is a [keybinding signal](class.SignalAction.html).
         
-        The default binding for this signal is Control-F.
+        The default binding for this signal is <kbd>Control</kbd>+<kbd>F</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -253,6 +283,8 @@ class ShortcutsWindow : gtk.window.Window
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   gulong connectSearch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -297,6 +329,8 @@ class ShortcutsWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           This should be the section-name of one of the [gtk.shortcuts_section.ShortcutsSection]
           objects that are in this shortcuts window.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T sectionName(string propval) nothrow
   {
@@ -314,6 +348,8 @@ class ShortcutsWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           
           Set this to null to show all groups.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T viewName(string propval) nothrow
   {

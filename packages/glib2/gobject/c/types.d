@@ -115,12 +115,14 @@ enum GParamFlags : uint
   Readwrite = 3,
 
   /**
-      the parameter will be set upon object construction
+      the parameter will be set upon object construction.
+        See `vfunc@Object.constructed` for more details
   */
   Construct = 4,
 
   /**
-      the parameter can only be set upon object construction
+      the parameter can only be set upon object construction.
+        See `vfunc@Object.constructed` for more details
   */
   ConstructOnly = 8,
 
@@ -225,22 +227,25 @@ enum GSignalFlags : uint
   NoHooks = 64,
 
   /**
-      Varargs signal emission will always collect the
-        arguments, even if there are no signal handlers connected.  Since 2.30.
+      Varargs signal emission will always collect the arguments, even if there
+      are no signal handlers connected.
   */
   MustCollect = 128,
 
   /**
-      The signal is deprecated and will be removed
-        in a future version. A warning will be generated if it is connected while
-        running with G_ENABLE_DIAGNOSTIC=1.  Since 2.32.
+      The signal is deprecated and will be removed in a future version.
+      
+      A warning will be generated if it is connected while running with
+      `G_ENABLE_DIAGNOSTIC=1`.
   */
   Deprecated = 256,
 
   /**
-      Only used in #GSignalAccumulator accumulator
-        functions for the #GSignalInvocationHint::run_type field to mark the first
-        call to the accumulator function for a signal emission.  Since 2.68.
+      The signal accumulator was invoked for the first time.
+      
+      This flag is only used in [gobject.types.SignalAccumulator][accumulator functions]
+      for the `run_type` field of the [gobject.types.SignalInvocationHint], to
+      mark the first call to the accumulator function for a signal emission.
   */
   AccumulatorFirstRun = 131072,
 }
@@ -495,15 +500,15 @@ struct GCClosure
     
     It will generally comprise a function of some kind and a marshaller
     used to call it. It is the responsibility of the marshaller to
-    convert the arguments for the invocation from #GValues into
+    convert the arguments for the invocation from [GValues][gobject.value.Value] into
     a suitable form, perform the callback on the converted arguments,
-    and transform the return value back into a #GValue.
+    and transform the return value back into a [gobject.value.Value].
     
     In the case of C programs, a closure usually just holds a pointer
     to a function and maybe a data argument, and the marshaller
-    converts between #GValue and native C types. The GObject
-    library provides the #GCClosure type for this purpose. Bindings for
-    other languages need marshallers which convert between #GValues
+    converts between [gobject.value.Value] and native C types. The GObject
+    library provides the [gobject.cclosure.CClosure] type for this purpose. Bindings for
+    other languages need marshallers which convert between [GValues][gobject.value.Value]
     and suitable representations in the runtime of the language in
     order to use functions written in that language as callbacks. Use
     [gobject.closure.Closure.setMarshal] to set the marshaller on such a custom
@@ -511,15 +516,15 @@ struct GCClosure
     
     Within GObject, closures play an important role in the
     implementation of signals. When a signal is registered, the
-    @c_marshaller argument to [gobject.global.signalNew] specifies the default C
+    @c_marshaller argument to `func@signal_new` specifies the default C
     marshaller for any closure which is connected to this
     signal. GObject provides a number of C marshallers for this
-    purpose, see the g_cclosure_marshal_*() functions. Additional C
+    purpose, see the `g_cclosure_marshal_*()` functions. Additional C
     marshallers can be generated with the [glib-genmarshal][glib-genmarshal]
     utility.  Closures can be explicitly connected to signals with
-    [gobject.global.signalConnectClosure], but it usually more convenient to let
+    `func@signal_connect_closure`, but it usually more convenient to let
     GObject create a closure automatically by using one of the
-    g_signal_connect_*() functions which take a callback function/user
+    `g_signal_connect_*()` functions which take a callback function/user
     data pair.
     
     Using closures has a number of important advantages over a simple
@@ -529,7 +534,7 @@ struct GCClosure
       which means that language bindings don't have to write individual glue
       for each callback type.
     
-    - The reference counting of #GClosure makes it easy to handle reentrancy
+    - The reference counting of [gobject.closure.Closure] makes it easy to handle reentrancy
       right; if a callback is removed while it is being invoked, the closure
       and its parameters won't be freed until the invocation finishes.
     
@@ -956,7 +961,7 @@ struct GObjectConstructParam
     methods for all object types in GTK, Pango and other libraries
     based on GObject. The [gobject.object.ObjectWrap] class provides methods for object
     construction and destruction, property access methods, and signal
-    support. Signals are described in detail [here][gobject-Signals].
+    support. Signals are described in detail [here](signals.html).
     
     For a tutorial on implementing a new [gobject.object.ObjectWrap] class, see [How to define and
     implement a new GObject](tutorial.html#how-to-define-and-implement-a-new-gobject).
@@ -1890,7 +1895,7 @@ struct GTypeInfo
   /**
       Location of the class initialization function for
        classed and instantiatable types. Location of the default vtable
-       inititalization function for interface types. (optional) This function
+       initialization function for interface types. (optional) This function
        is used both to fill in virtual functions in the class or default vtable,
        and to do type-specific setup such as registering signals and object
        properties.
@@ -2155,6 +2160,15 @@ struct GTypeQuery
 }
 
 /**
+    - `'i'`: Integers, passed as `collect_values[].v_int`
+      - `'l'`: Longs, passed as `collect_values[].v_long`
+      - `'d'`: Doubles, passed as `collect_values[].v_double`
+      - `'p'`: Pointers, passed as `collect_values[].v_pointer`
+    
+      It should be noted that for variable argument list construction,
+      ANSI C promotes every type smaller than an integer to an int, and
+      floats to doubles. So for collection of short int or char, `'i'`
+      needs to be used, and for collection of floats `'d'`.
     The #GTypeValueTable provides the functions required by the #GValue
     implementation, to serve as a container for values of a type.
 */
@@ -2186,14 +2200,6 @@ struct GTypeValueTable
         this value bit-by-bit. Each character in the format represents
         an argument to be collected, and the characters themselves indicate
         the type of the argument. Currently supported arguments are:
-         - `'i'`: Integers, passed as `collect_values[].v_int`
-         - `'l'`: Longs, passed as `collect_values[].v_long`
-         - `'d'`: Doubles, passed as `collect_values[].v_double`
-         - `'p'`: Pointers, passed as `collect_values[].v_pointer`
-        It should be noted that for variable argument list construction,
-        ANSI C promotes every type smaller than an integer to an int, and
-        floats to doubles. So for collection of short int or char, `'i'`
-        needs to be used, and for collection of floats `'d'`.
   */
   const(char)* collectFormat;
 
@@ -2220,14 +2226,23 @@ struct GTypeValueTable
 /**
     An opaque structure used to hold different types of values.
     
-    The data within the structure has protected scope: it is accessible only
-    to functions within a #GTypeValueTable structure, or implementations of
-    the g_value_*() API. That is, code portions which implement new fundamental
-    types.
+    Before it can be used, a [gobject.value.Value] has to be initialized to a specific type by
+    calling [gobject.value.Value.init_] on it.
     
-    #GValue users cannot make any assumptions about how data is stored
+    Many types which are stored within a [gobject.value.Value] need to allocate data on the
+    heap, so [gobject.value.Value.unset] must always be called on a [gobject.value.Value] to
+    free any such data once you’re finished with the [gobject.value.Value], even if the
+    [gobject.value.Value] itself is stored on the stack.
+    
+    The data within the structure has protected scope: it is accessible only
+    to functions within a [gobject.type_value_table.TypeValueTable] structure, or
+    implementations of the `g_value_*()` API. That is, code which implements new
+    fundamental types.
+    
+    [gobject.value.Value] users cannot make any assumptions about how data is stored
     within the 2 element @data union, and the @g_type member should
-    only be accessed through the G_VALUE_TYPE() macro.
+    only be accessed through the `func@GObject.VALUE_TYPE` macro and related
+    macros.
 */
 struct GValue
 {

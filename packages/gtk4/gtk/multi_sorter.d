@@ -16,8 +16,7 @@ import gtk.sorter;
 import gtk.types;
 
 /**
-    [gtk.multi_sorter.MultiSorter] combines multiple sorters by trying them
-    in turn.
+    Combines multiple sorters by trying them in turn.
     
     If the first sorter compares two items as equal,
     the second is tried next, and so on.

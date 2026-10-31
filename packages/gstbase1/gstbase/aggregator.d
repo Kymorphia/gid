@@ -13,6 +13,7 @@ import gst.buffer_list;
 import gst.buffer_pool;
 import gst.caps;
 import gst.element;
+import gst.event;
 import gst.sample;
 import gst.segment;
 import gst.structure;
@@ -332,6 +333,25 @@ class Aggregator : gst.element.Element
     GstSample* _cretval;
     _cretval = gst_aggregator_peek_next_sample(cast(GstAggregator*)this._cPtr, pad ? cast(GstAggregatorPad*)pad._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      This method will push the provided event downstream. If needed, mandatory
+      events such as stream-start, caps, and segment events will be sent before
+      pushing the event.
+      
+      This API does not allow pushing stream-start, caps, segment and EOS events.
+      Specific API like [gstbase.aggregator.Aggregator.setSrcCaps] should be used for these.
+  
+      Params:
+        event = the #GstEvent to push.
+      Returns: 
+  */
+  bool pushSrcEvent(gst.event.Event event) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_aggregator_push_src_event(cast(GstAggregator*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 

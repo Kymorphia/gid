@@ -709,6 +709,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         continue to use the same kind of widget for editing in future
         releases, therefore you should check the type of editable
         before doing any specific setup, as in the following example:
+        
         ```c
         static void
         text_editing_started (GtkCellRenderer *cell,

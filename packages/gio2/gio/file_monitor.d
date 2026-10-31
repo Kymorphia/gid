@@ -69,7 +69,7 @@ class FileMonitor : gobject.object.ObjectWrap
   */
   @property bool cancelled() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("cancelled");
+    return isCancelled();
   }
 
   /**
@@ -108,12 +108,12 @@ class FileMonitor : gobject.object.ObjectWrap
       implementations only.
       
       Implementations are responsible to call this method from the
-      [thread-default main context][g-main-context-push-thread-default] of the
-      thread that the monitor was created in.
+      thread-default main context (see [glib.main_context.MainContext.pushThreadDefault])
+      of the thread that the monitor was created in.
   
       Params:
         child = a #GFile.
-        otherFile = a #GFile.
+        otherFile = a #GFile, or null.
         eventType = a set of #GFileMonitorEvent flags.
   */
   void emitEvent(gio.file.File child, gio.file.File otherFile, gio.types.FileMonitorEvent eventType) nothrow

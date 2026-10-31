@@ -13,8 +13,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.shortcut_action.ShortcutAction] encodes an action that can be triggered by a
-    keyboard shortcut.
+    Encodes an action that can be triggered by a keyboard shortcut.
     
     `GtkShortcutActions` contain functions that allow easy presentation
     to end users as well as being printed for debugging.

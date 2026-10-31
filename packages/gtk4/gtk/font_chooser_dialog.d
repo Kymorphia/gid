@@ -27,7 +27,10 @@ import gtk.window;
 /**
     The [gtk.font_chooser_dialog.FontChooserDialog] widget is a dialog for selecting a font.
     
-    ![An example GtkFontChooserDialog](fontchooser.png)
+    <picture>
+      <source srcset="fontchooser-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFontChooserDialog" src="fontchooser.png">
+    </picture>
     
     [gtk.font_chooser_dialog.FontChooserDialog] implements the [gtk.font_chooser.FontChooser] interface
     and does not provide much API of its own.

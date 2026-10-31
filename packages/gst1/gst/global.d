@@ -18,12 +18,157 @@ import gst.caps_features;
 import gst.debug_category;
 import gst.debug_message;
 import gst.element;
+import gst.log_context;
 import gst.parse_context;
 import gst.plugin;
+import gst.segment;
 import gst.structure;
 import gst.tracer;
 import gst.types;
 
+
+/**
+    Calls func from another thread and passes user_data to it.
+
+    Params:
+      func = function to call asynchronously from another thread
+*/
+void callAsync(gst.types.CallAsyncFunc func) nothrow
+{
+  extern(C) void _funcCallback(void* userData) nothrow
+  {
+    ptrThawGC(userData);
+    auto _dlg = cast(gst.types.CallAsyncFunc*)userData;
+
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gst.types.CallAsyncFunc");
+    }
+  }
+  auto _funcCB = func ? &_funcCallback : null;
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  gst_call_async(_funcCB, _func);
+}
+
+/**
+    Applications might want to check if the runtime GStreamer version is greater
+    or equal to the version specified using major, minor and micro.
+
+    Params:
+      major = Major version number
+      minor = Minor version number
+      micro = Micro version number
+    Returns: true if the GStreamer version is greater or equal to
+      major\.minor\.micro, false otherwise. Also this function returns false
+      when checking for a different major version to the current one, as major
+      version bumps are ABI breaks anyway.
+*/
+bool checkVersion(uint major, uint minor, uint micro) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_check_version(major, minor, micro);
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsArmNeon() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_arm_neon();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsArmNeon64() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_arm_neon64();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX863dnow() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_3dnow();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Avx() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_avx();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Avx2() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_avx2();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Mmx() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_mmx();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Mmxext() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_mmxext();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Sse2() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_sse2();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Sse3() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_sse3();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Sse41() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_sse4_1();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Sse42() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_sse4_2();
+  return _retval;
+}
+
+/** */
+bool cpuidSupportsX86Ssse3() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_cpuid_supports_x86_ssse3();
+  return _retval;
+}
 
 /**
     Adds the logging function to the list of logging functions.
@@ -313,6 +458,31 @@ void debugLogIdLiteral(gst.debug_category.DebugCategory category, gst.types.Debu
 }
 
 /**
+    Logs a message with the specified context and ID. If the context has already
+    seen this message based on its flags configuration, the message will not be
+    logged.
+    
+    level >= [gst.types.DebugLevel.Memdump] is not supported.
+
+    Params:
+      ctx = a #GstLogContext
+      level = level of the message
+      file = the file that emitted the message, usually the __FILE__ identifier
+      function_ = the function that emitted the message
+      line = the line that emitted the message, usually the __LINE__ identifier
+      id = the contextual ID of the message
+      message = message string
+*/
+void debugLogIdLiteralWithContext(gst.log_context.LogContext ctx, gst.types.DebugLevel level, string file, string function_, int line, string id, string message) nothrow
+{
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+  gst_debug_log_id_literal_with_context(ctx ? cast(GstLogContext*)ctx._cPtr : null, level, _file, _function_, line, _id, _message);
+}
+
+/**
     Logs the given message using the currently registered debugging handlers.
 
     Params:
@@ -331,6 +501,73 @@ void debugLogLiteral(gst.debug_category.DebugCategory category, gst.types.DebugL
   const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
   const(char)* _messageString = messageString.toCString!(No.Malloc, No.Nullable);
   gst_debug_log_literal(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, _messageString);
+}
+
+/**
+    Logs a literal message with the specified context. Depending on the context
+    state, the message may not be logged at all.
+    
+    level >= [gst.types.DebugLevel.Memdump] is not supported.
+
+    Params:
+      ctx = a #GstLogContext
+      level = level of the message
+      file = the file that emitted the message, usually the __FILE__ identifier
+      function_ = the function that emitted the message
+      line = the line that emitted the message, usually the __LINE__ identifier
+      object = the object this message relates to,
+            or null if none
+      message = message string
+*/
+void debugLogLiteralWithContext(gst.log_context.LogContext ctx, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectWrap object, string message) nothrow
+{
+  const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
+  const(char)* _function_ = function_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+  gst_debug_log_literal_with_context(ctx ? cast(GstLogContext*)ctx._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, _message);
+}
+
+/**
+    Returns a string that represents ptr. This is safe to call with
+    [gst.structure.Structure], [gst.caps_features.CapsFeatures], [gst.mini_object.MiniObject] s (e.g. [gst.caps.Caps],
+    [gst.buffer.Buffer] or [gst.message.Message]), and `GObjects` (e.g. [gst.element.Element] or [gst.pad.Pad]).
+    
+    The string representation is meant to be used for debugging purposes and
+    might change between GStreamer versions.
+    
+    Passing other kind of pointers might or might not work and is generally
+    unsafe to do.
+
+    Params:
+      ptr = the object
+    Returns: a string containing a string
+          representation of the object
+*/
+string debugPrintObject(const(void)* ptr = null) nothrow
+{
+  char* _cretval;
+  _cretval = gst_debug_print_object(ptr);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+  return _retval;
+}
+
+/**
+    Returns a string that represents segments.
+    
+    The string representation is meant to be used for debugging purposes and
+    might change between GStreamer versions.
+
+    Params:
+      segment = the [gst.segment.Segment]
+    Returns: a string containing a string
+          representation of the segment
+*/
+string debugPrintSegment(gst.segment.Segment* segment = null) nothrow
+{
+  char* _cretval;
+  _cretval = gst_debug_print_segment(cast(const(GstSegment)*)segment);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+  return _retval;
 }
 
 /**
@@ -1120,22 +1357,6 @@ void segtrapSetEnabled(bool enabled) nothrow
   gst_segtrap_set_enabled(enabled);
 }
 
-/** */
-gobject.types.GType staticCapsGetType() nothrow
-{
-  gobject.types.GType _retval;
-  _retval = gst_static_caps_get_type();
-  return _retval;
-}
-
-/** */
-gobject.types.GType staticPadTemplateGetType() nothrow
-{
-  gobject.types.GType _retval;
-  _retval = gst_static_pad_template_get_type();
-  return _retval;
-}
-
 /**
     Checks if the given type is already registered.
 
@@ -1277,14 +1498,6 @@ gst.tracer.Tracer[] tracingGetActiveTracers() nothrow
   return _retval;
 }
 
-/** */
-gobject.types.GType typeFindGetType() nothrow
-{
-  gobject.types.GType _retval;
-  _retval = gst_type_find_get_type();
-  return _retval;
-}
-
 /**
     Checks if type is plugin API. See [gst.global.typeMarkAsPluginApi] for
     details.
@@ -1362,7 +1575,8 @@ bool updateRegistry() nothrow
       array = the sorted input array
       numElements = number of elements in the array
       elementSize = size of every element in bytes
-      searchFunc = function to compare two elements, search_data will always be passed as second argument
+      searchFunc = function to compare two
+           elements, search_data will always be passed as second argument
       mode = search mode that should be used
       searchData = element that should be found
     Returns: The address of the found
@@ -1392,7 +1606,7 @@ void* utilArrayBinarySearch(void* array, uint numElements, size_t elementSize, g
 }
 
 /**
-    Return a max num of log2.
+    Returns smallest integral value not less than log2(v).
 
     Params:
       v = a #guint32 value.
@@ -1464,6 +1678,20 @@ int utilFilenameCompare(string a, string b) nothrow
 }
 
 /**
+    Returns smallest integral value not bigger than log2(v).
+
+    Params:
+      v = a #guint32 value.
+    Returns: a computed #guint val.
+*/
+uint utilFloorLog2(uint v) nothrow
+{
+  uint _retval;
+  _retval = gst_util_floor_log2(v);
+  return _retval;
+}
+
+/**
     Adds the fractions a_n/a_d and b_n/b_d and stores
     the result in res_n and res_d.
 
@@ -1518,6 +1746,26 @@ bool utilFractionMultiply(int aN, int aD, int bN, int bD, out int resN, out int 
 {
   bool _retval;
   _retval = cast(bool)gst_util_fraction_multiply(aN, aD, bN, bD, cast(int*)&resN, cast(int*)&resD);
+  return _retval;
+}
+
+/**
+    Multiplies the fractions a_n/a_d and b_n/b_d and stores
+    the result in res_n and res_d.
+
+    Params:
+      aN = Numerator of first value
+      aD = Denominator of first value
+      bN = Numerator of second value
+      bD = Denominator of second value
+      resN = Pointer to #gint to hold the result numerator
+      resD = Pointer to #gint to hold the result denominator
+    Returns: false on overflow, true otherwise.
+*/
+bool utilFractionMultiplyInt64(long aN, long aD, long bN, long bD, out long resN, out long resD) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_util_fraction_multiply_int64(aN, aD, bN, bD, cast(long*)&resN, cast(long*)&resD);
   return _retval;
 }
 
@@ -2335,6 +2583,22 @@ gst.structure.Structure valueGetStructure(gobject.value.Value value) nothrow
 }
 
 /**
+    Compute a hash value of value.
+    #GValue considered as equals by [gst.global.valueCompare] will have the same hash value.
+
+    Params:
+      value = a #GValue to hash
+      res = a location to store the hash value
+    Returns: true, or false if value cannot be hashed.
+*/
+bool valueHash(gobject.value.Value value, out uint res) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_value_hash(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, cast(uint*)&res);
+  return _retval;
+}
+
+/**
     Initialises the target value to be of the same type as source and then copies
     the contents from source to target.
 
@@ -2390,12 +2654,14 @@ bool valueIsFixed(gobject.value.Value value) nothrow
 }
 
 /**
-    Check that value1 is a subset of value2.
+    Check that value1 is a subset of value2. If value1 and value2 is are
+    fixed value, value1 must be a subset of value2 and not equal to value2 to
+    be a subset of value2.
 
     Params:
       value1 = a #GValue
       value2 = a #GValue
-    Returns: true is value1 is a subset of value2
+    Returns: true is value1 is a subset, strict subset if both values are  of value2
 */
 bool valueIsSubset(gobject.value.Value value1, gobject.value.Value value2) nothrow
 {

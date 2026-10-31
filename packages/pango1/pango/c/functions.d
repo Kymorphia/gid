@@ -146,7 +146,9 @@ __gshared extern(C) nothrow
   PangoFontDescription* function(const(PangoFontDescription)* desc) c_pango_font_description_copy_static; ///
   gboolean function(const(PangoFontDescription)* desc1, const(PangoFontDescription)* desc2) c_pango_font_description_equal; ///
   void function(PangoFontDescription* desc) c_pango_font_description_free; ///
+  PangoFontColor function(const(PangoFontDescription)* desc) c_pango_font_description_get_color; ///
   const(char)* function(const(PangoFontDescription)* desc) c_pango_font_description_get_family; ///
+  const(char)* function(const(PangoFontDescription)* desc) c_pango_font_description_get_features; ///
   PangoGravity function(const(PangoFontDescription)* desc) c_pango_font_description_get_gravity; ///
   PangoFontMask function(const(PangoFontDescription)* desc) c_pango_font_description_get_set_fields; ///
   int function(const(PangoFontDescription)* desc) c_pango_font_description_get_size; ///
@@ -160,8 +162,11 @@ __gshared extern(C) nothrow
   void function(PangoFontDescription* desc, const(PangoFontDescription)* descToMerge, gboolean replaceExisting) c_pango_font_description_merge; ///
   void function(PangoFontDescription* desc, const(PangoFontDescription)* descToMerge, gboolean replaceExisting) c_pango_font_description_merge_static; ///
   void function(PangoFontDescription* desc, double size) c_pango_font_description_set_absolute_size; ///
+  void function(PangoFontDescription* desc, PangoFontColor color) c_pango_font_description_set_color; ///
   void function(PangoFontDescription* desc, const(char)* family) c_pango_font_description_set_family; ///
   void function(PangoFontDescription* desc, const(char)* family) c_pango_font_description_set_family_static; ///
+  void function(PangoFontDescription* desc, const(char)* features) c_pango_font_description_set_features; ///
+  void function(PangoFontDescription* desc, const(char)* features) c_pango_font_description_set_features_static; ///
   void function(PangoFontDescription* desc, PangoGravity gravity) c_pango_font_description_set_gravity; ///
   void function(PangoFontDescription* desc, int size) c_pango_font_description_set_size; ///
   void function(PangoFontDescription* desc, PangoStretch stretch) c_pango_font_description_set_stretch; ///
@@ -193,6 +198,7 @@ __gshared extern(C) nothrow
 
   // FontMap
   GType function() c_pango_font_map_get_type; ///
+  gboolean function(PangoFontMap* fontmap, const(char)* filename, GError** _err) c_pango_font_map_add_font_file; ///
   void function(PangoFontMap* fontmap) c_pango_font_map_changed; ///
   PangoContext* function(PangoFontMap* fontmap) c_pango_font_map_create_context; ///
   PangoFontFamily* function(PangoFontMap* fontmap, const(char)* name) c_pango_font_map_get_family; ///
@@ -266,6 +272,7 @@ __gshared extern(C) nothrow
   void function(PangoItem* item, PangoAttrIterator* iter) c_pango_item_apply_attrs; ///
   PangoItem* function(PangoItem* item) c_pango_item_copy; ///
   void function(PangoItem* item) c_pango_item_free; ///
+  int function(PangoItem* item) c_pango_item_get_char_offset; ///
   PangoItem* function(PangoItem* orig, int splitIndex, int splitOffset) c_pango_item_split; ///
 
   // Language
@@ -896,7 +903,13 @@ alias pango_font_description_equal = c_pango_font_description_equal;
 alias pango_font_description_free = c_pango_font_description_free;
 
 /** */
+alias pango_font_description_get_color = c_pango_font_description_get_color;
+
+/** */
 alias pango_font_description_get_family = c_pango_font_description_get_family;
+
+/** */
+alias pango_font_description_get_features = c_pango_font_description_get_features;
 
 /** */
 alias pango_font_description_get_gravity = c_pango_font_description_get_gravity;
@@ -938,10 +951,19 @@ alias pango_font_description_merge_static = c_pango_font_description_merge_stati
 alias pango_font_description_set_absolute_size = c_pango_font_description_set_absolute_size;
 
 /** */
+alias pango_font_description_set_color = c_pango_font_description_set_color;
+
+/** */
 alias pango_font_description_set_family = c_pango_font_description_set_family;
 
 /** */
 alias pango_font_description_set_family_static = c_pango_font_description_set_family_static;
+
+/** */
+alias pango_font_description_set_features = c_pango_font_description_set_features;
+
+/** */
+alias pango_font_description_set_features_static = c_pango_font_description_set_features_static;
 
 /** */
 alias pango_font_description_set_gravity = c_pango_font_description_set_gravity;
@@ -1023,6 +1045,9 @@ alias pango_font_family_list_faces = c_pango_font_family_list_faces;
 
 /** */
 alias pango_font_map_get_type = c_pango_font_map_get_type;
+
+/** */
+alias pango_font_map_add_font_file = c_pango_font_map_add_font_file;
 
 /** */
 alias pango_font_map_changed = c_pango_font_map_changed;
@@ -1214,6 +1239,9 @@ alias pango_item_copy = c_pango_item_copy;
 
 /** */
 alias pango_item_free = c_pango_item_free;
+
+/** */
+alias pango_item_get_char_offset = c_pango_item_get_char_offset;
 
 /** */
 alias pango_item_split = c_pango_item_split;
@@ -2127,7 +2155,9 @@ shared static this()
   gidLink(cast(void**)&pango_font_description_copy_static, "pango_font_description_copy_static", libs);
   gidLink(cast(void**)&pango_font_description_equal, "pango_font_description_equal", libs);
   gidLink(cast(void**)&pango_font_description_free, "pango_font_description_free", libs);
+  gidLink(cast(void**)&pango_font_description_get_color, "pango_font_description_get_color", libs);
   gidLink(cast(void**)&pango_font_description_get_family, "pango_font_description_get_family", libs);
+  gidLink(cast(void**)&pango_font_description_get_features, "pango_font_description_get_features", libs);
   gidLink(cast(void**)&pango_font_description_get_gravity, "pango_font_description_get_gravity", libs);
   gidLink(cast(void**)&pango_font_description_get_set_fields, "pango_font_description_get_set_fields", libs);
   gidLink(cast(void**)&pango_font_description_get_size, "pango_font_description_get_size", libs);
@@ -2141,8 +2171,11 @@ shared static this()
   gidLink(cast(void**)&pango_font_description_merge, "pango_font_description_merge", libs);
   gidLink(cast(void**)&pango_font_description_merge_static, "pango_font_description_merge_static", libs);
   gidLink(cast(void**)&pango_font_description_set_absolute_size, "pango_font_description_set_absolute_size", libs);
+  gidLink(cast(void**)&pango_font_description_set_color, "pango_font_description_set_color", libs);
   gidLink(cast(void**)&pango_font_description_set_family, "pango_font_description_set_family", libs);
   gidLink(cast(void**)&pango_font_description_set_family_static, "pango_font_description_set_family_static", libs);
+  gidLink(cast(void**)&pango_font_description_set_features, "pango_font_description_set_features", libs);
+  gidLink(cast(void**)&pango_font_description_set_features_static, "pango_font_description_set_features_static", libs);
   gidLink(cast(void**)&pango_font_description_set_gravity, "pango_font_description_set_gravity", libs);
   gidLink(cast(void**)&pango_font_description_set_size, "pango_font_description_set_size", libs);
   gidLink(cast(void**)&pango_font_description_set_stretch, "pango_font_description_set_stretch", libs);
@@ -2174,6 +2207,7 @@ shared static this()
 
   // FontMap
   gidLink(cast(void**)&pango_font_map_get_type, "pango_font_map_get_type", libs);
+  gidLink(cast(void**)&pango_font_map_add_font_file, "pango_font_map_add_font_file", libs);
   gidLink(cast(void**)&pango_font_map_changed, "pango_font_map_changed", libs);
   gidLink(cast(void**)&pango_font_map_create_context, "pango_font_map_create_context", libs);
   gidLink(cast(void**)&pango_font_map_get_family, "pango_font_map_get_family", libs);
@@ -2247,6 +2281,7 @@ shared static this()
   gidLink(cast(void**)&pango_item_apply_attrs, "pango_item_apply_attrs", libs);
   gidLink(cast(void**)&pango_item_copy, "pango_item_copy", libs);
   gidLink(cast(void**)&pango_item_free, "pango_item_free", libs);
+  gidLink(cast(void**)&pango_item_get_char_offset, "pango_item_get_char_offset", libs);
   gidLink(cast(void**)&pango_item_split, "pango_item_split", libs);
 
   // Language

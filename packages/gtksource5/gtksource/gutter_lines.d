@@ -158,6 +158,22 @@ class GutterLines : gobject.object.ObjectWrap
         y = a location for the Y position in widget coordinates
         height = the line height based on mode
   */
+  void getLineExtent(uint line, gtksource.types.GutterRendererAlignmentMode mode, out double y, out double height) nothrow
+  {
+    gtk_source_gutter_lines_get_line_extent(cast(GtkSourceGutterLines*)this._cPtr, line, mode, cast(double*)&y, cast(double*)&height);
+  }
+
+  /**
+      Gets the Y range for a line based on mode.
+      
+      The value for `y` is relative to the renderers widget coordinates.
+  
+      Params:
+        line = a line number starting from zero
+        mode = a #GtkSourceGutterRendererAlignmentMode
+        y = a location for the Y position in widget coordinates
+        height = the line height based on mode
+  */
   void getLineYrange(uint line, gtksource.types.GutterRendererAlignmentMode mode, out int y, out int height) nothrow
   {
     gtk_source_gutter_lines_get_line_yrange(cast(GtkSourceGutterLines*)this._cPtr, line, mode, cast(int*)&y, cast(int*)&height);

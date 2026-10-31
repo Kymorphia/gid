@@ -18,6 +18,7 @@ __gshared extern(C) nothrow
   GstEGLImage* function(GstGLContext* context, void* image, GstGLFormat format, void* userData, GstEGLImageDestroyNotify userDataDestroy) c_gst_egl_image_new_wrapped; ///
   gboolean function(GstEGLImage* image, int* fd, int* stride, size_t* offset) c_gst_egl_image_export_dmabuf; ///
   void* function(GstEGLImage* image) c_gst_egl_image_get_image; ///
+  gboolean function(GstGLContext* context, GstVideoFormat format) c_gst_egl_image_can_emulate; ///
   GstEGLImage* function(GstGLContext* context, int dmabuf, const(GstVideoInfo)* inInfo, int plane, size_t offset) c_gst_egl_image_from_dmabuf; ///
   GstEGLImage* function(GstGLContext* context, int* fd, const(size_t)* offset, const(GstVideoInfo)* inInfo) c_gst_egl_image_from_dmabuf_direct; ///
   GstEGLImage* function(GstGLContext* context, int* fd, const(size_t)* offset, const(GstVideoInfo)* inInfo, GstGLTextureTarget target) c_gst_egl_image_from_dmabuf_direct_target; ///
@@ -31,6 +32,7 @@ __gshared extern(C) nothrow
   GstGLDisplayEGL* function(void* display) c_gst_gl_display_egl_new_with_egl_display; ///
   GstGLDisplayEGL* function(GstGLDisplay* display) c_gst_gl_display_egl_from_gl_display; ///
   void* function(GstGLDisplayType type, size_t display) c_gst_gl_display_egl_get_from_native; ///
+  void function(GstGLDisplayEGL* displayEgl, gboolean foreign) c_gst_gl_display_egl_set_foreign; ///
 
   // GLDisplayEGLDevice
   GType function() c_gst_gl_display_egl_device_get_type; ///
@@ -66,6 +68,9 @@ alias gst_egl_image_export_dmabuf = c_gst_egl_image_export_dmabuf;
 alias gst_egl_image_get_image = c_gst_egl_image_get_image;
 
 /** */
+alias gst_egl_image_can_emulate = c_gst_egl_image_can_emulate;
+
+/** */
 alias gst_egl_image_from_dmabuf = c_gst_egl_image_from_dmabuf;
 
 /** */
@@ -99,6 +104,9 @@ alias gst_gl_display_egl_from_gl_display = c_gst_gl_display_egl_from_gl_display;
 
 /** */
 alias gst_gl_display_egl_get_from_native = c_gst_gl_display_egl_get_from_native;
+
+/** */
+alias gst_gl_display_egl_set_foreign = c_gst_gl_display_egl_set_foreign;
 
 // GLDisplayEGLDevice
 
@@ -147,6 +155,7 @@ shared static this()
   gidLink(cast(void**)&gst_egl_image_new_wrapped, "gst_egl_image_new_wrapped", libs);
   gidLink(cast(void**)&gst_egl_image_export_dmabuf, "gst_egl_image_export_dmabuf", libs);
   gidLink(cast(void**)&gst_egl_image_get_image, "gst_egl_image_get_image", libs);
+  gidLink(cast(void**)&gst_egl_image_can_emulate, "gst_egl_image_can_emulate", libs);
   gidLink(cast(void**)&gst_egl_image_from_dmabuf, "gst_egl_image_from_dmabuf", libs);
   gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct, "gst_egl_image_from_dmabuf_direct", libs);
   gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct_target, "gst_egl_image_from_dmabuf_direct_target", libs);
@@ -160,6 +169,7 @@ shared static this()
   gidLink(cast(void**)&gst_gl_display_egl_new_with_egl_display, "gst_gl_display_egl_new_with_egl_display", libs);
   gidLink(cast(void**)&gst_gl_display_egl_from_gl_display, "gst_gl_display_egl_from_gl_display", libs);
   gidLink(cast(void**)&gst_gl_display_egl_get_from_native, "gst_gl_display_egl_get_from_native", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_set_foreign, "gst_gl_display_egl_set_foreign", libs);
 
   // GLDisplayEGLDevice
   gidLink(cast(void**)&gst_gl_display_egl_device_get_type, "gst_gl_display_egl_device_get_type", libs);

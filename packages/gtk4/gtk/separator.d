@@ -18,9 +18,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.separator.Separator] is a horizontal or vertical separator widget.
+    Draws a horizontal or vertical line to separate other widgets.
     
-    ![An example GtkSeparator](separator.png)
+    <picture>
+      <source srcset="separator-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSeparator" src="separator.png">
+    </picture>
     
     A [gtk.separator.Separator] can be used to group the widgets within a window.
     It displays a line with a shadow to make it appear sunken into the

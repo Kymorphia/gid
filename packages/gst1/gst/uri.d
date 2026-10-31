@@ -110,6 +110,20 @@ class Uri : gobject.boxed.Boxed
   }
 
   /**
+      Create a new #GstUri object with the same data as this #GstUri object.
+      If uri is null then returns null.
+      Returns: A new #GstUri object which is a copy of this
+                 #GstUri or null.
+  */
+  gst.uri.Uri copy() nothrow
+  {
+    GstUri* _cretval;
+    _cretval = gst_uri_copy(cast(const(GstUri)*)this._cPtr);
+    auto _retval = _cretval ? new gst.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Compares two #GstUri objects to see if they represent the same normalized
       URI.
   

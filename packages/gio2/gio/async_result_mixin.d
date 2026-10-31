@@ -102,9 +102,9 @@ template AsyncResultT()
 {
 
   /**
-      Gets the source object from a #GAsyncResult.
+      Gets the source object from a [gio.async_result.AsyncResult].
       Returns: a new reference to the source
-           object for the res, or null if there is none.
+           object for the res, or `NULL` if there is none.
   */
   override gobject.object.ObjectWrap getSourceObject() nothrow
   {
@@ -115,7 +115,7 @@ template AsyncResultT()
   }
 
   /**
-      Gets the user data from a #GAsyncResult.
+      Gets the user data from a [gio.async_result.AsyncResult].
       Returns: the user data for res.
   */
   override void* getUserData() nothrow
@@ -130,7 +130,7 @@ template AsyncResultT()
   
       Params:
         sourceTag = an application-defined tag
-      Returns: true if res has the indicated source_tag, false if
+      Returns: `TRUE` if res has the indicated source_tag, `FALSE` if
           not.
   */
   override bool isTagged(void* sourceTag = null) nothrow
@@ -141,18 +141,18 @@ template AsyncResultT()
   }
 
   /**
-      If res is a #GSimpleAsyncResult, this is equivalent to
+      If res is a [gio.simple_async_result.SimpleAsyncResult], this is equivalent to
       [gio.simple_async_result.SimpleAsyncResult.propagateError]. Otherwise it returns
-      false.
+      `FALSE`.
       
-      This can be used for legacy error handling in async *_finish()
-      wrapper functions that traditionally handled #GSimpleAsyncResult
+      This can be used for legacy error handling in async `*_finish()`
+      wrapper functions that traditionally handled [gio.simple_async_result.SimpleAsyncResult]
       error returns themselves rather than calling into the virtual method.
-      This should not be used in new code; #GAsyncResult errors that are
+      This should not be used in new code; [gio.async_result.AsyncResult] errors that are
       set by virtual methods should also be extracted by virtual methods,
       to enable subclasses to chain up correctly.
-      Returns: true if error is has been filled in with an error from
-          res, false if not.
+      Returns: `TRUE` if error is has been filled in with an error from
+          res, `FALSE` if not.
       Throws: [ErrorWrap]
   */
   override bool legacyPropagateError()

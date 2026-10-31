@@ -178,8 +178,8 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Get `flapPosition` property.
       Returns: The flap position.
         
-        If it's set to [gtk.types.PackType.Start], the flap is displayed before the content,
-        if [gtk.types.PackType.End], it's displayed after the content.
+        If it's set to [gtk.types.PackType.Start], the flap is displayed before the
+        content, if [gtk.types.PackType.End], it's displayed after the content.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -193,8 +193,8 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Params:
         propval = The flap position.
           
-          If it's set to [gtk.types.PackType.Start], the flap is displayed before the content,
-          if [gtk.types.PackType.End], it's displayed after the content.
+          If it's set to [gtk.types.PackType.Start], the flap is displayed before the
+          content, if [gtk.types.PackType.End], it's displayed after the content.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -827,8 +827,8 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   /**
       Sets the flap position for self.
       
-      If it's set to [gtk.types.PackType.Start], the flap is displayed before the content,
-      if [gtk.types.PackType.End], it's displayed after the content.
+      If it's set to [gtk.types.PackType.Start], the flap is displayed before the
+      content, if [gtk.types.PackType.End], it's displayed after the content.
   
       Params:
         position = the new value
@@ -869,9 +869,9 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   /**
       Sets the fold threshold policy for self.
       
-      If set to [adw.types.FoldThresholdPolicy.Minimum], flap will only fold when the
-      children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural], it
-      will fold as soon as children don't get their natural size.
+      If set to [adw.types.FoldThresholdPolicy.Minimum], flap will only fold when
+      the children cannot fit anymore. With [adw.types.FoldThresholdPolicy.Natural],
+      it will fold as soon as children don't get their natural size.
       
       This can be useful if you have a long ellipsizing label and want to let it
       ellipsize instead of immediately folding.
@@ -1005,9 +1005,9 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Sets the type of animation used for reveal and fold transitions in self.
       
       [adw.flap.Flap.flap] is transparent by default, which means the content will
-      be seen through it with [adw.types.FlapTransitionType.Over] transitions; add the
-      [`.background`](style-classes.html#background) style class to it if this is
-      unwanted.
+      be seen through it with [adw.types.FlapTransitionType.Over] transitions; add
+      the [`.background`](style-classes.html#background) style class to it if this
+      is unwanted.
   
       Params:
         transitionType = the new transition type
@@ -1062,8 +1062,8 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
       Params:
         propval = The flap position.
           
-          If it's set to [gtk.types.PackType.Start], the flap is displayed before the content,
-          if [gtk.types.PackType.End], it's displayed after the content.
+          If it's set to [gtk.types.PackType.Start], the flap is displayed before the
+          content, if [gtk.types.PackType.End], it's displayed after the content.
       Returns: Builder instance for fluent chaining
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)

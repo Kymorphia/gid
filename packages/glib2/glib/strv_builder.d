@@ -17,7 +17,10 @@ import gobject.boxed;
       g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
       g_strv_builder_add (builder, "hello");
       g_strv_builder_add (builder, "world");
+    
       g_auto(GStrv) array = g_strv_builder_end (builder);
+    
+      g_assert_true (g_strv_equal (array, (const char *[]) { "hello", "world", NULL }));
     ```
 */
 class StrvBuilder : gobject.boxed.Boxed
@@ -137,5 +140,45 @@ class StrvBuilder : gobject.boxed.Boxed
   {
     char* _value = value.toCString!(Yes.Malloc, No.Nullable);
     g_strv_builder_take(cast(GStrvBuilder*)this._cPtr, _value);
+  }
+
+  /**
+      Decreases the reference count on the string vector builder, and returns
+      its contents as a `NULL`-terminated string array.
+      
+      This function is especially useful for cases where it's not possible
+      to use `g_autoptr()`.
+      
+      ```c
+      GStrvBuilder *builder = g_strv_builder_new ();
+      g_strv_builder_add (builder, "hello");
+      g_strv_builder_add (builder, "world");
+      
+      GStrv array = g_strv_builder_unref_to_strv (builder);
+      
+      g_assert_true (g_strv_equal (array, (const char *[]) { "hello", "world", NULL }));
+      
+      g_strfreev (array);
+      ```
+      Returns: the constructed string
+          array
+  */
+  string[] unrefToStrv() nothrow
+  {
+    GStrv _cretval;
+    _cretval = g_strv_builder_unref_to_strv(cast(GStrvBuilder*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
   }
 }

@@ -16,6 +16,19 @@ import std.typecons : isTuple;
 /**
     A type in the [glib.variant.Variant] type system.
     
+    [glib.variant.Variant] types are represented as strings, but have a strict
+    syntax described below. All [glib.variant_type.VariantType]s passed to GLib must be
+    valid, and they are typically expected to be static (i.e. not provided by
+    user input) as they determine how binary [glib.variant.Variant] data is
+    interpreted.
+    
+    To convert a static string to a [glib.variant_type.VariantType] in C, use the
+    `func@GLib.VARIANT_TYPE` casting macro. When GLib is compiled with checks
+    enabled, it will validate the type. To check if an arbitrary string is a
+    valid [glib.variant_type.VariantType], use [glib.variant_type.VariantType.stringIsValid].
+    
+    ## GVariant Type System
+    
     This section introduces the [glib.variant.Variant] type system. It is based, in
     large part, on the D-Bus type system, with two major changes and
     some minor lifting of restrictions. The
@@ -259,16 +272,17 @@ class VariantType : Boxed
   }
 
   /**
-      Creates a new #GVariantType corresponding to the type string given
-      by type_string.  It is appropriate to call [glib.variant_type.VariantType.free] on
-      the return value.
+      Creates a new [glib.variant_type.VariantType] corresponding to the type string given
+      by type_string.
+      
+      It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
       
       It is a programmer error to call this function with an invalid type
       string.  Use [glib.variant_type.VariantType.stringIsValid] if you are unsure.
   
       Params:
-        typeString = a valid GVariant type string
-      Returns: a new #GVariantType
+        typeString = a valid [GVariant type string](./struct.VariantType.html#gvariant-type-strings)
+      Returns: a new [glib.variant_type.VariantType]
   */
   this(string typeString) nothrow
   {
@@ -282,12 +296,11 @@ class VariantType : Boxed
       Constructs the type corresponding to an array of elements of the
       type type.
       
-      It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
+      It is appropriate to call [glib.variant_type.VariantType.first] on the return value.
   
       Params:
-        element = a #GVariantType
-      Returns: a new array #GVariantType
-        
+        element = an element type
+      Returns: a new array type
         Since 2.24
   */
   static glib.variant_type.VariantType newArray(glib.variant_type.VariantType element) nothrow
@@ -305,10 +318,9 @@ class VariantType : Boxed
       It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
   
       Params:
-        key = a basic #GVariantType
-        value = a #GVariantType
-      Returns: a new dictionary entry #GVariantType
-        
+        key = a basic type to use for the key
+        value = a type to use for the value
+      Returns: a new dictionary entry type
         Since 2.24
   */
   static glib.variant_type.VariantType newDictEntry(glib.variant_type.VariantType key, glib.variant_type.VariantType value) nothrow
@@ -320,15 +332,14 @@ class VariantType : Boxed
   }
 
   /**
-      Constructs the type corresponding to a maybe instance containing
-      type type or Nothing.
+      Constructs the type corresponding to a ‘maybe’ instance containing
+      type type or `Nothing`.
       
       It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
   
       Params:
-        element = a #GVariantType
-      Returns: a new maybe #GVariantType
-        
+        element = an element type
+      Returns: a new ‘maybe’ type
         Since 2.24
   */
   static glib.variant_type.VariantType newMaybe(glib.variant_type.VariantType element) nothrow
@@ -342,15 +353,14 @@ class VariantType : Boxed
   /**
       Constructs a new tuple type, from items.
       
-      length is the number of items in items, or -1 to indicate that
-      items is null-terminated.
+      length is the number of items in items, or `-1` to indicate that
+      items is `NULL`-terminated.
       
       It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
   
       Params:
-        items = an array of #GVariantTypes, one for each item
-      Returns: a new tuple #GVariantType
-        
+        items = an array of types, one for each item
+      Returns: a new tuple type
         Since 2.24
   */
   static glib.variant_type.VariantType newTuple(glib.variant_type.VariantType[] items) nothrow
@@ -369,10 +379,11 @@ class VariantType : Boxed
   }
 
   /**
-      Makes a copy of a #GVariantType.  It is appropriate to call
-      [glib.variant_type.VariantType.free] on the return value.  type may not be null.
-      Returns: a new #GVariantType
-        
+      Makes a copy of a [glib.variant_type.VariantType].
+      
+      It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
+      type may not be `NULL`.
+      Returns: a new [glib.variant_type.VariantType]
         Since 2.24
   */
   glib.variant_type.VariantType copy() nothrow
@@ -384,11 +395,11 @@ class VariantType : Boxed
   }
 
   /**
-      Returns a newly-allocated copy of the type string corresponding to
-      type.  The returned string is nul-terminated.  It is appropriate to
-      call [glib.global.gfree] on the return value.
+      Returns a newly-allocated copy of the type string corresponding to type.
+      
+      The returned string is nul-terminated.  It is appropriate to call
+      `funcGLib.free` on the return value.
       Returns: the corresponding type string
-        
         Since 2.24
   */
   string dupString() nothrow
@@ -400,11 +411,10 @@ class VariantType : Boxed
   }
 
   /**
-      Determines the element type of an array or maybe type.
+      Determines the element type of an array or ‘maybe’ type.
       
-      This function may only be used with array or maybe types.
+      This function may only be used with array or ‘maybe’ types.
       Returns: the element type of type
-        
         Since 2.24
   */
   glib.variant_type.VariantType element() nothrow
@@ -423,14 +433,13 @@ class VariantType : Boxed
       be returned if they are not exactly equal.  If you want to check for
       subtypes, use [glib.variant_type.VariantType.isSubtypeOf].
       
-      The argument types of type1 and type2 are only #gconstpointer to
-      allow use with #GHashTable without function pointer casting.  For
-      both arguments, a valid #GVariantType must be provided.
+      The argument types of type1 and type2 are only `gconstpointer` to
+      allow use with [glib.hash_table.HashTable] without function pointer casting.  For
+      both arguments, a valid [glib.variant_type.VariantType] must be provided.
   
       Params:
-        type2 = a #GVariantType
+        type2 = another type to compare
       Returns: true if type1 and type2 are exactly equal
-        
         Since 2.24
   */
   bool equal(glib.variant_type.VariantType type2) nothrow
@@ -451,12 +460,12 @@ class VariantType : Boxed
       In the case of a dictionary entry type, this returns the type of
       the key.
       
-      null is returned in case of type being `G_VARIANT_TYPE_UNIT`.
+      `NULL` is returned in case of type being `G_VARIANT_TYPE_UNIT`.
       
       This call, together with [glib.variant_type.VariantType.next] provides an iterator
       interface over tuple and dictionary entry types.
-      Returns: the first item type of type, or null
-        
+      Returns: the first item type of type, or `NULL`
+          if the type has no item types
         Since 2.24
   */
   glib.variant_type.VariantType first() nothrow
@@ -468,11 +477,11 @@ class VariantType : Boxed
   }
 
   /**
-      Returns the length of the type string corresponding to the given
-      type.  This function must be used to determine the valid extent of
+      Returns the length of the type string corresponding to the given type.
+      
+      This function must be used to determine the valid extent of
       the memory region returned by [glib.variant_type.VariantType.peekString].
       Returns: the length of the corresponding type string
-        
         Since 2.24
   */
   size_t getStringLength() nothrow
@@ -485,11 +494,10 @@ class VariantType : Boxed
   /**
       Hashes type.
       
-      The argument type of type is only #gconstpointer to allow use with
-      #GHashTable without function pointer casting.  A valid
-      #GVariantType must be provided.
+      The argument type of type is only `gconstpointer` to allow use with
+      [glib.hash_table.HashTable] without function pointer casting.  A valid
+      [glib.variant_type.VariantType] must be provided.
       Returns: the hash value
-        
         Since 2.24
   */
   uint hash() nothrow
@@ -500,14 +508,14 @@ class VariantType : Boxed
   }
 
   /**
-      Determines if the given type is an array type.  This is true if the
-      type string for type starts with an 'a'.
+      Determines if the given type is an array type.
+      
+      This is true if the type string for type starts with an `a`.
       
       This function returns true for any indefinite type for which every
-      definite subtype is an array type -- `G_VARIANT_TYPE_ARRAY`, for
+      definite subtype is an array type — `G_VARIANT_TYPE_ARRAY`, for
       example.
       Returns: true if type is an array type
-        
         Since 2.24
   */
   bool isArray() nothrow
@@ -525,10 +533,9 @@ class VariantType : Boxed
       
       Only a basic type may be used as the key of a dictionary entry.
       
-      This function returns false for all indefinite types except
+      This function returns `FALSE` for all indefinite types except
       `G_VARIANT_TYPE_BASIC`.
       Returns: true if type is a basic type
-        
         Since 2.24
   */
   bool isBasic() nothrow
@@ -545,10 +552,9 @@ class VariantType : Boxed
       entry types plus the variant type.
       
       This function returns true for any indefinite type for which every
-      definite subtype is a container -- `G_VARIANT_TYPE_ARRAY`, for
+      definite subtype is a container — `G_VARIANT_TYPE_ARRAY`, for
       example.
       Returns: true if type is a container type
-        
         Since 2.24
   */
   bool isContainer() nothrow
@@ -562,15 +568,14 @@ class VariantType : Boxed
       Determines if the given type is definite (ie: not indefinite).
       
       A type is definite if its type string does not contain any indefinite
-      type characters ('*', '?', or 'r').
+      type characters (`*`, `?`, or `r`).
       
-      A #GVariant instance may not have an indefinite type, so calling
+      A [glib.variant.Variant] instance may not have an indefinite type, so calling
       this function on the result of [glib.variant.Variant.getType] will always
       result in true being returned.  Calling this function on an
       indefinite type like `G_VARIANT_TYPE_ARRAY`, however, will result in
-      false being returned.
+      `FALSE` being returned.
       Returns: true if type is definite
-        
         Since 2.24
   */
   bool isDefinite() nothrow
@@ -581,14 +586,14 @@ class VariantType : Boxed
   }
 
   /**
-      Determines if the given type is a dictionary entry type.  This is
-      true if the type string for type starts with a '{'.
+      Determines if the given type is a dictionary entry type.
+      
+      This is true if the type string for type starts with a `{`.
       
       This function returns true for any indefinite type for which every
-      definite subtype is a dictionary entry type --
+      definite subtype is a dictionary entry type —
       `G_VARIANT_TYPE_DICT_ENTRY`, for example.
       Returns: true if type is a dictionary entry type
-        
         Since 2.24
   */
   bool isDictEntry() nothrow
@@ -599,14 +604,14 @@ class VariantType : Boxed
   }
 
   /**
-      Determines if the given type is a maybe type.  This is true if the
-      type string for type starts with an 'm'.
+      Determines if the given type is a ‘maybe’ type.
+      
+      This is true if the type string for type starts with an `m`.
       
       This function returns true for any indefinite type for which every
-      definite subtype is a maybe type -- `G_VARIANT_TYPE_MAYBE`, for
+      definite subtype is a ‘maybe’ type — `G_VARIANT_TYPE_MAYBE`, for
       example.
-      Returns: true if type is a maybe type
-        
+      Returns: true if type is a ‘maybe’ type
         Since 2.24
   */
   bool isMaybe() nothrow
@@ -624,9 +629,8 @@ class VariantType : Boxed
       only indefinite types can have subtypes.
   
       Params:
-        supertype = a #GVariantType
+        supertype = type of potential supertype
       Returns: true if type is a subtype of supertype
-        
         Since 2.24
   */
   bool isSubtypeOf(glib.variant_type.VariantType supertype) nothrow
@@ -637,15 +641,15 @@ class VariantType : Boxed
   }
 
   /**
-      Determines if the given type is a tuple type.  This is true if the
-      type string for type starts with a '(' or if type is
+      Determines if the given type is a tuple type.
+      
+      This is true if the type string for type starts with a `(` or if type is
       `G_VARIANT_TYPE_TUPLE`.
       
       This function returns true for any indefinite type for which every
-      definite subtype is a tuple type -- `G_VARIANT_TYPE_TUPLE`, for
+      definite subtype is a tuple type — `G_VARIANT_TYPE_TUPLE`, for
       example.
       Returns: true if type is a tuple type
-        
         Since 2.24
   */
   bool isTuple() nothrow
@@ -658,7 +662,6 @@ class VariantType : Boxed
   /**
       Determines if the given type is the variant type.
       Returns: true if type is the variant type
-        
         Since 2.24
   */
   bool isVariant() nothrow
@@ -675,7 +678,6 @@ class VariantType : Boxed
       than the additional restriction, this call is equivalent to
       [glib.variant_type.VariantType.first].
       Returns: the key type of the dictionary entry
-        
         Since 2.24
   */
   glib.variant_type.VariantType key() nothrow
@@ -695,9 +697,8 @@ class VariantType : Boxed
       `G_VARIANT_TYPE_TUPLE`.
       
       In the case of a dictionary entry type, this function will always
-      return 2.
+      return `2`.
       Returns: the number of items in type
-        
         Since 2.24
   */
   size_t nItems() nothrow
@@ -716,11 +717,11 @@ class VariantType : Boxed
       
       If called on the key type of a dictionary entry then this call
       returns the value type.  If called on the value type of a dictionary
-      entry then this call returns null.
+      entry then this call returns `NULL`.
       
-      For tuples, null is returned when type is the last item in a tuple.
-      Returns: the next #GVariantType after type, or null
-        
+      For tuples, `NULL` is returned when type is the last item in the tuple.
+      Returns: the next type after type, or `NULL` if
+          there are no further types
         Since 2.24
   */
   glib.variant_type.VariantType next() nothrow
@@ -736,7 +737,6 @@ class VariantType : Boxed
       
       This function may only be used with a dictionary entry type.
       Returns: the value type of the dictionary entry
-        
         Since 2.24
   */
   glib.variant_type.VariantType value() nothrow
@@ -767,14 +767,15 @@ class VariantType : Boxed
   }
 
   /**
-      Checks if type_string is a valid GVariant type string.  This call is
-      equivalent to calling [glib.variant_type.VariantType.stringScan] and confirming
-      that the following character is a nul terminator.
+      Checks if type_string is a valid
+      [GVariant type string](./struct.VariantType.html#gvariant-type-strings).
+      
+      This call is equivalent to calling [glib.variant_type.VariantType.stringScan] and
+      confirming that the following character is a nul terminator.
   
       Params:
         typeString = a pointer to any string
       Returns: true if type_string is exactly one valid type string
-        
         Since 2.24
   */
   static bool stringIsValid(string typeString) nothrow
@@ -787,6 +788,7 @@ class VariantType : Boxed
 
   /**
       Scan for a single complete and valid GVariant type string in string.
+      
       The memory pointed to by limit (or bytes beyond it) is never
       accessed.
       
@@ -802,8 +804,8 @@ class VariantType : Boxed
   
       Params:
         string_ = a pointer to any string
-        limit = the end of string, or null
-        endptr = location to store the end pointer, or null
+        limit = the end of string
+        endptr = location to store the end pointer
       Returns: true if a valid type string was found
   */
   static bool stringScan(string string_, string limit, out string endptr) nothrow

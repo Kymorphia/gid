@@ -23,6 +23,8 @@ import gtk.widget;
     with a short text.
     
     This widget is only meant to be used with [gtk.shortcuts_window.ShortcutsWindow].
+
+    Deprecated: This widget will be removed in GTK 5
 */
 class ShortcutsShortcut : gtk.widget.Widget
 {
@@ -67,6 +69,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         propval = The size group for the accelerator portion of this shortcut.
           
           This is used internally by GTK, and must not be modified by applications.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
@@ -102,6 +106,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         
         Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
         in .ui files.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string accelerator() nothrow
   {
@@ -138,6 +144,8 @@ class ShortcutsShortcut : gtk.widget.Widget
           
           Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
           in .ui files.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void accelerator(string propval) nothrow
   {
@@ -152,6 +160,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         then GTK will use the accelerators that are associated with the
         action via [gtk.application.Application.setAccelsForAction], and
         setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string actionName() nothrow
   {
@@ -167,6 +177,8 @@ class ShortcutsShortcut : gtk.widget.Widget
           then GTK will use the accelerators that are associated with the
           action via [gtk.application.Application.setAccelsForAction], and
           setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void actionName(string propval) nothrow
   {
@@ -179,6 +191,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         
         If the shortcut is used regardless of the text direction,
         set this property to [gtk.types.TextDirection.None].
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property gtk.types.TextDirection direction() nothrow
   {
@@ -192,6 +206,8 @@ class ShortcutsShortcut : gtk.widget.Widget
           
           If the shortcut is used regardless of the text direction,
           set this property to [gtk.types.TextDirection.None].
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void direction(gtk.types.TextDirection propval) nothrow
   {
@@ -206,6 +222,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         is set to [gtk.types.ShortcutType.Gesture].
         
         For the other predefined gesture types, GTK provides an icon on its own.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property gio.icon.Icon icon() nothrow
   {
@@ -221,6 +239,8 @@ class ShortcutsShortcut : gtk.widget.Widget
           is set to [gtk.types.ShortcutType.Gesture].
           
           For the other predefined gesture types, GTK provides an icon on its own.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void icon(gio.icon.Icon propval) nothrow
   {
@@ -230,6 +250,8 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `iconSet` property.
       Returns: true if an icon has been set.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property bool iconSet() nothrow
   {
@@ -240,6 +262,8 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `iconSet` property.
       Params:
         propval = true if an icon has been set.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void iconSet(bool propval) nothrow
   {
@@ -249,6 +273,8 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `shortcutType` property.
       Returns: The type of shortcut that is represented.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property gtk.types.ShortcutType shortcutType() nothrow
   {
@@ -259,6 +285,8 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `shortcutType` property.
       Params:
         propval = The type of shortcut that is represented.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void shortcutType(gtk.types.ShortcutType propval) nothrow
   {
@@ -272,6 +300,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         This is typically used for gestures and should be a short, one-line
         text that describes the gesture itself. For the predefined gesture
         types, GTK provides a subtitle on its own.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string subtitle() nothrow
   {
@@ -286,6 +316,8 @@ class ShortcutsShortcut : gtk.widget.Widget
           This is typically used for gestures and should be a short, one-line
           text that describes the gesture itself. For the predefined gesture
           types, GTK provides a subtitle on its own.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void subtitle(string propval) nothrow
   {
@@ -295,6 +327,8 @@ class ShortcutsShortcut : gtk.widget.Widget
   /**
       Get `subtitleSet` property.
       Returns: true if a subtitle has been set.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property bool subtitleSet() nothrow
   {
@@ -305,6 +339,8 @@ class ShortcutsShortcut : gtk.widget.Widget
       Set `subtitleSet` property.
       Params:
         propval = true if a subtitle has been set.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void subtitleSet(bool propval) nothrow
   {
@@ -317,6 +353,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         this object.
         
         This should be a short string that can fit in a single line.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string title() nothrow
   {
@@ -330,6 +368,8 @@ class ShortcutsShortcut : gtk.widget.Widget
           this object.
           
           This should be a short string that can fit in a single line.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void title(string propval) nothrow
   {
@@ -342,6 +382,8 @@ class ShortcutsShortcut : gtk.widget.Widget
         propval = The size group for the textual portion of this shortcut.
           
           This is used internally by GTK, and must not be modified by applications.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
@@ -361,6 +403,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           This is used internally by GTK, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
@@ -398,6 +442,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
           in .ui files.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T accelerator(string propval) nothrow
   {
@@ -414,6 +460,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           action via [gtk.application.Application.setAccelsForAction], and
           setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T actionName(string propval) nothrow
   {
@@ -428,6 +476,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           If the shortcut is used regardless of the text direction,
           set this property to [gtk.types.TextDirection.None].
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T direction(gtk.types.TextDirection propval) nothrow
   {
@@ -444,6 +494,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           For the other predefined gesture types, GTK provides an icon on its own.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T icon(gio.icon.Icon propval) nothrow
   {
@@ -455,6 +507,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = true if an icon has been set.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T iconSet(bool propval) nothrow
   {
@@ -466,6 +520,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The type of shortcut that is represented.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T shortcutType(gtk.types.ShortcutType propval) nothrow
   {
@@ -481,6 +537,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           text that describes the gesture itself. For the predefined gesture
           types, GTK provides a subtitle on its own.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T subtitle(string propval) nothrow
   {
@@ -492,6 +550,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = true if a subtitle has been set.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T subtitleSet(bool propval) nothrow
   {
@@ -506,6 +566,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           This should be a short string that can fit in a single line.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T title(string propval) nothrow
   {
@@ -519,6 +581,8 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           This is used internally by GTK, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {

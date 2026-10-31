@@ -171,9 +171,9 @@ import gobject.object;
     supported.
     
     Substitutions must start with a slash, and must not contain a trailing slash
-    before the `=`.  The path after the slash should ideally be absolute, but
-    this is not strictly required.  It is possible to overlay the location of a
-    single resource with an individual file.
+    before the `=`.  The filesystem path after the `=` should ideally be absolute,
+    but this is not strictly required.  It is possible to overlay the location of
+    a single resource with an individual file.
 */
 class Resource : gobject.boxed.Boxed
 {
@@ -210,12 +210,13 @@ class Resource : gobject.boxed.Boxed
   }
 
   /**
-      Creates a GResource from a reference to the binary resource bundle.
+      Creates a [gio.resource.Resource] from a reference to the binary resource bundle.
+      
       This will keep a reference to data while the resource lives, so
       the data should not be modified or freed.
       
       If you want to use this resource in the global resource namespace you need
-      to register it with [gio.resource.Resource.Register].
+      to register it with `funcGio.resources_register`.
       
       Note: data must be backed by memory that is at least pointer aligned.
       Otherwise this function will internally create a copy of the memory since
@@ -224,8 +225,8 @@ class Resource : gobject.boxed.Boxed
       If data is empty or corrupt, [gio.types.ResourceError.Internal] will be returned.
   
       Params:
-        data = A #GBytes
-      Returns: a new #GResource, or null on error
+        data = A [glib.bytes.Bytes]
+      Returns: a new [gio.resource.Resource], or `NULL` on error
       Throws: [ErrorWrap]
   */
   static gio.resource.Resource newFromData(glib.bytes.Bytes data)
@@ -241,17 +242,18 @@ class Resource : gobject.boxed.Boxed
 
   /**
       Returns all the names of children at the specified path in the resource.
-      The return result is a null terminated list of strings which should
-      be released with [glib.global.strfreev].
       
-      If path is invalid or does not exist in the #GResource,
+      The return result is a `NULL` terminated list of strings which should
+      be released with `funcGLib.strfreev`.
+      
+      If path is invalid or does not exist in the [gio.resource.Resource],
       [gio.types.ResourceError.NotFound] will be returned.
       
       lookup_flags controls the behaviour of the lookup.
   
       Params:
-        path = A pathname inside the resource
-        lookupFlags = A #GResourceLookupFlags
+        path = A path name inside the resource
+        lookupFlags = A [gio.types.ResourceLookupFlags]
       Returns: an array of constant strings
       Throws: [ErrorWrap]
   */
@@ -283,15 +285,18 @@ class Resource : gobject.boxed.Boxed
       if found returns information about it.
       
       lookup_flags controls the behaviour of the lookup.
+      
+      The only error this can return is [gio.types.ResourceError.NotFound], if path was
+      not found in resource.
   
       Params:
-        path = A pathname inside the resource
-        lookupFlags = A #GResourceLookupFlags
+        path = A path name inside the resource
+        lookupFlags = A [gio.types.ResourceLookupFlags]
         size = a location to place the length of the contents of the file,
-             or null if the length is not needed
+             or `NULL` if the length is not needed
         flags = a location to place the flags about the file,
-             or null if the length is not needed
-      Returns: true if the file was found. false if there were errors
+             or `NULL` if the length is not needed
+      Returns: `TRUE` if the file was found, `FALSE` if there were errors
       Throws: [ErrorWrap]
   */
   bool getInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
@@ -306,26 +311,45 @@ class Resource : gobject.boxed.Boxed
   }
 
   /**
+      Returns whether the specified path in the resource
+      has children.
+  
+      Params:
+        path = A pathname inside the resource
+      Returns: true if path has children
+  */
+  bool hasChildren(string path) nothrow
+  {
+    bool _retval;
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)g_resource_has_children(cast(GResource*)this._cPtr, _path);
+    return _retval;
+  }
+
+  /**
       Looks for a file at the specified path in the resource and
-      returns a #GBytes that lets you directly access the data in
+      returns a [glib.bytes.Bytes] that lets you directly access the data in
       memory.
       
       The data is always followed by a zero byte, so you
       can safely use the data as a C string. However, that byte
-      is not included in the size of the GBytes.
+      is not included in the size of the [glib.bytes.Bytes].
       
       For uncompressed resource files this is a pointer directly into
-      the resource bundle, which is typically in some readonly data section
-      in the program binary. For compressed files we allocate memory on
-      the heap and automatically uncompress the data.
+      the resource bundle, which is typically in some read-only data section
+      in the program binary. For compressed files, memory is allocated on
+      the heap and the data is automatically uncompressed.
       
       lookup_flags controls the behaviour of the lookup.
+      
+      This can return error [gio.types.ResourceError.NotFound] if path was not found in
+      resource, or [gio.types.ResourceError.Internal] if decompression of a compressed
+      resource failed.
   
       Params:
-        path = A pathname inside the resource
-        lookupFlags = A #GResourceLookupFlags
-      Returns: #GBytes or null on error.
-            Free the returned object with [glib.bytes.Bytes.unref]
+        path = A path name inside the resource
+        lookupFlags = A [gio.types.ResourceLookupFlags]
+      Returns: [glib.bytes.Bytes] or `NULL` on error
       Throws: [ErrorWrap]
   */
   glib.bytes.Bytes lookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
@@ -342,15 +366,17 @@ class Resource : gobject.boxed.Boxed
 
   /**
       Looks for a file at the specified path in the resource and
-      returns a #GInputStream that lets you read the data.
+      returns a [gio.input_stream.InputStream] that lets you read the data.
       
       lookup_flags controls the behaviour of the lookup.
+      
+      The only error this can return is [gio.types.ResourceError.NotFound], if path was
+      not found in resource.
   
       Params:
-        path = A pathname inside the resource
-        lookupFlags = A #GResourceLookupFlags
-      Returns: #GInputStream or null on error.
-            Free the returned object with [gobject.object.ObjectWrap.unref]
+        path = A path name inside the resource
+        lookupFlags = A [gio.types.ResourceLookupFlags]
+      Returns: [gio.input_stream.InputStream] or `NULL` on error
       Throws: [ErrorWrap]
   */
   gio.input_stream.InputStream openStream(string path, gio.types.ResourceLookupFlags lookupFlags)
@@ -366,20 +392,20 @@ class Resource : gobject.boxed.Boxed
   }
 
   /**
-      Loads a binary resource bundle and creates a #GResource representation of it, allowing
-      you to query it for data.
+      Loads a binary resource bundle and creates a [gio.resource.Resource]
+      representation of it, allowing you to query it for data.
       
       If you want to use this resource in the global resource namespace you need
-      to register it with [gio.resource.Resource.Register].
+      to register it with `funcGio.resources_register`.
       
       If filename is empty or the data in it is corrupt,
       [gio.types.ResourceError.Internal] will be returned. If filename doesn’t exist, or
-      there is an error in reading it, an error from [glib.mapped_file.MappedFile.new_] will be
-      returned.
+      there is an error in reading it, an error from [glib.mapped_file.MappedFile.new_]
+      will be returned.
   
       Params:
         filename = the path of a filename to load, in the GLib filename encoding
-      Returns: a new #GResource, or null on error
+      Returns: a new [gio.resource.Resource], or `NULL` on error
       Throws: [ErrorWrap]
   */
   static gio.resource.Resource load(string filename)

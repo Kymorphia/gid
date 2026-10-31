@@ -48,6 +48,9 @@ class TextNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color used by the text node.
+      
+      The value returned by this function will not be correct
+      if the render node was created for a non-sRGB color.
       Returns: the text color
   */
   gdk.rgba.RGBA getColor() nothrow

@@ -19,6 +19,8 @@ __gshared extern(C) nothrow
   void function(AdwAboutDialog* self, const(char)* name, const(char*)* people) c_adw_about_dialog_add_credit_section; ///
   void function(AdwAboutDialog* self, const(char)* title, const(char)* copyright, GtkLicense licenseType, const(char)* license) c_adw_about_dialog_add_legal_section; ///
   void function(AdwAboutDialog* self, const(char)* title, const(char)* url) c_adw_about_dialog_add_link; ///
+  void function(AdwAboutDialog* self, const(char)* appid, const(char)* name, const(char)* summary) c_adw_about_dialog_add_other_app; ///
+  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_appdata_resource_path; ///
   const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_application_icon; ///
   const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_application_name; ///
   const(char*)* function(AdwAboutDialog* self) c_adw_about_dialog_get_artists; ///
@@ -147,6 +149,7 @@ __gshared extern(C) nothrow
   GtkWidget* function(AdwAlertDialog* self) c_adw_alert_dialog_get_extra_child; ///
   const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_heading; ///
   gboolean function(AdwAlertDialog* self) c_adw_alert_dialog_get_heading_use_markup; ///
+  gboolean function(AdwAlertDialog* self) c_adw_alert_dialog_get_prefer_wide_layout; ///
   AdwResponseAppearance function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_appearance; ///
   gboolean function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_enabled; ///
   const(char)* function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_label; ///
@@ -159,6 +162,7 @@ __gshared extern(C) nothrow
   void function(AdwAlertDialog* self, GtkWidget* child) c_adw_alert_dialog_set_extra_child; ///
   void function(AdwAlertDialog* self, const(char)* heading) c_adw_alert_dialog_set_heading; ///
   void function(AdwAlertDialog* self, gboolean useMarkup) c_adw_alert_dialog_set_heading_use_markup; ///
+  void function(AdwAlertDialog* self, gboolean preferWideLayout) c_adw_alert_dialog_set_prefer_wide_layout; ///
   void function(AdwAlertDialog* self, const(char)* response, AdwResponseAppearance appearance) c_adw_alert_dialog_set_response_appearance; ///
   void function(AdwAlertDialog* self, const(char)* response, gboolean enabled) c_adw_alert_dialog_set_response_enabled; ///
   void function(AdwAlertDialog* self, const(char)* response, const(char)* label) c_adw_alert_dialog_set_response_label; ///
@@ -190,10 +194,12 @@ __gshared extern(C) nothrow
   GType function() c_adw_application_window_get_type; ///
   GtkWidget* function(GtkApplication* app) c_adw_application_window_new; ///
   void function(AdwApplicationWindow* self, AdwBreakpoint* breakpoint) c_adw_application_window_add_breakpoint; ///
+  gboolean function(AdwApplicationWindow* self) c_adw_application_window_get_adaptive_preview; ///
   GtkWidget* function(AdwApplicationWindow* self) c_adw_application_window_get_content; ///
   AdwBreakpoint* function(AdwApplicationWindow* self) c_adw_application_window_get_current_breakpoint; ///
   GListModel* function(AdwApplicationWindow* self) c_adw_application_window_get_dialogs; ///
   AdwDialog* function(AdwApplicationWindow* self) c_adw_application_window_get_visible_dialog; ///
+  void function(AdwApplicationWindow* self, gboolean adaptivePreview) c_adw_application_window_set_adaptive_preview; ///
   void function(AdwApplicationWindow* self, GtkWidget* content) c_adw_application_window_set_content; ///
 
   // Avatar
@@ -215,10 +221,12 @@ __gshared extern(C) nothrow
   GType function() c_adw_banner_get_type; ///
   GtkWidget* function(const(char)* title) c_adw_banner_new; ///
   const(char)* function(AdwBanner* self) c_adw_banner_get_button_label; ///
+  AdwBannerButtonStyle function(AdwBanner* self) c_adw_banner_get_button_style; ///
   gboolean function(AdwBanner* self) c_adw_banner_get_revealed; ///
   const(char)* function(AdwBanner* self) c_adw_banner_get_title; ///
   gboolean function(AdwBanner* self) c_adw_banner_get_use_markup; ///
   void function(AdwBanner* self, const(char)* label) c_adw_banner_set_button_label; ///
+  void function(AdwBanner* self, AdwBannerButtonStyle style) c_adw_banner_set_button_style; ///
   void function(AdwBanner* self, gboolean revealed) c_adw_banner_set_revealed; ///
   void function(AdwBanner* self, const(char)* title) c_adw_banner_set_title; ///
   void function(AdwBanner* self, gboolean useMarkup) c_adw_banner_set_use_markup; ///
@@ -228,6 +236,34 @@ __gshared extern(C) nothrow
   GtkWidget* function() c_adw_bin_new; ///
   GtkWidget* function(AdwBin* self) c_adw_bin_get_child; ///
   void function(AdwBin* self, GtkWidget* child) c_adw_bin_set_child; ///
+
+  // BottomSheet
+  GType function() c_adw_bottom_sheet_get_type; ///
+  GtkWidget* function() c_adw_bottom_sheet_new; ///
+  float function(AdwBottomSheet* self) c_adw_bottom_sheet_get_align; ///
+  GtkWidget* function(AdwBottomSheet* self) c_adw_bottom_sheet_get_bottom_bar; ///
+  int function(AdwBottomSheet* self) c_adw_bottom_sheet_get_bottom_bar_height; ///
+  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_can_close; ///
+  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_can_open; ///
+  GtkWidget* function(AdwBottomSheet* self) c_adw_bottom_sheet_get_content; ///
+  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_full_width; ///
+  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_modal; ///
+  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_open; ///
+  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_reveal_bottom_bar; ///
+  GtkWidget* function(AdwBottomSheet* self) c_adw_bottom_sheet_get_sheet; ///
+  int function(AdwBottomSheet* self) c_adw_bottom_sheet_get_sheet_height; ///
+  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_show_drag_handle; ///
+  void function(AdwBottomSheet* self, float align_) c_adw_bottom_sheet_set_align; ///
+  void function(AdwBottomSheet* self, GtkWidget* bottomBar) c_adw_bottom_sheet_set_bottom_bar; ///
+  void function(AdwBottomSheet* self, gboolean canClose) c_adw_bottom_sheet_set_can_close; ///
+  void function(AdwBottomSheet* self, gboolean canOpen) c_adw_bottom_sheet_set_can_open; ///
+  void function(AdwBottomSheet* self, GtkWidget* content) c_adw_bottom_sheet_set_content; ///
+  void function(AdwBottomSheet* self, gboolean fullWidth) c_adw_bottom_sheet_set_full_width; ///
+  void function(AdwBottomSheet* self, gboolean modal) c_adw_bottom_sheet_set_modal; ///
+  void function(AdwBottomSheet* self, gboolean open) c_adw_bottom_sheet_set_open; ///
+  void function(AdwBottomSheet* self, gboolean reveal) c_adw_bottom_sheet_set_reveal_bottom_bar; ///
+  void function(AdwBottomSheet* self, GtkWidget* sheet) c_adw_bottom_sheet_set_sheet; ///
+  void function(AdwBottomSheet* self, gboolean showDragHandle) c_adw_bottom_sheet_set_show_drag_handle; ///
 
   // Breakpoint
   GType function() c_adw_breakpoint_get_type; ///
@@ -270,6 +306,14 @@ __gshared extern(C) nothrow
   void function(AdwButtonContent* self, const(char)* iconName) c_adw_button_content_set_icon_name; ///
   void function(AdwButtonContent* self, const(char)* label) c_adw_button_content_set_label; ///
   void function(AdwButtonContent* self, gboolean useUnderline) c_adw_button_content_set_use_underline; ///
+
+  // ButtonRow
+  GType function() c_adw_button_row_get_type; ///
+  GtkWidget* function() c_adw_button_row_new; ///
+  const(char)* function(AdwButtonRow* self) c_adw_button_row_get_end_icon_name; ///
+  const(char)* function(AdwButtonRow* self) c_adw_button_row_get_start_icon_name; ///
+  void function(AdwButtonRow* self, const(char)* iconName) c_adw_button_row_set_end_icon_name; ///
+  void function(AdwButtonRow* self, const(char)* iconName) c_adw_button_row_set_start_icon_name; ///
 
   // CallbackAnimationTarget
   GType function() c_adw_callback_animation_target_get_type; ///
@@ -354,16 +398,20 @@ __gshared extern(C) nothrow
   gboolean function(AdwComboRow* self) c_adw_combo_row_get_enable_search; ///
   GtkExpression* function(AdwComboRow* self) c_adw_combo_row_get_expression; ///
   GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_factory; ///
+  GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_header_factory; ///
   GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_list_factory; ///
   GListModel* function(AdwComboRow* self) c_adw_combo_row_get_model; ///
+  GtkStringFilterMatchMode function(AdwComboRow* self) c_adw_combo_row_get_search_match_mode; ///
   uint function(AdwComboRow* self) c_adw_combo_row_get_selected; ///
   GObject* function(AdwComboRow* self) c_adw_combo_row_get_selected_item; ///
   gboolean function(AdwComboRow* self) c_adw_combo_row_get_use_subtitle; ///
   void function(AdwComboRow* self, gboolean enableSearch) c_adw_combo_row_set_enable_search; ///
   void function(AdwComboRow* self, GtkExpression* expression) c_adw_combo_row_set_expression; ///
   void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_factory; ///
+  void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_header_factory; ///
   void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_list_factory; ///
   void function(AdwComboRow* self, GListModel* model) c_adw_combo_row_set_model; ///
+  void function(AdwComboRow* self, GtkStringFilterMatchMode searchMatchMode) c_adw_combo_row_set_search_match_mode; ///
   void function(AdwComboRow* self, uint position) c_adw_combo_row_set_selected; ///
   void function(AdwComboRow* self, gboolean useSubtitle) c_adw_combo_row_set_use_subtitle; ///
 
@@ -404,6 +452,7 @@ __gshared extern(C) nothrow
   gboolean function(AdwEntryRow* self) c_adw_entry_row_get_enable_emoji_completion; ///
   GtkInputHints function(AdwEntryRow* self) c_adw_entry_row_get_input_hints; ///
   GtkInputPurpose function(AdwEntryRow* self) c_adw_entry_row_get_input_purpose; ///
+  int function(AdwEntryRow* self) c_adw_entry_row_get_max_length; ///
   gboolean function(AdwEntryRow* self) c_adw_entry_row_get_show_apply_button; ///
   uint function(AdwEntryRow* self) c_adw_entry_row_get_text_length; ///
   gboolean function(AdwEntryRow* self) c_adw_entry_row_grab_focus_without_selecting; ///
@@ -413,6 +462,7 @@ __gshared extern(C) nothrow
   void function(AdwEntryRow* self, gboolean enableEmojiCompletion) c_adw_entry_row_set_enable_emoji_completion; ///
   void function(AdwEntryRow* self, GtkInputHints hints) c_adw_entry_row_set_input_hints; ///
   void function(AdwEntryRow* self, GtkInputPurpose purpose) c_adw_entry_row_set_input_purpose; ///
+  void function(AdwEntryRow* self, int maxLength) c_adw_entry_row_set_max_length; ///
   void function(AdwEntryRow* self, gboolean showApplyButton) c_adw_entry_row_set_show_apply_button; ///
 
   // EnumListItem
@@ -505,6 +555,30 @@ __gshared extern(C) nothrow
   void function(AdwHeaderBar* self, gboolean showTitle) c_adw_header_bar_set_show_title; ///
   void function(AdwHeaderBar* self, GtkWidget* titleWidget) c_adw_header_bar_set_title_widget; ///
 
+  // InlineViewSwitcher
+  GType function() c_adw_inline_view_switcher_get_type; ///
+  GtkWidget* function() c_adw_inline_view_switcher_new; ///
+  gboolean function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_can_shrink; ///
+  AdwInlineViewSwitcherDisplayMode function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_display_mode; ///
+  gboolean function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_homogeneous; ///
+  AdwViewStack* function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_stack; ///
+  void function(AdwInlineViewSwitcher* self, gboolean canShrink) c_adw_inline_view_switcher_set_can_shrink; ///
+  void function(AdwInlineViewSwitcher* self, AdwInlineViewSwitcherDisplayMode mode) c_adw_inline_view_switcher_set_display_mode; ///
+  void function(AdwInlineViewSwitcher* self, gboolean homogeneous) c_adw_inline_view_switcher_set_homogeneous; ///
+  void function(AdwInlineViewSwitcher* self, AdwViewStack* stack) c_adw_inline_view_switcher_set_stack; ///
+
+  // Layout
+  GType function() c_adw_layout_get_type; ///
+  AdwLayout* function(GtkWidget* content) c_adw_layout_new; ///
+  GtkWidget* function(AdwLayout* self) c_adw_layout_get_content; ///
+  const(char)* function(AdwLayout* self) c_adw_layout_get_name; ///
+  void function(AdwLayout* self, const(char)* name) c_adw_layout_set_name; ///
+
+  // LayoutSlot
+  GType function() c_adw_layout_slot_get_type; ///
+  GtkWidget* function(const(char)* id) c_adw_layout_slot_new; ///
+  const(char)* function(AdwLayoutSlot* self) c_adw_layout_slot_get_slot_id; ///
+
   // Leaflet
   GType function() c_adw_leaflet_get_type; ///
   GtkWidget* function() c_adw_leaflet_new; ///
@@ -584,6 +658,19 @@ __gshared extern(C) nothrow
   void function(AdwMessageDialog* self, const(char)* response, gboolean enabled) c_adw_message_dialog_set_response_enabled; ///
   void function(AdwMessageDialog* self, const(char)* response, const(char)* label) c_adw_message_dialog_set_response_label; ///
 
+  // MultiLayoutView
+  GType function() c_adw_multi_layout_view_get_type; ///
+  GtkWidget* function() c_adw_multi_layout_view_new; ///
+  void function(AdwMultiLayoutView* self, AdwLayout* layout) c_adw_multi_layout_view_add_layout; ///
+  GtkWidget* function(AdwMultiLayoutView* self, const(char)* id) c_adw_multi_layout_view_get_child; ///
+  AdwLayout* function(AdwMultiLayoutView* self) c_adw_multi_layout_view_get_layout; ///
+  AdwLayout* function(AdwMultiLayoutView* self, const(char)* name) c_adw_multi_layout_view_get_layout_by_name; ///
+  const(char)* function(AdwMultiLayoutView* self) c_adw_multi_layout_view_get_layout_name; ///
+  void function(AdwMultiLayoutView* self, AdwLayout* layout) c_adw_multi_layout_view_remove_layout; ///
+  void function(AdwMultiLayoutView* self, const(char)* id, GtkWidget* child) c_adw_multi_layout_view_set_child; ///
+  void function(AdwMultiLayoutView* self, AdwLayout* layout) c_adw_multi_layout_view_set_layout; ///
+  void function(AdwMultiLayoutView* self, const(char)* name) c_adw_multi_layout_view_set_layout_name; ///
+
   // NavigationPage
   GType function() c_adw_navigation_page_get_type; ///
   AdwNavigationPage* function(GtkWidget* child, const(char)* title) c_adw_navigation_page_new; ///
@@ -606,6 +693,7 @@ __gshared extern(C) nothrow
   double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_min_sidebar_width; ///
   gboolean function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_show_content; ///
   AdwNavigationPage* function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar; ///
+  GtkPackType function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_position; ///
   double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_width_fraction; ///
   AdwLengthUnit function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_width_unit; ///
   void function(AdwNavigationSplitView* self, gboolean collapsed) c_adw_navigation_split_view_set_collapsed; ///
@@ -614,6 +702,7 @@ __gshared extern(C) nothrow
   void function(AdwNavigationSplitView* self, double width) c_adw_navigation_split_view_set_min_sidebar_width; ///
   void function(AdwNavigationSplitView* self, gboolean showContent) c_adw_navigation_split_view_set_show_content; ///
   void function(AdwNavigationSplitView* self, AdwNavigationPage* sidebar) c_adw_navigation_split_view_set_sidebar; ///
+  void function(AdwNavigationSplitView* self, GtkPackType position) c_adw_navigation_split_view_set_sidebar_position; ///
   void function(AdwNavigationSplitView* self, double fraction) c_adw_navigation_split_view_set_sidebar_width_fraction; ///
   void function(AdwNavigationSplitView* self, AdwLengthUnit unit) c_adw_navigation_split_view_set_sidebar_width_unit; ///
 
@@ -623,10 +712,13 @@ __gshared extern(C) nothrow
   void function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_add; ///
   AdwNavigationPage* function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_find_page; ///
   gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_animate_transitions; ///
+  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_hhomogeneous; ///
   GListModel* function(AdwNavigationView* self) c_adw_navigation_view_get_navigation_stack; ///
   gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_pop_on_escape; ///
   AdwNavigationPage* function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_get_previous_page; ///
+  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_vhomogeneous; ///
   AdwNavigationPage* function(AdwNavigationView* self) c_adw_navigation_view_get_visible_page; ///
+  const(char)* function(AdwNavigationView* self) c_adw_navigation_view_get_visible_page_tag; ///
   gboolean function(AdwNavigationView* self) c_adw_navigation_view_pop; ///
   gboolean function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_pop_to_page; ///
   gboolean function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_pop_to_tag; ///
@@ -636,7 +728,13 @@ __gshared extern(C) nothrow
   void function(AdwNavigationView* self, AdwNavigationPage** pages, int nPages) c_adw_navigation_view_replace; ///
   void function(AdwNavigationView* self, const(char*)* tags, int nTags) c_adw_navigation_view_replace_with_tags; ///
   void function(AdwNavigationView* self, gboolean animateTransitions) c_adw_navigation_view_set_animate_transitions; ///
+  void function(AdwNavigationView* self, gboolean hhomogeneous) c_adw_navigation_view_set_hhomogeneous; ///
   void function(AdwNavigationView* self, gboolean popOnEscape) c_adw_navigation_view_set_pop_on_escape; ///
+  void function(AdwNavigationView* self, gboolean vhomogeneous) c_adw_navigation_view_set_vhomogeneous; ///
+
+  // NoneAnimationTarget
+  GType function() c_adw_none_animation_target_get_type; ///
+  AdwAnimationTarget* function() c_adw_none_animation_target_new; ///
 
   // OverlaySplitView
   GType function() c_adw_overlay_split_view_get_type; ///
@@ -689,26 +787,36 @@ __gshared extern(C) nothrow
   GType function() c_adw_preferences_group_get_type; ///
   GtkWidget* function() c_adw_preferences_group_new; ///
   void function(AdwPreferencesGroup* self, GtkWidget* child) c_adw_preferences_group_add; ///
+  void function(AdwPreferencesGroup* self, GListModel* model, GtkListBoxCreateWidgetFunc createRowFunc, void* userData, GDestroyNotify userDataFreeFunc) c_adw_preferences_group_bind_model; ///
   const(char)* function(AdwPreferencesGroup* self) c_adw_preferences_group_get_description; ///
   GtkWidget* function(AdwPreferencesGroup* self) c_adw_preferences_group_get_header_suffix; ///
+  GtkWidget* function(AdwPreferencesGroup* self, uint index) c_adw_preferences_group_get_row; ///
+  gboolean function(AdwPreferencesGroup* self) c_adw_preferences_group_get_separate_rows; ///
   const(char)* function(AdwPreferencesGroup* self) c_adw_preferences_group_get_title; ///
   void function(AdwPreferencesGroup* self, GtkWidget* child) c_adw_preferences_group_remove; ///
   void function(AdwPreferencesGroup* self, const(char)* description) c_adw_preferences_group_set_description; ///
   void function(AdwPreferencesGroup* self, GtkWidget* suffix) c_adw_preferences_group_set_header_suffix; ///
+  void function(AdwPreferencesGroup* self, gboolean separateRows) c_adw_preferences_group_set_separate_rows; ///
   void function(AdwPreferencesGroup* self, const(char)* title) c_adw_preferences_group_set_title; ///
 
   // PreferencesPage
   GType function() c_adw_preferences_page_get_type; ///
   GtkWidget* function() c_adw_preferences_page_new; ///
   void function(AdwPreferencesPage* self, AdwPreferencesGroup* group) c_adw_preferences_page_add; ///
+  AdwBanner* function(AdwPreferencesPage* self) c_adw_preferences_page_get_banner; ///
   const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_description; ///
+  gboolean function(AdwPreferencesPage* self) c_adw_preferences_page_get_description_centered; ///
+  AdwPreferencesGroup* function(AdwPreferencesPage* self, uint index) c_adw_preferences_page_get_group; ///
   const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_icon_name; ///
   const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_name; ///
   const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_title; ///
   gboolean function(AdwPreferencesPage* self) c_adw_preferences_page_get_use_underline; ///
+  void function(AdwPreferencesPage* self, AdwPreferencesGroup* group, int index) c_adw_preferences_page_insert; ///
   void function(AdwPreferencesPage* self, AdwPreferencesGroup* group) c_adw_preferences_page_remove; ///
   void function(AdwPreferencesPage* self) c_adw_preferences_page_scroll_to_top; ///
+  void function(AdwPreferencesPage* self, AdwBanner* banner) c_adw_preferences_page_set_banner; ///
   void function(AdwPreferencesPage* self, const(char)* description) c_adw_preferences_page_set_description; ///
+  void function(AdwPreferencesPage* self, gboolean centered) c_adw_preferences_page_set_description_centered; ///
   void function(AdwPreferencesPage* self, const(char)* iconName) c_adw_preferences_page_set_icon_name; ///
   void function(AdwPreferencesPage* self, const(char)* name) c_adw_preferences_page_set_name; ///
   void function(AdwPreferencesPage* self, const(char)* title) c_adw_preferences_page_set_title; ///
@@ -752,6 +860,112 @@ __gshared extern(C) nothrow
   GObject* function(AdwPropertyAnimationTarget* self) c_adw_property_animation_target_get_object; ///
   GParamSpec* function(AdwPropertyAnimationTarget* self) c_adw_property_animation_target_get_pspec; ///
 
+  // ShortcutLabel
+  GType function() c_adw_shortcut_label_get_type; ///
+  GtkWidget* function(const(char)* accelerator) c_adw_shortcut_label_new; ///
+  const(char)* function(AdwShortcutLabel* self) c_adw_shortcut_label_get_accelerator; ///
+  const(char)* function(AdwShortcutLabel* self) c_adw_shortcut_label_get_disabled_text; ///
+  void function(AdwShortcutLabel* self, const(char)* accelerator) c_adw_shortcut_label_set_accelerator; ///
+  void function(AdwShortcutLabel* self, const(char)* disabledText) c_adw_shortcut_label_set_disabled_text; ///
+
+  // ShortcutsDialog
+  GType function() c_adw_shortcuts_dialog_get_type; ///
+  AdwDialog* function() c_adw_shortcuts_dialog_new; ///
+  void function(AdwShortcutsDialog* self, AdwShortcutsSection* section) c_adw_shortcuts_dialog_add; ///
+
+  // ShortcutsItem
+  GType function() c_adw_shortcuts_item_get_type; ///
+  AdwShortcutsItem* function(const(char)* title, const(char)* accelerator) c_adw_shortcuts_item_new; ///
+  AdwShortcutsItem* function(const(char)* title, const(char)* actionName) c_adw_shortcuts_item_new_from_action; ///
+  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_accelerator; ///
+  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_action_name; ///
+  GtkTextDirection function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_direction; ///
+  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_subtitle; ///
+  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_title; ///
+  void function(AdwShortcutsItem* self, const(char)* accelerator) c_adw_shortcuts_item_set_accelerator; ///
+  void function(AdwShortcutsItem* self, const(char)* actionName) c_adw_shortcuts_item_set_action_name; ///
+  void function(AdwShortcutsItem* self, GtkTextDirection direction) c_adw_shortcuts_item_set_direction; ///
+  void function(AdwShortcutsItem* self, const(char)* subtitle) c_adw_shortcuts_item_set_subtitle; ///
+  void function(AdwShortcutsItem* self, const(char)* title) c_adw_shortcuts_item_set_title; ///
+
+  // ShortcutsSection
+  GType function() c_adw_shortcuts_section_get_type; ///
+  AdwShortcutsSection* function(const(char)* title) c_adw_shortcuts_section_new; ///
+  void function(AdwShortcutsSection* self, AdwShortcutsItem* item) c_adw_shortcuts_section_add; ///
+  const(char)* function(AdwShortcutsSection* self) c_adw_shortcuts_section_get_title; ///
+  void function(AdwShortcutsSection* self, const(char)* title) c_adw_shortcuts_section_set_title; ///
+
+  // Sidebar
+  GType function() c_adw_sidebar_get_type; ///
+  GtkWidget* function() c_adw_sidebar_new; ///
+  void function(AdwSidebar* self, AdwSidebarSection* section) c_adw_sidebar_append; ///
+  gboolean function(AdwSidebar* self) c_adw_sidebar_get_drop_preload; ///
+  GtkFilter* function(AdwSidebar* self) c_adw_sidebar_get_filter; ///
+  AdwSidebarItem* function(AdwSidebar* self, uint index) c_adw_sidebar_get_item; ///
+  GtkSelectionModel* function(AdwSidebar* self) c_adw_sidebar_get_items; ///
+  GMenuModel* function(AdwSidebar* self) c_adw_sidebar_get_menu_model; ///
+  AdwSidebarMode function(AdwSidebar* self) c_adw_sidebar_get_mode; ///
+  GtkWidget* function(AdwSidebar* self) c_adw_sidebar_get_placeholder; ///
+  AdwSidebarSection* function(AdwSidebar* self, uint index) c_adw_sidebar_get_section; ///
+  GListModel* function(AdwSidebar* self) c_adw_sidebar_get_sections; ///
+  uint function(AdwSidebar* self) c_adw_sidebar_get_selected; ///
+  AdwSidebarItem* function(AdwSidebar* self) c_adw_sidebar_get_selected_item; ///
+  void function(AdwSidebar* self, AdwSidebarSection* section, int position) c_adw_sidebar_insert; ///
+  void function(AdwSidebar* self, AdwSidebarSection* section) c_adw_sidebar_prepend; ///
+  void function(AdwSidebar* self, AdwSidebarSection* section) c_adw_sidebar_remove; ///
+  void function(AdwSidebar* self) c_adw_sidebar_remove_all; ///
+  void function(AdwSidebar* self, gboolean preload) c_adw_sidebar_set_drop_preload; ///
+  void function(AdwSidebar* self, GtkFilter* filter) c_adw_sidebar_set_filter; ///
+  void function(AdwSidebar* self, GMenuModel* menuModel) c_adw_sidebar_set_menu_model; ///
+  void function(AdwSidebar* self, AdwSidebarMode mode) c_adw_sidebar_set_mode; ///
+  void function(AdwSidebar* self, GtkWidget* placeholder) c_adw_sidebar_set_placeholder; ///
+  void function(AdwSidebar* self, uint selected) c_adw_sidebar_set_selected; ///
+  void function(AdwSidebar* self, GdkDragAction actions, GType* types, size_t nTypes) c_adw_sidebar_setup_drop_target; ///
+
+  // SidebarItem
+  GType function() c_adw_sidebar_item_get_type; ///
+  AdwSidebarItem* function(const(char)* title) c_adw_sidebar_item_new; ///
+  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_drag_motion_activate; ///
+  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_enabled; ///
+  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_icon_name; ///
+  GdkPaintable* function(AdwSidebarItem* self) c_adw_sidebar_item_get_icon_paintable; ///
+  uint function(AdwSidebarItem* self) c_adw_sidebar_item_get_index; ///
+  AdwSidebarSection* function(AdwSidebarItem* self) c_adw_sidebar_item_get_section; ///
+  uint function(AdwSidebarItem* self) c_adw_sidebar_item_get_section_index; ///
+  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_subtitle; ///
+  GtkWidget* function(AdwSidebarItem* self) c_adw_sidebar_item_get_suffix; ///
+  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_title; ///
+  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_tooltip; ///
+  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_use_underline; ///
+  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_visible; ///
+  void function(AdwSidebarItem* self, gboolean dragMotionActivate) c_adw_sidebar_item_set_drag_motion_activate; ///
+  void function(AdwSidebarItem* self, gboolean enabled) c_adw_sidebar_item_set_enabled; ///
+  void function(AdwSidebarItem* self, const(char)* iconName) c_adw_sidebar_item_set_icon_name; ///
+  void function(AdwSidebarItem* self, GdkPaintable* paintable) c_adw_sidebar_item_set_icon_paintable; ///
+  void function(AdwSidebarItem* self, const(char)* subtitle) c_adw_sidebar_item_set_subtitle; ///
+  void function(AdwSidebarItem* self, GtkWidget* suffix) c_adw_sidebar_item_set_suffix; ///
+  void function(AdwSidebarItem* self, const(char)* title) c_adw_sidebar_item_set_title; ///
+  void function(AdwSidebarItem* self, const(char)* tooltip) c_adw_sidebar_item_set_tooltip; ///
+  void function(AdwSidebarItem* self, gboolean useUnderline) c_adw_sidebar_item_set_use_underline; ///
+  void function(AdwSidebarItem* self, gboolean visible) c_adw_sidebar_item_set_visible; ///
+
+  // SidebarSection
+  GType function() c_adw_sidebar_section_get_type; ///
+  AdwSidebarSection* function() c_adw_sidebar_section_new; ///
+  void function(AdwSidebarSection* self, AdwSidebarItem* item) c_adw_sidebar_section_append; ///
+  void function(AdwSidebarSection* self, GListModel* model, AdwSidebarSectionCreateItemFunc createItemFunc, void* userData, GDestroyNotify userDataFreeFunc) c_adw_sidebar_section_bind_model; ///
+  AdwSidebarItem* function(AdwSidebarSection* self, uint index) c_adw_sidebar_section_get_item; ///
+  GListModel* function(AdwSidebarSection* self) c_adw_sidebar_section_get_items; ///
+  GMenuModel* function(AdwSidebarSection* self) c_adw_sidebar_section_get_menu_model; ///
+  AdwSidebar* function(AdwSidebarSection* self) c_adw_sidebar_section_get_sidebar; ///
+  const(char)* function(AdwSidebarSection* self) c_adw_sidebar_section_get_title; ///
+  void function(AdwSidebarSection* self, AdwSidebarItem* item, int position) c_adw_sidebar_section_insert; ///
+  void function(AdwSidebarSection* self, AdwSidebarItem* item) c_adw_sidebar_section_prepend; ///
+  void function(AdwSidebarSection* self, AdwSidebarItem* item) c_adw_sidebar_section_remove; ///
+  void function(AdwSidebarSection* self) c_adw_sidebar_section_remove_all; ///
+  void function(AdwSidebarSection* self, GMenuModel* menuModel) c_adw_sidebar_section_set_menu_model; ///
+  void function(AdwSidebarSection* self, const(char)* title) c_adw_sidebar_section_set_title; ///
+
   // SpinRow
   GType function() c_adw_spin_row_get_type; ///
   GtkWidget* function(GtkAdjustment* adjustment, double climbRate, uint digits) c_adw_spin_row_new; ///
@@ -775,6 +989,16 @@ __gshared extern(C) nothrow
   void function(AdwSpinRow* self, double value) c_adw_spin_row_set_value; ///
   void function(AdwSpinRow* self, gboolean wrap) c_adw_spin_row_set_wrap; ///
   void function(AdwSpinRow* self) c_adw_spin_row_update; ///
+
+  // Spinner
+  GType function() c_adw_spinner_get_type; ///
+  GtkWidget* function() c_adw_spinner_new; ///
+
+  // SpinnerPaintable
+  GType function() c_adw_spinner_paintable_get_type; ///
+  AdwSpinnerPaintable* function(GtkWidget* widget) c_adw_spinner_paintable_new; ///
+  GtkWidget* function(AdwSpinnerPaintable* self) c_adw_spinner_paintable_get_widget; ///
+  void function(AdwSpinnerPaintable* self, GtkWidget* widget) c_adw_spinner_paintable_set_widget; ///
 
   // SplitButton
   GType function() c_adw_split_button_get_type; ///
@@ -881,10 +1105,15 @@ __gshared extern(C) nothrow
   GType function() c_adw_style_manager_get_type; ///
   AdwStyleManager* function() c_adw_style_manager_get_default; ///
   AdwStyleManager* function(GdkDisplay* display) c_adw_style_manager_get_for_display; ///
+  AdwAccentColor function(AdwStyleManager* self) c_adw_style_manager_get_accent_color; ///
+  GdkRGBA* function(AdwStyleManager* self) c_adw_style_manager_get_accent_color_rgba; ///
   AdwColorScheme function(AdwStyleManager* self) c_adw_style_manager_get_color_scheme; ///
   gboolean function(AdwStyleManager* self) c_adw_style_manager_get_dark; ///
   GdkDisplay* function(AdwStyleManager* self) c_adw_style_manager_get_display; ///
+  const(char)* function(AdwStyleManager* self) c_adw_style_manager_get_document_font_name; ///
   gboolean function(AdwStyleManager* self) c_adw_style_manager_get_high_contrast; ///
+  const(char)* function(AdwStyleManager* self) c_adw_style_manager_get_monospace_font_name; ///
+  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_system_supports_accent_colors; ///
   gboolean function(AdwStyleManager* self) c_adw_style_manager_get_system_supports_color_schemes; ///
   void function(AdwStyleManager* self, AdwColorScheme colorScheme) c_adw_style_manager_set_color_scheme; ///
 
@@ -1098,8 +1327,49 @@ __gshared extern(C) nothrow
   GType function() c_adw_toast_overlay_get_type; ///
   GtkWidget* function() c_adw_toast_overlay_new; ///
   void function(AdwToastOverlay* self, AdwToast* toast) c_adw_toast_overlay_add_toast; ///
+  void function(AdwToastOverlay* self) c_adw_toast_overlay_dismiss_all; ///
   GtkWidget* function(AdwToastOverlay* self) c_adw_toast_overlay_get_child; ///
   void function(AdwToastOverlay* self, GtkWidget* child) c_adw_toast_overlay_set_child; ///
+
+  // Toggle
+  GType function() c_adw_toggle_get_type; ///
+  AdwToggle* function() c_adw_toggle_new; ///
+  GtkWidget* function(AdwToggle* self) c_adw_toggle_get_child; ///
+  const(char)* function(AdwToggle* self) c_adw_toggle_get_description; ///
+  gboolean function(AdwToggle* self) c_adw_toggle_get_enabled; ///
+  const(char)* function(AdwToggle* self) c_adw_toggle_get_icon_name; ///
+  uint function(AdwToggle* self) c_adw_toggle_get_index; ///
+  const(char)* function(AdwToggle* self) c_adw_toggle_get_label; ///
+  const(char)* function(AdwToggle* self) c_adw_toggle_get_name; ///
+  const(char)* function(AdwToggle* self) c_adw_toggle_get_tooltip; ///
+  gboolean function(AdwToggle* self) c_adw_toggle_get_use_underline; ///
+  void function(AdwToggle* self, GtkWidget* child) c_adw_toggle_set_child; ///
+  void function(AdwToggle* self, const(char)* description) c_adw_toggle_set_description; ///
+  void function(AdwToggle* self, gboolean enabled) c_adw_toggle_set_enabled; ///
+  void function(AdwToggle* self, const(char)* iconName) c_adw_toggle_set_icon_name; ///
+  void function(AdwToggle* self, const(char)* label) c_adw_toggle_set_label; ///
+  void function(AdwToggle* self, const(char)* name) c_adw_toggle_set_name; ///
+  void function(AdwToggle* self, const(char)* tooltip) c_adw_toggle_set_tooltip; ///
+  void function(AdwToggle* self, gboolean useUnderline) c_adw_toggle_set_use_underline; ///
+
+  // ToggleGroup
+  GType function() c_adw_toggle_group_get_type; ///
+  GtkWidget* function() c_adw_toggle_group_new; ///
+  void function(AdwToggleGroup* self, AdwToggle* toggle) c_adw_toggle_group_add; ///
+  uint function(AdwToggleGroup* self) c_adw_toggle_group_get_active; ///
+  const(char)* function(AdwToggleGroup* self) c_adw_toggle_group_get_active_name; ///
+  gboolean function(AdwToggleGroup* self) c_adw_toggle_group_get_can_shrink; ///
+  gboolean function(AdwToggleGroup* self) c_adw_toggle_group_get_homogeneous; ///
+  uint function(AdwToggleGroup* self) c_adw_toggle_group_get_n_toggles; ///
+  AdwToggle* function(AdwToggleGroup* self, uint index) c_adw_toggle_group_get_toggle; ///
+  AdwToggle* function(AdwToggleGroup* self, const(char)* name) c_adw_toggle_group_get_toggle_by_name; ///
+  GtkSelectionModel* function(AdwToggleGroup* self) c_adw_toggle_group_get_toggles; ///
+  void function(AdwToggleGroup* self, AdwToggle* toggle) c_adw_toggle_group_remove; ///
+  void function(AdwToggleGroup* self) c_adw_toggle_group_remove_all; ///
+  void function(AdwToggleGroup* self, uint active) c_adw_toggle_group_set_active; ///
+  void function(AdwToggleGroup* self, const(char)* name) c_adw_toggle_group_set_active_name; ///
+  void function(AdwToggleGroup* self, gboolean canShrink) c_adw_toggle_group_set_can_shrink; ///
+  void function(AdwToggleGroup* self, gboolean homogeneous) c_adw_toggle_group_set_homogeneous; ///
 
   // ToolbarView
   GType function() c_adw_toolbar_view_get_type; ///
@@ -1132,14 +1402,19 @@ __gshared extern(C) nothrow
   AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title) c_adw_view_stack_add_titled; ///
   AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title, const(char)* iconName) c_adw_view_stack_add_titled_with_icon; ///
   GtkWidget* function(AdwViewStack* self, const(char)* name) c_adw_view_stack_get_child_by_name; ///
+  gboolean function(AdwViewStack* self) c_adw_view_stack_get_enable_transitions; ///
   gboolean function(AdwViewStack* self) c_adw_view_stack_get_hhomogeneous; ///
   AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_get_page; ///
   GtkSelectionModel* function(AdwViewStack* self) c_adw_view_stack_get_pages; ///
+  uint function(AdwViewStack* self) c_adw_view_stack_get_transition_duration; ///
+  gboolean function(AdwViewStack* self) c_adw_view_stack_get_transition_running; ///
   gboolean function(AdwViewStack* self) c_adw_view_stack_get_vhomogeneous; ///
   GtkWidget* function(AdwViewStack* self) c_adw_view_stack_get_visible_child; ///
   const(char)* function(AdwViewStack* self) c_adw_view_stack_get_visible_child_name; ///
   void function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_remove; ///
+  void function(AdwViewStack* self, gboolean enableTransitions) c_adw_view_stack_set_enable_transitions; ///
   void function(AdwViewStack* self, gboolean hhomogeneous) c_adw_view_stack_set_hhomogeneous; ///
+  void function(AdwViewStack* self, uint duration) c_adw_view_stack_set_transition_duration; ///
   void function(AdwViewStack* self, gboolean vhomogeneous) c_adw_view_stack_set_vhomogeneous; ///
   void function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_set_visible_child; ///
   void function(AdwViewStack* self, const(char)* name) c_adw_view_stack_set_visible_child_name; ///
@@ -1151,6 +1426,8 @@ __gshared extern(C) nothrow
   const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_icon_name; ///
   const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_name; ///
   gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_needs_attention; ///
+  const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_section_title; ///
+  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_starts_section; ///
   const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_title; ///
   gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_use_underline; ///
   gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_visible; ///
@@ -1158,6 +1435,8 @@ __gshared extern(C) nothrow
   void function(AdwViewStackPage* self, const(char)* iconName) c_adw_view_stack_page_set_icon_name; ///
   void function(AdwViewStackPage* self, const(char)* name) c_adw_view_stack_page_set_name; ///
   void function(AdwViewStackPage* self, gboolean needsAttention) c_adw_view_stack_page_set_needs_attention; ///
+  void function(AdwViewStackPage* self, const(char)* sectionTitle) c_adw_view_stack_page_set_section_title; ///
+  void function(AdwViewStackPage* self, gboolean startsSection) c_adw_view_stack_page_set_starts_section; ///
   void function(AdwViewStackPage* self, const(char)* title) c_adw_view_stack_page_set_title; ///
   void function(AdwViewStackPage* self, gboolean useUnderline) c_adw_view_stack_page_set_use_underline; ///
   void function(AdwViewStackPage* self, gboolean visible) c_adw_view_stack_page_set_visible; ///
@@ -1183,6 +1462,18 @@ __gshared extern(C) nothrow
   void function(AdwViewSwitcherBar* self, gboolean reveal) c_adw_view_switcher_bar_set_reveal; ///
   void function(AdwViewSwitcherBar* self, AdwViewStack* stack) c_adw_view_switcher_bar_set_stack; ///
 
+  // ViewSwitcherSidebar
+  GType function() c_adw_view_switcher_sidebar_get_type; ///
+  GtkWidget* function() c_adw_view_switcher_sidebar_new; ///
+  GtkFilter* function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_filter; ///
+  AdwSidebarMode function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_mode; ///
+  GtkWidget* function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_placeholder; ///
+  AdwViewStack* function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_stack; ///
+  void function(AdwViewSwitcherSidebar* self, GtkFilter* filter) c_adw_view_switcher_sidebar_set_filter; ///
+  void function(AdwViewSwitcherSidebar* self, AdwSidebarMode mode) c_adw_view_switcher_sidebar_set_mode; ///
+  void function(AdwViewSwitcherSidebar* self, GtkWidget* placeholder) c_adw_view_switcher_sidebar_set_placeholder; ///
+  void function(AdwViewSwitcherSidebar* self, AdwViewStack* stack) c_adw_view_switcher_sidebar_set_stack; ///
+
   // ViewSwitcherTitle
   GType function() c_adw_view_switcher_title_get_type; ///
   GtkWidget* function() c_adw_view_switcher_title_new; ///
@@ -1200,10 +1491,12 @@ __gshared extern(C) nothrow
   GType function() c_adw_window_get_type; ///
   GtkWidget* function() c_adw_window_new; ///
   void function(AdwWindow* self, AdwBreakpoint* breakpoint) c_adw_window_add_breakpoint; ///
+  gboolean function(AdwWindow* self) c_adw_window_get_adaptive_preview; ///
   GtkWidget* function(AdwWindow* self) c_adw_window_get_content; ///
   AdwBreakpoint* function(AdwWindow* self) c_adw_window_get_current_breakpoint; ///
   GListModel* function(AdwWindow* self) c_adw_window_get_dialogs; ///
   AdwDialog* function(AdwWindow* self) c_adw_window_get_visible_dialog; ///
+  void function(AdwWindow* self, gboolean adaptivePreview) c_adw_window_set_adaptive_preview; ///
   void function(AdwWindow* self, GtkWidget* content) c_adw_window_set_content; ///
 
   // WindowTitle
@@ -1214,6 +1507,72 @@ __gshared extern(C) nothrow
   void function(AdwWindowTitle* self, const(char)* subtitle) c_adw_window_title_set_subtitle; ///
   void function(AdwWindowTitle* self, const(char)* title) c_adw_window_title_set_title; ///
 
+  // WrapBox
+  GType function() c_adw_wrap_box_get_type; ///
+  GtkWidget* function() c_adw_wrap_box_new; ///
+  void function(AdwWrapBox* self, GtkWidget* child) c_adw_wrap_box_append; ///
+  float function(AdwWrapBox* self) c_adw_wrap_box_get_align; ///
+  int function(AdwWrapBox* self) c_adw_wrap_box_get_child_spacing; ///
+  AdwLengthUnit function(AdwWrapBox* self) c_adw_wrap_box_get_child_spacing_unit; ///
+  AdwJustifyMode function(AdwWrapBox* self) c_adw_wrap_box_get_justify; ///
+  gboolean function(AdwWrapBox* self) c_adw_wrap_box_get_justify_last_line; ///
+  gboolean function(AdwWrapBox* self) c_adw_wrap_box_get_line_homogeneous; ///
+  int function(AdwWrapBox* self) c_adw_wrap_box_get_line_spacing; ///
+  AdwLengthUnit function(AdwWrapBox* self) c_adw_wrap_box_get_line_spacing_unit; ///
+  int function(AdwWrapBox* self) c_adw_wrap_box_get_natural_line_length; ///
+  AdwLengthUnit function(AdwWrapBox* self) c_adw_wrap_box_get_natural_line_length_unit; ///
+  AdwPackDirection function(AdwWrapBox* self) c_adw_wrap_box_get_pack_direction; ///
+  AdwWrapPolicy function(AdwWrapBox* self) c_adw_wrap_box_get_wrap_policy; ///
+  gboolean function(AdwWrapBox* self) c_adw_wrap_box_get_wrap_reverse; ///
+  void function(AdwWrapBox* self, GtkWidget* child, GtkWidget* sibling) c_adw_wrap_box_insert_child_after; ///
+  void function(AdwWrapBox* self, GtkWidget* child) c_adw_wrap_box_prepend; ///
+  void function(AdwWrapBox* self, GtkWidget* child) c_adw_wrap_box_remove; ///
+  void function(AdwWrapBox* self) c_adw_wrap_box_remove_all; ///
+  void function(AdwWrapBox* self, GtkWidget* child, GtkWidget* sibling) c_adw_wrap_box_reorder_child_after; ///
+  void function(AdwWrapBox* self, float align_) c_adw_wrap_box_set_align; ///
+  void function(AdwWrapBox* self, int childSpacing) c_adw_wrap_box_set_child_spacing; ///
+  void function(AdwWrapBox* self, AdwLengthUnit unit) c_adw_wrap_box_set_child_spacing_unit; ///
+  void function(AdwWrapBox* self, AdwJustifyMode justify) c_adw_wrap_box_set_justify; ///
+  void function(AdwWrapBox* self, gboolean justifyLastLine) c_adw_wrap_box_set_justify_last_line; ///
+  void function(AdwWrapBox* self, gboolean homogeneous) c_adw_wrap_box_set_line_homogeneous; ///
+  void function(AdwWrapBox* self, int lineSpacing) c_adw_wrap_box_set_line_spacing; ///
+  void function(AdwWrapBox* self, AdwLengthUnit unit) c_adw_wrap_box_set_line_spacing_unit; ///
+  void function(AdwWrapBox* self, int naturalLineLength) c_adw_wrap_box_set_natural_line_length; ///
+  void function(AdwWrapBox* self, AdwLengthUnit unit) c_adw_wrap_box_set_natural_line_length_unit; ///
+  void function(AdwWrapBox* self, AdwPackDirection packDirection) c_adw_wrap_box_set_pack_direction; ///
+  void function(AdwWrapBox* self, AdwWrapPolicy wrapPolicy) c_adw_wrap_box_set_wrap_policy; ///
+  void function(AdwWrapBox* self, gboolean wrapReverse) c_adw_wrap_box_set_wrap_reverse; ///
+
+  // WrapLayout
+  GType function() c_adw_wrap_layout_get_type; ///
+  GtkLayoutManager* function() c_adw_wrap_layout_new; ///
+  float function(AdwWrapLayout* self) c_adw_wrap_layout_get_align; ///
+  int function(AdwWrapLayout* self) c_adw_wrap_layout_get_child_spacing; ///
+  AdwLengthUnit function(AdwWrapLayout* self) c_adw_wrap_layout_get_child_spacing_unit; ///
+  AdwJustifyMode function(AdwWrapLayout* self) c_adw_wrap_layout_get_justify; ///
+  gboolean function(AdwWrapLayout* self) c_adw_wrap_layout_get_justify_last_line; ///
+  gboolean function(AdwWrapLayout* self) c_adw_wrap_layout_get_line_homogeneous; ///
+  int function(AdwWrapLayout* self) c_adw_wrap_layout_get_line_spacing; ///
+  AdwLengthUnit function(AdwWrapLayout* self) c_adw_wrap_layout_get_line_spacing_unit; ///
+  int function(AdwWrapLayout* self) c_adw_wrap_layout_get_natural_line_length; ///
+  AdwLengthUnit function(AdwWrapLayout* self) c_adw_wrap_layout_get_natural_line_length_unit; ///
+  AdwPackDirection function(AdwWrapLayout* self) c_adw_wrap_layout_get_pack_direction; ///
+  AdwWrapPolicy function(AdwWrapLayout* self) c_adw_wrap_layout_get_wrap_policy; ///
+  gboolean function(AdwWrapLayout* self) c_adw_wrap_layout_get_wrap_reverse; ///
+  void function(AdwWrapLayout* self, float align_) c_adw_wrap_layout_set_align; ///
+  void function(AdwWrapLayout* self, int childSpacing) c_adw_wrap_layout_set_child_spacing; ///
+  void function(AdwWrapLayout* self, AdwLengthUnit unit) c_adw_wrap_layout_set_child_spacing_unit; ///
+  void function(AdwWrapLayout* self, AdwJustifyMode justify) c_adw_wrap_layout_set_justify; ///
+  void function(AdwWrapLayout* self, gboolean justifyLastLine) c_adw_wrap_layout_set_justify_last_line; ///
+  void function(AdwWrapLayout* self, gboolean homogeneous) c_adw_wrap_layout_set_line_homogeneous; ///
+  void function(AdwWrapLayout* self, int lineSpacing) c_adw_wrap_layout_set_line_spacing; ///
+  void function(AdwWrapLayout* self, AdwLengthUnit unit) c_adw_wrap_layout_set_line_spacing_unit; ///
+  void function(AdwWrapLayout* self, int naturalLineLength) c_adw_wrap_layout_set_natural_line_length; ///
+  void function(AdwWrapLayout* self, AdwLengthUnit unit) c_adw_wrap_layout_set_natural_line_length_unit; ///
+  void function(AdwWrapLayout* self, AdwPackDirection packDirection) c_adw_wrap_layout_set_pack_direction; ///
+  void function(AdwWrapLayout* self, AdwWrapPolicy wrapPolicy) c_adw_wrap_layout_set_wrap_policy; ///
+  void function(AdwWrapLayout* self, gboolean wrapReverse) c_adw_wrap_layout_set_wrap_reverse; ///
+
   // global
   gboolean function(GtkWidget* widget) c_adw_get_enable_animations; ///
   uint function() c_adw_get_major_version; ///
@@ -1222,10 +1581,15 @@ __gshared extern(C) nothrow
   void function() c_adw_init; ///
   gboolean function() c_adw_is_initialized; ///
   double function(double a, double b, double t) c_adw_lerp; ///
+  void function(const(GdkRGBA)* rgba, gboolean dark, GdkRGBA* standaloneRgba) c_adw_rgba_to_standalone; ///
   void function(GtkWidget* parent, const(char)* firstPropertyName,  ...) c_adw_show_about_dialog; ///
   void function(GtkWidget* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) c_adw_show_about_dialog_from_appdata; ///
   void function(GtkWindow* parent, const(char)* firstPropertyName,  ...) c_adw_show_about_window; ///
   void function(GtkWindow* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) c_adw_show_about_window_from_appdata; ///
+
+  // AccentColor
+  void function(AdwAccentColor self, GdkRGBA* rgba) c_adw_accent_color_to_rgba; ///
+  void function(AdwAccentColor self, gboolean dark, GdkRGBA* rgba) c_adw_accent_color_to_standalone_rgba; ///
 
   // Easing
   double function(AdwEasing self, double value) c_adw_easing_ease; ///
@@ -1257,6 +1621,12 @@ alias adw_about_dialog_add_legal_section = c_adw_about_dialog_add_legal_section;
 
 /** */
 alias adw_about_dialog_add_link = c_adw_about_dialog_add_link;
+
+/** */
+alias adw_about_dialog_add_other_app = c_adw_about_dialog_add_other_app;
+
+/** */
+alias adw_about_dialog_get_appdata_resource_path = c_adw_about_dialog_get_appdata_resource_path;
 
 /** */
 alias adw_about_dialog_get_application_icon = c_adw_about_dialog_get_application_icon;
@@ -1631,6 +2001,9 @@ alias adw_alert_dialog_get_heading = c_adw_alert_dialog_get_heading;
 alias adw_alert_dialog_get_heading_use_markup = c_adw_alert_dialog_get_heading_use_markup;
 
 /** */
+alias adw_alert_dialog_get_prefer_wide_layout = c_adw_alert_dialog_get_prefer_wide_layout;
+
+/** */
 alias adw_alert_dialog_get_response_appearance = c_adw_alert_dialog_get_response_appearance;
 
 /** */
@@ -1665,6 +2038,9 @@ alias adw_alert_dialog_set_heading = c_adw_alert_dialog_set_heading;
 
 /** */
 alias adw_alert_dialog_set_heading_use_markup = c_adw_alert_dialog_set_heading_use_markup;
+
+/** */
+alias adw_alert_dialog_set_prefer_wide_layout = c_adw_alert_dialog_set_prefer_wide_layout;
 
 /** */
 alias adw_alert_dialog_set_response_appearance = c_adw_alert_dialog_set_response_appearance;
@@ -1744,6 +2120,9 @@ alias adw_application_window_new = c_adw_application_window_new;
 alias adw_application_window_add_breakpoint = c_adw_application_window_add_breakpoint;
 
 /** */
+alias adw_application_window_get_adaptive_preview = c_adw_application_window_get_adaptive_preview;
+
+/** */
 alias adw_application_window_get_content = c_adw_application_window_get_content;
 
 /** */
@@ -1754,6 +2133,9 @@ alias adw_application_window_get_dialogs = c_adw_application_window_get_dialogs;
 
 /** */
 alias adw_application_window_get_visible_dialog = c_adw_application_window_get_visible_dialog;
+
+/** */
+alias adw_application_window_set_adaptive_preview = c_adw_application_window_set_adaptive_preview;
 
 /** */
 alias adw_application_window_set_content = c_adw_application_window_set_content;
@@ -1811,6 +2193,9 @@ alias adw_banner_new = c_adw_banner_new;
 alias adw_banner_get_button_label = c_adw_banner_get_button_label;
 
 /** */
+alias adw_banner_get_button_style = c_adw_banner_get_button_style;
+
+/** */
 alias adw_banner_get_revealed = c_adw_banner_get_revealed;
 
 /** */
@@ -1821,6 +2206,9 @@ alias adw_banner_get_use_markup = c_adw_banner_get_use_markup;
 
 /** */
 alias adw_banner_set_button_label = c_adw_banner_set_button_label;
+
+/** */
+alias adw_banner_set_button_style = c_adw_banner_set_button_style;
 
 /** */
 alias adw_banner_set_revealed = c_adw_banner_set_revealed;
@@ -1844,6 +2232,86 @@ alias adw_bin_get_child = c_adw_bin_get_child;
 
 /** */
 alias adw_bin_set_child = c_adw_bin_set_child;
+
+// BottomSheet
+
+/** */
+alias adw_bottom_sheet_get_type = c_adw_bottom_sheet_get_type;
+
+/** */
+alias adw_bottom_sheet_new = c_adw_bottom_sheet_new;
+
+/** */
+alias adw_bottom_sheet_get_align = c_adw_bottom_sheet_get_align;
+
+/** */
+alias adw_bottom_sheet_get_bottom_bar = c_adw_bottom_sheet_get_bottom_bar;
+
+/** */
+alias adw_bottom_sheet_get_bottom_bar_height = c_adw_bottom_sheet_get_bottom_bar_height;
+
+/** */
+alias adw_bottom_sheet_get_can_close = c_adw_bottom_sheet_get_can_close;
+
+/** */
+alias adw_bottom_sheet_get_can_open = c_adw_bottom_sheet_get_can_open;
+
+/** */
+alias adw_bottom_sheet_get_content = c_adw_bottom_sheet_get_content;
+
+/** */
+alias adw_bottom_sheet_get_full_width = c_adw_bottom_sheet_get_full_width;
+
+/** */
+alias adw_bottom_sheet_get_modal = c_adw_bottom_sheet_get_modal;
+
+/** */
+alias adw_bottom_sheet_get_open = c_adw_bottom_sheet_get_open;
+
+/** */
+alias adw_bottom_sheet_get_reveal_bottom_bar = c_adw_bottom_sheet_get_reveal_bottom_bar;
+
+/** */
+alias adw_bottom_sheet_get_sheet = c_adw_bottom_sheet_get_sheet;
+
+/** */
+alias adw_bottom_sheet_get_sheet_height = c_adw_bottom_sheet_get_sheet_height;
+
+/** */
+alias adw_bottom_sheet_get_show_drag_handle = c_adw_bottom_sheet_get_show_drag_handle;
+
+/** */
+alias adw_bottom_sheet_set_align = c_adw_bottom_sheet_set_align;
+
+/** */
+alias adw_bottom_sheet_set_bottom_bar = c_adw_bottom_sheet_set_bottom_bar;
+
+/** */
+alias adw_bottom_sheet_set_can_close = c_adw_bottom_sheet_set_can_close;
+
+/** */
+alias adw_bottom_sheet_set_can_open = c_adw_bottom_sheet_set_can_open;
+
+/** */
+alias adw_bottom_sheet_set_content = c_adw_bottom_sheet_set_content;
+
+/** */
+alias adw_bottom_sheet_set_full_width = c_adw_bottom_sheet_set_full_width;
+
+/** */
+alias adw_bottom_sheet_set_modal = c_adw_bottom_sheet_set_modal;
+
+/** */
+alias adw_bottom_sheet_set_open = c_adw_bottom_sheet_set_open;
+
+/** */
+alias adw_bottom_sheet_set_reveal_bottom_bar = c_adw_bottom_sheet_set_reveal_bottom_bar;
+
+/** */
+alias adw_bottom_sheet_set_sheet = c_adw_bottom_sheet_set_sheet;
+
+/** */
+alias adw_bottom_sheet_set_show_drag_handle = c_adw_bottom_sheet_set_show_drag_handle;
 
 // Breakpoint
 
@@ -1954,6 +2422,26 @@ alias adw_button_content_set_label = c_adw_button_content_set_label;
 
 /** */
 alias adw_button_content_set_use_underline = c_adw_button_content_set_use_underline;
+
+// ButtonRow
+
+/** */
+alias adw_button_row_get_type = c_adw_button_row_get_type;
+
+/** */
+alias adw_button_row_new = c_adw_button_row_new;
+
+/** */
+alias adw_button_row_get_end_icon_name = c_adw_button_row_get_end_icon_name;
+
+/** */
+alias adw_button_row_get_start_icon_name = c_adw_button_row_get_start_icon_name;
+
+/** */
+alias adw_button_row_set_end_icon_name = c_adw_button_row_set_end_icon_name;
+
+/** */
+alias adw_button_row_set_start_icon_name = c_adw_button_row_set_start_icon_name;
 
 // CallbackAnimationTarget
 
@@ -2176,10 +2664,16 @@ alias adw_combo_row_get_expression = c_adw_combo_row_get_expression;
 alias adw_combo_row_get_factory = c_adw_combo_row_get_factory;
 
 /** */
+alias adw_combo_row_get_header_factory = c_adw_combo_row_get_header_factory;
+
+/** */
 alias adw_combo_row_get_list_factory = c_adw_combo_row_get_list_factory;
 
 /** */
 alias adw_combo_row_get_model = c_adw_combo_row_get_model;
+
+/** */
+alias adw_combo_row_get_search_match_mode = c_adw_combo_row_get_search_match_mode;
 
 /** */
 alias adw_combo_row_get_selected = c_adw_combo_row_get_selected;
@@ -2200,10 +2694,16 @@ alias adw_combo_row_set_expression = c_adw_combo_row_set_expression;
 alias adw_combo_row_set_factory = c_adw_combo_row_set_factory;
 
 /** */
+alias adw_combo_row_set_header_factory = c_adw_combo_row_set_header_factory;
+
+/** */
 alias adw_combo_row_set_list_factory = c_adw_combo_row_set_list_factory;
 
 /** */
 alias adw_combo_row_set_model = c_adw_combo_row_set_model;
+
+/** */
+alias adw_combo_row_set_search_match_mode = c_adw_combo_row_set_search_match_mode;
 
 /** */
 alias adw_combo_row_set_selected = c_adw_combo_row_set_selected;
@@ -2318,6 +2818,9 @@ alias adw_entry_row_get_input_hints = c_adw_entry_row_get_input_hints;
 alias adw_entry_row_get_input_purpose = c_adw_entry_row_get_input_purpose;
 
 /** */
+alias adw_entry_row_get_max_length = c_adw_entry_row_get_max_length;
+
+/** */
 alias adw_entry_row_get_show_apply_button = c_adw_entry_row_get_show_apply_button;
 
 /** */
@@ -2343,6 +2846,9 @@ alias adw_entry_row_set_input_hints = c_adw_entry_row_set_input_hints;
 
 /** */
 alias adw_entry_row_set_input_purpose = c_adw_entry_row_set_input_purpose;
+
+/** */
+alias adw_entry_row_set_max_length = c_adw_entry_row_set_max_length;
 
 /** */
 alias adw_entry_row_set_show_apply_button = c_adw_entry_row_set_show_apply_button;
@@ -2597,6 +3103,66 @@ alias adw_header_bar_set_show_title = c_adw_header_bar_set_show_title;
 /** */
 alias adw_header_bar_set_title_widget = c_adw_header_bar_set_title_widget;
 
+// InlineViewSwitcher
+
+/** */
+alias adw_inline_view_switcher_get_type = c_adw_inline_view_switcher_get_type;
+
+/** */
+alias adw_inline_view_switcher_new = c_adw_inline_view_switcher_new;
+
+/** */
+alias adw_inline_view_switcher_get_can_shrink = c_adw_inline_view_switcher_get_can_shrink;
+
+/** */
+alias adw_inline_view_switcher_get_display_mode = c_adw_inline_view_switcher_get_display_mode;
+
+/** */
+alias adw_inline_view_switcher_get_homogeneous = c_adw_inline_view_switcher_get_homogeneous;
+
+/** */
+alias adw_inline_view_switcher_get_stack = c_adw_inline_view_switcher_get_stack;
+
+/** */
+alias adw_inline_view_switcher_set_can_shrink = c_adw_inline_view_switcher_set_can_shrink;
+
+/** */
+alias adw_inline_view_switcher_set_display_mode = c_adw_inline_view_switcher_set_display_mode;
+
+/** */
+alias adw_inline_view_switcher_set_homogeneous = c_adw_inline_view_switcher_set_homogeneous;
+
+/** */
+alias adw_inline_view_switcher_set_stack = c_adw_inline_view_switcher_set_stack;
+
+// Layout
+
+/** */
+alias adw_layout_get_type = c_adw_layout_get_type;
+
+/** */
+alias adw_layout_new = c_adw_layout_new;
+
+/** */
+alias adw_layout_get_content = c_adw_layout_get_content;
+
+/** */
+alias adw_layout_get_name = c_adw_layout_get_name;
+
+/** */
+alias adw_layout_set_name = c_adw_layout_set_name;
+
+// LayoutSlot
+
+/** */
+alias adw_layout_slot_get_type = c_adw_layout_slot_get_type;
+
+/** */
+alias adw_layout_slot_new = c_adw_layout_slot_new;
+
+/** */
+alias adw_layout_slot_get_slot_id = c_adw_layout_slot_get_slot_id;
+
 // Leaflet
 
 /** */
@@ -2822,6 +3388,41 @@ alias adw_message_dialog_set_response_enabled = c_adw_message_dialog_set_respons
 /** */
 alias adw_message_dialog_set_response_label = c_adw_message_dialog_set_response_label;
 
+// MultiLayoutView
+
+/** */
+alias adw_multi_layout_view_get_type = c_adw_multi_layout_view_get_type;
+
+/** */
+alias adw_multi_layout_view_new = c_adw_multi_layout_view_new;
+
+/** */
+alias adw_multi_layout_view_add_layout = c_adw_multi_layout_view_add_layout;
+
+/** */
+alias adw_multi_layout_view_get_child = c_adw_multi_layout_view_get_child;
+
+/** */
+alias adw_multi_layout_view_get_layout = c_adw_multi_layout_view_get_layout;
+
+/** */
+alias adw_multi_layout_view_get_layout_by_name = c_adw_multi_layout_view_get_layout_by_name;
+
+/** */
+alias adw_multi_layout_view_get_layout_name = c_adw_multi_layout_view_get_layout_name;
+
+/** */
+alias adw_multi_layout_view_remove_layout = c_adw_multi_layout_view_remove_layout;
+
+/** */
+alias adw_multi_layout_view_set_child = c_adw_multi_layout_view_set_child;
+
+/** */
+alias adw_multi_layout_view_set_layout = c_adw_multi_layout_view_set_layout;
+
+/** */
+alias adw_multi_layout_view_set_layout_name = c_adw_multi_layout_view_set_layout_name;
+
 // NavigationPage
 
 /** */
@@ -2884,6 +3485,9 @@ alias adw_navigation_split_view_get_show_content = c_adw_navigation_split_view_g
 alias adw_navigation_split_view_get_sidebar = c_adw_navigation_split_view_get_sidebar;
 
 /** */
+alias adw_navigation_split_view_get_sidebar_position = c_adw_navigation_split_view_get_sidebar_position;
+
+/** */
 alias adw_navigation_split_view_get_sidebar_width_fraction = c_adw_navigation_split_view_get_sidebar_width_fraction;
 
 /** */
@@ -2906,6 +3510,9 @@ alias adw_navigation_split_view_set_show_content = c_adw_navigation_split_view_s
 
 /** */
 alias adw_navigation_split_view_set_sidebar = c_adw_navigation_split_view_set_sidebar;
+
+/** */
+alias adw_navigation_split_view_set_sidebar_position = c_adw_navigation_split_view_set_sidebar_position;
 
 /** */
 alias adw_navigation_split_view_set_sidebar_width_fraction = c_adw_navigation_split_view_set_sidebar_width_fraction;
@@ -2931,6 +3538,9 @@ alias adw_navigation_view_find_page = c_adw_navigation_view_find_page;
 alias adw_navigation_view_get_animate_transitions = c_adw_navigation_view_get_animate_transitions;
 
 /** */
+alias adw_navigation_view_get_hhomogeneous = c_adw_navigation_view_get_hhomogeneous;
+
+/** */
 alias adw_navigation_view_get_navigation_stack = c_adw_navigation_view_get_navigation_stack;
 
 /** */
@@ -2940,7 +3550,13 @@ alias adw_navigation_view_get_pop_on_escape = c_adw_navigation_view_get_pop_on_e
 alias adw_navigation_view_get_previous_page = c_adw_navigation_view_get_previous_page;
 
 /** */
+alias adw_navigation_view_get_vhomogeneous = c_adw_navigation_view_get_vhomogeneous;
+
+/** */
 alias adw_navigation_view_get_visible_page = c_adw_navigation_view_get_visible_page;
+
+/** */
+alias adw_navigation_view_get_visible_page_tag = c_adw_navigation_view_get_visible_page_tag;
 
 /** */
 alias adw_navigation_view_pop = c_adw_navigation_view_pop;
@@ -2970,7 +3586,21 @@ alias adw_navigation_view_replace_with_tags = c_adw_navigation_view_replace_with
 alias adw_navigation_view_set_animate_transitions = c_adw_navigation_view_set_animate_transitions;
 
 /** */
+alias adw_navigation_view_set_hhomogeneous = c_adw_navigation_view_set_hhomogeneous;
+
+/** */
 alias adw_navigation_view_set_pop_on_escape = c_adw_navigation_view_set_pop_on_escape;
+
+/** */
+alias adw_navigation_view_set_vhomogeneous = c_adw_navigation_view_set_vhomogeneous;
+
+// NoneAnimationTarget
+
+/** */
+alias adw_none_animation_target_get_type = c_adw_none_animation_target_get_type;
+
+/** */
+alias adw_none_animation_target_new = c_adw_none_animation_target_new;
 
 // OverlaySplitView
 
@@ -3113,10 +3743,19 @@ alias adw_preferences_group_new = c_adw_preferences_group_new;
 alias adw_preferences_group_add = c_adw_preferences_group_add;
 
 /** */
+alias adw_preferences_group_bind_model = c_adw_preferences_group_bind_model;
+
+/** */
 alias adw_preferences_group_get_description = c_adw_preferences_group_get_description;
 
 /** */
 alias adw_preferences_group_get_header_suffix = c_adw_preferences_group_get_header_suffix;
+
+/** */
+alias adw_preferences_group_get_row = c_adw_preferences_group_get_row;
+
+/** */
+alias adw_preferences_group_get_separate_rows = c_adw_preferences_group_get_separate_rows;
 
 /** */
 alias adw_preferences_group_get_title = c_adw_preferences_group_get_title;
@@ -3129,6 +3768,9 @@ alias adw_preferences_group_set_description = c_adw_preferences_group_set_descri
 
 /** */
 alias adw_preferences_group_set_header_suffix = c_adw_preferences_group_set_header_suffix;
+
+/** */
+alias adw_preferences_group_set_separate_rows = c_adw_preferences_group_set_separate_rows;
 
 /** */
 alias adw_preferences_group_set_title = c_adw_preferences_group_set_title;
@@ -3145,7 +3787,16 @@ alias adw_preferences_page_new = c_adw_preferences_page_new;
 alias adw_preferences_page_add = c_adw_preferences_page_add;
 
 /** */
+alias adw_preferences_page_get_banner = c_adw_preferences_page_get_banner;
+
+/** */
 alias adw_preferences_page_get_description = c_adw_preferences_page_get_description;
+
+/** */
+alias adw_preferences_page_get_description_centered = c_adw_preferences_page_get_description_centered;
+
+/** */
+alias adw_preferences_page_get_group = c_adw_preferences_page_get_group;
 
 /** */
 alias adw_preferences_page_get_icon_name = c_adw_preferences_page_get_icon_name;
@@ -3160,13 +3811,22 @@ alias adw_preferences_page_get_title = c_adw_preferences_page_get_title;
 alias adw_preferences_page_get_use_underline = c_adw_preferences_page_get_use_underline;
 
 /** */
+alias adw_preferences_page_insert = c_adw_preferences_page_insert;
+
+/** */
 alias adw_preferences_page_remove = c_adw_preferences_page_remove;
 
 /** */
 alias adw_preferences_page_scroll_to_top = c_adw_preferences_page_scroll_to_top;
 
 /** */
+alias adw_preferences_page_set_banner = c_adw_preferences_page_set_banner;
+
+/** */
 alias adw_preferences_page_set_description = c_adw_preferences_page_set_description;
+
+/** */
+alias adw_preferences_page_set_description_centered = c_adw_preferences_page_set_description_centered;
 
 /** */
 alias adw_preferences_page_set_icon_name = c_adw_preferences_page_set_icon_name;
@@ -3282,6 +3942,296 @@ alias adw_property_animation_target_get_object = c_adw_property_animation_target
 /** */
 alias adw_property_animation_target_get_pspec = c_adw_property_animation_target_get_pspec;
 
+// ShortcutLabel
+
+/** */
+alias adw_shortcut_label_get_type = c_adw_shortcut_label_get_type;
+
+/** */
+alias adw_shortcut_label_new = c_adw_shortcut_label_new;
+
+/** */
+alias adw_shortcut_label_get_accelerator = c_adw_shortcut_label_get_accelerator;
+
+/** */
+alias adw_shortcut_label_get_disabled_text = c_adw_shortcut_label_get_disabled_text;
+
+/** */
+alias adw_shortcut_label_set_accelerator = c_adw_shortcut_label_set_accelerator;
+
+/** */
+alias adw_shortcut_label_set_disabled_text = c_adw_shortcut_label_set_disabled_text;
+
+// ShortcutsDialog
+
+/** */
+alias adw_shortcuts_dialog_get_type = c_adw_shortcuts_dialog_get_type;
+
+/** */
+alias adw_shortcuts_dialog_new = c_adw_shortcuts_dialog_new;
+
+/** */
+alias adw_shortcuts_dialog_add = c_adw_shortcuts_dialog_add;
+
+// ShortcutsItem
+
+/** */
+alias adw_shortcuts_item_get_type = c_adw_shortcuts_item_get_type;
+
+/** */
+alias adw_shortcuts_item_new = c_adw_shortcuts_item_new;
+
+/** */
+alias adw_shortcuts_item_new_from_action = c_adw_shortcuts_item_new_from_action;
+
+/** */
+alias adw_shortcuts_item_get_accelerator = c_adw_shortcuts_item_get_accelerator;
+
+/** */
+alias adw_shortcuts_item_get_action_name = c_adw_shortcuts_item_get_action_name;
+
+/** */
+alias adw_shortcuts_item_get_direction = c_adw_shortcuts_item_get_direction;
+
+/** */
+alias adw_shortcuts_item_get_subtitle = c_adw_shortcuts_item_get_subtitle;
+
+/** */
+alias adw_shortcuts_item_get_title = c_adw_shortcuts_item_get_title;
+
+/** */
+alias adw_shortcuts_item_set_accelerator = c_adw_shortcuts_item_set_accelerator;
+
+/** */
+alias adw_shortcuts_item_set_action_name = c_adw_shortcuts_item_set_action_name;
+
+/** */
+alias adw_shortcuts_item_set_direction = c_adw_shortcuts_item_set_direction;
+
+/** */
+alias adw_shortcuts_item_set_subtitle = c_adw_shortcuts_item_set_subtitle;
+
+/** */
+alias adw_shortcuts_item_set_title = c_adw_shortcuts_item_set_title;
+
+// ShortcutsSection
+
+/** */
+alias adw_shortcuts_section_get_type = c_adw_shortcuts_section_get_type;
+
+/** */
+alias adw_shortcuts_section_new = c_adw_shortcuts_section_new;
+
+/** */
+alias adw_shortcuts_section_add = c_adw_shortcuts_section_add;
+
+/** */
+alias adw_shortcuts_section_get_title = c_adw_shortcuts_section_get_title;
+
+/** */
+alias adw_shortcuts_section_set_title = c_adw_shortcuts_section_set_title;
+
+// Sidebar
+
+/** */
+alias adw_sidebar_get_type = c_adw_sidebar_get_type;
+
+/** */
+alias adw_sidebar_new = c_adw_sidebar_new;
+
+/** */
+alias adw_sidebar_append = c_adw_sidebar_append;
+
+/** */
+alias adw_sidebar_get_drop_preload = c_adw_sidebar_get_drop_preload;
+
+/** */
+alias adw_sidebar_get_filter = c_adw_sidebar_get_filter;
+
+/** */
+alias adw_sidebar_get_item = c_adw_sidebar_get_item;
+
+/** */
+alias adw_sidebar_get_items = c_adw_sidebar_get_items;
+
+/** */
+alias adw_sidebar_get_menu_model = c_adw_sidebar_get_menu_model;
+
+/** */
+alias adw_sidebar_get_mode = c_adw_sidebar_get_mode;
+
+/** */
+alias adw_sidebar_get_placeholder = c_adw_sidebar_get_placeholder;
+
+/** */
+alias adw_sidebar_get_section = c_adw_sidebar_get_section;
+
+/** */
+alias adw_sidebar_get_sections = c_adw_sidebar_get_sections;
+
+/** */
+alias adw_sidebar_get_selected = c_adw_sidebar_get_selected;
+
+/** */
+alias adw_sidebar_get_selected_item = c_adw_sidebar_get_selected_item;
+
+/** */
+alias adw_sidebar_insert = c_adw_sidebar_insert;
+
+/** */
+alias adw_sidebar_prepend = c_adw_sidebar_prepend;
+
+/** */
+alias adw_sidebar_remove = c_adw_sidebar_remove;
+
+/** */
+alias adw_sidebar_remove_all = c_adw_sidebar_remove_all;
+
+/** */
+alias adw_sidebar_set_drop_preload = c_adw_sidebar_set_drop_preload;
+
+/** */
+alias adw_sidebar_set_filter = c_adw_sidebar_set_filter;
+
+/** */
+alias adw_sidebar_set_menu_model = c_adw_sidebar_set_menu_model;
+
+/** */
+alias adw_sidebar_set_mode = c_adw_sidebar_set_mode;
+
+/** */
+alias adw_sidebar_set_placeholder = c_adw_sidebar_set_placeholder;
+
+/** */
+alias adw_sidebar_set_selected = c_adw_sidebar_set_selected;
+
+/** */
+alias adw_sidebar_setup_drop_target = c_adw_sidebar_setup_drop_target;
+
+// SidebarItem
+
+/** */
+alias adw_sidebar_item_get_type = c_adw_sidebar_item_get_type;
+
+/** */
+alias adw_sidebar_item_new = c_adw_sidebar_item_new;
+
+/** */
+alias adw_sidebar_item_get_drag_motion_activate = c_adw_sidebar_item_get_drag_motion_activate;
+
+/** */
+alias adw_sidebar_item_get_enabled = c_adw_sidebar_item_get_enabled;
+
+/** */
+alias adw_sidebar_item_get_icon_name = c_adw_sidebar_item_get_icon_name;
+
+/** */
+alias adw_sidebar_item_get_icon_paintable = c_adw_sidebar_item_get_icon_paintable;
+
+/** */
+alias adw_sidebar_item_get_index = c_adw_sidebar_item_get_index;
+
+/** */
+alias adw_sidebar_item_get_section = c_adw_sidebar_item_get_section;
+
+/** */
+alias adw_sidebar_item_get_section_index = c_adw_sidebar_item_get_section_index;
+
+/** */
+alias adw_sidebar_item_get_subtitle = c_adw_sidebar_item_get_subtitle;
+
+/** */
+alias adw_sidebar_item_get_suffix = c_adw_sidebar_item_get_suffix;
+
+/** */
+alias adw_sidebar_item_get_title = c_adw_sidebar_item_get_title;
+
+/** */
+alias adw_sidebar_item_get_tooltip = c_adw_sidebar_item_get_tooltip;
+
+/** */
+alias adw_sidebar_item_get_use_underline = c_adw_sidebar_item_get_use_underline;
+
+/** */
+alias adw_sidebar_item_get_visible = c_adw_sidebar_item_get_visible;
+
+/** */
+alias adw_sidebar_item_set_drag_motion_activate = c_adw_sidebar_item_set_drag_motion_activate;
+
+/** */
+alias adw_sidebar_item_set_enabled = c_adw_sidebar_item_set_enabled;
+
+/** */
+alias adw_sidebar_item_set_icon_name = c_adw_sidebar_item_set_icon_name;
+
+/** */
+alias adw_sidebar_item_set_icon_paintable = c_adw_sidebar_item_set_icon_paintable;
+
+/** */
+alias adw_sidebar_item_set_subtitle = c_adw_sidebar_item_set_subtitle;
+
+/** */
+alias adw_sidebar_item_set_suffix = c_adw_sidebar_item_set_suffix;
+
+/** */
+alias adw_sidebar_item_set_title = c_adw_sidebar_item_set_title;
+
+/** */
+alias adw_sidebar_item_set_tooltip = c_adw_sidebar_item_set_tooltip;
+
+/** */
+alias adw_sidebar_item_set_use_underline = c_adw_sidebar_item_set_use_underline;
+
+/** */
+alias adw_sidebar_item_set_visible = c_adw_sidebar_item_set_visible;
+
+// SidebarSection
+
+/** */
+alias adw_sidebar_section_get_type = c_adw_sidebar_section_get_type;
+
+/** */
+alias adw_sidebar_section_new = c_adw_sidebar_section_new;
+
+/** */
+alias adw_sidebar_section_append = c_adw_sidebar_section_append;
+
+/** */
+alias adw_sidebar_section_bind_model = c_adw_sidebar_section_bind_model;
+
+/** */
+alias adw_sidebar_section_get_item = c_adw_sidebar_section_get_item;
+
+/** */
+alias adw_sidebar_section_get_items = c_adw_sidebar_section_get_items;
+
+/** */
+alias adw_sidebar_section_get_menu_model = c_adw_sidebar_section_get_menu_model;
+
+/** */
+alias adw_sidebar_section_get_sidebar = c_adw_sidebar_section_get_sidebar;
+
+/** */
+alias adw_sidebar_section_get_title = c_adw_sidebar_section_get_title;
+
+/** */
+alias adw_sidebar_section_insert = c_adw_sidebar_section_insert;
+
+/** */
+alias adw_sidebar_section_prepend = c_adw_sidebar_section_prepend;
+
+/** */
+alias adw_sidebar_section_remove = c_adw_sidebar_section_remove;
+
+/** */
+alias adw_sidebar_section_remove_all = c_adw_sidebar_section_remove_all;
+
+/** */
+alias adw_sidebar_section_set_menu_model = c_adw_sidebar_section_set_menu_model;
+
+/** */
+alias adw_sidebar_section_set_title = c_adw_sidebar_section_set_title;
+
 // SpinRow
 
 /** */
@@ -3349,6 +4299,28 @@ alias adw_spin_row_set_wrap = c_adw_spin_row_set_wrap;
 
 /** */
 alias adw_spin_row_update = c_adw_spin_row_update;
+
+// Spinner
+
+/** */
+alias adw_spinner_get_type = c_adw_spinner_get_type;
+
+/** */
+alias adw_spinner_new = c_adw_spinner_new;
+
+// SpinnerPaintable
+
+/** */
+alias adw_spinner_paintable_get_type = c_adw_spinner_paintable_get_type;
+
+/** */
+alias adw_spinner_paintable_new = c_adw_spinner_paintable_new;
+
+/** */
+alias adw_spinner_paintable_get_widget = c_adw_spinner_paintable_get_widget;
+
+/** */
+alias adw_spinner_paintable_set_widget = c_adw_spinner_paintable_set_widget;
 
 // SplitButton
 
@@ -3641,6 +4613,12 @@ alias adw_style_manager_get_default = c_adw_style_manager_get_default;
 alias adw_style_manager_get_for_display = c_adw_style_manager_get_for_display;
 
 /** */
+alias adw_style_manager_get_accent_color = c_adw_style_manager_get_accent_color;
+
+/** */
+alias adw_style_manager_get_accent_color_rgba = c_adw_style_manager_get_accent_color_rgba;
+
+/** */
 alias adw_style_manager_get_color_scheme = c_adw_style_manager_get_color_scheme;
 
 /** */
@@ -3650,7 +4628,16 @@ alias adw_style_manager_get_dark = c_adw_style_manager_get_dark;
 alias adw_style_manager_get_display = c_adw_style_manager_get_display;
 
 /** */
+alias adw_style_manager_get_document_font_name = c_adw_style_manager_get_document_font_name;
+
+/** */
 alias adw_style_manager_get_high_contrast = c_adw_style_manager_get_high_contrast;
+
+/** */
+alias adw_style_manager_get_monospace_font_name = c_adw_style_manager_get_monospace_font_name;
+
+/** */
+alias adw_style_manager_get_system_supports_accent_colors = c_adw_style_manager_get_system_supports_accent_colors;
 
 /** */
 alias adw_style_manager_get_system_supports_color_schemes = c_adw_style_manager_get_system_supports_color_schemes;
@@ -4248,10 +5235,125 @@ alias adw_toast_overlay_new = c_adw_toast_overlay_new;
 alias adw_toast_overlay_add_toast = c_adw_toast_overlay_add_toast;
 
 /** */
+alias adw_toast_overlay_dismiss_all = c_adw_toast_overlay_dismiss_all;
+
+/** */
 alias adw_toast_overlay_get_child = c_adw_toast_overlay_get_child;
 
 /** */
 alias adw_toast_overlay_set_child = c_adw_toast_overlay_set_child;
+
+// Toggle
+
+/** */
+alias adw_toggle_get_type = c_adw_toggle_get_type;
+
+/** */
+alias adw_toggle_new = c_adw_toggle_new;
+
+/** */
+alias adw_toggle_get_child = c_adw_toggle_get_child;
+
+/** */
+alias adw_toggle_get_description = c_adw_toggle_get_description;
+
+/** */
+alias adw_toggle_get_enabled = c_adw_toggle_get_enabled;
+
+/** */
+alias adw_toggle_get_icon_name = c_adw_toggle_get_icon_name;
+
+/** */
+alias adw_toggle_get_index = c_adw_toggle_get_index;
+
+/** */
+alias adw_toggle_get_label = c_adw_toggle_get_label;
+
+/** */
+alias adw_toggle_get_name = c_adw_toggle_get_name;
+
+/** */
+alias adw_toggle_get_tooltip = c_adw_toggle_get_tooltip;
+
+/** */
+alias adw_toggle_get_use_underline = c_adw_toggle_get_use_underline;
+
+/** */
+alias adw_toggle_set_child = c_adw_toggle_set_child;
+
+/** */
+alias adw_toggle_set_description = c_adw_toggle_set_description;
+
+/** */
+alias adw_toggle_set_enabled = c_adw_toggle_set_enabled;
+
+/** */
+alias adw_toggle_set_icon_name = c_adw_toggle_set_icon_name;
+
+/** */
+alias adw_toggle_set_label = c_adw_toggle_set_label;
+
+/** */
+alias adw_toggle_set_name = c_adw_toggle_set_name;
+
+/** */
+alias adw_toggle_set_tooltip = c_adw_toggle_set_tooltip;
+
+/** */
+alias adw_toggle_set_use_underline = c_adw_toggle_set_use_underline;
+
+// ToggleGroup
+
+/** */
+alias adw_toggle_group_get_type = c_adw_toggle_group_get_type;
+
+/** */
+alias adw_toggle_group_new = c_adw_toggle_group_new;
+
+/** */
+alias adw_toggle_group_add = c_adw_toggle_group_add;
+
+/** */
+alias adw_toggle_group_get_active = c_adw_toggle_group_get_active;
+
+/** */
+alias adw_toggle_group_get_active_name = c_adw_toggle_group_get_active_name;
+
+/** */
+alias adw_toggle_group_get_can_shrink = c_adw_toggle_group_get_can_shrink;
+
+/** */
+alias adw_toggle_group_get_homogeneous = c_adw_toggle_group_get_homogeneous;
+
+/** */
+alias adw_toggle_group_get_n_toggles = c_adw_toggle_group_get_n_toggles;
+
+/** */
+alias adw_toggle_group_get_toggle = c_adw_toggle_group_get_toggle;
+
+/** */
+alias adw_toggle_group_get_toggle_by_name = c_adw_toggle_group_get_toggle_by_name;
+
+/** */
+alias adw_toggle_group_get_toggles = c_adw_toggle_group_get_toggles;
+
+/** */
+alias adw_toggle_group_remove = c_adw_toggle_group_remove;
+
+/** */
+alias adw_toggle_group_remove_all = c_adw_toggle_group_remove_all;
+
+/** */
+alias adw_toggle_group_set_active = c_adw_toggle_group_set_active;
+
+/** */
+alias adw_toggle_group_set_active_name = c_adw_toggle_group_set_active_name;
+
+/** */
+alias adw_toggle_group_set_can_shrink = c_adw_toggle_group_set_can_shrink;
+
+/** */
+alias adw_toggle_group_set_homogeneous = c_adw_toggle_group_set_homogeneous;
 
 // ToolbarView
 
@@ -4342,6 +5444,9 @@ alias adw_view_stack_add_titled_with_icon = c_adw_view_stack_add_titled_with_ico
 alias adw_view_stack_get_child_by_name = c_adw_view_stack_get_child_by_name;
 
 /** */
+alias adw_view_stack_get_enable_transitions = c_adw_view_stack_get_enable_transitions;
+
+/** */
 alias adw_view_stack_get_hhomogeneous = c_adw_view_stack_get_hhomogeneous;
 
 /** */
@@ -4349,6 +5454,12 @@ alias adw_view_stack_get_page = c_adw_view_stack_get_page;
 
 /** */
 alias adw_view_stack_get_pages = c_adw_view_stack_get_pages;
+
+/** */
+alias adw_view_stack_get_transition_duration = c_adw_view_stack_get_transition_duration;
+
+/** */
+alias adw_view_stack_get_transition_running = c_adw_view_stack_get_transition_running;
 
 /** */
 alias adw_view_stack_get_vhomogeneous = c_adw_view_stack_get_vhomogeneous;
@@ -4363,7 +5474,13 @@ alias adw_view_stack_get_visible_child_name = c_adw_view_stack_get_visible_child
 alias adw_view_stack_remove = c_adw_view_stack_remove;
 
 /** */
+alias adw_view_stack_set_enable_transitions = c_adw_view_stack_set_enable_transitions;
+
+/** */
 alias adw_view_stack_set_hhomogeneous = c_adw_view_stack_set_hhomogeneous;
+
+/** */
+alias adw_view_stack_set_transition_duration = c_adw_view_stack_set_transition_duration;
 
 /** */
 alias adw_view_stack_set_vhomogeneous = c_adw_view_stack_set_vhomogeneous;
@@ -4395,6 +5512,12 @@ alias adw_view_stack_page_get_name = c_adw_view_stack_page_get_name;
 alias adw_view_stack_page_get_needs_attention = c_adw_view_stack_page_get_needs_attention;
 
 /** */
+alias adw_view_stack_page_get_section_title = c_adw_view_stack_page_get_section_title;
+
+/** */
+alias adw_view_stack_page_get_starts_section = c_adw_view_stack_page_get_starts_section;
+
+/** */
 alias adw_view_stack_page_get_title = c_adw_view_stack_page_get_title;
 
 /** */
@@ -4414,6 +5537,12 @@ alias adw_view_stack_page_set_name = c_adw_view_stack_page_set_name;
 
 /** */
 alias adw_view_stack_page_set_needs_attention = c_adw_view_stack_page_set_needs_attention;
+
+/** */
+alias adw_view_stack_page_set_section_title = c_adw_view_stack_page_set_section_title;
+
+/** */
+alias adw_view_stack_page_set_starts_section = c_adw_view_stack_page_set_starts_section;
 
 /** */
 alias adw_view_stack_page_set_title = c_adw_view_stack_page_set_title;
@@ -4475,6 +5604,38 @@ alias adw_view_switcher_bar_set_reveal = c_adw_view_switcher_bar_set_reveal;
 /** */
 alias adw_view_switcher_bar_set_stack = c_adw_view_switcher_bar_set_stack;
 
+// ViewSwitcherSidebar
+
+/** */
+alias adw_view_switcher_sidebar_get_type = c_adw_view_switcher_sidebar_get_type;
+
+/** */
+alias adw_view_switcher_sidebar_new = c_adw_view_switcher_sidebar_new;
+
+/** */
+alias adw_view_switcher_sidebar_get_filter = c_adw_view_switcher_sidebar_get_filter;
+
+/** */
+alias adw_view_switcher_sidebar_get_mode = c_adw_view_switcher_sidebar_get_mode;
+
+/** */
+alias adw_view_switcher_sidebar_get_placeholder = c_adw_view_switcher_sidebar_get_placeholder;
+
+/** */
+alias adw_view_switcher_sidebar_get_stack = c_adw_view_switcher_sidebar_get_stack;
+
+/** */
+alias adw_view_switcher_sidebar_set_filter = c_adw_view_switcher_sidebar_set_filter;
+
+/** */
+alias adw_view_switcher_sidebar_set_mode = c_adw_view_switcher_sidebar_set_mode;
+
+/** */
+alias adw_view_switcher_sidebar_set_placeholder = c_adw_view_switcher_sidebar_set_placeholder;
+
+/** */
+alias adw_view_switcher_sidebar_set_stack = c_adw_view_switcher_sidebar_set_stack;
+
 // ViewSwitcherTitle
 
 /** */
@@ -4522,6 +5683,9 @@ alias adw_window_new = c_adw_window_new;
 alias adw_window_add_breakpoint = c_adw_window_add_breakpoint;
 
 /** */
+alias adw_window_get_adaptive_preview = c_adw_window_get_adaptive_preview;
+
+/** */
 alias adw_window_get_content = c_adw_window_get_content;
 
 /** */
@@ -4532,6 +5696,9 @@ alias adw_window_get_dialogs = c_adw_window_get_dialogs;
 
 /** */
 alias adw_window_get_visible_dialog = c_adw_window_get_visible_dialog;
+
+/** */
+alias adw_window_set_adaptive_preview = c_adw_window_set_adaptive_preview;
 
 /** */
 alias adw_window_set_content = c_adw_window_set_content;
@@ -4555,6 +5722,196 @@ alias adw_window_title_set_subtitle = c_adw_window_title_set_subtitle;
 
 /** */
 alias adw_window_title_set_title = c_adw_window_title_set_title;
+
+// WrapBox
+
+/** */
+alias adw_wrap_box_get_type = c_adw_wrap_box_get_type;
+
+/** */
+alias adw_wrap_box_new = c_adw_wrap_box_new;
+
+/** */
+alias adw_wrap_box_append = c_adw_wrap_box_append;
+
+/** */
+alias adw_wrap_box_get_align = c_adw_wrap_box_get_align;
+
+/** */
+alias adw_wrap_box_get_child_spacing = c_adw_wrap_box_get_child_spacing;
+
+/** */
+alias adw_wrap_box_get_child_spacing_unit = c_adw_wrap_box_get_child_spacing_unit;
+
+/** */
+alias adw_wrap_box_get_justify = c_adw_wrap_box_get_justify;
+
+/** */
+alias adw_wrap_box_get_justify_last_line = c_adw_wrap_box_get_justify_last_line;
+
+/** */
+alias adw_wrap_box_get_line_homogeneous = c_adw_wrap_box_get_line_homogeneous;
+
+/** */
+alias adw_wrap_box_get_line_spacing = c_adw_wrap_box_get_line_spacing;
+
+/** */
+alias adw_wrap_box_get_line_spacing_unit = c_adw_wrap_box_get_line_spacing_unit;
+
+/** */
+alias adw_wrap_box_get_natural_line_length = c_adw_wrap_box_get_natural_line_length;
+
+/** */
+alias adw_wrap_box_get_natural_line_length_unit = c_adw_wrap_box_get_natural_line_length_unit;
+
+/** */
+alias adw_wrap_box_get_pack_direction = c_adw_wrap_box_get_pack_direction;
+
+/** */
+alias adw_wrap_box_get_wrap_policy = c_adw_wrap_box_get_wrap_policy;
+
+/** */
+alias adw_wrap_box_get_wrap_reverse = c_adw_wrap_box_get_wrap_reverse;
+
+/** */
+alias adw_wrap_box_insert_child_after = c_adw_wrap_box_insert_child_after;
+
+/** */
+alias adw_wrap_box_prepend = c_adw_wrap_box_prepend;
+
+/** */
+alias adw_wrap_box_remove = c_adw_wrap_box_remove;
+
+/** */
+alias adw_wrap_box_remove_all = c_adw_wrap_box_remove_all;
+
+/** */
+alias adw_wrap_box_reorder_child_after = c_adw_wrap_box_reorder_child_after;
+
+/** */
+alias adw_wrap_box_set_align = c_adw_wrap_box_set_align;
+
+/** */
+alias adw_wrap_box_set_child_spacing = c_adw_wrap_box_set_child_spacing;
+
+/** */
+alias adw_wrap_box_set_child_spacing_unit = c_adw_wrap_box_set_child_spacing_unit;
+
+/** */
+alias adw_wrap_box_set_justify = c_adw_wrap_box_set_justify;
+
+/** */
+alias adw_wrap_box_set_justify_last_line = c_adw_wrap_box_set_justify_last_line;
+
+/** */
+alias adw_wrap_box_set_line_homogeneous = c_adw_wrap_box_set_line_homogeneous;
+
+/** */
+alias adw_wrap_box_set_line_spacing = c_adw_wrap_box_set_line_spacing;
+
+/** */
+alias adw_wrap_box_set_line_spacing_unit = c_adw_wrap_box_set_line_spacing_unit;
+
+/** */
+alias adw_wrap_box_set_natural_line_length = c_adw_wrap_box_set_natural_line_length;
+
+/** */
+alias adw_wrap_box_set_natural_line_length_unit = c_adw_wrap_box_set_natural_line_length_unit;
+
+/** */
+alias adw_wrap_box_set_pack_direction = c_adw_wrap_box_set_pack_direction;
+
+/** */
+alias adw_wrap_box_set_wrap_policy = c_adw_wrap_box_set_wrap_policy;
+
+/** */
+alias adw_wrap_box_set_wrap_reverse = c_adw_wrap_box_set_wrap_reverse;
+
+// WrapLayout
+
+/** */
+alias adw_wrap_layout_get_type = c_adw_wrap_layout_get_type;
+
+/** */
+alias adw_wrap_layout_new = c_adw_wrap_layout_new;
+
+/** */
+alias adw_wrap_layout_get_align = c_adw_wrap_layout_get_align;
+
+/** */
+alias adw_wrap_layout_get_child_spacing = c_adw_wrap_layout_get_child_spacing;
+
+/** */
+alias adw_wrap_layout_get_child_spacing_unit = c_adw_wrap_layout_get_child_spacing_unit;
+
+/** */
+alias adw_wrap_layout_get_justify = c_adw_wrap_layout_get_justify;
+
+/** */
+alias adw_wrap_layout_get_justify_last_line = c_adw_wrap_layout_get_justify_last_line;
+
+/** */
+alias adw_wrap_layout_get_line_homogeneous = c_adw_wrap_layout_get_line_homogeneous;
+
+/** */
+alias adw_wrap_layout_get_line_spacing = c_adw_wrap_layout_get_line_spacing;
+
+/** */
+alias adw_wrap_layout_get_line_spacing_unit = c_adw_wrap_layout_get_line_spacing_unit;
+
+/** */
+alias adw_wrap_layout_get_natural_line_length = c_adw_wrap_layout_get_natural_line_length;
+
+/** */
+alias adw_wrap_layout_get_natural_line_length_unit = c_adw_wrap_layout_get_natural_line_length_unit;
+
+/** */
+alias adw_wrap_layout_get_pack_direction = c_adw_wrap_layout_get_pack_direction;
+
+/** */
+alias adw_wrap_layout_get_wrap_policy = c_adw_wrap_layout_get_wrap_policy;
+
+/** */
+alias adw_wrap_layout_get_wrap_reverse = c_adw_wrap_layout_get_wrap_reverse;
+
+/** */
+alias adw_wrap_layout_set_align = c_adw_wrap_layout_set_align;
+
+/** */
+alias adw_wrap_layout_set_child_spacing = c_adw_wrap_layout_set_child_spacing;
+
+/** */
+alias adw_wrap_layout_set_child_spacing_unit = c_adw_wrap_layout_set_child_spacing_unit;
+
+/** */
+alias adw_wrap_layout_set_justify = c_adw_wrap_layout_set_justify;
+
+/** */
+alias adw_wrap_layout_set_justify_last_line = c_adw_wrap_layout_set_justify_last_line;
+
+/** */
+alias adw_wrap_layout_set_line_homogeneous = c_adw_wrap_layout_set_line_homogeneous;
+
+/** */
+alias adw_wrap_layout_set_line_spacing = c_adw_wrap_layout_set_line_spacing;
+
+/** */
+alias adw_wrap_layout_set_line_spacing_unit = c_adw_wrap_layout_set_line_spacing_unit;
+
+/** */
+alias adw_wrap_layout_set_natural_line_length = c_adw_wrap_layout_set_natural_line_length;
+
+/** */
+alias adw_wrap_layout_set_natural_line_length_unit = c_adw_wrap_layout_set_natural_line_length_unit;
+
+/** */
+alias adw_wrap_layout_set_pack_direction = c_adw_wrap_layout_set_pack_direction;
+
+/** */
+alias adw_wrap_layout_set_wrap_policy = c_adw_wrap_layout_set_wrap_policy;
+
+/** */
+alias adw_wrap_layout_set_wrap_reverse = c_adw_wrap_layout_set_wrap_reverse;
 
 // global
 
@@ -4580,6 +5937,9 @@ alias adw_is_initialized = c_adw_is_initialized;
 alias adw_lerp = c_adw_lerp;
 
 /** */
+alias adw_rgba_to_standalone = c_adw_rgba_to_standalone;
+
+/** */
 alias adw_show_about_dialog = c_adw_show_about_dialog;
 
 /** */
@@ -4590,6 +5950,14 @@ alias adw_show_about_window = c_adw_show_about_window;
 
 /** */
 alias adw_show_about_window_from_appdata = c_adw_show_about_window_from_appdata;
+
+// AccentColor
+
+/** */
+alias adw_accent_color_to_rgba = c_adw_accent_color_to_rgba;
+
+/** */
+alias adw_accent_color_to_standalone_rgba = c_adw_accent_color_to_standalone_rgba;
 
 // Easing
 
@@ -4616,6 +5984,8 @@ shared static this()
   gidLink(cast(void**)&adw_about_dialog_add_credit_section, "adw_about_dialog_add_credit_section", libs);
   gidLink(cast(void**)&adw_about_dialog_add_legal_section, "adw_about_dialog_add_legal_section", libs);
   gidLink(cast(void**)&adw_about_dialog_add_link, "adw_about_dialog_add_link", libs);
+  gidLink(cast(void**)&adw_about_dialog_add_other_app, "adw_about_dialog_add_other_app", libs);
+  gidLink(cast(void**)&adw_about_dialog_get_appdata_resource_path, "adw_about_dialog_get_appdata_resource_path", libs);
   gidLink(cast(void**)&adw_about_dialog_get_application_icon, "adw_about_dialog_get_application_icon", libs);
   gidLink(cast(void**)&adw_about_dialog_get_application_name, "adw_about_dialog_get_application_name", libs);
   gidLink(cast(void**)&adw_about_dialog_get_artists, "adw_about_dialog_get_artists", libs);
@@ -4744,6 +6114,7 @@ shared static this()
   gidLink(cast(void**)&adw_alert_dialog_get_extra_child, "adw_alert_dialog_get_extra_child", libs);
   gidLink(cast(void**)&adw_alert_dialog_get_heading, "adw_alert_dialog_get_heading", libs);
   gidLink(cast(void**)&adw_alert_dialog_get_heading_use_markup, "adw_alert_dialog_get_heading_use_markup", libs);
+  gidLink(cast(void**)&adw_alert_dialog_get_prefer_wide_layout, "adw_alert_dialog_get_prefer_wide_layout", libs);
   gidLink(cast(void**)&adw_alert_dialog_get_response_appearance, "adw_alert_dialog_get_response_appearance", libs);
   gidLink(cast(void**)&adw_alert_dialog_get_response_enabled, "adw_alert_dialog_get_response_enabled", libs);
   gidLink(cast(void**)&adw_alert_dialog_get_response_label, "adw_alert_dialog_get_response_label", libs);
@@ -4756,6 +6127,7 @@ shared static this()
   gidLink(cast(void**)&adw_alert_dialog_set_extra_child, "adw_alert_dialog_set_extra_child", libs);
   gidLink(cast(void**)&adw_alert_dialog_set_heading, "adw_alert_dialog_set_heading", libs);
   gidLink(cast(void**)&adw_alert_dialog_set_heading_use_markup, "adw_alert_dialog_set_heading_use_markup", libs);
+  gidLink(cast(void**)&adw_alert_dialog_set_prefer_wide_layout, "adw_alert_dialog_set_prefer_wide_layout", libs);
   gidLink(cast(void**)&adw_alert_dialog_set_response_appearance, "adw_alert_dialog_set_response_appearance", libs);
   gidLink(cast(void**)&adw_alert_dialog_set_response_enabled, "adw_alert_dialog_set_response_enabled", libs);
   gidLink(cast(void**)&adw_alert_dialog_set_response_label, "adw_alert_dialog_set_response_label", libs);
@@ -4787,10 +6159,12 @@ shared static this()
   gidLink(cast(void**)&adw_application_window_get_type, "adw_application_window_get_type", libs);
   gidLink(cast(void**)&adw_application_window_new, "adw_application_window_new", libs);
   gidLink(cast(void**)&adw_application_window_add_breakpoint, "adw_application_window_add_breakpoint", libs);
+  gidLink(cast(void**)&adw_application_window_get_adaptive_preview, "adw_application_window_get_adaptive_preview", libs);
   gidLink(cast(void**)&adw_application_window_get_content, "adw_application_window_get_content", libs);
   gidLink(cast(void**)&adw_application_window_get_current_breakpoint, "adw_application_window_get_current_breakpoint", libs);
   gidLink(cast(void**)&adw_application_window_get_dialogs, "adw_application_window_get_dialogs", libs);
   gidLink(cast(void**)&adw_application_window_get_visible_dialog, "adw_application_window_get_visible_dialog", libs);
+  gidLink(cast(void**)&adw_application_window_set_adaptive_preview, "adw_application_window_set_adaptive_preview", libs);
   gidLink(cast(void**)&adw_application_window_set_content, "adw_application_window_set_content", libs);
 
   // Avatar
@@ -4812,10 +6186,12 @@ shared static this()
   gidLink(cast(void**)&adw_banner_get_type, "adw_banner_get_type", libs);
   gidLink(cast(void**)&adw_banner_new, "adw_banner_new", libs);
   gidLink(cast(void**)&adw_banner_get_button_label, "adw_banner_get_button_label", libs);
+  gidLink(cast(void**)&adw_banner_get_button_style, "adw_banner_get_button_style", libs);
   gidLink(cast(void**)&adw_banner_get_revealed, "adw_banner_get_revealed", libs);
   gidLink(cast(void**)&adw_banner_get_title, "adw_banner_get_title", libs);
   gidLink(cast(void**)&adw_banner_get_use_markup, "adw_banner_get_use_markup", libs);
   gidLink(cast(void**)&adw_banner_set_button_label, "adw_banner_set_button_label", libs);
+  gidLink(cast(void**)&adw_banner_set_button_style, "adw_banner_set_button_style", libs);
   gidLink(cast(void**)&adw_banner_set_revealed, "adw_banner_set_revealed", libs);
   gidLink(cast(void**)&adw_banner_set_title, "adw_banner_set_title", libs);
   gidLink(cast(void**)&adw_banner_set_use_markup, "adw_banner_set_use_markup", libs);
@@ -4825,6 +6201,34 @@ shared static this()
   gidLink(cast(void**)&adw_bin_new, "adw_bin_new", libs);
   gidLink(cast(void**)&adw_bin_get_child, "adw_bin_get_child", libs);
   gidLink(cast(void**)&adw_bin_set_child, "adw_bin_set_child", libs);
+
+  // BottomSheet
+  gidLink(cast(void**)&adw_bottom_sheet_get_type, "adw_bottom_sheet_get_type", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_new, "adw_bottom_sheet_new", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_align, "adw_bottom_sheet_get_align", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_bottom_bar, "adw_bottom_sheet_get_bottom_bar", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_bottom_bar_height, "adw_bottom_sheet_get_bottom_bar_height", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_can_close, "adw_bottom_sheet_get_can_close", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_can_open, "adw_bottom_sheet_get_can_open", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_content, "adw_bottom_sheet_get_content", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_full_width, "adw_bottom_sheet_get_full_width", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_modal, "adw_bottom_sheet_get_modal", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_open, "adw_bottom_sheet_get_open", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_reveal_bottom_bar, "adw_bottom_sheet_get_reveal_bottom_bar", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_sheet, "adw_bottom_sheet_get_sheet", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_sheet_height, "adw_bottom_sheet_get_sheet_height", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_get_show_drag_handle, "adw_bottom_sheet_get_show_drag_handle", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_align, "adw_bottom_sheet_set_align", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_bottom_bar, "adw_bottom_sheet_set_bottom_bar", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_can_close, "adw_bottom_sheet_set_can_close", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_can_open, "adw_bottom_sheet_set_can_open", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_content, "adw_bottom_sheet_set_content", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_full_width, "adw_bottom_sheet_set_full_width", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_modal, "adw_bottom_sheet_set_modal", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_open, "adw_bottom_sheet_set_open", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_reveal_bottom_bar, "adw_bottom_sheet_set_reveal_bottom_bar", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_sheet, "adw_bottom_sheet_set_sheet", libs);
+  gidLink(cast(void**)&adw_bottom_sheet_set_show_drag_handle, "adw_bottom_sheet_set_show_drag_handle", libs);
 
   // Breakpoint
   gidLink(cast(void**)&adw_breakpoint_get_type, "adw_breakpoint_get_type", libs);
@@ -4867,6 +6271,14 @@ shared static this()
   gidLink(cast(void**)&adw_button_content_set_icon_name, "adw_button_content_set_icon_name", libs);
   gidLink(cast(void**)&adw_button_content_set_label, "adw_button_content_set_label", libs);
   gidLink(cast(void**)&adw_button_content_set_use_underline, "adw_button_content_set_use_underline", libs);
+
+  // ButtonRow
+  gidLink(cast(void**)&adw_button_row_get_type, "adw_button_row_get_type", libs);
+  gidLink(cast(void**)&adw_button_row_new, "adw_button_row_new", libs);
+  gidLink(cast(void**)&adw_button_row_get_end_icon_name, "adw_button_row_get_end_icon_name", libs);
+  gidLink(cast(void**)&adw_button_row_get_start_icon_name, "adw_button_row_get_start_icon_name", libs);
+  gidLink(cast(void**)&adw_button_row_set_end_icon_name, "adw_button_row_set_end_icon_name", libs);
+  gidLink(cast(void**)&adw_button_row_set_start_icon_name, "adw_button_row_set_start_icon_name", libs);
 
   // CallbackAnimationTarget
   gidLink(cast(void**)&adw_callback_animation_target_get_type, "adw_callback_animation_target_get_type", libs);
@@ -4951,16 +6363,20 @@ shared static this()
   gidLink(cast(void**)&adw_combo_row_get_enable_search, "adw_combo_row_get_enable_search", libs);
   gidLink(cast(void**)&adw_combo_row_get_expression, "adw_combo_row_get_expression", libs);
   gidLink(cast(void**)&adw_combo_row_get_factory, "adw_combo_row_get_factory", libs);
+  gidLink(cast(void**)&adw_combo_row_get_header_factory, "adw_combo_row_get_header_factory", libs);
   gidLink(cast(void**)&adw_combo_row_get_list_factory, "adw_combo_row_get_list_factory", libs);
   gidLink(cast(void**)&adw_combo_row_get_model, "adw_combo_row_get_model", libs);
+  gidLink(cast(void**)&adw_combo_row_get_search_match_mode, "adw_combo_row_get_search_match_mode", libs);
   gidLink(cast(void**)&adw_combo_row_get_selected, "adw_combo_row_get_selected", libs);
   gidLink(cast(void**)&adw_combo_row_get_selected_item, "adw_combo_row_get_selected_item", libs);
   gidLink(cast(void**)&adw_combo_row_get_use_subtitle, "adw_combo_row_get_use_subtitle", libs);
   gidLink(cast(void**)&adw_combo_row_set_enable_search, "adw_combo_row_set_enable_search", libs);
   gidLink(cast(void**)&adw_combo_row_set_expression, "adw_combo_row_set_expression", libs);
   gidLink(cast(void**)&adw_combo_row_set_factory, "adw_combo_row_set_factory", libs);
+  gidLink(cast(void**)&adw_combo_row_set_header_factory, "adw_combo_row_set_header_factory", libs);
   gidLink(cast(void**)&adw_combo_row_set_list_factory, "adw_combo_row_set_list_factory", libs);
   gidLink(cast(void**)&adw_combo_row_set_model, "adw_combo_row_set_model", libs);
+  gidLink(cast(void**)&adw_combo_row_set_search_match_mode, "adw_combo_row_set_search_match_mode", libs);
   gidLink(cast(void**)&adw_combo_row_set_selected, "adw_combo_row_set_selected", libs);
   gidLink(cast(void**)&adw_combo_row_set_use_subtitle, "adw_combo_row_set_use_subtitle", libs);
 
@@ -5001,6 +6417,7 @@ shared static this()
   gidLink(cast(void**)&adw_entry_row_get_enable_emoji_completion, "adw_entry_row_get_enable_emoji_completion", libs);
   gidLink(cast(void**)&adw_entry_row_get_input_hints, "adw_entry_row_get_input_hints", libs);
   gidLink(cast(void**)&adw_entry_row_get_input_purpose, "adw_entry_row_get_input_purpose", libs);
+  gidLink(cast(void**)&adw_entry_row_get_max_length, "adw_entry_row_get_max_length", libs);
   gidLink(cast(void**)&adw_entry_row_get_show_apply_button, "adw_entry_row_get_show_apply_button", libs);
   gidLink(cast(void**)&adw_entry_row_get_text_length, "adw_entry_row_get_text_length", libs);
   gidLink(cast(void**)&adw_entry_row_grab_focus_without_selecting, "adw_entry_row_grab_focus_without_selecting", libs);
@@ -5010,6 +6427,7 @@ shared static this()
   gidLink(cast(void**)&adw_entry_row_set_enable_emoji_completion, "adw_entry_row_set_enable_emoji_completion", libs);
   gidLink(cast(void**)&adw_entry_row_set_input_hints, "adw_entry_row_set_input_hints", libs);
   gidLink(cast(void**)&adw_entry_row_set_input_purpose, "adw_entry_row_set_input_purpose", libs);
+  gidLink(cast(void**)&adw_entry_row_set_max_length, "adw_entry_row_set_max_length", libs);
   gidLink(cast(void**)&adw_entry_row_set_show_apply_button, "adw_entry_row_set_show_apply_button", libs);
 
   // EnumListItem
@@ -5102,6 +6520,30 @@ shared static this()
   gidLink(cast(void**)&adw_header_bar_set_show_title, "adw_header_bar_set_show_title", libs);
   gidLink(cast(void**)&adw_header_bar_set_title_widget, "adw_header_bar_set_title_widget", libs);
 
+  // InlineViewSwitcher
+  gidLink(cast(void**)&adw_inline_view_switcher_get_type, "adw_inline_view_switcher_get_type", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_new, "adw_inline_view_switcher_new", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_get_can_shrink, "adw_inline_view_switcher_get_can_shrink", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_get_display_mode, "adw_inline_view_switcher_get_display_mode", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_get_homogeneous, "adw_inline_view_switcher_get_homogeneous", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_get_stack, "adw_inline_view_switcher_get_stack", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_set_can_shrink, "adw_inline_view_switcher_set_can_shrink", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_set_display_mode, "adw_inline_view_switcher_set_display_mode", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_set_homogeneous, "adw_inline_view_switcher_set_homogeneous", libs);
+  gidLink(cast(void**)&adw_inline_view_switcher_set_stack, "adw_inline_view_switcher_set_stack", libs);
+
+  // Layout
+  gidLink(cast(void**)&adw_layout_get_type, "adw_layout_get_type", libs);
+  gidLink(cast(void**)&adw_layout_new, "adw_layout_new", libs);
+  gidLink(cast(void**)&adw_layout_get_content, "adw_layout_get_content", libs);
+  gidLink(cast(void**)&adw_layout_get_name, "adw_layout_get_name", libs);
+  gidLink(cast(void**)&adw_layout_set_name, "adw_layout_set_name", libs);
+
+  // LayoutSlot
+  gidLink(cast(void**)&adw_layout_slot_get_type, "adw_layout_slot_get_type", libs);
+  gidLink(cast(void**)&adw_layout_slot_new, "adw_layout_slot_new", libs);
+  gidLink(cast(void**)&adw_layout_slot_get_slot_id, "adw_layout_slot_get_slot_id", libs);
+
   // Leaflet
   gidLink(cast(void**)&adw_leaflet_get_type, "adw_leaflet_get_type", libs);
   gidLink(cast(void**)&adw_leaflet_new, "adw_leaflet_new", libs);
@@ -5181,6 +6623,19 @@ shared static this()
   gidLink(cast(void**)&adw_message_dialog_set_response_enabled, "adw_message_dialog_set_response_enabled", libs);
   gidLink(cast(void**)&adw_message_dialog_set_response_label, "adw_message_dialog_set_response_label", libs);
 
+  // MultiLayoutView
+  gidLink(cast(void**)&adw_multi_layout_view_get_type, "adw_multi_layout_view_get_type", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_new, "adw_multi_layout_view_new", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_add_layout, "adw_multi_layout_view_add_layout", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_get_child, "adw_multi_layout_view_get_child", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_get_layout, "adw_multi_layout_view_get_layout", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_get_layout_by_name, "adw_multi_layout_view_get_layout_by_name", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_get_layout_name, "adw_multi_layout_view_get_layout_name", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_remove_layout, "adw_multi_layout_view_remove_layout", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_set_child, "adw_multi_layout_view_set_child", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_set_layout, "adw_multi_layout_view_set_layout", libs);
+  gidLink(cast(void**)&adw_multi_layout_view_set_layout_name, "adw_multi_layout_view_set_layout_name", libs);
+
   // NavigationPage
   gidLink(cast(void**)&adw_navigation_page_get_type, "adw_navigation_page_get_type", libs);
   gidLink(cast(void**)&adw_navigation_page_new, "adw_navigation_page_new", libs);
@@ -5203,6 +6658,7 @@ shared static this()
   gidLink(cast(void**)&adw_navigation_split_view_get_min_sidebar_width, "adw_navigation_split_view_get_min_sidebar_width", libs);
   gidLink(cast(void**)&adw_navigation_split_view_get_show_content, "adw_navigation_split_view_get_show_content", libs);
   gidLink(cast(void**)&adw_navigation_split_view_get_sidebar, "adw_navigation_split_view_get_sidebar", libs);
+  gidLink(cast(void**)&adw_navigation_split_view_get_sidebar_position, "adw_navigation_split_view_get_sidebar_position", libs);
   gidLink(cast(void**)&adw_navigation_split_view_get_sidebar_width_fraction, "adw_navigation_split_view_get_sidebar_width_fraction", libs);
   gidLink(cast(void**)&adw_navigation_split_view_get_sidebar_width_unit, "adw_navigation_split_view_get_sidebar_width_unit", libs);
   gidLink(cast(void**)&adw_navigation_split_view_set_collapsed, "adw_navigation_split_view_set_collapsed", libs);
@@ -5211,6 +6667,7 @@ shared static this()
   gidLink(cast(void**)&adw_navigation_split_view_set_min_sidebar_width, "adw_navigation_split_view_set_min_sidebar_width", libs);
   gidLink(cast(void**)&adw_navigation_split_view_set_show_content, "adw_navigation_split_view_set_show_content", libs);
   gidLink(cast(void**)&adw_navigation_split_view_set_sidebar, "adw_navigation_split_view_set_sidebar", libs);
+  gidLink(cast(void**)&adw_navigation_split_view_set_sidebar_position, "adw_navigation_split_view_set_sidebar_position", libs);
   gidLink(cast(void**)&adw_navigation_split_view_set_sidebar_width_fraction, "adw_navigation_split_view_set_sidebar_width_fraction", libs);
   gidLink(cast(void**)&adw_navigation_split_view_set_sidebar_width_unit, "adw_navigation_split_view_set_sidebar_width_unit", libs);
 
@@ -5220,10 +6677,13 @@ shared static this()
   gidLink(cast(void**)&adw_navigation_view_add, "adw_navigation_view_add", libs);
   gidLink(cast(void**)&adw_navigation_view_find_page, "adw_navigation_view_find_page", libs);
   gidLink(cast(void**)&adw_navigation_view_get_animate_transitions, "adw_navigation_view_get_animate_transitions", libs);
+  gidLink(cast(void**)&adw_navigation_view_get_hhomogeneous, "adw_navigation_view_get_hhomogeneous", libs);
   gidLink(cast(void**)&adw_navigation_view_get_navigation_stack, "adw_navigation_view_get_navigation_stack", libs);
   gidLink(cast(void**)&adw_navigation_view_get_pop_on_escape, "adw_navigation_view_get_pop_on_escape", libs);
   gidLink(cast(void**)&adw_navigation_view_get_previous_page, "adw_navigation_view_get_previous_page", libs);
+  gidLink(cast(void**)&adw_navigation_view_get_vhomogeneous, "adw_navigation_view_get_vhomogeneous", libs);
   gidLink(cast(void**)&adw_navigation_view_get_visible_page, "adw_navigation_view_get_visible_page", libs);
+  gidLink(cast(void**)&adw_navigation_view_get_visible_page_tag, "adw_navigation_view_get_visible_page_tag", libs);
   gidLink(cast(void**)&adw_navigation_view_pop, "adw_navigation_view_pop", libs);
   gidLink(cast(void**)&adw_navigation_view_pop_to_page, "adw_navigation_view_pop_to_page", libs);
   gidLink(cast(void**)&adw_navigation_view_pop_to_tag, "adw_navigation_view_pop_to_tag", libs);
@@ -5233,7 +6693,13 @@ shared static this()
   gidLink(cast(void**)&adw_navigation_view_replace, "adw_navigation_view_replace", libs);
   gidLink(cast(void**)&adw_navigation_view_replace_with_tags, "adw_navigation_view_replace_with_tags", libs);
   gidLink(cast(void**)&adw_navigation_view_set_animate_transitions, "adw_navigation_view_set_animate_transitions", libs);
+  gidLink(cast(void**)&adw_navigation_view_set_hhomogeneous, "adw_navigation_view_set_hhomogeneous", libs);
   gidLink(cast(void**)&adw_navigation_view_set_pop_on_escape, "adw_navigation_view_set_pop_on_escape", libs);
+  gidLink(cast(void**)&adw_navigation_view_set_vhomogeneous, "adw_navigation_view_set_vhomogeneous", libs);
+
+  // NoneAnimationTarget
+  gidLink(cast(void**)&adw_none_animation_target_get_type, "adw_none_animation_target_get_type", libs);
+  gidLink(cast(void**)&adw_none_animation_target_new, "adw_none_animation_target_new", libs);
 
   // OverlaySplitView
   gidLink(cast(void**)&adw_overlay_split_view_get_type, "adw_overlay_split_view_get_type", libs);
@@ -5286,26 +6752,36 @@ shared static this()
   gidLink(cast(void**)&adw_preferences_group_get_type, "adw_preferences_group_get_type", libs);
   gidLink(cast(void**)&adw_preferences_group_new, "adw_preferences_group_new", libs);
   gidLink(cast(void**)&adw_preferences_group_add, "adw_preferences_group_add", libs);
+  gidLink(cast(void**)&adw_preferences_group_bind_model, "adw_preferences_group_bind_model", libs);
   gidLink(cast(void**)&adw_preferences_group_get_description, "adw_preferences_group_get_description", libs);
   gidLink(cast(void**)&adw_preferences_group_get_header_suffix, "adw_preferences_group_get_header_suffix", libs);
+  gidLink(cast(void**)&adw_preferences_group_get_row, "adw_preferences_group_get_row", libs);
+  gidLink(cast(void**)&adw_preferences_group_get_separate_rows, "adw_preferences_group_get_separate_rows", libs);
   gidLink(cast(void**)&adw_preferences_group_get_title, "adw_preferences_group_get_title", libs);
   gidLink(cast(void**)&adw_preferences_group_remove, "adw_preferences_group_remove", libs);
   gidLink(cast(void**)&adw_preferences_group_set_description, "adw_preferences_group_set_description", libs);
   gidLink(cast(void**)&adw_preferences_group_set_header_suffix, "adw_preferences_group_set_header_suffix", libs);
+  gidLink(cast(void**)&adw_preferences_group_set_separate_rows, "adw_preferences_group_set_separate_rows", libs);
   gidLink(cast(void**)&adw_preferences_group_set_title, "adw_preferences_group_set_title", libs);
 
   // PreferencesPage
   gidLink(cast(void**)&adw_preferences_page_get_type, "adw_preferences_page_get_type", libs);
   gidLink(cast(void**)&adw_preferences_page_new, "adw_preferences_page_new", libs);
   gidLink(cast(void**)&adw_preferences_page_add, "adw_preferences_page_add", libs);
+  gidLink(cast(void**)&adw_preferences_page_get_banner, "adw_preferences_page_get_banner", libs);
   gidLink(cast(void**)&adw_preferences_page_get_description, "adw_preferences_page_get_description", libs);
+  gidLink(cast(void**)&adw_preferences_page_get_description_centered, "adw_preferences_page_get_description_centered", libs);
+  gidLink(cast(void**)&adw_preferences_page_get_group, "adw_preferences_page_get_group", libs);
   gidLink(cast(void**)&adw_preferences_page_get_icon_name, "adw_preferences_page_get_icon_name", libs);
   gidLink(cast(void**)&adw_preferences_page_get_name, "adw_preferences_page_get_name", libs);
   gidLink(cast(void**)&adw_preferences_page_get_title, "adw_preferences_page_get_title", libs);
   gidLink(cast(void**)&adw_preferences_page_get_use_underline, "adw_preferences_page_get_use_underline", libs);
+  gidLink(cast(void**)&adw_preferences_page_insert, "adw_preferences_page_insert", libs);
   gidLink(cast(void**)&adw_preferences_page_remove, "adw_preferences_page_remove", libs);
   gidLink(cast(void**)&adw_preferences_page_scroll_to_top, "adw_preferences_page_scroll_to_top", libs);
+  gidLink(cast(void**)&adw_preferences_page_set_banner, "adw_preferences_page_set_banner", libs);
   gidLink(cast(void**)&adw_preferences_page_set_description, "adw_preferences_page_set_description", libs);
+  gidLink(cast(void**)&adw_preferences_page_set_description_centered, "adw_preferences_page_set_description_centered", libs);
   gidLink(cast(void**)&adw_preferences_page_set_icon_name, "adw_preferences_page_set_icon_name", libs);
   gidLink(cast(void**)&adw_preferences_page_set_name, "adw_preferences_page_set_name", libs);
   gidLink(cast(void**)&adw_preferences_page_set_title, "adw_preferences_page_set_title", libs);
@@ -5349,6 +6825,112 @@ shared static this()
   gidLink(cast(void**)&adw_property_animation_target_get_object, "adw_property_animation_target_get_object", libs);
   gidLink(cast(void**)&adw_property_animation_target_get_pspec, "adw_property_animation_target_get_pspec", libs);
 
+  // ShortcutLabel
+  gidLink(cast(void**)&adw_shortcut_label_get_type, "adw_shortcut_label_get_type", libs);
+  gidLink(cast(void**)&adw_shortcut_label_new, "adw_shortcut_label_new", libs);
+  gidLink(cast(void**)&adw_shortcut_label_get_accelerator, "adw_shortcut_label_get_accelerator", libs);
+  gidLink(cast(void**)&adw_shortcut_label_get_disabled_text, "adw_shortcut_label_get_disabled_text", libs);
+  gidLink(cast(void**)&adw_shortcut_label_set_accelerator, "adw_shortcut_label_set_accelerator", libs);
+  gidLink(cast(void**)&adw_shortcut_label_set_disabled_text, "adw_shortcut_label_set_disabled_text", libs);
+
+  // ShortcutsDialog
+  gidLink(cast(void**)&adw_shortcuts_dialog_get_type, "adw_shortcuts_dialog_get_type", libs);
+  gidLink(cast(void**)&adw_shortcuts_dialog_new, "adw_shortcuts_dialog_new", libs);
+  gidLink(cast(void**)&adw_shortcuts_dialog_add, "adw_shortcuts_dialog_add", libs);
+
+  // ShortcutsItem
+  gidLink(cast(void**)&adw_shortcuts_item_get_type, "adw_shortcuts_item_get_type", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_new, "adw_shortcuts_item_new", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_new_from_action, "adw_shortcuts_item_new_from_action", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_get_accelerator, "adw_shortcuts_item_get_accelerator", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_get_action_name, "adw_shortcuts_item_get_action_name", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_get_direction, "adw_shortcuts_item_get_direction", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_get_subtitle, "adw_shortcuts_item_get_subtitle", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_get_title, "adw_shortcuts_item_get_title", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_set_accelerator, "adw_shortcuts_item_set_accelerator", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_set_action_name, "adw_shortcuts_item_set_action_name", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_set_direction, "adw_shortcuts_item_set_direction", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_set_subtitle, "adw_shortcuts_item_set_subtitle", libs);
+  gidLink(cast(void**)&adw_shortcuts_item_set_title, "adw_shortcuts_item_set_title", libs);
+
+  // ShortcutsSection
+  gidLink(cast(void**)&adw_shortcuts_section_get_type, "adw_shortcuts_section_get_type", libs);
+  gidLink(cast(void**)&adw_shortcuts_section_new, "adw_shortcuts_section_new", libs);
+  gidLink(cast(void**)&adw_shortcuts_section_add, "adw_shortcuts_section_add", libs);
+  gidLink(cast(void**)&adw_shortcuts_section_get_title, "adw_shortcuts_section_get_title", libs);
+  gidLink(cast(void**)&adw_shortcuts_section_set_title, "adw_shortcuts_section_set_title", libs);
+
+  // Sidebar
+  gidLink(cast(void**)&adw_sidebar_get_type, "adw_sidebar_get_type", libs);
+  gidLink(cast(void**)&adw_sidebar_new, "adw_sidebar_new", libs);
+  gidLink(cast(void**)&adw_sidebar_append, "adw_sidebar_append", libs);
+  gidLink(cast(void**)&adw_sidebar_get_drop_preload, "adw_sidebar_get_drop_preload", libs);
+  gidLink(cast(void**)&adw_sidebar_get_filter, "adw_sidebar_get_filter", libs);
+  gidLink(cast(void**)&adw_sidebar_get_item, "adw_sidebar_get_item", libs);
+  gidLink(cast(void**)&adw_sidebar_get_items, "adw_sidebar_get_items", libs);
+  gidLink(cast(void**)&adw_sidebar_get_menu_model, "adw_sidebar_get_menu_model", libs);
+  gidLink(cast(void**)&adw_sidebar_get_mode, "adw_sidebar_get_mode", libs);
+  gidLink(cast(void**)&adw_sidebar_get_placeholder, "adw_sidebar_get_placeholder", libs);
+  gidLink(cast(void**)&adw_sidebar_get_section, "adw_sidebar_get_section", libs);
+  gidLink(cast(void**)&adw_sidebar_get_sections, "adw_sidebar_get_sections", libs);
+  gidLink(cast(void**)&adw_sidebar_get_selected, "adw_sidebar_get_selected", libs);
+  gidLink(cast(void**)&adw_sidebar_get_selected_item, "adw_sidebar_get_selected_item", libs);
+  gidLink(cast(void**)&adw_sidebar_insert, "adw_sidebar_insert", libs);
+  gidLink(cast(void**)&adw_sidebar_prepend, "adw_sidebar_prepend", libs);
+  gidLink(cast(void**)&adw_sidebar_remove, "adw_sidebar_remove", libs);
+  gidLink(cast(void**)&adw_sidebar_remove_all, "adw_sidebar_remove_all", libs);
+  gidLink(cast(void**)&adw_sidebar_set_drop_preload, "adw_sidebar_set_drop_preload", libs);
+  gidLink(cast(void**)&adw_sidebar_set_filter, "adw_sidebar_set_filter", libs);
+  gidLink(cast(void**)&adw_sidebar_set_menu_model, "adw_sidebar_set_menu_model", libs);
+  gidLink(cast(void**)&adw_sidebar_set_mode, "adw_sidebar_set_mode", libs);
+  gidLink(cast(void**)&adw_sidebar_set_placeholder, "adw_sidebar_set_placeholder", libs);
+  gidLink(cast(void**)&adw_sidebar_set_selected, "adw_sidebar_set_selected", libs);
+  gidLink(cast(void**)&adw_sidebar_setup_drop_target, "adw_sidebar_setup_drop_target", libs);
+
+  // SidebarItem
+  gidLink(cast(void**)&adw_sidebar_item_get_type, "adw_sidebar_item_get_type", libs);
+  gidLink(cast(void**)&adw_sidebar_item_new, "adw_sidebar_item_new", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_drag_motion_activate, "adw_sidebar_item_get_drag_motion_activate", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_enabled, "adw_sidebar_item_get_enabled", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_icon_name, "adw_sidebar_item_get_icon_name", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_icon_paintable, "adw_sidebar_item_get_icon_paintable", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_index, "adw_sidebar_item_get_index", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_section, "adw_sidebar_item_get_section", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_section_index, "adw_sidebar_item_get_section_index", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_subtitle, "adw_sidebar_item_get_subtitle", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_suffix, "adw_sidebar_item_get_suffix", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_title, "adw_sidebar_item_get_title", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_tooltip, "adw_sidebar_item_get_tooltip", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_use_underline, "adw_sidebar_item_get_use_underline", libs);
+  gidLink(cast(void**)&adw_sidebar_item_get_visible, "adw_sidebar_item_get_visible", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_drag_motion_activate, "adw_sidebar_item_set_drag_motion_activate", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_enabled, "adw_sidebar_item_set_enabled", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_icon_name, "adw_sidebar_item_set_icon_name", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_icon_paintable, "adw_sidebar_item_set_icon_paintable", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_subtitle, "adw_sidebar_item_set_subtitle", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_suffix, "adw_sidebar_item_set_suffix", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_title, "adw_sidebar_item_set_title", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_tooltip, "adw_sidebar_item_set_tooltip", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_use_underline, "adw_sidebar_item_set_use_underline", libs);
+  gidLink(cast(void**)&adw_sidebar_item_set_visible, "adw_sidebar_item_set_visible", libs);
+
+  // SidebarSection
+  gidLink(cast(void**)&adw_sidebar_section_get_type, "adw_sidebar_section_get_type", libs);
+  gidLink(cast(void**)&adw_sidebar_section_new, "adw_sidebar_section_new", libs);
+  gidLink(cast(void**)&adw_sidebar_section_append, "adw_sidebar_section_append", libs);
+  gidLink(cast(void**)&adw_sidebar_section_bind_model, "adw_sidebar_section_bind_model", libs);
+  gidLink(cast(void**)&adw_sidebar_section_get_item, "adw_sidebar_section_get_item", libs);
+  gidLink(cast(void**)&adw_sidebar_section_get_items, "adw_sidebar_section_get_items", libs);
+  gidLink(cast(void**)&adw_sidebar_section_get_menu_model, "adw_sidebar_section_get_menu_model", libs);
+  gidLink(cast(void**)&adw_sidebar_section_get_sidebar, "adw_sidebar_section_get_sidebar", libs);
+  gidLink(cast(void**)&adw_sidebar_section_get_title, "adw_sidebar_section_get_title", libs);
+  gidLink(cast(void**)&adw_sidebar_section_insert, "adw_sidebar_section_insert", libs);
+  gidLink(cast(void**)&adw_sidebar_section_prepend, "adw_sidebar_section_prepend", libs);
+  gidLink(cast(void**)&adw_sidebar_section_remove, "adw_sidebar_section_remove", libs);
+  gidLink(cast(void**)&adw_sidebar_section_remove_all, "adw_sidebar_section_remove_all", libs);
+  gidLink(cast(void**)&adw_sidebar_section_set_menu_model, "adw_sidebar_section_set_menu_model", libs);
+  gidLink(cast(void**)&adw_sidebar_section_set_title, "adw_sidebar_section_set_title", libs);
+
   // SpinRow
   gidLink(cast(void**)&adw_spin_row_get_type, "adw_spin_row_get_type", libs);
   gidLink(cast(void**)&adw_spin_row_new, "adw_spin_row_new", libs);
@@ -5372,6 +6954,16 @@ shared static this()
   gidLink(cast(void**)&adw_spin_row_set_value, "adw_spin_row_set_value", libs);
   gidLink(cast(void**)&adw_spin_row_set_wrap, "adw_spin_row_set_wrap", libs);
   gidLink(cast(void**)&adw_spin_row_update, "adw_spin_row_update", libs);
+
+  // Spinner
+  gidLink(cast(void**)&adw_spinner_get_type, "adw_spinner_get_type", libs);
+  gidLink(cast(void**)&adw_spinner_new, "adw_spinner_new", libs);
+
+  // SpinnerPaintable
+  gidLink(cast(void**)&adw_spinner_paintable_get_type, "adw_spinner_paintable_get_type", libs);
+  gidLink(cast(void**)&adw_spinner_paintable_new, "adw_spinner_paintable_new", libs);
+  gidLink(cast(void**)&adw_spinner_paintable_get_widget, "adw_spinner_paintable_get_widget", libs);
+  gidLink(cast(void**)&adw_spinner_paintable_set_widget, "adw_spinner_paintable_set_widget", libs);
 
   // SplitButton
   gidLink(cast(void**)&adw_split_button_get_type, "adw_split_button_get_type", libs);
@@ -5478,10 +7070,15 @@ shared static this()
   gidLink(cast(void**)&adw_style_manager_get_type, "adw_style_manager_get_type", libs);
   gidLink(cast(void**)&adw_style_manager_get_default, "adw_style_manager_get_default", libs);
   gidLink(cast(void**)&adw_style_manager_get_for_display, "adw_style_manager_get_for_display", libs);
+  gidLink(cast(void**)&adw_style_manager_get_accent_color, "adw_style_manager_get_accent_color", libs);
+  gidLink(cast(void**)&adw_style_manager_get_accent_color_rgba, "adw_style_manager_get_accent_color_rgba", libs);
   gidLink(cast(void**)&adw_style_manager_get_color_scheme, "adw_style_manager_get_color_scheme", libs);
   gidLink(cast(void**)&adw_style_manager_get_dark, "adw_style_manager_get_dark", libs);
   gidLink(cast(void**)&adw_style_manager_get_display, "adw_style_manager_get_display", libs);
+  gidLink(cast(void**)&adw_style_manager_get_document_font_name, "adw_style_manager_get_document_font_name", libs);
   gidLink(cast(void**)&adw_style_manager_get_high_contrast, "adw_style_manager_get_high_contrast", libs);
+  gidLink(cast(void**)&adw_style_manager_get_monospace_font_name, "adw_style_manager_get_monospace_font_name", libs);
+  gidLink(cast(void**)&adw_style_manager_get_system_supports_accent_colors, "adw_style_manager_get_system_supports_accent_colors", libs);
   gidLink(cast(void**)&adw_style_manager_get_system_supports_color_schemes, "adw_style_manager_get_system_supports_color_schemes", libs);
   gidLink(cast(void**)&adw_style_manager_set_color_scheme, "adw_style_manager_set_color_scheme", libs);
 
@@ -5695,8 +7292,49 @@ shared static this()
   gidLink(cast(void**)&adw_toast_overlay_get_type, "adw_toast_overlay_get_type", libs);
   gidLink(cast(void**)&adw_toast_overlay_new, "adw_toast_overlay_new", libs);
   gidLink(cast(void**)&adw_toast_overlay_add_toast, "adw_toast_overlay_add_toast", libs);
+  gidLink(cast(void**)&adw_toast_overlay_dismiss_all, "adw_toast_overlay_dismiss_all", libs);
   gidLink(cast(void**)&adw_toast_overlay_get_child, "adw_toast_overlay_get_child", libs);
   gidLink(cast(void**)&adw_toast_overlay_set_child, "adw_toast_overlay_set_child", libs);
+
+  // Toggle
+  gidLink(cast(void**)&adw_toggle_get_type, "adw_toggle_get_type", libs);
+  gidLink(cast(void**)&adw_toggle_new, "adw_toggle_new", libs);
+  gidLink(cast(void**)&adw_toggle_get_child, "adw_toggle_get_child", libs);
+  gidLink(cast(void**)&adw_toggle_get_description, "adw_toggle_get_description", libs);
+  gidLink(cast(void**)&adw_toggle_get_enabled, "adw_toggle_get_enabled", libs);
+  gidLink(cast(void**)&adw_toggle_get_icon_name, "adw_toggle_get_icon_name", libs);
+  gidLink(cast(void**)&adw_toggle_get_index, "adw_toggle_get_index", libs);
+  gidLink(cast(void**)&adw_toggle_get_label, "adw_toggle_get_label", libs);
+  gidLink(cast(void**)&adw_toggle_get_name, "adw_toggle_get_name", libs);
+  gidLink(cast(void**)&adw_toggle_get_tooltip, "adw_toggle_get_tooltip", libs);
+  gidLink(cast(void**)&adw_toggle_get_use_underline, "adw_toggle_get_use_underline", libs);
+  gidLink(cast(void**)&adw_toggle_set_child, "adw_toggle_set_child", libs);
+  gidLink(cast(void**)&adw_toggle_set_description, "adw_toggle_set_description", libs);
+  gidLink(cast(void**)&adw_toggle_set_enabled, "adw_toggle_set_enabled", libs);
+  gidLink(cast(void**)&adw_toggle_set_icon_name, "adw_toggle_set_icon_name", libs);
+  gidLink(cast(void**)&adw_toggle_set_label, "adw_toggle_set_label", libs);
+  gidLink(cast(void**)&adw_toggle_set_name, "adw_toggle_set_name", libs);
+  gidLink(cast(void**)&adw_toggle_set_tooltip, "adw_toggle_set_tooltip", libs);
+  gidLink(cast(void**)&adw_toggle_set_use_underline, "adw_toggle_set_use_underline", libs);
+
+  // ToggleGroup
+  gidLink(cast(void**)&adw_toggle_group_get_type, "adw_toggle_group_get_type", libs);
+  gidLink(cast(void**)&adw_toggle_group_new, "adw_toggle_group_new", libs);
+  gidLink(cast(void**)&adw_toggle_group_add, "adw_toggle_group_add", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_active, "adw_toggle_group_get_active", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_active_name, "adw_toggle_group_get_active_name", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_can_shrink, "adw_toggle_group_get_can_shrink", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_homogeneous, "adw_toggle_group_get_homogeneous", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_n_toggles, "adw_toggle_group_get_n_toggles", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_toggle, "adw_toggle_group_get_toggle", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_toggle_by_name, "adw_toggle_group_get_toggle_by_name", libs);
+  gidLink(cast(void**)&adw_toggle_group_get_toggles, "adw_toggle_group_get_toggles", libs);
+  gidLink(cast(void**)&adw_toggle_group_remove, "adw_toggle_group_remove", libs);
+  gidLink(cast(void**)&adw_toggle_group_remove_all, "adw_toggle_group_remove_all", libs);
+  gidLink(cast(void**)&adw_toggle_group_set_active, "adw_toggle_group_set_active", libs);
+  gidLink(cast(void**)&adw_toggle_group_set_active_name, "adw_toggle_group_set_active_name", libs);
+  gidLink(cast(void**)&adw_toggle_group_set_can_shrink, "adw_toggle_group_set_can_shrink", libs);
+  gidLink(cast(void**)&adw_toggle_group_set_homogeneous, "adw_toggle_group_set_homogeneous", libs);
 
   // ToolbarView
   gidLink(cast(void**)&adw_toolbar_view_get_type, "adw_toolbar_view_get_type", libs);
@@ -5729,14 +7367,19 @@ shared static this()
   gidLink(cast(void**)&adw_view_stack_add_titled, "adw_view_stack_add_titled", libs);
   gidLink(cast(void**)&adw_view_stack_add_titled_with_icon, "adw_view_stack_add_titled_with_icon", libs);
   gidLink(cast(void**)&adw_view_stack_get_child_by_name, "adw_view_stack_get_child_by_name", libs);
+  gidLink(cast(void**)&adw_view_stack_get_enable_transitions, "adw_view_stack_get_enable_transitions", libs);
   gidLink(cast(void**)&adw_view_stack_get_hhomogeneous, "adw_view_stack_get_hhomogeneous", libs);
   gidLink(cast(void**)&adw_view_stack_get_page, "adw_view_stack_get_page", libs);
   gidLink(cast(void**)&adw_view_stack_get_pages, "adw_view_stack_get_pages", libs);
+  gidLink(cast(void**)&adw_view_stack_get_transition_duration, "adw_view_stack_get_transition_duration", libs);
+  gidLink(cast(void**)&adw_view_stack_get_transition_running, "adw_view_stack_get_transition_running", libs);
   gidLink(cast(void**)&adw_view_stack_get_vhomogeneous, "adw_view_stack_get_vhomogeneous", libs);
   gidLink(cast(void**)&adw_view_stack_get_visible_child, "adw_view_stack_get_visible_child", libs);
   gidLink(cast(void**)&adw_view_stack_get_visible_child_name, "adw_view_stack_get_visible_child_name", libs);
   gidLink(cast(void**)&adw_view_stack_remove, "adw_view_stack_remove", libs);
+  gidLink(cast(void**)&adw_view_stack_set_enable_transitions, "adw_view_stack_set_enable_transitions", libs);
   gidLink(cast(void**)&adw_view_stack_set_hhomogeneous, "adw_view_stack_set_hhomogeneous", libs);
+  gidLink(cast(void**)&adw_view_stack_set_transition_duration, "adw_view_stack_set_transition_duration", libs);
   gidLink(cast(void**)&adw_view_stack_set_vhomogeneous, "adw_view_stack_set_vhomogeneous", libs);
   gidLink(cast(void**)&adw_view_stack_set_visible_child, "adw_view_stack_set_visible_child", libs);
   gidLink(cast(void**)&adw_view_stack_set_visible_child_name, "adw_view_stack_set_visible_child_name", libs);
@@ -5748,6 +7391,8 @@ shared static this()
   gidLink(cast(void**)&adw_view_stack_page_get_icon_name, "adw_view_stack_page_get_icon_name", libs);
   gidLink(cast(void**)&adw_view_stack_page_get_name, "adw_view_stack_page_get_name", libs);
   gidLink(cast(void**)&adw_view_stack_page_get_needs_attention, "adw_view_stack_page_get_needs_attention", libs);
+  gidLink(cast(void**)&adw_view_stack_page_get_section_title, "adw_view_stack_page_get_section_title", libs);
+  gidLink(cast(void**)&adw_view_stack_page_get_starts_section, "adw_view_stack_page_get_starts_section", libs);
   gidLink(cast(void**)&adw_view_stack_page_get_title, "adw_view_stack_page_get_title", libs);
   gidLink(cast(void**)&adw_view_stack_page_get_use_underline, "adw_view_stack_page_get_use_underline", libs);
   gidLink(cast(void**)&adw_view_stack_page_get_visible, "adw_view_stack_page_get_visible", libs);
@@ -5755,6 +7400,8 @@ shared static this()
   gidLink(cast(void**)&adw_view_stack_page_set_icon_name, "adw_view_stack_page_set_icon_name", libs);
   gidLink(cast(void**)&adw_view_stack_page_set_name, "adw_view_stack_page_set_name", libs);
   gidLink(cast(void**)&adw_view_stack_page_set_needs_attention, "adw_view_stack_page_set_needs_attention", libs);
+  gidLink(cast(void**)&adw_view_stack_page_set_section_title, "adw_view_stack_page_set_section_title", libs);
+  gidLink(cast(void**)&adw_view_stack_page_set_starts_section, "adw_view_stack_page_set_starts_section", libs);
   gidLink(cast(void**)&adw_view_stack_page_set_title, "adw_view_stack_page_set_title", libs);
   gidLink(cast(void**)&adw_view_stack_page_set_use_underline, "adw_view_stack_page_set_use_underline", libs);
   gidLink(cast(void**)&adw_view_stack_page_set_visible, "adw_view_stack_page_set_visible", libs);
@@ -5780,6 +7427,18 @@ shared static this()
   gidLink(cast(void**)&adw_view_switcher_bar_set_reveal, "adw_view_switcher_bar_set_reveal", libs);
   gidLink(cast(void**)&adw_view_switcher_bar_set_stack, "adw_view_switcher_bar_set_stack", libs);
 
+  // ViewSwitcherSidebar
+  gidLink(cast(void**)&adw_view_switcher_sidebar_get_type, "adw_view_switcher_sidebar_get_type", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_new, "adw_view_switcher_sidebar_new", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_get_filter, "adw_view_switcher_sidebar_get_filter", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_get_mode, "adw_view_switcher_sidebar_get_mode", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_get_placeholder, "adw_view_switcher_sidebar_get_placeholder", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_get_stack, "adw_view_switcher_sidebar_get_stack", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_set_filter, "adw_view_switcher_sidebar_set_filter", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_set_mode, "adw_view_switcher_sidebar_set_mode", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_set_placeholder, "adw_view_switcher_sidebar_set_placeholder", libs);
+  gidLink(cast(void**)&adw_view_switcher_sidebar_set_stack, "adw_view_switcher_sidebar_set_stack", libs);
+
   // ViewSwitcherTitle
   gidLink(cast(void**)&adw_view_switcher_title_get_type, "adw_view_switcher_title_get_type", libs);
   gidLink(cast(void**)&adw_view_switcher_title_new, "adw_view_switcher_title_new", libs);
@@ -5797,10 +7456,12 @@ shared static this()
   gidLink(cast(void**)&adw_window_get_type, "adw_window_get_type", libs);
   gidLink(cast(void**)&adw_window_new, "adw_window_new", libs);
   gidLink(cast(void**)&adw_window_add_breakpoint, "adw_window_add_breakpoint", libs);
+  gidLink(cast(void**)&adw_window_get_adaptive_preview, "adw_window_get_adaptive_preview", libs);
   gidLink(cast(void**)&adw_window_get_content, "adw_window_get_content", libs);
   gidLink(cast(void**)&adw_window_get_current_breakpoint, "adw_window_get_current_breakpoint", libs);
   gidLink(cast(void**)&adw_window_get_dialogs, "adw_window_get_dialogs", libs);
   gidLink(cast(void**)&adw_window_get_visible_dialog, "adw_window_get_visible_dialog", libs);
+  gidLink(cast(void**)&adw_window_set_adaptive_preview, "adw_window_set_adaptive_preview", libs);
   gidLink(cast(void**)&adw_window_set_content, "adw_window_set_content", libs);
 
   // WindowTitle
@@ -5811,6 +7472,72 @@ shared static this()
   gidLink(cast(void**)&adw_window_title_set_subtitle, "adw_window_title_set_subtitle", libs);
   gidLink(cast(void**)&adw_window_title_set_title, "adw_window_title_set_title", libs);
 
+  // WrapBox
+  gidLink(cast(void**)&adw_wrap_box_get_type, "adw_wrap_box_get_type", libs);
+  gidLink(cast(void**)&adw_wrap_box_new, "adw_wrap_box_new", libs);
+  gidLink(cast(void**)&adw_wrap_box_append, "adw_wrap_box_append", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_align, "adw_wrap_box_get_align", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_child_spacing, "adw_wrap_box_get_child_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_child_spacing_unit, "adw_wrap_box_get_child_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_justify, "adw_wrap_box_get_justify", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_justify_last_line, "adw_wrap_box_get_justify_last_line", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_line_homogeneous, "adw_wrap_box_get_line_homogeneous", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_line_spacing, "adw_wrap_box_get_line_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_line_spacing_unit, "adw_wrap_box_get_line_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_natural_line_length, "adw_wrap_box_get_natural_line_length", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_natural_line_length_unit, "adw_wrap_box_get_natural_line_length_unit", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_pack_direction, "adw_wrap_box_get_pack_direction", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_wrap_policy, "adw_wrap_box_get_wrap_policy", libs);
+  gidLink(cast(void**)&adw_wrap_box_get_wrap_reverse, "adw_wrap_box_get_wrap_reverse", libs);
+  gidLink(cast(void**)&adw_wrap_box_insert_child_after, "adw_wrap_box_insert_child_after", libs);
+  gidLink(cast(void**)&adw_wrap_box_prepend, "adw_wrap_box_prepend", libs);
+  gidLink(cast(void**)&adw_wrap_box_remove, "adw_wrap_box_remove", libs);
+  gidLink(cast(void**)&adw_wrap_box_remove_all, "adw_wrap_box_remove_all", libs);
+  gidLink(cast(void**)&adw_wrap_box_reorder_child_after, "adw_wrap_box_reorder_child_after", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_align, "adw_wrap_box_set_align", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_child_spacing, "adw_wrap_box_set_child_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_child_spacing_unit, "adw_wrap_box_set_child_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_justify, "adw_wrap_box_set_justify", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_justify_last_line, "adw_wrap_box_set_justify_last_line", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_line_homogeneous, "adw_wrap_box_set_line_homogeneous", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_line_spacing, "adw_wrap_box_set_line_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_line_spacing_unit, "adw_wrap_box_set_line_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_natural_line_length, "adw_wrap_box_set_natural_line_length", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_natural_line_length_unit, "adw_wrap_box_set_natural_line_length_unit", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_pack_direction, "adw_wrap_box_set_pack_direction", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_wrap_policy, "adw_wrap_box_set_wrap_policy", libs);
+  gidLink(cast(void**)&adw_wrap_box_set_wrap_reverse, "adw_wrap_box_set_wrap_reverse", libs);
+
+  // WrapLayout
+  gidLink(cast(void**)&adw_wrap_layout_get_type, "adw_wrap_layout_get_type", libs);
+  gidLink(cast(void**)&adw_wrap_layout_new, "adw_wrap_layout_new", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_align, "adw_wrap_layout_get_align", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_child_spacing, "adw_wrap_layout_get_child_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_child_spacing_unit, "adw_wrap_layout_get_child_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_justify, "adw_wrap_layout_get_justify", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_justify_last_line, "adw_wrap_layout_get_justify_last_line", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_line_homogeneous, "adw_wrap_layout_get_line_homogeneous", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_line_spacing, "adw_wrap_layout_get_line_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_line_spacing_unit, "adw_wrap_layout_get_line_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_natural_line_length, "adw_wrap_layout_get_natural_line_length", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_natural_line_length_unit, "adw_wrap_layout_get_natural_line_length_unit", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_pack_direction, "adw_wrap_layout_get_pack_direction", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_wrap_policy, "adw_wrap_layout_get_wrap_policy", libs);
+  gidLink(cast(void**)&adw_wrap_layout_get_wrap_reverse, "adw_wrap_layout_get_wrap_reverse", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_align, "adw_wrap_layout_set_align", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_child_spacing, "adw_wrap_layout_set_child_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_child_spacing_unit, "adw_wrap_layout_set_child_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_justify, "adw_wrap_layout_set_justify", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_justify_last_line, "adw_wrap_layout_set_justify_last_line", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_line_homogeneous, "adw_wrap_layout_set_line_homogeneous", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_line_spacing, "adw_wrap_layout_set_line_spacing", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_line_spacing_unit, "adw_wrap_layout_set_line_spacing_unit", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_natural_line_length, "adw_wrap_layout_set_natural_line_length", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_natural_line_length_unit, "adw_wrap_layout_set_natural_line_length_unit", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_pack_direction, "adw_wrap_layout_set_pack_direction", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_wrap_policy, "adw_wrap_layout_set_wrap_policy", libs);
+  gidLink(cast(void**)&adw_wrap_layout_set_wrap_reverse, "adw_wrap_layout_set_wrap_reverse", libs);
+
   // global
   gidLink(cast(void**)&adw_get_enable_animations, "adw_get_enable_animations", libs);
   gidLink(cast(void**)&adw_get_major_version, "adw_get_major_version", libs);
@@ -5819,10 +7546,15 @@ shared static this()
   gidLink(cast(void**)&adw_init, "adw_init", libs);
   gidLink(cast(void**)&adw_is_initialized, "adw_is_initialized", libs);
   gidLink(cast(void**)&adw_lerp, "adw_lerp", libs);
+  gidLink(cast(void**)&adw_rgba_to_standalone, "adw_rgba_to_standalone", libs);
   gidLink(cast(void**)&adw_show_about_dialog, "adw_show_about_dialog", libs);
   gidLink(cast(void**)&adw_show_about_dialog_from_appdata, "adw_show_about_dialog_from_appdata", libs);
   gidLink(cast(void**)&adw_show_about_window, "adw_show_about_window", libs);
   gidLink(cast(void**)&adw_show_about_window_from_appdata, "adw_show_about_window_from_appdata", libs);
+
+  // AccentColor
+  gidLink(cast(void**)&adw_accent_color_to_rgba, "adw_accent_color_to_rgba", libs);
+  gidLink(cast(void**)&adw_accent_color_to_standalone_rgba, "adw_accent_color_to_standalone_rgba", libs);
 
   // Easing
   gidLink(cast(void**)&adw_easing_ease, "adw_easing_ease", libs);

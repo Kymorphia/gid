@@ -23,7 +23,10 @@ import gtk.widget;
     The [gtk.font_button.FontButton] allows to open a font chooser dialog to change
     the font.
     
-    ![An example GtkFontButton](font-button.png)
+    <picture>
+      <source srcset="font-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFontButton" src="font-button.png">
+    </picture>
     
     It is suitable widget for selecting a font in a preference dialog.
     

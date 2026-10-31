@@ -29,13 +29,13 @@ import soup.websocket_connection;
 /**
     Soup session state object.
     
-    #SoupSession is the object that controls client-side HTTP. A
-    #SoupSession encapsulates all of the state that libsoup is keeping
+    [soup.session.Session] is the object that controls client-side HTTP. A
+    [soup.session.Session] encapsulates all of the state that libsoup is keeping
     on behalf of your program; cached HTTP connections, authentication
     information, etc. It also keeps track of various global options
     and features that you are using.
     
-    Most applications will only need a single #SoupSession; the primary
+    Most applications will only need a single [soup.session.Session]; the primary
     reason you might need multiple sessions is if you need to have
     multiple independent authentication contexts. (Eg, you are
     connecting to a server and authenticating as two different users at
@@ -44,7 +44,7 @@ import soup.websocket_connection;
     one session for the first user, and a second session for the other
     user.)
     
-    Additional #SoupSession functionality is provided by
+    Additional [soup.session.Session] functionality is provided by
     [soup.session_feature.SessionFeature] objects, which can be added to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType]
     For example, [soup.logger.Logger] provides support for
@@ -56,7 +56,7 @@ import soup.websocket_connection;
     
     All [soup.session.Session]s are created with a [soup.auth_manager.AuthManager], and support
     for `SOUP_TYPE_AUTH_BASIC` and `SOUP_TYPE_AUTH_DIGEST`. Additionally,
-    sessions using the plain #SoupSession class (rather than one of its deprecated
+    sessions using the plain [soup.session.Session] class (rather than one of its deprecated
     subtypes) have a [soup.content_decoder.ContentDecoder] by default.
     
     Note that all async methods will invoke their callbacks on the thread-default
@@ -126,7 +126,7 @@ class Session : gobject.object.ObjectWrap
 
   /**
       Get `acceptLanguageAuto` property.
-      Returns: If true, #SoupSession will automatically set the string
+      Returns: If true, [soup.session.Session] will automatically set the string
         for the "Accept-Language" header on every [soup.message.Message]
         sent, based on the return value of `func@GLib.get_language_names`.
         
@@ -141,7 +141,7 @@ class Session : gobject.object.ObjectWrap
   /**
       Set `acceptLanguageAuto` property.
       Params:
-        propval = If true, #SoupSession will automatically set the string
+        propval = If true, [soup.session.Session] will automatically set the string
           for the "Accept-Language" header on every [soup.message.Message]
           sent, based on the return value of `func@GLib.get_language_names`.
           
@@ -383,7 +383,7 @@ class Session : gobject.object.ObjectWrap
         enclosed in parentheses, between or after the tokens.
         
         If you set a [soup.session.Session.userAgent] property that has trailing
-        whitespace, #SoupSession will append its own product token
+        whitespace, [soup.session.Session] will append its own product token
         (eg, `libsoup/2.3.2`) to the end of the
         header for you.
   */
@@ -417,7 +417,7 @@ class Session : gobject.object.ObjectWrap
           enclosed in parentheses, between or after the tokens.
           
           If you set a [soup.session.Session.userAgent] property that has trailing
-          whitespace, #SoupSession will append its own product token
+          whitespace, [soup.session.Session] will append its own product token
           (eg, `libsoup/2.3.2`) to the end of the
           header for you.
   */
@@ -427,7 +427,7 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a #SoupSession with the default options.
+      Creates a [soup.session.Session] with the default options.
       Returns: the new session.
   */
   this() nothrow
@@ -448,9 +448,9 @@ class Session : gobject.object.ObjectWrap
 
   /**
       Adds feature's functionality to session. You cannot add multiple
-      features of the same `aliasGLib.Type` to a session.
+      features of the same [gobject.types.size_t] to a session.
       
-      See the main #SoupSession documentation for information on what
+      See the main [soup.session.Session] documentation for information on what
       features are present in sessions by default.
   
       Params:
@@ -472,7 +472,7 @@ class Session : gobject.object.ObjectWrap
       existing feature on session the chance to accept feature_type as
       a "subfeature". This can be used to add new [soup.auth.Auth] types, for instance.
       
-      See the main #SoupSession documentation for information on what
+      See the main [soup.session.Session] documentation for information on what
       features are present in sessions by default.
   
       Params:
@@ -798,6 +798,9 @@ class Session : gobject.object.ObjectWrap
       initial (`3xx/401/407`) response body will be suppressed, and
       [soup.session.Session.send] will only return once a final response has been
       received.
+      
+      Possible error domains include [soup.types.SessionError], [gio.types.IOErrorEnum],
+      and [gio.types.TlsError] which you may want to specifically handle.
   
       Params:
         msg = a #SoupMessage
@@ -1113,7 +1116,7 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-      Set a `classGIo.TlsDatabase` to be used by session on new connections.
+      Set a [gio.tls_database.TlsDatabase] to be used by session on new connections.
       
       If tls_database is null then certificate validation will always fail. See
       [soup.session.Session.tlsDatabase] for more information.
@@ -1390,7 +1393,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `acceptLanguageAuto` property.
       Params:
-        propval = If true, #SoupSession will automatically set the string
+        propval = If true, [soup.session.Session] will automatically set the string
           for the "Accept-Language" header on every [soup.message.Message]
           sent, based on the return value of `func@GLib.get_language_names`.
           
@@ -1570,7 +1573,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           enclosed in parentheses, between or after the tokens.
           
           If you set a [soup.session.Session.userAgent] property that has trailing
-          whitespace, #SoupSession will append its own product token
+          whitespace, [soup.session.Session] will append its own product token
           (eg, `libsoup/2.3.2`) to the end of the
           header for you.
       Returns: Builder instance for fluent chaining

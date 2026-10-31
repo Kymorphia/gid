@@ -11,8 +11,8 @@ import gobject.boxed;
 import gobject.object;
 
 /**
-    The [gdk.toplevel_layout.ToplevelLayout] struct contains information that
-    is necessary to present a sovereign window on screen.
+    Contains information that is necessary to present a sovereign
+    window on screen.
     
     The [gdk.toplevel_layout.ToplevelLayout] struct is necessary for using
     [gdk.toplevel.Toplevel.present].
@@ -62,7 +62,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       how a toplevel surface should be placed and behave on-screen.
       
       The size is in ”application pixels”, not
-      ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
+      ”device pixels” (see [gdk.surface.Surface.getScale]).
       Returns: newly created instance of [gdk.toplevel_layout.ToplevelLayout]
   */
   this() nothrow
@@ -88,7 +88,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       Check whether layout and other has identical layout properties.
   
       Params:
-        other = another [gdk.toplevel_layout.ToplevelLayout]
+        other = another toplevel layout
       Returns: true if layout and other have identical layout properties,
           otherwise false.
   */
@@ -133,7 +133,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   /**
       If the layout specifies whether to the toplevel should go maximized,
       the value pointed to by maximized is set to true if it should go
-      fullscreen, or false, if it should go unmaximized.
+      maximized, or false, if it should go unmaximized.
   
       Params:
         maximized = set to true if the toplevel should be maximized

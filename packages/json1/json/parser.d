@@ -107,6 +107,27 @@ class Parser : gobject.object.ObjectWrap
   }
 
   /**
+      Get `strict` property.
+      Returns: Whether the parser should be strictly conforming to the
+        JSON format, or allow custom extensions like comments.
+  */
+  @property bool strict() nothrow
+  {
+    return getStrict();
+  }
+
+  /**
+      Set `strict` property.
+      Params:
+        propval = Whether the parser should be strictly conforming to the
+          JSON format, or allow custom extensions like comments.
+  */
+  @property void strict(bool propval) nothrow
+  {
+    setStrict(propval);
+  }
+
+  /**
       Creates a new JSON parser.
       
       You can use the [json.parser.Parser] to load a JSON stream from either a file or a
@@ -177,6 +198,17 @@ class Parser : gobject.object.ObjectWrap
     JsonNode* _cretval;
     _cretval = json_parser_get_root(cast(JsonParser*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves whether the parser is operating in strict mode.
+      Returns: true if the parser is strict, and false otherwise
+  */
+  bool getStrict() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_parser_get_strict(cast(JsonParser*)this._cPtr);
     return _retval;
   }
 
@@ -365,6 +397,23 @@ class Parser : gobject.object.ObjectWrap
   }
 
   /**
+      Sets whether the parser should operate in strict mode.
+      
+      If strict is true, [json.parser.Parser] will strictly conform to
+      the JSON format.
+      
+      If strict is false, [json.parser.Parser] will allow custom extensions
+      to the JSON format, like comments.
+  
+      Params:
+        strict = whether the parser should be strict
+  */
+  void setStrict(bool strict) nothrow
+  {
+    json_parser_set_strict(cast(JsonParser*)this._cPtr, strict);
+  }
+
+  /**
       Steals the top level node from the parsed JSON stream.
       
       This will be `NULL` in the same situations as [json.parser.Parser.getRoot]
@@ -398,6 +447,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.array_element` virtual function
   */
   gulong connectArrayElement(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -453,6 +505,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.array_end` virtual function
   */
   gulong connectArrayEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -502,6 +557,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.array_start` virtual function
   */
   gulong connectArrayStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -549,6 +607,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.error` virtual function
   */
   gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -600,6 +661,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.object_end` virtual function
   */
   gulong connectObjectEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -638,7 +702,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ObjectMember` signal.
   
       The `::object-member` signal is emitted each time a parser
-        has successfully parsed a single member of a JSON object
+        has successfully parsed a single member of a JSON object.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -653,6 +717,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.object_member` virtual function
   */
   gulong connectObjectMember(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -705,6 +772,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.object_start` virtual function
   */
   gulong connectObjectStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -739,7 +809,7 @@ class Parser : gobject.object.ObjectWrap
       Connect to `ParseEnd` signal.
   
       This signal is emitted when a parser successfully finished parsing a
-        JSON data stream
+        JSON data stream.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -750,6 +820,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.parse_end` virtual function
   */
   gulong connectParseEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -794,6 +867,9 @@ class Parser : gobject.object.ObjectWrap
   
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [json.parser.Parser] and
+          override the `vfuncJson.Parser.parse_start` virtual function
   */
   gulong connectParseStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -842,6 +918,18 @@ class ParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   T immutable_(bool propval) nothrow
   {
     return setProperty("immutable", propval);
+  }
+
+  /**
+      Set `strict` property.
+      Params:
+        propval = Whether the parser should be strictly conforming to the
+          JSON format, or allow custom extensions like comments.
+      Returns: Builder instance for fluent chaining
+  */
+  T strict(bool propval) nothrow
+  {
+    return setProperty("strict", propval);
   }
 }
 

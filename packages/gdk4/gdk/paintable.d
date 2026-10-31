@@ -13,8 +13,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [gdk.paintable.Paintable] is a simple interface used by GTK to represent content that
-    can be painted.
+    An interface for content that can be painted.
     
     The content of a [gdk.paintable.Paintable] can be painted anywhere at any size
     without requiring any sort of layout. The interface is inspired by
@@ -39,7 +38,7 @@ import gobject.object;
     a different output with the same snapshot. Once that happens, it will call
     [gdk.paintable.Paintable.invalidateContents] which will emit the
     [gdk.paintable.Paintable.invalidateContents] signal. If a paintable is known
-    to never change its contents, it will set the [gdk.types.PaintableFlags.Contents]
+    to never change its contents, it will set the [gdk.types.PaintableFlags.StaticContents]
     flag. If a consumer cannot deal with changing contents, it may call
     [gdk.paintable.Paintable.getCurrentImage] which will return a static
     paintable and use that.
@@ -51,7 +50,7 @@ import gobject.object;
     by calling [gdk.paintable.Paintable.invalidateSize] which will emit the
     [gdk.paintable.Paintable.invalidateSize] signal. And just like for contents,
     if a paintable is known to never change its size, it will set the
-    [gdk.types.PaintableFlags.Size] flag.
+    [gdk.types.PaintableFlags.StaticSize] flag.
     
     Besides API for applications, there are some functions that are only
     useful for implementing subclasses and should not be used by applications:
@@ -200,7 +199,7 @@ interface Paintable
       This function will emit the [gdk.paintable.Paintable.invalidateContents]
       signal.
       
-      If a paintable reports the [gdk.types.PaintableFlags.Contents] flag,
+      If a paintable reports the [gdk.types.PaintableFlags.StaticContents] flag,
       it must not call this function.
   */
   void invalidateContents();
@@ -214,7 +213,7 @@ interface Paintable
       This function will emit the [gdk.paintable.Paintable.invalidateSize]
       signal.
       
-      If a paintable reports the [gdk.types.PaintableFlags.Size] flag,
+      If a paintable reports the [gdk.types.PaintableFlags.StaticSize] flag,
       it must not call this function.
   */
   void invalidateSize();

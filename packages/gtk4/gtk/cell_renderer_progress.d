@@ -58,13 +58,20 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
     return new CellRendererProgressGidBuilder;
   }
 
-  /** */
+  /**
+      Get `inverted` property.
+      Returns: Whether progess is inverted.
+  */
   @property bool inverted() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("inverted");
   }
 
-  /** */
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether progess is inverted.
+  */
   @property void inverted(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("inverted", propval);
@@ -219,7 +226,12 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
 
   mixin OrientableGidBuilderT!();
 
-  /** */
+  /**
+      Set `inverted` property.
+      Params:
+        propval = Whether progess is inverted.
+      Returns: Builder instance for fluent chaining
+  */
   T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);

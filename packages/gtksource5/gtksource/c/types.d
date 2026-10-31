@@ -5,6 +5,30 @@ public import gid.basictypes;
 public import gtk.c.types;
 
 /** */
+enum GtkSourceAnnotationStyle
+{
+  /**
+      same color as drawn spaces
+  */
+  None = 0,
+
+  /**
+      same as the diff:changed-line foreground color
+  */
+  Warning = 1,
+
+  /**
+      same as the diff:removed-line foreground color
+  */
+  Error = 2,
+
+  /**
+      same as the diff:added-line foreground color
+  */
+  Accent = 3,
+}
+
+/** */
 enum GtkSourceBackgroundPatternType
 {
   /**
@@ -276,6 +300,13 @@ enum GtkSourceSortFlags : uint
       remove duplicates
   */
   RemoveDuplicates = 4,
+
+  /**
+      improved sorting for filenames.
+      
+      see `func@GLib.utf8_collate_key_for_filename`
+  */
+  Filename = 8,
 }
 
 /**
@@ -368,6 +399,66 @@ enum GtkSourceViewGutterPosition
 }
 
 /**
+    Represents an annotation added to [gtksource.view.View], it has a [gtksource.annotation.Annotation.line] property,
+    [gtksource.annotation.Annotation.description], icon and a style.
+    
+    It will be displayed always at the end of a line.
+    
+    If the style is GTK_SOURCE_ANNOTATION_STYLE_NONE it will use the same color as [gtksource.space_drawer.SpaceDrawer].
+*/
+struct GtkSourceAnnotation;
+
+/** */
+struct GtkSourceAnnotationClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    It is used to provide annotations and display them on [gtksource.view.View] and also populate
+    [gtksource.hover_display.HoverDisplay] when the user hovers over an annotation.
+    
+    You can subclass this object and implement [gtksource.annotation_provider.AnnotationProvider.populateHoverAsync] and
+    [gtksource.annotation_provider.AnnotationProvider.populateHoverFinish] or connect to `signal@AnnotationProvider::populate`
+    and call `method@AnnotationProvider.populate` or do it asynchronously.
+*/
+struct GtkSourceAnnotationProvider
+{
+  /** */
+  GObject parentInstance;
+}
+
+/** */
+struct GtkSourceAnnotationProviderClass
+{
+  /** */
+  GObjectClass parentClass;
+
+  /** */
+  extern(C) void function(GtkSourceAnnotationProvider* self, GtkSourceAnnotation* annotation, GtkSourceHoverDisplay* display, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) populateHoverAsync;
+
+  /** */
+  extern(C) gboolean function(GtkSourceAnnotationProvider* self, GAsyncResult* result, GError** _err) populateHoverFinish;
+}
+
+/**
+    Use this object to manage [gtksource.annotation.Annotation]s. Each [gtksource.view.View] has a single annotation
+    manager and it is guaranteed to be the same for the lifetime of [gtksource.view.View].
+    
+    Add [gtksource.annotation_provider.AnnotationProvider]s with [gtksource.annotations.Annotations.addProvider] to
+    display all the annotations added to each [gtksource.annotation_provider.AnnotationProvider].
+*/
+struct GtkSourceAnnotations;
+
+/** */
+struct GtkSourceAnnotationsClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
     Subclass of [gtk.text_buffer.TextBuffer].
     
     A [gtksource.buffer.Buffer] object is the model for [gtksource.view.View] widgets.
@@ -416,6 +507,12 @@ enum GtkSourceViewGutterPosition
     
     tag_table = gtk_text_buffer_get_tag_table (buffer);
     tag = gtk_text_tag_table_lookup (tag_table, "gtksourceview:context-classes:string");
+    ```
+    ```python
+    buffer = GtkSource.Buffer()
+    
+    tag_table = buffer.get_tag_table()
+    tag = tag_table.lookup(name="gtksourceview:context-classes:string")
     ```
     
     The tag must be used for read-only purposes.
@@ -1021,16 +1118,16 @@ struct GtkSourceHoverProviderInterface
     [gtksource.view.View.indenter] property.
     
     Implementors of this interface should implement both
-    `vfunc@Indenter.is_trigger` and `vfunc@Indenter.indent`.
+    `vfunc@GtkSource.Indenter.is_trigger` and `vfunc@GtkSource.Indenter.indent`.
     
-    `vfunc@Indenter.is_trigger` is called upon key-press to
+    `vfunc@GtkSource.Indenter.is_trigger` is called upon key-press to
     determine of the key press should trigger an indentation.  The default
     implementation of the interface checks to see if the key was
     [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.ShiftMask] set.
     
-    `vfunc@Indenter.indent` is called after text has been
+    `vfunc@GtkSource.Indenter.indent` is called after text has been
     inserted into [gtksource.buffer.Buffer] when
-    `vfunc@Indenter.is_trigger` returned true. The [gtk.text_iter.TextIter]
+    `vfunc@GtkSource.Indenter.is_trigger` returned true. The [gtk.text_iter.TextIter]
     is placed directly after the inserted character or characters.
     
     It may be beneficial to move the insertion mark using
@@ -1289,6 +1386,20 @@ struct GtkSourcePrintCompositorClass
             gtk_source_region_iter_next (&region_iter);
     }
     ```
+    ```python
+    buffer: GtkSource.Buffer = GtkSource.Buffer()
+    region: GtkSource.Region = GtkSource.Region(buffer=buffer)
+    region_iter = region.get_start_region_iter()
+    
+    while not region_iter.is_end():
+        success, start, end = region_iter.get_subregion()
+        if not success:
+            break
+    
+        # Do something useful with the subregion
+    
+        region_iter.next()
+    ```
 */
 struct GtkSourceRegion
 {
@@ -1526,6 +1637,22 @@ struct GtkSourceSnippetManagerClass
                                                      ~GTK_SOURCE_SPACE_TYPE_NEWLINE);
     
     gtk_source_space_drawer_set_enable_matrix (space_drawer, TRUE);
+    ```
+    ```python
+    space_drawer.set_types_for_locations(
+        locations=GtkSource.SpaceLocationFlags.ALL,
+        types=GtkSource.SpaceTypeFlags.NBSP,
+    )
+    
+    all_types_except_newline = GtkSource.SpaceTypeFlags(
+        int(GtkSource.SpaceTypeFlags.ALL) & ~int(GtkSource.SpaceTypeFlags.NEWLINE)
+    )
+    space_drawer.set_types_for_locations(
+        locations=GtkSource.SpaceLocationFlags.TRAILING,
+        types=all_types_except_newline,
+    )
+    
+    space_drawer.set_enable_matrix(True)
     ```
     
     # Use-case: draw unwanted white spaces
@@ -1767,14 +1894,18 @@ struct GtkSourceTagClass
     
     ```c
     GtkCssProvider *provider = gtk_css_provider_new ();
-    gtk_css_provider_load_from_data (provider,
-                                     "textview { font-family: Monospace; font-size: 8pt; }",
-                                     -1,
-                                     NULL);
+    gtk_css_provider_load_from_string (provider,
+                                      "textview { font-family: Monospace; font-size: 8pt; }");
     gtk_style_context_add_provider (gtk_widget_get_style_context (view),
                                     GTK_STYLE_PROVIDER (provider),
                                     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     g_object_unref (provider);
+    ```
+    ```python
+    provider = Gtk.CssProvider()
+    provider.load_from_string("textview { font-family: Monospace; font-size: 8pt; }")
+    style_context = view.get_style_context()
+    style_context.add_provider(provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
     ```
     
     If you need to adjust the font or size of font within a portion of the
@@ -1859,6 +1990,31 @@ struct GtkSourceViewClass
     
     g_object_bind_property (im_context, "command-bar-text", command_bar_label, "label", 0);
     g_object_bind_property (im_context, "command-text", command_label, "label", 0);
+    ```
+    ```python
+    key = Gtk.EventControllerKey.new()
+    im_context = GtkSource.VimIMContext.new()
+    buffer = GtkSource.Buffer()
+    view = GtkSource.View.new_with_buffer(buffer)
+    
+    key.set_im_context(im_context)
+    key.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
+    view.add_controller(key)
+    im_context.set_client_widget(view)
+    
+    im_context.bind_property(
+        source_property="command-text",
+        target=command_label,
+        target_property="label",
+        flags=GObject.BindingFlags.DEFAULT,
+    )
+    
+    im_context.bind_property(
+        source_property="command-bar-text",
+        target=command_bar_label,
+        target_property="label",
+        flags=GObject.BindingFlags.DEFAULT,
+    )
     ```
 */
 struct GtkSourceVimIMContext;

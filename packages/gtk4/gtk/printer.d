@@ -13,7 +13,7 @@ import gtk.paper_size;
 import gtk.types;
 
 /**
-    A [gtk.printer.Printer] object represents a printer.
+    Represents a printer.
     
     You only need to deal directly with printers if you use the
     non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.

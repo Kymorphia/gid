@@ -23,9 +23,12 @@ import gtk.types;
 import pango.layout;
 
 /**
-    A [gtk.scale.Scale] is a slider control used to select a numeric value.
+    Allows to select a numeric value with a slider control.
     
-    ![An example GtkScale](scales.png)
+    <picture>
+      <source srcset="scales-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkScale" src="scales.png">
+    </picture>
     
     To use it, you’ll probably want to investigate the methods on its base
     class, [gtk.range.Range], in addition to the methods for [gtk.scale.Scale] itself.
@@ -46,6 +49,15 @@ import pango.layout;
     the element is not empty, its content is taken as the markup to show at
     the mark. It can be translated with the usual ”translatable” and
     “context” attributes.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.popover_menu.PopoverMenu] supports the following keyboard shortcuts:
+    
+    - Arrow keys, <kbd>+</kbd> and <kbd>-</kbd> will increment or decrement
+      by step, or by page when combined with <kbd>Ctrl</kbd>.
+    - <kbd>PgUp</kbd> and <kbd>PgDn</kbd> will increment or decrement by page.
+    - <kbd>Home</kbd> and <kbd>End</kbd> will set the minimum or maximum value.
     
     # CSS nodes
     
@@ -423,7 +435,8 @@ class Scale : gtk.range.Range
       [gtk.scale.Scale.digits] property.
   
       Params:
-        func = function that formats the value
+        func = function
+            that formats the value
   */
   void setFormatValueFunc(gtk.types.ScaleFormatValueFunc func = null) nothrow
   {

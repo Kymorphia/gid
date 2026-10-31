@@ -107,6 +107,7 @@ __gshared extern(C) nothrow
   GType function() c_gst_encoding_profile_get_type; ///
   GstEncodingProfile* function(const(char)* targetname, const(char)* profilename, const(char)* category) c_gst_encoding_profile_find; ///
   GstEncodingProfile* function(GstDiscovererInfo* info) c_gst_encoding_profile_from_discoverer; ///
+  GstEncodingProfile* function(const(char)* string_) c_gst_encoding_profile_from_string; ///
   GstEncodingProfile* function(GstEncodingProfile* self) c_gst_encoding_profile_copy; ///
   gboolean function(GstEncodingProfile* profile) c_gst_encoding_profile_get_allow_dynamic_output; ///
   const(char)* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_description; ///
@@ -134,6 +135,7 @@ __gshared extern(C) nothrow
   void function(GstEncodingProfile* profile, const(char)* presetName) c_gst_encoding_profile_set_preset_name; ///
   void function(GstEncodingProfile* profile, GstCaps* restriction) c_gst_encoding_profile_set_restriction; ///
   void function(GstEncodingProfile* profile, gboolean singleSegment) c_gst_encoding_profile_set_single_segment; ///
+  char* function(GstEncodingProfile* profile) c_gst_encoding_profile_to_string; ///
 
   // EncodingTarget
   GType function() c_gst_encoding_target_get_type; ///
@@ -176,6 +178,10 @@ __gshared extern(C) nothrow
   const(char)* function(const(ubyte)* audioConfig, uint len) c_gst_codec_utils_aac_get_profile; ///
   uint function(const(ubyte)* audioConfig, uint len) c_gst_codec_utils_aac_get_sample_rate; ///
   uint function(uint srIdx) c_gst_codec_utils_aac_get_sample_rate_from_index; ///
+  GstBuffer* function(GstCaps* caps) c_gst_codec_utils_av1_create_av1c_from_caps; ///
+  GstCaps* function(GstBuffer* av1c) c_gst_codec_utils_av1_create_caps_from_av1c; ///
+  const(char)* function(ubyte seqLevelIdx) c_gst_codec_utils_av1_get_level; ///
+  ubyte function(const(char)* level) c_gst_codec_utils_av1_get_seq_level_idx; ///
   GstCaps* function(const(char)* codecsField) c_gst_codec_utils_caps_from_mime_codec; ///
   char* function(GstCaps* caps) c_gst_codec_utils_caps_get_mime_codec; ///
   gboolean function(GstCaps* caps, const(ubyte)* sps, uint len) c_gst_codec_utils_h264_caps_set_level_and_profile; ///
@@ -188,6 +194,11 @@ __gshared extern(C) nothrow
   ubyte function(const(char)* level) c_gst_codec_utils_h265_get_level_idc; ///
   const(char)* function(const(ubyte)* profileTierLevel, uint len) c_gst_codec_utils_h265_get_profile; ///
   const(char)* function(const(ubyte)* profileTierLevel, uint len) c_gst_codec_utils_h265_get_tier; ///
+  gboolean function(GstCaps* caps, const(ubyte)* decoderConfiguration, uint len) c_gst_codec_utils_h266_caps_set_level_tier_and_profile; ///
+  const(char)* function(const(ubyte)* ptlRecord, uint len) c_gst_codec_utils_h266_get_level; ///
+  ubyte function(const(char)* level) c_gst_codec_utils_h266_get_level_idc; ///
+  const(char)* function(const(ubyte)* ptlRecord, uint len) c_gst_codec_utils_h266_get_profile; ///
+  const(char)* function(const(ubyte)* ptlRecord, uint len) c_gst_codec_utils_h266_get_tier; ///
   gboolean function(GstCaps* caps, const(ubyte)* visObjSeq, uint len) c_gst_codec_utils_mpeg4video_caps_set_level_and_profile; ///
   const(char)* function(const(ubyte)* visObjSeq, uint len) c_gst_codec_utils_mpeg4video_get_level; ///
   const(char)* function(const(ubyte)* visObjSeq, uint len) c_gst_codec_utils_mpeg4video_get_profile; ///
@@ -211,6 +222,8 @@ __gshared extern(C) nothrow
   GstMessage* function(GstElement* element, const(GstCaps)* encodeCaps) c_gst_missing_encoder_message_new; ///
   char* function(GstMessage* msg) c_gst_missing_plugin_message_get_description; ///
   char* function(GstMessage* msg) c_gst_missing_plugin_message_get_installer_detail; ///
+  const(char)* function(GstMessage* msg) c_gst_missing_plugin_message_get_stream_id; ///
+  void function(GstMessage* msg, const(char)* streamId) c_gst_missing_plugin_message_set_stream_id; ///
   char* function(const(char)* protocol) c_gst_missing_uri_sink_installer_detail_new; ///
   GstMessage* function(GstElement* element, const(char)* protocol) c_gst_missing_uri_sink_message_new; ///
   char* function(const(char)* protocol) c_gst_missing_uri_source_installer_detail_new; ///
@@ -474,6 +487,9 @@ alias gst_encoding_profile_find = c_gst_encoding_profile_find;
 alias gst_encoding_profile_from_discoverer = c_gst_encoding_profile_from_discoverer;
 
 /** */
+alias gst_encoding_profile_from_string = c_gst_encoding_profile_from_string;
+
+/** */
 alias gst_encoding_profile_copy = c_gst_encoding_profile_copy;
 
 /** */
@@ -553,6 +569,9 @@ alias gst_encoding_profile_set_restriction = c_gst_encoding_profile_set_restrict
 
 /** */
 alias gst_encoding_profile_set_single_segment = c_gst_encoding_profile_set_single_segment;
+
+/** */
+alias gst_encoding_profile_to_string = c_gst_encoding_profile_to_string;
 
 // EncodingTarget
 
@@ -665,6 +684,18 @@ alias gst_codec_utils_aac_get_sample_rate = c_gst_codec_utils_aac_get_sample_rat
 alias gst_codec_utils_aac_get_sample_rate_from_index = c_gst_codec_utils_aac_get_sample_rate_from_index;
 
 /** */
+alias gst_codec_utils_av1_create_av1c_from_caps = c_gst_codec_utils_av1_create_av1c_from_caps;
+
+/** */
+alias gst_codec_utils_av1_create_caps_from_av1c = c_gst_codec_utils_av1_create_caps_from_av1c;
+
+/** */
+alias gst_codec_utils_av1_get_level = c_gst_codec_utils_av1_get_level;
+
+/** */
+alias gst_codec_utils_av1_get_seq_level_idx = c_gst_codec_utils_av1_get_seq_level_idx;
+
+/** */
 alias gst_codec_utils_caps_from_mime_codec = c_gst_codec_utils_caps_from_mime_codec;
 
 /** */
@@ -699,6 +730,21 @@ alias gst_codec_utils_h265_get_profile = c_gst_codec_utils_h265_get_profile;
 
 /** */
 alias gst_codec_utils_h265_get_tier = c_gst_codec_utils_h265_get_tier;
+
+/** */
+alias gst_codec_utils_h266_caps_set_level_tier_and_profile = c_gst_codec_utils_h266_caps_set_level_tier_and_profile;
+
+/** */
+alias gst_codec_utils_h266_get_level = c_gst_codec_utils_h266_get_level;
+
+/** */
+alias gst_codec_utils_h266_get_level_idc = c_gst_codec_utils_h266_get_level_idc;
+
+/** */
+alias gst_codec_utils_h266_get_profile = c_gst_codec_utils_h266_get_profile;
+
+/** */
+alias gst_codec_utils_h266_get_tier = c_gst_codec_utils_h266_get_tier;
 
 /** */
 alias gst_codec_utils_mpeg4video_caps_set_level_and_profile = c_gst_codec_utils_mpeg4video_caps_set_level_and_profile;
@@ -768,6 +814,12 @@ alias gst_missing_plugin_message_get_description = c_gst_missing_plugin_message_
 
 /** */
 alias gst_missing_plugin_message_get_installer_detail = c_gst_missing_plugin_message_get_installer_detail;
+
+/** */
+alias gst_missing_plugin_message_get_stream_id = c_gst_missing_plugin_message_get_stream_id;
+
+/** */
+alias gst_missing_plugin_message_set_stream_id = c_gst_missing_plugin_message_set_stream_id;
 
 /** */
 alias gst_missing_uri_sink_installer_detail_new = c_gst_missing_uri_sink_installer_detail_new;
@@ -920,6 +972,7 @@ shared static this()
   gidLink(cast(void**)&gst_encoding_profile_get_type, "gst_encoding_profile_get_type", libs);
   gidLink(cast(void**)&gst_encoding_profile_find, "gst_encoding_profile_find", libs);
   gidLink(cast(void**)&gst_encoding_profile_from_discoverer, "gst_encoding_profile_from_discoverer", libs);
+  gidLink(cast(void**)&gst_encoding_profile_from_string, "gst_encoding_profile_from_string", libs);
   gidLink(cast(void**)&gst_encoding_profile_copy, "gst_encoding_profile_copy", libs);
   gidLink(cast(void**)&gst_encoding_profile_get_allow_dynamic_output, "gst_encoding_profile_get_allow_dynamic_output", libs);
   gidLink(cast(void**)&gst_encoding_profile_get_description, "gst_encoding_profile_get_description", libs);
@@ -947,6 +1000,7 @@ shared static this()
   gidLink(cast(void**)&gst_encoding_profile_set_preset_name, "gst_encoding_profile_set_preset_name", libs);
   gidLink(cast(void**)&gst_encoding_profile_set_restriction, "gst_encoding_profile_set_restriction", libs);
   gidLink(cast(void**)&gst_encoding_profile_set_single_segment, "gst_encoding_profile_set_single_segment", libs);
+  gidLink(cast(void**)&gst_encoding_profile_to_string, "gst_encoding_profile_to_string", libs);
 
   // EncodingTarget
   gidLink(cast(void**)&gst_encoding_target_get_type, "gst_encoding_target_get_type", libs);
@@ -989,6 +1043,10 @@ shared static this()
   gidLink(cast(void**)&gst_codec_utils_aac_get_profile, "gst_codec_utils_aac_get_profile", libs);
   gidLink(cast(void**)&gst_codec_utils_aac_get_sample_rate, "gst_codec_utils_aac_get_sample_rate", libs);
   gidLink(cast(void**)&gst_codec_utils_aac_get_sample_rate_from_index, "gst_codec_utils_aac_get_sample_rate_from_index", libs);
+  gidLink(cast(void**)&gst_codec_utils_av1_create_av1c_from_caps, "gst_codec_utils_av1_create_av1c_from_caps", libs);
+  gidLink(cast(void**)&gst_codec_utils_av1_create_caps_from_av1c, "gst_codec_utils_av1_create_caps_from_av1c", libs);
+  gidLink(cast(void**)&gst_codec_utils_av1_get_level, "gst_codec_utils_av1_get_level", libs);
+  gidLink(cast(void**)&gst_codec_utils_av1_get_seq_level_idx, "gst_codec_utils_av1_get_seq_level_idx", libs);
   gidLink(cast(void**)&gst_codec_utils_caps_from_mime_codec, "gst_codec_utils_caps_from_mime_codec", libs);
   gidLink(cast(void**)&gst_codec_utils_caps_get_mime_codec, "gst_codec_utils_caps_get_mime_codec", libs);
   gidLink(cast(void**)&gst_codec_utils_h264_caps_set_level_and_profile, "gst_codec_utils_h264_caps_set_level_and_profile", libs);
@@ -1001,6 +1059,11 @@ shared static this()
   gidLink(cast(void**)&gst_codec_utils_h265_get_level_idc, "gst_codec_utils_h265_get_level_idc", libs);
   gidLink(cast(void**)&gst_codec_utils_h265_get_profile, "gst_codec_utils_h265_get_profile", libs);
   gidLink(cast(void**)&gst_codec_utils_h265_get_tier, "gst_codec_utils_h265_get_tier", libs);
+  gidLink(cast(void**)&gst_codec_utils_h266_caps_set_level_tier_and_profile, "gst_codec_utils_h266_caps_set_level_tier_and_profile", libs);
+  gidLink(cast(void**)&gst_codec_utils_h266_get_level, "gst_codec_utils_h266_get_level", libs);
+  gidLink(cast(void**)&gst_codec_utils_h266_get_level_idc, "gst_codec_utils_h266_get_level_idc", libs);
+  gidLink(cast(void**)&gst_codec_utils_h266_get_profile, "gst_codec_utils_h266_get_profile", libs);
+  gidLink(cast(void**)&gst_codec_utils_h266_get_tier, "gst_codec_utils_h266_get_tier", libs);
   gidLink(cast(void**)&gst_codec_utils_mpeg4video_caps_set_level_and_profile, "gst_codec_utils_mpeg4video_caps_set_level_and_profile", libs);
   gidLink(cast(void**)&gst_codec_utils_mpeg4video_get_level, "gst_codec_utils_mpeg4video_get_level", libs);
   gidLink(cast(void**)&gst_codec_utils_mpeg4video_get_profile, "gst_codec_utils_mpeg4video_get_profile", libs);
@@ -1024,6 +1087,8 @@ shared static this()
   gidLink(cast(void**)&gst_missing_encoder_message_new, "gst_missing_encoder_message_new", libs);
   gidLink(cast(void**)&gst_missing_plugin_message_get_description, "gst_missing_plugin_message_get_description", libs);
   gidLink(cast(void**)&gst_missing_plugin_message_get_installer_detail, "gst_missing_plugin_message_get_installer_detail", libs);
+  gidLink(cast(void**)&gst_missing_plugin_message_get_stream_id, "gst_missing_plugin_message_get_stream_id", libs);
+  gidLink(cast(void**)&gst_missing_plugin_message_set_stream_id, "gst_missing_plugin_message_set_stream_id", libs);
   gidLink(cast(void**)&gst_missing_uri_sink_installer_detail_new, "gst_missing_uri_sink_installer_detail_new", libs);
   gidLink(cast(void**)&gst_missing_uri_sink_message_new, "gst_missing_uri_sink_message_new", libs);
   gidLink(cast(void**)&gst_missing_uri_source_installer_detail_new, "gst_missing_uri_source_installer_detail_new", libs);

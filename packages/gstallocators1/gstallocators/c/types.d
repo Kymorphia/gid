@@ -114,7 +114,13 @@ struct GstPhysMemoryAllocatorInterface
     #GstBufferPool. For that reason, this allocator has the
     [gst.types.AllocatorFlags.NoCopy] flag set.
 */
-struct GstShmAllocator;
+struct GstShmAllocator
+{
+  /**
+      Parent instance.
+  */
+  GstFdAllocator parentInstance;
+}
 
 /** */
 struct GstShmAllocatorClass
@@ -123,5 +129,21 @@ struct GstShmAllocatorClass
       Parent Class.
   */
   GstFdAllocatorClass parentClass;
+}
+
+/**
+    This is a subclass of #GstDmaBufAllocator that implements the
+    [gst.allocator.Allocator.alloc] method using `memfd_create()` and `UDMABUF_CREATE`.
+    Platforms not supporting that (most non-Linux) will always return null.
+*/
+struct GstUdmabufAllocator;
+
+/** */
+struct GstUdmabufAllocatorClass
+{
+  /**
+      Parent Class.
+  */
+  GstDmaBufAllocatorClass parentClass;
 }
 

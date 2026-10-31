@@ -3,6 +3,7 @@ module gst.static_caps;
 
 public import gid.basictypes;
 import gid.gid;
+import gobject.boxed;
 import gst.c.functions;
 import gst.c.types;
 import gst.caps;
@@ -13,38 +14,47 @@ import gst.types;
     used in conjunction with GST_STATIC_CAPS() and [gst.static_caps.StaticCaps.get] to
     instantiate a #GstCaps.
 */
-class StaticCaps
+class StaticCaps : gobject.boxed.Boxed
 {
-  GstStaticCaps _cInstance;
 
   /**
-      Create a `static_caps.StaticCaps` wrap type.
-      Params:
-        caps = the cached #GstCaps
-        string_ = a string describing a caps
+      Create a `static_caps.StaticCaps` boxed type.
   */
-  this(gst.caps.Caps caps = gst.caps.Caps.init, string string_ = string.init) nothrow
+  this() nothrow
   {
-    this.caps = caps;
-    this.string_ = string_;
+    super(boxedNew!GstStaticCaps(_getGType), Yes.Take);
   }
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstStaticCaps*)ptr;
-
-    if (take)
-      gFree(ptr);
+    super(cast(void*)ptr, take);
   }
 
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    return dup ? boxCopy : _cInstancePtr;
   }
 
-  private gst.caps.Caps _capsRef; // Keeps borrowed field value alive
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_static_caps_get_type != &gidSymbolNotFound ? gst_static_caps_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StaticCaps self() nothrow
+  {
+    return this;
+  }
 
   /**
       Get `caps` field.
@@ -56,33 +66,12 @@ class StaticCaps
   }
 
   /**
-      Set `caps` field.
-      Params:
-        propval = the cached #GstCaps
-  */
-  @property void caps(gst.caps.Caps propval) nothrow
-  {
-    _capsRef = propval;
-    (cast(GstStaticCaps*)this._cPtr).caps = propval ? cast(GstCaps*)propval._cPtr(No.Dup) : null;
-  }
-
-  /**
       Get `string_` field.
       Returns: a string describing a caps
   */
   @property string string_() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstStaticCaps*)this._cPtr).string_);
-  }
-
-  /**
-      Set `string_` field.
-      Params:
-        propval = a string describing a caps
-  */
-  @property void string_(string propval) nothrow
-  {
-    (cast(GstStaticCaps*)this._cPtr).string_ = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -97,7 +86,7 @@ class StaticCaps
       Converts a #GstStaticCaps to a #GstCaps.
       Returns: a pointer to the #GstCaps. Since the
             core holds an additional ref to the returned caps, use
-            gst_caps_make_writable() on the returned caps to modify it.
+            [gst.caps.Caps.makeWritable] on the returned caps to modify it.
   */
   gst.caps.Caps get() nothrow
   {

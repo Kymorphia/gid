@@ -79,6 +79,11 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   /**
       Gets the name of the D-Bus interface the method was invoked on.
       
+      This can be `NULL` if it was not specified by the sender. See
+      [gio.types.DBusInterfaceMethodCallFunc] or the
+      [D-Bus Specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-types-method)
+      for details on when this can happen and how it should be handled.
+      
       If this method call is a property Get, Set or GetAll call that has
       been redirected to the method call handler then
       "org.freedesktop.DBus.Properties" will be returned.  See
@@ -99,7 +104,8 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       descriptor passing, that cannot be properly expressed in the
       #GVariant API.
       
-      See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+      See this [server][gio.dbus_connection.DBusConnection]
+      and [client][gio.dbus_connection.DBusConnection]
       for an example of how to use this low-level API to send and receive
       UNIX file descriptors.
       Returns: #GDBusMessage. Do not free, it is owned by invocation.
@@ -190,6 +196,9 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
 
   /**
       Gets the bus name that invoked the method.
+      
+      This can return null if not specified by the caller, e.g. on peer-to-peer
+      connections.
       Returns: A string. Do not free, it is owned by invocation.
   */
   string getSender() nothrow

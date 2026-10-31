@@ -5,6 +5,7 @@ public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
+import glib.error;
 import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
@@ -83,13 +84,36 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
   mixin ListModelT!();
 
   /**
-      Forces a change in the context, which will cause any [pango.context.Context]
+      Loads a font file with one or more fonts into the [pango.font_map.FontMap].
+      
+      The added fonts will take precedence over preexisting
+      fonts with the same name.
+  
+      Params:
+        filename = Path to the font file
+      Returns: True if the font file is successfully loaded
+            into the fontmap, false if an error occurred.
+      Throws: [ErrorWrap]
+  */
+  bool addFontFile(string filename)
+  {
+    bool _retval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)pango_font_map_add_font_file(cast(PangoFontMap*)this._cPtr, _filename, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Forces a change in the fontmap, which will cause any [pango.context.Context]
       using this fontmap to change.
       
       This function is only useful when implementing a new backend
       for Pango, something applications won't do. Backends should
       call this function if they have attached extra data to the
-      context and such data is changed.
+      fontmap and such data is changed.
   */
   void changed() nothrow
   {
@@ -216,10 +240,14 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-      Returns a new font that is like font, except that its size
-      is multiplied by scale, its backend-dependent configuration
-      (e.g. cairo font options) is replaced by the one in context,
-      and its variations are replaced by variations.
+      Returns a new font that is like font, except that it is scaled
+      by scale, its backend-dependent configuration (e.g. cairo font options)
+      is replaced by the one in context, and its variations are replaced
+      by variations.
+      
+      Note that the scaling here is meant to be linear, so this
+      scaling can be used to render a font on a hi-dpi display
+      without changing its optical size.
   
       Params:
         font = a font in fontmap

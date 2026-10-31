@@ -126,6 +126,11 @@ class VideoOverlayComposition : gobject.boxed.Boxed
       rectangles or change the render co-ordinates or render dimension). The
       actual overlay pixel data buffers contained in the rectangles are not
       copied.
+      
+      This should be avoided unless rectangles need to be modified because it
+      invalidates caching in sinks and compositor elements. To add extra rectangles
+      it is rather recommended to add an extra composition meta using
+      [gstvideo.global.bufferAddVideoOverlayCompositionMeta].
       Returns: a new #GstVideoOverlayComposition equivalent
             to comp.
   */
@@ -175,6 +180,11 @@ class VideoOverlayComposition : gobject.boxed.Boxed
       new writable copy of comp and unref comp itself. All the contained
       rectangles will also be copied, but the actual overlay pixel data buffers
       contained in the rectangles are not copied.
+      
+      This should be avoided unless rectangles need to be modified because it
+      invalidates caching in sinks and compositor elements. To add extra rectangles
+      it is rather recommended to add an extra composition meta using
+      [gstvideo.global.bufferAddVideoOverlayCompositionMeta].
       Returns: a writable #GstVideoOverlayComposition
             equivalent to comp.
   */

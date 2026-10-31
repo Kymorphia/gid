@@ -11,7 +11,7 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
-    [gtk.gesture_drag.GestureDrag] is a [gtk.gesture.Gesture] implementation for drags.
+    Recognizes drag gestures.
     
     The drag operation itself can be tracked throughout the
     [gtk.gesture_drag.GestureDrag.dragBegin],

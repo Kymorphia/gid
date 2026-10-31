@@ -62,7 +62,7 @@ class VariantBuilder : gobject.boxed.Boxed
       
       In most cases it is easier to place a #GVariantBuilder directly on
       the stack of the calling function and initialise it with
-      [glib.variant_builder.VariantBuilder.init_].
+      [glib.variant_builder.VariantBuilder.initStatic].
   
       Params:
         type = a container type

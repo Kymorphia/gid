@@ -26,6 +26,7 @@ import gtk.page_setup;
 import gtk.print_job;
 import gtk.printer;
 import gtk.scale;
+import gtk.text_buffer;
 import gtk.text_tag;
 import gtk.tree_iter;
 import gtk.tree_model;
@@ -190,6 +191,9 @@ alias FontChooserLevel = GtkFontChooserLevel;
 alias FontLevel = GtkFontLevel;
 
 /** */
+alias FontRendering = GtkFontRendering;
+
+/** */
 alias GraphicsOffloadEnabled = GtkGraphicsOffloadEnabled;
 
 /** */
@@ -215,6 +219,12 @@ alias InputPurpose = GtkInputPurpose;
 
 /** */
 alias InscriptionOverflow = GtkInscriptionOverflow;
+
+/** */
+alias InterfaceColorScheme = GtkInterfaceColorScheme;
+
+/** */
+alias InterfaceContrast = GtkInterfaceContrast;
 
 /** */
 alias Justification = GtkJustification;
@@ -316,6 +326,9 @@ alias PropagationPhase = GtkPropagationPhase;
 alias RecentManagerError = GtkRecentManagerError;
 
 /** */
+alias ReducedMotion = GtkReducedMotion;
+
+/** */
 alias ResponseType = GtkResponseType;
 
 /** */
@@ -379,10 +392,19 @@ alias StringFilterMatchMode = GtkStringFilterMatchMode;
 alias StyleContextPrintFlags = GtkStyleContextPrintFlags;
 
 /** */
+alias SvgError = GtkSvgError;
+
+/** */
+alias SvgFeatures = GtkSvgFeatures;
+
+/** */
 alias SymbolicColor = GtkSymbolicColor;
 
 /** */
 alias SystemSetting = GtkSystemSetting;
+
+/** */
+alias TextBufferNotifyFlags = GtkTextBufferNotifyFlags;
 
 /** */
 alias TextDirection = GtkTextDirection;
@@ -415,6 +437,9 @@ alias TreeViewGridLines = GtkTreeViewGridLines;
 alias Unit = GtkUnit;
 
 /** */
+alias WindowGravity = GtkWindowGravity;
+
+/** */
 alias WrapMode = GtkWrapMode;
 
 // Structs
@@ -439,6 +464,9 @@ alias PrintBackend = GtkPrintBackend*;
 
 /** */
 alias RequestedSize = GtkRequestedSize;
+
+/** */
+alias SvgLocation = GtkSvgLocation;
 
 // Callbacks
 
@@ -468,6 +496,8 @@ alias AssistantPageFunc = int delegate(int currentPage);
       cellBackground = the background area for renderer inside the
           background area provided to [gtk.cell_area.CellArea.foreachAlloc].
     Returns: true to stop iterating over cells.
+
+    Deprecated: There is no replacement
 */
 alias CellAllocCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer, gdk.rectangle.Rectangle cellArea, gdk.rectangle.Rectangle cellBackground);
 
@@ -478,6 +508,8 @@ alias CellAllocCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer,
     Params:
       renderer = the cell renderer to operate on
     Returns: true to stop iterating over cells.
+
+    Deprecated: There is no replacement
 */
 alias CellCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer);
 
@@ -490,6 +522,8 @@ alias CellCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer);
       cell = the cell renderer whose value is to be set
       treeModel = the model
       iter = a [gtk.tree_iter.TreeIter] indicating the row to set the value for
+
+    Deprecated: There is no replacement
 */
 alias CellLayoutDataFunc = void delegate(gtk.cell_layout.CellLayout cellLayout, gtk.cell_renderer.CellRenderer cell, gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter);
 
@@ -507,11 +541,11 @@ alias CustomAllocateFunc = void delegate(gtk.widget.Widget widget, int width, in
 /**
     User function that is called to determine if the item should be matched.
     
-    If the filter matches the item, this function must return true. If the
-    item should be filtered out, false must be returned.
+    If the filter matches the item, this function must return true.
+    If the item should be filtered out, false must be returned.
 
     Params:
-      item = The item to be matched
+      item = the item to be matched
     Returns: true to keep the item around
 */
 alias CustomFilterFunc = bool delegate(gobject.object.ObjectWrap item);
@@ -570,6 +604,8 @@ alias DrawingAreaDrawFunc = void delegate(gtk.drawing_area.DrawingArea drawingAr
       iter = a [gtk.tree_iter.TreeIter] indicating the row to match
     Returns: true if iter should be displayed as a possible completion
         for key
+
+    Deprecated: There is no replacement
 */
 alias EntryCompletionMatchFunc = bool delegate(gtk.entry_completion.EntryCompletion completion, string key, gtk.tree_iter.TreeIter iter);
 
@@ -635,6 +671,8 @@ alias FlowBoxSortFunc = int delegate(gtk.flow_box_child.FlowBoxChild child1, gtk
       family = a [pango.font_family.FontFamily]
       face = a [pango.font_face.FontFace] belonging to family
     Returns: true if the font should be displayed
+
+    Deprecated: There is no replacement
 */
 alias FontFilterFunc = bool delegate(pango.font_family.FontFamily family, pango.font_face.FontFace face);
 
@@ -647,6 +685,8 @@ alias FontFilterFunc = bool delegate(pango.font_family.FontFamily family, pango.
     Params:
       iconView = a [gtk.icon_view.IconView]
       path = The [gtk.tree_path.TreePath] of a selected row
+
+    Deprecated: There is no replacement.
 */
 alias IconViewForeachFunc = void delegate(gtk.icon_view.IconView iconView, gtk.tree_path.TreePath path);
 
@@ -759,7 +799,14 @@ alias PageSetupDoneFunc = void delegate(gtk.page_setup.PageSetup pageSetup);
 */
 alias PrintJobCompleteFunc = void delegate(gtk.print_job.PrintJob printJob, glib.error.ErrorWrap error);
 
-/** */
+/**
+    Function called by [gtk.print_settings.PrintSettings.foreach_] on every key/value pair
+    inside a [gtk.print_settings.PrintSettings].
+
+    Params:
+      key = the setting key
+      value = the setting value
+*/
 alias PrintSettingsFunc = void delegate(string key, string value);
 
 /**
@@ -774,18 +821,70 @@ alias PrintSettingsFunc = void delegate(string key, string value);
 */
 alias PrinterFunc = bool delegate(gtk.printer.Printer printer);
 
-/** */
+/**
+    Function that formats the value of a scale.
+    
+    See [gtk.scale.Scale.setFormatValueFunc].
+
+    Params:
+      scale = The [gtk.scale.Scale]
+      value = The numeric value to format
+    Returns: A newly allocated string describing a textual representation
+        of the given numerical value.
+*/
 alias ScaleFormatValueFunc = string delegate(gtk.scale.Scale scale, double value);
 
 /**
-    Prototype for shortcuts based on user callbacks.
+    Type for shortcuts based on user callbacks.
 
     Params:
       widget = The widget passed to the activation
       args = The arguments passed to the activation
-    Returns: true if the action was successful.
+    Returns: true if the action was successful
 */
 alias ShortcutFunc = bool delegate(gtk.widget.Widget widget, glib.variant.Variant args);
+
+/**
+    A notification callback used by [gtk.text_buffer.TextBuffer.addCommitNotify].
+    
+    You may not modify the [gtk.text_buffer.TextBuffer] from a
+    [gtk.types.TextBufferCommitNotify] callback and that is enforced
+    by the [gtk.text_buffer.TextBuffer] API.
+    
+    [gtk.types.TextBufferCommitNotify] may be used to be notified about
+    changes to the underlying buffer right before-or-after the changes are
+    committed to the underlying B-Tree. This is useful if you want to observe
+    changes to the buffer without other signal handlers potentially modifying
+    state on the way to the default signal handler.
+    
+    When flags is [gtk.types.TextBufferNotifyFlags.BeforeInsert], `position` is set to
+    the offset in characters from the start of the buffer where the insertion
+    will occur. `length` is set to the number of characters to be inserted.  You
+    may not yet retrieve the text until it has been inserted. You may access the
+    text from [gtk.types.TextBufferNotifyFlags.AfterInsert] using
+    [gtk.text_buffer.TextBuffer.getSlice].
+    
+    When flags is [gtk.types.TextBufferNotifyFlags.AfterInsert], `position` is set to
+    offset in characters where the insertion occurred and `length` is set
+    to the number of characters inserted.
+    
+    When flags is [gtk.types.TextBufferNotifyFlags.BeforeDelete], `position` is set to
+    offset in characters where the deletion will occur and `length` is set
+    to the number of characters that will be removed. You may still retrieve
+    the text from this handler using `position` and `length`.
+    
+    When flags is [gtk.types.TextBufferNotifyFlags.AfterDelete], `length` is set to
+    zero to denote that the delete-range has already been committed to the
+    underlying B-Tree. You may no longer retrieve the text that has been
+    deleted from the [gtk.text_buffer.TextBuffer].
+
+    Params:
+      buffer = the text buffer being notified
+      flags = the type of commit notification
+      position = the position of the text operation
+      length = the length of the text operation in characters
+*/
+alias TextBufferCommitNotify = void delegate(gtk.text_buffer.TextBuffer buffer, gtk.types.TextBufferNotifyFlags flags, uint position, uint length);
 
 /**
     The predicate function used by [gtk.text_iter.TextIter.forwardFindChar] and
@@ -808,13 +907,15 @@ alias TextCharPredicate = bool delegate(dchar ch);
 alias TextTagTableForeach = void delegate(gtk.text_tag.TextTag tag);
 
 /**
-    Callback type for adding a function to update animations. See [gtk.widget.Widget.addTickCallback].
+    Callback type for adding a function to update animations.
+    
+    See [gtk.widget.Widget.addTickCallback].
 
     Params:
       widget = the widget
-      frameClock = the frame clock for the widget (same as calling [gtk.widget.Widget.getFrameClock])
-    Returns: [glib.types.SOURCE_CONTINUE] if the tick callback should continue to be called,
-       [glib.types.SOURCE_REMOVE] if the tick callback should be removed.
+      frameClock = the frame clock for the widget
+    Returns: [glib.types.SOURCE_CONTINUE] if the tick callback should continue
+        to be called, [glib.types.SOURCE_REMOVE] if it should be removed
 */
 alias TickCallback = bool delegate(gtk.widget.Widget widget, gdk.frame_clock.FrameClock frameClock);
 
@@ -833,6 +934,8 @@ alias TickCallback = bool delegate(gtk.widget.Widget widget, gdk.frame_clock.Fra
       cell = The [gtk.cell_renderer.CellRenderer] that is being rendered by tree_column
       treeModel = The [gtk.tree_model.TreeModel] being rendered
       iter = A [gtk.tree_iter.TreeIter] of the current row rendered
+
+    Deprecated: There is no replacement
 */
 alias TreeCellDataFunc = void delegate(gtk.tree_view_column.TreeViewColumn treeColumn, gtk.cell_renderer.CellRenderer cell, gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter);
 
@@ -856,6 +959,8 @@ alias TreeCellDataFunc = void delegate(gtk.tree_view_column.TreeViewColumn treeC
       b = Another [gtk.tree_iter.TreeIter] in model
     Returns: a negative integer, zero or a positive integer depending on whether
         `a` sorts before, with or after `b`
+
+    Deprecated: There is no replacement
 */
 alias TreeIterCompareFunc = int delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter a, gtk.tree_iter.TreeIter b);
 
@@ -889,6 +994,8 @@ alias TreeListModelCreateModelFunc = gio.list_model.ListModel delegate(gobject.o
       value = A [gobject.value.Value] which is already initialized for
          with the correct type for the column column.
       column = the column whose display value is determined
+
+    Deprecated: There is no replacement
 */
 alias TreeModelFilterModifyFunc = void delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, out gobject.value.Value value, int column);
 
@@ -900,6 +1007,8 @@ alias TreeModelFilterModifyFunc = void delegate(gtk.tree_model.TreeModel model, 
       iter = a [gtk.tree_iter.TreeIter] pointing to the row in model whose visibility
           is determined
     Returns: Whether the row indicated by iter is visible.
+
+    Deprecated: There is no replacement
 */
 alias TreeModelFilterVisibleFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter);
 
@@ -912,6 +1021,8 @@ alias TreeModelFilterVisibleFunc = bool delegate(gtk.tree_model.TreeModel model,
       path = the current [gtk.tree_path.TreePath]
       iter = the current [gtk.tree_iter.TreeIter]
     Returns: true to stop iterating, false to continue
+
+    Deprecated: There is no replacement.
 */
 alias TreeModelForeachFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
 
@@ -923,6 +1034,8 @@ alias TreeModelForeachFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.t
       model = The [gtk.tree_model.TreeModel] being viewed
       path = The [gtk.tree_path.TreePath] of a selected row
       iter = A [gtk.tree_iter.TreeIter] pointing to a selected row
+
+    Deprecated: There is no replacement
 */
 alias TreeSelectionForeachFunc = void delegate(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
 
@@ -940,6 +1053,8 @@ alias TreeSelectionForeachFunc = void delegate(gtk.tree_model.TreeModel model, g
       path = The [gtk.tree_path.TreePath] of the row in question
       pathCurrentlySelected = true, if the path is currently selected
     Returns: true, if the selection state of the row can be toggled
+
+    Deprecated: There is no replacement
 */
 alias TreeSelectionFunc = bool delegate(gtk.tree_selection.TreeSelection selection, gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, bool pathCurrentlySelected);
 
@@ -959,6 +1074,8 @@ alias TreeSelectionFunc = bool delegate(gtk.tree_selection.TreeSelection selecti
       prevColumn = A [gtk.tree_view_column.TreeViewColumn] on one side of column
       nextColumn = A [gtk.tree_view_column.TreeViewColumn] on the other side of column
     Returns: true, if column can be dropped in this spot
+
+    Deprecated: There is no replacement.
 */
 alias TreeViewColumnDropFunc = bool delegate(gtk.tree_view.TreeView treeView, gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn prevColumn, gtk.tree_view_column.TreeViewColumn nextColumn);
 
@@ -968,6 +1085,8 @@ alias TreeViewColumnDropFunc = bool delegate(gtk.tree_view.TreeView treeView, gt
     Params:
       treeView = A [gtk.tree_view.TreeView]
       path = The path that’s expanded
+
+    Deprecated: There is no replacement.
 */
 alias TreeViewMappingFunc = void delegate(gtk.tree_view.TreeView treeView, gtk.tree_path.TreePath path);
 
@@ -981,6 +1100,8 @@ alias TreeViewMappingFunc = void delegate(gtk.tree_view.TreeView treeView, gtk.t
       model = the [gtk.tree_model.TreeModel]
       iter = a [gtk.tree_iter.TreeIter] pointing at a row in model
     Returns: true if the row is a separator
+
+    Deprecated: There is no replacement.
 */
 alias TreeViewRowSeparatorFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter);
 
@@ -997,6 +1118,8 @@ alias TreeViewRowSeparatorFunc = bool delegate(gtk.tree_model.TreeModel model, g
       iter = a [gtk.tree_iter.TreeIter] pointing the row of model that should be compared
          with key.
     Returns: false if the row matches, true otherwise.
+
+    Deprecated: There is no replacement.
 */
 alias TreeViewSearchEqualFunc = bool delegate(gtk.tree_model.TreeModel model, int column, string key, gtk.tree_iter.TreeIter iter);
 
@@ -1237,9 +1360,11 @@ enum ACCESSIBLE_VALUE_UNDEFINED = -1;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum BINARY_AGE = 1402;
+enum BINARY_AGE = 2204;
 
-/** */
+/**
+    The default name of the extension point.
+*/
 enum IM_MODULE_EXTENSION_POINT_NAME = "gtk-im-module";
 
 /**
@@ -1255,7 +1380,7 @@ enum INPUT_ERROR = -1;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum INTERFACE_AGE = 2;
+enum INTERFACE_AGE = 4;
 
 /**
     The value used to refer to a guaranteed invalid position
@@ -1292,10 +1417,16 @@ enum LEVEL_BAR_OFFSET_LOW = "low";
 */
 enum MAJOR_VERSION = 4;
 
-/** */
+/**
+    Evaluates to the maximum length of a compose sequence.
+    
+    This macro is longer used by GTK.
+*/
 enum MAX_COMPOSE_LEN = 7;
 
-/** */
+/**
+    The default extension point name for media file.
+*/
 enum MEDIA_FILE_EXTENSION_POINT_NAME = "gtk-media-file";
 
 /**
@@ -1303,14 +1434,14 @@ enum MEDIA_FILE_EXTENSION_POINT_NAME = "gtk-media-file";
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 2;
+enum MICRO_VERSION = 4;
 
 /**
     Like `func@get_minor_version`, but from the headers used at
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MINOR_VERSION = 14;
+enum MINOR_VERSION = 22;
 
 /**
     Name for the A3 paper size.
@@ -1347,34 +1478,60 @@ enum PAPER_NAME_LEGAL = "na_legal";
 */
 enum PAPER_NAME_LETTER = "na_letter";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store whether to collate the
+    printed pages.
+*/
 enum PRINT_SETTINGS_COLLATE = "collate";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the default source.
+*/
 enum PRINT_SETTINGS_DEFAULT_SOURCE = "default-source";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the dither used.
+*/
 enum PRINT_SETTINGS_DITHER = "dither";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store whether to print the
+    output in duplex.
+*/
 enum PRINT_SETTINGS_DUPLEX = "duplex";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the finishings.
+*/
 enum PRINT_SETTINGS_FINISHINGS = "finishings";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the media type.
+    
+    The set of media types is defined in PWG 5101.1-2002 PWG.
+*/
 enum PRINT_SETTINGS_MEDIA_TYPE = "media-type";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the number of pages per
+    sheet.
+*/
 enum PRINT_SETTINGS_NUMBER_UP = "number-up";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the number of pages per
+    sheet in number-up mode.
+*/
 enum PRINT_SETTINGS_NUMBER_UP_LAYOUT = "number-up-layout";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the number of copies.
+*/
 enum PRINT_SETTINGS_N_COPIES = "n-copies";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the orientation.
+*/
 enum PRINT_SETTINGS_ORIENTATION = "orientation";
 
 /**
@@ -1384,7 +1541,9 @@ enum PRINT_SETTINGS_ORIENTATION = "orientation";
 */
 enum PRINT_SETTINGS_OUTPUT_BASENAME = "output-basename";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the output bin.
+*/
 enum PRINT_SETTINGS_OUTPUT_BIN = "output-bin";
 
 /**
@@ -1406,55 +1565,97 @@ enum PRINT_SETTINGS_OUTPUT_FILE_FORMAT = "output-file-format";
 */
 enum PRINT_SETTINGS_OUTPUT_URI = "output-uri";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the array of page ranges
+    to print.
+*/
 enum PRINT_SETTINGS_PAGE_RANGES = "page-ranges";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the set of pages to print.
+*/
 enum PRINT_SETTINGS_PAGE_SET = "page-set";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the page format.
+*/
 enum PRINT_SETTINGS_PAPER_FORMAT = "paper-format";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the page height.
+*/
 enum PRINT_SETTINGS_PAPER_HEIGHT = "paper-height";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the paper width.
+*/
 enum PRINT_SETTINGS_PAPER_WIDTH = "paper-width";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the printer name.
+*/
 enum PRINT_SETTINGS_PRINTER = "printer";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the resolution in lines
+    per inch.
+*/
 enum PRINT_SETTINGS_PRINTER_LPI = "printer-lpi";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store which pages to print.
+*/
 enum PRINT_SETTINGS_PRINT_PAGES = "print-pages";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the printing quality.
+*/
 enum PRINT_SETTINGS_QUALITY = "quality";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the resolution in DPI.
+*/
 enum PRINT_SETTINGS_RESOLUTION = "resolution";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the horizontal
+    resolution in DPI.
+*/
 enum PRINT_SETTINGS_RESOLUTION_X = "resolution-x";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the vertical resolution
+    in DPI.
+*/
 enum PRINT_SETTINGS_RESOLUTION_Y = "resolution-y";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store whether to reverse the
+    order of the printed pages.
+*/
 enum PRINT_SETTINGS_REVERSE = "reverse";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the scale.
+*/
 enum PRINT_SETTINGS_SCALE = "scale";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store whether to print with
+    colors.
+*/
 enum PRINT_SETTINGS_USE_COLOR = "use-color";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store 32-bit Windows extra
+    driver.
+*/
 enum PRINT_SETTINGS_WIN32_DRIVER_EXTRA = "win32-driver-extra";
 
-/** */
+/**
+    The key used by the “Print to file” printer to store the 32-bit Windows
+    driver version.
+*/
 enum PRINT_SETTINGS_WIN32_DRIVER_VERSION = "win32-driver-version";
 
 /**
@@ -1508,6 +1709,11 @@ enum STYLE_PROVIDER_PRIORITY_THEME = 200;
 enum STYLE_PROVIDER_PRIORITY_USER = 800;
 
 /**
+    The [gtk.types.SvgFeatures] that are enabled by default.
+*/
+enum SVG_DEFAULT_FEATURES = 15;
+
+/**
     The priority at which the text view validates onscreen lines
     in an idle job in the background.
 */
@@ -1517,6 +1723,8 @@ enum TEXT_VIEW_PRIORITY_VALIDATE = 125;
     Uses the default sort function in a [gtk.tree_sortable.TreeSortable].
     
     See also: [gtk.tree_sortable.TreeSortable.setSortColumnId]
+
+    Deprecated: There is no replacement
 */
 enum TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID = -1;
 
@@ -1524,5 +1732,7 @@ enum TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID = -1;
     Disables sorting in a [gtk.tree_sortable.TreeSortable].
     
     See also: [gtk.tree_sortable.TreeSortable.setSortColumnId]
+
+    Deprecated: There is no replacement
 */
 enum TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID = -2;

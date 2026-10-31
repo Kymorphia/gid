@@ -26,6 +26,27 @@ import gtk.widget;
     use the methods of this interface to interact with the
     widget.
     
+    # Shortcuts and Gestures
+    
+    [gtk.file_chooser_widget.FileChooserWidget] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.file_chooser_widget.FileChooserWidget.desktopFolder]
+    - [gtk.file_chooser_widget.FileChooserWidget.downFolder]
+    - [gtk.file_chooser_widget.FileChooserWidget.homeFolder]
+    - [gtk.file_chooser_widget.FileChooserWidget.locationPopup]
+    - [gtk.file_chooser_widget.FileChooserWidget.locationPopupOnPaste]
+    - [gtk.file_chooser_widget.FileChooserWidget.locationTogglePopup]
+    - [gtk.file_chooser_widget.FileChooserWidget.placesShortcut]
+    - [gtk.file_chooser_widget.FileChooserWidget.quickBookmark]
+    - [gtk.file_chooser_widget.FileChooserWidget.recentShortcut]
+    - [gtk.file_chooser_widget.FileChooserWidget.searchShortcut]
+    - [gtk.file_chooser_widget.FileChooserWidget.showHidden]
+    - [gtk.file_chooser_widget.FileChooserWidget.upFolder]
+    
     # CSS nodes
     
     [gtk.file_chooser_widget.FileChooserWidget] has a single CSS node with name filechooser.
@@ -69,13 +90,20 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
     return new FileChooserWidgetGidBuilder;
   }
 
-  /** */
+  /**
+      Get `searchMode` property.
+      Returns: Whether search mode is enabled.
+  */
   @property bool searchMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("search-mode");
   }
 
-  /** */
+  /**
+      Set `searchMode` property.
+      Params:
+        propval = Whether search mode is enabled.
+  */
   @property void searchMode(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("search-mode", propval);
@@ -90,7 +118,10 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
     return gobject.object.ObjectWrap.getProperty!(bool)("show-time");
   }
 
-  /** */
+  /**
+      Get `subtitle` property.
+      Returns: The subtitle of the file chooser widget.
+  */
   @property string subtitle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("subtitle");
@@ -761,7 +792,12 @@ class FileChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gt
 
   mixin FileChooserGidBuilderT!();
 
-  /** */
+  /**
+      Set `searchMode` property.
+      Params:
+        propval = Whether search mode is enabled.
+      Returns: Builder instance for fluent chaining
+  */
   T searchMode(bool propval) nothrow
   {
     return setProperty("search-mode", propval);

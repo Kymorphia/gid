@@ -20,7 +20,7 @@ import gobject.object;
     This is useful when you obtained a [gio.input_stream.InputStream] and a
     [gio.output_stream.OutputStream] by other means, for instance creating them with
     platform specific methods as
-    [`[gio.unix_input_stream.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
+    [`[giounix.input_stream.InputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
     (from `gio-unix-2.0.pc` / `GioUnix-2.0`), and you want to
     take advantage of the methods provided by [gio.iostream.IOStream].
 */

@@ -6,28 +6,43 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
 import gid.gid;
+import gobject.boxed;
 
 /**
-    The [gdk.drag_surface_size.DragSurfaceSize] struct contains information that is useful
-    to compute the size of a drag surface.
+    Contains information that is useful to compute the size of a drag surface.
 */
-class DragSurfaceSize
+class DragSurfaceSize : gobject.boxed.Boxed
 {
-  GdkDragSurfaceSize* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GdkDragSurfaceSize*)ptr;
-
-    owned = take;
+    super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr() nothrow
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return cast(void*)_cInstancePtr;
+    return dup ? boxCopy : _cInstancePtr;
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_drag_surface_size_get_type != &gidSymbolNotFound ? gdk_drag_surface_size_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override DragSurfaceSize self() nothrow
+  {
+    return this;
   }
 
   /**

@@ -20,10 +20,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    The [gtk.stack_switcher.StackSwitcher] shows a row of buttons to switch between [gtk.stack.Stack]
-    pages.
+    Shows a row of buttons to switch between [gtk.stack.Stack] pages.
     
-    ![An example GtkStackSwitcher](stackswitcher.png)
+    <picture>
+      <source srcset="stackswitcher-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStackSwitcher" src="stackswitcher.png">
+    </picture>
     
     It acts as a controller for the associated [gtk.stack.Stack].
     
@@ -46,7 +48,7 @@ import gtk.widget;
     # Accessibility
     
     [gtk.stack_switcher.StackSwitcher] uses the [gtk.types.AccessibleRole.TabList] role
-    and uses the [gtk.types.AccessibleRole.Tab] for its buttons.
+    and uses the [gtk.types.AccessibleRole.Tab] role for its buttons.
     
     # Orientable
     

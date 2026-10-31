@@ -49,16 +49,21 @@ class BorderNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the colors of the border.
-      Returns: an array of 4 [gdk.rgba.RGBA] structs
-            for the top, right, bottom and left color of the border
+      Returns: an array of 4 [gdk.rgba.RGBA]
+          structs for the top, right, bottom and left color of the border
   */
-  gdk.rgba.RGBA getColors() nothrow
+  gdk.rgba.RGBA[] getColors() nothrow
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_border_node_get_colors(cast(const(GskRenderNode)*)this._cPtr);
-    gdk.rgba.RGBA _retval;
+    gdk.rgba.RGBA[] _retval;
+
     if (_cretval)
-      _retval = *cast(gdk.rgba.RGBA*)_cretval;
+    {
+      _retval = new gdk.rgba.RGBA[4];
+      foreach (i; 0 .. 4)
+        _retval[i] = cast(gdk.rgba.RGBA)(_cretval[i]);
+    }
     return _retval;
   }
 

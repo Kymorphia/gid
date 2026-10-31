@@ -16,6 +16,8 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.shortcut_manager;
+import gtk.shortcut_manager_mixin;
 import gtk.widget;
 import panel.c.functions;
 import panel.c.types;

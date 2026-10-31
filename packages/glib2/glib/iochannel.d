@@ -263,7 +263,8 @@ class IOChannel : gobject.boxed.Boxed
   /**
       This returns the string that #GIOChannel uses to determine
       where in the file a line break occurs. A value of null
-      indicates autodetection.
+      indicates autodetection. Since 2.84, the return value is always
+      nul-terminated.
   
       Params:
         length = a location to return the length of the line terminator

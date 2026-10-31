@@ -17,10 +17,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.frame.Frame] is a widget that surrounds its child with a decorative
-    frame and an optional label.
+    Surrounds its child with a decorative frame and an optional label.
     
-    ![An example GtkFrame](frame.png)
+    <picture>
+      <source srcset="frame-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFrame" src="frame.png">
+    </picture>
     
     If present, the label is drawn inside the top edge of the frame.
     The horizontal position of the label can be controlled with
@@ -31,20 +33,16 @@ import gtk.widget;
     
     # GtkFrame as GtkBuildable
     
-    The [gtk.frame.Frame] implementation of the [gtk.buildable.Buildable] interface supports
-    placing a child in the label position by specifying “label” as the
-    “type” attribute of a `<child>` element. A normal content child can
-    be specified without specifying a `<child>` type attribute.
-    
     An example of a UI definition fragment with GtkFrame:
+    
     ```xml
     <object class="GtkFrame">
-      <child type="label">
+      <property name="label-widget">
         <object class="GtkLabel" id="frame_label"/>
-      </child>
-      <child>
+      </property>
+      <property name="child">
         <object class="GtkEntry" id="frame_content"/>
-      </child>
+      </property>
     </object>
     ```
     

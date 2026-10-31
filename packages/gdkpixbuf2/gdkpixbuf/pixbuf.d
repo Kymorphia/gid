@@ -50,9 +50,6 @@ import gobject.object;
     function will compute an optimal rowstride so that rendering can be
     performed with an efficient algorithm.
     
-    As a special case, you can use the [gdkpixbuf.pixbuf.Pixbuf.newFromXpmData]
-    function to create a pixbuf from inline XPM image data.
-    
     You can also copy an existing pixbuf with the [gdkpixbuf.pixbuf.Pixbuf.copy]
     function. This is not the same as just acquiring a reference to
     the old pixbuf instance: the copy function will actually duplicate
@@ -674,6 +671,10 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Params:
         data = Pointer to inline XPM data.
       Returns: A newly-created pixbuf
+  
+      Deprecated: Use [gdkpixbuf.pixbuf.Pixbuf.newFromStream] with
+          a [gio.memory_input_stream.MemoryInputStream], making sure to handle errors in
+          case the XPM format loader is not available
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromXpmData(string[] data) nothrow
   {
@@ -1486,9 +1487,9 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       See [gdkpixbuf.pixbuf.Pixbuf.saveToCallback] for more details.
   
       Params:
-        saveFunc = a function that is called to save each block of data that
-            the save routine generates.
-        type = name of file format.
+        saveFunc = a function that is called to
+            save each block of data that the save routine generates
+        type = name of file format
         optionKeys = name of options to set
         optionValues = values for named options
       Returns: whether an error was set

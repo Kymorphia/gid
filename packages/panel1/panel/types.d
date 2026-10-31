@@ -49,18 +49,18 @@ enum MAJOR_VERSION = 1;
 /**
     libpanel micro version component (e.g. 3 if `PANEL_VERSION` is 1.2.3)
 */
-enum MICRO_VERSION = 1;
+enum MICRO_VERSION = 3;
 
 /**
     libpanel minor version component (e.g. 2 if `PANEL_VERSION` is 1.2.3)
 */
-enum MINOR_VERSION = 8;
+enum MINOR_VERSION = 10;
 
 /**
     libpanel version, encoded as a string, useful for printing and
     concatenation.
 */
-enum VERSION_S = "1.8.1";
+enum VERSION_S = "1.10.3";
 
 /** */
 enum WIDGET_KIND_ANY = "*";

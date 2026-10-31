@@ -23,7 +23,7 @@ import gobject.object;
 import gobject.value;
 
 /**
-    [gdk.display.Display] objects are the GDK representation of a workstation.
+    A representation of a workstation.
     
     Their purpose are two-fold:
     
@@ -278,6 +278,8 @@ class Display : gobject.object.ObjectWrap
       buffer formats with producers such as v4l, pipewire or GStreamer.
       
       To learn more about dma-bufs, see [gdk.dmabuf_texture_builder.DmabufTextureBuilder].
+      
+      This function is threadsafe. It can be called from any thread.
       Returns: a [gdk.dmabuf_formats.DmabufFormats] object
   */
   gdk.dmabuf_formats.DmabufFormats getDmabufFormats() nothrow

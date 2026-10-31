@@ -19,10 +19,13 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.center_box.CenterBox] arranges three children in a row, keeping the middle child
+    Arranges three children in a row, keeping the middle child
     centered as well as possible.
     
-    ![An example GtkCenterBox](centerbox.png)
+    <picture>
+      <source srcset="centerbox-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkCenterBox" src="centerbox.png">
+    </picture>
     
     To add children to [gtk.center_box.CenterBox], use [gtk.center_box.CenterBox.setStartWidget],
     [gtk.center_box.CenterBox.setCenterWidget] and
@@ -52,7 +55,8 @@ import gtk.widget;
     
     Until GTK 4.10, [gtk.center_box.CenterBox] used the [gtk.types.AccessibleRole.Group] role.
     
-    Starting from GTK 4.12, [gtk.center_box.CenterBox] uses the [gtk.types.AccessibleRole.Generic] role.
+    Starting from GTK 4.12, [gtk.center_box.CenterBox] uses the [gtk.types.AccessibleRole.Generic]
+    role.
 */
 class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
 {
@@ -135,7 +139,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
         
         In vertical orientation, the end position is at the bottom.
         In horizontal orientation, the end position is at the trailing
-        edge wrt. to the text direction.
+        edge with respect to the text direction.
   */
   @property gtk.widget.Widget endWidget() nothrow
   {
@@ -149,7 +153,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
           
           In vertical orientation, the end position is at the bottom.
           In horizontal orientation, the end position is at the trailing
-          edge wrt. to the text direction.
+          edge with respect to the text direction.
   */
   @property void endWidget(gtk.widget.Widget propval) nothrow
   {
@@ -164,7 +168,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
         natural widths, the start and end widgets start shrinking and the
         center child keeps natural width until they reach minimum width.
         
-        If set to `FALSE`, start and end widgets keep natural width and the
+        If false, start and end widgets keep natural width and the
         center widget starts shrinking instead.
   */
   @property bool shrinkCenterLast() nothrow
@@ -181,7 +185,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
           natural widths, the start and end widgets start shrinking and the
           center child keeps natural width until they reach minimum width.
           
-          If set to `FALSE`, start and end widgets keep natural width and the
+          If false, start and end widgets keep natural width and the
           center widget starts shrinking instead.
   */
   @property void shrinkCenterLast(bool propval) nothrow
@@ -195,7 +199,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
         
         In vertical orientation, the start position is at the top.
         In horizontal orientation, the start position is at the leading
-        edge wrt. to the text direction.
+        edge with respect to the text direction.
   */
   @property gtk.widget.Widget startWidget() nothrow
   {
@@ -209,7 +213,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
           
           In vertical orientation, the start position is at the top.
           In horizontal orientation, the start position is at the leading
-          edge wrt. to the text direction.
+          edge with respect to the text direction.
   */
   @property void startWidget(gtk.widget.Widget propval) nothrow
   {
@@ -220,7 +224,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Creates a new [gtk.center_box.CenterBox].
-      Returns: the new [gtk.center_box.CenterBox].
+      Returns: the new [gtk.center_box.CenterBox]
   */
   this() nothrow
   {
@@ -230,7 +234,9 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Gets the value set by [gtk.center_box.CenterBox.setBaselinePosition].
+      Gets the baseline position of the center box.
+      
+      See [gtk.center_box.CenterBox.setBaselinePosition].
       Returns: the baseline position
   */
   gtk.types.BaselinePosition getBaselinePosition() nothrow
@@ -242,8 +248,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Gets the center widget, or null if there is none.
-      Returns: the center widget.
+      Gets the center widget.
+      Returns: the center widget
   */
   gtk.widget.Widget getCenterWidget() nothrow
   {
@@ -254,8 +260,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Gets the end widget, or null if there is none.
-      Returns: the end widget.
+      Gets the end widget.
+      Returns: the end widget
   */
   gtk.widget.Widget getEndWidget() nothrow
   {
@@ -266,7 +272,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Gets whether self shrinks the center widget after other children.
+      Gets whether the center widget shrinks after other children.
       Returns: whether to shrink the center widget after others
   */
   bool getShrinkCenterLast() nothrow
@@ -277,8 +283,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Gets the start widget, or null if there is none.
-      Returns: the start widget.
+      Gets the start widget.
+      Returns: the start widget
   */
   gtk.widget.Widget getStartWidget() nothrow
   {
@@ -294,11 +300,11 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       This affects only horizontal boxes with at least one baseline
       aligned child. If there is more vertical space available than
       requested, and the baseline is not allocated by the parent then
-      position is used to allocate the baseline wrt. the extra space
-      available.
+      position is used to allocate the baseline with respect to the
+      extra space available.
   
       Params:
-        position = a [gtk.types.BaselinePosition]
+        position = the baseline position
   */
   void setBaselinePosition(gtk.types.BaselinePosition position) nothrow
   {
@@ -308,7 +314,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Sets the center widget.
       
-      To remove the existing center widget, pass null.
+      To remove the existing center widget, pass `NULL`.
   
       Params:
         child = the new center widget
@@ -321,7 +327,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Sets the end widget.
       
-      To remove the existing end widget, pass null.
+      To remove the existing end widget, pass `NULL`.
   
       Params:
         child = the new end widget
@@ -338,8 +344,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       natural widths, the start and end widgets start shrinking and the
       center child keeps natural width until they reach minimum width.
       
-      If set to `FALSE`, start and end widgets keep natural width and the
-      center widget starts shrinking instead.
+      If shrink_center_last is false, start and end widgets keep natural
+      width and the center widget starts shrinking instead.
   
       Params:
         shrinkCenterLast = whether to shrink the center widget after others
@@ -352,7 +358,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   /**
       Sets the start widget.
       
-      To remove the existing start widget, pass null.
+      To remove the existing start widget, pass `NULL`.
   
       Params:
         child = the new start widget
@@ -398,7 +404,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
           
           In vertical orientation, the end position is at the bottom.
           In horizontal orientation, the end position is at the trailing
-          edge wrt. to the text direction.
+          edge with respect to the text direction.
       Returns: Builder instance for fluent chaining
   */
   T endWidget(gtk.widget.Widget propval) nothrow
@@ -415,7 +421,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
           natural widths, the start and end widgets start shrinking and the
           center child keeps natural width until they reach minimum width.
           
-          If set to `FALSE`, start and end widgets keep natural width and the
+          If false, start and end widgets keep natural width and the
           center widget starts shrinking instead.
       Returns: Builder instance for fluent chaining
   */
@@ -431,7 +437,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
           
           In vertical orientation, the start position is at the top.
           In horizontal orientation, the start position is at the leading
-          edge wrt. to the text direction.
+          edge with respect to the text direction.
       Returns: Builder instance for fluent chaining
   */
   T startWidget(gtk.widget.Widget propval) nothrow

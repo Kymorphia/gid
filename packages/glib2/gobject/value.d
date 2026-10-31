@@ -27,14 +27,23 @@ import gobject.types;
 /**
     An opaque structure used to hold different types of values.
     
-    The data within the structure has protected scope: it is accessible only
-    to functions within a #GTypeValueTable structure, or implementations of
-    the g_value_*() API. That is, code portions which implement new fundamental
-    types.
+    Before it can be used, a [gobject.value.Value] has to be initialized to a specific type by
+    calling [gobject.value.Value.init_] on it.
     
-    #GValue users cannot make any assumptions about how data is stored
+    Many types which are stored within a [gobject.value.Value] need to allocate data on the
+    heap, so [gobject.value.Value.unset] must always be called on a [gobject.value.Value] to
+    free any such data once you’re finished with the [gobject.value.Value], even if the
+    [gobject.value.Value] itself is stored on the stack.
+    
+    The data within the structure has protected scope: it is accessible only
+    to functions within a [gobject.type_value_table.TypeValueTable] structure, or
+    implementations of the `g_value_*()` API. That is, code which implements new
+    fundamental types.
+    
+    [gobject.value.Value] users cannot make any assumptions about how data is stored
     within the 2 element @data union, and the @g_type member should
-    only be accessed through the G_VALUE_TYPE() macro.
+    only be accessed through the `func@GObject.VALUE_TYPE` macro and related
+    macros.
 */
 class Value : Boxed
 {
@@ -137,7 +146,8 @@ class Value : Boxed
       Copies the value of src_value into dest_value.
   
       Params:
-        destValue = An initialized #GValue structure of the same type as src_value.
+        destValue = an initialized [gobject.value.Value] structure of the same type
+            as src_value
   */
   void copy(gobject.value.Value destValue) nothrow
   {
@@ -187,8 +197,9 @@ class Value : Boxed
 
   /**
       Determines if value will fit inside the size of a pointer value.
+      
       This is an internal function introduced mainly for C marshallers.
-      Returns: true if value will fit inside a pointer value.
+      Returns: true if value will fit inside a pointer value; false otherwise
   */
   bool fitsPointer() nothrow
   {
@@ -436,11 +447,24 @@ class Value : Boxed
   }
 
   /**
-      Initializes value with the default value of type.
+      Initializes value to store values of the given type, and sets its value
+      to the initial value for type.
+      
+      This must be called before any other methods on a [gobject.value.Value], so
+      the value knows what type it’s meant to store.
+      
+      ```c
+        GValue value = G_VALUE_INIT;
+      
+        g_value_init (&value, SOME_G_TYPE);
+        …
+        g_value_unset (&value);
+      ```
   
       Params:
-        gType = Type the #GValue should hold values of.
-      Returns: the #GValue structure that has been passed in
+        gType = type the [gobject.value.Value] should hold values of
+      Returns: the [gobject.value.Value] structure that has been
+          passed in
   */
   gobject.value.Value init_(gobject.types.GType gType) nothrow
   {
@@ -451,12 +475,14 @@ class Value : Boxed
   }
 
   /**
-      Initializes and sets value from an instantiatable type via the
-      value_table's collect_value() function.
+      Initializes and sets value from an instantiatable type.
+      
+      This calls the [gobject.types.TypeValueCollectFunc] function for the type
+      the [gobject.value.Value] contains.
       
       Note: The value will be initialised with the exact type of
-      instance.  If you wish to set the value's type to a different GType
-      (such as a parent class GType), you need to manually call
+      instance.  If you wish to set the value’s type to a different
+      [gobject.types.size_t] (such as a parent class type), you need to manually call
       [gobject.value.Value.init_] and [gobject.value.Value.setInstance].
   
       Params:
@@ -468,10 +494,13 @@ class Value : Boxed
   }
 
   /**
-      Returns the value contents as pointer. This function asserts that
-      [gobject.value.Value.fitsPointer] returned true for the passed in value.
+      Returns the value contents as a pointer.
+      
+      This function asserts that [gobject.value.Value.fitsPointer] returned true
+      for the passed in value.
+      
       This is an internal function introduced mainly for C marshallers.
-      Returns: the value contents as pointer
+      Returns: the value contents as a pointer
   */
   void* peekPointer() nothrow
   {
@@ -480,9 +509,10 @@ class Value : Boxed
   }
 
   /**
-      Clears the current value in value and resets it to the default value
-      (as if the value had just been initialized).
-      Returns: the #GValue structure that has been passed in
+      Clears the current value in value and resets it to the initial value
+      (as if the value had just been initialized using
+      [gobject.value.Value.init_]).
+      Returns: the [gobject.value.Value] structure that has been passed in
   */
   gobject.value.Value reset() nothrow
   {
@@ -507,7 +537,7 @@ class Value : Boxed
       Set the contents of a `G_TYPE_BOXED` derived #GValue to v_boxed.
   
       Params:
-        vBoxed = boxed value to be set
+        vBoxed = caller-owned boxed object to be duplicated for the #GValue
   */
   void setBoxed(const(void)* vBoxed = null) nothrow
   {
@@ -596,8 +626,10 @@ class Value : Boxed
   }
 
   /**
-      Sets value from an instantiatable type via the
-      value_table's collect_value() function.
+      Sets value from an instantiatable type.
+      
+      This calls the [gobject.types.TypeValueCollectFunc] function for the type
+      the [gobject.value.Value] contains.
   
       Params:
         instance = the instance
@@ -891,17 +923,21 @@ class Value : Boxed
 
   /**
       Tries to cast the contents of src_value into a type appropriate
-      to store in dest_value, e.g. to transform a `G_TYPE_INT` value
-      into a `G_TYPE_FLOAT` value. Performing transformations between
-      value types might incur precision lossage. Especially
-      transformations into strings might reveal seemingly arbitrary
-      results and shouldn't be relied upon for production code (such
-      as rcfile value or object property serialization).
+      to store in dest_value.
+      
+      If a transformation is not possible, dest_value is not modified.
+      
+      For example, this could transform a `G_TYPE_INT` value into a `G_TYPE_FLOAT`
+      value.
+      
+      Performing transformations between value types might incur precision loss.
+      Especially transformations into strings might reveal seemingly arbitrary
+      results and the format of particular transformations to strings is not
+      guaranteed over time.
   
       Params:
-        destValue = Target value.
-      Returns: Whether a transformation rule was found and could be applied.
-         Upon failing transformations, dest_value is left untouched.
+        destValue = target value
+      Returns: true on success; false otherwise
   */
   bool transform(gobject.value.Value destValue) nothrow
   {
@@ -911,10 +947,11 @@ class Value : Boxed
   }
 
   /**
-      Clears the current value in value (if any) and "unsets" the type,
-      this releases all resources associated with this GValue. An unset
-      value is the same as an uninitialized (zero-filled) #GValue
-      structure.
+      Clears the current value in value (if any) and ‘unsets’ the type.
+      
+      This releases all resources associated with this [gobject.value.Value]. An
+      unset value is the same as a cleared (zero-filled)
+      [gobject.value.Value] structure set to `G_VALUE_INIT`.
   */
   void unset() nothrow
   {
@@ -922,13 +959,13 @@ class Value : Boxed
   }
 
   /**
-      Returns whether a #GValue of type src_type can be copied into
-      a #GValue of type dest_type.
+      Checks whether a [gobject.value.Value.copy] is able to copy values of type
+      src_type into values of type dest_type.
   
       Params:
-        srcType = source type to be copied.
-        destType = destination type for copying.
-      Returns: true if [gobject.value.Value.copy] is possible with src_type and dest_type.
+        srcType = source type to be copied
+        destType = destination type for copying
+      Returns: true if the copy is possible; false otherwise
   */
   static bool typeCompatible(gobject.types.GType srcType, gobject.types.GType destType) nothrow
   {
@@ -938,15 +975,17 @@ class Value : Boxed
   }
 
   /**
-      Check whether [gobject.value.Value.transform] is able to transform values
-      of type src_type into values of type dest_type. Note that for
-      the types to be transformable, they must be compatible or a
-      transformation function must be registered.
+      Checks whether [gobject.value.Value.transform] is able to transform values
+      of type src_type into values of type dest_type.
+      
+      Note that for the types to be transformable, they must be compatible or a
+      transformation function must be registered using
+      [gobject.value.Value.registerTransformFunc].
   
       Params:
-        srcType = Source type.
-        destType = Target type.
-      Returns: true if the transformation is possible, false otherwise.
+        srcType = source type
+        destType = target type
+      Returns: true if the transformation is possible; false otherwise
   */
   static bool typeTransformable(gobject.types.GType srcType, gobject.types.GType destType) nothrow
   {

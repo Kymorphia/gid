@@ -214,6 +214,25 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   }
 
   /**
+      Get `maxLength` property.
+      Returns: Maximum number of characters for the entry.
+  */
+  @property int maxLength() nothrow
+  {
+    return getMaxLength();
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = Maximum number of characters for the entry.
+  */
+  @property void maxLength(int propval) nothrow
+  {
+    setMaxLength(propval);
+  }
+
+  /**
       Get `showApplyButton` property.
       Returns: Whether to show the apply button.
         
@@ -351,6 +370,17 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   }
 
   /**
+      Retrieves the maximum length of the entry.
+      Returns: The maximum length of the entry.
+  */
+  int getMaxLength() nothrow
+  {
+    int _retval;
+    _retval = adw_entry_row_get_max_length(cast(AdwEntryRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Gets whether self can show the apply button.
       Returns: whether to show the apply button
   */
@@ -460,6 +490,17 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   void setInputPurpose(gtk.types.InputPurpose purpose) nothrow
   {
     adw_entry_row_set_input_purpose(cast(AdwEntryRow*)this._cPtr, purpose);
+  }
+
+  /**
+      Sets the maximum length of the entry.
+  
+      Params:
+        maxLength = maximum length of the entry
+  */
+  void setMaxLength(int maxLength) nothrow
+  {
+    adw_entry_row_set_max_length(cast(AdwEntryRow*)this._cPtr, maxLength);
   }
 
   /**
@@ -642,6 +683,17 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
   T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = Maximum number of characters for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxLength(int propval) nothrow
+  {
+    return setProperty("max-length", propval);
   }
 
   /**

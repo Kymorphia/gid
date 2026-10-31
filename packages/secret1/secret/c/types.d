@@ -92,26 +92,24 @@ enum SecretError
   InvalidFileFormat = 5,
 
   /**
-      the xdg:schema attribute of the table does
-      not match the schema name
+      the xdg:schema attribute of the table does not match the schema name
   */
   MismatchedSchema = 6,
 
   /**
-      attribute contained in table not found
-      in corresponding schema
+      attribute contained in table not found in corresponding schema
   */
   NoMatchingAttribute = 7,
 
   /**
-      attribute could not be parsed according to its type
-      reported in the table's schema
+      attribute could not be parsed according to its type reported in the table's
+      schema
   */
   WrongType = 8,
 
   /**
-      attribute list passed to secret_attributes_validate
-      has no elements to validate
+      attribute list passed to secret_attributes_validate has no elements to
+      validate
   */
   EmptyTable = 9,
 }
@@ -329,34 +327,54 @@ struct SecretBackendInterface
   */
   GTypeInterface parentIface;
 
-  /** */
+  /**
+      implementation of reinitialization step in constructor, optional
+  */
   extern(C) void function(SecretBackend* self, SecretBackendFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) ensureForFlags;
 
-  /** */
+  /**
+      implementation of reinitialization step in constructor, optional
+  */
   extern(C) gboolean function(SecretBackend* self, GAsyncResult* result, GError** _err) ensureForFlagsFinish;
 
-  /** */
+  /**
+      implementation of `func@password_store`, required
+  */
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) store;
 
-  /** */
+  /**
+      implementation of `func@password_store_finish`, required
+  */
   extern(C) gboolean function(SecretBackend* self, GAsyncResult* result, GError** _err) storeFinish;
 
-  /** */
+  /**
+      implementation of `func@password_lookup`, required
+  */
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) lookup;
 
-  /** */
+  /**
+      implementation of `func@password_lookup_finish`, required
+  */
   extern(C) SecretValue* function(SecretBackend* self, GAsyncResult* result, GError** _err) lookupFinish;
 
-  /** */
+  /**
+      implementation of `func@password_clear`, required
+  */
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) clear;
 
-  /** */
+  /**
+      implementation of `func@password_clear_finish`, required
+  */
   extern(C) gboolean function(SecretBackend* self, GAsyncResult* result, GError** _err) clearFinish;
 
-  /** */
+  /**
+      implementation of `func@password_search`, required
+  */
   extern(C) void function(SecretBackend* self, const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) search;
 
-  /** */
+  /**
+      implementation of `func@password_search_finish`, required
+  */
   extern(C) GList* function(SecretBackend* self, GAsyncResult* result, GError** _err) searchFinish;
 }
 
@@ -512,10 +530,16 @@ struct SecretRetrievableInterface
   */
   GTypeInterface parentIface;
 
-  /** */
+  /**
+      implementation of [secret.retrievable.Retrievable.retrieveSecret],
+        required
+  */
   extern(C) void function(SecretRetrievable* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) retrieveSecret;
 
-  /** */
+  /**
+      implementation of
+        [secret.retrievable.Retrievable.retrieveSecretFinish], required
+  */
   extern(C) SecretValue* function(SecretRetrievable* self, GAsyncResult* result, GError** _err) retrieveSecretFinish;
 }
 
@@ -635,8 +659,11 @@ struct SecretSchemaAttribute
 /**
     A proxy object representing the Secret Service.
     
-    A #SecretService object represents the Secret Service implementation which
-    runs as a D-Bus service.
+    A #SecretService object either represents an implementation of the
+    [`org.freedesktop.Secret`](https://specifications.freedesktop.org/secret-service/latest/)
+    D-Bus service or a file that is encrypted using a master secret that was
+    provided by the
+    [secret portal](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Secret.html).
     
     Normally a single #SecretService object can be shared between multiple
     callers. The [secret.service.Service.get] method is used to access this #SecretService
@@ -690,30 +717,42 @@ struct SecretServiceClass
   GDBusProxyClass parentClass;
 
   /**
-      the `alias@GLib.Type` of the [secret.collection.Collection] objects instantiated
-        by the #SecretService proxy
+      the [gobject.types.size_t] of the [secret.collection.Collection] objects
+        instantiated by the #SecretService proxy
   */
   GType collectionGtype;
 
   /**
-      the `alias@GLib.Type` of the [secret.item.Item] objects instantiated by the
-        #SecretService proxy
+      the [gobject.types.size_t] of the [secret.item.Item] objects
+        instantiated by the #SecretService proxy
   */
   GType itemGtype;
 
-  /** */
+  /**
+      called to perform synchronous prompting when necessary
+  */
   extern(C) GVariant* function(SecretService* self, SecretPrompt* prompt, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) promptSync;
 
-  /** */
+  /**
+      called to perform asynchronous prompting when necessary
+  */
   extern(C) void function(SecretService* self, SecretPrompt* prompt, const(GVariantType)* returnType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) promptAsync;
 
-  /** */
+  /**
+      called to complete an asynchronous prompt operation
+  */
   extern(C) GVariant* function(SecretService* self, GAsyncResult* result, GError** _err) promptFinish;
 
-  /** */
+  /**
+      called to get the GObject type for collections
+        instantiated by the #SecretService proxy
+  */
   extern(C) GType function(SecretService* self) getCollectionGtype;
 
-  /** */
+  /**
+      called to get the GObject type for collections
+        instantiated by the #SecretService proxy
+  */
   extern(C) GType function(SecretService* self) getItemGtype;
 
   /** */

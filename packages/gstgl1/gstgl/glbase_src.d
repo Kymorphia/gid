@@ -8,6 +8,7 @@ import gobject.object;
 import gstbase.push_src;
 import gstgl.c.functions;
 import gstgl.c.types;
+import gstgl.glcontext;
 import gstgl.types;
 
 /**
@@ -63,6 +64,15 @@ class GLBaseSrc : gstbase.push_src.PushSrc
   @property void timestampOffset(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("timestamp-offset", propval);
+  }
+
+  /** */
+  gstgl.glcontext.GLContext getGlContext() nothrow
+  {
+    GstGLContext* _cretval;
+    _cretval = gst_gl_base_src_get_gl_context(cast(GstGLBaseSrc*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    return _retval;
   }
 }
 

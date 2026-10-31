@@ -30,7 +30,7 @@ class TransformNode : gsk.render_node.RenderNode
         transform = The transform to apply
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, gsk.transform.Transform transform) nothrow
+  this(gsk.render_node.RenderNode child, gsk.transform.Transform transform = null) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_transform_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);

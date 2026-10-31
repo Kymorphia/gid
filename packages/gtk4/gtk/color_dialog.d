@@ -16,15 +16,14 @@ import gtk.types;
 import gtk.window;
 
 /**
-    A [gtk.color_dialog.ColorDialog] object collects the arguments that
-    are needed to present a color chooser dialog to the
-    user, such as a title for the dialog and whether it
-    should be modal.
+    Asynchronous API to present a color chooser dialog.
+    
+    [gtk.color_dialog.ColorDialog] collects the arguments that are needed to present
+    the dialog to the user, such as a title for the dialog and whether
+    it should be modal.
     
     The dialog is shown with the [gtk.color_dialog.ColorDialog.chooseRgba]
-    function. This API follows the GIO async pattern, and the
-    result can be obtained by calling
-    [gtk.color_dialog.ColorDialog.chooseRgbaFinish].
+    function.
     
     See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
     that uses [gtk.color_dialog.ColorDialog] and presents the results.
@@ -87,8 +86,7 @@ class ColorDialog : gobject.object.ObjectWrap
 
   /**
       Get `title` property.
-      Returns: A title that may be shown on the color chooser
-        dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+      Returns: A title that may be shown on the color chooser dialog.
   */
   @property string title() nothrow
   {
@@ -98,8 +96,7 @@ class ColorDialog : gobject.object.ObjectWrap
   /**
       Set `title` property.
       Params:
-        propval = A title that may be shown on the color chooser
-          dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+        propval = A title that may be shown on the color chooser dialog.
   */
   @property void title(string propval) nothrow
   {
@@ -143,18 +140,14 @@ class ColorDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function initiates a color choice operation by
-      presenting a color chooser dialog to the user.
-      
-      The callback will be called when the dialog is dismissed.
-      It should call [gtk.color_dialog.ColorDialog.chooseRgbaFinish]
-      to obtain the result.
+      Presents a color chooser dialog to the user.
   
       Params:
-        parent = the parent [gtk.window.Window]
+        parent = the parent window
         initialColor = the color to select initially
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call
+            when the operation is complete
   */
   void chooseRgba(gtk.window.Window parent = null, gdk.rgba.RGBA* initialColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -178,13 +171,14 @@ class ColorDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.color_dialog.ColorDialog.chooseRgba] call and
-      returns the resulting color.
+      Finishes the [gtk.color_dialog.ColorDialog.chooseRgba] call
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: the selected color, or
-          `NULL` and error is set
+        result = the result
+      Returns: the selected color
       Throws: [ErrorWrap]
   */
   gdk.rgba.RGBA chooseRgbaFinish(gio.async_result.AsyncResult result)
@@ -207,7 +201,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Returns whether the color chooser dialog
       blocks interaction with the parent window
       while it is presented.
-      Returns: `TRUE` if the color chooser dialog is modal
+      Returns: true if the color chooser dialog is modal
   */
   bool getModal() nothrow
   {
@@ -231,7 +225,7 @@ class ColorDialog : gobject.object.ObjectWrap
 
   /**
       Returns whether colors may have alpha.
-      Returns: `TRUE` if colors may have alpha
+      Returns: true if colors may have alpha
   */
   bool getWithAlpha() nothrow
   {
@@ -296,8 +290,7 @@ class ColorDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `title` property.
       Params:
-        propval = A title that may be shown on the color chooser
-          dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
+        propval = A title that may be shown on the color chooser dialog.
       Returns: Builder instance for fluent chaining
   */
   T title(string propval) nothrow

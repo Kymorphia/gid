@@ -155,6 +155,191 @@ enum VteFormat
   Html = 2,
 }
 
+/**
+    An enum describing how to interpret progress state, for the
+    [vte.types.TERMPROP_PROGRESS_HINT] termprop.
+*/
+enum VteProgressHint
+{
+  /**
+      no progress current
+  */
+  Inactive = 0,
+
+  /**
+      progress is normal
+  */
+  Active = 1,
+
+  /**
+      progress is aborted by an error
+  */
+  Error = 2,
+
+  /**
+      progress is indeterminate
+  */
+  Indeterminate = 3,
+
+  /**
+      progress is paused
+  */
+  Paused = 4,
+}
+
+/**
+    A flags type.
+*/
+enum VtePropertyFlags : uint
+{
+  /**
+      no flags, default
+  */
+  None = 0,
+
+  /**
+      denotes an ephemeral termprop
+  */
+  Ephemeral = 1,
+}
+
+/**
+    An enum containing the IDs of the always-installed termprops.
+*/
+enum VtePropertyId
+{
+  /**
+      the ID of the [vte.types.TERMPROP_CURRENT_DIRECTORY_URI] termprop
+  */
+  CurrentDirectoryUri = 0,
+
+  /**
+      the ID of the [vte.types.TERMPROP_CURRENT_FILE_URI] termprop
+  */
+  CurrentFileUri = 1,
+
+  /**
+      the ID of the [vte.types.TERMPROP_XTERM_TITLE] termprop
+  */
+  XtermTitle = 2,
+
+  /**
+      the ID of the [vte.types.TERMPROP_CONTAINER_NAME] termprop
+  */
+  ContainerName = 3,
+
+  /**
+      the ID of the [vte.types.TERMPROP_CONTAINER_RUNTIME] termprop
+  */
+  ContainerRuntime = 4,
+
+  /**
+      the ID of the [vte.types.TERMPROP_CONTAINER_UID] termprop
+  */
+  ContainerUid = 5,
+
+  /**
+      the ID of the [vte.types.TERMPROP_SHELL_PRECMD] termprop
+  */
+  ShellPrecmd = 6,
+
+  /**
+      the ID of the [vte.types.TERMPROP_SHELL_PREEXEC] termprop
+  */
+  ShellPreexec = 7,
+
+  /**
+      the ID of the [vte.types.TERMPROP_SHELL_POSTEXEC] termprop
+  */
+  ShellPostexec = 8,
+
+  /**
+      the ID of the [vte.types.TERMPROP_PROGRESS_HINT] termprop. Since: 0.80
+  */
+  ProgressHint = 9,
+
+  /**
+      the ID of the [vte.types.TERMPROP_PROGRESS_VALUE] termprop. Since: 0.80
+  */
+  ProgressValue = 10,
+
+  /**
+      the ID of the [vte.types.TERMPROP_ICON_COLOR] termprop. Since: 0.80
+  */
+  IconColor = 11,
+
+  /**
+      the ID of the [vte.types.TERMPROP_ICON_IMAGE] termprop. Since: 0.80
+  */
+  IconImage = 12,
+}
+
+/**
+    An enumeration type describing types of properties.
+*/
+enum VtePropertyType
+{
+  /**
+      no value, use for signalling
+  */
+  Valueless = 0,
+
+  /**
+      a bool
+  */
+  Bool = 1,
+
+  /**
+      a signed 64-bit integer
+  */
+  Int = 2,
+
+  /**
+      an unsigned 64-bit integer
+  */
+  Uint = 3,
+
+  /**
+      a finite double-precision floating point number
+  */
+  Double = 4,
+
+  /**
+      a color
+  */
+  Rgb = 5,
+
+  /**
+      a color with alpha
+  */
+  Rgba = 6,
+
+  /**
+      a string
+  */
+  String = 7,
+
+  /**
+      binary data
+  */
+  Data = 8,
+
+  /**
+      a UUID
+  */
+  Uuid = 9,
+
+  /**
+      a URI
+  */
+  Uri = 10,
+
+  /**
+      an image. Since: 0.80
+  */
+  Image = 11,
+}
+
 /** */
 enum VtePtyError
 {
@@ -259,6 +444,22 @@ enum VteTextBlinkMode
       Allow blinking text. This is the default.
   */
   Always = 3,
+}
+
+/** */
+enum VteUuidFormat : uint
+{
+  /** */
+  Simple = 1,
+
+  /** */
+  Braced = 2,
+
+  /** */
+  Urn = 4,
+
+  /** */
+  Any = 7,
 }
 
 /**
@@ -419,7 +620,13 @@ struct VteTerminalClass
   extern(C) void function(VteTerminal* terminal, const(VteEventContext)* context) setupContextMenu;
 
   /** */
-  void*[12] Padding;
+  extern(C) gboolean function(VteTerminal* terminal, const(int)* props, int nProps) termpropsChanged;
+
+  /** */
+  extern(C) void function(VteTerminal* terminal, const(char)* prop) termpropChanged;
+
+  /** */
+  void*[10] Padding;
 
   /** */
   VteTerminalClassPrivate* priv;
@@ -427,6 +634,11 @@ struct VteTerminalClass
 
 /** */
 struct VteTerminalClassPrivate;
+
+/**
+    An object representing an UUID.
+*/
+struct VteUuid;
 
 alias extern(C) gboolean function(VteTerminal* terminal, glong column, glong row, void* data) VteSelectionFunc;
 

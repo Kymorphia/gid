@@ -13,7 +13,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.stack_page.StackPage] is an auxiliary class used by [gtk.stack.Stack].
+    An auxiliary class used by [gtk.stack.Stack].
 */
 class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {

@@ -17,8 +17,7 @@ import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
-    [gtk.multi_selection.MultiSelection] is a [gtk.selection_model.SelectionModel] that allows selecting multiple
-    elements.
+    A selection model that allows selecting multiple elements.
 */
 class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {

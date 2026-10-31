@@ -54,7 +54,7 @@ class GLShader : gst.object.ObjectWrap
   /** */
   @property bool linked() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("linked");
+    return isLinked();
   }
 
   /**

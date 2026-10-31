@@ -16,10 +16,10 @@ import soup.types;
 /**
     Sniffs the mime type of messages.
     
-    A #SoupContentSniffer tries to detect the actual content type of
+    A [soup.content_sniffer.ContentSniffer] tries to detect the actual content type of
     the files that are being downloaded by looking at some of the data
     before the [soup.message.Message] emits its [soup.message.Message.gotHeaders] signal.
-    #SoupContentSniffer implements [soup.session_feature.SessionFeature], so you can add
+    [soup.content_sniffer.ContentSniffer] implements [soup.session_feature.SessionFeature], so you can add
     content sniffing to a session with [soup.session.Session.addFeature] or
     [soup.session.Session.addFeatureByType].
 */
@@ -63,7 +63,7 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
   mixin SessionFeatureT!();
 
   /**
-      Creates a new #SoupContentSniffer.
+      Creates a new [soup.content_sniffer.ContentSniffer].
       Returns: a new #SoupContentSniffer
   */
   this() nothrow

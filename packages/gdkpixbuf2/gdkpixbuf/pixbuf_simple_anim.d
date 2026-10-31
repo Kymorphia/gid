@@ -53,6 +53,8 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   /**
       Get `loop` property.
       Returns: Whether the animation should loop when it reaches the end.
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   @property bool loop() nothrow
   {
@@ -63,6 +65,8 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
       Set `loop` property.
       Params:
         propval = Whether the animation should loop when it reaches the end.
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   @property void loop(bool propval) nothrow
   {
@@ -77,6 +81,8 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
         height = the height of the animation
         rate = the speed of the animation, in frames per second
       Returns: a newly allocated #GdkPixbufSimpleAnim
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   this(int width, int height, float rate) nothrow
   {
@@ -92,6 +98,8 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   
       Params:
         pixbuf = the pixbuf to add
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
@@ -101,6 +109,8 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   /**
       Gets whether animation should loop indefinitely when it reaches the end.
       Returns: true if the animation loops forever, false otherwise
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   bool getLoop() nothrow
   {
@@ -114,6 +124,8 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   
       Params:
         loop = whether to loop the animation
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   void setLoop(bool loop) nothrow
   {
@@ -130,6 +142,8 @@ class PixbufSimpleAnimGidBuilderImpl(T) : gdkpixbuf.pixbuf_animation.PixbufAnima
       Params:
         propval = Whether the animation should loop when it reaches the end.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   T loop(bool propval) nothrow
   {

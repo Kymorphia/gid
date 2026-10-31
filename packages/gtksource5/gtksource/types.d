@@ -9,6 +9,9 @@ import gtksource.c.types;
 // Enums
 
 /** */
+alias AnnotationStyle = GtkSourceAnnotationStyle;
+
+/** */
 alias BackgroundPatternType = GtkSourceBackgroundPatternType;
 
 /** */
@@ -85,11 +88,11 @@ enum MAJOR_VERSION = 5;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 1;
+enum MICRO_VERSION = 0;
 
 /**
     Like [gtksource.global.getMinorVersion], but from the headers used at
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MINOR_VERSION = 12;
+enum MINOR_VERSION = 18;

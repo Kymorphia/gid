@@ -20,9 +20,12 @@ import gtk.constraint_target_mixin;
 import gtk.types;
 
 /**
-    A [gtk.link_button.LinkButton] is a button with a hyperlink.
+    A button with a hyperlink.
     
-    ![An example GtkLinkButton](link-button.png)
+    <picture>
+      <source srcset="link-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkLinkButton" src="link-button.png">
+    </picture>
     
     It is useful to show quick links to resources.
     
@@ -37,6 +40,19 @@ import gtk.types;
     is clicked. This behaviour can be overridden by connecting to the
     [gtk.link_button.LinkButton.activateLink] signal and returning true from
     the signal handler.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.link_button.LinkButton] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    
+    # Actions
+    
+    [gtk.link_button.LinkButton] defines a set of built-in actions:
+    
+    - `clipboard.copy` copies the url to the clipboard.
+    - `menu.popup` opens the context menu.
     
     # CSS nodes
     

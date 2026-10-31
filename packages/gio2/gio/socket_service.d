@@ -83,7 +83,7 @@ class SocketService : gio.socket_listener.SocketListener
   */
   @property bool active() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("active");
+    return isActive();
   }
 
   /**

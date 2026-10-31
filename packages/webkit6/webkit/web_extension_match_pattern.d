@@ -232,10 +232,27 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
   
       Params:
         urlScheme = The custom URL scheme to register
+  
+      Deprecated: Use [webkit.web_extension_match_pattern.WebExtensionMatchPattern.registerCustomUrlScheme] instead.
   */
   static void registerCustomURLScheme(string urlScheme) nothrow
   {
     const(char)* _urlScheme = urlScheme.toCString!(No.Malloc, No.Nullable);
     webkit_web_extension_match_pattern_register_custom_URL_scheme(_urlScheme);
+  }
+
+  /**
+      Registers a custom URL scheme that can be used in match patterns.
+      
+      This method should be used to register any custom URL schemes used by the app for the extension base URLs,
+      other than `webkit-extension`, or if extensions should have access to other supported URL schemes when using `<all_urls>`.
+  
+      Params:
+        urlScheme = The custom URL scheme to register
+  */
+  static void registerCustomUrlScheme(string urlScheme) nothrow
+  {
+    const(char)* _urlScheme = urlScheme.toCString!(No.Malloc, No.Nullable);
+    webkit_web_extension_match_pattern_register_custom_url_scheme(_urlScheme);
   }
 }

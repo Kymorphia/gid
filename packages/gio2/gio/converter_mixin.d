@@ -7,6 +7,7 @@ public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
+public import glib.bytes;
 public import glib.error;
 public import gobject.gid_builder;
 
@@ -139,6 +140,27 @@ template ConverterT()
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     gio.types.ConverterResult _retval = cast(gio.types.ConverterResult)_cretval;
+    return _retval;
+  }
+
+  /**
+      Applies converter to the data in bytes.
+  
+      Params:
+        bytes = the data to convert
+      Returns: A newly-allocated
+          [glib.bytes.Bytes] with the converted data, or `NULL` if an error
+          occurred
+      Throws: [ErrorWrap]
+  */
+  override glib.bytes.Bytes convertBytes(glib.bytes.Bytes bytes)
+  {
+    GBytes* _cretval;
+    GError *_err;
+    _cretval = g_converter_convert_bytes(cast(GConverter*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

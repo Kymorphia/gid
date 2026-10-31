@@ -600,7 +600,7 @@ class ByteWriter
       Resets writer and returns the current data as buffer.
       
       Free-function: gst_buffer_unref
-      Returns: the current data as buffer. gst_buffer_unref()
+      Returns: the current data as buffer. [gst.buffer.Buffer.unref]
             after usage.
   */
   gst.buffer.Buffer resetAndGetBuffer() nothrow

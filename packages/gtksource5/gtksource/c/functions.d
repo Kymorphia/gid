@@ -10,6 +10,28 @@ private immutable LIBS = ["gtksourceview-5_0"];
 
 __gshared extern(C) nothrow
 {
+  // Annotation
+  GType function() c_gtk_source_annotation_get_type; ///
+  GtkSourceAnnotation* function(const(char)* description, GIcon* icon, int line, GtkSourceAnnotationStyle style) c_gtk_source_annotation_new; ///
+  const(char)* function(GtkSourceAnnotation* self) c_gtk_source_annotation_get_description; ///
+  GIcon* function(GtkSourceAnnotation* self) c_gtk_source_annotation_get_icon; ///
+  int function(GtkSourceAnnotation* self) c_gtk_source_annotation_get_line; ///
+  GtkSourceAnnotationStyle function(GtkSourceAnnotation* self) c_gtk_source_annotation_get_style; ///
+
+  // AnnotationProvider
+  GType function() c_gtk_source_annotation_provider_get_type; ///
+  GtkSourceAnnotationProvider* function() c_gtk_source_annotation_provider_new; ///
+  void function(GtkSourceAnnotationProvider* self, GtkSourceAnnotation* annotation) c_gtk_source_annotation_provider_add_annotation; ///
+  void function(GtkSourceAnnotationProvider* self, GtkSourceAnnotation* annotation, GtkSourceHoverDisplay* display, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_source_annotation_provider_populate_hover_async; ///
+  gboolean function(GtkSourceAnnotationProvider* self, GAsyncResult* result, GError** _err) c_gtk_source_annotation_provider_populate_hover_finish; ///
+  void function(GtkSourceAnnotationProvider* self) c_gtk_source_annotation_provider_remove_all; ///
+  gboolean function(GtkSourceAnnotationProvider* self, GtkSourceAnnotation* annotation) c_gtk_source_annotation_provider_remove_annotation; ///
+
+  // Annotations
+  GType function() c_gtk_source_annotations_get_type; ///
+  void function(GtkSourceAnnotations* self, GtkSourceAnnotationProvider* provider) c_gtk_source_annotations_add_provider; ///
+  gboolean function(GtkSourceAnnotations* self, GtkSourceAnnotationProvider* provider) c_gtk_source_annotations_remove_provider; ///
+
   // Buffer
   GType function() c_gtk_source_buffer_get_type; ///
   GtkSourceBuffer* function(GtkTextTagTable* table) c_gtk_source_buffer_new; ///
@@ -26,6 +48,7 @@ __gshared extern(C) nothrow
   gboolean function(GtkSourceBuffer* buffer) c_gtk_source_buffer_get_implicit_trailing_newline; ///
   GtkSourceLanguage* function(GtkSourceBuffer* buffer) c_gtk_source_buffer_get_language; ///
   gboolean function(GtkSourceBuffer* buffer) c_gtk_source_buffer_get_loading; ///
+  char* function(GtkSourceBuffer* buffer, GtkTextIter* start, GtkTextIter* end) c_gtk_source_buffer_get_markup; ///
   GSList* function(GtkSourceBuffer* buffer, GtkTextIter* iter, const(char)* category) c_gtk_source_buffer_get_source_marks_at_iter; ///
   GSList* function(GtkSourceBuffer* buffer, int line, const(char)* category) c_gtk_source_buffer_get_source_marks_at_line; ///
   GtkSourceStyleScheme* function(GtkSourceBuffer* buffer) c_gtk_source_buffer_get_style_scheme; ///
@@ -186,6 +209,7 @@ __gshared extern(C) nothrow
   uint function(GtkSourceGutterLines* lines) c_gtk_source_gutter_lines_get_first; ///
   void function(GtkSourceGutterLines* lines, GtkTextIter* iter, uint line) c_gtk_source_gutter_lines_get_iter_at_line; ///
   uint function(GtkSourceGutterLines* lines) c_gtk_source_gutter_lines_get_last; ///
+  void function(GtkSourceGutterLines* lines, uint line, GtkSourceGutterRendererAlignmentMode mode, double* y, double* height) c_gtk_source_gutter_lines_get_line_extent; ///
   void function(GtkSourceGutterLines* lines, uint line, GtkSourceGutterRendererAlignmentMode mode, int* y, int* height) c_gtk_source_gutter_lines_get_line_yrange; ///
   GtkTextView* function(GtkSourceGutterLines* lines) c_gtk_source_gutter_lines_get_view; ///
   gboolean function(GtkSourceGutterLines* lines, uint line) c_gtk_source_gutter_lines_has_any_class; ///
@@ -540,6 +564,7 @@ __gshared extern(C) nothrow
   GType function() c_gtk_source_view_get_type; ///
   GtkWidget* function() c_gtk_source_view_new; ///
   GtkWidget* function(GtkSourceBuffer* buffer) c_gtk_source_view_new_with_buffer; ///
+  GtkSourceAnnotations* function(GtkSourceView* view) c_gtk_source_view_get_annotations; ///
   gboolean function(GtkSourceView* view) c_gtk_source_view_get_auto_indent; ///
   GtkSourceBackgroundPatternType function(GtkSourceView* view) c_gtk_source_view_get_background_pattern; ///
   GtkSourceCompletion* function(GtkSourceView* view) c_gtk_source_view_get_completion; ///
@@ -608,6 +633,60 @@ __gshared extern(C) nothrow
   GQuark function() c_gtk_source_file_saver_error_quark; ///
 }
 
+// Annotation
+
+/** */
+alias gtk_source_annotation_get_type = c_gtk_source_annotation_get_type;
+
+/** */
+alias gtk_source_annotation_new = c_gtk_source_annotation_new;
+
+/** */
+alias gtk_source_annotation_get_description = c_gtk_source_annotation_get_description;
+
+/** */
+alias gtk_source_annotation_get_icon = c_gtk_source_annotation_get_icon;
+
+/** */
+alias gtk_source_annotation_get_line = c_gtk_source_annotation_get_line;
+
+/** */
+alias gtk_source_annotation_get_style = c_gtk_source_annotation_get_style;
+
+// AnnotationProvider
+
+/** */
+alias gtk_source_annotation_provider_get_type = c_gtk_source_annotation_provider_get_type;
+
+/** */
+alias gtk_source_annotation_provider_new = c_gtk_source_annotation_provider_new;
+
+/** */
+alias gtk_source_annotation_provider_add_annotation = c_gtk_source_annotation_provider_add_annotation;
+
+/** */
+alias gtk_source_annotation_provider_populate_hover_async = c_gtk_source_annotation_provider_populate_hover_async;
+
+/** */
+alias gtk_source_annotation_provider_populate_hover_finish = c_gtk_source_annotation_provider_populate_hover_finish;
+
+/** */
+alias gtk_source_annotation_provider_remove_all = c_gtk_source_annotation_provider_remove_all;
+
+/** */
+alias gtk_source_annotation_provider_remove_annotation = c_gtk_source_annotation_provider_remove_annotation;
+
+// Annotations
+
+/** */
+alias gtk_source_annotations_get_type = c_gtk_source_annotations_get_type;
+
+/** */
+alias gtk_source_annotations_add_provider = c_gtk_source_annotations_add_provider;
+
+/** */
+alias gtk_source_annotations_remove_provider = c_gtk_source_annotations_remove_provider;
+
 // Buffer
 
 /** */
@@ -654,6 +733,9 @@ alias gtk_source_buffer_get_language = c_gtk_source_buffer_get_language;
 
 /** */
 alias gtk_source_buffer_get_loading = c_gtk_source_buffer_get_loading;
+
+/** */
+alias gtk_source_buffer_get_markup = c_gtk_source_buffer_get_markup;
 
 /** */
 alias gtk_source_buffer_get_source_marks_at_iter = c_gtk_source_buffer_get_source_marks_at_iter;
@@ -1082,6 +1164,9 @@ alias gtk_source_gutter_lines_get_iter_at_line = c_gtk_source_gutter_lines_get_i
 
 /** */
 alias gtk_source_gutter_lines_get_last = c_gtk_source_gutter_lines_get_last;
+
+/** */
+alias gtk_source_gutter_lines_get_line_extent = c_gtk_source_gutter_lines_get_line_extent;
 
 /** */
 alias gtk_source_gutter_lines_get_line_yrange = c_gtk_source_gutter_lines_get_line_yrange;
@@ -2018,6 +2103,9 @@ alias gtk_source_view_new = c_gtk_source_view_new;
 alias gtk_source_view_new_with_buffer = c_gtk_source_view_new_with_buffer;
 
 /** */
+alias gtk_source_view_get_annotations = c_gtk_source_view_get_annotations;
+
+/** */
 alias gtk_source_view_get_auto_indent = c_gtk_source_view_get_auto_indent;
 
 /** */
@@ -2203,6 +2291,28 @@ shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
 
+  // Annotation
+  gidLink(cast(void**)&gtk_source_annotation_get_type, "gtk_source_annotation_get_type", libs);
+  gidLink(cast(void**)&gtk_source_annotation_new, "gtk_source_annotation_new", libs);
+  gidLink(cast(void**)&gtk_source_annotation_get_description, "gtk_source_annotation_get_description", libs);
+  gidLink(cast(void**)&gtk_source_annotation_get_icon, "gtk_source_annotation_get_icon", libs);
+  gidLink(cast(void**)&gtk_source_annotation_get_line, "gtk_source_annotation_get_line", libs);
+  gidLink(cast(void**)&gtk_source_annotation_get_style, "gtk_source_annotation_get_style", libs);
+
+  // AnnotationProvider
+  gidLink(cast(void**)&gtk_source_annotation_provider_get_type, "gtk_source_annotation_provider_get_type", libs);
+  gidLink(cast(void**)&gtk_source_annotation_provider_new, "gtk_source_annotation_provider_new", libs);
+  gidLink(cast(void**)&gtk_source_annotation_provider_add_annotation, "gtk_source_annotation_provider_add_annotation", libs);
+  gidLink(cast(void**)&gtk_source_annotation_provider_populate_hover_async, "gtk_source_annotation_provider_populate_hover_async", libs);
+  gidLink(cast(void**)&gtk_source_annotation_provider_populate_hover_finish, "gtk_source_annotation_provider_populate_hover_finish", libs);
+  gidLink(cast(void**)&gtk_source_annotation_provider_remove_all, "gtk_source_annotation_provider_remove_all", libs);
+  gidLink(cast(void**)&gtk_source_annotation_provider_remove_annotation, "gtk_source_annotation_provider_remove_annotation", libs);
+
+  // Annotations
+  gidLink(cast(void**)&gtk_source_annotations_get_type, "gtk_source_annotations_get_type", libs);
+  gidLink(cast(void**)&gtk_source_annotations_add_provider, "gtk_source_annotations_add_provider", libs);
+  gidLink(cast(void**)&gtk_source_annotations_remove_provider, "gtk_source_annotations_remove_provider", libs);
+
   // Buffer
   gidLink(cast(void**)&gtk_source_buffer_get_type, "gtk_source_buffer_get_type", libs);
   gidLink(cast(void**)&gtk_source_buffer_new, "gtk_source_buffer_new", libs);
@@ -2219,6 +2329,7 @@ shared static this()
   gidLink(cast(void**)&gtk_source_buffer_get_implicit_trailing_newline, "gtk_source_buffer_get_implicit_trailing_newline", libs);
   gidLink(cast(void**)&gtk_source_buffer_get_language, "gtk_source_buffer_get_language", libs);
   gidLink(cast(void**)&gtk_source_buffer_get_loading, "gtk_source_buffer_get_loading", libs);
+  gidLink(cast(void**)&gtk_source_buffer_get_markup, "gtk_source_buffer_get_markup", libs);
   gidLink(cast(void**)&gtk_source_buffer_get_source_marks_at_iter, "gtk_source_buffer_get_source_marks_at_iter", libs);
   gidLink(cast(void**)&gtk_source_buffer_get_source_marks_at_line, "gtk_source_buffer_get_source_marks_at_line", libs);
   gidLink(cast(void**)&gtk_source_buffer_get_style_scheme, "gtk_source_buffer_get_style_scheme", libs);
@@ -2379,6 +2490,7 @@ shared static this()
   gidLink(cast(void**)&gtk_source_gutter_lines_get_first, "gtk_source_gutter_lines_get_first", libs);
   gidLink(cast(void**)&gtk_source_gutter_lines_get_iter_at_line, "gtk_source_gutter_lines_get_iter_at_line", libs);
   gidLink(cast(void**)&gtk_source_gutter_lines_get_last, "gtk_source_gutter_lines_get_last", libs);
+  gidLink(cast(void**)&gtk_source_gutter_lines_get_line_extent, "gtk_source_gutter_lines_get_line_extent", libs);
   gidLink(cast(void**)&gtk_source_gutter_lines_get_line_yrange, "gtk_source_gutter_lines_get_line_yrange", libs);
   gidLink(cast(void**)&gtk_source_gutter_lines_get_view, "gtk_source_gutter_lines_get_view", libs);
   gidLink(cast(void**)&gtk_source_gutter_lines_has_any_class, "gtk_source_gutter_lines_has_any_class", libs);
@@ -2733,6 +2845,7 @@ shared static this()
   gidLink(cast(void**)&gtk_source_view_get_type, "gtk_source_view_get_type", libs);
   gidLink(cast(void**)&gtk_source_view_new, "gtk_source_view_new", libs);
   gidLink(cast(void**)&gtk_source_view_new_with_buffer, "gtk_source_view_new_with_buffer", libs);
+  gidLink(cast(void**)&gtk_source_view_get_annotations, "gtk_source_view_get_annotations", libs);
   gidLink(cast(void**)&gtk_source_view_get_auto_indent, "gtk_source_view_get_auto_indent", libs);
   gidLink(cast(void**)&gtk_source_view_get_background_pattern, "gtk_source_view_get_background_pattern", libs);
   gidLink(cast(void**)&gtk_source_view_get_completion, "gtk_source_view_get_completion", libs);

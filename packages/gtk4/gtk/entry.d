@@ -32,9 +32,12 @@ import pango.attr_list;
 import pango.tab_array;
 
 /**
-    [gtk.entry.Entry] is a single line text entry widget.
+    A single-line text entry widget.
     
-    ![An example GtkEntry](entry.png)
+    <picture>
+      <source srcset="entry-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkEntry" src="entry.png">
+    </picture>
     
     A fairly large set of key bindings are supported by default. If the
     entered text is longer than the allocation of the widget, the widget
@@ -448,6 +451,88 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   @property void maxLength(int propval) nothrow
   {
     setMaxLength(propval);
+  }
+
+  /**
+      Get `menuEntryIconPrimaryText` property.
+      Returns: Text for an item in the context menu to activate the primary icon action.
+        
+        When the primary icon is activatable and this property has been set, a new entry
+        in the context menu of this GtkEntry will appear with this text. Selecting that
+        menu entry will result in the primary icon being activated, exactly in the same way
+        as it would be activated from a mouse click.
+        
+        This simplifies adding accessibility support to applications using activatable
+        icons. The activatable icons aren't focusable when navigating the interface with
+        the keyboard This is why Gtk recommends to also add those actions in the context
+        menu. This set of methods greatly simplifies this, by adding a menu item that, when
+        enabled, calls the same callback than clicking on the icon.
+  */
+  @property string menuEntryIconPrimaryText() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("menu-entry-icon-primary-text");
+  }
+
+  /**
+      Set `menuEntryIconPrimaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the primary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+  */
+  @property void menuEntryIconPrimaryText(string propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("menu-entry-icon-primary-text", propval);
+  }
+
+  /**
+      Get `menuEntryIconSecondaryText` property.
+      Returns: Text for an item in the context menu to activate the secondary icon action.
+        
+        When the primary icon is activatable and this property has been set, a new entry
+        in the context menu of this GtkEntry will appear with this text. Selecting that
+        menu entry will result in the primary icon being activated, exactly in the same way
+        as it would be activated from a mouse click.
+        
+        This simplifies adding accessibility support to applications using activatable
+        icons. The activatable icons aren't focusable when navigating the interface with
+        the keyboard This is why Gtk recommends to also add those actions in the context
+        menu. This set of methods greatly simplifies this, by adding a menu item that, when
+        enabled, calls the same callback than clicking on the icon.
+  */
+  @property string menuEntryIconSecondaryText() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(string)("menu-entry-icon-secondary-text");
+  }
+
+  /**
+      Set `menuEntryIconSecondaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the secondary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+  */
+  @property void menuEntryIconSecondaryText(string propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(string)("menu-entry-icon-secondary-text", propval);
   }
 
   /**
@@ -899,25 +984,41 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-tooltip-text", propval);
   }
 
-  /** */
+  /**
+      Get `showEmojiIcon` property.
+      Returns: Whether the entry will show an Emoji icon in the secondary icon position
+        to open the Emoji chooser.
+  */
   @property bool showEmojiIcon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-emoji-icon");
   }
 
-  /** */
+  /**
+      Set `showEmojiIcon` property.
+      Params:
+        propval = Whether the entry will show an Emoji icon in the secondary icon position
+          to open the Emoji chooser.
+  */
   @property void showEmojiIcon(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-emoji-icon", propval);
   }
 
-  /** */
+  /**
+      Get `tabs` property.
+      Returns: A list of tabstops to apply to the text of the entry.
+  */
   @property pango.tab_array.TabArray tabs() nothrow
   {
     return getTabs();
   }
 
-  /** */
+  /**
+      Set `tabs` property.
+      Params:
+        propval = A list of tabstops to apply to the text of the entry.
+  */
   @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     setTabs(propval);
@@ -1144,7 +1245,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       The position’s coordinates are relative to the entry’s
       top left corner. If `x`, `y` doesn’t lie inside an icon,
       -1 is returned. This function is intended for use in a
-       [gtk.widget.Widget.queryTooltip] signal handler.
+      [gtk.widget.Widget.queryTooltip] signal handler.
   
       Params:
         x = the x coordinate of the position to find, relative to entry
@@ -1326,6 +1427,27 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     int _retval;
     _retval = gtk_entry_get_max_length(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the text that will be used in the context menu of the [gtk.entry.Entry]
+      when the specified icon is activatable. Selecting this item in the menu
+      results, from all aspects, the same than clicking on the specified icon.
+      This greatly simplifies making accessible applications, because the icons
+      aren't focusable when using keyboard navigation. This is why Gtk recommends
+      to add the same action to the context menu.
+  
+      Params:
+        iconPos = either GTK_ENTRY_ICON_PRIMARY or GTK_ENTRY_ICON_SECONDARY
+      Returns: the text that will be used in the menu item,
+          or NULL if no menu item is desired.
+  */
+  string getMenuEntryIconText(gtk.types.EntryIconPosition iconPos) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_entry_get_menu_entry_icon_text(cast(GtkEntry*)this._cPtr, iconPos);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 
@@ -1776,6 +1898,24 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   }
 
   /**
+      Sets the text that will be used in the context menu of the [gtk.entry.Entry]
+      when the specified icon is activatable. Selecting this item in the menu
+      results, from all aspects, the same than clicking on the specified icon.
+      This greatly simplifies making accessible applications, because the icons
+      aren't focusable when using keyboard navigation. This is why Gtk recommends
+      to add the same action to the context menu.
+  
+      Params:
+        iconPos = either GTK_ENTRY_ICON_PRIMARY or GTK_ENTRY_ICON_SECONDARY
+        text = the text used for the menu item in the context menu, or NULL to not add a menu item.
+  */
+  void setMenuEntryIconText(gtk.types.EntryIconPosition iconPos, string text) nothrow
+  {
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    gtk_entry_set_menu_entry_icon_text(cast(GtkEntry*)this._cPtr, iconPos, _text);
+  }
+
+  /**
       Sets whether the text is overwritten when typing in the [gtk.entry.Entry].
   
       Params:
@@ -2198,6 +2338,50 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
   }
 
   /**
+      Set `menuEntryIconPrimaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the primary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuEntryIconPrimaryText(string propval) nothrow
+  {
+    return setProperty("menu-entry-icon-primary-text", propval);
+  }
+
+  /**
+      Set `menuEntryIconSecondaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the secondary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuEntryIconSecondaryText(string propval) nothrow
+  {
+    return setProperty("menu-entry-icon-secondary-text", propval);
+  }
+
+  /**
       Set `overwriteMode` property.
       Params:
         propval = If text is overwritten when typing in the [gtk.entry.Entry].
@@ -2435,13 +2619,24 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
     return setProperty("secondary-icon-tooltip-text", propval);
   }
 
-  /** */
+  /**
+      Set `showEmojiIcon` property.
+      Params:
+        propval = Whether the entry will show an Emoji icon in the secondary icon position
+          to open the Emoji chooser.
+      Returns: Builder instance for fluent chaining
+  */
   T showEmojiIcon(bool propval) nothrow
   {
     return setProperty("show-emoji-icon", propval);
   }
 
-  /** */
+  /**
+      Set `tabs` property.
+      Params:
+        propval = A list of tabstops to apply to the text of the entry.
+      Returns: Builder instance for fluent chaining
+  */
   T tabs(pango.tab_array.TabArray propval) nothrow
   {
     return setProperty("tabs", propval);

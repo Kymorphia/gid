@@ -40,6 +40,9 @@ class ColorNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color of the given node.
+      
+      The value returned by this function will not be correct
+      if the render node was created for a non-sRGB color.
       Returns: the color of the node
   */
   gdk.rgba.RGBA getColor() nothrow

@@ -230,9 +230,6 @@ enum GdkPixbufRotation
     function will compute an optimal rowstride so that rendering can be
     performed with an efficient algorithm.
     
-    As a special case, you can use the [gdkpixbuf.pixbuf.Pixbuf.newFromXpmData]
-    function to create a pixbuf from inline XPM image data.
-    
     You can also copy an existing pixbuf with the [gdkpixbuf.pixbuf.Pixbuf.copy]
     function. This is not the same as just acquiring a reference to
     the old pixbuf instance: the copy function will actually duplicate
@@ -354,6 +351,8 @@ struct GdkPixbuf;
     To display an animation you don't need to understand its
     representation, however; you just ask [gdkpixbuf.pixbuf.Pixbuf] what should
     be displayed at a given point in time.
+
+    Deprecated: Use a different image loading library for animatable assets
 */
 struct GdkPixbufAnimation
 {
@@ -365,6 +364,8 @@ struct GdkPixbufAnimation
     Modules supporting animations must derive a type from
     #GdkPixbufAnimation, providing suitable implementations of the
     virtual functions.
+
+    Deprecated: Use a different image loading library for animatable assets
 */
 struct GdkPixbufAnimationClass
 {
@@ -397,6 +398,8 @@ struct GdkPixbufAnimationClass
 /**
     An opaque object representing an iterator which points to a
     certain position in an animation.
+
+    Deprecated: Use a different image loading library for animatable assets
 */
 struct GdkPixbufAnimationIter
 {
@@ -408,6 +411,8 @@ struct GdkPixbufAnimationIter
     Modules supporting animations must derive a type from
     #GdkPixbufAnimationIter, providing suitable implementations of the
     virtual functions.
+
+    Deprecated: Use a different image loading library for animatable assets
 */
 struct GdkPixbufAnimationIterClass
 {

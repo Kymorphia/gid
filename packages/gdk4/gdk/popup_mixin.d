@@ -13,7 +13,7 @@ public import gobject.gid_builder;
 public import gobject.object;
 
 /**
-    A [gdk.popup.Popup] is a surface that is attached to another surface.
+    A surface that is attached to another surface.
     
     The [gdk.popup.Popup] is positioned relative to its parent surface.
     
@@ -120,7 +120,7 @@ template PopupT()
   /**
       Present popup after having processed the [gdk.popup_layout.PopupLayout] rules.
       
-      If the popup was previously now showing, it will be showed,
+      If the popup was previously not showing, it will be shown,
       otherwise it will change position according to layout.
       
       After calling this function, the result should be handled in response

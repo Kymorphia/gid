@@ -19,9 +19,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.drawing_area.DrawingArea] is a widget that allows drawing with cairo.
+    Allows drawing with cairo.
     
-    ![An example GtkDrawingArea](drawingarea.png)
+    <picture>
+      <source srcset="drawingarea-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkDrawingArea" src="drawingarea.png">
+    </picture>
     
     It’s essentially a blank widget; you can draw on it. After
     creating a drawing area, the application may want to connect to:
@@ -259,8 +262,8 @@ class DrawingArea : gtk.widget.Widget
       on the drawing area. This will cause a redraw and will call draw_func again.
   
       Params:
-        drawFunc = callback that lets you draw
-            the drawing area's contents
+        drawFunc = callback
+            that lets you draw the drawing area's contents
   */
   void setDrawFunc(gtk.types.DrawingAreaDrawFunc drawFunc = null) nothrow
   {

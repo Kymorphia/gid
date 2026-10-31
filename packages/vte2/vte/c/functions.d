@@ -14,6 +14,7 @@ private immutable LIBS = ["vte-2.91_0"];
 __gshared extern(C) nothrow
 {
   // EventContext
+  GType function() c_vte_event_context_get_type; ///
   GdkEvent* function(const(VteEventContext)* context) c_vte_event_context_get_event; ///
 
   // Pty
@@ -47,6 +48,10 @@ __gshared extern(C) nothrow
   void function(VteTerminal* terminal) c_vte_terminal_copy_clipboard; ///
   void function(VteTerminal* terminal, VteFormat format) c_vte_terminal_copy_clipboard_format; ///
   void function(VteTerminal* terminal) c_vte_terminal_copy_primary; ///
+  char* function(VteTerminal* terminal, const(char)* prop, size_t* size) c_vte_terminal_dup_termprop_string; ///
+  char* function(VteTerminal* terminal, int prop, size_t* size) c_vte_terminal_dup_termprop_string_by_id; ///
+  VteUuid* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_dup_termprop_uuid; ///
+  VteUuid* function(VteTerminal* terminal, int prop) c_vte_terminal_dup_termprop_uuid_by_id; ///
   gboolean function(VteTerminal* terminal, GdkEvent* event, GRegex** regexes, size_t nRegexes, GRegexMatchFlags matchFlags, char** matches) c_vte_terminal_event_check_gregex_simple; ///
   char** function(VteTerminal* terminal, GdkEvent* event, VteRegex** regexes, size_t nRegexes, uint matchFlags, size_t* nMatches) c_vte_terminal_event_check_regex_array; ///
   gboolean function(VteTerminal* terminal, GdkEvent* event, VteRegex** regexes, size_t nRegexes, uint matchFlags, char** matches) c_vte_terminal_event_check_regex_simple; ///
@@ -66,8 +71,6 @@ __gshared extern(C) nothrow
   glong function(VteTerminal* terminal) c_vte_terminal_get_column_count; ///
   GtkWidget* function(VteTerminal* terminal) c_vte_terminal_get_context_menu; ///
   GMenuModel* function(VteTerminal* terminal) c_vte_terminal_get_context_menu_model; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_current_container_name; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_current_container_runtime; ///
   const(char)* function(VteTerminal* terminal) c_vte_terminal_get_current_directory_uri; ///
   const(char)* function(VteTerminal* terminal) c_vte_terminal_get_current_file_uri; ///
   VteCursorBlinkMode function(VteTerminal* terminal) c_vte_terminal_get_cursor_blink_mode; ///
@@ -76,6 +79,7 @@ __gshared extern(C) nothrow
   gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_a11y; ///
   gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_bidi; ///
   gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_fallback_scrolling; ///
+  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_legacy_osc777; ///
   gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_shaping; ///
   gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_sixel; ///
   const(char)* function(VteTerminal* terminal) c_vte_terminal_get_encoding; ///
@@ -95,6 +99,26 @@ __gshared extern(C) nothrow
   gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_output; ///
   gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_unit_is_pixels; ///
   glong function(VteTerminal* terminal) c_vte_terminal_get_scrollback_lines; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, gboolean* valuep) c_vte_terminal_get_termprop_bool; ///
+  gboolean function(VteTerminal* terminal, int prop, gboolean* valuep) c_vte_terminal_get_termprop_bool_by_id; ///
+  const(ubyte)* function(VteTerminal* terminal, const(char)* prop, size_t* size) c_vte_terminal_get_termprop_data; ///
+  const(ubyte)* function(VteTerminal* terminal, int prop, size_t* size) c_vte_terminal_get_termprop_data_by_id; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, double* valuep) c_vte_terminal_get_termprop_double; ///
+  gboolean function(VteTerminal* terminal, int prop, double* valuep) c_vte_terminal_get_termprop_double_by_id; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, GType gtype, long* valuep) c_vte_terminal_get_termprop_enum; ///
+  gboolean function(VteTerminal* terminal, int prop, GType gtype, long* valuep) c_vte_terminal_get_termprop_enum_by_id; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, GType gtype, gboolean ignoreUnknownFlags, ulong* valuep) c_vte_terminal_get_termprop_flags; ///
+  gboolean function(VteTerminal* terminal, int prop, GType gtype, gboolean ignoreUnknownFlags, ulong* valuep) c_vte_terminal_get_termprop_flags_by_id; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, long* valuep) c_vte_terminal_get_termprop_int; ///
+  gboolean function(VteTerminal* terminal, int prop, long* valuep) c_vte_terminal_get_termprop_int_by_id; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, GdkRGBA* color) c_vte_terminal_get_termprop_rgba; ///
+  gboolean function(VteTerminal* terminal, int prop, GdkRGBA* color) c_vte_terminal_get_termprop_rgba_by_id; ///
+  const(char)* function(VteTerminal* terminal, const(char)* prop, size_t* size) c_vte_terminal_get_termprop_string; ///
+  const(char)* function(VteTerminal* terminal, int prop, size_t* size) c_vte_terminal_get_termprop_string_by_id; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, ulong* valuep) c_vte_terminal_get_termprop_uint; ///
+  gboolean function(VteTerminal* terminal, int prop, ulong* valuep) c_vte_terminal_get_termprop_uint_by_id; ///
+  gboolean function(VteTerminal* terminal, const(char)* prop, GValue* gvalue) c_vte_terminal_get_termprop_value; ///
+  gboolean function(VteTerminal* terminal, int prop, GValue* gvalue) c_vte_terminal_get_termprop_value_by_id; ///
   char* function(VteTerminal* terminal, VteSelectionFunc isSelected, void* userData, GArray* attributes) c_vte_terminal_get_text; ///
   VteTextBlinkMode function(VteTerminal* terminal) c_vte_terminal_get_text_blink_mode; ///
   char* function(VteTerminal* terminal, VteFormat format) c_vte_terminal_get_text_format; ///
@@ -123,7 +147,19 @@ __gshared extern(C) nothrow
   void function(VteTerminal* terminal) c_vte_terminal_paste_primary; ///
   void function(VteTerminal* terminal, const(char)* text) c_vte_terminal_paste_text; ///
   VtePty* function(VteTerminal* terminal, VtePtyFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_pty_new_sync; ///
+  GBytes* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_data_bytes; ///
+  GBytes* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_data_bytes_by_id; ///
+  GdkPixbuf* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_image_pixbuf; ///
+  GdkPixbuf* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_image_pixbuf_by_id; ///
+  cairo_surface_t* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_image_surface; ///
+  cairo_surface_t* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_image_surface_by_id; ///
+  GUri* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_uri; ///
+  GUri* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_uri_by_id; ///
+  GVariant* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_variant; ///
+  GVariant* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_variant_by_id; ///
   void function(VteTerminal* terminal, gboolean clearTabstops, gboolean clearHistory) c_vte_terminal_reset; ///
+  void function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_reset_termprop; ///
+  void function(VteTerminal* terminal, int prop) c_vte_terminal_reset_termprop_by_id; ///
   gboolean function(VteTerminal* terminal) c_vte_terminal_search_find_next; ///
   gboolean function(VteTerminal* terminal) c_vte_terminal_search_find_previous; ///
   GRegex* function(VteTerminal* terminal) c_vte_terminal_search_get_gregex; ///
@@ -159,6 +195,7 @@ __gshared extern(C) nothrow
   void function(VteTerminal* terminal, gboolean enableA11y) c_vte_terminal_set_enable_a11y; ///
   void function(VteTerminal* terminal, gboolean enableBidi) c_vte_terminal_set_enable_bidi; ///
   void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_enable_fallback_scrolling; ///
+  void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_enable_legacy_osc777; ///
   void function(VteTerminal* terminal, gboolean enableShaping) c_vte_terminal_set_enable_shaping; ///
   void function(VteTerminal* terminal, gboolean enabled) c_vte_terminal_set_enable_sixel; ///
   gboolean function(VteTerminal* terminal, const(char)* codeset, GError** _err) c_vte_terminal_set_encoding; ///
@@ -176,6 +213,7 @@ __gshared extern(C) nothrow
   void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_scroll_unit_is_pixels; ///
   void function(VteTerminal* terminal, glong lines) c_vte_terminal_set_scrollback_lines; ///
   void function(VteTerminal* terminal, glong columns, glong rows) c_vte_terminal_set_size; ///
+  void function(VteTerminal* terminal) c_vte_terminal_set_suppress_legacy_signals; ///
   void function(VteTerminal* terminal, VteTextBlinkMode textBlinkMode) c_vte_terminal_set_text_blink_mode; ///
   void function(VteTerminal* terminal, const(char)* exceptions) c_vte_terminal_set_word_char_exceptions; ///
   void function(VteTerminal* terminal, VteAlign align_) c_vte_terminal_set_xalign; ///
@@ -189,8 +227,19 @@ __gshared extern(C) nothrow
   void function(VteTerminal* terminal, GPid childPid) c_vte_terminal_watch_child; ///
   gboolean function(VteTerminal* terminal, GOutputStream* stream, VteWriteFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_write_contents_sync; ///
 
+  // Uuid
+  GType function() c_vte_uuid_get_type; ///
+  VteUuid* function(const(char)* str, ptrdiff_t len, VteUuidFormat fmt) c_vte_uuid_new_from_string; ///
+  VteUuid* function() c_vte_uuid_new_v4; ///
+  VteUuid* function(const(VteUuid)* uuid) c_vte_uuid_dup; ///
+  gboolean function(const(VteUuid)* uuid, const(VteUuid)* other) c_vte_uuid_equal; ///
+  void function(VteUuid* uuid) c_vte_uuid_free; ///
+  char* function(VteUuid* uuid, VteUuidFormat fmt, size_t* len) c_vte_uuid_free_to_string; ///
+  VteUuid* function(const(VteUuid)* ns, const(char)* data, ptrdiff_t len) c_vte_uuid_new_v5; ///
+  char* function(const(VteUuid)* uuid, VteUuidFormat fmt, size_t* len) c_vte_uuid_to_string; ///
+  gboolean function(const(char)* str, ptrdiff_t len, VteUuidFormat fmt) c_vte_uuid_validate_string; ///
+
   // global
-  GType function() c_vte_event_context_get_type; ///
   gboolean function(const(char)* encoding) c_vte_get_encoding_supported; ///
   char** function(gboolean includeAliases) c_vte_get_encodings; ///
   VteFeatureFlags function() c_vte_get_feature_flags; ///
@@ -198,7 +247,13 @@ __gshared extern(C) nothrow
   uint function() c_vte_get_major_version; ///
   uint function() c_vte_get_micro_version; ///
   uint function() c_vte_get_minor_version; ///
+  const(char*)* function(size_t* length) c_vte_get_termprops; ///
+  ulong function() c_vte_get_test_flags; ///
   char* function() c_vte_get_user_shell; ///
+  int function(const(char)* name, VtePropertyType type, VtePropertyFlags flags) c_vte_install_termprop; ///
+  int function(const(char)* name, const(char)* targetName) c_vte_install_termprop_alias; ///
+  gboolean function(const(char)* name, const(char*)* resolvedName, int* prop, VtePropertyType* type, VtePropertyFlags* flags) c_vte_query_termprop; ///
+  gboolean function(int prop, const(char*)* name, VtePropertyType* type, VtePropertyFlags* flags) c_vte_query_termprop_by_id; ///
   void function(ulong flags) c_vte_set_test_flags; ///
 
   // PtyError
@@ -209,6 +264,9 @@ __gshared extern(C) nothrow
 }
 
 // EventContext
+
+/** */
+alias vte_event_context_get_type = c_vte_event_context_get_type;
 
 /** */
 alias vte_event_context_get_event = c_vte_event_context_get_event;
@@ -298,6 +356,18 @@ alias vte_terminal_copy_clipboard_format = c_vte_terminal_copy_clipboard_format;
 alias vte_terminal_copy_primary = c_vte_terminal_copy_primary;
 
 /** */
+alias vte_terminal_dup_termprop_string = c_vte_terminal_dup_termprop_string;
+
+/** */
+alias vte_terminal_dup_termprop_string_by_id = c_vte_terminal_dup_termprop_string_by_id;
+
+/** */
+alias vte_terminal_dup_termprop_uuid = c_vte_terminal_dup_termprop_uuid;
+
+/** */
+alias vte_terminal_dup_termprop_uuid_by_id = c_vte_terminal_dup_termprop_uuid_by_id;
+
+/** */
 alias vte_terminal_event_check_gregex_simple = c_vte_terminal_event_check_gregex_simple;
 
 /** */
@@ -355,12 +425,6 @@ alias vte_terminal_get_context_menu = c_vte_terminal_get_context_menu;
 alias vte_terminal_get_context_menu_model = c_vte_terminal_get_context_menu_model;
 
 /** */
-alias vte_terminal_get_current_container_name = c_vte_terminal_get_current_container_name;
-
-/** */
-alias vte_terminal_get_current_container_runtime = c_vte_terminal_get_current_container_runtime;
-
-/** */
 alias vte_terminal_get_current_directory_uri = c_vte_terminal_get_current_directory_uri;
 
 /** */
@@ -383,6 +447,9 @@ alias vte_terminal_get_enable_bidi = c_vte_terminal_get_enable_bidi;
 
 /** */
 alias vte_terminal_get_enable_fallback_scrolling = c_vte_terminal_get_enable_fallback_scrolling;
+
+/** */
+alias vte_terminal_get_enable_legacy_osc777 = c_vte_terminal_get_enable_legacy_osc777;
 
 /** */
 alias vte_terminal_get_enable_shaping = c_vte_terminal_get_enable_shaping;
@@ -440,6 +507,66 @@ alias vte_terminal_get_scroll_unit_is_pixels = c_vte_terminal_get_scroll_unit_is
 
 /** */
 alias vte_terminal_get_scrollback_lines = c_vte_terminal_get_scrollback_lines;
+
+/** */
+alias vte_terminal_get_termprop_bool = c_vte_terminal_get_termprop_bool;
+
+/** */
+alias vte_terminal_get_termprop_bool_by_id = c_vte_terminal_get_termprop_bool_by_id;
+
+/** */
+alias vte_terminal_get_termprop_data = c_vte_terminal_get_termprop_data;
+
+/** */
+alias vte_terminal_get_termprop_data_by_id = c_vte_terminal_get_termprop_data_by_id;
+
+/** */
+alias vte_terminal_get_termprop_double = c_vte_terminal_get_termprop_double;
+
+/** */
+alias vte_terminal_get_termprop_double_by_id = c_vte_terminal_get_termprop_double_by_id;
+
+/** */
+alias vte_terminal_get_termprop_enum = c_vte_terminal_get_termprop_enum;
+
+/** */
+alias vte_terminal_get_termprop_enum_by_id = c_vte_terminal_get_termprop_enum_by_id;
+
+/** */
+alias vte_terminal_get_termprop_flags = c_vte_terminal_get_termprop_flags;
+
+/** */
+alias vte_terminal_get_termprop_flags_by_id = c_vte_terminal_get_termprop_flags_by_id;
+
+/** */
+alias vte_terminal_get_termprop_int = c_vte_terminal_get_termprop_int;
+
+/** */
+alias vte_terminal_get_termprop_int_by_id = c_vte_terminal_get_termprop_int_by_id;
+
+/** */
+alias vte_terminal_get_termprop_rgba = c_vte_terminal_get_termprop_rgba;
+
+/** */
+alias vte_terminal_get_termprop_rgba_by_id = c_vte_terminal_get_termprop_rgba_by_id;
+
+/** */
+alias vte_terminal_get_termprop_string = c_vte_terminal_get_termprop_string;
+
+/** */
+alias vte_terminal_get_termprop_string_by_id = c_vte_terminal_get_termprop_string_by_id;
+
+/** */
+alias vte_terminal_get_termprop_uint = c_vte_terminal_get_termprop_uint;
+
+/** */
+alias vte_terminal_get_termprop_uint_by_id = c_vte_terminal_get_termprop_uint_by_id;
+
+/** */
+alias vte_terminal_get_termprop_value = c_vte_terminal_get_termprop_value;
+
+/** */
+alias vte_terminal_get_termprop_value_by_id = c_vte_terminal_get_termprop_value_by_id;
 
 /** */
 alias vte_terminal_get_text = c_vte_terminal_get_text;
@@ -526,7 +653,43 @@ alias vte_terminal_paste_text = c_vte_terminal_paste_text;
 alias vte_terminal_pty_new_sync = c_vte_terminal_pty_new_sync;
 
 /** */
+alias vte_terminal_ref_termprop_data_bytes = c_vte_terminal_ref_termprop_data_bytes;
+
+/** */
+alias vte_terminal_ref_termprop_data_bytes_by_id = c_vte_terminal_ref_termprop_data_bytes_by_id;
+
+/** */
+alias vte_terminal_ref_termprop_image_pixbuf = c_vte_terminal_ref_termprop_image_pixbuf;
+
+/** */
+alias vte_terminal_ref_termprop_image_pixbuf_by_id = c_vte_terminal_ref_termprop_image_pixbuf_by_id;
+
+/** */
+alias vte_terminal_ref_termprop_image_surface = c_vte_terminal_ref_termprop_image_surface;
+
+/** */
+alias vte_terminal_ref_termprop_image_surface_by_id = c_vte_terminal_ref_termprop_image_surface_by_id;
+
+/** */
+alias vte_terminal_ref_termprop_uri = c_vte_terminal_ref_termprop_uri;
+
+/** */
+alias vte_terminal_ref_termprop_uri_by_id = c_vte_terminal_ref_termprop_uri_by_id;
+
+/** */
+alias vte_terminal_ref_termprop_variant = c_vte_terminal_ref_termprop_variant;
+
+/** */
+alias vte_terminal_ref_termprop_variant_by_id = c_vte_terminal_ref_termprop_variant_by_id;
+
+/** */
 alias vte_terminal_reset = c_vte_terminal_reset;
+
+/** */
+alias vte_terminal_reset_termprop = c_vte_terminal_reset_termprop;
+
+/** */
+alias vte_terminal_reset_termprop_by_id = c_vte_terminal_reset_termprop_by_id;
 
 /** */
 alias vte_terminal_search_find_next = c_vte_terminal_search_find_next;
@@ -634,6 +797,9 @@ alias vte_terminal_set_enable_bidi = c_vte_terminal_set_enable_bidi;
 alias vte_terminal_set_enable_fallback_scrolling = c_vte_terminal_set_enable_fallback_scrolling;
 
 /** */
+alias vte_terminal_set_enable_legacy_osc777 = c_vte_terminal_set_enable_legacy_osc777;
+
+/** */
 alias vte_terminal_set_enable_shaping = c_vte_terminal_set_enable_shaping;
 
 /** */
@@ -685,6 +851,9 @@ alias vte_terminal_set_scrollback_lines = c_vte_terminal_set_scrollback_lines;
 alias vte_terminal_set_size = c_vte_terminal_set_size;
 
 /** */
+alias vte_terminal_set_suppress_legacy_signals = c_vte_terminal_set_suppress_legacy_signals;
+
+/** */
 alias vte_terminal_set_text_blink_mode = c_vte_terminal_set_text_blink_mode;
 
 /** */
@@ -720,10 +889,39 @@ alias vte_terminal_watch_child = c_vte_terminal_watch_child;
 /** */
 alias vte_terminal_write_contents_sync = c_vte_terminal_write_contents_sync;
 
-// global
+// Uuid
 
 /** */
-alias vte_event_context_get_type = c_vte_event_context_get_type;
+alias vte_uuid_get_type = c_vte_uuid_get_type;
+
+/** */
+alias vte_uuid_new_from_string = c_vte_uuid_new_from_string;
+
+/** */
+alias vte_uuid_new_v4 = c_vte_uuid_new_v4;
+
+/** */
+alias vte_uuid_dup = c_vte_uuid_dup;
+
+/** */
+alias vte_uuid_equal = c_vte_uuid_equal;
+
+/** */
+alias vte_uuid_free = c_vte_uuid_free;
+
+/** */
+alias vte_uuid_free_to_string = c_vte_uuid_free_to_string;
+
+/** */
+alias vte_uuid_new_v5 = c_vte_uuid_new_v5;
+
+/** */
+alias vte_uuid_to_string = c_vte_uuid_to_string;
+
+/** */
+alias vte_uuid_validate_string = c_vte_uuid_validate_string;
+
+// global
 
 /** */
 alias vte_get_encoding_supported = c_vte_get_encoding_supported;
@@ -747,7 +945,25 @@ alias vte_get_micro_version = c_vte_get_micro_version;
 alias vte_get_minor_version = c_vte_get_minor_version;
 
 /** */
+alias vte_get_termprops = c_vte_get_termprops;
+
+/** */
+alias vte_get_test_flags = c_vte_get_test_flags;
+
+/** */
 alias vte_get_user_shell = c_vte_get_user_shell;
+
+/** */
+alias vte_install_termprop = c_vte_install_termprop;
+
+/** */
+alias vte_install_termprop_alias = c_vte_install_termprop_alias;
+
+/** */
+alias vte_query_termprop = c_vte_query_termprop;
+
+/** */
+alias vte_query_termprop_by_id = c_vte_query_termprop_by_id;
 
 /** */
 alias vte_set_test_flags = c_vte_set_test_flags;
@@ -767,6 +983,7 @@ shared static this()
   auto libs = gidResolveLibs(LIBS);
 
   // EventContext
+  gidLink(cast(void**)&vte_event_context_get_type, "vte_event_context_get_type", libs);
   gidLink(cast(void**)&vte_event_context_get_event, "vte_event_context_get_event", libs);
 
   // Pty
@@ -800,6 +1017,10 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_copy_clipboard, "vte_terminal_copy_clipboard", libs);
   gidLink(cast(void**)&vte_terminal_copy_clipboard_format, "vte_terminal_copy_clipboard_format", libs);
   gidLink(cast(void**)&vte_terminal_copy_primary, "vte_terminal_copy_primary", libs);
+  gidLink(cast(void**)&vte_terminal_dup_termprop_string, "vte_terminal_dup_termprop_string", libs);
+  gidLink(cast(void**)&vte_terminal_dup_termprop_string_by_id, "vte_terminal_dup_termprop_string_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_dup_termprop_uuid, "vte_terminal_dup_termprop_uuid", libs);
+  gidLink(cast(void**)&vte_terminal_dup_termprop_uuid_by_id, "vte_terminal_dup_termprop_uuid_by_id", libs);
   gidLink(cast(void**)&vte_terminal_event_check_gregex_simple, "vte_terminal_event_check_gregex_simple", libs);
   gidLink(cast(void**)&vte_terminal_event_check_regex_array, "vte_terminal_event_check_regex_array", libs);
   gidLink(cast(void**)&vte_terminal_event_check_regex_simple, "vte_terminal_event_check_regex_simple", libs);
@@ -819,8 +1040,6 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_get_column_count, "vte_terminal_get_column_count", libs);
   gidLink(cast(void**)&vte_terminal_get_context_menu, "vte_terminal_get_context_menu", libs);
   gidLink(cast(void**)&vte_terminal_get_context_menu_model, "vte_terminal_get_context_menu_model", libs);
-  gidLink(cast(void**)&vte_terminal_get_current_container_name, "vte_terminal_get_current_container_name", libs);
-  gidLink(cast(void**)&vte_terminal_get_current_container_runtime, "vte_terminal_get_current_container_runtime", libs);
   gidLink(cast(void**)&vte_terminal_get_current_directory_uri, "vte_terminal_get_current_directory_uri", libs);
   gidLink(cast(void**)&vte_terminal_get_current_file_uri, "vte_terminal_get_current_file_uri", libs);
   gidLink(cast(void**)&vte_terminal_get_cursor_blink_mode, "vte_terminal_get_cursor_blink_mode", libs);
@@ -829,6 +1048,7 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_get_enable_a11y, "vte_terminal_get_enable_a11y", libs);
   gidLink(cast(void**)&vte_terminal_get_enable_bidi, "vte_terminal_get_enable_bidi", libs);
   gidLink(cast(void**)&vte_terminal_get_enable_fallback_scrolling, "vte_terminal_get_enable_fallback_scrolling", libs);
+  gidLink(cast(void**)&vte_terminal_get_enable_legacy_osc777, "vte_terminal_get_enable_legacy_osc777", libs);
   gidLink(cast(void**)&vte_terminal_get_enable_shaping, "vte_terminal_get_enable_shaping", libs);
   gidLink(cast(void**)&vte_terminal_get_enable_sixel, "vte_terminal_get_enable_sixel", libs);
   gidLink(cast(void**)&vte_terminal_get_encoding, "vte_terminal_get_encoding", libs);
@@ -848,6 +1068,26 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_get_scroll_on_output, "vte_terminal_get_scroll_on_output", libs);
   gidLink(cast(void**)&vte_terminal_get_scroll_unit_is_pixels, "vte_terminal_get_scroll_unit_is_pixels", libs);
   gidLink(cast(void**)&vte_terminal_get_scrollback_lines, "vte_terminal_get_scrollback_lines", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_bool, "vte_terminal_get_termprop_bool", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_bool_by_id, "vte_terminal_get_termprop_bool_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_data, "vte_terminal_get_termprop_data", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_data_by_id, "vte_terminal_get_termprop_data_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_double, "vte_terminal_get_termprop_double", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_double_by_id, "vte_terminal_get_termprop_double_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_enum, "vte_terminal_get_termprop_enum", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_enum_by_id, "vte_terminal_get_termprop_enum_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_flags, "vte_terminal_get_termprop_flags", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_flags_by_id, "vte_terminal_get_termprop_flags_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_int, "vte_terminal_get_termprop_int", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_int_by_id, "vte_terminal_get_termprop_int_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_rgba, "vte_terminal_get_termprop_rgba", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_rgba_by_id, "vte_terminal_get_termprop_rgba_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_string, "vte_terminal_get_termprop_string", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_string_by_id, "vte_terminal_get_termprop_string_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_uint, "vte_terminal_get_termprop_uint", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_uint_by_id, "vte_terminal_get_termprop_uint_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_value, "vte_terminal_get_termprop_value", libs);
+  gidLink(cast(void**)&vte_terminal_get_termprop_value_by_id, "vte_terminal_get_termprop_value_by_id", libs);
   gidLink(cast(void**)&vte_terminal_get_text, "vte_terminal_get_text", libs);
   gidLink(cast(void**)&vte_terminal_get_text_blink_mode, "vte_terminal_get_text_blink_mode", libs);
   gidLink(cast(void**)&vte_terminal_get_text_format, "vte_terminal_get_text_format", libs);
@@ -876,7 +1116,19 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_paste_primary, "vte_terminal_paste_primary", libs);
   gidLink(cast(void**)&vte_terminal_paste_text, "vte_terminal_paste_text", libs);
   gidLink(cast(void**)&vte_terminal_pty_new_sync, "vte_terminal_pty_new_sync", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_data_bytes, "vte_terminal_ref_termprop_data_bytes", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_data_bytes_by_id, "vte_terminal_ref_termprop_data_bytes_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_image_pixbuf, "vte_terminal_ref_termprop_image_pixbuf", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_image_pixbuf_by_id, "vte_terminal_ref_termprop_image_pixbuf_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_image_surface, "vte_terminal_ref_termprop_image_surface", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_image_surface_by_id, "vte_terminal_ref_termprop_image_surface_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_uri, "vte_terminal_ref_termprop_uri", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_uri_by_id, "vte_terminal_ref_termprop_uri_by_id", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_variant, "vte_terminal_ref_termprop_variant", libs);
+  gidLink(cast(void**)&vte_terminal_ref_termprop_variant_by_id, "vte_terminal_ref_termprop_variant_by_id", libs);
   gidLink(cast(void**)&vte_terminal_reset, "vte_terminal_reset", libs);
+  gidLink(cast(void**)&vte_terminal_reset_termprop, "vte_terminal_reset_termprop", libs);
+  gidLink(cast(void**)&vte_terminal_reset_termprop_by_id, "vte_terminal_reset_termprop_by_id", libs);
   gidLink(cast(void**)&vte_terminal_search_find_next, "vte_terminal_search_find_next", libs);
   gidLink(cast(void**)&vte_terminal_search_find_previous, "vte_terminal_search_find_previous", libs);
   gidLink(cast(void**)&vte_terminal_search_get_gregex, "vte_terminal_search_get_gregex", libs);
@@ -912,6 +1164,7 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_set_enable_a11y, "vte_terminal_set_enable_a11y", libs);
   gidLink(cast(void**)&vte_terminal_set_enable_bidi, "vte_terminal_set_enable_bidi", libs);
   gidLink(cast(void**)&vte_terminal_set_enable_fallback_scrolling, "vte_terminal_set_enable_fallback_scrolling", libs);
+  gidLink(cast(void**)&vte_terminal_set_enable_legacy_osc777, "vte_terminal_set_enable_legacy_osc777", libs);
   gidLink(cast(void**)&vte_terminal_set_enable_shaping, "vte_terminal_set_enable_shaping", libs);
   gidLink(cast(void**)&vte_terminal_set_enable_sixel, "vte_terminal_set_enable_sixel", libs);
   gidLink(cast(void**)&vte_terminal_set_encoding, "vte_terminal_set_encoding", libs);
@@ -929,6 +1182,7 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_set_scroll_unit_is_pixels, "vte_terminal_set_scroll_unit_is_pixels", libs);
   gidLink(cast(void**)&vte_terminal_set_scrollback_lines, "vte_terminal_set_scrollback_lines", libs);
   gidLink(cast(void**)&vte_terminal_set_size, "vte_terminal_set_size", libs);
+  gidLink(cast(void**)&vte_terminal_set_suppress_legacy_signals, "vte_terminal_set_suppress_legacy_signals", libs);
   gidLink(cast(void**)&vte_terminal_set_text_blink_mode, "vte_terminal_set_text_blink_mode", libs);
   gidLink(cast(void**)&vte_terminal_set_word_char_exceptions, "vte_terminal_set_word_char_exceptions", libs);
   gidLink(cast(void**)&vte_terminal_set_xalign, "vte_terminal_set_xalign", libs);
@@ -942,8 +1196,19 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_watch_child, "vte_terminal_watch_child", libs);
   gidLink(cast(void**)&vte_terminal_write_contents_sync, "vte_terminal_write_contents_sync", libs);
 
+  // Uuid
+  gidLink(cast(void**)&vte_uuid_get_type, "vte_uuid_get_type", libs);
+  gidLink(cast(void**)&vte_uuid_new_from_string, "vte_uuid_new_from_string", libs);
+  gidLink(cast(void**)&vte_uuid_new_v4, "vte_uuid_new_v4", libs);
+  gidLink(cast(void**)&vte_uuid_dup, "vte_uuid_dup", libs);
+  gidLink(cast(void**)&vte_uuid_equal, "vte_uuid_equal", libs);
+  gidLink(cast(void**)&vte_uuid_free, "vte_uuid_free", libs);
+  gidLink(cast(void**)&vte_uuid_free_to_string, "vte_uuid_free_to_string", libs);
+  gidLink(cast(void**)&vte_uuid_new_v5, "vte_uuid_new_v5", libs);
+  gidLink(cast(void**)&vte_uuid_to_string, "vte_uuid_to_string", libs);
+  gidLink(cast(void**)&vte_uuid_validate_string, "vte_uuid_validate_string", libs);
+
   // global
-  gidLink(cast(void**)&vte_event_context_get_type, "vte_event_context_get_type", libs);
   gidLink(cast(void**)&vte_get_encoding_supported, "vte_get_encoding_supported", libs);
   gidLink(cast(void**)&vte_get_encodings, "vte_get_encodings", libs);
   gidLink(cast(void**)&vte_get_feature_flags, "vte_get_feature_flags", libs);
@@ -951,7 +1216,13 @@ shared static this()
   gidLink(cast(void**)&vte_get_major_version, "vte_get_major_version", libs);
   gidLink(cast(void**)&vte_get_micro_version, "vte_get_micro_version", libs);
   gidLink(cast(void**)&vte_get_minor_version, "vte_get_minor_version", libs);
+  gidLink(cast(void**)&vte_get_termprops, "vte_get_termprops", libs);
+  gidLink(cast(void**)&vte_get_test_flags, "vte_get_test_flags", libs);
   gidLink(cast(void**)&vte_get_user_shell, "vte_get_user_shell", libs);
+  gidLink(cast(void**)&vte_install_termprop, "vte_install_termprop", libs);
+  gidLink(cast(void**)&vte_install_termprop_alias, "vte_install_termprop_alias", libs);
+  gidLink(cast(void**)&vte_query_termprop, "vte_query_termprop", libs);
+  gidLink(cast(void**)&vte_query_termprop_by_id, "vte_query_termprop_by_id", libs);
   gidLink(cast(void**)&vte_set_test_flags, "vte_set_test_flags", libs);
 
   // PtyError

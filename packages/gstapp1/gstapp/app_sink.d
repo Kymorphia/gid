@@ -13,6 +13,7 @@ import gst.sample;
 import gst.types;
 import gst.urihandler;
 import gst.urihandler_mixin;
+import gstapp.app_sink_simple_callbacks;
 import gstapp.c.functions;
 import gstapp.c.types;
 import gstapp.types;
@@ -36,7 +37,7 @@ import gstbase.base_sink;
     Appsink will internally use a queue to collect buffers from the streaming
     thread. If the application is not pulling samples fast enough, this queue
     will consume a lot of memory over time. The "max-buffers", "max-time" and "max-bytes"
-    properties can be used to limit the queue size. The "drop" property controls whether the
+    properties can be used to limit the queue size. The "leaky-type" property controls whether the
     streaming thread blocks or if older buffers are dropped when the maximum
     queue size is reached. Note that blocking the streaming thread can negatively
     affect real-time performance and should be avoided.
@@ -117,16 +118,63 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     setCaps(propval);
   }
 
-  /** */
+  /**
+      Get `currentLevelBuffers` property.
+      Returns: The number of currently queued buffers inside appsink.
+  */
+  @property ulong currentLevelBuffers() nothrow
+  {
+    return getCurrentLevelBuffers();
+  }
+
+  /**
+      Get `currentLevelBytes` property.
+      Returns: The number of currently queued bytes inside appsink.
+  */
+  @property ulong currentLevelBytes() nothrow
+  {
+    return getCurrentLevelBytes();
+  }
+
+  /**
+      Get `currentLevelTime` property.
+      Returns: The amount of currently queued time inside appsink.
+  */
+  @property ulong currentLevelTime() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-time");
+  }
+
+  /**
+      Get `drop` property.
+      Returns: Drop old buffers when the buffer queue is filled.
+  
+      Deprecated: Use "leaky-type" property instead.
+  */
   @property bool drop() nothrow
   {
     return getDrop();
   }
 
-  /** */
+  /**
+      Set `drop` property.
+      Params:
+        propval = Drop old buffers when the buffer queue is filled.
+  
+      Deprecated: Use "leaky-type" property instead.
+  */
   @property void drop(bool propval) nothrow
   {
     setDrop(propval);
+  }
+
+  /**
+      Get `dropped` property.
+      Returns: Number of buffers that were dropped.
+  */
+  @property ulong dropped() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("dropped");
   }
 
   /** */
@@ -144,7 +192,41 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   /** */
   @property bool eos() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(bool)("eos");
+    return isEos();
+  }
+
+  /**
+      Get `in_` property.
+      Returns: Number of input buffers that were queued.
+  */
+  @property ulong in_() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("in");
+  }
+
+  /**
+      Get `leakyType` property.
+      Returns: When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsink
+        will drop any buffers that are pushed into it once its internal queue is
+        full. The selected type defines whether to drop the oldest or new
+        buffers.
+  */
+  @property gstapp.types.AppLeakyType leakyType() nothrow
+  {
+    return getLeakyType();
+  }
+
+  /**
+      Set `leakyType` property.
+      Params:
+        propval = When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsink
+          will drop any buffers that are pushed into it once its internal queue is
+          full. The selected type defines whether to drop the oldest or new
+          buffers.
+  */
+  @property void leakyType(gstapp.types.AppLeakyType propval) nothrow
+  {
+    setLeakyType(propval);
   }
 
   /**
@@ -205,6 +287,34 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   }
 
   /**
+      Get `out_` property.
+      Returns: Number of output buffers that were dequeued.
+  */
+  @property ulong out_() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(ulong)("out");
+  }
+
+  /**
+      Get `silent` property.
+      Returns: Don't emit notify for input, output and dropped buffers.
+  */
+  @property bool silent() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("silent");
+  }
+
+  /**
+      Set `silent` property.
+      Params:
+        propval = Don't emit notify for input, output and dropped buffers.
+  */
+  @property void silent(bool propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("silent", propval);
+  }
+
+  /**
       Get `waitOnEos` property.
       Returns: Wait for all buffers to be processed after receiving an EOS.
         
@@ -244,7 +354,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
 
   /**
       Get the configured caps on appsink.
-      Returns: the #GstCaps accepted by the sink. gst_caps_unref() after usage.
+      Returns: the #GstCaps accepted by the sink. [gst.caps.Caps.unref] after usage.
   */
   gst.caps.Caps getCaps() nothrow
   {
@@ -255,10 +365,45 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   }
 
   /**
+      Get the number of currently queued buffers inside appsink.
+      Returns: The number of currently queued buffers.
+  */
+  ulong getCurrentLevelBuffers() nothrow
+  {
+    ulong _retval;
+    _retval = gst_app_sink_get_current_level_buffers(cast(GstAppSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the number of currently queued bytes inside appsink.
+      Returns: The number of currently queued bytes.
+  */
+  ulong getCurrentLevelBytes() nothrow
+  {
+    ulong _retval;
+    _retval = gst_app_sink_get_current_level_bytes(cast(GstAppSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the amount of currently queued time inside appsink.
+      Returns: The amount of currently queued time.
+  */
+  gst.types.ClockTime getCurrentLevelTime() nothrow
+  {
+    gst.types.ClockTime _retval;
+    _retval = gst_app_sink_get_current_level_time(cast(GstAppSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Check if appsink will drop old buffers when the maximum amount of queued
       data is reached (meaning max buffers, time or bytes limit, whichever is hit first).
       Returns: true if appsink is dropping old buffers when the queue is
         filled.
+  
+      Deprecated: Use [gstapp.app_src.AppSrc.getLeakyType] instead.
   */
   bool getDrop() nothrow
   {
@@ -276,6 +421,19 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   {
     bool _retval;
     _retval = cast(bool)gst_app_sink_get_emit_signals(cast(GstAppSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the currently set #GstAppLeakyType. See [gstapp.app_sink.AppSink.setLeakyType]
+      for more details.
+      Returns: The currently set #GstAppLeakyType.
+  */
+  gstapp.types.AppLeakyType getLeakyType() nothrow
+  {
+    GstAppLeakyType _cretval;
+    _cretval = gst_app_sink_get_leaky_type(cast(GstAppSink*)this._cPtr);
+    gstapp.types.AppLeakyType _retval = cast(gstapp.types.AppLeakyType)_cretval;
     return _retval;
   }
 
@@ -341,6 +499,37 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   }
 
   /**
+      This function blocks until a sample or an event becomes available or the appsink
+      element is set to the READY/NULL state.
+      
+      This function will only return samples when the appsink is in the PLAYING
+      state. All rendered buffers and events will be put in a queue so that the application
+      can pull them at its own rate. Note that when the application does not
+      pull samples fast enough, the queued buffers could consume a lot of memory,
+      especially when dealing with raw video frames.
+      Events can be pulled when the appsink is in the READY, PAUSED or PLAYING state.
+      
+      This function will only pull serialized events, excluding
+      the EOS event for which this functions returns
+      null. Use [gstapp.app_sink.AppSink.isEos] to check for the EOS condition.
+      
+      This method is a variant of [gstapp.app_sink.AppSink.pullSample] that can be used
+      to handle incoming events events as well as samples.
+      
+      Note that future releases may extend this API to return other object types
+      so make sure that your code is checking for the actual type it is handling.
+      Returns: a #GstSample, or a #GstEvent or NULL when the appsink is stopped or EOS.
+                 Call [gst.mini_object.MiniObject.unref] after usage.
+  */
+  gst.mini_object.MiniObject pullObject() nothrow
+  {
+    GstMiniObject* _cretval;
+    _cretval = gst_app_sink_pull_object(cast(GstAppSink*)this._cPtr);
+    auto _retval = _cretval ? new gst.mini_object.MiniObject(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Get the last preroll sample in appsink. This was the sample that caused the
       appsink to preroll in the PAUSED state.
       
@@ -360,7 +549,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       This function blocks until a preroll sample or EOS is received or the appsink
       element is set to the READY/NULL state.
       Returns: a #GstSample or NULL when the appsink is stopped or EOS.
-                 Call gst_sample_unref() after usage.
+                 Call [gst.sample.Sample.unref] after usage.
   */
   gst.sample.Sample pullPreroll() nothrow
   {
@@ -383,7 +572,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       If an EOS event was received before any buffers, this function returns
       null. Use gst_app_sink_is_eos () to check for the EOS condition.
       Returns: a #GstSample or NULL when the appsink is stopped or EOS.
-                 Call gst_sample_unref() after usage.
+                 Call [gst.sample.Sample.unref] after usage.
   */
   gst.sample.Sample pullSample() nothrow
   {
@@ -427,6 +616,8 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   
       Params:
         drop = the new state
+  
+      Deprecated: Use [gstapp.app_src.AppSrc.getLeakyType] instead.
   */
   void setDrop(bool drop) nothrow
   {
@@ -444,6 +635,20 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   void setEmitSignals(bool emit) nothrow
   {
     gst_app_sink_set_emit_signals(cast(GstAppSink*)this._cPtr, emit);
+  }
+
+  /**
+      When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsink
+      will drop any buffers that are pushed into it once its internal queue is
+      full. The selected type defines whether to drop the oldest or new
+      buffers.
+  
+      Params:
+        leaky = the #GstAppLeakyType
+  */
+  void setLeakyType(gstapp.types.AppLeakyType leaky) nothrow
+  {
+    gst_app_sink_set_leaky_type(cast(GstAppSink*)this._cPtr, leaky);
   }
 
   /**
@@ -489,6 +694,29 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   }
 
   /**
+      Set callbacks which will be executed for each new preroll, new sample and eos.
+      This is an alternative to using the signals, it has lower overhead and is thus
+      less expensive, but also less flexible.
+      
+      If callbacks are installed, no signals will be emitted for performance
+      reasons.
+      
+      Once cb is set on an #GstAppSink it is not possible anymore to change any of
+      the callbacks inside it.
+      
+      Note that [gstapp.app_sink.AppSink.setCallbacks] and
+      [gstapp.app_sink.AppSink.setSimpleCallbacks] are mutually exclusive and setting one
+      will unset the other.
+  
+      Params:
+        cb = the callbacks
+  */
+  void setSimpleCallbacks(gstapp.app_sink_simple_callbacks.AppSinkSimpleCallbacks cb = null) nothrow
+  {
+    gst_app_sink_set_simple_callbacks(cast(GstAppSink*)this._cPtr, cb ? cast(GstAppSinkSimpleCallbacks*)cb._cPtr(Yes.Dup) : null);
+  }
+
+  /**
       Instruct appsink to wait for all buffers to be consumed when an EOS is received.
   
       Params:
@@ -497,6 +725,40 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   void setWaitOnEos(bool wait) nothrow
   {
     gst_app_sink_set_wait_on_eos(cast(GstAppSink*)this._cPtr, wait);
+  }
+
+  /**
+      This function blocks until a sample or an event or EOS becomes available or the appsink
+      element is set to the READY/NULL state or the timeout expires.
+      
+      This function will only return samples when the appsink is in the PLAYING
+      state. All rendered buffers and events will be put in a queue so that the application
+      can pull them at its own rate. Note that when the application does not
+      pull samples fast enough, the queued buffers could consume a lot of memory,
+      especially when dealing with raw video frames.
+      Events can be pulled when the appsink is in the READY, PAUSED or PLAYING state.
+      
+      This function will only pull serialized events, excluding
+      the EOS event for which this functions returns
+      null. Use [gstapp.app_sink.AppSink.isEos] to check for the EOS condition.
+      
+      This method is a variant of [gstapp.app_sink.AppSink.tryPullSample] that can be used
+      to handle incoming events events as well as samples.
+      
+      Note that future releases may extend this API to return other object types
+      so make sure that your code is checking for the actual type it is handling.
+  
+      Params:
+        timeout = the maximum amount of time to wait for a sample
+      Returns: a #GstSample, or #GstEvent or NULL when the appsink is stopped or EOS or the timeout expires.
+        Call [gst.mini_object.MiniObject.unref] after usage.
+  */
+  gst.mini_object.MiniObject tryPullObject(gst.types.ClockTime timeout) nothrow
+  {
+    GstMiniObject* _cretval;
+    _cretval = gst_app_sink_try_pull_object(cast(GstAppSink*)this._cPtr, timeout);
+    auto _retval = _cretval ? new gst.mini_object.MiniObject(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
   }
 
   /**
@@ -523,7 +785,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         timeout = the maximum amount of time to wait for the preroll sample
       Returns: a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.
-                 Call gst_sample_unref() after usage.
+                 Call [gst.sample.Sample.unref] after usage.
   */
   gst.sample.Sample tryPullPreroll(gst.types.ClockTime timeout) nothrow
   {
@@ -550,7 +812,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         timeout = the maximum amount of time to wait for a sample
       Returns: a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.
-                 Call gst_sample_unref() after usage.
+                 Call [gst.sample.Sample.unref] after usage.
   */
   gst.sample.Sample tryPullSample(gst.types.ClockTime timeout) nothrow
   {
@@ -920,7 +1182,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         Note that when the application does not pull samples fast enough, the
         queued samples could consume a lot of memory, especially when dealing with
         raw video frames. It's possible to control the behaviour of the queue with
-        the "drop" and "max-buffers" / "max-bytes" / "max-time" set of properties.
+        the "leaky-type" and "max-buffers" / "max-bytes" / "max-time" set of properties.
         
         If an EOS event was received before any buffers, this function returns
         null. Use gst_app_sink_is_eos () to check for the EOS condition.
@@ -982,7 +1244,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         Note that when the application does not pull samples fast enough, the
         queued samples could consume a lot of memory, especially when dealing with
         raw video frames. It's possible to control the behaviour of the queue with
-        the "drop" and "max-buffers" / "max-bytes" / "max-time" set of properties.
+        the "leaky-type" and "max-buffers" / "max-bytes" / "max-time" set of properties.
         
         This function will only pull serialized events, excluding
         the EOS event for which this functions returns
@@ -1129,7 +1391,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         Note that when the application does not pull samples fast enough, the
         queued samples could consume a lot of memory, especially when dealing with
         raw video frames. It's possible to control the behaviour of the queue with
-        the "drop" and "max-buffers" / "max-bytes" / "max-time" set of properties.
+        the "leaky-type" and "max-buffers" / "max-bytes" / "max-time" set of properties.
         
         If an EOS event was received before any buffers or the timeout expires,
         this function returns null. Use gst_app_sink_is_eos () to check
@@ -1203,7 +1465,14 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
     return setProperty("caps", propval);
   }
 
-  /** */
+  /**
+      Set `drop` property.
+      Params:
+        propval = Drop old buffers when the buffer queue is filled.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use "leaky-type" property instead.
+  */
   T drop(bool propval) nothrow
   {
     return setProperty("drop", propval);
@@ -1213,6 +1482,20 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
   T emitSignals(bool propval) nothrow
   {
     return setProperty("emit-signals", propval);
+  }
+
+  /**
+      Set `leakyType` property.
+      Params:
+        propval = When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsink
+          will drop any buffers that are pushed into it once its internal queue is
+          full. The selected type defines whether to drop the oldest or new
+          buffers.
+      Returns: Builder instance for fluent chaining
+  */
+  T leakyType(gstapp.types.AppLeakyType propval) nothrow
+  {
+    return setProperty("leaky-type", propval);
   }
 
   /**
@@ -1246,6 +1529,17 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
   T maxTime(ulong propval) nothrow
   {
     return setProperty("max-time", propval);
+  }
+
+  /**
+      Set `silent` property.
+      Params:
+        propval = Don't emit notify for input, output and dropped buffers.
+      Returns: Builder instance for fluent chaining
+  */
+  T silent(bool propval) nothrow
+  {
+    return setProperty("silent", propval);
   }
 
   /**

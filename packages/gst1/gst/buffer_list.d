@@ -113,9 +113,9 @@ class BufferList : gobject.boxed.Boxed
   
       Params:
         idx = the index
-      Returns: the buffer at idx in group
-            or null when there is no buffer. The buffer remains valid as
-            long as list is valid and buffer is not removed from the list.
+      Returns: the buffer at idx in group.
+            The returned buffer remains valid as long as list is valid and
+            buffer is not removed from the list.
   */
   gst.buffer.Buffer get(uint idx) nothrow
   {
@@ -134,7 +134,7 @@ class BufferList : gobject.boxed.Boxed
       Params:
         idx = the index
       Returns: the buffer at idx in group.
-            The returned  buffer remains valid as long as list is valid and
+            The returned buffer remains valid as long as list is valid and
             the buffer is not removed from the list.
   */
   gst.buffer.Buffer getWritable(uint idx) nothrow
@@ -161,6 +161,18 @@ class BufferList : gobject.boxed.Boxed
   }
 
   /**
+      Tests if you can safely modify list. It is only safe to modify buffer list when
+      there is only one owner of the buffer list - ie, the object is writable.
+      Returns: 
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_buffer_list_is_writable(cast(const(GstBufferList)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Returns the number of buffers in list.
       Returns: the number of buffers in the buffer list
   */
@@ -168,6 +180,29 @@ class BufferList : gobject.boxed.Boxed
   {
     uint _retval;
     _retval = gst_buffer_list_length(cast(GstBufferList*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns a writable copy of list.
+      
+      If there is only one reference count on list, the caller must be the owner,
+      and so this function will return the buffer list object unchanged. If on the other
+      hand there is more than one reference on the object, a new buffer list object will
+      be returned. The caller's reference on list will be removed, and instead the
+      caller will own a reference to the returned object.
+      
+      In short, this function unrefs the buffer_list in the argument and refs the buffer list
+      that it returns. Don't access the argument after calling this function. See
+      also: [gst.buffer_list.BufferList.ref_].
+      Returns: a writable buffer list which may or may not be the
+            same as buffer list
+  */
+  gst.buffer_list.BufferList makeWritable() nothrow
+  {
+    GstBufferList* _cretval;
+    _cretval = gst_buffer_list_make_writable(cast(GstBufferList*)this._cPtr);
+    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -182,5 +217,50 @@ class BufferList : gobject.boxed.Boxed
   void remove(uint idx, uint length) nothrow
   {
     gst_buffer_list_remove(cast(GstBufferList*)this._cPtr, idx, length);
+  }
+
+  /**
+      Modifies a pointer to a #GstBufferList to point to a different
+      #GstBufferList. The modification is done atomically (so this is useful for
+      ensuring thread safety in some cases), and the reference counts are updated
+      appropriately (the old buffer list is unreffed, the new is reffed).
+      
+      Either new_list or the #GstBufferList pointed to by old_list may be null.
+  
+      Params:
+        oldList = pointer to a pointer to a
+              #GstBufferList to be replaced.
+        newList = pointer to a #GstBufferList that
+              will replace the buffer list pointed to by old_list.
+      Returns: true if new_list was different from old_list
+  */
+  static bool replace(ref gst.buffer_list.BufferList oldList, gst.buffer_list.BufferList newList = null) nothrow
+  {
+    bool _retval;
+    GstBufferList* _oldList = oldList ? cast(GstBufferList*)oldList._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_buffer_list_replace(&_oldList, newList ? cast(GstBufferList*)newList._cPtr(No.Dup) : null);
+    oldList = _oldList ? new gst.buffer_list.BufferList(cast(void*)_oldList, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Modifies a pointer to a #GstBufferList to point to a different
+      #GstBufferList. This function is similar to [gst.buffer_list.BufferList.replace] except
+      that it takes ownership of new_list.
+  
+      Params:
+        oldList = pointer to a pointer to a #GstBufferList
+              to be replaced.
+        newList = pointer to a #GstBufferList
+              that will replace the bufferlist pointed to by old_list.
+      Returns: true if new_list was different from old_list
+  */
+  static bool take(ref gst.buffer_list.BufferList oldList, gst.buffer_list.BufferList newList = null) nothrow
+  {
+    bool _retval;
+    GstBufferList* _oldList = oldList ? cast(GstBufferList*)oldList._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_buffer_list_take(&_oldList, newList ? cast(GstBufferList*)newList._cPtr(Yes.Dup) : null);
+    oldList = _oldList ? new gst.buffer_list.BufferList(cast(void*)_oldList, Yes.Take) : null;
+    return _retval;
   }
 }

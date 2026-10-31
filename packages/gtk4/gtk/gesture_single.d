@@ -11,8 +11,7 @@ import gtk.gesture;
 import gtk.types;
 
 /**
-    [gtk.gesture_single.GestureSingle] is a `GtkGestures` subclass optimized for singe-touch
-    and mouse gestures.
+    A [gtk.gesture.Gesture] subclass optimized for singe-touch and mouse gestures.
     
     Under interaction, these gestures stick to the first interacting sequence,
     which is accessible through [gtk.gesture_single.GestureSingle.getCurrentSequence]

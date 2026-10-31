@@ -43,6 +43,16 @@ import gtk.types;
     
     If you need to add a group programmatically, use
     [gtk.shortcuts_section.ShortcutsSection.addGroup].
+    
+    # Shortcuts and Gestures
+    
+    Pan gestures allow to navigate between sections.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.shortcuts_section.ShortcutsSection.changeCurrentPage]
+
+    Deprecated: This widget will be removed in GTK 5
 */
 class ShortcutsSection : gtk.box.Box
 {
@@ -88,6 +98,8 @@ class ShortcutsSection : gtk.box.Box
         This property can be used to influence how the groups in this
         section are distributed across pages and columns. The default
         value of 15 should work in most cases.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property uint maxHeight() nothrow
   {
@@ -102,6 +114,8 @@ class ShortcutsSection : gtk.box.Box
           This property can be used to influence how the groups in this
           section are distributed across pages and columns. The default
           value of 15 should work in most cases.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void maxHeight(uint propval) nothrow
   {
@@ -115,6 +129,8 @@ class ShortcutsSection : gtk.box.Box
         
         Setting the [gtk.shortcuts_window.ShortcutsWindow.sectionName] property
         to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string sectionName() nothrow
   {
@@ -129,6 +145,8 @@ class ShortcutsSection : gtk.box.Box
           
           Setting the [gtk.shortcuts_window.ShortcutsWindow.sectionName] property
           to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void sectionName(string propval) nothrow
   {
@@ -142,6 +160,8 @@ class ShortcutsSection : gtk.box.Box
         
         If there is only one section, you don't need to set a title,
         since the section selector will not be shown in this case.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string title() nothrow
   {
@@ -156,6 +176,8 @@ class ShortcutsSection : gtk.box.Box
           
           If there is only one section, you don't need to set a title,
           since the section selector will not be shown in this case.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void title(string propval) nothrow
   {
@@ -171,6 +193,8 @@ class ShortcutsSection : gtk.box.Box
         Applications are expected to use the
         [gtk.shortcuts_window.ShortcutsWindow.viewName] property
         for this purpose.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property string viewName() nothrow
   {
@@ -187,6 +211,8 @@ class ShortcutsSection : gtk.box.Box
           Applications are expected to use the
           [gtk.shortcuts_window.ShortcutsWindow.viewName] property
           for this purpose.
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   @property void viewName(string propval) nothrow
   {
@@ -204,6 +230,8 @@ class ShortcutsSection : gtk.box.Box
   
       Params:
         group = the [gtk.shortcuts_group.ShortcutsGroup] to add
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   void addGroup(gtk.shortcuts_group.ShortcutsGroup group) nothrow
   {
@@ -213,20 +241,26 @@ class ShortcutsSection : gtk.box.Box
   /**
       Connect to `ChangeCurrentPage` signal.
   
-      
+      Emitted when we change the current page.
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>PgUp</kbd>, <kbd>PgUp</kbd>,
+        <kbd>Ctrl</kbd>+<kbd>PgDn</kbd>, <kbd>PgDn</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          `bool callback(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection)`
+          `bool callback(int offset, gtk.shortcuts_section.ShortcutsSection shortcutsSection)`
   
-          `object`  (optional)
+          `offset` the offset (optional)
   
           `shortcutsSection` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the page was changed
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   gulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -279,6 +313,8 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           section are distributed across pages and columns. The default
           value of 15 should work in most cases.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T maxHeight(uint propval) nothrow
   {
@@ -294,6 +330,8 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           Setting the [gtk.shortcuts_window.ShortcutsWindow.sectionName] property
           to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T sectionName(string propval) nothrow
   {
@@ -309,6 +347,8 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           If there is only one section, you don't need to set a title,
           since the section selector will not be shown in this case.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T title(string propval) nothrow
   {
@@ -326,6 +366,8 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           [gtk.shortcuts_window.ShortcutsWindow.viewName] property
           for this purpose.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This widget will be removed in GTK 5
   */
   T viewName(string propval) nothrow
   {

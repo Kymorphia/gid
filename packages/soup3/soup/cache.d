@@ -93,7 +93,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Will remove all entries in the cache plus all the cache files.
       
-      This is not thread safe and must be called only from the thread that created the #SoupCache
+      This is not thread safe and must be called only from the thread that created the [soup.cache.Cache]
   */
   void clear() nothrow
   {
@@ -109,7 +109,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       You must call this before exiting if you want your cache data to
       persist between sessions.
       
-      This is not thread safe and must be called only from the thread that created the #SoupCache
+      This is not thread safe and must be called only from the thread that created the [soup.cache.Cache]
   */
   void dump() nothrow
   {
@@ -144,7 +144,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Loads the contents of cache's index into memory.
       
-      This is not thread safe and must be called only from the thread that created the #SoupCache
+      This is not thread safe and must be called only from the thread that created the [soup.cache.Cache]
   */
   void load() nothrow
   {

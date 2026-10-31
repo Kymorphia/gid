@@ -28,6 +28,10 @@ class StrokeNode : gsk.render_node.RenderNode
       the given path using the attributes defined in stroke.
       
       The area is filled with child.
+      
+      GSK aims to follow the SVG semantics for stroking paths.
+      E.g. zero-length contours will get round or square line
+      caps drawn, regardless whether they are closed or not.
   
       Params:
         child = The node to stroke the area with

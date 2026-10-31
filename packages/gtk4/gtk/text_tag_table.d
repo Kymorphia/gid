@@ -14,7 +14,7 @@ import gtk.text_tag;
 import gtk.types;
 
 /**
-    The collection of tags in a [gtk.text_buffer.TextBuffer]
+    Collects the tags in a [gtk.text_buffer.TextBuffer].
     
     You may wish to begin by reading the
     [text widget conceptual overview](section-text-widget.html),

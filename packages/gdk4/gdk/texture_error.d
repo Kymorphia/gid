@@ -13,7 +13,10 @@ struct TextureError
 {
   alias Enum = gdk.types.TextureError; ///
 
-  /** */
+  /**
+      Registers an error quark for [gdk.texture.Texture] errors.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

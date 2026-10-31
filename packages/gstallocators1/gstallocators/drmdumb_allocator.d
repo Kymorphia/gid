@@ -113,7 +113,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
         width = padded width for this allocation
         height = padded height for this allocation
         outPitch = the pitch as returned by the driver
-      Returns: a new DRM Dumb #GstMemory. Use gst_memory_unref()
+      Returns: a new DRM Dumb #GstMemory. Use [gst.memory.Memory.unref]
           to release the memory after usage.
   */
   gst.memory.Memory alloc(uint drmFourcc, uint width, uint height, out uint outPitch) nothrow

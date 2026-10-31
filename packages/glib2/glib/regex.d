@@ -12,58 +12,133 @@ import glib.types;
 import gobject.boxed;
 
 /**
-    A [glib.regex.Regex] is the "compiled" form of a regular expression pattern.
+    A [glib.regex.Regex] is a compiled form of a regular expression.
+    
+    After instantiating a [glib.regex.Regex], you can use its methods to find matches
+    in a string, replace matches within a string, or split the string at matches.
     
     [glib.regex.Regex] implements regular expression pattern matching using syntax and
-    semantics similar to Perl regular expression. See the
-    [PCRE documentation](man:pcrepattern(3)) for the syntax definition.
+    semantics (such as character classes, quantifiers, and capture groups)
+    similar to Perl regular expression. See the
+    [PCRE documentation](man:pcre2pattern(3)) for details.
     
-    Some functions accept a @start_position argument, setting it differs
-    from just passing over a shortened string and setting [glib.types.RegexMatchFlags.Notbol]
-    in the case of a pattern that begins with any kind of lookbehind assertion.
-    For example, consider the pattern "\Biss\B" which finds occurrences of "iss"
-    in the middle of words. ("\B" matches only if the current position in the
-    subject is not a word boundary.) When applied to the string "Mississipi"
-    from the fourth byte, namely "issipi", it does not match, because "\B" is
-    always false at the start of the subject, which is deemed to be a word
-    boundary. However, if the entire string is passed , but with
-    @start_position set to 4, it finds the second occurrence of "iss" because
-    it is able to look behind the starting point to discover that it is
-    preceded by a letter.
+    A typical scenario for regex pattern matching is to check if a string
+    matches a pattern. The following statements implement this scenario.
     
-    Note that, unless you set the [glib.types.RegexCompileFlags.Raw] flag, all the strings passed
-    to these functions must be encoded in UTF-8. The lengths and the positions
-    inside the strings are in bytes and not in characters, so, for instance,
-    "\xc3\xa0" (i.e. "à") is two bytes long but it is treated as a
-    single character. If you set [glib.types.RegexCompileFlags.Raw] the strings can be non-valid
-    UTF-8 strings and a byte is treated as a character, so "\xc3\xa0" is two
-    bytes and two characters long.
+    ``` { .c }
+    const char *regex_pattern = ".*GLib.*";
+    const char *string_to_search = "You will love the GLib implementation of regex";
+    g_autoptr(GMatchInfo) match_info = NULL;
+    g_autoptr(GRegex) regex = NULL;
     
-    When matching a pattern, "\n" matches only against a "\n" character in
-    the string, and "\r" matches only a "\r" character. To match any newline
-    sequence use "\R". This particular group matches either the two-character
-    sequence CR + LF ("\r\n"), or one of the single characters LF (linefeed,
-    U+000A, "\n"), VT vertical tab, U+000B, "\v"), FF (formfeed, U+000C, "\f"),
-    CR (carriage return, U+000D, "\r"), NEL (next line, U+0085), LS (line
-    separator, U+2028), or PS (paragraph separator, U+2029).
+    regex = g_regex_new (regex_pattern, G_REGEX_DEFAULT, G_REGEX_MATCH_DEFAULT, NULL);
+    g_assert (regex != NULL);
+    
+    if (g_regex_match (regex, string_to_search, G_REGEX_MATCH_DEFAULT, &match_info))
+      {
+        int start_pos, end_pos;
+        g_match_info_fetch_pos (match_info, 0, &start_pos, &end_pos);
+        g_print ("Match successful! Overall pattern matches bytes %d to %d\n", start_pos, end_pos);
+      }
+    else
+      {
+        g_print ("No match!\n");
+      }
+    ```
+    
+    The constructor for [glib.regex.Regex] includes two sets of bitmapped flags:
+    
+    * [glib.types.RegexCompileFlags]—These flags
+    control how GLib compiles the regex. There are options for case
+    sensitivity, multiline, ignoring whitespace, etc.
+    * [glib.types.RegexMatchFlags]—These flags control
+    [glib.regex.Regex]’s matching behavior, such as anchoring and customizing definitions
+    for newline characters.
+    
+    Some regex patterns include backslash assertions, such as `\d` (digit) or
+    `\D` (non-digit). The regex pattern must escape those backslashes. For
+    example, the pattern `"\\d\\D"` matches a digit followed by a non-digit.
+    
+    GLib’s implementation of pattern matching includes a `start_position`
+    argument for some of the match, replace, and split methods. Specifying
+    a start position provides flexibility when you want to ignore the first
+    _n_ characters of a string, but want to incorporate backslash assertions
+    at character _n_ - 1. For example, a database field contains inconsistent
+    spelling for a job title: `healthcare provider` and `health-care provider`.
+    The database manager wants to make the spelling consistent by adding a
+    hyphen when it is missing. The following regex pattern tests for the string
+    `care` preceded by a non-word boundary character (instead of a hyphen)
+    and followed by a space.
+    
+    ``` { .c }
+    const char *regex_pattern = "\\Bcare\\s";
+    ```
+    
+    An efficient way to match with this pattern is to start examining at
+    `start_position` 6 in the string `healthcare` or `health-care`.
+    
+    ``` { .c }
+    const char *regex_pattern = "\\Bcare\\s";
+    const char *string_to_search = "healthcare provider";
+    g_autoptr(GMatchInfo) match_info = NULL;
+    g_autoptr(GRegex) regex = NULL;
+    
+    regex = g_regex_new (
+      regex_pattern,
+      G_REGEX_DEFAULT,
+      G_REGEX_MATCH_DEFAULT,
+      NULL);
+    g_assert (regex != NULL);
+    
+    g_regex_match_full (
+      regex,
+      string_to_search,
+      -1,
+      6, // position of 'c' in the test string.
+      G_REGEX_MATCH_DEFAULT,
+      &match_info,
+      NULL);
+    ```
+    
+    The method [glib.regex.Regex.matchFull] (and other methods implementing
+    `start_pos`) allow for lookback before the start position to determine if
+    the previous character satisfies an assertion.
+    
+    Unless you set the `flags@GLib.RegexCompileFlags.RAW` as one of
+    the [glib.types.RegexCompileFlags], all the strings passed to [glib.regex.Regex] methods must
+    be encoded in UTF-8. The lengths and the positions inside the strings are
+    in bytes and not in characters, so, for instance, `\xc3\xa0` (i.e., `à`)
+    is two bytes long but it is treated as a single character. If you set
+    [glib.types.RegexCompileFlags.Raw], the strings can be non-valid UTF-8 strings and a byte is
+    treated as a character, so `\xc3\xa0` is two bytes and two characters long.
+    
+    Regarding line endings, `\n` matches a `\n` character, and `\r` matches
+    a `\r` character. More generally, `\R` matches all typical line endings:
+    CR + LF (`\r\n`), LF (linefeed, U+000A, `\n`), VT (vertical tab, U+000B,
+    `\v`), FF (formfeed, U+000C, `\f`), CR (carriage return, U+000D, `\r`),
+    NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph
+    separator, U+2029).
     
     The behaviour of the dot, circumflex, and dollar metacharacters are
-    affected by newline characters, the default is to recognize any newline
-    character (the same characters recognized by "\R"). This can be changed
-    with [glib.types.RegexCompileFlags.NewlineCr], [glib.types.RegexCompileFlags.NewlineLf] and [glib.types.RegexCompileFlags.NewlineCrlf]
-    compile options, and with [glib.types.RegexMatchFlags.NewlineAny],
-    [glib.types.RegexMatchFlags.NewlineCr], [glib.types.RegexMatchFlags.NewlineLf] and
-    [glib.types.RegexMatchFlags.NewlineCrlf] match options. These settings are also
-    relevant when compiling a pattern if [glib.types.RegexCompileFlags.Extended] is set, and an
-    unescaped "#" outside a character class is encountered. This indicates
-    a comment that lasts until after the next newline.
+    affected by newline characters. By default, [glib.regex.Regex] matches any newline
+    character matched by `\R`. You can limit the matched newline characters by
+    specifying the `flags@GLib.RegexMatchFlags.NEWLINE_CR`,
+    `flags@GLib.RegexMatchFlags.NEWLINE_LF`, and
+    `flags@GLib.RegexMatchFlags.NEWLINE_CRLF` compile options, and
+    with `flags@GLib.RegexMatchFlags.NEWLINE_ANY`,
+    `flags@GLib.RegexMatchFlags.NEWLINE_CR`,
+    `flags@GLib.RegexMatchFlags.NEWLINE_LF` and
+    `flags@GLib.RegexMatchFlags.NEWLINE_CRLF` match options.
+    These settings are also relevant when compiling a pattern if
+    `flags@GLib.RegexCompileFlags.EXTENDED` is set and an unescaped
+    `#` outside a character class is encountered. This indicates a comment
+    that lasts until after the next newline.
     
-    Creating and manipulating the same [glib.regex.Regex] structure from different
-    threads is not a problem as [glib.regex.Regex] does not modify its internal
-    state between creation and destruction, on the other hand [glib.match_info.MatchInfo]
-    is not threadsafe.
+    Because [glib.regex.Regex] does not modify its internal state between creation and
+    destruction, you can create and modify the same [glib.regex.Regex] instance from
+    different threads. In contrast, [glib.match_info.MatchInfo] is not thread safe.
     
-    The regular expressions low-level functionalities are obtained through
+    The regular expression low-level functionalities are obtained through
     the excellent [PCRE](http://www.pcre.org/) library written by Philip Hazel.
 */
 class Regex : gobject.boxed.Boxed
@@ -326,15 +401,15 @@ class Regex : gobject.boxed.Boxed
       Using the standard algorithm for regular expression matching only
       the longest match in the string is retrieved, it is not possible
       to obtain all the available matches. For instance matching
-      "<a> <b> <c>" against the pattern "<.*>"
-      you get "<a> <b> <c>".
+      `"<a> <b> <c>"` against the pattern `"<.*>"`
+      you get `"<a> <b> <c>"`.
       
       This function uses a different algorithm (called DFA, i.e. deterministic
       finite automaton), so it can retrieve all the possible matches, all
       starting at the same point in the string. For instance matching
-      "<a> <b> <c>" against the pattern "<.*>;"
-      you would obtain three matches: "<a> <b> <c>",
-      "<a> <b>" and "<a>".
+      `"<a> <b> <c>"` against the pattern `"<.*>"`
+      you would obtain three matches: `"<a> <b> <c>"`,
+      `"<a> <b>"` and `"<a>"`.
       
       The number of matched strings is retrieved using
       [glib.match_info.MatchInfo.getMatchCount]. To obtain the matched strings and
@@ -471,13 +546,13 @@ class Regex : gobject.boxed.Boxed
 
   /**
       Replaces all occurrences of the pattern in regex with the
-      replacement text. Backreferences of the form '\number' or
-      '\g<number>' in the replacement text are interpolated by the
-      number-th captured subexpression of the match, '\g<name>' refers
-      to the captured subexpression with the given name. '\0' refers
-      to the complete match, but '\0' followed by a number is the octal
-      representation of a character. To include a literal '\' in the
-      replacement, write '\\\\'.
+      replacement text. Backreferences of the form `\number` or
+      `\g<number>` in the replacement text are interpolated by the
+      number-th captured subexpression of the match, `\g<name>` refers
+      to the captured subexpression with the given name. `\0` refers
+      to the complete match, but `\0` followed by a number is the octal
+      representation of a character. To include a literal `\` in the
+      replacement, write `\\\\`.
       
       There are also escapes that changes the case of the following text:
       

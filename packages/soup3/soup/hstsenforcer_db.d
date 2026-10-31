@@ -15,7 +15,7 @@ import soup.types;
 /**
     Persistent HTTP Strict Transport Security enforcer.
     
-    #SoupHSTSEnforcerDB is a [soup.hstsenforcer.HSTSEnforcer] that uses a SQLite
+    [soup.hstsenforcer_db.HSTSEnforcerDB] is a [soup.hstsenforcer.HSTSEnforcer] that uses a SQLite
     database as a backend for persistency.
 */
 class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
@@ -65,13 +65,13 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
   }
 
   /**
-      Creates a #SoupHSTSEnforcerDB.
+      Creates a [soup.hstsenforcer_db.HSTSEnforcerDB].
       
       filename will be read in during the initialization of a
-      #SoupHSTSEnforcerDB, in order to create an initial set of HSTS
+      [soup.hstsenforcer_db.HSTSEnforcerDB], in order to create an initial set of HSTS
       policies. If the file doesn't exist, a new database will be created
       and initialized. Changes to the policies during the lifetime of a
-      #SoupHSTSEnforcerDB will be written to filename when
+      [soup.hstsenforcer_db.HSTSEnforcerDB] will be written to filename when
       [soup.hstsenforcer.HSTSEnforcer.changed] is emitted.
   
       Params:

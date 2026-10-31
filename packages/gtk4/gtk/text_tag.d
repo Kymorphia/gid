@@ -14,7 +14,7 @@ import pango.tab_array;
 import pango.types;
 
 /**
-    A tag that can be applied to text contained in a [gtk.text_buffer.TextBuffer].
+    Can be applied to text contained in a [gtk.text_buffer.TextBuffer].
     
     You may wish to begin by reading the
     [text widget conceptual overview](section-text-widget.html),
@@ -116,13 +116,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("allow-breaks", propval);
   }
 
-  /** */
+  /**
+      Get `allowBreaksSet` property.
+      Returns: Whether the `allow-breaks` property is set.
+  */
   @property bool allowBreaksSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-breaks-set");
   }
 
-  /** */
+  /**
+      Set `allowBreaksSet` property.
+      Params:
+        propval = Whether the `allow-breaks` property is set.
+  */
   @property void allowBreaksSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-breaks-set", propval);
@@ -159,13 +166,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("background-full-height", propval);
   }
 
-  /** */
+  /**
+      Get `backgroundFullHeightSet` property.
+      Returns: Whether the `background-full-height` property is set.
+  */
   @property bool backgroundFullHeightSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-full-height-set");
   }
 
-  /** */
+  /**
+      Set `backgroundFullHeightSet` property.
+      Params:
+        propval = Whether the `background-full-height` property is set.
+  */
   @property void backgroundFullHeightSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-full-height-set", propval);
@@ -190,13 +204,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("background-rgba", propval);
   }
 
-  /** */
+  /**
+      Get `backgroundSet` property.
+      Returns: Whether the `background` property is set.
+  */
   @property bool backgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
   }
 
-  /** */
+  /**
+      Set `backgroundSet` property.
+      Params:
+        propval = Whether the `background` property is set.
+  */
   @property void backgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-set", propval);
@@ -240,13 +261,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("editable", propval);
   }
 
-  /** */
+  /**
+      Get `editableSet` property.
+      Returns: Whether the `editable` property is set.
+  */
   @property bool editableSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("editable-set");
   }
 
-  /** */
+  /**
+      Set `editableSet` property.
+      Params:
+        propval = Whether the `editable` property is set.
+  */
   @property void editableSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("editable-set", propval);
@@ -277,13 +305,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("fallback", propval);
   }
 
-  /** */
+  /**
+      Get `fallbackSet` property.
+      Returns: Whether the `fallback` property is set.
+  */
   @property bool fallbackSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("fallback-set");
   }
 
-  /** */
+  /**
+      Set `fallbackSet` property.
+      Params:
+        propval = Whether the `fallback` property is set.
+  */
   @property void fallbackSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("fallback-set", propval);
@@ -308,13 +343,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(string)("family", propval);
   }
 
-  /** */
+  /**
+      Get `familySet` property.
+      Returns: Whether the `family` property is set.
+  */
   @property bool familySet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("family-set");
   }
 
-  /** */
+  /**
+      Set `familySet` property.
+      Params:
+        propval = Whether the `family` property is set.
+  */
   @property void familySet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("family-set", propval);
@@ -383,13 +425,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(string)("font-features", propval);
   }
 
-  /** */
+  /**
+      Get `fontFeaturesSet` property.
+      Returns: Whether the `font-features` property is set.
+  */
   @property bool fontFeaturesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("font-features-set");
   }
 
-  /** */
+  /**
+      Set `fontFeaturesSet` property.
+      Params:
+        propval = Whether the `font-features` property is set.
+  */
   @property void fontFeaturesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("font-features-set", propval);
@@ -424,13 +473,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("foreground-rgba", propval);
   }
 
-  /** */
+  /**
+      Get `foregroundSet` property.
+      Returns: Whether the `foreground` property is set.
+  */
   @property bool foregroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("foreground-set");
   }
 
-  /** */
+  /**
+      Set `foregroundSet` property.
+      Params:
+        propval = Whether the `foreground` property is set.
+  */
   @property void foregroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("foreground-set", propval);
@@ -463,13 +519,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("indent", propval);
   }
 
-  /** */
+  /**
+      Get `indentSet` property.
+      Returns: Whether the `indent` property is set.
+  */
   @property bool indentSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("indent-set");
   }
 
-  /** */
+  /**
+      Set `indentSet` property.
+      Params:
+        propval = Whether the `indent` property is set.
+  */
   @property void indentSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("indent-set", propval);
@@ -494,13 +557,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("insert-hyphens", propval);
   }
 
-  /** */
+  /**
+      Get `insertHyphensSet` property.
+      Returns: Whether the `insert-hyphens` property is set.
+  */
   @property bool insertHyphensSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("insert-hyphens-set");
   }
 
-  /** */
+  /**
+      Set `insertHyphensSet` property.
+      Params:
+        propval = Whether the `insert-hyphens` property is set.
+  */
   @property void insertHyphensSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("insert-hyphens-set", propval);
@@ -533,13 +603,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("invisible", propval);
   }
 
-  /** */
+  /**
+      Get `invisibleSet` property.
+      Returns: Whether the `invisible` property is set.
+  */
   @property bool invisibleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("invisible-set");
   }
 
-  /** */
+  /**
+      Set `invisibleSet` property.
+      Params:
+        propval = Whether the `invisible` property is set.
+  */
   @property void invisibleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("invisible-set", propval);
@@ -564,13 +641,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(gtk.types.Justification)("justification", propval);
   }
 
-  /** */
+  /**
+      Get `justificationSet` property.
+      Returns: Whether the `justification` property is set.
+  */
   @property bool justificationSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("justification-set");
   }
 
-  /** */
+  /**
+      Set `justificationSet` property.
+      Params:
+        propval = Whether the `justification` property is set.
+  */
   @property void justificationSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("justification-set", propval);
@@ -607,13 +691,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(string)("language", propval);
   }
 
-  /** */
+  /**
+      Get `languageSet` property.
+      Returns: Whether the `language` property is set.
+  */
   @property bool languageSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("language-set");
   }
 
-  /** */
+  /**
+      Set `languageSet` property.
+      Params:
+        propval = Whether the `language` property is set.
+  */
   @property void languageSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("language-set", propval);
@@ -638,13 +729,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("left-margin", propval);
   }
 
-  /** */
+  /**
+      Get `leftMarginSet` property.
+      Returns: Whether the `left-margin` property is set.
+  */
   @property bool leftMarginSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("left-margin-set");
   }
 
-  /** */
+  /**
+      Set `leftMarginSet` property.
+      Params:
+        propval = Whether the `left-margin` property is set.
+  */
   @property void leftMarginSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("left-margin-set", propval);
@@ -669,13 +767,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("letter-spacing", propval);
   }
 
-  /** */
+  /**
+      Get `letterSpacingSet` property.
+      Returns: Whether the `letter-spacing` property is set.
+  */
   @property bool letterSpacingSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("letter-spacing-set");
   }
 
-  /** */
+  /**
+      Set `letterSpacingSet` property.
+      Params:
+        propval = Whether the `letter-spacing` property is set.
+  */
   @property void letterSpacingSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("letter-spacing-set", propval);
@@ -700,13 +805,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(float)("line-height", propval);
   }
 
-  /** */
+  /**
+      Get `lineHeightSet` property.
+      Returns: Whether the `line-height` property is set.
+  */
   @property bool lineHeightSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("line-height-set");
   }
 
-  /** */
+  /**
+      Set `lineHeightSet` property.
+      Params:
+        propval = Whether the `line-height` property is set.
+  */
   @property void lineHeightSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("line-height-set", propval);
@@ -765,25 +877,39 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("overline-rgba", propval);
   }
 
-  /** */
+  /**
+      Get `overlineRgbaSet` property.
+      Returns: Whether the `overline-rgba` property is set.
+  */
   @property bool overlineRgbaSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("overline-rgba-set");
   }
 
-  /** */
+  /**
+      Set `overlineRgbaSet` property.
+      Params:
+        propval = Whether the `overline-rgba` property is set.
+  */
   @property void overlineRgbaSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("overline-rgba-set", propval);
   }
 
-  /** */
+  /**
+      Get `overlineSet` property.
+      Returns: Whether the `overline` property is set.
+  */
   @property bool overlineSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("overline-set");
   }
 
-  /** */
+  /**
+      Set `overlineSet` property.
+      Params:
+        propval = Whether the `overline` property is set.
+  */
   @property void overlineSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("overline-set", propval);
@@ -818,13 +944,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("paragraph-background-rgba", propval);
   }
 
-  /** */
+  /**
+      Get `paragraphBackgroundSet` property.
+      Returns: Whether the `paragraph-background` property is set.
+  */
   @property bool paragraphBackgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("paragraph-background-set");
   }
 
-  /** */
+  /**
+      Set `paragraphBackgroundSet` property.
+      Params:
+        propval = Whether the `paragraph-background` property is set.
+  */
   @property void paragraphBackgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("paragraph-background-set", propval);
@@ -849,13 +982,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("pixels-above-lines", propval);
   }
 
-  /** */
+  /**
+      Get `pixelsAboveLinesSet` property.
+      Returns: Whether the `pixels-above-lines` property is set.
+  */
   @property bool pixelsAboveLinesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("pixels-above-lines-set");
   }
 
-  /** */
+  /**
+      Set `pixelsAboveLinesSet` property.
+      Params:
+        propval = Whether the `pixels-above-lines` property is set.
+  */
   @property void pixelsAboveLinesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("pixels-above-lines-set", propval);
@@ -880,13 +1020,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("pixels-below-lines", propval);
   }
 
-  /** */
+  /**
+      Get `pixelsBelowLinesSet` property.
+      Returns: Whether the `pixels-below-lines` property is set.
+  */
   @property bool pixelsBelowLinesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("pixels-below-lines-set");
   }
 
-  /** */
+  /**
+      Set `pixelsBelowLinesSet` property.
+      Params:
+        propval = Whether the `pixels-below-lines` property is set.
+  */
   @property void pixelsBelowLinesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("pixels-below-lines-set", propval);
@@ -911,13 +1058,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("pixels-inside-wrap", propval);
   }
 
-  /** */
+  /**
+      Get `pixelsInsideWrapSet` property.
+      Returns: Whether the `pixels-inside-wrap` property is set.
+  */
   @property bool pixelsInsideWrapSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("pixels-inside-wrap-set");
   }
 
-  /** */
+  /**
+      Set `pixelsInsideWrapSet` property.
+      Params:
+        propval = Whether the `pixels-inside-wrap` property is set.
+  */
   @property void pixelsInsideWrapSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("pixels-inside-wrap-set", propval);
@@ -942,13 +1096,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("right-margin", propval);
   }
 
-  /** */
+  /**
+      Get `rightMarginSet` property.
+      Returns: Whether the `right-margin` property is set.
+  */
   @property bool rightMarginSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("right-margin-set");
   }
 
-  /** */
+  /**
+      Set `rightMarginSet` property.
+      Params:
+        propval = Whether the `right-margin` property is set.
+  */
   @property void rightMarginSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("right-margin-set", propval);
@@ -977,13 +1138,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("rise", propval);
   }
 
-  /** */
+  /**
+      Get `riseSet` property.
+      Returns: Whether the `rise` property is set.
+  */
   @property bool riseSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("rise-set");
   }
 
-  /** */
+  /**
+      Set `riseSet` property.
+      Params:
+        propval = Whether the `rise` property is set.
+  */
   @property void riseSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("rise-set", propval);
@@ -1014,13 +1182,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(double)("scale", propval);
   }
 
-  /** */
+  /**
+      Get `scaleSet` property.
+      Returns: Whether the `scale` property is set.
+  */
   @property bool scaleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("scale-set");
   }
 
-  /** */
+  /**
+      Set `scaleSet` property.
+      Params:
+        propval = Whether the `scale` property is set.
+  */
   @property void scaleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("scale-set", propval);
@@ -1049,13 +1224,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("sentence", propval);
   }
 
-  /** */
+  /**
+      Get `sentenceSet` property.
+      Returns: Whether the `sentence` property is set.
+  */
   @property bool sentenceSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("sentence-set");
   }
 
-  /** */
+  /**
+      Set `sentenceSet` property.
+      Params:
+        propval = Whether the `sentence` property is set.
+  */
   @property void sentenceSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("sentence-set", propval);
@@ -1080,13 +1262,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(pango.types.ShowFlags)("show-spaces", propval);
   }
 
-  /** */
+  /**
+      Get `showSpacesSet` property.
+      Returns: Whether the `show-spaces` property is set.
+  */
   @property bool showSpacesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-spaces-set");
   }
 
-  /** */
+  /**
+      Set `showSpacesSet` property.
+      Params:
+        propval = Whether the `show-spaces` property is set.
+  */
   @property void showSpacesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-spaces-set", propval);
@@ -1130,13 +1319,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(double)("size-points", propval);
   }
 
-  /** */
+  /**
+      Get `sizeSet` property.
+      Returns: Whether the `size` property is set.
+  */
   @property bool sizeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("size-set");
   }
 
-  /** */
+  /**
+      Set `sizeSet` property.
+      Params:
+        propval = Whether the `size` property is set.
+  */
   @property void sizeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("size-set", propval);
@@ -1161,13 +1357,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(pango.types.Stretch)("stretch", propval);
   }
 
-  /** */
+  /**
+      Get `stretchSet` property.
+      Returns: Whether the `stretch` property is set.
+  */
   @property bool stretchSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("stretch-set");
   }
 
-  /** */
+  /**
+      Set `stretchSet` property.
+      Params:
+        propval = Whether the `stretch` property is set.
+  */
   @property void stretchSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("stretch-set", propval);
@@ -1234,13 +1437,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("strikethrough-rgba-set", propval);
   }
 
-  /** */
+  /**
+      Get `strikethroughSet` property.
+      Returns: Whether the `strikethrough` property is set.
+  */
   @property bool strikethroughSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough-set");
   }
 
-  /** */
+  /**
+      Set `strikethroughSet` property.
+      Params:
+        propval = Whether the `strikethrough` property is set.
+  */
   @property void strikethroughSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strikethrough-set", propval);
@@ -1265,13 +1475,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(pango.types.Style)("style", propval);
   }
 
-  /** */
+  /**
+      Get `styleSet` property.
+      Returns: Whether the `style` property is set.
+  */
   @property bool styleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("style-set");
   }
 
-  /** */
+  /**
+      Set `styleSet` property.
+      Params:
+        propval = Whether the `style` property is set.
+  */
   @property void styleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("style-set", propval);
@@ -1296,13 +1513,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(pango.tab_array.TabArray)("tabs", propval);
   }
 
-  /** */
+  /**
+      Get `tabsSet` property.
+      Returns: Whether the `tabs` property is set.
+  */
   @property bool tabsSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("tabs-set");
   }
 
-  /** */
+  /**
+      Set `tabsSet` property.
+      Params:
+        propval = Whether the `tabs` property is set.
+  */
   @property void tabsSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("tabs-set", propval);
@@ -1327,13 +1551,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(pango.types.TextTransform)("text-transform", propval);
   }
 
-  /** */
+  /**
+      Get `textTransformSet` property.
+      Returns: Whether the `text-transform` property is set.
+  */
   @property bool textTransformSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("text-transform-set");
   }
 
-  /** */
+  /**
+      Set `textTransformSet` property.
+      Params:
+        propval = Whether the `text-transform` property is set.
+  */
   @property void textTransformSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("text-transform-set", propval);
@@ -1408,13 +1639,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("underline-rgba-set", propval);
   }
 
-  /** */
+  /**
+      Get `underlineSet` property.
+      Returns: Whether the `underline` property is set.
+  */
   @property bool underlineSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("underline-set");
   }
 
-  /** */
+  /**
+      Set `underlineSet` property.
+      Params:
+        propval = Whether the `underline` property is set.
+  */
   @property void underlineSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("underline-set", propval);
@@ -1439,13 +1677,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(pango.types.Variant)("variant", propval);
   }
 
-  /** */
+  /**
+      Get `variantSet` property.
+      Returns: Whether the `variant` property is set.
+  */
   @property bool variantSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("variant-set");
   }
 
-  /** */
+  /**
+      Set `variantSet` property.
+      Params:
+        propval = Whether the `variant` property is set.
+  */
   @property void variantSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("variant-set", propval);
@@ -1470,13 +1715,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(int)("weight", propval);
   }
 
-  /** */
+  /**
+      Get `weightSet` property.
+      Returns: Whether the `weight` property is set.
+  */
   @property bool weightSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("weight-set");
   }
 
-  /** */
+  /**
+      Set `weightSet` property.
+      Params:
+        propval = Whether the `weight` property is set.
+  */
   @property void weightSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("weight-set", propval);
@@ -1505,13 +1757,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(bool)("word", propval);
   }
 
-  /** */
+  /**
+      Get `wordSet` property.
+      Returns: Whether the `word` property is set.
+  */
   @property bool wordSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("word-set");
   }
 
-  /** */
+  /**
+      Set `wordSet` property.
+      Params:
+        propval = Whether the `word` property is set.
+  */
   @property void wordSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("word-set", propval);
@@ -1538,13 +1797,20 @@ class TextTag : gobject.object.ObjectWrap
     gobject.object.ObjectWrap.setProperty!(gtk.types.WrapMode)("wrap-mode", propval);
   }
 
-  /** */
+  /**
+      Get `wrapModeSet` property.
+      Returns: Whether the `wrap-mode` property is set.
+  */
   @property bool wrapModeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("wrap-mode-set");
   }
 
-  /** */
+  /**
+      Set `wrapModeSet` property.
+      Params:
+        propval = Whether the `wrap-mode` property is set.
+  */
   @property void wrapModeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("wrap-mode-set", propval);
@@ -1646,7 +1912,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("allow-breaks", propval);
   }
 
-  /** */
+  /**
+      Set `allowBreaksSet` property.
+      Params:
+        propval = Whether the `allow-breaks` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T allowBreaksSet(bool propval) nothrow
   {
     return setProperty("allow-breaks-set", propval);
@@ -1675,7 +1946,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("background-full-height", propval);
   }
 
-  /** */
+  /**
+      Set `backgroundFullHeightSet` property.
+      Params:
+        propval = Whether the `background-full-height` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T backgroundFullHeightSet(bool propval) nothrow
   {
     return setProperty("background-full-height-set", propval);
@@ -1692,7 +1968,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("background-rgba", propval);
   }
 
-  /** */
+  /**
+      Set `backgroundSet` property.
+      Params:
+        propval = Whether the `background` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T backgroundSet(bool propval) nothrow
   {
     return setProperty("background-set", propval);
@@ -1720,7 +2001,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("editable", propval);
   }
 
-  /** */
+  /**
+      Set `editableSet` property.
+      Params:
+        propval = Whether the `editable` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T editableSet(bool propval) nothrow
   {
     return setProperty("editable-set", propval);
@@ -1740,7 +2026,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("fallback", propval);
   }
 
-  /** */
+  /**
+      Set `fallbackSet` property.
+      Params:
+        propval = Whether the `fallback` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T fallbackSet(bool propval) nothrow
   {
     return setProperty("fallback-set", propval);
@@ -1757,7 +2048,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("family", propval);
   }
 
-  /** */
+  /**
+      Set `familySet` property.
+      Params:
+        propval = Whether the `family` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T familySet(bool propval) nothrow
   {
     return setProperty("family-set", propval);
@@ -1799,7 +2095,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("font-features", propval);
   }
 
-  /** */
+  /**
+      Set `fontFeaturesSet` property.
+      Params:
+        propval = Whether the `font-features` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T fontFeaturesSet(bool propval) nothrow
   {
     return setProperty("font-features-set", propval);
@@ -1827,7 +2128,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("foreground-rgba", propval);
   }
 
-  /** */
+  /**
+      Set `foregroundSet` property.
+      Params:
+        propval = Whether the `foreground` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T foregroundSet(bool propval) nothrow
   {
     return setProperty("foreground-set", propval);
@@ -1848,7 +2154,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("indent", propval);
   }
 
-  /** */
+  /**
+      Set `indentSet` property.
+      Params:
+        propval = Whether the `indent` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T indentSet(bool propval) nothrow
   {
     return setProperty("indent-set", propval);
@@ -1865,7 +2176,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("insert-hyphens", propval);
   }
 
-  /** */
+  /**
+      Set `insertHyphensSet` property.
+      Params:
+        propval = Whether the `insert-hyphens` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T insertHyphensSet(bool propval) nothrow
   {
     return setProperty("insert-hyphens-set", propval);
@@ -1886,7 +2202,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("invisible", propval);
   }
 
-  /** */
+  /**
+      Set `invisibleSet` property.
+      Params:
+        propval = Whether the `invisible` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T invisibleSet(bool propval) nothrow
   {
     return setProperty("invisible-set", propval);
@@ -1903,7 +2224,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("justification", propval);
   }
 
-  /** */
+  /**
+      Set `justificationSet` property.
+      Params:
+        propval = Whether the `justification` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T justificationSet(bool propval) nothrow
   {
     return setProperty("justification-set", propval);
@@ -1926,7 +2252,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("language", propval);
   }
 
-  /** */
+  /**
+      Set `languageSet` property.
+      Params:
+        propval = Whether the `language` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T languageSet(bool propval) nothrow
   {
     return setProperty("language-set", propval);
@@ -1943,7 +2274,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("left-margin", propval);
   }
 
-  /** */
+  /**
+      Set `leftMarginSet` property.
+      Params:
+        propval = Whether the `left-margin` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T leftMarginSet(bool propval) nothrow
   {
     return setProperty("left-margin-set", propval);
@@ -1960,7 +2296,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("letter-spacing", propval);
   }
 
-  /** */
+  /**
+      Set `letterSpacingSet` property.
+      Params:
+        propval = Whether the `letter-spacing` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T letterSpacingSet(bool propval) nothrow
   {
     return setProperty("letter-spacing-set", propval);
@@ -1977,7 +2318,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("line-height", propval);
   }
 
-  /** */
+  /**
+      Set `lineHeightSet` property.
+      Params:
+        propval = Whether the `line-height` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T lineHeightSet(bool propval) nothrow
   {
     return setProperty("line-height-set", propval);
@@ -2020,13 +2366,23 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("overline-rgba", propval);
   }
 
-  /** */
+  /**
+      Set `overlineRgbaSet` property.
+      Params:
+        propval = Whether the `overline-rgba` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T overlineRgbaSet(bool propval) nothrow
   {
     return setProperty("overline-rgba-set", propval);
   }
 
-  /** */
+  /**
+      Set `overlineSet` property.
+      Params:
+        propval = Whether the `overline` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T overlineSet(bool propval) nothrow
   {
     return setProperty("overline-set", propval);
@@ -2054,7 +2410,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("paragraph-background-rgba", propval);
   }
 
-  /** */
+  /**
+      Set `paragraphBackgroundSet` property.
+      Params:
+        propval = Whether the `paragraph-background` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T paragraphBackgroundSet(bool propval) nothrow
   {
     return setProperty("paragraph-background-set", propval);
@@ -2071,7 +2432,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("pixels-above-lines", propval);
   }
 
-  /** */
+  /**
+      Set `pixelsAboveLinesSet` property.
+      Params:
+        propval = Whether the `pixels-above-lines` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T pixelsAboveLinesSet(bool propval) nothrow
   {
     return setProperty("pixels-above-lines-set", propval);
@@ -2088,7 +2454,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("pixels-below-lines", propval);
   }
 
-  /** */
+  /**
+      Set `pixelsBelowLinesSet` property.
+      Params:
+        propval = Whether the `pixels-below-lines` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T pixelsBelowLinesSet(bool propval) nothrow
   {
     return setProperty("pixels-below-lines-set", propval);
@@ -2105,7 +2476,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("pixels-inside-wrap", propval);
   }
 
-  /** */
+  /**
+      Set `pixelsInsideWrapSet` property.
+      Params:
+        propval = Whether the `pixels-inside-wrap` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T pixelsInsideWrapSet(bool propval) nothrow
   {
     return setProperty("pixels-inside-wrap-set", propval);
@@ -2122,7 +2498,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("right-margin", propval);
   }
 
-  /** */
+  /**
+      Set `rightMarginSet` property.
+      Params:
+        propval = Whether the `right-margin` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T rightMarginSet(bool propval) nothrow
   {
     return setProperty("right-margin-set", propval);
@@ -2141,7 +2522,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("rise", propval);
   }
 
-  /** */
+  /**
+      Set `riseSet` property.
+      Params:
+        propval = Whether the `rise` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T riseSet(bool propval) nothrow
   {
     return setProperty("rise-set", propval);
@@ -2161,7 +2547,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("scale", propval);
   }
 
-  /** */
+  /**
+      Set `scaleSet` property.
+      Params:
+        propval = Whether the `scale` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T scaleSet(bool propval) nothrow
   {
     return setProperty("scale-set", propval);
@@ -2180,7 +2571,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("sentence", propval);
   }
 
-  /** */
+  /**
+      Set `sentenceSet` property.
+      Params:
+        propval = Whether the `sentence` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T sentenceSet(bool propval) nothrow
   {
     return setProperty("sentence-set", propval);
@@ -2197,7 +2593,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("show-spaces", propval);
   }
 
-  /** */
+  /**
+      Set `showSpacesSet` property.
+      Params:
+        propval = Whether the `show-spaces` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T showSpacesSet(bool propval) nothrow
   {
     return setProperty("show-spaces-set", propval);
@@ -2225,7 +2626,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("size-points", propval);
   }
 
-  /** */
+  /**
+      Set `sizeSet` property.
+      Params:
+        propval = Whether the `size` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T sizeSet(bool propval) nothrow
   {
     return setProperty("size-set", propval);
@@ -2242,7 +2648,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("stretch", propval);
   }
 
-  /** */
+  /**
+      Set `stretchSet` property.
+      Params:
+        propval = Whether the `stretch` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T stretchSet(bool propval) nothrow
   {
     return setProperty("stretch-set", propval);
@@ -2283,7 +2694,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("strikethrough-rgba-set", propval);
   }
 
-  /** */
+  /**
+      Set `strikethroughSet` property.
+      Params:
+        propval = Whether the `strikethrough` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T strikethroughSet(bool propval) nothrow
   {
     return setProperty("strikethrough-set", propval);
@@ -2300,7 +2716,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("style", propval);
   }
 
-  /** */
+  /**
+      Set `styleSet` property.
+      Params:
+        propval = Whether the `style` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T styleSet(bool propval) nothrow
   {
     return setProperty("style-set", propval);
@@ -2317,7 +2738,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("tabs", propval);
   }
 
-  /** */
+  /**
+      Set `tabsSet` property.
+      Params:
+        propval = Whether the `tabs` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T tabsSet(bool propval) nothrow
   {
     return setProperty("tabs-set", propval);
@@ -2334,7 +2760,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("text-transform", propval);
   }
 
-  /** */
+  /**
+      Set `textTransformSet` property.
+      Params:
+        propval = Whether the `text-transform` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T textTransformSet(bool propval) nothrow
   {
     return setProperty("text-transform-set", propval);
@@ -2379,7 +2810,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("underline-rgba-set", propval);
   }
 
-  /** */
+  /**
+      Set `underlineSet` property.
+      Params:
+        propval = Whether the `underline` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T underlineSet(bool propval) nothrow
   {
     return setProperty("underline-set", propval);
@@ -2396,7 +2832,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("variant", propval);
   }
 
-  /** */
+  /**
+      Set `variantSet` property.
+      Params:
+        propval = Whether the `variant` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T variantSet(bool propval) nothrow
   {
     return setProperty("variant-set", propval);
@@ -2413,7 +2854,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("weight", propval);
   }
 
-  /** */
+  /**
+      Set `weightSet` property.
+      Params:
+        propval = Whether the `weight` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T weightSet(bool propval) nothrow
   {
     return setProperty("weight-set", propval);
@@ -2432,7 +2878,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("word", propval);
   }
 
-  /** */
+  /**
+      Set `wordSet` property.
+      Params:
+        propval = Whether the `word` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T wordSet(bool propval) nothrow
   {
     return setProperty("word-set", propval);
@@ -2450,7 +2901,12 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
     return setProperty("wrap-mode", propval);
   }
 
-  /** */
+  /**
+      Set `wrapModeSet` property.
+      Params:
+        propval = Whether the `wrap-mode` property is set.
+      Returns: Builder instance for fluent chaining
+  */
   T wrapModeSet(bool propval) nothrow
   {
     return setProperty("wrap-mode-set", propval);

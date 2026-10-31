@@ -39,7 +39,7 @@ class TestSuite
       Adds test_case to suite.
   
       Params:
-        testCase = a #GTestCase
+        testCase = a test case
   */
   void add(glib.types.TestCase testCase) nothrow
   {
@@ -50,7 +50,7 @@ class TestSuite
       Adds nestedsuite to suite.
   
       Params:
-        nestedsuite = another #GTestSuite
+        nestedsuite = another test suite
   */
   void addSuite(glib.test_suite.TestSuite nestedsuite) nothrow
   {

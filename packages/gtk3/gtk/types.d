@@ -1122,7 +1122,7 @@ alias TreeViewSearchPositionFunc = void delegate(gtk.tree_view.TreeView treeView
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum BINARY_AGE = 2443;
+enum BINARY_AGE = 2452;
 
 /**
     Constant to return from a signal handler for the #GtkSpinButton::input
@@ -1169,7 +1169,7 @@ enum MAX_COMPOSE_LEN = 7;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 43;
+enum MICRO_VERSION = 52;
 
 /**
     Like [gtk.global.getMinorVersion], but from the headers used at

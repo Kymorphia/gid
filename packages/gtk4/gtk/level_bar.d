@@ -22,12 +22,15 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.level_bar.LevelBar] is a widget that can be used as a level indicator.
+    Shows a level indicator.
     
     Typical use cases are displaying the strength of a password, or
     showing the charge level of a battery.
     
-    ![An example GtkLevelBar](levelbar.png)
+    <picture>
+      <source srcset="levelbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkLevelBar" src="levelbar.png">
+    </picture>
     
     Use [gtk.level_bar.LevelBar.setValue] to set the current value, and
     [gtk.level_bar.LevelBar.addOffsetValue] to set the value offsets at which

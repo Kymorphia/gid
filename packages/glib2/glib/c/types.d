@@ -22,7 +22,7 @@ alias GDateDay = ubyte;
 alias GDateYear = ushort;
 
 /**
-    Opaque type. See g_main_context_pusher_new() for details.
+    Opaque type. See [glib.main_context.MainContext.pusherNew] for details.
 */
 alias GMainContextPusher = void;
 
@@ -816,11 +816,8 @@ enum GHookFlagMask : uint
   */
   InCall = 2,
 
-  /**
-      A mask covering all bits reserved for
-        hook flags; see [glib.types.HOOK_FLAG_USER_SHIFT]
-  */
-  Mask = 15,
+  /** */
+  Reserved1 = 4,
 }
 
 /**
@@ -1177,8 +1174,8 @@ enum GLogWriterOutput
 }
 
 /**
-    Flags to pass to [glib.main_context.MainContext.newWithFlags] which affect the behaviour
-    of a #GMainContext.
+    Flags to pass to [glib.main_context.MainContext.newWithFlags] which affect the
+    behaviour of a [glib.main_context.MainContext].
 */
 enum GMainContextFlags : uint
 {
@@ -1228,7 +1225,7 @@ enum GMarkupCollectType : uint
   Strdup = 2,
 
   /**
-      expects a parameter of type (gboolean *)
+      expects a parameter of type (`gboolean *`)
           and parses the attribute value as a boolean. Sets false if the
           attribute isn't present. Valid boolean values consist of
           (case-insensitive) "false", "f", "no", "n", "0" and "true", "t",
@@ -1239,7 +1236,7 @@ enum GMarkupCollectType : uint
   /**
       as with [glib.types.MarkupCollectType.Boolean], but
           in the case of a missing attribute a value is set that compares
-          equal to neither false nor true G_MARKUP_COLLECT_OPTIONAL is
+          equal to neither false nor true [glib.types.MarkupCollectType.Optional] is
           implied
   */
   Tristate = 4,
@@ -1458,41 +1455,41 @@ enum GOptionArg
   Int = 2,
 
   /**
-      The option provides a callback (of type
-          #GOptionArgFunc) to parse the extra argument.
+      The option provides a callback (of type #GOptionArgFunc)
+        to parse the extra argument.
   */
   Callback = 3,
 
   /**
       The option takes a filename as argument, which will
-             be in the GLib filename encoding rather than UTF-8.
+           be in the GLib filename encoding rather than UTF-8.
   */
   Filename = 4,
 
   /**
       The option takes a string argument, multiple
-          uses of the option are collected into an array of strings.
+        uses of the option are collected into an array of strings.
   */
   StringArray = 5,
 
   /**
       The option takes a filename as argument,
-          multiple uses of the option are collected into an array of strings.
+        multiple uses of the option are collected into an array of strings.
   */
   FilenameArray = 6,
 
   /**
       The option takes a double argument. The argument
-          can be formatted either for the user's locale or for the "C" locale.
-          Since 2.12
+        can be formatted either for the user's locale or for the "C" locale.
+        Since 2.12
   */
   Double = 7,
 
   /**
       The option takes a 64-bit integer. Like
-          [glib.types.OptionArg.Int] but for larger numbers. The number can be in
-          decimal base, or in hexadecimal (when prefixed with `0x`, for
-          example, `0xffffffff`). Since 2.12
+        [glib.types.OptionArg.Int] but for larger numbers. The number can be in
+        decimal base, or in hexadecimal (when prefixed with `0x`, for
+        example, `0xffffffff`). Since 2.12
   */
   Int64 = 8,
 }
@@ -1526,7 +1523,7 @@ enum GOptionError
 enum GOptionFlags : uint
 {
   /**
-      No flags. Since: 2.42.
+      No flags.
   */
   None = 0,
 
@@ -1537,48 +1534,57 @@ enum GOptionFlags : uint
 
   /**
       The option appears in the main section of the
-          `--help` output, even if it is defined in a group.
+        `--help` output, even if it is defined in a group.
   */
   InMain = 2,
 
   /**
       For options of the [glib.types.OptionArg.None] kind, this
-          flag indicates that the sense of the option is reversed. i.e. false will
-          be stored into the argument rather than true.
+        flag indicates that the sense of the option is reversed. i.e. false will
+        be stored into the argument rather than true.
   */
   Reverse = 4,
 
   /**
       For options of the [glib.types.OptionArg.Callback] kind,
-          this flag indicates that the callback does not take any argument
-          (like a [glib.types.OptionArg.None] option). Since 2.8
+        this flag indicates that the callback does not take any argument
+        (like a [glib.types.OptionArg.None] option). Since 2.8
   */
   NoArg = 8,
 
   /**
       For options of the [glib.types.OptionArg.Callback]
-          kind, this flag indicates that the argument should be passed to the
-          callback in the GLib filename encoding rather than UTF-8. Since 2.8
+        kind, this flag indicates that the argument should be passed to the
+        callback in the GLib filename encoding rather than UTF-8. Since 2.8
   */
   Filename = 16,
 
   /**
       For options of the [glib.types.OptionArg.Callback]
-          kind, this flag indicates that the argument supply is optional.
-          If no argument is given then data of [glib.types.OptionParseFunc] will be
-          set to NULL. Since 2.8
+        kind, this flag indicates that the argument supply is optional.
+        If no argument is given then data of [glib.types.OptionParseFunc] will be
+        set to NULL. Since 2.8
   */
   OptionalArg = 32,
 
   /**
       This flag turns off the automatic conflict
-          resolution which prefixes long option names with `groupname-` if
-          there is a conflict. This option should only be used in situations
-          where aliasing is necessary to model some legacy commandline interface.
-          It is not safe to use this option, unless all option groups are under
-          your direct control. Since 2.8.
+        resolution which prefixes long option names with `groupname-` if
+        there is a conflict. This option should only be used in situations
+        where aliasing is necessary to model some legacy commandline interface.
+        It is not safe to use this option, unless all option groups are under
+        your direct control. Since 2.8.
   */
   Noalias = 64,
+
+  /**
+      This flag marks the option as deprecated in the `--help`.
+      
+      You should update the description of the option to describe what
+      the user should do in response to the deprecation, for instance:
+      remove the option, or replace it with another one.
+  */
+  Deprecated = 128,
 }
 
 /**
@@ -1709,33 +1715,8 @@ enum GRegexCompileFlags : uint
   */
   NewlineLf = 2097152,
 
-  /**
-      Usually any newline character or character sequence is
-          recognized. If this option is set, the only recognized newline character
-          sequence is '\r\n'.
-  */
-  NewlineCrlf = 3145728,
-
-  /**
-      Usually any newline character or character sequence
-          is recognized. If this option is set, the only recognized newline character
-          sequences are '\r', '\n', and '\r\n'. Since: 2.34
-  */
-  NewlineAnycrlf = 5242880,
-
-  /**
-      Usually any newline character or character sequence
-          is recognised. If this option is set, then "\R" only recognizes the newline
-         characters '\r', '\n' and '\r\n'. Since: 2.34
-  */
-  BsrAnycrlf = 8388608,
-
-  /**
-      Changes behaviour so that it is compatible with
-          JavaScript rather than PCRE. Since GLib 2.74 this is no longer supported,
-          as libpcre2 does not support it. Since: 2.34 Deprecated: 2.74
-  */
-  JavascriptCompat = 33554432,
+  /** */
+  NewlineReserved1 = 4194304,
 }
 
 /**
@@ -2465,21 +2446,22 @@ enum GSpawnFlags : uint
 
 /**
     The type of file to return the filename for, when used with
-    [glib.global.testBuildFilename].
+    `func@GLib.test_build_filename`.
     
     These two options correspond rather directly to the 'dist' and
     'built' terminology that automake uses and are explicitly used to
-    distinguish between the 'srcdir' and 'builddir' being separate.  All
-    files in your project should either be dist (in the
-    `EXTRA_DIST` or `dist_schema_DATA`
-    sense, in which case they will always be in the srcdir) or built (in
-    the `BUILT_SOURCES` sense, in which case they will
-    always be in the builddir).
+    distinguish between the 'srcdir' and 'builddir' being separate. All
+    files in your project should either be dist (in the `EXTRA_DIST` or
+    `dist_schema_DATA` sense, in which case they will always be in the
+    srcdir) or built (in the `BUILT_SOURCES` sense, in which case they
+    will always be in the builddir).
     
-    Note: as a general rule of automake, files that are generated only as
+    Note: As a general rule of automake, files that are generated only as
     part of the build-from-git process (but then are distributed with the
     tarball) always go in srcdir (even if doing a srcdir != builddir
     build from git) and are considered as distributed files.
+    
+    The same principles apply for other build systems, such as meson.
 */
 enum GTestFileType
 {
@@ -2551,10 +2533,11 @@ enum GTestResult
 }
 
 /**
-    Flags to pass to [glib.global.testTrapSubprocess] to control input and output.
+    Flags to pass to `func@GLib.test_trap_subprocess` to control input and output.
     
-    Note that in contrast with [glib.global.testTrapFork], the default is to
-    not show stdout and stderr.
+    Note that in contrast with `func@GLib.test_trap_fork`, the default
+    behavior of `func@GLib.test_trap_subprocess` is to not show stdout
+    and stderr.
 */
 enum GTestSubprocessFlags : uint
 {
@@ -2565,35 +2548,42 @@ enum GTestSubprocessFlags : uint
 
   /**
       If this flag is given, the child
-          process will inherit the parent's stdin. Otherwise, the child's
-          stdin is redirected to `/dev/null`.
+        process will inherit the parent's stdin. Otherwise, the child's
+        stdin is redirected to `/dev/null`.
   */
   InheritStdin = 1,
 
   /**
       If this flag is given, the child
-          process will inherit the parent's stdout. Otherwise, the child's
-          stdout will not be visible, but it will be captured to allow
-          later tests with g_test_trap_assert_stdout().
+        process will inherit the parent's stdout. Otherwise, the child's
+        stdout will not be visible, but it will be captured to allow
+        later tests with `func@GLib.test_trap_assert_stdout`.
   */
   InheritStdout = 2,
 
   /**
       If this flag is given, the child
-          process will inherit the parent's stderr. Otherwise, the child's
-          stderr will not be visible, but it will be captured to allow
-          later tests with g_test_trap_assert_stderr().
+        process will inherit the parent's stderr. Otherwise, the child's
+        stderr will not be visible, but it will be captured to allow
+        later tests with `func@GLib.test_trap_assert_stderr`.
   */
   InheritStderr = 4,
+
+  /**
+      If this flag is given, the
+        child process will inherit the parent’s open file descriptors.
+  */
+  InheritDescriptors = 8,
 }
 
 /**
-    Test traps are guards around forked tests.
-    These flags determine what traps to set.
+    Flags to pass to `func@GLib.test_trap_fork` to control input and output.
+    
+    Test traps are guards around forked tests. These flags determine what traps to set.
 
-    Deprecated: #GTestTrapFlags is used only with [glib.global.testTrapFork],
-      which is deprecated. [glib.global.testTrapSubprocess] uses
-      #GTestSubprocessFlags.
+    Deprecated: [glib.types.TestTrapFlags] is used only with `func@GLib.test_trap_fork`,
+        which is deprecated. Its replacement, `func@GLib.test_trap_subprocess` uses
+        [glib.types.TestSubprocessFlags].
 */
 enum GTestTrapFlags : uint
 {
@@ -2859,21 +2849,43 @@ enum GTraverseFlags : uint
 
 /**
     Specifies the type of traversal performed by [glib.tree.Tree.traverse],
-    [glib.node.Node.traverse] and [glib.node.Node.find]. The different orders are
-    illustrated here:
+    [glib.node.Node.traverse] and [glib.node.Node.find].
+    
+    The different orders are illustrated here:
+    
     - In order: A, B, C, D, E, F, G, H, I
-      ![](Sorted_binary_tree_inorder.svg)
+      <picture>
+        <source srcset="Sorted_binary_tree_inorder-dark.svg"
+         media="(prefers-color-scheme: dark)">
+        <img src="Sorted_binary_tree_inorder.svg"
+         alt="Sorted binary tree, in-order traversal">
+      </picture>
     - Pre order: F, B, A, D, C, E, G, I, H
-      ![](Sorted_binary_tree_preorder.svg)
+      <picture>
+        <source srcset="Sorted_binary_tree_preorder-dark.svg"
+         media="(prefers-color-scheme: dark)">
+        <img src="Sorted_binary_tree_preorder.svg"
+         alt="Sorted binary tree, pre-order traversal">
+      </picture>
     - Post order: A, C, E, D, B, H, I, G, F
-      ![](Sorted_binary_tree_postorder.svg)
+      <picture>
+        <source srcset="Sorted_binary_tree_postorder-dark.svg"
+         media="(prefers-color-scheme: dark)">
+        <img src="Sorted_binary_tree_postorder.svg"
+         alt="Sorted binary tree, post-order traversal">
+      </picture>
     - Level order: F, B, G, A, D, I, C, E, H
-      ![](Sorted_binary_tree_breadth-first_traversal.svg)
+      <picture>
+        <source srcset="Sorted_binary_tree_breadth-first_traversal-dark.svg"
+         media="(prefers-color-scheme: dark)">
+        <img src="Sorted_binary_tree_breadth-first_traversal.svg"
+         alt="Sorted binary tree, breadth-first level order traversal">
+      </picture>
 */
 enum GTraverseType
 {
   /**
-      vists a node's left child first, then the node itself,
+      visits a node's left child first, then the node itself,
                    then its right child. This is the one to use if you
                    want the output sorted according to the compare
                    function.
@@ -2892,9 +2904,9 @@ enum GTraverseType
 
   /**
       is not implemented for
-                   [balanced binary trees][glib-Balanced-Binary-Trees].
-                   For [n-ary trees][glib-N-ary-Trees], it
-                   vists the root node first, then its children, then
+                   [balanced binary trees](data-structures.html#binary-trees).
+                   For [n-ary trees](data-structures.html#n-ary-trees), it
+                   visits the root node first, then its children, then
                    its grandchildren, and so on. Note that this is less
                    efficient than the other orders.
   */
@@ -3133,24 +3145,33 @@ enum GUnicodeBreakType
 
   /**
       Aksara (AK). Since: 2.80
-      @G_UNICODE_BREAK_AKSARA_PRE_BASE (AP). Since: 2.80
-      @G_UNICODE_BREAK_AKSARA_START (AS). Since: 2.80
-      @G_UNICODE_BREAK_VIRAMA_FINAL (VF). Since: 2.80
-      @G_UNICODE_BREAK_VIRAMA (VI). Since: 2.80
   */
   Aksara = 43,
 
-  /** */
+  /**
+      Aksara Pre-Base (AP). Since: 2.80
+  */
   AksaraPreBase = 44,
 
-  /** */
+  /**
+      Aksara Start (AS). Since: 2.80
+  */
   AksaraStart = 45,
 
-  /** */
+  /**
+      Virama Final (VF). Since: 2.80
+  */
   ViramaFinal = 46,
 
-  /** */
+  /**
+      Virama (VI). Since: 2.80
+  */
   Virama = 47,
+
+  /**
+      Unambiguous Hyphen (HH). Since: 2.88
+  */
+  UnambiguousHyphen = 48,
 }
 
 /**
@@ -3995,6 +4016,61 @@ enum GUnicodeScript
       Nag Mundari. Since 2.74
   */
   NagMundari = 164,
+
+  /**
+      Todhri. Since: 2.84
+  */
+  Todhri = 165,
+
+  /**
+      Garay. Since: 2.84
+  */
+  Garay = 166,
+
+  /**
+      Tulu-Tigalari. Since: 2.84
+  */
+  TuluTigalari = 167,
+
+  /**
+      Sunuwar. Since: 2.84
+  */
+  Sunuwar = 168,
+
+  /**
+      Gurung Khema. Since: 2.84
+  */
+  GurungKhema = 169,
+
+  /**
+      Kirat Rai. Since: 2.84
+  */
+  KiratRai = 170,
+
+  /**
+      Ol Onal. Since: 2.84
+  */
+  OlOnal = 171,
+
+  /**
+      Sidetic. Since: 2.88
+  */
+  Sidetic = 172,
+
+  /**
+      Tolong Siki. Since: 2.88
+  */
+  TolongSiki = 173,
+
+  /**
+      Tai Yo. Since: 2.88
+  */
+  TaiYo = 174,
+
+  /**
+      Beria Erfe. Since: 2.88
+  */
+  BeriaErfe = 175,
 }
 
 /**
@@ -4153,22 +4229,6 @@ enum GUnicodeType
       General category "Separator, Space" (Zs)
   */
   SpaceSeparator = 29,
-}
-
-/**
-    Mnemonic constants for the ends of a Unix pipe.
-*/
-enum GUnixPipeEnd
-{
-  /**
-      The readable file descriptor 0
-  */
-  Read = 0,
-
-  /**
-      The writable file descriptor 1
-  */
-  Write = 1,
 }
 
 /**
@@ -4635,19 +4695,19 @@ enum GVariantParseError
 struct GAllocator;
 
 /**
-    Contains the public fields of a GArray.
+    Contains the public fields of a [glib.array.Array].
 */
 struct GArray
 {
   /**
       a pointer to the element data. The data may be moved as
-          elements are added to the #GArray.
+          elements are added to the [glib.array.Array].
   */
   char* data;
 
   /**
-      the number of elements in the #GArray not including the
-          possible terminating zero element.
+      the number of elements in the [glib.array.Array] not including the
+          possible terminating zero element
   */
   uint len;
 }
@@ -4666,7 +4726,7 @@ struct GAsyncQueue;
     pointed by the URI like its MIME type, the application that is registering
     the bookmark and the icon that should be used to represent the bookmark.
     The data is stored using the
-    [Desktop Bookmark Specification](http://www.gnome.org/~ebassi/bookmark-spec).
+    [Desktop Bookmark Specification](https://www.freedesktop.org/wiki/Specifications/desktop-bookmark-spec/).
     
     The syntax of the bookmark files is described in detail inside the
     Desktop Bookmark Specification, here is a quick summary: bookmark
@@ -4701,47 +4761,50 @@ struct GAsyncQueue;
 struct GBookmarkFile;
 
 /**
-    Contains the public fields of a GByteArray.
+    Contains the public fields of a [glib.byte_array.ByteArray].
 */
 struct GByteArray
 {
   /**
       a pointer to the element data. The data may be moved as
-          elements are added to the #GByteArray
+          elements are added to the [glib.byte_array.ByteArray]
   */
   ubyte* data;
 
   /**
-      the number of elements in the #GByteArray
+      the number of elements in the [glib.byte_array.ByteArray]
   */
   uint len;
 }
 
 /**
-    A simple refcounted data type representing an immutable sequence of zero or
-    more bytes from an unspecified origin.
+    A simple reference counted data type representing an immutable sequence of
+    zero or more bytes from an unspecified origin.
     
-    The purpose of a #GBytes is to keep the memory region that it holds
+    The purpose of a [glib.bytes.Bytes] is to keep the memory region that it holds
     alive for as long as anyone holds a reference to the bytes.  When
     the last reference count is dropped, the memory is released. Multiple
-    unrelated callers can use byte data in the #GBytes without coordinating
+    unrelated callers can use byte data in the [glib.bytes.Bytes] without coordinating
     their activities, resting assured that the byte data will not change or
     move while they hold a reference.
     
-    A #GBytes can come from many different origins that may have
+    A [glib.bytes.Bytes] can come from many different origins that may have
     different procedures for freeing the memory region.  Examples are
-    memory from [glib.global.gmalloc], from memory slices, from a #GMappedFile or
-    memory from other allocators.
+    memory from `func@GLib.malloc`, from memory slices, from a
+    [glib.mapped_file.MappedFile] or memory from other allocators.
     
-    #GBytes work well as keys in #GHashTable. Use [glib.bytes.Bytes.equal] and
-    [glib.bytes.Bytes.hash] as parameters to [glib.hash_table.HashTable.new_] or [glib.hash_table.HashTable.newFull].
-    #GBytes can also be used as keys in a #GTree by passing the [glib.bytes.Bytes.compare]
-    function to [glib.tree.Tree.new_].
+    [glib.bytes.Bytes] work well as keys in [glib.hash_table.HashTable]. Use
+    [glib.bytes.Bytes.equal] and [glib.bytes.Bytes.hash] as parameters to
+    [glib.hash_table.HashTable.new_] or [glib.hash_table.HashTable.newFull].
+    [glib.bytes.Bytes] can also be used as keys in a [glib.tree.Tree] by passing the
+    [glib.bytes.Bytes.compare] function to [glib.tree.Tree.new_].
     
     The data pointed to by this bytes must not be modified. For a mutable
-    array of bytes see #GByteArray. Use [glib.bytes.Bytes.unrefToArray] to create a
-    mutable array for a #GBytes sequence. To create an immutable #GBytes from
-    a mutable #GByteArray, use the [glib.byte_array.ByteArray.freeToBytes] function.
+    array of bytes see [glib.byte_array.ByteArray]. Use
+    [glib.bytes.Bytes.unrefToArray] to create a mutable array for a [glib.bytes.Bytes]
+    sequence. To create an immutable [glib.bytes.Bytes] from a mutable
+    [glib.byte_array.ByteArray], use the [glib.byte_array.ByteArray.freeToBytes]
+    function.
 */
 struct GBytes;
 
@@ -5068,7 +5131,7 @@ struct GError
 
 /**
     The #GHashTable struct is an opaque data structure to represent a
-    [Hash Table][glib-Hash-Tables]. It should only be accessed via the
+    [Hash Table](data-structures.html#hash-tables). It should only be accessed via the
     following functions.
 */
 struct GHashTable;
@@ -5325,13 +5388,13 @@ struct GIOFuncs
     [glib.key_file.KeyFile] parses .ini-like config files.
     
     [glib.key_file.KeyFile] lets you parse, edit or create files containing groups of
-    key-value pairs, which we call "key files" for lack of a better name.
-    Several freedesktop.org specifications use key files now, e.g the
-    [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec)
-    and the [Icon Theme Specification](http://freedesktop.org/Standards/icon-theme-spec).
+    key-value pairs, which we call ‘key files’ for lack of a better name.
+    Several freedesktop.org specifications use key files. For example, the
+    [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
+    and the [Icon Theme Specification](https://specifications.freedesktop.org/icon-theme-spec/latest/).
     
     The syntax of key files is described in detail in the
-    [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec),
+    [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/),
     here is a quick summary: Key files consists of groups of key-value pairs, interspersed
     with comments.
     
@@ -5356,30 +5419,32 @@ struct GIOFuncs
     Booleans=true;false;true;true
     ```
     
-    Lines beginning with a '#' and blank lines are considered comments.
+    Lines beginning with a `#` and blank lines are considered comments.
     
     Groups are started by a header line containing the group name enclosed
-    in '[' and ']', and ended implicitly by the start of the next group or
+    in `[` and `]`, and ended implicitly by the start of the next group or
     the end of the file. Each key-value pair must be contained in a group.
     
     Key-value pairs generally have the form `key=value`, with the exception
     of localized strings, which have the form `key[locale]=value`, with a
     locale identifier of the form `lang_COUNTRY@MODIFIER` where `COUNTRY`
-    and `MODIFIER` are optional. Space before and after the '=' character
-    are ignored. Newline, tab, carriage return and backslash characters in
-    value are escaped as `\n`, `\t`, `\r`, and `\\\\`, respectively. To preserve
-    leading spaces in values, these can also be escaped as `\s`.
+    and `MODIFIER` are optional. As a special case, the locale `C` is associated
+    with the untranslated pair `key=value` (since GLib 2.84). Space before and
+    after the `=` character is ignored. Newline, tab, carriage return and
+    backslash characters in value are escaped as `\n`, `\t`, `\r`, and `\\\\`,
+    respectively. To preserve leading spaces in values, these can also be escaped
+    as `\s`.
     
     Key files can store strings (possibly with localized variants), integers,
     booleans and lists of these. Lists are separated by a separator character,
-    typically ';' or ','. To use the list separator character in a value in
+    typically `;` or `,`. To use the list separator character in a value in
     a list, it has to be escaped by prefixing it with a backslash.
     
     This syntax is obviously inspired by the .ini files commonly met
     on Windows, but there are some important differences:
     
-    - .ini files use the ';' character to begin comments,
-      key files use the '#' character.
+    - .ini files use the `;` character to begin comments,
+      key files use the `#` character.
     
     - Key files do not allow for ungrouped keys meaning only
       comments can precede the first group.
@@ -5387,14 +5452,14 @@ struct GIOFuncs
     - Key files are always encoded in UTF-8.
     
     - Key and Group names are case-sensitive. For example, a group called
-      [GROUP] is a different from [group].
+      `[GROUP]` is a different from `[group]`.
     
-    - .ini files don't have a strongly typed boolean entry type,
-       they only have GetProfileInt(). In key files, only
-       true and false (in lower case) are allowed.
+    - .ini files don’t have a strongly typed boolean entry type,
+       they only have `GetProfileInt()`. In key files, only
+       `true` and `false` (in lower case) are allowed.
     
     Note that in contrast to the
-    [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec),
+    [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/),
     groups in key files may contain the same key multiple times; the last entry wins.
     Key files may also contain multiple groups with the same name; they are merged
     together. Another difference is that keys and group names in key files are not
@@ -5464,7 +5529,7 @@ struct GList
   /**
       holds the element's data, which can be a pointer to any kind
              of data, or any integer value using the
-             [Type Conversion Macros][glib-Type-Conversion-Macros]
+             [Type Conversion Macros](conversion-macros.html#conversion-macros)
   */
   void* data;
 
@@ -5542,6 +5607,10 @@ struct GMarkupParseContext;
     errors are intended to be set from these callbacks. If you set an error
     from a callback, [glib.markup_parse_context.MarkupParseContext.parse] will report that error
     back to its caller.
+    
+    Refer to the [GMarkup](../glib/markup.html) documentation to understand
+    the scope and limitations of [glib.types.MarkupParser]. In particular, it is not a
+    full XML parser and it must not be used to process untrusted data.
 */
 struct GMarkupParser
 {
@@ -5688,7 +5757,7 @@ union GMutex
 }
 
 /**
-    The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
+    The #GNode struct represents one node in a [n-ary tree](data-structures.html#n-ary-trees).
 */
 struct GNode
 {
@@ -5749,6 +5818,19 @@ struct GOnce
 struct GOptionContext;
 
 /**
+    - [glib.types.OptionArg.None]: `gboolean`
+        - [glib.types.OptionArg.String]: `gchar`*
+        - [glib.types.OptionArg.Int]: `gint`
+        - [glib.types.OptionArg.Filename]: `gchar`*
+        - [glib.types.OptionArg.StringArray]: `gchar`**
+        - [glib.types.OptionArg.FilenameArray]: `gchar`**
+        - [glib.types.OptionArg.Double]: `gdouble`
+    
+        If @arg type is [glib.types.OptionArg.String] or [glib.types.OptionArg.Filename],
+        the location will contain a newly allocated string if the option
+        was given. That string needs to be freed by the callee using [glib.global.gfree].
+        Likewise if @arg type is [glib.types.OptionArg.StringArray] or
+        [glib.types.OptionArg.FilenameArray], the data should be freed using [glib.global.strfreev].
     A GOptionEntry struct defines a single option. To have an effect, they
     must be added to a #GOptionGroup with [glib.option_context.OptionContext.addMainEntries]
     or [glib.option_group.OptionGroup.addEntries].
@@ -5788,18 +5870,6 @@ struct GOptionEntry
           called to handle the extra argument. Otherwise, @arg_data is a
           pointer to a location to store the value, the required type of
           the location depends on the @arg type:
-           - [glib.types.OptionArg.None]: `gboolean`
-           - [glib.types.OptionArg.String]: `gchar`*
-           - [glib.types.OptionArg.Int]: `gint`
-           - [glib.types.OptionArg.Filename]: `gchar`*
-           - [glib.types.OptionArg.StringArray]: `gchar`**
-           - [glib.types.OptionArg.FilenameArray]: `gchar`**
-           - [glib.types.OptionArg.Double]: `gdouble`
-          If @arg type is [glib.types.OptionArg.String] or [glib.types.OptionArg.Filename],
-          the location will contain a newly allocated string if the option
-          was given. That string needs to be freed by the callee using [glib.global.gfree].
-          Likewise if @arg type is [glib.types.OptionArg.StringArray] or
-          [glib.types.OptionArg.FilenameArray], the data should be freed using [glib.global.strfreev].
   */
   void* argData;
 
@@ -5869,15 +5939,15 @@ struct GPathBuf
 }
 
 /**
-    A [glib.pattern_spec.PatternSpec] struct is the 'compiled' form of a glob-style pattern.
+    A [glib.pattern_spec.PatternSpec] struct is the ‘compiled’ form of a glob-style pattern.
     
     The `func@GLib.pattern_match_simple` and [glib.pattern_spec.PatternSpec.match] functions
-    match a string against a pattern containing '*' and '?' wildcards with similar
-    semantics as the standard `glob()` function: '*' matches an arbitrary,
-    possibly empty, string, '?' matches an arbitrary character.
+    match a string against a pattern containing `*` and `?` wildcards with similar
+    semantics as the standard `glob()` function: `*` matches an arbitrary,
+    possibly empty, string, `?` matches an arbitrary character.
     
-    Note that in contrast to `glob()`, the '/' character can be matched by
-    the wildcards, there are no '[...]' character ranges and '*' and '?'
+    Note that in contrast to [`glob()`](man:glob(3)), the `/` character can be
+    matched by the wildcards, there are no `[…]` character ranges and `*` and `?`
     can not be escaped to include them literally in a pattern.
     
     When multiple strings must be matched against the same pattern, it is better
@@ -5946,25 +6016,25 @@ struct GPrivate
 }
 
 /**
-    Contains the public fields of a pointer array.
+    Contains the public fields of a [glib.ptr_array.PtrArray].
 */
 struct GPtrArray
 {
   /**
-      points to the array of pointers, which may be moved when the
+      a pointer to the array of pointers, which may be moved when the
           array grows
   */
   void** pdata;
 
   /**
-      number of pointers in the array
+      the number of pointers in the array
   */
   uint len;
 }
 
 /**
     Contains the public fields of a
-    [Queue][glib-Double-ended-Queues].
+    [Queue](data-structures.html#double-ended-queues).
 */
 struct GQueue
 {
@@ -6088,58 +6158,133 @@ struct GRecMutex
 }
 
 /**
-    A [glib.regex.Regex] is the "compiled" form of a regular expression pattern.
+    A [glib.regex.Regex] is a compiled form of a regular expression.
+    
+    After instantiating a [glib.regex.Regex], you can use its methods to find matches
+    in a string, replace matches within a string, or split the string at matches.
     
     [glib.regex.Regex] implements regular expression pattern matching using syntax and
-    semantics similar to Perl regular expression. See the
-    [PCRE documentation](man:pcrepattern(3)) for the syntax definition.
+    semantics (such as character classes, quantifiers, and capture groups)
+    similar to Perl regular expression. See the
+    [PCRE documentation](man:pcre2pattern(3)) for details.
     
-    Some functions accept a @start_position argument, setting it differs
-    from just passing over a shortened string and setting [glib.types.RegexMatchFlags.Notbol]
-    in the case of a pattern that begins with any kind of lookbehind assertion.
-    For example, consider the pattern "\Biss\B" which finds occurrences of "iss"
-    in the middle of words. ("\B" matches only if the current position in the
-    subject is not a word boundary.) When applied to the string "Mississipi"
-    from the fourth byte, namely "issipi", it does not match, because "\B" is
-    always false at the start of the subject, which is deemed to be a word
-    boundary. However, if the entire string is passed , but with
-    @start_position set to 4, it finds the second occurrence of "iss" because
-    it is able to look behind the starting point to discover that it is
-    preceded by a letter.
+    A typical scenario for regex pattern matching is to check if a string
+    matches a pattern. The following statements implement this scenario.
     
-    Note that, unless you set the [glib.types.RegexCompileFlags.Raw] flag, all the strings passed
-    to these functions must be encoded in UTF-8. The lengths and the positions
-    inside the strings are in bytes and not in characters, so, for instance,
-    "\xc3\xa0" (i.e. "à") is two bytes long but it is treated as a
-    single character. If you set [glib.types.RegexCompileFlags.Raw] the strings can be non-valid
-    UTF-8 strings and a byte is treated as a character, so "\xc3\xa0" is two
-    bytes and two characters long.
+    ``` { .c }
+    const char *regex_pattern = ".*GLib.*";
+    const char *string_to_search = "You will love the GLib implementation of regex";
+    g_autoptr(GMatchInfo) match_info = NULL;
+    g_autoptr(GRegex) regex = NULL;
     
-    When matching a pattern, "\n" matches only against a "\n" character in
-    the string, and "\r" matches only a "\r" character. To match any newline
-    sequence use "\R". This particular group matches either the two-character
-    sequence CR + LF ("\r\n"), or one of the single characters LF (linefeed,
-    U+000A, "\n"), VT vertical tab, U+000B, "\v"), FF (formfeed, U+000C, "\f"),
-    CR (carriage return, U+000D, "\r"), NEL (next line, U+0085), LS (line
-    separator, U+2028), or PS (paragraph separator, U+2029).
+    regex = g_regex_new (regex_pattern, G_REGEX_DEFAULT, G_REGEX_MATCH_DEFAULT, NULL);
+    g_assert (regex != NULL);
+    
+    if (g_regex_match (regex, string_to_search, G_REGEX_MATCH_DEFAULT, &match_info))
+      {
+        int start_pos, end_pos;
+        g_match_info_fetch_pos (match_info, 0, &start_pos, &end_pos);
+        g_print ("Match successful! Overall pattern matches bytes %d to %d\n", start_pos, end_pos);
+      }
+    else
+      {
+        g_print ("No match!\n");
+      }
+    ```
+    
+    The constructor for [glib.regex.Regex] includes two sets of bitmapped flags:
+    
+    * [glib.types.RegexCompileFlags]—These flags
+    control how GLib compiles the regex. There are options for case
+    sensitivity, multiline, ignoring whitespace, etc.
+    * [glib.types.RegexMatchFlags]—These flags control
+    [glib.regex.Regex]’s matching behavior, such as anchoring and customizing definitions
+    for newline characters.
+    
+    Some regex patterns include backslash assertions, such as `\d` (digit) or
+    `\D` (non-digit). The regex pattern must escape those backslashes. For
+    example, the pattern `"\\d\\D"` matches a digit followed by a non-digit.
+    
+    GLib’s implementation of pattern matching includes a `start_position`
+    argument for some of the match, replace, and split methods. Specifying
+    a start position provides flexibility when you want to ignore the first
+    _n_ characters of a string, but want to incorporate backslash assertions
+    at character _n_ - 1. For example, a database field contains inconsistent
+    spelling for a job title: `healthcare provider` and `health-care provider`.
+    The database manager wants to make the spelling consistent by adding a
+    hyphen when it is missing. The following regex pattern tests for the string
+    `care` preceded by a non-word boundary character (instead of a hyphen)
+    and followed by a space.
+    
+    ``` { .c }
+    const char *regex_pattern = "\\Bcare\\s";
+    ```
+    
+    An efficient way to match with this pattern is to start examining at
+    `start_position` 6 in the string `healthcare` or `health-care`.
+    
+    ``` { .c }
+    const char *regex_pattern = "\\Bcare\\s";
+    const char *string_to_search = "healthcare provider";
+    g_autoptr(GMatchInfo) match_info = NULL;
+    g_autoptr(GRegex) regex = NULL;
+    
+    regex = g_regex_new (
+      regex_pattern,
+      G_REGEX_DEFAULT,
+      G_REGEX_MATCH_DEFAULT,
+      NULL);
+    g_assert (regex != NULL);
+    
+    g_regex_match_full (
+      regex,
+      string_to_search,
+      -1,
+      6, // position of 'c' in the test string.
+      G_REGEX_MATCH_DEFAULT,
+      &match_info,
+      NULL);
+    ```
+    
+    The method [glib.regex.Regex.matchFull] (and other methods implementing
+    `start_pos`) allow for lookback before the start position to determine if
+    the previous character satisfies an assertion.
+    
+    Unless you set the `flags@GLib.RegexCompileFlags.RAW` as one of
+    the [glib.types.RegexCompileFlags], all the strings passed to [glib.regex.Regex] methods must
+    be encoded in UTF-8. The lengths and the positions inside the strings are
+    in bytes and not in characters, so, for instance, `\xc3\xa0` (i.e., `à`)
+    is two bytes long but it is treated as a single character. If you set
+    [glib.types.RegexCompileFlags.Raw], the strings can be non-valid UTF-8 strings and a byte is
+    treated as a character, so `\xc3\xa0` is two bytes and two characters long.
+    
+    Regarding line endings, `\n` matches a `\n` character, and `\r` matches
+    a `\r` character. More generally, `\R` matches all typical line endings:
+    CR + LF (`\r\n`), LF (linefeed, U+000A, `\n`), VT (vertical tab, U+000B,
+    `\v`), FF (formfeed, U+000C, `\f`), CR (carriage return, U+000D, `\r`),
+    NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph
+    separator, U+2029).
     
     The behaviour of the dot, circumflex, and dollar metacharacters are
-    affected by newline characters, the default is to recognize any newline
-    character (the same characters recognized by "\R"). This can be changed
-    with [glib.types.RegexCompileFlags.NewlineCr], [glib.types.RegexCompileFlags.NewlineLf] and [glib.types.RegexCompileFlags.NewlineCrlf]
-    compile options, and with [glib.types.RegexMatchFlags.NewlineAny],
-    [glib.types.RegexMatchFlags.NewlineCr], [glib.types.RegexMatchFlags.NewlineLf] and
-    [glib.types.RegexMatchFlags.NewlineCrlf] match options. These settings are also
-    relevant when compiling a pattern if [glib.types.RegexCompileFlags.Extended] is set, and an
-    unescaped "#" outside a character class is encountered. This indicates
-    a comment that lasts until after the next newline.
+    affected by newline characters. By default, [glib.regex.Regex] matches any newline
+    character matched by `\R`. You can limit the matched newline characters by
+    specifying the `flags@GLib.RegexMatchFlags.NEWLINE_CR`,
+    `flags@GLib.RegexMatchFlags.NEWLINE_LF`, and
+    `flags@GLib.RegexMatchFlags.NEWLINE_CRLF` compile options, and
+    with `flags@GLib.RegexMatchFlags.NEWLINE_ANY`,
+    `flags@GLib.RegexMatchFlags.NEWLINE_CR`,
+    `flags@GLib.RegexMatchFlags.NEWLINE_LF` and
+    `flags@GLib.RegexMatchFlags.NEWLINE_CRLF` match options.
+    These settings are also relevant when compiling a pattern if
+    `flags@GLib.RegexCompileFlags.EXTENDED` is set and an unescaped
+    `#` outside a character class is encountered. This indicates a comment
+    that lasts until after the next newline.
     
-    Creating and manipulating the same [glib.regex.Regex] structure from different
-    threads is not a problem as [glib.regex.Regex] does not modify its internal
-    state between creation and destruction, on the other hand [glib.match_info.MatchInfo]
-    is not threadsafe.
+    Because [glib.regex.Regex] does not modify its internal state between creation and
+    destruction, you can create and modify the same [glib.regex.Regex] instance from
+    different threads. In contrast, [glib.match_info.MatchInfo] is not thread safe.
     
-    The regular expressions low-level functionalities are obtained through
+    The regular expression low-level functionalities are obtained through
     the excellent [PCRE](http://www.pcre.org/) library written by Philip Hazel.
 */
 struct GRegex;
@@ -6198,7 +6343,7 @@ struct GSList
   /**
       holds the element's data, which can be a pointer to any kind
              of data, or any integer value using the
-             [Type Conversion Macros][glib-Type-Conversion-Macros]
+             [Type Conversion Macros](conversion-macros.html#conversion-macros)
   */
   void* data;
 
@@ -6474,7 +6619,7 @@ struct GScannerConfig
 
 /**
     The #GSequence struct is an opaque data type representing a
-    [sequence][glib-Sequences] data type.
+    [sequence](data-structures.html#scalable-lists) data type.
 */
 struct GSequence;
 
@@ -6578,8 +6723,8 @@ struct GSourceCallbackFuncs
 struct GSourceFuncs
 {
   /**
-      Called before all the file descriptors are polled. If the
-          source can determine that it is ready here (without waiting for the
+      Called before all the file descriptors are polled. If
+          the source can determine that it is ready here (without waiting for the
           results of the poll() call) it should return true. It can also return
           a @timeout_ value which should be the maximum timeout (in milliseconds)
           which should be passed to the poll() call. The actual timeout used will
@@ -6590,38 +6735,41 @@ struct GSourceFuncs
           timeout and the source also has a ready time set, then the
           lower of the two will be used.
   */
-  extern(C) gboolean function(GSource* source, int* timeout) prepare;
+  GSourceFuncsPrepareFunc prepare;
 
   /**
-      Called after all the file descriptors are polled. The source
-          should return true if it is ready to be dispatched. Note that some
-          time may have passed since the previous prepare function was called,
+      Called after all the file descriptors are polled. The
+          source should return true if it is ready to be dispatched. Note that
+          some time may have passed since the previous prepare function was called,
           so the source should be checked again here.  Since 2.36 this may
           be null, in which case the effect is as if the function always returns
           false.
   */
-  extern(C) gboolean function(GSource* source) check;
+  GSourceFuncsCheckFunc check;
 
   /**
       Called to dispatch the event source, after it has returned
           true in either its @prepare or its @check function, or if a ready time
           has been reached. The @dispatch function receives a callback function and
           user data. The callback function may be null if the source was never
-          connected to a callback using [glib.source.Source.setCallback]. The @dispatch
-          function should call the callback function with @user_data and whatever
-          additional parameters are needed for this type of event source. The
-          return value of the @dispatch function should be [glib.types.SOURCE_REMOVE] if the
-          source should be removed or [glib.types.SOURCE_CONTINUE] to keep it.
+          connected to a callback using [glib.source.Source.setCallback]. The
+          @dispatch function should call the callback function with @user_data and
+          whatever additional parameters are needed for this type of event source.
+          The return value of the @dispatch function should be
+          [glib.types.SOURCE_REMOVE] if the source should be removed or
+          [glib.types.SOURCE_CONTINUE] to keep it.
   */
-  extern(C) gboolean function(GSource* source, GSourceFunc callback, void* userData) dispatch;
+  GSourceFuncsDispatchFunc dispatch;
 
   /**
-      Called when the source is finalized. At this point, the source
-          will have been destroyed, had its callback cleared, and have been removed
-          from its #GMainContext, but it will still have its final reference count,
-          so methods can be called on it from within this function.
+      Called when the source is finalized. At this point,
+          the source will have been destroyed, had its callback cleared, and have
+          been removed from its [glib.main_context.MainContext], but it will still have
+          its final reference count, so methods can be called on it from within
+          this function. This may be null, in which case the effect is as if the
+          function does nothing and returns.
   */
-  extern(C) void function(GSource* source) finalize;
+  GSourceFuncsFinalizeFunc finalize;
 
   /** */
   GSourceFunc closureCallback;
@@ -6729,7 +6877,7 @@ struct GStaticPrivate
 }
 
 /**
-    The #GStaticRWLock struct represents a read-write lock. A read-write
+    The [glib.static_rwlock.StaticRWLock] struct represents a read-write lock. A read-write
     lock can be used for protecting data that some portions of code only
     read from, while others also write. In such situations it is
     desirable that several readers can read at once, whereas of course
@@ -6773,8 +6921,8 @@ struct GStaticPrivate
     ```
     
     This example shows an array which can be accessed by many readers
-    (the my_array_get() function) simultaneously, whereas the writers
-    (the my_array_set() function) will only be allowed once at a time
+    (the `my_array_get()` function) simultaneously, whereas the writers
+    (the `my_array_set()` function) will only be allowed once at a time
     and only if no readers currently access the array. This is because
     of the potentially dangerous resizing of the array. Using these
     functions is fully multi-thread safe now.
@@ -6786,23 +6934,23 @@ struct GStaticPrivate
     to finish their operation. As soon as the last reader unlocks the
     data, the writer will lock it.
     
-    Even though #GStaticRWLock is not opaque, it should only be used
+    Even though [glib.static_rwlock.StaticRWLock] is not opaque, it should only be used
     with the following functions.
     
-    All of the g_static_rw_lock_* functions can be used even if
+    All of the `g_static_rw_lock_*` functions can be used even if
     [glib.thread.Thread.init_] has not been called. Then they do nothing, apart
-    from g_static_rw_lock_*_trylock, which does nothing but returning true.
+    from `g_static_rw_lock_*_trylock`, which does nothing but returning true.
     
     A read-write lock has a higher overhead than a mutex. For example, both
     [glib.static_rwlock.StaticRWLock.readerLock] and [glib.static_rwlock.StaticRWLock.readerUnlock] have
-    to lock and unlock a #GStaticMutex, so it takes at least twice the time
-    to lock and unlock a #GStaticRWLock that it does to lock and unlock a
-    #GStaticMutex. So only data structures that are accessed by multiple
+    to lock and unlock a [glib.static_mutex.StaticMutex], so it takes at least twice the time
+    to lock and unlock a [glib.static_rwlock.StaticRWLock] that it does to lock and unlock a
+    [glib.static_mutex.StaticMutex]. So only data structures that are accessed by multiple
     readers, and which keep the lock for a considerable time justify a
-    #GStaticRWLock. The above example most probably would fare better with a
-    #GStaticMutex.
+    [glib.static_rwlock.StaticRWLock]. The above example most probably would fare better with a
+    [glib.static_mutex.StaticMutex].
 
-    Deprecated: Use a #GRWLock instead
+    Deprecated: Use a [glib.rwlock.RWLock] instead
 */
 struct GStaticRWLock
 {
@@ -6926,7 +7074,10 @@ struct GStringChunk;
       g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
       g_strv_builder_add (builder, "hello");
       g_strv_builder_add (builder, "world");
+    
       g_auto(GStrv) array = g_strv_builder_end (builder);
+    
+      g_assert_true (g_strv_equal (array, (const char *[]) { "hello", "world", NULL }));
     ```
 */
 struct GStrvBuilder;
@@ -7343,7 +7494,7 @@ struct GTrashStack
 
 /**
     The GTree struct is an opaque data structure representing a
-    [balanced binary tree][glib-Balanced-Binary-Trees]. It should be
+    [balanced binary tree](data-structures.html#binary-trees). It should be
     accessed only by using the following functions.
 */
 struct GTree;
@@ -7367,21 +7518,6 @@ struct GTuples
       the number of records that matched.
   */
   uint len;
-}
-
-/**
-    A Unix pipe. The advantage of this type over `int[2]` is that it can
-    be closed automatically when it goes out of scope, using `g_auto(GUnixPipe)`,
-    on compilers that support that feature.
-*/
-struct GUnixPipe
-{
-  /**
-      A pair of file descriptors, each negative if closed or not yet opened.
-       The file descriptor with index [glib.types.UnixPipeEnd.Read] is readable.
-       The file descriptor with index [glib.types.UnixPipeEnd.Write] is writable.
-  */
-  int[2] fds;
 }
 
 /**
@@ -7457,7 +7593,7 @@ struct GUnixPipe
     references’ (sometimes referred to as ‘relative URIs’) or ‘URIs’ (for
     clarity, ‘URIs’ are referred to in this documentation as
     ‘absolute URIs’ — although
-    [in constrast to RFC 3986](https://tools.ietf.org/html/rfc3986#section-4.3),
+    [in contrast to RFC 3986](https://tools.ietf.org/html/rfc3986#section-4.3),
     fragment identifiers are always allowed).
     
     Relative references have one or more components of the URI missing. In
@@ -7967,6 +8103,19 @@ struct GVariantIter
 /**
     A type in the [glib.variant.Variant] type system.
     
+    [glib.variant.Variant] types are represented as strings, but have a strict
+    syntax described below. All [glib.variant_type.VariantType]s passed to GLib must be
+    valid, and they are typically expected to be static (i.e. not provided by
+    user input) as they determine how binary [glib.variant.Variant] data is
+    interpreted.
+    
+    To convert a static string to a [glib.variant_type.VariantType] in C, use the
+    `func@GLib.VARIANT_TYPE` casting macro. When GLib is compiled with checks
+    enabled, it will validate the type. To check if an arbitrary string is a
+    valid [glib.variant_type.VariantType], use [glib.variant_type.VariantType.stringIsValid].
+    
+    ## GVariant Type System
+    
     This section introduces the [glib.variant.Variant] type system. It is based, in
     large part, on the D-Bus type system, with two major changes and
     some minor lifting of restrictions. The
@@ -8211,6 +8360,14 @@ alias extern(C) void function() GSourceDummyMarshal;
 
 alias extern(C) gboolean function(void* userData) GSourceFunc;
 
+alias extern(C) gboolean function(GSource* source) GSourceFuncsCheckFunc;
+
+alias extern(C) gboolean function(GSource* source, GSourceFunc callback, void* userData) GSourceFuncsDispatchFunc;
+
+alias extern(C) void function(GSource* source) GSourceFuncsFinalizeFunc;
+
+alias extern(C) gboolean function(GSource* source, int* timeout) GSourceFuncsPrepareFunc;
+
 alias extern(C) void function(void* userData) GSourceOnceFunc;
 
 alias extern(C) void function(void* data) GSpawnChildSetupFunc;
@@ -8230,8 +8387,6 @@ alias extern(C) const(char)* function(const(char)* str, void* data) GTranslateFu
 alias extern(C) gboolean function(void* key, void* value, void* data) GTraverseFunc;
 
 alias extern(C) gboolean function(GTreeNode* node, void* data) GTraverseNodeFunc;
-
-alias extern(C) gboolean function(int fd, GIOCondition condition, void* userData) GUnixFDSourceFunc;
 
 alias extern(C) void function() GVoidFunc;
 

@@ -75,6 +75,12 @@ import gobject.object;
     [gio.subprocess.Subprocess.wait].  After the process exits, the status can be
     checked using functions such as [gio.subprocess.Subprocess.getIfExited] (which
     are similar to the familiar `WIFEXITED`-style POSIX macros).
+    
+    Note that as of GLib 2.82, creating a [gio.subprocess.Subprocess] causes the signal
+    `SIGPIPE` to be ignored for the remainder of the program. If you are writing
+    a command-line utility that uses [gio.subprocess.Subprocess], you may need to take into
+    account the fact that your program will not automatically be killed
+    if it tries to write to `stdout` after it has been closed.
 */
 class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
 {

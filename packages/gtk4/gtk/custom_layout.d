@@ -10,11 +10,11 @@ import gtk.layout_manager;
 import gtk.types;
 
 /**
-    [gtk.custom_layout.CustomLayout] uses closures for size negotiation.
+    Uses closures for size negotiation.
     
-    A `GtkCustomLayout `uses closures matching to the old [gtk.widget.Widget]
+    A [gtk.custom_layout.CustomLayout] uses closures matching to the old [gtk.widget.Widget]
     virtual functions for size negotiation, as a convenience API to
-    ease the porting towards the corresponding `GtkLayoutManager
+    ease the porting towards the corresponding [gtk.layout_manager.LayoutManager]
     virtual functions.
 */
 class CustomLayout : gtk.layout_manager.LayoutManager

@@ -15,7 +15,7 @@ import gobject.object;
     descriptors that it contains, closing them when finalized.
     
     It may be wrapped in a
-    [[gio.unix_fdmessage.UnixFDMessage]](../gio-unix/class.UnixFDMessage.html) and sent over a
+    [[giounix.fdmessage.FDMessage]](../gio-unix/class.UnixFDMessage.html) and sent over a
     [gio.socket.Socket] in the [gio.types.SocketFamily.Unix] family by using
     [gio.socket.Socket.sendMessage] and received using
     [gio.socket.Socket.receiveMessage].

@@ -145,7 +145,7 @@ class MappedFile : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_mapped_file_get_contents(cast(GMappedFile*)this._cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;
   }
 

@@ -818,7 +818,6 @@ class Layout : gobject.object.ObjectWrap
       Queries whether the layout had to wrap any paragraphs.
       
       This returns true if a positive width is set on layout,
-      ellipsization mode of layout is set to [pango.types.EllipsizeMode.None],
       and there are paragraphs exceeding the layout width that have
       to be wrapped.
       Returns: true if any paragraphs had to be wrapped, false
@@ -1264,7 +1263,7 @@ class Layout : gobject.object.ObjectWrap
 
   /**
       Sets the width to which the lines of the [pango.layout.Layout] should wrap or
-      ellipsized.
+      get ellipsized.
       
       The default value is -1: no width set.
   

@@ -7,14 +7,11 @@ import gdk.c.types;
 import gdk.draw_context;
 import gdk.types;
 import gid.gid;
-import gio.initable;
-import gio.initable_mixin;
 import gobject.dclosure;
 import gobject.gid_builder;
 
 /**
-    [gdk.vulkan_context.VulkanContext] is an object representing the platform-specific
-    Vulkan draw context.
+    Represents the platform-specific Vulkan draw context.
     
     [gdk.vulkan_context.VulkanContext]s are created for a surface using
     [gdk.surface.Surface.createVulkanContext], and the context will match
@@ -22,8 +19,11 @@ import gobject.gid_builder;
     
     Support for [gdk.vulkan_context.VulkanContext] is platform-specific and context creation
     can fail, returning null context.
+
+    Deprecated: GTK does not expose any Vulkan internals. This
+        struct is a leftover that was accidentally exposed.
 */
-class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
+class VulkanContext : gdk.draw_context.DrawContext
 {
 
   /** */
@@ -59,8 +59,6 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
   {
     return new VulkanContextGidBuilder;
   }
-
-  mixin InitableT!();
 
   /**
       Connect to `ImagesUpdated` signal.
@@ -111,10 +109,8 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
 }
 
 /// Fluent builder implementation template for [gdk.vulkan_context.VulkanContext]
-class VulkanContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
+class VulkanContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T
 {
-
-  mixin InitableGidBuilderT!();
 }
 
 /// Fluent builder for [gdk.vulkan_context.VulkanContext]

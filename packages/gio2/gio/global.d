@@ -17,8 +17,6 @@ import gio.output_stream;
 import gio.resource;
 import gio.settings_backend;
 import gio.types;
-import gio.unix_mount_entry;
-import gio.unix_mount_point;
 import glib.bytes;
 import glib.error;
 import glib.source;
@@ -136,19 +134,19 @@ gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.can
 }
 
 /**
-    Version of [gio.global.busOwnNameOnConnection] using closures instead of
+    Version of `funcGio.bus_own_name_on_connection` using closures instead of
     callbacks for easier binding in other languages.
 
     Params:
-      connection = a #GDBusConnection
+      connection = a bus connection
       name = the well-known name to own
-      flags = a set of flags from the #GBusNameOwnerFlags enumeration
-      nameAcquiredClosure = #GClosure to invoke when name is
-            acquired or null
-      nameLostClosure = #GClosure to invoke when name is lost
-            or null
+      flags = a set of flags with ownership options
+      nameAcquiredClosure = closure to invoke when name is
+          acquired, or `NULL` to ignore
+      nameLostClosure = closure to invoke when name is lost,
+          or `NULL` to ignore
     Returns: an identifier (never 0) that can be used with
-          [gio.global.busUnownName] to stop owning the name.
+        `funcGio.bus_unown_name` to stop owning the name.
 */
 uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null) nothrow
 {
@@ -159,21 +157,21 @@ uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, strin
 }
 
 /**
-    Version of [gio.global.busOwnName] using closures instead of callbacks for
+    Version of [funcGio.bus_own_name using closures instead of callbacks for
     easier binding in other languages.
 
     Params:
       busType = the type of bus to own a name on
       name = the well-known name to own
-      flags = a set of flags from the #GBusNameOwnerFlags enumeration
-      busAcquiredClosure = #GClosure to invoke when connected to
-            the bus of type bus_type or null
-      nameAcquiredClosure = #GClosure to invoke when name is
-            acquired or null
-      nameLostClosure = #GClosure to invoke when name is lost or
-            null
+      flags = a set of flags with ownership options
+      busAcquiredClosure = closure to invoke when connected to
+          the bus of type bus_type, or `NULL` to ignore
+      nameAcquiredClosure = closure to invoke when name is
+          acquired, or `NULL` to ignore
+      nameLostClosure = closure to invoke when name is lost, or
+          `NULL` to ignore
     Returns: an identifier (never 0) that can be used with
-          [gio.global.busUnownName] to stop owning the name.
+        `funcGio.bus_unown_name` to stop owning the name.
 */
 uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure busAcquiredClosure = null, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null) nothrow
 {
@@ -187,14 +185,15 @@ uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFl
     Stops owning a name.
     
     Note that there may still be D-Bus traffic to process (relating to owning
-    and unowning the name) in the current thread-default #GMainContext after
-    this function has returned. You should continue to iterate the #GMainContext
-    until the #GDestroyNotify function passed to [gio.global.busOwnName] is called, in
-    order to avoid memory leaks through callbacks queued on the #GMainContext
-    after it’s stopped being iterated.
+    and unowning the name) in the current thread-default
+    [glib.main_context.MainContext] after this function has returned. You should
+    continue to iterate the [glib.main_context.MainContext] until the
+    [glib.types.DestroyNotify] function passed to `funcGio.bus_own_name` is
+    called, in order to avoid memory leaks through callbacks queued on the
+    [glib.main_context.MainContext] after it’s stopped being iterated.
 
     Params:
-      ownerId = an identifier obtained from [gio.global.busOwnName]
+      ownerId = an identifier obtained from `funcGio.bus_own_name`
 */
 void busUnownName(uint ownerId) nothrow
 {
@@ -1200,7 +1199,7 @@ void ioSchedulerCancelAllJobs() nothrow
 
     Params:
       jobFunc = a #GIOSchedulerJobFunc.
-      ioPriority = the [I/O priority][io-priority]
+      ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority)
         of the request.
       cancellable = optional #GCancellable object, null to ignore.
 
@@ -1232,62 +1231,62 @@ void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gi
 }
 
 /**
-    Creates a keyfile-backed #GSettingsBackend.
+    Creates a keyfile-backed [gio.settings_backend.SettingsBackend].
     
     The filename of the keyfile to use is given by filename.
     
     All settings read to or written from the backend must fall under the
     path given in root_path (which must start and end with a slash and
-    not contain two consecutive slashes).  root_path may be "/".
+    not contain two consecutive slashes).  root_path may be `"/"`.
     
-    If root_group is non-null then it specifies the name of the keyfile
+    If root_group is non-`NULL` then it specifies the name of the keyfile
     group used for keys that are written directly below root_path.  For
-    example, if root_path is "/apps/example/" and root_group is
-    "toplevel", then settings the key "/apps/example/enabled" to a value
-    of true will cause the following to appear in the keyfile:
+    example, if root_path is `"/apps/example/"` and root_group is
+    `"toplevel"`, then setting the key `"/apps/example/enabled"` to true will
+    cause the following to appear in the keyfile:
     
     ```
-      [toplevel]
-      enabled=true
+    [toplevel]
+    enabled=true
     ```
     
-    If root_group is null then it is not permitted to store keys
+    If root_group is `NULL` then it is not permitted to store keys
     directly below the root_path.
     
     For keys not stored directly below root_path (ie: in a sub-path),
     the name of the subpath (with the final slash stripped) is used as
     the name of the keyfile group.  To continue the example, if
-    "/apps/example/profiles/default/font-size" were set to
-    12 then the following would appear in the keyfile:
+    `"/apps/example/profiles/default/font-size"` were set to
+    `12` then the following would appear in the keyfile:
     
     ```
-      [profiles/default]
-      font-size=12
+    [profiles/default]
+    font-size=12
     ```
     
     The backend will refuse writes (and return writability as being
     false) for keys outside of root_path and, in the event that
-    root_group is null, also for keys directly under root_path.
+    root_group is `NULL`, also for keys directly under root_path.
     Writes will also be refused if the backend detects that it has the
     inability to rewrite the keyfile (ie: the containing directory is not
     writable).
     
     There is no checking done for your key namespace clashing with the
-    syntax of the key file format.  For example, if you have '[' or ']'
-    characters in your path names or '=' in your key names you may be in
+    syntax of the key file format.  For example, if you have `[` or `]`
+    characters in your path names or `=` in your key names you may be in
     trouble.
     
     The backend reads default values from a keyfile called `defaults` in
-    the directory specified by the #GKeyfileSettingsBackend:defaults-dir property,
-    and a list of locked keys from a text file with the name `locks` in
+    the directory specified by the `GKeyfileSettingsBackend:defaults-dir`
+    property, and a list of locked keys from a text file with the name `locks` in
     the same location.
 
     Params:
       filename = the filename of the keyfile
       rootPath = the path under which all settings keys appear
-      rootGroup = the group name corresponding to
-                     root_path, or null
-    Returns: a keyfile-backed #GSettingsBackend
+      rootGroup = the group name corresponding to root_path, or
+           `NULL` to disallow storing keys directly beneath root_path
+    Returns: a keyfile-backed [gio.settings_backend.SettingsBackend]
 */
 gio.settings_backend.SettingsBackend keyfileSettingsBackendNew(string filename, string rootPath, string rootGroup = null) nothrow
 {
@@ -1502,14 +1501,15 @@ bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffe
 /**
     Returns all the names of children at the specified path in the set of
     globally registered resources.
-    The return result is a null terminated list of strings which should
-    be released with [glib.global.strfreev].
+    
+    The return result is a `NULL` terminated list of strings which should
+    be released with `funcGLib.strfreev`.
     
     lookup_flags controls the behaviour of the lookup.
 
     Params:
-      path = A pathname inside the resource
-      lookupFlags = A #GResourceLookupFlags
+      path = A path name inside the resource
+      lookupFlags = A [gio.types.ResourceLookupFlags]
     Returns: an array of constant strings
     Throws: [ErrorWrap]
 */
@@ -1543,13 +1543,13 @@ string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags l
     lookup_flags controls the behaviour of the lookup.
 
     Params:
-      path = A pathname inside the resource
-      lookupFlags = A #GResourceLookupFlags
+      path = A path name inside the resource
+      lookupFlags = A [gio.types.ResourceLookupFlags]
       size = a location to place the length of the contents of the file,
-           or null if the length is not needed
-      flags = a location to place the #GResourceFlags about the file,
-           or null if the flags are not needed
-    Returns: true if the file was found. false if there were errors
+           or `NULL` if the length is not needed
+      flags = a location to place the [gio.types.ResourceFlags] about the file,
+           or `NULL` if the flags are not needed
+    Returns: `TRUE` if the file was found, `FALSE` if there were errors
     Throws: [ErrorWrap]
 */
 bool resourcesGetInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
@@ -1564,26 +1564,41 @@ bool resourcesGetInfo(string path, gio.types.ResourceLookupFlags lookupFlags, ou
 }
 
 /**
+    Returns whether the specified path in the set of
+    globally registered resources has children.
+
+    Params:
+      path = A pathname
+    Returns: true if patch has children
+*/
+bool resourcesHasChildren(string path) nothrow
+{
+  bool _retval;
+  const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+  _retval = cast(bool)g_resources_has_children(_path);
+  return _retval;
+}
+
+/**
     Looks for a file at the specified path in the set of
-    globally registered resources and returns a #GBytes that
+    globally registered resources and returns a [glib.bytes.Bytes] that
     lets you directly access the data in memory.
     
     The data is always followed by a zero byte, so you
     can safely use the data as a C string. However, that byte
-    is not included in the size of the GBytes.
+    is not included in the size of the [glib.bytes.Bytes].
     
     For uncompressed resource files this is a pointer directly into
-    the resource bundle, which is typically in some readonly data section
+    the resource bundle, which is typically in some read-only data section
     in the program binary. For compressed files we allocate memory on
     the heap and automatically uncompress the data.
     
     lookup_flags controls the behaviour of the lookup.
 
     Params:
-      path = A pathname inside the resource
-      lookupFlags = A #GResourceLookupFlags
-    Returns: #GBytes or null on error.
-          Free the returned object with [glib.bytes.Bytes.unref]
+      path = A path name inside the resource
+      lookupFlags = A [gio.types.ResourceLookupFlags]
+    Returns: [glib.bytes.Bytes] or `NULL` on error
     Throws: [ErrorWrap]
 */
 glib.bytes.Bytes resourcesLookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
@@ -1600,16 +1615,15 @@ glib.bytes.Bytes resourcesLookupData(string path, gio.types.ResourceLookupFlags 
 
 /**
     Looks for a file at the specified path in the set of
-    globally registered resources and returns a #GInputStream
+    globally registered resources and returns a [gio.input_stream.InputStream]
     that lets you read the data.
     
     lookup_flags controls the behaviour of the lookup.
 
     Params:
-      path = A pathname inside the resource
-      lookupFlags = A #GResourceLookupFlags
-    Returns: #GInputStream or null on error.
-          Free the returned object with [gobject.object.ObjectWrap.unref]
+      path = A path name inside the resource
+      lookupFlags = A [gio.types.ResourceLookupFlags]
+    Returns: [gio.input_stream.InputStream] or `NULL` on error
     Throws: [ErrorWrap]
 */
 gio.input_stream.InputStream resourcesOpenStream(string path, gio.types.ResourceLookupFlags lookupFlags)
@@ -1626,11 +1640,13 @@ gio.input_stream.InputStream resourcesOpenStream(string path, gio.types.Resource
 
 /**
     Registers the resource with the process-global set of resources.
+    
     Once a resource is registered the files in it can be accessed
-    with the global resource lookup functions like [gio.global.resourcesLookupData].
+    with the global resource lookup functions like
+    `funcGio.resources_lookup_data`.
 
     Params:
-      resource = A #GResource
+      resource = A [gio.resource.Resource]
 */
 void resourcesRegister(gio.resource.Resource resource) nothrow
 {
@@ -1641,7 +1657,7 @@ void resourcesRegister(gio.resource.Resource resource) nothrow
     Unregisters the resource from the process-global set of resources.
 
     Params:
-      resource = A #GResource
+      resource = A [gio.resource.Resource]
 */
 void resourcesUnregister(gio.resource.Resource resource) nothrow
 {
@@ -1679,414 +1695,4 @@ void simpleAsyncReportGerrorInIdle(gobject.object.ObjectWrap object, gio.types.A
   auto _callbackCB = callback ? &_callbackCallback : null;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   g_simple_async_report_gerror_in_idle(object ? cast(GObject*)object._cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
-}
-
-/**
-    Determines if mount_path is considered an implementation of the
-    OS. This is primarily used for hiding mountable and mounted volumes
-    that only are used in the OS and has little to no relevance to the
-    casual user.
-
-    Params:
-      mountPath = a mount path, e.g. `/media/disk` or `/usr`
-    Returns: true if mount_path is considered an implementation detail
-          of the OS.
-*/
-bool unixIsMountPathSystemInternal(string mountPath) nothrow
-{
-  bool _retval;
-  const(char)* _mountPath = mountPath.toCString!(No.Malloc, No.Nullable);
-  _retval = cast(bool)g_unix_is_mount_path_system_internal(_mountPath);
-  return _retval;
-}
-
-/**
-    Determines if device_path is considered a block device path which is only
-    used in implementation of the OS. This is primarily used for hiding
-    mounted volumes that are intended as APIs for programs to read, and system
-    administrators at a shell; rather than something that should, for example,
-    appear in a GUI. For example, the Linux `/proc` filesystem.
-    
-    The list of device paths considered ‘system’ ones may change over time.
-
-    Params:
-      devicePath = a device path, e.g. `/dev/loop0` or `nfsd`
-    Returns: true if device_path is considered an implementation detail of
-         the OS.
-*/
-bool unixIsSystemDevicePath(string devicePath) nothrow
-{
-  bool _retval;
-  const(char)* _devicePath = devicePath.toCString!(No.Malloc, No.Nullable);
-  _retval = cast(bool)g_unix_is_system_device_path(_devicePath);
-  return _retval;
-}
-
-/**
-    Determines if fs_type is considered a type of file system which is only
-    used in implementation of the OS. This is primarily used for hiding
-    mounted volumes that are intended as APIs for programs to read, and system
-    administrators at a shell; rather than something that should, for example,
-    appear in a GUI. For example, the Linux `/proc` filesystem.
-    
-    The list of file system types considered ‘system’ ones may change over time.
-
-    Params:
-      fsType = a file system type, e.g. `procfs` or `tmpfs`
-    Returns: true if fs_type is considered an implementation detail of the OS.
-*/
-bool unixIsSystemFsType(string fsType) nothrow
-{
-  bool _retval;
-  const(char)* _fsType = fsType.toCString!(No.Malloc, No.Nullable);
-  _retval = cast(bool)g_unix_is_system_fs_type(_fsType);
-  return _retval;
-}
-
-/**
-    Gets a #GUnixMountEntry for a given mount path. If time_read
-    is set, it will be filled with a unix timestamp for checking
-    if the mounts have changed since with [gio.global.unixMountsChangedSince].
-    
-    If more mounts have the same mount path, the last matching mount
-    is returned.
-    
-    This will return null if there is no mount point at mount_path.
-
-    Params:
-      mountPath = path for a possible unix mount.
-      timeRead = guint64 to contain a timestamp.
-    Returns: a #GUnixMountEntry.
-*/
-gio.unix_mount_entry.UnixMountEntry unixMountAt(string mountPath, out ulong timeRead) nothrow
-{
-  GUnixMountEntry* _cretval;
-  const(char)* _mountPath = mountPath.toCString!(No.Malloc, No.Nullable);
-  _cretval = g_unix_mount_at(_mountPath, cast(ulong*)&timeRead);
-  auto _retval = _cretval ? new gio.unix_mount_entry.UnixMountEntry(cast(void*)_cretval, Yes.Take) : null;
-  return _retval;
-}
-
-/**
-    Compares two unix mounts.
-
-    Params:
-      mount1 = first #GUnixMountEntry to compare.
-      mount2 = second #GUnixMountEntry to compare.
-    Returns: 1, 0 or -1 if mount1 is greater than, equal to,
-      or less than mount2, respectively.
-*/
-int unixMountCompare(gio.unix_mount_entry.UnixMountEntry mount1, gio.unix_mount_entry.UnixMountEntry mount2) nothrow
-{
-  int _retval;
-  _retval = g_unix_mount_compare(mount1 ? cast(GUnixMountEntry*)mount1._cPtr(No.Dup) : null, mount2 ? cast(GUnixMountEntry*)mount2._cPtr(No.Dup) : null);
-  return _retval;
-}
-
-/**
-    Makes a copy of mount_entry.
-
-    Params:
-      mountEntry = a #GUnixMountEntry.
-    Returns: a new #GUnixMountEntry
-*/
-gio.unix_mount_entry.UnixMountEntry unixMountCopy(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  GUnixMountEntry* _cretval;
-  _cretval = g_unix_mount_copy(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gio.unix_mount_entry.UnixMountEntry(cast(void*)_cretval, Yes.Take) : null;
-  return _retval;
-}
-
-/**
-    Gets a #GUnixMountEntry for a given file path. If time_read
-    is set, it will be filled with a unix timestamp for checking
-    if the mounts have changed since with [gio.global.unixMountsChangedSince].
-    
-    If more mounts have the same mount path, the last matching mount
-    is returned.
-    
-    This will return null if looking up the mount entry fails, if
-    file_path doesn’t exist or there is an I/O error.
-
-    Params:
-      filePath = file path on some unix mount.
-      timeRead = guint64 to contain a timestamp.
-    Returns: a #GUnixMountEntry.
-*/
-gio.unix_mount_entry.UnixMountEntry unixMountFor(string filePath, out ulong timeRead) nothrow
-{
-  GUnixMountEntry* _cretval;
-  const(char)* _filePath = filePath.toCString!(No.Malloc, No.Nullable);
-  _cretval = g_unix_mount_for(_filePath, cast(ulong*)&timeRead);
-  auto _retval = _cretval ? new gio.unix_mount_entry.UnixMountEntry(cast(void*)_cretval, Yes.Take) : null;
-  return _retval;
-}
-
-/**
-    Frees a unix mount.
-
-    Params:
-      mountEntry = a #GUnixMountEntry.
-*/
-void unixMountFree(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  g_unix_mount_free(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-}
-
-/**
-    Gets the device path for a unix mount.
-
-    Params:
-      mountEntry = a #GUnixMount.
-    Returns: a string containing the device path.
-*/
-string unixMountGetDevicePath(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  const(char)* _cretval;
-  _cretval = g_unix_mount_get_device_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
-  return _retval;
-}
-
-/**
-    Gets the filesystem type for the unix mount.
-
-    Params:
-      mountEntry = a #GUnixMount.
-    Returns: a string containing the file system type.
-*/
-string unixMountGetFsType(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  const(char)* _cretval;
-  _cretval = g_unix_mount_get_fs_type(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
-  return _retval;
-}
-
-/**
-    Gets the mount path for a unix mount.
-
-    Params:
-      mountEntry = input #GUnixMountEntry to get the mount path for.
-    Returns: the mount path for mount_entry.
-*/
-string unixMountGetMountPath(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  const(char)* _cretval;
-  _cretval = g_unix_mount_get_mount_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
-  return _retval;
-}
-
-/**
-    Gets a comma-separated list of mount options for the unix mount. For example,
-    `rw,relatime,seclabel,data=ordered`.
-    
-    This is similar to [gio.unix_mount_point.UnixMountPoint.getOptions], but it takes
-    a #GUnixMountEntry as an argument.
-
-    Params:
-      mountEntry = a #GUnixMountEntry.
-    Returns: a string containing the options, or null if not
-      available.
-*/
-string unixMountGetOptions(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  const(char)* _cretval;
-  _cretval = g_unix_mount_get_options(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
-  return _retval;
-}
-
-/**
-    Gets the root of the mount within the filesystem. This is useful e.g. for
-    mounts created by bind operation, or btrfs subvolumes.
-    
-    For example, the root path is equal to "/" for mount created by
-    "mount /dev/sda1 /mnt/foo" and "/bar" for
-    "mount --bind /mnt/foo/bar /mnt/bar".
-
-    Params:
-      mountEntry = a #GUnixMountEntry.
-    Returns: a string containing the root, or null if not supported.
-*/
-string unixMountGetRootPath(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  const(char)* _cretval;
-  _cretval = g_unix_mount_get_root_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
-  return _retval;
-}
-
-/**
-    Guesses whether a Unix mount can be ejected.
-
-    Params:
-      mountEntry = a #GUnixMountEntry
-    Returns: true if mount_entry is deemed to be ejectable.
-*/
-bool unixMountGuessCanEject(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  bool _retval;
-  _retval = cast(bool)g_unix_mount_guess_can_eject(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  return _retval;
-}
-
-/**
-    Guesses the icon of a Unix mount.
-
-    Params:
-      mountEntry = a #GUnixMountEntry
-    Returns: a #GIcon
-*/
-gio.icon.Icon unixMountGuessIcon(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  GIcon* _cretval;
-  _cretval = g_unix_mount_guess_icon(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
-  return _retval;
-}
-
-/**
-    Guesses the name of a Unix mount.
-    The result is a translated string.
-
-    Params:
-      mountEntry = a #GUnixMountEntry
-    Returns: A newly allocated string that must
-          be freed with [glib.global.gfree]
-*/
-string unixMountGuessName(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  char* _cretval;
-  _cretval = g_unix_mount_guess_name(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
-  return _retval;
-}
-
-/**
-    Guesses whether a Unix mount should be displayed in the UI.
-
-    Params:
-      mountEntry = a #GUnixMountEntry
-    Returns: true if mount_entry is deemed to be displayable.
-*/
-bool unixMountGuessShouldDisplay(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  bool _retval;
-  _retval = cast(bool)g_unix_mount_guess_should_display(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  return _retval;
-}
-
-/**
-    Guesses the symbolic icon of a Unix mount.
-
-    Params:
-      mountEntry = a #GUnixMountEntry
-    Returns: a #GIcon
-*/
-gio.icon.Icon unixMountGuessSymbolicIcon(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  GIcon* _cretval;
-  _cretval = g_unix_mount_guess_symbolic_icon(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
-  return _retval;
-}
-
-/**
-    Checks if a unix mount is mounted read only.
-
-    Params:
-      mountEntry = a #GUnixMount.
-    Returns: true if mount_entry is read only.
-*/
-bool unixMountIsReadonly(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  bool _retval;
-  _retval = cast(bool)g_unix_mount_is_readonly(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  return _retval;
-}
-
-/**
-    Checks if a Unix mount is a system mount. This is the Boolean OR of
-    [gio.global.unixIsSystemFsType], [gio.global.unixIsSystemDevicePath] and
-    [gio.global.unixIsMountPathSystemInternal] on mount_entry’s properties.
-    
-    The definition of what a ‘system’ mount entry is may change over time as new
-    file system types and device paths are ignored.
-
-    Params:
-      mountEntry = a #GUnixMount.
-    Returns: true if the unix mount is for a system path.
-*/
-bool unixMountIsSystemInternal(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
-{
-  bool _retval;
-  _retval = cast(bool)g_unix_mount_is_system_internal(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
-  return _retval;
-}
-
-/**
-    Checks if the unix mount points have changed since a given unix time.
-
-    Params:
-      time = guint64 to contain a timestamp.
-    Returns: true if the mount points have changed since time.
-*/
-bool unixMountPointsChangedSince(ulong time) nothrow
-{
-  bool _retval;
-  _retval = cast(bool)g_unix_mount_points_changed_since(time);
-  return _retval;
-}
-
-/**
-    Gets a #GList of #GUnixMountPoint containing the unix mount points.
-    If time_read is set, it will be filled with the mount timestamp,
-    allowing for checking if the mounts have changed with
-    [gio.global.unixMountPointsChangedSince].
-
-    Params:
-      timeRead = guint64 to contain a timestamp.
-    Returns: a #GList of the UNIX mountpoints.
-*/
-gio.unix_mount_point.UnixMountPoint[] unixMountPointsGet(out ulong timeRead) nothrow
-{
-  GList* _cretval;
-  _cretval = g_unix_mount_points_get(cast(ulong*)&timeRead);
-  auto _retval = gListToD!(gio.unix_mount_point.UnixMountPoint, GidOwnership.Full)(cast(GList*)_cretval);
-  return _retval;
-}
-
-/**
-    Checks if the unix mounts have changed since a given unix time.
-
-    Params:
-      time = guint64 to contain a timestamp.
-    Returns: true if the mounts have changed since time.
-*/
-bool unixMountsChangedSince(ulong time) nothrow
-{
-  bool _retval;
-  _retval = cast(bool)g_unix_mounts_changed_since(time);
-  return _retval;
-}
-
-/**
-    Gets a #GList of #GUnixMountEntry containing the unix mounts.
-    If time_read is set, it will be filled with the mount
-    timestamp, allowing for checking if the mounts have changed
-    with [gio.global.unixMountsChangedSince].
-
-    Params:
-      timeRead = guint64 to contain a timestamp, or null
-    Returns: a #GList of the UNIX mounts.
-*/
-gio.unix_mount_entry.UnixMountEntry[] unixMountsGet(out ulong timeRead) nothrow
-{
-  GList* _cretval;
-  _cretval = g_unix_mounts_get(cast(ulong*)&timeRead);
-  auto _retval = gListToD!(gio.unix_mount_entry.UnixMountEntry, GidOwnership.Full)(cast(GList*)_cretval);
-  return _retval;
 }

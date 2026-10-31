@@ -11,7 +11,7 @@ import soup.message;
 import soup.types;
 
 /**
-    #SoupHSTSPolicy implements HTTP policies, as described by
+    [soup.hstspolicy.HSTSPolicy] implements HTTP policies, as described by
     [RFC 6797](http://tools.ietf.org/html/rfc6797).
     
     @domain represents the host that this policy applies to. The domain
@@ -64,7 +64,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new #SoupHSTSPolicy with the given attributes.
+      Creates a new [soup.hstspolicy.HSTSPolicy] with the given attributes.
       
       domain is a domain on which the strict transport security policy
       represented by this object must be enforced.
@@ -92,7 +92,7 @@ class HSTSPolicy : gobject.boxed.Boxed
 
   /**
       Parses msg's first "Strict-Transport-Security" response header and
-      returns a #SoupHSTSPolicy.
+      returns a [soup.hstspolicy.HSTSPolicy].
   
       Params:
         msg = a #SoupMessage
@@ -130,7 +130,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new session #SoupHSTSPolicy with the given attributes.
+      Creates a new session [soup.hstspolicy.HSTSPolicy] with the given attributes.
       
       A session policy is a policy that is valid during the lifetime of
       the [soup.hstsenforcer.HSTSEnforcer] it is added to. Contrary to regular policies,

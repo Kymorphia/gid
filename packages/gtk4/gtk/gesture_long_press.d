@@ -11,7 +11,7 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
-    [gtk.gesture_long_press.GestureLongPress] is a [gtk.gesture.Gesture] for long presses.
+    Recognizes long press gestures.
     
     This gesture is also known as “Press and Hold”.
     

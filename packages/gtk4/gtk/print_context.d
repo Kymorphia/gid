@@ -15,7 +15,7 @@ import pango.font_map;
 import pango.layout;
 
 /**
-    A [gtk.print_context.PrintContext] encapsulates context information that is required when
+    Encapsulates context information that is required when
     drawing pages for printing.
     
     This includes the cairo context and important parameters like page size

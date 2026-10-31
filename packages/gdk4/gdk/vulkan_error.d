@@ -13,7 +13,10 @@ struct VulkanError
 {
   alias Enum = gdk.types.VulkanError; ///
 
-  /** */
+  /**
+      Registers an error quark for [gdk.vulkan_context.VulkanContext] errors.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

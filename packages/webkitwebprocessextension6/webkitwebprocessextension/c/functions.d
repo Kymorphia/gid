@@ -32,6 +32,7 @@ __gshared extern(C) nothrow
   WebKitContextMenuItem* function(WebKitContextMenu* menu, uint position) c_webkit_context_menu_get_item_at_position; ///
   GList* function(WebKitContextMenu* menu) c_webkit_context_menu_get_items; ///
   uint function(WebKitContextMenu* menu) c_webkit_context_menu_get_n_items; ///
+  gboolean function(WebKitContextMenu* menu, int* x, int* y) c_webkit_context_menu_get_position; ///
   GVariant* function(WebKitContextMenu* menu) c_webkit_context_menu_get_user_data; ///
   void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_insert; ///
   WebKitContextMenuItem* function(WebKitContextMenu* menu) c_webkit_context_menu_last; ///
@@ -49,8 +50,10 @@ __gshared extern(C) nothrow
   WebKitContextMenuItem* function() c_webkit_context_menu_item_new_separator; ///
   WebKitContextMenuItem* function(const(char)* label, WebKitContextMenu* submenu) c_webkit_context_menu_item_new_with_submenu; ///
   GAction* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_gaction; ///
+  GVariant* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_gaction_target; ///
   WebKitContextMenuAction function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_stock_action; ///
   WebKitContextMenu* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_submenu; ///
+  const(char)* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_title; ///
   gboolean function(WebKitContextMenuItem* item) c_webkit_context_menu_item_is_separator; ///
   void function(WebKitContextMenuItem* item, WebKitContextMenu* submenu) c_webkit_context_menu_item_set_submenu; ///
 
@@ -209,6 +212,9 @@ alias webkit_context_menu_get_items = c_webkit_context_menu_get_items;
 alias webkit_context_menu_get_n_items = c_webkit_context_menu_get_n_items;
 
 /** */
+alias webkit_context_menu_get_position = c_webkit_context_menu_get_position;
+
+/** */
 alias webkit_context_menu_get_user_data = c_webkit_context_menu_get_user_data;
 
 /** */
@@ -256,10 +262,16 @@ alias webkit_context_menu_item_new_with_submenu = c_webkit_context_menu_item_new
 alias webkit_context_menu_item_get_gaction = c_webkit_context_menu_item_get_gaction;
 
 /** */
+alias webkit_context_menu_item_get_gaction_target = c_webkit_context_menu_item_get_gaction_target;
+
+/** */
 alias webkit_context_menu_item_get_stock_action = c_webkit_context_menu_item_get_stock_action;
 
 /** */
 alias webkit_context_menu_item_get_submenu = c_webkit_context_menu_item_get_submenu;
+
+/** */
+alias webkit_context_menu_item_get_title = c_webkit_context_menu_item_get_title;
 
 /** */
 alias webkit_context_menu_item_is_separator = c_webkit_context_menu_item_is_separator;
@@ -541,6 +553,7 @@ shared static this()
   gidLink(cast(void**)&webkit_context_menu_get_item_at_position, "webkit_context_menu_get_item_at_position", libs);
   gidLink(cast(void**)&webkit_context_menu_get_items, "webkit_context_menu_get_items", libs);
   gidLink(cast(void**)&webkit_context_menu_get_n_items, "webkit_context_menu_get_n_items", libs);
+  gidLink(cast(void**)&webkit_context_menu_get_position, "webkit_context_menu_get_position", libs);
   gidLink(cast(void**)&webkit_context_menu_get_user_data, "webkit_context_menu_get_user_data", libs);
   gidLink(cast(void**)&webkit_context_menu_insert, "webkit_context_menu_insert", libs);
   gidLink(cast(void**)&webkit_context_menu_last, "webkit_context_menu_last", libs);
@@ -558,8 +571,10 @@ shared static this()
   gidLink(cast(void**)&webkit_context_menu_item_new_separator, "webkit_context_menu_item_new_separator", libs);
   gidLink(cast(void**)&webkit_context_menu_item_new_with_submenu, "webkit_context_menu_item_new_with_submenu", libs);
   gidLink(cast(void**)&webkit_context_menu_item_get_gaction, "webkit_context_menu_item_get_gaction", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_get_gaction_target, "webkit_context_menu_item_get_gaction_target", libs);
   gidLink(cast(void**)&webkit_context_menu_item_get_stock_action, "webkit_context_menu_item_get_stock_action", libs);
   gidLink(cast(void**)&webkit_context_menu_item_get_submenu, "webkit_context_menu_item_get_submenu", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_get_title, "webkit_context_menu_item_get_title", libs);
   gidLink(cast(void**)&webkit_context_menu_item_is_separator, "webkit_context_menu_item_is_separator", libs);
   gidLink(cast(void**)&webkit_context_menu_item_set_submenu, "webkit_context_menu_item_set_submenu", libs);
 

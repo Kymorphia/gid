@@ -69,6 +69,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   /**
       Get `flowinfo` property.
       Returns: The `sin6_flowinfo` field, for IPv6 addresses.
+        
+        If unset this property is inherited from [gio.inet_socket_address.InetSocketAddress.address].
   */
   @property uint flowinfo() nothrow
   {
@@ -87,6 +89,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   /**
       Get `scopeId` property.
       Returns: The `sin6_scope_id` field, for IPv6 addresses.
+        
+        If unset this property is inherited from [gio.inet_socket_address.InetSocketAddress.address].
   */
   @property uint scopeId() nothrow
   {
@@ -112,7 +116,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Creates a new #GInetSocketAddress for address and port.
       
       If address is an IPv6 address, it can also contain a scope ID
-      (separated from the address by a `%`).
+      (separated from the address by a `%`). Note that currently this
+      behavior is platform specific. This may change in a future release.
   
       Params:
         address = the string form of an IP address
@@ -145,6 +150,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   /**
       Gets the `sin6_flowinfo` field from address,
       which must be an IPv6 address.
+      
+      If not overridden this value will be inherited from [gio.inet_socket_address.InetSocketAddress.address].
       Returns: the flowinfo field
   */
   uint getFlowinfo() nothrow
@@ -168,6 +175,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   /**
       Gets the `sin6_scope_id` field from address,
       which must be an IPv6 address.
+      
+      If not overridden this value will be inherited from [gio.inet_socket_address.InetSocketAddress.address].
       Returns: the scope id field
   */
   uint getScopeId() nothrow
@@ -198,6 +207,8 @@ class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
       Set `flowinfo` property.
       Params:
         propval = The `sin6_flowinfo` field, for IPv6 addresses.
+          
+          If unset this property is inherited from [gio.inet_socket_address.InetSocketAddress.address].
       Returns: Builder instance for fluent chaining
   */
   T flowinfo(uint propval) nothrow
@@ -220,6 +231,8 @@ class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
       Set `scopeId` property.
       Params:
         propval = The `sin6_scope_id` field, for IPv6 addresses.
+          
+          If unset this property is inherited from [gio.inet_socket_address.InetSocketAddress.address].
       Returns: Builder instance for fluent chaining
   */
   T scopeId(uint propval) nothrow

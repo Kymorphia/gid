@@ -338,10 +338,10 @@ class Clock : gst.object.ObjectWrap
   }
 
   /**
-      The time master of the master clock and the time slave of the slave
-      clock are added to the list of observations. If enough observations
-      are available, a linear regression algorithm is run on the
-      observations and clock is recalibrated.
+      The time observation_external of the external or master clock and the time
+      observation_internal of the internal or slave clock are added to the list of
+      observations. If enough observations are available, a linear regression
+      algorithm is run on the observations and clock is recalibrated.
       
       If this functions returns true, r_squared will contain the
       correlation coefficient of the interpolation. A value of 1.0
@@ -350,30 +350,30 @@ class Clock : gst.object.ObjectWrap
       clocks.
   
       Params:
-        slave = a time on the slave
-        master = a time on the master
+        observationInternal = a time on the internal clock
+        observationExternal = a time on the external clock
         rSquared = a pointer to hold the result
       Returns: true if enough observations were added to run the
         regression algorithm.
   */
-  bool addObservation(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared) nothrow
+  bool addObservation(gst.types.ClockTime observationInternal, gst.types.ClockTime observationExternal, out double rSquared) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_clock_add_observation(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared);
+    _retval = cast(bool)gst_clock_add_observation(cast(GstClock*)this._cPtr, observationInternal, observationExternal, cast(double*)&rSquared);
     return _retval;
   }
 
   /**
       Add a clock observation to the internal slaving algorithm the same as
-      [gst.clock.Clock.addObservation], and return the result of the master clock
-      estimation, without updating the internal calibration.
+      [gst.clock.Clock.addObservation], and return the result of the external or master
+      clock estimation, without updating the internal calibration.
       
       The caller can then take the results and call [gst.clock.Clock.setCalibration]
       with the values, or some modified version of them.
   
       Params:
-        slave = a time on the slave
-        master = a time on the master
+        observationInternal = a time on the internal clock
+        observationExternal = a time on the external clock
         rSquared = a pointer to hold the result
         internal = a location to store the internal time
         external = a location to store the external time
@@ -382,10 +382,10 @@ class Clock : gst.object.ObjectWrap
       Returns: true if enough observations were added to run the
         regression algorithm.
   */
-  bool addObservationUnapplied(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared, out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom) nothrow
+  bool addObservationUnapplied(gst.types.ClockTime observationInternal, gst.types.ClockTime observationExternal, out double rSquared, out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_clock_add_observation_unapplied(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
+    _retval = cast(bool)gst_clock_add_observation_unapplied(cast(GstClock*)this._cPtr, observationInternal, observationExternal, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
     return _retval;
   }
 
@@ -524,6 +524,19 @@ class Clock : gst.object.ObjectWrap
   {
     bool _retval;
     _retval = cast(bool)gst_clock_is_synced(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Checks that clock is the default system clock, as returned by
+      [gst.system_clock.SystemClock.obtain], and is of type [gst.types.ClockType.Monotonic].
+      Returns: true if clock is the default system monotonic clock,
+          false otherwise.
+  */
+  bool isSystemMonotonic() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_is_system_monotonic(cast(GstClock*)this._cPtr);
     return _retval;
   }
 

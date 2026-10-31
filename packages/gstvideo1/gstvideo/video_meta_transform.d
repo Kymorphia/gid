@@ -12,6 +12,9 @@ import gstvideo.video_info;
 /**
     Extra data passed to a video transform #GstMetaTransformFunction such as:
     "gst-video-scale".
+    
+    This transformation can not express letterbox, cropping, or rotations,
+    use #GstVideoMetaTransformMatrix instead
 */
 class VideoMetaTransform
 {

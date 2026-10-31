@@ -68,10 +68,16 @@ template MemoryMonitorT()
   /**
       Connect to `LowMemoryWarning` signal.
   
-      Emitted when the system is running low on free memory. The signal
+      Emitted when the system is running low on free memory.
+        
+        The signal
         handler should then take the appropriate action depending on the
         warning level. See the #GMemoryMonitorWarningLevel documentation for
         details.
+        
+        Since the [gio.memory_monitor.MemoryMonitor] is a singleton, this signal will be
+        emitted in the [glib.main_context.MainContext.default_][global-default main
+        context].
   
       Params:
         callback = signal callback delegate or function to connect

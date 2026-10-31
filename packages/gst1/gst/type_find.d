@@ -3,6 +3,7 @@ module gst.type_find;
 
 public import gid.basictypes;
 import gid.gid;
+import gobject.boxed;
 import gst.c.functions;
 import gst.c.types;
 import gst.caps;
@@ -13,30 +14,46 @@ import gst.types;
     The following functions allow you to detect the media type of an unknown
     stream.
 */
-class TypeFind
+class TypeFind : gobject.boxed.Boxed
 {
-  GstTypeFind _cInstance;
 
   /**
-      Create a `type_find.TypeFind` wrap type.
+      Create a `type_find.TypeFind` boxed type.
   */
   this() nothrow
   {
+    super(boxedNew!GstTypeFind(_getGType), Yes.Take);
   }
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstTypeFind*)ptr;
-
-    if (take)
-      gFree(ptr);
+    super(cast(void*)ptr, take);
   }
 
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    return dup ? boxCopy : _cInstancePtr;
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_type_find_get_type != &gidSymbolNotFound ? gst_type_find_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override TypeFind self() nothrow
+  {
+    return this;
   }
 
   /** Function alias for field `peekFunc` */
@@ -83,25 +100,6 @@ class TypeFind
   {
     ulong _retval;
     _retval = gst_type_find_get_length(cast(GstTypeFind*)this._cPtr);
-    return _retval;
-  }
-
-  /**
-      Returns the size bytes of the stream to identify beginning at offset. If
-      offset is a positive number, the offset is relative to the beginning of the
-      stream, if offset is a negative number the offset is relative to the end of
-      the stream. The returned memory is valid until the typefinding function
-      returns and must not be freed.
-  
-      Params:
-        offset = The offset
-        size = The number of bytes to return
-      Returns: the
-            requested data, or null if that data is not available.
-  */
-  const(ubyte)* peek(long offset, uint size) nothrow
-  {
-    auto _retval = gst_type_find_peek(cast(GstTypeFind*)this._cPtr, offset, size);
     return _retval;
   }
 

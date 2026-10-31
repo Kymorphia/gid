@@ -48,6 +48,15 @@ alias Rectangle = RsvgRectangle;
 */
 alias SizeFunc = void delegate(out int width, out int height);
 
+/** */
+enum HAVE_CSS = true;
+
+/** */
+enum HAVE_PIXBUF = 1;
+
+/** */
+enum HAVE_SVGZ = true;
+
 /**
     This is a C macro that expands to a number with the major version
     of librsvg against which your program is compiled.
@@ -82,7 +91,7 @@ enum MAJOR_VERSION = 2;
     your program), or for programs not written in C, use
     `rsvg_micro_version` instead.
 */
-enum MICRO_VERSION = 1;
+enum MICRO_VERSION = 3;
 
 /**
     This is a C macro that expands to a number with the minor version
@@ -100,7 +109,7 @@ enum MICRO_VERSION = 1;
     your program), or for programs not written in C, use
     `rsvg_minor_version` instead.
 */
-enum MINOR_VERSION = 57;
+enum MINOR_VERSION = 61;
 
 /**
     This is a C macro that expands to a string with the version of
@@ -119,4 +128,4 @@ enum MINOR_VERSION = 57;
     your program), or for programs not written in C, use
     `rsvg_version` instead.
 */
-enum VERSION = "2.57.1";
+enum VERSION = "2.61.3";

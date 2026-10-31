@@ -15,12 +15,10 @@ import gtk.types;
 import gtk.window;
 
 /**
-    A [gtk.alert_dialog.AlertDialog] object collects the arguments that
-    are needed to present a message to the user.
+    Collects the arguments that are needed to present a message to the user.
     
     The message is shown with the [gtk.alert_dialog.AlertDialog.choose]
-    function. This API follows the GIO async pattern, and the result can
-    be obtained by calling [gtk.alert_dialog.AlertDialog.chooseFinish].
+    function.
     
     If you don't need to wait for a button to be clicked, you can use
     [gtk.alert_dialog.AlertDialog.show].
@@ -67,7 +65,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Returns: Labels for buttons to show in the alert.
         
         The labels should be translated and may contain
-        a _ to indicate the mnemonic character.
+        a `_` character to indicate the mnemonic character.
         
         If this property is not set, then a 'Close' button is
         automatically created.
@@ -83,7 +81,7 @@ class AlertDialog : gobject.object.ObjectWrap
         propval = Labels for buttons to show in the alert.
           
           The labels should be translated and may contain
-          a _ to indicate the mnemonic character.
+          a `_` character to indicate the mnemonic character.
           
           If this property is not set, then a 'Close' button is
           automatically created.
@@ -95,8 +93,8 @@ class AlertDialog : gobject.object.ObjectWrap
 
   /**
       Get `cancelButton` property.
-      Returns: This property determines what happens when the Escape key is
-        pressed while the alert is shown.
+      Returns: Determines what happens when the <kbd>Escape</kbd> key is pressed
+        while the alert is shown.
         
         If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
         then pressing Escape is treated as if that button was pressed. If it is -1
@@ -113,8 +111,8 @@ class AlertDialog : gobject.object.ObjectWrap
   /**
       Set `cancelButton` property.
       Params:
-        propval = This property determines what happens when the Escape key is
-          pressed while the alert is shown.
+        propval = Determines what happens when the <kbd>Escape</kbd> key is pressed
+          while the alert is shown.
           
           If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
           then pressing Escape is treated as if that button was pressed. If it is -1
@@ -130,8 +128,8 @@ class AlertDialog : gobject.object.ObjectWrap
 
   /**
       Get `defaultButton` property.
-      Returns: This property determines what happens when the Return key is
-        pressed while the alert is shown.
+      Returns: Determines what happens when the <kbd>Return</kbd> key is pressed
+        while the alert is shown.
         
         If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
         then pressing Return is treated as if that button was pressed. If it is -1
@@ -148,8 +146,8 @@ class AlertDialog : gobject.object.ObjectWrap
   /**
       Set `defaultButton` property.
       Params:
-        propval = This property determines what happens when the Return key is
-          pressed while the alert is shown.
+        propval = Determines what happens when the <kbd>Return</kbd> key is pressed
+          while the alert is shown.
           
           If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
           then pressing Return is treated as if that button was pressed. If it is -1
@@ -221,20 +219,17 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 
   /**
-      This function shows the alert to the user.
-      
-      The callback will be called when the alert is dismissed.
-      It should call [gtk.alert_dialog.AlertDialog.chooseFinish]
-      to obtain the result.
+      Shows the alert to the user.
       
       It is ok to pass `NULL` for the callback if the alert
       does not have more than one button. A simpler API for
       this case is [gtk.alert_dialog.AlertDialog.show].
   
       Params:
-        parent = the parent [gtk.window.Window]
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call
+            when the operation is complete
   */
   void choose(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -258,11 +253,10 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Finishes the [gtk.alert_dialog.AlertDialog.choose] call
-      and returns the index of the button that was clicked.
+      Finishes the [gtk.alert_dialog.AlertDialog.choose] call.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
+        result = the result
       Returns: the index of the button that was clicked, or -1 if
           the dialog was cancelled and [gtk.alert_dialog.AlertDialog.cancelButton]
           is not set
@@ -349,7 +343,7 @@ class AlertDialog : gobject.object.ObjectWrap
   /**
       Returns whether the alert blocks interaction
       with the parent window while it is presented.
-      Returns: `TRUE` if the alert is modal
+      Returns: true if the alert is modal
   */
   bool getModal() nothrow
   {
@@ -437,16 +431,17 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 
   /**
-      Show the alert to the user.
+      Shows the alert to the user.
       
-      This function is a simple version of [gtk.alert_dialog.AlertDialog.choose]
+      This function is a simpler version of [gtk.alert_dialog.AlertDialog.choose]
       intended for dialogs with a single button.
-      If you want to cancel the dialog or if the alert has more than one button,
-      you should use that function instead and provide it with a #GCancellable or
-      callback respectively.
+      
+      If you want to cancel the dialog or if the alert has more than one
+      button, you should use that function instead and provide it with a
+      [gio.cancellable.Cancellable] and callback respectively.
   
       Params:
-        parent = the parent [gtk.window.Window]
+        parent = the parent window
   */
   void show(gtk.window.Window parent = null) nothrow
   {
@@ -464,7 +459,7 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Labels for buttons to show in the alert.
           
           The labels should be translated and may contain
-          a _ to indicate the mnemonic character.
+          a `_` character to indicate the mnemonic character.
           
           If this property is not set, then a 'Close' button is
           automatically created.
@@ -478,8 +473,8 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `cancelButton` property.
       Params:
-        propval = This property determines what happens when the Escape key is
-          pressed while the alert is shown.
+        propval = Determines what happens when the <kbd>Escape</kbd> key is pressed
+          while the alert is shown.
           
           If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
           then pressing Escape is treated as if that button was pressed. If it is -1
@@ -497,8 +492,8 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `defaultButton` property.
       Params:
-        propval = This property determines what happens when the Return key is
-          pressed while the alert is shown.
+        propval = Determines what happens when the <kbd>Return</kbd> key is pressed
+          while the alert is shown.
           
           If this property holds the index of a button in [gtk.alert_dialog.AlertDialog.buttons],
           then pressing Return is treated as if that button was pressed. If it is -1

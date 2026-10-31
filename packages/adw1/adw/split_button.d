@@ -56,6 +56,17 @@ import gtk.widget;
     classes matching the button contents. The nested button nodes will never
     contain them.
     
+    ## Style classes
+    
+    [adw.split_button.SplitButton] can use some of the same style classes as [gtk.button.Button]:
+    
+    - [`.suggested-action`](style-classes.html#suggested-action)
+    - [`.destructive-action`](style-classes.html#destructive-action)
+    - [`.flat`](style-classes.html#flat)
+    - [`.raised`](style-classes.html#raised)
+    
+    Other style classes, like `.pill`, cannot be used.
+    
     ## Accessibility
     
     [adw.split_button.SplitButton] uses the [gtk.types.AccessibleRole.Group] role.
@@ -160,7 +171,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         If the does not fit in the available space in the given direction, GTK will
         try its best to keep it inside the screen and fully visible.
         
-        If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
+        [gtk.types.ArrowType.None] behaves same as [gtk.types.ArrowType.Down].
   */
   @property gtk.types.ArrowType direction() nothrow
   {
@@ -177,7 +188,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           If the does not fit in the available space in the given direction, GTK will
           try its best to keep it inside the screen and fully visible.
           
-          If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
+          [gtk.types.ArrowType.None] behaves same as [gtk.types.ArrowType.Down].
   */
   @property void direction(gtk.types.ArrowType propval) nothrow
   {
@@ -523,7 +534,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       If the does not fit in the available space in the given direction, GTK will
       try its best to keep it inside the screen and fully visible.
       
-      If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
+      [gtk.types.ArrowType.None] behaves same as [gtk.types.ArrowType.Down].
   
       Params:
         direction = the direction
@@ -764,7 +775,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           If the does not fit in the available space in the given direction, GTK will
           try its best to keep it inside the screen and fully visible.
           
-          If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
+          [gtk.types.ArrowType.None] behaves same as [gtk.types.ArrowType.Down].
       Returns: Builder instance for fluent chaining
   */
   T direction(gtk.types.ArrowType propval) nothrow

@@ -55,6 +55,9 @@ class OutsetShadowNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color of the outset shadow.
+      
+      The value returned by this function will not be correct
+      if the render node was created for a non-sRGB color.
       Returns: a color
   */
   gdk.rgba.RGBA getColor() nothrow

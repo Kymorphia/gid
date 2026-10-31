@@ -280,6 +280,32 @@ class AudioRingBuffer : gst.object.ObjectWrap
   }
 
   /**
+      Gets the current segment base number of the ringbuffer.
+      
+      MT safe.
+      Returns: Current segment base number of the ringbuffer.
+  */
+  ulong getSegbase() nothrow
+  {
+    ulong _retval;
+    _retval = gst_audio_ring_buffer_get_segbase(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the current segment number of the ringbuffer.
+      
+      MT safe.
+      Returns: Current segment number of the ringbuffer.
+  */
+  ulong getSegdone() nothrow
+  {
+    ulong _retval;
+    _retval = gst_audio_ring_buffer_get_segdone(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Check if the ringbuffer is acquired and ready to use.
       Returns: TRUE if the ringbuffer is acquired, FALSE on error.
         
@@ -515,6 +541,19 @@ class AudioRingBuffer : gst.object.ObjectWrap
   void setSample(ulong sample) nothrow
   {
     gst_audio_ring_buffer_set_sample(cast(GstAudioRingBuffer*)this._cPtr, sample);
+  }
+
+  /**
+      Sets the current segment number of the ringbuffer.
+      
+      MT safe.
+  
+      Params:
+        segdone = the segment number to set
+  */
+  void setSegdone(ulong segdone) nothrow
+  {
+    gst_audio_ring_buffer_set_segdone(cast(GstAudioRingBuffer*)this._cPtr, segdone);
   }
 
   /** */

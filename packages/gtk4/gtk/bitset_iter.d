@@ -10,8 +10,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    An opaque, stack-allocated struct for iterating
-    over the elements of a [gtk.bitset.Bitset].
+    Iterates over the elements of a [gtk.bitset.Bitset].
+    
+    `GtkBitSetIter is an opaque, stack-allocated struct.
     
     Before a [gtk.bitset_iter.BitsetIter] can be used, it needs to be initialized with
     [gtk.bitset_iter.BitsetIter.initFirst], [gtk.bitset_iter.BitsetIter.initLast]

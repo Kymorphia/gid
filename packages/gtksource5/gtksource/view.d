@@ -20,6 +20,7 @@ import gtk.scrollable_mixin;
 import gtk.text_iter;
 import gtk.text_view;
 import gtk.types;
+import gtksource.annotations;
 import gtksource.buffer;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -77,14 +78,18 @@ import gtksource.types;
     
     ```c
     GtkCssProvider *provider = gtk_css_provider_new ();
-    gtk_css_provider_load_from_data (provider,
-                                     "textview { font-family: Monospace; font-size: 8pt; }",
-                                     -1,
-                                     NULL);
+    gtk_css_provider_load_from_string (provider,
+                                      "textview { font-family: Monospace; font-size: 8pt; }");
     gtk_style_context_add_provider (gtk_widget_get_style_context (view),
                                     GTK_STYLE_PROVIDER (provider),
                                     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     g_object_unref (provider);
+    ```
+    ```python
+    provider = Gtk.CssProvider()
+    provider.load_from_string("textview { font-family: Monospace; font-size: 8pt; }")
+    style_context = view.get_style_context()
+    style_context.add_provider(provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
     ```
     
     If you need to adjust the font or size of font within a portion of the
@@ -127,6 +132,15 @@ class View : gtk.text_view.TextView
   static ViewGidBuilder builder() nothrow
   {
     return new ViewGidBuilder;
+  }
+
+  /**
+      Get `annotations` property.
+      Returns: The [gtksource.annotations.Annotations] object associated with the view.
+  */
+  @property gtksource.annotations.Annotations annotations() nothrow
+  {
+    return getAnnotations();
   }
 
   /** */
@@ -392,7 +406,7 @@ class View : gtk.text_view.TextView
 
   /**
       Get `spaceDrawer` property.
-      Returns: The [gtksource.space_drawer.SpaceDrawer] object associated with the view.4
+      Returns: The [gtksource.space_drawer.SpaceDrawer] object associated with the view.
   */
   @property gtksource.space_drawer.SpaceDrawer spaceDrawer() nothrow
   {
@@ -450,6 +464,21 @@ class View : gtk.text_view.TextView
     GtkWidget* _cretval;
     _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the [gtksource.annotations.Annotations] associated with view.
+      
+      The returned object is guaranteed to be the same for the lifetime of view.
+      Each [gtksource.view.View] object has a different [gtksource.annotations.Annotations].
+      Returns: the #GtkSourceAnnotations associated with view.
+  */
+  gtksource.annotations.Annotations getAnnotations() nothrow
+  {
+    GtkSourceAnnotations* _cretval;
+    _cretval = gtk_source_view_get_annotations(cast(GtkSourceView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.annotations.Annotations)(cast(GtkSourceAnnotations*)_cretval, No.Take);
     return _retval;
   }
 

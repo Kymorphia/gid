@@ -27,22 +27,41 @@ import gtk.application;
     
     ## Automatic Resources
     
-    [adw.application.Application] will automatically load stylesheets located in the
+    [adw.application.Application] will automatically load certain resources located in the
     application's resource base path (see
     [gio.application.Application.setResourceBasePath], if they're present.
     
-    They can be used to add custom styles to the application, as follows:
+    ### Shortcuts Dialog
     
-    - `style.css` contains styles that are always present.
+    If there's a resource located at `shortcuts-dialog.ui` which defines an
+    [adw.shortcuts_dialog.ShortcutsDialog] with the ID `shortcuts_dialog`, [adw.application.Application]
+    will set up an `app.shortcuts` action that creates and presents this dialog,
+    as well as a <kbd>Ctrl</kbd><kbd>?</kbd> accelerator for it.
     
-    - `style-dark.css` contains styles only used when
-    [adw.style_manager.StyleManager.dark] is `TRUE`.
+    ### Stylesheet
     
-    - `style-hc.css` contains styles used when the system high contrast
-      preference is enabled.
+    If there's a resource located at `style.css`, [adw.application.Application] will load
+    styles from it. This can be used to add custom styles to the application.
     
-    - `style-hc-dark.css` contains styles used when the system high contrast
-      preference is enabled and [adw.style_manager.StyleManager.dark] is `TRUE`.
+    #### Additional styles (deprecated)
+    
+    [adw.application.Application] will also load the following stylesheets conditionally:
+    
+    - `style-dark.css` when [adw.style_manager.StyleManager.dark] is `TRUE`.
+    
+    - `style-hc.css` when the system high contrast preference is enabled.
+    
+    - `style-hc-dark.css` when the system high contrast preference is enabled and
+      [adw.style_manager.StyleManager.dark] is `TRUE`.
+    
+    :::warning
+        These resources are deprecated since 1.9.
+    
+        Use `style.css` with the following media queries instead:
+    
+        - `prefers-color-scheme: dark` for styles used only for dark appearance.
+        - `prefers-contrast: more` for styles used only when the system high
+          contrast preference is enabled.
 */
 class Application : gtk.application.Application
 {

@@ -71,8 +71,6 @@ import gtk.window;
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <property name="content">
         <object class="AdwToolbarView">
           <child type="top">
@@ -98,9 +96,16 @@ import gtk.window;
     </object>
     ```
     
-    Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.window.Window] doesn't have a
-    minimum size, and [gtk.widget.Widget.widthRequest] and
-    [gtk.widget.Widget.heightRequest] properties must be set manually.
+    When breakpoints are used, the minimum size must be larger than the smallest
+    UI state. [adw.window.Window] defaults to the minimum size of 360×200 px. If that's
+    too small, set the [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties manually.
+    
+    ## Adaptive Preview
+    
+    [adw.window.Window] has a debug tool called adaptive preview. It can be opened from
+    GTK Inspector or by pressing <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>,
+    and controlled via the [adw.window.Window.adaptivePreview] property.
 */
 class Window : gtk.window.Window
 {
@@ -137,6 +142,41 @@ class Window : gtk.window.Window
   static WindowGidBuilder builder() nothrow
   {
     return new WindowGidBuilder;
+  }
+
+  /**
+      Get `adaptivePreview` property.
+      Returns: Whether adaptive preview is currently open.
+        
+        Adaptive preview is a debugging tool used for testing the window
+        contents at specific screen sizes, simulating mobile environment.
+        
+        Adaptive preview can always be accessed from inspector. This function
+        allows applications to open it manually.
+        
+        Most applications should not use this property.
+  */
+  @property bool adaptivePreview() nothrow
+  {
+    return getAdaptivePreview();
+  }
+
+  /**
+      Set `adaptivePreview` property.
+      Params:
+        propval = Whether adaptive preview is currently open.
+          
+          Adaptive preview is a debugging tool used for testing the window
+          contents at specific screen sizes, simulating mobile environment.
+          
+          Adaptive preview can always be accessed from inspector. This function
+          allows applications to open it manually.
+          
+          Most applications should not use this property.
+  */
+  @property void adaptivePreview(bool propval) nothrow
+  {
+    setAdaptivePreview(propval);
   }
 
   /**
@@ -212,6 +252,17 @@ class Window : gtk.window.Window
   }
 
   /**
+      Gets whether adaptive preview for self is currently open.
+      Returns: whether adaptive preview is open.
+  */
+  bool getAdaptivePreview() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_window_get_adaptive_preview(cast(AdwWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Gets the content widget of self.
       
       This method should always be used instead of [gtk.window.Window.getChild].
@@ -264,6 +315,25 @@ class Window : gtk.window.Window
   }
 
   /**
+      Sets whether adaptive preview for self is currently open.
+      
+      Adaptive preview is a debugging tool used for testing the window
+      contents at specific screen sizes, simulating mobile environment.
+      
+      Adaptive preview can always be accessed from inspector. This function
+      allows applications to open it manually.
+      
+      Most applications should not use this function.
+  
+      Params:
+        adaptivePreview = whether to open adaptive preview
+  */
+  void setAdaptivePreview(bool adaptivePreview) nothrow
+  {
+    adw_window_set_adaptive_preview(cast(AdwWindow*)this._cPtr, adaptivePreview);
+  }
+
+  /**
       Sets the content widget of self.
       
       This method should always be used instead of [gtk.window.Window.setChild].
@@ -281,6 +351,25 @@ class Window : gtk.window.Window
 class WindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 {
 
+
+  /**
+      Set `adaptivePreview` property.
+      Params:
+        propval = Whether adaptive preview is currently open.
+          
+          Adaptive preview is a debugging tool used for testing the window
+          contents at specific screen sizes, simulating mobile environment.
+          
+          Adaptive preview can always be accessed from inspector. This function
+          allows applications to open it manually.
+          
+          Most applications should not use this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T adaptivePreview(bool propval) nothrow
+  {
+    return setProperty("adaptive-preview", propval);
+  }
 
   /**
       Set `content` property.

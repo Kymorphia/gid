@@ -186,9 +186,9 @@ class OptionContext
       this function will produce help output to stdout and
       call `exit (0)`.
       
-      Note that function depends on the [current locale][setlocale] for
-      automatic character set conversion of string and filename
-      arguments.
+      Note that function depends on the
+      [current locale](running.html#locale) for automatic
+      character set conversion of string and filename arguments.
   
       Params:
         argv = a pointer to the array of command line arguments

@@ -258,7 +258,8 @@ class Animation : gobject.object.ObjectWrap
   /**
       Pauses a playing animation for self.
       
-      Does nothing if the current state of self isn't [adw.types.AnimationState.Playing].
+      Does nothing if the current state of self isn't
+      [adw.types.AnimationState.Playing].
       
       Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Paused].
   */

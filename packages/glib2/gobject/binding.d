@@ -146,7 +146,7 @@ class Binding : gobject.object.ObjectWrap
       Returns: The name of the property of #GBinding:source that should be used
         as the source of the binding.
         
-        This should be in [canonical form][canonical-parameter-names] to get the
+        This should be in [canonical form][gobject.param_spec.ParamSpec] to get the
         best performance.
   */
   @property string sourceProperty() nothrow
@@ -168,7 +168,7 @@ class Binding : gobject.object.ObjectWrap
       Returns: The name of the property of #GBinding:target that should be used
         as the target of the binding.
         
-        This should be in [canonical form][canonical-parameter-names] to get the
+        This should be in [canonical form][gobject.param_spec.ParamSpec] to get the
         best performance.
   */
   @property string targetProperty() nothrow
@@ -347,7 +347,7 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The name of the property of #GBinding:source that should be used
           as the source of the binding.
           
-          This should be in [canonical form][canonical-parameter-names] to get the
+          This should be in [canonical form][gobject.param_spec.ParamSpec] to get the
           best performance.
       Returns: Builder instance for fluent chaining
   */
@@ -373,7 +373,7 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The name of the property of #GBinding:target that should be used
           as the target of the binding.
           
-          This should be in [canonical form][canonical-parameter-names] to get the
+          This should be in [canonical form][gobject.param_spec.ParamSpec] to get the
           best performance.
       Returns: Builder instance for fluent chaining
   */

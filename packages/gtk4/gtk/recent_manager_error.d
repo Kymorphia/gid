@@ -13,7 +13,10 @@ struct RecentManagerError
 {
   alias Enum = gtk.types.RecentManagerError; ///
 
-  /** */
+  /**
+      Registers an error quark for [gtk.recent_manager.RecentManager] errors.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

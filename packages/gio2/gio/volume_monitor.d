@@ -115,7 +115,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   /**
       Gets the volume monitor used by gio.
       Returns: a reference to the #GVolumeMonitor used by gio. Call
-           [gobject.object.ObjectWrap.unref] when done with it.
+           [gobject.object.ObjectWrap.unref] when done with it, after disconnecting any signal handlers.
   */
   static gio.volume_monitor.VolumeMonitor get() nothrow
   {

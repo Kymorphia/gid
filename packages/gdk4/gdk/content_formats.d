@@ -11,8 +11,7 @@ import gobject.boxed;
 import gobject.types;
 
 /**
-    The [gdk.content_formats.ContentFormats] structure is used to advertise and negotiate the
-    format of content.
+    Used to advertise and negotiate the format of content.
     
     You will encounter [gdk.content_formats.ContentFormats] when interacting with objects
     controlling operations that pass data between different widgets, window
@@ -190,6 +189,17 @@ class ContentFormats : gobject.boxed.Boxed
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i].fromCString!(No.Free);
     }
+    return _retval;
+  }
+
+  /**
+      Returns whether the content formats contain any formats.
+      Returns: true if formats contains no mime types and no GTypes
+  */
+  bool isEmpty() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_content_formats_is_empty(cast(GdkContentFormats*)this._cPtr);
     return _retval;
   }
 

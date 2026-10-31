@@ -56,6 +56,7 @@ __gshared extern(C) nothrow
 
   // GLBaseSrc
   GType function() c_gst_gl_base_src_get_type; ///
+  GstGLContext* function(GstGLBaseSrc* baseSrc) c_gst_gl_base_src_get_gl_context; ///
 
   // GLBuffer
   GType function() c_gst_gl_buffer_get_type; ///
@@ -345,6 +346,7 @@ __gshared extern(C) nothrow
   void function(GstGLWindow* window) c_gst_gl_window_draw; ///
   GstGLContext* function(GstGLWindow* window) c_gst_gl_window_get_context; ///
   size_t function(GstGLWindow* window) c_gst_gl_window_get_display; ///
+  gboolean function(GstGLWindow* window) c_gst_gl_window_get_request_output_surface; ///
   void function(GstGLWindow* window, uint* width, uint* height) c_gst_gl_window_get_surface_dimensions; ///
   size_t function(GstGLWindow* window) c_gst_gl_window_get_window_handle; ///
   void function(GstGLWindow* window, gboolean handleEvents) c_gst_gl_window_handle_events; ///
@@ -362,6 +364,7 @@ __gshared extern(C) nothrow
   void function(GstGLWindow* window, GstGLWindowCB callback, void* data, GDestroyNotify destroyNotify) c_gst_gl_window_set_draw_callback; ///
   void function(GstGLWindow* window, int width, int height) c_gst_gl_window_set_preferred_size; ///
   gboolean function(GstGLWindow* window, int x, int y, int width, int height) c_gst_gl_window_set_render_rectangle; ///
+  void function(GstGLWindow* window, gboolean outputSurface) c_gst_gl_window_set_request_output_surface; ///
   void function(GstGLWindow* window, GstGLWindowResizeCB callback, void* data, GDestroyNotify destroyNotify) c_gst_gl_window_set_resize_callback; ///
   void function(GstGLWindow* window, size_t handle) c_gst_gl_window_set_window_handle; ///
   void function(GstGLWindow* window) c_gst_gl_window_show; ///
@@ -376,6 +379,8 @@ __gshared extern(C) nothrow
   gboolean function(GstContext* context, GstGLDisplay** display) c_gst_context_get_gl_display; ///
   void function(GstContext* context, GstGLDisplay* display) c_gst_context_set_gl_display; ///
   gboolean function(const(char)* name, const(char)* ext) c_gst_gl_check_extension; ///
+  gboolean function(GstGLContext* context, const(GValue)* src, GstGLDrmFormatFlags flags, GValue* dst) c_gst_gl_dma_buf_transform_drm_formats_to_gst_formats; ///
+  gboolean function(GstGLContext* context, const(GValue)* src, GstGLDrmFormatFlags flags, GValue* dst) c_gst_gl_dma_buf_transform_gst_formats_to_drm_formats; ///
   void function(GstElement* element, GstGLDisplay* display) c_gst_gl_element_propagate_display_context; ///
   gboolean function(GstElement* element, GstGLDisplay** displayPtr, GstGLContext** otherContextPtr) c_gst_gl_ensure_element_data; ///
   void function(GstVideoAffineTransformationMeta* meta, float* matrix) c_gst_gl_get_affine_transformation_meta_as_ndc; ///
@@ -555,6 +560,9 @@ alias gst_gl_base_mixer_pad_get_type = c_gst_gl_base_mixer_pad_get_type;
 
 /** */
 alias gst_gl_base_src_get_type = c_gst_gl_base_src_get_type;
+
+/** */
+alias gst_gl_base_src_get_gl_context = c_gst_gl_base_src_get_gl_context;
 
 // GLBuffer
 
@@ -1312,6 +1320,9 @@ alias gst_gl_window_get_context = c_gst_gl_window_get_context;
 alias gst_gl_window_get_display = c_gst_gl_window_get_display;
 
 /** */
+alias gst_gl_window_get_request_output_surface = c_gst_gl_window_get_request_output_surface;
+
+/** */
 alias gst_gl_window_get_surface_dimensions = c_gst_gl_window_get_surface_dimensions;
 
 /** */
@@ -1363,6 +1374,9 @@ alias gst_gl_window_set_preferred_size = c_gst_gl_window_set_preferred_size;
 alias gst_gl_window_set_render_rectangle = c_gst_gl_window_set_render_rectangle;
 
 /** */
+alias gst_gl_window_set_request_output_surface = c_gst_gl_window_set_request_output_surface;
+
+/** */
 alias gst_gl_window_set_resize_callback = c_gst_gl_window_set_resize_callback;
 
 /** */
@@ -1399,6 +1413,12 @@ alias gst_context_set_gl_display = c_gst_context_set_gl_display;
 
 /** */
 alias gst_gl_check_extension = c_gst_gl_check_extension;
+
+/** */
+alias gst_gl_dma_buf_transform_drm_formats_to_gst_formats = c_gst_gl_dma_buf_transform_drm_formats_to_gst_formats;
+
+/** */
+alias gst_gl_dma_buf_transform_gst_formats_to_drm_formats = c_gst_gl_dma_buf_transform_gst_formats_to_drm_formats;
 
 /** */
 alias gst_gl_element_propagate_display_context = c_gst_gl_element_propagate_display_context;
@@ -1625,6 +1645,7 @@ shared static this()
 
   // GLBaseSrc
   gidLink(cast(void**)&gst_gl_base_src_get_type, "gst_gl_base_src_get_type", libs);
+  gidLink(cast(void**)&gst_gl_base_src_get_gl_context, "gst_gl_base_src_get_gl_context", libs);
 
   // GLBuffer
   gidLink(cast(void**)&gst_gl_buffer_get_type, "gst_gl_buffer_get_type", libs);
@@ -1914,6 +1935,7 @@ shared static this()
   gidLink(cast(void**)&gst_gl_window_draw, "gst_gl_window_draw", libs);
   gidLink(cast(void**)&gst_gl_window_get_context, "gst_gl_window_get_context", libs);
   gidLink(cast(void**)&gst_gl_window_get_display, "gst_gl_window_get_display", libs);
+  gidLink(cast(void**)&gst_gl_window_get_request_output_surface, "gst_gl_window_get_request_output_surface", libs);
   gidLink(cast(void**)&gst_gl_window_get_surface_dimensions, "gst_gl_window_get_surface_dimensions", libs);
   gidLink(cast(void**)&gst_gl_window_get_window_handle, "gst_gl_window_get_window_handle", libs);
   gidLink(cast(void**)&gst_gl_window_handle_events, "gst_gl_window_handle_events", libs);
@@ -1931,6 +1953,7 @@ shared static this()
   gidLink(cast(void**)&gst_gl_window_set_draw_callback, "gst_gl_window_set_draw_callback", libs);
   gidLink(cast(void**)&gst_gl_window_set_preferred_size, "gst_gl_window_set_preferred_size", libs);
   gidLink(cast(void**)&gst_gl_window_set_render_rectangle, "gst_gl_window_set_render_rectangle", libs);
+  gidLink(cast(void**)&gst_gl_window_set_request_output_surface, "gst_gl_window_set_request_output_surface", libs);
   gidLink(cast(void**)&gst_gl_window_set_resize_callback, "gst_gl_window_set_resize_callback", libs);
   gidLink(cast(void**)&gst_gl_window_set_window_handle, "gst_gl_window_set_window_handle", libs);
   gidLink(cast(void**)&gst_gl_window_show, "gst_gl_window_show", libs);
@@ -1945,6 +1968,8 @@ shared static this()
   gidLink(cast(void**)&gst_context_get_gl_display, "gst_context_get_gl_display", libs);
   gidLink(cast(void**)&gst_context_set_gl_display, "gst_context_set_gl_display", libs);
   gidLink(cast(void**)&gst_gl_check_extension, "gst_gl_check_extension", libs);
+  gidLink(cast(void**)&gst_gl_dma_buf_transform_drm_formats_to_gst_formats, "gst_gl_dma_buf_transform_drm_formats_to_gst_formats", libs);
+  gidLink(cast(void**)&gst_gl_dma_buf_transform_gst_formats_to_drm_formats, "gst_gl_dma_buf_transform_gst_formats_to_drm_formats", libs);
   gidLink(cast(void**)&gst_gl_element_propagate_display_context, "gst_gl_element_propagate_display_context", libs);
   gidLink(cast(void**)&gst_gl_ensure_element_data, "gst_gl_ensure_element_data", libs);
   gidLink(cast(void**)&gst_gl_get_affine_transformation_meta_as_ndc, "gst_gl_get_affine_transformation_meta_as_ndc", libs);

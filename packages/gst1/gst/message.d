@@ -370,6 +370,26 @@ class Message : gobject.boxed.Boxed
   }
 
   /**
+      Creates a new device-monitor-started message. The device-monitor-started
+      message is produced by a #GstDeviceMonitor once it has started probing
+      devices. It does not indicate whether any #GstDeviceProvider instances
+      support monitoring at all, only whether at least one was able to start
+      probing.
+  
+      Params:
+        src = The #GstObject that created the message
+        success = Whether the monitor was started successfully
+      Returns: a newly allocated #GstMessage
+  */
+  static gst.message.Message newDeviceMonitorStarted(gst.object.ObjectWrap src, bool success) nothrow
+  {
+    GstMessage* _cretval;
+    _cretval = gst_message_new_device_monitor_started(src ? cast(GstObject*)src._cPtr(No.Dup) : null, success);
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Creates a new device-removed message. The device-removed message is produced
       by #GstDeviceProvider or a #GstDeviceMonitor. They announce the
       disappearance of monitored devices.
@@ -462,10 +482,10 @@ class Message : gobject.boxed.Boxed
         
         MT safe.
   */
-  static gst.message.Message newError(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_) nothrow
+  static gst.message.Message newError(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_ = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_message_new_error(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -484,10 +504,10 @@ class Message : gobject.boxed.Boxed
         details = A GstStructure with details
       Returns: the new error message.
   */
-  static gst.message.Message newErrorWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null) nothrow
+  static gst.message.Message newErrorWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_ = null, gst.structure.Structure details = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -523,10 +543,10 @@ class Message : gobject.boxed.Boxed
         
         MT safe.
   */
-  static gst.message.Message newInfo(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_) nothrow
+  static gst.message.Message newInfo(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_ = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_message_new_info(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -543,10 +563,10 @@ class Message : gobject.boxed.Boxed
         details = A GstStructure with details
       Returns: the new warning message.
   */
-  static gst.message.Message newInfoWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null) nothrow
+  static gst.message.Message newInfoWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_ = null, gst.structure.Structure details = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -735,7 +755,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _location = location.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_message_new_redirect(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_redirect(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(GstStructure*)entryStruct._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1079,10 +1099,10 @@ class Message : gobject.boxed.Boxed
         
         MT safe.
   */
-  static gst.message.Message newWarning(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_) nothrow
+  static gst.message.Message newWarning(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_ = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_message_new_warning(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1099,10 +1119,10 @@ class Message : gobject.boxed.Boxed
         details = A GstStructure with details
       Returns: the new warning message.
   */
-  static gst.message.Message newWarningWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_, gst.structure.Structure details = null) nothrow
+  static gst.message.Message newWarningWithDetails(gst.object.ObjectWrap src, glib.error.ErrorWrap error, string debug_ = null, gst.structure.Structure details = null) nothrow
   {
     GstMessage* _cretval;
-    const(char)* _debug_ = debug_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _debug_ = debug_.toCString!(No.Malloc, Yes.Nullable);
     _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr(No.Dup) : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -1122,7 +1142,21 @@ class Message : gobject.boxed.Boxed
   void addRedirectEntry(string location, gst.tag_list.TagList tagList = null, gst.structure.Structure entryStruct = null) nothrow
   {
     const(char)* _location = location.toCString!(No.Malloc, No.Nullable);
-    gst_message_add_redirect_entry(cast(GstMessage*)this._cPtr, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
+    gst_message_add_redirect_entry(cast(GstMessage*)this._cPtr, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(GstStructure*)entryStruct._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Returns the optional details structure of the message. May be NULL if none.
+      
+      The returned structure must not be freed.
+      Returns: The details, or NULL if none.
+  */
+  gst.structure.Structure getDetails() nothrow
+  {
+    const(GstStructure)* _cretval;
+    _cretval = gst_message_get_details(cast(GstMessage*)this._cPtr);
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    return _retval;
   }
 
   /** */
@@ -1201,6 +1235,41 @@ class Message : gobject.boxed.Boxed
     bool _retval;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_message_has_name(cast(GstMessage*)this._cPtr, _name);
+    return _retval;
+  }
+
+  /**
+      Tests if you can safely modify message. It is only safe to modify message when
+      there is only one owner of the message - ie, the object is writable.
+      Returns: 
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_message_is_writable(cast(const(GstMessage)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns a writable copy of message.
+      
+      If there is only one reference count on message, the caller must be the owner,
+      and so this function will return the message object unchanged. If on the other
+      hand there is more than one reference on the object, a new message object will
+      be returned. The caller's reference on message will be removed, and instead the
+      caller will own a reference to the returned object.
+      
+      In short, this function unrefs the message in the argument and refs the message
+      that it returns. Don't access the argument after calling this function. See
+      also: [gst.message.Message.ref_].
+      Returns: a writable message which may or may not be the
+            same as message
+  */
+  gst.message.Message makeWritable() nothrow
+  {
+    GstMessage* _cretval;
+    _cretval = gst_message_make_writable(cast(GstMessage*)this._cPtr);
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1336,6 +1405,22 @@ class Message : gobject.boxed.Boxed
   }
 
   /**
+      Parses a device-monitor-started message. The device-monitor-started message
+      is produced by a #GstDeviceMonitor once at least one #GstDeviceProvider
+      successfully starts probing.
+  
+      Params:
+        success = Result location for whether the #GstDeviceMonitor was
+           successfully started
+  */
+  void parseDeviceMonitorStarted(out bool success) nothrow
+  {
+    gboolean _success;
+    gst_message_parse_device_monitor_started(cast(GstMessage*)this._cPtr, &_success);
+    success = cast(bool)_success;
+  }
+
+  /**
       Parses a device-removed message. The device-removed message is produced by
       #GstDeviceProvider or a #GstDeviceMonitor. It announces the
       disappearance of monitored devices.
@@ -1409,6 +1494,21 @@ class Message : gobject.boxed.Boxed
   }
 
   /**
+      Returns the details structure if present or will create one if not present.
+      The returned structure must not be freed.
+  
+      Params:
+        structure = A pointer to the returned details
+  */
+  void parseErrorWritableDetails(out gst.structure.Structure structure) nothrow
+  {
+    GstStructure* _structure;
+    gst_message_parse_error_writable_details(cast(GstMessage*)this._cPtr, &_structure);
+    if (_structure)
+      structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+  }
+
+  /**
       Extract the group from the STREAM_START message.
   
       Params:
@@ -1474,6 +1574,21 @@ class Message : gobject.boxed.Boxed
   {
     const(GstStructure)* _structure;
     gst_message_parse_info_details(cast(GstMessage*)this._cPtr, &_structure);
+    if (_structure)
+      structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+  }
+
+  /**
+      Returns the details structure if present or will create one if not present.
+      The returned structure must not be freed.
+  
+      Params:
+        structure = A pointer to the returned details
+  */
+  void parseInfoWritableDetails(out gst.structure.Structure structure) nothrow
+  {
+    GstStructure* _structure;
+    gst_message_parse_info_writable_details(cast(GstMessage*)this._cPtr, &_structure);
     if (_structure)
       structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
   }
@@ -1715,8 +1830,8 @@ class Message : gobject.boxed.Boxed
             gst_message_parse_state_changed (msg, &old_state, &new_state, NULL);
             g_print ("Element %s changed state from %s to %s.\n",
                 GST_OBJECT_NAME (msg->src),
-                gst_element_state_get_name (old_state),
-                gst_element_state_get_name (new_state));
+                gst_state_get_name (old_state),
+                gst_state_get_name (new_state));
             break;
           }
           ...
@@ -1945,6 +2060,21 @@ class Message : gobject.boxed.Boxed
   }
 
   /**
+      Returns the details structure if present or will create one if not present.
+      The returned structure must not be freed.
+  
+      Params:
+        structure = A pointer to the returned details
+  */
+  void parseWarningWritableDetails(out gst.structure.Structure structure) nothrow
+  {
+    GstStructure* _structure;
+    gst_message_parse_warning_writable_details(cast(GstMessage*)this._cPtr, &_structure);
+    if (_structure)
+      structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
+  }
+
+  /**
       Configures the buffering stats values in message.
   
       Params:
@@ -1956,6 +2086,18 @@ class Message : gobject.boxed.Boxed
   void setBufferingStats(gst.types.BufferingMode mode, int avgIn, int avgOut, long bufferingLeft) nothrow
   {
     gst_message_set_buffering_stats(cast(GstMessage*)this._cPtr, mode, avgIn, avgOut, bufferingLeft);
+  }
+
+  /**
+      Add details to message. Will fail if the message already has details set on
+      it or if it is not writable.
+  
+      Params:
+        details = A GstStructure with details
+  */
+  void setDetails(gst.structure.Structure details = null) nothrow
+  {
+    gst_message_set_details(cast(GstMessage*)this._cPtr, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -2084,6 +2226,22 @@ class Message : gobject.boxed.Boxed
   }
 
   /**
+      Returns the details structure of the message. If not present it will be
+      created. Use this function (instead of [gst.message.Message.getDetails]) if you
+      want to write to the details structure.
+      
+      The returned structure must not be freed.
+      Returns: The details
+  */
+  gst.structure.Structure writableDetails() nothrow
+  {
+    GstStructure* _cretval;
+    _cretval = gst_message_writable_details(cast(GstMessage*)this._cPtr);
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
       Get a writable version of the structure.
       Returns: The structure of the message. The structure
         is still owned by the message, which means that you should not free
@@ -2098,6 +2256,27 @@ class Message : gobject.boxed.Boxed
     GstStructure* _cretval;
     _cretval = gst_message_writable_structure(cast(GstMessage*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Modifies a pointer to a #GstMessage to point to a different #GstMessage. This
+      function is similar to [gst.message.Message.replace] except that it takes ownership
+      of new_message.
+  
+      Params:
+        oldMessage = pointer to a pointer to a #GstMessage
+              to be replaced.
+        newMessage = pointer to a #GstMessage that
+              will replace the message pointed to by old_message.
+      Returns: true if new_message was different from old_message
+  */
+  static bool take(ref gst.message.Message oldMessage, gst.message.Message newMessage = null) nothrow
+  {
+    bool _retval;
+    GstMessage* _oldMessage = oldMessage ? cast(GstMessage*)oldMessage._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_message_take(&_oldMessage, newMessage ? cast(GstMessage*)newMessage._cPtr(Yes.Dup) : null);
+    oldMessage = _oldMessage ? new gst.message.Message(cast(void*)_oldMessage, Yes.Take) : null;
     return _retval;
   }
 }

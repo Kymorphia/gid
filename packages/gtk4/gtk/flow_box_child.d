@@ -18,7 +18,10 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.flow_box_child.FlowBoxChild] is the kind of widget that can be added to a [gtk.flow_box.FlowBox].
+    The kind of widget that can be added to a [gtk.flow_box.FlowBox].
+    
+    [gtk.flow_box.FlowBox] will automatically wrap its children in a [gtk.flow_box_child.FlowBoxChild]
+    when necessary.
 */
 class FlowBoxChild : gtk.widget.Widget
 {

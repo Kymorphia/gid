@@ -10,7 +10,7 @@ import gsk.renderer;
 import gsk.types;
 
 /**
-    A GSK renderer that is using Vulkan.
+    Renders a GSK rendernode tree with Vulkan.
     
     This renderer will fail to realize if Vulkan is not supported.
 */
@@ -51,7 +51,16 @@ class VulkanRenderer : gsk.renderer.Renderer
     return new VulkanRendererGidBuilder;
   }
 
-  /** */
+  /**
+      Creates a new Vulkan renderer.
+      
+      The Vulkan renderer is a renderer that uses the Vulkan library for
+      rendering.
+      
+      This renderer will fail to realize when GTK was not compiled with
+      Vulkan support.
+      Returns: a new Vulkan renderer
+  */
   this() nothrow
   {
     GskRenderer* _cretval;

@@ -15,12 +15,12 @@ import soup.types;
 /**
     Debug logging support
     
-    #SoupLogger watches a [soup.session.Session] and logs the HTTP traffic that
+    [soup.logger.Logger] watches a [soup.session.Session] and logs the HTTP traffic that
     it generates, for debugging purposes. Many applications use an
     environment variable to determine whether or not to use
-    #SoupLogger, and to determine the amount of debugging output.
+    [soup.logger.Logger], and to determine the amount of debugging output.
     
-    To use #SoupLogger, first create a logger with [soup.logger.Logger.new_], optionally
+    To use [soup.logger.Logger], first create a logger with [soup.logger.Logger.new_], optionally
     configure it with [soup.logger.Logger.setRequestFilter],
     [soup.logger.Logger.setResponseFilter], and [soup.logger.Logger.setPrinter], and
     then attach it to a session (or multiple sessions) with
@@ -37,11 +37,11 @@ import soup.types;
     > Content-Type: text/plain
     > Connection: close
     
-    &lt; HTTP/1.1 201 Created
-    &lt; Soup-Debug-Timestamp: 1200171744
-    &lt; Soup-Debug: SoupMessage 1 (0x617000)
-    &lt; Date: Sun, 12 Jan 2008 21:02:24 GMT
-    &lt; Content-Length: 0
+    < HTTP/1.1 201 Created
+    < Soup-Debug-Timestamp: 1200171744
+    < Soup-Debug: SoupMessage 1 (0x617000)
+    < Date: Sun, 12 Jan 2008 21:02:24 GMT
+    < Content-Length: 0
     ```
     
     The `Soup-Debug-Timestamp` line gives the time (as a `time_t`) when the
@@ -51,7 +51,7 @@ import soup.types;
     [soup.session.Session], [soup.message.Message], and [gio.socket.Socket] involved; the hex
     numbers are the addresses of the objects in question (which may be useful if
     you are running in a debugger). The decimal IDs are simply counters that
-    uniquely identify objects across the lifetime of the #SoupLogger. In
+    uniquely identify objects across the lifetime of the [soup.logger.Logger]. In
     particular, this can be used to identify when multiple messages are sent
     across the same connection.
     
@@ -63,7 +63,7 @@ import soup.types;
     from the network (from the [soup.message.Message.gotBody] or
     [soup.message.Message.gotInformational] signal), which means that the
     [soup.message.Message.gotHeaders] signal, and anything triggered off it (such as
-    #SoupMessage::authenticate) will be emitted *before* the response headers are
+    [soup.message.Message.authenticate]) will be emitted *before* the response headers are
     actually logged.
     
     If the response doesn't happen to trigger the [soup.message.Message.gotBody] nor
@@ -154,7 +154,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   mixin SessionFeatureT!();
 
   /**
-      Creates a new #SoupLogger with the given debug level.
+      Creates a new [soup.logger.Logger] with the given debug level.
       
       If you need finer control over what message parts are and aren't
       logged, use [soup.logger.Logger.setRequestFilter] and

@@ -542,6 +542,27 @@ enum PangoEllipsizeMode
 }
 
 /**
+    Specifies whether a font should or should not have color glyphs.
+*/
+enum PangoFontColor
+{
+  /**
+      The font should not have color glyphs
+  */
+  Forbidden = 0,
+
+  /**
+      The font should have color glyphs
+  */
+  Required = 1,
+
+  /**
+      The font may or may not use color
+  */
+  DontCare = 2,
+}
+
+/**
     The bits in a [pango.types.FontMask] correspond to the set fields in a
     [pango.font_description.FontDescription].
 */
@@ -578,14 +599,24 @@ enum PangoFontMask : uint
   Size = 32,
 
   /**
-      the font gravity is specified (Since: 1.16.)
+      The font gravity is specified.
   */
   Gravity = 64,
 
   /**
-      OpenType font variations are specified (Since: 1.42)
+      OpenType font variations are specified.
   */
   Variations = 128,
+
+  /**
+      OpenType font features are specified.
+  */
+  Features = 256,
+
+  /**
+      Font color is specified.
+  */
+  Color = 512,
 }
 
 /**
@@ -1797,6 +1828,11 @@ enum PangoWrapMode
         character boundaries if there is not enough space for a full word.
   */
   WordChar = 2,
+
+  /**
+      do not wrap.
+  */
+  None = 3,
 }
 
 /**
@@ -1865,13 +1901,22 @@ struct PangoAttrClass
   */
   PangoAttrType type;
 
-  /** */
+  /**
+      function to duplicate an attribute of this type
+        (see [pango.attribute.Attribute.copy])
+  */
   extern(C) PangoAttribute* function(const(PangoAttribute)* attr) copy;
 
-  /** */
+  /**
+      function to free an attribute of this type
+        (see [pango.attribute.Attribute.destroy])
+  */
   extern(C) void function(PangoAttribute* attr) destroy;
 
-  /** */
+  /**
+      function to check two attributes of this type for equality
+        (see [pango.attribute.Attribute.equal])
+  */
   extern(C) gboolean function(const(PangoAttribute)* attr1, const(PangoAttribute)* attr2) equal;
 }
 
@@ -2315,13 +2360,22 @@ struct PangoFontMapClass
   */
   GObjectClass parentClass;
 
-  /** */
+  /**
+      a function to load a font with a given description. See
+      [pango.font_map.FontMap.loadFont].
+  */
   extern(C) PangoFont* function(PangoFontMap* fontmap, PangoContext* context, const(PangoFontDescription)* desc) loadFont;
 
-  /** */
+  /**
+      A function to list available font families. See
+      [pango.font_map.FontMap.listFamilies].
+  */
   extern(C) void function(PangoFontMap* fontmap, PangoFontFamily*** families, int* nFamilies) listFamilies;
 
-  /** */
+  /**
+      a function to load a fontset with a given given description
+      suitable for a particular language. See [pango.font_map.FontMap.loadFontset].
+  */
   extern(C) PangoFontset* function(PangoFontMap* fontmap, PangoContext* context, const(PangoFontDescription)* desc, PangoLanguage* language) loadFontset;
 
   /**
@@ -2330,10 +2384,15 @@ struct PangoFontMapClass
   */
   const(char)* shapeEngineType;
 
-  /** */
+  /**
+      a function to get the serial number of the fontmap.
+      See [pango.font_map.FontMap.getSerial].
+  */
   extern(C) uint function(PangoFontMap* fontmap) getSerial;
 
-  /** */
+  /**
+      See [pango.font_map.FontMap.changed]
+  */
   extern(C) void function(PangoFontMap* fontmap) changed;
 
   /** */
@@ -2417,16 +2476,27 @@ struct PangoFontsetClass
   */
   GObjectClass parentClass;
 
-  /** */
+  /**
+      a function to get the font in the fontset that contains the
+        best glyph for the given Unicode character; see [pango.fontset.Fontset.getFont]
+  */
   extern(C) PangoFont* function(PangoFontset* fontset, uint wc) getFont;
 
-  /** */
+  /**
+      a function to get overall metric information for the fonts
+        in the fontset; see [pango.fontset.Fontset.getMetrics]
+  */
   extern(C) PangoFontMetrics* function(PangoFontset* fontset) getMetrics;
 
-  /** */
+  /**
+      a function to get the language of the fontset.
+  */
   extern(C) PangoLanguage* function(PangoFontset* fontset) getLanguage;
 
-  /** */
+  /**
+      a function to loop over the fonts in the fontset. See
+        [pango.fontset.Fontset.foreach_]
+  */
   extern(C) void function(PangoFontset* fontset, PangoFontsetForeachFunc func, void* data) foreach_;
 
   /** */
@@ -3042,37 +3112,64 @@ struct PangoRendererClass
   /** */
   GObjectClass parentClass;
 
-  /** */
+  /**
+      draws a [pango.glyph_string.GlyphString]
+  */
   extern(C) void function(PangoRenderer* renderer, PangoFont* font, PangoGlyphString* glyphs, int x, int y) drawGlyphs;
 
-  /** */
+  /**
+      draws a rectangle
+  */
   extern(C) void function(PangoRenderer* renderer, PangoRenderPart part, int x, int y, int width, int height) drawRectangle;
 
-  /** */
+  /**
+      draws a squiggly line that approximately
+      covers the given rectangle in the style of an underline used to
+      indicate a spelling error.
+  */
   extern(C) void function(PangoRenderer* renderer, int x, int y, int width, int height) drawErrorUnderline;
 
-  /** */
+  /**
+      draw content for a glyph shaped with [pango.attr_shape.AttrShape]
+        @x, @y are the coordinates of the left edge of the baseline,
+        in user coordinates.
+  */
   extern(C) void function(PangoRenderer* renderer, PangoAttrShape* attr, int x, int y) drawShape;
 
-  /** */
+  /**
+      draws a trapezoidal filled area
+  */
   extern(C) void function(PangoRenderer* renderer, PangoRenderPart part, double y1, double x11, double x21, double y2, double x12, double x22) drawTrapezoid;
 
-  /** */
+  /**
+      draws a single glyph
+  */
   extern(C) void function(PangoRenderer* renderer, PangoFont* font, PangoGlyph glyph, double x, double y) drawGlyph;
 
-  /** */
+  /**
+      do renderer specific processing when rendering
+       attributes change
+  */
   extern(C) void function(PangoRenderer* renderer, PangoRenderPart part) partChanged;
 
-  /** */
+  /**
+      Do renderer-specific initialization before drawing
+  */
   extern(C) void function(PangoRenderer* renderer) begin;
 
-  /** */
+  /**
+      Do renderer-specific cleanup after drawing
+  */
   extern(C) void function(PangoRenderer* renderer) end;
 
-  /** */
+  /**
+      updates the renderer for a new run
+  */
   extern(C) void function(PangoRenderer* renderer, PangoLayoutRun* run) prepareRun;
 
-  /** */
+  /**
+      draws a [pango.glyph_item.GlyphItem]
+  */
   extern(C) void function(PangoRenderer* renderer, const(char)* text, PangoGlyphItem* glyphItem, int x, int y) drawGlyphItem;
 
   /** */

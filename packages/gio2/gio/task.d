@@ -285,9 +285,9 @@ import gobject.value;
     
     You can use [gio.task.Task.runInThread] to turn a synchronous
     operation into an asynchronous one, by running it in a thread.
-    When it completes, the result will be dispatched to the thread-default main
-    context (see [glib.main_context.MainContext.pushThreadDefault]) where the [gio.task.Task]
-    was created.
+    When it completes, the result will be dispatched to the thread-default
+    main context (see [glib.main_context.MainContext.pushThreadDefault])
+    where the [gio.task.Task] was created.
     
     Running a task in a thread:
     ```c
@@ -607,8 +607,8 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
 
   /**
       Creates a #GTask acting on source_object, which will eventually be
-      used to invoke callback in the current
-      [thread-default main context][g-main-context-push-thread-default].
+      used to invoke callback in the current thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault]).
       
       Call this in the "start" method of your asynchronous method, and
       pass the #GTask around throughout the asynchronous operation. You
@@ -749,8 +749,8 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
 
   /**
       Gets the #GMainContext that task will return its result in (that
-      is, the context that was the
-      [thread-default main context][g-main-context-push-thread-default]
+      is, the context that was the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       at the point when task was created).
       
       This will always return a non-null value, even if the task's
@@ -1071,8 +1071,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
       name of the #GSource used for idle completion of the task.
       
       This function may only be called before the task is first used in a thread
-      other than the one it was constructed in. It is called automatically by
-      [gio.task.Task.setSourceTag] if not called already.
+      other than the one it was constructed in.
   
       Params:
         name = a human readable name for the task, or null to unset it
@@ -1170,6 +1169,9 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
       Sets task’s name, used in debugging and profiling.
       
       This is a variant of [gio.task.Task.setName] that avoids copying name.
+      
+      This function is called automatically by [gio.task.Task.setSourceTag]
+      unless a name is set.
   
       Params:
         name = a human readable name for the task. Must be a string literal

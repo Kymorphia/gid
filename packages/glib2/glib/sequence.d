@@ -10,7 +10,7 @@ import glib.types;
 
 /**
     The #GSequence struct is an opaque data type representing a
-    [sequence][glib-Sequences] data type.
+    [sequence](data-structures.html#scalable-lists) data type.
 */
 class Sequence
 {

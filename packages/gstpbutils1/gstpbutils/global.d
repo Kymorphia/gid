@@ -175,6 +175,68 @@ uint codecUtilsAacGetSampleRateFromIndex(uint srIdx) nothrow
 }
 
 /**
+    Creates the corresponding AV1 Codec Configuration Record
+
+    Params:
+      caps = a video/x-av1 #GstCaps
+    Returns: The AV1 Codec Configuration Record, or
+      null if there was an error.
+*/
+gst.buffer.Buffer codecUtilsAv1CreateAv1cFromCaps(gst.caps.Caps caps) nothrow
+{
+  GstBuffer* _cretval;
+  _cretval = gst_codec_utils_av1_create_av1c_from_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    Parses the provided av1c and returns the corresponding caps
+
+    Params:
+      av1c = a #GstBuffer containing a AV1CodecConfigurationRecord
+    Returns: The parsed AV1 caps, or null if there
+      is an error
+*/
+gst.caps.Caps codecUtilsAv1CreateCapsFromAv1c(gst.buffer.Buffer av1c) nothrow
+{
+  GstCaps* _cretval;
+  _cretval = gst_codec_utils_av1_create_caps_from_av1c(av1c ? cast(GstBuffer*)av1c._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    Transform a seq_level_idx into the level string
+
+    Params:
+      seqLevelIdx = A seq_level_idx
+    Returns: the level string or null if the seq_level_idx is unknown
+*/
+string codecUtilsAv1GetLevel(ubyte seqLevelIdx) nothrow
+{
+  const(char)* _cretval;
+  _cretval = gst_codec_utils_av1_get_level(seqLevelIdx);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Transform a level string from the caps into the seq_level_idx
+
+    Params:
+      level = A level string from caps
+    Returns: the seq_level_idx or 31 (max-level) if the level is unknown
+*/
+ubyte codecUtilsAv1GetSeqLevelIdx(string level) nothrow
+{
+  ubyte _retval;
+  const(char)* _level = level.toCString!(No.Malloc, No.Nullable);
+  _retval = gst_codec_utils_av1_get_seq_level_idx(_level);
+  return _retval;
+}
+
+/**
     Converts a RFC 6381 compatible codec string to #GstCaps. More than one codec
     string can be present (separated by `,`).
     
@@ -455,6 +517,107 @@ string codecUtilsH265GetTier(ubyte[] profileTierLevel) nothrow
 }
 
 /**
+    Sets the level, tier and profile in caps if it can be determined from
+    decoder_configuration. See [gstpbutils.global.codecUtilsH266GetLevel],
+    [gstpbutils.global.codecUtilsH266GetTier] and [gstpbutils.global.codecUtilsH266GetProfile]
+    for more details on the parameters.
+
+    Params:
+      caps = the #GstCaps to which the level, tier and profile are to be added
+      decoderConfiguration = Pointer to the VvcDecoderConfigurationRecord struct as defined in ISO/IEC 14496-15
+    Returns: true if the level, tier, profile could be set, false otherwise.
+*/
+bool codecUtilsH266CapsSetLevelTierAndProfile(gst.caps.Caps caps, ubyte[] decoderConfiguration) nothrow
+{
+  bool _retval;
+  uint _len;
+  if (decoderConfiguration)
+    _len = cast(uint)decoderConfiguration.length;
+
+  auto _decoderConfiguration = cast(ubyte*)decoderConfiguration.ptr;
+  _retval = cast(bool)gst_codec_utils_h266_caps_set_level_tier_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _decoderConfiguration, _len);
+  return _retval;
+}
+
+/**
+    Converts the level indication (general_level_idc) in the stream's
+    ptl_record structure into a string.
+
+    Params:
+      ptlRecord = Pointer to the VvcPTLRecord structure as defined in ISO/IEC 14496-15.
+    Returns: The level as a const string, or null if there is an error.
+*/
+string codecUtilsH266GetLevel(ubyte[] ptlRecord) nothrow
+{
+  const(char)* _cretval;
+  uint _len;
+  if (ptlRecord)
+    _len = cast(uint)ptlRecord.length;
+
+  auto _ptlRecord = cast(ubyte*)ptlRecord.ptr;
+  _cretval = gst_codec_utils_h266_get_level(_ptlRecord, _len);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Transform a level string from the caps into the level_idc
+
+    Params:
+      level = A level string from caps
+    Returns: the level_idc or 0 if the level is unknown
+*/
+ubyte codecUtilsH266GetLevelIdc(string level) nothrow
+{
+  ubyte _retval;
+  const(char)* _level = level.toCString!(No.Malloc, No.Nullable);
+  _retval = gst_codec_utils_h266_get_level_idc(_level);
+  return _retval;
+}
+
+/**
+    Converts the profile indication (general_profile_idc) in the stream's
+    ptl_record structure into a string.
+
+    Params:
+      ptlRecord = Pointer to the VvcPTLRecord structure as defined in ISO/IEC 14496-15.
+    Returns: The profile as a const string, or null if there is an error.
+*/
+string codecUtilsH266GetProfile(ubyte[] ptlRecord) nothrow
+{
+  const(char)* _cretval;
+  uint _len;
+  if (ptlRecord)
+    _len = cast(uint)ptlRecord.length;
+
+  auto _ptlRecord = cast(ubyte*)ptlRecord.ptr;
+  _cretval = gst_codec_utils_h266_get_profile(_ptlRecord, _len);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Converts the tier indication (general_tier_flag) in the stream's
+    ptl_record structure into a string.
+
+    Params:
+      ptlRecord = Pointer to the VvcPTLRecord structure as defined in ISO/IEC 14496-15.
+    Returns: The tier as a const string, or null if there is an error.
+*/
+string codecUtilsH266GetTier(ubyte[] ptlRecord) nothrow
+{
+  const(char)* _cretval;
+  uint _len;
+  if (ptlRecord)
+    _len = cast(uint)ptlRecord.length;
+
+  auto _ptlRecord = cast(ubyte*)ptlRecord.ptr;
+  _cretval = gst_codec_utils_h266_get_tier(_ptlRecord, _len);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
     Sets the level and profile in caps if it can be determined from
     vis_obj_seq. See [gstpbutils.global.codecUtilsMpeg4videoGetLevel] and
     [gstpbutils.global.codecUtilsMpeg4videoGetProfile] for more details on the
@@ -638,7 +801,8 @@ string[] encodingListAvailableCategories() nothrow
       details = NULL-terminated array
             of installer string details (see below)
       ctx = a #GstInstallPluginsContext, or NULL
-      func = the function to call when the installer program returns
+      func = the function to call when the
+            installer program returns
     Returns: result code whether an external installer could be started
 */
 gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstpbutils.install_plugins_context.InstallPluginsContext ctx, gstpbutils.types.InstallPluginsResultFunc func) nothrow
@@ -903,6 +1067,34 @@ string missingPluginMessageGetInstallerDetail(gst.message.Message msg) nothrow
   _cretval = gst_missing_plugin_message_get_installer_detail(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
+}
+
+/**
+    Get the stream-id of the stream for which an element is missing.
+
+    Params:
+      msg = A missing-plugin #GstMessage of type #GST_MESSAGE_ELEMENT
+    Returns: The stream-id or null if none is specified.
+*/
+string missingPluginMessageGetStreamId(gst.message.Message msg) nothrow
+{
+  const(char)* _cretval;
+  _cretval = gst_missing_plugin_message_get_stream_id(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Set the stream-id of the stream for which an element is missing.
+
+    Params:
+      msg = A missing-plugin #GstMessage of type #GST_MESSAGE_ELEMENT
+      streamId = The stream id for which an element is missing
+*/
+void missingPluginMessageSetStreamId(gst.message.Message msg, string streamId) nothrow
+{
+  const(char)* _streamId = streamId.toCString!(No.Malloc, No.Nullable);
+  gst_missing_plugin_message_set_stream_id(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null, _streamId);
 }
 
 /**

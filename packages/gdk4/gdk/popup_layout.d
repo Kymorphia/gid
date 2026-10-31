@@ -10,8 +10,8 @@ import gid.gid;
 import gobject.boxed;
 
 /**
-    The [gdk.popup_layout.PopupLayout] struct contains information that is
-    necessary position a [gdk.popup.Popup] relative to its parent.
+    Contains information that is necessary position a [gdk.popup.Popup]
+    relative to its parent.
     
     The positioning requires a negotiation with the windowing system,
     since it depends on external constraints, such as the position of
@@ -93,7 +93,7 @@ class PopupLayout : gobject.boxed.Boxed
       position of surface.
   
       Params:
-        anchorRect = the anchor [gtk.types.Rectangle] to align surface with
+        anchorRect = the anchor rectangle to align surface with
         rectAnchor = the point on anchor_rect to align with surface's anchor point
         surfaceAnchor = the point on surface to align with rect's anchor point
       Returns: newly created instance of [gdk.popup_layout.PopupLayout]
@@ -121,7 +121,7 @@ class PopupLayout : gobject.boxed.Boxed
       Check whether layout and other has identical layout properties.
   
       Params:
-        other = another [gdk.popup_layout.PopupLayout]
+        other = another popup layout
       Returns: true if layout and other have identical layout properties,
           otherwise false.
   */
@@ -133,8 +133,8 @@ class PopupLayout : gobject.boxed.Boxed
   }
 
   /**
-      Get the [gdk.types.AnchorHints].
-      Returns: the [gdk.types.AnchorHints]
+      Get the anchor hints.
+      Returns: the anchor hints
   */
   gdk.types.AnchorHints getAnchorHints() nothrow
   {
@@ -218,7 +218,7 @@ class PopupLayout : gobject.boxed.Boxed
       beyond the left or right edges of the monitor.
   
       Params:
-        anchorHints = the new [gdk.types.AnchorHints]
+        anchorHints = the new anchor hints
   */
   void setAnchorHints(gdk.types.AnchorHints anchorHints) nothrow
   {

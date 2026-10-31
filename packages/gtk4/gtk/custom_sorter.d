@@ -10,8 +10,7 @@ import gtk.sorter;
 import gtk.types;
 
 /**
-    [gtk.custom_sorter.CustomSorter] is a [gtk.sorter.Sorter] implementation that sorts via a callback
-    function.
+    Sorts items via a callback function.
 */
 class CustomSorter : gtk.sorter.Sorter
 {

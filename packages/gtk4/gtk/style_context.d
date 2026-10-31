@@ -93,13 +93,20 @@ class StyleContext : gobject.object.ObjectWrap
     return new StyleContextGidBuilder;
   }
 
-  /** */
+  /**
+      Get `display` property.
+      Returns: The display of the style context.
+  */
   @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
 
-  /** */
+  /**
+      Set `display` property.
+      Params:
+        propval = The display of the style context.
+  */
   @property void display(gdk.display.Display propval) nothrow
   {
     setDisplay(propval);
@@ -465,7 +472,12 @@ class StyleContext : gobject.object.ObjectWrap
 class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
-  /** */
+  /**
+      Set `display` property.
+      Params:
+        propval = The display of the style context.
+      Returns: Builder instance for fluent chaining
+  */
   T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);

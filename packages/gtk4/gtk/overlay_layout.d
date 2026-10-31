@@ -10,7 +10,7 @@ import gtk.layout_manager;
 import gtk.types;
 
 /**
-    [gtk.overlay_layout.OverlayLayout] is the layout manager used by [gtk.overlay.Overlay].
+    The layout manager used by [gtk.overlay.Overlay].
     
     It places widgets as overlays on top of the main child.
     

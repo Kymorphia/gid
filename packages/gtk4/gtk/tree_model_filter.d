@@ -125,13 +125,19 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
     return new TreeModelFilterGidBuilder;
   }
 
-  /** */
+  /**
+      Get `childModel` property.
+      Returns: The child model of the tree model filter.
+  */
   @property gtk.tree_model.TreeModel childModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.tree_model.TreeModel)("child-model");
   }
 
-  /** */
+  /**
+      Get `virtualRoot` property.
+      Returns: The virtual root of the tree model filter.
+  */
   @property gtk.tree_path.TreePath virtualRoot() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.tree_path.TreePath)("virtual-root");
@@ -386,13 +392,23 @@ class TreeModelFilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
   mixin TreeDragSourceGidBuilderT!();
   mixin TreeModelGidBuilderT!();
 
-  /** */
+  /**
+      Set `childModel` property.
+      Params:
+        propval = The child model of the tree model filter.
+      Returns: Builder instance for fluent chaining
+  */
   T childModel(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("child-model", propval);
   }
 
-  /** */
+  /**
+      Set `virtualRoot` property.
+      Params:
+        propval = The virtual root of the tree model filter.
+      Returns: Builder instance for fluent chaining
+  */
   T virtualRoot(gtk.tree_path.TreePath propval) nothrow
   {
     return setProperty("virtual-root", propval);

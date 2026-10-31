@@ -11,8 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    The [gtk.actionable.Actionable] interface provides a convenient way of associating
-    widgets with actions.
+    Provides a way to associate widgets with actions.
     
     It primarily consists of two properties: [gtk.actionable.Actionable.actionName]
     and [gtk.actionable.Actionable.actionTarget]. There are also some convenience
@@ -35,16 +34,30 @@ interface Actionable
     return cast(void function())gtk_actionable_get_type != &gidSymbolNotFound ? gtk_actionable_get_type() : cast(GType)0;
   }
 
-  /** */
+  /**
+      Get `actionName` property.
+      Returns: The name of the action with which this widget should be associated.
+  */
   @property string actionName() nothrow;
 
-  /** */
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the action with which this widget should be associated.
+  */
   @property void actionName(string propval) nothrow;
 
-  /** */
+  /**
+      Get `actionTarget` property.
+      Returns: The target value of the actionable widget's action.
+  */
   @property glib.variant.Variant actionTarget() nothrow;
 
-  /** */
+  /**
+      Set `actionTarget` property.
+      Params:
+        propval = The target value of the actionable widget's action.
+  */
   @property void actionTarget(glib.variant.Variant propval) nothrow;
 
   /**
@@ -121,9 +134,19 @@ interface Actionable
 interface ActionableGidBuilderImpl(T)
 {
 
-  /** */
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the action with which this widget should be associated.
+      Returns: Builder instance for fluent chaining
+  */
   T actionName(string propval) nothrow;
 
-  /** */
+  /**
+      Set `actionTarget` property.
+      Params:
+        propval = The target value of the actionable widget's action.
+      Returns: Builder instance for fluent chaining
+  */
   T actionTarget(glib.variant.Variant propval) nothrow;
 }

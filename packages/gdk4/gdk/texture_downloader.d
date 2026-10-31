@@ -4,6 +4,7 @@ module gdk.texture_downloader;
 public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
+import gdk.color_state;
 import gdk.texture;
 import gdk.types;
 import gid.gid;
@@ -12,8 +13,7 @@ import gobject.boxed;
 import gobject.object;
 
 /**
-    The [gdk.texture_downloader.TextureDownloader] is used to download the contents of a
-    [gdk.texture.Texture].
+    Used to download the contents of a [gdk.texture.Texture].
     
     It is intended to be created as a short-term object for a single download,
     but can be used for multiple downloads of different textures or with different
@@ -59,6 +59,9 @@ class TextureDownloader : gobject.boxed.Boxed
 
   /**
       Creates a new texture downloader for texture.
+      
+      By default, the downloader will convert the data to
+      the default memory format, and to the sRGB color state.
   
       Params:
         texture = texture to download
@@ -93,6 +96,9 @@ class TextureDownloader : gobject.boxed.Boxed
       fails to allocate memory. If you think that may happen, you should handle
       memory allocation yourself and use [gdk.texture_downloader.TextureDownloader.downloadInto]
       once allocation succeeded.
+      
+      This function cannot be used with a multiplanar format. Use
+      [gdk.texture_downloader.TextureDownloader.downloadBytesWithPlanes] for that purpose.
   
       Params:
         outStride = The stride of the resulting data in bytes
@@ -103,6 +109,38 @@ class TextureDownloader : gobject.boxed.Boxed
     GBytes* _cretval;
     _cretval = gdk_texture_downloader_download_bytes(cast(const(GdkTextureDownloader)*)this._cPtr, cast(size_t*)&outStride);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Downloads the given texture pixels into a [glib.bytes.Bytes]. The offsets and
+      strides of the resulting buffer will be stored in the respective values.
+      
+      If the format does have less than 4 planes, the remaining offsets and strides will be
+      set to `0`.
+  
+      Params:
+        outOffsets = The offsets of the resulting data planes in bytes
+        outStrides = The stride of the resulting data planes in bytes
+      Returns: The downloaded pixels
+  */
+  glib.bytes.Bytes downloadBytesWithPlanes(ref size_t[] outOffsets, ref size_t[] outStrides) nothrow
+  {
+    GBytes* _cretval;
+    _cretval = gdk_texture_downloader_download_bytes_with_planes(cast(const(GdkTextureDownloader)*)this._cPtr, outOffsets.ptr, outStrides.ptr);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the color state that the data will be downloaded in.
+      Returns: The color state of the download
+  */
+  gdk.color_state.ColorState getColorState() nothrow
+  {
+    GdkColorState* _cretval;
+    _cretval = gdk_texture_downloader_get_color_state(cast(const(GdkTextureDownloader)*)this._cPtr);
+    auto _retval = _cretval ? new gdk.color_state.ColorState(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -128,6 +166,20 @@ class TextureDownloader : gobject.boxed.Boxed
     _cretval = gdk_texture_downloader_get_texture(cast(const(GdkTextureDownloader)*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Sets the color state the downloader will convert the data to.
+      
+      By default, the sRGB colorstate returned by [gdk.color_state.ColorState.getSrgb]
+      is used.
+  
+      Params:
+        colorState = the color state to use
+  */
+  void setColorState(gdk.color_state.ColorState colorState) nothrow
+  {
+    gdk_texture_downloader_set_color_state(cast(GdkTextureDownloader*)this._cPtr, colorState ? cast(GdkColorState*)colorState._cPtr(No.Dup) : null);
   }
 
   /**

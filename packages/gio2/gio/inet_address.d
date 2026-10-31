@@ -77,6 +77,16 @@ class InetAddress : gobject.object.ObjectWrap
   }
 
   /**
+      Get `flowinfo` property.
+      Returns: The flowinfo for an IPv6 address.
+        See [gio.inet_address.InetAddress.getFlowinfo].
+  */
+  @property uint flowinfo() nothrow
+  {
+    return getFlowinfo();
+  }
+
+  /**
       Get `isAny` property.
       Returns: Whether this is the "any" address for its family.
         See [gio.inet_address.InetAddress.getIsAny].
@@ -177,6 +187,16 @@ class InetAddress : gobject.object.ObjectWrap
   }
 
   /**
+      Get `scopeId` property.
+      Returns: The scope-id for an IPv6 address.
+        See [gio.inet_address.InetAddress.getScopeId].
+  */
+  @property uint scopeId() nothrow
+  {
+    return getScopeId();
+  }
+
+  /**
       Creates a #GInetAddress for the "any" address (unassigned/"don't
       care") for family.
   
@@ -217,6 +237,10 @@ class InetAddress : gobject.object.ObjectWrap
 
   /**
       Parses string as an IP address and creates a new #GInetAddress.
+      
+      If address is an IPv6 address, it can also contain a scope ID
+      (separated from the address by a `%`). Note that currently this
+      behavior is platform specific. This may change in a future release.
   
       Params:
         string_ = a string representation of an IP address
@@ -273,6 +297,17 @@ class InetAddress : gobject.object.ObjectWrap
     GSocketFamily _cretval;
     _cretval = g_inet_address_get_family(cast(GInetAddress*)this._cPtr);
     gio.types.SocketFamily _retval = cast(gio.types.SocketFamily)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gio.inet_address.InetAddress.flowinfo].
+      Returns: The flowinfo for the address, `0` if unset or not IPv6 address.
+  */
+  uint getFlowinfo() nothrow
+  {
+    uint _retval;
+    _retval = g_inet_address_get_flowinfo(cast(GInetAddress*)this._cPtr);
     return _retval;
   }
 
@@ -404,6 +439,17 @@ class InetAddress : gobject.object.ObjectWrap
   }
 
   /**
+      Gets the value of [gio.inet_address.InetAddress.scopeId].
+      Returns: The scope-id for the address, `0` if unset or not IPv6 address.
+  */
+  uint getScopeId() nothrow
+  {
+    uint _retval;
+    _retval = g_inet_address_get_scope_id(cast(GInetAddress*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Converts address to string form.
       Returns: a representation of address as a string, which should be
         freed after use.
@@ -441,6 +487,30 @@ class InetAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   T family(gio.types.SocketFamily propval) nothrow
   {
     return setProperty("family", propval);
+  }
+
+  /**
+      Set `flowinfo` property.
+      Params:
+        propval = The flowinfo for an IPv6 address.
+          See [gio.inet_address.InetAddress.getFlowinfo].
+      Returns: Builder instance for fluent chaining
+  */
+  T flowinfo(uint propval) nothrow
+  {
+    return setProperty("flowinfo", propval);
+  }
+
+  /**
+      Set `scopeId` property.
+      Params:
+        propval = The scope-id for an IPv6 address.
+          See [gio.inet_address.InetAddress.getScopeId].
+      Returns: Builder instance for fluent chaining
+  */
+  T scopeId(uint propval) nothrow
+  {
+    return setProperty("scope-id", propval);
   }
 }
 

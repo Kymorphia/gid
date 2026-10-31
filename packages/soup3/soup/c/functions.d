@@ -282,8 +282,8 @@ __gshared extern(C) nothrow
   void function(SoupMessageHeaders* hdrs) c_soup_message_headers_unref; ///
 
   // MessageHeadersIter
-  gboolean function(SoupMessageHeadersIter* iter, const(char*)* name, const(char*)* value) c_soup_message_headers_iter_next; ///
   void function(SoupMessageHeadersIter* iter, SoupMessageHeaders* hdrs) c_soup_message_headers_iter_init; ///
+  gboolean function(SoupMessageHeadersIter* iter, const(char*)* name, const(char*)* value) c_soup_message_headers_iter_next; ///
 
   // MessageMetrics
   GType function() c_soup_message_metrics_get_type; ///
@@ -440,6 +440,7 @@ __gshared extern(C) nothrow
   GList* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_extensions; ///
   GIOStream* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_io_stream; ///
   uint function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_keepalive_interval; ///
+  uint function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_keepalive_pong_timeout; ///
   ulong function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_max_incoming_payload_size; ///
   const(char)* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_origin; ///
   const(char)* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_protocol; ///
@@ -449,6 +450,7 @@ __gshared extern(C) nothrow
   void function(SoupWebsocketConnection* self, SoupWebsocketDataType type, GBytes* message) c_soup_websocket_connection_send_message; ///
   void function(SoupWebsocketConnection* self, const(char)* text) c_soup_websocket_connection_send_text; ///
   void function(SoupWebsocketConnection* self, uint interval) c_soup_websocket_connection_set_keepalive_interval; ///
+  void function(SoupWebsocketConnection* self, uint pongTimeout) c_soup_websocket_connection_set_keepalive_pong_timeout; ///
   void function(SoupWebsocketConnection* self, ulong maxIncomingPayloadSize) c_soup_websocket_connection_set_max_incoming_payload_size; ///
 
   // WebsocketExtension
@@ -1246,10 +1248,10 @@ alias soup_message_headers_unref = c_soup_message_headers_unref;
 // MessageHeadersIter
 
 /** */
-alias soup_message_headers_iter_next = c_soup_message_headers_iter_next;
+alias soup_message_headers_iter_init = c_soup_message_headers_iter_init;
 
 /** */
-alias soup_message_headers_iter_init = c_soup_message_headers_iter_init;
+alias soup_message_headers_iter_next = c_soup_message_headers_iter_next;
 
 // MessageMetrics
 
@@ -1688,6 +1690,9 @@ alias soup_websocket_connection_get_io_stream = c_soup_websocket_connection_get_
 alias soup_websocket_connection_get_keepalive_interval = c_soup_websocket_connection_get_keepalive_interval;
 
 /** */
+alias soup_websocket_connection_get_keepalive_pong_timeout = c_soup_websocket_connection_get_keepalive_pong_timeout;
+
+/** */
 alias soup_websocket_connection_get_max_incoming_payload_size = c_soup_websocket_connection_get_max_incoming_payload_size;
 
 /** */
@@ -1713,6 +1718,9 @@ alias soup_websocket_connection_send_text = c_soup_websocket_connection_send_tex
 
 /** */
 alias soup_websocket_connection_set_keepalive_interval = c_soup_websocket_connection_set_keepalive_interval;
+
+/** */
+alias soup_websocket_connection_set_keepalive_pong_timeout = c_soup_websocket_connection_set_keepalive_pong_timeout;
 
 /** */
 alias soup_websocket_connection_set_max_incoming_payload_size = c_soup_websocket_connection_set_max_incoming_payload_size;
@@ -2171,8 +2179,8 @@ shared static this()
   gidLink(cast(void**)&soup_message_headers_unref, "soup_message_headers_unref", libs);
 
   // MessageHeadersIter
-  gidLink(cast(void**)&soup_message_headers_iter_next, "soup_message_headers_iter_next", libs);
   gidLink(cast(void**)&soup_message_headers_iter_init, "soup_message_headers_iter_init", libs);
+  gidLink(cast(void**)&soup_message_headers_iter_next, "soup_message_headers_iter_next", libs);
 
   // MessageMetrics
   gidLink(cast(void**)&soup_message_metrics_get_type, "soup_message_metrics_get_type", libs);
@@ -2329,6 +2337,7 @@ shared static this()
   gidLink(cast(void**)&soup_websocket_connection_get_extensions, "soup_websocket_connection_get_extensions", libs);
   gidLink(cast(void**)&soup_websocket_connection_get_io_stream, "soup_websocket_connection_get_io_stream", libs);
   gidLink(cast(void**)&soup_websocket_connection_get_keepalive_interval, "soup_websocket_connection_get_keepalive_interval", libs);
+  gidLink(cast(void**)&soup_websocket_connection_get_keepalive_pong_timeout, "soup_websocket_connection_get_keepalive_pong_timeout", libs);
   gidLink(cast(void**)&soup_websocket_connection_get_max_incoming_payload_size, "soup_websocket_connection_get_max_incoming_payload_size", libs);
   gidLink(cast(void**)&soup_websocket_connection_get_origin, "soup_websocket_connection_get_origin", libs);
   gidLink(cast(void**)&soup_websocket_connection_get_protocol, "soup_websocket_connection_get_protocol", libs);
@@ -2338,6 +2347,7 @@ shared static this()
   gidLink(cast(void**)&soup_websocket_connection_send_message, "soup_websocket_connection_send_message", libs);
   gidLink(cast(void**)&soup_websocket_connection_send_text, "soup_websocket_connection_send_text", libs);
   gidLink(cast(void**)&soup_websocket_connection_set_keepalive_interval, "soup_websocket_connection_set_keepalive_interval", libs);
+  gidLink(cast(void**)&soup_websocket_connection_set_keepalive_pong_timeout, "soup_websocket_connection_set_keepalive_pong_timeout", libs);
   gidLink(cast(void**)&soup_websocket_connection_set_max_incoming_payload_size, "soup_websocket_connection_set_max_incoming_payload_size", libs);
 
   // WebsocketExtension

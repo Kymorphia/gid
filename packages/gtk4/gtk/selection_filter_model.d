@@ -14,8 +14,7 @@ import gtk.selection_model;
 import gtk.types;
 
 /**
-    [gtk.selection_filter_model.SelectionFilterModel] is a list model that presents the selection from
-    a [gtk.selection_model.SelectionModel].
+    A list model that presents the selection from a [gtk.selection_model.SelectionModel].
 */
 class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {

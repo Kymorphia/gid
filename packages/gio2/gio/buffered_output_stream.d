@@ -109,8 +109,8 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Creates a new buffered output stream for a base stream.
   
       Params:
-        baseStream = a #GOutputStream.
-      Returns: a #GOutputStream for the given base_stream.
+        baseStream = a [gio.output_stream.OutputStream].
+      Returns: a [gio.output_stream.OutputStream] for the given base_stream.
   */
   this(gio.output_stream.OutputStream baseStream) nothrow
   {
@@ -123,9 +123,9 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Creates a new buffered output stream with a given buffer size.
   
       Params:
-        baseStream = a #GOutputStream.
+        baseStream = a [gio.output_stream.OutputStream].
         size = a #gsize.
-      Returns: a #GOutputStream with an internal buffer set to size.
+      Returns: a [gio.output_stream.OutputStream] with an internal buffer set to size.
   */
   static gio.buffered_output_stream.BufferedOutputStream newSized(gio.output_stream.OutputStream baseStream, size_t size) nothrow
   {
@@ -137,8 +137,8 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 
   /**
       Checks if the buffer automatically grows as data is added.
-      Returns: true if the stream's buffer automatically grows,
-        false otherwise.
+      Returns: `TRUE` if the stream's buffer automatically grows,
+        `FALSE` otherwise.
   */
   bool getAutoGrow() nothrow
   {

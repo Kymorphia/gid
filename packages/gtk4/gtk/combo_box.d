@@ -28,7 +28,10 @@ import gtk.widget;
     A [gtk.combo_box.ComboBox] is a widget that allows the user to choose from a list of
     valid choices.
     
-    ![An example GtkComboBox](combo-box.png)
+    <picture>
+      <source srcset="combo-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkComboBox" src="combo-box.png">
+    </picture>
     
     The [gtk.combo_box.ComboBox] displays the selected choice; when activated, the
     [gtk.combo_box.ComboBox] displays a popup which allows the user to make a new choice.
@@ -1068,7 +1071,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
           `comboBox` the instance the signal is connected to (optional)
   
-          `Returns` 
+          `Returns` whether the combo box was popped down
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */

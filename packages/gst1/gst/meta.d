@@ -189,6 +189,17 @@ class Meta
     return _retval;
   }
 
+  /** */
+  static bool apiTypeTagsContainOnly(gobject.types.GType api, string[] validTags) nothrow
+  {
+    bool _retval;
+    auto _validTags_arr = new char*[](validTags.length + 1);
+    auto _validTags = cast(char**)_validTags_arr.ptr;
+    foreach (i, s; validTags) _validTags[i] = s.toCString!(No.Malloc);
+    _retval = cast(bool)gst_meta_api_type_tags_contain_only(api, _validTags);
+    return _retval;
+  }
+
   /**
       Recreate a #GstMeta from serialized data returned by
       [gst.meta.Meta.serialize] and add it to buffer.

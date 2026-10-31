@@ -37,8 +37,6 @@ import gtk.widget;
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <child>
         <object class="AdwBreakpoint">
           <condition>max-width: 550sp</condition>
@@ -79,6 +77,9 @@ import gtk.widget;
     ## CSS nodes
     
     [adw.view_switcher_bar.ViewSwitcherBar] has a single CSS node with name` viewswitcherbar`.
+    
+    See also: [adw.view_switcher.ViewSwitcher], [adw.inline_view_switcher.InlineViewSwitcher],
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar].
 */
 class ViewSwitcherBar : gtk.widget.Widget
 {

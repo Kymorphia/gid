@@ -117,4 +117,35 @@ class MapInfo
   {
     (cast(GstMapInfo*)this._cPtr).maxsize = propval;
   }
+
+  /**
+      Release the memory obtained with [gst.memory.Memory.map]
+  */
+  void clear() nothrow
+  {
+    gst_map_info_clear(cast(GstMapInfo*)this._cPtr);
+  }
+
+  /** */
+  ubyte[] getData() nothrow
+  {
+    ubyte* _cretval;
+    size_t _cretlength;
+    _cretval = gst_map_info_get_data(cast(GstMapInfo*)this._cPtr, &_cretlength);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /**
+      Initializes info.
+  */
+  void init_() nothrow
+  {
+    gst_map_info_init(cast(GstMapInfo*)this._cPtr);
+  }
 }

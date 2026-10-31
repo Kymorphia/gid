@@ -196,6 +196,24 @@ class ContextMenu : gobject.object.ObjectWrap
   }
 
   /**
+      Gets the position in view coordinates where the context menu was triggered.
+      
+      This function only returns valid coordinates when called for a #WebKitContextMenu
+      passed to #WebKitWebView::context-menu signal.
+  
+      Params:
+        x = return location for the x coordinate
+        y = return location for the y coordinate
+      Returns: true if valid position coordinates are available, false otherwise
+  */
+  bool getPosition(out int x, out int y) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)webkit_context_menu_get_position(cast(WebKitContextMenu*)this._cPtr, cast(int*)&x, cast(int*)&y);
+    return _retval;
+  }
+
+  /**
       Gets the user data of menu.
       
       This function can be used from the UI Process to get user data previously set

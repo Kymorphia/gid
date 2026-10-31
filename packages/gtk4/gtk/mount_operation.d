@@ -13,16 +13,16 @@ import gtk.types;
 import gtk.window;
 
 /**
-    [gtk.mount_operation.MountOperation] is an implementation of [gio.mount_operation.MountOperation].
-    
-    The functions and objects described here make working with GTK and
-    GIO more convenient.
+    Asks the user for passwords and other information required to
+    mount a volume.
     
     [gtk.mount_operation.MountOperation] is needed when mounting volumes:
     It is an implementation of [gio.mount_operation.MountOperation] that can be used with
     GIO functions for mounting volumes such as
-    [gio.file.File.mountEnclosingVolume], [gio.file.File.mountMountable],
-    [gio.volume.Volume.mount], [gio.mount.Mount.unmountWithOperation] and others.
+    [gio.file.File.mountEnclosingVolume],
+    [gio.file.File.mountMountable],
+    [gio.volume.Volume.mount],
+    [gio.mount.Mount.unmountWithOperation] and others.
     
     When necessary, [gtk.mount_operation.MountOperation] shows dialogs to let the user
     enter passwords, ask questions or show processes blocking unmount.

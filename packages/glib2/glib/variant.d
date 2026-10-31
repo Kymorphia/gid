@@ -762,7 +762,7 @@ class Variant
       
       string must be valid UTF-8, and must not be null. To encode
       potentially-null strings, use [glib.variant.Variant.new_] with `ms` as the
-      [format string][gvariant-format-strings-maybe-types].
+      [format string](gvariant-format-strings.html#maybe-types).
   
       Params:
         string_ = a normal UTF-8 nul-terminated string
@@ -1712,11 +1712,11 @@ class Variant
   /**
       Looks up a value in a dictionary #GVariant.
       
-      This function works with dictionaries of the type a{s*} (and equally
-      well with type a{o*}, but we only further discuss the string case
+      This function works with dictionaries of the type `a{s*}` (and equally
+      well with type `a{o*}`), but we only further discuss the string case
       for sake of clarity).
       
-      In the event that dictionary has the type a{sv}, the expected_type
+      In the event that dictionary has the type `a{sv}`, the expected_type
       string specifies what type of value is expected to be inside of the
       variant. If the value inside the variant has a different type then
       null is returned. In the event that dictionary has a value type other
@@ -1730,7 +1730,7 @@ class Variant
       value will have this type.
       
       This function is currently implemented with a linear scan.  If you
-      plan to do many lookups then #GVariantDict may be more efficient.
+      plan to do many lookups then [glib.variant_dict.VariantDict] may be more efficient.
   
       Params:
         key = the key to look up in the dictionary
@@ -1770,7 +1770,7 @@ class Variant
   /**
       Pretty-prints value in the format understood by [glib.variant.Variant.parse].
       
-      The format is described [here][gvariant-text].
+      The format is described [here](gvariant-text-format.html).
       
       If type_annotate is true, then type information is included in
       the output.

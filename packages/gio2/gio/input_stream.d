@@ -126,7 +126,7 @@ class InputStream : gobject.object.ObjectWrap
       override one you must override all.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional cancellable object
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
@@ -287,7 +287,7 @@ class InputStream : gobject.object.ObjectWrap
   
       Params:
         buffer = a buffer to read data into (which should be at least count bytes long)
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
@@ -369,7 +369,7 @@ class InputStream : gobject.object.ObjectWrap
   
       Params:
         buffer = a buffer to read data into (which should be at least count bytes long).
-        ioPriority = the [I/O priority][io-priority]
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority)
           of the request.
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback
@@ -465,7 +465,7 @@ class InputStream : gobject.object.ObjectWrap
   
       Params:
         count = the number of bytes that will be read from the stream
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
@@ -604,7 +604,7 @@ class InputStream : gobject.object.ObjectWrap
   
       Params:
         count = the number of bytes that will be skipped from the stream
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied

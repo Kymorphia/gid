@@ -54,7 +54,7 @@ gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size) nothrow
             caps, or null
     Returns: the #GstCaps corresponding to the data,
           or null if no type could be found. The caller should free the caps
-          returned with gst_caps_unref().
+          returned with [gst.caps.Caps.unref].
 */
 gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, out gst.types.TypeFindProbability prob) nothrow
 {
@@ -87,7 +87,7 @@ gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectWrap obj, gst.buffer.Buff
             caps, or null
     Returns: the #GstCaps corresponding to the data,
           or null if no type could be found. The caller should free the caps
-          returned with gst_caps_unref().
+          returned with [gst.caps.Caps.unref].
 */
 gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, gst.caps.Caps caps, out gst.types.TypeFindProbability prob) nothrow
 {
@@ -123,7 +123,7 @@ gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectWrap obj, gst.buf
             caps, or null
     Returns: the #GstCaps corresponding to the data,
           or null if no type could be found. The caller should free the caps
-          returned with gst_caps_unref().
+          returned with [gst.caps.Caps.unref].
 */
 gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, string extension, out gst.types.TypeFindProbability prob) nothrow
 {
@@ -155,7 +155,7 @@ gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gs
             caps, or null
     Returns: the #GstCaps corresponding to the data,
           or null if no type could be found. The caller should free the caps
-          returned with gst_caps_unref().
+          returned with [gst.caps.Caps.unref].
 */
 gst.caps.Caps typeFindHelperForData(gst.object.ObjectWrap obj, ubyte[] data, out gst.types.TypeFindProbability prob) nothrow
 {
@@ -189,7 +189,7 @@ gst.caps.Caps typeFindHelperForData(gst.object.ObjectWrap obj, ubyte[] data, out
             caps, or null
     Returns: the #GstCaps corresponding to the data,
           or null if no type could be found. The caller should free the caps
-          returned with gst_caps_unref().
+          returned with [gst.caps.Caps.unref].
 */
 gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] data, gst.caps.Caps caps, out gst.types.TypeFindProbability prob) nothrow
 {
@@ -230,7 +230,7 @@ gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] d
             caps, or null
     Returns: the #GstCaps corresponding to the data,
           or null if no type could be found. The caller should free the caps
-          returned with gst_caps_unref().
+          returned with [gst.caps.Caps.unref].
 */
 gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyte[] data, string extension, out gst.types.TypeFindProbability prob) nothrow
 {
@@ -260,7 +260,7 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyt
       extension = an extension
     Returns: the #GstCaps corresponding to
           extension, or null if no type could be found. The caller should free
-          the caps returned with gst_caps_unref().
+          the caps returned with [gst.caps.Caps.unref].
 */
 gst.caps.Caps typeFindHelperForExtension(gst.object.ObjectWrap obj, string extension) nothrow
 {

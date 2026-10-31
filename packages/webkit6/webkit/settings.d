@@ -1134,6 +1134,25 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
+      Get `mathFontFamily` property.
+      Returns: The font family used as the default for content using a math font.
+  */
+  @property string mathFontFamily() nothrow
+  {
+    return getMathFontFamily();
+  }
+
+  /**
+      Set `mathFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a math font.
+  */
+  @property void mathFontFamily(string propval) nothrow
+  {
+    setMathFontFamily(propval);
+  }
+
+  /**
       Get `mediaContentTypesRequiringHardwareSupport` property.
       Returns: List of media content types requiring hardware support, split by semicolons (:).
         For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
@@ -2060,6 +2079,20 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
+      Gets the #WebKitSettings:math-font-family property.
+      Returns: The default font family used to display content marked with math font.
+        
+        Since 2.52
+  */
+  string getMathFontFamily() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_settings_get_math_font_family(cast(WebKitSettings*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
       Gets the #WebKitSettings:media-content-types-requiring-hardware-support property.
       Returns: Media content types requiring hardware support, or null.
   */
@@ -2717,6 +2750,20 @@ class Settings : gobject.object.ObjectWrap
   void setLoadIconsIgnoringImageLoadSetting(bool enabled) nothrow
   {
     webkit_settings_set_load_icons_ignoring_image_load_setting(cast(WebKitSettings*)this._cPtr, enabled);
+  }
+
+  /**
+      Set the #WebKitSettings:math-font-family property.
+      
+      Since 2.52
+  
+      Params:
+        mathFontFamily = the new default math font family
+  */
+  void setMathFontFamily(string mathFontFamily = null) nothrow
+  {
+    const(char)* _mathFontFamily = mathFontFamily.toCString!(No.Malloc, Yes.Nullable);
+    webkit_settings_set_math_font_family(cast(WebKitSettings*)this._cPtr, _mathFontFamily);
   }
 
   /**
@@ -3481,6 +3528,17 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   T loadIconsIgnoringImageLoadSetting(bool propval) nothrow
   {
     return setProperty("load-icons-ignoring-image-load-setting", propval);
+  }
+
+  /**
+      Set `mathFontFamily` property.
+      Params:
+        propval = The font family used as the default for content using a math font.
+      Returns: Builder instance for fluent chaining
+  */
+  T mathFontFamily(string propval) nothrow
+  {
+    return setProperty("math-font-family", propval);
   }
 
   /**

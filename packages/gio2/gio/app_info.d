@@ -26,15 +26,19 @@ import gobject.object;
     As of GLib 2.20, URIs will always be converted to POSIX paths
     (using [gio.file.File.getPath]) when using [gio.app_info.AppInfo.launch]
     even if the application requested an URI and not a POSIX path. For example
-    for a desktop-file based application with Exec key `totem
-    `U`` and a single URI, `sftp://foo/file.avi`, then
-    `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will
-    only work if a set of suitable GIO extensions (such as GVfs 2.26
-    compiled with FUSE support), is available and operational; if this
-    is not the case, the URI will be passed unmodified to the application.
-    Some URIs, such as `mailto:`, of course cannot be mapped to a POSIX
-    path (in GVfs there's no FUSE mount for it); such URIs will be
-    passed unmodified to the application.
+    for a desktop-file based application with the following Exec key:
+    
+    ```
+    Exec=totem %U
+    ```
+    
+    and a single URI, `sftp://foo/file.avi`, then
+    `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will only work
+    if a set of suitable GIO extensions (such as GVfs 2.26 compiled with FUSE
+    support), is available and operational; if this is not the case, the URI
+    will be passed unmodified to the application. Some URIs, such as `mailto:`,
+    of course cannot be mapped to a POSIX path (in GVfs there’s no FUSE mount
+    for it); such URIs will be passed unmodified to the application.
     
     Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
     back to the GIO URI in the [gio.file.File] constructors (since GVfs
@@ -64,7 +68,7 @@ import gobject.object;
     
     This code will work when both `cdda://sr0/Track 1.wav` and
     `/home/user/.gvfs/cdda on sr0/Track 1.wav` is passed to the
-    application. It should be noted that it's generally not safe
+    application. It should be noted that it’s generally not safe
     for applications to rely on the format of a particular URIs.
     Different launcher applications (e.g. file managers) may have
     different ideas of what a given URI means.
@@ -80,19 +84,21 @@ interface AppInfo
   }
 
   /**
-      Creates a new #GAppInfo from the given information.
+      Creates a new [gio.app_info.AppInfo] from the given information.
       
-      Note that for commandline, the quoting rules of the Exec key of the
+      Note that for commandline, the quoting rules of the `Exec` key of the
       [freedesktop.org Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec)
       are applied. For example, if the commandline contains
       percent-encoded URIs, the percent-character must be doubled in order to prevent it from
-      being swallowed by Exec key unquoting. See the specification for exact quoting rules.
+      being swallowed by `Exec` key unquoting. See
+      [the specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html)
+      for exact quoting rules.
   
       Params:
-        commandline = the commandline to use
-        applicationName = the application name, or null to use commandline
-        flags = flags that can specify details of the created #GAppInfo
-      Returns: new #GAppInfo for given command.
+        commandline = the command line to use
+        applicationName = the application name, or `NULL` to use commandline
+        flags = flags that can specify details of the created [gio.app_info.AppInfo]
+      Returns: new [gio.app_info.AppInfo] for given command.
       Throws: [ErrorWrap]
   */
   static gio.app_info.AppInfo createFromCommandline(string commandline, string applicationName, gio.types.AppInfoCreateFlags flags)
@@ -113,11 +119,17 @@ interface AppInfo
       on this system.
       
       For desktop files, this includes applications that have
-      `NoDisplay=true` set or are excluded from display by means
-      of `OnlyShowIn` or `NotShowIn`. See [gio.app_info.AppInfo.shouldShow].
-      The returned list does not include applications which have
-      the `Hidden` key set.
-      Returns: a newly allocated #GList of references to #GAppInfos.
+      [`NoDisplay=true`](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-nodisplay)
+      set or are excluded from display by means of
+      [`OnlyShowIn`](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-onlyshowin)
+      or [`NotShowIn`](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-notshowin).
+      See [gio.app_info.AppInfo.shouldShow].
+      
+      The returned list does not include applications which have the
+      [`Hidden` key](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-hidden)
+      set.
+      Returns: a newly allocated
+          list of references to [gio.app_info.AppInfo]s.
   */
   static gio.app_info.AppInfo[] getAll() nothrow
   {
@@ -128,15 +140,15 @@ interface AppInfo
   }
 
   /**
-      Gets a list of all #GAppInfos for a given content type,
-      including the recommended and fallback #GAppInfos. See
+      Gets a list of all [gio.app_info.AppInfo]s for a given content type,
+      including the recommended and fallback [gio.app_info.AppInfo]s. See
       [gio.app_info.AppInfo.getRecommendedForType] and
       [gio.app_info.AppInfo.getFallbackForType].
   
       Params:
-        contentType = the content type to find a #GAppInfo for
-      Returns: #GList of #GAppInfos
-            for given content_type or null on error.
+        contentType = the content type to find a [gio.app_info.AppInfo] for
+      Returns: list of
+          [gio.app_info.AppInfo]s for given content_type.
   */
   static gio.app_info.AppInfo[] getAllForType(string contentType) nothrow
   {
@@ -148,14 +160,14 @@ interface AppInfo
   }
 
   /**
-      Gets the default #GAppInfo for a given content type.
+      Gets the default [gio.app_info.AppInfo] for a given content type.
   
       Params:
-        contentType = the content type to find a #GAppInfo for
-        mustSupportUris = if true, the #GAppInfo is expected to
-              support URIs
-      Returns: #GAppInfo for given content_type or
-            null on error.
+        contentType = the content type to find a [gio.app_info.AppInfo] for
+        mustSupportUris = if `TRUE`, the [gio.app_info.AppInfo] is expected to
+            support URIs
+      Returns: [gio.app_info.AppInfo] for given
+          content_type or `NULL` on error.
   */
   static gio.app_info.AppInfo getDefaultForType(string contentType, bool mustSupportUris) nothrow
   {
@@ -167,14 +179,16 @@ interface AppInfo
   }
 
   /**
-      Asynchronously gets the default #GAppInfo for a given content type.
+      Asynchronously gets the default [gio.app_info.AppInfo] for a given content
+      type.
   
       Params:
-        contentType = the content type to find a #GAppInfo for
-        mustSupportUris = if true, the #GAppInfo is expected to
-              support URIs
-        cancellable = optional #GCancellable object, null to ignore
-        callback = a #GAsyncReadyCallback to call when the request is done
+        contentType = the content type to find a [gio.app_info.AppInfo] for
+        mustSupportUris = if `TRUE`, the [gio.app_info.AppInfo] is expected to
+            support URIs
+        cancellable = a [gio.cancellable.Cancellable]
+        callback = a [gio.types.AsyncReadyCallback] to call
+            when the request is done
   */
   static void getDefaultForTypeAsync(string contentType, bool mustSupportUris, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -199,15 +213,16 @@ interface AppInfo
   }
 
   /**
-      Finishes a default #GAppInfo lookup started by
+      Finishes a default [gio.app_info.AppInfo] lookup started by
       [gio.app_info.AppInfo.getDefaultForTypeAsync].
       
-      If no #GAppInfo is found, then error will be set to [gio.types.IOErrorEnum.NotFound].
+      If no #[gio.app_info.AppInfo] is found, then error will be set to
+      `errorGio.IOErrorEnum.NOT_FOUND`.
   
       Params:
-        result = a #GAsyncResult
-      Returns: #GAppInfo for given content_type or
-            null on error.
+        result = the async result
+      Returns: [gio.app_info.AppInfo] for given content_type or
+          `NULL` on error.
       Throws: [ErrorWrap]
   */
   static gio.app_info.AppInfo getDefaultForTypeFinish(gio.async_result.AsyncResult result)
@@ -222,15 +237,15 @@ interface AppInfo
   }
 
   /**
-      Gets the default application for handling URIs with
-      the given URI scheme. A URI scheme is the initial part
-      of the URI, up to but not including the ':', e.g. "http",
-      "ftp" or "sip".
+      Gets the default application for handling URIs with the given URI scheme.
+      
+      A URI scheme is the initial part of the URI, up to but not including the `:`.
+      For example, `http`, `ftp` or `sip`.
   
       Params:
         uriScheme = a string containing a URI scheme.
-      Returns: #GAppInfo for given uri_scheme or
-            null on error.
+      Returns: [gio.app_info.AppInfo] for given
+          uri_scheme or `NULL` on error.
   */
   static gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme) nothrow
   {
@@ -244,13 +259,14 @@ interface AppInfo
   /**
       Asynchronously gets the default application for handling URIs with
       the given URI scheme. A URI scheme is the initial part
-      of the URI, up to but not including the ':', e.g. "http",
-      "ftp" or "sip".
+      of the URI, up to but not including the `:`, e.g. `http`,
+      `ftp` or `sip`.
   
       Params:
         uriScheme = a string containing a URI scheme.
-        cancellable = optional #GCancellable object, null to ignore
-        callback = a #GAsyncReadyCallback to call when the request is done
+        cancellable = a [gio.cancellable.Cancellable]
+        callback = a [gio.types.AsyncReadyCallback] to call
+            when the request is done
   */
   static void getDefaultForUriSchemeAsync(string uriScheme, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -275,15 +291,16 @@ interface AppInfo
   }
 
   /**
-      Finishes a default #GAppInfo lookup started by
+      Finishes a default [gio.app_info.AppInfo] lookup started by
       [gio.app_info.AppInfo.getDefaultForUriSchemeAsync].
       
-      If no #GAppInfo is found, then error will be set to [gio.types.IOErrorEnum.NotFound].
+      If no [gio.app_info.AppInfo] is found, then error will be set to
+      `errorGio.IOErrorEnum.NOT_FOUND`.
   
       Params:
-        result = a #GAsyncResult
-      Returns: #GAppInfo for given uri_scheme or
-            null on error.
+        result = the async result
+      Returns: [gio.app_info.AppInfo] for given uri_scheme or
+          `NULL` on error.
       Throws: [ErrorWrap]
   */
   static gio.app_info.AppInfo getDefaultForUriSchemeFinish(gio.async_result.AsyncResult result)
@@ -298,14 +315,14 @@ interface AppInfo
   }
 
   /**
-      Gets a list of fallback #GAppInfos for a given content type, i.e.
-      those applications which claim to support the given content type
-      by MIME type subclassing and not directly.
+      Gets a list of fallback [gio.app_info.AppInfo]s for a given content type, i.e.
+      those applications which claim to support the given content type by MIME
+      type subclassing and not directly.
   
       Params:
-        contentType = the content type to find a #GAppInfo for
-      Returns: #GList of #GAppInfos
-            for given content_type or null on error.
+        contentType = the content type to find a [gio.app_info.AppInfo] for
+      Returns: list of [gio.app_info.AppInfo]s
+            for given content_type or `NULL` on error.
   */
   static gio.app_info.AppInfo[] getFallbackForType(string contentType) nothrow
   {
@@ -317,17 +334,18 @@ interface AppInfo
   }
 
   /**
-      Gets a list of recommended #GAppInfos for a given content type, i.e.
-      those applications which claim to support the given content type exactly,
-      and not by MIME type subclassing.
+      Gets a list of recommended [gio.app_info.AppInfo]s for a given content type,
+      i.e. those applications which claim to support the given content type
+      exactly, and not by MIME type subclassing.
+      
       Note that the first application of the list is the last used one, i.e.
-      the last one for which [gio.app_info.AppInfo.setAsLastUsedForType] has been
-      called.
+      the last one for which [gio.app_info.AppInfo.setAsLastUsedForType] has
+      been called.
   
       Params:
-        contentType = the content type to find a #GAppInfo for
-      Returns: #GList of #GAppInfos
-            for given content_type or null on error.
+        contentType = the content type to find a [gio.app_info.AppInfo] for
+      Returns: list of
+          [gio.app_info.AppInfo]s for given content_type or `NULL` on error.
   */
   static gio.app_info.AppInfo[] getRecommendedForType(string contentType) nothrow
   {
@@ -339,19 +357,18 @@ interface AppInfo
   }
 
   /**
-      Utility function that launches the default application
-      registered to handle the specified uri. Synchronous I/O
-      is done on the uri to detect the type of the file if
-      required.
+      Utility function that launches the default application registered to handle
+      the specified uri. Synchronous I/O is done on the uri to detect the type of
+      the file if required.
       
-      The D-Bus–activated applications don't have to be started if your application
+      The D-Bus–activated applications don’t have to be started if your application
       terminates too soon after this function. To prevent this, use
       [gio.app_info.AppInfo.launchDefaultForUriAsync] instead.
   
       Params:
         uri = the uri to show
-        context = an optional #GAppLaunchContext
-      Returns: true on success, false on error.
+        context = optional launch context
+      Returns: `TRUE` on success, `FALSE` on error.
       Throws: [ErrorWrap]
   */
   static bool launchDefaultForUri(string uri, gio.app_launch_context.AppLaunchContext context = null)
@@ -368,10 +385,9 @@ interface AppInfo
   /**
       Async version of [gio.app_info.AppInfo.launchDefaultForUri].
       
-      This version is useful if you are interested in receiving
-      error information in the case where the application is
-      sandboxed and the portal may present an application chooser
-      dialog to the user.
+      This version is useful if you are interested in receiving error information
+      in the case where the application is sandboxed and the portal may present an
+      application chooser dialog to the user.
       
       This is also useful if you want to be sure that the D-Bus–activated
       applications are really started before termination and if you are interested
@@ -379,9 +395,10 @@ interface AppInfo
   
       Params:
         uri = the uri to show
-        context = an optional #GAppLaunchContext
-        cancellable = a #GCancellable
-        callback = a #GAsyncReadyCallback to call when the request is done
+        context = optional launch context
+        cancellable = a [gio.cancellable.Cancellable]
+        callback = a [gio.types.AsyncReadyCallback] to call
+            when the request is done
   */
   static void launchDefaultForUriAsync(string uri, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -409,8 +426,8 @@ interface AppInfo
       Finishes an asynchronous launch-default-for-uri operation.
   
       Params:
-        result = a #GAsyncResult
-      Returns: true if the launch was successful, false if error is set
+        result = the async result
+      Returns: `TRUE` if the launch was successful, `FALSE` if error is set
       Throws: [ErrorWrap]
   */
   static bool launchDefaultForUriFinish(gio.async_result.AsyncResult result)
@@ -445,66 +462,66 @@ interface AppInfo
   
       Params:
         contentType = a string.
-      Returns: true on success, false on error.
+      Returns: `TRUE` on success, `FALSE` on error.
       Throws: [ErrorWrap]
   */
   bool addSupportsType(string contentType);
 
   /**
-      Obtains the information whether the #GAppInfo can be deleted.
+      Obtains the information whether the [gio.app_info.AppInfo] can be deleted.
       See [gio.app_info.AppInfo.delete_].
-      Returns: true if appinfo can be deleted
+      Returns: `TRUE` if appinfo can be deleted
   */
   bool canDelete();
 
   /**
       Checks if a supported content type can be removed from an application.
-      Returns: true if it is possible to remove supported
-            content types from a given appinfo, false if not.
+      Returns: `TRUE` if it is possible to remove supported content types from a
+          given appinfo, `FALSE` if not.
   */
   bool canRemoveSupportsType();
 
   /**
-      Tries to delete a #GAppInfo.
+      Tries to delete a [gio.app_info.AppInfo].
       
       On some platforms, there may be a difference between user-defined
-      #GAppInfos which can be deleted, and system-wide ones which cannot.
+      [gio.app_info.AppInfo]s which can be deleted, and system-wide ones which cannot.
       See [gio.app_info.AppInfo.canDelete].
-      Returns: true if appinfo has been deleted
+      Returns: `TRUE` if appinfo has been deleted
   */
   bool delete_();
 
   /**
-      Creates a duplicate of a #GAppInfo.
+      Creates a duplicate of a [gio.app_info.AppInfo].
       Returns: a duplicate of appinfo.
   */
   gio.app_info.AppInfo dup();
 
   /**
-      Checks if two #GAppInfos are equal.
+      Checks if two [gio.app_info.AppInfo]s are equal.
       
-      Note that the check *may not* compare each individual
-      field, and only does an identity check. In case detecting changes in the
-      contents is needed, program code must additionally compare relevant fields.
+      Note that the check *may not* compare each individual field, and only does
+      an identity check. In case detecting changes in the contents is needed,
+      program code must additionally compare relevant fields.
   
       Params:
-        appinfo2 = the second #GAppInfo.
-      Returns: true if appinfo1 is equal to appinfo2. false otherwise.
+        appinfo2 = the second [gio.app_info.AppInfo].
+      Returns: `TRUE` if appinfo1 is equal to appinfo2. `FALSE` otherwise.
   */
   bool equal(gio.app_info.AppInfo appinfo2);
 
   /**
       Gets the commandline with which the application will be
       started.
-      Returns: a string containing the appinfo's commandline,
-            or null if this information is not available
+      Returns: a string containing the appinfo’s
+          commandline, or `NULL` if this information is not available
   */
   string getCommandline();
 
   /**
       Gets a human-readable description of an installed application.
       Returns: a string containing a description of the
-        application appinfo, or null if none.
+        application appinfo, or `NULL` if none.
   */
   string getDescription();
 
@@ -517,32 +534,31 @@ interface AppInfo
   string getDisplayName();
 
   /**
-      Gets the executable's name for the installed application.
+      Gets the executable’s name for the installed application.
       
       This is intended to be used for debugging or labelling what program is going
       to be run. To launch the executable, use [gio.app_info.AppInfo.launch] and related
       functions, rather than spawning the return value from this function.
-      Returns: a string containing the appinfo's application
+      Returns: a string containing the appinfo’s application
         binaries name
   */
   string getExecutable();
 
   /**
       Gets the icon for the application.
-      Returns: the default #GIcon for appinfo or null
-        if there is no default icon.
+      Returns: the default [gio.icon.Icon] for
+          appinfo or `NULL` if there is no default icon.
   */
   gio.icon.Icon getIcon();
 
   /**
-      Gets the ID of an application. An id is a string that
-      identifies the application. The exact format of the id is
-      platform dependent. For instance, on Unix this is the
-      desktop file id from the xdg menu specification.
+      Gets the ID of an application. An id is a string that identifies the
+      application. The exact format of the id is platform dependent. For instance,
+      on Unix this is the desktop file id from the xdg menu specification.
       
-      Note that the returned ID may be null, depending on how
-      the appinfo has been constructed.
-      Returns: a string containing the application's ID.
+      Note that the returned ID may be `NULL`, depending on how the appinfo has
+      been constructed.
+      Returns: a string containing the application’s ID.
   */
   string getId();
 
@@ -555,7 +571,8 @@ interface AppInfo
   /**
       Retrieves the list of content types that app_info claims to support.
       If this information is not provided by the environment, this function
-      will return null.
+      will return `NULL`.
+      
       This function does not take in consideration associations added with
       [gio.app_info.AppInfo.addSupportsType], but only those exported directly by
       the application.
@@ -569,7 +586,7 @@ interface AppInfo
       about the details of the launcher (like what screen it is on).
       On error, error will be set accordingly.
       
-      To launch the application without arguments pass a null files list.
+      To launch the application without arguments pass a `NULL` files list.
       
       Note that even if the launch is successful the application launched
       can fail to start if it runs into problems during startup. There is
@@ -593,9 +610,9 @@ interface AppInfo
       variables are also set, based on information provided in context.
   
       Params:
-        files = a #GList of #GFile objects
-        context = a #GAppLaunchContext or null
-      Returns: true on successful launch, false otherwise.
+        files = a list of [gio.file.File] objects
+        context = the launch context
+      Returns: `TRUE` on successful launch, `FALSE` otherwise.
       Throws: [ErrorWrap]
   */
   bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null);
@@ -608,16 +625,16 @@ interface AppInfo
       one URI per invocation as part of their command-line, multiple instances
       of the application will be spawned.
       
-      To launch the application without arguments pass a null uris list.
+      To launch the application without arguments pass a `NULL` uris list.
       
       Note that even if the launch is successful the application launched
       can fail to start if it runs into problems during startup. There is
       no way to detect this.
   
       Params:
-        uris = a #GList containing URIs to launch.
-        context = a #GAppLaunchContext or null
-      Returns: true on successful launch, false otherwise.
+        uris = a list of URIs to launch.
+        context = the launch context
+      Returns: `TRUE` on successful launch, `FALSE` otherwise.
       Throws: [ErrorWrap]
   */
   bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null);
@@ -631,10 +648,11 @@ interface AppInfo
       [gio.app_info.AppInfo.launchDefaultForUriAsync].
   
       Params:
-        uris = a #GList containing URIs to launch.
-        context = a #GAppLaunchContext or null
-        cancellable = a #GCancellable
-        callback = a #GAsyncReadyCallback to call when the request is done
+        uris = a list of URIs to launch.
+        context = the launch context
+        cancellable = a [gio.cancellable.Cancellable]
+        callback = a [gio.types.AsyncReadyCallback] to call
+            when the request is done
   */
   void launchUrisAsync(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
@@ -642,8 +660,8 @@ interface AppInfo
       Finishes a [gio.app_info.AppInfo.launchUrisAsync] operation.
   
       Params:
-        result = a #GAsyncResult
-      Returns: true on successful launch, false otherwise.
+        result = the async result
+      Returns: `TRUE` on successful launch, `FALSE` otherwise.
       Throws: [ErrorWrap]
   */
   bool launchUrisFinish(gio.async_result.AsyncResult result);
@@ -653,7 +671,7 @@ interface AppInfo
   
       Params:
         contentType = a string.
-      Returns: true on success, false on error.
+      Returns: `TRUE` on success, `FALSE` on error.
       Throws: [ErrorWrap]
   */
   bool removeSupportsType(string contentType);
@@ -662,9 +680,9 @@ interface AppInfo
       Sets the application as the default handler for the given file extension.
   
       Params:
-        extension = a string containing the file extension
-              (without the dot).
-      Returns: true on success, false on error.
+        extension = a string containing the file extension (without
+            the dot).
+      Returns: `TRUE` on success, `FALSE` on error.
       Throws: [ErrorWrap]
   */
   bool setAsDefaultForExtension(string extension);
@@ -674,20 +692,20 @@ interface AppInfo
   
       Params:
         contentType = the content type.
-      Returns: true on success, false on error.
+      Returns: `TRUE` on success, `FALSE` on error.
       Throws: [ErrorWrap]
   */
   bool setAsDefaultForType(string contentType);
 
   /**
-      Sets the application as the last used application for a given type.
-      This will make the application appear as first in the list returned
-      by [gio.app_info.AppInfo.getRecommendedForType], regardless of the default
+      Sets the application as the last used application for a given type. This
+      will make the application appear as first in the list returned by
+      [gio.app_info.AppInfo.getRecommendedForType], regardless of the default
       application for that content type.
   
       Params:
         contentType = the content type.
-      Returns: true on success, false on error.
+      Returns: `TRUE` on success, `FALSE` on error.
       Throws: [ErrorWrap]
   */
   bool setAsLastUsedForType(string contentType);
@@ -695,19 +713,19 @@ interface AppInfo
   /**
       Checks if the application info should be shown in menus that
       list available applications.
-      Returns: true if the appinfo should be shown, false otherwise.
+      Returns: `TRUE` if the appinfo should be shown, `FALSE` otherwise.
   */
   bool shouldShow();
 
   /**
       Checks if the application accepts files as arguments.
-      Returns: true if the appinfo supports files.
+      Returns: `TRUE` if the appinfo supports files.
   */
   bool supportsFiles();
 
   /**
       Checks if the application supports reading files and directories from URIs.
-      Returns: true if the appinfo supports URIs.
+      Returns: `TRUE` if the appinfo supports URIs.
   */
   bool supportsUris();
 }

@@ -3,6 +3,7 @@ module gst.static_pad_template;
 
 public import gid.basictypes;
 import gid.gid;
+import gobject.boxed;
 import gobject.object;
 import gst.c.functions;
 import gst.c.types;
@@ -14,20 +15,18 @@ import gst.types;
 /**
     Structure describing the #GstStaticPadTemplate.
 */
-class StaticPadTemplate
+class StaticPadTemplate : gobject.boxed.Boxed
 {
-  GstStaticPadTemplate _cInstance;
 
   /**
-      Create a `static_pad_template.StaticPadTemplate` wrap type.
+      Create a `static_pad_template.StaticPadTemplate` boxed type.
       Params:
-        nameTemplate = the name of the template
         direction = the direction of the template
         presence = the presence of the template
   */
-  this(string nameTemplate = string.init, gst.types.PadDirection direction = gst.types.PadDirection.init, gst.types.PadPresence presence = gst.types.PadPresence.init) nothrow
+  this(gst.types.PadDirection direction = gst.types.PadDirection.init, gst.types.PadPresence presence = gst.types.PadPresence.init) nothrow
   {
-    this.nameTemplate = nameTemplate;
+    super(boxedNew!GstStaticPadTemplate(_getGType), Yes.Take);
     this.direction = direction;
     this.presence = presence;
   }
@@ -35,16 +34,32 @@ class StaticPadTemplate
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstStaticPadTemplate*)ptr;
-
-    if (take)
-      gFree(ptr);
+    super(cast(void*)ptr, take);
   }
 
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    return dup ? boxCopy : _cInstancePtr;
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_static_pad_template_get_type != &gidSymbolNotFound ? gst_static_pad_template_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StaticPadTemplate self() nothrow
+  {
+    return this;
   }
 
   /**
@@ -54,16 +69,6 @@ class StaticPadTemplate
   @property string nameTemplate() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
-  }
-
-  /**
-      Set `nameTemplate` field.
-      Params:
-        propval = the name of the template
-  */
-  @property void nameTemplate(string propval) nothrow
-  {
-    (cast(GstStaticPadTemplate*)this._cPtr).nameTemplate = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -110,7 +115,7 @@ class StaticPadTemplate
   */
   @property gst.static_caps.StaticCaps staticCaps() nothrow
   {
-    return new gst.static_caps.StaticCaps(cast(GstStaticCaps*)&(cast(GstStaticPadTemplate*)this._cPtr).staticCaps, No.Take);
+    return cToD!(gst.static_caps.StaticCaps)(cast(void*)&(cast(GstStaticPadTemplate*)this._cPtr).staticCaps);
   }
 
   /**
@@ -129,7 +134,7 @@ class StaticPadTemplate
       Gets the capabilities of the static pad template.
       Returns: the #GstCaps of the static pad template.
         Unref after usage. Since the core holds an additional
-        ref to the returned caps, use gst_caps_make_writable()
+        ref to the returned caps, use [gst.caps.Caps.makeWritable]
         on the returned caps to modify it.
   */
   gst.caps.Caps getCaps() nothrow

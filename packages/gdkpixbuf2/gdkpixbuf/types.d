@@ -213,13 +213,13 @@ enum PIXBUF_MAJOR = 2;
     Micro version of gdk-pixbuf library, that is the "2" in
     "0.8.2" for example.
 */
-enum PIXBUF_MICRO = 10;
+enum PIXBUF_MICRO = 5;
 
 /**
     Minor version of gdk-pixbuf library, that is the "8" in
     "0.8.2" for example.
 */
-enum PIXBUF_MINOR = 42;
+enum PIXBUF_MINOR = 44;
 
 /**
     Contains the full version of GdkPixbuf as a string.
@@ -227,4 +227,4 @@ enum PIXBUF_MINOR = 42;
     This is the version being compiled against; contrast with
     `gdk_pixbuf_version`.
 */
-enum PIXBUF_VERSION = "2.42.10";
+enum PIXBUF_VERSION = "2.44.5";

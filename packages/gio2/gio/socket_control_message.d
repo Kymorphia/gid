@@ -22,7 +22,7 @@ import gobject.object;
     These messages are sent with [gio.socket.Socket.sendMessage] and received
     with [gio.socket.Socket.receiveMessage].
     
-    To extend the set of control message that can be sent, subclass this
+    To extend the set of control messages that can be sent, subclass this
     class and override the `get_size`, `get_level`, `get_type` and `serialize`
     methods.
     

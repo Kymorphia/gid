@@ -4,57 +4,59 @@
 [Summary]
 Package                    |       Structs        |        Funcs         |       Signals        |        Fields        |
                            |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |
-adw1                       |   74    0    0   100 |  980    0    0   100 |   47    0    0   100 |    0    0    0   100 |
+adw1                       |   95    0    0   100 | 1279    0    0   100 |   55    0    0   100 |    0    0    0   100 |
 arrow1                     |  296    0    0   100 |  973    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   76    0    0   100 | 1258    1    6  99.5 |    0    0    0   100 |  128    0    8  94.1 |
+glib2                      |   75    0    0   100 | 1261    1   10  99.2 |    0    0    0   100 |  127    0    8  94.1 |
+glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0    0    0   100 |    1    0    0   100 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   14    0    1  93.3 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gobject2                   |   56    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  137    0    3  97.9 |
+gobject2                   |   56    0    0   100 |  265    0    4  98.5 |    3    0    0   100 |  137    0    3  97.9 |
 gda5                       |  112    0    3  97.4 |  662    0   25  96.4 |   54    0    0   100 |  197    0   26  88.3 |
 gdk3                       |   57    0    0   100 |  542    0    6  98.9 |   39    0    0   100 |  264    0    3  98.9 |
-gdk4                       |   63    0    0   100 |  479    0    9  98.2 |   35    0    0   100 |   14    0    0   100 |
+gdk4                       |   66    0    0   100 |  535    0    9  98.3 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  178    0    0   100 | 1729    0   15  99.1 |   81    0    0   100 |   61    0    7  89.7 |
+gio2                       |  171    0    0   100 | 1665    0   15  99.1 |   79    0    0   100 |   61    0    7  89.7 |
+giounix2                   |   11    0    0   100 |  100    0    1  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
-gsk4                       |   51    0    0   100 |  267    0    4  98.5 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   89    0    0   100 | 1398    0   21  98.5 |   23    0    0   100 |  129    0    4  97.0 |
-gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstapp1                    |    6    0    0   100 |   48    0    0   100 |   17    0    0   100 |    8    0    0   100 |
-gstaudio1                  |   33    0    0   100 |  213    0    9  95.9 |    0    0    0   100 |   57    0    8  87.7 |
-gstbase1                   |   23    0    0   100 |  302    0   13  95.9 |    2    0    0   100 |   30    0    1  96.8 |
+gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
+gst1                       |   94    0    1  98.9 | 1519    0   21  98.6 |   23    0    0   100 |  131    0    4  97.0 |
+gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
+gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
+gstaudio1                  |   33    0    0   100 |  216    0    5  97.7 |    0    0    0   100 |   59    0    6  90.8 |
+gstbase1                   |   23    0    0   100 |  303    0   13  95.9 |    2    0    0   100 |   30    0    1  96.8 |
 gstcheck1                  |    8    0    0   100 |  109    0    3  97.3 |    0    0    0   100 |    8    0    0   100 |
-gstcontroller1             |   10    0    0   100 |   16    0    0   100 |    3    0    0   100 |    2    0    0   100 |
-gstgl1                     |   38    0    0   100 |  279    0   16  94.6 |    5    0    0   100 |   54    0    6  90.0 |
-gstglegl1                  |    7    0    0   100 |   14    0    6  70.0 |    0    0    0   100 |    0    0    0   100 |
+gstcontroller1             |   10    0    0   100 |   17    0    0   100 |    3    0    0   100 |    2    0    0   100 |
+gstgl1                     |   38    0    0   100 |  282    0   18  94.0 |    5    0    0   100 |   54    0    6  90.0 |
+gstglegl1                  |    7    0    0   100 |   16    0    6  72.7 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstnet1                    |    9    0    0   100 |   24    0    0   100 |    0    0    0   100 |    6    0    0   100 |
-gstpbutils1                |   16    0    0   100 |  169    0    2  98.8 |    5    0    0   100 |    0    0    0   100 |
+gstnet1                    |    9    0    0   100 |   25    0    0   100 |    0    0    0   100 |    6    0    0   100 |
+gstpbutils1                |   16    0    0   100 |  182    0    2  98.9 |    5    0    0   100 |    0    0    0   100 |
 gstrtp1                    |   11    0    0   100 |  197    0    1  99.5 |    6    0    0   100 |   17    0    1  94.4 |
 gstrtsp1                   |   15    0    0   100 |  139    1    0   100 |    1    0    0   100 |   50    0    1  98.0 |
-gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   82    0    7  92.1 |
+gstsdp1                    |   23    0    0   100 |  169    0    2  98.8 |    0    0    0   100 |   82    0    7  92.1 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   58    0    0   100 |  372    0    7  98.2 |    2    0    0   100 |  176    0   11  94.1 |
-gtk3                       |  345    0    0   100 | 3771    1   14  99.6 |  447    0    0   100 |  155    0    4  97.5 |
-gtk4                       |  320    0    0   100 | 3587    0    4  99.9 |  345    0    0   100 |   34    0    4  89.5 |
+gstvideo1                  |   60    0    0   100 |  386    0    7  98.2 |    2    0    0   100 |  182    0   10  94.8 |
+gtk3                       |  345    0    0   100 | 3771    1   14  99.6 |  448    0    0   100 |  155    0    4  97.5 |
+gtk4                       |  326    0    0   100 | 3667    0    4  99.9 |  347    0    0   100 |   37    0    4  90.2 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
-gtksource5                 |   49    0    0   100 |  448    0    0   100 |   30    0    0   100 |    0    0    0   100 |
-harfbuzz0                  |   35    0    0   100 |  408    0   41  90.9 |    0    0    0   100 |   72    0    4  94.7 |
-javascriptcore6            |   10    0    0   100 |  103    0   10  91.2 |    1    0    0   100 |    5    0    1  83.3 |
-json1                      |   12    0    0   100 |  200    0    0   100 |    9    0    0   100 |    0    0    0   100 |
+gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32    0    0   100 |    0    0    0   100 |
+harfbuzz0                  |   35    0    0   100 |  432    0   43  90.9 |    0    0    0   100 |   72    0    4  94.7 |
+javascriptcore6            |   10    0    0   100 |  104    0    9  92.0 |    1    0    0   100 |    5    0    1  83.3 |
+json1                      |   12    0    0   100 |  203    0    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  310    0    1  99.7 |   17    0    0   100 |    0    0    0   100 |
-pango1                     |   43    0    0   100 |  397    0   11  97.3 |    0    0    0   100 |   92    0    5  94.8 |
+pango1                     |   43    0    0   100 |  405    0   10  97.6 |    0    0    0   100 |   92    0    5  94.8 |
 pangocairo1                |    4    0    0   100 |   26    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-rsvg2                      |    7    0    0   100 |   46    0    0   100 |    0    0    0   100 |   12    0    0   100 |
+rsvg2                      |    7    0    0   100 |   48    0    0   100 |    0    0    0   100 |   12    0    0   100 |
 secret1                    |   11    0    0   100 |  137    0    4  97.2 |    0    0    0   100 |    5    0    0   100 |
-soup3                      |   38    0    0   100 |  374    0    1  99.7 |   42    0    0   100 |    4    0    0   100 |
-vte2                       |    7    0    0   100 |  169    0    4  97.7 |   35    0    0   100 |    0    0    0   100 |
-vte3                       |    7    0    0   100 |  159    0    0   100 |   28    0    0   100 |    0    0    0   100 |
-webkit6                    |   74    0    0   100 |  648    0    0   100 |   72    0    0   100 |    0    0    0   100 |
-webkitwebprocessextension6 |   16    0    0   100 |   97    0    0   100 |   12    0    0   100 |    0    0    0   100 |
+soup3                      |   38    0    0   100 |  376    0    1  99.7 |   42    0    0   100 |    4    0    0   100 |
+vte2                       |    8    0    0   100 |  217    0    5  97.7 |   34    0    0   100 |    0    0    0   100 |
+vte3                       |    8    0    0   100 |  211    0    1  99.5 |   30    0    0   100 |    0    0    0   100 |
+webkit6                    |   76    0    0   100 |  688    0    3  99.6 |   72    0    0   100 |    0    0    0   100 |
+webkitwebprocessextension6 |   16    0    0   100 |  100    0    0   100 |   12    0    0   100 |    0    0    0   100 |
 cairo1                     |   21    0    0   100 |  328    0    2  99.4 |    0    0    0   100 |   37    0    0   100 |
 freetype2                  |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gid                        |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -65,6 +67,7 @@ xlib2                      |   12    0    0   100 |    1    0    0   100 |    0 
 gda.types.Short
 gda.types.SqlAnyPart
 gda.types.UShort
+gst.types.ValueUniqueList
 
 [Unsupported Funcs]
 atk.document.Document.getAttributes
@@ -74,14 +77,20 @@ atk.editable_text.EditableText.setRunAttributes
 atk.object.ObjectWrap.getAttributes
 atk.text.Text.getDefaultAttributes
 atk.text.Text.getRunAttributes
+glib.async_queue.AsyncQueue.newFull
 glib.cond.Cond.wait
 glib.cond.Cond.waitUntil
 glib.main_context.MainContext.wait
 glib.option_context.OptionContext.setTranslateFunc
 glib.option_group.OptionGroup.setTranslateFunc
+glib.global.bitLockAndGet
+glib.global.bitUnlockAndSet
+glib.global.strsplitSet
 glib.global.testAddDataFunc
 gobject.type_class.TypeClass.adjustPrivateOffset
-gobject.global.signalNewv
+gobject.global.enumRegisterStatic
+gobject.global.flagsRegisterStatic
+gobject.global.typeDefaultInterfaceGet
 gda.attributes_manager.AttributesManager.setFull
 gda.column.Column.setAttribute
 gda.connection.Connection.asyncStatementExecute
@@ -127,8 +136,8 @@ gio.cancellable.Cancellable.connect
 gio.dbus_connection.DBusConnection.registerSubtree
 gio.data_input_stream.DataInputStream.readLine
 gio.data_input_stream.DataInputStream.readLineFinish
-gio.desktop_app_info.DesktopAppInfo.search
 gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
+gio.inet_address.InetAddress.newFromBytesWithIpv6Info
 gio.memory_input_stream.MemoryInputStream.newFromData
 gio.memory_input_stream.MemoryInputStream.addData
 gio.settings_backend.SettingsBackend.flattenTree
@@ -138,15 +147,16 @@ gio.task.Task.runInThreadSync
 gio.task.Task.setTaskData
 gio.tls_client_connection.TlsClientConnection.getAcceptedCas
 gio.tls_password.TlsPassword.setValueFull
+giounix.desktop_app_info.DesktopAppInfo.search
 gsk.path.Path.getClosestPoint
 gsk.path.Path.getEndPoint
 gsk.path.Path.getStartPoint
 gsk.path_measure.PathMeasure.getPoint
-gst.buffer.Buffer.extract
 gst.buffer.Buffer.foreachMeta
 gst.buffer_list.BufferList.foreach_
-gst.caps_features.CapsFeatures.setParentRefcount
 gst.iterator.Iterator.findCustom
+gst.meta.Meta.apiTypeAggregateParams
+gst.meta.Meta.apiTypeSetParamsAggregator
 gst.mini_object.MiniObject.setQdata
 gst.pad.Pad.setActivateFunctionFull
 gst.pad.Pad.setActivatemodeFunctionFull
@@ -160,15 +170,11 @@ gst.pad.Pad.setLinkFunctionFull
 gst.pad.Pad.setQueryFunctionFull
 gst.pad.Pad.setUnlinkFunctionFull
 gst.pad.Pad.stickyEventsForeach
-gst.structure.Structure.setParentRefcount
 gst.task.Task.setLock
+gst.type_find.TypeFind.peek
 gst.global.tracingRegisterHook
-gstaudio.audio_channel_mixer.AudioChannelMixer.samples
-gstaudio.audio_converter.AudioConverter.samples
-gstaudio.audio_quantize.AudioQuantize.samples
 gstaudio.audio_resampler.AudioResampler.resample
 gstaudio.audio_ring_buffer.AudioRingBuffer.setChannelPositions
-gstaudio.global.bufferAddAudioDownmixMeta
 gstaudio.global.bufferAddAudioMeta
 gstaudio.global.bufferAddDsdPlaneOffsetMeta
 gstaudio.global.dsdConvert
@@ -189,6 +195,8 @@ gstcheck.harness.Harness.addSinkHarness
 gstcheck.harness.Harness.addSrcHarness
 gstcheck.global.checkInit
 gstgl.glbase_memory.GLBaseMemory.init_
+gstgl.gldisplay.GLDisplay.findWindow
+gstgl.gldisplay.GLDisplay.retrieveWindow
 gstgl.glframebuffer.GLFramebuffer.drawToTexture
 gstgl.glmemory.GLMemory.init_
 gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams.newWrapped
@@ -247,21 +255,22 @@ harfbuzz.global.faceCollectNominalGlyphMapping
 harfbuzz.global.faceCollectUnicodes
 harfbuzz.global.faceCollectVariationSelectors
 harfbuzz.global.faceCollectVariationUnicodes
+harfbuzz.global.faceSetGetTableTagsFunc
 harfbuzz.global.featureToString
 harfbuzz.global.fontFuncsSetGlyphHAdvancesFunc
+harfbuzz.global.fontFuncsSetGlyphHOriginsFunc
 harfbuzz.global.fontFuncsSetGlyphNameFunc
 harfbuzz.global.fontFuncsSetGlyphVAdvancesFunc
+harfbuzz.global.fontFuncsSetGlyphVOriginsFunc
 harfbuzz.global.fontFuncsSetNominalGlyphsFunc
 harfbuzz.global.fontGetGlyphAdvancesForDirection
 harfbuzz.global.fontGetGlyphHAdvances
+harfbuzz.global.fontGetGlyphHOrigins
 harfbuzz.global.fontGetGlyphName
 harfbuzz.global.fontGetGlyphVAdvances
+harfbuzz.global.fontGetGlyphVOrigins
 harfbuzz.global.fontGetNominalGlyphs
 harfbuzz.global.fontGlyphToString
-harfbuzz.global.fontSetFuncs
-harfbuzz.global.fontSetFuncsData
-harfbuzz.global.ftFaceCreate
-harfbuzz.global.ftFontCreate
 harfbuzz.global.otLayoutCollectFeatures
 harfbuzz.global.otLayoutCollectFeaturesMap
 harfbuzz.global.otLayoutCollectLookups
@@ -276,6 +285,7 @@ harfbuzz.global.otNameGetUtf32
 harfbuzz.global.otNameGetUtf8
 harfbuzz.global.otShapeGlyphsClosure
 harfbuzz.global.otShapePlanCollectLookups
+harfbuzz.global.otShapePlanGetFeatureTags
 harfbuzz.global.otVarFindAxis
 harfbuzz.global.otVarNormalizeVariations
 harfbuzz.global.tagToString
@@ -289,7 +299,6 @@ javascriptcore.class_.Class.addProperty
 javascriptcore.context.Context.registerClass
 javascriptcore.value.Value.newFunctionVariadic
 javascriptcore.value.Value.newFunctionv
-javascriptcore.value.Value.arrayBufferGetData
 javascriptcore.value.Value.objectDefinePropertyAccessor
 panel.settings.Settings.bindWithMapping
 pango.attr_shape.AttrShape.newWithData
@@ -297,7 +306,6 @@ pango.glyph_item.GlyphItem.getLogicalWidths
 pango.glyph_item.GlyphItem.letterSpace
 pango.glyph_string.GlyphString.getLogicalWidths
 pango.tab_array.TabArray.getTabs
-pango.global.getMirrorChar
 pango.global.log2visGetEmbeddingLevels
 pango.global.scanInt
 pango.global.scanString
@@ -312,6 +320,11 @@ vte.terminal.Terminal.eventCheckGregexSimple
 vte.terminal.Terminal.getText
 vte.terminal.Terminal.getTextIncludeTrailingSpaces
 vte.terminal.Terminal.getTextRange
+vte.uuid.Uuid.freeToString
+vte.uuid.Uuid.freeToString
+webkit.web_extension.WebExtension.getAllRequestedMatchPatterns
+webkit.web_extension.WebExtension.getOptionalPermissionMatchPatterns
+webkit.web_extension.WebExtension.getRequestedPermissionMatchPatterns
 cairo.scaled_font.ScaledFont.textToGlyphs
 cairo.global.imageSurfaceCreateForData
 
@@ -369,8 +382,6 @@ gst.meta_info.MetaInfo.serializeFunc
 gst.pad_probe_info.PadProbeInfo.data
 gst.type_find.TypeFind.data
 gstaudio.audio_buffer.AudioBuffer.planes
-gstaudio.audio_downmix_meta.AudioDownmixMeta.fromPosition
-gstaudio.audio_downmix_meta.AudioDownmixMeta.toPosition
 gstaudio.audio_downmix_meta.AudioDownmixMeta.matrix
 gstaudio.audio_format_info.AudioFormatInfo.unpackFunc
 gstaudio.audio_format_info.AudioFormatInfo.packFunc
@@ -392,7 +403,6 @@ gstsdp.mikeypayload_pke.MIKEYPayloadPKE.data
 gstsdp.mikeypayload_rand.MIKEYPayloadRAND.rand
 gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam.val
 gstsdp.mikeypayload_t.MIKEYPayloadT.tsValue
-gstvideo.ancillary_meta.AncillaryMeta.data
 gstvideo.video_format_info.VideoFormatInfo.unpackFunc
 gstvideo.video_format_info.VideoFormatInfo.packFunc
 gstvideo.video_frame.VideoFrame.meta

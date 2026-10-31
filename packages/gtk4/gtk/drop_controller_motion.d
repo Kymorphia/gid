@@ -13,8 +13,7 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
-    [gtk.drop_controller_motion.DropControllerMotion] is an event controller tracking
-    the pointer during Drag-and-Drop operations.
+    An event controller tracking the pointer during Drag-and-Drop operations.
     
     It is modeled after [gtk.event_controller_motion.EventControllerMotion] so if you
     have used that, this should feel really familiar.

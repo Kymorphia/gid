@@ -28,8 +28,12 @@ import gstvideo.video_alignment;
     - padding-bottom (uint): extra pixels on the bottom
     - padding-left (uint): extra pixels on the left side
     - padding-right (uint): extra pixels on the right side
-    The padding fields have the same semantic as #GstVideoMeta.alignment
-    and so represent the paddings requested on produced video buffers.
+    - stride-align0 (uint): stride align requirements for plane 0
+    - stride-align1 (uint): stride align requirements for plane 1
+    - stride-align2 (uint): stride align requirements for plane 2
+    - stride-align3 (uint): stride align requirements for plane 3
+    The padding and stride-align fields have the same semantic as #GstVideoMeta.alignment
+    and so represent the paddings and stride-align requested on produced video buffers.
     
     Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
     [gst.meta.Meta.deserialize].
@@ -349,6 +353,22 @@ class VideoMeta
   {
     bool _retval;
     _retval = cast(bool)gst_video_meta_map(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null, cast(void**)&data, cast(int*)&stride, flags);
+    return _retval;
+  }
+
+  /**
+      Set the alignment of meta to alignment. This function checks that
+      the paddings defined in alignment are compatible with the strides
+      defined in meta and will fail to update if they are not.
+  
+      Params:
+        alignment = a #GstVideoAlignment
+      Returns: true if alignment's meta has been updated, false if not
+  */
+  bool setAlignmentFull(gstvideo.video_alignment.VideoAlignment alignment) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_video_meta_set_alignment_full(cast(GstVideoMeta*)this._cPtr, cast(const(GstVideoAlignment)*)&alignment);
     return _retval;
   }
 

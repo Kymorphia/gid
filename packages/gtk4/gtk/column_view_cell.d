@@ -12,12 +12,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.column_view_cell.ColumnViewCell] is used by [gtk.column_view_column.ColumnViewColumn] to represent items
-    in a cell in [gtk.column_view.ColumnView].
+    Represents items in a cell in [gtk.column_view.ColumnView].
     
-    The [gtk.column_view_cell.ColumnViewCell]s are managed by the columnview widget (with its factory)
-    and cannot be created by applications, but they need to be populated
-    by application code. This is done by calling [gtk.column_view_cell.ColumnViewCell.setChild].
+    The [gtk.column_view_cell.ColumnViewCell]s are managed by the [gtk.column_view.ColumnView]
+    widget (with its factory) and cannot be created by applications, but
+    they need to be populated by application code. This is done by calling
+    [gtk.column_view_cell.ColumnViewCell.setChild].
     
     [gtk.column_view_cell.ColumnViewCell]s exist in 2 stages:
     
@@ -185,7 +185,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   /**
       Checks if the item is displayed as selected.
       
-      The selected state is maintained by the liste widget and its model
+      The selected state is maintained by the list widget and its model
       and cannot be set otherwise.
       Returns: true if the item is selected.
   */

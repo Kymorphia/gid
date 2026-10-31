@@ -11,7 +11,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.section_model.SectionModel] is an interface that adds support for sections to list models.
+    An interface that adds support for sections to list models.
     
     A [gtk.section_model.SectionModel] groups successive items into so-called sections. List widgets
     like [gtk.list_view.ListView] and [gtk.grid_view.GridView] then allow displaying section headers for
@@ -52,7 +52,27 @@ interface SectionModel
   */
   void getSection(uint position, out uint outStart, out uint outEnd);
 
-  /** */
+  /**
+      This function emits the [gtk.section_model.SectionModel.sectionsChanged]
+      signal to notify about changes to sections.
+      
+      It must cover all positions that used to be a section start or that
+      are now a section start. It does not have to cover all positions for
+      which the section has changed.
+      
+      The [gio.list_model.ListModel.itemsChanged] implies the effect of the
+      [gtk.section_model.SectionModel.sectionsChanged] signal for all the items
+      it covers.
+      
+      It is recommended that when changes to the items cause section changes
+      in a larger range, that the larger range is included in the emission
+      of the [gio.list_model.ListModel.itemsChanged] instead of emitting
+      two signals.
+  
+      Params:
+        position = the first changed item
+        nItems = the number of changed items
+  */
   void sectionsChanged(uint position, uint nItems);
 
   /**

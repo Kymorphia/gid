@@ -330,6 +330,14 @@ class SocketListener : gobject.object.ObjectWrap
       This is useful if you need to have a socket for incoming connections
       but don't care about the specific port number.
       
+      If possible, the [gio.socket_listener.SocketListener] will listen on both IPv4 and
+      IPv6 (listening on the same port on both). If listening on one of the socket
+      families fails, the [gio.socket_listener.SocketListener] will only listen on the other.
+      If listening on both fails, an error will be returned.
+      
+      If you need to distinguish whether listening on IPv4 or IPv6 or both was
+      successful, connect to [gio.socket_listener.SocketListener.event].
+      
       source_object will be passed out in the various calls
       to accept to identify this particular source, which is
       useful if you're listening on multiple addresses and do
@@ -354,6 +362,14 @@ class SocketListener : gobject.object.ObjectWrap
       Helper function for [gio.socket_listener.SocketListener.addAddress] that
       creates a TCP/IP socket listening on IPv4 and IPv6 (if
       supported) on the specified port on all interfaces.
+      
+      If possible, the [gio.socket_listener.SocketListener] will listen on both IPv4 and
+      IPv6 (listening on the same port on both). If listening on one of the socket
+      families fails, the [gio.socket_listener.SocketListener] will only listen on the other.
+      If listening on both fails, an error will be returned.
+      
+      If you need to distinguish whether listening on IPv4 or IPv6 or both was
+      successful, connect to [gio.socket_listener.SocketListener.event].
       
       source_object will be passed out in the various calls
       to accept to identify this particular source, which is
@@ -384,6 +400,9 @@ class SocketListener : gobject.object.ObjectWrap
       Adds socket to the set of sockets that we try to accept
       new clients from. The socket must be bound to a local
       address and listened to.
+      
+      For parallel calls to [gio.socket_listener.SocketListener] methods to work, the socket
+      must be in non-blocking mode. (See [gio.socket.Socket.blocking].)
       
       source_object will be passed out in the various calls
       to accept to identify this particular source, which is

@@ -29,9 +29,12 @@ import gtk.widget;
 import gtk.window_group;
 
 /**
-    A [gtk.window.Window] is a toplevel window which can contain other widgets.
+    A toplevel window which can contain other widgets.
     
-    ![An example GtkWindow](window.png)
+    <picture>
+      <source srcset="window-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkWindow" src="window.png">
+    </picture>
     
     Windows normally have decorations that are under the control
     of the windowing system and allow the user to manipulate the window
@@ -42,6 +45,28 @@ import gtk.window_group;
     The [gtk.window.Window] implementation of the [gtk.buildable.Buildable] interface supports
     setting a child as the titlebar by specifying “titlebar” as the “type”
     attribute of a `<child>` element.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.window.Window] supports the following keyboard shortcuts:
+    
+    - <kbd>F10</kbd> activates the menubar, if present.
+    - <kbd>Alt</kbd> makes the mnemonics visible while pressed.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.window.Window.activateDefault]
+    - [gtk.window.Window.activateFocus]
+    - [gtk.window.Window.enableDebugging]
+    
+    # Actions
+    
+    [gtk.window.Window] defines a set of built-in actions:
+    
+    - `default.activate` activates the default widget.
+    - `window.minimize` minimizes the window.
+    - `window.toggle-maximized` maximizes or restores the window.
+    - `window.close` closes the window.
     
     # CSS nodes
     
@@ -75,17 +100,9 @@ import gtk.window_group;
     
     # Accessibility
     
-    Until GTK 4.10, [gtk.window.Window] used the [gtk.types.AccessibleRole.Window] role.
+    [gtk.window.Window] uses the [gtk.types.AccessibleRole.Window] role.
     
-    Since GTK 4.12, [gtk.window.Window] uses the [gtk.types.AccessibleRole.Application] role.
-    
-    # Actions
-    
-    [gtk.window.Window] defines a set of built-in actions:
-    - `default.activate`: Activate the default widget.
-    - `window.minimize`: Minimize the window.
-    - `window.toggle-maximized`: Maximize or restore the window.
-    - `window.close`: Close the window.
+    From GTK 4.12 to 4.18, it used the [gtk.types.AccessibleRole.Application] role.
 */
 class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut_manager.ShortcutManager
 {
@@ -134,7 +151,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         
         Normally, the connection between the application and the window
         will remain until the window is destroyed, but you can explicitly
-        remove it by setting the :application property to null.
+        remove it by setting the this property to `NULL`.
   */
   @property gtk.application.Application application() nothrow
   {
@@ -152,7 +169,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
           
           Normally, the connection between the application and the window
           will remain until the window is destroyed, but you can explicitly
-          remove it by setting the :application property to null.
+          remove it by setting the this property to `NULL`.
   */
   @property void application(gtk.application.Application propval) nothrow
   {
@@ -387,8 +404,37 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
+      Get `gravity` property.
+      Returns: The gravity to use when resizing the window programmatically.
+        
+        Gravity describes which point of the window we want to keep
+        fixed (meaning that the window will grow in the opposite direction).
+        For example, a gravity of [gtk.types.WindowGravity.TopRight] means that we
+        want the to fix top right corner of the window.
+  */
+  @property gtk.types.WindowGravity gravity() nothrow
+  {
+    return getGravity();
+  }
+
+  /**
+      Set `gravity` property.
+      Params:
+        propval = The gravity to use when resizing the window programmatically.
+          
+          Gravity describes which point of the window we want to keep
+          fixed (meaning that the window will grow in the opposite direction).
+          For example, a gravity of [gtk.types.WindowGravity.TopRight] means that we
+          want the to fix top right corner of the window.
+  */
+  @property void gravity(gtk.types.WindowGravity propval) nothrow
+  {
+    setGravity(propval);
+  }
+
+  /**
       Get `handleMenubarAccel` property.
-      Returns: Whether the window frame should handle F10 for activating
+      Returns: Whether the window frame should handle <kbd>F10</kbd> for activating
         menubars.
   */
   @property bool handleMenubarAccel() nothrow
@@ -399,7 +445,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Set `handleMenubarAccel` property.
       Params:
-        propval = Whether the window frame should handle F10 for activating
+        propval = Whether the window frame should handle <kbd>F10</kbd> for activating
           menubars.
   */
   @property void handleMenubarAccel(bool propval) nothrow
@@ -409,7 +455,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
 
   /**
       Get `hideOnClose` property.
-      Returns: If this window should be hidden when the users clicks the close button.
+      Returns: If this window should be hidden instead of destroyed when the user clicks
+        the close button.
   */
   @property bool hideOnClose() nothrow
   {
@@ -419,7 +466,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Set `hideOnClose` property.
       Params:
-        propval = If this window should be hidden when the users clicks the close button.
+        propval = If this window should be hidden instead of destroyed when the user clicks
+          the close button.
   */
   @property void hideOnClose(bool propval) nothrow
   {
@@ -628,17 +676,17 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Creates a new [gtk.window.Window].
       
-      To get an undecorated window (no window borders), use
-      [gtk.window.Window.setDecorated].
+      To get an undecorated window (without window borders),
+      use [gtk.window.Window.setDecorated].
       
-      All top-level windows created by [gtk.window.Window.new_] are stored
+      All top-level windows created by this function are stored
       in an internal top-level window list. This list can be obtained
       from [gtk.window.Window.listToplevels]. Due to GTK keeping a
-      reference to the window internally, [gtk.window.Window.new_] does not
+      reference to the window internally, this function does not
       return a reference to the caller.
       
       To delete a [gtk.window.Window], call [gtk.window.Window.destroy].
-      Returns: a new [gtk.window.Window].
+      Returns: a new [gtk.window.Window]
   */
   this() nothrow
   {
@@ -664,7 +712,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Returns a list of all existing toplevel windows.
+      Returns the list of all existing toplevel windows.
       
       If you want to iterate through the list and perform actions involving
       callbacks that might destroy the widgets or add new ones, be aware that
@@ -681,7 +729,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Returns a list of all existing toplevel windows.
+      Returns the list of all existing toplevel windows.
       
       The widgets in the list are not individually referenced.
       If you want to iterate through the list and perform actions
@@ -702,7 +750,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Sets whether the window should request startup notification.
       
-      By default, after showing the first [gtk.window.Window], GTK calls
+      By default, after showing the first window, GTK calls
       [gdk.toplevel.Toplevel.setStartupId]. Call this function
       to disable the automatic startup notification. You might do this
       if your first window is a splash screen, and you want to delay
@@ -742,6 +790,14 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       
       The debugger offers access to the widget hierarchy of the application
       and to useful debugging tools.
+      
+      This function allows applications that already use
+      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>
+      (or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>)
+      for their own key shortcuts to add a different shortcut to open the Inspector.
+      
+      If you are not overriding the default key shortcuts for the Inspector,
+      you should not use this function.
   
       Params:
         enable = true to enable interactive debugging
@@ -766,7 +822,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Drop the internal reference GTK holds on toplevel windows.
+      Drops the internal reference GTK holds on toplevel windows.
   */
   void destroy() nothrow
   {
@@ -774,12 +830,15 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Asks to place window in the fullscreen state.
+      Asks to place the window in the fullscreen state.
       
       Note that you shouldn’t assume the window is definitely fullscreen
       afterward, because other entities (e.g. the user or window manager)
       unfullscreen it again, and not all window managers honor requests
       to fullscreen windows.
+      
+      If a window is not explicitly fullscreened or unfullscreened before
+      it is shown, the initial state is at the window managers discretion.
       
       You can track the result of this operation via the
       [gdk.toplevel.Toplevel.state] property, or by listening to
@@ -791,7 +850,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Asks to place window in the fullscreen state on the given monitor.
+      Asks to place the window in the fullscreen state on the given monitor.
       
       Note that you shouldn't assume the window is definitely fullscreen
       afterward, or that the windowing system allows fullscreen windows on
@@ -810,8 +869,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Gets the [gtk.application.Application] associated with the window.
-      Returns: a [gtk.application.Application]
+      Gets the application object associated with the window.
+      Returns: the application
   */
   gtk.application.Application getApplication() nothrow
   {
@@ -822,7 +881,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Gets the child widget of window.
+      Gets the child widget of the window.
       Returns: the child widget of window
   */
   gtk.widget.Widget getChild() nothrow
@@ -888,7 +947,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
 
   /**
       Returns whether the window will be destroyed with its transient parent.
-      Returns: true if the window will be destroyed with its transient parent.
+      Returns: true if the window will be destroyed with its transient parent
   */
   bool getDestroyWithParent() nothrow
   {
@@ -903,7 +962,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Note that this is the widget that would have the focus
       if the toplevel window focused; if the toplevel window
       is not focused then `gtk_widget_has_focus (widget)` will
-      not be true for the widget.
+      not be false for the widget.
       Returns: the currently focused widget
   */
   gtk.widget.Widget getFocus() nothrow
@@ -917,7 +976,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Gets whether “focus rectangles” are supposed to be visible.
       Returns: true if “focus rectangles” are supposed to be visible
-          in this window.
+          in this window
   */
   bool getFocusVisible() nothrow
   {
@@ -927,10 +986,22 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Returns the group for window.
+      Returns the gravity that is used when changing the window size programmatically.
+      Returns: the gravity
+  */
+  gtk.types.WindowGravity getGravity() nothrow
+  {
+    GtkWindowGravity _cretval;
+    _cretval = gtk_window_get_gravity(cast(GtkWindow*)this._cPtr);
+    gtk.types.WindowGravity _retval = cast(gtk.types.WindowGravity)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns the group for the window.
       
       If the window has no group, then the default group is returned.
-      Returns: the [gtk.window_group.WindowGroup] for a window
+      Returns: the window group for window
           or the default group
   */
   gtk.window_group.WindowGroup getGroup() nothrow
@@ -942,9 +1013,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Returns whether this window reacts to F10 key presses by
-      activating a menubar it contains.
-      Returns: true if the window handles F10
+      Returns whether this window reacts to <kbd>F10</kbd>
+      presses by activating a menubar it contains.
+      Returns: true if the window handles <kbd>F10</kbd>
   */
   bool getHandleMenubarAccel() nothrow
   {
@@ -954,7 +1025,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Returns whether the window will be hidden when the close button is clicked.
+      Returns whether the window will be hidden instead of destroyed when the close
+      button is clicked.
       Returns: true if the window will be hidden
   */
   bool getHideOnClose() nothrow
@@ -979,7 +1051,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Gets whether mnemonics are supposed to be visible.
       Returns: true if mnemonics are supposed to be visible
-          in this window.
+          in this window
   */
   bool getMnemonicsVisible() nothrow
   {
@@ -1001,7 +1073,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Gets the value set by [gtk.window.Window.setResizable].
+      Gets whether the user can resize the window.
       Returns: true if the user can resize the window
   */
   bool getResizable() nothrow
@@ -1013,7 +1085,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
 
   /**
       Retrieves the title of the window.
-      Returns: the title of the window
+      Returns: the title
   */
   string getTitle() nothrow
   {
@@ -1024,9 +1096,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Returns the custom titlebar that has been set with
+      Returns the titlebar that has been set with
       [gtk.window.Window.setTitlebar].
-      Returns: the custom titlebar
+      Returns: the titlebar
   */
   gtk.widget.Widget getTitlebar() nothrow
   {
@@ -1038,7 +1110,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
 
   /**
       Fetches the transient parent for this window.
-      Returns: the transient parent for this window
+      Returns: the transient parent
   */
   gtk.window.Window getTransientFor() nothrow
   {
@@ -1049,8 +1121,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Returns whether window has an explicit window group.
-      Returns: true if window has an explicit window group.
+      Returns whether the window has an explicit window group.
+      Returns: true if window has an explicit window group
   */
   bool hasGroup() nothrow
   {
@@ -1077,7 +1149,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Retrieves the current fullscreen state of window.
+      Retrieves the current fullscreen state of the window.
       
       Note that since fullscreening is ultimately handled by the window
       manager and happens asynchronously to an application request, you
@@ -1087,7 +1159,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       
       If the window isn't yet mapped, the value returned will whether the
       initial requested state is fullscreen.
-      Returns: whether the window has a fullscreen state.
+      Returns: whether the window is fullscreen
   */
   bool isFullscreen() nothrow
   {
@@ -1097,7 +1169,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Retrieves the current maximized state of window.
+      Retrieves the current maximized state of the window.
       
       Note that since maximization is ultimately handled by the window
       manager and happens asynchronously to an application request, you
@@ -1107,7 +1179,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       
       If the window isn't yet mapped, the value returned will whether the
       initial requested state is maximized.
-      Returns: whether the window has a maximized state.
+      Returns: whether the window is maximized
   */
   bool isMaximized() nothrow
   {
@@ -1117,11 +1189,12 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Retrieves the current suspended state of window.
+      Retrieves the current suspended state of the window.
       
-      A window being suspended means it's currently not visible to the user, for
-      example by being on a inactive workspace, minimized, obstructed.
-      Returns: whether the window is suspended.
+      A window being suspended means it's currently not visible
+      to the user, for example by being on a inactive workspace,
+      minimized, obstructed.
+      Returns: whether the window is suspended
   */
   bool isSuspended() nothrow
   {
@@ -1131,7 +1204,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Asks to maximize window, so that it fills the screen.
+      Asks to maximize the window, so that it fills the screen.
       
       Note that you shouldn’t assume the window is definitely maximized
       afterward, because other entities (e.g. the user or window manager)
@@ -1141,6 +1214,11 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       It’s permitted to call this function before showing a window,
       in which case the window will be maximized when it appears onscreen
       initially.
+      
+      If a window is not explicitly maximized or unmaximized before it is
+      shown, the initial state is at the window managers discretion. For
+      example, it might decide to maximize a window that almost fills the
+      screen.
       
       You can track the result of this operation via the
       [gdk.toplevel.Toplevel.state] property, or by listening to
@@ -1153,7 +1231,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Asks to minimize the specified window.
+      Asks to minimize the window.
       
       Note that you shouldn’t assume the window is definitely minimized
       afterward, because the windowing system might not support this
@@ -1209,11 +1287,11 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Sets or unsets the [gtk.application.Application] associated with the window.
+      Sets or unsets the application object associated with the window.
       
       The application will be kept alive for at least as long as it has
-      any windows associated with it (see [gio.application.Application.hold] for a way
-      to keep it alive without windows).
+      any windows associated with it (see [gio.application.Application.hold]
+      for a way to keep it alive without windows).
       
       Normally, the connection between the application and the window will
       remain until the window is destroyed, but you can explicitly remove
@@ -1224,7 +1302,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       as relevant.
   
       Params:
-        application = a [gtk.application.Application], or null to unset
+        application = a [gtk.application.Application]
   */
   void setApplication(gtk.application.Application application = null) nothrow
   {
@@ -1232,7 +1310,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Sets the child widget of window.
+      Sets the child widget of the window.
   
       Params:
         child = the child widget
@@ -1268,7 +1346,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Sets the default size of a window.
       
-      The default size of a window is the size that will be used if no other constraints apply.
+      The default size of a window is the size that will be used
+      if no other constraints apply.
       
       The default size will be updated whenever the window is resized
       to reflect the new size, unless the window is forced to a size,
@@ -1308,12 +1387,12 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Sets the default widget.
       
-      The default widget is the widget that is activated when the user
-      presses Enter in a dialog (for example).
+      The default widget is the widget that is activated
+      when the user presses <kbd>Enter</kbd> in a dialog
+      (for example).
   
       Params:
         defaultWidget = widget to be the default
-            to unset the default widget for the toplevel
   */
   void setDefaultWidget(gtk.widget.Widget defaultWidget = null) nothrow
   {
@@ -1343,14 +1422,13 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      If setting is true, then destroying the transient parent of window
-      will also destroy window itself.
+      Sets whether to destroy the window when the transient parent is destroyed.
       
       This is useful for dialogs that shouldn’t persist beyond the lifetime
       of the main window they are associated with, for example.
   
       Params:
-        setting = whether to destroy window with its transient parent
+        setting = whether to destroy the window with its transient parent
   */
   void setDestroyWithParent(bool setting) nothrow
   {
@@ -1358,13 +1436,13 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Sets the [gdk.display.Display] where the window is displayed.
+      Sets the display where the window is displayed.
       
       If the window is already mapped, it will be unmapped,
       and then remapped on the new display.
   
       Params:
-        display = a [gdk.display.Display]
+        display = a display
   */
   void setDisplay(gdk.display.Display display) nothrow
   {
@@ -1381,8 +1459,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       to use [gtk.widget.Widget.grabFocus] instead of this function.
   
       Params:
-        focus = widget to be the new focus widget, or null to unset
-            any focus widget for the toplevel window.
+        focus = the new focus widget
   */
   void setFocus(gtk.widget.Widget focus = null) nothrow
   {
@@ -1404,11 +1481,22 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Sets whether this window should react to F10 key presses
-      by activating a menubar it contains.
+      Sets the gravity that is used when changing the window size programmatically.
   
       Params:
-        handleMenubarAccel = true to make window handle F10
+        gravity = the new gravity
+  */
+  void setGravity(gtk.types.WindowGravity gravity) nothrow
+  {
+    gtk_window_set_gravity(cast(GtkWindow*)this._cPtr, gravity);
+  }
+
+  /**
+      Sets whether this window should react to <kbd>F10</kbd>
+      presses by activating a menubar it contains.
+  
+      Params:
+        handleMenubarAccel = true to make window handle <kbd>F10</kbd>
   */
   void setHandleMenubarAccel(bool handleMenubarAccel) nothrow
   {
@@ -1416,8 +1504,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      If setting is true, then clicking the close button on the window
-      will not destroy it, but only hide it.
+      Sets whether clicking the close button will hide the window instead
+      of destroying it.
   
       Params:
         setting = whether to hide the window when it is closed
@@ -1503,7 +1591,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       [gtk.window.Window.present] or any equivalent function generating
       a window map event.
       
-      This function is only useful on X11, not with other GTK targets.
+      This function is only useful on Wayland or X11, not with other GDK
+      backends.
   
       Params:
         startupId = a string with startup-notification identifier
@@ -1515,7 +1604,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Sets the title of the [gtk.window.Window].
+      Sets the title of the window.
       
       The title of a window will be displayed in its title bar; on the
       X Window System, the title bar is rendered by the window manager
@@ -1524,7 +1613,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       this window from other windows they may have open. A good title might
       include the application name and current document filename, for example.
       
-      Passing null does the same as setting the title to an empty string.
+      Passing `NULL` does the same as setting the title to an empty string.
   
       Params:
         title = title of the window
@@ -1536,7 +1625,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Sets a custom titlebar for window.
+      Sets a custom titlebar for the window.
       
       A typical widget used here is [gtk.header_bar.HeaderBar], as it
       provides various features expected of a titlebar while allowing
@@ -1557,14 +1646,16 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
+      Sets a transient parent for the window.
+      
       Dialog windows should be set transient for the main application
       window they were spawned from. This allows window managers to e.g.
       keep the dialog on top of the main window, or center the dialog
       over the main window. [gtk.dialog.Dialog.newWithButtons] and other
-      convenience functions in GTK will sometimes call
-      [gtk.window.Window.setTransientFor] on your behalf.
+      convenience functions in GTK will sometimes call this function on
+      your behalf.
       
-      Passing null for parent unsets the current transient window.
+      Passing `NULL` for parent unsets the current transient window.
       
       On Windows, this function puts the child window on top of the parent,
       much as the window manager would have done on X.
@@ -1578,7 +1669,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Asks to remove the fullscreen state for window, and return to
+      Asks to remove the fullscreen state for the window, and return to
       its previous state.
       
       Note that you shouldn’t assume the window is definitely not
@@ -1587,6 +1678,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       managers honor requests to unfullscreen windows; normally the
       window will end up restored to its normal state. Just don’t
       write code that crashes if not.
+      
+      If a window is not explicitly fullscreened or unfullscreened before
+      it is shown, the initial state is at the window managers discretion.
       
       You can track the result of this operation via the
       [gdk.toplevel.Toplevel.state] property, or by listening to
@@ -1598,12 +1692,17 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Asks to unmaximize window.
+      Asks to unmaximize the window.
       
       Note that you shouldn’t assume the window is definitely unmaximized
       afterward, because other entities (e.g. the user or window manager)
       maximize it again, and not all window managers honor requests to
       unmaximize.
+      
+      If a window is not explicitly maximized or unmaximized before it is
+      shown, the initial state is at the window managers discretion. For
+      example, it might decide to maximize a window that almost fills the
+      screen.
       
       You can track the result of this operation via the
       [gdk.toplevel.Toplevel.state] property, or by listening to
@@ -1615,7 +1714,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-      Asks to unminimize the specified window.
+      Asks to unminimize the window.
       
       Note that you shouldn’t assume the window is definitely unminimized
       afterward, because the windowing system might not support this
@@ -1634,10 +1733,11 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Connect to `ActivateDefault` signal.
   
-      Emitted when the user activates the default widget
-        of window.
+      Emitted when the user activates the default widget.
         
         This is a [keybinding signal](class.SignalAction.html).
+        
+        The keybindings for this signal are all forms of the <kbd>Enter</kbd> key.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1685,6 +1785,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         widget of window.
         
         This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>␣</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1784,8 +1886,9 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         
         This is a [keybinding signal](class.SignalAction.html).
         
-        The default bindings for this signal are Ctrl-Shift-I
-        and Ctrl-Shift-D.
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> and
+        <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1839,8 +1942,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Connect to `KeysChanged` signal.
   
-      emitted when the set of accelerators or mnemonics that
-        are associated with window changes.
+      Emitted when the set of accelerators or mnemonics that
+        are associated with the window changes.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1853,7 +1956,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: Signal ID
   
       Deprecated: Use [gtk.shortcut.Shortcut] and [gtk.event_controller.EventController]
-        to implement keyboard shortcuts
+          to implement keyboard shortcuts
   */
   gulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
@@ -1904,7 +2007,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           
           Normally, the connection between the application and the window
           will remain until the window is destroyed, but you can explicitly
-          remove it by setting the :application property to null.
+          remove it by setting the this property to `NULL`.
       Returns: Builder instance for fluent chaining
   */
   T application(gtk.application.Application propval) nothrow
@@ -2043,9 +2146,25 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
   }
 
   /**
+      Set `gravity` property.
+      Params:
+        propval = The gravity to use when resizing the window programmatically.
+          
+          Gravity describes which point of the window we want to keep
+          fixed (meaning that the window will grow in the opposite direction).
+          For example, a gravity of [gtk.types.WindowGravity.TopRight] means that we
+          want the to fix top right corner of the window.
+      Returns: Builder instance for fluent chaining
+  */
+  T gravity(gtk.types.WindowGravity propval) nothrow
+  {
+    return setProperty("gravity", propval);
+  }
+
+  /**
       Set `handleMenubarAccel` property.
       Params:
-        propval = Whether the window frame should handle F10 for activating
+        propval = Whether the window frame should handle <kbd>F10</kbd> for activating
           menubars.
       Returns: Builder instance for fluent chaining
   */
@@ -2057,7 +2176,8 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
   /**
       Set `hideOnClose` property.
       Params:
-        propval = If this window should be hidden when the users clicks the close button.
+        propval = If this window should be hidden instead of destroyed when the user clicks
+          the close button.
       Returns: Builder instance for fluent chaining
   */
   T hideOnClose(bool propval) nothrow

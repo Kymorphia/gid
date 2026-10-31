@@ -77,7 +77,6 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   static void listFree(gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] infos) nothrow
   {
     auto _infos = gListFromD!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(infos);
-    scope(exit) containerFree!(GList*, gstpbutils.discoverer_stream_info.DiscovererStreamInfo, GidOwnership.None)(_infos);
     gst_discoverer_stream_info_list_free(_infos);
   }
 

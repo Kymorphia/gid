@@ -14,7 +14,7 @@ import soup.types;
 /**
     A WebSocket extension
     
-    #SoupWebsocketExtension is the base class for WebSocket extension objects.
+    [soup.websocket_extension.WebsocketExtension] is the base class for WebSocket extension objects.
 */
 class WebsocketExtension : gobject.object.ObjectWrap
 {

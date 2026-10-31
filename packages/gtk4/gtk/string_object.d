@@ -10,7 +10,7 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    [gtk.string_object.StringObject] is the type of items in a [gtk.string_list.StringList].
+    The type of items in a [gtk.string_list.StringList].
     
     A [gtk.string_object.StringObject] is a wrapper around a `const char*`; it has
     a [gtk.string_object.StringObject.string_] property that can be used

@@ -23,10 +23,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.popover_menu.PopoverMenu] is a subclass of [gtk.popover.Popover] that implements menu
-    behavior.
+    A subclass of [gtk.popover.Popover] that implements menu behavior.
     
-    ![An example GtkPopoverMenu](menu.png)
+    <picture>
+      <source srcset="menu-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPopoverMenu" src="menu.png">
+    </picture>
     
     [gtk.popover_menu.PopoverMenu] treats its children like menus and allows switching
     between them. It can open submenus as traditional, nested submenus,
@@ -107,11 +109,19 @@ import gtk.widget;
     
     - "label": a user-visible string to display
     - "icon": icon name to display
+    - "gtk-macos-special": (macOS only, ignored by others) Add special meaning to a menu
+        in the macOS menu bar. See [Using GTK on Apple macOS](osx.html).
     
     Menu items will also show accelerators, which are usually associated
     with actions via [gtk.application.Application.setAccelsForAction],
     [gtk.widget_class.WidgetClass.addBindingAction] or
     [gtk.shortcut_controller.ShortcutController.addShortcut].
+    
+    # Shortcuts and Gestures
+    
+    [gtk.popover_menu.PopoverMenu] supports the following keyboard shortcuts:
+    
+    - <kbd>Space</kbd> activates the default widget.
     
     # CSS Nodes
     
@@ -130,9 +140,8 @@ import gtk.widget;
     
     [gtk.popover_menu.PopoverMenu] uses the [gtk.types.AccessibleRole.Menu] role, and its
     items use the [gtk.types.AccessibleRole.MenuItem],
-    [gtk.types.AccessibleRole.MenuItemCheckbox] or
-    [gtk.types.AccessibleRole.MenuItemRadio] roles, depending on the
-    action they are connected to.
+    [gtk.types.AccessibleRole.Checkbox] or [gtk.types.AccessibleRole.MenuItemRadio]
+    roles, depending on the action they are connected to.
 */
 class PopoverMenu : gtk.popover.Popover
 {

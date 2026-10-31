@@ -21,8 +21,11 @@ import gobject.object;
 
 /**
     The [gio.volume.Volume] interface represents user-visible objects that can be
-    mounted. Note, when [porting from GnomeVFS](migrating-gnome-vfs.html),
-    [gio.volume.Volume] is the moral equivalent of `GnomeVFSDrive`.
+    mounted. For example, a file system partition on a USB flash drive, or an
+    optical disc inserted into a disc drive.
+    
+    If a [gio.volume.Volume] is currently mounted, the corresponding [gio.mount.Mount] can
+    be retrieved using [gio.volume.Volume.getMount].
     
     Mounting a [gio.volume.Volume] instance is an asynchronous operation. For more
     information about asynchronous operations, see [gio.async_result.AsyncResult] and
@@ -43,6 +46,9 @@ import gobject.object;
     successfully.  If a [glib.error.ErrorWrap] is present when
     [gio.volume.Volume.mountFinish] is called, then it will be filled with any
     error information.
+    
+    Note, when [porting from GnomeVFS](migrating-gnome-vfs.html),
+    [gio.volume.Volume] is the moral equivalent of `GnomeVFSDrive`.
     
     ## Volume Identifiers
     

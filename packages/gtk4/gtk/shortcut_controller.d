@@ -18,7 +18,7 @@ import gtk.shortcut;
 import gtk.types;
 
 /**
-    [gtk.shortcut_controller.ShortcutController] is an event controller that manages shortcuts.
+    Manages keyboard shortcuts and their activation.
     
     Most common shortcuts are using this controller implicitly, e.g. by
     adding a mnemonic underline to a [gtk.label.Label], or by installing a key

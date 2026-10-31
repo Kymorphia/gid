@@ -17,12 +17,12 @@ import soup.types;
 /**
     Automatic cookie handling for SoupSession.
     
-    A #SoupCookieJar stores [soup.cookie.Cookie]s and arrange for them to be sent with
-    the appropriate [soup.message.Message]s. #SoupCookieJar implements
+    A [soup.cookie_jar.CookieJar] stores [soup.cookie.Cookie]s and arrange for them to be sent with
+    the appropriate [soup.message.Message]s. [soup.cookie_jar.CookieJar] implements
     [soup.session_feature.SessionFeature], so you can add a cookie jar to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
     
-    Note that the base #SoupCookieJar class does not support any form
+    Note that the base [soup.cookie_jar.CookieJar] class does not support any form
     of long-term cookie persistence.
 */
 class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
@@ -93,9 +93,9 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   mixin SessionFeatureT!();
 
   /**
-      Creates a new #SoupCookieJar.
+      Creates a new [soup.cookie_jar.CookieJar].
       
-      The base #SoupCookieJar class does not support persistent storage of cookies;
+      The base [soup.cookie_jar.CookieJar] class does not support persistent storage of cookies;
       use a subclass for that.
       Returns: a new #SoupCookieJar
   */
@@ -177,6 +177,8 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       
       The cookies in the list are a copy of the original, so
       you have to free them when you are done with them.
+      
+      For historical reasons this list is in reverse order.
       Returns: a #GSList
           with all the cookies in the jar.
   */
@@ -215,12 +217,12 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 
   /**
       Retrieves the list of cookies that would be sent with a request to uri
-      as a [glib.list.List] of #SoupCookie objects.
+      as a [glib.list.List] of [soup.cookie.Cookie] objects.
       
       If for_http is true, the return value will include cookies marked
       "HttpOnly" (that is, cookies that the server wishes to keep hidden
       from client-side scripting operations such as the JavaScript
-      document.cookies property). Since #SoupCookieJar sets the Cookie
+      document.cookies property). Since [soup.cookie_jar.CookieJar] sets the Cookie
       header itself when making the actual HTTP request, you should
       almost certainly be setting for_http to false if you are calling
       this.
@@ -275,7 +277,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       If for_http is true, the return value will include cookies marked
       "HttpOnly" (that is, cookies that the server wishes to keep hidden
       from client-side scripting operations such as the JavaScript
-      document.cookies property). Since #SoupCookieJar sets the Cookie
+      document.cookies property). Since [soup.cookie_jar.CookieJar] sets the Cookie
       header itself when making the actual HTTP request, you should
       almost certainly be setting for_http to false if you are calling
       this.

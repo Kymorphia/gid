@@ -24,8 +24,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.range.Range] is the common base class for widgets which visualize an
-    adjustment.
+    Base class for widgets which visualize an adjustment.
     
     Widgets that are derived from [gtk.range.Range] include
     [gtk.scale.Scale] and [gtk.scrollbar.Scrollbar].
@@ -33,6 +32,12 @@ import gtk.widget;
     Apart from signals for monitoring the parameters of the adjustment,
     [gtk.range.Range] provides properties and methods for setting a
     “fill level” on range widgets. See [gtk.range.Range.setFillLevel].
+    
+    # Shortcuts and Gestures
+    
+    The [gtk.range.Range] slider is draggable. Holding the <kbd>Shift</kbd> key while
+    dragging, or initiating the drag with a long-press will enable the
+    fine-tuning mode.
 */
 class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {

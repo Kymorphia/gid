@@ -99,11 +99,19 @@ class HoverContext : gobject.object.ObjectWrap
     return _retval;
   }
 
-  /** */
-  bool getIter(gtk.text_iter.TextIter iter) nothrow
+  /**
+      Gets the location of the pointer where the request was made.
+  
+      Params:
+        iter = a #GtkTextIter
+      Returns: true if the mark is still valid and iter was set.
+  */
+  bool getIter(out gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
+    auto _iter = boxedNew!GtkTextIter(gtk.text_iter.TextIter._getGType);
+    _retval = cast(bool)gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)this._cPtr, _iter);
+    iter = new gtk.text_iter.TextIter(cast(void*)_iter, Yes.Take);
     return _retval;
   }
 

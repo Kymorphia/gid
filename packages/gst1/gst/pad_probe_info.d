@@ -159,11 +159,97 @@ class PadProbeInfo
   }
 
   /** */
+  gst.types.FlowReturn getFlowReturn() nothrow
+  {
+    GstFlowReturn _cretval;
+    _cretval = gst_pad_probe_info_get_flow_return(cast(GstPadProbeInfo*)this._cPtr);
+    gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /** */
+  gulong getId() nothrow
+  {
+    gulong _retval;
+    _retval = gst_pad_probe_info_get_id(cast(GstPadProbeInfo*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  ulong getOffset() nothrow
+  {
+    ulong _retval;
+    _retval = gst_pad_probe_info_get_offset(cast(GstPadProbeInfo*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
   gst.query.Query getQuery() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_pad_probe_info_get_query(cast(GstPadProbeInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, No.Take) : null;
     return _retval;
+  }
+
+  /** */
+  size_t getSize() nothrow
+  {
+    size_t _retval;
+    _retval = gst_pad_probe_info_get_size(cast(GstPadProbeInfo*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  gst.types.PadProbeType getType() nothrow
+  {
+    GstPadProbeType _cretval;
+    _cretval = gst_pad_probe_info_get_type(cast(GstPadProbeInfo*)this._cPtr);
+    gst.types.PadProbeType _retval = cast(gst.types.PadProbeType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Updates info with buffer or null.
+  
+      Params:
+        buffer = a #GstBuffer
+  */
+  void setBuffer(gst.buffer.Buffer buffer = null) nothrow
+  {
+    gst_pad_probe_info_set_buffer(cast(GstPadProbeInfo*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Updates info with list or null.
+  
+      Params:
+        list = a #GstBufferList
+  */
+  void setBufferList(gst.buffer_list.BufferList list = null) nothrow
+  {
+    gst_pad_probe_info_set_buffer_list(cast(GstPadProbeInfo*)this._cPtr, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Updates info with event or null.
+  
+      Params:
+        event = a #GstEvent
+  */
+  void setEvent(gst.event.Event event = null) nothrow
+  {
+    gst_pad_probe_info_set_event(cast(GstPadProbeInfo*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Updates info with flow_ret.
+  
+      Params:
+        flowRet = A #GstFlowReturn
+  */
+  void setFlowReturn(gst.types.FlowReturn flowRet) nothrow
+  {
+    gst_pad_probe_info_set_flow_return(cast(GstPadProbeInfo*)this._cPtr, flowRet);
   }
 }

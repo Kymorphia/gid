@@ -285,10 +285,11 @@ class Toast : gobject.object.ObjectWrap
         Priority controls how the toast behaves when another toast is already
         being displayed.
         
-        If the priority is [adw.types.ToastPriority.Normal], the toast will be queued.
+        If the priority is [adw.types.ToastPriority.Normal], the toast will be
+        queued.
         
-        If the priority is [adw.types.ToastPriority.High], the toast will be displayed
-        immediately, pushing the previous toast into the queue instead.
+        If the priority is [adw.types.ToastPriority.High], the toast will be
+        displayed immediately, pushing the previous toast into the queue instead.
   */
   @property adw.types.ToastPriority priority() nothrow
   {
@@ -303,10 +304,11 @@ class Toast : gobject.object.ObjectWrap
           Priority controls how the toast behaves when another toast is already
           being displayed.
           
-          If the priority is [adw.types.ToastPriority.Normal], the toast will be queued.
+          If the priority is [adw.types.ToastPriority.Normal], the toast will be
+          queued.
           
-          If the priority is [adw.types.ToastPriority.High], the toast will be displayed
-          immediately, pushing the previous toast into the queue instead.
+          If the priority is [adw.types.ToastPriority.High], the toast will be
+          displayed immediately, pushing the previous toast into the queue instead.
   */
   @property void priority(adw.types.ToastPriority propval) nothrow
   {
@@ -833,10 +835,11 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           Priority controls how the toast behaves when another toast is already
           being displayed.
           
-          If the priority is [adw.types.ToastPriority.Normal], the toast will be queued.
+          If the priority is [adw.types.ToastPriority.Normal], the toast will be
+          queued.
           
-          If the priority is [adw.types.ToastPriority.High], the toast will be displayed
-          immediately, pushing the previous toast into the queue instead.
+          If the priority is [adw.types.ToastPriority.High], the toast will be
+          displayed immediately, pushing the previous toast into the queue instead.
       Returns: Builder instance for fluent chaining
   */
   T priority(adw.types.ToastPriority propval) nothrow

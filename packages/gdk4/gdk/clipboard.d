@@ -22,8 +22,7 @@ import gobject.types;
 import gobject.value;
 
 /**
-    The [gdk.clipboard.Clipboard] object represents data shared between applications or
-    inside an application.
+    Represents data shared between applications or inside an application.
     
     To get a [gdk.clipboard.Clipboard] object, use [gdk.display.Display.getClipboard] or
     [gdk.display.Display.getPrimaryClipboard]. You can find out about the data
@@ -175,9 +174,6 @@ class Clipboard : gobject.object.ObjectWrap
       Asynchronously requests an input stream to read the clipboard's
       contents from.
       
-      When the operation is finished callback will be called. You must then
-      call [gdk.clipboard.Clipboard.readFinish] to get the result of the operation.
-      
       The clipboard will choose the most suitable mime type from the given list
       to fulfill the request, preferring the ones listed first.
   
@@ -239,9 +235,6 @@ class Clipboard : gobject.object.ObjectWrap
   /**
       Asynchronously request the clipboard contents converted to a string.
       
-      When the operation is finished callback will be called. You must then
-      call [gdk.clipboard.Clipboard.readTextFinish] to get the result.
-      
       This is a simple wrapper around [gdk.clipboard.Clipboard.readValueAsync].
       Use that function or [gdk.clipboard.Clipboard.readAsync] directly if you
       need more control over the operation.
@@ -294,9 +287,6 @@ class Clipboard : gobject.object.ObjectWrap
 
   /**
       Asynchronously request the clipboard contents converted to a [gdkpixbuf.pixbuf.Pixbuf].
-      
-      When the operation is finished callback will be called. You must then
-      call [gdk.clipboard.Clipboard.readTextureFinish] to get the result.
       
       This is a simple wrapper around [gdk.clipboard.Clipboard.readValueAsync].
       Use that function or [gdk.clipboard.Clipboard.readAsync] directly if you
@@ -351,9 +341,6 @@ class Clipboard : gobject.object.ObjectWrap
   /**
       Asynchronously request the clipboard contents converted to the given
       type.
-      
-      When the operation is finished callback will be called. You must then call
-      [gdk.clipboard.Clipboard.readValueFinish] to get the resulting [gobject.value.Value].
       
       For local clipboard contents that are available in the given `GType`,
       the value will be copied directly. Otherwise, GDK will try to use
@@ -448,8 +435,6 @@ class Clipboard : gobject.object.ObjectWrap
       Asynchronously instructs the clipboard to store its contents remotely.
       
       If the clipboard is not local, this function does nothing but report success.
-      
-      The callback must call [gdk.clipboard.Clipboard.storeFinish].
       
       The purpose of this call is to preserve clipboard contents beyond the
       lifetime of an application, so this function is typically called on

@@ -20,7 +20,7 @@ import pango.attr_list;
 import pango.types;
 
 /**
-    [gtk.inscription.Inscription] is a widget to show text in a predefined area.
+    Shows text in a predefined area.
     
     You likely want to use [gtk.label.Label] instead as this widget is intended only
     for a small subset of use cases. The main scenario envisaged is inside lists
@@ -32,6 +32,10 @@ import pango.types;
     
     Users of this widget should take care to plan behaviour for the common case
     where the text doesn't fit exactly in the allocated space.
+    
+    ## CSS nodes
+    
+    [gtk.inscription.Inscription] has a single CSS node with the name label.
 */
 class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {

@@ -29,7 +29,7 @@ import gobject.object;
     The [gio.application_command_line.ApplicationCommandLine] object can provide the @argc and @argv
     parameters for use with the [glib.option_context.OptionContext] command-line parsing API,
     with the [gio.application_command_line.ApplicationCommandLine.getArguments] function. See
-    [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
+    [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
     for an example.
     
     The exit status of the originally-invoked process may be set and

@@ -28,7 +28,10 @@ import gtk.window;
 /**
     A dialog for choosing a color.
     
-    ![An example GtkColorChooserDialog](colorchooser.png)
+    <picture>
+      <source srcset="colorchooser-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkColorChooserDialog" src="colorchooser.png">
+    </picture>
     
     [gtk.color_chooser_dialog.ColorChooserDialog] implements the [gtk.color_chooser.ColorChooser] interface
     and does not provide much API of its own.
@@ -85,13 +88,24 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
     return new ColorChooserDialogGidBuilder;
   }
 
-  /** */
+  /**
+      Get `showEditor` property.
+      Returns: Whether the color chooser dialog is showing the single-color editor.
+        
+        It can be set to switch the color chooser into single-color editing mode.
+  */
   @property bool showEditor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
   }
 
-  /** */
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = Whether the color chooser dialog is showing the single-color editor.
+          
+          It can be set to switch the color chooser into single-color editing mode.
+  */
   @property void showEditor(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
@@ -124,7 +138,14 @@ class ColorChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, g
 
   mixin ColorChooserGidBuilderT!();
 
-  /** */
+  /**
+      Set `showEditor` property.
+      Params:
+        propval = Whether the color chooser dialog is showing the single-color editor.
+          
+          It can be set to switch the color chooser into single-color editing mode.
+      Returns: Builder instance for fluent chaining
+  */
   T showEditor(bool propval) nothrow
   {
     return setProperty("show-editor", propval);

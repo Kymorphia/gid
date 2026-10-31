@@ -20,9 +20,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    The [gtk.image.Image] widget displays an image.
+    Displays an image.
     
-    ![An example GtkImage](image.png)
+    <picture>
+      <source srcset="image-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkImage" src="image.png">
+    </picture>
     
     Various kinds of object can be displayed as an image; most typically,
     you would load a [gdk.texture.Texture] from a file, using the convenience function
@@ -35,9 +38,9 @@ import gtk.widget;
     If the file isn’t loaded successfully, the image will contain a
     “broken image” icon similar to that used in many web browsers.
     
-    If you want to handle errors in loading the file yourself,
-    for example by displaying an error message, then load the image with
-    [gdk.texture.Texture.newFromFile], then create the [gtk.image.Image] with
+    If you want to handle errors in loading the file yourself, for example
+    by displaying an error message, then load the image with an image
+    loading framework such as libglycin, then create the [gtk.image.Image] with
     [gtk.image.Image.newFromPaintable].
     
     Sometimes an application will want to avoid depending on external data
@@ -302,9 +305,9 @@ class Image : gtk.widget.Widget
       will display a “broken image” icon. This function never returns null,
       it always returns a valid [gtk.image.Image] widget.
       
-      If you need to detect failures to load the file, use
-      [gdk.texture.Texture.newFromFile] to load the file yourself,
-      then create the [gtk.image.Image] from the texture.
+      If you need to detect failures to load the file, use an
+      image loading framework such as libglycin to load the file
+      yourself, then create the [gtk.image.Image] from the texture.
       
       The storage type (see [gtk.image.Image.getStorageType])
       of the returned image is not defined, it will be whatever
@@ -371,6 +374,13 @@ class Image : gtk.widget.Widget
       
       The [gtk.image.Image] will track changes to the paintable and update
       its size and contents in response to it.
+      
+      Note that paintables are still subject to the icon size that is
+      set on the image. If you want to display a paintable at its intrinsic
+      size, use [gtk.picture.Picture] instead.
+      
+      If paintable is a [gtk.symbolic_paintable.SymbolicPaintable], then it will be
+      recolored with the symbolic palette from the theme.
   
       Params:
         paintable = a [gdk.paintable.Paintable]
@@ -420,9 +430,9 @@ class Image : gtk.widget.Widget
       display a “broken image” icon. This function never returns null,
       it always returns a valid [gtk.image.Image] widget.
       
-      If you need to detect failures to load the file, use
-      [gdkpixbuf.pixbuf.Pixbuf.newFromFile] to load the file yourself,
-      then create the [gtk.image.Image] from the pixbuf.
+      If you need to detect failures to load the file, use an
+      image loading framework such as libglycin to load the file
+      yourself, then create the [gtk.image.Image] from the texture.
       
       The storage type (see [gtk.image.Image.getStorageType]) of
       the returned image is not defined, it will be whatever is
@@ -543,6 +553,12 @@ class Image : gtk.widget.Widget
       Sets a [gtk.image.Image] to show a file.
       
       See [gtk.image.Image.newFromFile] for details.
+      
+      ::: warning
+          Note that this function should not be used with untrusted data.
+          Use a proper image loading framework such as libglycin, which can
+          load many image formats into a [gdk.texture.Texture], and then use
+          [gtk.image.Image.setFromPaintable].
   
       Params:
         filename = a filename
@@ -641,7 +657,7 @@ class Image : gtk.widget.Widget
       Sets the pixel size to use for named icons.
       
       If the pixel size is set to a value != -1, it is used instead
-      of the icon size set by [gtk.image.Image.setFromIconName].
+      of the icon size set by [gtk.image.Image.setIconSize].
   
       Params:
         pixelSize = the new pixel size

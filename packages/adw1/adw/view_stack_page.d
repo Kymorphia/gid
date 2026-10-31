@@ -152,6 +152,60 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
+      Get `sectionTitle` property.
+      Returns: Section title for this page.
+        
+        Does nothing unless [adw.view_stack_page.ViewStackPage.startsSection] is set.
+  */
+  @property string sectionTitle() nothrow
+  {
+    return getSectionTitle();
+  }
+
+  /**
+      Set `sectionTitle` property.
+      Params:
+        propval = Section title for this page.
+          
+          Does nothing unless [adw.view_stack_page.ViewStackPage.startsSection] is set.
+  */
+  @property void sectionTitle(string propval) nothrow
+  {
+    setSectionTitle(propval);
+  }
+
+  /**
+      Get `startsSection` property.
+      Returns: Whether this page starts a section.
+        
+        If set to `TRUE`, [adw.view_stack.ViewStack.pages] will have a section starting
+        from this page.
+        
+        If [adw.view_stack_page.ViewStackPage.sectionTitle] is set, it should be used as a
+        title for the section.
+  */
+  @property bool startsSection() nothrow
+  {
+    return getStartsSection();
+  }
+
+  /**
+      Set `startsSection` property.
+      Params:
+        propval = Whether this page starts a section.
+          
+          If set to `TRUE`, [adw.view_stack.ViewStack.pages] will have a section starting
+          from this page.
+          
+          If [adw.view_stack_page.ViewStackPage.sectionTitle] is set, it should be used as a
+          title for the section.
+  */
+  @property void startsSection(bool propval) nothrow
+  {
+    setStartsSection(propval);
+  }
+
+  /**
       Get `title` property.
       Returns: The title of the child page.
   */
@@ -275,6 +329,29 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
+      Gets the section title for self.
+      Returns: the section title
+  */
+  string getSectionTitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_view_stack_page_get_section_title(cast(AdwViewStackPage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether self starts a section.
+      Returns: whether self starts a section
+  */
+  bool getStartsSection() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_view_stack_page_get_starts_section(cast(AdwViewStackPage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Gets the page title.
       Returns: the page title
   */
@@ -365,6 +442,37 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
+      Sets the section title for self.
+      
+      Does nothing unless [adw.view_stack_page.ViewStackPage.startsSection] is set.
+  
+      Params:
+        sectionTitle = the section title
+  */
+  void setSectionTitle(string sectionTitle = null) nothrow
+  {
+    const(char)* _sectionTitle = sectionTitle.toCString!(No.Malloc, Yes.Nullable);
+    adw_view_stack_page_set_section_title(cast(AdwViewStackPage*)this._cPtr, _sectionTitle);
+  }
+
+  /**
+      Sets whether self starts a section.
+      
+      If set to `TRUE`, [adw.view_stack.ViewStack.pages] will have a section starting
+      from this page.
+      
+      If [adw.view_stack_page.ViewStackPage.sectionTitle] is set, it should be used as a
+      title for the section.
+  
+      Params:
+        startsSection = whether self starts a section
+  */
+  void setStartsSection(bool startsSection) nothrow
+  {
+    adw_view_stack_page_set_starts_section(cast(AdwViewStackPage*)this._cPtr, startsSection);
+  }
+
+  /**
       Sets the page title.
   
       Params:
@@ -388,7 +496,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
-      Sets whether page is visible in its [adw.view_stack.ViewStack].
+      Sets whether self is visible in its [adw.view_stack.ViewStack].
       
       This is independent from the [gtk.widget.Widget.visible] property of
       [adw.view_stack_page.ViewStackPage.child].
@@ -468,6 +576,36 @@ class ViewStackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   T needsAttention(bool propval) nothrow
   {
     return setProperty("needs-attention", propval);
+  }
+
+  /**
+      Set `sectionTitle` property.
+      Params:
+        propval = Section title for this page.
+          
+          Does nothing unless [adw.view_stack_page.ViewStackPage.startsSection] is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T sectionTitle(string propval) nothrow
+  {
+    return setProperty("section-title", propval);
+  }
+
+  /**
+      Set `startsSection` property.
+      Params:
+        propval = Whether this page starts a section.
+          
+          If set to `TRUE`, [adw.view_stack.ViewStack.pages] will have a section starting
+          from this page.
+          
+          If [adw.view_stack_page.ViewStackPage.sectionTitle] is set, it should be used as a
+          title for the section.
+      Returns: Builder instance for fluent chaining
+  */
+  T startsSection(bool propval) nothrow
+  {
+    return setProperty("starts-section", propval);
   }
 
   /**

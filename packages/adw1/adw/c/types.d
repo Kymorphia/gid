@@ -6,6 +6,60 @@ public import gio.c.types;
 public import gtk.c.types;
 
 /**
+    Describes the available system accent colors.
+*/
+enum AdwAccentColor
+{
+  /**
+      Use a blue color (`#3584e4` or `#0073e5` in Yaru). This is the default value.
+  */
+  Blue = 0,
+
+  /**
+      Use a teal color (`#2190a4` or `#4b8501` in Yaru).
+  */
+  Teal = 1,
+
+  /**
+      Use a green color (`#3a944a` or `#4b8501` in Yaru).
+  */
+  Green = 2,
+
+  /**
+      Use a yellow color (`#c88800`).
+  */
+  Yellow = 3,
+
+  /**
+      Use a orange color (`#ed5b00` or `#e95420` in Yaru).
+  */
+  Orange = 4,
+
+  /**
+      Use a red color (`#e62d42` or `#da3450` in Yaru).
+  */
+  Red = 5,
+
+  /**
+      Use a pink color (`#d56199` or `#b34cb3` in Yaru).
+  */
+  Pink = 6,
+
+  /**
+      Use a purple color (`#9141ac` or `#7764d8` in Yaru).
+  */
+  Purple = 7,
+
+  /**
+      Use a slate color (`#6f8396` or `#657b69` in Yaru).
+  */
+  Slate = 8,
+
+  /** */
+  Brown = 108,
+}
+
+/**
     Describes the possible states of an [adw.animation.Animation].
     
     The state can be controlled with [adw.animation.Animation.play],
@@ -33,6 +87,26 @@ enum AdwAnimationState
       The animation has finished.
   */
   Finished = 3,
+}
+
+/**
+    Describes the available button styles for [adw.banner.Banner].
+    
+    New values may be added to this enumeration over time.
+    
+    See [adw.banner.Banner.buttonStyle].
+*/
+enum AdwBannerButtonStyle
+{
+  /**
+      The default button style.
+  */
+  Default = 0,
+
+  /**
+      A button in the suggested action style.
+  */
+  Suggested = 1,
 }
 
 /**
@@ -115,7 +189,7 @@ enum AdwColorScheme
   /**
       Inherit the parent color-scheme. When set on the
         [adw.style_manager.StyleManager] returned by [adw.style_manager.StyleManager.getDefault], it's
-        equivalent to [adw.types.ColorScheme.PreferLight].
+        equivalent to `enum@Adw.ColorScheme.prefer-light`.
   */
   Default = 0,
 
@@ -152,8 +226,9 @@ enum AdwColorScheme
 enum AdwDialogPresentationMode
 {
   /**
-      Switch between [adw.types.DialogPresentationMode.Floating] and
-        [adw.types.DialogPresentationMode.BottomSheet] depending on available size.
+      Switch between [adw.types.DialogPresentationMode.Floating]
+        and `enum@Adw.DialogPresentationMode.bottom-sheet` depending on available
+        size.
   */
   Auto = 0,
 
@@ -187,13 +262,14 @@ enum AdwEasing
   EaseInQuad = 1,
 
   /**
-      Quadratic tweening, inverse of [adw.types.Easing.EaseInQuad].
+      Quadratic tweening, inverse of
+        `enum@Adw.Easing.ease-in-quad`.
   */
   EaseOutQuad = 2,
 
   /**
-      Quadratic tweening, combining [adw.types.Easing.EaseInQuad] and
-        [adw.types.Easing.EaseOutQuad].
+      Quadratic tweening, combining
+        `enum@Adw.Easing.ease-in-quad` and `enum@Adw.Easing.ease-out-quad`.
   */
   EaseInOutQuad = 3,
 
@@ -203,13 +279,14 @@ enum AdwEasing
   EaseInCubic = 4,
 
   /**
-      Cubic tweening, inverse of [adw.types.Easing.EaseInCubic].
+      Cubic tweening, inverse of
+        `enum@Adw.Easing.ease-in-cubic`.
   */
   EaseOutCubic = 5,
 
   /**
-      Cubic tweening, combining [adw.types.Easing.EaseInCubic] and
-        [adw.types.Easing.EaseOutCubic].
+      Cubic tweening, combining
+        `enum@Adw.Easing.ease-in-cubic` and `enum@Adw.Easing.ease-out-cubic`.
   */
   EaseInOutCubic = 6,
 
@@ -219,13 +296,14 @@ enum AdwEasing
   EaseInQuart = 7,
 
   /**
-      Quartic tweening, inverse of [adw.types.Easing.EaseInQuart].
+      Quartic tweening, inverse of
+        `enum@Adw.Easing.ease-in-quart`.
   */
   EaseOutQuart = 8,
 
   /**
-      Quartic tweening, combining [adw.types.Easing.EaseInQuart] and
-        [adw.types.Easing.EaseOutQuart].
+      Quartic tweening, combining
+        `enum@Adw.Easing.ease-in-quart` and `enum@Adw.Easing.ease-out-quart`.
   */
   EaseInOutQuart = 9,
 
@@ -235,13 +313,14 @@ enum AdwEasing
   EaseInQuint = 10,
 
   /**
-      Quintic tweening, inverse of [adw.types.Easing.EaseInQuint].
+      Quintic tweening, inverse of
+        `enum@Adw.Easing.ease-in-quint`.
   */
   EaseOutQuint = 11,
 
   /**
-      Quintic tweening, combining [adw.types.Easing.EaseInQuint] and
-        [adw.types.Easing.EaseOutQuint].
+      Quintic tweening, combining
+        `enum@Adw.Easing.ease-in-quint` and `enum@Adw.Easing.ease-out-quint`.
   */
   EaseInOutQuint = 12,
 
@@ -251,13 +330,14 @@ enum AdwEasing
   EaseInSine = 13,
 
   /**
-      Sine wave tweening, inverse of [adw.types.Easing.EaseInSine].
+      Sine wave tweening, inverse of
+        `enum@Adw.Easing.ease-in-sine`.
   */
   EaseOutSine = 14,
 
   /**
-      Sine wave tweening, combining [adw.types.Easing.EaseInSine] and
-        [adw.types.Easing.EaseOutSine].
+      Sine wave tweening, combining
+        `enum@Adw.Easing.ease-in-sine` and `enum@Adw.Easing.ease-out-sine`.
   */
   EaseInOutSine = 15,
 
@@ -267,13 +347,14 @@ enum AdwEasing
   EaseInExpo = 16,
 
   /**
-      Exponential tweening, inverse of [adw.types.Easing.EaseInExpo].
+      Exponential tweening, inverse of
+        `enum@Adw.Easing.ease-in-expo`.
   */
   EaseOutExpo = 17,
 
   /**
-      Exponential tweening, combining [adw.types.Easing.EaseInExpo] and
-        [adw.types.Easing.EaseOutExpo].
+      Exponential tweening, combining
+        `enum@Adw.Easing.ease-in-expo` and `enum@Adw.Easing.ease-out-expo`.
   */
   EaseInOutExpo = 18,
 
@@ -283,13 +364,14 @@ enum AdwEasing
   EaseInCirc = 19,
 
   /**
-      Circular tweening, inverse of [adw.types.Easing.EaseInCirc].
+      Circular tweening, inverse of
+        `enum@Adw.Easing.ease-in-circ`.
   */
   EaseOutCirc = 20,
 
   /**
-      Circular tweening, combining [adw.types.Easing.EaseInCirc] and
-        [adw.types.Easing.EaseOutCirc].
+      Circular tweening, combining
+        `enum@Adw.Easing.ease-in-circ` and `enum@Adw.Easing.ease-out-circ`.
   */
   EaseInOutCirc = 21,
 
@@ -300,13 +382,14 @@ enum AdwEasing
 
   /**
       Elastic tweening, with offshoot on end, inverse of
-        [adw.types.Easing.EaseInElastic].
+        `enum@Adw.Easing.ease-in-elastic`.
   */
   EaseOutElastic = 23,
 
   /**
       Elastic tweening, with offshoot on both ends,
-        combining [adw.types.Easing.EaseInElastic] and [adw.types.Easing.EaseOutElastic].
+        combining `enum@Adw.Easing.ease-in-elastic` and
+        `enum@Adw.Easing.ease-out-elastic`.
   */
   EaseInOutElastic = 24,
 
@@ -317,13 +400,14 @@ enum AdwEasing
 
   /**
       Overshooting cubic tweening, with backtracking on end,
-        inverse of [adw.types.Easing.EaseInBack].
+        inverse of `enum@Adw.Easing.ease-in-back`.
   */
   EaseOutBack = 26,
 
   /**
       Overshooting cubic tweening, with backtracking on both
-        ends, combining [adw.types.Easing.EaseInBack] and [adw.types.Easing.EaseOutBack].
+        ends, combining `enum@Adw.Easing.ease-in-back` and
+        `enum@Adw.Easing.ease-out-back`.
   */
   EaseInOutBack = 27,
 
@@ -335,16 +419,45 @@ enum AdwEasing
 
   /**
       Exponentially decaying parabolic (bounce) tweening,
-        with bounce on end, inverse of [adw.types.Easing.EaseInBounce].
+        with bounce on end, inverse of `enum@Adw.Easing.ease-in-bounce`.
   */
   EaseOutBounce = 29,
 
   /**
       Exponentially decaying parabolic (bounce) tweening,
-        with bounce on both ends, combining [adw.types.Easing.EaseInBounce] and
-        [adw.types.Easing.EaseOutBounce].
+        with bounce on both ends, combining `enum@Adw.Easing.ease-in-bounce` and
+        `enum@Adw.Easing.ease-out-bounce`.
   */
   EaseInOutBounce = 30,
+
+  /**
+      Cubic bezier tweening, with control points in (0.25, 0.1) and (0.25, 1.0).
+      
+      Increases in velocity towards the middle of the animation, slowing back down
+      at the end.
+  */
+  Ease = 31,
+
+  /**
+      Cubic bezier tweening, with control points in (0.42, 0.0) and (1.0, 1.0).
+      
+      Starts off slowly, with the speed of the animation increasing until complete.
+  */
+  EaseIn = 32,
+
+  /**
+      Cubic bezier tweening, with control points in (0.0, 0.0) and (0.58, 1.0).
+      
+      Starts quickly, slowing down the animation until complete.
+  */
+  EaseOut = 33,
+
+  /**
+      Cubic bezier tweening, with control points in (0.42, 0.0) and (0.58, 1.0).
+      
+      Starts off slowly, speeds up in the middle, and then slows down again.
+  */
+  EaseInOut = 34,
 }
 
 /**
@@ -422,6 +535,59 @@ enum AdwFoldThresholdPolicy
 }
 
 /**
+    Describes what [adw.inline_view_switcher.InlineViewSwitcher] toggles display.
+    
+    <picture>
+      <source srcset="inline-view-switcher-display-modes-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="inline-view-switcher-display-modes.png" alt="inline-view-switcher-display-modes">
+    </picture>
+*/
+enum AdwInlineViewSwitcherDisplayMode
+{
+  /**
+      Toggles only display labels.
+  */
+  Labels = 0,
+
+  /**
+      Toggles only display icons.
+  */
+  Icons = 1,
+
+  /**
+      Toggles display both icons and labels.
+  */
+  Both = 2,
+}
+
+/**
+    Describes line justify behaviors in a [adw.wrap_layout.WrapLayout] or [adw.wrap_box.WrapBox].
+    
+    See [adw.wrap_layout.WrapLayout.justify] and [adw.wrap_box.WrapBox.justify].
+*/
+enum AdwJustifyMode
+{
+  /**
+      Don't justify children within a line.
+  */
+  None = 0,
+
+  /**
+      Stretch each child within the line, keeping consistent
+          spacing, so that the line fills the entire length.
+  */
+  Fill = 1,
+
+  /**
+      Increase spacing between children, moving the children
+          so that the first and last child are aligned with the beginning and end
+          of the line. If the line only contains a single widget, it will be
+          stretched regardless.
+  */
+  Spread = 2,
+}
+
+/**
     Describes the possible transitions in a [adw.leaflet.Leaflet] widget.
     
     New values may be added to this enumeration over time.
@@ -492,6 +658,27 @@ enum AdwNavigationDirection
 }
 
 /**
+    Describes child packing behavior in a [adw.wrap_layout.WrapLayout] or [adw.wrap_box.WrapBox].
+    
+    See [adw.wrap_layout.WrapLayout.packDirection] and
+    [adw.wrap_box.WrapBox.packDirection].
+*/
+enum AdwPackDirection
+{
+  /**
+      Pack children from left to right for LTR languages,
+          or top to bottom vertically.
+  */
+  StartToEnd = 0,
+
+  /**
+      Pack children from right to left for LTR languages,
+          or bottom to top vertically.
+  */
+  EndToStart = 1,
+}
+
+/**
     Describes the possible styles of [adw.alert_dialog.AlertDialog] response buttons.
     
     See [adw.alert_dialog.AlertDialog.setResponseAppearance].
@@ -515,6 +702,24 @@ enum AdwResponseAppearance
           the user.
   */
   Destructive = 2,
+}
+
+/**
+    Determines how an [adw.sidebar.Sidebar] should look and behave.
+    
+    See [adw.sidebar.Sidebar.mode] and [adw.view_switcher_sidebar.ViewSwitcherSidebar.mode].
+*/
+enum AdwSidebarMode
+{
+  /**
+      The sidebar should be displayed as a sidebar
+  */
+  Sidebar = 0,
+
+  /**
+      The sidebar should be displayed as boxed lists page
+  */
+  Page = 1,
 }
 
 /**
@@ -663,10 +868,10 @@ enum AdwToastPriority
     where some elements are directly adjacent to the top/bottom bars, or
     [adw.tab_view.TabView], where each page can have a different background.
     
-    [adw.types.ToolbarStyle.RaisedBorder] style is similar to [adw.types.ToolbarStyle.Raised], but
-    with the shadow replaced with a more subtle border. It's intended to be used
-    in applications like image viewers, where a shadow over the content might be
-    undesired.
+    `enum@Adw.ToolbarStyle.raised-border` style is similar to
+    [adw.types.ToolbarStyle.Raised], but with the shadow replaced with a more
+    subtle border. It's intended to be used in applications like image viewers,
+    where a shadow over the content might be undesired.
     
     <picture style="min-width: 33%; display: inline-block;">
       <source srcset="toolbar-view-raised-dark.png" media="(prefers-color-scheme: dark)">
@@ -714,6 +919,26 @@ enum AdwViewSwitcherPolicy
       Force the wide mode
   */
   Wide = 1,
+}
+
+/**
+    Describes line wrapping behavior in a [adw.wrap_layout.WrapLayout] or [adw.wrap_box.WrapBox].
+    
+    See [adw.wrap_layout.WrapLayout.wrapPolicy] and [adw.wrap_box.WrapBox.wrapPolicy].
+*/
+enum AdwWrapPolicy
+{
+  /**
+      Fit as many children into each line as possible, shrinking
+          them down to their minimum size before wrapping to the next line.
+  */
+  Minimum = 0,
+
+  /**
+      Wrap to the next line as soon as the previous line cannot
+          fit any more children without shrinking them past their natural size.
+  */
+  Natural = 1,
 }
 
 /**
@@ -844,6 +1069,11 @@ enum AdwViewSwitcherPolicy
     To add information about other modules, such as application dependencies or
     data, use [adw.about_dialog.AboutDialog.addLegalSection].
     
+    ## Other applications
+    
+    [adw.about_dialog.AboutDialog] can show links to your other apps at the end of the main
+    page. To add them, use [adw.about_dialog.AboutDialog.addOtherApp].
+    
     ## Constructing
     
     To make constructing an [adw.about_dialog.AboutDialog] as convenient as possible, you can
@@ -869,7 +1099,7 @@ enum AdwViewSwitcherPolicy
                              "application-icon", "org.example.App",
                              "version", "1.2.3",
                              "copyright", "© 2022 Angela Avery",
-                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/new",
+                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/",
                              "license-type", GTK_LICENSE_GPL_3_0,
                              "developers", developers,
                              "designers", designers,
@@ -1045,7 +1275,7 @@ struct AdwAboutDialogClass
                              "application-icon", "org.example.App",
                              "version", "1.2.3",
                              "copyright", "© 2022 Angela Avery",
-                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/new",
+                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/",
                              "license-type", GTK_LICENSE_GPL_3_0,
                              "developers", developers,
                              "designers", designers,
@@ -1058,6 +1288,8 @@ struct AdwAboutDialogClass
     
     [adw.about_window.AboutWindow] has a main CSS node with the name `window` and the
     style class `.about`.
+
+    Deprecated: Use [adw.about_dialog.AboutDialog].
 */
 struct AdwAboutWindow;
 
@@ -1104,10 +1336,19 @@ struct AdwAboutWindowClass
     It contains subnodes `label.title` and `label.subtitle` representing
     respectively the title label and subtitle label.
     
-    [adw.action_row.ActionRow] can use the
-    [`.property`](style-classes.html#property-rows) style class to emphasize
-    the row subtitle instead of the row title, which is useful for
-    displaying read-only properties.
+    ## Style classes
+    
+    [adw.action_row.ActionRow] can use the [`.property`](style-classes.html#property-rows)
+    style class to emphasize the row subtitle instead of the row title, which is
+    useful for displaying read-only properties.
+    
+    <picture>
+      <source srcset="property-row-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="property-row.png" alt="property-row">
+    </picture>
+    
+    When used together with the `.monospace` style class, only the subtitle
+    becomes monospace, not the title or any extra widgets.
 */
 struct AdwActionRow
 {
@@ -1190,8 +1431,7 @@ struct AdwActionRowClass
     ## Async API
     
     [adw.alert_dialog.AlertDialog] can also be used via the [adw.alert_dialog.AlertDialog.choose] method.
-    This API follows the GIO async pattern, and the result can be obtained by
-    calling [adw.alert_dialog.AlertDialog.chooseFinish], for example:
+    This API follows the GIO async pattern, for example:
     
     ```c
     static void
@@ -1236,7 +1476,7 @@ struct AdwActionRowClass
     
     [adw.alert_dialog.AlertDialog] supports adding responses in UI definitions by via the
     `<responses>` element that may contain multiple `<response>` elements, each
-    respresenting a response.
+    representing a response.
     
     Each of the `<response>` elements must have the `id` attribute specifying the
     response ID. The contents of the element are used as the response label.
@@ -1359,22 +1599,41 @@ struct AdwAnimationTargetClass;
     
     ## Automatic Resources
     
-    [adw.application.Application] will automatically load stylesheets located in the
+    [adw.application.Application] will automatically load certain resources located in the
     application's resource base path (see
     [gio.application.Application.setResourceBasePath], if they're present.
     
-    They can be used to add custom styles to the application, as follows:
+    ### Shortcuts Dialog
     
-    - `style.css` contains styles that are always present.
+    If there's a resource located at `shortcuts-dialog.ui` which defines an
+    [adw.shortcuts_dialog.ShortcutsDialog] with the ID `shortcuts_dialog`, [adw.application.Application]
+    will set up an `app.shortcuts` action that creates and presents this dialog,
+    as well as a <kbd>Ctrl</kbd><kbd>?</kbd> accelerator for it.
     
-    - `style-dark.css` contains styles only used when
-    [adw.style_manager.StyleManager.dark] is `TRUE`.
+    ### Stylesheet
     
-    - `style-hc.css` contains styles used when the system high contrast
-      preference is enabled.
+    If there's a resource located at `style.css`, [adw.application.Application] will load
+    styles from it. This can be used to add custom styles to the application.
     
-    - `style-hc-dark.css` contains styles used when the system high contrast
-      preference is enabled and [adw.style_manager.StyleManager.dark] is `TRUE`.
+    #### Additional styles (deprecated)
+    
+    [adw.application.Application] will also load the following stylesheets conditionally:
+    
+    - `style-dark.css` when [adw.style_manager.StyleManager.dark] is `TRUE`.
+    
+    - `style-hc.css` when the system high contrast preference is enabled.
+    
+    - `style-hc-dark.css` when the system high contrast preference is enabled and
+      [adw.style_manager.StyleManager.dark] is `TRUE`.
+    
+    :::warning
+        These resources are deprecated since 1.9.
+    
+        Use `style.css` with the following media queries instead:
+    
+        - `prefers-color-scheme: dark` for styles used only for dark appearance.
+        - `prefers-contrast: more` for styles used only when the system high
+          contrast preference is enabled.
 */
 struct AdwApplication
 {
@@ -1459,14 +1718,18 @@ struct AdwApplicationWindowClass
     The color is picked based on the hash of the [adw.avatar.Avatar.text].
     
     If [adw.avatar.Avatar.showInitials] is set to `FALSE`,
-    [adw.avatar.Avatar.iconName] or `avatar-default-symbolic` is shown instead of
-    the initials.
+    [adw.avatar.Avatar.iconName] or `adw-avatar-default-symbolic` is shown instead
+    of the initials.
     
     Use [adw.avatar.Avatar.customImage] to set a custom image.
     
     ## CSS nodes
     
     [adw.avatar.Avatar] has a single CSS node with name `avatar`.
+    
+    ## Accessibility
+    
+    [adw.avatar.Avatar] uses the [gtk.types.AccessibleRole.Img] role.
 */
 struct AdwAvatar;
 
@@ -1495,7 +1758,13 @@ struct AdwAvatarClass
     
     Banners can optionally have a button with text on it, set through
     [adw.banner.Banner.buttonLabel]. The button can be used with a [gio.action.Action],
-    or with the [adw.banner.Banner.buttonClicked] signal.
+    or with the [adw.banner.Banner.buttonClicked] signal. The button can have
+    different styles, a gray style and a suggested style.
+    
+    <picture>
+      <source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="banner-suggested.png" alt="banner with suggested button style">
+    </picture>
     
     ## CSS nodes
     
@@ -1532,6 +1801,89 @@ struct AdwBin
 
 /** */
 struct AdwBinClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    A bottom sheet with an optional bottom bar.
+    
+    <picture>
+      <source srcset="bottom-sheet-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="bottom-sheet.png" alt="bottom-sheet">
+    </picture>
+    
+    [adw.bottom_sheet.BottomSheet] has three child widgets. [adw.bottom_sheet.BottomSheet.content] is
+    shown persistently. [adw.bottom_sheet.BottomSheet.sheet] is displayed above it when
+    it's open, and [adw.bottom_sheet.BottomSheet.bottomBar] is displayed when it's not.
+    
+    Bottom sheet and bottom bar are attached to the bottom edge of the widget.
+    They take the full width by default, but can only take a portion of it if
+    [adw.bottom_sheet.BottomSheet.fullWidth] is set to `FALSE`. In this case,
+    [adw.bottom_sheet.BottomSheet.align_] determines where along the bottom edge they are
+    placed.
+    
+    Bottom bar can be hidden using the [adw.bottom_sheet.BottomSheet.revealBottomBar]
+    property.
+    
+    [adw.bottom_sheet.BottomSheet] can be useful for applications such as music players, that
+    want to have a persistent bottom bar that expands into a bottom sheet when
+    clicked. It's meant for cases where a bottom sheet is tightly integrated into
+    the UI. For more transient bottom sheets, see [adw.dialog.Dialog].
+    
+    To open or close the bottom sheet, use the [adw.bottom_sheet.BottomSheet.open]
+    property.
+    
+    By default, the bottom sheet has an overlaid drag handle. It can be disabled
+    by setting [adw.bottom_sheet.BottomSheet.showDragHandle] to `FALSE`. Note that the
+    handle also controls whether the sheet can be dragged using a pointer.
+    
+    Bottom sheets are modal by default, meaning that the content is dimmed and
+    cannot be accessed while the sheet is open. Set [adw.bottom_sheet.BottomSheet.modal]
+    to `FALSE` if this behavior is unwanted.
+    
+    To disable user interactions for opening or closing the bottom sheet (such as
+    swipes or clicking the bottom bar or close button), set
+    [adw.bottom_sheet.BottomSheet.canOpen] or [adw.bottom_sheet.BottomSheet.canClose] to
+    `FALSE`.
+    
+    In some cases, particularly when using a full-width bottom bar, it may be
+    necessary to shift [adw.bottom_sheet.BottomSheet.content] upwards. Use the
+    [adw.bottom_sheet.BottomSheet.bottomBarHeight] and
+    [adw.bottom_sheet.BottomSheet.sheetHeight] for that.
+    
+    [adw.bottom_sheet.BottomSheet] is not adaptive, and for larger window sizes applications
+    may want to replace it with another UI, such as a sidebar. This can be done
+    using [adw.multi_layout_view.MultiLayoutView].
+    
+    ## Sizing
+    
+    Unlike [adw.dialog.Dialog] presented as a bottom sheet, [adw.bottom_sheet.BottomSheet] just
+    follows the content's natural size, and it's up to the applications to make
+    sure their content provides one. For example, when using
+    [gtk.scrolled_window.ScrolledWindow], make sure to set
+    [gtk.scrolled_window.ScrolledWindow.propagateNaturalHeight] to `TRUE`.
+    
+    ## Header Bar Integration
+    
+    When placed inside an [adw.bottom_sheet.BottomSheet], [adw.header_bar.HeaderBar] will not show the
+    title when [adw.bottom_sheet.BottomSheet.showDragHandle] is `TRUE`, regardless of
+    [adw.header_bar.HeaderBar.showTitle]. This only applies to the default title,
+    titles set with [adw.header_bar.HeaderBar.titleWidget] will still be shown.
+    
+    ## [adw.bottom_sheet.BottomSheet] as [gtk.buildable.Buildable]:
+    
+    The [adw.bottom_sheet.BottomSheet] implementation of the [gtk.buildable.Buildable] interface
+    supports setting the sheet widget by specifying “sheet” as the “type”
+    attribute of a `<child>` element, and the bottom bar by specifying
+    “bottom-bar”. Specifying “content” or omitting the child type results in
+    setting the content child.
+*/
+struct AdwBottomSheet;
+
+/** */
+struct AdwBottomSheetClass
 {
   /** */
   GtkWidgetClass parentClass;
@@ -1787,6 +2139,61 @@ struct AdwButtonContentClass
 }
 
 /**
+    A [gtk.list_box_row.ListBoxRow] that looks like a button.
+    
+    <picture>
+      <source srcset="button-rows-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="button-rows.png" alt="button-rows">
+    </picture>
+    
+    The [adw.button_row.ButtonRow] widget has a title and two icons: before and after the
+    title.
+    
+    It is convenient for presenting actions like "Delete" at the end of a boxed
+    list.
+    
+    [adw.button_row.ButtonRow] is always activatable.
+    
+    ## CSS nodes
+    
+    [adw.button_row.ButtonRow] has a main CSS node with name `row` and the style class
+    `.button`.
+    
+    It contains the subnode `box` for its main horizontal box, which contains the
+    nodes: `image.icon.start` for the start icon, `label.title` for the title,
+    and `image.icon.end` for the end icon.
+    
+    ## Style classes
+    
+    The [`.suggested-action`](style-classes.html#suggested-action) style class
+    makes [adw.button_row.ButtonRow] use accent color for its background. It should be used
+    very sparingly to denote important buttons.
+    
+    <picture>
+      <source srcset="button-row-suggested-action-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="button-row-suggested-action.png" alt="button-row-suggested-action">
+    </picture>
+    
+    The [`.destructive-action`](style-classes.html#destructive-action) style
+    makes the row use destructive colors. It can be used to draw attention to the
+    potentially damaging consequences of using it. This style acts as a warning
+    to the user.
+    
+    <picture>
+      <source srcset="button-row-destructive-action-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="button-row-destructive-action.png" alt="button-row-destructive-action">
+    </picture>
+*/
+struct AdwButtonRow;
+
+/** */
+struct AdwButtonRowClass
+{
+  /** */
+  AdwPreferencesRowClass parentClass;
+}
+
+/**
     An [adw.animation_target.AnimationTarget] that calls a given callback during the
     animation.
 */
@@ -1855,7 +2262,7 @@ struct AdwCarouselIndicatorDotsClass
     A lines indicator for [adw.carousel.Carousel].
     
     <picture>
-      <source srcset="carousel-indicator-dots-lines.png" media="(prefers-color-scheme: dark)">
+      <source srcset="carousel-indicator-lines-dark.png" media="(prefers-color-scheme: dark)">
       <img src="carousel-indicator-lines.png" alt="carousel-indicator-lines">
     </picture>
     
@@ -2018,7 +2425,7 @@ struct AdwClampScrollableClass
     
     ## Accessibility
     
-    [adw.combo_row.ComboRow] uses the [gtk.types.AccessibleRole.ComboBox] role.
+    [adw.combo_row.ComboRow] uses the `enum@Gtk.AccessibleRole.combo-box` role.
 */
 struct AdwComboRow
 {
@@ -2074,6 +2481,10 @@ struct AdwComboRowClass
     
     Use [adw.dialog.Dialog.forceClose] to close the dialog even when `can-close` is set to
     `FALSE`.
+    
+    [adw.dialog.Dialog] is transient and doesn't integrate with the window below it, for
+    example it's not possible to collapse it into a bottom bar. See
+    [adw.bottom_sheet.BottomSheet] for persistent and more tightly integrated bottom sheets.
     
     ## Header Bar Integration
     
@@ -2221,6 +2632,15 @@ struct AdwEnumListModelClass
     It contains the subnodes `row.header` for its main embedded row,
     `list.nested` for the list it can expand, and `image.expander-row-arrow` for
     its arrow.
+    
+    ## Style classes
+    
+    [adw.expander_row.ExpanderRow] can use the [`.`](style-classes.html#property-rows)
+    style class to emphasize the row subtitle instead of the row title, which is
+    useful for displaying read-only properties.
+    
+    When used together with the `.monospace` style class, only the subtitle
+    becomes monospace, not the title or any extra widgets.
 */
 struct AdwExpanderRow
 {
@@ -2325,7 +2745,7 @@ struct AdwFlapClass
     ## Dialog Integration
     
     When placed inside an [adw.dialog.Dialog], [adw.header_bar.HeaderBar] will display the dialog
-    title intead of window title. It will also adjust the decoration layout to
+    title instead of window title. It will also adjust the decoration layout to
     ensure it always has a close button and nothing else. Set
     [adw.header_bar.HeaderBar.showStartTitleButtons] and
     [adw.header_bar.HeaderBar.showEndTitleButtons] to `FALSE` to remove it if it's
@@ -2349,6 +2769,13 @@ struct AdwFlapClass
     When placed inside [adw.navigation_split_view.NavigationSplitView] or [adw.overlay_split_view.OverlaySplitView],
     [adw.header_bar.HeaderBar] will automatically hide the title buttons other than at the
     edges of the window.
+    
+    ## Bottom Sheet Integration
+    
+    When played inside [adw.bottom_sheet.BottomSheet], [adw.header_bar.HeaderBar] will not show the title
+    unless [adw.bottom_sheet.BottomSheet.showDragHandle] is set to `FALSE`, regardless
+    of [adw.header_bar.HeaderBar.showTitle]. This only applies to the default title,
+    titles set with [adw.header_bar.HeaderBar.titleWidget] will still be shown.
     
     ## Centering Policy
     
@@ -2385,7 +2812,7 @@ struct AdwFlapClass
     [adw.header_bar.HeaderBar]'s CSS node is called `headerbar`. It contains a `windowhandle`
     subnode, which contains a `box` subnode, which contains three `widget`
     subnodes at the start, center and end of the header bar. The start and end
-    subnotes contain a `box` subnode with the `.start` and `.end` style classes
+    subnodes contain a `box` subnode with the `.start` and `.end` style classes
     respectively, and the center node contains a node that represents the title.
     
     Each of the boxes contains a `windowcontrols` subnode, see
@@ -2403,6 +2830,86 @@ struct AdwHeaderBar;
 
 /** */
 struct AdwHeaderBarClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    A view switcher that uses a toggle group.
+    
+    <picture>
+      <source srcset="inline-view-switcher-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="inline-view-switcher.png" alt="inline-view-switcher">
+    </picture>
+    
+    A view switcher showing pages of an [adw.view_stack.ViewStack] within an
+    [adw.toggle_group.ToggleGroup], similar to [adw.view_switcher.ViewSwitcher].
+    
+    The toggles can display either an icon, a label or both. Use the
+    [adw.inline_view_switcher.InlineViewSwitcher.displayMode] to control this.
+    
+    <picture>
+      <source srcset="inline-view-switcher-display-modes-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="inline-view-switcher-display-modes.png" alt="inline-view-switcher-display-modes">
+    </picture>
+    
+    ## CSS nodes
+    
+    [adw.inline_view_switcher.InlineViewSwitcher] has a single CSS node with the name
+    `inline-view-switcher`.
+    
+    ## Style classes
+    
+    Like [adw.toggle_group.ToggleGroup], it can accept the [`.flat`](style-classes.html#flat_1)
+    and [`.round`](style-classes.html#round) style classes.
+    
+    <picture>
+      <source srcset="inline-view-switcher-style-classes-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="inline-view-switcher-style-classes.png" alt="inline-view-switcher-style-classes">
+    </picture>
+    
+    ## Accessibility
+    
+    The internal toggle group uses the `enum@Gtk.AccessibleRole.tab-list` role.
+    Its toggles use the [gtk.types.AccessibleRole.Tab] role.
+    
+    See also: [adw.view_switcher.ViewSwitcher], [adw.view_switcher_bar.ViewSwitcherBar],
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar].
+*/
+struct AdwInlineViewSwitcher;
+
+/** */
+struct AdwInlineViewSwitcherClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    An individual layout in [adw.multi_layout_view.MultiLayoutView].
+*/
+struct AdwLayout;
+
+/** */
+struct AdwLayoutClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    A child slot within [adw.layout.Layout].
+    
+    While it contains a layout child, the [gtk.widget.Widget.visible] property
+    of the slot is updated to match that of the layout child.
+    
+    See [adw.multi_layout_view.MultiLayoutView].
+*/
+struct AdwLayoutSlot;
+
+/** */
+struct AdwLayoutSlotClass
 {
   /** */
   GtkWidgetClass parentClass;
@@ -2522,8 +3029,7 @@ struct AdwLeafletPageClass
     ## Async API
     
     [adw.message_dialog.MessageDialog] can also be used via the [adw.message_dialog.MessageDialog.choose]
-    method. This API follows the GIO async pattern, and the result can be
-    obtained by calling [adw.message_dialog.MessageDialog.chooseFinish], for example:
+    method. This API follows the GIO async pattern, for example:
     
     ```c
     static void
@@ -2565,7 +3071,7 @@ struct AdwLeafletPageClass
     
     [adw.message_dialog.MessageDialog] supports adding responses in UI definitions by via the
     `<responses>` element that may contain multiple `<response>` elements, each
-    respresenting a response.
+    representing a response.
     
     Each of the `<response>` elements must have the `id` attribute specifying the
     response ID. The contents of the element are used as the response label.
@@ -2597,6 +3103,8 @@ struct AdwLeafletPageClass
     ## Accessibility
     
     [adw.message_dialog.MessageDialog] uses the [gtk.types.AccessibleRole.Dialog] role.
+
+    Deprecated: Use [adw.alert_dialog.AlertDialog].
 */
 struct AdwMessageDialog
 {
@@ -2615,6 +3123,97 @@ struct AdwMessageDialogClass
 
   /** */
   void*[4] padding;
+}
+
+/**
+    A widget for switching between different layouts.
+    
+    [adw.multi_layout_view.MultiLayoutView] contains layouts and children. Each child has
+    an ID, each layout has slots inside it, each slot also has an ID. When
+    switching layouts, children are inserted into slots with matching IDs. The
+    [gtk.widget.Widget.visible] property of each slot is updated to match
+    that of the inserted child.
+    
+    This can be useful for rearranging children when it's difficult to do so
+    otherwise, for example to move a child from a sidebar to a bottom bar.
+    
+    The currently used layout can be switched using the
+    [adw.multi_layout_view.MultiLayoutView.layout] or [adw.multi_layout_view.MultiLayoutView.layoutName]
+    properties. For example, it can be done via a [adw.breakpoint.Breakpoint] setter
+    to change layouts depending on the window size.
+    
+    ## AdwMultiLayoutView as GtkBuildable
+    
+    The [adw.multi_layout_view.MultiLayoutView] implementation of the [gtk.buildable.Buildable]
+    interface supports adding layouts via `<child>` element with the `type`
+    attribute omitted.
+    
+    It also supports setting children via `<child type="ID">`.
+    
+    Example of an [adw.multi_layout_view.MultiLayoutView] UI definition that can display a secondary
+    child as either a sidebar or a bottom sheet.
+    
+    ```xml
+    <object class="AdwMultiLayoutView">
+      <child>
+        <object class="AdwLayout">
+          <property name="name">sidebar</property>
+          <property name="content">
+            <object class="AdwOverlaySplitView">
+              <property name="sidebar">
+                <object class="AdwLayoutSlot">
+                  <property name="id">secondary</property>
+                </object>
+              </property>
+              <property name="content">
+                <object class="AdwLayoutSlot">
+                  <property name="id">primary</property>
+                </object>
+              </property>
+            </object>
+          </property>
+        </object>
+      </child>
+      <child>
+        <object class="AdwLayout">
+          <property name="name">bottom-sheet</property>
+          <property name="content">
+            <object class="AdwBottomSheet">
+              <property name="open">True</property>
+              <property name="content">
+                <object class="AdwLayoutSlot">
+                  <property name="id">primary</property>
+                </object>
+              </property>
+              <property name="sheet">
+                <object class="AdwLayoutSlot">
+                  <property name="id">secondary</property>
+                </object>
+              </property>
+            </object>
+          </property>
+        </object>
+      </child>
+      <child type="primary">
+        <!-- ... -->
+      </child>
+      <child type="secondary">
+        <!-- ... -->
+      </child>
+    </object>
+    ```
+    
+    ## CSS nodes
+    
+    [adw.multi_layout_view.MultiLayoutView] has a single CSS node with name `multi-layout-view`.
+*/
+struct AdwMultiLayoutView;
+
+/** */
+struct AdwMultiLayoutViewClass
+{
+  /** */
+  GtkWidgetClass parentClass;
 }
 
 /**
@@ -2700,8 +3299,6 @@ struct AdwNavigationPageClass
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">280</property>
-      <property name="height-request">200</property>
       <property name="default-width">800</property>
       <property name="default-height">800</property>
       <child>
@@ -2987,6 +3584,14 @@ struct AdwNavigationViewClass
 }
 
 /**
+    An [adw.animation_target.AnimationTarget] that doesn't do anything.
+*/
+struct AdwNoneAnimationTarget;
+
+/** */
+struct AdwNoneAnimationTargetClass;
+
+/**
     A widget presenting sidebar and content side by side or as an overlay.
     
     <picture>
@@ -3027,8 +3632,6 @@ struct AdwNavigationViewClass
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <property name="default-width">800</property>
       <property name="default-height">800</property>
       <child>
@@ -3171,6 +3774,12 @@ struct AdwPasswordEntryRowClass
     The [adw.preferences_dialog.PreferencesDialog] widget presents an application's preferences
     gathered into pages and groups. The preferences are searchable by the user.
     
+    ## Actions
+    
+    `AdwPrefencesDialog` defines the `navigation.pop` action, it doesn't take any
+    parameters and pops the current subpage from the navigation stack, equivalent
+    to calling [adw.preferences_dialog.PreferencesDialog.popSubpage].
+    
     ## CSS nodes
     
     [adw.preferences_dialog.PreferencesDialog] has a main CSS node with the name `dialog` and the
@@ -3208,6 +3817,11 @@ struct AdwPreferencesDialogClass
     To summarize the role of the preferences it gathers, a group can have both a
     title and a description. The title will be used by [adw.preferences_dialog.PreferencesDialog]
     to let the user look for a preference.
+    
+    The [adw.preferences_group.PreferencesGroup.separateRows] property can be used to
+    separate the rows within the group, same as when using the
+    [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+    instead of `.boxed-list`.
     
     ## AdwPreferencesGroup as GtkBuildable
     
@@ -3326,6 +3940,8 @@ struct AdwPreferencesRowClass
     
     [adw.preferences_window.PreferencesWindow] has a main CSS node with the name `window` and the
     style class `.preferences`.
+
+    Deprecated: Use [adw.preferences_dialog.PreferencesDialog].
 */
 struct AdwPreferencesWindow
 {
@@ -3353,6 +3969,582 @@ struct AdwPropertyAnimationTarget;
 
 /** */
 struct AdwPropertyAnimationTargetClass;
+
+/**
+    A widget that displays a keyboard shortcut.
+    
+    <picture>
+      <source srcset="shortcut-label-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="shortcut-label.png" alt="shortcut-label">
+    </picture>
+    
+    The shown shortcut can be set using the [adw.shortcut_label.ShortcutLabel.accelerator]
+    property.
+    
+    Optionally, if no shortcut is set, [adw.shortcut_label.ShortcutLabel] will display a
+    placeholder set with the [adw.shortcut_label.ShortcutLabel.disabledText] property.
+    
+    The following types of shortcuts can be displayed:
+    
+    - A single shortcut in `func@Gtk.accelerator_parse` format, e.g. `<Control>C`:
+    
+        <picture>
+          <source srcset="shortcut-label-single-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="shortcut-label-single.png" alt="shortcut-label-single">
+        </picture>
+    
+    - Multiple alternative shortcuts, separated with spaces, e.g. `<Shift>A Home`:
+    
+        <picture>
+          <source srcset="shortcut-label-alternative-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="shortcut-label-alternative.png" alt="shortcut-label-alternative">
+        </picture>
+    
+    - A range of shortcuts, separated with `...`, e.g. `<Alt>1...9`:
+    
+        <picture>
+          <source srcset="shortcut-label-range-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="shortcut-label-range.png" alt="shortcut-label-range">
+        </picture>
+    
+    - Multiple keys pressed at once, separated with `&`, e.g. `Control_L&Control_R`:
+    
+        <picture>
+          <source srcset="shortcut-label-multiple-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="shortcut-label-multiple.png" alt="shortcut-label-multiple">
+        </picture>
+    
+    - Multiple shortcuts or keys, pressed sequentially, separated with `+`, e.g. `<Control>C+<Control>X`:
+    
+        <picture>
+          <source srcset="shortcut-label-sequence-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="shortcut-label-sequence.png" alt="shortcut-label-sequence">
+        </picture>
+    
+    ::: note
+        `<`, `>` and `&` need to be escaped as `&lt;`, `&gt;` and `&amp;` when used in UI files.
+    
+    ## CSS nodes
+    
+    [adw.shortcut_label.ShortcutLabel] has a single CSS node with name `shortcut-label`. The
+    individual keycap labels each have the `.keycap` style class, while the
+    labels separating them have the `.dimmed` style class.
+    
+    ## Accessibility
+    
+    [adw.shortcut_label.ShortcutLabel] uses the [gtk.types.AccessibleRole.Label] role.
+    
+    See also: [adw.shortcuts_dialog.ShortcutsDialog].
+*/
+struct AdwShortcutLabel;
+
+/** */
+struct AdwShortcutLabelClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    A dialog that displays application's keyboard shortcuts.
+    
+    <picture>
+      <source srcset="shortcuts-dialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="shortcuts-dialog.png" alt="shortcuts-dialog">
+    </picture>
+    
+    Shortcuts are grouped into sections, represented by [adw.shortcuts_section.ShortcutsSection]
+    objects. Each section has one or more items, represented by
+    [adw.shortcuts_item.ShortcutsItem] objects.
+    
+    To add a section to the dialog, use [adw.shortcuts_dialog.ShortcutsDialog.add], or add it
+    as a child when using UI files.
+    
+    Sections without titles can be used to further subdivide each section into
+    groups.
+    
+    Example of an [adw.shortcuts_dialog.ShortcutsDialog] UI definition:
+    
+    ```xml
+    <object class="AdwShortcutsDialog" id="shortcuts_dialog">
+      <child>
+        <object class="AdwShortcutsSection">
+          <property name="title" translatable="yes">General</property>
+          <child>
+            <object class="AdwShortcutsItem">
+              <property name="title" translatable="yes">Open Menu</property>
+              <property name="accelerator">F10</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwShortcutsItem">
+              <property name="title" translatable="yes">Quit</property>
+              <property name="action-name">app.quit</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwShortcutsSection">
+          <child>
+            <object class="AdwShortcutsItem">
+              <property name="title" translatable="yes">Move Tab Left</property>
+              <property name="accelerator">&lt;Shift&gt;&lt;Ctrl&gt;Page_Up</property>
+              <property name="direction">ltr</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwShortcutsItem">
+              <property name="title" translatable="yes">Move Tab Right</property>
+              <property name="accelerator">&lt;Shift&gt;&lt;Ctrl&gt;Page_Down</property>
+              <property name="direction">ltr</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwShortcutsItem">
+              <property name="title" translatable="yes">Move Tab Right</property>
+              <property name="accelerator">&lt;Shift&gt;&lt;Ctrl&gt;Page_Up</property>
+              <property name="direction">rtl</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwShortcutsItem">
+              <property name="title" translatable="yes">Move Tab Left</property>
+              <property name="accelerator">&lt;Shift&gt;&lt;Ctrl&gt;Page_Down</property>
+              <property name="direction">rtl</property>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+    ```
+    
+    If the `app.quit` action has the <kbd>Ctrl</kbd><kbd>Q</kbd> accelerator
+    associated with it, the result will look as follows:
+    
+    <picture>
+      <source srcset="shortcuts-dialog-example-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="shortcuts-dialog-example.png" alt="shortcuts-dialog-example">
+    </picture>
+    
+    The recommended way to use [adw.shortcuts_dialog.ShortcutsDialog] is via [adw.application.Application]'s
+    automatic resource loading.
+    
+    See also: [adw.shortcut_label.ShortcutLabel].
+*/
+struct AdwShortcutsDialog;
+
+/** */
+struct AdwShortcutsDialogClass
+{
+  /** */
+  AdwDialogClass parentClass;
+}
+
+/**
+    An object representing an individual shortcut in [adw.shortcuts_section.ShortcutsSection].
+    
+    A shortcut has a title, an optional subtitle, and an accelerator.
+    
+    Accelerator must be specified in the format [adw.shortcut_label.ShortcutLabel] accepts.
+    
+    Alternatively, the [adw.shortcuts_item.ShortcutsItem.actionName] property can be used
+    to automatically get accelerator associated with the specified action, as set
+    via [gtk.application.Application.setAccelsForAction].
+    
+    If both are specified, the accelerator will be used if the action couldn't
+    be found or doesn't have an accelerator associated for it.
+    
+    If [adw.shortcuts_item.ShortcutsItem.direction] is set, the shortcut will only be
+    displayed for the specified text direction. This allows to display different
+    shortcuts for different text directions.
+*/
+struct AdwShortcutsItem;
+
+/** */
+struct AdwShortcutsItemClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    An object representing a section in [adw.shortcuts_dialog.ShortcutsDialog].
+    
+    It contains [adw.shortcuts_item.ShortcutsItem] objects, use [adw.shortcuts_section.ShortcutsSection.add] to
+    add them.
+    
+    [adw.shortcuts_section.ShortcutsSection] implements the [gio.list_model.ListModel] interface and
+    allows to access the added shortcut items through it.
+    
+    ## [adw.shortcuts_section.ShortcutsSection] as [gtk.buildable.Buildable]
+    
+    [adw.shortcuts_section.ShortcutsSection] allows adding [adw.shortcuts_item.ShortcutsItem] objects as children.
+*/
+struct AdwShortcutsSection;
+
+/** */
+struct AdwShortcutsSectionClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    Adaptive sidebar widget.
+    
+    <picture>
+      <source srcset="sidebar-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="sidebar.png" alt="sidebar">
+    </picture>
+    
+    [adw.sidebar.Sidebar] contains [adw.sidebar_section.SidebarSection] objects, which in turn contain
+    [adw.sidebar_item.SidebarItem] objects.
+    
+    To add sections, use [adw.sidebar.Sidebar.append], [adw.sidebar.Sidebar.prepend] or
+    [adw.sidebar.Sidebar.insert].
+    
+    To remove sections, use [adw.sidebar.Sidebar.remove] or
+    [adw.sidebar.Sidebar.removeAll].
+    
+    To inspect the items, use [adw.sidebar.Sidebar.getItem] or
+    [adw.sidebar.Sidebar.items].
+    
+    To inspect sections themselves, use [adw.sidebar.Sidebar.getSection] or
+    [adw.sidebar.Sidebar.sections].
+    
+    ## Selection and activation
+    
+    [adw.sidebar.Sidebar] has zero or one selected items. The index of the item can be
+    accessed and changed via [adw.sidebar.Sidebar.selected]. Set it to
+    [gtk.types.INVALID_LIST_POSITION] to remove selection.
+    
+    Selection cannot be permanently disabled.
+    
+    [adw.sidebar.Sidebar.selectedItem] can be used to access the selected item.
+    
+    Connect to the [adw.sidebar.Sidebar.activated] signal to run code when an item
+    has been activated. This can be used to toggle the visible pane when used in
+    a split view.
+    
+    See also: [adw.view_switcher_sidebar.ViewSwitcherSidebar].
+    
+    ## Modes
+    
+    <picture>
+      <source srcset="sidebar-modes-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="sidebar-modes.png" alt="sidebar-modes">
+    </picture>
+    
+    [adw.sidebar.Sidebar] is adaptive and can act as either a regular sidebar, or a page
+    of boxed lists.
+    
+    Use the [adw.sidebar.Sidebar.mode] to determine its look and behavior.
+    
+    A typical use case involves using [adw.sidebar.Sidebar] inside the sidebar pane of a
+    [adw.navigation_split_view.NavigationSplitView], and switching mode to page whenever it's
+    collapsed, as follows:
+    
+    ```xml
+    <object class="AdwWindow">
+      <property name="default-width">800</property>
+      <property name="default-height">600</property>
+      <child>
+        <object class="AdwBreakpoint">
+          <condition>max-width: 400sp</condition>
+          <setter object="split_view" property="collapsed">True</setter>
+          <setter object="sidebar" property="mode">page</setter>
+        </object>
+      </child>
+      <property name="content">
+        <object class="AdwNavigationSplitView" id="split_view">
+          <property name="sidebar">
+            <object class="AdwNavigationPage">
+              <property name="title" translatable="yes">Sidebar</property>
+              <property name="child">
+                <object class="AdwToolbarView">
+                  <child type="top">
+                    <object class="AdwHeaderBar"/>
+                  </child>
+                  <property name="content">
+                    <object class="AdwSidebar" id="sidebar">
+                      <!-- Calls adw_navigation_split_view_set_show_content (split_view, TRUE); -->
+                      <signal name="activated" handler="sidebar_activated_cb"/>
+                      <!-- ... -->
+                    </object>
+                  </property>
+                </object>
+              </property>
+            </object>
+          </property>
+          <property name="content">
+            <object class="AdwNavigationPage">
+              <property name="title" translatable="yes">Content</property>
+              <property name="child">
+                <!-- ... -->
+              </property>
+            </object>
+          </property>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    When used with [adw.overlay_split_view.OverlaySplitView], the sidebar should stay in sidebar
+    mode, as the sidebar pane is still a sidebar when collapsed.
+    
+    ## Search
+    
+    [adw.sidebar.Sidebar] supports filtering items via the [adw.sidebar.Sidebar.filter]
+    property.
+    
+    Use [adw.sidebar.Sidebar.placeholder] to provide an empty state widget. It will
+    be shown when all items have been filtered out, or the sidebar has no items
+    otherwise.
+    
+    ## Context Menu
+    
+    To create a context menu for the sidebar items, use the
+    [adw.sidebar.Sidebar.menuModel] property to provide a menu model, and the
+    [adw.sidebar.Sidebar.setupMenu] signal to set up actions for the given item.
+    
+    To set or override the menu for just one section, use
+    [adw.sidebar_section.SidebarSection.menuModel] instead.
+    
+    ## Drag-and-Drop
+    
+    [adw.sidebar.Sidebar] items can have a drop target for arbitrary content.
+    
+    Use [adw.sidebar.Sidebar.setupDropTarget] to set it up, specifying the
+    supported content types and drag actions, then connect to
+    [adw.sidebar.Sidebar.drop] to handle drops.
+    
+    In some cases, it may be necessary to determine the used action based on the
+    dragged content, or the hovered item.
+    
+    To determine it based on the sidebar item, connect to the
+    [adw.sidebar.Sidebar.dropEnter] signal and return the action from its handler.
+    
+    To determine it based on the content, set [adw.sidebar.Sidebar.dropPreload] to
+    `TRUE`, then connect to [adw.sidebar.Sidebar.dropValueLoaded] signal and return
+    the action from its handler.
+    
+    In both cases the action will be passed as a parameter to the
+    [adw.sidebar.Sidebar.drop] signal.
+    
+    Regardless of whether a drop target was set up, dragging content over sidebar
+    items activates them after a timeout. To disable this behavior for specific
+    items, set [adw.sidebar_item.SidebarItem.dragMotionActivate] to `FALSE` on them.
+    
+    ## [adw.sidebar.Sidebar] as [gtk.buildable.Buildable]
+    
+    [adw.sidebar.Sidebar] allows adding sections as children.
+    
+    Example of an [adw.sidebar.Sidebar] UI definition:
+    
+    ```xml
+    <object class="AdwSidebar">
+      <child>
+        <object class="AdwSidebarSection">
+          <child>
+            <object class="AdwSidebarItem">
+              <property name="title" translatable="yes">Recent</property>
+              <property name="icon-name">document-open-recent-symbolic</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwSidebarItem">
+              <property name="title" translatable="yes">Starred</property>
+              <property name="icon-name">starred-symbolic</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwSidebarSection">
+          <property name="title" translatable="yes">Places</property>
+          <child>
+            <object class="AdwSidebarItem">
+              <property name="title" translatable="yes">Music</property>
+              <property name="icon-name">folder-music-symbolic</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwSidebarItem">
+              <property name="title" translatable="yes">Pictures</property>
+              <property name="icon-name">folder-pictures-symbolic</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwSidebarItem">
+              <property name="title" translatable="yes">Videos</property>
+              <property name="icon-name">folder-videos-symbolic</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwSidebarSection">
+          <child>
+            <object class="AdwSidebarItem">
+              <property name="title" translatable="yes">Trash</property>
+              <property name="icon-name">user-trash-symbolic</property>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+    ```
+    
+    ## CSS nodes
+    
+    [adw.sidebar.Sidebar] has a main CSS node with the name `sidebar`.
+    
+    Internally, it's using a [gtk.list_box.ListBox] with the
+    [`.navigation-sidebar`](style-classes.html#sidebars) style class in sidebar
+    mode, or an [adw.preferences_page.PreferencesPage] in page mode.
+    
+    ## Accessibility
+    
+    [adw.sidebar.Sidebar] uses the [gtk.types.AccessibleRole.Generic] role.
+*/
+struct AdwSidebar;
+
+/** */
+struct AdwSidebarClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    An item within [adw.sidebar_section.SidebarSection].
+    
+    Sidebar items must have a title, set via [adw.sidebar_item.SidebarItem.title].
+    
+    Sidebar items should, but are not required to, have an icon. Icons can be set
+    from an icon name, via [adw.sidebar_item.SidebarItem.iconName], or a
+    [gdk.paintable.Paintable], via [adw.sidebar_item.SidebarItem.iconPaintable].
+    
+    Items can also have subtitles, set with the [adw.sidebar_item.SidebarItem.subtitle]
+    property. Subtitles should be used sparingly.
+    
+    To add a tooltip, use [adw.sidebar_item.SidebarItem.tooltip]. Tooltips always use
+    Pango markup.
+    
+    Items can have an arbitrary suffix widget, set with the
+    [adw.sidebar_item.SidebarItem.suffix] properties. It will be displayed at the end of
+    its row, or before the arrow in the [adw.types.SidebarMode.Page] mode.
+    
+    To hide or disable the item, use the [adw.sidebar_item.SidebarItem.visible] and
+    [adw.sidebar_item.SidebarItem.enabled] properties respectively.
+    
+    To access the items's section, use [adw.sidebar_item.SidebarItem.section].
+    
+    It's also possible to access the index of the item in both the section and
+    the sidebar, using [adw.sidebar_item.SidebarItem.getSectionIndex] and
+    [adw.sidebar_item.SidebarItem.getIndex] respectively.
+    
+    Dragging content over sidebar items activates them by default. To disable
+    this behavior, set [adw.sidebar_item.SidebarItem.dragMotionActivate] to `FALSE`.
+    
+    [adw.sidebar_item.SidebarItem] is derivable, and applications that need to associate each
+    page with data can store it in the items themselves  this way.
+*/
+struct AdwSidebarItem
+{
+  /** */
+  GObject parentInstance;
+}
+
+/** */
+struct AdwSidebarItemClass
+{
+  /**
+      The parent class
+  */
+  GObjectClass parentClass;
+
+  /** */
+  void*[4] padding;
+}
+
+/**
+    A section within [adw.sidebar.Sidebar].
+    
+    [adw.sidebar_section.SidebarSection] contains [adw.sidebar_item.SidebarItem] objects.
+    
+    Section can optionally have a title, set with the
+    [adw.sidebar_section.SidebarSection.title] property. If a title is not set, the section
+    will have a separator in front of it, or just spacing in the
+    [adw.types.SidebarMode.Page] mode.
+    
+    To add items, use [adw.sidebar_section.SidebarSection.append],
+    [adw.sidebar_section.SidebarSection.prepend] or [adw.sidebar_section.SidebarSection.insert].
+    
+    To remove items, use [adw.sidebar_section.SidebarSection.remove] or
+    [adw.sidebar_section.SidebarSection.removeAll].
+    
+    To inspect the items, use [adw.sidebar_section.SidebarSection.getItem] or
+    [adw.sidebar_section.SidebarSection.items].
+    
+    To get the sidebar the section is in, use[adw.sidebar_section.SidebarSection.sidebar].
+    
+    ## Binding models
+    
+    [adw.sidebar_section.SidebarSection] can show items from a provided [gio.list_model.ListModel],
+    using [adw.sidebar_section.SidebarSection.bindModel]. It works the same way as
+    [gtk.list_box.ListBox.bindModel], except the provided function creates an
+    [adw.sidebar_item.SidebarItem] rather than a [gtk.list_box_row.ListBoxRow].
+    
+    While a model is bound, adding or removing items manually is not allowed.
+    Inspecting them is still allowed, but discouraged.
+    
+    ## [adw.sidebar_section.SidebarSection] as [gtk.buildable.Buildable]
+    
+    [adw.sidebar_section.SidebarSection] allows adding items as children.
+    
+    Example of an [adw.sidebar_section.SidebarSection] UI definition:
+    
+    ```xml
+    <object class="AdwSidebarSection">
+      <property name="title" translatable="yes">Places</property>
+      <child>
+        <object class="AdwSidebarItem">
+          <property name="title" translatable="yes">Music</property>
+          <property name="icon-name">folder-music-symbolic</property>
+        </object>
+      </child>
+      <child>
+        <object class="AdwSidebarItem">
+          <property name="title" translatable="yes">Pictures</property>
+          <property name="icon-name">folder-pictures-symbolic</property>
+        </object>
+      </child>
+      <child>
+        <object class="AdwSidebarItem">
+          <property name="title" translatable="yes">Videos</property>
+          <property name="icon-name">folder-videos-symbolic</property>
+        </object>
+      </child>
+    </object>
+    ```
+    
+    Result:
+    
+    <picture>
+      <source srcset="sidebar-section-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="sidebar-section.png" alt="sidebar-section">
+    </picture>
+*/
+struct AdwSidebarSection;
+
+/** */
+struct AdwSidebarSectionClass
+{
+  /** */
+  GObjectClass parentClass;
+}
 
 /**
     An [adw.action_row.ActionRow] with an embedded spin button.
@@ -3389,7 +4581,7 @@ struct AdwPropertyAnimationTargetClass;
     ## Accessibility
     
     [adw.spin_row.SpinRow] uses an internal [gtk.spin_button.SpinButton] with the
-    [gtk.types.AccessibleRole.SpinButton] role.
+    `enum@Gtk.AccessibleRole.spin-button` role.
 */
 struct AdwSpinRow;
 
@@ -3398,6 +4590,93 @@ struct AdwSpinRowClass
 {
   /** */
   AdwActionRowClass parentClass;
+}
+
+/**
+    A widget showing a loading spinner.
+    
+    <picture>
+      <source srcset="spinner-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="spinner.png" alt="spinner">
+    </picture>
+    
+    The size of the spinner depends on the available size, never smaller than
+    16×16 pixels and never larger than 64×64 pixels.
+    
+    Use the [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
+    properties in combination with [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] for fine sizing control.
+    
+    For example, the following snippet shows the spinner at 48×48 pixels:
+    
+    ```xml
+    <object class="AdwSpinner">
+      <property name="halign">center</property>
+      <property name="valign">center</property>
+      <property name="width-request">48</property>
+      <property name="height-request">48</property>
+    </object>
+    ```
+    
+    See [adw.spinner_paintable.SpinnerPaintable] for cases where using a widget is impractical or
+    impossible, such as [adw.status_page.StatusPage.paintable].
+    
+    ## CSS nodes
+    
+    [adw.spinner.Spinner] has a single node with the name `image` and the style class
+    `.spinner`.
+    
+    ## Accessibility
+    
+    [adw.spinner.Spinner] uses the `enum@Gtk.AccessibleRole.progress-bar` role.
+*/
+struct AdwSpinner;
+
+/** */
+struct AdwSpinnerClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    A paintable showing a loading spinner.
+    
+    <picture>
+      <source srcset="spinner-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="spinner.png" alt="spinner">
+    </picture>
+    
+    [adw.spinner_paintable.SpinnerPaintable] size varies depending on the available space, but is
+    capped at 64×64 pixels.
+    
+    To be able to animate, [adw.spinner_paintable.SpinnerPaintable] needs a widget. It will be
+    animated according to that widget's frame clock, and only if that widget is
+    mapped. Ideally it should be the same widget the paintable is displayed in,
+    but that's not a requirement.
+    
+    Most applications should be using [adw.spinner.Spinner] instead.
+    [adw.spinner_paintable.SpinnerPaintable] is provided for the cases where using a widget is
+    impractical or impossible, such as [adw.status_page.StatusPage.paintable]:
+    
+    ```xml
+    <object class="AdwStatusPage" id="status_page">
+      <property name="paintable">
+        <object class="AdwSpinnerPaintable">
+          <property name="widget">status_page</property>
+        </object>
+      </property>
+      <!-- ... -->
+    </object>
+    ```
+*/
+struct AdwSpinnerPaintable;
+
+/** */
+struct AdwSpinnerPaintableClass
+{
+  /** */
+  GObjectClass parentClass;
 }
 
 /**
@@ -3433,6 +4712,17 @@ struct AdwSpinRowClass
     The main CSS node will contain the `.image-button` or `.text-button` style
     classes matching the button contents. The nested button nodes will never
     contain them.
+    
+    ## Style classes
+    
+    [adw.split_button.SplitButton] can use some of the same style classes as [gtk.button.Button]:
+    
+    - [`.suggested-action`](style-classes.html#suggested-action)
+    - [`.destructive-action`](style-classes.html#destructive-action)
+    - [`.flat`](style-classes.html#flat)
+    - [`.raised`](style-classes.html#raised)
+    
+    Other style classes, like `.pill`, cannot be used.
     
     ## Accessibility
     
@@ -3583,9 +4873,21 @@ struct AdwSqueezerPageClass
     
     [adw.status_page.StatusPage] has a main CSS node with name `statuspage`.
     
+    When setting an [adw.spinner_paintable.SpinnerPaintable] as [adw.status_page.StatusPage.paintable],
+    the main nodes gains the `.spinner` style class for a more compact
+    appearance.
+    
+    ## Style classes
+    
     [adw.status_page.StatusPage] can use the
     [`.compact`](style-classes.html#compact-status-page) style class for when it
-    needs to fit into a small space such a sidebar or a popover.
+    needs to fit into a small space such a sidebar or a popover, similar to when
+    using a spinner as the paintable.
+    
+    <picture>
+      <source srcset="status-page-compact-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="status-page-compact.png" alt="status-page-compact">
+    </picture>
 */
 struct AdwStatusPage;
 
@@ -3600,11 +4902,13 @@ struct AdwStatusPageClass
     A class for managing application-wide styling.
     
     [adw.style_manager.StyleManager] provides a way to query and influence the application
-    styles, such as whether to use dark or high contrast appearance.
+    styles, such as whether to use dark style, the system accent color or high
+    contrast appearance.
     
     It allows to set the color scheme via the
     [adw.style_manager.StyleManager.colorScheme] property, and to query the current
-    appearance, as well as whether a system-wide color scheme preference exists.
+    appearance, as well as whether a system-wide color scheme and accent color
+    preferences exists.
 */
 struct AdwStyleManager;
 
@@ -3744,9 +5048,40 @@ struct AdwSwitchRowClass
     them. Pinned tabs always stay visible and aren't a part of the scrollable
     area.
     
+    ## Drag-and-Drop
+    
+    [adw.tab_bar.TabBar] tabs can have an additional drop target for arbitrary content.
+    
+    Use [adw.tab_bar.TabBar.setupExtraDropTarget] to set it up, specifying the
+    supported content types and drag actions, then connect to
+    [adw.tab_bar.TabBar.extraDragDrop] to handle a drop.
+    
+    In some cases, it may be necessary to determine the used action based on the
+    content. In that case, set [adw.tab_bar.TabBar.extraDragPreload] to `TRUE`
+    and connect to [adw.tab_bar.TabBar.extraDragValue] signal, then return the
+    action from its handler. To access this action from the
+    [adw.tab_bar.TabBar.extraDragDrop] handler, use the
+    [adw.tab_bar.TabBar.extraDragPreferredAction] property.
+    
+    [adw.tab_bar.TabBar.extraDragValue] is also always emitted when starting to
+    hover an item, with a `NULL` value. This happens even when
+    [adw.tab_bar.TabBar.extraDragPreload] is `FALSE`.
+    
     ## CSS nodes
     
     [adw.tab_bar.TabBar] has a single CSS node with name `tabbar`.
+    
+    ## Style classes
+    
+    By default [adw.tab_bar.TabBar] look like a part of an [adw.header_bar.HeaderBar] and is intended
+    to be used directly attached to one or used as a [adw.toolbar_view.ToolbarView] toolbar.
+    The [`.inline`](style-classes.html#inline) style class removes its background,
+    so that it can be used in different contexts instead.
+    
+    <picture>
+      <source srcset="tab-bar-inline-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="tab-bar-inline.png" alt="tab-bar-inline">
+    </picture>
 */
 struct AdwTabBar;
 
@@ -3844,6 +5179,26 @@ struct AdwTabButtonClass
     If search and window buttons are disabled, and secondary menu is not set, the
     header bar will be hidden.
     
+    ## Drag-and-Drop
+    
+    [adw.tab_overview.TabOverview] thumbnails can have an additional drop target for arbitrary
+    content.
+    
+    Use [adw.tab_overview.TabOverview.setupExtraDropTarget] to set it up, specifying the
+    supported content types and drag actions, then connect to
+    [adw.tab_overview.TabOverview.extraDragDrop] to handle a drop.
+    
+    In some cases, it may be necessary to determine the used action based on the
+    content. In that case, set [adw.tab_overview.TabOverview.extraDragPreload] to
+    `TRUE` and connect to [adw.tab_overview.TabOverview.extraDragValue] signal, then
+    return the action from its handler. To access this action from the
+    [adw.tab_overview.TabOverview.extraDragDrop] handler, use the
+    [adw.tab_overview.TabOverview.extraDragPreferredAction] property.
+    
+    [adw.tab_overview.TabOverview.extraDragValue] is also always emitted when starting to
+    hover an item, with a `NULL` value. This happens even when
+    [adw.tab_overview.TabOverview.extraDragPreload] is `FALSE`.
+    
     ## Actions
     
     [adw.tab_overview.TabOverview] defines the `overview.open` and `overview.close` actions for
@@ -3915,8 +5270,8 @@ struct AdwTabPageClass
     
     ## Accessibility
     
-    [adw.tab_view.TabView] uses the [gtk.types.AccessibleRole.TabPanel] for the tab pages which
-    are the accessible parent objects of the child widgets.
+    [adw.tab_view.TabView] uses the `enum@Gtk.AccessibleRole.tab-panel` role for the tab
+    pages which are the accessible parent objects of the child widgets.
 */
 struct AdwTabView;
 
@@ -4094,6 +5449,9 @@ struct AdwToastClass
     main child, on top of which it can display a [adw.toast.Toast], overlaid.
     Toasts can be shown with [adw.toast_overlay.ToastOverlay.addToast].
     
+    Use [adw.toast_overlay.ToastOverlay.dismissAll] to dismiss all toasts at once, or
+    [adw.toast.Toast.dismiss] to dismiss a single toast.
+    
     See [adw.toast.Toast] for details.
     
     ## CSS nodes
@@ -4121,12 +5479,135 @@ struct AdwToastClass
     
     ## Accessibility
     
-    [adw.toast_overlay.ToastOverlay] uses the `GTK_ACCESSIBLE_ROLE_TAB_GROUP` role.
+    [adw.toast_overlay.ToastOverlay] uses the [gtk.types.AccessibleRole.Group] role.
 */
 struct AdwToastOverlay;
 
 /** */
 struct AdwToastOverlayClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    A toggle within [adw.toggle_group.ToggleGroup].
+    
+    [adw.toggle.Toggle] can optionally have a name, set with [adw.toggle.Toggle.name].
+    If the name is set, [adw.toggle_group.ToggleGroup.activeName] can be used to access
+    toggles instead of index.
+*/
+struct AdwToggle;
+
+/** */
+struct AdwToggleClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    A group of exclusive toggles.
+    
+    <picture>
+      <source srcset="toggle-group-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="toggle-group.png" alt="toggle-group">
+    </picture>
+    
+    [adw.toggle_group.ToggleGroup] presents a set of exclusive toggles, represented as
+    [adw.toggle.Toggle] objects. Each toggle can display an icon, a label, an icon
+    and a label, or a custom child.
+    
+    Toggles are indexed by their position, with the first toggle being equivalent
+    to 0, and so on. Use the [adw.toggle_group.ToggleGroup.active] to get that position.
+    
+    Toggles can also have optional names, set via the [adw.toggle.Toggle.name]
+    property. The name of the active toggle can be accessed via the
+    [adw.toggle_group.ToggleGroup.activeName] property.
+    
+    [adw.toggle.Toggle] objects can be retrieved via their index or name, using
+    [adw.toggle_group.ToggleGroup.getToggle] or [adw.toggle_group.ToggleGroup.getToggleByName]
+    respectively. [adw.toggle_group.ToggleGroup] also provides a [gtk.selection_model.SelectionModel] of
+    its toggles via the [adw.toggle_group.ToggleGroup.toggles] property.
+    
+    [adw.toggle_group.ToggleGroup] is orientable, and the toggles can be displayed horizontally
+    or vertically. This is mostly useful for icon-only toggles.
+    
+    Use the [adw.toggle_group.ToggleGroup.homogeneous] property to make the toggles take
+    the same size, and the [adw.toggle_group.ToggleGroup.canShrink] to control whether
+    the toggles can ellipsize.
+    
+    Example of an [adw.toggle_group.ToggleGroup] UI definition:
+    
+    ```xml
+     <object class="AdwToggleGroup">
+       <property name="active-name">picture</property>
+       <child>
+         <object class="AdwToggle">
+           <property name="icon-name">camera-photo-symbolic</property>
+           <property name="tooltip" translatable="yes">Picture Mode</property>
+           <property name="name">picture</property>
+         </object>
+       </child>
+       <child>
+         <object class="AdwToggle">
+           <property name="icon-name">camera-video-symbolic</property>
+           <property name="tooltip" translatable="yes">Recording Mode</property>
+           <property name="name">recording</property>
+         </object>
+       </child>
+     </object>
+    ```
+    
+    See also: [adw.inline_view_switcher.InlineViewSwitcher].
+    
+    ## CSS nodes
+    
+    [adw.toggle_group.ToggleGroup] has a main CSS node with the name `toggle-group`.
+    
+    Its toggles have CSS nodes with the name `toggle`, and its separators have nodes
+    with the name `separator`.
+    
+    Toggle nodes will have a different style classes depending on their content:
+    `.text-button` for labels, `.image-button` for icons, `.image-text-button`
+    for both or no style class for custom children.
+    
+    The hidden separators use the `.hidden` style class.
+    
+    ## Style classes
+    
+    [adw.toggle_group.ToggleGroup] can use the [`.flat`](style-classes.html#flat_1) style class
+    to remove its background and make it look like a group of buttons.
+    
+    <picture>
+      <source srcset="toggle-group-flat-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="toggle-group-flat.png" alt="toggle-group-flat">
+    </picture>
+    
+    It can also use the [`.round`](style-classes.html#round) style class to make
+    its toggles and the group itself rounded.
+    
+    <picture>
+      <source srcset="toggle-group-round-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="toggle-group-round.png" alt="toggle-group-round">
+    </picture>
+    
+    They can also be combined with each other.
+    
+    <picture>
+      <source srcset="toggle-group-flat-round-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="toggle-group-flat-round.png" alt="toggle-group-flat-round">
+    </picture>
+    
+    ## Accessibility
+    
+    [adw.toggle_group.ToggleGroup] uses the `enum@Gtk.AccessibleRole.radio-group` role. Its
+    toggles use the [gtk.types.AccessibleRole.Radio] role.
+*/
+struct AdwToggleGroup;
+
+/** */
+struct AdwToggleGroupClass
 {
   /** */
   GtkWidgetClass parentClass;
@@ -4248,7 +5729,8 @@ struct AdwToolbarViewClass
     It is typically used to hold an application's main views.
     
     It doesn't provide a way to transition between pages.
-    Instead, a separate widget such as [adw.view_switcher.ViewSwitcher] can be used with
+    Instead, a separate widget such as [adw.view_switcher.ViewSwitcher],
+    [adw.inline_view_switcher.InlineViewSwitcher] or [adw.view_switcher_sidebar.ViewSwitcherSidebar] can be used with
     [adw.view_stack.ViewStack] to provide this functionality.
     
     [adw.view_stack.ViewStack] pages can have a title, an icon, an attention request, and a
@@ -4258,7 +5740,14 @@ struct AdwToolbarViewClass
     [adw.view_stack_page.ViewStackPage.needsAttention], and
     [adw.view_stack_page.ViewStackPage.badgeNumber] properties.
     
-    Unlike [gtk.stack.Stack], transitions between views are not animated.
+    [adw.view_stack.ViewStack] pages can also be grouped into sections, using the
+    [adw.view_stack_page.ViewStackPage.startsSection] and
+    [adw.view_stack_page.ViewStackPage.sectionTitle] properties. Currently, only
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar] displays groups.
+    
+    Unlike [gtk.stack.Stack], transitions between views can only be animated via
+    a crossfade and size changes are always interpolated. Animations are disabled
+    by default. Use [adw.view_stack.ViewStack.enableTransitions] to enable them.
     
     [adw.view_stack.ViewStack] maintains a [adw.view_stack_page.ViewStackPage] object for each added child,
     which holds additional per-child properties. You obtain the
@@ -4294,8 +5783,8 @@ struct AdwToolbarViewClass
     
     ## Accessibility
     
-    [adw.view_stack.ViewStack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack pages
-    which are the accessible parent objects of the child widgets.
+    [adw.view_stack.ViewStack] uses the `enum@Gtk.AccessibleRole.tab-panel` for the stack
+    pages which are the accessible parent objects of the child widgets.
 */
 struct AdwViewStack;
 
@@ -4355,8 +5844,6 @@ struct AdwViewStackPagesClass
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <child>
         <object class="AdwBreakpoint">
           <condition>max-width: 550sp</condition>
@@ -4401,8 +5888,11 @@ struct AdwViewStackPagesClass
     
     ## Accessibility
     
-    [adw.view_switcher.ViewSwitcher] uses the [gtk.types.AccessibleRole.TabList] role and uses the
-    [gtk.types.AccessibleRole.Tab] for its buttons.
+    [adw.view_switcher.ViewSwitcher] uses the `enum@Gtk.AccessibleRole.tab-list` role and the
+    [gtk.types.AccessibleRole.Tab] role for its buttons.
+    
+    See also: [adw.view_switcher_bar.ViewSwitcherBar], [adw.inline_view_switcher.InlineViewSwitcher],
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar].
 */
 struct AdwViewSwitcher;
 
@@ -4426,8 +5916,6 @@ struct AdwViewSwitcher;
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <child>
         <object class="AdwBreakpoint">
           <condition>max-width: 550sp</condition>
@@ -4468,6 +5956,9 @@ struct AdwViewSwitcher;
     ## CSS nodes
     
     [adw.view_switcher_bar.ViewSwitcherBar] has a single CSS node with name` viewswitcherbar`.
+    
+    See also: [adw.view_switcher.ViewSwitcher], [adw.inline_view_switcher.InlineViewSwitcher],
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar].
 */
 struct AdwViewSwitcherBar;
 
@@ -4480,6 +5971,60 @@ struct AdwViewSwitcherBarClass
 
 /** */
 struct AdwViewSwitcherClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    An adaptive sidebar that controls an [adw.view_stack.ViewStack].
+    
+    <picture>
+      <source srcset="view-switcher-sidebar-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="view-switcher-sidebar.png" alt="view-switcher-sidebar">
+    </picture>
+    
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar] is a view switcher implemented using a
+    [adw.sidebar.Sidebar], in a similar fashion to [gtk.stack_sidebar.StackSidebar].
+    
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar] items have an icon, a label, as well as an unread
+    dot or a badge.
+    
+    Unlike other switchers, [adw.view_switcher_sidebar.ViewSwitcherSidebar] supports grouping pages into
+    sections, using the [adw.view_stack_page.ViewStackPage.startsSection] and
+    [adw.view_stack_page.ViewStackPage.sectionTitle] properties.
+    
+    Like [adw.sidebar.Sidebar], [adw.view_switcher_sidebar.ViewSwitcherSidebar] is adaptive and can behave as
+    a sidebar or a page, via the [adw.view_switcher_sidebar.ViewSwitcherSidebar.mode] property.
+    
+    <picture>
+      <source srcset="view-switcher-sidebar-modes-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="view-switcher-sidebar-modes.png" alt="view-switcher-sidebar-modes">
+    </picture>
+    
+    Connect to the [adw.view_switcher_sidebar.ViewSwitcherSidebar.activated] signal to run code when
+    an item has been activated. This can be used to toggle the visible pane when
+    used in a split view.
+    
+    Like [adw.sidebar.Sidebar], [adw.view_switcher_sidebar.ViewSwitcherSidebar] supports filtering items via the
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar.filter] property.
+    
+    Use [adw.view_switcher_sidebar.ViewSwitcherSidebar.placeholder] to provide an empty state
+    widget. It will be shown when all items have been filtered out, or the
+    sidebar has no items otherwise.
+    
+    ## CSS nodes
+    
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar] has a single CSS node with name
+    `view-switcher-sidebar`.
+    
+    See also: [adw.view_switcher.ViewSwitcher], [adw.view_switcher_bar.ViewSwitcherBar],
+    [adw.inline_view_switcher.InlineViewSwitcher].
+*/
+struct AdwViewSwitcherSidebar;
+
+/** */
+struct AdwViewSwitcherSidebarClass
 {
   /** */
   GtkWidgetClass parentClass;
@@ -4602,8 +6147,6 @@ struct AdwViewSwitcherTitleClass
     
     ```xml
     <object class="AdwWindow">
-      <property name="width-request">360</property>
-      <property name="height-request">200</property>
       <property name="content">
         <object class="AdwToolbarView">
           <child type="top">
@@ -4629,9 +6172,16 @@ struct AdwViewSwitcherTitleClass
     </object>
     ```
     
-    Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.window.Window] doesn't have a
-    minimum size, and [gtk.widget.Widget.widthRequest] and
-    [gtk.widget.Widget.heightRequest] properties must be set manually.
+    When breakpoints are used, the minimum size must be larger than the smallest
+    UI state. [adw.window.Window] defaults to the minimum size of 360×200 px. If that's
+    too small, set the [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties manually.
+    
+    ## Adaptive Preview
+    
+    [adw.window.Window] has a debug tool called adaptive preview. It can be opened from
+    GTK Inspector or by pressing <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>,
+    and controlled via the [adw.window.Window.adaptivePreview] property.
 */
 struct AdwWindow
 {
@@ -4673,5 +6223,136 @@ struct AdwWindowTitleClass
   GtkWidgetClass parentClass;
 }
 
+/**
+    A box-like widget that can wrap into multiple lines.
+    
+    <picture>
+      <source srcset="wrap-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="wrap-box.png" alt="wrap-box">
+    </picture>
+    
+    [adw.wrap_box.WrapBox] is similar to [gtk.box.Box], but can wrap lines when the
+    widgets cannot fit otherwise. Unlike [gtk.flow_box.FlowBox], the children aren't
+    arranged into a grid and behave more like words in a wrapping label.
+    
+    Like [gtk.box.Box], [adw.wrap_box.WrapBox] is orientable and has spacing:
+    
+    - [adw.wrap_box.WrapBox.childSpacing] between children in the same line;
+    - [adw.wrap_box.WrapBox.lineSpacing] between lines.
+    
+    ::: note
+        Unlike [gtk.box.Box], [adw.wrap_box.WrapBox] cannot follow the CSS `border-spacing`
+        property.
+    
+    Use the [adw.wrap_box.WrapBox.naturalLineLength] property to determine the
+    layout's natural size, e.g. when using it in a [gtk.popover.Popover].
+    
+    Normally, a horizontal [adw.wrap_box.WrapBox] wraps left to right and top to bottom
+    for left-to-right languages. Both of these directions can be reversed, using
+    the [adw.wrap_box.WrapBox.packDirection] and [adw.wrap_box.WrapBox.wrapReverse]
+    properties. Additionally, the alignment of each line can be controlled with
+    the [adw.wrap_box.WrapBox.align_] property.
+    
+    Lines can be justified using the [adw.wrap_box.WrapBox.justify] property, filling
+    the entire line by either increasing child size or spacing depending on the
+    value. Set [adw.wrap_box.WrapBox.justifyLastLine] to justify the last line as
+    well.
+    
+    By default, [adw.wrap_box.WrapBox] wraps as soon as the previous line cannot fit any
+    more children without shrinking them past their natural size. Set
+    [adw.wrap_box.WrapBox.wrapPolicy] to [adw.types.WrapPolicy.Minimum] to only wrap
+    once all the children in the previous line have been shrunk to their minimum
+    size.
+    
+    To make each line take the same amount of space, set
+    [adw.wrap_box.WrapBox.lineHomogeneous] to `TRUE`.
+    
+    Spacing and natural line length can scale with the text scale factor, use the
+    [adw.wrap_box.WrapBox.childSpacingUnit], [adw.wrap_box.WrapBox.lineSpacingUnit]
+    and/or [adw.wrap_box.WrapBox.naturalLineLengthUnit] properties to enable that
+    behavior.
+    
+    See [adw.wrap_layout.WrapLayout].
+    
+    ## CSS nodes
+    
+    [adw.wrap_box.WrapBox] uses a single CSS node with name `wrap-box`.
+    
+    ## Accessibility
+    
+    [adw.wrap_box.WrapBox] uses the [gtk.types.AccessibleRole.Group] role.
+*/
+struct AdwWrapBox;
+
+/** */
+struct AdwWrapBoxClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
+/**
+    A box-like layout that can wrap into multiple lines.
+    
+    <picture>
+      <source srcset="wrap-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="wrap-box.png" alt="wrap-box">
+    </picture>
+    
+    [adw.wrap_layout.WrapLayout] is similar to [gtk.box_layout.BoxLayout], but can wrap lines when
+    the widgets cannot fit otherwise. Unlike [gtk.flow_box.FlowBox], the children
+    aren't arranged into a grid and behave more like words in a wrapping label.
+    
+    Like [gtk.box_layout.BoxLayout], [adw.wrap_layout.WrapLayout] is orientable and has spacing:
+    
+    - [adw.wrap_layout.WrapLayout.childSpacing] between children in the same line;
+    - [adw.wrap_layout.WrapLayout.lineSpacing] between lines.
+    
+    ::: note
+        Unlike [gtk.box_layout.BoxLayout], [adw.wrap_layout.WrapLayout] cannot follow the CSS
+        `border-spacing` property.
+    
+    Use the [adw.wrap_layout.WrapLayout.naturalLineLength] property to determine the
+    layout's natural size, e.g. when using it in a [gtk.popover.Popover].
+    
+    Normally, a horizontal [adw.wrap_layout.WrapLayout] wraps left to right and top to bottom
+    for left-to-right languages. Both of these directions can be reversed, using
+    the [adw.wrap_layout.WrapLayout.packDirection] and
+    [adw.wrap_layout.WrapLayout.wrapReverse] properties. Additionally, the alignment
+    of each line can be controlled with the [adw.wrap_layout.WrapLayout.align_] property.
+    
+    Lines can be justified using the [adw.wrap_layout.WrapLayout.justify] property,
+    filling the entire line by either increasing child size or spacing depending
+    on the value. Set [adw.wrap_layout.WrapLayout.justifyLastLine] to justify the last
+    line as well.
+    
+    By default, [adw.wrap_layout.WrapLayout] wraps as soon as the previous line cannot fit
+    any more children without shrinking them past their natural size. Set
+    [adw.wrap_layout.WrapLayout.wrapPolicy] to [adw.types.WrapPolicy.Minimum] to only
+    wrap once all the children in the previous line have been shrunk to their
+    minimum size.
+    
+    To make each line take the same amount of space, set
+    [adw.wrap_layout.WrapLayout.lineHomogeneous] to `TRUE`.
+    
+    Spacing and natural line length can scale with the text scale factor, use the
+    [adw.wrap_layout.WrapLayout.childSpacingUnit],
+    [adw.wrap_layout.WrapLayout.lineSpacingUnit] and/or
+    [adw.wrap_layout.WrapLayout.naturalLineLengthUnit] properties to enable that
+    behavior.
+    
+    See [adw.wrap_box.WrapBox].
+*/
+struct AdwWrapLayout;
+
+/** */
+struct AdwWrapLayoutClass
+{
+  /** */
+  GtkLayoutManagerClass parentClass;
+}
+
 alias extern(C) void function(double value, void* userData) AdwAnimationTargetFunc;
+
+alias extern(C) AdwSidebarItem* function(GObject* item, void* userData) AdwSidebarSectionCreateItemFunc;
 

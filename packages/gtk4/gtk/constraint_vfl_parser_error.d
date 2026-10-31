@@ -13,7 +13,10 @@ struct ConstraintVflParserError
 {
   alias Enum = gtk.types.ConstraintVflParserError; ///
 
-  /** */
+  /**
+      Registers an error quark for VFL error parsing.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

@@ -106,7 +106,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   
       Params:
         attributes = a file attribute query string.
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied

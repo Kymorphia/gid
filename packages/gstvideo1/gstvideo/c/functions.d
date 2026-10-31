@@ -34,6 +34,7 @@ __gshared extern(C) nothrow
   GstEvent* function(const(char)* key, GstNavigationModifierType state) c_gst_navigation_event_new_key_release; ///
   GstEvent* function(int button, double x, double y, GstNavigationModifierType state) c_gst_navigation_event_new_mouse_button_press; ///
   GstEvent* function(int button, double x, double y, GstNavigationModifierType state) c_gst_navigation_event_new_mouse_button_release; ///
+  GstEvent* function(int button, double x, double y, GstNavigationModifierType state) c_gst_navigation_event_new_mouse_double_click; ///
   GstEvent* function(double x, double y, GstNavigationModifierType state) c_gst_navigation_event_new_mouse_move; ///
   GstEvent* function(double x, double y, double deltaX, double deltaY, GstNavigationModifierType state) c_gst_navigation_event_new_mouse_scroll; ///
   GstEvent* function(GstNavigationModifierType state) c_gst_navigation_event_new_touch_cancel; ///
@@ -155,6 +156,7 @@ __gshared extern(C) nothrow
   const(GstVideoInfo)* function(GstVideoConverter* convert) c_gst_video_converter_get_in_info; ///
   const(GstVideoInfo)* function(GstVideoConverter* convert) c_gst_video_converter_get_out_info; ///
   gboolean function(GstVideoConverter* convert, GstStructure* config) c_gst_video_converter_set_config; ///
+  gboolean function(GstVideoConverter* convert, GstBuffer* src, GstBuffer* dest) c_gst_video_converter_transform_metas; ///
   GstVideoConverter* function(const(GstVideoInfo)* inInfo, const(GstVideoInfo)* outInfo, GstStructure* config) c_gst_video_converter_new; ///
   GstVideoConverter* function(const(GstVideoInfo)* inInfo, const(GstVideoInfo)* outInfo, GstStructure* config, GstTaskPool* pool) c_gst_video_converter_new_with_pool; ///
 
@@ -215,10 +217,15 @@ __gshared extern(C) nothrow
   void function(GstVideoDither* dither, void* line, uint x, uint y, uint width) c_gst_video_dither_line; ///
   GstVideoDither* function(GstVideoDitherMethod method, GstVideoDitherFlags flags, GstVideoFormat format, uint* quantizer, uint width) c_gst_video_dither_new; ///
 
+  // VideoDmabufPool
+  GType function() c_gst_video_dmabuf_pool_get_type; ///
+  GstBufferPool* function() c_gst_video_dmabuf_pool_new; ///
+
   // VideoEncoder
   GType function() c_gst_video_encoder_get_type; ///
   GstBuffer* function(GstVideoEncoder* encoder, size_t size) c_gst_video_encoder_allocate_output_buffer; ///
   GstFlowReturn function(GstVideoEncoder* encoder, GstVideoCodecFrame* frame, size_t size) c_gst_video_encoder_allocate_output_frame; ///
+  void function(GstVideoEncoder* encoder, GstVideoCodecFrame* frame) c_gst_video_encoder_drop_frame; ///
   GstFlowReturn function(GstVideoEncoder* encoder, GstVideoCodecFrame* frame) c_gst_video_encoder_finish_frame; ///
   GstFlowReturn function(GstVideoEncoder* encoder, GstVideoCodecFrame* frame) c_gst_video_encoder_finish_subframe; ///
   void function(GstVideoEncoder* encoder, GstAllocator** allocator, GstAllocationParams* params) c_gst_video_encoder_get_allocator; ///
@@ -233,6 +240,7 @@ __gshared extern(C) nothrow
   void function(GstVideoEncoder* encoder, const(GstTagList)* tags, GstTagMergeMode mode) c_gst_video_encoder_merge_tags; ///
   gboolean function(GstVideoEncoder* encoder) c_gst_video_encoder_negotiate; ///
   GstCaps* function(GstVideoEncoder* enc, GstCaps* caps, GstCaps* filter) c_gst_video_encoder_proxy_getcaps; ///
+  void function(GstVideoEncoder* encoder, GstVideoCodecFrame* frame) c_gst_video_encoder_release_frame; ///
   void function(GstVideoEncoder* encoder, GList* headers) c_gst_video_encoder_set_headers; ///
   void function(GstVideoEncoder* encoder, GstClockTime minLatency, GstClockTime maxLatency) c_gst_video_encoder_set_latency; ///
   void function(GstVideoEncoder* encoder, GstClockTime interval) c_gst_video_encoder_set_min_force_key_unit_interval; ///
@@ -298,11 +306,20 @@ __gshared extern(C) nothrow
   gboolean function(GstVideoMeta* meta, size_t* planeSize) c_gst_video_meta_get_plane_size; ///
   gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info, void** data, int* stride, GstMapFlags flags) c_gst_video_meta_map; ///
   gboolean function(GstVideoMeta* meta, GstVideoAlignment alignment) c_gst_video_meta_set_alignment; ///
+  gboolean function(GstVideoMeta* meta, const(GstVideoAlignment)* alignment) c_gst_video_meta_set_alignment_full; ///
   gboolean function(GstVideoMeta* meta, uint plane, GstMapInfo* info) c_gst_video_meta_unmap; ///
   const(GstMetaInfo)* function() c_gst_video_meta_get_info; ///
 
   // VideoMetaTransform
   GQuark function() c_gst_video_meta_transform_scale_get_quark; ///
+
+  // VideoMetaTransformMatrix
+  void function(GstVideoMetaTransformMatrix* trans, const(GstVideoInfo)* inInfo, const(GstVideoRectangle)* inRectangle, const(GstVideoInfo)* outInfo, const(GstVideoRectangle)* outRectangle) c_gst_video_meta_transform_matrix_init; ///
+  gboolean function(const(GstVideoMetaTransformMatrix)* transform, int* x, int* y) c_gst_video_meta_transform_matrix_point; ///
+  gboolean function(const(GstVideoMetaTransformMatrix)* transform, int* x, int* y) c_gst_video_meta_transform_matrix_point_clipped; ///
+  gboolean function(const(GstVideoMetaTransformMatrix)* transform, GstVideoRectangle* rect) c_gst_video_meta_transform_matrix_rectangle; ///
+  gboolean function(const(GstVideoMetaTransformMatrix)* transform, GstVideoRectangle* rect) c_gst_video_meta_transform_matrix_rectangle_clipped; ///
+  GQuark function() c_gst_video_meta_transform_matrix_get_quark; ///
 
   // VideoMultiviewFlagsSet
   GType function() c_gst_video_multiview_flagset_get_type; ///
@@ -458,7 +475,7 @@ __gshared extern(C) nothrow
   GstVideoMeta* function(GstBuffer* buffer) c_gst_buffer_get_video_meta; ///
   GstVideoMeta* function(GstBuffer* buffer, int id) c_gst_buffer_get_video_meta_id; ///
   GstVideoRegionOfInterestMeta* function(GstBuffer* buffer, int id) c_gst_buffer_get_video_region_of_interest_meta_id; ///
-  gboolean function(GstStructure* config, GstVideoAlignment* align_) c_gst_buffer_pool_config_get_video_alignment; ///
+  gboolean function(const(GstStructure)* config, GstVideoAlignment* align_) c_gst_buffer_pool_config_get_video_alignment; ///
   void function(GstStructure* config, const(GstVideoAlignment)* align_) c_gst_buffer_pool_config_set_video_alignment; ///
   gboolean function(GstMessage* msg) c_gst_is_video_overlay_prepare_window_handle_message; ///
   GType function() c_gst_video_afd_meta_api_get_type; ///
@@ -478,6 +495,8 @@ __gshared extern(C) nothrow
   GstSample* function(GstSample* sample, const(GstCaps)* toCaps, GstClockTime timeout, GError** _err) c_gst_video_convert_sample; ///
   void function(GstSample* sample, const(GstCaps)* toCaps, GstClockTime timeout, GstVideoConvertSampleCallback callback, void* userData, GDestroyNotify destroyNotify) c_gst_video_convert_sample_async; ///
   GType function() c_gst_video_crop_meta_api_get_type; ///
+  uint function(GstVideoFormat format, ulong* modifier) c_gst_video_dma_drm_format_from_gst_format; ///
+  GstVideoFormat function(uint fourcc, ulong modifier) c_gst_video_dma_drm_format_to_gst_format; ///
   uint function(GstVideoFormat format) c_gst_video_dma_drm_fourcc_from_format; ///
   uint function(const(char)* formatStr, ulong* modifier) c_gst_video_dma_drm_fourcc_from_string; ///
   GstVideoFormat function(uint fourcc) c_gst_video_dma_drm_fourcc_to_format; ///
@@ -618,6 +637,9 @@ alias gst_navigation_event_new_mouse_button_press = c_gst_navigation_event_new_m
 
 /** */
 alias gst_navigation_event_new_mouse_button_release = c_gst_navigation_event_new_mouse_button_release;
+
+/** */
+alias gst_navigation_event_new_mouse_double_click = c_gst_navigation_event_new_mouse_double_click;
 
 /** */
 alias gst_navigation_event_new_mouse_move = c_gst_navigation_event_new_mouse_move;
@@ -915,6 +937,9 @@ alias gst_video_converter_get_out_info = c_gst_video_converter_get_out_info;
 alias gst_video_converter_set_config = c_gst_video_converter_set_config;
 
 /** */
+alias gst_video_converter_transform_metas = c_gst_video_converter_transform_metas;
+
+/** */
 alias gst_video_converter_new = c_gst_video_converter_new;
 
 /** */
@@ -1075,6 +1100,14 @@ alias gst_video_dither_line = c_gst_video_dither_line;
 /** */
 alias gst_video_dither_new = c_gst_video_dither_new;
 
+// VideoDmabufPool
+
+/** */
+alias gst_video_dmabuf_pool_get_type = c_gst_video_dmabuf_pool_get_type;
+
+/** */
+alias gst_video_dmabuf_pool_new = c_gst_video_dmabuf_pool_new;
+
 // VideoEncoder
 
 /** */
@@ -1085,6 +1118,9 @@ alias gst_video_encoder_allocate_output_buffer = c_gst_video_encoder_allocate_ou
 
 /** */
 alias gst_video_encoder_allocate_output_frame = c_gst_video_encoder_allocate_output_frame;
+
+/** */
+alias gst_video_encoder_drop_frame = c_gst_video_encoder_drop_frame;
 
 /** */
 alias gst_video_encoder_finish_frame = c_gst_video_encoder_finish_frame;
@@ -1127,6 +1163,9 @@ alias gst_video_encoder_negotiate = c_gst_video_encoder_negotiate;
 
 /** */
 alias gst_video_encoder_proxy_getcaps = c_gst_video_encoder_proxy_getcaps;
+
+/** */
+alias gst_video_encoder_release_frame = c_gst_video_encoder_release_frame;
 
 /** */
 alias gst_video_encoder_set_headers = c_gst_video_encoder_set_headers;
@@ -1292,6 +1331,9 @@ alias gst_video_meta_map = c_gst_video_meta_map;
 alias gst_video_meta_set_alignment = c_gst_video_meta_set_alignment;
 
 /** */
+alias gst_video_meta_set_alignment_full = c_gst_video_meta_set_alignment_full;
+
+/** */
 alias gst_video_meta_unmap = c_gst_video_meta_unmap;
 
 /** */
@@ -1301,6 +1343,26 @@ alias gst_video_meta_get_info = c_gst_video_meta_get_info;
 
 /** */
 alias gst_video_meta_transform_scale_get_quark = c_gst_video_meta_transform_scale_get_quark;
+
+// VideoMetaTransformMatrix
+
+/** */
+alias gst_video_meta_transform_matrix_init = c_gst_video_meta_transform_matrix_init;
+
+/** */
+alias gst_video_meta_transform_matrix_point = c_gst_video_meta_transform_matrix_point;
+
+/** */
+alias gst_video_meta_transform_matrix_point_clipped = c_gst_video_meta_transform_matrix_point_clipped;
+
+/** */
+alias gst_video_meta_transform_matrix_rectangle = c_gst_video_meta_transform_matrix_rectangle;
+
+/** */
+alias gst_video_meta_transform_matrix_rectangle_clipped = c_gst_video_meta_transform_matrix_rectangle_clipped;
+
+/** */
+alias gst_video_meta_transform_matrix_get_quark = c_gst_video_meta_transform_matrix_get_quark;
 
 // VideoMultiviewFlagsSet
 
@@ -1760,6 +1822,12 @@ alias gst_video_convert_sample_async = c_gst_video_convert_sample_async;
 alias gst_video_crop_meta_api_get_type = c_gst_video_crop_meta_api_get_type;
 
 /** */
+alias gst_video_dma_drm_format_from_gst_format = c_gst_video_dma_drm_format_from_gst_format;
+
+/** */
+alias gst_video_dma_drm_format_to_gst_format = c_gst_video_dma_drm_format_to_gst_format;
+
+/** */
 alias gst_video_dma_drm_fourcc_from_format = c_gst_video_dma_drm_fourcc_from_format;
 
 /** */
@@ -1995,6 +2063,7 @@ shared static this()
   gidLink(cast(void**)&gst_navigation_event_new_key_release, "gst_navigation_event_new_key_release", libs);
   gidLink(cast(void**)&gst_navigation_event_new_mouse_button_press, "gst_navigation_event_new_mouse_button_press", libs);
   gidLink(cast(void**)&gst_navigation_event_new_mouse_button_release, "gst_navigation_event_new_mouse_button_release", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_mouse_double_click, "gst_navigation_event_new_mouse_double_click", libs);
   gidLink(cast(void**)&gst_navigation_event_new_mouse_move, "gst_navigation_event_new_mouse_move", libs);
   gidLink(cast(void**)&gst_navigation_event_new_mouse_scroll, "gst_navigation_event_new_mouse_scroll", libs);
   gidLink(cast(void**)&gst_navigation_event_new_touch_cancel, "gst_navigation_event_new_touch_cancel", libs);
@@ -2116,6 +2185,7 @@ shared static this()
   gidLink(cast(void**)&gst_video_converter_get_in_info, "gst_video_converter_get_in_info", libs);
   gidLink(cast(void**)&gst_video_converter_get_out_info, "gst_video_converter_get_out_info", libs);
   gidLink(cast(void**)&gst_video_converter_set_config, "gst_video_converter_set_config", libs);
+  gidLink(cast(void**)&gst_video_converter_transform_metas, "gst_video_converter_transform_metas", libs);
   gidLink(cast(void**)&gst_video_converter_new, "gst_video_converter_new", libs);
   gidLink(cast(void**)&gst_video_converter_new_with_pool, "gst_video_converter_new_with_pool", libs);
 
@@ -2176,10 +2246,15 @@ shared static this()
   gidLink(cast(void**)&gst_video_dither_line, "gst_video_dither_line", libs);
   gidLink(cast(void**)&gst_video_dither_new, "gst_video_dither_new", libs);
 
+  // VideoDmabufPool
+  gidLink(cast(void**)&gst_video_dmabuf_pool_get_type, "gst_video_dmabuf_pool_get_type", libs);
+  gidLink(cast(void**)&gst_video_dmabuf_pool_new, "gst_video_dmabuf_pool_new", libs);
+
   // VideoEncoder
   gidLink(cast(void**)&gst_video_encoder_get_type, "gst_video_encoder_get_type", libs);
   gidLink(cast(void**)&gst_video_encoder_allocate_output_buffer, "gst_video_encoder_allocate_output_buffer", libs);
   gidLink(cast(void**)&gst_video_encoder_allocate_output_frame, "gst_video_encoder_allocate_output_frame", libs);
+  gidLink(cast(void**)&gst_video_encoder_drop_frame, "gst_video_encoder_drop_frame", libs);
   gidLink(cast(void**)&gst_video_encoder_finish_frame, "gst_video_encoder_finish_frame", libs);
   gidLink(cast(void**)&gst_video_encoder_finish_subframe, "gst_video_encoder_finish_subframe", libs);
   gidLink(cast(void**)&gst_video_encoder_get_allocator, "gst_video_encoder_get_allocator", libs);
@@ -2194,6 +2269,7 @@ shared static this()
   gidLink(cast(void**)&gst_video_encoder_merge_tags, "gst_video_encoder_merge_tags", libs);
   gidLink(cast(void**)&gst_video_encoder_negotiate, "gst_video_encoder_negotiate", libs);
   gidLink(cast(void**)&gst_video_encoder_proxy_getcaps, "gst_video_encoder_proxy_getcaps", libs);
+  gidLink(cast(void**)&gst_video_encoder_release_frame, "gst_video_encoder_release_frame", libs);
   gidLink(cast(void**)&gst_video_encoder_set_headers, "gst_video_encoder_set_headers", libs);
   gidLink(cast(void**)&gst_video_encoder_set_latency, "gst_video_encoder_set_latency", libs);
   gidLink(cast(void**)&gst_video_encoder_set_min_force_key_unit_interval, "gst_video_encoder_set_min_force_key_unit_interval", libs);
@@ -2259,11 +2335,20 @@ shared static this()
   gidLink(cast(void**)&gst_video_meta_get_plane_size, "gst_video_meta_get_plane_size", libs);
   gidLink(cast(void**)&gst_video_meta_map, "gst_video_meta_map", libs);
   gidLink(cast(void**)&gst_video_meta_set_alignment, "gst_video_meta_set_alignment", libs);
+  gidLink(cast(void**)&gst_video_meta_set_alignment_full, "gst_video_meta_set_alignment_full", libs);
   gidLink(cast(void**)&gst_video_meta_unmap, "gst_video_meta_unmap", libs);
   gidLink(cast(void**)&gst_video_meta_get_info, "gst_video_meta_get_info", libs);
 
   // VideoMetaTransform
   gidLink(cast(void**)&gst_video_meta_transform_scale_get_quark, "gst_video_meta_transform_scale_get_quark", libs);
+
+  // VideoMetaTransformMatrix
+  gidLink(cast(void**)&gst_video_meta_transform_matrix_init, "gst_video_meta_transform_matrix_init", libs);
+  gidLink(cast(void**)&gst_video_meta_transform_matrix_point, "gst_video_meta_transform_matrix_point", libs);
+  gidLink(cast(void**)&gst_video_meta_transform_matrix_point_clipped, "gst_video_meta_transform_matrix_point_clipped", libs);
+  gidLink(cast(void**)&gst_video_meta_transform_matrix_rectangle, "gst_video_meta_transform_matrix_rectangle", libs);
+  gidLink(cast(void**)&gst_video_meta_transform_matrix_rectangle_clipped, "gst_video_meta_transform_matrix_rectangle_clipped", libs);
+  gidLink(cast(void**)&gst_video_meta_transform_matrix_get_quark, "gst_video_meta_transform_matrix_get_quark", libs);
 
   // VideoMultiviewFlagsSet
   gidLink(cast(void**)&gst_video_multiview_flagset_get_type, "gst_video_multiview_flagset_get_type", libs);
@@ -2439,6 +2524,8 @@ shared static this()
   gidLink(cast(void**)&gst_video_convert_sample, "gst_video_convert_sample", libs);
   gidLink(cast(void**)&gst_video_convert_sample_async, "gst_video_convert_sample_async", libs);
   gidLink(cast(void**)&gst_video_crop_meta_api_get_type, "gst_video_crop_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_dma_drm_format_from_gst_format, "gst_video_dma_drm_format_from_gst_format", libs);
+  gidLink(cast(void**)&gst_video_dma_drm_format_to_gst_format, "gst_video_dma_drm_format_to_gst_format", libs);
   gidLink(cast(void**)&gst_video_dma_drm_fourcc_from_format, "gst_video_dma_drm_fourcc_from_format", libs);
   gidLink(cast(void**)&gst_video_dma_drm_fourcc_from_string, "gst_video_dma_drm_fourcc_from_string", libs);
   gidLink(cast(void**)&gst_video_dma_drm_fourcc_to_format, "gst_video_dma_drm_fourcc_to_format", libs);

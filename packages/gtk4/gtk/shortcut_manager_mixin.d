@@ -10,8 +10,7 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
-    The [gtk.shortcut_manager.ShortcutManager] interface is used to implement
-    shortcut scopes.
+    An interface that is used to implement shortcut scopes.
     
     This is important for [gtk.native.Native] widgets that have their
     own surface, since the event controllers that are used to implement

@@ -12,7 +12,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.center_layout.CenterLayout] is a layout manager that manages up to three children.
+    Manages up to three children.
     
     The start widget is allocated at the start of the layout (left in
     left-to-right locales and right in right-to-left ones), and the end

@@ -16,7 +16,7 @@ import gtk.printer;
 import gtk.types;
 
 /**
-    A [gtk.print_job.PrintJob] object represents a job that is sent to a printer.
+    Represents a job that is sent to a printer.
     
     You only need to deal directly with print jobs if you use the
     non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
@@ -344,7 +344,8 @@ class PrintJob : gobject.object.ObjectWrap
       Sends the print job off to the printer.
   
       Params:
-        callback = function to call when the job completes or an error occurs
+        callback = function
+            to call when the job completes or an error occurs
   */
   void send(gtk.types.PrintJobCompleteFunc callback) nothrow
   {

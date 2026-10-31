@@ -123,7 +123,7 @@ class Value : gobject.boxed.Boxed
       value.
       
       The content type must be `text/plain`.
-      Returns: the content type
+      Returns: the value
   */
   string getText() nothrow
   {

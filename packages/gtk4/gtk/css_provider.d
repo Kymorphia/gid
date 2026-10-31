@@ -17,8 +17,7 @@ import gtk.style_provider_mixin;
 import gtk.types;
 
 /**
-    [gtk.css_provider.CssProvider] is an object implementing the [gtk.style_provider.StyleProvider] interface
-    for CSS.
+    A style provider for CSS.
     
     It is able to parse CSS-like input in order to style widgets.
     
@@ -82,6 +81,157 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   static CssProviderGidBuilder builder() nothrow
   {
     return new CssProviderGidBuilder;
+  }
+
+  /**
+      Get `prefersColorScheme` property.
+      Returns: Define the color scheme used for rendering the user interface.
+        
+        The UI can be set to either `enum@Gtk.InterfaceColorScheme.LIGHT`,
+        or `enum@Gtk.InterfaceColorScheme.DARK` mode. Other values will
+        be interpreted the same as `enum@Gtk.InterfaceColorScheme.LIGHT`.
+        
+        This setting is be available for media queries in CSS:
+        
+        ```css
+        @media (prefers-color-scheme: dark) {
+          // some dark mode styling
+        }
+        ```
+        
+        Changing this setting will reload the style sheet.
+  */
+  @property gtk.types.InterfaceColorScheme prefersColorScheme() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.InterfaceColorScheme)("prefers-color-scheme");
+  }
+
+  /**
+      Set `prefersColorScheme` property.
+      Params:
+        propval = Define the color scheme used for rendering the user interface.
+          
+          The UI can be set to either `enum@Gtk.InterfaceColorScheme.LIGHT`,
+          or `enum@Gtk.InterfaceColorScheme.DARK` mode. Other values will
+          be interpreted the same as `enum@Gtk.InterfaceColorScheme.LIGHT`.
+          
+          This setting is be available for media queries in CSS:
+          
+          ```css
+          @media (prefers-color-scheme: dark) {
+            // some dark mode styling
+          }
+          ```
+          
+          Changing this setting will reload the style sheet.
+  */
+  @property void prefersColorScheme(gtk.types.InterfaceColorScheme propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.InterfaceColorScheme)("prefers-color-scheme", propval);
+  }
+
+  /**
+      Get `prefersContrast` property.
+      Returns: Define the contrast mode to use for the user interface.
+        
+        When set to `enum@Gtk.InterfaceContrast.MORE` or
+        `enum@Gtk.InterfaceContrast.LESS`, the UI is rendered in
+        high or low contrast.
+        
+        When set to `enum@Gtk.InterfaceContrast.NO_PREFERENCE` (the default),
+        the user interface will be rendered in default mode.
+        
+        This setting is be available for media queries in CSS:
+        
+        ```css
+        @media (prefers-contrast: more) {
+          // some style with high contrast
+        }
+        ```
+        
+        Changing this setting will reload the style sheet.
+  */
+  @property gtk.types.InterfaceContrast prefersContrast() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.InterfaceContrast)("prefers-contrast");
+  }
+
+  /**
+      Set `prefersContrast` property.
+      Params:
+        propval = Define the contrast mode to use for the user interface.
+          
+          When set to `enum@Gtk.InterfaceContrast.MORE` or
+          `enum@Gtk.InterfaceContrast.LESS`, the UI is rendered in
+          high or low contrast.
+          
+          When set to `enum@Gtk.InterfaceContrast.NO_PREFERENCE` (the default),
+          the user interface will be rendered in default mode.
+          
+          This setting is be available for media queries in CSS:
+          
+          ```css
+          @media (prefers-contrast: more) {
+            // some style with high contrast
+          }
+          ```
+          
+          Changing this setting will reload the style sheet.
+  */
+  @property void prefersContrast(gtk.types.InterfaceContrast propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.InterfaceContrast)("prefers-contrast", propval);
+  }
+
+  /**
+      Get `prefersReducedMotion` property.
+      Returns: Define the type of reduced motion to use for the user interface.
+        
+        When set to `enum@Gtk.ReducedMotion.REDUCE` the UI is rendered in
+        with reduced motion animations.
+        
+        When set to `enum@Gtk.ReducedMotion.NO_PREFERENCE` (the default),
+        the user interface will be rendered in default mode.
+        
+        This setting is be available for media queries in CSS:
+        
+        ```css
+        @media (prefers-reduced-motion: reduce) {
+          // some style with reduced motion
+        }
+        ```
+        
+        Changing this setting will reload the style sheet.
+  */
+  @property gtk.types.ReducedMotion prefersReducedMotion() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ReducedMotion)("prefers-reduced-motion");
+  }
+
+  /**
+      Set `prefersReducedMotion` property.
+      Params:
+        propval = Define the type of reduced motion to use for the user interface.
+          
+          When set to `enum@Gtk.ReducedMotion.REDUCE` the UI is rendered in
+          with reduced motion animations.
+          
+          When set to `enum@Gtk.ReducedMotion.NO_PREFERENCE` (the default),
+          the user interface will be rendered in default mode.
+          
+          This setting is be available for media queries in CSS:
+          
+          ```css
+          @media (prefers-reduced-motion: reduce) {
+            // some style with reduced motion
+          }
+          ```
+          
+          Changing this setting will reload the style sheet.
+  */
+  @property void prefersReducedMotion(gtk.types.ReducedMotion propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ReducedMotion)("prefers-reduced-motion", propval);
   }
 
   mixin StyleProviderT!();
@@ -198,6 +348,8 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         name = A theme name
         variant = variant to load, for example, "dark", or
             null for the default
+  
+      Deprecated: Using any of the other theme loaders, combine with media queries.
   */
   void loadNamed(string name, string variant = null) nothrow
   {
@@ -229,6 +381,9 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   
       Signals that a parsing error occurred.
         
+        The expected error values are in the [gtk.types.CssParserError]
+        and [gtk.types.CssParserWarning] enumerations.
+        
         The path, line and position describe the actual location of
         the error as accurately as possible.
         
@@ -236,6 +391,9 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         the error. Errors may however cause parts of the given data or
         even all of it to not be parsed at all. So it is a useful idea
         to check that the parsing succeeds by connecting to this signal.
+        
+        Errors in the [gtk.types.CssParserWarning] enumeration should not
+        be treated as fatal errors.
         
         Note that this signal may be emitted at any time as the css provider
         may opt to defer parsing parts or all of the input to a later time
@@ -298,6 +456,86 @@ class CssProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 {
 
   mixin StyleProviderGidBuilderT!();
+
+  /**
+      Set `prefersColorScheme` property.
+      Params:
+        propval = Define the color scheme used for rendering the user interface.
+          
+          The UI can be set to either `enum@Gtk.InterfaceColorScheme.LIGHT`,
+          or `enum@Gtk.InterfaceColorScheme.DARK` mode. Other values will
+          be interpreted the same as `enum@Gtk.InterfaceColorScheme.LIGHT`.
+          
+          This setting is be available for media queries in CSS:
+          
+          ```css
+          @media (prefers-color-scheme: dark) {
+            // some dark mode styling
+          }
+          ```
+          
+          Changing this setting will reload the style sheet.
+      Returns: Builder instance for fluent chaining
+  */
+  T prefersColorScheme(gtk.types.InterfaceColorScheme propval) nothrow
+  {
+    return setProperty("prefers-color-scheme", propval);
+  }
+
+  /**
+      Set `prefersContrast` property.
+      Params:
+        propval = Define the contrast mode to use for the user interface.
+          
+          When set to `enum@Gtk.InterfaceContrast.MORE` or
+          `enum@Gtk.InterfaceContrast.LESS`, the UI is rendered in
+          high or low contrast.
+          
+          When set to `enum@Gtk.InterfaceContrast.NO_PREFERENCE` (the default),
+          the user interface will be rendered in default mode.
+          
+          This setting is be available for media queries in CSS:
+          
+          ```css
+          @media (prefers-contrast: more) {
+            // some style with high contrast
+          }
+          ```
+          
+          Changing this setting will reload the style sheet.
+      Returns: Builder instance for fluent chaining
+  */
+  T prefersContrast(gtk.types.InterfaceContrast propval) nothrow
+  {
+    return setProperty("prefers-contrast", propval);
+  }
+
+  /**
+      Set `prefersReducedMotion` property.
+      Params:
+        propval = Define the type of reduced motion to use for the user interface.
+          
+          When set to `enum@Gtk.ReducedMotion.REDUCE` the UI is rendered in
+          with reduced motion animations.
+          
+          When set to `enum@Gtk.ReducedMotion.NO_PREFERENCE` (the default),
+          the user interface will be rendered in default mode.
+          
+          This setting is be available for media queries in CSS:
+          
+          ```css
+          @media (prefers-reduced-motion: reduce) {
+            // some style with reduced motion
+          }
+          ```
+          
+          Changing this setting will reload the style sheet.
+      Returns: Builder instance for fluent chaining
+  */
+  T prefersReducedMotion(gtk.types.ReducedMotion propval) nothrow
+  {
+    return setProperty("prefers-reduced-motion", propval);
+  }
 }
 
 /// Fluent builder for [gtk.css_provider.CssProvider]

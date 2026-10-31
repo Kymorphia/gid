@@ -12,7 +12,7 @@ import webkit.types;
     Configures network proxies.
     
     WebKitNetworkProxySettings can be used to provide a custom proxy configuration
-    to a #WebKitWebContext. You need to call webkit_web_context_set_network_proxy_settings()
+    to a #WebKitNetworkSession. You need to call webkit_network_session_set_network_proxy_settings()
     with [webkit.types.NetworkProxyMode.Custom] and a WebKitNetworkProxySettings.
 */
 class NetworkProxySettings : gobject.boxed.Boxed

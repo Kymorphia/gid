@@ -20,9 +20,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    The [gtk.menu_button.MenuButton] widget is used to display a popup when clicked.
+    Displays a popup when clicked.
     
-    ![An example GtkMenuButton](menu-button.png)
+    <picture>
+      <source srcset="menu-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkMenuButton" src="menu-button.png">
+    </picture>
     
     This popup can be provided either as a [gtk.popover.Popover] or as an abstract
     [gio.menu_model.MenuModel].
@@ -317,7 +320,7 @@ class MenuButton : gtk.widget.Widget
   */
   @property void popover(gtk.popover.Popover propval) nothrow
   {
-    gobject.object.ObjectWrap.setProperty!(gtk.popover.Popover)("popover", propval);
+    setPopover(propval);
   }
 
   /**
@@ -614,9 +617,9 @@ class MenuButton : gtk.widget.Widget
       menu_button. Instead, this can be done manually in func.
   
       Params:
-        func = function to call when a popup is about to
-            be shown, but none has been provided via other means, or null
-            to reset to default behavior.
+        func = function
+            to call when a popup is about to be shown, but none has been provided via other means,
+            or null to reset to default behavior
   */
   void setCreatePopupFunc(gtk.types.MenuButtonCreatePopupFunc func = null) nothrow
   {
@@ -739,9 +742,10 @@ class MenuButton : gtk.widget.Widget
       from the menu_button, and the property is set to null.
   
       Params:
-        popover = a [gtk.popover.Popover], or null to unset and disable the button
+        popover = a [gtk.popover.Popover], or null to unset and
+            disable the button
   */
-  void setPopover(gtk.widget.Widget popover = null) nothrow
+  void setPopover(gtk.popover.Popover popover = null) nothrow
   {
     gtk_menu_button_set_popover(cast(GtkMenuButton*)this._cPtr, popover ? cast(GtkWidget*)popover._cPtr(No.Dup) : null);
   }

@@ -1518,7 +1518,7 @@ enum GdkGrabStatus
     Defines the reference point of a window and the meaning of coordinates
     passed to [gtk.window.Window.move]. See [gtk.window.Window.move] and the "implementation
     notes" section of the
-    [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
+    [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/)
     specification for more details.
 */
 enum GdkGravity
@@ -2661,7 +2661,7 @@ enum GdkWindowType
     the window has. The window manager can use this when determining decoration
     and behaviour of the window. The hint must be set before mapping the window.
     
-    See the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
+    See the [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/)
     specification for more details about window types.
 */
 enum GdkWindowTypeHint

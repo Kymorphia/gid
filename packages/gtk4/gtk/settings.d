@@ -13,16 +13,17 @@ import gtk.style_provider_mixin;
 import gtk.types;
 
 /**
-    [gtk.settings.Settings] provides a mechanism to share global settings between
-    applications.
+    Provides a mechanism to share global settings between applications.
+    
+    GTK relies on the platform-specific API for getting desktop-wide
+    settings.
+    
+    On Wayland, the settings are obtained via a settings portal that
+    is part of the Linux desktop APIs for application.
     
     On the X window system, this sharing is realized by an
     [XSettings](http://www.freedesktop.org/wiki/Specifications/xsettings-spec)
-    manager that is usually part of the desktop environment, along with
-    utilities that let the user change these settings.
-    
-    On Wayland, the settings are obtained either via a settings portal,
-    or by reading desktop settings from DConf.
+    manager.
     
     On macOS, the settings are obtained from `NSUserDefaults`.
     
@@ -141,6 +142,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Dark themes should not be used for documents, where large spaces
         are white/light and the dark chrome creates too much contrast
         (web browser, text editor...).
+  
+      Deprecated: Use [gtk.css_provider.CssProvider] properties instead
   */
   @property bool gtkApplicationPreferDarkTheme() nothrow
   {
@@ -164,6 +167,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Dark themes should not be used for documents, where large spaces
           are white/light and the dark chrome creates too much contrast
           (web browser, text editor...).
+  
+      Deprecated: Use [gtk.css_provider.CssProvider] properties instead
   */
   @property void gtkApplicationPreferDarkTheme(bool propval) nothrow
   {
@@ -677,6 +682,43 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 
   /**
+      Get `gtkFontRendering` property.
+      Returns: How GTK font rendering is set up.
+        
+        When set to `enum@Gtk.FontRendering.MANUAL`, GTK respects the low-level
+        font-related settings ([gtk.settings.Settings.gtkHintFontMetrics],
+        [gtk.settings.Settings.gtkXftAntialias], [gtk.settings.Settings.gtkXftHinting],
+        [gtk.settings.Settings.gtkXftHintstyle] and [gtk.settings.Settings.gtkXftRgba])
+        as much as practical.
+        
+        When set to `enum@Gtk.FontRendering.AUTOMATIC`, GTK will consider factors such
+        as screen resolution and scale in deciding how to render fonts.
+  */
+  @property gtk.types.FontRendering gtkFontRendering() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.FontRendering)("gtk-font-rendering");
+  }
+
+  /**
+      Set `gtkFontRendering` property.
+      Params:
+        propval = How GTK font rendering is set up.
+          
+          When set to `enum@Gtk.FontRendering.MANUAL`, GTK respects the low-level
+          font-related settings ([gtk.settings.Settings.gtkHintFontMetrics],
+          [gtk.settings.Settings.gtkXftAntialias], [gtk.settings.Settings.gtkXftHinting],
+          [gtk.settings.Settings.gtkXftHintstyle] and [gtk.settings.Settings.gtkXftRgba])
+          as much as practical.
+          
+          When set to `enum@Gtk.FontRendering.AUTOMATIC`, GTK will consider factors such
+          as screen resolution and scale in deciding how to render fonts.
+  */
+  @property void gtkFontRendering(gtk.types.FontRendering propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.FontRendering)("gtk-font-rendering", propval);
+  }
+
+  /**
       Get `gtkFontconfigTimestamp` property.
       Returns: Timestamp of the current fontconfig configuration.
   */
@@ -776,6 +818,93 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   @property void gtkImModule(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-im-module", propval);
+  }
+
+  /**
+      Get `gtkInterfaceColorScheme` property.
+      Returns: The color scheme used for rendering the user interface.
+        
+        This setting communicates the system-wide preference.
+        The color scheme that is actually used when applying CSS
+        styles can be set with the [gtk.css_provider.CssProvider.prefersColorScheme]
+        property.
+  */
+  @property gtk.types.InterfaceColorScheme gtkInterfaceColorScheme() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.InterfaceColorScheme)("gtk-interface-color-scheme");
+  }
+
+  /**
+      Set `gtkInterfaceColorScheme` property.
+      Params:
+        propval = The color scheme used for rendering the user interface.
+          
+          This setting communicates the system-wide preference.
+          The color scheme that is actually used when applying CSS
+          styles can be set with the [gtk.css_provider.CssProvider.prefersColorScheme]
+          property.
+  */
+  @property void gtkInterfaceColorScheme(gtk.types.InterfaceColorScheme propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.InterfaceColorScheme)("gtk-interface-color-scheme", propval);
+  }
+
+  /**
+      Get `gtkInterfaceContrast` property.
+      Returns: The level of contrast to use for the user interface.
+        
+        This setting communicates the system-wide preference.
+        The contrast level that is actually used when applying CSS
+        styles can be set with the [gtk.css_provider.CssProvider.prefersContrast]
+        property.
+  */
+  @property gtk.types.InterfaceContrast gtkInterfaceContrast() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.InterfaceContrast)("gtk-interface-contrast");
+  }
+
+  /**
+      Set `gtkInterfaceContrast` property.
+      Params:
+        propval = The level of contrast to use for the user interface.
+          
+          This setting communicates the system-wide preference.
+          The contrast level that is actually used when applying CSS
+          styles can be set with the [gtk.css_provider.CssProvider.prefersContrast]
+          property.
+  */
+  @property void gtkInterfaceContrast(gtk.types.InterfaceContrast propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.InterfaceContrast)("gtk-interface-contrast", propval);
+  }
+
+  /**
+      Get `gtkInterfaceReducedMotion` property.
+      Returns: Whether animations should be reduced to essential motions.
+        
+        This setting communicates the system-wide preference.
+        The motion level that is actually used when applying CSS
+        styles can be set with the [gtk.css_provider.CssProvider.prefersReducedMotion]
+        property.
+  */
+  @property gtk.types.ReducedMotion gtkInterfaceReducedMotion() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gtk.types.ReducedMotion)("gtk-interface-reduced-motion");
+  }
+
+  /**
+      Set `gtkInterfaceReducedMotion` property.
+      Params:
+        propval = Whether animations should be reduced to essential motions.
+          
+          This setting communicates the system-wide preference.
+          The motion level that is actually used when applying CSS
+          styles can be set with the [gtk.css_provider.CssProvider.prefersReducedMotion]
+          property.
+  */
+  @property void gtkInterfaceReducedMotion(gtk.types.ReducedMotion propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gtk.types.ReducedMotion)("gtk-interface-reduced-motion", propval);
   }
 
   /**
@@ -1031,6 +1160,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkShellShowsAppMenu` property.
       Returns: Set to true if the desktop environment is displaying
         the app menu, false if the app should display it itself.
+  
+      Deprecated: This setting is not relevant anymore
   */
   @property bool gtkShellShowsAppMenu() nothrow
   {
@@ -1042,6 +1173,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Set to true if the desktop environment is displaying
           the app menu, false if the app should display it itself.
+  
+      Deprecated: This setting is not relevant anymore
   */
   @property void gtkShellShowsAppMenu(bool propval) nothrow
   {
@@ -1052,6 +1185,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkShellShowsDesktop` property.
       Returns: Set to true if the desktop environment is displaying
         the desktop folder, false if not.
+  
+      Deprecated: This setting is not relevant anymore
   */
   @property bool gtkShellShowsDesktop() nothrow
   {
@@ -1063,6 +1198,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Set to true if the desktop environment is displaying
           the desktop folder, false if not.
+  
+      Deprecated: This setting is not relevant anymore
   */
   @property void gtkShellShowsDesktop(bool propval) nothrow
   {
@@ -1073,6 +1210,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkShellShowsMenubar` property.
       Returns: Set to true if the desktop environment is displaying
         the menubar, false if the app should display it itself.
+  
+      Deprecated: This setting is not relevant anymore
   */
   @property bool gtkShellShowsMenubar() nothrow
   {
@@ -1084,6 +1223,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Set to true if the desktop environment is displaying
           the menubar, false if the app should display it itself.
+  
+      Deprecated: This setting is not relevant anymore
   */
   @property void gtkShellShowsMenubar(bool propval) nothrow
   {
@@ -1490,6 +1631,8 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           are white/light and the dark chrome creates too much contrast
           (web browser, text editor...).
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gtk.css_provider.CssProvider] properties instead
   */
   T gtkApplicationPreferDarkTheme(bool propval) nothrow
   {
@@ -1780,6 +1923,26 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
   }
 
   /**
+      Set `gtkFontRendering` property.
+      Params:
+        propval = How GTK font rendering is set up.
+          
+          When set to `enum@Gtk.FontRendering.MANUAL`, GTK respects the low-level
+          font-related settings ([gtk.settings.Settings.gtkHintFontMetrics],
+          [gtk.settings.Settings.gtkXftAntialias], [gtk.settings.Settings.gtkXftHinting],
+          [gtk.settings.Settings.gtkXftHintstyle] and [gtk.settings.Settings.gtkXftRgba])
+          as much as practical.
+          
+          When set to `enum@Gtk.FontRendering.AUTOMATIC`, GTK will consider factors such
+          as screen resolution and scale in deciding how to render fonts.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkFontRendering(gtk.types.FontRendering propval) nothrow
+  {
+    return setProperty("gtk-font-rendering", propval);
+  }
+
+  /**
       Set `gtkFontconfigTimestamp` property.
       Params:
         propval = Timestamp of the current fontconfig configuration.
@@ -1834,6 +1997,54 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
   T gtkImModule(string propval) nothrow
   {
     return setProperty("gtk-im-module", propval);
+  }
+
+  /**
+      Set `gtkInterfaceColorScheme` property.
+      Params:
+        propval = The color scheme used for rendering the user interface.
+          
+          This setting communicates the system-wide preference.
+          The color scheme that is actually used when applying CSS
+          styles can be set with the [gtk.css_provider.CssProvider.prefersColorScheme]
+          property.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkInterfaceColorScheme(gtk.types.InterfaceColorScheme propval) nothrow
+  {
+    return setProperty("gtk-interface-color-scheme", propval);
+  }
+
+  /**
+      Set `gtkInterfaceContrast` property.
+      Params:
+        propval = The level of contrast to use for the user interface.
+          
+          This setting communicates the system-wide preference.
+          The contrast level that is actually used when applying CSS
+          styles can be set with the [gtk.css_provider.CssProvider.prefersContrast]
+          property.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkInterfaceContrast(gtk.types.InterfaceContrast propval) nothrow
+  {
+    return setProperty("gtk-interface-contrast", propval);
+  }
+
+  /**
+      Set `gtkInterfaceReducedMotion` property.
+      Params:
+        propval = Whether animations should be reduced to essential motions.
+          
+          This setting communicates the system-wide preference.
+          The motion level that is actually used when applying CSS
+          styles can be set with the [gtk.css_provider.CssProvider.prefersReducedMotion]
+          property.
+      Returns: Builder instance for fluent chaining
+  */
+  T gtkInterfaceReducedMotion(gtk.types.ReducedMotion propval) nothrow
+  {
+    return setProperty("gtk-interface-reduced-motion", propval);
   }
 
   /**
@@ -1980,6 +2191,8 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Set to true if the desktop environment is displaying
           the app menu, false if the app should display it itself.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This setting is not relevant anymore
   */
   T gtkShellShowsAppMenu(bool propval) nothrow
   {
@@ -1992,6 +2205,8 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Set to true if the desktop environment is displaying
           the desktop folder, false if not.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This setting is not relevant anymore
   */
   T gtkShellShowsDesktop(bool propval) nothrow
   {
@@ -2004,6 +2219,8 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Set to true if the desktop environment is displaying
           the menubar, false if the app should display it itself.
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This setting is not relevant anymore
   */
   T gtkShellShowsMenubar(bool propval) nothrow
   {

@@ -16,12 +16,14 @@ import gtk.sorter;
 import gtk.types;
 
 /**
-    A [gio.list_model.ListModel] that sorts the elements of an underlying model
-    according to a [gtk.sorter.Sorter].
+    A list model that sorts the elements of another model.
+    
+    The elements are sorted according to a [gtk.sorter.Sorter].
     
     The model is a stable sort. If two items compare equal according
     to the sorter, the one that appears first in the original model will
     also appear first after sorting.
+    
     Note that if you change the sorter, the previous order will have no
     influence on the new order. If you want that, consider using a
     [gtk.multi_sorter.MultiSorter] and appending the previous sorter to it.

@@ -63,6 +63,24 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
     return getEnumType();
   }
 
+  /**
+      Get `itemType` property.
+      Returns: The type of the items. See [gio.list_model.ListModel.getItemType].
+  */
+  @property gobject.types.GType itemType() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+  */
+  @property uint nItems() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
   mixin ListModelT!();
 
   /**

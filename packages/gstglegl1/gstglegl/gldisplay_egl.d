@@ -54,6 +54,10 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
 
   /**
       Create a new #GstGLDisplayEGL using the default EGL_DEFAULT_DISPLAY.
+      
+      The returned #GstGLDisplayEGL will by default free all EGL resources when
+      finalized. See [gstglegl.gldisplay_egl.GLDisplayEGL.setForeign] for details on if you need
+      the EGLDisplay to remain alive.
       Returns: a new #GstGLDisplayEGL or null
   */
   this() nothrow
@@ -90,6 +94,11 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
       
       This function will return the same value for multiple calls with the same
       display.
+      
+      The returned #GstGLDisplayEGL will *not* be marked as foreign and will free
+      some display global EGL resources on finalization. If an external API/user
+      will be also handling the lifetime of the `EGLDisplay`, you should mark the
+      returned #GstGLDisplayEGL as foreign by calling [gstglegl.gldisplay_egl.GLDisplayEGL.setForeign].
   
       Params:
         display = an existing #GstGLDisplay
@@ -117,6 +126,31 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     auto _retval = gst_gl_display_egl_get_from_native(type, display);
     return _retval;
+  }
+
+  /**
+      Configure whether or not this EGL display is foreign and is managed by an
+      external application/library.
+      
+      A display marked as foreign will not have display global resources freed when
+      this display is finalized. As such, any external API using the same
+      `EGLDisplay` must keep the `EGLDisplay` alive while GStreamer is using any
+      EGL or GL resources associated with that `EGLDisplay`.  The reverse is also
+      true and a foreign #GstGLDisplayEGL must not be used after the associated
+      `EGLDisplay` has been destroyed externally with `eglTerminate()`.
+      
+      A non-foreign #GstGLDisplayEGL will destroy the associated `EGLDisplay` on
+      finalization. This can also be useful when a user would like GStreamer to
+      assume ownership of the `EGLDisplay` after calling e.g.
+      [gstglegl.gldisplay_egl.GLDisplayEGL.newWithEglDisplay].
+  
+      Params:
+        foreign = whether display_egl should be marked as containing a foreign
+                    `EGLDisplay`
+  */
+  void setForeign(bool foreign) nothrow
+  {
+    gst_gl_display_egl_set_foreign(cast(GstGLDisplayEGL*)this._cPtr, foreign);
   }
 }
 

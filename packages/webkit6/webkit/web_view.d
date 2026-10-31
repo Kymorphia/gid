@@ -363,6 +363,15 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
+      Get `themeColor` property.
+      Returns: The theme color of the WebView's current page.
+  */
+  @property gdk.rgba.RGBA themeColor() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("theme-color");
+  }
+
+  /**
       Get `title` property.
       Returns: The main frame document title of this #WebKitWebView. If
         the title has not been received yet, it will be null.
@@ -1165,7 +1174,8 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-      Finishes an asynchronous operation started with [webkit.web_view.WebView.getSnapshot].
+      Finishes an asynchronous operation started with [webkit.web_view.WebView.getSnapshot], producing
+      an image of the snapshot using the BGRA8888 pixel format.
   
       Params:
         result = a #GAsyncResult
@@ -1180,6 +1190,22 @@ class WebView : webkit.web_view_base.WebViewBase
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the theme color that is specified by the content in the web_view.
+      If the web_view doesn't have a theme color it will fill the rgba
+      with transparent black content.
+  
+      Params:
+        rgba = a #GdkRGBA to fill in with the theme color
+      Returns: Whether the currently loaded page defines a theme color.
+  */
+  bool getThemeColor(out gdk.rgba.RGBA rgba) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)webkit_web_view_get_theme_color(cast(WebKitWebView*)this._cPtr, cast(GdkRGBA*)&rgba);
     return _retval;
   }
 
@@ -1434,6 +1460,22 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
+      Gets whether web_view is in immersive mode.
+      
+      An immersive session is a mode in which the user is presented with a fully immersive XR experience
+      (such as VR or AR), typically rendered via a headset.
+      
+      Note that if WebXR is disabled or OPENXR is not used, this API always returns false.
+      Returns: true if the web_view is in immersive mode, or false otherwise.
+  */
+  bool isImmersiveModeEnabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)webkit_web_view_is_immersive_mode_enabled(cast(WebKitWebView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Gets the value of the #WebKitWebView:is-loading property.
       
       You can monitor when a #WebKitWebView is loading a page by connecting to
@@ -1464,6 +1506,21 @@ class WebView : webkit.web_view_base.WebViewBase
     bool _retval;
     _retval = cast(bool)webkit_web_view_is_playing_audio(cast(WebKitWebView*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Requests to leave the immersive mode this #WebKitWebView is in.
+      
+      Users interact with web content to start XR sessions, and can typically
+      end the sessions themselves, but applications might need to end a session on their
+      own based on application or platform logic.
+      
+      Note that if WebXR is disabled, or if it is enabled but the web_view is not in
+      immersive mode, this API does nothing. See also [webkit.web_view.WebView.isImmersiveModeEnabled].
+  */
+  void leaveImmersiveMode() nothrow
+  {
+    webkit_web_view_leave_immersive_mode(cast(WebKitWebView*)this._cPtr);
   }
 
   /**

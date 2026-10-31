@@ -21,7 +21,10 @@ import gtk.widget;
 /**
     [gtk.info_bar.InfoBar] can be used to show messages to the user without a dialog.
     
-    ![An example GtkInfoBar](info-bar.png)
+    <picture>
+      <source srcset="info-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkInfoBar" src="info-bar.png">
+    </picture>
     
     It is often temporarily shown at the top or bottom of a document.
     In contrast to [gtk.dialog.Dialog], which has an action area at the

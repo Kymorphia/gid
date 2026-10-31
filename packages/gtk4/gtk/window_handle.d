@@ -17,10 +17,11 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.window_handle.WindowHandle] is a titlebar area widget.
+    Implements titlebar functionality for a window.
     
-    When added into a window, it can be dragged to move the window, and handles
-    right click, double click and middle click as expected of a titlebar.
+    When added into a window, it can be dragged to move the window,
+    and it implements the right click, double click and middle click
+    behaviors that are expected of a titlebar.
     
     # CSS nodes
     
@@ -30,7 +31,8 @@ import gtk.widget;
     
     Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.Group] role.
     
-    Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic] role.
+    Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic]
+    role.
 */
 class WindowHandle : gtk.widget.Widget
 {

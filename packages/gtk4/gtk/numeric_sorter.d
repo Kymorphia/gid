@@ -11,7 +11,7 @@ import gtk.sorter;
 import gtk.types;
 
 /**
-    [gtk.numeric_sorter.NumericSorter] is a [gtk.sorter.Sorter] that compares numbers.
+    Sorts items numerically.
     
     To obtain the numbers to compare, this sorter evaluates a
     [gtk.expression.Expression].

@@ -118,7 +118,7 @@ class Query : gobject.boxed.Boxed
   /**
       Constructs a new query object for querying if caps are accepted.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         caps = a fixed #GstCaps
@@ -135,7 +135,7 @@ class Query : gobject.boxed.Boxed
   /**
       Constructs a new query object for querying the allocation properties.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         caps = the negotiated caps
@@ -153,7 +153,7 @@ class Query : gobject.boxed.Boxed
   /**
       Constructs a new query object for querying the bitrate.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
       Returns: a new #GstQuery
   */
   static gst.query.Query newBitrate() nothrow
@@ -168,7 +168,7 @@ class Query : gobject.boxed.Boxed
       Constructs a new query object for querying the buffering status of
       a stream.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         format = the default #GstFormat for the new query
@@ -202,7 +202,7 @@ class Query : gobject.boxed.Boxed
       filter should be returned from the CAPS query. Specifying a filter might
       greatly reduce the amount of processing an element needs to do.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         filter = a filter
@@ -219,7 +219,7 @@ class Query : gobject.boxed.Boxed
   /**
       Constructs a new query object for querying the pipeline-local context.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         contextType = Context type to query
@@ -235,11 +235,11 @@ class Query : gobject.boxed.Boxed
   }
 
   /**
-      Constructs a new convert query object. Use gst_query_unref()
+      Constructs a new convert query object. Use [gst.query.Query.unref]
       when done with it. A convert query is used to ask for a conversion between
       one format and another.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         srcFormat = the source #GstFormat for the new query
@@ -256,10 +256,10 @@ class Query : gobject.boxed.Boxed
   }
 
   /**
-      Constructs a new custom query object. Use gst_query_unref()
+      Constructs a new custom query object. Use [gst.query.Query.unref]
       when done with it.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         type = the query type
@@ -277,7 +277,7 @@ class Query : gobject.boxed.Boxed
   /**
       Constructs a new query object for querying the drain state.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
       Returns: a new #GstQuery
   */
   static gst.query.Query newDrain() nothrow
@@ -290,10 +290,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new stream duration query object to query in the given format.
-      Use gst_query_unref() when done with it. A duration query will give the
+      Use [gst.query.Query.unref] when done with it. A duration query will give the
       total length of the stream.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         format = the #GstFormat for this duration query
@@ -311,7 +311,7 @@ class Query : gobject.boxed.Boxed
       Constructs a new query object for querying formats of
       the stream.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
       Returns: a new #GstQuery
   */
   static gst.query.Query newFormats() nothrow
@@ -324,11 +324,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new latency query object.
-      Use gst_query_unref() when done with it. A latency query is usually performed
+      Use [gst.query.Query.unref] when done with it. A latency query is usually performed
       by sinks to compensate for additional latency introduced by elements in the
       pipeline.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
       Returns: a #GstQuery
   */
   static gst.query.Query newLatency() nothrow
@@ -340,11 +340,11 @@ class Query : gobject.boxed.Boxed
   }
 
   /**
-      Constructs a new query stream position query object. Use gst_query_unref()
+      Constructs a new query stream position query object. Use [gst.query.Query.unref]
       when done with it. A position query is used to query the current position
       of playback in the streams, in some format.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         format = the default #GstFormat for the new query
@@ -361,7 +361,7 @@ class Query : gobject.boxed.Boxed
   /**
       Constructs a new query object for querying the scheduling properties.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
       Returns: a new #GstQuery
   */
   static gst.query.Query newScheduling() nothrow
@@ -376,7 +376,7 @@ class Query : gobject.boxed.Boxed
       Constructs a new query object for querying seeking properties of
       the stream.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         format = the default #GstFormat for the new query
@@ -391,11 +391,11 @@ class Query : gobject.boxed.Boxed
   }
 
   /**
-      Constructs a new segment query object. Use gst_query_unref()
+      Constructs a new segment query object. Use [gst.query.Query.unref]
       when done with it. A segment query is used to discover information about the
       currently configured segment for playback.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
   
       Params:
         format = the #GstFormat for the new query
@@ -412,7 +412,7 @@ class Query : gobject.boxed.Boxed
   /**
       Constructs a new query object for querying the stream selection capability.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
       Returns: a new #GstQuery
   */
   static gst.query.Query newSelectable() nothrow
@@ -424,11 +424,11 @@ class Query : gobject.boxed.Boxed
   }
 
   /**
-      Constructs a new query URI query object. Use gst_query_unref()
+      Constructs a new query URI query object. Use [gst.query.Query.unref]
       when done with it. An URI query is used to query the current URI
       that is used by the source or sink.
       
-      Free-function: gst_query_unref()
+      Free-function: [gst.query.Query.unref]
       Returns: a new #GstQuery
   */
   static gst.query.Query newUri() nothrow
@@ -634,6 +634,41 @@ class Query : gobject.boxed.Boxed
   {
     bool _retval;
     _retval = cast(bool)gst_query_has_scheduling_mode_with_flags(cast(GstQuery*)this._cPtr, mode, flags);
+    return _retval;
+  }
+
+  /**
+      Tests if you can safely modify query. It is only safe to modify query when
+      there is only one owner of the query - ie, the object is writable.
+      Returns: 
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_query_is_writable(cast(const(GstQuery)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns a writable copy of query.
+      
+      If there is only one reference count on query, the caller must be the owner,
+      and so this function will return the query object unchanged. If on the other
+      hand there is more than one reference on the object, a new query object will
+      be returned. The caller's reference on query will be removed, and instead the
+      caller will own a reference to the returned object.
+      
+      In short, this function unrefs the query in the argument and refs the query
+      that it returns. Don't access the argument after calling this function. See
+      also: [gst.query.Query.ref_].
+      Returns: a writable query which may or may not be the
+            same as query
+  */
+  gst.query.Query makeWritable() nothrow
+  {
+    GstQuery* _cretval;
+    _cretval = gst_query_make_writable(cast(GstQuery*)this._cPtr);
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1424,6 +1459,29 @@ class Query : gobject.boxed.Boxed
     GstStructure* _cretval;
     _cretval = gst_query_writable_structure(cast(GstQuery*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Modifies a pointer to a #GstQuery to point to a different #GstQuery. This
+      function is similar to [gst.query.Query.replace] except that it takes ownership of
+      new_query.
+      
+      Either new_query or the #GstQuery pointed to by old_query may be null.
+  
+      Params:
+        oldQuery = pointer to a
+              pointer to a #GstQuery to be stolen.
+        newQuery = pointer to a #GstQuery that will
+              replace the query pointed to by old_query.
+      Returns: true if new_query was different from old_query
+  */
+  static bool take(ref gst.query.Query oldQuery, gst.query.Query newQuery = null) nothrow
+  {
+    bool _retval;
+    GstQuery* _oldQuery = oldQuery ? cast(GstQuery*)oldQuery._cPtr(Yes.Dup) : null;
+    _retval = cast(bool)gst_query_take(&_oldQuery, newQuery ? cast(GstQuery*)newQuery._cPtr(Yes.Dup) : null);
+    oldQuery = _oldQuery ? new gst.query.Query(cast(void*)_oldQuery, Yes.Take) : null;
     return _retval;
   }
 }

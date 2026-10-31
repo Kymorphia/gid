@@ -11,7 +11,7 @@ import gtk.gesture;
 import gtk.types;
 
 /**
-    [gtk.gesture_rotate.GestureRotate] is a [gtk.gesture.Gesture] for 2-finger rotations.
+    Recognizes 2-finger rotation gestures.
     
     Whenever the angle between both handled sequences changes, the
     [gtk.gesture_rotate.GestureRotate.angleChanged] signal is emitted.

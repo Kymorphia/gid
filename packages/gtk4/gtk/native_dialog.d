@@ -12,10 +12,10 @@ import gtk.types;
 import gtk.window;
 
 /**
-    Native dialogs are platform dialogs that don't use [gtk.dialog.Dialog].
+    Base class for platform dialogs that don't use [gtk.dialog.Dialog].
     
-    They are used in order to integrate better with a platform, by
-    looking the same as other native applications and supporting
+    Native dialogs are used in order to integrate better with a platform,
+    by looking the same as other native applications and supporting
     platform specific features.
     
     The [gtk.dialog.Dialog] functions cannot be used on such objects,

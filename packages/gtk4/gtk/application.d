@@ -20,19 +20,43 @@ import gtk.types;
 import gtk.window;
 
 /**
-    [gtk.application.Application] is a high-level API for writing applications.
+    A high-level API for writing applications.
     
-    It supports many aspects of writing a GTK application in a convenient
-    fashion, without enforcing a one-size-fits-all model.
+    [gtk.application.Application] supports many aspects of writing a GTK application
+    in a convenient fashion, without enforcing a one-size-fits-all model.
     
-    Currently, [gtk.application.Application] handles GTK initialization, application
-    uniqueness, session management, provides some basic scriptability and
-    desktop shell integration by exporting actions and menus and manages a
-    list of toplevel windows whose life-cycle is automatically tied to the
-    life-cycle of your application.
+    Currently, it handles GTK initialization, application uniqueness, session
+    management, provides some basic scriptability and desktop shell integration
+    by exporting actions and menus and manages a list of toplevel windows whose
+    life-cycle is automatically tied to the life-cycle of your application.
     
-    While [gtk.application.Application] works fine with plain [gtk.window.Window]s, it is
-    recommended to use it together with [gtk.application_window.ApplicationWindow].
+    While [gtk.application.Application] works fine with plain [gtk.window.Window]s,
+    it is recommended to use it together with [gtk.application_window.ApplicationWindow].
+    
+    ## Initialization
+    
+    A typical [gtk.application.Application] will create a window in its
+    `signal@GIO.Application::activate`, `signal@GIO.Application::open`
+    or `signal@GIO.Application::command-line` handlers. Note that all
+    of these signals may be emitted multiple times, so handlers must
+    be careful to take existing windows into account.
+    
+    A typical ::activate handler should look like this:
+    
+    ```
+    static void
+    activate (GApplication *gapp)
+    {
+      GtkApplication *app = GTK_APPLICATION (gapp);
+      GtkWindow *window;
+    
+      window = gtk_application_get_active_window (app);
+      if (!window)
+        window = create_window (app);
+    
+      gtk_window_present (window);
+    }
+    ```
     
     ## Automatic resources
     
@@ -65,15 +89,11 @@ import gtk.window;
     displays the shortcuts window, associate the item with the action
     `win.show-help-overlay`.
     
-    ## A simple application
+    [gtk.application.Application] will also automatically set the application id as the
+    default window icon. Use [gtk.window.Window.setDefaultIconName] or
+    [gtk.window.Window.iconName] to override that behavior.
     
-    [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/bp/bloatpad.c)
-    is available in the GTK source code repository
-    
-    [gtk.application.Application] optionally registers with a session manager of the
-    users session (if you set the [gtk.application.Application.registerSession]
-    property) and offers various functionality related to the session
-    life-cycle.
+    # Inhibiting
     
     An application can block various ways to end the session with
     the [gtk.application.Application.inhibit] function. Typical use cases for
@@ -83,10 +103,15 @@ import gtk.window;
     inform the user about the negative consequences of ending the
     session while inhibitors are present.
     
+    ## A simple application
+    
+    [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/bp/bloatpad.c)
+    is available in the GTK source code repository
+    
     ## See Also
     
-    [HowDoI: Using GtkApplication](https://wiki.gnome.org/HowDoI/GtkApplication),
-    [Getting Started with GTK: Basics](getting_started.html#basics)
+    - [Using GtkApplication](https://developer.gnome.org/documentation/tutorials/application.html)
+    - [Getting Started with GTK: Basics](getting_started.html#basics)
 */
 class Application : gio.application.Application
 {
@@ -136,7 +161,7 @@ class Application : gio.application.Application
 
   /**
       Get `menubar` property.
-      Returns: The [gio.menu_model.MenuModel] to be used for the application's menu bar.
+      Returns: The menu model to be used for the application's menu bar.
   */
   @property gio.menu_model.MenuModel menubar() nothrow
   {
@@ -146,7 +171,7 @@ class Application : gio.application.Application
   /**
       Set `menubar` property.
       Params:
-        propval = The [gio.menu_model.MenuModel] to be used for the application's menu bar.
+        propval = The menu model to be used for the application's menu bar.
   */
   @property void menubar(gio.menu_model.MenuModel propval) nothrow
   {
@@ -155,10 +180,13 @@ class Application : gio.application.Application
 
   /**
       Get `registerSession` property.
-      Returns: Set this property to `TRUE` to register with the session manager.
+      Returns: Set this property to true to register with the session manager.
         
         This will make GTK track the session state (such as the
         [gtk.application.Application.screensaverActive] property).
+  
+      Deprecated: This property is ignored. GTK always registers
+        with the session manager
   */
   @property bool registerSession() nothrow
   {
@@ -168,10 +196,13 @@ class Application : gio.application.Application
   /**
       Set `registerSession` property.
       Params:
-        propval = Set this property to `TRUE` to register with the session manager.
+        propval = Set this property to true to register with the session manager.
           
           This will make GTK track the session state (such as the
           [gtk.application.Application.screensaverActive] property).
+  
+      Deprecated: This property is ignored. GTK always registers
+        with the session manager
   */
   @property void registerSession(bool propval) nothrow
   {
@@ -180,11 +211,8 @@ class Application : gio.application.Application
 
   /**
       Get `screensaverActive` property.
-      Returns: This property is `TRUE` if GTK believes that the screensaver is
-        currently active.
-        
-        GTK only tracks session state (including this) when
-        [gtk.application.Application.registerSession] is set to true.
+      Returns: This property is true if GTK believes that the screensaver
+        is currently active.
         
         Tracking the screensaver state is currently only supported on
         Linux.
@@ -195,21 +223,21 @@ class Application : gio.application.Application
   }
 
   /**
-      Creates a new [gtk.application.Application] instance.
+      Creates a new application instance.
       
       When using [gtk.application.Application], it is not necessary to call `funcGtk.init`
       manually. It is called as soon as the application gets registered as
       the primary instance.
       
       Concretely, `funcGtk.init` is called in the default handler for the
-      `GApplication::startup` signal. Therefore, [gtk.application.Application] subclasses should
-      always chain up in their `GApplication::startup` handler before using any GTK
-      API.
+      `GApplication::startup` signal. Therefore, [gtk.application.Application] subclasses
+      should always chain up in their `vfuncGIO.Application.startup` handler
+      before using any GTK API.
       
       Note that commandline arguments are not passed to `funcGtk.init`.
       
-      If `application_id` is not null, then it must be valid. See
-      `[gio.application.Application.idIsValid]`.
+      If `application_id` is not `NULL`, then it must be valid. See
+      [gio.application.Application.idIsValid].
       
       If no application ID is given then some features (most notably application
       uniqueness) will be disabled.
@@ -228,24 +256,23 @@ class Application : gio.application.Application
   }
 
   /**
-      Adds a window to `application`.
+      Adds a window to the application.
       
-      This call can only happen after the `application` has started;
+      This call can only happen after the application has started;
       typically, you should add new application windows in response
-      to the emission of the `GApplication::activate` signal.
+      to the emission of the `signalGIO.Application::activate` signal.
       
       This call is equivalent to setting the [gtk.window.Window.application]
-      property of `window` to `application`.
+      property of the window to application.
       
       Normally, the connection between the application and the window
       will remain until the window is destroyed, but you can explicitly
       remove it with [gtk.application.Application.removeWindow].
       
-      GTK will keep the `application` running as long as it has
-      any windows.
+      GTK will keep the application running as long as it has any windows.
   
       Params:
-        window = a [gtk.window.Window]
+        window = a window
   */
   void addWindow(gtk.window.Window window) nothrow
   {
@@ -259,7 +286,7 @@ class Application : gio.application.Application
       Params:
         detailedActionName = a detailed action name, specifying an action
             and target to obtain accelerators for
-      Returns: accelerators for `detailed_action_name`
+      Returns: accelerators for detailed_action_name
   */
   string[] getAccelsForAction(string detailedActionName) nothrow
   {
@@ -282,7 +309,7 @@ class Application : gio.application.Application
   }
 
   /**
-      Returns the list of actions (possibly empty) that `accel` maps to.
+      Returns the list of actions (possibly empty) that the accelerator maps to.
       
       Each item in the list is a detailed action name in the usual form.
       
@@ -302,7 +329,7 @@ class Application : gio.application.Application
   
       Params:
         accel = an accelerator that can be parsed by `funcGtk.accelerator_parse`
-      Returns: a null-terminated array of actions for `accel`
+      Returns: actions for accel
   */
   string[] getActionsForAccel(string accel) nothrow
   {
@@ -327,10 +354,10 @@ class Application : gio.application.Application
   /**
       Gets the “active” window for the application.
       
-      The active window is the one that was most recently focused (within
-      the application).  This window may not have the focus at the moment
-      if another application has it — this is just the most
-      recently-focused window within this application.
+      The active window is the one that was most recently focused
+      (within the application). This window may not have the focus
+      at the moment if another application has it — this is just
+      the most recently-focused window within this application.
       Returns: the active window
   */
   gtk.window.Window getActiveWindow() nothrow
@@ -348,9 +375,9 @@ class Application : gio.application.Application
       for more information.
   
       Params:
-        id = the id of the menu to look up
+        id = the ID of the menu to look up
       Returns: Gets the menu with the
-          given id from the automatically loaded resources
+          given ID from the automatically loaded resources
   */
   gio.menu.Menu getMenuById(string id) nothrow
   {
@@ -362,9 +389,8 @@ class Application : gio.application.Application
   }
 
   /**
-      Returns the menu model that has been set with
-      [gtk.application.Application.setMenubar].
-      Returns: the menubar for windows of `application`
+      Returns the menu model for the menu bar of the application.
+      Returns: the menubar for windows of the application
   */
   gio.menu_model.MenuModel getMenubar() nothrow
   {
@@ -375,14 +401,14 @@ class Application : gio.application.Application
   }
 
   /**
-      Returns the [gtk.application_window.ApplicationWindow] with the given ID.
+      Returns the window with the given ID.
       
       The ID of a [gtk.application_window.ApplicationWindow] can be retrieved with
       [gtk.application_window.ApplicationWindow.getId].
   
       Params:
         id = an identifier number
-      Returns: the window for the given `id`
+      Returns: the window for the given ID
   */
   gtk.window.Window getWindowById(uint id) nothrow
   {
@@ -393,7 +419,7 @@ class Application : gio.application.Application
   }
 
   /**
-      Gets a list of the [gtk.window.Window] instances associated with `application`.
+      Gets a list of the window associated with the application.
       
       The list is sorted by most recently focused window, such that the first
       element is the currently focused window. (Useful for choosing a parent
@@ -402,8 +428,7 @@ class Application : gio.application.Application
       The list that is returned should not be modified in any way. It will
       only remain valid until the next focus change or window creation or
       deletion.
-      Returns: a [glib.list.List] of [gtk.window.Window]
-          instances
+      Returns: the list of windows
   */
   gtk.window.Window[] getWindows() nothrow
   {
@@ -414,7 +439,7 @@ class Application : gio.application.Application
   }
 
   /**
-      Inform the session manager that certain types of actions should be
+      Informs the session manager that certain types of actions should be
       inhibited.
       
       This is not guaranteed to work on all platforms and for all types of
@@ -422,7 +447,7 @@ class Application : gio.application.Application
       
       Applications should invoke this method when they begin an operation
       that should not be interrupted, such as creating a CD or DVD. The
-      types of actions that may be blocked are specified by the `flags`
+      types of actions that may be blocked are specified by the flags
       parameter. When the application completes the operation it should
       call [gtk.application.Application.uninhibit] to remove the inhibitor. Note
       that an application can have multiple inhibitors, and all of them must
@@ -433,20 +458,23 @@ class Application : gio.application.Application
       the action. In most cases, users will be given the option to force
       the action to take place.
       
-      The `reason` message should be short and to the point.
+      The reason message should be short and to the point.
       
-      If `window` is given, the session manager may point the user to
+      If a window is given, the session manager may point the user to
       this window to find out more about why the action is inhibited.
+      
+      The cookie that is returned by this function  should be used as an
+      argument to [gtk.application.Application.uninhibit] in order to remove
+      the request.
   
       Params:
-        window = a [gtk.window.Window]
+        window = a window
         flags = what types of actions should be inhibited
         reason = a short, human-readable string that explains
             why these operations are inhibited
-      Returns: A non-zero cookie that is used to uniquely identify this
-          request. It should be used as an argument to [gtk.application.Application.uninhibit]
-          in order to remove the request. If the platform does not support
-          inhibiting or the request failed for some reason, 0 is returned.
+      Returns: A non-zero cookie that is used to uniquely identify this, or
+          0 if the platform does not support inhibiting or the request failed
+          for some reason
   */
   uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason = null) nothrow
   {
@@ -482,17 +510,17 @@ class Application : gio.application.Application
   }
 
   /**
-      Remove a window from `application`.
+      Remove a window from the application.
       
-      If `window` belongs to `application` then this call is equivalent to
-      setting the [gtk.window.Window.application] property of `window` to
-      `NULL`.
+      If the window belongs to the application then this call is
+      equivalent to setting the [gtk.window.Window.application]
+      property of the window to `NULL`.
       
       The application may stop running as a result of a call to this
-      function, if `window` was the last window of the `application`.
+      function, if the window was the last window of the application.
   
       Params:
-        window = a [gtk.window.Window]
+        window = a window
   */
   void removeWindow(gtk.window.Window window) nothrow
   {
@@ -503,14 +531,14 @@ class Application : gio.application.Application
       Sets zero or more keyboard accelerators that will trigger the
       given action.
       
-      The first item in `accels` will be the primary accelerator, which may be
-      displayed in the UI.
+      The first item in accels will be the primary accelerator,
+      which may be displayed in the UI.
       
-      To remove all accelerators for an action, use an empty, zero-terminated
-      array for `accels`.
+      To remove all accelerators for an action, use an empty,
+      zero-terminated array for accels.
       
-      For the `detailed_action_name`, see `[gio.action.Action.parseDetailedName]` and
-      `[gio.action.Action.printDetailedName]`.
+      For the detailed_action_name, see [gio.action.Action.parseDetailedName]
+      and [Gio.Action.print_detailed_name].
   
       Params:
         detailedActionName = a detailed action name, specifying an action
@@ -528,16 +556,16 @@ class Application : gio.application.Application
   }
 
   /**
-      Sets or unsets the menubar for windows of `application`.
+      Sets or unsets the menubar for windows of the application.
       
       This is a menubar in the traditional sense.
       
       This can only be done in the primary instance of the application,
-      after it has been registered. `GApplication::startup` is a good place
-      to call this.
+      after it has been registered. `vfuncGIO.Application.startup` is
+      a good place to call this.
       
       Depending on the desktop environment, this may appear at the top of
-      each window, or at the top of the screen.  In some environments, if
+      each window, or at the top of the screen. In some environments, if
       both the application menu and the menubar are set, the application
       menu will be presented as if it were the first item of the menubar.
       Other environments treat the two as completely separate — for example,
@@ -548,7 +576,7 @@ class Application : gio.application.Application
       user selecting these menu items.
   
       Params:
-        menubar = a [gio.menu_model.MenuModel]
+        menubar = a menu model
   */
   void setMenubar(gio.menu_model.MenuModel menubar = null) nothrow
   {
@@ -575,8 +603,7 @@ class Application : gio.application.Application
   
       Emitted when the session manager is about to end the session.
         
-        This signal is only emitted if [gtk.application.Application.registerSession]
-        is `TRUE`. Applications can connect to this signal and call
+        Applications can connect to this signal and call
         [gtk.application.Application.inhibit] with [gtk.types.ApplicationInhibitFlags.Logout]
         to delay the end of the session until state has been saved.
   
@@ -622,15 +649,16 @@ class Application : gio.application.Application
   /**
       Connect to `WindowAdded` signal.
   
-      Emitted when a [gtk.window.Window] is added to `application` through
-        [gtk.application.Application.addWindow].
+      Emitted when a window is added to an application.
+        
+        See [gtk.application.Application.addWindow].
   
       Params:
         callback = signal callback delegate or function to connect
   
           `void callback(gtk.window.Window window, gtk.application.Application application)`
   
-          `window` the newly-added [gtk.window.Window] (optional)
+          `window` the newly-added window (optional)
   
           `application` the instance the signal is connected to (optional)
   
@@ -673,7 +701,7 @@ class Application : gio.application.Application
   /**
       Connect to `WindowRemoved` signal.
   
-      Emitted when a [gtk.window.Window] is removed from `application`.
+      Emitted when a window is removed from an application.
         
         This can happen as a side-effect of the window being destroyed
         or explicitly through [gtk.application.Application.removeWindow].
@@ -683,7 +711,7 @@ class Application : gio.application.Application
   
           `void callback(gtk.window.Window window, gtk.application.Application application)`
   
-          `window` the [gtk.window.Window] that is being removed (optional)
+          `window` the window that is being removed (optional)
   
           `application` the instance the signal is connected to (optional)
   
@@ -732,7 +760,7 @@ class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
   /**
       Set `menubar` property.
       Params:
-        propval = The [gio.menu_model.MenuModel] to be used for the application's menu bar.
+        propval = The menu model to be used for the application's menu bar.
       Returns: Builder instance for fluent chaining
   */
   T menubar(gio.menu_model.MenuModel propval) nothrow
@@ -743,11 +771,14 @@ class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
   /**
       Set `registerSession` property.
       Params:
-        propval = Set this property to `TRUE` to register with the session manager.
+        propval = Set this property to true to register with the session manager.
           
           This will make GTK track the session state (such as the
           [gtk.application.Application.screensaverActive] property).
       Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property is ignored. GTK always registers
+        with the session manager
   */
   T registerSession(bool propval) nothrow
   {

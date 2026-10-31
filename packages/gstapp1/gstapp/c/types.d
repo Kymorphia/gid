@@ -69,7 +69,7 @@ enum GstAppStreamType
     Appsink will internally use a queue to collect buffers from the streaming
     thread. If the application is not pulling samples fast enough, this queue
     will consume a lot of memory over time. The "max-buffers", "max-time" and "max-bytes"
-    properties can be used to limit the queue size. The "drop" property controls whether the
+    properties can be used to limit the queue size. The "leaky-type" property controls whether the
     streaming thread blocks or if older buffers are dropped when the maximum
     queue size is reached. Note that blocking the streaming thread can negatively
     affect real-time performance and should be avoided.
@@ -135,7 +135,7 @@ struct GstAppSinkCallbacks
       Called when a new event is available.
             This callback is called from the streaming thread.
             The new event can be retrieved with
-            gst_app_sink_pull_event() either from this callback
+            [gstapp.app_sink.AppSink.pullObject] either from this callback
             or from any other thread.
             The callback should return true if the event has been handled,
             false otherwise.
@@ -146,9 +146,6 @@ struct GstAppSinkCallbacks
   /**
       Called when the propose_allocation query is available.
             This callback is called from the streaming thread.
-            The allocation query can be retrieved with
-            gst_app_sink_propose_allocation() either from this callback
-            or from any other thread.
             Since: 1.24
   */
   extern(C) gboolean function(GstAppSink* appsink, GstQuery* query, void* userData) proposeAllocation;
@@ -193,6 +190,14 @@ struct GstAppSinkClass
 
 /** */
 struct GstAppSinkPrivate;
+
+/**
+    A set of callbacks that can be installed on the appsink with
+    [gstapp.app_sink.AppSink.setSimpleCallbacks].
+    
+    Unlike GstAppSinkCallbacks this can also be used from bindings.
+*/
+struct GstAppSinkSimpleCallbacks;
 
 /**
     The appsrc element can be used by applications to insert data into a
@@ -337,4 +342,28 @@ struct GstAppSrcClass
 
 /** */
 struct GstAppSrcPrivate;
+
+/**
+    A set of callbacks that can be installed on the appsink with
+    [gstapp.app_sink.AppSink.setSimpleCallbacks].
+    
+    Unlike GstAppSrcCallbacks this can also be used from bindings.
+*/
+struct GstAppSrcSimpleCallbacks;
+
+alias extern(C) void function(GstAppSink* appsink, void* userData) GstAppSinkEosCallback;
+
+alias extern(C) gboolean function(GstAppSink* appsink, void* userData) GstAppSinkNewEventCallback;
+
+alias extern(C) GstFlowReturn function(GstAppSink* appsink, void* userData) GstAppSinkNewPrerollCallback;
+
+alias extern(C) GstFlowReturn function(GstAppSink* appsink, void* userData) GstAppSinkNewSampleCallback;
+
+alias extern(C) gboolean function(GstAppSink* appsink, GstQuery* query, void* userData) GstAppSinkProposeAllocationCallback;
+
+alias extern(C) void function(GstAppSrc* appsrc, void* userData) GstAppSrcEnoughDataCallback;
+
+alias extern(C) void function(GstAppSrc* appsrc, uint length, void* userData) GstAppSrcNeedDataCallback;
+
+alias extern(C) gboolean function(GstAppSrc* appsrc, ulong offset, void* userData) GstAppSrcSeekDataCallback;
 

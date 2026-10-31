@@ -171,8 +171,8 @@ class ToolbarView : gtk.widget.Widget
       Get `bottomBarStyle` property.
       Returns: Appearance of the bottom bars.
         
-        If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling content
-        has a subtle undershoot shadow when touching them, same as the
+        If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling
+        content has a subtle undershoot shadow when touching them, same as the
         [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
         style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
         [adw.preferences_page.PreferencesPage], where the background at the bottom of the page is
@@ -182,15 +182,15 @@ class ToolbarView : gtk.widget.Widget
         visible. It is also never present if
         [adw.toolbar_view.ToolbarView.extendContentToBottomEdge] is set to `TRUE`.
         
-        If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque background and a
-        persistent shadow, this is suitable for content such as
+        If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque
+        background and a persistent shadow, this is suitable for content such as
         [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
         where some elements are directly adjacent to the bottom bars, or
         [adw.tab_view.TabView], where each page can have a different background.
         
-        [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-        shadow is replaced with a more subtle border. This can be useful for
-        applications like image viewers.
+        `enum@Adw.ToolbarStyle.raised-border` is similar to
+        [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more
+        subtle border. This can be useful for applications like image viewers.
         
         See also [adw.toolbar_view.ToolbarView.topBarStyle].
   */
@@ -204,8 +204,8 @@ class ToolbarView : gtk.widget.Widget
       Params:
         propval = Appearance of the bottom bars.
           
-          If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling content
-          has a subtle undershoot shadow when touching them, same as the
+          If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling
+          content has a subtle undershoot shadow when touching them, same as the
           [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
           style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
           [adw.preferences_page.PreferencesPage], where the background at the bottom of the page is
@@ -215,15 +215,15 @@ class ToolbarView : gtk.widget.Widget
           visible. It is also never present if
           [adw.toolbar_view.ToolbarView.extendContentToBottomEdge] is set to `TRUE`.
           
-          If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque background and a
-          persistent shadow, this is suitable for content such as
+          If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque
+          background and a persistent shadow, this is suitable for content such as
           [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
           where some elements are directly adjacent to the bottom bars, or
           [adw.tab_view.TabView], where each page can have a different background.
           
-          [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-          shadow is replaced with a more subtle border. This can be useful for
-          applications like image viewers.
+          `enum@Adw.ToolbarStyle.raised-border` is similar to
+          [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more
+          subtle border. This can be useful for applications like image viewers.
           
           See also [adw.toolbar_view.ToolbarView.topBarStyle].
   */
@@ -399,8 +399,8 @@ class ToolbarView : gtk.widget.Widget
       Get `topBarStyle` property.
       Returns: Appearance of the top bars.
         
-        If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling content has a
-        subtle undershoot shadow when touching them, same as the
+        If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling
+        content has a subtle undershoot shadow when touching them, same as the
         [`.undershoot-top`](style-classes.html#undershoot-indicators)
         style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
         [adw.preferences_page.PreferencesPage], where the background at the top of the page is
@@ -410,15 +410,15 @@ class ToolbarView : gtk.widget.Widget
         visible. It is also never present if
         [adw.toolbar_view.ToolbarView.extendContentToTopEdge] is set to `TRUE`.
         
-        If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background and a
-        persistent shadow, this is suitable for content such as
+        If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque
+        background and a persistent shadow, this is suitable for content such as
         [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
         where some elements are directly adjacent to the top bars, or
         [adw.tab_view.TabView], where each page can have a different background.
         
-        [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-        shadow is replaced with a more subtle border. This can be useful for
-        applications like image viewers.
+        `enum@Adw.ToolbarStyle.raised-border` is similar to
+        [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more
+        subtle border. This can be useful for applications like image viewers.
         
         See also [adw.toolbar_view.ToolbarView.bottomBarStyle].
   */
@@ -432,8 +432,8 @@ class ToolbarView : gtk.widget.Widget
       Params:
         propval = Appearance of the top bars.
           
-          If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling content has a
-          subtle undershoot shadow when touching them, same as the
+          If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling
+          content has a subtle undershoot shadow when touching them, same as the
           [`.undershoot-top`](style-classes.html#undershoot-indicators)
           style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
           [adw.preferences_page.PreferencesPage], where the background at the top of the page is
@@ -443,15 +443,15 @@ class ToolbarView : gtk.widget.Widget
           visible. It is also never present if
           [adw.toolbar_view.ToolbarView.extendContentToTopEdge] is set to `TRUE`.
           
-          If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background and a
-          persistent shadow, this is suitable for content such as
+          If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque
+          background and a persistent shadow, this is suitable for content such as
           [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
           where some elements are directly adjacent to the top bars, or
           [adw.tab_view.TabView], where each page can have a different background.
           
-          [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-          shadow is replaced with a more subtle border. This can be useful for
-          applications like image viewers.
+          `enum@Adw.ToolbarStyle.raised-border` is similar to
+          [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more
+          subtle border. This can be useful for applications like image viewers.
           
           See also [adw.toolbar_view.ToolbarView.bottomBarStyle].
   */
@@ -510,7 +510,7 @@ class ToolbarView : gtk.widget.Widget
   }
 
   /**
-      Gets appearance of the botom bars for self.
+      Gets appearance of the bottom bars for self.
       Returns: bottom bar style
   */
   adw.types.ToolbarStyle getBottomBarStyle() nothrow
@@ -619,8 +619,8 @@ class ToolbarView : gtk.widget.Widget
   /**
       Sets appearance of the bottom bars for self.
       
-      If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling content has
-      a subtle undershoot shadow when touching them, same as the
+      If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling
+      content has a subtle undershoot shadow when touching them, same as the
       [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
       style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
       [adw.preferences_page.PreferencesPage], where the background at the bottom of the page is
@@ -630,15 +630,15 @@ class ToolbarView : gtk.widget.Widget
       visible. It is also never present if
       [adw.toolbar_view.ToolbarView.extendContentToBottomEdge] is set to `TRUE`.
       
-      If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque background and a
-      persistent shadow, this is suitable for content such as
+      If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque
+      background and a persistent shadow, this is suitable for content such as
       [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
       where some elements are directly adjacent to the bottom bars, or
       [adw.tab_view.TabView], where each page can have a different background.
       
-      [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-      shadow is replaced with a more subtle border. This can be useful for
-      applications like image viewers.
+      `enumAdw.ToolbarStyle.raised-border` is similar to
+      [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more subtle
+      border. This can be useful for applications like image viewers.
       
       See also [adw.toolbar_view.ToolbarView.setTopBarStyle].
   
@@ -734,8 +734,8 @@ class ToolbarView : gtk.widget.Widget
   /**
       Sets appearance of the top bars for self.
       
-      If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling content has a
-      subtle undershoot shadow when touching them, same as the
+      If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling
+      content has a subtle undershoot shadow when touching them, same as the
       [`.undershoot-top`](style-classes.html#undershoot-indicators)
       style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
       [adw.preferences_page.PreferencesPage], where the background at the top of the page is
@@ -745,15 +745,15 @@ class ToolbarView : gtk.widget.Widget
       visible. It is also never present if
       [adw.toolbar_view.ToolbarView.extendContentToTopEdge] is set to `TRUE`.
       
-      If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background and a
-      persistent shadow, this is suitable for content such as
+      If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background
+      and a persistent shadow, this is suitable for content such as
       [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
       where some elements are directly adjacent to the top bars, or
       [adw.tab_view.TabView], where each page can have a different background.
       
-      [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-      shadow is replaced with a more subtle border. This can be useful for
-      applications like image viewers.
+      `enumAdw.ToolbarStyle.raised-border` is similar to
+      [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more subtle
+      border. This can be useful for applications like image viewers.
       
       See also [adw.toolbar_view.ToolbarView.setBottomBarStyle].
   
@@ -776,8 +776,8 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Appearance of the bottom bars.
           
-          If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling content
-          has a subtle undershoot shadow when touching them, same as the
+          If set to [adw.types.ToolbarStyle.Flat], bottom bars are flat and scrolling
+          content has a subtle undershoot shadow when touching them, same as the
           [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
           style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
           [adw.preferences_page.PreferencesPage], where the background at the bottom of the page is
@@ -787,15 +787,15 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           visible. It is also never present if
           [adw.toolbar_view.ToolbarView.extendContentToBottomEdge] is set to `TRUE`.
           
-          If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque background and a
-          persistent shadow, this is suitable for content such as
+          If set to [adw.types.ToolbarStyle.Raised], bottom bars have an opaque
+          background and a persistent shadow, this is suitable for content such as
           [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
           where some elements are directly adjacent to the bottom bars, or
           [adw.tab_view.TabView], where each page can have a different background.
           
-          [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-          shadow is replaced with a more subtle border. This can be useful for
-          applications like image viewers.
+          `enum@Adw.ToolbarStyle.raised-border` is similar to
+          [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more
+          subtle border. This can be useful for applications like image viewers.
           
           See also [adw.toolbar_view.ToolbarView.topBarStyle].
       Returns: Builder instance for fluent chaining
@@ -892,8 +892,8 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Appearance of the top bars.
           
-          If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling content has a
-          subtle undershoot shadow when touching them, same as the
+          If set to [adw.types.ToolbarStyle.Flat], top bars are flat and scrolling
+          content has a subtle undershoot shadow when touching them, same as the
           [`.undershoot-top`](style-classes.html#undershoot-indicators)
           style class. This works well for simple content, e.g. [adw.status_page.StatusPage] or
           [adw.preferences_page.PreferencesPage], where the background at the top of the page is
@@ -903,15 +903,15 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           visible. It is also never present if
           [adw.toolbar_view.ToolbarView.extendContentToTopEdge] is set to `TRUE`.
           
-          If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque background and a
-          persistent shadow, this is suitable for content such as
+          If set to [adw.types.ToolbarStyle.Raised], top bars have an opaque
+          background and a persistent shadow, this is suitable for content such as
           [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
           where some elements are directly adjacent to the top bars, or
           [adw.tab_view.TabView], where each page can have a different background.
           
-          [adw.types.ToolbarStyle.RaisedBorder] is similar to [adw.types.ToolbarStyle.Raised], but the
-          shadow is replaced with a more subtle border. This can be useful for
-          applications like image viewers.
+          `enum@Adw.ToolbarStyle.raised-border` is similar to
+          [adw.types.ToolbarStyle.Raised], but the shadow is replaced with a more
+          subtle border. This can be useful for applications like image viewers.
           
           See also [adw.toolbar_view.ToolbarView.bottomBarStyle].
       Returns: Builder instance for fluent chaining

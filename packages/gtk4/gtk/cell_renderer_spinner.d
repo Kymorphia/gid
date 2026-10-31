@@ -64,13 +64,20 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
     return new CellRendererSpinnerGidBuilder;
   }
 
-  /** */
+  /**
+      Get `active` property.
+      Returns: Whether the spinner is active (ie. shown) in the cell
+  */
   @property bool active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("active");
   }
 
-  /** */
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the spinner is active (ie. shown) in the cell
+  */
   @property void active(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
@@ -139,7 +146,12 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
 class CellRendererSpinnerGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
 {
 
-  /** */
+  /**
+      Set `active` property.
+      Params:
+        propval = Whether the spinner is active (ie. shown) in the cell
+      Returns: Builder instance for fluent chaining
+  */
   T active(bool propval) nothrow
   {
     return setProperty("active", propval);

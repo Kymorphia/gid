@@ -22,7 +22,7 @@ import gobject.object;
     One useful application of this interface is to map the
     names of actions from various action groups to unique,
     prefixed names (e.g. by prepending "app." or "win.").
-    This is the motivation for the 'Map' part of the interface
+    This is the motivation for the ‘Map’ part of the interface
     name.
 */
 interface ActionMap
@@ -44,15 +44,15 @@ interface ActionMap
       The action map takes its own reference on action.
   
       Params:
-        action = a #GAction
+        action = a [gio.action.Action]
   */
   void addAction(gio.action.Action action);
 
   /**
-      A convenience function for creating multiple #GSimpleAction instances
-      and adding them to a #GActionMap.
+      A convenience function for creating multiple [gio.simple_action.SimpleAction]
+      instances and adding them to a [gio.action_map.ActionMap].
       
-      Each action is constructed as per one #GActionEntry.
+      Each action is constructed as per one [gio.action_entry.ActionEntry].
       
       ```c
       static void
@@ -89,7 +89,7 @@ interface ActionMap
   
       Params:
         entries = a pointer to
-                    the first item in an array of #GActionEntry structs
+            the first item in an array of [gio.action_entry.ActionEntry] structs
         userData = the user data for signal connections
   */
   void addActionEntries(gio.action_entry.ActionEntry[] entries, void* userData = null);
@@ -97,11 +97,11 @@ interface ActionMap
   /**
       Looks up the action with the name action_name in action_map.
       
-      If no such action exists, returns null.
+      If no such action exists, returns `NULL`.
   
       Params:
         actionName = the name of an action
-      Returns: a #GAction, or null
+      Returns: a [gio.action.Action]
   */
   gio.action.Action lookupAction(string actionName);
 
@@ -116,7 +116,7 @@ interface ActionMap
   void removeAction(string actionName);
 
   /**
-      Remove actions from a #GActionMap. This is meant as the reverse of
+      Remove actions from a [gio.action_map.ActionMap]. This is meant as the reverse of
       [gio.action_map.ActionMap.addActionEntries].
       
       
@@ -141,7 +141,7 @@ interface ActionMap
   
       Params:
         entries = a pointer to
-                    the first item in an array of #GActionEntry structs
+            the first item in an array of [gio.action_entry.ActionEntry] structs
   */
   void removeActionEntries(gio.action_entry.ActionEntry[] entries);
 }

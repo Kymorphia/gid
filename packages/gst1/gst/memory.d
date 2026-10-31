@@ -33,8 +33,8 @@ import gst.types;
     New memory can be created with [gst.memory.Memory.newWrapped] that wraps the memory
     allocated elsewhere.
     
-    Refcounting of the memory block is performed with gst_memory_ref() and
-    gst_memory_unref().
+    Refcounting of the memory block is performed with [gst.memory.Memory.ref_] and
+    [gst.memory.Memory.unref].
     
     The size of the memory can be retrieved and changed with
     [gst.memory.Memory.getSizes] and [gst.memory.Memory.resize] respectively.
@@ -317,6 +317,18 @@ class Memory : gobject.boxed.Boxed
   }
 
   /**
+      Tests if you can safely modify memory. It is only safe to modify memory when
+      there is only one owner of the memory - ie, the object is writable.
+      Returns: 
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_memory_is_writable(cast(const(GstMemory)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Create a #GstMemory object that is mapped with flags. If mem is mappable
       with flags, this function returns the mapped mem directly. Otherwise a
       mapped copy of mem is returned.
@@ -337,6 +349,29 @@ class Memory : gobject.boxed.Boxed
     _cretval = gst_memory_make_mapped(cast(GstMemory*)this._cPtr, &_info, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns a writable copy of memory.
+      
+      If there is only one reference count on memory, the caller must be the owner,
+      and so this function will return the memory object unchanged. If on the other
+      hand there is more than one reference on the object, a new memory object will
+      be returned. The caller's reference on memory will be removed, and instead the
+      caller will own a reference to the returned object.
+      
+      In short, this function unrefs the memory in the argument and refs the memory
+      that it returns. Don't access the argument after calling this function. See
+      also: [gst.memory.Memory.ref_].
+      Returns: a writable memory which may or may not be the
+            same as memory
+  */
+  gst.memory.Memory makeWritable() nothrow
+  {
+    GstMemory* _cretval;
+    _cretval = gst_memory_make_writable(cast(GstMemory*)this._cPtr);
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

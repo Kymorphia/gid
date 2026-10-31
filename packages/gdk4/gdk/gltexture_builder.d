@@ -5,6 +5,7 @@ public import gid.basictypes;
 import cairo.region;
 import gdk.c.functions;
 import gdk.c.types;
+import gdk.color_state;
 import gdk.glcontext;
 import gdk.texture;
 import gdk.types;
@@ -13,8 +14,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [gdk.gltexture_builder.GLTextureBuilder] is a builder used to construct [gdk.texture.Texture] objects from
-    GL textures.
+    Constructs [gdk.texture.Texture] objects from GL textures.
     
     The operation is quite simple: Create a texture builder, set all the necessary
     properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.context],
@@ -60,6 +60,25 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   static GLTextureBuilderGidBuilder builder() nothrow
   {
     return new GLTextureBuilderGidBuilder;
+  }
+
+  /**
+      Get `colorState` property.
+      Returns: The color state of the texture.
+  */
+  @property gdk.color_state.ColorState colorState() nothrow
+  {
+    return getColorState();
+  }
+
+  /**
+      Set `colorState` property.
+      Params:
+        propval = The color state of the texture.
+  */
+  @property void colorState(gdk.color_state.ColorState propval) nothrow
+  {
+    setColorState(propval);
   }
 
   /**
@@ -249,6 +268,18 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
+      Gets the color state previously set via [gdk.gltexture_builder.GLTextureBuilder.setColorState].
+      Returns: the color state
+  */
+  gdk.color_state.ColorState getColorState() nothrow
+  {
+    GdkColorState* _cretval;
+    _cretval = gdk_gl_texture_builder_get_color_state(cast(GdkGLTextureBuilder*)this._cPtr);
+    auto _retval = _cretval ? new gdk.color_state.ColorState(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
       Gets the context previously set via [gdk.gltexture_builder.GLTextureBuilder.setContext] or
       null if none was set.
       Returns: The context
@@ -357,13 +388,27 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
+      Sets the color state for the texture.
+      
+      By default, the sRGB colorstate is used. If you don't know what
+      colorstates are, this is probably the right thing.
+  
+      Params:
+        colorState = a [gdk.color_state.ColorState]
+  */
+  void setColorState(gdk.color_state.ColorState colorState) nothrow
+  {
+    gdk_gl_texture_builder_set_color_state(cast(GdkGLTextureBuilder*)this._cPtr, colorState ? cast(GdkColorState*)colorState._cPtr(No.Dup) : null);
+  }
+
+  /**
       Sets the context to be used for the texture. This is the context that owns
       the texture.
       
       The context must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
   
       Params:
-        context = The context the texture beongs to or null to unset
+        context = The context the texture belongs to or null to unset
   */
   void setContext(gdk.glcontext.GLContext context = null) nothrow
   {
@@ -505,6 +550,17 @@ class GLTextureBuilder : gobject.object.ObjectWrap
 /// Fluent builder implementation template for [gdk.gltexture_builder.GLTextureBuilder]
 class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
+
+  /**
+      Set `colorState` property.
+      Params:
+        propval = The color state of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T colorState(gdk.color_state.ColorState propval) nothrow
+  {
+    return setProperty("color-state", propval);
+  }
 
   /**
       Set `context` property.

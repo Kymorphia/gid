@@ -22,7 +22,7 @@ import gobject.types;
 import gobject.value;
 
 /**
-    The [gdk.drop.Drop] object represents the target of an ongoing DND operation.
+    Represents the target of an ongoing DND operation.
     
     Possible drop sites get informed about the status of the ongoing drag
     operation with events of type [gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
@@ -135,7 +135,8 @@ class Drop : gobject.object.ObjectWrap
       available via [gdk.drop.Drop.getActions].
   
       Params:
-        action = the action performed by the destination or 0 if the drop failed
+        action = the action performed by the destination or [gdk.types.DragAction.None] if the
+            drop failed
   */
   void finish(gdk.types.DragAction action) nothrow
   {
@@ -195,7 +196,7 @@ class Drop : gobject.object.ObjectWrap
       If this is an in-app drag-and-drop operation, returns the [gdk.drag.Drag]
       that corresponds to this drop.
       
-      If it is not, null is returned.
+      If it is not, `NULL` is returned.
       Returns: the corresponding [gdk.drag.Drag]
   */
   gdk.drag.Drag getDrag() nothrow
@@ -299,10 +300,6 @@ class Drop : gobject.object.ObjectWrap
       Asynchronously request the drag operation's contents converted
       to the given type.
       
-      When the operation is finished callback will be called. You must
-      then call [gdk.drop.Drop.readValueFinish] to get the resulting
-      [gobject.value.Value].
-      
       For local drag-and-drop operations that are available in the given
       `GType`, the value will be copied directly. Otherwise, GDK will
       try to use `funcGdk.content_deserialize_async` to convert the data.
@@ -371,8 +368,8 @@ class Drop : gobject.object.ObjectWrap
       actions first and then later call this function again.
   
       Params:
-        actions = Supported actions of the destination, or 0 to indicate
-             that a drop will not be accepted
+        actions = Supported actions of the destination, or [gdk.types.DragAction.None] to
+             indicate that a drop will not be accepted
         preferred = A unique action that's a member of actions indicating the
              preferred action
   */

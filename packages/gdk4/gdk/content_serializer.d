@@ -17,8 +17,7 @@ import gobject.types;
 import gobject.value;
 
 /**
-    A [gdk.content_serializer.ContentSerializer] is used to serialize content for
-    inter-application data transfers.
+    Serializes content for inter-application data transfers.
     
     The [gdk.content_serializer.ContentSerializer] transforms an object that is identified
     by a GType into a serialized form (i.e. a byte stream) that is

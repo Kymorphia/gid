@@ -151,7 +151,7 @@ class String : gobject.boxed.Boxed
       Creates a new #GString, initialized with the given string.
       
       After this call, init belongs to the #GString and may no longer be
-      modified by the caller. The memory of data has to be dynamically
+      modified by the caller. The memory of init has to be dynamically
       allocated and will eventually be freed with [glib.global.gfree].
   
       Params:
@@ -326,6 +326,21 @@ class String : gobject.boxed.Boxed
     const(char)* _rval = rval.toCString!(No.Malloc, No.Nullable);
     _cretval = g_string_assign(cast(GString*)this._cPtr, _rval);
     auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Copies the [glib.string_.String] instance and its contents.
+      
+      This will preserve the allocation length of the [glib.string_.String] in the
+      copy.
+      Returns: a copy of string
+  */
+  glib.string_.String copy() nothrow
+  {
+    GString* _cretval;
+    _cretval = g_string_copy(cast(GString*)this._cPtr);
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -624,13 +639,18 @@ class String : gobject.boxed.Boxed
       replacement will be inserted no more than once per possible position
       (beginning of string, end of string and between characters). This did
       not work correctly in earlier versions.
+      
+      If limit is zero and more than `G_MAXUINT` instances of find are in
+      the input string, they will all be replaced, but the return value will
+      be capped at `G_MAXUINT`.
   
       Params:
         find = the string to find in string
         replace = the string to insert in place of find
         limit = the maximum instances of find to replace with replace, or `0` for
           no limit
-      Returns: the number of find and replace operations performed.
+      Returns: the number of find and replace operations performed,
+          up to `G_MAXUINT`
   */
   uint replace(string find, string replace, uint limit) nothrow
   {

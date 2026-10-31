@@ -1029,7 +1029,7 @@ class Harness
 
   /**
       Pulls all pending data from the harness and returns it as a single buffer.
-      Returns: the data as a buffer. Unref with gst_buffer_unref()
+      Returns: the data as a buffer. Unref with [gst.buffer.Buffer.unref]
             when no longer needed.
   */
   gst.buffer.Buffer takeAllDataAsBuffer() nothrow

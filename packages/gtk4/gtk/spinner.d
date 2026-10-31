@@ -16,12 +16,15 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.spinner.Spinner] widget displays an icon-size spinning animation.
+    Displays an icon-size spinning animation.
     
     It is often used as an alternative to a [gtk.progress_bar.ProgressBar]
     for displaying indefinite activity, instead of actual progress.
     
-    ![An example GtkSpinner](spinner.png)
+    <picture>
+      <source srcset="spinner-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSpinner" src="spinner.png">
+    </picture>
     
     To start the animation, use [gtk.spinner.Spinner.start], to stop it
     use [gtk.spinner.Spinner.stop].
@@ -31,6 +34,10 @@ import gtk.widget;
     [gtk.spinner.Spinner] has a single CSS node with the name spinner.
     When the animation is active, the :checked pseudoclass is
     added to this node.
+    
+    # Accessibility
+    
+    [gtk.spinner.Spinner] uses the [gtk.types.AccessibleRole.ProgressBar] role.
 */
 class Spinner : gtk.widget.Widget
 {

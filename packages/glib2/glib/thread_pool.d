@@ -250,7 +250,7 @@ class ThreadPool
       If max_threads is -1, no limit is imposed on the number
       of unused threads.
       
-      The default value is 2.
+      The default value is 8 since GLib 2.84. Previously the default value was 2.
   
       Params:
         maxThreads = maximal number of unused threads

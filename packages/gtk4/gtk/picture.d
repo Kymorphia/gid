@@ -20,9 +20,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    The [gtk.picture.Picture] widget displays a [gdk.paintable.Paintable].
+    Displays a [gdk.paintable.Paintable].
     
-    ![An example GtkPicture](picture.png)
+    <picture>
+      <source srcset="picture-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPicture" src="picture.png">
+    </picture>
     
     Many convenience functions are provided to make pictures simple to use.
     For example, if you want to load an image from a file, and then display
@@ -36,8 +39,8 @@ import gtk.widget;
     “broken image” icon similar to that used in many web browsers.
     If you want to handle errors in loading the file yourself,
     for example by displaying an error message, then load the image with
-    [gdk.texture.Texture.newFromFile], then create the [gtk.picture.Picture] with
-    [gtk.picture.Picture.newForPaintable].
+    and image loading framework such as libglycin, then create the [gtk.picture.Picture]
+    with [gtk.picture.Picture.newForPaintable].
     
     Sometimes an application will want to avoid depending on external data
     files, such as image files. See the documentation of [gio.resource.Resource] for details.
@@ -181,6 +184,25 @@ class Picture : gtk.widget.Widget
   }
 
   /**
+      Get `isolateContents` property.
+      Returns: If the rendering of the contents is isolated from the rest of the widget tree.
+  */
+  @property bool isolateContents() nothrow
+  {
+    return getIsolateContents();
+  }
+
+  /**
+      Set `isolateContents` property.
+      Params:
+        propval = If the rendering of the contents is isolated from the rest of the widget tree.
+  */
+  @property void isolateContents(bool propval) nothrow
+  {
+    setIsolateContents(propval);
+  }
+
+  /**
       Get `keepAspectRatio` property.
       Returns: Whether the GtkPicture will render its contents trying to preserve the aspect
         ratio.
@@ -241,9 +263,9 @@ class Picture : gtk.widget.Widget
       If the file isn’t found or can’t be loaded, the resulting
       [gtk.picture.Picture] is empty.
       
-      If you need to detect failures to load the file, use
-      [gdk.texture.Texture.newFromFile] to load the file yourself,
-      then create the [gtk.picture.Picture] from the texture.
+      If you need to detect failures to load the file, use an
+      image loading framework such as libglycin to load the file
+      yourself, then create the [gtk.picture.Picture] from the texture.
   
       Params:
         file = a [gio.file.File]
@@ -391,6 +413,17 @@ class Picture : gtk.widget.Widget
   }
 
   /**
+      Returns whether the contents are isolated.
+      Returns: True if contents are isolated
+  */
+  bool getIsolateContents() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_picture_get_isolate_contents(cast(GtkPicture*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Returns whether the [gtk.picture.Picture] preserves its contents aspect ratio.
       Returns: true if the self tries to keep the contents' aspect ratio
   
@@ -436,7 +469,7 @@ class Picture : gtk.widget.Widget
   }
 
   /**
-      If set to true, the self can be made smaller than its contents.
+      If set to true, then self can be made smaller than its contents.
       
       The contents will then be scaled down when rendering.
       
@@ -472,6 +505,12 @@ class Picture : gtk.widget.Widget
       Makes self load and display file.
       
       See [gtk.picture.Picture.newForFile] for details.
+      
+      ::: warning
+          Note that this function should not be used with untrusted data.
+          Use a proper image loading framework such as libglycin, which can
+          load many image formats into a [gdk.texture.Texture], and then use
+          [gtk.image.Image.setFromPaintable].
   
       Params:
         file = a [gio.file.File]
@@ -485,6 +524,12 @@ class Picture : gtk.widget.Widget
       Makes self load and display the given filename.
       
       This is a utility function that calls [gtk.picture.Picture.setFile].
+      
+      ::: warning
+          Note that this function should not be used with untrusted data.
+          Use a proper image loading framework such as libglycin, which can
+          load many image formats into a [gdk.texture.Texture], and then use
+          [gtk.image.Image.setFromPaintable].
   
       Params:
         filename = the filename to play
@@ -493,6 +538,26 @@ class Picture : gtk.widget.Widget
   {
     const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
     gtk_picture_set_filename(cast(GtkPicture*)this._cPtr, _filename);
+  }
+
+  /**
+      If set to true, then the contents will be rendered individually.
+      
+      If set to false they will be able to erase or otherwise mix with
+      the background.
+      
+      GTK supports finer grained isolation, in rare cases where you need
+      this, you can use [gtk.snapshot.Snapshot.pushIsolation] yourself to
+      achieve this.
+      
+      By default contents are isolated.
+  
+      Params:
+        isolateContents = if contents are rendered separately
+  */
+  void setIsolateContents(bool isolateContents) nothrow
+  {
+    gtk_picture_set_isolate_contents(cast(GtkPicture*)this._cPtr, isolateContents);
   }
 
   /**
@@ -521,7 +586,7 @@ class Picture : gtk.widget.Widget
   /**
       Makes self display the given paintable.
       
-      If paintable is null, nothing will be displayed.
+      If paintable is `NULL`, nothing will be displayed.
       
       See [gtk.picture.Picture.newForPaintable] for details.
   
@@ -613,6 +678,17 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
+  }
+
+  /**
+      Set `isolateContents` property.
+      Params:
+        propval = If the rendering of the contents is isolated from the rest of the widget tree.
+      Returns: Builder instance for fluent chaining
+  */
+  T isolateContents(bool propval) nothrow
+  {
+    return setProperty("isolate-contents", propval);
   }
 
   /**

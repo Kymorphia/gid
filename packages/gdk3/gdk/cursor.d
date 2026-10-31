@@ -140,6 +140,11 @@ class Cursor : gobject.object.ObjectWrap
       - ![](nwse_resize_cursor.png) "nwse-resize"
       - ![](zoom_in_cursor.png) "zoom-in"
       - ![](zoom_out_cursor.png) "zoom-out"
+      
+      Additionally, the following cursor names are supported, which are
+      not in the CSS specification:
+      - ![](dnd_ask_cursor.png) "dnd-ask"
+      - ![](all_resize_cursor.png) "all-resize"
   
       Params:
         display = the #GdkDisplay for which the cursor will be created

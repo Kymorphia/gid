@@ -13,7 +13,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [gdk.app_launch_context.AppLaunchContext] handles launching an application in a graphical context.
+    Handles launching an application in a graphical context.
     
     It is an implementation of [gio.app_launch_context.AppLaunchContext] that provides startup
     notification and allows to launch applications on a specific workspace.

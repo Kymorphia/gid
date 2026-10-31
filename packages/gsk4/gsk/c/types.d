@@ -127,7 +127,7 @@ enum GskCorner
 }
 
 /**
-    [gsk.types.FillRule] is used to select how paths are filled.
+    Specifies how paths are filled.
     
     Whether or not a point is included in the fill is determined by taking
     a ray from that point to infinity and looking at intersections with the
@@ -161,8 +161,7 @@ enum GskFillRule
 }
 
 /**
-    This defines the types of the uniforms that `GskGLShaders`
-    declare.
+    Defines the types of the uniforms that `GskGLShaders` declare.
     
     It defines both what the type is called in the GLSL shader
     code, and what the corresponding C type is on the Gtk side.
@@ -208,6 +207,40 @@ enum GskGLUniformType
       A GLSL vec4 / graphene_vec4_t uniform
   */
   Vec4 = 7,
+}
+
+/**
+    These flags describe the types of isolations possible with a
+    [gsk.isolation_node.IsolationNode].
+    
+    More isolation options may be added in the future.
+*/
+enum GskIsolation : uint
+{
+  /**
+      No isolation is defined.
+  */
+  None = 0,
+
+  /**
+      If the background should be made available.
+        If the background is not available, future operations will be rendered
+        to a transparent background and added to the existing background later.
+  */
+  Background = 1,
+
+  /**
+      If copies should be available to paste nodes.
+        If copies are not available, paste nodes can only paste from copies that
+        are made inside the isolated contents.
+  */
+  CopyPaste = 2,
+
+  /**
+      Isolate everything. This will include features that
+        are added in the future.
+  */
+  All = -1,
 }
 
 /**
@@ -311,8 +344,7 @@ enum GskMaskMode
 }
 
 /**
-    The values of the [gsk.types.PathDirection] enum are used to pick one
-    of the four tangents at a given point on the path.
+    Used to pick one of the four tangents at a given point on the path.
     
     Note that the directions for @GSK_PATH_FROM_START/@GSK_PATH_TO_END and
     @GSK_PATH_TO_START/@GSK_PATH_FROM_END will coincide for smooth points.
@@ -383,7 +415,35 @@ enum GskPathForeachFlags : uint
 }
 
 /**
-    Path operations are used to describe the segments of a [gsk.path.Path].
+    The values of this enumeration classify intersections
+    between paths.
+*/
+enum GskPathIntersection
+{
+  /**
+      No intersection
+  */
+  None = 0,
+
+  /**
+      A normal intersection, where the two paths
+        cross each other
+  */
+  Normal = 1,
+
+  /**
+      The start of a segment where the two paths coincide
+  */
+  Start = 2,
+
+  /**
+      The end of a segment where the two paths coincide
+  */
+  End = 3,
+}
+
+/**
+    Describes the segments of a [gsk.path.Path].
     
     More values may be added in the future.
 */
@@ -426,6 +486,63 @@ enum GskPathOperation
         curve will be passed, too.
   */
   Conic = 5,
+}
+
+/**
+    GSK_PORTER_DUFF_SOURCE:
+    GSK_PORTER_DUFF_DEST:
+    GSK_PORTER_DUFF_SOURCE_OVER_DEST:
+    GSK_PORTER_DUFF_DEST_OVER_SOURCE:
+    GSK_PORTER_DUFF_SOURCE_IN_DEST:
+    GSK_PORTER_DUFF_DEST_IN_SOURCE:
+    GSK_PORTER_DUFF_SOURCE_OUT_DEST:
+    GSK_PORTER_DUFF_DEST_OUT_SOURCE:
+    GSK_PORTER_DUFF_SOURCE_ATOP_DEST:
+    GSK_PORTER_DUFF_DEST_ATOP_SOURCE:
+    GSK_PORTER_DUFF_XOR:
+    GSK_PORTER_DUFF_CLEAR:
+    The 12 compositing modes defined by the seminal paper
+    by Thomas Porter and Tom Duff.
+    
+    They are used in SVG, PDF and in Cairo with [cairo.types.Operator].
+*/
+enum GskPorterDuff
+{
+  /** */
+  Source = 0,
+
+  /** */
+  Dest = 1,
+
+  /** */
+  SourceOverDest = 2,
+
+  /** */
+  DestOverSource = 3,
+
+  /** */
+  SourceInDest = 4,
+
+  /** */
+  DestInSource = 5,
+
+  /** */
+  SourceOutDest = 6,
+
+  /** */
+  DestOutSource = 7,
+
+  /** */
+  SourceAtopDest = 8,
+
+  /** */
+  DestAtopSource = 9,
+
+  /** */
+  Xor = 10,
+
+  /** */
+  Clear = 11,
 }
 
 /**
@@ -587,6 +704,42 @@ enum GskRenderNodeType
       A node that possibly redirects part of the scene graph to a subsurface.
   */
   SubsurfaceNode = 30,
+
+  /**
+      A node that applies some function to each color component.
+  */
+  ComponentTransferNode = 31,
+
+  /**
+      A node that copies the rendering canvas to be pasted later.
+  */
+  CopyNode = 32,
+
+  /**
+      A node that pastes a previously copied canvas.
+  */
+  PasteNode = 33,
+
+  /**
+      A node that combines a child with the background using Porter/Duff
+      operations.
+  */
+  CompositeNode = 34,
+
+  /**
+      A node that isolated content of its child from previous content.
+  */
+  IsolationNode = 35,
+
+  /**
+      A node that displaces content according to some mask.
+  */
+  DisplacementNode = 36,
+
+  /**
+      A node that combines two child nodes in an arithmetic way.
+  */
+  ArithmeticNode = 37,
 }
 
 /**
@@ -710,7 +863,11 @@ struct GskBlurNode;
 */
 struct GskBorderNode;
 
-/** */
+/**
+    A Broadway based renderer.
+    
+    See [gsk.renderer.Renderer].
+*/
 struct GskBroadwayRenderer;
 
 /** */
@@ -722,7 +879,7 @@ struct GskBroadwayRendererClass;
 struct GskCairoNode;
 
 /**
-    A GSK renderer that is using cairo.
+    Renders a GSK rendernode tree with cairo.
     
     Since it is using cairo, this renderer cannot support
     3D transformations.
@@ -764,6 +921,30 @@ struct GskColorStop
 }
 
 /**
+    Specifies a transfer function for a color component to be applied
+    while rendering.
+    
+    The available functions include linear, piecewise-linear,
+    gamma and step functions.
+    
+    Note that the transfer function is applied to un-premultiplied
+    values, and all results are clamped to the [0, 1] range.
+*/
+struct GskComponentTransfer;
+
+/**
+    A render node for applying a [gsk.component_transfer.ComponentTransfer] for each color
+    component of the child node.
+*/
+struct GskComponentTransferNode;
+
+/**
+    A render node that uses Porter/Duff compositing operators to combine
+    its child with the background.
+*/
+struct GskCompositeNode;
+
+/**
     A render node for a conic gradient.
 */
 struct GskConicGradientNode;
@@ -772,6 +953,12 @@ struct GskConicGradientNode;
     A render node that can contain other render nodes.
 */
 struct GskContainerNode;
+
+/**
+    A render node that copies the current state of the rendering canvas
+    so a [gsk.paste_node.PasteNode] can draw it.
+*/
+struct GskCopyNode;
 
 /**
     A render node cross fading between two child nodes.
@@ -790,15 +977,18 @@ struct GskDebugNode;
 */
 struct GskFillNode;
 
-/** */
+/**
+    Renders a GSK rendernode tree with OpenGL.
+    
+    See [gsk.renderer.Renderer].
+*/
 struct GskGLRenderer;
 
 /** */
 struct GskGLRendererClass;
 
 /**
-    A [gsk.glshader.GLShader] is a snippet of GLSL that is meant to run in the
-    fragment shader of the rendering pipeline.
+    Implements a fragment shader using GLSL.
     
     A fragment shader gets the coordinates being rendered as input and
     produces the pixel values for that particular pixel. Additionally,
@@ -910,6 +1100,13 @@ struct GskGLRendererClass;
       fragColor = position * source1 + (1.0 - position) * source2;
     }
     ```
+
+    Deprecated: This feature was deprecated in GTK 4.16 after the new
+      rendering infrastructure introduced in 4.14 did not support it. The lack
+      of Vulkan integration would have made it a very hard feature to support.
+      If you want to use OpenGL directly, you should look at
+      [GtkGLArea](../gtk4/class.GLArea.html), which uses a different approach
+      and is still well-supported.
 */
 struct GskGLShader;
 
@@ -931,6 +1128,11 @@ struct GskGLShaderNode;
 struct GskInsetShadowNode;
 
 /**
+    A render node that isolates its child from surrounding rendernodes.
+*/
+struct GskIsolationNode;
+
+/**
     A render node for a linear gradient.
 */
 struct GskLinearGradientNode;
@@ -940,7 +1142,11 @@ struct GskLinearGradientNode;
 */
 struct GskMaskNode;
 
-/** */
+/**
+    A GL based renderer.
+    
+    See [gsk.renderer.Renderer].
+*/
 struct GskNglRenderer;
 
 /**
@@ -985,8 +1191,12 @@ struct GskParseLocation
 }
 
 /**
-    A [gsk.path.Path] describes lines and curves that are more complex
-    than simple rectangles.
+    A render node for a paste.
+*/
+struct GskPasteNode;
+
+/**
+    Describes lines and curves that are more complex than simple rectangles.
     
     Paths can used for rendering (filling or stroking) and for animations
     (e.g. as trajectories).
@@ -1008,8 +1218,7 @@ struct GskParseLocation
 struct GskPath;
 
 /**
-    [gsk.path_builder.PathBuilder] is an auxiliary object for constructing
-    [gsk.path.Path] objects.
+    Constructs [gsk.path.Path] objects.
     
     A path is constructed like this:
     
@@ -1051,8 +1260,7 @@ struct GskPath;
 struct GskPathBuilder;
 
 /**
-    [gsk.path_measure.PathMeasure] is an object that allows measurements
-    on [gsk.path.Path]s such as determining the length of the path.
+    Performs measurements on paths such as determining the length of the path.
     
     Many measuring operations require sampling the path length
     at intermediate points. Therefore, a [gsk.path_measure.PathMeasure] has
@@ -1065,10 +1273,10 @@ struct GskPathBuilder;
 struct GskPathMeasure;
 
 /**
-    [gsk.path_point.PathPoint] is an opaque type representing a point on a path.
+    Represents a point on a path.
     
-    It can be queried for properties of the path at that point, such as
-    its tangent or its curvature.
+    It can be queried for properties of the path at that point,
+    such as its tangent or its curvature.
     
     To obtain a [gsk.path_point.PathPoint], use [gsk.path.Path.getClosestPoint],
     [gsk.path.Path.getStartPoint], [gsk.path.Path.getEndPoint]
@@ -1087,8 +1295,7 @@ struct GskPathPoint;
 struct GskRadialGradientNode;
 
 /**
-    [gsk.render_node.RenderNode] is the basic block in a scene graph to be
-    rendered using [gsk.renderer.Renderer].
+    The basic block in a scene graph to be rendered using [gsk.renderer.Renderer].
     
     Each node has a parent, except the top-level node; each node may have
     children nodes.
@@ -1104,8 +1311,93 @@ struct GskRadialGradientNode;
 struct GskRenderNode;
 
 /**
-    [gsk.renderer.Renderer] is a class that renders a scene graph defined via a
-    tree of [gsk.render_node.RenderNode] instances.
+    A facility to replay a [gsk.render_node.RenderNode] and its children, potentially
+    modifying them.
+    
+    This is a utility tool to walk a rendernode tree. The most powerful way
+    is to provide a function via [gsk.render_replay.RenderReplay.setNodeFilter]
+    to filter each individual node and then run
+    [gsk.render_replay.RenderReplay.filterNode] on the nodes you want to filter.
+    
+    If you want to just walk the node tree and extract information
+    without any modifications, you can also use [gsk.render_node.RenderNode.getChildren].
+    
+    Here is a little example application that redacts text in a node file:
+    
+    ```
+    #include <gtk/gtk.h>
+    
+    static GskRenderNode *
+    redact_nodes (GskRenderReplay *replay,
+                  GskRenderNode   *node,
+                  gpointer         user_data)
+    {
+      GskRenderNode *result;
+    
+      if (gsk_render_node_get_node_type (node) == GSK_TEXT_NODE)
+        {
+          graphene_rect_t bounds;
+          const GdkRGBA *color;
+    
+          gsk_render_node_get_bounds (node, &bounds);
+          color = gsk_text_node_get_color (node);
+    
+          result = gsk_color_node_new (color, &bounds);
+        }
+      else
+        {
+          result = gsk_render_replay_default (replay, node);
+        }
+    
+      return result;
+    }
+    
+    int
+    main (int argc, char *argv[])
+    {
+      GFile *file;
+      GBytes *bytes;
+      GskRenderNode *result, *node;
+      GskRenderReplay *replay;
+    
+      gtk_init ();
+    
+      if (argc != 3)
+        {
+          g_print ("usage: %s INFILE OUTFILE\n", argv[0]);
+          return 0;
+        }
+    
+      file = g_file_new_for_commandline_arg (argv[1]);
+      bytes = g_file_load_bytes (file, NULL, NULL, NULL);
+      g_object_unref (file);
+      if (bytes == NULL)
+        return 1;
+    
+      node = gsk_render_node_deserialize (bytes, NULL, NULL);
+      g_bytes_unref (bytes);
+      if (node == NULL)
+        return 1;
+    
+      replay = gsk_render_replay_new ();
+      gsk_render_replay_set_node_filter (replay, redact_nodes, NULL, NULL);
+      result = gsk_render_replay_filter_node (replay, node);
+      gsk_render_replay_free (replay);
+    
+      if (!gsk_render_node_write_to_file (result, argv[2], NULL))
+        return 1;
+    
+      gsk_render_node_unref (result);
+      gsk_render_node_unref (node);
+    
+      return 0;
+    }
+    ```
+*/
+struct GskRenderReplay;
+
+/**
+    Renders a scene graph defined via a tree of [gsk.render_node.RenderNode] instances.
     
     Typically you will use a [gsk.renderer.Renderer] instance to repeatedly call
     [gsk.renderer.Renderer.render] to update the contents of its associated
@@ -1170,7 +1462,7 @@ struct GskRoundedRect
 }
 
 /**
-    An object to build the uniforms data for a [gsk.glshader.GLShader].
+    Builds the uniforms data for a [gsk.glshader.GLShader].
 */
 struct GskShaderArgsBuilder;
 
@@ -1206,8 +1498,7 @@ struct GskShadow
 struct GskShadowNode;
 
 /**
-    A [gsk.stroke.Stroke] struct collects the parameters that influence
-    the operation of stroking a path.
+    Collects the parameters that are needed when stroking a path.
 */
 struct GskStroke;
 
@@ -1233,12 +1524,12 @@ struct GskTextNode;
 struct GskTextureNode;
 
 /**
-    A render node for a [gdk.texture.Texture].
+    A render node for a [gdk.texture.Texture], with control over scaling.
 */
 struct GskTextureScaleNode;
 
 /**
-    [gsk.transform.Transform] is an object to describe transform matrices.
+    Describes a 3D transform.
     
     Unlike [graphene.matrix.Matrix], [gsk.transform.Transform] retains the steps in how
     a transform was constructed, and allows inspecting them. It is modeled
@@ -1256,7 +1547,7 @@ struct GskTransform;
 struct GskTransformNode;
 
 /**
-    A GSK renderer that is using Vulkan.
+    Renders a GSK rendernode tree with Vulkan.
     
     This renderer will fail to realize if Vulkan is not supported.
 */
@@ -1268,4 +1559,12 @@ struct GskVulkanRendererClass;
 alias extern(C) void function(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData) GskParseErrorFunc;
 
 alias extern(C) gboolean function(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData) GskPathForeachFunc;
+
+alias extern(C) gboolean function(GskPath* path1, const(GskPathPoint)* point1, GskPath* path2, const(GskPathPoint)* point2, GskPathIntersection kind, void* userData) GskPathIntersectionFunc;
+
+alias extern(C) PangoFont* function(GskRenderReplay* replay, PangoFont* font, void* userData) GskRenderReplayFontFilter;
+
+alias extern(C) GskRenderNode* function(GskRenderReplay* replay, GskRenderNode* node, void* userData) GskRenderReplayNodeFilter;
+
+alias extern(C) GdkTexture* function(GskRenderReplay* replay, GdkTexture* texture, void* userData) GskRenderReplayTextureFilter;
 

@@ -15,13 +15,27 @@ alias GtkAllocation = GdkRectangle;
 */
 enum GtkAccessibleAnnouncementPriority
 {
-  /** */
+  /**
+      The announcement is low priority,
+        and might be read only on the user's request.
+  */
   Low = 0,
 
-  /** */
+  /**
+      The announcement is of medium
+        priority, and is usually spoken at the next opportunity, such as at the
+        end of speaking the current sentence or when the user pauses typing.
+  */
   Medium = 1,
 
-  /** */
+  /**
+      The announcement is of high
+        priority, and is usually spoken immediately. Because an interruption
+        might disorient users or cause them to not complete their current task,
+        authors SHOULD NOT use high priority announcements unless the
+        interruption is imperative. An example would be a notification about a
+        critical battery power level.
+  */
   High = 2,
 }
 
@@ -133,16 +147,27 @@ enum GtkAccessibleProperty
   Description = 1,
 
   /**
-      Indicates the availability and type of
-         interactive popup element, such as menu or dialog, that can be triggered
-         by an element.
+      Indicates the availability of interactive
+         popup element, such as menu or popover, that can be triggered by an
+         element. Contrary to “aria-haspopup”, it doesn't indicate the type of the
+         element, as such it cannot be used to indicate the availability of more
+         complex elements such as dialog. Value type: boolean
   */
   HasPopup = 2,
 
   /**
       Indicates keyboard shortcuts that an
          author has implemented to activate or give focus to an element. Value type:
-         string
+         string. The format of the value is a space-separated list of shortcuts, with
+         each shortcut consisting of one or more modifiers (`Control`, `Alt` or `Shift`),
+         followed by a non-modifier key, all separated by `+`. The
+         [WAI-ARIA](https://www.w3.org/TR/wai-aria/#aria-keyshortcuts) reference
+         specifies how to build keyboard shortcuts strings, with specific values
+         for each key which are the same regardless of the language, so these
+         strings can't be built from localized key names. You can convert an
+         accelerator into the matching key shortcuts label with
+         `func@Gtk.accelerator_get_accessible_label`.
+         Examples: `F2`, `Alt+F`, `Control+Shift+N`
   */
   KeyShortcuts = 3,
 
@@ -236,9 +261,15 @@ enum GtkAccessibleProperty
 
   /**
       Defines the human readable text alternative
-         of aria-valuenow for a range widget. Value type: string
+         of `enum@Gtk.AccessibleProperty.VALUE_NOW` for a range widget. Value type: string
   */
   ValueText = 18,
+
+  /**
+      Defines a string value that provides a description of non-standard keyboard
+      interactions of the current element. Value type: string
+  */
+  HelpText = 19,
 }
 
 /**
@@ -300,8 +331,8 @@ enum GtkAccessibleRelation
   Details = 7,
 
   /**
-      Identifies the element that provides
-         an error message for an object. Value type: reference
+      Identifies the element (or elements) that
+         provide an error message for an object. Value type: reference
   */
   ErrorMessage = 8,
 
@@ -348,7 +379,7 @@ enum GtkAccessibleRelation
 
   /**
       Defines a human readable text
-         alternative of aria-rowindex. Value type: string
+         alternative of `enum@Gtk.AccessibleRelation.ROW_INDEX`. Value type: string
   */
   RowIndexText = 15,
 
@@ -363,6 +394,56 @@ enum GtkAccessibleRelation
          set of listitems or treeitems. Value type: integer
   */
   SetSize = 17,
+
+  /**
+      Identifies the element (or elements) that are labeled by the
+      current element. Value type: reference
+      
+      This relation is managed by GTK and should not be set from application code.
+  */
+  LabelFor = 18,
+
+  /**
+      Identifies the element (or elements) that are described by
+      the current element. Value type: reference
+      
+      This relation is managed by GTK and should not be set from application code.
+  */
+  DescriptionFor = 19,
+
+  /**
+      Identifies the element (or elements) that the current
+      element is controlled by. Value type: reference
+      
+      This relation is managed by GTK and should not be set from application code.
+  */
+  ControlledBy = 20,
+
+  /**
+      Identifies the element (or elements) for which the current
+      element provides additional information. Value type: reference
+      
+      This relation is managed by GTK and should not be set from application code.
+  */
+  DetailsFor = 21,
+
+  /**
+      Identifies the element (or elements) for which the current
+      element provides an error message. Value type: reference
+      
+      This relation is managed by GTK and should not be set from application code.
+  */
+  ErrorMessageFor = 22,
+
+  /**
+      Identifies the previous element (or elements) in an alternate
+      reading order of content which, at the user's discretion, allows
+      assistive technology to override the general default of reading in
+      document source order. Value type: reference
+      
+      This relation is managed by GTK and should not be set from application code.
+  */
+  FlowFrom = 23,
 }
 
 /**
@@ -1019,7 +1100,7 @@ enum GtkAccessibleTristate
     are interpreted relative to text direction.
     
     Baseline support is optional for containers and widgets, and is only available
-    for vertical alignment. `GTK_ALIGN_BASELINE_CENTER and [gtk.types.Align.BaselineFill]
+    for vertical alignment. [gtk.types.Align.BaselineCenter] and [gtk.types.Align.BaselineFill]
     are treated similar to [gtk.types.Align.Center] and [gtk.types.Align.Fill], except that it
     positions the widget to line up the baselines, where that is supported.
 */
@@ -1096,7 +1177,7 @@ enum GtkApplicationInhibitFlags : uint
 }
 
 /**
-    Used to indicate the direction in which an arrow should point.
+    Indicates the direction in which an arrow should point.
 */
 enum GtkArrowType
 {
@@ -1127,7 +1208,7 @@ enum GtkArrowType
 }
 
 /**
-    Determines the page role inside a [gtk.assistant.Assistant].
+    Determines the role of a page inside a [gtk.assistant.Assistant].
     
     The role is used to handle buttons sensitivity and visibility.
     
@@ -1137,6 +1218,8 @@ enum GtkArrowType
     
     The Cancel button will only be shown if the page isn’t “committed”.
     See [gtk.assistant.Assistant.commit] for details.
+
+    Deprecated: [gtk.assistant.Assistant] will be removed in GTK 5
 */
 enum GtkAssistantPageType
 {
@@ -1382,7 +1465,7 @@ enum GtkBuilderError
     
     > Please note that [gtk.types.ButtonsType.Ok], [gtk.types.ButtonsType.YesNo]
     > and [gtk.types.ButtonsType.OkCancel] are discouraged by the
-    > [GNOME Human Interface Guidelines](http://library.gnome.org/devel/hig-book/stable/).
+    > [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/).
 */
 enum GtkButtonsType
 {
@@ -1419,6 +1502,8 @@ enum GtkButtonsType
 
 /**
     The available modes for [gtk.cell_renderer_accel.CellRendererAccel.accelMode].
+
+    Deprecated: There is no replacement
 */
 enum GtkCellRendererAccelMode
 {
@@ -1435,6 +1520,8 @@ enum GtkCellRendererAccelMode
 
 /**
     Identifies how the user can interact with a particular cell.
+
+    Deprecated: There is no replacement.
 */
 enum GtkCellRendererMode
 {
@@ -1459,6 +1546,8 @@ enum GtkCellRendererMode
 
 /**
     Tells how a cell is to be rendered.
+
+    Deprecated: There is no replacement.
 */
 enum GtkCellRendererState : uint
 {
@@ -1657,32 +1746,32 @@ enum GtkConstraintVflParserError
   /**
       Invalid or unknown symbol
   */
-  Symbol = 0,
+  InvalidSymbol = 0,
 
   /**
       Invalid or unknown attribute
   */
-  Attribute = 1,
+  InvalidAttribute = 1,
 
   /**
       Invalid or unknown view
   */
-  View = 2,
+  InvalidView = 2,
 
   /**
       Invalid or unknown metric
   */
-  Metric = 3,
+  InvalidMetric = 3,
 
   /**
       Invalid or unknown priority
   */
-  Priority = 4,
+  InvalidPriority = 4,
 
   /**
       Invalid or unknown relation
   */
-  Relation = 5,
+  InvalidRelation = 5,
 }
 
 /**
@@ -1861,7 +1950,7 @@ enum GtkDebugFlags : uint
   /**
       Trace GtkBuilder operation
   */
-  Builder = 128,
+  BuilderTrace = 128,
 
   /**
       Information about size requests
@@ -1877,6 +1966,11 @@ enum GtkDebugFlags : uint
       Open the GTK inspector
   */
   Interactive = 1024,
+
+  /**
+      Show touch UI elements for pointer events.
+  */
+  Touchscreen = 2048,
 
   /**
       Information about actions and menu models
@@ -1917,6 +2011,21 @@ enum GtkDebugFlags : uint
       Inverts the default text-direction.
   */
   InvertTextDir = 524288,
+
+  /**
+      Information about deprecated CSS features.
+  */
+  Css = 1048576,
+
+  /**
+      Information about deprecated GtkBuilder features.
+  */
+  Builder = 2097152,
+
+  /**
+      Information about session saving.
+  */
+  Session = 4194304,
 }
 
 /**
@@ -1998,6 +2107,8 @@ enum GtkDialogError
 
 /**
     Flags used to influence dialog construction.
+
+    Deprecated: There is no replacement.
 */
 enum GtkDialogFlags : uint
 {
@@ -2155,6 +2266,12 @@ enum GtkEventControllerScrollFlags : uint
   Kinetic = 8,
 
   /**
+      A #GtkEventControllerScrollFlags value to prefer physical direction over
+      logical direction (i.e. oblivious to natural scroll).
+  */
+  PhysicalDirection = 16,
+
+  /**
       Emit scroll on both axes.
   */
   BothAxes = 3,
@@ -2211,6 +2328,8 @@ enum GtkFileChooserAction
 /**
     These identify the various errors that can occur while calling
     [gtk.file_chooser.FileChooser] functions.
+
+    Deprecated: There is no replacement
 */
 enum GtkFileChooserError
 {
@@ -2244,28 +2363,54 @@ enum GtkFileChooserError
     If you are writing an implementation and are not sure which
     value to pass, [gtk.types.FilterChange.Different] is always a correct
     choice.
+    
+    New values may be added in the future.
 */
 enum GtkFilterChange
 {
   /**
       The filter change cannot be
-        described with any of the other enumeration values.
+        described with any of the other enumeration values
   */
   Different = 0,
 
   /**
       The filter is less strict than
-        it was before: All items that it used to return true for
+        it was before: All items that it used to return true
         still return true, others now may, too.
   */
   LessStrict = 1,
 
   /**
       The filter is more strict than
-        it was before: All items that it used to return false for
+        it was before: All items that it used to return false
         still return false, others now may, too.
   */
   MoreStrict = 2,
+
+  /**
+      Similar to `enum@Gtk.FilterChange.DIFFERENT`,
+      but signs that item watches should be recreated. This is used by
+      [gtk.filter_list_model.FilterListModel] to keep the list up-to-date when items
+      change.
+  */
+  DifferentRewatch = 3,
+
+  /**
+      Similar to `enum@Gtk.FilterChange.LESS_STRICT`,
+      but signs that item watches should be recreated. This is used by
+      [gtk.filter_list_model.FilterListModel] to keep the list up-to-date when items
+      change.
+  */
+  LessStrictRewatch = 4,
+
+  /**
+      Similar to `enum@Gtk.FilterChange.MORE_STRICT`,
+      but signs that item watches should be recreated. This is used by
+      [gtk.filter_list_model.FilterListModel] to keep the list up-to-date when items
+      change.
+  */
+  MoreStrictRewatch = 5,
 }
 
 /**
@@ -2285,13 +2430,13 @@ enum GtkFilterMatch
 
   /**
       The filter does not match any item,
-        [gtk.filter.Filter.match] will always return false.
+        [gtk.filter.Filter.match] will always return false
   */
   None = 1,
 
   /**
       The filter matches all items,
-        [gtk.filter.Filter.match] will alays return true.
+        [gtk.filter.Filter.match] will alays return true
   */
   All = 2,
 }
@@ -2302,6 +2447,8 @@ enum GtkFilterMatch
     
     This enumeration may be extended in the future; applications should
     ignore unknown values.
+
+    Deprecated: There is no replacement.
 */
 enum GtkFontChooserLevel : uint
 {
@@ -2362,7 +2509,26 @@ enum GtkFontLevel
 }
 
 /**
-    Represents the state of graphics offlodading.
+    Values for the [gtk.settings.Settings.gtkFontRendering] setting
+    that influence how GTK renders fonts.
+*/
+enum GtkFontRendering
+{
+  /**
+      Set up font rendering automatically,
+        taking factors like screen resolution and scale into account
+  */
+  Automatic = 0,
+
+  /**
+      Follow low-level font-related settings
+        when configuring font rendering
+  */
+  Manual = 1,
+}
+
+/**
+    Represents the state of graphics offloading.
 */
 enum GtkGraphicsOffloadEnabled
 {
@@ -2382,6 +2548,11 @@ enum GtkGraphicsOffloadEnabled
 */
 enum GtkIconLookupFlags : uint
 {
+  /**
+      Perform a regular lookup.
+  */
+  None = 0,
+
   /**
       Try to always load regular icons, even
         when symbolic icon names are given
@@ -2448,6 +2619,8 @@ enum GtkIconThemeError
 
 /**
     An enum for determining where a dropped item goes.
+
+    Deprecated: There is no replacement.
 */
 enum GtkIconViewDropPosition
 {
@@ -2704,6 +2877,72 @@ enum GtkInscriptionOverflow
       Omit characters at the end of the text
   */
   EllipsizeEnd = 3,
+}
+
+/**
+    Values for the [gtk.settings.Settings.gtkInterfaceColorScheme]
+    and [gtk.css_provider.CssProvider.prefersColorScheme] properties
+    that indicates what color scheme is used.
+    
+    This information can be used inside CSS via media queries.
+    
+    More values may be added to this enumeration. Unknown values
+    should be treated the same as [gtk.types.InterfaceColorScheme.Default].
+*/
+enum GtkInterfaceColorScheme
+{
+  /**
+      The system doesn't support color schemes
+  */
+  Unsupported = 0,
+
+  /**
+      The default color scheme is used
+  */
+  Default = 1,
+
+  /**
+      A dark color scheme is used
+  */
+  Dark = 2,
+
+  /**
+      A light color scheme is used
+  */
+  Light = 3,
+}
+
+/**
+    Values for the [gtk.settings.Settings.gtkInterfaceContrast]
+    and [gtk.css_provider.CssProvider.prefersContrast] properties
+    that indicates the preferred level of contrast.
+    
+    This information can be used inside CSS via media queries.
+    
+    More values may be added to this enumeration. Unknown values
+    should be treated the same as [gtk.types.InterfaceContrast.NoPreference].
+*/
+enum GtkInterfaceContrast
+{
+  /**
+      The system doesn't support contrast levels
+  */
+  Unsupported = 0,
+
+  /**
+      No particular preference for contrast
+  */
+  NoPreference = 1,
+
+  /**
+      More contrast is preferred
+  */
+  More = 2,
+
+  /**
+      Less contrast is preferred
+  */
+  Less = 3,
 }
 
 /**
@@ -3190,6 +3429,11 @@ enum GtkPadActionType
       Action is triggered by a pad strip
   */
   Strip = 2,
+
+  /**
+      Action is triggered by a pad dial
+  */
+  Dial = 3,
 }
 
 /**
@@ -3492,7 +3736,8 @@ enum GtkPrintOperationAction
 
   /**
       Start to print without showing
-        the print dialog, based on the current print settings.
+        the print dialog, based on the current print settings, if possible.
+        Depending on the platform, a print dialog might appear anyway.
   */
   Print = 1,
 
@@ -3661,9 +3906,10 @@ enum GtkPropagationLimit
   None = 0,
 
   /**
-      Events are only handled if their target
-        is in the same [gtk.native.Native] as the event controllers widget. Note
-        that some event types have two targets (origin and destination).
+      Events are only handled if their target is in
+        the same [gtk.native.Native] (or widget with [gtk.widget.Widget.limitEvents]
+        set) as the event controllers widget.
+        Note that some event types have two targets (origin and destination).
   */
   SameNative = 1,
 }
@@ -3748,10 +3994,35 @@ enum GtkRecentManagerError
 }
 
 /**
+    Values for the [gtk.settings.Settings.gtkInterfaceReducedMotion]
+    and [gtk.css_provider.CssProvider.prefersReducedMotion] properties
+    that indicates the preferred level of motion animations.
+    
+    This information can be used inside CSS via media queries.
+*/
+enum GtkReducedMotion
+{
+  /**
+      The user has made no preference known to the system
+  */
+  NoPreference = 0,
+
+  /**
+      The user has notified the system that they
+        prefer an interface that removes or replaces the types of motion-based
+        animation that either trigger discomfort for those with vestibular
+        motion sensitivity, or distraction for those with attention deficits
+  */
+  Reduce = 1,
+}
+
+/**
     Predefined values for use as response ids in [gtk.dialog.Dialog.addButton].
     
     All predefined values are negative; GTK leaves values of 0 or greater for
     application-defined response ids.
+
+    Deprecated: There is no replacement.
 */
 enum GtkResponseType
 {
@@ -3867,6 +4138,30 @@ enum GtkRevealerTransitionType
       Floop in from the top
   */
   SwingDown = 9,
+
+  /**
+      Combination of `enum@Gtk.RevealerTransitionType.CROSSFADE`
+      and `enum@Gtk.RevealerTransitionType.SLIDE_RIGHT`.
+  */
+  FadeSlideRight = 10,
+
+  /**
+      Combination of `enum@Gtk.RevealerTransitionType.CROSSFADE`
+      and `enum@Gtk.RevealerTransitionType.SLIDE_LEFT`.
+  */
+  FadeSlideLeft = 11,
+
+  /**
+      Combination of `enum@Gtk.RevealerTransitionType.CROSSFADE`
+      and `enum@Gtk.RevealerTransitionType.SLIDE_UP`.
+  */
+  FadeSlideUp = 12,
+
+  /**
+      Combination of `enum@Gtk.RevealerTransitionType.CROSSFADE`
+      and `enum@Gtk.RevealerTransitionType.SLIDE_DOWN`.
+  */
+  FadeSlideDown = 13,
 }
 
 /**
@@ -4066,7 +4361,7 @@ enum GtkSensitivityType
 }
 
 /**
-    List of flags that can be passed to action activation.
+    Flags that can be passed to action activation.
     
     More flags may be added in the future.
 */
@@ -4570,19 +4865,19 @@ enum GtkStringFilterMatchMode
 {
   /**
       The search string and
-        text must match exactly.
+        text must match exactly
   */
   Exact = 0,
 
   /**
       The search string
-        must be contained as a substring inside the text.
+        must be contained as a substring inside the text
   */
   Substring = 1,
 
   /**
       The text must begin
-        with the search string.
+        with the search string
   */
   Prefix = 2,
 }
@@ -4619,6 +4914,120 @@ enum GtkStyleContextPrintFlags : uint
 }
 
 /**
+    Error codes in the `GTK_SVG_ERROR` domain for errors
+    that happen during parsing or rendering of SVG.
+*/
+enum GtkSvgError
+{
+  /**
+      The XML syntax is broken
+        in some way
+  */
+  InvalidSyntax = 0,
+
+  /**
+      An XML element is invalid
+        (either because it is not part of SVG, or because it is
+        in the wrong place, or because it not implemented in GTK)
+  */
+  InvalidElement = 1,
+
+  /**
+      An attribute is invalid
+        (either because it is not part of SVG, or because it is
+        not implemented in GTK, or its value is problematic)
+  */
+  InvalidAttribute = 2,
+
+  /**
+      A required attribute is missing
+  */
+  MissingAttribute = 3,
+
+  /**
+      A reference does not point to
+        a suitable element
+  */
+  InvalidReference = 4,
+
+  /**
+      An animation could not be updated
+  */
+  FailedUpdate = 5,
+
+  /**
+      Rendering is not according to
+        expecations
+  */
+  FailedRendering = 6,
+
+  /**
+      An XML element is ignored,
+        but it should not affect rendering (this error code is used
+        for metadata and exension elements)
+  */
+  IgnoredElement = 7,
+
+  /**
+      An implementation limit has
+        been hit, such as the number of loaded shapes.
+  */
+  LimitsExceeded = 8,
+
+  /**
+      The SVG uses features that
+        are not supported by [gtk.svg.Svg]. It may be advisable to use
+        a different SVG renderer.
+  */
+  NotImplemented = 9,
+}
+
+/**
+    Features of the SVG renderer that can be enabled or disabled.
+    
+    By default, all features except [gtk.types.SvgFeatures.TraditionalSymbolic]
+    are enabled.
+    
+    New values may be added in the future.
+*/
+enum GtkSvgFeatures : uint
+{
+  /**
+      Whether to run animations. If disabled,
+        state changes are applied without transitions
+  */
+  Animations = 1,
+
+  /**
+      Whether to use system resources,
+        such as fonts. If disabled, only embedded fonts are used
+  */
+  SystemResources = 2,
+
+  /**
+      Whether to load external
+        resources, such as images. If disabled, only embedded
+        images are loaded
+  */
+  ExternalResources = 4,
+
+  /**
+      Whether to allow gpa extensions, such
+        as states and transitions
+  */
+  Extensions = 8,
+
+  /**
+      This feature is meant for
+        compatibility with old symbolic icons. If this is enabled,
+        fill and stroke attributes are ignored. The used colors
+        are derived from symbolic style classes if present, and
+        the default fill color is the symbolic foreground color.
+  */
+  TraditionalSymbolic = 16,
+}
+
+/**
     The indexes of colors passed to symbolic color rendering, such as
     `vfunc@Gtk.SymbolicPaintable.snapshot_symbolic`.
     
@@ -4645,6 +5054,11 @@ enum GtkSymbolicColor
       Indication color for success
   */
   Success = 3,
+
+  /**
+      The system accent color.
+  */
+  Accent = 4,
 }
 
 /**
@@ -4694,6 +5108,37 @@ enum GtkSystemSetting
 }
 
 /**
+    Values for [gtk.types.TextBufferCommitNotify] to denote the
+    point of the notification.
+*/
+enum GtkTextBufferNotifyFlags : uint
+{
+  /**
+      Be notified before text
+        is inserted into the underlying buffer.
+  */
+  BeforeInsert = 1,
+
+  /**
+      Be notified after text
+        has been inserted into the underlying buffer.
+  */
+  AfterInsert = 2,
+
+  /**
+      Be notified before text
+        is deleted from the underlying buffer.
+  */
+  BeforeDelete = 4,
+
+  /**
+      Be notified after text
+        has been deleted from the underlying buffer.
+  */
+  AfterDelete = 8,
+}
+
+/**
     Reading directions for text.
 */
 enum GtkTextDirection
@@ -4736,9 +5181,9 @@ enum GtkTextExtendSelection
 /**
     Flags affecting how a search is done.
     
-    If neither [gtk.types.TextSearchFlags.VisibleOnly] nor [gtk.types.TextSearchFlags.TextOnly] are
-    enabled, the match must be exact; the special 0xFFFC character will match
-    embedded paintables or child widgets.
+    If neither [gtk.types.TextSearchFlags.VisibleOnly] nor [gtk.types.TextSearchFlags.TextOnly]
+    are enabled, the match must be exact; the special 0xFFFC character will
+    match embedded paintables or child widgets.
 */
 enum GtkTextSearchFlags : uint
 {
@@ -4821,6 +5266,8 @@ enum GtkTextWindowType
     static for the lifetime of the object. A more complete description
     of [gtk.types.TreeModelFlags.ItersPersist] can be found in the overview of
     this section.
+
+    Deprecated: There is no replacement
 */
 enum GtkTreeModelFlags : uint
 {
@@ -4841,6 +5288,8 @@ enum GtkTreeModelFlags : uint
     The sizing method the column uses to determine its width.  Please note
     that [gtk.types.TreeViewColumnSizing.Autosize] are inefficient for large views, and
     can make columns appear choppy.
+
+    Deprecated: There is no replacement.
 */
 enum GtkTreeViewColumnSizing
 {
@@ -4862,6 +5311,8 @@ enum GtkTreeViewColumnSizing
 
 /**
     An enum for determining where a dropped row goes.
+
+    Deprecated: There is no replacement.
 */
 enum GtkTreeViewDropPosition
 {
@@ -4888,6 +5339,8 @@ enum GtkTreeViewDropPosition
 
 /**
     Used to indicate which grid lines to draw in a tree view.
+
+    Deprecated: There is no replacement
 */
 enum GtkTreeViewGridLines
 {
@@ -4939,6 +5392,94 @@ enum GtkUnit
 }
 
 /**
+    Determines which point or edge of a window is meant to remain fixed
+    when a window changes size.
+*/
+enum GtkWindowGravity
+{
+  /**
+      The top left corner
+  */
+  TopLeft = 0,
+
+  /**
+      The top edge
+  */
+  Top = 1,
+
+  /**
+      The top right corner
+  */
+  TopRight = 2,
+
+  /**
+      The left edge
+  */
+  Left = 3,
+
+  /**
+      The center pointer
+  */
+  Center = 4,
+
+  /**
+      The right edge
+  */
+  Right = 5,
+
+  /**
+      The bottom left corner
+  */
+  BottomLeft = 6,
+
+  /**
+      the bottom edge
+  */
+  Bottom = 7,
+
+  /**
+      The bottom right corner
+  */
+  BottomRight = 8,
+
+  /**
+      The top left or top right corner,
+        depending on the text direction
+  */
+  TopStart = 9,
+
+  /**
+      The top right or top left corner,
+        depending on the text direction
+  */
+  TopEnd = 10,
+
+  /**
+      The left or right edge,
+        depending on the text direction
+  */
+  Start = 11,
+
+  /**
+      The right or left edge,
+        depending on the text direction
+  */
+  End = 12,
+
+  /**
+      The bottom left or top right corner,
+        depending on the text direction
+  */
+  BottomStart = 13,
+
+  /**
+      The bottom right or top left corner,
+        depending on the text direction
+  */
+  BottomEnd = 14,
+}
+
+/**
     Describes a type of line wrapping.
 */
 enum GtkWrapMode
@@ -4968,8 +5509,7 @@ enum GtkWrapMode
 }
 
 /**
-    [gtk.atcontext.ATContext] is an abstract class provided by GTK to communicate to
-    platform-specific assistive technologies API.
+    Communicates with platform-specific assistive technologies API.
     
     Each platform supported by GTK implements a [gtk.atcontext.ATContext] subclass, and
     is responsible for updating the accessible state in response to state
@@ -4981,8 +5521,7 @@ struct GtkATContext;
 struct GtkATContextClass;
 
 /**
-    The [gtk.about_dialog.AboutDialog] offers a simple way to display information about
-    a program.
+    Displays information about a program.
     
     The shown information includes the programs' logo, name, copyright,
     website and license. It is also possible to give credits to the authors,
@@ -4991,7 +5530,10 @@ struct GtkATContextClass;
     An about dialog is typically opened when the user selects the `About`
     option from the `Help` menu. All parts of the dialog are optional.
     
-    ![An example GtkAboutDialog](aboutdialog.png)
+    <picture>
+      <source srcset="aboutdialot-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkAboutDialog" src="aboutdialog.png">
+    </picture>
     
     About dialogs often contain links and email addresses. [gtk.about_dialog.AboutDialog]
     displays these as clickable links. By default, it calls [gtk.file_launcher.FileLauncher.launch]
@@ -5002,14 +5544,14 @@ struct GtkATContextClass;
     `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title,
     use a string like `GTK team https://www.gtk.org`.
     
-    To make constructing a [gtk.about_dialog.AboutDialog] as convenient as possible, you can
+    To make constructing an about dialog as convenient as possible, you can
     use the function `func@Gtk.show_about_dialog` which constructs and shows
     a dialog and keeps it around so that it can be shown again.
     
     Note that GTK sets a default title of `_("About %s")` on the dialog
     window (where `%s` is replaced by the name of the application, but in
     order to ensure proper translation of the title, applications should
-    set the title property explicitly when constructing a [gtk.about_dialog.AboutDialog],
+    set the title property explicitly when constructing an about dialog,
     as shown in the following example:
     
     ```c
@@ -5024,6 +5566,12 @@ struct GtkATContextClass;
                            NULL);
     ```
     
+    ## Shortcuts and Gestures
+    
+    [gtk.about_dialog.AboutDialog] supports the following keyboard shortcuts:
+    
+    - <kbd>Escape</kbd> closes the window.
+    
     ## CSS nodes
     
     [gtk.about_dialog.AboutDialog] has a single CSS node with the name `window` and style
@@ -5032,13 +5580,12 @@ struct GtkATContextClass;
 struct GtkAboutDialog;
 
 /**
-    [gtk.accessible.Accessible] is an interface for describing UI elements for
-    Assistive Technologies.
+    An interface for describing UI elements for Assistive Technologies.
     
     Every accessible implementation has:
     
      - a “role”, represented by a value of the [gtk.types.AccessibleRole] enumeration
-     - an “attribute”, represented by a set of [gtk.types.AccessibleState],
+     - “attributes”, represented by a set of [gtk.types.AccessibleState],
        [gtk.types.AccessibleProperty] and [gtk.types.AccessibleRelation] values
     
     The role cannot be changed after instantiating a [gtk.accessible.Accessible]
@@ -5054,8 +5601,10 @@ struct GtkAboutDialog;
     by reimplementing the `vfunc@Gtk.Accessible.get_accessible_parent`,
     `vfunc@Gtk.Accessible.get_first_accessible_child` and
     `vfunc@Gtk.Accessible.get_next_accessible_sibling` virtual functions.
+    
     Note that you can not create a top-level accessible object as of now,
     which means that you must always have a parent accessible object.
+    
     Also note that when an accessible object does not correspond to a widget,
     and it has children, whose implementation you don't control,
     it is necessary to ensure the correct shape of the a11y tree
@@ -5063,6 +5612,49 @@ struct GtkAboutDialog;
     updating the sibling by [gtk.accessible.Accessible.updateNextAccessibleSibling].
 */
 struct GtkAccessible;
+
+/**
+    Represents a link (i.e. a uri).
+    
+    A widget that contains one or more links should implement
+    the [gtk.accessible_hypertext.AccessibleHypertext] interface and return
+    [gtk.accessible_hyperlink.AccessibleHyperlink] objects for each of the links.
+*/
+struct GtkAccessibleHyperlink;
+
+/** */
+struct GtkAccessibleHyperlinkClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    An interface for accessible objects containing links.
+    
+    The [gtk.accessible_hypertext.AccessibleHypertext] interfaces is meant to be implemented by accessible
+    objects that contain links. Those links don't necessarily have to be part
+    of text, they can be associated with images and other things.
+*/
+struct GtkAccessibleHypertext;
+
+/**
+    The interface vtable for accessible objects containing links.
+*/
+struct GtkAccessibleHypertextInterface
+{
+  /** */
+  GTypeInterface gIface;
+
+  /** */
+  extern(C) uint function(GtkAccessibleHypertext* self) getNLinks;
+
+  /** */
+  extern(C) GtkAccessibleHyperlink* function(GtkAccessibleHypertext* self, uint index) getLink;
+
+  /** */
+  extern(C) uint function(GtkAccessibleHypertext* self, uint offset) getLinkAt;
+}
 
 /**
     The common interface for accessible objects.
@@ -5094,19 +5686,26 @@ struct GtkAccessibleInterface
 
   /** */
   extern(C) gboolean function(GtkAccessible* self, int* x, int* y, int* width, int* height) getBounds;
+
+  /** */
+  extern(C) char* function(GtkAccessible* self) getAccessibleId;
 }
 
 /**
-    A boxed type which wraps a list of references to GtkAccessible objects.
+    Wraps a list of references to [gtk.accessible.Accessible] objects.
 */
 struct GtkAccessibleList;
 
 /**
-    This interface describes ranged controls, e.g. controls which have a single
-    value within an allowed range and that can optionally be changed by the user.
+    An interface for accessible objects containing a numeric value.
     
-    This interface is expected to be implemented by controls using the following
-    roles:
+    [gtk.accessible_range.AccessibleRange] describes ranged controls for Assistive Technologies.
+    
+    Ranged controls have a single value within an allowed range that can
+    optionally be changed by the user.
+    
+    This interface is expected to be implemented by controls using the
+    following roles:
     
     - [gtk.types.AccessibleRole.Meter]
     - [gtk.types.AccessibleRole.ProgressBar]
@@ -5173,6 +5772,18 @@ struct GtkAccessibleTextInterface
 
   /** */
   extern(C) void function(GtkAccessibleText* self, char*** attributeNames, char*** attributeValues) getDefaultAttributes;
+
+  /** */
+  extern(C) gboolean function(GtkAccessibleText* self, uint start, uint end, graphene_rect_t* extents) getExtents;
+
+  /** */
+  extern(C) gboolean function(GtkAccessibleText* self, const(graphene_point_t)* point, uint* offset) getOffset;
+
+  /** */
+  extern(C) gboolean function(GtkAccessibleText* self, uint offset) setCaretPosition;
+
+  /** */
+  extern(C) gboolean function(GtkAccessibleText* self, size_t i, GtkAccessibleTextRange* range) setSelection;
 }
 
 /**
@@ -5192,11 +5803,14 @@ struct GtkAccessibleTextRange
 }
 
 /**
-    [gtk.action_bar.ActionBar] is designed to present contextual actions.
+    Presents contextual actions.
     
-    ![An example GtkActionBar](action-bar.png)
+    <picture>
+      <source srcset="action-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkActionBar" src="action-bar.png">
+    </picture>
     
-    It is expected to be displayed below the content and expand
+    [gtk.action_bar.ActionBar] is expected to be displayed below the content and expand
     horizontally to fill the area.
     
     It allows placing children at the start or the end. In addition, it
@@ -5226,7 +5840,7 @@ struct GtkAccessibleTextRange
     
     A [gtk.action_bar.ActionBar]'s CSS node is called `actionbar`. It contains a `revealer`
     subnode, which contains a `box` subnode, which contains two `box` subnodes at
-    the start and end of the action bar, with `start` and `end style classes
+    the start and end of the action bar, with `start` and `end` style classes
     respectively, as well as a center node that represents the center child.
     
     Each of the boxes contains children packed for that side.
@@ -5234,8 +5848,7 @@ struct GtkAccessibleTextRange
 struct GtkActionBar;
 
 /**
-    The [gtk.actionable.Actionable] interface provides a convenient way of associating
-    widgets with actions.
+    Provides a way to associate widgets with actions.
     
     It primarily consists of two properties: [gtk.actionable.Actionable.actionName]
     and [gtk.actionable.Actionable.actionTarget]. There are also some convenience
@@ -5280,7 +5893,9 @@ struct GtkActionableInterface
 }
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that calls [gtk.widget.Widget.activate].
+    Activates a widget.
+    
+    Widgets are activated by calling [gtk.widget.Widget.activate].
 */
 struct GtkActivateAction;
 
@@ -5288,7 +5903,7 @@ struct GtkActivateAction;
 struct GtkActivateActionClass;
 
 /**
-    [gtk.adjustment.Adjustment] is a model for a numeric value.
+    A model for a numeric value.
     
     The [gtk.adjustment.Adjustment] has an associated lower and upper bound.
     It also contains step and page increments, and a page size.
@@ -5332,12 +5947,10 @@ struct GtkAdjustmentClass
 }
 
 /**
-    A [gtk.alert_dialog.AlertDialog] object collects the arguments that
-    are needed to present a message to the user.
+    Collects the arguments that are needed to present a message to the user.
     
     The message is shown with the [gtk.alert_dialog.AlertDialog.choose]
-    function. This API follows the GIO async pattern, and the result can
-    be obtained by calling [gtk.alert_dialog.AlertDialog.chooseFinish].
+    function.
     
     If you don't need to wait for a button to be clicked, you can use
     [gtk.alert_dialog.AlertDialog.show].
@@ -5352,9 +5965,9 @@ struct GtkAlertDialogClass
 }
 
 /**
-    A [gtk.shortcut_trigger.ShortcutTrigger] that combines two triggers.
+    Combines two shortcut triggers.
     
-    The [gtk.alternative_trigger.AlternativeTrigger] triggers when either of two trigger.
+    The [gtk.alternative_trigger.AlternativeTrigger] triggers when either of the two trigger.
     
     This can be cascaded to combine more than two triggers.
 */
@@ -5364,7 +5977,7 @@ struct GtkAlternativeTrigger;
 struct GtkAlternativeTriggerClass;
 
 /**
-    [gtk.any_filter.AnyFilter] matches an item when at least one of its filters matches.
+    Matches an item when at least one of its filters matches.
     
     To add filters to a [gtk.any_filter.AnyFilter], use [gtk.multi_filter.MultiFilter.append].
 */
@@ -5403,7 +6016,10 @@ struct GtkAppChooser;
 /**
     The [gtk.app_chooser_button.AppChooserButton] lets the user select an application.
     
-    ![An example GtkAppChooserButton](appchooserbutton.png)
+    <picture>
+      <source srcset="appchooserbutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkAppChooserButton" src="appchooserbutton.png">
+    </picture>
     
     Initially, a [gtk.app_chooser_button.AppChooserButton] selects the first application
     in its list, which will either be the most-recently used application
@@ -5438,7 +6054,10 @@ struct GtkAppChooserButton;
 /**
     [gtk.app_chooser_dialog.AppChooserDialog] shows a [gtk.app_chooser_widget.AppChooserWidget] inside a [gtk.dialog.Dialog].
     
-    ![An example GtkAppChooserDialog](appchooserdialog.png)
+    <picture>
+      <source srcset="appchooserdialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkAppChooserDialog" src="appchooserdialog.png">
+    </picture>
     
     Note that [gtk.app_chooser_dialog.AppChooserDialog] does not have any interesting methods
     of its own. Instead, you should get the embedded [gtk.app_chooser_widget.AppChooserWidget]
@@ -5492,19 +6111,43 @@ struct GtkAppChooserDialog;
 struct GtkAppChooserWidget;
 
 /**
-    [gtk.application.Application] is a high-level API for writing applications.
+    A high-level API for writing applications.
     
-    It supports many aspects of writing a GTK application in a convenient
-    fashion, without enforcing a one-size-fits-all model.
+    [gtk.application.Application] supports many aspects of writing a GTK application
+    in a convenient fashion, without enforcing a one-size-fits-all model.
     
-    Currently, [gtk.application.Application] handles GTK initialization, application
-    uniqueness, session management, provides some basic scriptability and
-    desktop shell integration by exporting actions and menus and manages a
-    list of toplevel windows whose life-cycle is automatically tied to the
-    life-cycle of your application.
+    Currently, it handles GTK initialization, application uniqueness, session
+    management, provides some basic scriptability and desktop shell integration
+    by exporting actions and menus and manages a list of toplevel windows whose
+    life-cycle is automatically tied to the life-cycle of your application.
     
-    While [gtk.application.Application] works fine with plain [gtk.window.Window]s, it is
-    recommended to use it together with [gtk.application_window.ApplicationWindow].
+    While [gtk.application.Application] works fine with plain [gtk.window.Window]s,
+    it is recommended to use it together with [gtk.application_window.ApplicationWindow].
+    
+    ## Initialization
+    
+    A typical [gtk.application.Application] will create a window in its
+    `signal@GIO.Application::activate`, `signal@GIO.Application::open`
+    or `signal@GIO.Application::command-line` handlers. Note that all
+    of these signals may be emitted multiple times, so handlers must
+    be careful to take existing windows into account.
+    
+    A typical ::activate handler should look like this:
+    
+    ```
+    static void
+    activate (GApplication *gapp)
+    {
+      GtkApplication *app = GTK_APPLICATION (gapp);
+      GtkWindow *window;
+    
+      window = gtk_application_get_active_window (app);
+      if (!window)
+        window = create_window (app);
+    
+      gtk_window_present (window);
+    }
+    ```
     
     ## Automatic resources
     
@@ -5537,15 +6180,11 @@ struct GtkAppChooserWidget;
     displays the shortcuts window, associate the item with the action
     `win.show-help-overlay`.
     
-    ## A simple application
+    [gtk.application.Application] will also automatically set the application id as the
+    default window icon. Use [gtk.window.Window.setDefaultIconName] or
+    [gtk.window.Window.iconName] to override that behavior.
     
-    [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/bp/bloatpad.c)
-    is available in the GTK source code repository
-    
-    [gtk.application.Application] optionally registers with a session manager of the
-    users session (if you set the [gtk.application.Application.registerSession]
-    property) and offers various functionality related to the session
-    life-cycle.
+    # Inhibiting
     
     An application can block various ways to end the session with
     the [gtk.application.Application.inhibit] function. Typical use cases for
@@ -5555,10 +6194,15 @@ struct GtkAppChooserWidget;
     inform the user about the negative consequences of ending the
     session while inhibitors are present.
     
+    ## A simple application
+    
+    [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/bp/bloatpad.c)
+    is available in the GTK source code repository
+    
     ## See Also
     
-    [HowDoI: Using GtkApplication](https://wiki.gnome.org/HowDoI/GtkApplication),
-    [Getting Started with GTK: Basics](getting_started.html#basics)
+    - [Using GtkApplication](https://developer.gnome.org/documentation/tutorials/application.html)
+    - [Getting Started with GTK: Basics](getting_started.html#basics)
 */
 struct GtkApplication
 {
@@ -5592,18 +6236,17 @@ struct GtkApplicationClass
 }
 
 /**
-    [gtk.application_window.ApplicationWindow] is a [gtk.window.Window] subclass that integrates with
-    [gtk.application.Application].
+    A [gtk.window.Window] subclass that integrates with [gtk.application.Application].
     
     Notably, [gtk.application_window.ApplicationWindow] can handle an application menubar.
     
-    This class implements the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap] interfaces,
-    to let you add window-specific actions that will be exported by the
-    associated [gtk.application.Application], together with its application-wide
+    This class implements the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
+    interfaces, to let you add window-specific actions that will be exported
+    by the associated [gtk.application.Application], together with its application-wide
     actions. Window-specific actions are prefixed with the “win.”
     prefix and application-wide actions are prefixed with the “app.”
     prefix. Actions must be addressed with the prefixed name when
-    referring to them from a [gio.menu_model.MenuModel].
+    referring to them from a menu model.
     
     Note that widgets that are placed inside a [gtk.application_window.ApplicationWindow]
     can also activate these actions, if they implement the
@@ -5616,13 +6259,12 @@ struct GtkApplicationClass
     For instance, on OS X, both menus will be displayed remotely;
     on Windows neither will be.
     
-    If the desktop environment does not display the menubar, then
-    [gtk.application_window.ApplicationWindow] will automatically show a menubar for it.
-    This behaviour can be overridden with the
-    [gtk.application_window.ApplicationWindow.showMenubar] property. If the
-    desktop environment does not display the application menu, then
-    it will automatically be included in the menubar or in the windows
-    client-side decorations.
+    If the desktop environment does not display the menubar, it can be shown in
+    the [gtk.application_window.ApplicationWindow] by setting the
+    [gtk.application_window.ApplicationWindow.showMenubar] property to true. If the
+    desktop environment does not display the application menu, then it will
+    automatically be included in the menubar or in the window’s client-side
+    decorations.
     
     See [gtk.popover_menu.PopoverMenu] for information about the XML language
     used by [gtk.builder.Builder] for menu models.
@@ -5683,14 +6325,14 @@ struct GtkApplicationWindowClass
 }
 
 /**
-    [gtk.aspect_frame.AspectFrame] preserves the aspect ratio of its child.
+    Preserves the aspect ratio of its child.
     
     The frame can respect the aspect ratio of the child widget,
     or use its own aspect ratio.
     
     # CSS nodes
     
-    [gtk.aspect_frame.AspectFrame] uses a CSS node with name `frame`.
+    [gtk.aspect_frame.AspectFrame] uses a CSS node with name `aspectframe`.
     
     # Accessibility
     
@@ -5703,7 +6345,10 @@ struct GtkAspectFrame;
 /**
     [gtk.assistant.Assistant] is used to represent a complex as a series of steps.
     
-    ![An example GtkAssistant](assistant.png)
+    <picture>
+      <source srcset="assistant-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkAssistant" src="assistant.png">
+    </picture>
     
     Each step consists of one or more pages. [gtk.assistant.Assistant] guides the user
     through the pages, and controls the page flow to collect the data needed
@@ -5743,15 +6388,14 @@ struct GtkAspectFrame;
 struct GtkAssistant;
 
 /**
-    [gtk.assistant_page.AssistantPage] is an auxiliary object used by `GtkAssistant.
+    [gtk.assistant_page.AssistantPage] is an auxiliary object used by [gtk.assistant.Assistant].
 
     Deprecated: This object will be removed in GTK 5
 */
 struct GtkAssistantPage;
 
 /**
-    [gtk.bin_layout.BinLayout] is a [gtk.layout_manager.LayoutManager] subclass useful for create "bins" of
-    widgets.
+    A layout manager for widgets with a single child.
     
     [gtk.bin_layout.BinLayout] will stack each child of a widget on top of each other,
     using the [gtk.widget.Widget.hexpand], [gtk.widget.Widget.vexpand],
@@ -5768,9 +6412,9 @@ struct GtkBinLayoutClass
 }
 
 /**
-    A [gtk.bitset.Bitset] represents a set of unsigned integers.
+    A set of unsigned integers.
     
-    Another name for this data structure is "bitmap".
+    Another name for this data structure is “bitmap”.
     
     The current implementation is based on [roaring bitmaps](https://roaringbitmap.org/).
     
@@ -5787,8 +6431,9 @@ struct GtkBinLayoutClass
 struct GtkBitset;
 
 /**
-    An opaque, stack-allocated struct for iterating
-    over the elements of a [gtk.bitset.Bitset].
+    Iterates over the elements of a [gtk.bitset.Bitset].
+    
+    `GtkBitSetIter is an opaque, stack-allocated struct.
     
     Before a [gtk.bitset_iter.BitsetIter] can be used, it needs to be initialized with
     [gtk.bitset_iter.BitsetIter.initFirst], [gtk.bitset_iter.BitsetIter.initLast]
@@ -5801,7 +6446,7 @@ struct GtkBitsetIter
 }
 
 /**
-    [gtk.bookmark_list.BookmarkList] is a list model that wraps [glib.bookmark_file.BookmarkFile].
+    A list model that wraps [glib.bookmark_file.BookmarkFile].
     
     It presents a [gio.list_model.ListModel] and fills it asynchronously with the
     [gio.file_info.FileInfo]s returned from that function.
@@ -5820,8 +6465,7 @@ struct GtkBookmarkListClass
 }
 
 /**
-    [gtk.bool_filter.BoolFilter] evaluates a boolean [gtk.expression.Expression]
-    to determine whether to include items.
+    Evaluates a boolean expression to determine whether to include items.
 */
 struct GtkBoolFilter;
 
@@ -5833,9 +6477,9 @@ struct GtkBoolFilterClass
 }
 
 /**
-    A struct that specifies a border around a rectangular area.
+    Specifies a border around a rectangular area.
     
-    Each side can have different width.
+    Each side can have a different width.
 */
 struct GtkBorder
 {
@@ -5861,15 +6505,18 @@ struct GtkBorder
 }
 
 /**
-    The [gtk.box.Box] widget arranges child widgets into a single row or column.
+    Arranges child widgets into a single row or column.
     
-    ![An example GtkBox](box.png)
+    <picture>
+      <source srcset="box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkBox" src="box.png">
+    </picture>
     
     Whether it is a row or column depends on the value of its
     [gtk.orientable.Orientable.orientation] property. Within the other
-    dimension, all children are allocated the same size. Of course, the
-    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign] properties
-    can be used on the children to influence their allocation.
+    dimension, all children are allocated the same size. The
+    [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
+    properties can be used on the children to influence their allocation.
     
     Use repeated calls to [gtk.box.Box.append] to pack widgets into a
     [gtk.box.Box] from start to end. Use [gtk.box.Box.remove] to remove widgets
@@ -5915,8 +6562,7 @@ struct GtkBoxClass
 }
 
 /**
-    [gtk.box_layout.BoxLayout] is a layout manager that arranges children in a single
-    row or column.
+    Arranges children in a single row or column.
     
     Whether it is a row or column depends on the value of its
     [gtk.orientable.Orientable.orientation] property. Within the other dimension
@@ -5940,16 +6586,15 @@ struct GtkBoxLayoutClass
 }
 
 /**
-    [gtk.buildable.Buildable] allows objects to extend and customize their deserialization
-    from ui files.
+    Allows objects to extend and customize deserialization from ui files.
     
-    The interface includes methods for setting names and properties of objects,
-    parsing custom tags and constructing child objects.
+    The [gtk.buildable.Buildable] interface includes methods for setting names and
+    properties of objects, parsing custom tags and constructing child objects.
     
-    The [gtk.buildable.Buildable] interface is implemented by all widgets and
-    many of the non-widget objects that are provided by GTK. The
-    main user of this interface is [gtk.builder.Builder]. There should be
-    very little need for applications to call any of these functions directly.
+    It is implemented by all widgets and many of the non-widget objects that are
+    provided by GTK. The main user of this interface is [gtk.builder.Builder].
+    There should be very little need for applications to call any of these
+    functions directly.
     
     An object only needs to implement this interface if it needs to extend the
     [gtk.builder.Builder] XML format or run any extra routines at deserialization time.
@@ -5957,8 +6602,7 @@ struct GtkBoxLayoutClass
 struct GtkBuildable;
 
 /**
-    The [gtk.buildable_iface.BuildableIface] interface contains methods that are
-    necessary to allow [gtk.builder.Builder] to construct an object from
+    Contains methods to let [gtk.builder.Builder] construct an object from
     a [gtk.builder.Builder] UI definition.
 */
 struct GtkBuildableIface
@@ -6050,7 +6694,9 @@ struct GtkBuildableIface
 }
 
 /**
-    An opaque context struct for [gtk.types.BuildableParser].
+    Provides context for parsing GtkBuilder UI files.
+    
+    [gtk.buildable_parse_context.BuildableParseContext] is an opaque struct.
 */
 struct GtkBuildableParseContext;
 
@@ -6084,8 +6730,7 @@ struct GtkBuildableParser
 }
 
 /**
-    A [gtk.builder.Builder] reads XML descriptions of a user interface and
-    instantiates the described objects.
+    Reads XML descriptions of a user interface and instantiates the described objects.
     
     To create a [gtk.builder.Builder] from a user interface description, call
     [gtk.builder.Builder.newFromFile], [gtk.builder.Builder.newFromResource]
@@ -6134,7 +6779,7 @@ struct GtkBuildableParser
     For example:
     
     ```xml
-    <?xml version="1.0" encoding="UTF-8">
+    <?xml version="1.0" encoding="UTF-8"?>
     <interface domain="your-app">
       ...
     </interface>
@@ -6149,7 +6794,7 @@ struct GtkBuildableParser
     error out if the version requirements are not met. For example:
     
     ```xml
-    <?xml version="1.0" encoding="UTF-8">
+    <?xml version="1.0" encoding="UTF-8"?>
     <interface domain="your-app">
       <requires lib="gtk" version="4.0" />
     </interface>
@@ -6202,9 +6847,15 @@ struct GtkBuildableParser
     
     ```xml
     <object class="GtkButton">
-      <property name="label" translatable="yes" context="button">Hello, world</property>
+      <property name="label"
+                translatable="yes"
+                context="button"
+                comments="A classic">Hello, world</property>
     </object>
     ```
+    
+    The xgettext tool that is part of gettext can extract these strings,
+    but note that it only looks for translatable="yes".
     
     [gtk.builder.Builder] can parse textual representations for the most common
     property types:
@@ -6216,15 +6867,20 @@ struct GtkBuildableParser
     - booleans (strings like “TRUE”, “t”, “yes”, “y”, “1” are interpreted
       as true values, strings like “FALSE”, “f”, “no”, “n”, “0” are interpreted
       as false values)
+    - string lists (separated by newlines)
     - enumeration types (can be specified by their full C identifier their short
       name used when registering the enumeration type, or their integer value)
-    - flag types (can be specified by their C identifier, short name, integer
-      value, and optionally combined with “|” for bitwise OR, e.g.
-      “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
-    - colors (in a format understood by [gdk.rgba.RGBA.parse])
-    - [glib.variant.Variant] (can be specified in the format understood by
-       [glib.variant.Variant.parse])
-    - pixbufs (can be specified as a filename of an image file to load)
+    - flag types (can be specified by their C identifier or short name,
+      optionally combined with “|” for bitwise OR, or a single integer value
+      e.g., “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase” or 520).
+    - colors (in the format understood by [gdk.rgba.RGBA.parse])
+    - transforms (in the format understood by [gsk.transform.Transform.parse])
+    - Pango attribute lists (in the format understood by [pango.attr_list.AttrList.toString_])
+    - Pango tab arrays (in the format understood by [pango.tab_array.TabArray.toString_])
+    - Pango font descriptions (in the format understood by [pango.font_description.FontDescription.fromString])
+    - [glib.variant.Variant] (in the format understood by [glib.variant.Variant.parse])
+    - textures (can be specified as an object id, a resource path or a filename of an image file to load relative to the Builder file or the CWD if [gtk.builder.Builder.addFromString] was used)
+    - GFile (like textures, can be specified as an object id, a URI or a filename of a file to load relative to the Builder file or the CWD if [gtk.builder.Builder.addFromString] was used)
     
     Objects can be referred to by their name and by default refer to
     objects declared in the local XML fragment and objects exposed via
@@ -6414,6 +7070,14 @@ struct GtkBuildableParser
     elements and attributes to the XML. Typically, any extension will be
     documented in each type that implements the interface.
     
+    ## Menus
+    
+    In addition to objects with properties that are created with `<object>` and
+    `<property>` elements, [gtk.builder.Builder] also allows to parse XML menu definitions
+    as used by [gio.menu.Menu] when exporting menu models over D-Bus, and as
+    described in the [gtk.popover_menu.PopoverMenu] documentation. Menus can be defined
+    as toplevel elements, or as property values for properties of type [gio.menu_model.MenuModel].
+    
     ## Templates
     
     When describing a [gtk.widget.Widget], you can use the `<template>` tag to
@@ -6461,11 +7125,14 @@ struct GtkBuilderCScopeClass
 struct GtkBuilderClass;
 
 /**
-    [gtk.builder_list_item_factory.BuilderListItemFactory] is a [gtk.list_item_factory.ListItemFactory] that creates
-    widgets by instantiating [gtk.builder.Builder] UI templates.
+    Creates widgets by instantiating [gtk.builder.Builder] UI templates.
     
-    The templates must be extending [gtk.list_item.ListItem], and typically use
-    [gtk.expression.Expression]s to obtain data from the items in the model.
+    The templates must extend the class that the parent widget expects.
+    For example, a factory provided to [gtk.list_view.ListView.factory] must have
+    a template that extends [gtk.list_item.ListItem].
+    
+    Templates typically use [gtk.expression.Expression] to obtain data from the items
+    in the model.
     
     Example:
     ```xml
@@ -6484,6 +7151,11 @@ struct GtkBuilderClass;
         </template>
       </interface>
     ```
+    
+    A common approach is to embed such templates as CDATA marked sections into
+    a surrounding UI file. Note that if you use this approach, extracting
+    translatable strings with xgettext will not work for strings inside the
+    marked section.
 */
 struct GtkBuilderListItemFactory;
 
@@ -6491,8 +7163,7 @@ struct GtkBuilderListItemFactory;
 struct GtkBuilderListItemFactoryClass;
 
 /**
-    [gtk.builder_scope.BuilderScope] is an interface to provide language binding support
-    to [gtk.builder.Builder].
+    Provides language binding support to [gtk.builder.Builder].
     
     The goal of [gtk.builder_scope.BuilderScope] is to look up programming-language-specific
     values for strings that are given in a [gtk.builder.Builder] UI file.
@@ -6551,14 +7222,22 @@ struct GtkBuilderScopeInterface
 }
 
 /**
-    The [gtk.button.Button] widget is generally used to trigger a callback function that is
-    called when the button is pressed.
+    Calls a callback function when the button is clicked.
     
-    ![An example GtkButton](button.png)
+    <picture>
+      <source srcset="button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkButton" src="button.png">
+    </picture>
     
     The [gtk.button.Button] widget can hold any valid child widget. That is, it can hold
     almost any other standard [gtk.widget.Widget]. The most commonly used child is the
     [gtk.label.Label].
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.button.Button.activate]
     
     # CSS nodes
     
@@ -6621,28 +7300,35 @@ struct GtkButtonPrivate;
 struct GtkCClosureExpression;
 
 /**
-    [gtk.calendar.Calendar] is a widget that displays a Gregorian calendar, one month
-    at a time.
+    Displays a Gregorian calendar, one month at a time.
     
-    ![An example GtkCalendar](calendar.png)
+    <picture>
+      <source srcset="calendar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkCalendar" src="calendar.png">
+    </picture>
     
     A [gtk.calendar.Calendar] can be created with [gtk.calendar.Calendar.new_].
     
-    The date that is currently displayed can be altered with
-    [gtk.calendar.Calendar.selectDay].
+    The selected date can be retrieved from a [gtk.calendar.Calendar] using
+    [gtk.calendar.Calendar.getDate].
+    It can be altered with [gtk.calendar.Calendar.setDate].
     
     To place a visual marker on a particular day, use
     [gtk.calendar.Calendar.markDay] and to remove the marker,
     [gtk.calendar.Calendar.unmarkDay]. Alternative, all
     marks can be cleared with [gtk.calendar.Calendar.clearMarks].
     
-    The selected date can be retrieved from a [gtk.calendar.Calendar] using
-    [gtk.calendar.Calendar.getDate].
-    
     Users should be aware that, although the Gregorian calendar is the
     legal calendar in most countries, it was adopted progressively
     between 1582 and 1929. Display before these dates is likely to be
     historically incorrect.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.calendar.Calendar] supports the following gestures:
+    
+    - Scrolling up or down will switch to the previous or next month.
+    - Date strings can be dropped for setting the current day.
     
     # CSS nodes
     
@@ -6674,7 +7360,7 @@ struct GtkCClosureExpression;
 struct GtkCalendar;
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that invokes a callback.
+    Invokes a callback.
 */
 struct GtkCallbackAction;
 
@@ -7753,10 +8439,13 @@ struct GtkCellRendererToggle;
 struct GtkCellView;
 
 /**
-    [gtk.center_box.CenterBox] arranges three children in a row, keeping the middle child
+    Arranges three children in a row, keeping the middle child
     centered as well as possible.
     
-    ![An example GtkCenterBox](centerbox.png)
+    <picture>
+      <source srcset="centerbox-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkCenterBox" src="centerbox.png">
+    </picture>
     
     To add children to [gtk.center_box.CenterBox], use [gtk.center_box.CenterBox.setStartWidget],
     [gtk.center_box.CenterBox.setCenterWidget] and
@@ -7786,7 +8475,8 @@ struct GtkCellView;
     
     Until GTK 4.10, [gtk.center_box.CenterBox] used the [gtk.types.AccessibleRole.Group] role.
     
-    Starting from GTK 4.12, [gtk.center_box.CenterBox] uses the [gtk.types.AccessibleRole.Generic] role.
+    Starting from GTK 4.12, [gtk.center_box.CenterBox] uses the [gtk.types.AccessibleRole.Generic]
+    role.
 */
 struct GtkCenterBox;
 
@@ -7794,7 +8484,7 @@ struct GtkCenterBox;
 struct GtkCenterBoxClass;
 
 /**
-    [gtk.center_layout.CenterLayout] is a layout manager that manages up to three children.
+    Manages up to three children.
     
     The start widget is allocated at the start of the layout (left in
     left-to-right locales and right in right-to-left ones), and the end
@@ -7812,9 +8502,12 @@ struct GtkCenterLayoutClass
 }
 
 /**
-    A [gtk.check_button.CheckButton] places a label next to an indicator.
+    Places a label next to an indicator.
     
-    ![Example GtkCheckButtons](check-button.png)
+    <picture>
+      <source srcset="check-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Example GtkCheckButtons" src="check-button.png">
+    </picture>
     
     A [gtk.check_button.CheckButton] is created by calling either [gtk.check_button.CheckButton.new_]
     or [gtk.check_button.CheckButton.newWithLabel].
@@ -7843,7 +8536,10 @@ struct GtkCenterLayoutClass
     Grouped check buttons use a different indicator, and are commonly referred
     to as *radio buttons*.
     
-    ![Example GtkCheckButtons](radio-button.png)
+    <picture>
+      <source srcset="radio-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Example GtkRadioButtons" src="radio-button.png">
+    </picture>
     
     To add a [gtk.check_button.CheckButton] to a group, use [gtk.check_button.CheckButton.setGroup].
     
@@ -7852,10 +8548,16 @@ struct GtkCenterLayoutClass
     [gio.action.Action] with a target for each button. Using the `toggled` signals to keep
     track of the group changes and state is discouraged.
     
+    # Shortcuts and Gestures
+    
+    [gtk.check_button.CheckButton] supports the following keyboard shortcuts:
+    
+    - <kbd>␣</kbd> or <kbd>Enter</kbd> activates the button.
+    
     # CSS nodes
     
     ```
-    checkbutton[.text-button]
+    checkbutton[.text-button][.grouped]
     ├── check
     ╰── [label]
     ```
@@ -7902,7 +8604,10 @@ struct GtkClosureExpression;
     The [gtk.color_button.ColorButton] allows to open a color chooser dialog to change
     the color.
     
-    ![An example GtkColorButton](color-button.png)
+    <picture>
+      <source srcset="color-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkColorButton" src="color-button.png">
+    </picture>
     
     It is suitable widget for selecting a color in a preference dialog.
     
@@ -7940,7 +8645,10 @@ struct GtkColorChooser;
 /**
     A dialog for choosing a color.
     
-    ![An example GtkColorChooserDialog](colorchooser.png)
+    <picture>
+      <source srcset="colorchooser-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkColorChooserDialog" src="colorchooser.png">
+    </picture>
     
     [gtk.color_chooser_dialog.ColorChooserDialog] implements the [gtk.color_chooser.ColorChooser] interface
     and does not provide much API of its own.
@@ -8006,6 +8714,14 @@ struct GtkColorChooserInterface
     The [gtk.color_chooser_widget.ColorChooserWidget] is used in the [gtk.color_chooser_dialog.ColorChooserDialog]
     to provide a dialog for selecting colors.
     
+    # Actions
+    
+    [gtk.color_chooser_widget.ColorChooserWidget] defines a set of built-in actions:
+    
+    - `color.customize` activates the color editor for the given color.
+    - `color.select` emits the [gtk.color_chooser.ColorChooser.colorActivated] signal
+      for the given color.
+    
     # CSS names
     
     [gtk.color_chooser_widget.ColorChooserWidget] has a single CSS node with name colorchooser.
@@ -8015,15 +8731,14 @@ struct GtkColorChooserInterface
 struct GtkColorChooserWidget;
 
 /**
-    A [gtk.color_dialog.ColorDialog] object collects the arguments that
-    are needed to present a color chooser dialog to the
-    user, such as a title for the dialog and whether it
-    should be modal.
+    Asynchronous API to present a color chooser dialog.
+    
+    [gtk.color_dialog.ColorDialog] collects the arguments that are needed to present
+    the dialog to the user, such as a title for the dialog and whether
+    it should be modal.
     
     The dialog is shown with the [gtk.color_dialog.ColorDialog.chooseRgba]
-    function. This API follows the GIO async pattern, and the
-    result can be obtained by calling
-    [gtk.color_dialog.ColorDialog.chooseRgbaFinish].
+    function.
     
     See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
     that uses [gtk.color_dialog.ColorDialog] and presents the results.
@@ -8031,10 +8746,12 @@ struct GtkColorChooserWidget;
 struct GtkColorDialog;
 
 /**
-    The [gtk.color_dialog_button.ColorDialogButton] is a wrapped around a [gtk.color_dialog.ColorDialog]
-    and allows to open a color chooser dialog to change the color.
+    Opens a color chooser dialog to select a color.
     
-    ![An example GtkColorDialogButton](color-button.png)
+    <picture>
+      <source srcset="color-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkColorDialogButton" src="color-button.png">
+    </picture>
     
     It is suitable widget for selecting a color in a preference dialog.
     
@@ -8067,8 +8784,7 @@ struct GtkColorDialogClass
 }
 
 /**
-    [gtk.column_view.ColumnView] presents a large dynamic list of items using multiple columns
-    with headers.
+    Presents a large dynamic list of items using multiple columns with headers.
     
     [gtk.column_view.ColumnView] uses the factories of its columns to generate a cell widget for
     each column, for each visible item and displays them together as the row for
@@ -8136,12 +8852,12 @@ struct GtkColorDialogClass
 struct GtkColumnView;
 
 /**
-    [gtk.column_view_cell.ColumnViewCell] is used by [gtk.column_view_column.ColumnViewColumn] to represent items
-    in a cell in [gtk.column_view.ColumnView].
+    Represents items in a cell in [gtk.column_view.ColumnView].
     
-    The [gtk.column_view_cell.ColumnViewCell]s are managed by the columnview widget (with its factory)
-    and cannot be created by applications, but they need to be populated
-    by application code. This is done by calling [gtk.column_view_cell.ColumnViewCell.setChild].
+    The [gtk.column_view_cell.ColumnViewCell]s are managed by the [gtk.column_view.ColumnView]
+    widget (with its factory) and cannot be created by applications, but
+    they need to be populated by application code. This is done by calling
+    [gtk.column_view_cell.ColumnViewCell.setChild].
     
     [gtk.column_view_cell.ColumnViewCell]s exist in 2 stages:
     
@@ -8161,7 +8877,7 @@ struct GtkColumnViewCellClass;
 struct GtkColumnViewClass;
 
 /**
-    [gtk.column_view_column.ColumnViewColumn] represents the columns being added to a [gtk.column_view.ColumnView].
+    Represents the columns in a [gtk.column_view.ColumnView].
     
     The main ingredient for a [gtk.column_view_column.ColumnViewColumn] is the [gtk.list_item_factory.ListItemFactory]
     that tells the columnview how to create cells for this column from items in
@@ -8180,8 +8896,7 @@ struct GtkColumnViewColumn;
 struct GtkColumnViewColumnClass;
 
 /**
-    [gtk.column_view_row.ColumnViewRow] is used by [gtk.column_view.ColumnView] to allow configuring
-    how rows are displayed.
+    Configures how rows are displayed in a [gtk.column_view.ColumnView].
     
     It is not used to set the widgets displayed in the individual cells. For that
     see `method@GtkColumnViewColumn.set_factory` and `class@GtkColumnViewCell`.
@@ -8192,8 +8907,7 @@ struct GtkColumnViewRow;
 struct GtkColumnViewRowClass;
 
 /**
-    [gtk.column_view_sorter.ColumnViewSorter] is a sorter implementation that
-    is geared towards the needs of [gtk.column_view.ColumnView].
+    Sorts [gtk.column_view.ColumnView] columns.
     
     The sorter returned by [gtk.column_view.ColumnView.getSorter] is
     a [gtk.column_view_sorter.ColumnViewSorter].
@@ -8238,7 +8952,10 @@ struct GtkColumnViewSorterClass
     A [gtk.combo_box.ComboBox] is a widget that allows the user to choose from a list of
     valid choices.
     
-    ![An example GtkComboBox](combo-box.png)
+    <picture>
+      <source srcset="combo-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkComboBox" src="combo-box.png">
+    </picture>
     
     The [gtk.combo_box.ComboBox] displays the selected choice; when activated, the
     [gtk.combo_box.ComboBox] displays a popup which allows the user to make a new choice.
@@ -8334,7 +9051,10 @@ struct GtkComboBoxClass
     A [gtk.combo_box_text.ComboBoxText] is a simple variant of [gtk.combo_box.ComboBox] for text-only
     use cases.
     
-    ![An example GtkComboBoxText](combo-box-text.png)
+    <picture>
+      <source srcset="combo-box-text-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkComboBoxText" src="combo-box-text.png">
+    </picture>
     
     [gtk.combo_box_text.ComboBoxText] hides the model-view complexity of [gtk.combo_box.ComboBox].
     
@@ -8398,7 +9118,7 @@ struct GtkComboBoxText;
 struct GtkConstantExpression;
 
 /**
-    [gtk.constraint.Constraint] describes a constraint between attributes of two widgets,
+    Describes a constraint between attributes of two widgets,
      expressed as a linear equation.
     
     The typical equation for a constraint is:
@@ -8424,8 +9144,7 @@ struct GtkConstraintClass
 }
 
 /**
-    A [gtk.constraint_guide.ConstraintGuide] is an invisible layout element in a
-    [gtk.constraint_layout.ConstraintLayout].
+    An invisible layout element in a [gtk.constraint_layout.ConstraintLayout].
     
     The [gtk.constraint_layout.ConstraintLayout] treats guides like widgets. They
     can be used as the source or target of a [gtk.constraint.Constraint].
@@ -8447,7 +9166,7 @@ struct GtkConstraintGuideClass
 }
 
 /**
-    A layout manager using constraints to describe relations between widgets.
+    Uses constraints to describe relations between widgets.
     
     [gtk.constraint_layout.ConstraintLayout] is a layout manager that uses relations between
     widget attributes, expressed via [gtk.constraint.Constraint] instances, to
@@ -8633,8 +9352,8 @@ struct GtkConstraintLayoutClass
 }
 
 /**
-    The [gtk.constraint_target.ConstraintTarget] interface is implemented by objects that
-    can be used as source or target in [gtk.constraint.Constraint]s.
+    Makes it possible to use an object as source or target in a
+    [gtk.constraint.Constraint].
     
     Besides [gtk.widget.Widget], it is also implemented by [gtk.constraint_guide.ConstraintGuide].
 */
@@ -8643,7 +9362,9 @@ struct GtkConstraintTarget;
 /** */
 struct GtkConstraintTargetInterface;
 
-/** */
+/**
+    Points at a location inside a CSS stream.
+*/
 struct GtkCssLocation
 {
   /** */
@@ -8663,8 +9384,7 @@ struct GtkCssLocation
 }
 
 /**
-    [gtk.css_provider.CssProvider] is an object implementing the [gtk.style_provider.StyleProvider] interface
-    for CSS.
+    A style provider for CSS.
     
     It is able to parse CSS-like input in order to style widgets.
     
@@ -8713,11 +9433,13 @@ struct GtkCssProviderPrivate;
 */
 struct GtkCssSection;
 
-/** */
+/**
+    A CSS style change.
+*/
 struct GtkCssStyleChange;
 
 /**
-    [gtk.custom_filter.CustomFilter] determines whether to include items with a callback.
+    Determines whether to include items with a callback.
 */
 struct GtkCustomFilter;
 
@@ -8729,11 +9451,11 @@ struct GtkCustomFilterClass
 }
 
 /**
-    [gtk.custom_layout.CustomLayout] uses closures for size negotiation.
+    Uses closures for size negotiation.
     
-    A `GtkCustomLayout `uses closures matching to the old [gtk.widget.Widget]
+    A [gtk.custom_layout.CustomLayout] uses closures matching to the old [gtk.widget.Widget]
     virtual functions for size negotiation, as a convenience API to
-    ease the porting towards the corresponding `GtkLayoutManager
+    ease the porting towards the corresponding [gtk.layout_manager.LayoutManager]
     virtual functions.
 */
 struct GtkCustomLayout;
@@ -8746,8 +9468,7 @@ struct GtkCustomLayoutClass
 }
 
 /**
-    [gtk.custom_sorter.CustomSorter] is a [gtk.sorter.Sorter] implementation that sorts via a callback
-    function.
+    Sorts items via a callback function.
 */
 struct GtkCustomSorter;
 
@@ -8762,7 +9483,10 @@ struct GtkCustomSorterClass
     Dialogs are a convenient way to prompt the user for a small amount
     of input.
     
-    ![An example GtkDialog](dialog.png)
+    <picture>
+      <source srcset="dialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkDialog" src="dialog.png">
+    </picture>
     
     Typical uses are to display a message, ask a question, or anything else
     that does not require extensive effort on the user’s part.
@@ -8912,7 +9636,7 @@ struct GtkDialogClass
 }
 
 /**
-    [gtk.directory_list.DirectoryList] is a list model that wraps [gio.file.File.enumerateChildrenAsync].
+    A list model that wraps [gio.file.File.enumerateChildrenAsync].
     
     It presents a [gio.list_model.ListModel] and fills it asynchronously with the [gio.file_info.FileInfo]s
     returned from that function.
@@ -8945,7 +9669,7 @@ struct GtkDirectoryListClass
 }
 
 /**
-    [gtk.drag_icon.DragIcon] is a [gtk.root.Root] implementation for drag icons.
+    A [gtk.root.Root] implementation for drag icons.
     
     A drag icon moves with the pointer during a Drag-and-Drop operation
     and is destroyed when the drag ends.
@@ -8967,7 +9691,7 @@ struct GtkDragIconClass
 }
 
 /**
-    [gtk.drag_source.DragSource] is an event controller to initiate Drag-And-Drop operations.
+    An event controller to initiate Drag-And-Drop operations.
     
     [gtk.drag_source.DragSource] can be set up with the necessary
     ingredients for a DND operation ahead of time. This includes
@@ -9050,9 +9774,12 @@ struct GtkDragSource;
 struct GtkDragSourceClass;
 
 /**
-    [gtk.drawing_area.DrawingArea] is a widget that allows drawing with cairo.
+    Allows drawing with cairo.
     
-    ![An example GtkDrawingArea](drawingarea.png)
+    <picture>
+      <source srcset="drawingarea-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkDrawingArea" src="drawingarea.png">
+    </picture>
     
     It’s essentially a blank widget; you can draw on it. After
     creating a drawing area, the application may want to connect to:
@@ -9149,8 +9876,7 @@ struct GtkDrawingAreaClass
 }
 
 /**
-    [gtk.drop_controller_motion.DropControllerMotion] is an event controller tracking
-    the pointer during Drag-and-Drop operations.
+    An event controller tracking the pointer during Drag-and-Drop operations.
     
     It is modeled after [gtk.event_controller_motion.EventControllerMotion] so if you
     have used that, this should feel really familiar.
@@ -9164,10 +9890,12 @@ struct GtkDropControllerMotion;
 struct GtkDropControllerMotionClass;
 
 /**
-    [gtk.drop_down.DropDown] is a widget that allows the user to choose an item
-    from a list of options.
+    Allows the user to choose an item from a list of options.
     
-    ![An example GtkDropDown](drop-down.png)
+    <picture>
+      <source srcset="drop-down-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkDropDown" src="drop-down.png">
+    </picture>
     
     The [gtk.drop_down.DropDown] displays the [selected][gtk.drop_down.DropDown.selected]
     choice.
@@ -9231,7 +9959,7 @@ struct GtkDropDownClass
 }
 
 /**
-    [gtk.drop_target.DropTarget] is an event controller to receive Drag-and-Drop operations.
+    An event controller to receive Drag-and-Drop operations.
     
     The most basic way to use a [gtk.drop_target.DropTarget] to receive drops on a
     widget is to create it via [gtk.drop_target.DropTarget.new_], passing in the
@@ -9306,8 +10034,7 @@ struct GtkDropDownClass
 struct GtkDropTarget;
 
 /**
-    [gtk.drop_target_async.DropTargetAsync] is an event controller to receive Drag-and-Drop
-    operations, asynchronously.
+    An event controller to receive Drag-and-Drop operations, asynchronously.
     
     It is the more complete but also more complex method of handling drop
     operations compared to [gtk.drop_target.DropTarget], and you should only use
@@ -9350,7 +10077,7 @@ struct GtkDropTargetAsyncClass;
 struct GtkDropTargetClass;
 
 /**
-    [gtk.editable.Editable] is an interface for text editing widgets.
+    Interface for single-line text editing widgets.
     
     Typical examples of editable widgets are [gtk.entry.Entry] and
     [gtk.spin_button.SpinButton]. It contains functions for generically manipulating
@@ -9516,10 +10243,12 @@ struct GtkEditableInterface
 }
 
 /**
-    A [gtk.editable_label.EditableLabel] is a label that allows users to
-    edit the text by switching to an “edit mode”.
+    Allows users to edit the displayed text by switching to an “edit mode”.
     
-    ![An example GtkEditableLabel](editable-label.png)
+    <picture>
+      <source srcset="editable-label-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkEditableLabel" src="editable-label.png">
+    </picture>
     
     [gtk.editable_label.EditableLabel] does not have API of its own, but it
     implements the [gtk.editable.Editable] interface.
@@ -9528,6 +10257,20 @@ struct GtkEditableInterface
     to click or press the Enter key. The default bindings
     for leaving the edit mode are the Enter key (to save
     the results) or the Escape key (to cancel the editing).
+    
+    # Shortcuts and Gestures
+    
+    [gtk.editable_label.EditableLabel] supports the following keyboard shortcuts:
+    
+    - <kbd>Enter</kbd> starts editing.
+    - <kbd>Escape</kbd> stops editing.
+    
+    # Actions
+    
+    [gtk.editable_label.EditableLabel] defines a set of built-in actions:
+    
+    - `editing.starts` switches the widget into editing mode.
+    - `editing.stop` switches the widget out of editing mode.
     
     # CSS nodes
     
@@ -9555,13 +10298,28 @@ struct GtkEditableLabelClass
 }
 
 /**
-    The [gtk.emoji_chooser.EmojiChooser] is used by text widgets such as [gtk.entry.Entry] or
-    [gtk.text_view.TextView] to let users insert Emoji characters.
+    Used by text widgets to let users insert Emoji characters.
     
-    ![An example GtkEmojiChooser](emojichooser.png)
+    <picture>
+      <source srcset="emojichooser-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkEmojiChooser" src="emojichooser.png">
+    </picture>
     
     [gtk.emoji_chooser.EmojiChooser] emits the [gtk.emoji_chooser.EmojiChooser.emojiPicked]
     signal when an Emoji is selected.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.emoji_chooser.EmojiChooser] supports the following keyboard shortcuts:
+    
+    - <kbd>Ctrl</kbd>+<kbd>N</kbd> scrolls th the next section.
+    - <kbd>Ctrl</kbd>+<kbd>P</kbd> scrolls th the previous section.
+    
+    # Actions
+    
+    [gtk.emoji_chooser.EmojiChooser] defines a set of built-in actions:
+    
+    - `scroll.section` scrolls to the next or previous section.
     
     # CSS nodes
     
@@ -9590,9 +10348,12 @@ struct GtkEmojiChooser;
 struct GtkEmojiChooserClass;
 
 /**
-    [gtk.entry.Entry] is a single line text entry widget.
+    A single-line text entry widget.
     
-    ![An example GtkEntry](entry.png)
+    <picture>
+      <source srcset="entry-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkEntry" src="entry.png">
+    </picture>
     
     A fairly large set of key bindings are supported by default. If the
     entered text is longer than the allocation of the widget, the widget
@@ -9685,7 +10446,7 @@ struct GtkEntry
 }
 
 /**
-    A [gtk.entry_buffer.EntryBuffer] hold the text displayed in a [gtk.text.Text] widget.
+    Holds the text that is displayed in a single-line text entry widget.
     
     A single [gtk.entry_buffer.EntryBuffer] object can be shared by multiple widgets
     which will then share the same text content, but not the cursor
@@ -9818,7 +10579,7 @@ struct GtkEntryClass
 struct GtkEntryCompletion;
 
 /**
-    [gtk.event_controller.EventController] is the base class for event controllers.
+    The base class for event controllers.
     
     These are ancillary objects associated to widgets, which react
     to `GdkEvents`, and possibly trigger actions as a consequence.
@@ -9837,8 +10598,7 @@ struct GtkEventController;
 struct GtkEventControllerClass;
 
 /**
-    [gtk.event_controller_focus.EventControllerFocus] is an event controller to keep track of
-    keyboard focus.
+    Tracks keyboard focus.
     
     The event controller offers [gtk.event_controller_focus.EventControllerFocus.enter]
     and [gtk.event_controller_focus.EventControllerFocus.leave] signals, as well as
@@ -9853,8 +10613,7 @@ struct GtkEventControllerFocus;
 struct GtkEventControllerFocusClass;
 
 /**
-    [gtk.event_controller_key.EventControllerKey] is an event controller that provides access
-    to key events.
+    Provides access to key events.
 */
 struct GtkEventControllerKey;
 
@@ -9862,8 +10621,7 @@ struct GtkEventControllerKey;
 struct GtkEventControllerKeyClass;
 
 /**
-    [gtk.event_controller_legacy.EventControllerLegacy] is an event controller that provides raw
-    access to the event stream.
+    Provides raw access to the event stream.
     
     It should only be used as a last resort if none of the other event
     controllers or gestures do the job.
@@ -9874,8 +10632,7 @@ struct GtkEventControllerLegacy;
 struct GtkEventControllerLegacyClass;
 
 /**
-    [gtk.event_controller_motion.EventControllerMotion] is an event controller tracking the pointer
-    position.
+    Tracks the pointer position.
     
     The event controller offers [gtk.event_controller_motion.EventControllerMotion.enter]
     and [gtk.event_controller_motion.EventControllerMotion.leave] signals, as well as
@@ -9890,8 +10647,7 @@ struct GtkEventControllerMotion;
 struct GtkEventControllerMotionClass;
 
 /**
-    [gtk.event_controller_scroll.EventControllerScroll] is an event controller that handles scroll
-    events.
+    Handles scroll events.
     
     It is capable of handling both discrete and continuous scroll
     events from mice or touchpads, abstracting them both with the
@@ -9931,7 +10687,7 @@ struct GtkEventControllerScroll;
 struct GtkEventControllerScrollClass;
 
 /**
-    [gtk.every_filter.EveryFilter] matches an item when each of its filters matches.
+    Matches an item when each of its filters matches.
     
     To add filters to a [gtk.every_filter.EveryFilter], use [gtk.multi_filter.MultiFilter.append].
 */
@@ -9941,10 +10697,12 @@ struct GtkEveryFilter;
 struct GtkEveryFilterClass;
 
 /**
-    [gtk.expander.Expander] allows the user to reveal its child by clicking
-    on an expander triangle.
+    Allows the user to reveal or conceal a child widget.
     
-    ![An example GtkExpander](expander.png)
+    <picture>
+      <source srcset="expander-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkExpander" src="expander.png">
+    </picture>
     
     This is similar to the triangles used in a [gtk.tree_view.TreeView].
     
@@ -9996,21 +10754,16 @@ struct GtkEveryFilterClass;
     
     # GtkExpander as GtkBuildable
     
-    The [gtk.expander.Expander] implementation of the [gtk.buildable.Buildable] interface supports
-    placing a child in the label position by specifying “label” as the
-    “type” attribute of a `<child>` element. A normal content child can be
-    specified without specifying a `<child>` type attribute.
-    
     An example of a UI definition fragment with GtkExpander:
     
     ```xml
     <object class="GtkExpander">
-      <child type="label">
+      <property name="label-widget">
         <object class="GtkLabel" id="expander-label"/>
-      </child>
-      <child>
+      </property>
+      <property name="child">
         <object class="GtkEntry" id="expander-content"/>
-      </child>
+      </property>
     </object>
     ```
     
@@ -10037,7 +10790,7 @@ struct GtkEveryFilterClass;
 struct GtkExpander;
 
 /**
-    [gtk.expression.Expression] provides a way to describe references to values.
+    Provides a way to describe references to values.
     
     An important aspect of expressions is that the value can be obtained
     from a source that is several steps away. For example, an expression
@@ -10136,8 +10889,9 @@ struct GtkExpander;
     
     To create a property expression, use the `<lookup>` element. It can have a `type`
     attribute to specify the object type, and a `name` attribute to specify the property
-    to look up. The content of `<lookup>` can either be an element specifying the expression
-    to use the object, or a string that specifies the name of the object to use.
+    to look up. The content of `<lookup>` can either be a string that specifies the name
+    of the object to use, an element specifying an expression to provide an object, or
+    empty to use the `this` object.
     
     Example:
     
@@ -10151,12 +10905,32 @@ struct GtkExpander;
     [gtk.builder_list_item_factory.BuilderListItemFactory] for an example of this technique.
     
     To create a constant expression, use the `<constant>` element. If the type attribute
-    is specified, the element content is interpreted as a value of that type. Otherwise,
+    is specified, the element content is interpreted as a value of that type, and the
+    initial attribute can be specified to get the initial value for that type. Otherwise,
     it is assumed to be an object. For instance:
     
     ```xml
       <constant>string_filter</constant>
       <constant type='gchararray'>Hello, world</constant>
+      <constant type='gchararray' initial='true' /> <!-- NULL -->
+    ```
+    
+    String (`type='gchararray'`) constants can be marked for translation with the
+    `translatable=` attribute, and will then be looked up in the
+    [gtk.builder.Builder.translationDomain] when the expression is constructed.
+    
+    ```xml
+      <constant type='gchararray' translatable='yes'>I'm translatable!</constant>
+    ```
+    
+    As with other translatable strings in [gtk.builder.Builder], constants can
+    also have a context and/or translation comment:
+    
+    ```xml
+      <constant type='gchararray'
+                translatable='yes'
+                context='example'
+                comments='A sample string'>I'm translatable!</constant>
     ```
     
     To create a closure expression, use the `<closure>` element. The `function`
@@ -10169,6 +10943,19 @@ struct GtkExpander;
         <constant type='gchararray'>File size:</constant>
         <lookup type='GFile' name='size'>myfile</lookup>
       </closure>
+    ```
+    
+    If an expression can fail, a `<try>` element can be used to provide fallbacks.
+    The expressions are tried from top to bottom until one of them succeeds.
+    If none of the expressions succeed, the expression fails as normal:
+    
+    ```xml
+      <try>
+        <lookup type='GtkWindow' name='title'>
+          <lookup type='GtkLabel' name='root'></lookup>
+        </lookup>
+        <constant type='gchararray'>Hello World</constant>
+      </try>
     ```
     
     To create a property binding, use the `<binding>` element in place of where a
@@ -10364,7 +11151,7 @@ struct GtkFileChooser;
     - To save a file under a different name, use [gtk.types.FileChooserAction.Save],
       and set the existing file with [gtk.file_chooser.FileChooser.setFile].
     
-    - To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
+    - To choose a folder instead of a file, use [gtk.types.FileChooserAction.SelectFolder].
     
     In general, you should only cause the file chooser to show a specific
     folder when it is appropriate to use [gtk.file_chooser.FileChooser.setFile],
@@ -10587,6 +11374,27 @@ struct GtkFileChooserNativeClass
     use the methods of this interface to interact with the
     widget.
     
+    # Shortcuts and Gestures
+    
+    [gtk.file_chooser_widget.FileChooserWidget] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.file_chooser_widget.FileChooserWidget.desktopFolder]
+    - [gtk.file_chooser_widget.FileChooserWidget.downFolder]
+    - [gtk.file_chooser_widget.FileChooserWidget.homeFolder]
+    - [gtk.file_chooser_widget.FileChooserWidget.locationPopup]
+    - [gtk.file_chooser_widget.FileChooserWidget.locationPopupOnPaste]
+    - [gtk.file_chooser_widget.FileChooserWidget.locationTogglePopup]
+    - [gtk.file_chooser_widget.FileChooserWidget.placesShortcut]
+    - [gtk.file_chooser_widget.FileChooserWidget.quickBookmark]
+    - [gtk.file_chooser_widget.FileChooserWidget.recentShortcut]
+    - [gtk.file_chooser_widget.FileChooserWidget.searchShortcut]
+    - [gtk.file_chooser_widget.FileChooserWidget.showHidden]
+    - [gtk.file_chooser_widget.FileChooserWidget.upFolder]
+    
     # CSS nodes
     
     [gtk.file_chooser_widget.FileChooserWidget] has a single CSS node with name filechooser.
@@ -10596,16 +11404,14 @@ struct GtkFileChooserNativeClass
 struct GtkFileChooserWidget;
 
 /**
-    A [gtk.file_dialog.FileDialog] object collects the arguments that
-    are needed to present a file chooser dialog to the
-    user, such as a title for the dialog and whether it
-    should be modal.
+    Asynchronous API to present a file chooser dialog.
+    
+    [gtk.file_dialog.FileDialog] collects the arguments that are needed to present
+    the dialog to the user, such as a title for the dialog and whether
+    it should be modal.
     
     The dialog is shown with [gtk.file_dialog.FileDialog.open],
-    [gtk.file_dialog.FileDialog.save], etc. These APIs follow the
-    GIO async pattern, and the result can be obtained by calling
-    the corresponding finish function, for example
-    [gtk.file_dialog.FileDialog.openFinish].
+    [gtk.file_dialog.FileDialog.save], etc.
 */
 struct GtkFileDialog;
 
@@ -10617,10 +11423,10 @@ struct GtkFileDialogClass
 }
 
 /**
-    [gtk.file_filter.FileFilter] filters files by name or mime type.
+    Filters files by name or mime type.
     
     [gtk.file_filter.FileFilter] can be used to restrict the files being shown in a
-    [gtk.file_chooser.FileChooser]. Files can be filtered based on their name (with
+    file chooser. Files can be filtered based on their name (with
     [gtk.file_filter.FileFilter.addPattern] or [gtk.file_filter.FileFilter.addSuffix])
     or on their mime type (with [gtk.file_filter.FileFilter.addMimeType]).
     
@@ -10630,8 +11436,8 @@ struct GtkFileDialogClass
     text/plain. Note that [gtk.file_filter.FileFilter] allows wildcards for the
     subtype of a mime type, so you can e.g. filter for image/\*.
     
-    Normally, file filters are used by adding them to a [gtk.file_chooser.FileChooser]
-    (see [gtk.file_chooser.FileChooser.addFilter]), but it is also possible to
+    Normally, file filters are used by adding them to a file chooser
+    (see [gtk.file_dialog.FileDialog.setFilters]), but it is also possible to
     manually use a file filter on any [gtk.filter_list_model.FilterListModel] containing
     [gio.file_info.FileInfo] objects.
     
@@ -10667,16 +11473,15 @@ struct GtkFileDialogClass
 struct GtkFileFilter;
 
 /**
-    A [gtk.file_launcher.FileLauncher] object collects the arguments that are needed to open a
-    file with an application.
+    Asynchronous API to open a file with an application.
+    
+    [gtk.file_launcher.FileLauncher] collects the arguments that are needed to open the file.
     
     Depending on system configuration, user preferences and available APIs, this
     may or may not show an app chooser dialog or launch the default application
     right away.
     
     The operation is started with the [gtk.file_launcher.FileLauncher.launch] function.
-    This API follows the GIO async pattern, and the result can be obtained by
-    calling [gtk.file_launcher.FileLauncher.launchFinish].
     
     To launch uris that don't represent files, use [gtk.uri_launcher.UriLauncher].
 */
@@ -10690,8 +11495,7 @@ struct GtkFileLauncherClass
 }
 
 /**
-    A [gtk.filter.Filter] object describes the filtering to be performed by a
-    [gtk.filter_list_model.FilterListModel].
+    Describes the filtering to be performed by a [gtk.filter_list_model.FilterListModel].
     
     The model will use the filter to determine if it should include items
     or not by calling [gtk.filter.Filter.match] for each item and only
@@ -10753,10 +11557,9 @@ struct GtkFilterClass
 }
 
 /**
-    [gtk.filter_list_model.FilterListModel] is a list model that filters the elements of
-    the underlying model according to a [gtk.filter.Filter].
+    A list model that filters the elements of another model.
     
-    It hides some elements from the other model according to
+    It hides some elements from the underlying model according to
     criteria given by a [gtk.filter.Filter].
     
     The model can be set up to do incremental filtering, so that
@@ -10775,7 +11578,7 @@ struct GtkFilterListModelClass
 }
 
 /**
-    [gtk.fixed.Fixed] places its child widgets at fixed positions and with fixed sizes.
+    Places its child widgets at fixed positions and with fixed sizes.
     
     [gtk.fixed.Fixed] performs no automatic layout management.
     
@@ -10830,8 +11633,7 @@ struct GtkFixedClass
 }
 
 /**
-    [gtk.fixed_layout.FixedLayout] is a layout manager which can place child widgets
-    at fixed positions.
+    Places child widgets at fixed positions.
     
     Most applications should never use this layout manager; fixed positioning
     and sizing requires constant recalculations on where children need to be
@@ -10884,7 +11686,7 @@ struct GtkFixedLayoutClass
 }
 
 /**
-    [gtk.flatten_list_model.FlattenListModel] is a list model that concatenates other list models.
+    A list model that concatenates other list models.
     
     [gtk.flatten_list_model.FlattenListModel] takes a list model containing list models, and flattens
     it into a single model. Each list model becomes a section in the single model.
@@ -10899,7 +11701,12 @@ struct GtkFlattenListModelClass
 }
 
 /**
-    A [gtk.flow_box.FlowBox] puts child widgets in reflowing grid.
+    Puts child widgets in a reflowing grid.
+    
+    <picture>
+      <source srcset="flow-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFlowBox" src="flow-box.png">
+    </picture>
     
     For instance, with the horizontal orientation, the widgets will be
     arranged from left to right, starting a new row under the previous
@@ -10925,6 +11732,15 @@ struct GtkFlattenListModelClass
     
     Also see [gtk.list_box.ListBox].
     
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.flow_box.FlowBox.moveCursor]
+    - [gtk.flow_box.FlowBox.selectAll]
+    - [gtk.flow_box.FlowBox.toggleCursorChild]
+    - [gtk.flow_box.FlowBox.unselectAll]
+    
     # CSS nodes
     
     ```
@@ -10949,7 +11765,10 @@ struct GtkFlattenListModelClass
 struct GtkFlowBox;
 
 /**
-    [gtk.flow_box_child.FlowBoxChild] is the kind of widget that can be added to a [gtk.flow_box.FlowBox].
+    The kind of widget that can be added to a [gtk.flow_box.FlowBox].
+    
+    [gtk.flow_box.FlowBox] will automatically wrap its children in a [gtk.flow_box_child.FlowBoxChild]
+    when necessary.
 */
 struct GtkFlowBoxChild
 {
@@ -10974,7 +11793,10 @@ struct GtkFlowBoxChildClass
     The [gtk.font_button.FontButton] allows to open a font chooser dialog to change
     the font.
     
-    ![An example GtkFontButton](font-button.png)
+    <picture>
+      <source srcset="font-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFontButton" src="font-button.png">
+    </picture>
     
     It is suitable widget for selecting a font in a preference dialog.
     
@@ -11009,7 +11831,10 @@ struct GtkFontChooser;
 /**
     The [gtk.font_chooser_dialog.FontChooserDialog] widget is a dialog for selecting a font.
     
-    ![An example GtkFontChooserDialog](fontchooser.png)
+    <picture>
+      <source srcset="fontchooser-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFontChooserDialog" src="fontchooser.png">
+    </picture>
     
     [gtk.font_chooser_dialog.FontChooserDialog] implements the [gtk.font_chooser.FontChooser] interface
     and does not provide much API of its own.
@@ -11086,15 +11911,14 @@ struct GtkFontChooserIface
 struct GtkFontChooserWidget;
 
 /**
-    A [gtk.font_dialog.FontDialog] object collects the arguments that
-    are needed to present a font chooser dialog to the
-    user, such as a title for the dialog and whether it
-    should be modal.
+    Asynchronous API to present a font chooser dialog.
+    
+    [gtk.font_dialog.FontDialog] collects the arguments that are needed to present
+    the dialog to the user, such as a title for the dialog and whether
+    it should be modal.
     
     The dialog is shown with the [gtk.font_dialog.FontDialog.chooseFont]
-    function or its variants. This API follows the GIO async pattern,
-    and the result can be obtained by calling the corresponding
-    finish function, such as [gtk.font_dialog.FontDialog.chooseFontFinish].
+    function or its variants.
     
     See [gtk.font_dialog_button.FontDialogButton] for a convenient control
     that uses [gtk.font_dialog.FontDialog] and presents the results.
@@ -11102,10 +11926,12 @@ struct GtkFontChooserWidget;
 struct GtkFontDialog;
 
 /**
-    The [gtk.font_dialog_button.FontDialogButton] is wrapped around a [gtk.font_dialog.FontDialog]
-    and allows to open a font chooser dialog to change the font.
+    Opens a font chooser dialog to select a font.
     
-    ![An example GtkFontDialogButton](font-button.png)
+    <picture>
+      <source srcset="font-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFontDialogButton" src="font-button.png">
+    </picture>
     
     It is suitable widget for selecting a font in a preference dialog.
     
@@ -11137,10 +11963,12 @@ struct GtkFontDialogClass
 }
 
 /**
-    [gtk.frame.Frame] is a widget that surrounds its child with a decorative
-    frame and an optional label.
+    Surrounds its child with a decorative frame and an optional label.
     
-    ![An example GtkFrame](frame.png)
+    <picture>
+      <source srcset="frame-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkFrame" src="frame.png">
+    </picture>
     
     If present, the label is drawn inside the top edge of the frame.
     The horizontal position of the label can be controlled with
@@ -11151,20 +11979,16 @@ struct GtkFontDialogClass
     
     # GtkFrame as GtkBuildable
     
-    The [gtk.frame.Frame] implementation of the [gtk.buildable.Buildable] interface supports
-    placing a child in the label position by specifying “label” as the
-    “type” attribute of a `<child>` element. A normal content child can
-    be specified without specifying a `<child>` type attribute.
-    
     An example of a UI definition fragment with GtkFrame:
+    
     ```xml
     <object class="GtkFrame">
-      <child type="label">
+      <property name="label-widget">
         <object class="GtkLabel" id="frame_label"/>
-      </child>
-      <child>
+      </property>
+      <property name="child">
         <object class="GtkEntry" id="frame_content"/>
-      </child>
+      </property>
     </object>
     ```
     
@@ -11206,9 +12030,12 @@ struct GtkFrameClass
 }
 
 /**
-    [gtk.glarea.GLArea] is a widget that allows drawing with OpenGL.
+    Allows drawing with OpenGL.
     
-    ![An example GtkGLArea](glarea.png)
+    <picture>
+      <source srcset="glarea-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkGLArea" src="glarea.png">
+    </picture>
     
     [gtk.glarea.GLArea] sets up its own [gdk.glcontext.GLContext], and creates a custom
     GL framebuffer that the widget will do GL rendering onto. It also ensures
@@ -11247,6 +12074,13 @@ struct GtkFrameClass
       glClearColor (0, 0, 0, 0);
       glClear (GL_COLOR_BUFFER_BIT);
     
+      // record the active framebuffer ID, so we can return to it
+      // with `glBindFramebuffer (GL_FRAMEBUFFER, screen_fb)` should
+      // we, for instance, intend on utilizing the results of an
+      // intermediate render texture pass
+      GLuint screen_fb = 0;
+      glGetIntegerv (GL_FRAMEBUFFER_BINDING, &screen_fb);
+    
       // draw your object
       // draw_an_object ();
     
@@ -11276,7 +12110,7 @@ struct GtkFrameClass
     
     ```c
     static void
-    on_realize (GtkGLarea *area)
+    on_realize (GtkGLArea *area)
     {
       // We need to make the context current if we want to
       // call GL API
@@ -11347,7 +12181,7 @@ struct GtkGLAreaClass
 }
 
 /**
-    [gtk.gesture.Gesture] is the base class for gesture recognition.
+    The base class for gesture recognition.
     
     Although [gtk.gesture.Gesture] is quite generalized to serve as a base for
     multi-touch gestures, it is suitable to implement single-touch and
@@ -11443,7 +12277,7 @@ struct GtkGesture;
 struct GtkGestureClass;
 
 /**
-    [gtk.gesture_click.GestureClick] is a [gtk.gesture.Gesture] implementation for clicks.
+    Recognizes click gestures.
     
     It is able to recognize multiple clicks on a nearby zone, which
     can be listened for through the [gtk.gesture_click.GestureClick.pressed]
@@ -11457,7 +12291,7 @@ struct GtkGestureClick;
 struct GtkGestureClickClass;
 
 /**
-    [gtk.gesture_drag.GestureDrag] is a [gtk.gesture.Gesture] implementation for drags.
+    Recognizes drag gestures.
     
     The drag operation itself can be tracked throughout the
     [gtk.gesture_drag.GestureDrag.dragBegin],
@@ -11473,7 +12307,7 @@ struct GtkGestureDrag;
 struct GtkGestureDragClass;
 
 /**
-    [gtk.gesture_long_press.GestureLongPress] is a [gtk.gesture.Gesture] for long presses.
+    Recognizes long press gestures.
     
     This gesture is also known as “Press and Hold”.
     
@@ -11495,7 +12329,7 @@ struct GtkGestureLongPress;
 struct GtkGestureLongPressClass;
 
 /**
-    [gtk.gesture_pan.GesturePan] is a [gtk.gesture.Gesture] for pan gestures.
+    Recognizes pan gestures.
     
     These are drags that are locked to happen along one axis. The axis
     that a [gtk.gesture_pan.GesturePan] handles is defined at construct time, and
@@ -11516,7 +12350,7 @@ struct GtkGesturePan;
 struct GtkGesturePanClass;
 
 /**
-    [gtk.gesture_rotate.GestureRotate] is a [gtk.gesture.Gesture] for 2-finger rotations.
+    Recognizes 2-finger rotation gestures.
     
     Whenever the angle between both handled sequences changes, the
     [gtk.gesture_rotate.GestureRotate.angleChanged] signal is emitted.
@@ -11527,8 +12361,7 @@ struct GtkGestureRotate;
 struct GtkGestureRotateClass;
 
 /**
-    [gtk.gesture_single.GestureSingle] is a `GtkGestures` subclass optimized for singe-touch
-    and mouse gestures.
+    A [gtk.gesture.Gesture] subclass optimized for singe-touch and mouse gestures.
     
     Under interaction, these gestures stick to the first interacting sequence,
     which is accessible through [gtk.gesture_single.GestureSingle.getCurrentSequence]
@@ -11548,7 +12381,7 @@ struct GtkGestureSingle;
 struct GtkGestureSingleClass;
 
 /**
-    [gtk.gesture_stylus.GestureStylus] is a [gtk.gesture.Gesture] specific to stylus input.
+    Recognizes tablet stylus input.
     
     The provided signals just relay the basic information of the
     stylus events.
@@ -11559,7 +12392,7 @@ struct GtkGestureStylus;
 struct GtkGestureStylusClass;
 
 /**
-    [gtk.gesture_swipe.GestureSwipe] is a [gtk.gesture.Gesture] for swipe gestures.
+    Recognizes swipe gestures.
     
     After a press/move/.../move/release sequence happens, the
     [gtk.gesture_swipe.GestureSwipe.swipe] signal will be emitted,
@@ -11578,7 +12411,7 @@ struct GtkGestureSwipe;
 struct GtkGestureSwipeClass;
 
 /**
-    [gtk.gesture_zoom.GestureZoom] is a [gtk.gesture.Gesture] for 2-finger pinch/zoom gestures.
+    Recognizes 2-finger pinch/zoom gestures.
     
     Whenever the distance between both tracked sequences changes, the
     [gtk.gesture_zoom.GestureZoom.scaleChanged] signal is emitted to report
@@ -11590,8 +12423,7 @@ struct GtkGestureZoom;
 struct GtkGestureZoomClass;
 
 /**
-    A widget that allows to bypass gsk rendering for its child by passing the content
-    directly to the compositor.
+    Bypasses gsk rendering by passing the content of its child directly to the compositor.
     
     Graphics offload is an optimization to reduce overhead and battery use that is
     most useful for video content. It only works on some platforms and in certain
@@ -11637,10 +12469,12 @@ struct GtkGraphicsOffloadClass
 }
 
 /**
-    [gtk.grid.Grid] is a container which arranges its child widgets in
-    rows and columns.
+    Arranges its child widgets in rows and columns.
     
-    ![An example GtkGrid](grid.png)
+    <picture>
+      <source srcset="grid-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkGrid" src="grid.png">
+    </picture>
     
     It supports arbitrary positions and horizontal/vertical spans.
     
@@ -11741,8 +12575,7 @@ struct GtkGridClass
 }
 
 /**
-    [gtk.grid_layout.GridLayout] is a layout manager which arranges child widgets in
-    rows and columns.
+    Arranges child widgets in rows and columns.
     
     Children have an "attach point" defined by the horizontal and vertical
     index of the cell they occupy; children can span multiple rows or columns.
@@ -11778,7 +12611,7 @@ struct GtkGridLayoutClass
 }
 
 /**
-    [gtk.grid_view.GridView] presents a large dynamic grid of items.
+    Presents a large dynamic grid of items.
     
     [gtk.grid_view.GridView] uses its factory to generate one child widget for each
     visible item and shows them in a grid. The orientation of the grid view
@@ -11791,6 +12624,13 @@ struct GtkGridLayoutClass
     
     To learn more about the list widget framework, see the
     [overview](section-list-widget.html).
+    
+    # Actions
+    
+    [gtk.grid_view.GridView] defines a set of built-in actions:
+    
+    - `list.activate-item` activates the item at given position by emitting the
+      the [gtk.grid_view.GridView.activate] signal.
     
     # CSS nodes
     
@@ -11820,9 +12660,12 @@ struct GtkGridView;
 struct GtkGridViewClass;
 
 /**
-    [gtk.header_bar.HeaderBar] is a widget for creating custom title bars for windows.
+    Creates a custom titlebar for a window.
     
-    ![An example GtkHeaderBar](headerbar.png)
+    <picture>
+      <source srcset="headerbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkHeaderBar" src="headerbar.png">
+    </picture>
     
     [gtk.header_bar.HeaderBar] is similar to a horizontal [gtk.center_box.CenterBox]. It allows
     children to be placed at the start or the end. In addition, it allows
@@ -11895,7 +12738,7 @@ struct GtkGridViewClass;
 struct GtkHeaderBar;
 
 /**
-    [gtk.imcontext.IMContext] defines the interface for GTK input methods.
+    The interface for GTK input methods.
     
     [gtk.imcontext.IMContext] is used by GTK text input widgets like [gtk.text.Text]
     to map from key events to Unicode character strings.
@@ -12083,8 +12926,11 @@ struct GtkIMContextClass
   /** */
   extern(C) gboolean function(GtkIMContext* context, GdkEvent* event) activateOskWithEvent;
 
-  /** */
-  extern(C) void function() GtkReserved2;
+  /**
+      Default handler of the
+        [gtk.imcontext.IMContext.invalidComposition] signal. Since: 4.22
+  */
+  extern(C) gboolean function(GtkIMContext* context, const(char)* str) invalidComposition;
 
   /** */
   extern(C) void function() GtkReserved3;
@@ -12094,7 +12940,7 @@ struct GtkIMContextClass
 }
 
 /**
-    [gtk.imcontext_simple.IMContextSimple] is an input method supporting table-based input methods.
+    Supports compose sequences, dead keys and numeric Unicode input.
     
     ## Compose sequences
     
@@ -12153,8 +12999,7 @@ struct GtkIMContextSimpleClass
 struct GtkIMContextSimplePrivate;
 
 /**
-    [gtk.immulticontext.IMMulticontext] is an input method context supporting multiple,
-    switchable input methods.
+    Supports switching between multiple input methods.
     
     Text widgets such as [gtk.text.Text] or [gtk.text_view.TextView] use a `GtkIMMultiContext`
     to implement their `im-module` property for switching between different
@@ -12192,14 +13037,22 @@ struct GtkIMMulticontextClass
 struct GtkIMMulticontextPrivate;
 
 /**
-    Contains information found when looking up an icon in [gtk.icon_theme.IconTheme].
+    Contains information found when looking up an icon in [gtk.icon_theme.IconTheme]
+    or loading it from a file.
     
-    [gtk.icon_paintable.IconPaintable] implements [gdk.paintable.Paintable].
+    [gtk.icon_paintable.IconPaintable] implements [gdk.paintable.Paintable] and [gtk.symbolic_paintable.SymbolicPaintable].
 */
 struct GtkIconPaintable;
 
+/** */
+struct GtkIconPaintableClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
 /**
-    [gtk.icon_theme.IconTheme] provides a facility for loading themed icons.
+    Loads themed icons.
     
     The main reason for using a name rather than simply providing a filename
     is to allow different icons to be used depending on what “icon theme” is
@@ -12237,6 +13090,11 @@ struct GtkIconTheme;
 /**
     [gtk.icon_view.IconView] is a widget which displays data in a grid of icons.
     
+    <picture>
+      <source srcset="icon-view-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkIconView" src="icon-view.png">
+    </picture>
+    
     [gtk.icon_view.IconView] provides an alternative view on a [gtk.tree_model.TreeModel].
     It displays the model as a grid of icons with labels. Like
     [gtk.tree_view.TreeView], it allows to select one or multiple items
@@ -12264,9 +13122,12 @@ struct GtkIconTheme;
 struct GtkIconView;
 
 /**
-    The [gtk.image.Image] widget displays an image.
+    Displays an image.
     
-    ![An example GtkImage](image.png)
+    <picture>
+      <source srcset="image-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkImage" src="image.png">
+    </picture>
     
     Various kinds of object can be displayed as an image; most typically,
     you would load a [gdk.texture.Texture] from a file, using the convenience function
@@ -12279,9 +13140,9 @@ struct GtkIconView;
     If the file isn’t loaded successfully, the image will contain a
     “broken image” icon similar to that used in many web browsers.
     
-    If you want to handle errors in loading the file yourself,
-    for example by displaying an error message, then load the image with
-    [gdk.texture.Texture.newFromFile], then create the [gtk.image.Image] with
+    If you want to handle errors in loading the file yourself, for example
+    by displaying an error message, then load the image with an image
+    loading framework such as libglycin, then create the [gtk.image.Image] with
     [gtk.image.Image.newFromPaintable].
     
     Sometimes an application will want to avoid depending on external data
@@ -12309,7 +13170,10 @@ struct GtkImage;
 /**
     [gtk.info_bar.InfoBar] can be used to show messages to the user without a dialog.
     
-    ![An example GtkInfoBar](info-bar.png)
+    <picture>
+      <source srcset="info-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkInfoBar" src="info-bar.png">
+    </picture>
     
     It is often temporarily shown at the top or bottom of a document.
     In contrast to [gtk.dialog.Dialog], which has an action area at the
@@ -12389,7 +13253,7 @@ struct GtkImage;
 struct GtkInfoBar;
 
 /**
-    [gtk.inscription.Inscription] is a widget to show text in a predefined area.
+    Shows text in a predefined area.
     
     You likely want to use [gtk.label.Label] instead as this widget is intended only
     for a small subset of use cases. The main scenario envisaged is inside lists
@@ -12401,6 +13265,10 @@ struct GtkInfoBar;
     
     Users of this widget should take care to plan behaviour for the common case
     where the text doesn't fit exactly in the allocated space.
+    
+    ## CSS nodes
+    
+    [gtk.inscription.Inscription] has a single CSS node with the name label.
 */
 struct GtkInscription;
 
@@ -12412,7 +13280,7 @@ struct GtkInscriptionClass
 }
 
 /**
-    A [gtk.shortcut_trigger.ShortcutTrigger] that triggers when a specific keyval and modifiers are pressed.
+    Triggers when a specific keyval and modifiers are pressed.
 */
 struct GtkKeyvalTrigger;
 
@@ -12420,12 +13288,48 @@ struct GtkKeyvalTrigger;
 struct GtkKeyvalTriggerClass;
 
 /**
-    The [gtk.label.Label] widget displays a small amount of text.
+    Displays a small amount of text.
     
-    As the name implies, most labels are used to label another widget
-    such as a [gtk.button.Button].
+    Most labels are used to label another widget (such as an [gtk.entry.Entry]).
     
-    ![An example GtkLabel](label.png)
+    <picture>
+      <source srcset="label-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkLabel" src="label.png">
+    </picture>
+    
+    ## Shortcuts and Gestures
+    
+    [gtk.label.Label] supports the following keyboard shortcuts, when the cursor is
+    visible:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    - <kbd>Ctrl</kbd>+<kbd>A</kbd> or <kbd>Ctrl</kbd>+<kbd>&sol;</kbd>
+      selects all.
+    - <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> or
+      <kbd>Ctrl</kbd>+<kbd>&bsol;</kbd> unselects all.
+    
+    Additionally, the following signals have default keybindings:
+    
+    - [gtk.label.Label.activateCurrentLink]
+    - [gtk.label.Label.copyClipboard]
+    - [gtk.label.Label.moveCursor]
+    
+    ## Actions
+    
+    [gtk.label.Label] defines a set of built-in actions:
+    
+    - `clipboard.copy` copies the text to the clipboard.
+    - `clipboard.cut` doesn't do anything, since text in labels can't be deleted.
+    - `clipboard.paste` doesn't do anything, since text in labels can't be
+      edited.
+    - `link.open` opens the link, when activated on a link inside the label.
+    - `link.copy` copies the link to the clipboard, when activated on a link
+      inside the label.
+    - `menu.popup` opens the context menu.
+    - `selection.delete` doesn't do anything, since text in labels can't be
+      deleted.
+    - `selection.select-all` selects all of the text, if the label allows
+      selection.
     
     ## CSS nodes
     
@@ -12520,9 +13424,8 @@ struct GtkKeyvalTriggerClass;
     
     ## Markup (styled text)
     
-    To make it easy to format text in a label (changing colors,
-    fonts, etc.), label text can be provided in a simple
-    markup format:
+    To make it easy to format text in a label (changing colors, fonts, etc.),
+    label text can be provided in a simple markup format:
     
     Here’s how to create a label with a small font:
     ```c
@@ -12533,7 +13436,7 @@ struct GtkKeyvalTriggerClass;
     (See the Pango manual for complete documentation] of available
     tags, `func@Pango.parse_markup`)
     
-    The markup passed to [gtk.label.Label.setMarkup] must be valid; for example,
+    The markup passed to [gtk.label.Label.setMarkup] must be valid XML; for example,
     literal `<`, `>` and `&` characters must be escaped as `&lt;`, `&gt;`, and `&amp;`.
     If you pass text obtained from the user, file, or a network to
     [gtk.label.Label.setMarkup], you’ll want to escape it with
@@ -12544,16 +13447,16 @@ struct GtkKeyvalTriggerClass;
     attributes in some cases. Be careful though; [pango.attr_list.AttrList] tends
     to cause internationalization problems, unless you’re applying attributes
     to the entire string (i.e. unless you set the range of each attribute
-    to [0, `G_MAXINT`)). The reason is that specifying the start_index and
-    end_index for a [pango.attribute.Attribute] requires knowledge of the exact
+    to [0, `G_MAXINT`)). The reason is that specifying the `start_index` and
+    `end_index` for a [pango.attribute.Attribute] requires knowledge of the exact
     string being displayed, so translations will cause problems.
     
     ## Selectable labels
     
     Labels can be made selectable with [gtk.label.Label.setSelectable].
-    Selectable labels allow the user to copy the label contents to
-    the clipboard. Only labels that contain useful-to-copy information—such
-    as error messages—should be made selectable.
+    Selectable labels allow the user to copy the label contents to the
+    clipboard. Only labels that contain useful-to-copy information — such
+    as error messages — should be made selectable.
     
     ## Text layout
     
@@ -12581,11 +13484,11 @@ struct GtkKeyvalTriggerClass;
     ## Links
     
     GTK supports markup for clickable hyperlinks in addition to regular Pango
-    markup. The markup for links is borrowed from HTML, using the `<a>` with
-    “href“, “title“ and “class“ attributes. GTK renders links similar to the
-    way they appear in web browsers, with colored, underlined text. The “title“
-    attribute is displayed as a tooltip on the link. The “class“ attribute is
-    used as style class on the CSS node for the link.
+    markup. The markup for links is borrowed from HTML, using the `<a>` tag
+    with “href“, “title“ and “class“ attributes. GTK renders links similar to
+    the way they appear in web browsers, with colored, underlined text. The
+    “title“ attribute is displayed as a tooltip on the link. The “class“
+    attribute is used as style class on the CSS node for the link.
     
     An example of inline links looks like this:
     
@@ -12605,8 +13508,7 @@ struct GtkKeyvalTriggerClass;
 struct GtkLabel;
 
 /**
-    [gtk.layout_child.LayoutChild] is the base class for objects that are meant to hold
-    layout properties.
+    The base class for objects that are meant to hold layout properties.
     
     If a [gtk.layout_manager.LayoutManager] has per-child properties, like their packing type,
     or the horizontal and vertical span, or the icon name, then the layout
@@ -12629,8 +13531,7 @@ struct GtkLayoutChildClass
 }
 
 /**
-    Layout managers are delegate classes that handle the preferred size
-    and the allocation of a widget.
+    Handles the preferred size and allocation for children of a widget.
     
     You typically subclass [gtk.layout_manager.LayoutManager] if you want to implement a
     layout policy for the children of a widget, or if you want to determine
@@ -12741,12 +13642,15 @@ struct GtkLayoutManagerClass
 }
 
 /**
-    [gtk.level_bar.LevelBar] is a widget that can be used as a level indicator.
+    Shows a level indicator.
     
     Typical use cases are displaying the strength of a password, or
     showing the charge level of a battery.
     
-    ![An example GtkLevelBar](levelbar.png)
+    <picture>
+      <source srcset="levelbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkLevelBar" src="levelbar.png">
+    </picture>
     
     Use [gtk.level_bar.LevelBar.setValue] to set the current value, and
     [gtk.level_bar.LevelBar.addOffsetValue] to set the value offsets at which
@@ -12842,9 +13746,12 @@ struct GtkLayoutManagerClass
 struct GtkLevelBar;
 
 /**
-    A [gtk.link_button.LinkButton] is a button with a hyperlink.
+    A button with a hyperlink.
     
-    ![An example GtkLinkButton](link-button.png)
+    <picture>
+      <source srcset="link-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkLinkButton" src="link-button.png">
+    </picture>
     
     It is useful to show quick links to resources.
     
@@ -12860,6 +13767,19 @@ struct GtkLevelBar;
     [gtk.link_button.LinkButton.activateLink] signal and returning true from
     the signal handler.
     
+    # Shortcuts and Gestures
+    
+    [gtk.link_button.LinkButton] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    
+    # Actions
+    
+    [gtk.link_button.LinkButton] defines a set of built-in actions:
+    
+    - `clipboard.copy` copies the url to the clipboard.
+    - `menu.popup` opens the context menu.
+    
     # CSS nodes
     
     [gtk.link_button.LinkButton] has a single CSS node with name button. To differentiate
@@ -12872,7 +13792,50 @@ struct GtkLevelBar;
 struct GtkLinkButton;
 
 /**
-    [gtk.list_base.ListBase] is the abstract base class for GTK's list widgets.
+    The abstract base class for GTK's list widgets.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.list_base.ListBase] supports the following keyboard shortcuts:
+    
+    - <kbd>Ctrl</kbd>+<kbd>A</kbd> or <kbd>Ctrl</kbd>+<kbd>&sol;</kbd>
+      selects all items.
+    - <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> or
+      <kbd>Ctrl</kbd>+<kbd>&bsol;</kbd> unselects all items.
+    
+    The focused item is controlled by the navigation keys below, combined
+    with the <kbd>Ctrl</kbd> modifier to prevent moving the selection,
+    and the <kbd>Shift</kbd> modifier to extend the current selection.
+    
+    - <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd> move the focus
+      on the next item in the designed direction.
+    - <kbd>Home</kbd> and <kbd>End</kbd> focus the first or last item.
+    - <kbd>PgUp</kbd> and <kbd>PgDn</kbd> move the focus one page up or down.
+    
+    List item widgets support the following keyboard shortcuts:
+    
+    - <kbd>Enter</kbd> activates the item.
+    - <kbd>␣</kbd> selects the item, with the same <kbd>Ctrl</kbd> and
+      <kbd>Shift</kbd> modifiers combinations as the navigation keys.
+    
+    # Actions
+    
+    [gtk.list_base.ListBase] defines a set of built-in actions:
+    
+    - `list.scroll-to-item` moves the visible area to the item at given position
+      with the minimum amount of scrolling required. If the item is already
+      visible, nothing happens.
+    - `list.select-item` changes the selection.
+    - `list.select-all` selects all items in the model, if the selection model
+      supports it.
+    - `list.unselect-all` unselects all items in the model, if the selection
+      model supports it.
+    
+    List item widgets install the following actions:
+    
+    - `listitem.select` changes selection if the item is selectable.
+    - `listitem.scroll-to` moves the visible area of the list to this item with
+      the minimum amount of scrolling required.
 */
 struct GtkListBase;
 
@@ -12880,7 +13843,12 @@ struct GtkListBase;
 struct GtkListBaseClass;
 
 /**
-    [gtk.list_box.ListBox] is a vertical list.
+    Shows a vertical list.
+    
+    <picture>
+      <source srcset="list-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkListBox" src="list-box.png">
+    </picture>
     
     A [gtk.list_box.ListBox] only contains [gtk.list_box_row.ListBoxRow] children. These rows can
     by dynamically sorted and filtered, and headers can be added dynamically
@@ -12910,9 +13878,18 @@ struct GtkListBaseClass;
     attribute of a `<child>` element. See [gtk.list_box.ListBox.setPlaceholder]
     for info.
     
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.list_box.ListBox.moveCursor]
+    - [gtk.list_box.ListBox.selectAll]
+    - [gtk.list_box.ListBox.toggleCursorRow]
+    - [gtk.list_box.ListBox.unselectAll]
+    
     # CSS nodes
     
-    ```plain
+    ```
     list[.separators][.rich-list][.navigation-sidebar][.boxed-list]
     ╰── row[.activatable]
     ```
@@ -12937,7 +13914,10 @@ struct GtkListBaseClass;
 struct GtkListBox;
 
 /**
-    [gtk.list_box_row.ListBoxRow] is the kind of widget that can be added to a [gtk.list_box.ListBox].
+    The kind of widget that can be added to a [gtk.list_box.ListBox].
+    
+    [gtk.list_box.ListBox] will automatically wrap its children in a `GtkListboxRow`
+    when necessary.
 */
 struct GtkListBoxRow
 {
@@ -12961,8 +13941,7 @@ struct GtkListBoxRowClass
 }
 
 /**
-    [gtk.list_header.ListHeader] is used by list widgets to represent the headers they
-    display.
+    Used by list widgets to represent the headers they display.
     
     [gtk.list_header.ListHeader] objects are managed just like [gtk.list_item.ListItem]
     objects via their factory, but provide a different set of properties suitable
@@ -12974,8 +13953,7 @@ struct GtkListHeader;
 struct GtkListHeaderClass;
 
 /**
-    [gtk.list_item.ListItem] is used by list widgets to represent items in a
-    [gio.list_model.ListModel].
+    Used by list widgets to represent items in a [gio.list_model.ListModel].
     
     [gtk.list_item.ListItem] objects are managed by the list widget (with its factory)
     and cannot be created by applications, but they need to be populated
@@ -12985,10 +13963,10 @@ struct GtkListHeaderClass;
     
     1. The unbound stage where the listitem is not currently connected to
        an item in the list. In that case, the [gtk.list_item.ListItem.item]
-       property is set to null.
+       property is set to `NULL`.
     
     2. The bound stage where the listitem references an item from the list.
-       The [gtk.list_item.ListItem.item] property is not null.
+       The [gtk.list_item.ListItem.item] property is not `NULL`.
 */
 struct GtkListItem;
 
@@ -12996,7 +13974,7 @@ struct GtkListItem;
 struct GtkListItemClass;
 
 /**
-    A [gtk.list_item_factory.ListItemFactory] creates widgets for the items taken from a [gio.list_model.ListModel].
+    Creates widgets for the items taken from a [gio.list_model.ListModel].
     
     This is one of the core concepts of handling list widgets such
     as [gtk.list_view.ListView] or [gtk.grid_view.GridView].
@@ -13040,10 +14018,9 @@ struct GtkListItemClass;
     If you intend to do changes to the behavior, it is recommended that you create
     a new [gtk.list_item_factory.ListItemFactory] which will allow the views to recreate its widgets.
     
-    Once you have chosen your factory and created it, you need to set it
-    on the view widget you want to use it with, such as via
-    [gtk.list_view.ListView.setFactory]. Reusing factories across different
-    views is allowed, but very uncommon.
+    Once you have chosen your factory and created it, you need to set it on the view
+    widget you want to use it with, such as via [gtk.list_view.ListView.setFactory].
+    Reusing factories across different views is allowed, but very uncommon.
 */
 struct GtkListItemFactory;
 
@@ -13220,7 +14197,7 @@ struct GtkListStoreClass
 struct GtkListStorePrivate;
 
 /**
-    [gtk.list_view.ListView] presents a large dynamic list of items.
+    Presents a large dynamic list of items.
     
     [gtk.list_view.ListView] uses its factory to generate one row widget for each visible
     item and shows them in a linear display, either vertically or horizontally.
@@ -13290,6 +14267,13 @@ struct GtkListStorePrivate;
       gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), list);
     ```
     
+    # Actions
+    
+    [gtk.list_view.ListView] defines a set of built-in actions:
+    
+    - `list.activate-item` activates the item at given position by emitting
+      the [gtk.list_view.ListView.activate] signal.
+    
     # CSS nodes
     
     ```
@@ -13310,7 +14294,7 @@ struct GtkListStorePrivate;
     rubberband selection, a node with name `rubberband` is used.
     
     The main listview node may also carry style classes to select
-    the style of [list presentation](ListContainers.html#list-styles):
+    the style of [list presentation](section-list-widget.html#list-styles):
     .rich-list, .navigation-sidebar or .data-table.
     
     # Accessibility
@@ -13327,7 +14311,10 @@ struct GtkListViewClass;
     [gtk.lock_button.LockButton] is a widget to obtain and revoke authorizations
     needed to operate the controls.
     
-    ![An example GtkLockButton](lock-button.png)
+    <picture>
+      <source srcset="lockbutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkLockButton" src="lockbutton.png">
+    </picture>
     
     It is typically used in preference dialogs or control panels.
     
@@ -13339,19 +14326,28 @@ struct GtkListViewClass;
     If the user is not currently allowed to perform the action, but can
     obtain the permission, the widget looks like this:
     
-    ![](lockbutton-locked.png)
+    <picture>
+      <source srcset="lockbutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An locked GtkLockButton" src="lockbutton.png">
+    </picture>
     
     and the user can click the button to request the permission. Depending
     on the platform, this may pop up an authentication dialog or ask the user
     to authenticate in some other way. Once the user has obtained the permission,
     the widget changes to this:
     
-    ![](lockbutton-unlocked.png)
+    <picture>
+      <source srcset="lockbutton-unlocked-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An unlocked GtkLockButton" src="lockbutton-unlocked.png">
+    </picture>
     
     and the permission can be dropped again by clicking the button. If the user
     is not able to obtain the permission at all, the widget looks like this:
     
-    ![](lockbutton-sorry.png)
+    <picture>
+      <source srcset="lockbutton-sorry-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An unobtainable GtkLockButton" src="lockbutton-sorry.png">
+    </picture>
     
     If the user has the permission and cannot drop it, the button is hidden.
     
@@ -13367,7 +14363,7 @@ struct GtkListViewClass;
 struct GtkLockButton;
 
 /**
-    A [gtk.map_list_model.MapListModel] maps the items in a list model to different items.
+    A list model that maps the items in another model to different items.
     
     [gtk.map_list_model.MapListModel] uses a [gtk.types.MapListModelMapFunc].
     
@@ -13407,9 +14403,12 @@ struct GtkMapListModelClass
 }
 
 /**
-    [gtk.media_controls.MediaControls] is a widget to show controls for a video.
+    Shows controls for video playback.
     
-    ![An example GtkMediaControls](media-controls.png)
+    <picture>
+      <source srcset="media-controls-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkMediaControls" src="media-controls.png">
+    </picture>
     
     Usually, [gtk.media_controls.MediaControls] is used as part of [gtk.video.Video].
 */
@@ -13423,7 +14422,7 @@ struct GtkMediaControlsClass
 }
 
 /**
-    [gtk.media_file.MediaFile] implements [gtk.media_stream.MediaStream] for files.
+    Implements the [gtk.media_stream.MediaStream] interface for files.
     
     This provides a simple way to play back video files with GTK.
     
@@ -13464,7 +14463,7 @@ struct GtkMediaFileClass
 }
 
 /**
-    [gtk.media_stream.MediaStream] is the integration point for media playback inside GTK.
+    The integration point for media playback inside GTK.
     
     GTK provides an implementation of the [gtk.media_stream.MediaStream] interface that
     is called [gtk.media_file.MediaFile].
@@ -13538,9 +14537,12 @@ struct GtkMediaStreamClass
 }
 
 /**
-    The [gtk.menu_button.MenuButton] widget is used to display a popup when clicked.
+    Displays a popup when clicked.
     
-    ![An example GtkMenuButton](menu-button.png)
+    <picture>
+      <source srcset="menu-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkMenuButton" src="menu-button.png">
+    </picture>
     
     This popup can be provided either as a [gtk.popover.Popover] or as an abstract
     [gio.menu_model.MenuModel].
@@ -13606,7 +14608,10 @@ struct GtkMenuButton;
 /**
     [gtk.message_dialog.MessageDialog] presents a dialog with some message text.
     
-    ![An example GtkMessageDialog](messagedialog.png)
+    <picture>
+      <source srcset="messagedialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkMessageDialog" src="messagedialog.png">
+    </picture>
     
     It’s simply a convenience widget; you could construct the equivalent of
     [gtk.message_dialog.MessageDialog] from [gtk.dialog.Dialog] without too much effort, but
@@ -13673,7 +14678,9 @@ struct GtkMessageDialog
 struct GtkMessageDialogClass;
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that calls [gtk.widget.Widget.mnemonicActivate].
+    Activates a widget with a mnemonic.
+    
+    This means that [gtk.widget.Widget.mnemonicActivate] is called.
 */
 struct GtkMnemonicAction;
 
@@ -13681,7 +14688,7 @@ struct GtkMnemonicAction;
 struct GtkMnemonicActionClass;
 
 /**
-    A [gtk.shortcut_trigger.ShortcutTrigger] that triggers when a specific mnemonic is pressed.
+    Triggers when a specific mnemonic is pressed.
     
     Mnemonics require a *mnemonic modifier* (typically <kbd>Alt</kbd>) to be
     pressed together with the mnemonic key.
@@ -13692,16 +14699,16 @@ struct GtkMnemonicTrigger;
 struct GtkMnemonicTriggerClass;
 
 /**
-    [gtk.mount_operation.MountOperation] is an implementation of [gio.mount_operation.MountOperation].
-    
-    The functions and objects described here make working with GTK and
-    GIO more convenient.
+    Asks the user for passwords and other information required to
+    mount a volume.
     
     [gtk.mount_operation.MountOperation] is needed when mounting volumes:
     It is an implementation of [gio.mount_operation.MountOperation] that can be used with
     GIO functions for mounting volumes such as
-    [gio.file.File.mountEnclosingVolume], [gio.file.File.mountMountable],
-    [gio.volume.Volume.mount], [gio.mount.Mount.unmountWithOperation] and others.
+    [gio.file.File.mountEnclosingVolume],
+    [gio.file.File.mountMountable],
+    [gio.volume.Volume.mount],
+    [gio.mount.Mount.unmountWithOperation] and others.
     
     When necessary, [gtk.mount_operation.MountOperation] shows dialogs to let the user
     enter passwords, ask questions or show processes blocking unmount.
@@ -13740,7 +14747,7 @@ struct GtkMountOperationClass
 struct GtkMountOperationPrivate;
 
 /**
-    [gtk.multi_filter.MultiFilter] is the base class for filters that combine multiple filters.
+    Base class for filters that combine multiple filters.
 */
 struct GtkMultiFilter;
 
@@ -13748,8 +14755,7 @@ struct GtkMultiFilter;
 struct GtkMultiFilterClass;
 
 /**
-    [gtk.multi_selection.MultiSelection] is a [gtk.selection_model.SelectionModel] that allows selecting multiple
-    elements.
+    A selection model that allows selecting multiple elements.
 */
 struct GtkMultiSelection;
 
@@ -13761,8 +14767,7 @@ struct GtkMultiSelectionClass
 }
 
 /**
-    [gtk.multi_sorter.MultiSorter] combines multiple sorters by trying them
-    in turn.
+    Combines multiple sorters by trying them in turn.
     
     If the first sorter compares two items as equal,
     the second is tried next, and so on.
@@ -13777,7 +14782,11 @@ struct GtkMultiSorterClass
 }
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that activates an action by name.
+    Activates a named action.
+    
+    See [gtk.widget_class.WidgetClass.installAction] and
+    [gtk.widget.Widget.insertActionGroup] for ways
+    to associate named actions with widgets.
 */
 struct GtkNamedAction;
 
@@ -13785,8 +14794,7 @@ struct GtkNamedAction;
 struct GtkNamedActionClass;
 
 /**
-    [gtk.native.Native] is the interface implemented by all widgets that have
-    their own [gdk.surface.Surface].
+    An interface for widgets that have their own [gdk.surface.Surface].
     
     The obvious example of a [gtk.native.Native] is [gtk.window.Window].
     
@@ -13804,10 +14812,10 @@ struct GtkNamedActionClass;
 struct GtkNative;
 
 /**
-    Native dialogs are platform dialogs that don't use [gtk.dialog.Dialog].
+    Base class for platform dialogs that don't use [gtk.dialog.Dialog].
     
-    They are used in order to integrate better with a platform, by
-    looking the same as other native applications and supporting
+    Native dialogs are used in order to integrate better with a platform,
+    by looking the same as other native applications and supporting
     platform specific features.
     
     The [gtk.dialog.Dialog] functions cannot be used on such objects,
@@ -13872,8 +14880,7 @@ struct GtkNeverTrigger;
 struct GtkNeverTriggerClass;
 
 /**
-    [gtk.no_selection.NoSelection] is a [gtk.selection_model.SelectionModel] that does not allow selecting
-    anything.
+    A selection model that does not allow selecting anything.
     
     This model is meant to be used as a simple wrapper around a [gio.list_model.ListModel]
     when a [gtk.selection_model.SelectionModel] is required.
@@ -13890,10 +14897,12 @@ struct GtkNoSelectionClass
 }
 
 /**
-    [gtk.notebook.Notebook] is a container whose children are pages switched
-    between using tabs.
+    Switches between children using tabs.
     
-    ![An example GtkNotebook](notebook.png)
+    <picture>
+      <source srcset="notebook-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkNotebook" src="notebook.png">
+    </picture>
     
     There are many configuration options for [gtk.notebook.Notebook]. Among
     other things, you can choose on which edge the tabs appear
@@ -13932,6 +14941,31 @@ struct GtkNoSelectionClass
       </child>
     </object>
     ```
+    
+    # Shortcuts and Gestures
+    
+    [gtk.notebook.Notebook] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    - <kbd>Home</kbd> moves the focus to the first tab.
+    - <kbd>End</kbd> moves the focus to the last tab.
+    
+    Additionally, the following signals have default keybindings:
+    
+    - [gtk.notebook.Notebook.changeCurrentPage]
+    - [gtk.notebook.Notebook.focusTab]
+    - [gtk.notebook.Notebook.moveFocusOut]
+    - [gtk.notebook.Notebook.reorderTab]
+    - [gtk.notebook.Notebook.selectPage]
+    
+    Tabs support drag-and-drop between notebooks sharing the same `group-name`,
+    or to new windows by handling the `::create-window` signal.
+    
+    # Actions
+    
+    [gtk.notebook.Notebook] defines a set of built-in actions:
+    
+    - `menu.popup` opens the tabs context menu.
     
     # CSS nodes
     
@@ -13986,12 +15020,12 @@ struct GtkNoSelectionClass
 struct GtkNotebook;
 
 /**
-    [gtk.notebook_page.NotebookPage] is an auxiliary object used by [gtk.notebook.Notebook].
+    An auxiliary object used by [gtk.notebook.Notebook].
 */
 struct GtkNotebookPage;
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that does nothing.
+    Does nothing.
 */
 struct GtkNothingAction;
 
@@ -13999,7 +15033,7 @@ struct GtkNothingAction;
 struct GtkNothingActionClass;
 
 /**
-    [gtk.numeric_sorter.NumericSorter] is a [gtk.sorter.Sorter] that compares numbers.
+    Sorts items numerically.
     
     To obtain the numbers to compare, this sorter evaluates a
     [gtk.expression.Expression].
@@ -14019,8 +15053,7 @@ struct GtkNumericSorterClass
 struct GtkObjectExpression;
 
 /**
-    The [gtk.orientable.Orientable] interface is implemented by all widgets that can be
-    oriented horizontally or vertically.
+    An interface for widgets that can be oriented horizontally or vertically.
     
     [gtk.orientable.Orientable] is more flexible in that it allows the orientation to be
     changed at runtime, allowing the widgets to “flip”.
@@ -14041,10 +15074,12 @@ struct GtkOrientableIface
 }
 
 /**
-    [gtk.overlay.Overlay] is a container which contains a single main child, on top
-    of which it can place “overlay” widgets.
+    Places “overlay” widgets on top of a single main child.
     
-    ![An example GtkOverlay](overlay.png)
+    <picture>
+      <source srcset="overlay-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkOverlay" src="overlay.png">
+    </picture>
     
     The position of each overlay widget is determined by its
     [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]
@@ -14077,7 +15112,7 @@ struct GtkOrientableIface
 struct GtkOverlay;
 
 /**
-    [gtk.overlay_layout.OverlayLayout] is the layout manager used by [gtk.overlay.Overlay].
+    The layout manager used by [gtk.overlay.Overlay].
     
     It places widgets as overlays on top of the main child.
     
@@ -14117,7 +15152,7 @@ struct GtkPadActionEntry
   GtkPadActionType type;
 
   /**
-      the 0-indexed button/ring/strip number that will trigger this action
+      the 0-indexed button/ring/strip/dial number that will trigger this action
         entry.
   */
   int index;
@@ -14140,8 +15175,7 @@ struct GtkPadActionEntry
 }
 
 /**
-    [gtk.pad_controller.PadController] is an event controller for the pads found in drawing
-    tablets.
+    Handles input from the pads found in drawing tablets.
     
     Pads are the collection of buttons and tactile sensors often found around
     the stylus-sensitive area.
@@ -14184,9 +15218,16 @@ struct GtkPadActionEntry
     pad_controller = gtk_pad_controller_new (action_group, NULL);
     ```
     
-    The actions belonging to rings/strips will be activated with a parameter
+    The actions belonging to rings/strips/dials will be activated with a parameter
     of type `G_VARIANT_TYPE_DOUBLE` bearing the value of the given axis, it
     is required that those are made stateful and accepting this [glib.variant_type.VariantType].
+    For rings the value is the angle of the ring position in degrees with 0
+    facing up. For strips the value is the absolute position on the strip, normalized
+    to the [0.0, 1.0] range.
+    For dials the value is the relative movement of the dial, normalized so that the
+    value 120 represents one logical scroll wheel detent in the positive direction.
+    Devices that support high-resolution scrolling may send events with fractions of
+    120 to signify a smaller motion.
 */
 struct GtkPadController;
 
@@ -14212,7 +15253,7 @@ struct GtkPageRange
 }
 
 /**
-    A [gtk.page_setup.PageSetup] object stores the page size, orientation and margins.
+    Stores page size, orientation and margins for printing.
     
     The idea is that you can get one of these from the page setup dialog
     and then pass it to the [gtk.print_operation.PrintOperation] when printing.
@@ -14258,10 +15299,13 @@ struct GtkPageRange
 struct GtkPageSetup;
 
 /**
-    [gtk.page_setup_unix_dialog.PageSetupUnixDialog] implements a page setup dialog for platforms
-    which don’t provide a native page setup dialog, like Unix.
+    Presents a page setup dialog for platforms which don’t provide
+    a native page setup dialog, like Unix.
     
-    ![An example GtkPageSetupUnixDialog](pagesetupdialog.png)
+    <picture>
+      <source srcset="pagesetupdialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPageSetupUnixDialog" src="pagesetupdialog.png">
+    </picture>
     
     It can be used very much like any other GTK dialog, at the
     cost of the portability offered by the high-level printing
@@ -14275,9 +15319,12 @@ struct GtkPageSetup;
 struct GtkPageSetupUnixDialog;
 
 /**
-    A widget with two panes, arranged either horizontally or vertically.
+    Arranges its children in two panes, horizontally or vertically.
     
-    ![An example GtkPaned](panes.png)
+    <picture>
+      <source srcset="panes-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPaned" src="panes.png">
+    </picture>
     
     The division between the two panes is adjustable by the user
     by dragging a handle.
@@ -14304,6 +15351,17 @@ struct GtkPageSetupUnixDialog;
     
     The application can set the position of the slider as if it were set
     by the user, by calling [gtk.paned.Paned.setPosition].
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.paned.Paned.acceptPosition]
+    - [gtk.paned.Paned.cancelPosition]
+    - [gtk.paned.Paned.cycleChildFocus]
+    - [gtk.paned.Paned.cycleHandleFocus]
+    - [gtk.paned.Paned.moveHandle]
+    - [gtk.paned.Paned.toggleHandleFocus]
     
     # CSS nodes
     
@@ -14370,9 +15428,12 @@ struct GtkParamSpecExpression
 }
 
 /**
-    [gtk.password_entry.PasswordEntry] is an entry that has been tailored for entering secrets.
+    A single-line text entry widget for entering passwords and other secrets.
     
-    ![An example GtkPasswordEntry](password-entry.png)
+    <picture>
+      <source srcset="password-entry-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPasswordEntry" src="password-entry.png">
+    </picture>
     
     It does not show its contents in clear text, does not allow to copy it
     to the clipboard, and it shows a warning when Caps Lock is engaged. If
@@ -14424,9 +15485,12 @@ struct GtkPasswordEntryBufferClass
 struct GtkPasswordEntryClass;
 
 /**
-    The [gtk.picture.Picture] widget displays a [gdk.paintable.Paintable].
+    Displays a [gdk.paintable.Paintable].
     
-    ![An example GtkPicture](picture.png)
+    <picture>
+      <source srcset="picture-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPicture" src="picture.png">
+    </picture>
     
     Many convenience functions are provided to make pictures simple to use.
     For example, if you want to load an image from a file, and then display
@@ -14440,8 +15504,8 @@ struct GtkPasswordEntryClass;
     “broken image” icon similar to that used in many web browsers.
     If you want to handle errors in loading the file yourself,
     for example by displaying an error message, then load the image with
-    [gdk.texture.Texture.newFromFile], then create the [gtk.picture.Picture] with
-    [gtk.picture.Picture.newForPaintable].
+    and image loading framework such as libglycin, then create the [gtk.picture.Picture]
+    with [gtk.picture.Picture.newForPaintable].
     
     Sometimes an application will want to avoid depending on external data
     files, such as image files. See the documentation of [gio.resource.Resource] for details.
@@ -14481,17 +15545,25 @@ struct GtkPictureClass
 }
 
 /**
-    [gtk.popover.Popover] is a bubble-like context popup.
+    Presents a bubble-like popup.
     
-    ![An example GtkPopover](popover.png)
+    <picture>
+      <source srcset="popover-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPopover" src="popover.png">
+    </picture>
     
     It is primarily meant to provide context-dependent information
-    or options. Popovers are attached to a parent widget. By default,
-    they point to the whole widget area, although this behavior can be
-    changed with [gtk.popover.Popover.setPointingTo].
+    or options. Popovers are attached to a parent widget. The parent widget
+    must support popover children, as [gtk.menu_button.MenuButton] and
+    [gtk.popover_menu_bar.PopoverMenuBar] do. If you want to make a custom widget that
+    has an attached popover, you need to call [gtk.popover.Popover.present]
+    in your `vfunc@Gtk.Widget.size_allocate` vfunc, in order to update the
+    positioning of the popover.
     
     The position of a popover relative to the widget it is attached to
-    can also be changed with [gtk.popover.Popover.setPosition]
+    can also be changed with [gtk.popover.Popover.setPosition]. By default,
+    it points to the whole widget area, but it can be made to point to
+    a specific area using [gtk.popover.Popover.setPointingTo].
     
     By default, [gtk.popover.Popover] performs a grab, in order to ensure input
     events get redirected to it while it is shown, and also so the popover
@@ -14502,7 +15574,7 @@ struct GtkPictureClass
     
     ## GtkPopover as menu replacement
     
-    [gtk.popover.Popover] is often used to replace menus. The best was to do this
+    [gtk.popover.Popover] is often used to replace menus. The best way to do this
     is to use the [gtk.popover_menu.PopoverMenu] subclass which supports being
     populated from a [gio.menu_model.MenuModel] with [gtk.popover_menu.PopoverMenu.newFromModel].
     
@@ -14526,6 +15598,17 @@ struct GtkPictureClass
       </item>
     </section>
     ```
+    
+    # Shortcuts and Gestures
+    
+    [gtk.popover.Popover] supports the following keyboard shortcuts:
+    
+    - <kbd>Escape</kbd> closes the popover.
+    - <kbd>Alt</kbd> makes the mnemonics visible.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.popover.Popover.activateDefault]
     
     # CSS nodes
     
@@ -14565,6 +15648,30 @@ struct GtkPopover
   GtkWidget parent;
 }
 
+/**
+    A single child container with a popover.
+    
+    You should use [gtk.popover_bin.PopoverBin] whenever you need to present a [gtk.popover.Popover]
+    to the user.
+    
+    ## Actions
+    
+    [gtk.popover_bin.PopoverBin] defines the `menu.popup` action, which can be activated
+    to present the popover to the user.
+    
+    ## CSS nodes
+    
+    [gtk.popover_bin.PopoverBin] has a single CSS node with the name `popoverbin`.
+*/
+struct GtkPopoverBin;
+
+/** */
+struct GtkPopoverBinClass
+{
+  /** */
+  GtkWidgetClass parentClass;
+}
+
 /** */
 struct GtkPopoverClass
 {
@@ -14582,10 +15689,12 @@ struct GtkPopoverClass
 }
 
 /**
-    [gtk.popover_menu.PopoverMenu] is a subclass of [gtk.popover.Popover] that implements menu
-    behavior.
+    A subclass of [gtk.popover.Popover] that implements menu behavior.
     
-    ![An example GtkPopoverMenu](menu.png)
+    <picture>
+      <source srcset="menu-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPopoverMenu" src="menu.png">
+    </picture>
     
     [gtk.popover_menu.PopoverMenu] treats its children like menus and allows switching
     between them. It can open submenus as traditional, nested submenus,
@@ -14666,11 +15775,19 @@ struct GtkPopoverClass
     
     - "label": a user-visible string to display
     - "icon": icon name to display
+    - "gtk-macos-special": (macOS only, ignored by others) Add special meaning to a menu
+        in the macOS menu bar. See [Using GTK on Apple macOS](osx.html).
     
     Menu items will also show accelerators, which are usually associated
     with actions via [gtk.application.Application.setAccelsForAction],
     [gtk.widget_class.WidgetClass.addBindingAction] or
     [gtk.shortcut_controller.ShortcutController.addShortcut].
+    
+    # Shortcuts and Gestures
+    
+    [gtk.popover_menu.PopoverMenu] supports the following keyboard shortcuts:
+    
+    - <kbd>Space</kbd> activates the default widget.
     
     # CSS Nodes
     
@@ -14689,17 +15806,18 @@ struct GtkPopoverClass
     
     [gtk.popover_menu.PopoverMenu] uses the [gtk.types.AccessibleRole.Menu] role, and its
     items use the [gtk.types.AccessibleRole.MenuItem],
-    [gtk.types.AccessibleRole.MenuItemCheckbox] or
-    [gtk.types.AccessibleRole.MenuItemRadio] roles, depending on the
-    action they are connected to.
+    [gtk.types.AccessibleRole.Checkbox] or [gtk.types.AccessibleRole.MenuItemRadio]
+    roles, depending on the action they are connected to.
 */
 struct GtkPopoverMenu;
 
 /**
-    [gtk.popover_menu_bar.PopoverMenuBar] presents a horizontal bar of items that pop
-    up popover menus when clicked.
+    Presents a horizontal bar of items that pop up menus when clicked.
     
-    ![An example GtkPopoverMenuBar](menubar.png)
+    <picture>
+      <source srcset="menubar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPopoverMenuBar" src="menubar.png">
+    </picture>
     
     The only way to create instances of [gtk.popover_menu_bar.PopoverMenuBar] is
     from a [gio.menu_model.MenuModel].
@@ -14728,11 +15846,13 @@ struct GtkPopoverMenu;
 */
 struct GtkPopoverMenuBar;
 
-/** */
+/**
+    A print backend.
+*/
 struct GtkPrintBackend;
 
 /**
-    A [gtk.print_context.PrintContext] encapsulates context information that is required when
+    Encapsulates context information that is required when
     drawing pages for printing.
     
     This includes the cairo context and important parameters like page size
@@ -14805,11 +15925,14 @@ struct GtkPrintBackend;
 struct GtkPrintContext;
 
 /**
-    A [gtk.print_dialog.PrintDialog] object collects the arguments that
-    are needed to present a print dialog to the user, such
-    as a title for the dialog and whether it should be modal.
+    Asynchronous API to present a print dialog to the user.
+    
+    [gtk.print_dialog.PrintDialog] collects the arguments that are needed to present
+     the dialog, such as a title for the dialog and whether it should
+     be modal.
     
     The dialog is shown with the [gtk.print_dialog.PrintDialog.setup] function.
+    
     The actual printing can be done with [gtk.print_dialog.PrintDialog.print] or
     [gtk.print_dialog.PrintDialog.printFile]. These APIs follows the GIO async pattern,
     and the results can be obtained by calling the corresponding finish methods.
@@ -14824,7 +15947,7 @@ struct GtkPrintDialogClass
 }
 
 /**
-    A [gtk.print_job.PrintJob] object represents a job that is sent to a printer.
+    Represents a job that is sent to a printer.
     
     You only need to deal directly with print jobs if you use the
     non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
@@ -14838,7 +15961,7 @@ struct GtkPrintDialogClass
 struct GtkPrintJob;
 
 /**
-    [gtk.print_operation.PrintOperation] is the high-level, portable printing API.
+    High-level, portable printing API.
     
     It looks a bit different than other GTK dialogs such as the
     [gtk.file_chooser.FileChooser], since some platforms don’t expose enough
@@ -14985,8 +16108,7 @@ struct GtkPrintOperationClass
 }
 
 /**
-    [gtk.print_operation_preview.PrintOperationPreview] is the interface that is used to
-    implement print preview.
+    The interface that is used to implement print preview.
     
     A [gtk.print_operation_preview.PrintOperationPreview] object is passed to the
     [gtk.print_operation.PrintOperation.preview] signal by
@@ -15044,8 +16166,7 @@ struct GtkPrintOperationPreviewIface
 struct GtkPrintOperationPrivate;
 
 /**
-    A [gtk.print_settings.PrintSettings] object represents the settings of a print dialog in
-    a system-independent way.
+    Collects the settings of a print dialog in a system-independent way.
     
     The main use for this object is that once you’ve printed you can get a
     settings object that represents the settings the user chose, and the next
@@ -15060,8 +16181,7 @@ struct GtkPrintOperationPrivate;
 struct GtkPrintSettings;
 
 /**
-    A [gtk.print_setup.PrintSetup] is an auxiliary object for printing that allows decoupling
-    the setup from the printing.
+    An auxiliary object for printing that allows decoupling the setup from the printing.
     
     A print setup is obtained by calling [gtk.print_dialog.PrintDialog.setup],
     and can later be passed to print functions such as [gtk.print_dialog.PrintDialog.print].
@@ -15074,10 +16194,13 @@ struct GtkPrintSettings;
 struct GtkPrintSetup;
 
 /**
-    [gtk.print_unix_dialog.PrintUnixDialog] implements a print dialog for platforms
-    which don’t provide a native print dialog, like Unix.
+    A print dialog for platforms which don’t provide a native
+    print dialog, like Unix.
     
-    ![An example GtkPrintUnixDialog](printdialog.png)
+    <picture>
+      <source srcset="printdialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPrintUnixDialog" src="printdialog.png">
+    </picture>
     
     It can be used very much like any other GTK dialog, at the cost of
     the portability offered by the high-level printing API with
@@ -15134,7 +16257,7 @@ struct GtkPrintSetup;
 struct GtkPrintUnixDialog;
 
 /**
-    A [gtk.printer.Printer] object represents a printer.
+    Represents a printer.
     
     You only need to deal directly with printers if you use the
     non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
@@ -15147,13 +16270,15 @@ struct GtkPrintUnixDialog;
 struct GtkPrinter;
 
 /**
-    [gtk.progress_bar.ProgressBar] is typically used to display the progress of a long
-    running operation.
+    Displays the progress of a long-running operation.
     
-    It provides a visual clue that processing is underway. [gtk.progress_bar.ProgressBar]
-    can be used in two different modes: percentage mode and activity mode.
+    [gtk.progress_bar.ProgressBar] provides a visual clue that processing is underway.
+    It can be used in two different modes: percentage mode and activity mode.
     
-    ![An example GtkProgressBar](progressbar.png)
+    <picture>
+      <source srcset="progressbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkProgressBar" src="progressbar.png">
+    </picture>
     
     When an application can determine how much work needs to take place
     (e.g. read a fixed number of bytes from a file) and can monitor its
@@ -15192,7 +16317,9 @@ struct GtkPrinter;
     
     # Accessibility
     
-    [gtk.progress_bar.ProgressBar] uses the [gtk.types.AccessibleRole.ProgressBar] role.
+    [gtk.progress_bar.ProgressBar] uses the [gtk.types.AccessibleRole.ProgressBar] role
+    and sets the [gtk.types.AccessibleProperty.ValueMin], [gtk.types.AccessibleProperty.ValueMax] and [gtk.types.AccessibleProperty.ValueNow] properties to reflect
+    the progress.
 */
 struct GtkProgressBar;
 
@@ -15202,8 +16329,7 @@ struct GtkProgressBar;
 struct GtkPropertyExpression;
 
 /**
-    [gtk.range.Range] is the common base class for widgets which visualize an
-    adjustment.
+    Base class for widgets which visualize an adjustment.
     
     Widgets that are derived from [gtk.range.Range] include
     [gtk.scale.Scale] and [gtk.scrollbar.Scrollbar].
@@ -15211,6 +16337,12 @@ struct GtkPropertyExpression;
     Apart from signals for monitoring the parameters of the adjustment,
     [gtk.range.Range] provides properties and methods for setting a
     “fill level” on range widgets. See [gtk.range.Range.setFillLevel].
+    
+    # Shortcuts and Gestures
+    
+    The [gtk.range.Range] slider is draggable. Holding the <kbd>Shift</kbd> key while
+    dragging, or initiating the drag with a long-press will enable the
+    fine-tuning mode.
 */
 struct GtkRange
 {
@@ -15294,13 +16426,13 @@ struct GtkRecentData
 }
 
 /**
-    [gtk.recent_info.RecentInfo] contains the metadata associated with an item in the
+    Contains the metadata associated with an item in the
     recently used files list.
 */
 struct GtkRecentInfo;
 
 /**
-    [gtk.recent_manager.RecentManager] manages and looks up recently used files.
+    Manages and looks up recently used files.
     
     Each recently used file is identified by its URI, and has meta-data
     associated to it, like the names and command lines of the applications
@@ -15394,9 +16526,10 @@ struct GtkRecentManagerClass
 struct GtkRecentManagerPrivate;
 
 /**
-    Represents a request of a screen object in a given orientation. These
-    are primarily used in container implementations when allocating a natural
-    size for children calling. See `func@distribute_natural_allocation`.
+    Represents a request of a screen object in a given orientation.
+    
+    These are primarily used in container implementations when allocating
+    a natural size for children. See `func@distribute_natural_allocation`.
 */
 struct GtkRequestedSize
 {
@@ -15417,9 +16550,10 @@ struct GtkRequestedSize
 }
 
 /**
-    A [gtk.requisition.Requisition] represents the desired size of a widget. See
-    [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
-    more information.
+    Represents the desired size of a widget.
+    
+    See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management)
+    for more information.
 */
 struct GtkRequisition
 {
@@ -15435,7 +16569,7 @@ struct GtkRequisition
 }
 
 /**
-    A [gtk.revealer.Revealer] animates the transition of its child from invisible to visible.
+    Animates the transition of its child from invisible to visible.
     
     The style of transition can be controlled with
     [gtk.revealer.Revealer.setTransitionType].
@@ -15460,11 +16594,11 @@ struct GtkRequisition
 struct GtkRevealer;
 
 /**
-    [gtk.root.Root] is the interface implemented by all widgets that can act as a toplevel
-    widget.
+    An interface for widgets that can act as the root of a widget hierarchy.
     
-    The root widget takes care of providing the connection to the windowing system
-    and manages layout, drawing and event delivery for its widget hierarchy.
+    The root widget takes care of providing the connection to the windowing
+    system and manages layout, drawing and event delivery for its widget
+    hierarchy.
     
     The obvious example of a [gtk.root.Root] is [gtk.window.Window].
     
@@ -15480,9 +16614,12 @@ struct GtkRoot;
 struct GtkRootInterface;
 
 /**
-    A [gtk.scale.Scale] is a slider control used to select a numeric value.
+    Allows to select a numeric value with a slider control.
     
-    ![An example GtkScale](scales.png)
+    <picture>
+      <source srcset="scales-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkScale" src="scales.png">
+    </picture>
     
     To use it, you’ll probably want to investigate the methods on its base
     class, [gtk.range.Range], in addition to the methods for [gtk.scale.Scale] itself.
@@ -15503,6 +16640,15 @@ struct GtkRootInterface;
     the element is not empty, its content is taken as the markup to show at
     the mark. It can be translated with the usual ”translatable” and
     “context” attributes.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.popover_menu.PopoverMenu] supports the following keyboard shortcuts:
+    
+    - Arrow keys, <kbd>+</kbd> and <kbd>-</kbd> will increment or decrement
+      by step, or by page when combined with <kbd>Ctrl</kbd>.
+    - <kbd>PgUp</kbd> and <kbd>PgDn</kbd> will increment or decrement by page.
+    - <kbd>Home</kbd> and <kbd>End</kbd> will set the minimum or maximum value.
     
     # CSS nodes
     
@@ -15568,11 +16714,17 @@ struct GtkScale
 }
 
 /**
-    [gtk.scale_button.ScaleButton] provides a button which pops up a scale widget.
+    Provides a button which pops up a scale widget.
     
     This kind of widget is commonly used for volume controls in multimedia
     applications, and GTK provides a [gtk.volume_button.VolumeButton] subclass that
     is tailored for this use case.
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.scale_button.ScaleButton.popup]
     
     # CSS nodes
     
@@ -15618,16 +16770,15 @@ struct GtkScaleClass
 }
 
 /**
-    The [gtk.scroll_info.ScrollInfo] can be used to provide more accurate data on how a scroll
-    operation should be performed.
+    Provides detailed information on how a scroll operation should be performed.
     
-    Scrolling functions usually allow passing a null scroll info which will cause
-    the default values to be used and just scroll the element into view.
+    Scrolling functions usually allow passing a `NULL` scroll info which will
+    cause the default values to be used and just scroll the element into view.
 */
 struct GtkScrollInfo;
 
 /**
-    [gtk.scrollable.Scrollable] is an interface for widgets with native scrolling ability.
+    An interface for widgets with native scrolling ability.
     
     To implement this interface you should override the
     [gtk.scrollable.Scrollable.hadjustment] and
@@ -15669,9 +16820,12 @@ struct GtkScrollableInterface
 }
 
 /**
-    The [gtk.scrollbar.Scrollbar] widget is a horizontal or vertical scrollbar.
+    Shows a horizontal or vertical scrollbar.
     
-    ![An example GtkScrollbar](scrollbar.png)
+    <picture>
+      <source srcset="scrollbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkScrollbar" src="scrollbar.png">
+    </picture>
     
     Its position and movement are controlled by the adjustment that is passed to
     or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
@@ -15715,7 +16869,12 @@ struct GtkScrollableInterface
 struct GtkScrollbar;
 
 /**
-    [gtk.scrolled_window.ScrolledWindow] is a container that makes its child scrollable.
+    Makes its child scrollable.
+    
+    <picture>
+      <source srcset="scrolledwindow-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkScrolledWindow" src="scrolledwindow.png">
+    </picture>
     
     It does so using either internally added scrollbars or externally
     associated adjustments, and optionally draws a frame around the child.
@@ -15761,6 +16920,12 @@ struct GtkScrollbar;
     can be turned off with the [gtk.scrolled_window.ScrolledWindow.overlayScrolling]
     property.
     
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.scrolled_window.ScrolledWindow.scrollChild]
+    
     # CSS nodes
     
     [gtk.scrolled_window.ScrolledWindow] has a main CSS node with name scrolledwindow.
@@ -15782,14 +16947,18 @@ struct GtkScrollbar;
     
     Until GTK 4.10, [gtk.scrolled_window.ScrolledWindow] used the [gtk.types.AccessibleRole.Group] role.
     
-    Starting from GTK 4.12, [gtk.scrolled_window.ScrolledWindow] uses the [gtk.types.AccessibleRole.Generic] role.
+    Starting from GTK 4.12, [gtk.scrolled_window.ScrolledWindow] uses the [gtk.types.AccessibleRole.Generic]
+    role.
 */
 struct GtkScrolledWindow;
 
 /**
-    [gtk.search_bar.SearchBar] is a container made to have a search entry.
+    Reveals a search entry when search is started.
     
-    ![An example GtkSearchBar](search-bar.png)
+    <picture>
+      <source srcset="search-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSearchBar" src="search-bar.png">
+    </picture>
     
     It can also contain additional widgets, such as drop-down menus,
     or buttons.  The search bar would appear when a search is started
@@ -15813,6 +16982,12 @@ struct GtkScrolledWindow;
     
     [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/search-bar.c)
     
+    # Shortcuts and Gestures
+    
+    [gtk.search_bar.SearchBar] supports the following keyboard shortcuts:
+    
+    - <kbd>Escape</kbd> hides the search bar.
+    
     # CSS nodes
     
     ```
@@ -15835,13 +17010,15 @@ struct GtkScrolledWindow;
 struct GtkSearchBar;
 
 /**
-    [gtk.search_entry.SearchEntry] is an entry widget that has been tailored for use
-    as a search entry.
+    A single-line text entry widget for use as a search entry.
     
     The main API for interacting with a [gtk.search_entry.SearchEntry] as entry
     is the [gtk.editable.Editable] interface.
     
-    ![An example GtkSearchEntry](search-entry.png)
+    <picture>
+      <source srcset="search-entry-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSearchEntry" src="search-entry.png">
+    </picture>
     
     It will show an inactive symbolic “find” icon when the search
     entry is empty, and a symbolic “clear” icon when there is text.
@@ -15866,6 +17043,15 @@ struct GtkSearchBar;
     [gtk.search_entry.SearchEntry] provides only minimal API and should be used with
     the [gtk.editable.Editable] API.
     
+    ## Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.search_entry.SearchEntry.activate]
+    - [gtk.search_entry.SearchEntry.nextMatch]
+    - [gtk.search_entry.SearchEntry.previousMatch]
+    - [gtk.search_entry.SearchEntry.stopSearch]
+    
     ## CSS Nodes
     
     ```
@@ -15883,7 +17069,7 @@ struct GtkSearchBar;
 struct GtkSearchEntry;
 
 /**
-    [gtk.section_model.SectionModel] is an interface that adds support for sections to list models.
+    An interface that adds support for sections to list models.
     
     A [gtk.section_model.SectionModel] groups successive items into so-called sections. List widgets
     like [gtk.list_view.ListView] and [gtk.grid_view.GridView] then allow displaying section headers for
@@ -15920,8 +17106,7 @@ struct GtkSectionModelInterface
 }
 
 /**
-    [gtk.selection_filter_model.SelectionFilterModel] is a list model that presents the selection from
-    a [gtk.selection_model.SelectionModel].
+    A list model that presents the selection from a [gtk.selection_model.SelectionModel].
 */
 struct GtkSelectionFilterModel;
 
@@ -15933,7 +17118,7 @@ struct GtkSelectionFilterModelClass
 }
 
 /**
-    [gtk.selection_model.SelectionModel] is an interface that add support for selection to list models.
+    An interface that adds support for selection to list models.
     
     This support is then used by widgets using list models to add the ability
     to select and unselect various items.
@@ -16050,9 +17235,12 @@ struct GtkSelectionModelInterface
 }
 
 /**
-    [gtk.separator.Separator] is a horizontal or vertical separator widget.
+    Draws a horizontal or vertical line to separate other widgets.
     
-    ![An example GtkSeparator](separator.png)
+    <picture>
+      <source srcset="separator-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSeparator" src="separator.png">
+    </picture>
     
     A [gtk.separator.Separator] can be used to group the widgets within a window.
     It displays a line with a shadow to make it appear sunken into the
@@ -16070,16 +17258,17 @@ struct GtkSelectionModelInterface
 struct GtkSeparator;
 
 /**
-    [gtk.settings.Settings] provides a mechanism to share global settings between
-    applications.
+    Provides a mechanism to share global settings between applications.
+    
+    GTK relies on the platform-specific API for getting desktop-wide
+    settings.
+    
+    On Wayland, the settings are obtained via a settings portal that
+    is part of the Linux desktop APIs for application.
     
     On the X window system, this sharing is realized by an
     [XSettings](http://www.freedesktop.org/wiki/Specifications/xsettings-spec)
-    manager that is usually part of the desktop environment, along with
-    utilities that let the user change these settings.
-    
-    On Wayland, the settings are obtained either via a settings portal,
-    or by reading desktop settings from DConf.
+    manager.
     
     On macOS, the settings are obtained from `NSUserDefaults`.
     
@@ -16102,7 +17291,7 @@ struct GtkSeparator;
 struct GtkSettings;
 
 /**
-    A [gtk.shortcut.Shortcut] describes a keyboard shortcut.
+    Describes a keyboard shortcut.
     
     It contains a description of how to trigger the shortcut via a
     [gtk.shortcut_trigger.ShortcutTrigger] and a way to activate the shortcut
@@ -16121,8 +17310,7 @@ struct GtkSettings;
 struct GtkShortcut;
 
 /**
-    [gtk.shortcut_action.ShortcutAction] encodes an action that can be triggered by a
-    keyboard shortcut.
+    Encodes an action that can be triggered by a keyboard shortcut.
     
     `GtkShortcutActions` contain functions that allow easy presentation
     to end users as well as being printed for debugging.
@@ -16162,7 +17350,7 @@ struct GtkShortcutClass
 }
 
 /**
-    [gtk.shortcut_controller.ShortcutController] is an event controller that manages shortcuts.
+    Manages keyboard shortcuts and their activation.
     
     Most common shortcuts are using this controller implicitly, e.g. by
     adding a mnemonic underline to a [gtk.label.Label], or by installing a key
@@ -16212,6 +17400,8 @@ struct GtkShortcutControllerClass;
     [gtk.shortcut_label.ShortcutLabel] displays a single keyboard shortcut or gesture.
     
     The main use case for [gtk.shortcut_label.ShortcutLabel] is inside a [gtk.shortcuts_window.ShortcutsWindow].
+
+    Deprecated: This widget will be removed in GTK 5
 */
 struct GtkShortcutLabel;
 
@@ -16219,8 +17409,7 @@ struct GtkShortcutLabel;
 struct GtkShortcutLabelClass;
 
 /**
-    The [gtk.shortcut_manager.ShortcutManager] interface is used to implement
-    shortcut scopes.
+    An interface that is used to implement shortcut scopes.
     
     This is important for [gtk.native.Native] widgets that have their
     own surface, since the event controllers that are used to implement
@@ -16259,7 +17448,7 @@ struct GtkShortcutManagerInterface
 }
 
 /**
-    [gtk.shortcut_trigger.ShortcutTrigger] tracks how a [gtk.shortcut.Shortcut] should be activated.
+    Tracks how a [gtk.shortcut.Shortcut] can be activated.
     
     To find out if a [gtk.shortcut_trigger.ShortcutTrigger] triggers, you can call
     [gtk.shortcut_trigger.ShortcutTrigger.trigger] on a [gdk.event.Event].
@@ -16293,6 +17482,8 @@ struct GtkShortcutTriggerClass;
     
     If you need to add a shortcut programmatically, use
     [gtk.shortcuts_group.ShortcutsGroup.addShortcut].
+
+    Deprecated: This widget will be removed in GTK 5
 */
 struct GtkShortcutsGroup;
 
@@ -16322,6 +17513,16 @@ struct GtkShortcutsGroupClass;
     
     If you need to add a group programmatically, use
     [gtk.shortcuts_section.ShortcutsSection.addGroup].
+    
+    # Shortcuts and Gestures
+    
+    Pan gestures allow to navigate between sections.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.shortcuts_section.ShortcutsSection.changeCurrentPage]
+
+    Deprecated: This widget will be removed in GTK 5
 */
 struct GtkShortcutsSection;
 
@@ -16333,6 +17534,8 @@ struct GtkShortcutsSectionClass;
     with a short text.
     
     This widget is only meant to be used with [gtk.shortcuts_window.ShortcutsWindow].
+
+    Deprecated: This widget will be removed in GTK 5
 */
 struct GtkShortcutsShortcut;
 
@@ -16361,7 +17564,10 @@ struct GtkShortcutsShortcutClass;
     
     # A simple example:
     
-    ![](gedit-shortcuts.png)
+    <picture>
+      <source srcset="gedit-shortcuts-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="A simple example" src="gedit-shortcuts.png">
+    </picture>
     
     This example has as single section. As you can see, the shortcut groups
     are arranged in columns, and spread across several pages if there are too
@@ -16371,31 +17577,46 @@ struct GtkShortcutsShortcutClass;
     
     # An example with multiple views:
     
-    ![](clocks-shortcuts.png)
+    <picture>
+      <source srcset="clocks-shortcuts-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example with multiple views" src="clocks-shortcuts.png">
+    </picture>
     
     This example shows a [gtk.shortcuts_window.ShortcutsWindow] that has been configured to show only
-    the shortcuts relevant to the "stopwatch" view.
+    the shortcuts relevant to the “Stopwatch” view.
     
     The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-clocks.ui).
     
     # An example with multiple sections:
     
-    ![](builder-shortcuts.png)
+    <picture>
+      <source srcset="builder-shortcuts-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example with multiple sections" src="builder-shortcuts.png">
+    </picture>
     
-    This example shows a [gtk.shortcuts_window.ShortcutsWindow] with two sections, "Editor Shortcuts"
-    and "Terminal Shortcuts".
+    This example shows a [gtk.shortcuts_window.ShortcutsWindow] with two sections, “Editor Shortcuts”
+    and “Terminal Shortcuts”.
     
     The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-builder.ui).
     
-    ## CSS nodes
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.shortcuts_window.ShortcutsWindow.close]
+    - [gtk.shortcuts_window.ShortcutsWindow.search]
+    
+    # CSS nodes
     
     [gtk.shortcuts_window.ShortcutsWindow] has a single CSS node with the name `window` and style
     class `.shortcuts`.
+
+    Deprecated: This widget will be removed in GTK 5
 */
 struct GtkShortcutsWindow;
 
 /**
-    A [gtk.shortcut.Shortcut]Action that emits a signal.
+    Emits a signal on a widget.
     
     Signals that are used in this way are referred to as keybinding signals,
     and they are expected to be defined with the [gobject.types.SignalFlags.Action] flag.
@@ -16406,8 +17627,7 @@ struct GtkSignalAction;
 struct GtkSignalActionClass;
 
 /**
-    [gtk.signal_list_item_factory.SignalListItemFactory] is a [gtk.list_item_factory.ListItemFactory] that emits signals
-    to manage listitems.
+    Emits signals to manage listitems.
     
     Signals are emitted for every listitem in the same order:
     
@@ -16432,15 +17652,15 @@ struct GtkSignalActionClass;
      again to bind the listitem for use with new items. By reusing listitems,
      potentially costly setup can be avoided. However, it means code needs to
      make sure to properly clean up the listitem in step 3 so that no information
-     from the previous use leaks into the next use.
+     from the previous use leaks into the next one.
     
-    5. [gtk.signal_list_item_factory.SignalListItemFactory.teardown] is emitted to allow undoing
-    the effects of [gtk.signal_list_item_factory.SignalListItemFactory.setup]. After this signal
-    was emitted on a listitem, the listitem will be destroyed and not be used again.
+     5. [gtk.signal_list_item_factory.SignalListItemFactory.teardown] is emitted to allow undoing
+     the effects of [gtk.signal_list_item_factory.SignalListItemFactory.setup]. After this signal
+     was emitted on a listitem, the listitem will be destroyed and not be used again.
     
-    Note that during the signal emissions, changing properties on the
-    listitems passed will not trigger notify signals as the listitem's
-    notifications are frozen. See [gobject.object.ObjectWrap.freezeNotify] for details.
+    Note that during the signal emissions, changing properties on the listitems
+    passed will not trigger notify signals as the listitem's notifications are
+    frozen. See [gobject.object.ObjectWrap.freezeNotify] for details.
     
     For tracking changes in other properties in the listitem, the
     ::notify signal is recommended. The signal can be connected in the
@@ -16453,8 +17673,7 @@ struct GtkSignalListItemFactory;
 struct GtkSignalListItemFactoryClass;
 
 /**
-    [gtk.single_selection.SingleSelection] is a [gtk.selection_model.SelectionModel] that allows selecting a single
-    item.
+    A selection model that allows selecting a single item.
     
     Note that the selection is *persistent* -- if the selected item is removed
     and re-added in the same [gio.list_model.ListModel.itemsChanged] emission, it
@@ -16471,51 +17690,91 @@ struct GtkSingleSelectionClass
 }
 
 /**
-    [gtk.size_group.SizeGroup] groups widgets together so they all request the same size.
+    Groups widgets together so they all request the same size.
     
-    This is typically useful when you want a column of widgets to have the
-    same size, but you can’t use a [gtk.grid.Grid].
+    This is typically useful when you want a column of widgets to have
+    the same size, but you can’t use a [gtk.grid.Grid] or [gtk.box.Box].
     
     In detail, the size requested for each widget in a [gtk.size_group.SizeGroup] is
     the maximum of the sizes that would have been requested for each
-    widget in the size group if they were not in the size group. The mode
-    of the size group (see [gtk.size_group.SizeGroup.setMode]) determines whether
-    this applies to the horizontal size, the vertical size, or both sizes.
+    widget in the size group if they were not in the size group. The
+    [mode][gtk.size_group.SizeGroup.setMode] of the size group determines
+    whether this applies to the horizontal size, the vertical size, or
+    both sizes.
     
     Note that size groups only affect the amount of space requested, not
     the size that the widgets finally receive. If you want the widgets in
     a [gtk.size_group.SizeGroup] to actually be the same size, you need to pack them in
-    such a way that they get the size they request and not more.
+    such a way that they get the size they request and not more. In
+    particular it doesn't make a lot of sense to set
+    [the expand flags][gtk.widget.Widget.setHexpand] on the widgets that
+    are members of a size group.
     
     [gtk.size_group.SizeGroup] objects are referenced by each widget in the size group,
     so once you have added all widgets to a [gtk.size_group.SizeGroup], you can drop
-    the initial reference to the size group with [gobject.object.ObjectWrap.unref]. If the
-    widgets in the size group are subsequently destroyed, then they will
-    be removed from the size group and drop their references on the size
-    group; when all widgets have been removed, the size group will be
-    freed.
+    the initial reference to the size group with
+    [gobject.object.ObjectWrap.unref]. If the widgets in the size group are
+    subsequently destroyed, then they will be removed from the size group
+    and drop their references on the size group; when all widgets have been
+    removed, the size group will be freed.
     
     Widgets can be part of multiple size groups; GTK will compute the
-    horizontal size of a widget from the horizontal requisition of all
-    widgets that can be reached from the widget by a chain of size groups
-    of type [gtk.types.SizeGroupMode.Horizontal] or [gtk.types.SizeGroupMode.Both], and the
-    vertical size from the vertical requisition of all widgets that can be
-    reached from the widget by a chain of size groups of type
-    [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both].
+    horizontal size of a widget from the horizontal requisition of all widgets
+    that can be reached from the widget by a chain of size groups with mode
+    `enum@Gtk.SizeGroupMode.HORIZONTAL` or `enum@Gtk.SizeGroupMode.BOTH`, and
+    the vertical size from the vertical requisition of all widgets that can be
+    reached from the widget by a chain of size groups with mode
+    `enum@Gtk.SizeGroupMode.VERTICAL` or `enum@Gtk.SizeGroupMode.BOTH`.
     
-    Note that only non-contextual sizes of every widget are ever consulted
-    by size groups (since size groups have no knowledge of what size a widget
-    will be allocated in one dimension, it cannot derive how much height
-    a widget will receive for a given width). When grouping widgets that
-    trade height for width in mode [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both]:
-    the height for the minimum width will be the requested height for all
-    widgets in the group. The same is of course true when horizontally grouping
-    width for height widgets.
+    # Size groups and trading height-for-width
     
-    Widgets that trade height-for-width should set a reasonably large minimum
-    width by way of [gtk.label.Label.widthChars] for instance. Widgets with
-    static sizes as well as widgets that grow (such as ellipsizing text) need no
-    such considerations.
+    ::: warning
+        Generally, size groups don't interact well with widgets that
+        trade height for width (or width for height), such as wrappable
+        labels. Avoid using size groups with such widgets.
+    
+    A size group with mode `enum@Gtk.SizeGroupMode.HORIZONTAL` or
+    `enum@Gtk.SizeGroupMode.VERTICAL` only consults non-contextual sizes
+    of widgets other than the one being measured, since it has no
+    knowledge of what size a widget will get allocated in the other
+    orientation. This can lead to widgets in a group actually requesting
+    different contextual sizes, contrary to the purpose of
+    [gtk.size_group.SizeGroup].
+    
+    In contrast, a size group with mode `enum@Gtk.SizeGroupMode.BOTH` can
+    properly propagate the available size in the opposite orientation
+    when measuring widgets in the group, which results in consistent and
+    accurate measurements.
+    
+    In case some mechanism other than a size group is already used to
+    ensure that widgets in a group all get the same size in one
+    orientation (for example, some common ancestor is known to allocate
+    the same width to all its children), and the size group is only
+    really needed to also make the widgets request the same size in the
+    other orientation, it is beneficial to still set the group's mode to
+    `enum@Gtk.SizeGroupMode.BOTH`. This lets the group assume and count
+    on sizes of the widgets in the former orientation being the same,
+    which enables it to propagate the available size as described above.
+    
+    # Alternatives to size groups
+    
+    Size groups have many limitations, such as only influencing size
+    requests but not allocations, and poor height-for-width support. When
+    possible, prefer using dedicated mechanisms that can properly ensure
+    that the widgets get the same size.
+    
+    Various container widgets and layout managers support a homogeneous
+    layout mode, where they will explicitly give the same size to their
+    children (see [gtk.box.Box.homogeneous]). Using homogeneous mode
+    can also have large performance benefits compared to either the same
+    container in non-homogeneous mode, or to size groups.
+    
+    [gtk.grid.Grid] can be used to position widgets into rows and
+    columns. Members of each column will have the same width among them;
+    likewise, members of each row will have the same height. On top of
+    that, the heights can be made equal between all rows with
+    [gtk.grid.Grid.rowHomogeneous], and the widths can be made equal
+    between all columns with [gtk.grid.Grid.columnHomogeneous].
     
     # GtkSizeGroup as GtkBuildable
     
@@ -16543,7 +17802,7 @@ struct GtkSizeGroup
 }
 
 /**
-    [gtk.slice_list_model.SliceListModel] is a list model that presents a slice of another model.
+    A list model that presents a slice of another model.
     
     This is useful when implementing paging by setting the size to the number
     of elements per page and updating the offset whenever a different page is
@@ -16561,7 +17820,7 @@ struct GtkSliceListModelClass
 }
 
 /**
-    [gtk.snapshot.Snapshot] assists in creating [gsk.render_node.RenderNode]s for widgets.
+    Assists in creating [gsk.render_node.RenderNode]s for widgets.
     
     It functions in a similar way to a cairo context, and maintains a stack
     of render nodes and their associated transformations.
@@ -16573,6 +17832,11 @@ struct GtkSliceListModelClass
     The typical way to obtain a [gtk.snapshot.Snapshot] object is as an argument to
     the `vfunc@Gtk.Widget.snapshot` vfunc. If you need to create your own
     [gtk.snapshot.Snapshot], use [gtk.snapshot.Snapshot.new_].
+    
+    Note that [gtk.snapshot.Snapshot] applies some optimizations, so the node
+    it produces may not match the API calls 1:1. For example, it will
+    omit clip nodes if the child node is entirely contained within the
+    clip rectangle.
 */
 struct GtkSnapshot;
 
@@ -16580,12 +17844,14 @@ struct GtkSnapshot;
 struct GtkSnapshotClass;
 
 /**
-    A [gio.list_model.ListModel] that sorts the elements of an underlying model
-    according to a [gtk.sorter.Sorter].
+    A list model that sorts the elements of another model.
+    
+    The elements are sorted according to a [gtk.sorter.Sorter].
     
     The model is a stable sort. If two items compare equal according
     to the sorter, the one that appears first in the original model will
     also appear first after sorting.
+    
     Note that if you change the sorter, the previous order will have no
     influence on the new order. If you want that, consider using a
     [gtk.multi_sorter.MultiSorter] and appending the previous sorter to it.
@@ -16617,7 +17883,7 @@ struct GtkSortListModelClass
 }
 
 /**
-    [gtk.sorter.Sorter] is an object to describe sorting criteria.
+    Describes sorting criteria for a [gtk.sort_list_model.SortListModel].
     
     Its primary user is [gtk.sort_list_model.SortListModel]
     
@@ -16689,10 +17955,12 @@ struct GtkSorterClass
 }
 
 /**
-    A [gtk.spin_button.SpinButton] is an ideal way to allow the user to set the
-    value of some attribute.
+    Allows to enter or change numeric values.
     
-    ![An example GtkSpinButton](spinbutton.png)
+    <picture>
+      <source srcset="spinbutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSpinButton" src="spinbutton.png">
+    </picture>
     
     Rather than having to directly type a number into a [gtk.entry.Entry],
     [gtk.spin_button.SpinButton] allows the user to click on one of two arrows
@@ -16772,6 +18040,12 @@ struct GtkSorterClass
     }
     ```
     
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.spin_button.SpinButton.changeValue]
+    
     # CSS nodes
     
     ```
@@ -16805,12 +18079,15 @@ struct GtkSorterClass
 struct GtkSpinButton;
 
 /**
-    A [gtk.spinner.Spinner] widget displays an icon-size spinning animation.
+    Displays an icon-size spinning animation.
     
     It is often used as an alternative to a [gtk.progress_bar.ProgressBar]
     for displaying indefinite activity, instead of actual progress.
     
-    ![An example GtkSpinner](spinner.png)
+    <picture>
+      <source srcset="spinner-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSpinner" src="spinner.png">
+    </picture>
     
     To start the animation, use [gtk.spinner.Spinner.start], to stop it
     use [gtk.spinner.Spinner.stop].
@@ -16820,12 +18097,20 @@ struct GtkSpinButton;
     [gtk.spinner.Spinner] has a single CSS node with the name spinner.
     When the animation is active, the :checked pseudoclass is
     added to this node.
+    
+    # Accessibility
+    
+    [gtk.spinner.Spinner] uses the [gtk.types.AccessibleRole.ProgressBar] role.
 */
 struct GtkSpinner;
 
 /**
-    [gtk.stack.Stack] is a container which only shows one of its children
-    at a time.
+    Shows one of its children at a time.
+    
+    <picture>
+      <source srcset="stack-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStack" src="stack.png">
+    </picture>
     
     In contrast to [gtk.notebook.Notebook], [gtk.stack.Stack] does not provide a means
     for users to change the visible child. Instead, a separate widget
@@ -16869,18 +18154,23 @@ struct GtkSpinner;
     
     # Accessibility
     
-    [gtk.stack.Stack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack
+    [gtk.stack.Stack] uses the [gtk.types.AccessibleRole.TabPanel] role for the stack
     pages, which are the accessible parent objects of the child widgets.
 */
 struct GtkStack;
 
 /**
-    [gtk.stack_page.StackPage] is an auxiliary class used by [gtk.stack.Stack].
+    An auxiliary class used by [gtk.stack.Stack].
 */
 struct GtkStackPage;
 
 /**
-    A [gtk.stack_sidebar.StackSidebar] uses a sidebar to switch between [gtk.stack.Stack] pages.
+    Uses a sidebar to switch between [gtk.stack.Stack] pages.
+    
+    <picture>
+      <source srcset="sidebar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStackSidebar" src="sidebar.png">
+    </picture>
     
     In order to use a [gtk.stack_sidebar.StackSidebar], you simply use a [gtk.stack.Stack] to
     organize your UI flow, and add the sidebar to your sidebar area. You
@@ -16899,10 +18189,12 @@ struct GtkStackPage;
 struct GtkStackSidebar;
 
 /**
-    The [gtk.stack_switcher.StackSwitcher] shows a row of buttons to switch between [gtk.stack.Stack]
-    pages.
+    Shows a row of buttons to switch between [gtk.stack.Stack] pages.
     
-    ![An example GtkStackSwitcher](stackswitcher.png)
+    <picture>
+      <source srcset="stackswitcher-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStackSwitcher" src="stackswitcher.png">
+    </picture>
     
     It acts as a controller for the associated [gtk.stack.Stack].
     
@@ -16925,7 +18217,7 @@ struct GtkStackSidebar;
     # Accessibility
     
     [gtk.stack_switcher.StackSwitcher] uses the [gtk.types.AccessibleRole.TabList] role
-    and uses the [gtk.types.AccessibleRole.Tab] for its buttons.
+    and uses the [gtk.types.AccessibleRole.Tab] role for its buttons.
     
     # Orientable
     
@@ -16939,7 +18231,10 @@ struct GtkStackSwitcher;
     A [gtk.statusbar.Statusbar] widget is usually placed along the bottom of an application's
     main [gtk.window.Window].
     
-    ![An example GtkStatusbar](statusbar.png)
+    <picture>
+      <source srcset="statusbar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkStatusbar" src="statusbar.png">
+    </picture>
     
     A `GtkStatusBar` may provide a regular commentary of the application's
     status (as is usually the case in a web browser, for example), or may be
@@ -16978,10 +18273,9 @@ struct GtkStackSwitcher;
 struct GtkStatusbar;
 
 /**
-    [gtk.string_filter.StringFilter] determines whether to include items by comparing
-    strings to a fixed search term.
+    Determines whether to include items by comparing strings to a fixed search term.
     
-    The strings are obtained from the items by evaluating a [gtk.expression.Expression]
+    The strings are obtained from the items by evaluating an expression
     set with [gtk.string_filter.StringFilter.setExpression], and they are
     compared against a search term set with [gtk.string_filter.StringFilter.setSearch].
     
@@ -17002,7 +18296,7 @@ struct GtkStringFilterClass
 }
 
 /**
-    [gtk.string_list.StringList] is a list model that wraps an array of strings.
+    A list model that wraps an array of strings.
     
     The objects in the model are of type [gtk.string_object.StringObject] and have
     a "string" property that can be used inside expressions.
@@ -17040,7 +18334,7 @@ struct GtkStringListClass
 }
 
 /**
-    [gtk.string_object.StringObject] is the type of items in a [gtk.string_list.StringList].
+    The type of items in a [gtk.string_list.StringList].
     
     A [gtk.string_object.StringObject] is a wrapper around a `const char*`; it has
     a [gtk.string_object.StringObject.string_] property that can be used
@@ -17056,14 +18350,14 @@ struct GtkStringObjectClass
 }
 
 /**
-    [gtk.string_sorter.StringSorter] is a [gtk.sorter.Sorter] that compares strings.
+    Sorts items by comparing strings.
+    
+    To obtain the strings to compare, this sorter evaluates a
+    [gtk.expression.Expression].
     
     It does the comparison in a linguistically correct way using the
     current locale by normalizing Unicode strings and possibly case-folding
     them before performing the comparison.
-    
-    To obtain the strings to compare, this sorter evaluates a
-    [gtk.expression.Expression].
 */
 struct GtkStringSorter;
 
@@ -17146,8 +18440,7 @@ struct GtkStyleContextClass
 }
 
 /**
-    [gtk.style_provider.StyleProvider] is an interface for style information used by
-    [gtk.style_context.StyleContext].
+    An interface for style information used by [gtk.style_context.StyleContext].
     
     See [gtk.style_context.StyleContext.addProvider] and
     [gtk.style_context.StyleContext.addProviderForDisplay] for
@@ -17159,22 +18452,207 @@ struct GtkStyleContextClass
 struct GtkStyleProvider;
 
 /**
-    [gtk.switch_.Switch] is a "light switch" that has two states: on or off.
+    A paintable implementation that renders SVG, with animations.
     
-    ![An example GtkSwitch](switch.png)
+    [gtk.svg.Svg] objects are created by parsing a subset of SVG,
+    including SVG animations.
+    
+    [gtk.svg.Svg] fills or strokes paths with symbolic or fixed colors.
+    It can have multiple states, and paths can be included in a subset
+    of the states. States can have animations, and the transition
+    between different states can also be animated.
+    
+    To show a static SVG image, it is enough to load the
+    the SVG and use it like any other paintable.
+    
+    To play an SVG animation, use [gtk.svg.Svg.setFrameClock]
+    to connect the paintable to a frame clock, and call
+    [gtk.svg.Svg.play] after loading the SVG. The animation can
+    be paused using [gtk.svg.Svg.pause].
+    
+    To set the current state, use [gtk.svg.Svg.setState].
+    
+    
+    ## Error handling
+    
+    Loading an SVG into [gtk.svg.Svg] will always produce a (possibly empty)
+    paintable. GTK will drop things that it can't handle and try to make
+    sense of the rest.
+    
+    To track errors during parsing or rendering, connect to the
+    [gtk.svg.Svg.error] signal.
+    
+    For parsing errors in the `GTK_SVG_ERROR` domain, the functions
+    `func@Gtk.SvgError.get_start`, `func@Gtk.SvgError.get_end`,
+    `func@Gtk.SvgError.get_element` and `func@Gtk.SvgError.get_attribute`
+    can be used to obtain information about where the error occurred.
+    
+    
+    ## The supported subset of SVG
+    
+    The paintable supports much of SVG 2, with some exceptions.
+    
+    Among the graphical elements, `<textPath>` and `<foreignObject>`
+    are not supported.
+    
+    Among the structural elements, `<a>` and `<view>` are not supported.
+    
+    In the `<filter>` element, the following primitives are not
+    supported: feConvolveMatrix, feDiffuseLighting,
+    feMorphology, feSpecularLighting and feTurbulence.
+    
+    Support for the `mask` attribute is limited to just a url
+    referring to the `<mask>` element by ID.
+    
+    In animation elements, the parsing of `begin` and `end` attributes
+    is limited, and the `min` and `max` attributes are not supported.
+    
+    Lastly, there is only minimal CSS support (the style attribute,
+    but not `<style>`), and no interactivity.
+    
+    
+    ## SVG Extensions
+    
+    The paintable supports a number of [custom attributes](icon-format.html)
+    that offer a convenient way to define states, transitions and animations.
+    For example,
+    
+        <circle cx='5' cy='5' r='5'
+                gpa:states='0 1'
+                gpa:animation-type='automatic'
+                gpa:animation-direction='segment'
+                gpa:animation-duration='600ms'/>
+    
+    defines the circle to be shown in states 0 and 1, and animates a segment
+    of the circle.
+    
+    <image src="svg-renderer1.svg">
+    
+    Note that the generated animations are implemented using standard
+    SVG attributes (`visibility`, `stroke-dasharray, `stroke-dashoffset`,
+    `pathLength` and `filter`). Setting these attributes in your SVG
+    is therefore going to interfere with generated animations.
+    
+    To connect general SVG animations to the states of the paintable,
+    use the custom `gpa:states(...)` condition in the `begin` and `end`
+    attributes of SVG animation elements. For example,
+    
+        <animate href='path1'
+                 attributeName='fill'
+                 begin='gpa:states(0).begin'
+                 dur='300ms'
+                 fill='freeze'
+                 from='black'
+                 to='magenta'/>
+    
+    will make the fill color of path1 transition from black to
+    magenta when the renderer enters state 0.
+    
+    <image src="svg-renderer2.svg">
+    
+    The `gpa:states(...)` condition triggers for upcoming state changes
+    as well, to support fade-out transitions. For example,
+    
+        <animate href='path1'
+                 attributeName='opacity'
+                 begin='gpa:states(0).end -300ms'
+                 dur='300ms'
+                 fill='freeze'
+                 from='1'
+                 to='0'/>
+    
+    will start a fade-out of path1 300ms before state 0 ends.
+    
+    A variant of the `gpa:states(...)` condition allows specifying
+    both before and after states:
+    
+        <animate href='path1'
+                 attributeName='opacity'
+                 begin='gpa:states(0, 1 2)'
+                 dur='300ms'
+                 fill='freeze'
+                 from='1'
+                 to='0'/>
+    
+    will start the animation when the state changes from 0 to 1 or
+    from 0 to 2, but not when it changes from 0 to 3.
+    
+    In addition to the `gpa:fill` and `gpa:stroke` attributes, symbolic
+    colors can also be specified as a custom paint server reference,
+    like this: `url(#gpa:warning)`. This works in `fill` and `stroke`
+    attributes, but also when specifying colors in SVG animation
+    attributes like `to` or `values`.
+    
+    Note that the SVG syntax allows for a fallback RGB color to be
+    specified after the url, for compatibility with other SVG consumers:
+    
+        fill='url(#gpa:warning) orange'
+    
+    In contrast to SVG 1.1 and 2.0, we allow the `transform` attribute
+    to be animated with `<animate>`.
+*/
+struct GtkSvg;
+
+/** */
+struct GtkSvgClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    Provides information about a location in an SVG document.
+    
+    The information should be considered approximate; it is
+    meant to provide feedback for errors in an editor.
+*/
+struct GtkSvgLocation
+{
+  /**
+      the byte index in document. If unknown, this will
+        be zero (which is also a valid value, but only if all
+        three values are zero)
+  */
+  size_t bytes;
+
+  /**
+      the line index in the document, 0-based
+  */
+  size_t lines;
+
+  /**
+      the char index in the line, 0-based
+  */
+  size_t lineChars;
+}
+
+/**
+    Shows a "light switch" that has two states: on or off.
+    
+    <picture>
+      <source srcset="switch-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSwitch" src="switch.png">
+    </picture>
     
     The user can control which state should be active by clicking the
-    empty area, or by dragging the handle.
+    empty area, or by dragging the slider.
     
-    [gtk.switch_.Switch] can also handle situations where the underlying state
-    changes with a delay. In this case, the slider position indicates
-    the user's recent change (as indicated by the [gtk.switch_.Switch.active]
-    property), and the color indicates whether the underlying state (represented
-    by the [gtk.switch_.Switch.state] property) has been updated yet.
+    [gtk.switch_.Switch] can also express situations where the underlying state changes
+    with a delay. In this case, the slider position indicates the user's recent
+    change (represented by the [gtk.switch_.Switch.active] property), while the
+    trough color indicates the present underlying state (represented by the
+    [gtk.switch_.Switch.state] property).
     
-    ![GtkSwitch with delayed state change](switch-state.png)
+    <picture>
+      <source srcset="switch-state-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="GtkSwitch with delayed state change" src="switch-state.png">
+    </picture>
     
     See [gtk.switch_.Switch.stateSet] for details.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.switch_.Switch] supports pan and drag gestures to move the slider.
     
     # CSS nodes
     
@@ -17196,17 +18674,17 @@ struct GtkStyleProvider;
 struct GtkSwitch;
 
 /**
-    [gtk.symbolic_paintable.SymbolicPaintable] is an interface that support symbolic colors in
-    paintables.
+    An interface that supports symbolic colors in paintables.
     
     [gdk.paintable.Paintable]s implementing the interface will have the
     `vfunc@Gtk.SymbolicPaintable.snapshot_symbolic` function called and
-    have the colors for drawing symbolic icons passed. At least 4 colors are guaranteed
-    to be passed every time.
+    have the colors for drawing symbolic icons passed. At least 5 colors
+    are guaranteed to be passed every time. These 5 colors are the
+    foreground color, and the colors to use for errors, warnings
+    and success information in that order, followed by the system
+    accent color.
     
-    These 4 colors are the foreground color, and the colors to use for errors, warnings
-    and success information in that order.
-    
+    The system accent color has been added in GTK 4.22.
     More colors may be added in the future.
 */
 struct GtkSymbolicPaintable;
@@ -17227,32 +18705,83 @@ struct GtkSymbolicPaintableInterface
         will be called.
   */
   extern(C) void function(GtkSymbolicPaintable* paintable, GdkSnapshot* snapshot, double width, double height, const(GdkRGBA)* colors, size_t nColors) snapshotSymbolic;
+
+  /**
+      Like @snapshot_symbolic, but additionally takes
+        a font weight argument. Since: 4.22
+  */
+  extern(C) void function(GtkSymbolicPaintable* paintable, GdkSnapshot* snapshot, double width, double height, const(GdkRGBA)* colors, size_t nColors, double weight) snapshotWithWeight;
 }
 
 /**
-    The [gtk.text.Text] widget is a single-line text entry widget.
+    A single-line text entry.
     
     [gtk.text.Text] is the common implementation of single-line text editing
     that is shared between [gtk.entry.Entry], [gtk.password_entry.PasswordEntry],
-    [gtk.spin_button.SpinButton], and other widgets. In all of these, [gtk.text.Text] is
-    used as the delegate for the [gtk.editable.Editable] implementation.
+    [gtk.spin_button.SpinButton], and other widgets. In all of these, a [gtk.text.Text]
+    instance is used as the delegate for the [gtk.editable.Editable] implementation.
     
-    A fairly large set of key bindings are supported by default. If the
-    entered text is longer than the allocation of the widget, the widget
-    will scroll so that the cursor position is visible.
+    A large number of key bindings s supported by default. If the entered
+    text is longer than the allocation of the widget, the widget will scroll
+    so that the cursor position is visible.
     
     When using an entry for passwords and other sensitive information,
     it can be put into “password mode” using [gtk.text.Text.setVisibility].
-    In this mode, entered text is displayed using a “invisible” character.
+    In this mode, entered text is displayed using an “invisible” character.
     By default, GTK picks the best invisible character that is available
     in the current font, but it can be changed with
     [gtk.text.Text.setInvisibleChar].
     
-    If you are looking to add icons or progress display in an entry, look
-    at [gtk.entry.Entry]. There other alternatives for more specialized use
-    cases, such as [gtk.search_entry.SearchEntry].
+    If you want to add icons or progress display in an entry, look at
+    [gtk.entry.Entry]. There are other alternatives for more specialized
+    use cases, such as [gtk.search_entry.SearchEntry].
     
-    If you need multi-line editable text, look at [gtk.text_view.TextView].
+    If you need multi-line editable text, use [gtk.text_view.TextView].
+    
+    # Shortcuts and Gestures
+    
+    [gtk.text.Text] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    - <kbd>Ctrl</kbd>+<kbd>A</kbd> or <kbd>Ctrl</kbd>+<kbd>&sol;</kbd>
+      selects all the text.
+    - <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> or
+      <kbd>Ctrl</kbd>+<kbd>&bsol;</kbd> unselects all.
+    - <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes the last modification.
+    - <kbd>Ctrl</kbd>+<kbd>Y</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
+      redoes the last undone modification.
+    - <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> toggles the text direction.
+    - <kbd>Clear</kbd> clears the content.
+    
+    Additionally, the following signals have default keybindings:
+    
+    - [gtk.text.Text.activate]
+    - [gtk.text.Text.backspace]
+    - [gtk.text.Text.copyClipboard]
+    - [gtk.text.Text.cutClipboard]
+    - [gtk.text.Text.deleteFromCursor]
+    - [gtk.text.Text.insertEmoji]
+    - [gtk.text.Text.moveCursor]
+    - [gtk.text.Text.pasteClipboard]
+    - [gtk.text.Text.toggleOverwrite]
+    
+    # Actions
+    
+    [gtk.text.Text] defines a set of built-in actions:
+    
+    - `clipboard.copy` copies the contents to the clipboard.
+    - `clipboard.cut` copies the contents to the clipboard and deletes it from
+      the widget.
+    - `clipboard.paste` inserts the contents of the clipboard into the widget.
+    - `menu.popup` opens the context menu.
+    - `misc.insert-emoji` opens the Emoji chooser.
+    - `misc.toggle-visibility` toggles the [gtk.text.Text]:visibility property.
+    - `misc.toggle-direction` toggles the text direction.
+    - `selection.delete` deletes the current selection.
+    - `selection.select-all` selects all of the widgets content.
+    - `text.redo` redoes the last change to the contents.
+    - `text.undo` undoes the last change to the contents.
+    - `text.clear` removes all content.
     
     # CSS nodes
     
@@ -17262,7 +18791,10 @@ struct GtkSymbolicPaintableInterface
     ├── undershoot.left
     ├── undershoot.right
     ├── [selection]
+    ├── [cursor-handle[.top]
+    ├── [cursor-handle.bottom]
     ├── [block-cursor]
+    ├── [cursor-handle[.top/.bottom][.insertion-cursor]]
     ╰── [window.popup]
     ```
     
@@ -17421,8 +18953,7 @@ struct GtkTextBufferClass
 struct GtkTextBufferPrivate;
 
 /**
-    A [gtk.text_child_anchor.TextChildAnchor] is a spot in a [gtk.text_buffer.TextBuffer] where child widgets can
-    be “anchored”.
+    Marks a spot in a [gtk.text_buffer.TextBuffer] where child widgets can be “anchored”.
     
     The anchor can have multiple widgets anchored, to allow for multiple views.
 */
@@ -17455,7 +18986,7 @@ struct GtkTextChildAnchorClass
 }
 
 /**
-    An iterator for the contents of a [gtk.text_buffer.TextBuffer].
+    Iterates over the contents of a [gtk.text_buffer.TextBuffer].
     
     You may wish to begin by reading the
     [text widget conceptual overview](section-text-widget.html),
@@ -17508,7 +19039,7 @@ struct GtkTextIter
 }
 
 /**
-    A [gtk.text_mark.TextMark] is a position in a `GtkTextbuffer` that is preserved
+    Marks a position in a `GtkTextbuffer` that is preserved
     across modifications.
     
     You may wish to begin by reading the
@@ -17562,7 +19093,7 @@ struct GtkTextMarkClass
 }
 
 /**
-    A tag that can be applied to text contained in a [gtk.text_buffer.TextBuffer].
+    Can be applied to text contained in a [gtk.text_buffer.TextBuffer].
     
     You may wish to begin by reading the
     [text widget conceptual overview](section-text-widget.html),
@@ -17604,7 +19135,7 @@ struct GtkTextTagClass
 struct GtkTextTagPrivate;
 
 /**
-    The collection of tags in a [gtk.text_buffer.TextBuffer]
+    Collects the tags in a [gtk.text_buffer.TextBuffer].
     
     You may wish to begin by reading the
     [text widget conceptual overview](section-text-widget.html),
@@ -17629,13 +19160,55 @@ struct GtkTextTagPrivate;
 struct GtkTextTagTable;
 
 /**
-    A widget that displays the contents of a [gtk.text_buffer.TextBuffer].
+    Displays the contents of a [gtk.text_buffer.TextBuffer].
     
-    ![An example GtkTextview](multiline-text.png)
+    <picture>
+      <source srcset="multiline-text-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkTextView" src="multiline-text.png">
+    </picture>
     
     You may wish to begin by reading the [conceptual overview](section-text-widget.html),
     which gives an overview of all the objects and data types related to the
     text widget and how they work together.
+    
+    ## Shortcuts and Gestures
+    
+    [gtk.text_view.TextView] supports the following keyboard shortcuts:
+    
+    - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+    - <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes the last modification.
+    - <kbd>Ctrl</kbd>+<kbd>Y</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
+       redoes the last undone modification.
+    - <kbd>Clear</kbd> clears the content.
+    
+    Additionally, the following signals have default keybindings:
+    
+    - [gtk.text_view.TextView.backspace]
+    - [gtk.text_view.TextView.copyClipboard]
+    - [gtk.text_view.TextView.cutClipboard]
+    - [gtk.text_view.TextView.deleteFromCursor]
+    - [gtk.text_view.TextView.insertEmoji]
+    - [gtk.text_view.TextView.moveCursor]
+    - [gtk.text_view.TextView.pasteClipboard]
+    - [gtk.text_view.TextView.selectAll]
+    - [gtk.text_view.TextView.toggleCursorVisible]
+    - [gtk.text_view.TextView.toggleOverwrite]
+    
+    ## Actions
+    
+    [gtk.text_view.TextView] defines a set of built-in actions:
+    
+    - `clipboard.copy` copies the contents to the clipboard.
+    - `clipboard.cut` copies the contents to the clipboard and deletes it from
+      the widget.
+    - `clipboard.paste` inserts the contents of the clipboard into the widget.
+    - `menu.popup` opens the context menu.
+    - `misc.insert-emoji` opens the Emoji chooser.
+    - `selection.delete` deletes the current selection.
+    - `selection.select-all` selects all of the widgets content.
+    - `text.redo` redoes the last change to the contents.
+    - `text.undo` undoes the last change to the contents.
+    - `text.clear` clears the content.
     
     ## CSS nodes
     
@@ -17769,8 +19342,12 @@ struct GtkTextViewClass
 struct GtkTextViewPrivate;
 
 /**
-    A [gtk.toggle_button.ToggleButton] is a button which remains “pressed-in” when
-    clicked.
+    Shows a button which remains “pressed-in” when clicked.
+    
+    <picture>
+      <source srcset="toggle-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Example GtkToggleButtons" src="toggle-button.png">
+    </picture>
     
     Clicking again will cause the toggle button to return to its normal state.
     
@@ -17782,9 +19359,6 @@ struct GtkTextViewPrivate;
     The state of a [gtk.toggle_button.ToggleButton] can be set specifically using
     [gtk.toggle_button.ToggleButton.setActive], and retrieved using
     [gtk.toggle_button.ToggleButton.getActive].
-    
-    To simply switch the state of a toggle button, use
-    [gtk.toggle_button.ToggleButton.toggled].
     
     ## Grouping
     
@@ -17865,7 +19439,7 @@ struct GtkToggleButtonClass
 }
 
 /**
-    [gtk.tooltip.Tooltip] is an object representing a widget tooltip.
+    Represents a widget tooltip.
     
     Basic tooltips can be realized simply by using
     [gtk.widget.Widget.setTooltipText] or
@@ -17957,7 +19531,7 @@ struct GtkTreeDragSourceIface
 }
 
 /**
-    [gtk.tree_expander.TreeExpander] is a widget that provides an expander for a list.
+    Provides an expander for a tree-like list.
     
     It is typically placed as a bottommost child into a [gtk.list_view.ListView]
     to allow users to expand and collapse children in a list with a
@@ -17988,6 +19562,28 @@ struct GtkTreeDragSourceIface
     the [gtk.tree_expander.TreeExpander.hideExpander] property to the item count of
     the model of the treelistrow, to hide the expander for rows without children,
     even if the row is expandable.
+    
+    ## Shortcuts and Gestures
+    
+    [gtk.tree_expander.TreeExpander] supports the following keyboard shortcuts:
+    
+    - <kbd>+</kbd> or <kbd>*</kbd> expands the expander.
+    - <kbd>-</kbd> or <kbd>/</kbd> collapses the expander.
+    - Left and right arrow keys, when combined with <kbd>Shift</kbd> or
+      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>, will expand or collapse, depending on
+      the locale's text direction.
+    - <kbd>Ctrl</kbd>+<kbd>␣</kbd> toggles the expander state.
+    
+    The row can also expand on drag gestures.
+    
+    ## Actions
+    
+    [gtk.tree_expander.TreeExpander] defines a set of built-in actions:
+    
+    - `listitem.expand` expands the expander if it can be expanded.
+    - `listitem.collapse` collapses the expander.
+    - `listitem.toggle-expand` tries to expand the expander if it was collapsed
+      or collapses it if it was expanded.
     
     ## CSS nodes
     
@@ -18052,7 +19648,7 @@ struct GtkTreeIter
 }
 
 /**
-    [gtk.tree_list_model.TreeListModel] is a list model that can create child models on demand.
+    A list model that can create child models on demand.
 */
 struct GtkTreeListModel;
 
@@ -18064,7 +19660,7 @@ struct GtkTreeListModelClass
 }
 
 /**
-    [gtk.tree_list_row.TreeListRow] is used by [gtk.tree_list_model.TreeListModel] to represent items.
+    The type of item used by [gtk.tree_list_model.TreeListModel].
     
     It allows navigating the model as a tree and modify the state of rows.
     
@@ -18086,8 +19682,7 @@ struct GtkTreeListRowClass
 }
 
 /**
-    [gtk.tree_list_row_sorter.TreeListRowSorter] is a special-purpose sorter that will apply a given
-    sorter to the levels in a tree.
+    Applies a gives sorter to the levels in a tree.
     
     Here is an example for setting up a column view with a tree model and
     a `GtkTreeListSorter`:
@@ -18805,6 +20400,11 @@ struct GtkTreeStorePrivate;
 /**
     A widget for displaying both trees and lists
     
+    <picture>
+      <source srcset="list-and-tree-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkTreeView" src="list-and-tree.png">
+    </picture>
+    
     Widget that displays any object that implements the [gtk.tree_model.TreeModel] interface.
     
     Please refer to the [tree widget conceptual overview](section-tree-widget.html)
@@ -18972,16 +20572,22 @@ struct GtkTreeViewClass
 struct GtkTreeViewColumn;
 
 /**
-    A [gtk.uri_launcher.UriLauncher] object collects the arguments that are needed to open a uri
-    with an application.
+    A [gtk.expression.Expression] that tries to evaluate each of its expressions until it succeeds.
+    
+    If all expressions fail to evaluate, the [gtk.try_expression.TryExpression]'s evaluation fails as well.
+*/
+struct GtkTryExpression;
+
+/**
+    Asynchronous API to open a uri with an application.
+    
+    [gtk.uri_launcher.UriLauncher] collects the arguments that are needed to open the uri.
     
     Depending on system configuration, user preferences and available APIs, this
     may or may not show an app chooser dialog or launch the default application
     right away.
     
     The operation is started with the [gtk.uri_launcher.UriLauncher.launch] function.
-    This API follows the GIO async pattern, and the result can be obtained by
-    calling [gtk.uri_launcher.UriLauncher.launchFinish].
     
     To launch a file, use [gtk.file_launcher.FileLauncher].
 */
@@ -18995,9 +20601,12 @@ struct GtkUriLauncherClass
 }
 
 /**
-    [gtk.video.Video] is a widget to show a [gtk.media_stream.MediaStream] with media controls.
+    Shows a [gtk.media_stream.MediaStream] with media controls.
     
-    ![An example GtkVideo](video.png)
+    <picture>
+      <source srcset="video-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkVideo" src="video.png">
+    </picture>
     
     The controls are available separately as [gtk.media_controls.MediaControls].
     If you just want to display a video without controls, you can treat it
@@ -19020,8 +20629,8 @@ struct GtkVideoClass
 }
 
 /**
-    [gtk.viewport.Viewport] implements scrollability for widgets that lack their
-    own scrolling capabilities.
+    Implements scrollability for widgets that don't support scrolling
+    on their own.
     
     Use [gtk.viewport.Viewport] to scroll child widgets such as [gtk.grid.Grid],
     [gtk.box.Box], and so on.
@@ -19045,7 +20654,10 @@ struct GtkViewport;
     [gtk.volume_button.VolumeButton] is a [gtk.scale_button.ScaleButton] subclass tailored for
     volume control.
     
-    ![An example GtkVolumeButton](volumebutton.png)
+    <picture>
+      <source srcset="volumebutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkVolumeButton" src="volumebutton.png">
+    </picture>
 
     Deprecated: This widget will be removed in GTK 5
 */
@@ -19058,8 +20670,7 @@ struct GtkVolumeButton
 /**
     The base class for all widgets.
     
-    [gtk.widget.Widget] is the base class all widgets in GTK derive from. It manages the
-    widget lifecycle, layout, states and style.
+    It manages the widget lifecycle, layout, states and style.
     
     ### Height-for-width Geometry Management
     
@@ -19116,7 +20727,7 @@ struct GtkVolumeButton
     Each widget, once allocated a size, will go on to first share the
     space in one orientation among its children and then request each child's
     height for its target allocated width or its width for allocated height,
-    depending. In this way a [gtk.widget.Widget] will typically be requested its size
+    depending. In this way a widget will typically be requested its size
     a number of times before actually being allocated a size. The size a
     widget is finally allocated can of course differ from the size it has
     requested. For this reason, [gtk.widget.Widget] caches a  small number of results
@@ -19647,8 +21258,7 @@ struct GtkWidgetClass
 struct GtkWidgetClassPrivate;
 
 /**
-    [gtk.widget_paintable.WidgetPaintable] is a [gdk.paintable.Paintable] that displays the contents
-    of a widget.
+    A [gdk.paintable.Paintable] that displays the contents of a widget.
     
     [gtk.widget_paintable.WidgetPaintable] will also take care of the widget not being in a
     state where it can be drawn (like when it isn't shown) and just draw
@@ -19681,9 +21291,12 @@ struct GtkWidgetPaintableClass
 struct GtkWidgetPrivate;
 
 /**
-    A [gtk.window.Window] is a toplevel window which can contain other widgets.
+    A toplevel window which can contain other widgets.
     
-    ![An example GtkWindow](window.png)
+    <picture>
+      <source srcset="window-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkWindow" src="window.png">
+    </picture>
     
     Windows normally have decorations that are under the control
     of the windowing system and allow the user to manipulate the window
@@ -19694,6 +21307,28 @@ struct GtkWidgetPrivate;
     The [gtk.window.Window] implementation of the [gtk.buildable.Buildable] interface supports
     setting a child as the titlebar by specifying “titlebar” as the “type”
     attribute of a `<child>` element.
+    
+    # Shortcuts and Gestures
+    
+    [gtk.window.Window] supports the following keyboard shortcuts:
+    
+    - <kbd>F10</kbd> activates the menubar, if present.
+    - <kbd>Alt</kbd> makes the mnemonics visible while pressed.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.window.Window.activateDefault]
+    - [gtk.window.Window.activateFocus]
+    - [gtk.window.Window.enableDebugging]
+    
+    # Actions
+    
+    [gtk.window.Window] defines a set of built-in actions:
+    
+    - `default.activate` activates the default widget.
+    - `window.minimize` minimizes the window.
+    - `window.toggle-maximized` maximizes or restores the window.
+    - `window.close` closes the window.
     
     # CSS nodes
     
@@ -19727,17 +21362,9 @@ struct GtkWidgetPrivate;
     
     # Accessibility
     
-    Until GTK 4.10, [gtk.window.Window] used the [gtk.types.AccessibleRole.Window] role.
+    [gtk.window.Window] uses the [gtk.types.AccessibleRole.Window] role.
     
-    Since GTK 4.12, [gtk.window.Window] uses the [gtk.types.AccessibleRole.Application] role.
-    
-    # Actions
-    
-    [gtk.window.Window] defines a set of built-in actions:
-    - `default.activate`: Activate the default widget.
-    - `window.minimize`: Minimize the window.
-    - `window.toggle-maximized`: Maximize or restore the window.
-    - `window.close`: Close the window.
+    From GTK 4.12 to 4.18, it used the [gtk.types.AccessibleRole.Application] role.
 */
 struct GtkWindow
 {
@@ -19775,9 +21402,7 @@ struct GtkWindowClass
   */
   extern(C) gboolean function(GtkWindow* window, gboolean toggle) enableDebugging;
 
-  /**
-      Class handler for the `GtkWindow::close-request` signal.
-  */
+  /** */
   extern(C) gboolean function(GtkWindow* window) closeRequest;
 
   /** */
@@ -19785,12 +21410,15 @@ struct GtkWindowClass
 }
 
 /**
-    [gtk.window_controls.WindowControls] shows window frame controls.
+    Shows window frame controls.
     
     Typical window frame controls are minimize, maximize and close buttons,
     and the window icon.
     
-    ![An example GtkWindowControls](windowcontrols.png)
+    <picture>
+      <source srcset="windowcontrols-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkWindowControls" src="windowcontrols.png">
+    </picture>
     
     [gtk.window_controls.WindowControls] only displays start or end side of the controls (see
     [gtk.window_controls.WindowControls.side]), so it's intended to be always used
@@ -19846,7 +21474,7 @@ struct GtkWindowControlsClass
 }
 
 /**
-    [gtk.window_group.WindowGroup] makes group of windows behave like separate applications.
+    Creates groups of windows that behave like separate applications.
     
     It achieves this by limiting the effect of GTK grabs and modality
     to windows in the same group.
@@ -19895,10 +21523,11 @@ struct GtkWindowGroupClass
 struct GtkWindowGroupPrivate;
 
 /**
-    [gtk.window_handle.WindowHandle] is a titlebar area widget.
+    Implements titlebar functionality for a window.
     
-    When added into a window, it can be dragged to move the window, and handles
-    right click, double click and middle click as expected of a titlebar.
+    When added into a window, it can be dragged to move the window,
+    and it implements the right click, double click and middle click
+    behaviors that are expected of a titlebar.
     
     # CSS nodes
     
@@ -19908,7 +21537,8 @@ struct GtkWindowGroupPrivate;
     
     Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.Group] role.
     
-    Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic] role.
+    Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic]
+    role.
 */
 struct GtkWindowHandle;
 
@@ -19978,6 +21608,8 @@ alias extern(C) gboolean function(GtkPrinter* printer, void* data) GtkPrinterFun
 alias extern(C) char* function(GtkScale* scale, double value, void* userData) GtkScaleFormatValueFunc;
 
 alias extern(C) gboolean function(GtkWidget* widget, GVariant* args, void* userData) GtkShortcutFunc;
+
+alias extern(C) void function(GtkTextBuffer* buffer, GtkTextBufferNotifyFlags flags, uint position, uint length, void* userData) GtkTextBufferCommitNotify;
 
 alias extern(C) gboolean function(dchar ch, void* userData) GtkTextCharPredicate;
 

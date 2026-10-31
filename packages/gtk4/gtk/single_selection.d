@@ -17,8 +17,7 @@ import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
-    [gtk.single_selection.SingleSelection] is a [gtk.selection_model.SelectionModel] that allows selecting a single
-    item.
+    A selection model that allows selecting a single item.
     
     Note that the selection is *persistent* -- if the selected item is removed
     and re-added in the same [gio.list_model.ListModel.itemsChanged] emission, it
@@ -267,7 +266,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       
       Note that setting [gtk.single_selection.SingleSelection.autoselect] will
       cause unselecting to not work, so it practically makes no sense
-      to set both at the same time the same time.
+      to set both at the same time.
   
       Params:
         canUnselect = true to allow unselecting
@@ -298,7 +297,8 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       value of the [gtk.single_selection.SingleSelection.autoselect] property:
       If it is set, no change will occur and the old item will stay
       selected. If it is unset, the selection will be unset and no item
-      will be selected.
+      will be selected. This also applies if [gtk.single_selection.SingleSelection.canUnselect]
+      is set to false.
   
       Params:
         position = the item to select or [gtk.types.INVALID_LIST_POSITION]

@@ -117,6 +117,7 @@ __gshared extern(C) nothrow
   GstSDPResult function(GstSDPMedia* media, uint port, uint numPorts) c_gst_sdp_media_set_port_info; ///
   GstSDPResult function(GstSDPMedia* media, const(char)* proto) c_gst_sdp_media_set_proto; ///
   GstSDPResult function(GstSDPMedia* media) c_gst_sdp_media_uninit; ///
+  GstSDPResult function(const(GstStructure)* structure, GstSDPMedia* media) c_gst_sdp_media_add_media_from_structure; ///
   GstSDPResult function(GstSDPMedia* media) c_gst_sdp_media_init; ///
   GstSDPResult function(GstSDPMedia** media) c_gst_sdp_media_new; ///
   GstSDPResult function(const(GstCaps)* caps, GstSDPMedia* media) c_gst_sdp_media_set_media_from_caps; ///
@@ -507,6 +508,9 @@ alias gst_sdp_media_set_proto = c_gst_sdp_media_set_proto;
 alias gst_sdp_media_uninit = c_gst_sdp_media_uninit;
 
 /** */
+alias gst_sdp_media_add_media_from_structure = c_gst_sdp_media_add_media_from_structure;
+
+/** */
 alias gst_sdp_media_init = c_gst_sdp_media_init;
 
 /** */
@@ -862,6 +866,7 @@ shared static this()
   gidLink(cast(void**)&gst_sdp_media_set_port_info, "gst_sdp_media_set_port_info", libs);
   gidLink(cast(void**)&gst_sdp_media_set_proto, "gst_sdp_media_set_proto", libs);
   gidLink(cast(void**)&gst_sdp_media_uninit, "gst_sdp_media_uninit", libs);
+  gidLink(cast(void**)&gst_sdp_media_add_media_from_structure, "gst_sdp_media_add_media_from_structure", libs);
   gidLink(cast(void**)&gst_sdp_media_init, "gst_sdp_media_init", libs);
   gidLink(cast(void**)&gst_sdp_media_new, "gst_sdp_media_new", libs);
   gidLink(cast(void**)&gst_sdp_media_set_media_from_caps, "gst_sdp_media_set_media_from_caps", libs);

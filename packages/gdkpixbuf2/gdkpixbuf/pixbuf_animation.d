@@ -31,6 +31,8 @@ import gobject.object;
     To display an animation you don't need to understand its
     representation, however; you just ask [gdkpixbuf.pixbuf.Pixbuf] what should
     be displayed at a given point in time.
+
+    Deprecated: Use a different image loading library for animatable assets
 */
 class PixbufAnimation : gobject.object.ObjectWrap
 {
@@ -84,6 +86,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
             name encoding
       Returns: A newly-created animation
       Throws: [ErrorWrap]
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromFile(string filename)
   {
@@ -107,6 +111,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
         resourcePath = the path of the resource file
       Returns: A newly-created animation
       Throws: [ErrorWrap]
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromResource(string resourcePath)
   {
@@ -139,6 +145,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object
       Returns: A newly-created animation
       Throws: [ErrorWrap]
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -159,6 +167,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
         asyncResult = a #GAsyncResult
       Returns: the newly created animation
       Throws: [ErrorWrap]
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStreamFinish(gio.async_result.AsyncResult asyncResult)
   {
@@ -185,6 +195,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
         stream = a #GInputStream from which to load the animation
         cancellable = optional #GCancellable object
         callback = a [gio.types.AsyncReadyCallback] to call when the pixbuf is loaded
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -210,6 +222,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
   /**
       Queries the height of the bounding box of a pixbuf animation.
       Returns: Height of the bounding box of the animation.
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   int getHeight() nothrow
   {
@@ -257,6 +271,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
       Params:
         startTime = time when the animation starts playing
       Returns: an iterator to move over the animation
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal* startTime = null) nothrow
   {
@@ -279,6 +295,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
       If an animation hasn't loaded any frames yet, this function will
       return `NULL`.
       Returns: unanimated image representing the animation
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   gdkpixbuf.pixbuf.Pixbuf getStaticImage() nothrow
   {
@@ -291,6 +309,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
   /**
       Queries the width of the bounding box of a pixbuf animation.
       Returns: Width of the bounding box of the animation.
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   int getWidth() nothrow
   {
@@ -307,6 +327,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
       return `TRUE`. Use [gdkpixbuf.pixbuf_animation.PixbufAnimation.getStaticImage] to retrieve
       the image.
       Returns: `TRUE` if the "animation" was really just an image
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   bool isStaticImage() nothrow
   {

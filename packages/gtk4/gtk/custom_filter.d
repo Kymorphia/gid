@@ -11,7 +11,7 @@ import gtk.filter;
 import gtk.types;
 
 /**
-    [gtk.custom_filter.CustomFilter] determines whether to include items with a callback.
+    Determines whether to include items with a callback.
 */
 class CustomFilter : gtk.filter.Filter
 {
@@ -51,10 +51,9 @@ class CustomFilter : gtk.filter.Filter
   }
 
   /**
-      Creates a new filter using the given match_func to filter
-      items.
+      Creates a new filter using the given function to filter items.
       
-      If match_func is null, the filter matches all items.
+      If match_func is `NULL`, the filter matches all items.
       
       If the filter func changes its filtering behavior,
       [gtk.filter.Filter.changed] needs to be called.
@@ -93,13 +92,13 @@ class CustomFilter : gtk.filter.Filter
   /**
       Sets the function used for filtering items.
       
-      If match_func is null, the filter matches all items.
+      If match_func is `NULL`, the filter matches all items.
       
       If the filter func changes its filtering behavior,
       [gtk.filter.Filter.changed] needs to be called.
       
-      If a previous function was set, its user_destroy will be
-      called now.
+      If a previous function was set, its user_destroy
+      will be called.
   
       Params:
         matchFunc = function to filter items

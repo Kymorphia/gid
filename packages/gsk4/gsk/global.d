@@ -10,12 +10,12 @@ import gsk.types;
 
 
 /**
-    Retrieves the [gsk.render_node.RenderNode] stored inside the given `value`, and acquires
-    a reference to it.
+    Retrieves the render node stored inside a [gobject.value.Value],
+    and acquires a reference to it.
 
     Params:
       value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
-    Returns: a [gsk.render_node.RenderNode]
+    Returns: the render node
 */
 gsk.render_node.RenderNode valueDupRenderNode(gobject.value.Value value) nothrow
 {
@@ -26,11 +26,11 @@ gsk.render_node.RenderNode valueDupRenderNode(gobject.value.Value value) nothrow
 }
 
 /**
-    Retrieves the [gsk.render_node.RenderNode] stored inside the given `value`.
+    Retrieves the render node stored inside a [gobject.value.Value].
 
     Params:
       value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
-    Returns: a [gsk.render_node.RenderNode]
+    Returns: the render node
 */
 gsk.render_node.RenderNode valueGetRenderNode(gobject.value.Value value) nothrow
 {
@@ -41,13 +41,14 @@ gsk.render_node.RenderNode valueGetRenderNode(gobject.value.Value value) nothrow
 }
 
 /**
-    Stores the given [gsk.render_node.RenderNode] inside `value`.
+    Stores the given render node inside a [gobject.value.Value].
     
-    The [gobject.value.Value] will acquire a reference to the `node`.
+    The [gobject.value.Value] will acquire a reference
+    to the render node.
 
     Params:
       value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
-      node = a [gsk.render_node.RenderNode]
+      node = a render node
 */
 void valueSetRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node) nothrow
 {
@@ -55,13 +56,14 @@ void valueSetRenderNode(gobject.value.Value value, gsk.render_node.RenderNode no
 }
 
 /**
-    Stores the given [gsk.render_node.RenderNode] inside `value`.
+    Stores the given render node inside a [gobject.value.Value].
     
-    This function transfers the ownership of the `node` to the [gobject.value.Value].
+    This function transfers the ownership of the
+    render node to the [gobject.value.Value].
 
     Params:
       value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
-      node = a [gsk.render_node.RenderNode]
+      node = a render node
 */
 void valueTakeRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node = null) nothrow
 {

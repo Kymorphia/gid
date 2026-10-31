@@ -55,10 +55,12 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
 
   /**
       Get `fileInfo` property.
-      Returns: A #GFileInfo containing the information found in the GZIP header
-        of the data stream processed, or null if the header was not yet
-        fully processed, is not present at all, or the compressor's
-        #GZlibDecompressor:format property is not [gio.types.ZlibCompressorFormat.Gzip].
+      Returns: A [gio.file_info.FileInfo] containing the information found in the gzip header
+        of the data stream processed.
+        
+        This will be `NULL` if the header was not yet fully processed, is not
+        present at all, or the compressor’s [gio.zlib_decompressor.ZlibDecompressor.format]
+        property is not `enum@Gio.ZlibCompressorFormat.GZIP`.
   */
   @property gio.file_info.FileInfo fileInfo() nothrow
   {
@@ -77,11 +79,11 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   mixin ConverterT!();
 
   /**
-      Creates a new #GZlibDecompressor.
+      Creates a new decompressor.
   
       Params:
-        format = The format to use for the compressed data
-      Returns: a new #GZlibDecompressor
+        format = the format to use for the compressed data
+      Returns: a new [gio.zlib_decompressor.ZlibDecompressor]
   */
   this(gio.types.ZlibCompressorFormat format) nothrow
   {
@@ -91,12 +93,8 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /**
-      Retrieves the #GFileInfo constructed from the GZIP header data
-      of compressed data processed by compressor, or null if decompressor's
-      #GZlibDecompressor:format property is not [gio.types.ZlibCompressorFormat.Gzip],
-      or the header data was not fully processed yet, or it not present in the
-      data stream at all.
-      Returns: a #GFileInfo, or null
+      Gets the [gio.zlib_decompressor.ZlibDecompressor.fileInfo] property.
+      Returns: file info from the gzip header, if available
   */
   gio.file_info.FileInfo getFileInfo() nothrow
   {

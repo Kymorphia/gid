@@ -14,8 +14,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [gdk.glcontext.GLContext] is an object representing a platform-specific
-    OpenGL draw context.
+    Represents a platform-specific OpenGL draw context.
     
     [gdk.glcontext.GLContext]s are created for a surface using
     [gdk.surface.Surface.createGlContext], and the context will match

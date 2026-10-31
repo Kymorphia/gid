@@ -140,7 +140,7 @@ interface AsyncInitable
         objectType = a #GType supporting #GAsyncInitable.
         nParameters = the number of parameters in parameters
         parameters = the parameters to use to construct the object
-        ioPriority = the [I/O priority][io-priority] of the operation
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the operation
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback to call when the initialization is
               finished
@@ -208,7 +208,7 @@ interface AsyncInitable
       any interface methods.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the operation
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the operation
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */

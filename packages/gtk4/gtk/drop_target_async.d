@@ -14,8 +14,7 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
-    [gtk.drop_target_async.DropTargetAsync] is an event controller to receive Drag-and-Drop
-    operations, asynchronously.
+    An event controller to receive Drag-and-Drop operations, asynchronously.
     
     It is the more complete but also more complex method of handling drop
     operations compared to [gtk.drop_target.DropTarget], and you should only use
@@ -161,7 +160,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_async_get_formats(cast(GtkDropTargetAsync*)this._cPtr);
-    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

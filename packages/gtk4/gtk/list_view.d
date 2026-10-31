@@ -25,7 +25,7 @@ import gtk.selection_model;
 import gtk.types;
 
 /**
-    [gtk.list_view.ListView] presents a large dynamic list of items.
+    Presents a large dynamic list of items.
     
     [gtk.list_view.ListView] uses its factory to generate one row widget for each visible
     item and shows them in a linear display, either vertically or horizontally.
@@ -95,6 +95,13 @@ import gtk.types;
       gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), list);
     ```
     
+    # Actions
+    
+    [gtk.list_view.ListView] defines a set of built-in actions:
+    
+    - `list.activate-item` activates the item at given position by emitting
+      the [gtk.list_view.ListView.activate] signal.
+    
     # CSS nodes
     
     ```
@@ -115,7 +122,7 @@ import gtk.types;
     rubberband selection, a node with name `rubberband` is used.
     
     The main listview node may also carry style classes to select
-    the style of [list presentation](ListContainers.html#list-styles):
+    the style of [list presentation](section-list-widget.html#list-styles):
     .rich-list, .navigation-sidebar or .data-table.
     
     # Accessibility
@@ -182,6 +189,8 @@ class ListView : gtk.list_base.ListBase
   /**
       Get `factory` property.
       Returns: Factory for populating list items.
+        
+        The factory must be for configuring [gtk.list_item.ListItem] objects.
   */
   @property gtk.list_item_factory.ListItemFactory factory() nothrow
   {
@@ -192,6 +201,8 @@ class ListView : gtk.list_base.ListBase
       Set `factory` property.
       Params:
         propval = Factory for populating list items.
+          
+          The factory must be for configuring [gtk.list_item.ListItem] objects.
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
@@ -201,6 +212,8 @@ class ListView : gtk.list_base.ListBase
   /**
       Get `headerFactory` property.
       Returns: Factory for creating header widgets.
+        
+        The factory must be for configuring [gtk.list_header.ListHeader] objects.
   */
   @property gtk.list_item_factory.ListItemFactory headerFactory() nothrow
   {
@@ -211,6 +224,8 @@ class ListView : gtk.list_base.ListBase
       Set `headerFactory` property.
       Params:
         propval = Factory for creating header widgets.
+          
+          The factory must be for configuring [gtk.list_header.ListHeader] objects.
   */
   @property void headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
@@ -364,9 +379,9 @@ class ListView : gtk.list_base.ListBase
   }
 
   /**
-      Returns whether the list box should show separators
+      Returns whether the listview should show separators
       between rows.
-      Returns: true if the list box shows separators
+      Returns: true if the listview shows separators
   */
   bool getShowSeparators() nothrow
   {
@@ -407,7 +422,8 @@ class ListView : gtk.list_base.ListBase
       If it isn't, then the changes will take effect once that happens.
   
       Params:
-        pos = position of the item
+        pos = position of the item. Must be less than the number of
+            items in the view.
         flags = actions to perform
         scroll = details of how to perform
             the scroll operation or null to scroll into view
@@ -421,7 +437,7 @@ class ListView : gtk.list_base.ListBase
       Sets whether selections can be changed by dragging with the mouse.
   
       Params:
-        enableRubberband = true to enable rubberband selection
+        enableRubberband = whether to enable rubberband selection
   */
   void setEnableRubberband(bool enableRubberband) nothrow
   {
@@ -443,7 +459,8 @@ class ListView : gtk.list_base.ListBase
       Sets the [gtk.list_item_factory.ListItemFactory] to use for populating the
       [gtk.list_header.ListHeader] objects used in section headers.
       
-      If this factory is set to null, the list will not show section headers.
+      If this factory is set to `NULL`, the list will not show
+      section headers.
   
       Params:
         factory = the factory to use
@@ -467,11 +484,11 @@ class ListView : gtk.list_base.ListBase
   }
 
   /**
-      Sets whether the list box should show separators
+      Sets whether the listview should show separators
       between rows.
   
       Params:
-        showSeparators = true to show separators
+        showSeparators = whether to show separators
   */
   void setShowSeparators(bool showSeparators) nothrow
   {
@@ -483,7 +500,7 @@ class ListView : gtk.list_base.ListBase
       selected on hover.
   
       Params:
-        singleClickActivate = true to activate items on single click
+        singleClickActivate = whether to activate items on single click
   */
   void setSingleClickActivate(bool singleClickActivate) nothrow
   {
@@ -491,7 +508,11 @@ class ListView : gtk.list_base.ListBase
   }
 
   /**
-      Sets the behavior of the <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> keys.
+      Sets the <kbd>Tab</kbd> key behavior.
+      
+      This influences how the <kbd>Tab</kbd> and
+      <kbd>Shift</kbd>+<kbd>Tab</kbd> keys move the
+      focus in the listview.
   
       Params:
         tabBehavior = The desired tab behavior
@@ -504,8 +525,10 @@ class ListView : gtk.list_base.ListBase
   /**
       Connect to `Activate` signal.
   
-      Emitted when a row has been activated by the user,
-        usually via activating the GtkListView|list.activate-item action.
+      Emitted when a row has been activated by the user.
+        
+        Activation usually happens via the list.activate-item action of
+        the [gtk.list_view.ListView].
         
         This allows for a convenient way to handle activation in a listview.
         See [gtk.list_item.ListItem.setActivatable] for details on how to use
@@ -577,6 +600,8 @@ class ListViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
       Set `factory` property.
       Params:
         propval = Factory for populating list items.
+          
+          The factory must be for configuring [gtk.list_item.ListItem] objects.
       Returns: Builder instance for fluent chaining
   */
   T factory(gtk.list_item_factory.ListItemFactory propval) nothrow
@@ -588,6 +613,8 @@ class ListViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
       Set `headerFactory` property.
       Params:
         propval = Factory for creating header widgets.
+          
+          The factory must be for configuring [gtk.list_header.ListHeader] objects.
       Returns: Builder instance for fluent chaining
   */
   T headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow

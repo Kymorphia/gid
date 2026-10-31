@@ -93,7 +93,7 @@ alias Range = SoupRange;
 // Callbacks
 
 /**
-    Callback used by #SoupAuthDomainBasic for authentication purposes.
+    Callback used by [soup.auth_domain_basic.AuthDomainBasic] for authentication purposes.
     
     The application should verify that username and password and valid
     and return true or false.
@@ -119,7 +119,7 @@ alias Range = SoupRange;
 alias AuthDomainBasicAuthCallback = bool delegate(soup.auth_domain_basic.AuthDomainBasic domain, soup.server_message.ServerMessage msg, string username, string password);
 
 /**
-    Callback used by #SoupAuthDomainDigest for authentication purposes.
+    Callback used by [soup.auth_domain_digest.AuthDomainDigest] for authentication purposes.
     
     The application should look up username in its password database,
     and return the corresponding encoded password (see
@@ -136,7 +136,7 @@ alias AuthDomainBasicAuthCallback = bool delegate(soup.auth_domain_basic.AuthDom
 alias AuthDomainDigestAuthCallback = string delegate(soup.auth_domain_digest.AuthDomainDigest domain, soup.server_message.ServerMessage msg, string username);
 
 /**
-    The prototype for a #SoupAuthDomain filter.
+    The prototype for a [soup.auth_domain.AuthDomain] filter.
     
     See [soup.auth_domain.AuthDomain.setFilter] for details.
 
@@ -148,7 +148,7 @@ alias AuthDomainDigestAuthCallback = string delegate(soup.auth_domain_digest.Aut
 alias AuthDomainFilter = bool delegate(soup.auth_domain.AuthDomain domain, soup.server_message.ServerMessage msg);
 
 /**
-    The prototype for a #SoupAuthDomain generic authentication callback.
+    The prototype for a [soup.auth_domain.AuthDomain] generic authentication callback.
     
     The callback should look up the user's password, call
     [soup.auth_domain.AuthDomain.checkPassword], and use the return value from that method
@@ -167,7 +167,7 @@ alias AuthDomainFilter = bool delegate(soup.auth_domain.AuthDomain domain, soup.
 
     Params:
       domain = a #SoupAuthDomain
-      msg = the #SoupServerMessage being authenticated
+      msg = the [soup.server_message.ServerMessage] being authenticated
       username = the username from msg
     Returns: true if msg is authenticated, false if not.
 */
@@ -252,7 +252,7 @@ alias MessageHeadersForeachFunc = void delegate(string name, string value);
 alias ServerCallback = void delegate(soup.server.Server server, soup.server_message.ServerMessage msg, string path, string[string] query);
 
 /**
-    A callback used to handle WebSocket requests to a #SoupServer.
+    A callback used to handle WebSocket requests to a [soup.server.Server].
     
     The callback will be invoked after sending the handshake response back to the
     client (and is only invoked if the handshake was successful).
@@ -332,14 +332,14 @@ enum MAJOR_VERSION = 3;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 5;
+enum MICRO_VERSION = 6;
 
 /**
     Like `func@get_minor_version`, but from the headers used at
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MINOR_VERSION = 4;
+enum MINOR_VERSION = 6;
 
 /**
     A macro that should be defined by the user prior to including

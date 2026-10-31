@@ -8,9 +8,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    A [gtk.requisition.Requisition] represents the desired size of a widget. See
-    [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
-    more information.
+    Represents the desired size of a widget.
+    
+    See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management)
+    for more information.
 */
 struct Requisition
 {

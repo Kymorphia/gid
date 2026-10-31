@@ -20,7 +20,7 @@ public import gobject.object;
 /**
     [gio.drive.Drive] represents a piece of hardware connected to the machine.
     It’s generally only created for removable hardware or hardware with
-    removable media.
+    removable media. For example, an optical disc drive, or a USB flash drive.
     
     [gio.drive.Drive] is a container class for [gio.volume.Volume] objects that stem from
     the same piece of media. As such, [gio.drive.Drive] abstracts a drive with

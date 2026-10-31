@@ -142,6 +142,7 @@ __gshared extern(C) nothrow
   // Bytes
   GType function() c_g_bytes_get_type; ///
   GBytes* function(const(void)* data, size_t size) c_g_bytes_new; ///
+  GBytes* function(GBytes* bytes, size_t offset, size_t length) c_g_bytes_new_from_bytes; ///
   GBytes* function(const(void)* data, size_t size) c_g_bytes_new_static; ///
   GBytes* function(void* data, size_t size) c_g_bytes_new_take; ///
   GBytes* function(const(void)* data, size_t size, GDestroyNotify freeFunc, void* userData) c_g_bytes_new_with_free_func; ///
@@ -151,7 +152,6 @@ __gshared extern(C) nothrow
   const(void)* function(GBytes* bytes, size_t elementSize, size_t offset, size_t nElements) c_g_bytes_get_region; ///
   size_t function(GBytes* bytes) c_g_bytes_get_size; ///
   uint function(GBytes* bytes) c_g_bytes_hash; ///
-  GBytes* function(GBytes* bytes, size_t offset, size_t length) c_g_bytes_new_from_bytes; ///
   GBytes* function(GBytes* bytes) c_g_bytes_ref; ///
   void function(GBytes* bytes) c_g_bytes_unref; ///
   GByteArray* function(GBytes* bytes) c_g_bytes_unref_to_array; ///
@@ -218,6 +218,7 @@ __gshared extern(C) nothrow
   uint function(const(GDate)* date) c_g_date_get_monday_week_of_year; ///
   GDateMonth function(const(GDate)* date) c_g_date_get_month; ///
   uint function(const(GDate)* date) c_g_date_get_sunday_week_of_year; ///
+  uint function(const(GDate)* date, GDateWeekday firstDayOfWeek) c_g_date_get_week_of_year; ///
   GDateWeekday function(const(GDate)* date) c_g_date_get_weekday; ///
   GDateYear function(const(GDate)* date) c_g_date_get_year; ///
   gboolean function(const(GDate)* date) c_g_date_is_first_of_month; ///
@@ -240,6 +241,7 @@ __gshared extern(C) nothrow
   ubyte function(GDateMonth month, GDateYear year) c_g_date_get_days_in_month; ///
   ubyte function(GDateYear year) c_g_date_get_monday_weeks_in_year; ///
   ubyte function(GDateYear year) c_g_date_get_sunday_weeks_in_year; ///
+  ubyte function(GDateYear year, GDateWeekday firstDayOfWeek) c_g_date_get_weeks_in_year; ///
   gboolean function(GDateYear year) c_g_date_is_leap_year; ///
   size_t function(char* s, size_t slen, const(char)* format, const(GDate)* date) c_g_date_strftime; ///
   gboolean function(GDateDay day) c_g_date_valid_day; ///
@@ -550,6 +552,7 @@ __gshared extern(C) nothrow
   void function(GMainContext* context) c_g_main_context_pop_thread_default; ///
   gboolean function(GMainContext* context, int* priority) c_g_main_context_prepare; ///
   void function(GMainContext* context) c_g_main_context_push_thread_default; ///
+  GMainContextPusher* function(GMainContext* mainContext) c_g_main_context_pusher_new; ///
   int function(GMainContext* context, int maxPriority, int* timeout, GPollFD* fds, int nFds) c_g_main_context_query; ///
   GMainContext* function(GMainContext* context) c_g_main_context_ref; ///
   void function(GMainContext* context) c_g_main_context_release; ///
@@ -560,6 +563,7 @@ __gshared extern(C) nothrow
   void function(GMainContext* context) c_g_main_context_wakeup; ///
   GMainContext* function() c_g_main_context_default; ///
   GMainContext* function() c_g_main_context_get_thread_default; ///
+  void function(GMainContextPusher* pusher) c_g_main_context_pusher_free; ///
   GMainContext* function() c_g_main_context_ref_thread_default; ///
 
   // MainLoop
@@ -590,7 +594,9 @@ __gshared extern(C) nothrow
   void function(GMarkupParseContext* context) c_g_markup_parse_context_free; ///
   const(char)* function(GMarkupParseContext* context) c_g_markup_parse_context_get_element; ///
   const(GSList)* function(GMarkupParseContext* context) c_g_markup_parse_context_get_element_stack; ///
+  size_t function(GMarkupParseContext* context) c_g_markup_parse_context_get_offset; ///
   void function(GMarkupParseContext* context, int* lineNumber, int* charNumber) c_g_markup_parse_context_get_position; ///
+  void function(GMarkupParseContext* context, size_t* lineNumber, size_t* charNumber, size_t* offset) c_g_markup_parse_context_get_tag_start; ///
   void* function(GMarkupParseContext* context) c_g_markup_parse_context_get_user_data; ///
   gboolean function(GMarkupParseContext* context, const(char)* text, ptrdiff_t textLen, GError** _err) c_g_markup_parse_context_parse; ///
   void* function(GMarkupParseContext* context) c_g_markup_parse_context_pop; ///
@@ -753,7 +759,7 @@ __gshared extern(C) nothrow
   gboolean function(GPtrArray* haystack, const(void)* needle, uint* index) c_g_ptr_array_find; ///
   gboolean function(GPtrArray* haystack, const(void)* needle, GEqualFunc equalFunc, uint* index) c_g_ptr_array_find_with_equal_func; ///
   void function(GPtrArray* array, GFunc func, void* userData) c_g_ptr_array_foreach; ///
-  void** function(GPtrArray* array, gboolean freeSeg) c_g_ptr_array_free; ///
+  void** function(GPtrArray* array, gboolean freeSegment) c_g_ptr_array_free; ///
   void function(GPtrArray* array, int index, void* data) c_g_ptr_array_insert; ///
   gboolean function(GPtrArray* array) c_g_ptr_array_is_null_terminated; ///
   GPtrArray* function() c_g_ptr_array_new; ///
@@ -1004,6 +1010,7 @@ __gshared extern(C) nothrow
   void* function(GSource* source, int fd, GIOCondition events) c_g_source_add_unix_fd; ///
   uint function(GSource* source, GMainContext* context) c_g_source_attach; ///
   void function(GSource* source) c_g_source_destroy; ///
+  GMainContext* function(GSource* source) c_g_source_dup_context; ///
   gboolean function(GSource* source) c_g_source_get_can_recurse; ///
   GMainContext* function(GSource* source) c_g_source_get_context; ///
   void function(GSource* source, GTimeVal* timeval) c_g_source_get_current_time; ///
@@ -1080,6 +1087,7 @@ __gshared extern(C) nothrow
   GString* function(GString* string_) c_g_string_ascii_down; ///
   GString* function(GString* string_) c_g_string_ascii_up; ///
   GString* function(GString* string_, const(char)* rval) c_g_string_assign; ///
+  GString* function(GString* string_) c_g_string_copy; ///
   GString* function(GString* string_) c_g_string_down; ///
   gboolean function(const(GString)* v, const(GString)* v2) c_g_string_equal; ///
   GString* function(GString* string_, ptrdiff_t pos, ptrdiff_t len) c_g_string_erase; ///
@@ -1122,6 +1130,7 @@ __gshared extern(C) nothrow
   GStrvBuilder* function(GStrvBuilder* builder) c_g_strv_builder_ref; ///
   void function(GStrvBuilder* builder, char* value) c_g_strv_builder_take; ///
   void function(GStrvBuilder* builder) c_g_strv_builder_unref; ///
+  GStrv function(GStrvBuilder* builder) c_g_strv_builder_unref_to_strv; ///
 
   // TestCase
   void function(GTestCase* testCase) c_g_test_case_free; ///
@@ -1144,6 +1153,7 @@ __gshared extern(C) nothrow
   GType function() c_g_thread_get_type; ///
   GThread* function(const(char)* name, GThreadFunc func, void* data) c_g_thread_new; ///
   GThread* function(const(char)* name, GThreadFunc func, void* data, GError** _err) c_g_thread_try_new; ///
+  const(char)* function(GThread* thread) c_g_thread_get_name; ///
   void* function(GThread* thread) c_g_thread_join; ///
   GThread* function(GThread* thread) c_g_thread_ref; ///
   void function(GThread* thread, GThreadPriority priority) c_g_thread_set_priority; ///
@@ -1401,6 +1411,7 @@ __gshared extern(C) nothrow
   void function(GVariantBuilder* builder) c_g_variant_builder_close; ///
   GVariant* function(GVariantBuilder* builder) c_g_variant_builder_end; ///
   void function(GVariantBuilder* builder, const(GVariantType)* type) c_g_variant_builder_init; ///
+  void function(GVariantBuilder* builder, const(GVariantType)* type) c_g_variant_builder_init_static; ///
   void function(GVariantBuilder* builder, const(GVariantType)* type) c_g_variant_builder_open; ///
   GVariantBuilder* function(GVariantBuilder* builder) c_g_variant_builder_ref; ///
   void function(GVariantBuilder* builder) c_g_variant_builder_unref; ///
@@ -1533,11 +1544,13 @@ __gshared extern(C) nothrow
   size_t function(const(ubyte)* in_, size_t len, gboolean breakLines, char* out_, int* state, int* save) c_g_base64_encode_step; ///
   const(char)* function(const(char)* fileName) c_g_basename; ///
   void function(int* address, int lockBit) c_g_bit_lock; ///
+  void function(int* address, uint lockBit, int* outVal) c_g_bit_lock_and_get; ///
   int function(gulong mask, int nthBit) c_g_bit_nth_lsf; ///
   int function(gulong mask, int nthBit) c_g_bit_nth_msf; ///
   uint function(gulong number) c_g_bit_storage; ///
   gboolean function(int* address, int lockBit) c_g_bit_trylock; ///
   void function(int* address, int lockBit) c_g_bit_unlock; ///
+  void function(int* address, uint lockBit, int newVal, int preserveMask) c_g_bit_unlock_and_set; ///
   void function() c_g_blow_chunks; ///
   char* function(const(char)* firstElement,  ...) c_g_build_filename; ///
   char* function(const(char)* firstElement, void** args) c_g_build_filename_valist; ///
@@ -1557,7 +1570,6 @@ __gshared extern(C) nothrow
   void function(void** pp, GDestroyNotify destroy) c_g_clear_pointer; ///
   void function(GSList** slistPtr, GDestroyNotify destroy) c_g_clear_slist; ///
   gboolean function(int fd, GError** _err) c_g_close; ///
-  int function(int lowfd) c_g_closefrom; ///
   char* function(GChecksumType checksumType, GBytes* data) c_g_compute_checksum_for_bytes; ///
   char* function(GChecksumType checksumType, const(ubyte)* data, size_t length) c_g_compute_checksum_for_data; ///
   char* function(GChecksumType checksumType, const(char)* str, ptrdiff_t length) c_g_compute_checksum_for_string; ///
@@ -1599,7 +1611,6 @@ __gshared extern(C) nothrow
   const(char)* function(char** envp, const(char)* variable) c_g_environ_getenv; ///
   char** function(char** envp, const(char)* variable, const(char)* value, gboolean overwrite) c_g_environ_setenv; ///
   char** function(char** envp, const(char)* variable) c_g_environ_unsetenv; ///
-  int function(int lowfd) c_g_fdwalk_set_cloexec; ///
   GFileError function(int errNo) c_g_file_error_from_errno; ///
   GQuark function() c_g_file_error_quark; ///
   gboolean function(const(char)* filename, ubyte** contents, size_t* length, GError** _err) c_g_file_get_contents; ///
@@ -1638,6 +1649,7 @@ __gshared extern(C) nothrow
   const(char*)* function(const(char)* categoryName) c_g_get_language_names_with_category; ///
   char** function(const(char)* locale) c_g_get_locale_variants; ///
   long function() c_g_get_monotonic_time; ///
+  ulong function() c_g_get_monotonic_time_ns; ///
   uint function() c_g_get_num_processors; ///
   char* function(const(char)* keyName) c_g_get_os_info; ///
   const(char)* function() c_g_get_prgname; ///
@@ -1679,6 +1691,7 @@ __gshared extern(C) nothrow
   char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_locale_to_utf8; ///
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format,  ...) c_g_log; ///
   void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* unusedData) c_g_log_default_handler; ///
+  GLogLevelFlags function() c_g_log_get_always_fatal; ///
   gboolean function() c_g_log_get_debug_enabled; ///
   void function(const(char)* logDomain, uint handlerId) c_g_log_remove_handler; ///
   GLogLevelFlags function(GLogLevelFlags fatalMask) c_g_log_set_always_fatal; ///
@@ -1779,6 +1792,7 @@ __gshared extern(C) nothrow
   void function(int* rc) c_g_ref_count_inc; ///
   void function(int* rc) c_g_ref_count_init; ///
   char* function(char* str) c_g_ref_string_acquire; ///
+  gboolean function(const(char)* str1, const(char)* str2) c_g_ref_string_equal; ///
   size_t function(char* str) c_g_ref_string_length; ///
   char* function(const(char)* str) c_g_ref_string_new; ///
   char* function(const(char)* str) c_g_ref_string_new_intern; ///
@@ -1809,6 +1823,7 @@ __gshared extern(C) nothrow
   const(long)* function(GSliceConfig ckey, long address, uint* nValues) c_g_slice_get_config_state; ///
   void function(GSliceConfig ckey, long value) c_g_slice_set_config; ///
   int function(char* string_, gulong n, const(char)* format,  ...) c_g_snprintf; ///
+  void function(void* array, size_t nElements, size_t elementSize, GCompareDataFunc compareFunc, void* userData) c_g_sort_array; ///
   uint function(uint num) c_g_spaced_primes_closest; ///
   gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, GError** _err) c_g_spawn_async; ///
   gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int stdinFd, int stdoutFd, int stderrFd, GError** _err) c_g_spawn_async_with_fds; ///
@@ -1916,6 +1931,7 @@ __gshared extern(C) nothrow
   void function(const(char)* domain, const(char)* file, int line, const(char)* func, ulong assertionFlags, const(char)* pattern) c_g_test_trap_assertions; ///
   gboolean function(ulong usecTimeout, GTestTrapFlags testTrapFlags) c_g_test_trap_fork; ///
   gboolean function() c_g_test_trap_has_passed; ///
+  gboolean function() c_g_test_trap_has_skipped; ///
   gboolean function() c_g_test_trap_reached_timeout; ///
   void function(const(char)* testPath, ulong usecTimeout, GTestSubprocessFlags testFlags) c_g_test_trap_subprocess; ///
   void function(const(char)* testPath, const(char*)* envp, ulong usecTimeout, GTestSubprocessFlags testFlags) c_g_test_trap_subprocess_with_envp; ///
@@ -1969,16 +1985,6 @@ __gshared extern(C) nothrow
   int function(dchar c) c_g_unichar_xdigit_value; ///
   dchar* function(dchar ch, size_t* resultLen) c_g_unicode_canonical_decomposition; ///
   void function(dchar* string_, size_t len) c_g_unicode_canonical_ordering; ///
-  GQuark function() c_g_unix_error_quark; ///
-  uint function(int fd, GIOCondition condition, GUnixFDSourceFunc function_, void* userData) c_g_unix_fd_add; ///
-  uint function(int priority, int fd, GIOCondition condition, GUnixFDSourceFunc function_, void* userData, GDestroyNotify notify) c_g_unix_fd_add_full; ///
-  GSource* function(int fd, GIOCondition condition) c_g_unix_fd_source_new; ///
-  void* function(const(char)* userName, GError** _err) c_g_unix_get_passwd_entry; ///
-  gboolean function(int* fds, int flags, GError** _err) c_g_unix_open_pipe; ///
-  gboolean function(int fd, gboolean nonblock, GError** _err) c_g_unix_set_fd_nonblocking; ///
-  uint function(int signum, GSourceFunc handler, void* userData) c_g_unix_signal_add; ///
-  uint function(int priority, int signum, GSourceFunc handler, void* userData, GDestroyNotify notify) c_g_unix_signal_add_full; ///
-  GSource* function(int signum) c_g_unix_signal_source_new; ///
   int function(const(char)* filename) c_g_unlink; ///
   void function(const(char)* variable) c_g_unsetenv; ///
   void function(gulong microseconds) c_g_usleep; ///
@@ -2402,6 +2408,9 @@ alias g_bytes_get_type = c_g_bytes_get_type;
 alias g_bytes_new = c_g_bytes_new;
 
 /** */
+alias g_bytes_new_from_bytes = c_g_bytes_new_from_bytes;
+
+/** */
 alias g_bytes_new_static = c_g_bytes_new_static;
 
 /** */
@@ -2427,9 +2436,6 @@ alias g_bytes_get_size = c_g_bytes_get_size;
 
 /** */
 alias g_bytes_hash = c_g_bytes_hash;
-
-/** */
-alias g_bytes_new_from_bytes = c_g_bytes_new_from_bytes;
 
 /** */
 alias g_bytes_ref = c_g_bytes_ref;
@@ -2610,6 +2616,9 @@ alias g_date_get_month = c_g_date_get_month;
 alias g_date_get_sunday_week_of_year = c_g_date_get_sunday_week_of_year;
 
 /** */
+alias g_date_get_week_of_year = c_g_date_get_week_of_year;
+
+/** */
 alias g_date_get_weekday = c_g_date_get_weekday;
 
 /** */
@@ -2674,6 +2683,9 @@ alias g_date_get_monday_weeks_in_year = c_g_date_get_monday_weeks_in_year;
 
 /** */
 alias g_date_get_sunday_weeks_in_year = c_g_date_get_sunday_weeks_in_year;
+
+/** */
+alias g_date_get_weeks_in_year = c_g_date_get_weeks_in_year;
 
 /** */
 alias g_date_is_leap_year = c_g_date_is_leap_year;
@@ -3558,6 +3570,9 @@ alias g_main_context_prepare = c_g_main_context_prepare;
 alias g_main_context_push_thread_default = c_g_main_context_push_thread_default;
 
 /** */
+alias g_main_context_pusher_new = c_g_main_context_pusher_new;
+
+/** */
 alias g_main_context_query = c_g_main_context_query;
 
 /** */
@@ -3586,6 +3601,9 @@ alias g_main_context_default = c_g_main_context_default;
 
 /** */
 alias g_main_context_get_thread_default = c_g_main_context_get_thread_default;
+
+/** */
+alias g_main_context_pusher_free = c_g_main_context_pusher_free;
 
 /** */
 alias g_main_context_ref_thread_default = c_g_main_context_ref_thread_default;
@@ -3666,7 +3684,13 @@ alias g_markup_parse_context_get_element = c_g_markup_parse_context_get_element;
 alias g_markup_parse_context_get_element_stack = c_g_markup_parse_context_get_element_stack;
 
 /** */
+alias g_markup_parse_context_get_offset = c_g_markup_parse_context_get_offset;
+
+/** */
 alias g_markup_parse_context_get_position = c_g_markup_parse_context_get_position;
+
+/** */
+alias g_markup_parse_context_get_tag_start = c_g_markup_parse_context_get_tag_start;
 
 /** */
 alias g_markup_parse_context_get_user_data = c_g_markup_parse_context_get_user_data;
@@ -4816,6 +4840,9 @@ alias g_source_attach = c_g_source_attach;
 alias g_source_destroy = c_g_source_destroy;
 
 /** */
+alias g_source_dup_context = c_g_source_dup_context;
+
+/** */
 alias g_source_get_can_recurse = c_g_source_get_can_recurse;
 
 /** */
@@ -5024,6 +5051,9 @@ alias g_string_ascii_up = c_g_string_ascii_up;
 alias g_string_assign = c_g_string_assign;
 
 /** */
+alias g_string_copy = c_g_string_copy;
+
+/** */
 alias g_string_down = c_g_string_down;
 
 /** */
@@ -5141,6 +5171,9 @@ alias g_strv_builder_take = c_g_strv_builder_take;
 /** */
 alias g_strv_builder_unref = c_g_strv_builder_unref;
 
+/** */
+alias g_strv_builder_unref_to_strv = c_g_strv_builder_unref_to_strv;
+
 // TestCase
 
 /** */
@@ -5186,6 +5219,9 @@ alias g_thread_new = c_g_thread_new;
 
 /** */
 alias g_thread_try_new = c_g_thread_try_new;
+
+/** */
+alias g_thread_get_name = c_g_thread_get_name;
 
 /** */
 alias g_thread_join = c_g_thread_join;
@@ -5911,6 +5947,9 @@ alias g_variant_builder_end = c_g_variant_builder_end;
 alias g_variant_builder_init = c_g_variant_builder_init;
 
 /** */
+alias g_variant_builder_init_static = c_g_variant_builder_init_static;
+
+/** */
 alias g_variant_builder_open = c_g_variant_builder_open;
 
 /** */
@@ -6291,6 +6330,9 @@ alias g_basename = c_g_basename;
 alias g_bit_lock = c_g_bit_lock;
 
 /** */
+alias g_bit_lock_and_get = c_g_bit_lock_and_get;
+
+/** */
 alias g_bit_nth_lsf = c_g_bit_nth_lsf;
 
 /** */
@@ -6304,6 +6346,9 @@ alias g_bit_trylock = c_g_bit_trylock;
 
 /** */
 alias g_bit_unlock = c_g_bit_unlock;
+
+/** */
+alias g_bit_unlock_and_set = c_g_bit_unlock_and_set;
 
 /** */
 alias g_blow_chunks = c_g_blow_chunks;
@@ -6361,9 +6406,6 @@ alias g_clear_slist = c_g_clear_slist;
 
 /** */
 alias g_close = c_g_close;
-
-/** */
-alias g_closefrom = c_g_closefrom;
 
 /** */
 alias g_compute_checksum_for_bytes = c_g_compute_checksum_for_bytes;
@@ -6489,9 +6531,6 @@ alias g_environ_setenv = c_g_environ_setenv;
 alias g_environ_unsetenv = c_g_environ_unsetenv;
 
 /** */
-alias g_fdwalk_set_cloexec = c_g_fdwalk_set_cloexec;
-
-/** */
 alias g_file_error_from_errno = c_g_file_error_from_errno;
 
 /** */
@@ -6604,6 +6643,9 @@ alias g_get_locale_variants = c_g_get_locale_variants;
 
 /** */
 alias g_get_monotonic_time = c_g_get_monotonic_time;
+
+/** */
+alias g_get_monotonic_time_ns = c_g_get_monotonic_time_ns;
 
 /** */
 alias g_get_num_processors = c_g_get_num_processors;
@@ -6727,6 +6769,9 @@ alias g_log = c_g_log;
 
 /** */
 alias g_log_default_handler = c_g_log_default_handler;
+
+/** */
+alias g_log_get_always_fatal = c_g_log_get_always_fatal;
 
 /** */
 alias g_log_get_debug_enabled = c_g_log_get_debug_enabled;
@@ -7029,6 +7074,9 @@ alias g_ref_count_init = c_g_ref_count_init;
 alias g_ref_string_acquire = c_g_ref_string_acquire;
 
 /** */
+alias g_ref_string_equal = c_g_ref_string_equal;
+
+/** */
 alias g_ref_string_length = c_g_ref_string_length;
 
 /** */
@@ -7117,6 +7165,9 @@ alias g_slice_set_config = c_g_slice_set_config;
 
 /** */
 alias g_snprintf = c_g_snprintf;
+
+/** */
+alias g_sort_array = c_g_sort_array;
 
 /** */
 alias g_spaced_primes_closest = c_g_spaced_primes_closest;
@@ -7440,6 +7491,9 @@ alias g_test_trap_fork = c_g_test_trap_fork;
 alias g_test_trap_has_passed = c_g_test_trap_has_passed;
 
 /** */
+alias g_test_trap_has_skipped = c_g_test_trap_has_skipped;
+
+/** */
 alias g_test_trap_reached_timeout = c_g_test_trap_reached_timeout;
 
 /** */
@@ -7597,36 +7651,6 @@ alias g_unicode_canonical_decomposition = c_g_unicode_canonical_decomposition;
 
 /** */
 alias g_unicode_canonical_ordering = c_g_unicode_canonical_ordering;
-
-/** */
-alias g_unix_error_quark = c_g_unix_error_quark;
-
-/** */
-alias g_unix_fd_add = c_g_unix_fd_add;
-
-/** */
-alias g_unix_fd_add_full = c_g_unix_fd_add_full;
-
-/** */
-alias g_unix_fd_source_new = c_g_unix_fd_source_new;
-
-/** */
-alias g_unix_get_passwd_entry = c_g_unix_get_passwd_entry;
-
-/** */
-alias g_unix_open_pipe = c_g_unix_open_pipe;
-
-/** */
-alias g_unix_set_fd_nonblocking = c_g_unix_set_fd_nonblocking;
-
-/** */
-alias g_unix_signal_add = c_g_unix_signal_add;
-
-/** */
-alias g_unix_signal_add_full = c_g_unix_signal_add_full;
-
-/** */
-alias g_unix_signal_source_new = c_g_unix_signal_source_new;
 
 /** */
 alias g_unlink = c_g_unlink;
@@ -7895,6 +7919,7 @@ shared static this()
   // Bytes
   gidLink(cast(void**)&g_bytes_get_type, "g_bytes_get_type", libs);
   gidLink(cast(void**)&g_bytes_new, "g_bytes_new", libs);
+  gidLink(cast(void**)&g_bytes_new_from_bytes, "g_bytes_new_from_bytes", libs);
   gidLink(cast(void**)&g_bytes_new_static, "g_bytes_new_static", libs);
   gidLink(cast(void**)&g_bytes_new_take, "g_bytes_new_take", libs);
   gidLink(cast(void**)&g_bytes_new_with_free_func, "g_bytes_new_with_free_func", libs);
@@ -7904,7 +7929,6 @@ shared static this()
   gidLink(cast(void**)&g_bytes_get_region, "g_bytes_get_region", libs);
   gidLink(cast(void**)&g_bytes_get_size, "g_bytes_get_size", libs);
   gidLink(cast(void**)&g_bytes_hash, "g_bytes_hash", libs);
-  gidLink(cast(void**)&g_bytes_new_from_bytes, "g_bytes_new_from_bytes", libs);
   gidLink(cast(void**)&g_bytes_ref, "g_bytes_ref", libs);
   gidLink(cast(void**)&g_bytes_unref, "g_bytes_unref", libs);
   gidLink(cast(void**)&g_bytes_unref_to_array, "g_bytes_unref_to_array", libs);
@@ -7971,6 +7995,7 @@ shared static this()
   gidLink(cast(void**)&g_date_get_monday_week_of_year, "g_date_get_monday_week_of_year", libs);
   gidLink(cast(void**)&g_date_get_month, "g_date_get_month", libs);
   gidLink(cast(void**)&g_date_get_sunday_week_of_year, "g_date_get_sunday_week_of_year", libs);
+  gidLink(cast(void**)&g_date_get_week_of_year, "g_date_get_week_of_year", libs);
   gidLink(cast(void**)&g_date_get_weekday, "g_date_get_weekday", libs);
   gidLink(cast(void**)&g_date_get_year, "g_date_get_year", libs);
   gidLink(cast(void**)&g_date_is_first_of_month, "g_date_is_first_of_month", libs);
@@ -7993,6 +8018,7 @@ shared static this()
   gidLink(cast(void**)&g_date_get_days_in_month, "g_date_get_days_in_month", libs);
   gidLink(cast(void**)&g_date_get_monday_weeks_in_year, "g_date_get_monday_weeks_in_year", libs);
   gidLink(cast(void**)&g_date_get_sunday_weeks_in_year, "g_date_get_sunday_weeks_in_year", libs);
+  gidLink(cast(void**)&g_date_get_weeks_in_year, "g_date_get_weeks_in_year", libs);
   gidLink(cast(void**)&g_date_is_leap_year, "g_date_is_leap_year", libs);
   gidLink(cast(void**)&g_date_strftime, "g_date_strftime", libs);
   gidLink(cast(void**)&g_date_valid_day, "g_date_valid_day", libs);
@@ -8303,6 +8329,7 @@ shared static this()
   gidLink(cast(void**)&g_main_context_pop_thread_default, "g_main_context_pop_thread_default", libs);
   gidLink(cast(void**)&g_main_context_prepare, "g_main_context_prepare", libs);
   gidLink(cast(void**)&g_main_context_push_thread_default, "g_main_context_push_thread_default", libs);
+  gidLink(cast(void**)&g_main_context_pusher_new, "g_main_context_pusher_new", libs);
   gidLink(cast(void**)&g_main_context_query, "g_main_context_query", libs);
   gidLink(cast(void**)&g_main_context_ref, "g_main_context_ref", libs);
   gidLink(cast(void**)&g_main_context_release, "g_main_context_release", libs);
@@ -8313,6 +8340,7 @@ shared static this()
   gidLink(cast(void**)&g_main_context_wakeup, "g_main_context_wakeup", libs);
   gidLink(cast(void**)&g_main_context_default, "g_main_context_default", libs);
   gidLink(cast(void**)&g_main_context_get_thread_default, "g_main_context_get_thread_default", libs);
+  gidLink(cast(void**)&g_main_context_pusher_free, "g_main_context_pusher_free", libs);
   gidLink(cast(void**)&g_main_context_ref_thread_default, "g_main_context_ref_thread_default", libs);
 
   // MainLoop
@@ -8343,7 +8371,9 @@ shared static this()
   gidLink(cast(void**)&g_markup_parse_context_free, "g_markup_parse_context_free", libs);
   gidLink(cast(void**)&g_markup_parse_context_get_element, "g_markup_parse_context_get_element", libs);
   gidLink(cast(void**)&g_markup_parse_context_get_element_stack, "g_markup_parse_context_get_element_stack", libs);
+  gidLink(cast(void**)&g_markup_parse_context_get_offset, "g_markup_parse_context_get_offset", libs);
   gidLink(cast(void**)&g_markup_parse_context_get_position, "g_markup_parse_context_get_position", libs);
+  gidLink(cast(void**)&g_markup_parse_context_get_tag_start, "g_markup_parse_context_get_tag_start", libs);
   gidLink(cast(void**)&g_markup_parse_context_get_user_data, "g_markup_parse_context_get_user_data", libs);
   gidLink(cast(void**)&g_markup_parse_context_parse, "g_markup_parse_context_parse", libs);
   gidLink(cast(void**)&g_markup_parse_context_pop, "g_markup_parse_context_pop", libs);
@@ -8757,6 +8787,7 @@ shared static this()
   gidLink(cast(void**)&g_source_add_unix_fd, "g_source_add_unix_fd", libs);
   gidLink(cast(void**)&g_source_attach, "g_source_attach", libs);
   gidLink(cast(void**)&g_source_destroy, "g_source_destroy", libs);
+  gidLink(cast(void**)&g_source_dup_context, "g_source_dup_context", libs);
   gidLink(cast(void**)&g_source_get_can_recurse, "g_source_get_can_recurse", libs);
   gidLink(cast(void**)&g_source_get_context, "g_source_get_context", libs);
   gidLink(cast(void**)&g_source_get_current_time, "g_source_get_current_time", libs);
@@ -8833,6 +8864,7 @@ shared static this()
   gidLink(cast(void**)&g_string_ascii_down, "g_string_ascii_down", libs);
   gidLink(cast(void**)&g_string_ascii_up, "g_string_ascii_up", libs);
   gidLink(cast(void**)&g_string_assign, "g_string_assign", libs);
+  gidLink(cast(void**)&g_string_copy, "g_string_copy", libs);
   gidLink(cast(void**)&g_string_down, "g_string_down", libs);
   gidLink(cast(void**)&g_string_equal, "g_string_equal", libs);
   gidLink(cast(void**)&g_string_erase, "g_string_erase", libs);
@@ -8875,6 +8907,7 @@ shared static this()
   gidLink(cast(void**)&g_strv_builder_ref, "g_strv_builder_ref", libs);
   gidLink(cast(void**)&g_strv_builder_take, "g_strv_builder_take", libs);
   gidLink(cast(void**)&g_strv_builder_unref, "g_strv_builder_unref", libs);
+  gidLink(cast(void**)&g_strv_builder_unref_to_strv, "g_strv_builder_unref_to_strv", libs);
 
   // TestCase
   gidLink(cast(void**)&g_test_case_free, "g_test_case_free", libs);
@@ -8897,6 +8930,7 @@ shared static this()
   gidLink(cast(void**)&g_thread_get_type, "g_thread_get_type", libs);
   gidLink(cast(void**)&g_thread_new, "g_thread_new", libs);
   gidLink(cast(void**)&g_thread_try_new, "g_thread_try_new", libs);
+  gidLink(cast(void**)&g_thread_get_name, "g_thread_get_name", libs);
   gidLink(cast(void**)&g_thread_join, "g_thread_join", libs);
   gidLink(cast(void**)&g_thread_ref, "g_thread_ref", libs);
   gidLink(cast(void**)&g_thread_set_priority, "g_thread_set_priority", libs);
@@ -9154,6 +9188,7 @@ shared static this()
   gidLink(cast(void**)&g_variant_builder_close, "g_variant_builder_close", libs);
   gidLink(cast(void**)&g_variant_builder_end, "g_variant_builder_end", libs);
   gidLink(cast(void**)&g_variant_builder_init, "g_variant_builder_init", libs);
+  gidLink(cast(void**)&g_variant_builder_init_static, "g_variant_builder_init_static", libs);
   gidLink(cast(void**)&g_variant_builder_open, "g_variant_builder_open", libs);
   gidLink(cast(void**)&g_variant_builder_ref, "g_variant_builder_ref", libs);
   gidLink(cast(void**)&g_variant_builder_unref, "g_variant_builder_unref", libs);
@@ -9286,11 +9321,13 @@ shared static this()
   gidLink(cast(void**)&g_base64_encode_step, "g_base64_encode_step", libs);
   gidLink(cast(void**)&g_basename, "g_basename", libs);
   gidLink(cast(void**)&g_bit_lock, "g_bit_lock", libs);
+  gidLink(cast(void**)&g_bit_lock_and_get, "g_bit_lock_and_get", libs);
   gidLink(cast(void**)&g_bit_nth_lsf, "g_bit_nth_lsf", libs);
   gidLink(cast(void**)&g_bit_nth_msf, "g_bit_nth_msf", libs);
   gidLink(cast(void**)&g_bit_storage, "g_bit_storage", libs);
   gidLink(cast(void**)&g_bit_trylock, "g_bit_trylock", libs);
   gidLink(cast(void**)&g_bit_unlock, "g_bit_unlock", libs);
+  gidLink(cast(void**)&g_bit_unlock_and_set, "g_bit_unlock_and_set", libs);
   gidLink(cast(void**)&g_blow_chunks, "g_blow_chunks", libs);
   gidLink(cast(void**)&g_build_filename, "g_build_filename", libs);
   gidLink(cast(void**)&g_build_filename_valist, "g_build_filename_valist", libs);
@@ -9310,7 +9347,6 @@ shared static this()
   gidLink(cast(void**)&g_clear_pointer, "g_clear_pointer", libs);
   gidLink(cast(void**)&g_clear_slist, "g_clear_slist", libs);
   gidLink(cast(void**)&g_close, "g_close", libs);
-  gidLink(cast(void**)&g_closefrom, "g_closefrom", libs);
   gidLink(cast(void**)&g_compute_checksum_for_bytes, "g_compute_checksum_for_bytes", libs);
   gidLink(cast(void**)&g_compute_checksum_for_data, "g_compute_checksum_for_data", libs);
   gidLink(cast(void**)&g_compute_checksum_for_string, "g_compute_checksum_for_string", libs);
@@ -9352,7 +9388,6 @@ shared static this()
   gidLink(cast(void**)&g_environ_getenv, "g_environ_getenv", libs);
   gidLink(cast(void**)&g_environ_setenv, "g_environ_setenv", libs);
   gidLink(cast(void**)&g_environ_unsetenv, "g_environ_unsetenv", libs);
-  gidLink(cast(void**)&g_fdwalk_set_cloexec, "g_fdwalk_set_cloexec", libs);
   gidLink(cast(void**)&g_file_error_from_errno, "g_file_error_from_errno", libs);
   gidLink(cast(void**)&g_file_error_quark, "g_file_error_quark", libs);
   gidLink(cast(void**)&g_file_get_contents, "g_file_get_contents", libs);
@@ -9391,6 +9426,7 @@ shared static this()
   gidLink(cast(void**)&g_get_language_names_with_category, "g_get_language_names_with_category", libs);
   gidLink(cast(void**)&g_get_locale_variants, "g_get_locale_variants", libs);
   gidLink(cast(void**)&g_get_monotonic_time, "g_get_monotonic_time", libs);
+  gidLink(cast(void**)&g_get_monotonic_time_ns, "g_get_monotonic_time_ns", libs);
   gidLink(cast(void**)&g_get_num_processors, "g_get_num_processors", libs);
   gidLink(cast(void**)&g_get_os_info, "g_get_os_info", libs);
   gidLink(cast(void**)&g_get_prgname, "g_get_prgname", libs);
@@ -9432,6 +9468,7 @@ shared static this()
   gidLink(cast(void**)&g_locale_to_utf8, "g_locale_to_utf8", libs);
   gidLink(cast(void**)&g_log, "g_log", libs);
   gidLink(cast(void**)&g_log_default_handler, "g_log_default_handler", libs);
+  gidLink(cast(void**)&g_log_get_always_fatal, "g_log_get_always_fatal", libs);
   gidLink(cast(void**)&g_log_get_debug_enabled, "g_log_get_debug_enabled", libs);
   gidLink(cast(void**)&g_log_remove_handler, "g_log_remove_handler", libs);
   gidLink(cast(void**)&g_log_set_always_fatal, "g_log_set_always_fatal", libs);
@@ -9532,6 +9569,7 @@ shared static this()
   gidLink(cast(void**)&g_ref_count_inc, "g_ref_count_inc", libs);
   gidLink(cast(void**)&g_ref_count_init, "g_ref_count_init", libs);
   gidLink(cast(void**)&g_ref_string_acquire, "g_ref_string_acquire", libs);
+  gidLink(cast(void**)&g_ref_string_equal, "g_ref_string_equal", libs);
   gidLink(cast(void**)&g_ref_string_length, "g_ref_string_length", libs);
   gidLink(cast(void**)&g_ref_string_new, "g_ref_string_new", libs);
   gidLink(cast(void**)&g_ref_string_new_intern, "g_ref_string_new_intern", libs);
@@ -9562,6 +9600,7 @@ shared static this()
   gidLink(cast(void**)&g_slice_get_config_state, "g_slice_get_config_state", libs);
   gidLink(cast(void**)&g_slice_set_config, "g_slice_set_config", libs);
   gidLink(cast(void**)&g_snprintf, "g_snprintf", libs);
+  gidLink(cast(void**)&g_sort_array, "g_sort_array", libs);
   gidLink(cast(void**)&g_spaced_primes_closest, "g_spaced_primes_closest", libs);
   gidLink(cast(void**)&g_spawn_async, "g_spawn_async", libs);
   gidLink(cast(void**)&g_spawn_async_with_fds, "g_spawn_async_with_fds", libs);
@@ -9669,6 +9708,7 @@ shared static this()
   gidLink(cast(void**)&g_test_trap_assertions, "g_test_trap_assertions", libs);
   gidLink(cast(void**)&g_test_trap_fork, "g_test_trap_fork", libs);
   gidLink(cast(void**)&g_test_trap_has_passed, "g_test_trap_has_passed", libs);
+  gidLink(cast(void**)&g_test_trap_has_skipped, "g_test_trap_has_skipped", libs);
   gidLink(cast(void**)&g_test_trap_reached_timeout, "g_test_trap_reached_timeout", libs);
   gidLink(cast(void**)&g_test_trap_subprocess, "g_test_trap_subprocess", libs);
   gidLink(cast(void**)&g_test_trap_subprocess_with_envp, "g_test_trap_subprocess_with_envp", libs);
@@ -9722,16 +9762,6 @@ shared static this()
   gidLink(cast(void**)&g_unichar_xdigit_value, "g_unichar_xdigit_value", libs);
   gidLink(cast(void**)&g_unicode_canonical_decomposition, "g_unicode_canonical_decomposition", libs);
   gidLink(cast(void**)&g_unicode_canonical_ordering, "g_unicode_canonical_ordering", libs);
-  gidLink(cast(void**)&g_unix_error_quark, "g_unix_error_quark", libs);
-  gidLink(cast(void**)&g_unix_fd_add, "g_unix_fd_add", libs);
-  gidLink(cast(void**)&g_unix_fd_add_full, "g_unix_fd_add_full", libs);
-  gidLink(cast(void**)&g_unix_fd_source_new, "g_unix_fd_source_new", libs);
-  gidLink(cast(void**)&g_unix_get_passwd_entry, "g_unix_get_passwd_entry", libs);
-  gidLink(cast(void**)&g_unix_open_pipe, "g_unix_open_pipe", libs);
-  gidLink(cast(void**)&g_unix_set_fd_nonblocking, "g_unix_set_fd_nonblocking", libs);
-  gidLink(cast(void**)&g_unix_signal_add, "g_unix_signal_add", libs);
-  gidLink(cast(void**)&g_unix_signal_add_full, "g_unix_signal_add_full", libs);
-  gidLink(cast(void**)&g_unix_signal_source_new, "g_unix_signal_source_new", libs);
   gidLink(cast(void**)&g_unlink, "g_unlink", libs);
   gidLink(cast(void**)&g_unsetenv, "g_unsetenv", libs);
   gidLink(cast(void**)&g_usleep, "g_usleep", libs);

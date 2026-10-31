@@ -53,7 +53,10 @@ class FilterOutputStream : gio.output_stream.OutputStream
     return new FilterOutputStreamGidBuilder;
   }
 
-  /** */
+  /**
+      Get `baseStream` property.
+      Returns: The underlying base stream on which the I/O ops will be done.
+  */
   @property gio.output_stream.OutputStream baseStream() nothrow
   {
     return getBaseStream();
@@ -70,7 +73,7 @@ class FilterOutputStream : gio.output_stream.OutputStream
 
   /**
       Gets the base stream for the filter stream.
-      Returns: a #GOutputStream.
+      Returns: a [gio.output_stream.OutputStream].
   */
   gio.output_stream.OutputStream getBaseStream() nothrow
   {
@@ -83,7 +86,7 @@ class FilterOutputStream : gio.output_stream.OutputStream
   /**
       Returns whether the base stream will be closed when stream is
       closed.
-      Returns: true if the base stream will be closed.
+      Returns: `TRUE` if the base stream will be closed.
   */
   bool getCloseBaseStream() nothrow
   {
@@ -96,7 +99,7 @@ class FilterOutputStream : gio.output_stream.OutputStream
       Sets whether the base stream will be closed when stream is closed.
   
       Params:
-        closeBase = true to close the base stream.
+        closeBase = `TRUE` to close the base stream.
   */
   void setCloseBaseStream(bool closeBase) nothrow
   {
@@ -108,7 +111,12 @@ class FilterOutputStream : gio.output_stream.OutputStream
 class FilterOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBuilderImpl!T
 {
 
-  /** */
+  /**
+      Set `baseStream` property.
+      Params:
+        propval = The underlying base stream on which the I/O ops will be done.
+      Returns: Builder instance for fluent chaining
+  */
   T baseStream(gio.output_stream.OutputStream propval) nothrow
   {
     return setProperty("base-stream", propval);

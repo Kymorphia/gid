@@ -18,10 +18,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.popover_menu_bar.PopoverMenuBar] presents a horizontal bar of items that pop
-    up popover menus when clicked.
+    Presents a horizontal bar of items that pop up menus when clicked.
     
-    ![An example GtkPopoverMenuBar](menubar.png)
+    <picture>
+      <source srcset="menubar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPopoverMenuBar" src="menubar.png">
+    </picture>
     
     The only way to create instances of [gtk.popover_menu_bar.PopoverMenuBar] is
     from a [gio.menu_model.MenuModel].

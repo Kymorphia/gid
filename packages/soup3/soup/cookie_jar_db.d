@@ -15,7 +15,7 @@ import soup.types;
 /**
     Database-based Cookie Jar.
     
-    #SoupCookieJarDB is a [soup.cookie_jar.CookieJar] that reads cookies from and writes
+    [soup.cookie_jar_db.CookieJarDB] is a [soup.cookie_jar.CookieJar] that reads cookies from and writes
     them to a sqlite database in the new Mozilla format.
     
     (This is identical to `SoupCookieJarSqlite` in
@@ -69,7 +69,7 @@ class CookieJarDB : soup.cookie_jar.CookieJar
   }
 
   /**
-      Creates a #SoupCookieJarDB.
+      Creates a [soup.cookie_jar_db.CookieJarDB].
       
       filename will be read in at startup to create an initial set of cookies. If
       read_only is false, then the non-session cookies will be written to

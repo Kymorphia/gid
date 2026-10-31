@@ -40,6 +40,14 @@ import gtk.widget;
     The [gtk.color_chooser_widget.ColorChooserWidget] is used in the [gtk.color_chooser_dialog.ColorChooserDialog]
     to provide a dialog for selecting colors.
     
+    # Actions
+    
+    [gtk.color_chooser_widget.ColorChooserWidget] defines a set of built-in actions:
+    
+    - `color.customize` activates the color editor for the given color.
+    - `color.select` emits the [gtk.color_chooser.ColorChooser.colorActivated] signal
+      for the given color.
+    
     # CSS names
     
     [gtk.color_chooser_widget.ColorChooserWidget] has a single CSS node with name colorchooser.

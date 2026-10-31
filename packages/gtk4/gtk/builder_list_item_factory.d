@@ -13,11 +13,14 @@ import gtk.list_item_factory;
 import gtk.types;
 
 /**
-    [gtk.builder_list_item_factory.BuilderListItemFactory] is a [gtk.list_item_factory.ListItemFactory] that creates
-    widgets by instantiating [gtk.builder.Builder] UI templates.
+    Creates widgets by instantiating [gtk.builder.Builder] UI templates.
     
-    The templates must be extending [gtk.list_item.ListItem], and typically use
-    [gtk.expression.Expression]s to obtain data from the items in the model.
+    The templates must extend the class that the parent widget expects.
+    For example, a factory provided to [gtk.list_view.ListView.factory] must have
+    a template that extends [gtk.list_item.ListItem].
+    
+    Templates typically use [gtk.expression.Expression] to obtain data from the items
+    in the model.
     
     Example:
     ```xml
@@ -36,6 +39,11 @@ import gtk.types;
         </template>
       </interface>
     ```
+    
+    A common approach is to embed such templates as CDATA marked sections into
+    a surrounding UI file. Note that if you use this approach, extracting
+    translatable strings with xgettext will not work for strings inside the
+    marked section.
 */
 class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 {
@@ -107,7 +115,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   
       Params:
         scope_ = A scope to use when instantiating
-        bytes = the [glib.bytes.Bytes] containing the ui file to instantiate
+        bytes = the [glib.bytes.Bytes] containing the UI definition to instantiate
       Returns: a new [gtk.builder_list_item_factory.BuilderListItemFactory]
   */
   static gtk.builder_list_item_factory.BuilderListItemFactory newFromBytes(gtk.builder_scope.BuilderScope scope_, glib.bytes.Bytes bytes) nothrow
@@ -124,7 +132,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   
       Params:
         scope_ = A scope to use when instantiating
-        resourcePath = valid path to a resource that contains the data
+        resourcePath = valid path to a resource that contains the UI definition
       Returns: a new [gtk.builder_list_item_factory.BuilderListItemFactory]
   */
   static gtk.builder_list_item_factory.BuilderListItemFactory newFromResource(gtk.builder_scope.BuilderScope scope_, string resourcePath) nothrow

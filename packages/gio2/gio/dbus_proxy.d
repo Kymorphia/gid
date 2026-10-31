@@ -68,6 +68,8 @@ import gobject.object;
     context (see [glib.main_context.MainContext.pushThreadDefault]) of the thread
     where the instance was constructed.
     
+    
+    ## A watch proxy example
     An example using a proxy for a well-known name can be found in
     [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
 */
@@ -309,7 +311,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   /**
       Like [gio.dbus_proxy.DBusProxy.newSync] but takes a #GBusType instead of a #GDBusConnection.
       
-      #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+      #GDBusProxy is used in this [example][gio.dbus_proxy.DBusProxy].
   
       Params:
         busType = A #GBusType.
@@ -360,7 +362,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       This is a synchronous failable constructor. See [gio.dbus_proxy.DBusProxy.new_]
       and [gio.dbus_proxy.DBusProxy.newFinish] for the asynchronous version.
       
-      #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+      #GDBusProxy is used in this [example][gio.dbus_proxy.DBusProxy].
   
       Params:
         connection = A #GDBusConnection.
@@ -415,7 +417,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       
       See [gio.dbus_proxy.DBusProxy.newSync] and for a synchronous version of this constructor.
       
-      #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+      #GDBusProxy is used in this [example][gio.dbus_proxy.DBusProxy].
   
       Params:
         connection = A #GDBusConnection.
@@ -454,7 +456,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   /**
       Like [gio.dbus_proxy.DBusProxy.new_] but takes a #GBusType instead of a #GDBusConnection.
       
-      #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+      #GDBusProxy is used in this [example][gio.dbus_proxy.DBusProxy].
   
       Params:
         busType = A #GBusType.
@@ -524,8 +526,8 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       then the return value is checked against the return type.
       
       This is an asynchronous method. When the operation is finished,
-      callback will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
+      callback will be invoked in the thread-default main context
+      (see [glib.main_context.MainContext.pushThreadDefault])
       of the thread you are calling this method from.
       You can then call [gio.dbus_proxy.DBusProxy.callFinish] to get the result of
       the operation. See [gio.dbus_proxy.DBusProxy.callSync] for the synchronous

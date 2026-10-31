@@ -20,7 +20,10 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.list_box_row.ListBoxRow] is the kind of widget that can be added to a [gtk.list_box.ListBox].
+    The kind of widget that can be added to a [gtk.list_box.ListBox].
+    
+    [gtk.list_box.ListBox] will automatically wrap its children in a `GtkListboxRow`
+    when necessary.
 */
 class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
 {

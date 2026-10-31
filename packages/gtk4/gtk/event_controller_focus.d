@@ -11,8 +11,7 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
-    [gtk.event_controller_focus.EventControllerFocus] is an event controller to keep track of
-    keyboard focus.
+    Tracks keyboard focus.
     
     The event controller offers [gtk.event_controller_focus.EventControllerFocus.enter]
     and [gtk.event_controller_focus.EventControllerFocus.leave] signals, as well as

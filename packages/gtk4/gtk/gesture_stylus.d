@@ -14,7 +14,7 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
-    [gtk.gesture_stylus.GestureStylus] is a [gtk.gesture.Gesture] specific to stylus input.
+    Recognizes tablet stylus input.
     
     The provided signals just relay the basic information of the
     stylus events.

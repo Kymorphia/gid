@@ -14,6 +14,8 @@ import gobject.object;
 /**
     An opaque object representing an iterator which points to a
     certain position in an animation.
+
+    Deprecated: Use a different image loading library for animatable assets
 */
 class PixbufAnimationIter : gobject.object.ObjectWrap
 {
@@ -78,6 +80,8 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       Params:
         currentTime = current time
       Returns: `TRUE` if the image may need updating
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   bool advance(glib.time_val.TimeVal* currentTime = null) nothrow
   {
@@ -97,6 +101,8 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       image file to avoid updates that are just too quick. The minimum timeout
       for GIF images is currently 20 milliseconds.
       Returns: delay time in milliseconds (thousandths of a second)
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   int getDelayTime() nothrow
   {
@@ -122,6 +128,8 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       Copy the pixbuf to keep it (don't just add a reference), as it may get
       recycled as you advance the iterator.
       Returns: the pixbuf to be displayed
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
@@ -139,6 +147,8 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       streaming in to the loader. So if you're on the currently loading frame,
       you will need to redraw the screen for the updated area.
       Returns: `TRUE` if the frame we're on is partially loaded, or the last frame
+  
+      Deprecated: Use a different image loading library for animatable assets
   */
   bool onCurrentlyLoadingFrame() nothrow
   {

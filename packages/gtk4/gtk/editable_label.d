@@ -19,10 +19,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.editable_label.EditableLabel] is a label that allows users to
-    edit the text by switching to an “edit mode”.
+    Allows users to edit the displayed text by switching to an “edit mode”.
     
-    ![An example GtkEditableLabel](editable-label.png)
+    <picture>
+      <source srcset="editable-label-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkEditableLabel" src="editable-label.png">
+    </picture>
     
     [gtk.editable_label.EditableLabel] does not have API of its own, but it
     implements the [gtk.editable.Editable] interface.
@@ -31,6 +33,20 @@ import gtk.widget;
     to click or press the Enter key. The default bindings
     for leaving the edit mode are the Enter key (to save
     the results) or the Escape key (to cancel the editing).
+    
+    # Shortcuts and Gestures
+    
+    [gtk.editable_label.EditableLabel] supports the following keyboard shortcuts:
+    
+    - <kbd>Enter</kbd> starts editing.
+    - <kbd>Escape</kbd> stops editing.
+    
+    # Actions
+    
+    [gtk.editable_label.EditableLabel] defines a set of built-in actions:
+    
+    - `editing.starts` switches the widget into editing mode.
+    - `editing.stop` switches the widget out of editing mode.
     
     # CSS nodes
     

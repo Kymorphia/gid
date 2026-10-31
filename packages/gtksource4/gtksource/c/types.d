@@ -563,34 +563,63 @@ struct GtkSourceCompletionProposalIface
   */
   GTypeInterface parent;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.getLabel].
+      By default, null is returned.
+  */
   extern(C) char* function(GtkSourceCompletionProposal* proposal) getLabel;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.getMarkup].
+      By default, null is returned.
+  */
   extern(C) char* function(GtkSourceCompletionProposal* proposal) getMarkup;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.getText].
+      By default, null is returned.
+  */
   extern(C) char* function(GtkSourceCompletionProposal* proposal) getText;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.getIcon].
+      By default, null is returned.
+  */
   extern(C) GdkPixbuf* function(GtkSourceCompletionProposal* proposal) getIcon;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.getIconName].
+      By default, null is returned.
+  */
   extern(C) const(char)* function(GtkSourceCompletionProposal* proposal) getIconName;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.getGicon].
+      By default, null is returned.
+  */
   extern(C) GIcon* function(GtkSourceCompletionProposal* proposal) getGicon;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.getInfo].
+      By default, null is returned.
+  */
   extern(C) char* function(GtkSourceCompletionProposal* proposal) getInfo;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.hash].
+      By default, it uses a direct hash ([glib.global.directHash]).
+  */
   extern(C) uint function(GtkSourceCompletionProposal* proposal) hash;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_proposal.CompletionProposal.equal].
+      By default, it uses direct equality ([glib.global.directEqual]).
+  */
   extern(C) gboolean function(GtkSourceCompletionProposal* proposal, GtkSourceCompletionProposal* other) equal;
 
-  /** */
+  /**
+      The function pointer for the #GtkSourceCompletionProposal::changed signal.
+  */
   extern(C) void function(GtkSourceCompletionProposal* proposal) changed;
 }
 
@@ -607,43 +636,82 @@ struct GtkSourceCompletionProviderIface
   */
   GTypeInterface gIface;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getName].
+      Must be implemented.
+  */
   extern(C) char* function(GtkSourceCompletionProvider* provider) getName;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getIcon].
+      By default, null is returned.
+  */
   extern(C) GdkPixbuf* function(GtkSourceCompletionProvider* provider) getIcon;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getIconName].
+      By default, null is returned.
+  */
   extern(C) const(char)* function(GtkSourceCompletionProvider* provider) getIconName;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getGicon].
+      By default, null is returned.
+  */
   extern(C) GIcon* function(GtkSourceCompletionProvider* provider) getGicon;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.populate].
+      Add no proposals by default.
+  */
   extern(C) void function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context) populate;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.match].
+      By default, true is returned.
+  */
   extern(C) gboolean function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context) match;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getActivation].
+      The combination of all #GtkSourceCompletionActivation is returned by default.
+  */
   extern(C) GtkSourceCompletionActivation function(GtkSourceCompletionProvider* provider) getActivation;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getInfoWidget].
+      By default, null is returned.
+  */
   extern(C) GtkWidget* function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal) getInfoWidget;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.updateInfo].
+      Does nothing by default.
+  */
   extern(C) void function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal, GtkSourceCompletionInfo* info) updateInfo;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getStartIter].
+      By default, false is returned.
+  */
   extern(C) gboolean function(GtkSourceCompletionProvider* provider, GtkSourceCompletionContext* context, GtkSourceCompletionProposal* proposal, GtkTextIter* iter) getStartIter;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.activateProposal].
+      By default, false is returned.
+  */
   extern(C) gboolean function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal, GtkTextIter* iter) activateProposal;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getInteractiveDelay].
+      By default, -1 is returned.
+  */
   extern(C) int function(GtkSourceCompletionProvider* provider) getInteractiveDelay;
 
-  /** */
+  /**
+      The virtual function pointer for [gtksource.completion_provider.CompletionProvider.getPriority].
+      By default, 0 is returned.
+  */
   extern(C) int function(GtkSourceCompletionProvider* provider) getPriority;
 }
 

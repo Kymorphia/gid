@@ -173,6 +173,25 @@ interface Navigation
   }
 
   /**
+      Create a new navigation event for the given key mouse double click.
+  
+      Params:
+        button = The number of the pressed mouse button.
+        x = The x coordinate of the mouse cursor.
+        y = The y coordinate of the mouse cursor.
+        state = a bit-mask representing the state of the modifier keys (e.g. Control,
+          Shift and Alt).
+      Returns: a new #GstEvent
+  */
+  static gst.event.Event eventNewMouseDoubleClick(int button, double x, double y, gstvideo.types.NavigationModifierType state) nothrow
+  {
+    GstEvent* _cretval;
+    _cretval = gst_navigation_event_new_mouse_double_click(button, x, y, state);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Create a new navigation event for the new mouse location.
   
       Params:
@@ -795,7 +814,7 @@ interface Navigation
   
       Params:
         event = The type of mouse event, as a text string. Recognised values are
-          "mouse-button-press", "mouse-button-release" and "mouse-move".
+          "mouse-button-press", "mouse-button-release", "mouse-move" and "mouse-double-click".
         button = The button number of the button being pressed or released. Pass 0
           for mouse-move events.
         x = The x coordinate of the mouse event.

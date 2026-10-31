@@ -14,7 +14,7 @@ import gtk.multi_filter;
 import gtk.types;
 
 /**
-    [gtk.every_filter.EveryFilter] matches an item when each of its filters matches.
+    Matches an item when each of its filters matches.
     
     To add filters to a [gtk.every_filter.EveryFilter], use [gtk.multi_filter.MultiFilter.append].
 */

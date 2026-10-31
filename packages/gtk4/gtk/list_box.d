@@ -21,7 +21,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.list_box.ListBox] is a vertical list.
+    Shows a vertical list.
+    
+    <picture>
+      <source srcset="list-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkListBox" src="list-box.png">
+    </picture>
     
     A [gtk.list_box.ListBox] only contains [gtk.list_box_row.ListBoxRow] children. These rows can
     by dynamically sorted and filtered, and headers can be added dynamically
@@ -51,9 +56,18 @@ import gtk.widget;
     attribute of a `<child>` element. See [gtk.list_box.ListBox.setPlaceholder]
     for info.
     
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.list_box.ListBox.moveCursor]
+    - [gtk.list_box.ListBox.selectAll]
+    - [gtk.list_box.ListBox.toggleCursorRow]
+    - [gtk.list_box.ListBox.unselectAll]
+    
     # CSS nodes
     
-    ```plain
+    ```
     list[.separators][.rich-list][.navigation-sidebar][.boxed-list]
     ╰── row[.activatable]
     ```
@@ -191,6 +205,25 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
+      Get `tabBehavior` property.
+      Returns: Behavior of the <kbd>Tab</kbd> key
+  */
+  @property gtk.types.ListTabBehavior tabBehavior() nothrow
+  {
+    return getTabBehavior();
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+  */
+  @property void tabBehavior(gtk.types.ListTabBehavior propval) nothrow
+  {
+    setTabBehavior(propval);
+  }
+
+  /**
       Creates a new [gtk.list_box.ListBox] container.
       Returns: a new [gtk.list_box.ListBox]
   */
@@ -234,8 +267,8 @@ class ListBox : gtk.widget.Widget
   
       Params:
         model = the [gio.list_model.ListModel] to be bound to box
-        createWidgetFunc = a function that creates widgets for items
-            or null in case you also passed null as model
+        createWidgetFunc = a function
+            that creates widgets for items or null in case you also passed null as model
   */
   void bindModel(gio.list_model.ListModel model = null, gtk.types.ListBoxCreateWidgetFunc createWidgetFunc = null) nothrow
   {
@@ -397,6 +430,18 @@ class ListBox : gtk.widget.Widget
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_get_show_separators(cast(GtkListBox*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the behavior of the <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> keys.
+      Returns: the tab behavior
+  */
+  gtk.types.ListTabBehavior getTabBehavior() nothrow
+  {
+    GtkListTabBehavior _cretval;
+    _cretval = gtk_list_box_get_tab_behavior(cast(GtkListBox*)this._cPtr);
+    gtk.types.ListTabBehavior _retval = cast(gtk.types.ListTabBehavior)_cretval;
     return _retval;
   }
 
@@ -586,7 +631,8 @@ class ListBox : gtk.widget.Widget
       (see [gtk.list_box.ListBox.bindModel]).
   
       Params:
-        filterFunc = callback that lets you filter which rows to show
+        filterFunc = callback
+            that lets you filter which rows to show
   */
   void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc = null) nothrow
   {
@@ -641,7 +687,8 @@ class ListBox : gtk.widget.Widget
       [gtk.list_box.ListBox.invalidateHeaders] is called.
   
       Params:
-        updateHeader = callback that lets you add row headers
+        updateHeader = callback
+            that lets you add row headers
   */
   void setHeaderFunc(gtk.types.ListBoxUpdateHeaderFunc updateHeader = null) nothrow
   {
@@ -740,6 +787,17 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
+      Sets the behavior of the <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> keys.
+  
+      Params:
+        behavior = the tab behavior
+  */
+  void setTabBehavior(gtk.types.ListTabBehavior behavior) nothrow
+  {
+    gtk_list_box_set_tab_behavior(cast(GtkListBox*)this._cPtr, behavior);
+  }
+
+  /**
       Unselect all children of box, if the selection mode allows it.
   */
   void unselectAll() nothrow
@@ -761,7 +819,7 @@ class ListBox : gtk.widget.Widget
   /**
       Connect to `ActivateCursorRow` signal.
   
-      
+      Emitted when the cursor row is activated.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -805,20 +863,30 @@ class ListBox : gtk.widget.Widget
   /**
       Connect to `MoveCursor` signal.
   
-      
+      Emitted when the user initiates a cursor movement.
+        
+        The default bindings for this signal come in two variants, the variant with
+        the Shift modifier extends the selection, the variant without the Shift
+        modifier does not. There are too many key combinations to list them all
+        here.
+        
+        - <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+          move by individual children
+        - <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
+        - <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
   
       Params:
         callback = signal callback delegate or function to connect
   
-          `void callback(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox)`
+          `void callback(gtk.types.MovementStep step, int count, bool extend, bool modify, gtk.list_box.ListBox listBox)`
   
-          `object`  (optional)
+          `step` the granularity of the move, as a [gtk.types.MovementStep] (optional)
   
-          `p0`  (optional)
+          `count` the number of step units to move (optional)
   
-          `p1`  (optional)
+          `extend` whether to extend the selection (optional)
   
-          `p2`  (optional)
+          `modify` whether to modify the selection (optional)
   
           `listBox` the instance the signal is connected to (optional)
   
@@ -1071,7 +1139,9 @@ class ListBox : gtk.widget.Widget
   /**
       Connect to `ToggleCursorRow` signal.
   
-      
+      Emitted when the cursor row is toggled.
+        
+        The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>␣</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1211,6 +1281,17 @@ class ListBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   T showSeparators(bool propval) nothrow
   {
     return setProperty("show-separators", propval);
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+      Returns: Builder instance for fluent chaining
+  */
+  T tabBehavior(gtk.types.ListTabBehavior propval) nothrow
+  {
+    return setProperty("tab-behavior", propval);
   }
 }
 

@@ -3,6 +3,7 @@ module gstaudio.audio_format_info;
 
 public import gid.basictypes;
 import gid.gid;
+import gobject.boxed;
 import gstaudio.c.functions;
 import gstaudio.c.types;
 import gstaudio.types;
@@ -10,16 +11,13 @@ import gstaudio.types;
 /**
     Information for an audio format.
 */
-class AudioFormatInfo
+class AudioFormatInfo : gobject.boxed.Boxed
 {
-  GstAudioFormatInfo _cInstance;
 
   /**
-      Create a `audio_format_info.AudioFormatInfo` wrap type.
+      Create a `audio_format_info.AudioFormatInfo` boxed type.
       Params:
         format = #GstAudioFormat
-        name = string representation of the format
-        description = user readable description of the format
         flags = #GstAudioFormatFlags
         endianness = the endianness
         width = amount of bits used for one sample
@@ -27,11 +25,10 @@ class AudioFormatInfo
         silence = @width/8 bytes with 1 silent sample
         unpackFormat = the format of the unpacked samples
   */
-  this(gstaudio.types.AudioFormat format = gstaudio.types.AudioFormat.init, string name = string.init, string description = string.init, gstaudio.types.AudioFormatFlags flags = gstaudio.types.AudioFormatFlags.init, int endianness = int.init, int width = int.init, int depth = int.init, ubyte[8] silence = (ubyte[8]).init, gstaudio.types.AudioFormat unpackFormat = gstaudio.types.AudioFormat.init) nothrow
+  this(gstaudio.types.AudioFormat format = gstaudio.types.AudioFormat.init, gstaudio.types.AudioFormatFlags flags = gstaudio.types.AudioFormatFlags.init, int endianness = int.init, int width = int.init, int depth = int.init, ubyte[8] silence = (ubyte[8]).init, gstaudio.types.AudioFormat unpackFormat = gstaudio.types.AudioFormat.init) nothrow
   {
+    super(boxedNew!GstAudioFormatInfo(_getGType), Yes.Take);
     this.format = format;
-    this.name = name;
-    this.description = description;
     this.flags = flags;
     this.endianness = endianness;
     this.width = width;
@@ -43,16 +40,32 @@ class AudioFormatInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioFormatInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
+    super(cast(void*)ptr, take);
   }
 
   /** */
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    return dup ? boxCopy : _cInstancePtr;
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_audio_format_info_get_type != &gidSymbolNotFound ? gst_audio_format_info_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override AudioFormatInfo self() nothrow
+  {
+    return this;
   }
 
   /**
@@ -84,32 +97,12 @@ class AudioFormatInfo
   }
 
   /**
-      Set `name` field.
-      Params:
-        propval = string representation of the format
-  */
-  @property void name(string propval) nothrow
-  {
-    (cast(GstAudioFormatInfo*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
-  }
-
-  /**
       Get `description` field.
       Returns: user readable description of the format
   */
   @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).description);
-  }
-
-  /**
-      Set `description` field.
-      Params:
-        propval = user readable description of the format
-  */
-  @property void description(string propval) nothrow
-  {
-    (cast(GstAudioFormatInfo*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
 
   /**

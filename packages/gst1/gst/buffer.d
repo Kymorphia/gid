@@ -73,7 +73,7 @@ import gst.types;
     know the media type of the buffer (the preceding CAPS event). Either or both
     can be set to #GST_BUFFER_OFFSET_NONE.
     
-    gst_buffer_ref() is used to increase the refcount of a buffer. This must be
+    [gst.buffer.Buffer.ref_] is used to increase the refcount of a buffer. This must be
     done when you want to keep a handle to the buffer after pushing it to the
     next element. The buffer refcount determines the writability of the buffer, a
     buffer is only writable when the refcount is exactly 1, i.e. when the caller
@@ -85,7 +85,7 @@ import gst.types;
     
     If a plug-in wants to modify the buffer data or metadata in-place, it should
     first obtain a buffer that is safe to modify by using
-    gst_buffer_make_writable(). This function is optimized so that a copy will
+    [gst.buffer.Buffer.makeWritable]. This function is optimized so that a copy will
     only be made when it is necessary.
     
     Several flags of the buffer can be set and unset with the
@@ -102,7 +102,7 @@ import gst.types;
     An element should either unref the buffer or push it out on a src pad
     using [gst.pad.Pad.push] (see #GstPad).
     
-    Buffers are usually freed by unreffing them with gst_buffer_unref(). When
+    Buffers are usually freed by unreffing them with [gst.buffer.Buffer.unref]. When
     the refcount drops to 0, any memory and metadata pointed to by the buffer is
     unreffed as well. Buffers allocated from a #GstBufferPool will be returned to
     the pool when the refcount drops to 0.
@@ -623,6 +623,24 @@ class Buffer : gobject.boxed.Boxed
   }
 
   /**
+      Copies size bytes starting from offset in buffer to dest.
+  
+      Params:
+        offset = the offset to extract
+        dest = the destination address
+      Returns: The amount of bytes extracted. This value can be lower than size
+           when buffer did not contain enough data.
+  */
+  size_t extract(size_t offset, ref ubyte[] dest) nothrow
+  {
+    size_t _retval;
+    size_t _size;
+    _size = cast(size_t)dest.length;
+    _retval = gst_buffer_extract(cast(GstBuffer*)this._cPtr, offset, dest.ptr, _size);
+    return _retval;
+  }
+
+  /**
       Extracts a copy of at most size bytes the data at offset into
       newly-allocated memory. dest must be freed using [glib.global.gfree] when done.
   
@@ -906,7 +924,7 @@ class Buffer : gobject.boxed.Boxed
       Checks if all memory blocks in buffer are writable.
       
       Note that this function does not check if buffer is writable, use
-      gst_buffer_is_writable() to check that if needed.
+      [gst.buffer.Buffer.isWritable] to check that if needed.
       Returns: true if all memory blocks in buffer are writable
   */
   bool isAllMemoryWritable() nothrow
@@ -922,7 +940,7 @@ class Buffer : gobject.boxed.Boxed
       length can be -1 to check all the memory blocks after idx.
       
       Note that this function does not check if buffer is writable, use
-      gst_buffer_is_writable() to check that if needed.
+      [gst.buffer.Buffer.isWritable] to check that if needed.
   
       Params:
         idx = an index
@@ -941,7 +959,7 @@ class Buffer : gobject.boxed.Boxed
       
       flags describe the desired access of the memory. When flags is
       #GST_MAP_WRITE, buffer should be writable (as returned from
-      gst_buffer_is_writable()).
+      [gst.buffer.Buffer.isWritable]).
       
       When buffer is writable but the memory isn't, a writable copy will
       automatically be created and returned. The readonly copy of the
@@ -971,7 +989,7 @@ class Buffer : gobject.boxed.Boxed
       
       flags describe the desired access of the memory. When flags is
       #GST_MAP_WRITE, buffer should be writable (as returned from
-      gst_buffer_is_writable()).
+      [gst.buffer.Buffer.isWritable]).
       
       When buffer is writable but the memory isn't, a writable copy will
       automatically be created and returned. The readonly copy of the buffer memory

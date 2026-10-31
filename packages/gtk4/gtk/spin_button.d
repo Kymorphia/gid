@@ -27,10 +27,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    A [gtk.spin_button.SpinButton] is an ideal way to allow the user to set the
-    value of some attribute.
+    Allows to enter or change numeric values.
     
-    ![An example GtkSpinButton](spinbutton.png)
+    <picture>
+      <source srcset="spinbutton-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSpinButton" src="spinbutton.png">
+    </picture>
     
     Rather than having to directly type a number into a [gtk.entry.Entry],
     [gtk.spin_button.SpinButton] allows the user to click on one of two arrows
@@ -109,6 +111,12 @@ import gtk.widget;
       gtk_window_present (GTK_WINDOW (window));
     }
     ```
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gtk.spin_button.SpinButton.changeValue]
     
     # CSS nodes
     

@@ -133,6 +133,9 @@ alias UserScriptInjectionTime = WebKitUserScriptInjectionTime;
 alias UserStyleLevel = WebKitUserStyleLevel;
 
 /** */
+alias WebExtensionError = WebKitWebExtensionError;
+
+/** */
 alias WebExtensionMatchPatternError = WebKitWebExtensionMatchPatternError;
 
 /** */
@@ -146,6 +149,12 @@ alias WebProcessTerminationReason = WebKitWebProcessTerminationReason;
 
 /** */
 alias WebsiteDataTypes = WebKitWebsiteDataTypes;
+
+/** */
+alias XRSessionFeatures = WebKitXRSessionFeatures;
+
+/** */
+alias XRSessionMode = WebKitXRSessionMode;
 
 // Callbacks
 
@@ -253,11 +262,11 @@ enum MAJOR_VERSION = 2;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 1;
+enum MICRO_VERSION = 6;
 
 /**
     Like [webkit.global.getMinorVersion], but from the headers used at
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MINOR_VERSION = 48;
+enum MINOR_VERSION = 52;

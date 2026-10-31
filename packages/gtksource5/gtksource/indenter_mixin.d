@@ -23,16 +23,16 @@ public import gtksource.view;
     [gtksource.view.View.indenter] property.
     
     Implementors of this interface should implement both
-    `vfunc@Indenter.is_trigger` and `vfunc@Indenter.indent`.
+    `vfunc@GtkSource.Indenter.is_trigger` and `vfunc@GtkSource.Indenter.indent`.
     
-    `vfunc@Indenter.is_trigger` is called upon key-press to
+    `vfunc@GtkSource.Indenter.is_trigger` is called upon key-press to
     determine of the key press should trigger an indentation.  The default
     implementation of the interface checks to see if the key was
     [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.ShiftMask] set.
     
-    `vfunc@Indenter.indent` is called after text has been
+    `vfunc@GtkSource.Indenter.indent` is called after text has been
     inserted into [gtksource.buffer.Buffer] when
-    `vfunc@Indenter.is_trigger` returned true. The [gtk.text_iter.TextIter]
+    `vfunc@GtkSource.Indenter.is_trigger` returned true. The [gtk.text_iter.TextIter]
     is placed directly after the inserted character or characters.
     
     It may be beneficial to move the insertion mark using
@@ -55,7 +55,7 @@ template IndenterT()
       is after having just inserted a newline (\n) character but can be other
       situations such as a manually requested indentation or reformatting.
       
-      See `ifaceIndenter.is_trigger` for how to trigger indentation on
+      See `vfuncGtkSource.Indenter.is_trigger` for how to trigger indentation on
       various characters inserted into the buffer.
       
       The implementor of this function is expected to keep iter valid across

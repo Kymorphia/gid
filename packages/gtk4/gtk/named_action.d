@@ -10,7 +10,11 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
-    A [gtk.shortcut_action.ShortcutAction] that activates an action by name.
+    Activates a named action.
+    
+    See [gtk.widget_class.WidgetClass.installAction] and
+    [gtk.widget.Widget.insertActionGroup] for ways
+    to associate named actions with widgets.
 */
 class NamedAction : gtk.shortcut_action.ShortcutAction
 {

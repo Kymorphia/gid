@@ -161,7 +161,7 @@ class Bus : gst.object.ObjectWrap
       The bus watch will only work if a #GMainLoop is being run.
       
       When func is called, the message belongs to the caller; if you want to
-      keep a copy of it, call gst_message_ref() before leaving func.
+      keep a copy of it, call [gst.message.Message.ref_] before leaving func.
       
       The watch can be removed using [gst.bus.Bus.removeWatch] or by returning false
       from func. If the watch was added to the default main context it is also

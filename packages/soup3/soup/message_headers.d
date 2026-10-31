@@ -46,7 +46,7 @@ class MessageHeaders : gobject.boxed.Boxed
   }
 
   /**
-      Creates a #SoupMessageHeaders.
+      Creates a [soup.message_headers.MessageHeaders].
       
       ([soup.message.Message] does this automatically for its own headers. You would only
       need to use this method if you are manually parsing or generating message
@@ -359,7 +359,12 @@ class MessageHeaders : gobject.boxed.Boxed
       Beware that even if given a total_length, this function does not
       check that the ranges are satisfiable.
       
-      #SoupServer has built-in handling for range requests. If your
+      A Range header requesting more than 200 ranges is rejected, since serving
+      that many ranges costs far more than the request asking for them.
+      [soup.server.Server] answers such a request with
+      [soup.types.Status.RequestedRangeNotSatisfiable].
+      
+      [soup.server.Server] has built-in handling for range requests. If your
       server handler returns a [soup.types.Status.Ok] response containing the
       complete response body (rather than pausing the message and
       returning some of the response body later), and there is a Range

@@ -51,6 +51,18 @@ class ScrollEvent : gdk.event.Event
   }
 
   /**
+      Extracts the scroll direction relative to the physical motion.
+      Returns: the relative scroll direction.
+  */
+  gdk.types.ScrollRelativeDirection getRelativeDirection() nothrow
+  {
+    GdkScrollRelativeDirection _cretval;
+    _cretval = gdk_scroll_event_get_relative_direction(cast(GdkEvent*)this._cPtr);
+    gdk.types.ScrollRelativeDirection _retval = cast(gdk.types.ScrollRelativeDirection)_cretval;
+    return _retval;
+  }
+
+  /**
       Extracts the scroll delta unit of a scroll event.
       
       The unit will always be [gdk.types.ScrollUnit.Wheel] if the scroll direction is not

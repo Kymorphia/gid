@@ -15,7 +15,7 @@ import soup.types;
 /**
     Text-file-based ("cookies.txt") Cookie Jar
     
-    #SoupCookieJarText is a [soup.cookie_jar.CookieJar] that reads cookies from and writes
+    [soup.cookie_jar_text.CookieJarText] is a [soup.cookie_jar.CookieJar] that reads cookies from and writes
     them to a text file in format similar to Mozilla's "cookies.txt".
 */
 class CookieJarText : soup.cookie_jar.CookieJar
@@ -65,7 +65,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
   }
 
   /**
-      Creates a #SoupCookieJarText.
+      Creates a [soup.cookie_jar_text.CookieJarText].
       
       filename will be read in at startup to create an initial set of cookies. If
       read_only is false, then the non-session cookies will be written to

@@ -15,9 +15,10 @@ import gtk.symbolic_paintable_mixin;
 import gtk.types;
 
 /**
-    Contains information found when looking up an icon in [gtk.icon_theme.IconTheme].
+    Contains information found when looking up an icon in [gtk.icon_theme.IconTheme]
+    or loading it from a file.
     
-    [gtk.icon_paintable.IconPaintable] implements [gdk.paintable.Paintable].
+    [gtk.icon_paintable.IconPaintable] implements [gdk.paintable.Paintable] and [gtk.symbolic_paintable.SymbolicPaintable].
 */
 class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.symbolic_paintable.SymbolicPaintable
 {
@@ -74,6 +75,30 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
     return getIconName();
   }
 
+  /** */
+  @property int scale() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("scale");
+  }
+
+  /** */
+  @property void scale(int propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("scale", propval);
+  }
+
+  /** */
+  @property int size() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(int)("size");
+  }
+
+  /** */
+  @property void size(int propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(int)("size", propval);
+  }
+
   mixin PaintableT!();
   mixin SymbolicPaintableT!();
 
@@ -84,7 +109,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   
       Params:
         file = a [gio.file.File]
-        size = desired icon size
+        size = desired icon size, in application pixels
         scale = the desired scale
       Returns: a [gtk.icon_paintable.IconPaintable] containing
           for the icon. Unref with [gobject.object.ObjectWrap.unref]
@@ -137,9 +162,6 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       
       This currently uses only the file name and not the file contents
       for determining this. This behaviour may change in the future.
-      
-      Note that to render a symbolic [gtk.icon_paintable.IconPaintable] properly (with
-      recoloring), you have to set its icon name on a [gtk.image.Image].
       Returns: true if the icon is symbolic, false otherwise
   */
   bool isSymbolic() nothrow
@@ -177,6 +199,18 @@ class IconPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
+  }
+
+  /** */
+  T scale(int propval) nothrow
+  {
+    return setProperty("scale", propval);
+  }
+
+  /** */
+  T size(int propval) nothrow
+  {
+    return setProperty("size", propval);
   }
 }
 

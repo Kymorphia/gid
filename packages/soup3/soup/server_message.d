@@ -22,7 +22,7 @@ import soup.types;
 /**
     An HTTP server request and response pair.
     
-    A SoupServerMessage represents an HTTP message that is being sent or
+    A [soup.server_message.ServerMessage] represents an HTTP message that is being sent or
     received on a [soup.server.Server].
     
     [soup.server.Server] will create [soup.server_message.ServerMessage]s automatically for
@@ -30,7 +30,7 @@ import soup.types;
     
     Note that libsoup's terminology here does not quite match the HTTP
     specification: in RFC 2616, an "HTTP-message" is *either* a Request, *or* a
-    Response. In libsoup, a #SoupServerMessage combines both the request and the
+    Response. In libsoup, a [soup.server_message.ServerMessage] combines both the request and the
     response.
 */
 class ServerMessage : gobject.object.ObjectWrap
@@ -81,7 +81,7 @@ class ServerMessage : gobject.object.ObjectWrap
 
   /**
       Get `tlsPeerCertificateErrors` property.
-      Returns: The verification errors on #SoupServerMessage:tls-peer-certificate
+      Returns: The verification errors on [soup.server_message.ServerMessage.tlsPeerCertificate]
   */
   @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors() nothrow
   {
@@ -144,7 +144,7 @@ class ServerMessage : gobject.object.ObjectWrap
       of a connection.
       Returns: the #GSocketAddress
           associated with the remote end of a connection, it may be
-          null if you used `classServer.accept_iostream`.
+          null if you used [soup.server.Server.acceptIostream].
   */
   gio.socket_address.SocketAddress getRemoteAddress() nothrow
   {
@@ -344,7 +344,7 @@ class ServerMessage : gobject.object.ObjectWrap
   }
 
   /**
-      Convenience function to set the response body of a #SoupServerMessage. If
+      Convenience function to set the response body of a [soup.server_message.ServerMessage]. If
       content_type is null, the response body must be empty as well.
   
       Params:
@@ -380,7 +380,7 @@ class ServerMessage : gobject.object.ObjectWrap
   }
 
   /**
-      "Steals" the HTTP connection associated with msg from its #SoupServer. This
+      "Steals" the HTTP connection associated with msg from its [soup.server.Server]. This
       happens immediately, regardless of the current state of the connection; if
       the response to msg has not yet finished being sent, then it will be
       discarded; you can steal the connection from a

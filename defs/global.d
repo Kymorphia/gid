@@ -150,6 +150,7 @@
 //!subtype int16_t short
 //!subtype int32 int
 //!subtype int32_t int
+//!subtype int64_t long
 //!subtype "long double" real
 //!subtype none void
 //!subtype passwd void
@@ -161,6 +162,7 @@
 //!subtype uint8_t ubyte
 //!subtype uint16_t ushort
 //!subtype uint32_t uint
+//!subtype uint64_t ulong
 //!subtype "unsigned char" ubyte
 //!subtype "unsigned int" uint
 //!subtype unsigned uint

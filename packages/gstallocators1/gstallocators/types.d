@@ -24,6 +24,12 @@ enum ALLOCATOR_FD = "fd";
 enum ALLOCATOR_SHM = "shm";
 
 /**
+    Name of this allocator, to be used for example with [gst.allocator.Allocator.find] and
+    [gst.memory.Memory.isType].
+*/
+enum ALLOCATOR_UDMABUF = "udmabuf";
+
+/**
     Constant that defines the caps feature name for DMA buffer sharing.
     
     It has to be used for non-mappable dma-buf only, i.e. when the underlying

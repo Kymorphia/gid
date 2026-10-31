@@ -16,10 +16,9 @@ import gtk.section_model_mixin;
 import gtk.types;
 
 /**
-    [gtk.filter_list_model.FilterListModel] is a list model that filters the elements of
-    the underlying model according to a [gtk.filter.Filter].
+    A list model that filters the elements of another model.
     
-    It hides some elements from the other model according to
+    It hides some elements from the underlying model according to
     criteria given by a [gtk.filter.Filter].
     
     The model can be set up to do incremental filtering, so that
@@ -149,6 +148,25 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
     return getPending();
   }
 
+  /**
+      Get `watchItems` property.
+      Returns: Monitor the list items for changes. It may impact performance.
+  */
+  @property bool watchItems() nothrow
+  {
+    return getWatchItems();
+  }
+
+  /**
+      Set `watchItems` property.
+      Params:
+        propval = Monitor the list items for changes. It may impact performance.
+  */
+  @property void watchItems(bool propval) nothrow
+  {
+    setWatchItems(propval);
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
 
@@ -232,6 +250,19 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 
   /**
+      Returns whether watching items is enabled.
+      
+      See [gtk.filter_list_model.FilterListModel.setWatchItems].
+      Returns: true if watching items is enabled
+  */
+  bool getWatchItems() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_filter_list_model_get_watch_items(cast(GtkFilterListModel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Sets the filter used to filter items.
   
       Params:
@@ -283,6 +314,23 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   {
     gtk_filter_list_model_set_model(cast(GtkFilterListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
+
+  /**
+      Sets the filter model to monitor properties of its items.
+      
+      This allows implementations of [gtk.filter.Filter] that support expression
+      watching to react to property changes. This property has no effect if the
+      current filter doesn't support watching items.
+      
+      By default, watching items is disabled.
+  
+      Params:
+        watchItems = true to watch items for property changes
+  */
+  void setWatchItems(bool watchItems) nothrow
+  {
+    gtk_filter_list_model_set_watch_items(cast(GtkFilterListModel*)this._cPtr, watchItems);
+  }
 }
 
 /// Fluent builder implementation template for [gtk.filter_list_model.FilterListModel]
@@ -323,6 +371,17 @@ class FilterListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
   T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
+  }
+
+  /**
+      Set `watchItems` property.
+      Params:
+        propval = Monitor the list items for changes. It may impact performance.
+      Returns: Builder instance for fluent chaining
+  */
+  T watchItems(bool propval) nothrow
+  {
+    return setProperty("watch-items", propval);
   }
 }
 

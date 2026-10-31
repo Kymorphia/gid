@@ -110,7 +110,7 @@ import gstbase.types;
     serialized via the pad's STREAM_LOCK.
     
     Note that [gstbase.adapter.Adapter.push] takes ownership of the buffer passed. Use
-    gst_buffer_ref() before pushing it into the adapter if you still want to
+    [gst.buffer.Buffer.ref_] before pushing it into the adapter if you still want to
     access the buffer later. The adapter will never modify the data in the
     buffer pushed in it.
 */
@@ -166,6 +166,10 @@ class Adapter : gobject.object.ObjectWrap
       Gets the maximum amount of bytes available, that is it returns the maximum
       value that can be supplied to [gstbase.adapter.Adapter.map] without that function
       returning null.
+      
+      Calling [gstbase.adapter.Adapter.map] with the amount of bytes returned by this function
+      may require expensive operations (like copying the data into a temporary
+      buffer) in some cases.
       Returns: number of bytes available in adapter
   */
   size_t available() nothrow
@@ -176,8 +180,11 @@ class Adapter : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the maximum number of bytes that are immediately available without
-      requiring any expensive operations (like copying the data into a
+      Gets the maximum number of bytes that can be retrieved in a single map
+      operation without merging buffers.
+      
+      Calling [gstbase.adapter.Adapter.map] with the amount of bytes returned by this function
+      will never require any expensive operations (like copying the data into a
       temporary buffer).
       Returns: number of bytes that are available in adapter without expensive
         operations
@@ -263,7 +270,7 @@ class Adapter : gobject.object.ObjectWrap
       does not flush them from the adapter. See [gstbase.adapter.Adapter.takeBuffer]
       for details.
       
-      Caller owns a reference to the returned buffer. gst_buffer_unref() after
+      Caller owns a reference to the returned buffer. [gst.buffer.Buffer.unref] after
       usage.
       
       Free-function: gst_buffer_unref
@@ -272,7 +279,7 @@ class Adapter : gobject.object.ObjectWrap
         nbytes = the number of bytes to get
       Returns: a #GstBuffer containing the first
             nbytes of the adapter, or null if nbytes bytes are not available.
-            gst_buffer_unref() when no longer needed.
+            [gst.buffer.Buffer.unref] when no longer needed.
   */
   gst.buffer.Buffer getBuffer(size_t nbytes) nothrow
   {
@@ -287,7 +294,7 @@ class Adapter : gobject.object.ObjectWrap
       does not flush them from the adapter. See [gstbase.adapter.Adapter.takeBufferFast]
       for details.
       
-      Caller owns a reference to the returned buffer. gst_buffer_unref() after
+      Caller owns a reference to the returned buffer. [gst.buffer.Buffer.unref] after
       usage.
       
       Free-function: gst_buffer_unref
@@ -296,7 +303,7 @@ class Adapter : gobject.object.ObjectWrap
         nbytes = the number of bytes to get
       Returns: a #GstBuffer containing the first
             nbytes of the adapter, or null if nbytes bytes are not available.
-            gst_buffer_unref() when no longer needed.
+            [gst.buffer.Buffer.unref] when no longer needed.
   */
   gst.buffer.Buffer getBufferFast(size_t nbytes) nothrow
   {
@@ -311,7 +318,7 @@ class Adapter : gobject.object.ObjectWrap
       the adapter but does not flush them from the adapter. See
       [gstbase.adapter.Adapter.takeBufferList] for details.
       
-      Caller owns the returned list. Call gst_buffer_list_unref() to free
+      Caller owns the returned list. Call [gst.buffer_list.BufferList.unref] to free
       the list after usage.
   
       Params:
@@ -333,7 +340,7 @@ class Adapter : gobject.object.ObjectWrap
       adapter, but does not flush them from the adapter. See
       [gstbase.adapter.Adapter.takeList] for details.
       
-      Caller owns returned list and contained buffers. gst_buffer_unref() each
+      Caller owns returned list and contained buffers. [gst.buffer.Buffer.unref] each
       buffer in the list before freeing the list after usage.
   
       Params:
@@ -446,7 +453,7 @@ class Adapter : gobject.object.ObjectWrap
       
       The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
       the adapter is first created or when it is cleared. This also means that before
-      the first byte with a dts is removed from the adapter, the dts
+      the first byte with a dts is added to the adapter, the dts
       and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
   
       Params:
@@ -467,7 +474,7 @@ class Adapter : gobject.object.ObjectWrap
       
       The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
       the adapter is first created or when it is cleared. This also means that before
-      the first byte with a dts is removed from the adapter, the dts
+      the first byte with a dts is added to the adapter, the dts
       and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
   
       Params:
@@ -489,7 +496,7 @@ class Adapter : gobject.object.ObjectWrap
       
       The offset is reset to GST_BUFFER_OFFSET_NONE and the distance is set to 0
       when the adapter is first created or when it is cleared. This also means that
-      before the first byte with an offset is removed from the adapter, the offset
+      before the first byte with an offset is added to the adapter, the offset
       and distance returned are GST_BUFFER_OFFSET_NONE and 0 respectively.
   
       Params:
@@ -510,7 +517,7 @@ class Adapter : gobject.object.ObjectWrap
       
       The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
       the adapter is first created or when it is cleared. This also means that before
-      the first byte with a pts is removed from the adapter, the pts
+      the first byte with a pts is added to the adapter, the pts
       and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
   
       Params:
@@ -531,7 +538,7 @@ class Adapter : gobject.object.ObjectWrap
       
       The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
       the adapter is first created or when it is cleared. This also means that before
-      the first byte with a pts is removed from the adapter, the pts
+      the first byte with a pts is added to the adapter, the pts
       and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
   
       Params:
@@ -583,10 +590,18 @@ class Adapter : gobject.object.ObjectWrap
       The caller needs to explicitly set or unset flags that should be set or
       unset.
       
+      Likewise, no assumptions should be made about timestamps and offset of the
+      returned buffer. The caller should use [gstbase.adapter.Adapter.prevPts],
+      [gstbase.adapter.Adapter.prevDts], and [gstbase.adapter.Adapter.prevOffset] to obtain the relevant
+      information.
+      
+      The returned buffer might not be writable, use [gst.buffer.Buffer.makeWritable]
+      if you need to change e.g. flags or timestamps.
+      
       Since 1.6 this will also copy over all GstMeta of the input buffers except
       for meta with the [gst.types.MetaFlags.Pooled] flag or with the "memory" tag.
       
-      Caller owns a reference to the returned buffer. gst_buffer_unref() after
+      Caller owns a reference to the returned buffer. [gst.buffer.Buffer.unref] after
       usage.
       
       Free-function: gst_buffer_unref
@@ -595,7 +610,7 @@ class Adapter : gobject.object.ObjectWrap
         nbytes = the number of bytes to take
       Returns: a #GstBuffer containing the first
             nbytes of the adapter, or null if nbytes bytes are not available.
-            gst_buffer_unref() when no longer needed.
+            [gst.buffer.Buffer.unref] when no longer needed.
   */
   gst.buffer.Buffer takeBuffer(size_t nbytes) nothrow
   {
@@ -625,7 +640,7 @@ class Adapter : gobject.object.ObjectWrap
       This function can return buffer up to the return value of
       [gstbase.adapter.Adapter.available] without making copies if possible.
       
-      Caller owns a reference to the returned buffer. gst_buffer_unref() after
+      Caller owns a reference to the returned buffer. [gst.buffer.Buffer.unref] after
       usage.
       
       Free-function: gst_buffer_unref
@@ -634,7 +649,7 @@ class Adapter : gobject.object.ObjectWrap
         nbytes = the number of bytes to take
       Returns: a #GstBuffer containing the first
             nbytes of the adapter, or null if nbytes bytes are not available.
-            gst_buffer_unref() when no longer needed.
+            [gst.buffer.Buffer.unref] when no longer needed.
   */
   gst.buffer.Buffer takeBufferFast(size_t nbytes) nothrow
   {
@@ -650,7 +665,7 @@ class Adapter : gobject.object.ObjectWrap
       When the caller can deal with individual buffers, this function is more
       performant because no memory should be copied.
       
-      Caller owns the returned list. Call gst_buffer_list_unref() to free
+      Caller owns the returned list. Call [gst.buffer_list.BufferList.unref] to free
       the list after usage.
   
       Params:
@@ -673,7 +688,7 @@ class Adapter : gobject.object.ObjectWrap
       When the caller can deal with individual buffers, this function is more
       performant because no memory should be copied.
       
-      Caller owns returned list and contained buffers. gst_buffer_unref() each
+      Caller owns returned list and contained buffers. [gst.buffer.Buffer.unref] each
       buffer in the list before freeing the list after usage.
   
       Params:

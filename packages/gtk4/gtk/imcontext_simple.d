@@ -10,7 +10,7 @@ import gtk.imcontext;
 import gtk.types;
 
 /**
-    [gtk.imcontext_simple.IMContextSimple] is an input method supporting table-based input methods.
+    Supports compose sequences, dead keys and numeric Unicode input.
     
     ## Compose sequences
     

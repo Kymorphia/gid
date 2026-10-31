@@ -149,14 +149,14 @@ enum MAJOR_VERSION = 2;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 1;
+enum MICRO_VERSION = 6;
 
 /**
     Like [javascriptcore.global.getMinorVersion], but from the headers used at
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MINOR_VERSION = 48;
+enum MINOR_VERSION = 52;
 
 /**
     Allows the DFG JIT to be used if true.

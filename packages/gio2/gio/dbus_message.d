@@ -338,7 +338,7 @@ class DBusMessage : gobject.object.ObjectWrap
 
   /**
       Checks whether message is locked. To monitor changes to this
-      value, conncet to the #GObject::notify signal to listen for changes
+      value, connect to the #GObject::notify signal to listen for changes
       on the #GDBusMessage:locked property.
       Returns: true if message is locked, false otherwise.
   */
@@ -708,9 +708,12 @@ class DBusMessage : gobject.object.ObjectWrap
 
   /**
       Sets the serial for message.
+      
+      The [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages)
+      does not allow the serial to be zero.
   
       Params:
-        serial = A #guint32.
+        serial = A #guint32, which must not be zero.
   */
   void setSerial(uint serial) nothrow
   {

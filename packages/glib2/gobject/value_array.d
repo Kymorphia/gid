@@ -152,7 +152,7 @@ class ValueArray : gobject.boxed.Boxed
   }
 
   /**
-      Return a pointer to the value at index_ containd in value_array.
+      Return a pointer to the value at index_ contained in value_array.
   
       Params:
         index = index of the value of interest

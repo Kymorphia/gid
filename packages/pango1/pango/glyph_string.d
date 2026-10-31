@@ -228,9 +228,11 @@ class GlyphString : gobject.boxed.Boxed
         text = the text for the run
         analysis = the analysis information return from `funcitemize`
         xPos = the x offset (in Pango units)
-        index = location to store calculated byte index within text
-        trailing = location to store a boolean indicating whether the
-            user clicked on the leading or trailing edge of the character
+        index = location to store calculated byte index
+            within text
+        trailing = location to store a boolean indicating
+            whether the user clicked on the leading or trailing edge of the
+            character
   */
   void xToIndex(string text, pango.analysis.Analysis analysis, int xPos, out int index, out int trailing) nothrow
   {

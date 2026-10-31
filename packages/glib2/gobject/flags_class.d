@@ -5,7 +5,6 @@ public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
-import gobject.flags_value;
 import gobject.type_class;
 import gobject.types;
 
@@ -34,5 +33,5 @@ struct FlagsClass
       an array of #GFlagsValue structs describing the
        individual values.
   */
-  FlagsValue* values;
+  GFlagsValue* values;
 }

@@ -111,7 +111,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       [gio.file_enumerator.FileEnumerator.closeFinish].
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
@@ -386,7 +386,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   
       Params:
         numFiles = the number of file info objects to request
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied

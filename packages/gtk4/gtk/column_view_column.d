@@ -14,7 +14,7 @@ import gtk.sorter;
 import gtk.types;
 
 /**
-    [gtk.column_view_column.ColumnViewColumn] represents the columns being added to a [gtk.column_view.ColumnView].
+    Represents the columns in a [gtk.column_view.ColumnView].
     
     The main ingredient for a [gtk.column_view_column.ColumnViewColumn] is the [gtk.list_item_factory.ListItemFactory]
     that tells the columnview how to create cells for this column from items in
@@ -95,6 +95,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   /**
       Get `factory` property.
       Returns: Factory for populating list items.
+        
+        The factory must be for configuring [gtk.column_view_cell.ColumnViewCell] objects.
   */
   @property gtk.list_item_factory.ListItemFactory factory() nothrow
   {
@@ -105,6 +107,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Set `factory` property.
       Params:
         propval = Factory for populating list items.
+          
+          The factory must be for configuring [gtk.column_view_cell.ColumnViewCell] objects.
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
@@ -287,7 +291,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   /**
       Gets the column view that's currently displaying this column.
       
-      If self has not been added to a column view yet, null is returned.
+      If self has not been added to a column view yet, `NULL` is returned.
       Returns: The column view displaying self.
   */
   gtk.column_view.ColumnView getColumnView() nothrow
@@ -310,8 +314,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the factory that's currently used to populate list items for
-      this column.
+      Gets the factory that's currently used to populate list items
+      for this column.
       Returns: The factory in use
   */
   gtk.list_item_factory.ListItemFactory getFactory() nothrow
@@ -408,10 +412,10 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Sets the column to take available extra space.
       
       The extra space is shared equally amongst all columns that
-      have the expand set to true.
+      have are set to expand.
   
       Params:
-        expand = true if this column should expand to fill available sace
+        expand = whether this column should expand to fill available space
   */
   void setExpand(bool expand) nothrow
   {
@@ -419,8 +423,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   }
 
   /**
-      Sets the [gtk.list_item_factory.ListItemFactory] to use for populating list items for this
-      column.
+      Sets the [gtk.list_item_factory.ListItemFactory] to use for populating list items
+      for this column.
   
       Params:
         factory = the factory to use
@@ -431,8 +435,9 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   }
 
   /**
-      If fixed_width is not -1, sets the fixed width of column;
-      otherwise unsets it.
+      Sets the fixed width of the column.
+      
+      If fixed_width is -1, the fixed width of the column is unset.
       
       Setting a fixed width overrides the automatically calculated
       width. Interactive resizing also sets the “fixed-width” property.
@@ -488,7 +493,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   /**
       Associates a sorter with the column.
       
-      If sorter is null, the column will not let users change
+      If sorter is unset, the column will not let users change
       the sorting by clicking on its header.
       
       This sorter can be made active by clicking on the column
@@ -552,6 +557,8 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
       Set `factory` property.
       Params:
         propval = Factory for populating list items.
+          
+          The factory must be for configuring [gtk.column_view_cell.ColumnViewCell] objects.
       Returns: Builder instance for fluent chaining
   */
   T factory(gtk.list_item_factory.ListItemFactory propval) nothrow

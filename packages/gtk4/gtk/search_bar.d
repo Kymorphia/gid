@@ -18,9 +18,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.search_bar.SearchBar] is a container made to have a search entry.
+    Reveals a search entry when search is started.
     
-    ![An example GtkSearchBar](search-bar.png)
+    <picture>
+      <source srcset="search-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkSearchBar" src="search-bar.png">
+    </picture>
     
     It can also contain additional widgets, such as drop-down menus,
     or buttons.  The search bar would appear when a search is started
@@ -43,6 +46,12 @@ import gtk.widget;
     entry.
     
     [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/search-bar.c)
+    
+    # Shortcuts and Gestures
+    
+    [gtk.search_bar.SearchBar] supports the following keyboard shortcuts:
+    
+    - <kbd>Escape</kbd> hides the search bar.
     
     # CSS nodes
     

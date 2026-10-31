@@ -105,7 +105,7 @@ class Device : gst.object.ObjectWrap
   /**
       Getter for the #GstCaps that this device supports.
       Returns: The #GstCaps supported by this device. Unref with
-        gst_caps_unref() when done.
+        [gst.caps.Caps.unref] when done.
   */
   gst.caps.Caps getCaps() nothrow
   {

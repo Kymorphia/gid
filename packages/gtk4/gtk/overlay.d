@@ -19,10 +19,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.overlay.Overlay] is a container which contains a single main child, on top
-    of which it can place “overlay” widgets.
+    Places “overlay” widgets on top of a single main child.
     
-    ![An example GtkOverlay](overlay.png)
+    <picture>
+      <source srcset="overlay-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkOverlay" src="overlay.png">
+    </picture>
     
     The position of each overlay widget is determined by its
     [gtk.widget.Widget.halign] and [gtk.widget.Widget.valign]

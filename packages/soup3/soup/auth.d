@@ -19,7 +19,7 @@ import soup.types;
     but applications never need to be aware of the specific subclasses being
     used.
     
-    #SoupAuth objects store the authentication data associated with a given bit
+    [soup.auth.Auth] objects store the authentication data associated with a given bit
     of web space. They are created automatically by [soup.session.Session].
 */
 class Auth : gobject.object.ObjectWrap
@@ -107,17 +107,17 @@ class Auth : gobject.object.ObjectWrap
   }
 
   /**
-      Creates a new #SoupAuth of type type with the information from
+      Creates a new [soup.auth.Auth] of type type with the information from
       msg and auth_header.
       
       This is called by [soup.session.Session]; you will normally not create auths
       yourself.
   
       Params:
-        type = the type of auth to create (a subtype of #SoupAuth)
+        type = the type of auth to create (a subtype of [soup.auth.Auth])
         msg = the #SoupMessage the auth is being created for
         authHeader = the WWW-Authenticate/Proxy-Authenticate header
-      Returns: the new #SoupAuth, or null if it could
+      Returns: the new [soup.auth.Auth], or null if it could
           not be created
   */
   this(gobject.types.GType type, soup.message.Message msg, string authHeader) nothrow
@@ -162,7 +162,7 @@ class Auth : gobject.object.ObjectWrap
       
       You need to cancel an auth to complete an asynchronous authenticate operation
       when no credentials are provided ([soup.auth.Auth.authenticate] is not called).
-      The #SoupAuth will be cancelled on dispose if it hans't been authenticated.
+      The [soup.auth.Auth] will be cancelled on dispose if it hasn't been authenticated.
   */
   void cancel() nothrow
   {
@@ -202,7 +202,7 @@ class Auth : gobject.object.ObjectWrap
   /**
       Gets an opaque identifier for auth.
       
-      The identifier can be used as a hash key or the like. #SoupAuth objects from
+      The identifier can be used as a hash key or the like. [soup.auth.Auth] objects from
       the same server with the same identifier refer to the same authentication
       domain (eg, the URLs associated with them take the same usernames and
       passwords).
@@ -328,7 +328,7 @@ class Auth : gobject.object.ObjectWrap
         msg = the #SoupMessage auth is being updated for
         authHeader = the WWW-Authenticate/Proxy-Authenticate header
       Returns: true if auth is still a valid (but potentially
-          unauthenticated) #SoupAuth. false if something about auth_params
+          unauthenticated) [soup.auth.Auth]. false if something about auth_params
           could not be parsed or incorporated into auth at all.
   */
   bool update(soup.message.Message msg, string authHeader) nothrow

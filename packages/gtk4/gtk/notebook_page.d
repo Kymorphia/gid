@@ -11,7 +11,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.notebook_page.NotebookPage] is an auxiliary object used by [gtk.notebook.Notebook].
+    An auxiliary object used by [gtk.notebook.Notebook].
 */
 class NotebookPage : gobject.object.ObjectWrap
 {

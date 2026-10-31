@@ -17,11 +17,14 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.action_bar.ActionBar] is designed to present contextual actions.
+    Presents contextual actions.
     
-    ![An example GtkActionBar](action-bar.png)
+    <picture>
+      <source srcset="action-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkActionBar" src="action-bar.png">
+    </picture>
     
-    It is expected to be displayed below the content and expand
+    [gtk.action_bar.ActionBar] is expected to be displayed below the content and expand
     horizontally to fill the area.
     
     It allows placing children at the start or the end. In addition, it
@@ -51,7 +54,7 @@ import gtk.widget;
     
     A [gtk.action_bar.ActionBar]'s CSS node is called `actionbar`. It contains a `revealer`
     subnode, which contains a `box` subnode, which contains two `box` subnodes at
-    the start and end of the action bar, with `start` and `end style classes
+    the start and end of the action bar, with `start` and `end` style classes
     respectively, as well as a center node that represents the center child.
     
     Each of the boxes contains children packed for that side.
@@ -113,7 +116,7 @@ class ActionBar : gtk.widget.Widget
   }
 
   /**
-      Creates a new [gtk.action_bar.ActionBar] widget.
+      Creates a new action bar widget.
       Returns: a new [gtk.action_bar.ActionBar]
   */
   this() nothrow
@@ -125,7 +128,7 @@ class ActionBar : gtk.widget.Widget
 
   /**
       Retrieves the center bar widget of the bar.
-      Returns: the center [gtk.widget.Widget]
+      Returns: the center widget
   */
   gtk.widget.Widget getCenterWidget() nothrow
   {
@@ -148,11 +151,11 @@ class ActionBar : gtk.widget.Widget
   }
 
   /**
-      Adds child to action_bar, packed with reference to the
-      end of the action_bar.
+      Adds a child to the action bar, packed with reference to the
+      end of the action bar.
   
       Params:
-        child = the [gtk.widget.Widget] to be added to action_bar
+        child = the widget to be added
   */
   void packEnd(gtk.widget.Widget child) nothrow
   {
@@ -160,11 +163,11 @@ class ActionBar : gtk.widget.Widget
   }
 
   /**
-      Adds child to action_bar, packed with reference to the
-      start of the action_bar.
+      Adds a child to the action, packed with reference to the
+      start of the action bar.
   
       Params:
-        child = the [gtk.widget.Widget] to be added to action_bar
+        child = the widget to be added
   */
   void packStart(gtk.widget.Widget child) nothrow
   {
@@ -172,10 +175,10 @@ class ActionBar : gtk.widget.Widget
   }
 
   /**
-      Removes a child from action_bar.
+      Removes a child from the action bar.
   
       Params:
-        child = the [gtk.widget.Widget] to be removed
+        child = the widget to be removed
   */
   void remove(gtk.widget.Widget child) nothrow
   {
@@ -183,7 +186,7 @@ class ActionBar : gtk.widget.Widget
   }
 
   /**
-      Sets the center widget for the [gtk.action_bar.ActionBar].
+      Sets the center widget for the action bar.
   
       Params:
         centerWidget = a widget to use for the center
@@ -196,12 +199,12 @@ class ActionBar : gtk.widget.Widget
   /**
       Reveals or conceals the content of the action bar.
       
-      Note: this does not show or hide action_bar in the
+      Note: this does not show or hide the action bar in the
       [gtk.widget.Widget.visible] sense, so revealing has
       no effect if the action bar is hidden.
   
       Params:
-        revealed = The new value of the property
+        revealed = the new value for the property
   */
   void setRevealed(bool revealed) nothrow
   {

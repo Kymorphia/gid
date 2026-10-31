@@ -2,19 +2,10 @@
 module vte.global;
 
 import gid.gid;
-import gobject.types;
 import vte.c.functions;
 import vte.c.types;
 import vte.types;
 
-
-/** */
-gobject.types.GType eventContextGetType() nothrow
-{
-  gobject.types.GType _retval;
-  _retval = vte_event_context_get_type();
-  return _retval;
-}
 
 /**
     Queries whether the legacy encoding encoding is supported.
@@ -134,6 +125,28 @@ uint getMinorVersion() nothrow
 }
 
 /**
+    Gets the names of the installed termprops in an unspecified order.
+    Returns: the names of the installed
+        termprops, or null if there are no termprops
+*/
+string[] getTermprops() nothrow
+{
+  const(char*)* _cretval;
+  size_t _cretlength;
+  _cretval = vte_get_termprops(&_cretlength);
+  string[] _retval;
+
+  if (_cretval)
+  {
+    _retval = new string[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = _cretval[i].fromCString!(No.Free);
+    gFree(cast(void*)_cretval);
+  }
+  return _retval;
+}
+
+/**
     Gets the user's shell, or null. In the latter case, the
     system default (usually "/bin/sh") should be used.
     Returns: a newly allocated string with the
@@ -144,5 +157,107 @@ string getUserShell() nothrow
   char* _cretval;
   _cretval = vte_get_user_shell();
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+  return _retval;
+}
+
+/**
+    Installs a new terminal property that can be set by the application.
+    
+    name must follow the rules for termprop names as laid out above; it
+    must have at least 4 components, the first two of which must be "vte",
+    and "ext". Use the [vte.types.TERMPROP_NAME_PREFIX] macro which defines this
+    name prefix.
+    
+    You should use an identifier for your terminal as the first component
+    after the prefix, as a namespace marker.
+    
+    It is a programming error to call this function with a name that does
+    not meet these requirements.
+    
+    It is a programming error to call this function after any #VteTerminal
+    instances have been created.
+    
+    It is a programming error to call this function if the named termprop
+    is already installed with a different type or flags.
+
+    Params:
+      name = a namespaced property name
+      type = a #VtePropertyType to use for the property
+      flags = flags from #VtePropertyFlags
+    Returns: an ID for the termprop
+*/
+int installTermprop(string name, vte.types.PropertyType type, vte.types.PropertyFlags flags) nothrow
+{
+  int _retval;
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  _retval = vte_install_termprop(_name, type, flags);
+  return _retval;
+}
+
+/**
+    Installs a new terminal property name as an alias for the terminal
+    property target_name.
+
+    Params:
+      name = a namespaced property name
+      targetName = the target property name
+    Returns: the ID for the termprop target_name
+*/
+int installTermpropAlias(string name, string targetName) nothrow
+{
+  int _retval;
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _targetName = targetName.toCString!(No.Malloc, No.Nullable);
+  _retval = vte_install_termprop_alias(_name, _targetName);
+  return _retval;
+}
+
+/**
+    Gets the property type of the termprop. For properties installed by
+    [vte.global.installTermprop], the name starts with "vte.ext.".
+    
+    For an alias termprop (see [vte.global.installTermpropAlias]), resolved_name
+    will be name of the alias' target termprop; otherwise it will be name.
+
+    Params:
+      name = a termprop name
+      resolvedName = a location to store the termprop's name
+      prop = a location to store the termprop's ID
+      type = a location to store the termprop's type as a #VtePropertyType
+      flags = a location to store the termprop's flags as a #VtePropertyFlags
+    Returns: true iff the termprop exists, and then prop, type and
+        flags will be filled in
+*/
+bool queryTermprop(string name, out string resolvedName, out int prop, out vte.types.PropertyType type, out vte.types.PropertyFlags flags) nothrow
+{
+  bool _retval;
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  char* _resolvedName;
+  _retval = cast(bool)vte_query_termprop(_name, &_resolvedName, cast(int*)&prop, &type, &flags);
+  resolvedName = _resolvedName.fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Like [vte.global.queryTermprop] except that it takes the termprop by ID.
+    See that function for more information.
+    
+    For an alias termprop (see [vte.global.installTermpropAlias]), resolved_name
+    will be name of the alias' target termprop; otherwise it will be name.
+
+    Params:
+      prop = a termprop ID
+      name = a location to store the termprop's name
+      type = a location to store the termprop's type as a #VtePropertyType
+      flags = a location to store the termprop's flags as a #VtePropertyFlags
+    Returns: true iff the termprop exists, and then name, type and
+        flags will be filled in
+*/
+bool queryTermpropById(int prop, out string name, out vte.types.PropertyType type, out vte.types.PropertyFlags flags) nothrow
+{
+  bool _retval;
+  char* _name;
+  _retval = cast(bool)vte_query_termprop_by_id(prop, &_name, &type, &flags);
+  name = _name.fromCString!(No.Free);
   return _retval;
 }

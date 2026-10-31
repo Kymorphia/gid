@@ -12,8 +12,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    Layout managers are delegate classes that handle the preferred size
-    and the allocation of a widget.
+    Handles the preferred size and allocation for children of a widget.
     
     You typically subclass [gtk.layout_manager.LayoutManager] if you want to implement a
     layout policy for the children of a widget, or if you want to determine

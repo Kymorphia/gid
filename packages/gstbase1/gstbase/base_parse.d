@@ -188,6 +188,25 @@ class BaseParse : gst.element.Element
   }
 
   /**
+      Get `disableClip` property.
+      Returns: Disable dropping buffers that are out of segment
+  */
+  @property bool disableClip() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(bool)("disable-clip");
+  }
+
+  /**
+      Set `disableClip` property.
+      Params:
+        propval = Disable dropping buffers that are out of segment
+  */
+  @property void disableClip(bool propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(bool)("disable-clip", propval);
+  }
+
+  /**
       Get `disablePassthrough` property.
       Returns: If set to true, baseparse will unconditionally force parsing of the
         incoming data. This can be required in the rare cases where the incoming
@@ -505,6 +524,17 @@ class BaseParse : gst.element.Element
 /// Fluent builder implementation template for [gstbase.base_parse.BaseParse]
 class BaseParseGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
+
+  /**
+      Set `disableClip` property.
+      Params:
+        propval = Disable dropping buffers that are out of segment
+      Returns: Builder instance for fluent chaining
+  */
+  T disableClip(bool propval) nothrow
+  {
+    return setProperty("disable-clip", propval);
+  }
 
   /**
       Set `disablePassthrough` property.

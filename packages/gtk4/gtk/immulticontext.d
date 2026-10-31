@@ -10,8 +10,7 @@ import gtk.imcontext;
 import gtk.types;
 
 /**
-    [gtk.immulticontext.IMMulticontext] is an input method context supporting multiple,
-    switchable input methods.
+    Supports switching between multiple input methods.
     
     Text widgets such as [gtk.text.Text] or [gtk.text_view.TextView] use a `GtkIMMultiContext`
     to implement their `im-module` property for switching between different

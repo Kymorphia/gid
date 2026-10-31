@@ -26,6 +26,11 @@ enum GstAggregatorStartTimeSelection
       selected by the `start-time` property.
   */
   Set = 2,
+
+  /**
+      Start at the current running time when reaching [gst.types.State.Playing].
+  */
+  Now = 3,
 }
 
 /**
@@ -225,7 +230,7 @@ enum GstCollectPadsStateFlags : uint
     serialized via the pad's STREAM_LOCK.
     
     Note that [gstbase.adapter.Adapter.push] takes ownership of the buffer passed. Use
-    gst_buffer_ref() before pushing it into the adapter if you still want to
+    [gst.buffer.Buffer.ref_] before pushing it into the adapter if you still want to
     access the buffer later. The adapter will never modify the data in the
     buffer pushed in it.
 */
@@ -2328,6 +2333,8 @@ struct GstPushSrcClass
     #GstQueueArray is an object that provides standard queue functionality
     based on an array instead of linked lists. This reduces the overhead
     caused by memory management by a large factor.
+
+    Deprecated: Use #GstVecDeque instead.
 */
 struct GstQueueArray;
 

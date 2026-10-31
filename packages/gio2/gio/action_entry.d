@@ -13,7 +13,7 @@ import gio.types;
     
     The order of the items in the structure are intended to reflect
     frequency of use.  It is permissible to use an incomplete initialiser
-    in order to leave some of the later values as null.  All values
+    in order to leave some of the later values as `NULL`.  All values
     after @name are optional.  Additional optional fields may be added in
     the future.
     
@@ -28,13 +28,12 @@ class ActionEntry
       Params:
         name = the name of the action
         parameterType = the type of the parameter that must be passed to the
-                           activate function for this action, given as a single
-                           GVariant type string (or null for no parameter)
+            activate function for this action, given as a single GVariant type string
+            (or `NULL` for no parameter)
         state = the initial state for this action, given in
-                  [GVariant text format][gvariant-text].  The state is parsed
-                  with no extra type information, so type tags must be added to
-                  the string if they are necessary.  Stateless actions should
-                  give null here.
+            [GVariant text format](../glib/gvariant-text-format.html).  The state is parsed
+            with no extra type information, so type tags must be added to the string
+            if they are necessary.  Stateless actions should give `NULL` here.
   */
   this(string name = string.init, string parameterType = string.init, string state = string.init) nothrow
   {
@@ -82,13 +81,12 @@ class ActionEntry
 
   /**
       Get `activate` field.
-      Returns: the callback to connect to the "activate" signal of the
-                   action.  Since GLib 2.40, this can be null for stateful
-                   actions, in which case the default handler is used.  For
-                   boolean-stated actions with no parameter, this is a
-                   toggle.  For other state types (and parameter type equal
-                   to the state type) this will be a function that
-                   just calls @change_state (which you should provide).
+      Returns: the callback to connect to the "activate" signal of the action.
+          Since GLib 2.40, this can be `NULL` for stateful actions, in which case
+          the default handler is used. For boolean-stated actions with no
+          parameter, this is a toggle. For other state types (and parameter type
+          equal to the state type) this will be a function that just calls
+          @change_state (which you should provide).
   */
   @property ActivateFuncType activate() nothrow
   {
@@ -98,8 +96,8 @@ class ActionEntry
   /**
       Get `parameterType` field.
       Returns: the type of the parameter that must be passed to the
-                         activate function for this action, given as a single
-                         GVariant type string (or null for no parameter)
+          activate function for this action, given as a single GVariant type string
+          (or `NULL` for no parameter)
   */
   @property string parameterType() nothrow
   {
@@ -110,8 +108,8 @@ class ActionEntry
       Set `parameterType` field.
       Params:
         propval = the type of the parameter that must be passed to the
-                           activate function for this action, given as a single
-                           GVariant type string (or null for no parameter)
+            activate function for this action, given as a single GVariant type string
+            (or `NULL` for no parameter)
   */
   @property void parameterType(string propval) nothrow
   {
@@ -121,10 +119,9 @@ class ActionEntry
   /**
       Get `state` field.
       Returns: the initial state for this action, given in
-                [GVariant text format][gvariant-text].  The state is parsed
-                with no extra type information, so type tags must be added to
-                the string if they are necessary.  Stateless actions should
-                give null here.
+          [GVariant text format](../glib/gvariant-text-format.html).  The state is parsed
+          with no extra type information, so type tags must be added to the string
+          if they are necessary.  Stateless actions should give `NULL` here.
   */
   @property string state() nothrow
   {
@@ -135,10 +132,9 @@ class ActionEntry
       Set `state` field.
       Params:
         propval = the initial state for this action, given in
-                  [GVariant text format][gvariant-text].  The state is parsed
-                  with no extra type information, so type tags must be added to
-                  the string if they are necessary.  Stateless actions should
-                  give null here.
+            [GVariant text format](../glib/gvariant-text-format.html).  The state is parsed
+            with no extra type information, so type tags must be added to the string
+            if they are necessary.  Stateless actions should give `NULL` here.
   */
   @property void state(string propval) nothrow
   {
@@ -150,9 +146,9 @@ class ActionEntry
 
   /**
       Get `changeState` field.
-      Returns: the callback to connect to the "change-state" signal
-                       of the action.  All stateful actions should provide a
-                       handler here; stateless actions should not.
+      Returns: the callback to connect to the "change-state" signal of the
+          action.  All stateful actions should provide a handler here; stateless
+          actions should not.
   */
   @property ChangeStateFuncType changeState() nothrow
   {

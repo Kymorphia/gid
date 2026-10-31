@@ -10,8 +10,7 @@ import gid.gid;
 import gobject.gid_builder;
 
 /**
-    [gdk.device_pad.DevicePad] is an interface implemented by devices of type
-    [gdk.types.InputSource.TabletPad]
+    An interface for tablet pad devices.
     
     It allows querying the features provided by the pad device.
     

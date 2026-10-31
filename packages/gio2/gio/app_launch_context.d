@@ -57,8 +57,9 @@ class AppLaunchContext : gobject.object.ObjectWrap
 
   /**
       Creates a new application launch context. This is not normally used,
-      instead you instantiate a subclass of this, such as #GdkAppLaunchContext.
-      Returns: a #GAppLaunchContext.
+      instead you instantiate a subclass of this, such as
+      [[gdk.app_launch_context.AppLaunchContext]](https://docs.gtk.org/gdk4/class.AppLaunchContext.html).
+      Returns: a launch context.
   */
   this() nothrow
   {
@@ -73,8 +74,8 @@ class AppLaunchContext : gobject.object.ObjectWrap
       application, by setting the `DISPLAY` environment variable.
   
       Params:
-        info = a #GAppInfo
-        files = a #GList of #GFile objects
+        info = the app info
+        files = a list of [gio.file.File] objects
       Returns: a display string for the display.
   */
   string getDisplay(gio.app_info.AppInfo info, gio.file.File[] files) nothrow
@@ -90,9 +91,9 @@ class AppLaunchContext : gobject.object.ObjectWrap
   /**
       Gets the complete environment variable list to be passed to
       the child process when context is used to launch an application.
-      This is a null-terminated array of strings, where each string has
+      This is a `NULL`-terminated array of strings, where each string has
       the form `KEY=VALUE`.
-      Returns: the child's environment
+      Returns: the child’s environment
   */
   string[] getEnvironment() nothrow
   {
@@ -127,14 +128,16 @@ class AppLaunchContext : gobject.object.ObjectWrap
       [freedesktop.org Startup Notification Protocol](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
       
       Support for the XDG Activation Protocol was added in GLib 2.76.
+      Since GLib 2.82 info and files can be `NULL`. If that’s not supported by the backend,
+      the returned token will be `NULL`.
   
       Params:
-        info = a #GAppInfo
-        files = a #GList of #GFile objects
-      Returns: a startup notification ID for the application, or null if
-            not supported.
+        info = the app info
+        files = a list of [gio.file.File] objects
+      Returns: a startup notification ID for the application, or `NULL` if
+          not supported.
   */
-  string getStartupNotifyId(gio.app_info.AppInfo info, gio.file.File[] files) nothrow
+  string getStartupNotifyId(gio.app_info.AppInfo info = null, gio.file.File[] files = null) nothrow
   {
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
@@ -146,10 +149,12 @@ class AppLaunchContext : gobject.object.ObjectWrap
 
   /**
       Called when an application has failed to launch, so that it can cancel
-      the application startup notification started in [gio.app_launch_context.AppLaunchContext.getStartupNotifyId].
+      the application startup notification started in
+      [gio.app_launch_context.AppLaunchContext.getStartupNotifyId].
   
       Params:
-        startupNotifyId = the startup notification id that was returned by [gio.app_launch_context.AppLaunchContext.getStartupNotifyId].
+        startupNotifyId = the startup notification id that was returned by
+            [gio.app_launch_context.AppLaunchContext.getStartupNotifyId].
   */
   void launchFailed(string startupNotifyId) nothrow
   {
@@ -158,8 +163,8 @@ class AppLaunchContext : gobject.object.ObjectWrap
   }
 
   /**
-      Arranges for variable to be set to value in the child's
-      environment when context is used to launch an application.
+      Arranges for variable to be set to value in the child’s environment when
+      context is used to launch an application.
   
       Params:
         variable = the environment variable to set
@@ -173,8 +178,8 @@ class AppLaunchContext : gobject.object.ObjectWrap
   }
 
   /**
-      Arranges for variable to be unset in the child's environment
-      when context is used to launch an application.
+      Arranges for variable to be unset in the child’s environment when context
+      is used to launch an application.
   
       Params:
         variable = the environment variable to remove
@@ -188,9 +193,9 @@ class AppLaunchContext : gobject.object.ObjectWrap
   /**
       Connect to `LaunchFailed` signal.
   
-      The #GAppLaunchContext::launch-failed signal is emitted when a #GAppInfo launch
-        fails. The startup notification id is provided, so that the launcher
-        can cancel the startup notification.
+      The [gio.app_launch_context.AppLaunchContext.launchFailed] signal is emitted when a
+        [gio.app_info.AppInfo] launch fails. The startup notification id is provided,
+        so that the launcher can cancel the startup notification.
         
         Because a launch operation may involve spawning multiple instances of the
         target application, you should expect this signal to be emitted multiple
@@ -244,11 +249,11 @@ class AppLaunchContext : gobject.object.ObjectWrap
   /**
       Connect to `LaunchStarted` signal.
   
-      The #GAppLaunchContext::launch-started signal is emitted when a #GAppInfo is
-        about to be launched. If non-null the platform_data is an
-        GVariant dictionary mapping strings to variants (ie `a{sv}`), which
-        contains additional, platform-specific data about this launch. On
-        UNIX, at least the `startup-notification-id` keys will be
+      The [gio.app_launch_context.AppLaunchContext.launchStarted] signal is emitted when a
+        [gio.app_info.AppInfo] is about to be launched. If non-null the
+        platform_data is an GVariant dictionary mapping strings to variants
+        (ie `a{sv}`), which contains additional, platform-specific data about this
+        launch. On UNIX, at least the `startup-notification-id` keys will be
         present.
         
         The value of the `startup-notification-id` key (type `s`) is a startup
@@ -256,8 +261,9 @@ class AppLaunchContext : gobject.object.ObjectWrap
         specification](https://specifications.freedesktop.org/startup-notification-spec/startup-notification-0.1.txt).
         It allows tracking the progress of the launchee through startup.
         
-        It is guaranteed that this signal is followed by either a #GAppLaunchContext::launched or
-        #GAppLaunchContext::launch-failed signal.
+        It is guaranteed that this signal is followed by either a
+        [gio.app_launch_context.AppLaunchContext.launched] or
+        [gio.app_launch_context.AppLaunchContext.launchFailed] signal.
         
         Because a launch operation may involve spawning multiple instances of the
         target application, you should expect this signal to be emitted multiple
@@ -268,7 +274,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   
           `void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext)`
   
-          `info` the #GAppInfo that is about to be launched (optional)
+          `info` the [gio.app_info.AppInfo] that is about to be launched (optional)
   
           `platformData` additional platform-specific data for this launch (optional)
   
@@ -317,8 +323,8 @@ class AppLaunchContext : gobject.object.ObjectWrap
   /**
       Connect to `Launched` signal.
   
-      The #GAppLaunchContext::launched signal is emitted when a #GAppInfo is successfully
-        launched.
+      The [gio.app_launch_context.AppLaunchContext.launched] signal is emitted when a
+        [gio.app_info.AppInfo] is successfully launched.
         
         Because a launch operation may involve spawning multiple instances of the
         target application, you should expect this signal to be emitted multiple
@@ -329,21 +335,22 @@ class AppLaunchContext : gobject.object.ObjectWrap
         platform-specific data about this launch. On UNIX, at least the
         `pid` and `startup-notification-id` keys will be present.
         
-        Since 2.72 the `pid` may be 0 if the process id wasn't known (for
+        Since 2.72 the `pid` may be 0 if the process id wasn’t known (for
         example if the process was launched via D-Bus). The `pid` may not be
         set at all in subsequent releases.
         
         On Windows, `pid` is guaranteed to be valid only for the duration of the
-        #GAppLaunchContext::launched signal emission; after the signal is emitted,
-        GLib will call [glib.global.spawnClosePid]. If you need to keep the #GPid after the
-        signal has been emitted, then you can duplicate `pid` using `DuplicateHandle()`.
+        [gio.app_launch_context.AppLaunchContext.launched] signal emission; after the signal
+        is emitted, GLib will call `funcGLib.spawn_close_pid`. If you need to
+        keep the [glib.types.int] after the signal has been emitted, then you can
+        duplicate `pid` using `DuplicateHandle()`.
   
       Params:
         callback = signal callback delegate or function to connect
   
           `void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext)`
   
-          `info` the #GAppInfo that was just launched (optional)
+          `info` the [gio.app_info.AppInfo] that was just launched (optional)
   
           `platformData` additional platform-specific data for this launch (optional)
   

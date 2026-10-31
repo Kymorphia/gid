@@ -23,17 +23,25 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.popover.Popover] is a bubble-like context popup.
+    Presents a bubble-like popup.
     
-    ![An example GtkPopover](popover.png)
+    <picture>
+      <source srcset="popover-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkPopover" src="popover.png">
+    </picture>
     
     It is primarily meant to provide context-dependent information
-    or options. Popovers are attached to a parent widget. By default,
-    they point to the whole widget area, although this behavior can be
-    changed with [gtk.popover.Popover.setPointingTo].
+    or options. Popovers are attached to a parent widget. The parent widget
+    must support popover children, as [gtk.menu_button.MenuButton] and
+    [gtk.popover_menu_bar.PopoverMenuBar] do. If you want to make a custom widget that
+    has an attached popover, you need to call [gtk.popover.Popover.present]
+    in your `vfunc@Gtk.Widget.size_allocate` vfunc, in order to update the
+    positioning of the popover.
     
     The position of a popover relative to the widget it is attached to
-    can also be changed with [gtk.popover.Popover.setPosition]
+    can also be changed with [gtk.popover.Popover.setPosition]. By default,
+    it points to the whole widget area, but it can be made to point to
+    a specific area using [gtk.popover.Popover.setPointingTo].
     
     By default, [gtk.popover.Popover] performs a grab, in order to ensure input
     events get redirected to it while it is shown, and also so the popover
@@ -44,7 +52,7 @@ import gtk.widget;
     
     ## GtkPopover as menu replacement
     
-    [gtk.popover.Popover] is often used to replace menus. The best was to do this
+    [gtk.popover.Popover] is often used to replace menus. The best way to do this
     is to use the [gtk.popover_menu.PopoverMenu] subclass which supports being
     populated from a [gio.menu_model.MenuModel] with [gtk.popover_menu.PopoverMenu.newFromModel].
     
@@ -68,6 +76,17 @@ import gtk.widget;
       </item>
     </section>
     ```
+    
+    # Shortcuts and Gestures
+    
+    [gtk.popover.Popover] supports the following keyboard shortcuts:
+    
+    - <kbd>Escape</kbd> closes the popover.
+    - <kbd>Alt</kbd> makes the mnemonics visible.
+    
+    The following signals have default keybindings:
+    
+    - [gtk.popover.Popover.activateDefault]
     
     # CSS nodes
     
@@ -581,6 +600,8 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Emitted whend the user activates the default widget.
         
         This is a [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is <kbd>Enter</kbd>.
   
       Params:
         callback = signal callback delegate or function to connect

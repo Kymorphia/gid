@@ -16,12 +16,15 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.window_controls.WindowControls] shows window frame controls.
+    Shows window frame controls.
     
     Typical window frame controls are minimize, maximize and close buttons,
     and the window icon.
     
-    ![An example GtkWindowControls](windowcontrols.png)
+    <picture>
+      <source srcset="windowcontrols-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkWindowControls" src="windowcontrols.png">
+    </picture>
     
     [gtk.window_controls.WindowControls] only displays start or end side of the controls (see
     [gtk.window_controls.WindowControls.side]), so it's intended to be always used
@@ -162,11 +165,44 @@ class WindowControls : gtk.widget.Widget
   }
 
   /**
+      Get `useNativeControls` property.
+      Returns: Whether to show platform native close/minimize/maximize buttons.
+        
+        For macOS, the [gtk.header_bar.HeaderBar.decorationLayout] property
+        controls the use of native window controls.
+        
+        On other platforms, this option has no effect.
+        
+        See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+  */
+  @property bool useNativeControls() nothrow
+  {
+    return getUseNativeControls();
+  }
+
+  /**
+      Set `useNativeControls` property.
+      Params:
+        propval = Whether to show platform native close/minimize/maximize buttons.
+          
+          For macOS, the [gtk.header_bar.HeaderBar.decorationLayout] property
+          controls the use of native window controls.
+          
+          On other platforms, this option has no effect.
+          
+          See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+  */
+  @property void useNativeControls(bool propval) nothrow
+  {
+    setUseNativeControls(propval);
+  }
+
+  /**
       Creates a new [gtk.window_controls.WindowControls].
   
       Params:
         side = the side
-      Returns: a new [gtk.window_controls.WindowControls].
+      Returns: a new [gtk.window_controls.WindowControls]
   */
   this(gtk.types.PackType side) nothrow
   {
@@ -176,8 +212,8 @@ class WindowControls : gtk.widget.Widget
   }
 
   /**
-      Gets the decoration layout of this [gtk.window_controls.WindowControls].
-      Returns: the decoration layout or null if it is unset
+      Gets the decoration layout of this window controls widget
+      Returns: the decoration layout
   */
   string getDecorationLayout() nothrow
   {
@@ -189,7 +225,7 @@ class WindowControls : gtk.widget.Widget
 
   /**
       Gets whether the widget has any window buttons.
-      Returns: true if the widget has window buttons, otherwise false
+      Returns: true if the widget has window buttons
   */
   bool getEmpty() nothrow
   {
@@ -199,7 +235,7 @@ class WindowControls : gtk.widget.Widget
   }
 
   /**
-      Gets the side to which this [gtk.window_controls.WindowControls] instance belongs.
+      Gets the side to which this window controls widget belongs.
       Returns: the side
   */
   gtk.types.PackType getSide() nothrow
@@ -207,6 +243,17 @@ class WindowControls : gtk.widget.Widget
     GtkPackType _cretval;
     _cretval = gtk_window_controls_get_side(cast(GtkWindowControls*)this._cPtr);
     gtk.types.PackType _retval = cast(gtk.types.PackType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns whether platform native window controls are shown.
+      Returns: true if native window controls are shown
+  */
+  bool getUseNativeControls() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_window_controls_get_use_native_controls(cast(GtkWindowControls*)this._cPtr);
     return _retval;
   }
 
@@ -224,11 +271,11 @@ class WindowControls : gtk.widget.Widget
       For example, “icon:minimize,maximize,close” specifies a icon
       on the left, and minimize, maximize and close buttons on the right.
       
-      If [gtk.window_controls.WindowControls.side] value is GTK_PACK_START, self
-      will display the part before the colon, otherwise after that.
+      If [gtk.window_controls.WindowControls.side] value is [gtk.types.PackType.Start],
+      self will display the part before the colon, otherwise after that.
   
       Params:
-        layout = a decoration layout, or null to unset the layout
+        layout = a decoration layout, or `NULL` to unset the layout
   */
   void setDecorationLayout(string layout = null) nothrow
   {
@@ -237,7 +284,8 @@ class WindowControls : gtk.widget.Widget
   }
 
   /**
-      Determines which part of decoration layout the [gtk.window_controls.WindowControls] uses.
+      Determines which part of decoration layout
+      the window controls widget uses.
       
       See [gtk.window_controls.WindowControls.decorationLayout].
   
@@ -247,6 +295,22 @@ class WindowControls : gtk.widget.Widget
   void setSide(gtk.types.PackType side) nothrow
   {
     gtk_window_controls_set_side(cast(GtkWindowControls*)this._cPtr, side);
+  }
+
+  /**
+      Sets whether platform native window controls are used.
+      
+      This option shows the "stoplight" buttons on macOS.
+      For Linux, this option has no effect.
+      
+      See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+  
+      Params:
+        setting = true to show native window controls
+  */
+  void setUseNativeControls(bool setting) nothrow
+  {
+    gtk_window_controls_set_use_native_controls(cast(GtkWindowControls*)this._cPtr, setting);
   }
 }
 
@@ -280,6 +344,24 @@ class WindowControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   T side(gtk.types.PackType propval) nothrow
   {
     return setProperty("side", propval);
+  }
+
+  /**
+      Set `useNativeControls` property.
+      Params:
+        propval = Whether to show platform native close/minimize/maximize buttons.
+          
+          For macOS, the [gtk.header_bar.HeaderBar.decorationLayout] property
+          controls the use of native window controls.
+          
+          On other platforms, this option has no effect.
+          
+          See also [Using GTK on Apple macOS](osx.html?native-window-controls).
+      Returns: Builder instance for fluent chaining
+  */
+  T useNativeControls(bool propval) nothrow
+  {
+    return setProperty("use-native-controls", propval);
   }
 }
 

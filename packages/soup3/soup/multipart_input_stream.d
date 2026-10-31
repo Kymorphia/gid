@@ -28,7 +28,7 @@ import soup.types;
     [soup.multipart_input_stream.MultipartInputStream.nextPart] before reading. Responses
     which are not wrapped will be treated like non-multipart responses.
     
-    Note that although #SoupMultipartInputStream is a [gio.input_stream.InputStream],
+    Note that although [soup.multipart_input_stream.MultipartInputStream] is a [gio.input_stream.InputStream],
     you should not read directly from it, and the results are undefined
     if you do.
 */
@@ -81,7 +81,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   mixin PollableInputStreamT!();
 
   /**
-      Creates a new #SoupMultipartInputStream that wraps the
+      Creates a new [soup.multipart_input_stream.MultipartInputStream] that wraps the
       [gio.input_stream.InputStream] obtained by sending the [soup.message.Message].
       
       Reads should not be done directly through this object, use the input streams
@@ -104,7 +104,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       Obtains the headers for the part currently being processed.
       
       Note that the [soup.message_headers.MessageHeaders] that are returned are owned by the
-      #SoupMultipartInputStream and will be replaced when a call is made to
+      [soup.multipart_input_stream.MultipartInputStream] and will be replaced when a call is made to
       [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async counterpart, so if
       keeping the headers is required, a copy must be made.
       
@@ -126,7 +126,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       Obtains an input stream for the next part.
       
       When dealing with a multipart response the input stream needs to be wrapped
-      in a #SoupMultipartInputStream and this function or its async counterpart
+      in a [soup.multipart_input_stream.MultipartInputStream] and this function or its async counterpart
       need to be called to obtain the first part for reading.
       
       After calling this function,
@@ -134,6 +134,9 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       headers for the first part. A read of 0 bytes indicates the end of
       the part; a new call to this function should be done at that point,
       to obtain the next part.
+      
+      error will only be set if an error happens during a read, null
+      is a valid return value otherwise.
   
       Params:
         cancellable = a #GCancellable

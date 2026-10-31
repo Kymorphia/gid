@@ -71,7 +71,7 @@ class Cookie : gobject.boxed.Boxed
   }
 
   /**
-      Creates a new #SoupCookie with the given attributes.
+      Creates a new [soup.cookie.Cookie] with the given attributes.
       
       Use [soup.cookie.Cookie.setSecure] and [soup.cookie.Cookie.setHttpOnly] if you
       need to set those attributes on the returned cookie.
@@ -426,14 +426,14 @@ class Cookie : gobject.boxed.Boxed
   }
 
   /**
-      Parses header and returns a #SoupCookie.
+      Parses header and returns a [soup.cookie.Cookie].
       
       If header contains multiple cookies, only the first one will be parsed.
       
       If header does not have "path" or "domain" attributes, they will
       be defaulted from origin. If origin is null, path will default
       to "/", but domain will be left as null. Note that this is not a
-      valid state for a #SoupCookie, and you will need to fill in some
+      valid state for a [soup.cookie.Cookie], and you will need to fill in some
       appropriate string for the domain if you want to actually make use
       of the cookie.
       

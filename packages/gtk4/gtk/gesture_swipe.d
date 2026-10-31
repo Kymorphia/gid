@@ -11,7 +11,7 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
-    [gtk.gesture_swipe.GestureSwipe] is a [gtk.gesture.Gesture] for swipe gestures.
+    Recognizes swipe gestures.
     
     After a press/move/.../move/release sequence happens, the
     [gtk.gesture_swipe.GestureSwipe.swipe] signal will be emitted,

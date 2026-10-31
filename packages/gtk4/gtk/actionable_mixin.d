@@ -12,8 +12,7 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
-    The [gtk.actionable.Actionable] interface provides a convenient way of associating
-    widgets with actions.
+    Provides a way to associate widgets with actions.
     
     It primarily consists of two properties: [gtk.actionable.Actionable.actionName]
     and [gtk.actionable.Actionable.actionTarget]. There are also some convenience
@@ -29,25 +28,39 @@ public import gtk.types;
 template ActionableT()
 {
 
-  /** */
+  /**
+      Get `actionName` property.
+      Returns: The name of the action with which this widget should be associated.
+  */
   @property string actionName() nothrow
   {
     return getActionName();
   }
 
-  /** */
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the action with which this widget should be associated.
+  */
   @property void actionName(string propval) nothrow
   {
     setActionName(propval);
   }
 
-  /** */
+  /**
+      Get `actionTarget` property.
+      Returns: The target value of the actionable widget's action.
+  */
   @property glib.variant.Variant actionTarget() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant.Variant)("action-target");
   }
 
-  /** */
+  /**
+      Set `actionTarget` property.
+      Params:
+        propval = The target value of the actionable widget's action.
+  */
   @property void actionTarget(glib.variant.Variant propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(glib.variant.Variant)("action-target", propval);
@@ -150,13 +163,23 @@ template ActionableT()
 template ActionableGidBuilderT()
 {
 
-  /** */
+  /**
+      Set `actionName` property.
+      Params:
+        propval = The name of the action with which this widget should be associated.
+      Returns: Builder instance for fluent chaining
+  */
   T actionName(string propval) nothrow
   {
     return setProperty("action-name", propval);
   }
 
-  /** */
+  /**
+      Set `actionTarget` property.
+      Params:
+        propval = The target value of the actionable widget's action.
+      Returns: Builder instance for fluent chaining
+  */
   T actionTarget(glib.variant.Variant propval) nothrow
   {
     return setProperty("action-target", propval);

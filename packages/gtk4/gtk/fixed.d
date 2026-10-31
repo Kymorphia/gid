@@ -17,7 +17,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
-    [gtk.fixed.Fixed] places its child widgets at fixed positions and with fixed sizes.
+    Places its child widgets at fixed positions and with fixed sizes.
     
     [gtk.fixed.Fixed] performs no automatic layout management.
     

@@ -241,7 +241,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       the result of the operation.
   
       Params:
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore.
         callback = callback to call when the request is satisfied.
   */
@@ -453,7 +453,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   
       Params:
         stopChars = characters to terminate the read.
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore.
         callback = callback to call when the request is satisfied.
   
@@ -567,7 +567,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   
       Params:
         stopChars = characters to terminate the read
-        ioPriority = the [I/O priority][io-priority] of the request
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
         cancellable = optional #GCancellable object, null to ignore
         callback = callback to call when the request is satisfied
   */

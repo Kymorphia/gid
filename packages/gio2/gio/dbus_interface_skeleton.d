@@ -190,7 +190,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   /**
       Gets all D-Bus properties for interface_.
       Returns: A #GVariant of type
-        ['a{sv}'][G-VARIANT-TYPE-VARDICT:CAPS].
+        ['a{sv}'](../glib/gvariant-text-format.html#dictionaries-and-dictionary-entries).
         Free with [glib.variant.Variant.unref].
   */
   glib.variant.Variant getProperties() nothrow

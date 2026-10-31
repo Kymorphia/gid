@@ -16,6 +16,8 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.shortcut_manager;
+import gtk.shortcut_manager_mixin;
 import gtk.types;
 
 /**
@@ -146,6 +148,11 @@ import gtk.types;
     To add information about other modules, such as application dependencies or
     data, use [adw.about_dialog.AboutDialog.addLegalSection].
     
+    ## Other applications
+    
+    [adw.about_dialog.AboutDialog] can show links to your other apps at the end of the main
+    page. To add them, use [adw.about_dialog.AboutDialog.addOtherApp].
+    
     ## Constructing
     
     To make constructing an [adw.about_dialog.AboutDialog] as convenient as possible, you can
@@ -171,7 +178,7 @@ import gtk.types;
                              "application-icon", "org.example.App",
                              "version", "1.2.3",
                              "copyright", "© 2022 Angela Avery",
-                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/new",
+                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/",
                              "license-type", GTK_LICENSE_GPL_3_0,
                              "developers", developers,
                              "designers", designers,
@@ -220,6 +227,22 @@ class AboutDialog : adw.dialog.Dialog
   static AboutDialogGidBuilder builder() nothrow
   {
     return new AboutDialogGidBuilder;
+  }
+
+  /**
+      Get `appdataResourcePath` property.
+      Returns: The path to the Appstream metadata resource.
+        
+        If provided, the dialog will be constructed from it.
+        
+        See [adw.about_dialog.AboutDialog.newFromAppdata].
+        
+        If [adw.about_dialog.AboutDialog.releaseNotesVersion] is set, release notes will
+        be set from the AppStream release description for that version.
+  */
+  @property string appdataResourcePath() nothrow
+  {
+    return getAppdataResourcePath();
   }
 
   /**
@@ -1017,7 +1040,7 @@ class AboutDialog : adw.dialog.Dialog
       * [adw.about_dialog.AboutDialog.issueUrl] is set from the `<url type="bugtracker">`
       * [adw.about_dialog.AboutDialog.licenseType] is set from the `<project_license>`.
           If the license type retrieved from AppStream is not listed in
-          [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
+          [gtk.types.License], it will be set to [gtk.types.License.Custom].
       
       If release_notes_version is not `NULL`,
       [adw.about_dialog.AboutDialog.releaseNotesVersion] is set to match it, while
@@ -1175,6 +1198,50 @@ class AboutDialog : adw.dialog.Dialog
     const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
     const(char)* _url = url.toCString!(No.Malloc, No.Nullable);
     adw_about_dialog_add_link(cast(AdwAboutDialog*)this._cPtr, _title, _url);
+  }
+
+  /**
+      Adds another application to self.
+      
+      The application will be displayed at the bottom of the main page, in a
+      separate section. Each added application will be presented as a row with
+      title and summary, as well as an icon with the name appid. Clicking the
+      row will show appid in the software center app.
+      
+      This can be used to link to your other applications if you have multiple.
+      
+      Example:
+      
+      ```c
+      adw_about_dialog_add_other_app (ADW_ABOUT_DIALOG (about),
+                                      "org.gnome.Boxes",
+                                      _("Boxes"),
+                                      _("Virtualization made simple"));
+      ```
+  
+      Params:
+        appid = the application ID
+        name = the application name
+        summary = the application summary
+  */
+  void addOtherApp(string appid, string name, string summary) nothrow
+  {
+    const(char)* _appid = appid.toCString!(No.Malloc, No.Nullable);
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _summary = summary.toCString!(No.Malloc, No.Nullable);
+    adw_about_dialog_add_other_app(cast(AdwAboutDialog*)this._cPtr, _appid, _name, _summary);
+  }
+
+  /**
+      Gets the AppStream metadata resource path for self.
+      Returns: the resource path
+  */
+  string getAppdataResourcePath() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_about_dialog_get_appdata_resource_path(cast(AdwAboutDialog*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
   }
 
   /**
@@ -1740,7 +1807,8 @@ class AboutDialog : adw.dialog.Dialog
       [adw.about_dialog.AboutDialog.license] can be used instead. The license type will be
       automatically set to [gtk.types.License.Custom] in that case.
       
-      If license_type is [gtk.types.License.Unknown], no information will be displayed.
+      If license_type is [gtk.types.License.Unknown], no information will be
+      displayed.
       
       If license_type is different from [gtk.types.License.Custom].
       [adw.about_dialog.AboutDialog.license] will be cleared out.
@@ -1840,7 +1908,8 @@ class AboutDialog : adw.dialog.Dialog
       should be marked as translatable.
       
       The string may contain email addresses and URLs, see the introduction for
-      more details.
+      more details. When there is more than one translator, they must be
+      separated by a newline in the same string.
       
       See also:
       
@@ -1956,6 +2025,24 @@ class AboutDialog : adw.dialog.Dialog
 class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
 {
 
+
+  /**
+      Set `appdataResourcePath` property.
+      Params:
+        propval = The path to the Appstream metadata resource.
+          
+          If provided, the dialog will be constructed from it.
+          
+          See [adw.about_dialog.AboutDialog.newFromAppdata].
+          
+          If [adw.about_dialog.AboutDialog.releaseNotesVersion] is set, release notes will
+          be set from the AppStream release description for that version.
+      Returns: Builder instance for fluent chaining
+  */
+  T appdataResourcePath(string propval) nothrow
+  {
+    return setProperty("appdata-resource-path", propval);
+  }
 
   /**
       Set `applicationIcon` property.

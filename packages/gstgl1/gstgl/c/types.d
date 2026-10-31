@@ -237,6 +237,31 @@ enum GstGLDisplayType : uint
 }
 
 /** */
+enum GstGLDrmFormatFlags : uint
+{
+  /**
+      include external-only formats
+  */
+  IncludeExternal = 1,
+
+  /**
+      only include formats with linear modifier
+  */
+  LinearOnly = 2,
+
+  /**
+      include emulated formats
+  */
+  IncludeEmulated = 4,
+
+  /**
+      EGL is responsible for the colorspace conversion. In this case, all
+      supported modifiers get translated to RGBA.
+  */
+  DirectImport = 8,
+}
+
+/** */
 enum GstGLFormat
 {
   /**
@@ -1854,7 +1879,7 @@ struct GstGLOverlayCompositor
   uint lastWindowHeight;
 
   /** */
-  GList* overlays;
+  GQueue* overlays;
 
   /** */
   GstGLShader* shader;

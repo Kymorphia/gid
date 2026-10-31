@@ -13,7 +13,10 @@ struct BuilderError
 {
   alias Enum = gtk.types.BuilderError; ///
 
-  /** */
+  /**
+      Registers an error quark for [gtk.builder.Builder] errors.
+      Returns: the error quark
+  */
   static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;

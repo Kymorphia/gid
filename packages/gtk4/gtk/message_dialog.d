@@ -26,7 +26,10 @@ import gtk.widget;
 /**
     [gtk.message_dialog.MessageDialog] presents a dialog with some message text.
     
-    ![An example GtkMessageDialog](messagedialog.png)
+    <picture>
+      <source srcset="messagedialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkMessageDialog" src="messagedialog.png">
+    </picture>
     
     It’s simply a convenience widget; you could construct the equivalent of
     [gtk.message_dialog.MessageDialog] from [gtk.dialog.Dialog] without too much effort, but
@@ -279,7 +282,12 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 {
 
 
-  /** */
+  /**
+      Set `buttons` property.
+      Params:
+        propval = Set of buttons to display on the dialog.
+      Returns: Builder instance for fluent chaining
+  */
   T buttons(gtk.types.ButtonsType propval) nothrow
   {
     return setProperty("buttons", propval);

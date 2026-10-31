@@ -265,7 +265,7 @@ class Window : gobject.object.ObjectWrap
       Begins a window move operation (for a toplevel window).
       You might use this function to implement a “window move grip,” for
       example. The function works best with window managers that support the
-      [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
+      [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/)
       but has a fallback implementation for other window managers.
   
       Params:
@@ -369,7 +369,7 @@ class Window : gobject.object.ObjectWrap
       You might use this function to implement a “window resize grip,” for
       example; in fact #GtkStatusbar uses it. The function works best
       with window managers that support the
-      [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
+      [Extended Window Manager Hints](https://specifications.freedesktop.org/wm/latest/)
       but has a fallback implementation for other window managers.
   
       Params:

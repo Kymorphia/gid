@@ -17,8 +17,7 @@ import gobject.types;
 import gobject.value;
 
 /**
-    A [gdk.content_deserializer.ContentDeserializer] is used to deserialize content received via
-    inter-application data transfers.
+    Deserializes content received via inter-application data transfers.
     
     The [gdk.content_deserializer.ContentDeserializer] transforms serialized content that is
     identified by a mime type into an object identified by a GType.

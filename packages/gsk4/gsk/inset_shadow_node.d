@@ -55,6 +55,9 @@ class InsetShadowNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color of the inset shadow.
+      
+      The value returned by this function will not be correct
+      if the render node was created for a non-sRGB color.
       Returns: the color of the shadow
   */
   gdk.rgba.RGBA getColor() nothrow

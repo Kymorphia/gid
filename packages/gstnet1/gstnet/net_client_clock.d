@@ -179,6 +179,16 @@ class NetClientClock : gst.system_clock.SystemClock
     _cretval = gst_net_client_clock_new(_name, _remoteAddress, remotePort, baseTime);
     this(_cretval, Yes.Take);
   }
+
+  /**
+      Clears any cached #GstNetClientClock clocks.
+      All references should be released beforehand.
+      Mainly used for testing.
+  */
+  static void deinit() nothrow
+  {
+    gst_net_client_clock_deinit();
+  }
 }
 
 /// Fluent builder implementation template for [gstnet.net_client_clock.NetClientClock]

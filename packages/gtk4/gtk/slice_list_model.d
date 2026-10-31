@@ -15,7 +15,7 @@ import gtk.section_model_mixin;
 import gtk.types;
 
 /**
-    [gtk.slice_list_model.SliceListModel] is a list model that presents a slice of another model.
+    A list model that presents a slice of another model.
     
     This is useful when implementing paging by setting the size to the number
     of elements per page and updating the offset whenever a different page is

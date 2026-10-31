@@ -15,15 +15,15 @@ import gobject.value;
     
     It will generally comprise a function of some kind and a marshaller
     used to call it. It is the responsibility of the marshaller to
-    convert the arguments for the invocation from #GValues into
+    convert the arguments for the invocation from [GValues][gobject.value.Value] into
     a suitable form, perform the callback on the converted arguments,
-    and transform the return value back into a #GValue.
+    and transform the return value back into a [gobject.value.Value].
     
     In the case of C programs, a closure usually just holds a pointer
     to a function and maybe a data argument, and the marshaller
-    converts between #GValue and native C types. The GObject
-    library provides the #GCClosure type for this purpose. Bindings for
-    other languages need marshallers which convert between #GValues
+    converts between [gobject.value.Value] and native C types. The GObject
+    library provides the [gobject.cclosure.CClosure] type for this purpose. Bindings for
+    other languages need marshallers which convert between [GValues][gobject.value.Value]
     and suitable representations in the runtime of the language in
     order to use functions written in that language as callbacks. Use
     [gobject.closure.Closure.setMarshal] to set the marshaller on such a custom
@@ -31,15 +31,15 @@ import gobject.value;
     
     Within GObject, closures play an important role in the
     implementation of signals. When a signal is registered, the
-    @c_marshaller argument to [gobject.global.signalNew] specifies the default C
+    @c_marshaller argument to `func@signal_new` specifies the default C
     marshaller for any closure which is connected to this
     signal. GObject provides a number of C marshallers for this
-    purpose, see the g_cclosure_marshal_*() functions. Additional C
+    purpose, see the `g_cclosure_marshal_*()` functions. Additional C
     marshallers can be generated with the [glib-genmarshal][glib-genmarshal]
     utility.  Closures can be explicitly connected to signals with
-    [gobject.global.signalConnectClosure], but it usually more convenient to let
+    `func@signal_connect_closure`, but it usually more convenient to let
     GObject create a closure automatically by using one of the
-    g_signal_connect_*() functions which take a callback function/user
+    `g_signal_connect_*()` functions which take a callback function/user
     data pair.
     
     Using closures has a number of important advantages over a simple
@@ -49,7 +49,7 @@ import gobject.value;
       which means that language bindings don't have to write individual glue
       for each callback type.
     
-    - The reference counting of #GClosure makes it easy to handle reentrancy
+    - The reference counting of [gobject.closure.Closure] makes it easy to handle reentrancy
       right; if a callback is removed while it is being invoked, the closure
       and its parameters won't be freed until the invocation finishes.
     

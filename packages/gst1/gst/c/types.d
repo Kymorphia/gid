@@ -19,10 +19,9 @@ public import gobject.c.types;
     }
     ```
     
-    #GstMapInfo cannot be used with g_auto() because it is ambiguous whether it
-    needs to be unmapped using [gst.buffer.Buffer.unmap] or [gst.memory.Memory.unmap].
-    
     See also #GstMemoryMapInfo.
+
+    Deprecated: Use #GstMapInfo instead.
 */
 alias GstBufferMapInfo = GstMapInfo;
 
@@ -59,10 +58,9 @@ alias GstElementFactoryListType = ulong;
     }
     ```
     
-    #GstMapInfo cannot be used with g_auto() because it is ambiguous whether it
-    needs to be unmapped using [gst.buffer.Buffer.unmap] or [gst.memory.Memory.unmap].
-    
     See also #GstBufferMapInfo.
+
+    Deprecated: Use #GstMapInfo instead.
 */
 alias GstMemoryMapInfo = GstMapInfo;
 
@@ -1409,6 +1407,66 @@ enum GstLockFlags : uint
 }
 
 /**
+    Flags to control the behavior of a #GstLogContext.
+*/
+enum GstLogContextFlags : uint
+{
+  /**
+      No special behavior (empty flags)
+  */
+  None = 0,
+
+  /**
+      Enable message throttling/deduplication. This
+       makes the context track which messages have been logged already based on
+       their message hash, and only log them once (or periodically if an
+       interval is set). Without this flag, all messages will be logged regardless
+       of whether they've been logged before.
+  */
+  Throttle = 1,
+}
+
+/**
+    Flags to control how the message hash is calculated in a #GstLogContext.
+    The message hash is used to determine if a message is a duplicate of a previously
+    logged message.
+*/
+enum GstLogContextHashFlags : uint
+{
+  /**
+      Default behavior for logging context
+                               (uses object, format, file but not line number or string args)
+  */
+  Default = 0,
+
+  /**
+      Ignore object pointer or object ID when calculating message hash
+  */
+  IgnoreObject = 1,
+
+  /**
+      Ignore the "format" part of the debug
+      log message
+  */
+  IgnoreFormat = 2,
+
+  /**
+      Ignore file name when calculating message hash
+  */
+  IgnoreFile = 4,
+
+  /**
+      Use line number when calculating message hash (not used by default)
+  */
+  UseLineNumber = 8,
+
+  /**
+      Use the arguments part of the string message (not used by default)
+  */
+  UseStringArgs = 16,
+}
+
+/**
     Flags used when mapping memory
 */
 enum GstMapFlags : uint
@@ -1422,6 +1480,13 @@ enum GstMapFlags : uint
       map for write access
   */
   Write = 2,
+
+  /**
+      Take another reference of the memory and store it in the GstMapInfo. This
+      makes sure that the memory stays valid  while it is mapped and
+      automatically unrefs it on unmap.
+  */
+  RefMemory = 256,
 
   /**
       first flag that can be used for custom purposes
@@ -1741,6 +1806,11 @@ enum GstMessageType : uint
           be applied (which may be in the past when the answer arrives). (Since: 1.18)
   */
   InstantRateRequest = 2147483656,
+
+  /**
+      Message indicating the #GstDeviceMonitor has completed async startup.
+  */
+  DeviceMonitorStarted = 2147483657,
 
   /**
       mask for all of the above messages.
@@ -3478,6 +3548,11 @@ enum GstStreamType : uint
       The stream contains subtitle / subpicture data.
   */
   Text = 16,
+
+  /**
+      The stream contains metadata.
+  */
+  Metadata = 32,
 }
 
 /**
@@ -4261,7 +4336,7 @@ struct GstBitmask;
     know the media type of the buffer (the preceding CAPS event). Either or both
     can be set to #GST_BUFFER_OFFSET_NONE.
     
-    gst_buffer_ref() is used to increase the refcount of a buffer. This must be
+    [gst.buffer.Buffer.ref_] is used to increase the refcount of a buffer. This must be
     done when you want to keep a handle to the buffer after pushing it to the
     next element. The buffer refcount determines the writability of the buffer, a
     buffer is only writable when the refcount is exactly 1, i.e. when the caller
@@ -4273,7 +4348,7 @@ struct GstBitmask;
     
     If a plug-in wants to modify the buffer data or metadata in-place, it should
     first obtain a buffer that is safe to modify by using
-    gst_buffer_make_writable(). This function is optimized so that a copy will
+    [gst.buffer.Buffer.makeWritable]. This function is optimized so that a copy will
     only be made when it is necessary.
     
     Several flags of the buffer can be set and unset with the
@@ -4290,7 +4365,7 @@ struct GstBitmask;
     An element should either unref the buffer or push it out on a src pad
     using [gst.pad.Pad.push] (see #GstPad).
     
-    Buffers are usually freed by unreffing them with gst_buffer_unref(). When
+    Buffers are usually freed by unreffing them with [gst.buffer.Buffer.unref]. When
     the refcount drops to 0, any memory and metadata pointed to by the buffer is
     unreffed as well. Buffers allocated from a #GstBufferPool will be returned to
     the pool when the refcount drops to 0.
@@ -5426,7 +5501,7 @@ struct GstDynamicTypeFactoryClass;
     Each element has a state (see #GstState).  You can get and set the state
     of an element with [gst.element.Element.getState] and [gst.element.Element.setState].
     Setting a state triggers a #GstStateChange. To get a string representation
-    of a #GstState, use [gst.element.Element.stateGetName].
+    of a #GstState, use [gst.global.stateGetName].
     
     You can get and set a #GstClock on an element using [gst.element.Element.getClock]
     and [gst.element.Element.setClock].
@@ -5713,7 +5788,7 @@ struct GstElementFactoryClass;
     specific parameters as arguments.
     To send an event application will usually use [gst.element.Element.sendEvent] and
     elements will use [gst.pad.Pad.sendEvent] or [gst.pad.Pad.pushEvent].
-    The event should be unreffed with gst_event_unref() if it has not been sent.
+    The event should be unreffed with [gst.event.Event.unref] if it has not been sent.
     
     Events that have been received can be parsed with their respective
     gst_event_parse_*() functions. It is valid to pass null for unwanted details.
@@ -5852,6 +5927,31 @@ struct GstGhostPadClass
 struct GstGhostPadPrivate;
 
 /**
+    A #GstIdStr is string type optimized for short strings and used for structure
+    names, structure field names and in other places.
+    
+    Strings up to 16 bytes (including NUL terminator) are stored inline, other
+    strings are stored on the heap.
+    
+    ```cpp
+    GstIdStr s = GST_ID_STR_INIT;
+    
+    gst_id_str_set (&s, "Hello, World!");
+    g_print ("%s\n", gst_id_str_as_str (&s));
+    
+    gst_id_str_clear (&s);
+    ```
+*/
+struct GstIdStr
+{
+  /** */
+  void* pointer;
+
+  /** */
+  ubyte[8] padding;
+}
+
+/**
     A fundamental type that describes a #gint64 range
 */
 struct GstInt64Range;
@@ -5964,6 +6064,63 @@ struct GstIterator
 }
 
 /**
+    A context for controlling logging behavior, for example to handle
+    logging once or periodic logging, avoiding to
+    spam the terminal with the same log message multiple times.
+    
+    ## Simple log context using static macros
+    
+    ``` c
+    // At global/file scope:
+    GST_LOG_CONTEXT_STATIC_DEFINE(my_context, GST_LOG_CONTEXT_FLAG_THROTTLE, );
+    #define MY_CONTEXT GST_LOG_CONTEXT_LAZY_INIT(my_context)
+    
+    // Then in code:
+    GST_CTX_INFO(MY_CONTEXT, "This will only appear once per file/line");
+    ```
+    
+    ## Periodic logging
+    
+    For messages that should be logged periodically (e.g., maximum once per minute):
+    
+    ``` c
+    // At global/file scope:
+    GST_LOG_CONTEXT_STATIC_DEFINE(my_periodic_context, GST_LOG_CONTEXT_FLAG_THROTTLE,
+      GST_LOG_CONTEXT_BUILDER_SET_INTERVAL(60 * GST_SECOND);
+    );
+    #define MY_PERIODIC_CONTEXT GST_LOG_CONTEXT_LAZY_INIT(my_periodic_context)
+    
+    // Then in code:
+    GST_CTX_INFO(MY_PERIODIC_CONTEXT, "This appears once per minute");
+    ```
+    
+    ## Customizing Message hash with custom flags and category
+    
+    By default, a message's hash is determined by the file name, object pointer,
+    and format string. You can customize this with builder operations:
+    
+    ``` c
+    // Ignore the object pointer when determining message hash (with throttling)
+    GST_LOG_CONTEXT_STATIC_DEFINE(obj_independent_ctx, GST_LOG_CONTEXT_FLAG_THROTTLE,
+      GST_LOG_CONTEXT_BUILDER_SET_HASH_FLAGS(GST_LOG_CONTEXT_IGNORE_OBJECT);
+    );
+    
+    // Use a custom category (without throttling)
+    GST_LOG_CONTEXT_STATIC_DEFINE(custom_cat_ctx, GST_LOG_CONTEXT_FLAG_NONE,
+      GST_LOG_CONTEXT_BUILDER_SET_CATEGORY(my_category);
+    );
+    ```
+*/
+struct GstLogContext;
+
+/**
+    A builder for creating a #GstLogContext. This provides a flexible way to
+    configure a log context with various options while maintaining immutability
+    of the resulting context.
+*/
+struct GstLogContextBuilder;
+
+/**
     A structure containing the result of a map operation such as
     [gst.memory.Memory.map]. It contains the data and size.
     
@@ -6029,8 +6186,8 @@ struct GstMapInfo
     New memory can be created with [gst.memory.Memory.newWrapped] that wraps the memory
     allocated elsewhere.
     
-    Refcounting of the memory block is performed with gst_memory_ref() and
-    gst_memory_unref().
+    Refcounting of the memory block is performed with [gst.memory.Memory.ref_] and
+    [gst.memory.Memory.unref].
     
     The size of the memory can be retrieved and changed with
     [gst.memory.Memory.getSizes] and [gst.memory.Memory.resize] respectively.
@@ -6168,6 +6325,31 @@ struct GstMeta
   */
   const(GstMetaInfo)* info;
 }
+
+/**
+    Register a #GstMetaInfo that can be automatically loaded the first time it is
+    used.
+    
+    In general, applications and plugins don't need to use the factory
+    beyond registering the meta in a plugin init function. Once that is
+    done, the meta is stored in the registry, and ready as soon as the
+    registry is loaded.
+    
+    ## Registering a meta for dynamic loading
+    
+    ```c
+    
+    static gboolean
+    plugin_init (GstPlugin * plugin)
+    {
+      return gst_meta_factory_register (plugin, my_meta_get_info());
+    }
+    ```
+*/
+struct GstMetaFactory;
+
+/** */
+struct GstMetaFactoryClass;
 
 /**
     The #GstMetaInfo provides information about a specific metadata
@@ -7432,6 +7614,13 @@ struct GstQuery
     
     Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
     [gst.meta.Meta.deserialize].
+    
+    Since 1.28 additional information about the timestamp can be provided via the
+    optional @info structure. This should only be used for information about the
+    timestamp and not for information about the clock source. The latter should
+    be stored in the @reference instead.
+    
+    Interpretation of the fields of @info depends on the @reference.
 */
 struct GstReferenceTimestampMeta
 {
@@ -7454,6 +7643,11 @@ struct GstReferenceTimestampMeta
       duration, or [gst.types.CLOCK_TIME_NONE]
   */
   GstClockTime duration;
+
+  /**
+      Additional information about the timestamp.
+  */
+  GstStructure* info;
 }
 
 /**
@@ -7943,14 +8137,17 @@ struct GstStreamPrivate;
     
     Some types have special delimiters:
     
-    - [GstValueArray](GST_TYPE_ARRAY) are inside curly brackets (`{` and `}`).
-      For example `a-structure, array={1, 2, 3}`
+    - [GstValueArray](GST_TYPE_ARRAY) are inside "less and greater than" (`<` and
+      `>`). For example `a-structure, array=<1, 2, 3>
     - Ranges are inside brackets (`[` and `]`). For example `a-structure,
       range=[1, 6, 2]` 1 being the min value, 6 the maximum and 2 the step. To
       specify a #GST_TYPE_INT64_RANGE you need to explicitly specify it like:
       `a-structure, a-int64-range=(gint64) [1, 5]`
-    - [GstValueList](GST_TYPE_LIST) are inside "less and greater than" (`<` and
-      `>`). For example `a-structure, list=<1, 2, 3>
+    - [GstValueList](GST_TYPE_LIST) are inside curly brackets (`{` and `}`).
+      For example `a-structure, list={1, 2, 3}`
+    - [GStrv](G_TYPE_STRV) are inside "less and greater than" (`<` and
+      `>`) and each string is double-quoted.
+      For example `a-structure, strv=(GStrv)<"foo", "bar">`. Since 1.26.0.
     
     Structures are delimited either by a null character `\0` or a semicolon `;`
     the latter allowing to store multiple structures in the same string (see
@@ -8583,9 +8780,28 @@ struct GstValueTable
   */
   GstValueDeserializeWithPSpecFunc deserializeWithPspec;
 
+  /**
+      a #GstValueHashFunc
+  */
+  GstValueHashFunc hash;
+
   /** */
-  void*[3] GstReserved;
+  void*[2] GstReserved;
 }
+
+/**
+    A fundamental type that describes a set of #GValue
+*/
+struct GstValueUniqueList;
+
+/**
+    #GstVecDeque is an object that provides standard double-ended queue (deque)
+    functionality based on an array instead of linked lists. This reduces the
+    overhead caused by memory management by a large factor.
+*/
+struct GstVecDeque;
+
+alias extern(C) gboolean function(GstStructure** aggregatedParams, const(GstStructure)* params0, const(GstStructure)* params1) GstAllocationMetaParamsAggregator;
 
 alias extern(C) gboolean function(GstBuffer* buffer, GstMeta** meta, void* userData) GstBufferForeachMetaFunc;
 
@@ -8594,6 +8810,8 @@ alias extern(C) gboolean function(GstBuffer** buffer, uint idx, void* userData) 
 alias extern(C) gboolean function(GstBus* bus, GstMessage* message, void* userData) GstBusFunc;
 
 alias extern(C) GstBusSyncReply function(GstBus* bus, GstMessage* message, void* userData) GstBusSyncHandler;
+
+alias extern(C) void function(void* userData) GstCallAsyncFunc;
 
 alias extern(C) gboolean function(GstCapsFeatures* features, GstStructure* structure, void* userData) GstCapsFilterMapFunc;
 
@@ -8667,6 +8885,8 @@ alias extern(C) void function(GstMiniObject* obj) GstMiniObjectFreeFunction;
 
 alias extern(C) void function(void* userData, GstMiniObject* obj) GstMiniObjectNotify;
 
+alias extern(C) void function(GstObject* object, void* userData) GstObjectCallAsyncFunc;
+
 alias extern(C) gboolean function(GstPad* pad, GstObject* parent) GstPadActivateFunction;
 
 alias extern(C) gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) GstPadActivateModeFunction;
@@ -8707,9 +8927,15 @@ alias extern(C) void function(GstPromise* promise, void* userData) GstPromiseCha
 
 alias extern(C) gboolean function(GQuark fieldId, GValue* value, void* userData) GstStructureFilterMapFunc;
 
+alias extern(C) gboolean function(const(GstIdStr)* fieldname, GValue* value, void* userData) GstStructureFilterMapIdStrFunc;
+
 alias extern(C) gboolean function(GQuark fieldId, const(GValue)* value, void* userData) GstStructureForeachFunc;
 
+alias extern(C) gboolean function(const(GstIdStr)* fieldname, const(GValue)* value, void* userData) GstStructureForeachIdStrFunc;
+
 alias extern(C) gboolean function(GQuark fieldId, GValue* value, void* userData) GstStructureMapFunc;
+
+alias extern(C) gboolean function(const(GstIdStr)* fieldname, GValue* value, void* userData) GstStructureMapIdStrFunc;
 
 alias extern(C) void function(const(GstTagList)* list, const(char)* tag, void* userData) GstTagForeachFunc;
 
@@ -8728,6 +8954,8 @@ alias extern(C) int function(const(GValue)* value1, const(GValue)* value2) GstVa
 alias extern(C) gboolean function(GValue* dest, const(char)* s) GstValueDeserializeFunc;
 
 alias extern(C) gboolean function(GValue* dest, const(char)* s, GParamSpec* pspec) GstValueDeserializeWithPSpecFunc;
+
+alias extern(C) gboolean function(const(GValue)* value, uint* res) GstValueHashFunc;
 
 alias extern(C) char* function(const(GValue)* value1) GstValueSerializeFunc;
 

@@ -29,6 +29,9 @@ import gtk.widget;
     main child, on top of which it can display a [adw.toast.Toast], overlaid.
     Toasts can be shown with [adw.toast_overlay.ToastOverlay.addToast].
     
+    Use [adw.toast_overlay.ToastOverlay.dismissAll] to dismiss all toasts at once, or
+    [adw.toast.Toast.dismiss] to dismiss a single toast.
+    
     See [adw.toast.Toast] for details.
     
     ## CSS nodes
@@ -56,7 +59,7 @@ import gtk.widget;
     
     ## Accessibility
     
-    [adw.toast_overlay.ToastOverlay] uses the `GTK_ACCESSIBLE_ROLE_TAB_GROUP` role.
+    [adw.toast_overlay.ToastOverlay] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class ToastOverlay : gtk.widget.Widget
 {
@@ -143,6 +146,16 @@ class ToastOverlay : gtk.widget.Widget
   void addToast(adw.toast.Toast toast) nothrow
   {
     adw_toast_overlay_add_toast(cast(AdwToastOverlay*)this._cPtr, toast ? cast(AdwToast*)toast._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Dismisses all displayed toasts.
+      
+      Use [adw.toast.Toast.dismiss] to dismiss a single toast.
+  */
+  void dismissAll() nothrow
+  {
+    adw_toast_overlay_dismiss_all(cast(AdwToastOverlay*)this._cPtr);
   }
 
   /**

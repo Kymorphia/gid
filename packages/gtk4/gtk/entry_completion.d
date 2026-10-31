@@ -156,25 +156,39 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
     setInlineSelection(propval);
   }
 
-  /** */
+  /**
+      Get `minimumKeyLength` property.
+      Returns: The minimum key length as set for completion.
+  */
   @property int minimumKeyLength() nothrow
   {
     return getMinimumKeyLength();
   }
 
-  /** */
+  /**
+      Set `minimumKeyLength` property.
+      Params:
+        propval = The minimum key length as set for completion.
+  */
   @property void minimumKeyLength(int propval) nothrow
   {
     setMinimumKeyLength(propval);
   }
 
-  /** */
+  /**
+      Get `model` property.
+      Returns: The model used as data source.
+  */
   @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
 
-  /** */
+  /**
+      Set `model` property.
+      Params:
+        propval = The model used as data source.
+  */
   @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
@@ -957,13 +971,23 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
     return setProperty("inline-selection", propval);
   }
 
-  /** */
+  /**
+      Set `minimumKeyLength` property.
+      Params:
+        propval = The minimum key length as set for completion.
+      Returns: Builder instance for fluent chaining
+  */
   T minimumKeyLength(int propval) nothrow
   {
     return setProperty("minimum-key-length", propval);
   }
 
-  /** */
+  /**
+      Set `model` property.
+      Params:
+        propval = The model used as data source.
+      Returns: Builder instance for fluent chaining
+  */
   T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);

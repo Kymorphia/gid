@@ -16,7 +16,7 @@ import gtk.filter;
 import gtk.types;
 
 /**
-    [gtk.multi_filter.MultiFilter] is the base class for filters that combine multiple filters.
+    Base class for filters that combine multiple filters.
 */
 class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.Buildable
 {
@@ -57,7 +57,9 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
 
   /**
       Get `itemType` property.
-      Returns: The type of items. See [gio.list_model.ListModel.getItemType].
+      Returns: The type of items.
+        
+        See [gio.list_model.ListModel.getItemType].
   */
   @property gobject.types.GType itemType() nothrow
   {
@@ -66,7 +68,9 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
 
   /**
       Get `nItems` property.
-      Returns: The number of items. See [gio.list_model.ListModel.getNItems].
+      Returns: The number of items.
+        
+        See [gio.list_model.ListModel.getNItems].
   */
   @property uint nItems() nothrow
   {
@@ -77,10 +81,10 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   mixin BuildableT!();
 
   /**
-      Adds a filter to self to use for matching.
+      Adds a filter.
   
       Params:
-        filter = A new filter to use
+        filter = a filter to add
   */
   void append(gtk.filter.Filter filter) nothrow
   {
@@ -88,11 +92,10 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   }
 
   /**
-      Removes the filter at the given position from the list of filters used
-      by self.
+      Removes a filter.
       
-      If position is larger than the number of filters, nothing happens and
-      the function returns.
+      If position is larger than the number of filters,
+      nothing happens.
   
       Params:
         position = position of filter to remove

@@ -13,9 +13,9 @@ import soup.types;
 /**
     Server-side authentication.
     
-    A #SoupAuthDomain manages authentication for all or part of a
+    A [soup.auth_domain.AuthDomain] manages authentication for all or part of a
     [soup.server.Server]. To make a server require authentication, first create
-    an appropriate subclass of #SoupAuthDomain, and then add it to the
+    an appropriate subclass of [soup.auth_domain.AuthDomain], and then add it to the
     server with [soup.server.Server.addAuthDomain].
     
     In order for an auth domain to have any effect, you must add one or more

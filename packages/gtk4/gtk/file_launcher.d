@@ -16,16 +16,15 @@ import gtk.types;
 import gtk.window;
 
 /**
-    A [gtk.file_launcher.FileLauncher] object collects the arguments that are needed to open a
-    file with an application.
+    Asynchronous API to open a file with an application.
+    
+    [gtk.file_launcher.FileLauncher] collects the arguments that are needed to open the file.
     
     Depending on system configuration, user preferences and available APIs, this
     may or may not show an app chooser dialog or launch the default application
     right away.
     
     The operation is started with the [gtk.file_launcher.FileLauncher.launch] function.
-    This API follows the GIO async pattern, and the result can be obtained by
-    calling [gtk.file_launcher.FileLauncher.launchFinish].
     
     To launch uris that don't represent files, use [gtk.uri_launcher.UriLauncher].
 */
@@ -140,8 +139,8 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 
   /**
-      Returns whether to ask the user to choose an app for opening the file.
-      Returns: `TRUE` if always asking for app
+      Returns whether to ask the user which app to use.
+      Returns: true if always asking the user
   */
   bool getAlwaysAsk() nothrow
   {
@@ -164,7 +163,7 @@ class FileLauncher : gobject.object.ObjectWrap
 
   /**
       Returns whether to make the file writable for the handler.
-      Returns: `TRUE` if the file will be made writable
+      Returns: true if the file will be made writable
   */
   bool getWritable() nothrow
   {
@@ -174,18 +173,15 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 
   /**
-      Launch an application to open the file.
+      Launches an application to open the file.
       
       This may present an app chooser dialog to the user.
-      
-      The callback will be called when the operation is completed.
-      It should call [gtk.file_launcher.FileLauncher.launchFinish] to obtain
-      the result.
   
       Params:
-        parent = the parent [gtk.window.Window]
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -213,9 +209,8 @@ class FileLauncher : gobject.object.ObjectWrap
       returns the result.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: `TRUE` if an application was launched,
-            or `FALSE` and error is set
+        result = the result
+      Returns: true if an application was launched
       Throws: [ErrorWrap]
   */
   bool launchFinish(gio.async_result.AsyncResult result)
@@ -229,19 +224,16 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 
   /**
-      Launch a file manager to show the file in its parent directory.
+      Launches a file manager to show the file in its parent directory.
       
-      This is only supported native files. It will fail if file
+      This is only supported for native files. It will fail if file
       is e.g. a http:// uri.
-      
-      The callback will be called when the operation is completed.
-      It should call [gtk.file_launcher.FileLauncher.openContainingFolderFinish]
-      to obtain the result.
   
       Params:
-        parent = the parent [gtk.window.Window]
-        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
-        callback = a callback to call when the operation is complete
+        parent = the parent window
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call when the
+            operation is complete
   */
   void openContainingFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -269,9 +261,8 @@ class FileLauncher : gobject.object.ObjectWrap
       call and returns the result.
   
       Params:
-        result = a [gio.async_result.AsyncResult]
-      Returns: `TRUE` if an application was launched,
-            or `FALSE` and error is set
+        result = the result
+      Returns: true if an application was launched
       Throws: [ErrorWrap]
   */
   bool openContainingFolderFinish(gio.async_result.AsyncResult result)
@@ -285,11 +276,13 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 
   /**
-      Sets whether to awlays ask the user to choose an app for opening the file.
-      If `FALSE`, the file might be opened with a default app or the previous choice.
+      Sets whether to always ask the user which app to use.
+      
+      If false, the file might be opened with a default app
+      or the previous choice.
   
       Params:
-        alwaysAsk = a `gboolean`
+        alwaysAsk = whether to always ask
   */
   void setAlwaysAsk(bool alwaysAsk) nothrow
   {
@@ -300,7 +293,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Sets the file that will be opened.
   
       Params:
-        file = a [gio.file.File]
+        file = the file
   */
   void setFile(gio.file.File file = null) nothrow
   {
@@ -311,7 +304,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Sets whether to make the file writable for the handler.
   
       Params:
-        writable = a `gboolean`
+        writable = whether to make the file writable
   */
   void setWritable(bool writable) nothrow
   {

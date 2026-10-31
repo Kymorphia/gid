@@ -123,7 +123,11 @@ class Credentials : gobject.object.ObjectWrap
       This operation can fail if #GCredentials is not supported on the
       OS or if the native credentials type does not contain information
       about the UNIX user.
-      Returns: The UNIX user identifier or `-1` if error is set.
+      
+      As the signedness of `uid_t` is not specified by POSIX, it is recommended to
+      check error for failure rather than trying to check the return value,
+      particularly in language bindings.
+      Returns: The UNIX user identifier or `(uid_t) -1` if error is set.
       Throws: [ErrorWrap]
   */
   uint getUnixUser()

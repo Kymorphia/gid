@@ -20,6 +20,7 @@ import gtk.constraint_target;
 import gtk.constraint_target_mixin;
 import gtk.expression;
 import gtk.list_item_factory;
+import gtk.types;
 
 /**
     A [gtk.list_box_row.ListBoxRow] used to choose from a list of items.
@@ -68,7 +69,7 @@ import gtk.list_item_factory;
     
     ## Accessibility
     
-    [adw.combo_row.ComboRow] uses the [gtk.types.AccessibleRole.ComboBox] role.
+    [adw.combo_row.ComboRow] uses the `enum@Gtk.AccessibleRole.combo-box` role.
 */
 class ComboRow : adw.action_row.ActionRow
 {
@@ -193,6 +194,25 @@ class ComboRow : adw.action_row.ActionRow
   }
 
   /**
+      Get `headerFactory` property.
+      Returns: The factory for creating header widgets for the popup.
+  */
+  @property gtk.list_item_factory.ListItemFactory headerFactory() nothrow
+  {
+    return getHeaderFactory();
+  }
+
+  /**
+      Set `headerFactory` property.
+      Params:
+        propval = The factory for creating header widgets for the popup.
+  */
+  @property void headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
+  {
+    setHeaderFactory(propval);
+  }
+
+  /**
       Get `listFactory` property.
       Returns: The factory for populating list items in the popup.
         
@@ -232,6 +252,25 @@ class ComboRow : adw.action_row.ActionRow
   @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
+  }
+
+  /**
+      Get `searchMatchMode` property.
+      Returns: The match mode for the search filter.
+  */
+  @property gtk.types.StringFilterMatchMode searchMatchMode() nothrow
+  {
+    return getSearchMatchMode();
+  }
+
+  /**
+      Set `searchMatchMode` property.
+      Params:
+        propval = The match mode for the search filter.
+  */
+  @property void searchMatchMode(gtk.types.StringFilterMatchMode propval) nothrow
+  {
+    setSearchMatchMode(propval);
   }
 
   /**
@@ -355,6 +394,18 @@ class ComboRow : adw.action_row.ActionRow
   }
 
   /**
+      Gets the factory that's currently used to create header widgets for the popup.
+      Returns: The factory in use
+  */
+  gtk.list_item_factory.ListItemFactory getHeaderFactory() nothrow
+  {
+    GtkListItemFactory* _cretval;
+    _cretval = adw_combo_row_get_header_factory(cast(AdwComboRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
       Gets the factory for populating list items in the popup.
       Returns: the factory in use
   */
@@ -375,6 +426,18 @@ class ComboRow : adw.action_row.ActionRow
     GListModel* _cretval;
     _cretval = adw_combo_row_get_model(cast(AdwComboRow*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the match mode that the search filter is using.
+      Returns: the match mode of the search filter
+  */
+  gtk.types.StringFilterMatchMode getSearchMatchMode() nothrow
+  {
+    GtkStringFilterMatchMode _cretval;
+    _cretval = adw_combo_row_get_search_match_mode(cast(AdwComboRow*)this._cPtr);
+    gtk.types.StringFilterMatchMode _retval = cast(gtk.types.StringFilterMatchMode)_cretval;
     return _retval;
   }
 
@@ -461,6 +524,17 @@ class ComboRow : adw.action_row.ActionRow
   }
 
   /**
+      Sets the factory to use for creating header widgets for the popup.
+  
+      Params:
+        factory = the factory to use
+  */
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
+  {
+    adw_combo_row_set_header_factory(cast(AdwComboRow*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
+  }
+
+  /**
       Sets the factory for populating list items in the popup.
       
       If this is not set, [adw.combo_row.ComboRow.factory] is used.
@@ -482,6 +556,17 @@ class ComboRow : adw.action_row.ActionRow
   void setModel(gio.list_model.ListModel model = null) nothrow
   {
     adw_combo_row_set_model(cast(AdwComboRow*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the match mode for the search filter.
+  
+      Params:
+        searchMatchMode = the new match mode
+  */
+  void setSearchMatchMode(gtk.types.StringFilterMatchMode searchMatchMode) nothrow
+  {
+    adw_combo_row_set_search_match_mode(cast(AdwComboRow*)this._cPtr, searchMatchMode);
   }
 
   /**
@@ -569,6 +654,17 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
   }
 
   /**
+      Set `headerFactory` property.
+      Params:
+        propval = The factory for creating header widgets for the popup.
+      Returns: Builder instance for fluent chaining
+  */
+  T headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
+  {
+    return setProperty("header-factory", propval);
+  }
+
+  /**
       Set `listFactory` property.
       Params:
         propval = The factory for populating list items in the popup.
@@ -590,6 +686,17 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
   T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
+  }
+
+  /**
+      Set `searchMatchMode` property.
+      Params:
+        propval = The match mode for the search filter.
+      Returns: Builder instance for fluent chaining
+  */
+  T searchMatchMode(gtk.types.StringFilterMatchMode propval) nothrow
+  {
+    return setProperty("search-match-mode", propval);
   }
 
   /**

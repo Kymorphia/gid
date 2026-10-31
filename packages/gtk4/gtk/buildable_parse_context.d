@@ -8,7 +8,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
-    An opaque context struct for [gtk.types.BuildableParser].
+    Provides context for parsing GtkBuilder UI files.
+    
+    [gtk.buildable_parse_context.BuildableParseContext] is an opaque struct.
 */
 class BuildableParseContext
 {

@@ -8,6 +8,15 @@ import gobject.c.types;
 import gobject.types;
 
 /**
+    - `'i'`: Integers, passed as `collect_values[].v_int`
+      - `'l'`: Longs, passed as `collect_values[].v_long`
+      - `'d'`: Doubles, passed as `collect_values[].v_double`
+      - `'p'`: Pointers, passed as `collect_values[].v_pointer`
+    
+      It should be noted that for variable argument list construction,
+      ANSI C promotes every type smaller than an integer to an int, and
+      floats to doubles. So for collection of short int or char, `'i'`
+      needs to be used, and for collection of floats `'d'`.
     The #GTypeValueTable provides the functions required by the #GValue
     implementation, to serve as a container for values of a type.
 */
@@ -27,14 +36,6 @@ class TypeValueTable
             this value bit-by-bit. Each character in the format represents
             an argument to be collected, and the characters themselves indicate
             the type of the argument. Currently supported arguments are:
-             - `'i'`: Integers, passed as `collect_values[].v_int`
-             - `'l'`: Longs, passed as `collect_values[].v_long`
-             - `'d'`: Doubles, passed as `collect_values[].v_double`
-             - `'p'`: Pointers, passed as `collect_values[].v_pointer`
-            It should be noted that for variable argument list construction,
-            ANSI C promotes every type smaller than an integer to an int, and
-            floats to doubles. So for collection of short int or char, `'i'`
-            needs to be used, and for collection of floats `'d'`.
         collectValue = Function to initialize a GValue from the values
             collected from variadic arguments
         lcopyFormat = Format description of the arguments to collect for @lcopy_value,
@@ -158,14 +159,6 @@ class TypeValueTable
           this value bit-by-bit. Each character in the format represents
           an argument to be collected, and the characters themselves indicate
           the type of the argument. Currently supported arguments are:
-           - `'i'`: Integers, passed as `collect_values[].v_int`
-           - `'l'`: Longs, passed as `collect_values[].v_long`
-           - `'d'`: Doubles, passed as `collect_values[].v_double`
-           - `'p'`: Pointers, passed as `collect_values[].v_pointer`
-          It should be noted that for variable argument list construction,
-          ANSI C promotes every type smaller than an integer to an int, and
-          floats to doubles. So for collection of short int or char, `'i'`
-          needs to be used, and for collection of floats `'d'`.
   */
   @property string collectFormat() nothrow
   {
@@ -179,14 +172,6 @@ class TypeValueTable
             this value bit-by-bit. Each character in the format represents
             an argument to be collected, and the characters themselves indicate
             the type of the argument. Currently supported arguments are:
-             - `'i'`: Integers, passed as `collect_values[].v_int`
-             - `'l'`: Longs, passed as `collect_values[].v_long`
-             - `'d'`: Doubles, passed as `collect_values[].v_double`
-             - `'p'`: Pointers, passed as `collect_values[].v_pointer`
-            It should be noted that for variable argument list construction,
-            ANSI C promotes every type smaller than an integer to an int, and
-            floats to doubles. So for collection of short int or char, `'i'`
-            needs to be used, and for collection of floats `'d'`.
   */
   @property void collectFormat(string propval) nothrow
   {

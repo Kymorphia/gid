@@ -36,6 +36,8 @@ import gobject.object;
     
     ![](menu-example.png)
     
+    While this kind of deeply nested menu is no longer considered good UI
+    practice, it serves as a good example of the concepts in [gio.menu_model.MenuModel].
     There are 8 ‘menus’ visible in the screenshot: one menubar, two
     submenus and 5 sections:
     
@@ -55,7 +57,10 @@ import gobject.object;
     
     ## A menu example
     
-    ![](menu-model.png)
+    <picture>
+      <source srcset="menu-model-dark.svg" media="(prefers-color-scheme: dark)">
+      <img src="menu-model-light.svg" alt="menu model">
+    </picture>
     
     Notice that the separators visible in the [example](#an-example-menu)
     appear nowhere in the [menu model](#a-menu-example). This is because
@@ -323,7 +328,7 @@ class MenuModel : gobject.object.ObjectWrap
         
         As an example, if the menu contains items a, b, c, d (in that
         order) and the signal (2, 1, 3) occurs then the new composition of
-        the menu will be a, b, _, _, _, d (with each _ representing some
+        the menu will be a, b, \_, \_, \_, d (with each _ representing some
         new item).
         
         Signal handlers may query the model (particularly the added items)

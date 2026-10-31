@@ -30,14 +30,14 @@ import gobject.object;
      - [gio.app_info.AppInfo.getDefaultForType]
      - [gio.app_info.AppInfo.getFallbackForType]
      - [gio.app_info.AppInfo.getRecommendedForType]
-     - [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
-     - [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
+     - [`[giounix.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
     
     The latter functions are available if using
-    [[gio.desktop_app_info.DesktopAppInfo]](../gio-unix/class.DesktopAppInfo.html) from
+    [[giounix.desktop_app_info.DesktopAppInfo]](../gio-unix/class.DesktopAppInfo.html) from
     `gio-unix-2.0.pc` (GIR namespace `GioUnix-2.0`).
     
     In the usual case, applications should try to make note of the change
@@ -92,7 +92,7 @@ class AppInfoMonitor : gobject.object.ObjectWrap
       Gets the #GAppInfoMonitor for the current thread-default main
       context.
       
-      The #GAppInfoMonitor will emit a "changed" signal in the
+      The #GAppInfoMonitor will emit a “changed” signal in the
       thread-default main context whenever the list of installed
       applications (as reported by [gio.app_info.AppInfo.getAll]) may have changed.
       

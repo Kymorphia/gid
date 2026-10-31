@@ -14,8 +14,8 @@ struct ResourceError
   alias Enum = gio.types.ResourceError; ///
 
   /**
-      Gets the #GResource Error Quark.
-      Returns: a #GQuark
+      Gets the [gio.resource.Resource] Error Quark.
+      Returns: a [glib.types.uint]
   */
   static glib.types.Quark quark() nothrow
   {

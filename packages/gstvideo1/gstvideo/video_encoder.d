@@ -190,11 +190,31 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /**
+      Removes frame from the list of pending frames, releases it
+      and posts a QoS message with the frame's details on the bus.
+      Similar to calling [gstvideo.video_encoder.VideoEncoder.finishFrame] without a buffer
+      attached to frame, but this function additionally stores events
+      from frame as pending, to be pushed out alongside the next frame
+      submitted via [gstvideo.video_encoder.VideoEncoder.finishFrame].
+  
+      Params:
+        frame = a #GstVideoCodecFrame
+  */
+  void dropFrame(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
+  {
+    gst_video_encoder_drop_frame(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
+  }
+
+  /**
       frame must have a valid encoded data buffer, whose metadata fields
       are then appropriately set according to frame data or no buffer at
       all if the frame should be dropped.
       It is subsequently pushed downstream or provided to pre_push.
       In any case, the frame is considered finished and released.
+      
+      If frame does not have a buffer attached, it will be dropped, and
+      a QoS message will be posted on the bus. Events from frame will be
+      pushed out immediately.
       
       After calling this function the output buffer of the frame is to be
       considered read-only. This function will also change the metadata
@@ -413,6 +433,20 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
     _cretval = gst_video_encoder_proxy_getcaps(cast(GstVideoEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
+  }
+
+  /**
+      Removes frame from list of pending frames and releases it, similar
+      to calling [gstvideo.video_encoder.VideoEncoder.finishFrame] without a buffer attached
+      to the frame, but does not post a QoS message or do any additional
+      processing. Events from frame are moved to the pending events list.
+  
+      Params:
+        frame = a #GstVideoCodecFrame
+  */
+  void releaseFrame(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
+  {
+    gst_video_encoder_release_frame(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
   }
 
   /**

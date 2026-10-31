@@ -15,7 +15,7 @@ import gtk.section_model_mixin;
 import gtk.types;
 
 /**
-    A [gtk.map_list_model.MapListModel] maps the items in a list model to different items.
+    A list model that maps the items in another model to different items.
     
     [gtk.map_list_model.MapListModel] uses a [gtk.types.MapListModelMapFunc].
     
@@ -98,6 +98,16 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
   @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model being mapped.
+  */
+  @property void model(gio.list_model.ListModel propval) nothrow
+  {
+    setModel(propval);
   }
 
   /**

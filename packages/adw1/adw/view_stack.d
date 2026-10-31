@@ -25,7 +25,8 @@ import gtk.widget;
     It is typically used to hold an application's main views.
     
     It doesn't provide a way to transition between pages.
-    Instead, a separate widget such as [adw.view_switcher.ViewSwitcher] can be used with
+    Instead, a separate widget such as [adw.view_switcher.ViewSwitcher],
+    [adw.inline_view_switcher.InlineViewSwitcher] or [adw.view_switcher_sidebar.ViewSwitcherSidebar] can be used with
     [adw.view_stack.ViewStack] to provide this functionality.
     
     [adw.view_stack.ViewStack] pages can have a title, an icon, an attention request, and a
@@ -35,7 +36,14 @@ import gtk.widget;
     [adw.view_stack_page.ViewStackPage.needsAttention], and
     [adw.view_stack_page.ViewStackPage.badgeNumber] properties.
     
-    Unlike [gtk.stack.Stack], transitions between views are not animated.
+    [adw.view_stack.ViewStack] pages can also be grouped into sections, using the
+    [adw.view_stack_page.ViewStackPage.startsSection] and
+    [adw.view_stack_page.ViewStackPage.sectionTitle] properties. Currently, only
+    [adw.view_switcher_sidebar.ViewSwitcherSidebar] displays groups.
+    
+    Unlike [gtk.stack.Stack], transitions between views can only be animated via
+    a crossfade and size changes are always interpolated. Animations are disabled
+    by default. Use [adw.view_stack.ViewStack.enableTransitions] to enable them.
     
     [adw.view_stack.ViewStack] maintains a [adw.view_stack_page.ViewStackPage] object for each added child,
     which holds additional per-child properties. You obtain the
@@ -71,8 +79,8 @@ import gtk.widget;
     
     ## Accessibility
     
-    [adw.view_stack.ViewStack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack pages
-    which are the accessible parent objects of the child widgets.
+    [adw.view_stack.ViewStack] uses the `enum@Gtk.AccessibleRole.tab-panel` for the stack
+    pages which are the accessible parent objects of the child widgets.
 */
 class ViewStack : gtk.widget.Widget
 {
@@ -112,6 +120,33 @@ class ViewStack : gtk.widget.Widget
   }
 
   /**
+      Get `enableTransitions` property.
+      Returns: Whether the stack uses a crossfade transition between pages.
+        
+        Use [adw.view_stack.ViewStack.transitionDuration] to control the duration, and
+        [adw.view_stack.ViewStack.transitionRunning] to know when the transition is
+        running.
+  */
+  @property bool enableTransitions() nothrow
+  {
+    return getEnableTransitions();
+  }
+
+  /**
+      Set `enableTransitions` property.
+      Params:
+        propval = Whether the stack uses a crossfade transition between pages.
+          
+          Use [adw.view_stack.ViewStack.transitionDuration] to control the duration, and
+          [adw.view_stack.ViewStack.transitionRunning] to know when the transition is
+          running.
+  */
+  @property void enableTransitions(bool propval) nothrow
+  {
+    setEnableTransitions(propval);
+  }
+
+  /**
       Get `hhomogeneous` property.
       Returns: Whether the stack is horizontally homogeneous.
         
@@ -146,13 +181,53 @@ class ViewStack : gtk.widget.Widget
       Get `pages` property.
       Returns: A selection model with the stack's pages.
         
-        This can be used to keep an up-to-date view. The model also implements
-        [gtk.selection_model.SelectionModel] and can be used to track and change the visible
-        page.
+        This can be used to keep an up-to-date view.
+        
+        The model implements [gtk.section_model.SectionModel] and creates sections based on
+        [adw.view_stack_page.ViewStackPage.startsSection] values.
+        
+        The model also implements [gtk.selection_model.SelectionModel] and can be used to
+        track and change the visible page.
   */
   @property gtk.selection_model.SelectionModel pages() nothrow
   {
     return getPages();
+  }
+
+  /**
+      Get `transitionDuration` property.
+      Returns: The transition animation duration, in milliseconds.
+        
+        Only used when [adw.view_stack.ViewStack.enableTransitions] is set to `TRUE`.
+  */
+  @property uint transitionDuration() nothrow
+  {
+    return getTransitionDuration();
+  }
+
+  /**
+      Set `transitionDuration` property.
+      Params:
+        propval = The transition animation duration, in milliseconds.
+          
+          Only used when [adw.view_stack.ViewStack.enableTransitions] is set to `TRUE`.
+  */
+  @property void transitionDuration(uint propval) nothrow
+  {
+    setTransitionDuration(propval);
+  }
+
+  /**
+      Get `transitionRunning` property.
+      Returns: Whether a transition is currently running.
+        
+        If a transition is impossible, the property value will be set to `TRUE` and
+        then immediately to `FALSE`, so it's possible to rely on its notifications
+        to know that a transition has happened.
+  */
+  @property bool transitionRunning() nothrow
+  {
+    return getTransitionRunning();
   }
 
   /**
@@ -336,6 +411,21 @@ class ViewStack : gtk.widget.Widget
   }
 
   /**
+      Gets whether self uses a crossfade transition between pages.
+      
+      Use [adw.view_stack.ViewStack.transitionDuration] to control the duration, and
+      [adw.view_stack.ViewStack.transitionRunning] to know when the transition is
+      running.
+      Returns: whether to enable page transitions
+  */
+  bool getEnableTransitions() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_view_stack_get_enable_transitions(cast(AdwViewStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Gets whether self is horizontally homogeneous.
       Returns: whether self is horizontally homogeneous
   */
@@ -364,9 +454,13 @@ class ViewStack : gtk.widget.Widget
   /**
       Returns a [gio.list_model.ListModel] that contains the pages of the stack.
       
-      This can be used to keep an up-to-date view. The model also implements
-      [gtk.selection_model.SelectionModel] and can be used to track and change the visible
-      page.
+      This can be used to keep an up-to-date view.
+      
+      The model implements [gtk.section_model.SectionModel] and creates sections based on
+      [adw.view_stack_page.ViewStackPage.startsSection] values.
+      
+      The model also implements [gtk.selection_model.SelectionModel] and can be used to track
+      and change the visible page.
       Returns: a [gtk.selection_model.SelectionModel] for the stack's children
   */
   gtk.selection_model.SelectionModel getPages() nothrow
@@ -374,6 +468,32 @@ class ViewStack : gtk.widget.Widget
     GtkSelectionModel* _cretval;
     _cretval = adw_view_stack_get_pages(cast(AdwViewStack*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the transition animation duration for self.
+      Returns: the transition duration, in milliseconds
+  */
+  uint getTransitionDuration() nothrow
+  {
+    uint _retval;
+    _retval = adw_view_stack_get_transition_duration(cast(AdwViewStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether a transition is currently running for self.
+      
+      If a transition is impossible, the property value will be set to `TRUE` and
+      then immediately to `FALSE`, so it's possible to rely on its notifications
+      to know that a transition has happened.
+      Returns: whether a transition is currently running
+  */
+  bool getTransitionRunning() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_view_stack_get_transition_running(cast(AdwViewStack*)this._cPtr);
     return _retval;
   }
 
@@ -424,6 +544,17 @@ class ViewStack : gtk.widget.Widget
   }
 
   /**
+      Sets whether self uses a crossfade transition between pages.
+  
+      Params:
+        enableTransitions = whether to enable page transitions
+  */
+  void setEnableTransitions(bool enableTransitions) nothrow
+  {
+    adw_view_stack_set_enable_transitions(cast(AdwViewStack*)this._cPtr, enableTransitions);
+  }
+
+  /**
       Sets self to be horizontally homogeneous or not.
       
       If the stack is horizontally homogeneous, it allocates the same width for
@@ -438,6 +569,19 @@ class ViewStack : gtk.widget.Widget
   void setHhomogeneous(bool hhomogeneous) nothrow
   {
     adw_view_stack_set_hhomogeneous(cast(AdwViewStack*)this._cPtr, hhomogeneous);
+  }
+
+  /**
+      Sets the transition animation duration for self.
+      
+      Only used when [adw.view_stack.ViewStack.enableTransitions] is set to `TRUE`.
+  
+      Params:
+        duration = the new duration, in milliseconds
+  */
+  void setTransitionDuration(uint duration) nothrow
+  {
+    adw_view_stack_set_transition_duration(cast(AdwViewStack*)this._cPtr, duration);
   }
 
   /**
@@ -489,6 +633,21 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /**
+      Set `enableTransitions` property.
+      Params:
+        propval = Whether the stack uses a crossfade transition between pages.
+          
+          Use [adw.view_stack.ViewStack.transitionDuration] to control the duration, and
+          [adw.view_stack.ViewStack.transitionRunning] to know when the transition is
+          running.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableTransitions(bool propval) nothrow
+  {
+    return setProperty("enable-transitions", propval);
+  }
+
+  /**
       Set `hhomogeneous` property.
       Params:
         propval = Whether the stack is horizontally homogeneous.
@@ -503,6 +662,19 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   T hhomogeneous(bool propval) nothrow
   {
     return setProperty("hhomogeneous", propval);
+  }
+
+  /**
+      Set `transitionDuration` property.
+      Params:
+        propval = The transition animation duration, in milliseconds.
+          
+          Only used when [adw.view_stack.ViewStack.enableTransitions] is set to `TRUE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T transitionDuration(uint propval) nothrow
+  {
+    return setProperty("transition-duration", propval);
   }
 
   /**

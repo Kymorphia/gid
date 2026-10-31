@@ -243,6 +243,13 @@ enum GstNavigationEventType
       An event cancelling all currently active touch points.
   */
   TouchCancel = 12,
+
+  /**
+      A mouse button double click event.
+      Use [gstvideo.navigation.Navigation.eventParseMouseButtonEvent] to extract the details
+      from the event.
+  */
+  MouseDoubleClick = 13,
 }
 
 /**
@@ -841,7 +848,7 @@ enum GstVideoChromaSite : uint
   VCosited = 4,
 
   /**
-      choma samples are sited on alternate lines
+      chroma samples are sited on alternate lines
   */
   AltLine = 8,
 
@@ -1859,6 +1866,46 @@ enum GstVideoFormat
       packed RGB with alpha, 8 bits per channel
   */
   Rbga = 133,
+
+  /**
+      packed 4:2:2 YUV, 16 bits per channel (Y-U-Y-V)
+  */
+  Y216Le = 134,
+
+  /**
+      packed 4:2:2 YUV, 16 bits per channel (Y-U-Y-V)
+  */
+  Y216Be = 135,
+
+  /**
+      packed 4:4:4:4 YUV, 16 bits per channel(U-Y-V-A)
+  */
+  Y416Le = 136,
+
+  /**
+      packed 4:4:4:4 YUV, 16 bits per channel(U-Y-V-A)
+  */
+  Y416Be = 137,
+
+  /**
+      10-bit grayscale, packed into 16bit words (6 bits left padding)
+  */
+  Gray10Le16 = 138,
+
+  /**
+      Fully packed variant of NV16_10LE32
+  */
+  Nv1610le40 = 139,
+
+  /**
+      packed 4:4:4 RGB (B-G-R-x), 10 bits for R/G/B channel and MSB 2 bits for padding.
+  */
+  Bgr10x2Le = 140,
+
+  /**
+      packed 4:4:4 RGB (R-G-B-x), 10 bits for R/G/B channel and MSB 2 bits for padding.
+  */
+  Rgb10x2Le = 141,
 }
 
 /**
@@ -2425,12 +2472,12 @@ enum GstVideoOrientationMethod
   Vert = 5,
 
   /**
-      Flip across upper left/lower right diagonal
+      Rotate counter-clockwise 90 degrees and flip vertically
   */
   UlLr = 6,
 
   /**
-      Flip across upper right/lower left diagonal
+      Rotate clockwise 90 degrees and flip vertically
   */
   UrLl = 7,
 
@@ -3286,7 +3333,7 @@ struct GstVideoAncillary
       The user data content of the Ancillary packet.
          Does not contain the ADF, DID, SDID nor CS.
   */
-  ubyte* data;
+  ubyte[256] data;
 
   /** */
   void*[4] GstReserved;
@@ -4056,6 +4103,20 @@ struct GstVideoDirectionInterface
 struct GstVideoDither;
 
 /**
+    Using #GstUdmabufAllocator, setting defaults and implementing implicit sync.
+*/
+struct GstVideoDmabufPool;
+
+/** */
+struct GstVideoDmabufPoolClass
+{
+  /**
+      Parent Class.
+  */
+  GstVideoBufferPoolClass parentClass;
+}
+
+/**
     This base class is for video encoders turning raw video into
     encoded video data.
     
@@ -4788,8 +4849,12 @@ struct GstVideoMasteringDisplayInfoCoordinates
     - padding-bottom (uint): extra pixels on the bottom
     - padding-left (uint): extra pixels on the left side
     - padding-right (uint): extra pixels on the right side
-    The padding fields have the same semantic as #GstVideoMeta.alignment
-    and so represent the paddings requested on produced video buffers.
+    - stride-align0 (uint): stride align requirements for plane 0
+    - stride-align1 (uint): stride align requirements for plane 1
+    - stride-align2 (uint): stride align requirements for plane 2
+    - stride-align3 (uint): stride align requirements for plane 3
+    The padding and stride-align fields have the same semantic as #GstVideoMeta.alignment
+    and so represent the paddings and stride-align requested on produced video buffers.
     
     Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
     [gst.meta.Meta.deserialize].
@@ -4870,6 +4935,9 @@ struct GstVideoMeta
 /**
     Extra data passed to a video transform #GstMetaTransformFunction such as:
     "gst-video-scale".
+    
+    This transformation can not express letterbox, cropping, or rotations,
+    use #GstVideoMetaTransformMatrix instead
 */
 struct GstVideoMetaTransform
 {
@@ -4882,6 +4950,45 @@ struct GstVideoMetaTransform
       the output #GstVideoInfo
   */
   GstVideoInfo* outInfo;
+}
+
+/**
+    Extra data passed to a video transform #GstMetaTransformFunction such as:
+    "gst-video-matrix".
+    
+    The matrix represents a transformation that is applied to the content of
+    @in_rectangle, and its output is put inside @out_rectangle. The coordinate
+    system has it's (0, 0) in the top-left corner of the rectangles and
+    goes down and right from there..
+    
+    It's a programming error to have a singular matrix.
+*/
+struct GstVideoMetaTransformMatrix
+{
+  /**
+      the input #GstVideoInfo
+  */
+  const(GstVideoInfo)* inInfo;
+
+  /**
+      the input #GstVideoRectangle
+  */
+  GstVideoRectangle inRectangle;
+
+  /**
+      the output #GstVideoInfo
+  */
+  const(GstVideoInfo)* outInfo;
+
+  /**
+      the output #GstVideoRectangle
+  */
+  GstVideoRectangle outRectangle;
+
+  /**
+      a 3x3 matrix representing an homographic transformation
+  */
+  float[9] matrix;
 }
 
 /**

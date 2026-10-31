@@ -299,8 +299,23 @@ alias DrawQuadraticToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, 
       glyph = The glyph ID to query
       drawFuncs = The draw functions to send the shape data to
       drawData = The data accompanying the draw functions
+
+    Deprecated: Use hb_font_draw_glyph_func_or_fail_t instead.
 */
 alias FontDrawGlyphFunc = void delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs drawFuncs, void* drawData);
+
+/**
+    A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
+
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      drawFuncs = The draw functions to send the shape data to
+      drawData = The data accompanying the draw functions
+    Returns: `true` if glyph was drawn, `false` otherwise
+*/
+alias FontDrawGlyphOrFailFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs drawFuncs, void* drawData);
 
 /**
     This method should retrieve the extents for a font.
@@ -330,7 +345,7 @@ alias FontGetGlyphAdvanceFunc = harfbuzz.types.Position delegate(harfbuzz.font.F
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
     
-    This method should retrieve the (X,Y) coordinates (in font units) for a
+    This method should retrieve the (X,Y) coordinates (in scaled units) for a
     specified contour point in a glyph. Each coordinate must be returned as
     an #hb_position_t output parameter.
 
@@ -407,7 +422,7 @@ alias FontGetGlyphKerningFunc = harfbuzz.types.Position delegate(harfbuzz.font.F
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
     
-    This method should retrieve the (X,Y) coordinates (in font units) of the
+    This method should retrieve the (X,Y) coordinates (in scaled units) of the
     origin for a glyph. Each coordinate must be returned in an #hb_position_t
     output parameter.
 
@@ -478,8 +493,26 @@ alias FontGetVariationGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Fon
       paintData = The data accompanying the paint functions
       paletteIndex = The color palette to use
       foreground = The foreground color
+    Returns: 
+
+    Deprecated: Use hb_font_paint_glyph_or_fail_func_t instead.
 */
-alias FontPaintGlyphFunc = void delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs paintFuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground);
+alias FontPaintGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs paintFuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground);
+
+/**
+    A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
+
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      paintFuncs = The paint functions to use
+      paintData = The data accompanying the paint functions
+      paletteIndex = The color palette to use
+      foreground = The foreground color
+    Returns: `true` if glyph was painted, `false` otherwise
+*/
+alias FontPaintGlyphOrFailFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs paintFuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground);
 
 /**
     A virtual method for the #hb_paint_funcs_t to paint a
@@ -501,7 +534,7 @@ alias PaintColorFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       glyph = the glyph ID
       font = the font
-    Returns: true if the glyph was painted, false otherwise.
+    Returns: `true` if the glyph was painted, `false` otherwise.
 */
 alias PaintColorGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font);
 
@@ -543,7 +576,7 @@ alias PaintCustomPaletteColorFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_
       width = width of the raster image in pixels, or 0
       height = height of the raster image in pixels, or 0
       format = the image format as a tag
-      slant = the synthetic slant ratio to be applied to the image during rendering
+      slant = Deprecated. Always set to 0.0.
       extents = glyph extents for desired rendering
     Returns: Whether the operation was successful.
 */
@@ -618,8 +651,10 @@ alias PaintPopTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs func
     A virtual method for the #hb_paint_funcs_t to clip
     subsequent paint calls to the outline of a glyph.
     
-    The coordinates of the glyph outline are interpreted according
-    to the current transform.
+    The coordinates of the glyph outline are expected in the
+    current font scale (ie. the results of calling
+    [harfbuzz.global.fontDrawGlyph] with font). The outline is
+    transformed by the current transform.
     
     This clip is applied in addition to the current clip,
     and remains in effect until a matching call to
@@ -741,12 +776,17 @@ alias PaintRadialGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fu
 alias PaintSweepGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle);
 
 /**
-    Callback function for [harfbuzz.global.faceCreateForTables].
+    Callback function for [harfbuzz.global.faceCreateForTables]. The tag is the tag of the
+    table to reference, and the special tag #HB_TAG_NONE is used to reference the
+    blob of the face itself. If referencing the face blob is not possible, it is
+    recommended to set hb_get_table_tags_func_t on the face to allow
+    [harfbuzz.global.faceReferenceBlob] to create a face blob out of individual table blobs.
 
     Params:
       face = an #hb_face_t to reference table for
       tag = the tag of the table to reference
-    Returns: A pointer to the tag table within face
+    Returns: A pointer to the tag table within face or
+      `NULL` if the table is not found or cannot be referenced.
 */
 alias ReferenceTableFunc = harfbuzz.blob.Blob delegate(harfbuzz.face.Face face, harfbuzz.types.Tag tag);
 
@@ -937,13 +977,13 @@ enum UNICODE_MAX = 1114111;
 enum UNICODE_MAX_DECOMPOSITION_LEN = 19;
 
 /** */
-enum VERSION_MAJOR = 8;
+enum VERSION_MAJOR = 12;
 
 /** */
-enum VERSION_MICRO = 0;
+enum VERSION_MICRO = 2;
 
 /** */
 enum VERSION_MINOR = 3;
 
 /** */
-enum VERSION_STRING = "8.3.0";
+enum VERSION_STRING = "12.3.2";

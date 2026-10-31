@@ -12,8 +12,7 @@ import gtk.list_item_factory;
 import gtk.types;
 
 /**
-    [gtk.signal_list_item_factory.SignalListItemFactory] is a [gtk.list_item_factory.ListItemFactory] that emits signals
-    to manage listitems.
+    Emits signals to manage listitems.
     
     Signals are emitted for every listitem in the same order:
     
@@ -38,15 +37,15 @@ import gtk.types;
      again to bind the listitem for use with new items. By reusing listitems,
      potentially costly setup can be avoided. However, it means code needs to
      make sure to properly clean up the listitem in step 3 so that no information
-     from the previous use leaks into the next use.
+     from the previous use leaks into the next one.
     
-    5. [gtk.signal_list_item_factory.SignalListItemFactory.teardown] is emitted to allow undoing
-    the effects of [gtk.signal_list_item_factory.SignalListItemFactory.setup]. After this signal
-    was emitted on a listitem, the listitem will be destroyed and not be used again.
+     5. [gtk.signal_list_item_factory.SignalListItemFactory.teardown] is emitted to allow undoing
+     the effects of [gtk.signal_list_item_factory.SignalListItemFactory.setup]. After this signal
+     was emitted on a listitem, the listitem will be destroyed and not be used again.
     
-    Note that during the signal emissions, changing properties on the
-    listitems passed will not trigger notify signals as the listitem's
-    notifications are frozen. See [gobject.object.ObjectWrap.freezeNotify] for details.
+    Note that during the signal emissions, changing properties on the listitems
+    passed will not trigger notify signals as the listitem's notifications are
+    frozen. See [gobject.object.ObjectWrap.freezeNotify] for details.
     
     For tracking changes in other properties in the listitem, the
     ::notify signal is recommended. The signal can be connected in the
@@ -106,9 +105,10 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   /**
       Connect to `Bind` signal.
   
-      Emitted when an object has been bound, for example when a
-        new [gtk.list_item.ListItem.item] has been set on a
-        listitem and should be bound for use.
+      Emitted when an object has been bound to an item.
+        
+        The handler for this signal must set
+        to populate the listitem with widgets.
         
         After this signal was emitted, the object might be shown in
         a [gtk.list_view.ListView] or other widget.
@@ -165,9 +165,12 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   /**
       Connect to `Setup` signal.
   
-      Emitted when a new listitem has been created and needs to be setup for use.
+      Emitted when a newly created listitem needs to be prepared for use.
         
         It is the first signal emitted for every listitem.
+        
+        The handler for this signal must call [gtk.list_item.ListItem.setChild]
+        to populate the listitem with widgets.
         
         The [gtk.signal_list_item_factory.SignalListItemFactory.teardown] signal is the opposite
         of this signal and can be used to undo everything done in this signal.
@@ -177,7 +180,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   
           `void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory)`
   
-          `object` The [gobject.object.ObjectWrap] to set up (optional)
+          `object` the [gobject.object.ObjectWrap] to set up (optional)
   
           `signalListItemFactory` the instance the signal is connected to (optional)
   
@@ -275,9 +278,11 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   /**
       Connect to `Unbind` signal.
   
-      Emitted when an object has been unbound from its item, for example when
-        a listitem was removed from use in a list widget
-        and its [gtk.list_item.ListItem.item] is about to be unset.
+      Emitted when an object has been unbound from its item.
+        
+        This happens for example when a listitem was removed from use
+        in a list widget and its [gtk.list_item.ListItem.item] is about
+        to be unset.
         
         This signal is the opposite of the [gtk.signal_list_item_factory.SignalListItemFactory.bind]
         signal and should be used to undo everything done in that signal.

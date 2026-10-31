@@ -55,6 +55,20 @@ import gtksource.types;
             gtk_source_region_iter_next (&region_iter);
     }
     ```
+    ```python
+    buffer: GtkSource.Buffer = GtkSource.Buffer()
+    region: GtkSource.Region = GtkSource.Region(buffer=buffer)
+    region_iter = region.get_start_region_iter()
+    
+    while not region_iter.is_end():
+        success, start, end = region_iter.get_subregion()
+        if not success:
+            break
+    
+        # Do something useful with the subregion
+    
+        region_iter.next()
+    ```
 */
 class Region : gobject.object.ObjectWrap
 {

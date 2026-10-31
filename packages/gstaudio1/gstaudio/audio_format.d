@@ -48,7 +48,7 @@ struct AudioFormat
       _length = cast(size_t)dest.length;
 
     auto _dest = cast(ubyte*)dest.ptr;
-    gst_audio_format_fill_silence(info ? cast(const(GstAudioFormatInfo)*)info._cPtr : null, _dest, _length);
+    gst_audio_format_fill_silence(info ? cast(const(GstAudioFormatInfo)*)info._cPtr(No.Dup) : null, _dest, _length);
   }
 
   /**
@@ -79,11 +79,20 @@ struct AudioFormat
   {
     const(GstAudioFormatInfo)* _cretval;
     _cretval = gst_audio_format_get_info(format);
-    auto _retval = _cretval ? new gstaudio.audio_format_info.AudioFormatInfo(cast(GstAudioFormatInfo*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstaudio.audio_format_info.AudioFormatInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
-  /** */
+  /**
+      Returns a string containing a descriptive name for the #GstAudioFormat.
+      
+      Since 1.26 this can also be used with [gstaudio.types.AudioFormat.Unknown], previous
+      versions were printing a critical warning and returned null.
+  
+      Params:
+        format = a #GstAudioFormat audio format
+      Returns: the name corresponding to format
+  */
   static string toString_(gstaudio.types.AudioFormat format) nothrow
   {
     const(char)* _cretval;

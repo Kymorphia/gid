@@ -10,7 +10,7 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
-    A [gtk.shortcut.Shortcut]Action that emits a signal.
+    Emits a signal on a widget.
     
     Signals that are used in this way are referred to as keybinding signals,
     and they are expected to be defined with the [gobject.types.SignalFlags.Action] flag.
