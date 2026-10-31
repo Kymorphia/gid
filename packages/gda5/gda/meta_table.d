@@ -4,6 +4,8 @@ module gda.meta_table;
 public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
+import gda.meta_table_column;
+import gda.meta_table_foreign_key;
 import gda.types;
 import gid.gid;
 
@@ -45,6 +47,15 @@ class MetaTable
   }
 
   /**
+      Get `columns` field.
+      Returns: list of #GdaMetaTableColumn structures, one for each column in the table
+  */
+  @property gda.meta_table_column.MetaTableColumn[] columns() nothrow
+  {
+    return gSListToD!(gda.meta_table_column.MetaTableColumn)((cast(GdaMetaTable*)this._cPtr).columns);
+  }
+
+  /**
       Get `pkColsNb` field.
       Returns: size of the @pk_cols_array array
   */
@@ -61,5 +72,23 @@ class MetaTable
   @property void pkColsNb(int propval) nothrow
   {
     (cast(GdaMetaTable*)this._cPtr).pkColsNb = propval;
+  }
+
+  /**
+      Get `reverseFkList` field.
+      Returns: list of #GdaMetaTableForeignKey where the referenced table is this table
+  */
+  @property gda.meta_table_foreign_key.MetaTableForeignKey[] reverseFkList() nothrow
+  {
+    return gSListToD!(gda.meta_table_foreign_key.MetaTableForeignKey)((cast(GdaMetaTable*)this._cPtr).reverseFkList);
+  }
+
+  /**
+      Get `fkList` field.
+      Returns: list of #GdaMetaTableForeignKey for this table
+  */
+  @property gda.meta_table_foreign_key.MetaTableForeignKey[] fkList() nothrow
+  {
+    return gSListToD!(gda.meta_table_foreign_key.MetaTableForeignKey)((cast(GdaMetaTable*)this._cPtr).fkList);
   }
 }

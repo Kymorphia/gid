@@ -19,6 +19,7 @@ import harfbuzz.font_funcs;
 import harfbuzz.glyph_info;
 import harfbuzz.glyph_position;
 import harfbuzz.map;
+import harfbuzz.ot_name_entry;
 import harfbuzz.paint_funcs;
 import harfbuzz.segment_properties;
 import harfbuzz.set;
@@ -5561,6 +5562,31 @@ harfbuzz.types.Position otMetricsGetYVariation(harfbuzz.font.Font font, harfbuzz
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_metrics_get_y_variation(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, metricsTag);
+  return _retval;
+}
+
+/**
+    Enumerates all available name IDs and language combinations. Returned
+    array is owned by the face and should not be modified.  It can be
+    used as long as face is alive.
+
+    Params:
+      face = font face.
+    Returns: Array of available name entries.
+*/
+harfbuzz.ot_name_entry.OtNameEntry[] otNameListNames(harfbuzz.face.Face face) nothrow
+{
+  const(hb_ot_name_entry_t)* _cretval;
+  uint _cretlength;
+  _cretval = hb_ot_name_list_names(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, &_cretlength);
+  harfbuzz.ot_name_entry.OtNameEntry[] _retval;
+
+  if (_cretval)
+  {
+    _retval = new harfbuzz.ot_name_entry.OtNameEntry[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = new harfbuzz.ot_name_entry.OtNameEntry(cast(void*)&_cretval[i], No.Take);
+  }
   return _retval;
 }
 

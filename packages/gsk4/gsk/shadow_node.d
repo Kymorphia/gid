@@ -22,6 +22,31 @@ class ShadowNode : gsk.render_node.RenderNode
   }
 
   /**
+      Creates a [gsk.render_node.RenderNode] that will draw a child with the given
+      shadows below it.
+  
+      Params:
+        child = The node to draw
+        shadows = The shadows to apply
+      Returns: A new [gsk.render_node.RenderNode]
+  */
+  this(gsk.render_node.RenderNode child, gsk.shadow.Shadow[] shadows) nothrow
+  {
+    GskRenderNode* _cretval;
+    size_t _nShadows;
+    if (shadows)
+      _nShadows = cast(size_t)shadows.length;
+
+    GskShadow[] _tmpshadows;
+    foreach (obj; shadows)
+      _tmpshadows ~= obj._cInstance;
+    const(GskShadow)* _shadows = _tmpshadows.ptr;
+
+    _cretval = gsk_shadow_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, _shadows, _nShadows);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
       Retrieves the child [gsk.render_node.RenderNode] of the shadow node.
       Returns: the child render node
   */

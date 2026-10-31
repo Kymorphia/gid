@@ -35,18 +35,24 @@ class TypeValueTable
             ANSI C promotes every type smaller than an integer to an int, and
             floats to doubles. So for collection of short int or char, `'i'`
             needs to be used, and for collection of floats `'d'`.
+        collectValue = Function to initialize a GValue from the values
+            collected from variadic arguments
         lcopyFormat = Format description of the arguments to collect for @lcopy_value,
             analogous to @collect_format. Usually, @lcopy_format string consists
             only of `'p'`s to provide lcopy_value() with pointers to storage locations.
+        lcopyValue = Function to store the contents of a value into the
+            locations collected from variadic arguments
   */
-  this(GTypeValueInitFunc valueInit = GTypeValueInitFunc.init, GTypeValueFreeFunc valueFree = GTypeValueFreeFunc.init, GTypeValueCopyFunc valueCopy = GTypeValueCopyFunc.init, GTypeValuePeekPointerFunc valuePeekPointer = GTypeValuePeekPointerFunc.init, string collectFormat = string.init, string lcopyFormat = string.init) nothrow
+  this(GTypeValueInitFunc valueInit = GTypeValueInitFunc.init, GTypeValueFreeFunc valueFree = GTypeValueFreeFunc.init, GTypeValueCopyFunc valueCopy = GTypeValueCopyFunc.init, GTypeValuePeekPointerFunc valuePeekPointer = GTypeValuePeekPointerFunc.init, string collectFormat = string.init, GTypeValueCollectFunc collectValue = GTypeValueCollectFunc.init, string lcopyFormat = string.init, GTypeValueLCopyFunc lcopyValue = GTypeValueLCopyFunc.init) nothrow
   {
     this.valueInit = valueInit;
     this.valueFree = valueFree;
     this.valueCopy = valueCopy;
     this.valuePeekPointer = valuePeekPointer;
     this.collectFormat = collectFormat;
+    this.collectValue = collectValue;
     this.lcopyFormat = lcopyFormat;
+    this.lcopyValue = lcopyValue;
   }
 
   /** */
@@ -188,6 +194,28 @@ class TypeValueTable
   }
 
   /**
+      Get `collectValue` field.
+      Returns: Function to initialize a GValue from the values
+          collected from variadic arguments
+  */
+  @property GTypeValueCollectFunc collectValue() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).collectValue;
+  }
+
+  /**
+      Set `collectValue` field.
+      Params:
+        propval = Function to initialize a GValue from the values
+            collected from variadic arguments
+  */
+
+  @property void collectValue(GTypeValueCollectFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).collectValue = propval;
+  }
+
+  /**
       Get `lcopyFormat` field.
       Returns: Format description of the arguments to collect for @lcopy_value,
           analogous to @collect_format. Usually, @lcopy_format string consists
@@ -208,5 +236,27 @@ class TypeValueTable
   @property void lcopyFormat(string propval) nothrow
   {
     (cast(GTypeValueTable*)this._cPtr).lcopyFormat = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+  }
+
+  /**
+      Get `lcopyValue` field.
+      Returns: Function to store the contents of a value into the
+          locations collected from variadic arguments
+  */
+  @property GTypeValueLCopyFunc lcopyValue() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).lcopyValue;
+  }
+
+  /**
+      Set `lcopyValue` field.
+      Params:
+        propval = Function to store the contents of a value into the
+            locations collected from variadic arguments
+  */
+
+  @property void lcopyValue(GTypeValueLCopyFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).lcopyValue = propval;
   }
 }

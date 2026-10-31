@@ -5,6 +5,7 @@ import gid.gid;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
+import glib.debug_key;
 import glib.error;
 import glib.iochannel;
 import glib.source;
@@ -5595,6 +5596,44 @@ glib.types.Quark optionErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_option_error_quark();
+  return _retval;
+}
+
+/**
+    Parses a string containing debugging options
+    into a [gda.types.uint] containing bit flags. This is used
+    within GDK and GTK to parse the debug options passed on the
+    command line or through environment variables.
+    
+    If string is equal to "all", all flags are set. Any flags
+    specified along with "all" in string are inverted; thus,
+    "all,foo,bar" or "foo,bar,all" sets all flags except those
+    corresponding to "foo" and "bar".
+    
+    If string is equal to "help", all the available keys in keys
+    are printed out to standard error.
+
+    Params:
+      string_ = a list of debug options separated by colons, spaces, or
+        commas, or null.
+      keys = pointer to an array of #GDebugKey which associate
+            strings with bit flags.
+    Returns: the combined set of bit flags.
+*/
+uint parseDebugString(string string_, glib.debug_key.DebugKey[] keys) nothrow
+{
+  uint _retval;
+  const(char)* _string_ = string_.toCString!(No.Malloc, Yes.Nullable);
+  uint _nkeys;
+  if (keys)
+    _nkeys = cast(uint)keys.length;
+
+  GDebugKey[] _tmpkeys;
+  foreach (obj; keys)
+    _tmpkeys ~= obj._cInstance;
+  const(GDebugKey)* _keys = _tmpkeys.ptr;
+
+  _retval = g_parse_debug_string(_string_, _keys, _nkeys);
   return _retval;
 }
 

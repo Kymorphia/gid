@@ -2718,6 +2718,31 @@ bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
 }
 
 /**
+    Registers each of the stock items in items. If an item already
+    exists with the same stock ID as one of the items, the old item
+    gets replaced. The stock items are copied, so GTK+ does not hold
+    any pointer into items and items can be freed. Use
+    [gtk.global.stockAddStatic] if items is persistent and GTK+ need not
+    copy the array.
+
+    Params:
+      items = a #GtkStockItem or array of items
+*/
+void stockAdd(gtk.stock_item.StockItem[] items) nothrow
+{
+  uint _nItems;
+  if (items)
+    _nItems = cast(uint)items.length;
+
+  GtkStockItem[] _tmpitems;
+  foreach (obj; items)
+    _tmpitems ~= obj._cInstance;
+  const(GtkStockItem)* _items = _tmpitems.ptr;
+
+  gtk_stock_add(_items, _nItems);
+}
+
+/**
     Retrieves a list of all known stock IDs added to a #GtkIconFactory
     or registered with [gtk.global.stockAdd]. The list must be freed with [glib.slist.SList.free],
     and each string in the list must be freed with [glib.global.gfree].

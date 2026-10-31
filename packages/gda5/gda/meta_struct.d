@@ -232,6 +232,21 @@ class MetaStruct : gobject.object.ObjectWrap
   }
 
   /**
+      Get a list of all the #GdaMetaDbObject structures representing database objects in mstruct. Note that
+      no #GdaMetaDbObject structure must not be modified.
+      Returns: a new #GSList list of pointers to
+        #GdaMetaDbObject structures which must be destroyed after usage using [glib.slist.SList.free]. The individual
+        #GdaMetaDbObject must not be modified.
+  */
+  gda.meta_db_object.MetaDbObject[] getAllDbObjects() nothrow
+  {
+    GSList* _cretval;
+    _cretval = gda_meta_struct_get_all_db_objects(cast(GdaMetaStruct*)this._cPtr);
+    auto _retval = gSListToD!(gda.meta_db_object.MetaDbObject, GidOwnership.Container)(cast(GSList*)_cretval);
+    return _retval;
+  }
+
+  /**
       Tries to locate the #GdaMetaDbObject structure representing the database object named after
       catalog, schema and name.
       

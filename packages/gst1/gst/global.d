@@ -234,6 +234,21 @@ int debugConstructWinColor(uint colorinfo) nothrow
 }
 
 /**
+    Returns a snapshot of a all categories that are currently in use . This list
+    may change anytime.
+    The caller has to free the list after use.
+    Returns: the list of
+          debug categories
+*/
+gst.debug_category.DebugCategory[] debugGetAllCategories() nothrow
+{
+  GSList* _cretval;
+  _cretval = gst_debug_get_all_categories();
+  auto _retval = gSListToD!(gst.debug_category.DebugCategory, GidOwnership.Container)(cast(GSList*)_cretval);
+  return _retval;
+}
+
+/**
     Changes the coloring mode for debug output.
     Returns: see GstDebugColorMode for possible values.
 */

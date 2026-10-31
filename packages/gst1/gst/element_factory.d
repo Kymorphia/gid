@@ -12,6 +12,7 @@ import gst.c.types;
 import gst.caps;
 import gst.element;
 import gst.plugin_feature;
+import gst.static_pad_template;
 import gst.types;
 
 /**
@@ -390,6 +391,19 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   {
     bool _retval;
     _retval = cast(bool)gst_element_factory_get_skip_documentation(cast(GstElementFactory*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the #GList of #GstStaticPadTemplate for this factory.
+      Returns: the
+            static pad templates
+  */
+  gst.static_pad_template.StaticPadTemplate[] getStaticPadTemplates() nothrow
+  {
+    const(GList)* _cretval;
+    _cretval = gst_element_factory_get_static_pad_templates(cast(GstElementFactory*)this._cPtr);
+    auto _retval = gListToD!(gst.static_pad_template.StaticPadTemplate, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 

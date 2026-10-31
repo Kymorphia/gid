@@ -9,6 +9,7 @@ import gda.data_model_mixin;
 import gda.set;
 import gda.types;
 import gid.gid;
+import glib.error;
 import gobject.gid_builder;
 import gobject.object;
 import libxml2.types;
@@ -199,6 +200,19 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   void cleanErrors() nothrow
   {
     gda_data_model_import_clean_errors(cast(GdaDataModelImport*)this._cPtr);
+  }
+
+  /**
+      Get the list of errors which model has to report. The returned list is a list of
+      #GError structures, and must not be modified
+      Returns: the list of errors (which must not be modified), or null
+  */
+  glib.error.ErrorWrap[] getErrors() nothrow
+  {
+    GSList* _cretval;
+    _cretval = gda_data_model_import_get_errors(cast(GdaDataModelImport*)this._cPtr);
+    auto _retval = gSListToD!(glib.error.ErrorWrap, GidOwnership.None)(cast(GSList*)_cretval);
+    return _retval;
   }
 }
 

@@ -211,4 +211,14 @@ class MetaDbObject
   {
     (cast(GdaMetaDbObject*)this._cPtr).objOwner = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
   }
+
+  /**
+      Get `dependList` field.
+      Returns: list of #GdaMetaDbObject pointers on which this object depends (through foreign keys
+                      or tables used for views)
+  */
+  @property gda.meta_db_object.MetaDbObject[] dependList() nothrow
+  {
+    return gSListToD!(gda.meta_db_object.MetaDbObject)((cast(GdaMetaDbObject*)this._cPtr).dependList);
+  }
 }

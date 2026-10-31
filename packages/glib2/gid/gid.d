@@ -299,7 +299,7 @@ ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes) no
 * Returns: D array of the given type
 */
 T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray) nothrow
-if (containerTypeIsSupported!T)
+if (containerTypeIsSupported!T && !isTypeWrap!T) // Wrap structures are stored inline in GArray, not supported
 {
   T[] a;
 
@@ -489,7 +489,7 @@ GBytes* gBytesFromD(ubyte[] a) nothrow
 * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
 */
 GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a) nothrow
-if (containerTypeIsSupported!T)
+if (containerTypeIsSupported!T && !isTypeWrap!T) // Wrap structures are stored inline in GArray, not supported
 {
   auto gArray = g_array_sized_new(zeroTerminated, false, containerTypeSize!T, cast(uint)a.length);
 
@@ -748,6 +748,20 @@ bool isTypeCopyableStruct(T)() nothrow
 }
 
 /**
+* Check if a type is a Wrap structure class (non-boxed, non-reffed class wrapping an inline C structure).
+* Params:
+*   T = Type to check
+* Returns: true if T is a Wrap structure class
+*/
+bool isTypeWrap(T)() nothrow
+{
+  static if (is(T == class) && !is(T : gobject.object.ObjectWrap) && isTypeCopyableStruct!T)
+    return !isBoxed!T && !__traits(compiles, T._unref(null)) && __traits(hasMember, T, "_cInstance");
+  else
+    return false;
+}
+
+/**
 * Check if a type is considered a simple container type (can be copied directly)
 * Params:
 *   T = The D type to check
@@ -825,6 +839,8 @@ if (containerTypeIsSupported!T)
     boxedFree(T._getGType, data);
   else static if (__traits(compiles, T._unref(data))) // Reffed types
     T._unref(data);
+  else static if (isTypeWrap!T) // Shallow copy from _cPtr(Yes.Dup) or C allocated structure
+    gFree(data);
   else static if (is(T : string) || isTypeSimple!T)
     gFree(data);
 }

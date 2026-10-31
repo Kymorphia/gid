@@ -11,6 +11,7 @@ import gobject.closure;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.param_spec;
+import gobject.parameter;
 import gobject.types;
 import gobject.value;
 
@@ -533,6 +534,41 @@ class ObjectWrap
     T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;
+  }
+
+  /**
+      Creates a new instance of a #GObject subtype and sets its properties.
+      
+      Construction parameters (see [gobject.types.ParamFlags.Construct], [gobject.types.ParamFlags.ConstructOnly])
+      which are not explicitly specified are set to their default values.
+  
+      Params:
+        objectType = the type id of the #GObject subtype to instantiate
+        parameters = an array of #GParameter
+      Returns: a new instance of
+        object_type
+  
+      Deprecated: Use [gobject.object.ObjectWrap.newWithProperties] instead.
+        deprecated. See #GParameter for more information.
+  */
+  static gobject.object.ObjectWrap newv(gobject.types.GType objectType, gobject.parameter.Parameter[] parameters) nothrow
+  {
+    GObject* _cretval;
+    uint _nParameters;
+    if (parameters)
+      _nParameters = cast(uint)parameters.length;
+
+    GParameter[] _tmpparameters;
+    foreach (obj; parameters)
+      _tmpparameters ~= obj._cInstance;
+    GParameter* _parameters = _tmpparameters.ptr;
+
+    _cretval = g_object_newv(objectType, _nParameters, _parameters);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
+    foreach (i, obj; parameters)
+      obj._cInstance = _tmpparameters[i];
+
+    return _retval;
   }
 
   /** */

@@ -7,6 +7,7 @@ import gda.c.types;
 import gda.connection;
 import gda.data_model;
 import gda.meta_context;
+import gda.meta_store_change;
 import gda.meta_struct;
 import gda.types;
 import gid.gid;
@@ -577,6 +578,56 @@ class MetaStore : gobject.object.ObjectWrap
     if (_err)
       throw new MetaStoreException(_err, Yes.Take);
     return _retval;
+  }
+
+  /**
+      Connect to `MetaChanged` signal.
+  
+      This signal is emitted when the store's contents have changed (the changes are in the changes list)
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gda.meta_store_change.MetaStoreChange[] changes, gda.meta_store.MetaStore metaStore)`
+  
+          `changes` a list of changes made, as a #GSList of pointers to #GdaMetaStoreChange (which must not be modified) (optional)
+  
+          `metaStore` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMetaChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gda.meta_store_change.MetaStoreChange[])))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.meta_store.MetaStore)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = gSListToD!(gda.meta_store_change.MetaStoreChange, GidOwnership.None)(cast(GSList*)getVal!(void*)(&_paramVals[1]));
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.meta_store.MetaStore.metaChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("meta-changed", closure, after);
   }
 
   /**

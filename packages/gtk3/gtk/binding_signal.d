@@ -3,6 +3,7 @@ module gtk.binding_signal;
 
 public import gid.basictypes;
 import gid.gid;
+import gtk.binding_arg;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -67,5 +68,17 @@ class BindingSignal
   @property void signalName(string propval) nothrow
   {
     (cast(GtkBindingSignal*)this._cPtr).signalName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+  }
+
+  /**
+      Get `args` field.
+      Returns: the arguments specified for the signal
+  */
+  @property gtk.binding_arg.BindingArg[] args() nothrow
+  {
+    auto _retval = new gtk.binding_arg.BindingArg[]((cast(GtkBindingSignal*)this._cPtr).nArgs);
+    foreach (i; 0 .. (cast(GtkBindingSignal*)this._cPtr).nArgs)
+      _retval[i] = new gtk.binding_arg.BindingArg(cast(void*)&(cast(GtkBindingSignal*)this._cPtr).args[i], No.Take);
+    return _retval;
   }
 }

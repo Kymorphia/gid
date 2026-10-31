@@ -4,6 +4,8 @@ module gda.sql_select_from;
 public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
+import gda.sql_select_join;
+import gda.sql_select_target;
 import gda.types;
 import gid.gid;
 
@@ -34,6 +36,24 @@ class SqlSelectFrom
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+  }
+
+  /**
+      Get `targets` field.
+      Returns: list of #GdaSqlSelectTarget
+  */
+  @property gda.sql_select_target.SqlSelectTarget[] targets() nothrow
+  {
+    return gSListToD!(gda.sql_select_target.SqlSelectTarget)((cast(GdaSqlSelectFrom*)this._cPtr).targets);
+  }
+
+  /**
+      Get `joins` field.
+      Returns: list of #GdaSqlSelectJoin
+  */
+  @property gda.sql_select_join.SqlSelectJoin[] joins() nothrow
+  {
+    return gSListToD!(gda.sql_select_join.SqlSelectJoin)((cast(GdaSqlSelectFrom*)this._cPtr).joins);
   }
 
   /**

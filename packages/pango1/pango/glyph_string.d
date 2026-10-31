@@ -8,6 +8,7 @@ import pango.analysis;
 import pango.c.functions;
 import pango.c.types;
 import pango.font;
+import pango.glyph_info;
 import pango.types;
 
 /**
@@ -49,6 +50,18 @@ class GlyphString : gobject.boxed.Boxed
   override GlyphString self() nothrow
   {
     return this;
+  }
+
+  /**
+      Get `glyphs` field.
+      Returns: array of glyph information
+  */
+  @property pango.glyph_info.GlyphInfo[] glyphs() nothrow
+  {
+    auto _retval = new pango.glyph_info.GlyphInfo[]((cast(PangoGlyphString*)this._cPtr).numGlyphs);
+    foreach (i; 0 .. (cast(PangoGlyphString*)this._cPtr).numGlyphs)
+      _retval[i] = new pango.glyph_info.GlyphInfo(cast(void*)&(cast(PangoGlyphString*)this._cPtr).glyphs[i], No.Take);
+    return _retval;
   }
 
   /**

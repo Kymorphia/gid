@@ -10,6 +10,9 @@ public import gio.cancellable;
 public import gio.types;
 public import glib.error;
 public import gobject.gid_builder;
+public import gobject.object;
+public import gobject.parameter;
+public import gobject.types;
 
 /**
     [gio.initable.Initable] is implemented by objects that can fail during
@@ -39,6 +42,7 @@ public import gobject.gid_builder;
 */
 template InitableT()
 {
+
 
   /**
       Initializes the object implementing the interface.

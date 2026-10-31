@@ -12,6 +12,9 @@ import gid.gid;
 // Aliases
 
 /** */
+alias AttributeSet = AtkAttributeSet;
+
+/** */
 alias State = AtkState;
 
 // Enums

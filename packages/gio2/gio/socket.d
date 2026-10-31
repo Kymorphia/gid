@@ -12,6 +12,8 @@ import gio.datagram_based_mixin;
 import gio.inet_address;
 import gio.initable;
 import gio.initable_mixin;
+import gio.input_message;
+import gio.output_message;
 import gio.socket_address;
 import gio.socket_connection;
 import gio.socket_control_message;
@@ -1377,6 +1379,91 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   }
 
   /**
+      Receive multiple data messages from socket in one go.  This is the most
+      complicated and fully-featured version of this call. For easier use, see
+      [gio.socket.Socket.receive], [gio.socket.Socket.receiveFrom], and [gio.socket.Socket.receiveMessage].
+      
+      messages must point to an array of #GInputMessage structs and
+      num_messages must be the length of this array. Each #GInputMessage
+      contains a pointer to an array of #GInputVector structs describing the
+      buffers that the data received in each message will be written to. Using
+      multiple #GInputVectors is more memory-efficient than manually copying data
+      out of a single buffer to multiple sources, and more system-call-efficient
+      than making multiple calls to [gio.socket.Socket.receive], such as in scenarios where
+      a lot of data packets need to be received (e.g. high-bandwidth video
+      streaming over RTP/UDP).
+      
+      flags modify how all messages are received. The commonly available
+      arguments for this are available in the #GSocketMsgFlags enum, but the
+      values there are the same as the system values, and the flags
+      are passed in as-is, so you can pass in system-specific flags too. These
+      flags affect the overall receive operation. Flags affecting individual
+      messages are returned in #GInputMessage.flags.
+      
+      The other members of #GInputMessage are treated as described in its
+      documentation.
+      
+      If #GSocket:blocking is true the call will block until num_messages have
+      been received, or the end of the stream is reached.
+      
+      If #GSocket:blocking is false the call will return up to num_messages
+      without blocking, or [gio.types.IOErrorEnum.WouldBlock] if no messages are queued in the
+      operating system to be received.
+      
+      In blocking mode, if #GSocket:timeout is positive and is reached before any
+      messages are received, [gio.types.IOErrorEnum.TimedOut] is returned, otherwise up to
+      num_messages are returned. (Note: This is effectively the
+      behaviour of `MSG_WAITFORONE` with recvmmsg().)
+      
+      To be notified when messages are available, wait for the
+      [glib.types.IOCondition.In] condition. Note though that you may still receive
+      [gio.types.IOErrorEnum.WouldBlock] from [gio.socket.Socket.receiveMessages] even if you were
+      previously notified of a [glib.types.IOCondition.In] condition.
+      
+      If the remote peer closes the connection, any messages queued in the
+      operating system will be returned, and subsequent calls to
+      [gio.socket.Socket.receiveMessages] will return 0 (with no error set).
+      
+      On error -1 is returned and error is set accordingly. An error will only
+      be returned if zero messages could be received; otherwise the number of
+      messages successfully received before the error will be returned.
+  
+      Params:
+        messages = an array of #GInputMessage structs
+        flags = an int containing #GSocketMsgFlags flags for the overall operation,
+             which may additionally contain
+             [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html)
+        cancellable = a [gio.cancellable.Cancellable] or null
+      Returns: number of messages received, or -1 on error. Note that the number
+            of messages received may be smaller than num_messages if in non-blocking
+            mode, if the peer closed the connection, or if num_messages
+            was larger than `UIO_MAXIOV` (1024), in which case the caller may re-try
+            to receive the remaining messages.
+      Throws: [ErrorWrap]
+  */
+  int receiveMessages(gio.input_message.InputMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
+  {
+    int _retval;
+    uint _numMessages;
+    if (messages)
+      _numMessages = cast(uint)messages.length;
+
+    GInputMessage[] _tmpmessages;
+    foreach (obj; messages)
+      _tmpmessages ~= obj._cInstance;
+    GInputMessage* _messages = _tmpmessages.ptr;
+
+    GError *_err;
+    _retval = g_socket_receive_messages(cast(GSocket*)this._cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    foreach (i, obj; messages)
+      obj._cInstance = _tmpmessages[i];
+
+    return _retval;
+  }
+
+  /**
       This behaves exactly the same as [gio.socket.Socket.receive], except that
       the choice of blocking or non-blocking behavior is determined by
       the blocking argument rather than by socket's properties.
@@ -1566,6 +1653,75 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     gio.types.PollableReturn _retval = cast(gio.types.PollableReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Send multiple data messages from socket in one go.  This is the most
+      complicated and fully-featured version of this call. For easier use, see
+      [gio.socket.Socket.send], [gio.socket.Socket.sendTo], and [gio.socket.Socket.sendMessage].
+      
+      messages must point to an array of #GOutputMessage structs and
+      num_messages must be the length of this array. Each #GOutputMessage
+      contains an address to send the data to, and a pointer to an array of
+      #GOutputVector structs to describe the buffers that the data to be sent
+      for each message will be gathered from. Using multiple #GOutputVectors is
+      more memory-efficient than manually copying data from multiple sources
+      into a single buffer, and more network-efficient than making multiple
+      calls to [gio.socket.Socket.send]. Sending multiple messages in one go avoids the
+      overhead of making a lot of syscalls in scenarios where a lot of data
+      packets need to be sent (e.g. high-bandwidth video streaming over RTP/UDP),
+      or where the same data needs to be sent to multiple recipients.
+      
+      flags modify how the message is sent. The commonly available arguments
+      for this are available in the #GSocketMsgFlags enum, but the
+      values there are the same as the system values, and the flags
+      are passed in as-is, so you can pass in system-specific flags too.
+      
+      If the socket is in blocking mode the call will block until there is
+      space for all the data in the socket queue. If there is no space available
+      and the socket is in non-blocking mode a [gio.types.IOErrorEnum.WouldBlock] error
+      will be returned if no data was written at all, otherwise the number of
+      messages sent will be returned. To be notified when space is available,
+      wait for the [glib.types.IOCondition.Out] condition. Note though that you may still receive
+      [gio.types.IOErrorEnum.WouldBlock] from [gio.socket.Socket.send] even if you were previously
+      notified of a [glib.types.IOCondition.Out] condition. (On Windows in particular, this is
+      very common due to the way the underlying APIs work.)
+      
+      On error -1 is returned and error is set accordingly. An error will only
+      be returned if zero messages could be sent; otherwise the number of messages
+      successfully sent before the error will be returned.
+  
+      Params:
+        messages = an array of #GOutputMessage structs
+        flags = an int containing #GSocketMsgFlags flags, which may additionally
+             contain [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html)
+        cancellable = a [gio.cancellable.Cancellable] or null
+      Returns: number of messages sent, or -1 on error. Note that the number of
+            messages sent may be smaller than num_messages if the socket is
+            non-blocking or if num_messages was larger than UIO_MAXIOV (1024),
+            in which case the caller may re-try to send the remaining messages.
+      Throws: [ErrorWrap]
+  */
+  int sendMessages(gio.output_message.OutputMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
+  {
+    int _retval;
+    uint _numMessages;
+    if (messages)
+      _numMessages = cast(uint)messages.length;
+
+    GOutputMessage[] _tmpmessages;
+    foreach (obj; messages)
+      _tmpmessages ~= obj._cInstance;
+    GOutputMessage* _messages = _tmpmessages.ptr;
+
+    GError *_err;
+    _retval = g_socket_send_messages(cast(GSocket*)this._cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    foreach (i, obj; messages)
+      obj._cInstance = _tmpmessages[i];
+
     return _retval;
   }
 

@@ -8,6 +8,7 @@ import gda.data_model;
 import gda.data_model_mixin;
 import gda.types;
 import gid.gid;
+import glib.error;
 import gobject.gid_builder;
 import gobject.object;
 
@@ -79,6 +80,18 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
   void cleanErrors() nothrow
   {
     gda_data_model_dir_clean_errors(cast(GdaDataModelDir*)this._cPtr);
+  }
+
+  /**
+      Get the list of errors which have occurred while using model
+      Returns: a read-only list of #GError pointers, or null if no error has occurred
+  */
+  glib.error.ErrorWrap[] getErrors() nothrow
+  {
+    const(GSList)* _cretval;
+    _cretval = gda_data_model_dir_get_errors(cast(GdaDataModelDir*)this._cPtr);
+    auto _retval = gSListToD!(glib.error.ErrorWrap, GidOwnership.None)(cast(GSList*)_cretval);
+    return _retval;
   }
 }
 

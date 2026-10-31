@@ -9,6 +9,7 @@ import gobject.closure;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
+import gtk.accel_group_entry;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -287,6 +288,33 @@ class AccelGroup : gobject.object.ObjectWrap
   void lock() nothrow
   {
     gtk_accel_group_lock(cast(GtkAccelGroup*)this._cPtr);
+  }
+
+  /**
+      Queries an accelerator group for all entries matching accel_key
+      and accel_mods.
+  
+      Params:
+        accelKey = key value of the accelerator
+        accelMods = modifier combination of the accelerator
+      Returns: an array of
+            n_entries #GtkAccelGroupEntry elements, or null. The array
+            is owned by GTK+ and must not be freed.
+  */
+  gtk.accel_group_entry.AccelGroupEntry[] query(uint accelKey, gdk.types.ModifierType accelMods) nothrow
+  {
+    GtkAccelGroupEntry* _cretval;
+    uint _cretlength;
+    _cretval = gtk_accel_group_query(cast(GtkAccelGroup*)this._cPtr, accelKey, accelMods, &_cretlength);
+    gtk.accel_group_entry.AccelGroupEntry[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gtk.accel_group_entry.AccelGroupEntry[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new gtk.accel_group_entry.AccelGroupEntry(cast(void*)&_cretval[i], No.Take);
+    }
+    return _retval;
   }
 
   /**

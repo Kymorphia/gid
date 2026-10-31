@@ -5,6 +5,7 @@ public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import glib.types;
+import gtk.binding_arg;
 import gtk.binding_set;
 import gtk.binding_signal;
 import gtk.c.functions;
@@ -217,6 +218,25 @@ class BindingEntry
     _cretval = gtk_binding_entry_add_signal_from_string(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, _signalDesc);
     glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
+  }
+
+  /**
+      Override or install a new key binding for keyval with modifiers on
+      binding_set.
+  
+      Params:
+        bindingSet = a #GtkBindingSet to add a signal to
+        keyval = key value
+        modifiers = key modifier
+        signalName = signal name to be bound
+        bindingArgs = list of #GtkBindingArg signal arguments
+  */
+  static void addSignall(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers, string signalName, gtk.binding_arg.BindingArg[] bindingArgs) nothrow
+  {
+    const(char)* _signalName = signalName.toCString!(No.Malloc, No.Nullable);
+    auto _bindingArgs = gSListFromD!(gtk.binding_arg.BindingArg)(bindingArgs);
+    scope(exit) containerFree!(GSList*, gtk.binding_arg.BindingArg, GidOwnership.None)(_bindingArgs);
+    gtk_binding_entry_add_signall(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, keyval, modifiers, _signalName, _bindingArgs);
   }
 
   /**

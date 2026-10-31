@@ -9,18 +9,18 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   76    0    0   100 | 1254    1   11  99.1 |    0    0    0   100 |  128    0    8  94.1 |
+glib2                      |   76    0    0   100 | 1255    1   10  99.2 |    0    0    0   100 |  128    0    8  94.1 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   14    0    1  93.3 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gobject2                   |   56    0    0   100 |  266    0    2  99.3 |    3    0    0   100 |  135    0    5  96.4 |
-gda5                       |  112    0    3  97.4 |  664    0   23  96.7 |   53    0    1  98.1 |  191    0   32  85.7 |
+gobject2                   |   56    0    0   100 |  267    0    1  99.6 |    3    0    0   100 |  137    0    3  97.9 |
+gda5                       |  112    0    3  97.4 |  667    0   20  97.1 |   54    0    0   100 |  197    0   26  88.3 |
 gdk3                       |   57    0    0   100 |  539    0    9  98.4 |   39    0    0   100 |  264    0    3  98.9 |
 gdk4                       |   63    0    0   100 |  483    0    5  99.0 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  178    0    0   100 | 1727    0   17  99.0 |   81    0    0   100 |   61    0    7  89.7 |
+gio2                       |  178    0    0   100 | 1735    0    9  99.5 |   81    0    0   100 |   61    0    7  89.7 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
-gsk4                       |   51    0    0   100 |  257    0   14  94.8 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   89    0    0   100 | 1393    0   26  98.2 |   23    0    0   100 |  129    0    4  97.0 |
+gsk4                       |   51    0    0   100 |  267    0    4  98.5 |    0    0    0   100 |   13    0    0   100 |
+gst1                       |   89    0    0   100 | 1395    0   24  98.3 |   23    0    0   100 |  129    0    4  97.0 |
 gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    6    0    0   100 |   48    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  212    0   10  95.5 |    0    0    0   100 |   57    0    8  87.7 |
@@ -37,15 +37,15 @@ gstrtsp1                   |   15    0    0   100 |  137    1    2  98.6 |    1 
 gstsdp1                    |   23    0    0   100 |  168    0    2  98.8 |    0    0    0   100 |   82    0    7  92.1 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   58    0    0   100 |  371    0    8  97.9 |    2    0    0   100 |  176    0   11  94.1 |
-gtk3                       |  345    0    0   100 | 3763    0   23  99.4 |  447    0    0   100 |  154    0    5  96.9 |
-gtk4                       |  320    0    0   100 | 3578    0   13  99.6 |  345    0    0   100 |   34    0    4  89.5 |
+gtk3                       |  345    0    0   100 | 3767    1   18  99.5 |  447    0    0   100 |  155    0    4  97.5 |
+gtk4                       |  320    0    0   100 | 3585    0    6  99.8 |  345    0    0   100 |   34    0    4  89.5 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   49    0    0   100 |  448    0    0   100 |   30    0    0   100 |    0    0    0   100 |
-harfbuzz0                  |   35    0    0   100 |  407    0   42  90.6 |    0    0    0   100 |   72    0    4  94.7 |
+harfbuzz0                  |   35    0    0   100 |  408    0   41  90.9 |    0    0    0   100 |   72    0    4  94.7 |
 javascriptcore6            |   10    0    0   100 |  104    0    9  92.0 |    1    0    0   100 |    5    0    1  83.3 |
 json1                      |   12    0    0   100 |  200    0    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  311    0    0   100 |   17    0    0   100 |    0    0    0   100 |
-pango1                     |   43    0    0   100 |  397    0   12  97.1 |    0    0    0   100 |   91    0    6  93.8 |
+pango1                     |   43    0    0   100 |  397    0   12  97.1 |    0    0    0   100 |   92    0    5  94.8 |
 pangocairo1                |    4    0    0   100 |   26    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 rsvg2                      |    7    0    0   100 |   46    0    0   100 |    0    0    0   100 |   12    0    0   100 |
@@ -83,9 +83,7 @@ glib.option_context.OptionContext.setTranslateFunc
 glib.option_group.OptionGroup.setTranslateFunc
 glib.global.environSetenv
 glib.global.environUnsetenv
-glib.global.parseDebugString
 glib.global.strfreev
-gobject.object.ObjectWrap.newv
 gobject.type_class.TypeClass.adjustPrivateOffset
 gda.connection.Connection.asyncStatementExecute
 gda.connection.Connection.repetitiveStatementExecute
@@ -95,13 +93,10 @@ gda.data_model.DataModel.getRowFromValues
 gda.data_model.DataModel.importFromFile
 gda.data_model.DataModel.importFromModel
 gda.data_model.DataModel.importFromString
-gda.data_model_dir.DataModelDir.getErrors
-gda.data_model_import.DataModelImport.getErrors
 gda.holder.Holder.getSourceModel
 gda.holder.Holder.takeStaticValue
 gda.meta_context.MetaContext.setColumns
 gda.meta_store.MetaStore.extractV
-gda.meta_struct.MetaStruct.getAllDbObjects
 gda.server_operation.ServerOperation.getNodeType
 gda.sql_function.SqlFunction.takeArgsList
 gda.thread_wrapper.ThreadWrapper.execute
@@ -125,43 +120,24 @@ gdk.texture_downloader.TextureDownloader.downloadInto
 gdk.global.contentRegisterDeserializer
 gdk.global.contentRegisterSerializer
 gdkpixbuf.pixbuf.Pixbuf.newFromData
-gio.action_map.ActionMap.addActionEntries
-gio.action_map.ActionMap.removeActionEntries
 gio.cancellable.Cancellable.connect
 gio.data_input_stream.DataInputStream.readLine
 gio.data_input_stream.DataInputStream.readLineFinish
-gio.datagram_based.DatagramBased.receiveMessages
-gio.datagram_based.DatagramBased.sendMessages
 gio.desktop_app_info.DesktopAppInfo.search
 gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
-gio.initable.Initable.newv
 gio.memory_input_stream.MemoryInputStream.newFromData
 gio.memory_input_stream.MemoryInputStream.addData
 gio.settings_backend.SettingsBackend.flattenTree
-gio.simple_action_group.SimpleActionGroup.addEntries
-gio.socket.Socket.receiveMessages
-gio.socket.Socket.sendMessages
 gio.tls_client_connection.TlsClientConnection.getAcceptedCas
-gsk.conic_gradient_node.ConicGradientNode.new_
-gsk.conic_gradient_node.ConicGradientNode.getColorStops
-gsk.linear_gradient_node.LinearGradientNode.new_
-gsk.linear_gradient_node.LinearGradientNode.getColorStops
 gsk.path.Path.getClosestPoint
 gsk.path.Path.getEndPoint
 gsk.path.Path.getStartPoint
 gsk.path_measure.PathMeasure.getPoint
-gsk.radial_gradient_node.RadialGradientNode.new_
-gsk.radial_gradient_node.RadialGradientNode.getColorStops
-gsk.repeating_linear_gradient_node.RepeatingLinearGradientNode.new_
-gsk.repeating_radial_gradient_node.RepeatingRadialGradientNode.new_
-gsk.shadow_node.ShadowNode.new_
-gsk.text_node.TextNode.getGlyphs
 gst.buffer.Buffer.newWrapped
 gst.buffer.Buffer.extract
 gst.buffer.Buffer.foreachMeta
 gst.buffer_list.BufferList.foreach_
 gst.caps_features.CapsFeatures.setParentRefcount
-gst.element_factory.ElementFactory.getStaticPadTemplates
 gst.iterator.Iterator.findCustom
 gst.pad.Pad.setActivateFunctionFull
 gst.pad.Pad.setActivatemodeFunctionFull
@@ -180,7 +156,6 @@ gst.plugin_feature.PluginFeature.listFree
 gst.structure.Structure.setParentRefcount
 gst.task.Task.setLock
 gst.uri.Uri.setPathSegments
-gst.global.debugGetAllCategories
 gst.global.tracingRegisterHook
 gstaudio.audio_channel_mixer.AudioChannelMixer.samples
 gstaudio.audio_converter.AudioConverter.samples
@@ -241,14 +216,11 @@ gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
 gstvideo.video_vbiparser.VideoVBIParser.addLine
 gstvideo.global.bufferAddVideoGlTextureUploadMeta
 gstvideo.global.videoChromaResample
-gtk.accel_group.AccelGroup.query
-gtk.binding_entry.BindingEntry.addSignall
 gtk.builder.Builder.addCallbackSymbol
 gtk.clipboard.Clipboard.requestTargets
 gtk.clipboard.Clipboard.waitForTargets
 gtk.list_store.ListStore.reorder
 gtk.menu.Menu.attachToWidget
-gtk.pad_controller.PadController.setActionEntries
 gtk.selection_data.SelectionData.getTargets
 gtk.text_buffer.TextBuffer.getDeserializeFormats
 gtk.text_buffer.TextBuffer.getSerializeFormats
@@ -257,8 +229,6 @@ gtk.global.init_
 gtk.global.initCheck
 gtk.global.initWithArgs
 gtk.global.parseArgs
-gtk.global.stockAdd
-gtk.global.stockAddStatic
 gtk.global.targetTableNewFromList
 gtk.global.targetsIncludeImage
 gtk.global.targetsIncludeRichText
@@ -269,14 +239,7 @@ gtk.cclosure_expression.CClosureExpression.new_
 gtk.closure_expression.ClosureExpression.new_
 gtk.custom_layout.CustomLayout.new_
 gtk.list_store.ListStore.reorder
-gtk.pad_controller.PadController.setActionEntries
 gtk.print_job.PrintJob.setPageRanges
-gtk.snapshot.Snapshot.appendConicGradient
-gtk.snapshot.Snapshot.appendLinearGradient
-gtk.snapshot.Snapshot.appendRadialGradient
-gtk.snapshot.Snapshot.appendRepeatingLinearGradient
-gtk.snapshot.Snapshot.appendRepeatingRadialGradient
-gtk.snapshot.Snapshot.pushShadow
 harfbuzz.global.bufferSerialize
 harfbuzz.global.bufferSerializeGlyphs
 harfbuzz.global.bufferSerializeUnicode
@@ -311,7 +274,6 @@ harfbuzz.global.otMetaGetEntryTags
 harfbuzz.global.otNameGetUtf16
 harfbuzz.global.otNameGetUtf32
 harfbuzz.global.otNameGetUtf8
-harfbuzz.global.otNameListNames
 harfbuzz.global.otShapeGlyphsClosure
 harfbuzz.global.otShapePlanCollectLookups
 harfbuzz.global.otVarFindAxis
@@ -358,9 +320,6 @@ vte.terminal.Terminal.getTextRange
 cairo.scaled_font.ScaledFont.textToGlyphs
 cairo.global.imageSurfaceCreateForData
 
-[Unsupported Signals]
-gda.meta_store.MetaStore.metaChanged
-
 [Unsupported Fields]
 glib.hook.Hook.data
 glib.hook.Hook.func
@@ -374,16 +333,10 @@ gmime.types.StreamIOVector.data
 gobject.cclosure.CClosure.callback
 gobject.types.ClosureNotifyData.data
 gobject.type_cvalue.TypeCValue.vPointer
-gobject.type_value_table.TypeValueTable.collectValue
-gobject.type_value_table.TypeValueTable.lcopyValue
 gda.diff.Diff.values
 gda.meta_context.MetaContext.columns
-gda.meta_db_object.MetaDbObject.dependList
 gda.meta_store_change.MetaStoreChange.keys
-gda.meta_table.MetaTable.columns
 gda.meta_table.MetaTable.pkColsArray
-gda.meta_table.MetaTable.reverseFkList
-gda.meta_table.MetaTable.fkList
 gda.meta_table_foreign_key.MetaTableForeignKey.fkColsArray
 gda.meta_table_foreign_key.MetaTableForeignKey.fkNamesArray
 gda.meta_table_foreign_key.MetaTableForeignKey.refPkColsArray
@@ -398,8 +351,6 @@ gda.sql_operation.SqlOperation.any
 gda.sql_param_spec.SqlParamSpec.validityMetaDict
 gda.sql_select_field.SqlSelectField.any
 gda.sql_select_from.SqlSelectFrom.any
-gda.sql_select_from.SqlSelectFrom.targets
-gda.sql_select_from.SqlSelectFrom.joins
 gda.sql_select_join.SqlSelectJoin.any
 gda.sql_select_order.SqlSelectOrder.any
 gda.sql_select_target.SqlSelectTarget.any
@@ -457,7 +408,6 @@ gstvideo.video_resampler.VideoResampler.phase
 gstvideo.video_resampler.VideoResampler.nTaps
 gstvideo.video_resampler.VideoResampler.taps
 gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta.data
-gtk.binding_signal.BindingSignal.args
 gtk.types.RequestedSize.data
 gtk.tree_iter.TreeIter.userData
 gtk.tree_iter.TreeIter.userData2
@@ -475,5 +425,4 @@ pango.analysis.Analysis.shapeEngine
 pango.analysis.Analysis.langEngine
 pango.attr_shape.AttrShape.data
 pango.attribute.Attribute.klass
-pango.glyph_string.GlyphString.glyphs
 pango.glyph_string.GlyphString.logClusters

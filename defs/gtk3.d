@@ -31,6 +31,9 @@
 //!set callback[ModuleInitFunc][ignore] 1
 //!set function[target_table_free][ignore] 1
 
+//# Stock items must persist until application exit, binding passes a temporary array
+//!set function[stock_add_static][disable] 1
+
 //# Ignore user data parameter
 //!set interface[Buildable].method[custom_tag_end][ignore] 1
 

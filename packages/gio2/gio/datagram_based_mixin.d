@@ -7,6 +7,8 @@ public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
+public import gio.input_message;
+public import gio.output_message;
 public import gio.types;
 public import glib.error;
 public import glib.source;
@@ -169,6 +171,170 @@ template DatagramBasedT()
     GSource* _cretval;
     _cretval = g_datagram_based_create_source(cast(GDatagramBased*)this._cPtr, condition, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Receive one or more data messages from datagram_based in one go.
+      
+      messages must point to an array of #GInputMessage structs and
+      num_messages must be the length of this array. Each #GInputMessage
+      contains a pointer to an array of #GInputVector structs describing the
+      buffers that the data received in each message will be written to.
+      
+      flags modify how all messages are received. The commonly available
+      arguments for this are available in the #GSocketMsgFlags enum, but the
+      values there are the same as the system values, and the flags
+      are passed in as-is, so you can pass in system-specific flags too. These
+      flags affect the overall receive operation. Flags affecting individual
+      messages are returned in #GInputMessage.flags.
+      
+      The other members of #GInputMessage are treated as described in its
+      documentation.
+      
+      If timeout is negative the call will block until num_messages have been
+      received, the connection is closed remotely (EOS), cancellable is cancelled,
+      or an error occurs.
+      
+      If timeout is 0 the call will return up to num_messages without blocking,
+      or [gio.types.IOErrorEnum.WouldBlock] if no messages are queued in the operating system
+      to be received.
+      
+      If timeout is positive the call will block on the same conditions as if
+      timeout were negative. If the timeout is reached
+      before any messages are received, [gio.types.IOErrorEnum.TimedOut] is returned,
+      otherwise it will return the number of messages received before timing out.
+      (Note: This is effectively the behaviour of `MSG_WAITFORONE` with
+      recvmmsg().)
+      
+      To be notified when messages are available, wait for the [glib.types.IOCondition.In] condition.
+      Note though that you may still receive [gio.types.IOErrorEnum.WouldBlock] from
+      [gio.datagram_based.DatagramBased.receiveMessages] even if you were previously notified of a
+      [glib.types.IOCondition.In] condition.
+      
+      If the remote peer closes the connection, any messages queued in the
+      underlying receive buffer will be returned, and subsequent calls to
+      [gio.datagram_based.DatagramBased.receiveMessages] will return 0 (with no error set).
+      
+      If the connection is shut down or closed (by calling [gio.socket.Socket.close] or
+      [gio.socket.Socket.shutdown] with shutdown_read set, if it’s a #GSocket, for
+      example), all calls to this function will return [gio.types.IOErrorEnum.Closed].
+      
+      On error -1 is returned and error is set accordingly. An error will only
+      be returned if zero messages could be received; otherwise the number of
+      messages successfully received before the error will be returned. If
+      cancellable is cancelled, [gio.types.IOErrorEnum.Cancelled] is returned as with any
+      other error.
+  
+      Params:
+        messages = an array of #GInputMessage structs
+        flags = an int containing #GSocketMsgFlags flags for the overall operation
+        timeout = the maximum time (in microseconds) to wait, 0 to not block, or -1
+            to block indefinitely
+        cancellable = a [gio.cancellable.Cancellable]
+      Returns: number of messages received, or -1 on error. Note that the number
+            of messages received may be smaller than num_messages if timeout is
+            zero or positive, if the peer closed the connection, or if num_messages
+            was larger than `UIO_MAXIOV` (1024), in which case the caller may re-try
+            to receive the remaining messages.
+      Throws: [ErrorWrap]
+  */
+  override int receiveMessages(gio.input_message.InputMessage[] messages, int flags, long timeout, gio.cancellable.Cancellable cancellable = null)
+  {
+    int _retval;
+    uint _numMessages;
+    if (messages)
+      _numMessages = cast(uint)messages.length;
+
+    GInputMessage[] _tmpmessages;
+    foreach (obj; messages)
+      _tmpmessages ~= obj._cInstance;
+    GInputMessage* _messages = _tmpmessages.ptr;
+
+    GError *_err;
+    _retval = g_datagram_based_receive_messages(cast(GDatagramBased*)this._cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    foreach (i, obj; messages)
+      obj._cInstance = _tmpmessages[i];
+
+    return _retval;
+  }
+
+  /**
+      Send one or more data messages from datagram_based in one go.
+      
+      messages must point to an array of #GOutputMessage structs and
+      num_messages must be the length of this array. Each #GOutputMessage
+      contains an address to send the data to, and a pointer to an array of
+      #GOutputVector structs to describe the buffers that the data to be sent
+      for each message will be gathered from.
+      
+      flags modify how the message is sent. The commonly available arguments
+      for this are available in the #GSocketMsgFlags enum, but the
+      values there are the same as the system values, and the flags
+      are passed in as-is, so you can pass in system-specific flags too.
+      
+      The other members of #GOutputMessage are treated as described in its
+      documentation.
+      
+      If timeout is negative the call will block until num_messages have been
+      sent, cancellable is cancelled, or an error occurs.
+      
+      If timeout is 0 the call will send up to num_messages without blocking,
+      or will return [gio.types.IOErrorEnum.WouldBlock] if there is no space to send messages.
+      
+      If timeout is positive the call will block on the same conditions as if
+      timeout were negative. If the timeout is reached before any messages are
+      sent, [gio.types.IOErrorEnum.TimedOut] is returned, otherwise it will return the number
+      of messages sent before timing out.
+      
+      To be notified when messages can be sent, wait for the [glib.types.IOCondition.Out] condition.
+      Note though that you may still receive [gio.types.IOErrorEnum.WouldBlock] from
+      [gio.datagram_based.DatagramBased.sendMessages] even if you were previously notified of a
+      [glib.types.IOCondition.Out] condition. (On Windows in particular, this is very common due to
+      the way the underlying APIs work.)
+      
+      If the connection is shut down or closed (by calling [gio.socket.Socket.close] or
+      [gio.socket.Socket.shutdown] with shutdown_write set, if it’s a #GSocket, for
+      example), all calls to this function will return [gio.types.IOErrorEnum.Closed].
+      
+      On error -1 is returned and error is set accordingly. An error will only
+      be returned if zero messages could be sent; otherwise the number of messages
+      successfully sent before the error will be returned. If cancellable is
+      cancelled, [gio.types.IOErrorEnum.Cancelled] is returned as with any other error.
+  
+      Params:
+        messages = an array of #GOutputMessage structs
+        flags = an int containing #GSocketMsgFlags flags
+        timeout = the maximum time (in microseconds) to wait, 0 to not block, or -1
+            to block indefinitely
+        cancellable = a [gio.cancellable.Cancellable]
+      Returns: number of messages sent, or -1 on error. Note that the number of
+            messages sent may be smaller than num_messages if timeout is zero
+            or positive, or if num_messages was larger than `UIO_MAXIOV` (1024), in
+            which case the caller may re-try to send the remaining messages.
+      Throws: [ErrorWrap]
+  */
+  override int sendMessages(gio.output_message.OutputMessage[] messages, int flags, long timeout, gio.cancellable.Cancellable cancellable = null)
+  {
+    int _retval;
+    uint _numMessages;
+    if (messages)
+      _numMessages = cast(uint)messages.length;
+
+    GOutputMessage[] _tmpmessages;
+    foreach (obj; messages)
+      _tmpmessages ~= obj._cInstance;
+    GOutputMessage* _messages = _tmpmessages.ptr;
+
+    GError *_err;
+    _retval = g_datagram_based_send_messages(cast(GDatagramBased*)this._cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    foreach (i, obj; messages)
+      obj._cInstance = _tmpmessages[i];
+
     return _retval;
   }
 }

@@ -10,6 +10,9 @@ import gio.cancellable;
 import gio.types;
 import glib.error;
 import gobject.gid_builder;
+import gobject.object;
+import gobject.parameter;
+import gobject.types;
 
 /**
     [gio.initable.Initable] is implemented by objects that can fail during
@@ -45,6 +48,45 @@ interface Initable
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_initable_get_type != &gidSymbolNotFound ? g_initable_get_type() : cast(GType)0;
+  }
+
+  /**
+      Helper function for constructing #GInitable object. This is
+      similar to [gobject.object.ObjectWrap.newv] but also initializes the object
+      and returns null, setting an error on failure.
+  
+      Params:
+        objectType = a #GType supporting #GInitable.
+        parameters = the parameters to use to construct the object
+        cancellable = optional #GCancellable object, null to ignore.
+      Returns: a newly allocated
+             #GObject, or null on error
+      Throws: [ErrorWrap]
+  
+      Deprecated: Use [gobject.object.ObjectWrap.newWithProperties] and
+        [gio.initable.Initable.init_] instead. See #GParameter for more information.
+  */
+  static gobject.object.ObjectWrap newv(gobject.types.GType objectType, gobject.parameter.Parameter[] parameters, gio.cancellable.Cancellable cancellable = null)
+  {
+    GObject* _cretval;
+    uint _nParameters;
+    if (parameters)
+      _nParameters = cast(uint)parameters.length;
+
+    GParameter[] _tmpparameters;
+    foreach (obj; parameters)
+      _tmpparameters ~= obj._cInstance;
+    GParameter* _parameters = _tmpparameters.ptr;
+
+    GError *_err;
+    _cretval = g_initable_newv(objectType, _nParameters, _parameters, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
+    foreach (i, obj; parameters)
+      obj._cInstance = _tmpparameters[i];
+
+    return _retval;
   }
 
   /**
