@@ -115,10 +115,10 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       function, [vte.pty.Pty.childSetup] will be called before the supplied
       function; you must not call it again.
       
-      Also, you MUST pass the `G_SPAWN_DO_NOT_REAP_CHILD` flag.
+      Also, you MUST pass the [glib.types.SpawnFlags.DoNotReapChild] flag.
       
-      Note also that `G_SPAWN_STDOUT_TO_DEV_NULL`, `G_SPAWN_STDERR_TO_DEV_NULL`,
-      and `G_SPAWN_CHILD_INHERITS_STDIN` are not supported, since stdin, stdout
+      Note also that [glib.types.SpawnFlags.StdoutToDevNull], [glib.types.SpawnFlags.StderrToDevNull],
+      and [glib.types.SpawnFlags.ChildInheritsStdin] are not supported, since stdin, stdout
       and stderr of the child process will always be connected to the PTY.
       
       Note that you should set the PTY's size using [vte.pty.Pty.setSize] before
@@ -315,11 +315,11 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       but can be overridden from envv.
       pty_flags controls logging the session to the specified system log files.
       
-      Note also that `G_SPAWN_STDOUT_TO_DEV_NULL`, `G_SPAWN_STDERR_TO_DEV_NULL`,
-      and `G_SPAWN_CHILD_INHERITS_STDIN` are not supported in spawn_flags, since
+      Note also that [glib.types.SpawnFlags.StdoutToDevNull], [glib.types.SpawnFlags.StderrToDevNull],
+      and [glib.types.SpawnFlags.ChildInheritsStdin] are not supported in spawn_flags, since
       stdin, stdout and stderr of the child process will always be connected to
-      the PTY. Also `G_SPAWN_LEAVE_DESCRIPTORS_OPEN` is not supported; and
-      `G_SPAWN_DO_NOT_REAP_CHILD` will always be added to spawn_flags.
+      the PTY. Also [glib.types.SpawnFlags.LeaveDescriptorsOpen] is not supported; and
+      [glib.types.SpawnFlags.DoNotReapChild] will always be added to spawn_flags.
       
       If fds is not null, the child process will map the file descriptors from
       fds according to map_fds; n_map_fds must be less or equal to n_fds.

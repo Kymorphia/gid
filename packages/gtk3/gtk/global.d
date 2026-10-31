@@ -1946,7 +1946,7 @@ void rcParse(string filename) nothrow
       scanner = a #GScanner
       color = a pointer to a #GdkColor in which to store
             the result
-    Returns: `G_TOKEN_NONE` if parsing succeeded, otherwise the token
+    Returns: [glib.types.TokenType.None] if parsing succeeded, otherwise the token
           that was expected but not found
 
     Deprecated: Use #GtkCssProvider instead
@@ -1968,7 +1968,7 @@ uint rcParseColor(glib.scanner.Scanner scanner, out gdk.color.Color color) nothr
       style = a #GtkRcStyle, or null
       color = a pointer to a #GdkColor in which to store
             the result
-    Returns: `G_TOKEN_NONE` if parsing succeeded, otherwise the token
+    Returns: [glib.types.TokenType.None] if parsing succeeded, otherwise the token
           that was expected but not found
 
     Deprecated: Use #GtkCssProvider instead
@@ -1988,7 +1988,7 @@ uint rcParseColorFull(glib.scanner.Scanner scanner, gtk.rc_style.RcStyle style, 
       scanner = a #GScanner (must be initialized for parsing an RC file)
       priority = A pointer to #GtkPathPriorityType variable in which
          to store the result.
-    Returns: `G_TOKEN_NONE` if parsing succeeded, otherwise the token
+    Returns: [glib.types.TokenType.None] if parsing succeeded, otherwise the token
         that was expected but not found.
 
     Deprecated: Use #GtkCssProvider instead
@@ -2008,7 +2008,7 @@ uint rcParsePriority(glib.scanner.Scanner scanner, out gtk.types.PathPriorityTyp
       scanner = a #GScanner (must be initialized for parsing an RC file)
       state = A pointer to a #GtkStateType variable in which to
          store the result.
-    Returns: `G_TOKEN_NONE` if parsing succeeded, otherwise the token
+    Returns: [glib.types.TokenType.None] if parsing succeeded, otherwise the token
         that was expected but not found.
 
     Deprecated: Use #GtkCssProvider instead

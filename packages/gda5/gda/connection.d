@@ -627,7 +627,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   
       Params:
         name = the name of the transation to start, or null
-        level = the requested transaction level (`GDA_TRANSACTION_ISOLATION_UNKNOWN` if not specified)
+        level = the requested transaction level ([gda.types.TransactionIsolation.Unknown] if not specified)
       Returns: true if the transaction was started successfully, false
         otherwise.
       Throws: [ConnectionException]

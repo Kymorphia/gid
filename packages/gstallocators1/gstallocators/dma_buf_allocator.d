@@ -93,7 +93,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
       Returns: a GstMemory based on allocator.
         
         When the buffer will be released the allocator will close the fd unless
-        the `GST_FD_MEMORY_FLAG_DONT_CLOSE` flag is specified.
+        the [gstallocators.types.FdMemoryFlags.DontClose] flag is specified.
         The memory is only mmapped on gst_buffer_mmap() request.
   */
   static gst.memory.Memory allocWithFlags(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags) nothrow

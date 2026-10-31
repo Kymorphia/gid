@@ -374,7 +374,7 @@ alias SignalAccumulator = bool delegate(gobject.types.SignalInvocationHint ihint
     Emission hooks allow you to tie a hook to the signal type, so that it will
     trap all emissions of that signal, from any object.
     
-    You may not attach these to signals created with the `G_SIGNAL_NO_HOOKS` flag.
+    You may not attach these to signals created with the [gobject.types.SignalFlags.NoHooks] flag.
 
     Params:
       ihint = Signal invocation hint, see #GSignalInvocationHint.
@@ -528,7 +528,7 @@ alias WeakNotify = void delegate(gobject.object.ObjectWrap whereTheObjectWas);
 enum PARAM_MASK = 255;
 
 /**
-    #GParamFlags value alias for `G_PARAM_STATIC_NAME` | `G_PARAM_STATIC_NICK` | `G_PARAM_STATIC_BLURB`.
+    #GParamFlags value alias for [gobject.types.ParamFlags.StaticName] | [gobject.types.ParamFlags.StaticNick] | [gobject.types.ParamFlags.StaticBlurb].
     
     It is recommended to use this for all properties by default, as it allows for
     internal performance improvements in GObject.

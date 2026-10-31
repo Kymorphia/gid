@@ -3676,7 +3676,7 @@ class WebView : webkit.web_view_base.WebViewBase
         You can handle the user message asynchronously by calling [gobject.object.ObjectWrap.ref_] on
         message and returning true. If the last reference of message is removed
         and the message has not been replied to, the operation in the #WebKitWebPage will
-        finish with error [webkit.types.UserMessageError.Message].
+        finish with error [webkitwebprocessextension.types.UserMessageError.UserMessageUnhandledMessage].
   
       Params:
         callback = signal callback delegate or function to connect

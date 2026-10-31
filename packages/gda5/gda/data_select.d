@@ -201,7 +201,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
       Note: any modification statement set using [gda.data_select.DataSelect.setModificationStatement] will first be unset
       
       This function is similar to calling [gda.data_select.DataSelect.computeModificationStatementsExt] with
-      cond_type set to `GDA_DATA_SELECT_COND_PK`
+      cond_type set to [gda.types.DataSelectConditionType.Pk]
       Returns: true if no error occurred. If false is returned, then some modification statement may still have been computed
       Throws: [DataSelectException]
   */

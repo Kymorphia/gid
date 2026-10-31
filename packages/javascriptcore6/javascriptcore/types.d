@@ -160,28 +160,28 @@ enum MINOR_VERSION = 48;
 
 /**
     Allows the DFG JIT to be used if true.
-    Option type: `JSC_OPTION_BOOLEAN`
+    Option type: [javascriptcore.types.OptionType.Boolean]
     Default value: true.
 */
 enum OPTIONS_USE_DFG = "useDFGJIT";
 
 /**
     Allows the FTL JIT to be used if true.
-    Option type: `JSC_OPTION_BOOLEAN`
+    Option type: [javascriptcore.types.OptionType.Boolean]
     Default value: true.
 */
 enum OPTIONS_USE_FTL = "useFTLJIT";
 
 /**
     Allows the executable pages to be allocated for JIT and thunks if true.
-    Option type: `JSC_OPTION_BOOLEAN`
+    Option type: [javascriptcore.types.OptionType.Boolean]
     Default value: true.
 */
 enum OPTIONS_USE_JIT = "useJIT";
 
 /**
     Allows the LLINT to be used if true.
-    Option type: `JSC_OPTION_BOOLEAN`
+    Option type: [javascriptcore.types.OptionType.Boolean]
     Default value: true.
 */
 enum OPTIONS_USE_LLINT = "useLLInt";

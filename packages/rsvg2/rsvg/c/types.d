@@ -325,10 +325,10 @@ struct RsvgHandleClass
     This is equivalent to [CSS lengths](https://www.w3.org/TR/CSS21/syndata.html#length-units).
     
     It is up to the calling application to convert lengths in non-pixel units
-    (i.e. those where the @unit field is not `RSVG_UNIT_PX`) into something
+    (i.e. those where the @unit field is not [rsvg.types.Unit.Px]) into something
     meaningful to the application.  For example, if your application knows the
     dots-per-inch (DPI) it is using, it can convert lengths with @unit in
-    `RSVG_UNIT_IN` or other physical units.
+    [rsvg.types.Unit.In] or other physical units.
 */
 struct RsvgLength
 {

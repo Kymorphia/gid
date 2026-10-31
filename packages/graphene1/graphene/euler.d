@@ -134,7 +134,7 @@ class Euler : gobject.boxed.Boxed
       #graphene_euler_t structure, when converting to and from other
       structures, like #graphene_quaternion_t and #graphene_matrix_t.
       
-      This function does not return the `GRAPHENE_EULER_ORDER_DEFAULT`
+      This function does not return the [graphene.types.EulerOrder.Default]
       enumeration value; it will return the effective order of rotation
       instead.
       Returns: the order used to apply the rotations
@@ -183,7 +183,7 @@ class Euler : gobject.boxed.Boxed
   /**
       Initializes a #graphene_euler_t using the given angles.
       
-      The order of the rotations is `GRAPHENE_EULER_ORDER_DEFAULT`.
+      The order of the rotations is [graphene.types.EulerOrder.Default].
   
       Params:
         x = rotation angle on the X axis, in degrees
@@ -339,7 +339,7 @@ class Euler : gobject.boxed.Boxed
       
       The rotations are applied over the reference frame axes in the order
       associated with the #graphene_euler_t; for instance, if the order
-      used to initialize `e` is `GRAPHENE_EULER_ORDER_XYZ`:
+      used to initialize `e` is [graphene.types.EulerOrder.Xyz]:
       
        * the first rotation moves the body around the X axis with
          an angle φ

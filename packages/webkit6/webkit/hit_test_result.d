@@ -80,7 +80,7 @@ class HitTestResult : gobject.object.ObjectWrap
 
   /**
       Get `imageUri` property.
-      Returns: The URI of the image if flag [webkit.types.HitTestResultContext.Image]
+      Returns: The URI of the image if flag [webkitwebprocessextension.types.HitTestResultContext.Image]
         is present in #WebKitHitTestResult:context
   */
   @property string imageUri() nothrow
@@ -90,7 +90,7 @@ class HitTestResult : gobject.object.ObjectWrap
 
   /**
       Get `linkLabel` property.
-      Returns: The label of the link if flag [webkit.types.HitTestResultContext.Link]
+      Returns: The label of the link if flag [webkitwebprocessextension.types.HitTestResultContext.Link]
         is present in #WebKitHitTestResult:context
   */
   @property string linkLabel() nothrow
@@ -100,7 +100,7 @@ class HitTestResult : gobject.object.ObjectWrap
 
   /**
       Get `linkTitle` property.
-      Returns: The title of the link if flag [webkit.types.HitTestResultContext.Link]
+      Returns: The title of the link if flag [webkitwebprocessextension.types.HitTestResultContext.Link]
         is present in #WebKitHitTestResult:context
   */
   @property string linkTitle() nothrow
@@ -110,7 +110,7 @@ class HitTestResult : gobject.object.ObjectWrap
 
   /**
       Get `linkUri` property.
-      Returns: The URI of the link if flag [webkit.types.HitTestResultContext.Link]
+      Returns: The URI of the link if flag [webkitwebprocessextension.types.HitTestResultContext.Link]
         is present in #WebKitHitTestResult:context
   */
   @property string linkUri() nothrow
@@ -120,7 +120,7 @@ class HitTestResult : gobject.object.ObjectWrap
 
   /**
       Get `mediaUri` property.
-      Returns: The URI of the media if flag [webkit.types.HitTestResultContext.Media]
+      Returns: The URI of the media if flag [webkitwebprocessextension.types.HitTestResultContext.Media]
         is present in #WebKitHitTestResult:context
   */
   @property string mediaUri() nothrow
@@ -129,7 +129,7 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-      Gets whether [webkit.types.HitTestResultContext.Editable] flag is present in
+      Gets whether [webkitwebprocessextension.types.HitTestResultContext.Editable] flag is present in
       #WebKitHitTestResult:context.
       Returns: true if there's an editable element at the coordinates of the hit_test_result,
            or false otherwise
@@ -142,7 +142,7 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-      Gets whether [webkit.types.HitTestResultContext.Image] flag is present in
+      Gets whether [webkitwebprocessextension.types.HitTestResultContext.Image] flag is present in
       #WebKitHitTestResult:context.
       Returns: true if there's an image element in the coordinates of the Hit Test,
            or false otherwise
@@ -155,7 +155,7 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-      Gets whether [webkit.types.HitTestResultContext.Link] flag is present in
+      Gets whether [webkitwebprocessextension.types.HitTestResultContext.Link] flag is present in
       #WebKitHitTestResult:context.
       Returns: true if there's a link element in the coordinates of the Hit Test,
            or false otherwise
@@ -168,7 +168,7 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-      Gets whether [webkit.types.HitTestResultContext.Media] flag is present in
+      Gets whether [webkitwebprocessextension.types.HitTestResultContext.Media] flag is present in
       #WebKitHitTestResult:context.
       Returns: true if there's a media element in the coordinates of the Hit Test,
            or false otherwise
@@ -181,7 +181,7 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-      Gets whether [webkit.types.HitTestResultContext.Scrollbar] flag is present in
+      Gets whether [webkitwebprocessextension.types.HitTestResultContext.Scrollbar] flag is present in
       #WebKitHitTestResult:context.
       Returns: true if there's a scrollbar element at the coordinates of the hit_test_result,
            or false otherwise
@@ -194,7 +194,7 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-      Gets whether [webkit.types.HitTestResultContext.Selection] flag is present in
+      Gets whether [webkitwebprocessextension.types.HitTestResultContext.Selection] flag is present in
       #WebKitHitTestResult:context.
       Returns: true if there's a selected element at the coordinates of the hit_test_result,
            or false otherwise
@@ -304,7 +304,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `imageUri` property.
       Params:
-        propval = The URI of the image if flag [webkit.types.HitTestResultContext.Image]
+        propval = The URI of the image if flag [webkitwebprocessextension.types.HitTestResultContext.Image]
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
@@ -316,7 +316,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `linkLabel` property.
       Params:
-        propval = The label of the link if flag [webkit.types.HitTestResultContext.Link]
+        propval = The label of the link if flag [webkitwebprocessextension.types.HitTestResultContext.Link]
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
@@ -328,7 +328,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `linkTitle` property.
       Params:
-        propval = The title of the link if flag [webkit.types.HitTestResultContext.Link]
+        propval = The title of the link if flag [webkitwebprocessextension.types.HitTestResultContext.Link]
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
@@ -340,7 +340,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `linkUri` property.
       Params:
-        propval = The URI of the link if flag [webkit.types.HitTestResultContext.Link]
+        propval = The URI of the link if flag [webkitwebprocessextension.types.HitTestResultContext.Link]
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
@@ -352,7 +352,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `mediaUri` property.
       Params:
-        propval = The URI of the media if flag [webkit.types.HitTestResultContext.Media]
+        propval = The URI of the media if flag [webkitwebprocessextension.types.HitTestResultContext.Media]
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */

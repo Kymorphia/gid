@@ -72,7 +72,7 @@ class FdAllocator : gst.allocator.Allocator
         flags = extra #GstFdMemoryFlags
       Returns: a GstMemory based on allocator.
         When the buffer will be released the allocator will close the fd unless
-        the `GST_FD_MEMORY_FLAG_DONT_CLOSE` flag is specified.
+        the [gstallocators.types.FdMemoryFlags.DontClose] flag is specified.
         The memory is only mmapped on [gst.buffer.Buffer.map] request.
   */
   static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags) nothrow

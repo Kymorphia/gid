@@ -730,7 +730,7 @@ alias NodeForeachFunc = void delegate(glib.node.Node node);
 alias NodeTraverseFunc = bool delegate(glib.node.Node node);
 
 /**
-    The type of function to be passed as callback for `G_OPTION_ARG_CALLBACK`
+    The type of function to be passed as callback for [glib.types.OptionArg.Callback]
     options.
 
     Params:
@@ -1493,8 +1493,8 @@ enum MODULE_SUFFIX = "so";
     If a long option in the main group has this name, it is not treated as a
     regular option. Instead it collects all non-option arguments which would
     otherwise be left in `argv`. The option must be of type
-    `G_OPTION_ARG_CALLBACK`, `G_OPTION_ARG_STRING_ARRAY`
-    or `G_OPTION_ARG_FILENAME_ARRAY`.
+    [glib.types.OptionArg.Callback], [glib.types.OptionArg.StringArray]
+    or [glib.types.OptionArg.FilenameArray].
     
     
     Using [glib.types.OPTION_REMAINING] instead of simply scanning `argv`

@@ -52,13 +52,13 @@ class UriParamsIter
       variables must thus outlive the iterator and not be modified during the
       iteration.
       
-      If `G_URI_PARAMS_WWW_FORM` is passed in flags, `+` characters in the param
+      If [glib.types.UriParamsFlags.WwwForm] is passed in flags, `+` characters in the param
       string will be replaced with spaces in the output. For example, `foo=bar+baz`
       will give attribute `foo` with value `bar baz`. This is commonly used on the
       web (the `https` and `http` schemes only), but is deprecated in favour of
       the equivalent of encoding spaces as `%20`.
       
-      Unlike with [glib.uri.Uri.parseParams], `G_URI_PARAMS_CASE_INSENSITIVE` has no
+      Unlike with [glib.uri.Uri.parseParams], [glib.types.UriParamsFlags.CaseInsensitive] has no
       effect if passed to flags for [glib.uri_params_iter.UriParamsIter.init_]. The caller is
       responsible for doing their own case-insensitive comparisons.
       

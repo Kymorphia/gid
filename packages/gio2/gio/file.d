@@ -167,7 +167,7 @@ interface File
       the commandline.  #GApplication also uses UTF-8 but
       [gio.application_command_line.ApplicationCommandLine.createFileForArg] may be more useful
       for you there.  It is also always possible to use this function with
-      #GOptionContext arguments of type `G_OPTION_ARG_FILENAME`.
+      #GOptionContext arguments of type [glib.types.OptionArg.Filename].
   
       Params:
         arg = a command line string

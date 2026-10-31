@@ -405,7 +405,7 @@ class Value : gobject.object.ObjectWrap
       `ArrayBuffer`, a new one of suitable size will be allocated to store
       the elements, which will be initialized to zero.
       
-      The type must *not* be `JSC_TYPED_ARRAY_NONE`.
+      The type must *not* be [javascriptcore.types.TypedArrayType.None].
   
       Params:
         context = a #JSCContext
@@ -643,7 +643,7 @@ class Value : gobject.object.ObjectWrap
       elements of the given type, where the elements are stored at the memory
       region represented by the array_buffer.
       
-      The type must *not* be `JSC_TYPED_ARRAY_NONE`.
+      The type must *not* be [javascriptcore.types.TypedArrayType.None].
       
       The offset and length parameters can be used to indicate which part of
       the array buffer can be accessed through the typed array. If both are
@@ -683,7 +683,7 @@ class Value : gobject.object.ObjectWrap
 
   /**
       Try to delete property with name from value. This function will return false if
-      the property was defined without `JSC_VALUE_PROPERTY_CONFIGURABLE` flag.
+      the property was defined without [javascriptcore.types.ValuePropertyFlags.Configurable] flag.
   
       Params:
         name = the property name
@@ -698,7 +698,7 @@ class Value : gobject.object.ObjectWrap
   }
 
   /**
-      Get the list of property names of value. Only properties defined with `JSC_VALUE_PROPERTY_ENUMERABLE`
+      Get the list of property names of value. Only properties defined with [javascriptcore.types.ValuePropertyFlags.Enumerable]
       flag will be collected.
       Returns: a null-terminated array of strings containing the
            property names, or null if value doesn't have enumerable properties.  Use [glib.global.strfreev] to free.
@@ -998,7 +998,7 @@ class Value : gobject.object.ObjectWrap
 
   /**
       Gets the type of elements contained in a typed array.
-      Returns: type of the elements, or `JSC_TYPED_ARRAY_NONE` if value is not a typed array.
+      Returns: type of the elements, or [javascriptcore.types.TypedArrayType.None] if value is not a typed array.
   */
   javascriptcore.types.TypedArrayType typedArrayGetType() nothrow
   {

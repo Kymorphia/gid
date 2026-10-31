@@ -115,7 +115,7 @@ class Node
   
       Params:
         flags = which types of children are to be visited, one of
-              `G_TRAVERSE_ALL`, `G_TRAVERSE_LEAVES` and `G_TRAVERSE_NON_LEAVES`
+              [glib.types.TraverseFlags.All], [glib.types.TraverseFlags.Leaves] and [glib.types.TraverseFlags.NonLeaves]
         func = the function to call for each visited node
   */
   void childrenForeach(glib.types.TraverseFlags flags, glib.types.NodeForeachFunc func) nothrow
@@ -208,7 +208,7 @@ class Node
   
       Params:
         flags = which types of children are to be counted, one of
-              `G_TRAVERSE_ALL`, `G_TRAVERSE_LEAVES` and `G_TRAVERSE_NON_LEAVES`
+              [glib.types.TraverseFlags.All], [glib.types.TraverseFlags.Leaves] and [glib.types.TraverseFlags.NonLeaves]
       Returns: the number of nodes in the tree
   */
   uint nNodes(glib.types.TraverseFlags flags) nothrow
@@ -234,10 +234,10 @@ class Node
       func must not do anything that would modify the structure of the tree.
   
       Params:
-        order = the order in which nodes are visited - `G_IN_ORDER`,
-              `G_PRE_ORDER`, `G_POST_ORDER`, or `G_LEVEL_ORDER`.
+        order = the order in which nodes are visited - [glib.types.TraverseType.InOrder],
+              [glib.types.TraverseType.PreOrder], [glib.types.TraverseType.PostOrder], or [glib.types.TraverseType.LevelOrder].
         flags = which types of children are to be visited, one of
-              `G_TRAVERSE_ALL`, `G_TRAVERSE_LEAVES` and `G_TRAVERSE_NON_LEAVES`
+              [glib.types.TraverseFlags.All], [glib.types.TraverseFlags.Leaves] and [glib.types.TraverseFlags.NonLeaves]
         maxDepth = the maximum depth of the traversal. Nodes below this
               depth will not be visited. If max_depth is -1 all nodes in
               the tree are visited. If depth is 1, only the root is visited.

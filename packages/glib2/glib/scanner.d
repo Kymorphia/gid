@@ -301,11 +301,11 @@ class Scanner
         expectedToken = the expected token
         identifierSpec = a string describing how the scanner's user
               refers to identifiers (null defaults to "identifier").
-              This is used if expected_token is `G_TOKEN_IDENTIFIER` or
-              `G_TOKEN_IDENTIFIER_NULL`.
+              This is used if expected_token is [glib.types.TokenType.Identifier] or
+              [glib.types.TokenType.IdentifierNull].
         symbolSpec = a string describing how the scanner's user refers
               to symbols (null defaults to "symbol"). This is used if
-              expected_token is `G_TOKEN_SYMBOL` or any token value greater
+              expected_token is [glib.types.TokenType.Symbol] or any token value greater
               than `G_TOKEN_LAST`.
         symbolName = the name of the symbol, if the scanner's current
               token is a symbol.

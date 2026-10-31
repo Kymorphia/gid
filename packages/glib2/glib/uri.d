@@ -25,15 +25,15 @@ import gobject.boxed;
     is, if the scheme is followed by `://` rather than just `:`), then the
     [glib.uri.Uri] will contain a hostname, and possibly a port and ‘userinfo’.
     Additionally, depending on how the [glib.uri.Uri] was constructed/parsed (for example,
-    using the `G_URI_FLAGS_HAS_PASSWORD` and `G_URI_FLAGS_HAS_AUTH_PARAMS` flags),
+    using the [glib.types.UriFlags.HasPassword] and [glib.types.UriFlags.HasAuthParams] flags),
     the userinfo may be split out into a username, password, and
     additional authorization-related parameters.
     
     Normally, the components of a [glib.uri.Uri] will have all `%`-encoded
     characters decoded. However, if you construct/parse a [glib.uri.Uri] with
-    `G_URI_FLAGS_ENCODED`, then the `%`-encoding will be preserved instead in
+    [glib.types.UriFlags.Encoded], then the `%`-encoding will be preserved instead in
     the userinfo, path, and query fields (and in the host field if also
-    created with `G_URI_FLAGS_NON_DNS`). In particular, this is necessary if
+    created with [glib.types.UriFlags.NonDns]). In particular, this is necessary if
     the URI may contain binary data or non-UTF-8 text, or if decoding
     the components might change the interpretation of the URI.
     
@@ -59,7 +59,7 @@ import gobject.boxed;
     g_assert_error (err, G_URI_ERROR, G_URI_ERROR_BAD_QUERY);
     ```
     
-    You should pass `G_URI_FLAGS_ENCODED` or `G_URI_FLAGS_ENCODED_QUERY` if you
+    You should pass [glib.types.UriFlags.Encoded] or [glib.types.UriFlags.EncodedQuery] if you
     need to handle that case manually. In particular, if the query string
     contains `=` characters that are `%`-encoded, you should let
     [glib.uri.Uri.parseParams] do the decoding once of the query.
@@ -135,7 +135,7 @@ import gobject.boxed;
     use [glib.uri.Uri.peekScheme] on the URI string to check the scheme
     first, and use that to decide what flags to parse it with.
     
-    For example, you might want to use `G_URI_PARAMS_WWW_FORM` when parsing the
+    For example, you might want to use [glib.types.UriParamsFlags.WwwForm] when parsing the
     params for a web URI, so compare the result of [glib.uri.Uri.peekScheme]
     against `http` and `https`.
     
@@ -151,7 +151,7 @@ import gobject.boxed;
     As with the parsing functions, the building functions take a
     [glib.types.UriFlags] argument. In particular, it is important to keep in mind
     whether the URI components you are using are already `%`-encoded. If so,
-    you must pass the `G_URI_FLAGS_ENCODED` flag.
+    you must pass the [glib.types.UriFlags.Encoded] flag.
     
     ## `file://` URIs
     
@@ -167,7 +167,7 @@ import gobject.boxed;
     Note that there is no `g_uri_equal ()` function, because comparing
     URIs usefully requires scheme-specific knowledge that [glib.uri.Uri] does
     not have. [glib.uri.Uri] can help with normalization if you use the various
-    encoded [glib.types.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
+    encoded [glib.types.UriFlags] as well as [glib.types.UriFlags.SchemeNormalize]
     however it is not comprehensive.
     For example, `data:,foo` and `data:;base64,Zm9v` resolve to the same
     thing according to the `data:` URI specification which GLib does not
@@ -210,7 +210,7 @@ class Uri : gobject.boxed.Boxed
   /**
       Gets uri's authentication parameters, which may contain
       `%`-encoding, depending on the flags with which uri was created.
-      (If uri was not created with `G_URI_FLAGS_HAS_AUTH_PARAMS` then this will
+      (If uri was not created with [glib.types.UriFlags.HasAuthParams] then this will
       be null.)
       
       Depending on the URI scheme, [glib.uri.Uri.parseParams] may be useful for
@@ -253,7 +253,7 @@ class Uri : gobject.boxed.Boxed
   /**
       Gets uri's host. This will never have `%`-encoded characters,
       unless it is non-UTF-8 (which can only be the case if uri was
-      created with `G_URI_FLAGS_NON_DNS`).
+      created with [glib.types.UriFlags.NonDns]).
       
       If uri contained an IPv6 address literal, this value will be just
       that address, without the brackets around it that are necessary in
@@ -273,7 +273,7 @@ class Uri : gobject.boxed.Boxed
   /**
       Gets uri's password, which may contain `%`-encoding, depending on
       the flags with which uri was created. (If uri was not created
-      with `G_URI_FLAGS_HAS_PASSWORD` then this will be null.)
+      with [glib.types.UriFlags.HasPassword] then this will be null.)
       Returns: uri's password.
   */
   string getPassword() nothrow
@@ -340,8 +340,8 @@ class Uri : gobject.boxed.Boxed
   /**
       Gets the ‘username’ component of uri's userinfo, which may contain
       `%`-encoding, depending on the flags with which uri was created.
-      If uri was not created with `G_URI_FLAGS_HAS_PASSWORD` or
-      `G_URI_FLAGS_HAS_AUTH_PARAMS`, this is the same as [glib.uri.Uri.getUserinfo].
+      If uri was not created with [glib.types.UriFlags.HasPassword] or
+      [glib.types.UriFlags.HasAuthParams], this is the same as [glib.uri.Uri.getUserinfo].
       Returns: uri's user.
   */
   string getUser() nothrow
@@ -395,7 +395,7 @@ class Uri : gobject.boxed.Boxed
       This is not guaranteed to return a string which is identical to the
       string that uri was parsed from. However, if the source URI was
       syntactically correct (according to RFC 3986), and it was parsed
-      with `G_URI_FLAGS_ENCODED`, then [glib.uri.Uri.toString_] is guaranteed to return
+      with [glib.types.UriFlags.Encoded], then [glib.uri.Uri.toString_] is guaranteed to return
       a string which is at least semantically equivalent to the source
       URI (according to RFC 3986).
       
@@ -463,9 +463,9 @@ class Uri : gobject.boxed.Boxed
 
   /**
       Creates a new #GUri from the given components according to flags
-      (`G_URI_FLAGS_HAS_PASSWORD` is added unconditionally). The flags must be
+      ([glib.types.UriFlags.HasPassword] is added unconditionally). The flags must be
       coherent with the passed values, in particular use `%`-encoded values with
-      `G_URI_FLAGS_ENCODED`.
+      [glib.types.UriFlags.Encoded].
       
       In contrast to [glib.uri.Uri.build], this allows specifying the components
       of the ‘userinfo’ field separately. Note that user must be non-null
@@ -610,7 +610,7 @@ class Uri : gobject.boxed.Boxed
       See also [glib.uri.Uri.joinWithUser], which allows specifying the
       components of the ‘userinfo’ separately.
       
-      `G_URI_FLAGS_HAS_PASSWORD` and `G_URI_FLAGS_HAS_AUTH_PARAMS` are ignored if set
+      [glib.types.UriFlags.HasPassword] and [glib.types.UriFlags.HasAuthParams] are ignored if set
       in flags.
   
       Params:
@@ -646,7 +646,7 @@ class Uri : gobject.boxed.Boxed
       In contrast to [glib.uri.Uri.join], this allows specifying the components
       of the ‘userinfo’ separately. It otherwise behaves the same.
       
-      `G_URI_FLAGS_HAS_PASSWORD` and `G_URI_FLAGS_HAS_AUTH_PARAMS` are ignored if set
+      [glib.types.UriFlags.HasPassword] and [glib.types.UriFlags.HasAuthParams] are ignored if set
       in flags.
   
       Params:
@@ -744,15 +744,15 @@ class Uri : gobject.boxed.Boxed
       The params string is assumed to still be `%`-encoded, but the returned
       values will be fully decoded. (Thus it is possible that the returned values
       may contain `=` or separators, if the value was encoded in the input.)
-      Invalid `%`-encoding is treated as with the `G_URI_FLAGS_PARSE_RELAXED`
+      Invalid `%`-encoding is treated as with the [glib.types.UriFlags.ParseRelaxed]
       rules for [glib.uri.Uri.parse]. (However, if params is the path or query string
-      from a #GUri that was parsed without `G_URI_FLAGS_PARSE_RELAXED` and
-      `G_URI_FLAGS_ENCODED`, then you already know that it does not contain any
+      from a #GUri that was parsed without [glib.types.UriFlags.ParseRelaxed] and
+      [glib.types.UriFlags.Encoded], then you already know that it does not contain any
       invalid encoding.)
       
-      `G_URI_PARAMS_WWW_FORM` is handled as documented for [glib.uri_params_iter.UriParamsIter.init_].
+      [glib.types.UriParamsFlags.WwwForm] is handled as documented for [glib.uri_params_iter.UriParamsIter.init_].
       
-      If `G_URI_PARAMS_CASE_INSENSITIVE` is passed to flags, attributes will be
+      If [glib.types.UriParamsFlags.CaseInsensitive] is passed to flags, attributes will be
       compared case-insensitively, so a params string `attr=123&Attr=456` will only
       return a single attribute–value pair, `Attr=456`. Case will be preserved in
       the returned attributes.
@@ -877,14 +877,14 @@ class Uri : gobject.boxed.Boxed
       returned as null (but note that all URIs always have a path component,
       though it may be the empty string).
       
-      If flags contains `G_URI_FLAGS_ENCODED`, then `%`-encoded characters in
+      If flags contains [glib.types.UriFlags.Encoded], then `%`-encoded characters in
       uri_ref will remain encoded in the output strings. (If not,
       then all such characters will be decoded.) Note that decoding will
       only work if the URI components are ASCII or UTF-8, so you will
-      need to use `G_URI_FLAGS_ENCODED` if they are not.
+      need to use [glib.types.UriFlags.Encoded] if they are not.
       
-      Note that the `G_URI_FLAGS_HAS_PASSWORD` and
-      `G_URI_FLAGS_HAS_AUTH_PARAMS` flags are ignored by [glib.uri.Uri.split],
+      Note that the [glib.types.UriFlags.HasPassword] and
+      [glib.types.UriFlags.HasAuthParams] flags are ignored by [glib.uri.Uri.split],
       since it always returns only the full userinfo; use
       [glib.uri.Uri.splitWithUser] if you want it split up.
   
@@ -977,9 +977,9 @@ class Uri : gobject.boxed.Boxed
       
       See [glib.uri.Uri.split], and the definition of #GUriFlags, for more
       information on the effect of flags. Note that password will only
-      be parsed out if flags contains `G_URI_FLAGS_HAS_PASSWORD`, and
+      be parsed out if flags contains [glib.types.UriFlags.HasPassword], and
       auth_params will only be parsed out if flags contains
-      `G_URI_FLAGS_HAS_AUTH_PARAMS`.
+      [glib.types.UriFlags.HasAuthParams].
   
       Params:
         uriRef = a string containing a relative or absolute URI
@@ -1050,7 +1050,7 @@ class Uri : gobject.boxed.Boxed
         illegalCharacters = a string of illegal characters
             not to be allowed, or null.
       Returns: an unescaped version of escaped_string
-            or null on error (if decoding failed, using `G_URI_ERROR_FAILED` error
+            or null on error (if decoding failed, using [glib.types.UriError.Failed] error
             code). The returned #GBytes should be unreffed when no longer needed.
       Throws: [UriException]
   */

@@ -2245,7 +2245,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         codeset = target charset, or null to use UTF-8
       Returns: true if the encoding could be changed to the specified one,
-         or false with error set to `G_CONVERT_ERROR_NO_CONVERSION`.
+         or false with error set to [glib.types.ConvertError.NoConversion].
       Throws: [ErrorWrap]
   
       Deprecated: Support for non-UTF-8 is deprecated.
@@ -2601,10 +2601,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       but can be overridden from envv.
       pty_flags controls logging the session to the specified system log files.
       
-      Note that `G_SPAWN_DO_NOT_REAP_CHILD` will always be added to spawn_flags.
+      Note that [glib.types.SpawnFlags.DoNotReapChild] will always be added to spawn_flags.
       
-      Note also that `G_SPAWN_STDOUT_TO_DEV_NULL`, `G_SPAWN_STDERR_TO_DEV_NULL`,
-      and `G_SPAWN_CHILD_INHERITS_STDIN` are not supported in spawn_flags, since
+      Note also that [glib.types.SpawnFlags.StdoutToDevNull], [glib.types.SpawnFlags.StderrToDevNull],
+      and [glib.types.SpawnFlags.ChildInheritsStdin] are not supported in spawn_flags, since
       stdin, stdout and stderr of the child process will always be connected to
       the PTY.
       
@@ -2685,8 +2685,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       When the operation fails, callback will be called with a -1 #GPid,
       and a non-null #GError containing the error information.
       
-      Note that `G_SPAWN_STDOUT_TO_DEV_NULL`, `G_SPAWN_STDERR_TO_DEV_NULL`,
-      and `G_SPAWN_CHILD_INHERITS_STDIN` are not supported in spawn_flags, since
+      Note that [glib.types.SpawnFlags.StdoutToDevNull], [glib.types.SpawnFlags.StderrToDevNull],
+      and [glib.types.SpawnFlags.ChildInheritsStdin] are not supported in spawn_flags, since
       stdin, stdout and stderr of the child process will always be connected to
       the PTY.
       
@@ -2815,7 +2815,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       [glib.global.childWatchSourceNew].
       
       Note: when using the [glib.global.spawnAsync] family of functions,
-      the `G_SPAWN_DO_NOT_REAP_CHILD` flag MUST have been passed.
+      the [glib.types.SpawnFlags.DoNotReapChild] flag MUST have been passed.
   
       Params:
         childPid = a #GPid

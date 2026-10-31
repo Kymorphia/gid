@@ -207,7 +207,7 @@ class BindingEntry
       Params:
         bindingSet = a #GtkBindingSet
         signalDesc = a signal description
-      Returns: `G_TOKEN_NONE` if the signal was successfully parsed and added,
+      Returns: [glib.types.TokenType.None] if the signal was successfully parsed and added,
             the expected token otherwise
   */
   static glib.types.TokenType addSignalFromString(gtk.binding_set.BindingSet bindingSet, string signalDesc) nothrow

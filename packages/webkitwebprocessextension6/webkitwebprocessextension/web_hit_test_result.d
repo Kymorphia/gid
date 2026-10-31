@@ -57,7 +57,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   /**
       Check whether there is an editable element at the hit test position.
       
-      Checks whether [webkit.types.HitTestResultContext.Editable] flag is present in
+      Checks whether [webkitwebprocessextension.types.HitTestResultContext.Editable] flag is present in
       the context flags.
       Returns: true if the hit test covers an editable element or false otherwise.
   */
@@ -71,7 +71,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   /**
       Check whether there is an image element at the hit test position.
       
-      Checks whether [webkit.types.HitTestResultContext.Image] flag is present in
+      Checks whether [webkitwebprocessextension.types.HitTestResultContext.Image] flag is present in
       the context flags.
       Returns: true if the hit test covers an image element or false otherwise.
   */
@@ -85,7 +85,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   /**
       Check whether there is a link element at the hit test position.
       
-      Checks whether [webkit.types.HitTestResultContext.Link] flag is present in
+      Checks whether [webkitwebprocessextension.types.HitTestResultContext.Link] flag is present in
       the context flags.
       Returns: true if the hit test covers a link element or false otherwise.
   */
@@ -99,7 +99,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   /**
       Check whether there is a media element at the hit test position.
       
-      Checks whether [webkit.types.HitTestResultContext.Media] flag is present in
+      Checks whether [webkitwebprocessextension.types.HitTestResultContext.Media] flag is present in
       the context flags.
       Returns: true if the hit test covers a media element or false otherwise.
   */
@@ -113,7 +113,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   /**
       Check whether there is a scrollbar at the hit test position.
       
-      Checks whether [webkit.types.HitTestResultContext.Scrollbar] flag is present in
+      Checks whether [webkitwebprocessextension.types.HitTestResultContext.Scrollbar] flag is present in
       the context flags.
       Returns: true if the hit test covers a scrollbar or false otherwise.
   */
@@ -127,7 +127,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   /**
       Check whether there is a selected element at the hit test position.
       
-      Checks whether [webkit.types.HitTestResultContext.Selection] flag is present in
+      Checks whether [webkitwebprocessextension.types.HitTestResultContext.Selection] flag is present in
       the context flags.
       Returns: true if the hit test covers a selected element or false otherwise.
   */

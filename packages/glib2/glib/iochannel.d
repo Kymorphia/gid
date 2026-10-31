@@ -160,8 +160,8 @@ class IOChannel : gobject.boxed.Boxed
   /**
       Flushes the write buffer for the GIOChannel.
       Returns: the status of the operation: One of
-          `G_IO_STATUS_NORMAL`, `G_IO_STATUS_AGAIN`, or
-          `G_IO_STATUS_ERROR`.
+          [glib.types.IOStatus.Normal], [glib.types.IOStatus.Again], or
+          [glib.types.IOStatus.Error].
       Throws: [IOChannelException]
   */
   glib.types.IOStatus flush()
@@ -242,9 +242,9 @@ class IOChannel : gobject.boxed.Boxed
 
   /**
       Gets the current flags for a #GIOChannel, including read-only
-      flags such as `G_IO_FLAG_IS_READABLE`.
+      flags such as [glib.types.IOFlags.IsReadable].
       
-      The values of the flags `G_IO_FLAG_IS_READABLE` and `G_IO_FLAG_IS_WRITABLE`
+      The values of the flags [glib.types.IOFlags.IsReadable] and [glib.types.IOFlags.IsWritable]
       are cached for internal use by the channel when it is created.
       If they should change at some later point (e.g. partial shutdown
       of a socket with the UNIX shutdown() function), the user
@@ -297,7 +297,7 @@ class IOChannel : gobject.boxed.Boxed
         buf = a buffer to read the data into (which should be at least
                 count bytes long)
         bytesRead = returns the number of bytes actually read
-      Returns: `G_IO_ERROR_NONE` if the operation was successful.
+      Returns: [glib.types.IOError.None] if the operation was successful.
   
       Deprecated: Use [glib.iochannel.IOChannel.readChars] instead.
   */
@@ -340,7 +340,7 @@ class IOChannel : gobject.boxed.Boxed
       Reads a line, including the terminating character(s),
       from a #GIOChannel into a newly-allocated string.
       str_return will contain allocated memory if the return
-      is `G_IO_STATUS_NORMAL`.
+      is [glib.types.IOStatus.Normal].
   
       Params:
         strReturn = The line read from the #GIOChannel, including the
@@ -396,8 +396,8 @@ class IOChannel : gobject.boxed.Boxed
                        #GIOChannel. This data should be freed with [glib.global.gfree] when no
                        longer needed. This data is terminated by an extra nul
                        character, but there may be other nuls in the intervening data.
-      Returns: `G_IO_STATUS_NORMAL` on success.
-            This function never returns `G_IO_STATUS_EOF`.
+      Returns: [glib.types.IOStatus.Normal] on success.
+            This function never returns [glib.types.IOStatus.Eof].
       Throws: [IOChannelException]
   */
   glib.types.IOStatus readToEnd(out ubyte[] strReturn)
@@ -443,10 +443,10 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         offset = an offset, in bytes, which is added to the position specified
                    by type
-        type = the position in the file, which can be `G_SEEK_CUR` (the current
-                 position), `G_SEEK_SET` (the start of the file), or `G_SEEK_END`
+        type = the position in the file, which can be [glib.types.SeekType.Cur] (the current
+                 position), [glib.types.SeekType.Set] (the start of the file), or [glib.types.SeekType.End]
                  (the end of the file)
-      Returns: `G_IO_ERROR_NONE` if the operation was successful.
+      Returns: [glib.types.IOError.None] if the operation was successful.
   
       Deprecated: Use [glib.iochannel.IOChannel.seekPosition] instead.
   */
@@ -463,7 +463,7 @@ class IOChannel : gobject.boxed.Boxed
   
       Params:
         offset = The offset in bytes from the position specified by type
-        type = a #GSeekType. The type `G_SEEK_CUR` is only allowed in those
+        type = a #GSeekType. The type [glib.types.SeekType.Cur] is only allowed in those
                                cases where a call to g_io_channel_set_encoding ()
                                is allowed. See the documentation for
                                g_io_channel_set_encoding () for details.
@@ -498,11 +498,11 @@ class IOChannel : gobject.boxed.Boxed
       
       A buffered channel can only be set unbuffered if the channel's
       internal buffers have been flushed. Newly created channels or
-      channels which have returned `G_IO_STATUS_EOF`
+      channels which have returned [glib.types.IOStatus.Eof]
       not require such a flush. For write-only channels, a call to
       g_io_channel_flush () is sufficient. For all other channels,
       the buffers may be flushed by a call to g_io_channel_seek_position ().
-      This includes the possibility of seeking with seek type `G_SEEK_CUR`
+      This includes the possibility of seeking with seek type [glib.types.SeekType.Cur]
       and an offset of zero. Note that this means that socket-based
       channels cannot be set unbuffered once they have had data
       read from them.
@@ -558,25 +558,25 @@ class IOChannel : gobject.boxed.Boxed
       
       - The current encoding is null or UTF-8.
       
-      - One of the (new API) read functions has just returned `G_IO_STATUS_EOF`
-        (or, in the case of [glib.iochannel.IOChannel.readToEnd], `G_IO_STATUS_NORMAL`).
+      - One of the (new API) read functions has just returned [glib.types.IOStatus.Eof]
+        (or, in the case of [glib.iochannel.IOChannel.readToEnd], [glib.types.IOStatus.Normal]).
       
       -  One of the functions [glib.iochannel.IOChannel.readChars] or
-         [glib.iochannel.IOChannel.readUnichar] has returned `G_IO_STATUS_AGAIN` or
-         `G_IO_STATUS_ERROR`. This may be useful in the case of
-         `G_CONVERT_ERROR_ILLEGAL_SEQUENCE`.
+         [glib.iochannel.IOChannel.readUnichar] has returned [glib.types.IOStatus.Again] or
+         [glib.types.IOStatus.Error]. This may be useful in the case of
+         [glib.types.ConvertError.IllegalSequence].
          Returning one of these statuses from [glib.iochannel.IOChannel.readLine],
          [glib.iochannel.IOChannel.readLineString], or [glib.iochannel.IOChannel.readToEnd]
          does not guarantee that the encoding can be changed.
       
       Channels which do not meet one of the above conditions cannot call
-      [glib.iochannel.IOChannel.seekPosition] with an offset of `G_SEEK_CUR`, and, if
+      [glib.iochannel.IOChannel.seekPosition] with an offset of [glib.types.SeekType.Cur], and, if
       they are "seekable", cannot call [glib.iochannel.IOChannel.writeChars] after
       calling one of the API "read" functions.
   
       Params:
         encoding = the encoding type
-      Returns: `G_IO_STATUS_NORMAL` if the encoding was successfully set
+      Returns: [glib.types.IOStatus.Normal] if the encoding was successfully set
       Throws: [IOChannelException]
   */
   glib.types.IOStatus setEncoding(string encoding = null)
@@ -592,7 +592,7 @@ class IOChannel : gobject.boxed.Boxed
   }
 
   /**
-      Sets the (writeable) flags in channel to (flags & `G_IO_FLAG_SET_MASK`).
+      Sets the (writeable) flags in channel to (flags & [glib.types.IOFlags.SetMask]).
   
       Params:
         flags = the flags to set on the IO channel
@@ -671,7 +671,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         buf = the buffer containing the data to write
         bytesWritten = the number of bytes actually written
-      Returns: `G_IO_ERROR_NONE` if the operation was successful.
+      Returns: [glib.types.IOError.None] if the operation was successful.
   
       Deprecated: Use [glib.iochannel.IOChannel.writeChars] instead.
   */
@@ -699,8 +699,8 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         buf = a buffer to write data from
         bytesWritten = The number of bytes written. This can be nonzero
-                          even if the return value is not `G_IO_STATUS_NORMAL`.
-                          If the return value is `G_IO_STATUS_NORMAL` and the
+                          even if the return value is not [glib.types.IOStatus.Normal].
+                          If the return value is [glib.types.IOStatus.Normal] and the
                           channel is blocking, this will always be equal
                           to count if count >= 0.
       Returns: the status of the operation.
@@ -748,7 +748,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         en = an `errno` error number, e.g. `EINVAL`
       Returns: a #GIOChannelError error number, e.g.
-             `G_IO_CHANNEL_ERROR_INVAL`.
+             [glib.types.IOChannelError.Inval].
   */
   static glib.types.IOChannelError errorFromErrno(int en) nothrow
   {

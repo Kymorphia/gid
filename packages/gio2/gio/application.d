@@ -514,14 +514,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       
       It is important to use the proper GVariant format when retrieving
       the options with [glib.variant_dict.VariantDict.lookup]:
-      - for `G_OPTION_ARG_NONE`, use `b`
-      - for `G_OPTION_ARG_STRING`, use `&s`
-      - for `G_OPTION_ARG_INT`, use `i`
-      - for `G_OPTION_ARG_INT64`, use `x`
-      - for `G_OPTION_ARG_DOUBLE`, use `d`
-      - for `G_OPTION_ARG_FILENAME`, use `^&ay`
-      - for `G_OPTION_ARG_STRING_ARRAY`, use `^a&s`
-      - for `G_OPTION_ARG_FILENAME_ARRAY`, use `^a&ay`
+      - for [glib.types.OptionArg.None], use `b`
+      - for [glib.types.OptionArg.String], use `&s`
+      - for [glib.types.OptionArg.Int], use `i`
+      - for [glib.types.OptionArg.Int64], use `x`
+      - for [glib.types.OptionArg.Double], use `d`
+      - for [glib.types.OptionArg.Filename], use `^&ay`
+      - for [glib.types.OptionArg.StringArray], use `^a&s`
+      - for [glib.types.OptionArg.FilenameArray], use `^a&ay`
   
       Params:
         entries = the

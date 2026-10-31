@@ -334,8 +334,8 @@ enum GDateDMY
 }
 
 /**
-    Enumeration representing a month; values are `G_DATE_JANUARY`,
-    `G_DATE_FEBRUARY`, etc. `G_DATE_BAD_MONTH` is the invalid value.
+    Enumeration representing a month; values are [glib.types.DateMonth.January],
+    [glib.types.DateMonth.February], etc. [glib.types.DateMonth.BadMonth] is the invalid value.
 */
 enum GDateMonth
 {
@@ -406,8 +406,8 @@ enum GDateMonth
 }
 
 /**
-    Enumeration representing a day of the week; `G_DATE_MONDAY`,
-    `G_DATE_TUESDAY`, etc. `G_DATE_BAD_WEEKDAY` is an invalid weekday.
+    Enumeration representing a day of the week; [glib.types.DateWeekday.Monday],
+    [glib.types.DateWeekday.Tuesday], etc. [glib.types.DateWeekday.BadWeekday] is an invalid weekday.
 */
 enum GDateWeekday
 {
@@ -454,7 +454,7 @@ enum GDateWeekday
 
 /**
     The possible errors, used in the @v_error field
-    of #GTokenValue, when the token is a `G_TOKEN_ERROR`.
+    of #GTokenValue, when the token is a [glib.types.TokenType.Error].
 */
 enum GErrorType
 {
@@ -707,8 +707,8 @@ enum GFileSetContentsFlags : uint
   /**
       Guarantee file durability: after a crash, the
         new version of the file will be available. On Unix systems this equates to
-        an `fsync()` on the file (if `G_FILE_SET_CONTENTS_CONSISTENT` is unset), or
-        the effects of `G_FILE_SET_CONTENTS_CONSISTENT` plus an `fsync()` on the
+        an `fsync()` on the file (if [glib.types.FileSetContentsFlags.Consistent] is unset), or
+        the effects of [glib.types.FileSetContentsFlags.Consistent] plus an `fsync()` on the
         directory containing the file after calling `rename()`.
   */
   Durable = 2,
@@ -1161,7 +1161,7 @@ enum GLogLevelFlags : uint
     handling it (and hence a fallback writer should be used).
     
     If a #GLogWriterFunc ignores a log entry, it should return
-    `G_LOG_WRITER_HANDLED`.
+    [glib.types.LogWriterOutput.Handled].
 */
 enum GLogWriterOutput
 {
@@ -1199,7 +1199,7 @@ enum GMainContextFlags : uint
 /**
     A mixed enumerated type and flags field. You must specify one type
     (string, strdup, boolean, tristate).  Additionally, you may  optionally
-    bitwise OR the type with the flag `G_MARKUP_COLLECT_OPTIONAL`.
+    bitwise OR the type with the flag [glib.types.MarkupCollectType.Optional].
     
     It is likely that this enum will be extended in the future to
     support other types.
@@ -1215,13 +1215,13 @@ enum GMarkupCollectType : uint
   /**
       collect the string pointer directly from
           the attribute_values[] array. Expects a parameter of type (const
-          char **). If `G_MARKUP_COLLECT_OPTIONAL` is specified and the
+          char **). If [glib.types.MarkupCollectType.Optional] is specified and the
           attribute isn't present then the pointer will be set to null
   */
   String = 1,
 
   /**
-      as with `G_MARKUP_COLLECT_STRING`, but
+      as with [glib.types.MarkupCollectType.String], but
           expects a parameter of type (char **) and [glib.global.strdup]s the
           returned pointer. The pointer must be freed with [glib.global.gfree]
   */
@@ -1237,7 +1237,7 @@ enum GMarkupCollectType : uint
   Boolean = 3,
 
   /**
-      as with `G_MARKUP_COLLECT_BOOLEAN`, but
+      as with [glib.types.MarkupCollectType.Boolean], but
           in the case of a missing attribute a value is set that compares
           equal to neither false nor true G_MARKUP_COLLECT_OPTIONAL is
           implied
@@ -1490,7 +1490,7 @@ enum GOptionArg
 
   /**
       The option takes a 64-bit integer. Like
-          `G_OPTION_ARG_INT` but for larger numbers. The number can be in
+          [glib.types.OptionArg.Int] but for larger numbers. The number can be in
           decimal base, or in hexadecimal (when prefixed with `0x`, for
           example, `0xffffffff`). Since 2.12
   */
@@ -1542,28 +1542,28 @@ enum GOptionFlags : uint
   InMain = 2,
 
   /**
-      For options of the `G_OPTION_ARG_NONE` kind, this
+      For options of the [glib.types.OptionArg.None] kind, this
           flag indicates that the sense of the option is reversed. i.e. false will
           be stored into the argument rather than true.
   */
   Reverse = 4,
 
   /**
-      For options of the `G_OPTION_ARG_CALLBACK` kind,
+      For options of the [glib.types.OptionArg.Callback] kind,
           this flag indicates that the callback does not take any argument
-          (like a `G_OPTION_ARG_NONE` option). Since 2.8
+          (like a [glib.types.OptionArg.None] option). Since 2.8
   */
   NoArg = 8,
 
   /**
-      For options of the `G_OPTION_ARG_CALLBACK`
+      For options of the [glib.types.OptionArg.Callback]
           kind, this flag indicates that the argument should be passed to the
           callback in the GLib filename encoding rather than UTF-8. Since 2.8
   */
   Filename = 16,
 
   /**
-      For options of the `G_OPTION_ARG_CALLBACK`
+      For options of the [glib.types.OptionArg.Callback]
           kind, this flag indicates that the argument supply is optional.
           If no argument is given then data of [glib.types.OptionParseFunc] will be
           set to NULL. Since 2.8
@@ -1604,8 +1604,8 @@ enum GRegexCompileFlags : uint
           newlines). The "start of line" metacharacter ("^") matches only
           at the start of the string, while the "end of line" metacharacter
           ("$") matches only at the end of the string, or before a terminating
-          newline (unless `G_REGEX_DOLLAR_ENDONLY` is set). When
-          `G_REGEX_MULTILINE` is set, the "start of line" and "end of line"
+          newline (unless [glib.types.RegexCompileFlags.DollarEndonly] is set). When
+          [glib.types.RegexCompileFlags.Multiline] is set, the "start of line" and "end of line"
           constructs match immediately following or immediately before any
           newline in the string, respectively, as well as at the very start
           and end. This can be changed within a pattern by a "(?m)" option
@@ -1644,7 +1644,7 @@ enum GRegexCompileFlags : uint
           matches only at the end of the string. Without this option, a
           dollar also matches immediately before the final character if
           it is a newline (but not before any other newlines). This option
-          is ignored if `G_REGEX_MULTILINE` is set.
+          is ignored if [glib.types.RegexCompileFlags.Multiline] is set.
   */
   DollarEndonly = 32,
 
@@ -2094,7 +2094,7 @@ enum GRegexMatchFlags : uint
   /**
       Specifies that first character of the string is
           not the beginning of a line, so the circumflex metacharacter should
-          not match before it. Setting this without `G_REGEX_MULTILINE` (at
+          not match before it. Setting this without [glib.types.RegexCompileFlags.Multiline] (at
           compile time) causes circumflex never to match. This option affects
           only the behaviour of the circumflex metacharacter, it does not
           affect "\A".
@@ -2105,7 +2105,7 @@ enum GRegexMatchFlags : uint
       Specifies that the end of the subject string is
           not the end of a line, so the dollar metacharacter should not match
           it nor (except in multiline mode) a newline immediately before it.
-          Setting this without `G_REGEX_MULTILINE` (at compile time) causes
+          Setting this without [glib.types.RegexCompileFlags.Multiline] (at compile time) causes
           dollar never to match. This option affects only the behaviour of
           the dollar metacharacter, it does not affect "\Z" or "\z".
   */
@@ -2182,20 +2182,20 @@ enum GRegexMatchFlags : uint
   BsrAny = 16777216,
 
   /**
-      An alias for `G_REGEX_MATCH_PARTIAL`. Since: 2.34
+      An alias for [glib.types.RegexMatchFlags.Partial]. Since: 2.34
   */
   PartialSoft = 32768,
 
   /**
       Turns on the partial matching feature. In contrast to
-          to `G_REGEX_MATCH_PARTIAL_SOFT`, this stops matching as soon as a partial match
+          to [glib.types.RegexMatchFlags.PartialSoft], this stops matching as soon as a partial match
           is found, without continuing to search for a possible complete match. See
           [glib.match_info.MatchInfo.isPartialMatch] for more information. Since: 2.34
   */
   PartialHard = 134217728,
 
   /**
-      Like `G_REGEX_MATCH_NOTEMPTY`, but only applied to
+      Like [glib.types.RegexMatchFlags.Notempty], but only applied to
           the start of the matched string. For anchored
           patterns this can only happen for pattern containing "\K". Since: 2.34
   */
@@ -2303,7 +2303,7 @@ enum GSpawnError
   TooBig = 5,
 
   /**
-      deprecated alias for `G_SPAWN_ERROR_TOO_BIG` (deprecated since GLib 2.32)
+      deprecated alias for [glib.types.SpawnError.TooBig] (deprecated since GLib 2.32)
   */
   _2big = 5,
 
@@ -2825,14 +2825,14 @@ enum GTraverseFlags : uint
   /**
       only leaf nodes should be visited. This name has
                           been introduced in 2.6, for older version use
-                          `G_TRAVERSE_LEAFS`.
+                          [glib.types.TraverseFlags.Leafs].
   */
   Leaves = 1,
 
   /**
       only non-leaf nodes should be visited. This
                               name has been introduced in 2.6, for older
-                              version use `G_TRAVERSE_NON_LEAFS`.
+                              version use [glib.types.TraverseFlags.NonLeafs].
   */
   NonLeaves = 2,
 
@@ -2847,12 +2847,12 @@ enum GTraverseFlags : uint
   Mask = 3,
 
   /**
-      identical to `G_TRAVERSE_LEAVES`.
+      identical to [glib.types.TraverseFlags.Leaves].
   */
   Leafs = 1,
 
   /**
-      identical to `G_TRAVERSE_NON_LEAVES`.
+      identical to [glib.types.TraverseFlags.NonLeaves].
   */
   NonLeafs = 2,
 }
@@ -4269,7 +4269,7 @@ enum GUriFlags : uint
       When parsing a URI, this indicates that `%`-encoded
           characters in the userinfo, path, query, and fragment fields
           should not be decoded. (And likewise the host field if
-          `G_URI_FLAGS_NON_DNS` is also set.) When building a URI, it indicates
+          [glib.types.UriFlags.NonDns] is also set.) When building a URI, it indicates
           that you have already `%`-encoded the components, and so #GUri
           should not do any encoding itself.
   */
@@ -4283,18 +4283,18 @@ enum GUriFlags : uint
   NonDns = 16,
 
   /**
-      Same as `G_URI_FLAGS_ENCODED`, for the query
+      Same as [glib.types.UriFlags.Encoded], for the query
           field only.
   */
   EncodedQuery = 32,
 
   /**
-      Same as `G_URI_FLAGS_ENCODED`, for the path only.
+      Same as [glib.types.UriFlags.Encoded], for the path only.
   */
   EncodedPath = 64,
 
   /**
-      Same as `G_URI_FLAGS_ENCODED`, for the
+      Same as [glib.types.UriFlags.Encoded], for the
           fragment only.
   */
   EncodedFragment = 128,
@@ -4310,8 +4310,8 @@ enum GUriFlags : uint
 
 /**
     Flags describing what parts of the URI to hide in
-    [glib.uri.Uri.toStringPartial]. Note that `G_URI_HIDE_PASSWORD` and
-    `G_URI_HIDE_AUTH_PARAMS` will only work if the #GUri was parsed with
+    [glib.uri.Uri.toStringPartial]. Note that [glib.types.UriHideFlags.Password] and
+    [glib.types.UriHideFlags.AuthParams] will only work if the #GUri was parsed with
     the corresponding flags.
 */
 enum GUriHideFlags : uint
@@ -4370,7 +4370,7 @@ enum GUriParamsFlags : uint
   WwwForm = 2,
 
   /**
-      See `G_URI_FLAGS_PARSE_RELAXED`.
+      See [glib.types.UriFlags.ParseRelaxed].
   */
   ParseRelaxed = 4,
 }
@@ -5056,7 +5056,7 @@ struct GError
   GQuark domain;
 
   /**
-      error code, e.g. `G_FILE_ERROR_NOENT`
+      error code, e.g. [glib.types.FileError.Noent]
   */
   int code;
 
@@ -5307,15 +5307,15 @@ struct GIOFuncs
   /**
       sets the #GIOFlags on the channel.  This is called
                      from [glib.iochannel.IOChannel.setFlags] with all flags except
-                     for `G_IO_FLAG_APPEND` and `G_IO_FLAG_NONBLOCK` masked
+                     for [glib.types.IOFlags.Append] and [glib.types.IOFlags.Nonblock] masked
                      out.
   */
   extern(C) GIOStatus function(GIOChannel* channel, GIOFlags flags, GError** _err) ioSetFlags;
 
   /**
       gets the #GIOFlags for the channel.  This function
-                     need only return the `G_IO_FLAG_APPEND` and
-                     `G_IO_FLAG_NONBLOCK` flags; [glib.iochannel.IOChannel.getFlags]
+                     need only return the [glib.types.IOFlags.Append] and
+                     [glib.types.IOFlags.Nonblock] flags; [glib.iochannel.IOChannel.getFlags]
                      automatically adds the others as appropriate.
   */
   extern(C) GIOFlags function(GIOChannel* channel) ioGetFlags;
@@ -5537,8 +5537,8 @@ struct GMarkupParseContext;
 /**
     Any of the fields in #GMarkupParser can be null, in which case they
     will be ignored. Except for the @error function, any of these callbacks
-    can set an error; in particular the `G_MARKUP_ERROR_UNKNOWN_ELEMENT`,
-    `G_MARKUP_ERROR_UNKNOWN_ATTRIBUTE`, and `G_MARKUP_ERROR_INVALID_CONTENT`
+    can set an error; in particular the [glib.types.MarkupError.UnknownElement],
+    [glib.types.MarkupError.UnknownAttribute], and [glib.types.MarkupError.InvalidContent]
     errors are intended to be set from these callbacks. If you set an error
     from a callback, [glib.markup_parse_context.MarkupParseContext.parse] will report that error
     back to its caller.
@@ -5563,7 +5563,7 @@ struct GMarkupParser
       Callback to invoke when some text is seen (text is always
           inside an element). Note that the text of an element may be spread
           over multiple calls of this function. If the
-          `G_MARKUP_TREAT_CDATA_AS_TEXT` flag is set, this function is also
+          [glib.types.MarkupParseFlags.TreatCdataAsText] flag is set, this function is also
           called for the content of CDATA marked sections.
   */
   extern(C) void function(GMarkupParseContext* context, const(char)* text, size_t textLen, void* userData, GError** _err) text;
@@ -5572,7 +5572,7 @@ struct GMarkupParser
       Callback to invoke for comments, processing instructions
           and doctype declarations; if you're re-writing the parsed document,
           write the passthrough text back out in the same position. If the
-          `G_MARKUP_TREAT_CDATA_AS_TEXT` flag is not set, this function is also
+          [glib.types.MarkupParseFlags.TreatCdataAsText] flag is not set, this function is also
           called for CDATA marked sections.
   */
   extern(C) void function(GMarkupParseContext* context, const(char)* passthroughText, size_t textLen, void* userData, GError** _err) passthrough;
@@ -5736,7 +5736,7 @@ struct GOnce
 
   /**
       the value returned by the call to the function, if @status
-               is `G_ONCE_STATUS_READY`
+               is [glib.types.OnceStatus.Ready]
   */
   void* retval;
 }
@@ -5783,23 +5783,23 @@ struct GOptionEntry
   GOptionArg arg;
 
   /**
-      If the @arg type is `G_OPTION_ARG_CALLBACK`, then @arg_data
+      If the @arg type is [glib.types.OptionArg.Callback], then @arg_data
           must point to a #GOptionArgFunc callback function, which will be
           called to handle the extra argument. Otherwise, @arg_data is a
           pointer to a location to store the value, the required type of
           the location depends on the @arg type:
-           - `G_OPTION_ARG_NONE`: `gboolean`
-           - `G_OPTION_ARG_STRING`: `gchar`*
-           - `G_OPTION_ARG_INT`: `gint`
-           - `G_OPTION_ARG_FILENAME`: `gchar`*
-           - `G_OPTION_ARG_STRING_ARRAY`: `gchar`**
-           - `G_OPTION_ARG_FILENAME_ARRAY`: `gchar`**
-           - `G_OPTION_ARG_DOUBLE`: `gdouble`
-          If @arg type is `G_OPTION_ARG_STRING` or `G_OPTION_ARG_FILENAME`,
+           - [glib.types.OptionArg.None]: `gboolean`
+           - [glib.types.OptionArg.String]: `gchar`*
+           - [glib.types.OptionArg.Int]: `gint`
+           - [glib.types.OptionArg.Filename]: `gchar`*
+           - [glib.types.OptionArg.StringArray]: `gchar`**
+           - [glib.types.OptionArg.FilenameArray]: `gchar`**
+           - [glib.types.OptionArg.Double]: `gdouble`
+          If @arg type is [glib.types.OptionArg.String] or [glib.types.OptionArg.Filename],
           the location will contain a newly allocated string if the option
           was given. That string needs to be freed by the callee using [glib.global.gfree].
-          Likewise if @arg type is `G_OPTION_ARG_STRING_ARRAY` or
-          `G_OPTION_ARG_FILENAME_ARRAY`, the data should be freed using [glib.global.strfreev].
+          Likewise if @arg type is [glib.types.OptionArg.StringArray] or
+          [glib.types.OptionArg.FilenameArray], the data should be freed using [glib.global.strfreev].
   */
   void* argData;
 
@@ -6095,7 +6095,7 @@ struct GRecMutex
     [PCRE documentation](man:pcrepattern(3)) for the syntax definition.
     
     Some functions accept a @start_position argument, setting it differs
-    from just passing over a shortened string and setting `G_REGEX_MATCH_NOTBOL`
+    from just passing over a shortened string and setting [glib.types.RegexMatchFlags.Notbol]
     in the case of a pattern that begins with any kind of lookbehind assertion.
     For example, consider the pattern "\Biss\B" which finds occurrences of "iss"
     in the middle of words. ("\B" matches only if the current position in the
@@ -6107,11 +6107,11 @@ struct GRecMutex
     it is able to look behind the starting point to discover that it is
     preceded by a letter.
     
-    Note that, unless you set the `G_REGEX_RAW` flag, all the strings passed
+    Note that, unless you set the [glib.types.RegexCompileFlags.Raw] flag, all the strings passed
     to these functions must be encoded in UTF-8. The lengths and the positions
     inside the strings are in bytes and not in characters, so, for instance,
     "\xc3\xa0" (i.e. "à") is two bytes long but it is treated as a
-    single character. If you set `G_REGEX_RAW` the strings can be non-valid
+    single character. If you set [glib.types.RegexCompileFlags.Raw] the strings can be non-valid
     UTF-8 strings and a byte is treated as a character, so "\xc3\xa0" is two
     bytes and two characters long.
     
@@ -6126,11 +6126,11 @@ struct GRecMutex
     The behaviour of the dot, circumflex, and dollar metacharacters are
     affected by newline characters, the default is to recognize any newline
     character (the same characters recognized by "\R"). This can be changed
-    with `G_REGEX_NEWLINE_CR`, `G_REGEX_NEWLINE_LF` and `G_REGEX_NEWLINE_CRLF`
-    compile options, and with `G_REGEX_MATCH_NEWLINE_ANY`,
-    `G_REGEX_MATCH_NEWLINE_CR`, `G_REGEX_MATCH_NEWLINE_LF` and
-    `G_REGEX_MATCH_NEWLINE_CRLF` match options. These settings are also
-    relevant when compiling a pattern if `G_REGEX_EXTENDED` is set, and an
+    with [glib.types.RegexCompileFlags.NewlineCr], [glib.types.RegexCompileFlags.NewlineLf] and [glib.types.RegexCompileFlags.NewlineCrlf]
+    compile options, and with [glib.types.RegexMatchFlags.NewlineAny],
+    [glib.types.RegexMatchFlags.NewlineCr], [glib.types.RegexMatchFlags.NewlineLf] and
+    [glib.types.RegexMatchFlags.NewlineCrlf] match options. These settings are also
+    relevant when compiling a pattern if [glib.types.RegexCompileFlags.Extended] is set, and an
     unescaped "#" outside a character class is encountered. This indicates
     a comment that lasts until after the next newline.
     
@@ -6389,7 +6389,7 @@ struct GScannerConfig
   uint, "scanIdentifier1char", 1,
   /**
       specifies if null is reported as
-          `G_TOKEN_IDENTIFIER_NULL` (the default is false).
+          [glib.types.TokenType.IdentifierNull] (the default is false).
   */
   uint, "scanIdentifierNULL", 1,
   /**
@@ -6434,11 +6434,11 @@ struct GScannerConfig
   uint, "scanStringDq", 1,
   /**
       specifies if binary, octal and hexadecimal numbers
-          are reported as `G_TOKEN_INT` (the default is true).
+          are reported as [glib.types.TokenType.Int] (the default is true).
   */
   uint, "numbers2Int", 1,
   /**
-      specifies if all numbers are reported as `G_TOKEN_FLOAT`
+      specifies if all numbers are reported as [glib.types.TokenType.Float]
           (the default is false).
   */
   uint, "int2Float", 1,
@@ -6449,12 +6449,12 @@ struct GScannerConfig
   uint, "identifier2String", 1,
   /**
       specifies if characters are reported by setting
-          `token = ch` or as `G_TOKEN_CHAR` (the default is true).
+          `token = ch` or as [glib.types.TokenType.Char] (the default is true).
   */
   uint, "char2Token", 1,
   /**
       specifies if symbols are reported by setting
-          `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
+          `token = v_symbol` or as [glib.types.TokenType.Symbol] (the default is false).
   */
   uint, "symbol2Token", 1,
   /**
@@ -7378,8 +7378,8 @@ struct GUnixPipe
 {
   /**
       A pair of file descriptors, each negative if closed or not yet opened.
-       The file descriptor with index `G_UNIX_PIPE_END_READ` is readable.
-       The file descriptor with index `G_UNIX_PIPE_END_WRITE` is writable.
+       The file descriptor with index [glib.types.UnixPipeEnd.Read] is readable.
+       The file descriptor with index [glib.types.UnixPipeEnd.Write] is writable.
   */
   int[2] fds;
 }
@@ -7399,15 +7399,15 @@ struct GUnixPipe
     is, if the scheme is followed by `://` rather than just `:`), then the
     [glib.uri.Uri] will contain a hostname, and possibly a port and ‘userinfo’.
     Additionally, depending on how the [glib.uri.Uri] was constructed/parsed (for example,
-    using the `G_URI_FLAGS_HAS_PASSWORD` and `G_URI_FLAGS_HAS_AUTH_PARAMS` flags),
+    using the [glib.types.UriFlags.HasPassword] and [glib.types.UriFlags.HasAuthParams] flags),
     the userinfo may be split out into a username, password, and
     additional authorization-related parameters.
     
     Normally, the components of a [glib.uri.Uri] will have all `%`-encoded
     characters decoded. However, if you construct/parse a [glib.uri.Uri] with
-    `G_URI_FLAGS_ENCODED`, then the `%`-encoding will be preserved instead in
+    [glib.types.UriFlags.Encoded], then the `%`-encoding will be preserved instead in
     the userinfo, path, and query fields (and in the host field if also
-    created with `G_URI_FLAGS_NON_DNS`). In particular, this is necessary if
+    created with [glib.types.UriFlags.NonDns]). In particular, this is necessary if
     the URI may contain binary data or non-UTF-8 text, or if decoding
     the components might change the interpretation of the URI.
     
@@ -7433,7 +7433,7 @@ struct GUnixPipe
     g_assert_error (err, G_URI_ERROR, G_URI_ERROR_BAD_QUERY);
     ```
     
-    You should pass `G_URI_FLAGS_ENCODED` or `G_URI_FLAGS_ENCODED_QUERY` if you
+    You should pass [glib.types.UriFlags.Encoded] or [glib.types.UriFlags.EncodedQuery] if you
     need to handle that case manually. In particular, if the query string
     contains `=` characters that are `%`-encoded, you should let
     [glib.uri.Uri.parseParams] do the decoding once of the query.
@@ -7509,7 +7509,7 @@ struct GUnixPipe
     use [glib.uri.Uri.peekScheme] on the URI string to check the scheme
     first, and use that to decide what flags to parse it with.
     
-    For example, you might want to use `G_URI_PARAMS_WWW_FORM` when parsing the
+    For example, you might want to use [glib.types.UriParamsFlags.WwwForm] when parsing the
     params for a web URI, so compare the result of [glib.uri.Uri.peekScheme]
     against `http` and `https`.
     
@@ -7525,7 +7525,7 @@ struct GUnixPipe
     As with the parsing functions, the building functions take a
     [glib.types.UriFlags] argument. In particular, it is important to keep in mind
     whether the URI components you are using are already `%`-encoded. If so,
-    you must pass the `G_URI_FLAGS_ENCODED` flag.
+    you must pass the [glib.types.UriFlags.Encoded] flag.
     
     ## `file://` URIs
     
@@ -7541,7 +7541,7 @@ struct GUnixPipe
     Note that there is no `g_uri_equal ()` function, because comparing
     URIs usefully requires scheme-specific knowledge that [glib.uri.Uri] does
     not have. [glib.uri.Uri] can help with normalization if you use the various
-    encoded [glib.types.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
+    encoded [glib.types.UriFlags] as well as [glib.types.UriFlags.SchemeNormalize]
     however it is not comprehensive.
     For example, `data:,foo` and `data:;base64,Zm9v` resolve to the same
     thing according to the `data:` URI specification which GLib does not

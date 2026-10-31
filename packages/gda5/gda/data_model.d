@@ -188,18 +188,18 @@ interface DataModel
                   default if not specified is the double quote character</para></listitem>
         <listitem><para>"FIELD_QUOTE": a boolean value which can be set to FALSE if no quote around the individual fields
                   is requeted, in case of CSV export</para></listitem>
-        <listitem><para>"NAMES_ON_FIRST_LINE": a boolean value which, if set to true and in case of a CSV or `GDA_DATA_MODEL_IO_TEXT_TABLE` export, will add a first line with the name each exported field (note that "FIELDS_NAME" is also accepted as a synonym)</para></listitem>
-        <listitem><para>"NAME": a string value used to name the exported data if the export format is XML or `GDA_DATA_MODEL_IO_TEXT_TABLE`</para></listitem>
+        <listitem><para>"NAMES_ON_FIRST_LINE": a boolean value which, if set to true and in case of a CSV or [gda.types.DataModelIOFormat.TextTable] export, will add a first line with the name each exported field (note that "FIELDS_NAME" is also accepted as a synonym)</para></listitem>
+        <listitem><para>"NAME": a string value used to name the exported data if the export format is XML or [gda.types.DataModelIOFormat.TextTable]</para></listitem>
         <listitem><para>"OVERWRITE": a boolean value which tells if the file must be over-written if it already exists.</para></listitem>
-        <listitem><para>"NULL_AS_EMPTY": a boolean value which, if set to true and in case of a CSV or `GDA_DATA_MODEL_IO_TEXT_TABLE` export, will render and NULL value as the empty string (instead of the 'NULL' string)</para></listitem>
+        <listitem><para>"NULL_AS_EMPTY": a boolean value which, if set to true and in case of a CSV or [gda.types.DataModelIOFormat.TextTable] export, will render and NULL value as the empty string (instead of the 'NULL' string)</para></listitem>
         <listitem><para>"INVALID_AS_NULL": a boolean value which, if set to true, considers any invalid data (for example for the date related values) as NULL</para></listitem>
-        <listitem><para>"COLUMN_SEPARATORS": a boolean value which, if set to true, adds a separators lines between each column, if the export format is `GDA_DATA_MODEL_IO_TEXT_TABLE`
+        <listitem><para>"COLUMN_SEPARATORS": a boolean value which, if set to true, adds a separators lines between each column, if the export format is [gda.types.DataModelIOFormat.TextTable]
                   </para></listitem>
-        <listitem><para>"SEPARATOR_LINE": a boolean value which, if set to true, adds an horizontal line between column titles and values, if the export format is `GDA_DATA_MODEL_IO_TEXT_TABLE`
+        <listitem><para>"SEPARATOR_LINE": a boolean value which, if set to true, adds an horizontal line between column titles and values, if the export format is [gda.types.DataModelIOFormat.TextTable]
                   </para></listitem>
-        <listitem><para>"ROW_NUMBERS": a boolean value which, if set to true, prepends a column with row numbers, if the export format is `GDA_DATA_MODEL_IO_TEXT_TABLE`
+        <listitem><para>"ROW_NUMBERS": a boolean value which, if set to true, prepends a column with row numbers, if the export format is [gda.types.DataModelIOFormat.TextTable]
                   </para></listitem>
-        <listitem><para>"MAX_WIDTH": an integer value which, if greater than 0, makes all the lines truncated to have at most that number of characters, if the export format is `GDA_DATA_MODEL_IO_TEXT_TABLE`
+        <listitem><para>"MAX_WIDTH": an integer value which, if greater than 0, makes all the lines truncated to have at most that number of characters, if the export format is [gda.types.DataModelIOFormat.TextTable]
                   </para></listitem>
       </itemizedlist>
       

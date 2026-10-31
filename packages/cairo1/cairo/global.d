@@ -1160,8 +1160,8 @@ void pdfSurfaceSetCustomMetadata(cairo.surface.Surface surface, string name, str
 }
 
 /**
-    Set document metadata. The `CAIRO_PDF_METADATA_CREATE_DATE` and
-    `CAIRO_PDF_METADATA_MOD_DATE` values must be in ISO-8601 format:
+    Set document metadata. The [cairo.types.PdfMetadata.CreateDate] and
+    [cairo.types.PdfMetadata.ModDate] values must be in ISO-8601 format:
     YYYY-MM-DDThh:mm:ss. An optional timezone of the form "[+/-]hh:mm"
     or "Z" for UTC time can be appended. All other metadata values can be any UTF-8
     string.

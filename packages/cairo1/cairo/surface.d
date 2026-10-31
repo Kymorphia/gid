@@ -121,8 +121,8 @@ class Surface : gobject.boxed.Boxed
       the process it will log operations and times, which are fast, which are
       slow, which are frequent, etc.
       
-      The mode parameter can be set to either `CAIRO_SURFACE_OBSERVER_NORMAL`
-      or `CAIRO_SURFACE_OBSERVER_RECORD_OPERATIONS`, to control whether or not
+      The mode parameter can be set to either [cairo.types.SurfaceObserverMode.Normal]
+      or [cairo.types.SurfaceObserverMode.RecordOperations], to control whether or not
       the internal observer should record operations.
   
       Params:

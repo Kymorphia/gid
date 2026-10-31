@@ -101,7 +101,7 @@ interface Serializable
       - a [gobject.value.Value] initialized with the expected type of the property
       
       This function will not be called for properties that are marked as
-      as `G_PARAM_CONSTRUCT_ONLY`.
+      as [gobject.types.ParamFlags.ConstructOnly].
   
       Params:
         propertyName = the name of the property to serialize

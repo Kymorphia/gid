@@ -45,7 +45,7 @@ class ScannerConfig
         scanIdentifier1char = specifies if single-character
               identifiers are recognized (the default is false).
         scanIdentifierNULL = specifies if null is reported as
-              `G_TOKEN_IDENTIFIER_NULL` (the default is false).
+              [glib.types.TokenType.IdentifierNull] (the default is false).
         scanSymbols = specifies if symbols are recognized (the default
               is true).
         scanBinary = specifies if binary numbers are recognized (the
@@ -63,15 +63,15 @@ class ScannerConfig
         scanStringDq = specifies if strings can be enclosed in double
               quotes (the default is true).
         numbers2Int = specifies if binary, octal and hexadecimal numbers
-              are reported as `G_TOKEN_INT` (the default is true).
-        int2Float = specifies if all numbers are reported as `G_TOKEN_FLOAT`
+              are reported as [glib.types.TokenType.Int] (the default is true).
+        int2Float = specifies if all numbers are reported as [glib.types.TokenType.Float]
               (the default is false).
         identifier2String = specifies if identifiers are reported as strings
               (the default is false).
         char2Token = specifies if characters are reported by setting
-              `token = ch` or as `G_TOKEN_CHAR` (the default is true).
+              `token = ch` or as [glib.types.TokenType.Char] (the default is true).
         symbol2Token = specifies if symbols are reported by setting
-              `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
+              `token = v_symbol` or as [glib.types.TokenType.Symbol] (the default is false).
         scope0Fallback = specifies if a symbol is searched for in the
               default scope in addition to the current scope (the default is false).
         storeInt64 = use value.v_int64 rather than v_int
@@ -344,7 +344,7 @@ class ScannerConfig
   /**
       Get `scanIdentifierNULL` field.
       Returns: specifies if null is reported as
-            `G_TOKEN_IDENTIFIER_NULL` (the default is false).
+            [glib.types.TokenType.IdentifierNull] (the default is false).
   */
   @property uint scanIdentifierNULL() nothrow
   {
@@ -355,7 +355,7 @@ class ScannerConfig
       Set `scanIdentifierNULL` field.
       Params:
         propval = specifies if null is reported as
-              `G_TOKEN_IDENTIFIER_NULL` (the default is false).
+              [glib.types.TokenType.IdentifierNull] (the default is false).
   */
   @property void scanIdentifierNULL(uint propval) nothrow
   {
@@ -533,7 +533,7 @@ class ScannerConfig
   /**
       Get `numbers2Int` field.
       Returns: specifies if binary, octal and hexadecimal numbers
-            are reported as `G_TOKEN_INT` (the default is true).
+            are reported as [glib.types.TokenType.Int] (the default is true).
   */
   @property uint numbers2Int() nothrow
   {
@@ -544,7 +544,7 @@ class ScannerConfig
       Set `numbers2Int` field.
       Params:
         propval = specifies if binary, octal and hexadecimal numbers
-              are reported as `G_TOKEN_INT` (the default is true).
+              are reported as [glib.types.TokenType.Int] (the default is true).
   */
   @property void numbers2Int(uint propval) nothrow
   {
@@ -553,7 +553,7 @@ class ScannerConfig
 
   /**
       Get `int2Float` field.
-      Returns: specifies if all numbers are reported as `G_TOKEN_FLOAT`
+      Returns: specifies if all numbers are reported as [glib.types.TokenType.Float]
             (the default is false).
   */
   @property uint int2Float() nothrow
@@ -564,7 +564,7 @@ class ScannerConfig
   /**
       Set `int2Float` field.
       Params:
-        propval = specifies if all numbers are reported as `G_TOKEN_FLOAT`
+        propval = specifies if all numbers are reported as [glib.types.TokenType.Float]
               (the default is false).
   */
   @property void int2Float(uint propval) nothrow
@@ -596,7 +596,7 @@ class ScannerConfig
   /**
       Get `char2Token` field.
       Returns: specifies if characters are reported by setting
-            `token = ch` or as `G_TOKEN_CHAR` (the default is true).
+            `token = ch` or as [glib.types.TokenType.Char] (the default is true).
   */
   @property uint char2Token() nothrow
   {
@@ -607,7 +607,7 @@ class ScannerConfig
       Set `char2Token` field.
       Params:
         propval = specifies if characters are reported by setting
-              `token = ch` or as `G_TOKEN_CHAR` (the default is true).
+              `token = ch` or as [glib.types.TokenType.Char] (the default is true).
   */
   @property void char2Token(uint propval) nothrow
   {
@@ -617,7 +617,7 @@ class ScannerConfig
   /**
       Get `symbol2Token` field.
       Returns: specifies if symbols are reported by setting
-            `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
+            `token = v_symbol` or as [glib.types.TokenType.Symbol] (the default is false).
   */
   @property uint symbol2Token() nothrow
   {
@@ -628,7 +628,7 @@ class ScannerConfig
       Set `symbol2Token` field.
       Params:
         propval = specifies if symbols are reported by setting
-              `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
+              `token = v_symbol` or as [glib.types.TokenType.Symbol] (the default is false).
   */
   @property void symbol2Token(uint propval) nothrow
   {

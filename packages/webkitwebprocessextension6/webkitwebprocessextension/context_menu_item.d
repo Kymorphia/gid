@@ -84,7 +84,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Creates a new #WebKitContextMenuItem for the given stock action.
       
       Stock actions are handled automatically by WebKit so that, for example,
-      when a menu item created with a [webkit.types.ContextMenuAction.Stop] is
+      when a menu item created with a [webkitwebprocessextension.types.ContextMenuAction.Stop] is
       activated the action associated will be handled by WebKit and the current
       load operation will be stopped. You can get the #GAction of a
       #WebKitContextMenuItem created with a #WebKitContextMenuAction with
@@ -170,8 +170,8 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Gets the #WebKitContextMenuAction of item.
       
       If the #WebKitContextMenuItem was not
-      created for a stock action [webkit.types.ContextMenuAction.Custom] will be
-      returned. If the #WebKitContextMenuItem is a separator [webkit.types.ContextMenuAction.NoAction]
+      created for a stock action [webkitwebprocessextension.types.ContextMenuAction.Custom] will be
+      returned. If the #WebKitContextMenuItem is a separator [webkitwebprocessextension.types.ContextMenuAction.NoAction]
       will be returned.
       Returns: the #WebKitContextMenuAction of item
   */

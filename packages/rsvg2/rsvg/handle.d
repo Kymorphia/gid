@@ -776,7 +776,7 @@ class Handle : gobject.object.ObjectWrap
       
       Note that the [rsvg.types.Length] return values have `RsvgUnits` in them; you should
       not assume that they are always in pixels.  For example, the following SVG element
-      will return width and height values whose `units` fields are `RSVG_UNIT_MM`.
+      will return width and height values whose `units` fields are [rsvg.types.Unit.Mm].
       
       ```
       <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm">

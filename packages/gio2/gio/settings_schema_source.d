@@ -64,7 +64,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
       system and to false for files in the home directory.
       
       In either case, an empty file or some types of corruption in the file will
-      result in `G_FILE_ERROR_INVAL` being returned.
+      result in [glib.types.FileError.Inval] being returned.
       
       If parent is non-null then there are two effects.
       

@@ -1092,7 +1092,7 @@ bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobj
 /**
     Adds an emission hook for a signal, which will get called for any emission
     of that signal, independent of the instance. This is possible only
-    for signals which don't have `G_SIGNAL_NO_HOOKS` flag set.
+    for signals which don't have [gobject.types.SignalFlags.NoHooks] flag set.
 
     Params:
       signalId = the signal identifier, as returned by [gobject.global.signalLookup].
@@ -1288,13 +1288,13 @@ void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId) 
     the criteria values are passed as arguments. A handler must match on all
     flags set in mask to be blocked (i.e. the match is conjunctive).
     
-    Passing at least one of the `G_SIGNAL_MATCH_ID`, `G_SIGNAL_MATCH_CLOSURE`,
-    `G_SIGNAL_MATCH_FUNC`
-    or `G_SIGNAL_MATCH_DATA` match flags is required for successful matches.
+    Passing at least one of the [gobject.types.SignalMatchType.Id], [gobject.types.SignalMatchType.Closure],
+    [gobject.types.SignalMatchType.Func]
+    or [gobject.types.SignalMatchType.Data] match flags is required for successful matches.
     If no handlers were found, 0 is returned, the number of blocked handlers
     otherwise.
     
-    Support for `G_SIGNAL_MATCH_ID` was added in GLib 2.78.
+    Support for [gobject.types.SignalMatchType.Id] was added in GLib 2.78.
 
     Params:
       instance = The instance to block handlers from.
@@ -1321,13 +1321,13 @@ uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.type
     the criteria values are passed as arguments. A handler must match on all
     flags set in mask to be disconnected (i.e. the match is conjunctive).
     
-    Passing at least one of the `G_SIGNAL_MATCH_ID`, `G_SIGNAL_MATCH_CLOSURE`,
-    `G_SIGNAL_MATCH_FUNC` or
-    `G_SIGNAL_MATCH_DATA` match flags is required for successful
+    Passing at least one of the [gobject.types.SignalMatchType.Id], [gobject.types.SignalMatchType.Closure],
+    [gobject.types.SignalMatchType.Func] or
+    [gobject.types.SignalMatchType.Data] match flags is required for successful
     matches.  If no handlers were found, 0 is returned, the number of
     disconnected handlers otherwise.
     
-    Support for `G_SIGNAL_MATCH_ID` was added in GLib 2.78.
+    Support for [gobject.types.SignalMatchType.Id] was added in GLib 2.78.
 
     Params:
       instance = The instance to remove handlers from.
@@ -1354,14 +1354,14 @@ uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject
     the criteria values are passed as arguments. A handler must match on all
     flags set in mask to be unblocked (i.e. the match is conjunctive).
     
-    Passing at least one of the `G_SIGNAL_MATCH_ID`, `G_SIGNAL_MATCH_CLOSURE`,
-    `G_SIGNAL_MATCH_FUNC`
-    or `G_SIGNAL_MATCH_DATA` match flags is required for successful matches.
+    Passing at least one of the [gobject.types.SignalMatchType.Id], [gobject.types.SignalMatchType.Closure],
+    [gobject.types.SignalMatchType.Func]
+    or [gobject.types.SignalMatchType.Data] match flags is required for successful matches.
     If no handlers were found, 0 is returned, the number of unblocked handlers
     otherwise. The match criteria should not apply to any handlers that are
     not currently blocked.
     
-    Support for `G_SIGNAL_MATCH_ID` was added in GLib 2.78.
+    Support for [gobject.types.SignalMatchType.Id] was added in GLib 2.78.
 
     Params:
       instance = The instance to unblock handlers from.
@@ -1514,7 +1514,7 @@ string signalName(uint signalId) nothrow
             types which are derived from this type
       signalFlags = a combination of #GSignalFlags specifying detail of when
             the default handler is to be invoked. You should at least specify
-            `G_SIGNAL_RUN_FIRST` or `G_SIGNAL_RUN_LAST`
+            [gobject.types.SignalFlags.RunFirst] or [gobject.types.SignalFlags.RunLast]
       classClosure = The closure to invoke on signal emission;
             may be null
       accumulator = the accumulator for this signal; may be null
@@ -1654,7 +1654,7 @@ void signalRemoveEmissionHook(uint signalId, gulong hookId) nothrow
     Stops a signal's current emission.
     
     This will prevent the default method from running, if the signal was
-    `G_SIGNAL_RUN_LAST` and you connected normally (i.e. without the "after"
+    [gobject.types.SignalFlags.RunLast] and you connected normally (i.e. without the "after"
     flag).
     
     Prints a warning if used on a signal which isn't being emitted.

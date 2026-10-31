@@ -54,7 +54,7 @@ class MatchInfo : gobject.boxed.Boxed
       match done with string against regex and have the same syntax used by
       [glib.regex.Regex.replace].
       
-      The string_to_expand must be UTF-8 encoded even if `G_REGEX_RAW` was
+      The string_to_expand must be UTF-8 encoded even if [glib.types.RegexCompileFlags.Raw] was
       passed to [glib.regex.Regex.new_].
       
       The backreferences are extracted from the string passed to the match
@@ -297,19 +297,19 @@ class MatchInfo : gobject.boxed.Boxed
       able to raise an error as soon as a mistake is made.
       
       GRegex supports the concept of partial matching by means of the
-      `G_REGEX_MATCH_PARTIAL_SOFT` and `G_REGEX_MATCH_PARTIAL_HARD` flags.
+      [glib.types.RegexMatchFlags.PartialSoft] and [glib.types.RegexMatchFlags.PartialHard] flags.
       When they are used, the return code for
       [glib.regex.Regex.match] or [glib.regex.Regex.matchFull] is, as usual, true
       for a complete match, false otherwise. But, when these functions
       return false, you can check if the match was partial calling
       [glib.match_info.MatchInfo.isPartialMatch].
       
-      The difference between `G_REGEX_MATCH_PARTIAL_SOFT` and
-      `G_REGEX_MATCH_PARTIAL_HARD` is that when a partial match is encountered
-      with `G_REGEX_MATCH_PARTIAL_SOFT`, matching continues to search for a
-      possible complete match, while with `G_REGEX_MATCH_PARTIAL_HARD` matching
+      The difference between [glib.types.RegexMatchFlags.PartialSoft] and
+      [glib.types.RegexMatchFlags.PartialHard] is that when a partial match is encountered
+      with [glib.types.RegexMatchFlags.PartialSoft], matching continues to search for a
+      possible complete match, while with [glib.types.RegexMatchFlags.PartialHard] matching
       stops at the partial match.
-      When both `G_REGEX_MATCH_PARTIAL_SOFT` and `G_REGEX_MATCH_PARTIAL_HARD`
+      When both [glib.types.RegexMatchFlags.PartialSoft] and [glib.types.RegexMatchFlags.PartialHard]
       are set, the latter takes precedence.
       
       There were formerly some restrictions on the pattern for partial matching.

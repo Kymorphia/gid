@@ -997,9 +997,9 @@ class ObjectWrap
         Note that getting this signal doesn’t itself guarantee that the value of
         the property has actually changed. When it is emitted is determined by the
         derived GObject class. If the implementor did not create the property with
-        `G_PARAM_EXPLICIT_NOTIFY`, then any call to [gobject.object.ObjectWrap.setProperty] results
+        [gobject.types.ParamFlags.ExplicitNotify], then any call to [gobject.object.ObjectWrap.setProperty] results
         in ::notify being emitted, even if the new value is the same as the old.
-        If they did pass `G_PARAM_EXPLICIT_NOTIFY`, then this signal is emitted only
+        If they did pass [gobject.types.ParamFlags.ExplicitNotify], then this signal is emitted only
         when they explicitly call [gobject.object.ObjectWrap.notify] or [gobject.object.ObjectWrap.notifyByPspec],
         and common practice is to do that only when the value has actually changed.
         

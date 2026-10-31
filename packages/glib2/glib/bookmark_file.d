@@ -170,7 +170,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the time the bookmark for uri was added to bookmark
       
       In the event the URI cannot be found, -1 is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -195,7 +195,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the time the bookmark for uri was added to bookmark
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -222,10 +222,10 @@ class BookmarkFile : gobject.boxed.Boxed
       The string returned in app_exec must be freed.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.  In the
+      error is set to [glib.types.BookmarkFileError.UriNotFound].  In the
       event that no application with name app_name has registered a bookmark
       for uri,  false is returned and error is set to
-      `G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED`. In the event that unquoting
+      [glib.types.BookmarkFileError.AppNotRegistered]. In the event that unquoting
       the command line fails, an error of the `G_SHELL_ERROR` domain is
       set and false is returned.
   
@@ -263,10 +263,10 @@ class BookmarkFile : gobject.boxed.Boxed
       The string returned in app_exec must be freed.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.  In the
+      error is set to [glib.types.BookmarkFileError.UriNotFound].  In the
       event that no application with name app_name has registered a bookmark
       for uri,  false is returned and error is set to
-      `G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED`. In the event that unquoting
+      [glib.types.BookmarkFileError.AppNotRegistered]. In the event that unquoting
       the command line fails, an error of the `G_SHELL_ERROR` domain is
       set and false is returned.
   
@@ -301,7 +301,7 @@ class BookmarkFile : gobject.boxed.Boxed
       bookmark for uri.
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -334,7 +334,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Retrieves the description of the bookmark for uri.
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -358,7 +358,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Retrieves the list of group names of the bookmark for uri.
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
       
       The returned array is null terminated, so length may optionally
       be null.
@@ -394,7 +394,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the icon of the bookmark for uri.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -423,9 +423,9 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets whether the private flag of the bookmark for uri is set.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.  In the
+      error is set to [glib.types.BookmarkFileError.UriNotFound].  In the
       event that the private flag cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_INVALID_VALUE`.
+      error is set to [glib.types.BookmarkFileError.InvalidValue].
   
       Params:
         uri = a valid URI
@@ -447,9 +447,9 @@ class BookmarkFile : gobject.boxed.Boxed
       Retrieves the MIME type of the resource pointed by uri.
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.  In the
+      error is set to [glib.types.BookmarkFileError.UriNotFound].  In the
       event that the MIME type cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_INVALID_VALUE`.
+      error is set to [glib.types.BookmarkFileError.InvalidValue].
   
       Params:
         uri = a valid URI
@@ -473,7 +473,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the time when the bookmark for uri was last modified.
       
       In the event the URI cannot be found, -1 is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -498,7 +498,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the time when the bookmark for uri was last modified.
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -534,7 +534,7 @@ class BookmarkFile : gobject.boxed.Boxed
       If uri is null, the title of bookmark is returned.
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI or null
@@ -582,7 +582,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the time the bookmark for uri was last visited.
       
       In the event the URI cannot be found, -1 is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -607,7 +607,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the time the bookmark for uri was last visited.
       
       In the event the URI cannot be found, null is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -631,7 +631,7 @@ class BookmarkFile : gobject.boxed.Boxed
       registered by application name.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -656,7 +656,7 @@ class BookmarkFile : gobject.boxed.Boxed
       the bookmark for uri belongs to.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         uri = a valid URI
@@ -772,7 +772,7 @@ class BookmarkFile : gobject.boxed.Boxed
       null, then the bookmark is removed.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
   
       Params:
         oldUri = a valid URI
@@ -797,10 +797,10 @@ class BookmarkFile : gobject.boxed.Boxed
       that have registered a bookmark for uri inside bookmark.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
       In the event that no application with name app_name has registered
       a bookmark for uri,  false is returned and error is set to
-      `G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED`.
+      [glib.types.BookmarkFileError.AppNotRegistered].
   
       Params:
         uri = a valid URI
@@ -825,9 +825,9 @@ class BookmarkFile : gobject.boxed.Boxed
       for uri belongs to.
       
       In the event the URI cannot be found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`.
+      error is set to [glib.types.BookmarkFileError.UriNotFound].
       In the event no group was defined, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_INVALID_VALUE`.
+      error is set to [glib.types.BookmarkFileError.InvalidValue].
   
       Params:
         uri = a valid URI
@@ -923,10 +923,10 @@ class BookmarkFile : gobject.boxed.Boxed
       
       If you try to remove an application by setting its registration count to
       zero, and no bookmark for uri is found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`; similarly,
+      error is set to [glib.types.BookmarkFileError.UriNotFound]; similarly,
       in the event that no application name has registered a bookmark
       for uri,  false is returned and error is set to
-      `G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED`.  Otherwise, if no bookmark
+      [glib.types.BookmarkFileError.AppNotRegistered].  Otherwise, if no bookmark
       for uri is found, one is created.
   
       Params:
@@ -978,10 +978,10 @@ class BookmarkFile : gobject.boxed.Boxed
       
       If you try to remove an application by setting its registration count to
       zero, and no bookmark for uri is found, false is returned and
-      error is set to `G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND`; similarly,
+      error is set to [glib.types.BookmarkFileError.UriNotFound]; similarly,
       in the event that no application name has registered a bookmark
       for uri,  false is returned and error is set to
-      `G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED`.  Otherwise, if no bookmark
+      [glib.types.BookmarkFileError.AppNotRegistered].  Otherwise, if no bookmark
       for uri is found, one is created.
   
       Params:

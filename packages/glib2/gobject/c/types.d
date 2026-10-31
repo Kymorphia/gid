@@ -110,7 +110,7 @@ enum GParamFlags : uint
   Writable = 2,
 
   /**
-      alias for `G_PARAM_READABLE` | `G_PARAM_WRITABLE`
+      alias for [gobject.types.ParamFlags.Readable] | [gobject.types.ParamFlags.Writable]
   */
   Readwrite = 3,
 
@@ -1749,9 +1749,9 @@ struct GSignalInvocationHint
 
   /**
       The stage the signal emission is currently in, this
-       field will contain one of `G_SIGNAL_RUN_FIRST`,
-       `G_SIGNAL_RUN_LAST` or `G_SIGNAL_RUN_CLEANUP` and `G_SIGNAL_ACCUMULATOR_FIRST_RUN`.
-       `G_SIGNAL_ACCUMULATOR_FIRST_RUN` is only set for the first run of the accumulator
+       field will contain one of [gobject.types.SignalFlags.RunFirst],
+       [gobject.types.SignalFlags.RunLast] or [gobject.types.SignalFlags.RunCleanup] and [gobject.types.SignalFlags.AccumulatorFirstRun].
+       [gobject.types.SignalFlags.AccumulatorFirstRun] is only set for the first run of the accumulator
        function for a signal emission.
   */
   GSignalFlags runType;

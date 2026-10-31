@@ -74,8 +74,8 @@ class Hmac : gobject.boxed.Boxed
       will be closed and it won't be possible to call [glib.hmac.Hmac.update]
       on it anymore.
       
-      Support for digests of type `G_CHECKSUM_SHA512` has been added in GLib 2.42.
-      Support for `G_CHECKSUM_SHA384` was added in GLib 2.52.
+      Support for digests of type [glib.types.ChecksumType.Sha512] has been added in GLib 2.42.
+      Support for [glib.types.ChecksumType.Sha384] was added in GLib 2.52.
   
       Params:
         digestType = the desired type of digest

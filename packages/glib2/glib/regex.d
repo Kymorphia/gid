@@ -19,7 +19,7 @@ import gobject.boxed;
     [PCRE documentation](man:pcrepattern(3)) for the syntax definition.
     
     Some functions accept a @start_position argument, setting it differs
-    from just passing over a shortened string and setting `G_REGEX_MATCH_NOTBOL`
+    from just passing over a shortened string and setting [glib.types.RegexMatchFlags.Notbol]
     in the case of a pattern that begins with any kind of lookbehind assertion.
     For example, consider the pattern "\Biss\B" which finds occurrences of "iss"
     in the middle of words. ("\B" matches only if the current position in the
@@ -31,11 +31,11 @@ import gobject.boxed;
     it is able to look behind the starting point to discover that it is
     preceded by a letter.
     
-    Note that, unless you set the `G_REGEX_RAW` flag, all the strings passed
+    Note that, unless you set the [glib.types.RegexCompileFlags.Raw] flag, all the strings passed
     to these functions must be encoded in UTF-8. The lengths and the positions
     inside the strings are in bytes and not in characters, so, for instance,
     "\xc3\xa0" (i.e. "à") is two bytes long but it is treated as a
-    single character. If you set `G_REGEX_RAW` the strings can be non-valid
+    single character. If you set [glib.types.RegexCompileFlags.Raw] the strings can be non-valid
     UTF-8 strings and a byte is treated as a character, so "\xc3\xa0" is two
     bytes and two characters long.
     
@@ -50,11 +50,11 @@ import gobject.boxed;
     The behaviour of the dot, circumflex, and dollar metacharacters are
     affected by newline characters, the default is to recognize any newline
     character (the same characters recognized by "\R"). This can be changed
-    with `G_REGEX_NEWLINE_CR`, `G_REGEX_NEWLINE_LF` and `G_REGEX_NEWLINE_CRLF`
-    compile options, and with `G_REGEX_MATCH_NEWLINE_ANY`,
-    `G_REGEX_MATCH_NEWLINE_CR`, `G_REGEX_MATCH_NEWLINE_LF` and
-    `G_REGEX_MATCH_NEWLINE_CRLF` match options. These settings are also
-    relevant when compiling a pattern if `G_REGEX_EXTENDED` is set, and an
+    with [glib.types.RegexCompileFlags.NewlineCr], [glib.types.RegexCompileFlags.NewlineLf] and [glib.types.RegexCompileFlags.NewlineCrlf]
+    compile options, and with [glib.types.RegexMatchFlags.NewlineAny],
+    [glib.types.RegexMatchFlags.NewlineCr], [glib.types.RegexMatchFlags.NewlineLf] and
+    [glib.types.RegexMatchFlags.NewlineCrlf] match options. These settings are also
+    relevant when compiling a pattern if [glib.types.RegexCompileFlags.Extended] is set, and an
     unescaped "#" outside a character class is encountered. This indicates
     a comment that lasts until after the next newline.
     
@@ -234,7 +234,7 @@ class Regex : gobject.boxed.Boxed
       when the regex structure was created, letting you have more
       flexibility in reusing #GRegex structures.
       
-      Unless `G_REGEX_RAW` is specified in the options, string must be valid UTF-8.
+      Unless [glib.types.RegexCompileFlags.Raw] is specified in the options, string must be valid UTF-8.
       
       A #GMatchInfo structure, used to get information on the match,
       is stored in match_info if not null. Note that if match_info
@@ -347,10 +347,10 @@ class Regex : gobject.boxed.Boxed
       is not able to capture substrings, so backreferences do not work.
       
       Setting start_position differs from just passing over a shortened
-      string and setting `G_REGEX_MATCH_NOTBOL` in the case of a pattern
+      string and setting [glib.types.RegexMatchFlags.Notbol] in the case of a pattern
       that begins with any kind of lookbehind assertion, such as "\b".
       
-      Unless `G_REGEX_RAW` is specified in the options, string must be valid UTF-8.
+      Unless [glib.types.RegexCompileFlags.Raw] is specified in the options, string must be valid UTF-8.
       
       A #GMatchInfo structure, used to get information on the match, is
       stored in match_info if not null. Note that if match_info is
@@ -396,10 +396,10 @@ class Regex : gobject.boxed.Boxed
       flexibility in reusing #GRegex structures.
       
       Setting start_position differs from just passing over a shortened
-      string and setting `G_REGEX_MATCH_NOTBOL` in the case of a pattern
+      string and setting [glib.types.RegexMatchFlags.Notbol] in the case of a pattern
       that begins with any kind of lookbehind assertion, such as "\b".
       
-      Unless `G_REGEX_RAW` is specified in the options, string must be valid UTF-8.
+      Unless [glib.types.RegexCompileFlags.Raw] is specified in the options, string must be valid UTF-8.
       
       A #GMatchInfo structure, used to get information on the match, is
       stored in match_info if not null. Note that if match_info is
@@ -489,12 +489,12 @@ class Regex : gobject.boxed.Boxed
       
       If you do not need to use backreferences use [glib.regex.Regex.replaceLiteral].
       
-      The replacement string must be UTF-8 encoded even if `G_REGEX_RAW` was
+      The replacement string must be UTF-8 encoded even if [glib.types.RegexCompileFlags.Raw] was
       passed to [glib.regex.Regex.new_]. If you want to use not UTF-8 encoded strings
       you can use [glib.regex.Regex.replaceLiteral].
       
       Setting start_position differs from just passing over a shortened
-      string and setting `G_REGEX_MATCH_NOTBOL` in the case of a pattern that
+      string and setting [glib.types.RegexMatchFlags.Notbol] in the case of a pattern that
       begins with any kind of lookbehind assertion, such as "\b".
   
       Params:
@@ -527,7 +527,7 @@ class Regex : gobject.boxed.Boxed
       eval for that occurrence.
       
       Setting start_position differs from just passing over a shortened
-      string and setting `G_REGEX_MATCH_NOTBOL` in the case of a pattern
+      string and setting [glib.types.RegexMatchFlags.Notbol] in the case of a pattern
       that begins with any kind of lookbehind assertion, such as "\b".
       
       The following example uses [glib.regex.Regex.replaceEval] to replace multiple
@@ -618,7 +618,7 @@ class Regex : gobject.boxed.Boxed
       include backreferences use [glib.regex.Regex.replace].
       
       Setting start_position differs from just passing over a
-      shortened string and setting `G_REGEX_MATCH_NOTBOL` in the
+      shortened string and setting [glib.types.RegexMatchFlags.Notbol] in the
       case of a pattern that begins with any kind of lookbehind
       assertion, such as "\b".
   
@@ -712,7 +712,7 @@ class Regex : gobject.boxed.Boxed
       "a", "b" and "c".
       
       Setting start_position differs from just passing over a shortened
-      string and setting `G_REGEX_MATCH_NOTBOL` in the case of a pattern
+      string and setting [glib.types.RegexMatchFlags.Notbol] in the case of a pattern
       that begins with any kind of lookbehind assertion, such as "\b".
   
       Params:

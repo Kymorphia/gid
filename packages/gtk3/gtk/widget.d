@@ -1296,7 +1296,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Installs an accelerator for this widget in accel_group that causes
       accel_signal to be emitted if the accelerator is activated.
       The accel_group needs to be added to the widget’s toplevel via
-      [gtk.window.Window.addAccelGroup], and the signal must be of type `G_SIGNAL_ACTION`.
+      [gtk.window.Window.addAccelGroup], and the signal must be of type [gobject.types.SignalFlags.Action].
       Accelerators added through this function are not user changeable during
       runtime. If you want to support accelerators that can be changed by the
       user, use [gtk.accel_map.AccelMap.addEntry] and [gtk.widget.Widget.setAccelPath] or

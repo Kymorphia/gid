@@ -6356,9 +6356,9 @@ struct GtkBuildableParser
     `func@GObject.signal_connect_object` or `func@GObject.signal_connect_data`
     functions:
     
-    - “after” matches the `G_CONNECT_AFTER` flag, and will ensure that the
+    - “after” matches the [gobject.types.ConnectFlags.After] flag, and will ensure that the
       handler is called after the default class closure for the signal
-    - “swapped” matches the `G_CONNECT_SWAPPED` flag, and will swap the
+    - “swapped” matches the [gobject.types.ConnectFlags.Swapped] flag, and will swap the
       instance and closure arguments when invoking the signal handler
     - “object” will bind the signal handler to the lifetime of the object
       referenced by the attribute
@@ -16398,7 +16398,7 @@ struct GtkShortcutsWindow;
     A [gtk.shortcut.Shortcut]Action that emits a signal.
     
     Signals that are used in this way are referred to as keybinding signals,
-    and they are expected to be defined with the `G_SIGNAL_ACTION` flag.
+    and they are expected to be defined with the [gobject.types.SignalFlags.Action] flag.
 */
 struct GtkSignalAction;
 

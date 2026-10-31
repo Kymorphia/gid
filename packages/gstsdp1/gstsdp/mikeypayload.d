@@ -114,7 +114,7 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Get the number of sub payloads of payload. payload should be of type
-      `GST_MIKEY_PT_KEMAC`.
+      [gstsdp.types.MIKEYPayloadType.Kemac].
       Returns: the number of sub payloads in payload
   */
   uint kemacGetNSub() nothrow
@@ -126,7 +126,7 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Get the sub payload of payload at idx. payload should be of type
-      `GST_MIKEY_PT_KEMAC`.
+      [gstsdp.types.MIKEYPayloadType.Kemac].
   
       Params:
         idx = an index
@@ -155,7 +155,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Set the KEMAC parameters. payload should point to a `GST_MIKEY_PT_KEMAC`
+      Set the KEMAC parameters. payload should point to a [gstsdp.types.MIKEYPayloadType.Kemac]
       payload.
   
       Params:
@@ -171,7 +171,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Set the key validity period in the `GST_MIKEY_PT_KEY_DATA` payload.
+      Set the key validity period in the [gstsdp.types.MIKEYPayloadType.KeyData] payload.
   
       Params:
         vfData = the Valid From data
@@ -197,7 +197,7 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set key_len bytes of key_data of type key_type as the key for the
-      `GST_MIKEY_PT_KEY_DATA` payload.
+      [gstsdp.types.MIKEYPayloadType.KeyData] payload.
   
       Params:
         keyType = a #GstMIKEYKeyDataType
@@ -237,7 +237,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Set the SPI/MKI validity in the `GST_MIKEY_PT_KEY_DATA` payload.
+      Set the SPI/MKI validity in the [gstsdp.types.MIKEYPayloadType.KeyData] payload.
   
       Params:
         spiData = the SPI/MKI data
@@ -257,7 +257,7 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the PKE values in payload. payload must be of type
-      `GST_MIKEY_PT_PKE`.
+      [gstsdp.types.MIKEYPayloadType.Pke].
   
       Params:
         C = envelope key cache indicator
@@ -277,7 +277,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Set the random values in a `GST_MIKEY_PT_RAND` payload.
+      Set the random values in a [gstsdp.types.MIKEYPayloadType.Rand] payload.
   
       Params:
         rand = random values
@@ -296,7 +296,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Add a new parameter to the `GST_MIKEY_PT_SP` payload with type, len
+      Add a new parameter to the [gstsdp.types.MIKEYPayloadType.Sp] payload with type, len
       and val.
   
       Params:
@@ -317,7 +317,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Get the number of security policy parameters in a `GST_MIKEY_PT_SP`
+      Get the number of security policy parameters in a [gstsdp.types.MIKEYPayloadType.Sp]
       payload.
       Returns: the number of parameters in payload
   */
@@ -329,7 +329,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Get the Security Policy parameter in a `GST_MIKEY_PT_SP` payload
+      Get the Security Policy parameter in a [gstsdp.types.MIKEYPayloadType.Sp] payload
       at idx.
   
       Params:
@@ -345,7 +345,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   }
 
   /**
-      Remove the Security Policy parameters from a `GST_MIKEY_PT_SP`
+      Remove the Security Policy parameters from a [gstsdp.types.MIKEYPayloadType.Sp]
       payload at idx.
   
       Params:

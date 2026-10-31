@@ -196,9 +196,9 @@ class KeyFile : gobject.boxed.Boxed
       boolean.
       
       If key cannot be found then false is returned and error is set
-      to `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. Likewise, if the value
+      to [glib.types.KeyFileError.KeyNotFound]. Likewise, if the value
       associated with key cannot be interpreted as a boolean then false
-      is returned and error is set to `G_KEY_FILE_ERROR_INVALID_VALUE`.
+      is returned and error is set to [glib.types.KeyFileError.InvalidValue].
   
       Params:
         groupName = a group name
@@ -224,9 +224,9 @@ class KeyFile : gobject.boxed.Boxed
       booleans.
       
       If key cannot be found then null is returned and error is set to
-      `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. Likewise, if the values associated
+      [glib.types.KeyFileError.KeyNotFound]. Likewise, if the values associated
       with key cannot be interpreted as booleans then null is returned
-      and error is set to `G_KEY_FILE_ERROR_INVALID_VALUE`.
+      and error is set to [glib.types.KeyFileError.InvalidValue].
   
       Params:
         groupName = a group name
@@ -292,9 +292,9 @@ class KeyFile : gobject.boxed.Boxed
       double. If group_name is null, the start_group is used.
       
       If key cannot be found then 0.0 is returned and error is set to
-      `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. Likewise, if the value associated
+      [glib.types.KeyFileError.KeyNotFound]. Likewise, if the value associated
       with key cannot be interpreted as a double then 0.0 is returned
-      and error is set to `G_KEY_FILE_ERROR_INVALID_VALUE`.
+      and error is set to [glib.types.KeyFileError.InvalidValue].
   
       Params:
         groupName = a group name
@@ -320,9 +320,9 @@ class KeyFile : gobject.boxed.Boxed
       doubles.
       
       If key cannot be found then null is returned and error is set to
-      `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. Likewise, if the values associated
+      [glib.types.KeyFileError.KeyNotFound]. Likewise, if the values associated
       with key cannot be interpreted as doubles then null is returned
-      and error is set to `G_KEY_FILE_ERROR_INVALID_VALUE`.
+      and error is set to [glib.types.KeyFileError.InvalidValue].
   
       Params:
         groupName = a group name
@@ -405,10 +405,10 @@ class KeyFile : gobject.boxed.Boxed
       integer.
       
       If key cannot be found then 0 is returned and error is set to
-      `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. Likewise, if the value associated
+      [glib.types.KeyFileError.KeyNotFound]. Likewise, if the value associated
       with key cannot be interpreted as an integer, or is out of range
       for a #gint, then 0 is returned
-      and error is set to `G_KEY_FILE_ERROR_INVALID_VALUE`.
+      and error is set to [glib.types.KeyFileError.InvalidValue].
   
       Params:
         groupName = a group name
@@ -434,10 +434,10 @@ class KeyFile : gobject.boxed.Boxed
       integers.
       
       If key cannot be found then null is returned and error is set to
-      `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. Likewise, if the values associated
+      [glib.types.KeyFileError.KeyNotFound]. Likewise, if the values associated
       with key cannot be interpreted as integers, or are out of range for
       #gint, then null is returned
-      and error is set to `G_KEY_FILE_ERROR_INVALID_VALUE`.
+      and error is set to [glib.types.KeyFileError.InvalidValue].
   
       Params:
         groupName = a group name
@@ -472,7 +472,7 @@ class KeyFile : gobject.boxed.Boxed
       returned keys will be null-terminated, so length may
       optionally be null. In the event that the group_name cannot
       be found, null is returned and error is set to
-      `G_KEY_FILE_ERROR_GROUP_NOT_FOUND`.
+      [glib.types.KeyFileError.GroupNotFound].
   
       Params:
         groupName = a group name
@@ -537,10 +537,10 @@ class KeyFile : gobject.boxed.Boxed
       
       If locale is to be non-null, or if the current locale will change over
       the lifetime of the #GKeyFile, it must be loaded with
-      `G_KEY_FILE_KEEP_TRANSLATIONS` in order to load strings for all locales.
+      [glib.types.KeyFileFlags.KeepTranslations] in order to load strings for all locales.
       
       If key cannot be found then null is returned and error is set
-      to `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. If the value associated
+      to [glib.types.KeyFileError.KeyNotFound]. If the value associated
       with key cannot be interpreted or no suitable translation can
       be found then the untranslated value is returned.
   
@@ -573,10 +573,10 @@ class KeyFile : gobject.boxed.Boxed
       
       If locale is to be non-null, or if the current locale will change over
       the lifetime of the #GKeyFile, it must be loaded with
-      `G_KEY_FILE_KEEP_TRANSLATIONS` in order to load strings for all locales.
+      [glib.types.KeyFileFlags.KeepTranslations] in order to load strings for all locales.
       
       If key cannot be found then null is returned and error is set
-      to `G_KEY_FILE_ERROR_KEY_NOT_FOUND`. If the values associated
+      to [glib.types.KeyFileError.KeyNotFound]. If the values associated
       with key cannot be interpreted or no suitable translations
       can be found then the untranslated values are returned. The
       returned array is null-terminated, so length may optionally
@@ -632,9 +632,9 @@ class KeyFile : gobject.boxed.Boxed
       like \s.
       
       In the event the key cannot be found, null is returned and
-      error is set to `G_KEY_FILE_ERROR_KEY_NOT_FOUND`.  In the
+      error is set to [glib.types.KeyFileError.KeyNotFound].  In the
       event that the group_name cannot be found, null is returned
-      and error is set to `G_KEY_FILE_ERROR_GROUP_NOT_FOUND`.
+      and error is set to [glib.types.KeyFileError.GroupNotFound].
   
       Params:
         groupName = a group name
@@ -660,9 +660,9 @@ class KeyFile : gobject.boxed.Boxed
       Returns the values associated with key under group_name.
       
       In the event the key cannot be found, null is returned and
-      error is set to `G_KEY_FILE_ERROR_KEY_NOT_FOUND`.  In the
+      error is set to [glib.types.KeyFileError.KeyNotFound].  In the
       event that the group_name cannot be found, null is returned
-      and error is set to `G_KEY_FILE_ERROR_GROUP_NOT_FOUND`.
+      and error is set to [glib.types.KeyFileError.GroupNotFound].
   
       Params:
         groupName = a group name
@@ -722,9 +722,9 @@ class KeyFile : gobject.boxed.Boxed
       Use [glib.key_file.KeyFile.getString] to retrieve an unescaped UTF-8 string.
       
       In the event the key cannot be found, null is returned and
-      error is set to `G_KEY_FILE_ERROR_KEY_NOT_FOUND`.  In the
+      error is set to [glib.types.KeyFileError.KeyNotFound].  In the
       event that the group_name cannot be found, null is returned
-      and error is set to `G_KEY_FILE_ERROR_GROUP_NOT_FOUND`.
+      and error is set to [glib.types.KeyFileError.GroupNotFound].
   
       Params:
         groupName = a group name
@@ -841,7 +841,7 @@ class KeyFile : gobject.boxed.Boxed
       returns the file's full path in full_path.
       
       If the file could not be found in any of the search_dirs,
-      `G_KEY_FILE_ERROR_NOT_FOUND` is returned. If
+      [glib.types.KeyFileError.NotFound] is returned. If
       the file is found but the OS returns an error when opening or reading the
       file, a `G_FILE_ERROR` is returned. If there is a problem parsing the file, a
       `G_KEY_FILE_ERROR` is returned.
@@ -881,8 +881,8 @@ class KeyFile : gobject.boxed.Boxed
       `G_FILE_ERROR` is returned. If there is a problem parsing the file, a
       `G_KEY_FILE_ERROR` is returned.
       
-      This function will never return a `G_KEY_FILE_ERROR_NOT_FOUND` error. If the
-      file is not found, `G_FILE_ERROR_NOENT` is returned.
+      This function will never return a [glib.types.KeyFileError.NotFound] error. If the
+      file is not found, [glib.types.FileError.Noent] is returned.
   
       Params:
         file = the path of a filename to load, in the GLib filename encoding

@@ -1684,7 +1684,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) 
     exits, at the priority priority.
     
     If you obtain pid from [glib.global.spawnAsync] or [glib.global.spawnAsyncWithPipes]
-    you will need to pass `G_SPAWN_DO_NOT_REAP_CHILD` as flag to
+    you will need to pass [glib.types.SpawnFlags.DoNotReapChild] as flag to
     the spawn function for the child watching to work.
     
     In many programs, you will want to call [glib.global.spawnCheckWaitStatus]
@@ -1744,7 +1744,7 @@ uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc f
     executed.
     
     Note that child watch sources can only be used in conjunction with
-    `g_spawn...` when the `G_SPAWN_DO_NOT_REAP_CHILD` flag is used.
+    `g_spawn...` when the [glib.types.SpawnFlags.DoNotReapChild] flag is used.
     
     Note that on platforms where #GPid must be explicitly closed
     (see [glib.global.spawnClosePid]) pid must not be closed while the
@@ -2078,7 +2078,7 @@ string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, str
                         Even if the conversion was successful, this may be
                         less than len if there were partial characters
                         at the end of the input. If the error
-                        `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
+                        [glib.types.ConvertError.IllegalSequence] occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
     Returns: If the conversion was successful, a newly allocated buffer
@@ -2580,7 +2580,7 @@ int fdwalkSetCloexec(int lowfd) nothrow
     Gets a #GFileError constant based on the passed-in err_no.
     
     For example, if you pass in `EEXIST` this function returns
-    `G_FILE_ERROR_EXIST`. Unlike `errno` values, you can portably
+    [glib.types.FileError.Exist]. Unlike `errno` values, you can portably
     assume that all #GFileError values will exist.
     
     Normally a #GFileError value goes into a #GError returned
@@ -2767,9 +2767,9 @@ bool fileSetContents(string filename, ubyte[] contents)
     As this function performs file I/O, it is recommended to not call it anywhere
     where blocking would cause problems, such as in the main loop of a graphical
     application. In particular, if flags has any value other than
-    `G_FILE_SET_CONTENTS_NONE` then this function may call `fsync()`.
+    [glib.types.FileSetContentsFlags.None] then this function may call `fsync()`.
     
-    If `G_FILE_SET_CONTENTS_CONSISTENT` is set in flags, the operation is atomic
+    If [glib.types.FileSetContentsFlags.Consistent] is set in flags, the operation is atomic
     in the sense that it is first written to a temporary file which is then
     renamed to the final name.
     
@@ -2782,7 +2782,7 @@ bool fileSetContents(string filename, ubyte[] contents)
     
     - On UNIX, if filename already exists and is non-empty, and if the system
       supports it (via a journalling filesystem or equivalent), and if
-      `G_FILE_SET_CONTENTS_CONSISTENT` is set in flags, the `fsync()` call (or
+      [glib.types.FileSetContentsFlags.Consistent] is set in flags, the `fsync()` call (or
       equivalent) will be used to ensure atomic replacement: filename
       will contain either its old contents or contents, even in the face of
       system power loss, the disk being unsafely removed, etc.
@@ -2790,8 +2790,8 @@ bool fileSetContents(string filename, ubyte[] contents)
     - On UNIX, if filename does not already exist or is empty, there is a
       possibility that system power loss etc. after calling this function will
       leave filename empty or full of NUL bytes, depending on the underlying
-      filesystem, unless `G_FILE_SET_CONTENTS_DURABLE` and
-      `G_FILE_SET_CONTENTS_CONSISTENT` are set in flags.
+      filesystem, unless [glib.types.FileSetContentsFlags.Durable] and
+      [glib.types.FileSetContentsFlags.Consistent] are set in flags.
     
     - On Windows renaming a file will not remove an existing file with the
       new name, so on Windows there is a race condition between the existing
@@ -2845,19 +2845,19 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
     the current set of available tests, there's no point passing in
     more than one test at a time.
     
-    Apart from `G_FILE_TEST_IS_SYMLINK` all tests follow symbolic links,
+    Apart from [glib.types.FileTest.IsSymlink] all tests follow symbolic links,
     so for a symbolic link to a regular file [glib.global.fileTest] will return
-    true for both `G_FILE_TEST_IS_SYMLINK` and `G_FILE_TEST_IS_REGULAR`.
+    true for both [glib.types.FileTest.IsSymlink] and [glib.types.FileTest.IsRegular].
     
     Note, that for a dangling symbolic link [glib.global.fileTest] will return
-    true for `G_FILE_TEST_IS_SYMLINK` and false for all other flags.
+    true for [glib.types.FileTest.IsSymlink] and false for all other flags.
     
     You should never use [glib.global.fileTest] to test whether it is safe
     to perform an operation, because there is always the possibility
     of the condition changing before you actually perform the operation,
     see [TOCTOU](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use).
     
-    For example, you might think you could use `G_FILE_TEST_IS_SYMLINK`
+    For example, you might think you could use [glib.types.FileTest.IsSymlink]
     to know whether it is safe to write to a file without being
     tricked into writing into a different location. It doesn't work!
     
@@ -2885,16 +2885,16 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
        }
     ```
     
-    Another thing to note is that `G_FILE_TEST_EXISTS` and
-    `G_FILE_TEST_IS_EXECUTABLE` are implemented using the access()
+    Another thing to note is that [glib.types.FileTest.Exists] and
+    [glib.types.FileTest.IsExecutable] are implemented using the access()
     system call. This usually doesn't matter, but if your program
     is setuid or setgid it means that these tests will give you
     the answer for the real user ID and group ID, rather than the
     effective user ID and group ID.
     
     On Windows, there are no symlinks, so testing for
-    `G_FILE_TEST_IS_SYMLINK` will always return false. Testing for
-    `G_FILE_TEST_IS_EXECUTABLE` will just check that the file exists and
+    [glib.types.FileTest.IsSymlink] will always return false. Testing for
+    [glib.types.FileTest.IsExecutable] will just check that the file exists and
     its name indicates that it is executable, checking for well-known
     extensions and those listed in the `PATHEXT` environment variable.
 
@@ -3017,9 +3017,9 @@ string filenameFromUri(string uri, out string hostname)
     
     The input string shall not contain nul characters even if the len
     argument is positive. A nul character found inside the string will result
-    in error `G_CONVERT_ERROR_ILLEGAL_SEQUENCE`. If the filename encoding is
+    in error [glib.types.ConvertError.IllegalSequence]. If the filename encoding is
     not UTF-8 and the conversion output contains a nul character, the error
-    `G_CONVERT_ERROR_EMBEDDED_NUL` is set and the function returns null.
+    [glib.types.ConvertError.EmbeddedNul] is set and the function returns null.
 
     Params:
       utf8string = a UTF-8 encoded string.
@@ -3028,7 +3028,7 @@ string filenameFromUri(string uri, out string hostname)
                         Even if the conversion was successful, this may be
                         less than len if there were partial characters
                         at the end of the input. If the error
-                        `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
+                        [glib.types.ConvertError.IllegalSequence] occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
     Returns: The converted string, or null on an error.
@@ -3091,9 +3091,9 @@ string filenameToUri(string filename, string hostname = null)
     
     The input string shall not contain nul characters even if the len
     argument is positive. A nul character found inside the string will result
-    in error `G_CONVERT_ERROR_ILLEGAL_SEQUENCE`.
+    in error [glib.types.ConvertError.IllegalSequence].
     If the source encoding is not UTF-8 and the conversion output contains a
-    nul character, the error `G_CONVERT_ERROR_EMBEDDED_NUL` is set and the
+    nul character, the error [glib.types.ConvertError.EmbeddedNul] is set and the
     function returns null. Use [glib.global.convert] to produce output that
     may contain embedded nul characters.
 
@@ -3104,7 +3104,7 @@ string filenameToUri(string filename, string hostname = null)
                         Even if the conversion was successful, this may be
                         less than len if there were partial characters
                         at the end of the input. If the error
-                        `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
+                        [glib.types.ConvertError.IllegalSequence] occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
     Returns: The converted string, or null on an error.
@@ -4119,7 +4119,7 @@ string getUserRuntimeDir() nothrow
     Returns the full path of a special directory using its logical id.
     
     On UNIX this is done using the XDG special user directories.
-    For compatibility with existing practise, `G_USER_DIRECTORY_DESKTOP`
+    For compatibility with existing practise, [glib.types.UserDirectory.DirectoryDesktop]
     falls back to `$HOME/Desktop` when XDG special user directories have
     not been set up.
     
@@ -4615,7 +4615,7 @@ string[] listenv() nothrow
     
     The input string shall not contain nul characters even if the len
     argument is positive. A nul character found inside the string will result
-    in error `G_CONVERT_ERROR_ILLEGAL_SEQUENCE`. Use [glib.global.convert] to convert
+    in error [glib.types.ConvertError.IllegalSequence]. Use [glib.global.convert] to convert
     input that may contain embedded nul characters.
 
     Params:
@@ -4625,7 +4625,7 @@ string[] listenv() nothrow
                         Even if the conversion was successful, this may be
                         less than len if there were partial characters
                         at the end of the input. If the error
-                        `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
+                        [glib.types.ConvertError.IllegalSequence] occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
     Returns: A newly-allocated buffer containing the converted string,
@@ -4661,10 +4661,10 @@ ubyte[] localeFromUtf8(ubyte[] utf8string, out size_t bytesRead)
     system) in the [current locale][setlocale] into a UTF-8 string.
     
     If the source encoding is not UTF-8 and the conversion output contains a
-    nul character, the error `G_CONVERT_ERROR_EMBEDDED_NUL` is set and the
+    nul character, the error [glib.types.ConvertError.EmbeddedNul] is set and the
     function returns null.
     If the source encoding is UTF-8, an embedded nul character is treated with
-    the `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` error for backward compatibility with
+    the [glib.types.ConvertError.IllegalSequence] error for backward compatibility with
     earlier versions of this library. Use [glib.global.convert] to produce output that
     may contain embedded nul characters.
 
@@ -4677,7 +4677,7 @@ ubyte[] localeFromUtf8(ubyte[] utf8string, out size_t bytesRead)
                         Even if the conversion was successful, this may be
                         less than len if there were partial characters
                         at the end of the input. If the error
-                        `G_CONVERT_ERROR_ILLEGAL_SEQUENCE` occurs, the value
+                        [glib.types.ConvertError.IllegalSequence] occurs, the value
                         stored will be the byte offset after the last valid
                         input sequence.
     Returns: The converted string, or null on an error.
@@ -6618,7 +6618,7 @@ glib.types.Quark shellErrorQuark() nothrow
     Possible errors are those from the `G_SHELL_ERROR` domain.
     
     In particular, if command_line is an empty string (or a string containing
-    only whitespace), `G_SHELL_ERROR_EMPTY_STRING` will be returned. It’s
+    only whitespace), [glib.types.ShellError.EmptyString] will be returned. It’s
     guaranteed that argvp will be a non-empty array if this function returns
     successfully.
     
@@ -7072,15 +7072,15 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     to be passed as the argument vector for the child. The first string
     in argv is of course the name of the program to execute. By default,
     the name of the program must be a full path. If flags contains the
-    `G_SPAWN_SEARCH_PATH` flag, the `PATH` environment variable is used to
+    [glib.types.SpawnFlags.SearchPath] flag, the `PATH` environment variable is used to
     search for the executable. If flags contains the
-    `G_SPAWN_SEARCH_PATH_FROM_ENVP` flag, the `PATH` variable from envp
+    [glib.types.SpawnFlags.SearchPathFromEnvp] flag, the `PATH` variable from envp
     is used to search for the executable. If both the
-    `G_SPAWN_SEARCH_PATH` and `G_SPAWN_SEARCH_PATH_FROM_ENVP` flags are
+    [glib.types.SpawnFlags.SearchPath] and [glib.types.SpawnFlags.SearchPathFromEnvp] flags are
     set, the `PATH` variable from envp takes precedence over the
     environment variable.
     
-    If the program name is not a full path and `G_SPAWN_SEARCH_PATH` flag
+    If the program name is not a full path and [glib.types.SpawnFlags.SearchPath] flag
     is not used, then the program will be run from the current directory
     (or working_directory, if specified); this might be unexpected or even
     dangerous in some cases when the current directory is world-writable.
@@ -7122,7 +7122,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     If envp is null, the child inherits its parent's environment.
     
     flags should be the bitwise OR of any flags you want to affect the
-    function's behaviour. The `G_SPAWN_DO_NOT_REAP_CHILD` means that the
+    function's behaviour. The [glib.types.SpawnFlags.DoNotReapChild] means that the
     child will not automatically be reaped; you must use a child watch
     ([glib.global.childWatchAdd]) to be notified about the death of the child process,
     otherwise it will stay around as a zombie process until this process exits.
@@ -7134,31 +7134,31 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     in child_pid). See [glib.global.childWatchAdd].
     
     Open UNIX file descriptors marked as `FD_CLOEXEC` will be automatically
-    closed in the child process. `G_SPAWN_LEAVE_DESCRIPTORS_OPEN` means that
+    closed in the child process. [glib.types.SpawnFlags.LeaveDescriptorsOpen] means that
     other open file descriptors will be inherited by the child; otherwise all
     descriptors except stdin/stdout/stderr will be closed before calling `exec()`
-    in the child. `G_SPAWN_SEARCH_PATH` means that argv[0] need not be an
+    in the child. [glib.types.SpawnFlags.SearchPath] means that argv[0] need not be an
     absolute path, it will be looked for in the `PATH` environment
-    variable. `G_SPAWN_SEARCH_PATH_FROM_ENVP` means need not be an
+    variable. [glib.types.SpawnFlags.SearchPathFromEnvp] means need not be an
     absolute path, it will be looked for in the `PATH` variable from
-    envp. If both `G_SPAWN_SEARCH_PATH` and `G_SPAWN_SEARCH_PATH_FROM_ENVP`
+    envp. If both [glib.types.SpawnFlags.SearchPath] and [glib.types.SpawnFlags.SearchPathFromEnvp]
     are used, the value from envp takes precedence over the environment.
     
-    `G_SPAWN_CHILD_INHERITS_STDIN` means that the child will inherit the parent's
+    [glib.types.SpawnFlags.ChildInheritsStdin] means that the child will inherit the parent's
     standard input (by default, the child's standard input is attached to
-    `/dev/null`). `G_SPAWN_STDIN_FROM_DEV_NULL` explicitly imposes the default
+    `/dev/null`). [glib.types.SpawnFlags.StdinFromDevNull] explicitly imposes the default
     behavior. Both flags cannot be enabled at the same time and, in both cases,
     the stdin_pipe_out argument is ignored.
     
-    `G_SPAWN_STDOUT_TO_DEV_NULL` means that the child's standard output
+    [glib.types.SpawnFlags.StdoutToDevNull] means that the child's standard output
     will be discarded (by default, it goes to the same location as the parent's
-    standard output). `G_SPAWN_CHILD_INHERITS_STDOUT` explicitly imposes the
+    standard output). [glib.types.SpawnFlags.ChildInheritsStdout] explicitly imposes the
     default behavior. Both flags cannot be enabled at the same time and, in
     both cases, the stdout_pipe_out argument is ignored.
     
-    `G_SPAWN_STDERR_TO_DEV_NULL` means that the child's standard error
+    [glib.types.SpawnFlags.StderrToDevNull] means that the child's standard error
     will be discarded (by default, it goes to the same location as the parent's
-    standard error). `G_SPAWN_CHILD_INHERITS_STDERR` explicitly imposes the
+    standard error). [glib.types.SpawnFlags.ChildInheritsStderr] explicitly imposes the
     default behavior. Both flags cannot be enabled at the same time and, in
     both cases, the stderr_pipe_out argument is ignored.
     
@@ -7177,7 +7177,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     
     source_fds is supported on Windows since 2.72.
     
-    `G_SPAWN_FILE_AND_ARGV_ZERO` means that the first element of argv is
+    [glib.types.SpawnFlags.FileAndArgvZero] means that the first element of argv is
     the file to execute, while the remaining elements are the actual
     argument vector to pass to the file. Normally [glib.global.spawnAsyncWithPipes]
     uses argv[0] as the file to execute, and passes all of argv to the child.
@@ -7198,9 +7198,9 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     If non-null, child_pid will on Unix be filled with the child's
     process ID. You can use the process ID to send signals to the child,
     or to use [glib.global.childWatchAdd] (or `waitpid()`) if you specified the
-    `G_SPAWN_DO_NOT_REAP_CHILD` flag. On Windows, child_pid will be
+    [glib.types.SpawnFlags.DoNotReapChild] flag. On Windows, child_pid will be
     filled with a handle to the child process only if you specified the
-    `G_SPAWN_DO_NOT_REAP_CHILD` flag. You can then access the child
+    [glib.types.SpawnFlags.DoNotReapChild] flag. You can then access the child
     process using the Win32 API, for example wait for its termination
     with the `WaitFor*()` functions, or examine its exit code with
     `GetExitCodeProcess()`. You should close the handle with `CloseHandle()`
@@ -7214,14 +7214,14 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     corresponding pipe won't be created.
     
     If stdin_pipe_out is null, the child's standard input is attached to
-    `/dev/null` unless `G_SPAWN_CHILD_INHERITS_STDIN` is set.
+    `/dev/null` unless [glib.types.SpawnFlags.ChildInheritsStdin] is set.
     
     If stderr_pipe_out is NULL, the child's standard error goes to the same
-    location as the parent's standard error unless `G_SPAWN_STDERR_TO_DEV_NULL`
+    location as the parent's standard error unless [glib.types.SpawnFlags.StderrToDevNull]
     is set.
     
     If stdout_pipe_out is NULL, the child's standard output goes to the same
-    location as the parent's standard output unless `G_SPAWN_STDOUT_TO_DEV_NULL`
+    location as the parent's standard output unless [glib.types.SpawnFlags.StdoutToDevNull]
     is set.
     
     error can be null to ignore errors, or non-null to report errors.
@@ -7245,9 +7245,9 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
     This optimized codepath will be used provided that the following conditions
     are met:
     
-    1. `G_SPAWN_DO_NOT_REAP_CHILD` is set
-    2. `G_SPAWN_LEAVE_DESCRIPTORS_OPEN` is set
-    3. `G_SPAWN_SEARCH_PATH_FROM_ENVP` is not set
+    1. [glib.types.SpawnFlags.DoNotReapChild] is set
+    2. [glib.types.SpawnFlags.LeaveDescriptorsOpen] is set
+    3. [glib.types.SpawnFlags.SearchPathFromEnvp] is not set
     4. working_directory is null
     5. child_setup is null
     6. The program is of a recognised binary format, or has a shebang.
@@ -7389,7 +7389,7 @@ bool spawnCheckExitStatus(int waitStatus)
     
     If the process was terminated by some means other than an exit
     status (for example if it was killed by a signal), the domain will be
-    `G_SPAWN_ERROR` and the code will be `G_SPAWN_ERROR_FAILED`.
+    `G_SPAWN_ERROR` and the code will be [glib.types.SpawnError.Failed].
     
     This function just offers convenience; you can of course also check
     the available platform via a macro such as `G_OS_UNIX`, and use
@@ -7435,8 +7435,8 @@ void spawnClosePid(glib.types.Pid pid) nothrow
     [glib.global.shellParseArgv] and passes it to [glib.global.spawnAsync].
     
     Runs a command line in the background. Unlike [glib.global.spawnAsync], the
-    `G_SPAWN_SEARCH_PATH` flag is enabled, other flags are not. Note
-    that `G_SPAWN_SEARCH_PATH` can have security implications, so
+    [glib.types.SpawnFlags.SearchPath] flag is enabled, other flags are not. Note
+    that [glib.types.SpawnFlags.SearchPath] can have security implications, so
     consider using [glib.global.spawnAsync] directly if appropriate. Possible
     errors are those from [glib.global.shellParseArgv] and [glib.global.spawnAsync].
     
@@ -7466,8 +7466,8 @@ bool spawnCommandLineAsync(string commandLine)
     
     The command_line argument will be parsed by [glib.global.shellParseArgv].
     
-    Unlike [glib.global.spawnSync], the `G_SPAWN_SEARCH_PATH` flag is enabled.
-    Note that `G_SPAWN_SEARCH_PATH` can have security implications, so
+    Unlike [glib.global.spawnSync], the [glib.types.SpawnFlags.SearchPath] flag is enabled.
+    Note that [glib.types.SpawnFlags.SearchPath] can have security implications, so
     consider using [glib.global.spawnSync] directly if appropriate.
     
     Possible errors are those from [glib.global.spawnSync] and those
@@ -7533,7 +7533,7 @@ glib.types.Quark spawnExitErrorQuark() nothrow
     
     All output from the child is stored in standard_output and standard_error,
     if those parameters are non-null. Note that you must set the
-    `G_SPAWN_STDOUT_TO_DEV_NULL` and `G_SPAWN_STDERR_TO_DEV_NULL` flags when
+    [glib.types.SpawnFlags.StdoutToDevNull] and [glib.types.SpawnFlags.StderrToDevNull] flags when
     passing null for standard_output and standard_error.
     
     If wait_status is non-null, the platform-specific status of
@@ -7542,7 +7542,7 @@ glib.types.Quark spawnExitErrorQuark() nothrow
     On Unix platforms, note that it is usually not equal
     to the integer passed to `exit()` or returned from `main()`.
     
-    Note that it is invalid to pass `G_SPAWN_DO_NOT_REAP_CHILD` in
+    Note that it is invalid to pass [glib.types.SpawnFlags.DoNotReapChild] in
     flags, and on POSIX platforms, the same restrictions as for
     [glib.global.childWatchSourceNew] apply.
     
@@ -10462,8 +10462,8 @@ void* unixGetPasswdEntry(string userName)
     you wanted to configure `O_NONBLOCK` then that had to be done separately with
     `fcntl()`.
     
-    Since GLib 2.80, the constants `G_UNIX_PIPE_END_READ` and
-    `G_UNIX_PIPE_END_WRITE` can be used as mnemonic indexes in fds.
+    Since GLib 2.80, the constants [glib.types.UnixPipeEnd.Read] and
+    [glib.types.UnixPipeEnd.Write] can be used as mnemonic indexes in fds.
     
     It is a programmer error to call this function with unsupported flags, and a
     critical warning will be raised.
@@ -10664,7 +10664,7 @@ void usleep(gulong microseconds) nothrow
     Params:
       str = a UTF-16 encoded string
       itemsRead = location to store number of
-            words read, or null. If null, then `G_CONVERT_ERROR_PARTIAL_INPUT` will
+            words read, or null. If null, then [glib.types.ConvertError.PartialInput] will
             be returned in case str contains a trailing partial character. If
             an error occurs then the index of the invalid input is stored here.
     Returns: a pointer to a newly allocated UCS-4 string.
@@ -10713,7 +10713,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
     Params:
       str = a UTF-16 encoded string
       itemsRead = location to store number of
-            words read, or null. If null, then `G_CONVERT_ERROR_PARTIAL_INPUT` will
+            words read, or null. If null, then [glib.types.ConvertError.PartialInput] will
             be returned in case str contains a trailing partial character. If
             an error occurs then the index of the invalid input is stored here.
             It’s guaranteed to be non-negative.
@@ -11321,7 +11321,7 @@ string utf8Substring(string str, glong startPos, glong endPos) nothrow
             then the string is nul-terminated.
       itemsRead = location to store number of
            bytes read, or null.
-            If null, then `G_CONVERT_ERROR_PARTIAL_INPUT` will be
+            If null, then [glib.types.ConvertError.PartialInput] will be
             returned in case str contains a trailing partial
             character. If an error occurs then the index of the
             invalid input is stored here.
@@ -11390,7 +11390,7 @@ dchar[] utf8ToUcs4Fast(string str) nothrow
       len = the maximum length (number of bytes) of str to use.
             If len < 0, then the string is nul-terminated.
       itemsRead = location to store number of
-            bytes read, or null. If null, then `G_CONVERT_ERROR_PARTIAL_INPUT` will
+            bytes read, or null. If null, then [glib.types.ConvertError.PartialInput] will
             be returned in case str contains a trailing partial character. If
             an error occurs then the index of the invalid input is stored here.
     Returns: a pointer to a newly allocated UTF-16 string.

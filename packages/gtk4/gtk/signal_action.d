@@ -13,7 +13,7 @@ import gtk.types;
     A [gtk.shortcut.Shortcut]Action that emits a signal.
     
     Signals that are used in this way are referred to as keybinding signals,
-    and they are expected to be defined with the `G_SIGNAL_ACTION` flag.
+    and they are expected to be defined with the [gobject.types.SignalFlags.Action] flag.
 */
 class SignalAction : gtk.shortcut_action.ShortcutAction
 {

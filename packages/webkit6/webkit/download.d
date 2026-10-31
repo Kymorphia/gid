@@ -275,7 +275,7 @@ class Download : gobject.object.ObjectWrap
       If #WebKitDownload::decide-destination signal is not handled
       and destination is not set when the download transfer starts,
       the file will be saved with the filename suggested by the server in
-      `G_USER_DIRECTORY_DOWNLOAD` directory.
+      [glib.types.UserDirectory.DirectoryDownload] directory.
   
       Params:
         destination = the destination
@@ -344,7 +344,7 @@ class Download : gobject.object.ObjectWrap
       This signal is emitted after response is received to
         decide a destination for the download using
         [webkit.download.Download.setDestination]. If this signal is not
-        handled, the file will be downloaded to `G_USER_DIRECTORY_DOWNLOAD`
+        handled, the file will be downloaded to [glib.types.UserDirectory.DirectoryDownload]
         directory using suggested_filename.
         
         Since 2.40, you may handle this signal asynchronously by
