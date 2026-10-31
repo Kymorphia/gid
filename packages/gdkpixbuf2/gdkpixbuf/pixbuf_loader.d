@@ -302,7 +302,7 @@ class PixbufLoader : gobject.object.ObjectWrap
     if (buf)
       _count = cast(size_t)buf.length;
 
-    auto _buf = buf.ptr ? cast(const(ubyte)*)buf.ptr : [ubyte.init].ptr;
+    auto _buf = cast(ubyte*)buf.ptr;
     GError *_err;
     _retval = cast(bool)gdk_pixbuf_loader_write(cast(GdkPixbufLoader*)this._cPtr, _buf, _count, &_err);
     if (_err)
@@ -351,7 +351,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   */
   gulong connectAreaPrepared(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdkpixbuf.pixbuf_loader.PixbufLoader)))
   && Parameters!T.length < 2)
   {
@@ -410,7 +410,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   */
   gulong connectAreaUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
@@ -474,7 +474,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   */
   gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdkpixbuf.pixbuf_loader.PixbufLoader)))
   && Parameters!T.length < 2)
   {
@@ -528,7 +528,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   */
   gulong connectSizePrepared(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gdkpixbuf.pixbuf_loader.PixbufLoader)))

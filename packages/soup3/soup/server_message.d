@@ -359,7 +359,7 @@ class ServerMessage : gobject.object.ObjectWrap
     if (respBody)
       _respLength = cast(size_t)respBody.length;
 
-    auto _respBody = respBody.ptr ? cast(const(ubyte)*)respBody.ptr : [ubyte.init].ptr;
+    auto _respBody = cast(ubyte*)respBody.ptr;
     soup_server_message_set_response(cast(SoupServerMessage*)this._cPtr, _contentType, respUse, _respBody, _respLength);
   }
 
@@ -442,7 +442,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_certificate.TlsCertificate)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gio.types.TlsCertificateFlags)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.server_message.ServerMessage)))
@@ -497,7 +497,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectConnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -541,7 +541,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -586,7 +586,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -630,7 +630,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectGotBody(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -679,7 +679,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectGotChunk(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.bytes.Bytes)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 3)
@@ -727,7 +727,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -772,7 +772,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectWroteBody(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -819,7 +819,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 3)
@@ -874,7 +874,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectWroteChunk(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -919,7 +919,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
@@ -963,7 +963,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   gulong connectWroteInformational(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {

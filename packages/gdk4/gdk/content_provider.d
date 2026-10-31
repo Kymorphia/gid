@@ -118,6 +118,41 @@ class ContentProvider : gobject.object.ObjectWrap
   }
 
   /**
+      Creates a content provider that represents all the given providers.
+      
+      Whenever data needs to be written, the union provider will try the given
+      providers in the given order and the first one supporting a format will
+      be chosen to provide it.
+      
+      This allows an easy way to support providing data in different formats.
+      For example, an image may be provided by its file and by the image
+      contents with a call such as
+      ```c
+      gdk_content_provider_new_union ((GdkContentProvider *[2]) {
+                                        gdk_content_provider_new_typed (G_TYPE_FILE, file),
+                                        gdk_content_provider_new_typed (G_TYPE_TEXTURE, texture)
+                                      }, 2);
+      ```
+  
+      Params:
+        providers = The [gdk.content_provider.ContentProvider]s to present the union of
+      Returns: a new [gdk.content_provider.ContentProvider]
+  */
+  static gdk.content_provider.ContentProvider newUnion(gdk.content_provider.ContentProvider[] providers = null) nothrow
+  {
+    GdkContentProvider* _cretval;
+    size_t _nProviders;
+    if (providers)
+      _nProviders = cast(size_t)providers.length;
+
+    auto _providers = cast(GdkContentProvider**)gMalloc((providers.length) * (GdkContentProvider*).sizeof);
+    foreach (i, obj; providers) _providers[i] = obj ? cast(GdkContentProvider*)obj._cPtr(Yes.Dup) : null;
+    _cretval = gdk_content_provider_new_union(_providers, _nProviders);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
       Emits the ::content-changed signal.
   */
   void contentChanged() nothrow
@@ -262,7 +297,7 @@ class ContentProvider : gobject.object.ObjectWrap
   */
   gulong connectContentChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.content_provider.ContentProvider)))
   && Parameters!T.length < 2)
   {

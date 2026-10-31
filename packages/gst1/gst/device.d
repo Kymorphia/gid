@@ -181,12 +181,9 @@ class Device : gst.object.ObjectWrap
   bool hasClassesv(string[] classes) nothrow
   {
     bool _retval;
-    char*[] _tmpclasses;
-    foreach (s; classes)
-      _tmpclasses ~= s.toCString;
-    _tmpclasses ~= null;
-    char** _classes = _tmpclasses.ptr;
-
+    auto _classes_arr = new char*[](classes.length + 1);
+    auto _classes = cast(char**)_classes_arr.ptr;
+    foreach (i, s; classes) _classes[i] = s.toCString!(No.Malloc);
     _retval = cast(bool)gst_device_has_classesv(cast(GstDevice*)this._cPtr, _classes);
     return _retval;
   }
@@ -228,7 +225,7 @@ class Device : gst.object.ObjectWrap
   */
   gulong connectRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.device.Device)))
   && Parameters!T.length < 2)
   {

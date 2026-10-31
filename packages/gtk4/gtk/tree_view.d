@@ -2109,7 +2109,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectColumnsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
@@ -2153,7 +2153,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectCursorChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
@@ -2204,7 +2204,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectExpandCollapseCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == bool)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
@@ -2286,7 +2286,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
@@ -2366,7 +2366,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectRowActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.tree_view_column.TreeViewColumn)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
@@ -2422,7 +2422,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectRowCollapsed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
@@ -2478,7 +2478,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectRowExpanded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
@@ -2531,7 +2531,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
@@ -2579,7 +2579,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectSelectCursorParent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
@@ -2629,7 +2629,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectSelectCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 3)
@@ -2681,7 +2681,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectStartInteractiveSearch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
@@ -2734,7 +2734,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectTestCollapseRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
@@ -2795,7 +2795,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectTestExpandRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
@@ -2851,7 +2851,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
@@ -2899,7 +2899,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {

@@ -65,11 +65,9 @@ class TargetList : gobject.boxed.Boxed
     if (targets)
       _ntargets = cast(uint)targets.length;
 
-    GtkTargetEntry[] _tmptargets;
-    foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
-    const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-
+    auto _targets_arr = new GtkTargetEntry[](targets.length);
+    auto _targets = _targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? *cast(GtkTargetEntry*)obj._cPtr(No.Dup) : GtkTargetEntry.init;
     _cretval = gtk_target_list_new(_targets, _ntargets);
     this(_cretval, Yes.Take);
   }
@@ -130,11 +128,9 @@ class TargetList : gobject.boxed.Boxed
     if (targets)
       _ntargets = cast(uint)targets.length;
 
-    GtkTargetEntry[] _tmptargets;
-    foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
-    const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-
+    auto _targets_arr = new GtkTargetEntry[](targets.length);
+    auto _targets = _targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? *cast(GtkTargetEntry*)obj._cPtr(No.Dup) : GtkTargetEntry.init;
     gtk_target_list_add_table(cast(GtkTargetList*)this._cPtr, _targets, _ntargets);
   }
 

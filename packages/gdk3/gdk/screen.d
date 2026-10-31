@@ -714,7 +714,7 @@ class Screen : gobject.object.ObjectWrap
   */
   gulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && Parameters!T.length < 2)
   {
@@ -762,7 +762,7 @@ class Screen : gobject.object.ObjectWrap
   */
   gulong connectMonitorsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && Parameters!T.length < 2)
   {
@@ -807,7 +807,7 @@ class Screen : gobject.object.ObjectWrap
   */
   gulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && Parameters!T.length < 2)
   {

@@ -350,12 +350,9 @@ class DropDown : gtk.widget.Widget
   static gtk.drop_down.DropDown newFromStrings(string[] strings) nothrow
   {
     GtkWidget* _cretval;
-    char*[] _tmpstrings;
-    foreach (s; strings)
-      _tmpstrings ~= s.toCString;
-    _tmpstrings ~= null;
-    const(char*)* _strings = _tmpstrings.ptr;
-
+    auto _strings_arr = new char*[](strings.length + 1);
+    auto _strings = cast(char**)_strings_arr.ptr;
+    foreach (i, s; strings) _strings[i] = s.toCString!(No.Malloc);
     _cretval = gtk_drop_down_new_from_strings(_strings);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.drop_down.DropDown)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
@@ -611,7 +608,7 @@ class DropDown : gtk.widget.Widget
   */
   gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.drop_down.DropDown)))
   && Parameters!T.length < 2)
   {

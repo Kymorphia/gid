@@ -207,12 +207,9 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   bool hasClassesv(string[] classes = null) nothrow
   {
     bool _retval;
-    char*[] _tmpclasses;
-    foreach (s; classes)
-      _tmpclasses ~= s.toCString;
-    _tmpclasses ~= null;
-    char** _classes = _tmpclasses.ptr;
-
+    auto _classes_arr = new char*[](classes.length + 1);
+    auto _classes = cast(char**)_classes_arr.ptr;
+    foreach (i, s; classes) _classes[i] = s.toCString!(No.Malloc);
     _retval = cast(bool)gst_device_provider_factory_has_classesv(cast(GstDeviceProviderFactory*)this._cPtr, _classes);
     return _retval;
   }

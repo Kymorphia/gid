@@ -799,7 +799,7 @@ class KeyFile : gobject.boxed.Boxed
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
+    auto _data = cast(char*)data.ptr;
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_data(cast(GKeyFile*)this._cPtr, _data, _length, flags, &_err);
     if (_err)
@@ -859,12 +859,9 @@ class KeyFile : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
-    const(char)*[] _tmpsearchDirs;
-    foreach (s; searchDirs)
-      _tmpsearchDirs ~= s.toCString;
-    _tmpsearchDirs ~= null;
-    const(char*)* _searchDirs = _tmpsearchDirs.ptr;
-
+    auto _searchDirs_arr = new char*[](searchDirs.length + 1);
+    auto _searchDirs = cast(char**)_searchDirs_arr.ptr;
+    foreach (i, s; searchDirs) _searchDirs[i] = s.toCString!(No.Malloc);
     char* _fullPath;
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_dirs(cast(GKeyFile*)this._cPtr, _file, _searchDirs, &_fullPath, flags, &_err);
@@ -1025,7 +1022,9 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    auto _list = list.ptr ? cast(gboolean*)list.ptr : [gboolean.init].ptr;
+    auto _list_arr = new gboolean[](list.length);
+    auto _list = _list_arr.ptr;
+    foreach (i, b; list) _list[i] = cast(gboolean)b;
     g_key_file_set_boolean_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 
@@ -1092,7 +1091,7 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    auto _list = list.ptr ? cast(double*)list.ptr : [double.init].ptr;
+    auto _list = cast(double*)list.ptr;
     g_key_file_set_double_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 
@@ -1145,7 +1144,7 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    auto _list = list.ptr ? cast(int*)list.ptr : [int.init].ptr;
+    auto _list = cast(int*)list.ptr;
     g_key_file_set_integer_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 
@@ -1201,12 +1200,9 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    char*[] _tmplist;
-    foreach (s; list)
-      _tmplist ~= s.toCString;
-    _tmplist ~= null;
-    const(char*)* _list = _tmplist.ptr;
-
+    auto _list_arr = new char*[](list.length + 1);
+    auto _list = cast(char**)_list_arr.ptr;
+    foreach (i, s; list) _list[i] = s.toCString!(No.Malloc);
     g_key_file_set_locale_string_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _locale, _list, _length);
   }
 
@@ -1248,12 +1244,9 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    const(char)*[] _tmplist;
-    foreach (s; list)
-      _tmplist ~= s.toCString;
-    _tmplist ~= null;
-    const(char*)* _list = _tmplist.ptr;
-
+    auto _list_arr = new char*[](list.length + 1);
+    auto _list = cast(char**)_list_arr.ptr;
+    foreach (i, s; list) _list[i] = s.toCString!(No.Malloc);
     g_key_file_set_string_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 

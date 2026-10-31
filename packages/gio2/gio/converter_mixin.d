@@ -128,12 +128,12 @@ template ConverterT()
     if (inbuf)
       _inbufSize = cast(size_t)inbuf.length;
 
-    auto _inbuf = inbuf.ptr ? cast(void*)inbuf.ptr : [ubyte.init].ptr;
+    auto _inbuf = cast(ubyte*)inbuf.ptr;
     size_t _outbufSize;
     if (outbuf)
       _outbufSize = cast(size_t)outbuf.length;
 
-    auto _outbuf = outbuf.ptr ? cast(void*)outbuf.ptr : [ubyte.init].ptr;
+    auto _outbuf = cast(ubyte*)outbuf.ptr;
     GError *_err;
     _cretval = g_converter_convert(cast(GConverter*)this._cPtr, _inbuf, _inbufSize, _outbuf, _outbufSize, flags, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
     if (_err)

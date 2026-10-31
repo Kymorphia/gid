@@ -98,12 +98,14 @@ class Int16ArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    auto _values = values.ptr ? cast(const(short)*)values.ptr : [short.init].ptr;
+    auto _values = cast(short*)values.ptr;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_int16_array_builder_append_values(cast(GArrowInt16ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

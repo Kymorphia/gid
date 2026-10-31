@@ -193,12 +193,9 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   {
     GProxyResolver* _cretval;
     const(char)* _defaultProxy = defaultProxy.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmpignoreHosts;
-    foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString;
-    _tmpignoreHosts ~= null;
-    char** _ignoreHosts = _tmpignoreHosts.ptr;
-
+    auto _ignoreHosts_arr = new char*[](ignoreHosts.length + 1);
+    auto _ignoreHosts = cast(char**)_ignoreHosts_arr.ptr;
+    foreach (i, s; ignoreHosts) _ignoreHosts[i] = s.toCString!(No.Malloc);
     _cretval = g_simple_proxy_resolver_new(_defaultProxy, _ignoreHosts);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, Yes.Take);
     return _retval;
@@ -234,12 +231,9 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   */
   void setIgnoreHosts(string[] ignoreHosts) nothrow
   {
-    char*[] _tmpignoreHosts;
-    foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString;
-    _tmpignoreHosts ~= null;
-    char** _ignoreHosts = _tmpignoreHosts.ptr;
-
+    auto _ignoreHosts_arr = new char*[](ignoreHosts.length + 1);
+    auto _ignoreHosts = cast(char**)_ignoreHosts_arr.ptr;
+    foreach (i, s; ignoreHosts) _ignoreHosts[i] = s.toCString!(No.Malloc);
     g_simple_proxy_resolver_set_ignore_hosts(cast(GSimpleProxyResolver*)this._cPtr, _ignoreHosts);
   }
 

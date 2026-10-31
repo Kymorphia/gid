@@ -192,7 +192,7 @@ class SocketService : gio.socket_listener.SocketListener
   */
   gulong connectIncoming(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.socket_connection.SocketConnection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.socket_service.SocketService)))

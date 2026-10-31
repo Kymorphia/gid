@@ -525,7 +525,7 @@ class SearchContext : gobject.object.ObjectWrap
     if (replace)
       _replaceLength = cast(int)replace.length;
 
-    auto _replace = replace.ptr ? cast(const(char)*)replace.ptr : [char.init].ptr;
+    auto _replace = cast(char*)replace.ptr;
     GError *_err;
     _retval = cast(bool)gtk_source_search_context_replace(cast(GtkSourceSearchContext*)this._cPtr, matchStart ? cast(GtkTextIter*)matchStart._cPtr(No.Dup) : null, matchEnd ? cast(GtkTextIter*)matchEnd._cPtr(No.Dup) : null, _replace, _replaceLength, &_err);
     if (_err)
@@ -554,7 +554,7 @@ class SearchContext : gobject.object.ObjectWrap
     if (replace)
       _replaceLength = cast(int)replace.length;
 
-    auto _replace = replace.ptr ? cast(const(char)*)replace.ptr : [char.init].ptr;
+    auto _replace = cast(char*)replace.ptr;
     GError *_err;
     _retval = gtk_source_search_context_replace_all(cast(GtkSourceSearchContext*)this._cPtr, _replace, _replaceLength, &_err);
     if (_err)

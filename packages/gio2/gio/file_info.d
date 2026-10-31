@@ -955,12 +955,9 @@ class FileInfo : gobject.object.ObjectWrap
   void setAttributeStringv(string attribute, string[] attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpattrValue;
-    foreach (s; attrValue)
-      _tmpattrValue ~= s.toCString;
-    _tmpattrValue ~= null;
-    char** _attrValue = _tmpattrValue.ptr;
-
+    auto _attrValue_arr = new char*[](attrValue.length + 1);
+    auto _attrValue = cast(char**)_attrValue_arr.ptr;
+    foreach (i, s; attrValue) _attrValue[i] = s.toCString!(No.Malloc);
     g_file_info_set_attribute_stringv(cast(GFileInfo*)this._cPtr, _attribute, _attrValue);
   }
 

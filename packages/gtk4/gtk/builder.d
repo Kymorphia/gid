@@ -534,7 +534,7 @@ class Builder : gobject.object.ObjectWrap
     if (string_)
       _length = cast(ptrdiff_t)string_.length;
 
-    auto _string_ = string_.ptr ? cast(char*)string_.ptr : [char.init].ptr;
+    auto _string_ = cast(char*)string_.ptr;
     _cretval = gtk_builder_new_from_string(_string_, _length);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
@@ -638,7 +638,7 @@ class Builder : gobject.object.ObjectWrap
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
+    auto _buffer = cast(char*)buffer.ptr;
     GError *_err;
     _retval = cast(bool)gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, &_err);
     if (_err)
@@ -669,12 +669,9 @@ class Builder : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
-    const(char)*[] _tmpobjectIds;
-    foreach (s; objectIds)
-      _tmpobjectIds ~= s.toCString;
-    _tmpobjectIds ~= null;
-    const(char*)* _objectIds = _tmpobjectIds.ptr;
-
+    auto _objectIds_arr = new char*[](objectIds.length + 1);
+    auto _objectIds = cast(char**)_objectIds_arr.ptr;
+    foreach (i, s; objectIds) _objectIds[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gtk_builder_add_objects_from_file(cast(GtkBuilder*)this._cPtr, _filename, _objectIds, &_err);
     if (_err)
@@ -705,12 +702,9 @@ class Builder : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
-    const(char)*[] _tmpobjectIds;
-    foreach (s; objectIds)
-      _tmpobjectIds ~= s.toCString;
-    _tmpobjectIds ~= null;
-    const(char*)* _objectIds = _tmpobjectIds.ptr;
-
+    auto _objectIds_arr = new char*[](objectIds.length + 1);
+    auto _objectIds = cast(char**)_objectIds_arr.ptr;
+    foreach (i, s; objectIds) _objectIds[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gtk_builder_add_objects_from_resource(cast(GtkBuilder*)this._cPtr, _resourcePath, _objectIds, &_err);
     if (_err)
@@ -743,13 +737,10 @@ class Builder : gobject.object.ObjectWrap
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
-    const(char)*[] _tmpobjectIds;
-    foreach (s; objectIds)
-      _tmpobjectIds ~= s.toCString;
-    _tmpobjectIds ~= null;
-    const(char*)* _objectIds = _tmpobjectIds.ptr;
-
+    auto _buffer = cast(char*)buffer.ptr;
+    auto _objectIds_arr = new char*[](objectIds.length + 1);
+    auto _objectIds = cast(char**)_objectIds_arr.ptr;
+    foreach (i, s; objectIds) _objectIds[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, _objectIds, &_err);
     if (_err)
@@ -825,7 +816,7 @@ class Builder : gobject.object.ObjectWrap
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
+    auto _buffer = cast(char*)buffer.ptr;
     GError *_err;
     _retval = cast(bool)gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, templateType, _buffer, _length, &_err);
     if (_err)

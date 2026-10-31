@@ -332,8 +332,30 @@ class Buffer : gobject.boxed.Boxed
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_buffer_new_memdup(_data, _size);
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a new buffer that wraps the given data. The memory will be freed
+      with [glib.global.gfree] and will be marked writable.
+  
+      Params:
+        data = data to wrap
+      Returns: a new #GstBuffer
+  */
+  static gst.buffer.Buffer newWrapped(ubyte[] data) nothrow
+  {
+    GstBuffer* _cretval;
+    size_t _size;
+    if (data)
+      _size = cast(size_t)data.length;
+
+    auto _data = cast(void*)gMalloc((data.length) * (ubyte).sizeof);
+    _data[0 .. data.length] = data[];
+    _cretval = gst_buffer_new_wrapped(_data, _size);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -394,7 +416,7 @@ class Buffer : gobject.boxed.Boxed
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
     _cretval = gst_buffer_new_wrapped_full(flags, _data, maxsize, offset, _size, _notify, _notifyCB);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
@@ -636,7 +658,7 @@ class Buffer : gobject.boxed.Boxed
     if (src)
       _size = cast(size_t)src.length;
 
-    auto _src = src.ptr ? cast(const(void)*)src.ptr : [ubyte.init].ptr;
+    auto _src = cast(ubyte*)src.ptr;
     _retval = gst_buffer_fill(cast(GstBuffer*)this._cPtr, offset, _src, _size);
     return _retval;
   }
@@ -989,7 +1011,7 @@ class Buffer : gobject.boxed.Boxed
     if (mem)
       _size = cast(size_t)mem.length;
 
-    auto _mem = mem.ptr ? cast(const(void)*)mem.ptr : [ubyte.init].ptr;
+    auto _mem = cast(ubyte*)mem.ptr;
     _retval = gst_buffer_memcmp(cast(GstBuffer*)this._cPtr, offset, _mem, _size);
     return _retval;
   }

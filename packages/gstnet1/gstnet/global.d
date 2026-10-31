@@ -123,12 +123,9 @@ void ptpDeinit() nothrow
 bool ptpInit(ulong clockId, string[] interfaces = null) nothrow
 {
   bool _retval;
-  char*[] _tmpinterfaces;
-  foreach (s; interfaces)
-    _tmpinterfaces ~= s.toCString;
-  _tmpinterfaces ~= null;
-  char** _interfaces = _tmpinterfaces.ptr;
-
+  auto _interfaces_arr = new char*[](interfaces.length + 1);
+  auto _interfaces = cast(char**)_interfaces_arr.ptr;
+  foreach (i, s; interfaces) _interfaces[i] = s.toCString!(No.Malloc);
   _retval = cast(bool)gst_ptp_init(clockId, _interfaces);
   return _retval;
 }

@@ -268,7 +268,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
   */
   gulong connectAuthorize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_method_invocation.DBusMethodInvocation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.debug_controller_dbus.DebugControllerDBus)))
   && Parameters!T.length < 3)

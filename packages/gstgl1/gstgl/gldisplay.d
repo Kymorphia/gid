@@ -342,7 +342,7 @@ class GLDisplay : gst.object.ObjectWrap
   */
   gulong connectCreateContext(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : gstgl.glcontext.GLContext)
+  && is(ReturnType!T : gstgl.glcontext.GLContext)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstgl.glcontext.GLContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstgl.gldisplay.GLDisplay)))
   && Parameters!T.length < 3)

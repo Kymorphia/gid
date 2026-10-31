@@ -234,12 +234,9 @@ class Value : gobject.object.ObjectWrap
   static javascriptcore.value.Value newArrayFromStrv(javascriptcore.context.Context context, string[] strv) nothrow
   {
     JSCValue* _cretval;
-    const(char)*[] _tmpstrv;
-    foreach (s; strv)
-      _tmpstrv ~= s.toCString;
-    _tmpstrv ~= null;
-    const(char*)* _strv = _tmpstrv.ptr;
-
+    auto _strv_arr = new char*[](strv.length + 1);
+    auto _strv = cast(char**)_strv_arr.ptr;
+    foreach (i, s; strv) _strv[i] = s.toCString!(No.Malloc);
     _cretval = jsc_value_new_array_from_strv(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _strv);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -465,11 +462,9 @@ class Value : gobject.object.ObjectWrap
     if (parameters)
       _nParameters = cast(uint)parameters.length;
 
-    JSCValue*[] _tmpparameters;
-    foreach (obj; parameters)
-      _tmpparameters ~= obj ? cast(JSCValue*)obj._cPtr : null;
-    JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
-
+    auto _parameters_arr = new JSCValue*[](parameters.length);
+    auto _parameters = cast(JSCValue**)_parameters_arr.ptr;
+    foreach (i, obj; parameters) _parameters[i] = obj ? cast(JSCValue*)obj._cPtr(No.Dup) : null;
     _cretval = jsc_value_constructor_callv(cast(JSCValue*)this._cPtr, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -493,11 +488,9 @@ class Value : gobject.object.ObjectWrap
     if (parameters)
       _nParameters = cast(uint)parameters.length;
 
-    JSCValue*[] _tmpparameters;
-    foreach (obj; parameters)
-      _tmpparameters ~= obj ? cast(JSCValue*)obj._cPtr : null;
-    JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
-
+    auto _parameters_arr = new JSCValue*[](parameters.length);
+    auto _parameters = cast(JSCValue**)_parameters_arr.ptr;
+    foreach (i, obj; parameters) _parameters[i] = obj ? cast(JSCValue*)obj._cPtr(No.Dup) : null;
     _cretval = jsc_value_function_callv(cast(JSCValue*)this._cPtr, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -791,11 +784,9 @@ class Value : gobject.object.ObjectWrap
     if (parameters)
       _nParameters = cast(uint)parameters.length;
 
-    JSCValue*[] _tmpparameters;
-    foreach (obj; parameters)
-      _tmpparameters ~= obj ? cast(JSCValue*)obj._cPtr : null;
-    JSCValue** _parameters = cast(JSCValue**)_tmpparameters.ptr;
-
+    auto _parameters_arr = new JSCValue*[](parameters.length);
+    auto _parameters = cast(JSCValue**)_parameters_arr.ptr;
+    foreach (i, obj; parameters) _parameters[i] = obj ? cast(JSCValue*)obj._cPtr(No.Dup) : null;
     _cretval = jsc_value_object_invoke_methodv(cast(JSCValue*)this._cPtr, _name, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -1050,13 +1041,13 @@ static T getJsVal(T)(JSCValue* jsval) nothrow
   static if (is(T == bool))
     return cast(bool)jsc_value_to_boolean(jsval);
   else static if (is(T == int))
-    return jsc_value_to_int32(jsval);
+  return jsc_value_to_int32(jsval);
   else static if (is(T == double))
-    return jsc_value_to_double(jsval);
+  return jsc_value_to_double(jsval);
   else static if (is(T == string))
-    return jsc_value_to_string(jsval).fromCString!(Yes.Free);
+  return jsc_value_to_string(jsval).fromCString!(Yes.Free);
   else static if (is(T == Value))
-    return gobject.object.ObjectWrap._getDObject!Value(jsval, No.Take);
+  return gobject.object.ObjectWrap._getDObject!Value(jsval, No.Take);
   else static if (is(T == U[], U))
   {
     enforce(jsc_value_is_array(jsval), "JSCValue is not a JavaScript array");
@@ -1115,11 +1106,11 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val) nothrow
   static if (is(T == bool))
     return jsc_value_new_boolean(ctx, cast(gboolean)val);
   else static if (isNumeric!T)
-    return jsc_value_new_number(ctx, val);
+  return jsc_value_new_number(ctx, val);
   else static if (is(T == string))
-    return jsc_value_new_string(ctx, val.toCString);
+  return jsc_value_new_string(ctx, val.toCString);
   else static if (is(T == Value))
-    return cast(JSCValue*)g_object_ref(cast(GObject*)val._cPtr);
+  return cast(JSCValue*)g_object_ref(cast(GObject*)val._cPtr);
   else static if (is(T == U[], U))
   {
     JSCValue* array = jsc_value_new_array(ctx, GTypeEnum.None);

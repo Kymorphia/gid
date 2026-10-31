@@ -52,7 +52,7 @@ struct Charset
     if (text)
       _len = cast(size_t)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     _retval = cast(bool)g_mime_charset_can_encode(cast(GMimeCharset*)&this, _charset, _text, _len);
     return _retval;
   }
@@ -80,7 +80,7 @@ struct Charset
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = inbuf.ptr ? cast(const(char)*)inbuf.ptr : [char.init].ptr;
+    auto _inbuf = cast(char*)inbuf.ptr;
     g_mime_charset_step(cast(GMimeCharset*)&this, _inbuf, _inlen);
   }
 
@@ -99,7 +99,7 @@ struct Charset
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = inbuf.ptr ? cast(const(char)*)inbuf.ptr : [char.init].ptr;
+    auto _inbuf = cast(char*)inbuf.ptr;
     _cretval = g_mime_charset_best(_inbuf, _inlen);
     string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
     return _retval;

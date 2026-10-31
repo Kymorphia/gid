@@ -666,7 +666,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   gulong connectEditingCanceled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_renderer.CellRenderer)))
   && Parameters!T.length < 2)
   {
@@ -742,7 +742,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   gulong connectEditingStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_editable.CellEditable)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.cell_renderer.CellRenderer)))

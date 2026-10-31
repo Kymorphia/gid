@@ -551,7 +551,7 @@ class WebView : webkit.web_view_base.WebViewBase
     if (body_)
       _length = cast(ptrdiff_t)body_.length;
 
-    auto _body_ = body_.ptr ? cast(const(char)*)body_.ptr : [char.init].ptr;
+    auto _body_ = cast(char*)body_.ptr;
     const(char)* _worldName = worldName.toCString!(No.Malloc, Yes.Nullable);
     const(char)* _sourceUri = sourceUri.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -767,7 +767,7 @@ class WebView : webkit.web_view_base.WebViewBase
     if (script)
       _length = cast(ptrdiff_t)script.length;
 
-    auto _script = script.ptr ? cast(const(char)*)script.ptr : [char.init].ptr;
+    auto _script = cast(char*)script.ptr;
     const(char)* _worldName = worldName.toCString!(No.Malloc, Yes.Nullable);
     const(char)* _sourceUri = sourceUri.toCString!(No.Malloc, Yes.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1826,12 +1826,9 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setCorsAllowlist(string[] allowlist = null) nothrow
   {
-    const(char)*[] _tmpallowlist;
-    foreach (s; allowlist)
-      _tmpallowlist ~= s.toCString;
-    _tmpallowlist ~= null;
-    const(char*)* _allowlist = _tmpallowlist.ptr;
-
+    auto _allowlist_arr = new char*[](allowlist.length + 1);
+    auto _allowlist = cast(char**)_allowlist_arr.ptr;
+    foreach (i, s; allowlist) _allowlist[i] = s.toCString!(No.Malloc);
     webkit_web_view_set_cors_allowlist(cast(WebKitWebView*)this._cPtr, _allowlist);
   }
 
@@ -2028,7 +2025,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.authentication_request.AuthenticationRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -2083,7 +2080,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
@@ -2165,7 +2162,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectContextMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.context_menu.ContextMenu)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.hit_test_result.HitTestResult)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
@@ -2221,7 +2218,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectContextMenuDismissed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
@@ -2283,7 +2280,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectCreate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : gtk.widget.Widget)
+  && is(ReturnType!T : gtk.widget.Widget)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.navigation_action.NavigationAction)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -2380,7 +2377,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectDecidePolicy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.policy_decision.PolicyDecision)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == webkit.types.PolicyDecisionType)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
@@ -2444,7 +2441,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectEnterFullscreen(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
@@ -2495,7 +2492,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectInsecureContentDetected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.InsecureContentEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -2548,7 +2545,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectLeaveFullscreen(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
@@ -2640,7 +2637,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectLoadChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.LoadEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -2705,7 +2702,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectLoadFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.LoadEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == glib.error.ErrorWrap)))
@@ -2780,7 +2777,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectLoadFailedWithTlsErrors(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.tls_certificate.TlsCertificate)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gio.types.TlsCertificateFlags)))
@@ -2850,7 +2847,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectMouseTargetChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.hit_test_result.HitTestResult)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
@@ -2951,7 +2948,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectPermissionRequest(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.permission_request.PermissionRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3014,7 +3011,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectPrint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.print_operation.PrintOperation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3074,7 +3071,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectQueryPermissionState(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.permission_state_query.PermissionStateQuery)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3130,7 +3127,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectReadyToShow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
@@ -3181,7 +3178,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectResourceLoadStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_resource.WebResource)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.urirequest.URIRequest)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
@@ -3239,7 +3236,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectRunAsModal(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
@@ -3299,7 +3296,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectRunColorChooser(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.color_chooser_request.ColorChooserRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3364,7 +3361,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectRunFileChooser(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.file_chooser_request.FileChooserRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3445,7 +3442,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectScriptDialog(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.script_dialog.ScriptDialog)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3504,7 +3501,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectShowNotification(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.notification.Notification)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3568,7 +3565,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectShowOptionMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.option_menu.OptionMenu)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gdk.rectangle.Rectangle)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
@@ -3635,7 +3632,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectSubmitForm(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.form_submission_request.FormSubmissionRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3693,7 +3690,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.user_message.UserMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
@@ -3747,7 +3744,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   gulong connectWebProcessTerminated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.WebProcessTerminationReason)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)

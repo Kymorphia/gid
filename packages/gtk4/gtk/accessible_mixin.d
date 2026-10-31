@@ -278,15 +278,13 @@ template AccessibleT()
     if (properties)
       _nProperties = cast(int)properties.length;
 
-    auto _properties = properties.ptr ? cast(GtkAccessibleProperty*)properties.ptr : [GtkAccessibleProperty.init].ptr;
+    auto _properties = cast(GtkAccessibleProperty*)properties.ptr;
     if (values)
       _nProperties = cast(int)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    const(GValue)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     gtk_accessible_update_property_value(cast(GtkAccessible*)this._cPtr, _nProperties, _properties, _values);
   }
 
@@ -308,15 +306,13 @@ template AccessibleT()
     if (relations)
       _nRelations = cast(int)relations.length;
 
-    auto _relations = relations.ptr ? cast(GtkAccessibleRelation*)relations.ptr : [GtkAccessibleRelation.init].ptr;
+    auto _relations = cast(GtkAccessibleRelation*)relations.ptr;
     if (values)
       _nRelations = cast(int)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    const(GValue)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     gtk_accessible_update_relation_value(cast(GtkAccessible*)this._cPtr, _nRelations, _relations, _values);
   }
 
@@ -338,15 +334,13 @@ template AccessibleT()
     if (states)
       _nStates = cast(int)states.length;
 
-    auto _states = states.ptr ? cast(GtkAccessibleState*)states.ptr : [GtkAccessibleState.init].ptr;
+    auto _states = cast(GtkAccessibleState*)states.ptr;
     if (values)
       _nStates = cast(int)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    const(GValue)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     gtk_accessible_update_state_value(cast(GtkAccessible*)this._cPtr, _nStates, _states, _values);
   }
 }

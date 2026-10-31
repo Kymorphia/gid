@@ -88,16 +88,16 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    GArrowMonthDayNano*[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= obj ? cast(GArrowMonthDayNano*)obj._cPtr : null;
-    const(GArrowMonthDayNano*)* _values = cast(const(GArrowMonthDayNano*)*)_tmpvalues.ptr;
-
+    auto _values_arr = new GArrowMonthDayNano*[](values.length);
+    auto _values = cast(GArrowMonthDayNano**)_values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? cast(GArrowMonthDayNano*)obj._cPtr(No.Dup) : null;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_month_day_nano_interval_array_builder_append_values(cast(GArrowMonthDayNanoIntervalArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

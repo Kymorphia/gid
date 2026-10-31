@@ -198,7 +198,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectTagAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_tag_table.TextTagTable)))
   && Parameters!T.length < 3)
@@ -250,7 +250,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectTagChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == bool)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_tag_table.TextTagTable)))
@@ -307,7 +307,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectTagRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_tag_table.TextTagTable)))
   && Parameters!T.length < 3)

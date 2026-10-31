@@ -574,7 +574,7 @@ class GLArea : gtk.widget.Widget
   */
   gulong connectCreateContext(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : gdk.glcontext.GLContext)
+  && is(ReturnType!T : gdk.glcontext.GLContext)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.glarea.GLArea)))
   && Parameters!T.length < 2)
   {
@@ -629,7 +629,7 @@ class GLArea : gtk.widget.Widget
   */
   gulong connectRender(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.glcontext.GLContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.glarea.GLArea)))
   && Parameters!T.length < 3)
@@ -692,7 +692,7 @@ class GLArea : gtk.widget.Widget
   */
   gulong connectResize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.glarea.GLArea)))

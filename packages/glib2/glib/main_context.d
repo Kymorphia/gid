@@ -140,7 +140,7 @@ class MainContext : gobject.boxed.Boxed
     if (fds)
       _nFds = cast(int)fds.length;
 
-    auto _fds = fds.ptr ? cast(GPollFD*)fds.ptr : [GPollFD.init].ptr;
+    auto _fds = cast(GPollFD*)fds.ptr;
     _retval = cast(bool)g_main_context_check(cast(GMainContext*)this._cPtr, maxPriority, _fds, _nFds);
     return _retval;
   }

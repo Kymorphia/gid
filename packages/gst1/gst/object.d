@@ -186,12 +186,9 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   */
   static void defaultDeepNotify(gobject.object.ObjectWrap object, gst.object.ObjectWrap orig, gobject.param_spec.ParamSpec pspec, string[] excludedProps = null) nothrow
   {
-    char*[] _tmpexcludedProps;
-    foreach (s; excludedProps)
-      _tmpexcludedProps ~= s.toCString;
-    _tmpexcludedProps ~= null;
-    char** _excludedProps = _tmpexcludedProps.ptr;
-
+    auto _excludedProps_arr = new char*[](excludedProps.length + 1);
+    auto _excludedProps = cast(char**)_excludedProps_arr.ptr;
+    foreach (i, s; excludedProps) _excludedProps[i] = s.toCString!(No.Malloc);
     gst_object_default_deep_notify(object ? cast(GObject*)object._cPtr(No.Dup) : null, orig ? cast(GstObject*)orig._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _excludedProps);
   }
 
@@ -313,11 +310,9 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
     if (values)
       _nValues = cast(uint)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    GValue* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     _retval = cast(bool)gst_object_get_g_value_array(cast(GstObject*)this._cPtr, _propertyName, timestamp, interval, _nValues, _values);
     return _retval;
   }
@@ -628,7 +623,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   */
   gulong connectDeepNotify(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.param_spec.ParamSpec)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.object.ObjectWrap)))

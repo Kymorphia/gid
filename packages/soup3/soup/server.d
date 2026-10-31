@@ -520,12 +520,9 @@ class Server : gobject.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
     const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmpprotocols;
-    foreach (s; protocols)
-      _tmpprotocols ~= s.toCString;
-    _tmpprotocols ~= null;
-    char** _protocols = _tmpprotocols.ptr;
-
+    auto _protocols_arr = new char*[](protocols.length + 1);
+    auto _protocols = cast(char**)_protocols_arr.ptr;
+    foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_server_add_websocket_handler(cast(SoupServer*)this._cPtr, _path, _origin, _protocols, _callbackCB, _callback, _callbackDestroyCB);
@@ -900,7 +897,7 @@ class Server : gobject.object.ObjectWrap
   */
   gulong connectRequestAborted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)
@@ -951,7 +948,7 @@ class Server : gobject.object.ObjectWrap
   */
   gulong connectRequestFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)
@@ -1008,7 +1005,7 @@ class Server : gobject.object.ObjectWrap
   */
   gulong connectRequestRead(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)
@@ -1069,7 +1066,7 @@ class Server : gobject.object.ObjectWrap
   */
   gulong connectRequestStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)

@@ -195,11 +195,9 @@ class FileSystem : gobject.object.ObjectWrap
     if (paths)
       _nPaths = cast(size_t)paths.length;
 
-    char*[] _tmppaths;
-    foreach (s; paths)
-      _tmppaths ~= s.toCString;
-    const(char*)* _paths = _tmppaths.ptr;
-
+    auto _paths_arr = new char*[](paths.length);
+    auto _paths = cast(char**)_paths_arr.ptr;
+    foreach (i, s; paths) _paths[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)garrow_file_system_delete_files(cast(GArrowFileSystem*)this._cPtr, _paths, _nPaths, &_err);
     if (_err)
@@ -249,11 +247,9 @@ class FileSystem : gobject.object.ObjectWrap
     if (paths)
       _nPaths = cast(size_t)paths.length;
 
-    char*[] _tmppaths;
-    foreach (s; paths)
-      _tmppaths ~= s.toCString;
-    const(char*)* _paths = _tmppaths.ptr;
-
+    auto _paths_arr = new char*[](paths.length);
+    auto _paths = cast(char**)_paths_arr.ptr;
+    foreach (i, s; paths) _paths[i] = s.toCString!(No.Malloc);
     GError *_err;
     _cretval = garrow_file_system_get_file_infos_paths(cast(GArrowFileSystem*)this._cPtr, _paths, _nPaths, &_err);
     if (_err)

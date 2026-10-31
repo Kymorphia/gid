@@ -562,7 +562,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectAcceptPosition(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
   && Parameters!T.length < 2)
   {
@@ -618,7 +618,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectCancelPosition(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
   && Parameters!T.length < 2)
   {
@@ -672,7 +672,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectCycleChildFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
   && Parameters!T.length < 3)
@@ -731,7 +731,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectCycleHandleFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
   && Parameters!T.length < 3)
@@ -787,7 +787,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectMoveHandle(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
   && Parameters!T.length < 3)
@@ -844,7 +844,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectToggleHandleFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
   && Parameters!T.length < 2)
   {

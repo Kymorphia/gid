@@ -123,7 +123,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (initialChars)
       _nInitialChars = cast(int)initialChars.length;
 
-    auto _initialChars = initialChars.ptr ? cast(const(char)*)initialChars.ptr : [char.init].ptr;
+    auto _initialChars = cast(char*)initialChars.ptr;
     _cretval = gtk_entry_buffer_new(_initialChars, _nInitialChars);
     this(_cretval, Yes.Take);
   }
@@ -175,7 +175,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (chars)
       _nChars = cast(uint)chars.length;
 
-    auto _chars = chars.ptr ? cast(const(char)*)chars.ptr : [char.init].ptr;
+    auto _chars = cast(char*)chars.ptr;
     gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, _nChars);
   }
 
@@ -256,7 +256,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (chars)
       _nChars = cast(int)chars.length;
 
-    auto _chars = chars.ptr ? cast(const(char)*)chars.ptr : [char.init].ptr;
+    auto _chars = cast(char*)chars.ptr;
     _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, _nChars);
     return _retval;
   }
@@ -293,7 +293,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (chars)
       _nChars = cast(int)chars.length;
 
-    auto _chars = chars.ptr ? cast(const(char)*)chars.ptr : [char.init].ptr;
+    auto _chars = cast(char*)chars.ptr;
     gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)this._cPtr, _chars, _nChars);
   }
 
@@ -318,7 +318,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   */
   gulong connectDeletedText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_buffer.EntryBuffer)))
@@ -374,7 +374,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   */
   gulong connectInsertedText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_buffer.EntryBuffer)))

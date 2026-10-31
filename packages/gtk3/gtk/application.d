@@ -651,12 +651,9 @@ class Application : gio.application.Application
   void setAccelsForAction(string detailedActionName, string[] accels) nothrow
   {
     const(char)* _detailedActionName = detailedActionName.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpaccels;
-    foreach (s; accels)
-      _tmpaccels ~= s.toCString;
-    _tmpaccels ~= null;
-    const(char*)* _accels = _tmpaccels.ptr;
-
+    auto _accels_arr = new char*[](accels.length + 1);
+    auto _accels = cast(char**)_accels_arr.ptr;
+    foreach (i, s; accels) _accels[i] = s.toCString!(No.Malloc);
     gtk_application_set_accels_for_action(cast(GtkApplication*)this._cPtr, _detailedActionName, _accels);
   }
 
@@ -748,7 +745,7 @@ class Application : gio.application.Application
   */
   gulong connectQueryEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.application.Application)))
   && Parameters!T.length < 2)
   {
@@ -795,7 +792,7 @@ class Application : gio.application.Application
   */
   gulong connectWindowAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.application.Application)))
   && Parameters!T.length < 3)
@@ -847,7 +844,7 @@ class Application : gio.application.Application
   */
   gulong connectWindowRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.application.Application)))
   && Parameters!T.length < 3)

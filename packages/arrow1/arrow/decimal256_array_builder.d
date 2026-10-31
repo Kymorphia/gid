@@ -94,16 +94,16 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     if (values)
       _valuesLength = cast(long)values.length;
 
-    GArrowDecimal256*[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= obj ? cast(GArrowDecimal256*)obj._cPtr : null;
-    GArrowDecimal256** _values = cast(GArrowDecimal256**)_tmpvalues.ptr;
-
+    auto _values_arr = new GArrowDecimal256*[](values.length);
+    auto _values = cast(GArrowDecimal256**)_values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? cast(GArrowDecimal256*)obj._cPtr(No.Dup) : null;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_decimal256_array_builder_append_values(cast(GArrowDecimal256ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

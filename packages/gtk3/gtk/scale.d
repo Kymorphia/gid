@@ -427,7 +427,7 @@ class Scale : gtk.range.Range
   */
   gulong connectFormatValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == string)
+  && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scale.Scale)))
   && Parameters!T.length < 3)

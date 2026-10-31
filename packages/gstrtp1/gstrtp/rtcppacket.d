@@ -85,7 +85,7 @@ class RTCPPacket
     if (data)
       _len = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_rtcp_packet_add_profile_specific_ext(cast(GstRTCPPacket*)this._cPtr, _data, _len);
     return _retval;
   }
@@ -250,7 +250,7 @@ class RTCPPacket
     if (ssrc)
       _len = cast(uint)ssrc.length;
 
-    auto _ssrc = ssrc.ptr ? cast(uint*)ssrc.ptr : [uint.init].ptr;
+    auto _ssrc = cast(uint*)ssrc.ptr;
     _retval = cast(bool)gst_rtcp_packet_bye_add_ssrcs(cast(GstRTCPPacket*)this._cPtr, _ssrc, _len);
     return _retval;
   }
@@ -605,7 +605,7 @@ class RTCPPacket
     if (data)
       _len = cast(ubyte)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_rtcp_packet_sdes_add_entry(cast(GstRTCPPacket*)this._cPtr, type, _len, _data);
     return _retval;
   }

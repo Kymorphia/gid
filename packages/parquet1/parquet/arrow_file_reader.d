@@ -135,7 +135,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
     if (columnIndices)
       _nColumnIndices = cast(size_t)columnIndices.length;
 
-    auto _columnIndices = columnIndices.ptr ? cast(int*)columnIndices.ptr : [int.init].ptr;
+    auto _columnIndices = cast(int*)columnIndices.ptr;
     GError *_err;
     _cretval = gparquet_arrow_file_reader_read_row_group(cast(GParquetArrowFileReader*)this._cPtr, rowGroupIndex, _columnIndices, _nColumnIndices, &_err);
     if (_err)

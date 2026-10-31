@@ -537,7 +537,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectAdjustBounds(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.range.Range)))
   && Parameters!T.length < 3)
@@ -602,7 +602,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectChangeValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.range.Range)))
@@ -661,7 +661,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectMoveSlider(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.range.Range)))
   && Parameters!T.length < 3)
@@ -709,7 +709,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.range.Range)))
   && Parameters!T.length < 2)
   {

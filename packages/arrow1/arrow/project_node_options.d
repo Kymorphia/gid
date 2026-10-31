@@ -58,11 +58,9 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     if (names)
       _nNames = cast(size_t)names.length;
 
-    char*[] _tmpnames;
-    foreach (s; names)
-      _tmpnames ~= s.toCString;
-    char** _names = _tmpnames.ptr;
-
+    auto _names_arr = new char*[](names.length);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
     _cretval = garrow_project_node_options_new(_expressions, _names, _nNames);
     this(_cretval, Yes.Take);
   }

@@ -206,12 +206,9 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   */
   void setSearchPath(string[] path = null) nothrow
   {
-    char*[] _tmppath;
-    foreach (s; path)
-      _tmppath ~= s.toCString;
-    _tmppath ~= null;
-    char** _path = _tmppath.ptr;
-
+    auto _path_arr = new char*[](path.length + 1);
+    auto _path = cast(char**)_path_arr.ptr;
+    foreach (i, s; path) _path[i] = s.toCString!(No.Malloc);
     gtk_source_style_scheme_manager_set_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
   }
 }

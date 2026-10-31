@@ -83,7 +83,8 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   bool getAxes(gdk.types.AxisUse[] axes, out double[] values) nothrow
   {
     bool _retval;
-    auto _axes = axes.ptr ? cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr : [GdkAxisUse.init].ptr;
+    auto _axes_arr = axes ~ GdkAxisUse.init;
+    auto _axes = _axes_arr.ptr;
     double* _values;
     _retval = cast(bool)gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)this._cPtr, _axes, &_values);
     values.length = axes.length;
@@ -146,7 +147,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   */
   gulong connectDown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))
@@ -202,7 +203,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   */
   gulong connectMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))
@@ -258,7 +259,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   */
   gulong connectProximity(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))
@@ -314,7 +315,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   */
   gulong connectUp(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))

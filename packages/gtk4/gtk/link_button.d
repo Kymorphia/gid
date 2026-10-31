@@ -240,7 +240,7 @@ class LinkButton : gtk.button.Button
   */
   gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.link_button.LinkButton)))
   && Parameters!T.length < 2)
   {

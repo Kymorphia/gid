@@ -311,46 +311,6 @@ class MiniObject : gobject.boxed.Boxed
   }
 
   /**
-      This sets an opaque, named pointer on a miniobject.
-      The name is specified through a #GQuark (retrieved e.g. via
-      [glib.global.quarkFromStaticString]), and the pointer
-      can be gotten back from the object with [gst.mini_object.MiniObject.getQdata]
-      until the object is disposed.
-      Setting a previously set user data pointer, overrides (frees)
-      the old pointer set, using null as pointer essentially
-      removes the data stored.
-      
-      destroy may be specified which is called with data as argument
-      when the object is disposed, or the data is being overwritten by
-      a call to [gst.mini_object.MiniObject.setQdata] with the same quark.
-  
-      Params:
-        quark = A #GQuark, naming the user data pointer
-        data = An opaque user data pointer
-        destroy = Function to invoke with data as argument, when data
-                    needs to be freed
-  */
-  void setQdata(glib.types.Quark quark, void* data, glib.types.DestroyNotify destroy) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    gst_mini_object_set_qdata(cast(GstMiniObject*)this._cPtr, quark, data, _destroyCB);
-  }
-
-  /**
       This function gets back user data pointers stored via [gst.mini_object.MiniObject.setQdata]
       and removes the data from object without invoking its `destroy()` function (if
       any was set).

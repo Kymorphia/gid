@@ -173,7 +173,7 @@ class RTCPBuffer
     if (data)
       _len = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtcp_buffer_new_copy_data(_data, _len);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -195,7 +195,7 @@ class RTCPBuffer
     if (data)
       _len = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtcp_buffer_new_take_data(_data, _len);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -233,7 +233,7 @@ class RTCPBuffer
     if (data)
       _len = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_rtcp_buffer_validate_data(_data, _len);
     return _retval;
   }
@@ -258,7 +258,7 @@ class RTCPBuffer
     if (data)
       _len = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_rtcp_buffer_validate_data_reduced(_data, _len);
     return _retval;
   }

@@ -129,7 +129,7 @@ class RTPBuffer
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_rtp_buffer_add_extension_onebyte_header(cast(GstRTPBuffer*)this._cPtr, id, _data, _size);
     return _retval;
   }
@@ -156,7 +156,7 @@ class RTPBuffer
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_rtp_buffer_add_extension_twobytes_header(cast(GstRTPBuffer*)this._cPtr, appbits, id, _data, _size);
     return _retval;
   }
@@ -808,8 +808,31 @@ class RTPBuffer
     if (data)
       _len = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtp_buffer_new_copy_data(_data, _len);
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Create a new buffer and set the data and size of the buffer to data and len
+      respectively. data will be freed when the buffer is unreffed, so this
+      function transfers ownership of data to the new buffer.
+  
+      Params:
+        data = data for the new buffer
+      Returns: A newly allocated buffer with data and of size len.
+  */
+  static gst.buffer.Buffer newTakeData(ubyte[] data) nothrow
+  {
+    GstBuffer* _cretval;
+    size_t _len;
+    if (data)
+      _len = cast(size_t)data.length;
+
+    auto _data = cast(void*)gMalloc((data.length) * (ubyte).sizeof);
+    _data[0 .. data.length] = data[];
+    _cretval = gst_rtp_buffer_new_take_data(_data, _len);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

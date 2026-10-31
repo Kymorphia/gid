@@ -134,7 +134,7 @@ template RTSPExtensionT()
   */
   gulong connectSend(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gstrtsp.types.RTSPResult)
+  && is(ReturnType!T == gstrtsp.types.RTSPResult)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == void*)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstrtsp.rtspextension.RTSPExtension)))

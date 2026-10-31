@@ -34,7 +34,7 @@ void*[] gidResolveLibs(immutable(string[]) libs) nothrow
       if (auto path = assumeWontThrow(environment.get("GTK_BASEPATH")))
         gidLibraryPath = path;
       else if (auto path = assumeWontThrow(environment.get("HOMEBREW_PREFIX")))
-        gidLibraryPath = buildPath(path, "lib");
+      gidLibraryPath = buildPath(path, "lib");
 
       debug if (gidLoaderDebug && gidLibraryPath.length > 0)
       assumeWontThrow(stderr.writeln("Detected giD library path: ", gidLibraryPath));

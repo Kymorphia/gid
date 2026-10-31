@@ -1019,51 +1019,6 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   }
 
   /**
-      Sets task's result to result and completes the task. If result
-      is not null, then result_destroy will be used to free result if
-      the caller does not take ownership of it with
-      [gio.task.Task.propagatePointer].
-      
-      "Completes the task" means that for an ordinary asynchronous task
-      it will either invoke the task's callback, or else queue that
-      callback to be invoked in the proper #GMainContext, or in the next
-      iteration of the current #GMainContext. For a task run via
-      [gio.task.Task.runInThread] or [gio.task.Task.runInThreadSync], calling this
-      method will save result to be returned to the caller later, but
-      the task will not actually be completed until the #GTaskThreadFunc
-      exits.
-      
-      Note that since the task may be completed before returning from
-      [gio.task.Task.returnPointer], you cannot assume that result is still
-      valid after calling this, unless you are still holding another
-      reference on it.
-  
-      Params:
-        result = the pointer result of a task
-              function
-        resultDestroy = a #GDestroyNotify function.
-  */
-  void returnPointer(void* result = null, glib.types.DestroyNotify resultDestroy = null) nothrow
-  {
-    extern(C) void _resultDestroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _resultDestroyCB = resultDestroy ? &_resultDestroyCallback : null;
-    g_task_return_pointer(cast(GTask*)this._cPtr, result, _resultDestroyCB);
-  }
-
-  /**
       Sets task's result to result (by copying it) and completes the task.
       
       If result is null then a #GValue of type `G_TYPE_POINTER`
@@ -1080,91 +1035,6 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   void returnValue(gobject.value.Value result = null) nothrow
   {
     g_task_return_value(cast(GTask*)this._cPtr, result ? cast(GValue*)result._cPtr(No.Dup) : null);
-  }
-
-  /**
-      Runs task_func in another thread. When task_func returns, task's
-      #GAsyncReadyCallback will be invoked in task's #GMainContext.
-      
-      This takes a ref on task until the task completes.
-      
-      See #GTaskThreadFunc for more details about how task_func is handled.
-      
-      Although GLib currently rate-limits the tasks queued via
-      [gio.task.Task.runInThread], you should not assume that it will always
-      do this. If you have a very large number of tasks to run (several tens of
-      tasks), but don't want them to all run at once, you should only queue a
-      limited number of them (around ten) at a time.
-      
-      Be aware that if your task depends on other tasks to complete, use of this
-      function could lead to a livelock if the other tasks also use this function
-      and enough of them (around 10) execute in a dependency chain, as that will
-      exhaust the thread pool. If this situation is possible, consider using a
-      separate worker thread or thread pool explicitly, rather than using
-      [gio.task.Task.runInThread].
-  
-      Params:
-        taskFunc = a #GTaskThreadFunc
-  */
-  void runInThread(gio.types.TaskThreadFunc taskFunc) nothrow
-  {
-    extern(C) void _taskFuncCallback(GTask* task, GObject* sourceObject, void* taskData, GCancellable* cancellable) nothrow
-    {
-      ptrThawGC(taskData);
-      auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
-
-      try
-      {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gio.types.TaskThreadFunc");
-      }
-    }
-    auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
-    g_task_run_in_thread(cast(GTask*)this._cPtr, _taskFuncCB);
-  }
-
-  /**
-      Runs task_func in another thread, and waits for it to return or be
-      cancelled. You can use [gio.task.Task.propagatePointer], etc, afterward
-      to get the result of task_func.
-      
-      See #GTaskThreadFunc for more details about how task_func is handled.
-      
-      Normally this is used with tasks created with a null
-      `callback`, but note that even if the task does
-      have a callback, it will not be invoked when task_func returns.
-      #GTask:completed will be set to true just before this function returns.
-      
-      Although GLib currently rate-limits the tasks queued via
-      [gio.task.Task.runInThreadSync], you should not assume that it will
-      always do this. If you have a very large number of tasks to run,
-      but don't want them to all run at once, you should only queue a
-      limited number of them at a time.
-  
-      Params:
-        taskFunc = a #GTaskThreadFunc
-  */
-  void runInThreadSync(gio.types.TaskThreadFunc taskFunc) nothrow
-  {
-    extern(C) void _taskFuncCallback(GTask* task, GObject* sourceObject, void* taskData, GCancellable* cancellable) nothrow
-    {
-      ptrThawGC(taskData);
-      auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
-
-      try
-      {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gio.types.TaskThreadFunc");
-      }
-    }
-    auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
-    g_task_run_in_thread_sync(cast(GTask*)this._cPtr, _taskFuncCB);
   }
 
   /**
@@ -1308,33 +1178,6 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   {
     const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
     g_task_set_static_name(cast(GTask*)this._cPtr, _name);
-  }
-
-  /**
-      Sets task's task data (freeing the existing task data, if any).
-  
-      Params:
-        taskData = task-specific data
-        taskDataDestroy = #GDestroyNotify for task_data
-  */
-  void setTaskData(void* taskData = null, glib.types.DestroyNotify taskDataDestroy = null) nothrow
-  {
-    extern(C) void _taskDataDestroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _taskDataDestroyCB = taskDataDestroy ? &_taskDataDestroyCallback : null;
-    g_task_set_task_data(cast(GTask*)this._cPtr, taskData, _taskDataDestroyCB);
   }
 }
 

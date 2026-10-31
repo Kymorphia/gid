@@ -68,7 +68,7 @@ class ScriptIter : gobject.boxed.Boxed
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     _cretval = pango_script_iter_new(_text, _length);
     this(_cretval, Yes.Take);
   }

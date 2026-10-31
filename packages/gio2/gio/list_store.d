@@ -304,11 +304,9 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
     if (additions)
       _nAdditions = cast(uint)additions.length;
 
-    GObject*[] _tmpadditions;
-    foreach (obj; additions)
-      _tmpadditions ~= obj ? cast(GObject*)obj._cPtr : null;
-    void** _additions = cast(void**)_tmpadditions.ptr;
-
+    auto _additions_arr = new GObject*[](additions.length);
+    auto _additions = cast(void**)_additions_arr.ptr;
+    foreach (i, obj; additions) _additions[i] = obj ? cast(GObject*)obj._cPtr(No.Dup) : null;
     g_list_store_splice(cast(GListStore*)this._cPtr, position, nRemovals, _additions, _nAdditions);
   }
 }

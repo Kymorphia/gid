@@ -701,7 +701,7 @@ class Widget : gtk.widget.Widget
   */
   gulong connectGetDefaultFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : gtk.widget.Widget)
+  && is(ReturnType!T : gtk.widget.Widget)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -749,7 +749,7 @@ class Widget : gtk.widget.Widget
   */
   gulong connectPresented(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && Parameters!T.length < 2)
   {

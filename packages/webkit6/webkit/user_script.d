@@ -68,18 +68,12 @@ class UserScript : gobject.boxed.Boxed
   {
     WebKitUserScript* _cretval;
     const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpallowList;
-    foreach (s; allowList)
-      _tmpallowList ~= s.toCString;
-    _tmpallowList ~= null;
-    const(char*)* _allowList = _tmpallowList.ptr;
-
-    char*[] _tmpblockList;
-    foreach (s; blockList)
-      _tmpblockList ~= s.toCString;
-    _tmpblockList ~= null;
-    const(char*)* _blockList = _tmpblockList.ptr;
-
+    auto _allowList_arr = new char*[](allowList.length + 1);
+    auto _allowList = cast(char**)_allowList_arr.ptr;
+    foreach (i, s; allowList) _allowList[i] = s.toCString!(No.Malloc);
+    auto _blockList_arr = new char*[](blockList.length + 1);
+    auto _blockList = cast(char**)_blockList_arr.ptr;
+    foreach (i, s; blockList) _blockList[i] = s.toCString!(No.Malloc);
     _cretval = webkit_user_script_new(_source, injectedFrames, injectionTime, _allowList, _blockList);
     this(_cretval, Yes.Take);
   }
@@ -103,18 +97,12 @@ class UserScript : gobject.boxed.Boxed
     WebKitUserScript* _cretval;
     const(char)* _source = source.toCString!(No.Malloc, No.Nullable);
     const(char)* _worldName = worldName.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpallowList;
-    foreach (s; allowList)
-      _tmpallowList ~= s.toCString;
-    _tmpallowList ~= null;
-    const(char*)* _allowList = _tmpallowList.ptr;
-
-    char*[] _tmpblockList;
-    foreach (s; blockList)
-      _tmpblockList ~= s.toCString;
-    _tmpblockList ~= null;
-    const(char*)* _blockList = _tmpblockList.ptr;
-
+    auto _allowList_arr = new char*[](allowList.length + 1);
+    auto _allowList = cast(char**)_allowList_arr.ptr;
+    foreach (i, s; allowList) _allowList[i] = s.toCString!(No.Malloc);
+    auto _blockList_arr = new char*[](blockList.length + 1);
+    auto _blockList = cast(char**)_blockList_arr.ptr;
+    foreach (i, s; blockList) _blockList[i] = s.toCString!(No.Malloc);
     _cretval = webkit_user_script_new_for_world(_source, injectedFrames, injectionTime, _worldName, _allowList, _blockList);
     auto _retval = _cretval ? new webkit.user_script.UserScript(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

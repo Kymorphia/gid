@@ -59,11 +59,9 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     if (keys)
       _nKeys = cast(size_t)keys.length;
 
-    char*[] _tmpkeys;
-    foreach (s; keys)
-      _tmpkeys ~= s.toCString;
-    const(char*)* _keys = _tmpkeys.ptr;
-
+    auto _keys_arr = new char*[](keys.length);
+    auto _keys = cast(char**)_keys_arr.ptr;
+    foreach (i, s; keys) _keys[i] = s.toCString!(No.Malloc);
     GError *_err;
     _cretval = garrow_aggregate_node_options_new(_aggregations, _keys, _nKeys, &_err);
     if (_err)

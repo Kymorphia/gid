@@ -259,7 +259,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   */
   gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.Variant)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.simple_action.SimpleAction)))
   && Parameters!T.length < 3)
@@ -341,7 +341,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   */
   gulong connectChangeState(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.Variant)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.simple_action.SimpleAction)))
   && Parameters!T.length < 3)

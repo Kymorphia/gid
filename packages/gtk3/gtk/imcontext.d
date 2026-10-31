@@ -326,7 +326,7 @@ class IMContext : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     gtk_im_context_set_surrounding(cast(GtkIMContext*)this._cPtr, _text, _len, cursorIndex);
   }
 
@@ -365,7 +365,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   gulong connectCommit(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 3)
@@ -421,7 +421,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   gulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.imcontext.IMContext)))
@@ -479,7 +479,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {
@@ -524,7 +524,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   gulong connectPreeditEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {
@@ -569,7 +569,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   gulong connectPreeditStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {
@@ -617,7 +617,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   gulong connectRetrieveSurrounding(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {

@@ -271,7 +271,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   gulong connectAfterPaint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
@@ -317,7 +317,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   gulong connectBeforePaint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
@@ -364,7 +364,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   gulong connectFlushEvents(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
@@ -412,7 +412,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   gulong connectLayout(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
@@ -462,7 +462,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   gulong connectPaint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
@@ -509,7 +509,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   gulong connectResumeEvents(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
@@ -559,7 +559,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   gulong connectUpdate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {

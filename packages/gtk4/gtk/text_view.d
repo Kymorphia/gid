@@ -1742,7 +1742,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectBackspace(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
@@ -1792,7 +1792,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
@@ -1842,7 +1842,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
@@ -1901,7 +1901,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DeleteType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_view.TextView)))
@@ -1963,7 +1963,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.TextExtendSelection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gtk.text_iter.TextIter)))
@@ -2033,7 +2033,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
   && Parameters!T.length < 3)
@@ -2087,7 +2087,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
@@ -2159,7 +2159,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
@@ -2226,7 +2226,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollStep)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_view.TextView)))
@@ -2285,7 +2285,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
@@ -2338,7 +2338,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
   && Parameters!T.length < 3)
@@ -2396,7 +2396,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
   && Parameters!T.length < 3)
@@ -2451,7 +2451,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
@@ -2500,7 +2500,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
@@ -2548,7 +2548,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   gulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {

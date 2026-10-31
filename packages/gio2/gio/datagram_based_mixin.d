@@ -246,18 +246,14 @@ template DatagramBasedT()
     if (messages)
       _numMessages = cast(uint)messages.length;
 
-    GInputMessage[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= obj._cInstance;
-    GInputMessage* _messages = _tmpmessages.ptr;
-
+    auto _messages_arr = new GInputMessage[](messages.length);
+    auto _messages = _messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj._cInstance;
     GError *_err;
     _retval = g_datagram_based_receive_messages(cast(GDatagramBased*)this._cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    foreach (i, obj; messages)
-      obj._cInstance = _tmpmessages[i];
-
+    foreach (i, obj; messages) obj._cInstance = _messages[i];
     return _retval;
   }
 
@@ -323,18 +319,14 @@ template DatagramBasedT()
     if (messages)
       _numMessages = cast(uint)messages.length;
 
-    GOutputMessage[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= obj._cInstance;
-    GOutputMessage* _messages = _tmpmessages.ptr;
-
+    auto _messages_arr = new GOutputMessage[](messages.length);
+    auto _messages = _messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj._cInstance;
     GError *_err;
     _retval = g_datagram_based_send_messages(cast(GDatagramBased*)this._cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    foreach (i, obj; messages)
-      obj._cInstance = _tmpmessages[i];
-
+    foreach (i, obj; messages) obj._cInstance = _messages[i];
     return _retval;
   }
 }

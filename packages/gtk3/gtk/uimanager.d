@@ -424,7 +424,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
+    auto _buffer = cast(char*)buffer.ptr;
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)this._cPtr, _buffer, _length, &_err);
     if (_err)
@@ -663,7 +663,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectActionsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 2)
   {
@@ -711,7 +711,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectAddWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 3)
@@ -768,7 +768,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectConnectProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.uimanager.UIManager)))
@@ -825,7 +825,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectDisconnectProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.uimanager.UIManager)))
@@ -883,7 +883,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectPostActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 3)
@@ -937,7 +937,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectPreActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 3)

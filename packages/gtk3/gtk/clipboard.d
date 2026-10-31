@@ -453,11 +453,9 @@ class Clipboard : gobject.object.ObjectWrap
     if (targets)
       _nTargets = cast(int)targets.length;
 
-    GtkTargetEntry[] _tmptargets;
-    foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
-    const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-
+    auto _targets_arr = new GtkTargetEntry[](targets.length);
+    auto _targets = _targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? *cast(GtkTargetEntry*)obj._cPtr(No.Dup) : GtkTargetEntry.init;
     gtk_clipboard_set_can_store(cast(GtkClipboard*)this._cPtr, _targets, _nTargets);
   }
 
@@ -490,7 +488,7 @@ class Clipboard : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     gtk_clipboard_set_text(cast(GtkClipboard*)this._cPtr, _text, _len);
   }
 
@@ -746,7 +744,7 @@ class Clipboard : gobject.object.ObjectWrap
   */
   gulong connectOwnerChange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_owner_change.EventOwnerChange)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.clipboard.Clipboard)))
   && Parameters!T.length < 3)

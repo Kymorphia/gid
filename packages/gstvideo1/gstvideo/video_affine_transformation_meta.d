@@ -88,7 +88,7 @@ class VideoAffineTransformationMeta
   void applyMatrix(float[] matrix) nothrow
   {
     assert(!matrix || matrix.length == 16);
-    auto _matrix = matrix.ptr ? cast(const(float)*)matrix.ptr : [float.init].ptr;
+    auto _matrix = cast(float*)matrix.ptr;
     gst_video_affine_transformation_meta_apply_matrix(cast(GstVideoAffineTransformationMeta*)this._cPtr, _matrix);
   }
 

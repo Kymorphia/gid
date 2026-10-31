@@ -407,7 +407,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   gulong connectFocusHomeOrEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
   && Parameters!T.length < 3)
@@ -460,7 +460,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   gulong connectOrientationChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.Orientation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
   && Parameters!T.length < 3)
@@ -522,7 +522,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   gulong connectPopupContextMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
@@ -583,7 +583,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   gulong connectStyleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ToolbarStyle)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
   && Parameters!T.length < 3)

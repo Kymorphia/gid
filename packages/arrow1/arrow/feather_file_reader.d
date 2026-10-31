@@ -89,7 +89,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
     if (indices)
       _nIndices = cast(uint)indices.length;
 
-    auto _indices = indices.ptr ? cast(const(int)*)indices.ptr : [int.init].ptr;
+    auto _indices = cast(int*)indices.ptr;
     GError *_err;
     _cretval = garrow_feather_file_reader_read_indices(cast(GArrowFeatherFileReader*)this._cPtr, _indices, _nIndices, &_err);
     if (_err)
@@ -106,11 +106,9 @@ class FeatherFileReader : gobject.object.ObjectWrap
     if (names)
       _nNames = cast(uint)names.length;
 
-    char*[] _tmpnames;
-    foreach (s; names)
-      _tmpnames ~= s.toCString;
-    const(char*)* _names = _tmpnames.ptr;
-
+    auto _names_arr = new char*[](names.length);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
     GError *_err;
     _cretval = garrow_feather_file_reader_read_names(cast(GArrowFeatherFileReader*)this._cPtr, _names, _nNames, &_err);
     if (_err)

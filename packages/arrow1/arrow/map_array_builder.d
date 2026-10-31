@@ -92,12 +92,14 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     if (offsets)
       _offsetsLength = cast(long)offsets.length;
 
-    auto _offsets = offsets.ptr ? cast(const(int)*)offsets.ptr : [int.init].ptr;
+    auto _offsets = cast(int*)offsets.ptr;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_map_array_builder_append_values(cast(GArrowMapArrayBuilder*)this._cPtr, _offsets, _offsetsLength, _isValids, _isValidsLength, &_err);
     if (_err)

@@ -268,12 +268,9 @@ class IconTheme : gobject.object.ObjectWrap
   gtk.icon_info.IconInfo chooseIcon(string[] iconNames, int size, gtk.types.IconLookupFlags flags) nothrow
   {
     GtkIconInfo* _cretval;
-    char*[] _tmpiconNames;
-    foreach (s; iconNames)
-      _tmpiconNames ~= s.toCString;
-    _tmpiconNames ~= null;
-    const(char*)* _iconNames = _tmpiconNames.ptr;
-
+    auto _iconNames_arr = new char*[](iconNames.length + 1);
+    auto _iconNames = cast(char**)_iconNames_arr.ptr;
+    foreach (i, s; iconNames) _iconNames[i] = s.toCString!(No.Malloc);
     _cretval = gtk_icon_theme_choose_icon(cast(GtkIconTheme*)this._cPtr, _iconNames, size, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
@@ -303,12 +300,9 @@ class IconTheme : gobject.object.ObjectWrap
   gtk.icon_info.IconInfo chooseIconForScale(string[] iconNames, int size, int scale, gtk.types.IconLookupFlags flags) nothrow
   {
     GtkIconInfo* _cretval;
-    char*[] _tmpiconNames;
-    foreach (s; iconNames)
-      _tmpiconNames ~= s.toCString;
-    _tmpiconNames ~= null;
-    const(char*)* _iconNames = _tmpiconNames.ptr;
-
+    auto _iconNames_arr = new char*[](iconNames.length + 1);
+    auto _iconNames = cast(char**)_iconNames_arr.ptr;
+    foreach (i, s; iconNames) _iconNames[i] = s.toCString!(No.Malloc);
     _cretval = gtk_icon_theme_choose_icon_for_scale(cast(GtkIconTheme*)this._cPtr, _iconNames, size, scale, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
@@ -739,11 +733,9 @@ class IconTheme : gobject.object.ObjectWrap
     if (path)
       _nElements = cast(int)path.length;
 
-    const(char)*[] _tmppath;
-    foreach (s; path)
-      _tmppath ~= s.toCString;
-    const(char*)* _path = _tmppath.ptr;
-
+    auto _path_arr = new char*[](path.length);
+    auto _path = cast(char**)_path_arr.ptr;
+    foreach (i, s; path) _path[i] = s.toCString!(No.Malloc);
     gtk_icon_theme_set_search_path(cast(GtkIconTheme*)this._cPtr, _path, _nElements);
   }
 
@@ -766,7 +758,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_theme.IconTheme)))
   && Parameters!T.length < 2)
   {

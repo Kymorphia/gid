@@ -565,7 +565,7 @@ class Assistant : gtk.window.Window
   */
   gulong connectApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
@@ -611,7 +611,7 @@ class Assistant : gtk.window.Window
   */
   gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
@@ -659,7 +659,7 @@ class Assistant : gtk.window.Window
   */
   gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
@@ -705,7 +705,7 @@ class Assistant : gtk.window.Window
   */
   gulong connectEscape(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
@@ -757,7 +757,7 @@ class Assistant : gtk.window.Window
   */
   gulong connectPrepare(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.assistant.Assistant)))
   && Parameters!T.length < 3)

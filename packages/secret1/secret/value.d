@@ -3,7 +3,6 @@ module secret.value;
 
 public import gid.basictypes;
 import gid.gid;
-import glib.types;
 import gobject.boxed;
 import secret.c.functions;
 import secret.c.types;
@@ -78,54 +77,10 @@ class Value : gobject.boxed.Boxed
     if (secret)
       _length = cast(ptrdiff_t)secret.length;
 
-    auto _secret = secret.ptr ? cast(const(char)*)secret.ptr : [char.init].ptr;
+    auto _secret = cast(char*)secret.ptr;
     const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
     _cretval = secret_value_new(_secret, _length, _contentType);
     this(_cretval, Yes.Take);
-  }
-
-  /**
-      Create a #SecretValue for the secret data passed in.
-      
-      The secret data is not copied, and will later be freed with the destroy
-      function.
-      
-      If the length is less than zero, then secret is assumed to be
-      null-terminated.
-  
-      Params:
-        secretData = the secret data
-        contentType = the content type of the data
-        destroy = function to call to free the secret data
-      Returns: the new #SecretValue
-  */
-  static secret.value.Value newFull(string secretData, string contentType, glib.types.DestroyNotify destroy) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    SecretValue* _cretval;
-    ptrdiff_t _length;
-    if (secretData)
-      _length = cast(ptrdiff_t)secretData.length;
-
-    auto _secretData = secretData.ptr ? cast(char*)secretData.ptr : [char.init].ptr;
-    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
-    _cretval = secret_value_new_full(_secretData, _length, _contentType, _destroyCB);
-    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
-    return _retval;
   }
 
   /**

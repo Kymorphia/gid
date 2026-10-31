@@ -481,7 +481,7 @@ class Calendar : gtk.widget.Widget
   */
   gulong connectDaySelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
@@ -525,7 +525,7 @@ class Calendar : gtk.widget.Widget
   */
   gulong connectNextMonth(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
@@ -569,7 +569,7 @@ class Calendar : gtk.widget.Widget
   */
   gulong connectNextYear(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
@@ -613,7 +613,7 @@ class Calendar : gtk.widget.Widget
   */
   gulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
@@ -657,7 +657,7 @@ class Calendar : gtk.widget.Widget
   */
   gulong connectPrevYear(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {

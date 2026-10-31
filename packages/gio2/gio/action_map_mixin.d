@@ -94,11 +94,9 @@ template ActionMapT()
     if (entries)
       _nEntries = cast(int)entries.length;
 
-    GActionEntry[] _tmpentries;
-    foreach (obj; entries)
-      _tmpentries ~= obj._cInstance;
-    const(GActionEntry)* _entries = _tmpentries.ptr;
-
+    auto _entries_arr = new GActionEntry[](entries.length);
+    auto _entries = _entries_arr.ptr;
+    foreach (i, obj; entries) _entries[i] = obj._cInstance;
     g_action_map_add_action_entries(cast(GActionMap*)this._cPtr, _entries, _nEntries, userData);
   }
 
@@ -168,11 +166,9 @@ template ActionMapT()
     if (entries)
       _nEntries = cast(int)entries.length;
 
-    GActionEntry[] _tmpentries;
-    foreach (obj; entries)
-      _tmpentries ~= obj._cInstance;
-    const(GActionEntry)* _entries = _tmpentries.ptr;
-
+    auto _entries_arr = new GActionEntry[](entries.length);
+    auto _entries = _entries_arr.ptr;
+    foreach (i, obj; entries) _entries[i] = obj._cInstance;
     g_action_map_remove_action_entries(cast(GActionMap*)this._cPtr, _entries, _nEntries);
   }
 }

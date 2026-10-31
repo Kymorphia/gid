@@ -1363,7 +1363,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (vectors)
       _numVectors = cast(int)vectors.length;
 
-    auto _vectors = vectors.ptr ? cast(GInputVector*)vectors.ptr : [GInputVector.init].ptr;
+    auto _vectors = cast(GInputVector*)vectors.ptr;
     int _numMessages;
     GSocketControlMessage** _messages;
     GError *_err;
@@ -1448,18 +1448,14 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (messages)
       _numMessages = cast(uint)messages.length;
 
-    GInputMessage[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= obj._cInstance;
-    GInputMessage* _messages = _tmpmessages.ptr;
-
+    auto _messages_arr = new GInputMessage[](messages.length);
+    auto _messages = _messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj._cInstance;
     GError *_err;
     _retval = g_socket_receive_messages(cast(GSocket*)this._cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    foreach (i, obj; messages)
-      obj._cInstance = _tmpmessages[i];
-
+    foreach (i, obj; messages) obj._cInstance = _messages[i];
     return _retval;
   }
 
@@ -1519,7 +1515,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (buffer)
       _size = cast(size_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(const(ubyte)*)buffer.ptr : [ubyte.init].ptr;
+    auto _buffer = cast(ubyte*)buffer.ptr;
     GError *_err;
     _retval = g_socket_send(cast(GSocket*)this._cPtr, _buffer, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1590,16 +1586,14 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (vectors)
       _numVectors = cast(int)vectors.length;
 
-    auto _vectors = vectors.ptr ? cast(GOutputVector*)vectors.ptr : [GOutputVector.init].ptr;
+    auto _vectors = cast(GOutputVector*)vectors.ptr;
     int _numMessages;
     if (messages)
       _numMessages = cast(int)messages.length;
 
-    GSocketControlMessage*[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= obj ? cast(GSocketControlMessage*)obj._cPtr : null;
-    GSocketControlMessage** _messages = cast(GSocketControlMessage**)_tmpmessages.ptr;
-
+    auto _messages_arr = new GSocketControlMessage*[](messages.length);
+    auto _messages = cast(GSocketControlMessage**)_messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj ? cast(GSocketControlMessage*)obj._cPtr(No.Dup) : null;
     GError *_err;
     _retval = g_socket_send_message(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1638,16 +1632,14 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (vectors)
       _numVectors = cast(int)vectors.length;
 
-    auto _vectors = vectors.ptr ? cast(const(GOutputVector)*)vectors.ptr : [GOutputVector.init].ptr;
+    auto _vectors = cast(GOutputVector*)vectors.ptr;
     int _numMessages;
     if (messages)
       _numMessages = cast(int)messages.length;
 
-    GSocketControlMessage*[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= obj ? cast(GSocketControlMessage*)obj._cPtr : null;
-    GSocketControlMessage** _messages = cast(GSocketControlMessage**)_tmpmessages.ptr;
-
+    auto _messages_arr = new GSocketControlMessage*[](messages.length);
+    auto _messages = cast(GSocketControlMessage**)_messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj ? cast(GSocketControlMessage*)obj._cPtr(No.Dup) : null;
     GError *_err;
     _cretval = g_socket_send_message_with_timeout(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, timeoutUs, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1710,18 +1702,14 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (messages)
       _numMessages = cast(uint)messages.length;
 
-    GOutputMessage[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= obj._cInstance;
-    GOutputMessage* _messages = _tmpmessages.ptr;
-
+    auto _messages_arr = new GOutputMessage[](messages.length);
+    auto _messages = _messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj._cInstance;
     GError *_err;
     _retval = g_socket_send_messages(cast(GSocket*)this._cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    foreach (i, obj; messages)
-      obj._cInstance = _tmpmessages[i];
-
+    foreach (i, obj; messages) obj._cInstance = _messages[i];
     return _retval;
   }
 
@@ -1748,7 +1736,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (buffer)
       _size = cast(size_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(const(ubyte)*)buffer.ptr : [ubyte.init].ptr;
+    auto _buffer = cast(ubyte*)buffer.ptr;
     GError *_err;
     _retval = g_socket_send_to(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, _buffer, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1777,7 +1765,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (buffer)
       _size = cast(size_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(const(ubyte)*)buffer.ptr : [ubyte.init].ptr;
+    auto _buffer = cast(ubyte*)buffer.ptr;
     GError *_err;
     _retval = g_socket_send_with_blocking(cast(GSocket*)this._cPtr, _buffer, _size, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

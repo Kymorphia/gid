@@ -239,7 +239,7 @@ class AudioFormatInfo
     if (dest)
       _length = cast(size_t)dest.length;
 
-    auto _dest = dest.ptr ? cast(void*)dest.ptr : [ubyte.init].ptr;
+    auto _dest = cast(ubyte*)dest.ptr;
     gst_audio_format_info_fill_silence(cast(const(GstAudioFormatInfo)*)this._cPtr, _dest, _length);
   }
 }

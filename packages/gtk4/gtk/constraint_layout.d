@@ -354,11 +354,9 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
     if (lines)
       _nLines = cast(size_t)lines.length;
 
-    char*[] _tmplines;
-    foreach (s; lines)
-      _tmplines ~= s.toCString;
-    const(char*)* _lines = _tmplines.ptr;
-
+    auto _lines_arr = new char*[](lines.length);
+    auto _lines = cast(char**)_lines_arr.ptr;
+    foreach (i, s; lines) _lines[i] = s.toCString!(No.Malloc);
     auto _views = gHashTableFromD!(string, gtk.constraint_target.ConstraintTarget)(views);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_views);
     GError *_err;

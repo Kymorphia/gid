@@ -56,20 +56,16 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     if (leftKeys)
       _nLeftKeys = cast(size_t)leftKeys.length;
 
-    char*[] _tmpleftKeys;
-    foreach (s; leftKeys)
-      _tmpleftKeys ~= s.toCString;
-    const(char*)* _leftKeys = _tmpleftKeys.ptr;
-
+    auto _leftKeys_arr = new char*[](leftKeys.length);
+    auto _leftKeys = cast(char**)_leftKeys_arr.ptr;
+    foreach (i, s; leftKeys) _leftKeys[i] = s.toCString!(No.Malloc);
     size_t _nRightKeys;
     if (rightKeys)
       _nRightKeys = cast(size_t)rightKeys.length;
 
-    char*[] _tmprightKeys;
-    foreach (s; rightKeys)
-      _tmprightKeys ~= s.toCString;
-    const(char*)* _rightKeys = _tmprightKeys.ptr;
-
+    auto _rightKeys_arr = new char*[](rightKeys.length);
+    auto _rightKeys = cast(char**)_rightKeys_arr.ptr;
+    foreach (i, s; rightKeys) _rightKeys[i] = s.toCString!(No.Malloc);
     GError *_err;
     _cretval = garrow_hash_join_node_options_new(type, _leftKeys, _nLeftKeys, _rightKeys, _nRightKeys, &_err);
     if (_err)
@@ -85,11 +81,9 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     if (outputs)
       _nOutputs = cast(size_t)outputs.length;
 
-    char*[] _tmpoutputs;
-    foreach (s; outputs)
-      _tmpoutputs ~= s.toCString;
-    const(char*)* _outputs = _tmpoutputs.ptr;
-
+    auto _outputs_arr = new char*[](outputs.length);
+    auto _outputs = cast(char**)_outputs_arr.ptr;
+    foreach (i, s; outputs) _outputs[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)garrow_hash_join_node_options_set_left_outputs(cast(GArrowHashJoinNodeOptions*)this._cPtr, _outputs, _nOutputs, &_err);
     if (_err)
@@ -105,11 +99,9 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     if (outputs)
       _nOutputs = cast(size_t)outputs.length;
 
-    char*[] _tmpoutputs;
-    foreach (s; outputs)
-      _tmpoutputs ~= s.toCString;
-    const(char*)* _outputs = _tmpoutputs.ptr;
-
+    auto _outputs_arr = new char*[](outputs.length);
+    auto _outputs = cast(char**)_outputs_arr.ptr;
+    foreach (i, s; outputs) _outputs[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)garrow_hash_join_node_options_set_right_outputs(cast(GArrowHashJoinNodeOptions*)this._cPtr, _outputs, _nOutputs, &_err);
     if (_err)

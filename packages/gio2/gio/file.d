@@ -142,12 +142,9 @@ interface File
   static gio.file.File newBuildFilenamev(string[] args) nothrow
   {
     GFile* _cretval;
-    const(char)*[] _tmpargs;
-    foreach (s; args)
-      _tmpargs ~= s.toCString;
-    _tmpargs ~= null;
-    const(char*)* _args = _tmpargs.ptr;
-
+    auto _args_arr = new char*[](args.length + 1);
+    auto _args = cast(char**)_args_arr.ptr;
+    foreach (i, s; args) _args[i] = s.toCString!(No.Malloc);
     _cretval = g_file_new_build_filenamev(_args);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;

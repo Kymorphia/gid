@@ -3,7 +3,6 @@ module javascriptcore.context;
 
 public import gid.basictypes;
 import gid.gid;
-import glib.types;
 import gobject.gid_builder;
 import gobject.object;
 import javascriptcore.c.functions;
@@ -171,10 +170,10 @@ class Context : gobject.object.ObjectWrap
               jsClass.addProperty!(PropInfo.Getter, PropInfo.Setter)(memberName);
           }
           else static if (isMethodExposable!(Member, Mode))
-            jsClass.addMethod!Member(getUDAName!(Member, memberName));
+          jsClass.addMethod!Member(getUDAName!(Member, memberName));
         }}
         else static if (isMethodExposable!(Member, Mode))
-          jsClass.addMethod!(Member)(getUDAName!(Member, memberName));
+        jsClass.addMethod!(Member)(getUDAName!(Member, memberName));
       }
     }}
 
@@ -267,7 +266,7 @@ class Context : gobject.object.ObjectWrap
         && (Mode == RegisterClassMode.Full || hasUDA!(F, JsExpose)))
       Getter = F;
       else static if (isCallable!F && Parameters!F.length == 1 && is(ReturnType!F == void)
-        && (Mode == RegisterClassMode.Full || hasUDA!(F, JsExpose)))
+      && (Mode == RegisterClassMode.Full || hasUDA!(F, JsExpose)))
       Setter = F;
     }
 
@@ -362,7 +361,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
+    auto _code = cast(char*)code.ptr;
     const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     JSCException* _exception;
     _cretval = jsc_context_check_syntax(cast(JSCContext*)this._cPtr, _code, _length, mode, _uri, lineNumber, &_exception);
@@ -393,7 +392,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
+    auto _code = cast(char*)code.ptr;
     _cretval = jsc_context_evaluate(cast(JSCContext*)this._cPtr, _code, _length);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -422,7 +421,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
+    auto _code = cast(char*)code.ptr;
     const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     JSCValue* _object;
     _cretval = jsc_context_evaluate_in_object(cast(JSCContext*)this._cPtr, _code, _length, objectInstance, objectClass ? cast(JSCClass*)objectClass._cPtr(No.Dup) : null, _uri, lineNumber, &_object);
@@ -449,7 +448,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
+    auto _code = cast(char*)code.ptr;
     const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
     _cretval = jsc_context_evaluate_with_source_uri(cast(JSCContext*)this._cPtr, _code, _length, _uri, lineNumber);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
@@ -550,45 +549,6 @@ class Context : gobject.object.ObjectWrap
     auto _handler = handler ? freezeDelegate(cast(void*)&handler) : null;
     GDestroyNotify _handlerDestroyCB = handler ? &thawDelegate : null;
     jsc_context_push_exception_handler(cast(JSCContext*)this._cPtr, _handlerCB, _handler, _handlerDestroyCB);
-  }
-
-  /**
-      Register a custom class in context using the given name. If the new class inherits from
-      another #JSCClass, the parent should be passed as parent_class, otherwise null should be
-      used. The optional vtable parameter allows to provide a custom implementation for handling
-      the class, for example, to handle external properties not added to the prototype.
-      When an instance of the #JSCClass is cleared in the context, destroy_notify is called with
-      the instance as parameter.
-  
-      Params:
-        name = the class name
-        parentClass = a #JSCClass or null
-        vtable = an optional #JSCClassVTable or null
-        destroyNotify = a destroy notifier for class instances
-      Returns: a #JSCClass
-  */
-  javascriptcore.class_.Class registerClass(string name, javascriptcore.class_.Class parentClass = null, javascriptcore.types.ClassVTable* vtable = null, glib.types.DestroyNotify destroyNotify = null) nothrow
-  {
-    extern(C) void _destroyNotifyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyNotifyCB = destroyNotify ? &_destroyNotifyCallback : null;
-    JSCClass* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    _cretval = jsc_context_register_class(cast(JSCContext*)this._cPtr, _name, parentClass ? cast(JSCClass*)parentClass._cPtr(No.Dup) : null, cast(JSCClassVTable*)vtable, _destroyNotifyCB);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
-    return _retval;
   }
 
   /**

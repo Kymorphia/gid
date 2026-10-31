@@ -693,7 +693,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   gulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_model.TreeModel)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.tree_iter.TreeIter)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_completion.EntryCompletion)))
@@ -759,7 +759,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   gulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.entry_completion.EntryCompletion)))
   && Parameters!T.length < 3)
@@ -822,7 +822,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   gulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_model.TreeModel)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.tree_iter.TreeIter)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_completion.EntryCompletion)))
@@ -880,7 +880,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   gulong connectNoMatches(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.entry_completion.EntryCompletion)))
   && Parameters!T.length < 2)
   {

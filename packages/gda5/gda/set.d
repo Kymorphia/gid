@@ -425,7 +425,7 @@ class Set : gobject.object.ObjectWrap
   */
   gulong connectHolderAttrChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gobject.value.Value)))
@@ -483,7 +483,7 @@ class Set : gobject.object.ObjectWrap
   */
   gulong connectHolderChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.set.Set)))
   && Parameters!T.length < 3)
@@ -534,7 +534,7 @@ class Set : gobject.object.ObjectWrap
   */
   gulong connectHolderTypeSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.set.Set)))
   && Parameters!T.length < 3)
@@ -582,7 +582,7 @@ class Set : gobject.object.ObjectWrap
   */
   gulong connectPublicDataChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.set.Set)))
   && Parameters!T.length < 2)
   {
@@ -628,7 +628,7 @@ class Set : gobject.object.ObjectWrap
   */
   gulong connectSourceModelChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.set.Set)))
   && Parameters!T.length < 3)
@@ -683,7 +683,7 @@ class Set : gobject.object.ObjectWrap
   */
   gulong connectValidateHolderChange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == glib.error.ErrorWrap)
+  && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.value.Value)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.set.Set)))
@@ -741,7 +741,7 @@ class Set : gobject.object.ObjectWrap
   */
   gulong connectValidateSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == glib.error.ErrorWrap)
+  && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.set.Set)))
   && Parameters!T.length < 2)
   {

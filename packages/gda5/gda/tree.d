@@ -13,7 +13,6 @@ import glib.types;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
-import gobject.value;
 
 /** */
 class Tree : gobject.object.ObjectWrap
@@ -182,35 +181,6 @@ class Tree : gobject.object.ObjectWrap
   }
 
   /**
-      Sets an attribute to tree, which will be accessible to any node in it.
-  
-      Params:
-        attribute = attribute name
-        value = a #GValue, or null
-        destroy = a function to be called when attribute is not needed anymore, or null
-  */
-  void setAttribute(string attribute, gobject.value.Value value, glib.types.DestroyNotify destroy) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
-    gda_tree_set_attribute(cast(GdaTree*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
-  }
-
-  /**
       Requests that tree be populated with nodes. If an error occurs, then tree's contents is left
       unchanged, and otherwise tree's previous contents is completely replaced by the new one.
       Returns: TRUE if no error occurred.
@@ -282,7 +252,7 @@ class Tree : gobject.object.ObjectWrap
   */
   gulong connectNodeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.tree_node.TreeNode)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree.Tree)))
   && Parameters!T.length < 3)
@@ -332,7 +302,7 @@ class Tree : gobject.object.ObjectWrap
   */
   gulong connectNodeDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree.Tree)))
   && Parameters!T.length < 3)
@@ -384,7 +354,7 @@ class Tree : gobject.object.ObjectWrap
   */
   gulong connectNodeHasChildToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.tree_node.TreeNode)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree.Tree)))
   && Parameters!T.length < 3)
@@ -434,7 +404,7 @@ class Tree : gobject.object.ObjectWrap
   */
   gulong connectNodeInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.tree_node.TreeNode)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree.Tree)))
   && Parameters!T.length < 3)

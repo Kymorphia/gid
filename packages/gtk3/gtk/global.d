@@ -2102,12 +2102,9 @@ void rcResetStyles(gtk.settings.Settings settings) nothrow
 */
 void rcSetDefaultFiles(string[] filenames) nothrow
 {
-  char*[] _tmpfilenames;
-  foreach (s; filenames)
-    _tmpfilenames ~= s.toCString;
-  _tmpfilenames ~= null;
-  char** _filenames = _tmpfilenames.ptr;
-
+  auto _filenames_arr = new char*[](filenames.length + 1);
+  auto _filenames = cast(char**)_filenames_arr.ptr;
+  foreach (i, s; filenames) _filenames[i] = s.toCString!(No.Malloc);
   gtk_rc_set_default_files(_filenames);
 }
 
@@ -2550,11 +2547,9 @@ void selectionAddTargets(gtk.widget.Widget widget, gdk.atom.Atom selection, gtk.
   if (targets)
     _ntargets = cast(uint)targets.length;
 
-  GtkTargetEntry[] _tmptargets;
-  foreach (obj; targets)
-    _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
-  const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-
+  auto _targets_arr = new GtkTargetEntry[](targets.length);
+  auto _targets = _targets_arr.ptr;
+  foreach (i, obj; targets) _targets[i] = obj ? *cast(GtkTargetEntry*)obj._cPtr(No.Dup) : GtkTargetEntry.init;
   gtk_selection_add_targets(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, _targets, _ntargets);
 }
 
@@ -2734,11 +2729,9 @@ void stockAdd(gtk.stock_item.StockItem[] items) nothrow
   if (items)
     _nItems = cast(uint)items.length;
 
-  GtkStockItem[] _tmpitems;
-  foreach (obj; items)
-    _tmpitems ~= obj._cInstance;
-  const(GtkStockItem)* _items = _tmpitems.ptr;
-
+  auto _items_arr = new GtkStockItem[](items.length);
+  auto _items = _items_arr.ptr;
+  foreach (i, obj; items) _items[i] = obj._cInstance;
   gtk_stock_add(_items, _nItems);
 }
 

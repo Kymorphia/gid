@@ -69,11 +69,9 @@ class Table : gobject.object.ObjectWrap
     if (arrays)
       _nArrays = cast(size_t)arrays.length;
 
-    GArrowArray*[] _tmparrays;
-    foreach (obj; arrays)
-      _tmparrays ~= obj ? cast(GArrowArray*)obj._cPtr : null;
-    GArrowArray** _arrays = cast(GArrowArray**)_tmparrays.ptr;
-
+    auto _arrays_arr = new GArrowArray*[](arrays.length);
+    auto _arrays = cast(GArrowArray**)_arrays_arr.ptr;
+    foreach (i, obj; arrays) _arrays[i] = obj ? cast(GArrowArray*)obj._cPtr(No.Dup) : null;
     GError *_err;
     _cretval = garrow_table_new_arrays(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _arrays, _nArrays, &_err);
     if (_err)
@@ -90,11 +88,9 @@ class Table : gobject.object.ObjectWrap
     if (chunkedArrays)
       _nChunkedArrays = cast(size_t)chunkedArrays.length;
 
-    GArrowChunkedArray*[] _tmpchunkedArrays;
-    foreach (obj; chunkedArrays)
-      _tmpchunkedArrays ~= obj ? cast(GArrowChunkedArray*)obj._cPtr : null;
-    GArrowChunkedArray** _chunkedArrays = cast(GArrowChunkedArray**)_tmpchunkedArrays.ptr;
-
+    auto _chunkedArrays_arr = new GArrowChunkedArray*[](chunkedArrays.length);
+    auto _chunkedArrays = cast(GArrowChunkedArray**)_chunkedArrays_arr.ptr;
+    foreach (i, obj; chunkedArrays) _chunkedArrays[i] = obj ? cast(GArrowChunkedArray*)obj._cPtr(No.Dup) : null;
     GError *_err;
     _cretval = garrow_table_new_chunked_arrays(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _chunkedArrays, _nChunkedArrays, &_err);
     if (_err)
@@ -111,11 +107,9 @@ class Table : gobject.object.ObjectWrap
     if (recordBatches)
       _nRecordBatches = cast(size_t)recordBatches.length;
 
-    GArrowRecordBatch*[] _tmprecordBatches;
-    foreach (obj; recordBatches)
-      _tmprecordBatches ~= obj ? cast(GArrowRecordBatch*)obj._cPtr : null;
-    GArrowRecordBatch** _recordBatches = cast(GArrowRecordBatch**)_tmprecordBatches.ptr;
-
+    auto _recordBatches_arr = new GArrowRecordBatch*[](recordBatches.length);
+    auto _recordBatches = cast(GArrowRecordBatch**)_recordBatches_arr.ptr;
+    foreach (i, obj; recordBatches) _recordBatches[i] = obj ? cast(GArrowRecordBatch*)obj._cPtr(No.Dup) : null;
     GError *_err;
     _cretval = garrow_table_new_record_batches(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _recordBatches, _nRecordBatches, &_err);
     if (_err)

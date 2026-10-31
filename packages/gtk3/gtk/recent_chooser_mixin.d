@@ -655,7 +655,7 @@ template RecentChooserT()
   */
   gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.recent_chooser.RecentChooser)))
   && Parameters!T.length < 2)
   {
@@ -702,7 +702,7 @@ template RecentChooserT()
   */
   gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.recent_chooser.RecentChooser)))
   && Parameters!T.length < 2)
   {

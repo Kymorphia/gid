@@ -88,11 +88,9 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
     if (entries)
       _nEntries = cast(int)entries.length;
 
-    GActionEntry[] _tmpentries;
-    foreach (obj; entries)
-      _tmpentries ~= obj._cInstance;
-    const(GActionEntry)* _entries = _tmpentries.ptr;
-
+    auto _entries_arr = new GActionEntry[](entries.length);
+    auto _entries = _entries_arr.ptr;
+    foreach (i, obj; entries) _entries[i] = obj._cInstance;
     g_simple_action_group_add_entries(cast(GSimpleActionGroup*)this._cPtr, _entries, _nEntries, userData);
   }
 

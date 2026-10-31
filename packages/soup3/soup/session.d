@@ -1206,12 +1206,9 @@ class Session : gobject.object.ObjectWrap
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmpprotocols;
-    foreach (s; protocols)
-      _tmpprotocols ~= s.toCString;
-    _tmpprotocols ~= null;
-    char** _protocols = _tmpprotocols.ptr;
-
+    auto _protocols_arr = new char*[](protocols.length + 1);
+    auto _protocols = cast(char**)_protocols_arr.ptr;
+    foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     soup_session_websocket_connect_async(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _origin, _protocols, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1286,7 +1283,7 @@ class Session : gobject.object.ObjectWrap
   */
   gulong connectRequestQueued(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.session.Session)))
   && Parameters!T.length < 3)
@@ -1340,7 +1337,7 @@ class Session : gobject.object.ObjectWrap
   */
   gulong connectRequestUnqueued(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.session.Session)))
   && Parameters!T.length < 3)

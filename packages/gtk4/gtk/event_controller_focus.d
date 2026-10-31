@@ -117,7 +117,7 @@ class EventControllerFocus : gtk.event_controller.EventController
   */
   gulong connectEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_focus.EventControllerFocus)))
   && Parameters!T.length < 2)
   {
@@ -169,7 +169,7 @@ class EventControllerFocus : gtk.event_controller.EventController
   */
   gulong connectLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_focus.EventControllerFocus)))
   && Parameters!T.length < 2)
   {

@@ -185,12 +185,12 @@ class MIKEYPayload : gobject.boxed.Boxed
     if (vfData)
       _vfLen = cast(ubyte)vfData.length;
 
-    auto _vfData = vfData.ptr ? cast(const(ubyte)*)vfData.ptr : [ubyte.init].ptr;
+    auto _vfData = cast(ubyte*)vfData.ptr;
     ubyte _vtLen;
     if (vtData)
       _vtLen = cast(ubyte)vtData.length;
 
-    auto _vtData = vtData.ptr ? cast(const(ubyte)*)vtData.ptr : [ubyte.init].ptr;
+    auto _vtData = cast(ubyte*)vtData.ptr;
     _retval = cast(bool)gst_mikey_payload_key_data_set_interval(cast(GstMIKEYPayload*)this._cPtr, _vfLen, _vfData, _vtLen, _vtData);
     return _retval;
   }
@@ -211,7 +211,7 @@ class MIKEYPayload : gobject.boxed.Boxed
     if (keyData)
       _keyLen = cast(ushort)keyData.length;
 
-    auto _keyData = keyData.ptr ? cast(const(ubyte)*)keyData.ptr : [ubyte.init].ptr;
+    auto _keyData = cast(ubyte*)keyData.ptr;
     _retval = cast(bool)gst_mikey_payload_key_data_set_key(cast(GstMIKEYPayload*)this._cPtr, keyType, _keyLen, _keyData);
     return _retval;
   }
@@ -231,7 +231,7 @@ class MIKEYPayload : gobject.boxed.Boxed
     if (saltData)
       _saltLen = cast(ushort)saltData.length;
 
-    auto _saltData = saltData.ptr ? cast(const(ubyte)*)saltData.ptr : [ubyte.init].ptr;
+    auto _saltData = cast(ubyte*)saltData.ptr;
     _retval = cast(bool)gst_mikey_payload_key_data_set_salt(cast(GstMIKEYPayload*)this._cPtr, _saltLen, _saltData);
     return _retval;
   }
@@ -250,7 +250,7 @@ class MIKEYPayload : gobject.boxed.Boxed
     if (spiData)
       _spiLen = cast(ubyte)spiData.length;
 
-    auto _spiData = spiData.ptr ? cast(const(ubyte)*)spiData.ptr : [ubyte.init].ptr;
+    auto _spiData = cast(ubyte*)spiData.ptr;
     _retval = cast(bool)gst_mikey_payload_key_data_set_spi(cast(GstMIKEYPayload*)this._cPtr, _spiLen, _spiData);
     return _retval;
   }
@@ -271,7 +271,7 @@ class MIKEYPayload : gobject.boxed.Boxed
     if (data)
       _dataLen = cast(ushort)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_mikey_payload_pke_set(cast(GstMIKEYPayload*)this._cPtr, C, _dataLen, _data);
     return _retval;
   }
@@ -290,7 +290,7 @@ class MIKEYPayload : gobject.boxed.Boxed
     if (rand)
       _len = cast(ubyte)rand.length;
 
-    auto _rand = rand.ptr ? cast(const(ubyte)*)rand.ptr : [ubyte.init].ptr;
+    auto _rand = cast(ubyte*)rand.ptr;
     _retval = cast(bool)gst_mikey_payload_rand_set(cast(GstMIKEYPayload*)this._cPtr, _len, _rand);
     return _retval;
   }
@@ -311,7 +311,7 @@ class MIKEYPayload : gobject.boxed.Boxed
     if (val)
       _len = cast(ubyte)val.length;
 
-    auto _val = val.ptr ? cast(const(ubyte)*)val.ptr : [ubyte.init].ptr;
+    auto _val = cast(ubyte*)val.ptr;
     _retval = cast(bool)gst_mikey_payload_sp_add_param(cast(GstMIKEYPayload*)this._cPtr, type, _len, _val);
     return _retval;
   }

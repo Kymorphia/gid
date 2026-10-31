@@ -334,7 +334,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(float)*)value.ptr : [float.init].ptr;
+    auto _value = cast(float*)value.ptr;
     gst_gl_shader_set_uniform_1fv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 
@@ -365,7 +365,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(int)*)value.ptr : [int.init].ptr;
+    auto _value = cast(int*)value.ptr;
     gst_gl_shader_set_uniform_1iv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 
@@ -397,7 +397,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(float)*)value.ptr : [float.init].ptr;
+    auto _value = cast(float*)value.ptr;
     gst_gl_shader_set_uniform_2fv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 
@@ -429,7 +429,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(int)*)value.ptr : [int.init].ptr;
+    auto _value = cast(int*)value.ptr;
     gst_gl_shader_set_uniform_2iv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 
@@ -462,7 +462,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(float)*)value.ptr : [float.init].ptr;
+    auto _value = cast(float*)value.ptr;
     gst_gl_shader_set_uniform_3fv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 
@@ -495,7 +495,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(int)*)value.ptr : [int.init].ptr;
+    auto _value = cast(int*)value.ptr;
     gst_gl_shader_set_uniform_3iv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 
@@ -529,7 +529,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(float)*)value.ptr : [float.init].ptr;
+    auto _value = cast(float*)value.ptr;
     gst_gl_shader_set_uniform_4fv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 
@@ -563,7 +563,7 @@ class GLShader : gst.object.ObjectWrap
     if (value)
       _count = cast(uint)value.length;
 
-    auto _value = value.ptr ? cast(const(int)*)value.ptr : [int.init].ptr;
+    auto _value = cast(int*)value.ptr;
     gst_gl_shader_set_uniform_4iv(cast(GstGLShader*)this._cPtr, _name, _count, _value);
   }
 

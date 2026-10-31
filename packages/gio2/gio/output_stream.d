@@ -432,7 +432,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (buffer)
       _count = cast(size_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
+    auto _buffer = cast(ubyte*)buffer.ptr;
     GError *_err;
     _retval = g_output_stream_write(cast(GOutputStream*)this._cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -476,7 +476,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (buffer)
       _count = cast(size_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
+    auto _buffer = cast(ubyte*)buffer.ptr;
     GError *_err;
     _retval = cast(bool)g_output_stream_write_all(cast(GOutputStream*)this._cPtr, _buffer, _count, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -529,7 +529,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (buffer)
       _count = cast(size_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
+    auto _buffer = cast(ubyte*)buffer.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_output_stream_write_all_async(cast(GOutputStream*)this._cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -627,7 +627,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (buffer)
       _count = cast(size_t)buffer.length;
 
-    auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
+    auto _buffer = cast(ubyte*)buffer.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_output_stream_write_async(cast(GOutputStream*)this._cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -780,7 +780,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (vectors)
       _nVectors = cast(size_t)vectors.length;
 
-    auto _vectors = vectors.ptr ? cast(const(GOutputVector)*)vectors.ptr : [GOutputVector.init].ptr;
+    auto _vectors = cast(GOutputVector*)vectors.ptr;
     GError *_err;
     _retval = cast(bool)g_output_stream_writev(cast(GOutputStream*)this._cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -827,7 +827,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (vectors)
       _nVectors = cast(size_t)vectors.length;
 
-    auto _vectors = vectors.ptr ? cast(GOutputVector*)vectors.ptr : [GOutputVector.init].ptr;
+    auto _vectors = cast(GOutputVector*)vectors.ptr;
     GError *_err;
     _retval = cast(bool)g_output_stream_writev_all(cast(GOutputStream*)this._cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -881,7 +881,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (vectors)
       _nVectors = cast(size_t)vectors.length;
 
-    auto _vectors = vectors.ptr ? cast(GOutputVector*)vectors.ptr : [GOutputVector.init].ptr;
+    auto _vectors = cast(GOutputVector*)vectors.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_output_stream_writev_all_async(cast(GOutputStream*)this._cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -974,7 +974,7 @@ class OutputStream : gobject.object.ObjectWrap
     if (vectors)
       _nVectors = cast(size_t)vectors.length;
 
-    auto _vectors = vectors.ptr ? cast(const(GOutputVector)*)vectors.ptr : [GOutputVector.init].ptr;
+    auto _vectors = cast(GOutputVector*)vectors.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_output_stream_writev_async(cast(GOutputStream*)this._cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

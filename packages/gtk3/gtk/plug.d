@@ -205,7 +205,7 @@ class Plug : gtk.window.Window
   */
   gulong connectEmbedded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.plug.Plug)))
   && Parameters!T.length < 2)
   {

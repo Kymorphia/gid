@@ -6,7 +6,6 @@ import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
-import glib.types;
 import gobject.value;
 
 /** */
@@ -72,27 +71,5 @@ class AttributesManager
   {
     const(char)* _attName = attName.toCString!(No.Malloc, No.Nullable);
     gda_attributes_manager_set(cast(GdaAttributesManager*)this._cPtr, ptr, _attName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
-  }
-
-  /** */
-  void setFull(void* ptr, string attName, gobject.value.Value value, glib.types.DestroyNotify destroy) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attName = attName.toCString!(No.Malloc, No.Nullable);
-    gda_attributes_manager_set_full(cast(GdaAttributesManager*)this._cPtr, ptr, _attName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
 }

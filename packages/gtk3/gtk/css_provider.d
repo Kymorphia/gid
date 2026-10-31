@@ -145,7 +145,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     GError *_err;
     _retval = cast(bool)gtk_css_provider_load_from_data(cast(GtkCssProvider*)this._cPtr, _data, _length, &_err);
     if (_err)
@@ -263,7 +263,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   gulong connectParsingError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.css_section.CssSection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.css_provider.CssProvider)))

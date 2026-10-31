@@ -221,11 +221,11 @@ class AudioBuffer
     if (from)
       _channels = cast(int)from.length;
 
-    auto _from = from.ptr ? cast(const(GstAudioChannelPosition)*)from.ptr : [GstAudioChannelPosition.init].ptr;
+    auto _from = cast(GstAudioChannelPosition*)from.ptr;
     if (to)
       _channels = cast(int)to.length;
 
-    auto _to = to.ptr ? cast(const(GstAudioChannelPosition)*)to.ptr : [GstAudioChannelPosition.init].ptr;
+    auto _to = cast(GstAudioChannelPosition*)to.ptr;
     _retval = cast(bool)gst_audio_buffer_reorder_channels(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, format, _channels, _from, _to);
     return _retval;
   }

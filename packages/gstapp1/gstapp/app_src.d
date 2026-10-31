@@ -893,7 +893,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   gulong connectEndOfStream(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.types.FlowReturn)
+  && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 2)
   {
@@ -942,7 +942,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   gulong connectEnoughData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 2)
   {
@@ -995,7 +995,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   gulong connectNeedData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
@@ -1054,7 +1054,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   gulong connectPushBuffer(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.types.FlowReturn)
+  && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer.Buffer)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
@@ -1116,7 +1116,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   gulong connectPushBufferList(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.types.FlowReturn)
+  && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer_list.BufferList)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
@@ -1182,7 +1182,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   gulong connectPushSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.types.FlowReturn)
+  && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.sample.Sample)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
@@ -1238,7 +1238,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   gulong connectSeekData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)

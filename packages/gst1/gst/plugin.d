@@ -259,24 +259,15 @@ class Plugin : gst.object.ObjectWrap
   */
   void addDependency(string[] envVars, string[] paths, string[] names, gst.types.PluginDependencyFlags flags) nothrow
   {
-    char*[] _tmpenvVars;
-    foreach (s; envVars)
-      _tmpenvVars ~= s.toCString;
-    _tmpenvVars ~= null;
-    const(char*)* _envVars = _tmpenvVars.ptr;
-
-    char*[] _tmppaths;
-    foreach (s; paths)
-      _tmppaths ~= s.toCString;
-    _tmppaths ~= null;
-    const(char*)* _paths = _tmppaths.ptr;
-
-    char*[] _tmpnames;
-    foreach (s; names)
-      _tmpnames ~= s.toCString;
-    _tmpnames ~= null;
-    const(char*)* _names = _tmpnames.ptr;
-
+    auto _envVars_arr = new char*[](envVars.length + 1);
+    auto _envVars = cast(char**)_envVars_arr.ptr;
+    foreach (i, s; envVars) _envVars[i] = s.toCString!(No.Malloc);
+    auto _paths_arr = new char*[](paths.length + 1);
+    auto _paths = cast(char**)_paths_arr.ptr;
+    foreach (i, s; paths) _paths[i] = s.toCString!(No.Malloc);
+    auto _names_arr = new char*[](names.length + 1);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
     gst_plugin_add_dependency(cast(GstPlugin*)this._cPtr, _envVars, _paths, _names, flags);
   }
 

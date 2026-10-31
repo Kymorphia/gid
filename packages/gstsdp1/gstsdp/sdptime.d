@@ -121,12 +121,9 @@ class SDPTime
     GstSDPResult _cretval;
     const(char)* _start = start.toCString!(No.Malloc, No.Nullable);
     const(char)* _stop = stop.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmprepeat;
-    foreach (s; repeat)
-      _tmprepeat ~= s.toCString;
-    _tmprepeat ~= null;
-    const(char*)* _repeat = _tmprepeat.ptr;
-
+    auto _repeat_arr = new char*[](repeat.length + 1);
+    auto _repeat = cast(char**)_repeat_arr.ptr;
+    foreach (i, s; repeat) _repeat[i] = s.toCString!(No.Malloc);
     _cretval = gst_sdp_time_set(cast(GstSDPTime*)this._cPtr, _start, _stop, _repeat);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

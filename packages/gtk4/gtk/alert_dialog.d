@@ -366,12 +366,9 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void setButtons(string[] labels) nothrow
   {
-    char*[] _tmplabels;
-    foreach (s; labels)
-      _tmplabels ~= s.toCString;
-    _tmplabels ~= null;
-    const(char*)* _labels = _tmplabels.ptr;
-
+    auto _labels_arr = new char*[](labels.length + 1);
+    auto _labels = cast(char**)_labels_arr.ptr;
+    foreach (i, s; labels) _labels[i] = s.toCString!(No.Malloc);
     gtk_alert_dialog_set_buttons(cast(GtkAlertDialog*)this._cPtr, _labels);
   }
 

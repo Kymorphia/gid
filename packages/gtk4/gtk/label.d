@@ -1582,7 +1582,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   gulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.label.Label)))
   && Parameters!T.length < 2)
   {
@@ -1632,7 +1632,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.label.Label)))
   && Parameters!T.length < 3)
@@ -1687,7 +1687,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.label.Label)))
   && Parameters!T.length < 2)
   {
@@ -1755,7 +1755,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))

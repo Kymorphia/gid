@@ -146,7 +146,7 @@ class RTPSourceMeta
     if (csrc)
       _csrcCount = cast(uint)csrc.length;
 
-    auto _csrc = csrc.ptr ? cast(const(uint)*)csrc.ptr : [uint.init].ptr;
+    auto _csrc = cast(uint*)csrc.ptr;
     _retval = cast(bool)gst_rtp_source_meta_append_csrc(cast(GstRTPSourceMeta*)this._cPtr, _csrc, _csrcCount);
     return _retval;
   }

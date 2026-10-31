@@ -10,6 +10,9 @@
 //# LayoutLine isParagraphStart conflicts with property, disable it
 //!set record[LayoutLine].method[is_paragraph_start][ignore] 1
 
+//# Ignore free function which takes ownership of a D array, pointless since D would copy the array just to free it
+//!set class[Font].function[descriptions_free][ignore] 1
+
 //# Change Layout.setText() text parameter to an array of chars with a length to remove length param and optimize
 //!set class[Layout].method[set_text].parameters.parameter[text].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
 

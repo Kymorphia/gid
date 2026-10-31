@@ -6,7 +6,6 @@ import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
-import glib.types;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
@@ -185,54 +184,6 @@ class Column : gobject.object.ObjectWrap
   }
 
   /**
-      Set the value associated to a named attribute. The attribute string is 'stolen' by this method, and
-      the memory it uses will be freed using the destroy function when no longer needed (if destroy is null,
-      then the string will not be freed at all).
-      
-      Attributes can have any name, but Libgda proposes some default names,
-      see <link linkend="libgda-40-Attributes-manager.synopsis">this section</link>.
-      
-      If there is already an attribute named attribute set, then its value is replaced with the new value (value is
-      copied), except if value is null, in which case the attribute is removed.
-      
-      For example one would use it as:
-      
-      <code>
-      gda_column_set_attribute (holder, g_strdup (my_attribute), g_free, my_value);
-      gda_column_set_attribute (holder, GDA_ATTRIBUTE_NAME, NULL, my_value);
-      </code>
-      
-      Note: this method does not modify in any way the contents of the data model for which column is a column (nor
-      does it modify the table definition of the tables used by a SELECT statement is the model was created from a
-      SELECT statement).
-  
-      Params:
-        attribute = attribute name as a static string
-        value = a #GValue, or null
-        destroy = a function to be called when attribute is not needed anymore, or null
-  */
-  void setAttribute(string attribute, gobject.value.Value value = null, glib.types.DestroyNotify destroy = null) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
-    gda_column_set_attribute(cast(GdaColumn*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
-  }
-
-  /**
       Sets the auto increment flag for the given column.
   
       Params:
@@ -334,7 +285,7 @@ class Column : gobject.object.ObjectWrap
   */
   gulong connectGTypeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.types.GType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.types.GType)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.column.Column)))
@@ -388,7 +339,7 @@ class Column : gobject.object.ObjectWrap
   */
   gulong connectNameChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.column.Column)))
   && Parameters!T.length < 3)

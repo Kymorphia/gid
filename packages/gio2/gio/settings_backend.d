@@ -154,12 +154,9 @@ class SettingsBackend : gobject.object.ObjectWrap
   void keysChanged(string path, string[] items, void* originTag = null) nothrow
   {
     const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpitems;
-    foreach (s; items)
-      _tmpitems ~= s.toCString;
-    _tmpitems ~= null;
-    const(char*)* _items = _tmpitems.ptr;
-
+    auto _items_arr = new char*[](items.length + 1);
+    auto _items = cast(char**)_items_arr.ptr;
+    foreach (i, s; items) _items[i] = s.toCString!(No.Malloc);
     g_settings_backend_keys_changed(cast(GSettingsBackend*)this._cPtr, _path, _items, originTag);
   }
 

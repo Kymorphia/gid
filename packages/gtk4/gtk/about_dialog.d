@@ -563,12 +563,9 @@ class AboutDialog : gtk.window.Window
   void addCreditSection(string sectionName, string[] people) nothrow
   {
     const(char)* _sectionName = sectionName.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmppeople;
-    foreach (s; people)
-      _tmppeople ~= s.toCString;
-    _tmppeople ~= null;
-    const(char*)* _people = _tmppeople.ptr;
-
+    auto _people_arr = new char*[](people.length + 1);
+    auto _people = cast(char**)_people_arr.ptr;
+    foreach (i, s; people) _people[i] = s.toCString!(No.Malloc);
     gtk_about_dialog_add_credit_section(cast(GtkAboutDialog*)this._cPtr, _sectionName, _people);
   }
 
@@ -814,12 +811,9 @@ class AboutDialog : gtk.window.Window
   */
   void setArtists(string[] artists) nothrow
   {
-    char*[] _tmpartists;
-    foreach (s; artists)
-      _tmpartists ~= s.toCString;
-    _tmpartists ~= null;
-    const(char*)* _artists = _tmpartists.ptr;
-
+    auto _artists_arr = new char*[](artists.length + 1);
+    auto _artists = cast(char**)_artists_arr.ptr;
+    foreach (i, s; artists) _artists[i] = s.toCString!(No.Malloc);
     gtk_about_dialog_set_artists(cast(GtkAboutDialog*)this._cPtr, _artists);
   }
 
@@ -832,12 +826,9 @@ class AboutDialog : gtk.window.Window
   */
   void setAuthors(string[] authors) nothrow
   {
-    char*[] _tmpauthors;
-    foreach (s; authors)
-      _tmpauthors ~= s.toCString;
-    _tmpauthors ~= null;
-    const(char*)* _authors = _tmpauthors.ptr;
-
+    auto _authors_arr = new char*[](authors.length + 1);
+    auto _authors = cast(char**)_authors_arr.ptr;
+    foreach (i, s; authors) _authors[i] = s.toCString!(No.Malloc);
     gtk_about_dialog_set_authors(cast(GtkAboutDialog*)this._cPtr, _authors);
   }
 
@@ -879,12 +870,9 @@ class AboutDialog : gtk.window.Window
   */
   void setDocumenters(string[] documenters) nothrow
   {
-    char*[] _tmpdocumenters;
-    foreach (s; documenters)
-      _tmpdocumenters ~= s.toCString;
-    _tmpdocumenters ~= null;
-    const(char*)* _documenters = _tmpdocumenters.ptr;
-
+    auto _documenters_arr = new char*[](documenters.length + 1);
+    auto _documenters = cast(char**)_documenters_arr.ptr;
+    foreach (i, s; documenters) _documenters[i] = s.toCString!(No.Malloc);
     gtk_about_dialog_set_documenters(cast(GtkAboutDialog*)this._cPtr, _documenters);
   }
 
@@ -1074,7 +1062,7 @@ class AboutDialog : gtk.window.Window
   */
   gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.about_dialog.AboutDialog)))
   && Parameters!T.length < 3)

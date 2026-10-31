@@ -124,7 +124,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
     if (markup)
       _length = cast(int)markup.length;
 
-    auto _markup = markup.ptr ? cast(const(char)*)markup.ptr : [char.init].ptr;
+    auto _markup = cast(char*)markup.ptr;
     gtk_source_gutter_renderer_text_set_markup(cast(GtkSourceGutterRendererText*)this._cPtr, _markup, _length);
   }
 
@@ -135,7 +135,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     gtk_source_gutter_renderer_text_set_text(cast(GtkSourceGutterRendererText*)this._cPtr, _text, _length);
   }
 }

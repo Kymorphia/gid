@@ -88,6 +88,19 @@ class SqlFunction
   }
 
   /**
+      Sets the function's arguments to point to args, then sets the
+      list's data elements' parent to function.
+  
+      Params:
+        args = a #GSList to take from
+  */
+  void takeArgsList(void*[] args) nothrow
+  {
+    auto _args = gSListFromD!(void*)(args);
+    gda_sql_function_take_args_list(cast(GdaSqlFunction*)this._cPtr, _args);
+  }
+
+  /**
       Sets the function's name using the string held by value. When call, value is freed using
       #[gda.global.valueFree].
   

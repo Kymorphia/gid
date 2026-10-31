@@ -572,7 +572,7 @@ template DriveT()
   */
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {
@@ -619,7 +619,7 @@ template DriveT()
   */
   gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {
@@ -664,7 +664,7 @@ template DriveT()
   */
   gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {
@@ -709,7 +709,7 @@ template DriveT()
   */
   gulong connectStopButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {

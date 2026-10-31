@@ -35,7 +35,7 @@ bool codecUtilsAacCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] audioConfig
   if (audioConfig)
     _len = cast(uint)audioConfig.length;
 
-  auto _audioConfig = audioConfig.ptr ? cast(const(ubyte)*)audioConfig.ptr : [ubyte.init].ptr;
+  auto _audioConfig = cast(ubyte*)audioConfig.ptr;
   _retval = cast(bool)gst_codec_utils_aac_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _audioConfig, _len);
   return _retval;
 }
@@ -56,7 +56,7 @@ uint codecUtilsAacGetChannels(ubyte[] audioConfig) nothrow
   if (audioConfig)
     _len = cast(uint)audioConfig.length;
 
-  auto _audioConfig = audioConfig.ptr ? cast(const(ubyte)*)audioConfig.ptr : [ubyte.init].ptr;
+  auto _audioConfig = cast(ubyte*)audioConfig.ptr;
   _retval = gst_codec_utils_aac_get_channels(_audioConfig, _len);
   return _retval;
 }
@@ -105,7 +105,7 @@ string codecUtilsAacGetLevel(ubyte[] audioConfig) nothrow
   if (audioConfig)
     _len = cast(uint)audioConfig.length;
 
-  auto _audioConfig = audioConfig.ptr ? cast(const(ubyte)*)audioConfig.ptr : [ubyte.init].ptr;
+  auto _audioConfig = cast(ubyte*)audioConfig.ptr;
   _cretval = gst_codec_utils_aac_get_level(_audioConfig, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -130,7 +130,7 @@ string codecUtilsAacGetProfile(ubyte[] audioConfig) nothrow
   if (audioConfig)
     _len = cast(uint)audioConfig.length;
 
-  auto _audioConfig = audioConfig.ptr ? cast(const(ubyte)*)audioConfig.ptr : [ubyte.init].ptr;
+  auto _audioConfig = cast(ubyte*)audioConfig.ptr;
   _cretval = gst_codec_utils_aac_get_profile(_audioConfig, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -153,7 +153,7 @@ uint codecUtilsAacGetSampleRate(ubyte[] audioConfig) nothrow
   if (audioConfig)
     _len = cast(uint)audioConfig.length;
 
-  auto _audioConfig = audioConfig.ptr ? cast(const(ubyte)*)audioConfig.ptr : [ubyte.init].ptr;
+  auto _audioConfig = cast(ubyte*)audioConfig.ptr;
   _retval = gst_codec_utils_aac_get_sample_rate(_audioConfig, _len);
   return _retval;
 }
@@ -230,7 +230,7 @@ bool codecUtilsH264CapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] sps) nothr
   if (sps)
     _len = cast(uint)sps.length;
 
-  auto _sps = sps.ptr ? cast(const(ubyte)*)sps.ptr : [ubyte.init].ptr;
+  auto _sps = cast(ubyte*)sps.ptr;
   _retval = cast(bool)gst_codec_utils_h264_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _sps, _len);
   return _retval;
 }
@@ -251,7 +251,7 @@ string codecUtilsH264GetLevel(ubyte[] sps) nothrow
   if (sps)
     _len = cast(uint)sps.length;
 
-  auto _sps = sps.ptr ? cast(const(ubyte)*)sps.ptr : [ubyte.init].ptr;
+  auto _sps = cast(ubyte*)sps.ptr;
   _cretval = gst_codec_utils_h264_get_level(_sps, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -299,7 +299,7 @@ string codecUtilsH264GetProfile(ubyte[] sps) nothrow
   if (sps)
     _len = cast(uint)sps.length;
 
-  auto _sps = sps.ptr ? cast(const(ubyte)*)sps.ptr : [ubyte.init].ptr;
+  auto _sps = cast(ubyte*)sps.ptr;
   _cretval = gst_codec_utils_h264_get_profile(_sps, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -328,7 +328,7 @@ bool codecUtilsH264GetProfileFlagsLevel(ubyte[] codecData, out ubyte profile, ou
   if (codecData)
     _len = cast(uint)codecData.length;
 
-  auto _codecData = codecData.ptr ? cast(const(ubyte)*)codecData.ptr : [ubyte.init].ptr;
+  auto _codecData = cast(ubyte*)codecData.ptr;
   _retval = cast(bool)gst_codec_utils_h264_get_profile_flags_level(_codecData, _len, cast(ubyte*)&profile, cast(ubyte*)&flags, cast(ubyte*)&level);
   return _retval;
 }
@@ -352,7 +352,7 @@ bool codecUtilsH265CapsSetLevelTierAndProfile(gst.caps.Caps caps, ubyte[] profil
   if (profileTierLevel)
     _len = cast(uint)profileTierLevel.length;
 
-  auto _profileTierLevel = profileTierLevel.ptr ? cast(const(ubyte)*)profileTierLevel.ptr : [ubyte.init].ptr;
+  auto _profileTierLevel = cast(ubyte*)profileTierLevel.ptr;
   _retval = cast(bool)gst_codec_utils_h265_caps_set_level_tier_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _profileTierLevel, _len);
   return _retval;
 }
@@ -374,7 +374,7 @@ string codecUtilsH265GetLevel(ubyte[] profileTierLevel) nothrow
   if (profileTierLevel)
     _len = cast(uint)profileTierLevel.length;
 
-  auto _profileTierLevel = profileTierLevel.ptr ? cast(const(ubyte)*)profileTierLevel.ptr : [ubyte.init].ptr;
+  auto _profileTierLevel = cast(ubyte*)profileTierLevel.ptr;
   _cretval = gst_codec_utils_h265_get_level(_profileTierLevel, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -425,7 +425,7 @@ string codecUtilsH265GetProfile(ubyte[] profileTierLevel) nothrow
   if (profileTierLevel)
     _len = cast(uint)profileTierLevel.length;
 
-  auto _profileTierLevel = profileTierLevel.ptr ? cast(const(ubyte)*)profileTierLevel.ptr : [ubyte.init].ptr;
+  auto _profileTierLevel = cast(ubyte*)profileTierLevel.ptr;
   _cretval = gst_codec_utils_h265_get_profile(_profileTierLevel, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -448,7 +448,7 @@ string codecUtilsH265GetTier(ubyte[] profileTierLevel) nothrow
   if (profileTierLevel)
     _len = cast(uint)profileTierLevel.length;
 
-  auto _profileTierLevel = profileTierLevel.ptr ? cast(const(ubyte)*)profileTierLevel.ptr : [ubyte.init].ptr;
+  auto _profileTierLevel = cast(ubyte*)profileTierLevel.ptr;
   _cretval = gst_codec_utils_h265_get_tier(_profileTierLevel, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -473,7 +473,7 @@ bool codecUtilsMpeg4videoCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] visO
   if (visObjSeq)
     _len = cast(uint)visObjSeq.length;
 
-  auto _visObjSeq = visObjSeq.ptr ? cast(const(ubyte)*)visObjSeq.ptr : [ubyte.init].ptr;
+  auto _visObjSeq = cast(ubyte*)visObjSeq.ptr;
   _retval = cast(bool)gst_codec_utils_mpeg4video_caps_set_level_and_profile(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _visObjSeq, _len);
   return _retval;
 }
@@ -496,7 +496,7 @@ string codecUtilsMpeg4videoGetLevel(ubyte[] visObjSeq) nothrow
   if (visObjSeq)
     _len = cast(uint)visObjSeq.length;
 
-  auto _visObjSeq = visObjSeq.ptr ? cast(const(ubyte)*)visObjSeq.ptr : [ubyte.init].ptr;
+  auto _visObjSeq = cast(ubyte*)visObjSeq.ptr;
   _cretval = gst_codec_utils_mpeg4video_get_level(_visObjSeq, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -520,7 +520,7 @@ string codecUtilsMpeg4videoGetProfile(ubyte[] visObjSeq) nothrow
   if (visObjSeq)
     _len = cast(uint)visObjSeq.length;
 
-  auto _visObjSeq = visObjSeq.ptr ? cast(const(ubyte)*)visObjSeq.ptr : [ubyte.init].ptr;
+  auto _visObjSeq = cast(ubyte*)visObjSeq.ptr;
   _cretval = gst_codec_utils_mpeg4video_get_profile(_visObjSeq, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -659,12 +659,9 @@ gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstp
   }
   auto _funcCB = func ? &_funcCallback : null;
   GstInstallPluginsReturn _cretval;
-  char*[] _tmpdetails;
-  foreach (s; details)
-    _tmpdetails ~= s.toCString;
-  _tmpdetails ~= null;
-  const(char*)* _details = _tmpdetails.ptr;
-
+  auto _details_arr = new char*[](details.length + 1);
+  auto _details = cast(char**)_details_arr.ptr;
+  foreach (i, s; details) _details[i] = s.toCString!(No.Malloc);
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   _cretval = gst_install_plugins_async(_details, ctx ? cast(GstInstallPluginsContext*)ctx._cPtr(No.Dup) : null, _funcCB, _func);
   gstpbutils.types.InstallPluginsReturn _retval = cast(gstpbutils.types.InstallPluginsReturn)_cretval;
@@ -716,12 +713,9 @@ bool installPluginsSupported() nothrow
 gstpbutils.types.InstallPluginsReturn installPluginsSync(string[] details, gstpbutils.install_plugins_context.InstallPluginsContext ctx = null) nothrow
 {
   GstInstallPluginsReturn _cretval;
-  char*[] _tmpdetails;
-  foreach (s; details)
-    _tmpdetails ~= s.toCString;
-  _tmpdetails ~= null;
-  const(char*)* _details = _tmpdetails.ptr;
-
+  auto _details_arr = new char*[](details.length + 1);
+  auto _details = cast(char**)_details_arr.ptr;
+  foreach (i, s; details) _details[i] = s.toCString!(No.Malloc);
   _cretval = gst_install_plugins_sync(_details, ctx ? cast(GstInstallPluginsContext*)ctx._cPtr(No.Dup) : null);
   gstpbutils.types.InstallPluginsReturn _retval = cast(gstpbutils.types.InstallPluginsReturn)_cretval;
   return _retval;

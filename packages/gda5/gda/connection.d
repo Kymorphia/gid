@@ -1511,7 +1511,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectConnClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
@@ -1555,7 +1555,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectConnOpened(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
@@ -1599,7 +1599,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectConnToClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
@@ -1643,7 +1643,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectDsnChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
@@ -1690,7 +1690,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection_event.ConnectionEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.connection.Connection)))
   && Parameters!T.length < 3)
@@ -1739,7 +1739,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectTransactionStatusChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {

@@ -111,9 +111,9 @@ class Snapshot : gdk.snapshot.Snapshot
   void appendBorder(gsk.rounded_rect.RoundedRect outline, float[] borderWidth, gdk.rgba.RGBA[] borderColor) nothrow
   {
     assert(!borderWidth || borderWidth.length == 4);
-    auto _borderWidth = borderWidth.ptr ? cast(const(float)*)borderWidth.ptr : [float.init].ptr;
+    auto _borderWidth = cast(float*)borderWidth.ptr;
     assert(!borderColor || borderColor.length == 4);
-    auto _borderColor = borderColor.ptr ? cast(const(GdkRGBA)*)borderColor.ptr : [GdkRGBA.init].ptr;
+    auto _borderColor = cast(GdkRGBA*)borderColor.ptr;
     gtk_snapshot_append_border(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, _borderWidth, _borderColor);
   }
 
@@ -167,11 +167,9 @@ class Snapshot : gdk.snapshot.Snapshot
     if (stops)
       _nStops = cast(size_t)stops.length;
 
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj._cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = obj._cInstance;
     gtk_snapshot_append_conic_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, rotation, _stops, _nStops);
   }
 
@@ -229,11 +227,9 @@ class Snapshot : gdk.snapshot.Snapshot
     if (stops)
       _nStops = cast(size_t)stops.length;
 
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj._cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = obj._cInstance;
     gtk_snapshot_append_linear_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&startPoint, cast(const(graphene_point_t)*)&endPoint, _stops, _nStops);
   }
 
@@ -286,11 +282,9 @@ class Snapshot : gdk.snapshot.Snapshot
     if (stops)
       _nStops = cast(size_t)stops.length;
 
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj._cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = obj._cInstance;
     gtk_snapshot_append_radial_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, hradius, vradius, start, end, _stops, _nStops);
   }
 
@@ -309,11 +303,9 @@ class Snapshot : gdk.snapshot.Snapshot
     if (stops)
       _nStops = cast(size_t)stops.length;
 
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj._cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = obj._cInstance;
     gtk_snapshot_append_repeating_linear_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&startPoint, cast(const(graphene_point_t)*)&endPoint, _stops, _nStops);
   }
 
@@ -335,11 +327,9 @@ class Snapshot : gdk.snapshot.Snapshot
     if (stops)
       _nStops = cast(size_t)stops.length;
 
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj._cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = obj._cInstance;
     gtk_snapshot_append_repeating_radial_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, hradius, vradius, start, end, _stops, _nStops);
   }
 
@@ -654,11 +644,9 @@ class Snapshot : gdk.snapshot.Snapshot
     if (shadow)
       _nShadows = cast(size_t)shadow.length;
 
-    GskShadow[] _tmpshadow;
-    foreach (obj; shadow)
-      _tmpshadow ~= obj._cInstance;
-    const(GskShadow)* _shadow = _tmpshadow.ptr;
-
+    auto _shadow_arr = new GskShadow[](shadow.length);
+    auto _shadow = _shadow_arr.ptr;
+    foreach (i, obj; shadow) _shadow[i] = obj._cInstance;
     gtk_snapshot_push_shadow(cast(GtkSnapshot*)this._cPtr, _shadow, _nShadows);
   }
 

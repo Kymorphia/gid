@@ -87,7 +87,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
   */
   gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.event_controller_legacy.EventControllerLegacy)))
   && Parameters!T.length < 3)

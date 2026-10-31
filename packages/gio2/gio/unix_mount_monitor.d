@@ -123,7 +123,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   */
   gulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.unix_mount_monitor.UnixMountMonitor)))
   && Parameters!T.length < 2)
   {
@@ -167,7 +167,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   */
   gulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.unix_mount_monitor.UnixMountMonitor)))
   && Parameters!T.length < 2)
   {

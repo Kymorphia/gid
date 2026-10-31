@@ -437,12 +437,9 @@ class WebContext : gobject.object.ObjectWrap
   */
   void setPreferredLanguages(string[] languages = null) nothrow
   {
-    const(char)*[] _tmplanguages;
-    foreach (s; languages)
-      _tmplanguages ~= s.toCString;
-    _tmplanguages ~= null;
-    const(char*)* _languages = _tmplanguages.ptr;
-
+    auto _languages_arr = new char*[](languages.length + 1);
+    auto _languages = cast(char**)_languages_arr.ptr;
+    foreach (i, s; languages) _languages[i] = s.toCString!(No.Malloc);
     webkit_web_context_set_preferred_languages(cast(WebKitWebContext*)this._cPtr, _languages);
   }
 
@@ -475,12 +472,9 @@ class WebContext : gobject.object.ObjectWrap
   */
   void setSpellCheckingLanguages(string[] languages) nothrow
   {
-    char*[] _tmplanguages;
-    foreach (s; languages)
-      _tmplanguages ~= s.toCString;
-    _tmplanguages ~= null;
-    const(char*)* _languages = _tmplanguages.ptr;
-
+    auto _languages_arr = new char*[](languages.length + 1);
+    auto _languages = cast(char**)_languages_arr.ptr;
+    foreach (i, s; languages) _languages[i] = s.toCString!(No.Malloc);
     webkit_web_context_set_spell_checking_languages(cast(WebKitWebContext*)this._cPtr, _languages);
   }
 
@@ -543,7 +537,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   gulong connectAutomationStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.automation_session.AutomationSession)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_context.WebContext)))
   && Parameters!T.length < 3)
@@ -598,7 +592,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   gulong connectInitializeNotificationPermissions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_context.WebContext)))
   && Parameters!T.length < 2)
   {
@@ -645,7 +639,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   gulong connectInitializeWebProcessExtensions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_context.WebContext)))
   && Parameters!T.length < 2)
   {
@@ -697,7 +691,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.user_message.UserMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_context.WebContext)))
   && Parameters!T.length < 3)

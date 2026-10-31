@@ -9,8 +9,6 @@ import gdk.display;
 import gdk.texture;
 import gdk.types;
 import gid.gid;
-import glib.error;
-import glib.types;
 import gobject.gid_builder;
 import gobject.object;
 
@@ -300,60 +298,6 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
     GdkDmabufTextureBuilder* _cretval;
     _cretval = gdk_dmabuf_texture_builder_new();
     this(_cretval, Yes.Take);
-  }
-
-  /**
-      Builds a new [gdk.texture.Texture] with the values set up in the builder.
-      
-      It is a programming error to call this function if any mandatory
-      property has not been set.
-      
-      If the dmabuf is not supported by GTK, null will be returned and error will be set.
-      
-      The `destroy` function gets called when the returned texture gets released.
-      
-      It is possible to call this function multiple times to create multiple textures,
-      possibly with changing properties in between.
-      
-      It is the responsibility of the caller to keep the file descriptors for the planes
-      open until the created texture is no longer used, and close them afterwards (possibly
-      using the destroy notify).
-      
-      Not all formats defined in the `drm_fourcc.h` header are supported. You can use
-      [gdk.display.Display.getDmabufFormats] to get a list of supported formats.
-  
-      Params:
-        destroy = destroy function to be called when the texture is
-            released
-        data = user data to pass to the destroy function
-      Returns: a newly built [gdk.texture.Texture] or `NULL`
-          if the format is not supported
-      Throws: [ErrorWrap]
-  */
-  gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null)
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    GdkTexture* _cretval;
-    GError *_err;
-    _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)this._cPtr, _destroyCB, data, &_err);
-    if (_err)
-      throw new ErrorWrap(_err, Yes.Take);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
-    return _retval;
   }
 
   /**

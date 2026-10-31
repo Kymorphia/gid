@@ -176,7 +176,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   */
   gulong connectValueAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gstcontroller.control_point.ControlPoint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstcontroller.timed_value_control_source.TimedValueControlSource)))
   && Parameters!T.length < 3)
@@ -226,7 +226,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   */
   gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gstcontroller.control_point.ControlPoint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstcontroller.timed_value_control_source.TimedValueControlSource)))
   && Parameters!T.length < 3)
@@ -276,7 +276,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   */
   gulong connectValueRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gstcontroller.control_point.ControlPoint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstcontroller.timed_value_control_source.TimedValueControlSource)))
   && Parameters!T.length < 3)

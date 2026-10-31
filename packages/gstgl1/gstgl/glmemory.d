@@ -3,15 +3,10 @@ module gstgl.glmemory;
 
 public import gid.basictypes;
 import gid.gid;
-import glib.types;
 import gobject.boxed;
-import gst.allocation_params;
-import gst.allocator;
-import gst.memory;
 import gstgl.c.functions;
 import gstgl.c.types;
 import gstgl.glbase_memory;
-import gstgl.glcontext;
 import gstgl.types;
 import gstvideo.video_alignment;
 import gstvideo.video_info;
@@ -338,43 +333,6 @@ class GLMemory : gobject.boxed.Boxed
     int _retval;
     _retval = gst_gl_memory_get_texture_width(cast(GstGLMemory*)this._cPtr);
     return _retval;
-  }
-
-  /**
-      Initializes mem with the required parameters.  info is assumed to have
-      already have been modified with [gstvideo.video_info.VideoInfo.align_].
-  
-      Params:
-        allocator = the #GstAllocator to initialize with
-        parent = the parent #GstMemory to initialize with
-        context = the #GstGLContext to initialize with
-        target = the #GstGLTextureTarget for this #GstGLMemory
-        texFormat = the #GstGLFormat for this #GstGLMemory
-        params = the GstAllocationParams to initialize with
-        info = the #GstVideoInfo for this #GstGLMemory
-        plane = the plane number (starting from 0) for this #GstGLMemory
-        valign = optional #GstVideoAlignment parameters
-        userData = user data to call notify with
-        notify = a #GDestroyNotify
-  */
-  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, gst.allocation_params.AllocationParams* params, gstvideo.video_info.VideoInfo info, uint plane, gstvideo.video_alignment.VideoAlignment* valign = null, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
-  {
-    extern(C) void _notifyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_memory_init(cast(GstGLMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, target, texFormat, cast(const(GstAllocationParams)*)params, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)valign, userData, _notifyCB);
   }
 
   /**

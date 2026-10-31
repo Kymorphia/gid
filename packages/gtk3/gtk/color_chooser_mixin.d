@@ -108,7 +108,7 @@ template ColorChooserT()
     if (colors)
       _nColors = cast(int)colors.length;
 
-    auto _colors = colors.ptr ? cast(GdkRGBA*)colors.ptr : [GdkRGBA.init].ptr;
+    auto _colors = cast(GdkRGBA*)colors.ptr;
     gtk_color_chooser_add_palette(cast(GtkColorChooser*)this._cPtr, orientation, colorsPerLine, _nColors, _colors);
   }
 
@@ -179,7 +179,7 @@ template ColorChooserT()
   */
   gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.rgba.RGBA)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.color_chooser.ColorChooser)))
   && Parameters!T.length < 3)

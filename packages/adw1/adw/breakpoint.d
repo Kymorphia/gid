@@ -203,27 +203,21 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
     if (objects)
       _nSetters = cast(int)objects.length;
 
-    GObject*[] _tmpobjects;
-    foreach (obj; objects)
-      _tmpobjects ~= obj ? cast(GObject*)obj._cPtr : null;
-    GObject** _objects = cast(GObject**)_tmpobjects.ptr;
-
+    auto _objects_arr = new GObject*[](objects.length);
+    auto _objects = cast(GObject**)_objects_arr.ptr;
+    foreach (i, obj; objects) _objects[i] = obj ? cast(GObject*)obj._cPtr(No.Dup) : null;
     if (names)
       _nSetters = cast(int)names.length;
 
-    char*[] _tmpnames;
-    foreach (s; names)
-      _tmpnames ~= s.toCString;
-    const(char*)* _names = _tmpnames.ptr;
-
+    auto _names_arr = new char*[](names.length);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
     if (values)
       _nSetters = cast(int)values.length;
 
-    GValue*[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= cast(GValue*)obj._cPtr;
-    const(GValue*)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue*[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? cast(GValue*)obj._cPtr(No.Dup) : null;
     adw_breakpoint_add_settersv(cast(AdwBreakpoint*)this._cPtr, _nSetters, _objects, _names, _values);
   }
 
@@ -269,7 +263,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.breakpoint.Breakpoint)))
   && Parameters!T.length < 2)
   {
@@ -315,7 +309,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   gulong connectUnapply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.breakpoint.Breakpoint)))
   && Parameters!T.length < 2)
   {

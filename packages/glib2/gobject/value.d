@@ -967,38 +967,38 @@ void initVal(T)(GValue* gval) nothrow
   static if (is(T == bool))
     g_value_init(gval, GTypeEnum.Boolean);
   else static if (is(T == byte) || is(T == char))
-    g_value_init(gval, GTypeEnum.Char);
+  g_value_init(gval, GTypeEnum.Char);
   else static if (is(T == ubyte))
-    g_value_init(gval, GTypeEnum.Uchar);
+  g_value_init(gval, GTypeEnum.Uchar);
   else static if (is(T == int))
-    g_value_init(gval, GTypeEnum.Int);
+  g_value_init(gval, GTypeEnum.Int);
   else static if (is(T == uint))
-    g_value_init(gval, GTypeEnum.Uint);
+  g_value_init(gval, GTypeEnum.Uint);
   else static if (is(T == long))
-    g_value_init(gval, GTypeEnum.Int64);
+  g_value_init(gval, GTypeEnum.Int64);
   else static if (is(T == ulong))
-    g_value_init(gval, GTypeEnum.Uint64);
+  g_value_init(gval, GTypeEnum.Uint64);
   else static if (is(T == float))
-    g_value_init(gval, GTypeEnum.Float);
+  g_value_init(gval, GTypeEnum.Float);
   else static if (is(T == double))
-    g_value_init(gval, GTypeEnum.Double);
+  g_value_init(gval, GTypeEnum.Double);
   else static if (is(T == enum))
-    static assert(0, "initVal: enums/flags need an explicit GType");
+  static assert(0, "initVal: enums/flags need an explicit GType");
   else static if (is(T == string))
-    g_value_init(gval, GTypeEnum.String);
+  g_value_init(gval, GTypeEnum.String);
   else static if (is(T == glib.variant.Variant))
-    g_value_init(gval, GTypeEnum.Variant);
+  g_value_init(gval, GTypeEnum.Variant);
   else static if (is(T : ParamSpec))
-    g_value_init(gval, GTypeEnum.Param);
+  g_value_init(gval, GTypeEnum.Param);
   else static if (is(T == string[]))
-    g_value_init(gval, g_strv_get_type());
+  g_value_init(gval, g_strv_get_type());
   else static if (isBoxed!T)
   { // Cannot initialize a plain boxed type, it is done in setVal()
   }
   else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
-    g_value_init(gval, GTypeEnum.Object);
+  g_value_init(gval, GTypeEnum.Object);
   else static if (is(T : Object) || isPointer!T)
-    g_value_init(gval, GTypeEnum.Pointer);
+  g_value_init(gval, GTypeEnum.Pointer);
   else
     static assert(0, "Unsupported type " ~ T.stringof ~ " in Value.initVal");
 }
@@ -1015,25 +1015,25 @@ T getVal(T)(const(GValue)* gval) nothrow
   static if (is(T == bool))
     return cast(bool)g_value_get_boolean(gval);
   else static if (is(T == byte) || is(T == char))
-    return g_value_get_schar(gval);
+  return g_value_get_schar(gval);
   else static if (is(T == ubyte))
-    return g_value_get_uchar(gval);
+  return g_value_get_uchar(gval);
   else static if (is(T == int))
-    return g_value_get_int(gval);
+  return g_value_get_int(gval);
   else static if (is(T == uint))
-    return g_value_get_uint(gval);
+  return g_value_get_uint(gval);
   else static if (is(T == long))
-    return g_value_get_int64(gval);
+  return g_value_get_int64(gval);
   else static if (is(T == ulong))
-    return g_value_get_uint64(gval);
+  return g_value_get_uint64(gval);
   else static if (is(T == float))
-    return g_value_get_float(gval);
+  return g_value_get_float(gval);
   else static if (is(T == double))
-    return g_value_get_double(gval);
+  return g_value_get_double(gval);
   else static if (is(T == enum)) // enum or flags
-    return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
+  return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
   else static if (is(T == string))
-    return g_value_get_string(gval).fromCString;
+  return g_value_get_string(gval).fromCString;
   else static if (is(T == glib.variant.Variant))
   {
     auto v = g_value_get_variant(gval);
@@ -1082,7 +1082,7 @@ T getVal(T)(const(GValue)* gval) nothrow
     return v ? new T(v, No.Take) : null;
   }
   else static if (isPointer!T)
-    return cast(T)g_value_get_pointer(gval);
+  return cast(T)g_value_get_pointer(gval);
   else
     static assert(0, "Unsupported type " ~ T.stringof ~ " in Value.getVal");
 }
@@ -1118,21 +1118,21 @@ void setVal(T)(GValue* gval, T v) nothrow
   static if (is(T == bool))
     g_value_set_boolean(gval, cast(gboolean)v);
   else static if (is(T == byte) || is(T == char))
-    g_value_set_schar(gval, v);
+  g_value_set_schar(gval, v);
   else static if (is(T == ubyte))
-    g_value_set_uchar(gval, v);
+  g_value_set_uchar(gval, v);
   else static if (is(T == int))
-    g_value_set_int(gval, v);
+  g_value_set_int(gval, v);
   else static if (is(T == uint))
-    g_value_set_uint(gval, v);
+  g_value_set_uint(gval, v);
   else static if (is(T == long))
-    g_value_set_int64(gval, v);
+  g_value_set_int64(gval, v);
   else static if (is(T == ulong))
-    g_value_set_uint64(gval, v);
+  g_value_set_uint64(gval, v);
   else static if (is(T == float))
-    g_value_set_float(gval, v);
+  g_value_set_float(gval, v);
   else static if (is(T == double))
-    g_value_set_double(gval, v);
+  g_value_set_double(gval, v);
   else static if (is(T == enum))
   {
     if (g_type_is_a(gval.gType, GTypeEnum.Flags))
@@ -1141,11 +1141,11 @@ void setVal(T)(GValue* gval, T v) nothrow
       g_value_set_enum(gval, v);
   }
   else static if (is(T == string))
-    g_value_take_string(gval, toCString!(Yes.Malloc)(v));
+  g_value_take_string(gval, toCString!(Yes.Malloc)(v));
   else static if (is(T == glib.variant.Variant))
-    g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
+  g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
   else static if (is(T : ParamSpec))
-    g_value_set_param(gval, v ? cast(GParamSpec*)v._cPtr : null);
+  g_value_set_param(gval, v ? cast(GParamSpec*)v._cPtr : null);
   else static if (is(T == string[]))
   {
     auto strv = cast(char**)gMalloc((v.length + 1) * (char*).sizeof);
@@ -1159,7 +1159,7 @@ void setVal(T)(GValue* gval, T v) nothrow
     if (!gval.gType)
     {
       if (!v) return;
-        g_value_init(gval, v._gType);
+      g_value_init(gval, v._gType);
     }
 
     g_value_set_boxed(gval, v ? v._cInstancePtr : null);
@@ -1170,13 +1170,13 @@ void setVal(T)(GValue* gval, T v) nothrow
     g_value_set_boxed(gval, cast(void*)&v);
   }
   else static if (is(T : gobject.object.ObjectWrap))
-    g_value_set_object(gval, v ? cast(GObject*)v._cPtr(No.Dup) : null);
+  g_value_set_object(gval, v ? cast(GObject*)v._cPtr(No.Dup) : null);
   else static if (is(T == interface))
   {
     if (auto objG = cast(gobject.object.ObjectWrap)v)
       g_value_set_object(gval, cast(GObject*)objG._cPtr(No.Dup));
     else if (!v)
-      g_value_set_object(gval, null);
+    g_value_set_object(gval, null);
     else
       assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectWrap in Value.setVal");
   }
@@ -1190,7 +1190,7 @@ void setVal(T)(GValue* gval, T v) nothrow
       g_value_set_pointer(gval, p);
   }
   else static if (isPointer!T)
-    g_value_set_pointer(gval, cast(void*)v);
+  g_value_set_pointer(gval, cast(void*)v);
   else
     static assert(0, "Unsupported type " ~ T.stringof ~ " in Value.setVal");
 }

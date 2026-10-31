@@ -11,7 +11,6 @@ import gio.async_result_mixin;
 import gio.cancellable;
 import gio.output_stream;
 import glib.error;
-import glib.types;
 import gobject.gid_builder;
 import gobject.object;
 import gobject.types;
@@ -187,33 +186,6 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   void returnSuccess() nothrow
   {
     gdk_content_serializer_return_success(cast(GdkContentSerializer*)this._cPtr);
-  }
-
-  /**
-      Associate data with the current serialization operation.
-  
-      Params:
-        data = data to associate with this operation
-        notify = destroy notify for data
-  */
-  void setTaskData(void* data, glib.types.DestroyNotify notify) nothrow
-  {
-    extern(C) void _notifyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _notifyCB = notify ? &_notifyCallback : null;
-    gdk_content_serializer_set_task_data(cast(GdkContentSerializer*)this._cPtr, data, _notifyCB);
   }
 }
 

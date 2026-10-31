@@ -249,7 +249,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     GError *_err;
     _cretval = gst_mikey_message_new_from_data(_data, _size, info, &_err);
     if (_err)
@@ -303,7 +303,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     if (data)
       _dataLen = cast(ushort)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_mikey_message_add_pke(cast(GstMIKEYMessage*)this._cPtr, C, _dataLen, _data);
     return _retval;
   }
@@ -322,7 +322,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     if (rand)
       _len = cast(ubyte)rand.length;
 
-    auto _rand = rand.ptr ? cast(const(ubyte)*)rand.ptr : [ubyte.init].ptr;
+    auto _rand = cast(ubyte*)rand.ptr;
     _retval = cast(bool)gst_mikey_message_add_rand(cast(GstMIKEYMessage*)this._cPtr, _len, _rand);
     return _retval;
   }

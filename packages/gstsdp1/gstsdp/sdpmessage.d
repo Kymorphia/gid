@@ -288,12 +288,9 @@ class SDPMessage : gobject.boxed.Boxed
     GstSDPResult _cretval;
     const(char)* _start = start.toCString!(No.Malloc, No.Nullable);
     const(char)* _stop = stop.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmprepeat;
-    foreach (s; repeat)
-      _tmprepeat ~= s.toCString;
-    _tmprepeat ~= null;
-    const(char*)* _repeat = _tmprepeat.ptr;
-
+    auto _repeat_arr = new char*[](repeat.length + 1);
+    auto _repeat = cast(char**)_repeat_arr.ptr;
+    foreach (i, s; repeat) _repeat[i] = s.toCString!(No.Malloc);
     _cretval = gst_sdp_message_add_time(cast(GstSDPMessage*)this._cPtr, _start, _stop, _repeat);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
@@ -1247,7 +1244,7 @@ class SDPMessage : gobject.boxed.Boxed
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_sdp_message_parse_buffer(_data, _size, msg ? cast(GstSDPMessage*)msg._cPtr(No.Dup) : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

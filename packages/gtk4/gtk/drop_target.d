@@ -391,7 +391,7 @@ class DropTarget : gtk.event_controller.EventController
     if (types)
       _nTypes = cast(size_t)types.length;
 
-    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
+    auto _types = cast(GType*)types.ptr;
     gtk_drop_target_set_gtypes(cast(GtkDropTarget*)this._cPtr, _types, _nTypes);
   }
 
@@ -441,7 +441,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   gulong connectAccept(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drop.Drop)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.drop_target.DropTarget)))
   && Parameters!T.length < 3)
@@ -507,7 +507,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   gulong connectDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.value.Value)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == double)))
@@ -574,7 +574,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   gulong connectEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gdk.types.DragAction)
+  && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_target.DropTarget)))
@@ -632,7 +632,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   gulong connectLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.drop_target.DropTarget)))
   && Parameters!T.length < 2)
   {
@@ -682,7 +682,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   gulong connectMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gdk.types.DragAction)
+  && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_target.DropTarget)))

@@ -91,12 +91,9 @@ class NetworkProxySettings : gobject.boxed.Boxed
   {
     WebKitNetworkProxySettings* _cretval;
     const(char)* _defaultProxyUri = defaultProxyUri.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmpignoreHosts;
-    foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString;
-    _tmpignoreHosts ~= null;
-    const(char*)* _ignoreHosts = _tmpignoreHosts.ptr;
-
+    auto _ignoreHosts_arr = new char*[](ignoreHosts.length + 1);
+    auto _ignoreHosts = cast(char**)_ignoreHosts_arr.ptr;
+    foreach (i, s; ignoreHosts) _ignoreHosts[i] = s.toCString!(No.Malloc);
     _cretval = webkit_network_proxy_settings_new(_defaultProxyUri, _ignoreHosts);
     this(_cretval, Yes.Take);
   }

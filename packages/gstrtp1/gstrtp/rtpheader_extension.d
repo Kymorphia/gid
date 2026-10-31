@@ -145,7 +145,7 @@ class RTPHeaderExtension : gst.element.Element
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_rtp_header_extension_read(cast(GstRTPHeaderExtension*)this._cPtr, readFlags, _data, _size, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
     return _retval;
   }
@@ -312,7 +312,7 @@ class RTPHeaderExtension : gst.element.Element
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = gst_rtp_header_extension_write(cast(GstRTPHeaderExtension*)this._cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta._cPtr(No.Dup) : null, writeFlags, output ? cast(GstBuffer*)output._cPtr(No.Dup) : null, _data, _size);
     return _retval;
   }

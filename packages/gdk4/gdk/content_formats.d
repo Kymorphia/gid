@@ -97,11 +97,9 @@ class ContentFormats : gobject.boxed.Boxed
     if (mimeTypes)
       _nMimeTypes = cast(uint)mimeTypes.length;
 
-    char*[] _tmpmimeTypes;
-    foreach (s; mimeTypes)
-      _tmpmimeTypes ~= s.toCString;
-    const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
-
+    auto _mimeTypes_arr = new char*[](mimeTypes.length);
+    auto _mimeTypes = cast(char**)_mimeTypes_arr.ptr;
+    foreach (i, s; mimeTypes) _mimeTypes[i] = s.toCString!(No.Malloc);
     _cretval = gdk_content_formats_new(_mimeTypes, _nMimeTypes);
     this(_cretval, Yes.Take);
   }

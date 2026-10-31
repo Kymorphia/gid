@@ -313,7 +313,7 @@ class Matrix : gobject.boxed.Boxed
   {
     graphene_matrix_t* _cretval;
     assert(!v || v.length == 16);
-    auto _v = v.ptr ? cast(const(float)*)v.ptr : [float.init].ptr;
+    auto _v = cast(float*)v.ptr;
     _cretval = graphene_matrix_init_from_float(cast(graphene_matrix_t*)this._cPtr, _v);
     auto _retval = _cretval ? new graphene.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;

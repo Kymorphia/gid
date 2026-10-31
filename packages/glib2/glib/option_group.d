@@ -71,7 +71,8 @@ class OptionGroup : gobject.boxed.Boxed
   */
   void addEntries(glib.types.OptionEntry[] entries) nothrow
   {
-    auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
+    auto _entries_arr = entries ~ GOptionEntry.init;
+    auto _entries = _entries_arr.ptr;
     g_option_group_add_entries(cast(GOptionGroup*)this._cPtr, _entries);
   }
 

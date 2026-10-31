@@ -309,7 +309,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   */
   gulong connectCustomItemActivated(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.app_chooser_button.AppChooserButton)))
   && Parameters!T.length < 3)

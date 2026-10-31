@@ -339,7 +339,7 @@ int distributeNaturalAllocation(int extraSpace, gtk.types.RequestedSize[] sizes)
   if (sizes)
     _nRequestedSizes = cast(uint)sizes.length;
 
-  auto _sizes = sizes.ptr ? cast(GtkRequestedSize*)sizes.ptr : [GtkRequestedSize.init].ptr;
+  auto _sizes = cast(GtkRequestedSize*)sizes.ptr;
   _retval = gtk_distribute_natural_allocation(extraSpace, _nRequestedSizes, _sizes);
   return _retval;
 }

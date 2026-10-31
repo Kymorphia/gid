@@ -405,7 +405,7 @@ class Dialog : gtk.window.Window
     if (newOrder)
       _nParams = cast(int)newOrder.length;
 
-    auto _newOrder = newOrder.ptr ? cast(int*)newOrder.ptr : [int.init].ptr;
+    auto _newOrder = cast(int*)newOrder.ptr;
     gtk_dialog_set_alternative_button_order_from_array(cast(GtkDialog*)this._cPtr, _nParams, _newOrder);
   }
 
@@ -458,7 +458,7 @@ class Dialog : gtk.window.Window
   */
   gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.dialog.Dialog)))
   && Parameters!T.length < 2)
   {
@@ -507,7 +507,7 @@ class Dialog : gtk.window.Window
   */
   gulong connectResponse(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.dialog.Dialog)))
   && Parameters!T.length < 3)

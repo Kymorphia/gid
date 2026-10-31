@@ -122,11 +122,9 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
     if (iconnames)
       _len = cast(int)iconnames.length;
 
-    char*[] _tmpiconnames;
-    foreach (s; iconnames)
-      _tmpiconnames ~= s.toCString;
-    char** _iconnames = _tmpiconnames.ptr;
-
+    auto _iconnames_arr = new char*[](iconnames.length);
+    auto _iconnames = cast(char**)_iconnames_arr.ptr;
+    foreach (i, s; iconnames) _iconnames[i] = s.toCString!(No.Malloc);
     _cretval = g_themed_icon_new_from_names(_iconnames, _len);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;

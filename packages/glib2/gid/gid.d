@@ -448,7 +448,7 @@ if ((is(K == string) || is(K == const(void)*))
     g_hash_table_destroy(hash);
   }
   else static if (ownership == GidOwnership.Full)
-    g_hash_table_unref(hash);
+  g_hash_table_unref(hash);
 
   return map;
 }
@@ -637,7 +637,7 @@ if ((is(K == string) || is(K == const(void)*))
   static if (is(V : gobject.object.ObjectWrap) || is(V == interface))
     valDestroyFunc = cast(GDestroyNotify)g_object_unref;
   else static if (is(V : string))
-    valDestroyFunc = g_free;
+  valDestroyFunc = g_free;
 
   GHashTable* hash;
 
@@ -705,11 +705,11 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
   static if (is(CT == GByteArray*))
     g_byte_array_unref(container);
   else static if (is(CT == GBytes*))
-    g_bytes_unref(container);
+  g_bytes_unref(container);
   else static if (is(CT == GArray*))
-    g_array_unref(container);
+  g_array_unref(container);
   else static if (is(CT == GPtrArray*))
-    g_ptr_array_unref(container);
+  g_ptr_array_unref(container);
   else static if (is(CT == GList*))
   {
     for (auto n = container; n; )
@@ -731,7 +731,7 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
     }
   }
   else static if (is(CT == GHashTable*))
-    g_hash_table_destroy(container);
+  g_hash_table_destroy(container);
   else
     static assert(0, "containerFree: unsupported container type " ~ CT.stringof);
 }
@@ -785,13 +785,13 @@ if (containerTypeIsSupported!T)
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
     return gobject.object.ObjectWrap._getDObject!T(data, No.Take);
   else static if (is(T == string))
-    return fromCString(cast(const(char)*)data);
+  return fromCString(cast(const(char)*)data);
   else static if (isTypeCopyableStruct!T)
-    return new T(data, No.Take);
+  return new T(data, No.Take);
   else static if (is(T == void*) || is(T == const(void)*))
-    return data;
+  return data;
   else static if (isTypeSimple!T)
-    return *(cast(T*)data);
+  return *(cast(T*)data);
   else
     assert(0);
 }
@@ -815,11 +815,11 @@ if (containerTypeIsSupported!T)
     *(cast(void**)data) = objG ? objG._cPtr(Yes.Dup) : null;
   }
   else static if (is(T == string))
-    *cast(char**)data = toCString!(Yes.Malloc)(val); // Transfer the string to C (use g_malloc)
+  *cast(char**)data = toCString!(Yes.Malloc)(val); // Transfer the string to C (use g_malloc)
   else static if (is(T == void*) || is(T == const(void)*))
-    *(cast(void**)data) = cast(void*)val;
+  *(cast(void**)data) = cast(void*)val;
   else static if (isTypeSimple!T)
-    *(cast(T*)data) = val;
+  *(cast(T*)data) = val;
   else
     assert(0);
 }
@@ -836,13 +836,13 @@ if (containerTypeIsSupported!T)
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
     gobject.object.ObjectWrap._unref(data);
   else static if (isBoxed!T)
-    boxedFree(T._getGType, data);
+  boxedFree(T._getGType, data);
   else static if (__traits(compiles, T._unref(data))) // Reffed types
-    T._unref(data);
+  T._unref(data);
   else static if (isTypeWrap!T) // Shallow copy from _cPtr(Yes.Dup) or C allocated structure
-    gFree(data);
+  gFree(data);
   else static if (is(T : string) || isTypeSimple!T)
-    gFree(data);
+  gFree(data);
 }
 
 /**

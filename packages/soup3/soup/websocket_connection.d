@@ -194,6 +194,31 @@ class WebsocketConnection : gobject.object.ObjectWrap
   }
 
   /**
+      Creates a #SoupWebsocketConnection on stream with the given active extensions.
+      
+      This should be called after completing the handshake to begin using the WebSocket
+      protocol.
+  
+      Params:
+        stream = a #GIOStream connected to the WebSocket server
+        uri = the URI of the connection
+        type = the type of connection (client/side)
+        origin = the Origin of the client
+        protocol = the subprotocol in use
+        extensions = a #GList of #SoupWebsocketExtension objects
+      Returns: a new #SoupWebsocketConnection
+  */
+  this(gio.iostream.IOStream stream, glib.uri.Uri uri, soup.types.WebsocketConnectionType type, string origin, string protocol, soup.websocket_extension.WebsocketExtension[] extensions) nothrow
+  {
+    SoupWebsocketConnection* _cretval;
+    const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _protocol = protocol.toCString!(No.Malloc, Yes.Nullable);
+    auto _extensions = gListFromD!(soup.websocket_extension.WebsocketExtension)(extensions);
+    _cretval = soup_websocket_connection_new(stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, type, _origin, _protocol, _extensions);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
       Close the connection in an orderly fashion.
       
       Note that until the [soup.websocket_connection.WebsocketConnection.closed] signal fires, the connection
@@ -373,7 +398,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     soup_websocket_connection_send_binary(cast(SoupWebsocketConnection*)this._cPtr, _data, _length);
   }
 
@@ -461,7 +486,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 2)
   {
@@ -505,7 +530,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   gulong connectClosing(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 2)
   {
@@ -554,7 +579,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 3)
@@ -610,7 +635,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   gulong connectMessage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.bytes.Bytes)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.websocket_connection.WebsocketConnection)))
@@ -669,7 +694,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   gulong connectPong(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.bytes.Bytes)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 3)

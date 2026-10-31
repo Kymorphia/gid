@@ -1509,7 +1509,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectActivateCursorItem(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
@@ -1564,7 +1564,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.icon_view.IconView)))
   && Parameters!T.length < 3)
@@ -1634,7 +1634,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
@@ -1704,7 +1704,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
@@ -1756,7 +1756,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectSelectCursorItem(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
@@ -1801,7 +1801,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
@@ -1854,7 +1854,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectToggleCursorItem(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
@@ -1905,7 +1905,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {

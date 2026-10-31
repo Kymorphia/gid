@@ -243,12 +243,9 @@ class FileChooserRequest : gobject.object.ObjectWrap
   */
   void selectFiles(string[] files) nothrow
   {
-    char*[] _tmpfiles;
-    foreach (s; files)
-      _tmpfiles ~= s.toCString;
-    _tmpfiles ~= null;
-    const(char*)* _files = _tmpfiles.ptr;
-
+    auto _files_arr = new char*[](files.length + 1);
+    auto _files = cast(char**)_files_arr.ptr;
+    foreach (i, s; files) _files[i] = s.toCString!(No.Malloc);
     webkit_file_chooser_request_select_files(cast(WebKitFileChooserRequest*)this._cPtr, _files);
   }
 }

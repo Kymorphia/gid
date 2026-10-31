@@ -100,16 +100,16 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     if (values)
       _valuesLength = cast(long)values.length;
 
-    char*[] _tmpvalues;
-    foreach (s; values)
-      _tmpvalues ~= s.toCString;
-    const(char*)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new char*[](values.length);
+    auto _values = cast(char**)_values_arr.ptr;
+    foreach (i, s; values) _values[i] = s.toCString!(No.Malloc);
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_large_string_array_builder_append_strings(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

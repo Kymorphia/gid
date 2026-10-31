@@ -4,6 +4,7 @@ module secret.global;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
+import gio.types;
 import glib.error;
 import gobject.object;
 import secret.c.functions;
@@ -49,6 +50,43 @@ bool passwordClearFinish(gio.async_result.AsyncResult result)
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
   return _retval;
+}
+
+/**
+    Remove unlocked matching passwords from the secret service.
+    
+    The attributes should be a set of key and value string pairs.
+    
+    All unlocked items that match the attributes will be deleted.
+    
+    This method will return immediately and complete asynchronously.
+
+    Params:
+      schema = the schema for the attributes
+      attributes = the attribute keys and values
+      cancellable = optional cancellation object
+      callback = called when the operation completes
+*/
+void passwordClear(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+{
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+  {
+    ptrThawGC(data);
+    auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  auto _attributes = gHashTableFromD!(string, string)(attributes);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  secret_password_clearv(schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
 
 /**
@@ -107,6 +145,43 @@ string passwordLookupFinish(gio.async_result.AsyncResult result)
     
     If no secret is found then null is returned.
     
+    This method will return immediately and complete asynchronously.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      cancellable = optional cancellation object
+      callback = called when the operation completes
+*/
+void passwordLookup(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+{
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+  {
+    ptrThawGC(data);
+    auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  auto _attributes = gHashTableFromD!(string, string)(attributes);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  secret_password_lookupv(schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+}
+
+/**
+    Lookup a password in the secret service.
+    
+    The attributes should be a set of key and value string pairs.
+    
+    If no secret is found then null is returned.
+    
     This method may block indefinitely and should not be used in user interface
     threads.
 
@@ -149,6 +224,42 @@ secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResu
     throw new ErrorWrap(_err, Yes.Take);
   auto _retval = gListToD!(secret.retrievable.Retrievable, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
+}
+
+/**
+    Search for items in the secret service.
+    
+    The attributes should be a set of key and value string pairs.
+    
+    This method will return immediately and complete asynchronously.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      flags = search option flags
+      cancellable = optional cancellation object
+      callback = called when the operation completes
+*/
+void passwordSearch(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+{
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+  {
+    ptrThawGC(data);
+    auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  auto _attributes = gHashTableFromD!(string, string)(attributes);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  secret_password_searchv(schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
 
 /**
@@ -199,6 +310,97 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
   return _retval;
+}
+
+/**
+    Store a password in the secret service.
+    
+    The attributes should be a set of key and value string pairs.
+    
+    If the attributes match a secret item already stored in the collection, then
+    the item will be updated with these new values.
+    
+    If collection is null, then the default collection will be
+    used. Use [secret.types.COLLECTION_SESSION] to store the password in the session
+    collection, which doesn't get stored across login sessions.
+    
+    This method will return immediately and complete asynchronously.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      collection = a collection alias, or D-Bus object path of the
+          collection where to store the secret
+      label = label for the secret
+      password = the null-terminated password to store
+      cancellable = optional cancellation object
+      callback = called when the operation completes
+*/
+void passwordStore(secret.schema.Schema schema, string[string] attributes, string collection, string label, string password, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+{
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+  {
+    ptrThawGC(data);
+    auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  auto _attributes = gHashTableFromD!(string, string)(attributes);
+  const(char)* _collection = collection.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+  const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  secret_password_storev(schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _collection, _label, _password, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+}
+
+/**
+    Store a password in the secret service.
+    
+    This is similar to `funcpassword_storev`, but takes a
+    [secret.value.Value] as the argument instead of a null-terminated password.
+    
+    This method will return immediately and complete asynchronously.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      collection = a collection alias, or D-Bus object path of the
+          collection where to store the secret
+      label = label for the secret
+      value = a [secret.value.Value]
+      cancellable = optional cancellation object
+      callback = called when the operation completes
+*/
+void passwordStoreBinary(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+{
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+  {
+    ptrThawGC(data);
+    auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  auto _attributes = gHashTableFromD!(string, string)(attributes);
+  const(char)* _collection = collection.toCString!(No.Malloc, Yes.Nullable);
+  const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  secret_password_storev_binary(schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
 }
 
 /**

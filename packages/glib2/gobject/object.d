@@ -314,7 +314,7 @@ class ObjectWrap
 
     // Traverse the C GObject type ancestry until we find a corresponding D class
     for (auto gTypeClass = (cast(GTypeInstance*)cptr).gClass; gTypeClass;
-      gTypeClass = g_type_class_peek_parent(gTypeClass))
+    gTypeClass = g_type_class_peek_parent(gTypeClass))
     {
       if (auto dClassType = gTypeClass.gType in gtypeClasses)
       { // If T is an interface type, make sure the matching object class implements it
@@ -558,16 +558,12 @@ class ObjectWrap
     if (parameters)
       _nParameters = cast(uint)parameters.length;
 
-    GParameter[] _tmpparameters;
-    foreach (obj; parameters)
-      _tmpparameters ~= obj._cInstance;
-    GParameter* _parameters = _tmpparameters.ptr;
-
+    auto _parameters_arr = new GParameter[](parameters.length);
+    auto _parameters = _parameters_arr.ptr;
+    foreach (i, obj; parameters) _parameters[i] = obj._cInstance;
     _cretval = g_object_newv(objectType, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
-    foreach (i, obj; parameters)
-      obj._cInstance = _tmpparameters[i];
-
+    foreach (i, obj; parameters) obj._cInstance = _parameters[i];
     return _retval;
   }
 
@@ -763,19 +759,15 @@ class ObjectWrap
     if (names)
       _nProperties = cast(uint)names.length;
 
-    char*[] _tmpnames;
-    foreach (s; names)
-      _tmpnames ~= s.toCString;
-    const(char*)* _names = _tmpnames.ptr;
-
+    auto _names_arr = new char*[](names.length);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
     if (values)
       _nProperties = cast(uint)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    GValue* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     g_object_getv(cast(GObject*)this._cPtr, _nProperties, _names, _values);
   }
 
@@ -1068,7 +1060,7 @@ class ObjectWrap
   */
   gulong connectNotify(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.param_spec.ParamSpec)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectWrap)))
   && Parameters!T.length < 3)

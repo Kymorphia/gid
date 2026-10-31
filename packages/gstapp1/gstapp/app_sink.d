@@ -578,7 +578,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectEos(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
@@ -633,7 +633,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectNewPreroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.types.FlowReturn)
+  && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
@@ -691,7 +691,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectNewSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.types.FlowReturn)
+  && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
@@ -755,7 +755,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectNewSerializedEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
@@ -808,7 +808,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectProposeAllocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.query.Query)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)
@@ -877,7 +877,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectPullPreroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.sample.Sample)
+  && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
@@ -938,7 +938,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectPullSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.sample.Sample)
+  && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
@@ -1009,7 +1009,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectTryPullObject(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.mini_object.MiniObject)
+  && is(ReturnType!T == gst.mini_object.MiniObject)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)
@@ -1082,7 +1082,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectTryPullPreroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.sample.Sample)
+  && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)
@@ -1150,7 +1150,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   gulong connectTryPullSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gst.sample.Sample)
+  && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)

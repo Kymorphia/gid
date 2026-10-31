@@ -63,11 +63,9 @@ class FileList : gobject.boxed.Boxed
     if (files)
       _nFiles = cast(size_t)files.length;
 
-    GFile*[] _tmpfiles;
-    foreach (obj; files)
-      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
-    GFile** _files = _tmpfiles.ptr;
-
+    auto _files_arr = new GFile*[](files.length);
+    auto _files = _files_arr.ptr;
+    foreach (i, obj; files) _files[i] = obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr(No.Dup): null;
     _cretval = gdk_file_list_new_from_array(_files, _nFiles);
     auto _retval = _cretval ? new gdk.file_list.FileList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

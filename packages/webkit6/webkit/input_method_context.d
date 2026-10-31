@@ -206,7 +206,7 @@ class InputMethodContext : gobject.object.ObjectWrap
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     webkit_input_method_context_notify_surrounding(cast(WebKitInputMethodContext*)this._cPtr, _text, _length, cursorIndex, selectionIndex);
   }
 
@@ -274,7 +274,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   gulong connectCommitted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 3)
@@ -327,7 +327,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   gulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.input_method_context.InputMethodContext)))
@@ -381,7 +381,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 2)
   {
@@ -425,7 +425,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   gulong connectPreeditFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 2)
   {
@@ -469,7 +469,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   gulong connectPreeditStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 2)
   {

@@ -213,7 +213,7 @@ class WebPage : gobject.object.ObjectWrap
   */
   gulong connectConsoleMessageSent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkitwebprocessextension.console_message.ConsoleMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.web_page.WebPage)))
   && Parameters!T.length < 3)
@@ -273,7 +273,7 @@ class WebPage : gobject.object.ObjectWrap
   */
   gulong connectContextMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.context_menu.ContextMenu)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.web_hit_test_result.WebHitTestResult)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkitwebprocessextension.web_page.WebPage)))
@@ -331,7 +331,7 @@ class WebPage : gobject.object.ObjectWrap
   */
   gulong connectDocumentLoaded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.web_page.WebPage)))
   && Parameters!T.length < 2)
   {
@@ -394,7 +394,7 @@ class WebPage : gobject.object.ObjectWrap
   */
   gulong connectSendRequest(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.urirequest.URIRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.uriresponse.URIResponse)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkitwebprocessextension.web_page.WebPage)))
@@ -459,7 +459,7 @@ class WebPage : gobject.object.ObjectWrap
   */
   gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.user_message.UserMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.web_page.WebPage)))
   && Parameters!T.length < 3)

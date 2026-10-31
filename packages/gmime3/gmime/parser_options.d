@@ -210,12 +210,9 @@ class ParserOptions : gobject.boxed.Boxed
   */
   void setFallbackCharsets(string[] charsets) nothrow
   {
-    const(char)*[] _tmpcharsets;
-    foreach (s; charsets)
-      _tmpcharsets ~= s.toCString;
-    _tmpcharsets ~= null;
-    const(char*)* _charsets = _tmpcharsets.ptr;
-
+    auto _charsets_arr = new char*[](charsets.length + 1);
+    auto _charsets = cast(char**)_charsets_arr.ptr;
+    foreach (i, s; charsets) _charsets[i] = s.toCString!(No.Malloc);
     g_mime_parser_options_set_fallback_charsets(cast(GMimeParserOptions*)this._cPtr, _charsets);
   }
 

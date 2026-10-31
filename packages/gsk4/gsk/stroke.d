@@ -186,7 +186,7 @@ class Stroke : gobject.boxed.Boxed
     if (dash)
       _nDash = cast(size_t)dash.length;
 
-    auto _dash = dash.ptr ? cast(const(float)*)dash.ptr : [float.init].ptr;
+    auto _dash = cast(float*)dash.ptr;
     gsk_stroke_set_dash(cast(GskStroke*)this._cPtr, _dash, _nDash);
   }
 

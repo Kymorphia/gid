@@ -145,7 +145,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
     if (qs)
       _n = cast(size_t)qs.length;
 
-    auto _qs = qs.ptr ? cast(const(double)*)qs.ptr : [double.init].ptr;
+    auto _qs = cast(double*)qs.ptr;
     garrow_quantile_options_set_qs(cast(GArrowQuantileOptions*)this._cPtr, _qs, _n);
   }
 }

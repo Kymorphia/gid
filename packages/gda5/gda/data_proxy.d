@@ -432,7 +432,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
     if (colsIndex)
       _nCols = cast(int)colsIndex.length;
 
-    auto _colsIndex = colsIndex.ptr ? cast(int*)colsIndex.ptr : [int.init].ptr;
+    auto _colsIndex = cast(int*)colsIndex.ptr;
     _cretval = gda_data_proxy_get_values(cast(GdaDataProxy*)this._cPtr, proxyRow, _colsIndex, _nCols);
     auto _retval = gSListToD!(gobject.value.Value, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
@@ -607,7 +607,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   */
   gulong connectFilterChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 2)
   {
@@ -655,7 +655,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   */
   gulong connectRowChangesApplied(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))
@@ -711,7 +711,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   */
   gulong connectRowDeleteChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == bool)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))
@@ -768,7 +768,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   */
   gulong connectSampleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))
@@ -822,7 +822,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   */
   gulong connectSampleSizeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 3)
@@ -876,7 +876,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   */
   gulong connectValidateRowChanges(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == glib.error.ErrorWrap)
+  && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))

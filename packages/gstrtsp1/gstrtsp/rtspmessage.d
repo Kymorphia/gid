@@ -482,7 +482,7 @@ class RTSPMessage : gobject.boxed.Boxed
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtsp_message_set_body(cast(GstRTSPMessage*)this._cPtr, _data, _size);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -545,6 +545,28 @@ class RTSPMessage : gobject.boxed.Boxed
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     if (_buffer)
       buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Set the body of msg to data and size. This method takes ownership of
+      data. Any existing body or body buffer will be replaced by the new body.
+  
+      Params:
+        data = the data
+      Returns: #GST_RTSP_OK.
+  */
+  gstrtsp.types.RTSPResult takeBody(ubyte[] data) nothrow
+  {
+    GstRTSPResult _cretval;
+    uint _size;
+    if (data)
+      _size = cast(uint)data.length;
+
+    auto _data = cast(ubyte*)gMalloc((data.length) * (ubyte).sizeof);
+    _data[0 .. data.length] = data[];
+    _cretval = gst_rtsp_message_take_body(cast(GstRTSPMessage*)this._cPtr, _data, _size);
+    gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
 

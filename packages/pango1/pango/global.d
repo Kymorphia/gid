@@ -121,12 +121,12 @@ void attrBreak(string text, pango.attr_list.AttrList attrList, int offset, pango
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
-  auto _attrs = attrs.ptr ? cast(PangoLogAttr*)attrs.ptr : [PangoLogAttr.init].ptr;
+  auto _attrs = cast(PangoLogAttr*)attrs.ptr;
   pango_attr_break(_text, _length, attrList ? cast(PangoAttrList*)attrList._cPtr(No.Dup) : null, offset, _attrs, _attrsLen);
 }
 
@@ -653,12 +653,12 @@ void break_(string text, pango.analysis.Analysis analysis, pango.types.LogAttr[]
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
-  auto _attrs = attrs.ptr ? cast(PangoLogAttr*)attrs.ptr : [PangoLogAttr.init].ptr;
+  auto _attrs = cast(PangoLogAttr*)attrs.ptr;
   pango_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, _attrs, _attrsLen);
 }
 
@@ -685,7 +685,7 @@ void defaultBreak(string text, pango.analysis.Analysis analysis, pango.types.Log
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   pango_default_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, cast(PangoLogAttr*)&attrs, attrsLen);
 }
 
@@ -733,7 +733,7 @@ pango.types.Direction findBaseDir(string text) nothrow
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   _cretval = pango_find_base_dir(_text, _length);
   pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
   return _retval;
@@ -768,7 +768,7 @@ void findParagraphBoundary(string text, out int paragraphDelimiterIndex, out int
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   pango_find_paragraph_boundary(_text, _length, cast(int*)&paragraphDelimiterIndex, cast(int*)&nextParagraphStart);
 }
 
@@ -796,12 +796,12 @@ void getLogAttrs(string text, int level, pango.language.Language language, pango
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
-  auto _attrs = attrs.ptr ? cast(PangoLogAttr*)attrs.ptr : [PangoLogAttr.init].ptr;
+  auto _attrs = cast(PangoLogAttr*)attrs.ptr;
   pango_get_log_attrs(_text, _length, level, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null, _attrs, _attrsLen);
 }
 
@@ -1024,7 +1024,7 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
   if (markupText)
     _length = cast(int)markupText.length;
 
-  auto _markupText = markupText.ptr ? cast(const(char)*)markupText.ptr : [char.init].ptr;
+  auto _markupText = cast(char*)markupText.ptr;
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
@@ -1223,7 +1223,7 @@ void shape(string text, pango.analysis.Analysis analysis, pango.glyph_string.Gly
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   pango_shape(_text, _length, analysis ? cast(const(PangoAnalysis)*)analysis._cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null);
 }
 
@@ -1262,12 +1262,12 @@ void shapeFull(string itemText, string paragraphText, pango.analysis.Analysis an
   if (itemText)
     _itemLength = cast(int)itemText.length;
 
-  auto _itemText = itemText.ptr ? cast(const(char)*)itemText.ptr : [char.init].ptr;
+  auto _itemText = cast(char*)itemText.ptr;
   int _paragraphLength;
   if (paragraphText)
     _paragraphLength = cast(int)paragraphText.length;
 
-  auto _paragraphText = paragraphText.ptr ? cast(const(char)*)paragraphText.ptr : [char.init].ptr;
+  auto _paragraphText = cast(char*)paragraphText.ptr;
   pango_shape_full(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis._cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null);
 }
 
@@ -1299,7 +1299,7 @@ void shapeItem(pango.item.Item item, string paragraphText, pango.types.LogAttr* 
   if (paragraphText)
     _paragraphLength = cast(int)paragraphText.length;
 
-  auto _paragraphText = paragraphText.ptr ? cast(const(char)*)paragraphText.ptr : [char.init].ptr;
+  auto _paragraphText = cast(char*)paragraphText.ptr;
   pango_shape_item(item ? cast(PangoItem*)item._cPtr(No.Dup) : null, _paragraphText, _paragraphLength, cast(PangoLogAttr*)logAttrs, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, flags);
 }
 
@@ -1336,12 +1336,12 @@ void shapeWithFlags(string itemText, string paragraphText, pango.analysis.Analys
   if (itemText)
     _itemLength = cast(int)itemText.length;
 
-  auto _itemText = itemText.ptr ? cast(const(char)*)itemText.ptr : [char.init].ptr;
+  auto _itemText = cast(char*)itemText.ptr;
   int _paragraphLength;
   if (paragraphText)
     _paragraphLength = cast(int)paragraphText.length;
 
-  auto _paragraphText = paragraphText.ptr ? cast(const(char)*)paragraphText.ptr : [char.init].ptr;
+  auto _paragraphText = cast(char*)paragraphText.ptr;
   pango_shape_with_flags(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis._cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, flags);
 }
 
@@ -1399,12 +1399,12 @@ void tailorBreak(string text, pango.analysis.Analysis analysis, int offset, pang
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
-  auto _attrs = attrs.ptr ? cast(PangoLogAttr*)attrs.ptr : [PangoLogAttr.init].ptr;
+  auto _attrs = cast(PangoLogAttr*)attrs.ptr;
   pango_tailor_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, offset, _attrs, _attrsLen);
 }
 

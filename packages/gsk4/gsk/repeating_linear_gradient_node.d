@@ -45,11 +45,9 @@ class RepeatingLinearGradientNode : gsk.render_node.RenderNode
     if (colorStops)
       _nColorStops = cast(size_t)colorStops.length;
 
-    GskColorStop[] _tmpcolorStops;
-    foreach (obj; colorStops)
-      _tmpcolorStops ~= obj._cInstance;
-    const(GskColorStop)* _colorStops = _tmpcolorStops.ptr;
-
+    auto _colorStops_arr = new GskColorStop[](colorStops.length);
+    auto _colorStops = _colorStops_arr.ptr;
+    foreach (i, obj; colorStops) _colorStops[i] = obj._cInstance;
     _cretval = gsk_repeating_linear_gradient_node_new(bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&start, cast(const(graphene_point_t)*)&end, _colorStops, _nColorStops);
     this(_cretval, Yes.Take);
   }

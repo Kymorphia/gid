@@ -204,12 +204,9 @@ class Clipboard : gobject.object.ObjectWrap
       }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
-    char*[] _tmpmimeTypes;
-    foreach (s; mimeTypes)
-      _tmpmimeTypes ~= s.toCString;
-    _tmpmimeTypes ~= null;
-    const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
-
+    auto _mimeTypes_arr = new char*[](mimeTypes.length + 1);
+    auto _mimeTypes = cast(char**)_mimeTypes_arr.ptr;
+    foreach (i, s; mimeTypes) _mimeTypes[i] = s.toCString!(No.Malloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_clipboard_read_async(cast(GdkClipboard*)this._cPtr, _mimeTypes, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -526,7 +523,7 @@ class Clipboard : gobject.object.ObjectWrap
   */
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.clipboard.Clipboard)))
   && Parameters!T.length < 2)
   {

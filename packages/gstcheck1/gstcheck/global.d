@@ -179,6 +179,34 @@ void checkElementPushBuffer(string elementName, gst.buffer.Buffer bufferIn, gst.
   gst_check_element_push_buffer(_elementName, bufferIn ? cast(GstBuffer*)bufferIn._cPtr(No.Dup) : null, capsIn ? cast(GstCaps*)capsIn._cPtr(No.Dup) : null, bufferOut ? cast(GstBuffer*)bufferOut._cPtr(No.Dup) : null, capsOut ? cast(GstCaps*)capsOut._cPtr(No.Dup) : null);
 }
 
+/**
+    Create an element using the factory providing the element_name and push the
+    buffers in buffer_in to this element. The element should create the buffers
+    equal to the buffers in buffer_out. We only check the size and the data of
+    the buffers. This function unrefs the buffers in the two lists.
+    The last_flow_return parameter indicates the expected flow return value from
+    pushing the final buffer in the list.
+    This can be used to set up a test which pushes some buffers and then an
+    invalid buffer, when the final buffer is expected to fail, for example.
+
+    Params:
+      elementName = name of the element that needs to be created
+      bufferIn = a list of buffers that needs to be
+         pushed to the element
+      capsIn = the #GstCaps expected of the sinkpad of the element
+      bufferOut = a list of buffers that we expect from
+        the element
+      capsOut = the #GstCaps expected of the srcpad of the element
+      lastFlowReturn = the last buffer push needs to give this GstFlowReturn
+*/
+void checkElementPushBufferList(string elementName, gst.buffer.Buffer[] bufferIn, gst.caps.Caps capsIn, gst.buffer.Buffer[] bufferOut, gst.caps.Caps capsOut, gst.types.FlowReturn lastFlowReturn) nothrow
+{
+  const(char)* _elementName = elementName.toCString!(No.Malloc, No.Nullable);
+  auto _bufferIn = gListFromD!(gst.buffer.Buffer)(bufferIn);
+  auto _bufferOut = gListFromD!(gst.buffer.Buffer)(bufferOut);
+  gst_check_element_push_buffer_list(_elementName, _bufferIn, capsIn ? cast(GstCaps*)capsIn._cPtr(No.Dup) : null, _bufferOut, capsOut ? cast(GstCaps*)capsOut._cPtr(No.Dup) : null, lastFlowReturn);
+}
+
 /** */
 void checkMessageError(gst.message.Message message, gst.types.MessageType type, glib.types.Quark domain, int code) nothrow
 {

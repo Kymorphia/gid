@@ -159,7 +159,7 @@ class DataComparator : gobject.object.ObjectWrap
     if (colNumbers)
       _nbCols = cast(int)colNumbers.length;
 
-    auto _colNumbers = colNumbers.ptr ? cast(const(int)*)colNumbers.ptr : [int.init].ptr;
+    auto _colNumbers = cast(int*)colNumbers.ptr;
     gda_data_comparator_set_key_columns(cast(GdaDataComparator*)this._cPtr, _colNumbers, _nbCols);
   }
 
@@ -183,7 +183,7 @@ class DataComparator : gobject.object.ObjectWrap
   */
   gulong connectDiffComputed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_comparator.DataComparator)))
   && Parameters!T.length < 3)

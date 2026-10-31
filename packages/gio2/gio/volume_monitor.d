@@ -223,7 +223,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectDriveChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -273,7 +273,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectDriveConnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -323,7 +323,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectDriveDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -373,7 +373,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectDriveEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -423,7 +423,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectDriveStopButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -473,7 +473,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectMountAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -523,7 +523,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectMountChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -576,7 +576,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectMountPreUnmount(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -626,7 +626,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectMountRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -676,7 +676,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectVolumeAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -726,7 +726,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectVolumeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
@@ -776,7 +776,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   */
   gulong connectVolumeRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)

@@ -722,7 +722,8 @@ glib.types.Quark flowToQuark(gst.types.FlowReturn ret) nothrow
 bool formatsContains(gst.types.Format[] formats, gst.types.Format format) nothrow
 {
   bool _retval;
-  auto _formats = formats.ptr ? cast(const(GstFormat)*)(formats ~ GstFormat.init).ptr : [GstFormat.init].ptr;
+  auto _formats_arr = formats ~ GstFormat.init;
+  auto _formats = _formats_arr.ptr;
   _retval = cast(bool)gst_formats_contains(_formats, format);
   return _retval;
 }
@@ -978,12 +979,9 @@ gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_contex
 gst.element.Element parseLaunchv(string[] argv)
 {
   GstElement* _cretval;
-  char*[] _tmpargv;
-  foreach (s; argv)
-    _tmpargv ~= s.toCString;
-  _tmpargv ~= null;
-  const(char*)* _argv = _tmpargv.ptr;
-
+  auto _argv_arr = new char*[](argv.length + 1);
+  auto _argv = cast(char**)_argv_arr.ptr;
+  foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
   GError *_err;
   _cretval = gst_parse_launchv(_argv, &_err);
   if (_err)
@@ -1012,12 +1010,9 @@ gst.element.Element parseLaunchv(string[] argv)
 gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
   GstElement* _cretval;
-  char*[] _tmpargv;
-  foreach (s; argv)
-    _tmpargv ~= s.toCString;
-  _tmpargv ~= null;
-  const(char*)* _argv = _tmpargv.ptr;
-
+  auto _argv_arr = new char*[](argv.length + 1);
+  auto _argv = cast(char**)_argv_arr.ptr;
+  foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
   GError *_err;
   _cretval = gst_parse_launchv_full(_argv, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
@@ -1040,12 +1035,9 @@ gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseConte
 string[] protectionFilterSystemsByAvailableDecryptors(string[] systemIdentifiers) nothrow
 {
   char** _cretval;
-  char*[] _tmpsystemIdentifiers;
-  foreach (s; systemIdentifiers)
-    _tmpsystemIdentifiers ~= s.toCString;
-  _tmpsystemIdentifiers ~= null;
-  const(char*)* _systemIdentifiers = _tmpsystemIdentifiers.ptr;
-
+  auto _systemIdentifiers_arr = new char*[](systemIdentifiers.length + 1);
+  auto _systemIdentifiers = cast(char**)_systemIdentifiers_arr.ptr;
+  foreach (i, s; systemIdentifiers) _systemIdentifiers[i] = s.toCString!(No.Malloc);
   _cretval = gst_protection_filter_systems_by_available_decryptors(_systemIdentifiers);
   string[] _retval;
 
@@ -1087,12 +1079,9 @@ gobject.types.GType protectionMetaApiGetType() nothrow
 string protectionSelectSystem(string[] systemIdentifiers) nothrow
 {
   const(char)* _cretval;
-  char*[] _tmpsystemIdentifiers;
-  foreach (s; systemIdentifiers)
-    _tmpsystemIdentifiers ~= s.toCString;
-  _tmpsystemIdentifiers ~= null;
-  const(char*)* _systemIdentifiers = _tmpsystemIdentifiers.ptr;
-
+  auto _systemIdentifiers_arr = new char*[](systemIdentifiers.length + 1);
+  auto _systemIdentifiers = cast(char**)_systemIdentifiers_arr.ptr;
+  foreach (i, s; systemIdentifiers) _systemIdentifiers[i] = s.toCString!(No.Malloc);
   _cretval = gst_protection_select_system(_systemIdentifiers);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -1457,7 +1446,7 @@ void utilDumpMem(ubyte[] mem) nothrow
   if (mem)
     _size = cast(uint)mem.length;
 
-  auto _mem = mem.ptr ? cast(const(ubyte)*)mem.ptr : [ubyte.init].ptr;
+  auto _mem = cast(ubyte*)mem.ptr;
   gst_util_dump_mem(_mem, _size);
 }
 

@@ -337,7 +337,7 @@ class Drag : gobject.object.ObjectWrap
   */
   gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.DragCancelReason)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag.Drag)))
   && Parameters!T.length < 3)
@@ -387,7 +387,7 @@ class Drag : gobject.object.ObjectWrap
   */
   gulong connectDndFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
   && Parameters!T.length < 2)
   {
@@ -431,7 +431,7 @@ class Drag : gobject.object.ObjectWrap
   */
   gulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
   && Parameters!T.length < 2)
   {

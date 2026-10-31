@@ -271,11 +271,9 @@ class Closure : gobject.boxed.Boxed
     if (paramValues)
       _nParamValues = cast(uint)paramValues.length;
 
-    GValue[] _tmpparamValues;
-    foreach (obj; paramValues)
-      _tmpparamValues ~= *cast(GValue*)obj._cPtr;
-    const(GValue)* _paramValues = _tmpparamValues.ptr;
-
+    auto _paramValues_arr = new GValue[](paramValues.length);
+    auto _paramValues = _paramValues_arr.ptr;
+    foreach (i, obj; paramValues) _paramValues[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     g_closure_invoke(cast(GClosure*)this._cPtr, _returnValue, _nParamValues, _paramValues, invocationHint);
     returnValue = new gobject.value.Value(cast(void*)_returnValue, Yes.Take);
   }

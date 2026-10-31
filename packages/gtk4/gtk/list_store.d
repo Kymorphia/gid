@@ -230,7 +230,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (types)
       _nColumns = cast(int)types.length;
 
-    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
+    auto _types = cast(GType*)types.ptr;
     _cretval = gtk_list_store_newv(_nColumns, _types);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_store.ListStore)(cast(GtkListStore*)_cretval, Yes.Take);
     return _retval;
@@ -343,15 +343,13 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (columns)
       _nValues = cast(int)columns.length;
 
-    auto _columns = columns.ptr ? cast(int*)columns.ptr : [int.init].ptr;
+    auto _columns = cast(int*)columns.ptr;
     if (values)
       _nValues = cast(int)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    GValue* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     gtk_list_store_insert_with_valuesv(cast(GtkListStore*)this._cPtr, _iter, position, _columns, _values, _nValues);
     iter = new gtk.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
   }
@@ -463,7 +461,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (types)
       _nColumns = cast(int)types.length;
 
-    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
+    auto _types = cast(GType*)types.ptr;
     gtk_list_store_set_column_types(cast(GtkListStore*)this._cPtr, _nColumns, _types);
   }
 
@@ -504,15 +502,13 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (columns)
       _nValues = cast(int)columns.length;
 
-    auto _columns = columns.ptr ? cast(int*)columns.ptr : [int.init].ptr;
+    auto _columns = cast(int*)columns.ptr;
     if (values)
       _nValues = cast(int)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    GValue* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     gtk_list_store_set_valuesv(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, _columns, _values, _nValues);
   }
 

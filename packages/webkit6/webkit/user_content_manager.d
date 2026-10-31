@@ -321,7 +321,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   gulong connectScriptMessageReceived(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : javascriptcore.value.Value)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.user_content_manager.UserContentManager)))
   && Parameters!T.length < 3)
@@ -387,7 +387,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   gulong connectScriptMessageWithReplyReceived(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : javascriptcore.value.Value)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == webkit.script_message_reply.ScriptMessageReply)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.user_content_manager.UserContentManager)))

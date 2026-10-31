@@ -6,7 +6,6 @@ import gda.c.functions;
 import gda.c.types;
 import gda.types;
 import gid.gid;
-import glib.types;
 import gobject.types;
 import gobject.value;
 
@@ -209,41 +208,5 @@ class MetaTableColumn
     _cretval = gda_meta_table_column_get_attribute(cast(GdaMetaTableColumn*)this._cPtr, _attribute);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
-  }
-
-  /**
-      Set the value associated to a named attribute.
-      
-      Attributes can have any name, but Libgda proposes some default names, see <link linkend="libgda-40-Attributes-manager.synopsis">this section</link>.
-      If there is already an attribute named attribute set, then its value is replaced with the new value,
-      except if value is null, in which case the attribute is removed.
-      
-      Warning: attribute is not copied, if it needs to be freed when not used anymore, then destroy should point to
-      the functions which will free it (typically [glib.global.gfree]). If attribute does not need to be freed, then destroy can be null.
-  
-      Params:
-        attribute = attribute name as a static string
-        value = a #GValue, or null
-        destroy = function called when attribute has to be freed, or null
-  */
-  void setAttribute(string attribute, gobject.value.Value value = null, glib.types.DestroyNotify destroy = null) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
-    gda_meta_table_column_set_attribute(cast(GdaMetaTableColumn*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
   }
 }

@@ -679,12 +679,9 @@ template DtlsConnectionT()
   */
   override void setAdvertisedProtocols(string[] protocols = null) nothrow
   {
-    char*[] _tmpprotocols;
-    foreach (s; protocols)
-      _tmpprotocols ~= s.toCString;
-    _tmpprotocols ~= null;
-    const(char*)* _protocols = _tmpprotocols.ptr;
-
+    auto _protocols_arr = new char*[](protocols.length + 1);
+    auto _protocols = cast(char**)_protocols_arr.ptr;
+    foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
     g_dtls_connection_set_advertised_protocols(cast(GDtlsConnection*)this._cPtr, _protocols);
   }
 
@@ -959,7 +956,7 @@ template DtlsConnectionT()
   */
   gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_certificate.TlsCertificate)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gio.types.TlsCertificateFlags)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.dtls_connection.DtlsConnection)))

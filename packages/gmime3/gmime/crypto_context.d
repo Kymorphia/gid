@@ -184,12 +184,9 @@ class CryptoContext : gobject.object.ObjectWrap
   int exportKeys(string[] keys, gmime.stream.Stream ostream)
   {
     int _retval;
-    char*[] _tmpkeys;
-    foreach (s; keys)
-      _tmpkeys ~= s.toCString;
-    _tmpkeys ~= null;
-    const(char*)* _keys = _tmpkeys.ptr;
-
+    auto _keys_arr = new char*[](keys.length + 1);
+    auto _keys = cast(char**)_keys_arr.ptr;
+    foreach (i, s; keys) _keys[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = g_mime_crypto_context_export_keys(cast(GMimeCryptoContext*)this._cPtr, _keys, ostream ? cast(GMimeStream*)ostream._cPtr(No.Dup) : null, &_err);
     if (_err)

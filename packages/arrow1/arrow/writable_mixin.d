@@ -37,7 +37,7 @@ template WritableT()
     if (data)
       _nBytes = cast(long)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     GError *_err;
     _retval = cast(bool)garrow_writable_write(cast(GArrowWritable*)this._cPtr, _data, _nBytes, &_err);
     if (_err)

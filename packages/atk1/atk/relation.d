@@ -99,11 +99,9 @@ class Relation : gobject.object.ObjectWrap
     if (targets)
       _nTargets = cast(int)targets.length;
 
-    AtkObject*[] _tmptargets;
-    foreach (obj; targets)
-      _tmptargets ~= obj ? cast(AtkObject*)obj._cPtr : null;
-    AtkObject** _targets = cast(AtkObject**)_tmptargets.ptr;
-
+    auto _targets_arr = new AtkObject*[](targets.length);
+    auto _targets = cast(AtkObject**)_targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? cast(AtkObject*)obj._cPtr(No.Dup) : null;
     _cretval = atk_relation_new(_targets, _nTargets, relationship);
     this(_cretval, Yes.Take);
   }

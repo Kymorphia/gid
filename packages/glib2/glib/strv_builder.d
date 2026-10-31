@@ -90,12 +90,9 @@ class StrvBuilder : gobject.boxed.Boxed
   */
   void addv(string[] value) nothrow
   {
-    char*[] _tmpvalue;
-    foreach (s; value)
-      _tmpvalue ~= s.toCString;
-    _tmpvalue ~= null;
-    const(char*)* _value = _tmpvalue.ptr;
-
+    auto _value_arr = new char*[](value.length + 1);
+    auto _value = cast(char**)_value_arr.ptr;
+    foreach (i, s; value) _value[i] = s.toCString!(No.Malloc);
     g_strv_builder_addv(cast(GStrvBuilder*)this._cPtr, _value);
   }
 

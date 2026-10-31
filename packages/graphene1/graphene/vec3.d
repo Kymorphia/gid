@@ -283,7 +283,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec3_t* _cretval;
     assert(!src || src.length == 3);
-    auto _src = src.ptr ? cast(const(float)*)src.ptr : [float.init].ptr;
+    auto _src = cast(float*)src.ptr;
     _cretval = graphene_vec3_init_from_float(cast(graphene_vec3_t*)this._cPtr, _src);
     auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
     return _retval;

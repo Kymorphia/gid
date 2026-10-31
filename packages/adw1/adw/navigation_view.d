@@ -555,11 +555,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     if (pages)
       _nPages = cast(int)pages.length;
 
-    AdwNavigationPage*[] _tmppages;
-    foreach (obj; pages)
-      _tmppages ~= obj ? cast(AdwNavigationPage*)obj._cPtr : null;
-    AdwNavigationPage** _pages = cast(AdwNavigationPage**)_tmppages.ptr;
-
+    auto _pages_arr = new AdwNavigationPage*[](pages.length);
+    auto _pages = cast(AdwNavigationPage**)_pages_arr.ptr;
+    foreach (i, obj; pages) _pages[i] = obj ? cast(AdwNavigationPage*)obj._cPtr(No.Dup) : null;
     adw_navigation_view_replace(cast(AdwNavigationView*)this._cPtr, _pages, _nPages);
   }
 
@@ -590,11 +588,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     if (tags)
       _nTags = cast(int)tags.length;
 
-    const(char)*[] _tmptags;
-    foreach (s; tags)
-      _tmptags ~= s.toCString;
-    const(char*)* _tags = _tmptags.ptr;
-
+    auto _tags_arr = new char*[](tags.length);
+    auto _tags = cast(char**)_tags_arr.ptr;
+    foreach (i, s; tags) _tags[i] = s.toCString!(No.Malloc);
     adw_navigation_view_replace_with_tags(cast(AdwNavigationView*)this._cPtr, _tags, _nTags);
   }
 
@@ -653,7 +649,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   gulong connectGetNextPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : adw.navigation_page.NavigationPage)
+  && is(ReturnType!T : adw.navigation_page.NavigationPage)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 2)
   {
@@ -708,7 +704,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   gulong connectPopped(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 3)
@@ -758,7 +754,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   gulong connectPushed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 2)
   {
@@ -804,7 +800,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   gulong connectReplaced(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 2)
   {

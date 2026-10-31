@@ -182,12 +182,9 @@ class Meta
   {
     gobject.types.GType _retval;
     const(char)* _api = api.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmptags;
-    foreach (s; tags)
-      _tmptags ~= s.toCString;
-    _tmptags ~= null;
-    const(char*)* _tags = _tmptags.ptr;
-
+    auto _tags_arr = new char*[](tags.length + 1);
+    auto _tags = cast(char**)_tags_arr.ptr;
+    foreach (i, s; tags) _tags[i] = s.toCString!(No.Malloc);
     _retval = gst_meta_api_type_register(_api, _tags);
     return _retval;
   }
@@ -216,7 +213,7 @@ class Meta
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_meta_deserialize(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _data, _size, cast(uint*)&consumed);
     auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
     return _retval;
@@ -286,12 +283,9 @@ class Meta
     auto _transformFuncCB = transformFunc ? &_transformFuncCallback : null;
     const(GstMetaInfo)* _cretval;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmptags;
-    foreach (s; tags)
-      _tmptags ~= s.toCString;
-    _tmptags ~= null;
-    const(char*)* _tags = _tmptags.ptr;
-
+    auto _tags_arr = new char*[](tags.length + 1);
+    auto _tags = cast(char**)_tags_arr.ptr;
+    foreach (i, s; tags) _tags[i] = s.toCString!(No.Malloc);
     auto _transformFunc = transformFunc ? freezeDelegate(cast(void*)&transformFunc) : null;
     GDestroyNotify _transformFuncDestroyCB = transformFunc ? &thawDelegate : null;
     _cretval = gst_meta_register_custom(_name, _tags, _transformFuncCB, _transformFunc, _transformFuncDestroyCB);

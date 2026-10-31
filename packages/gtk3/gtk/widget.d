@@ -1875,11 +1875,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     if (targets)
       _nTargets = cast(int)targets.length;
 
-    GtkTargetEntry[] _tmptargets;
-    foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
-    const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-
+    auto _targets_arr = new GtkTargetEntry[](targets.length);
+    auto _targets = _targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? *cast(GtkTargetEntry*)obj._cPtr(No.Dup) : GtkTargetEntry.init;
     gtk_drag_dest_set(cast(GtkWidget*)this._cPtr, flags, _targets, _nTargets, actions);
   }
 
@@ -2035,11 +2033,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     if (targets)
       _nTargets = cast(int)targets.length;
 
-    GtkTargetEntry[] _tmptargets;
-    foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
-    const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-
+    auto _targets_arr = new GtkTargetEntry[](targets.length);
+    auto _targets = _targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? *cast(GtkTargetEntry*)obj._cPtr(No.Dup) : GtkTargetEntry.init;
     gtk_drag_source_set(cast(GtkWidget*)this._cPtr, startButtonMask, _targets, _nTargets, actions);
   }
 
@@ -6001,7 +5997,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectAccelClosuresChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -6056,7 +6052,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6118,7 +6114,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6176,7 +6172,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectCanActivateAccel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6232,7 +6228,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectChildNotify(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.param_spec.ParamSpec)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6284,7 +6280,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -6338,7 +6334,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectConfigureEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_configure.EventConfigure)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6395,7 +6391,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDamageEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_expose.EventExpose)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6454,7 +6450,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDeleteEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6509,7 +6505,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDestroy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -6564,7 +6560,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDestroyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6618,7 +6614,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.TextDirection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6674,7 +6670,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragBegin(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6727,7 +6723,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragDataDelete(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -6788,7 +6784,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragDataGet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.selection_data.SelectionData)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == uint)))
@@ -6920,7 +6916,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragDataReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
@@ -7006,7 +7002,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
@@ -7073,7 +7069,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7130,7 +7126,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.types.DragResult)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.widget.Widget)))
@@ -7197,7 +7193,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.widget.Widget)))
@@ -7343,7 +7339,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDragMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
@@ -7426,7 +7422,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectDraw(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == cairo.context.Context)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7488,7 +7484,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectEnterNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_crossing.EventCrossing)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7550,7 +7546,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7605,7 +7601,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectEventAfter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7656,7 +7652,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7716,7 +7712,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectFocusInEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_focus.EventFocus)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7776,7 +7772,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectFocusOutEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_focus.EventFocus)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7836,7 +7832,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectGrabBrokenEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_grab_broken.EventGrabBroken)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7887,7 +7883,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectGrabFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -7941,7 +7937,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectGrabNotify(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -7990,7 +7986,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectHide(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -8041,7 +8037,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectHierarchyChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8099,7 +8095,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectKeyPressEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_key.EventKey)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8159,7 +8155,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectKeyReleaseEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_key.EventKey)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8216,7 +8212,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8278,7 +8274,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectLeaveNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_crossing.EventCrossing)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8337,7 +8333,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectMap(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -8390,7 +8386,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectMapEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_any.EventAny)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8446,7 +8442,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8508,7 +8504,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectMotionNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_motion.EventMotion)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8561,7 +8557,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8613,7 +8609,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectParentSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8668,7 +8664,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -8724,7 +8720,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectPropertyNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_property.EventProperty)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8783,7 +8779,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectProximityInEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_proximity.EventProximity)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8842,7 +8838,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectProximityOutEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_proximity.EventProximity)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -8915,7 +8911,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
@@ -8980,7 +8976,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectRealize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -9028,7 +9024,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectScreenChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9088,7 +9084,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_scroll.EventScroll)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9145,7 +9141,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectSelectionClearEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9202,7 +9198,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectSelectionGet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.selection_data.SelectionData)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == uint)))
@@ -9261,7 +9257,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectSelectionNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9316,7 +9312,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectSelectionReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.selection_data.SelectionData)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.widget.Widget)))
@@ -9375,7 +9371,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectSelectionRequestEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9427,7 +9423,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectShow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -9475,7 +9471,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectShowHelp(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.WidgetHelpType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9529,7 +9525,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectSizeAllocate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.Allocation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9582,7 +9578,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectStateChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.StateType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9633,7 +9629,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.StateFlags)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9692,7 +9688,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectStyleSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.style.Style)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9745,7 +9741,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectStyleUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -9792,7 +9788,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectTouchEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9848,7 +9844,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectUnmap(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -9901,7 +9897,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectUnmapEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_any.EventAny)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -9955,7 +9951,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectUnrealize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
@@ -10013,7 +10009,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectVisibilityNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_visibility.EventVisibility)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
@@ -10074,7 +10070,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gulong connectWindowStateEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_window_state.EventWindowState)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)

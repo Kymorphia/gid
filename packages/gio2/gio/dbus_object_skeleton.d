@@ -188,7 +188,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   */
   gulong connectAuthorizeMethod(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_interface_skeleton.DBusInterfaceSkeleton)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.dbus_method_invocation.DBusMethodInvocation)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.dbus_object_skeleton.DBusObjectSkeleton)))

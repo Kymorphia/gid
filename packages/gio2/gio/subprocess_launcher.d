@@ -156,12 +156,9 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void setEnviron(string[] env) nothrow
   {
-    char*[] _tmpenv;
-    foreach (s; env)
-      _tmpenv ~= s.toCString;
-    _tmpenv ~= null;
-    char** _env = _tmpenv.ptr;
-
+    auto _env_arr = new char*[](env.length + 1);
+    auto _env = cast(char**)_env_arr.ptr;
+    foreach (i, s; env) _env[i] = s.toCString!(No.Malloc);
     g_subprocess_launcher_set_environ(cast(GSubprocessLauncher*)this._cPtr, _env);
   }
 
@@ -287,12 +284,9 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   gio.subprocess.Subprocess spawnv(string[] argv)
   {
     GSubprocess* _cretval;
-    const(char)*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    _tmpargv ~= null;
-    const(char*)* _argv = _tmpargv.ptr;
-
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
     GError *_err;
     _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)this._cPtr, _argv, &_err);
     if (_err)

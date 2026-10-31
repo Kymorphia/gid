@@ -226,31 +226,31 @@ class VariantType : Boxed
       static if (is(Arg == bool))
         typeStr ~= "b";
       else static if (is(Arg == byte) || is(Arg == ubyte))
-        typeStr ~= "y";
+      typeStr ~= "y";
       else static if (is(Arg == short))
-        typeStr ~= "n";
+      typeStr ~= "n";
       else static if (is(Arg == ushort))
-        typeStr ~= "q";
+      typeStr ~= "q";
       else static if (is(Arg == int))
-        typeStr ~= "i";
+      typeStr ~= "i";
       else static if (is(Arg == uint))
-        typeStr ~= "u";
+      typeStr ~= "u";
       else static if (is(Arg == long))
-        typeStr ~= "x";
+      typeStr ~= "x";
       else static if (is(Arg == ulong))
-        typeStr ~= "t";
+      typeStr ~= "t";
       else static if (is(Arg == float) || is(Arg == double))
-        typeStr ~= "d";
+      typeStr ~= "d";
       else static if (isSomeString!Arg)
-        typeStr ~= "s";
+      typeStr ~= "s";
       else static if (is(Arg : E[], E))
-        typeStr ~= "a" ~ getStr!E;
+      typeStr ~= "a" ~ getStr!E;
       else static if (is(Arg : V[K], V, K))
-        typeStr ~= "a{" ~ getStr!K ~ getStr!V ~ "}";
+      typeStr ~= "a{" ~ getStr!K ~ getStr!V ~ "}";
       else static if (is(Arg : glib.variant.Variant))
-        typeStr ~= "v";
+      typeStr ~= "v";
       else static if (isTuple!Arg)
-        typeStr ~= "r";
+      typeStr ~= "r";
       else
         static assert(false, "Unsupported type for Variant creation: " ~ Arg.stringof);
     }
@@ -360,11 +360,9 @@ class VariantType : Boxed
     if (items)
       _length = cast(int)items.length;
 
-    GVariantType*[] _tmpitems;
-    foreach (obj; items)
-      _tmpitems ~= cast(GVariantType*)obj._cPtr;
-    const(GVariantType*)* _items = _tmpitems.ptr;
-
+    auto _items_arr = new GVariantType*[](items.length);
+    auto _items = _items_arr.ptr;
+    foreach (i, obj; items) _items[i] = obj ? cast(GVariantType*)obj._cPtr(No.Dup) : null;
     _cretval = g_variant_type_new_tuple(_items, _length);
     auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

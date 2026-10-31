@@ -130,12 +130,9 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   static gio.subprocess.Subprocess new_(string[] argv, gio.types.SubprocessFlags flags)
   {
     GSubprocess* _cretval;
-    const(char)*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    _tmpargv ~= null;
-    const(char*)* _argv = _tmpargv.ptr;
-
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
     GError *_err;
     _cretval = g_subprocess_newv(_argv, flags, &_err);
     if (_err)

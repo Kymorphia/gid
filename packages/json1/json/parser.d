@@ -225,7 +225,7 @@ class Parser : gobject.object.ObjectWrap
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
+    auto _data = cast(char*)data.ptr;
     GError *_err;
     _retval = cast(bool)json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, _length, &_err);
     if (_err)
@@ -401,7 +401,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectArrayElement(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.array.Array)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : json.parser.Parser)))
@@ -456,7 +456,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectArrayEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.array.Array)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : json.parser.Parser)))
   && Parameters!T.length < 3)
@@ -505,7 +505,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectArrayStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {
@@ -552,7 +552,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : json.parser.Parser)))
   && Parameters!T.length < 3)
@@ -603,7 +603,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectObjectEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : json.parser.Parser)))
   && Parameters!T.length < 3)
@@ -656,7 +656,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectObjectMember(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : json.parser.Parser)))
@@ -708,7 +708,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectObjectStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {
@@ -753,7 +753,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectParseEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {
@@ -797,7 +797,7 @@ class Parser : gobject.object.ObjectWrap
   */
   gulong connectParseStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {

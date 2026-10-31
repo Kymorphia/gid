@@ -690,7 +690,7 @@ class Dialog : gtk.widget.Widget
   */
   gulong connectCloseAttempt(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.dialog.Dialog)))
   && Parameters!T.length < 2)
   {
@@ -734,7 +734,7 @@ class Dialog : gtk.widget.Widget
   */
   gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.dialog.Dialog)))
   && Parameters!T.length < 2)
   {

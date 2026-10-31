@@ -96,7 +96,7 @@ class UriParamsIter
     if (params)
       _length = cast(ptrdiff_t)params.length;
 
-    auto _params = params.ptr ? cast(const(char)*)params.ptr : [char.init].ptr;
+    auto _params = cast(char*)params.ptr;
     const(char)* _separators = separators.toCString!(No.Malloc, No.Nullable);
     g_uri_params_iter_init(cast(GUriParamsIter*)this._cPtr, _params, _length, _separators, flags);
   }

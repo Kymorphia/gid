@@ -6,7 +6,6 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
-import glib.types;
 import gobject.gid_builder;
 import gobject.object;
 
@@ -225,48 +224,8 @@ class TlsPassword : gobject.object.ObjectWrap
     if (value)
       _length = cast(ptrdiff_t)value.length;
 
-    auto _value = value.ptr ? cast(const(ubyte)*)value.ptr : [ubyte.init].ptr;
+    auto _value = cast(ubyte*)value.ptr;
     g_tls_password_set_value(cast(GTlsPassword*)this._cPtr, _value, _length);
-  }
-
-  /**
-      Provide the value for this password.
-      
-      The value will be owned by the password object, and later freed using
-      the destroy function callback.
-      
-      Specify the length, for a non-nul-terminated password. Pass -1 as
-      length if using a nul-terminated password, and length will be
-      calculated automatically. (Note that the terminating nul is not
-      considered part of the password in this case.)
-  
-      Params:
-        value = the value for the password
-        destroy = a function to use to free the password.
-  */
-  void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy = null) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    ptrdiff_t _length;
-    if (value)
-      _length = cast(ptrdiff_t)value.length;
-
-    auto _value = value.ptr ? cast(ubyte*)value.ptr : [ubyte.init].ptr;
-    g_tls_password_set_value_full(cast(GTlsPassword*)this._cPtr, _value, _length, _destroyCB);
   }
 
   /**

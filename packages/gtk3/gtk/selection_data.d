@@ -225,7 +225,7 @@ class SelectionData : gobject.boxed.Boxed
     if (data)
       _length = cast(int)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     gtk_selection_data_set(cast(GtkSelectionData*)this._cPtr, type ? cast(GdkAtom)type._cPtr : null, format, _data, _length);
   }
 
@@ -263,7 +263,7 @@ class SelectionData : gobject.boxed.Boxed
     if (str)
       _len = cast(int)str.length;
 
-    auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+    auto _str = cast(char*)str.ptr;
     _retval = cast(bool)gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, _len);
     return _retval;
   }
@@ -285,12 +285,9 @@ class SelectionData : gobject.boxed.Boxed
   bool setUris(string[] uris) nothrow
   {
     bool _retval;
-    char*[] _tmpuris;
-    foreach (s; uris)
-      _tmpuris ~= s.toCString;
-    _tmpuris ~= null;
-    char** _uris = _tmpuris.ptr;
-
+    auto _uris_arr = new char*[](uris.length + 1);
+    auto _uris = cast(char**)_uris_arr.ptr;
+    foreach (i, s; uris) _uris[i] = s.toCString!(No.Malloc);
     _retval = cast(bool)gtk_selection_data_set_uris(cast(GtkSelectionData*)this._cPtr, _uris);
     return _retval;
   }

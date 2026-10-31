@@ -360,7 +360,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   gulong connectQueryTooltipMarkup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == string)
+  && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.mark_attributes.MarkAttributes)))
   && Parameters!T.length < 3)
@@ -416,7 +416,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   gulong connectQueryTooltipText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == string)
+  && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.mark_attributes.MarkAttributes)))
   && Parameters!T.length < 3)

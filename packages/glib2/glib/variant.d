@@ -429,11 +429,9 @@ class Variant
     if (children)
       _nChildren = cast(size_t)children.length;
 
-    GVariant*[] _tmpchildren;
-    foreach (obj; children)
-      _tmpchildren ~= obj ? cast(GVariant*)obj._cPtr : null;
-    const(GVariant*)* _children = cast(const(GVariant*)*)_tmpchildren.ptr;
-
+    auto _children_arr = new GVariant*[](children.length);
+    auto _children = cast(GVariant**)_children_arr.ptr;
+    foreach (i, obj; children) _children[i] = obj ? cast(GVariant*)obj._cPtr(No.Dup) : null;
     _cretval = g_variant_new_array(childType ? cast(const(GVariantType)*)childType._cPtr(No.Dup) : null, _children, _nChildren);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -508,11 +506,9 @@ class Variant
     if (strv)
       _length = cast(ptrdiff_t)strv.length;
 
-    char*[] _tmpstrv;
-    foreach (s; strv)
-      _tmpstrv ~= s.toCString;
-    const(char*)* _strv = _tmpstrv.ptr;
-
+    auto _strv_arr = new char*[](strv.length);
+    auto _strv = cast(char**)_strv_arr.ptr;
+    foreach (i, s; strv) _strv[i] = s.toCString!(No.Malloc);
     _cretval = g_variant_new_bytestring_array(_strv, _length);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -735,11 +731,9 @@ class Variant
     if (strv)
       _length = cast(ptrdiff_t)strv.length;
 
-    const(char)*[] _tmpstrv;
-    foreach (s; strv)
-      _tmpstrv ~= s.toCString;
-    const(char*)* _strv = _tmpstrv.ptr;
-
+    auto _strv_arr = new char*[](strv.length);
+    auto _strv = cast(char**)_strv_arr.ptr;
+    foreach (i, s; strv) _strv[i] = s.toCString!(No.Malloc);
     _cretval = g_variant_new_objv(_strv, _length);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -800,11 +794,9 @@ class Variant
     if (strv)
       _length = cast(ptrdiff_t)strv.length;
 
-    const(char)*[] _tmpstrv;
-    foreach (s; strv)
-      _tmpstrv ~= s.toCString;
-    const(char*)* _strv = _tmpstrv.ptr;
-
+    auto _strv_arr = new char*[](strv.length);
+    auto _strv = cast(char**)_strv_arr.ptr;
+    foreach (i, s; strv) _strv[i] = s.toCString!(No.Malloc);
     _cretval = g_variant_new_strv(_strv, _length);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -831,11 +823,9 @@ class Variant
     if (children)
       _nChildren = cast(size_t)children.length;
 
-    GVariant*[] _tmpchildren;
-    foreach (obj; children)
-      _tmpchildren ~= obj ? cast(GVariant*)obj._cPtr : null;
-    const(GVariant*)* _children = cast(const(GVariant*)*)_tmpchildren.ptr;
-
+    auto _children_arr = new GVariant*[](children.length);
+    auto _children = cast(GVariant**)_children_arr.ptr;
+    foreach (i, obj; children) _children[i] = obj ? cast(GVariant*)obj._cPtr(No.Dup) : null;
     _cretval = g_variant_new_tuple(_children, _nChildren);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
@@ -2019,23 +2009,23 @@ GVariant* createVariant(T)(T val)
   static if (is(T == bool))
     return g_variant_new_boolean(val);
   else static if (is(T == byte) || is(T == ubyte))
-    return g_variant_new_byte(cast(ubyte)val);
+  return g_variant_new_byte(cast(ubyte)val);
   else static if (is(T == short))
-    return g_variant_new_int16(val);
+  return g_variant_new_int16(val);
   else static if (is(T == ushort))
-    return g_variant_new_uint16(val);
+  return g_variant_new_uint16(val);
   else static if (is(T == int))
-    return g_variant_new_int32(val);
+  return g_variant_new_int32(val);
   else static if (is(T == uint))
-    return g_variant_new_uint32(val);
+  return g_variant_new_uint32(val);
   else static if (is(T == long))
-    return g_variant_new_int64(val);
+  return g_variant_new_int64(val);
   else static if (is(T == ulong))
-    return g_variant_new_uint64(val);
+  return g_variant_new_uint64(val);
   else static if (is(T == float) || is(T == double))
-    return g_variant_new_double(val);
+  return g_variant_new_double(val);
   else static if (isSomeString!T)
-    return g_variant_new_string(val.to!string.toCString);
+  return g_variant_new_string(val.to!string.toCString);
   else static if (is(T : E[], E))
   {
     auto variantType = g_variant_type_new(VariantType.getStr!T.toCString); // ++ new
@@ -2061,9 +2051,9 @@ GVariant* createVariant(T)(T val)
     return g_variant_builder_end(&builder);
   }
   else static if (is(T : Variant))
-    return g_variant_new_variant(cast(GVariant*)val._cInstancePtr);
+  return g_variant_new_variant(cast(GVariant*)val._cInstancePtr);
   else static if (is(T == GVariant*))
-    return g_variant_new_variant(val);
+  return g_variant_new_variant(val);
   else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)
   {
     try
@@ -2071,23 +2061,23 @@ GVariant* createVariant(T)(T val)
       if (val.type is typeid(bool))
         return createVariant(val.get!bool);
       else if (val.type is typeid(byte) || val.type is typeid(ubyte))
-        return createVariant(val.coerce!byte);
+      return createVariant(val.coerce!byte);
       else if (val.type is typeid(short))
-        return createVariant(val.get!short);
+      return createVariant(val.get!short);
       else if (val.type is typeid(ushort))
-        return createVariant(val.get!ushort);
+      return createVariant(val.get!ushort);
       else if (val.type is typeid(int))
-        return createVariant(val.get!int);
+      return createVariant(val.get!int);
       else if (val.type is typeid(uint))
-        return createVariant(val.get!uint);
+      return createVariant(val.get!uint);
       else if (val.type is typeid(long))
-        return createVariant(val.get!long);
+      return createVariant(val.get!long);
       else if (val.type is typeid(ulong))
-        return createVariant(val.get!ulong);
+      return createVariant(val.get!ulong);
       else if (val.type is typeid(float) || val.type is typeid(double))
-        return createVariant(val.coerce!double);
+      return createVariant(val.coerce!double);
       else if (val.type is typeid(string) || val.type is typeid(wstring) || val.type is typeid(dstring))
-        return createVariant(val.coerce!string);
+      return createVariant(val.coerce!string);
       else
         assert(false, "Variant.createVariant does not support D Variant type " ~ val.type.to!string);
     }
@@ -2095,7 +2085,7 @@ GVariant* createVariant(T)(T val)
     assert(false, "Variant.createVariant exception with std.variant.Variant value get"); // Should not happen
   }
   else static if (isTypeTuple!T)
-    return createVariant(val.expand);
+  return createVariant(val.expand);
   else
     static assert(false, "Unsupported type for Variant.createVariant: " ~ T.stringof);
 }
@@ -2145,23 +2135,23 @@ T getVal(T)(GVariant* v)
   static if (is(T == bool))
     return cast(bool)g_variant_get_boolean(v);
   else static if (is(T == byte) || is(T == ubyte))
-    return cast(T)g_variant_get_byte(v);
+  return cast(T)g_variant_get_byte(v);
   else static if (is(T == short))
-    return g_variant_get_int16(v);
+  return g_variant_get_int16(v);
   else static if (is(T == ushort))
-    return g_variant_get_uint16(v);
+  return g_variant_get_uint16(v);
   else static if (is(T == int))
-    return g_variant_get_int32(v);
+  return g_variant_get_int32(v);
   else static if (is(T == uint))
-    return g_variant_get_uint32(v);
+  return g_variant_get_uint32(v);
   else static if (is(T == long))
-    return g_variant_get_int64(v);
+  return g_variant_get_int64(v);
   else static if (is(T == ulong))
-    return g_variant_get_uint64(v);
+  return g_variant_get_uint64(v);
   else static if (is(T == float) || is(T == double))
-    return cast(T)g_variant_get_double(v);
+  return cast(T)g_variant_get_double(v);
   else static if (isSomeString!T)
-    return fromCString(g_variant_get_string(v, null)); // g_variant_get_string second argument is an optional output length parameter
+  return fromCString(g_variant_get_string(v, null)); // g_variant_get_string second argument is an optional output length parameter
   else static if (is(T : E[], E))
   {
     T valArray;
@@ -2194,9 +2184,9 @@ T getVal(T)(GVariant* v)
     return dict;
   }
   else static if ((is(T : Variant)))
-    return new Variant(v, No.Take);
+  return new Variant(v, No.Take);
   else static if ((is(T == GVariant*)))
-    return g_variant_get_variant(v);
+  return g_variant_get_variant(v);
   else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)
   {
     if (g_variant_type_is_basic(g_variant_get_type(v)))
@@ -2231,7 +2221,7 @@ T getVal(T)(GVariant* v)
       return StdVariant.init; // Return an uninitialized std.variant if not a basic type
   }
   else static if (is(T : Tuple!Types, Types...))
-    return getValTuple!Types(v);
+  return getValTuple!Types(v);
   else
     static assert(false, "Unsupported type for Variant.getVal: " ~ T.stringof);
 }

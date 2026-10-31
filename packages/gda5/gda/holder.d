@@ -399,48 +399,6 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /**
-      Set the value associated to a named attribute. The attribute string is 'stolen' by this method, and
-      the memory it uses will be freed using the destroy function when no longer needed (if destroy is null,
-      then the string will not be freed at all).
-      
-      Attributes can have any name, but Libgda proposes some default names,
-      see <link linkend="libgda-5.0-Attributes-manager.synopsis">this section</link>.
-      
-      For example one would use it as:
-      
-      <code>gda_holder_set_attribute (holder, g_strdup (my_attribute), my_value, g_free);</code>
-      <code>gda_holder_set_attribute (holder, GDA_ATTRIBUTE_NAME, my_value, NULL);</code>
-      
-      If there is already an attribute named attribute set, then its value is replaced with the new value (value is
-      copied), except if value is null, in which case the attribute is removed.
-  
-      Params:
-        attribute = attribute name
-        value = a #GValue, or null
-        destroy = a function to be called when attribute is not needed anymore, or null
-  */
-  void setAttribute(string attribute, gobject.value.Value value, glib.types.DestroyNotify destroy) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
-    gda_holder_set_attribute(cast(GdaHolder*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, _destroyCB);
-  }
-
-  /**
       Sets holder to change when bind_to changes (and does not make bind_to change when holder changes).
       For the operation to succeed, the GType of holder and bind_to must be the same, with the exception that
       any of them can have a `GDA_TYPE_NULL` type (in this situation, the GType of the two #GdaHolder objects
@@ -652,7 +610,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.value.Value)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.holder.Holder)))
@@ -704,7 +662,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && Parameters!T.length < 2)
   {
@@ -748,7 +706,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectSourceChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && Parameters!T.length < 2)
   {
@@ -797,7 +755,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   */
   gulong connectValidateChange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == glib.error.ErrorWrap)
+  && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.value.Value)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.holder.Holder)))
   && Parameters!T.length < 3)

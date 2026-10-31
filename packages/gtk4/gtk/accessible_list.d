@@ -61,11 +61,9 @@ class AccessibleList : gobject.boxed.Boxed
     if (accessibles)
       _nAccessibles = cast(size_t)accessibles.length;
 
-    GtkAccessible*[] _tmpaccessibles;
-    foreach (obj; accessibles)
-      _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
-    GtkAccessible** _accessibles = _tmpaccessibles.ptr;
-
+    auto _accessibles_arr = new GtkAccessible*[](accessibles.length);
+    auto _accessibles = _accessibles_arr.ptr;
+    foreach (i, obj; accessibles) _accessibles[i] = obj ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)obj)._cPtr(No.Dup): null;
     _cretval = gtk_accessible_list_new_from_array(_accessibles, _nAccessibles);
     auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

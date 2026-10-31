@@ -1090,7 +1090,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
@@ -1149,7 +1149,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : gobject.object.ObjectWrap)
+  && is(ReturnType!T : gobject.object.ObjectWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 2)
   {
@@ -1202,7 +1202,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
@@ -1261,7 +1261,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectDone(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PrintOperationResult)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
@@ -1360,7 +1360,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectDrawPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.print_operation.PrintOperation)))
@@ -1416,7 +1416,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectEndPrint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
@@ -1479,7 +1479,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectPaginate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
@@ -1552,7 +1552,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectPreview(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation_preview.PrintOperationPreview)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.window.Window)))
@@ -1619,7 +1619,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.page_setup.PageSetup)))
@@ -1678,7 +1678,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 2)
   {
@@ -1730,7 +1730,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   gulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.page_setup.PageSetup)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.print_settings.PrintSettings)))

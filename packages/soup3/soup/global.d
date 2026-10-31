@@ -571,7 +571,7 @@ bool headersParse(string str, soup.message_headers.MessageHeaders dest) nothrow
   if (str)
     _len = cast(int)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _retval = cast(bool)soup_headers_parse(_str, _len, dest ? cast(SoupMessageHeaders*)dest._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -601,7 +601,7 @@ uint headersParseRequest(string str, soup.message_headers.MessageHeaders reqHead
   if (str)
     _len = cast(int)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   char* _reqMethod;
   char* _reqPath;
   _retval = soup_headers_parse_request(_str, _len, reqHeaders ? cast(SoupMessageHeaders*)reqHeaders._cPtr(No.Dup) : null, &_reqMethod, &_reqPath, &ver);
@@ -634,7 +634,7 @@ bool headersParseResponse(string str, soup.message_headers.MessageHeaders header
   if (str)
     _len = cast(int)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   char* _reasonPhrase;
   _retval = cast(bool)soup_headers_parse_response(_str, _len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
   reasonPhrase = _reasonPhrase.fromCString!(Yes.Free);
@@ -778,12 +778,9 @@ bool uriEqual(glib.uri.Uri uri1, glib.uri.Uri uri2) nothrow
 void websocketClientPrepareHandshake(soup.message.Message msg, string origin = null, string[] protocols = null, gobject.type_class.TypeClass[] supportedExtensions = null) nothrow
 {
   const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpprotocols;
-  foreach (s; protocols)
-    _tmpprotocols ~= s.toCString;
-  _tmpprotocols ~= null;
-  char** _protocols = _tmpprotocols.ptr;
-
+  auto _protocols_arr = new char*[](protocols.length + 1);
+  auto _protocols = cast(char**)_protocols_arr.ptr;
+  foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
   auto _supportedExtensions = gPtrArrayFromD!(gobject.type_class.TypeClass, false)(supportedExtensions);
   scope(exit) containerFree!(GPtrArray*, gobject.type_class.TypeClass, GidOwnership.None)(_supportedExtensions);
   soup_websocket_client_prepare_handshake(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _origin, _protocols, _supportedExtensions);
@@ -861,12 +858,9 @@ bool websocketServerCheckHandshake(soup.server_message.ServerMessage msg, string
 {
   bool _retval;
   const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpprotocols;
-  foreach (s; protocols)
-    _tmpprotocols ~= s.toCString;
-  _tmpprotocols ~= null;
-  char** _protocols = _tmpprotocols.ptr;
-
+  auto _protocols_arr = new char*[](protocols.length + 1);
+  auto _protocols = cast(char**)_protocols_arr.ptr;
+  foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
   auto _supportedExtensions = gPtrArrayFromD!(gobject.type_class.TypeClass, false)(supportedExtensions);
   scope(exit) containerFree!(GPtrArray*, gobject.type_class.TypeClass, GidOwnership.None)(_supportedExtensions);
   GError *_err;
@@ -909,12 +903,9 @@ bool websocketServerProcessHandshake(soup.server_message.ServerMessage msg, stri
 {
   bool _retval;
   const(char)* _expectedOrigin = expectedOrigin.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpprotocols;
-  foreach (s; protocols)
-    _tmpprotocols ~= s.toCString;
-  _tmpprotocols ~= null;
-  char** _protocols = _tmpprotocols.ptr;
-
+  auto _protocols_arr = new char*[](protocols.length + 1);
+  auto _protocols = cast(char**)_protocols_arr.ptr;
+  foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
   auto _supportedExtensions = gPtrArrayFromD!(gobject.type_class.TypeClass, false)(supportedExtensions);
   scope(exit) containerFree!(GPtrArray*, gobject.type_class.TypeClass, GidOwnership.None)(_supportedExtensions);
   GList* _acceptedExtensions;

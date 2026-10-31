@@ -688,7 +688,7 @@ class TabOverview : gtk.widget.Widget
     if (types)
       _nTypes = cast(size_t)types.length;
 
-    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
+    auto _types = cast(GType*)types.ptr;
     adw_tab_overview_setup_extra_drop_target(cast(AdwTabOverview*)this._cPtr, actions, _types, _nTypes);
   }
 
@@ -716,7 +716,7 @@ class TabOverview : gtk.widget.Widget
   */
   gulong connectCreateTab(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : adw.tab_page.TabPage)
+  && is(ReturnType!T : adw.tab_page.TabPage)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_overview.TabOverview)))
   && Parameters!T.length < 2)
   {
@@ -773,7 +773,7 @@ class TabOverview : gtk.widget.Widget
   */
   gulong connectExtraDragDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.value.Value)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_overview.TabOverview)))
@@ -841,7 +841,7 @@ class TabOverview : gtk.widget.Widget
   */
   gulong connectExtraDragValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == gdk.types.DragAction)
+  && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.value.Value)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_overview.TabOverview)))

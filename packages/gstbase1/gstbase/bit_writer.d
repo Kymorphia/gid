@@ -169,7 +169,7 @@ class BitWriter
     if (data)
       _nbytes = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _retval = cast(bool)gst_bit_writer_put_bytes(cast(GstBitWriter*)this._cPtr, _data, _nbytes);
     return _retval;
   }

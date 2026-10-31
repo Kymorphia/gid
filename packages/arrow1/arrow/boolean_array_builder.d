@@ -98,12 +98,16 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    auto _values = values.ptr ? cast(const(gboolean)*)values.ptr : [gboolean.init].ptr;
+    auto _values_arr = new gboolean[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, b; values) _values[i] = cast(gboolean)b;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_boolean_array_builder_append_values(cast(GArrowBooleanArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

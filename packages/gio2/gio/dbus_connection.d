@@ -21,7 +21,6 @@ import gio.menu_model;
 import gio.types;
 import gio.unix_fdlist;
 import glib.error;
-import glib.types;
 import glib.variant;
 import glib.variant_type;
 import gobject.closure;
@@ -1282,79 +1281,6 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   }
 
   /**
-      Registers a whole subtree of dynamic objects.
-      
-      The enumerate and introspection functions in vtable are used to
-      convey, to remote callers, what nodes exist in the subtree rooted
-      by object_path.
-      
-      When handling remote calls into any node in the subtree, first the
-      enumerate function is used to check if the node exists. If the node exists
-      or the [gio.types.DBusSubtreeFlags.DispatchToUnenumeratedNodes] flag is set
-      the introspection function is used to check if the node supports the
-      requested method. If so, the dispatch function is used to determine
-      where to dispatch the call. The collected #GDBusInterfaceVTable and
-      #gpointer will be used to call into the interface vtable for processing
-      the request.
-      
-      All calls into user-provided code will be invoked in the
-      [thread-default main context][g-main-context-push-thread-default]
-      of the thread you are calling this method from.
-      
-      If an existing subtree is already registered at object_path or
-      then error is set to [gio.types.IOErrorEnum.Exists].
-      
-      Note that it is valid to register regular objects (using
-      [gio.dbus_connection.DBusConnection.registerObject]) in a subtree registered with
-      [gio.dbus_connection.DBusConnection.registerSubtree] - if so, the subtree handler
-      is tried as the last resort. One way to think about a subtree
-      handler is to consider it a fallback handler for object paths not
-      registered via [gio.dbus_connection.DBusConnection.registerObject] or other bindings.
-      
-      Note that vtable will be copied so you cannot change it after
-      registration.
-      
-      See this [server][gdbus-subtree-server] for an example of how to use
-      this method.
-  
-      Params:
-        objectPath = the object path to register the subtree at
-        vtable = a #GDBusSubtreeVTable to enumerate, introspect and
-              dispatch nodes in the subtree
-        flags = flags used to fine tune the behavior of the subtree
-        userData = data to pass to functions in vtable
-        userDataFreeFunc = function to call when the subtree is unregistered
-      Returns: 0 if error is set, otherwise a subtree registration ID (never 0)
-        that can be used with [gio.dbus_connection.DBusConnection.unregisterSubtree]
-      Throws: [ErrorWrap]
-  */
-  uint registerSubtree(string objectPath, gio.types.DBusSubtreeVTable vtable, gio.types.DBusSubtreeFlags flags, void* userData, glib.types.DestroyNotify userDataFreeFunc)
-  {
-    extern(C) void _userDataFreeFuncCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _userDataFreeFuncCB = userDataFreeFunc ? &_userDataFreeFuncCallback : null;
-    uint _retval;
-    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
-    GError *_err;
-    _retval = g_dbus_connection_register_subtree(cast(GDBusConnection*)this._cPtr, _objectPath, cast(const(GDBusSubtreeVTable)*)&vtable, flags, userData, _userDataFreeFuncCB, &_err);
-    if (_err)
-      throw new ErrorWrap(_err, Yes.Take);
-    return _retval;
-  }
-
-  /**
       Removes a filter.
       
       Note that since filters run in a different thread, there is a race
@@ -1814,7 +1740,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   */
   gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.dbus_connection.DBusConnection)))

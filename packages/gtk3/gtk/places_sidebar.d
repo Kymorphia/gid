@@ -639,7 +639,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectDragActionAsk(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == int)
+  && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
@@ -707,7 +707,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectDragActionRequested(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == int)
+  && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.file.File)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gio.file.File[])))
@@ -776,7 +776,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectDragPerformDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gio.file.File[])))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
@@ -837,7 +837,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectMount(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
@@ -892,7 +892,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectOpenLocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.types.PlacesOpenFlags)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.places_sidebar.PlacesSidebar)))
@@ -976,7 +976,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.file.File)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.volume.Volume)))
@@ -1039,7 +1039,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 2)
   {
@@ -1086,7 +1086,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectShowEnterLocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 2)
   {
@@ -1137,7 +1137,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectShowErrorMessage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.places_sidebar.PlacesSidebar)))
@@ -1197,7 +1197,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 2)
   {
@@ -1247,7 +1247,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
@@ -1301,7 +1301,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectShowStarredLocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
@@ -1354,7 +1354,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   gulong connectUnmount(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)

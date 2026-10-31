@@ -55,11 +55,9 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
     if (paths)
       _nPaths = cast(size_t)paths.length;
 
-    char*[] _tmppaths;
-    foreach (s; paths)
-      _tmppaths ~= s.toCString;
-    const(char*)* _paths = _tmppaths.ptr;
-
+    auto _paths_arr = new char*[](paths.length);
+    auto _paths = cast(char**)_paths_arr.ptr;
+    foreach (i, s; paths) _paths[i] = s.toCString!(No.Malloc);
     _cretval = gaflight_path_descriptor_new(_paths, _nPaths);
     this(_cretval, Yes.Take);
   }

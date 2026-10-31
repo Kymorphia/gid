@@ -214,7 +214,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
   */
   gulong connectPageCreated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.web_page.WebPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.web_process_extension.WebProcessExtension)))
   && Parameters!T.length < 3)
@@ -267,7 +267,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
   */
   gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.user_message.UserMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.web_process_extension.WebProcessExtension)))
   && Parameters!T.length < 3)

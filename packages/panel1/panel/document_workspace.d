@@ -196,7 +196,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   */
   gulong connectAddWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.position.Position)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : panel.document_workspace.DocumentWorkspace)))
@@ -254,7 +254,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   */
   gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : panel.frame.Frame)
+  && is(ReturnType!T : panel.frame.Frame)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.position.Position)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.document_workspace.DocumentWorkspace)))
   && Parameters!T.length < 3)

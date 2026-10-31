@@ -287,7 +287,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   */
   gulong connectNewConnection(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_connection.DBusConnection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.dbus_server.DBusServer)))
   && Parameters!T.length < 3)

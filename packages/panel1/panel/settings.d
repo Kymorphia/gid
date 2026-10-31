@@ -7,11 +7,9 @@ import gio.action_group;
 import gio.action_group_mixin;
 import gio.types;
 import glib.variant;
-import glib.variant_type;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
-import gobject.value;
 import panel.c.functions;
 import panel.c.types;
 import panel.types;
@@ -153,65 +151,6 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     panel_settings_bind(cast(PanelSettings*)this._cPtr, _key, object, _property, flags);
-  }
-
-  /**
-      Like [panel.settings.Settings.bind] but allows transforming to and from settings storage using
-      get_mapping and set_mapping transformation functions.
-      
-      Call [panel.settings.Settings.unbind] to unbind the mapping.
-  
-      Params:
-        key = The settings key
-        object = the object to bind to
-        property = the property of object to bind to
-        flags = flags for the binding
-        getMapping = variant to value mapping
-        setMapping = value to variant mapping
-  */
-  void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null) nothrow
-  {
-    extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData) nothrow
-    {
-      bool _dretval;
-      auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindGetMapping");
-      }
-      auto _retval = cast(gboolean)_dretval;
-
-      return _retval;
-    }
-    auto _getMappingCB = getMapping ? &_getMappingCallback : null;
-    extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData) nothrow
-    {
-      glib.variant.Variant _dretval;
-      auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindSetMapping");
-      }
-      auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
-
-      return _retval;
-    }
-    auto _setMappingCB = setMapping ? &_setMappingCallback : null;
-    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
-    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
-    auto _setMapping = setMapping ? freezeDelegate(cast(void*)&setMapping) : null;
-    GDestroyNotify _setMappingDestroyCB = setMapping ? &thawDelegate : null;
-    panel_settings_bind_with_mapping(cast(PanelSettings*)this._cPtr, _key, object, _property, flags, _getMappingCB, _setMappingCB, _setMapping, _setMappingDestroyCB);
   }
 
   /** */
@@ -369,7 +308,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   */
   gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.settings.Settings)))
   && Parameters!T.length < 3)

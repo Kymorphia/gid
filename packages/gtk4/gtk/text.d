@@ -1038,7 +1038,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
@@ -1087,7 +1087,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectBackspace(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
@@ -1137,7 +1137,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
@@ -1187,7 +1187,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
@@ -1245,7 +1245,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DeleteType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text.Text)))
@@ -1304,7 +1304,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text.Text)))
   && Parameters!T.length < 3)
@@ -1358,7 +1358,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
@@ -1427,7 +1427,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
@@ -1488,7 +1488,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
@@ -1538,7 +1538,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text.Text)))
   && Parameters!T.length < 3)
@@ -1590,7 +1590,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   gulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {

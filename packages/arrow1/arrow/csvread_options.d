@@ -494,11 +494,9 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (columnNames)
       _nColumnNames = cast(size_t)columnNames.length;
 
-    char*[] _tmpcolumnNames;
-    foreach (s; columnNames)
-      _tmpcolumnNames ~= s.toCString;
-    const(char*)* _columnNames = _tmpcolumnNames.ptr;
-
+    auto _columnNames_arr = new char*[](columnNames.length);
+    auto _columnNames = cast(char**)_columnNames_arr.ptr;
+    foreach (i, s; columnNames) _columnNames[i] = s.toCString!(No.Malloc);
     garrow_csv_read_options_set_column_names(cast(GArrowCSVReadOptions*)this._cPtr, _columnNames, _nColumnNames);
   }
 
@@ -509,11 +507,9 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (falseValues)
       _nFalseValues = cast(size_t)falseValues.length;
 
-    char*[] _tmpfalseValues;
-    foreach (s; falseValues)
-      _tmpfalseValues ~= s.toCString;
-    const(char*)* _falseValues = _tmpfalseValues.ptr;
-
+    auto _falseValues_arr = new char*[](falseValues.length);
+    auto _falseValues = cast(char**)_falseValues_arr.ptr;
+    foreach (i, s; falseValues) _falseValues[i] = s.toCString!(No.Malloc);
     garrow_csv_read_options_set_false_values(cast(GArrowCSVReadOptions*)this._cPtr, _falseValues, _nFalseValues);
   }
 
@@ -524,11 +520,9 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (nullValues)
       _nNullValues = cast(size_t)nullValues.length;
 
-    char*[] _tmpnullValues;
-    foreach (s; nullValues)
-      _tmpnullValues ~= s.toCString;
-    const(char*)* _nullValues = _tmpnullValues.ptr;
-
+    auto _nullValues_arr = new char*[](nullValues.length);
+    auto _nullValues = cast(char**)_nullValues_arr.ptr;
+    foreach (i, s; nullValues) _nullValues[i] = s.toCString!(No.Malloc);
     garrow_csv_read_options_set_null_values(cast(GArrowCSVReadOptions*)this._cPtr, _nullValues, _nNullValues);
   }
 
@@ -547,11 +541,9 @@ class CSVReadOptions : gobject.object.ObjectWrap
     if (trueValues)
       _nTrueValues = cast(size_t)trueValues.length;
 
-    char*[] _tmptrueValues;
-    foreach (s; trueValues)
-      _tmptrueValues ~= s.toCString;
-    const(char*)* _trueValues = _tmptrueValues.ptr;
-
+    auto _trueValues_arr = new char*[](trueValues.length);
+    auto _trueValues = cast(char**)_trueValues_arr.ptr;
+    foreach (i, s; trueValues) _trueValues[i] = s.toCString!(No.Malloc);
     garrow_csv_read_options_set_true_values(cast(GArrowCSVReadOptions*)this._cPtr, _trueValues, _nTrueValues);
   }
 }

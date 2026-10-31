@@ -3,10 +3,7 @@ module gstgl.glbase_memory;
 
 public import gid.basictypes;
 import gid.gid;
-import glib.types;
 import gobject.boxed;
-import gst.allocation_params;
-import gst.allocator;
 import gst.memory;
 import gst.types;
 import gstgl.c.functions;
@@ -143,38 +140,6 @@ class GLBaseMemory : gobject.boxed.Boxed
     bool _retval;
     _retval = cast(bool)gst_gl_base_memory_alloc_data(cast(GstGLBaseMemory*)this._cPtr);
     return _retval;
-  }
-
-  /**
-      Initializes mem with the required parameters
-  
-      Params:
-        allocator = the #GstAllocator to initialize with
-        parent = the parent #GstMemory to initialize with
-        context = the #GstGLContext to initialize with
-        params = the GstAllocationParams to initialize with
-        size = the number of bytes to be allocated
-        userData = user data to call notify with
-        notify = a #GDestroyNotify
-  */
-  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* params, size_t size, void* userData = null, glib.types.DestroyNotify notify = null) nothrow
-  {
-    extern(C) void _notifyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_base_memory_init(cast(GstGLBaseMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)params, size, userData, _notifyCB);
   }
 
   /** */

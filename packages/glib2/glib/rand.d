@@ -90,7 +90,7 @@ class Rand : gobject.boxed.Boxed
     if (seed)
       _seedLength = cast(uint)seed.length;
 
-    auto _seed = seed.ptr ? cast(const(uint)*)seed.ptr : [uint.init].ptr;
+    auto _seed = cast(uint*)seed.ptr;
     _cretval = g_rand_new_with_seed_array(_seed, _seedLength);
     auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -193,7 +193,7 @@ class Rand : gobject.boxed.Boxed
     if (seed)
       _seedLength = cast(uint)seed.length;
 
-    auto _seed = seed.ptr ? cast(const(uint)*)seed.ptr : [uint.init].ptr;
+    auto _seed = cast(uint*)seed.ptr;
     g_rand_set_seed_array(cast(GRand*)this._cPtr, _seed, _seedLength);
   }
 }

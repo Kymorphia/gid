@@ -36,11 +36,9 @@ class ContainerNode : gsk.render_node.RenderNode
     if (children)
       _nChildren = cast(uint)children.length;
 
-    GskRenderNode*[] _tmpchildren;
-    foreach (obj; children)
-      _tmpchildren ~= obj ? cast(GskRenderNode*)obj._cPtr : null;
-    GskRenderNode** _children = cast(GskRenderNode**)_tmpchildren.ptr;
-
+    auto _children_arr = new GskRenderNode*[](children.length);
+    auto _children = cast(GskRenderNode**)_children_arr.ptr;
+    foreach (i, obj; children) _children[i] = obj ? cast(GskRenderNode*)obj._cPtr(No.Dup) : null;
     _cretval = gsk_container_node_new(_children, _nChildren);
     this(_cretval, Yes.Take);
   }

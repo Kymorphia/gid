@@ -53,13 +53,10 @@ string tagFreeformStringToUtf8(string data, string[] envVars) nothrow
   if (data)
     _size = cast(int)data.length;
 
-  auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
-  char*[] _tmpenvVars;
-  foreach (s; envVars)
-    _tmpenvVars ~= s.toCString;
-  _tmpenvVars ~= null;
-  const(char*)* _envVars = _tmpenvVars.ptr;
-
+  auto _data = cast(char*)data.ptr;
+  auto _envVars_arr = new char*[](envVars.length + 1);
+  auto _envVars = cast(char**)_envVars_arr.ptr;
+  foreach (i, s; envVars) _envVars[i] = s.toCString!(No.Malloc);
   _cretval = gst_tag_freeform_string_to_utf8(_data, _size, _envVars);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -464,7 +461,7 @@ gst.sample.Sample tagImageDataToImageSample(ubyte[] imageData, gsttag.types.TagI
   if (imageData)
     _imageDataLen = cast(uint)imageData.length;
 
-  auto _imageData = imageData.ptr ? cast(const(ubyte)*)imageData.ptr : [ubyte.init].ptr;
+  auto _imageData = cast(ubyte*)imageData.ptr;
   _cretval = gst_tag_image_data_to_image_sample(_imageData, _imageDataLen, imageType);
   auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -489,7 +486,7 @@ bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id
   if (imageData)
     _imageDataLen = cast(uint)imageData.length;
 
-  auto _imageData = imageData.ptr ? cast(const(ubyte)*)imageData.ptr : [ubyte.init].ptr;
+  auto _imageData = cast(ubyte*)imageData.ptr;
   _retval = cast(bool)gst_tag_list_add_id3_image(tagList ? cast(GstTagList*)tagList._cPtr(No.Dup) : null, _imageData, _imageDataLen, id3PictureType);
   return _retval;
 }
@@ -565,12 +562,12 @@ gst.tag_list.TagList tagListFromVorbiscomment(ubyte[] data, ubyte[] idData, out 
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+  auto _data = cast(ubyte*)data.ptr;
   uint _idDataLength;
   if (idData)
     _idDataLength = cast(uint)idData.length;
 
-  auto _idData = idData.ptr ? cast(const(ubyte)*)idData.ptr : [ubyte.init].ptr;
+  auto _idData = cast(ubyte*)idData.ptr;
   char* _vendorString;
   _cretval = gst_tag_list_from_vorbiscomment(_data, _size, _idData, _idDataLength, &_vendorString);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
@@ -597,7 +594,7 @@ gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ub
   if (idData)
     _idDataLength = cast(uint)idData.length;
 
-  auto _idData = idData.ptr ? cast(const(ubyte)*)idData.ptr : [ubyte.init].ptr;
+  auto _idData = cast(ubyte*)idData.ptr;
   char* _vendorString;
   _cretval = gst_tag_list_from_vorbiscomment_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _idData, _idDataLength, &_vendorString);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
@@ -632,7 +629,7 @@ gst.tag_list.TagList tagListNewFromId3v1(ubyte[] data) nothrow
 {
   GstTagList* _cretval;
   assert(!data || data.length == 128);
-  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+  auto _data = cast(ubyte*)data.ptr;
   _cretval = gst_tag_list_new_from_id3v1(_data);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -689,7 +686,7 @@ gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[
   if (idData)
     _idDataLength = cast(uint)idData.length;
 
-  auto _idData = idData.ptr ? cast(const(ubyte)*)idData.ptr : [ubyte.init].ptr;
+  auto _idData = cast(ubyte*)idData.ptr;
   const(char)* _vendorString = vendorString.toCString!(No.Malloc, Yes.Nullable);
   _cretval = gst_tag_list_to_vorbiscomment_buffer(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _idData, _idDataLength, _vendorString);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
@@ -710,12 +707,9 @@ gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[
 gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, string[] schemas) nothrow
 {
   GstBuffer* _cretval;
-  char*[] _tmpschemas;
-  foreach (s; schemas)
-    _tmpschemas ~= s.toCString;
-  _tmpschemas ~= null;
-  const(char*)* _schemas = _tmpschemas.ptr;
-
+  auto _schemas_arr = new char*[](schemas.length + 1);
+  auto _schemas = cast(char**)_schemas_arr.ptr;
+  foreach (i, s; schemas) _schemas[i] = s.toCString!(No.Malloc);
   _cretval = gst_tag_list_to_xmp_buffer(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, readOnly, _schemas);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;

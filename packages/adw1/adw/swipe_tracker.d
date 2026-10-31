@@ -452,7 +452,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   gulong connectBeginSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.swipe_tracker.SwipeTracker)))
   && Parameters!T.length < 2)
   {
@@ -505,7 +505,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   gulong connectEndSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.swipe_tracker.SwipeTracker)))
@@ -562,7 +562,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   gulong connectPrepare(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == adw.types.NavigationDirection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.swipe_tracker.SwipeTracker)))
   && Parameters!T.length < 3)
@@ -612,7 +612,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   gulong connectUpdateSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.swipe_tracker.SwipeTracker)))
   && Parameters!T.length < 3)

@@ -90,12 +90,14 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    auto _values = values.ptr ? cast(const(long)*)values.ptr : [long.init].ptr;
+    auto _values = cast(long*)values.ptr;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_binary_dictionary_array_builder_append_indices(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
@@ -111,7 +113,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (value)
       _length = cast(int)value.length;
 
-    auto _value = value.ptr ? cast(const(ubyte)*)value.ptr : [ubyte.init].ptr;
+    auto _value = cast(ubyte*)value.ptr;
     GError *_err;
     _retval = cast(bool)garrow_binary_dictionary_array_builder_append_value(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)

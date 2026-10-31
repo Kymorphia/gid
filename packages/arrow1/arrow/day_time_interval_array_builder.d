@@ -88,16 +88,16 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    GArrowDayMillisecond*[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= obj ? cast(GArrowDayMillisecond*)obj._cPtr : null;
-    const(GArrowDayMillisecond*)* _values = cast(const(GArrowDayMillisecond*)*)_tmpvalues.ptr;
-
+    auto _values_arr = new GArrowDayMillisecond*[](values.length);
+    auto _values = cast(GArrowDayMillisecond**)_values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? cast(GArrowDayMillisecond*)obj._cPtr(No.Dup) : null;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_day_time_interval_array_builder_append_values(cast(GArrowDayTimeIntervalArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

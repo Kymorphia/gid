@@ -176,12 +176,9 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   this(gtk.types.IconSize size, double min, double max, double step, string[] icons = null) nothrow
   {
     GtkWidget* _cretval;
-    char*[] _tmpicons;
-    foreach (s; icons)
-      _tmpicons ~= s.toCString;
-    _tmpicons ~= null;
-    const(char*)* _icons = _tmpicons.ptr;
-
+    auto _icons_arr = new char*[](icons.length + 1);
+    auto _icons = cast(char**)_icons_arr.ptr;
+    foreach (i, s; icons) _icons[i] = s.toCString!(No.Malloc);
     _cretval = gtk_scale_button_new(size, min, max, step, _icons);
     this(_cretval, No.Take);
   }
@@ -268,12 +265,9 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   */
   void setIcons(string[] icons) nothrow
   {
-    char*[] _tmpicons;
-    foreach (s; icons)
-      _tmpicons ~= s.toCString;
-    _tmpicons ~= null;
-    const(char*)* _icons = _tmpicons.ptr;
-
+    auto _icons_arr = new char*[](icons.length + 1);
+    auto _icons = cast(char**)_icons_arr.ptr;
+    foreach (i, s; icons) _icons[i] = s.toCString!(No.Malloc);
     gtk_scale_button_set_icons(cast(GtkScaleButton*)this._cPtr, _icons);
   }
 
@@ -312,7 +306,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   */
   gulong connectPopdown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 2)
   {
@@ -360,7 +354,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   */
   gulong connectPopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 2)
   {
@@ -407,7 +401,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   */
   gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 3)

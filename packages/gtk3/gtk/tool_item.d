@@ -544,7 +544,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   gulong connectCreateMenuProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tool_item.ToolItem)))
   && Parameters!T.length < 2)
   {
@@ -599,7 +599,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   gulong connectToolbarReconfigured(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tool_item.ToolItem)))
   && Parameters!T.length < 2)
   {

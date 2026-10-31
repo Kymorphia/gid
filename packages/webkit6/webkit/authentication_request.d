@@ -280,7 +280,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   */
   gulong connectAuthenticated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.credential.Credential)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.authentication_request.AuthenticationRequest)))
   && Parameters!T.length < 3)
@@ -330,7 +330,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   */
   gulong connectCancelled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.authentication_request.AuthenticationRequest)))
   && Parameters!T.length < 2)
   {

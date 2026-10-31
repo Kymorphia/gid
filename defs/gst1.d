@@ -33,6 +33,10 @@
 //# Change ChildProxy.getProperty to getChildProxyProperty, conflicts with ObjectWrap.getProperty and could not get it to work with an alias
 //!set interface[ChildProxy].method[get_property][name] getChildProxyProperty
 
+//# Ignore list free functions which take ownership of a D array, pointless since D would copy the list just to free it
+//!set class[Plugin].function[list_free][ignore] 1
+//!set class[PluginFeature].function[list_free][ignore] 1
+
 //# Ignore methods which take a parent refcount, used for code implementing parent objects
 //!set record[CapsFeatures].method[set_parent_refcount][ignore] 0
 //!set record[Structure].method[set_parent_refcount][ignore] 0

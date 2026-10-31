@@ -66,7 +66,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (value)
       _length = cast(int)value.length;
 
-    auto _value = value.ptr ? cast(const(ubyte)*)value.ptr : [ubyte.init].ptr;
+    auto _value = cast(ubyte*)value.ptr;
     GError *_err;
     _retval = cast(bool)garrow_fixed_size_binary_array_builder_append_value(cast(GArrowFixedSizeBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
@@ -105,16 +105,16 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    GBytes*[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= cast(GBytes*)obj._cPtr;
-    GBytes** _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GBytes*[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? cast(GBytes*)obj._cPtr(No.Dup) : null;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_fixed_size_binary_array_builder_append_values(cast(GArrowFixedSizeBinaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
@@ -145,7 +145,9 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
+    auto _isValids_arr = new gboolean[](isValids.length);
+    auto _isValids = _isValids_arr.ptr;
+    foreach (i, b; isValids) _isValids[i] = cast(gboolean)b;
     GError *_err;
     _retval = cast(bool)garrow_fixed_size_binary_array_builder_append_values_packed(cast(GArrowFixedSizeBinaryArrayBuilder*)this._cPtr, values ? cast(GBytes*)values._cPtr(No.Dup) : null, _isValids, _isValidsLength, &_err);
     if (_err)

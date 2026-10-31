@@ -73,19 +73,15 @@ interface Initable
     if (parameters)
       _nParameters = cast(uint)parameters.length;
 
-    GParameter[] _tmpparameters;
-    foreach (obj; parameters)
-      _tmpparameters ~= obj._cInstance;
-    GParameter* _parameters = _tmpparameters.ptr;
-
+    auto _parameters_arr = new GParameter[](parameters.length);
+    auto _parameters = _parameters_arr.ptr;
+    foreach (i, obj; parameters) _parameters[i] = obj._cInstance;
     GError *_err;
     _cretval = g_initable_newv(objectType, _nParameters, _parameters, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
-    foreach (i, obj; parameters)
-      obj._cInstance = _tmpparameters[i];
-
+    foreach (i, obj; parameters) obj._cInstance = _parameters[i];
     return _retval;
   }
 

@@ -93,6 +93,27 @@ class MessageBody : gobject.boxed.Boxed
   }
 
   /**
+      Appends length bytes from data to body.
+      
+      This function is exactly equivalent to [soup.message_body.MessageBody.append]
+      with [soup.types.MemoryUse.Take] as second argument; it exists mainly for
+      convenience and simplifying language bindings.
+  
+      Params:
+        data = data to append
+  */
+  void append(ubyte[] data) nothrow
+  {
+    size_t _length;
+    if (data)
+      _length = cast(size_t)data.length;
+
+    auto _data = cast(ubyte*)gMalloc((data.length) * (ubyte).sizeof);
+    _data[0 .. data.length] = data[];
+    soup_message_body_append_take(cast(SoupMessageBody*)this._cPtr, _data, _length);
+  }
+
+  /**
       Tags body as being complete.
       
       Call this when using chunked encoding after you have appended the last chunk.

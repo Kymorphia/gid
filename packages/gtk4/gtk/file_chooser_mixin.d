@@ -207,18 +207,12 @@ template FileChooserT()
   {
     const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
     const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpoptions;
-    foreach (s; options)
-      _tmpoptions ~= s.toCString;
-    _tmpoptions ~= null;
-    const(char*)* _options = _tmpoptions.ptr;
-
-    char*[] _tmpoptionLabels;
-    foreach (s; optionLabels)
-      _tmpoptionLabels ~= s.toCString;
-    _tmpoptionLabels ~= null;
-    const(char*)* _optionLabels = _tmpoptionLabels.ptr;
-
+    auto _options_arr = new char*[](options.length + 1);
+    auto _options = cast(char**)_options_arr.ptr;
+    foreach (i, s; options) _options[i] = s.toCString!(No.Malloc);
+    auto _optionLabels_arr = new char*[](optionLabels.length + 1);
+    auto _optionLabels = cast(char**)_optionLabels_arr.ptr;
+    foreach (i, s; optionLabels) _optionLabels[i] = s.toCString!(No.Malloc);
     gtk_file_chooser_add_choice(cast(GtkFileChooser*)this._cPtr, _id, _label, _options, _optionLabels);
   }
 

@@ -186,7 +186,7 @@ class ShortcutsSection : gtk.box.Box
   */
   gulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.shortcuts_section.ShortcutsSection)))
   && Parameters!T.length < 3)

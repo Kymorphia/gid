@@ -279,18 +279,12 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    _tmpargv ~= null;
-    char** _argv = _tmpargv.ptr;
-
-    char*[] _tmpenvv;
-    foreach (s; envv)
-      _tmpenvv ~= s.toCString;
-    _tmpenvv ~= null;
-    char** _envv = _tmpenvv.ptr;
-
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+    auto _envv_arr = new char*[](envv.length + 1);
+    auto _envv = cast(char**)_envv_arr.ptr;
+    foreach (i, s; envv) _envv[i] = s.toCString!(No.Malloc);
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -387,28 +381,22 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-    const(char)*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    _tmpargv ~= null;
-    const(char*)* _argv = _tmpargv.ptr;
-
-    const(char)*[] _tmpenvv;
-    foreach (s; envv)
-      _tmpenvv ~= s.toCString;
-    _tmpenvv ~= null;
-    const(char*)* _envv = _tmpenvv.ptr;
-
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+    auto _envv_arr = new char*[](envv.length + 1);
+    auto _envv = cast(char**)_envv_arr.ptr;
+    foreach (i, s; envv) _envv[i] = s.toCString!(No.Malloc);
     int _nFds;
     if (fds)
       _nFds = cast(int)fds.length;
 
-    auto _fds = fds.ptr ? cast(const(int)*)fds.ptr : [int.init].ptr;
+    auto _fds = cast(int*)fds.ptr;
     int _nMapFds;
     if (mapFds)
       _nMapFds = cast(int)mapFds.length;
 
-    auto _mapFds = mapFds.ptr ? cast(const(int)*)mapFds.ptr : [int.init].ptr;
+    auto _mapFds = cast(int*)mapFds.ptr;
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;

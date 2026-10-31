@@ -63,21 +63,19 @@ class Tensor : gobject.object.ObjectWrap
     if (shape)
       _nDimensions = cast(size_t)shape.length;
 
-    auto _shape = shape.ptr ? cast(long*)shape.ptr : [long.init].ptr;
+    auto _shape = cast(long*)shape.ptr;
     size_t _nStrides;
     if (strides)
       _nStrides = cast(size_t)strides.length;
 
-    auto _strides = strides.ptr ? cast(long*)strides.ptr : [long.init].ptr;
+    auto _strides = cast(long*)strides.ptr;
     size_t _nDimensionNames;
     if (dimensionNames)
       _nDimensionNames = cast(size_t)dimensionNames.length;
 
-    char*[] _tmpdimensionNames;
-    foreach (s; dimensionNames)
-      _tmpdimensionNames ~= s.toCString;
-    char** _dimensionNames = _tmpdimensionNames.ptr;
-
+    auto _dimensionNames_arr = new char*[](dimensionNames.length);
+    auto _dimensionNames = cast(char**)_dimensionNames_arr.ptr;
+    foreach (i, s; dimensionNames) _dimensionNames[i] = s.toCString!(No.Malloc);
     _cretval = garrow_tensor_new(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, _shape, _nDimensions, _strides, _nStrides, _dimensionNames, _nDimensionNames);
     this(_cretval, Yes.Take);
   }

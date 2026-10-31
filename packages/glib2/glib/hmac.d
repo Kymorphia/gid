@@ -90,7 +90,7 @@ class Hmac : gobject.boxed.Boxed
     if (key)
       _keyLen = cast(size_t)key.length;
 
-    auto _key = key.ptr ? cast(const(ubyte)*)key.ptr : [ubyte.init].ptr;
+    auto _key = cast(ubyte*)key.ptr;
     _cretval = g_hmac_new(digestType, _key, _keyLen);
     this(_cretval, Yes.Take);
   }
@@ -161,7 +161,7 @@ class Hmac : gobject.boxed.Boxed
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     g_hmac_update(cast(GHmac*)this._cPtr, _data, _length);
   }
 }

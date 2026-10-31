@@ -504,7 +504,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     if (data)
       _dataLength = cast(int)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     GError *_err;
     _cretval = gdk_pixbuf_new_from_inline(_dataLength, _data, copyPixels, &_err);
     if (_err)
@@ -678,12 +678,9 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   static gdkpixbuf.pixbuf.Pixbuf newFromXpmData(string[] data) nothrow
   {
     GdkPixbuf* _cretval;
-    char*[] _tmpdata;
-    foreach (s; data)
-      _tmpdata ~= s.toCString;
-    _tmpdata ~= null;
-    const(char*)* _data = _tmpdata.ptr;
-
+    auto _data_arr = new char*[](data.length + 1);
+    auto _data = cast(char**)_data_arr.ptr;
+    foreach (i, s; data) _data[i] = s.toCString!(No.Malloc);
     _cretval = gdk_pixbuf_new_from_xpm_data(_data);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
@@ -1462,18 +1459,12 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     size_t _bufferSize;
     ubyte* _buffer;
     const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpoptionKeys;
-    foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString;
-    _tmpoptionKeys ~= null;
-    char** _optionKeys = _tmpoptionKeys.ptr;
-
-    char*[] _tmpoptionValues;
-    foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString;
-    _tmpoptionValues ~= null;
-    char** _optionValues = _tmpoptionValues.ptr;
-
+    auto _optionKeys_arr = new char*[](optionKeys.length + 1);
+    auto _optionKeys = cast(char**)_optionKeys_arr.ptr;
+    foreach (i, s; optionKeys) _optionKeys[i] = s.toCString!(No.Malloc);
+    auto _optionValues_arr = new char*[](optionValues.length + 1);
+    auto _optionValues = cast(char**)_optionValues_arr.ptr;
+    foreach (i, s; optionValues) _optionValues[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gdk_pixbuf_save_to_bufferv(cast(GdkPixbuf*)this._cPtr, &_buffer, &_bufferSize, _type, _optionKeys, _optionValues, &_err);
     if (_err)
@@ -1531,18 +1522,12 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     bool _retval;
     auto _saveFunc = saveFunc ? cast(void*)&(saveFunc) : null;
     const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpoptionKeys;
-    foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString;
-    _tmpoptionKeys ~= null;
-    char** _optionKeys = _tmpoptionKeys.ptr;
-
-    char*[] _tmpoptionValues;
-    foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString;
-    _tmpoptionValues ~= null;
-    char** _optionValues = _tmpoptionValues.ptr;
-
+    auto _optionKeys_arr = new char*[](optionKeys.length + 1);
+    auto _optionKeys = cast(char**)_optionKeys_arr.ptr;
+    foreach (i, s; optionKeys) _optionKeys[i] = s.toCString!(No.Malloc);
+    auto _optionValues_arr = new char*[](optionValues.length + 1);
+    auto _optionValues = cast(char**)_optionValues_arr.ptr;
+    foreach (i, s; optionValues) _optionValues[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gdk_pixbuf_save_to_callbackv(cast(GdkPixbuf*)this._cPtr, _saveFuncCB, _saveFunc, _type, _optionKeys, _optionValues, &_err);
     if (_err)
@@ -1572,18 +1557,12 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   {
     bool _retval;
     const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpoptionKeys;
-    foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString;
-    _tmpoptionKeys ~= null;
-    char** _optionKeys = _tmpoptionKeys.ptr;
-
-    char*[] _tmpoptionValues;
-    foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString;
-    _tmpoptionValues ~= null;
-    char** _optionValues = _tmpoptionValues.ptr;
-
+    auto _optionKeys_arr = new char*[](optionKeys.length + 1);
+    auto _optionKeys = cast(char**)_optionKeys_arr.ptr;
+    foreach (i, s; optionKeys) _optionKeys[i] = s.toCString!(No.Malloc);
+    auto _optionValues_arr = new char*[](optionValues.length + 1);
+    auto _optionValues = cast(char**)_optionValues_arr.ptr;
+    foreach (i, s; optionValues) _optionValues[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gdk_pixbuf_save_to_streamv(cast(GdkPixbuf*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _type, _optionKeys, _optionValues, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1628,18 +1607,12 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpoptionKeys;
-    foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString;
-    _tmpoptionKeys ~= null;
-    char** _optionKeys = _tmpoptionKeys.ptr;
-
-    char*[] _tmpoptionValues;
-    foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString;
-    _tmpoptionValues ~= null;
-    char** _optionValues = _tmpoptionValues.ptr;
-
+    auto _optionKeys_arr = new char*[](optionKeys.length + 1);
+    auto _optionKeys = cast(char**)_optionKeys_arr.ptr;
+    foreach (i, s; optionKeys) _optionKeys[i] = s.toCString!(No.Malloc);
+    auto _optionValues_arr = new char*[](optionValues.length + 1);
+    auto _optionValues = cast(char**)_optionValues_arr.ptr;
+    foreach (i, s; optionValues) _optionValues[i] = s.toCString!(No.Malloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_pixbuf_save_to_streamv_async(cast(GdkPixbuf*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _type, _optionKeys, _optionValues, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -1666,18 +1639,12 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     bool _retval;
     const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
     const(char)* _type = type.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpoptionKeys;
-    foreach (s; optionKeys)
-      _tmpoptionKeys ~= s.toCString;
-    _tmpoptionKeys ~= null;
-    char** _optionKeys = _tmpoptionKeys.ptr;
-
-    char*[] _tmpoptionValues;
-    foreach (s; optionValues)
-      _tmpoptionValues ~= s.toCString;
-    _tmpoptionValues ~= null;
-    char** _optionValues = _tmpoptionValues.ptr;
-
+    auto _optionKeys_arr = new char*[](optionKeys.length + 1);
+    auto _optionKeys = cast(char**)_optionKeys_arr.ptr;
+    foreach (i, s; optionKeys) _optionKeys[i] = s.toCString!(No.Malloc);
+    auto _optionValues_arr = new char*[](optionValues.length + 1);
+    auto _optionValues = cast(char**)_optionValues_arr.ptr;
+    foreach (i, s; optionValues) _optionValues[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gdk_pixbuf_savev(cast(GdkPixbuf*)this._cPtr, _filename, _type, _optionKeys, _optionValues, &_err);
     if (_err)

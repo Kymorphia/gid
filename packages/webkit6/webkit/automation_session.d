@@ -142,7 +142,7 @@ class AutomationSession : gobject.object.ObjectWrap
   */
   gulong connectCreateWebView(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : webkit.web_view.WebView)
+  && is(ReturnType!T : webkit.web_view.WebView)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.automation_session.AutomationSession)))
   && Parameters!T.length < 2)
   {
@@ -190,7 +190,7 @@ class AutomationSession : gobject.object.ObjectWrap
   */
   gulong connectWillClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.automation_session.AutomationSession)))
   && Parameters!T.length < 2)
   {

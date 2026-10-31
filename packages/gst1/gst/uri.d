@@ -543,6 +543,22 @@ class Uri : gobject.boxed.Boxed
   }
 
   /**
+      Replace the path segments list in the URI.
+  
+      Params:
+        pathSegments = The new
+                          path list to set.
+      Returns: true if the path segments were set successfully.
+  */
+  bool setPathSegments(string[] pathSegments = null) nothrow
+  {
+    bool _retval;
+    auto _pathSegments = gListFromD!(string)(pathSegments);
+    _retval = cast(bool)gst_uri_set_path_segments(cast(GstUri*)this._cPtr, _pathSegments);
+    return _retval;
+  }
+
+  /**
       Sets or unsets the path in the URI.
   
       Params:

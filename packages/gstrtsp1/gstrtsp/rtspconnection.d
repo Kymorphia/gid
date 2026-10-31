@@ -468,7 +468,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtsp_connection_read(cast(GstRTSPConnection*)this._cPtr, _data, _size, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -493,7 +493,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtsp_connection_read_usec(cast(GstRTSPConnection*)this._cPtr, _data, _size, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -590,11 +590,9 @@ class RTSPConnection
     if (messages)
       _nMessages = cast(uint)messages.length;
 
-    GstRTSPMessage[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= *cast(GstRTSPMessage*)obj._cPtr;
-    GstRTSPMessage* _messages = _tmpmessages.ptr;
-
+    auto _messages_arr = new GstRTSPMessage[](messages.length);
+    auto _messages = _messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj ? *cast(GstRTSPMessage*)obj._cPtr(No.Dup) : GstRTSPMessage.init;
     _cretval = gst_rtsp_connection_send_messages(cast(GstRTSPConnection*)this._cPtr, _messages, _nMessages, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -619,11 +617,9 @@ class RTSPConnection
     if (messages)
       _nMessages = cast(uint)messages.length;
 
-    GstRTSPMessage[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= *cast(GstRTSPMessage*)obj._cPtr;
-    GstRTSPMessage* _messages = _tmpmessages.ptr;
-
+    auto _messages_arr = new GstRTSPMessage[](messages.length);
+    auto _messages = _messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj ? *cast(GstRTSPMessage*)obj._cPtr(No.Dup) : GstRTSPMessage.init;
     _cretval = gst_rtsp_connection_send_messages_usec(cast(GstRTSPConnection*)this._cPtr, _messages, _nMessages, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -902,7 +898,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtsp_connection_write(cast(GstRTSPConnection*)this._cPtr, _data, _size, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -927,7 +923,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_rtsp_connection_write_usec(cast(GstRTSPConnection*)this._cPtr, _data, _size, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;

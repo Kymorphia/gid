@@ -1006,11 +1006,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (regexes)
       _nRegexes = cast(size_t)regexes.length;
 
-    VteRegex*[] _tmpregexes;
-    foreach (obj; regexes)
-      _tmpregexes ~= cast(VteRegex*)obj._cPtr;
-    VteRegex** _regexes = _tmpregexes.ptr;
-
+    auto _regexes_arr = new VteRegex*[](regexes.length);
+    auto _regexes = _regexes_arr.ptr;
+    foreach (i, obj; regexes) _regexes[i] = obj ? cast(VteRegex*)obj._cPtr(No.Dup) : null;
     _cretval = vte_terminal_event_check_regex_array(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, _regexes, _nRegexes, matchFlags, &_cretlength);
     string[] _retval;
 
@@ -1036,7 +1034,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     vte_terminal_feed(cast(VteTerminal*)this._cPtr, _data, _length);
   }
 
@@ -1053,7 +1051,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (text)
       _length = cast(ptrdiff_t)text.length;
 
-    auto _text = text.ptr ? cast(const(ubyte)*)text.ptr : [ubyte.init].ptr;
+    auto _text = cast(ubyte*)text.ptr;
     vte_terminal_feed_child(cast(VteTerminal*)this._cPtr, _text, _length);
   }
 
@@ -1072,7 +1070,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     vte_terminal_feed_child_binary(cast(VteTerminal*)this._cPtr, _data, _length);
   }
 
@@ -2249,7 +2247,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (palette)
       _paletteSize = cast(size_t)palette.length;
 
-    auto _palette = palette.ptr ? cast(const(GdkRGBA)*)palette.ptr : [GdkRGBA.init].ptr;
+    auto _palette = cast(GdkRGBA*)palette.ptr;
     vte_terminal_set_colors(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)foreground, cast(const(GdkRGBA)*)background, _palette, _paletteSize);
   }
 
@@ -2741,18 +2739,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    _tmpargv ~= null;
-    char** _argv = _tmpargv.ptr;
-
-    char*[] _tmpenvv;
-    foreach (s; envv)
-      _tmpenvv ~= s.toCString;
-    _tmpenvv ~= null;
-    char** _envv = _tmpenvv.ptr;
-
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+    auto _envv_arr = new char*[](envv.length + 1);
+    auto _envv = cast(char**)_envv_arr.ptr;
+    foreach (i, s; envv) _envv[i] = s.toCString!(No.Malloc);
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -2818,18 +2810,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
     bool _retval;
     const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    _tmpargv ~= null;
-    char** _argv = _tmpargv.ptr;
-
-    char*[] _tmpenvv;
-    foreach (s; envv)
-      _tmpenvv ~= s.toCString;
-    _tmpenvv ~= null;
-    char** _envv = _tmpenvv.ptr;
-
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+    auto _envv_arr = new char*[](envv.length + 1);
+    auto _envv = cast(char**)_envv_arr.ptr;
+    foreach (i, s; envv) _envv[i] = s.toCString!(No.Malloc);
     auto _childSetup = childSetup ? cast(void*)&(childSetup) : null;
     GError *_err;
     _retval = cast(bool)vte_terminal_spawn_sync(cast(VteTerminal*)this._cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
@@ -2931,28 +2917,22 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-    const(char)*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    _tmpargv ~= null;
-    const(char*)* _argv = _tmpargv.ptr;
-
-    const(char)*[] _tmpenvv;
-    foreach (s; envv)
-      _tmpenvv ~= s.toCString;
-    _tmpenvv ~= null;
-    const(char*)* _envv = _tmpenvv.ptr;
-
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+    auto _envv_arr = new char*[](envv.length + 1);
+    auto _envv = cast(char**)_envv_arr.ptr;
+    foreach (i, s; envv) _envv[i] = s.toCString!(No.Malloc);
     int _nFds;
     if (fds)
       _nFds = cast(int)fds.length;
 
-    auto _fds = fds.ptr ? cast(const(int)*)fds.ptr : [int.init].ptr;
+    auto _fds = cast(int*)fds.ptr;
     int _nMapFds;
     if (mapFds)
       _nMapFds = cast(int)mapFds.length;
 
-    auto _mapFds = mapFds.ptr ? cast(const(int)*)mapFds.ptr : [int.init].ptr;
+    auto _mapFds = cast(int*)mapFds.ptr;
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -3037,7 +3017,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectBell(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3088,7 +3068,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectCharSizeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
@@ -3143,7 +3123,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectChildExited(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
@@ -3194,7 +3174,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectCommit(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
@@ -3244,7 +3224,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectContentsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3288,7 +3268,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3332,7 +3312,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3376,7 +3356,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectCurrentFileUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3421,7 +3401,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectCursorMoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3465,7 +3445,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectDecreaseFontSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3509,7 +3489,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectDeiconifyWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3555,7 +3535,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectEncodingChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3601,7 +3581,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectEof(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3655,7 +3635,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectHyperlinkHoverUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gdk.rectangle.Rectangle)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
@@ -3709,7 +3689,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectIconTitleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3753,7 +3733,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectIconifyWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3797,7 +3777,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectIncreaseFontSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3841,7 +3821,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectLowerWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3885,7 +3865,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectMaximizeWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -3933,7 +3913,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectMoveWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
@@ -3990,7 +3970,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectNotificationReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
@@ -4042,7 +4022,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4086,7 +4066,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectRaiseWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4130,7 +4110,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectRefreshWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4178,7 +4158,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectResizeWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
@@ -4230,7 +4210,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectRestoreWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4274,7 +4254,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4331,7 +4311,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectSetupContextMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == vte.event_context.EventContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
@@ -4380,7 +4360,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectShellPrecmd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4425,7 +4405,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectShellPreexec(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4471,7 +4451,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectTextDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4517,7 +4497,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectTextInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4563,7 +4543,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectTextModified(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
@@ -4611,7 +4591,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectTextScrolled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
@@ -4659,7 +4639,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   gulong connectWindowTitleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {

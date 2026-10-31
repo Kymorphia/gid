@@ -190,19 +190,15 @@ class MetaStore : gobject.object.ObjectWrap
     if (colnames)
       _nbCols = cast(uint)colnames.length;
 
-    char*[] _tmpcolnames;
-    foreach (s; colnames)
-      _tmpcolnames ~= s.toCString;
-    char** _colnames = _tmpcolnames.ptr;
-
+    auto _colnames_arr = new char*[](colnames.length);
+    auto _colnames = cast(char**)_colnames_arr.ptr;
+    foreach (i, s; colnames) _colnames[i] = s.toCString!(No.Malloc);
     if (refColnames)
       _nbCols = cast(uint)refColnames.length;
 
-    char*[] _tmprefColnames;
-    foreach (s; refColnames)
-      _tmprefColnames ~= s.toCString;
-    char** _refColnames = _tmprefColnames.ptr;
-
+    auto _refColnames_arr = new char*[](refColnames.length);
+    auto _refColnames = cast(char**)_refColnames_arr.ptr;
+    foreach (i, s; refColnames) _refColnames[i] = s.toCString!(No.Malloc);
     GError *_err;
     _retval = cast(bool)gda_meta_store_declare_foreign_key(cast(GdaMetaStore*)this._cPtr, mstruct ? cast(GdaMetaStruct*)mstruct._cPtr(No.Dup) : null, _fkName, _catalog, _schema, _table, _refCatalog, _refSchema, _refTable, _nbCols, _colnames, _refColnames, &_err);
     if (_err)
@@ -291,19 +287,15 @@ class MetaStore : gobject.object.ObjectWrap
     if (valueNames)
       _nvalues = cast(int)valueNames.length;
 
-    char*[] _tmpvalueNames;
-    foreach (s; valueNames)
-      _tmpvalueNames ~= s.toCString;
-    const(char*)* _valueNames = _tmpvalueNames.ptr;
-
+    auto _valueNames_arr = new char*[](valueNames.length);
+    auto _valueNames = cast(char**)_valueNames_arr.ptr;
+    foreach (i, s; valueNames) _valueNames[i] = s.toCString!(No.Malloc);
     if (values)
       _nvalues = cast(int)values.length;
 
-    GValue*[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= cast(GValue*)obj._cPtr;
-    const(GValue*)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue*[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? cast(GValue*)obj._cPtr(No.Dup) : null;
     GError *_err;
     _retval = cast(bool)gda_meta_store_modify_v(cast(GdaMetaStore*)this._cPtr, _tableName, newData ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newData)._cPtr(No.Dup) : null, _condition, _nvalues, _valueNames, _values, &_err);
     if (_err)
@@ -599,7 +591,7 @@ class MetaStore : gobject.object.ObjectWrap
   */
   gulong connectMetaChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gda.meta_store_change.MetaStoreChange[])))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.meta_store.MetaStore)))
   && Parameters!T.length < 3)
@@ -648,7 +640,7 @@ class MetaStore : gobject.object.ObjectWrap
   */
   gulong connectMetaReset(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.meta_store.MetaStore)))
   && Parameters!T.length < 2)
   {
@@ -698,7 +690,7 @@ class MetaStore : gobject.object.ObjectWrap
   */
   gulong connectSuggestUpdate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == glib.error.ErrorWrap)
+  && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gda.meta_context.MetaContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.meta_store.MetaStore)))
   && Parameters!T.length < 3)

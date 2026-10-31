@@ -223,7 +223,7 @@ class Discoverer : gobject.object.ObjectWrap
   */
   gulong connectDiscovered(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstpbutils.discoverer_info.DiscovererInfo)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstpbutils.discoverer.Discoverer)))
@@ -275,7 +275,7 @@ class Discoverer : gobject.object.ObjectWrap
   */
   gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 2)
   {
@@ -325,7 +325,7 @@ class Discoverer : gobject.object.ObjectWrap
   */
   gulong connectLoadSerializedInfo(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : gstpbutils.discoverer_info.DiscovererInfo)
+  && is(ReturnType!T : gstpbutils.discoverer_info.DiscovererInfo)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 3)
@@ -384,7 +384,7 @@ class Discoverer : gobject.object.ObjectWrap
   */
   gulong connectSourceSetup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.element.Element)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 3)
@@ -432,7 +432,7 @@ class Discoverer : gobject.object.ObjectWrap
   */
   gulong connectStarting(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 2)
   {

@@ -111,12 +111,9 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   this(string[] strings = null) nothrow
   {
     GtkStringList* _cretval;
-    char*[] _tmpstrings;
-    foreach (s; strings)
-      _tmpstrings ~= s.toCString;
-    _tmpstrings ~= null;
-    const(char*)* _strings = _tmpstrings.ptr;
-
+    auto _strings_arr = new char*[](strings.length + 1);
+    auto _strings = cast(char**)_strings_arr.ptr;
+    foreach (i, s; strings) _strings[i] = s.toCString!(No.Malloc);
     _cretval = gtk_string_list_new(_strings);
     this(_cretval, Yes.Take);
   }
@@ -191,12 +188,9 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   */
   void splice(uint position, uint nRemovals, string[] additions = null) nothrow
   {
-    char*[] _tmpadditions;
-    foreach (s; additions)
-      _tmpadditions ~= s.toCString;
-    _tmpadditions ~= null;
-    const(char*)* _additions = _tmpadditions.ptr;
-
+    auto _additions_arr = new char*[](additions.length + 1);
+    auto _additions = cast(char**)_additions_arr.ptr;
+    foreach (i, s; additions) _additions[i] = s.toCString!(No.Malloc);
     gtk_string_list_splice(cast(GtkStringList*)this._cPtr, position, nRemovals, _additions);
   }
 

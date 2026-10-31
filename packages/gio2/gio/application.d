@@ -529,7 +529,8 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void addMainOptionEntries(glib.types.OptionEntry[] entries) nothrow
   {
-    auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
+    auto _entries_arr = entries ~ GOptionEntry.init;
+    auto _entries = _entries_arr.ptr;
     g_application_add_main_option_entries(cast(GApplication*)this._cPtr, _entries);
   }
 
@@ -806,11 +807,9 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
     if (files)
       _nFiles = cast(int)files.length;
 
-    GFile*[] _tmpfiles;
-    foreach (obj; files)
-      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
-    GFile** _files = _tmpfiles.ptr;
-
+    auto _files_arr = new GFile*[](files.length);
+    auto _files = _files_arr.ptr;
+    foreach (i, obj; files) _files[i] = obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr(No.Dup): null;
     const(char)* _hint = hint.toCString!(No.Malloc, No.Nullable);
     g_application_open(cast(GApplication*)this._cPtr, _files, _nFiles, _hint);
   }
@@ -983,11 +982,9 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
     if (argv)
       _argc = cast(int)argv.length;
 
-    char*[] _tmpargv;
-    foreach (s; argv)
-      _tmpargv ~= s.toCString;
-    char** _argv = _tmpargv.ptr;
-
+    auto _argv_arr = new char*[](argv.length);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
     _retval = g_application_run(cast(GApplication*)this._cPtr, _argc, _argv);
     return _retval;
   }
@@ -1295,7 +1292,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {
@@ -1346,7 +1343,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   gulong connectCommandLine(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == int)
+  && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application_command_line.ApplicationCommandLine)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.application.Application)))
   && Parameters!T.length < 3)
@@ -1443,7 +1440,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   gulong connectHandleLocalOptions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == int)
+  && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant_dict.VariantDict)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.application.Application)))
   && Parameters!T.length < 3)
@@ -1499,7 +1496,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   gulong connectNameLost(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {
@@ -1551,7 +1548,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   gulong connectOpen(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File[])))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.application.Application)))
@@ -1611,7 +1608,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   gulong connectShutdown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {
@@ -1656,7 +1653,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   gulong connectStartup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {

@@ -152,12 +152,9 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   static string lookup(gio.dbus_annotation_info.DBusAnnotationInfo[] annotations, string name) nothrow
   {
     const(char)* _cretval;
-    GDBusAnnotationInfo*[] _tmpannotations;
-    foreach (obj; annotations)
-      _tmpannotations ~= cast(GDBusAnnotationInfo*)obj._cPtr;
-    _tmpannotations.length++;
-    GDBusAnnotationInfo** _annotations = _tmpannotations.ptr;
-
+    auto _annotations_arr = new GDBusAnnotationInfo*[](annotations.length + 1);
+    auto _annotations = _annotations_arr.ptr;
+    foreach (i, obj; annotations) _annotations[i] = obj ? cast(GDBusAnnotationInfo*)obj._cPtr(No.Dup) : null;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_dbus_annotation_info_lookup(_annotations, _name);
     string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);

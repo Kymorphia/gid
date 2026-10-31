@@ -183,7 +183,7 @@ class ColorSelection : gtk.box.Box
     if (colors)
       _nColors = cast(int)colors.length;
 
-    auto _colors = colors.ptr ? cast(const(GdkColor)*)colors.ptr : [GdkColor.init].ptr;
+    auto _colors = cast(GdkColor*)colors.ptr;
     _cretval = gtk_color_selection_palette_to_string(_colors, _nColors);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
@@ -426,7 +426,7 @@ class ColorSelection : gtk.box.Box
   */
   gulong connectColorChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.color_selection.ColorSelection)))
   && Parameters!T.length < 2)
   {

@@ -238,7 +238,7 @@ string asciiStrdown(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_ascii_strdown(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -498,7 +498,7 @@ string asciiStrup(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_ascii_strup(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -623,18 +623,12 @@ void assertionMessageCmpstrv(string domain, string file, int line, string func, 
   const(char)* _file = file.toCString!(No.Malloc, No.Nullable);
   const(char)* _func = func.toCString!(No.Malloc, No.Nullable);
   const(char)* _expr = expr.toCString!(No.Malloc, No.Nullable);
-  const(char)*[] _tmparg1;
-  foreach (s; arg1)
-    _tmparg1 ~= s.toCString;
-  _tmparg1 ~= null;
-  const(char*)* _arg1 = _tmparg1.ptr;
-
-  const(char)*[] _tmparg2;
-  foreach (s; arg2)
-    _tmparg2 ~= s.toCString;
-  _tmparg2 ~= null;
-  const(char*)* _arg2 = _tmparg2.ptr;
-
+  auto _arg1_arr = new char*[](arg1.length + 1);
+  auto _arg1 = cast(char**)_arg1_arr.ptr;
+  foreach (i, s; arg1) _arg1[i] = s.toCString!(No.Malloc);
+  auto _arg2_arr = new char*[](arg2.length + 1);
+  auto _arg2 = cast(char**)_arg2_arr.ptr;
+  foreach (i, s; arg2) _arg2[i] = s.toCString!(No.Malloc);
   g_assertion_message_cmpstrv(_domain, _file, line, _func, _expr, _arg1, _arg2, firstWrongIdx);
 }
 
@@ -1375,7 +1369,7 @@ string base64Encode(ubyte[] data = null) nothrow
   if (data)
     _len = cast(size_t)data.length;
 
-  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+  auto _data = cast(ubyte*)data.ptr;
   _cretval = g_base64_encode(_data, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -1555,12 +1549,9 @@ void blowChunks() nothrow
 string buildFilenamev(string[] args) nothrow
 {
   char* _cretval;
-  char*[] _tmpargs;
-  foreach (s; args)
-    _tmpargs ~= s.toCString;
-  _tmpargs ~= null;
-  char** _args = _tmpargs.ptr;
-
+  auto _args_arr = new char*[](args.length + 1);
+  auto _args = cast(char**)_args_arr.ptr;
+  foreach (i, s; args) _args[i] = s.toCString!(No.Malloc);
   _cretval = g_build_filenamev(_args);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -1583,12 +1574,9 @@ string buildPathv(string separator, string[] args) nothrow
 {
   char* _cretval;
   const(char)* _separator = separator.toCString!(No.Malloc, No.Nullable);
-  char*[] _tmpargs;
-  foreach (s; args)
-    _tmpargs ~= s.toCString;
-  _tmpargs ~= null;
-  char** _args = _tmpargs.ptr;
-
+  auto _args_arr = new char*[](args.length + 1);
+  auto _args = cast(char**)_args_arr.ptr;
+  foreach (i, s; args) _args[i] = s.toCString!(No.Malloc);
   _cretval = g_build_pathv(_separator, _args);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -1938,7 +1926,7 @@ string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data
   if (data)
     _length = cast(size_t)data.length;
 
-  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+  auto _data = cast(ubyte*)data.ptr;
   _cretval = g_compute_checksum_for_data(checksumType, _data, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -1963,7 +1951,7 @@ string computeChecksumForString(glib.types.ChecksumType checksumType, string str
   if (str)
     _length = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_compute_checksum_for_string(checksumType, _str, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -2012,12 +2000,12 @@ string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte
   if (key)
     _keyLen = cast(size_t)key.length;
 
-  auto _key = key.ptr ? cast(const(ubyte)*)key.ptr : [ubyte.init].ptr;
+  auto _key = cast(ubyte*)key.ptr;
   size_t _length;
   if (data)
     _length = cast(size_t)data.length;
 
-  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+  auto _data = cast(ubyte*)data.ptr;
   _cretval = g_compute_hmac_for_data(digestType, _key, _keyLen, _data, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -2043,12 +2031,12 @@ string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, str
   if (key)
     _keyLen = cast(size_t)key.length;
 
-  auto _key = key.ptr ? cast(const(ubyte)*)key.ptr : [ubyte.init].ptr;
+  auto _key = cast(ubyte*)key.ptr;
   ptrdiff_t _length;
   if (str)
     _length = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_compute_hmac_for_string(digestType, _key, _keyLen, _str, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -2095,7 +2083,7 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
+  auto _str = cast(ubyte*)str.ptr;
   const(char)* _toCodeset = toCodeset.toCString!(No.Malloc, No.Nullable);
   const(char)* _fromCodeset = fromCodeset.toCString!(No.Malloc, No.Nullable);
   GError *_err;
@@ -2166,7 +2154,7 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
+  auto _str = cast(ubyte*)str.ptr;
   const(char)* _toCodeset = toCodeset.toCString!(No.Malloc, No.Nullable);
   const(char)* _fromCodeset = fromCodeset.toCString!(No.Malloc, No.Nullable);
   const(char)* _fallback = fallback.toCString!(No.Malloc, No.Nullable);
@@ -2538,15 +2526,82 @@ string dpgettext2(string domain, string context, string msgid) nothrow
 string environGetenv(string[] envp, string variable) nothrow
 {
   const(char)* _cretval;
-  char*[] _tmpenvp;
-  foreach (s; envp)
-    _tmpenvp ~= s.toCString;
-  _tmpenvp ~= null;
-  char** _envp = _tmpenvp.ptr;
-
+  auto _envp_arr = new char*[](envp.length + 1);
+  auto _envp = cast(char**)_envp_arr.ptr;
+  foreach (i, s; envp) _envp[i] = s.toCString!(No.Malloc);
   const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
   _cretval = g_environ_getenv(_envp, _variable);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Sets the environment variable variable in the provided list
+    envp to value.
+
+    Params:
+      envp = an environment list that can be freed using [glib.global.strfreev] (e.g., as
+            returned from [glib.global.getEnviron]), or null for an empty
+            environment list
+      variable = the environment variable to set, must not
+            contain '='
+      value = the value for to set the variable to
+      overwrite = whether to change the variable if it already exists
+    Returns: the updated environment list. Free it using [glib.global.strfreev].
+*/
+string[] environSetenv(string[] envp, string variable, string value, bool overwrite) nothrow
+{
+  char** _cretval;
+  auto _envp = cast(char**)gMalloc((envp.length + 1) * (char*).sizeof);
+  foreach (i, s; envp) _envp[i] = s.toCString!(Yes.Malloc);
+  const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
+  const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+  _cretval = g_environ_setenv(_envp, _variable, _value, overwrite);
+  string[] _retval;
+
+  if (_cretval)
+  {
+    uint _cretlength;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
+    _retval = new string[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
+    gFree(cast(void*)_cretval);
+  }
+  return _retval;
+}
+
+/**
+    Removes the environment variable variable from the provided
+    environment envp.
+
+    Params:
+      envp = an environment list that can be freed using [glib.global.strfreev] (e.g., as
+            returned from [glib.global.getEnviron]), or null for an empty environment list
+      variable = the environment variable to remove, must not
+            contain '='
+    Returns: the updated environment list. Free it using [glib.global.strfreev].
+*/
+string[] environUnsetenv(string[] envp, string variable) nothrow
+{
+  char** _cretval;
+  auto _envp = cast(char**)gMalloc((envp.length + 1) * (char*).sizeof);
+  foreach (i, s; envp) _envp[i] = s.toCString!(Yes.Malloc);
+  const(char)* _variable = variable.toCString!(No.Malloc, No.Nullable);
+  _cretval = g_environ_unsetenv(_envp, _variable);
+  string[] _retval;
+
+  if (_cretval)
+  {
+    uint _cretlength;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
+    _retval = new string[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
+    gFree(cast(void*)_cretval);
+  }
   return _retval;
 }
 
@@ -2749,7 +2804,7 @@ bool fileSetContents(string filename, ubyte[] contents)
   if (contents)
     _length = cast(ptrdiff_t)contents.length;
 
-  auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
+  auto _contents = cast(ubyte*)contents.ptr;
   GError *_err;
   _retval = cast(bool)g_file_set_contents(_filename, _contents, _length, &_err);
   if (_err)
@@ -2830,7 +2885,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
   if (contents)
     _length = cast(ptrdiff_t)contents.length;
 
-  auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
+  auto _contents = cast(ubyte*)contents.ptr;
   GError *_err;
   _retval = cast(bool)g_file_set_contents_full(_filename, _contents, _length, flags, mode, &_err);
   if (_err)
@@ -3043,7 +3098,7 @@ ubyte[] filenameFromUtf8(ubyte[] utf8string, out size_t bytesRead)
   if (utf8string)
     _len = cast(ptrdiff_t)utf8string.length;
 
-  auto _utf8string = utf8string.ptr ? cast(const(ubyte)*)utf8string.ptr : [ubyte.init].ptr;
+  auto _utf8string = cast(ubyte*)utf8string.ptr;
   GError *_err;
   _cretval = g_filename_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -3119,7 +3174,7 @@ string filenameToUtf8(ubyte[] opsysstring, out size_t bytesRead)
   if (opsysstring)
     _len = cast(ptrdiff_t)opsysstring.length;
 
-  auto _opsysstring = opsysstring.ptr ? cast(const(ubyte)*)opsysstring.ptr : [ubyte.init].ptr;
+  auto _opsysstring = cast(ubyte*)opsysstring.ptr;
   GError *_err;
   _cretval = g_filename_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -4641,7 +4696,7 @@ ubyte[] localeFromUtf8(ubyte[] utf8string, out size_t bytesRead)
   if (utf8string)
     _len = cast(ptrdiff_t)utf8string.length;
 
-  auto _utf8string = utf8string.ptr ? cast(const(ubyte)*)utf8string.ptr : [ubyte.init].ptr;
+  auto _utf8string = cast(ubyte*)utf8string.ptr;
   GError *_err;
   _cretval = g_locale_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -4692,7 +4747,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
   if (opsysstring)
     _len = cast(ptrdiff_t)opsysstring.length;
 
-  auto _opsysstring = opsysstring.ptr ? cast(const(ubyte)*)opsysstring.ptr : [ubyte.init].ptr;
+  auto _opsysstring = cast(ubyte*)opsysstring.ptr;
   GError *_err;
   _cretval = g_locale_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -4950,12 +5005,9 @@ void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.varian
 */
 void logWriterDefaultSetDebugDomains(string[] domains = null) nothrow
 {
-  const(char)*[] _tmpdomains;
-  foreach (s; domains)
-    _tmpdomains ~= s.toCString;
-  _tmpdomains ~= null;
-  const(char*)* _domains = _tmpdomains.ptr;
-
+  auto _domains_arr = new char*[](domains.length + 1);
+  auto _domains = cast(char**)_domains_arr.ptr;
+  foreach (i, s; domains) _domains[i] = s.toCString!(No.Malloc);
   g_log_writer_default_set_debug_domains(_domains);
 }
 
@@ -5320,7 +5372,7 @@ string markupEscapeText(string text) nothrow
   if (text)
     _length = cast(ptrdiff_t)text.length;
 
-  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+  auto _text = cast(char*)text.ptr;
   _cretval = g_markup_escape_text(_text, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -5628,11 +5680,9 @@ uint parseDebugString(string string_, glib.debug_key.DebugKey[] keys) nothrow
   if (keys)
     _nkeys = cast(uint)keys.length;
 
-  GDebugKey[] _tmpkeys;
-  foreach (obj; keys)
-    _tmpkeys ~= obj._cInstance;
-  const(GDebugKey)* _keys = _tmpkeys.ptr;
-
+  auto _keys_arr = new GDebugKey[](keys.length);
+  auto _keys = _keys_arr.ptr;
+  foreach (i, obj; keys) _keys[i] = obj._cInstance;
   _retval = g_parse_debug_string(_string_, _keys, _nkeys);
   return _retval;
 }
@@ -6962,18 +7012,12 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpargv;
-  foreach (s; argv)
-    _tmpargv ~= s.toCString;
-  _tmpargv ~= null;
-  char** _argv = _tmpargv.ptr;
-
-  char*[] _tmpenvp;
-  foreach (s; envp)
-    _tmpenvp ~= s.toCString;
-  _tmpenvp ~= null;
-  char** _envp = _tmpenvp.ptr;
-
+  auto _argv_arr = new char*[](argv.length + 1);
+  auto _argv = cast(char**)_argv_arr.ptr;
+  foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+  auto _envp_arr = new char*[](envp.length + 1);
+  auto _envp = cast(char**)_envp_arr.ptr;
+  foreach (i, s; envp) _envp[i] = s.toCString!(No.Malloc);
   auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
   _retval = cast(bool)g_spawn_async(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, &_err);
@@ -7022,18 +7066,12 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpargv;
-  foreach (s; argv)
-    _tmpargv ~= s.toCString;
-  _tmpargv ~= null;
-  char** _argv = _tmpargv.ptr;
-
-  char*[] _tmpenvp;
-  foreach (s; envp)
-    _tmpenvp ~= s.toCString;
-  _tmpenvp ~= null;
-  char** _envp = _tmpenvp.ptr;
-
+  auto _argv_arr = new char*[](argv.length + 1);
+  auto _argv = cast(char**)_argv_arr.ptr;
+  foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+  auto _envp_arr = new char*[](envp.length + 1);
+  auto _envp = cast(char**)_envp_arr.ptr;
+  foreach (i, s; envp) _envp[i] = s.toCString!(No.Malloc);
   auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
   _retval = cast(bool)g_spawn_async_with_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, stdinFd, stdoutFd, stderrFd, &_err);
@@ -7082,18 +7120,12 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpargv;
-  foreach (s; argv)
-    _tmpargv ~= s.toCString;
-  _tmpargv ~= null;
-  char** _argv = _tmpargv.ptr;
-
-  char*[] _tmpenvp;
-  foreach (s; envp)
-    _tmpenvp ~= s.toCString;
-  _tmpenvp ~= null;
-  char** _envp = _tmpenvp.ptr;
-
+  auto _argv_arr = new char*[](argv.length + 1);
+  auto _argv = cast(char**)_argv_arr.ptr;
+  foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+  auto _envp_arr = new char*[](envp.length + 1);
+  auto _envp = cast(char**)_envp_arr.ptr;
+  foreach (i, s; envp) _envp[i] = s.toCString!(No.Malloc);
   auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
   _retval = cast(bool)g_spawn_async_with_pipes(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cast(int*)&standardInput, cast(int*)&standardOutput, cast(int*)&standardError, &_err);
@@ -7341,28 +7373,22 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-  const(char)*[] _tmpargv;
-  foreach (s; argv)
-    _tmpargv ~= s.toCString;
-  _tmpargv ~= null;
-  const(char*)* _argv = _tmpargv.ptr;
-
-  const(char)*[] _tmpenvp;
-  foreach (s; envp)
-    _tmpenvp ~= s.toCString;
-  _tmpenvp ~= null;
-  const(char*)* _envp = _tmpenvp.ptr;
-
+  auto _argv_arr = new char*[](argv.length + 1);
+  auto _argv = cast(char**)_argv_arr.ptr;
+  foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+  auto _envp_arr = new char*[](envp.length + 1);
+  auto _envp = cast(char**)_envp_arr.ptr;
+  foreach (i, s; envp) _envp[i] = s.toCString!(No.Malloc);
   auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   size_t _nFds;
   if (sourceFds)
     _nFds = cast(size_t)sourceFds.length;
 
-  auto _sourceFds = sourceFds.ptr ? cast(const(int)*)sourceFds.ptr : [int.init].ptr;
+  auto _sourceFds = cast(int*)sourceFds.ptr;
   if (targetFds)
     _nFds = cast(size_t)targetFds.length;
 
-  auto _targetFds = targetFds.ptr ? cast(const(int)*)targetFds.ptr : [int.init].ptr;
+  auto _targetFds = cast(int*)targetFds.ptr;
   GError *_err;
   _retval = cast(bool)g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
   if (_err)
@@ -7624,18 +7650,12 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpargv;
-  foreach (s; argv)
-    _tmpargv ~= s.toCString;
-  _tmpargv ~= null;
-  char** _argv = _tmpargv.ptr;
-
-  char*[] _tmpenvp;
-  foreach (s; envp)
-    _tmpenvp ~= s.toCString;
-  _tmpenvp ~= null;
-  char** _envp = _tmpenvp.ptr;
-
+  auto _argv_arr = new char*[](argv.length + 1);
+  auto _argv = cast(char**)_argv_arr.ptr;
+  foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+  auto _envp_arr = new char*[](envp.length + 1);
+  auto _envp = cast(char**)_envp_arr.ptr;
+  foreach (i, s; envp) _envp[i] = s.toCString!(No.Malloc);
   auto _childSetup = childSetup ? cast(void*)&(childSetup) : null;
   char* _standardOutput;
   char* _standardError;
@@ -8166,12 +8186,9 @@ string strdup(string str = null) nothrow
 string[] strdupv(string[] strArray = null) nothrow
 {
   char** _cretval;
-  char*[] _tmpstrArray;
-  foreach (s; strArray)
-    _tmpstrArray ~= s.toCString;
-  _tmpstrArray ~= null;
-  char** _strArray = _tmpstrArray.ptr;
-
+  auto _strArray_arr = new char*[](strArray.length + 1);
+  auto _strArray = cast(char**)_strArray_arr.ptr;
+  foreach (i, s; strArray) _strArray[i] = s.toCString!(No.Malloc);
   _cretval = g_strdupv(_strArray);
   string[] _retval;
 
@@ -8286,12 +8303,9 @@ string strjoinv(string separator, string[] strArray) nothrow
 {
   char* _cretval;
   const(char)* _separator = separator.toCString!(No.Malloc, Yes.Nullable);
-  char*[] _tmpstrArray;
-  foreach (s; strArray)
-    _tmpstrArray ~= s.toCString;
-  _tmpstrArray ~= null;
-  char** _strArray = _tmpstrArray.ptr;
-
+  auto _strArray_arr = new char*[](strArray.length + 1);
+  auto _strArray = cast(char**)_strArray_arr.ptr;
+  foreach (i, s; strArray) _strArray[i] = s.toCString!(No.Malloc);
   _cretval = g_strjoinv(_separator, _strArray);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -8594,12 +8608,9 @@ string strup(string string_) nothrow
 bool strvContains(string[] strv, string str) nothrow
 {
   bool _retval;
-  char*[] _tmpstrv;
-  foreach (s; strv)
-    _tmpstrv ~= s.toCString;
-  _tmpstrv ~= null;
-  const(char*)* _strv = _tmpstrv.ptr;
-
+  auto _strv_arr = new char*[](strv.length + 1);
+  auto _strv = cast(char**)_strv_arr.ptr;
+  foreach (i, s; strv) _strv[i] = s.toCString!(No.Malloc);
   const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
   _retval = cast(bool)g_strv_contains(_strv, _str);
   return _retval;
@@ -8628,18 +8639,12 @@ bool strvContains(string[] strv, string str) nothrow
 bool strvEqual(string[] strv1, string[] strv2) nothrow
 {
   bool _retval;
-  char*[] _tmpstrv1;
-  foreach (s; strv1)
-    _tmpstrv1 ~= s.toCString;
-  _tmpstrv1 ~= null;
-  const(char*)* _strv1 = _tmpstrv1.ptr;
-
-  char*[] _tmpstrv2;
-  foreach (s; strv2)
-    _tmpstrv2 ~= s.toCString;
-  _tmpstrv2 ~= null;
-  const(char*)* _strv2 = _tmpstrv2.ptr;
-
+  auto _strv1_arr = new char*[](strv1.length + 1);
+  auto _strv1 = cast(char**)_strv1_arr.ptr;
+  foreach (i, s; strv1) _strv1[i] = s.toCString!(No.Malloc);
+  auto _strv2_arr = new char*[](strv2.length + 1);
+  auto _strv2 = cast(char**)_strv2_arr.ptr;
+  foreach (i, s; strv2) _strv2[i] = s.toCString!(No.Malloc);
   _retval = cast(bool)g_strv_equal(_strv1, _strv2);
   return _retval;
 }
@@ -8662,55 +8667,11 @@ gobject.types.GType strvGetType() nothrow
 uint strvLength(string[] strArray) nothrow
 {
   uint _retval;
-  char*[] _tmpstrArray;
-  foreach (s; strArray)
-    _tmpstrArray ~= s.toCString;
-  _tmpstrArray ~= null;
-  char** _strArray = _tmpstrArray.ptr;
-
+  auto _strArray_arr = new char*[](strArray.length + 1);
+  auto _strArray = cast(char**)_strArray_arr.ptr;
+  foreach (i, s; strArray) _strArray[i] = s.toCString!(No.Malloc);
   _retval = g_strv_length(_strArray);
   return _retval;
-}
-
-/**
-    Create a new test case, similar to [glib.global.testCreateCase]. However
-    the test is assumed to use no fixture, and test suites are automatically
-    created on the fly and added to the root fixture, based on the
-    slash-separated portions of testpath. The test_data argument
-    will be passed as first argument to test_func.
-    
-    If testpath includes the component "subprocess" anywhere in it,
-    the test will be skipped by default, and only run if explicitly
-    required via the `-p` command-line option or [glib.global.testTrapSubprocess].
-    
-    No component of testpath may start with a dot (`.`) if the
-    [glib.types.TEST_OPTION_ISOLATE_DIRS] option is being used; and it is recommended to
-    do so even if it isn’t.
-
-    Params:
-      testpath = /-separated test case path name for the test.
-      testData = Test data argument for the test function.
-      testFunc = The test function to invoke for this test.
-*/
-void testAddDataFunc(string testpath, const(void)* testData, glib.types.TestDataFunc testFunc) nothrow
-{
-  extern(C) void _testFuncCallback(const(void)* userData) nothrow
-  {
-    ptrThawGC(userData);
-    auto _dlg = cast(glib.types.TestDataFunc*)userData;
-
-    try
-    {
-      (*_dlg)();
-    }
-    catch (Exception e)
-    {
-      gidInvokeCallbackExceptionHandler(e, "glib.types.TestDataFunc");
-    }
-  }
-  auto _testFuncCB = testFunc ? &_testFuncCallback : null;
-  const(char)* _testpath = testpath.toCString!(No.Malloc, No.Nullable);
-  g_test_add_data_func(_testpath, testData, _testFuncCB);
 }
 
 /** */
@@ -9399,12 +9360,9 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubpr
 void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags) nothrow
 {
   const(char)* _testPath = testPath.toCString!(No.Malloc, Yes.Nullable);
-  const(char)*[] _tmpenvp;
-  foreach (s; envp)
-    _tmpenvp ~= s.toCString;
-  _tmpenvp ~= null;
-  const(char*)* _envp = _tmpenvp.ptr;
-
+  auto _envp_arr = new char*[](envp.length + 1);
+  auto _envp = cast(char**)_envp_arr.ptr;
+  foreach (i, s; envp) _envp[i] = s.toCString!(No.Malloc);
   g_test_trap_subprocess_with_envp(_testPath, _envp, usecTimeout, testFlags);
 }
 
@@ -9707,7 +9665,7 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = str.ptr ? cast(const(dchar)*)str.ptr : [dchar.init].ptr;
+  auto _str = cast(dchar*)str.ptr;
   GError *_err;
   _cretval = g_ucs4_to_utf16(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
@@ -9749,7 +9707,7 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = str.ptr ? cast(const(dchar)*)str.ptr : [dchar.init].ptr;
+  auto _str = cast(dchar*)str.ptr;
   GError *_err;
   _cretval = g_ucs4_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
@@ -10386,7 +10344,7 @@ void unicodeCanonicalOrdering(dchar[] string_) nothrow
   if (string_)
     _len = cast(size_t)string_.length;
 
-  auto _string_ = string_.ptr ? cast(dchar*)string_.ptr : [dchar.init].ptr;
+  auto _string_ = cast(dchar*)string_.ptr;
   g_unicode_canonical_ordering(_string_, _len);
 }
 
@@ -10522,7 +10480,7 @@ bool unixOpenPipe(int[] fds, int flags)
 {
   bool _retval;
   assert(!fds || fds.length == 2);
-  auto _fds = fds.ptr ? cast(int*)fds.ptr : [int.init].ptr;
+  auto _fds = cast(int*)fds.ptr;
   GError *_err;
   _retval = cast(bool)g_unix_open_pipe(_fds, flags, &_err);
   if (_err)
@@ -10719,7 +10677,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = str.ptr ? cast(const(ushort)*)str.ptr : [ushort.init].ptr;
+  auto _str = cast(ushort*)str.ptr;
   GError *_err;
   _cretval = g_utf16_to_ucs4(_str, _len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
@@ -10771,7 +10729,7 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = str.ptr ? cast(const(ushort)*)str.ptr : [ushort.init].ptr;
+  auto _str = cast(ushort*)str.ptr;
   GError *_err;
   _cretval = g_utf16_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
@@ -10805,7 +10763,7 @@ string utf8Casefold(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_casefold(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -10861,7 +10819,7 @@ string utf8CollateKey(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_collate_key(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -10892,7 +10850,7 @@ string utf8CollateKeyForFilename(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_collate_key_for_filename(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -10996,7 +10954,7 @@ dchar utf8GetCharValidated(string p) nothrow
   if (p)
     _maxLen = cast(ptrdiff_t)p.length;
 
-  auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
+  auto _p = cast(char*)p.ptr;
   _retval = g_utf8_get_char_validated(_p, _maxLen);
   return _retval;
 }
@@ -11023,7 +10981,7 @@ string utf8MakeValid(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_make_valid(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -11070,7 +11028,7 @@ string utf8Normalize(string str, glib.types.NormalizeMode mode) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_normalize(_str, _len, mode);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -11166,7 +11124,7 @@ string utf8Strchr(string p, dchar c) nothrow
   if (p)
     _len = cast(ptrdiff_t)p.length;
 
-  auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
+  auto _p = cast(char*)p.ptr;
   _cretval = g_utf8_strchr(_p, _len, c);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -11190,7 +11148,7 @@ string utf8Strdown(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_strdown(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -11262,7 +11220,7 @@ string utf8Strrchr(string p, dchar c) nothrow
   if (p)
     _len = cast(ptrdiff_t)p.length;
 
-  auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
+  auto _p = cast(char*)p.ptr;
   _cretval = g_utf8_strrchr(_p, _len, c);
   string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
   return _retval;
@@ -11294,7 +11252,7 @@ string utf8Strreverse(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_strreverse(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -11319,7 +11277,7 @@ string utf8Strup(string str) nothrow
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
+  auto _str = cast(char*)str.ptr;
   _cretval = g_utf8_strup(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
   return _retval;
@@ -11408,7 +11366,8 @@ dchar[] utf8ToUcs4Fast(string str) nothrow
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = str.ptr ? cast(const(char)*)(str ~ char.init).ptr : [char.init].ptr;
+  auto _str_arr = str ~ char.init;
+  auto _str = _str_arr.ptr;
   _cretval = g_utf8_to_ucs4_fast(_str, _len, &_cretlength);
   dchar[] _retval;
 
@@ -11506,7 +11465,7 @@ bool utf8Validate(ubyte[] str, out string end) nothrow
   if (str)
     _maxLen = cast(ptrdiff_t)str.length;
 
-  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
+  auto _str = cast(ubyte*)str.ptr;
   char* _end;
   _retval = cast(bool)g_utf8_validate(_str, _maxLen, &_end);
   end = _end.fromCString!(No.Free);
@@ -11531,7 +11490,7 @@ bool utf8ValidateLen(ubyte[] str, out string end) nothrow
   if (str)
     _maxLen = cast(size_t)str.length;
 
-  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
+  auto _str = cast(ubyte*)str.ptr;
   char* _end;
   _retval = cast(bool)g_utf8_validate_len(_str, _maxLen, &_end);
   end = _end.fromCString!(No.Free);

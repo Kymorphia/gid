@@ -496,12 +496,9 @@ class IconTheme : gobject.object.ObjectWrap
   {
     GtkIconPaintable* _cretval;
     const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpfallbacks;
-    foreach (s; fallbacks)
-      _tmpfallbacks ~= s.toCString;
-    _tmpfallbacks ~= null;
-    const(char*)* _fallbacks = _tmpfallbacks.ptr;
-
+    auto _fallbacks_arr = new char*[](fallbacks.length + 1);
+    auto _fallbacks = cast(char**)_fallbacks_arr.ptr;
+    foreach (i, s; fallbacks) _fallbacks[i] = s.toCString!(No.Malloc);
     _cretval = gtk_icon_theme_lookup_icon(cast(GtkIconTheme*)this._cPtr, _iconName, _fallbacks, size, scale, direction, flags);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
@@ -526,12 +523,9 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void setResourcePath(string[] path = null) nothrow
   {
-    const(char)*[] _tmppath;
-    foreach (s; path)
-      _tmppath ~= s.toCString;
-    _tmppath ~= null;
-    const(char*)* _path = _tmppath.ptr;
-
+    auto _path_arr = new char*[](path.length + 1);
+    auto _path = cast(char**)_path_arr.ptr;
+    foreach (i, s; path) _path[i] = s.toCString!(No.Malloc);
     gtk_icon_theme_set_resource_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -558,12 +552,9 @@ class IconTheme : gobject.object.ObjectWrap
   */
   void setSearchPath(string[] path = null) nothrow
   {
-    const(char)*[] _tmppath;
-    foreach (s; path)
-      _tmppath ~= s.toCString;
-    _tmppath ~= null;
-    const(char*)* _path = _tmppath.ptr;
-
+    auto _path_arr = new char*[](path.length + 1);
+    auto _path = cast(char**)_path_arr.ptr;
+    foreach (i, s; path) _path[i] = s.toCString!(No.Malloc);
     gtk_icon_theme_set_search_path(cast(GtkIconTheme*)this._cPtr, _path);
   }
 
@@ -605,7 +596,7 @@ class IconTheme : gobject.object.ObjectWrap
   */
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_theme.IconTheme)))
   && Parameters!T.length < 2)
   {

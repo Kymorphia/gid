@@ -1517,12 +1517,9 @@ class Settings : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
-    char*[] _tmpvalue;
-    foreach (s; value)
-      _tmpvalue ~= s.toCString;
-    _tmpvalue ~= null;
-    const(char*)* _value = _tmpvalue.ptr;
-
+    auto _value_arr = new char*[](value.length + 1);
+    auto _value = cast(char**)_value_arr.ptr;
+    foreach (i, s; value) _value[i] = s.toCString!(No.Malloc);
     _retval = cast(bool)g_settings_set_strv(cast(GSettings*)this._cPtr, _key, _value);
     return _retval;
   }
@@ -1631,7 +1628,7 @@ class Settings : gobject.object.ObjectWrap
   */
   gulong connectChangeEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.types.Quark[])))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)
@@ -1700,7 +1697,7 @@ class Settings : gobject.object.ObjectWrap
   */
   gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)
@@ -1769,7 +1766,7 @@ class Settings : gobject.object.ObjectWrap
   */
   gulong connectWritableChangeEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)
@@ -1829,7 +1826,7 @@ class Settings : gobject.object.ObjectWrap
   */
   gulong connectWritableChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)

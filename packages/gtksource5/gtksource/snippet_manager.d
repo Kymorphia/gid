@@ -226,12 +226,9 @@ class SnippetManager : gobject.object.ObjectWrap
   */
   void setSearchPath(string[] dirs = null) nothrow
   {
-    char*[] _tmpdirs;
-    foreach (s; dirs)
-      _tmpdirs ~= s.toCString;
-    _tmpdirs ~= null;
-    const(char*)* _dirs = _tmpdirs.ptr;
-
+    auto _dirs_arr = new char*[](dirs.length + 1);
+    auto _dirs = cast(char**)_dirs_arr.ptr;
+    foreach (i, s; dirs) _dirs[i] = s.toCString!(No.Malloc);
     gtk_source_snippet_manager_set_search_path(cast(GtkSourceSnippetManager*)this._cPtr, _dirs);
   }
 }

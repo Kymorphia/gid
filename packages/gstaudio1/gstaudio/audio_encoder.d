@@ -536,6 +536,19 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /**
+      Set the codec headers to be sent downstream whenever requested.
+  
+      Params:
+        headers = a list of
+            #GstBuffer containing the codec header
+  */
+  void setHeaders(gst.buffer.Buffer[] headers) nothrow
+  {
+    auto _headers = gListFromD!(gst.buffer.Buffer)(headers);
+    gst_audio_encoder_set_headers(cast(GstAudioEncoder*)this._cPtr, _headers);
+  }
+
+  /**
       Sets encoder latency. If the provided values changed from
       previously provided ones, this will also post a LATENCY message on the bus
       so the pipeline can reconfigure its global latency.

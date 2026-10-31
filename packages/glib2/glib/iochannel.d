@@ -626,7 +626,7 @@ class IOChannel : gobject.boxed.Boxed
     if (lineTerm)
       _length = cast(int)lineTerm.length;
 
-    auto _lineTerm = lineTerm.ptr ? cast(const(char)*)lineTerm.ptr : [char.init].ptr;
+    auto _lineTerm = cast(char*)lineTerm.ptr;
     g_io_channel_set_line_term(cast(GIOChannel*)this._cPtr, _lineTerm, _length);
   }
 
@@ -682,7 +682,7 @@ class IOChannel : gobject.boxed.Boxed
     if (buf)
       _count = cast(size_t)buf.length;
 
-    auto _buf = buf.ptr ? cast(const(char)*)buf.ptr : [char.init].ptr;
+    auto _buf = cast(char*)buf.ptr;
     _cretval = g_io_channel_write(cast(GIOChannel*)this._cPtr, _buf, _count, cast(size_t*)&bytesWritten);
     glib.types.IOError _retval = cast(glib.types.IOError)_cretval;
     return _retval;
@@ -713,7 +713,7 @@ class IOChannel : gobject.boxed.Boxed
     if (buf)
       _count = cast(ptrdiff_t)buf.length;
 
-    auto _buf = buf.ptr ? cast(const(ubyte)*)buf.ptr : [ubyte.init].ptr;
+    auto _buf = cast(ubyte*)buf.ptr;
     GError *_err;
     _cretval = g_io_channel_write_chars(cast(GIOChannel*)this._cPtr, _buf, _count, cast(size_t*)&bytesWritten, &_err);
     if (_err)

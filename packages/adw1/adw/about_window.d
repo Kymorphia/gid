@@ -1071,12 +1071,9 @@ class AboutWindow : adw.window.Window
   void addAcknowledgementSection(string name, string[] people) nothrow
   {
     const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmppeople;
-    foreach (s; people)
-      _tmppeople ~= s.toCString;
-    _tmppeople ~= null;
-    const(char*)* _people = _tmppeople.ptr;
-
+    auto _people_arr = new char*[](people.length + 1);
+    auto _people = cast(char**)_people_arr.ptr;
+    foreach (i, s; people) _people[i] = s.toCString!(No.Malloc);
     adw_about_window_add_acknowledgement_section(cast(AdwAboutWindow*)this._cPtr, _name, _people);
   }
 
@@ -1104,12 +1101,9 @@ class AboutWindow : adw.window.Window
   void addCreditSection(string name, string[] people) nothrow
   {
     const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    char*[] _tmppeople;
-    foreach (s; people)
-      _tmppeople ~= s.toCString;
-    _tmppeople ~= null;
-    const(char*)* _people = _tmppeople.ptr;
-
+    auto _people_arr = new char*[](people.length + 1);
+    auto _people = cast(char**)_people_arr.ptr;
+    foreach (i, s; people) _people[i] = s.toCString!(No.Malloc);
     adw_about_window_add_credit_section(cast(AdwAboutWindow*)this._cPtr, _name, _people);
   }
 
@@ -1519,12 +1513,9 @@ class AboutWindow : adw.window.Window
   */
   void setArtists(string[] artists = null) nothrow
   {
-    char*[] _tmpartists;
-    foreach (s; artists)
-      _tmpartists ~= s.toCString;
-    _tmpartists ~= null;
-    const(char*)* _artists = _tmpartists.ptr;
-
+    auto _artists_arr = new char*[](artists.length + 1);
+    auto _artists = cast(char**)_artists_arr.ptr;
+    foreach (i, s; artists) _artists[i] = s.toCString!(No.Malloc);
     adw_about_window_set_artists(cast(AdwAboutWindow*)this._cPtr, _artists);
   }
 
@@ -1627,12 +1618,9 @@ class AboutWindow : adw.window.Window
   */
   void setDesigners(string[] designers = null) nothrow
   {
-    char*[] _tmpdesigners;
-    foreach (s; designers)
-      _tmpdesigners ~= s.toCString;
-    _tmpdesigners ~= null;
-    const(char*)* _designers = _tmpdesigners.ptr;
-
+    auto _designers_arr = new char*[](designers.length + 1);
+    auto _designers = cast(char**)_designers_arr.ptr;
+    foreach (i, s; designers) _designers[i] = s.toCString!(No.Malloc);
     adw_about_window_set_designers(cast(AdwAboutWindow*)this._cPtr, _designers);
   }
 
@@ -1677,12 +1665,9 @@ class AboutWindow : adw.window.Window
   */
   void setDevelopers(string[] developers = null) nothrow
   {
-    char*[] _tmpdevelopers;
-    foreach (s; developers)
-      _tmpdevelopers ~= s.toCString;
-    _tmpdevelopers ~= null;
-    const(char*)* _developers = _tmpdevelopers.ptr;
-
+    auto _developers_arr = new char*[](developers.length + 1);
+    auto _developers = cast(char**)_developers_arr.ptr;
+    foreach (i, s; developers) _developers[i] = s.toCString!(No.Malloc);
     adw_about_window_set_developers(cast(AdwAboutWindow*)this._cPtr, _developers);
   }
 
@@ -1708,12 +1693,9 @@ class AboutWindow : adw.window.Window
   */
   void setDocumenters(string[] documenters = null) nothrow
   {
-    char*[] _tmpdocumenters;
-    foreach (s; documenters)
-      _tmpdocumenters ~= s.toCString;
-    _tmpdocumenters ~= null;
-    const(char*)* _documenters = _tmpdocumenters.ptr;
-
+    auto _documenters_arr = new char*[](documenters.length + 1);
+    auto _documenters = cast(char**)_documenters_arr.ptr;
+    foreach (i, s; documenters) _documenters[i] = s.toCString!(No.Malloc);
     adw_about_window_set_documenters(cast(AdwAboutWindow*)this._cPtr, _documenters);
   }
 
@@ -1941,7 +1923,7 @@ class AboutWindow : adw.window.Window
   */
   gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == bool)
+  && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.about_window.AboutWindow)))
   && Parameters!T.length < 3)

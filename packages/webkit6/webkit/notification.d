@@ -169,7 +169,7 @@ class Notification : gobject.object.ObjectWrap
   */
   gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.notification.Notification)))
   && Parameters!T.length < 2)
   {
@@ -216,7 +216,7 @@ class Notification : gobject.object.ObjectWrap
   */
   gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.notification.Notification)))
   && Parameters!T.length < 2)
   {

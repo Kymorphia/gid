@@ -405,7 +405,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tool_button.ToolButton)))
   && Parameters!T.length < 2)
   {

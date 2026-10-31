@@ -441,7 +441,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     GError *_err;
     _retval = cast(bool)gtk_text_buffer_deserialize(cast(GtkTextBuffer*)this._cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer._cPtr(No.Dup) : null, format ? cast(GdkAtom)format._cPtr : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _data, _length, &_err);
     if (_err)
@@ -897,7 +897,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     gtk_text_buffer_insert(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _text, _len);
   }
 
@@ -914,7 +914,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     gtk_text_buffer_insert_at_cursor(cast(GtkTextBuffer*)this._cPtr, _text, _len);
   }
 
@@ -963,7 +963,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     _retval = cast(bool)gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _text, _len, defaultEditable);
     return _retval;
   }
@@ -988,7 +988,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     _retval = cast(bool)gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)this._cPtr, _text, _len, defaultEditable);
     return _retval;
   }
@@ -1010,7 +1010,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (markup)
       _len = cast(int)markup.length;
 
-    auto _markup = markup.ptr ? cast(const(char)*)markup.ptr : [char.init].ptr;
+    auto _markup = cast(char*)markup.ptr;
     gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _markup, _len);
   }
 
@@ -1414,7 +1414,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
+    auto _text = cast(char*)text.ptr;
     gtk_text_buffer_set_text(cast(GtkTextBuffer*)this._cPtr, _text, _len);
   }
 
@@ -1477,7 +1477,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectApplyTag(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gtk.text_iter.TextIter)))
@@ -1542,7 +1542,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectBeginUserAction(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
@@ -1587,7 +1587,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
@@ -1645,7 +1645,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectDeleteRange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
@@ -1707,7 +1707,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectEndUserAction(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
@@ -1764,7 +1764,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectInsertChildAnchor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_child_anchor.TextChildAnchor)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
@@ -1828,7 +1828,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectInsertPixbuf(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdkpixbuf.pixbuf.Pixbuf)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
@@ -1894,7 +1894,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectInsertText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
@@ -1953,7 +1953,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectMarkDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_mark.TextMark)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 3)
@@ -2010,7 +2010,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectMarkSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_mark.TextMark)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
@@ -2066,7 +2066,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectModifiedChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
@@ -2114,7 +2114,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectPasteDone(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.clipboard.Clipboard)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 3)
@@ -2176,7 +2176,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   gulong connectRemoveTag(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.text_iter.TextIter)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gtk.text_iter.TextIter)))

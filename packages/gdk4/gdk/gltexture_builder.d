@@ -9,7 +9,6 @@ import gdk.glcontext;
 import gdk.texture;
 import gdk.types;
 import gid.gid;
-import glib.types;
 import gobject.gid_builder;
 import gobject.object;
 
@@ -247,50 +246,6 @@ class GLTextureBuilder : gobject.object.ObjectWrap
     GdkGLTextureBuilder* _cretval;
     _cretval = gdk_gl_texture_builder_new();
     this(_cretval, Yes.Take);
-  }
-
-  /**
-      Builds a new [gdk.texture.Texture] with the values set up in the builder.
-      
-      The `destroy` function gets called when the returned texture gets released;
-      either when the texture is finalized or by an explicit call to
-      [gdk.gltexture.GLTexture.release]. It should release all GL resources associated
-      with the texture, such as the [gdk.gltexture_builder.GLTextureBuilder.id] and the
-      [gdk.gltexture_builder.GLTextureBuilder.sync].
-      
-      Note that it is a programming error to call this function if any mandatory
-      property has not been set.
-      
-      It is possible to call this function multiple times to create multiple textures,
-      possibly with changing properties in between.
-  
-      Params:
-        destroy = destroy function to be called when the texture is
-            released
-        data = user data to pass to the destroy function
-      Returns: a newly built [gdk.texture.Texture]
-  */
-  gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null) nothrow
-  {
-    extern(C) void _destroyCallback(void* data) nothrow
-    {
-      ptrThawGC(data);
-      auto _dlg = cast(glib.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
-      }
-    }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)this._cPtr, _destroyCB, data);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
-    return _retval;
   }
 
   /**

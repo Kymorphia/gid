@@ -111,11 +111,9 @@ class RTSPWatch
     if (messages)
       _nMessages = cast(uint)messages.length;
 
-    GstRTSPMessage[] _tmpmessages;
-    foreach (obj; messages)
-      _tmpmessages ~= *cast(GstRTSPMessage*)obj._cPtr;
-    GstRTSPMessage* _messages = _tmpmessages.ptr;
-
+    auto _messages_arr = new GstRTSPMessage[](messages.length);
+    auto _messages = _messages_arr.ptr;
+    foreach (i, obj; messages) _messages[i] = obj ? *cast(GstRTSPMessage*)obj._cPtr(No.Dup) : GstRTSPMessage.init;
     _cretval = gst_rtsp_watch_send_messages(cast(GstRTSPWatch*)this._cPtr, _messages, _nMessages, cast(uint*)&id);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -200,6 +198,40 @@ class RTSPWatch
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_watch_wait_backlog_usec(cast(GstRTSPWatch*)this._cPtr, timeout);
+    gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
+    return _retval;
+  }
+
+  /**
+      Write data using the connection of the watch. If it cannot be sent
+      immediately, it will be queued for transmission in watch. The contents of
+      message will then be serialized and transmitted when the connection of the
+      watch becomes writable. In case the message is queued, the ID returned in
+      id will be non-zero and used as the ID argument in the message_sent
+      callback.
+      
+      This function will take ownership of data and [glib.global.gfree] it after use.
+      
+      If the amount of queued data exceeds the limits set with
+      [gstrtsp.rtspwatch.RTSPWatch.setSendBacklog], this function will return
+      #GST_RTSP_ENOMEM.
+  
+      Params:
+        data = the data to queue
+        id = location for a message ID or null
+      Returns: #GST_RTSP_OK on success. #GST_RTSP_ENOMEM when the backlog limits
+        are reached. #GST_RTSP_EINTR when watch was flushing.
+  */
+  gstrtsp.types.RTSPResult writeData(ubyte[] data, out uint id) nothrow
+  {
+    GstRTSPResult _cretval;
+    uint _size;
+    if (data)
+      _size = cast(uint)data.length;
+
+    auto _data = cast(ubyte*)gMalloc((data.length) * (ubyte).sizeof);
+    _data[0 .. data.length] = data[];
+    _cretval = gst_rtsp_watch_write_data(cast(GstRTSPWatch*)this._cPtr, _data, _size, cast(uint*)&id);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

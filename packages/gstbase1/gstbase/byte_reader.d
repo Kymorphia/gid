@@ -580,7 +580,7 @@ class ByteReader
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     gst_byte_reader_init(cast(GstByteReader*)this._cPtr, _data, _size);
   }
 

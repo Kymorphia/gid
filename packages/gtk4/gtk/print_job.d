@@ -412,6 +412,24 @@ class PrintJob : gobject.object.ObjectWrap
   }
 
   /**
+      Sets the page ranges for this job.
+  
+      Params:
+        ranges = pointer to an array of
+             [gtk.types.PageRange] structs
+  */
+  void setPageRanges(gtk.types.PageRange[] ranges) nothrow
+  {
+    int _nRanges;
+    if (ranges)
+      _nRanges = cast(int)ranges.length;
+
+    auto _ranges = cast(GtkPageRange*)gMalloc((ranges.length) * (GtkPageRange).sizeof);
+    _ranges[0 .. ranges.length] = ranges[];
+    gtk_print_job_set_page_ranges(cast(GtkPrintJob*)this._cPtr, _ranges, _nRanges);
+  }
+
+  /**
       Sets the [gtk.types.PageSet] setting for this job.
   
       Params:
@@ -559,7 +577,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   gulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_job.PrintJob)))
   && Parameters!T.length < 2)
   {

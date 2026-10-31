@@ -500,7 +500,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   gulong connectApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.entry_row.EntryRow)))
   && Parameters!T.length < 2)
   {
@@ -544,7 +544,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   gulong connectEntryActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.entry_row.EntryRow)))
   && Parameters!T.length < 2)
   {

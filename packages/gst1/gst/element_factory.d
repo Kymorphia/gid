@@ -187,19 +187,15 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     if (names)
       _n = cast(uint)names.length;
 
-    char*[] _tmpnames;
-    foreach (s; names)
-      _tmpnames ~= s.toCString;
-    const(char*)* _names = _tmpnames.ptr;
-
+    auto _names_arr = new char*[](names.length);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
     if (values)
       _n = cast(uint)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    const(GValue)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     _cretval = gst_element_factory_make_with_properties(_factoryname, _n, _names, _values);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
@@ -298,19 +294,15 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     if (names)
       _n = cast(uint)names.length;
 
-    char*[] _tmpnames;
-    foreach (s; names)
-      _tmpnames ~= s.toCString;
-    const(char*)* _names = _tmpnames.ptr;
-
+    auto _names_arr = new char*[](names.length);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
     if (values)
       _n = cast(uint)values.length;
 
-    GValue[] _tmpvalues;
-    foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj._cPtr;
-    const(GValue)* _values = _tmpvalues.ptr;
-
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     _cretval = gst_element_factory_create_with_properties(cast(GstElementFactory*)this._cPtr, _n, _names, _values);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;

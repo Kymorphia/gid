@@ -709,7 +709,7 @@ class BookmarkFile : gobject.boxed.Boxed
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
+    auto _data = cast(ubyte*)data.ptr;
     GError *_err;
     _retval = cast(bool)g_bookmark_file_load_from_data(cast(GBookmarkFile*)this._cPtr, _data, _length, &_err);
     if (_err)
@@ -1044,11 +1044,9 @@ class BookmarkFile : gobject.boxed.Boxed
     if (groups)
       _length = cast(size_t)groups.length;
 
-    const(char)*[] _tmpgroups;
-    foreach (s; groups)
-      _tmpgroups ~= s.toCString;
-    const(char*)* _groups = _tmpgroups.ptr;
-
+    auto _groups_arr = new char*[](groups.length);
+    auto _groups = cast(char**)_groups_arr.ptr;
+    foreach (i, s; groups) _groups[i] = s.toCString!(No.Malloc);
     g_bookmark_file_set_groups(cast(GBookmarkFile*)this._cPtr, _uri, _groups, _length);
   }
 

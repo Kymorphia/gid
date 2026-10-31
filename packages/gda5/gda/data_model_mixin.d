@@ -124,7 +124,7 @@ template DataModelT()
     if (cols)
       _ncols = cast(int)cols.length;
 
-    auto _cols = cols.ptr ? cast(int*)cols.ptr : [int.init].ptr;
+    auto _cols = cast(int*)cols.ptr;
     GError *_err;
     _cretval = gda_data_model_array_copy_model_ext(cast(GdaDataModel*)this._cPtr, _ncols, _cols, &_err);
     if (_err)
@@ -284,12 +284,12 @@ template DataModelT()
     if (cols)
       _nbCols = cast(int)cols.length;
 
-    auto _cols = cols.ptr ? cast(const(int)*)cols.ptr : [int.init].ptr;
+    auto _cols = cast(int*)cols.ptr;
     int _nbRows;
     if (rows)
       _nbRows = cast(int)rows.length;
 
-    auto _rows = rows.ptr ? cast(const(int)*)rows.ptr : [int.init].ptr;
+    auto _rows = cast(int*)rows.ptr;
     GError *_err;
     _retval = cast(bool)gda_data_model_export_to_file(cast(GdaDataModel*)this._cPtr, format, _file, _cols, _nbCols, _rows, _nbRows, options ? cast(GdaSet*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -323,12 +323,12 @@ template DataModelT()
     if (cols)
       _nbCols = cast(int)cols.length;
 
-    auto _cols = cols.ptr ? cast(const(int)*)cols.ptr : [int.init].ptr;
+    auto _cols = cast(int*)cols.ptr;
     int _nbRows;
     if (rows)
       _nbRows = cast(int)rows.length;
 
-    auto _rows = rows.ptr ? cast(const(int)*)rows.ptr : [int.init].ptr;
+    auto _rows = cast(int*)rows.ptr;
     _cretval = gda_data_model_export_to_string(cast(GdaDataModel*)this._cPtr, format, _cols, _nbCols, _rows, _nbRows, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
@@ -783,7 +783,7 @@ template DataModelT()
   */
   gulong connectAccessChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_model.DataModel)))
   && Parameters!T.length < 2)
   {
@@ -827,7 +827,7 @@ template DataModelT()
   */
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_model.DataModel)))
   && Parameters!T.length < 2)
   {
@@ -872,7 +872,7 @@ template DataModelT()
   */
   gulong connectReset(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_model.DataModel)))
   && Parameters!T.length < 2)
   {
@@ -918,7 +918,7 @@ template DataModelT()
   */
   gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_model.DataModel)))
   && Parameters!T.length < 3)
@@ -968,7 +968,7 @@ template DataModelT()
   */
   gulong connectRowRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_model.DataModel)))
   && Parameters!T.length < 3)
@@ -1018,7 +1018,7 @@ template DataModelT()
   */
   gulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_model.DataModel)))
   && Parameters!T.length < 3)

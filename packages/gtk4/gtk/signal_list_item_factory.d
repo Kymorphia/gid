@@ -131,7 +131,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   */
   gulong connectBind(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
@@ -186,7 +186,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   */
   gulong connectSetup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
@@ -241,7 +241,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   */
   gulong connectTeardown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
@@ -296,7 +296,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   */
   gulong connectUnbind(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)

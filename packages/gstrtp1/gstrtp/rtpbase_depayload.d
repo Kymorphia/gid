@@ -344,7 +344,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   gulong connectAddExtension(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpheader_extension.RTPHeaderExtension)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstrtp.rtpbase_depayload.RTPBaseDepayload)))
   && Parameters!T.length < 3)
@@ -392,7 +392,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   gulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T == void)
+  && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpbase_depayload.RTPBaseDepayload)))
   && Parameters!T.length < 2)
   {
@@ -442,7 +442,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   gulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
-    && is(ReturnType!T : gstrtp.rtpheader_extension.RTPHeaderExtension)
+  && is(ReturnType!T : gstrtp.rtpheader_extension.RTPHeaderExtension)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstrtp.rtpbase_depayload.RTPBaseDepayload)))
