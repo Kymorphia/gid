@@ -232,26 +232,16 @@ private string[] libraryCandidates(string baseName) nothrow
   else version(OSX)
   {
     if (soVer.length > 0)
-      cands ~= "lib" ~ base ~ "." ~ soVer ~ ".dylib";
-
-    cands ~= "lib" ~ base ~ ".dylib";
-
-    if (soVer.length > 0)
-      cands ~= base ~ "." ~ soVer ~ ".dylib";
-
-    cands ~= base ~ ".dylib";
+      cands ~= ["lib" ~ base ~ "." ~ soVer ~ ".dylib", base ~ "." ~ soVer ~ ".dylib"];
+    else // Only try unversioned libs if soVer is empty (to prevent ABI breakage)
+      cands ~= ["lib" ~ base ~ ".dylib", base ~ ".dylib"];
   }
   else // Other posix systems
   {
     if (soVer.length > 0)
-      cands ~= "lib" ~ base ~ ".so." ~ soVer;
-
-    cands ~= "lib" ~ base ~ ".so";
-
-    if (soVer.length > 0)
-      cands ~= base ~ ".so." ~ soVer;
-
-    cands ~= base ~ ".so";
+      cands ~= ["lib" ~ base ~ ".so." ~ soVer, base ~ ".so." ~ soVer];
+    else // Only try unversioned libs if soVer is empty (to prevent ABI breakage)
+      cands ~= ["lib" ~ base ~ ".so", base ~ ".so"];
   }
 
   return cands;
