@@ -70,7 +70,6 @@
 //# Set ref/unref of ParamSpec
 //!set class[ParamSpec][glib:ref-func] g_param_spec_ref
 //!set class[ParamSpec][glib:unref-func] g_param_spec_unref
-//!del class[ParamSpec][glib:get-type]
 
 //# Designate ParamSpecPool.new as constructor and set as introspectable
 //!set record[ParamSpecPool].function[new][introspectable] 1

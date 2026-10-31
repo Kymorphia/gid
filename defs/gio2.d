@@ -51,7 +51,6 @@
 
 //# Set parameters to out
 //!set callback[DBusSubtreeDispatchFunc].parameters.parameter[out_user_data][direction] out
-//!set enumeration[DBusError].function[register_error_domain].parameters.parameter[quark_volatile][direction] out
 
 //# string-length-param (Strings with array length parameters)
 //!set class[DataInputStream].method[read_upto].parameters.parameter[stop_chars].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
@@ -63,9 +62,6 @@
 //!set class[IOModule].function[query].return-value.array[][zero-terminated] 1
 //!set class[SettingsBackend].function[flatten_tree].parameters.parameter[keys].array[][zero-terminated] 1
 //!set class[SettingsBackend].function[flatten_tree].parameters.parameter[values].array[][zero-terminated] 1
-
-//!set interface[DtlsConnection].method[get_channel_binding_data].parameters.parameter[data][caller-allocates] 1
-//!set class[TlsConnection].method[get_channel_binding_data].parameters.parameter[data][caller-allocates] 1
 
 //!class ListModel
 

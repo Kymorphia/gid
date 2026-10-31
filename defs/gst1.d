@@ -49,8 +49,6 @@
 //!set callback[MemoryIsSpanFunction].parameters.parameter[offset][direction] out
 
 //# Fix arg direction and ownership for some callbacks
-//!set callback[BufferListFunc].parameters.parameter[buffer][direction] inout
-//!set callback[BufferForeachMetaFunc].parameters.parameter[meta][direction] inout
 //!set callback[BufferForeachMetaFunc].parameters.parameter[meta][transfer-ownership] none
 
 //# Set values parameter to be a caller-allocates output array
@@ -60,10 +58,6 @@
 
 //# Set MetaDeserializeFunction.data parameter to array with length
 //!set callback[MetaDeserializeFunction].parameters.parameter[data].type '<array length="3" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
-
-//# utilSimplifyFraction.direction/denominator are inout params
-//!set function[util_simplify_fraction].parameters.parameter[numerator][direction] inout
-//!set function[util_simplify_fraction].parameters.parameter[denominator][direction] inout
 
 //# Disable unnecessary ByteArrayInterface functions (can use GArray versions instead)
 //!set record[Meta].method[serialize][ignore] 1

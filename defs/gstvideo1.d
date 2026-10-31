@@ -25,9 +25,6 @@
 //!set record[VideoGLTextureUploadMeta].method[upload].parameters.parameter[texture_id].type '<array zero-terminated="0" fixed-size="4" c:type="guint*"><type name="guint" c:type="guint"/></array>'
 //!set function[buffer_add_video_gl_texture_upload_meta].parameters.parameter[texture_type].type '<array zero-terminated="0" fixed-size="4" c:type="GstVideoGLTextureType*"><type name="VideoGLTextureType" c:type="GstVideoGLTextureType"/></array>'
 
-//# Set basic parameters to out
-//!set interface[Navigation].function[event_parse_modifier_state].parameters.parameter[state][direction] out
-
 //# Disable interface APIs
 //!set interface[VideoOverlay].function[install_properties][ignore] 1
 

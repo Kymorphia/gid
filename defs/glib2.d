@@ -123,7 +123,6 @@
 //!set record[IOChannel].method[write_chars].parameters.parameter[buf].array[][length] 1
 
 //# Add missing free functions
-//!set record[AsyncQueue][free-function] g_async_queue_unref
 //!set record[Hmac][free-function] g_hmac_unref
 //!set record[List][free-function] g_list_free
 //!set record[OptionContext][free-function] g_option_context_free
@@ -202,8 +201,6 @@
 //!set function[bit_unlock].parameters.parameter[address][direction] inout
 //!set function[nullify_pointer].parameters.parameter[nullify_location][direction] out
 //!set function[ref_count_compare].parameters.parameter[rc][direction] inout
-//!set function[ref_count_dec].parameters.parameter[rc][direction] inout
-//!set function[ref_count_inc].parameters.parameter[rc][direction] inout
 //!set function[ref_count_init].parameters.parameter[rc][direction] inout
 //!set record[Timer].method[elapsed].parameters.parameter[microseconds][direction] out
 //!set record[Completion].method[complete_utf8].parameters.parameter[new_prefix][direction] out
