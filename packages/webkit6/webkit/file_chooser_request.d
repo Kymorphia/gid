@@ -79,6 +79,17 @@ class FileChooserRequest : gobject.object.ObjectWrap
   }
 
   /**
+      Get `mimeTypes` property.
+      Returns: A null-terminated array of strings containing the list of MIME
+        types the file chooser dialog should handle. See
+        [webkit.file_chooser_request.FileChooserRequest.getMimeTypes] for more details.
+  */
+  @property string[] mimeTypes() nothrow
+  {
+    return getMimeTypes();
+  }
+
+  /**
       Get `selectMultiple` property.
       Returns: Whether the file chooser should allow selecting multiple
         files. See
@@ -88,6 +99,17 @@ class FileChooserRequest : gobject.object.ObjectWrap
   @property bool selectMultiple() nothrow
   {
     return getSelectMultiple();
+  }
+
+  /**
+      Get `selectedFiles` property.
+      Returns: A null-terminated array of strings containing the list of
+        selected files associated to the current request. See
+        [webkit.file_chooser_request.FileChooserRequest.getSelectedFiles] for more details.
+  */
+  @property string[] selectedFiles() nothrow
+  {
+    return getSelectedFiles();
   }
 
   /**

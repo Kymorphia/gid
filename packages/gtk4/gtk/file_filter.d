@@ -302,6 +302,17 @@ class FileFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gtk.build
   mixin BuildableGidBuilderT!();
 
   /**
+      Set `mimeTypes` property.
+      Params:
+        propval = The MIME types that this filter matches.
+      Returns: Builder instance for fluent chaining
+  */
+  T mimeTypes(string[] propval) nothrow
+  {
+    return setProperty("mime-types", propval);
+  }
+
+  /**
       Set `name` property.
       Params:
         propval = The human-readable name of the filter.
@@ -313,6 +324,28 @@ class FileFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gtk.build
   T name(string propval) nothrow
   {
     return setProperty("name", propval);
+  }
+
+  /**
+      Set `patterns` property.
+      Params:
+        propval = The patterns that this filter matches.
+      Returns: Builder instance for fluent chaining
+  */
+  T patterns(string[] propval) nothrow
+  {
+    return setProperty("patterns", propval);
+  }
+
+  /**
+      Set `suffixes` property.
+      Params:
+        propval = The suffixes that this filter matches.
+      Returns: Builder instance for fluent chaining
+  */
+  T suffixes(string[] propval) nothrow
+  {
+    return setProperty("suffixes", propval);
   }
 }
 

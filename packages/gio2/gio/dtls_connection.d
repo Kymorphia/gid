@@ -52,6 +52,23 @@ interface DtlsConnection
   }
 
   /**
+      Get `advertisedProtocols` property.
+      Returns: The list of application-layer protocols that the connection
+        advertises that it is willing to speak. See
+        [gio.dtls_connection.DtlsConnection.setAdvertisedProtocols].
+  */
+  @property string[] advertisedProtocols() nothrow;
+
+  /**
+      Set `advertisedProtocols` property.
+      Params:
+        propval = The list of application-layer protocols that the connection
+          advertises that it is willing to speak. See
+          [gio.dtls_connection.DtlsConnection.setAdvertisedProtocols].
+  */
+  @property void advertisedProtocols(string[] propval) nothrow;
+
+  /**
       Get `baseSocket` property.
       Returns: The #GDatagramBased that the connection wraps. Note that this may be any
         implementation of #GDatagramBased, not just a #GSocket.
@@ -695,6 +712,16 @@ interface DtlsConnection
 /// Fluent builder implementation template for [gio.dtls_connection.DtlsConnection]
 interface DtlsConnectionGidBuilderImpl(T)
 {
+
+  /**
+      Set `advertisedProtocols` property.
+      Params:
+        propval = The list of application-layer protocols that the connection
+          advertises that it is willing to speak. See
+          [gio.dtls_connection.DtlsConnection.setAdvertisedProtocols].
+      Returns: Builder instance for fluent chaining
+  */
+  T advertisedProtocols(string[] propval) nothrow;
 
   /**
       Set `baseSocket` property.

@@ -59,6 +59,24 @@ class LanguageManager : gobject.object.ObjectWrap
     return new LanguageManagerGidBuilder;
   }
 
+  /** */
+  @property string[] languageIds() nothrow
+  {
+    return getLanguageIds();
+  }
+
+  /** */
+  @property string[] searchPath() nothrow
+  {
+    return getSearchPath();
+  }
+
+  /** */
+  @property void searchPath(string[] propval) nothrow
+  {
+    setSearchPath(propval);
+  }
+
   /**
       Creates a new language manager.
       
@@ -274,6 +292,12 @@ class LanguageManager : gobject.object.ObjectWrap
 /// Fluent builder implementation template for [gtksource.language_manager.LanguageManager]
 class LanguageManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
+
+  /** */
+  T searchPath(string[] propval) nothrow
+  {
+    return setProperty("search-path", propval);
+  }
 }
 
 /// Fluent builder for [gtksource.language_manager.LanguageManager]

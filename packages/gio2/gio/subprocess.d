@@ -704,6 +704,17 @@ class SubprocessGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
   mixin InitableGidBuilderT!();
 
   /**
+      Set `argv` property.
+      Params:
+        propval = Argument vector.
+      Returns: Builder instance for fluent chaining
+  */
+  T argv(string[] propval) nothrow
+  {
+    return setProperty("argv", propval);
+  }
+
+  /**
       Set `flags` property.
       Params:
         propval = Subprocess flags.

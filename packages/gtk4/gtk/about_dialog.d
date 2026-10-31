@@ -111,6 +111,58 @@ class AboutDialog : gtk.window.Window
   }
 
   /**
+      Get `artists` property.
+      Returns: The people who contributed artwork to the program, as a `NULL`-terminated
+        array of strings.
+        
+        Each string may contain email addresses and URLs, which will be displayed
+        as links.
+  */
+  @property string[] artists() nothrow
+  {
+    return getArtists();
+  }
+
+  /**
+      Set `artists` property.
+      Params:
+        propval = The people who contributed artwork to the program, as a `NULL`-terminated
+          array of strings.
+          
+          Each string may contain email addresses and URLs, which will be displayed
+          as links.
+  */
+  @property void artists(string[] propval) nothrow
+  {
+    setArtists(propval);
+  }
+
+  /**
+      Get `authors` property.
+      Returns: The authors of the program, as a `NULL`-terminated array of strings.
+        
+        Each string may contain email addresses and URLs, which will be displayed
+        as links, see the introduction for more details.
+  */
+  @property string[] authors() nothrow
+  {
+    return getAuthors();
+  }
+
+  /**
+      Set `authors` property.
+      Params:
+        propval = The authors of the program, as a `NULL`-terminated array of strings.
+          
+          Each string may contain email addresses and URLs, which will be displayed
+          as links, see the introduction for more details.
+  */
+  @property void authors(string[] propval) nothrow
+  {
+    setAuthors(propval);
+  }
+
+  /**
       Get `comments` property.
       Returns: Comments about the program.
         
@@ -154,6 +206,31 @@ class AboutDialog : gtk.window.Window
   @property void copyright(string propval) nothrow
   {
     setCopyright(propval);
+  }
+
+  /**
+      Get `documenters` property.
+      Returns: The people documenting the program, as a `NULL`-terminated array of strings.
+        
+        Each string may contain email addresses and URLs, which will be displayed
+        as links, see the introduction for more details.
+  */
+  @property string[] documenters() nothrow
+  {
+    return getDocumenters();
+  }
+
+  /**
+      Set `documenters` property.
+      Params:
+        propval = The people documenting the program, as a `NULL`-terminated array of strings.
+          
+          Each string may contain email addresses and URLs, which will be displayed
+          as links, see the introduction for more details.
+  */
+  @property void documenters(string[] propval) nothrow
+  {
+    setDocumenters(propval);
   }
 
   /**
@@ -1038,6 +1115,35 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 
 
   /**
+      Set `artists` property.
+      Params:
+        propval = The people who contributed artwork to the program, as a `NULL`-terminated
+          array of strings.
+          
+          Each string may contain email addresses and URLs, which will be displayed
+          as links.
+      Returns: Builder instance for fluent chaining
+  */
+  T artists(string[] propval) nothrow
+  {
+    return setProperty("artists", propval);
+  }
+
+  /**
+      Set `authors` property.
+      Params:
+        propval = The authors of the program, as a `NULL`-terminated array of strings.
+          
+          Each string may contain email addresses and URLs, which will be displayed
+          as links, see the introduction for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T authors(string[] propval) nothrow
+  {
+    return setProperty("authors", propval);
+  }
+
+  /**
       Set `comments` property.
       Params:
         propval = Comments about the program.
@@ -1061,6 +1167,20 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
   T copyright(string propval) nothrow
   {
     return setProperty("copyright", propval);
+  }
+
+  /**
+      Set `documenters` property.
+      Params:
+        propval = The people documenting the program, as a `NULL`-terminated array of strings.
+          
+          Each string may contain email addresses and URLs, which will be displayed
+          as links, see the introduction for more details.
+      Returns: Builder instance for fluent chaining
+  */
+  T documenters(string[] propval) nothrow
+  {
+    return setProperty("documenters", propval);
   }
 
   /**

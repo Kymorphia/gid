@@ -63,6 +63,37 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 
   /**
+      Get `buttons` property.
+      Returns: Labels for buttons to show in the alert.
+        
+        The labels should be translated and may contain
+        a _ to indicate the mnemonic character.
+        
+        If this property is not set, then a 'Close' button is
+        automatically created.
+  */
+  @property string[] buttons() nothrow
+  {
+    return getButtons();
+  }
+
+  /**
+      Set `buttons` property.
+      Params:
+        propval = Labels for buttons to show in the alert.
+          
+          The labels should be translated and may contain
+          a _ to indicate the mnemonic character.
+          
+          If this property is not set, then a 'Close' button is
+          automatically created.
+  */
+  @property void buttons(string[] propval) nothrow
+  {
+    setButtons(propval);
+  }
+
+  /**
       Get `cancelButton` property.
       Returns: This property determines what happens when the Escape key is
         pressed while the alert is shown.
@@ -429,6 +460,23 @@ class AlertDialog : gobject.object.ObjectWrap
 /// Fluent builder implementation template for [gtk.alert_dialog.AlertDialog]
 class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
+
+  /**
+      Set `buttons` property.
+      Params:
+        propval = Labels for buttons to show in the alert.
+          
+          The labels should be translated and may contain
+          a _ to indicate the mnemonic character.
+          
+          If this property is not set, then a 'Close' button is
+          automatically created.
+      Returns: Builder instance for fluent chaining
+  */
+  T buttons(string[] propval) nothrow
+  {
+    return setProperty("buttons", propval);
+  }
 
   /**
       Set `cancelButton` property.

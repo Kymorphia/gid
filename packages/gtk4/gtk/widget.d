@@ -522,6 +522,25 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   }
 
   /**
+      Get `cssClasses` property.
+      Returns: A list of css classes applied to this widget.
+  */
+  @property string[] cssClasses() nothrow
+  {
+    return getCssClasses();
+  }
+
+  /**
+      Set `cssClasses` property.
+      Params:
+        propval = A list of css classes applied to this widget.
+  */
+  @property void cssClasses(string[] propval) nothrow
+  {
+    setCssClasses(propval);
+  }
+
+  /**
       Get `cssName` property.
       Returns: The name of this widget in the CSS tree.
         
@@ -4903,6 +4922,17 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   T canTarget(bool propval) nothrow
   {
     return setProperty("can-target", propval);
+  }
+
+  /**
+      Set `cssClasses` property.
+      Params:
+        propval = A list of css classes applied to this widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T cssClasses(string[] propval) nothrow
+  {
+    return setProperty("css-classes", propval);
   }
 
   /**

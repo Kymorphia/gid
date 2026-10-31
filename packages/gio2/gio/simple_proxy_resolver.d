@@ -89,6 +89,91 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
     setDefaultProxy(propval);
   }
 
+  /**
+      Get `ignoreHosts` property.
+      Returns: A list of hostnames and IP addresses that the resolver should
+        allow direct connections to.
+        
+        Entries can be in one of 4 formats:
+        
+        - A hostname, such as "example.com", ".example.com", or
+          "*.example.com", any of which match "example.com" or
+          any subdomain of it.
+        
+        - An IPv4 or IPv6 address, such as "192.168.1.1",
+          which matches only that address.
+        
+        - A hostname or IP address followed by a port, such as
+          "example.com:80", which matches whatever the hostname or IP
+          address would match, but only for URLs with the (explicitly)
+          indicated port. In the case of an IPv6 address, the address
+          part must appear in brackets: "[::1]:443"
+        
+        - An IP address range, given by a base address and prefix length,
+          such as "fe80::/10", which matches any address in that range.
+        
+        Note that when dealing with Unicode hostnames, the matching is
+        done against the ASCII form of the name.
+        
+        Also note that hostname exclusions apply only to connections made
+        to hosts identified by name, and IP address exclusions apply only
+        to connections made to hosts identified by address. That is, if
+        example.com has an address of 192.168.1.1, and the :ignore-hosts list
+        contains only "192.168.1.1", then a connection to "example.com"
+        (eg, via a #GNetworkAddress) will use the proxy, and a connection to
+        "192.168.1.1" (eg, via a #GInetSocketAddress) will not.
+        
+        These rules match the "ignore-hosts"/"noproxy" rules most
+        commonly used by other applications.
+  */
+  @property string[] ignoreHosts() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(string[])("ignore-hosts");
+  }
+
+  /**
+      Set `ignoreHosts` property.
+      Params:
+        propval = A list of hostnames and IP addresses that the resolver should
+          allow direct connections to.
+          
+          Entries can be in one of 4 formats:
+          
+          - A hostname, such as "example.com", ".example.com", or
+            "*.example.com", any of which match "example.com" or
+            any subdomain of it.
+          
+          - An IPv4 or IPv6 address, such as "192.168.1.1",
+            which matches only that address.
+          
+          - A hostname or IP address followed by a port, such as
+            "example.com:80", which matches whatever the hostname or IP
+            address would match, but only for URLs with the (explicitly)
+            indicated port. In the case of an IPv6 address, the address
+            part must appear in brackets: "[::1]:443"
+          
+          - An IP address range, given by a base address and prefix length,
+            such as "fe80::/10", which matches any address in that range.
+          
+          Note that when dealing with Unicode hostnames, the matching is
+          done against the ASCII form of the name.
+          
+          Also note that hostname exclusions apply only to connections made
+          to hosts identified by name, and IP address exclusions apply only
+          to connections made to hosts identified by address. That is, if
+          example.com has an address of 192.168.1.1, and the :ignore-hosts list
+          contains only "192.168.1.1", then a connection to "example.com"
+          (eg, via a #GNetworkAddress) will use the proxy, and a connection to
+          "192.168.1.1" (eg, via a #GInetSocketAddress) will not.
+          
+          These rules match the "ignore-hosts"/"noproxy" rules most
+          commonly used by other applications.
+  */
+  @property void ignoreHosts(string[] propval) nothrow
+  {
+    setIgnoreHosts(propval);
+  }
+
   mixin ProxyResolverT!();
 
   /**
@@ -201,6 +286,50 @@ class SimpleProxyResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
   T defaultProxy(string propval) nothrow
   {
     return setProperty("default-proxy", propval);
+  }
+
+  /**
+      Set `ignoreHosts` property.
+      Params:
+        propval = A list of hostnames and IP addresses that the resolver should
+          allow direct connections to.
+          
+          Entries can be in one of 4 formats:
+          
+          - A hostname, such as "example.com", ".example.com", or
+            "*.example.com", any of which match "example.com" or
+            any subdomain of it.
+          
+          - An IPv4 or IPv6 address, such as "192.168.1.1",
+            which matches only that address.
+          
+          - A hostname or IP address followed by a port, such as
+            "example.com:80", which matches whatever the hostname or IP
+            address would match, but only for URLs with the (explicitly)
+            indicated port. In the case of an IPv6 address, the address
+            part must appear in brackets: "[::1]:443"
+          
+          - An IP address range, given by a base address and prefix length,
+            such as "fe80::/10", which matches any address in that range.
+          
+          Note that when dealing with Unicode hostnames, the matching is
+          done against the ASCII form of the name.
+          
+          Also note that hostname exclusions apply only to connections made
+          to hosts identified by name, and IP address exclusions apply only
+          to connections made to hosts identified by address. That is, if
+          example.com has an address of 192.168.1.1, and the :ignore-hosts list
+          contains only "192.168.1.1", then a connection to "example.com"
+          (eg, via a #GNetworkAddress) will use the proxy, and a connection to
+          "192.168.1.1" (eg, via a #GInetSocketAddress) will not.
+          
+          These rules match the "ignore-hosts"/"noproxy" rules most
+          commonly used by other applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T ignoreHosts(string[] propval) nothrow
+  {
+    return setProperty("ignore-hosts", propval);
   }
 }
 

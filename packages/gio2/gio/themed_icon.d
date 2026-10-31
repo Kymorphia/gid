@@ -60,6 +60,15 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   }
 
   /**
+      Get `names` property.
+      Returns: A null-terminated array of icon names.
+  */
+  @property string[] names() nothrow
+  {
+    return getNames();
+  }
+
+  /**
       Get `useDefaultFallbacks` property.
       Returns: Whether to use the default fallbacks found by shortening the icon name
         at '-' characters. If the "names" array has more than one element,
@@ -221,6 +230,17 @@ class ThemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
   T name(string propval) nothrow
   {
     return setProperty("name", propval);
+  }
+
+  /**
+      Set `names` property.
+      Params:
+        propval = A null-terminated array of icon names.
+      Returns: Builder instance for fluent chaining
+  */
+  T names(string[] propval) nothrow
+  {
+    return setProperty("names", propval);
   }
 
   /**

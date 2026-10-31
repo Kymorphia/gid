@@ -227,6 +227,12 @@ class StringListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 
   mixin ListModelGidBuilderT!();
   mixin BuildableGidBuilderT!();
+
+  /** */
+  T strings(string[] propval) nothrow
+  {
+    return setProperty("strings", propval);
+  }
 }
 
 /// Fluent builder for [gtk.string_list.StringList]

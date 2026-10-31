@@ -85,6 +85,53 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
     setAdjustment(propval);
   }
 
+  /**
+      Get `icons` property.
+      Returns: The names of the icons to be used by the scale button.
+        The first item in the array will be used in the button
+        when the current value is the lowest value, the second
+        item for the highest value. All the subsequent icons will
+        be used for all the other values, spread evenly over the
+        range of values.
+        
+        If there's only one icon name in the @icons array, it will
+        be used for all the values. If only two icon names are in
+        the @icons array, the first one will be used for the bottom
+        50% of the scale, and the second one for the top 50%.
+        
+        It is recommended to use at least 3 icons so that the
+        #GtkScaleButton reflects the current value of the scale
+        better for the users.
+  */
+  @property string[] icons() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(string[])("icons");
+  }
+
+  /**
+      Set `icons` property.
+      Params:
+        propval = The names of the icons to be used by the scale button.
+          The first item in the array will be used in the button
+          when the current value is the lowest value, the second
+          item for the highest value. All the subsequent icons will
+          be used for all the other values, spread evenly over the
+          range of values.
+          
+          If there's only one icon name in the @icons array, it will
+          be used for all the values. If only two icon names are in
+          the @icons array, the first one will be used for the bottom
+          50% of the scale, and the second one for the top 50%.
+          
+          It is recommended to use at least 3 icons so that the
+          #GtkScaleButton reflects the current value of the scale
+          better for the users.
+  */
+  @property void icons(string[] propval) nothrow
+  {
+    setIcons(propval);
+  }
+
   /** */
   @property gtk.types.IconSize size() nothrow
   {
@@ -402,6 +449,31 @@ class ScaleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.orie
   T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
+  }
+
+  /**
+      Set `icons` property.
+      Params:
+        propval = The names of the icons to be used by the scale button.
+          The first item in the array will be used in the button
+          when the current value is the lowest value, the second
+          item for the highest value. All the subsequent icons will
+          be used for all the other values, spread evenly over the
+          range of values.
+          
+          If there's only one icon name in the @icons array, it will
+          be used for all the values. If only two icon names are in
+          the @icons array, the first one will be used for the bottom
+          50% of the scale, and the second one for the top 50%.
+          
+          It is recommended to use at least 3 icons so that the
+          #GtkScaleButton reflects the current value of the scale
+          better for the users.
+      Returns: Builder instance for fluent chaining
+  */
+  T icons(string[] propval) nothrow
+  {
+    return setProperty("icons", propval);
   }
 
   /** */

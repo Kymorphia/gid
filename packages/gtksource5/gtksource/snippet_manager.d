@@ -61,6 +61,25 @@ class SnippetManager : gobject.object.ObjectWrap
   }
 
   /**
+      Get `searchPath` property.
+      Returns: Contains a list of directories to search for files containing snippets (*.snippets).
+  */
+  @property string[] searchPath() nothrow
+  {
+    return getSearchPath();
+  }
+
+  /**
+      Set `searchPath` property.
+      Params:
+        propval = Contains a list of directories to search for files containing snippets (*.snippets).
+  */
+  @property void searchPath(string[] propval) nothrow
+  {
+    setSearchPath(propval);
+  }
+
+  /**
       Returns the default #GtkSourceSnippetManager instance.
       Returns: a #GtkSourceSnippetManager which
           is owned by GtkSourceView library and must not be unref'd.
@@ -220,6 +239,17 @@ class SnippetManager : gobject.object.ObjectWrap
 /// Fluent builder implementation template for [gtksource.snippet_manager.SnippetManager]
 class SnippetManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
+
+  /**
+      Set `searchPath` property.
+      Params:
+        propval = Contains a list of directories to search for files containing snippets (*.snippets).
+      Returns: Builder instance for fluent chaining
+  */
+  T searchPath(string[] propval) nothrow
+  {
+    return setProperty("search-path", propval);
+  }
 }
 
 /// Fluent builder for [gtksource.snippet_manager.SnippetManager]

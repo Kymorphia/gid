@@ -275,6 +275,53 @@ class AboutWindow : adw.window.Window
   }
 
   /**
+      Get `artists` property.
+      Returns: The list of artists of the application.
+        
+        It will be displayed on the Credits page.
+        
+        Each name may contain email addresses and URLs, see the introduction for
+        more details.
+        
+        See also:
+        
+        * [adw.about_window.AboutWindow.developers]
+        * [adw.about_window.AboutWindow.designers]
+        * [adw.about_window.AboutWindow.documenters]
+        * [adw.about_window.AboutWindow.translatorCredits]
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property string[] artists() nothrow
+  {
+    return getArtists();
+  }
+
+  /**
+      Set `artists` property.
+      Params:
+        propval = The list of artists of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.documenters]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property void artists(string[] propval) nothrow
+  {
+    setArtists(propval);
+  }
+
+  /**
       Get `comments` property.
       Returns: The comments about the application.
         
@@ -409,6 +456,53 @@ class AboutWindow : adw.window.Window
   }
 
   /**
+      Get `designers` property.
+      Returns: The list of designers of the application.
+        
+        It will be displayed on the Credits page.
+        
+        Each name may contain email addresses and URLs, see the introduction for
+        more details.
+        
+        See also:
+        
+        * [adw.about_window.AboutWindow.developers]
+        * [adw.about_window.AboutWindow.artists]
+        * [adw.about_window.AboutWindow.documenters]
+        * [adw.about_window.AboutWindow.translatorCredits]
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property string[] designers() nothrow
+  {
+    return getDesigners();
+  }
+
+  /**
+      Set `designers` property.
+      Params:
+        propval = The list of designers of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.documenters]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property void designers(string[] propval) nothrow
+  {
+    setDesigners(propval);
+  }
+
+  /**
       Get `developerName` property.
       Returns: The developer name.
         
@@ -443,6 +537,100 @@ class AboutWindow : adw.window.Window
   @property void developerName(string propval) nothrow
   {
     setDeveloperName(propval);
+  }
+
+  /**
+      Get `developers` property.
+      Returns: The list of developers of the application.
+        
+        It will be displayed on the Credits page.
+        
+        Each name may contain email addresses and URLs, see the introduction for
+        more details.
+        
+        See also:
+        
+        * [adw.about_window.AboutWindow.designers]
+        * [adw.about_window.AboutWindow.artists]
+        * [adw.about_window.AboutWindow.documenters]
+        * [adw.about_window.AboutWindow.translatorCredits]
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property string[] developers() nothrow
+  {
+    return getDevelopers();
+  }
+
+  /**
+      Set `developers` property.
+      Params:
+        propval = The list of developers of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.documenters]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property void developers(string[] propval) nothrow
+  {
+    setDevelopers(propval);
+  }
+
+  /**
+      Get `documenters` property.
+      Returns: The list of documenters of the application.
+        
+        It will be displayed on the Credits page.
+        
+        Each name may contain email addresses and URLs, see the introduction for
+        more details.
+        
+        See also:
+        
+        * [adw.about_window.AboutWindow.developers]
+        * [adw.about_window.AboutWindow.designers]
+        * [adw.about_window.AboutWindow.artists]
+        * [adw.about_window.AboutWindow.translatorCredits]
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property string[] documenters() nothrow
+  {
+    return getDocumenters();
+  }
+
+  /**
+      Set `documenters` property.
+      Params:
+        propval = The list of documenters of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+  */
+  @property void documenters(string[] propval) nothrow
+  {
+    setDocumenters(propval);
   }
 
   /**
@@ -1820,6 +2008,31 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
   }
 
   /**
+      Set `artists` property.
+      Params:
+        propval = The list of artists of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.documenters]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      Returns: Builder instance for fluent chaining
+  */
+  T artists(string[] propval) nothrow
+  {
+    return setProperty("artists", propval);
+  }
+
+  /**
       Set `comments` property.
       Params:
         propval = The comments about the application.
@@ -1893,6 +2106,31 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
   }
 
   /**
+      Set `designers` property.
+      Params:
+        propval = The list of designers of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.documenters]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      Returns: Builder instance for fluent chaining
+  */
+  T designers(string[] propval) nothrow
+  {
+    return setProperty("designers", propval);
+  }
+
+  /**
       Set `developerName` property.
       Params:
         propval = The developer name.
@@ -1910,6 +2148,56 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
   T developerName(string propval) nothrow
   {
     return setProperty("developer-name", propval);
+  }
+
+  /**
+      Set `developers` property.
+      Params:
+        propval = The list of developers of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.documenters]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      Returns: Builder instance for fluent chaining
+  */
+  T developers(string[] propval) nothrow
+  {
+    return setProperty("developers", propval);
+  }
+
+  /**
+      Set `documenters` property.
+      Params:
+        propval = The list of documenters of the application.
+          
+          It will be displayed on the Credits page.
+          
+          Each name may contain email addresses and URLs, see the introduction for
+          more details.
+          
+          See also:
+          
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.translatorCredits]
+          * [adw.about_window.AboutWindow.addCreditSection]
+          * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      Returns: Builder instance for fluent chaining
+  */
+  T documenters(string[] propval) nothrow
+  {
+    return setProperty("documenters", propval);
   }
 
   /**

@@ -48,6 +48,24 @@ class StyleSchemeManager : gobject.object.ObjectWrap
     return new StyleSchemeManagerGidBuilder;
   }
 
+  /** */
+  @property string[] schemeIds() nothrow
+  {
+    return getSchemeIds();
+  }
+
+  /** */
+  @property string[] searchPath() nothrow
+  {
+    return getSearchPath();
+  }
+
+  /** */
+  @property void searchPath(string[] propval) nothrow
+  {
+    setSearchPath(propval);
+  }
+
   /**
       Creates a new style manager. If you do not need more than one style
       manager then use [gtksource.style_scheme_manager.StyleSchemeManager.getDefault] instead.
@@ -201,6 +219,12 @@ class StyleSchemeManager : gobject.object.ObjectWrap
 /// Fluent builder implementation template for [gtksource.style_scheme_manager.StyleSchemeManager]
 class StyleSchemeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
+
+  /** */
+  T searchPath(string[] propval) nothrow
+  {
+    return setProperty("search-path", propval);
+  }
 }
 
 /// Fluent builder for [gtksource.style_scheme_manager.StyleSchemeManager]

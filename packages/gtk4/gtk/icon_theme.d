@@ -104,6 +104,79 @@ class IconTheme : gobject.object.ObjectWrap
   }
 
   /**
+      Get `iconNames` property.
+      Returns: The icon names that are supported by the icon theme.
+  */
+  @property string[] iconNames() nothrow
+  {
+    return getIconNames();
+  }
+
+  /**
+      Get `resourcePath` property.
+      Returns: Resource paths that will be looked at when looking for icons,
+        similar to search paths.
+        
+        The resources are considered as part of the hicolor icon theme
+        and must be located in subdirectories that are defined in the
+        hicolor icon theme, such as `@path/16x16/actions/run.png`.
+        Icons that are directly placed in the resource path instead
+        of a subdirectory are also considered as ultimate fallback.
+  */
+  @property string[] resourcePath() nothrow
+  {
+    return getResourcePath();
+  }
+
+  /**
+      Set `resourcePath` property.
+      Params:
+        propval = Resource paths that will be looked at when looking for icons,
+          similar to search paths.
+          
+          The resources are considered as part of the hicolor icon theme
+          and must be located in subdirectories that are defined in the
+          hicolor icon theme, such as `@path/16x16/actions/run.png`.
+          Icons that are directly placed in the resource path instead
+          of a subdirectory are also considered as ultimate fallback.
+  */
+  @property void resourcePath(string[] propval) nothrow
+  {
+    setResourcePath(propval);
+  }
+
+  /**
+      Get `searchPath` property.
+      Returns: The search path for this icon theme.
+        
+        When looking for icons, GTK will search for a subdirectory of
+        one or more of the directories in the search path with the same
+        name as the icon theme containing an index.theme file. (Themes
+        from multiple of the path elements are combined to allow themes
+        to be extended by adding icons in the user’s home directory.)
+  */
+  @property string[] searchPath() nothrow
+  {
+    return getSearchPath();
+  }
+
+  /**
+      Set `searchPath` property.
+      Params:
+        propval = The search path for this icon theme.
+          
+          When looking for icons, GTK will search for a subdirectory of
+          one or more of the directories in the search path with the same
+          name as the icon theme containing an index.theme file. (Themes
+          from multiple of the path elements are combined to allow themes
+          to be extended by adding icons in the user’s home directory.)
+  */
+  @property void searchPath(string[] propval) nothrow
+  {
+    setSearchPath(propval);
+  }
+
+  /**
       Get `themeName` property.
       Returns: The name of the icon theme that is being used.
         
@@ -573,6 +646,41 @@ class IconThemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
+  }
+
+  /**
+      Set `resourcePath` property.
+      Params:
+        propval = Resource paths that will be looked at when looking for icons,
+          similar to search paths.
+          
+          The resources are considered as part of the hicolor icon theme
+          and must be located in subdirectories that are defined in the
+          hicolor icon theme, such as `@path/16x16/actions/run.png`.
+          Icons that are directly placed in the resource path instead
+          of a subdirectory are also considered as ultimate fallback.
+      Returns: Builder instance for fluent chaining
+  */
+  T resourcePath(string[] propval) nothrow
+  {
+    return setProperty("resource-path", propval);
+  }
+
+  /**
+      Set `searchPath` property.
+      Params:
+        propval = The search path for this icon theme.
+          
+          When looking for icons, GTK will search for a subdirectory of
+          one or more of the directories in the search path with the same
+          name as the icon theme containing an index.theme file. (Themes
+          from multiple of the path elements are combined to allow themes
+          to be extended by adding icons in the user’s home directory.)
+      Returns: Builder instance for fluent chaining
+  */
+  T searchPath(string[] propval) nothrow
+  {
+    return setProperty("search-path", propval);
   }
 
   /**

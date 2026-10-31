@@ -64,6 +64,29 @@ class TlsConnection : gio.iostream.IOStream
   }
 
   /**
+      Get `advertisedProtocols` property.
+      Returns: The list of application-layer protocols that the connection
+        advertises that it is willing to speak. See
+        [gio.tls_connection.TlsConnection.setAdvertisedProtocols].
+  */
+  @property string[] advertisedProtocols() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(string[])("advertised-protocols");
+  }
+
+  /**
+      Set `advertisedProtocols` property.
+      Params:
+        propval = The list of application-layer protocols that the connection
+          advertises that it is willing to speak. See
+          [gio.tls_connection.TlsConnection.setAdvertisedProtocols].
+  */
+  @property void advertisedProtocols(string[] propval) nothrow
+  {
+    setAdvertisedProtocols(propval);
+  }
+
+  /**
       Get `baseIoStream` property.
       Returns: The #GIOStream that the connection wraps. The connection holds a reference
         to this stream, and may run operations on the stream from other threads
@@ -897,6 +920,19 @@ class TlsConnection : gio.iostream.IOStream
 /// Fluent builder implementation template for [gio.tls_connection.TlsConnection]
 class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
 {
+
+  /**
+      Set `advertisedProtocols` property.
+      Params:
+        propval = The list of application-layer protocols that the connection
+          advertises that it is willing to speak. See
+          [gio.tls_connection.TlsConnection.setAdvertisedProtocols].
+      Returns: Builder instance for fluent chaining
+  */
+  T advertisedProtocols(string[] propval) nothrow
+  {
+    return setProperty("advertised-protocols", propval);
+  }
 
   /**
       Set `baseIoStream` property.
