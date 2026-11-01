@@ -171,12 +171,9 @@ alias GLFilterRenderFunc = bool delegate(gstgl.glfilter.GLFilter filter, gstgl.g
 
 /**
     callback definition for operating through a #GstGLFramebuffer object
-
-    Params:
-      stuff = user data
     Returns: 
 */
-alias GLFramebufferFunc = bool delegate(void* stuff);
+alias GLFramebufferFunc = bool delegate();
 
 /** */
 alias GLWindowCB = void delegate();

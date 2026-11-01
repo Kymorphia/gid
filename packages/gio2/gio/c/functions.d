@@ -218,7 +218,7 @@ __gshared extern(C) nothrow
   GCancellable* function() c_g_cancellable_new; ///
   GCancellable* function() c_g_cancellable_get_current; ///
   void function(GCancellable* cancellable) c_g_cancellable_cancel; ///
-  gulong function(GCancellable* cancellable, GCallback callback, void* data, GDestroyNotify dataDestroyFunc) c_g_cancellable_connect; ///
+  gulong function(GCancellable* cancellable, GCancellableConnectFunc callback, void* data, GDestroyNotify dataDestroyFunc) c_g_cancellable_connect; ///
   void function(GCancellable* cancellable, gulong handlerId) c_g_cancellable_disconnect; ///
   int function(GCancellable* cancellable) c_g_cancellable_get_fd; ///
   gboolean function(GCancellable* cancellable) c_g_cancellable_is_cancelled; ///

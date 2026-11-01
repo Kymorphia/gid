@@ -3,6 +3,7 @@ module gstgl.glrenderbuffer_allocation_params;
 
 public import gid.basictypes;
 import gid.gid;
+import glib.types;
 import gobject.boxed;
 import gst.allocation_params;
 import gstgl.c.functions;
@@ -110,5 +111,30 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
     GstGLRenderbufferAllocationParams* _cretval;
     _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, renderbufferFormat, width, height);
     this(_cretval, Yes.Take);
+  }
+
+  /** */
+  static gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams newWrapped(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height, void* glHandle = null, glib.types.DestroyNotify notify = null) nothrow
+  {
+    extern(C) void _notifyCallback(void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
+    }
+    auto _notifyCB = notify ? &_notifyCallback : null;
+    GstGLRenderbufferAllocationParams* _cretval;
+    auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
+    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, renderbufferFormat, width, height, glHandle, _notify, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
   }
 }

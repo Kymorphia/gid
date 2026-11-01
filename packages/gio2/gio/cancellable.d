@@ -115,6 +115,71 @@ class Cancellable : gobject.object.ObjectWrap
   }
 
   /**
+      Convenience function to connect to the #GCancellable::cancelled
+      signal. Also handles the race condition that may happen
+      if the cancellable is cancelled right before connecting.
+      
+      callback is called exactly once each time cancellable is cancelled,
+      either directly at the time of the connect if cancellable is already
+      cancelled, or when cancellable is cancelled in some thread.
+      In case the cancellable is reset via [gio.cancellable.Cancellable.reset]
+      then the callback can be called again if the cancellable is cancelled and
+      if it had not been previously cancelled at the time
+      [gio.cancellable.Cancellable.connect] was called (e.g. if the connection actually
+      took place, returning a non-zero value).
+      
+      data_destroy_func will be called when the handler is
+      disconnected, or immediately if the cancellable is already
+      cancelled.
+      
+      See #GCancellable::cancelled for details on how to use this.
+      
+      Since GLib 2.40, the lock protecting cancellable is not held when
+      callback is invoked. This lifts a restriction in place for
+      earlier GLib versions which now makes it easier to write cleanup
+      code that unconditionally invokes e.g. [gio.cancellable.Cancellable.cancel].
+      Note that since 2.82 GLib still holds a lock during the callback but it’s
+      designed in a way that most of the [gio.cancellable.Cancellable] methods can be
+      called, including [gio.cancellable.Cancellable.cancel] or
+      [gobject.object.ObjectWrap.unref].
+      
+      There are still some methods that will deadlock (by design) when
+      called from the [gio.cancellable.Cancellable.cancelled] callbacks:
+       - [gio.cancellable.Cancellable.connect]
+       - [gio.cancellable.Cancellable.disconnect]
+       - [gio.cancellable.Cancellable.reset]
+       - [gio.cancellable.Cancellable.makePollfd]
+       - [gio.cancellable.Cancellable.releaseFd]
+  
+      Params:
+        callback = The #GCallback to connect.
+      Returns: The id of the signal handler or 0 if cancellable has already
+                 been cancelled.
+  */
+  gulong connect(gio.types.CancellableConnectFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GCancellable* cancellable, void* data) nothrow
+    {
+      auto _dlg = cast(gio.types.CancellableConnectFunc*)data;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.CancellableConnectFunc");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    gulong _retval;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    _retval = g_cancellable_connect(cast(GCancellable*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    return _retval;
+  }
+
+  /**
       Disconnects a handler from a cancellable instance similar to
       [gobject.global.signalHandlerDisconnect].  Additionally, in the event that a
       signal handler is currently running, this call will block until the

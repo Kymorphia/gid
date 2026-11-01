@@ -3,6 +3,7 @@ module gstgl.glvideo_allocation_params;
 
 public import gid.basictypes;
 import gid.gid;
+import glib.types;
 import gobject.boxed;
 import gst.allocation_params;
 import gstgl.c.functions;
@@ -138,6 +139,97 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
     GstGLVideoAllocationParams* _cretval;
     _cretval = gst_gl_video_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)valign, target, texFormat);
     this(_cretval, Yes.Take);
+  }
+
+  /** */
+  static gstgl.glvideo_allocation_params.GLVideoAllocationParams newWrappedData(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* allocParams, gstvideo.video_info.VideoInfo vInfo, uint plane, gstvideo.video_alignment.VideoAlignment* valign, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, void* wrappedData = null, glib.types.DestroyNotify notify = null) nothrow
+  {
+    extern(C) void _notifyCallback(void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
+    }
+    auto _notifyCB = notify ? &_notifyCallback : null;
+    GstGLVideoAllocationParams* _cretval;
+    auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
+    _cretval = gst_gl_video_allocation_params_new_wrapped_data(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)valign, target, texFormat, wrappedData, _notify, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      gl_handle is defined by the specific OpenGL handle being wrapped
+      For #GstGLMemory and #GstGLMemoryPBO it is an OpenGL texture id.
+      Other memory types may define it to require a different type of parameter.
+  
+      Params:
+        context = a #GstGLContext
+        allocParams = the #GstAllocationParams for tex_id
+        vInfo = the #GstVideoInfo for tex_id
+        plane = the video plane tex_id represents
+        valign = any #GstVideoAlignment applied to symem mappings of tex_id
+        target = the #GstGLTextureTarget for tex_id
+        texFormat = the #GstGLFormat for tex_id
+        glHandle = the GL handle to wrap
+        notify = a #GDestroyNotify
+      Returns: a new #GstGLVideoAllocationParams for wrapping gl_handle
+  */
+  static gstgl.glvideo_allocation_params.GLVideoAllocationParams newWrappedGlHandle(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* allocParams, gstvideo.video_info.VideoInfo vInfo, uint plane, gstvideo.video_alignment.VideoAlignment* valign, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, void* glHandle = null, glib.types.DestroyNotify notify = null) nothrow
+  {
+    extern(C) void _notifyCallback(void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
+    }
+    auto _notifyCB = notify ? &_notifyCallback : null;
+    GstGLVideoAllocationParams* _cretval;
+    auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
+    _cretval = gst_gl_video_allocation_params_new_wrapped_gl_handle(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)valign, target, texFormat, glHandle, _notify, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /** */
+  static gstgl.glvideo_allocation_params.GLVideoAllocationParams newWrappedTexture(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams* allocParams, gstvideo.video_info.VideoInfo vInfo, uint plane, gstvideo.video_alignment.VideoAlignment* valign, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, uint texId, glib.types.DestroyNotify notify = null) nothrow
+  {
+    extern(C) void _notifyCallback(void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
+    }
+    auto _notifyCB = notify ? &_notifyCallback : null;
+    GstGLVideoAllocationParams* _cretval;
+    auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
+    _cretval = gst_gl_video_allocation_params_new_wrapped_texture(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)allocParams, vInfo ? cast(const(GstVideoInfo)*)vInfo._cPtr(No.Dup) : null, plane, cast(const(GstVideoAlignment)*)valign, target, texFormat, texId, _notify, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
   }
 
   /**

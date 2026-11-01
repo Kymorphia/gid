@@ -10,6 +10,7 @@ import gstgl.c.functions;
 import gstgl.c.types;
 import gstgl.glbase_memory;
 import gstgl.glcontext;
+import gstgl.glmemory;
 import gstgl.types;
 
 /**
@@ -118,6 +119,48 @@ class GLFramebuffer : gst.object.ObjectWrap
   void bind() nothrow
   {
     gst_gl_framebuffer_bind(cast(GstGLFramebuffer*)this._cPtr);
+  }
+
+  /**
+      Perform the steps necessary to have the output of a glDraw* command in
+      func update the contents of mem.
+      
+      Note: this function does not map mem for writing with OpenGL and that must
+      be done manually by the caller using any of the mapping functions such as
+      [gst.memory.Memory.map] with the map flags [gst.types.MapFlags.Write] | [gstgl.types.MAP_GL].
+      
+      Must be called with the same OpenGL context current that fb was created
+      with.
+  
+      Params:
+        mem = the #GstGLMemory to draw to
+        func = the function to run
+      Returns: the result of executing func
+  */
+  bool drawToTexture(gstgl.glmemory.GLMemory mem, gstgl.types.GLFramebufferFunc func) nothrow
+  {
+    extern(C) gboolean _funcCallback(void* stuff) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gstgl.types.GLFramebufferFunc*)stuff;
+
+      try
+      {
+        _dretval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLFramebufferFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    bool _retval;
+    auto _func = func ? cast(void*)&(func) : null;
+    _retval = cast(bool)gst_gl_framebuffer_draw_to_texture(cast(GstGLFramebuffer*)this._cPtr, mem ? cast(GstGLMemory*)mem._cPtr(No.Dup) : null, _funcCB, _func);
+    return _retval;
   }
 
   /**

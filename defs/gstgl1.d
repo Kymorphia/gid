@@ -52,3 +52,20 @@
 
 //# Disable: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
 //!set record[GLBaseMemory].field[lock][ignore] 1
+
+//# Closure parameter is named 'stuff' and not detected automatically
+//!set callback[GLFramebufferFunc].parameters.parameter[stuff][closure] 0
+
+//# Wrapped memory release callbacks have no user_data, mark the GDestroyNotify data parameter as its closure
+//!set record[GLRenderbufferAllocationParams].constructor[new_wrapped].parameters.parameter[notify][closure] 6
+//!set record[GLVideoAllocationParams].constructor[new_wrapped_data].parameters.parameter[notify][closure] 8
+//!set record[GLVideoAllocationParams].constructor[new_wrapped_gl_handle].parameters.parameter[notify][closure] 8
+//!set record[GLVideoAllocationParams].constructor[new_wrapped_texture].parameters.parameter[notify][closure] 8
+
+//# Ignore: GLDisplay window lookup using a GCompareFunc with positional data (find_window is deprecated), rarely useful outside of GL elements
+//!set class[GLDisplay].method[find_window][ignore] 1
+//!set class[GLDisplay].method[retrieve_window][ignore] 1
+
+//# Ignore: Low-level memory initializers for allocator implementations, not useful from D
+//!set record[GLBaseMemory].method[init][ignore] 1
+//!set record[GLMemory].method[init][ignore] 1

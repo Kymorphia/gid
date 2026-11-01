@@ -136,3 +136,6 @@
 
 //# Disable: Uses ignored GValue fundamental types (Fraction, ValueArray, ValueList)
 //!set class[ValueUniqueList][ignore] 1
+
+//# Ignore: Iterator.find_custom uses a GCompareFunc with positional data, use Iterator.foreach or D iteration instead
+//!set record[Iterator].method[find_custom][ignore] 1

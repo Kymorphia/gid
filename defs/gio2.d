@@ -113,6 +113,13 @@
 //!set class[TlsPassword].method[set_value_full][ignore] 1
 //!set class[UnixSocketAddress].property[path-as-array][ignore] 1
 
+//# Ignore: Generic gpointer result with destroy notify, use Task.returnValue or the typed return methods instead
+//!set class[Task].method[return_pointer][ignore] 1
+
+//# Cancellable.connect takes a generic GCallback, add a callback type with the 'cancelled' signal signature
+//!add repository.namespace '<callback name="CancellableConnectFunc" c:type="GCancellableConnectFunc"><return-value transfer-ownership="none"><type name="none" c:type="void"/></return-value><parameters><parameter name="cancellable" transfer-ownership="none"><type name="Cancellable" c:type="GCancellable*"/></parameter><parameter name="data" transfer-ownership="none" nullable="1" allow-none="1" closure="1"><type name="gpointer" c:type="gpointer"/></parameter></parameters></callback>'
+//!set class[Cancellable].method[connect].parameters.parameter[callback].type '<type name="CancellableConnectFunc" c:type="GCancellableConnectFunc"/>'
+
 //!class ListModel
 
   /**

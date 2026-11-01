@@ -15,21 +15,21 @@ gmime3                     |   69    0    0   100 |  558    0    0   100 |    0 
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  265    0    0   100 |    3    0    0   100 |  137    0    0   100 |
 gdk3                       |   57    0    0   100 |  542    0    6  98.9 |   39    0    0   100 |  264    0    3  98.9 |
-gdk4                       |   66    0    0   100 |  535    0    7  98.7 |   35    0    0   100 |   14    0    0   100 |
+gdk4                       |   66    0    0   100 |  538    0    4  99.3 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  171    0    0   100 | 1668    0    7  99.6 |   79    0    0   100 |   63    0    5  92.6 |
+gio2                       |  171    0    0   100 | 1669    0    5  99.7 |   79    0    0   100 |   63    0    5  92.6 |
 giounix2                   |   11    0    0   100 |  100    0    1  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94    0    0   100 | 1530    0    6  99.6 |   23    0    0   100 |  131    0    0   100 |
+gst1                       |   94    0    0   100 | 1530    0    5  99.7 |   23    0    0   100 |  131    0    0   100 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  216    0    5  97.7 |    0    0    0   100 |   59    0    4  93.7 |
-gstbase1                   |   23    0    0   100 |  303    0   13  95.9 |    2    0    0   100 |   30    0    1  96.8 |
+gstbase1                   |   23    0    0   100 |  303    0   12  96.2 |    2    0    0   100 |   30    0    1  96.8 |
 gstcheck1                  |    8    0    0   100 |  109    0    2  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   17    0    0   100 |    3    0    0   100 |    2    0    0   100 |
-gstgl1                     |   38    0    0   100 |  282    0   18  94.0 |    5    0    0   100 |   54    0    0   100 |
-gstglegl1                  |    7    0    0   100 |   16    0    6  72.7 |    0    0    0   100 |    0    0    0   100 |
+gstgl1                     |   38    0    0   100 |  287    0    9  97.0 |    5    0    0   100 |   54    0    0   100 |
+gstglegl1                  |    7    0    0   100 |   16    1    5  76.2 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstnet1                    |    9    0    0   100 |   25    0    0   100 |    0    0    0   100 |    6    0    0   100 |
 gstpbutils1                |   16    0    0   100 |  182    0    2  98.9 |    5    0    0   100 |    0    0    0   100 |
@@ -39,11 +39,11 @@ gstsdp1                    |   23    0    0   100 |  169    0    2  98.8 |    0 
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   60    0    0   100 |  386    0    6  98.5 |    2    0    0   100 |  182    0    7  96.3 |
 gtk3                       |  345    0    0   100 | 3771    1   13  99.7 |  448    0    0   100 |  155    0    0   100 |
-gtk4                       |  326    0    0   100 | 3667    0    2  99.9 |  347    0    0   100 |   37    0    0   100 |
+gtk4                       |  326    0    0   100 | 3667    0    1 100.0 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32    0    0   100 |    0    0    0   100 |
 harfbuzz0                  |   35    0    0   100 |  457    0   16  96.6 |    0    0    0   100 |   72    0    1  98.6 |
-javascriptcore6            |   10    0    0   100 |  104    0    9  92.0 |    1    0    0   100 |    5    0    0   100 |
+javascriptcore6            |   10    0    0   100 |  104    0    0   100 |    1    0    0   100 |    5    0    0   100 |
 json1                      |   12    0    0   100 |  203    0    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  310    0    1  99.7 |   17    0    0   100 |    0    0    0   100 |
 pango1                     |   43    0    0   100 |  405    0    5  98.8 |    0    0    0   100 |   92    0    1  98.9 |
@@ -78,17 +78,12 @@ gdk.drag_context.DragContext.listTargets
 gdk.global.dragBegin
 gdk.global.dragBeginForDevice
 gdk.global.dragBeginFromPoint
-gdk.dmabuf_texture_builder.DmabufTextureBuilder.build
-gdk.gltexture.GLTexture.new_
-gdk.gltexture_builder.GLTextureBuilder.build
 gdk.texture.Texture.download
 gdk.texture_downloader.TextureDownloader.downloadInto
 gdk.global.contentRegisterDeserializer
 gdk.global.contentRegisterSerializer
-gio.cancellable.Cancellable.connect
 gio.dbus_connection.DBusConnection.registerSubtree
 gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
-gio.task.Task.returnPointer
 gio.task.Task.runInThread
 gio.task.Task.runInThreadSync
 gio.tls_client_connection.TlsClientConnection.getAcceptedCas
@@ -99,7 +94,6 @@ gsk.path.Path.getStartPoint
 gsk.path_measure.PathMeasure.getPoint
 gst.buffer.Buffer.foreachMeta
 gst.buffer_list.BufferList.foreach_
-gst.iterator.Iterator.findCustom
 gst.pad.Pad.setGetrangeFunctionFull
 gst.pad.Pad.stickyEventsForeach
 gst.type_find.TypeFind.peek
@@ -120,15 +114,8 @@ gstbase.byte_reader.ByteReader.peekData
 gstbase.byte_writer.ByteWriter.freeAndGetBuffer
 gstbase.byte_writer.ByteWriter.freeAndGetData
 gstbase.byte_writer.ByteWriter.resetAndGetData
-gstbase.collect_pads.CollectPads.addPad
 gstcheck.harness.Harness.addSinkHarness
 gstcheck.harness.Harness.addSrcHarness
-gstgl.glbase_memory.GLBaseMemory.init_
-gstgl.gldisplay.GLDisplay.findWindow
-gstgl.gldisplay.GLDisplay.retrieveWindow
-gstgl.glframebuffer.GLFramebuffer.drawToTexture
-gstgl.glmemory.GLMemory.init_
-gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams.newWrapped
 gstgl.glshader.GLShader.setUniformMatrix2fv
 gstgl.glshader.GLShader.setUniformMatrix2x3fv
 gstgl.glshader.GLShader.setUniformMatrix2x4fv
@@ -138,10 +125,6 @@ gstgl.glshader.GLShader.setUniformMatrix3x4fv
 gstgl.glshader.GLShader.setUniformMatrix4fv
 gstgl.glshader.GLShader.setUniformMatrix4x2fv
 gstgl.glshader.GLShader.setUniformMatrix4x3fv
-gstgl.glvideo_allocation_params.GLVideoAllocationParams.newWrappedData
-gstgl.glvideo_allocation_params.GLVideoAllocationParams.newWrappedGlHandle
-gstgl.glvideo_allocation_params.GLVideoAllocationParams.newWrappedTexture
-gstglegl.eglimage.EGLImage.newWrapped
 gstglegl.eglimage.EGLImage.exportDmabuf
 gstglegl.eglimage.EGLImage.fromDmabufDirect
 gstglegl.eglimage.EGLImage.fromDmabufDirectTarget
@@ -171,7 +154,6 @@ gtk.global.targetsIncludeImage
 gtk.global.targetsIncludeRichText
 gtk.global.targetsIncludeText
 gtk.global.targetsIncludeUri
-gtk.custom_layout.CustomLayout.new_
 gtk.list_store.ListStore.reorder
 harfbuzz.global.faceSetGetTableTagsFunc
 harfbuzz.global.fontFuncsSetGlyphHAdvancesFunc
@@ -189,15 +171,6 @@ harfbuzz.global.fontGetNominalGlyphs
 harfbuzz.global.otShapePlanGetFeatureTags
 harfbuzz.global.tagToString
 harfbuzz.global.unicodeFuncsSetDecomposeCompatibilityFunc
-javascriptcore.class_.Class.addConstructorVariadic
-javascriptcore.class_.Class.addConstructorv
-javascriptcore.class_.Class.addMethodVariadic
-javascriptcore.class_.Class.addMethodv
-javascriptcore.class_.Class.addProperty
-javascriptcore.context.Context.registerClass
-javascriptcore.value.Value.newFunctionVariadic
-javascriptcore.value.Value.newFunctionv
-javascriptcore.value.Value.objectDefinePropertyAccessor
 panel.settings.Settings.bindWithMapping
 pango.glyph_item.GlyphItem.getLogicalWidths
 pango.glyph_item.GlyphItem.letterSpace

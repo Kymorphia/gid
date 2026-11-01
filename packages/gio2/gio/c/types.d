@@ -13652,3 +13652,5 @@ alias extern(C) void function(GTask* task, GObject* sourceObject, void* taskData
 
 alias extern(C) GFile* function(GVfs* vfs, const(char)* identifier, void* userData) GVfsFileLookupFunc;
 
+alias extern(C) void function(GCancellable* cancellable, void* data) GCancellableConnectFunc;
+

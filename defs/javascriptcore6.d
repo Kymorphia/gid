@@ -15,3 +15,14 @@
 
 //# Disable: Internal/implementation-only API, not useful from D
 //!set record[ClassClass].field[parent_class][ignore] 1
+
+//# Ignore: Raw GCallback based APIs, covered by the D template methods (Class.addConstructor, addMethod, addProperty, Context.registerClass, Value.newFunction)
+//!set class[Class].method[add_constructor_variadic][ignore] 1
+//!set class[Class].method[add_constructorv][ignore] 1
+//!set class[Class].method[add_method_variadic][ignore] 1
+//!set class[Class].method[add_methodv][ignore] 1
+//!set class[Class].method[add_property][ignore] 1
+//!set class[Context].method[register_class][ignore] 1
+//!set class[Value].constructor[new_function_variadic][ignore] 1
+//!set class[Value].constructor[new_functionv][ignore] 1
+//!set class[Value].method[object_define_property_accessor][ignore] 1

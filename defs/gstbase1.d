@@ -28,3 +28,6 @@
 //!set record[BitReader].field[data][writable] 0
 //!set record[ByteReader].field[data][writable] 0
 //!set record[ByteWriter].field[parent][writable] 0
+
+//# Ignore: CollectPads is deprecated in favor of Aggregator and add_pad requires a raw structure size and destroy notify
+//!set class[CollectPads].method[add_pad][ignore] 1

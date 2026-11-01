@@ -14,3 +14,6 @@
 
 //# Disable EGLImage.fromTexture because the attribs parameter has a non-zero terminator (EGL_NONE), FIXME
 //!set record[EGLImage].function[from_texture][unsupported] 1
+
+//# Disable: Destroy notify is called during EGLImage finalization, wrapping the image would take a reference to a finalizing object (FIXME)
+//!set record[EGLImage].constructor[new_wrapped][disable] 1

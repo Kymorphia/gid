@@ -72,6 +72,9 @@
 //!set record[TreeIter].field[user_data2][ignore] 1
 //!set record[TreeIter].field[user_data3][ignore] 1
 
+//# Ignore: CustomLayout callbacks have no user_data, subclass LayoutManager in D instead
+//!set class[CustomLayout].constructor[new][ignore] 1
+
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][ignore] 1
 //!set class[CustomSorter].method[set_sort_func][ignore] 1
