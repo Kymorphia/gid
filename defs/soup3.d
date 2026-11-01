@@ -25,3 +25,6 @@
 //!set class[AuthDomain].property[generic-auth-callback][ignore] 1
 //!set class[AuthDomainBasic].property[auth-callback][ignore] 1
 //!set class[AuthDomainDigest].property[auth-callback][ignore] 1
+
+//# Params hash table is string to string, not gpointer to gpointer
+//!set class[WebsocketExtension].method[configure].parameters.parameter[params].type '<type name="GLib.HashTable" c:type="GHashTable*"><type name="utf8" c:type="gchar*"/><type name="utf8" c:type="gchar*"/></type>'

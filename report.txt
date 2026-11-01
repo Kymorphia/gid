@@ -50,8 +50,8 @@ pango1                     |   43    0    0   100 |  405    0    5  98.8 |    0 
 pangocairo1                |    4    0    0   100 |   26    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 rsvg2                      |    7    0    0   100 |   48    0    0   100 |    0    0    0   100 |   12    0    0   100 |
-secret1                    |   11    0    0   100 |  137    0    3  97.9 |    0    0    0   100 |    5    0    0   100 |
-soup3                      |   38    0    0   100 |  376    0    1  99.7 |   42    0    0   100 |    4    0    0   100 |
+secret1                    |   11    0    0   100 |  140    0    0   100 |    0    0    0   100 |    5    0    0   100 |
+soup3                      |   38    0    0   100 |  377    0    0   100 |   42    0    0   100 |    4    0    0   100 |
 vte2                       |    8    0    0   100 |  217    0    3  98.6 |   34    0    0   100 |    0    0    0   100 |
 vte3                       |    8    0    0   100 |  211    0    0   100 |   30    0    0   100 |    0    0    0   100 |
 webkit6                    |   76    0    0   100 |  691    0    0   100 |   72    0    0   100 |    0    0    0   100 |
@@ -204,10 +204,6 @@ pango.glyph_item.GlyphItem.letterSpace
 pango.glyph_string.GlyphString.getLogicalWidths
 pango.tab_array.TabArray.getTabs
 pango.global.log2visGetEmbeddingLevels
-secret.schema.Schema.newv
-secret.service.Service.createItemDbusPathSync
-secret.global.attributesValidate
-soup.websocket_extension.WebsocketExtension.configure
 vte.terminal.Terminal.getText
 vte.terminal.Terminal.getTextIncludeTrailingSpaces
 vte.terminal.Terminal.getTextRange

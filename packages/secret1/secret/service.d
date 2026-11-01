@@ -403,6 +403,52 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
+      Create a new item in a secret service collection and return its D-Bus
+      object path.
+      
+      It is often easier to use `funcpassword_store_sync` or [secret.item.Item.createSync]
+      rather than using this function. Using this method requires that you setup
+      a correct hash table of D-Bus properties for the new collection.
+      
+      If the flags contains [secret.types.ItemCreateFlags.Replace], then the secret
+      service will search for an item matching the attributes, and update that item
+      instead of creating a new one.
+      
+      properties is a set of properties for the new collection. The keys in the
+      hash table should be interface.property strings like
+      `org.freedesktop.Secret.Item.Label`. The values
+      in the hash table should be [glib.variant.Variant] values of the properties.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads. The secret service may prompt the user. [secret.service.Service.prompt]
+      will be used to handle any prompts that are required.
+  
+      Params:
+        collectionPath = the D-Bus path of the collection in which to create item
+        properties = hash table of D-Bus properties
+            for the new collection
+        value = the secret value to store in the item
+        flags = flags for the creation of the new item
+        cancellable = optional cancellation object
+      Returns: a new string containing the D-Bus object path
+          of the item
+      Throws: [ErrorWrap]
+  */
+  string createItemDbusPathSync(string collectionPath, glib.variant.Variant[string] properties, secret.value.Value value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
+  {
+    char* _cretval;
+    const(char)* _collectionPath = collectionPath.toCString!(No.Malloc, No.Nullable);
+    auto _properties = gHashTableFromD!(string, glib.variant.Variant)(properties);
+    scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_properties);
+    GError *_err;
+    _cretval = secret_service_create_item_dbus_path_sync(cast(SecretService*)this._cPtr, _collectionPath, _properties, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
       Decode a [secret.value.Value] into [glib.variant.Variant] received with the Secret Service
       DBus API.
       

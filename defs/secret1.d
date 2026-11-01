@@ -22,3 +22,6 @@
 //# Disable: Redundant with another API (e.g. GBytes variant, simpler setter or accessor methods)
 //!set interface[Retrievable].property[attributes][ignore] 1
 //!set record[Value].constructor[new_full][ignore] 1
+
+//# Attributes hash table is string to string, not gpointer to gpointer
+//!set function[attributes_validate].parameters.parameter[attributes].type '<type name="GLib.HashTable" c:type="GHashTable*"><type name="utf8" c:type="gchar*"/><type name="utf8" c:type="gchar*"/></type>'

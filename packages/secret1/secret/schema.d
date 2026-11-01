@@ -137,4 +137,45 @@ class Schema : gobject.boxed.Boxed
       _retval[i] = new secret.schema_attribute.SchemaAttribute(cast(void*)&(cast(SecretSchema*)this._cPtr).attributes[i], No.Take);
     return _retval;
   }
+
+  /**
+      Using this function is not normally necessary from C code. This is useful
+      for constructing #SecretSchema structures in bindings.
+      
+      A schema represents a set of attributes that are stored with an item. These
+      schemas are used for interoperability between various services storing the
+      same types of items.
+      
+      Each schema has an name like `org.gnome.keyring.NetworkPassword`, and
+      defines a set of attributes names, and types (string, integer, boolean) for
+      those attributes.
+      
+      Each key in the attributes table should be a attribute name strings, and
+      the values in the table should be integers from the [secret.types.SchemaAttributeType]
+      enumeration, representing the attribute type for each attribute name.
+      
+      Normally when looking up passwords only those with matching schema names are
+      returned. If the schema flags contain the [secret.types.SchemaFlags.DontMatchName] flag,
+      then lookups will not check that the schema name matches that on the item, only
+      the schema's attributes are matched. This is useful when you are looking up items
+      that are not stored by the libsecret library. Other libraries such as libgnome-keyring
+      don't store the schema name.
+  
+      Params:
+        name = the dotted name of the schema
+        flags = the flags for the schema
+        attributeNamesAndTypes = the attribute names and types of those attributes
+      Returns: the new schema, which should be unreferenced with
+          [secret.schema.Schema.unref] when done
+  */
+  static secret.schema.Schema new_(string name, secret.types.SchemaFlags flags, secret.types.SchemaAttributeType[string] attributeNamesAndTypes) nothrow
+  {
+    SecretSchema* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    auto _attributeNamesAndTypes = gHashTableFromD!(string, secret.types.SchemaAttributeType)(attributeNamesAndTypes);
+    scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributeNamesAndTypes);
+    _cretval = secret_schema_newv(_name, flags, _attributeNamesAndTypes);
+    auto _retval = _cretval ? new secret.schema.Schema(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
 }

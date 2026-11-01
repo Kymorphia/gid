@@ -54,6 +54,27 @@ class WebsocketExtension : gobject.object.ObjectWrap
   }
 
   /**
+      Configures extension with the given params.
+  
+      Params:
+        connectionType = either [soup.types.WebsocketConnectionType.Client] or [soup.types.WebsocketConnectionType.Server]
+        params = the parameters
+      Returns: true if extension could be configured with the given parameters, or false otherwise
+      Throws: [ErrorWrap]
+  */
+  bool configure(soup.types.WebsocketConnectionType connectionType, string[string] params = null)
+  {
+    bool _retval;
+    auto _params = gHashTableFromD!(string, string)(params);
+    scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_params);
+    GError *_err;
+    _retval = cast(bool)soup_websocket_extension_configure(cast(SoupWebsocketExtension*)this._cPtr, connectionType, _params, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
       Get the parameters strings to be included in the request header.
       
       If the extension doesn't include any parameter in the request, this function

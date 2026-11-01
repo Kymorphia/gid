@@ -428,8 +428,7 @@ if (containerTypeIsSupported!T)
 * Returns: The D associative array which is a copy of the data in hash
 */
 V[K] gHashTableToD(K, V, GidOwnership ownership = GidOwnership.None)(GHashTable* hash) nothrow
-if ((is(K == string) || is(K == const(void)*))
-  && (is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)))
+if (isHashTableKeyType!K && isHashTableValueType!V)
 {
   GHashTableIter iter;
   void* key;
@@ -440,7 +439,12 @@ if ((is(K == string) || is(K == const(void)*))
     return map;
 
   for (g_hash_table_iter_init(&iter, hash); g_hash_table_iter_next(&iter, &key, &value); )
-    map[cToD!K(key)] = cToD!V(value);
+  {
+    static if (isHashTablePtrIntType!V)
+      map[cToD!K(key)] = cast(V)cast(ptrdiff_t)value; // Integer/enum values are stored in the pointer (GINT_TO_POINTER)
+    else
+      map[cToD!K(key)] = cToD!V(value);
+  }
 
   static if (ownership == GidOwnership.Container)
   {
@@ -629,8 +633,7 @@ if (containerTypeIsSupported!T)
 * Returns: A newly allocated GHashTable.
 */
 GHashTable* gHashTableFromD(K, V)(V[K] map) nothrow
-if ((is(K == string) || is(K == const(void)*))
-  && (is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)))
+if (isHashTableKeyType!K && isHashTableValueType!V)
 {
   GDestroyNotify valDestroyFunc;
 
@@ -638,6 +641,15 @@ if ((is(K == string) || is(K == const(void)*))
     valDestroyFunc = cast(GDestroyNotify)g_object_unref;
   else static if (is(V : string))
   valDestroyFunc = g_free;
+  else static if (isTypeCopyableStruct!V)
+  {
+    static extern(C) void valFree(void* data) nothrow
+    {
+      cValueFree!V(data);
+    }
+
+    valDestroyFunc = &valFree;
+  }
 
   GHashTable* hash;
 
@@ -652,11 +664,50 @@ if ((is(K == string) || is(K == const(void)*))
     void* valptr;
 
     dToC!K(k, &keyptr);
-    dToC!V(map[k], &valptr);
+
+    static if (isHashTablePtrIntType!V)
+      valptr = cast(void*)cast(ptrdiff_t)map[k]; // Store integer/enum values in the pointer (GINT_TO_POINTER)
+    else
+      dToC!V(map[k], &valptr);
+
     g_hash_table_insert(hash, keyptr, valptr);
   }
 
   return hash;
+}
+
+/**
+* Check if a type is supported as a GHashTable key type.
+* Params:
+*   K = The D key type
+* Returns: true if the type can be used as a hash table key
+*/
+bool isHashTableKeyType(K)() nothrow
+{
+  return is(K == string) || is(K == const(void)*);
+}
+
+/**
+* Check if a type is an integer or enum type which is stored directly in a GHashTable value pointer (GINT_TO_POINTER).
+* Params:
+*   V = The D value type
+* Returns: true if the value type is stored in the pointer
+*/
+bool isHashTablePtrIntType(V)() nothrow
+{
+  return (is(V == enum) || __traits(isIntegral, V)) && !is(V == bool) && V.sizeof <= (void*).sizeof;
+}
+
+/**
+* Check if a type is supported as a GHashTable value type.
+* Params:
+*   V = The D value type
+* Returns: true if the type can be used as a hash table value
+*/
+bool isHashTableValueType(V)() nothrow
+{
+  return is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)
+  || (isTypeCopyableStruct!V && !isTypeWrap!V) || isHashTablePtrIntType!V;
 }
 
 /**

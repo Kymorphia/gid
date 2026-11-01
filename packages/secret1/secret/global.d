@@ -16,6 +16,30 @@ import secret.value;
 
 
 /**
+    Check if attributes are valid according to the provided schema.
+    
+    Verifies schema name if available, attribute names and parsing
+    of attribute values.
+
+    Params:
+      schema = the schema for the attributes
+      attributes = the attributes to be validated
+    Returns: whether or not the given attributes table is valid
+    Throws: [ErrorWrap]
+*/
+bool attributesValidate(secret.schema.Schema schema, string[string] attributes)
+{
+  bool _retval;
+  auto _attributes = gHashTableFromD!(string, string)(attributes);
+  scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
+  GError *_err;
+  _retval = cast(bool)secret_attributes_validate(schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, &_err);
+  if (_err)
+    throw new ErrorWrap(_err, Yes.Take);
+  return _retval;
+}
+
+/**
     Get a secret storage schema of the given type.
     
     C code may access the schemas (such as `SECRET_SCHEMA_NOTE`) directly, but
