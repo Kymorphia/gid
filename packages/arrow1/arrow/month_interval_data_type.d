@@ -16,7 +16,7 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

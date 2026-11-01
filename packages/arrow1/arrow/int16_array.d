@@ -18,7 +18,7 @@ class Int16Array : arrow.numeric_array.NumericArray
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

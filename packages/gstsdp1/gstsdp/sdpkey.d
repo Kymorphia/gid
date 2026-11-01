@@ -11,10 +11,8 @@ import gstsdp.types;
     The contents of the SDP "k=" field which is used to convey encryption
     keys.
 */
-class SDPKey
+class SDPKey : StructWrap!(GstSDPKey)
 {
-  GstSDPKey _cInstance;
-
   /**
       Create a `sdpkey.SDPKey` wrap type.
       Params:
@@ -30,16 +28,7 @@ class SDPKey
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPKey*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

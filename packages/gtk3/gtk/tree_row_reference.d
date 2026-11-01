@@ -16,32 +16,13 @@ import gtk.types;
     same row (a #GtkTreePath refers to a position, not a fixed row). Create a
     new GtkTreeRowReference with [gtk.tree_row_reference.TreeRowReference.new_].
 */
-class TreeRowReference : gobject.boxed.Boxed
+class TreeRowReference : gobject.boxed.BoxedWrap!(gtk_tree_row_reference_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gtk_tree_row_reference_get_type != &gidSymbolNotFound ? gtk_tree_row_reference_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

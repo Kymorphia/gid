@@ -38,9 +38,8 @@ import gst.types;
     A weak reference can be added and remove with [gst.mini_object.MiniObject.weakRef]
     and [gst.mini_object.MiniObject.weakUnref] respectively.
 */
-class MiniObject : gobject.boxed.Boxed
+class MiniObject : gobject.boxed.BoxedWrap!(gst_mini_object_get_type)
 {
-
   /**
       Create a `mini_object.MiniObject` boxed type.
       Params:
@@ -67,26 +66,7 @@ class MiniObject : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_mini_object_get_type != &gidSymbolNotFound ? gst_mini_object_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

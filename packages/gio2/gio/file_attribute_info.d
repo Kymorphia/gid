@@ -10,10 +10,8 @@ import gio.types;
 /**
     Information about a specific attribute.
 */
-class FileAttributeInfo
+class FileAttributeInfo : StructWrap!(GFileAttributeInfo)
 {
-  GFileAttributeInfo _cInstance;
-
   /**
       Create a `file_attribute_info.FileAttributeInfo` wrap type.
       Params:
@@ -31,16 +29,7 @@ class FileAttributeInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GFileAttributeInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -11,7 +11,7 @@ import glib.error;
 import gobject.gid_builder;
 
 /** */
-interface WritableFile
+interface WritableFile : GidWrap
 {
 
   /** */

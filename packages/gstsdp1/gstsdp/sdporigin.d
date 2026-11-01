@@ -12,10 +12,8 @@ import gstsdp.types;
     (their username and the address of the user's host) plus a session id and
     session version number.
 */
-class SDPOrigin
+class SDPOrigin : StructWrap!(GstSDPOrigin)
 {
-  GstSDPOrigin _cInstance;
-
   /**
       Create a `sdporigin.SDPOrigin` wrap type.
       Params:
@@ -44,16 +42,7 @@ class SDPOrigin
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPOrigin*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

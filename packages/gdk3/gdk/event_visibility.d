@@ -16,10 +16,8 @@ import gid.gid;
           reliably, so this event can not be guaranteed to provide useful
           information.
 */
-class EventVisibility
+class EventVisibility : StructWrap!(GdkEventVisibility)
 {
-  GdkEventVisibility _cInstance;
-
   /**
       Create a `event_visibility.EventVisibility` wrap type.
       Params:
@@ -40,16 +38,7 @@ class EventVisibility
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventVisibility*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

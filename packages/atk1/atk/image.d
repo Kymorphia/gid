@@ -27,7 +27,7 @@ import gobject.gid_builder;
     presentation of the most significant information present in the
     image.
 */
-interface Image
+interface Image : GidWrap
 {
 
   /** */

@@ -211,7 +211,7 @@ import gtk.types;
       however, signals must be emitted at all times (however the root level
       is always referenced when any view is attached).
 */
-interface TreeModel
+interface TreeModel : GidWrap
 {
 
   /** */

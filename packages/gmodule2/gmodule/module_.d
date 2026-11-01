@@ -18,23 +18,13 @@ import gmodule.types;
     global constructors (for example, those using GCC’s
     `__attribute__((constructor))` attribute).
 */
-class Module
+class Module : OpaqueWrap!(ModuleC*, void, void)
 {
-  ModuleC* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(ModuleC*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

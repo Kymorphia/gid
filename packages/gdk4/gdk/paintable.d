@@ -58,7 +58,7 @@ import gobject.object;
     [gdk.paintable.Paintable.invalidateSize],
     [gdk.paintable.Paintable.newEmpty].
 */
-interface Paintable
+interface Paintable : GidWrap
 {
 
   /** */

@@ -14,7 +14,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /** */
-interface Readable
+interface Readable : GidWrap
 {
 
   /** */

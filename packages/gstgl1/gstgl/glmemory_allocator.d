@@ -20,7 +20,7 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -34,23 +34,13 @@ import gst.types;
     descriptor, and [gst.poll.Poll.fdCanWrite] to see if it is possible to
     write to it.
 */
-class Poll
+class Poll : OpaqueWrap!(GstPoll*, void, void)
 {
-  GstPoll* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstPoll*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

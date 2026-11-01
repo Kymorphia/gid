@@ -47,7 +47,7 @@ import gtk.types;
     }
     ```
 */
-interface Editable
+interface Editable : GidWrap
 {
 
   /** */

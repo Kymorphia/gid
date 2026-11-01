@@ -20,7 +20,7 @@ import gstsdp.sdpmessage;
     This interface is implemented e.g. by the Windows Media Streaming RTSP
      exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
 */
-interface RTSPExtension
+interface RTSPExtension : GidWrap
 {
 
   /** */

@@ -36,7 +36,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

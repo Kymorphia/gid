@@ -141,7 +141,7 @@ import gtk.widget;
     and include your widgets in it.  Then, set the container as
     the whole extra widget.
 */
-interface FileChooser
+interface FileChooser : GidWrap
 {
 
   /** */

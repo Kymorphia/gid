@@ -10,29 +10,13 @@ import glib.types;
 /**
     An opaque structure representing a test suite.
 */
-class TestSuite
+class TestSuite : OpaqueWrap!(GTestSuite*, g_test_suite_free, void)
 {
-  GTestSuite* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GTestSuite*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_test_suite_free)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

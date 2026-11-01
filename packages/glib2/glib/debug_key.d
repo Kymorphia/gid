@@ -11,10 +11,8 @@ import glib.types;
     Associates a string with a bit flag.
     Used in [glib.global.parseDebugString].
 */
-class DebugKey
+class DebugKey : StructWrap!(GDebugKey)
 {
-  GDebugKey _cInstance;
-
   /**
       Create a `debug_key.DebugKey` wrap type.
       Params:
@@ -30,16 +28,7 @@ class DebugKey
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GDebugKey*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

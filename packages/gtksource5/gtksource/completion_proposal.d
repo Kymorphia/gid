@@ -20,7 +20,7 @@ import gtksource.types;
     #GtkSourceCompletionProvider can use `func@GObject.IMPLEMENT_INTERFACE` to
     implement this with null for the interface init function.
 */
-interface CompletionProposal
+interface CompletionProposal : GidWrap
 {
 
   /** */

@@ -21,7 +21,7 @@ class ProxyPad : gst.pad.Pad
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

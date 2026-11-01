@@ -12,10 +12,8 @@ import gid.gid;
 /**
     Generated when the pointer moves.
 */
-class EventMotion
+class EventMotion : StructWrap!(GdkEventMotion)
 {
-  GdkEventMotion _cInstance;
-
   /**
       Create a `event_motion.EventMotion` wrap type.
       Params:
@@ -55,16 +53,7 @@ class EventMotion
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventMotion*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

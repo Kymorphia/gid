@@ -16,10 +16,8 @@ import gstvideo.video_time_code;
     Each frame is assumed to have its own timecode, i.e. they are not
     automatically incremented/interpolated.
 */
-class VideoTimeCodeMeta
+class VideoTimeCodeMeta : StructWrap!(GstVideoTimeCodeMeta)
 {
-  GstVideoTimeCodeMeta _cInstance;
-
   /**
       Create a `video_time_code_meta.VideoTimeCodeMeta` wrap type.
   */
@@ -30,16 +28,7 @@ class VideoTimeCodeMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoTimeCodeMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -30,32 +30,13 @@ import json.types;
     To retrieve the size of the object (that is, the number of members it has),
     use [json.object.ObjectWrap.getSize].
 */
-class ObjectWrap : gobject.boxed.Boxed
+class ObjectWrap : gobject.boxed.BoxedWrap!(json_object_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())json_object_get_type != &gidSymbolNotFound ? json_object_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

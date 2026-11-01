@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Generated during touchpad swipe gestures.
 */
-class EventTouchpadSwipe
+class EventTouchpadSwipe : StructWrap!(GdkEventTouchpadSwipe)
 {
-  GdkEventTouchpadSwipe _cInstance;
-
   /**
       Create a `event_touchpad_swipe.EventTouchpadSwipe` wrap type.
       Params:
@@ -56,16 +54,7 @@ class EventTouchpadSwipe
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventTouchpadSwipe*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

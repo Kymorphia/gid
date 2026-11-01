@@ -43,7 +43,7 @@ class GeolocationPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

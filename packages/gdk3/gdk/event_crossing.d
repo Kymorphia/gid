@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Generated when the pointer enters or leaves a window.
 */
-class EventCrossing
+class EventCrossing : StructWrap!(GdkEventCrossing)
 {
-  GdkEventCrossing _cInstance;
-
   /**
       Create a `event_crossing.EventCrossing` wrap type.
       Params:
@@ -60,16 +58,7 @@ class EventCrossing
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventCrossing*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

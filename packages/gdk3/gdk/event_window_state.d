@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Generated when the state of a toplevel window changes.
 */
-class EventWindowState
+class EventWindowState : StructWrap!(GdkEventWindowState)
 {
-  GdkEventWindowState _cInstance;
-
   /**
       Create a `event_window_state.EventWindowState` wrap type.
       Params:
@@ -37,16 +35,7 @@ class EventWindowState
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventWindowState*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

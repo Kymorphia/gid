@@ -12,23 +12,13 @@ import glib.types;
     The #GSequenceIter struct is an opaque data type representing an
     iterator pointing into a #GSequence.
 */
-class SequenceIter
+class SequenceIter : OpaqueWrap!(GSequenceIter*, void, void)
 {
-  GSequenceIter* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GSequenceIter*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

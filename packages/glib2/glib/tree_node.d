@@ -10,23 +10,13 @@ import glib.types;
 /**
     An opaque type which identifies a specific node in a #GTree.
 */
-class TreeNode
+class TreeNode : OpaqueWrap!(GTreeNode*, void, void)
 {
-  GTreeNode* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GTreeNode*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

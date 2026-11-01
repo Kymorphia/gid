@@ -12,10 +12,8 @@ import pango.types;
     The [pango.attr_string.AttrString] structure is used to represent attributes with
     a string value.
 */
-class AttrString
+class AttrString : StructWrap!(PangoAttrString)
 {
-  PangoAttrString _cInstance;
-
   /**
       Create a `attr_string.AttrString` wrap type.
       Params:
@@ -29,16 +27,7 @@ class AttrString
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrString*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

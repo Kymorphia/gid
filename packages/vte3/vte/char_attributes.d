@@ -8,10 +8,8 @@ import vte.c.types;
 import vte.types;
 
 /** */
-class CharAttributes
+class CharAttributes : StructWrap!(VteCharAttributes)
 {
-  VteCharAttributes _cInstance;
-
   /**
       Create a `char_attributes.CharAttributes` wrap type.
   */
@@ -22,15 +20,6 @@ class CharAttributes
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(VteCharAttributes*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 }

@@ -23,32 +23,13 @@ import pango.types;
     suitable for storing attributes for large amounts of text. In general, you
     should not use a single [pango.attr_list.AttrList] for more than one paragraph of text.
 */
-class AttrList : gobject.boxed.Boxed
+class AttrList : gobject.boxed.BoxedWrap!(pango_attr_list_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())pango_attr_list_get_type != &gidSymbolNotFound ? pango_attr_list_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

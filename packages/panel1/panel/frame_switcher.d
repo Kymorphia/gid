@@ -30,7 +30,7 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -23,9 +23,8 @@ import gobject.boxed;
     portions (defined in #cairo_path_data_type_t), since the data
     includes both headers and coordinates for each portion.
 */
-class Path : gobject.boxed.Boxed
+class Path : gobject.boxed.BoxedWrap!(cairo_gobject_path_get_type)
 {
-
   /**
       Create a `path.Path` boxed type.
       Params:
@@ -42,26 +41,7 @@ class Path : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())cairo_gobject_path_get_type != &gidSymbolNotFound ? cairo_gobject_path_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

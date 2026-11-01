@@ -10,10 +10,8 @@ import gstvideo.types;
 /**
     Information for a video format.
 */
-class VideoFormatInfo
+class VideoFormatInfo : StructWrap!(GstVideoFormatInfo)
 {
-  GstVideoFormatInfo _cInstance;
-
   /**
       Create a `video_format_info.VideoFormatInfo` wrap type.
       Params:
@@ -79,16 +77,7 @@ class VideoFormatInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoFormatInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

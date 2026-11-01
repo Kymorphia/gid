@@ -24,7 +24,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -12,10 +12,8 @@ import gstsdp.types;
     The Security Policy payload defines a set of policies that apply to a
     specific security protocol
 */
-class MIKEYPayloadSP
+class MIKEYPayloadSP : StructWrap!(GstMIKEYPayloadSP)
 {
-  GstMIKEYPayloadSP _cInstance;
-
   /**
       Create a `mikeypayload_sp.MIKEYPayloadSP` wrap type.
       Params:
@@ -31,16 +29,7 @@ class MIKEYPayloadSP
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMIKEYPayloadSP*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

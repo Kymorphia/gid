@@ -37,7 +37,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

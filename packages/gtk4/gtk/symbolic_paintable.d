@@ -25,7 +25,7 @@ import gtk.types;
     The system accent color has been added in GTK 4.22.
     More colors may be added in the future.
 */
-interface SymbolicPaintable
+interface SymbolicPaintable : GidWrap
 {
 
   /** */

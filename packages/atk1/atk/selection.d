@@ -26,7 +26,7 @@ import gobject.object;
     are accomplished a other ATK interfaces - #AtkSelection is limited
     to the selection/deselection of children.
 */
-interface Selection
+interface Selection : GidWrap
 {
 
   /** */

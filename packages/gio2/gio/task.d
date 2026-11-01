@@ -546,7 +546,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

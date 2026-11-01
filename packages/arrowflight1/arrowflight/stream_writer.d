@@ -17,7 +17,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

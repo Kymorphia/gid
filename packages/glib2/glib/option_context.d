@@ -14,29 +14,13 @@ import glib.types;
     are accepted by the commandline option parser. The struct has only private
     fields and should not be directly accessed.
 */
-class OptionContext
+class OptionContext : OpaqueWrap!(GOptionContext*, g_option_context_free, void)
 {
-  GOptionContext* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GOptionContext*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_option_context_free)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

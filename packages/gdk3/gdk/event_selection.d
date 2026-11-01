@@ -13,10 +13,8 @@ import gid.gid;
     Generated when a selection is requested or ownership of a selection
     is taken over by another client application.
 */
-class EventSelection
+class EventSelection : StructWrap!(GdkEventSelection)
 {
-  GdkEventSelection _cInstance;
-
   /**
       Create a `event_selection.EventSelection` wrap type.
       Params:
@@ -39,16 +37,7 @@ class EventSelection
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventSelection*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

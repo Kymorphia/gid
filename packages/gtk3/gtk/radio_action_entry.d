@@ -11,10 +11,8 @@ import gtk.types;
     #GtkRadioActionEntry structs are used with
     [gtk.action_group.ActionGroup.addRadioActions] to construct groups of radio actions.
 */
-class RadioActionEntry
+class RadioActionEntry : StructWrap!(GtkRadioActionEntry)
 {
-  GtkRadioActionEntry _cInstance;
-
   /**
       Create a `radio_action_entry.RadioActionEntry` wrap type.
       Params:
@@ -43,16 +41,7 @@ class RadioActionEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkRadioActionEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

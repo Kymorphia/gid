@@ -12,10 +12,8 @@ import gid.gid;
 /**
     Attributes to use for a newly-created window.
 */
-class WindowAttr
+class WindowAttr : StructWrap!(GdkWindowAttr)
 {
-  GdkWindowAttr _cInstance;
-
   /**
       Create a `window_attr.WindowAttr` wrap type.
       Params:
@@ -56,16 +54,7 @@ class WindowAttr
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkWindowAttr*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

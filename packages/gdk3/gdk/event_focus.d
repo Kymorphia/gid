@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Describes a change of keyboard focus.
 */
-class EventFocus
+class EventFocus : StructWrap!(GdkEventFocus)
 {
-  GdkEventFocus _cInstance;
-
   /**
       Create a `event_focus.EventFocus` wrap type.
       Params:
@@ -35,16 +33,7 @@ class EventFocus
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventFocus*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

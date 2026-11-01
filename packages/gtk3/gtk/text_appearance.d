@@ -9,10 +9,8 @@ import gtk.c.types;
 import gtk.types;
 
 /** */
-class TextAppearance
+class TextAppearance : StructWrap!(GtkTextAppearance)
 {
-  GtkTextAppearance _cInstance;
-
   /**
       Create a `text_appearance.TextAppearance` wrap type.
       Params:
@@ -47,16 +45,7 @@ class TextAppearance
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkTextAppearance*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

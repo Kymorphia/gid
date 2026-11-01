@@ -11,9 +11,8 @@ import gstrtsp.types;
 /**
     Provides helper functions to handle RTSP urls.
 */
-class RTSPUrl : gobject.boxed.Boxed
+class RTSPUrl : gobject.boxed.BoxedWrap!(gst_rtsp_url_get_type)
 {
-
   /**
       Create a `rtspurl.RTSPUrl` boxed type.
       Params:
@@ -42,26 +41,7 @@ class RTSPUrl : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_rtsp_url_get_type != &gidSymbolNotFound ? gst_rtsp_url_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

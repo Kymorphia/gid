@@ -26,7 +26,7 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

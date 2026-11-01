@@ -17,7 +17,7 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

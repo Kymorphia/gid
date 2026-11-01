@@ -271,7 +271,7 @@ import gstvideo.types;
     }
     ```
 */
-interface VideoOverlay
+interface VideoOverlay : GidWrap
 {
 
   /** */

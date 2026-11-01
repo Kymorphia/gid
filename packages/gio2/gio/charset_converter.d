@@ -24,7 +24,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

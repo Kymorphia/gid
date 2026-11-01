@@ -35,7 +35,7 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

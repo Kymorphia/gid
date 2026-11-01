@@ -19,7 +19,7 @@ class AudioAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

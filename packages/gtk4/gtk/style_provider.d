@@ -20,7 +20,7 @@ import gtk.types;
     GTK uses the [gtk.style_provider.StyleProvider] implementation for CSS in
     [gtk.css_provider.CssProvider].
 */
-interface StyleProvider
+interface StyleProvider : GidWrap
 {
 
   /** */

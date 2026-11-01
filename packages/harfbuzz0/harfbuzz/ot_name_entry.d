@@ -10,10 +10,8 @@ import harfbuzz.types;
 /**
     Structure representing a name ID in a particular language.
 */
-class OtNameEntry
+class OtNameEntry : StructWrap!(hb_ot_name_entry_t)
 {
-  hb_ot_name_entry_t _cInstance;
-
   /**
       Create a `ot_name_entry.OtNameEntry` wrap type.
       Params:
@@ -27,16 +25,7 @@ class OtNameEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(hb_ot_name_entry_t*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

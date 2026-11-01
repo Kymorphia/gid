@@ -30,7 +30,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

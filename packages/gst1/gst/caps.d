@@ -50,9 +50,8 @@ import gst.types;
     behavior when using serialization features, such as [gst.caps.Caps.toString_] or
     [gst.global.valueSerialize] and their counterparts.
 */
-class Caps : gobject.boxed.Boxed
+class Caps : gobject.boxed.BoxedWrap!(gst_caps_get_type)
 {
-
   /**
       Create a `caps.Caps` boxed type.
   */
@@ -64,26 +63,7 @@ class Caps : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_caps_get_type != &gidSymbolNotFound ? gst_caps_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

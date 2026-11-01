@@ -14,23 +14,13 @@ import glib.types;
     Deprecated: Use [glib.thread_pool.ThreadPool] or
         [gio.task.Task.runInThread]
 */
-class IOSchedulerJob
+class IOSchedulerJob : OpaqueWrap!(GIOSchedulerJob*, void, void)
 {
-  GIOSchedulerJob* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GIOSchedulerJob*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

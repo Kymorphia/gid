@@ -30,7 +30,7 @@ class XRPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

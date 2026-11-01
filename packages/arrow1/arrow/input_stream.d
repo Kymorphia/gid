@@ -26,7 +26,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

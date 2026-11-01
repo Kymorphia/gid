@@ -18,7 +18,7 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

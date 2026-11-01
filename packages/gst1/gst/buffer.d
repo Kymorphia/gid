@@ -116,32 +116,13 @@ import gst.types;
     buffer from being returned to a buffer pool until the #GstMemory is available
     for re-use. (Since: 1.6)
 */
-class Buffer : gobject.boxed.Boxed
+class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_buffer_get_type != &gidSymbolNotFound ? gst_buffer_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

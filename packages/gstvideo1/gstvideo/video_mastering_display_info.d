@@ -12,10 +12,8 @@ import gstvideo.types;
     Mastering display color volume information defined by SMPTE ST 2086
     (a.k.a static HDR metadata).
 */
-class VideoMasteringDisplayInfo
+class VideoMasteringDisplayInfo : StructWrap!(GstVideoMasteringDisplayInfo)
 {
-  GstVideoMasteringDisplayInfo _cInstance;
-
   /**
       Create a `video_mastering_display_info.VideoMasteringDisplayInfo` wrap type.
       Params:
@@ -40,16 +38,7 @@ class VideoMasteringDisplayInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoMasteringDisplayInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

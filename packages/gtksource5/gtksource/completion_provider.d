@@ -29,7 +29,7 @@ import gtksource.types;
     `vfunc@CompletionProvider.populate_async` to asynchronously populate the results
     to avoid blocking the main loop.
 */
-interface CompletionProvider
+interface CompletionProvider : GidWrap
 {
 
   /** */

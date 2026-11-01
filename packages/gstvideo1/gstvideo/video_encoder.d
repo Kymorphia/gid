@@ -86,7 +86,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

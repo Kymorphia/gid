@@ -20,7 +20,7 @@ import json.types;
     to be serialized or deserialized by `func@Json.construct_gobject` and
     `func@Json.serialize_gobject`, respectively.
 */
-interface Serializable
+interface Serializable : GidWrap
 {
 
   /** */

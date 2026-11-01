@@ -30,7 +30,7 @@ class MediaFile : gtk.media_stream.MediaStream
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -12,10 +12,8 @@ import gstaudio.types;
 /**
     Meta containing Audio Level Indication: https://tools.ietf.org/html/rfc6464
 */
-class AudioLevelMeta
+class AudioLevelMeta : StructWrap!(GstAudioLevelMeta)
 {
-  GstAudioLevelMeta _cInstance;
-
   /**
       Create a `audio_level_meta.AudioLevelMeta` wrap type.
       Params:
@@ -31,16 +29,7 @@ class AudioLevelMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioLevelMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

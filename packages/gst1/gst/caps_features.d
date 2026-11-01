@@ -30,32 +30,13 @@ import gst.types;
     are given as a string of the format `memory:GstMemoryTypeName` or
     `meta:GstMetaAPIName`.
 */
-class CapsFeatures : gobject.boxed.Boxed
+class CapsFeatures : gobject.boxed.BoxedWrap!(gst_caps_features_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_caps_features_get_type != &gidSymbolNotFound ? gst_caps_features_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

@@ -32,7 +32,7 @@ class HScale : gtk.scale.Scale
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

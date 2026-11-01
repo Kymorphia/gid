@@ -22,9 +22,8 @@ import pango.language;
     which gives an overview of all the objects and data
     types related to the text widget and how they work together.
 */
-class TextIter : gobject.boxed.Boxed
+class TextIter : gobject.boxed.BoxedWrap!(gtk_text_iter_get_type)
 {
-
   /**
       Create a `text_iter.TextIter` boxed type.
   */
@@ -36,26 +35,7 @@ class TextIter : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gtk_text_iter_get_type != &gidSymbolNotFound ? gtk_text_iter_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

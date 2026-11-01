@@ -23,29 +23,13 @@ import glib.types;
     @msg_handler field. The type of the message handler function
     is declared by #GScannerMsgFunc.
 */
-class Scanner
+class Scanner : OpaqueWrap!(GScanner*, g_scanner_destroy, void)
 {
-  GScanner* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GScanner*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_scanner_destroy)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

@@ -20,7 +20,7 @@ class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

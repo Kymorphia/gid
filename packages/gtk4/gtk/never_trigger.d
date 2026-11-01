@@ -19,7 +19,7 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

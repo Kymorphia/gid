@@ -38,7 +38,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

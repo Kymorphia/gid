@@ -44,7 +44,7 @@ import gobject.object;
     understood by [gio.icon.Icon.deserialize], yielding one of the built-in
     icon types.
 */
-interface Icon
+interface Icon : GidWrap
 {
 
   /** */

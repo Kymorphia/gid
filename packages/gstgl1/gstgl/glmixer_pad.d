@@ -16,7 +16,7 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

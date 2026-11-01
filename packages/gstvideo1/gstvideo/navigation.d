@@ -39,7 +39,7 @@ import gstvideo.types;
     The GstNavigation message functions provide functions for creating and
     parsing custom bus messages for signaling GstNavigation changes.
 */
-interface Navigation
+interface Navigation : GidWrap
 {
 
   /** */

@@ -9,12 +9,14 @@ public import std.traits : isCallable, Parameters, ParameterStorageClass, Parame
 import core.memory : GC;
 import core.stdc.string : strlen;
 public import core.stdc.string : memset;
+public import gid.wrap;
 import std.conv : to;
 import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
 import glib.c.functions;
 import glib.c.types;
 import glib.types : SOURCE_REMOVE;
+import gobject.boxed;
 import gobject.object;
 import gobject.c.functions;
 
@@ -718,8 +720,8 @@ bool isHashTableValueType(V)() nothrow
 */
 bool containerTypeIsSupported(T)() nothrow
 {
-  return is(T : gobject.object.ObjectWrap) || is(T == interface) || is(T == string) || isTypeCopyableStruct!T || isTypeSimple!T
-  || isTypeOpaque!T || is(T == void*) || is(T == const(void)*);
+  return is(T : GidWrap) || is(T == interface) || is(T == string) || isTypeSimple!T || is(T == void*)
+  || is(T == const(void)*);
 }
 
 /**
@@ -788,30 +790,29 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
 }
 
 /**
-* Check if a type is a Boxed or Reffed type
+* Check if a type is a structure wrapper which can be copied (Boxed, Reffed, Wrap or an Opaque type with a copy function)
 * Params:
 *   T = Type to check
-* Returns: true if type is a boxed or reffed type
+* Returns: true if T is a copyable structure wrapper type
 */
 bool isTypeCopyableStruct(T)() nothrow
 {
-  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c._cPtr(Yes.Dup);});
+  static if (is(T : OpaqueWrapBase))
+    return T._copyable;
+  else
+    return is(T : gobject.boxed.Boxed) || is(T : ReffedWrapBase) || is(T : StructWrapBase);
 }
 
 /**
-* Check if a type is an Opaque structure class (wraps a C pointer, which can't be copied, and tracks ownership with an owned member).
+* Check if a type is an Opaque structure class without a copy function (see OpaqueWrap).
 * Opaque container elements are borrowed pointers, they are not duplicated or freed.
 * Params:
 *   T = Type to check
-* Returns: true if T is an Opaque structure class
+* Returns: true if T is an Opaque structure class which can't be copied
 */
 bool isTypeOpaque(T)() nothrow
 {
-  static if (is(T == class) && !is(T : gobject.object.ObjectWrap) && !isTypeCopyableStruct!T)
-    return __traits(hasMember, T, "owned") && __traits(hasMember, T, "_cInstancePtr")
-  && __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c._cPtr();});
-  else
-    return false;
+  return is(T : OpaqueWrapBase) && !isTypeCopyableStruct!T;
 }
 
 /**
@@ -822,10 +823,7 @@ bool isTypeOpaque(T)() nothrow
 */
 bool isTypeWrap(T)() nothrow
 {
-  static if (is(T == class) && !is(T : gobject.object.ObjectWrap) && isTypeCopyableStruct!T)
-    return !isBoxed!T && !__traits(compiles, T._unref(null)) && __traits(hasMember, T, "_cInstance");
-  else
-    return false;
+  return is(T : StructWrapBase);
 }
 
 /**
@@ -853,7 +851,7 @@ if (containerTypeIsSupported!T)
     return gobject.object.ObjectWrap._getDObject!T(data, No.Take);
   else static if (is(T == string))
   return fromCString(cast(const(char)*)data);
-  else static if (isTypeCopyableStruct!T || isTypeOpaque!T)
+  else static if (is(T : GidWrap))
   return new T(data, No.Take);
   else static if (is(T == void*) || is(T == const(void)*))
   return data;
@@ -873,18 +871,10 @@ if (containerTypeIsSupported!T)
 void dToC(T)(T val, void* data) nothrow
 if (containerTypeIsSupported!T)
 {
-  static if (is(T : gobject.object.ObjectWrap) || isTypeCopyableStruct!T)
-    *(cast(void**)data) = val ? val._cPtr(Yes.Dup) : null;
-  else static if (is(T == interface))
-  {
-    auto objG = cast(gobject.object.ObjectWrap)val;
-    assert(!val || objG, "Object implementing " ~ T.stringof ~ " interface is not an ObjectWrap");
-    *(cast(void**)data) = objG ? objG._cPtr(Yes.Dup) : null;
-  }
+  static if (is(T : GidWrap)) // Includes GObject interfaces, Opaque elements are borrowed pointers
+    *(cast(void**)data) = val ? val._cPtr(isTypeOpaque!T ? No.Dup : Yes.Dup) : null;
   else static if (is(T == string))
   *cast(char**)data = toCString!(Yes.Malloc)(val); // Transfer the string to C (use g_malloc)
-  else static if (isTypeOpaque!T)
-  *(cast(void**)data) = val ? val._cPtr : null; // Borrowed pointer
   else static if (is(T == void*) || is(T == const(void)*))
   *(cast(void**)data) = cast(void*)val;
   else static if (isTypeSimple!T)
@@ -902,14 +892,15 @@ if (containerTypeIsSupported!T)
 void cValueFree(T)(void* data) nothrow
 if (containerTypeIsSupported!T)
 {
-  static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
-    gobject.object.ObjectWrap._unref(data);
-  else static if (isBoxed!T)
-  boxedFree(T._getGType, data);
-  else static if (__traits(compiles, T._unref(data))) // Reffed types
-  T._unref(data);
-  else static if (isTypeWrap!T) // Shallow copy from _cPtr(Yes.Dup) or C allocated structure
-  gFree(data);
+  static if (is(T == interface))
+    gobject.object.ObjectWrap._cFree(data);
+  else static if (is(T : GidWrap))
+  {
+    static if (!isTypeOpaque!T) // Opaque container elements are borrowed
+      T._cFree(data);
+  }
+  else static if (isBoxed!T) // Boxed D struct
+  T._cFree(data);
   else static if (is(T : string) || isTypeSimple!T)
   gFree(data);
 }
@@ -957,11 +948,14 @@ void cValueFreeInMainContext(void* value, GDestroyNotify freeFunc) nothrow
 * Check if a type is a boxed struct or class.
 * Params:
 *   T = The type to check
-* Returns: true if T is a boxed type (just checks if it has a boxCopy member)
+* Returns: true if T is a Boxed class or a boxed D struct (a struct with a _getGType member)
 */
 bool isBoxed(T)() nothrow
 {
-  return hasMember!(T, "boxCopy");
+  static if (is(T == struct))
+    return hasMember!(T, "_getGType");
+  else
+    return is(T : gobject.boxed.Boxed);
 }
 
 /**

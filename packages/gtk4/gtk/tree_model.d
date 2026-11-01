@@ -215,7 +215,7 @@ import gtk.types;
 
     Deprecated: Use [gio.list_model.ListModel] instead
 */
-interface TreeModel
+interface TreeModel : GidWrap
 {
 
   /** */

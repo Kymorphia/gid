@@ -30,10 +30,8 @@ import gstaudio.types;
     number of valid bytes from the size of the buffer. You should always
     use the @num_bytes_per_channel variable of this metadata.
 */
-class DsdPlaneOffsetMeta
+class DsdPlaneOffsetMeta : StructWrap!(GstDsdPlaneOffsetMeta)
 {
-  GstDsdPlaneOffsetMeta _cInstance;
-
   /**
       Create a `dsd_plane_offset_meta.DsdPlaneOffsetMeta` wrap type.
       Params:
@@ -49,16 +47,7 @@ class DsdPlaneOffsetMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstDsdPlaneOffsetMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

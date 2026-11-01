@@ -20,10 +20,8 @@ import gstvideo.video_info;
     
     It's a programming error to have a singular matrix.
 */
-class VideoMetaTransformMatrix
+class VideoMetaTransformMatrix : StructWrap!(GstVideoMetaTransformMatrix)
 {
-  GstVideoMetaTransformMatrix _cInstance;
-
   /**
       Create a `video_meta_transform_matrix.VideoMetaTransformMatrix` wrap type.
       Params:
@@ -45,16 +43,7 @@ class VideoMetaTransformMatrix
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoMetaTransformMatrix*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gstvideo.video_info.VideoInfo _inInfoRef; // Keeps borrowed field value alive

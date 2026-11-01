@@ -11,23 +11,13 @@ import gstvideo.types;
     GstVideoDither provides implementations of several dithering algorithms
     that can be applied to lines of video pixels to quantize and dither them.
 */
-class VideoDither
+class VideoDither : OpaqueWrap!(GstVideoDither*, void, void)
 {
-  GstVideoDither* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstVideoDither*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

@@ -114,7 +114,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

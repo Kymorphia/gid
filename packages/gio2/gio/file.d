@@ -118,7 +118,7 @@ import gobject.object;
     [RFC9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-etag).
     [gio.file.File] Entity Tags are a very similar concept.
 */
-interface File
+interface File : GidWrap
 {
 
   /** */

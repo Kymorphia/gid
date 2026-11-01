@@ -28,7 +28,7 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

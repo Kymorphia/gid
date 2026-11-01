@@ -45,7 +45,7 @@ import gobject.object;
     For [porting from GnomeVFS](migrating-gnome-vfs.html) note that there is no
     equivalent of [gio.drive.Drive] in that API.
 */
-interface Drive
+interface Drive : GidWrap
 {
 
   /** */

@@ -18,7 +18,7 @@ import gobject.object;
     AtkHyperlink in that AtkHyperlink is an object type, rather than an
     interface, and thus cannot be directly queried. FTW
 */
-interface HyperlinkImpl
+interface HyperlinkImpl : GidWrap
 {
 
   /** */

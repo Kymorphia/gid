@@ -42,7 +42,7 @@ import gtksource.view;
     All changes are encapsulated within a single user action so that the
     user may undo them using standard undo/redo accelerators.
 */
-interface Indenter
+interface Indenter : GidWrap
 {
 
   /** */

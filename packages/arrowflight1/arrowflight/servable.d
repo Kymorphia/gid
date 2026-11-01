@@ -10,7 +10,7 @@ import gid.gid;
 import gobject.gid_builder;
 
 /** */
-interface Servable
+interface Servable : GidWrap
 {
 
   /** */

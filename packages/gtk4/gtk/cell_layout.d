@@ -127,7 +127,7 @@ import gtk.types;
     Deprecated: List views use widgets to display their contents.
         See [gtk.layout_manager.LayoutManager] for layout manager delegate objects
 */
-interface CellLayout
+interface CellLayout : GidWrap
 {
 
   /** */

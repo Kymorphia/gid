@@ -12,10 +12,8 @@ import glib.types;
     be changed during the parsing phase and will affect the lexical
     parsing of the next unpeeked token.
 */
-class ScannerConfig
+class ScannerConfig : StructWrap!(GScannerConfig)
 {
-  GScannerConfig _cInstance;
-
   /**
       Create a `scanner_config.ScannerConfig` wrap type.
       Params:
@@ -109,16 +107,7 @@ class ScannerConfig
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GScannerConfig*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -14,10 +14,8 @@ import gst.types;
     Metadata type that holds information about a sample from a protection-protected
     track, including the information needed to decrypt it (if it is encrypted).
 */
-class ProtectionMeta
+class ProtectionMeta : StructWrap!(GstProtectionMeta)
 {
-  GstProtectionMeta _cInstance;
-
   /**
       Create a `protection_meta.ProtectionMeta` wrap type.
       Params:
@@ -31,16 +29,7 @@ class ProtectionMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstProtectionMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

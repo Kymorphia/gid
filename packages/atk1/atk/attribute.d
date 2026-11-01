@@ -20,10 +20,8 @@ import gid.gid;
     
     A string name/value pair representing a generic attribute.
 */
-class Attribute
+class Attribute : StructWrap!(AtkAttribute)
 {
-  AtkAttribute _cInstance;
-
   /**
       Create a `attribute.Attribute` wrap type.
       Params:
@@ -39,16 +37,7 @@ class Attribute
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(AtkAttribute*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

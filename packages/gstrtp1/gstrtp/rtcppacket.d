@@ -12,10 +12,8 @@ import gstrtp.types;
     Data structure that points to a packet at @offset in @buffer.
     The size of the structure is made public to allow stack allocations.
 */
-class RTCPPacket
+class RTCPPacket : StructWrap!(GstRTCPPacket)
 {
-  GstRTCPPacket _cInstance;
-
   /**
       Create a `rtcppacket.RTCPPacket` wrap type.
       Params:
@@ -29,16 +27,7 @@ class RTCPPacket
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstRTCPPacket*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

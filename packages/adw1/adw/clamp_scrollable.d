@@ -37,7 +37,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

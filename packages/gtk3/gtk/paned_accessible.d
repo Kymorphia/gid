@@ -20,7 +20,7 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

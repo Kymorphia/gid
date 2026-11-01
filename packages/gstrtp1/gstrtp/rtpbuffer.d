@@ -15,10 +15,8 @@ import gstrtp.types;
     #GstBuffer objects that contain RTP payloads. These buffers are typically of
     'application/x-rtp' #GstCaps.
 */
-class RTPBuffer
+class RTPBuffer : StructWrap!(GstRTPBuffer)
 {
-  GstRTPBuffer _cInstance;
-
   /**
       Create a `rtpbuffer.RTPBuffer` wrap type.
       Params:
@@ -36,16 +34,7 @@ class RTPBuffer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstRTPBuffer*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive

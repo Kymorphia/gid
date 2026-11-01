@@ -10,10 +10,8 @@ import glib.types;
 /**
     A union holding the value of the token.
 */
-class TokenValue
+class TokenValue : StructWrap!(GTokenValue)
 {
-  GTokenValue _cInstance;
-
   /**
       Create a `token_value.TokenValue` wrap type.
       Params:
@@ -47,16 +45,7 @@ class TokenValue
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GTokenValue*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

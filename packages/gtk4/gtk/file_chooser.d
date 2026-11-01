@@ -58,7 +58,7 @@ import gtk.types;
 
     Deprecated: Use [gtk.file_dialog.FileDialog] instead
 */
-interface FileChooser
+interface FileChooser : GidWrap
 {
 
   /** */

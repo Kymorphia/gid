@@ -17,7 +17,7 @@ import gobject.object;
     [gio.dtls_client_connection.DtlsClientConnection] is the client-side subclass of
     [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
 */
-interface DtlsClientConnection
+interface DtlsClientConnection : GidWrap
 {
 
   /** */

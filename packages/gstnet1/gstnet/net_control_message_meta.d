@@ -17,10 +17,8 @@ import gstnet.types;
     sending and receiving ancillary data such as unix credentials (See
     #GUnixCredentialsMessage) and Unix file descriptions (See #GUnixFDMessage).
 */
-class NetControlMessageMeta
+class NetControlMessageMeta : StructWrap!(GstNetControlMessageMeta)
 {
-  GstNetControlMessageMeta _cInstance;
-
   /**
       Create a `net_control_message_meta.NetControlMessageMeta` wrap type.
       Params:
@@ -34,16 +32,7 @@ class NetControlMessageMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstNetControlMessageMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

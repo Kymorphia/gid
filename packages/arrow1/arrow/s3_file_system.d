@@ -16,7 +16,7 @@ class S3FileSystem : arrow.file_system.FileSystem
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

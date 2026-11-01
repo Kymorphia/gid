@@ -50,7 +50,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

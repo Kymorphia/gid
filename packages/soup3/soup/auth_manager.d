@@ -38,7 +38,7 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

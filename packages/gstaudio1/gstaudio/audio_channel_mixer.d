@@ -8,23 +8,13 @@ import gstaudio.c.types;
 import gstaudio.types;
 
 /** */
-class AudioChannelMixer
+class AudioChannelMixer : OpaqueWrap!(GstAudioChannelMixer*, void, void)
 {
-  GstAudioChannelMixer* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstAudioChannelMixer*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

@@ -14,10 +14,8 @@ import gstbase.types;
 /**
     Structure used by the collect_pads.
 */
-class CollectData
+class CollectData : StructWrap!(GstCollectData)
 {
-  GstCollectData _cInstance;
-
   /**
       Create a `collect_data.CollectData` wrap type.
       Params:
@@ -39,16 +37,7 @@ class CollectData
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstCollectData*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gstbase.collect_pads.CollectPads _collectRef; // Keeps borrowed field value alive

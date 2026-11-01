@@ -30,7 +30,7 @@ class OutputStream : gio.output_stream.OutputStream, gio.pollable_output_stream.
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

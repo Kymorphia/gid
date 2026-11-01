@@ -25,7 +25,7 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

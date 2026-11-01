@@ -11,23 +11,13 @@ import gid.gid;
     An opaque type representing a string as an index into a table
     of strings on the X server.
 */
-class Atom
+class Atom : OpaqueWrap!(GdkAtom, void, void)
 {
-  GdkAtom _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GdkAtom)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

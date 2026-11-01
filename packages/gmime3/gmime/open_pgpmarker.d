@@ -10,10 +10,8 @@ import gmime.types;
 /**
     An OpenPGP marker for use with GMime's internal state machines used for detecting OpenPGP blocks.
 */
-class OpenPGPMarker
+class OpenPGPMarker : StructWrap!(GMimeOpenPGPMarker)
 {
-  GMimeOpenPGPMarker _cInstance;
-
   /**
       Create a `open_pgpmarker.OpenPGPMarker` wrap type.
       Params:
@@ -35,16 +33,7 @@ class OpenPGPMarker
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GMimeOpenPGPMarker*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

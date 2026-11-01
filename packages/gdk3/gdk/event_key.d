@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Describes a key press or key release event.
 */
-class EventKey
+class EventKey : StructWrap!(GdkEventKey)
 {
-  GdkEventKey _cInstance;
-
   /**
       Create a `event_key.EventKey` wrap type.
       Params:
@@ -63,16 +61,7 @@ class EventKey
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventKey*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

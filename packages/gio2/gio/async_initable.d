@@ -118,7 +118,7 @@ import gobject.types;
     }
     ```
 */
-interface AsyncInitable
+interface AsyncInitable : GidWrap
 {
 
   /** */

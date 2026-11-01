@@ -16,10 +16,8 @@ import gstvideo.video_info;
     This transformation can not express letterbox, cropping, or rotations,
     use #GstVideoMetaTransformMatrix instead
 */
-class VideoMetaTransform
+class VideoMetaTransform : StructWrap!(GstVideoMetaTransform)
 {
-  GstVideoMetaTransform _cInstance;
-
   /**
       Create a `video_meta_transform.VideoMetaTransform` wrap type.
       Params:
@@ -35,16 +33,7 @@ class VideoMetaTransform
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoMetaTransform*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gstvideo.video_info.VideoInfo _inInfoRef; // Keeps borrowed field value alive

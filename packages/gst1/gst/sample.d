@@ -17,32 +17,13 @@ import gst.types;
     A #GstSample is a small object containing data, a type, timing and
     extra arbitrary information.
 */
-class Sample : gobject.boxed.Boxed
+class Sample : gobject.boxed.BoxedWrap!(gst_sample_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_sample_get_type != &gidSymbolNotFound ? gst_sample_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

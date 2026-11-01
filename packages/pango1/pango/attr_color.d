@@ -13,10 +13,8 @@ import pango.types;
     The [pango.attr_color.AttrColor] structure is used to represent attributes that
     are colors.
 */
-class AttrColor
+class AttrColor : StructWrap!(PangoAttrColor)
 {
-  PangoAttrColor _cInstance;
-
   /**
       Create a `attr_color.AttrColor` wrap type.
       Params:
@@ -30,16 +28,7 @@ class AttrColor
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrColor*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -17,10 +17,8 @@ import gstbase.types;
     32 and 64 bits. It also provides functions to write/read NUL-terminated strings
     in various character encodings.
 */
-class ByteWriter
+class ByteWriter : StructWrap!(GstByteWriter)
 {
-  GstByteWriter _cInstance;
-
   /**
       Create a `byte_writer.ByteWriter` wrap type.
       Params:
@@ -38,16 +36,7 @@ class ByteWriter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstByteWriter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

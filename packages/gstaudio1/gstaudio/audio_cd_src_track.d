@@ -17,10 +17,8 @@ import gstaudio.types;
     Applications will be informed of the available tracks via a TOC message
     on the pipeline's #GstBus instead.
 */
-class AudioCdSrcTrack
+class AudioCdSrcTrack : StructWrap!(GstAudioCdSrcTrack)
 {
-  GstAudioCdSrcTrack _cInstance;
-
   /**
       Create a `audio_cd_src_track.AudioCdSrcTrack` wrap type.
       Params:
@@ -42,16 +40,7 @@ class AudioCdSrcTrack
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioCdSrcTrack*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

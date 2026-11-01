@@ -18,7 +18,7 @@ class GLRenderbufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAlloca
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

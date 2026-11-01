@@ -12,10 +12,8 @@ import pango.types;
     The [pango.attr_size.AttrSize] structure is used to represent attributes which
     set font size.
 */
-class AttrSize
+class AttrSize : StructWrap!(PangoAttrSize)
 {
-  PangoAttrSize _cInstance;
-
   /**
       Create a `attr_size.AttrSize` wrap type.
       Params:
@@ -35,16 +33,7 @@ class AttrSize
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrSize*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

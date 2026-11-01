@@ -16,7 +16,7 @@ import gobject.object;
     load their certificate information from a file. It is an interface which
     TLS library specific subtypes implement.
 */
-interface TlsFileDatabase
+interface TlsFileDatabase : GidWrap
 {
 
   /** */

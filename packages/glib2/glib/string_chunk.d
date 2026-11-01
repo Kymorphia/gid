@@ -32,29 +32,13 @@ import glib.types;
     To free the entire [glib.string_chunk.StringChunk] use [glib.string_chunk.StringChunk.free].
     It is not possible to free individual strings.
 */
-class StringChunk
+class StringChunk : OpaqueWrap!(GStringChunk*, g_string_chunk_free, void)
 {
-  GStringChunk* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GStringChunk*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_string_chunk_free)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

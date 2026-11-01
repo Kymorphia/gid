@@ -29,7 +29,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -62,7 +62,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

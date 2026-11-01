@@ -18,7 +18,7 @@ import secret.types;
     #SecretBackend represents a backend implementation of password
     storage.
 */
-interface Backend
+interface Backend : GidWrap
 {
 
   /** */

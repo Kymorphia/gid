@@ -36,7 +36,7 @@ import gobject.object;
     [gio.power_profile_monitor.PowerProfileMonitor.powerSaverEnabled], and unref the
     [gio.power_profile_monitor.PowerProfileMonitor] itself when exiting.
 */
-interface PowerProfileMonitor
+interface PowerProfileMonitor : GidWrap
 {
 
   /** */

@@ -27,7 +27,7 @@ import gtk.widget;
     [gtk.root.Root] also maintains the location of keyboard focus inside its widget
     hierarchy, with [gtk.root.Root.setFocus] and [gtk.root.Root.getFocus].
 */
-interface Root
+interface Root : GidWrap
 {
 
   /** */

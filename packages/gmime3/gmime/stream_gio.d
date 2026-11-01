@@ -20,7 +20,7 @@ class StreamGIO : gmime.stream.Stream
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

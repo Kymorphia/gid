@@ -10,10 +10,8 @@ import gstsdp.types;
 /**
     The contents of the SDP "a=" field which contains a key/value pair.
 */
-class SDPAttribute
+class SDPAttribute : StructWrap!(GstSDPAttribute)
 {
-  GstSDPAttribute _cInstance;
-
   /**
       Create a `sdpattribute.SDPAttribute` wrap type.
       Params:
@@ -29,16 +27,7 @@ class SDPAttribute
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPAttribute*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

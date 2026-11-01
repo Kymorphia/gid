@@ -16,7 +16,7 @@ class ParquetFileFormat : arrowdataset.file_format.FileFormat
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

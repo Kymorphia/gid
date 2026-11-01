@@ -13,10 +13,8 @@ import gstvideo.types;
     #GstMeta for carrying SMPTE-291M Ancillary data. Note that all the ADF fields
        (@DID to @checksum) are 10bit values with parity/non-parity high-bits set.
 */
-class AncillaryMeta
+class AncillaryMeta : StructWrap!(GstAncillaryMeta)
 {
-  GstAncillaryMeta _cInstance;
-
   /**
       Create a `ancillary_meta.AncillaryMeta` wrap type.
       Params:
@@ -52,16 +50,7 @@ class AncillaryMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAncillaryMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

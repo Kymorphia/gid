@@ -463,7 +463,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

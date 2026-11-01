@@ -43,7 +43,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

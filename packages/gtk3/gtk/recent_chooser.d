@@ -23,7 +23,7 @@ import gtk.types;
     
     Recently used files are supported since GTK+ 2.10.
 */
-interface RecentChooser
+interface RecentChooser : GidWrap
 {
 
   /** */

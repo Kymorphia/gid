@@ -12,10 +12,8 @@ import gid.gid;
 /**
     Generated during DND operations.
 */
-class EventDND
+class EventDND : StructWrap!(GdkEventDND)
 {
-  GdkEventDND _cInstance;
-
   /**
       Create a `event_dnd.EventDND` wrap type.
       Params:
@@ -45,16 +43,7 @@ class EventDND
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventDND*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

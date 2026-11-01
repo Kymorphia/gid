@@ -36,7 +36,7 @@ import gtk.types;
         implemented according to the design of each platform and/or
         application requiring them.
 */
-interface AppChooser
+interface AppChooser : GidWrap
 {
 
   /** */

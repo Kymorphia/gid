@@ -20,7 +20,7 @@ import gobject.object;
     
     See `iface@AtkTable`
 */
-interface TableCell
+interface TableCell : GidWrap
 {
 
   /** */

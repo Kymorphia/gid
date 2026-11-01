@@ -21,7 +21,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

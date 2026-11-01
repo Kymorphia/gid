@@ -26,7 +26,7 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

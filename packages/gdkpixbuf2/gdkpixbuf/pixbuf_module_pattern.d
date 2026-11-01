@@ -39,10 +39,8 @@ import gid.gid;
     In the example above, the signature matches e.g. "auud\0" with
     relevance 100, and "blau" with relevance 90.
 */
-class PixbufModulePattern
+class PixbufModulePattern : StructWrap!(GdkPixbufModulePattern)
 {
-  GdkPixbufModulePattern _cInstance;
-
   /**
       Create a `pixbuf_module_pattern.PixbufModulePattern` wrap type.
       Params:
@@ -61,16 +59,7 @@ class PixbufModulePattern
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkPixbufModulePattern*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

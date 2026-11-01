@@ -12,10 +12,8 @@ import glib.types;
     one-time initialization function must have its own unique #GOnce
     struct.
 */
-class Once
+class Once : StructWrap!(GOnce)
 {
-  GOnce _cInstance;
-
   /**
       Create a `once.Once` wrap type.
       Params:
@@ -29,16 +27,7 @@ class Once
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GOnce*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

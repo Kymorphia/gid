@@ -19,10 +19,8 @@ import glib.types;
     [glib.uri_params_iter.UriParamsIter.init_]. See the documentation for [glib.uri_params_iter.UriParamsIter.init_]
     for a usage example.
 */
-class UriParamsIter
+class UriParamsIter : StructWrap!(GUriParamsIter)
 {
-  GUriParamsIter _cInstance;
-
   /**
       Create a `uri_params_iter.UriParamsIter` wrap type.
   */
@@ -33,16 +31,7 @@ class UriParamsIter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GUriParamsIter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

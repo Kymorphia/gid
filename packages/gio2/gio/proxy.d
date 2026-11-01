@@ -23,7 +23,7 @@ import gobject.object;
     name `socks5` using the function
     [gio.ioextension_point.IOExtensionPoint.getExtensionByName].
 */
-interface Proxy
+interface Proxy : GidWrap
 {
 
   /** */

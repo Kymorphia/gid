@@ -12,10 +12,8 @@ import gobject.types;
     
     See also: [gobject.global.signalQuery]
 */
-class SignalQuery
+class SignalQuery : StructWrap!(GSignalQuery)
 {
-  GSignalQuery _cInstance;
-
   /**
       Create a `signal_query.SignalQuery` wrap type.
       Params:
@@ -38,16 +36,7 @@ class SignalQuery
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GSignalQuery*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

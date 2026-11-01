@@ -18,7 +18,7 @@ class ListBoxRowAccessible : gtk.container_accessible.ContainerAccessible
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

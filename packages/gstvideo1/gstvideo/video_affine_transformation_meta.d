@@ -21,10 +21,8 @@ import gstvideo.types;
     the y-axis moving vertically (positive values up the screen) and the z-axis
     perpendicular to the screen (positive values into the screen).
 */
-class VideoAffineTransformationMeta
+class VideoAffineTransformationMeta : StructWrap!(GstVideoAffineTransformationMeta)
 {
-  GstVideoAffineTransformationMeta _cInstance;
-
   /**
       Create a `video_affine_transformation_meta.VideoAffineTransformationMeta` wrap type.
       Params:
@@ -38,16 +36,7 @@ class VideoAffineTransformationMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoAffineTransformationMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

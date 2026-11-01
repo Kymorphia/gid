@@ -28,7 +28,7 @@ import gtksource.types;
     may take additional time should use `vfunc@HoverProvider.populate_async`
     to avoid blocking the main loop.
 */
-interface HoverProvider
+interface HoverProvider : GidWrap
 {
 
   /** */

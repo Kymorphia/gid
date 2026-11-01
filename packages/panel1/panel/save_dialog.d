@@ -34,7 +34,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

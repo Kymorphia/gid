@@ -66,7 +66,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

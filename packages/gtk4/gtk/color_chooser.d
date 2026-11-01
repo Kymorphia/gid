@@ -24,7 +24,7 @@ import gtk.types;
     Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
         instead of widgets implementing [gtk.color_chooser.ColorChooser]
 */
-interface ColorChooser
+interface ColorChooser : GidWrap
 {
 
   /** */

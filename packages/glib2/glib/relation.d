@@ -50,23 +50,13 @@ import glib.types;
 
     Deprecated: Rarely used API
 */
-class Relation
+class Relation : OpaqueWrap!(GRelation*, void, void)
 {
-  GRelation* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GRelation*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

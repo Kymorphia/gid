@@ -20,7 +20,7 @@ import soup.types;
     
     See [soup.session.Session.addFeature], etc, to add a feature to a session.
 */
-interface SessionFeature
+interface SessionFeature : GidWrap
 {
 
   /** */

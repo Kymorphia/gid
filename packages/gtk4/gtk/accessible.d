@@ -44,7 +44,7 @@ import gtk.types;
     by calling [gtk.accessible.Accessible.setAccessibleParent] and
     updating the sibling by [gtk.accessible.Accessible.updateNextAccessibleSibling].
 */
-interface Accessible
+interface Accessible : GidWrap
 {
 
   /** */

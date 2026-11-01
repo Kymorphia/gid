@@ -11,10 +11,8 @@ import gsk.types;
 /**
     The shadow parameters in a shadow node.
 */
-class Shadow
+class Shadow : StructWrap!(GskShadow)
 {
-  GskShadow _cInstance;
-
   /**
       Create a `shadow.Shadow` wrap type.
       Params:
@@ -34,16 +32,7 @@ class Shadow
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GskShadow*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -12,10 +12,8 @@ import gstbase.types;
     from a memory buffer. It provides functions for reading any number of bits
     into 8, 16, 32 and 64 bit variables.
 */
-class BitReader
+class BitReader : StructWrap!(GstBitReader)
 {
-  GstBitReader _cInstance;
-
   /**
       Create a `bit_reader.BitReader` wrap type.
       Params:
@@ -31,16 +29,7 @@ class BitReader
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstBitReader*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

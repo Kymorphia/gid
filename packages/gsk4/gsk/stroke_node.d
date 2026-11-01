@@ -20,7 +20,20 @@ class StrokeNode : gsk.render_node.RenderNode
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(GskRenderNode*)ptr, take);
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gsk_stroke_node_get_type != &gidSymbolNotFound ? gsk_stroke_node_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
   }
 
   /**

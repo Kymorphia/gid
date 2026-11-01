@@ -12,10 +12,8 @@ import gobject.types;
     
     See also: [gobject.global.typeQuery]
 */
-class TypeQuery
+class TypeQuery : StructWrap!(GTypeQuery)
 {
-  GTypeQuery _cInstance;
-
   /**
       Create a `type_query.TypeQuery` wrap type.
       Params:
@@ -35,16 +33,7 @@ class TypeQuery
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GTypeQuery*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

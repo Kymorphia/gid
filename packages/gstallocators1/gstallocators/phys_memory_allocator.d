@@ -10,7 +10,7 @@ import gstallocators.c.types;
 import gstallocators.types;
 
 /** */
-interface PhysMemoryAllocator
+interface PhysMemoryAllocator : GidWrap
 {
 
   /** */

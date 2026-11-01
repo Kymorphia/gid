@@ -8,10 +8,8 @@ import javascriptcore.c.types;
 import javascriptcore.types;
 
 /** */
-class ClassClass
+class ClassClass : StructWrap!(JSCClassClass)
 {
-  JSCClassClass _cInstance;
-
   /**
       Create a `class_class.ClassClass` wrap type.
   */
@@ -22,15 +20,6 @@ class ClassClass
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(JSCClassClass*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 }

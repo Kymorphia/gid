@@ -14,10 +14,8 @@ import gstvideo.types;
     
     The configuration of the time code.
 */
-class VideoTimeCodeConfig
+class VideoTimeCodeConfig : StructWrap!(GstVideoTimeCodeConfig)
 {
-  GstVideoTimeCodeConfig _cInstance;
-
   /**
       Create a `video_time_code_config.VideoTimeCodeConfig` wrap type.
       Params:
@@ -37,16 +35,7 @@ class VideoTimeCodeConfig
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoTimeCodeConfig*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

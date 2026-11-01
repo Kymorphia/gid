@@ -22,7 +22,7 @@ import gobject.object;
     See [gio.dbus_object_manager_client.DBusObjectManagerClient] for the client-side implementation
     and [gio.dbus_object_manager_server.DBusObjectManagerServer] for the service-side implementation.
 */
-interface DBusObjectManager
+interface DBusObjectManager : GidWrap
 {
 
   /** */

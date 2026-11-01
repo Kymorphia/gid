@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Generated when a setting is modified.
 */
-class EventSetting
+class EventSetting : StructWrap!(GdkEventSetting)
 {
-  GdkEventSetting _cInstance;
-
   /**
       Create a `event_setting.EventSetting` wrap type.
       Params:
@@ -37,16 +35,7 @@ class EventSetting
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventSetting*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

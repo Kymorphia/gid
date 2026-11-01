@@ -12,23 +12,13 @@ import gstaudio.types;
     #GstAudioResampler is a structure which holds the information
     required to perform various kinds of resampling filtering.
 */
-class AudioResampler
+class AudioResampler : OpaqueWrap!(GstAudioResampler*, void, void)
 {
-  GstAudioResampler* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstAudioResampler*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

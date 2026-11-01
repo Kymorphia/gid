@@ -11,10 +11,8 @@ import pango.types;
     A [pango.glyph_info.GlyphInfo] structure represents a single glyph with
     positioning information and visual attributes.
 */
-class GlyphInfo
+class GlyphInfo : StructWrap!(PangoGlyphInfo)
 {
-  PangoGlyphInfo _cInstance;
-
   /**
       Create a `glyph_info.GlyphInfo` wrap type.
       Params:
@@ -32,16 +30,7 @@ class GlyphInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoGlyphInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

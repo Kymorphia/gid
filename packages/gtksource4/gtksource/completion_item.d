@@ -20,7 +20,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

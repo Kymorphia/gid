@@ -40,7 +40,7 @@ import gobject.types;
     during normal construction and automatically initialize them, throwing
     an exception on failure.
 */
-interface Initable
+interface Initable : GidWrap
 {
 
   /** */

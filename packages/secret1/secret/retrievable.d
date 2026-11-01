@@ -25,7 +25,7 @@ import secret.value;
     retrieved by [secret.retrievable.Retrievable.retrieveSecret] and
     [secret.retrievable.Retrievable.retrieveSecretFinish].
 */
-interface Retrievable
+interface Retrievable : GidWrap
 {
 
   /** */

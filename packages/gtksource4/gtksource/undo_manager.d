@@ -11,7 +11,7 @@ import gtksource.c.types;
 import gtksource.types;
 
 /** */
-interface UndoManager
+interface UndoManager : GidWrap
 {
 
   /** */

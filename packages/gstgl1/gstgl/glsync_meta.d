@@ -14,10 +14,8 @@ import gstgl.types;
     #GstGLSyncMeta provides the ability to synchronize the OpenGL command stream
     with the CPU or with other OpenGL contexts.
 */
-class GLSyncMeta
+class GLSyncMeta : StructWrap!(GstGLSyncMeta)
 {
-  GstGLSyncMeta _cInstance;
-
   /**
       Create a `glsync_meta.GLSyncMeta` wrap type.
       Params:
@@ -31,16 +29,7 @@ class GLSyncMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstGLSyncMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

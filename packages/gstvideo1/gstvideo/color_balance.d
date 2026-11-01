@@ -18,7 +18,7 @@ import gstvideo.types;
     
     Example elements are 'xvimagesink' and 'colorbalance'
 */
-interface ColorBalance
+interface ColorBalance : GidWrap
 {
 
   /** */

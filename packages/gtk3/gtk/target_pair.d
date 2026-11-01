@@ -13,10 +13,8 @@ import gtk.types;
     information as a table of #GtkTargetEntry, but in
     an efficient form.
 */
-class TargetPair
+class TargetPair : StructWrap!(GtkTargetPair)
 {
-  GtkTargetPair _cInstance;
-
   /**
       Create a `target_pair.TargetPair` wrap type.
       Params:
@@ -35,16 +33,7 @@ class TargetPair
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkTargetPair*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

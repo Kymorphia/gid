@@ -12,7 +12,7 @@ import gtksource.style_scheme;
 import gtksource.types;
 
 /** */
-interface StyleSchemeChooser
+interface StyleSchemeChooser : GidWrap
 {
 
   /** */

@@ -18,9 +18,8 @@ import gtk.types;
     [gtk.bitset_iter.BitsetIter.initFirst], [gtk.bitset_iter.BitsetIter.initLast]
     or [gtk.bitset_iter.BitsetIter.initAt].
 */
-class BitsetIter : gobject.boxed.Boxed
+class BitsetIter : gobject.boxed.BoxedWrap!(gtk_bitset_iter_get_type)
 {
-
   /**
       Create a `bitset_iter.BitsetIter` boxed type.
   */
@@ -32,26 +31,7 @@ class BitsetIter : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gtk_bitset_iter_get_type != &gidSymbolNotFound ? gtk_bitset_iter_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

@@ -17,7 +17,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

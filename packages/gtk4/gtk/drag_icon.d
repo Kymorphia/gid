@@ -42,7 +42,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

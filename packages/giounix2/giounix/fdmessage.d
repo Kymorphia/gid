@@ -33,7 +33,7 @@ class FDMessage : gio.socket_control_message.SocketControlMessage
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

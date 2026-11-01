@@ -10,10 +10,8 @@ import gid.gid;
 /**
     Encapsulates information about a key event.
 */
-class KeyEventStruct
+class KeyEventStruct : StructWrap!(AtkKeyEventStruct)
 {
-  AtkKeyEventStruct _cInstance;
-
   /**
       Create a `key_event_struct.KeyEventStruct` wrap type.
       Params:
@@ -48,16 +46,7 @@ class KeyEventStruct
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(AtkKeyEventStruct*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -12,10 +12,8 @@ import gtk.types;
     #GtkToggleActionEntry structs are used with
     [gtk.action_group.ActionGroup.addToggleActions] to construct toggle actions.
 */
-class ToggleActionEntry
+class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
 {
-  GtkToggleActionEntry _cInstance;
-
   /**
       Create a `toggle_action_entry.ToggleActionEntry` wrap type.
       Params:
@@ -45,16 +43,7 @@ class ToggleActionEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkToggleActionEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

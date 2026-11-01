@@ -18,10 +18,8 @@ import gtk.types;
     activation, an action signal is emitted on the target widget to carry out
     the actual activation.
 */
-class BindingSet
+class BindingSet : StructWrap!(GtkBindingSet)
 {
-  GtkBindingSet _cInstance;
-
   /**
       Create a `binding_set.BindingSet` wrap type.
       Params:
@@ -39,16 +37,7 @@ class BindingSet
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkBindingSet*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

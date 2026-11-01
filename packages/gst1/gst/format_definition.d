@@ -11,10 +11,8 @@ import gst.types;
 /**
     A format definition
 */
-class FormatDefinition
+class FormatDefinition : StructWrap!(GstFormatDefinition)
 {
-  GstFormatDefinition _cInstance;
-
   /**
       Create a `format_definition.FormatDefinition` wrap type.
       Params:
@@ -34,16 +32,7 @@ class FormatDefinition
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstFormatDefinition*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

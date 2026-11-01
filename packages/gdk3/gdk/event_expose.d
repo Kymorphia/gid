@@ -14,10 +14,8 @@ import gid.gid;
     Generated when all or part of a window becomes visible and needs to be
     redrawn.
 */
-class EventExpose
+class EventExpose : StructWrap!(GdkEventExpose)
 {
-  GdkEventExpose _cInstance;
-
   /**
       Create a `event_expose.EventExpose` wrap type.
       Params:
@@ -44,16 +42,7 @@ class EventExpose
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventExpose*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

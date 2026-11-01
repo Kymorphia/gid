@@ -16,7 +16,7 @@ class Date32DataType : arrow.temporal_data_type.TemporalDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

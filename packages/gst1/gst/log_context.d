@@ -55,23 +55,13 @@ import gst.types;
     );
     ```
 */
-class LogContext
+class LogContext : OpaqueWrap!(GstLogContext*, void, void)
 {
-  GstLogContext* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstLogContext*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

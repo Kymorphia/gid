@@ -20,7 +20,7 @@ class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Imag
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

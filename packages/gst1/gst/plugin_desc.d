@@ -14,10 +14,8 @@ import gst.types;
     The @licence parameter must be one of: LGPL, GPL, QPL, GPL/QPL, MPL,
     BSD, MIT/X11, Proprietary, unknown.
 */
-class PluginDesc
+class PluginDesc : StructWrap!(GstPluginDesc)
 {
-  GstPluginDesc _cInstance;
-
   /**
       Create a `plugin_desc.PluginDesc` wrap type.
       Params:
@@ -56,16 +54,7 @@ class PluginDesc
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstPluginDesc*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

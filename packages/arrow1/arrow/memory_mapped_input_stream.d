@@ -21,7 +21,7 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

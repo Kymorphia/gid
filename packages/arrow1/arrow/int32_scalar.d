@@ -16,7 +16,7 @@ class Int32Scalar : arrow.scalar.Scalar
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -11,10 +11,8 @@ import gstsdp.types;
     The contents of the SDP "b=" field which specifies the proposed bandwidth to
     be used by the session or media.
 */
-class SDPBandwidth
+class SDPBandwidth : StructWrap!(GstSDPBandwidth)
 {
-  GstSDPBandwidth _cInstance;
-
   /**
       Create a `sdpbandwidth.SDPBandwidth` wrap type.
       Params:
@@ -30,16 +28,7 @@ class SDPBandwidth
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPBandwidth*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

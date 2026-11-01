@@ -23,32 +23,13 @@ import gobject.object;
     Create a [gdk.texture.Texture] for the existing format and then download it in a
     different format.
 */
-class TextureDownloader : gobject.boxed.Boxed
+class TextureDownloader : gobject.boxed.BoxedWrap!(gdk_texture_downloader_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gdk_texture_downloader_get_type != &gidSymbolNotFound ? gdk_texture_downloader_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

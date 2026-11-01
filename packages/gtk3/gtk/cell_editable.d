@@ -16,7 +16,7 @@ import gtk.types;
     to edit the contents of a #GtkTreeView cell. It provides a way to specify how
     temporary widgets should be configured for editing, get the new value, etc.
 */
-interface CellEditable
+interface CellEditable : GidWrap
 {
 
   /** */

@@ -28,7 +28,7 @@ class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

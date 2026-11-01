@@ -23,7 +23,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

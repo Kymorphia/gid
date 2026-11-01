@@ -19,7 +19,7 @@ import gtk.types;
     
     #GtkOrientable was introduced in GTK+ 2.16.
 */
-interface Orientable
+interface Orientable : GidWrap
 {
 
   /** */

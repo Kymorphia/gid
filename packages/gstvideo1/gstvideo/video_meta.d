@@ -38,10 +38,8 @@ import gstvideo.video_alignment;
     Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
     [gst.meta.Meta.deserialize].
 */
-class VideoMeta
+class VideoMeta : StructWrap!(GstVideoMeta)
 {
-  GstVideoMeta _cInstance;
-
   /**
       Create a `video_meta.VideoMeta` wrap type.
       Params:
@@ -78,16 +76,7 @@ class VideoMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

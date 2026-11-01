@@ -23,33 +23,28 @@ import gobject.value;
     used, but they cannot be mixed. Using `-` is considerably more
     efficient, and is the ‘canonical form’. Using `_` is discouraged.
 */
-class ParamSpec
+class ParamSpec : ReffedWrap!(GParamSpec*, g_param_spec_ref, g_param_spec_unref)
 {
-  GParamSpec* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GParamSpec*)ptr;
-
-    if (!take && ptr)
-      g_param_spec_ref(_cInstancePtr);
+    super(ptr, take);
   }
 
-  ~this() nothrow
+  /**
+  * Get the GType of ParamSpec (the G_TYPE_PARAM fundamental type).
+  * Returns: The GType
+  */
+  static GType _getGType() nothrow
   {
-    if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_param_spec_unref)());
+    return cast(GType)GTypeEnum.Param;
   }
-
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
+  override @property GType _gType() nothrow
   {
-    if (dup)
-      g_param_spec_ref(_cInstancePtr);
-
-    return _cInstancePtr;
+    return _getGType;
   }
 
   /**

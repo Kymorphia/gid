@@ -85,7 +85,7 @@ class Dialog : gtk.widget.Widget, gtk.shortcut_manager.ShortcutManager
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -48,7 +48,7 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

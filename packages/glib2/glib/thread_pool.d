@@ -8,6 +8,13 @@ import glib.c.types;
 import glib.error;
 import glib.types;
 
+
+private extern(C) void freePool(GThreadPool* pool) nothrow
+{
+  g_thread_pool_free(pool, true, false); // immediate, wait
+}
+
+
 /**
     The [glib.thread_pool.ThreadPool] struct represents a thread pool.
     
@@ -36,37 +43,14 @@ import glib.types;
     [glib.thread_pool.ThreadPool.setMaxUnusedThreads]. All currently unused threads
     can be stopped by calling [glib.thread_pool.ThreadPool.stopUnusedThreads].
 */
-class ThreadPool
+class ThreadPool : OpaqueWrap!(GThreadPool*, freePool, void)
 {
-  GThreadPool* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GThreadPool*)ptr;
-
-    owned = take;
+    super(ptr, take);
   }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(freePool)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
-  }
-
-  private static extern(C) void freePool(GThreadPool* pool) nothrow
-  {
-    g_thread_pool_free(pool, true, false); // immediate, wait
-  }
-
-
 
   /**
       Returns the maximal number of threads for pool.

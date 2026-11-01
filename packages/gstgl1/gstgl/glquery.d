@@ -15,10 +15,8 @@ import gstgl.types;
     A #GstGLQuery represents and holds an OpenGL query object.  Various types of
     queries can be run or counters retrieved.
 */
-class GLQuery
+class GLQuery : StructWrap!(GstGLQuery)
 {
-  GstGLQuery _cInstance;
-
   /**
       Create a `glquery.GLQuery` wrap type.
   */
@@ -29,16 +27,7 @@ class GLQuery
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstGLQuery*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

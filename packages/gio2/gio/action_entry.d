@@ -19,10 +19,8 @@ import gio.types;
     
     See [gio.action_map.ActionMap.addActionEntries] for an example.
 */
-class ActionEntry
+class ActionEntry : StructWrap!(GActionEntry)
 {
-  GActionEntry _cInstance;
-
   /**
       Create a `action_entry.ActionEntry` wrap type.
       Params:
@@ -45,16 +43,7 @@ class ActionEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GActionEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

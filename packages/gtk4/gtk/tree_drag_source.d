@@ -18,7 +18,7 @@ import gtk.types;
     Deprecated: List views use widgets to display their contents.
         You can use [gtk.drag_source.DragSource] to implement a drag source
 */
-interface TreeDragSource
+interface TreeDragSource : GidWrap
 {
 
   /** */

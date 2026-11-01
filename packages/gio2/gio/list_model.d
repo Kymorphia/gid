@@ -78,7 +78,7 @@ import gobject.types;
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
     ```
 */
-interface ListModel
+interface ListModel : GidWrap
 {
 
   /** */

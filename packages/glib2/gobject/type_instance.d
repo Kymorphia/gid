@@ -10,10 +10,8 @@ import gobject.types;
 /**
     An opaque structure used as the base of all type instances.
 */
-class TypeInstance
+class TypeInstance : StructWrap!(GTypeInstance)
 {
-  GTypeInstance _cInstance;
-
   /**
       Create a `type_instance.TypeInstance` wrap type.
   */
@@ -24,16 +22,7 @@ class TypeInstance
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GTypeInstance*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /** */

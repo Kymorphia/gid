@@ -19,7 +19,20 @@ class TryExpression : gtk.expression.Expression
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(GtkExpression*)ptr, take);
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_try_expression_get_type != &gidSymbolNotFound ? gtk_try_expression_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
   }
 
   /**

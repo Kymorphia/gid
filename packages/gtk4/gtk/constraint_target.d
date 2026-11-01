@@ -15,7 +15,7 @@ import gtk.types;
     
     Besides [gtk.widget.Widget], it is also implemented by [gtk.constraint_guide.ConstraintGuide].
 */
-interface ConstraintTarget
+interface ConstraintTarget : GidWrap
 {
 
   /** */

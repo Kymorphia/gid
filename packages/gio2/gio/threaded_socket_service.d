@@ -36,7 +36,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

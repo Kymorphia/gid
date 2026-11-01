@@ -42,7 +42,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

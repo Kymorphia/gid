@@ -44,10 +44,8 @@ import gid.gid;
     1/4 of a second of the first. For a triple click to occur, the third
     button press must also occur within 1/2 second of the first button press.
 */
-class EventButton
+class EventButton : StructWrap!(GdkEventButton)
 {
-  GdkEventButton _cInstance;
-
   /**
       Create a `event_button.EventButton` wrap type.
       Params:
@@ -90,16 +88,7 @@ class EventButton
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventButton*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

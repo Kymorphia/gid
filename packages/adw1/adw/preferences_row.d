@@ -34,7 +34,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

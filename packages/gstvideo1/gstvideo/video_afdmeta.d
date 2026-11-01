@@ -25,10 +25,8 @@ import gstvideo.types;
     
     and SMPTE ST2016-1
 */
-class VideoAFDMeta
+class VideoAFDMeta : StructWrap!(GstVideoAFDMeta)
 {
-  GstVideoAFDMeta _cInstance;
-
   /**
       Create a `video_afdmeta.VideoAFDMeta` wrap type.
       Params:
@@ -46,16 +44,7 @@ class VideoAFDMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoAFDMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

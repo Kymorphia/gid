@@ -11,10 +11,8 @@ import glib.types;
 /**
     The #GHook struct represents a single hook function in a #GHookList.
 */
-class Hook
+class Hook : StructWrap!(GHook)
 {
-  GHook _cInstance;
-
   /**
       Create a `hook.Hook` wrap type.
       Params:
@@ -33,16 +31,7 @@ class Hook
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GHook*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

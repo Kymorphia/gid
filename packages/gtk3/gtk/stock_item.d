@@ -9,10 +9,8 @@ import gtk.c.types;
 import gtk.types;
 
 /** */
-class StockItem
+class StockItem : StructWrap!(GtkStockItem)
 {
-  GtkStockItem _cInstance;
-
   /**
       Create a `stock_item.StockItem` wrap type.
       Params:
@@ -34,16 +32,7 @@ class StockItem
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkStockItem*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

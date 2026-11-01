@@ -799,3 +799,4 @@ enum GTypeEnum
   Object = 20 << GTypeFundamentalShift,
   Variant = 21 << GTypeFundamentalShift,
 }
+

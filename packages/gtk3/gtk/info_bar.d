@@ -97,7 +97,7 @@ class InfoBar : gtk.box.Box
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

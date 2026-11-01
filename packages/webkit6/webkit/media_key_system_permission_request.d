@@ -30,7 +30,7 @@ class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permis
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

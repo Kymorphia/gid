@@ -17,7 +17,7 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

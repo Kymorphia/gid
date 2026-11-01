@@ -23,7 +23,7 @@ import gobject.gid_builder;
     returns false, then the behavior of other [gio.pollable_input_stream.PollableInputStream] methods is
     undefined.
 */
-interface PollableInputStream
+interface PollableInputStream : GidWrap
 {
 
   /** */

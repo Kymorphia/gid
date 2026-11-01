@@ -29,10 +29,8 @@ import gid.gid;
     the start of the range is the active point, as the user moves this to
     manipulate the selection.
 */
-class TextSelection
+class TextSelection : StructWrap!(AtkTextSelection)
 {
-  AtkTextSelection _cInstance;
-
   /**
       Create a `text_selection.TextSelection` wrap type.
       Params:
@@ -56,16 +54,7 @@ class TextSelection
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(AtkTextSelection*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private atk.object.ObjectWrap _startObjectRef; // Keeps borrowed field value alive

@@ -11,29 +11,13 @@ import glib.types;
     Contains the public fields of a
     [Queue](data-structures.html#double-ended-queues).
 */
-class Queue
+class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
 {
-  GQueue* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GQueue*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_queue_free)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

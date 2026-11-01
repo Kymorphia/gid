@@ -18,7 +18,7 @@ class GpgContext : gmime.crypto_context.CryptoContext
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

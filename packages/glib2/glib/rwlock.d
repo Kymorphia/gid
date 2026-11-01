@@ -72,10 +72,8 @@ import glib.types;
     
     A GRWLock should only be accessed with the g_rw_lock_ functions.
 */
-class RWLock
+class RWLock : StructWrap!(GRWLock)
 {
-  GRWLock _cInstance;
-
   /**
       Create a `rwlock.RWLock` wrap type.
   */
@@ -86,16 +84,7 @@ class RWLock
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GRWLock*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

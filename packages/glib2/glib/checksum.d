@@ -26,32 +26,13 @@ import gobject.boxed;
     one go, use the convenience functions `func@GLib.compute_checksum_for_data`
     and `func@GLib.compute_checksum_for_string`, respectively.
 */
-class Checksum : gobject.boxed.Boxed
+class Checksum : gobject.boxed.BoxedWrap!(g_checksum_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())g_checksum_get_type != &gidSymbolNotFound ? g_checksum_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

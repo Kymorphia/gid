@@ -58,7 +58,7 @@ import gobject.gid_builder;
     not be implemented — their ‘wrappers’ are actually implemented with
     calls to [gio.action_group.ActionGroup.queryAction].
 */
-interface ActionGroup
+interface ActionGroup : GidWrap
 {
 
   /** */

@@ -25,9 +25,8 @@ import graphene.vec2;
     will internally operate on a normalized copy; all functions returning a
     #graphene_rect_t will always return a normalized rectangle.
 */
-class Rect : gobject.boxed.Boxed
+class Rect : gobject.boxed.BoxedWrap!(graphene_rect_get_type)
 {
-
   /**
       Create a `rect.Rect` boxed type.
       Params:
@@ -44,26 +43,7 @@ class Rect : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())graphene_rect_get_type != &gidSymbolNotFound ? graphene_rect_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

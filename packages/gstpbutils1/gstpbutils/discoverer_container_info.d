@@ -19,7 +19,7 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

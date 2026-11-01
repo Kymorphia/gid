@@ -24,7 +24,7 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

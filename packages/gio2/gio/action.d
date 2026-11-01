@@ -43,7 +43,7 @@ import gobject.gid_builder;
     Probably the only useful thing to do with a [gio.action.Action] is to put it
     inside of a [gio.simple_action_group.SimpleActionGroup].
 */
-interface Action
+interface Action : GidWrap
 {
 
   /** */

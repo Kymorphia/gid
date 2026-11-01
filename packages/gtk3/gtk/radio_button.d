@@ -111,7 +111,7 @@ class RadioButton : gtk.check_button.CheckButton
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

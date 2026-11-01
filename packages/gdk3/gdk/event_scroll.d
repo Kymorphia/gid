@@ -19,10 +19,8 @@ import gid.gid;
     these, the scroll deltas can be obtained with
     [gdk.event.Event.getScrollDeltas].
 */
-class EventScroll
+class EventScroll : StructWrap!(GdkEventScroll)
 {
-  GdkEventScroll _cInstance;
-
   /**
       Create a `event_scroll.EventScroll` wrap type.
       Params:
@@ -69,16 +67,7 @@ class EventScroll
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventScroll*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

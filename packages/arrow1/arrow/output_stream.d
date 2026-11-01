@@ -24,7 +24,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -21,7 +21,7 @@ import gtk.types;
     automatically acquire the `horizontal` or `vertical` CSS class depending on
     the value of the [gtk.orientable.Orientable.orientation] property.
 */
-interface Orientable
+interface Orientable : GidWrap
 {
 
   /** */

@@ -12,10 +12,8 @@ import gstvideo.types;
 /**
     H.264 H.265 metadata from SEI User Data Unregistered messages
 */
-class VideoSEIUserDataUnregisteredMeta
+class VideoSEIUserDataUnregisteredMeta : StructWrap!(GstVideoSEIUserDataUnregisteredMeta)
 {
-  GstVideoSEIUserDataUnregisteredMeta _cInstance;
-
   /**
       Create a `video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta` wrap type.
       Params:
@@ -31,16 +29,7 @@ class VideoSEIUserDataUnregisteredMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoSEIUserDataUnregisteredMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

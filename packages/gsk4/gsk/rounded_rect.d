@@ -25,10 +25,8 @@ import gsk.types;
     The algorithm used for normalizing corner sizes is described in
     [the CSS specification](https://drafts.csswg.org/css-backgrounds-3/#border-radius).
 */
-class RoundedRect
+class RoundedRect : StructWrap!(GskRoundedRect)
 {
-  GskRoundedRect _cInstance;
-
   /**
       Create a `rounded_rect.RoundedRect` wrap type.
       Params:
@@ -42,16 +40,7 @@ class RoundedRect
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GskRoundedRect*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

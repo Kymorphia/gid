@@ -38,7 +38,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

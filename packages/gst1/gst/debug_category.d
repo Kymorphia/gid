@@ -11,10 +11,8 @@ import gst.types;
     This is the struct that describes the categories. Once initialized with
     #GST_DEBUG_CATEGORY_INIT, its values can't be changed anymore.
 */
-class DebugCategory
+class DebugCategory : StructWrap!(GstDebugCategory)
 {
-  GstDebugCategory _cInstance;
-
   /**
       Create a `debug_category.DebugCategory` wrap type.
   */
@@ -25,16 +23,7 @@ class DebugCategory
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstDebugCategory*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

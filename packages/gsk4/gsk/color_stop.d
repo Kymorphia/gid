@@ -11,10 +11,8 @@ import gsk.types;
 /**
     A color stop in a gradient node.
 */
-class ColorStop
+class ColorStop : StructWrap!(GskColorStop)
 {
-  GskColorStop _cInstance;
-
   /**
       Create a `color_stop.ColorStop` wrap type.
       Params:
@@ -30,16 +28,7 @@ class ColorStop
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GskColorStop*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

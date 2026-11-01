@@ -23,7 +23,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

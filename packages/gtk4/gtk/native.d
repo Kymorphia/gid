@@ -28,7 +28,7 @@ import gtk.types;
     a [gsk.renderer.Renderer] for rendering on that surface. To get the
     renderer, use [gtk.native.Native.getRenderer].
 */
-interface Native
+interface Native : GidWrap
 {
 
   /** */

@@ -41,10 +41,8 @@ import gst.types;
     
     Interpretation of the fields of @info depends on the @reference.
 */
-class ReferenceTimestampMeta
+class ReferenceTimestampMeta : StructWrap!(GstReferenceTimestampMeta)
 {
-  GstReferenceTimestampMeta _cInstance;
-
   /**
       Create a `reference_timestamp_meta.ReferenceTimestampMeta` wrap type.
       Params:
@@ -64,16 +62,7 @@ class ReferenceTimestampMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstReferenceTimestampMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

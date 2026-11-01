@@ -33,7 +33,7 @@ class AspectFrame : gtk.frame.Frame
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

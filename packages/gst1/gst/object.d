@@ -72,7 +72,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

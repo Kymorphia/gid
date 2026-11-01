@@ -34,7 +34,7 @@ import gst.types;
     where to find presets through the GST_PRESET_PATH environment variable.
     Presets found in those paths will be considered as "app presets".
 */
-interface Preset
+interface Preset : GidWrap
 {
 
   /** */

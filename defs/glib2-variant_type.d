@@ -4,7 +4,7 @@ import glib.variant;
 import std.traits : isSomeString;
 import std.typecons : isTuple;
 
-class VariantType : Boxed
+class VariantType : BoxedWrap!g_variant_type_get_gtype
 {
 
   /**

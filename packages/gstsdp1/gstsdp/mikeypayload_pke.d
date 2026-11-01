@@ -14,10 +14,8 @@ import gstsdp.types;
     transport payload.  The encryption algorithm used is implicit from
     the certificate/public key used.
 */
-class MIKEYPayloadPKE
+class MIKEYPayloadPKE : StructWrap!(GstMIKEYPayloadPKE)
 {
-  GstMIKEYPayloadPKE _cInstance;
-
   /**
       Create a `mikeypayload_pke.MIKEYPayloadPKE` wrap type.
       Params:
@@ -33,16 +31,7 @@ class MIKEYPayloadPKE
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMIKEYPayloadPKE*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

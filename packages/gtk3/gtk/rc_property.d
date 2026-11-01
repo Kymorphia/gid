@@ -14,10 +14,8 @@ import gtk.types;
 /**
     Deprecated
 */
-class RcProperty
+class RcProperty : StructWrap!(GtkRcProperty)
 {
-  GtkRcProperty _cInstance;
-
   /**
       Create a `rc_property.RcProperty` wrap type.
       Params:
@@ -36,16 +34,7 @@ class RcProperty
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkRcProperty*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

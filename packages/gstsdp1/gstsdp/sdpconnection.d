@@ -10,10 +10,8 @@ import gstsdp.types;
 /**
     The contents of the SDP "c=" field which contains connection data.
 */
-class SDPConnection
+class SDPConnection : StructWrap!(GstSDPConnection)
 {
-  GstSDPConnection _cInstance;
-
   /**
       Create a `sdpconnection.SDPConnection` wrap type.
       Params:
@@ -36,16 +34,7 @@ class SDPConnection
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPConnection*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

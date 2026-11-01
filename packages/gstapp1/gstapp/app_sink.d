@@ -63,7 +63,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

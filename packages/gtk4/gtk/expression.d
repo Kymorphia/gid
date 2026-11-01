@@ -196,33 +196,26 @@ import gtk.types;
       </object>
     ```
 */
-class Expression
+class Expression : ReffedWrap!(GtkExpression*, gtk_expression_ref, gtk_expression_unref)
 {
-  GtkExpression* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GtkExpression*)ptr;
-
-    if (!take && ptr)
-      gtk_expression_ref(_cInstancePtr);
+    super(ptr, take);
   }
-
-  ~this() nothrow
-  {
-    if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(gtk_expression_unref)());
-  }
-
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
+  static GType _getGType() nothrow
   {
-    if (dup)
-      gtk_expression_ref(_cInstancePtr);
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_expression_get_type != &gidSymbolNotFound ? gtk_expression_get_type() : cast(GType)0;
+  }
 
-    return _cInstancePtr;
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
   }
 
   /**

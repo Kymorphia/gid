@@ -19,7 +19,7 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

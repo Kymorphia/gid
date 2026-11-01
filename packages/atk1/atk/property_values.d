@@ -13,10 +13,8 @@ import gobject.value;
     valid value. This is a field defined with the purpose of contain
     the previous value of the property, but is not used anymore.
 */
-class PropertyValues
+class PropertyValues : StructWrap!(AtkPropertyValues)
 {
-  AtkPropertyValues _cInstance;
-
   /**
       Create a `property_values.PropertyValues` wrap type.
       Params:
@@ -30,16 +28,7 @@ class PropertyValues
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(AtkPropertyValues*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

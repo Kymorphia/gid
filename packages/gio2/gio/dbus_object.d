@@ -18,7 +18,7 @@ import gobject.object;
     (see [gio.dbus_object_proxy.DBusObjectProxy]). It is essentially just a container of
     interfaces.
 */
-interface DBusObject
+interface DBusObject : GidWrap
 {
 
   /** */

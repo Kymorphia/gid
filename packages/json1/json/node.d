@@ -47,32 +47,13 @@ import json.types;
     have a reference count not equal to 1. To this end, JSON-GLib uses
     [json.node.Node.copy] and [json.node.Node.unref] internally.
 */
-class Node : gobject.boxed.Boxed
+class Node : gobject.boxed.BoxedWrap!(json_node_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())json_node_get_type != &gidSymbolNotFound ? json_node_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

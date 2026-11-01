@@ -23,7 +23,7 @@ import gobject.object;
     found in [glib-networking](https://gitlab.gnome.org/GNOME/glib-networking).
     GIO comes with an implementation for use inside Flatpak portals.
 */
-interface ProxyResolver
+interface ProxyResolver : GidWrap
 {
 
   /** */

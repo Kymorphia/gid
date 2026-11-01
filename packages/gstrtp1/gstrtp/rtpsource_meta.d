@@ -12,10 +12,8 @@ import gstrtp.types;
 /**
     Meta describing the source(s) of the buffer.
 */
-class RTPSourceMeta
+class RTPSourceMeta : StructWrap!(GstRTPSourceMeta)
 {
-  GstRTPSourceMeta _cInstance;
-
   /**
       Create a `rtpsource_meta.RTPSourceMeta` wrap type.
       Params:
@@ -35,16 +33,7 @@ class RTPSourceMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstRTPSourceMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

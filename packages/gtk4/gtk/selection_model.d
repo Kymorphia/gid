@@ -50,7 +50,7 @@ import gtk.types;
     Selections may happen asynchronously, so the only reliable way to find out
     when an item was selected is to listen to the signals that indicate selection.
 */
-interface SelectionModel
+interface SelectionModel : GidWrap
 {
 
   /** */

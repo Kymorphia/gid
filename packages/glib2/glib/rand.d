@@ -12,32 +12,13 @@ import gobject.boxed;
     The GRand struct is an opaque data structure. It should only be
     accessed through the g_rand_* functions.
 */
-class Rand : gobject.boxed.Boxed
+class Rand : gobject.boxed.BoxedWrap!(g_rand_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())g_rand_get_type != &gidSymbolNotFound ? g_rand_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

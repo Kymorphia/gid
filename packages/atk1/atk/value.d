@@ -156,7 +156,7 @@ import gobject.value;
     </para>
     </refsect1>
 */
-interface Value
+interface Value : GidWrap
 {
 
   /** */

@@ -22,7 +22,7 @@ import gobject.gid_builder;
     cases where one document contains "embedded content" which can
     reasonably be considered a document in its own right.
 */
-interface Document
+interface Document : GidWrap
 {
 
   /** */

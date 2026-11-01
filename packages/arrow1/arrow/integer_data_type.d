@@ -16,7 +16,7 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

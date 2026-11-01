@@ -11,10 +11,8 @@ import gstsdp.types;
 /**
     The timestamp payload carries the timestamp information
 */
-class MIKEYPayloadT
+class MIKEYPayloadT : StructWrap!(GstMIKEYPayloadT)
 {
-  GstMIKEYPayloadT _cInstance;
-
   /**
       Create a `mikeypayload_t.MIKEYPayloadT` wrap type.
       Params:
@@ -28,16 +26,7 @@ class MIKEYPayloadT
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMIKEYPayloadT*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

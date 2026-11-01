@@ -24,7 +24,7 @@ class EveryFilter : gtk.multi_filter.MultiFilter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

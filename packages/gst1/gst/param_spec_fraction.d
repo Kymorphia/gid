@@ -12,10 +12,8 @@ import gst.types;
     A GParamSpec derived structure that contains the meta data for fractional
     properties.
 */
-class ParamSpecFraction
+class ParamSpecFraction : StructWrap!(GstParamSpecFraction)
 {
-  GstParamSpecFraction _cInstance;
-
   /**
       Create a `param_spec_fraction.ParamSpecFraction` wrap type.
       Params:
@@ -39,16 +37,7 @@ class ParamSpecFraction
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstParamSpecFraction*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

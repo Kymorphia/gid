@@ -28,10 +28,8 @@ import gio.types;
     Flags relevant to this message will be returned in @flags. For example,
     `MSG_EOR` or `MSG_TRUNC`.
 */
-class InputMessage
+class InputMessage : StructWrap!(GInputMessage)
 {
-  GInputMessage _cInstance;
-
   /**
       Create a `input_message.InputMessage` wrap type.
       Params:
@@ -49,16 +47,7 @@ class InputMessage
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GInputMessage*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

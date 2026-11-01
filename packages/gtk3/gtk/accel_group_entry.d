@@ -10,10 +10,8 @@ import gtk.c.types;
 import gtk.types;
 
 /** */
-class AccelGroupEntry
+class AccelGroupEntry : StructWrap!(GtkAccelGroupEntry)
 {
-  GtkAccelGroupEntry _cInstance;
-
   /**
       Create a `accel_group_entry.AccelGroupEntry` wrap type.
       Params:
@@ -31,16 +29,7 @@ class AccelGroupEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkAccelGroupEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /** */

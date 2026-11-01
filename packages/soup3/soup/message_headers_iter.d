@@ -16,10 +16,8 @@ import soup.types;
     
     You may not modify the headers while iterating over them.
 */
-class MessageHeadersIter
+class MessageHeadersIter : StructWrap!(SoupMessageHeadersIter)
 {
-  SoupMessageHeadersIter _cInstance;
-
   /**
       Create a `message_headers_iter.MessageHeadersIter` wrap type.
   */
@@ -30,16 +28,7 @@ class MessageHeadersIter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(SoupMessageHeadersIter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

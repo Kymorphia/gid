@@ -17,7 +17,7 @@ class Mark : gtk.text_mark.TextMark
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

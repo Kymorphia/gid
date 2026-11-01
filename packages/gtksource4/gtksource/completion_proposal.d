@@ -14,7 +14,7 @@ import gtksource.c.types;
 import gtksource.types;
 
 /** */
-interface CompletionProposal
+interface CompletionProposal : GidWrap
 {
 
   /** */

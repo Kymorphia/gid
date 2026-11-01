@@ -13,10 +13,8 @@ import gstvideo.video_overlay_composition;
 /**
     Extra buffer metadata describing image overlay data.
 */
-class VideoOverlayCompositionMeta
+class VideoOverlayCompositionMeta : StructWrap!(GstVideoOverlayCompositionMeta)
 {
-  GstVideoOverlayCompositionMeta _cInstance;
-
   /**
       Create a `video_overlay_composition_meta.VideoOverlayCompositionMeta` wrap type.
       Params:
@@ -30,16 +28,7 @@ class VideoOverlayCompositionMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoOverlayCompositionMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

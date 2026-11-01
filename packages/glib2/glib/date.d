@@ -95,10 +95,16 @@ struct Date
     return _getGType();
   }
 
-  void* boxCopy() nothrow
+  /** */
+  static void* _cDup(void* ptr) nothrow
   {
-    import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType, cast(void*)&this);
+    return boxedCopy(_getGType, ptr);
+  }
+
+  /** */
+  static void _cFree(void* ptr) nothrow
+  {
+    boxedFree(_getGType, ptr);
   }
 
   /**

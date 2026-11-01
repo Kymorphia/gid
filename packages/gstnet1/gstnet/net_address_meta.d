@@ -15,10 +15,8 @@ import gstnet.types;
     in a #GstBuffer so that it network elements can track the to and from address
     of the buffer.
 */
-class NetAddressMeta
+class NetAddressMeta : StructWrap!(GstNetAddressMeta)
 {
-  GstNetAddressMeta _cInstance;
-
   /**
       Create a `net_address_meta.NetAddressMeta` wrap type.
       Params:
@@ -32,16 +30,7 @@ class NetAddressMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstNetAddressMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -110,7 +110,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

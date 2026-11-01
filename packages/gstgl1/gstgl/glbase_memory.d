@@ -20,9 +20,8 @@ import gstgl.types;
     
     Data is uploaded or downloaded from the GPU as is necessary.
 */
-class GLBaseMemory : gobject.boxed.Boxed
+class GLBaseMemory : gobject.boxed.BoxedWrap!(gst_gl_base_memory_get_type)
 {
-
   /**
       Create a `glbase_memory.GLBaseMemory` boxed type.
       Params:
@@ -41,26 +40,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_gl_base_memory_get_type != &gidSymbolNotFound ? gst_gl_base_memory_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

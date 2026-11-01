@@ -12,10 +12,8 @@ import gstvideo.types;
 /**
     Extra buffer metadata describing image cropping.
 */
-class VideoCropMeta
+class VideoCropMeta : StructWrap!(GstVideoCropMeta)
 {
-  GstVideoCropMeta _cInstance;
-
   /**
       Create a `video_crop_meta.VideoCropMeta` wrap type.
       Params:
@@ -35,16 +33,7 @@ class VideoCropMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoCropMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

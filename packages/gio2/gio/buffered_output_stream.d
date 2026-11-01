@@ -34,7 +34,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

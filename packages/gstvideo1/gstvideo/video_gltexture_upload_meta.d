@@ -15,10 +15,8 @@ import gstvideo.types;
     have OpenGL set up and call this from a thread where it is valid
     to upload something to an OpenGL texture.
 */
-class VideoGLTextureUploadMeta
+class VideoGLTextureUploadMeta : StructWrap!(GstVideoGLTextureUploadMeta)
 {
-  GstVideoGLTextureUploadMeta _cInstance;
-
   /**
       Create a `video_gltexture_upload_meta.VideoGLTextureUploadMeta` wrap type.
       Params:
@@ -36,16 +34,7 @@ class VideoGLTextureUploadMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoGLTextureUploadMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

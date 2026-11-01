@@ -14,10 +14,8 @@ import gstvideo.types;
 /**
     Extra buffer metadata describing an image region of interest
 */
-class VideoRegionOfInterestMeta
+class VideoRegionOfInterestMeta : StructWrap!(GstVideoRegionOfInterestMeta)
 {
-  GstVideoRegionOfInterestMeta _cInstance;
-
   /**
       Create a `video_region_of_interest_meta.VideoRegionOfInterestMeta` wrap type.
       Params:
@@ -43,16 +41,7 @@ class VideoRegionOfInterestMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoRegionOfInterestMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

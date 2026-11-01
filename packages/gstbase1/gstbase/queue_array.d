@@ -14,23 +14,13 @@ import gstbase.types;
 
     Deprecated: Use #GstVecDeque instead.
 */
-class QueueArray
+class QueueArray : OpaqueWrap!(GstQueueArray*, void, void)
 {
-  GstQueueArray* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstQueueArray*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /** */

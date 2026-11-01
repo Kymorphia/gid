@@ -11,23 +11,13 @@ import gstvideo.types;
     #GstVideoScaler is a utility object for rescaling and resampling
     video frames using various interpolation / sampling methods.
 */
-class VideoScaler
+class VideoScaler : OpaqueWrap!(GstVideoScaler*, void, void)
 {
-  GstVideoScaler* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstVideoScaler*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

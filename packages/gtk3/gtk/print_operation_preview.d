@@ -13,7 +13,7 @@ import gtk.print_context;
 import gtk.types;
 
 /** */
-interface PrintOperationPreview
+interface PrintOperationPreview : GidWrap
 {
 
   /** */

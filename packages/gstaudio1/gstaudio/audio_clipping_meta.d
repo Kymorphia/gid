@@ -23,10 +23,8 @@ import gstaudio.types;
     Note: If clipping of the start is done by adjusting the segment, this meta
     has to be dropped from buffers as otherwise clipping could happen twice.
 */
-class AudioClippingMeta
+class AudioClippingMeta : StructWrap!(GstAudioClippingMeta)
 {
-  GstAudioClippingMeta _cInstance;
-
   /**
       Create a `audio_clipping_meta.AudioClippingMeta` wrap type.
       Params:
@@ -44,16 +42,7 @@ class AudioClippingMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioClippingMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

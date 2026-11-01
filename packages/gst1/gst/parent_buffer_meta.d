@@ -20,10 +20,8 @@ import gst.types;
     buffer from being returned to a buffer pool until the #GstMemory is available
     for re-use.
 */
-class ParentBufferMeta
+class ParentBufferMeta : StructWrap!(GstParentBufferMeta)
 {
-  GstParentBufferMeta _cInstance;
-
   /**
       Create a `parent_buffer_meta.ParentBufferMeta` wrap type.
       Params:
@@ -37,16 +35,7 @@ class ParentBufferMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstParentBufferMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

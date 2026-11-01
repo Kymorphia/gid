@@ -12,10 +12,8 @@ import gstvideo.types;
 /**
     Extra buffer metadata providing Closed Caption.
 */
-class VideoCaptionMeta
+class VideoCaptionMeta : StructWrap!(GstVideoCaptionMeta)
 {
-  GstVideoCaptionMeta _cInstance;
-
   /**
       Create a `video_caption_meta.VideoCaptionMeta` wrap type.
       Params:
@@ -29,16 +27,7 @@ class VideoCaptionMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoCaptionMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

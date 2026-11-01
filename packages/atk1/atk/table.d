@@ -44,7 +44,7 @@ import gobject.object;
     expose other kind of children, like rows or captions. Right now,
     index-based methods are deprecated.
 */
-interface Table
+interface Table : GidWrap
 {
 
   /** */

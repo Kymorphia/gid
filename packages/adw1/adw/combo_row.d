@@ -77,7 +77,7 @@ class ComboRow : adw.action_row.ActionRow
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

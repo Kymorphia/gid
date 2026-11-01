@@ -27,7 +27,7 @@ class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_featur
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -12,23 +12,13 @@ import gtk.types;
     
     [gtk.buildable_parse_context.BuildableParseContext] is an opaque struct.
 */
-class BuildableParseContext
+class BuildableParseContext : OpaqueWrap!(GtkBuildableParseContext*, void, void)
 {
-  GtkBuildableParseContext* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GtkBuildableParseContext*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

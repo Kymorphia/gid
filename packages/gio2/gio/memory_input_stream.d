@@ -28,7 +28,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

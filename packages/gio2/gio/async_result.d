@@ -98,7 +98,7 @@ import gobject.object;
     [glib.types.PRIORITY_LOW] and [glib.types.PRIORITY_HIGH], with [glib.types.PRIORITY_DEFAULT]
     as a default.
 */
-interface AsyncResult
+interface AsyncResult : GidWrap
 {
 
   /** */

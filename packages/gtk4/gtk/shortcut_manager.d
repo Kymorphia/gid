@@ -22,7 +22,7 @@ import gtk.types;
     Every widget that implements [gtk.shortcut_manager.ShortcutManager] will be used as a
     [gtk.types.ShortcutScope.Managed].
 */
-interface ShortcutManager
+interface ShortcutManager : GidWrap
 {
 
   /** */

@@ -16,7 +16,7 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

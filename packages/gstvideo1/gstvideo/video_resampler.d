@@ -12,10 +12,8 @@ import gstvideo.types;
     #GstVideoResampler is a structure which holds the information
     required to perform various kinds of resampling filtering.
 */
-class VideoResampler
+class VideoResampler : StructWrap!(GstVideoResampler)
 {
-  GstVideoResampler _cInstance;
-
   /**
       Create a `video_resampler.VideoResampler` wrap type.
       Params:
@@ -35,16 +33,7 @@ class VideoResampler
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoResampler*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

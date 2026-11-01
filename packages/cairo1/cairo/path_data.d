@@ -71,10 +71,8 @@ import gid.gid;
     iterate over the path data, instead of hardcoding the number of
     elements for each element type.
 */
-class PathData
+class PathData : StructWrap!(cairo_path_data_t)
 {
-  cairo_path_data_t _cInstance;
-
   /**
       Create a `path_data.PathData` wrap type.
   */
@@ -85,15 +83,6 @@ class PathData
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(cairo_path_data_t*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 }

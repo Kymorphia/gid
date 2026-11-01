@@ -21,10 +21,8 @@ import json.types;
     All the fields in the [json.object_iter.ObjectIter] structure are private and should
     never be accessed directly.
 */
-class ObjectIter
+class ObjectIter : StructWrap!(JsonObjectIter)
 {
-  JsonObjectIter _cInstance;
-
   /**
       Create a `object_iter.ObjectIter` wrap type.
   */
@@ -35,16 +33,7 @@ class ObjectIter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(JsonObjectIter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

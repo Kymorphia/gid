@@ -12,32 +12,13 @@ import gstpbutils.types;
     Opaque context structure for the plugin installation. Use the provided
     API to set details on it.
 */
-class InstallPluginsContext : gobject.boxed.Boxed
+class InstallPluginsContext : gobject.boxed.BoxedWrap!(gst_install_plugins_context_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_install_plugins_context_get_type != &gidSymbolNotFound ? gst_install_plugins_context_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

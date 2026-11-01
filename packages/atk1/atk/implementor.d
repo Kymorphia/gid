@@ -10,23 +10,13 @@ import gid.gid;
 import gobject.object;
 
 /** */
-class Implementor
+class Implementor : OpaqueWrap!(AtkImplementor*, void, void)
 {
-  AtkImplementor* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(AtkImplementor*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

@@ -14,9 +14,8 @@ import gstcontroller.types;
     values used for interpolation. This "inherits" from
     GstTimedValue.
 */
-class ControlPoint : gobject.boxed.Boxed
+class ControlPoint : gobject.boxed.BoxedWrap!(gst_control_point_get_type)
 {
-
   /**
       Create a `control_point.ControlPoint` boxed type.
       Params:
@@ -33,26 +32,7 @@ class ControlPoint : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_control_point_get_type != &gidSymbolNotFound ? gst_control_point_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

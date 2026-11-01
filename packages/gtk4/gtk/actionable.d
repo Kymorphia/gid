@@ -24,7 +24,7 @@ import gtk.types;
     are added with [gtk.widget.Widget.insertActionGroup] will be consulted
     as well.
 */
-interface Actionable
+interface Actionable : GidWrap
 {
 
   /** */

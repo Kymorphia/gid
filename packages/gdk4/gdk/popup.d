@@ -21,7 +21,7 @@ import gobject.object;
     They can be modal, which is indicated by the [gdk.popup.Popup.autohide]
     property.
 */
-interface Popup
+interface Popup : GidWrap
 {
 
   /** */

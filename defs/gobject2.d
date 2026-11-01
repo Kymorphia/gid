@@ -198,3 +198,20 @@ void signalHandlersDestroy(gobject.object.ObjectWrap instance) nothrow
     Object = 20 << GTypeFundamentalShift,
     Variant = 21 << GTypeFundamentalShift,
   }
+
+//!class ParamSpec
+
+  /**
+   * Get the GType of ParamSpec (the G_TYPE_PARAM fundamental type).
+   * Returns: The GType
+   */
+  static GType _getGType() nothrow
+  {
+    return cast(GType)GTypeEnum.Param;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType;
+  }

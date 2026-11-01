@@ -9,8 +9,23 @@ import std.traits : isSomeString, isTypeTuple;
 import std.typecons : Tuple;
 import std.variant : StdVariant = Variant;
 
-class Variant
+class Variant : ReffedWrap!(GVariant*, g_variant_ref, g_variant_unref)
 {
+  /**
+   * Get the GType of Variant (the G_TYPE_VARIANT fundamental type).
+   * Returns: The GType
+   */
+  static GType _getGType() nothrow
+  {
+    return g_variant_get_gtype();
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType;
+  }
+
   /**
    * Template to create a new Variant from a single D value.
    * Params:

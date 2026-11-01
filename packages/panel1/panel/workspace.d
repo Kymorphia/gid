@@ -38,7 +38,7 @@ class Workspace : adw.application_window.ApplicationWindow
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

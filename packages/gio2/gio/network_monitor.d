@@ -23,7 +23,7 @@ import gobject.object;
     
     There is also an implementation for use inside Flatpak sandboxes.
 */
-interface NetworkMonitor
+interface NetworkMonitor : GidWrap
 {
 
   /** */

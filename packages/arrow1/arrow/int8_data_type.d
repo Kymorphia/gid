@@ -16,7 +16,7 @@ class Int8DataType : arrow.integer_data_type.IntegerDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

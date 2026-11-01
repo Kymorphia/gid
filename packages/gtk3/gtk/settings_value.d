@@ -9,10 +9,8 @@ import gtk.c.types;
 import gtk.types;
 
 /** */
-class SettingsValue
+class SettingsValue : StructWrap!(GtkSettingsValue)
 {
-  GtkSettingsValue _cInstance;
-
   /**
       Create a `settings_value.SettingsValue` wrap type.
       Params:
@@ -27,16 +25,7 @@ class SettingsValue
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkSettingsValue*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

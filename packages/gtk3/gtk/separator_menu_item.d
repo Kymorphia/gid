@@ -32,7 +32,7 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

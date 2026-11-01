@@ -14,7 +14,7 @@ import gstvideo.types;
     The interface allows unified access to control flipping and autocenter
     operation of video-sources or operators.
 */
-interface VideoOrientation
+interface VideoOrientation : GidWrap
 {
 
   /** */

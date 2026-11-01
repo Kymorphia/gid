@@ -12,7 +12,7 @@ import gtk.tree_path;
 import gtk.types;
 
 /** */
-interface TreeDragDest
+interface TreeDragDest : GidWrap
 {
 
   /** */

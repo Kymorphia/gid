@@ -51,7 +51,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

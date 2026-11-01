@@ -19,7 +19,7 @@ import gtk.types;
     `enum@Gtk.AccessibleProperty.DESCRIPTION` properties for accessible
     objects containing simple, unformatted text.
 */
-interface AccessibleText
+interface AccessibleText : GidWrap
 {
 
   /** */

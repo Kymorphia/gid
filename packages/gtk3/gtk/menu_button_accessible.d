@@ -22,7 +22,7 @@ class MenuButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

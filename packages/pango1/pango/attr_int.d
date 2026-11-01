@@ -12,10 +12,8 @@ import pango.types;
     The [pango.attr_int.AttrInt] structure is used to represent attributes with
     an integer or enumeration value.
 */
-class AttrInt
+class AttrInt : StructWrap!(PangoAttrInt)
 {
-  PangoAttrInt _cInstance;
-
   /**
       Create a `attr_int.AttrInt` wrap type.
       Params:
@@ -29,16 +27,7 @@ class AttrInt
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrInt*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -18,7 +18,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

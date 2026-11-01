@@ -15,10 +15,8 @@ import gstbase.types;
     32 and 64 bits. It also provides functions to read NUL-terminated strings
     in various character encodings.
 */
-class ByteReader
+class ByteReader : StructWrap!(GstByteReader)
 {
-  GstByteReader _cInstance;
-
   /**
       Create a `byte_reader.ByteReader` wrap type.
       Params:
@@ -32,16 +30,7 @@ class ByteReader
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstByteReader*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

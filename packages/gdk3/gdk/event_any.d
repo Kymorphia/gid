@@ -13,10 +13,8 @@ import gid.gid;
     Any event pointer can safely be cast to a pointer to a #GdkEventAny to
     access these fields.
 */
-class EventAny
+class EventAny : StructWrap!(GdkEventAny)
 {
-  GdkEventAny _cInstance;
-
   /**
       Create a `event_any.EventAny` wrap type.
       Params:
@@ -34,16 +32,7 @@ class EventAny
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventAny*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

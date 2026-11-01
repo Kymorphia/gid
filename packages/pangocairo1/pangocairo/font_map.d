@@ -19,7 +19,7 @@ import pangocairo.types;
     The actual type of the font map will depend on the particular
     font technology Cairo was compiled to use.
 */
-interface FontMap
+interface FontMap : GidWrap
 {
 
   /** */

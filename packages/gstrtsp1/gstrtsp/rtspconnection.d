@@ -23,23 +23,13 @@ import gstrtsp.types;
     This object manages the RTSP connection to the server. It provides function
     to receive and send bytes and messages.
 */
-class RTSPConnection
+class RTSPConnection : OpaqueWrap!(GstRTSPConnection*, void, void)
 {
-  GstRTSPConnection* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstRTSPConnection*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

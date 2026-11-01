@@ -73,7 +73,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

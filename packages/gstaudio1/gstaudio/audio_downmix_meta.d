@@ -19,10 +19,8 @@ import gstaudio.types;
     the input channels with the coefficients in @matrix[i] and taking the sum
     of the results.
 */
-class AudioDownmixMeta
+class AudioDownmixMeta : StructWrap!(GstAudioDownmixMeta)
 {
-  GstAudioDownmixMeta _cInstance;
-
   /**
       Create a `audio_downmix_meta.AudioDownmixMeta` wrap type.
   */
@@ -33,16 +31,7 @@ class AudioDownmixMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioDownmixMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

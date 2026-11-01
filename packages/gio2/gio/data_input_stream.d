@@ -26,7 +26,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

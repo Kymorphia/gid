@@ -21,10 +21,8 @@ import gstaudio.types;
     
     The different channels in @planes are always in the GStreamer channel order.
 */
-class AudioBuffer
+class AudioBuffer : StructWrap!(GstAudioBuffer)
 {
-  GstAudioBuffer _cInstance;
-
   /**
       Create a `audio_buffer.AudioBuffer` wrap type.
       Params:
@@ -42,16 +40,7 @@ class AudioBuffer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioBuffer*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

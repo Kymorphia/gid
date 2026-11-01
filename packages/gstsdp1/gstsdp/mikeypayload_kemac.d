@@ -11,10 +11,8 @@ import gstsdp.types;
 /**
     A structure holding the KEMAC payload
 */
-class MIKEYPayloadKEMAC
+class MIKEYPayloadKEMAC : StructWrap!(GstMIKEYPayloadKEMAC)
 {
-  GstMIKEYPayloadKEMAC _cInstance;
-
   /**
       Create a `mikeypayload_kemac.MIKEYPayloadKEMAC` wrap type.
       Params:
@@ -30,16 +28,7 @@ class MIKEYPayloadKEMAC
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMIKEYPayloadKEMAC*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

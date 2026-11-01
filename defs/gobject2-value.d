@@ -11,7 +11,7 @@ import gobject.types;
 /**
  * Abstract class used as the base for GObject boxed types.
  */
-class Value : Boxed
+class Value : BoxedWrap!g_value_get_type
 {
 
   /**

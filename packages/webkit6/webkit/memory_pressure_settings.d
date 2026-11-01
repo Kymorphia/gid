@@ -30,32 +30,13 @@ import webkit.types;
     and the settings will be applied to all the network processes created after that call by any instance of
     #WebKitWebsiteDataManager.
 */
-class MemoryPressureSettings : gobject.boxed.Boxed
+class MemoryPressureSettings : gobject.boxed.BoxedWrap!(webkit_memory_pressure_settings_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())webkit_memory_pressure_settings_get_type != &gidSymbolNotFound ? webkit_memory_pressure_settings_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

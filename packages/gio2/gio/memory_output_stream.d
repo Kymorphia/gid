@@ -28,7 +28,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

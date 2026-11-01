@@ -22,7 +22,7 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

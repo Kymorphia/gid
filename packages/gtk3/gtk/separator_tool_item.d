@@ -37,7 +37,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

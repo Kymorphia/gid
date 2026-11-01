@@ -10,10 +10,8 @@ import gio.types;
 /**
     Struct used in `func@Gio.DBusError.register_error_domain`.
 */
-class DBusErrorEntry
+class DBusErrorEntry : StructWrap!(GDBusErrorEntry)
 {
-  GDBusErrorEntry _cInstance;
-
   /**
       Create a `dbus_error_entry.DBusErrorEntry` wrap type.
       Params:
@@ -29,16 +27,7 @@ class DBusErrorEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GDBusErrorEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

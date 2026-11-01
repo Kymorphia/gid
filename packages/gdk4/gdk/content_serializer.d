@@ -35,7 +35,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

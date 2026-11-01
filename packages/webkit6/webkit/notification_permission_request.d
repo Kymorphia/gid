@@ -27,7 +27,7 @@ class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permissi
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

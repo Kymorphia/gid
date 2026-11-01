@@ -13,10 +13,8 @@ import gstbase.types;
     Structure used by #GstDataQueue. You can supply a different structure, as
     long as the top of the structure is identical to this structure.
 */
-class DataQueueItem
+class DataQueueItem : StructWrap!(GstDataQueueItem)
 {
-  GstDataQueueItem _cInstance;
-
   /**
       Create a `data_queue_item.DataQueueItem` wrap type.
       Params:
@@ -41,16 +39,7 @@ class DataQueueItem
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstDataQueueItem*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gst.mini_object.MiniObject _objectRef; // Keeps borrowed field value alive

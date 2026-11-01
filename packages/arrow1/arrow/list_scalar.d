@@ -17,7 +17,7 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

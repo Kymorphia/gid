@@ -17,7 +17,7 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

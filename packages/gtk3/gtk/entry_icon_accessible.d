@@ -20,7 +20,7 @@ class EntryIconAccessible : atk.object.ObjectWrap, atk.action.Action, atk.compon
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

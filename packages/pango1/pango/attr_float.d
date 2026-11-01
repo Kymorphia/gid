@@ -12,10 +12,8 @@ import pango.types;
     The [pango.attr_float.AttrFloat] structure is used to represent attributes with
     a float or double value.
 */
-class AttrFloat
+class AttrFloat : StructWrap!(PangoAttrFloat)
 {
-  PangoAttrFloat _cInstance;
-
   /**
       Create a `attr_float.AttrFloat` wrap type.
       Params:
@@ -29,16 +27,7 @@ class AttrFloat
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrFloat*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

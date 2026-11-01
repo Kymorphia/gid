@@ -25,33 +25,26 @@ import gsk.types;
     them. All [gsk.render_node.RenderNode]s are immutable, you can only specify their
     properties during construction.
 */
-class RenderNode
+class RenderNode : ReffedWrap!(GskRenderNode*, gsk_render_node_ref, gsk_render_node_unref)
 {
-  GskRenderNode* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GskRenderNode*)ptr;
-
-    if (!take && ptr)
-      gsk_render_node_ref(_cInstancePtr);
+    super(ptr, take);
   }
-
-  ~this() nothrow
-  {
-    if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(gsk_render_node_unref)());
-  }
-
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
+  static GType _getGType() nothrow
   {
-    if (dup)
-      gsk_render_node_ref(_cInstancePtr);
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gsk_render_node_get_type != &gidSymbolNotFound ? gsk_render_node_get_type() : cast(GType)0;
+  }
 
-    return _cInstancePtr;
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
   }
 
   /**

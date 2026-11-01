@@ -131,7 +131,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

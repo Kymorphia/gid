@@ -12,10 +12,8 @@ import gid.gid;
 /**
     Describes a property change on a window.
 */
-class EventProperty
+class EventProperty : StructWrap!(GdkEventProperty)
 {
-  GdkEventProperty _cInstance;
-
   /**
       Create a `event_property.EventProperty` wrap type.
       Params:
@@ -38,16 +36,7 @@ class EventProperty
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventProperty*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

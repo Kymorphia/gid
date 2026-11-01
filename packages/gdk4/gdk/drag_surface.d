@@ -14,7 +14,7 @@ import gobject.gid_builder;
 /**
     A surface that is used during DND.
 */
-interface DragSurface
+interface DragSurface : GidWrap
 {
 
   /** */

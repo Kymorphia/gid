@@ -136,7 +136,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

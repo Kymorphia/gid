@@ -8,10 +8,8 @@ import glib.c.types;
 import glib.types;
 
 /** */
-class TestLogBuffer
+class TestLogBuffer : StructWrap!(GTestLogBuffer)
 {
-  GTestLogBuffer _cInstance;
-
   /**
       Create a `test_log_buffer.TestLogBuffer` wrap type.
   */
@@ -22,16 +20,7 @@ class TestLogBuffer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GTestLogBuffer*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

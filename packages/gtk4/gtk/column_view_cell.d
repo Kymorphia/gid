@@ -34,7 +34,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

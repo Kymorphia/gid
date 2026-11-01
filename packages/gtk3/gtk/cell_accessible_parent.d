@@ -15,7 +15,7 @@ import gtk.cell_accessible;
 import gtk.types;
 
 /** */
-interface CellAccessibleParent
+interface CellAccessibleParent : GidWrap
 {
 
   /** */

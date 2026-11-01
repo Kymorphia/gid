@@ -19,9 +19,8 @@ import pango.types;
     of shaping text with [pango.layout.Layout] is a list of [pango.layout_line.LayoutLine],
     each of which contains a list of [pango.glyph_item.GlyphItem].
 */
-class GlyphItem : gobject.boxed.Boxed
+class GlyphItem : gobject.boxed.BoxedWrap!(pango_glyph_item_get_type)
 {
-
   /**
       Create a `glyph_item.GlyphItem` boxed type.
       Params:
@@ -43,26 +42,7 @@ class GlyphItem : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())pango_glyph_item_get_type != &gidSymbolNotFound ? pango_glyph_item_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

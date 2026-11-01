@@ -17,10 +17,8 @@ import gstsdp.types;
 /**
     The contents of the SDP "m=" field with all related fields.
 */
-class SDPMedia
+class SDPMedia : StructWrap!(GstSDPMedia)
 {
-  GstSDPMedia _cInstance;
-
   /**
       Create a `sdpmedia.SDPMedia` wrap type.
       Params:
@@ -42,16 +40,7 @@ class SDPMedia
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPMedia*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

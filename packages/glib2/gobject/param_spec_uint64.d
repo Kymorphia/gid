@@ -17,6 +17,6 @@ class ParamSpecUInt64 : gobject.param_spec.ParamSpec
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(GParamSpec*)ptr, take);
+    super(ptr, take);
   }
 }

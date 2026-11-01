@@ -19,7 +19,7 @@ import gtk.widget_path;
     GtkStyleProvider is an interface used to provide style information to a #GtkStyleContext.
     See [gtk.style_context.StyleContext.addProvider] and [gtk.style_context.StyleContext.addProviderForScreen].
 */
-interface StyleProvider
+interface StyleProvider : GidWrap
 {
 
   /** */

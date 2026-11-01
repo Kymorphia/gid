@@ -30,7 +30,7 @@ class GestureSingle : gtk.gesture.Gesture
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

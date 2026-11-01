@@ -19,23 +19,13 @@ import glib.types;
 
     Deprecated: Use a #GHashTable instead
 */
-class Cache
+class Cache : OpaqueWrap!(GCache*, void, void)
 {
-  GCache* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GCache*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

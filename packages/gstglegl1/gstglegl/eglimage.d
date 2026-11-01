@@ -18,9 +18,8 @@ import gstvideo.video_info;
     or [gstglegl.eglimage.EGLImage.fromDmabufDirect], or #GstGLMemoryEGL provides a
     #GstAllocator to allocate `EGLImage`'s bound to and OpenGL texture.
 */
-class EGLImage : gobject.boxed.Boxed
+class EGLImage : gobject.boxed.BoxedWrap!(gst_egl_image_get_type)
 {
-
   /**
       Create a `eglimage.EGLImage` boxed type.
   */
@@ -32,26 +31,7 @@ class EGLImage : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_egl_image_get_type != &gidSymbolNotFound ? gst_egl_image_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

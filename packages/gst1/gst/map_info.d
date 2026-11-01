@@ -16,10 +16,8 @@ import gst.types;
     needs to be unmapped using [gst.buffer.Buffer.unmap] or [gst.memory.Memory.unmap]. Instead,
     #GstBufferMapInfo and #GstMemoryMapInfo can be used in that case.
 */
-class MapInfo
+class MapInfo : StructWrap!(GstMapInfo)
 {
-  GstMapInfo _cInstance;
-
   /**
       Create a `map_info.MapInfo` wrap type.
       Params:
@@ -37,16 +35,7 @@ class MapInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMapInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gst.memory.Memory _memoryRef; // Keeps borrowed field value alive

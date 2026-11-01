@@ -12,10 +12,8 @@ import pango.types;
     The [pango.attr_font_features.AttrFontFeatures] structure is used to represent OpenType
     font features as an attribute.
 */
-class AttrFontFeatures
+class AttrFontFeatures : StructWrap!(PangoAttrFontFeatures)
 {
-  PangoAttrFontFeatures _cInstance;
-
   /**
       Create a `attr_font_features.AttrFontFeatures` wrap type.
       Params:
@@ -29,16 +27,7 @@ class AttrFontFeatures
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrFontFeatures*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

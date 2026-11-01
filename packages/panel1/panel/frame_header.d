@@ -16,7 +16,7 @@ import panel.widget;
 /**
     An interface implemented by the header of a #PanelFrame.
 */
-interface FrameHeader
+interface FrameHeader : GidWrap
 {
 
   /** */

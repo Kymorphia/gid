@@ -18,10 +18,8 @@ import gstvideo.types;
     for alpha channels to CODECs or formats that don't support that out of the
     box.
 */
-class VideoCodecAlphaMeta
+class VideoCodecAlphaMeta : StructWrap!(GstVideoCodecAlphaMeta)
 {
-  GstVideoCodecAlphaMeta _cInstance;
-
   /**
       Create a `video_codec_alpha_meta.VideoCodecAlphaMeta` wrap type.
       Params:
@@ -35,16 +33,7 @@ class VideoCodecAlphaMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoCodecAlphaMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

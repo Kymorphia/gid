@@ -48,7 +48,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

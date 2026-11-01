@@ -46,7 +46,7 @@ class PasswordEntryRow : adw.entry_row.EntryRow
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

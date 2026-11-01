@@ -23,7 +23,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

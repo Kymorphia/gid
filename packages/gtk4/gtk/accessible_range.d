@@ -36,7 +36,7 @@ import gtk.types;
     - [gtk.types.AccessibleProperty.ValueNow]
     - [gtk.types.AccessibleProperty.ValueText]
 */
-interface AccessibleRange
+interface AccessibleRange : GidWrap
 {
 
   /** */

@@ -21,7 +21,7 @@ import gtk.types;
     Deprecated: List views use widgets for displaying their
         contents. See [gtk.editable.Editable] for editable text widgets
 */
-interface CellEditable
+interface CellEditable : GidWrap
 {
 
   /** */

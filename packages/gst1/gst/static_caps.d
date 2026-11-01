@@ -14,9 +14,8 @@ import gst.types;
     used in conjunction with GST_STATIC_CAPS() and [gst.static_caps.StaticCaps.get] to
     instantiate a #GstCaps.
 */
-class StaticCaps : gobject.boxed.Boxed
+class StaticCaps : gobject.boxed.BoxedWrap!(gst_static_caps_get_type)
 {
-
   /**
       Create a `static_caps.StaticCaps` boxed type.
   */
@@ -28,26 +27,7 @@ class StaticCaps : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_static_caps_get_type != &gidSymbolNotFound ? gst_static_caps_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

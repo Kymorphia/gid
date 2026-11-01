@@ -42,7 +42,7 @@ import gtk.types;
     - When any of the adjustments emits the [gtk.adjustment.Adjustment.valueChanged]
       signal, the scrollable widget should scroll its contents.
 */
-interface Scrollable
+interface Scrollable : GidWrap
 {
 
   /** */

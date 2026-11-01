@@ -22,7 +22,7 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

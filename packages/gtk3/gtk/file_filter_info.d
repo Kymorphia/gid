@@ -11,10 +11,8 @@ import gtk.types;
     A #GtkFileFilterInfo-struct is used to pass information about the
     tested file to [gtk.file_filter.FileFilter.filter].
 */
-class FileFilterInfo
+class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
 {
-  GtkFileFilterInfo _cInstance;
-
   /**
       Create a `file_filter_info.FileFilterInfo` wrap type.
       Params:
@@ -38,16 +36,7 @@ class FileFilterInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkFileFilterInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

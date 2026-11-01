@@ -10,10 +10,8 @@ import gstrtsp.types;
 /**
     A time range.
 */
-class RTSPTimeRange
+class RTSPTimeRange : StructWrap!(GstRTSPTimeRange)
 {
-  GstRTSPTimeRange _cInstance;
-
   /**
       Create a `rtsptime_range.RTSPTimeRange` wrap type.
       Params:
@@ -35,16 +33,7 @@ class RTSPTimeRange
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstRTSPTimeRange*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

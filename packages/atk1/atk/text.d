@@ -34,7 +34,7 @@ import gobject.gid_builder;
     character length; also bounding box glyph-to-offset mapping may be
     complex for languages which use ligatures.
 */
-interface Text
+interface Text : GidWrap
 {
 
   /** */

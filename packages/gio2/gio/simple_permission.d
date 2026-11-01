@@ -23,7 +23,7 @@ class SimplePermission : gio.permission.Permission
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

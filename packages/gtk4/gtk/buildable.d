@@ -23,7 +23,7 @@ import gtk.types;
     An object only needs to implement this interface if it needs to extend the
     [gtk.builder.Builder] XML format or run any extra routines at deserialization time.
 */
-interface Buildable
+interface Buildable : GidWrap
 {
 
   /** */

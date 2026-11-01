@@ -20,7 +20,7 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

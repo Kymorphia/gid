@@ -12,23 +12,13 @@ import gstvideo.video_frame;
 import gstvideo.video_info;
 
 /** */
-class VideoConverter
+class VideoConverter : OpaqueWrap!(GstVideoConverter*, void, void)
 {
-  GstVideoConverter* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstVideoConverter*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

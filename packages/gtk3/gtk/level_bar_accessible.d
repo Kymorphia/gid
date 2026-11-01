@@ -20,7 +20,7 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -22,10 +22,8 @@ import gid.gid;
     (or [gdk.types.EventType.TouchCancel]) event. With multitouch devices, there may be
     several active sequences at the same time.
 */
-class EventTouch
+class EventTouch : StructWrap!(GdkEventTouch)
 {
-  GdkEventTouch _cInstance;
-
   /**
       Create a `event_touch.EventTouch` wrap type.
       Params:
@@ -68,16 +66,7 @@ class EventTouch
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventTouch*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

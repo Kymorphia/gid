@@ -15,10 +15,8 @@ import gid.gid;
     again. Note that implicit grabs (which are initiated by button presses)
     can also cause #GdkEventGrabBroken events.
 */
-class EventGrabBroken
+class EventGrabBroken : StructWrap!(GdkEventGrabBroken)
 {
-  GdkEventGrabBroken _cInstance;
-
   /**
       Create a `event_grab_broken.EventGrabBroken` wrap type.
       Params:
@@ -46,16 +44,7 @@ class EventGrabBroken
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventGrabBroken*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

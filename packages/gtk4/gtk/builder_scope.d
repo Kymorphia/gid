@@ -28,7 +28,7 @@ import gtk.types;
     may want to (partially) derive from or fall back to a [gtk.builder_cscope.BuilderCScope],
     as that class implements support for automatic lookups from C symbols.
 */
-interface BuilderScope
+interface BuilderScope : GidWrap
 {
 
   /** */

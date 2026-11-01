@@ -18,7 +18,7 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

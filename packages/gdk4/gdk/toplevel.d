@@ -23,7 +23,7 @@ import gobject.gid_builder;
     the windowing system, such as controlling maximization and size of the
     surface, setting icons and transient parents for dialogs.
 */
-interface Toplevel
+interface Toplevel : GidWrap
 {
 
   /** */

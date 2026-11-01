@@ -9,10 +9,8 @@ import gtk.types;
 import gtk.widget;
 
 /** */
-class TableChild
+class TableChild : StructWrap!(GtkTableChild)
 {
-  GtkTableChild _cInstance;
-
   /**
       Create a `table_child.TableChild` wrap type.
       Params:
@@ -50,16 +48,7 @@ class TableChild
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkTableChild*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gtk.widget.Widget _widgetRef; // Keeps borrowed field value alive

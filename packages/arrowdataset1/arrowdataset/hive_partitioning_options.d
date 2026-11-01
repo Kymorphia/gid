@@ -17,7 +17,7 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

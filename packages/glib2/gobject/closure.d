@@ -56,9 +56,8 @@ import gobject.value;
     - [gobject.closure.Closure.invalidate] and invalidation notifiers allow callbacks to be
       automatically removed when the objects they point to go away.
 */
-class Closure : gobject.boxed.Boxed
+class Closure : gobject.boxed.BoxedWrap!(g_closure_get_type)
 {
-
   /**
       Create a `closure.Closure` boxed type.
       Params:
@@ -77,26 +76,7 @@ class Closure : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())g_closure_get_type != &gidSymbolNotFound ? g_closure_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

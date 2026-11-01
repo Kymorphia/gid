@@ -12,10 +12,8 @@ import gtksource.types;
     #GtkSourceRegionIter is an opaque datatype; ignore all its fields.
     Initialize the iter with [gtksource.region.Region.getStartRegionIter].
 */
-class RegionIter
+class RegionIter : StructWrap!(GtkSourceRegionIter)
 {
-  GtkSourceRegionIter _cInstance;
-
   /**
       Create a `region_iter.RegionIter` wrap type.
   */
@@ -26,16 +24,7 @@ class RegionIter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkSourceRegionIter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

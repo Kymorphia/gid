@@ -28,7 +28,7 @@ import gobject.gid_builder;
     mode for a given group will be notified through the #GdkEventPadGroupMode
     event.
 */
-interface DevicePad
+interface DevicePad : GidWrap
 {
 
   /** */

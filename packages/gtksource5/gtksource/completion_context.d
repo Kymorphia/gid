@@ -42,7 +42,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

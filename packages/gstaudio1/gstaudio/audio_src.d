@@ -31,7 +31,7 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

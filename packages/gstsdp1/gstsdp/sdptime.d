@@ -11,10 +11,8 @@ import gstsdp.types;
     The contents of the SDP "t=" field which specify the start and stop times for
     a conference session.
 */
-class SDPTime
+class SDPTime : StructWrap!(GstSDPTime)
 {
-  GstSDPTime _cInstance;
-
   /**
       Create a `sdptime.SDPTime` wrap type.
       Params:
@@ -32,16 +30,7 @@ class SDPTime
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPTime*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -21,7 +21,7 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

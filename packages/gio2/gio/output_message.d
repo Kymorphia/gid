@@ -19,10 +19,8 @@ import gobject.object;
     If @address is null then the message is sent to the default receiver
     (as previously set by [gio.socket.Socket.connect]).
 */
-class OutputMessage
+class OutputMessage : StructWrap!(GOutputMessage)
 {
-  GOutputMessage _cInstance;
-
   /**
       Create a `output_message.OutputMessage` wrap type.
       Params:
@@ -41,16 +39,7 @@ class OutputMessage
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GOutputMessage*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gio.socket_address.SocketAddress _addressRef; // Keeps borrowed field value alive

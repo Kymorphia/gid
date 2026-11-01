@@ -33,10 +33,8 @@ import gobject.types;
     It is invalid to take a #GWeakRef on an object during #GObjectClass.dispose
     without first having or creating a strong reference to the object.
 */
-class WeakRef
+class WeakRef : StructWrap!(GWeakRef)
 {
-  GWeakRef _cInstance;
-
   /**
       Create a `weak_ref.WeakRef` wrap type.
   */
@@ -47,15 +45,6 @@ class WeakRef
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GWeakRef*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 }

@@ -68,7 +68,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

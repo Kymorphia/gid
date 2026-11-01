@@ -34,7 +34,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

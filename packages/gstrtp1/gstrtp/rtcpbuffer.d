@@ -22,10 +22,8 @@ import gstrtp.types;
     into the RTCP buffer; you can move to the next packet with
     [gstrtp.rtcppacket.RTCPPacket.moveToNext].
 */
-class RTCPBuffer
+class RTCPBuffer : StructWrap!(GstRTCPBuffer)
 {
-  GstRTCPBuffer _cInstance;
-
   /**
       Create a `rtcpbuffer.RTCPBuffer` wrap type.
       Params:
@@ -39,16 +37,7 @@ class RTCPBuffer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstRTCPBuffer*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive

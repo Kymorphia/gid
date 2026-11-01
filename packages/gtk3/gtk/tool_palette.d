@@ -102,7 +102,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

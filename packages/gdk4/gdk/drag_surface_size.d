@@ -11,32 +11,13 @@ import gobject.boxed;
 /**
     Contains information that is useful to compute the size of a drag surface.
 */
-class DragSurfaceSize : gobject.boxed.Boxed
+class DragSurfaceSize : gobject.boxed.BoxedWrap!(gdk_drag_surface_size_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gdk_drag_surface_size_get_type != &gidSymbolNotFound ? gdk_drag_surface_size_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

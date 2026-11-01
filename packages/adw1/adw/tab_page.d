@@ -22,7 +22,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

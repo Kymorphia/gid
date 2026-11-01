@@ -35,7 +35,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

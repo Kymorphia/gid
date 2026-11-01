@@ -19,7 +19,7 @@ class MapArray : arrow.list_array.ListArray
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

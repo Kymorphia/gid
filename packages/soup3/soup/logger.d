@@ -78,7 +78,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

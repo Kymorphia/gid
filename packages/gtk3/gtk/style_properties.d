@@ -37,7 +37,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -13,10 +13,8 @@ import pango.types;
     The [pango.attr_shape.AttrShape] structure is used to represent attributes which
     impose shape restrictions.
 */
-class AttrShape
+class AttrShape : StructWrap!(PangoAttrShape)
 {
-  PangoAttrShape _cInstance;
-
   /**
       Create a `attr_shape.AttrShape` wrap type.
       Params:
@@ -36,16 +34,7 @@ class AttrShape
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrShape*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

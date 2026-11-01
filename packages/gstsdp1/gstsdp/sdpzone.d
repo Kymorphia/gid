@@ -12,10 +12,8 @@ import gstsdp.types;
     specify a list of time zone adjustments and offsets from the base
     time.
 */
-class SDPZone
+class SDPZone : StructWrap!(GstSDPZone)
 {
-  GstSDPZone _cInstance;
-
   /**
       Create a `sdpzone.SDPZone` wrap type.
       Params:
@@ -31,16 +29,7 @@ class SDPZone
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstSDPZone*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

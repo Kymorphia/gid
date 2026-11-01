@@ -8,23 +8,13 @@ import gstvideo.c.types;
 import gstvideo.types;
 
 /** */
-class VideoChromaResample
+class VideoChromaResample : OpaqueWrap!(GstVideoChromaResample*, void, void)
 {
-  GstVideoChromaResample* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstVideoChromaResample*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

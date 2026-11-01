@@ -18,32 +18,13 @@ import gobject.boxed;
     Memory management of #cairo_device_t is done with
     [cairo.device.Device.reference] and [cairo.device.Device.destroy].
 */
-class Device : gobject.boxed.Boxed
+class Device : gobject.boxed.BoxedWrap!(cairo_gobject_device_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())cairo_gobject_device_get_type != &gidSymbolNotFound ? cairo_gobject_device_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

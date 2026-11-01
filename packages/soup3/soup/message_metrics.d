@@ -24,32 +24,13 @@ import soup.types;
     being loaded. You can connect to different [soup.message.Message] signals to get the
     final result of every value.
 */
-class MessageMetrics : gobject.boxed.Boxed
+class MessageMetrics : gobject.boxed.BoxedWrap!(soup_message_metrics_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())soup_message_metrics_get_type != &gidSymbolNotFound ? soup_message_metrics_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

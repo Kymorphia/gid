@@ -34,10 +34,8 @@ import gst.types;
     See #GstBuffer for how the metadata can be added, retrieved and removed from
     buffers.
 */
-class Meta
+class Meta : StructWrap!(GstMeta)
 {
-  GstMeta _cInstance;
-
   /**
       Create a `meta.Meta` wrap type.
       Params:
@@ -51,16 +49,7 @@ class Meta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

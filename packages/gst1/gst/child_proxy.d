@@ -28,7 +28,7 @@ import gst.types;
     scheme is recursive. Thus `child1::child2::property` is valid too, if
     `child1` and `child2` implement the #GstChildProxy interface.
 */
-interface ChildProxy
+interface ChildProxy : GidWrap
 {
 
   /** */

@@ -22,7 +22,7 @@ class BooleanCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessibl
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

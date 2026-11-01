@@ -10,10 +10,8 @@ import gobject.types;
 /**
     A union holding one collected value.
 */
-class TypeCValue
+class TypeCValue : StructWrap!(GTypeCValue)
 {
-  GTypeCValue _cInstance;
-
   /**
       Create a `type_cvalue.TypeCValue` wrap type.
       Params:
@@ -33,16 +31,7 @@ class TypeCValue
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GTypeCValue*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

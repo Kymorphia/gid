@@ -8,23 +8,13 @@ import glib.c.types;
 import glib.types;
 
 /** */
-class MemChunk
+class MemChunk : OpaqueWrap!(GMemChunk*, void, void)
 {
-  GMemChunk* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GMemChunk*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /** */

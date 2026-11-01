@@ -19,7 +19,7 @@ import gobject.gid_builder;
     GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
     file or the `GioUnix-2.0` GIR namespace when using it.
 */
-interface FileDescriptorBased
+interface FileDescriptorBased : GidWrap
 {
 
   /** */

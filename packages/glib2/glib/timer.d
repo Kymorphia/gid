@@ -14,23 +14,13 @@ import glib.types;
     This is done somewhat differently on different platforms, and can be
     tricky to get exactly right, so [glib.timer.Timer] provides a portable/convenient interface.
 */
-class Timer
+class Timer : OpaqueWrap!(GTimer*, void, void)
 {
-  GTimer* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GTimer*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

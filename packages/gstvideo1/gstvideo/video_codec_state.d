@@ -24,9 +24,8 @@ import gstvideo.video_mastering_display_info;
     [gstvideo.video_decoder.VideoDecoder.setOutputState] or
     [gstvideo.video_encoder.VideoEncoder.setOutputState] methods.
 */
-class VideoCodecState : gobject.boxed.Boxed
+class VideoCodecState : gobject.boxed.BoxedWrap!(gst_video_codec_state_get_type)
 {
-
   /**
       Create a `video_codec_state.VideoCodecState` boxed type.
       Params:
@@ -47,26 +46,7 @@ class VideoCodecState : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_video_codec_state_get_type != &gidSymbolNotFound ? gst_video_codec_state_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

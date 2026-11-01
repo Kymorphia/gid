@@ -19,7 +19,7 @@ import gobject.object;
     on the service side (see [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]) and client side
     (see [gio.dbus_proxy.DBusProxy]).
 */
-interface DBusInterface
+interface DBusInterface : GidWrap
 {
 
   /** */

@@ -13,10 +13,8 @@ import pango.types;
     The [pango.attr_font_desc.AttrFontDesc] structure is used to store an attribute that
     sets all aspects of the font description at once.
 */
-class AttrFontDesc
+class AttrFontDesc : StructWrap!(PangoAttrFontDesc)
 {
-  PangoAttrFontDesc _cInstance;
-
   /**
       Create a `attr_font_desc.AttrFontDesc` wrap type.
       Params:
@@ -30,16 +28,7 @@ class AttrFontDesc
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAttrFontDesc*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

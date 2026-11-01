@@ -17,10 +17,8 @@ import gst.types;
     [gst.meta.Meta.deserialize], but only if the #GstStructure does not contain any
     fields that cannot be serialized, see [gst.types.SerializeFlags.Strict].
 */
-class CustomMeta
+class CustomMeta : StructWrap!(GstCustomMeta)
 {
-  GstCustomMeta _cInstance;
-
   /**
       Create a `custom_meta.CustomMeta` wrap type.
   */
@@ -31,16 +29,7 @@ class CustomMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstCustomMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

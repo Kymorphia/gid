@@ -19,7 +19,7 @@ import gtk.types;
     In GTK+, the main widgets that implement this interface are
     #GtkColorChooserWidget, #GtkColorChooserDialog and #GtkColorButton.
 */
-interface ColorChooser
+interface ColorChooser : GidWrap
 {
 
   /** */

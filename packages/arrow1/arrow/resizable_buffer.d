@@ -17,7 +17,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

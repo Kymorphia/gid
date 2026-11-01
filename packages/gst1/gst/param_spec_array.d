@@ -11,10 +11,8 @@ import gst.types;
 /**
     A GParamSpec derived structure for arrays of values.
 */
-class ParamSpecArray
+class ParamSpecArray : StructWrap!(GstParamSpecArray)
 {
-  GstParamSpecArray _cInstance;
-
   /**
       Create a `param_spec_array.ParamSpecArray` wrap type.
       Params:
@@ -28,16 +26,7 @@ class ParamSpecArray
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstParamSpecArray*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

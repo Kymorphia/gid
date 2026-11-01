@@ -27,7 +27,7 @@ import gtk.types;
     The [gio.list_model.ListModel.itemsChanged] signal has the same effect, all sections in
     that range are invalidated, too.
 */
-interface SectionModel
+interface SectionModel : GidWrap
 {
 
   /** */

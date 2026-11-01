@@ -10,10 +10,8 @@ import gstsdp.types;
 /**
     A Type/Length/Value field for security parameters
 */
-class MIKEYPayloadSPParam
+class MIKEYPayloadSPParam : StructWrap!(GstMIKEYPayloadSPParam)
 {
-  GstMIKEYPayloadSPParam _cInstance;
-
   /**
       Create a `mikeypayload_spparam.MIKEYPayloadSPParam` wrap type.
       Params:
@@ -29,16 +27,7 @@ class MIKEYPayloadSPParam
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMIKEYPayloadSPParam*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

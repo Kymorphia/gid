@@ -13,10 +13,8 @@ import gobject.value;
     The GObjectConstructParam struct is an auxiliary structure used to hand
     #GParamSpec/#GValue pairs to the @constructor of a #GObjectClass.
 */
-class ObjectConstructParam
+class ObjectConstructParam : StructWrap!(GObjectConstructParam)
 {
-  GObjectConstructParam _cInstance;
-
   /**
       Create a `object_construct_param.ObjectConstructParam` wrap type.
       Params:
@@ -32,16 +30,7 @@ class ObjectConstructParam
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GObjectConstructParam*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gobject.param_spec.ParamSpec _pspecRef; // Keeps borrowed field value alive

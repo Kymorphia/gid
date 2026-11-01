@@ -17,7 +17,7 @@ import gtk.types;
     Deprecated: List views use widgets to display their contents.
         You can use [gtk.drop_target.DropTarget] to implement a drop destination
 */
-interface TreeDragDest
+interface TreeDragDest : GidWrap
 {
 
   /** */

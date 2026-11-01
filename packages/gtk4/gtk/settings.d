@@ -49,7 +49,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

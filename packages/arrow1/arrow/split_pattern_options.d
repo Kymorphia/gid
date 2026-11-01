@@ -17,7 +17,7 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

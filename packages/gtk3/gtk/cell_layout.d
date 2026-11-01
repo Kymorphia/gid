@@ -120,7 +120,7 @@ import gtk.types;
     problematic calls out of init() and into a constructor()
     for your class.
 */
-interface CellLayout
+interface CellLayout : GidWrap
 {
 
   /** */

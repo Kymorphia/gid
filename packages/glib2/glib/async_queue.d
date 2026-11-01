@@ -13,29 +13,13 @@ import glib.types;
     
     It should only be accessed through the `g_async_queue_*` functions.
 */
-class AsyncQueue
+class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_ref)
 {
-  GAsyncQueue* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GAsyncQueue*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_async_queue_unref)());
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? cast(void*)g_async_queue_ref(_cInstancePtr) : cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

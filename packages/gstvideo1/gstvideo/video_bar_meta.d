@@ -23,10 +23,8 @@ import gstvideo.types;
     
     and SMPTE ST2016-1
 */
-class VideoBarMeta
+class VideoBarMeta : StructWrap!(GstVideoBarMeta)
 {
-  GstVideoBarMeta _cInstance;
-
   /**
       Create a `video_bar_meta.VideoBarMeta` wrap type.
       Params:
@@ -52,16 +50,7 @@ class VideoBarMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoBarMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

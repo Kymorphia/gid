@@ -27,7 +27,7 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

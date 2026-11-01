@@ -20,10 +20,8 @@ import gid.gid;
     This event type will be used pretty rarely. It only is important for
     XInput aware programs that are drawing their own cursor.
 */
-class EventProximity
+class EventProximity : StructWrap!(GdkEventProximity)
 {
-  GdkEventProximity _cInstance;
-
   /**
       Create a `event_proximity.EventProximity` wrap type.
       Params:
@@ -46,16 +44,7 @@ class EventProximity
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventProximity*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

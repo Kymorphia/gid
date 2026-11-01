@@ -95,7 +95,7 @@ class ListBox : gtk.widget.Widget
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

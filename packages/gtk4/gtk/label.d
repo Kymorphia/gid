@@ -250,7 +250,7 @@ class Label : gtk.widget.Widget, gtk.accessible_hypertext.AccessibleHypertext, g
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

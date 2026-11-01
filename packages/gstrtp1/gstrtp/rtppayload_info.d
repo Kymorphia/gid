@@ -10,10 +10,8 @@ import gstrtp.types;
 /**
     Structure holding default payload type information.
 */
-class RTPPayloadInfo
+class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
 {
-  GstRTPPayloadInfo _cInstance;
-
   /**
       Create a `rtppayload_info.RTPPayloadInfo` wrap type.
       Params:
@@ -39,16 +37,7 @@ class RTPPayloadInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstRTPPayloadInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

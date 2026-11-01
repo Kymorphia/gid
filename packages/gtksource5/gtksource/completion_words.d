@@ -25,7 +25,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

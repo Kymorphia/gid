@@ -39,7 +39,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

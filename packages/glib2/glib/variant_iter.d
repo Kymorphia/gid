@@ -12,29 +12,13 @@ import glib.variant;
     #GVariantIter is an opaque data structure and can only be accessed
     using the following functions.
 */
-class VariantIter
+class VariantIter : OpaqueWrap!(GVariantIter*, g_variant_iter_free, void)
 {
-  GVariantIter* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GVariantIter*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_variant_iter_free)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

@@ -12,10 +12,8 @@ import gobject.value;
 /**
     A #GCClosure is a specialization of #GClosure for C function callbacks.
 */
-class CClosure
+class CClosure : StructWrap!(GCClosure)
 {
-  GCClosure _cInstance;
-
   /**
       Create a `cclosure.CClosure` wrap type.
   */
@@ -26,16 +24,7 @@ class CClosure
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GCClosure*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

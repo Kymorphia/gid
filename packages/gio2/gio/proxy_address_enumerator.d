@@ -30,7 +30,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

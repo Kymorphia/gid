@@ -13,10 +13,8 @@ import gstbase.types;
     bits into a memory buffer. It provides functions for writing any
     number of bits into 8, 16, 32 and 64 bit variables.
 */
-class BitWriter
+class BitWriter : StructWrap!(GstBitWriter)
 {
-  GstBitWriter _cInstance;
-
   /**
       Create a `bit_writer.BitWriter` wrap type.
       Params:
@@ -30,16 +28,7 @@ class BitWriter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstBitWriter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

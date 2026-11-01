@@ -41,7 +41,7 @@ import gobject.object;
     [gio.dtls_connection.DtlsConnection] will not raise a [gio.types.IOErrorEnum.NotConnected] error on
     further I/O.
 */
-interface DtlsConnection
+interface DtlsConnection : GidWrap
 {
 
   /** */

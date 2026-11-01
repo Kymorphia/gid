@@ -103,7 +103,7 @@ class View : gtk.text_view.TextView
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

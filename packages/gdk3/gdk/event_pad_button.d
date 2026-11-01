@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Generated during [gdk.types.InputSource.TabletPad] button presses and releases.
 */
-class EventPadButton
+class EventPadButton : StructWrap!(GdkEventPadButton)
 {
-  GdkEventPadButton _cInstance;
-
   /**
       Create a `event_pad_button.EventPadButton` wrap type.
       Params:
@@ -42,16 +40,7 @@ class EventPadButton
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventPadButton*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

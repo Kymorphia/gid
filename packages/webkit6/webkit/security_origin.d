@@ -20,32 +20,13 @@ import webkit.types;
     origins, beware that if both protocol and host are null, the origins
     should not be treated as equal.
 */
-class SecurityOrigin : gobject.boxed.Boxed
+class SecurityOrigin : gobject.boxed.BoxedWrap!(webkit_security_origin_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())webkit_security_origin_get_type != &gidSymbolNotFound ? webkit_security_origin_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

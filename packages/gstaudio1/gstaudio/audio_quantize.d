@@ -8,23 +8,13 @@ import gstaudio.c.types;
 import gstaudio.types;
 
 /** */
-class AudioQuantize
+class AudioQuantize : OpaqueWrap!(GstAudioQuantize*, void, void)
 {
-  GstAudioQuantize* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstAudioQuantize*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

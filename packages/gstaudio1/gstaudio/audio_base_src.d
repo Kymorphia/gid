@@ -23,7 +23,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

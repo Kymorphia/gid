@@ -22,7 +22,7 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

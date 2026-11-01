@@ -26,7 +26,7 @@ import pango.font_map;
     Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
       instead
 */
-interface FontChooser
+interface FontChooser : GidWrap
 {
 
   /** */

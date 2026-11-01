@@ -205,7 +205,7 @@ class Label : gtk.misc.Misc
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -40,7 +40,7 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

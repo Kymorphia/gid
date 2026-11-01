@@ -11,10 +11,8 @@ import gtk.types;
     A GtkRecentFilterInfo struct is used
     to pass information about the tested file to [gtk.recent_filter.RecentFilter.filter].
 */
-class RecentFilterInfo
+class RecentFilterInfo : StructWrap!(GtkRecentFilterInfo)
 {
-  GtkRecentFilterInfo _cInstance;
-
   /**
       Create a `recent_filter_info.RecentFilterInfo` wrap type.
       Params:
@@ -38,16 +36,7 @@ class RecentFilterInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkRecentFilterInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

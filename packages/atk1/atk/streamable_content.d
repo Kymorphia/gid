@@ -30,7 +30,7 @@ import gobject.gid_builder;
     tied to the current user-agent view of the a particular document,
     but may in some cases give access to the underlying model data.
 */
-interface StreamableContent
+interface StreamableContent : GidWrap
 {
 
   /** */

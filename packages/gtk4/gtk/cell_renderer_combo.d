@@ -36,7 +36,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

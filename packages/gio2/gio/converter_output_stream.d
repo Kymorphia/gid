@@ -27,7 +27,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

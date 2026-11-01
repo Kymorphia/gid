@@ -20,7 +20,7 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

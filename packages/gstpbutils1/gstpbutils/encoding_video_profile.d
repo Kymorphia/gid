@@ -19,7 +19,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

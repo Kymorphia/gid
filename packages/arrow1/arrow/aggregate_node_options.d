@@ -18,7 +18,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

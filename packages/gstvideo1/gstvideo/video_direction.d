@@ -13,7 +13,7 @@ import gstvideo.types;
     The interface allows unified access to control flipping and rotation
     operations of video-sources or operators.
 */
-interface VideoDirection
+interface VideoDirection : GidWrap
 {
 
   /** */

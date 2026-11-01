@@ -92,7 +92,7 @@ string objectMixin() nothrow
     struct, the [gstpbutils.types.ObjectClass] (or derived) struct, and any private data allocated
     by `G_ADD_PRIVATE()`.
 */
-class ObjectWrap
+class ObjectWrap : GidWrap
 {
   protected GObject* _cInstancePtr; // Pointer to wrapped C GObject
   DClosure[gulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
@@ -239,9 +239,9 @@ class ObjectWrap
   *   gObj = The GObject to reference
   * Returns: The GObject
   */
-  static void* _ref(void* gObj) nothrow
+  static void* _cDup(void* gObj) nothrow
   {
-    return g_object_ref(cast(GObject*)gObj);
+    return gObj ? g_object_ref(cast(GObject*)gObj) : null;
   }
 
   /**
@@ -249,9 +249,10 @@ class ObjectWrap
   * Params:
   *   gObj = The GObject to reference
   */
-  static _unref(void* gObj) nothrow
+  static void _cFree(void* gObj) nothrow
   {
-    g_object_unref(cast(GObject*)gObj);
+    if (gObj)
+      g_object_unref(cast(GObject*)gObj);
   }
 
   /**

@@ -143,7 +143,7 @@ import gtk.types;
     and [gtk.editable.Editable.deleteText] signals, you will need to connect
     to them on the delegate obtained via [gtk.editable.Editable.getDelegate].
 */
-interface Editable
+interface Editable : GidWrap
 {
 
   /** */

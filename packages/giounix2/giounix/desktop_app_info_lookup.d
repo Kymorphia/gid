@@ -18,7 +18,7 @@ import gobject.object;
     Deprecated: The [giounix.desktop_app_info_lookup.DesktopAppInfoLookup] interface is
         deprecated and unused by GIO.
 */
-interface DesktopAppInfoLookup
+interface DesktopAppInfoLookup : GidWrap
 {
 
   /** */

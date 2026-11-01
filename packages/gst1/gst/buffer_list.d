@@ -19,32 +19,13 @@ import gst.types;
     interesting when multiple buffers need to be pushed in one go because it
     can reduce the amount of overhead for pushing each buffer individually.
 */
-class BufferList : gobject.boxed.Boxed
+class BufferList : gobject.boxed.BoxedWrap!(gst_buffer_list_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_buffer_list_get_type != &gidSymbolNotFound ? gst_buffer_list_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

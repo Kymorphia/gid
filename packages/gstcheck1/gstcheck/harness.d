@@ -113,10 +113,8 @@ import gstcheck.types;
     gst_harness_push_from_src (h);
     ```
 */
-class Harness
+class Harness : StructWrap!(GstHarness)
 {
-  GstHarness _cInstance;
-
   /**
       Create a `harness.Harness` wrap type.
       Params:
@@ -134,16 +132,7 @@ class Harness
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstHarness*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gst.element.Element _elementRef; // Keeps borrowed field value alive

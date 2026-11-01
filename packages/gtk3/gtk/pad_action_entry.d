@@ -10,10 +10,8 @@ import gtk.types;
 /**
     Struct defining a pad action entry.
 */
-class PadActionEntry
+class PadActionEntry : StructWrap!(GtkPadActionEntry)
 {
-  GtkPadActionEntry _cInstance;
-
   /**
       Create a `pad_action_entry.PadActionEntry` wrap type.
       Params:
@@ -37,16 +35,7 @@ class PadActionEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkPadActionEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -27,7 +27,7 @@ import gobject.gid_builder;
     out through [gdk.device_pad.DevicePad.getGroupNModes], and the current mode
     for a given group will be notified through events of type [gdk.types.EventType.PadGroupMode].
 */
-interface DevicePad
+interface DevicePad : GidWrap
 {
 
   /** */

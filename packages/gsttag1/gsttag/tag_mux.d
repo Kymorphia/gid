@@ -33,7 +33,7 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -13,7 +13,7 @@ import glib.types;
 
 /// Class wrapper for boxed types
 /** */
-abstract class Boxed
+abstract class Boxed : GidWrap
 {
   void* _cInstancePtr; /// Pointer to the C boxed value
 
@@ -96,35 +96,73 @@ abstract class Boxed
   }
 
   /**
-  * Make a copy of the wrapped C boxed data.
-  * Returns: Copy of the boxed type
+  * Get the C boxed pointer.
+  * Params:
+  *   dup = Yes.Dup to return a copy of the boxed value which the caller owns, No.Dup to return the borrowed pointer
+  * Returns: The C boxed pointer
   */
-  void* boxCopy() nothrow
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    return _cInstancePtr ? cast(void*)g_boxed_copy(_gType, _cInstancePtr) : null;
+    return dup ? boxedCopy(_gType, _cInstancePtr) : _cInstancePtr;
+  }
+}
+
+/**
+* Template base class for boxed type wrapper classes, which provides the GType and the static C copy/free functions.
+* Boxed types which derive from another boxed wrapper class (rather than directly from Boxed) define these members themselves.
+* Params:
+*   getTypeFunc = The C get_type() function for the boxed type
+*/
+abstract class BoxedWrap(alias getTypeFunc) : Boxed
+{
+  /**
+  * Constructor for wrapping a GObject boxed value
+  * Params:
+  *   boxPtr = The pointer to the boxed type instance
+  *   take = Yes.Take if ownership of pointer should be taken by the D object, No.Take to do a box copy of it
+  */
+  this(void* boxPtr, Flag!"Take" take) nothrow
+  {
+    super(boxPtr, take);
   }
 
   /**
-  * Copy a C boxed value using g_boxed_copy.
-  * Params:
-  *   T = The D boxed type
-  *   cBoxed = The C boxed pointer
-  * Returns: A copy of the boxed type
+  * Get the GType of this boxed type.
+  * Returns: The GObject GType (0 if the get_type() function was not resolved)
   */
-  static void* boxedCopy(T)(void* cBoxed) nothrow
+  static GType _getGType() nothrow
   {
-    return cBoxed ? g_boxed_copy(T._getGType, cBoxed) : null;
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())getTypeFunc != &gidSymbolNotFound ? getTypeFunc() : cast(GType)0;
   }
 
   /**
-  * Free a C boxed value using g_boxed_free.
-  * Params:
-  *   T = The D boxed type
-  *   cBoxed = The C boxed pointer
+  * Boxed GType property.
+  * Returns: The GType of the Boxed class.
   */
-  static void boxedFree(T)(void* cBoxed) nothrow
+  override @property GType _gType() nothrow
   {
-    if (cBoxed)
-      g_boxed_free(T._getGType, cBoxed);
+    return _getGType();
+  }
+
+  /**
+  * Copy a C boxed instance (null safe).
+  * Params:
+  *   ptr = The C boxed instance pointer
+  * Returns: The copy
+  */
+  static void* _cDup(void* ptr) nothrow
+  {
+    return boxedCopy(_getGType, ptr);
+  }
+
+  /**
+  * Free a C boxed instance (null safe).
+  * Params:
+  *   ptr = The C boxed instance pointer
+  */
+  static void _cFree(void* ptr) nothrow
+  {
+    boxedFree(_getGType, ptr);
   }
 }

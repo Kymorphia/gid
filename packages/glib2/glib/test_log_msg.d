@@ -8,10 +8,8 @@ import glib.c.types;
 import glib.types;
 
 /** */
-class TestLogMsg
+class TestLogMsg : StructWrap!(GTestLogMsg)
 {
-  GTestLogMsg _cInstance;
-
   /**
       Create a `test_log_msg.TestLogMsg` wrap type.
   */
@@ -22,15 +20,6 @@ class TestLogMsg
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GTestLogMsg*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 }

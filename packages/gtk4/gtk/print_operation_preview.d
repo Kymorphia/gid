@@ -19,7 +19,7 @@ import gtk.types;
     [gtk.print_operation.PrintOperation.preview] signal by
     [gtk.print_operation.PrintOperation].
 */
-interface PrintOperationPreview
+interface PrintOperationPreview : GidWrap
 {
 
   /** */

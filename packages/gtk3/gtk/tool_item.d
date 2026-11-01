@@ -38,7 +38,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

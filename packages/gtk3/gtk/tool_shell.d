@@ -16,7 +16,7 @@ import pango.types;
     The #GtkToolShell interface allows container widgets to provide additional
     information when embedding #GtkToolItem widgets.
 */
-interface ToolShell
+interface ToolShell : GidWrap
 {
 
   /** */

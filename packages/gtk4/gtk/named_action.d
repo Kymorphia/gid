@@ -22,7 +22,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

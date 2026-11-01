@@ -15,23 +15,13 @@ import gobject.types;
     The implementation of the #GObject property system uses such a pool to
     store the #GParamSpecs of the properties all object types.
 */
-class ParamSpecPool
+class ParamSpecPool : OpaqueWrap!(GParamSpecPool*, void, void)
 {
-  GParamSpecPool* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GParamSpecPool*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

@@ -51,7 +51,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

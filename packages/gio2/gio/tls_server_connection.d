@@ -17,7 +17,7 @@ import gobject.object;
     [gio.tls_server_connection.TlsServerConnection] is the server-side subclass of
     [gio.tls_connection.TlsConnection], representing a server-side TLS connection.
 */
-interface TlsServerConnection
+interface TlsServerConnection : GidWrap
 {
 
   /** */

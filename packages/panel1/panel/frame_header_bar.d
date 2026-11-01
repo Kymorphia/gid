@@ -32,7 +32,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

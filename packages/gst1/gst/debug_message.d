@@ -8,23 +8,13 @@ import gst.c.types;
 import gst.types;
 
 /** */
-class DebugMessage
+class DebugMessage : OpaqueWrap!(GstDebugMessage*, void, void)
 {
-  GstDebugMessage* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstDebugMessage*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

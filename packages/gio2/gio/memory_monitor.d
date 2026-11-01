@@ -61,7 +61,7 @@ import gobject.object;
     Don’t forget to disconnect the [gio.memory_monitor.MemoryMonitor.lowMemoryWarning]
     signal, and unref the [gio.memory_monitor.MemoryMonitor] itself when exiting.
 */
-interface MemoryMonitor
+interface MemoryMonitor : GidWrap
 {
 
   /** */

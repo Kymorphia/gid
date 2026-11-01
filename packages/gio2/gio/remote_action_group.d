@@ -33,7 +33,7 @@ import gobject.gid_builder;
     provides a mechanism by which to receive platform data for action
     invocations that arrive by way of D-Bus.
 */
-interface RemoteActionGroup
+interface RemoteActionGroup : GidWrap
 {
 
   /** */

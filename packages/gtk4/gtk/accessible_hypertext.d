@@ -16,7 +16,7 @@ import gtk.types;
     objects that contain links. Those links don't necessarily have to be part
     of text, they can be associated with images and other things.
 */
-interface AccessibleHypertext
+interface AccessibleHypertext : GidWrap
 {
 
   /** */

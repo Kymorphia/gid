@@ -30,7 +30,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -14,10 +14,8 @@ import gobject.value;
 
     Deprecated: This type is not introspectable.
 */
-class Parameter
+class Parameter : StructWrap!(GParameter)
 {
-  GParameter _cInstance;
-
   /**
       Create a `parameter.Parameter` wrap type.
       Params:
@@ -31,16 +29,7 @@ class Parameter
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GParameter*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

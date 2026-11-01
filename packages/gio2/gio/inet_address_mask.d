@@ -25,7 +25,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

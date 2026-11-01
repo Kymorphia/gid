@@ -13,10 +13,8 @@ import gstvideo.video_info;
 /**
     A video frame obtained from [gstvideo.video_frame.VideoFrame.map]
 */
-class VideoFrame
+class VideoFrame : StructWrap!(GstVideoFrame)
 {
-  GstVideoFrame _cInstance;
-
   /**
       Create a `video_frame.VideoFrame` wrap type.
       Params:
@@ -35,16 +33,7 @@ class VideoFrame
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstVideoFrame*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

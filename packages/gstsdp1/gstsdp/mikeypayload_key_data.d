@@ -12,10 +12,8 @@ import gstsdp.types;
     The Key data payload contains key material. It should be added as sub
     payload to the KEMAC.
 */
-class MIKEYPayloadKeyData
+class MIKEYPayloadKeyData : StructWrap!(GstMIKEYPayloadKeyData)
 {
-  GstMIKEYPayloadKeyData _cInstance;
-
   /**
       Create a `mikeypayload_key_data.MIKEYPayloadKeyData` wrap type.
       Params:
@@ -37,16 +35,7 @@ class MIKEYPayloadKeyData
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMIKEYPayloadKeyData*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

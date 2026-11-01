@@ -27,7 +27,7 @@ import gstaudio.types;
     "mute" #GObject properties and handle setting and getting of them properly.
     The volume property is defined to be a linear volume factor.
 */
-interface StreamVolume
+interface StreamVolume : GidWrap
 {
 
   /** */

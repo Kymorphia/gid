@@ -16,10 +16,8 @@ import gtk.types;
     Each key binding element of a binding sets binding list is
     represented by a GtkBindingEntry.
 */
-class BindingEntry
+class BindingEntry : StructWrap!(GtkBindingEntry)
 {
-  GtkBindingEntry _cInstance;
-
   /**
       Create a `binding_entry.BindingEntry` wrap type.
       Params:
@@ -41,16 +39,7 @@ class BindingEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkBindingEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

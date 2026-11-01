@@ -22,7 +22,7 @@ import gobject.gid_builder;
     
     See `iface@AtkText`
 */
-interface EditableText
+interface EditableText : GidWrap
 {
 
   /** */

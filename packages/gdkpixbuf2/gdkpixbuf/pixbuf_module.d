@@ -56,10 +56,8 @@ import gmodule.module_;
        `$libdir/gdk-pixbuf-2.0/$version/loaders.cache`, unless overridden
        by the environment variable `GDK_PIXBUF_MODULE_FILE`)
 */
-class PixbufModule
+class PixbufModule : StructWrap!(GdkPixbufModule)
 {
-  GdkPixbufModule _cInstance;
-
   /**
       Create a `pixbuf_module.PixbufModule` wrap type.
       Params:
@@ -92,16 +90,7 @@ class PixbufModule
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkPixbufModule*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

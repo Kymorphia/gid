@@ -379,12 +379,12 @@
 
 //# Use a custom free function since g_thread_pool_free takes 3 arguments
 //!set record[ThreadPool][free-function] freePool
-//!class ThreadPool
+//!class ThreadPool pre
 
-  private static extern(C) void freePool(GThreadPool* pool) nothrow
-  {
-    g_thread_pool_free(pool, true, false); // immediate, wait
-  }
+private extern(C) void freePool(GThreadPool* pool) nothrow
+{
+  g_thread_pool_free(pool, true, false); // immediate, wait
+}
 
 //# Change Timer.new() function to a constructor and set to inspectable
 //!set record[Timer].function[new][introspectable] 1

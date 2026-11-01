@@ -19,9 +19,8 @@ import graphene.types;
     The contents of the [graphene.frustum.Frustum] are private, and should not be
     modified directly.
 */
-class Frustum : gobject.boxed.Boxed
+class Frustum : gobject.boxed.BoxedWrap!(graphene_frustum_get_type)
 {
-
   /**
       Create a `frustum.Frustum` boxed type.
   */
@@ -33,26 +32,7 @@ class Frustum : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())graphene_frustum_get_type != &gidSymbolNotFound ? graphene_frustum_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

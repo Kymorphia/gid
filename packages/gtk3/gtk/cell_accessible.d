@@ -23,7 +23,7 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

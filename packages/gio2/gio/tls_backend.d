@@ -17,7 +17,7 @@ import gobject.types;
     internal type used to coordinate the different classes implemented
     by a TLS backend.
 */
-interface TlsBackend
+interface TlsBackend : GidWrap
 {
 
   /** */

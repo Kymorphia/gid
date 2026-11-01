@@ -9,10 +9,8 @@ import gtk.types;
 import gtk.widget;
 
 /** */
-class FixedChild
+class FixedChild : StructWrap!(GtkFixedChild)
 {
-  GtkFixedChild _cInstance;
-
   /**
       Create a `fixed_child.FixedChild` wrap type.
       Params:
@@ -30,16 +28,7 @@ class FixedChild
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkFixedChild*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gtk.widget.Widget _widgetRef; // Keeps borrowed field value alive

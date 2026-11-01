@@ -58,7 +58,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

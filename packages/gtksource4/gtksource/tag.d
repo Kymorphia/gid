@@ -17,7 +17,7 @@ class Tag : gtk.text_tag.TextTag
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

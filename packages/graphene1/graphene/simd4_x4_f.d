@@ -8,10 +8,8 @@ import graphene.c.types;
 import graphene.types;
 
 /** */
-class Simd4X4F
+class Simd4X4F : StructWrap!(graphene_simd4x4f_t)
 {
-  graphene_simd4x4f_t _cInstance;
-
   /**
       Create a `simd4_x4_f.Simd4X4F` wrap type.
   */
@@ -22,15 +20,6 @@ class Simd4X4F
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(graphene_simd4x4f_t*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 }

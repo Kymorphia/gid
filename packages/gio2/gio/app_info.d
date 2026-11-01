@@ -73,7 +73,7 @@ import gobject.object;
     Different launcher applications (e.g. file managers) may have
     different ideas of what a given URI means.
 */
-interface AppInfo
+interface AppInfo : GidWrap
 {
 
   /** */

@@ -80,7 +80,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

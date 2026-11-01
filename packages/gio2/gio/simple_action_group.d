@@ -26,7 +26,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

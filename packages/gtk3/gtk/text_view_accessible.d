@@ -24,7 +24,7 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

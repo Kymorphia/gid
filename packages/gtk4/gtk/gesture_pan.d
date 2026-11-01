@@ -32,7 +32,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

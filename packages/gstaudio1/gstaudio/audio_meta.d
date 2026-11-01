@@ -15,10 +15,8 @@ import gstaudio.types;
     audio buffers. These functions in this module help to create and attach the
     meta as well as extracting it.
 */
-class AudioMeta
+class AudioMeta : StructWrap!(GstAudioMeta)
 {
-  GstAudioMeta _cInstance;
-
   /**
       Create a `audio_meta.AudioMeta` wrap type.
       Params:
@@ -32,16 +30,7 @@ class AudioMeta
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioMeta*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

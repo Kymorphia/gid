@@ -13,10 +13,8 @@ import gtk.types;
     an argument for a key binding signal emission as
     stored in #GtkBindingSignal.
 */
-class BindingArg
+class BindingArg : StructWrap!(GtkBindingArg)
 {
-  GtkBindingArg _cInstance;
-
   /**
       Create a `binding_arg.BindingArg` wrap type.
       Params:
@@ -30,16 +28,7 @@ class BindingArg
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkBindingArg*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

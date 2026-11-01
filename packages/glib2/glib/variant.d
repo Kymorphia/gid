@@ -266,34 +266,29 @@ import std.variant : StdVariant = Variant;
     management for those dictionaries, but the type information would
     be shared.
 */
-class Variant
+class Variant : ReffedWrap!(GVariant*, g_variant_ref, g_variant_unref)
 {
-  GVariant* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GVariant*)ptr;
-
-    if (!take && ptr)
-      g_variant_ref_sink(_cInstancePtr);
+    super(ptr, take);
   }
-
-  ~this() nothrow
+  /**
+  * Get the GType of Variant (the G_TYPE_VARIANT fundamental type).
+  * Returns: The GType
+  */
+  static GType _getGType() nothrow
   {
-    if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_variant_unref)());
+    return g_variant_get_gtype();
   }
-
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
+  override @property GType _gType() nothrow
   {
-    if (dup)
-      g_variant_ref_sink(_cInstancePtr);
-
-    return _cInstancePtr;
+    return _getGType;
   }
+
   /**
   * Template to create a new Variant from a single D value.
   * Params:

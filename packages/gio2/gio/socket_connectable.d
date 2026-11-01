@@ -70,7 +70,7 @@ import gobject.object;
     }
     ```
 */
-interface SocketConnectable
+interface SocketConnectable : GidWrap
 {
 
   /** */

@@ -28,7 +28,7 @@ import gobject.object;
     transparent background, in which case text glyph bounding box
     information is provided by #AtkText.
 */
-interface Component
+interface Component : GidWrap
 {
 
   /** */

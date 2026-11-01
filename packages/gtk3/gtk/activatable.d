@@ -247,7 +247,7 @@ import gtk.types;
     }
     ```
 */
-interface Activatable
+interface Activatable : GidWrap
 {
 
   /** */

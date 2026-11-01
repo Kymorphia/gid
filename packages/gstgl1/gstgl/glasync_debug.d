@@ -11,10 +11,8 @@ import gstgl.types;
     #GstGLAsyncDebug an opaque structure and should only be accessed through the
     provided API.
 */
-class GLAsyncDebug
+class GLAsyncDebug : StructWrap!(GstGLAsyncDebug)
 {
-  GstGLAsyncDebug _cInstance;
-
   /**
       Create a `glasync_debug.GLAsyncDebug` wrap type.
   */
@@ -25,16 +23,7 @@ class GLAsyncDebug
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstGLAsyncDebug*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -12,29 +12,13 @@ import glib.types;
     The #GSequence struct is an opaque data type representing a
     [sequence](data-structures.html#scalable-lists) data type.
 */
-class Sequence
+class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
 {
-  GSequence* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GSequence*)ptr;
-
-    owned = take;
-  }
-
-  ~this() nothrow
-  {
-    if (owned && _cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(g_sequence_free)());
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

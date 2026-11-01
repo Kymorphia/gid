@@ -19,7 +19,7 @@ import gobject.gid_builder;
     
     See `class@AtkObject`
 */
-interface Window
+interface Window : GidWrap
 {
 
   /** */

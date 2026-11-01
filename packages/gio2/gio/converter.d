@@ -22,7 +22,7 @@ import gobject.gid_builder;
     compression, decompression and regular expression
     replace.
 */
-interface Converter
+interface Converter : GidWrap
 {
 
   /** */

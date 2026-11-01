@@ -38,7 +38,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

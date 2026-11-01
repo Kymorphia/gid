@@ -10,10 +10,8 @@ import glib.types;
 /**
     The #GNode struct represents one node in a [n-ary tree](data-structures.html#n-ary-trees).
 */
-class Node
+class Node : StructWrap!(GNode)
 {
-  GNode _cInstance;
-
   /**
       Create a `node.Node` wrap type.
   */
@@ -24,16 +22,7 @@ class Node
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GNode*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

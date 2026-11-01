@@ -13,10 +13,8 @@ import pango.types;
     The [pango.analysis.Analysis] structure stores information about
     the properties of a segment of text.
 */
-class Analysis
+class Analysis : StructWrap!(PangoAnalysis)
 {
-  PangoAnalysis _cInstance;
-
   /**
       Create a `analysis.Analysis` wrap type.
       Params:
@@ -40,16 +38,7 @@ class Analysis
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(PangoAnalysis*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private pango.font.Font _fontRef; // Keeps borrowed field value alive

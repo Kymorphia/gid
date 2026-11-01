@@ -13,10 +13,8 @@ import gtk.types;
     activate a widget in response to a key press via a signal
     emission.
 */
-class BindingSignal
+class BindingSignal : StructWrap!(GtkBindingSignal)
 {
-  GtkBindingSignal _cInstance;
-
   /**
       Create a `binding_signal.BindingSignal` wrap type.
       Params:
@@ -30,16 +28,7 @@ class BindingSignal
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkBindingSignal*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

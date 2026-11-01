@@ -20,10 +20,8 @@ import gobject.types;
     The #GTypeValueTable provides the functions required by the #GValue
     implementation, to serve as a container for values of a type.
 */
-class TypeValueTable
+class TypeValueTable : StructWrap!(GTypeValueTable)
 {
-  GTypeValueTable _cInstance;
-
   /**
       Create a `type_value_table.TypeValueTable` wrap type.
       Params:
@@ -59,16 +57,7 @@ class TypeValueTable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GTypeValueTable*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -14,10 +14,8 @@ import gid.gid;
     information is only available if the X server supports the XFIXES
     extension.
 */
-class EventOwnerChange
+class EventOwnerChange : StructWrap!(GdkEventOwnerChange)
 {
-  GdkEventOwnerChange _cInstance;
-
   /**
       Create a `event_owner_change.EventOwnerChange` wrap type.
       Params:
@@ -44,16 +42,7 @@ class EventOwnerChange
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventOwnerChange*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

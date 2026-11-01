@@ -33,7 +33,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

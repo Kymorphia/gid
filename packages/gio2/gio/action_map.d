@@ -25,7 +25,7 @@ import gobject.object;
     This is the motivation for the ‘Map’ part of the interface
     name.
 */
-interface ActionMap
+interface ActionMap : GidWrap
 {
 
   /** */

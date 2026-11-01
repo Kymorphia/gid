@@ -13,10 +13,8 @@ import gst.types;
     Note that GstClockEntry should be treated as an opaque structure. It must
     not be extended or allocated using a custom allocator.
 */
-class ClockEntry
+class ClockEntry : StructWrap!(GstClockEntry)
 {
-  GstClockEntry _cInstance;
-
   /**
       Create a `clock_entry.ClockEntry` wrap type.
       Params:
@@ -30,16 +28,7 @@ class ClockEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstClockEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

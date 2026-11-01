@@ -11,10 +11,8 @@ import gstrtsp.types;
 /**
     Provides helper functions to deal with RTSP transport strings.
 */
-class RTSPTransport
+class RTSPTransport : StructWrap!(GstRTSPTransport)
 {
-  GstRTSPTransport _cInstance;
-
   /**
       Create a `rtsptransport.RTSPTransport` wrap type.
       Params:
@@ -60,16 +58,7 @@ class RTSPTransport
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstRTSPTransport*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

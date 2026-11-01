@@ -34,7 +34,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

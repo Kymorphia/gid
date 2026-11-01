@@ -11,10 +11,8 @@ import gstsdp.types;
 /**
     The RAND payload consists of a (pseudo-)random bit-string
 */
-class MIKEYPayloadRAND
+class MIKEYPayloadRAND : StructWrap!(GstMIKEYPayloadRAND)
 {
-  GstMIKEYPayloadRAND _cInstance;
-
   /**
       Create a `mikeypayload_rand.MIKEYPayloadRAND` wrap type.
       Params:
@@ -28,16 +26,7 @@ class MIKEYPayloadRAND
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstMIKEYPayloadRAND*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

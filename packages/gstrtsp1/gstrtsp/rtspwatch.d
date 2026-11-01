@@ -14,23 +14,13 @@ import gstrtsp.types;
     Opaque RTSP watch object that can be used for asynchronous RTSP
     operations.
 */
-class RTSPWatch
+class RTSPWatch : OpaqueWrap!(GstRTSPWatch*, void, void)
 {
-  GstRTSPWatch* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GstRTSPWatch*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

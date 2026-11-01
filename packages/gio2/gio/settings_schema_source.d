@@ -13,32 +13,13 @@ import gobject.boxed;
 /**
     This is an opaque structure type.  You may not access it directly.
 */
-class SettingsSchemaSource : gobject.boxed.Boxed
+class SettingsSchemaSource : gobject.boxed.BoxedWrap!(g_settings_schema_source_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())g_settings_schema_source_get_type != &gidSymbolNotFound ? g_settings_schema_source_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

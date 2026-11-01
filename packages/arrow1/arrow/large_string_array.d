@@ -17,7 +17,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

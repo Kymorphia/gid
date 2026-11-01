@@ -14,10 +14,8 @@ import gst.types;
 /**
     Info passed in the #GstPadProbeCallback.
 */
-class PadProbeInfo
+class PadProbeInfo : StructWrap!(GstPadProbeInfo)
 {
-  GstPadProbeInfo _cInstance;
-
   /**
       Create a `pad_probe_info.PadProbeInfo` wrap type.
       Params:
@@ -39,16 +37,7 @@ class PadProbeInfo
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstPadProbeInfo*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

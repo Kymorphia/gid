@@ -51,7 +51,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

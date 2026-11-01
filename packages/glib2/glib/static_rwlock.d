@@ -83,10 +83,8 @@ import glib.types;
 
     Deprecated: Use a [glib.rwlock.RWLock] instead
 */
-class StaticRWLock
+class StaticRWLock : StructWrap!(GStaticRWLock)
 {
-  GStaticRWLock _cInstance;
-
   /**
       Create a `static_rwlock.StaticRWLock` wrap type.
   */
@@ -97,15 +95,6 @@ class StaticRWLock
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GStaticRWLock*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 }

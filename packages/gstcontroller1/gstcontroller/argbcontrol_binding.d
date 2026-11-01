@@ -23,7 +23,7 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -11,10 +11,8 @@ import gtk.types;
     Meta-data to be passed to [gtk.recent_manager.RecentManager.addFull] when
     registering a recently used resource.
 */
-class RecentData
+class RecentData : StructWrap!(GtkRecentData)
 {
-  GtkRecentData _cInstance;
-
   /**
       Create a `recent_data.RecentData` wrap type.
       Params:
@@ -45,16 +43,7 @@ class RecentData
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkRecentData*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

@@ -128,7 +128,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

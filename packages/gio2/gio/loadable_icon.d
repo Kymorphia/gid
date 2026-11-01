@@ -18,7 +18,7 @@ import gobject.object;
     [gio.loadable_icon.LoadableIcon] extends the [gio.icon.Icon] interface and adds the ability
     to load icons from streams.
 */
-interface LoadableIcon
+interface LoadableIcon : GidWrap
 {
 
   /** */

@@ -14,23 +14,13 @@ import gio.types;
     The scope can be used with [gio.global.ioModulesLoadAllInDirectoryWithScope]
     or [gio.global.ioModulesScanAllInDirectoryWithScope].
 */
-class IOModuleScope
+class IOModuleScope : OpaqueWrap!(GIOModuleScope*, void, void)
 {
-  GIOModuleScope* _cInstancePtr;
-  bool owned;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GIOModuleScope*)ptr;
-
-    owned = take;
-  }
-
-  /** */
-  void* _cPtr() nothrow
-  {
-    return cast(void*)_cInstancePtr;
+    super(ptr, take);
   }
 
   /**

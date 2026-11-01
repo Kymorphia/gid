@@ -14,9 +14,8 @@ import gstrtsp.types;
 /**
     Provides methods for creating and parsing request, response and data messages.
 */
-class RTSPMessage : gobject.boxed.Boxed
+class RTSPMessage : gobject.boxed.BoxedWrap!(gst_rtsp_msg_get_type)
 {
-
   /**
       Create a `rtspmessage.RTSPMessage` boxed type.
       Params:
@@ -31,26 +30,7 @@ class RTSPMessage : gobject.boxed.Boxed
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())gst_rtsp_msg_get_type != &gidSymbolNotFound ? gst_rtsp_msg_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

@@ -11,10 +11,8 @@ import gid.gid;
 /**
     Generated when a window size or position has changed.
 */
-class EventConfigure
+class EventConfigure : StructWrap!(GdkEventConfigure)
 {
-  GdkEventConfigure _cInstance;
-
   /**
       Create a `event_configure.EventConfigure` wrap type.
       Params:
@@ -40,16 +38,7 @@ class EventConfigure
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GdkEventConfigure*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

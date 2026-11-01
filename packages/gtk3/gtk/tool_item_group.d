@@ -34,7 +34,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

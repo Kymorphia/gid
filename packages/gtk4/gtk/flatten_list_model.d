@@ -26,7 +26,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

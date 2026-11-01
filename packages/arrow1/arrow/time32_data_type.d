@@ -17,7 +17,7 @@ class Time32DataType : arrow.time_data_type.TimeDataType
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -23,33 +23,26 @@ import gobject.object;
     
     [gdk.event.Event] structs are immutable.
 */
-class Event
+class Event : ReffedWrap!(GdkEvent*, gdk_event_ref, gdk_event_unref)
 {
-  GdkEvent* _cInstancePtr;
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstancePtr = cast(GdkEvent*)ptr;
-
-    if (!take && ptr)
-      gdk_event_ref(_cInstancePtr);
+    super(ptr, take);
   }
-
-  ~this() nothrow
-  {
-    if (_cInstancePtr)
-      cValueFreeInMainContext(cast(void*)_cInstancePtr, cast(GDestroyNotify)cFuncPtr!(gdk_event_unref)());
-  }
-
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
+  static GType _getGType() nothrow
   {
-    if (dup)
-      gdk_event_ref(_cInstancePtr);
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_event_get_type != &gidSymbolNotFound ? gdk_event_get_type() : cast(GType)0;
+  }
 
-    return _cInstancePtr;
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
   }
 
   /**

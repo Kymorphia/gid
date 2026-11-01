@@ -24,7 +24,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

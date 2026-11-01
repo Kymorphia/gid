@@ -18,7 +18,7 @@ class VideoDmabufPool : gstvideo.video_buffer_pool.VideoBufferPool
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

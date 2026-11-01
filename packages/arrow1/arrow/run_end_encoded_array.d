@@ -19,7 +19,7 @@ class RunEndEncodedArray : arrow.array.Array
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

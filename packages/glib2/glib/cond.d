@@ -74,10 +74,8 @@ import glib.types;
     
     A #GCond should only be accessed via the g_cond_ functions.
 */
-class Cond
+class Cond : StructWrap!(GCond)
 {
-  GCond _cInstance;
-
   /**
       Create a `cond.Cond` wrap type.
   */
@@ -88,16 +86,7 @@ class Cond
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GCond*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

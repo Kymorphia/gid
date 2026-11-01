@@ -63,7 +63,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -24,7 +24,7 @@ class ImageCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible,
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

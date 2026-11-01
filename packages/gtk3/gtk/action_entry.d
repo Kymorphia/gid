@@ -12,10 +12,8 @@ import gtk.types;
     #GtkActionEntry structs are used with [gtk.action_group.ActionGroup.addActions] to
     construct actions.
 */
-class ActionEntry
+class ActionEntry : StructWrap!(GtkActionEntry)
 {
-  GtkActionEntry _cInstance;
-
   /**
       Create a `action_entry.ActionEntry` wrap type.
       Params:
@@ -44,16 +42,7 @@ class ActionEntry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GtkActionEntry*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**

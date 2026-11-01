@@ -186,7 +186,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

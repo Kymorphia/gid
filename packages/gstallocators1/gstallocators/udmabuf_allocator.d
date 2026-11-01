@@ -22,7 +22,7 @@ class UdmabufAllocator : gstallocators.dma_buf_allocator.DmaBufAllocator
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

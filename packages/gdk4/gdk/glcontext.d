@@ -69,7 +69,7 @@ class GLContext : gdk.draw_context.DrawContext
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

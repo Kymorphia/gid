@@ -31,7 +31,7 @@ import gobject.gid_builder;
     exposing redundant actions if possible.  By convention we have been
     using "mouse centric" terminology for #AtkAction names.
 */
-interface Action
+interface Action : GidWrap
 {
 
   /** */

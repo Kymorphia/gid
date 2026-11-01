@@ -51,7 +51,7 @@ class SearchEntry : gtk.entry.Entry
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

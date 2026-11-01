@@ -74,7 +74,7 @@ class GridView : gtk.list_base.ListBase
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

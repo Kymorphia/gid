@@ -24,32 +24,13 @@ import soup.types;
     As an added bonus, when @data is filled in, it is always terminated
     with a `\0` byte (which is not reflected in @length).
 */
-class MessageBody : gobject.boxed.Boxed
+class MessageBody : gobject.boxed.BoxedWrap!(soup_message_body_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())soup_message_body_get_type != &gidSymbolNotFound ? soup_message_body_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

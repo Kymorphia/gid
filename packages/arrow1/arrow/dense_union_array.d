@@ -22,7 +22,7 @@ class DenseUnionArray : arrow.union_array.UnionArray
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

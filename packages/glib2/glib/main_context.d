@@ -13,32 +13,13 @@ import gobject.boxed;
     The [glib.main_context.MainContext] struct is an opaque data
     type representing a set of sources to be handled in a main loop.
 */
-class MainContext : gobject.boxed.Boxed
+class MainContext : gobject.boxed.BoxedWrap!(g_main_context_get_type)
 {
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return dup ? boxCopy : _cInstancePtr;
-  }
-
-  /** */
-  static GType _getGType() nothrow
-  {
-    import gid.loader : gidSymbolNotFound;
-    return cast(void function())g_main_context_get_type != &gidSymbolNotFound ? g_main_context_get_type() : cast(GType)0;
-  }
-
-  /** */
-  override @property GType _gType() nothrow
-  {
-    return _getGType();
+    super(ptr, take);
   }
 
   /** Returns `this`, for use in `with` statements. */

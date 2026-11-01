@@ -16,10 +16,8 @@ import gstaudio.types;
     is valid (otherwise it is unused). Also, when DSD is the sample type,
     only the rate, channels, position, and bpf fields in @info are populated.
 */
-class AudioRingBufferSpec
+class AudioRingBufferSpec : StructWrap!(GstAudioRingBufferSpec)
 {
-  GstAudioRingBufferSpec _cInstance;
-
   /**
       Create a `audio_ring_buffer_spec.AudioRingBufferSpec` wrap type.
       Params:
@@ -46,16 +44,7 @@ class AudioRingBufferSpec
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GstAudioRingBufferSpec*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   private gst.caps.Caps _capsRef; // Keeps borrowed field value alive

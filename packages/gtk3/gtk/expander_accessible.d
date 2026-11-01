@@ -21,7 +21,7 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    super(cast(void*)ptr, take);
+    super(ptr, take);
   }
 
   /** */

@@ -12,10 +12,8 @@ import gio.types;
     [gio.static_resource.StaticResource] is an opaque data structure and can only be accessed
     using the following functions.
 */
-class StaticResource
+class StaticResource : StructWrap!(GStaticResource)
 {
-  GStaticResource _cInstance;
-
   /**
       Create a `static_resource.StaticResource` wrap type.
   */
@@ -26,16 +24,7 @@ class StaticResource
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
   {
-    _cInstance = *cast(GStaticResource*)ptr;
-
-    if (take)
-      gFree(ptr);
-  }
-
-  /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
-  {
-    return cast(void*)(dup ? mallocDup(&_cInstance) : &_cInstance);
+    super(ptr, take);
   }
 
   /**
