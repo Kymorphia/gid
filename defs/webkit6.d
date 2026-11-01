@@ -8,3 +8,8 @@
 //!set class[InputMethodContext].method[notify_surrounding].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set class[WebView].method[call_async_javascript_function].parameters.parameter[body].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set class[WebView].method[evaluate_javascript].parameters.parameter[script].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+
+//# Match pattern getters return NULL-terminated arrays
+//!set class[WebExtension].method[get_all_requested_match_patterns].return-value.array[][zero-terminated] 1
+//!set class[WebExtension].method[get_optional_permission_match_patterns].return-value.array[][zero-terminated] 1
+//!set class[WebExtension].method[get_requested_permission_match_patterns].return-value.array[][zero-terminated] 1

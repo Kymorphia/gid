@@ -233,6 +233,45 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   }
 
   /**
+      Reads a line from the data input stream.  Note that no encoding
+      checks or conversion is performed; the input is not guaranteed to
+      be UTF-8, and may in fact have embedded NUL characters.
+      
+      If cancellable is not null, then the operation can be cancelled by
+      triggering the cancellable object from another thread. If the operation
+      was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+  
+      Params:
+        length = a #gsize to get the length of the data read in.
+        cancellable = optional #GCancellable object, null to ignore.
+      Returns: a NUL terminated byte array with the line that was read in
+         (without the newlines).  Set length to a #gsize to get the length
+         of the read line.  On an error, it will return null and error
+         will be set. If there's no content to read, it will still return
+         null, but error won't be set.
+      Throws: [ErrorWrap]
+  */
+  string readLine(out size_t length, gio.cancellable.Cancellable cancellable = null)
+  {
+    char* _cretval;
+    GError *_err;
+    _cretval = g_data_input_stream_read_line(cast(GDataInputStream*)this._cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    string _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] != 0)
+        _cretlength++;
+      _retval = cast(string)_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
       The asynchronous version of [gio.data_input_stream.DataInputStream.readLine].  It is
       an error to have two outstanding calls to this function.
       
@@ -264,6 +303,42 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_data_input_stream_read_line_async(cast(GDataInputStream*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finish an asynchronous call started by
+      [gio.data_input_stream.DataInputStream.readLineAsync].  Note the warning about
+      string encoding in [gio.data_input_stream.DataInputStream.readLine] applies here as
+      well.
+  
+      Params:
+        result = the #GAsyncResult that was provided to the callback.
+        length = a #gsize to get the length of the data read in.
+      Returns: a NUL-terminated byte array with the line that was read in
+         (without the newlines).  Set length to a #gsize to get the length
+         of the read line.  On an error, it will return null and error
+         will be set. If there's no content to read, it will still return
+         null, but error won't be set.
+      Throws: [ErrorWrap]
+  */
+  string readLineFinish(gio.async_result.AsyncResult result, out size_t length)
+  {
+    char* _cretval;
+    GError *_err;
+    _cretval = g_data_input_stream_read_line_finish(cast(GDataInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    string _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] != 0)
+        _cretlength++;
+      _retval = cast(string)_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
   }
 
   /**

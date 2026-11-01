@@ -21,6 +21,12 @@
 //# Add missing closure designation
 //!set callback[AsyncReadyCallback].parameters.parameter[data][closure] 2
 
+//# DBus interface property callbacks have an explicit GError** parameter, convert it to throws
+//!del callback[DBusInterfaceGetPropertyFunc].parameters.parameter[error]
+//!set callback[DBusInterfaceGetPropertyFunc][throws] 1
+//!del callback[DBusInterfaceSetPropertyFunc].parameters.parameter[error]
+//!set callback[DBusInterfaceSetPropertyFunc][throws] 1
+
 //# Set return/param arrays to be zero-terminated=1
 //!set callback[DBusSubtreeIntrospectFunc].return-value.array[][zero-terminated] 1
 //!set class[Application].method[add_main_option_entries].parameters.parameter[entries].array[][zero-terminated] 1
@@ -29,8 +35,14 @@
 //!set class[DataInputStream].method[read_line].return-value.array[][zero-terminated] 1
 //!set class[DataInputStream].method[read_line_finish].return-value.array[][zero-terminated] 1
 //!set class[InetAddress].constructor[new_from_bytes].parameters.parameter[bytes].array[][zero-terminated] 1
+//!set class[InetAddress].constructor[new_from_bytes_with_ipv6_info].parameters.parameter[bytes].array[][zero-terminated] 1
 //!set function[dbus_escape_object_path_bytestring].parameters.parameter[bytes].array[][zero-terminated] 1
 //!set function[dbus_unescape_object_path].return-value.array[][zero-terminated] 1
+
+//# Newer GIR types read_line return as a guint8 array without element c:type, restore char element type so it is returned as a string
+//!set class[DataInputStream].method[read_line].return-value.array.type '<type name="gchar" c:type="char"/>'
+//!set class[DataInputStream].method[read_line_finish].return-value.array.type '<type name="gchar" c:type="char"/>'
+
 
 //# Set field arrays to be zero-terminated=1
 //!set record[DBusAnnotationInfo].field[annotations].array[][zero-terminated] 1

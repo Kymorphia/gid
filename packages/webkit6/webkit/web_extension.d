@@ -12,6 +12,7 @@ import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
 import webkit.types;
+import webkit.web_extension_match_pattern;
 
 /**
     Represents a [WebExtension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions).
@@ -283,6 +284,31 @@ class WebExtension : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
+      Get the set of websites that the extension requires access to for injected content
+      and for receiving messages from websites.
+      Returns: a
+           null-terminated array of match patterns matching all requested websites.
+  */
+  webkit.web_extension_match_pattern.WebExtensionMatchPattern[] getAllRequestedMatchPatterns() nothrow
+  {
+    WebKitWebExtensionMatchPattern** _cretval;
+    _cretval = webkit_web_extension_get_all_requested_match_patterns(cast(WebKitWebExtension*)this._cPtr);
+    webkit.web_extension_match_pattern.WebExtensionMatchPattern[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new webkit.web_extension_match_pattern.WebExtensionMatchPattern[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new webkit.web_extension_match_pattern.WebExtensionMatchPattern(cast(void*)_cretval[i], Yes.Take);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
       Get the default locale for the extension.
       Returns: the default locale, or null if there was no default
         locale specified.
@@ -507,6 +533,31 @@ class WebExtension : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
+      Get the set of websites that the extension may need access to for optional functionality.
+      These match patterns can be requested by the extension at a later time.
+      Returns: a
+           null-terminated array of match patterns matching the optional websites.
+  */
+  webkit.web_extension_match_pattern.WebExtensionMatchPattern[] getOptionalPermissionMatchPatterns() nothrow
+  {
+    WebKitWebExtensionMatchPattern** _cretval;
+    _cretval = webkit_web_extension_get_optional_permission_match_patterns(cast(WebKitWebExtension*)this._cPtr);
+    webkit.web_extension_match_pattern.WebExtensionMatchPattern[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new webkit.web_extension_match_pattern.WebExtensionMatchPattern[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new webkit.web_extension_match_pattern.WebExtensionMatchPattern(cast(void*)_cretval[i], Yes.Take);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
       Get the set of permissions that the extension may need for
       optional functionality. These permissions can be requested
       by the extension at a later time.
@@ -542,6 +593,30 @@ class WebExtension : gobject.object.ObjectWrap, gio.initable.Initable
     const(char)* _cretval;
     _cretval = webkit_web_extension_get_path(cast(WebKitWebExtension*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Get the set of websites that the extension requires access to for its base functionality.
+      Returns: a
+           null-terminated array of match patterns matching the required websites.
+  */
+  webkit.web_extension_match_pattern.WebExtensionMatchPattern[] getRequestedPermissionMatchPatterns() nothrow
+  {
+    WebKitWebExtensionMatchPattern** _cretval;
+    _cretval = webkit_web_extension_get_requested_permission_match_patterns(cast(WebKitWebExtension*)this._cPtr);
+    webkit.web_extension_match_pattern.WebExtensionMatchPattern[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new webkit.web_extension_match_pattern.WebExtensionMatchPattern[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new webkit.web_extension_match_pattern.WebExtensionMatchPattern(cast(void*)_cretval[i], Yes.Take);
+      gFree(cast(void*)_cretval);
+    }
     return _retval;
   }
 

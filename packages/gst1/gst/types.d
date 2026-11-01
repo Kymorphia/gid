@@ -348,6 +348,19 @@ alias VecDeque = GstVecDeque*;
 // Callbacks
 
 /**
+    The aggregator function will combine the parameters from params0 and param1
+    and write the result back into aggregated_params.
+
+    Params:
+      aggregatedParams = This structure will be updated with the
+                            combined parameters from both params0 and params1.
+      params0 = a #GstStructure containing the new parameters to be aggregated.
+      params1 = a #GstStructure containing the new parameters to be aggregated.
+    Returns: true if the parameters were successfully aggregated, false otherwise.
+*/
+alias AllocationMetaParamsAggregator = bool delegate(out gst.structure.Structure aggregatedParams, gst.structure.Structure params0, gst.structure.Structure params1);
+
+/**
     Specifies the type of function passed to [gst.bus.Bus.addWatch] or
     [gst.bus.Bus.addWatchFull], which is called from the mainloop when a message
     is available on the bus.

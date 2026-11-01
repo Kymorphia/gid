@@ -9,7 +9,7 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   75    0    0   100 | 1261    1   10  99.2 |    0    0    0   100 |  127    0    8  94.1 |
+glib2                      |   75    0    0   100 | 1264    1    7  99.4 |    0    0    0   100 |  127    0    8  94.1 |
 glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0    0    0   100 |    1    0    0   100 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   14    0    1  93.3 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -18,11 +18,11 @@ gda5                       |  112    0    3  97.4 |  662    0   25  96.4 |   54 
 gdk3                       |   57    0    0   100 |  542    0    6  98.9 |   39    0    0   100 |  264    0    3  98.9 |
 gdk4                       |   66    0    0   100 |  535    0    9  98.3 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    1  99.0 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  171    0    0   100 | 1665    0   15  99.1 |   79    0    0   100 |   61    0    7  89.7 |
+gio2                       |  171    0    0   100 | 1668    0   12  99.3 |   79    0    0   100 |   63    0    5  92.6 |
 giounix2                   |   11    0    0   100 |  100    0    1  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94    0    1  98.9 | 1519    0   21  98.6 |   23    0    0   100 |  131    0    4  97.0 |
+gst1                       |   94    0    1  98.9 | 1520    0   20  98.7 |   23    0    0   100 |  131    0    4  97.0 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  216    0    5  97.7 |    0    0    0   100 |   59    0    6  90.8 |
@@ -55,7 +55,7 @@ secret1                    |   11    0    0   100 |  137    0    4  97.2 |    0 
 soup3                      |   38    0    0   100 |  376    0    1  99.7 |   42    0    0   100 |    4    0    0   100 |
 vte2                       |    8    0    0   100 |  217    0    5  97.7 |   34    0    0   100 |    0    0    0   100 |
 vte3                       |    8    0    0   100 |  211    0    1  99.5 |   30    0    0   100 |    0    0    0   100 |
-webkit6                    |   76    0    0   100 |  688    0    3  99.6 |   72    0    0   100 |    0    0    0   100 |
+webkit6                    |   76    0    0   100 |  691    0    0   100 |   72    0    0   100 |    0    0    0   100 |
 webkitwebprocessextension6 |   16    0    0   100 |  100    0    0   100 |   12    0    0   100 |    0    0    0   100 |
 cairo1                     |   21    0    0   100 |  328    0    2  99.4 |    0    0    0   100 |   37    0    0   100 |
 freetype2                  |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -83,9 +83,6 @@ glib.cond.Cond.waitUntil
 glib.main_context.MainContext.wait
 glib.option_context.OptionContext.setTranslateFunc
 glib.option_group.OptionGroup.setTranslateFunc
-glib.global.bitLockAndGet
-glib.global.bitUnlockAndSet
-glib.global.strsplitSet
 glib.global.testAddDataFunc
 gobject.type_class.TypeClass.adjustPrivateOffset
 gobject.global.enumRegisterStatic
@@ -134,10 +131,7 @@ gdk.global.contentRegisterSerializer
 gdkpixbuf.pixbuf.Pixbuf.newFromData
 gio.cancellable.Cancellable.connect
 gio.dbus_connection.DBusConnection.registerSubtree
-gio.data_input_stream.DataInputStream.readLine
-gio.data_input_stream.DataInputStream.readLineFinish
 gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
-gio.inet_address.InetAddress.newFromBytesWithIpv6Info
 gio.memory_input_stream.MemoryInputStream.newFromData
 gio.memory_input_stream.MemoryInputStream.addData
 gio.settings_backend.SettingsBackend.flattenTree
@@ -155,7 +149,6 @@ gsk.path_measure.PathMeasure.getPoint
 gst.buffer.Buffer.foreachMeta
 gst.buffer_list.BufferList.foreach_
 gst.iterator.Iterator.findCustom
-gst.meta.Meta.apiTypeAggregateParams
 gst.meta.Meta.apiTypeSetParamsAggregator
 gst.mini_object.MiniObject.setQdata
 gst.pad.Pad.setActivateFunctionFull
@@ -322,9 +315,6 @@ vte.terminal.Terminal.getTextIncludeTrailingSpaces
 vte.terminal.Terminal.getTextRange
 vte.uuid.Uuid.freeToString
 vte.uuid.Uuid.freeToString
-webkit.web_extension.WebExtension.getAllRequestedMatchPatterns
-webkit.web_extension.WebExtension.getOptionalPermissionMatchPatterns
-webkit.web_extension.WebExtension.getRequestedPermissionMatchPatterns
 cairo.scaled_font.ScaledFont.textToGlyphs
 cairo.global.imageSurfaceCreateForData
 
@@ -370,8 +360,6 @@ gda.sql_table.SqlTable.any
 gdk.event_button.EventButton.axes
 gdk.event_motion.EventMotion.axes
 gdk.event_touch.EventTouch.axes
-gio.types.DBusInterfaceVTable.getProperty
-gio.types.DBusInterfaceVTable.setProperty
 gio.input_message.InputMessage.address
 gio.input_message.InputMessage.controlMessages
 gio.input_message.InputMessage.numControlMessages

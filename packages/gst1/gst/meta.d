@@ -10,6 +10,7 @@ import gst.c.functions;
 import gst.c.types;
 import gst.custom_meta;
 import gst.meta_info;
+import gst.structure;
 import gst.types;
 
 /**
@@ -132,6 +133,31 @@ class Meta
     auto _data = gByteArrayFromD(data);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_data);
     _retval = cast(bool)gst_meta_serialize_simple(cast(const(GstMeta)*)this._cPtr, _data);
+    return _retval;
+  }
+
+  /**
+      When a element like `tee` decides the allocation, each downstream element may
+      fill different parameters and pass them to [gst.query.Query.addAllocationMeta].
+      In order to keep these parameters, a merge operation is needed. This
+      aggregate function can combine the parameters from params0 and param1, and
+      write the result back into aggregated_params.
+  
+      Params:
+        api = the GType of the API for which the parameters are being aggregated.
+        aggregatedParams = This structure will be updated with the
+                              combined parameters from both params0 and params1.
+        params0 = a #GstStructure containing the new parameters to be aggregated.
+        params1 = a #GstStructure containing the new parameters to be aggregated.
+      Returns: true if the parameters were successfully aggregated, false otherwise.
+  */
+  static bool apiTypeAggregateParams(gobject.types.GType api, out gst.structure.Structure aggregatedParams, gst.structure.Structure params0, gst.structure.Structure params1) nothrow
+  {
+    bool _retval;
+    GstStructure* _aggregatedParams;
+    _retval = cast(bool)gst_meta_api_type_aggregate_params(api, &_aggregatedParams, params0 ? cast(const(GstStructure)*)params0._cPtr(No.Dup) : null, params1 ? cast(const(GstStructure)*)params1._cPtr(No.Dup) : null);
+    if (_aggregatedParams)
+      aggregatedParams = new gst.structure.Structure(cast(void*)_aggregatedParams, Yes.Take);
     return _retval;
   }
 

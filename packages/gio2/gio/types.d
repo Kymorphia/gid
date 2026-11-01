@@ -379,6 +379,23 @@ alias BusNameVanishedCallback = void delegate(gio.dbus_connection.DBusConnection
 alias CancellableSourceFunc = bool delegate(gio.cancellable.Cancellable cancellable);
 
 /**
+    The type of the get_property function in #GDBusInterfaceVTable.
+
+    Params:
+      connection = A #GDBusConnection.
+      sender = The unique bus name of the remote caller or null if
+            not specified by the caller, e.g. on peer-to-peer connections.
+      objectPath = The object path that the method was invoked on.
+      interfaceName = The D-Bus interface name for the property.
+      propertyName = The name of the property to get the value of.
+    Returns: A #GVariant with the value for property_name or null if
+          error is set. If the returned #GVariant is floating, it is
+          consumed - otherwise its reference count is decreased by one.
+    Throws: [ErrorWrap]
+*/
+alias DBusInterfaceGetPropertyFunc = glib.variant.Variant delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string propertyName, GError **_err);
+
+/**
     The type of the method_call function in #GDBusInterfaceVTable.
     
     interface_name may be `NULL` if not specified by the sender, although it’s
@@ -400,6 +417,22 @@ alias CancellableSourceFunc = bool delegate(gio.cancellable.Cancellable cancella
       invocation = A #GDBusMethodInvocation object that must be used to return a value or error.
 */
 alias DBusInterfaceMethodCallFunc = void delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, gio.dbus_method_invocation.DBusMethodInvocation invocation);
+
+/**
+    The type of the set_property function in #GDBusInterfaceVTable.
+
+    Params:
+      connection = A #GDBusConnection.
+      sender = The unique bus name of the remote caller or null if
+            not specified by the caller, e.g. on peer-to-peer connections.
+      objectPath = The object path that the method was invoked on.
+      interfaceName = The D-Bus interface name for the property.
+      propertyName = The name of the property to get the value of.
+      value = The value to set the property to.
+    Returns: true if the property was set to value, false if error is set.
+    Throws: [ErrorWrap]
+*/
+alias DBusInterfaceSetPropertyFunc = bool delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string propertyName, glib.variant.Variant value, GError **_err);
 
 /**
     Signature for function used in [gio.dbus_connection.DBusConnection.addFilter].

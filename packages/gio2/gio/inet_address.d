@@ -236,6 +236,31 @@ class InetAddress : gobject.object.ObjectWrap
   }
 
   /**
+      Creates a new [gio.inet_address.InetAddress] from the given family, bytes
+      and scope_id.
+      
+      bytes must be 4 bytes for `enumGio.SocketFamily.IPV4` and 16 bytes for
+      `enumGio.SocketFamily.IPV6`.
+  
+      Params:
+        bytes = raw address data
+        family = the address family of bytes
+        flowinfo = 
+        scopeId = the scope-id of the address
+      Returns: a new internet address corresponding to
+          family, bytes and scope_id
+  */
+  static gio.inet_address.InetAddress newFromBytesWithIpv6Info(ubyte[] bytes, gio.types.SocketFamily family, uint flowinfo, uint scopeId) nothrow
+  {
+    GInetAddress* _cretval;
+    auto _bytes_arr = bytes ~ ubyte.init;
+    auto _bytes = _bytes_arr.ptr;
+    _cretval = g_inet_address_new_from_bytes_with_ipv6_info(_bytes, family, flowinfo, scopeId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
       Parses string as an IP address and creates a new #GInetAddress.
       
       If address is an IPv6 address, it can also contain a scope ID

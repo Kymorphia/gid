@@ -196,9 +196,13 @@
 //!set function[atomic_int_or].parameters.parameter[atomic].type '<type name="guint" c:type="volatile guint*"/>'
 //!set function[atomic_int_set].parameters.parameter[atomic].type '<type name="gint" c:type="volatile gint*"/>'
 //!set function[atomic_int_xor].parameters.parameter[atomic].type '<type name="guint" c:type="volatile guint*"/>'
+//!set function[bit_lock_and_get].parameters.parameter[address].type '<type name="gint" c:type="gint*"/>'
+//!set function[bit_unlock_and_set].parameters.parameter[address].type '<type name="gint" c:type="gint*"/>'
 //!set function[bit_lock].parameters.parameter[address][direction] inout
 //!set function[bit_trylock].parameters.parameter[address][direction] inout
 //!set function[bit_unlock].parameters.parameter[address][direction] inout
+//!set function[bit_lock_and_get].parameters.parameter[address][direction] inout
+//!set function[bit_unlock_and_set].parameters.parameter[address][direction] inout
 //!set function[nullify_pointer].parameters.parameter[nullify_location][direction] out
 //!set function[ref_count_compare].parameters.parameter[rc][direction] inout
 //!set function[ref_count_init].parameters.parameter[rc][direction] inout
@@ -213,6 +217,9 @@
 //!set function[slice_get_config_state].return-value.type '<array length="2" zero-terminated="0" c:type="const gint64*"><type name="gint64" c:type="gint64"/></array>'
 //!set function[slice_get_config_state].parameters.parameter[n_values][direction] out
 //!set function[ucs4_to_utf16].return-value.type '<array zero-terminated="1" c:type="gunichar2*"><type name="guint16" c:type="gunichar2"/></array>'
+
+//# Newer GLib GIR types strsplit_set delimiters as a guint8 array without a length, it is a nul-terminated string of delimiter bytes
+//!set function[strsplit_set].parameters.parameter[delimiters].array '<type name="utf8" c:type="const gchar*"/>'
 //!set function[unicode_canonical_decomposition].return-value.type '<array length="1" zero-terminated="0" c:type="gunichar*"><type name="gunichar" c:type="gunichar"/></array>'
 //!set function[unicode_canonical_decomposition].parameters.parameter[result_len][direction] out
 //!set function[utf16_to_ucs4].return-value.type '<array length="3" zero-terminated="1" c:type="gunichar*"><type name="gunichar" c:type="gunichar"/></array>'

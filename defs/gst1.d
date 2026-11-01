@@ -51,6 +51,14 @@
 //# Fix arg direction and ownership for some callbacks
 //!set callback[BufferForeachMetaFunc].parameters.parameter[meta][transfer-ownership] none
 
+//# Meta params aggregation returns a newly allocated structure in aggregated_params (callers pass a NULL-initialized pointer)
+//!set record[Meta].function[api_type_aggregate_params].parameters.parameter[aggregated_params][direction] out
+//!set record[Meta].function[api_type_aggregate_params].parameters.parameter[aggregated_params][caller-allocates] 0
+//!set record[Meta].function[api_type_aggregate_params].parameters.parameter[aggregated_params][transfer-ownership] full
+//!set callback[AllocationMetaParamsAggregator].parameters.parameter[aggregated_params][direction] out
+//!set callback[AllocationMetaParamsAggregator].parameters.parameter[aggregated_params][caller-allocates] 0
+//!set callback[AllocationMetaParamsAggregator].parameters.parameter[aggregated_params][transfer-ownership] full
+
 //# Set values parameter to be a caller-allocates output array
 //!set callback[ControlSourceGetValueArray].parameters.parameter[values][direction] out
 //!set callback[ControlSourceGetValueArray].parameters.parameter[values][caller-allocates] 1

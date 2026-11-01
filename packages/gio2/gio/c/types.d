@@ -13606,11 +13606,11 @@ alias extern(C) void function(GDBusConnection* connection, const(char)* name, vo
 
 alias extern(C) gboolean function(GCancellable* cancellable, void* data) GCancellableSourceFunc;
 
-alias extern(C) GVariant* function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GError** error, void* userData) GDBusInterfaceGetPropertyFunc;
+alias extern(C) GVariant* function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, void* userData, GError** _err) GDBusInterfaceGetPropertyFunc;
 
 alias extern(C) void function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, GDBusMethodInvocation* invocation, void* userData) GDBusInterfaceMethodCallFunc;
 
-alias extern(C) gboolean function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GVariant* value, GError** error, void* userData) GDBusInterfaceSetPropertyFunc;
+alias extern(C) gboolean function(GDBusConnection* connection, const(char)* sender, const(char)* objectPath, const(char)* interfaceName, const(char)* propertyName, GVariant* value, void* userData, GError** _err) GDBusInterfaceSetPropertyFunc;
 
 alias extern(C) GDBusMessage* function(GDBusConnection* connection, GDBusMessage* message, gboolean incoming, void* userData) GDBusMessageFilterFunction;
 

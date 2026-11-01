@@ -1430,6 +1430,23 @@ void bitLock(ref void* address, int lockBit) nothrow
 }
 
 /**
+    Sets the indicated lock_bit in address and atomically returns the new value.
+    
+    This is like `funcGLib.bit_lock`, except it can atomically return the new value at
+    address (right after obtaining the lock). Thus the value returned in out_val
+    always has the lock_bit set.
+
+    Params:
+      address = a pointer to an integer
+      lockBit = a bit value between 0 and 31
+      outVal = return location for the new value of the integer
+*/
+void bitLockAndGet(ref int address, uint lockBit, out int outVal) nothrow
+{
+  g_bit_lock_and_get(cast(int*)&address, lockBit, cast(int*)&outVal);
+}
+
+/**
     Find the position of the first bit set in mask, searching
     from (but not including) nth_bit upwards. Bits are numbered
     from 0 (least significant) to sizeof(#gulong) * 8 - 1 (31 or 63,
@@ -1527,6 +1544,27 @@ bool bitTrylock(ref void* address, int lockBit) nothrow
 void bitUnlock(ref void* address, int lockBit) nothrow
 {
   g_bit_unlock(cast(int*)&address, lockBit);
+}
+
+/**
+    This is like `funcGLib.bit_unlock` but also atomically sets address to
+    val.
+    
+    If preserve_mask is not zero, then the preserve_mask bits will be
+    preserved in address and are not set to val.
+    
+    Note that the lock_bit bit will always be unset regardless of
+    val, preserve_mask and the currently set value in address.
+
+    Params:
+      address = a pointer to an integer
+      lockBit = a bit value between 0 and 31
+      newVal = the new value to set
+      preserveMask = mask for bits from address to preserve
+*/
+void bitUnlockAndSet(ref int address, uint lockBit, int newVal, int preserveMask) nothrow
+{
+  g_bit_unlock_and_set(cast(int*)&address, lockBit, newVal, preserveMask);
 }
 
 /** */
@@ -8586,6 +8624,63 @@ string[] strsplit(string string_, string delimiter, int maxTokens) nothrow
   const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
   const(char)* _delimiter = delimiter.toCString!(No.Malloc, No.Nullable);
   _cretval = g_strsplit(_string_, _delimiter, maxTokens);
+  string[] _retval;
+
+  if (_cretval)
+  {
+    uint _cretlength;
+    while (_cretval[_cretlength] !is null)
+      _cretlength++;
+    _retval = new string[_cretlength];
+    foreach (i; 0 .. _cretlength)
+      _retval[i] = _cretval[i].fromCString!(Yes.Free);
+    gFree(cast(void*)_cretval);
+  }
+  return _retval;
+}
+
+/**
+    Splits string into a number of tokens not containing any of the
+    bytes in delimiters.
+    
+    A token is the (possibly empty) longest string that does not
+    contain any of the bytes in delimiters. Note that separators
+    will only be single bytes from delimiters. If max_tokens is reached,
+    the remainder is appended to the last token.
+    
+    For example, the result of `g_strsplit_set ("abc:def/ghi", ":/", -1)`
+    is an array containing the three strings `"abc"`, `"def"`, and `"ghi"`.
+    
+    The result of `g_strsplit_set (":def/ghi:/x", ":/", -1)` is an array
+    containing the five strings `""`, `"def"`, `"ghi"`, `""`, `"x"`.
+    
+    As a special case, the result of splitting the empty string `""` is an empty
+    array, not an array containing a single string. The reason for this
+    special case is that being able to represent an empty array is typically
+    more useful than consistent handling of empty elements. If you do need
+    to represent empty elements, you'll need to check for the empty string
+    before calling `[glib.global.strsplitSet]`.
+    
+    Note that this function works on bytes not characters, so it can't be used
+    to delimit UTF-8 strings for anything but ASCII characters.
+
+    Params:
+      string_ = a string to split
+      delimiters = a
+          nul-terminated byte array containing bytes that are used to
+          split the string; can be empty (just a nul byte), which will result in no
+          string splitting
+      maxTokens = the maximum number of tokens to split string into.
+          If this is less than 1, the string is split completely
+    Returns: a newly-allocated array of strings. Use
+        `funcGLib.strfreev` to free it.
+*/
+string[] strsplitSet(string string_, string delimiters, int maxTokens) nothrow
+{
+  char** _cretval;
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+  const(char)* _delimiters = delimiters.toCString!(No.Malloc, No.Nullable);
+  _cretval = g_strsplit_set(_string_, _delimiters, maxTokens);
   string[] _retval;
 
   if (_cretval)
