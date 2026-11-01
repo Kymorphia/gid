@@ -7,13 +7,13 @@
 //!subctype EGLint int
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set record[EGLImage].method[export_dmabuf][unsupported] 1
-//!set record[EGLImage].function[from_dmabuf_direct][unsupported] 1
-//!set record[EGLImage].function[from_dmabuf_direct_target][unsupported] 1
-//!set record[EGLImage].function[from_dmabuf_direct_target_with_dma_drm][unsupported] 1
+//!set record[EGLImage].method[export_dmabuf][disable] 1
+//!set record[EGLImage].function[from_dmabuf_direct][disable] 1
+//!set record[EGLImage].function[from_dmabuf_direct_target][disable] 1
+//!set record[EGLImage].function[from_dmabuf_direct_target_with_dma_drm][disable] 1
 
 //# Disable EGLImage.fromTexture because the attribs parameter has a non-zero terminator (EGL_NONE), FIXME
-//!set record[EGLImage].function[from_texture][unsupported] 1
+//!set record[EGLImage].function[from_texture][disable] 1
 
 //# Disable: Destroy notify is called during EGLImage finalization, wrapping the image would take a reference to a finalizing object (FIXME)
 //!set record[EGLImage].constructor[new_wrapped][disable] 1

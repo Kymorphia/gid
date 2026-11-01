@@ -4,21 +4,21 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstvideo1/
 //!info capi https://gstreamer.freedesktop.org/documentation/video/index.html
 
-//# Ignore this type which is derived from Gst.FlagSet which is a fundamental type with limited usage and no clear way to bind it
-//!set class[VideoMultiviewFlagsSet][ignore] 1
+//# Disable this type which is derived from the unsupported Gst.FlagSet fundamental type (FIXME)
+//!set class[VideoMultiviewFlagsSet][disable] 1
 
-//!set record[VideoMeta].method[set_alignment][unsupported] 1
-//!set class[VideoSink].function[center_rect][unsupported] 1
+//!set record[VideoMeta].method[set_alignment][disable] 1
+//!set class[VideoSink].function[center_rect][disable] 1
 
 //# Disable callables with arrays with sizes not described by parameters (FIXME)
-//!set record[VideoVBIParser].method[add_line][unsupported] 1
-//!set callback[VideoAffineTransformationGetMatrix][unsupported] 1
-//!set callback[VideoFormatPack][unsupported] 1
-//!set callback[VideoFormatUnpack][unsupported] 1
-//!set record[VideoMeta].field[map][unsupported] 1
-//!set record[VideoScaler].method[vertical][unsupported] 1
-//!set record[VideoVBIEncoder].method[write_line][unsupported] 1
-//!set function[video_chroma_resample][unsupported] 1
+//!set record[VideoVBIParser].method[add_line][disable] 1
+//!set callback[VideoAffineTransformationGetMatrix][disable] 1
+//!set callback[VideoFormatPack][disable] 1
+//!set callback[VideoFormatUnpack][disable] 1
+//!set record[VideoMeta].field[map][disable] 1
+//!set record[VideoScaler].method[vertical][disable] 1
+//!set record[VideoVBIEncoder].method[write_line][disable] 1
+//!set function[video_chroma_resample][disable] 1
 
 //# Parameters with fixed size arrays
 //!set callback[VideoGLTextureUpload].parameters.parameter[texture_id].type '<array zero-terminated="0" fixed-size="4" c:type="guint*"><type name="guint" c:type="guint"/></array>'

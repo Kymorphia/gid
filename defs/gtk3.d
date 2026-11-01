@@ -16,7 +16,7 @@
 //!set callback[ClipboardRichTextReceivedFunc].parameters.parameter[text].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set class[ListStore].method[reorder][unsupported] 1
+//!set class[ListStore].method[reorder][disable] 1
 
 //# axes param takes a GDK_AXIS_IGNORE terminated array (0 value) and expects the out values[] array to be the same size (use length of axes array)
 //!set class[GestureStylus].method[get_axes].parameters.parameter[axes].array[][zero-terminated] 1
@@ -32,7 +32,7 @@
 //!set function[target_table_free][ignore] 1
 
 //# Stock items must persist until application exit, binding passes a temporary array
-//!set function[stock_add_static][disable] 1
+//!set function[stock_add_static][ignore] 1
 
 //# Ignore user data parameter
 //!set interface[Buildable].method[custom_tag_end][ignore] 1

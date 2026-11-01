@@ -9,7 +9,7 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   74    0    0   100 | 1264    1    2  99.8 |    0    0    0   100 |  108    0    0   100 |
+glib2                      |   74    1    0  98.7 | 1264    7    2  99.3 |    0    0    0   100 |  108    0    0   100 |
 glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0    0    0   100 |    1    0    0   100 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   14    0    1  93.3 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -21,25 +21,25 @@ gio2                       |  171    0    0   100 | 1669    0    5  99.7 |   79 
 giounix2                   |   11    0    0   100 |  100    0    1  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94    0    0   100 | 1530    0    5  99.7 |   23    0    0   100 |  131    0    0   100 |
+gst1                       |   94   10    0  90.4 | 1530    0    5  99.7 |   23    0    0   100 |  131    0    0   100 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
-gstaudio1                  |   33    0    0   100 |  216    0    5  97.7 |    0    0    0   100 |   59    0    4  93.7 |
-gstbase1                   |   23    0    0   100 |  303    0   12  96.2 |    2    0    0   100 |   30    0    1  96.8 |
+gstaudio1                  |   33    0    0   100 |  216    5    0  97.7 |    0    0    0   100 |   59    0    4  93.7 |
+gstbase1                   |   23    0    0   100 |  303    4    8  96.2 |    2    0    0   100 |   30    0    1  96.8 |
 gstcheck1                  |    8    0    0   100 |  109    0    2  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   17    0    0   100 |    3    0    0   100 |    2    0    0   100 |
-gstgl1                     |   38    0    0   100 |  287    0    9  97.0 |    5    0    0   100 |   54    0    0   100 |
-gstglegl1                  |    7    0    0   100 |   16    1    5  76.2 |    0    0    0   100 |    0    0    0   100 |
+gstgl1                     |   38    0    0   100 |  287    9    0  97.0 |    5    0    0   100 |   54    0    0   100 |
+gstglegl1                  |    7    0    0   100 |   16    6    0  72.7 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstnet1                    |    9    0    0   100 |   25    0    0   100 |    0    0    0   100 |    6    0    0   100 |
-gstpbutils1                |   16    0    0   100 |  182    0    2  98.9 |    5    0    0   100 |    0    0    0   100 |
-gstrtp1                    |   11    0    0   100 |  197    0    1  99.5 |    6    0    0   100 |   17    0    0   100 |
-gstrtsp1                   |   15    0    0   100 |  139    1    0   100 |    1    0    0   100 |   50    0    1  98.0 |
-gstsdp1                    |   23    0    0   100 |  169    0    2  98.8 |    0    0    0   100 |   82    0    7  92.1 |
+gstpbutils1                |   16    0    0   100 |  182    2    0  98.9 |    5    0    0   100 |    0    0    0   100 |
+gstrtp1                    |   11    0    0   100 |  197    1    0  99.5 |    6    0    0   100 |   17    0    0   100 |
+gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1    0    0   100 |   50    0    1  98.0 |
+gstsdp1                    |   23    0    0   100 |  169    2    0  98.8 |    0    0    0   100 |   82    0    7  92.1 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   60    0    0   100 |  386    0    6  98.5 |    2    0    0   100 |  182    0    7  96.3 |
-gtk3                       |  345    0    0   100 | 3771    1   13  99.7 |  448    0    0   100 |  155    0    0   100 |
-gtk4                       |  326    0    0   100 | 3667    0    1 100.0 |  347    0    0   100 |   37    0    0   100 |
+gstvideo1                  |   60    1    0  98.4 |  386    6    0  98.5 |    2    0    0   100 |  182    1    6  96.3 |
+gtk3                       |  345    0    0   100 | 3771    1   12  99.7 |  448    0    0   100 |  155    0    0   100 |
+gtk4                       |  326    0    0   100 | 3667    1    0 100.0 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32    0    0   100 |    0    0    0   100 |
 harfbuzz0                  |   35    0    0   100 |  457    0   16  96.6 |    0    0    0   100 |   72    0    1  98.6 |
@@ -61,6 +61,69 @@ freetype2                  |    5    0    0   100 |    0    0    0   100 |    0 
 gid                        |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 libxml2                    |   10    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 xlib2                      |   12    0    0   100 |    1    0    0   100 |    0    0    0   100 |    0    0    0   100 |
+
+[Disabled Structs]
+glib.log_field.LogField
+gst.types.Bitmask
+gst.types.DoubleRange
+gst.types.FlagSet
+gst.types.Fraction
+gst.types.FractionRange
+gst.types.Int64Range
+gst.types.IntRange
+gst.types.ValueArray
+gst.types.ValueList
+gst.types.ValueUniqueList
+gstvideo.video_multiview_flags_set.VideoMultiviewFlagsSet
+
+[Disabled Funcs]
+glib.global.logSetWriterFunc
+glib.global.logStructuredArray
+glib.global.logWriterDefault
+glib.global.logWriterFormatFields
+glib.global.logWriterJournald
+glib.global.logWriterStandardStreams
+glib.global.logWriterSyslog
+gstaudio.audio_resampler.AudioResampler.resample
+gstaudio.audio_ring_buffer.AudioRingBuffer.setChannelPositions
+gstaudio.global.bufferAddAudioMeta
+gstaudio.global.bufferAddDsdPlaneOffsetMeta
+gstaudio.global.dsdConvert
+gstbase.bit_writer.BitWriter.freeAndGetData
+gstbase.bit_writer.BitWriter.getData
+gstbase.bit_writer.BitWriter.resetAndGetData
+gstbase.byte_writer.ByteWriter.resetAndGetData
+gstgl.glshader.GLShader.setUniformMatrix2fv
+gstgl.glshader.GLShader.setUniformMatrix2x3fv
+gstgl.glshader.GLShader.setUniformMatrix2x4fv
+gstgl.glshader.GLShader.setUniformMatrix3fv
+gstgl.glshader.GLShader.setUniformMatrix3x2fv
+gstgl.glshader.GLShader.setUniformMatrix3x4fv
+gstgl.glshader.GLShader.setUniformMatrix4fv
+gstgl.glshader.GLShader.setUniformMatrix4x2fv
+gstgl.glshader.GLShader.setUniformMatrix4x3fv
+gstglegl.eglimage.EGLImage.newWrapped
+gstglegl.eglimage.EGLImage.exportDmabuf
+gstglegl.eglimage.EGLImage.fromDmabufDirect
+gstglegl.eglimage.EGLImage.fromDmabufDirectTarget
+gstglegl.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
+gstglegl.eglimage.EGLImage.fromTexture
+gstpbutils.global.codecUtilsOpusCreateCaps
+gstpbutils.global.codecUtilsOpusCreateHeader
+gstrtp.global.bufferAddRtpSourceMeta
+gstsdp.mikeymessage.MIKEYMessage.addT
+gstsdp.mikeypayload.MIKEYPayload.tSet
+gstvideo.video_meta.VideoMeta.setAlignment
+gstvideo.video_scaler.VideoScaler.vertical
+gstvideo.video_sink.VideoSink.centerRect
+gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
+gstvideo.video_vbiparser.VideoVBIParser.addLine
+gstvideo.global.videoChromaResample
+gtk.list_store.ListStore.reorder
+gtk.list_store.ListStore.reorder
+
+[Disabled Fields]
+gstvideo.video_meta.VideoMeta.map
 
 [Unsupported Funcs]
 atk.document.Document.getAttributes
@@ -97,53 +160,18 @@ gst.buffer_list.BufferList.foreach_
 gst.pad.Pad.setGetrangeFunctionFull
 gst.pad.Pad.stickyEventsForeach
 gst.type_find.TypeFind.peek
-gstaudio.audio_resampler.AudioResampler.resample
-gstaudio.audio_ring_buffer.AudioRingBuffer.setChannelPositions
-gstaudio.global.bufferAddAudioMeta
-gstaudio.global.bufferAddDsdPlaneOffsetMeta
-gstaudio.global.dsdConvert
 gstbase.adapter.Adapter.map
 gstbase.adapter.Adapter.take
 gstbase.bit_writer.BitWriter.freeAndGetBuffer
-gstbase.bit_writer.BitWriter.freeAndGetData
-gstbase.bit_writer.BitWriter.getData
-gstbase.bit_writer.BitWriter.resetAndGetData
 gstbase.byte_reader.ByteReader.dupData
 gstbase.byte_reader.ByteReader.getData
 gstbase.byte_reader.ByteReader.peekData
 gstbase.byte_writer.ByteWriter.freeAndGetBuffer
 gstbase.byte_writer.ByteWriter.freeAndGetData
-gstbase.byte_writer.ByteWriter.resetAndGetData
 gstcheck.harness.Harness.addSinkHarness
 gstcheck.harness.Harness.addSrcHarness
-gstgl.glshader.GLShader.setUniformMatrix2fv
-gstgl.glshader.GLShader.setUniformMatrix2x3fv
-gstgl.glshader.GLShader.setUniformMatrix2x4fv
-gstgl.glshader.GLShader.setUniformMatrix3fv
-gstgl.glshader.GLShader.setUniformMatrix3x2fv
-gstgl.glshader.GLShader.setUniformMatrix3x4fv
-gstgl.glshader.GLShader.setUniformMatrix4fv
-gstgl.glshader.GLShader.setUniformMatrix4x2fv
-gstgl.glshader.GLShader.setUniformMatrix4x3fv
-gstglegl.eglimage.EGLImage.exportDmabuf
-gstglegl.eglimage.EGLImage.fromDmabufDirect
-gstglegl.eglimage.EGLImage.fromDmabufDirectTarget
-gstglegl.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
-gstglegl.eglimage.EGLImage.fromTexture
-gstpbutils.global.codecUtilsOpusCreateCaps
-gstpbutils.global.codecUtilsOpusCreateHeader
-gstrtp.global.bufferAddRtpSourceMeta
-gstsdp.mikeymessage.MIKEYMessage.addT
-gstsdp.mikeypayload.MIKEYPayload.tSet
-gstvideo.video_meta.VideoMeta.setAlignment
-gstvideo.video_scaler.VideoScaler.vertical
-gstvideo.video_sink.VideoSink.centerRect
-gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
-gstvideo.video_vbiparser.VideoVBIParser.addLine
-gstvideo.global.videoChromaResample
 gtk.clipboard.Clipboard.requestTargets
 gtk.clipboard.Clipboard.waitForTargets
-gtk.list_store.ListStore.reorder
 gtk.menu.Menu.attachToWidget
 gtk.selection_data.SelectionData.getTargets
 gtk.text_buffer.TextBuffer.getDeserializeFormats
@@ -154,7 +182,6 @@ gtk.global.targetsIncludeImage
 gtk.global.targetsIncludeRichText
 gtk.global.targetsIncludeText
 gtk.global.targetsIncludeUri
-gtk.list_store.ListStore.reorder
 harfbuzz.global.faceSetGetTableTagsFunc
 harfbuzz.global.fontFuncsSetGlyphHAdvancesFunc
 harfbuzz.global.fontFuncsSetGlyphHOriginsFunc
@@ -211,7 +238,6 @@ gstsdp.mikeypayload_rand.MIKEYPayloadRAND.rand
 gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam.val
 gstsdp.mikeypayload_t.MIKEYPayloadT.tsValue
 gstvideo.video_frame.VideoFrame.data
-gstvideo.video_meta.VideoMeta.map
 gstvideo.video_resampler.VideoResampler.offset
 gstvideo.video_resampler.VideoResampler.phase
 gstvideo.video_resampler.VideoResampler.nTaps

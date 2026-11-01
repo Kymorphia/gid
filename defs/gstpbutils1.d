@@ -5,8 +5,8 @@
 //!info capi https://gstreamer.freedesktop.org/documentation/pbutils/index.html
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set function[codec_utils_opus_create_caps][unsupported] 1
-//!set function[codec_utils_opus_create_header][unsupported] 1
+//!set function[codec_utils_opus_create_caps][disable] 1
+//!set function[codec_utils_opus_create_header][disable] 1
 
 //# caller-allocated-out-array (Caller allocated output array)
 //!set function[codec_utils_opus_parse_caps].parameters.parameter[channel_mapping][caller-allocates] 1

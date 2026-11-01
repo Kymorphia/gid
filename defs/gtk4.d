@@ -8,7 +8,7 @@
 //!kind RequestedSize StructAlias
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set class[ListStore].method[reorder][unsupported] 1
+//!set class[ListStore].method[reorder][disable] 1
 
 //# Ignore method which uses GObjectClass
 //!set interface[Editable].function[install_properties][ignore] 1

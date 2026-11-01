@@ -5,7 +5,7 @@
 //!info capi https://gstreamer.freedesktop.org/documentation/rtplib/index.html
 
 //# ssrc parameter appears to be an input uint pointer for some unknown reason, mark it unsupported
-//!set function[buffer_add_rtp_source_meta][unsupported] 1
+//!set function[buffer_add_rtp_source_meta][disable] 1
 
 //# Set basic parameters to out
 //!set record[RTCPPacket].method[sdes_copy_entry].parameters.parameter[type][direction] out
@@ -71,6 +71,6 @@
 //# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[RTPBuffer].field[data][ignore] 1
 
-//# Disable: Uses ignored GValue fundamental types (Fraction, ValueArray, ValueList)
-//!set class[RTPBaseDepayload].property[extensions][ignore] 1
-//!set class[RTPBasePayload].property[extensions][ignore] 1
+//# Disable: Uses unsupported GValue fundamental types (Fraction, ValueArray, ValueList) (FIXME)
+//!set class[RTPBaseDepayload].property[extensions][disable] 1
+//!set class[RTPBasePayload].property[extensions][disable] 1

@@ -61,21 +61,23 @@
 //!set record[StaticMutex][ignore] 1
 //!set record[StaticRecMutex][ignore] 1
 //!set record[TrashStack][ignore] 1
-//!set record[LogField][ignore] 1
-//!set callback[LogWriterFunc][ignore] 1
-//!set function[log_set_writer_func][ignore] 1
-//!set function[log_structured_array][ignore] 1
-//!set function[log_writer_default][ignore] 1
-//!set function[log_writer_format_fields][ignore] 1
-//!set function[log_writer_journald][ignore] 1
-//!set function[log_writer_standard_streams][ignore] 1
-//!set function[log_writer_syslog][ignore] 1
 //!set function[propagate_error][ignore] 1
 //!set function[strfreev][ignore] 1
 //!set function[strlcat][ignore] 1
 //!set function[strlcpy][ignore] 1
 //!set function[strrstr_len][ignore] 1
 //!set function[strstr_len][ignore] 1
+
+//# Disable structured logging API, LogField value is a pointer with a length or -1 for a string (FIXME)
+//!set record[LogField][disable] 1
+//!set callback[LogWriterFunc][disable] 1
+//!set function[log_set_writer_func][disable] 1
+//!set function[log_structured_array][disable] 1
+//!set function[log_writer_default][disable] 1
+//!set function[log_writer_format_fields][disable] 1
+//!set function[log_writer_journald][disable] 1
+//!set function[log_writer_standard_streams][disable] 1
+//!set function[log_writer_syslog][disable] 1
 
 //# Disable Queue fields
 //!set record[Queue].field[head][ignore] 1
@@ -407,7 +409,7 @@
     return _retval;
   }
 
-//!set record[Date].function[strftime][disable] 1
+//!set record[Date].function[strftime][ignore] 1
 //!class Date
 
   /**

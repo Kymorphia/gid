@@ -5,10 +5,10 @@
 //!info capi https://gstreamer.freedesktop.org/documentation/base/index.html
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set record[BitWriter].method[free_and_get_data][unsupported] 1
-//!set record[BitWriter].method[get_data][unsupported] 1
-//!set record[BitWriter].method[reset_and_get_data][unsupported] 1
-//!set record[ByteWriter].method[reset_and_get_data][unsupported] 1
+//!set record[BitWriter].method[free_and_get_data][disable] 1
+//!set record[BitWriter].method[get_data][disable] 1
+//!set record[BitWriter].method[reset_and_get_data][disable] 1
+//!set record[ByteWriter].method[reset_and_get_data][disable] 1
 
 //# Set length of array parameters
 //!set record[BitWriter].method[put_bytes].parameters.parameter[data].array[][length] 1

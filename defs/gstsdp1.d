@@ -5,8 +5,8 @@
 //!info capi https://gstreamer.freedesktop.org/documentation/sdp/index.html
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set record[MIKEYMessage].method[add_t][unsupported] 1
-//!set record[MIKEYPayload].method[t_set][unsupported] 1
+//!set record[MIKEYMessage].method[add_t][disable] 1
+//!set record[MIKEYPayload].method[t_set][disable] 1
 
 
 //# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
