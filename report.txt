@@ -21,7 +21,7 @@ gio2                       |  171    0    0   100 | 1668    0    7  99.6 |   79 
 giounix2                   |   11    0    0   100 |  100    0    1  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94    0    0   100 | 1520    0   16  99.0 |   23    0    0   100 |  131    0    0   100 |
+gst1                       |   94    0    0   100 | 1530    0    6  99.6 |   23    0    0   100 |  131    0    0   100 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  216    0    5  97.7 |    0    0    0   100 |   59    0    4  93.7 |
@@ -100,17 +100,7 @@ gsk.path_measure.PathMeasure.getPoint
 gst.buffer.Buffer.foreachMeta
 gst.buffer_list.BufferList.foreach_
 gst.iterator.Iterator.findCustom
-gst.pad.Pad.setActivateFunctionFull
-gst.pad.Pad.setActivatemodeFunctionFull
-gst.pad.Pad.setChainFunctionFull
-gst.pad.Pad.setChainListFunctionFull
-gst.pad.Pad.setEventFullFunctionFull
-gst.pad.Pad.setEventFunctionFull
 gst.pad.Pad.setGetrangeFunctionFull
-gst.pad.Pad.setIterateInternalLinksFunctionFull
-gst.pad.Pad.setLinkFunctionFull
-gst.pad.Pad.setQueryFunctionFull
-gst.pad.Pad.setUnlinkFunctionFull
 gst.pad.Pad.stickyEventsForeach
 gst.type_find.TypeFind.peek
 gstaudio.audio_resampler.AudioResampler.resample

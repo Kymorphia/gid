@@ -59,6 +59,19 @@
 //!set callback[AllocationMetaParamsAggregator].parameters.parameter[aggregated_params][caller-allocates] 0
 //!set callback[AllocationMetaParamsAggregator].parameters.parameter[aggregated_params][transfer-ownership] full
 
+//# Pad callbacks have no user_data parameter, the closure data is stored in a GstPad structure field (see GST_PAD_*FUNC_DATA in gstpad.h)
+//!set callback[PadActivateFunction][gid-closure-field] 'pad.activatedata'
+//!set callback[PadActivateModeFunction][gid-closure-field] 'pad.activatemodedata'
+//!set callback[PadChainFunction][gid-closure-field] 'pad.chaindata'
+//!set callback[PadChainListFunction][gid-closure-field] 'pad.chainlistdata'
+//!set callback[PadEventFunction][gid-closure-field] 'pad.eventdata'
+//!set callback[PadEventFullFunction][gid-closure-field] 'pad.eventdata'
+//!set callback[PadGetRangeFunction][gid-closure-field] 'pad.getrangedata'
+//!set callback[PadIterIntLinkFunction][gid-closure-field] 'pad.iterintlinkdata'
+//!set callback[PadLinkFunction][gid-closure-field] 'pad.linkdata'
+//!set callback[PadUnlinkFunction][gid-closure-field] 'pad.unlinkdata'
+//!set callback[PadQueryFunction][gid-closure-field] 'pad.querydata'
+
 //# Set values parameter to be a caller-allocates output array
 //!set callback[ControlSourceGetValueArray].parameters.parameter[values][direction] out
 //!set callback[ControlSourceGetValueArray].parameters.parameter[values][caller-allocates] 1

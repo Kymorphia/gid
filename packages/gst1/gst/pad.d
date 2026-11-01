@@ -1448,6 +1448,73 @@ class Pad : gst.object.ObjectWrap
   }
 
   /**
+      Sets the given activate function for pad. The activate function will
+      dispatch to [gst.pad.Pad.activateMode] to perform the actual activation.
+      Only makes sense to set on sink pads.
+      
+      Call this function if your sink pad can start a pull-based task.
+  
+      Params:
+        activate = the #GstPadActivateFunction to set.
+  */
+  void setActivateFunctionFull(gst.types.PadActivateFunction activate) nothrow
+  {
+    extern(C) gboolean _activateCallback(GstPad* pad, GstObject* parent) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.PadActivateFunction*)(cast(GstPad*)pad).activatedata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadActivateFunction");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _activateCB = activate ? &_activateCallback : null;
+    auto _activate = activate ? freezeDelegate(cast(void*)&activate) : null;
+    GDestroyNotify _activateDestroyCB = activate ? &thawDelegate : null;
+    gst_pad_set_activate_function_full(cast(GstPad*)this._cPtr, _activateCB, _activate, _activateDestroyCB);
+  }
+
+  /**
+      Sets the given activate_mode function for the pad. An activate_mode function
+      prepares the element for data passing.
+  
+      Params:
+        activatemode = the #GstPadActivateModeFunction to set.
+  */
+  void setActivatemodeFunctionFull(gst.types.PadActivateModeFunction activatemode) nothrow
+  {
+    extern(C) gboolean _activatemodeCallback(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.PadActivateModeFunction*)(cast(GstPad*)pad).activatemodedata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), mode, cast(bool)active);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadActivateModeFunction");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _activatemodeCB = activatemode ? &_activatemodeCallback : null;
+    auto _activatemode = activatemode ? freezeDelegate(cast(void*)&activatemode) : null;
+    GDestroyNotify _activatemodeDestroyCB = activatemode ? &thawDelegate : null;
+    gst_pad_set_activatemode_function_full(cast(GstPad*)this._cPtr, _activatemodeCB, _activatemode, _activatemodeDestroyCB);
+  }
+
+  /**
       Activates or deactivates the given pad.
       Normally called from within core state change functions.
       
@@ -1472,6 +1539,71 @@ class Pad : gst.object.ObjectWrap
   }
 
   /**
+      Sets the given chain function for the pad. The chain function is called to
+      process a #GstBuffer input buffer. see #GstPadChainFunction for more details.
+  
+      Params:
+        chain = the #GstPadChainFunction to set.
+  */
+  void setChainFunctionFull(gst.types.PadChainFunction chain) nothrow
+  {
+    extern(C) GstFlowReturn _chainCallback(GstPad* pad, GstObject* parent, GstBuffer* buffer) nothrow
+    {
+      gst.types.FlowReturn _dretval;
+      auto _dlg = cast(gst.types.PadChainFunction*)(cast(GstPad*)pad).chaindata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadChainFunction");
+      }
+      auto _retval = cast(GstFlowReturn)_dretval;
+
+      return _retval;
+    }
+    auto _chainCB = chain ? &_chainCallback : null;
+    auto _chain = chain ? freezeDelegate(cast(void*)&chain) : null;
+    GDestroyNotify _chainDestroyCB = chain ? &thawDelegate : null;
+    gst_pad_set_chain_function_full(cast(GstPad*)this._cPtr, _chainCB, _chain, _chainDestroyCB);
+  }
+
+  /**
+      Sets the given chain list function for the pad. The chainlist function is
+      called to process a #GstBufferList input buffer list. See
+      #GstPadChainListFunction for more details.
+  
+      Params:
+        chainlist = the #GstPadChainListFunction to set.
+  */
+  void setChainListFunctionFull(gst.types.PadChainListFunction chainlist) nothrow
+  {
+    extern(C) GstFlowReturn _chainlistCallback(GstPad* pad, GstObject* parent, GstBufferList* list) nothrow
+    {
+      gst.types.FlowReturn _dretval;
+      auto _dlg = cast(gst.types.PadChainListFunction*)(cast(GstPad*)pad).chainlistdata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), list ? new gst.buffer_list.BufferList(cast(void*)list, Yes.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadChainListFunction");
+      }
+      auto _retval = cast(GstFlowReturn)_dretval;
+
+      return _retval;
+    }
+    auto _chainlistCB = chainlist ? &_chainlistCallback : null;
+    auto _chainlist = chainlist ? freezeDelegate(cast(void*)&chainlist) : null;
+    GDestroyNotify _chainlistDestroyCB = chainlist ? &thawDelegate : null;
+    gst_pad_set_chain_list_function_full(cast(GstPad*)this._cPtr, _chainlistCB, _chainlist, _chainlistDestroyCB);
+  }
+
+  /**
       Set the given private data gpointer on the pad.
       This function can only be used by the element that owns the pad.
       No locking is performed in this function.
@@ -1482,6 +1614,140 @@ class Pad : gst.object.ObjectWrap
   void setElementPrivate(void* priv = null) nothrow
   {
     gst_pad_set_element_private(cast(GstPad*)this._cPtr, priv);
+  }
+
+  /**
+      Sets the given event handler for the pad.
+  
+      Params:
+        event = the #GstPadEventFullFunction to set.
+  */
+  void setEventFullFunctionFull(gst.types.PadEventFullFunction event) nothrow
+  {
+    extern(C) GstFlowReturn _eventCallback(GstPad* pad, GstObject* parent, GstEvent* event) nothrow
+    {
+      gst.types.FlowReturn _dretval;
+      auto _dlg = cast(gst.types.PadEventFullFunction*)(cast(GstPad*)pad).eventdata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), event ? new gst.event.Event(cast(void*)event, Yes.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadEventFullFunction");
+      }
+      auto _retval = cast(GstFlowReturn)_dretval;
+
+      return _retval;
+    }
+    auto _eventCB = event ? &_eventCallback : null;
+    auto _event = event ? freezeDelegate(cast(void*)&event) : null;
+    GDestroyNotify _eventDestroyCB = event ? &thawDelegate : null;
+    gst_pad_set_event_full_function_full(cast(GstPad*)this._cPtr, _eventCB, _event, _eventDestroyCB);
+  }
+
+  /**
+      Sets the given event handler for the pad.
+  
+      Params:
+        event = the #GstPadEventFunction to set.
+  */
+  void setEventFunctionFull(gst.types.PadEventFunction event) nothrow
+  {
+    extern(C) gboolean _eventCallback(GstPad* pad, GstObject* parent, GstEvent* event) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.PadEventFunction*)(cast(GstPad*)pad).eventdata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), event ? new gst.event.Event(cast(void*)event, Yes.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadEventFunction");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _eventCB = event ? &_eventCallback : null;
+    auto _event = event ? freezeDelegate(cast(void*)&event) : null;
+    GDestroyNotify _eventDestroyCB = event ? &thawDelegate : null;
+    gst_pad_set_event_function_full(cast(GstPad*)this._cPtr, _eventCB, _event, _eventDestroyCB);
+  }
+
+  /**
+      Sets the given internal link iterator function for the pad.
+  
+      Params:
+        iterintlink = the #GstPadIterIntLinkFunction to set.
+  */
+  void setIterateInternalLinksFunctionFull(gst.types.PadIterIntLinkFunction iterintlink) nothrow
+  {
+    extern(C) GstIterator* _iterintlinkCallback(GstPad* pad, GstObject* parent) nothrow
+    {
+      gst.iterator.Iterator _dretval;
+      auto _dlg = cast(gst.types.PadIterIntLinkFunction*)(cast(GstPad*)pad).iterintlinkdata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadIterIntLinkFunction");
+      }
+      auto _retval = _dretval ? cast(GstIterator*)_dretval._cPtr(Yes.Dup) : null;
+
+      return _retval;
+    }
+    auto _iterintlinkCB = iterintlink ? &_iterintlinkCallback : null;
+    auto _iterintlink = iterintlink ? freezeDelegate(cast(void*)&iterintlink) : null;
+    GDestroyNotify _iterintlinkDestroyCB = iterintlink ? &thawDelegate : null;
+    gst_pad_set_iterate_internal_links_function_full(cast(GstPad*)this._cPtr, _iterintlinkCB, _iterintlink, _iterintlinkDestroyCB);
+  }
+
+  /**
+      Sets the given link function for the pad. It will be called when
+      the pad is linked with another pad.
+      
+      The return value #GST_PAD_LINK_OK should be used when the connection can be
+      made.
+      
+      The return value #GST_PAD_LINK_REFUSED should be used when the connection
+      cannot be made for some reason.
+      
+      If link is installed on a source pad, it should call the #GstPadLinkFunction
+      of the peer sink pad, if present.
+  
+      Params:
+        link = the #GstPadLinkFunction to set.
+  */
+  void setLinkFunctionFull(gst.types.PadLinkFunction link) nothrow
+  {
+    extern(C) GstPadLinkReturn _linkCallback(GstPad* pad, GstObject* parent, GstPad* peer) nothrow
+    {
+      gst.types.PadLinkReturn _dretval;
+      auto _dlg = cast(gst.types.PadLinkFunction*)(cast(GstPad*)pad).linkdata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)peer, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadLinkFunction");
+      }
+      auto _retval = cast(GstPadLinkReturn)_dretval;
+
+      return _retval;
+    }
+    auto _linkCB = link ? &_linkCallback : null;
+    auto _link = link ? freezeDelegate(cast(void*)&link) : null;
+    GDestroyNotify _linkDestroyCB = link ? &thawDelegate : null;
+    gst_pad_set_link_function_full(cast(GstPad*)this._cPtr, _linkCB, _link, _linkDestroyCB);
   }
 
   /**
@@ -1496,6 +1762,69 @@ class Pad : gst.object.ObjectWrap
   void setOffset(long offset) nothrow
   {
     gst_pad_set_offset(cast(GstPad*)this._cPtr, offset);
+  }
+
+  /**
+      Set the given query function for the pad.
+  
+      Params:
+        query = the #GstPadQueryFunction to set.
+  */
+  void setQueryFunctionFull(gst.types.PadQueryFunction query) nothrow
+  {
+    extern(C) gboolean _queryCallback(GstPad* pad, GstObject* parent, GstQuery* query) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.PadQueryFunction*)(cast(GstPad*)pad).querydata;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadQueryFunction");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _queryCB = query ? &_queryCallback : null;
+    auto _query = query ? freezeDelegate(cast(void*)&query) : null;
+    GDestroyNotify _queryDestroyCB = query ? &thawDelegate : null;
+    gst_pad_set_query_function_full(cast(GstPad*)this._cPtr, _queryCB, _query, _queryDestroyCB);
+  }
+
+  /**
+      Sets the given unlink function for the pad. It will be called
+      when the pad is unlinked.
+      
+      Note that the pad's lock is already held when the unlink
+      function is called, so most pad functions cannot be called
+      from within the callback.
+  
+      Params:
+        unlink = the #GstPadUnlinkFunction to set.
+  */
+  void setUnlinkFunctionFull(gst.types.PadUnlinkFunction unlink) nothrow
+  {
+    extern(C) void _unlinkCallback(GstPad* pad, GstObject* parent) nothrow
+    {
+      auto _dlg = cast(gst.types.PadUnlinkFunction*)(cast(GstPad*)pad).unlinkdata;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadUnlinkFunction");
+      }
+    }
+    auto _unlinkCB = unlink ? &_unlinkCallback : null;
+    auto _unlink = unlink ? freezeDelegate(cast(void*)&unlink) : null;
+    GDestroyNotify _unlinkDestroyCB = unlink ? &thawDelegate : null;
+    gst_pad_set_unlink_function_full(cast(GstPad*)this._cPtr, _unlinkCB, _unlink, _unlinkDestroyCB);
   }
 
   /**
