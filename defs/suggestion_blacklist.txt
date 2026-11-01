@@ -13,10 +13,6 @@ File: defs/atk1.d
 //!set record[TextIface].field[get_bounded_ranges].callback[get_bounded_ranges].parameters.parameter[rect][direction] out
 //!set record[ObjectClass].field[active_descendant_changed].callback[active_descendant_changed].parameters.parameter[child][direction] out
 
-File: defs/gda5.d
-
-//!set callback[ThreadWrapperCallback].parameters.parameter[signame].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
-
 File: defs/glib2.d
 
 //!set function[error_domain_register].parameters.parameter[error_type_name].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'

@@ -59,6 +59,19 @@
 //!set class[CustomLayout].constructor[new].parameters.parameter[measure][scope] forever
 //!set class[CustomLayout].constructor[new].parameters.parameter[allocate][scope] forever
 
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[RecentData].field[groups][writable] 0
+
+//# Disable: Generic GCallback/C function symbol APIs, not usable from D
+//!set class[BuilderCScope].method[add_callback_symbol][ignore] 1
+//!set class[CClosureExpression].constructor[new][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[RequestedSize].field[data][ignore] 1
+//!set record[TreeIter].field[user_data][ignore] 1
+//!set record[TreeIter].field[user_data2][ignore] 1
+//!set record[TreeIter].field[user_data3][ignore] 1
+
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][ignore] 1
 //!set class[CustomSorter].method[set_sort_func][ignore] 1

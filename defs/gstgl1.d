@@ -24,3 +24,31 @@
 //# caller-allocated-out-array (Caller allocated output array)
 //!set function[gl_swizzle_invert].parameters.parameter[inversion][caller-allocates] 1
 //!set function[gl_video_format_swizzle].parameters.parameter[swizzle][caller-allocates] 1
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[GLAllocationParams].field[alloc_params][writable] 0
+//!set record[GLBaseMemory].field[mem][writable] 0
+//!set record[GLBaseMemory].field[query][writable] 0
+//!set record[GLBuffer].field[mem][writable] 0
+//!set record[GLBufferAllocationParams].field[parent][writable] 0
+//!set record[GLMemory].field[mem][writable] 0
+//!set record[GLMemory].field[info][writable] 0
+//!set record[GLSyncMeta].field[parent][writable] 0
+//!set record[GLVideoAllocationParams].field[parent][writable] 0
+//!set record[GLVideoAllocationParams].field[valign][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[GLAllocationParams].field[context][writable] 0
+//!set record[GLBaseMemory].field[context][writable] 0
+//!set record[GLVideoAllocationParams].field[v_info][writable] 0
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[GLAllocationParams].field[user_data][ignore] 1
+//!set record[GLAllocationParams].field[wrapped_data][ignore] 1
+//!set record[GLAllocationParams].field[gl_handle][ignore] 1
+//!set record[GLBaseMemory].field[data][ignore] 1
+//!set record[GLSyncMeta].field[data][ignore] 1
+
+//# Disable: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
+//!set record[GLBaseMemory].field[lock][ignore] 1

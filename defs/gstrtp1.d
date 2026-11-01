@@ -62,3 +62,15 @@
 //!set record[RTCPPacket].method[xr_get_voip_signal_metrics].parameters.parameter[rerl][direction] out
 //!set record[RTCPPacket].method[xr_get_voip_signal_metrics].parameters.parameter[gmin][direction] out
 //!set record[RTPSourceMeta].method[set_ssrc].parameters.parameter[ssrc][direction] out
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[RTCPPacket].field[rtcp][writable] 0
+//!set record[RTPSourceMeta].field[meta][writable] 0
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[RTPBuffer].field[data][ignore] 1
+
+//# Disable: Uses ignored GValue fundamental types (Fraction, ValueArray, ValueList)
+//!set class[RTPBaseDepayload].property[extensions][ignore] 1
+//!set class[RTPBasePayload].property[extensions][ignore] 1

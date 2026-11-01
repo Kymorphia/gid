@@ -315,6 +315,40 @@
 
 //# g_markup_parse_context_new() has unnecessary closure and destroy notify, override the new() method
 //!set record[MarkupParseContext].constructor[new][ignore] 1
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[Hook].field[next][writable] 0
+//!set record[Hook].field[prev][writable] 0
+//!set record[HookList].field[hooks][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[OptionEntry].field[long_name][writable] 0
+//!set record[OptionEntry].field[description][writable] 0
+//!set record[OptionEntry].field[arg_description][writable] 0
+//!set record[String].field[str][writable] 0
+
+//# Disable: Deprecated thread function vtable (D has native threads)
+//!set record[ThreadFunctions][ignore] 1
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[AsyncQueue].function[new_full][ignore] 1
+//!set function[test_add_data_func][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[Hook].field[data][ignore] 1
+//!set record[Hook].field[func][ignore] 1
+//!set record[Node].field[data][ignore] 1
+//!set record[Once].field[retval][ignore] 1
+//!set record[OptionEntry].field[arg_data][ignore] 1
+//!set union[TokenValue].field[v_symbol][ignore] 1
+
+//# Disable: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
+//!set record[Cond].method[wait][ignore] 1
+//!set record[Cond].method[wait_until][ignore] 1
+//!set record[MainContext].method[wait][ignore] 1
+
+//# julian_days is a full width 32 bit field, not a bitfield
+//!del record[Date].field[julian_days][bits]
+
 //!class MarkupParseContext
 
   /** */

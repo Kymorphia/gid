@@ -11,3 +11,7 @@
 //!set class[Context].method[evaluate].parameters.parameter[code].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set class[Context].method[evaluate_in_object].parameters.parameter[code].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set class[Context].method[evaluate_with_source_uri].parameters.parameter[code].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[ClassClass].field[parent_class][ignore] 1

@@ -75,6 +75,44 @@
 //!set class[SettingsBackend].function[flatten_tree].parameters.parameter[keys].array[][zero-terminated] 1
 //!set class[SettingsBackend].function[flatten_tree].parameters.parameter[values].array[][zero-terminated] 1
 
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[DBusAnnotationInfo].field[annotations][writable] 0
+//!set record[DBusArgInfo].field[annotations][writable] 0
+//!set record[DBusInterfaceInfo].field[methods][writable] 0
+//!set record[DBusInterfaceInfo].field[signals][writable] 0
+//!set record[DBusInterfaceInfo].field[properties][writable] 0
+//!set record[DBusInterfaceInfo].field[annotations][writable] 0
+//!set record[DBusMethodInfo].field[in_args][writable] 0
+//!set record[DBusMethodInfo].field[out_args][writable] 0
+//!set record[DBusMethodInfo].field[annotations][writable] 0
+//!set record[DBusNodeInfo].field[interfaces][writable] 0
+//!set record[DBusNodeInfo].field[nodes][writable] 0
+//!set record[DBusNodeInfo].field[annotations][writable] 0
+//!set record[DBusPropertyInfo].field[annotations][writable] 0
+//!set record[DBusSignalInfo].field[args][writable] 0
+//!set record[DBusSignalInfo].field[annotations][writable] 0
+//!set record[FileAttributeInfoList].field[infos][writable] 0
+//!set record[InputMessage].field[vectors][writable] 0
+//!set record[OutputMessage].field[vectors][writable] 0
+//!set record[OutputMessage].field[control_messages][writable] 0
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set class[SettingsBackend].function[flatten_tree][ignore] 1
+//!set class[Task].method[set_task_data][ignore] 1
+
+//# Disable: Redundant with another API (e.g. GBytes variant, simpler setter or accessor methods)
+//!set interface[DtlsClientConnection].property[accepted-cas][ignore] 1
+//!set class[MemoryInputStream].constructor[new_from_data][ignore] 1
+//!set class[MemoryInputStream].method[add_data][ignore] 1
+//!set class[TlsCertificate].property[certificate][ignore] 1
+//!set class[TlsCertificate].property[dns-names][ignore] 1
+//!set class[TlsCertificate].property[ip-addresses][ignore] 1
+//!set class[TlsCertificate].property[pkcs12-data][ignore] 1
+//!set class[TlsCertificate].property[private-key][ignore] 1
+//!set interface[TlsClientConnection].property[accepted-cas][ignore] 1
+//!set class[TlsPassword].method[set_value_full][ignore] 1
+//!set class[UnixSocketAddress].property[path-as-array][ignore] 1
+
 //!class ListModel
 
   /**

@@ -5520,7 +5520,7 @@ void memSetVtable(glib.types.MemVTable vtable) nothrow
     Returns: a pointer to the newly-allocated copy of the memory
 
     Deprecated: Use `funcGLib.memdup2` instead, as it accepts a gsize argument
-        for byte_size, avoiding the possibility of overflow in a [gobject.types.size_t] → [gda.types.uint]
+        for byte_size, avoiding the possibility of overflow in a [gobject.types.size_t] → `guint`
         conversion
 */
 void* memdup(const(void)* mem, uint byteSize) nothrow
@@ -5534,7 +5534,7 @@ void* memdup(const(void)* mem, uint byteSize) nothrow
     from mem. If mem is `NULL` it returns `NULL`.
     
     This replaces `funcGLib.memdup`, which was prone to integer overflows when
-    converting the argument from a [gobject.types.size_t] to a [gda.types.uint].
+    converting the argument from a [gobject.types.size_t] to a `guint`.
 
     Params:
       mem = the memory to copy
@@ -5738,7 +5738,7 @@ glib.types.Quark optionErrorQuark() nothrow
 
 /**
     Parses a string containing debugging options
-    into a [gda.types.uint] containing bit flags. This is used
+    into a `guint` containing bit flags. This is used
     within GDK and GTK to parse the debug options passed on the
     command line or through environment variables.
     

@@ -6,3 +6,7 @@
 
 //# PathPoint should be opaque
 //!set record[PathPoint][opaque] 1
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[RoundedRect].field[bounds][writable] 0

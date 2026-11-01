@@ -69,3 +69,46 @@
 
 //# Pointer fields owned by the structure (freed by its free function), enables setters
 //!set record[TargetEntry].field[target][owned] 1
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[BindingEntry].field[binding_set][writable] 0
+//!set record[BindingEntry].field[set_next][writable] 0
+//!set record[BindingEntry].field[hash_next][writable] 0
+//!set record[BindingEntry].field[signals][writable] 0
+//!set record[BindingSet].field[widget_path_pspecs][writable] 0
+//!set record[BindingSet].field[widget_class_pspecs][writable] 0
+//!set record[BindingSet].field[class_branch_pspecs][writable] 0
+//!set record[BindingSet].field[entries][writable] 0
+//!set record[BindingSet].field[current][writable] 0
+//!set record[BindingSignal].field[next][writable] 0
+//!set record[BindingSignal].field[args][writable] 0
+//!set record[RcProperty].field[value][writable] 0
+//!set record[RecentData].field[groups][writable] 0
+//!set record[RecentFilterInfo].field[applications][writable] 0
+//!set record[RecentFilterInfo].field[groups][writable] 0
+//!set record[SettingsValue].field[value][writable] 0
+//!set record[TargetPair].field[target][writable] 0
+//!set record[TextAttributes].field[appearance][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[TextAttributes].field[font][writable] 0
+//!set record[TextAttributes].field[tabs][writable] 0
+//!set record[TextAttributes].field[language][writable] 0
+
+//# Disable: Deprecated API with a replacement
+//!set class[Settings].property[color-hash][ignore] 1
+
+//# Disable: Generic GCallback/C function symbol APIs, not usable from D
+//!set class[Builder].method[add_callback_symbol][ignore] 1
+
+//# Disable: Properties which conflict with identically named methods (use the methods)
+//!set class[Widget].property[has-default][ignore] 1
+//!set class[Widget].property[has-focus][ignore] 1
+//!set class[Widget].property[is-focus][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[RequestedSize].field[data][ignore] 1
+//!set record[TreeIter].field[user_data][ignore] 1
+//!set record[TreeIter].field[user_data2][ignore] 1
+//!set record[TreeIter].field[user_data3][ignore] 1

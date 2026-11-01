@@ -21,3 +21,28 @@
 
 //# Set basic parameters to out
 //!set callback[AudioBaseSinkCustomSlavingCallback].parameters.parameter[requested_skew][direction] out
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[AudioBuffer].field[info][writable] 0
+//!set record[AudioClippingMeta].field[meta][writable] 0
+//!set record[AudioDownmixMeta].field[meta][writable] 0
+//!set record[AudioDownmixMeta].field[from_position][writable] 0
+//!set record[AudioDownmixMeta].field[to_position][writable] 0
+//!set record[AudioLevelMeta].field[meta][writable] 0
+//!set record[AudioMeta].field[meta][writable] 0
+//!set record[AudioMeta].field[info][writable] 0
+//!set record[AudioRingBufferSpec].field[info][writable] 0
+//!set record[DsdPlaneOffsetMeta].field[meta][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[AudioFormatInfo].field[name][writable] 0
+//!set record[AudioFormatInfo].field[description][writable] 0
+//!set record[AudioInfo].field[finfo][writable] 0
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[AudioFormatInfo].field[unpack_func][ignore] 1
+//!set record[AudioFormatInfo].field[pack_func][ignore] 1
+
+//# Disable: Uses ignored GValue fundamental types (Fraction, ValueArray, ValueList)
+//!set class[AudioAggregator].property[output-buffer-duration-fraction][ignore] 1

@@ -267,7 +267,7 @@ class Bytes : gobject.boxed.Boxed
       the data is copied.
       
       Do not use it if bytes contains more than `G_MAXUINT`
-      bytes. [glib.byte_array.ByteArray] stores the length of its data in [gda.types.uint],
+      bytes. [glib.byte_array.ByteArray] stores the length of its data in `guint`,
       which may be shorter than [gobject.types.size_t], that bytes is using.
       Returns: a new mutable [glib.byte_array.ByteArray] containing
           the same byte data

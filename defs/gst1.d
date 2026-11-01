@@ -76,3 +76,50 @@
 
 //# Pointer fields owned by the structure (freed by its free function), enables setters
 //!set record[Message].field[src][owned] 1
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[Buffer].field[mini_object][writable] 0
+//!set record[Caps].field[mini_object][writable] 0
+//!set record[CustomMeta].field[meta][writable] 0
+//!set record[Event].field[mini_object][writable] 0
+//!set record[MapInfo].field[data][writable] 0
+//!set record[Memory].field[mini_object][writable] 0
+//!set record[Message].field[mini_object][writable] 0
+//!set record[Meta].field[info][writable] 0
+//!set record[ParamSpecArray].field[parent_instance][writable] 0
+//!set record[ParamSpecFraction].field[parent_instance][writable] 0
+//!set record[ParentBufferMeta].field[parent][writable] 0
+//!set record[Promise].field[parent][writable] 0
+//!set record[ProtectionMeta].field[meta][writable] 0
+//!set record[Query].field[mini_object][writable] 0
+//!set record[ReferenceTimestampMeta].field[parent][writable] 0
+//!set record[StaticPadTemplate].field[static_caps][writable] 0
+//!set record[TagList].field[mini_object][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[Buffer].field[pool][writable] 0
+//!set record[Memory].field[allocator][writable] 0
+//!set record[Memory].field[parent][writable] 0
+//!set record[StaticCaps].field[caps][writable] 0
+//!set record[StaticCaps].field[string][writable] 0
+//!set record[StaticPadTemplate].field[name_template][writable] 0
+
+//# Disable: Generic GCallback/C function symbol APIs, not usable from D
+//!set function[tracing_register_hook][ignore] 1
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[Meta].function[api_type_set_params_aggregator][ignore] 1
+//!set record[MetaInfo].field[serialize_func][ignore] 1
+//!set record[MiniObject].method[set_qdata][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[MapInfo].field[user_data][ignore] 1
+//!set record[PadProbeInfo].field[data][ignore] 1
+//!set record[TypeFind].field[data][ignore] 1
+
+//# Disable: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
+//!set class[Task].method[set_lock][ignore] 1
+
+//# Disable: Uses ignored GValue fundamental types (Fraction, ValueArray, ValueList)
+//!set class[ValueUniqueList][ignore] 1

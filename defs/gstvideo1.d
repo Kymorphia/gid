@@ -34,3 +34,40 @@
 //!set record[VideoCodecState].field[caps][owned] 1
 //!set record[VideoCodecState].field[allocation_caps][owned] 1
 //!set record[VideoCodecState].field[codec_data][owned] 1
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[AncillaryMeta].field[meta][writable] 0
+//!set record[AncillaryMeta].field[data][writable] 0
+//!set record[VideoAFDMeta].field[meta][writable] 0
+//!set record[VideoAffineTransformationMeta].field[meta][writable] 0
+//!set record[VideoBarMeta].field[meta][writable] 0
+//!set record[VideoCaptionMeta].field[meta][writable] 0
+//!set record[VideoCaptionMeta].field[data][writable] 0
+//!set record[VideoCodecAlphaMeta].field[meta][writable] 0
+//!set record[VideoCodecState].field[info][writable] 0
+//!set record[VideoCodecState].field[mastering_display_info][writable] 0
+//!set record[VideoCodecState].field[content_light_level][writable] 0
+//!set record[VideoCropMeta].field[meta][writable] 0
+//!set record[VideoFrame].field[info][writable] 0
+//!set record[VideoGLTextureUploadMeta].field[meta][writable] 0
+//!set record[VideoInfo].field[finfo][writable] 0
+//!set record[VideoInfoDmaDrm].field[vinfo][writable] 0
+//!set record[VideoMeta].field[meta][writable] 0
+//!set record[VideoOverlayCompositionMeta].field[meta][writable] 0
+//!set record[VideoRegionOfInterestMeta].field[meta][writable] 0
+//!set record[VideoRegionOfInterestMeta].field[params][writable] 0
+//!set record[VideoSEIUserDataUnregisteredMeta].field[meta][writable] 0
+//!set record[VideoTimeCode].field[config][writable] 0
+//!set record[VideoTimeCodeMeta].field[meta][writable] 0
+//!set record[VideoTimeCodeMeta].field[tc][writable] 0
+
+//# Disable: Deprecated API with a replacement
+//!set function[buffer_add_video_gl_texture_upload_meta][ignore] 1
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[VideoFormatInfo].field[unpack_func][ignore] 1
+//!set record[VideoFormatInfo].field[pack_func][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[VideoFrame].field[meta][ignore] 1

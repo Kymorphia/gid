@@ -38,3 +38,11 @@
 //# string-length-param (Strings with array length parameters)
 //!set interface[EditableText].method[insert_text].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set record[EditableTextIface].field[insert_text].callback[insert_text].parameters.parameter[string].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[PropertyValues].field[old_value][writable] 0
+//!set record[PropertyValues].field[new_value][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[TextRange].field[content][writable] 0

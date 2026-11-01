@@ -110,6 +110,30 @@
 //# NOTE: signalHandlersDisconnectMatched is also a potential candidate, but not currently implemented
 //!set function[signal_handler_disconnect][ignore] 1
 //!set function[signal_handlers_destroy][ignore] 1
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[EnumClass].field[values][writable] 0
+//!set record[FlagsClass].field[values][writable] 0
+//!set record[Parameter].field[value][writable] 0
+//!set record[SignalQuery].field[param_types][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[EnumValue].field[value_name][writable] 0
+//!set record[EnumValue].field[value_nick][writable] 0
+//!set record[FlagsValue].field[value_name][writable] 0
+//!set record[FlagsValue].field[value_nick][writable] 0
+//!set record[ValueArray].field[values][writable] 0
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[TypeClass].function[adjust_private_offset][ignore] 1
+//!set function[enum_register_static][ignore] 1
+//!set function[flags_register_static][ignore] 1
+//!set function[type_default_interface_get][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[CClosure].field[callback][ignore] 1
+//!set record[ClosureNotifyData].field[data][ignore] 1
+//!set union[TypeCValue].field[v_pointer][ignore] 1
+
 //!class global pre
 
 /**

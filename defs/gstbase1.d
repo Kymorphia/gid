@@ -22,3 +22,9 @@
 //# Pointer fields owned by the structure (freed by its free function), enables setters
 //!set record[BaseParseFrame].field[buffer][owned] 1
 //!set record[BaseParseFrame].field[out_buffer][owned] 1
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[BitReader].field[data][writable] 0
+//!set record[ByteReader].field[data][writable] 0
+//!set record[ByteWriter].field[parent][writable] 0

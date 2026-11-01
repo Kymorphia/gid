@@ -11,3 +11,11 @@
 //!set function[check_init].parameters.parameter[argc][direction] inout
 //!set function[check_init].parameters.parameter[argv][direction] inout
 //!set function[check_init].parameters.parameter[argv].type '<array length="0" c:type="char***"><type name="utf8" c:type="char**"/></array>'
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[Harness].field[src_harness][writable] 0
+//!set record[Harness].field[sink_harness][writable] 0
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set function[check_init][ignore] 1

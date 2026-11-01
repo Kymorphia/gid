@@ -286,9 +286,6 @@ alias TestCase = GTestCase*;
 /** */
 alias TestConfig = GTestConfig;
 
-/** */
-alias ThreadFunctions = GThreadFunctions;
-
 // Callbacks
 
 /**

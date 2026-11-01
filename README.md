@@ -20,7 +20,6 @@ This package repository currently contains bindings for the following libraries:
  * [Vte](https://github.com/GNOME/vte) - Virtual terminal widget library for Gtk (supports versions for Gtk3 and Gtk4)
  * [GtkSource](https://gitlab.gnome.org/GNOME/gtksourceview/) - Source code viewer widget for Gtk (supports versions for Gtk3 and Gtk4)
  * [Apache Arrow](https://arrow.apache.org/) - The universal columnar format and multi-language toolbox for fast data interchange and in-memory analytics
- * [libgda](https://gitlab.gnome.org/GNOME/libgda) - GNU Data Access (GDA) library for accessing databases and other data sources
  * [libsoup](https://github.com/GNOME/libsoup) - An HTTP client/server library
  * [Rsvg](https://github.com/GNOME/librsvg) - SVG graphics rendering library
  * [json-glib](https://github.com/GNOME/json-glib) - JSON library

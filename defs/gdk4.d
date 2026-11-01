@@ -6,3 +6,8 @@
 
 //# Conflicts with undocumented Phobos object.Object.Monitor interface
 //!subtype Monitor MonitorWrap
+
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set class[ContentDeserializer].method[set_task_data][ignore] 1
+//!set class[ContentSerializer].method[set_task_data][ignore] 1

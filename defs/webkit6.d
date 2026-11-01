@@ -13,3 +13,9 @@
 //!set class[WebExtension].method[get_all_requested_match_patterns].return-value.array[][zero-terminated] 1
 //!set class[WebExtension].method[get_optional_permission_match_patterns].return-value.array[][zero-terminated] 1
 //!set class[WebExtension].method[get_requested_permission_match_patterns].return-value.array[][zero-terminated] 1
+
+
+//# Disable: Properties which conflict with identically named methods (use the methods)
+//!set class[NetworkSession].property[is-ephemeral][ignore] 1
+//!set class[WebView].property[is-controlled-by-automation][ignore] 1
+//!set class[WebsiteDataManager].property[is-ephemeral][ignore] 1

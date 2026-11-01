@@ -10,3 +10,15 @@
 //# string-length-param (Strings with array length parameters)
 //!set record[Value].constructor[new].parameters.parameter[secret].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set record[Value].constructor[new_full].parameters.parameter[secretData].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[Schema].field[attributes][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[Schema].field[name][writable] 0
+//!set record[SchemaAttribute].field[name][writable] 0
+
+//# Disable: Redundant with another API (e.g. GBytes variant, simpler setter or accessor methods)
+//!set interface[Retrievable].property[attributes][ignore] 1
+//!set record[Value].constructor[new_full][ignore] 1

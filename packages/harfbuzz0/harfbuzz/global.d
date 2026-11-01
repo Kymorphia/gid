@@ -1011,6 +1011,36 @@ void bufferReverseRange(harfbuzz.buffer.Buffer buffer, uint start, uint end) not
 }
 
 /**
+    Serializes buffer into a textual representation of its content, whether
+    Unicode codepoints or glyph identifiers and positioning information. This is
+    useful for showing the contents of the buffer, for example during debugging.
+    See the documentation of [harfbuzz.global.bufferSerializeUnicode] and
+    [harfbuzz.global.bufferSerializeGlyphs] for a description of the output format.
+
+    Params:
+      buffer = an #hb_buffer_t buffer.
+      start = the first item in buffer to serialize.
+      end = the last item in buffer to serialize.
+      buf = output string to
+              write serialized buffer into.
+      bufConsumed = if not `NULL`, will be set to the number of bytes written into buf.
+      font = the #hb_font_t used to shape this buffer, needed to
+               read glyph names and extents. If `NULL`, an empty font will be used.
+      format = the #hb_buffer_serialize_format_t to use for formatting the output.
+      flags = the #hb_buffer_serialize_flags_t that control what glyph properties
+                to serialize.
+    Returns: The number of serialized items.
+*/
+uint bufferSerialize(harfbuzz.buffer.Buffer buffer, uint start, uint end, ref ubyte[] buf, out uint bufConsumed, harfbuzz.font.Font font, harfbuzz.types.BufferSerializeFormat format, harfbuzz.types.BufferSerializeFlags flags) nothrow
+{
+  uint _retval;
+  uint _bufSize;
+  _bufSize = cast(uint)buf.length;
+  _retval = hb_buffer_serialize(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, start, end, buf.ptr, _bufSize, cast(uint*)&bufConsumed, font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, format, flags);
+  return _retval;
+}
+
+/**
     Parses a string into an #hb_buffer_serialize_format_t. Does not check if
     str is a valid buffer serialization format, use
     [harfbuzz.global.bufferSerializeListFormats] to get the list of supported formats.
@@ -1049,6 +1079,73 @@ string bufferSerializeFormatToString(harfbuzz.types.BufferSerializeFormat format
 }
 
 /**
+    Serializes buffer into a textual representation of its glyph content,
+    useful for showing the contents of the buffer, for example during debugging.
+    There are currently two supported serialization formats:
+    
+    ## text
+    A human-readable, plain text format.
+    The serialized glyphs will look something like:
+    
+    ```
+    [uni0651=0518,0+0|uni0628=0+1897]
+    ```
+    
+    - The serialized glyphs are delimited with `[` and `]`.
+    - Glyphs are separated with `|`
+    - Each glyph starts with glyph name, or glyph index if
+      #HB_BUFFER_SERIALIZE_FLAG_NO_GLYPH_NAMES flag is set. Then,
+      - If #HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS is not set, `=` then #hb_glyph_info_t.cluster.
+      - If #HB_BUFFER_SERIALIZE_FLAG_NO_POSITIONS is not set, the #hb_glyph_position_t in the format:
+        - If #hb_glyph_position_t.x_offset and #hb_glyph_position_t.y_offset are not both 0, `x_offset,y_offset`. Then,
+        - `+x_advance`, then `,y_advance` if #hb_glyph_position_t.y_advance is not 0. Then,
+      - If #HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS is set, the #hb_glyph_extents_t in the format `<x_bearing,y_bearing,width,height>`
+    
+    ## json
+    A machine-readable, structured format.
+    The serialized glyphs will look something like:
+    
+    ```
+    [{"g":"uni0651","cl":0,"dx":518,"dy":0,"ax":0,"ay":0},
+    {"g":"uni0628","cl":0,"dx":0,"dy":0,"ax":1897,"ay":0}]
+    ```
+    
+    Each glyph is a JSON object, with the following properties:
+    - `g`: the glyph name or glyph index if
+      #HB_BUFFER_SERIALIZE_FLAG_NO_GLYPH_NAMES flag is set.
+    - `cl`: #hb_glyph_info_t.cluster if
+      #HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS is not set.
+    - `dx`,`dy`,`ax`,`ay`: #hb_glyph_position_t.x_offset, #hb_glyph_position_t.y_offset,
+       #hb_glyph_position_t.x_advance and #hb_glyph_position_t.y_advance
+       respectively, if #HB_BUFFER_SERIALIZE_FLAG_NO_POSITIONS is not set.
+    - `xb`,`yb`,`w`,`h`: #hb_glyph_extents_t.x_bearing, #hb_glyph_extents_t.y_bearing,
+       #hb_glyph_extents_t.width and #hb_glyph_extents_t.height respectively if
+       #HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS is set.
+
+    Params:
+      buffer = an #hb_buffer_t buffer.
+      start = the first item in buffer to serialize.
+      end = the last item in buffer to serialize.
+      buf = output string to
+              write serialized buffer into.
+      bufConsumed = if not `NULL`, will be set to the number of bytes written into buf.
+      font = the #hb_font_t used to shape this buffer, needed to
+               read glyph names and extents. If `NULL`, an empty font will be used.
+      format = the #hb_buffer_serialize_format_t to use for formatting the output.
+      flags = the #hb_buffer_serialize_flags_t that control what glyph properties
+                to serialize.
+    Returns: The number of serialized items.
+*/
+uint bufferSerializeGlyphs(harfbuzz.buffer.Buffer buffer, uint start, uint end, ref ubyte[] buf, out uint bufConsumed, harfbuzz.font.Font font, harfbuzz.types.BufferSerializeFormat format, harfbuzz.types.BufferSerializeFlags flags) nothrow
+{
+  uint _retval;
+  uint _bufSize;
+  _bufSize = cast(uint)buf.length;
+  _retval = hb_buffer_serialize_glyphs(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, start, end, buf.ptr, _bufSize, cast(uint*)&bufConsumed, font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, format, flags);
+  return _retval;
+}
+
+/**
     Returns a list of supported buffer serialization formats.
     Returns: A string array of buffer serialization formats. Should not be freed.
 */
@@ -1067,6 +1164,61 @@ string[] bufferSerializeListFormats() nothrow
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString!(No.Free);
   }
+  return _retval;
+}
+
+/**
+    Serializes buffer into a textual representation of its content,
+    when the buffer contains Unicode codepoints (i.e., before shaping). This is
+    useful for showing the contents of the buffer, for example during debugging.
+    There are currently two supported serialization formats:
+    
+    ## text
+    A human-readable, plain text format.
+    The serialized codepoints will look something like:
+    
+    ```
+     <U+0651=0|U+0628=1>
+    ```
+    
+    - Glyphs are separated with `|`
+    - Unicode codepoints are expressed as zero-padded four (or more)
+      digit hexadecimal numbers preceded by `U+`
+    - If #HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS is not set, the cluster
+      will be indicated with a `=` then #hb_glyph_info_t.cluster.
+    
+    ## json
+    A machine-readable, structured format.
+    The serialized codepoints will be a list of objects with the following
+    properties:
+    - `u`: the Unicode codepoint as a decimal integer
+    - `cl`: #hb_glyph_info_t.cluster if
+      #HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS is not set.
+    
+    For example:
+    
+    ```
+    [{u:1617,cl:0},{u:1576,cl:1}]
+    ```
+
+    Params:
+      buffer = an #hb_buffer_t buffer.
+      start = the first item in buffer to serialize.
+      end = the last item in buffer to serialize.
+      buf = output string to
+              write serialized buffer into.
+      bufConsumed = if not `NULL`, will be set to the number of bytes written into buf.
+      format = the #hb_buffer_serialize_format_t to use for formatting the output.
+      flags = the #hb_buffer_serialize_flags_t that control what glyph properties
+                to serialize.
+    Returns: The number of serialized items.
+*/
+uint bufferSerializeUnicode(harfbuzz.buffer.Buffer buffer, uint start, uint end, ref ubyte[] buf, out uint bufConsumed, harfbuzz.types.BufferSerializeFormat format, harfbuzz.types.BufferSerializeFlags flags) nothrow
+{
+  uint _retval;
+  uint _bufSize;
+  _bufSize = cast(uint)buf.length;
+  _retval = hb_buffer_serialize_unicode(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, start, end, buf.ptr, _bufSize, cast(uint*)&bufConsumed, format, flags);
   return _retval;
 }
 
@@ -1823,6 +1975,60 @@ void faceBuilderSortTables(harfbuzz.face.Face face, harfbuzz.types.Tag[] tags) n
 }
 
 /**
+    Collects the mapping from Unicode characters to nominal glyphs of the face,
+    and optionally all of the Unicode characters covered by face.
+
+    Params:
+      face = A face object
+      mapping = The map to add Unicode-to-glyph mapping to
+      unicodes = The set to add Unicode characters to, or `NULL`
+*/
+void faceCollectNominalGlyphMapping(harfbuzz.face.Face face, harfbuzz.map.Map mapping, harfbuzz.set.Set unicodes = null) nothrow
+{
+  hb_face_collect_nominal_glyph_mapping(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, mapping ? cast(hb_map_t*)mapping._cPtr(No.Dup) : null, unicodes ? cast(hb_set_t*)unicodes._cPtr(No.Dup) : null);
+}
+
+/**
+    Collects all of the Unicode characters covered by face and adds
+    them to the #hb_set_t set out.
+
+    Params:
+      face = A face object
+      out_ = The set to add Unicode characters to
+*/
+void faceCollectUnicodes(harfbuzz.face.Face face, harfbuzz.set.Set out_) nothrow
+{
+  hb_face_collect_unicodes(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, out_ ? cast(hb_set_t*)out_._cPtr(No.Dup) : null);
+}
+
+/**
+    Collects all Unicode "Variation Selector" characters covered by face and adds
+    them to the #hb_set_t set out.
+
+    Params:
+      face = A face object
+      out_ = The set to add Variation Selector characters to
+*/
+void faceCollectVariationSelectors(harfbuzz.face.Face face, harfbuzz.set.Set out_) nothrow
+{
+  hb_face_collect_variation_selectors(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, out_ ? cast(hb_set_t*)out_._cPtr(No.Dup) : null);
+}
+
+/**
+    Collects all Unicode characters for variation_selector covered by face and adds
+    them to the #hb_set_t set out.
+
+    Params:
+      face = A face object
+      variationSelector = The Variation Selector to query
+      out_ = The set to add Unicode characters to
+*/
+void faceCollectVariationUnicodes(harfbuzz.face.Face face, harfbuzz.types.Codepoint variationSelector, harfbuzz.set.Set out_) nothrow
+{
+  hb_face_collect_variation_unicodes(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, variationSelector, out_ ? cast(hb_set_t*)out_._cPtr(No.Dup) : null);
+}
+
+/**
     Fetches the number of faces in a blob.
 
     Params:
@@ -2257,6 +2463,25 @@ harfbuzz.types.Bool featureFromString(ubyte[] str, out harfbuzz.feature.Feature 
   auto _str = cast(ubyte*)str.ptr;
   _retval = hb_feature_from_string(_str, _len, cast(hb_feature_t*)&feature);
   return _retval;
+}
+
+/**
+    Converts a #hb_feature_t into a `NULL`-terminated string in the format
+    understood by [harfbuzz.global.featureFromString]. The client in responsible for
+    allocating big enough size for buf, 128 bytes is more than enough.
+    
+    Note that the feature value will be omitted if it is '1', but the
+    string won't include any whitespace.
+
+    Params:
+      feature = an #hb_feature_t to convert
+      buf = output string
+*/
+void featureToString(harfbuzz.feature.Feature feature, ref char[] buf) nothrow
+{
+  uint _size;
+  _size = cast(uint)buf.length;
+  hb_feature_to_string(cast(hb_feature_t*)&feature, buf.ptr, _size);
 }
 
 /**
@@ -3297,6 +3522,27 @@ void fontGetGlyphKerningForDirection(harfbuzz.font.Font font, harfbuzz.types.Cod
 }
 
 /**
+    Fetches the glyph-name string for a glyph ID in the specified font.
+    
+    According to the OpenType specification, glyph names are limited to 63
+    characters and can only contain (a subset of) ASCII.
+
+    Params:
+      font = #hb_font_t to work upon
+      glyph = The glyph ID to query
+      name = Name string retrieved for the glyph ID
+    Returns: `true` if data found, `false` otherwise
+*/
+harfbuzz.types.Bool fontGetGlyphName(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, ref char[] name) nothrow
+{
+  harfbuzz.types.Bool _retval;
+  uint _size;
+  _size = cast(uint)name.length;
+  _retval = hb_font_get_glyph_name(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, name.ptr, _size);
+  return _retval;
+}
+
+/**
     Fetches the (X,Y) coordinates of the origin for a glyph in
     the specified font.
     
@@ -3655,6 +3901,28 @@ harfbuzz.types.Bool fontGlyphFromString(harfbuzz.font.Font font, ubyte[] s, out 
   auto _s = cast(ubyte*)s.ptr;
   _retval = hb_font_glyph_from_string(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, _s, _len, cast(hb_codepoint_t*)&glyph);
   return _retval;
+}
+
+/**
+    Fetches the name of the specified glyph ID in font and returns
+    it in string `s`.
+    
+    If the glyph ID has no name in font, a string of the form `gidDDD` is
+    generated, with `DDD` being the glyph ID.
+    
+    According to the OpenType specification, glyph names are limited to 63
+    characters and can only contain (a subset of) ASCII.
+
+    Params:
+      font = #hb_font_t to work upon
+      glyph = The glyph ID to query
+      s = The string containing the glyph name
+*/
+void fontGlyphToString(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, ref char[] s) nothrow
+{
+  uint _size;
+  _size = cast(uint)s.length;
+  hb_font_glyph_to_string(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, s.ptr, _size);
 }
 
 /**
@@ -4960,6 +5228,80 @@ void otFontSetFuncs(harfbuzz.font.Font font) nothrow
 }
 
 /**
+    Fetches a list of all feature indexes in the specified face's GSUB table
+    or GPOS table, underneath the specified scripts, languages, and features.
+    If no list of scripts is provided, all scripts will be queried. If no list
+    of languages is provided, all languages will be queried. If no list of
+    features is provided, all features will be queried.
+
+    Params:
+      face = #hb_face_t to work upon
+      tableTag = #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
+      scripts = The array of scripts to collect features for,
+          terminated by `HB_TAG_NONE`
+      languages = The array of languages to collect features for,
+          terminated by `HB_TAG_NONE`
+      features = The array of features to collect,
+          terminated by `HB_TAG_NONE`
+      featureIndexes = The set of feature indexes found for the query
+*/
+void otLayoutCollectFeatures(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, harfbuzz.types.Tag[] scripts, harfbuzz.types.Tag[] languages, harfbuzz.types.Tag[] features, harfbuzz.set.Set featureIndexes) nothrow
+{
+  auto _scripts_arr = scripts ~ hb_tag_t.init;
+  auto _scripts = _scripts_arr.ptr;
+  auto _languages_arr = languages ~ hb_tag_t.init;
+  auto _languages = _languages_arr.ptr;
+  auto _features_arr = features ~ hb_tag_t.init;
+  auto _features = _features_arr.ptr;
+  hb_ot_layout_collect_features(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, _scripts, _languages, _features, featureIndexes ? cast(hb_set_t*)featureIndexes._cPtr(No.Dup) : null);
+}
+
+/**
+    Fetches the mapping from feature tags to feature indexes for
+    the specified script and language.
+
+    Params:
+      face = #hb_face_t to work upon
+      tableTag = #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
+      scriptIndex = The index of the requested script tag
+      languageIndex = The index of the requested language tag
+      featureMap = The map of feature tag to feature index.
+*/
+void otLayoutCollectFeaturesMap(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, harfbuzz.map.Map featureMap) nothrow
+{
+  hb_ot_layout_collect_features_map(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, featureMap ? cast(hb_map_t*)featureMap._cPtr(No.Dup) : null);
+}
+
+/**
+    Fetches a list of all feature-lookup indexes in the specified face's GSUB
+    table or GPOS table, underneath the specified scripts, languages, and
+    features. If no list of scripts is provided, all scripts will be queried.
+    If no list of languages is provided, all languages will be queried. If no
+    list of features is provided, all features will be queried.
+
+    Params:
+      face = #hb_face_t to work upon
+      tableTag = #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
+      scripts = The array of scripts to collect lookups for,
+          terminated by `HB_TAG_NONE`
+      languages = The array of languages to collect lookups for,
+          terminated by `HB_TAG_NONE`
+      features = The array of features to collect lookups for,
+          terminated by `HB_TAG_NONE`
+      lookupIndexes = The array of lookup indexes found for the query
+*/
+void otLayoutCollectLookups(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, harfbuzz.types.Tag[] scripts, harfbuzz.types.Tag[] languages, harfbuzz.types.Tag[] features, harfbuzz.set.Set lookupIndexes) nothrow
+{
+  auto _scripts_arr = scripts ~ hb_tag_t.init;
+  auto _scripts = _scripts_arr.ptr;
+  auto _languages_arr = languages ~ hb_tag_t.init;
+  auto _languages = _languages_arr.ptr;
+  auto _features_arr = features ~ hb_tag_t.init;
+  auto _features = _features_arr.ptr;
+  hb_ot_layout_collect_lookups(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, _scripts, _languages, _features, lookupIndexes ? cast(hb_set_t*)lookupIndexes._cPtr(No.Dup) : null);
+}
+
+/**
     Fetches a list of the characters defined as having a variant under the specified
     "Character Variant" ("cvXX") feature tag.
 
@@ -5226,6 +5568,21 @@ harfbuzz.types.OtLayoutGlyphClass otLayoutGetGlyphClass(harfbuzz.face.Face face,
 }
 
 /**
+    Retrieves the set of all glyphs from the face that belong to the requested
+    glyph class in the face's GDEF table.
+
+    Params:
+      face = The #hb_face_t to work on
+      klass = The #hb_ot_layout_glyph_class_t GDEF class to retrieve
+      glyphs = The #hb_set_t set of all glyphs belonging to the requested
+                 class.
+*/
+void otLayoutGetGlyphsInClass(harfbuzz.face.Face face, harfbuzz.types.OtLayoutGlyphClass klass, harfbuzz.set.Set glyphs) nothrow
+{
+  hb_ot_layout_get_glyphs_in_class(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, klass, glyphs ? cast(hb_set_t*)glyphs._cPtr(No.Dup) : null);
+}
+
+/**
     Fetches the dominant horizontal baseline tag used by script.
 
     Params:
@@ -5476,6 +5833,24 @@ harfbuzz.types.Bool otLayoutLookupCollectGlyphAlternates(harfbuzz.face.Face face
 }
 
 /**
+    Fetches a list of all glyphs affected by the specified lookup in the
+    specified face's GSUB table or GPOS table.
+
+    Params:
+      face = #hb_face_t to work upon
+      tableTag = #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
+      lookupIndex = The index of the feature lookup to query
+      glyphsBefore = Array of glyphs preceding the substitution range
+      glyphsInput = Array of input glyphs that would be substituted by the lookup
+      glyphsAfter = Array of glyphs following the substitution range
+      glyphsOutput = Array of glyphs that would be the substituted output of the lookup
+*/
+void otLayoutLookupCollectGlyphs(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint lookupIndex, harfbuzz.set.Set glyphsBefore = null, harfbuzz.set.Set glyphsInput = null, harfbuzz.set.Set glyphsAfter = null, harfbuzz.set.Set glyphsOutput = null) nothrow
+{
+  hb_ot_layout_lookup_collect_glyphs(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, lookupIndex, glyphsBefore ? cast(hb_set_t*)glyphsBefore._cPtr(No.Dup) : null, glyphsInput ? cast(hb_set_t*)glyphsInput._cPtr(No.Dup) : null, glyphsAfter ? cast(hb_set_t*)glyphsAfter._cPtr(No.Dup) : null, glyphsOutput ? cast(hb_set_t*)glyphsOutput._cPtr(No.Dup) : null);
+}
+
+/**
     Fetches alternates of a glyph from a given GSUB lookup index. Note that for one-to-one GSUB
     glyph substitutions, this function fetches the substituted glyph.
 
@@ -5516,6 +5891,20 @@ harfbuzz.types.Position otLayoutLookupGetOpticalBound(harfbuzz.font.Font font, u
 }
 
 /**
+    Compute the transitive closure of glyphs needed for a
+    specified lookup.
+
+    Params:
+      face = #hb_face_t to work upon
+      lookupIndex = index of the feature lookup to query
+      glyphs = Array of glyphs comprising the transitive closure of the lookup
+*/
+void otLayoutLookupSubstituteClosure(harfbuzz.face.Face face, uint lookupIndex, harfbuzz.set.Set glyphs) nothrow
+{
+  hb_ot_layout_lookup_substitute_closure(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, lookupIndex, glyphs ? cast(hb_set_t*)glyphs._cPtr(No.Dup) : null);
+}
+
+/**
     Tests whether a specified lookup in the specified face would
     trigger a substitution on the given glyph sequence.
 
@@ -5537,6 +5926,20 @@ harfbuzz.types.Bool otLayoutLookupWouldSubstitute(harfbuzz.face.Face face, uint 
   auto _glyphs = cast(hb_codepoint_t*)glyphs.ptr;
   _retval = hb_ot_layout_lookup_would_substitute(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, lookupIndex, _glyphs, _glyphsLength, zeroContext);
   return _retval;
+}
+
+/**
+    Compute the transitive closure of glyphs needed for all of the
+    provided lookups.
+
+    Params:
+      face = #hb_face_t to work upon
+      lookups = The set of lookups to query
+      glyphs = Array of glyphs comprising the transitive closure of the lookups
+*/
+void otLayoutLookupsSubstituteClosure(harfbuzz.face.Face face, harfbuzz.set.Set lookups, harfbuzz.set.Set glyphs) nothrow
+{
+  hb_ot_layout_lookups_substitute_closure(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, lookups ? cast(const(hb_set_t)*)lookups._cPtr(No.Dup) : null, glyphs ? cast(hb_set_t*)glyphs._cPtr(No.Dup) : null);
 }
 
 /**
@@ -5988,6 +6391,24 @@ harfbuzz.types.Bool otMathIsGlyphExtendedShape(harfbuzz.face.Face face, harfbuzz
 }
 
 /**
+    Fetches all available feature types.
+
+    Params:
+      face = a face object
+      startOffset = iteration's start offset
+      entries = entries tags buffer
+    Returns: Number of all available feature types.
+*/
+uint otMetaGetEntryTags(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.OtMetaTag[] entries) nothrow
+{
+  uint _retval;
+  uint _entriesCount;
+  _entriesCount = cast(uint)entries.length;
+  _retval = hb_ot_meta_get_entry_tags(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, startOffset, &_entriesCount, entries.ptr);
+  return _retval;
+}
+
+/**
     It fetches metadata entry of a given tag from a font.
 
     Params:
@@ -6082,6 +6503,72 @@ harfbuzz.types.Position otMetricsGetYVariation(harfbuzz.font.Font font, harfbuzz
 }
 
 /**
+    Fetches a font name from the OpenType 'name' table.
+    If language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
+    Returns string in UTF-16 encoding. A NUL terminator is always written
+    for convenience, and isn't included in the output text_size.
+
+    Params:
+      face = font face.
+      nameId = OpenType name identifier to fetch.
+      language = language to fetch the name for.
+      text = buffer to write fetched name into.
+    Returns: full length of the requested string, or 0 if not found.
+*/
+uint otNameGetUtf16(harfbuzz.face.Face face, harfbuzz.types.OtNameId nameId, harfbuzz.types.Language language, ref ushort[] text) nothrow
+{
+  uint _retval;
+  uint _textSize;
+  _textSize = cast(uint)text.length;
+  _retval = hb_ot_name_get_utf16(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, nameId, language, &_textSize, text.ptr);
+  return _retval;
+}
+
+/**
+    Fetches a font name from the OpenType 'name' table.
+    If language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
+    Returns string in UTF-32 encoding. A NUL terminator is always written
+    for convenience, and isn't included in the output text_size.
+
+    Params:
+      face = font face.
+      nameId = OpenType name identifier to fetch.
+      language = language to fetch the name for.
+      text = buffer to write fetched name into.
+    Returns: full length of the requested string, or 0 if not found.
+*/
+uint otNameGetUtf32(harfbuzz.face.Face face, harfbuzz.types.OtNameId nameId, harfbuzz.types.Language language, ref uint[] text) nothrow
+{
+  uint _retval;
+  uint _textSize;
+  _textSize = cast(uint)text.length;
+  _retval = hb_ot_name_get_utf32(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, nameId, language, &_textSize, text.ptr);
+  return _retval;
+}
+
+/**
+    Fetches a font name from the OpenType 'name' table.
+    If language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
+    Returns string in UTF-8 encoding. A NUL terminator is always written
+    for convenience, and isn't included in the output text_size.
+
+    Params:
+      face = font face.
+      nameId = OpenType name identifier to fetch.
+      language = language to fetch the name for.
+      text = buffer to write fetched name into.
+    Returns: full length of the requested string, or 0 if not found.
+*/
+uint otNameGetUtf8(harfbuzz.face.Face face, harfbuzz.types.OtNameId nameId, harfbuzz.types.Language language, ref char[] text) nothrow
+{
+  uint _retval;
+  uint _textSize;
+  _textSize = cast(uint)text.length;
+  _retval = hb_ot_name_get_utf8(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, nameId, language, &_textSize, text.ptr);
+  return _retval;
+}
+
+/**
     Enumerates all available name IDs and language combinations. Returned
     array is owned by the face and should not be modified.  It can be
     used as long as face is alive.
@@ -6104,6 +6591,41 @@ harfbuzz.ot_name_entry.OtNameEntry[] otNameListNames(harfbuzz.face.Face face) no
       _retval[i] = new harfbuzz.ot_name_entry.OtNameEntry(cast(void*)&_cretval[i], No.Take);
   }
   return _retval;
+}
+
+/**
+    Computes the transitive closure of glyphs needed for a specified
+    input buffer under the given font and feature list. The closure is
+    computed as a set, not as a list.
+
+    Params:
+      font = #hb_font_t to work upon
+      buffer = The input buffer to compute from
+      features = The features enabled on the buffer
+      glyphs = The #hb_set_t set of glyphs comprising the transitive closure of the query
+*/
+void otShapeGlyphsClosure(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features, harfbuzz.set.Set glyphs) nothrow
+{
+  uint _numFeatures;
+  if (features)
+    _numFeatures = cast(uint)features.length;
+
+  auto _features = cast(hb_feature_t*)features.ptr;
+  hb_ot_shape_glyphs_closure(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, _features, _numFeatures, glyphs ? cast(hb_set_t*)glyphs._cPtr(No.Dup) : null);
+}
+
+/**
+    Computes the complete set of GSUB or GPOS lookups that are applicable
+    under a given shape_plan.
+
+    Params:
+      shapePlan = #hb_shape_plan_t to query
+      tableTag = GSUB or GPOS
+      lookupIndexes = The #hb_set_t set of lookups returned
+*/
+void otShapePlanCollectLookups(harfbuzz.shape_plan.ShapePlan shapePlan, harfbuzz.types.Tag tableTag, harfbuzz.set.Set lookupIndexes) nothrow
+{
+  hb_ot_shape_plan_collect_lookups(shapePlan ? cast(hb_shape_plan_t*)shapePlan._cPtr(No.Dup) : null, tableTag, lookupIndexes ? cast(hb_set_t*)lookupIndexes._cPtr(No.Dup) : null);
 }
 
 /**
@@ -6379,6 +6901,22 @@ void otVarNormalizeCoords(harfbuzz.face.Face face, float[] designCoords, out int
 
   auto _designCoords = cast(float*)designCoords.ptr;
   hb_ot_var_normalize_coords(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, _coordsLength, _designCoords, cast(int*)&normalizedCoords);
+}
+
+/**
+    Normalizes all of the coordinates in the given list of variation axes.
+
+    Params:
+      face = The #hb_face_t to work on
+      variations = The array of variations to normalize
+      variationsLength = The number of variations to normalize
+      coords = The array of normalized coordinates
+*/
+void otVarNormalizeVariations(harfbuzz.face.Face face, harfbuzz.variation.Variation variations, uint variationsLength, ref int[] coords) nothrow
+{
+  uint _coordsLength;
+  _coordsLength = cast(uint)coords.length;
+  hb_ot_var_normalize_variations(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, cast(const(hb_variation_t)*)&variations, variationsLength, coords.ptr, _coordsLength);
 }
 
 /**
@@ -8427,4 +8965,22 @@ harfbuzz.types.Bool variationFromString(ubyte[] str, out harfbuzz.variation.Vari
   auto _str = cast(ubyte*)str.ptr;
   _retval = hb_variation_from_string(_str, _len, cast(hb_variation_t*)&variation);
   return _retval;
+}
+
+/**
+    Converts an #hb_variation_t into a `NULL`-terminated string in the format
+    understood by [harfbuzz.global.variationFromString]. The client in responsible for
+    allocating big enough size for buf, 128 bytes is more than enough.
+    
+    Note that the string won't include any whitespace.
+
+    Params:
+      variation = an #hb_variation_t to convert
+      buf = output string
+*/
+void variationToString(harfbuzz.variation.Variation variation, ref char[] buf) nothrow
+{
+  uint _size;
+  _size = cast(uint)buf.length;
+  hb_variation_to_string(cast(hb_variation_t*)&variation, buf.ptr, _size);
 }

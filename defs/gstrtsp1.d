@@ -19,3 +19,9 @@
 
 //# Takes a NULL-terminated array of credentials, not a single one
 //!set function[rtsp_auth_credentials_free][disable] 1
+
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[RTSPAuthCredential].field[authorization][writable] 0
+//!set record[RTSPAuthParam].field[name][writable] 0
+//!set record[RTSPAuthParam].field[value][writable] 0

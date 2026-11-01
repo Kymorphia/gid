@@ -83,3 +83,67 @@
 //!set function[font_get_glyph_name].parameters.parameter[name][caller-allocates] 1
 //!set function[font_glyph_to_string].parameters.parameter[s][caller-allocates] 1
 //!set function[ot_var_normalize_variations].parameters.parameter[coords][caller-allocates] 1
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[ot_name_entry_t].field[language][writable] 0
+//!set record[segment_properties_t].field[language][writable] 0
+
+//# Disable: Deprecated API with a replacement
+//!set function[ot_layout_table_choose_script][ignore] 1
+//!set function[ot_var_find_axis][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[color_line_t].field[data][ignore] 1
+//!set record[color_line_t].field[get_color_stops_user_data][ignore] 1
+//!set record[color_line_t].field[get_extend_user_data][ignore] 1
+
+//# Fix array length parameters which are wrongly annotated as out
+//!set function[buffer_serialize].parameters.parameter[buf_size][direction] in
+//!set function[buffer_serialize_glyphs].parameters.parameter[buf_size][direction] in
+//!set function[buffer_serialize_unicode].parameters.parameter[buf_size][direction] in
+//!set function[feature_to_string].parameters.parameter[size][direction] in
+//!set function[font_get_glyph_name].parameters.parameter[size][direction] in
+//!set function[font_glyph_to_string].parameters.parameter[size][direction] in
+//!set function[ot_meta_get_entry_tags].parameters.parameter[entries_count][direction] inout
+//!set function[ot_name_get_utf16].parameters.parameter[text_size][direction] inout
+//!set function[ot_name_get_utf32].parameters.parameter[text_size][direction] inout
+//!set function[ot_name_get_utf8].parameters.parameter[text_size][direction] inout
+//!set function[ot_var_normalize_variations].parameters.parameter[coords_length][direction] in
+//!set function[variation_to_string].parameters.parameter[size][direction] in
+
+//# Fix hb_set_t/hb_map_t parameters which are filled by the function, but are allocated by the caller (in, not out caller-allocates)
+//!del function[face_collect_nominal_glyph_mapping].parameters.parameter[mapping][caller-allocates]
+//!set function[face_collect_nominal_glyph_mapping].parameters.parameter[mapping][direction] in
+//!del function[face_collect_nominal_glyph_mapping].parameters.parameter[unicodes][caller-allocates]
+//!set function[face_collect_nominal_glyph_mapping].parameters.parameter[unicodes][direction] in
+//!del function[face_collect_unicodes].parameters.parameter[out][caller-allocates]
+//!set function[face_collect_unicodes].parameters.parameter[out][direction] in
+//!del function[face_collect_variation_selectors].parameters.parameter[out][caller-allocates]
+//!set function[face_collect_variation_selectors].parameters.parameter[out][direction] in
+//!del function[face_collect_variation_unicodes].parameters.parameter[out][caller-allocates]
+//!set function[face_collect_variation_unicodes].parameters.parameter[out][direction] in
+//!del function[ot_layout_collect_features].parameters.parameter[feature_indexes][caller-allocates]
+//!set function[ot_layout_collect_features].parameters.parameter[feature_indexes][direction] in
+//!del function[ot_layout_collect_features_map].parameters.parameter[feature_map][caller-allocates]
+//!set function[ot_layout_collect_features_map].parameters.parameter[feature_map][direction] in
+//!del function[ot_layout_collect_lookups].parameters.parameter[lookup_indexes][caller-allocates]
+//!set function[ot_layout_collect_lookups].parameters.parameter[lookup_indexes][direction] in
+//!del function[ot_layout_get_glyphs_in_class].parameters.parameter[glyphs][caller-allocates]
+//!set function[ot_layout_get_glyphs_in_class].parameters.parameter[glyphs][direction] in
+//!del function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_before][caller-allocates]
+//!set function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_before][direction] in
+//!del function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_input][caller-allocates]
+//!set function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_input][direction] in
+//!del function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_after][caller-allocates]
+//!set function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_after][direction] in
+//!del function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_output][caller-allocates]
+//!set function[ot_layout_lookup_collect_glyphs].parameters.parameter[glyphs_output][direction] in
+//!del function[ot_layout_lookup_substitute_closure].parameters.parameter[glyphs][caller-allocates]
+//!set function[ot_layout_lookup_substitute_closure].parameters.parameter[glyphs][direction] in
+//!del function[ot_layout_lookups_substitute_closure].parameters.parameter[glyphs][caller-allocates]
+//!set function[ot_layout_lookups_substitute_closure].parameters.parameter[glyphs][direction] in
+//!del function[ot_shape_glyphs_closure].parameters.parameter[glyphs][caller-allocates]
+//!set function[ot_shape_glyphs_closure].parameters.parameter[glyphs][direction] in
+//!del function[ot_shape_plan_collect_lookups].parameters.parameter[lookup_indexes][caller-allocates]
+//!set function[ot_shape_plan_collect_lookups].parameters.parameter[lookup_indexes][direction] in

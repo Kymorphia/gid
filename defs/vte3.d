@@ -22,3 +22,7 @@
 //!set record[Regex].constructor[new_for_search].parameters.parameter[pattern].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set record[Regex].constructor[new_for_search_full].parameters.parameter[pattern].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set class[Terminal].glib:signal[commit].parameters.parameter[text].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
+
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[Uuid].method[free_to_string][ignore] 1

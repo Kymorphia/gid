@@ -43,3 +43,41 @@
 //!set record[ScriptIter].constructor[new].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set function[log2vis_get_embedding_levels].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set record[GlyphString].method[get_logical_widths].parameters.parameter[text].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
+
+
+//# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
+//!set record[Analysis].field[extra_attrs][writable] 0
+//!set record[AttrColor].field[attr][writable] 0
+//!set record[AttrFloat].field[attr][writable] 0
+//!set record[AttrFontDesc].field[attr][writable] 0
+//!set record[AttrFontFeatures].field[attr][writable] 0
+//!set record[AttrInt].field[attr][writable] 0
+//!set record[AttrLanguage].field[attr][writable] 0
+//!set record[AttrShape].field[attr][writable] 0
+//!set record[AttrSize].field[attr][writable] 0
+//!set record[AttrString].field[attr][writable] 0
+//!set record[GlyphString].field[glyphs][writable] 0
+//!set record[Item].field[analysis][writable] 0
+//!set record[LayoutLine].field[runs][writable] 0
+
+//# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
+//!set record[GlyphItem].field[item][writable] 0
+//!set record[GlyphItem].field[glyphs][writable] 0
+//!set record[GlyphItemIter].field[glyph_item][writable] 0
+//!set record[GlyphItemIter].field[text][writable] 0
+//!set record[LayoutLine].field[layout][writable] 0
+
+//# Disable: Deprecated API with a replacement
+//!set record[Analysis].field[shape_engine][ignore] 1
+//!set record[Analysis].field[lang_engine][ignore] 1
+//!set function[scan_int][ignore] 1
+//!set function[scan_string][ignore] 1
+//!set function[scan_word][ignore] 1
+//!set function[skip_space][ignore] 1
+
+//# Disable: Internal/implementation-only API, not useful from D
+//!set record[AttrShape].function[new_with_data][ignore] 1
+//!set record[Attribute].field[klass][ignore] 1
+
+//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//!set record[AttrShape].field[data][ignore] 1
