@@ -165,6 +165,31 @@ class SelectionData : gobject.boxed.Boxed
   }
 
   /**
+      Gets the contents of selection_data as an array of targets.
+      This can be used to interpret the results of getting
+      the standard TARGETS target that is always supplied for
+      any selection.
+  
+      Params:
+        targets = location to store an array of targets. The result stored
+                    here must be freed with [glib.global.gfree].
+      Returns: true if selection_data contains a valid
+           array of targets, otherwise false.
+  */
+  bool getTargets(out gdk.atom.Atom[] targets) nothrow
+  {
+    bool _retval;
+    int _nAtoms;
+    GdkAtom* _targets;
+    _retval = cast(bool)gtk_selection_data_get_targets(cast(const(GtkSelectionData)*)this._cPtr, &_targets, &_nAtoms);
+    targets.length = _nAtoms;
+    foreach (i; 0 .. _nAtoms)
+      targets[i] = new gdk.atom.Atom(cast(void*)_targets[i], No.Take);
+    gFree(cast(void*)_targets);
+    return _retval;
+  }
+
+  /**
       Gets the contents of the selection data as a UTF-8 string.
       Returns: if the selection data contained a
           recognized text type and it could be converted to UTF-8, a newly

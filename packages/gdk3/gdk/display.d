@@ -638,6 +638,31 @@ class Display : gobject.object.ObjectWrap
   }
 
   /**
+      Issues a request to the clipboard manager to store the
+      clipboard data. On X11, this is a special program that works
+      according to the
+      [FreeDesktop Clipboard Specification](http://www.freedesktop.org/Standards/clipboard-manager-spec).
+  
+      Params:
+        clipboardWindow = a #GdkWindow belonging to the clipboard owner
+        time = a timestamp
+        targets = an array of targets
+                             that should be saved, or null
+                             if all available targets should be saved.
+  */
+  void storeClipboard(gdk.window.Window clipboardWindow, uint time, gdk.atom.Atom[] targets = null) nothrow
+  {
+    int _nTargets;
+    if (targets)
+      _nTargets = cast(int)targets.length;
+
+    auto _targets_arr = new GdkAtom[](targets.length);
+    auto _targets = _targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? cast(GdkAtom)obj._cPtr: null;
+    gdk_display_store_clipboard(cast(GdkDisplay*)this._cPtr, clipboardWindow ? cast(GdkWindow*)clipboardWindow._cPtr(No.Dup) : null, time, _targets, _nTargets);
+  }
+
+  /**
       Returns whether the speicifed display supports clipboard
       persistance; i.e. if it’s possible to store the clipboard data after an
       application has quit. On X11 this checks if a clipboard daemon is

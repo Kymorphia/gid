@@ -353,6 +353,43 @@ class Clipboard : gobject.object.ObjectWrap
   }
 
   /**
+      Requests the contents of the clipboard as list of supported targets.
+      When the list is later received, callback will be called.
+      
+      The targets parameter to callback will contain the resulting targets if
+      the request succeeded, or null if it failed.
+  
+      Params:
+        callback = a function to call when the targets are
+              received, or the retrieval fails. (It will always be called
+              one way or the other.)
+  */
+  void requestTargets(gtk.types.ClipboardTargetsReceivedFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkAtom* atoms, int nAtoms, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gtk.types.ClipboardTargetsReceivedFunc*)data;
+      gdk.atom.Atom[] _atoms;
+      _atoms.length = nAtoms;
+      foreach (i; 0 .. nAtoms)
+        _atoms[i] = new gdk.atom.Atom(cast(void*)atoms[i], No.Take);
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _atoms);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ClipboardTargetsReceivedFunc");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_clipboard_request_targets(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
+  }
+
+  /**
       Requests the contents of the clipboard as text. When the text is
       later received, it will be converted to UTF-8 if necessary, and
       callback will be called.
@@ -573,6 +610,33 @@ class Clipboard : gobject.object.ObjectWrap
     }
     if (_format)
       format = new gdk.atom.Atom(cast(void*)_format, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns a list of targets that are present on the clipboard, or null
+      if there aren’t any targets available. The returned list must be
+      freed with [glib.global.gfree].
+      This function waits for the data to be received using the main
+      loop, so events, timeouts, etc, may be dispatched during the wait.
+  
+      Params:
+        targets = location
+                    to store an array of targets. The result stored here must
+                    be freed with [glib.global.gfree].
+      Returns: true if any targets are present on the clipboard,
+                      otherwise false.
+  */
+  bool waitForTargets(out gdk.atom.Atom[] targets) nothrow
+  {
+    bool _retval;
+    int _nTargets;
+    GdkAtom* _targets;
+    _retval = cast(bool)gtk_clipboard_wait_for_targets(cast(GtkClipboard*)this._cPtr, &_targets, &_nTargets);
+    targets.length = _nTargets;
+    foreach (i; 0 .. _nTargets)
+      targets[i] = new gdk.atom.Atom(cast(void*)_targets[i], No.Take);
+    gFree(cast(void*)_targets);
     return _retval;
   }
 

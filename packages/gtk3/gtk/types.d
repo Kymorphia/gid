@@ -624,6 +624,17 @@ alias ClipboardReceivedFunc = void delegate(gtk.clipboard.Clipboard clipboard, g
 alias ClipboardRichTextReceivedFunc = void delegate(gtk.clipboard.Clipboard clipboard, gdk.atom.Atom format, char[] text);
 
 /**
+    A function to be called when the results of [gtk.clipboard.Clipboard.requestTargets]
+    are received, or when the request fails.
+
+    Params:
+      clipboard = the #GtkClipboard
+      atoms = the supported targets,
+          as array of #GdkAtom, or null if retrieving the data failed.
+*/
+alias ClipboardTargetsReceivedFunc = void delegate(gtk.clipboard.Clipboard clipboard, gdk.atom.Atom[] atoms);
+
+/**
     A function to be called when the results of [gtk.clipboard.Clipboard.requestText]
     are received, or when the request fails.
 

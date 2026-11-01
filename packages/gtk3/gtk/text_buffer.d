@@ -549,6 +549,30 @@ class TextBuffer : gobject.object.ObjectWrap
   }
 
   /**
+      This function returns the rich text deserialize formats registered
+      with buffer using [gtk.text_buffer.TextBuffer.registerDeserializeFormat] or
+      [gtk.text_buffer.TextBuffer.registerDeserializeTagset]
+      Returns: an array of
+                      #GdkAtoms representing the registered formats.
+  */
+  gdk.atom.Atom[] getDeserializeFormats() nothrow
+  {
+    GdkAtom* _cretval;
+    int _cretlength;
+    _cretval = gtk_text_buffer_get_deserialize_formats(cast(GtkTextBuffer*)this._cPtr, &_cretlength);
+    gdk.atom.Atom[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gdk.atom.Atom[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new gdk.atom.Atom(cast(void*)_cretval[i], No.Take);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
       Initializes iter with the “end iterator,” one past the last valid
       character in the text buffer. If dereferenced with
       [gtk.text_iter.TextIter.getChar], the end iterator has a character value of 0.
@@ -799,6 +823,30 @@ class TextBuffer : gobject.object.ObjectWrap
     _retval = cast(bool)gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)this._cPtr, _start, _end);
     start = new gtk.text_iter.TextIter(cast(void*)_start, Yes.Take);
     end = new gtk.text_iter.TextIter(cast(void*)_end, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This function returns the rich text serialize formats registered
+      with buffer using [gtk.text_buffer.TextBuffer.registerSerializeFormat] or
+      [gtk.text_buffer.TextBuffer.registerSerializeTagset]
+      Returns: an array of
+                      #GdkAtoms representing the registered formats.
+  */
+  gdk.atom.Atom[] getSerializeFormats() nothrow
+  {
+    GdkAtom* _cretval;
+    int _cretlength;
+    _cretval = gtk_text_buffer_get_serialize_formats(cast(GtkTextBuffer*)this._cPtr, &_cretlength);
+    gdk.atom.Atom[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gdk.atom.Atom[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new gdk.atom.Atom(cast(void*)_cretval[i], No.Take);
+      gFree(cast(void*)_cretval);
+    }
     return _retval;
   }
 

@@ -14,7 +14,7 @@ glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0 
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   14    0    1  93.3 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  265    0    0   100 |    3    0    0   100 |  137    0    0   100 |
-gdk3                       |   57    0    0   100 |  542    0    6  98.9 |   39    0    0   100 |  264    0    3  98.9 |
+gdk3                       |   57    0    0   100 |  548    0    0   100 |   39    0    0   100 |  264    0    3  98.9 |
 gdk4                       |   66    0    0   100 |  538    0    4  99.3 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4    0    0   100 |   23    0    0   100 |
 gio2                       |  171    0    0   100 | 1669    0    5  99.7 |   79    0    0   100 |   63    0    5  92.6 |
@@ -38,7 +38,7 @@ gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1 
 gstsdp1                    |   23    0    0   100 |  169    2    0  98.8 |    0    0    0   100 |   82    0    7  92.1 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   60    1    0  98.4 |  386    6    0  98.5 |    2    0    0   100 |  182    1    6  96.3 |
-gtk3                       |  345    0    0   100 | 3772    1   11  99.7 |  448    0    0   100 |  155    0    0   100 |
+gtk3                       |  345    0    0   100 | 3781    1    2  99.9 |  448    0    0   100 |  155    0    0   100 |
 gtk4                       |  326    0    0   100 | 3667    1    0 100.0 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32    0    0   100 |    0    0    0   100 |
@@ -135,12 +135,6 @@ atk.text.Text.getDefaultAttributes
 atk.text.Text.getRunAttributes
 glib.option_context.OptionContext.setTranslateFunc
 glib.option_group.OptionGroup.setTranslateFunc
-gdk.device.Device.listAxes
-gdk.display.Display.storeClipboard
-gdk.drag_context.DragContext.listTargets
-gdk.global.dragBegin
-gdk.global.dragBeginForDevice
-gdk.global.dragBeginFromPoint
 gdk.texture.Texture.download
 gdk.texture_downloader.TextureDownloader.downloadInto
 gdk.global.contentRegisterDeserializer
@@ -170,17 +164,8 @@ gstbase.byte_writer.ByteWriter.freeAndGetBuffer
 gstbase.byte_writer.ByteWriter.freeAndGetData
 gstcheck.harness.Harness.addSinkHarness
 gstcheck.harness.Harness.addSrcHarness
-gtk.clipboard.Clipboard.requestTargets
-gtk.clipboard.Clipboard.waitForTargets
 gtk.menu.Menu.attachToWidget
-gtk.selection_data.SelectionData.getTargets
-gtk.text_buffer.TextBuffer.getDeserializeFormats
-gtk.text_buffer.TextBuffer.getSerializeFormats
 gtk.global.targetTableNewFromList
-gtk.global.targetsIncludeImage
-gtk.global.targetsIncludeRichText
-gtk.global.targetsIncludeText
-gtk.global.targetsIncludeUri
 harfbuzz.global.faceSetGetTableTagsFunc
 harfbuzz.global.fontFuncsSetGlyphHAdvancesFunc
 harfbuzz.global.fontFuncsSetGlyphHOriginsFunc

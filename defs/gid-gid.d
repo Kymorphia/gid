@@ -717,7 +717,7 @@ bool isHashTableValueType(V)() nothrow
 bool containerTypeIsSupported(T)() nothrow
 {
   return is(T : gobject.object.ObjectWrap) || is(T == interface) || is(T == string) || isTypeCopyableStruct!T || isTypeSimple!T
-    || is(T == void*) || is(T == const(void)*);
+    || isTypeOpaque!T || is(T == void*) || is(T == const(void)*);
 }
 
 /**
@@ -797,6 +797,22 @@ bool isTypeCopyableStruct(T)() nothrow
 }
 
 /**
+ * Check if a type is an Opaque structure class (wraps a C pointer, which can't be copied, and tracks ownership with an owned member).
+ * Opaque container elements are borrowed pointers, they are not duplicated or freed.
+ * Params:
+ *   T = Type to check
+ * Returns: true if T is an Opaque structure class
+ */
+bool isTypeOpaque(T)() nothrow
+{
+  static if (is(T == class) && !is(T : gobject.object.ObjectWrap) && !isTypeCopyableStruct!T)
+    return __traits(hasMember, T, "owned") && __traits(hasMember, T, "_cInstancePtr")
+      && __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c._cPtr();});
+  else
+    return false;
+}
+
+/**
  * Check if a type is a Wrap structure class (non-boxed, non-reffed class wrapping an inline C structure).
  * Params:
  *   T = Type to check
@@ -835,7 +851,7 @@ T cToD(T)(void* data) nothrow
     return gobject.object.ObjectWrap._getDObject!T(data, No.Take);
   else static if (is(T == string))
     return fromCString(cast(const(char)*)data);
-  else static if (isTypeCopyableStruct!T)
+  else static if (isTypeCopyableStruct!T || isTypeOpaque!T)
     return new T(data, No.Take);
   else static if (is(T == void*) || is(T == const(void)*))
     return data;
@@ -865,6 +881,8 @@ void dToC(T)(T val, void* data) nothrow
   }
   else static if (is(T == string))
     *cast(char**)data = toCString!(Yes.Malloc)(val); // Transfer the string to C (use g_malloc)
+  else static if (isTypeOpaque!T)
+    *(cast(void**)data) = val ? val._cPtr : null; // Borrowed pointer
   else static if (is(T == void*) || is(T == const(void)*))
     *(cast(void**)data) = cast(void*)val;
   else static if (isTypeSimple!T)

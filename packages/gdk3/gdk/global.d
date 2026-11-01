@@ -9,6 +9,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.color;
 import gdk.cursor;
+import gdk.device;
 import gdk.display;
 import gdk.drag_context;
 import gdk.drawing_context;
@@ -304,6 +305,76 @@ void disableMultidevice() nothrow
 void dragAbort(gdk.drag_context.DragContext context, uint time) nothrow
 {
   gdk_drag_abort(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, time);
+}
+
+/**
+    Starts a drag and creates a new drag context for it.
+    This function assumes that the drag is controlled by the
+    client pointer device, use [gdk.global.dragBeginForDevice] to
+    begin a drag with a different device.
+    
+    This function is called by the drag source.
+
+    Params:
+      window = the source window for this drag.
+      targets = the offered targets,
+            as list of #GdkAtoms
+    Returns: a newly created #GdkDragContext
+*/
+gdk.drag_context.DragContext dragBegin(gdk.window.Window window, gdk.atom.Atom[] targets) nothrow
+{
+  GdkDragContext* _cretval;
+  auto _targets = gListFromD!(gdk.atom.Atom)(targets);
+  scope(exit) containerFree!(GList*, gdk.atom.Atom, GidOwnership.None)(_targets);
+  _cretval = gdk_drag_begin(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, _targets);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, Yes.Take);
+  return _retval;
+}
+
+/**
+    Starts a drag and creates a new drag context for it.
+    
+    This function is called by the drag source.
+
+    Params:
+      window = the source window for this drag
+      device = the device that controls this drag
+      targets = the offered targets,
+            as list of #GdkAtoms
+    Returns: a newly created #GdkDragContext
+*/
+gdk.drag_context.DragContext dragBeginForDevice(gdk.window.Window window, gdk.device.Device device, gdk.atom.Atom[] targets) nothrow
+{
+  GdkDragContext* _cretval;
+  auto _targets = gListFromD!(gdk.atom.Atom)(targets);
+  scope(exit) containerFree!(GList*, gdk.atom.Atom, GidOwnership.None)(_targets);
+  _cretval = gdk_drag_begin_for_device(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, _targets);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, Yes.Take);
+  return _retval;
+}
+
+/**
+    Starts a drag and creates a new drag context for it.
+    
+    This function is called by the drag source.
+
+    Params:
+      window = the source window for this drag
+      device = the device that controls this drag
+      targets = the offered targets,
+            as list of #GdkAtoms
+      xRoot = the x coordinate where the drag nominally started
+      yRoot = the y coordinate where the drag nominally started
+    Returns: a newly created #GdkDragContext
+*/
+gdk.drag_context.DragContext dragBeginFromPoint(gdk.window.Window window, gdk.device.Device device, gdk.atom.Atom[] targets, int xRoot, int yRoot) nothrow
+{
+  GdkDragContext* _cretval;
+  auto _targets = gListFromD!(gdk.atom.Atom)(targets);
+  scope(exit) containerFree!(GList*, gdk.atom.Atom, GidOwnership.None)(_targets);
+  _cretval = gdk_drag_begin_from_point(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, _targets, xRoot, yRoot);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, Yes.Take);
+  return _retval;
 }
 
 /**

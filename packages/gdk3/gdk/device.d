@@ -2,6 +2,7 @@
 module gdk.device;
 
 public import gid.basictypes;
+import gdk.atom;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.cursor;
@@ -616,6 +617,19 @@ class Device : gobject.object.ObjectWrap
     GdkGrabStatus _cretval;
     _cretval = gdk_device_grab(cast(GdkDevice*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, grabOwnership, ownerEvents, eventMask, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null, time);
     gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns a #GList of #GdkAtoms, containing the labels for
+      the axes that device currently has.
+      Returns: A #GList of #GdkAtoms, free with [glib.list.List.free].
+  */
+  gdk.atom.Atom[] listAxes() nothrow
+  {
+    GList* _cretval;
+    _cretval = gdk_device_list_axes(cast(GdkDevice*)this._cPtr);
+    auto _retval = gListToD!(gdk.atom.Atom, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 

@@ -37,6 +37,7 @@ import gtk.stock_item;
 import gtk.style;
 import gtk.style_context;
 import gtk.target_entry;
+import gtk.text_buffer;
 import gtk.tree_model;
 import gtk.tree_path;
 import gtk.types;
@@ -3011,6 +3012,101 @@ void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func) nothrow
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   gtk_stock_set_translate_func(_domain, _funcCB, _func, _funcDestroyCB);
+}
+
+/**
+    Determines if any of the targets in targets can be used to
+    provide a #GdkPixbuf.
+
+    Params:
+      targets = an array of #GdkAtoms
+      writable = whether to accept only targets for which GTK+ knows
+          how to convert a pixbuf into the format
+    Returns: true if targets include a suitable target for images,
+        otherwise false.
+*/
+bool targetsIncludeImage(gdk.atom.Atom[] targets, bool writable) nothrow
+{
+  bool _retval;
+  int _nTargets;
+  if (targets)
+    _nTargets = cast(int)targets.length;
+
+  auto _targets_arr = new GdkAtom[](targets.length);
+  auto _targets = _targets_arr.ptr;
+  foreach (i, obj; targets) _targets[i] = obj ? cast(GdkAtom)obj._cPtr: null;
+  _retval = cast(bool)gtk_targets_include_image(_targets, _nTargets, writable);
+  return _retval;
+}
+
+/**
+    Determines if any of the targets in targets can be used to
+    provide rich text.
+
+    Params:
+      targets = an array of #GdkAtoms
+      buffer = a #GtkTextBuffer
+    Returns: true if targets include a suitable target for rich text,
+                    otherwise false.
+*/
+bool targetsIncludeRichText(gdk.atom.Atom[] targets, gtk.text_buffer.TextBuffer buffer) nothrow
+{
+  bool _retval;
+  int _nTargets;
+  if (targets)
+    _nTargets = cast(int)targets.length;
+
+  auto _targets_arr = new GdkAtom[](targets.length);
+  auto _targets = _targets_arr.ptr;
+  foreach (i, obj; targets) _targets[i] = obj ? cast(GdkAtom)obj._cPtr: null;
+  _retval = cast(bool)gtk_targets_include_rich_text(_targets, _nTargets, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Determines if any of the targets in targets can be used to
+    provide text.
+
+    Params:
+      targets = an array of #GdkAtoms
+    Returns: true if targets include a suitable target for text,
+        otherwise false.
+*/
+bool targetsIncludeText(gdk.atom.Atom[] targets) nothrow
+{
+  bool _retval;
+  int _nTargets;
+  if (targets)
+    _nTargets = cast(int)targets.length;
+
+  auto _targets_arr = new GdkAtom[](targets.length);
+  auto _targets = _targets_arr.ptr;
+  foreach (i, obj; targets) _targets[i] = obj ? cast(GdkAtom)obj._cPtr: null;
+  _retval = cast(bool)gtk_targets_include_text(_targets, _nTargets);
+  return _retval;
+}
+
+/**
+    Determines if any of the targets in targets can be used to
+    provide an uri list.
+
+    Params:
+      targets = an array of #GdkAtoms
+    Returns: true if targets include a suitable target for uri lists,
+        otherwise false.
+*/
+bool targetsIncludeUri(gdk.atom.Atom[] targets) nothrow
+{
+  bool _retval;
+  int _nTargets;
+  if (targets)
+    _nTargets = cast(int)targets.length;
+
+  auto _targets_arr = new GdkAtom[](targets.length);
+  auto _targets = _targets_arr.ptr;
+  foreach (i, obj; targets) _targets[i] = obj ? cast(GdkAtom)obj._cPtr: null;
+  _retval = cast(bool)gtk_targets_include_uri(_targets, _nTargets);
+  return _retval;
 }
 
 /**

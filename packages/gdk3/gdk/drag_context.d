@@ -2,6 +2,7 @@
 module gdk.drag_context;
 
 public import gid.basictypes;
+import gdk.atom;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;
@@ -149,6 +150,18 @@ class DragContext : gobject.object.ObjectWrap
     GdkDragAction _cretval;
     _cretval = gdk_drag_context_get_suggested_action(cast(GdkDragContext*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
+    return _retval;
+  }
+
+  /**
+      Retrieves the list of targets of the context.
+      Returns: a #GList of targets
+  */
+  gdk.atom.Atom[] listTargets() nothrow
+  {
+    GList* _cretval;
+    _cretval = gdk_drag_context_list_targets(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gListToD!(gdk.atom.Atom, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 
