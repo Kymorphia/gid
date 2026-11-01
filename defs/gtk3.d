@@ -40,6 +40,9 @@
 //# Set basic parameters to out
 //!set function[rc_parse_priority].parameters.parameter[priority][direction] out
 
+//# set_default_icon_list copies the list and refs the pixbufs (caller retains ownership), like set_icon_list
+//!set class[Window].function[set_default_icon_list].parameters.parameter[list][transfer-ownership] none
+
 //# Return callback array should be transfer-ownership full
 //!set callback[TextBufferSerializeFunc].return-value[][transfer-ownership] full
 

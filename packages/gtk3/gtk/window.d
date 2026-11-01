@@ -758,6 +758,24 @@ class Window : gtk.bin.Bin
   }
 
   /**
+      Sets an icon list to be used as fallback for windows that haven't
+      had [gtk.window.Window.setIconList] called on them to set up a
+      window-specific icon list. This function allows you to set up the
+      icon for all windows in your app at once.
+      
+      See [gtk.window.Window.setIconList] for more details.
+  
+      Params:
+        list = a list of #GdkPixbuf
+  */
+  static void setDefaultIconList(gdkpixbuf.pixbuf.Pixbuf[] list) nothrow
+  {
+    auto _list = gListFromD!(gdkpixbuf.pixbuf.Pixbuf)(list);
+    scope(exit) containerFree!(GList*, gdkpixbuf.pixbuf.Pixbuf, GidOwnership.None)(_list);
+    gtk_window_set_default_icon_list(_list);
+  }
+
+  /**
       Sets an icon to be used as fallback for windows that haven't
       had [gtk.window.Window.setIconList] called on them from a named
       themed icon, see [gtk.window.Window.setIconName].
