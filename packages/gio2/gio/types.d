@@ -540,23 +540,6 @@ alias DBusProxyTypeFunc = gobject.types.GType delegate(gio.dbus_object_manager_c
 alias DBusSignalCallback = void delegate(gio.dbus_connection.DBusConnection connection, string senderName, string objectPath, string interfaceName, string signalName, glib.variant.Variant parameters);
 
 /**
-    The type of the dispatch function in #GDBusSubtreeVTable.
-    
-    Subtrees are flat.  node, if non-null, is always exactly one
-    segment of the object path (ie: it never contains a slash).
-
-    Params:
-      connection = A #GDBusConnection.
-      sender = The unique bus name of the remote caller.
-      objectPath = The object path that was registered with [gio.dbus_connection.DBusConnection.registerSubtree].
-      interfaceName = The D-Bus interface name that the method call or property access is for.
-      node = A node that is a child of object_path (relative to object_path) or null for the root of the subtree.
-      outUserData = Return location for user data to pass to functions in the returned #GDBusInterfaceVTable.
-    Returns: A #GDBusInterfaceVTable or null if you don't want to handle the methods.
-*/
-alias DBusSubtreeDispatchFunc = gio.types.DBusInterfaceVTable delegate(gio.dbus_connection.DBusConnection connection, string sender, string objectPath, string interfaceName, string node, out void* outUserData);
-
-/**
     The type of the enumerate function in #GDBusSubtreeVTable.
     
     This function is called when generating introspection data and also

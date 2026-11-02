@@ -76,7 +76,7 @@ class DBusAnnotationInfo : gobject.boxed.BoxedWrap!(g_dbus_annotation_info_get_t
   @property void key(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).key);
-    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)this._cPtr).key);
+    (cast(GDBusAnnotationInfo*)this._cPtr).key = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -96,7 +96,7 @@ class DBusAnnotationInfo : gobject.boxed.BoxedWrap!(g_dbus_annotation_info_get_t
   @property void value(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).value);
-    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)this._cPtr).value);
+    (cast(GDBusAnnotationInfo*)this._cPtr).value = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**

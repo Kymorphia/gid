@@ -76,7 +76,7 @@ class DBusSignalInfo : gobject.boxed.BoxedWrap!(g_dbus_signal_info_get_type)
   @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusSignalInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GDBusSignalInfo*)this._cPtr).name);
+    (cast(GDBusSignalInfo*)this._cPtr).name = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**

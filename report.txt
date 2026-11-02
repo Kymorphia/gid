@@ -11,17 +11,17 @@ arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0 
 atk1                       |   40    0    0   100 |  236    0    7  97.1 |   41    0    0   100 |   29    0    0   100 |
 glib2                      |   74    1    0  98.7 | 1264    7    2  99.3 |    0    0    0   100 |  108    0    0   100 |
 glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0    0    0   100 |    1    0    0   100 |
-gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   14    0    1  93.3 |
+gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   15    0    0   100 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  265    0    0   100 |    3    0    0   100 |  137    0    0   100 |
 gdk3                       |   57    0    0   100 |  548    0    0   100 |   39    0    0   100 |  264    0    3  98.9 |
 gdk4                       |   66    0    0   100 |  538    0    4  99.3 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  171    0    0   100 | 1669    0    5  99.7 |   79    0    0   100 |   63    0    5  92.6 |
+gio2                       |  171    0    0   100 | 1669    0    5  99.7 |   79    0    0   100 |   64    0    4  94.1 |
 giounix2                   |   11    0    0   100 |  100    0    1  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94   10    0  90.4 | 1530    0    5  99.7 |   23    0    0   100 |  131    0    0   100 |
+gst1                       |   94   10    0  90.4 | 1530    0    5  99.7 |   23    0    0   100 |  130    0    1  99.2 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  216    5    0  97.7 |    0    0    0   100 |   59    0    4  93.7 |
@@ -195,15 +195,14 @@ cairo.scaled_font.ScaledFont.textToGlyphs
 cairo.global.imageSurfaceCreateForData
 
 [Unsupported Fields]
-gmime.types.StreamIOVector.data
 gdk.event_button.EventButton.axes
 gdk.event_motion.EventMotion.axes
 gdk.event_touch.EventTouch.axes
+gio.types.DBusSubtreeVTable.dispatch
 gio.input_message.InputMessage.address
 gio.input_message.InputMessage.controlMessages
 gio.input_message.InputMessage.numControlMessages
-gio.types.InputVector.buffer
-gio.types.OutputVector.buffer
+gst.meta_info.MetaInfo.deserializeFunc
 gstaudio.audio_buffer.AudioBuffer.planes
 gstaudio.audio_downmix_meta.AudioDownmixMeta.matrix
 gstaudio.audio_meta.AudioMeta.offsets

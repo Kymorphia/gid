@@ -1275,11 +1275,11 @@ class TextBuffer : gobject.object.ObjectWrap
 
       if (_dretval.length > 0)
       {
-        _retval = cast(ubyte*)gMalloc(_dretval.length * (*_retval).sizeof);
+        _retval = cast(typeof(_retval))gMalloc(_dretval.length * (*_retval).sizeof);
         _retval[0 .. _dretval.length] = _dretval[];
       }
 
-      *length = cast(typeof(length))_dretval.length;
+      *length = cast(typeof(*length))_dretval.length;
 
       return _retval;
     }

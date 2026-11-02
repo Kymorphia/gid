@@ -45,7 +45,7 @@ class TargetEntry : gobject.boxed.BoxedWrap!(gtk_target_entry_get_type)
   @property void target(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkTargetEntry*)this._cPtr).target);
-    dToC(propval, cast(void*)&(cast(GtkTargetEntry*)this._cPtr).target);
+    (cast(GtkTargetEntry*)this._cPtr).target = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**

@@ -78,7 +78,7 @@ class DBusNodeInfo : gobject.boxed.BoxedWrap!(g_dbus_node_info_get_type)
   @property void path(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusNodeInfo*)this._cPtr).path);
-    dToC(propval, cast(void*)&(cast(GDBusNodeInfo*)this._cPtr).path);
+    (cast(GDBusNodeInfo*)this._cPtr).path = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**

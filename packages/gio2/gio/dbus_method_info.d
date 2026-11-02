@@ -76,7 +76,7 @@ class DBusMethodInfo : gobject.boxed.BoxedWrap!(g_dbus_method_info_get_type)
   @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusMethodInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GDBusMethodInfo*)this._cPtr).name);
+    (cast(GDBusMethodInfo*)this._cPtr).name = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**

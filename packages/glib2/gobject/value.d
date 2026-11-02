@@ -1041,10 +1041,17 @@ T getVal(T)(const(GValue)* gval) nothrow
   return g_value_get_int(gval);
   else static if (is(T == uint))
   return g_value_get_uint(gval);
-  else static if (is(T == long))
-  return g_value_get_int64(gval);
-  else static if (is(T == ulong))
-  return g_value_get_uint64(gval);
+  else static if (is(T == long)) // Also glong on 64 bit systems (where c_long is long), use the actual GValue type
+  return gval.gType == GTypeEnum.Long ? g_value_get_long(gval) : g_value_get_int64(gval);
+  else static if (is(T == ulong)) // Also gulong on 64 bit systems and GType (an alias of ulong)
+  {
+    if (gval.gType == GTypeEnum.Ulong)
+      return g_value_get_ulong(gval);
+    else if (gval.gType == g_gtype_get_type())
+    return g_value_get_gtype(gval);
+    else
+      return g_value_get_uint64(gval);
+  }
   else static if (is(T == float))
   return g_value_get_float(gval);
   else static if (is(T == double))
@@ -1144,10 +1151,22 @@ void setVal(T)(GValue* gval, T v) nothrow
   g_value_set_int(gval, v);
   else static if (is(T == uint))
   g_value_set_uint(gval, v);
-  else static if (is(T == long))
-  g_value_set_int64(gval, v);
-  else static if (is(T == ulong))
-  g_value_set_uint64(gval, v);
+  else static if (is(T == long)) // Also glong on 64 bit systems (where c_long is long), use the actual GValue type
+  {
+    if (gval.gType == GTypeEnum.Long)
+      g_value_set_long(gval, v);
+    else
+      g_value_set_int64(gval, v);
+  }
+  else static if (is(T == ulong)) // Also gulong on 64 bit systems and GType (an alias of ulong)
+  {
+    if (gval.gType == GTypeEnum.Ulong)
+      g_value_set_ulong(gval, v);
+    else if (gval.gType == g_gtype_get_type())
+    g_value_set_gtype(gval, v);
+    else
+      g_value_set_uint64(gval, v);
+  }
   else static if (is(T == float))
   g_value_set_float(gval, v);
   else static if (is(T == double))
@@ -1160,7 +1179,7 @@ void setVal(T)(GValue* gval, T v) nothrow
       g_value_set_enum(gval, v);
   }
   else static if (is(T == string))
-  g_value_take_string(gval, toCString!(Yes.Malloc)(v));
+  g_value_take_string(gval, toCString!(Yes.Malloc, Yes.Nullable)(v)); // null D string is a NULL C string
   else static if (is(T == glib.variant.Variant))
   g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
   else static if (is(T : ParamSpec))

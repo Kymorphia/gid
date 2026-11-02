@@ -79,7 +79,7 @@ class DBusPropertyInfo : gobject.boxed.BoxedWrap!(g_dbus_property_info_get_type)
   @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).name);
-    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)this._cPtr).name);
+    (cast(GDBusPropertyInfo*)this._cPtr).name = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -99,7 +99,7 @@ class DBusPropertyInfo : gobject.boxed.BoxedWrap!(g_dbus_property_info_get_type)
   @property void signature(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).signature);
-    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)this._cPtr).signature);
+    (cast(GDBusPropertyInfo*)this._cPtr).signature = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**

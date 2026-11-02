@@ -27,7 +27,6 @@ import gst.map_info;
 import gst.memory;
 import gst.message;
 import gst.meta;
-import gst.meta_info;
 import gst.mini_object;
 import gst.object;
 import gst.pad;
@@ -709,19 +708,6 @@ alias MemoryUnmapFunction = void delegate(gst.memory.Memory mem);
       meta = a #GstMeta
 */
 alias MetaClearFunction = void delegate(gst.buffer.Buffer buffer, gst.meta.Meta meta);
-
-/**
-    Recreate a #GstMeta from serialized data returned by
-    #GstMetaSerializeFunction and add it to buffer.
-
-    Params:
-      info = #GstMetaInfo of the meta
-      buffer = a #GstBuffer
-      data = data obtained from #GstMetaSerializeFunction
-      version_ = 
-    Returns: the metadata owned by buffer, or null.
-*/
-alias MetaDeserializeFunction = gst.meta.Meta delegate(gst.meta_info.MetaInfo info, gst.buffer.Buffer buffer, ubyte[] data, ubyte version_);
 
 /**
     Function called when meta is freed in buffer.

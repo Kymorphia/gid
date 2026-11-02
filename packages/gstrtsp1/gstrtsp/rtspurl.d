@@ -105,7 +105,7 @@ class RTSPUrl : gobject.boxed.BoxedWrap!(gst_rtsp_url_get_type)
   @property void user(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).user);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).user);
+    (cast(GstRTSPUrl*)this._cPtr).user = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -125,7 +125,7 @@ class RTSPUrl : gobject.boxed.BoxedWrap!(gst_rtsp_url_get_type)
   @property void passwd(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).passwd);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).passwd);
+    (cast(GstRTSPUrl*)this._cPtr).passwd = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -145,7 +145,7 @@ class RTSPUrl : gobject.boxed.BoxedWrap!(gst_rtsp_url_get_type)
   @property void host(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).host);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).host);
+    (cast(GstRTSPUrl*)this._cPtr).host = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -184,7 +184,7 @@ class RTSPUrl : gobject.boxed.BoxedWrap!(gst_rtsp_url_get_type)
   @property void abspath(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).abspath);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).abspath);
+    (cast(GstRTSPUrl*)this._cPtr).abspath = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -204,7 +204,7 @@ class RTSPUrl : gobject.boxed.BoxedWrap!(gst_rtsp_url_get_type)
   @property void query(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).query);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).query);
+    (cast(GstRTSPUrl*)this._cPtr).query = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
