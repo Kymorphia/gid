@@ -275,7 +275,7 @@ class ContentFormats : gobject.boxed.BoxedWrap!(gdk_content_formats_get_type)
   gdk.content_formats.ContentFormats union_(gdk.content_formats.ContentFormats second) nothrow
   {
     GdkContentFormats* _cretval;
-    _cretval = gdk_content_formats_union(cast(GdkContentFormats*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
+    _cretval = gdk_content_formats_union(cast(GdkContentFormats*)this._cPtr(Yes.Dup), second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -288,7 +288,7 @@ class ContentFormats : gobject.boxed.BoxedWrap!(gdk_content_formats_get_type)
   gdk.content_formats.ContentFormats unionDeserializeGtypes() nothrow
   {
     GdkContentFormats* _cretval;
-    _cretval = gdk_content_formats_union_deserialize_gtypes(cast(GdkContentFormats*)this._cPtr);
+    _cretval = gdk_content_formats_union_deserialize_gtypes(cast(GdkContentFormats*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -301,7 +301,7 @@ class ContentFormats : gobject.boxed.BoxedWrap!(gdk_content_formats_get_type)
   gdk.content_formats.ContentFormats unionDeserializeMimeTypes() nothrow
   {
     GdkContentFormats* _cretval;
-    _cretval = gdk_content_formats_union_deserialize_mime_types(cast(GdkContentFormats*)this._cPtr);
+    _cretval = gdk_content_formats_union_deserialize_mime_types(cast(GdkContentFormats*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -314,7 +314,7 @@ class ContentFormats : gobject.boxed.BoxedWrap!(gdk_content_formats_get_type)
   gdk.content_formats.ContentFormats unionSerializeGtypes() nothrow
   {
     GdkContentFormats* _cretval;
-    _cretval = gdk_content_formats_union_serialize_gtypes(cast(GdkContentFormats*)this._cPtr);
+    _cretval = gdk_content_formats_union_serialize_gtypes(cast(GdkContentFormats*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -327,7 +327,7 @@ class ContentFormats : gobject.boxed.BoxedWrap!(gdk_content_formats_get_type)
   gdk.content_formats.ContentFormats unionSerializeMimeTypes() nothrow
   {
     GdkContentFormats* _cretval;
-    _cretval = gdk_content_formats_union_serialize_mime_types(cast(GdkContentFormats*)this._cPtr);
+    _cretval = gdk_content_formats_union_serialize_mime_types(cast(GdkContentFormats*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -177,7 +177,7 @@ class Thread : gobject.boxed.BoxedWrap!(g_thread_get_type)
   */
   void* join() nothrow
   {
-    auto _retval = g_thread_join(cast(GThread*)this._cPtr);
+    auto _retval = g_thread_join(cast(GThread*)this._cPtr(Yes.Dup));
     return _retval;
   }
 

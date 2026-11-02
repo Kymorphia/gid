@@ -9,7 +9,7 @@ import std.traits : isSomeString, isTypeTuple;
 import std.typecons : Tuple;
 import std.variant : StdVariant = Variant;
 
-class Variant : ReffedWrap!(GVariant*, g_variant_ref, g_variant_unref)
+class Variant : ReffedWrap!(GVariant*, g_variant_ref_sink, g_variant_unref) // ref_sink: sinks floating references (No.Take on new variants)
 {
   /**
    * Get the GType of Variant (the G_TYPE_VARIANT fundamental type).

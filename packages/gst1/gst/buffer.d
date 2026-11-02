@@ -501,7 +501,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   gst.buffer.Buffer append(gst.buffer.Buffer buf2) nothrow
   {
     GstBuffer* _cretval;
-    _cretval = gst_buffer_append(cast(GstBuffer*)this._cPtr, buf2 ? cast(GstBuffer*)buf2._cPtr(Yes.Dup) : null);
+    _cretval = gst_buffer_append(cast(GstBuffer*)this._cPtr(Yes.Dup), buf2 ? cast(GstBuffer*)buf2._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -536,7 +536,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   gst.buffer.Buffer appendRegion(gst.buffer.Buffer buf2, ptrdiff_t offset, ptrdiff_t size) nothrow
   {
     GstBuffer* _cretval;
-    _cretval = gst_buffer_append_region(cast(GstBuffer*)this._cPtr, buf2 ? cast(GstBuffer*)buf2._cPtr(Yes.Dup) : null, offset, size);
+    _cretval = gst_buffer_append_region(cast(GstBuffer*)this._cPtr(Yes.Dup), buf2 ? cast(GstBuffer*)buf2._cPtr(Yes.Dup) : null, offset, size);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

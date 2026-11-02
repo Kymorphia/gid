@@ -163,7 +163,7 @@ class GlyphItem : gobject.boxed.BoxedWrap!(pango_glyph_item_get_type)
   {
     GSList* _cretval;
     const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
-    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)this._cPtr, _text, list ? cast(PangoAttrList*)list._cPtr(No.Dup) : null);
+    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)this._cPtr(Yes.Dup), _text, list ? cast(PangoAttrList*)list._cPtr(No.Dup) : null);
     auto _retval = gSListToD!(pango.glyph_item.GlyphItem, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }

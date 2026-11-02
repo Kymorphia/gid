@@ -128,7 +128,7 @@ class Allocator : gst.object.ObjectWrap
   */
   void setDefault() nothrow
   {
-    gst_allocator_set_default(cast(GstAllocator*)this._cPtr);
+    gst_allocator_set_default(cast(GstAllocator*)this._cPtr(Yes.Dup));
   }
 }
 

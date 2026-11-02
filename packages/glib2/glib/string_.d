@@ -385,7 +385,7 @@ class String : gobject.boxed.BoxedWrap!(g_gstring_get_type)
   string freeAndSteal() nothrow
   {
     char* _cretval;
-    _cretval = g_string_free_and_steal(cast(GString*)this._cPtr);
+    _cretval = g_string_free_and_steal(cast(GString*)this._cPtr(Yes.Dup));
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
   }
@@ -404,7 +404,7 @@ class String : gobject.boxed.BoxedWrap!(g_gstring_get_type)
   glib.bytes.Bytes freeToBytes() nothrow
   {
     GBytes* _cretval;
-    _cretval = g_string_free_to_bytes(cast(GString*)this._cPtr);
+    _cretval = g_string_free_to_bytes(cast(GString*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

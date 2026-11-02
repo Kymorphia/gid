@@ -256,7 +256,7 @@ class Bytes : gobject.boxed.BoxedWrap!(g_bytes_get_type)
   ubyte[] unrefToArray() nothrow
   {
     GByteArray* _cretval;
-    _cretval = g_bytes_unref_to_array(cast(GBytes*)this._cPtr);
+    _cretval = g_bytes_unref_to_array(cast(GBytes*)this._cPtr(Yes.Dup));
     auto _retval = gByteArrayToD(cast(GByteArray*)_cretval);
     return _retval;
   }
@@ -277,7 +277,7 @@ class Bytes : gobject.boxed.BoxedWrap!(g_bytes_get_type)
   {
     void* _cretval;
     size_t _cretlength;
-    _cretval = g_bytes_unref_to_data(cast(GBytes*)this._cPtr, &_cretlength);
+    _cretval = g_bytes_unref_to_data(cast(GBytes*)this._cPtr(Yes.Dup), &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)

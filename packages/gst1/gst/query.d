@@ -647,7 +647,7 @@ class Query : gobject.boxed.BoxedWrap!(gst_query_get_type)
   gst.query.Query makeWritable() nothrow
   {
     GstQuery* _cretval;
-    _cretval = gst_query_make_writable(cast(GstQuery*)this._cPtr);
+    _cretval = gst_query_make_writable(cast(GstQuery*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

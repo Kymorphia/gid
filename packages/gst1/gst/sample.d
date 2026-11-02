@@ -159,7 +159,7 @@ class Sample : gobject.boxed.BoxedWrap!(gst_sample_get_type)
   gst.sample.Sample makeWritable() nothrow
   {
     GstSample* _cretval;
-    _cretval = gst_sample_make_writable(cast(GstSample*)this._cPtr);
+    _cretval = gst_sample_make_writable(cast(GstSample*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -185,7 +185,7 @@ class Context : gobject.boxed.BoxedWrap!(gst_context_get_type)
   gst.context.Context makeWritable() nothrow
   {
     GstContext* _cretval;
-    _cretval = gst_context_make_writable(cast(GstContext*)this._cPtr);
+    _cretval = gst_context_make_writable(cast(GstContext*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

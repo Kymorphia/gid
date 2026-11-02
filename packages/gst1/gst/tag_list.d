@@ -767,7 +767,7 @@ class TagList : gobject.boxed.BoxedWrap!(gst_tag_list_get_type)
   gst.tag_list.TagList makeWritable() nothrow
   {
     GstTagList* _cretval;
-    _cretval = gst_tag_list_make_writable(cast(GstTagList*)this._cPtr);
+    _cretval = gst_tag_list_make_writable(cast(GstTagList*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

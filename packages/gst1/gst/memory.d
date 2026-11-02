@@ -326,7 +326,7 @@ class Memory : gobject.boxed.BoxedWrap!(gst_memory_get_type)
   {
     GstMemory* _cretval;
     GstMapInfo _info;
-    _cretval = gst_memory_make_mapped(cast(GstMemory*)this._cPtr, &_info, flags);
+    _cretval = gst_memory_make_mapped(cast(GstMemory*)this._cPtr(Yes.Dup), &_info, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
@@ -350,7 +350,7 @@ class Memory : gobject.boxed.BoxedWrap!(gst_memory_get_type)
   gst.memory.Memory makeWritable() nothrow
   {
     GstMemory* _cretval;
-    _cretval = gst_memory_make_writable(cast(GstMemory*)this._cPtr);
+    _cretval = gst_memory_make_writable(cast(GstMemory*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

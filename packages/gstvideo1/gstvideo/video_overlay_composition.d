@@ -172,7 +172,7 @@ class VideoOverlayComposition : gobject.boxed.BoxedWrap!(gst_video_overlay_compo
   gstvideo.video_overlay_composition.VideoOverlayComposition makeWritable() nothrow
   {
     GstVideoOverlayComposition* _cretval;
-    _cretval = gst_video_overlay_composition_make_writable(cast(GstVideoOverlayComposition*)this._cPtr);
+    _cretval = gst_video_overlay_composition_make_writable(cast(GstVideoOverlayComposition*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gstvideo.video_overlay_composition.VideoOverlayComposition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

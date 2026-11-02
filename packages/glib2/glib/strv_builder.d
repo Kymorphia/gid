@@ -147,7 +147,7 @@ class StrvBuilder : gobject.boxed.BoxedWrap!(g_strv_builder_get_type)
   string[] unrefToStrv() nothrow
   {
     GStrv _cretval;
-    _cretval = g_strv_builder_unref_to_strv(cast(GStrvBuilder*)this._cPtr);
+    _cretval = g_strv_builder_unref_to_strv(cast(GStrvBuilder*)this._cPtr(Yes.Dup));
     string[] _retval;
 
     if (_cretval)

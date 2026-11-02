@@ -498,7 +498,7 @@ class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_
   */
   void unrefAndUnlock() nothrow
   {
-    g_async_queue_unref_and_unlock(cast(GAsyncQueue*)this._cPtr);
+    g_async_queue_unref_and_unlock(cast(GAsyncQueue*)this._cPtr(Yes.Dup));
   }
 
   /**

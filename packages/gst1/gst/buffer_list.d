@@ -182,7 +182,7 @@ class BufferList : gobject.boxed.BoxedWrap!(gst_buffer_list_get_type)
   gst.buffer_list.BufferList makeWritable() nothrow
   {
     GstBufferList* _cretval;
-    _cretval = gst_buffer_list_make_writable(cast(GstBufferList*)this._cPtr);
+    _cretval = gst_buffer_list_make_writable(cast(GstBufferList*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

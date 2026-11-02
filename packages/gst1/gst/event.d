@@ -996,7 +996,7 @@ class Event : gobject.boxed.BoxedWrap!(gst_event_get_type)
   gst.event.Event makeWritable() nothrow
   {
     GstEvent* _cretval;
-    _cretval = gst_event_make_writable(cast(GstEvent*)this._cPtr);
+    _cretval = gst_event_make_writable(cast(GstEvent*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

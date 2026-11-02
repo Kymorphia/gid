@@ -224,7 +224,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   {
     const(char)* _errorName = errorName.toCString!(No.Malloc, No.Nullable);
     const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
-    g_dbus_method_invocation_return_dbus_error(cast(GDBusMethodInvocation*)this._cPtr, _errorName, _errorMessage);
+    g_dbus_method_invocation_return_dbus_error(cast(GDBusMethodInvocation*)this._cPtr(Yes.Dup), _errorName, _errorMessage);
   }
 
   /**
@@ -242,7 +242,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   void returnErrorLiteral(glib.types.Quark domain, int code, string message) nothrow
   {
     const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
-    g_dbus_method_invocation_return_error_literal(cast(GDBusMethodInvocation*)this._cPtr, domain, code, _message);
+    g_dbus_method_invocation_return_error_literal(cast(GDBusMethodInvocation*)this._cPtr(Yes.Dup), domain, code, _message);
   }
 
   /**
@@ -258,7 +258,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnGerror(glib.error.ErrorWrap error) nothrow
   {
-    g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)this._cPtr, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
+    g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)this._cPtr(Yes.Dup), error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
   }
 
   /**
@@ -300,7 +300,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnValue(glib.variant.Variant parameters = null) nothrow
   {
-    g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)this._cPtr, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
+    g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)this._cPtr(Yes.Dup), parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
   }
 
   /**
@@ -318,7 +318,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnValueWithUnixFdList(glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null) nothrow
   {
-    g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)this._cPtr, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
+    g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)this._cPtr(Yes.Dup), parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
   }
 }
 

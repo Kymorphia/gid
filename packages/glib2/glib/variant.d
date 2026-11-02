@@ -266,7 +266,7 @@ import std.variant : StdVariant = Variant;
     management for those dictionaries, but the type information would
     be shared.
 */
-class Variant : ReffedWrap!(GVariant*, g_variant_ref, g_variant_unref)
+class Variant : ReffedWrap!(GVariant*, g_variant_ref_sink, g_variant_unref) // ref_sink: sinks floating references (No.Take on new variants)
 {
 
   /** */

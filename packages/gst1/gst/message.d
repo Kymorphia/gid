@@ -1248,7 +1248,7 @@ class Message : gobject.boxed.BoxedWrap!(gst_message_get_type)
   gst.message.Message makeWritable() nothrow
   {
     GstMessage* _cretval;
-    _cretval = gst_message_make_writable(cast(GstMessage*)this._cPtr);
+    _cretval = gst_message_make_writable(cast(GstMessage*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

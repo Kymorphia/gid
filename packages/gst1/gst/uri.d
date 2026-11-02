@@ -409,7 +409,7 @@ class Uri : gobject.boxed.BoxedWrap!(gst_uri_get_type)
   gst.uri.Uri makeWritable() nothrow
   {
     GstUri* _cretval;
-    _cretval = gst_uri_make_writable(cast(GstUri*)this._cPtr);
+    _cretval = gst_uri_make_writable(cast(GstUri*)this._cPtr(Yes.Dup));
     auto _retval = _cretval ? new gst.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
