@@ -139,3 +139,10 @@
 
 //# Ignore: Iterator.find_custom uses a GCompareFunc with positional data, use Iterator.foreach or D iteration instead
 //!set record[Iterator].method[find_custom][ignore] 1
+
+//# Disable: Callback returns structure pointer with transfer none (no D owner to keep it alive for C)
+//!set callback[MetaDeserializeFunction][disable] 1
+//!set record[MetaInfo].field[deserialize_func][disable] 1
+
+//# Set direction of PadGetRangeFunction buffer to inout (caller may provide a buffer to fill, or receives a new one)
+//!set callback[PadGetRangeFunction].parameters.parameter[buffer][direction] inout

@@ -351,6 +351,11 @@
 //# julian_days is a full width 32 bit field, not a bitfield
 //!del record[Date].field[julian_days][bits]
 
+//# Disable: Callback returns a string with transfer none (no D owner to keep it alive for C)
+//!set callback[TranslateFunc][disable] 1
+//!set record[OptionContext].method[set_translate_func][disable] 1
+//!set record[OptionGroup].method[set_translate_func][disable] 1
+
 //!class MarkupParseContext
 
   /** */

@@ -120,6 +120,26 @@
 //!add repository.namespace '<callback name="CancellableConnectFunc" c:type="GCancellableConnectFunc"><return-value transfer-ownership="none"><type name="none" c:type="void"/></return-value><parameters><parameter name="cancellable" transfer-ownership="none"><type name="Cancellable" c:type="GCancellable*"/></parameter><parameter name="data" transfer-ownership="none" nullable="1" allow-none="1" closure="1"><type name="gpointer" c:type="gpointer"/></parameter></parameters></callback>'
 //!set class[Cancellable].method[connect].parameters.parameter[callback].type '<type name="CancellableConnectFunc" c:type="GCancellableConnectFunc"/>'
 
+//# Ignore: Thread function callbacks without closure data, use D threads or async APIs instead
+//!set class[Task].method[run_in_thread][ignore] 1
+//!set class[Task].method[run_in_thread_sync][ignore] 1
+
+//# Disable: Callback returns structure pointer with transfer none (no D owner to keep it alive for C)
+//!set callback[DBusSubtreeDispatchFunc][disable] 1
+//!set record[DBusSubtreeVTable].field[dispatch][disable] 1
+
+//# Disable: Notified callback without closure data
+//!set class[DBusConnection].method[register_subtree][disable] 1
+
+//# Disable: Message control array fields with unsupported pointer/length layout
+//!set record[InputMessage].field[address][disable] 1
+//!set record[InputMessage].field[control_messages][disable] 1
+//!set record[InputMessage].field[num_control_messages][disable] 1
+
+//# Disable: Returns a list of byte arrays (nested containers not supported)
+//!set interface[DtlsClientConnection].method[get_accepted_cas][disable] 1
+//!set interface[TlsClientConnection].method[get_accepted_cas][disable] 1
+
 //!class ListModel
 
   /**

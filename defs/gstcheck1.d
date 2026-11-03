@@ -19,3 +19,7 @@
 
 //# Disable: Internal/implementation-only API, not useful from D
 //!set function[check_init][ignore] 1
+
+//# Disable: Takes ownership of a Harness which has no copy function
+//!set record[Harness].method[add_sink_harness][disable] 1
+//!set record[Harness].method[add_src_harness][disable] 1

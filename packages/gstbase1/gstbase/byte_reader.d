@@ -65,6 +65,30 @@ class ByteReader : StructWrap!(GstByteReader)
   /**
       Free-function: g_free
       
+      Returns a newly-allocated copy of the current data
+      position if at least size bytes are left and
+      updates the current position. Free with [glib.global.gfree] when no longer needed.
+  
+      Params:
+        size = Size in bytes
+        val = address of a
+              #guint8 pointer variable in which to store the result
+      Returns: true if successful, false otherwise.
+  */
+  bool dupData(uint size, out ubyte[] val) nothrow
+  {
+    bool _retval;
+    ubyte* _val;
+    _retval = cast(bool)gst_byte_reader_dup_data(cast(GstByteReader*)this._cPtr, size, &_val);
+    val.length = (_val ? size : 0);
+    val[0 .. $] = (cast(ubyte*)_val)[0 .. (_val ? size : 0)];
+    gFree(cast(void*)_val);
+    return _retval;
+  }
+
+  /**
+      Free-function: g_free
+      
       Returns a newly-allocated copy of the current data position if there is
       a NUL-terminated UTF-16 string in the data (this could be an empty string
       as well), and advances the current position.
@@ -166,6 +190,27 @@ class ByteReader : StructWrap!(GstByteReader)
     char* _str;
     _retval = cast(bool)gst_byte_reader_dup_string_utf8(cast(GstByteReader*)this._cPtr, &_str);
     str = _str.fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Returns a constant pointer to the current data
+      position if at least size bytes are left and
+      updates the current position.
+  
+      Params:
+        size = Size in bytes
+        val = address of a
+              #guint8 pointer variable in which to store the result
+      Returns: true if successful, false otherwise.
+  */
+  bool getData(uint size, out ubyte[] val) nothrow
+  {
+    bool _retval;
+    const(ubyte)* _val;
+    _retval = cast(bool)gst_byte_reader_get_data(cast(GstByteReader*)this._cPtr, size, &_val);
+    val.length = (_val ? size : 0);
+    val[0 .. $] = (cast(ubyte*)_val)[0 .. (_val ? size : 0)];
     return _retval;
   }
 
@@ -645,6 +690,27 @@ class ByteReader : StructWrap!(GstByteReader)
   {
     uint _retval;
     _retval = gst_byte_reader_masked_scan_uint32_peek(cast(const(GstByteReader)*)this._cPtr, mask, pattern, offset, size, cast(uint*)&value);
+    return _retval;
+  }
+
+  /**
+      Returns a constant pointer to the current data
+      position if at least size bytes are left and
+      keeps the current position.
+  
+      Params:
+        size = Size in bytes
+        val = address of a
+              #guint8 pointer variable in which to store the result
+      Returns: true if successful, false otherwise.
+  */
+  bool peekData(uint size, out ubyte[] val) nothrow
+  {
+    bool _retval;
+    const(ubyte)* _val;
+    _retval = cast(bool)gst_byte_reader_peek_data(cast(const(GstByteReader)*)this._cPtr, size, &_val);
+    val.length = (_val ? size : 0);
+    val[0 .. $] = (cast(ubyte*)_val)[0 .. (_val ? size : 0)];
     return _retval;
   }
 

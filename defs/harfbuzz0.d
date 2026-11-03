@@ -84,7 +84,6 @@
 //!set function[font_glyph_to_string].parameters.parameter[s][caller-allocates] 1
 //!set function[ot_var_normalize_variations].parameters.parameter[coords][caller-allocates] 1
 
-
 //# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
 //!set record[ot_name_entry_t].field[language][writable] 0
 //!set record[segment_properties_t].field[language][writable] 0
@@ -147,3 +146,35 @@
 //!set function[ot_shape_glyphs_closure].parameters.parameter[glyphs][direction] in
 //!del function[ot_shape_plan_collect_lookups].parameters.parameter[lookup_indexes][caller-allocates]
 //!set function[ot_shape_plan_collect_lookups].parameters.parameter[lookup_indexes][direction] in
+
+//# Disable: Strided batch glyph APIs (single glyph APIs are available)
+//!set function[font_get_glyph_advances_for_direction][disable] 1
+//!set function[font_get_glyph_h_advances][disable] 1
+//!set function[font_get_glyph_v_advances][disable] 1
+//!set function[font_get_glyph_h_origins][disable] 1
+//!set function[font_get_glyph_v_origins][disable] 1
+//!set function[font_get_nominal_glyphs][disable] 1
+//!set callback[font_get_glyph_advances_func_t][disable] 1
+//!set callback[font_get_glyph_origins_func_t][disable] 1
+//!set callback[font_get_nominal_glyphs_func_t][disable] 1
+//!set alias[font_get_glyph_h_origins_func_t][disable] 1
+//!set alias[font_get_glyph_v_origins_func_t][disable] 1
+//!set function[font_funcs_set_glyph_h_advances_func][disable] 1
+//!set function[font_funcs_set_glyph_v_advances_func][disable] 1
+//!set function[font_funcs_set_glyph_h_origins_func][disable] 1
+//!set function[font_funcs_set_glyph_v_origins_func][disable] 1
+//!set function[font_funcs_set_nominal_glyphs_func][disable] 1
+//!set callback[unicode_decompose_compatibility_func_t][disable] 1
+//!set function[unicode_funcs_set_decompose_compatibility_func][disable] 1
+
+//# Disable: Tag arrays with inout count and caller allocated buffers
+//!set function[ot_shape_plan_get_feature_tags][disable] 1
+//!set callback[get_table_tags_func_t][disable] 1
+//!set function[face_set_get_table_tags_func][disable] 1
+//!set function[tag_to_string][disable] 1
+
+//# Disable: Callbacks with caller allocated output arrays
+//!set callback[font_get_glyph_name_func_t][disable] 1
+//!set function[font_funcs_set_glyph_name_func][disable] 1
+//!set callback[color_line_get_color_stops_func_t][disable] 1
+//!set record[color_line_t].field[get_color_stops][disable] 1

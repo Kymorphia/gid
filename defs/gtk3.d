@@ -115,3 +115,9 @@
 //!set record[TreeIter].field[user_data][ignore] 1
 //!set record[TreeIter].field[user_data2][ignore] 1
 //!set record[TreeIter].field[user_data3][ignore] 1
+
+//# Ignore: Legacy target table array of inline structures with full ownership, use TargetList instead
+//!set function[target_table_new_from_list][ignore] 1
+
+//# Disable: Notified callback without closure data
+//!set class[Menu].method[attach_to_widget][disable] 1

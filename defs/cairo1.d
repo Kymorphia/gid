@@ -145,3 +145,14 @@
 //!set callback[UserScaledFontTextToGlyphsFunc].parameters.parameter[utf8].type '<array length="2" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set record[Context].method[show_text_glyphs].parameters.parameter[utf8].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set record[ScaledFont].method[text_to_glyphs].parameters.parameter[utf8].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'
+
+//# Disable: Data must remain valid for the life of the surface (D memory can't be handed to C without an owner)
+//!set function[image_surface_create_for_data][disable] 1
+
+//# Disable: Inout allocated glyph/cluster arrays with inout counts
+//!set record[ScaledFont].method[text_to_glyphs][disable] 1
+//!set callback[UserScaledFontTextToGlyphsFunc][disable] 1
+
+//# Make read-only (no write support): Arrays allocated and freed by cairo (cairo_path_destroy/cairo_rectangle_list_destroy)
+//!set record[Path].field[data][writable] 0
+//!set record[RectangleList].field[rectangles][writable] 0

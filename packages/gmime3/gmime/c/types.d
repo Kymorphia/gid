@@ -1560,6 +1560,7 @@ struct GMimeFilterCharset
   /**
       charset conversion state
   */
+  void* cd;
 }
 
 /** */

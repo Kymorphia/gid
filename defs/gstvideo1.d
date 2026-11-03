@@ -71,3 +71,6 @@
 
 //# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[VideoFrame].field[meta][ignore] 1
+
+//# Disable: Fixed size array of plane data pointers
+//!set record[VideoFrame].field[data][disable] 1

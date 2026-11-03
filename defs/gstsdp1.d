@@ -42,3 +42,6 @@
 //!set record[SDPMessage].field[session_name][writable] 0
 //!set record[SDPMessage].field[information][writable] 0
 //!set record[SDPMessage].field[uri][writable] 0
+
+//# Disable: Array field with unsupported pointer element type
+//!set record[MIKEYPayloadKeyData].field[kv_data][disable] 1

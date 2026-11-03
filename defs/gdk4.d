@@ -16,3 +16,11 @@
 //!set class[GLTexture].constructor[new].parameters.parameter[destroy][closure] 5
 //!set class[GLTextureBuilder].method[build].parameters.parameter[destroy][closure] 1
 //!set class[DmabufTextureBuilder].method[build].parameters.parameter[destroy][closure] 1
+
+//# Disable: Global (de)serializer registration callbacks without closure data
+//!set function[content_register_deserializer][disable] 1
+//!set function[content_register_serializer][disable] 1
+
+//# Disable: Output data arrays with length computed from stride and height (use TextureDownloader.downloadBytes)
+//!set class[Texture].method[download][disable] 1
+//!set record[TextureDownloader].method[download_into][disable] 1

@@ -46,3 +46,10 @@
 
 //# Make read-only (no write support): Pointer fields of unknown ownership, no proper write support
 //!set record[TextRange].field[content][writable] 0
+
+//# Ignore: AttributeSet (GSList of Attribute) APIs, ATK is deprecated
+//!set interface[Document].method[get_attributes][ignore] 1
+//!set interface[EditableText].method[set_run_attributes][ignore] 1
+//!set class[Object].method[get_attributes][ignore] 1
+//!set interface[Text].method[get_default_attributes][ignore] 1
+//!set interface[Text].method[get_run_attributes][ignore] 1

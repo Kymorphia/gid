@@ -81,3 +81,11 @@
 
 //# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[AttrShape].field[data][ignore] 1
+
+//# Disable: Array lengths determined by text length or other API, not described by parameters
+//!set function[log2vis_get_embedding_levels][disable] 1
+//!set record[GlyphItem].method[get_logical_widths][disable] 1
+//!set record[GlyphItem].method[letter_space][disable] 1
+//!set record[GlyphString].method[get_logical_widths][disable] 1
+//!set record[TabArray].method[get_tabs][disable] 1
+//!set record[GlyphString].field[log_clusters][disable] 1

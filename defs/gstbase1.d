@@ -31,3 +31,8 @@
 
 //# Ignore: CollectPads is deprecated in favor of Aggregator and add_pad requires a raw structure size and destroy notify
 //!set class[CollectPads].method[add_pad][ignore] 1
+
+//# Ignore: Free the stack/inline writer and return its data, redundant with the non-freeing accessors in D
+//!set record[BitWriter].method[free_and_get_buffer][ignore] 1
+//!set record[ByteWriter].method[free_and_get_buffer][ignore] 1
+//!set record[ByteWriter].method[free_and_get_data][ignore] 1

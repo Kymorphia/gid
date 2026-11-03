@@ -84,6 +84,32 @@ class TypeFind : gobject.boxed.BoxedWrap!(gst_type_find_get_type)
   }
 
   /**
+      Returns the size bytes of the stream to identify beginning at offset. If
+      offset is a positive number, the offset is relative to the beginning of the
+      stream, if offset is a negative number the offset is relative to the end of
+      the stream. The returned memory is valid until the typefinding function
+      returns and must not be freed.
+  
+      Params:
+        offset = The offset
+        size = The number of bytes to return
+      Returns: the
+            requested data, or null if that data is not available.
+  */
+  ubyte[] peek(long offset, uint size) nothrow
+  {
+    const(ubyte)* _cretval;
+    _cretval = gst_type_find_peek(cast(GstTypeFind*)this._cPtr, offset, size);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. size].dup;
+    }
+    return _retval;
+  }
+
+  /**
       If a #GstTypeFindFunction calls this function it suggests the caps with the
       given probability. A #GstTypeFindFunction may supply different suggestions
       in one call.

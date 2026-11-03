@@ -358,6 +358,38 @@ class Adapter : gobject.object.ObjectWrap
   }
 
   /**
+      Gets the first size bytes stored in the adapter. The returned pointer is
+      valid until the next function is called on the adapter.
+      
+      Note that setting the returned pointer as the data of a #GstBuffer is
+      incorrect for general-purpose plugins. The reason is that if a downstream
+      element stores the buffer so that it has access to it outside of the bounds
+      of its chain function, the buffer will have an invalid data pointer after
+      your element flushes the bytes. In that case you should use
+      [gstbase.adapter.Adapter.take], which returns a freshly-allocated buffer that you can set
+      as #GstBuffer memory or the potentially more performant
+      [gstbase.adapter.Adapter.takeBuffer].
+      
+      Returns null if size bytes are not available.
+  
+      Params:
+        size = the number of bytes to map/peek
+      Returns: a pointer to the first size bytes of data, or null
+  */
+  ubyte[] map(size_t size) nothrow
+  {
+    const(void)* _cretval;
+    _cretval = gst_adapter_map(cast(GstAdapter*)this._cPtr, size);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. size].dup;
+    }
+    return _retval;
+  }
+
+  /**
       Scan for pattern pattern with applied mask mask in the adapter data,
       starting from offset offset.
       
@@ -575,6 +607,32 @@ class Adapter : gobject.object.ObjectWrap
   void push(gst.buffer.Buffer buf) nothrow
   {
     gst_adapter_push(cast(GstAdapter*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Returns a freshly allocated buffer containing the first nbytes bytes of the
+      adapter. The returned bytes will be flushed from the adapter.
+      
+      Caller owns returned value. g_free after usage.
+      
+      Free-function: g_free
+  
+      Params:
+        nbytes = the number of bytes to take
+      Returns: oven-fresh hot data, or null if nbytes bytes are not available
+  */
+  ubyte[] take(size_t nbytes) nothrow
+  {
+    void* _cretval;
+    _cretval = gst_adapter_take(cast(GstAdapter*)this._cPtr, nbytes);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. nbytes].dup;
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
   }
 
   /**

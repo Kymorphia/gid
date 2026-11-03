@@ -3,3 +3,6 @@
 //!info homepage https://gtk.org
 //!info docs https://www.kymorphia.com/gid/gid~giounix2/
 //!info capi https://docs.gtk.org/gio-unix/
+
+//# Disable: Returns an array of string arrays (char***) which is not supported
+//!set class[DesktopAppInfo].function[search][disable] 1

@@ -5,3 +5,6 @@
 //!info capi https://docs.gtk.org/gmodule/
 
 //!subtype GModule ModuleC
+
+//# Ignore: Module init hook symbol type, not useful from D
+//!set callback[ModuleCheckInit][ignore] 1

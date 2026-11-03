@@ -138,3 +138,10 @@
 //# Output parameter missing out annotation
 //!set class[ApplicationPkcs7Mime].method[decrypt].parameters.parameter[result][direction] out
 //!set class[ApplicationPkcs7Mime].method[decrypt].parameters.parameter[result][transfer-ownership] full
+
+//# Ignore: iconv_t field (GIR has no c:type, set it to keep the C structure layout)
+//!set class[FilterCharset].field[cd].type[][c:type] gpointer
+//!set class[FilterCharset].field[cd][ignore] 1
+
+//# Make read-only (no write support): Internal array managed by the References API
+//!set record[References].field[array][writable] 0

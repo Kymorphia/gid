@@ -46,3 +46,7 @@
 
 //# Disable: Uses unsupported GValue fundamental types (Fraction, ValueArray, ValueList) (FIXME)
 //!set class[AudioAggregator].property[output-buffer-duration-fraction][disable] 1
+
+//# Disable: Array fields with lengths from other structures (channel counts)
+//!set record[AudioDownmixMeta].field[matrix][disable] 1
+//!set record[AudioMeta].field[offsets][disable] 1

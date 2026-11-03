@@ -3,3 +3,6 @@
 //!info homepage https://gitlab.gnome.org/GNOME/libpanel
 //!info docs https://www.kymorphia.com/gid/gid~panel1/
 //!info capi https://gnome.pages.gitlab.gnome.org/libpanel/panel-1.0
+
+//# Disable: Notified callback without closure data
+//!set class[Settings].method[bind_with_mapping][disable] 1
