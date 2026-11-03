@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dnf install -y gcc-gdc ldc dub glib2-devel make pkg-config
+          dnf install -y gcc-gdc ldc dub glib2-devel make pkg-config gobject-introspection-devel
 
       # - name: Build gidgen
       #   run: |
