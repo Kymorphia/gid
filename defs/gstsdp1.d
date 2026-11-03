@@ -45,3 +45,18 @@
 
 //# Disable: Array field with unsupported pointer element type
 //!set record[MIKEYPayloadKeyData].field[kv_data][disable] 1
+
+//# Set array field lengths from their length fields (read-only, payload data is set with the payload API)
+//!set record[MIKEYPayloadKeyData].field[key_data].type '<array length="2" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set record[MIKEYPayloadKeyData].field[key_data][writable] 0
+//!set record[MIKEYPayloadKeyData].field[salt_data].type '<array length="4" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set record[MIKEYPayloadKeyData].field[salt_data][writable] 0
+//!set record[MIKEYPayloadPKE].field[data].type '<array length="2" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set record[MIKEYPayloadPKE].field[data][writable] 0
+//!set record[MIKEYPayloadRAND].field[rand].type '<array length="1" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set record[MIKEYPayloadRAND].field[rand][writable] 0
+//!set record[MIKEYPayloadSPParam].field[val].type '<array length="1" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set record[MIKEYPayloadSPParam].field[val][writable] 0
+
+//# Disable: Timestamp array field with a length determined by the timestamp type
+//!set record[MIKEYPayloadT].field[ts_value][disable] 1

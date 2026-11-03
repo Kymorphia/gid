@@ -196,6 +196,16 @@ class ObjectWrap : GidWrap
   }
 
   /**
+   * Steal the C object (see GidWrap._cSteal). The D object is the unique proxy of the GObject (bound by a toggle
+   * reference) and remains valid, so a new reference is returned.
+   * Returns: The C object with a new reference owned by the caller
+   */
+  void* _cSteal() nothrow
+  {
+    return _cPtr(Yes.Dup);
+  }
+
+  /**
    * Calls g_object_ref() on a GObject.
    * Params:
    *   gObj = The GObject to reference

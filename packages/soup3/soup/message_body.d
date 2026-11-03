@@ -45,6 +45,9 @@ class MessageBody : gobject.boxed.BoxedWrap!(soup_message_body_get_type)
   */
   @property ubyte[] data() nothrow
   {
+    if (!(cast(SoupMessageBody*)this._cPtr).data)
+      return null;
+
     return (cast(SoupMessageBody*)this._cPtr).data[0 .. (cast(SoupMessageBody*)this._cPtr).length].dup;
   }
 

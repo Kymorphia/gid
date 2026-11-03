@@ -49,6 +49,9 @@ class AudioDownmixMeta : StructWrap!(GstAudioDownmixMeta)
   */
   @property gstaudio.types.AudioChannelPosition[] fromPosition() nothrow
   {
+    if (!(cast(GstAudioDownmixMeta*)this._cPtr).fromPosition)
+      return null;
+
     return (cast(GstAudioDownmixMeta*)this._cPtr).fromPosition[0 .. (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels].dup;
   }
 
@@ -58,6 +61,9 @@ class AudioDownmixMeta : StructWrap!(GstAudioDownmixMeta)
   */
   @property gstaudio.types.AudioChannelPosition[] toPosition() nothrow
   {
+    if (!(cast(GstAudioDownmixMeta*)this._cPtr).toPosition)
+      return null;
+
     return (cast(GstAudioDownmixMeta*)this._cPtr).toPosition[0 .. (cast(GstAudioDownmixMeta*)this._cPtr).toChannels].dup;
   }
 

@@ -57,6 +57,18 @@ class ErrorWrap : Exception
   }
 
   /**
+  * Steal the wrapped C GError, transferring ownership to the caller (see gid.wrap.GidWrap._cSteal). The exception
+  * is left without a GError, so it must not be used afterwards.
+  * Returns: The C GError pointer, owned by the caller
+  */
+  void* _cSteal() nothrow @nogc
+  {
+    auto ptr = cast(void*)errPtr;
+    errPtr = null;
+    return ptr;
+  }
+
+  /**
   * Get error domain quark.
   * Returns: Error domain string quark
   */

@@ -40,6 +40,9 @@ class ByteReader : StructWrap!(GstByteReader)
   */
   @property ubyte[] data() nothrow
   {
+    if (!(cast(GstByteReader*)this._cPtr).data)
+      return null;
+
     return (cast(GstByteReader*)this._cPtr).data[0 .. (cast(GstByteReader*)this._cPtr).size].dup;
   }
 

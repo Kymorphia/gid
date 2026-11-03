@@ -50,3 +50,9 @@
 //# Disable: Array fields with lengths from other structures (channel counts)
 //!set record[AudioDownmixMeta].field[matrix][disable] 1
 //!set record[AudioMeta].field[offsets][disable] 1
+
+//# Set array field lengths from their length fields (read-only, set when mapping the buffer or adding the meta)
+//!set record[AudioBuffer].field[planes].type '<array length="2" zero-terminated="0" c:type="gpointer*"><type name="gpointer" c:type="gpointer"/></array>'
+//!set record[AudioBuffer].field[planes][writable] 0
+//!set record[DsdPlaneOffsetMeta].field[offsets].type '<array length="1" zero-terminated="0" c:type="gsize*"><type name="gsize" c:type="gsize"/></array>'
+//!set record[DsdPlaneOffsetMeta].field[offsets][writable] 0

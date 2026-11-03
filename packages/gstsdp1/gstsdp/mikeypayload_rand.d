@@ -15,12 +15,9 @@ class MIKEYPayloadRAND : StructWrap!(GstMIKEYPayloadRAND)
 {
   /**
       Create a `mikeypayload_rand.MIKEYPayloadRAND` wrap type.
-      Params:
-        len = the length of @rand
   */
-  this(ubyte len = ubyte.init) nothrow
+  this() nothrow
   {
-    this.len = len;
   }
 
   /** */
@@ -39,21 +36,14 @@ class MIKEYPayloadRAND : StructWrap!(GstMIKEYPayloadRAND)
   }
 
   /**
-      Get `len` field.
-      Returns: the length of @rand
+      Get `rand` field.
+      Returns: random values
   */
-  @property ubyte len() nothrow
+  @property ubyte[] rand() nothrow
   {
-    return (cast(GstMIKEYPayloadRAND*)this._cPtr).len;
-  }
+    if (!(cast(GstMIKEYPayloadRAND*)this._cPtr).rand)
+      return null;
 
-  /**
-      Set `len` field.
-      Params:
-        propval = the length of @rand
-  */
-  @property void len(ubyte propval) nothrow
-  {
-    (cast(GstMIKEYPayloadRAND*)this._cPtr).len = propval;
+    return (cast(GstMIKEYPayloadRAND*)this._cPtr).rand[0 .. (cast(GstMIKEYPayloadRAND*)this._cPtr).len].dup;
   }
 }

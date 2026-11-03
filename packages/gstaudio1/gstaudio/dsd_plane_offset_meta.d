@@ -35,12 +35,10 @@ class DsdPlaneOffsetMeta : StructWrap!(GstDsdPlaneOffsetMeta)
   /**
       Create a `dsd_plane_offset_meta.DsdPlaneOffsetMeta` wrap type.
       Params:
-        numChannels = number of channels in the DSD data
         numBytesPerChannel = the number of valid bytes per channel in the buffer
   */
-  this(int numChannels = int.init, size_t numBytesPerChannel = size_t.init) nothrow
+  this(size_t numBytesPerChannel = size_t.init) nothrow
   {
-    this.numChannels = numChannels;
     this.numBytesPerChannel = numBytesPerChannel;
   }
 
@@ -60,25 +58,6 @@ class DsdPlaneOffsetMeta : StructWrap!(GstDsdPlaneOffsetMeta)
   }
 
   /**
-      Get `numChannels` field.
-      Returns: number of channels in the DSD data
-  */
-  @property int numChannels() nothrow
-  {
-    return (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numChannels;
-  }
-
-  /**
-      Set `numChannels` field.
-      Params:
-        propval = number of channels in the DSD data
-  */
-  @property void numChannels(int propval) nothrow
-  {
-    (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numChannels = propval;
-  }
-
-  /**
       Get `numBytesPerChannel` field.
       Returns: the number of valid bytes per channel in the buffer
   */
@@ -95,6 +74,18 @@ class DsdPlaneOffsetMeta : StructWrap!(GstDsdPlaneOffsetMeta)
   @property void numBytesPerChannel(size_t propval) nothrow
   {
     (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numBytesPerChannel = propval;
+  }
+
+  /**
+      Get `offsets` field.
+      Returns: the offsets (in bytes) where each channel plane starts in the buffer
+  */
+  @property size_t[] offsets() nothrow
+  {
+    if (!(cast(GstDsdPlaneOffsetMeta*)this._cPtr).offsets)
+      return null;
+
+    return (cast(GstDsdPlaneOffsetMeta*)this._cPtr).offsets[0 .. (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numChannels].dup;
   }
 
   /** */

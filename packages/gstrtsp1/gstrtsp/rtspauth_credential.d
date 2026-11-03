@@ -6,6 +6,7 @@ import gid.gid;
 import gobject.boxed;
 import gstrtsp.c.functions;
 import gstrtsp.c.types;
+import gstrtsp.rtspauth_param;
 import gstrtsp.types;
 
 /**
@@ -53,6 +54,26 @@ class RTSPAuthCredential : gobject.boxed.BoxedWrap!(gst_rtsp_auth_credential_get
   @property void scheme(gstrtsp.types.RTSPAuthMethod propval) nothrow
   {
     (cast(GstRTSPAuthCredential*)this._cPtr).scheme = cast(GstRTSPAuthMethod)propval;
+  }
+
+  /**
+      Get `params` field.
+      Returns: A NULL-terminated array of #GstRTSPAuthParam
+  */
+  @property gstrtsp.rtspauth_param.RTSPAuthParam[] params() nothrow
+  {
+    uint len;
+    if ((cast(GstRTSPAuthCredential*)this._cPtr).params)
+    {
+      for (; (cast(GstRTSPAuthCredential*)this._cPtr).params[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new gstrtsp.rtspauth_param.RTSPAuthParam[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = new gstrtsp.rtspauth_param.RTSPAuthParam(cast(void*)(cast(GstRTSPAuthCredential*)this._cPtr).params[i], No.Take);
+    return _retval;
   }
 
   /**

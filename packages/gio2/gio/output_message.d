@@ -120,6 +120,9 @@ class OutputMessage : StructWrap!(GOutputMessage)
   */
   @property gio.socket_control_message.SocketControlMessage[] controlMessages() nothrow
   {
+    if (!(cast(GOutputMessage*)this._cPtr).controlMessages)
+      return null;
+
     auto _retval = new gio.socket_control_message.SocketControlMessage[]((cast(GOutputMessage*)this._cPtr).numControlMessages);
     foreach (i; 0 .. (cast(GOutputMessage*)this._cPtr).numControlMessages)
       _retval[i] = gobject.object.ObjectWrap._getDObject!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GOutputMessage*)this._cPtr).controlMessages[i], No.Take);

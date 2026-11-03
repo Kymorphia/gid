@@ -64,6 +64,9 @@ class VideoCaptionMeta : StructWrap!(GstVideoCaptionMeta)
   */
   @property ubyte[] data() nothrow
   {
+    if (!(cast(GstVideoCaptionMeta*)this._cPtr).data)
+      return null;
+
     return (cast(GstVideoCaptionMeta*)this._cPtr).data[0 .. (cast(GstVideoCaptionMeta*)this._cPtr).size].dup;
   }
 

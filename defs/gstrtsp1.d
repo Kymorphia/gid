@@ -25,3 +25,7 @@
 //!set record[RTSPAuthCredential].field[authorization][writable] 0
 //!set record[RTSPAuthParam].field[name][writable] 0
 //!set record[RTSPAuthParam].field[value][writable] 0
+
+//# Set NULL-terminated array field (read-only, parsed credentials)
+//!set record[RTSPAuthCredential].field[params].type '<array zero-terminated="1" c:type="GstRTSPAuthParam**"><type name="RTSPAuthParam" c:type="GstRTSPAuthParam*"/></array>'
+//!set record[RTSPAuthCredential].field[params][writable] 0

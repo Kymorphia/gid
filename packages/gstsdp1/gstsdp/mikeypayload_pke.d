@@ -20,12 +20,10 @@ class MIKEYPayloadPKE : StructWrap!(GstMIKEYPayloadPKE)
       Create a `mikeypayload_pke.MIKEYPayloadPKE` wrap type.
       Params:
         C = envelope key cache indicator
-        dataLen = length of @data
   */
-  this(gstsdp.types.MIKEYCacheType C = gstsdp.types.MIKEYCacheType.init, ushort dataLen = ushort.init) nothrow
+  this(gstsdp.types.MIKEYCacheType C = gstsdp.types.MIKEYCacheType.init) nothrow
   {
     this.C = C;
-    this.dataLen = dataLen;
   }
 
   /** */
@@ -63,21 +61,14 @@ class MIKEYPayloadPKE : StructWrap!(GstMIKEYPayloadPKE)
   }
 
   /**
-      Get `dataLen` field.
-      Returns: length of @data
+      Get `data` field.
+      Returns: the encrypted envelope key
   */
-  @property ushort dataLen() nothrow
+  @property ubyte[] data() nothrow
   {
-    return (cast(GstMIKEYPayloadPKE*)this._cPtr).dataLen;
-  }
+    if (!(cast(GstMIKEYPayloadPKE*)this._cPtr).data)
+      return null;
 
-  /**
-      Set `dataLen` field.
-      Params:
-        propval = length of @data
-  */
-  @property void dataLen(ushort propval) nothrow
-  {
-    (cast(GstMIKEYPayloadPKE*)this._cPtr).dataLen = propval;
+    return (cast(GstMIKEYPayloadPKE*)this._cPtr).data[0 .. (cast(GstMIKEYPayloadPKE*)this._cPtr).dataLen].dup;
   }
 }

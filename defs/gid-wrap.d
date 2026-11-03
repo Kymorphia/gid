@@ -30,6 +30,16 @@ interface GidWrap
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow;
 
   /**
+   * Steal the C instance, transferring the wrapper's ownership of it to the caller without a copy or an added
+   * reference. Wrappers which own their C instance (Boxed, ReffedWrap and owning OpaqueWrap) are left empty (null C
+   * instance, nothing is freed when destroyed), so they must not be used afterwards. Wrappers which can't give up their
+   * C instance return a new reference or copy instead (see _cPtr(Yes.Dup)) and remain valid: ObjectWrap (the unique
+   * D proxy of a GObject), StructWrap (inline structure) and borrowing OpaqueWrap.
+   * Returns: The C instance pointer, owned by the caller (null if the wrapper is empty)
+   */
+  void* _cSteal() nothrow;
+
+  /**
    * Get the GType of the instance.
    * Returns: The GType or 0 if the type has none
    */
@@ -122,6 +132,22 @@ class OpaqueWrap(CT, alias freeFunc = void, alias copyFunc = void) : OpaqueWrapB
     }
   }
 
+  /**
+   * Steal the C structure (see GidWrap._cSteal). An owned structure is handed over and the wrapper is left empty,
+   * a borrowed structure is copied (only valid for copyable types).
+   * Returns: The C structure pointer, owned by the caller
+   */
+  override void* _cSteal() nothrow
+  {
+    if (!_owned)
+      return _cPtr(Yes.Dup);
+
+    auto ptr = cast(void*)_cInstancePtr;
+    _cInstancePtr = null;
+    _owned = false;
+    return ptr;
+  }
+
   /** Get the GType (Opaque types have none). Returns: 0 */
   static GType _getGType() nothrow
   {
@@ -183,6 +209,17 @@ class ReffedWrap(CT, alias refFunc, alias unrefFunc) : ReffedWrapBase
   override void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? _cDup(cast(void*)_cInstancePtr) : cast(void*)_cInstancePtr;
+  }
+
+  /**
+   * Steal the C structure reference (see GidWrap._cSteal), the wrapper is left empty.
+   * Returns: The C structure pointer with the wrapper's reference, owned by the caller
+   */
+  override void* _cSteal() nothrow
+  {
+    auto ptr = cast(void*)_cInstancePtr;
+    _cInstancePtr = null;
+    return ptr;
   }
 
   /**
@@ -270,6 +307,15 @@ class StructWrap(CT, alias copyFunc = void) : StructWrapBase
   override void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? _cDup(cast(void*)&_cInstance) : cast(void*)&_cInstance;
+  }
+
+  /**
+   * Steal the C structure (see GidWrap._cSteal). The structure is held inline by the wrapper, so a copy is returned.
+   * Returns: A copy of the C structure, owned by the caller
+   */
+  override void* _cSteal() nothrow
+  {
+    return _cDup(cast(void*)&_cInstance);
   }
 
   /**

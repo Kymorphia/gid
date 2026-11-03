@@ -202,6 +202,9 @@ class AncillaryMeta : StructWrap!(GstAncillaryMeta)
   */
   @property ushort[] data() nothrow
   {
+    if (!(cast(GstAncillaryMeta*)this._cPtr).data)
+      return null;
+
     return (cast(GstAncillaryMeta*)this._cPtr).data[0 .. (cast(GstAncillaryMeta*)this._cPtr).dataCount].dup;
   }
 

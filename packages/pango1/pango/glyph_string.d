@@ -39,6 +39,9 @@ class GlyphString : gobject.boxed.BoxedWrap!(pango_glyph_string_get_type)
   */
   @property pango.glyph_info.GlyphInfo[] glyphs() nothrow
   {
+    if (!(cast(PangoGlyphString*)this._cPtr).glyphs)
+      return null;
+
     auto _retval = new pango.glyph_info.GlyphInfo[]((cast(PangoGlyphString*)this._cPtr).numGlyphs);
     foreach (i; 0 .. (cast(PangoGlyphString*)this._cPtr).numGlyphs)
       _retval[i] = new pango.glyph_info.GlyphInfo(cast(void*)&(cast(PangoGlyphString*)this._cPtr).glyphs[i], No.Take);

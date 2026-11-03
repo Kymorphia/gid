@@ -74,3 +74,16 @@
 
 //# Disable: Fixed size array of plane data pointers
 //!set record[VideoFrame].field[data][disable] 1
+
+//# Set array field lengths from their length fields (read-only, set by VideoResampler.init or when adding the meta)
+//!set record[VideoResampler].field[offset].type '<array length="1" zero-terminated="0" c:type="guint32*"><type name="guint32" c:type="guint32"/></array>'
+//!set record[VideoResampler].field[offset][writable] 0
+//!set record[VideoResampler].field[phase].type '<array length="1" zero-terminated="0" c:type="guint32*"><type name="guint32" c:type="guint32"/></array>'
+//!set record[VideoResampler].field[phase][writable] 0
+//!set record[VideoResampler].field[n_taps].type '<array length="3" zero-terminated="0" c:type="guint32*"><type name="guint32" c:type="guint32"/></array>'
+//!set record[VideoResampler].field[n_taps][writable] 0
+//!set record[VideoSEIUserDataUnregisteredMeta].field[data].type '<array length="3" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set record[VideoSEIUserDataUnregisteredMeta].field[data][writable] 0
+
+//# Disable: Two dimensional taps array (n_phases * max_taps)
+//!set record[VideoResampler].field[taps][disable] 1

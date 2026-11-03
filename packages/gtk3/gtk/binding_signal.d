@@ -65,6 +65,9 @@ class BindingSignal : StructWrap!(GtkBindingSignal)
   */
   @property gtk.binding_arg.BindingArg[] args() nothrow
   {
+    if (!(cast(GtkBindingSignal*)this._cPtr).args)
+      return null;
+
     auto _retval = new gtk.binding_arg.BindingArg[]((cast(GtkBindingSignal*)this._cPtr).nArgs);
     foreach (i; 0 .. (cast(GtkBindingSignal*)this._cPtr).nArgs)
       _retval[i] = new gtk.binding_arg.BindingArg(cast(void*)&(cast(GtkBindingSignal*)this._cPtr).args[i], No.Take);

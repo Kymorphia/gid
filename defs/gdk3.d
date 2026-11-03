@@ -41,3 +41,8 @@
 
 //# Disable: Internal/implementation-only API, not useful from D
 //!set callback[FilterFunc][ignore] 1
+
+//# Disable: Axes array fields with a length from the device (number of axes)
+//!set record[EventButton].field[axes][disable] 1
+//!set record[EventMotion].field[axes][disable] 1
+//!set record[EventTouch].field[axes][disable] 1

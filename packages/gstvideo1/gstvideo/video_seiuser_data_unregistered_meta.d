@@ -18,12 +18,10 @@ class VideoSEIUserDataUnregisteredMeta : StructWrap!(GstVideoSEIUserDataUnregist
       Create a `video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta` wrap type.
       Params:
         uuid = User Data Unregistered UUID
-        size = Size of the data buffer
   */
-  this(ubyte[16] uuid = (ubyte[16]).init, size_t size = size_t.init) nothrow
+  this(ubyte[16] uuid = (ubyte[16]).init) nothrow
   {
     this.uuid = uuid;
-    this.size = size;
   }
 
   /** */
@@ -61,22 +59,15 @@ class VideoSEIUserDataUnregisteredMeta : StructWrap!(GstVideoSEIUserDataUnregist
   }
 
   /**
-      Get `size` field.
-      Returns: Size of the data buffer
+      Get `data` field.
+      Returns: Unparsed data buffer
   */
-  @property size_t size() nothrow
+  @property ubyte[] data() nothrow
   {
-    return (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).size;
-  }
+    if (!(cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).data)
+      return null;
 
-  /**
-      Set `size` field.
-      Params:
-        propval = Size of the data buffer
-  */
-  @property void size(size_t propval) nothrow
-  {
-    (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).size = propval;
+    return (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).data[0 .. (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).size].dup;
   }
 
   /** */

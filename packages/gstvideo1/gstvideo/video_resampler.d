@@ -18,16 +18,12 @@ class VideoResampler : StructWrap!(GstVideoResampler)
       Create a `video_resampler.VideoResampler` wrap type.
       Params:
         inSize = the input size
-        outSize = the output size
         maxTaps = the maximum number of taps
-        nPhases = the number of phases
   */
-  this(int inSize = int.init, int outSize = int.init, uint maxTaps = uint.init, uint nPhases = uint.init) nothrow
+  this(int inSize = int.init, uint maxTaps = uint.init) nothrow
   {
     this.inSize = inSize;
-    this.outSize = outSize;
     this.maxTaps = maxTaps;
-    this.nPhases = nPhases;
   }
 
   /** */
@@ -56,25 +52,6 @@ class VideoResampler : StructWrap!(GstVideoResampler)
   }
 
   /**
-      Get `outSize` field.
-      Returns: the output size
-  */
-  @property int outSize() nothrow
-  {
-    return (cast(GstVideoResampler*)this._cPtr).outSize;
-  }
-
-  /**
-      Set `outSize` field.
-      Params:
-        propval = the output size
-  */
-  @property void outSize(int propval) nothrow
-  {
-    (cast(GstVideoResampler*)this._cPtr).outSize = propval;
-  }
-
-  /**
       Get `maxTaps` field.
       Returns: the maximum number of taps
   */
@@ -94,22 +71,39 @@ class VideoResampler : StructWrap!(GstVideoResampler)
   }
 
   /**
-      Get `nPhases` field.
-      Returns: the number of phases
+      Get `offset` field.
+      Returns: array with the source offset for each output element
   */
-  @property uint nPhases() nothrow
+  @property uint[] offset() nothrow
   {
-    return (cast(GstVideoResampler*)this._cPtr).nPhases;
+    if (!(cast(GstVideoResampler*)this._cPtr).offset)
+      return null;
+
+    return (cast(GstVideoResampler*)this._cPtr).offset[0 .. (cast(GstVideoResampler*)this._cPtr).outSize].dup;
   }
 
   /**
-      Set `nPhases` field.
-      Params:
-        propval = the number of phases
+      Get `phase` field.
+      Returns: array with the phase to use for each output element
   */
-  @property void nPhases(uint propval) nothrow
+  @property uint[] phase() nothrow
   {
-    (cast(GstVideoResampler*)this._cPtr).nPhases = propval;
+    if (!(cast(GstVideoResampler*)this._cPtr).phase)
+      return null;
+
+    return (cast(GstVideoResampler*)this._cPtr).phase[0 .. (cast(GstVideoResampler*)this._cPtr).outSize].dup;
+  }
+
+  /**
+      Get `nTaps` field.
+      Returns: array with new number of taps for each phase
+  */
+  @property uint[] nTaps() nothrow
+  {
+    if (!(cast(GstVideoResampler*)this._cPtr).nTaps)
+      return null;
+
+    return (cast(GstVideoResampler*)this._cPtr).nTaps[0 .. (cast(GstVideoResampler*)this._cPtr).nPhases].dup;
   }
 
   /**

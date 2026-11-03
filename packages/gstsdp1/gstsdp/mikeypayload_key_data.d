@@ -18,16 +18,12 @@ class MIKEYPayloadKeyData : StructWrap!(GstMIKEYPayloadKeyData)
       Create a `mikeypayload_key_data.MIKEYPayloadKeyData` wrap type.
       Params:
         keyType = the #GstMIKEYKeyDataType of @key_data
-        keyLen = length of @key_data
-        saltLen = the length of @salt_data, can be 0
         kvType = the Key Validity type
         kvLen = length of @kv_data
   */
-  this(gstsdp.types.MIKEYKeyDataType keyType = gstsdp.types.MIKEYKeyDataType.init, ushort keyLen = ushort.init, ushort saltLen = ushort.init, gstsdp.types.MIKEYKVType kvType = gstsdp.types.MIKEYKVType.init, ubyte[2] kvLen = (ubyte[2]).init) nothrow
+  this(gstsdp.types.MIKEYKeyDataType keyType = gstsdp.types.MIKEYKeyDataType.init, gstsdp.types.MIKEYKVType kvType = gstsdp.types.MIKEYKVType.init, ubyte[2] kvLen = (ubyte[2]).init) nothrow
   {
     this.keyType = keyType;
-    this.keyLen = keyLen;
-    this.saltLen = saltLen;
     this.kvType = kvType;
     this.kvLen = kvLen;
   }
@@ -67,41 +63,27 @@ class MIKEYPayloadKeyData : StructWrap!(GstMIKEYPayloadKeyData)
   }
 
   /**
-      Get `keyLen` field.
-      Returns: length of @key_data
+      Get `keyData` field.
+      Returns: the key data
   */
-  @property ushort keyLen() nothrow
+  @property ubyte[] keyData() nothrow
   {
-    return (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyLen;
+    if (!(cast(GstMIKEYPayloadKeyData*)this._cPtr).keyData)
+      return null;
+
+    return (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyData[0 .. (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyLen].dup;
   }
 
   /**
-      Set `keyLen` field.
-      Params:
-        propval = length of @key_data
+      Get `saltData` field.
+      Returns: salt data
   */
-  @property void keyLen(ushort propval) nothrow
+  @property ubyte[] saltData() nothrow
   {
-    (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyLen = propval;
-  }
+    if (!(cast(GstMIKEYPayloadKeyData*)this._cPtr).saltData)
+      return null;
 
-  /**
-      Get `saltLen` field.
-      Returns: the length of @salt_data, can be 0
-  */
-  @property ushort saltLen() nothrow
-  {
-    return (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltLen;
-  }
-
-  /**
-      Set `saltLen` field.
-      Params:
-        propval = the length of @salt_data, can be 0
-  */
-  @property void saltLen(ushort propval) nothrow
-  {
-    (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltLen = propval;
+    return (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltData[0 .. (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltLen].dup;
   }
 
   /**

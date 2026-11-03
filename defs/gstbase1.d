@@ -36,3 +36,6 @@
 //!set record[BitWriter].method[free_and_get_buffer][ignore] 1
 //!set record[ByteWriter].method[free_and_get_buffer][ignore] 1
 //!set record[ByteWriter].method[free_and_get_data][ignore] 1
+
+//# Disable: Data array field with a length in bits (bit_size)
+//!set record[BitWriter].field[data][disable] 1

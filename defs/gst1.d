@@ -66,7 +66,6 @@
 //!set callback[PadChainListFunction][gid-closure-field] 'pad.chainlistdata'
 //!set callback[PadEventFunction][gid-closure-field] 'pad.eventdata'
 //!set callback[PadEventFullFunction][gid-closure-field] 'pad.eventdata'
-//!set callback[PadGetRangeFunction][gid-closure-field] 'pad.getrangedata'
 //!set callback[PadIterIntLinkFunction][gid-closure-field] 'pad.iterintlinkdata'
 //!set callback[PadLinkFunction][gid-closure-field] 'pad.linkdata'
 //!set callback[PadUnlinkFunction][gid-closure-field] 'pad.unlinkdata'
@@ -144,5 +143,122 @@
 //!set callback[MetaDeserializeFunction][disable] 1
 //!set record[MetaInfo].field[deserialize_func][disable] 1
 
-//# Set direction of PadGetRangeFunction buffer to inout (caller may provide a buffer to fill, or receives a new one)
-//!set callback[PadGetRangeFunction].parameters.parameter[buffer][direction] inout
+//# PadGetRangeFunction and Pad.setGetrangeFunctionFull are hand written below: the buffer is either provided by the
+//# caller (filled in place, the caller keeps its reference) or NULL (a new buffer is returned with full transfer),
+//# which can't be expressed with GIR annotations
+//!set callback[PadGetRangeFunction][ignore] 1
+//!set class[Pad].method[set_getrange_function_full][ignore] 1
+
+//!class types
+
+/**
+    This function will be called on source pads when a peer element
+    request a buffer at the specified offset and length. If this function
+    returns #GST_FLOW_OK, the result buffer will be stored in buffer. The
+    contents of buffer is invalid for any other return value.
+
+    This function is installed on a source pad with
+    [gst.pad.Pad.setGetrangeFunctionFull] and can only be called on source pads after
+    they are successfully activated with [gst.pad.Pad.activateMode] with the
+    #GST_PAD_MODE_PULL.
+
+    offset and length are always given in byte units. offset must normally be a value
+    between 0 and the length in bytes of the data available on pad. The
+    length (duration in bytes) can be retrieved with a #GST_QUERY_DURATION or with a
+    #GST_QUERY_SEEKING.
+
+    Any offset larger or equal than the length will make the function return
+    #GST_FLOW_EOS, which corresponds to EOS. In this case buffer does not
+    contain a valid buffer.
+
+    The buffer size of buffer will only be smaller than length when offset is
+    near the end of the stream. In all other cases, the size of buffer must be
+    exactly the requested size.
+
+    It is allowed to call this function with a 0 length and valid offset, in
+    which case buffer will contain a 0-sized buffer and the function returns
+    #GST_FLOW_OK.
+
+    When this function is called with a -1 offset, the sequentially next buffer
+    of length length in the stream is returned.
+
+    When this function is called with a -1 length, a buffer with a default
+    optimal length is returned in buffer. The length might depend on the value
+    of offset.
+
+    If buffer is null, the function should set it to a new buffer. Otherwise buffer is
+    provided by the caller and should be filled in place: it must not be replaced or set to null
+    (the call then fails with #GST_FLOW_ERROR), and it is only valid during the call (the
+    caller keeps its reference, the D object is left empty afterwards).
+
+    Params:
+      pad = the src #GstPad to perform the getrange on.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      offset = the offset of the range
+      length = the length of the range
+      buffer = null to return a new buffer, or a caller provided buffer to fill
+    Returns: #GST_FLOW_OK for success and a valid buffer in buffer. Any other
+      return value leaves buffer undefined.
+*/
+alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, ulong offset, uint length, ref gst.buffer.Buffer buffer);
+
+//!class Pad
+
+  /**
+      Sets the given getrange function for the pad. The getrange function is
+      called to produce a new #GstBuffer to start the processing pipeline. see
+      #GstPadGetRangeFunction for a description of the getrange function.
+
+      Params:
+        get = the #GstPadGetRangeFunction to set.
+  */
+  void setGetrangeFunctionFull(gst.types.PadGetRangeFunction get) nothrow
+  {
+    extern(C) GstFlowReturn _getCallback(GstPad* pad, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
+    {
+      gst.types.FlowReturn _dretval;
+      auto _dlg = cast(gst.types.PadGetRangeFunction*)pad.getrangedata;
+
+      // A caller provided buffer is borrowed: its reference is taken for the call and stolen back afterwards, so
+      // the buffer stays writable (single reference) while it is filled
+      auto _provided = *buffer ? new gst.buffer.Buffer(cast(void*)*buffer, Yes.Take) : null;
+      auto _buffer = _provided;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take),
+          gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length,
+          _buffer);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadGetRangeFunction");
+      }
+
+      auto _retval = cast(GstFlowReturn)_dretval;
+
+      if (_provided) // The caller keeps its buffer, a replacement is released by its D object
+      {
+        _provided._cSteal;
+
+        if (_buffer !is _provided)
+        {
+          import glib.c.functions : g_log;
+          import glib.c.types : GLogLevelFlags;
+          g_log("Gid", GLogLevelFlags.LevelCritical, "%s",
+            "gst.types.PadGetRangeFunction replaced the caller provided buffer".ptr);
+          _retval = GstFlowReturn.Error;
+        }
+      }
+      else // New buffer owned by the caller
+        *buffer = _buffer ? cast(GstBuffer*)_buffer._cPtr(Yes.Dup) : null;
+
+      return _retval;
+    }
+    auto _getCB = get ? &_getCallback : null;
+    auto _get = get ? freezeDelegate(cast(void*)&get) : null;
+    GDestroyNotify _getDestroyCB = get ? &thawDelegate : null;
+    gst_pad_set_getrange_function_full(cast(GstPad*)this._cPtr, _getCB, _get, _getDestroyCB);
+  }

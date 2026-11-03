@@ -360,6 +360,25 @@ alias VecDeque = GstVecDeque*;
 alias AllocationMetaParamsAggregator = bool delegate(out gst.structure.Structure aggregatedParams, gst.structure.Structure params0, gst.structure.Structure params1);
 
 /**
+    A function that will be called from [gst.buffer_list.BufferList.foreach_]. The buffer
+    field will point to a the reference of the buffer at idx.
+    
+    When this function returns true, the next buffer will be
+    returned. When false is returned, [gst.buffer_list.BufferList.foreach_] will return.
+    
+    When buffer is set to null, the item will be removed from the bufferlist.
+    When buffer has been made writable, the new buffer reference can be assigned
+    to buffer. This function is responsible for unreffing the old buffer when
+    removing or modifying.
+
+    Params:
+      buffer = pointer to the buffer
+      idx = the index of buffer
+    Returns: false when [gst.buffer_list.BufferList.foreach_] should stop
+*/
+alias BufferListFunc = bool delegate(ref gst.buffer.Buffer buffer, uint idx);
+
+/**
     Specifies the type of function passed to [gst.bus.Bus.addWatch] or
     [gst.bus.Bus.addWatchFull], which is called from the mainloop when a message
     is available on the bus.
@@ -957,6 +976,24 @@ alias PadProbeCallback = gst.types.PadProbeReturn delegate(gst.pad.Pad pad, gst.
     Returns: true if the query could be performed.
 */
 alias PadQueryFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.query.Query query);
+
+/**
+    Callback used by [gst.pad.Pad.stickyEventsForeach].
+    
+    When this function returns true, the next event will be
+    returned. When false is returned, [gst.pad.Pad.stickyEventsForeach] will return.
+    
+    When event is set to null, the item will be removed from the list of sticky events.
+    event can be replaced by assigning a new reference to it.
+    This function is responsible for unreffing the old event when
+    removing or modifying.
+
+    Params:
+      pad = the #GstPad.
+      event = a sticky #GstEvent.
+    Returns: true if the iteration should continue
+*/
+alias PadStickyEventsForeachFunction = bool delegate(gst.pad.Pad pad, ref gst.event.Event event);
 
 /**
     Function signature to handle a unlinking the pad prom its peer.
@@ -2284,3 +2321,57 @@ enum VERSION_MINOR = 28;
     Actual releases have 0, GIT versions have 1, prerelease versions have 2-...
 */
 enum VERSION_NANO = 0;
+
+/**
+This function will be called on source pads when a peer element
+request a buffer at the specified offset and length. If this function
+returns #GST_FLOW_OK, the result buffer will be stored in buffer. The
+contents of buffer is invalid for any other return value.
+
+This function is installed on a source pad with
+[gst.pad.Pad.setGetrangeFunctionFull] and can only be called on source pads after
+they are successfully activated with [gst.pad.Pad.activateMode] with the
+#GST_PAD_MODE_PULL.
+
+offset and length are always given in byte units. offset must normally be a value
+between 0 and the length in bytes of the data available on pad. The
+length (duration in bytes) can be retrieved with a #GST_QUERY_DURATION or with a
+#GST_QUERY_SEEKING.
+
+Any offset larger or equal than the length will make the function return
+#GST_FLOW_EOS, which corresponds to EOS. In this case buffer does not
+contain a valid buffer.
+
+The buffer size of buffer will only be smaller than length when offset is
+near the end of the stream. In all other cases, the size of buffer must be
+exactly the requested size.
+
+It is allowed to call this function with a 0 length and valid offset, in
+which case buffer will contain a 0-sized buffer and the function returns
+#GST_FLOW_OK.
+
+When this function is called with a -1 offset, the sequentially next buffer
+of length length in the stream is returned.
+
+When this function is called with a -1 length, a buffer with a default
+optimal length is returned in buffer. The length might depend on the value
+of offset.
+
+If buffer is null, the function should set it to a new buffer. Otherwise buffer is
+provided by the caller and should be filled in place: it must not be replaced or set to null
+(the call then fails with #GST_FLOW_ERROR), and it is only valid during the call (the
+caller keeps its reference, the D object is left empty afterwards).
+
+Params:
+pad = the src #GstPad to perform the getrange on.
+parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+flag is set, parent is guaranteed to be not-null and remain valid
+during the execution of this function.
+offset = the offset of the range
+length = the length of the range
+buffer = null to return a new buffer, or a caller provided buffer to fill
+Returns: #GST_FLOW_OK for success and a valid buffer in buffer. Any other
+return value leaves buffer undefined.
+*/
+alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, ulong offset, uint length, ref gst.buffer.Buffer buffer);
+

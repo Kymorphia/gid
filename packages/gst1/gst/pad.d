@@ -164,6 +164,63 @@ class Pad : gst.object.ObjectWrap
   }
 
   /**
+  Sets the given getrange function for the pad. The getrange function is
+  called to produce a new #GstBuffer to start the processing pipeline. see
+  #GstPadGetRangeFunction for a description of the getrange function.
+  
+  Params:
+  get = the #GstPadGetRangeFunction to set.
+  */
+  void setGetrangeFunctionFull(gst.types.PadGetRangeFunction get) nothrow
+  {
+    extern(C) GstFlowReturn _getCallback(GstPad* pad, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
+    {
+      gst.types.FlowReturn _dretval;
+      auto _dlg = cast(gst.types.PadGetRangeFunction*)pad.getrangedata;
+
+      // A caller provided buffer is borrowed: its reference is taken for the call and stolen back afterwards, so
+      // the buffer stays writable (single reference) while it is filled
+      auto _provided = *buffer ? new gst.buffer.Buffer(cast(void*)*buffer, Yes.Take) : null;
+      auto _buffer = _provided;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length,
+        _buffer);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadGetRangeFunction");
+      }
+
+      auto _retval = cast(GstFlowReturn)_dretval;
+
+      if (_provided) // The caller keeps its buffer, a replacement is released by its D object
+      {
+        _provided._cSteal;
+
+        if (_buffer !is _provided)
+        {
+          import glib.c.functions : g_log;
+          import glib.c.types : GLogLevelFlags;
+          g_log("Gid", GLogLevelFlags.LevelCritical, "%s",
+          "gst.types.PadGetRangeFunction replaced the caller provided buffer".ptr);
+          _retval = GstFlowReturn.Error;
+        }
+      }
+      else // New buffer owned by the caller
+        *buffer = _buffer ? cast(GstBuffer*)_buffer._cPtr(Yes.Dup) : null;
+
+      return _retval;
+    }
+    auto _getCB = get ? &_getCallback : null;
+    auto _get = get ? freezeDelegate(cast(void*)&get) : null;
+    GDestroyNotify _getDestroyCB = get ? &thawDelegate : null;
+    gst_pad_set_getrange_function_full(cast(GstPad*)this._cPtr, _getCB, _get, _getDestroyCB);
+  }
+
+  /**
       Creates a new pad with the given name in the given direction.
       If name is null, a guaranteed unique name (across all pads)
       will be assigned.
@@ -1858,6 +1915,40 @@ class Pad : gst.object.ObjectWrap
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _retval = cast(bool)gst_pad_start_task(cast(GstPad*)this._cPtr, _funcCB, _func, _funcDestroyCB);
     return _retval;
+  }
+
+  /**
+      Iterates all sticky events on pad and calls foreach_func for every
+      event. If foreach_func returns false the iteration is immediately stopped.
+  
+      Params:
+        foreachFunc = the
+             #GstPadStickyEventsForeachFunction that should be called for every event.
+  */
+  void stickyEventsForeach(gst.types.PadStickyEventsForeachFunction foreachFunc) nothrow
+  {
+    extern(C) gboolean _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.PadStickyEventsForeachFunction*)userData;
+      auto _event = *event ? new gst.event.Event(cast(void*)*event, Yes.Take) : null;
+
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), _event);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadStickyEventsForeachFunction");
+      }
+      auto _retval = cast(gboolean)_dretval;
+      *event = _event ? cast(GstEvent*)_event._cPtr(Yes.Dup) : null;
+
+      return _retval;
+    }
+    auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
+    auto _foreachFunc = foreachFunc ? cast(void*)&(foreachFunc) : null;
+    gst_pad_sticky_events_foreach(cast(GstPad*)this._cPtr, _foreachFuncCB, _foreachFunc);
   }
 
   /**

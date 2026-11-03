@@ -16,12 +16,10 @@ class MIKEYPayloadSPParam : StructWrap!(GstMIKEYPayloadSPParam)
       Create a `mikeypayload_spparam.MIKEYPayloadSPParam` wrap type.
       Params:
         type = specifies the type of the parameter
-        len = specifies the length of @val
   */
-  this(ubyte type = ubyte.init, ubyte len = ubyte.init) nothrow
+  this(ubyte type = ubyte.init) nothrow
   {
     this.type = type;
-    this.len = len;
   }
 
   /** */
@@ -50,21 +48,14 @@ class MIKEYPayloadSPParam : StructWrap!(GstMIKEYPayloadSPParam)
   }
 
   /**
-      Get `len` field.
-      Returns: specifies the length of @val
+      Get `val` field.
+      Returns: specifies the value of the parameter
   */
-  @property ubyte len() nothrow
+  @property ubyte[] val() nothrow
   {
-    return (cast(GstMIKEYPayloadSPParam*)this._cPtr).len;
-  }
+    if (!(cast(GstMIKEYPayloadSPParam*)this._cPtr).val)
+      return null;
 
-  /**
-      Set `len` field.
-      Params:
-        propval = specifies the length of @val
-  */
-  @property void len(ubyte propval) nothrow
-  {
-    (cast(GstMIKEYPayloadSPParam*)this._cPtr).len = propval;
+    return (cast(GstMIKEYPayloadSPParam*)this._cPtr).val[0 .. (cast(GstMIKEYPayloadSPParam*)this._cPtr).len].dup;
   }
 }

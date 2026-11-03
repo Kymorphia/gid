@@ -57,6 +57,9 @@ class InputMessage : StructWrap!(GInputMessage)
   */
   @property gio.types.InputVector[] vectors() nothrow
   {
+    if (!(cast(GInputMessage*)this._cPtr).vectors)
+      return null;
+
     return (cast(GInputMessage*)this._cPtr).vectors[0 .. (cast(GInputMessage*)this._cPtr).numVectors].dup;
   }
 

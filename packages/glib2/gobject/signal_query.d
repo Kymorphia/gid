@@ -148,6 +148,9 @@ class SignalQuery : StructWrap!(GSignalQuery)
   */
   @property gobject.types.GType[] paramTypes() nothrow
   {
+    if (!(cast(GSignalQuery*)this._cPtr).paramTypes)
+      return null;
+
     return (cast(GSignalQuery*)this._cPtr).paramTypes[0 .. (cast(GSignalQuery*)this._cPtr).nParams].dup;
   }
 }

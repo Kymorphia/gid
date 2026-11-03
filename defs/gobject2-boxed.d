@@ -98,6 +98,17 @@ abstract class Boxed : GidWrap
   {
     return dup ? boxedCopy(_gType, _cInstancePtr) : _cInstancePtr;
   }
+
+  /**
+   * Steal the C boxed value (see GidWrap._cSteal), the wrapper is left empty.
+   * Returns: The C boxed pointer, owned by the caller
+   */
+  void* _cSteal() nothrow
+  {
+    auto ptr = _cInstancePtr;
+    _cInstancePtr = null;
+    return ptr;
+  }
 }
 
 /**

@@ -27,13 +27,11 @@ class AudioBuffer : StructWrap!(GstAudioBuffer)
       Create a `audio_buffer.AudioBuffer` wrap type.
       Params:
         nSamples = the size of the buffer in samples
-        nPlanes = the number of planes available
         buffer = the mapped buffer
   */
-  this(size_t nSamples = size_t.init, int nPlanes = int.init, gst.buffer.Buffer buffer = gst.buffer.Buffer.init) nothrow
+  this(size_t nSamples = size_t.init, gst.buffer.Buffer buffer = gst.buffer.Buffer.init) nothrow
   {
     this.nSamples = nSamples;
-    this.nPlanes = nPlanes;
     this.buffer = buffer;
   }
 
@@ -72,22 +70,16 @@ class AudioBuffer : StructWrap!(GstAudioBuffer)
   }
 
   /**
-      Get `nPlanes` field.
-      Returns: the number of planes available
+      Get `planes` field.
+      Returns: an array of @n_planes pointers pointing to the start of each
+          plane in the mapped buffer
   */
-  @property int nPlanes() nothrow
+  @property void*[] planes() nothrow
   {
-    return (cast(GstAudioBuffer*)this._cPtr).nPlanes;
-  }
+    if (!(cast(GstAudioBuffer*)this._cPtr).planes)
+      return null;
 
-  /**
-      Set `nPlanes` field.
-      Params:
-        propval = the number of planes available
-  */
-  @property void nPlanes(int propval) nothrow
-  {
-    (cast(GstAudioBuffer*)this._cPtr).nPlanes = propval;
+    return (cast(GstAudioBuffer*)this._cPtr).planes[0 .. (cast(GstAudioBuffer*)this._cPtr).nPlanes].dup;
   }
 
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive

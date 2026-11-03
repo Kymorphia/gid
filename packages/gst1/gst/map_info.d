@@ -85,6 +85,9 @@ class MapInfo : StructWrap!(GstMapInfo)
   */
   @property ubyte[] data() nothrow
   {
+    if (!(cast(GstMapInfo*)this._cPtr).data)
+      return null;
+
     return (cast(GstMapInfo*)this._cPtr).data[0 .. (cast(GstMapInfo*)this._cPtr).size].dup;
   }
 
