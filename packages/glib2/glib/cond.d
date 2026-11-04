@@ -89,6 +89,12 @@ class Cond : StructWrap!(GCond)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       If threads are waiting for cond, all of them are unblocked.
       If no threads are waiting for cond, this function has no effect.

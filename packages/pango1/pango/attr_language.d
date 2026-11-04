@@ -31,6 +31,12 @@ class AttrLanguage : StructWrap!(PangoAttrLanguage)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `attr` field.
       Returns: the common portion of the attribute
@@ -58,6 +64,9 @@ class AttrLanguage : StructWrap!(PangoAttrLanguage)
   */
   @property void value(pango.language.Language propval) nothrow
   {
+    if (_refuseBorrowedStore("value"))
+      return;
+
     _valueRef = propval;
     (cast(PangoAttrLanguage*)this._cPtr).value = propval ? cast(PangoLanguage*)propval._cPtr(No.Dup) : null;
   }

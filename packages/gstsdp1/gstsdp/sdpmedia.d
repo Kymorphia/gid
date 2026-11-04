@@ -43,6 +43,14 @@ class SDPMedia : StructWrap!(GstSDPMedia)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _mediaRef; // Keeps borrowed GC string alive
+
   /**
       Get `media` field.
       Returns: the media type
@@ -59,7 +67,11 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   */
   @property void media(string propval) nothrow
   {
-    (cast(GstSDPMedia*)this._cPtr).media = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("media"))
+      return;
+
+    _mediaRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPMedia*)this._cPtr).media = cast(char*)_mediaRef;
   }
 
   /**
@@ -100,6 +112,8 @@ class SDPMedia : StructWrap!(GstSDPMedia)
     (cast(GstSDPMedia*)this._cPtr).numPorts = propval;
   }
 
+  private const(char)* _protoRef; // Keeps borrowed GC string alive
+
   /**
       Get `proto` field.
       Returns: the transport protocol
@@ -116,7 +130,11 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   */
   @property void proto(string propval) nothrow
   {
-    (cast(GstSDPMedia*)this._cPtr).proto = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("proto"))
+      return;
+
+    _protoRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPMedia*)this._cPtr).proto = cast(char*)_protoRef;
   }
 
   /**
@@ -127,6 +145,8 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).fmts);
   }
+
+  private const(char)* _informationRef; // Keeps borrowed GC string alive
 
   /**
       Get `information` field.
@@ -144,7 +164,11 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   */
   @property void information(string propval) nothrow
   {
-    (cast(GstSDPMedia*)this._cPtr).information = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("information"))
+      return;
+
+    _informationRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPMedia*)this._cPtr).information = cast(char*)_informationRef;
   }
 
   /**
@@ -171,7 +195,7 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   */
   @property gstsdp.sdpkey.SDPKey key() nothrow
   {
-    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMedia*)this._cPtr).key, No.Take);
+    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMedia*)this._cPtr).key, this);
   }
 
   /**
@@ -318,25 +342,6 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   }
 
   /**
-      Allocate a new copy of media and store the result in copy. The value in
-      copy should be release with gst_sdp_media_free function.
-  
-      Params:
-        copy = pointer to new #GstSDPMedia
-      Returns: a #GstSDPResult
-  */
-  gstsdp.types.SDPResult copy(out gstsdp.sdpmedia.SDPMedia copy) nothrow
-  {
-    GstSDPResult _cretval;
-    GstSDPMedia* _copy;
-    _cretval = gst_sdp_media_copy(cast(const(GstSDPMedia)*)this._cPtr, &_copy);
-    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    if (_copy)
-      copy = new gstsdp.sdpmedia.SDPMedia(cast(void*)_copy, Yes.Take);
-    return _retval;
-  }
-
-  /**
       Get the number of formats in media.
       Returns: the number of formats in media.
   */
@@ -358,7 +363,7 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     const(GstSDPAttribute)* _cretval;
     _cretval = gst_sdp_media_get_attribute(cast(const(GstSDPMedia)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpattribute.SDPAttribute(cast(GstSDPAttribute*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpattribute.SDPAttribute(cast(GstSDPAttribute*)_cretval, this) : null;
     return _retval;
   }
 
@@ -406,7 +411,7 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     const(GstSDPBandwidth)* _cretval;
     _cretval = gst_sdp_media_get_bandwidth(cast(const(GstSDPMedia)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpbandwidth.SDPBandwidth(cast(GstSDPBandwidth*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpbandwidth.SDPBandwidth(cast(GstSDPBandwidth*)_cretval, this) : null;
     return _retval;
   }
 
@@ -444,7 +449,7 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     const(GstSDPConnection)* _cretval;
     _cretval = gst_sdp_media_get_connection(cast(const(GstSDPMedia)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)_cretval, this) : null;
     return _retval;
   }
 
@@ -483,7 +488,7 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     const(GstSDPKey)* _cretval;
     _cretval = gst_sdp_media_get_key(cast(const(GstSDPMedia)*)this._cPtr);
-    auto _retval = _cretval ? new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)_cretval, this) : null;
     return _retval;
   }
 
@@ -861,53 +866,11 @@ class SDPMedia : StructWrap!(GstSDPMedia)
         media = a #GstSDPMedia
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult addMediaFromStructure(gst.structure.Structure structure, out gstsdp.sdpmedia.SDPMedia media) nothrow
+  static gstsdp.types.SDPResult addMediaFromStructure(gst.structure.Structure structure, gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
-    GstSDPMedia _media;
-    _cretval = gst_sdp_media_add_media_from_structure(structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, &_media);
+    _cretval = gst_sdp_media_add_media_from_structure(structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, media ? cast(GstSDPMedia*)media._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media, No.Take);
-    return _retval;
-  }
-
-  /**
-      Initialize media so that its contents are as if it was freshly allocated
-      with [gstsdp.sdpmedia.SDPMedia.new_]. This function is mostly used to initialize a media
-      allocated on the stack. [gstsdp.sdpmedia.SDPMedia.uninit] undoes this operation.
-      
-      When this function is invoked on newly allocated data (with malloc or on the
-      stack), its contents should be set to 0 before calling this function.
-  
-      Params:
-        media = a #GstSDPMedia
-      Returns: a #GstSDPResult.
-  */
-  static gstsdp.types.SDPResult init_(out gstsdp.sdpmedia.SDPMedia media) nothrow
-  {
-    GstSDPResult _cretval;
-    GstSDPMedia _media;
-    _cretval = gst_sdp_media_init(&_media);
-    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media, No.Take);
-    return _retval;
-  }
-
-  /**
-      Allocate a new GstSDPMedia and store the result in media.
-  
-      Params:
-        media = pointer to new #GstSDPMedia
-      Returns: a #GstSDPResult.
-  */
-  static gstsdp.types.SDPResult new_(out gstsdp.sdpmedia.SDPMedia media) nothrow
-  {
-    GstSDPResult _cretval;
-    GstSDPMedia* _media;
-    _cretval = gst_sdp_media_new(&_media);
-    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    if (_media)
-      media = new gstsdp.sdpmedia.SDPMedia(cast(void*)_media, Yes.Take);
     return _retval;
   }
 
@@ -931,13 +894,11 @@ class SDPMedia : StructWrap!(GstSDPMedia)
         media = a #GstSDPMedia
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult setMediaFromCaps(gst.caps.Caps caps, out gstsdp.sdpmedia.SDPMedia media) nothrow
+  static gstsdp.types.SDPResult setMediaFromCaps(gst.caps.Caps caps, gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
-    GstSDPMedia _media;
-    _cretval = gst_sdp_media_set_media_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null, &_media);
+    _cretval = gst_sdp_media_set_media_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null, media ? cast(GstSDPMedia*)media._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media, No.Take);
     return _retval;
   }
 }

@@ -53,13 +53,19 @@ class VideoBarMeta : StructWrap!(GstVideoBarMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `meta` field.
       Returns: parent #GstMeta
   */
   @property gst.meta.Meta meta() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoBarMeta*)this._cPtr).meta, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoBarMeta*)this._cPtr).meta, this);
   }
 
   /**

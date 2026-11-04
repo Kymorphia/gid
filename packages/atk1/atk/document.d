@@ -5,6 +5,7 @@ public import gid.basictypes;
 public import atk.document_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
+import atk.text_selection;
 import atk.types;
 import gid.gid;
 import gobject.dclosure;
@@ -105,6 +106,20 @@ interface Document : GidWrap
           document does not allow the attribute to be modified
   */
   bool setAttributeValue(string attributeName, string attributeValue);
+
+  /**
+      Makes 1 or more selections within this document denoted by the given
+      array of AtkTextSelections. Any existing physical selection (inside or
+      outside this document) is replaced by the new selections. All objects within
+      the given selection ranges must be descendants of this document. Otherwise
+      FALSE will be returned.
+  
+      Params:
+        selections = a GArray of AtkTextSelections
+                       to be selected.
+      Returns: TRUE if the selection was made successfully; FALSE otherwise.
+  */
+  bool setTextSelections(atk.text_selection.TextSelection[] selections);
 
   /**
       Connect to `DocumentAttributeChanged` signal.

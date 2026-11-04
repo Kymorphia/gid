@@ -48,6 +48,12 @@ class TextAppearance : StructWrap!(GtkTextAppearance)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `bgColor` field.
       Returns: Background #GdkColor.

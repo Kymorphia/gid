@@ -29,6 +29,12 @@ class MIKEYPayloadT : StructWrap!(GstMIKEYPayloadT)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `pt` field.
       Returns: the payload header

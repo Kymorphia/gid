@@ -28,6 +28,12 @@ class OtNameEntry : StructWrap!(hb_ot_name_entry_t)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `nameId` field.
       Returns: name ID

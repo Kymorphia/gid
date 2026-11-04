@@ -27,6 +27,12 @@ class StaticResource : StructWrap!(GStaticResource)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Finalizes a [gio.resource.Resource] initialized by
       [gio.static_resource.StaticResource.init_].

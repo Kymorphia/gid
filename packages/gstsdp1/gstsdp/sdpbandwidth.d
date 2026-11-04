@@ -31,6 +31,14 @@ class SDPBandwidth : StructWrap!(GstSDPBandwidth)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _bwtypeRef; // Keeps borrowed GC string alive
+
   /**
       Get `bwtype` field.
       Returns: the bandwidth modifier type
@@ -47,7 +55,11 @@ class SDPBandwidth : StructWrap!(GstSDPBandwidth)
   */
   @property void bwtype(string propval) nothrow
   {
-    (cast(GstSDPBandwidth*)this._cPtr).bwtype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("bwtype"))
+      return;
+
+    _bwtypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPBandwidth*)this._cPtr).bwtype = cast(char*)_bwtypeRef;
   }
 
   /**

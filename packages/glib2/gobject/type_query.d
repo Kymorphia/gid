@@ -36,6 +36,12 @@ class TypeQuery : StructWrap!(GTypeQuery)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the #GType value of the type
@@ -55,6 +61,8 @@ class TypeQuery : StructWrap!(GTypeQuery)
     (cast(GTypeQuery*)this._cPtr).type = propval;
   }
 
+  private const(char)* _typeNameRef; // Keeps borrowed GC string alive
+
   /**
       Get `typeName` field.
       Returns: the name of the type
@@ -71,7 +79,11 @@ class TypeQuery : StructWrap!(GTypeQuery)
   */
   @property void typeName(string propval) nothrow
   {
-    (cast(GTypeQuery*)this._cPtr).typeName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("typeName"))
+      return;
+
+    _typeNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTypeQuery*)this._cPtr).typeName = cast(const(char)*)_typeNameRef;
   }
 
   /**

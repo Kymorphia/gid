@@ -23,6 +23,12 @@ class IOSchedulerJob : OpaqueWrap!(GIOSchedulerJob*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Used from an I/O job to send a callback to be run in the thread
       that the job was started from, waiting for the result (and thus

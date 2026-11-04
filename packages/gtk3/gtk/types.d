@@ -685,7 +685,7 @@ alias EntryCompletionMatchFunc = bool delegate(gtk.entry_completion.EntryComplet
 
     Params:
       filterInfo = a #GtkFileFilterInfo that is filled according
-          to the needed flags passed to [gtk.file_filter.FileFilter.addCustom]
+          to the needed flags passed to [gtk.file_filter.FileFilter.addCustom] (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: true if the file should be displayed
 */
 alias FileFilterFunc = bool delegate(gtk.file_filter_info.FileFilterInfo filterInfo);
@@ -760,7 +760,7 @@ alias IconViewForeachFunc = void delegate(gtk.icon_view.IconView iconView, gtk.t
 
     Params:
       grabWidget = the widget to which the event will be delivered
-      event = the key event
+      event = the key event (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: true to stop further processing of event, false to continue.
 */
 alias KeySnoopFunc = int delegate(gtk.widget.Widget grabWidget, gdk.event_key.EventKey event);
@@ -894,7 +894,7 @@ alias RcPropertyParser = bool delegate(gobject.param_spec.ParamSpec pspec, glib.
 
     Params:
       filterInfo = a #GtkRecentFilterInfo that is filled according
-         to the needed flags passed to [gtk.recent_filter.RecentFilter.addCustom]
+         to the needed flags passed to [gtk.recent_filter.RecentFilter.addCustom] (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: true if the file should be displayed
 */
 alias RecentFilterFunc = bool delegate(gtk.recent_filter_info.RecentFilterInfo filterInfo);

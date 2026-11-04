@@ -4,6 +4,22 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstrtp1/
 //!info capi https://gstreamer.freedesktop.org/documentation/rtplib/index.html
 
+// Map functions return a MapScope which unmaps the structure (explicit unmap or scope exit), the unmap function is
+// only used by the MapScope (unmapping a MapScope structure directly would unmap it twice)
+//!set record[RTPBuffer].function[map][gid-unmap] gst_rtp_buffer_unmap
+//!set record[RTPBuffer].function[map][gid-map-source] buffer
+//!set record[RTPBuffer].method[unmap][disable] 1
+//!set record[RTCPBuffer].function[map].parameters.parameter[rtcp][direction] out
+//!set record[RTCPBuffer].function[map].parameters.parameter[rtcp][caller-allocates] 1
+//!set record[RTCPBuffer].function[map][gid-unmap] gst_rtcp_buffer_unmap
+//!set record[RTCPBuffer].function[map][gid-map-source] buffer
+//!set record[RTCPBuffer].method[unmap][disable] 1
+
+// Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
+//!set function[buffer_get_rtp_source_meta].return-value[][gid-borrow] buffer
+//!set record[RTPPayloadInfo].function[for_name].return-value[][gid-borrow] static
+//!set record[RTPPayloadInfo].function[for_pt].return-value[][gid-borrow] static
+
 //# ssrc parameter appears to be an input uint pointer for some unknown reason, mark it unsupported
 //!set function[buffer_add_rtp_source_meta][disable] 1
 

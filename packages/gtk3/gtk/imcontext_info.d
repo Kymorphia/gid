@@ -37,6 +37,14 @@ class IMContextInfo : StructWrap!(GtkIMContextInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _contextIdRef; // Keeps borrowed GC string alive
+
   /**
       Get `contextId` field.
       Returns: The unique identification string of the input method.
@@ -53,8 +61,14 @@ class IMContextInfo : StructWrap!(GtkIMContextInfo)
   */
   @property void contextId(string propval) nothrow
   {
-    (cast(GtkIMContextInfo*)this._cPtr).contextId = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("contextId"))
+      return;
+
+    _contextIdRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkIMContextInfo*)this._cPtr).contextId = cast(const(char)*)_contextIdRef;
   }
+
+  private const(char)* _contextNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `contextName` field.
@@ -72,8 +86,14 @@ class IMContextInfo : StructWrap!(GtkIMContextInfo)
   */
   @property void contextName(string propval) nothrow
   {
-    (cast(GtkIMContextInfo*)this._cPtr).contextName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("contextName"))
+      return;
+
+    _contextNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkIMContextInfo*)this._cPtr).contextName = cast(const(char)*)_contextNameRef;
   }
+
+  private const(char)* _domainRef; // Keeps borrowed GC string alive
 
   /**
       Get `domain` field.
@@ -91,8 +111,14 @@ class IMContextInfo : StructWrap!(GtkIMContextInfo)
   */
   @property void domain(string propval) nothrow
   {
-    (cast(GtkIMContextInfo*)this._cPtr).domain = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("domain"))
+      return;
+
+    _domainRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkIMContextInfo*)this._cPtr).domain = cast(const(char)*)_domainRef;
   }
+
+  private const(char)* _domainDirnameRef; // Keeps borrowed GC string alive
 
   /**
       Get `domainDirname` field.
@@ -110,8 +136,14 @@ class IMContextInfo : StructWrap!(GtkIMContextInfo)
   */
   @property void domainDirname(string propval) nothrow
   {
-    (cast(GtkIMContextInfo*)this._cPtr).domainDirname = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("domainDirname"))
+      return;
+
+    _domainDirnameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkIMContextInfo*)this._cPtr).domainDirname = cast(const(char)*)_domainDirnameRef;
   }
+
+  private const(char)* _defaultLocalesRef; // Keeps borrowed GC string alive
 
   /**
       Get `defaultLocales` field.
@@ -131,6 +163,10 @@ class IMContextInfo : StructWrap!(GtkIMContextInfo)
   */
   @property void defaultLocales(string propval) nothrow
   {
-    (cast(GtkIMContextInfo*)this._cPtr).defaultLocales = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("defaultLocales"))
+      return;
+
+    _defaultLocalesRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkIMContextInfo*)this._cPtr).defaultLocales = cast(const(char)*)_defaultLocalesRef;
   }
 }

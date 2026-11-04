@@ -16,7 +16,7 @@ import gid.gid;
           reliably, so this event can not be guaranteed to provide useful
           information.
 */
-class EventVisibility : StructWrap!(GdkEventVisibility)
+class EventVisibility : StructWrap!(GdkEventVisibility, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_visibility.EventVisibility` wrap type.
@@ -39,6 +39,12 @@ class EventVisibility : StructWrap!(GdkEventVisibility)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -78,6 +84,9 @@ class EventVisibility : StructWrap!(GdkEventVisibility)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventVisibility*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

@@ -30,6 +30,12 @@ class AttrFontFeatures : StructWrap!(PangoAttrFontFeatures)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `attr` field.
       Returns: the common portion of the attribute
@@ -38,6 +44,8 @@ class AttrFontFeatures : StructWrap!(PangoAttrFontFeatures)
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontFeatures*)this._cPtr).attr);
   }
+
+  private const(char)* _featuresRef; // Keeps borrowed GC string alive
 
   /**
       Get `features` field.
@@ -55,7 +63,11 @@ class AttrFontFeatures : StructWrap!(PangoAttrFontFeatures)
   */
   @property void features(string propval) nothrow
   {
-    (cast(PangoAttrFontFeatures*)this._cPtr).features = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("features"))
+      return;
+
+    _featuresRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(PangoAttrFontFeatures*)this._cPtr).features = cast(char*)_featuresRef;
   }
 
   /**

@@ -19,7 +19,7 @@ import gid.gid;
     these, the scroll deltas can be obtained with
     [gdk.event.Event.getScrollDeltas].
 */
-class EventScroll : StructWrap!(GdkEventScroll)
+class EventScroll : StructWrap!(GdkEventScroll, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_scroll.EventScroll` wrap type.
@@ -70,6 +70,12 @@ class EventScroll : StructWrap!(GdkEventScroll)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.Scroll]).
@@ -107,6 +113,9 @@ class EventScroll : StructWrap!(GdkEventScroll)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventScroll*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -253,6 +262,9 @@ class EventScroll : StructWrap!(GdkEventScroll)
   */
   @property void device(gdk.device.Device propval) nothrow
   {
+    if (_refuseBorrowedStore("device"))
+      return;
+
     _deviceRef = propval;
     (cast(GdkEventScroll*)this._cPtr).device = propval ? cast(GdkDevice*)propval._cPtr(No.Dup) : null;
   }

@@ -12,7 +12,7 @@ import gid.gid;
 /**
     Generated during DND operations.
 */
-class EventDND : StructWrap!(GdkEventDND)
+class EventDND : StructWrap!(GdkEventDND, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_dnd.EventDND` wrap type.
@@ -44,6 +44,12 @@ class EventDND : StructWrap!(GdkEventDND)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -87,6 +93,9 @@ class EventDND : StructWrap!(GdkEventDND)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventDND*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -128,6 +137,9 @@ class EventDND : StructWrap!(GdkEventDND)
   */
   @property void context(gdk.drag_context.DragContext propval) nothrow
   {
+    if (_refuseBorrowedStore("context"))
+      return;
+
     _contextRef = propval;
     (cast(GdkEventDND*)this._cPtr).context = propval ? cast(GdkDragContext*)propval._cPtr(No.Dup) : null;
   }

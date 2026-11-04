@@ -36,6 +36,12 @@ class TargetPair : StructWrap!(GtkTargetPair)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `target` field.
       Returns: #GdkAtom representation of the target type

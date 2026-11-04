@@ -4,6 +4,18 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstaudio1/
 //!info capi https://gstreamer.freedesktop.org/documentation/audio/index.html
 
+// Map functions return a MapScope which unmaps the structure (explicit unmap or scope exit), the unmap function is
+// only used by the MapScope (unmapping a MapScope structure directly would unmap it twice)
+//!set record[AudioBuffer].function[map][gid-unmap] gst_audio_buffer_unmap
+//!set record[AudioBuffer].function[map][gid-map-source] gstbuffer
+//!set record[AudioBuffer].method[unmap][disable] 1
+
+// Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
+//!set function[buffer_add_audio_clipping_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_audio_level_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_get_audio_downmix_meta_for_channels].return-value[][gid-borrow] buffer
+//!set function[buffer_get_audio_level_meta].return-value[][gid-borrow] buffer
+
 //# Disable callbacks with arrays with sizes not described by parameters (FIXME)
 //!set callback[AudioFormatPack][disable] 1
 //!set callback[AudioFormatUnpack][disable] 1

@@ -18,6 +18,12 @@ class MemChunk : OpaqueWrap!(GMemChunk*, void, void)
   }
 
   /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** */
   void* alloc() nothrow
   {
     auto _retval = g_mem_chunk_alloc(cast(GMemChunk*)this._cPtr);

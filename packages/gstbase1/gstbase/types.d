@@ -44,7 +44,7 @@ alias TypeFindData = GstTypeFindData*;
     memory and resources allocated for it.
 
     Params:
-      data = the #GstCollectData that will be freed
+      data = the #GstCollectData that will be freed (borrowed, only valid during the callback, use `_dup` to keep a copy)
 */
 alias CollectDataDestroyNotify = void delegate(gstbase.collect_data.CollectData data);
 
@@ -55,7 +55,7 @@ alias CollectDataDestroyNotify = void delegate(gstbase.collect_data.CollectData 
 
     Params:
       pads = the #GstCollectPads that triggered the callback
-      data = the #GstCollectData of pad that has received the buffer
+      data = the #GstCollectData of pad that has received the buffer (borrowed, only valid during the callback, use `_dup` to keep a copy)
       buffer = the #GstBuffer
     Returns: [gst.types.FlowReturn.Ok] for success
 */
@@ -73,7 +73,7 @@ alias CollectPadsBufferFunction = gst.types.FlowReturn delegate(gstbase.collect_
 
     Params:
       pads = a #GstCollectPads
-      data = a #GstCollectData
+      data = a #GstCollectData (borrowed, only valid during the callback, use `_dup` to keep a copy)
       inbuffer = the input #GstBuffer
       outbuffer = the output #GstBuffer
     Returns: a #GstFlowReturn that corresponds to the result of clipping.
@@ -85,9 +85,9 @@ alias CollectPadsClipFunction = gst.types.FlowReturn delegate(gstbase.collect_pa
 
     Params:
       pads = the #GstCollectPads that is comparing the timestamps
-      data1 = the first #GstCollectData
+      data1 = the first #GstCollectData (borrowed, only valid during the callback, use `_dup` to keep a copy)
       timestamp1 = the first timestamp
-      data2 = the second #GstCollectData
+      data2 = the second #GstCollectData (borrowed, only valid during the callback, use `_dup` to keep a copy)
       timestamp2 = the second timestamp
     Returns: Integer less than zero when first timestamp is deemed older than the second one.
                Zero if the timestamps are deemed equally old.
@@ -103,7 +103,7 @@ alias CollectPadsCompareFunction = int delegate(gstbase.collect_pads.CollectPads
 
     Params:
       pads = the #GstCollectPads that triggered the callback
-      pad = the #GstPad that received an event
+      pad = the #GstPad that received an event (borrowed, only valid during the callback, use `_dup` to keep a copy)
       event = the #GstEvent received
     Returns: true if the pad could handle the event
 */
@@ -138,7 +138,7 @@ alias CollectPadsFunction = gst.types.FlowReturn delegate(gstbase.collect_pads.C
 
     Params:
       pads = the #GstCollectPads that triggered the callback
-      pad = the #GstPad that received an event
+      pad = the #GstPad that received an event (borrowed, only valid during the callback, use `_dup` to keep a copy)
       query = the #GstEvent received
     Returns: true if the pad could handle the event
 */

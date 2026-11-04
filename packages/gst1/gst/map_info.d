@@ -38,6 +38,12 @@ class MapInfo : StructWrap!(GstMapInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gst.memory.Memory _memoryRef; // Keeps borrowed field value alive
 
   /**
@@ -56,6 +62,9 @@ class MapInfo : StructWrap!(GstMapInfo)
   */
   @property void memory(gst.memory.Memory propval) nothrow
   {
+    if (_refuseBorrowedStore("memory"))
+      return;
+
     _memoryRef = propval;
     (cast(GstMapInfo*)this._cPtr).memory = propval ? cast(GstMemory*)propval._cPtr(No.Dup) : null;
   }

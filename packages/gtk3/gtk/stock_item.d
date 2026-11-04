@@ -35,6 +35,14 @@ class StockItem : StructWrap!(GtkStockItem)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _stockIdRef; // Keeps borrowed GC string alive
+
   /**
       Get `stockId` field.
       Returns: Identifier.
@@ -51,8 +59,14 @@ class StockItem : StructWrap!(GtkStockItem)
   */
   @property void stockId(string propval) nothrow
   {
-    (cast(GtkStockItem*)this._cPtr).stockId = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("stockId"))
+      return;
+
+    _stockIdRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkStockItem*)this._cPtr).stockId = cast(char*)_stockIdRef;
   }
+
+  private const(char)* _labelRef; // Keeps borrowed GC string alive
 
   /**
       Get `label` field.
@@ -70,7 +84,11 @@ class StockItem : StructWrap!(GtkStockItem)
   */
   @property void label(string propval) nothrow
   {
-    (cast(GtkStockItem*)this._cPtr).label = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("label"))
+      return;
+
+    _labelRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkStockItem*)this._cPtr).label = cast(char*)_labelRef;
   }
 
   /**
@@ -111,6 +129,8 @@ class StockItem : StructWrap!(GtkStockItem)
     (cast(GtkStockItem*)this._cPtr).keyval = propval;
   }
 
+  private const(char)* _translationDomainRef; // Keeps borrowed GC string alive
+
   /**
       Get `translationDomain` field.
       Returns: Translation domain of the menu or toolbar item
@@ -127,6 +147,10 @@ class StockItem : StructWrap!(GtkStockItem)
   */
   @property void translationDomain(string propval) nothrow
   {
-    (cast(GtkStockItem*)this._cPtr).translationDomain = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("translationDomain"))
+      return;
+
+    _translationDomainRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkStockItem*)this._cPtr).translationDomain = cast(char*)_translationDomainRef;
   }
 }

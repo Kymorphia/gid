@@ -40,6 +40,15 @@ class RTCPBuffer : StructWrap!(GstRTCPBuffer)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** Scope of a structure mapped by [gstrtp.rtcpbuffer.RTCPBuffer.map] (see [gid.wrap.MapScope]) */
+  alias MapScope = gid.wrap.MapScope!(gstrtp.rtcpbuffer.RTCPBuffer, gst_rtcp_buffer_unmap, gst.buffer.Buffer);
+
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
 
   /** */
@@ -51,6 +60,9 @@ class RTCPBuffer : StructWrap!(GstRTCPBuffer)
   /** */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstRTCPBuffer*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
@@ -99,34 +111,21 @@ class RTCPBuffer : StructWrap!(GstRTCPBuffer)
   }
 
   /**
-      Finish rtcp after being constructed. This function is usually called
-      after [gstrtp.rtcpbuffer.RTCPBuffer.map] and after adding the RTCP items to the new buffer.
-      
-      The function adjusts the size of rtcp with the total length of all the
-      added packets.
-      Returns: 
-  */
-  bool unmap() nothrow
-  {
-    bool _retval;
-    _retval = cast(bool)gst_rtcp_buffer_unmap(cast(GstRTCPBuffer*)this._cPtr);
-    return _retval;
-  }
-
-  /**
       Open buffer for reading or writing, depending on flags. The resulting RTCP
       buffer state is stored in rtcp.
   
       Params:
         buffer = a buffer with an RTCP packet
         flags = flags for the mapping
-        rtcp = resulting #GstRTCPBuffer
+        rtcp = resulting #GstRTCPBuffer (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `RTCPBuffer.MapScope rtcp;`)
       Returns: 
   */
-  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, gstrtp.rtcpbuffer.RTCPBuffer rtcp) nothrow
+  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, out gstrtp.rtcpbuffer.RTCPBuffer.MapScope rtcp) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gst_rtcp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, rtcp ? cast(GstRTCPBuffer*)rtcp._cPtr : null);
+    auto _rtcp = cast(GstRTCPBuffer*)rtcp._begin(buffer);
+    _retval = cast(bool)gst_rtcp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, _rtcp);
+    rtcp._mapped = _retval;
     return _retval;
   }
 

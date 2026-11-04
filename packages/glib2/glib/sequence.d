@@ -21,6 +21,12 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Adds a new item to the end of seq.
   

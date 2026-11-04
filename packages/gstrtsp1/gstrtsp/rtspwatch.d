@@ -23,6 +23,12 @@ class RTSPWatch : OpaqueWrap!(GstRTSPWatch*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Adds a #GstRTSPWatch to a context so that it will be executed within that context.
   

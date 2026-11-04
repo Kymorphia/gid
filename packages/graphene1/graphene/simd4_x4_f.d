@@ -22,4 +22,10 @@ class Simd4X4F : StructWrap!(graphene_simd4x4f_t)
   {
     super(ptr, take);
   }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
 }

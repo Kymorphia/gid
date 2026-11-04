@@ -17,6 +17,12 @@ class DebugMessage : OpaqueWrap!(GstDebugMessage*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Gets the string representation of a #GstDebugMessage. This function is used
       in debug handlers to extract the message.

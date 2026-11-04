@@ -37,6 +37,15 @@ class RTPBuffer : StructWrap!(GstRTPBuffer)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** Scope of a structure mapped by [gstrtp.rtpbuffer.RTPBuffer.map] (see [gid.wrap.MapScope]) */
+  alias MapScope = gid.wrap.MapScope!(gstrtp.rtpbuffer.RTPBuffer, gst_rtp_buffer_unmap, gst.buffer.Buffer);
+
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
 
   /**
@@ -55,6 +64,9 @@ class RTPBuffer : StructWrap!(GstRTPBuffer)
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstRTPBuffer*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
@@ -569,14 +581,6 @@ class RTPBuffer : StructWrap!(GstRTPBuffer)
   }
 
   /**
-      Unmap rtp previously mapped with [gstrtp.rtpbuffer.RTPBuffer.map].
-  */
-  void unmap() nothrow
-  {
-    gst_rtp_buffer_unmap(cast(GstRTPBuffer*)this._cPtr);
-  }
-
-  /**
       Allocate enough data in buffer to hold an RTP packet with csrc_count CSRCs,
       a payload length of payload_len and padding of pad_len.
       buffer must be writable and all previous memory in buffer will be freed.
@@ -728,15 +732,15 @@ class RTPBuffer : StructWrap!(GstRTPBuffer)
       Params:
         buffer = a #GstBuffer
         flags = #GstMapFlags
-        rtp = a #GstRTPBuffer
+        rtp = a #GstRTPBuffer (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `RTPBuffer.MapScope rtp;`)
       Returns: true if buffer could be mapped.
   */
-  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, out gstrtp.rtpbuffer.RTPBuffer rtp) nothrow
+  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, out gstrtp.rtpbuffer.RTPBuffer.MapScope rtp) nothrow
   {
     bool _retval;
-    GstRTPBuffer _rtp;
-    _retval = cast(bool)gst_rtp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, &_rtp);
-    rtp = new gstrtp.rtpbuffer.RTPBuffer(cast(void*)&_rtp, No.Take);
+    auto _rtp = cast(GstRTPBuffer*)rtp._begin(buffer);
+    _retval = cast(bool)gst_rtp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, _rtp);
+    rtp._mapped = _retval;
     return _retval;
   }
 

@@ -113,7 +113,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   {
     const(GskRoundedRect)* _cretval;
     _cretval = gsk_inset_shadow_node_get_outline(cast(const(GskRenderNode)*)this._cPtr);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 

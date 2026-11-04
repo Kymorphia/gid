@@ -39,6 +39,12 @@ class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `contains` field.
       Returns: Flags indicating which of the following fields need
@@ -60,6 +66,8 @@ class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
     (cast(GtkFileFilterInfo*)this._cPtr).contains = cast(GtkFileFilterFlags)propval;
   }
 
+  private const(char)* _filenameRef; // Keeps borrowed GC string alive
+
   /**
       Get `filename` field.
       Returns: the filename of the file being tested
@@ -76,8 +84,14 @@ class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
   */
   @property void filename(string propval) nothrow
   {
-    (cast(GtkFileFilterInfo*)this._cPtr).filename = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("filename"))
+      return;
+
+    _filenameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkFileFilterInfo*)this._cPtr).filename = cast(const(char)*)_filenameRef;
   }
+
+  private const(char)* _uriRef; // Keeps borrowed GC string alive
 
   /**
       Get `uri` field.
@@ -95,8 +109,14 @@ class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
   */
   @property void uri(string propval) nothrow
   {
-    (cast(GtkFileFilterInfo*)this._cPtr).uri = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("uri"))
+      return;
+
+    _uriRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkFileFilterInfo*)this._cPtr).uri = cast(const(char)*)_uriRef;
   }
+
+  private const(char)* _displayNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `displayName` field.
@@ -116,8 +136,14 @@ class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
   */
   @property void displayName(string propval) nothrow
   {
-    (cast(GtkFileFilterInfo*)this._cPtr).displayName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("displayName"))
+      return;
+
+    _displayNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkFileFilterInfo*)this._cPtr).displayName = cast(const(char)*)_displayNameRef;
   }
+
+  private const(char)* _mimeTypeRef; // Keeps borrowed GC string alive
 
   /**
       Get `mimeType` field.
@@ -135,6 +161,10 @@ class FileFilterInfo : StructWrap!(GtkFileFilterInfo)
   */
   @property void mimeType(string propval) nothrow
   {
-    (cast(GtkFileFilterInfo*)this._cPtr).mimeType = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("mimeType"))
+      return;
+
+    _mimeTypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkFileFilterInfo*)this._cPtr).mimeType = cast(const(char)*)_mimeTypeRef;
   }
 }

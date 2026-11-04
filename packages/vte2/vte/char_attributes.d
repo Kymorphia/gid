@@ -22,4 +22,10 @@ class CharAttributes : StructWrap!(VteCharAttributes)
   {
     super(ptr, take);
   }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
 }

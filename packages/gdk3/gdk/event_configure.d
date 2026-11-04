@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated when a window size or position has changed.
 */
-class EventConfigure : StructWrap!(GdkEventConfigure)
+class EventConfigure : StructWrap!(GdkEventConfigure, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_configure.EventConfigure` wrap type.
@@ -39,6 +39,12 @@ class EventConfigure : StructWrap!(GdkEventConfigure)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -78,6 +84,9 @@ class EventConfigure : StructWrap!(GdkEventConfigure)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventConfigure*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

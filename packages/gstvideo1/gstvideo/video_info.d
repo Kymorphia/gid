@@ -42,7 +42,7 @@ class VideoInfo : gobject.boxed.BoxedWrap!(gst_video_info_get_type)
   */
   @property gstvideo.video_format_info.VideoFormatInfo finfo() nothrow
   {
-    return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)this._cPtr).finfo, No.Take);
+    return (cast(GstVideoInfo*)this._cPtr).finfo ? new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)this._cPtr).finfo, this) : null;
   }
 
   /**

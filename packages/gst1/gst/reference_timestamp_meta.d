@@ -65,13 +65,19 @@ class ReferenceTimestampMeta : StructWrap!(GstReferenceTimestampMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `parent` field.
       Returns: the parent #GstMeta structure
   */
   @property gst.meta.Meta parent() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstReferenceTimestampMeta*)this._cPtr).parent, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstReferenceTimestampMeta*)this._cPtr).parent, this);
   }
 
   private gst.caps.Caps _referenceRef; // Keeps borrowed field value alive
@@ -92,6 +98,9 @@ class ReferenceTimestampMeta : StructWrap!(GstReferenceTimestampMeta)
   */
   @property void reference(gst.caps.Caps propval) nothrow
   {
+    if (_refuseBorrowedStore("reference"))
+      return;
+
     _referenceRef = propval;
     (cast(GstReferenceTimestampMeta*)this._cPtr).reference = propval ? cast(GstCaps*)propval._cPtr(No.Dup) : null;
   }
@@ -152,6 +161,9 @@ class ReferenceTimestampMeta : StructWrap!(GstReferenceTimestampMeta)
   */
   @property void info(gst.structure.Structure propval) nothrow
   {
+    if (_refuseBorrowedStore("info"))
+      return;
+
     _infoRef = propval;
     (cast(GstReferenceTimestampMeta*)this._cPtr).info = propval ? cast(GstStructure*)propval._cPtr(No.Dup) : null;
   }

@@ -799,7 +799,7 @@ class Clipboard : gobject.object.ObjectWrap
   
           `void callback(gdk.event_owner_change.EventOwnerChange event, gtk.clipboard.Clipboard clipboard)`
   
-          `event` the GdkEventOwnerChange event (optional)
+          `event` the GdkEventOwnerChange event (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `clipboard` the instance the signal is connected to (optional)
   
@@ -820,7 +820,10 @@ class Clipboard : gobject.object.ObjectWrap
       Tuple!(Parameters!T) _paramTuple;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_owner_change.EventOwnerChange(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);

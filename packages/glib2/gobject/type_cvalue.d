@@ -34,6 +34,12 @@ class TypeCValue : StructWrap!(GTypeCValue)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `vInt` field.
       Returns: the field for holding integer values

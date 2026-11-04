@@ -56,7 +56,7 @@ gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer b
 {
   GstAncillaryMeta* _cretval;
   _cretval = gst_buffer_add_ancillary_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstvideo.ancillary_meta.AncillaryMeta(cast(GstAncillaryMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.ancillary_meta.AncillaryMeta(cast(GstAncillaryMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -75,7 +75,7 @@ gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buff
 {
   GstVideoAFDMeta* _cretval;
   _cretval = gst_buffer_add_video_afd_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, field, spec, afd);
-  auto _retval = _cretval ? new gstvideo.video_afdmeta.VideoAFDMeta(cast(GstVideoAFDMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_afdmeta.VideoAFDMeta(cast(GstVideoAFDMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -91,7 +91,7 @@ gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAd
 {
   GstVideoAffineTransformationMeta* _cretval;
   _cretval = gst_buffer_add_video_affine_transformation_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta(cast(GstVideoAffineTransformationMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta(cast(GstVideoAffineTransformationMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -121,7 +121,7 @@ gstvideo.video_bar_meta.VideoBarMeta bufferAddVideoBarMeta(gst.buffer.Buffer buf
 {
   GstVideoBarMeta* _cretval;
   _cretval = gst_buffer_add_video_bar_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, field, isLetterbox, barData1, barData2);
-  auto _retval = _cretval ? new gstvideo.video_bar_meta.VideoBarMeta(cast(GstVideoBarMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_bar_meta.VideoBarMeta(cast(GstVideoBarMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -144,7 +144,7 @@ gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffe
 
   auto _data = cast(ubyte*)data.ptr;
   _cretval = gst_buffer_add_video_caption_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, captionType, _data, _size);
-  auto _retval = _cretval ? new gstvideo.video_caption_meta.VideoCaptionMeta(cast(GstVideoCaptionMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_caption_meta.VideoCaptionMeta(cast(GstVideoCaptionMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -161,7 +161,7 @@ gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta
 {
   GstVideoCodecAlphaMeta* _cretval;
   _cretval = gst_buffer_add_video_codec_alpha_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, alphaBuffer ? cast(GstBuffer*)alphaBuffer._cPtr(Yes.Dup) : null);
-  auto _retval = _cretval ? new gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta(cast(GstVideoCodecAlphaMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta(cast(GstVideoCodecAlphaMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -184,7 +184,7 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvi
 {
   GstVideoMeta* _cretval;
   _cretval = gst_buffer_add_video_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, format, width, height);
-  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -210,7 +210,7 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, g
   assert(!stride || stride.length == 4);
   auto _stride = cast(int*)stride.ptr;
   _cretval = gst_buffer_add_video_meta_full(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, format, width, height, nPlanes, _offset, _stride);
-  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -228,7 +228,7 @@ gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVid
 {
   GstVideoOverlayCompositionMeta* _cretval;
   _cretval = gst_buffer_add_video_overlay_composition_meta(buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, comp ? cast(GstVideoOverlayComposition*)comp._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta(cast(GstVideoOverlayCompositionMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta(cast(GstVideoOverlayCompositionMeta*)_cretval, buf) : null;
   return _retval;
 }
 
@@ -250,7 +250,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
   GstVideoRegionOfInterestMeta* _cretval;
   const(char)* _roiType = roiType.toCString!(No.Malloc, No.Nullable);
   _cretval = gst_buffer_add_video_region_of_interest_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _roiType, x, y, w, h);
-  auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -271,7 +271,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
 {
   GstVideoRegionOfInterestMeta* _cretval;
   _cretval = gst_buffer_add_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, roiType, x, y, w, h);
-  auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -296,7 +296,7 @@ gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta b
 
   auto _data = cast(ubyte*)data.ptr;
   _cretval = gst_buffer_add_video_sei_user_data_unregistered_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _uuid, _data, _size);
-  auto _retval = _cretval ? new gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta(cast(GstVideoSEIUserDataUnregisteredMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta(cast(GstVideoSEIUserDataUnregisteredMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -314,7 +314,7 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.b
 {
   GstVideoTimeCodeMeta* _cretval;
   _cretval = gst_buffer_add_video_time_code_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, tc ? cast(const(GstVideoTimeCode)*)tc._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstvideo.video_time_code_meta.VideoTimeCodeMeta(cast(GstVideoTimeCodeMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_time_code_meta.VideoTimeCodeMeta(cast(GstVideoTimeCodeMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -340,7 +340,7 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(g
 {
   GstVideoTimeCodeMeta* _cretval;
   _cretval = gst_buffer_add_video_time_code_meta_full(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam._cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
-  auto _retval = _cretval ? new gstvideo.video_time_code_meta.VideoTimeCodeMeta(cast(GstVideoTimeCodeMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_time_code_meta.VideoTimeCodeMeta(cast(GstVideoTimeCodeMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -359,7 +359,7 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer) nothr
 {
   GstVideoMeta* _cretval;
   _cretval = gst_buffer_get_video_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -379,7 +379,7 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int
 {
   GstVideoMeta* _cretval;
   _cretval = gst_buffer_get_video_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id);
-  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -399,7 +399,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
 {
   GstVideoRegionOfInterestMeta* _cretval;
   _cretval = gst_buffer_get_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id);
-  auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval, buffer) : null;
   return _retval;
 }
 

@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated when the pointer enters or leaves a window.
 */
-class EventCrossing : StructWrap!(GdkEventCrossing)
+class EventCrossing : StructWrap!(GdkEventCrossing, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_crossing.EventCrossing` wrap type.
@@ -61,6 +61,12 @@ class EventCrossing : StructWrap!(GdkEventCrossing)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.EnterNotify] or [gdk.types.EventType.LeaveNotify]).
@@ -98,6 +104,9 @@ class EventCrossing : StructWrap!(GdkEventCrossing)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventCrossing*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -139,6 +148,9 @@ class EventCrossing : StructWrap!(GdkEventCrossing)
   */
   @property void subwindow(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("subwindow"))
+      return;
+
     _subwindowRef = propval;
     (cast(GdkEventCrossing*)this._cPtr).subwindow = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

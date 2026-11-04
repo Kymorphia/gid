@@ -306,10 +306,11 @@ class CollectPads : gst.object.ObjectWrap
     {
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsBufferFunction*)userData;
+      auto _data = data ? new gstbase.collect_data.CollectData(cast(void*)data, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _data, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
       }
       catch (Exception e)
       {
@@ -337,11 +338,12 @@ class CollectPads : gst.object.ObjectWrap
     {
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsClipFunction*)userData;
+      auto _data = data ? new gstbase.collect_data.CollectData(cast(void*)data, null) : null;
       gst.buffer.Buffer _outbuffer;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _data, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
       }
       catch (Exception e)
       {
@@ -371,10 +373,12 @@ class CollectPads : gst.object.ObjectWrap
     {
       int _retval;
       auto _dlg = cast(gstbase.types.CollectPadsCompareFunction*)userData;
+      auto _data1 = data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, null) : null;
+      auto _data2 = data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, null) : null;
 
       try
       {
-        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, No.Take) : null, timestamp1, data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, No.Take) : null, timestamp2);
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _data1, timestamp1, _data2, timestamp2);
       }
       catch (Exception e)
       {
@@ -406,10 +410,11 @@ class CollectPads : gst.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsEventFunction*)userData;
+      auto _pad = pad ? new gstbase.collect_data.CollectData(cast(void*)pad, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _pad, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
       }
       catch (Exception e)
       {
@@ -528,10 +533,11 @@ class CollectPads : gst.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsQueryFunction*)userData;
+      auto _pad = pad ? new gstbase.collect_data.CollectData(cast(void*)pad, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _pad, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
       }
       catch (Exception e)
       {

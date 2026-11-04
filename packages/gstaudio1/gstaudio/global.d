@@ -398,7 +398,7 @@ gstaudio.audio_clipping_meta.AudioClippingMeta bufferAddAudioClippingMeta(gst.bu
 {
   GstAudioClippingMeta* _cretval;
   _cretval = gst_buffer_add_audio_clipping_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, format, start, end);
-  auto _retval = _cretval ? new gstaudio.audio_clipping_meta.AudioClippingMeta(cast(GstAudioClippingMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstaudio.audio_clipping_meta.AudioClippingMeta(cast(GstAudioClippingMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -415,7 +415,7 @@ gstaudio.audio_level_meta.AudioLevelMeta bufferAddAudioLevelMeta(gst.buffer.Buff
 {
   GstAudioLevelMeta* _cretval;
   _cretval = gst_buffer_add_audio_level_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, level, voiceActivity);
-  auto _retval = _cretval ? new gstaudio.audio_level_meta.AudioLevelMeta(cast(GstAudioLevelMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstaudio.audio_level_meta.AudioLevelMeta(cast(GstAudioLevelMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -438,7 +438,7 @@ gstaudio.audio_downmix_meta.AudioDownmixMeta bufferGetAudioDownmixMetaForChannel
 
   auto _toPosition = cast(GstAudioChannelPosition*)toPosition.ptr;
   _cretval = gst_buffer_get_audio_downmix_meta_for_channels(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _toPosition, _toChannels);
-  auto _retval = _cretval ? new gstaudio.audio_downmix_meta.AudioDownmixMeta(cast(GstAudioDownmixMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstaudio.audio_downmix_meta.AudioDownmixMeta(cast(GstAudioDownmixMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -454,7 +454,7 @@ gstaudio.audio_level_meta.AudioLevelMeta bufferGetAudioLevelMeta(gst.buffer.Buff
 {
   GstAudioLevelMeta* _cretval;
   _cretval = gst_buffer_get_audio_level_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstaudio.audio_level_meta.AudioLevelMeta(cast(GstAudioLevelMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstaudio.audio_level_meta.AudioLevelMeta(cast(GstAudioLevelMeta*)_cretval, buffer) : null;
   return _retval;
 }
 

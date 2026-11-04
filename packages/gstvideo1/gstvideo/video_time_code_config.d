@@ -38,6 +38,12 @@ class VideoTimeCodeConfig : StructWrap!(GstVideoTimeCodeConfig)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `fpsN` field.
       Returns: Numerator of the frame rate
@@ -113,6 +119,9 @@ class VideoTimeCodeConfig : StructWrap!(GstVideoTimeCodeConfig)
   */
   @property void latestDailyJam(glib.date_time.DateTime propval) nothrow
   {
+    if (_refuseBorrowedStore("latestDailyJam"))
+      return;
+
     _latestDailyJamRef = propval;
     (cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam = propval ? cast(GDateTime*)propval._cPtr(No.Dup) : null;
   }

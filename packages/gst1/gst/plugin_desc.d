@@ -57,6 +57,12 @@ class PluginDesc : StructWrap!(GstPluginDesc)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `majorVersion` field.
       Returns: the major version number of core that plugin was compiled for
@@ -95,6 +101,8 @@ class PluginDesc : StructWrap!(GstPluginDesc)
     (cast(GstPluginDesc*)this._cPtr).minorVersion = propval;
   }
 
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: a unique name of the plugin
@@ -111,8 +119,14 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).name = cast(const(char)*)_nameRef;
   }
+
+  private const(char)* _descriptionRef; // Keeps borrowed GC string alive
 
   /**
       Get `description` field.
@@ -130,7 +144,11 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void description(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("description"))
+      return;
+
+    _descriptionRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).description = cast(const(char)*)_descriptionRef;
   }
 
   /**
@@ -153,6 +171,8 @@ class PluginDesc : StructWrap!(GstPluginDesc)
     (cast(GstPluginDesc*)this._cPtr).pluginInit = propval;
   }
 
+  private const(char)* _version_Ref; // Keeps borrowed GC string alive
+
   /**
       Get `version_` field.
       Returns: version of the plugin
@@ -169,8 +189,14 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void version_(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).version_ = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("version_"))
+      return;
+
+    _version_Ref = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).version_ = cast(const(char)*)_version_Ref;
   }
+
+  private const(char)* _licenseRef; // Keeps borrowed GC string alive
 
   /**
       Get `license` field.
@@ -188,8 +214,14 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void license(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).license = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("license"))
+      return;
+
+    _licenseRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).license = cast(const(char)*)_licenseRef;
   }
+
+  private const(char)* _sourceRef; // Keeps borrowed GC string alive
 
   /**
       Get `source` field.
@@ -207,8 +239,14 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void source(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).source = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("source"))
+      return;
+
+    _sourceRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).source = cast(const(char)*)_sourceRef;
   }
+
+  private const(char)* _package_Ref; // Keeps borrowed GC string alive
 
   /**
       Get `package_` field.
@@ -226,8 +264,14 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void package_(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).package_ = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("package_"))
+      return;
+
+    _package_Ref = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).package_ = cast(const(char)*)_package_Ref;
   }
+
+  private const(char)* _originRef; // Keeps borrowed GC string alive
 
   /**
       Get `origin` field.
@@ -245,8 +289,14 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void origin(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).origin = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("origin"))
+      return;
+
+    _originRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).origin = cast(const(char)*)_originRef;
   }
+
+  private const(char)* _releaseDatetimeRef; // Keeps borrowed GC string alive
 
   /**
       Get `releaseDatetime` field.
@@ -274,6 +324,10 @@ class PluginDesc : StructWrap!(GstPluginDesc)
   */
   @property void releaseDatetime(string propval) nothrow
   {
-    (cast(GstPluginDesc*)this._cPtr).releaseDatetime = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("releaseDatetime"))
+      return;
+
+    _releaseDatetimeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).releaseDatetime = cast(const(char)*)_releaseDatetimeRef;
   }
 }

@@ -4,6 +4,12 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstrtsp1/
 //!info capi https://gstreamer.freedesktop.org/documentation/rtsplib/index.html
 
+// Disabled: fill a structure with C allocated members (freed by gst_rtsp_transport_free), which a D copy would leak
+// or double free (needs an owned C allocated wrapper without a copy function)
+//!set record[RTSPTransport].function[new][disable] 1
+//!set record[RTSPTransport].function[init][disable] 1
+//!set record[RTSPTransport].function[parse][disable] 1
+
 //# Seems to use the wrong type (gchar**), but there are no docs, so not positive..
 //!set interface[RTSPExtension].method[get_transports].parameters.parameter[transport].type[][c:type] gchar*
 

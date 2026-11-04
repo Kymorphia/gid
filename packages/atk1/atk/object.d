@@ -1074,7 +1074,7 @@ class ObjectWrap : gobject.object.ObjectWrap
           `void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectWrap objectWrap)`
   
           `arg1` an #AtkPropertyValues containing the new
-            value of the property which changed. (optional)
+            value of the property which changed. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `objectWrap` the instance the signal is connected to (optional)
   
@@ -1095,7 +1095,10 @@ class ObjectWrap : gobject.object.ObjectWrap
       Tuple!(Parameters!T) _paramTuple;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _arg1 = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _arg1 ? new atk.property_values.PropertyValues(_arg1, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);

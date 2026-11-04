@@ -17,6 +17,12 @@ class AudioQuantize : OpaqueWrap!(GstAudioQuantize*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Reset quant to the state is was when created, clearing any
       history it might have.

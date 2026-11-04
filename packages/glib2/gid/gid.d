@@ -301,7 +301,7 @@ ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes) no
 * Returns: D array of the given type
 */
 T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray) nothrow
-if (containerTypeIsSupported!T && !isTypeWrap!T) // Wrap structures are stored inline in GArray, not supported
+if (containerTypeIsSupported!T)
 {
   T[] a;
 
@@ -313,8 +313,11 @@ if (containerTypeIsSupported!T && !isTypeWrap!T) // Wrap structures are stored i
 
   a.length = gArray.len;
 
-  static if (!isTypeSimple!T && !is(T == void*) && !is(T == const(void)*))
+  static if (isTypeWrap!T) // Wrap structures are stored inline, the D objects copy them
     foreach (i; 0 .. gArray.len)
+    a[i] = new T(cast(void*)&gArray.data[i * containerTypeSize!T], No.Take);
+  else static if (!isTypeSimple!T && !is(T == void*) && !is(T == const(void)*))
+  foreach (i; 0 .. gArray.len)
     a[i] = cToD!T((cast(void**)gArray.data)[i]);
   else
     a[0 .. $] = (cast(T*)gArray.data)[0 .. gArray.len];
@@ -495,11 +498,20 @@ GBytes* gBytesFromD(ubyte[] a) nothrow
 * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
 */
 GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a) nothrow
-if (containerTypeIsSupported!T && !isTypeWrap!T) // Wrap structures are stored inline in GArray, not supported
+if (containerTypeIsSupported!T)
 {
-  auto gArray = g_array_sized_new(zeroTerminated, false, containerTypeSize!T, cast(uint)a.length);
+  // Wrap structures are cleared, so that null D objects result in zeroed structures
+  auto gArray = g_array_sized_new(zeroTerminated, isTypeWrap!T, containerTypeSize!T, cast(uint)a.length);
 
-  static if (!isTypeSimple!T && !is(T == void*) && !is(T == const(void)*))
+  static if (isTypeWrap!T) // Wrap structures are stored inline as shallow copies (pointer fields are borrowed)
+  {
+    g_array_set_size(gArray, cast(uint)a.length);
+
+    foreach (i; 0 .. a.length)
+      if (a[i])
+      *cast(typeof(T._cInstance)*)&gArray.data[i * containerTypeSize!T] = *cast(typeof(T._cInstance)*)a[i]._cPtr;
+  }
+  else static if (!isTypeSimple!T && !is(T == void*) && !is(T == const(void)*))
   {
     extern(C) void clearFunc(void* elem) nothrow
     {
@@ -735,6 +747,8 @@ if (containerTypeIsSupported!T)
 {
   static if (isTypeSimple!T)
     return T.sizeof;
+  else static if (isTypeWrap!T) // Wrap structures are stored inline (GArray)
+  return typeof(T._cInstance).sizeof;
   else
     return (void*).sizeof;
 }

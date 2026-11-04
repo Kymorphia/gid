@@ -52,7 +52,7 @@ class ShadowNode : gsk.render_node.RenderNode
 
     auto _shadows_arr = new GskShadow[](shadows.length);
     auto _shadows = _shadows_arr.ptr;
-    foreach (i, obj; shadows) _shadows[i] = obj._cInstance;
+    foreach (i, obj; shadows) _shadows[i] = *cast(GskShadow*)obj._cPtr;
     _cretval = gsk_shadow_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, _shadows, _nShadows);
     this(_cretval, Yes.Take);
   }

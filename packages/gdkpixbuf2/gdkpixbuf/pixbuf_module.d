@@ -93,6 +93,14 @@ class PixbufModule : StructWrap!(GdkPixbufModule)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _moduleNameRef; // Keeps borrowed GC string alive
+
   /**
       Get `moduleName` field.
       Returns: the name of the module, usually the same as the
@@ -111,8 +119,14 @@ class PixbufModule : StructWrap!(GdkPixbufModule)
   */
   @property void moduleName(string propval) nothrow
   {
-    (cast(GdkPixbufModule*)this._cPtr).moduleName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("moduleName"))
+      return;
+
+    _moduleNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModule*)this._cPtr).moduleName = cast(char*)_moduleNameRef;
   }
+
+  private const(char)* _modulePathRef; // Keeps borrowed GC string alive
 
   /**
       Get `modulePath` field.
@@ -130,7 +144,11 @@ class PixbufModule : StructWrap!(GdkPixbufModule)
   */
   @property void modulePath(string propval) nothrow
   {
-    (cast(GdkPixbufModule*)this._cPtr).modulePath = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("modulePath"))
+      return;
+
+    _modulePathRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModule*)this._cPtr).modulePath = cast(char*)_modulePathRef;
   }
 
   /**
@@ -160,6 +178,9 @@ class PixbufModule : StructWrap!(GdkPixbufModule)
   */
   @property void info(gdkpixbuf.pixbuf_format.PixbufFormat propval) nothrow
   {
+    if (_refuseBorrowedStore("info"))
+      return;
+
     _infoRef = propval;
     (cast(GdkPixbufModule*)this._cPtr).info = propval ? cast(GdkPixbufFormat*)propval._cPtr(No.Dup) : null;
   }

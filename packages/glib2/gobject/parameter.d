@@ -32,6 +32,14 @@ class Parameter : StructWrap!(GParameter)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: the parameter name
@@ -48,7 +56,11 @@ class Parameter : StructWrap!(GParameter)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GParameter*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GParameter*)this._cPtr).name = cast(const(char)*)_nameRef;
   }
 
   /**

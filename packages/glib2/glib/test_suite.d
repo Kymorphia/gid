@@ -19,6 +19,12 @@ class TestSuite : OpaqueWrap!(GTestSuite*, g_test_suite_free, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Adds test_case to suite.
   

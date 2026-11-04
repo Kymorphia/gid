@@ -46,6 +46,12 @@ class VideoMetaTransformMatrix : StructWrap!(GstVideoMetaTransformMatrix)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gstvideo.video_info.VideoInfo _inInfoRef; // Keeps borrowed field value alive
 
   /**
@@ -64,6 +70,9 @@ class VideoMetaTransformMatrix : StructWrap!(GstVideoMetaTransformMatrix)
   */
   @property void inInfo(gstvideo.video_info.VideoInfo propval) nothrow
   {
+    if (_refuseBorrowedStore("inInfo"))
+      return;
+
     _inInfoRef = propval;
     (cast(GstVideoMetaTransformMatrix*)this._cPtr).inInfo = propval ? cast(const(GstVideoInfo)*)propval._cPtr(No.Dup) : null;
   }
@@ -105,6 +114,9 @@ class VideoMetaTransformMatrix : StructWrap!(GstVideoMetaTransformMatrix)
   */
   @property void outInfo(gstvideo.video_info.VideoInfo propval) nothrow
   {
+    if (_refuseBorrowedStore("outInfo"))
+      return;
+
     _outInfoRef = propval;
     (cast(GstVideoMetaTransformMatrix*)this._cPtr).outInfo = propval ? cast(const(GstVideoInfo)*)propval._cPtr(No.Dup) : null;
   }

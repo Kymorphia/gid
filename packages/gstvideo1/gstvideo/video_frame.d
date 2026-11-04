@@ -36,6 +36,15 @@ class VideoFrame : StructWrap!(GstVideoFrame)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** Scope of a structure mapped by [gstvideo.video_frame.VideoFrame.map] (see [gid.wrap.MapScope]) */
+  alias MapScope = gid.wrap.MapScope!(gstvideo.video_frame.VideoFrame, gst_video_frame_unmap, gst.buffer.Buffer);
+
   /**
       Get `info` field.
       Returns: the #GstVideoInfo
@@ -82,6 +91,9 @@ class VideoFrame : StructWrap!(GstVideoFrame)
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstVideoFrame*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }
@@ -143,14 +155,6 @@ class VideoFrame : StructWrap!(GstVideoFrame)
   }
 
   /**
-      Unmap the memory previously mapped with gst_video_frame_map.
-  */
-  void unmap() nothrow
-  {
-    gst_video_frame_unmap(cast(GstVideoFrame*)this._cPtr);
-  }
-
-  /**
       Use info and buffer to fill in the values of frame. frame is usually
       allocated on the stack, and you will pass the address to the #GstVideoFrame
       structure allocated on the stack; [gstvideo.video_frame.VideoFrame.map] will then fill in
@@ -196,18 +200,18 @@ class VideoFrame : StructWrap!(GstVideoFrame)
       memory chunks for you.
   
       Params:
-        frame = pointer to #GstVideoFrame
+        frame = pointer to #GstVideoFrame (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `VideoFrame.MapScope frame;`)
         info = a #GstVideoInfo
         buffer = the buffer to map
         flags = #GstMapFlags
       Returns: true on success.
   */
-  static bool map(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, gst.types.MapFlags flags) nothrow
+  static bool map(out gstvideo.video_frame.VideoFrame.MapScope frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
-    GstVideoFrame _frame;
-    _retval = cast(bool)gst_video_frame_map(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags);
-    frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame, No.Take);
+    auto _frame = cast(GstVideoFrame*)frame._begin(buffer);
+    _retval = cast(bool)gst_video_frame_map(_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags);
+    frame._mapped = _retval;
     return _retval;
   }
 
@@ -222,19 +226,19 @@ class VideoFrame : StructWrap!(GstVideoFrame)
       frame->data.
   
       Params:
-        frame = pointer to #GstVideoFrame
+        frame = pointer to #GstVideoFrame (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `VideoFrame.MapScope frame;`)
         info = a #GstVideoInfo
         buffer = the buffer to map
         id = the frame id to map
         flags = #GstMapFlags
       Returns: true on success.
   */
-  static bool mapId(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, int id, gst.types.MapFlags flags) nothrow
+  static bool mapId(out gstvideo.video_frame.VideoFrame.MapScope frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, int id, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
-    GstVideoFrame _frame;
-    _retval = cast(bool)gst_video_frame_map_id(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id, flags);
-    frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame, No.Take);
+    auto _frame = cast(GstVideoFrame*)frame._begin(buffer);
+    _retval = cast(bool)gst_video_frame_map_id(_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id, flags);
+    frame._mapped = _retval;
     return _retval;
   }
 }

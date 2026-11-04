@@ -1450,12 +1450,12 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
 
     auto _messages_arr = new GInputMessage[](messages.length);
     auto _messages = _messages_arr.ptr;
-    foreach (i, obj; messages) _messages[i] = obj._cInstance;
+    foreach (i, obj; messages) _messages[i] = *cast(GInputMessage*)obj._cPtr;
     GError *_err;
     _retval = g_socket_receive_messages(cast(GSocket*)this._cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    foreach (i, obj; messages) obj._cInstance = _messages[i];
+    foreach (i, obj; messages) *cast(GInputMessage*)obj._cPtr = _messages[i];
     return _retval;
   }
 
@@ -1704,12 +1704,12 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
 
     auto _messages_arr = new GOutputMessage[](messages.length);
     auto _messages = _messages_arr.ptr;
-    foreach (i, obj; messages) _messages[i] = obj._cInstance;
+    foreach (i, obj; messages) _messages[i] = *cast(GOutputMessage*)obj._cPtr;
     GError *_err;
     _retval = g_socket_send_messages(cast(GSocket*)this._cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
-    foreach (i, obj; messages) obj._cInstance = _messages[i];
+    foreach (i, obj; messages) *cast(GOutputMessage*)obj._cPtr = _messages[i];
     return _retval;
   }
 

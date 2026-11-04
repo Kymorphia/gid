@@ -20,6 +20,12 @@ class VideoDither : OpaqueWrap!(GstVideoDither*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Dither width pixels starting from offset `x` in line using dither.
       

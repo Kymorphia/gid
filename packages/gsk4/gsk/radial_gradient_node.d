@@ -65,7 +65,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
 
     auto _colorStops_arr = new GskColorStop[](colorStops.length);
     auto _colorStops = _colorStops_arr.ptr;
-    foreach (i, obj; colorStops) _colorStops[i] = obj._cInstance;
+    foreach (i, obj; colorStops) _colorStops[i] = *cast(GskColorStop*)obj._cPtr;
     _cretval = gsk_radial_gradient_node_new(bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, hradius, vradius, start, end, _colorStops, _nColorStops);
     this(_cretval, Yes.Take);
   }

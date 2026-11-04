@@ -31,6 +31,14 @@ class PropertyValues : StructWrap!(AtkPropertyValues)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _propertyNameRef; // Keeps borrowed GC string alive
+
   /**
       Get `propertyName` field.
       Returns: The name of the ATK property which has changed.
@@ -47,7 +55,11 @@ class PropertyValues : StructWrap!(AtkPropertyValues)
   */
   @property void propertyName(string propval) nothrow
   {
-    (cast(AtkPropertyValues*)this._cPtr).propertyName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("propertyName"))
+      return;
+
+    _propertyNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(AtkPropertyValues*)this._cPtr).propertyName = cast(const(char)*)_propertyNameRef;
   }
 
   /**

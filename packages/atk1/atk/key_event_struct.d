@@ -49,6 +49,12 @@ class KeyEventStruct : StructWrap!(AtkKeyEventStruct)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: An AtkKeyEventType, generally one of ATK_KEY_EVENT_PRESS or ATK_KEY_EVENT_RELEASE
@@ -133,6 +139,8 @@ class KeyEventStruct : StructWrap!(AtkKeyEventStruct)
     (cast(AtkKeyEventStruct*)this._cPtr).length = propval;
   }
 
+  private const(char)* _string_Ref; // Keeps borrowed GC string alive
+
   /**
       Get `string_` field.
       Returns: A string containing one of the following: either a string approximating the text that would
@@ -155,7 +163,11 @@ class KeyEventStruct : StructWrap!(AtkKeyEventStruct)
   */
   @property void string_(string propval) nothrow
   {
-    (cast(AtkKeyEventStruct*)this._cPtr).string_ = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("string_"))
+      return;
+
+    _string_Ref = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(AtkKeyEventStruct*)this._cPtr).string_ = cast(char*)_string_Ref;
   }
 
   /**

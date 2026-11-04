@@ -43,6 +43,12 @@ class Poll : OpaqueWrap!(GstPoll*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Add a file descriptor to the file descriptor set.
   

@@ -33,6 +33,12 @@ class ObjectConstructParam : StructWrap!(GObjectConstructParam)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gobject.param_spec.ParamSpec _pspecRef; // Keeps borrowed field value alive
 
   /**
@@ -51,6 +57,9 @@ class ObjectConstructParam : StructWrap!(GObjectConstructParam)
   */
   @property void pspec(gobject.param_spec.ParamSpec propval) nothrow
   {
+    if (_refuseBorrowedStore("pspec"))
+      return;
+
     _pspecRef = propval;
     (cast(GObjectConstructParam*)this._cPtr).pspec = propval ? cast(GParamSpec*)propval._cPtr(No.Dup) : null;
   }
@@ -73,6 +82,9 @@ class ObjectConstructParam : StructWrap!(GObjectConstructParam)
   */
   @property void value(gobject.value.Value propval) nothrow
   {
+    if (_refuseBorrowedStore("value"))
+      return;
+
     _valueRef = propval;
     (cast(GObjectConstructParam*)this._cPtr).value = propval ? cast(GValue*)propval._cPtr(No.Dup) : null;
   }

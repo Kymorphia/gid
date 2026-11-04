@@ -171,7 +171,7 @@ class PadController : gtk.event_controller.EventController
 
     auto _entries_arr = new GtkPadActionEntry[](entries.length);
     auto _entries = _entries_arr.ptr;
-    foreach (i, obj; entries) _entries[i] = obj._cInstance;
+    foreach (i, obj; entries) _entries[i] = *cast(GtkPadActionEntry*)obj._cPtr;
     gtk_pad_controller_set_action_entries(cast(GtkPadController*)this._cPtr, _entries, _nEntries);
   }
 }

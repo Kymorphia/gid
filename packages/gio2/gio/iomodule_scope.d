@@ -23,6 +23,12 @@ class IOModuleScope : OpaqueWrap!(GIOModuleScope*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Block modules with the given basename from being loaded when
       this scope is used with [gio.global.ioModulesScanAllInDirectoryWithScope]

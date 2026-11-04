@@ -32,13 +32,19 @@ class GLSyncMeta : StructWrap!(GstGLSyncMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `parent` field.
       Returns: the parent #GstMeta
   */
   @property gst.meta.Meta parent() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)this._cPtr).parent, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)this._cPtr).parent, this);
   }
 
   private gstgl.glcontext.GLContext _contextRef; // Keeps borrowed field value alive
@@ -59,6 +65,9 @@ class GLSyncMeta : StructWrap!(GstGLSyncMeta)
   */
   @property void context(gstgl.glcontext.GLContext propval) nothrow
   {
+    if (_refuseBorrowedStore("context"))
+      return;
+
     _contextRef = propval;
     (cast(GstGLSyncMeta*)this._cPtr).context = propval ? cast(GstGLContext*)propval._cPtr(No.Dup) : null;
   }

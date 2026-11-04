@@ -175,7 +175,7 @@ class Snapshot : gdk.snapshot.Snapshot
 
     auto _stops_arr = new GskColorStop[](stops.length);
     auto _stops = _stops_arr.ptr;
-    foreach (i, obj; stops) _stops[i] = obj._cInstance;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
     gtk_snapshot_append_conic_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, rotation, _stops, _nStops);
   }
 
@@ -247,7 +247,7 @@ class Snapshot : gdk.snapshot.Snapshot
 
     auto _stops_arr = new GskColorStop[](stops.length);
     auto _stops = _stops_arr.ptr;
-    foreach (i, obj; stops) _stops[i] = obj._cInstance;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
     gtk_snapshot_append_linear_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&startPoint, cast(const(graphene_point_t)*)&endPoint, _stops, _nStops);
   }
 
@@ -316,7 +316,7 @@ class Snapshot : gdk.snapshot.Snapshot
 
     auto _stops_arr = new GskColorStop[](stops.length);
     auto _stops = _stops_arr.ptr;
-    foreach (i, obj; stops) _stops[i] = obj._cInstance;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
     gtk_snapshot_append_radial_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, hradius, vradius, start, end, _stops, _nStops);
   }
 
@@ -337,7 +337,7 @@ class Snapshot : gdk.snapshot.Snapshot
 
     auto _stops_arr = new GskColorStop[](stops.length);
     auto _stops = _stops_arr.ptr;
-    foreach (i, obj; stops) _stops[i] = obj._cInstance;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
     gtk_snapshot_append_repeating_linear_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&startPoint, cast(const(graphene_point_t)*)&endPoint, _stops, _nStops);
   }
 
@@ -361,7 +361,7 @@ class Snapshot : gdk.snapshot.Snapshot
 
     auto _stops_arr = new GskColorStop[](stops.length);
     auto _stops = _stops_arr.ptr;
-    foreach (i, obj; stops) _stops[i] = obj._cInstance;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
     gtk_snapshot_append_repeating_radial_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, hradius, vradius, start, end, _stops, _nStops);
   }
 
@@ -754,7 +754,7 @@ class Snapshot : gdk.snapshot.Snapshot
 
     auto _shadow_arr = new GskShadow[](shadow.length);
     auto _shadow = _shadow_arr.ptr;
-    foreach (i, obj; shadow) _shadow[i] = obj._cInstance;
+    foreach (i, obj; shadow) _shadow[i] = *cast(GskShadow*)obj._cPtr;
     gtk_snapshot_push_shadow(cast(GtkSnapshot*)this._cPtr, _shadow, _nShadows);
   }
 

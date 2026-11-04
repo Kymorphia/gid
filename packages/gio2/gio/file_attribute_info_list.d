@@ -34,7 +34,7 @@ class FileAttributeInfoList : gobject.boxed.BoxedWrap!(g_file_attribute_info_lis
   */
   @property gio.file_attribute_info.FileAttributeInfo infos() nothrow
   {
-    return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)this._cPtr).infos, No.Take);
+    return (cast(GFileAttributeInfoList*)this._cPtr).infos ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)this._cPtr).infos, this) : null;
   }
 
   /**
@@ -107,7 +107,7 @@ class FileAttributeInfoList : gobject.boxed.BoxedWrap!(g_file_attribute_info_lis
     const(GFileAttributeInfo)* _cretval;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = g_file_attribute_info_list_lookup(cast(GFileAttributeInfoList*)this._cPtr, _name);
-    auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval, this) : null;
     return _retval;
   }
 }

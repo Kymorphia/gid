@@ -17,6 +17,12 @@ class VideoChromaResample : OpaqueWrap!(GstVideoChromaResample*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       The resampler must be fed n_lines at a time. The first line should be
       at offset.

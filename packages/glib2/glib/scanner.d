@@ -32,6 +32,12 @@ class Scanner : OpaqueWrap!(GScanner*, g_scanner_destroy, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Returns the current line in the input stream (counting
       from 1). This is the line of the last token parsed via

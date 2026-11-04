@@ -48,6 +48,14 @@ class TokenValue : StructWrap!(GTokenValue)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _vIdentifierRef; // Keeps borrowed GC string alive
+
   /**
       Get `vIdentifier` field.
       Returns: token identifier value
@@ -64,7 +72,11 @@ class TokenValue : StructWrap!(GTokenValue)
   */
   @property void vIdentifier(string propval) nothrow
   {
-    (cast(GTokenValue*)this._cPtr).vIdentifier = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("vIdentifier"))
+      return;
+
+    _vIdentifierRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTokenValue*)this._cPtr).vIdentifier = cast(char*)_vIdentifierRef;
   }
 
   /**
@@ -181,6 +193,8 @@ class TokenValue : StructWrap!(GTokenValue)
     (cast(GTokenValue*)this._cPtr).vHex = propval;
   }
 
+  private const(char)* _vStringRef; // Keeps borrowed GC string alive
+
   /**
       Get `vString` field.
       Returns: string value
@@ -197,8 +211,14 @@ class TokenValue : StructWrap!(GTokenValue)
   */
   @property void vString(string propval) nothrow
   {
-    (cast(GTokenValue*)this._cPtr).vString = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("vString"))
+      return;
+
+    _vStringRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTokenValue*)this._cPtr).vString = cast(char*)_vStringRef;
   }
+
+  private const(char)* _vCommentRef; // Keeps borrowed GC string alive
 
   /**
       Get `vComment` field.
@@ -216,7 +236,11 @@ class TokenValue : StructWrap!(GTokenValue)
   */
   @property void vComment(string propval) nothrow
   {
-    (cast(GTokenValue*)this._cPtr).vComment = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("vComment"))
+      return;
+
+    _vCommentRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTokenValue*)this._cPtr).vComment = cast(char*)_vCommentRef;
   }
 
   /**

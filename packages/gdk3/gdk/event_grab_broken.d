@@ -15,7 +15,7 @@ import gid.gid;
     again. Note that implicit grabs (which are initiated by button presses)
     can also cause #GdkEventGrabBroken events.
 */
-class EventGrabBroken : StructWrap!(GdkEventGrabBroken)
+class EventGrabBroken : StructWrap!(GdkEventGrabBroken, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_grab_broken.EventGrabBroken` wrap type.
@@ -45,6 +45,12 @@ class EventGrabBroken : StructWrap!(GdkEventGrabBroken)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -86,6 +92,9 @@ class EventGrabBroken : StructWrap!(GdkEventGrabBroken)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventGrabBroken*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -171,6 +180,9 @@ class EventGrabBroken : StructWrap!(GdkEventGrabBroken)
   */
   @property void grabWindow(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("grabWindow"))
+      return;
+
     _grabWindowRef = propval;
     (cast(GdkEventGrabBroken*)this._cPtr).grabWindow = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

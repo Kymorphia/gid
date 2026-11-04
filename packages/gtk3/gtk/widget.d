@@ -6041,7 +6041,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventButton which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -6065,7 +6065,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_button.EventButton(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -6103,7 +6106,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventButton which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -6127,7 +6130,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_button.EventButton(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -6323,7 +6329,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_configure.EventConfigure event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventConfigure which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -6347,7 +6353,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_configure.EventConfigure(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -6380,7 +6389,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
           `bool callback(gdk.event_expose.EventExpose event, gtk.widget.Widget widget)`
   
-          `event` the #GdkEventExpose event (optional)
+          `event` the #GdkEventExpose event (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -6404,7 +6413,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_expose.EventExpose(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -7473,7 +7485,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventCrossing which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7497,7 +7509,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_crossing.EventCrossing(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -7701,7 +7716,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventFocus which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7725,7 +7740,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_focus.EventFocus(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -7761,7 +7779,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventFocus which triggered this
-              signal. (optional)
+              signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7785,7 +7803,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_focus.EventFocus(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -7821,7 +7842,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
           `bool callback(gdk.event_grab_broken.EventGrabBroken event, gtk.widget.Widget widget)`
   
-          `event` the #GdkEventGrabBroken event (optional)
+          `event` the #GdkEventGrabBroken event (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7845,7 +7866,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_grab_broken.EventGrabBroken(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8084,7 +8108,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
           `bool callback(gdk.event_key.EventKey event, gtk.widget.Widget widget)`
   
-          `event` the #GdkEventKey which triggered this signal. (optional)
+          `event` the #GdkEventKey which triggered this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8108,7 +8132,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_key.EventKey(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8144,7 +8171,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
           `bool callback(gdk.event_key.EventKey event, gtk.widget.Widget widget)`
   
-          `event` the #GdkEventKey which triggered this signal. (optional)
+          `event` the #GdkEventKey which triggered this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8168,7 +8195,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_key.EventKey(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8263,7 +8293,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventCrossing which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8287,7 +8317,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_crossing.EventCrossing(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8375,7 +8408,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
           `bool callback(gdk.event_any.EventAny event, gtk.widget.Widget widget)`
   
-          `event` the #GdkEventAny which triggered this signal. (optional)
+          `event` the #GdkEventAny which triggered this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8399,7 +8432,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_any.EventAny(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8493,7 +8529,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_motion.EventMotion event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventMotion which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8517,7 +8553,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_motion.EventMotion(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8709,7 +8748,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_property.EventProperty event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventProperty which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8733,7 +8772,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_property.EventProperty(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8768,7 +8810,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventProximity which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8792,7 +8834,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_proximity.EventProximity(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -8827,7 +8872,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventProximity which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8851,7 +8896,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_proximity.EventProximity(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -9073,7 +9121,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_scroll.EventScroll event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventScroll which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9097,7 +9145,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_scroll.EventScroll(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -9130,7 +9181,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventSelection which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9154,7 +9205,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_selection.EventSelection(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -9247,7 +9301,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
           `bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget)`
   
-          `event`  (optional)
+          `event`  (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9270,7 +9324,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_selection.EventSelection(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -9360,7 +9417,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventSelection which triggered
-              this signal. (optional)
+              this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9384,7 +9441,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_selection.EventSelection(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -9886,7 +9946,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
           `bool callback(gdk.event_any.EventAny event, gtk.widget.Widget widget)`
   
-          `event` the #GdkEventAny which triggered this signal (optional)
+          `event` the #GdkEventAny which triggered this signal (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9910,7 +9970,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_any.EventAny(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -9993,7 +10056,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_visibility.EventVisibility event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventVisibility which
-              triggered this signal. (optional)
+              triggered this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -10022,7 +10085,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_visibility.EventVisibility(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -10059,7 +10125,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           `bool callback(gdk.event_window_state.EventWindowState event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventWindowState which
-              triggered this signal. (optional)
+              triggered this signal. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `widget` the instance the signal is connected to (optional)
   
@@ -10083,7 +10149,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_window_state.EventWindowState(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);

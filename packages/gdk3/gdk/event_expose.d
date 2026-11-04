@@ -14,7 +14,7 @@ import gid.gid;
     Generated when all or part of a window becomes visible and needs to be
     redrawn.
 */
-class EventExpose : StructWrap!(GdkEventExpose)
+class EventExpose : StructWrap!(GdkEventExpose, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_expose.EventExpose` wrap type.
@@ -43,6 +43,12 @@ class EventExpose : StructWrap!(GdkEventExpose)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -82,6 +88,9 @@ class EventExpose : StructWrap!(GdkEventExpose)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventExpose*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -142,6 +151,9 @@ class EventExpose : StructWrap!(GdkEventExpose)
   */
   @property void region(cairo.region.Region propval) nothrow
   {
+    if (_refuseBorrowedStore("region"))
+      return;
+
     _regionRef = propval;
     (cast(GdkEventExpose*)this._cPtr).region = propval ? cast(cairo_region_t*)propval._cPtr(No.Dup) : null;
   }

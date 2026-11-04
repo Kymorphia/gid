@@ -23,6 +23,12 @@ class Timer : OpaqueWrap!(GTimer*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
   * If timer has been started but not stopped, obtains the time since
   * the timer was started. If timer has been stopped, obtains the

@@ -41,6 +41,15 @@ class AudioBuffer : StructWrap!(GstAudioBuffer)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** Scope of a structure mapped by [gstaudio.audio_buffer.AudioBuffer.map] (see [gid.wrap.MapScope]) */
+  alias MapScope = gid.wrap.MapScope!(gstaudio.audio_buffer.AudioBuffer, gst_audio_buffer_unmap, gst.buffer.Buffer);
+
   /**
       Get `info` field.
       Returns: a #GstAudioInfo describing the audio properties of this buffer
@@ -100,17 +109,11 @@ class AudioBuffer : StructWrap!(GstAudioBuffer)
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstAudioBuffer*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
-  }
-
-  /**
-      Unmaps an audio buffer that was previously mapped with
-      [gstaudio.audio_buffer.AudioBuffer.map].
-  */
-  void unmap() nothrow
-  {
-    gst_audio_buffer_unmap(cast(GstAudioBuffer*)this._cPtr);
   }
 
   /**
@@ -167,18 +170,18 @@ class AudioBuffer : StructWrap!(GstAudioBuffer)
       as long as it's mapped.
   
       Params:
-        buffer = pointer to a #GstAudioBuffer
+        buffer = pointer to a #GstAudioBuffer (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `AudioBuffer.MapScope buffer;`)
         info = the audio properties of the buffer
         gstbuffer = the #GstBuffer to be mapped
         flags = the access mode for the memory
       Returns: true if the map operation succeeded or false on failure
   */
-  static bool map(out gstaudio.audio_buffer.AudioBuffer buffer, gstaudio.audio_info.AudioInfo info, gst.buffer.Buffer gstbuffer, gst.types.MapFlags flags) nothrow
+  static bool map(out gstaudio.audio_buffer.AudioBuffer.MapScope buffer, gstaudio.audio_info.AudioInfo info, gst.buffer.Buffer gstbuffer, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
-    GstAudioBuffer _buffer;
-    _retval = cast(bool)gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer._cPtr(No.Dup) : null, flags);
-    buffer = new gstaudio.audio_buffer.AudioBuffer(cast(void*)&_buffer, No.Take);
+    auto _buffer = cast(GstAudioBuffer*)buffer._begin(gstbuffer);
+    _retval = cast(bool)gst_audio_buffer_map(_buffer, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer._cPtr(No.Dup) : null, flags);
+    buffer._mapped = _retval;
     return _retval;
   }
 

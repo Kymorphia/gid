@@ -321,7 +321,7 @@ class MIKEYPayload : gobject.boxed.BoxedWrap!(gst_mikey_payload_get_type)
   {
     const(GstMIKEYPayloadSPParam)* _cretval;
     _cretval = gst_mikey_payload_sp_get_param(cast(const(GstMIKEYPayload)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam(cast(GstMIKEYPayloadSPParam*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam(cast(GstMIKEYPayloadSPParam*)_cretval, this) : null;
     return _retval;
   }
 

@@ -17,6 +17,12 @@ class AudioChannelMixer : OpaqueWrap!(GstAudioChannelMixer*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Check if mix is in passthrough.
       

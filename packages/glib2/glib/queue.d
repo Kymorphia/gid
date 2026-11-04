@@ -20,6 +20,12 @@ class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Removes all the elements in queue. If queue elements contain
       dynamically-allocated memory, they should be freed first.

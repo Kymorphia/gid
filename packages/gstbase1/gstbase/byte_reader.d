@@ -33,6 +33,12 @@ class ByteReader : StructWrap!(GstByteReader)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `data` field.
       Returns: Data from which the bit reader will

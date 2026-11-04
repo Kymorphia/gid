@@ -23,7 +23,7 @@ gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buf
 {
   GstRTPSourceMeta* _cretval;
   _cretval = gst_buffer_get_rtp_source_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstrtp.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstrtp.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval, buffer) : null;
   return _retval;
 }
 

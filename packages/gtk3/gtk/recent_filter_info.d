@@ -39,6 +39,12 @@ class RecentFilterInfo : StructWrap!(GtkRecentFilterInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `contains` field.
       Returns: #GtkRecentFilterFlags to indicate which fields are set.
@@ -58,6 +64,8 @@ class RecentFilterInfo : StructWrap!(GtkRecentFilterInfo)
     (cast(GtkRecentFilterInfo*)this._cPtr).contains = cast(GtkRecentFilterFlags)propval;
   }
 
+  private const(char)* _uriRef; // Keeps borrowed GC string alive
+
   /**
       Get `uri` field.
       Returns: The URI of the file being tested.
@@ -74,8 +82,14 @@ class RecentFilterInfo : StructWrap!(GtkRecentFilterInfo)
   */
   @property void uri(string propval) nothrow
   {
-    (cast(GtkRecentFilterInfo*)this._cPtr).uri = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("uri"))
+      return;
+
+    _uriRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentFilterInfo*)this._cPtr).uri = cast(const(char)*)_uriRef;
   }
+
+  private const(char)* _displayNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `displayName` field.
@@ -95,8 +109,14 @@ class RecentFilterInfo : StructWrap!(GtkRecentFilterInfo)
   */
   @property void displayName(string propval) nothrow
   {
-    (cast(GtkRecentFilterInfo*)this._cPtr).displayName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("displayName"))
+      return;
+
+    _displayNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentFilterInfo*)this._cPtr).displayName = cast(const(char)*)_displayNameRef;
   }
+
+  private const(char)* _mimeTypeRef; // Keeps borrowed GC string alive
 
   /**
       Get `mimeType` field.
@@ -114,7 +134,11 @@ class RecentFilterInfo : StructWrap!(GtkRecentFilterInfo)
   */
   @property void mimeType(string propval) nothrow
   {
-    (cast(GtkRecentFilterInfo*)this._cPtr).mimeType = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("mimeType"))
+      return;
+
+    _mimeTypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentFilterInfo*)this._cPtr).mimeType = cast(const(char)*)_mimeTypeRef;
   }
 
   /**

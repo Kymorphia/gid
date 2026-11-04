@@ -44,7 +44,7 @@ import gid.gid;
     1/4 of a second of the first. For a triple click to occur, the third
     button press must also occur within 1/2 second of the first button press.
 */
-class EventButton : StructWrap!(GdkEventButton)
+class EventButton : StructWrap!(GdkEventButton, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_button.EventButton` wrap type.
@@ -91,6 +91,12 @@ class EventButton : StructWrap!(GdkEventButton)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.ButtonPress], [gdk.types.EventType._2buttonPress],
@@ -130,6 +136,9 @@ class EventButton : StructWrap!(GdkEventButton)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventButton*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -278,6 +287,9 @@ class EventButton : StructWrap!(GdkEventButton)
   */
   @property void device(gdk.device.Device propval) nothrow
   {
+    if (_refuseBorrowedStore("device"))
+      return;
+
     _deviceRef = propval;
     (cast(GdkEventButton*)this._cPtr).device = propval ? cast(GdkDevice*)propval._cPtr(No.Dup) : null;
   }

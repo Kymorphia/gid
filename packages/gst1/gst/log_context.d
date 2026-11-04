@@ -64,6 +64,12 @@ class LogContext : OpaqueWrap!(GstLogContext*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Resets the logging context, clearing all tracked messages.
   */

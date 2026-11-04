@@ -14,7 +14,7 @@ import gid.gid;
     information is only available if the X server supports the XFIXES
     extension.
 */
-class EventOwnerChange : StructWrap!(GdkEventOwnerChange)
+class EventOwnerChange : StructWrap!(GdkEventOwnerChange, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_owner_change.EventOwnerChange` wrap type.
@@ -43,6 +43,12 @@ class EventOwnerChange : StructWrap!(GdkEventOwnerChange)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -82,6 +88,9 @@ class EventOwnerChange : StructWrap!(GdkEventOwnerChange)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventOwnerChange*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -123,6 +132,9 @@ class EventOwnerChange : StructWrap!(GdkEventOwnerChange)
   */
   @property void owner(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("owner"))
+      return;
+
     _ownerRef = propval;
     (cast(GdkEventOwnerChange*)this._cPtr).owner = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

@@ -36,6 +36,12 @@ class ObjectIter : StructWrap!(JsonObjectIter)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Initialises the iter and associate it with object.
       

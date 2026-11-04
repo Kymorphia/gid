@@ -40,6 +40,14 @@ class BindingSet : StructWrap!(GtkBindingSet)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _setNameRef; // Keeps borrowed GC string alive
+
   /**
       Get `setName` field.
       Returns: unique name of this binding set
@@ -56,7 +64,11 @@ class BindingSet : StructWrap!(GtkBindingSet)
   */
   @property void setName(string propval) nothrow
   {
-    (cast(GtkBindingSet*)this._cPtr).setName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("setName"))
+      return;
+
+    _setNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkBindingSet*)this._cPtr).setName = cast(char*)_setNameRef;
   }
 
   /**
@@ -111,7 +123,7 @@ class BindingSet : StructWrap!(GtkBindingSet)
   */
   @property gtk.binding_entry.BindingEntry entries() nothrow
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).entries, No.Take);
+    return (cast(GtkBindingSet*)this._cPtr).entries ? new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).entries, this) : null;
   }
 
   /**
@@ -120,7 +132,7 @@ class BindingSet : StructWrap!(GtkBindingSet)
   */
   @property gtk.binding_entry.BindingEntry current() nothrow
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).current, No.Take);
+    return (cast(GtkBindingSet*)this._cPtr).current ? new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).current, this) : null;
   }
 
   /**
@@ -191,7 +203,7 @@ class BindingSet : StructWrap!(GtkBindingSet)
     GtkBindingSet* _cretval;
     const(char)* _setName = setName.toCString!(No.Malloc, No.Nullable);
     _cretval = gtk_binding_set_find(_setName);
-    auto _retval = _cretval ? new gtk.binding_set.BindingSet(cast(GtkBindingSet*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.binding_set.BindingSet(cast(GtkBindingSet*)_cretval, null) : null;
     return _retval;
   }
 }

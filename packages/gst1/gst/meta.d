@@ -52,6 +52,12 @@ class Meta : StructWrap!(GstMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `flags` field.
       Returns: extra flags for the metadata
@@ -241,7 +247,7 @@ class Meta : StructWrap!(GstMeta)
 
     auto _data = cast(ubyte*)data.ptr;
     _cretval = gst_meta_deserialize(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _data, _size, cast(uint*)&consumed);
-    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, buffer) : null;
     return _retval;
   }
 
@@ -293,10 +299,11 @@ class Meta : StructWrap!(GstMeta)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CustomMetaTransformFunction*)userData;
+      auto _meta = meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+        _dretval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, _meta, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
       }
       catch (Exception e)
       {

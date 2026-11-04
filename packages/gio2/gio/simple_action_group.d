@@ -90,7 +90,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
 
     auto _entries_arr = new GActionEntry[](entries.length);
     auto _entries = _entries_arr.ptr;
-    foreach (i, obj; entries) _entries[i] = obj._cInstance;
+    foreach (i, obj; entries) _entries[i] = *cast(GActionEntry*)obj._cPtr;
     g_simple_action_group_add_entries(cast(GSimpleActionGroup*)this._cPtr, _entries, _nEntries, userData);
   }
 

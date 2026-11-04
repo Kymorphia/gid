@@ -20,6 +20,12 @@ class Atom : OpaqueWrap!(GdkAtom, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Determines the string corresponding to an atom.
       Returns: a newly-allocated string containing the string

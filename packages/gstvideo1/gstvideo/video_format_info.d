@@ -80,6 +80,12 @@ class VideoFormatInfo : StructWrap!(GstVideoFormatInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `format` field.
       Returns: #GstVideoFormat
@@ -99,6 +105,8 @@ class VideoFormatInfo : StructWrap!(GstVideoFormatInfo)
     (cast(GstVideoFormatInfo*)this._cPtr).format = cast(GstVideoFormat)propval;
   }
 
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: string representation of the format
@@ -115,8 +123,14 @@ class VideoFormatInfo : StructWrap!(GstVideoFormatInfo)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GstVideoFormatInfo*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstVideoFormatInfo*)this._cPtr).name = cast(const(char)*)_nameRef;
   }
+
+  private const(char)* _descriptionRef; // Keeps borrowed GC string alive
 
   /**
       Get `description` field.
@@ -134,7 +148,11 @@ class VideoFormatInfo : StructWrap!(GstVideoFormatInfo)
   */
   @property void description(string propval) nothrow
   {
-    (cast(GstVideoFormatInfo*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("description"))
+      return;
+
+    _descriptionRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstVideoFormatInfo*)this._cPtr).description = cast(const(char)*)_descriptionRef;
   }
 
   /**

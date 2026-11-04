@@ -31,6 +31,12 @@ class BindingArg : StructWrap!(GtkBindingArg)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `argType` field.
       Returns: implementation detail

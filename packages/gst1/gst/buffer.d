@@ -125,6 +125,9 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
     super(ptr, take);
   }
 
+  /** Scope of a structure mapped by [gst.buffer.Buffer.map] (see [gid.wrap.MapScope]) */
+  alias MapScope = gid.wrap.MapScope!(gst.map_info.MapInfo, gst_buffer_unmap, gst.buffer.Buffer);
+
   /** Returns `this`, for use in `with` statements. */
   override Buffer self() nothrow
   {
@@ -417,7 +420,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
     GstCustomMeta* _cretval;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_buffer_add_custom_meta(cast(GstBuffer*)this._cPtr, _name);
-    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -433,7 +436,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     GstMeta* _cretval;
     _cretval = gst_buffer_add_meta(cast(GstBuffer*)this._cPtr, cast(const(GstMetaInfo)*)&info, params);
-    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -449,7 +452,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     GstParentBufferMeta* _cretval;
     _cretval = gst_buffer_add_parent_buffer_meta(cast(GstBuffer*)this._cPtr, ref_ ? cast(GstBuffer*)ref_._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.parent_buffer_meta.ParentBufferMeta(cast(GstParentBufferMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.parent_buffer_meta.ParentBufferMeta(cast(GstParentBufferMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -466,7 +469,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     GstProtectionMeta* _cretval;
     _cretval = gst_buffer_add_protection_meta(cast(GstBuffer*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
-    auto _retval = _cretval ? new gst.protection_meta.ProtectionMeta(cast(GstProtectionMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.protection_meta.ProtectionMeta(cast(GstProtectionMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -485,7 +488,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     GstReferenceTimestampMeta* _cretval;
     _cretval = gst_buffer_add_reference_timestamp_meta(cast(GstBuffer*)this._cPtr, reference ? cast(GstCaps*)reference._cPtr(No.Dup) : null, timestamp, duration);
-    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -715,7 +718,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
     GstCustomMeta* _cretval;
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_buffer_get_custom_meta(cast(GstBuffer*)this._cPtr, _name);
-    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -782,7 +785,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     GstMeta* _cretval;
     _cretval = gst_buffer_get_meta(cast(GstBuffer*)this._cPtr, api);
-    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -810,7 +813,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     GstReferenceTimestampMeta* _cretval;
     _cretval = gst_buffer_get_reference_timestamp_meta(cast(GstBuffer*)this._cPtr, reference ? cast(GstCaps*)reference._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval, this) : null;
     return _retval;
   }
 
@@ -950,16 +953,16 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
       usage.
   
       Params:
-        info = info about the mapping
+        info = info about the mapping (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `Buffer.MapScope info;`)
         flags = flags for the mapping
       Returns: true if the map succeeded and info contains valid data.
   */
-  bool map(out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
+  bool map(out gst.buffer.Buffer.MapScope info, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
-    GstMapInfo _info;
-    _retval = cast(bool)gst_buffer_map(cast(GstBuffer*)this._cPtr, &_info, flags);
-    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
+    auto _info = cast(GstMapInfo*)info._begin(this);
+    _retval = cast(bool)gst_buffer_map(cast(GstBuffer*)this._cPtr, _info, flags);
+    info._mapped = _retval;
     return _retval;
   }
 
@@ -981,17 +984,17 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
       Params:
         idx = an index
         length = a length
-        info = info about the mapping
+        info = info about the mapping (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `Buffer.MapScope info;`)
         flags = flags for the mapping
       Returns: true if the map succeeded and info contains valid
         data.
   */
-  bool mapRange(uint idx, int length, out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
+  bool mapRange(uint idx, int length, out gst.buffer.Buffer.MapScope info, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
-    GstMapInfo _info;
-    _retval = cast(bool)gst_buffer_map_range(cast(GstBuffer*)this._cPtr, idx, length, &_info, flags);
-    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
+    auto _info = cast(GstMapInfo*)info._begin(this);
+    _retval = cast(bool)gst_buffer_map_range(cast(GstBuffer*)this._cPtr, idx, length, _info, flags);
+    info._mapped = _retval;
     return _retval;
   }
 
@@ -1218,17 +1221,6 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   void setSize(ptrdiff_t size) nothrow
   {
     gst_buffer_set_size(cast(GstBuffer*)this._cPtr, size);
-  }
-
-  /**
-      Releases the memory previously mapped with [gst.buffer.Buffer.map].
-  
-      Params:
-        info = a #GstMapInfo
-  */
-  void unmap(gst.map_info.MapInfo info) nothrow
-  {
-    gst_buffer_unmap(cast(GstBuffer*)this._cPtr, info ? cast(GstMapInfo*)info._cPtr : null);
   }
 
   /**

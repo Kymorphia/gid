@@ -31,6 +31,12 @@ class ColorStop : StructWrap!(GskColorStop)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `offset` field.
       Returns: the offset of the color stop

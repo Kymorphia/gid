@@ -24,6 +24,12 @@ class QueueArray : OpaqueWrap!(GstQueueArray*, void, void)
   }
 
   /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** */
   void pushTailStruct(void* pStruct = null) nothrow
   {
     gst_queue_array_push_tail_struct(cast(GstQueueArray*)this._cPtr, pStruct);

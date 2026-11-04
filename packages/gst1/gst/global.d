@@ -182,12 +182,13 @@ void debugAddLogFunction(gst.types.LogFunction func) nothrow
   extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) nothrow
   {
     auto _dlg = cast(gst.types.LogFunction*)userData;
+    auto _category = category ? new gst.debug_category.DebugCategory(cast(void*)category, null) : null;
     string _file = file.fromCString!(No.Free);
     string _function_ = function_.fromCString!(No.Free);
 
     try
     {
-      (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
+      (*_dlg)(_category, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
     }
     catch (Exception e)
     {
@@ -592,12 +593,13 @@ uint debugRemoveLogFunction(gst.types.LogFunction func = null) nothrow
   extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) nothrow
   {
     auto _dlg = cast(gst.types.LogFunction*)userData;
+    auto _category = category ? new gst.debug_category.DebugCategory(cast(void*)category, null) : null;
     string _file = file.fromCString!(No.Free);
     string _function_ = function_.fromCString!(No.Free);
 
     try
     {
-      (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
+      (*_dlg)(_category, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
     }
     catch (Exception e)
     {

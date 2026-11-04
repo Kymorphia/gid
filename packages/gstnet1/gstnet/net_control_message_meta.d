@@ -35,13 +35,19 @@ class NetControlMessageMeta : StructWrap!(GstNetControlMessageMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `meta` field.
       Returns: the parent type
   */
   @property gst.meta.Meta meta() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetControlMessageMeta*)this._cPtr).meta, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetControlMessageMeta*)this._cPtr).meta, this);
   }
 
   private gio.socket_control_message.SocketControlMessage _messageRef; // Keeps borrowed field value alive
@@ -62,6 +68,9 @@ class NetControlMessageMeta : StructWrap!(GstNetControlMessageMeta)
   */
   @property void message(gio.socket_control_message.SocketControlMessage propval) nothrow
   {
+    if (_refuseBorrowedStore("message"))
+      return;
+
     _messageRef = propval;
     (cast(GstNetControlMessageMeta*)this._cPtr).message = propval ? cast(GSocketControlMessage*)propval._cPtr(No.Dup) : null;
   }

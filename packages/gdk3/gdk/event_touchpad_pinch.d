@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated during touchpad swipe gestures.
 */
-class EventTouchpadPinch : StructWrap!(GdkEventTouchpadPinch)
+class EventTouchpadPinch : StructWrap!(GdkEventTouchpadPinch, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_touchpad_pinch.EventTouchpadPinch` wrap type.
@@ -63,6 +63,12 @@ class EventTouchpadPinch : StructWrap!(GdkEventTouchpadPinch)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.TouchpadPinch])
@@ -100,6 +106,9 @@ class EventTouchpadPinch : StructWrap!(GdkEventTouchpadPinch)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventTouchpadPinch*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

@@ -28,6 +28,12 @@ class RegionIter : StructWrap!(GtkSourceRegionIter)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Gets the subregion at this iterator.
   

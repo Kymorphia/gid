@@ -36,13 +36,19 @@ class VideoCodecAlphaMeta : StructWrap!(GstVideoCodecAlphaMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `meta` field.
       Returns: parent #GstMeta
   */
   @property gst.meta.Meta meta() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).meta, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).meta, this);
   }
 
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
@@ -63,6 +69,9 @@ class VideoCodecAlphaMeta : StructWrap!(GstVideoCodecAlphaMeta)
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }

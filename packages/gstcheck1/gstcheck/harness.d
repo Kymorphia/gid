@@ -135,6 +135,12 @@ class Harness : StructWrap!(GstHarness)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gst.element.Element _elementRef; // Keeps borrowed field value alive
 
   /**
@@ -153,6 +159,9 @@ class Harness : StructWrap!(GstHarness)
   */
   @property void element(gst.element.Element propval) nothrow
   {
+    if (_refuseBorrowedStore("element"))
+      return;
+
     _elementRef = propval;
     (cast(GstHarness*)this._cPtr).element = propval ? cast(GstElement*)propval._cPtr(No.Dup) : null;
   }
@@ -175,6 +184,9 @@ class Harness : StructWrap!(GstHarness)
   */
   @property void srcpad(gst.pad.Pad propval) nothrow
   {
+    if (_refuseBorrowedStore("srcpad"))
+      return;
+
     _srcpadRef = propval;
     (cast(GstHarness*)this._cPtr).srcpad = propval ? cast(GstPad*)propval._cPtr(No.Dup) : null;
   }
@@ -197,6 +209,9 @@ class Harness : StructWrap!(GstHarness)
   */
   @property void sinkpad(gst.pad.Pad propval) nothrow
   {
+    if (_refuseBorrowedStore("sinkpad"))
+      return;
+
     _sinkpadRef = propval;
     (cast(GstHarness*)this._cPtr).sinkpad = propval ? cast(GstPad*)propval._cPtr(No.Dup) : null;
   }
@@ -207,7 +222,7 @@ class Harness : StructWrap!(GstHarness)
   */
   @property gstcheck.harness.Harness srcHarness() nothrow
   {
-    return new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)this._cPtr).srcHarness, No.Take);
+    return (cast(GstHarness*)this._cPtr).srcHarness ? new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)this._cPtr).srcHarness, this) : null;
   }
 
   /**
@@ -216,7 +231,7 @@ class Harness : StructWrap!(GstHarness)
   */
   @property gstcheck.harness.Harness sinkHarness() nothrow
   {
-    return new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)this._cPtr).sinkHarness, No.Take);
+    return (cast(GstHarness*)this._cPtr).sinkHarness ? new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)this._cPtr).sinkHarness, this) : null;
   }
 
   /**
@@ -266,10 +281,11 @@ class Harness : StructWrap!(GstHarness)
     {
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
+      auto _info = info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), _info);
       }
       catch (Exception e)
       {

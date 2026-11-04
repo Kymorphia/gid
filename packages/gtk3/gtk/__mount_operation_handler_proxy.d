@@ -24,4 +24,10 @@ class MountOperationHandlerProxy : StructWrap!(_GtkMountOperationHandlerProxy)
   {
     super(ptr, take);
   }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
 }

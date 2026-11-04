@@ -31,14 +31,22 @@ class BindingSignal : StructWrap!(GtkBindingSignal)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `next` field.
       Returns: implementation detail
   */
   @property gtk.binding_signal.BindingSignal next() nothrow
   {
-    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingSignal*)this._cPtr).next, No.Take);
+    return (cast(GtkBindingSignal*)this._cPtr).next ? new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingSignal*)this._cPtr).next, this) : null;
   }
+
+  private const(char)* _signalNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `signalName` field.
@@ -56,7 +64,11 @@ class BindingSignal : StructWrap!(GtkBindingSignal)
   */
   @property void signalName(string propval) nothrow
   {
-    (cast(GtkBindingSignal*)this._cPtr).signalName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("signalName"))
+      return;
+
+    _signalNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkBindingSignal*)this._cPtr).signalName = cast(char*)_signalNameRef;
   }
 
   /**

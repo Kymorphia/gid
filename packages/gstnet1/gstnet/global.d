@@ -27,7 +27,7 @@ gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer
 {
   GstNetAddressMeta* _cretval;
   _cretval = gst_buffer_add_net_address_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, addr ? cast(GSocketAddress*)addr._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstnet.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstnet.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -43,7 +43,7 @@ gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessage
 {
   GstNetControlMessageMeta* _cretval;
   _cretval = gst_buffer_add_net_control_message_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, message ? cast(GSocketControlMessage*)message._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstnet.net_control_message_meta.NetControlMessageMeta(cast(GstNetControlMessageMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstnet.net_control_message_meta.NetControlMessageMeta(cast(GstNetControlMessageMeta*)_cretval, buffer) : null;
   return _retval;
 }
 
@@ -59,7 +59,7 @@ gstnet.net_address_meta.NetAddressMeta bufferGetNetAddressMeta(gst.buffer.Buffer
 {
   GstNetAddressMeta* _cretval;
   _cretval = gst_buffer_get_net_address_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstnet.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new gstnet.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval, buffer) : null;
   return _retval;
 }
 

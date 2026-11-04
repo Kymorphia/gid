@@ -80,7 +80,7 @@ struct VideoFormat
   {
     const(GstVideoFormatInfo)* _cretval;
     _cretval = gst_video_format_get_info(format);
-    auto _retval = _cretval ? new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)_cretval, null) : null;
     return _retval;
   }
 

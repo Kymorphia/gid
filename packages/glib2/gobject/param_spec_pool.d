@@ -24,6 +24,12 @@ class ParamSpecPool : OpaqueWrap!(GParamSpecPool*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Inserts a #GParamSpec in the pool.
   

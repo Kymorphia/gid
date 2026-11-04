@@ -79,13 +79,19 @@ class VideoMeta : StructWrap!(GstVideoMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `meta` field.
       Returns: parent #GstMeta
   */
   @property gst.meta.Meta meta() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoMeta*)this._cPtr).meta, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoMeta*)this._cPtr).meta, this);
   }
 
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
@@ -106,6 +112,9 @@ class VideoMeta : StructWrap!(GstVideoMeta)
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstVideoMeta*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }

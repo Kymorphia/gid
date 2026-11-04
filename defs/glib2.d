@@ -46,6 +46,7 @@
 //# Set copy and free functions for Error
 //!set record[Error][copy-function] g_error_copy
 //!set record[Error][free-function] g_error_free
+//!set record[Error][gid-borrow] 0
 
 //# Error conflicts with the base D Error type, rename to ErrorG
 //!subtype Error ErrorWrap

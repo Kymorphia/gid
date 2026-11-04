@@ -32,13 +32,19 @@ class ProtectionMeta : StructWrap!(GstProtectionMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `meta` field.
       Returns: the parent #GstMeta.
   */
   @property gst.meta.Meta meta() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstProtectionMeta*)this._cPtr).meta, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstProtectionMeta*)this._cPtr).meta, this);
   }
 
   private gst.structure.Structure _infoRef; // Keeps borrowed field value alive
@@ -59,6 +65,9 @@ class ProtectionMeta : StructWrap!(GstProtectionMeta)
   */
   @property void info(gst.structure.Structure propval) nothrow
   {
+    if (_refuseBorrowedStore("info"))
+      return;
+
     _infoRef = propval;
     (cast(GstProtectionMeta*)this._cPtr).info = propval ? cast(GstStructure*)propval._cPtr(No.Dup) : null;
   }

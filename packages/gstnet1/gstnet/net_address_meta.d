@@ -33,13 +33,19 @@ class NetAddressMeta : StructWrap!(GstNetAddressMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `meta` field.
       Returns: the parent type
   */
   @property gst.meta.Meta meta() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)this._cPtr).meta, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)this._cPtr).meta, this);
   }
 
   private gio.socket_address.SocketAddress _addrRef; // Keeps borrowed field value alive
@@ -60,6 +66,9 @@ class NetAddressMeta : StructWrap!(GstNetAddressMeta)
   */
   @property void addr(gio.socket_address.SocketAddress propval) nothrow
   {
+    if (_refuseBorrowedStore("addr"))
+      return;
+
     _addrRef = propval;
     (cast(GstNetAddressMeta*)this._cPtr).addr = propval ? cast(GSocketAddress*)propval._cPtr(No.Dup) : null;
   }

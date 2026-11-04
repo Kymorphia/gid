@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated when a setting is modified.
 */
-class EventSetting : StructWrap!(GdkEventSetting)
+class EventSetting : StructWrap!(GdkEventSetting, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_setting.EventSetting` wrap type.
@@ -36,6 +36,12 @@ class EventSetting : StructWrap!(GdkEventSetting)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -75,6 +81,9 @@ class EventSetting : StructWrap!(GdkEventSetting)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventSetting*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -119,6 +128,8 @@ class EventSetting : StructWrap!(GdkEventSetting)
     (cast(GdkEventSetting*)this._cPtr).action = cast(GdkSettingAction)propval;
   }
 
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: the name of the setting.
@@ -135,6 +146,10 @@ class EventSetting : StructWrap!(GdkEventSetting)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GdkEventSetting*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkEventSetting*)this._cPtr).name = cast(char*)_nameRef;
   }
 }

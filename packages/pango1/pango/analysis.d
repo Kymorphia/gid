@@ -41,6 +41,12 @@ class Analysis : StructWrap!(PangoAnalysis)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private pango.font.Font _fontRef; // Keeps borrowed field value alive
 
   /**
@@ -59,6 +65,9 @@ class Analysis : StructWrap!(PangoAnalysis)
   */
   @property void font(pango.font.Font propval) nothrow
   {
+    if (_refuseBorrowedStore("font"))
+      return;
+
     _fontRef = propval;
     (cast(PangoAnalysis*)this._cPtr).font = propval ? cast(PangoFont*)propval._cPtr(No.Dup) : null;
   }
@@ -157,6 +166,9 @@ class Analysis : StructWrap!(PangoAnalysis)
   */
   @property void language(pango.language.Language propval) nothrow
   {
+    if (_refuseBorrowedStore("language"))
+      return;
+
     _languageRef = propval;
     (cast(PangoAnalysis*)this._cPtr).language = propval ? cast(PangoLanguage*)propval._cPtr(No.Dup) : null;
   }

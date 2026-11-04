@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated during [gdk.types.InputSource.TabletPad] interaction with tactile sensors.
 */
-class EventPadAxis : StructWrap!(GdkEventPadAxis)
+class EventPadAxis : StructWrap!(GdkEventPadAxis, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_pad_axis.EventPadAxis` wrap type.
@@ -44,6 +44,12 @@ class EventPadAxis : StructWrap!(GdkEventPadAxis)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -83,6 +89,9 @@ class EventPadAxis : StructWrap!(GdkEventPadAxis)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventPadAxis*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

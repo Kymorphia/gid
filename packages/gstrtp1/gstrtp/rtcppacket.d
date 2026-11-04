@@ -30,13 +30,19 @@ class RTCPPacket : StructWrap!(GstRTCPPacket)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `rtcp` field.
       Returns: pointer to RTCP buffer
   */
   @property gstrtp.rtcpbuffer.RTCPBuffer rtcp() nothrow
   {
-    return new gstrtp.rtcpbuffer.RTCPBuffer(cast(GstRTCPBuffer*)(cast(GstRTCPPacket*)this._cPtr).rtcp, No.Take);
+    return (cast(GstRTCPPacket*)this._cPtr).rtcp ? new gstrtp.rtcpbuffer.RTCPBuffer(cast(GstRTCPBuffer*)(cast(GstRTCPPacket*)this._cPtr).rtcp, this) : null;
   }
 
   /**

@@ -13,7 +13,7 @@ import gid.gid;
     Any event pointer can safely be cast to a pointer to a #GdkEventAny to
     access these fields.
 */
-class EventAny : StructWrap!(GdkEventAny)
+class EventAny : StructWrap!(GdkEventAny, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_any.EventAny` wrap type.
@@ -33,6 +33,12 @@ class EventAny : StructWrap!(GdkEventAny)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -72,6 +78,9 @@ class EventAny : StructWrap!(GdkEventAny)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventAny*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

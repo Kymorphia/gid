@@ -42,6 +42,12 @@ class DataQueueItem : StructWrap!(GstDataQueueItem)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gst.mini_object.MiniObject _objectRef; // Keeps borrowed field value alive
 
   /**
@@ -60,6 +66,9 @@ class DataQueueItem : StructWrap!(GstDataQueueItem)
   */
   @property void object(gst.mini_object.MiniObject propval) nothrow
   {
+    if (_refuseBorrowedStore("object"))
+      return;
+
     _objectRef = propval;
     (cast(GstDataQueueItem*)this._cPtr).object = propval ? cast(GstMiniObject*)propval._cPtr(No.Dup) : null;
   }

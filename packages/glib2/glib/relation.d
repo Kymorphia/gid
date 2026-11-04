@@ -59,6 +59,12 @@ class Relation : OpaqueWrap!(GRelation*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Returns the number of tuples in a #GRelation that have the given
       value in the given field.

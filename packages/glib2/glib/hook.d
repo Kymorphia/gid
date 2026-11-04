@@ -34,13 +34,19 @@ class Hook : StructWrap!(GHook)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `next` field.
       Returns: pointer to the next hook in the list
   */
   @property glib.hook.Hook next() nothrow
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).next, No.Take);
+    return (cast(GHook*)this._cPtr).next ? new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).next, this) : null;
   }
 
   /**
@@ -49,7 +55,7 @@ class Hook : StructWrap!(GHook)
   */
   @property glib.hook.Hook prev() nothrow
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).prev, No.Take);
+    return (cast(GHook*)this._cPtr).prev ? new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).prev, this) : null;
   }
 
   /**
@@ -195,10 +201,12 @@ class Hook : StructWrap!(GHook)
     extern(C) int _funcCallback(GHook* newHook, GHook* sibling) nothrow
     {
       int _retval;
+      auto _newHook = newHook ? new glib.hook.Hook(cast(void*)newHook, null) : null;
+      auto _sibling = sibling ? new glib.hook.Hook(cast(void*)sibling, null) : null;
 
       try
       {
-        _retval = _static_func(newHook ? new glib.hook.Hook(cast(void*)newHook, No.Take) : null, sibling ? new glib.hook.Hook(cast(void*)sibling, No.Take) : null);
+        _retval = _static_func(_newHook, _sibling);
       }
       catch (Exception e)
       {

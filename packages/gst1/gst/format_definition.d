@@ -35,6 +35,12 @@ class FormatDefinition : StructWrap!(GstFormatDefinition)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `value` field.
       Returns: The unique id of this format
@@ -54,6 +60,8 @@ class FormatDefinition : StructWrap!(GstFormatDefinition)
     (cast(GstFormatDefinition*)this._cPtr).value = cast(GstFormat)propval;
   }
 
+  private const(char)* _nickRef; // Keeps borrowed GC string alive
+
   /**
       Get `nick` field.
       Returns: A short nick of the format
@@ -70,8 +78,14 @@ class FormatDefinition : StructWrap!(GstFormatDefinition)
   */
   @property void nick(string propval) nothrow
   {
-    (cast(GstFormatDefinition*)this._cPtr).nick = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("nick"))
+      return;
+
+    _nickRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstFormatDefinition*)this._cPtr).nick = cast(const(char)*)_nickRef;
   }
+
+  private const(char)* _descriptionRef; // Keeps borrowed GC string alive
 
   /**
       Get `description` field.
@@ -89,7 +103,11 @@ class FormatDefinition : StructWrap!(GstFormatDefinition)
   */
   @property void description(string propval) nothrow
   {
-    (cast(GstFormatDefinition*)this._cPtr).description = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("description"))
+      return;
+
+    _descriptionRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstFormatDefinition*)this._cPtr).description = cast(const(char)*)_descriptionRef;
   }
 
   /**

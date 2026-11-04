@@ -106,7 +106,7 @@ class GLBaseMemory : gobject.boxed.BoxedWrap!(gst_gl_base_memory_get_type)
   /** */
   @property gstgl.glquery.GLQuery query() nothrow
   {
-    return new gstgl.glquery.GLQuery(cast(GstGLQuery*)(cast(GstGLBaseMemory*)this._cPtr).query, No.Take);
+    return (cast(GstGLBaseMemory*)this._cPtr).query ? new gstgl.glquery.GLQuery(cast(GstGLQuery*)(cast(GstGLBaseMemory*)this._cPtr).query, this) : null;
   }
 
   /**

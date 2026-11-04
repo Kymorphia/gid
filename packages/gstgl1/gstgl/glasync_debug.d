@@ -26,6 +26,12 @@ class GLAsyncDebug : StructWrap!(GstGLAsyncDebug)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       freeze the debug output.  While frozen, any call to
       [gstgl.glasync_debug.GLAsyncDebug.outputLogMsg] will not output any messages but

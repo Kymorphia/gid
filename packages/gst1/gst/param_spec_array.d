@@ -29,6 +29,12 @@ class ParamSpecArray : StructWrap!(GstParamSpecArray)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `parentInstance` field.
       Returns: super class
@@ -56,6 +62,9 @@ class ParamSpecArray : StructWrap!(GstParamSpecArray)
   */
   @property void elementSpec(gobject.param_spec.ParamSpec propval) nothrow
   {
+    if (_refuseBorrowedStore("elementSpec"))
+      return;
+
     _elementSpecRef = propval;
     (cast(GstParamSpecArray*)this._cPtr).elementSpec = propval ? cast(GParamSpec*)propval._cPtr(No.Dup) : null;
   }

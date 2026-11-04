@@ -31,6 +31,14 @@ class SDPKey : StructWrap!(GstSDPKey)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _typeRef; // Keeps borrowed GC string alive
+
   /**
       Get `type` field.
       Returns: the encryption type
@@ -47,8 +55,14 @@ class SDPKey : StructWrap!(GstSDPKey)
   */
   @property void type(string propval) nothrow
   {
-    (cast(GstSDPKey*)this._cPtr).type = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("type"))
+      return;
+
+    _typeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPKey*)this._cPtr).type = cast(char*)_typeRef;
   }
+
+  private const(char)* _dataRef; // Keeps borrowed GC string alive
 
   /**
       Get `data` field.
@@ -66,6 +80,10 @@ class SDPKey : StructWrap!(GstSDPKey)
   */
   @property void data(string propval) nothrow
   {
-    (cast(GstSDPKey*)this._cPtr).data = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("data"))
+      return;
+
+    _dataRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPKey*)this._cPtr).data = cast(char*)_dataRef;
   }
 }

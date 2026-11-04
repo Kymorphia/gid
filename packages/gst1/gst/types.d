@@ -496,7 +496,7 @@ alias ControlSourceGetValue = bool delegate(gst.control_source.ControlSource sel
 
     Params:
       transbuf = a #GstBuffer
-      meta = a #GstCustomMeta
+      meta = a #GstCustomMeta (borrowed, only valid during the callback, use `_dup` to keep a copy)
       buffer = a #GstBuffer
       type = the transform type
       data = transform specific data.
@@ -624,7 +624,7 @@ alias IteratorResyncFunction = void delegate(gst.iterator.Iterator it);
     Use G_GNUC_NO_INSTRUMENT on that function.
 
     Params:
-      category = a #GstDebugCategory
+      category = a #GstDebugCategory (borrowed, only valid during the callback, use `_dup` to keep a copy)
       level = a #GstDebugLevel
       file = file name
       function_ = function name
@@ -667,7 +667,7 @@ alias MemoryIsSpanFunction = bool delegate(gst.memory.Memory mem1, gst.memory.Me
 
     Params:
       mem = a #GstMemory
-      info = the #GstMapInfo to map with
+      info = the #GstMapInfo to map with (borrowed, only valid during the callback, use `_dup` to keep a copy)
       maxsize = size to map
     Returns: a pointer to memory of which at least maxsize bytes can be
       accessed according to the access pattern in info's flags.
@@ -706,7 +706,7 @@ alias MemoryShareFunction = gst.memory.Memory delegate(gst.memory.Memory mem, pt
 
     Params:
       mem = a #GstMemory
-      info = a #GstMapInfo
+      info = a #GstMapInfo (borrowed, only valid during the callback, use `_dup` to keep a copy)
 */
 alias MemoryUnmapFullFunction = void delegate(gst.memory.Memory mem, gst.map_info.MapInfo info);
 
@@ -724,7 +724,7 @@ alias MemoryUnmapFunction = void delegate(gst.memory.Memory mem);
 
     Params:
       buffer = a #GstBuffer
-      meta = a #GstMeta
+      meta = a #GstMeta (borrowed, only valid during the callback, use `_dup` to keep a copy)
 */
 alias MetaClearFunction = void delegate(gst.buffer.Buffer buffer, gst.meta.Meta meta);
 
@@ -732,7 +732,7 @@ alias MetaClearFunction = void delegate(gst.buffer.Buffer buffer, gst.meta.Meta 
     Function called when meta is freed in buffer.
 
     Params:
-      meta = a #GstMeta
+      meta = a #GstMeta (borrowed, only valid during the callback, use `_dup` to keep a copy)
       buffer = a #GstBuffer
 */
 alias MetaFreeFunction = void delegate(gst.meta.Meta meta, gst.buffer.Buffer buffer);
@@ -741,7 +741,7 @@ alias MetaFreeFunction = void delegate(gst.meta.Meta meta, gst.buffer.Buffer buf
     Function called when meta is initialized in buffer.
 
     Params:
-      meta = a #GstMeta
+      meta = a #GstMeta (borrowed, only valid during the callback, use `_dup` to keep a copy)
       params = parameters passed to the init function
       buffer = a #GstBuffer
     Returns: 
@@ -759,7 +759,7 @@ alias MetaInitFunction = bool delegate(gst.meta.Meta meta, void* params, gst.buf
 
     Params:
       transbuf = a #GstBuffer
-      meta = a #GstMeta
+      meta = a #GstMeta (borrowed, only valid during the callback, use `_dup` to keep a copy)
       buffer = a #GstBuffer
       type = the transform type
     Returns: true if the transform could be performed
@@ -959,7 +959,7 @@ alias PadLinkFunction = gst.types.PadLinkReturn delegate(gst.pad.Pad pad, gst.ob
 
     Params:
       pad = the #GstPad that is blocked
-      info = #GstPadProbeInfo
+      info = #GstPadProbeInfo (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: a #GstPadProbeReturn
 */
 alias PadProbeCallback = gst.types.PadProbeReturn delegate(gst.pad.Pad pad, gst.pad_probe_info.PadProbeInfo info);

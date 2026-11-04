@@ -30,6 +30,12 @@ class DBusErrorEntry : StructWrap!(GDBusErrorEntry)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `errorCode` field.
       Returns: an error code
@@ -49,6 +55,8 @@ class DBusErrorEntry : StructWrap!(GDBusErrorEntry)
     (cast(GDBusErrorEntry*)this._cPtr).errorCode = propval;
   }
 
+  private const(char)* _dbusErrorNameRef; // Keeps borrowed GC string alive
+
   /**
       Get `dbusErrorName` field.
       Returns: the D-Bus error name to associate with @error_code
@@ -65,6 +73,10 @@ class DBusErrorEntry : StructWrap!(GDBusErrorEntry)
   */
   @property void dbusErrorName(string propval) nothrow
   {
-    (cast(GDBusErrorEntry*)this._cPtr).dbusErrorName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("dbusErrorName"))
+      return;
+
+    _dbusErrorNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GDBusErrorEntry*)this._cPtr).dbusErrorName = cast(const(char)*)_dbusErrorNameRef;
   }
 }

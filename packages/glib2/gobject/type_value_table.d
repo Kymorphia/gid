@@ -60,6 +60,12 @@ class TypeValueTable : StructWrap!(GTypeValueTable)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `valueInit` field.
       Returns: Function to initialize a GValue
@@ -142,6 +148,8 @@ class TypeValueTable : StructWrap!(GTypeValueTable)
     (cast(GTypeValueTable*)this._cPtr).valuePeekPointer = propval;
   }
 
+  private const(char)* _collectFormatRef; // Keeps borrowed GC string alive
+
   /**
       Get `collectFormat` field.
       Returns: A string format describing how to collect the contents of
@@ -164,7 +172,11 @@ class TypeValueTable : StructWrap!(GTypeValueTable)
   */
   @property void collectFormat(string propval) nothrow
   {
-    (cast(GTypeValueTable*)this._cPtr).collectFormat = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("collectFormat"))
+      return;
+
+    _collectFormatRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTypeValueTable*)this._cPtr).collectFormat = cast(const(char)*)_collectFormatRef;
   }
 
   /**
@@ -189,6 +201,8 @@ class TypeValueTable : StructWrap!(GTypeValueTable)
     (cast(GTypeValueTable*)this._cPtr).collectValue = propval;
   }
 
+  private const(char)* _lcopyFormatRef; // Keeps borrowed GC string alive
+
   /**
       Get `lcopyFormat` field.
       Returns: Format description of the arguments to collect for @lcopy_value,
@@ -209,7 +223,11 @@ class TypeValueTable : StructWrap!(GTypeValueTable)
   */
   @property void lcopyFormat(string propval) nothrow
   {
-    (cast(GTypeValueTable*)this._cPtr).lcopyFormat = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("lcopyFormat"))
+      return;
+
+    _lcopyFormatRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTypeValueTable*)this._cPtr).lcopyFormat = cast(const(char)*)_lcopyFormatRef;
   }
 
   /**

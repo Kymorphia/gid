@@ -21,6 +21,12 @@ class BuildableParseContext : OpaqueWrap!(GtkBuildableParseContext*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Retrieves the name of the currently open element.
       

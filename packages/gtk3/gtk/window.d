@@ -840,7 +840,7 @@ class Window : gtk.bin.Bin
   bool activateKey(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gtk_window_activate_key(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
+    _retval = cast(bool)gtk_window_activate_key(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1847,7 +1847,7 @@ class Window : gtk.bin.Bin
   bool propagateKeyEvent(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gtk_window_propagate_key_event(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
+    _retval = cast(bool)gtk_window_propagate_key_event(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 

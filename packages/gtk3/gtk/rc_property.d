@@ -37,6 +37,12 @@ class RcProperty : StructWrap!(GtkRcProperty)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `typeName` field.
       Returns: quark-ified type identifier
@@ -77,6 +83,8 @@ class RcProperty : StructWrap!(GtkRcProperty)
     (cast(GtkRcProperty*)this._cPtr).propertyName = propval;
   }
 
+  private const(char)* _originRef; // Keeps borrowed GC string alive
+
   /**
       Get `origin` field.
       Returns: field similar to one found in #GtkSettingsValue
@@ -93,7 +101,11 @@ class RcProperty : StructWrap!(GtkRcProperty)
   */
   @property void origin(string propval) nothrow
   {
-    (cast(GtkRcProperty*)this._cPtr).origin = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("origin"))
+      return;
+
+    _originRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRcProperty*)this._cPtr).origin = cast(char*)_originRef;
   }
 
   /**

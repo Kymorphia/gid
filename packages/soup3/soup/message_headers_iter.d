@@ -31,6 +31,12 @@ class MessageHeadersIter : StructWrap!(SoupMessageHeadersIter)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Initializes iter for iterating hdrs.
   

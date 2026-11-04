@@ -58,7 +58,7 @@ class PixbufFormat : gobject.boxed.BoxedWrap!(gdk_pixbuf_format_get_type)
   */
   @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature() nothrow
   {
-    return new gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)this._cPtr).signature, No.Take);
+    return (cast(GdkPixbufFormat*)this._cPtr).signature ? new gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)this._cPtr).signature, this) : null;
   }
 
   /**

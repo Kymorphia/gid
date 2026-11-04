@@ -41,6 +41,12 @@ class StringChunk : OpaqueWrap!(GStringChunk*, g_string_chunk_free, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Frees all strings contained within the #GStringChunk.
       After calling [glib.string_chunk.StringChunk.clear] it is not safe to

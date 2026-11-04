@@ -36,6 +36,12 @@ class HookList : StructWrap!(GHookList)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `seqId` field.
       Returns: the next free #GHook id
@@ -99,7 +105,7 @@ class HookList : StructWrap!(GHookList)
   */
   @property glib.hook.Hook hooks() nothrow
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)this._cPtr).hooks, No.Take);
+    return (cast(GHookList*)this._cPtr).hooks ? new glib.hook.Hook(cast(GHook*)(cast(GHookList*)this._cPtr).hooks, this) : null;
   }
 
   /**
@@ -186,10 +192,11 @@ class HookList : StructWrap!(GHookList)
     extern(C) void _marshallerCallback(GHook* hook, void* marshalData) nothrow
     {
       auto _dlg = cast(glib.types.HookMarshaller*)marshalData;
+      auto _hook = hook ? new glib.hook.Hook(cast(void*)hook, null) : null;
 
       try
       {
-        (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
+        (*_dlg)(_hook);
       }
       catch (Exception e)
       {
@@ -217,10 +224,11 @@ class HookList : StructWrap!(GHookList)
     {
       bool _dretval;
       auto _dlg = cast(glib.types.HookCheckMarshaller*)marshalData;
+      auto _hook = hook ? new glib.hook.Hook(cast(void*)hook, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
+        _dretval = (*_dlg)(_hook);
       }
       catch (Exception e)
       {

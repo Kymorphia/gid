@@ -52,6 +52,12 @@ class ThreadPool : OpaqueWrap!(GThreadPool*, freePool, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Returns the maximal number of threads for pool.
       Returns: the maximal number of threads

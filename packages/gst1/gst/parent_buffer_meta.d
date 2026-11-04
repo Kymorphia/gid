@@ -38,13 +38,19 @@ class ParentBufferMeta : StructWrap!(GstParentBufferMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `parent` field.
       Returns: the parent #GstMeta structure
   */
   @property gst.meta.Meta parent() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)this._cPtr).parent, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)this._cPtr).parent, this);
   }
 
   private gst.buffer.Buffer _bufferRef; // Keeps borrowed field value alive
@@ -65,6 +71,9 @@ class ParentBufferMeta : StructWrap!(GstParentBufferMeta)
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstParentBufferMeta*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }

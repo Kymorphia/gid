@@ -40,6 +40,12 @@ class CollectData : StructWrap!(GstCollectData)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gstbase.collect_pads.CollectPads _collectRef; // Keeps borrowed field value alive
 
   /**
@@ -58,6 +64,9 @@ class CollectData : StructWrap!(GstCollectData)
   */
   @property void collect(gstbase.collect_pads.CollectPads propval) nothrow
   {
+    if (_refuseBorrowedStore("collect"))
+      return;
+
     _collectRef = propval;
     (cast(GstCollectData*)this._cPtr).collect = propval ? cast(GstCollectPads*)propval._cPtr(No.Dup) : null;
   }
@@ -80,6 +89,9 @@ class CollectData : StructWrap!(GstCollectData)
   */
   @property void pad(gst.pad.Pad propval) nothrow
   {
+    if (_refuseBorrowedStore("pad"))
+      return;
+
     _padRef = propval;
     (cast(GstCollectData*)this._cPtr).pad = propval ? cast(GstPad*)propval._cPtr(No.Dup) : null;
   }
@@ -102,6 +114,9 @@ class CollectData : StructWrap!(GstCollectData)
   */
   @property void buffer(gst.buffer.Buffer propval) nothrow
   {
+    if (_refuseBorrowedStore("buffer"))
+      return;
+
     _bufferRef = propval;
     (cast(GstCollectData*)this._cPtr).buffer = propval ? cast(GstBuffer*)propval._cPtr(No.Dup) : null;
   }

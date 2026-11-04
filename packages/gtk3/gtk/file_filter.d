@@ -149,10 +149,11 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.FileFilterFunc*)data;
+      auto _filterInfo = filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, No.Take) : null);
+        _dretval = (*_dlg)(_filterInfo);
       }
       catch (Exception e)
       {

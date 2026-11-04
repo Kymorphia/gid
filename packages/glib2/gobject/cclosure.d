@@ -27,6 +27,12 @@ class CClosure : StructWrap!(GCClosure)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `closure` field.
       Returns: the #GClosure

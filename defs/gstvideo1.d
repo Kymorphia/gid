@@ -4,6 +4,34 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstvideo1/
 //!info capi https://gstreamer.freedesktop.org/documentation/video/index.html
 
+// Map functions return a MapScope which unmaps the structure (explicit unmap or scope exit), the unmap function is
+// only used by the MapScope (unmapping a MapScope structure directly would unmap it twice)
+//!set record[VideoFrame].function[map][gid-unmap] gst_video_frame_unmap
+//!set record[VideoFrame].function[map][gid-map-source] buffer
+//!set record[VideoFrame].function[map_id][gid-unmap] gst_video_frame_unmap
+//!set record[VideoFrame].function[map_id][gid-map-source] buffer
+//!set record[VideoFrame].method[unmap][disable] 1
+
+// Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
+//!set function[buffer_add_ancillary_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_afd_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_affine_transformation_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_bar_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_caption_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_codec_alpha_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_meta_full].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_overlay_composition_meta].return-value[][gid-borrow] buf
+//!set function[buffer_add_video_region_of_interest_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_region_of_interest_meta_id].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_sei_user_data_unregistered_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_time_code_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_video_time_code_meta_full].return-value[][gid-borrow] buffer
+//!set function[buffer_get_video_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_get_video_meta_id].return-value[][gid-borrow] buffer
+//!set function[buffer_get_video_region_of_interest_meta_id].return-value[][gid-borrow] buffer
+//!set enumeration[VideoFormat].function[get_info].return-value[][gid-borrow] static
+
 //# Disable this type which is derived from the unsupported Gst.FlagSet fundamental type (FIXME)
 //!set class[VideoMultiviewFlagsSet][disable] 1
 

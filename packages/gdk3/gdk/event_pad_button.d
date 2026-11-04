@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated during [gdk.types.InputSource.TabletPad] button presses and releases.
 */
-class EventPadButton : StructWrap!(GdkEventPadButton)
+class EventPadButton : StructWrap!(GdkEventPadButton, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_pad_button.EventPadButton` wrap type.
@@ -41,6 +41,12 @@ class EventPadButton : StructWrap!(GdkEventPadButton)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -80,6 +86,9 @@ class EventPadButton : StructWrap!(GdkEventPadButton)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventPadButton*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

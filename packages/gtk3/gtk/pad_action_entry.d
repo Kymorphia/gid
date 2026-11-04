@@ -38,6 +38,12 @@ class PadActionEntry : StructWrap!(GtkPadActionEntry)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the type of pad feature that will trigger this action entry.
@@ -97,6 +103,8 @@ class PadActionEntry : StructWrap!(GtkPadActionEntry)
     (cast(GtkPadActionEntry*)this._cPtr).mode = propval;
   }
 
+  private const(char)* _labelRef; // Keeps borrowed GC string alive
+
   /**
       Get `label` field.
       Returns: Human readable description of this action entry, this string should
@@ -115,8 +123,14 @@ class PadActionEntry : StructWrap!(GtkPadActionEntry)
   */
   @property void label(string propval) nothrow
   {
-    (cast(GtkPadActionEntry*)this._cPtr).label = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("label"))
+      return;
+
+    _labelRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkPadActionEntry*)this._cPtr).label = cast(char*)_labelRef;
   }
+
+  private const(char)* _actionNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `actionName` field.
@@ -134,6 +148,10 @@ class PadActionEntry : StructWrap!(GtkPadActionEntry)
   */
   @property void actionName(string propval) nothrow
   {
-    (cast(GtkPadActionEntry*)this._cPtr).actionName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("actionName"))
+      return;
+
+    _actionNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkPadActionEntry*)this._cPtr).actionName = cast(char*)_actionNameRef;
   }
 }

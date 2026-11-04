@@ -345,7 +345,7 @@ bool bindingsActivate(gobject.object.ObjectWrap object, uint keyval, gdk.types.M
 bool bindingsActivateEvent(gobject.object.ObjectWrap object, gdk.event_key.EventKey event) nothrow
 {
   bool _retval;
-  _retval = cast(bool)gtk_bindings_activate_event(object ? cast(GObject*)object._cPtr(No.Dup) : null, event ? cast(GdkEventKey*)event._cPtr : null);
+  _retval = cast(bool)gtk_bindings_activate_event(object ? cast(GObject*)object._cPtr(No.Dup) : null, event ? cast(GdkEventKey*)event._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2910,7 +2910,7 @@ void stockAdd(gtk.stock_item.StockItem[] items) nothrow
 
   auto _items_arr = new GtkStockItem[](items.length);
   auto _items = _items_arr.ptr;
-  foreach (i, obj; items) _items[i] = obj._cInstance;
+  foreach (i, obj; items) _items[i] = *cast(GtkStockItem*)obj._cPtr;
   gtk_stock_add(_items, _nItems);
 }
 

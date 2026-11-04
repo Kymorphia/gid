@@ -43,6 +43,12 @@ class AudioCdSrcTrack : StructWrap!(GstAudioCdSrcTrack)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `isAudio` field.
       Returns: Whether this is an audio track
@@ -137,6 +143,9 @@ class AudioCdSrcTrack : StructWrap!(GstAudioCdSrcTrack)
   */
   @property void tags(gst.tag_list.TagList propval) nothrow
   {
+    if (_refuseBorrowedStore("tags"))
+      return;
+
     _tagsRef = propval;
     (cast(GstAudioCdSrcTrack*)this._cPtr).tags = propval ? cast(GstTagList*)propval._cPtr(No.Dup) : null;
   }

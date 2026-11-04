@@ -37,6 +37,14 @@ class SDPConnection : StructWrap!(GstSDPConnection)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nettypeRef; // Keeps borrowed GC string alive
+
   /**
       Get `nettype` field.
       Returns: the type of network. "IN" is defined to have the meaning
@@ -55,8 +63,14 @@ class SDPConnection : StructWrap!(GstSDPConnection)
   */
   @property void nettype(string propval) nothrow
   {
-    (cast(GstSDPConnection*)this._cPtr).nettype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("nettype"))
+      return;
+
+    _nettypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPConnection*)this._cPtr).nettype = cast(char*)_nettypeRef;
   }
+
+  private const(char)* _addrtypeRef; // Keeps borrowed GC string alive
 
   /**
       Get `addrtype` field.
@@ -74,8 +88,14 @@ class SDPConnection : StructWrap!(GstSDPConnection)
   */
   @property void addrtype(string propval) nothrow
   {
-    (cast(GstSDPConnection*)this._cPtr).addrtype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("addrtype"))
+      return;
+
+    _addrtypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPConnection*)this._cPtr).addrtype = cast(char*)_addrtypeRef;
   }
+
+  private const(char)* _addressRef; // Keeps borrowed GC string alive
 
   /**
       Get `address` field.
@@ -93,7 +113,11 @@ class SDPConnection : StructWrap!(GstSDPConnection)
   */
   @property void address(string propval) nothrow
   {
-    (cast(GstSDPConnection*)this._cPtr).address = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("address"))
+      return;
+
+    _addressRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPConnection*)this._cPtr).address = cast(char*)_addressRef;
   }
 
   /**

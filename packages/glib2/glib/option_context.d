@@ -23,6 +23,12 @@ class OptionContext : OpaqueWrap!(GOptionContext*, g_option_context_free, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Adds a #GOptionGroup to the context, so that parsing with context
       will recognize the options in the group. Note that this will take

@@ -23,6 +23,12 @@ class TestLogBuffer : StructWrap!(GTestLogBuffer)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Internal function for gtester to decode test log messages, no ABI guarantees provided.
   

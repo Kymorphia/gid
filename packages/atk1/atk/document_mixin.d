@@ -5,6 +5,7 @@ public import gid.basictypes;
 public import atk.document_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
+public import atk.text_selection;
 public import atk.types;
 public import gid.gid;
 public import gobject.dclosure;
@@ -136,6 +137,27 @@ template DocumentT()
     const(char)* _attributeName = attributeName.toCString!(No.Malloc, No.Nullable);
     const(char)* _attributeValue = attributeValue.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)atk_document_set_attribute_value(cast(AtkDocument*)this._cPtr, _attributeName, _attributeValue);
+    return _retval;
+  }
+
+  /**
+      Makes 1 or more selections within this document denoted by the given
+      array of AtkTextSelections. Any existing physical selection (inside or
+      outside this document) is replaced by the new selections. All objects within
+      the given selection ranges must be descendants of this document. Otherwise
+      FALSE will be returned.
+  
+      Params:
+        selections = a GArray of AtkTextSelections
+                       to be selected.
+      Returns: TRUE if the selection was made successfully; FALSE otherwise.
+  */
+  override bool setTextSelections(atk.text_selection.TextSelection[] selections) nothrow
+  {
+    bool _retval;
+    auto _selections = gArrayGFromD!(atk.text_selection.TextSelection, false)(selections);
+    scope(exit) containerFree!(GArray*, atk.text_selection.TextSelection, GidOwnership.None)(_selections);
+    _retval = cast(bool)atk_document_set_text_selections(cast(AtkDocument*)this._cPtr, _selections);
     return _retval;
   }
 

@@ -33,6 +33,14 @@ class SDPTime : StructWrap!(GstSDPTime)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _startRef; // Keeps borrowed GC string alive
+
   /**
       Get `start` field.
       Returns: start time for the conference. The value is the decimal
@@ -51,8 +59,14 @@ class SDPTime : StructWrap!(GstSDPTime)
   */
   @property void start(string propval) nothrow
   {
-    (cast(GstSDPTime*)this._cPtr).start = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("start"))
+      return;
+
+    _startRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPTime*)this._cPtr).start = cast(char*)_startRef;
   }
+
+  private const(char)* _stopRef; // Keeps borrowed GC string alive
 
   /**
       Get `stop` field.
@@ -72,7 +86,11 @@ class SDPTime : StructWrap!(GstSDPTime)
   */
   @property void stop(string propval) nothrow
   {
-    (cast(GstSDPTime*)this._cPtr).stop = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("stop"))
+      return;
+
+    _stopRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPTime*)this._cPtr).stop = cast(char*)_stopRef;
   }
 
   /**

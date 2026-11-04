@@ -5767,7 +5767,7 @@ uint parseDebugString(string string_, glib.debug_key.DebugKey[] keys) nothrow
 
   auto _keys_arr = new GDebugKey[](keys.length);
   auto _keys = _keys_arr.ptr;
-  foreach (i, obj; keys) _keys[i] = obj._cInstance;
+  foreach (i, obj; keys) _keys[i] = *cast(GDebugKey*)obj._cPtr;
   _retval = g_parse_debug_string(_string_, _keys, _nkeys);
   return _retval;
 }

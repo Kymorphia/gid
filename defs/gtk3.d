@@ -4,6 +4,12 @@
 //!info docs https://www.kymorphia.com/gid/gid~gtk3/
 //!info capi https://docs.gtk.org/gtk3/
 
+// Disabled: returns entries referencing accel group internals, which shallow copies may outlive
+//!set class[AccelGroup].method[query][disable] 1
+
+// Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
+//!set record[BindingSet].function[find].return-value[][gid-borrow] static
+
 //!kind RequestedSize StructAlias
 
 //# Rename ToolShell.getOrientation since it conflicts with Orientable.getOrientation in ToolBar

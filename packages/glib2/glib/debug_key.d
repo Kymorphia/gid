@@ -31,6 +31,14 @@ class DebugKey : StructWrap!(GDebugKey)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _keyRef; // Keeps borrowed GC string alive
+
   /**
       Get `key` field.
       Returns: the string
@@ -47,7 +55,11 @@ class DebugKey : StructWrap!(GDebugKey)
   */
   @property void key(string propval) nothrow
   {
-    (cast(GDebugKey*)this._cPtr).key = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("key"))
+      return;
+
+    _keyRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GDebugKey*)this._cPtr).key = cast(const(char)*)_keyRef;
   }
 
   /**

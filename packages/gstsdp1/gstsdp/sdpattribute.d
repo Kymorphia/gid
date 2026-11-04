@@ -30,6 +30,14 @@ class SDPAttribute : StructWrap!(GstSDPAttribute)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _keyRef; // Keeps borrowed GC string alive
+
   /**
       Get `key` field.
       Returns: the attribute key
@@ -46,8 +54,14 @@ class SDPAttribute : StructWrap!(GstSDPAttribute)
   */
   @property void key(string propval) nothrow
   {
-    (cast(GstSDPAttribute*)this._cPtr).key = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("key"))
+      return;
+
+    _keyRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPAttribute*)this._cPtr).key = cast(char*)_keyRef;
   }
+
+  private const(char)* _valueRef; // Keeps borrowed GC string alive
 
   /**
       Get `value` field.
@@ -65,7 +79,11 @@ class SDPAttribute : StructWrap!(GstSDPAttribute)
   */
   @property void value(string propval) nothrow
   {
-    (cast(GstSDPAttribute*)this._cPtr).value = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("value"))
+      return;
+
+    _valueRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPAttribute*)this._cPtr).value = cast(char*)_valueRef;
   }
 
   /**

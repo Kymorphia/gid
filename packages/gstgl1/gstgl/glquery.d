@@ -30,6 +30,12 @@ class GLQuery : StructWrap!(GstGLQuery)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Record the result of a counter
   */

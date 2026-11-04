@@ -13,7 +13,7 @@ import gid.gid;
     Generated when a selection is requested or ownership of a selection
     is taken over by another client application.
 */
-class EventSelection : StructWrap!(GdkEventSelection)
+class EventSelection : StructWrap!(GdkEventSelection, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_selection.EventSelection` wrap type.
@@ -38,6 +38,12 @@ class EventSelection : StructWrap!(GdkEventSelection)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -79,6 +85,9 @@ class EventSelection : StructWrap!(GdkEventSelection)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventSelection*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -166,6 +175,9 @@ class EventSelection : StructWrap!(GdkEventSelection)
   */
   @property void requestor(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("requestor"))
+      return;
+
     _requestorRef = propval;
     (cast(GdkEventSelection*)this._cPtr).requestor = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

@@ -42,6 +42,12 @@ class BindingEntry : StructWrap!(GtkBindingEntry)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `keyval` field.
       Returns: key value to match
@@ -86,7 +92,7 @@ class BindingEntry : StructWrap!(GtkBindingEntry)
   */
   @property gtk.binding_set.BindingSet bindingSet() nothrow
   {
-    return new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)this._cPtr).bindingSet, No.Take);
+    return (cast(GtkBindingEntry*)this._cPtr).bindingSet ? new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)this._cPtr).bindingSet, this) : null;
   }
 
   /**
@@ -152,7 +158,7 @@ class BindingEntry : StructWrap!(GtkBindingEntry)
   */
   @property gtk.binding_entry.BindingEntry setNext() nothrow
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).setNext, No.Take);
+    return (cast(GtkBindingEntry*)this._cPtr).setNext ? new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).setNext, this) : null;
   }
 
   /**
@@ -161,7 +167,7 @@ class BindingEntry : StructWrap!(GtkBindingEntry)
   */
   @property gtk.binding_entry.BindingEntry hashNext() nothrow
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).hashNext, No.Take);
+    return (cast(GtkBindingEntry*)this._cPtr).hashNext ? new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).hashNext, this) : null;
   }
 
   /**
@@ -170,7 +176,7 @@ class BindingEntry : StructWrap!(GtkBindingEntry)
   */
   @property gtk.binding_signal.BindingSignal signals() nothrow
   {
-    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)this._cPtr).signals, No.Take);
+    return (cast(GtkBindingEntry*)this._cPtr).signals ? new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)this._cPtr).signals, this) : null;
   }
 
   /**

@@ -12,7 +12,7 @@ import gid.gid;
 /**
     Generated when the pointer moves.
 */
-class EventMotion : StructWrap!(GdkEventMotion)
+class EventMotion : StructWrap!(GdkEventMotion, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_motion.EventMotion` wrap type.
@@ -56,6 +56,12 @@ class EventMotion : StructWrap!(GdkEventMotion)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the type of the event.
@@ -93,6 +99,9 @@ class EventMotion : StructWrap!(GdkEventMotion)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventMotion*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -237,6 +246,9 @@ class EventMotion : StructWrap!(GdkEventMotion)
   */
   @property void device(gdk.device.Device propval) nothrow
   {
+    if (_refuseBorrowedStore("device"))
+      return;
+
     _deviceRef = propval;
     (cast(GdkEventMotion*)this._cPtr).device = propval ? cast(GdkDevice*)propval._cPtr(No.Dup) : null;
   }

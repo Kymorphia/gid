@@ -33,6 +33,12 @@ class AccelGroupEntry : StructWrap!(GtkAccelGroupEntry)
   }
 
   /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** */
   @property gtk.types.AccelKey key() nothrow
   {
     return cToD!(gtk.types.AccelKey)(cast(void*)&(cast(GtkAccelGroupEntry*)this._cPtr).key);
@@ -55,6 +61,9 @@ class AccelGroupEntry : StructWrap!(GtkAccelGroupEntry)
   /** */
   @property void closure(gobject.closure.Closure propval) nothrow
   {
+    if (_refuseBorrowedStore("closure"))
+      return;
+
     _closureRef = propval;
     (cast(GtkAccelGroupEntry*)this._cPtr).closure = propval ? cast(GClosure*)propval._cPtr(No.Dup) : null;
   }

@@ -31,13 +31,19 @@ class VideoOverlayCompositionMeta : StructWrap!(GstVideoOverlayCompositionMeta)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `meta` field.
       Returns: parent #GstMeta
   */
   @property gst.meta.Meta meta() nothrow
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).meta, No.Take);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).meta, this);
   }
 
   private gstvideo.video_overlay_composition.VideoOverlayComposition _overlayRef; // Keeps borrowed field value alive
@@ -58,6 +64,9 @@ class VideoOverlayCompositionMeta : StructWrap!(GstVideoOverlayCompositionMeta)
   */
   @property void overlay(gstvideo.video_overlay_composition.VideoOverlayComposition propval) nothrow
   {
+    if (_refuseBorrowedStore("overlay"))
+      return;
+
     _overlayRef = propval;
     (cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay = propval ? cast(GstVideoOverlayComposition*)propval._cPtr(No.Dup) : null;
   }

@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated during [gdk.types.InputSource.TabletPad] mode switches in a group.
 */
-class EventPadGroupMode : StructWrap!(GdkEventPadGroupMode)
+class EventPadGroupMode : StructWrap!(GdkEventPadGroupMode, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_pad_group_mode.EventPadGroupMode` wrap type.
@@ -40,6 +40,12 @@ class EventPadGroupMode : StructWrap!(GdkEventPadGroupMode)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -79,6 +85,9 @@ class EventPadGroupMode : StructWrap!(GdkEventPadGroupMode)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventPadGroupMode*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

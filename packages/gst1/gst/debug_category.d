@@ -26,6 +26,12 @@ class DebugCategory : StructWrap!(GstDebugCategory)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Returns the color of a debug category used when printing output in this
       category.

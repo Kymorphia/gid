@@ -26,6 +26,12 @@ class TypeInstance : StructWrap!(GTypeInstance)
   }
 
   /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /** */
   void* getPrivate(gobject.types.GType privateType) nothrow
   {
     auto _retval = g_type_instance_get_private(cast(GTypeInstance*)this._cPtr, privateType);

@@ -85,4 +85,10 @@ class PathData : StructWrap!(cairo_path_data_t)
   {
     super(ptr, take);
   }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
 }

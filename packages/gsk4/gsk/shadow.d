@@ -35,6 +35,12 @@ class Shadow : StructWrap!(GskShadow)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `color` field.
       Returns: the color of the shadow

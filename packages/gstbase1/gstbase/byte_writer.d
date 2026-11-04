@@ -39,13 +39,19 @@ class ByteWriter : StructWrap!(GstByteWriter)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `parent` field.
       Returns: #GstByteReader parent
   */
   @property gstbase.byte_reader.ByteReader parent() nothrow
   {
-    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent, No.Take);
+    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent, this);
   }
 
   /**

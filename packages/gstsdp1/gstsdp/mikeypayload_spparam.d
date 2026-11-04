@@ -28,6 +28,12 @@ class MIKEYPayloadSPParam : StructWrap!(GstMIKEYPayloadSPParam)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: specifies the type of the parameter

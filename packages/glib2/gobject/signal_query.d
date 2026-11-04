@@ -39,6 +39,12 @@ class SignalQuery : StructWrap!(GSignalQuery)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `signalId` field.
       Returns: The signal id of the signal being queried, or 0 if the
@@ -60,6 +66,8 @@ class SignalQuery : StructWrap!(GSignalQuery)
     (cast(GSignalQuery*)this._cPtr).signalId = propval;
   }
 
+  private const(char)* _signalNameRef; // Keeps borrowed GC string alive
+
   /**
       Get `signalName` field.
       Returns: The signal name.
@@ -76,7 +84,11 @@ class SignalQuery : StructWrap!(GSignalQuery)
   */
   @property void signalName(string propval) nothrow
   {
-    (cast(GSignalQuery*)this._cPtr).signalName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("signalName"))
+      return;
+
+    _signalNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GSignalQuery*)this._cPtr).signalName = cast(const(char)*)_signalNameRef;
   }
 
   /**

@@ -31,6 +31,12 @@ class ClockEntry : StructWrap!(GstClockEntry)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `refcount` field.
       Returns: reference counter (read-only)

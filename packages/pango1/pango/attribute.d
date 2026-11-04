@@ -106,7 +106,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrColor* _cretval;
     _cretval = pango_attribute_as_color(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_color.AttrColor(cast(PangoAttrColor*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_color.AttrColor(cast(PangoAttrColor*)_cretval, this) : null;
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrFloat* _cretval;
     _cretval = pango_attribute_as_float(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_float.AttrFloat(cast(PangoAttrFloat*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_float.AttrFloat(cast(PangoAttrFloat*)_cretval, this) : null;
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrFontDesc* _cretval;
     _cretval = pango_attribute_as_font_desc(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_font_desc.AttrFontDesc(cast(PangoAttrFontDesc*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_font_desc.AttrFontDesc(cast(PangoAttrFontDesc*)_cretval, this) : null;
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrFontFeatures* _cretval;
     _cretval = pango_attribute_as_font_features(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_font_features.AttrFontFeatures(cast(PangoAttrFontFeatures*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_font_features.AttrFontFeatures(cast(PangoAttrFontFeatures*)_cretval, this) : null;
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrInt* _cretval;
     _cretval = pango_attribute_as_int(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_int.AttrInt(cast(PangoAttrInt*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_int.AttrInt(cast(PangoAttrInt*)_cretval, this) : null;
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrLanguage* _cretval;
     _cretval = pango_attribute_as_language(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_language.AttrLanguage(cast(PangoAttrLanguage*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_language.AttrLanguage(cast(PangoAttrLanguage*)_cretval, this) : null;
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrShape* _cretval;
     _cretval = pango_attribute_as_shape(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_shape.AttrShape(cast(PangoAttrShape*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_shape.AttrShape(cast(PangoAttrShape*)_cretval, this) : null;
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrSize* _cretval;
     _cretval = pango_attribute_as_size(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_size.AttrSize(cast(PangoAttrSize*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_size.AttrSize(cast(PangoAttrSize*)_cretval, this) : null;
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class Attribute : gobject.boxed.BoxedWrap!(pango_attribute_get_type)
   {
     PangoAttrString* _cretval;
     _cretval = pango_attribute_as_string(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_string.AttrString(cast(PangoAttrString*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_string.AttrString(cast(PangoAttrString*)_cretval, this) : null;
     return _retval;
   }
 

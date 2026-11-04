@@ -94,7 +94,7 @@ class Item : gobject.boxed.BoxedWrap!(pango_item_get_type)
   */
   @property pango.analysis.Analysis analysis() nothrow
   {
-    return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)this._cPtr).analysis, No.Take);
+    return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)this._cPtr).analysis, this);
   }
 
   /**

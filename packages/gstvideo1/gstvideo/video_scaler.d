@@ -20,6 +20,12 @@ class VideoScaler : OpaqueWrap!(GstVideoScaler*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Scale a rectangle of pixels in src with src_stride to dest with
       dest_stride using the horizontal scaler hscaler and the vertical

@@ -4,6 +4,16 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstsdp1/
 //!info capi https://gstreamer.freedesktop.org/documentation/sdp/index.html
 
+// Disabled: create or fill a structure with C allocated members (freed by gst_sdp_media_free/uninit), which a D copy
+// would leak or double free. set_media_from_caps and add_media_from_structure modify an existing media (not outputs).
+//!set record[SDPMedia].method[copy][disable] 1
+//!set record[SDPMedia].function[new][disable] 1
+//!set record[SDPMedia].function[init][disable] 1
+//!set record[SDPMedia].function[set_media_from_caps].parameters.parameter[media][direction] in
+//!set record[SDPMedia].function[set_media_from_caps].parameters.parameter[media][caller-allocates] 0
+//!set record[SDPMedia].function[add_media_from_structure].parameters.parameter[media][direction] in
+//!set record[SDPMedia].function[add_media_from_structure].parameters.parameter[media][caller-allocates] 0
+
 //# Disable methods with arrays with sizes not described by parameters (FIXME)
 //!set record[MIKEYMessage].method[add_t][disable] 1
 //!set record[MIKEYPayload].method[t_set][disable] 1

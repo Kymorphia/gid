@@ -62,6 +62,14 @@ class PixbufModulePattern : StructWrap!(GdkPixbufModulePattern)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _prefixRef; // Keeps borrowed GC string alive
+
   /**
       Get `prefix` field.
       Returns: the prefix for this pattern
@@ -78,8 +86,14 @@ class PixbufModulePattern : StructWrap!(GdkPixbufModulePattern)
   */
   @property void prefix(string propval) nothrow
   {
-    (cast(GdkPixbufModulePattern*)this._cPtr).prefix = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("prefix"))
+      return;
+
+    _prefixRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModulePattern*)this._cPtr).prefix = cast(char*)_prefixRef;
   }
+
+  private const(char)* _maskRef; // Keeps borrowed GC string alive
 
   /**
       Get `mask` field.
@@ -99,7 +113,11 @@ class PixbufModulePattern : StructWrap!(GdkPixbufModulePattern)
   */
   @property void mask(string propval) nothrow
   {
-    (cast(GdkPixbufModulePattern*)this._cPtr).mask = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("mask"))
+      return;
+
+    _maskRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModulePattern*)this._cPtr).mask = cast(char*)_maskRef;
   }
 
   /**

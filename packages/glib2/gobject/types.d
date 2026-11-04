@@ -307,7 +307,7 @@ alias ClosureNotify = void delegate(gobject.closure.Closure closure);
     zeros before this function is called.
 
     Params:
-      instance = The instance to initialize
+      instance = The instance to initialize (borrowed, only valid during the callback, use `_dup` to keep a copy)
       gClass = The class of the type the instance is
            created for
 */

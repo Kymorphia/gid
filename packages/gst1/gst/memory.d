@@ -75,6 +75,9 @@ class Memory : gobject.boxed.BoxedWrap!(gst_memory_get_type)
     super(ptr, take);
   }
 
+  /** Scope of a structure mapped by [gst.memory.Memory.map] (see [gid.wrap.MapScope]) */
+  alias MapScope = gid.wrap.MapScope!(gst.map_info.MapInfo, gst_memory_unmap, gst.memory.Memory);
+
   /** Returns `this`, for use in `with` statements. */
   override Memory self() nothrow
   {
@@ -309,30 +312,6 @@ class Memory : gobject.boxed.BoxedWrap!(gst_memory_get_type)
   }
 
   /**
-      Create a #GstMemory object that is mapped with flags. If mem is mappable
-      with flags, this function returns the mapped mem directly. Otherwise a
-      mapped copy of mem is returned.
-      
-      This function takes ownership of old mem and returns a reference to a new
-      #GstMemory.
-  
-      Params:
-        info = pointer for info
-        flags = mapping flags
-      Returns: a #GstMemory object mapped
-        with flags or null when a mapping is not possible.
-  */
-  gst.memory.Memory makeMapped(out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
-  {
-    GstMemory* _cretval;
-    GstMapInfo _info;
-    _cretval = gst_memory_make_mapped(cast(GstMemory*)this._cPtr(Yes.Dup), &_info, flags);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
-    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
-    return _retval;
-  }
-
-  /**
       Returns a writable copy of memory.
       
       If there is only one reference count on memory, the caller must be the owner,
@@ -370,16 +349,16 @@ class Memory : gobject.boxed.BoxedWrap!(gst_memory_get_type)
       should be done.
   
       Params:
-        info = pointer for info
+        info = pointer for info (mapped structure scope, unmapped by its `unmap()` or when it goes out of scope, use a local variable: `Memory.MapScope info;`)
         flags = mapping flags
       Returns: true if the map operation was successful.
   */
-  bool map(out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
+  bool map(out gst.memory.Memory.MapScope info, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
-    GstMapInfo _info;
-    _retval = cast(bool)gst_memory_map(cast(GstMemory*)this._cPtr, &_info, flags);
-    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
+    auto _info = cast(GstMapInfo*)info._begin(this);
+    _retval = cast(bool)gst_memory_map(cast(GstMemory*)this._cPtr, _info, flags);
+    info._mapped = _retval;
     return _retval;
   }
 
@@ -416,16 +395,5 @@ class Memory : gobject.boxed.BoxedWrap!(gst_memory_get_type)
     _cretval = gst_memory_share(cast(GstMemory*)this._cPtr, offset, size);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
-  }
-
-  /**
-      Release the memory obtained with [gst.memory.Memory.map]
-  
-      Params:
-        info = a #GstMapInfo
-  */
-  void unmap(gst.map_info.MapInfo info) nothrow
-  {
-    gst_memory_unmap(cast(GstMemory*)this._cPtr, info ? cast(GstMapInfo*)info._cPtr : null);
   }
 }

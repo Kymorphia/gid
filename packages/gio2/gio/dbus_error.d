@@ -177,7 +177,7 @@ struct DBusError
 
     auto _entries_arr = new GDBusErrorEntry[](entries.length);
     auto _entries = _entries_arr.ptr;
-    foreach (i, obj; entries) _entries[i] = obj._cInstance;
+    foreach (i, obj; entries) _entries[i] = *cast(GDBusErrorEntry*)obj._cPtr;
     g_dbus_error_register_error_domain(_errorDomainQuarkName, cast(size_t*)&quarkVolatile, _entries, _numEntries);
   }
 

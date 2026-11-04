@@ -21,6 +21,12 @@ class AudioResampler : OpaqueWrap!(GstAudioResampler*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get the number of input frames that would currently be needed
       to produce out_frames from resampler.

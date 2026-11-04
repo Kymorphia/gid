@@ -47,6 +47,12 @@ class AudioRingBufferSpec : StructWrap!(GstAudioRingBufferSpec)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gst.caps.Caps _capsRef; // Keeps borrowed field value alive
 
   /**
@@ -65,6 +71,9 @@ class AudioRingBufferSpec : StructWrap!(GstAudioRingBufferSpec)
   */
   @property void caps(gst.caps.Caps propval) nothrow
   {
+    if (_refuseBorrowedStore("caps"))
+      return;
+
     _capsRef = propval;
     (cast(GstAudioRingBufferSpec*)this._cPtr).caps = propval ? cast(GstCaps*)propval._cPtr(No.Dup) : null;
   }

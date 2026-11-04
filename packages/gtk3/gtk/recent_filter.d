@@ -165,10 +165,11 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.RecentFilterFunc*)userData;
+      auto _filterInfo = filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
+        _dretval = (*_dlg)(_filterInfo);
       }
       catch (Exception e)
       {

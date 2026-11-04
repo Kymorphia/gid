@@ -50,6 +50,12 @@ class InputMessage : StructWrap!(GInputMessage)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `vectors` field.
       Returns: pointer to an

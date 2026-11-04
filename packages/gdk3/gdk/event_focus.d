@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Describes a change of keyboard focus.
 */
-class EventFocus : StructWrap!(GdkEventFocus)
+class EventFocus : StructWrap!(GdkEventFocus, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_focus.EventFocus` wrap type.
@@ -34,6 +34,12 @@ class EventFocus : StructWrap!(GdkEventFocus)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -73,6 +79,9 @@ class EventFocus : StructWrap!(GdkEventFocus)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventFocus*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

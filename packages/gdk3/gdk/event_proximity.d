@@ -20,7 +20,7 @@ import gid.gid;
     This event type will be used pretty rarely. It only is important for
     XInput aware programs that are drawing their own cursor.
 */
-class EventProximity : StructWrap!(GdkEventProximity)
+class EventProximity : StructWrap!(GdkEventProximity, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_proximity.EventProximity` wrap type.
@@ -45,6 +45,12 @@ class EventProximity : StructWrap!(GdkEventProximity)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -84,6 +90,9 @@ class EventProximity : StructWrap!(GdkEventProximity)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventProximity*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -146,6 +155,9 @@ class EventProximity : StructWrap!(GdkEventProximity)
   */
   @property void device(gdk.device.Device propval) nothrow
   {
+    if (_refuseBorrowedStore("device"))
+      return;
+
     _deviceRef = propval;
     (cast(GdkEventProximity*)this._cPtr).device = propval ? cast(GdkDevice*)propval._cPtr(No.Dup) : null;
   }

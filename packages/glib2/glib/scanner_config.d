@@ -110,6 +110,14 @@ class ScannerConfig : StructWrap!(GScannerConfig)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _csetSkipCharactersRef; // Keeps borrowed GC string alive
+
   /**
       Get `csetSkipCharacters` field.
       Returns: specifies which characters should be skipped
@@ -130,8 +138,14 @@ class ScannerConfig : StructWrap!(GScannerConfig)
   */
   @property void csetSkipCharacters(string propval) nothrow
   {
-    (cast(GScannerConfig*)this._cPtr).csetSkipCharacters = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("csetSkipCharacters"))
+      return;
+
+    _csetSkipCharactersRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).csetSkipCharacters = cast(char*)_csetSkipCharactersRef;
   }
+
+  private const(char)* _csetIdentifierFirstRef; // Keeps borrowed GC string alive
 
   /**
       Get `csetIdentifierFirst` field.
@@ -151,8 +165,14 @@ class ScannerConfig : StructWrap!(GScannerConfig)
   */
   @property void csetIdentifierFirst(string propval) nothrow
   {
-    (cast(GScannerConfig*)this._cPtr).csetIdentifierFirst = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("csetIdentifierFirst"))
+      return;
+
+    _csetIdentifierFirstRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).csetIdentifierFirst = cast(char*)_csetIdentifierFirstRef;
   }
+
+  private const(char)* _csetIdentifierNthRef; // Keeps borrowed GC string alive
 
   /**
       Get `csetIdentifierNth` field.
@@ -176,8 +196,14 @@ class ScannerConfig : StructWrap!(GScannerConfig)
   */
   @property void csetIdentifierNth(string propval) nothrow
   {
-    (cast(GScannerConfig*)this._cPtr).csetIdentifierNth = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("csetIdentifierNth"))
+      return;
+
+    _csetIdentifierNthRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).csetIdentifierNth = cast(char*)_csetIdentifierNthRef;
   }
+
+  private const(char)* _cpairCommentSingleRef; // Keeps borrowed GC string alive
 
   /**
       Get `cpairCommentSingle` field.
@@ -201,7 +227,11 @@ class ScannerConfig : StructWrap!(GScannerConfig)
   */
   @property void cpairCommentSingle(string propval) nothrow
   {
-    (cast(GScannerConfig*)this._cPtr).cpairCommentSingle = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("cpairCommentSingle"))
+      return;
+
+    _cpairCommentSingleRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).cpairCommentSingle = cast(char*)_cpairCommentSingleRef;
   }
 
   /**

@@ -46,6 +46,14 @@ class ActionEntry : StructWrap!(GActionEntry)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: the name of the action
@@ -62,7 +70,11 @@ class ActionEntry : StructWrap!(GActionEntry)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GActionEntry*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GActionEntry*)this._cPtr).name = cast(const(char)*)_nameRef;
   }
 
   /** Function alias for field `activate` */
@@ -81,6 +93,8 @@ class ActionEntry : StructWrap!(GActionEntry)
   {
     return (cast(GActionEntry*)this._cPtr).activate;
   }
+
+  private const(char)* _parameterTypeRef; // Keeps borrowed GC string alive
 
   /**
       Get `parameterType` field.
@@ -102,8 +116,14 @@ class ActionEntry : StructWrap!(GActionEntry)
   */
   @property void parameterType(string propval) nothrow
   {
-    (cast(GActionEntry*)this._cPtr).parameterType = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("parameterType"))
+      return;
+
+    _parameterTypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GActionEntry*)this._cPtr).parameterType = cast(const(char)*)_parameterTypeRef;
   }
+
+  private const(char)* _stateRef; // Keeps borrowed GC string alive
 
   /**
       Get `state` field.
@@ -127,7 +147,11 @@ class ActionEntry : StructWrap!(GActionEntry)
   */
   @property void state(string propval) nothrow
   {
-    (cast(GActionEntry*)this._cPtr).state = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("state"))
+      return;
+
+    _stateRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GActionEntry*)this._cPtr).state = cast(const(char)*)_stateRef;
   }
 
   /** Function alias for field `changeState` */

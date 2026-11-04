@@ -70,7 +70,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
   {
     const(GskRoundedRect)* _cretval;
     _cretval = gsk_rounded_clip_node_get_clip(cast(const(GskRenderNode)*)this._cPtr);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 }

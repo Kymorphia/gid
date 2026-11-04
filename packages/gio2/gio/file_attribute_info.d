@@ -32,6 +32,14 @@ class FileAttributeInfo : StructWrap!(GFileAttributeInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: the name of the attribute.
@@ -48,7 +56,11 @@ class FileAttributeInfo : StructWrap!(GFileAttributeInfo)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GFileAttributeInfo*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GFileAttributeInfo*)this._cPtr).name = cast(char*)_nameRef;
   }
 
   /**

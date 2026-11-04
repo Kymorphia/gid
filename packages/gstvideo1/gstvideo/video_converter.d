@@ -21,6 +21,12 @@ class VideoConverter : OpaqueWrap!(GstVideoConverter*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Convert the pixels of src into dest using convert.
       

@@ -41,6 +41,12 @@ class VideoMasteringDisplayInfo : StructWrap!(GstVideoMasteringDisplayInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `displayPrimaries` field.
       Returns: the xy coordinates of primaries in the CIE 1931 color space.

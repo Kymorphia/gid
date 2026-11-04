@@ -42,6 +42,12 @@ class OutputMessage : StructWrap!(GOutputMessage)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gio.socket_address.SocketAddress _addressRef; // Keeps borrowed field value alive
 
   /**
@@ -60,6 +66,9 @@ class OutputMessage : StructWrap!(GOutputMessage)
   */
   @property void address(gio.socket_address.SocketAddress propval) nothrow
   {
+    if (_refuseBorrowedStore("address"))
+      return;
+
     _addressRef = propval;
     (cast(GOutputMessage*)this._cPtr).address = propval ? cast(GSocketAddress*)propval._cPtr(No.Dup) : null;
   }

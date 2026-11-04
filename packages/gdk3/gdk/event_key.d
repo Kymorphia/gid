@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Describes a key press or key release event.
 */
-class EventKey : StructWrap!(GdkEventKey)
+class EventKey : StructWrap!(GdkEventKey, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_key.EventKey` wrap type.
@@ -64,6 +64,12 @@ class EventKey : StructWrap!(GdkEventKey)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.KeyPress] or [gdk.types.EventType.KeyRelease]).
@@ -101,6 +107,9 @@ class EventKey : StructWrap!(GdkEventKey)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventKey*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }
@@ -208,6 +217,8 @@ class EventKey : StructWrap!(GdkEventKey)
     (cast(GdkEventKey*)this._cPtr).length = propval;
   }
 
+  private const(char)* _string_Ref; // Keeps borrowed GC string alive
+
   /**
       Get `string_` field.
       Returns: a string containing an approximation of the text that
@@ -244,7 +255,11 @@ class EventKey : StructWrap!(GdkEventKey)
   */
   @property void string_(string propval) nothrow
   {
-    (cast(GdkEventKey*)this._cPtr).string_ = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("string_"))
+      return;
+
+    _string_Ref = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkEventKey*)this._cPtr).string_ = cast(char*)_string_Ref;
   }
 
   /**

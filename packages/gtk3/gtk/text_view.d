@@ -1171,7 +1171,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool imContextFilterKeypress(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
+    _retval = cast(bool)gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 

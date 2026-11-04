@@ -21,6 +21,12 @@ class SequenceIter : OpaqueWrap!(GSequenceIter*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Returns a negative number if `a` comes before `b`, 0 if they are equal,
       and a positive number if `a` comes after `b`.

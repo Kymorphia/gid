@@ -45,6 +45,14 @@ class SDPOrigin : StructWrap!(GstSDPOrigin)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _usernameRef; // Keeps borrowed GC string alive
+
   /**
       Get `username` field.
       Returns: the user's login on the originating host, or it is "-"
@@ -63,8 +71,14 @@ class SDPOrigin : StructWrap!(GstSDPOrigin)
   */
   @property void username(string propval) nothrow
   {
-    (cast(GstSDPOrigin*)this._cPtr).username = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("username"))
+      return;
+
+    _usernameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPOrigin*)this._cPtr).username = cast(char*)_usernameRef;
   }
+
+  private const(char)* _sessIdRef; // Keeps borrowed GC string alive
 
   /**
       Get `sessId` field.
@@ -86,8 +100,14 @@ class SDPOrigin : StructWrap!(GstSDPOrigin)
   */
   @property void sessId(string propval) nothrow
   {
-    (cast(GstSDPOrigin*)this._cPtr).sessId = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("sessId"))
+      return;
+
+    _sessIdRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPOrigin*)this._cPtr).sessId = cast(char*)_sessIdRef;
   }
+
+  private const(char)* _sessVersionRef; // Keeps borrowed GC string alive
 
   /**
       Get `sessVersion` field.
@@ -105,8 +125,14 @@ class SDPOrigin : StructWrap!(GstSDPOrigin)
   */
   @property void sessVersion(string propval) nothrow
   {
-    (cast(GstSDPOrigin*)this._cPtr).sessVersion = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("sessVersion"))
+      return;
+
+    _sessVersionRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPOrigin*)this._cPtr).sessVersion = cast(char*)_sessVersionRef;
   }
+
+  private const(char)* _nettypeRef; // Keeps borrowed GC string alive
 
   /**
       Get `nettype` field.
@@ -126,8 +152,14 @@ class SDPOrigin : StructWrap!(GstSDPOrigin)
   */
   @property void nettype(string propval) nothrow
   {
-    (cast(GstSDPOrigin*)this._cPtr).nettype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("nettype"))
+      return;
+
+    _nettypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPOrigin*)this._cPtr).nettype = cast(char*)_nettypeRef;
   }
+
+  private const(char)* _addrtypeRef; // Keeps borrowed GC string alive
 
   /**
       Get `addrtype` field.
@@ -145,8 +177,14 @@ class SDPOrigin : StructWrap!(GstSDPOrigin)
   */
   @property void addrtype(string propval) nothrow
   {
-    (cast(GstSDPOrigin*)this._cPtr).addrtype = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("addrtype"))
+      return;
+
+    _addrtypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPOrigin*)this._cPtr).addrtype = cast(char*)_addrtypeRef;
   }
+
+  private const(char)* _addrRef; // Keeps borrowed GC string alive
 
   /**
       Get `addr` field.
@@ -166,6 +204,10 @@ class SDPOrigin : StructWrap!(GstSDPOrigin)
   */
   @property void addr(string propval) nothrow
   {
-    (cast(GstSDPOrigin*)this._cPtr).addr = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("addr"))
+      return;
+
+    _addrRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPOrigin*)this._cPtr).addr = cast(char*)_addrRef;
   }
 }

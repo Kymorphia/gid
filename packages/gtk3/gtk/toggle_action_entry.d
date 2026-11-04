@@ -46,6 +46,14 @@ class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: The name of the action.
@@ -62,8 +70,14 @@ class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GtkToggleActionEntry*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkToggleActionEntry*)this._cPtr).name = cast(const(char)*)_nameRef;
   }
+
+  private const(char)* _stockIdRef; // Keeps borrowed GC string alive
 
   /**
       Get `stockId` field.
@@ -83,8 +97,14 @@ class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
   */
   @property void stockId(string propval) nothrow
   {
-    (cast(GtkToggleActionEntry*)this._cPtr).stockId = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("stockId"))
+      return;
+
+    _stockIdRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkToggleActionEntry*)this._cPtr).stockId = cast(const(char)*)_stockIdRef;
   }
+
+  private const(char)* _labelRef; // Keeps borrowed GC string alive
 
   /**
       Get `label` field.
@@ -104,8 +124,14 @@ class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
   */
   @property void label(string propval) nothrow
   {
-    (cast(GtkToggleActionEntry*)this._cPtr).label = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("label"))
+      return;
+
+    _labelRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkToggleActionEntry*)this._cPtr).label = cast(const(char)*)_labelRef;
   }
+
+  private const(char)* _acceleratorRef; // Keeps borrowed GC string alive
 
   /**
       Get `accelerator` field.
@@ -125,8 +151,14 @@ class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
   */
   @property void accelerator(string propval) nothrow
   {
-    (cast(GtkToggleActionEntry*)this._cPtr).accelerator = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("accelerator"))
+      return;
+
+    _acceleratorRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkToggleActionEntry*)this._cPtr).accelerator = cast(const(char)*)_acceleratorRef;
   }
+
+  private const(char)* _tooltipRef; // Keeps borrowed GC string alive
 
   /**
       Get `tooltip` field.
@@ -146,7 +178,11 @@ class ToggleActionEntry : StructWrap!(GtkToggleActionEntry)
   */
   @property void tooltip(string propval) nothrow
   {
-    (cast(GtkToggleActionEntry*)this._cPtr).tooltip = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("tooltip"))
+      return;
+
+    _tooltipRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkToggleActionEntry*)this._cPtr).tooltip = cast(const(char)*)_tooltipRef;
   }
 
   /**

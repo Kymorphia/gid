@@ -22,6 +22,12 @@ class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Returns the length of the queue.
       

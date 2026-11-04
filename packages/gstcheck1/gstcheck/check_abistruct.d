@@ -30,6 +30,14 @@ class CheckABIStruct : StructWrap!(GstCheckABIStruct)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: The name of the structure
@@ -46,7 +54,11 @@ class CheckABIStruct : StructWrap!(GstCheckABIStruct)
   */
   @property void name(string propval) nothrow
   {
-    (cast(GstCheckABIStruct*)this._cPtr).name = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstCheckABIStruct*)this._cPtr).name = cast(const(char)*)_nameRef;
   }
 
   /**

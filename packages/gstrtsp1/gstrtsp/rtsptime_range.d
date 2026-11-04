@@ -36,6 +36,12 @@ class RTSPTimeRange : StructWrap!(GstRTSPTimeRange)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `unit` field.
       Returns: the time units used

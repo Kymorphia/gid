@@ -31,6 +31,12 @@ class BitWriter : StructWrap!(GstBitWriter)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `bitSize` field.
       Returns: Size of written @data in bits

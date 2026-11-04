@@ -17,6 +17,9 @@
 
 //# Disable: Deprecated API with a replacement
 //!set class[Terminal].method[event_check_gregex_simple][ignore] 1
+//!set class[Terminal].method[get_text][ignore] 1
+//!set class[Terminal].method[get_text_include_trailing_spaces][ignore] 1
+//!set class[Terminal].method[get_text_range][ignore] 1
 
 //# Disable: Internal/implementation-only API, not useful from D
 //!set record[Uuid].method[free_to_string][ignore] 1

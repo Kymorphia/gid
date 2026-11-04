@@ -25,6 +25,12 @@ class Node : StructWrap!(GNode)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `next` field.
       Returns: points to the node's next sibling (a sibling is another
@@ -32,7 +38,7 @@ class Node : StructWrap!(GNode)
   */
   @property glib.node.Node next() nothrow
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).next, No.Take);
+    return (cast(GNode*)this._cPtr).next ? new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).next, this) : null;
   }
 
   /**
@@ -41,7 +47,7 @@ class Node : StructWrap!(GNode)
   */
   @property glib.node.Node prev() nothrow
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).prev, No.Take);
+    return (cast(GNode*)this._cPtr).prev ? new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).prev, this) : null;
   }
 
   /**
@@ -51,7 +57,7 @@ class Node : StructWrap!(GNode)
   */
   @property glib.node.Node parent() nothrow
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).parent, No.Take);
+    return (cast(GNode*)this._cPtr).parent ? new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).parent, this) : null;
   }
 
   /**
@@ -62,7 +68,7 @@ class Node : StructWrap!(GNode)
   */
   @property glib.node.Node children() nothrow
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).children, No.Take);
+    return (cast(GNode*)this._cPtr).children ? new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).children, this) : null;
   }
 
   /**
@@ -112,10 +118,11 @@ class Node : StructWrap!(GNode)
     extern(C) void _funcCallback(GNode* node, void* data) nothrow
     {
       auto _dlg = cast(glib.types.NodeForeachFunc*)data;
+      auto _node = node ? new glib.node.Node(cast(void*)node, null) : null;
 
       try
       {
-        (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
+        (*_dlg)(_node);
       }
       catch (Exception e)
       {
@@ -239,10 +246,11 @@ class Node : StructWrap!(GNode)
     {
       bool _dretval;
       auto _dlg = cast(glib.types.NodeTraverseFunc*)data;
+      auto _node = node ? new glib.node.Node(cast(void*)node, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
+        _dretval = (*_dlg)(_node);
       }
       catch (Exception e)
       {

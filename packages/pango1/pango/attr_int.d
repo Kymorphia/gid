@@ -30,6 +30,12 @@ class AttrInt : StructWrap!(PangoAttrInt)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `attr` field.
       Returns: the common portion of the attribute

@@ -42,7 +42,7 @@ class VideoTimeCode : gobject.boxed.BoxedWrap!(gst_video_time_code_get_type)
   */
   @property gstvideo.video_time_code_config.VideoTimeCodeConfig config() nothrow
   {
-    return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)this._cPtr).config, No.Take);
+    return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)this._cPtr).config, this);
   }
 
   /**

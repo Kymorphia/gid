@@ -40,6 +40,14 @@ class Attribute : StructWrap!(AtkAttribute)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
   /**
       Get `name` field.
       Returns: The attribute name.
@@ -56,8 +64,14 @@ class Attribute : StructWrap!(AtkAttribute)
   */
   @property void name(string propval) nothrow
   {
-    (cast(AtkAttribute*)this._cPtr).name = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(AtkAttribute*)this._cPtr).name = cast(char*)_nameRef;
   }
+
+  private const(char)* _valueRef; // Keeps borrowed GC string alive
 
   /**
       Get `value` field.
@@ -75,6 +89,10 @@ class Attribute : StructWrap!(AtkAttribute)
   */
   @property void value(string propval) nothrow
   {
-    (cast(AtkAttribute*)this._cPtr).value = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("value"))
+      return;
+
+    _valueRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(AtkAttribute*)this._cPtr).value = cast(char*)_valueRef;
   }
 }

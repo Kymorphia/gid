@@ -1086,7 +1086,7 @@ class StatusIcon : gobject.object.ObjectWrap
           `bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon)`
   
           `event` the #GdkEventButton which triggered
-                                            this signal (optional)
+                                            this signal (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `statusIcon` the instance the signal is connected to (optional)
   
@@ -1110,7 +1110,10 @@ class StatusIcon : gobject.object.ObjectWrap
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_button.EventButton(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -1146,7 +1149,7 @@ class StatusIcon : gobject.object.ObjectWrap
           `bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon)`
   
           `event` the #GdkEventButton which triggered
-                                            this signal (optional)
+                                            this signal (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `statusIcon` the instance the signal is connected to (optional)
   
@@ -1170,7 +1173,10 @@ class StatusIcon : gobject.object.ObjectWrap
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_button.EventButton(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
@@ -1360,7 +1366,7 @@ class StatusIcon : gobject.object.ObjectWrap
           `bool callback(gdk.event_scroll.EventScroll event, gtk.status_icon.StatusIcon statusIcon)`
   
           `event` the #GdkEventScroll which triggered
-                                            this signal (optional)
+                                            this signal (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
   
           `statusIcon` the instance the signal is connected to (optional)
   
@@ -1384,7 +1390,10 @@ class StatusIcon : gobject.object.ObjectWrap
       bool _retval;
 
       static if (Parameters!T.length > 0)
-        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gdk.event_scroll.EventScroll(_event, null) : null;
+      }
 
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);

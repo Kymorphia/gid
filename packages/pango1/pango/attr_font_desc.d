@@ -31,6 +31,12 @@ class AttrFontDesc : StructWrap!(PangoAttrFontDesc)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `attr` field.
       Returns: the common portion of the attribute
@@ -58,6 +64,9 @@ class AttrFontDesc : StructWrap!(PangoAttrFontDesc)
   */
   @property void desc(pango.font_description.FontDescription propval) nothrow
   {
+    if (_refuseBorrowedStore("desc"))
+      return;
+
     _descRef = propval;
     (cast(PangoAttrFontDesc*)this._cPtr).desc = propval ? cast(PangoFontDescription*)propval._cPtr(No.Dup) : null;
   }

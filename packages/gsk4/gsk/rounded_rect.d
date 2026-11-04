@@ -43,6 +43,12 @@ class RoundedRect : StructWrap!(GskRoundedRect)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `bounds` field.
       Returns: the bounds of the rectangle
@@ -117,7 +123,7 @@ class RoundedRect : StructWrap!(GskRoundedRect)
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_init(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_size_t)*)&topLeft, cast(const(graphene_size_t)*)&topRight, cast(const(graphene_size_t)*)&bottomRight, cast(const(graphene_size_t)*)&bottomLeft);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 
@@ -135,7 +141,7 @@ class RoundedRect : StructWrap!(GskRoundedRect)
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_init_copy(cast(GskRoundedRect*)this._cPtr, src ? cast(const(GskRoundedRect)*)src._cPtr : null);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 
@@ -152,7 +158,7 @@ class RoundedRect : StructWrap!(GskRoundedRect)
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_init_from_rect(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, radius);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 
@@ -198,7 +204,7 @@ class RoundedRect : StructWrap!(GskRoundedRect)
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_normalize(cast(GskRoundedRect*)this._cPtr);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 
@@ -216,7 +222,7 @@ class RoundedRect : StructWrap!(GskRoundedRect)
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_offset(cast(GskRoundedRect*)this._cPtr, dx, dy);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 
@@ -241,7 +247,7 @@ class RoundedRect : StructWrap!(GskRoundedRect)
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_shrink(cast(GskRoundedRect*)this._cPtr, top, right, bottom, left);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, this) : null;
     return _retval;
   }
 }

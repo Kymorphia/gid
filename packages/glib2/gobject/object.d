@@ -576,10 +576,10 @@ class ObjectWrap : GidWrap
 
     auto _parameters_arr = new GParameter[](parameters.length);
     auto _parameters = _parameters_arr.ptr;
-    foreach (i, obj; parameters) _parameters[i] = obj._cInstance;
+    foreach (i, obj; parameters) _parameters[i] = *cast(GParameter*)obj._cPtr;
     _cretval = g_object_newv(objectType, _nParameters, _parameters);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
-    foreach (i, obj; parameters) obj._cInstance = _parameters[i];
+    foreach (i, obj; parameters) *cast(GParameter*)obj._cPtr = _parameters[i];
     return _retval;
   }
 

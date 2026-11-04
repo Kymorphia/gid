@@ -28,6 +28,14 @@ class SettingsValue : StructWrap!(GtkSettingsValue)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _originRef; // Keeps borrowed GC string alive
+
   /**
       Get `origin` field.
       Returns: Origin should be something like “filename:linenumber” for
@@ -46,7 +54,11 @@ class SettingsValue : StructWrap!(GtkSettingsValue)
   */
   @property void origin(string propval) nothrow
   {
-    (cast(GtkSettingsValue*)this._cPtr).origin = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("origin"))
+      return;
+
+    _originRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkSettingsValue*)this._cPtr).origin = cast(char*)_originRef;
   }
 
   /**

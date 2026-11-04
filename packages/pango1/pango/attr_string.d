@@ -30,6 +30,12 @@ class AttrString : StructWrap!(PangoAttrString)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `attr` field.
       Returns: the common portion of the attribute
@@ -38,6 +44,8 @@ class AttrString : StructWrap!(PangoAttrString)
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrString*)this._cPtr).attr);
   }
+
+  private const(char)* _valueRef; // Keeps borrowed GC string alive
 
   /**
       Get `value` field.
@@ -55,6 +63,10 @@ class AttrString : StructWrap!(PangoAttrString)
   */
   @property void value(string propval) nothrow
   {
-    (cast(PangoAttrString*)this._cPtr).value = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("value"))
+      return;
+
+    _valueRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(PangoAttrString*)this._cPtr).value = cast(char*)_valueRef;
   }
 }

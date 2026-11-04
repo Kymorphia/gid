@@ -59,7 +59,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property gstsdp.sdporigin.SDPOrigin origin() nothrow
   {
-    return new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)&(cast(GstSDPMessage*)this._cPtr).origin, No.Take);
+    return new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)&(cast(GstSDPMessage*)this._cPtr).origin, this);
   }
 
   /**
@@ -113,7 +113,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property gstsdp.sdpconnection.SDPConnection connection() nothrow
   {
-    return new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)&(cast(GstSDPMessage*)this._cPtr).connection, No.Take);
+    return new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)&(cast(GstSDPMessage*)this._cPtr).connection, this);
   }
 
   /**
@@ -149,7 +149,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property gstsdp.sdpkey.SDPKey key() nothrow
   {
-    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMessage*)this._cPtr).key, No.Take);
+    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMessage*)this._cPtr).key, this);
   }
 
   /**
@@ -396,7 +396,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPAttribute)* _cretval;
     _cretval = gst_sdp_message_get_attribute(cast(const(GstSDPMessage)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpattribute.SDPAttribute(cast(GstSDPAttribute*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpattribute.SDPAttribute(cast(GstSDPAttribute*)_cretval, this) : null;
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPBandwidth)* _cretval;
     _cretval = gst_sdp_message_get_bandwidth(cast(const(GstSDPMessage)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpbandwidth.SDPBandwidth(cast(GstSDPBandwidth*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpbandwidth.SDPBandwidth(cast(GstSDPBandwidth*)_cretval, this) : null;
     return _retval;
   }
 
@@ -456,7 +456,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPConnection)* _cretval;
     _cretval = gst_sdp_message_get_connection(cast(const(GstSDPMessage)*)this._cPtr);
-    auto _retval = _cretval ? new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)_cretval, this) : null;
     return _retval;
   }
 
@@ -495,7 +495,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPKey)* _cretval;
     _cretval = gst_sdp_message_get_key(cast(const(GstSDPMessage)*)this._cPtr);
-    auto _retval = _cretval ? new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)_cretval, this) : null;
     return _retval;
   }
 
@@ -510,7 +510,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPMedia)* _cretval;
     _cretval = gst_sdp_message_get_media(cast(const(GstSDPMessage)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpmedia.SDPMedia(cast(GstSDPMedia*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpmedia.SDPMedia(cast(GstSDPMedia*)_cretval, this) : null;
     return _retval;
   }
 
@@ -522,7 +522,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPOrigin)* _cretval;
     _cretval = gst_sdp_message_get_origin(cast(const(GstSDPMessage)*)this._cPtr);
-    auto _retval = _cretval ? new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)_cretval, this) : null;
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPTime)* _cretval;
     _cretval = gst_sdp_message_get_time(cast(const(GstSDPMessage)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdptime.SDPTime(cast(GstSDPTime*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdptime.SDPTime(cast(GstSDPTime*)_cretval, this) : null;
     return _retval;
   }
 
@@ -603,7 +603,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   {
     const(GstSDPZone)* _cretval;
     _cretval = gst_sdp_message_get_zone(cast(const(GstSDPMessage)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpzone.SDPZone(cast(GstSDPZone*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.sdpzone.SDPZone(cast(GstSDPZone*)_cretval, this) : null;
     return _retval;
   }
 

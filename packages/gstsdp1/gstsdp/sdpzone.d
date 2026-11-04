@@ -32,6 +32,14 @@ class SDPZone : StructWrap!(GstSDPZone)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _timeRef; // Keeps borrowed GC string alive
+
   /**
       Get `time` field.
       Returns: the NTP time that a time zone adjustment happens
@@ -48,8 +56,14 @@ class SDPZone : StructWrap!(GstSDPZone)
   */
   @property void time(string propval) nothrow
   {
-    (cast(GstSDPZone*)this._cPtr).time = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("time"))
+      return;
+
+    _timeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPZone*)this._cPtr).time = cast(char*)_timeRef;
   }
+
+  private const(char)* _typedTimeRef; // Keeps borrowed GC string alive
 
   /**
       Get `typedTime` field.
@@ -67,7 +81,11 @@ class SDPZone : StructWrap!(GstSDPZone)
   */
   @property void typedTime(string propval) nothrow
   {
-    (cast(GstSDPZone*)this._cPtr).typedTime = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("typedTime"))
+      return;
+
+    _typedTimeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPZone*)this._cPtr).typedTime = cast(char*)_typedTimeRef;
   }
 
   /**

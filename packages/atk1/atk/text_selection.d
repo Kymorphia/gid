@@ -57,6 +57,12 @@ class TextSelection : StructWrap!(AtkTextSelection)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private atk.object.ObjectWrap _startObjectRef; // Keeps borrowed field value alive
 
   /**
@@ -75,6 +81,9 @@ class TextSelection : StructWrap!(AtkTextSelection)
   */
   @property void startObject(atk.object.ObjectWrap propval) nothrow
   {
+    if (_refuseBorrowedStore("startObject"))
+      return;
+
     _startObjectRef = propval;
     (cast(AtkTextSelection*)this._cPtr).startObject = propval ? cast(AtkObject*)propval._cPtr(No.Dup) : null;
   }
@@ -118,6 +127,9 @@ class TextSelection : StructWrap!(AtkTextSelection)
   */
   @property void endObject(atk.object.ObjectWrap propval) nothrow
   {
+    if (_refuseBorrowedStore("endObject"))
+      return;
+
     _endObjectRef = propval;
     (cast(AtkTextSelection*)this._cPtr).endObject = propval ? cast(AtkObject*)propval._cPtr(No.Dup) : null;
   }

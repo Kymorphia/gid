@@ -21,6 +21,12 @@ class VariantIter : OpaqueWrap!(GVariantIter*, g_variant_iter_free, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Queries the number of child items in the container that we are
       iterating over.  This is the total number of items -- not the number

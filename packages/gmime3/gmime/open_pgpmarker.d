@@ -36,6 +36,14 @@ class OpenPGPMarker : StructWrap!(GMimeOpenPGPMarker)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _markerRef; // Keeps borrowed GC string alive
+
   /**
       Get `marker` field.
       Returns: The OpenPGP marker.
@@ -52,7 +60,11 @@ class OpenPGPMarker : StructWrap!(GMimeOpenPGPMarker)
   */
   @property void marker(string propval) nothrow
   {
-    (cast(GMimeOpenPGPMarker*)this._cPtr).marker = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("marker"))
+      return;
+
+    _markerRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GMimeOpenPGPMarker*)this._cPtr).marker = cast(const(char)*)_markerRef;
   }
 
   /**

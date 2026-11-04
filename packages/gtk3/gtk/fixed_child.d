@@ -31,6 +31,12 @@ class FixedChild : StructWrap!(GtkFixedChild)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   private gtk.widget.Widget _widgetRef; // Keeps borrowed field value alive
 
   /** */
@@ -42,6 +48,9 @@ class FixedChild : StructWrap!(GtkFixedChild)
   /** */
   @property void widget(gtk.widget.Widget propval) nothrow
   {
+    if (_refuseBorrowedStore("widget"))
+      return;
+
     _widgetRef = propval;
     (cast(GtkFixedChild*)this._cPtr).widget = propval ? cast(GtkWidget*)propval._cPtr(No.Dup) : null;
   }

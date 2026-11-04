@@ -1762,7 +1762,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   bool imContextFilterKeypress(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
-    _retval = cast(bool)gtk_entry_im_context_filter_keypress(cast(GtkEntry*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
+    _retval = cast(bool)gtk_entry_im_context_filter_keypress(cast(GtkEntry*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 

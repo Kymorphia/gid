@@ -40,6 +40,12 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `payloadType` field.
       Returns: payload type, -1 means dynamic
@@ -59,6 +65,8 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
     (cast(GstRTPPayloadInfo*)this._cPtr).payloadType = propval;
   }
 
+  private const(char)* _mediaRef; // Keeps borrowed GC string alive
+
   /**
       Get `media` field.
       Returns: the media type(s), usually "audio", "video", "application", "text",
@@ -77,8 +85,14 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
   */
   @property void media(string propval) nothrow
   {
-    (cast(GstRTPPayloadInfo*)this._cPtr).media = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("media"))
+      return;
+
+    _mediaRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstRTPPayloadInfo*)this._cPtr).media = cast(const(char)*)_mediaRef;
   }
+
+  private const(char)* _encodingNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `encodingName` field.
@@ -96,7 +110,11 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
   */
   @property void encodingName(string propval) nothrow
   {
-    (cast(GstRTPPayloadInfo*)this._cPtr).encodingName = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("encodingName"))
+      return;
+
+    _encodingNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstRTPPayloadInfo*)this._cPtr).encodingName = cast(const(char)*)_encodingNameRef;
   }
 
   /**
@@ -118,6 +136,8 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
     (cast(GstRTPPayloadInfo*)this._cPtr).clockRate = propval;
   }
 
+  private const(char)* _encodingParametersRef; // Keeps borrowed GC string alive
+
   /**
       Get `encodingParameters` field.
       Returns: encoding parameters. For audio this is the number of
@@ -136,7 +156,11 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
   */
   @property void encodingParameters(string propval) nothrow
   {
-    (cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters = cast(const(char)*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("encodingParameters"))
+      return;
+
+    _encodingParametersRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters = cast(const(char)*)_encodingParametersRef;
   }
 
   /**
@@ -176,7 +200,7 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
     const(char)* _media = media.toCString!(No.Malloc, No.Nullable);
     const(char)* _encodingName = encodingName.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_rtp_payload_info_for_name(_media, _encodingName);
-    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval, null) : null;
     return _retval;
   }
 
@@ -193,7 +217,7 @@ class RTPPayloadInfo : StructWrap!(GstRTPPayloadInfo)
   {
     const(GstRTPPayloadInfo)* _cretval;
     _cretval = gst_rtp_payload_info_for_pt(payloadType);
-    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval, null) : null;
     return _retval;
   }
 }

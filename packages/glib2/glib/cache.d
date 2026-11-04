@@ -28,6 +28,12 @@ class Cache : OpaqueWrap!(GCache*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Frees the memory allocated for the #GCache.
       

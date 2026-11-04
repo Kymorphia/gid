@@ -11,7 +11,7 @@ import gid.gid;
 /**
     Generated when the state of a toplevel window changes.
 */
-class EventWindowState : StructWrap!(GdkEventWindowState)
+class EventWindowState : StructWrap!(GdkEventWindowState, gdk_event_copy, gdk_event_free)
 {
   /**
       Create a `event_window_state.EventWindowState` wrap type.
@@ -36,6 +36,12 @@ class EventWindowState : StructWrap!(GdkEventWindowState)
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
   }
 
   /**
@@ -75,6 +81,9 @@ class EventWindowState : StructWrap!(GdkEventWindowState)
   */
   @property void window(gdk.window.Window propval) nothrow
   {
+    if (_refuseBorrowedStore("window"))
+      return;
+
     _windowRef = propval;
     (cast(GdkEventWindowState*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
   }

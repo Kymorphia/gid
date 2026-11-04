@@ -57,6 +57,14 @@ class WindowAttr : StructWrap!(GdkWindowAttr)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _titleRef; // Keeps borrowed GC string alive
+
   /**
       Get `title` field.
       Returns: title of the window (for toplevel windows)
@@ -73,7 +81,11 @@ class WindowAttr : StructWrap!(GdkWindowAttr)
   */
   @property void title(string propval) nothrow
   {
-    (cast(GdkWindowAttr*)this._cPtr).title = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("title"))
+      return;
+
+    _titleRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkWindowAttr*)this._cPtr).title = cast(char*)_titleRef;
   }
 
   /**
@@ -210,6 +222,9 @@ class WindowAttr : StructWrap!(GdkWindowAttr)
   */
   @property void visual(gdk.visual.Visual propval) nothrow
   {
+    if (_refuseBorrowedStore("visual"))
+      return;
+
     _visualRef = propval;
     (cast(GdkWindowAttr*)this._cPtr).visual = propval ? cast(GdkVisual*)propval._cPtr(No.Dup) : null;
   }
@@ -251,9 +266,14 @@ class WindowAttr : StructWrap!(GdkWindowAttr)
   */
   @property void cursor(gdk.cursor.Cursor propval) nothrow
   {
+    if (_refuseBorrowedStore("cursor"))
+      return;
+
     _cursorRef = propval;
     (cast(GdkWindowAttr*)this._cPtr).cursor = propval ? cast(GdkCursor*)propval._cPtr(No.Dup) : null;
   }
+
+  private const(char)* _wmclassNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `wmclassName` field.
@@ -271,8 +291,14 @@ class WindowAttr : StructWrap!(GdkWindowAttr)
   */
   @property void wmclassName(string propval) nothrow
   {
-    (cast(GdkWindowAttr*)this._cPtr).wmclassName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("wmclassName"))
+      return;
+
+    _wmclassNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkWindowAttr*)this._cPtr).wmclassName = cast(char*)_wmclassNameRef;
   }
+
+  private const(char)* _wmclassClassRef; // Keeps borrowed GC string alive
 
   /**
       Get `wmclassClass` field.
@@ -290,7 +316,11 @@ class WindowAttr : StructWrap!(GdkWindowAttr)
   */
   @property void wmclassClass(string propval) nothrow
   {
-    (cast(GdkWindowAttr*)this._cPtr).wmclassClass = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("wmclassClass"))
+      return;
+
+    _wmclassClassRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkWindowAttr*)this._cPtr).wmclassClass = cast(char*)_wmclassClassRef;
   }
 
   /**

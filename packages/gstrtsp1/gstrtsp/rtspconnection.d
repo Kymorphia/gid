@@ -32,6 +32,12 @@ class RTSPConnection : OpaqueWrap!(GstRTSPConnection*, void, void)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Add header to be appended to any HTTP request made by connection.
       If the header already exists then the old header is replaced by the new header.

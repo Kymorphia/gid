@@ -344,10 +344,11 @@ class Pad : gst.object.ObjectWrap
     {
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
+      auto _info = info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, null) : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), _info);
       }
       catch (Exception e)
       {

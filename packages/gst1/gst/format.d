@@ -45,7 +45,7 @@ struct Format
   {
     const(GstFormatDefinition)* _cretval;
     _cretval = gst_format_get_details(format);
-    auto _retval = _cretval ? new gst.format_definition.FormatDefinition(cast(GstFormatDefinition*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.format_definition.FormatDefinition(cast(GstFormatDefinition*)_cretval, null) : null;
     return _retval;
   }
 

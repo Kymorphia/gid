@@ -87,6 +87,12 @@ class RWLock : StructWrap!(GRWLock)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Frees the resources allocated to a lock with [glib.rwlock.RWLock.init_].
       

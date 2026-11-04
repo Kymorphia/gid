@@ -622,7 +622,7 @@ alias HookCheckFunc = bool delegate();
     Defines the type of function used by [glib.hook_list.HookList.marshalCheck].
 
     Params:
-      hook = a #GHook
+      hook = a #GHook (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: false if hook should be destroyed
 */
 alias HookCheckMarshaller = bool delegate(glib.hook.Hook hook);
@@ -632,8 +632,8 @@ alias HookCheckMarshaller = bool delegate(glib.hook.Hook hook);
     [glib.hook.Hook.insertSorted].
 
     Params:
-      newHook = the #GHook being inserted
-      sibling = the #GHook to compare with new_hook
+      newHook = the #GHook being inserted (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      sibling = the #GHook to compare with new_hook (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: a value <= 0 if new_hook should be before sibling
 */
 alias HookCompareFunc = int delegate(glib.hook.Hook newHook, glib.hook.Hook sibling);
@@ -643,8 +643,8 @@ alias HookCompareFunc = int delegate(glib.hook.Hook newHook, glib.hook.Hook sibl
     list of hooks gets finalized.
 
     Params:
-      hookList = a #GHookList
-      hook = the hook in hook_list that gets finalized
+      hookList = a #GHookList (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      hook = the hook in hook_list that gets finalized (borrowed, only valid during the callback, use `_dup` to keep a copy)
 */
 alias HookFinalizeFunc = void delegate(glib.hook_list.HookList hookList, glib.hook.Hook hook);
 
@@ -652,7 +652,7 @@ alias HookFinalizeFunc = void delegate(glib.hook_list.HookList hookList, glib.ho
     Defines the type of the function passed to [glib.hook.Hook.find].
 
     Params:
-      hook = a #GHook
+      hook = a #GHook (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: true if the required #GHook has been found
 */
 alias HookFindFunc = bool delegate(glib.hook.Hook hook);
@@ -667,7 +667,7 @@ alias HookFunc = void delegate();
     Defines the type of function used by [glib.hook_list.HookList.marshal].
 
     Params:
-      hook = a #GHook
+      hook = a #GHook (borrowed, only valid during the callback, use `_dup` to keep a copy)
 */
 alias HookMarshaller = void delegate(glib.hook.Hook hook);
 
@@ -713,7 +713,7 @@ alias LogFunc = void delegate(string logDomain, glib.types.LogLevelFlags logLeve
     data passed to [glib.node.Node.childrenForeach].
 
     Params:
-      node = a #GNode.
+      node = a #GNode. (borrowed, only valid during the callback, use `_dup` to keep a copy)
 */
 alias NodeForeachFunc = void delegate(glib.node.Node node);
 
@@ -724,7 +724,7 @@ alias NodeForeachFunc = void delegate(glib.node.Node node);
     true, then the traversal is stopped.
 
     Params:
-      node = a #GNode.
+      node = a #GNode. (borrowed, only valid during the callback, use `_dup` to keep a copy)
     Returns: true to stop the traversal.
 */
 alias NodeTraverseFunc = bool delegate(glib.node.Node node);

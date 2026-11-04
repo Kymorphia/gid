@@ -46,6 +46,14 @@ class RecentData : StructWrap!(GtkRecentData)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _displayNameRef; // Keeps borrowed GC string alive
+
   /**
       Get `displayName` field.
       Returns: a UTF-8 encoded string, containing the name of the recently
@@ -64,8 +72,14 @@ class RecentData : StructWrap!(GtkRecentData)
   */
   @property void displayName(string propval) nothrow
   {
-    (cast(GtkRecentData*)this._cPtr).displayName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("displayName"))
+      return;
+
+    _displayNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentData*)this._cPtr).displayName = cast(char*)_displayNameRef;
   }
+
+  private const(char)* _descriptionRef; // Keeps borrowed GC string alive
 
   /**
       Get `description` field.
@@ -85,8 +99,14 @@ class RecentData : StructWrap!(GtkRecentData)
   */
   @property void description(string propval) nothrow
   {
-    (cast(GtkRecentData*)this._cPtr).description = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("description"))
+      return;
+
+    _descriptionRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentData*)this._cPtr).description = cast(char*)_descriptionRef;
   }
+
+  private const(char)* _mimeTypeRef; // Keeps borrowed GC string alive
 
   /**
       Get `mimeType` field.
@@ -104,8 +124,14 @@ class RecentData : StructWrap!(GtkRecentData)
   */
   @property void mimeType(string propval) nothrow
   {
-    (cast(GtkRecentData*)this._cPtr).mimeType = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("mimeType"))
+      return;
+
+    _mimeTypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentData*)this._cPtr).mimeType = cast(char*)_mimeTypeRef;
   }
+
+  private const(char)* _appNameRef; // Keeps borrowed GC string alive
 
   /**
       Get `appName` field.
@@ -125,8 +151,14 @@ class RecentData : StructWrap!(GtkRecentData)
   */
   @property void appName(string propval) nothrow
   {
-    (cast(GtkRecentData*)this._cPtr).appName = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("appName"))
+      return;
+
+    _appNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentData*)this._cPtr).appName = cast(char*)_appNameRef;
   }
+
+  private const(char)* _appExecRef; // Keeps borrowed GC string alive
 
   /**
       Get `appExec` field.
@@ -150,7 +182,11 @@ class RecentData : StructWrap!(GtkRecentData)
   */
   @property void appExec(string propval) nothrow
   {
-    (cast(GtkRecentData*)this._cPtr).appExec = cast(char*)toCString!(No.Malloc, Yes.Nullable)(propval);
+    if (_refuseBorrowedStore("appExec"))
+      return;
+
+    _appExecRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkRecentData*)this._cPtr).appExec = cast(char*)_appExecRef;
   }
 
   /**

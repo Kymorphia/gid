@@ -4,6 +4,10 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstgl1/
 //!info capi https://gstreamer.freedesktop.org/documentation/gl/index.html
 
+// Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
+//!set function[buffer_add_gl_sync_meta].return-value[][gid-borrow] buffer
+//!set function[buffer_add_gl_sync_meta_full].return-value[][gid-borrow] buffer
+
 //# Conflicts with copy method
 //!set record[GLAllocationParams].field[copy][ignore] 1
 

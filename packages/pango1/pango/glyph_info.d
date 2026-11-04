@@ -33,6 +33,12 @@ class GlyphInfo : StructWrap!(PangoGlyphInfo)
     super(ptr, take);
   }
 
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
   /**
       Get `glyph` field.
       Returns: the glyph itself.

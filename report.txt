@@ -8,7 +8,7 @@ adw1                       |   95    0    0   100 | 1279    0    0   100 |   55 
 arrow1                     |  296    0    0   100 |  973    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-atk1                       |   40    0    0   100 |  236    0    2  99.2 |   41    0    0   100 |   29    0    0   100 |
+atk1                       |   40    0    0   100 |  237    1    0  99.6 |   41    0    0   100 |   29    0    0   100 |
 glib2                      |   74    1    0  98.7 | 1264    9    0  99.3 |    0    0    0   100 |  108    0    0   100 |
 glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0    0    0   100 |    1    0    0   100 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   15    0    0   100 |
@@ -21,10 +21,10 @@ gio2                       |  171    0    0   100 | 1669    3    0  99.8 |   79 
 giounix2                   |   11    0    0   100 |  100    1    0  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94   10    0  90.4 | 1533    0    1  99.9 |   23    0    0   100 |  130    1    0  99.2 |
+gst1                       |   94   10    0  90.4 | 1530    3    1  99.7 |   23    0    0   100 |  130    1    0  99.2 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
-gstaudio1                  |   33    0    0   100 |  216    5    0  97.7 |    0    0    0   100 |   61    2    0  96.8 |
+gstaudio1                  |   33    0    0   100 |  215    6    0  97.3 |    0    0    0   100 |   61    2    0  96.8 |
 gstbase1                   |   23    0    0   100 |  308    4    0  98.7 |    2    0    0   100 |   30    1    0  96.8 |
 gstcheck1                  |    8    0    0   100 |  109    2    0  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   17    0    0   100 |    3    0    0   100 |    2    0    0   100 |
@@ -33,12 +33,12 @@ gstglegl1                  |    7    0    0   100 |   16    6    0  72.7 |    0 
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstnet1                    |    9    0    0   100 |   25    0    0   100 |    0    0    0   100 |    6    0    0   100 |
 gstpbutils1                |   16    0    0   100 |  182    2    0  98.9 |    5    0    0   100 |    0    0    0   100 |
-gstrtp1                    |   11    0    0   100 |  197    1    0  99.5 |    6    0    0   100 |   17    0    0   100 |
-gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1    0    0   100 |   51    0    0   100 |
-gstsdp1                    |   23    0    0   100 |  169    2    0  98.8 |    0    0    0   100 |   87    2    0  97.8 |
+gstrtp1                    |   11    0    0   100 |  195    3    0  98.5 |    6    0    0   100 |   17    0    0   100 |
+gstrtsp1                   |   15    0    0   100 |  136    3    0  97.8 |    1    0    0   100 |   51    0    0   100 |
+gstsdp1                    |   23    0    0   100 |  166    5    0  97.1 |    0    0    0   100 |   87    2    0  97.8 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   60    1    0  98.4 |  386    6    0  98.5 |    2    0    0   100 |  186    3    0  98.4 |
-gtk3                       |  345    0    0   100 | 3781    2    0  99.9 |  448    0    0   100 |  155    0    0   100 |
+gstvideo1                  |   60    1    0  98.4 |  385    7    0  98.2 |    2    0    0   100 |  186    3    0  98.4 |
+gtk3                       |  345    0    0   100 | 3780    3    0  99.9 |  448    0    0   100 |  155    0    0   100 |
 gtk4                       |  326    0    0   100 | 3667    1    0 100.0 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32    0    0   100 |    0    0    0   100 |
@@ -52,7 +52,7 @@ parquet1                   |   16    0    0   100 |   77    0    0   100 |    0 
 rsvg2                      |    7    0    0   100 |   48    0    0   100 |    0    0    0   100 |   12    0    0   100 |
 secret1                    |   11    0    0   100 |  140    0    0   100 |    0    0    0   100 |    5    0    0   100 |
 soup3                      |   38    0    0   100 |  377    0    0   100 |   42    0    0   100 |    4    0    0   100 |
-vte2                       |    8    0    0   100 |  217    0    3  98.6 |   34    0    0   100 |    0    0    0   100 |
+vte2                       |    8    0    0   100 |  217    0    0   100 |   34    0    0   100 |    0    0    0   100 |
 vte3                       |    8    0    0   100 |  211    0    0   100 |   30    0    0   100 |    0    0    0   100 |
 webkit6                    |   76    0    0   100 |  691    0    0   100 |   72    0    0   100 |    0    0    0   100 |
 webkitwebprocessextension6 |   16    0    0   100 |  100    0    0   100 |   12    0    0   100 |    0    0    0   100 |
@@ -77,6 +77,7 @@ gst.types.ValueUniqueList
 gstvideo.video_multiview_flags_set.VideoMultiviewFlagsSet
 
 [Disabled Funcs]
+atk.document.Document.getTextSelections
 glib.option_context.OptionContext.setTranslateFunc
 glib.option_group.OptionGroup.setTranslateFunc
 glib.global.logSetWriterFunc
@@ -94,6 +95,10 @@ gio.dbus_connection.DBusConnection.registerSubtree
 gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
 gio.tls_client_connection.TlsClientConnection.getAcceptedCas
 giounix.desktop_app_info.DesktopAppInfo.search
+gst.buffer.Buffer.unmap
+gst.memory.Memory.makeMapped
+gst.memory.Memory.unmap
+gstaudio.audio_buffer.AudioBuffer.unmap
 gstaudio.audio_resampler.AudioResampler.resample
 gstaudio.audio_ring_buffer.AudioRingBuffer.setChannelPositions
 gstaudio.global.bufferAddAudioMeta
@@ -122,15 +127,25 @@ gstglegl.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
 gstglegl.eglimage.EGLImage.fromTexture
 gstpbutils.global.codecUtilsOpusCreateCaps
 gstpbutils.global.codecUtilsOpusCreateHeader
+gstrtp.rtcpbuffer.RTCPBuffer.unmap
+gstrtp.rtpbuffer.RTPBuffer.unmap
 gstrtp.global.bufferAddRtpSourceMeta
+gstrtsp.rtsptransport.RTSPTransport.init_
+gstrtsp.rtsptransport.RTSPTransport.new_
+gstrtsp.rtsptransport.RTSPTransport.parse
 gstsdp.mikeymessage.MIKEYMessage.addT
 gstsdp.mikeypayload.MIKEYPayload.tSet
+gstsdp.sdpmedia.SDPMedia.copy
+gstsdp.sdpmedia.SDPMedia.init_
+gstsdp.sdpmedia.SDPMedia.new_
+gstvideo.video_frame.VideoFrame.unmap
 gstvideo.video_meta.VideoMeta.setAlignment
 gstvideo.video_scaler.VideoScaler.vertical
 gstvideo.video_sink.VideoSink.centerRect
 gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
 gstvideo.video_vbiparser.VideoVBIParser.addLine
 gstvideo.global.videoChromaResample
+gtk.accel_group.AccelGroup.query
 gtk.list_store.ListStore.reorder
 gtk.menu.Menu.attachToWidget
 gtk.list_store.ListStore.reorder
@@ -180,13 +195,8 @@ harfbuzz.color_line.ColorLine.getColorStops
 pango.glyph_string.GlyphString.logClusters
 
 [Unsupported Funcs]
-atk.document.Document.getTextSelections
-atk.document.Document.setTextSelections
 gsk.path.Path.getClosestPoint
 gsk.path.Path.getEndPoint
 gsk.path.Path.getStartPoint
 gsk.path_measure.PathMeasure.getPoint
 gst.buffer.Buffer.foreachMeta
-vte.terminal.Terminal.getText
-vte.terminal.Terminal.getTextIncludeTrailingSpaces
-vte.terminal.Terminal.getTextRange
