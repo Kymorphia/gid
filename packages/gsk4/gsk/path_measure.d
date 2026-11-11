@@ -7,6 +7,7 @@ import gobject.boxed;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.path;
+import gsk.path_point;
 import gsk.types;
 
 /**
@@ -88,6 +89,26 @@ class PathMeasure : gobject.boxed.BoxedWrap!(gsk_path_measure_get_type)
     GskPath* _cretval;
     _cretval = gsk_path_measure_get_path(cast(GskPathMeasure*)this._cPtr);
     auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the point at the given distance into the path.
+      
+      An empty path has no points, so false is returned in that case.
+  
+      Params:
+        distance = the distance
+        result = return location for the point
+      Returns: true if result was set
+  */
+  bool getPoint(float distance, out gsk.path_point.PathPoint result) nothrow
+  {
+    bool _retval;
+    GskPathPoint _result;
+    _retval = cast(bool)gsk_path_measure_get_point(cast(GskPathMeasure*)this._cPtr, distance, &_result);
+    if (_retval)
+      result = new gsk.path_point.PathPoint(boxedCopy(gsk.path_point.PathPoint._getGType, &_result), Yes.Take);
     return _retval;
   }
 

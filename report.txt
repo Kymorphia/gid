@@ -20,8 +20,8 @@ gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4 
 gio2                       |  171    0    0   100 | 1669    3    0  99.8 |   79    0    0   100 |   64    4    0  94.1 |
 giounix2                   |   11    0    0   100 |  100    1    0  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
-gsk4                       |   58    0    0   100 |  305    0    4  98.7 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94   10    0  90.4 | 1530    3    1  99.7 |   23    0    0   100 |  130    1    0  99.2 |
+gsk4                       |   58    0    0   100 |  309    0    0   100 |    0    0    0   100 |   13    0    0   100 |
+gst1                       |   94   10    0  90.4 | 1531    3    0  99.8 |   23    0    0   100 |  130    1    0  99.2 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  215    6    0  97.3 |    0    0    0   100 |   61    2    0  96.8 |
@@ -193,10 +193,3 @@ gstvideo.video_meta.VideoMeta.map
 gstvideo.video_resampler.VideoResampler.taps
 harfbuzz.color_line.ColorLine.getColorStops
 pango.glyph_string.GlyphString.logClusters
-
-[Unsupported Funcs]
-gsk.path.Path.getClosestPoint
-gsk.path.Path.getEndPoint
-gsk.path.Path.getStartPoint
-gsk.path_measure.PathMeasure.getPoint
-gst.buffer.Buffer.foreachMeta

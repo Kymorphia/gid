@@ -360,6 +360,24 @@ alias VecDeque = GstVecDeque*;
 alias AllocationMetaParamsAggregator = bool delegate(out gst.structure.Structure aggregatedParams, gst.structure.Structure params0, gst.structure.Structure params1);
 
 /**
+    A function that will be called from [gst.buffer.Buffer.foreachMeta]. The meta
+    field will point to a the reference of the meta.
+    
+    buffer should not be modified from this callback.
+    
+    When this function returns true, the next meta will be
+    returned. When false is returned, [gst.buffer.Buffer.foreachMeta] will return.
+    
+    When meta is set to null, the item will be removed from the buffer.
+
+    Params:
+      buffer = a #GstBuffer
+      meta = a pointer to a #GstMeta (borrowed from the owner named by definitions; set to `null` to remove, replacing with a different instance is a programmer error)
+    Returns: false when [gst.buffer.Buffer.foreachMeta] should stop
+*/
+alias BufferForeachMetaFunc = bool delegate(gst.buffer.Buffer buffer, ref gst.meta.Meta meta);
+
+/**
     A function that will be called from [gst.buffer_list.BufferList.foreach_]. The buffer
     field will point to a the reference of the buffer at idx.
     

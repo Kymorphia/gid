@@ -4,6 +4,8 @@ module gst.buffer;
 public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
+import glib.c.functions;
+import glib.c.types;
 import glib.types;
 import gobject.boxed;
 import gobject.types;
@@ -690,6 +692,57 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_find_memory(cast(GstBuffer*)this._cPtr, offset, size, cast(uint*)&idx, cast(uint*)&length, cast(size_t*)&skip);
+    return _retval;
+  }
+
+  /**
+      Calls func with user_data for each meta in buffer.
+      
+      func can modify the passed meta pointer or its contents. The return value
+      of func defines if this function returns or if the remaining metadata items
+      in the buffer should be skipped.
+  
+      Params:
+        func = a #GstBufferForeachMetaFunc to call
+      Returns: false when func returned false for one of the metadata.
+  */
+  bool foreachMeta(gst.types.BufferForeachMetaFunc func) nothrow
+  {
+    extern(C) gboolean _funcCallback(GstBuffer* buffer, GstMeta** meta, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gst.types.BufferForeachMetaFunc*)userData;
+      auto _buffer = buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null;
+      auto _metaOrig = *meta;
+      auto _meta = _metaOrig ? new gst.meta.Meta(cast(void*)_metaOrig, _buffer) : null;
+
+      try
+      {
+        _dretval = (*_dlg)(_buffer, _meta);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.BufferForeachMetaFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+      if (!_meta)
+        *meta = null;
+      else if (_meta._cPtr !is cast(void*)_metaOrig)
+      {
+        g_log("Gid", GLogLevelFlags.LevelCritical, "%s",
+        "gst.types.BufferForeachMetaFunc replaced the borrowed meta".ptr);
+        *meta = _metaOrig;
+        _retval = cast(typeof(_retval))0;
+      }
+      else
+        *meta = _metaOrig;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    bool _retval;
+    auto _func = func ? cast(void*)&(func) : null;
+    _retval = cast(bool)gst_buffer_foreach_meta(cast(GstBuffer*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 

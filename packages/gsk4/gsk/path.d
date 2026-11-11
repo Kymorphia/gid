@@ -195,6 +195,50 @@ class Path : gobject.boxed.BoxedWrap!(gsk_path_get_type)
   }
 
   /**
+      Computes the closest point on the path to the given point.
+      
+      If there is no point closer than the given threshold,
+      false is returned.
+  
+      Params:
+        point = the point
+        threshold = maximum allowed distance
+        result = return location for the closest point
+        distance = return location for the distance
+      Returns: true if point was set to the closest point
+          on self, false if no point is closer than threshold
+  */
+  bool getClosestPoint(graphene.point.Point point, float threshold, out gsk.path_point.PathPoint result, out float distance) nothrow
+  {
+    bool _retval;
+    GskPathPoint _result;
+    _retval = cast(bool)gsk_path_get_closest_point(cast(GskPath*)this._cPtr, cast(const(graphene_point_t)*)&point, threshold, &_result, cast(float*)&distance);
+    if (_retval)
+      result = new gsk.path_point.PathPoint(boxedCopy(gsk.path_point.PathPoint._getGType, &_result), Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the end point of the path.
+      
+      An empty path has no points, so false
+      is returned in this case.
+  
+      Params:
+        result = return location for point
+      Returns: true if result was filled
+  */
+  bool getEndPoint(out gsk.path_point.PathPoint result) nothrow
+  {
+    bool _retval;
+    GskPathPoint _result;
+    _retval = cast(bool)gsk_path_get_end_point(cast(GskPath*)this._cPtr, &_result);
+    if (_retval)
+      result = new gsk.path_point.PathPoint(boxedCopy(gsk.path_point.PathPoint._getGType, &_result), Yes.Take);
+    return _retval;
+  }
+
+  /**
       Moves point to the next vertex.
       
       An empty path has no points, so false
@@ -225,6 +269,26 @@ class Path : gobject.boxed.BoxedWrap!(gsk_path_get_type)
   {
     bool _retval;
     _retval = cast(bool)gsk_path_get_previous(cast(GskPath*)this._cPtr, point ? cast(GskPathPoint*)point._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Gets the start point of the path.
+      
+      An empty path has no points, so false
+      is returned in this case.
+  
+      Params:
+        result = return location for point
+      Returns: true if result was filled
+  */
+  bool getStartPoint(out gsk.path_point.PathPoint result) nothrow
+  {
+    bool _retval;
+    GskPathPoint _result;
+    _retval = cast(bool)gsk_path_get_start_point(cast(GskPath*)this._cPtr, &_result);
+    if (_retval)
+      result = new gsk.path_point.PathPoint(boxedCopy(gsk.path_point.PathPoint._getGType, &_result), Yes.Take);
     return _retval;
   }
 

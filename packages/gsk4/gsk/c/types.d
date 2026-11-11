@@ -1287,7 +1287,35 @@ struct GskPathMeasure;
     It is the callers responsibility to keep a reference to the path
     as long as the [gsk.path_point.PathPoint] is used.
 */
-struct GskPathPoint;
+struct GskPathPoint
+{
+  /** */
+  /** */
+  union
+  {
+    /** */
+    /** */
+    struct
+    {
+      /** */
+      size_t contour;
+
+      /** */
+      size_t idx;
+
+      /** */
+      float t;
+    }
+
+
+    /** */
+    void*[8] padding;
+
+    /** */
+    graphene_vec4_t alignment;
+  }
+
+}
 
 /**
     A render node for a radial gradient.

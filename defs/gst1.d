@@ -65,6 +65,7 @@
 
 //# Fix arg direction and ownership for some callbacks
 //!set callback[BufferForeachMetaFunc].parameters.parameter[meta][transfer-ownership] none
+//!set callback[BufferForeachMetaFunc].parameters.parameter[meta][gid-borrow] buffer
 
 //# Meta params aggregation returns a newly allocated structure in aggregated_params (callers pass a NULL-initialized pointer)
 //!set record[Meta].function[api_type_aggregate_params].parameters.parameter[aggregated_params][direction] out
