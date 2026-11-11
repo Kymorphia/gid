@@ -92,7 +92,7 @@
 //!set function[ot_layout_table_choose_script][ignore] 1
 //!set function[ot_var_find_axis][ignore] 1
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[color_line_t].field[data][ignore] 1
 //!set record[color_line_t].field[get_color_stops_user_data][ignore] 1
 //!set record[color_line_t].field[get_extend_user_data][ignore] 1

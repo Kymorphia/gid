@@ -133,20 +133,20 @@
 //!set record[StaticCaps].field[string][writable] 0
 //!set record[StaticPadTemplate].field[name_template][writable] 0
 
-//# Disable: Generic GCallback/C function symbol APIs, not usable from D
+//# Ignore: Generic GCallback/C function symbol APIs, not usable from D
 //!set function[tracing_register_hook][ignore] 1
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[Meta].function[api_type_set_params_aggregator][ignore] 1
 //!set record[MetaInfo].field[serialize_func][ignore] 1
 //!set record[MiniObject].method[set_qdata][ignore] 1
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[MapInfo].field[user_data][ignore] 1
 //!set record[PadProbeInfo].field[data][ignore] 1
 //!set record[TypeFind].field[data][ignore] 1
 
-//# Disable: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
+//# Ignore: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
 //!set class[Task].method[set_lock][ignore] 1
 
 //# Disable: Uses unsupported GValue fundamental types (Fraction, ValueArray, ValueList) (FIXME)
@@ -158,6 +158,9 @@
 //# Disable: Callback returns structure pointer with transfer none (no D owner to keep it alive for C)
 //!set callback[MetaDeserializeFunction][disable] 1
 //!set record[MetaInfo].field[deserialize_func][disable] 1
+
+//# Disable: Caller-allocated callback output arrays are not supported; installing this callback also requires support for instance function-pointer fields.
+//!set callback[ControlSourceGetValueArray][disable] 1
 
 //# PadGetRangeFunction and Pad.setGetrangeFunctionFull are hand written below: the buffer is either provided by the
 //# caller (filled in place, the caller keeps its reference) or NULL (a new buffer is returned with full transfer),

@@ -123,13 +123,13 @@
 //!set record[FlagsValue].field[value_nick][writable] 0
 //!set record[ValueArray].field[values][writable] 0
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[TypeClass].function[adjust_private_offset][ignore] 1
 //!set function[enum_register_static][ignore] 1
 //!set function[flags_register_static][ignore] 1
 //!set function[type_default_interface_get][ignore] 1
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[CClosure].field[callback][ignore] 1
 //!set record[ClosureNotifyData].field[data][ignore] 1
 //!set union[TypeCValue].field[v_pointer][ignore] 1

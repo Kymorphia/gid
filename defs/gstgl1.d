@@ -47,7 +47,7 @@
 //!set record[GLBaseMemory].field[context][writable] 0
 //!set record[GLVideoAllocationParams].field[v_info][writable] 0
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[GLAllocationParams].field[user_data][ignore] 1
 //!set record[GLAllocationParams].field[wrapped_data][ignore] 1
 //!set record[GLAllocationParams].field[gl_handle][ignore] 1

@@ -67,7 +67,7 @@
 //!set record[GlyphItemIter].field[text][writable] 0
 //!set record[LayoutLine].field[layout][writable] 0
 
-//# Disable: Deprecated API with a replacement
+//# Ignore: Deprecated API with a replacement
 //!set record[Analysis].field[shape_engine][ignore] 1
 //!set record[Analysis].field[lang_engine][ignore] 1
 //!set function[scan_int][ignore] 1
@@ -75,11 +75,11 @@
 //!set function[scan_word][ignore] 1
 //!set function[skip_space][ignore] 1
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[AttrShape].function[new_with_data][ignore] 1
 //!set record[Attribute].field[klass][ignore] 1
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[AttrShape].field[data][ignore] 1
 
 //# Disable: Array lengths determined by text length or other API, not described by parameters

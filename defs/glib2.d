@@ -6,7 +6,7 @@
 
 //!kind OptionEntry StructAlias
 
-//# Disable binding of container types
+//# Ignore: low level container types
 //!set record[Array][ignore] 1
 //!set record[ByteArray][ignore] 1
 //!set record[PtrArray][ignore] 1
@@ -31,7 +31,7 @@
 //!set record[Variant].constructor[new_from_data][introspectable] 0
 //!set record[Variant].function[parse][introspectable] 0
 
-//# Disable problematic functions (memory allocation issues)
+//# Ignore: problematic functions (memory allocation issues)
 //!set record[Bytes].constructor[new_take][ignore] 1
 //!set function[base64_decode_inplace][ignore] 1
 
@@ -55,7 +55,7 @@
 //!set record[Dir][free-function] g_dir_close
 //!set record[Dir].method[close][ignore] 1
 
-//# Disable binding of useless/problematic API
+//# Ignore: binding of useless/problematic API
 //!set record[Completion][ignore] 1
 //!set union[Mutex][ignore] 1
 //!set record[RecMutex][ignore] 1
@@ -80,14 +80,14 @@
 //!set function[log_writer_standard_streams][disable] 1
 //!set function[log_writer_syslog][disable] 1
 
-//# Disable Queue fields
+//# Ignore: Queue fields
 //!set record[Queue].field[head][ignore] 1
 //!set record[Queue].field[tail][ignore] 1
 
-//# Disable TestLogMsg fields
+//# Ignore: TestLogMsg fields
 //!set record[TestLogMsg].*field[][ignore] 1
 
-//# Disable datalist functions
+//# Ignore: datalist functions
 //!set *function[datalist_*][ignore] 1
 
 //# Remove problematic type
@@ -146,7 +146,7 @@
 //!set class[Variant][glib:ref-func] g_variant_ref_sink
 //!set class[Variant][glib:unref-func] g_variant_unref
 
-//# Disable deprecated g_variant_parser_get_error_quark since it confuses the exception generator
+//# Ignore: deprecated g_variant_parser_get_error_quark since it confuses the exception generator
 //!set class[Variant].function[parser_get_error_quark][ignore] 1
 
 //# Add ref/unref functions to VariantBuilder
@@ -318,6 +318,7 @@
 
 //# g_markup_parse_context_new() has unnecessary closure and destroy notify, override the new() method
 //!set record[MarkupParseContext].constructor[new][ignore] 1
+
 //# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
 //!set record[Hook].field[next][writable] 0
 //!set record[Hook].field[prev][writable] 0
@@ -329,14 +330,14 @@
 //!set record[OptionEntry].field[arg_description][writable] 0
 //!set record[String].field[str][writable] 0
 
-//# Disable: Deprecated thread function vtable (D has native threads)
+//# Ignore: Deprecated thread function vtable (D has native threads)
 //!set record[ThreadFunctions][ignore] 1
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[AsyncQueue].function[new_full][ignore] 1
 //!set function[test_add_data_func][ignore] 1
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[Hook].field[data][ignore] 1
 //!set record[Hook].field[func][ignore] 1
 //!set record[Node].field[data][ignore] 1
@@ -344,7 +345,7 @@
 //!set record[OptionEntry].field[arg_data][ignore] 1
 //!set union[TokenValue].field[v_symbol][ignore] 1
 
-//# Disable: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
+//# Ignore: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
 //!set record[Cond].method[wait][ignore] 1
 //!set record[Cond].method[wait_until][ignore] 1
 //!set record[MainContext].method[wait][ignore] 1

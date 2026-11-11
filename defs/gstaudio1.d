@@ -52,7 +52,7 @@
 //!set record[AudioFormatInfo].field[description][writable] 0
 //!set record[AudioInfo].field[finfo][writable] 0
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[AudioFormatInfo].field[unpack_func][ignore] 1
 //!set record[AudioFormatInfo].field[pack_func][ignore] 1
 

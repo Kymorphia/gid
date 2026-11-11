@@ -84,7 +84,7 @@
 //!set record[RTCPPacket].field[rtcp][writable] 0
 //!set record[RTPSourceMeta].field[meta][writable] 0
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[RTPBuffer].field[data][ignore] 1
 
 //# Disable: Uses unsupported GValue fundamental types (Fraction, ValueArray, ValueList) (FIXME)

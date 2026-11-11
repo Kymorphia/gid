@@ -35,8 +35,11 @@
 //# Disable this type which is derived from the unsupported Gst.FlagSet fundamental type (FIXME)
 //!set class[VideoMultiviewFlagsSet][disable] 1
 
-//!set record[VideoMeta].method[set_alignment][disable] 1
-//!set class[VideoSink].function[center_rect][disable] 1
+//# Ignore: deprecated and replaced by gst_video_meta_set_alignment_full
+//!set record[VideoMeta].method[set_alignment][ignore] 1
+
+//# Ignore: deprecated and replaced by gst_video_center_rect
+//!set class[VideoSink].function[center_rect][ignore] 1
 
 //# Disable callables with arrays with sizes not described by parameters (FIXME)
 //!set record[VideoVBIParser].method[add_line][disable] 1
@@ -53,7 +56,7 @@
 //!set record[VideoGLTextureUploadMeta].method[upload].parameters.parameter[texture_id].type '<array zero-terminated="0" fixed-size="4" c:type="guint*"><type name="guint" c:type="guint"/></array>'
 //!set function[buffer_add_video_gl_texture_upload_meta].parameters.parameter[texture_type].type '<array zero-terminated="0" fixed-size="4" c:type="GstVideoGLTextureType*"><type name="VideoGLTextureType" c:type="GstVideoGLTextureType"/></array>'
 
-//# Disable interface APIs
+//# Ignore interface APIs
 //!set interface[VideoOverlay].function[install_properties][ignore] 1
 
 //# Pointer fields owned by the structure (freed by its free function), enables setters
@@ -90,14 +93,14 @@
 //!set record[VideoTimeCodeMeta].field[meta][writable] 0
 //!set record[VideoTimeCodeMeta].field[tc][writable] 0
 
-//# Disable: Deprecated API with a replacement
+//# Ignore: Deprecated API with a replacement
 //!set function[buffer_add_video_gl_texture_upload_meta][ignore] 1
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[VideoFormatInfo].field[unpack_func][ignore] 1
 //!set record[VideoFormatInfo].field[pack_func][ignore] 1
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[VideoFrame].field[meta][ignore] 1
 
 //# Disable: Fixed size array of plane data pointers

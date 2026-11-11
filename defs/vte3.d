@@ -24,5 +24,5 @@
 //!set class[Terminal].glib:signal[commit].parameters.parameter[text].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
 
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[Uuid].method[free_to_string][ignore] 1

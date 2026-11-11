@@ -105,18 +105,18 @@
 //!set record[TextAttributes].field[tabs][writable] 0
 //!set record[TextAttributes].field[language][writable] 0
 
-//# Disable: Deprecated API with a replacement
+//# Ignore: Deprecated API with a replacement
 //!set class[Settings].property[color-hash][ignore] 1
 
-//# Disable: Generic GCallback/C function symbol APIs, not usable from D
+//# Ignore: Generic GCallback/C function symbol APIs, not usable from D
 //!set class[Builder].method[add_callback_symbol][ignore] 1
 
-//# Disable: Properties which conflict with identically named methods (use the methods)
+//# Ignore: Properties which conflict with identically named methods (use the methods)
 //!set class[Widget].property[has-default][ignore] 1
 //!set class[Widget].property[has-focus][ignore] 1
 //!set class[Widget].property[is-focus][ignore] 1
 
-//# Disable: Untyped raw pointer fields (gpointer user/private data), not useful from D
+//# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[RequestedSize].field[data][ignore] 1
 //!set record[TreeIter].field[user_data][ignore] 1
 //!set record[TreeIter].field[user_data2][ignore] 1

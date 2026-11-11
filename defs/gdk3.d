@@ -114,7 +114,7 @@
 //!set record[EventSelection].field[target][writable] 0
 //!set record[EventSelection].field[property][writable] 0
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set callback[FilterFunc][ignore] 1
 
 //# Disable: Axes array fields with a length from the device (number of axes)

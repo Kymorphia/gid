@@ -25,6 +25,6 @@
 //!set record[PixbufFormat].field[description][writable] 0
 //!set record[PixbufFormat].field[license][writable] 0
 
-//# Disable: Redundant with another API (e.g. GBytes variant, simpler setter or accessor methods)
+//# Ignore: Redundant with another API (e.g. GBytes variant, simpler setter or accessor methods)
 //!set callback[PixbufDestroyNotify][ignore] 1
 //!set class[Pixbuf].constructor[new_from_data][ignore] 1

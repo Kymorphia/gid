@@ -37,7 +37,7 @@ gstrtp1                    |   11    0    0   100 |  195    3    0  98.5 |    6 
 gstrtsp1                   |   15    0    0   100 |  136    3    0  97.8 |    1    0    0   100 |   51    0    0   100 |
 gstsdp1                    |   23    0    0   100 |  166    5    0  97.1 |    0    0    0   100 |   87    2    0  97.8 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   60    1    0  98.4 |  385    7    0  98.2 |    2    0    0   100 |  186    3    0  98.4 |
+gstvideo1                  |   60    1    0  98.4 |  385    5    0  98.7 |    2    0    0   100 |  186    3    0  98.4 |
 gtk3                       |  345    0    0   100 | 3780    3    0  99.9 |  448    0    0   100 |  155    0    0   100 |
 gtk4                       |  326    0    0   100 | 3667    1    0 100.0 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
@@ -139,9 +139,7 @@ gstsdp.sdpmedia.SDPMedia.copy
 gstsdp.sdpmedia.SDPMedia.init_
 gstsdp.sdpmedia.SDPMedia.new_
 gstvideo.video_frame.VideoFrame.unmap
-gstvideo.video_meta.VideoMeta.setAlignment
 gstvideo.video_scaler.VideoScaler.vertical
-gstvideo.video_sink.VideoSink.centerRect
 gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
 gstvideo.video_vbiparser.VideoVBIParser.addLine
 gstvideo.global.videoChromaResample

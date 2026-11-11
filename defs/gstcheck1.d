@@ -17,7 +17,7 @@
 //!set record[Harness].field[src_harness][writable] 0
 //!set record[Harness].field[sink_harness][writable] 0
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set function[check_init][ignore] 1
 
 //# Disable: Takes ownership of a Harness which has no copy function

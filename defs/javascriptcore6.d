@@ -13,7 +13,7 @@
 //!set class[Context].method[evaluate_with_source_uri].parameters.parameter[code].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set record[ClassClass].field[parent_class][ignore] 1
 
 //# Ignore: Raw GCallback based APIs, covered by the D template methods (Class.addConstructor, addMethod, addProperty, Context.registerClass, Value.newFunction)

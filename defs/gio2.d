@@ -96,11 +96,11 @@
 //!set record[OutputMessage].field[vectors][writable] 0
 //!set record[OutputMessage].field[control_messages][writable] 0
 
-//# Disable: Internal/implementation-only API, not useful from D
+//# Ignore: Internal/implementation-only API, not useful from D
 //!set class[SettingsBackend].function[flatten_tree][ignore] 1
 //!set class[Task].method[set_task_data][ignore] 1
 
-//# Disable: Redundant with another API (e.g. GBytes variant, simpler setter or accessor methods)
+//# Ignore: Redundant with another API (e.g. GBytes variant, simpler setter or accessor methods)
 //!set interface[DtlsClientConnection].property[accepted-cas][ignore] 1
 //!set class[MemoryInputStream].constructor[new_from_data][ignore] 1
 //!set class[MemoryInputStream].method[add_data][ignore] 1
@@ -164,7 +164,7 @@
     return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
   }
 
-//# Disable ListStore.findWithEqualFuncFull with unnecessary additional user_data
+//# Ignore: ListStore.findWithEqualFuncFull with unnecessary additional user_data
 //!set class[ListStore].method[find_with_equal_func_full][ignore] 1
 
 //# Override to use delegates with ObjectWrap arguments
