@@ -9,7 +9,7 @@ arrow1                     |  296    0    0   100 |  973    0    0   100 |    0 
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 atk1                       |   40    0    0   100 |  237    1    0  99.6 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   74    1    0  98.7 | 1264    9    0  99.3 |    0    0    0   100 |  108    0    0   100 |
+glib2                      |   75    0    0   100 | 1271    2    0  99.8 |    0    0    0   100 |  111    0    0   100 |
 glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0    0    0   100 |    1    0    0   100 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   15    0    0   100 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -62,20 +62,10 @@ gid                        |    6    0    0   100 |    0    0    0   100 |    0 
 libxml2                    |   10    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 xlib2                      |   12    0    0   100 |    1    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
-[Disabled Structs]
-glib.log_field.LogField
-
 [Disabled Funcs]
 atk.document.Document.getTextSelections
 glib.option_context.OptionContext.setTranslateFunc
 glib.option_group.OptionGroup.setTranslateFunc
-glib.global.logSetWriterFunc
-glib.global.logStructuredArray
-glib.global.logWriterDefault
-glib.global.logWriterFormatFields
-glib.global.logWriterJournald
-glib.global.logWriterStandardStreams
-glib.global.logWriterSyslog
 gdk.texture.Texture.download
 gdk.texture_downloader.TextureDownloader.downloadInto
 gdk.global.contentRegisterDeserializer

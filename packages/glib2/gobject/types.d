@@ -307,7 +307,7 @@ alias ClosureNotify = void delegate(gobject.closure.Closure closure);
     zeros before this function is called.
 
     Params:
-      instance = The instance to initialize (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      instance = The instance to initialize (borrowed, only valid during the callback)
       gClass = The class of the type the instance is
            created for
 */
@@ -496,7 +496,7 @@ alias TypeClassCacheFunc = bool delegate(gobject.type_class.TypeClass gClass);
 
     Params:
       value = the value to initialize
-      collectValues = the collected values
+      collectValues = the collected values (borrowed, only valid during the callback)
       collectFlags = optional flags
     Returns: `NULL` on success, otherwise a
         newly allocated error string on failure
@@ -606,7 +606,7 @@ alias TypeValueInitFunc = void delegate(gobject.value.Value value);
     Params:
       value = the value to lcopy
       collectValues = the collected
-          locations for storage
+          locations for storage (borrowed, only valid during the callback)
       collectFlags = optional flags
     Returns: `NULL` on success, otherwise
         a newly allocated error string on failure

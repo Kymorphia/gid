@@ -47,7 +47,7 @@ alias PixbufModuleFillInfoFunc = void delegate(gdkpixbuf.pixbuf_format.PixbufFor
     #GdkPixbufModule when it is loaded.
 
     Params:
-      module_ = a #GdkPixbufModule. (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      module_ = a #GdkPixbufModule. (borrowed, only valid during the callback)
 */
 alias PixbufModuleFillVtableFunc = void delegate(gdkpixbuf.pixbuf_module.PixbufModule module_);
 

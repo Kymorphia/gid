@@ -69,17 +69,6 @@
 //!set function[strrstr_len][ignore] 1
 //!set function[strstr_len][ignore] 1
 
-//# Disable structured logging API, LogField value is a pointer with a length or -1 for a string (FIXME)
-//!set record[LogField][disable] 1
-//!set callback[LogWriterFunc][disable] 1
-//!set function[log_set_writer_func][disable] 1
-//!set function[log_structured_array][disable] 1
-//!set function[log_writer_default][disable] 1
-//!set function[log_writer_format_fields][disable] 1
-//!set function[log_writer_journald][disable] 1
-//!set function[log_writer_standard_streams][disable] 1
-//!set function[log_writer_syslog][disable] 1
-
 //# Ignore: Queue fields
 //!set record[Queue].field[head][ignore] 1
 //!set record[Queue].field[tail][ignore] 1
@@ -357,6 +346,188 @@
 //!set callback[TranslateFunc][disable] 1
 //!set record[OptionContext].method[set_translate_func][disable] 1
 //!set record[OptionGroup].method[set_translate_func][disable] 1
+
+//# LogWriterFunc fields are borrowed and LogField has no copy function (_dup is shallow), keep values with valueString/valueBytes
+//!set callback[LogWriterFunc].parameters.parameter[fields].doc '<doc xml:space="preserve">fields forming the message, use [glib.log_field.LogField.valueString] or [glib.log_field.LogField.valueBytes] to keep field values</doc>'
+
+//# Structured logging: LogField string/binary value helpers, and D replacements for the varargs g_log_structured()
+//# and the g_log_structured_standard() macro (not introspectable)
+//!class LogField
+
+  private const(void)* _valueRef; // Keeps D value data assigned with setValueString/setValueBytes alive
+
+  /**
+      Create a log field with a string value.
+      Params:
+        key = field name (UTF-8 string)
+        value = field value string (kept alive by the LogField, passed to C with its length)
+  */
+  this(string key, string value) nothrow
+  {
+    this.key = key;
+    setValueString(value);
+  }
+
+  /**
+      Create a log field with a binary value.
+      Params:
+        key = field name (UTF-8 string)
+        value = field value bytes (kept alive by the LogField, passed to C with its length)
+  */
+  this(string key, const(ubyte)[] value) nothrow
+  {
+    this.key = key;
+    setValueBytes(value);
+  }
+
+  /**
+      Set the value to a string.
+      Params:
+        val = The string value (kept alive by the LogField, passed to C with its length)
+  */
+  void setValueString(string val) nothrow
+  {
+    _valueRef = val.length > 0 ? cast(const(void)*)val.ptr : cast(const(void)*)"".ptr;
+    (cast(GLogField*)this._cPtr).value = _valueRef;
+    (cast(GLogField*)this._cPtr).length = cast(ptrdiff_t)val.length;
+  }
+
+  /**
+      Set the value to binary data.
+      Params:
+        val = The value bytes (kept alive by the LogField, passed to C with its length)
+  */
+  void setValueBytes(const(ubyte)[] val) nothrow
+  {
+    _valueRef = val.length > 0 ? cast(const(void)*)val.ptr : cast(const(void)*)"".ptr;
+    (cast(GLogField*)this._cPtr).value = _valueRef;
+    (cast(GLogField*)this._cPtr).length = cast(ptrdiff_t)val.length;
+  }
+
+  /**
+      Get a copy of the value as a string (a nul-terminated value if length is -1).
+      Returns: The value string
+  */
+  string valueString() nothrow
+  {
+    auto cval = cast(const(char)*)(cast(GLogField*)this._cPtr).value;
+    auto len = (cast(GLogField*)this._cPtr).length;
+
+    if (!cval)
+      return null;
+
+    return len < 0 ? cval.fromCString : cval[0 .. len].idup;
+  }
+
+  /**
+      Get a copy of the value as bytes (up to the nul-terminator if length is -1).
+      Returns: The value bytes
+  */
+  ubyte[] valueBytes() nothrow
+  {
+    auto cval = cast(const(ubyte)*)(cast(GLogField*)this._cPtr).value;
+    auto len = (cast(GLogField*)this._cPtr).length;
+
+    if (!cval)
+      return null;
+
+    if (len < 0)
+      for (len = 0; cval[len] != 0; len++) {}
+
+    return cval[0 .. len].dup;
+  }
+//!class global pre
+
+/**
+    Get the syslog style priority string for a log level, as used for the `PRIORITY` structured logging field
+    (the same mapping used by g_log_structured()).
+    Params:
+      logLevel = The log level
+    Returns: The priority string ("3" to "7")
+*/
+string logLevelPriority(glib.types.LogLevelFlags logLevel) nothrow
+{
+  if (logLevel & glib.types.LogLevelFlags.LevelError)
+    return "3";
+  else if (logLevel & (glib.types.LogLevelFlags.LevelCritical | glib.types.LogLevelFlags.LevelWarning))
+    return "4";
+  else if (logLevel & glib.types.LogLevelFlags.LevelMessage)
+    return "5";
+  else if (logLevel & glib.types.LogLevelFlags.LevelInfo)
+    return "6";
+  else if (logLevel & glib.types.LogLevelFlags.LevelDebug)
+    return "7";
+
+  return "5";
+}
+
+/**
+    Log a message with structured data (D version of the C varargs g_log_structured()).
+    The `PRIORITY` field (from logLevel) and the `GLIB_DOMAIN` field (if logDomain is not null) are added before
+    fields, which should include a `MESSAGE` field. The message is passed to the log writer function (see
+    [glib.global.logSetWriterFunc]). If the level is [glib.types.LogLevelFlags.LevelError] the program is aborted.
+    Params:
+      logDomain = log domain, usually the application or library name, or null
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+      fields = key-value pairs of structured data to add to the log message
+*/
+void logStructured(string logDomain, glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields) nothrow
+{
+  glib.log_field.LogField[] allFields = [new glib.log_field.LogField("PRIORITY", logLevelPriority(logLevel))];
+
+  if (logDomain)
+    allFields ~= new glib.log_field.LogField("GLIB_DOMAIN", logDomain);
+
+  logStructuredArray(logLevel, allFields ~ fields);
+}
+
+/**
+    Log a message with structured string data (D version of the C varargs g_log_structured()).
+    See [glib.global.logStructured] with a LogField array, field order follows the associative array.
+    Params:
+      logDomain = log domain, usually the application or library name, or null
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+      fields = key-value string pairs of structured data to add to the log message (should include `MESSAGE`)
+*/
+void logStructured(string logDomain, glib.types.LogLevelFlags logLevel, string[string] fields) nothrow
+{
+  glib.log_field.LogField[] logFields;
+
+  foreach (kv; fields.byKeyValue)
+    logFields ~= new glib.log_field.LogField(kv.key, kv.value);
+
+  logStructured(logDomain, logLevel, logFields);
+}
+
+/**
+    Log a structured message with the D source location (D version of the C g_log_structured_standard() macro).
+    Adds `CODE_FILE`, `CODE_LINE`, `CODE_FUNC` and `MESSAGE` fields.
+    Params:
+      logDomain = log domain, usually the application or library name, or null
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+      message = the log message (not a format string, use std.format to format it)
+      file = source file (defaults to the caller's)
+      line = source line (defaults to the caller's)
+      func = source function (defaults to the caller's)
+*/
+void logStructuredStandard(string logDomain, glib.types.LogLevelFlags logLevel, string message, string file = __FILE__, size_t line = __LINE__, string func = __PRETTY_FUNCTION__) nothrow
+{
+  import std.conv : to;
+
+  string lineStr;
+
+  try
+    lineStr = line.to!string;
+  catch (Exception)
+    lineStr = "0";
+
+  glib.log_field.LogField[] fields;
+  fields ~= new glib.log_field.LogField("CODE_FILE", file);
+  fields ~= new glib.log_field.LogField("CODE_LINE", lineStr);
+  fields ~= new glib.log_field.LogField("CODE_FUNC", func);
+  fields ~= new glib.log_field.LogField("MESSAGE", message);
+  logStructured(logDomain, logLevel, fields);
+}
 
 //!class MarkupParseContext
 

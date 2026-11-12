@@ -8,6 +8,7 @@ import glib.error;
 import glib.hook;
 import glib.hook_list;
 import glib.iochannel;
+import glib.log_field;
 import glib.match_info;
 import glib.node;
 import glib.option_context;
@@ -622,7 +623,7 @@ alias HookCheckFunc = bool delegate();
     Defines the type of function used by [glib.hook_list.HookList.marshalCheck].
 
     Params:
-      hook = a #GHook (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      hook = a #GHook (borrowed, only valid during the callback)
     Returns: false if hook should be destroyed
 */
 alias HookCheckMarshaller = bool delegate(glib.hook.Hook hook);
@@ -632,8 +633,8 @@ alias HookCheckMarshaller = bool delegate(glib.hook.Hook hook);
     [glib.hook.Hook.insertSorted].
 
     Params:
-      newHook = the #GHook being inserted (borrowed, only valid during the callback, use `_dup` to keep a copy)
-      sibling = the #GHook to compare with new_hook (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      newHook = the #GHook being inserted (borrowed, only valid during the callback)
+      sibling = the #GHook to compare with new_hook (borrowed, only valid during the callback)
     Returns: a value <= 0 if new_hook should be before sibling
 */
 alias HookCompareFunc = int delegate(glib.hook.Hook newHook, glib.hook.Hook sibling);
@@ -643,8 +644,8 @@ alias HookCompareFunc = int delegate(glib.hook.Hook newHook, glib.hook.Hook sibl
     list of hooks gets finalized.
 
     Params:
-      hookList = a #GHookList (borrowed, only valid during the callback, use `_dup` to keep a copy)
-      hook = the hook in hook_list that gets finalized (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      hookList = a #GHookList (borrowed, only valid during the callback)
+      hook = the hook in hook_list that gets finalized (borrowed, only valid during the callback)
 */
 alias HookFinalizeFunc = void delegate(glib.hook_list.HookList hookList, glib.hook.Hook hook);
 
@@ -652,7 +653,7 @@ alias HookFinalizeFunc = void delegate(glib.hook_list.HookList hookList, glib.ho
     Defines the type of the function passed to [glib.hook.Hook.find].
 
     Params:
-      hook = a #GHook (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      hook = a #GHook (borrowed, only valid during the callback)
     Returns: true if the required #GHook has been found
 */
 alias HookFindFunc = bool delegate(glib.hook.Hook hook);
@@ -667,7 +668,7 @@ alias HookFunc = void delegate();
     Defines the type of function used by [glib.hook_list.HookList.marshal].
 
     Params:
-      hook = a #GHook (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      hook = a #GHook (borrowed, only valid during the callback)
 */
 alias HookMarshaller = void delegate(glib.hook.Hook hook);
 
@@ -708,12 +709,40 @@ alias IOFunc = bool delegate(glib.iochannel.IOChannel source, glib.types.IOCondi
 alias LogFunc = void delegate(string logDomain, glib.types.LogLevelFlags logLevel, string message);
 
 /**
+    Writer function for log entries. A log entry is a collection of one or more
+    #GLogFields, using the standard [field names from journal
+    specification](https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html).
+    See [glib.global.logStructured] for more information.
+    
+    Writer functions must ignore fields which they do not recognise, unless they
+    can write arbitrary binary output, as field values may be arbitrary binary.
+    
+    log_level is guaranteed to be included in fields as the `PRIORITY` field,
+    but is provided separately for convenience of deciding whether or where to
+    output the log entry.
+    
+    Writer functions should return [glib.types.LogWriterOutput.Handled] if they handled the log
+    message successfully or if they deliberately ignored it. If there was an
+    error handling the message (for example, if the writer function is meant to
+    send messages to a remote logging server and there is a network error), it
+    should return [glib.types.LogWriterOutput.Unhandled]. This allows writer functions to be
+    chained and fall back to simpler handlers in case of failure.
+
+    Params:
+      logLevel = log level of the message
+      fields = fields forming the message, use [glib.log_field.LogField.valueString] or [glib.log_field.LogField.valueBytes] to keep field values (borrowed, only valid during the callback)
+    Returns: [glib.types.LogWriterOutput.Handled] if the log entry was handled successfully;
+        [glib.types.LogWriterOutput.Unhandled] otherwise
+*/
+alias LogWriterFunc = glib.types.LogWriterOutput delegate(glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields);
+
+/**
     Specifies the type of function passed to [glib.node.Node.childrenForeach].
     The function is called with each child node, together with the user
     data passed to [glib.node.Node.childrenForeach].
 
     Params:
-      node = a #GNode. (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      node = a #GNode. (borrowed, only valid during the callback)
 */
 alias NodeForeachFunc = void delegate(glib.node.Node node);
 
@@ -724,7 +753,7 @@ alias NodeForeachFunc = void delegate(glib.node.Node node);
     true, then the traversal is stopped.
 
     Params:
-      node = a #GNode. (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      node = a #GNode. (borrowed, only valid during the callback)
     Returns: true to stop the traversal.
 */
 alias NodeTraverseFunc = bool delegate(glib.node.Node node);

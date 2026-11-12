@@ -143,7 +143,7 @@ alias GLBaseMemoryAllocatorDestroyFunction = void delegate(gstgl.glbase_memory.G
 
     Params:
       mem = a #GstGLBaseMemory
-      info = a #GstMapInfo to map with (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      info = a #GstMapInfo to map with (borrowed, only valid during the callback)
       maxsize = the size to map
     Returns: the mapped pointer
 */
@@ -154,7 +154,7 @@ alias GLBaseMemoryAllocatorMapFunction = void* delegate(gstgl.glbase_memory.GLBa
 
     Params:
       mem = a #GstGLBaseMemory
-      info = a #GstMapInfo to map with (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      info = a #GstMapInfo to map with (borrowed, only valid during the callback)
 */
 alias GLBaseMemoryAllocatorUnmapFunction = void delegate(gstgl.glbase_memory.GLBaseMemory mem, gst.map_info.MapInfo info);
 

@@ -8,12 +8,105 @@ import glib.c.types;
 import glib.debug_key;
 import glib.error;
 import glib.iochannel;
+import glib.log_field;
 import glib.source;
 import glib.test_suite;
 import glib.time_val;
 import glib.types;
 import glib.variant;
 import gobject.types;
+
+
+/**
+Get the syslog style priority string for a log level, as used for the `PRIORITY` structured logging field
+(the same mapping used by g_log_structured()).
+Params:
+logLevel = The log level
+Returns: The priority string ("3" to "7")
+*/
+string logLevelPriority(glib.types.LogLevelFlags logLevel) nothrow
+{
+  if (logLevel & glib.types.LogLevelFlags.LevelError)
+    return "3";
+  else if (logLevel & (glib.types.LogLevelFlags.LevelCritical | glib.types.LogLevelFlags.LevelWarning))
+  return "4";
+  else if (logLevel & glib.types.LogLevelFlags.LevelMessage)
+  return "5";
+  else if (logLevel & glib.types.LogLevelFlags.LevelInfo)
+  return "6";
+  else if (logLevel & glib.types.LogLevelFlags.LevelDebug)
+  return "7";
+
+  return "5";
+}
+
+/**
+Log a message with structured data (D version of the C varargs g_log_structured()).
+The `PRIORITY` field (from logLevel) and the `GLIB_DOMAIN` field (if logDomain is not null) are added before
+fields, which should include a `MESSAGE` field. The message is passed to the log writer function (see
+[glib.global.logSetWriterFunc]). If the level is [glib.types.LogLevelFlags.LevelError] the program is aborted.
+Params:
+logDomain = log domain, usually the application or library name, or null
+logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+fields = key-value pairs of structured data to add to the log message
+*/
+void logStructured(string logDomain, glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields) nothrow
+{
+  glib.log_field.LogField[] allFields = [new glib.log_field.LogField("PRIORITY", logLevelPriority(logLevel))];
+
+  if (logDomain)
+    allFields ~= new glib.log_field.LogField("GLIB_DOMAIN", logDomain);
+
+  logStructuredArray(logLevel, allFields ~ fields);
+}
+
+/**
+Log a message with structured string data (D version of the C varargs g_log_structured()).
+See [glib.global.logStructured] with a LogField array, field order follows the associative array.
+Params:
+logDomain = log domain, usually the application or library name, or null
+logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+fields = key-value string pairs of structured data to add to the log message (should include `MESSAGE`)
+*/
+void logStructured(string logDomain, glib.types.LogLevelFlags logLevel, string[string] fields) nothrow
+{
+  glib.log_field.LogField[] logFields;
+
+  foreach (kv; fields.byKeyValue)
+    logFields ~= new glib.log_field.LogField(kv.key, kv.value);
+
+  logStructured(logDomain, logLevel, logFields);
+}
+
+/**
+Log a structured message with the D source location (D version of the C g_log_structured_standard() macro).
+Adds `CODE_FILE`, `CODE_LINE`, `CODE_FUNC` and `MESSAGE` fields.
+Params:
+logDomain = log domain, usually the application or library name, or null
+logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+message = the log message (not a format string, use std.format to format it)
+file = source file (defaults to the caller's)
+line = source line (defaults to the caller's)
+func = source function (defaults to the caller's)
+*/
+void logStructuredStandard(string logDomain, glib.types.LogLevelFlags logLevel, string message, string file = __FILE__, size_t line = __LINE__, string func = __PRETTY_FUNCTION__) nothrow
+{
+  import std.conv : to;
+
+  string lineStr;
+
+  try
+  lineStr = line.to!string;
+  catch (Exception)
+  lineStr = "0";
+
+  glib.log_field.LogField[] fields;
+  fields ~= new glib.log_field.LogField("CODE_FILE", file);
+  fields ~= new glib.log_field.LogField("CODE_LINE", lineStr);
+  fields ~= new glib.log_field.LogField("CODE_FUNC", func);
+  fields ~= new glib.log_field.LogField("MESSAGE", message);
+  logStructured(logDomain, logLevel, fields);
+}
 
 
 /**
@@ -5046,6 +5139,82 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
 }
 
 /**
+    Set a writer function which will be called to format and write out each log
+    message.
+    
+    Each program should set a writer function, or the default writer
+    (`funcGLib.log_writer_default`) will be used.
+    
+    Libraries **must not** call this function — only programs are allowed to
+    install a writer function, as there must be a single, central point where
+    log messages are formatted and outputted.
+    
+    There can only be one writer function. It is an error to set more than one.
+
+    Params:
+      func = log writer function, which must not be `NULL`
+*/
+void logSetWriterFunc(glib.types.LogWriterFunc func) nothrow
+{
+  extern(C) GLogWriterOutput _funcCallback(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) nothrow
+  {
+    glib.types.LogWriterOutput _dretval;
+    auto _dlg = cast(glib.types.LogWriterFunc*)userData;
+    glib.log_field.LogField[] _fields;
+    _fields.length = nFields;
+    foreach (i; 0 .. nFields)
+      _fields[i] = new glib.log_field.LogField(cast(void*)&fields[i], null);
+
+    try
+    {
+      _dretval = (*_dlg)(logLevel, _fields);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.LogWriterFunc");
+    }
+    auto _retval = cast(GLogWriterOutput)_dretval;
+
+    return _retval;
+  }
+  auto _funcCB = func ? &_funcCallback : null;
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  g_log_set_writer_func(_funcCB, _func, _funcDestroyCB);
+}
+
+/**
+    Log a message with structured data.
+    
+    The message will be passed through to the log writer set by the application
+    using `funcGLib.log_set_writer_func`. If the
+    message is fatal (i.e. its log level is `flagsGLib.LogLevelFlags.LEVEL_ERROR`), the program will
+    be aborted at the end of this function.
+    
+    See `funcGLib.log_structured` for more documentation.
+    
+    This assumes that log_level is already present in fields (typically as the
+    `PRIORITY` field).
+
+    Params:
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
+           level
+      fields = key–value pairs of structured data to add
+           to the log message
+*/
+void logStructuredArray(glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields) nothrow
+{
+  size_t _nFields;
+  if (fields)
+    _nFields = cast(size_t)fields.length;
+
+  auto _fields_arr = new GLogField[](fields.length);
+  auto _fields = _fields_arr.ptr;
+  foreach (i, obj; fields) _fields[i] = *cast(GLogField*)obj._cPtr;
+  g_log_structured_array(logLevel, _fields, _nFields);
+}
+
+/**
     Log a message with structured data, accepting the data within a [glib.variant.Variant].
     
     This version is especially useful for use in other languages, via introspection.
@@ -5073,6 +5242,54 @@ void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.varian
 {
   const(char)* _logDomain = logDomain.toCString!(No.Malloc, Yes.Nullable);
   g_log_variant(_logDomain, logLevel, fields ? cast(GVariant*)fields._cPtr(No.Dup) : null);
+}
+
+/**
+    Format a structured log message and output it to the default log destination
+    for the platform.
+    
+    On Linux, this is typically the systemd journal, falling
+    back to `stdout` or `stderr` if running from the terminal or if output is
+    being redirected to a file.
+    
+    Support for other platform-specific logging mechanisms may be added in
+    future. Distributors of GLib may modify this function to impose their own
+    (documented) platform-specific log writing policies.
+    
+    This is suitable for use as a [glib.types.LogWriterFunc], and is the default writer used
+    if no other is set using `funcGLib.log_set_writer_func`.
+    
+    As with `funcGLib.log_default_handler`, this function drops debug and informational
+    messages unless their log domain (or `all`) is listed in the space-separated
+    `G_MESSAGES_DEBUG` environment variable, or `DEBUG_INVOCATION=1` is set in
+    the environment, or set at runtime by `funcGLib.log_writer_default_set_debug_domains`.
+    
+    `funcGLib.log_writer_default` uses the mask set by `funcGLib.log_set_always_fatal` to
+    determine which messages are fatal. When using a custom writer function instead it is
+    up to the writer function to determine which log messages are fatal.
+
+    Params:
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
+           level
+      fields = key–value pairs of structured data forming
+           the log message
+      userData = user data passed to `funcGLib.log_set_writer_func`
+    Returns: `enumGLib.LogWriterOutput.HANDLED` on success,
+        `enumGLib.LogWriterOutput.UNHANDLED` otherwise
+*/
+glib.types.LogWriterOutput logWriterDefault(glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields, void* userData = null) nothrow
+{
+  GLogWriterOutput _cretval;
+  size_t _nFields;
+  if (fields)
+    _nFields = cast(size_t)fields.length;
+
+  auto _fields_arr = new GLogField[](fields.length);
+  auto _fields = _fields_arr.ptr;
+  foreach (i, obj; fields) _fields[i] = *cast(GLogField*)obj._cPtr;
+  _cretval = g_log_writer_default(logLevel, _fields, _nFields, userData);
+  glib.types.LogWriterOutput _retval = cast(glib.types.LogWriterOutput)_cretval;
+  return _retval;
 }
 
 /**
@@ -5164,6 +5381,45 @@ bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDoma
 }
 
 /**
+    Format a structured log message as a string suitable for outputting to the
+    terminal (or elsewhere).
+    
+    This will include the values of all fields it knows
+    how to interpret, which includes `MESSAGE` and `GLIB_DOMAIN` (see the
+    documentation for `funcGLib.log_structured`). It does not include values from
+    unknown fields.
+    
+    The returned string does **not** have a trailing new-line character. It is
+    encoded in the character set of the current locale, which is not necessarily
+    UTF-8.
+
+    Params:
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
+           level
+      fields = key–value pairs of structured data forming
+           the log message
+      useColor = `TRUE` to use
+          [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
+          when formatting the message, `FALSE` to not
+    Returns: string containing the formatted log message, in
+         the character set of the current locale
+*/
+string logWriterFormatFields(glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields, bool useColor) nothrow
+{
+  char* _cretval;
+  size_t _nFields;
+  if (fields)
+    _nFields = cast(size_t)fields.length;
+
+  auto _fields_arr = new GLogField[](fields.length);
+  auto _fields = _fields_arr.ptr;
+  foreach (i, obj; fields) _fields[i] = *cast(GLogField*)obj._cPtr;
+  _cretval = g_log_writer_format_fields(logLevel, _fields, _nFields, useColor);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+  return _retval;
+}
+
+/**
     Check whether the given output_fd file descriptor is a connection to the
     systemd journal, or something else (like a log file or `stdout` or
     `stderr`).
@@ -5186,6 +5442,85 @@ bool logWriterIsJournald(int outputFd) nothrow
 }
 
 /**
+    Format a structured log message and send it to the systemd journal as a set
+    of key–value pairs.
+    
+    All fields are sent to the journal, but if a field has
+    length zero (indicating program-specific data) then only its key will be
+    sent.
+    
+    This is suitable for use as a [glib.types.LogWriterFunc].
+    
+    If GLib has been compiled without systemd support, this function is still
+    defined, but will always return `enumGLib.LogWriterOutput.UNHANDLED`.
+
+    Params:
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
+           level
+      fields = key–value pairs of structured data forming
+           the log message
+      userData = user data passed to `funcGLib.log_set_writer_func`
+    Returns: `enumGLib.LogWriterOutput.HANDLED` on success, `enumGLib.LogWriterOutput.UNHANDLED` otherwise
+*/
+glib.types.LogWriterOutput logWriterJournald(glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields, void* userData = null) nothrow
+{
+  GLogWriterOutput _cretval;
+  size_t _nFields;
+  if (fields)
+    _nFields = cast(size_t)fields.length;
+
+  auto _fields_arr = new GLogField[](fields.length);
+  auto _fields = _fields_arr.ptr;
+  foreach (i, obj; fields) _fields[i] = *cast(GLogField*)obj._cPtr;
+  _cretval = g_log_writer_journald(logLevel, _fields, _nFields, userData);
+  glib.types.LogWriterOutput _retval = cast(glib.types.LogWriterOutput)_cretval;
+  return _retval;
+}
+
+/**
+    Format a structured log message and print it to either `stdout` or `stderr`,
+    depending on its log level.
+    
+    `flagsGLib.LogLevelFlags.LEVEL_INFO` and `flagsGLib.LogLevelFlags.LEVEL_DEBUG` messages
+    are sent to `stdout`, or to `stderr` if requested by
+    `funcGLib.log_writer_default_set_use_stderr`;
+    all other log levels are sent to `stderr`. Only fields
+    which are understood by this function are included in the formatted string
+    which is printed.
+    
+    If the output stream supports
+    [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code),
+    they will be used in the output.
+    
+    A trailing new-line character is added to the log message when it is printed.
+    
+    This is suitable for use as a [glib.types.LogWriterFunc].
+
+    Params:
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
+           level
+      fields = key–value pairs of structured data forming
+           the log message
+      userData = user data passed to `funcGLib.log_set_writer_func`
+    Returns: `enumGLib.LogWriterOutput.HANDLED` on success,
+        `enumGLib.LogWriterOutput.UNHANDLED` otherwise
+*/
+glib.types.LogWriterOutput logWriterStandardStreams(glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields, void* userData = null) nothrow
+{
+  GLogWriterOutput _cretval;
+  size_t _nFields;
+  if (fields)
+    _nFields = cast(size_t)fields.length;
+
+  auto _fields_arr = new GLogField[](fields.length);
+  auto _fields = _fields_arr.ptr;
+  foreach (i, obj; fields) _fields[i] = *cast(GLogField*)obj._cPtr;
+  _cretval = g_log_writer_standard_streams(logLevel, _fields, _nFields, userData);
+  glib.types.LogWriterOutput _retval = cast(glib.types.LogWriterOutput)_cretval;
+  return _retval;
+}
+
+/**
     Check whether the given output_fd file descriptor supports
     [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
     
@@ -5199,6 +5534,43 @@ bool logWriterSupportsColor(int outputFd) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_log_writer_supports_color(outputFd);
+  return _retval;
+}
+
+/**
+    Format a structured log message and send it to the syslog daemon. Only fields
+    which are understood by this function are included in the formatted string
+    which is printed.
+    
+    Log facility will be defined via the SYSLOG_FACILITY field and accepts the following
+    values: "auth", "daemon", and "user". If SYSLOG_FACILITY is not specified, LOG_USER
+    facility will be used.
+    
+    This is suitable for use as a [glib.types.LogWriterFunc].
+    
+    If syslog is not supported, this function is still defined, but will always
+    return `enumGLib.LogWriterOutput.UNHANDLED`.
+
+    Params:
+      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
+           level
+      fields = key–value pairs of structured data forming
+           the log message
+      userData = user data passed to `funcGLib.log_set_writer_func`
+    Returns: `enumGLib.LogWriterOutput.HANDLED` on success, `enumGLib.LogWriterOutput.UNHANDLED` otherwise
+*/
+glib.types.LogWriterOutput logWriterSyslog(glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields, void* userData = null) nothrow
+{
+  GLogWriterOutput _cretval;
+  size_t _nFields;
+  if (fields)
+    _nFields = cast(size_t)fields.length;
+
+  auto _fields_arr = new GLogField[](fields.length);
+  auto _fields = _fields_arr.ptr;
+  foreach (i, obj; fields) _fields[i] = *cast(GLogField*)obj._cPtr;
+  _cretval = g_log_writer_syslog(logLevel, _fields, _nFields, userData);
+  glib.types.LogWriterOutput _retval = cast(glib.types.LogWriterOutput)_cretval;
   return _retval;
 }
 

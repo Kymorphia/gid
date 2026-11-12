@@ -685,7 +685,7 @@ alias EntryCompletionMatchFunc = bool delegate(gtk.entry_completion.EntryComplet
 
     Params:
       filterInfo = a #GtkFileFilterInfo that is filled according
-          to the needed flags passed to [gtk.file_filter.FileFilter.addCustom] (borrowed, only valid during the callback, use `_dup` to keep a copy)
+          to the needed flags passed to [gtk.file_filter.FileFilter.addCustom] (borrowed, only valid during the callback)
     Returns: true if the file should be displayed
 */
 alias FileFilterFunc = bool delegate(gtk.file_filter_info.FileFilterInfo filterInfo);
@@ -894,7 +894,7 @@ alias RcPropertyParser = bool delegate(gobject.param_spec.ParamSpec pspec, glib.
 
     Params:
       filterInfo = a #GtkRecentFilterInfo that is filled according
-         to the needed flags passed to [gtk.recent_filter.RecentFilter.addCustom] (borrowed, only valid during the callback, use `_dup` to keep a copy)
+         to the needed flags passed to [gtk.recent_filter.RecentFilter.addCustom] (borrowed, only valid during the callback)
     Returns: true if the file should be displayed
 */
 alias RecentFilterFunc = bool delegate(gtk.recent_filter_info.RecentFilterInfo filterInfo);

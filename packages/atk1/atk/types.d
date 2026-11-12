@@ -125,7 +125,7 @@ alias Function = bool delegate();
 
     Params:
       event = an AtkKeyEventStruct containing information about the key event for which
-        notification is being given. (borrowed, only valid during the callback, use `_dup` to keep a copy)
+        notification is being given. (borrowed, only valid during the callback)
     Returns: TRUE (nonzero) if the event emission should be stopped and the event
       discarded without being passed to the normal GUI recipient; FALSE (zero) if the
       event dispatch to the client application should proceed as normal.
@@ -141,7 +141,7 @@ alias KeySnoopFunc = int delegate(atk.key_event_struct.KeyEventStruct event);
 
     Params:
       obj = atkobject which property changes
-      vals = values changed (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      vals = values changed (borrowed, only valid during the callback)
 
     Deprecated: Since 2.12.
 */

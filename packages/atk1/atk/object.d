@@ -1074,7 +1074,7 @@ class ObjectWrap : gobject.object.ObjectWrap
           `void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectWrap objectWrap)`
   
           `arg1` an #AtkPropertyValues containing the new
-            value of the property which changed. (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
+            value of the property which changed. (borrowed, only valid during the callback) (optional)
   
           `objectWrap` the instance the signal is connected to (optional)
   
