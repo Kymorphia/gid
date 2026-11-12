@@ -976,6 +976,17 @@ class Value : BoxedWrap!g_value_get_type
 }
 
 /**
+* Check if a D type converts itself to and from GValues (value types of other packages, such as the GStreamer
+* fundamental types gst.types.Fraction or gst.types.IntRange). Such a type provides the following members:
+* ---
+* static GType _gidValueGType() nothrow; // GType of the values (0 if unavailable)
+* static T _gidValueGet(const(GValue)* gval) nothrow; // Get a D value from a GValue of the GType
+* void _gidValueSet(GValue* gval) nothrow; // Set a GValue initialized to the GType (C copies of any D memory)
+* ---
+*/
+enum isGidValueType(T) = is(typeof(&T._gidValueGType)) && is(typeof(&T._gidValueGet)) && is(typeof(&T._gidValueSet));
+
+/**
 * Template to initialize a C GValue structure.
 * Params:
 *   T = The D type to initialize the GValue to
@@ -983,8 +994,10 @@ class Value : BoxedWrap!g_value_get_type
 */
 void initVal(T)(GValue* gval) nothrow
 {
-  static if (is(T == bool))
-    g_value_init(gval, GTypeEnum.Boolean);
+  static if (isGidValueType!T)
+    g_value_init(gval, T._gidValueGType());
+  else static if (is(T == bool))
+  g_value_init(gval, GTypeEnum.Boolean);
   else static if (is(T == byte) || is(T == char))
   g_value_init(gval, GTypeEnum.Char);
   else static if (is(T == ubyte))
@@ -1031,8 +1044,10 @@ void initVal(T)(GValue* gval) nothrow
 */
 T getVal(T)(const(GValue)* gval) nothrow
 {
-  static if (is(T == bool))
-    return cast(bool)g_value_get_boolean(gval);
+  static if (isGidValueType!T)
+    return T._gidValueGet(gval);
+  else static if (is(T == bool))
+  return cast(bool)g_value_get_boolean(gval);
   else static if (is(T == byte) || is(T == char))
   return g_value_get_schar(gval);
   else static if (is(T == ubyte))
@@ -1135,14 +1150,22 @@ string getStringWithLength(const(GValue)* gval, int length) nothrow
 /**
 * Template to set a GValue to a given D type (must have been initialized to the proper type)
 * Params:
-*   T = D type which the C GValue structure has been initialized to (except Boxed types which are initialized by this template)
+*   T = D type which the C GValue structure has been initialized to (except Boxed types and isGidValueType types, which are
+*     initialized by this template if needed)
 *   gval = C GValue structure pointer
 *   v = The value to set the GValue structure to
 */
 void setVal(T)(GValue* gval, T v) nothrow
 {
-  static if (is(T == bool))
-    g_value_set_boolean(gval, cast(gboolean)v);
+  static if (isGidValueType!T)
+  {
+    if (!gval.gType)
+      g_value_init(gval, T._gidValueGType());
+
+    v._gidValueSet(gval);
+  }
+  else static if (is(T == bool))
+  g_value_set_boolean(gval, cast(gboolean)v);
   else static if (is(T == byte) || is(T == char))
   g_value_set_schar(gval, v);
   else static if (is(T == ubyte))

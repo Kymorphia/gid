@@ -87,6 +87,47 @@
 //# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[RTPBuffer].field[data][ignore] 1
 
-//# Disable: Uses unsupported GValue fundamental types (Fraction, ValueArray, ValueList) (FIXME)
-//!set class[RTPBaseDepayload].property[extensions][disable] 1
-//!set class[RTPBasePayload].property[extensions][disable] 1
+//# Ignore: Property type Gst.ValueArray is a fundamental GValue type, replaced by gst.types.ValueArray properties below
+//!set class[RTPBaseDepayload].property[extensions][ignore] 1
+//!set class[RTPBasePayload].property[extensions][ignore] 1
+
+//# Add read-only extensions properties, using the gst.types.ValueArray D value type (values are gstrtp.rtpheader_extension.RTPHeaderExtension objects)
+//!class RTPBaseDepayload
+
+  /**
+      Get `extensions` property.
+      Returns: A list of already enabled RTP header extensions. This may be useful for finding
+        out which extensions are already enabled (with add-extension signal) and picking a non-conflicting
+        ID for a new extension that needs to be added on top of the existing ones.
+
+        Note that the value returned by reading this property is not dynamically updated when the set of
+        enabled extensions changes by any of existing action signals. Rather, it represents the current state
+        at the time the property is read.
+
+        Dynamic updates of this property can be received by subscribing to its corresponding "notify" signal, i.e.
+        "notify::extensions".
+  */
+  @property gst.types.ValueArray extensions() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.ValueArray)("extensions");
+  }
+
+//!class RTPBasePayload
+
+  /**
+      Get `extensions` property.
+      Returns: A list of already enabled RTP header extensions. This may be useful for finding
+        out which extensions are already enabled (with add-extension signal) and picking a non-conflicting
+        ID for a new extension that needs to be added on top of the existing ones.
+
+        Note that the value returned by reading this property is not dynamically updated when the set of
+        enabled extensions changes by any of existing action signals. Rather, it represents the current state
+        at the time the property is read.
+
+        Dynamic updates of this property can be received by subscribing to its corresponding "notify" signal, i.e.
+        "notify::extensions".
+  */
+  @property gst.types.ValueArray extensions() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.ValueArray)("extensions");
+  }

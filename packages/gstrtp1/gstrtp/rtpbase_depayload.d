@@ -182,6 +182,25 @@ class RTPBaseDepayload : gst.element.Element
   }
 
   /**
+  Get `extensions` property.
+  Returns: A list of already enabled RTP header extensions. This may be useful for finding
+  out which extensions are already enabled (with add-extension signal) and picking a non-conflicting
+  ID for a new extension that needs to be added on top of the existing ones.
+  
+  Note that the value returned by reading this property is not dynamically updated when the set of
+  enabled extensions changes by any of existing action signals. Rather, it represents the current state
+  at the time the property is read.
+  
+  Dynamic updates of this property can be received by subscribing to its corresponding "notify" signal, i.e.
+  "notify::extensions".
+  */
+  @property gst.types.ValueArray extensions() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.ValueArray)("extensions");
+  }
+
+
+  /**
       Called from GstRTPBaseDepayload.process or
       GstRTPBaseDepayload.process_rtp_packet when the depayloader needs
       to keep the current input RTP header for use with the next output

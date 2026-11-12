@@ -12,6 +12,8 @@ import gstaudio.c.types;
 import gstaudio.types;
 import gstbase.aggregator;
 
+import gst.types;
+
 /**
     Subclasses must use (a subclass of) #GstAudioAggregatorPad for both
     their source and sink pads,
@@ -176,6 +178,26 @@ class AudioAggregator : gstbase.aggregator.Aggregator
     gobject.object.ObjectWrap.setProperty!(ulong)("output-buffer-duration", propval);
   }
 
+  /**
+  Get `outputBufferDurationFraction` property.
+  Returns: Output block size in nanoseconds, expressed as a fraction.
+  */
+  @property gst.types.Fraction outputBufferDurationFraction() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.Fraction)("output-buffer-duration-fraction");
+  }
+
+  /**
+  Set `outputBufferDurationFraction` property.
+  Params:
+  propval = Output block size in nanoseconds, expressed as a fraction.
+  */
+  @property void outputBufferDurationFraction(gst.types.Fraction propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.types.Fraction)("output-buffer-duration-fraction", propval);
+  }
+
+
   /** */
   void setSinkCaps(gstaudio.audio_aggregator_pad.AudioAggregatorPad pad, gst.caps.Caps caps) nothrow
   {
@@ -186,6 +208,17 @@ class AudioAggregator : gstbase.aggregator.Aggregator
 /// Fluent builder implementation template for [gstaudio.audio_aggregator.AudioAggregator]
 class AudioAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilderImpl!T
 {
+
+  /**
+  Set `outputBufferDurationFraction` property.
+  Params:
+  propval = Output block size in nanoseconds, expressed as a fraction.
+  Returns: Builder instance for fluent chaining
+  */
+  T outputBufferDurationFraction(gst.types.Fraction propval) nothrow
+  {
+    return setProperty("output-buffer-duration-fraction", propval);
+  }
 
   /** */
   T alignmentThreshold(ulong propval) nothrow

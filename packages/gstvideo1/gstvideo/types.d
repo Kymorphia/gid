@@ -629,3 +629,36 @@ enum VIDEO_TILE_X_TILES_MASK = 65535;
 
 /** */
 enum VIDEO_TILE_Y_TILES_SHIFT = 16;
+
+import gobject.c.types;
+import gst.c.functions;
+
+/**
+Multiview flag set value type (GstVideoMultiviewFlagsSet), a [gst.types.FlagSet] of
+[gstvideo.types.VideoMultiviewFlags], such as the caps `multiview-flags` field.
+*/
+struct VideoMultiviewFlagsSet
+{
+  VideoMultiviewFlags flags; /// The flags
+  VideoMultiviewFlags mask; /// Mask of the flags which are relevant
+
+  /// Get the GType of GstVideoMultiviewFlagsSet values.
+  static GType _gidValueGType() nothrow
+  {
+    return gst_video_multiview_flagset_get_type();
+  }
+
+  /// Get a VideoMultiviewFlagsSet from a GValue.
+  static VideoMultiviewFlagsSet _gidValueGet(const(GValue)* gval) nothrow
+  {
+    auto flags = cast(VideoMultiviewFlags)gst_value_get_flagset_flags(gval);
+    auto mask = cast(VideoMultiviewFlags)gst_value_get_flagset_mask(gval);
+    return VideoMultiviewFlagsSet(flags, mask);
+  }
+
+  /// Set a GValue to the VideoMultiviewFlagsSet.
+  void _gidValueSet(GValue* gval) const nothrow
+  {
+    gst_value_set_flagset(gval, cast(uint)flags, cast(uint)mask);
+  }
+}

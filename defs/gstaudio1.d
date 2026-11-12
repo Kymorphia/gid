@@ -56,8 +56,8 @@
 //!set record[AudioFormatInfo].field[unpack_func][ignore] 1
 //!set record[AudioFormatInfo].field[pack_func][ignore] 1
 
-//# Disable: Uses unsupported GValue fundamental types (Fraction, ValueArray, ValueList) (FIXME)
-//!set class[AudioAggregator].property[output-buffer-duration-fraction][disable] 1
+//# Ignore: Property type Gst.Fraction is a fundamental GValue type, replaced by gst.types.Fraction properties below
+//!set class[AudioAggregator].property[output-buffer-duration-fraction][ignore] 1
 
 //# Disable: Array fields with lengths from other structures (channel counts)
 //!set record[AudioDownmixMeta].field[matrix][disable] 1
@@ -68,3 +68,41 @@
 //!set record[AudioBuffer].field[planes][writable] 0
 //!set record[DsdPlaneOffsetMeta].field[offsets].type '<array length="1" zero-terminated="0" c:type="gsize*"><type name="gsize" c:type="gsize"/></array>'
 //!set record[DsdPlaneOffsetMeta].field[offsets][writable] 0
+
+//# Add output-buffer-duration-fraction property, using the gst.types.Fraction D value type
+//!class AudioAggregator pre
+import gst.types;
+
+//!class AudioAggregator
+
+  /**
+      Get `outputBufferDurationFraction` property.
+      Returns: Output block size in nanoseconds, expressed as a fraction.
+  */
+  @property gst.types.Fraction outputBufferDurationFraction() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(gst.types.Fraction)("output-buffer-duration-fraction");
+  }
+
+  /**
+      Set `outputBufferDurationFraction` property.
+      Params:
+        propval = Output block size in nanoseconds, expressed as a fraction.
+  */
+  @property void outputBufferDurationFraction(gst.types.Fraction propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(gst.types.Fraction)("output-buffer-duration-fraction", propval);
+  }
+
+//!class AudioAggregatorGidBuilder
+
+  /**
+      Set `outputBufferDurationFraction` property.
+      Params:
+        propval = Output block size in nanoseconds, expressed as a fraction.
+      Returns: Builder instance for fluent chaining
+  */
+  T outputBufferDurationFraction(gst.types.Fraction propval) nothrow
+  {
+    return setProperty("output-buffer-duration-fraction", propval);
+  }

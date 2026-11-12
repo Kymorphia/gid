@@ -21,7 +21,7 @@ gio2                       |  171    0    0   100 | 1669    3    0  99.8 |   79 
 giounix2                   |   11    0    0   100 |  100    1    0  99.0 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  309    0    0   100 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94   10    0  90.4 | 1531    3    0  99.8 |   23    0    0   100 |  130    1    0  99.2 |
+gst1                       |   94    0    0   100 | 1531    3    0  99.8 |   23    0    0   100 |  130    1    0  99.2 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  215    6    0  97.3 |    0    0    0   100 |   61    2    0  96.8 |
@@ -37,7 +37,7 @@ gstrtp1                    |   11    0    0   100 |  195    3    0  98.5 |    6 
 gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1    0    0   100 |   51    0    0   100 |
 gstsdp1                    |   23    0    0   100 |  167    2    0  98.8 |    0    0    0   100 |   87    2    0  97.8 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   60    1    0  98.4 |  385    5    0  98.7 |    2    0    0   100 |  186    3    0  98.4 |
+gstvideo1                  |   60    0    0   100 |  385    5    0  98.7 |    2    0    0   100 |  186    3    0  98.4 |
 gtk3                       |  345    0    0   100 | 3780    3    0  99.9 |  448    0    0   100 |  155    0    0   100 |
 gtk4                       |  326    0    0   100 | 3667    1    0 100.0 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
@@ -64,17 +64,6 @@ xlib2                      |   12    0    0   100 |    1    0    0   100 |    0 
 
 [Disabled Structs]
 glib.log_field.LogField
-gst.types.Bitmask
-gst.types.DoubleRange
-gst.types.FlagSet
-gst.types.Fraction
-gst.types.FractionRange
-gst.types.Int64Range
-gst.types.IntRange
-gst.types.ValueArray
-gst.types.ValueList
-gst.types.ValueUniqueList
-gstvideo.video_multiview_flags_set.VideoMultiviewFlagsSet
 
 [Disabled Funcs]
 atk.document.Document.getTextSelections

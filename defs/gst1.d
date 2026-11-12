@@ -23,16 +23,17 @@
 
 //!kind Structure Boxed
 
-//# Disable fundamental GValue types which are not currently supported (FIXME)
-//!set class[Bitmask][disable] 1
-//!set class[DoubleRange][disable] 1
-//!set class[FlagSet][disable] 1
-//!set class[Fraction][disable] 1
-//!set class[FractionRange][disable] 1
-//!set class[Int64Range][disable] 1
-//!set class[IntRange][disable] 1
-//!set class[ValueArray][disable] 1
-//!set class[ValueList][disable] 1
+//# Ignore: Fundamental GValue types with no C structure, bound as D value types in gst.types instead (see gst1-types.d)
+//!set class[Bitmask][ignore] 1
+//!set class[DoubleRange][ignore] 1
+//!set class[FlagSet][ignore] 1
+//!set class[Fraction][ignore] 1
+//!set class[FractionRange][ignore] 1
+//!set class[Int64Range][ignore] 1
+//!set class[IntRange][ignore] 1
+//!set class[ValueArray][ignore] 1
+//!set class[ValueList][ignore] 1
+//!set class[ValueUniqueList][ignore] 1
 
 //# Ignore "protected/private" structure fields
 //!set record[Iterator].*field[][ignore] 1
@@ -148,9 +149,6 @@
 
 //# Ignore: Use D native synchronization primitives instead (GLib Mutex/RecMutex/Cond/Private are disabled)
 //!set class[Task].method[set_lock][ignore] 1
-
-//# Disable: Uses unsupported GValue fundamental types (Fraction, ValueArray, ValueList) (FIXME)
-//!set class[ValueUniqueList][disable] 1
 
 //# Ignore: Iterator.find_custom uses a GCompareFunc with positional data, use Iterator.foreach or D iteration instead
 //!set record[Iterator].method[find_custom][ignore] 1

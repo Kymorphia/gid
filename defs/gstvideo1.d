@@ -32,8 +32,8 @@
 //!set function[buffer_get_video_region_of_interest_meta_id].return-value[][gid-borrow] buffer
 //!set enumeration[VideoFormat].function[get_info].return-value[][gid-borrow] static
 
-//# Disable this type which is derived from the unsupported Gst.FlagSet fundamental type (FIXME)
-//!set class[VideoMultiviewFlagsSet][disable] 1
+//# Ignore: Fundamental GValue type derived from Gst.FlagSet, bound as a D value type in gstvideo.types instead
+//!set class[VideoMultiviewFlagsSet][ignore] 1
 
 //# Ignore: deprecated and replaced by gst_video_meta_set_alignment_full
 //!set record[VideoMeta].method[set_alignment][ignore] 1
@@ -118,3 +118,39 @@
 
 //# Disable: Two dimensional taps array (n_phases * max_taps)
 //!set record[VideoResampler].field[taps][disable] 1
+
+//# VideoMultiviewFlagsSet D value type (GstVideoMultiviewFlagsSet GValue flag set type, see gst1-types.d)
+//!class types pre
+
+import gobject.c.types;
+import gst.c.functions;
+
+/**
+    Multiview flag set value type (GstVideoMultiviewFlagsSet), a [gst.types.FlagSet] of
+    [gstvideo.types.VideoMultiviewFlags], such as the caps `multiview-flags` field.
+*/
+struct VideoMultiviewFlagsSet
+{
+  VideoMultiviewFlags flags; /// The flags
+  VideoMultiviewFlags mask; /// Mask of the flags which are relevant
+
+  /// Get the GType of GstVideoMultiviewFlagsSet values.
+  static GType _gidValueGType() nothrow
+  {
+    return gst_video_multiview_flagset_get_type();
+  }
+
+  /// Get a VideoMultiviewFlagsSet from a GValue.
+  static VideoMultiviewFlagsSet _gidValueGet(const(GValue)* gval) nothrow
+  {
+    auto flags = cast(VideoMultiviewFlags)gst_value_get_flagset_flags(gval);
+    auto mask = cast(VideoMultiviewFlags)gst_value_get_flagset_mask(gval);
+    return VideoMultiviewFlagsSet(flags, mask);
+  }
+
+  /// Set a GValue to the VideoMultiviewFlagsSet.
+  void _gidValueSet(GValue* gval) const nothrow
+  {
+    gst_value_set_flagset(gval, cast(uint)flags, cast(uint)mask);
+  }
+}
