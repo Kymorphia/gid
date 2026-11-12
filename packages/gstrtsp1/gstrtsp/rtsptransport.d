@@ -8,51 +8,27 @@ import gstrtsp.c.types;
 import gstrtsp.rtsprange;
 import gstrtsp.types;
 
+
+private extern(C) GstRTSPTransport* rtspTransportCopy(const(GstRTSPTransport)* transport) nothrow
+{
+  auto copy = mallocDup(cast(GstRTSPTransport*)transport);
+  copy.destination = gid.gid.strdup(transport.destination);
+  copy.source = gid.gid.strdup(transport.source);
+  return copy;
+}
 /**
     Provides helper functions to deal with RTSP transport strings.
 */
-class RTSPTransport : StructWrap!(GstRTSPTransport)
+class RTSPTransport : StructWrap!(GstRTSPTransport, rtspTransportCopy, gst_rtsp_transport_free)
 {
   /**
-      Create a `rtsptransport.RTSPTransport` wrap type.
-      Params:
-        trans = the transport mode
-        profile = the tansport profile
-        lowerTransport = the lower transport
-        destination = the destination ip/hostname
-        source = the source ip/hostname
-        layers = the number of layers
-        modePlay = if play mode was selected
-        modeRecord = if record mode was selected
-        append = is append mode was selected
-        interleaved = the interleave range
-        ttl = the time to live for multicast UDP
-        port = the port pair for multicast sessions
-        clientPort = the client port pair for receiving data. For TCP
-            based transports, applications can use this field to store the
-            sender and receiver ports of the client.
-        serverPort = the server port pair for receiving data. For TCP
-            based transports, applications can use this field to store the
-            sender and receiver ports of the server.
-        ssrc = the ssrc that the sender/receiver will use
+      Create a new C allocated `rtsptransport.RTSPTransport` initialized with `gst_rtsp_transport_init()`.
   */
-  this(gstrtsp.types.RTSPTransMode trans = gstrtsp.types.RTSPTransMode.init, gstrtsp.types.RTSPProfile profile = gstrtsp.types.RTSPProfile.init, gstrtsp.types.RTSPLowerTrans lowerTransport = gstrtsp.types.RTSPLowerTrans.init, string destination = string.init, string source = string.init, uint layers = uint.init, bool modePlay = bool.init, bool modeRecord = bool.init, bool append = bool.init, gstrtsp.rtsprange.RTSPRange interleaved = gstrtsp.rtsprange.RTSPRange.init, uint ttl = uint.init, gstrtsp.rtsprange.RTSPRange port = gstrtsp.rtsprange.RTSPRange.init, gstrtsp.rtsprange.RTSPRange clientPort = gstrtsp.rtsprange.RTSPRange.init, gstrtsp.rtsprange.RTSPRange serverPort = gstrtsp.rtsprange.RTSPRange.init, uint ssrc = uint.init) nothrow
+  this() nothrow
   {
-    this.trans = trans;
-    this.profile = profile;
-    this.lowerTransport = lowerTransport;
-    this.destination = destination;
-    this.source = source;
-    this.layers = layers;
-    this.modePlay = modePlay;
-    this.modeRecord = modeRecord;
-    this.append = append;
-    this.interleaved = interleaved;
-    this.ttl = ttl;
-    this.port = port;
-    this.clientPort = clientPort;
-    this.serverPort = serverPort;
-    this.ssrc = ssrc;
+    auto _ptr = cast(GstRTSPTransport*)gMalloc(GstRTSPTransport.sizeof);
+    gst_rtsp_transport_init(_ptr);
+    super(cast(void*)_ptr, Yes.Take);
   }
 
   /** */
@@ -124,8 +100,6 @@ class RTSPTransport : StructWrap!(GstRTSPTransport)
     (cast(GstRTSPTransport*)this._cPtr).lowerTransport = cast(GstRTSPLowerTrans)propval;
   }
 
-  private const(char)* _destinationRef; // Keeps borrowed GC string alive
-
   /**
       Get `destination` field.
       Returns: the destination ip/hostname
@@ -142,14 +116,9 @@ class RTSPTransport : StructWrap!(GstRTSPTransport)
   */
   @property void destination(string propval) nothrow
   {
-    if (_refuseBorrowedStore("destination"))
-      return;
-
-    _destinationRef = toCString!(No.Malloc, Yes.Nullable)(propval);
-    (cast(GstRTSPTransport*)this._cPtr).destination = cast(char*)_destinationRef;
+    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).destination);
+    (cast(GstRTSPTransport*)this._cPtr).destination = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
-
-  private const(char)* _sourceRef; // Keeps borrowed GC string alive
 
   /**
       Get `source` field.
@@ -167,11 +136,8 @@ class RTSPTransport : StructWrap!(GstRTSPTransport)
   */
   @property void source(string propval) nothrow
   {
-    if (_refuseBorrowedStore("source"))
-      return;
-
-    _sourceRef = toCString!(No.Malloc, Yes.Nullable)(propval);
-    (cast(GstRTSPTransport*)this._cPtr).source = cast(char*)_sourceRef;
+    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).source);
+    (cast(GstRTSPTransport*)this._cPtr).source = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -449,6 +415,61 @@ class RTSPTransport : StructWrap!(GstRTSPTransport)
     _cretval = gst_rtsp_transport_get_mime(trans, &_mime);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     mime = _mime.fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Initialize transport so that it can be used.
+  
+      Params:
+        transport = a #GstRTSPTransport
+      Returns: #GST_RTSP_OK.
+  */
+  static gstrtsp.types.RTSPResult init_(out gstrtsp.rtsptransport.RTSPTransport transport) nothrow
+  {
+    GstRTSPResult _cretval;
+    auto _transport = cast(GstRTSPTransport*)gMalloc(GstRTSPTransport.sizeof);
+    _cretval = gst_rtsp_transport_init(_transport);
+    gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
+    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)_transport, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Allocate a new initialized #GstRTSPTransport. Use [gstrtsp.rtsptransport.RTSPTransport.free]
+      after usage.
+  
+      Params:
+        transport = location to hold the new #GstRTSPTransport
+      Returns: a #GstRTSPResult.
+  */
+  static gstrtsp.types.RTSPResult new_(out gstrtsp.rtsptransport.RTSPTransport transport) nothrow
+  {
+    GstRTSPResult _cretval;
+    GstRTSPTransport* _transport;
+    _cretval = gst_rtsp_transport_new(&_transport);
+    gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
+    if (_transport)
+      transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)_transport, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parse the RTSP transport string str into transport.
+  
+      Params:
+        str = a transport string
+        transport = a #GstRTSPTransport
+      Returns: a #GstRTSPResult.
+  */
+  static gstrtsp.types.RTSPResult parse(string str, out gstrtsp.rtsptransport.RTSPTransport transport) nothrow
+  {
+    GstRTSPResult _cretval;
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+    auto _transport = cast(GstRTSPTransport*)gMalloc(GstRTSPTransport.sizeof);
+    _cretval = gst_rtsp_transport_parse(_str, _transport);
+    gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
+    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)_transport, Yes.Take);
     return _retval;
   }
 }

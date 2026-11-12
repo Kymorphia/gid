@@ -4,11 +4,24 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstsdp1/
 //!info capi https://gstreamer.freedesktop.org/documentation/sdp/index.html
 
-// Disabled: create or fill a structure with C allocated members (freed by gst_sdp_media_free/uninit), which a D copy
-// would leak or double free. set_media_from_caps and add_media_from_structure modify an existing media (not outputs).
-//!set record[SDPMedia].method[copy][disable] 1
-//!set record[SDPMedia].function[new][disable] 1
-//!set record[SDPMedia].function[init][disable] 1
+//# SDPMedia has C allocated members (arrays and strings freed by gst_sdp_media_uninit/free), so it is held as a C
+//# allocated structure (allocated with g_malloc0 and initialized with gst_sdp_media_init, freed with gst_sdp_media_free,
+//# deep copied with gst_sdp_media_copy). The kind override keeps it a Wrap structure (free-function makes it opaque).
+//!set record[SDPMedia][copy-function] sdpMediaCopy
+//!set record[SDPMedia][free-function] gst_sdp_media_free
+//!set record[SDPMedia][gid-init-function] gst_sdp_media_init
+//!kind SDPMedia Wrap
+//!set record[SDPMedia].field[media][owned] 1
+//!set record[SDPMedia].field[proto][owned] 1
+//!set record[SDPMedia].field[information][owned] 1
+
+//# Ignore: frees the members of the C allocated structure, which is done by gst_sdp_media_free (wrapper finalizer)
+//!set record[SDPMedia].method[uninit][ignore] 1
+
+//# gst_sdp_message_add_media() moves the contents of media (leaving it zeroed), replaced below to re-initialize it
+//!set record[SDPMessage].method[add_media][ignore] 1
+
+//# set_media_from_caps and add_media_from_structure modify an existing media (not outputs)
 //!set record[SDPMedia].function[set_media_from_caps].parameters.parameter[media][direction] in
 //!set record[SDPMedia].function[set_media_from_caps].parameters.parameter[media][caller-allocates] 0
 //!set record[SDPMedia].function[add_media_from_structure].parameters.parameter[media][direction] in
@@ -70,3 +83,34 @@
 
 //# Disable: Timestamp array field with a length determined by the timestamp type
 //!set record[MIKEYPayloadT].field[ts_value][disable] 1
+
+//# Copy function with the StructWrap copy function signature (gst_sdp_media_copy() returns the copy in an out parameter)
+//!class SDPMedia pre
+
+private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
+{
+  GstSDPMedia* copy;
+  gst_sdp_media_copy(media, &copy);
+  return copy;
+}
+
+//!class SDPMessage
+
+  /**
+      Adds media to the array of medias in msg. The contents of media are moved to msg and media is re-initialized
+      afterwards (empty), so it can be used again.
+  
+      Params:
+        media = a #GstSDPMedia
+      Returns: a #GstSDPResult.
+  */
+  gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media) nothrow
+  {
+    auto _media = media ? cast(GstSDPMedia*)media._cPtr(No.Dup) : null;
+    GstSDPResult _cretval = gst_sdp_message_add_media(cast(GstSDPMessage*)this._cPtr, _media);
+
+    if (_media && _cretval == GstSDPResult.Ok)
+      gst_sdp_media_init(_media);
+
+    return cast(gstsdp.types.SDPResult)_cretval;
+  }

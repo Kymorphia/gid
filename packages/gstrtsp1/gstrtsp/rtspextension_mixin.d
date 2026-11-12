@@ -98,7 +98,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult setupMedia(gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_setup_media(cast(GstRTSPExtension*)this._cPtr, media ? cast(GstSDPMedia*)media._cPtr : null);
+    _cretval = gst_rtsp_extension_setup_media(cast(GstRTSPExtension*)this._cPtr, media ? cast(GstSDPMedia*)media._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

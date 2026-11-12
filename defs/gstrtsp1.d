@@ -4,11 +4,16 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstrtsp1/
 //!info capi https://gstreamer.freedesktop.org/documentation/rtsplib/index.html
 
-// Disabled: fill a structure with C allocated members (freed by gst_rtsp_transport_free), which a D copy would leak
-// or double free (needs an owned C allocated wrapper without a copy function)
-//!set record[RTSPTransport].function[new][disable] 1
-//!set record[RTSPTransport].function[init][disable] 1
-//!set record[RTSPTransport].function[parse][disable] 1
+//# RTSPTransport has C allocated string members (freed by gst_rtsp_transport_init/free), so it is held as a C allocated
+//# structure (allocated with g_malloc0 and initialized with gst_rtsp_transport_init, freed with gst_rtsp_transport_free,
+//# deep copied with rtspTransportCopy below, since GstRtsp has no copy function). The kind override keeps it a Wrap
+//# structure (free-function makes it opaque).
+//!set record[RTSPTransport][copy-function] rtspTransportCopy
+//!set record[RTSPTransport][free-function] gst_rtsp_transport_free
+//!set record[RTSPTransport][gid-init-function] gst_rtsp_transport_init
+//!kind RTSPTransport Wrap
+//!set record[RTSPTransport].field[destination][owned] 1
+//!set record[RTSPTransport].field[source][owned] 1
 
 //# Seems to use the wrong type (gchar**), but there are no docs, so not positive..
 //!set interface[RTSPExtension].method[get_transports].parameters.parameter[transport].type[][c:type] gchar*
@@ -35,3 +40,14 @@
 //# Set NULL-terminated array field (read-only, parsed credentials)
 //!set record[RTSPAuthCredential].field[params].type '<array zero-terminated="1" c:type="GstRTSPAuthParam**"><type name="RTSPAuthParam" c:type="GstRTSPAuthParam*"/></array>'
 //!set record[RTSPAuthCredential].field[params][writable] 0
+
+//# Copy function for the C allocated RTSPTransport (GstRtsp has none): a shallow copy with duplicated strings
+//!class RTSPTransport pre
+
+private extern(C) GstRTSPTransport* rtspTransportCopy(const(GstRTSPTransport)* transport) nothrow
+{
+  auto copy = mallocDup(cast(GstRTSPTransport*)transport);
+  copy.destination = gid.gid.strdup(transport.destination);
+  copy.source = gid.gid.strdup(transport.source);
+  return copy;
+}

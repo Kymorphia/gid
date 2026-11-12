@@ -34,8 +34,8 @@ gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0 
 gstnet1                    |    9    0    0   100 |   25    0    0   100 |    0    0    0   100 |    6    0    0   100 |
 gstpbutils1                |   16    0    0   100 |  182    2    0  98.9 |    5    0    0   100 |    0    0    0   100 |
 gstrtp1                    |   11    0    0   100 |  195    3    0  98.5 |    6    0    0   100 |   17    0    0   100 |
-gstrtsp1                   |   15    0    0   100 |  136    3    0  97.8 |    1    0    0   100 |   51    0    0   100 |
-gstsdp1                    |   23    0    0   100 |  166    5    0  97.1 |    0    0    0   100 |   87    2    0  97.8 |
+gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1    0    0   100 |   51    0    0   100 |
+gstsdp1                    |   23    0    0   100 |  167    2    0  98.8 |    0    0    0   100 |   87    2    0  97.8 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   60    1    0  98.4 |  385    5    0  98.7 |    2    0    0   100 |  186    3    0  98.4 |
 gtk3                       |  345    0    0   100 | 3780    3    0  99.9 |  448    0    0   100 |  155    0    0   100 |
@@ -130,14 +130,8 @@ gstpbutils.global.codecUtilsOpusCreateHeader
 gstrtp.rtcpbuffer.RTCPBuffer.unmap
 gstrtp.rtpbuffer.RTPBuffer.unmap
 gstrtp.global.bufferAddRtpSourceMeta
-gstrtsp.rtsptransport.RTSPTransport.init_
-gstrtsp.rtsptransport.RTSPTransport.new_
-gstrtsp.rtsptransport.RTSPTransport.parse
 gstsdp.mikeymessage.MIKEYMessage.addT
 gstsdp.mikeypayload.MIKEYPayload.tSet
-gstsdp.sdpmedia.SDPMedia.copy
-gstsdp.sdpmedia.SDPMedia.init_
-gstsdp.sdpmedia.SDPMedia.new_
 gstvideo.video_frame.VideoFrame.unmap
 gstvideo.video_scaler.VideoScaler.vertical
 gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine

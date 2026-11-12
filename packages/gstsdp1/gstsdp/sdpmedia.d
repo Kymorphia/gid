@@ -14,27 +14,27 @@ import gstsdp.sdpconnection;
 import gstsdp.sdpkey;
 import gstsdp.types;
 
+
+private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
+{
+  GstSDPMedia* copy;
+  gst_sdp_media_copy(media, &copy);
+  return copy;
+}
+
 /**
     The contents of the SDP "m=" field with all related fields.
 */
-class SDPMedia : StructWrap!(GstSDPMedia)
+class SDPMedia : StructWrap!(GstSDPMedia, sdpMediaCopy, gst_sdp_media_free)
 {
   /**
-      Create a `sdpmedia.SDPMedia` wrap type.
-      Params:
-        media = the media type
-        port = the transport port to which the media stream will be sent
-        numPorts = the number of ports or -1 if only one port was specified
-        proto = the transport protocol
-        information = the media title
+      Create a new C allocated `sdpmedia.SDPMedia` initialized with `gst_sdp_media_init()`.
   */
-  this(string media = string.init, uint port = uint.init, uint numPorts = uint.init, string proto = string.init, string information = string.init) nothrow
+  this() nothrow
   {
-    this.media = media;
-    this.port = port;
-    this.numPorts = numPorts;
-    this.proto = proto;
-    this.information = information;
+    auto _ptr = cast(GstSDPMedia*)gMalloc(GstSDPMedia.sizeof);
+    gst_sdp_media_init(_ptr);
+    super(cast(void*)_ptr, Yes.Take);
   }
 
   /** */
@@ -48,8 +48,6 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     super(ptr, owner);
   }
-
-  private const(char)* _mediaRef; // Keeps borrowed GC string alive
 
   /**
       Get `media` field.
@@ -67,11 +65,8 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   */
   @property void media(string propval) nothrow
   {
-    if (_refuseBorrowedStore("media"))
-      return;
-
-    _mediaRef = toCString!(No.Malloc, Yes.Nullable)(propval);
-    (cast(GstSDPMedia*)this._cPtr).media = cast(char*)_mediaRef;
+    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).media);
+    (cast(GstSDPMedia*)this._cPtr).media = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -112,8 +107,6 @@ class SDPMedia : StructWrap!(GstSDPMedia)
     (cast(GstSDPMedia*)this._cPtr).numPorts = propval;
   }
 
-  private const(char)* _protoRef; // Keeps borrowed GC string alive
-
   /**
       Get `proto` field.
       Returns: the transport protocol
@@ -130,11 +123,8 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   */
   @property void proto(string propval) nothrow
   {
-    if (_refuseBorrowedStore("proto"))
-      return;
-
-    _protoRef = toCString!(No.Malloc, Yes.Nullable)(propval);
-    (cast(GstSDPMedia*)this._cPtr).proto = cast(char*)_protoRef;
+    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).proto);
+    (cast(GstSDPMedia*)this._cPtr).proto = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -145,8 +135,6 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).fmts);
   }
-
-  private const(char)* _informationRef; // Keeps borrowed GC string alive
 
   /**
       Get `information` field.
@@ -164,11 +152,8 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   */
   @property void information(string propval) nothrow
   {
-    if (_refuseBorrowedStore("information"))
-      return;
-
-    _informationRef = toCString!(No.Malloc, Yes.Nullable)(propval);
-    (cast(GstSDPMedia*)this._cPtr).information = cast(char*)_informationRef;
+    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).information);
+    (cast(GstSDPMedia*)this._cPtr).information = toCString!(Yes.Malloc, Yes.Nullable)(propval);
   }
 
   /**
@@ -338,6 +323,25 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   {
     uint _retval;
     _retval = gst_sdp_media_connections_len(cast(const(GstSDPMedia)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Allocate a new copy of media and store the result in copy. The value in
+      copy should be release with gst_sdp_media_free function.
+  
+      Params:
+        copy = pointer to new #GstSDPMedia
+      Returns: a #GstSDPResult
+  */
+  gstsdp.types.SDPResult copy(out gstsdp.sdpmedia.SDPMedia copy) nothrow
+  {
+    GstSDPResult _cretval;
+    GstSDPMedia* _copy;
+    _cretval = gst_sdp_media_copy(cast(const(GstSDPMedia)*)this._cPtr, &_copy);
+    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
+    if (_copy)
+      copy = new gstsdp.sdpmedia.SDPMedia(cast(void*)_copy, Yes.Take);
     return _retval;
   }
 
@@ -834,20 +838,6 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   }
 
   /**
-      Free all resources allocated in media. media should not be used anymore after
-      this function. This function should be used when media was allocated on the
-      stack and initialized with [gstsdp.sdpmedia.SDPMedia.init_].
-      Returns: a #GstSDPResult.
-  */
-  gstsdp.types.SDPResult uninit() nothrow
-  {
-    GstSDPResult _cretval;
-    _cretval = gst_sdp_media_uninit(cast(GstSDPMedia*)this._cPtr);
-    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    return _retval;
-  }
-
-  /**
       Mapping of structure fields to SDP attributes:
       
       a=rtpmap:(payload) (encoding_name) or (clock_rate)[or (encoding_params)]
@@ -869,8 +859,48 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   static gstsdp.types.SDPResult addMediaFromStructure(gst.structure.Structure structure, gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_media_add_media_from_structure(structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, media ? cast(GstSDPMedia*)media._cPtr : null);
+    _cretval = gst_sdp_media_add_media_from_structure(structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, media ? cast(GstSDPMedia*)media._cPtr(No.Dup) : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
+    return _retval;
+  }
+
+  /**
+      Initialize media so that its contents are as if it was freshly allocated
+      with [gstsdp.sdpmedia.SDPMedia.new_]. This function is mostly used to initialize a media
+      allocated on the stack. [gstsdp.sdpmedia.SDPMedia.uninit] undoes this operation.
+      
+      When this function is invoked on newly allocated data (with malloc or on the
+      stack), its contents should be set to 0 before calling this function.
+  
+      Params:
+        media = a #GstSDPMedia
+      Returns: a #GstSDPResult.
+  */
+  static gstsdp.types.SDPResult init_(out gstsdp.sdpmedia.SDPMedia media) nothrow
+  {
+    GstSDPResult _cretval;
+    auto _media = cast(GstSDPMedia*)gMalloc(GstSDPMedia.sizeof);
+    _cretval = gst_sdp_media_init(_media);
+    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
+    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)_media, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Allocate a new GstSDPMedia and store the result in media.
+  
+      Params:
+        media = pointer to new #GstSDPMedia
+      Returns: a #GstSDPResult.
+  */
+  static gstsdp.types.SDPResult new_(out gstsdp.sdpmedia.SDPMedia media) nothrow
+  {
+    GstSDPResult _cretval;
+    GstSDPMedia* _media;
+    _cretval = gst_sdp_media_new(&_media);
+    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
+    if (_media)
+      media = new gstsdp.sdpmedia.SDPMedia(cast(void*)_media, Yes.Take);
     return _retval;
   }
 
@@ -897,7 +927,7 @@ class SDPMedia : StructWrap!(GstSDPMedia)
   static gstsdp.types.SDPResult setMediaFromCaps(gst.caps.Caps caps, gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_media_set_media_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null, media ? cast(GstSDPMedia*)media._cPtr : null);
+    _cretval = gst_sdp_media_set_media_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null, media ? cast(GstSDPMedia*)media._cPtr(No.Dup) : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }

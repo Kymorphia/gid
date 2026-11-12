@@ -171,6 +171,25 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   }
 
   /**
+  Adds media to the array of medias in msg. The contents of media are moved to msg and media is re-initialized
+  afterwards (empty), so it can be used again.
+  
+  Params:
+  media = a #GstSDPMedia
+  Returns: a #GstSDPResult.
+  */
+  gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media) nothrow
+  {
+    auto _media = media ? cast(GstSDPMedia*)media._cPtr(No.Dup) : null;
+    GstSDPResult _cretval = gst_sdp_message_add_media(cast(GstSDPMessage*)this._cPtr, _media);
+
+    if (_media && _cretval == GstSDPResult.Ok)
+      gst_sdp_media_init(_media);
+
+    return cast(gstsdp.types.SDPResult)_cretval;
+  }
+
+  /**
       Add the attribute with key and value to msg.
   
       Params:
@@ -217,23 +236,6 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
     GstSDPResult _cretval;
     const(char)* _email = email.toCString!(No.Malloc, No.Nullable);
     _cretval = gst_sdp_message_add_email(cast(GstSDPMessage*)this._cPtr, _email);
-    gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    return _retval;
-  }
-
-  /**
-      Adds media to the array of medias in msg. This function takes ownership of
-      the contents of media so that media will have to be reinitialized with
-      [gstsdp.sdpmedia.SDPMedia.init_] before it can be used again.
-  
-      Params:
-        media = a #GstSDPMedia to add
-      Returns: a #GstSDPResult.
-  */
-  gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media) nothrow
-  {
-    GstSDPResult _cretval;
-    _cretval = gst_sdp_message_add_media(cast(GstSDPMessage*)this._cPtr, media ? cast(GstSDPMedia*)media._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
