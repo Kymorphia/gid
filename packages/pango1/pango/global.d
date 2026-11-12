@@ -20,6 +20,29 @@ import pango.types;
 
 
 /**
+Return the bidirectional embedding levels of the input paragraph.
+The bidirectional embedding levels are defined by the [Unicode Bidirectional
+Algorithm](http://www.unicode.org/reports/tr9/).
+If the input base direction is a weak direction, the direction of the characters in the text will determine the
+final resolved direction.
+Params:
+text = the text to itemize
+pbaseDir = input base direction, and output resolved direction
+Returns: the embedding levels, one item per character (not byte)
+*/
+ubyte[] log2visGetEmbeddingLevels(string text, ref pango.types.Direction pbaseDir) nothrow
+{
+  import glib.c.functions : g_free, g_utf8_strlen;
+
+  auto nChars = text.length > 0 ? g_utf8_strlen(text.ptr, text.length) : 0; // Same count as Pango uses for the array
+  auto _cretval = pango_log2vis_get_embedding_levels(text.length > 0 ? text.ptr : "".ptr, cast(int)text.length, &pbaseDir);
+  auto _retval = _cretval && nChars > 0 ? _cretval[0 .. nChars].dup : null;
+  g_free(_cretval);
+  return _retval;
+}
+
+
+/**
     Create a new allow-breaks attribute.
     
     If breaks are disabled, the range will be kept in a

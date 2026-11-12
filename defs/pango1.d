@@ -41,8 +41,6 @@
 //!set class[Layout].method[set_markup].parameters.parameter[markup].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set class[Layout].method[set_markup_with_accel].parameters.parameter[markup].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set record[ScriptIter].constructor[new].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
-//!set function[log2vis_get_embedding_levels].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
-//!set record[GlyphString].method[get_logical_widths].parameters.parameter[text].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 
 
 //# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
@@ -83,14 +81,38 @@
 //!set record[AttrShape].field[data][ignore] 1
 
 //# Disable: Array lengths determined by text length or other API, not described by parameters
-//!set function[log2vis_get_embedding_levels][disable] 1
-//!set record[GlyphItem].method[letter_space][disable] 1
 //!set record[GlyphString].field[log_clusters][disable] 1
 
-//# Hand-written below: Output array lengths determined by text or other API, not described by parameters
+//# Hand-written below: Array lengths determined by text or other API, not described by parameters
+//!set function[log2vis_get_embedding_levels][ignore] 1
 //!set record[GlyphItem].method[get_logical_widths][ignore] 1
+//!set record[GlyphItem].method[letter_space][ignore] 1
 //!set record[GlyphString].method[get_logical_widths][ignore] 1
 //!set record[TabArray].method[get_tabs][ignore] 1
+
+//!class global pre
+
+/**
+    Return the bidirectional embedding levels of the input paragraph.
+    The bidirectional embedding levels are defined by the [Unicode Bidirectional
+    Algorithm](http://www.unicode.org/reports/tr9/).
+    If the input base direction is a weak direction, the direction of the characters in the text will determine the
+    final resolved direction.
+    Params:
+      text = the text to itemize
+      pbaseDir = input base direction, and output resolved direction
+    Returns: the embedding levels, one item per character (not byte)
+*/
+ubyte[] log2visGetEmbeddingLevels(string text, ref pango.types.Direction pbaseDir) nothrow
+{
+  import glib.c.functions : g_free, g_utf8_strlen;
+
+  auto nChars = text.length > 0 ? g_utf8_strlen(text.ptr, text.length) : 0; // Same count as Pango uses for the array
+  auto _cretval = pango_log2vis_get_embedding_levels(text.length > 0 ? text.ptr : "".ptr, cast(int)text.length, &pbaseDir);
+  auto _retval = _cretval && nChars > 0 ? _cretval[0 .. nChars].dup : null;
+  g_free(_cretval);
+  return _retval;
+}
 
 //!class GlyphItem
 
@@ -113,6 +135,28 @@
     auto widths = new int[item.numChars];
     pango_glyph_item_get_logical_widths(cast(PangoGlyphItem*)this._cPtr, text.ptr, widths.ptr);
     return widths;
+  }
+
+  /**
+      Adds spacing between the graphemes of the glyph item to give the effect of typographic letter spacing.
+      Params:
+        text = text that the glyph item corresponds to (the item offset is an offset from the start of text)
+        logAttrs = logical attributes for the item, the first logical attribute refers to the position before the first
+          character in the item (at least the item's number of characters + 1 elements, see
+          [pango.global.getLogAttrs] and [pango.layout.Layout.getLogAttrsReadonly])
+        letterSpacing = amount of letter spacing to add in Pango units, may be negative, though too large negative
+          values will give ugly results
+      Returns: true on success, false if text or logAttrs is too short for the item (nothing is done)
+  */
+  bool letterSpace(string text, pango.types.LogAttr[] logAttrs, int letterSpacing) nothrow
+  {
+    auto item = (cast(PangoGlyphItem*)this._cPtr).item;
+
+    if (!item || text.length < cast(size_t)item.offset + item.length || logAttrs.length < cast(size_t)item.numChars + 1)
+      return false;
+
+    pango_glyph_item_letter_space(cast(PangoGlyphItem*)this._cPtr, text.ptr, logAttrs.ptr, letterSpacing);
+    return true;
   }
 
 //!class GlyphString

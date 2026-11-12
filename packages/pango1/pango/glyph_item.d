@@ -153,6 +153,28 @@ class GlyphItem : gobject.boxed.BoxedWrap!(pango_glyph_item_get_type)
     return widths;
   }
 
+  /**
+  Adds spacing between the graphemes of the glyph item to give the effect of typographic letter spacing.
+  Params:
+  text = text that the glyph item corresponds to (the item offset is an offset from the start of text)
+  logAttrs = logical attributes for the item, the first logical attribute refers to the position before the first
+  character in the item (at least the item's number of characters + 1 elements, see
+  [pango.global.getLogAttrs] and [pango.layout.Layout.getLogAttrsReadonly])
+  letterSpacing = amount of letter spacing to add in Pango units, may be negative, though too large negative
+  values will give ugly results
+  Returns: true on success, false if text or logAttrs is too short for the item (nothing is done)
+  */
+  bool letterSpace(string text, pango.types.LogAttr[] logAttrs, int letterSpacing) nothrow
+  {
+    auto item = (cast(PangoGlyphItem*)this._cPtr).item;
+
+    if (!item || text.length < cast(size_t)item.offset + item.length || logAttrs.length < cast(size_t)item.numChars + 1)
+      return false;
+
+    pango_glyph_item_letter_space(cast(PangoGlyphItem*)this._cPtr, text.ptr, logAttrs.ptr, letterSpacing);
+    return true;
+  }
+
 
   /**
       Splits a shaped item ([pango.glyph_item.GlyphItem]) into multiple items based

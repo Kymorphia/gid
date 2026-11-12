@@ -46,7 +46,7 @@ harfbuzz0                  |   35    0    0   100 |  457   16    0  96.6 |    0 
 javascriptcore6            |   10    0    0   100 |  104    0    0   100 |    1    0    0   100 |    5    0    0   100 |
 json1                      |   12    0    0   100 |  203    0    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  310    1    0  99.7 |   17    0    0   100 |    0    0    0   100 |
-pango1                     |   43    0    0   100 |  405    2    0  99.5 |    0    0    0   100 |   92    1    0  98.9 |
+pango1                     |   43    0    0   100 |  405    0    0   100 |    0    0    0   100 |   92    1    0  98.9 |
 pangocairo1                |    4    0    0   100 |   26    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 rsvg2                      |    7    0    0   100 |   48    0    0   100 |    0    0    0   100 |   12    0    0   100 |
@@ -137,8 +137,6 @@ harfbuzz.global.otShapePlanGetFeatureTags
 harfbuzz.global.tagToString
 harfbuzz.global.unicodeFuncsSetDecomposeCompatibilityFunc
 panel.settings.Settings.bindWithMapping
-pango.glyph_item.GlyphItem.letterSpace
-pango.global.log2visGetEmbeddingLevels
 
 [Disabled Fields]
 gdk.event_button.EventButton.axes
