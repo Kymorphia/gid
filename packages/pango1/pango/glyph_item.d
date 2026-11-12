@@ -133,6 +133,28 @@ class GlyphItem : gobject.boxed.BoxedWrap!(pango_glyph_item_get_type)
   }
 
   /**
+  Given a glyph item and the corresponding text, determine the width corresponding to each character.
+  When multiple characters compose a single cluster, the width of the entire cluster is divided equally among the
+  characters.
+  See also [pango.glyph_string.GlyphString.getLogicalWidths].
+  Params:
+  text = text that the glyph item corresponds to (the item offset is an offset from the start of text)
+  Returns: the logical widths, one for each character of the item, or null if text is too short for the item
+  */
+  int[] getLogicalWidths(string text) nothrow
+  {
+    auto item = (cast(PangoGlyphItem*)this._cPtr).item;
+
+    if (!item || item.numChars <= 0 || text.length < cast(size_t)item.offset + item.length)
+      return null;
+
+    auto widths = new int[item.numChars];
+    pango_glyph_item_get_logical_widths(cast(PangoGlyphItem*)this._cPtr, text.ptr, widths.ptr);
+    return widths;
+  }
+
+
+  /**
       Splits a shaped item ([pango.glyph_item.GlyphItem]) into multiple items based
       on an attribute list.
       

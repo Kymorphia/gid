@@ -764,13 +764,17 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   
       Params:
         glyphs = an array of #cairo_glyph_t objects
-        numGlyphs = the number of elements in glyphs
         extents = a #cairo_text_extents_t object into which the results
           will be stored
   */
-  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, out cairo.types.TextExtents extents) nothrow
+  void glyphExtents(cairo.glyph.Glyph[] glyphs, out cairo.types.TextExtents extents) nothrow
   {
-    cairo_glyph_extents(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(cairo_text_extents_t*)&extents);
+    int _numGlyphs;
+    if (glyphs)
+      _numGlyphs = cast(int)glyphs.length;
+
+    auto _glyphs = cast(cairo_glyph_t*)glyphs.ptr;
+    cairo_glyph_extents(cast(cairo_t*)this._cPtr, _glyphs, _numGlyphs, cast(cairo_text_extents_t*)&extents);
   }
 
   /**
@@ -780,11 +784,15 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   
       Params:
         glyphs = array of glyphs to show
-        numGlyphs = number of glyphs to show
   */
-  void glyphPath(cairo.glyph.Glyph glyphs, int numGlyphs) nothrow
+  void glyphPath(cairo.glyph.Glyph[] glyphs) nothrow
   {
-    cairo_glyph_path(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs);
+    int _numGlyphs;
+    if (glyphs)
+      _numGlyphs = cast(int)glyphs.length;
+
+    auto _glyphs = cast(cairo_glyph_t*)glyphs.ptr;
+    cairo_glyph_path(cast(cairo_t*)this._cPtr, _glyphs, _numGlyphs);
   }
 
   /**
@@ -1791,11 +1799,15 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   
       Params:
         glyphs = array of glyphs to show
-        numGlyphs = number of glyphs to show
   */
-  void showGlyphs(cairo.glyph.Glyph glyphs, int numGlyphs) nothrow
+  void showGlyphs(cairo.glyph.Glyph[] glyphs) nothrow
   {
-    cairo_show_glyphs(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs);
+    int _numGlyphs;
+    if (glyphs)
+      _numGlyphs = cast(int)glyphs.length;
+
+    auto _glyphs = cast(cairo_glyph_t*)glyphs.ptr;
+    cairo_show_glyphs(cast(cairo_t*)this._cPtr, _glyphs, _numGlyphs);
   }
 
   /**
@@ -1867,19 +1879,27 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
       Params:
         utf8 = a string of text encoded in UTF-8
         glyphs = array of glyphs to show
-        numGlyphs = number of glyphs to show
         clusters = array of cluster mapping information
-        numClusters = number of clusters in the mapping
         clusterFlags = cluster mapping flags
   */
-  void showTextGlyphs(string utf8, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags) nothrow
+  void showTextGlyphs(string utf8, cairo.glyph.Glyph[] glyphs, cairo.text_cluster.TextCluster[] clusters, cairo.types.TextClusterFlags clusterFlags) nothrow
   {
     int _utf8Len;
     if (utf8)
       _utf8Len = cast(int)utf8.length;
 
     auto _utf8 = cast(char*)utf8.ptr;
-    cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, _utf8Len, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(const(cairo_text_cluster_t)*)&clusters, numClusters, clusterFlags);
+    int _numGlyphs;
+    if (glyphs)
+      _numGlyphs = cast(int)glyphs.length;
+
+    auto _glyphs = cast(cairo_glyph_t*)glyphs.ptr;
+    int _numClusters;
+    if (clusters)
+      _numClusters = cast(int)clusters.length;
+
+    auto _clusters = cast(cairo_text_cluster_t*)clusters.ptr;
+    cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, _utf8Len, _glyphs, _numGlyphs, _clusters, _numClusters, clusterFlags);
   }
 
   /**

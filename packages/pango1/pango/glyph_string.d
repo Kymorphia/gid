@@ -49,6 +49,35 @@ class GlyphString : gobject.boxed.BoxedWrap!(pango_glyph_string_get_type)
   }
 
   /**
+  Given a glyph string and corresponding text, determine the width corresponding to each character.
+  When multiple characters compose a single cluster, the width of the entire cluster is divided equally among the
+  characters.
+  See also [pango.glyph_item.GlyphItem.getLogicalWidths].
+  Params:
+  text = the text corresponding to the glyphs
+  embeddingLevel = the embedding level of the string
+  Returns: the logical widths, one for each character in text
+  */
+  int[] getLogicalWidths(string text, int embeddingLevel) nothrow
+  {
+    size_t nChars; // Count characters the same way Pango does (g_utf8_next_char() steps, NUL bytes included)
+
+    for (size_t i = 0; i < text.length; nChars++)
+    {
+      immutable ubyte c = text[i];
+      i += c < 0xC0 ? 1 : c < 0xE0 ? 2 : c < 0xF0 ? 3 : c < 0xF8 ? 4 : c < 0xFC ? 5 : c < 0xFE ? 6 : 1;
+    }
+
+    if (nChars == 0)
+      return null;
+
+    auto widths = new int[nChars];
+    pango_glyph_string_get_logical_widths(cast(PangoGlyphString*)this._cPtr, text.ptr, cast(int)text.length, embeddingLevel, widths.ptr);
+    return widths;
+  }
+
+
+  /**
       Create a new [pango.glyph_string.GlyphString].
       Returns: the newly allocated [pango.glyph_string.GlyphString], which
           should be freed with [pango.glyph_string.GlyphString.free].

@@ -31,6 +31,31 @@ class TabArray : gobject.boxed.BoxedWrap!(pango_tab_array_get_type)
   }
 
   /**
+  Get the alignments and locations of the tab stops, arrays of length [pango.tab_array.TabArray.getSize].
+  Params:
+  alignments = Output tab stop alignments
+  locations = Output tab stop locations
+  */
+  void getTabs(out pango.types.TabAlign[] alignments, out int[] locations) nothrow
+  {
+    import glib.c.functions : g_free;
+
+    PangoTabAlign* _alignments;
+    int* _locations;
+    pango_tab_array_get_tabs(cast(PangoTabArray*)this._cPtr, &_alignments, &_locations);
+    auto size = pango_tab_array_get_size(cast(PangoTabArray*)this._cPtr);
+
+    if (size > 0)
+    {
+      alignments = _alignments[0 .. size].dup;
+      locations = _locations[0 .. size].dup;
+    }
+
+    g_free(_alignments);
+    g_free(_locations);
+  }
+
+  /**
       Creates an array of initial_size tab stops.
       
       Tab stops are specified in pixel units if positions_in_pixels is true,

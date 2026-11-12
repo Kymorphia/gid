@@ -123,6 +123,14 @@
 //!set record[Surface].method[get_mime_data].parameters.parameter[data].type '<array length="2" zero-terminated="0" c:type="const guint8**"><type name="guint8" c:type="guint8"/></array>'
 //!set record[Surface].method[set_mime_data].parameters.parameter[data].type '<array length="2" zero-terminated="0" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
 
+//# Glyph and cluster arrays
+//!set record[Context].method[glyph_extents].parameters.parameter[glyphs].type '<array length="1" zero-terminated="0" c:type="const cairo_glyph_t*"><type name="Glyph" c:type="cairo_glyph_t"/></array>'
+//!set record[Context].method[glyph_path].parameters.parameter[glyphs].type '<array length="1" zero-terminated="0" c:type="const cairo_glyph_t*"><type name="Glyph" c:type="cairo_glyph_t"/></array>'
+//!set record[Context].method[show_glyphs].parameters.parameter[glyphs].type '<array length="1" zero-terminated="0" c:type="const cairo_glyph_t*"><type name="Glyph" c:type="cairo_glyph_t"/></array>'
+//!set record[Context].method[show_text_glyphs].parameters.parameter[glyphs].type '<array length="3" zero-terminated="0" c:type="const cairo_glyph_t*"><type name="Glyph" c:type="cairo_glyph_t"/></array>'
+//!set record[Context].method[show_text_glyphs].parameters.parameter[clusters].type '<array length="5" zero-terminated="0" c:type="const cairo_text_cluster_t*"><type name="TextCluster" c:type="cairo_text_cluster_t"/></array>'
+//!set record[ScaledFont].method[glyph_extents].parameters.parameter[glyphs].type '<array length="1" zero-terminated="0" c:type="const cairo_glyph_t*"><type name="Glyph" c:type="cairo_glyph_t"/></array>'
+
 //# Use array of characters with a length, to remove the length and optimize
 //!set function[script_write_comment].parameters.parameter[comment].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 
@@ -161,9 +169,17 @@
 //# Hand-written below: D pixel data must be kept alive by the surface (D memory can't be handed to C without an owner)
 //!set function[image_surface_create_for_data][ignore] 1
 
-//# Disable: Inout allocated glyph/cluster arrays with inout counts
-//!set record[ScaledFont].method[text_to_glyphs][disable] 1
+//# Hand-written below: Inout allocated glyph/cluster arrays with inout counts, freed with cairo_glyph_free/cairo_text_cluster_free
+//!set record[ScaledFont].method[text_to_glyphs][ignore] 1
+
+//# Disable: Callback filling inout allocated glyph/cluster arrays with inout counts
 //!set callback[UserScaledFontTextToGlyphsFunc][disable] 1
+
+//# Ignore: Glyph and cluster array allocation, D arrays are used instead
+//!set function[glyph_allocate][ignore] 1
+//!set function[text_cluster_allocate][ignore] 1
+//!set record[Glyph].method[free][ignore] 1
+//!set record[TextCluster].method[free][ignore] 1
 
 //# Make read-only (no write support): Arrays allocated and freed by cairo (cairo_path_destroy/cairo_rectangle_list_destroy)
 //!set record[Path].field[data][writable] 0
@@ -222,3 +238,69 @@ cairo.surface.Surface imageSurfaceCreateForData(ubyte[] data, cairo.types.Format
 
   return new cairo.surface.Surface(cast(void*)_cretval, Yes.Take);
 }
+
+//!class ScaledFont pre
+import cairo.text_cluster;
+
+//!class ScaledFont
+
+  /**
+      Converts UTF-8 text to an array of glyphs, with cluster mapping, that can be used to render later using this
+      scaled font (with [cairo.context.Context.showTextGlyphs] for example).
+      Params:
+        x = X position to place first glyph
+        y = Y position to place first glyph
+        utf8 = a string of text encoded in UTF-8
+        glyphs = Output array of glyphs (empty on error)
+        clusters = Output array of cluster mapping information (empty on error)
+        clusterFlags = Output cluster mapping flags
+      Returns: [cairo.types.Status.Success] upon success, or an error status if the input values are wrong or if
+        conversion failed. If the scaled font is in an error state, its status is returned.
+  */
+  cairo.types.Status textToGlyphs(double x, double y, string utf8, out cairo.glyph.Glyph[] glyphs, out cairo.text_cluster.TextCluster[] clusters, out cairo.types.TextClusterFlags clusterFlags) nothrow
+  {
+    import cairo.glyph : Glyph;
+    import cairo.text_cluster : TextCluster;
+
+    cairo_glyph_t* _glyphs; // Allocated by cairo (initial null)
+    int _numGlyphs;
+    cairo_text_cluster_t* _clusters;
+    int _numClusters;
+    auto _retval = cairo_scaled_font_text_to_glyphs(cast(cairo_scaled_font_t*)this._cPtr, x, y, utf8.length > 0 ? utf8.ptr : "".ptr, cast(int)utf8.length, &_glyphs, &_numGlyphs, &_clusters, &_numClusters, &clusterFlags);
+
+    if (_retval == cairo_status_t.Success)
+    {
+      glyphs = (cast(Glyph*)_glyphs)[0 .. _numGlyphs].dup;
+      clusters = (cast(TextCluster*)_clusters)[0 .. _numClusters].dup;
+    }
+
+    cairo_glyph_free(_glyphs); // Pointers are reset to the initial null by cairo on error
+    cairo_text_cluster_free(_clusters);
+    return _retval;
+  }
+
+  /**
+      Converts UTF-8 text to an array of glyphs, without cluster mapping, that can be used to render later using this
+      scaled font (with [cairo.context.Context.showGlyphs] for example).
+      Params:
+        x = X position to place first glyph
+        y = Y position to place first glyph
+        utf8 = a string of text encoded in UTF-8
+        glyphs = Output array of glyphs (empty on error)
+      Returns: [cairo.types.Status.Success] upon success, or an error status if the input values are wrong or if
+        conversion failed. If the scaled font is in an error state, its status is returned.
+  */
+  cairo.types.Status textToGlyphs(double x, double y, string utf8, out cairo.glyph.Glyph[] glyphs) nothrow
+  {
+    import cairo.glyph : Glyph;
+
+    cairo_glyph_t* _glyphs; // Allocated by cairo (initial null)
+    int _numGlyphs;
+    auto _retval = cairo_scaled_font_text_to_glyphs(cast(cairo_scaled_font_t*)this._cPtr, x, y, utf8.length > 0 ? utf8.ptr : "".ptr, cast(int)utf8.length, &_glyphs, &_numGlyphs, null, null, null);
+
+    if (_retval == cairo_status_t.Success)
+      glyphs = (cast(Glyph*)_glyphs)[0 .. _numGlyphs].dup;
+
+    cairo_glyph_free(_glyphs); // Pointer is reset to the initial null by cairo on error
+    return _retval;
+  }

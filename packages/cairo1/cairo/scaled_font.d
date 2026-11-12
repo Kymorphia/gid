@@ -12,6 +12,8 @@ import cairo.types;
 import gid.gid;
 import gobject.boxed;
 
+import cairo.text_cluster;
+
 /**
     A #cairo_scaled_font_t is a font scaled to a particular size and device
     resolution. A #cairo_scaled_font_t is most useful for low-level font
@@ -38,6 +40,67 @@ class ScaledFont : gobject.boxed.BoxedWrap!(cairo_gobject_scaled_font_get_type)
   override ScaledFont self() nothrow
   {
     return this;
+  }
+
+  /**
+  Converts UTF-8 text to an array of glyphs, with cluster mapping, that can be used to render later using this
+  scaled font (with [cairo.context.Context.showTextGlyphs] for example).
+  Params:
+  x = X position to place first glyph
+  y = Y position to place first glyph
+  utf8 = a string of text encoded in UTF-8
+  glyphs = Output array of glyphs (empty on error)
+  clusters = Output array of cluster mapping information (empty on error)
+  clusterFlags = Output cluster mapping flags
+  Returns: [cairo.types.Status.Success] upon success, or an error status if the input values are wrong or if
+  conversion failed. If the scaled font is in an error state, its status is returned.
+  */
+  cairo.types.Status textToGlyphs(double x, double y, string utf8, out cairo.glyph.Glyph[] glyphs, out cairo.text_cluster.TextCluster[] clusters, out cairo.types.TextClusterFlags clusterFlags) nothrow
+  {
+    import cairo.glyph : Glyph;
+    import cairo.text_cluster : TextCluster;
+
+    cairo_glyph_t* _glyphs; // Allocated by cairo (initial null)
+    int _numGlyphs;
+    cairo_text_cluster_t* _clusters;
+    int _numClusters;
+    auto _retval = cairo_scaled_font_text_to_glyphs(cast(cairo_scaled_font_t*)this._cPtr, x, y, utf8.length > 0 ? utf8.ptr : "".ptr, cast(int)utf8.length, &_glyphs, &_numGlyphs, &_clusters, &_numClusters, &clusterFlags);
+
+    if (_retval == cairo_status_t.Success)
+    {
+      glyphs = (cast(Glyph*)_glyphs)[0 .. _numGlyphs].dup;
+      clusters = (cast(TextCluster*)_clusters)[0 .. _numClusters].dup;
+    }
+
+    cairo_glyph_free(_glyphs); // Pointers are reset to the initial null by cairo on error
+    cairo_text_cluster_free(_clusters);
+    return _retval;
+  }
+
+  /**
+  Converts UTF-8 text to an array of glyphs, without cluster mapping, that can be used to render later using this
+  scaled font (with [cairo.context.Context.showGlyphs] for example).
+  Params:
+  x = X position to place first glyph
+  y = Y position to place first glyph
+  utf8 = a string of text encoded in UTF-8
+  glyphs = Output array of glyphs (empty on error)
+  Returns: [cairo.types.Status.Success] upon success, or an error status if the input values are wrong or if
+  conversion failed. If the scaled font is in an error state, its status is returned.
+  */
+  cairo.types.Status textToGlyphs(double x, double y, string utf8, out cairo.glyph.Glyph[] glyphs) nothrow
+  {
+    import cairo.glyph : Glyph;
+
+    cairo_glyph_t* _glyphs; // Allocated by cairo (initial null)
+    int _numGlyphs;
+    auto _retval = cairo_scaled_font_text_to_glyphs(cast(cairo_scaled_font_t*)this._cPtr, x, y, utf8.length > 0 ? utf8.ptr : "".ptr, cast(int)utf8.length, &_glyphs, &_numGlyphs, null, null, null);
+
+    if (_retval == cairo_status_t.Success)
+      glyphs = (cast(Glyph*)_glyphs)[0 .. _numGlyphs].dup;
+
+    cairo_glyph_free(_glyphs); // Pointer is reset to the initial null by cairo on error
+    return _retval;
   }
 
   /**
@@ -163,12 +226,16 @@ class ScaledFont : gobject.boxed.BoxedWrap!(cairo_gobject_scaled_font_get_type)
   
       Params:
         glyphs = an array of glyph IDs with X and Y offsets.
-        numGlyphs = the number of glyphs in the glyphs array
         extents = a #cairo_text_extents_t which to store the retrieved extents.
   */
-  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, out cairo.types.TextExtents extents) nothrow
+  void glyphExtents(cairo.glyph.Glyph[] glyphs, out cairo.types.TextExtents extents) nothrow
   {
-    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(cairo_text_extents_t*)&extents);
+    int _numGlyphs;
+    if (glyphs)
+      _numGlyphs = cast(int)glyphs.length;
+
+    auto _glyphs = cast(cairo_glyph_t*)glyphs.ptr;
+    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)this._cPtr, _glyphs, _numGlyphs, cast(cairo_text_extents_t*)&extents);
   }
 
   /**

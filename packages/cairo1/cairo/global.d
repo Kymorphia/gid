@@ -7,14 +7,12 @@ import cairo.context;
 import cairo.device;
 import cairo.font_face;
 import cairo.font_options;
-import cairo.glyph;
 import cairo.matrix;
 import cairo.path;
 import cairo.pattern;
 import cairo.region;
 import cairo.scaled_font;
 import cairo.surface;
-import cairo.text_cluster;
 import cairo.types;
 import gid.gid;
 
@@ -70,6 +68,7 @@ cairo.surface.Surface imageSurfaceCreateForData(ubyte[] data, cairo.types.Format
 
   return new cairo.surface.Surface(cast(void*)_cretval, Yes.Take);
 }
+
 
 /**
     Creates a new #cairo_t with all graphics state parameters set to
@@ -190,36 +189,6 @@ int formatStrideForWidth(cairo.types.Format format, int width) nothrow
 void* getUserData(cairo.context.Context cr, cairo.types.UserDataKey key) nothrow
 {
   auto _retval = cairo_get_user_data(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(cairo_user_data_key_t)*)&key);
-  return _retval;
-}
-
-/**
-    Allocates an array of #cairo_glyph_t's.
-    This function is only useful in implementations of
-    #cairo_user_scaled_font_text_to_glyphs_func_t where the user
-    needs to allocate an array of glyphs that cairo will free.
-    For all other uses, user can use their own allocation method
-    for glyphs.
-    
-    This function returns null if num_glyphs is not positive,
-    or if out of memory.  That means, the null return value
-    signals out-of-memory only if num_glyphs was positive.
-
-    Params:
-      numGlyphs = number of glyphs to allocate
-    Returns: the newly allocated array of glyphs that should be
-               freed using [cairo.glyph.Glyph.free]
-*/
-cairo.glyph.Glyph glyphAllocate(int numGlyphs) nothrow
-{
-  cairo_glyph_t* _cretval;
-  _cretval = cairo_glyph_allocate(numGlyphs);
-  cairo.glyph.Glyph _retval;
-  if (_cretval)
-  {
-    _retval = *cast(cairo.glyph.Glyph*)_cretval;
-    cValueFree!(cairo.glyph.Glyph)(_cretval);
-  }
   return _retval;
 }
 
@@ -2235,36 +2204,6 @@ cairo.surface.Surface teeSurfaceIndex(cairo.surface.Surface abstractSurface, uin
 void teeSurfaceRemove(cairo.surface.Surface abstractSurface, cairo.surface.Surface target) nothrow
 {
   cairo_tee_surface_remove(abstractSurface ? cast(cairo_surface_t*)abstractSurface._cPtr(No.Dup) : null, target ? cast(cairo_surface_t*)target._cPtr(No.Dup) : null);
-}
-
-/**
-    Allocates an array of #cairo_text_cluster_t's.
-    This function is only useful in implementations of
-    #cairo_user_scaled_font_text_to_glyphs_func_t where the user
-    needs to allocate an array of text clusters that cairo will free.
-    For all other uses, user can use their own allocation method
-    for text clusters.
-    
-    This function returns null if num_clusters is not positive,
-    or if out of memory.  That means, the null return value
-    signals out-of-memory only if num_clusters was positive.
-
-    Params:
-      numClusters = number of text_clusters to allocate
-    Returns: the newly allocated array of text clusters that should be
-               freed using [cairo.text_cluster.TextCluster.free]
-*/
-cairo.text_cluster.TextCluster textClusterAllocate(int numClusters) nothrow
-{
-  cairo_text_cluster_t* _cretval;
-  _cretval = cairo_text_cluster_allocate(numClusters);
-  cairo.text_cluster.TextCluster _retval;
-  if (_cretval)
-  {
-    _retval = *cast(cairo.text_cluster.TextCluster*)_cretval;
-    cValueFree!(cairo.text_cluster.TextCluster)(_cretval);
-  }
-  return _retval;
 }
 
 /**
