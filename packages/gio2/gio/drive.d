@@ -332,7 +332,34 @@ interface Drive : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.changed");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("changed", closure, after);
+  }
 
   /**
       Connect to `Disconnected` signal.
@@ -352,7 +379,34 @@ interface Drive : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.disconnected");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("disconnected", closure, after);
+  }
 
   /**
       Connect to `EjectButton` signal.
@@ -370,7 +424,34 @@ interface Drive : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.ejectButton");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("eject-button", closure, after);
+  }
 
   /**
       Connect to `StopButton` signal.
@@ -388,7 +469,34 @@ interface Drive : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStopButton(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectStopButton(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.stopButton");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("stop-button", closure, after);
+  }
 }
 
 /// Fluent builder implementation template for [gio.drive.Drive]

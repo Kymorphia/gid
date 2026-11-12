@@ -10,6 +10,7 @@ import gdk.types;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
+import gobject.object;
 
 /**
     A surface that is used during DND.
@@ -63,7 +64,38 @@ interface DragSurface : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.drag_surface_size.DragSurfaceSize)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_surface.DragSurface)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag_surface.DragSurface.computeSize");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("compute-size", closure, after);
+  }
 }
 
 /// Fluent builder implementation template for [gdk.drag_surface.DragSurface]

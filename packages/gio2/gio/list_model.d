@@ -212,7 +212,46 @@ interface ListModel : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == uint)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.list_model.ListModel)))
+  && Parameters!T.length < 5)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 4, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.list_model.ListModel.itemsChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("items-changed", closure, after);
+  }
 }
 
 /// Fluent builder implementation template for [gio.list_model.ListModel]

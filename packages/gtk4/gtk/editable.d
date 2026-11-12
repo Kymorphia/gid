@@ -594,7 +594,34 @@ interface Editable : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.editable.Editable)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.changed");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("changed", closure, after);
+  }
 
   /**
       Connect to `DeleteText` signal.
@@ -623,7 +650,42 @@ interface Editable : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.editable.Editable)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.deleteText");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("delete-text", closure, after);
+  }
 
   /**
       Connect to `InsertText` signal.
@@ -652,7 +714,52 @@ interface Editable : GidWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After) nothrow;
+  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.ref_ && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.editable.Editable)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 4, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      auto length = getVal!(int)(&_paramVals[2]);
+
+      static if (Parameters!T.length > 1)
+      {
+        if (auto _p = getVal!(Parameters!T[1]*)(&_paramVals[3]))
+          _paramTuple[1] = *_p;
+      }
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getStringWithLength(&_paramVals[1], length);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.insertText");
+      }
+
+      static if (Parameters!T.length > 1)
+      {
+        if (auto _p = getVal!(Parameters!T[1]*)(&_paramVals[3]))
+          *_p = _paramTuple[1];
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gobject.object.ObjectWrap)this).connectSignalClosure("insert-text", closure, after);
+  }
 }
 
 /// Fluent builder implementation template for [gtk.editable.Editable]
