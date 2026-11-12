@@ -93,7 +93,7 @@ class Frustum : gobject.boxed.BoxedWrap!(graphene_frustum_get_type)
         planes = return location for an array
             of 6 #graphene_plane_t
   */
-  void getPlanes(ref graphene.plane.Plane[] planes) nothrow
+  void getPlanes(out graphene.plane.Plane[] planes) nothrow
   {
     graphene_plane_t[] _planes;
     _planes.length = 6;

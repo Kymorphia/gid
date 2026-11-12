@@ -27,8 +27,10 @@ struct VideoColorRange
         offset = output offsets
         scale = output scale
   */
-  static void offsets(gstvideo.types.VideoColorRange range, gstvideo.video_format_info.VideoFormatInfo info, ref int[] offset, ref int[] scale) nothrow
+  static void offsets(gstvideo.types.VideoColorRange range, gstvideo.video_format_info.VideoFormatInfo info, out int[] offset, out int[] scale) nothrow
   {
+    offset.length = 4;
+    scale.length = 4;
     gst_video_color_range_offsets(range, info ? cast(const(GstVideoFormatInfo)*)info._cPtr : null, offset.ptr, scale.ptr);
   }
 }

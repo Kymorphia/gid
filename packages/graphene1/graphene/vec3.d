@@ -434,8 +434,9 @@ class Vec3 : gobject.boxed.BoxedWrap!(graphene_vec3_get_type)
         dest = return location for
             an array of floating point values
   */
-  void toFloat(ref float[] dest) nothrow
+  void toFloat(out float[] dest) nothrow
   {
+    dest.length = 3;
     graphene_vec3_to_float(cast(const(graphene_vec3_t)*)this._cPtr, dest.ptr);
   }
 

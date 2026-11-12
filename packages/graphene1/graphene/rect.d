@@ -231,7 +231,7 @@ class Rect : gobject.boxed.BoxedWrap!(graphene_rect_get_type)
         vertices = return location for an array
            of 4 #graphene_vec2_t
   */
-  void getVertices(ref graphene.vec2.Vec2[] vertices) nothrow
+  void getVertices(out graphene.vec2.Vec2[] vertices) nothrow
   {
     graphene_vec2_t[] _vertices;
     _vertices.length = 4;

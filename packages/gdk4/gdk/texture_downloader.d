@@ -105,9 +105,11 @@ class TextureDownloader : gobject.boxed.BoxedWrap!(gdk_texture_downloader_get_ty
         outStrides = The stride of the resulting data planes in bytes
       Returns: The downloaded pixels
   */
-  glib.bytes.Bytes downloadBytesWithPlanes(ref size_t[] outOffsets, ref size_t[] outStrides) nothrow
+  glib.bytes.Bytes downloadBytesWithPlanes(out size_t[] outOffsets, out size_t[] outStrides) nothrow
   {
     GBytes* _cretval;
+    outOffsets.length = 4;
+    outStrides.length = 4;
     _cretval = gdk_texture_downloader_download_bytes_with_planes(cast(const(GdkTextureDownloader)*)this._cPtr, outOffsets.ptr, outStrides.ptr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

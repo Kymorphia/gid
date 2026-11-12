@@ -787,9 +787,10 @@ gst.caps.Caps codecUtilsOpusCreateCapsFromHeader(gst.buffer.Buffer header, gst.b
       channelMapping = the mapping between the streams
     Returns: true if parsing was successful, false otherwise.
 */
-bool codecUtilsOpusParseCaps(gst.caps.Caps caps, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping) nothrow
+bool codecUtilsOpusParseCaps(gst.caps.Caps caps, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, out ubyte[] channelMapping) nothrow
 {
   bool _retval;
+  channelMapping.length = 256;
   _retval = cast(bool)gst_codec_utils_opus_parse_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(uint*)&rate, cast(ubyte*)&channels, cast(ubyte*)&channelMappingFamily, cast(ubyte*)&streamCount, cast(ubyte*)&coupledCount, channelMapping.ptr);
   return _retval;
 }
@@ -809,9 +810,10 @@ bool codecUtilsOpusParseCaps(gst.caps.Caps caps, out uint rate, out ubyte channe
       outputGain = Output gain or 0
     Returns: true if parsing was successful, false otherwise.
 */
-bool codecUtilsOpusParseHeader(gst.buffer.Buffer header, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping, out ushort preSkip, out short outputGain) nothrow
+bool codecUtilsOpusParseHeader(gst.buffer.Buffer header, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, out ubyte[] channelMapping, out ushort preSkip, out short outputGain) nothrow
 {
   bool _retval;
+  channelMapping.length = 256;
   _retval = cast(bool)gst_codec_utils_opus_parse_header(header ? cast(GstBuffer*)header._cPtr(No.Dup) : null, cast(uint*)&rate, cast(ubyte*)&channels, cast(ubyte*)&channelMappingFamily, cast(ubyte*)&streamCount, cast(ubyte*)&coupledCount, channelMapping.ptr, cast(ushort*)&preSkip, cast(short*)&outputGain);
   return _retval;
 }

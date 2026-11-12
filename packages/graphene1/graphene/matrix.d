@@ -889,8 +889,9 @@ class Matrix : gobject.boxed.BoxedWrap!(graphene_matrix_get_type)
             for an array of floating point values. The array must be capable
             of holding at least 16 values.
   */
-  void toFloat(ref float[] v) nothrow
+  void toFloat(out float[] v) nothrow
   {
+    v.length = 16;
     graphene_matrix_to_float(cast(const(graphene_matrix_t)*)this._cPtr, v.ptr);
   }
 

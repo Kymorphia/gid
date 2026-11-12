@@ -223,8 +223,9 @@ bool glEnsureElementData(gst.element.Element element, ref gstgl.gldisplay.GLDisp
       meta = a #GstVideoAffineTransformationMeta
       matrix = result of the 4x4 matrix
 */
-void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, ref float[] matrix) nothrow
+void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, out float[] matrix) nothrow
 {
+  matrix.length = 16;
   gst_gl_get_affine_transformation_meta_as_ndc(meta ? cast(GstVideoAffineTransformationMeta*)meta._cPtr : null, matrix.ptr);
 }
 
@@ -294,12 +295,13 @@ bool glHandleSetContext(gst.element.Element element, gst.context.Context context
       b = another 2-dimensional 4x4 array of #gfloat
       result = the result of the multiplication
 */
-void glMultiplyMatrix4(float[] a, float[] b, ref float[] result) nothrow
+void glMultiplyMatrix4(float[] a, float[] b, out float[] result) nothrow
 {
   assert(!a || a.length == 16);
   auto _a = cast(float*)a.ptr;
   assert(!b || b.length == 16);
   auto _b = cast(float*)b.ptr;
+  result.length = 16;
   gst_gl_multiply_matrix4(_a, _b, result.ptr);
 }
 
@@ -345,10 +347,11 @@ gobject.types.GType glStereoDownmixModeGetType() nothrow
       swizzle = input swizzle
       inversion = resulting inversion
 */
-void glSwizzleInvert(int[] swizzle, ref int[] inversion) nothrow
+void glSwizzleInvert(int[] swizzle, out int[] inversion) nothrow
 {
   assert(!swizzle || swizzle.length == 4);
   auto _swizzle = cast(int*)swizzle.ptr;
+  inversion.length = 4;
   gst_gl_swizzle_invert(_swizzle, inversion.ptr);
 }
 
@@ -426,9 +429,10 @@ gstgl.types.GLSLVersion glVersionToGlslVersion(gstgl.types.GLAPI glApi, int maj,
       swizzle = the returned swizzle indices
     Returns: whether valid swizzle indices could be found
 */
-bool glVideoFormatSwizzle(gstvideo.types.VideoFormat videoFormat, ref int[] swizzle) nothrow
+bool glVideoFormatSwizzle(gstvideo.types.VideoFormat videoFormat, out int[] swizzle) nothrow
 {
   bool _retval;
+  swizzle.length = 4;
   _retval = cast(bool)gst_gl_video_format_swizzle(videoFormat, swizzle.ptr);
   return _retval;
 }

@@ -318,6 +318,7 @@ struct Encoding
       _inlen = cast(size_t)inbuf.length;
 
     auto _inbuf = cast(ubyte*)inbuf.ptr;
+    uubuf.length = 60;
     _retval = g_mime_encoding_uuencode_close(_inbuf, _inlen, outbuf.ptr, uubuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -344,6 +345,7 @@ struct Encoding
       _inlen = cast(size_t)inbuf.length;
 
     auto _inbuf = cast(ubyte*)inbuf.ptr;
+    uubuf.length = 60;
     _retval = g_mime_encoding_uuencode_step(_inbuf, _inlen, outbuf.ptr, uubuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }

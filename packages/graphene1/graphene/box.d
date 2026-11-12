@@ -234,7 +234,7 @@ class Box : gobject.boxed.BoxedWrap!(graphene_box_get_type)
         vertices = return location for an array
             of 8 #graphene_vec3_t
   */
-  void getVertices(ref graphene.vec3.Vec3[] vertices) nothrow
+  void getVertices(out graphene.vec3.Vec3[] vertices) nothrow
   {
     graphene_vec3_t[] _vertices;
     _vertices.length = 8;

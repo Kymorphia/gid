@@ -312,9 +312,10 @@ class VideoMeta : StructWrap!(GstVideoMeta)
       Returns: true if meta's alignment is valid and plane_height has been
         updated, false otherwise
   */
-  bool getPlaneHeight(ref uint[] planeHeight) nothrow
+  bool getPlaneHeight(out uint[] planeHeight) nothrow
   {
     bool _retval;
+    planeHeight.length = 4;
     _retval = cast(bool)gst_video_meta_get_plane_height(cast(GstVideoMeta*)this._cPtr, planeHeight.ptr);
     return _retval;
   }
@@ -328,9 +329,10 @@ class VideoMeta : StructWrap!(GstVideoMeta)
       Returns: true if meta's alignment is valid and plane_size has been
         updated, false otherwise
   */
-  bool getPlaneSize(ref size_t[] planeSize) nothrow
+  bool getPlaneSize(out size_t[] planeSize) nothrow
   {
     bool _retval;
+    planeSize.length = 4;
     _retval = cast(bool)gst_video_meta_get_plane_size(cast(GstVideoMeta*)this._cPtr, planeSize.ptr);
     return _retval;
   }
