@@ -4,6 +4,8 @@ module gtk.root_iface_proxy;
 import gobject.object;
 import gtk.root;
 import gtk.root_mixin;
+import gtk.native;
+import gtk.native_mixin;
 
 /// Proxy object for [gtk.root.Root] interface when a GObject has no applicable D binding
 class RootIfaceProxy : IfaceProxy, gtk.root.Root
@@ -19,4 +21,5 @@ class RootIfaceProxy : IfaceProxy, gtk.root.Root
   }
 
   mixin RootT!();
+  mixin gtk.native_mixin.NativeT!();
 }

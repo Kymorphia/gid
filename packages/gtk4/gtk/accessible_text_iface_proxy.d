@@ -4,6 +4,8 @@ module gtk.accessible_text_iface_proxy;
 import gobject.object;
 import gtk.accessible_text;
 import gtk.accessible_text_mixin;
+import gtk.accessible;
+import gtk.accessible_mixin;
 
 /// Proxy object for [gtk.accessible_text.AccessibleText] interface when a GObject has no applicable D binding
 class AccessibleTextIfaceProxy : IfaceProxy, gtk.accessible_text.AccessibleText
@@ -19,4 +21,5 @@ class AccessibleTextIfaceProxy : IfaceProxy, gtk.accessible_text.AccessibleText
   }
 
   mixin AccessibleTextT!();
+  mixin gtk.accessible_mixin.AccessibleT!();
 }

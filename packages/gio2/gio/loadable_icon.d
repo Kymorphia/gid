@@ -8,6 +8,7 @@ import gio.async_result;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
+import gio.icon;
 import gio.input_stream;
 import gio.types;
 import glib.error;
@@ -18,7 +19,7 @@ import gobject.object;
     [gio.loadable_icon.LoadableIcon] extends the [gio.icon.Icon] interface and adds the ability
     to load icons from streams.
 */
-interface LoadableIcon : GidWrap
+interface LoadableIcon : gio.icon.Icon
 {
 
   /** */
@@ -70,6 +71,6 @@ interface LoadableIcon : GidWrap
 }
 
 /// Fluent builder implementation template for [gio.loadable_icon.LoadableIcon]
-interface LoadableIconGidBuilderImpl(T)
+interface LoadableIconGidBuilderImpl(T) : gio.icon.IconGidBuilderImpl!T
 {
 }

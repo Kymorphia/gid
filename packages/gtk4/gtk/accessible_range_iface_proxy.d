@@ -4,6 +4,8 @@ module gtk.accessible_range_iface_proxy;
 import gobject.object;
 import gtk.accessible_range;
 import gtk.accessible_range_mixin;
+import gtk.accessible;
+import gtk.accessible_mixin;
 
 /// Proxy object for [gtk.accessible_range.AccessibleRange] interface when a GObject has no applicable D binding
 class AccessibleRangeIfaceProxy : IfaceProxy, gtk.accessible_range.AccessibleRange
@@ -19,4 +21,5 @@ class AccessibleRangeIfaceProxy : IfaceProxy, gtk.accessible_range.AccessibleRan
   }
 
   mixin AccessibleRangeT!();
+  mixin gtk.accessible_mixin.AccessibleT!();
 }

@@ -8,6 +8,7 @@ import gio.async_result;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
+import gio.initable;
 import gio.socket_connectable;
 import gio.types;
 import glib.error;
@@ -23,7 +24,7 @@ import gobject.object;
     
     There is also an implementation for use inside Flatpak sandboxes.
 */
-interface NetworkMonitor : GidWrap
+interface NetworkMonitor : gio.initable.Initable
 {
 
   /** */
@@ -220,6 +221,6 @@ interface NetworkMonitor : GidWrap
 }
 
 /// Fluent builder implementation template for [gio.network_monitor.NetworkMonitor]
-interface NetworkMonitorGidBuilderImpl(T)
+interface NetworkMonitorGidBuilderImpl(T) : gio.initable.InitableGidBuilderImpl!T
 {
 }

@@ -4,6 +4,7 @@ module secret.backend;
 public import gid.basictypes;
 public import secret.backend_iface_proxy;
 import gid.gid;
+import gio.async_initable;
 import gio.async_result;
 import gio.cancellable;
 import gio.types;
@@ -18,7 +19,7 @@ import secret.types;
     #SecretBackend represents a backend implementation of password
     storage.
 */
-interface Backend : GidWrap
+interface Backend : gio.async_initable.AsyncInitable
 {
 
   /** */
@@ -93,7 +94,7 @@ interface Backend : GidWrap
 }
 
 /// Fluent builder implementation template for [secret.backend.Backend]
-interface BackendGidBuilderImpl(T)
+interface BackendGidBuilderImpl(T) : gio.async_initable.AsyncInitableGidBuilderImpl!T
 {
 
   /**

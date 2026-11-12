@@ -4,6 +4,8 @@ module secret.backend_iface_proxy;
 import gobject.object;
 import secret.backend;
 import secret.backend_mixin;
+import gio.async_initable;
+import gio.async_initable_mixin;
 
 /// Proxy object for [secret.backend.Backend] interface when a GObject has no applicable D binding
 class BackendIfaceProxy : IfaceProxy, secret.backend.Backend
@@ -19,4 +21,5 @@ class BackendIfaceProxy : IfaceProxy, secret.backend.Backend
   }
 
   mixin BackendT!();
+  mixin gio.async_initable_mixin.AsyncInitableT!();
 }

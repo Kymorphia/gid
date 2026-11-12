@@ -18,7 +18,7 @@ import gtk.types;
     support sorting. The #GtkTreeView uses the methods provided by this interface
     to sort the model.
 */
-interface TreeSortable : GidWrap
+interface TreeSortable : gtk.tree_model.TreeModel
 {
 
   /** */
@@ -120,6 +120,6 @@ interface TreeSortable : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.tree_sortable.TreeSortable]
-interface TreeSortableGidBuilderImpl(T)
+interface TreeSortableGidBuilderImpl(T) : gtk.tree_model.TreeModelGidBuilderImpl!T
 {
 }

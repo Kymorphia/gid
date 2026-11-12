@@ -9,6 +9,7 @@ import gobject.gid_builder;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
+import gtk.native;
 import gtk.types;
 import gtk.widget;
 
@@ -27,7 +28,7 @@ import gtk.widget;
     [gtk.root.Root] also maintains the location of keyboard focus inside its widget
     hierarchy, with [gtk.root.Root.setFocus] and [gtk.root.Root.getFocus].
 */
-interface Root : GidWrap
+interface Root : gtk.native.Native
 {
 
   /** */
@@ -72,6 +73,6 @@ interface Root : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.root.Root]
-interface RootGidBuilderImpl(T)
+interface RootGidBuilderImpl(T) : gtk.native.NativeGidBuilderImpl!T
 {
 }

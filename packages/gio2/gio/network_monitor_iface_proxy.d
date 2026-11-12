@@ -4,6 +4,8 @@ module gio.network_monitor_iface_proxy;
 import gobject.object;
 import gio.network_monitor;
 import gio.network_monitor_mixin;
+import gio.initable;
+import gio.initable_mixin;
 
 /// Proxy object for [gio.network_monitor.NetworkMonitor] interface when a GObject has no applicable D binding
 class NetworkMonitorIfaceProxy : IfaceProxy, gio.network_monitor.NetworkMonitor
@@ -19,4 +21,5 @@ class NetworkMonitorIfaceProxy : IfaceProxy, gio.network_monitor.NetworkMonitor
   }
 
   mixin NetworkMonitorT!();
+  mixin gio.initable_mixin.InitableT!();
 }

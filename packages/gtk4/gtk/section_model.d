@@ -4,6 +4,7 @@ module gtk.section_model;
 public import gid.basictypes;
 public import gtk.section_model_iface_proxy;
 import gid.gid;
+import gio.list_model;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gtk.c.functions;
@@ -27,7 +28,7 @@ import gtk.types;
     The [gio.list_model.ListModel.itemsChanged] signal has the same effect, all sections in
     that range are invalidated, too.
 */
-interface SectionModel : GidWrap
+interface SectionModel : gio.list_model.ListModel
 {
 
   /** */
@@ -107,6 +108,6 @@ interface SectionModel : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.section_model.SectionModel]
-interface SectionModelGidBuilderImpl(T)
+interface SectionModelGidBuilderImpl(T) : gio.list_model.ListModelGidBuilderImpl!T
 {
 }

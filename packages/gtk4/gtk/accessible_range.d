@@ -5,6 +5,7 @@ public import gid.basictypes;
 public import gtk.accessible_range_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;
+import gtk.accessible;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -36,7 +37,7 @@ import gtk.types;
     - [gtk.types.AccessibleProperty.ValueNow]
     - [gtk.types.AccessibleProperty.ValueText]
 */
-interface AccessibleRange : GidWrap
+interface AccessibleRange : gtk.accessible.Accessible
 {
 
   /** */
@@ -48,6 +49,6 @@ interface AccessibleRange : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.accessible_range.AccessibleRange]
-interface AccessibleRangeGidBuilderImpl(T)
+interface AccessibleRangeGidBuilderImpl(T) : gtk.accessible.AccessibleGidBuilderImpl!T
 {
 }

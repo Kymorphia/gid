@@ -6,6 +6,7 @@ public import gio.power_profile_monitor_iface_proxy;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.initable;
 import gio.types;
 import gobject.gid_builder;
 import gobject.object;
@@ -36,7 +37,7 @@ import gobject.object;
     [gio.power_profile_monitor.PowerProfileMonitor.powerSaverEnabled], and unref the
     [gio.power_profile_monitor.PowerProfileMonitor] itself when exiting.
 */
-interface PowerProfileMonitor : GidWrap
+interface PowerProfileMonitor : gio.initable.Initable
 {
 
   /** */
@@ -76,6 +77,6 @@ interface PowerProfileMonitor : GidWrap
 }
 
 /// Fluent builder implementation template for [gio.power_profile_monitor.PowerProfileMonitor]
-interface PowerProfileMonitorGidBuilderImpl(T)
+interface PowerProfileMonitorGidBuilderImpl(T) : gio.initable.InitableGidBuilderImpl!T
 {
 }

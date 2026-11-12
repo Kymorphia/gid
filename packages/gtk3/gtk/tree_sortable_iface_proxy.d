@@ -4,6 +4,8 @@ module gtk.tree_sortable_iface_proxy;
 import gobject.object;
 import gtk.tree_sortable;
 import gtk.tree_sortable_mixin;
+import gtk.tree_model;
+import gtk.tree_model_mixin;
 
 /// Proxy object for [gtk.tree_sortable.TreeSortable] interface when a GObject has no applicable D binding
 class TreeSortableIfaceProxy : IfaceProxy, gtk.tree_sortable.TreeSortable
@@ -19,4 +21,5 @@ class TreeSortableIfaceProxy : IfaceProxy, gtk.tree_sortable.TreeSortable
   }
 
   mixin TreeSortableT!();
+  mixin gtk.tree_model_mixin.TreeModelT!();
 }

@@ -4,6 +4,8 @@ module gio.memory_monitor_iface_proxy;
 import gobject.object;
 import gio.memory_monitor;
 import gio.memory_monitor_mixin;
+import gio.initable;
+import gio.initable_mixin;
 
 /// Proxy object for [gio.memory_monitor.MemoryMonitor] interface when a GObject has no applicable D binding
 class MemoryMonitorIfaceProxy : IfaceProxy, gio.memory_monitor.MemoryMonitor
@@ -19,4 +21,5 @@ class MemoryMonitorIfaceProxy : IfaceProxy, gio.memory_monitor.MemoryMonitor
   }
 
   mixin MemoryMonitorT!();
+  mixin gio.initable_mixin.InitableT!();
 }

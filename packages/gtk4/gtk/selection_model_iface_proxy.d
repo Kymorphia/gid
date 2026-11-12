@@ -4,6 +4,8 @@ module gtk.selection_model_iface_proxy;
 import gobject.object;
 import gtk.selection_model;
 import gtk.selection_model_mixin;
+import gio.list_model;
+import gio.list_model_mixin;
 
 /// Proxy object for [gtk.selection_model.SelectionModel] interface when a GObject has no applicable D binding
 class SelectionModelIfaceProxy : IfaceProxy, gtk.selection_model.SelectionModel
@@ -19,4 +21,5 @@ class SelectionModelIfaceProxy : IfaceProxy, gtk.selection_model.SelectionModel
   }
 
   mixin SelectionModelT!();
+  mixin gio.list_model_mixin.ListModelT!();
 }

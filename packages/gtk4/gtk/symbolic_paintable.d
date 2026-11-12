@@ -3,6 +3,7 @@ module gtk.symbolic_paintable;
 
 public import gid.basictypes;
 public import gtk.symbolic_paintable_iface_proxy;
+import gdk.paintable;
 import gdk.rgba;
 import gdk.snapshot;
 import gid.gid;
@@ -25,7 +26,7 @@ import gtk.types;
     The system accent color has been added in GTK 4.22.
     More colors may be added in the future.
 */
-interface SymbolicPaintable : GidWrap
+interface SymbolicPaintable : gdk.paintable.Paintable
 {
 
   /** */
@@ -66,6 +67,6 @@ interface SymbolicPaintable : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.symbolic_paintable.SymbolicPaintable]
-interface SymbolicPaintableGidBuilderImpl(T)
+interface SymbolicPaintableGidBuilderImpl(T) : gdk.paintable.PaintableGidBuilderImpl!T
 {
 }

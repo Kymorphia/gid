@@ -5,6 +5,7 @@ public import gid.basictypes;
 public import gtk.accessible_text_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;
+import gtk.accessible;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -19,7 +20,7 @@ import gtk.types;
     `enum@Gtk.AccessibleProperty.DESCRIPTION` properties for accessible
     objects containing simple, unformatted text.
 */
-interface AccessibleText : GidWrap
+interface AccessibleText : gtk.accessible.Accessible
 {
 
   /** */
@@ -67,6 +68,6 @@ interface AccessibleText : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.accessible_text.AccessibleText]
-interface AccessibleTextGidBuilderImpl(T)
+interface AccessibleTextGidBuilderImpl(T) : gtk.accessible.AccessibleGidBuilderImpl!T
 {
 }

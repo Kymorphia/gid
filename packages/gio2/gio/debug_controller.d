@@ -6,6 +6,7 @@ public import gio.debug_controller_iface_proxy;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.initable;
 import gio.types;
 import gobject.gid_builder;
 
@@ -27,7 +28,7 @@ import gobject.gid_builder;
     creating one of the built-in implementations of [gio.debug_controller.DebugController] should be
     all that’s needed to dynamically enable or disable debug output.
 */
-interface DebugController : GidWrap
+interface DebugController : gio.initable.Initable
 {
 
   /** */
@@ -68,7 +69,7 @@ interface DebugController : GidWrap
 }
 
 /// Fluent builder implementation template for [gio.debug_controller.DebugController]
-interface DebugControllerGidBuilderImpl(T)
+interface DebugControllerGidBuilderImpl(T) : gio.initable.InitableGidBuilderImpl!T
 {
 
   /**

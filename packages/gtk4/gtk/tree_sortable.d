@@ -23,7 +23,7 @@ import gtk.types;
     Deprecated: There is no replacement for this interface. You should
         use [gtk.sort_list_model.SortListModel] to wrap your list model instead
 */
-interface TreeSortable : GidWrap
+interface TreeSortable : gtk.tree_model.TreeModel
 {
 
   /** */
@@ -125,6 +125,6 @@ interface TreeSortable : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.tree_sortable.TreeSortable]
-interface TreeSortableGidBuilderImpl(T)
+interface TreeSortableGidBuilderImpl(T) : gtk.tree_model.TreeModelGidBuilderImpl!T
 {
 }

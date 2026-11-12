@@ -4,6 +4,7 @@ module gio.remote_action_group;
 public import gid.basictypes;
 public import gio.remote_action_group_iface_proxy;
 import gid.gid;
+import gio.action_group;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -33,7 +34,7 @@ import gobject.gid_builder;
     provides a mechanism by which to receive platform data for action
     invocations that arrive by way of D-Bus.
 */
-interface RemoteActionGroup : GidWrap
+interface RemoteActionGroup : gio.action_group.ActionGroup
 {
 
   /** */
@@ -81,6 +82,6 @@ interface RemoteActionGroup : GidWrap
 }
 
 /// Fluent builder implementation template for [gio.remote_action_group.RemoteActionGroup]
-interface RemoteActionGroupGidBuilderImpl(T)
+interface RemoteActionGroupGidBuilderImpl(T) : gio.action_group.ActionGroupGidBuilderImpl!T
 {
 }

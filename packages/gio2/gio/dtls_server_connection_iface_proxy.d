@@ -4,6 +4,10 @@ module gio.dtls_server_connection_iface_proxy;
 import gobject.object;
 import gio.dtls_server_connection;
 import gio.dtls_server_connection_mixin;
+import gio.datagram_based;
+import gio.datagram_based_mixin;
+import gio.dtls_connection;
+import gio.dtls_connection_mixin;
 
 /// Proxy object for [gio.dtls_server_connection.DtlsServerConnection] interface when a GObject has no applicable D binding
 class DtlsServerConnectionIfaceProxy : IfaceProxy, gio.dtls_server_connection.DtlsServerConnection
@@ -19,4 +23,6 @@ class DtlsServerConnectionIfaceProxy : IfaceProxy, gio.dtls_server_connection.Dt
   }
 
   mixin DtlsServerConnectionT!();
+  mixin gio.datagram_based_mixin.DatagramBasedT!();
+  mixin gio.dtls_connection_mixin.DtlsConnectionT!();
 }

@@ -4,6 +4,8 @@ module gio.remote_action_group_iface_proxy;
 import gobject.object;
 import gio.remote_action_group;
 import gio.remote_action_group_mixin;
+import gio.action_group;
+import gio.action_group_mixin;
 
 /// Proxy object for [gio.remote_action_group.RemoteActionGroup] interface when a GObject has no applicable D binding
 class RemoteActionGroupIfaceProxy : IfaceProxy, gio.remote_action_group.RemoteActionGroup
@@ -19,4 +21,5 @@ class RemoteActionGroupIfaceProxy : IfaceProxy, gio.remote_action_group.RemoteAc
   }
 
   mixin RemoteActionGroupT!();
+  mixin gio.action_group_mixin.ActionGroupT!();
 }

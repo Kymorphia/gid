@@ -4,6 +4,8 @@ module gtk.symbolic_paintable_iface_proxy;
 import gobject.object;
 import gtk.symbolic_paintable;
 import gtk.symbolic_paintable_mixin;
+import gdk.paintable;
+import gdk.paintable_mixin;
 
 /// Proxy object for [gtk.symbolic_paintable.SymbolicPaintable] interface when a GObject has no applicable D binding
 class SymbolicPaintableIfaceProxy : IfaceProxy, gtk.symbolic_paintable.SymbolicPaintable
@@ -19,4 +21,5 @@ class SymbolicPaintableIfaceProxy : IfaceProxy, gtk.symbolic_paintable.SymbolicP
   }
 
   mixin SymbolicPaintableT!();
+  mixin gdk.paintable_mixin.PaintableT!();
 }

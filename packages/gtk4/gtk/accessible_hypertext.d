@@ -5,6 +5,7 @@ public import gid.basictypes;
 public import gtk.accessible_hypertext_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;
+import gtk.accessible;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -16,7 +17,7 @@ import gtk.types;
     objects that contain links. Those links don't necessarily have to be part
     of text, they can be associated with images and other things.
 */
-interface AccessibleHypertext : GidWrap
+interface AccessibleHypertext : gtk.accessible.Accessible
 {
 
   /** */
@@ -28,6 +29,6 @@ interface AccessibleHypertext : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.accessible_hypertext.AccessibleHypertext]
-interface AccessibleHypertextGidBuilderImpl(T)
+interface AccessibleHypertextGidBuilderImpl(T) : gtk.accessible.AccessibleGidBuilderImpl!T
 {
 }

@@ -6,6 +6,7 @@ public import gio.memory_monitor_iface_proxy;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
+import gio.initable;
 import gio.types;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -61,7 +62,7 @@ import gobject.object;
     Don’t forget to disconnect the [gio.memory_monitor.MemoryMonitor.lowMemoryWarning]
     signal, and unref the [gio.memory_monitor.MemoryMonitor] itself when exiting.
 */
-interface MemoryMonitor : GidWrap
+interface MemoryMonitor : gio.initable.Initable
 {
 
   /** */
@@ -113,6 +114,6 @@ interface MemoryMonitor : GidWrap
 }
 
 /// Fluent builder implementation template for [gio.memory_monitor.MemoryMonitor]
-interface MemoryMonitorGidBuilderImpl(T)
+interface MemoryMonitorGidBuilderImpl(T) : gio.initable.InitableGidBuilderImpl!T
 {
 }

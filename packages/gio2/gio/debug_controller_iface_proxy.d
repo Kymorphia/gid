@@ -4,6 +4,8 @@ module gio.debug_controller_iface_proxy;
 import gobject.object;
 import gio.debug_controller;
 import gio.debug_controller_mixin;
+import gio.initable;
+import gio.initable_mixin;
 
 /// Proxy object for [gio.debug_controller.DebugController] interface when a GObject has no applicable D binding
 class DebugControllerIfaceProxy : IfaceProxy, gio.debug_controller.DebugController
@@ -19,4 +21,5 @@ class DebugControllerIfaceProxy : IfaceProxy, gio.debug_controller.DebugControll
   }
 
   mixin DebugControllerT!();
+  mixin gio.initable_mixin.InitableT!();
 }

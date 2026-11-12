@@ -7,6 +7,7 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.datagram_based;
+import gio.dtls_connection;
 import gio.socket_connectable;
 import gio.types;
 import glib.error;
@@ -17,7 +18,7 @@ import gobject.object;
     [gio.dtls_client_connection.DtlsClientConnection] is the client-side subclass of
     [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
 */
-interface DtlsClientConnection : GidWrap
+interface DtlsClientConnection : gio.datagram_based.DatagramBased, gio.dtls_connection.DtlsConnection
 {
 
   /** */
@@ -184,7 +185,7 @@ interface DtlsClientConnection : GidWrap
 }
 
 /// Fluent builder implementation template for [gio.dtls_client_connection.DtlsClientConnection]
-interface DtlsClientConnectionGidBuilderImpl(T)
+interface DtlsClientConnectionGidBuilderImpl(T) : gio.datagram_based.DatagramBasedGidBuilderImpl!T, gio.dtls_connection.DtlsConnectionGidBuilderImpl!T
 {
 
   /**

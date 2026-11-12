@@ -4,6 +4,7 @@ module gtk.selection_model;
 public import gid.basictypes;
 public import gtk.selection_model_iface_proxy;
 import gid.gid;
+import gio.list_model;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gtk.bitset;
@@ -50,7 +51,7 @@ import gtk.types;
     Selections may happen asynchronously, so the only reliable way to find out
     when an item was selected is to listen to the signals that indicate selection.
 */
-interface SelectionModel : GidWrap
+interface SelectionModel : gio.list_model.ListModel
 {
 
   /** */
@@ -241,6 +242,6 @@ interface SelectionModel : GidWrap
 }
 
 /// Fluent builder implementation template for [gtk.selection_model.SelectionModel]
-interface SelectionModelGidBuilderImpl(T)
+interface SelectionModelGidBuilderImpl(T) : gio.list_model.ListModelGidBuilderImpl!T
 {
 }
