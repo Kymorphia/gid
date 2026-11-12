@@ -169,8 +169,17 @@ struct DsdInfo
   */
   void setFormat(gstaudio.types.DsdFormat format, int rate, int channels, gstaudio.types.AudioChannelPosition[] positions = null) nothrow
   {
-    assert(!positions || positions.length == 64);
+    if (positions.length > 64) positions = positions[0 .. 64];
     auto _positions = cast(GstAudioChannelPosition*)positions.ptr;
+    typeof(*_positions)[64] _positions_fixed = void;
+    if (positions.length == 0)
+      _positions = null;
+    else if (positions.length < 64)
+    {
+      (cast(ubyte[])_positions_fixed[])[] = 0;
+      _positions_fixed[0 .. positions.length] = _positions[0 .. positions.length];
+      _positions = _positions_fixed.ptr;
+    }
     gst_dsd_info_set_format(cast(GstDsdInfo*)&this, format, rate, channels, _positions);
   }
 

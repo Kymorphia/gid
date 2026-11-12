@@ -628,8 +628,15 @@ gst.tag_list.TagList tagListFromXmpBuffer(gst.buffer.Buffer buffer) nothrow
 gst.tag_list.TagList tagListNewFromId3v1(ubyte[] data) nothrow
 {
   GstTagList* _cretval;
-  assert(!data || data.length == 128);
+  if (data.length > 128) data = data[0 .. 128];
   auto _data = cast(ubyte*)data.ptr;
+  typeof(*_data)[128] _data_fixed = void;
+  if (data.length < 128)
+  {
+    (cast(ubyte[])_data_fixed[])[] = 0;
+    _data_fixed[0 .. data.length] = _data[0 .. data.length];
+    _data = _data_fixed.ptr;
+  }
   _cretval = gst_tag_list_new_from_id3v1(_data);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   return _retval;

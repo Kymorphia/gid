@@ -119,8 +119,15 @@ class VideoGLTextureUploadMeta : StructWrap!(GstVideoGLTextureUploadMeta)
   bool upload(uint[] textureId) nothrow
   {
     bool _retval;
-    assert(!textureId || textureId.length == 4);
+    if (textureId.length > 4) textureId = textureId[0 .. 4];
     auto _textureId = cast(uint*)textureId.ptr;
+    typeof(*_textureId)[4] _textureId_fixed = void;
+    if (textureId.length < 4)
+    {
+      (cast(ubyte[])_textureId_fixed[])[] = 0;
+      _textureId_fixed[0 .. textureId.length] = _textureId[0 .. textureId.length];
+      _textureId = _textureId_fixed.ptr;
+    }
     _retval = cast(bool)gst_video_gl_texture_upload_meta_upload(cast(GstVideoGLTextureUploadMeta*)this._cPtr, _textureId);
     return _retval;
   }

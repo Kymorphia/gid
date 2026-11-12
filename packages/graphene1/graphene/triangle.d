@@ -262,12 +262,33 @@ class Triangle : gobject.boxed.BoxedWrap!(graphene_triangle_get_type)
   graphene.triangle.Triangle initFromFloat(float[] a, float[] b, float[] c) nothrow
   {
     graphene_triangle_t* _cretval;
-    assert(!a || a.length == 3);
+    if (a.length > 3) a = a[0 .. 3];
     auto _a = cast(float*)a.ptr;
-    assert(!b || b.length == 3);
+    typeof(*_a)[3] _a_fixed = void;
+    if (a.length < 3)
+    {
+      (cast(ubyte[])_a_fixed[])[] = 0;
+      _a_fixed[0 .. a.length] = _a[0 .. a.length];
+      _a = _a_fixed.ptr;
+    }
+    if (b.length > 3) b = b[0 .. 3];
     auto _b = cast(float*)b.ptr;
-    assert(!c || c.length == 3);
+    typeof(*_b)[3] _b_fixed = void;
+    if (b.length < 3)
+    {
+      (cast(ubyte[])_b_fixed[])[] = 0;
+      _b_fixed[0 .. b.length] = _b[0 .. b.length];
+      _b = _b_fixed.ptr;
+    }
+    if (c.length > 3) c = c[0 .. 3];
     auto _c = cast(float*)c.ptr;
+    typeof(*_c)[3] _c_fixed = void;
+    if (c.length < 3)
+    {
+      (cast(ubyte[])_c_fixed[])[] = 0;
+      _c_fixed[0 .. c.length] = _c[0 .. c.length];
+      _c = _c_fixed.ptr;
+    }
     _cretval = graphene_triangle_init_from_float(cast(graphene_triangle_t*)this._cPtr, _a, _b, _c);
     auto _retval = _cretval ? new graphene.triangle.Triangle(cast(void*)_cretval, No.Take) : null;
     return _retval;

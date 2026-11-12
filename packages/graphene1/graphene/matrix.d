@@ -292,8 +292,15 @@ class Matrix : gobject.boxed.BoxedWrap!(graphene_matrix_get_type)
   graphene.matrix.Matrix initFromFloat(float[] v) nothrow
   {
     graphene_matrix_t* _cretval;
-    assert(!v || v.length == 16);
+    if (v.length > 16) v = v[0 .. 16];
     auto _v = cast(float*)v.ptr;
+    typeof(*_v)[16] _v_fixed = void;
+    if (v.length < 16)
+    {
+      (cast(ubyte[])_v_fixed[])[] = 0;
+      _v_fixed[0 .. v.length] = _v[0 .. v.length];
+      _v = _v_fixed.ptr;
+    }
     _cretval = graphene_matrix_init_from_float(cast(graphene_matrix_t*)this._cPtr, _v);
     auto _retval = _cretval ? new graphene.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;

@@ -124,8 +124,15 @@ class Quad : gobject.boxed.BoxedWrap!(graphene_quad_get_type)
   graphene.quad.Quad initFromPoints(graphene.point.Point[] points) nothrow
   {
     graphene_quad_t* _cretval;
-    assert(!points || points.length == 4);
+    if (points.length > 4) points = points[0 .. 4];
     auto _points = cast(graphene_point_t*)points.ptr;
+    typeof(*_points)[4] _points_fixed = void;
+    if (points.length < 4)
+    {
+      (cast(ubyte[])_points_fixed[])[] = 0;
+      _points_fixed[0 .. points.length] = _points[0 .. points.length];
+      _points = _points_fixed.ptr;
+    }
     _cretval = graphene_quad_init_from_points(cast(graphene_quad_t*)this._cPtr, _points);
     auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, No.Take) : null;
     return _retval;

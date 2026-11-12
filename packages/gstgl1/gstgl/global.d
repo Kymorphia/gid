@@ -297,10 +297,24 @@ bool glHandleSetContext(gst.element.Element element, gst.context.Context context
 */
 void glMultiplyMatrix4(float[] a, float[] b, out float[] result) nothrow
 {
-  assert(!a || a.length == 16);
+  if (a.length > 16) a = a[0 .. 16];
   auto _a = cast(float*)a.ptr;
-  assert(!b || b.length == 16);
+  typeof(*_a)[16] _a_fixed = void;
+  if (a.length < 16)
+  {
+    (cast(ubyte[])_a_fixed[])[] = 0;
+    _a_fixed[0 .. a.length] = _a[0 .. a.length];
+    _a = _a_fixed.ptr;
+  }
+  if (b.length > 16) b = b[0 .. 16];
   auto _b = cast(float*)b.ptr;
+  typeof(*_b)[16] _b_fixed = void;
+  if (b.length < 16)
+  {
+    (cast(ubyte[])_b_fixed[])[] = 0;
+    _b_fixed[0 .. b.length] = _b[0 .. b.length];
+    _b = _b_fixed.ptr;
+  }
   result.length = 16;
   gst_gl_multiply_matrix4(_a, _b, result.ptr);
 }
@@ -315,8 +329,15 @@ void glMultiplyMatrix4(float[] a, float[] b, out float[] result) nothrow
 */
 void glSetAffineTransformationMetaFromNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, float[] matrix) nothrow
 {
-  assert(!matrix || matrix.length == 16);
+  if (matrix.length > 16) matrix = matrix[0 .. 16];
   auto _matrix = cast(float*)matrix.ptr;
+  typeof(*_matrix)[16] _matrix_fixed = void;
+  if (matrix.length < 16)
+  {
+    (cast(ubyte[])_matrix_fixed[])[] = 0;
+    _matrix_fixed[0 .. matrix.length] = _matrix[0 .. matrix.length];
+    _matrix = _matrix_fixed.ptr;
+  }
   gst_gl_set_affine_transformation_meta_from_ndc(meta ? cast(GstVideoAffineTransformationMeta*)meta._cPtr : null, _matrix);
 }
 
@@ -349,8 +370,15 @@ gobject.types.GType glStereoDownmixModeGetType() nothrow
 */
 void glSwizzleInvert(int[] swizzle, out int[] inversion) nothrow
 {
-  assert(!swizzle || swizzle.length == 4);
+  if (swizzle.length > 4) swizzle = swizzle[0 .. 4];
   auto _swizzle = cast(int*)swizzle.ptr;
+  typeof(*_swizzle)[4] _swizzle_fixed = void;
+  if (swizzle.length < 4)
+  {
+    (cast(ubyte[])_swizzle_fixed[])[] = 0;
+    _swizzle_fixed[0 .. swizzle.length] = _swizzle[0 .. swizzle.length];
+    _swizzle = _swizzle_fixed.ptr;
+  }
   inversion.length = 4;
   gst_gl_swizzle_invert(_swizzle, inversion.ptr);
 }

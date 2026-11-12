@@ -217,8 +217,15 @@ class Vec4 : gobject.boxed.BoxedWrap!(graphene_vec4_get_type)
   graphene.vec4.Vec4 initFromFloat(float[] src) nothrow
   {
     graphene_vec4_t* _cretval;
-    assert(!src || src.length == 4);
+    if (src.length > 4) src = src[0 .. 4];
     auto _src = cast(float*)src.ptr;
+    typeof(*_src)[4] _src_fixed = void;
+    if (src.length < 4)
+    {
+      (cast(ubyte[])_src_fixed[])[] = 0;
+      _src_fixed[0 .. src.length] = _src[0 .. src.length];
+      _src = _src_fixed.ptr;
+    }
     _cretval = graphene_vec4_init_from_float(cast(graphene_vec4_t*)this._cPtr, _src);
     auto _retval = _cretval ? new graphene.vec4.Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;

@@ -52,10 +52,24 @@ class BorderNode : gsk.render_node.RenderNode
   this(gsk.rounded_rect.RoundedRect outline, float[] borderWidth, gdk.rgba.RGBA[] borderColor) nothrow
   {
     GskRenderNode* _cretval;
-    assert(!borderWidth || borderWidth.length == 4);
+    if (borderWidth.length > 4) borderWidth = borderWidth[0 .. 4];
     auto _borderWidth = cast(float*)borderWidth.ptr;
-    assert(!borderColor || borderColor.length == 4);
+    typeof(*_borderWidth)[4] _borderWidth_fixed = void;
+    if (borderWidth.length < 4)
+    {
+      (cast(ubyte[])_borderWidth_fixed[])[] = 0;
+      _borderWidth_fixed[0 .. borderWidth.length] = _borderWidth[0 .. borderWidth.length];
+      _borderWidth = _borderWidth_fixed.ptr;
+    }
+    if (borderColor.length > 4) borderColor = borderColor[0 .. 4];
     auto _borderColor = cast(GdkRGBA*)borderColor.ptr;
+    typeof(*_borderColor)[4] _borderColor_fixed = void;
+    if (borderColor.length < 4)
+    {
+      (cast(ubyte[])_borderColor_fixed[])[] = 0;
+      _borderColor_fixed[0 .. borderColor.length] = _borderColor[0 .. borderColor.length];
+      _borderColor = _borderColor_fixed.ptr;
+    }
     _cretval = gsk_border_node_new(outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, _borderWidth, _borderColor);
     this(_cretval, Yes.Take);
   }

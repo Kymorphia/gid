@@ -262,8 +262,15 @@ class Vec3 : gobject.boxed.BoxedWrap!(graphene_vec3_get_type)
   graphene.vec3.Vec3 initFromFloat(float[] src) nothrow
   {
     graphene_vec3_t* _cretval;
-    assert(!src || src.length == 3);
+    if (src.length > 3) src = src[0 .. 3];
     auto _src = cast(float*)src.ptr;
+    typeof(*_src)[3] _src_fixed = void;
+    if (src.length < 3)
+    {
+      (cast(ubyte[])_src_fixed[])[] = 0;
+      _src_fixed[0 .. src.length] = _src[0 .. src.length];
+      _src = _src_fixed.ptr;
+    }
     _cretval = graphene_vec3_init_from_float(cast(graphene_vec3_t*)this._cPtr, _src);
     auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
     return _retval;

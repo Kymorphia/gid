@@ -212,13 +212,12 @@ void* getPasswdEntry(string userName)
     Returns: true on success, false if not (and errno will be set).
     Throws: [ErrorWrap]
 */
-bool openPipe(int[] fds, int flags)
+bool openPipe(out int[] fds, int flags)
 {
   bool _retval;
-  assert(!fds || fds.length == 2);
-  auto _fds = cast(int*)fds.ptr;
+  fds.length = 2;
   GError *_err;
-  _retval = cast(bool)g_unix_open_pipe(_fds, flags, &_err);
+  _retval = cast(bool)g_unix_open_pipe(fds.ptr, flags, &_err);
   if (_err)
     throw new ErrorWrap(_err, Yes.Take);
   return _retval;

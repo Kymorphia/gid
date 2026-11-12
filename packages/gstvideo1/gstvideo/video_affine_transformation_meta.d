@@ -82,8 +82,15 @@ class VideoAffineTransformationMeta : StructWrap!(GstVideoAffineTransformationMe
   */
   void applyMatrix(float[] matrix) nothrow
   {
-    assert(!matrix || matrix.length == 16);
+    if (matrix.length > 16) matrix = matrix[0 .. 16];
     auto _matrix = cast(float*)matrix.ptr;
+    typeof(*_matrix)[16] _matrix_fixed = void;
+    if (matrix.length < 16)
+    {
+      (cast(ubyte[])_matrix_fixed[])[] = 0;
+      _matrix_fixed[0 .. matrix.length] = _matrix[0 .. matrix.length];
+      _matrix = _matrix_fixed.ptr;
+    }
     gst_video_affine_transformation_meta_apply_matrix(cast(GstVideoAffineTransformationMeta*)this._cPtr, _matrix);
   }
 

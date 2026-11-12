@@ -243,8 +243,17 @@ class AudioInfo : gobject.boxed.BoxedWrap!(gst_audio_info_get_type)
   */
   void setFormat(gstaudio.types.AudioFormat format, int rate, int channels, gstaudio.types.AudioChannelPosition[] position = null) nothrow
   {
-    assert(!position || position.length == 64);
+    if (position.length > 64) position = position[0 .. 64];
     auto _position = cast(GstAudioChannelPosition*)position.ptr;
+    typeof(*_position)[64] _position_fixed = void;
+    if (position.length == 0)
+      _position = null;
+    else if (position.length < 64)
+    {
+      (cast(ubyte[])_position_fixed[])[] = 0;
+      _position_fixed[0 .. position.length] = _position[0 .. position.length];
+      _position = _position_fixed.ptr;
+    }
     gst_audio_info_set_format(cast(GstAudioInfo*)this._cPtr, format, rate, channels, _position);
   }
 

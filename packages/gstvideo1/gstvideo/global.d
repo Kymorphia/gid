@@ -205,10 +205,24 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvi
 gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height, uint nPlanes, size_t[] offset, int[] stride) nothrow
 {
   GstVideoMeta* _cretval;
-  assert(!offset || offset.length == 4);
+  if (offset.length > 4) offset = offset[0 .. 4];
   auto _offset = cast(size_t*)offset.ptr;
-  assert(!stride || stride.length == 4);
+  typeof(*_offset)[4] _offset_fixed = void;
+  if (offset.length < 4)
+  {
+    (cast(ubyte[])_offset_fixed[])[] = 0;
+    _offset_fixed[0 .. offset.length] = _offset[0 .. offset.length];
+    _offset = _offset_fixed.ptr;
+  }
+  if (stride.length > 4) stride = stride[0 .. 4];
   auto _stride = cast(int*)stride.ptr;
+  typeof(*_stride)[4] _stride_fixed = void;
+  if (stride.length < 4)
+  {
+    (cast(ubyte[])_stride_fixed[])[] = 0;
+    _stride_fixed[0 .. stride.length] = _stride[0 .. stride.length];
+    _stride = _stride_fixed.ptr;
+  }
   _cretval = gst_buffer_add_video_meta_full(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, format, width, height, nPlanes, _offset, _stride);
   auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, buffer) : null;
   return _retval;
@@ -288,8 +302,15 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
 gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta bufferAddVideoSeiUserDataUnregisteredMeta(gst.buffer.Buffer buffer, ubyte[] uuid, ubyte[] data = null) nothrow
 {
   GstVideoSEIUserDataUnregisteredMeta* _cretval;
-  assert(!uuid || uuid.length == 16);
+  if (uuid.length > 16) uuid = uuid[0 .. 16];
   auto _uuid = cast(ubyte*)uuid.ptr;
+  typeof(*_uuid)[16] _uuid_fixed = void;
+  if (uuid.length < 16)
+  {
+    (cast(ubyte[])_uuid_fixed[])[] = 0;
+    _uuid_fixed[0 .. uuid.length] = _uuid[0 .. uuid.length];
+    _uuid = _uuid_fixed.ptr;
+  }
   size_t _size;
   if (data)
     _size = cast(size_t)data.length;
