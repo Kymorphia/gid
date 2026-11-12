@@ -20,6 +20,58 @@ import gid.gid;
 
 
 /**
+Creates an image surface for the provided pixel data.
+The surface keeps a reference to data, preventing it from being garbage collected until the surface is destroyed
+(also when the surface is still referenced from C after the D object is gone), so data does not need to be kept
+by the caller. The initial contents of data are used as the initial image contents and drawing to the surface
+modifies data. Call [cairo.surface.Surface.flush] before accessing data directly after drawing, and
+[cairo.surface.Surface.markDirty] after modifying it.
+
+The stride may be larger than width times the bytes per pixel to provide alignment for each pixel and row, use
+[cairo.global.formatStrideForWidth] to get a valid stride for format and width.
+
+Params:
+data = pixel data buffer, must be at least stride * height bytes long
+format = the format of pixels in the buffer
+width = the width of the image to be stored in the buffer
+height = the height of the image to be stored in the buffer
+stride = the number of bytes between the start of rows in the buffer as allocated
+Returns: the newly created surface. This function never returns null, in case of an error such as an invalid
+stride or data being too short for stride * height a "nil" surface is returned whose
+[cairo.surface.Surface.status] is [cairo.types.Status.InvalidStride] (or another error status like
+[cairo.types.Status.InvalidFormat], [cairo.types.Status.InvalidSize] or [cairo.types.Status.NoMemory]).
+*/
+cairo.surface.Surface imageSurfaceCreateForData(ubyte[] data, cairo.types.Format format, int width, int height, int stride) nothrow
+{
+  import core.memory : GC;
+
+  __gshared cairo_user_data_key_t dataKey; // Address used as the surface user data key for the data owner
+
+  // A negative stride is rejected by cairo with an invalid stride error surface, used if data is too short
+  if (stride < 0 || height < 0 || data.length < cast(size_t)stride * height)
+    stride = -1;
+
+  auto _cretval = cairo_image_surface_create_for_data(stride >= 0 ? data.ptr : null, format, width, height, stride);
+
+  if (cairo_surface_status(_cretval) == cairo_status_t.Success)
+  { // Separate GC allocated owner per surface (a root on data itself would be shared between surfaces using it)
+    auto owner = cast(ubyte[]*)GC.malloc((ubyte[]).sizeof, GC.BlkAttr.NO_MOVE);
+    *owner = data;
+    ptrFreezeGC(owner);
+
+    auto status = cairo_surface_set_user_data(_cretval, &dataKey, owner, cast(cairo_destroy_func_t)&thawPtrDestroyFunc);
+
+    if (status != cairo_status_t.Success)
+    { // Failed to attach the owner (out of memory), finish the surface so that cairo no longer accesses data
+      ptrThawGC(owner);
+      cairo_surface_finish(_cretval);
+    }
+  }
+
+  return new cairo.surface.Surface(cast(void*)_cretval, Yes.Take);
+}
+
+/**
     Creates a new #cairo_t with all graphics state parameters set to
     default values and with target as a target surface. The target
     surface should be constructed with a backend-specific function such
@@ -2168,7 +2220,7 @@ cairo.surface.Surface teeSurfaceIndex(cairo.surface.Surface abstractSurface, uin
 {
   cairo_surface_t* _cretval;
   _cretval = cairo_tee_surface_index(abstractSurface ? cast(cairo_surface_t*)abstractSurface._cPtr(No.Dup) : null, index);
-  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -2362,7 +2414,7 @@ cairo.pattern.Pattern userScaledFontGetForegroundMarker(cairo.scaled_font.Scaled
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_user_scaled_font_get_foreground_marker(scaledFont ? cast(cairo_scaled_font_t*)scaledFont._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -2408,7 +2460,7 @@ cairo.pattern.Pattern userScaledFontGetForegroundSource(cairo.scaled_font.Scaled
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_user_scaled_font_get_foreground_source(scaledFont ? cast(cairo_scaled_font_t*)scaledFont._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 

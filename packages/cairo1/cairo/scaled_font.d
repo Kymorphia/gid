@@ -77,7 +77,7 @@ class ScaledFont : gobject.boxed.BoxedWrap!(cairo_gobject_scaled_font_get_type)
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_scaled_font_get_font_face(cast(cairo_scaled_font_t*)this._cPtr);
-    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

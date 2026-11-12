@@ -548,7 +548,7 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_get_font_face(cast(cairo_t*)this._cPtr);
-    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -597,7 +597,7 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_group_target(cast(cairo_t*)this._cPtr);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -702,7 +702,7 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   {
     cairo_scaled_font_t* _cretval;
     _cretval = cairo_get_scaled_font(cast(cairo_t*)this._cPtr);
-    auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -716,7 +716,7 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_get_source(cast(cairo_t*)this._cPtr);
-    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -736,7 +736,7 @@ class Context : gobject.boxed.BoxedWrap!(cairo_gobject_context_get_type)
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_target(cast(cairo_t*)this._cPtr);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

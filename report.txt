@@ -56,7 +56,7 @@ vte2                       |    8    0    0   100 |  217    0    0   100 |   34 
 vte3                       |    8    0    0   100 |  211    0    0   100 |   30    0    0   100 |    0    0    0   100 |
 webkit6                    |   76    0    0   100 |  691    0    0   100 |   72    0    0   100 |    0    0    0   100 |
 webkitwebprocessextension6 |   16    0    0   100 |  100    0    0   100 |   12    0    0   100 |    0    0    0   100 |
-cairo1                     |   21    0    0   100 |  328    2    0  99.4 |    0    0    0   100 |   37    0    0   100 |
+cairo1                     |   21    0    0   100 |  328    1    0  99.7 |    0    0    0   100 |   37    0    0   100 |
 freetype2                  |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gid                        |    6    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 libxml2                    |   10    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -143,7 +143,6 @@ pango.glyph_string.GlyphString.getLogicalWidths
 pango.tab_array.TabArray.getTabs
 pango.global.log2visGetEmbeddingLevels
 cairo.scaled_font.ScaledFont.textToGlyphs
-cairo.global.imageSurfaceCreateForData
 
 [Disabled Fields]
 gdk.event_button.EventButton.axes

@@ -146,8 +146,20 @@
 //!set record[Context].method[show_text_glyphs].parameters.parameter[utf8].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set record[ScaledFont].method[text_to_glyphs].parameters.parameter[utf8].type '<array length="3" c:type="const char*"><type name="char" c:type="char"/></array>'
 
-//# Disable: Data must remain valid for the life of the surface (D memory can't be handed to C without an owner)
-//!set function[image_surface_create_for_data][disable] 1
+//# Fix transfer of returned objects owned by cairo (GIR has full, double unref crash)
+//!set record[Context].method[get_font_face].return-value[][transfer-ownership] none
+//!set record[Context].method[get_group_target].return-value[][transfer-ownership] none
+//!set record[Context].method[get_scaled_font].return-value[][transfer-ownership] none
+//!set record[Context].method[get_source].return-value[][transfer-ownership] none
+//!set record[Context].method[get_target].return-value[][transfer-ownership] none
+//!set record[ScaledFont].method[get_font_face].return-value[][transfer-ownership] none
+//!set record[Surface].method[get_device].return-value[][transfer-ownership] none
+//!set function[tee_surface_index].return-value[][transfer-ownership] none
+//!set function[user_scaled_font_get_foreground_marker].return-value[][transfer-ownership] none
+//!set function[user_scaled_font_get_foreground_source].return-value[][transfer-ownership] none
+
+//# Hand-written below: D pixel data must be kept alive by the surface (D memory can't be handed to C without an owner)
+//!set function[image_surface_create_for_data][ignore] 1
 
 //# Disable: Inout allocated glyph/cluster arrays with inout counts
 //!set record[ScaledFont].method[text_to_glyphs][disable] 1
@@ -156,3 +168,57 @@
 //# Make read-only (no write support): Arrays allocated and freed by cairo (cairo_path_destroy/cairo_rectangle_list_destroy)
 //!set record[Path].field[data][writable] 0
 //!set record[RectangleList].field[rectangles][writable] 0
+
+//!class global pre
+
+/**
+    Creates an image surface for the provided pixel data.
+    The surface keeps a reference to data, preventing it from being garbage collected until the surface is destroyed
+    (also when the surface is still referenced from C after the D object is gone), so data does not need to be kept
+    by the caller. The initial contents of data are used as the initial image contents and drawing to the surface
+    modifies data. Call [cairo.surface.Surface.flush] before accessing data directly after drawing, and
+    [cairo.surface.Surface.markDirty] after modifying it.
+
+    The stride may be larger than width times the bytes per pixel to provide alignment for each pixel and row, use
+    [cairo.global.formatStrideForWidth] to get a valid stride for format and width.
+
+    Params:
+      data = pixel data buffer, must be at least stride * height bytes long
+      format = the format of pixels in the buffer
+      width = the width of the image to be stored in the buffer
+      height = the height of the image to be stored in the buffer
+      stride = the number of bytes between the start of rows in the buffer as allocated
+    Returns: the newly created surface. This function never returns null, in case of an error such as an invalid
+      stride or data being too short for stride * height a "nil" surface is returned whose
+      [cairo.surface.Surface.status] is [cairo.types.Status.InvalidStride] (or another error status like
+      [cairo.types.Status.InvalidFormat], [cairo.types.Status.InvalidSize] or [cairo.types.Status.NoMemory]).
+*/
+cairo.surface.Surface imageSurfaceCreateForData(ubyte[] data, cairo.types.Format format, int width, int height, int stride) nothrow
+{
+  import core.memory : GC;
+
+  __gshared cairo_user_data_key_t dataKey; // Address used as the surface user data key for the data owner
+
+  // A negative stride is rejected by cairo with an invalid stride error surface, used if data is too short
+  if (stride < 0 || height < 0 || data.length < cast(size_t)stride * height)
+    stride = -1;
+
+  auto _cretval = cairo_image_surface_create_for_data(stride >= 0 ? data.ptr : null, format, width, height, stride);
+
+  if (cairo_surface_status(_cretval) == cairo_status_t.Success)
+  { // Separate GC allocated owner per surface (a root on data itself would be shared between surfaces using it)
+    auto owner = cast(ubyte[]*)GC.malloc((ubyte[]).sizeof, GC.BlkAttr.NO_MOVE);
+    *owner = data;
+    ptrFreezeGC(owner);
+
+    auto status = cairo_surface_set_user_data(_cretval, &dataKey, owner, cast(cairo_destroy_func_t)&thawPtrDestroyFunc);
+
+    if (status != cairo_status_t.Success)
+    { // Failed to attach the owner (out of memory), finish the surface so that cairo no longer accesses data
+      ptrThawGC(owner);
+      cairo_surface_finish(_cretval);
+    }
+  }
+
+  return new cairo.surface.Surface(cast(void*)_cretval, Yes.Take);
+}

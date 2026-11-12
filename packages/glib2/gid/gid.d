@@ -89,6 +89,9 @@ void* freezeDelegate(void* dlg) nothrow
   return dupDlg;
 }
 
+/// A more appropriately named alias to thawDelegate for other pointer thaw purposes
+alias thawPtrDestroyFunc = thawDelegate;
+
 /**
 * Unfreeze a delegate which was frozen with `freezeDelegate`, allowing it to be garbage collected
 * Params:

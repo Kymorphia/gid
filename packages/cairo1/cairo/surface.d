@@ -249,7 +249,7 @@ class Surface : gobject.boxed.BoxedWrap!(cairo_gobject_surface_get_type)
   {
     cairo_device_t* _cretval;
     _cretval = cairo_surface_get_device(cast(cairo_surface_t*)this._cPtr);
-    auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
