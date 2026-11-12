@@ -4,11 +4,10 @@
 //!info docs https://www.kymorphia.com/gid/gid~gstbase1/
 //!info capi https://gstreamer.freedesktop.org/documentation/base/index.html
 
-//# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set record[BitWriter].method[free_and_get_data][disable] 1
-//!set record[BitWriter].method[get_data][disable] 1
-//!set record[BitWriter].method[reset_and_get_data][disable] 1
-//!set record[ByteWriter].method[reset_and_get_data][disable] 1
+//# Hand-written below: Data arrays with a size from the writer (bit size or written size)
+//!set record[BitWriter].method[get_data][ignore] 1
+//!set record[BitWriter].method[reset_and_get_data][ignore] 1
+//!set record[ByteWriter].method[reset_and_get_data][ignore] 1
 
 //# Set length of array parameters
 //!set record[BitWriter].method[put_bytes].parameters.parameter[data].array[][length] 1
@@ -36,6 +35,60 @@
 //!set record[BitWriter].method[free_and_get_buffer][ignore] 1
 //!set record[ByteWriter].method[free_and_get_buffer][ignore] 1
 //!set record[ByteWriter].method[free_and_get_data][ignore] 1
+//!set record[BitWriter].method[free_and_get_data][ignore] 1
 
-//# Disable: Data array field with a length in bits (bit_size)
-//!set record[BitWriter].field[data][disable] 1
+//# Ignore: Data array field with a length in bits (bit_size), use BitWriter.getData
+//!set record[BitWriter].field[data][ignore] 1
+//!class BitWriter
+
+  /**
+      Get a copy of the written data, the size is the bit size rounded up to whole bytes.
+      Returns: a copy of the written data
+  */
+  ubyte[] getData() nothrow
+  {
+    auto writer = cast(GstBitWriter*)this._cPtr;
+
+    if (!writer.data)
+      return null;
+
+    return writer.data[0 .. (writer.bitSize + 7) / 8].dup;
+  }
+
+  /**
+      Resets the bit writer and returns the data which was written.
+      Returns: the written data, the size is the bit size rounded up to whole bytes
+  */
+  ubyte[] resetAndGetData() nothrow
+  {
+    import glib.c.functions : g_free;
+
+    auto writer = cast(GstBitWriter*)this._cPtr;
+    auto size = (writer.bitSize + 7) / 8;
+    auto owned = writer.owned; // Owned data is duplicated (and the original freed), otherwise external data is returned
+    auto _cretval = gst_bit_writer_reset_and_get_data(writer);
+    auto _retval = _cretval ? _cretval[0 .. size].dup : null;
+
+    if (owned)
+      g_free(_cretval);
+
+    return _retval;
+  }
+
+//!class ByteWriter
+
+  /**
+      Resets the byte writer and returns the data which was written.
+      Returns: the written data
+  */
+  ubyte[] resetAndGetData() nothrow
+  {
+    import glib.c.functions : g_free;
+
+    auto writer = cast(GstByteWriter*)this._cPtr;
+    auto size = writer.parent.size;
+    auto _cretval = gst_byte_writer_reset_and_get_data(writer);
+    auto _retval = _cretval ? _cretval[0 .. size].dup : null;
+    g_free(_cretval);
+    return _retval;
+  }

@@ -4,16 +4,16 @@
 //!info docs https://www.kymorphia.com/gid/gid~gst1/
 //!info capi https://gstreamer.freedesktop.org/documentation/gstreamer/gi-index.html
 
-// Disabled: maps memory without a way to unmap it (use Memory.map, which returns a MapScope)
-//!set record[Memory].method[make_mapped][disable] 1
+// Ignored: maps memory without a way to unmap it (use Memory.map, which returns a MapScope)
+//!set record[Memory].method[make_mapped][ignore] 1
 
 // Map functions return a MapScope which unmaps the structure (explicit unmap or scope exit), the unmap function is
 // only used by the MapScope (unmapping a MapScope structure directly would unmap it twice)
 //!set record[Buffer].method[map][gid-unmap] gst_buffer_unmap
 //!set record[Buffer].method[map_range][gid-unmap] gst_buffer_unmap
-//!set record[Buffer].method[unmap][disable] 1
+//!set record[Buffer].method[unmap][ignore] 1
 //!set record[Memory].method[map][gid-unmap] gst_memory_unmap
-//!set record[Memory].method[unmap][disable] 1
+//!set record[Memory].method[unmap][ignore] 1
 
 // Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
 //!set record[Meta].function[deserialize].return-value[][gid-borrow] buffer

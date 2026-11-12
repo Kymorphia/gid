@@ -15,6 +15,42 @@ import gstaudio.c.types;
 import gstaudio.types;
 
 
+import gstaudio.audio_info;
+import gstaudio.audio_meta;
+
+/**
+Allocates and attaches a #GstAudioMeta on buffer, which must be writable for that purpose. The fields of the
+meta are directly populated from the arguments of this function.
+When info.layout is [gstaudio.types.AudioLayout.NonInterleaved] and offsets is empty, the offsets are
+calculated with a formula that assumes the planes are tightly packed and in sequence:
+offsets[channel] = channel * samples * sample_stride
+It is not allowed for channels to overlap in memory, i.e. for each i in [0, channels), the range
+[offsets[i], offsets[i] + samples * sample_stride) must not overlap with any other such range.
+Params:
+buffer = a #GstBuffer
+info = the audio properties of the buffer
+samples = the number of valid samples in the buffer
+offsets = the offsets (in bytes) where each channel plane starts in the buffer, empty to calculate them (only
+for non-interleaved layout), otherwise its length must be the number of channels in info
+Returns: the #GstAudioMeta that was attached on the buffer (borrowed from it) or null on error
+*/
+gstaudio.audio_meta.AudioMeta bufferAddAudioMeta(gst.buffer.Buffer buffer, gstaudio.audio_info.AudioInfo info, size_t samples, size_t[] offsets = null) nothrow
+{
+  if (offsets.length > 0 && info && offsets.length != (cast(GstAudioInfo*)info._cPtr(No.Dup)).channels)
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.bufferAddAudioMeta offsets length %d does not match the number of channels %d",
+    cast(int)offsets.length, (cast(GstAudioInfo*)info._cPtr(No.Dup)).channels);
+    return null;
+  }
+
+  auto _cretval = gst_buffer_add_audio_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null,
+  info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, samples, offsets.length > 0 ? offsets.ptr : null);
+  return _cretval ? new gstaudio.audio_meta.AudioMeta(cast(GstAudioMeta*)_cretval, buffer) : null;
+}
+
+
 /**
     Get the fallback channel-mask for the given number of channels.
     

@@ -120,6 +120,58 @@ class VideoFrame : StructWrap!(GstVideoFrame)
   }
 
   /**
+  Get the data of a plane of a mapped video frame.
+  The returned slice references the mapped memory of the frame and is only valid while the frame is mapped (see
+  [gstvideo.video_frame.VideoFrame.map]). Writing to it modifies the frame if it was mapped for writing.
+  For formats which are not tiled the length is the plane stride times the plane height, otherwise it extends to
+  the end of the mapped memory. Use the stride of the plane from [gstvideo.video_frame.VideoFrame.info] to access
+  rows.
+  Params:
+  plane = the plane index (less than the number of planes of the video format)
+  Returns: the plane data or null if the frame is not mapped or plane is out of range
+  */
+  ubyte[] planeData(uint plane) nothrow
+  {
+    auto frame = cast(GstVideoFrame*)this._cPtr;
+    auto finfo = frame.info.finfo;
+
+    if (!finfo || plane >= finfo.nPlanes || plane >= frame.data.length || !frame.data[plane])
+      return null;
+
+    auto data = cast(ubyte*)frame.data[plane];
+    auto mapIndex = frame.meta ? plane : 0; // Each plane has its own memory map when mapped with a VideoMeta
+    auto mapInfo = &frame.map[mapIndex];
+
+    if (!mapInfo.data || data < mapInfo.data || data >= mapInfo.data + mapInfo.size)
+      return null;
+
+    size_t size = mapInfo.data + mapInfo.size - data; // Remaining mapped bytes from the plane start
+    auto stride = frame.info.stride[plane];
+
+    if (!(finfo.flags & GstVideoFormatFlags.Tiled) && stride > 0)
+    {
+      int height = frame.info.height;
+
+      if (frame.info.interlaceMode == GstVideoInterlaceMode.Alternate) // One field per buffer
+        height = (height + 1) / 2;
+
+      foreach (comp; 0 .. finfo.nComponents) // Scale the height by the vertical subsampling of a component in the plane
+      {
+        if (finfo.plane[comp] == plane)
+        {
+          height = -((-height) >> finfo.hSub[comp]);
+          break;
+        }
+      }
+
+      if (height >= 0 && cast(size_t)stride * height < size)
+        size = cast(size_t)stride * height;
+    }
+
+    return data[0 .. size];
+  }
+
+  /**
       Copy the contents from src to dest.
       
       Note: Since: 1.18, dest dimensions are allowed to be

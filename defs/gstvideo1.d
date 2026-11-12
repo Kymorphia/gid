@@ -10,7 +10,7 @@
 //!set record[VideoFrame].function[map][gid-map-source] buffer
 //!set record[VideoFrame].function[map_id][gid-unmap] gst_video_frame_unmap
 //!set record[VideoFrame].function[map_id][gid-map-source] buffer
-//!set record[VideoFrame].method[unmap][disable] 1
+//!set record[VideoFrame].method[unmap][ignore] 1
 
 // Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
 //!set function[buffer_add_ancillary_meta].return-value[][gid-borrow] buffer
@@ -103,8 +103,8 @@
 //# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[VideoFrame].field[meta][ignore] 1
 
-//# Disable: Fixed size array of plane data pointers
-//!set record[VideoFrame].field[data][disable] 1
+//# Ignore: Fixed size array of plane data pointers (use VideoFrame.planeData)
+//!set record[VideoFrame].field[data][ignore] 1
 
 //# Set array field lengths from their length fields (read-only, set by VideoResampler.init or when adding the meta)
 //!set record[VideoResampler].field[offset].type '<array length="1" zero-terminated="0" c:type="guint32*"><type name="guint32" c:type="guint32"/></array>'
@@ -154,3 +154,56 @@ struct VideoMultiviewFlagsSet
     gst_value_set_flagset(gval, cast(uint)flags, cast(uint)mask);
   }
 }
+//!class VideoFrame
+
+  /**
+      Get the data of a plane of a mapped video frame.
+      The returned slice references the mapped memory of the frame and is only valid while the frame is mapped (see
+      [gstvideo.video_frame.VideoFrame.map]). Writing to it modifies the frame if it was mapped for writing.
+      For formats which are not tiled the length is the plane stride times the plane height, otherwise it extends to
+      the end of the mapped memory. Use the stride of the plane from [gstvideo.video_frame.VideoFrame.info] to access
+      rows.
+      Params:
+        plane = the plane index (less than the number of planes of the video format)
+      Returns: the plane data or null if the frame is not mapped or plane is out of range
+  */
+  ubyte[] planeData(uint plane) nothrow
+  {
+    auto frame = cast(GstVideoFrame*)this._cPtr;
+    auto finfo = frame.info.finfo;
+
+    if (!finfo || plane >= finfo.nPlanes || plane >= frame.data.length || !frame.data[plane])
+      return null;
+
+    auto data = cast(ubyte*)frame.data[plane];
+    auto mapIndex = frame.meta ? plane : 0; // Each plane has its own memory map when mapped with a VideoMeta
+    auto mapInfo = &frame.map[mapIndex];
+
+    if (!mapInfo.data || data < mapInfo.data || data >= mapInfo.data + mapInfo.size)
+      return null;
+
+    size_t size = mapInfo.data + mapInfo.size - data; // Remaining mapped bytes from the plane start
+    auto stride = frame.info.stride[plane];
+
+    if (!(finfo.flags & GstVideoFormatFlags.Tiled) && stride > 0)
+    {
+      int height = frame.info.height;
+
+      if (frame.info.interlaceMode == GstVideoInterlaceMode.Alternate) // One field per buffer
+        height = (height + 1) / 2;
+
+      foreach (comp; 0 .. finfo.nComponents) // Scale the height by the vertical subsampling of a component in the plane
+      {
+        if (finfo.plane[comp] == plane)
+        {
+          height = -((-height) >> finfo.hSub[comp]);
+          break;
+        }
+      }
+
+      if (height >= 0 && cast(size_t)stride * height < size)
+        size = cast(size_t)stride * height;
+    }
+
+    return data[0 .. size];
+  }

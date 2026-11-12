@@ -112,6 +112,22 @@ class ByteWriter : StructWrap!(GstByteWriter)
   }
 
   /**
+  Resets the byte writer and returns the data which was written.
+  Returns: the written data
+  */
+  ubyte[] resetAndGetData() nothrow
+  {
+    import glib.c.functions : g_free;
+
+    auto writer = cast(GstByteWriter*)this._cPtr;
+    auto size = writer.parent.size;
+    auto _cretval = gst_byte_writer_reset_and_get_data(writer);
+    auto _retval = _cretval ? _cretval[0 .. size].dup : null;
+    g_free(_cretval);
+    return _retval;
+  }
+
+  /**
       Checks if enough free space from the current write cursor is
       available and reallocates if necessary.
   

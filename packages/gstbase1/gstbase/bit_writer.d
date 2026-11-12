@@ -57,6 +57,41 @@ class BitWriter : StructWrap!(GstBitWriter)
   }
 
   /**
+  Get a copy of the written data, the size is the bit size rounded up to whole bytes.
+  Returns: a copy of the written data
+  */
+  ubyte[] getData() nothrow
+  {
+    auto writer = cast(GstBitWriter*)this._cPtr;
+
+    if (!writer.data)
+      return null;
+
+    return writer.data[0 .. (writer.bitSize + 7) / 8].dup;
+  }
+
+  /**
+  Resets the bit writer and returns the data which was written.
+  Returns: the written data, the size is the bit size rounded up to whole bytes
+  */
+  ubyte[] resetAndGetData() nothrow
+  {
+    import glib.c.functions : g_free;
+
+    auto writer = cast(GstBitWriter*)this._cPtr;
+    auto size = (writer.bitSize + 7) / 8;
+    auto owned = writer.owned; // Owned data is duplicated (and the original freed), otherwise external data is returned
+    auto _cretval = gst_bit_writer_reset_and_get_data(writer);
+    auto _retval = _cretval ? _cretval[0 .. size].dup : null;
+
+    if (owned)
+      g_free(_cretval);
+
+    return _retval;
+  }
+
+
+  /**
       Write trailing bit to align last byte of data. trailing_bit can
       only be 1 or 0.
   

@@ -76,6 +76,21 @@ class AudioMeta : StructWrap!(GstAudioMeta)
     (cast(GstAudioMeta*)this._cPtr).samples = propval;
   }
 
+  /**
+  Get `offsets` field.
+  Returns: the offsets (in bytes) where each channel plane starts in the buffer, one for each channel of the
+  audio info, or null if the buffer has interleaved layout
+  */
+  @property size_t[] offsets() nothrow
+  {
+    auto meta = cast(GstAudioMeta*)this._cPtr;
+
+    if (!meta.offsets || meta.info.channels <= 0)
+      return null;
+
+    return meta.offsets[0 .. meta.info.channels].dup;
+  }
+
   /** */
   static gst.meta_info.MetaInfo getInfo() nothrow
   {

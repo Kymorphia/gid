@@ -8,12 +8,12 @@
 // only used by the MapScope (unmapping a MapScope structure directly would unmap it twice)
 //!set record[RTPBuffer].function[map][gid-unmap] gst_rtp_buffer_unmap
 //!set record[RTPBuffer].function[map][gid-map-source] buffer
-//!set record[RTPBuffer].method[unmap][disable] 1
+//!set record[RTPBuffer].method[unmap][ignore] 1
 //!set record[RTCPBuffer].function[map].parameters.parameter[rtcp][direction] out
 //!set record[RTCPBuffer].function[map].parameters.parameter[rtcp][caller-allocates] 1
 //!set record[RTCPBuffer].function[map][gid-unmap] gst_rtcp_buffer_unmap
 //!set record[RTCPBuffer].function[map][gid-map-source] buffer
-//!set record[RTCPBuffer].method[unmap][disable] 1
+//!set record[RTCPBuffer].method[unmap][ignore] 1
 
 // Borrowed structure returns: owned by a parameter (buffer metas) or static/long-lived data (no owner)
 //!set function[buffer_get_rtp_source_meta].return-value[][gid-borrow] buffer
