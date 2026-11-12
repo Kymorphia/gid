@@ -435,6 +435,46 @@ class Menu : gtk.menu_shell.MenuShell
   }
 
   /**
+  Attaches the menu to the widget and provides a callback function that will be invoked when the menu calls
+  [gtk.menu.Menu.detach] during its destruction.
+  If the menu is attached to the widget then it will be destroyed when the widget is destroyed, as if it was a
+  child widget. An attached menu will also move between screens correctly if the widgets moves between screens.
+  Params:
+  attachWidget = the widget that the menu will be attached to
+  detacher = the user supplied callback function that will be called when the menu calls
+  [gtk.menu.Menu.detach] (kept alive by the menu), or null
+  */
+  void attachToWidget(gtk.widget.Widget attachWidget, gtk.types.MenuDetachFunc detacher = null) nothrow
+  {
+    import gobject.c.functions : g_object_get_data, g_object_set_data_full;
+    import gobject.c.types : GObject;
+
+    static extern(C) void _detacherCallback(GtkWidget* attachWidget, GtkMenu* menu) nothrow
+    {
+      auto _dlg = cast(gtk.types.MenuDetachFunc*)g_object_get_data(cast(GObject*)menu, "gid-menu-detacher");
+
+      if (!_dlg || !*_dlg)
+        return;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)attachWidget, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.MenuDetachFunc");
+      }
+    }
+
+    // The detacher has no closure data, the frozen delegate is owned by the menu object data (replaced or freed with the menu)
+    g_object_set_data_full(cast(GObject*)this._cPtr, "gid-menu-detacher", detacher ? freezeDelegate(cast(void*)&detacher) : null,
+    detacher ? cast(GDestroyNotify)&thawPtrDestroyFunc : null);
+    gtk_menu_attach_to_widget(cast(GtkMenu*)this._cPtr, attachWidget ? cast(GtkWidget*)attachWidget._cPtr(No.Dup) : null,
+    detacher ? &_detacherCallback : null);
+  }
+
+  /**
       Creates a new #GtkMenu
       Returns: a new #GtkMenu
   */

@@ -7,8 +7,8 @@
 //!kind BitsetIter Boxed
 //!kind RequestedSize StructAlias
 
-//# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set class[ListStore].method[reorder][disable] 1
+//# Hand-written below: New order array length is the number of rows in the store
+//!set class[ListStore].method[reorder][ignore] 1
 
 //# Ignore method which uses GObjectClass
 //!set interface[Editable].function[install_properties][ignore] 1
@@ -74,6 +74,33 @@
 
 //# Ignore: CustomLayout callbacks have no user_data, subclass LayoutManager in D instead
 //!set class[CustomLayout].constructor[new][ignore] 1
+
+//!class ListStore
+
+  /**
+      Reorders the store to follow the order indicated by newOrder. Note that this function only works with unsorted
+      stores.
+      Params:
+        newOrder = an array of integers mapping the new position of each child to its old position before the
+          re-ordering, i.e. `newOrder[newpos] = oldpos`. Its length must be the number of rows in the store.
+  */
+  void reorder(int[] newOrder) nothrow
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+
+    auto nRows = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)this._cPtr, null);
+
+    if (newOrder.length != nRows)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gtk.list_store.ListStore.reorder newOrder length %d does not match the number of rows %d",
+        cast(int)newOrder.length, nRows);
+      return;
+    }
+
+    if (nRows > 0)
+      gtk_list_store_reorder(cast(GtkListStore*)this._cPtr, newOrder.ptr);
+  }
 
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][ignore] 1

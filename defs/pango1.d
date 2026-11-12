@@ -55,6 +55,10 @@
 //!set record[AttrSize].field[attr][writable] 0
 //!set record[AttrString].field[attr][writable] 0
 //!set record[GlyphString].field[glyphs][writable] 0
+
+//# Set array field length from num_glyphs field (read-only, set by shaping)
+//!set record[GlyphString].field[log_clusters].type '<array length="0" zero-terminated="0" c:type="gint*"><type name="gint" c:type="gint"/></array>'
+//!set record[GlyphString].field[log_clusters][writable] 0
 //!set record[Item].field[analysis][writable] 0
 //!set record[LayoutLine].field[runs][writable] 0
 
@@ -79,9 +83,6 @@
 
 //# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[AttrShape].field[data][ignore] 1
-
-//# Disable: Array lengths determined by text length or other API, not described by parameters
-//!set record[GlyphString].field[log_clusters][disable] 1
 
 //# Hand-written below: Array lengths determined by text or other API, not described by parameters
 //!set function[log2vis_get_embedding_levels][ignore] 1

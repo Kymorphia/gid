@@ -205,6 +205,32 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   mixin TreeSortableT!();
 
   /**
+  Reorders the store to follow the order indicated by newOrder. Note that this function only works with unsorted
+  stores.
+  Params:
+  newOrder = an array of integers mapping the new position of each child to its old position before the
+  re-ordering, i.e. `newOrder[newpos] = oldpos`. Its length must be the number of rows in the store.
+  */
+  void reorder(int[] newOrder) nothrow
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+
+    auto nRows = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)this._cPtr, null);
+
+    if (newOrder.length != nRows)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gtk.list_store.ListStore.reorder newOrder length %d does not match the number of rows %d",
+      cast(int)newOrder.length, nRows);
+      return;
+    }
+
+    if (nRows > 0)
+      gtk_list_store_reorder(cast(GtkListStore*)this._cPtr, newOrder.ptr);
+  }
+
+
+  /**
       Non-vararg creation function.  Used primarily by language bindings.
   
       Params:

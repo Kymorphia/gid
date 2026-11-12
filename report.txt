@@ -18,7 +18,7 @@ gdk3                       |   57    0    0   100 |  548    0    0   100 |   39 
 gdk4                       |   66    0    0   100 |  538    4    0  99.3 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4    0    0   100 |   23    0    0   100 |
 gio2                       |  171    0    0   100 | 1669    3    0  99.8 |   79    0    0   100 |   64    4    0  94.1 |
-giounix2                   |   11    0    0   100 |  100    1    0  99.0 |    2    0    0   100 |    0    0    0   100 |
+giounix2                   |   11    0    0   100 |  100    0    0   100 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  309    0    0   100 |    0    0    0   100 |   13    0    0   100 |
 gst1                       |   94    0    0   100 | 1531    3    0  99.8 |   23    0    0   100 |  130    1    0  99.2 |
@@ -38,15 +38,15 @@ gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1 
 gstsdp1                    |   23    0    0   100 |  167    2    0  98.8 |    0    0    0   100 |   87    2    0  97.8 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   60    0    0   100 |  385    5    0  98.7 |    2    0    0   100 |  186    3    0  98.4 |
-gtk3                       |  345    0    0   100 | 3780    3    0  99.9 |  448    0    0   100 |  155    0    0   100 |
-gtk4                       |  326    0    0   100 | 3667    1    0 100.0 |  347    0    0   100 |   37    0    0   100 |
+gtk3                       |  345    0    0   100 | 3780    1    0 100.0 |  448    0    0   100 |  155    0    0   100 |
+gtk4                       |  326    0    0   100 | 3667    0    0   100 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32    0    0   100 |    0    0    0   100 |
 harfbuzz0                  |   35    0    0   100 |  457   16    0  96.6 |    0    0    0   100 |   72    1    0  98.6 |
 javascriptcore6            |   10    0    0   100 |  104    0    0   100 |    1    0    0   100 |    5    0    0   100 |
 json1                      |   12    0    0   100 |  203    0    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  310    1    0  99.7 |   17    0    0   100 |    0    0    0   100 |
-pango1                     |   43    0    0   100 |  405    0    0   100 |    0    0    0   100 |   92    1    0  98.9 |
+pango1                     |   43    0    0   100 |  405    0    0   100 |    0    0    0   100 |   93    0    0   100 |
 pangocairo1                |    4    0    0   100 |   26    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 rsvg2                      |    7    0    0   100 |   48    0    0   100 |    0    0    0   100 |   12    0    0   100 |
@@ -73,7 +73,6 @@ gdk.global.contentRegisterSerializer
 gio.dbus_connection.DBusConnection.registerSubtree
 gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
 gio.tls_client_connection.TlsClientConnection.getAcceptedCas
-giounix.desktop_app_info.DesktopAppInfo.search
 gst.buffer.Buffer.unmap
 gst.memory.Memory.makeMapped
 gst.memory.Memory.unmap
@@ -117,9 +116,6 @@ gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
 gstvideo.video_vbiparser.VideoVBIParser.addLine
 gstvideo.global.videoChromaResample
 gtk.accel_group.AccelGroup.query
-gtk.list_store.ListStore.reorder
-gtk.menu.Menu.attachToWidget
-gtk.list_store.ListStore.reorder
 harfbuzz.global.faceSetGetTableTagsFunc
 harfbuzz.global.fontFuncsSetGlyphHAdvancesFunc
 harfbuzz.global.fontFuncsSetGlyphHOriginsFunc
@@ -156,4 +152,3 @@ gstvideo.video_frame.VideoFrame.data
 gstvideo.video_meta.VideoMeta.map
 gstvideo.video_resampler.VideoResampler.taps
 harfbuzz.color_line.ColorLine.getColorStops
-pango.glyph_string.GlyphString.logClusters

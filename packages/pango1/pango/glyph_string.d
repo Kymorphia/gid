@@ -49,6 +49,19 @@ class GlyphString : gobject.boxed.BoxedWrap!(pango_glyph_string_get_type)
   }
 
   /**
+      Get `logClusters` field.
+      Returns: logical cluster info, indexed by the byte index
+          within the text corresponding to the glyph string
+  */
+  @property int[] logClusters() nothrow
+  {
+    if (!(cast(PangoGlyphString*)this._cPtr).logClusters)
+      return null;
+
+    return (cast(PangoGlyphString*)this._cPtr).logClusters[0 .. (cast(PangoGlyphString*)this._cPtr).numGlyphs].dup;
+  }
+
+  /**
   Given a glyph string and corresponding text, determine the width corresponding to each character.
   When multiple characters compose a single cluster, the width of the entire cluster is divided equally among the
   characters.
