@@ -131,14 +131,347 @@
 //# Disable: Notified callback without closure data
 //!set class[DBusConnection].method[register_subtree][disable] 1
 
-//# Disable: Message control array fields with unsupported pointer/length layout
-//!set record[InputMessage].field[address][disable] 1
-//!set record[InputMessage].field[control_messages][disable] 1
-//!set record[InputMessage].field[num_control_messages][disable] 1
+//# Hand-written below: Receive return location fields, set to temporary locations by receiveMessages (the received
+//# address and control messages are owned by the InputMessage), vectors set from D buffers
+//!set record[InputMessage].field[address][ignore] 1
+//!set record[InputMessage].field[control_messages][ignore] 1
+//!set record[InputMessage].field[num_control_messages][ignore] 1
+//!set class[Socket].method[receive_messages][ignore] 1
+//!set interface[DatagramBased].method[receive_messages][ignore] 1
 
-//# Disable: Returns a list of byte arrays (nested containers not supported)
-//!set interface[DtlsClientConnection].method[get_accepted_cas][disable] 1
-//!set interface[TlsClientConnection].method[get_accepted_cas][disable] 1
+//# Hand-written below: Returns a list of byte arrays
+//!set interface[DtlsClientConnection].method[get_accepted_cas][ignore] 1
+//!set interface[TlsClientConnection].method[get_accepted_cas][ignore] 1
+
+//!class InputMessage pre
+
+import gio.socket_address;
+import gio.socket_control_message;
+import gobject.object;
+
+//!class InputMessage
+
+  private gio.types.InputVector[] _vectorsRef; // Vectors array referenced by the C structure (references the buffers)
+  private bool _receiveAddress; // Receive the source address of the message
+  private bool _receiveControlMessages; // Receive the control messages of the message
+  private gio.socket_address.SocketAddress _address; // Source address of the last receive
+  private gio.socket_control_message.SocketControlMessage[] _controlMessages; // Control messages of the last receive
+
+  /**
+      Create an input message which receives data into buffers.
+      Params:
+        buffers = the buffers to receive the message data into (scatter input, in order), kept alive by the message
+        receiveAddress = true to receive the source address of the message (see [gio.input_message.InputMessage.address])
+        receiveControlMessages = true to receive the control messages of the message (see
+          [gio.input_message.InputMessage.controlMessages])
+  */
+  this(ubyte[][] buffers, bool receiveAddress = false, bool receiveControlMessages = false) nothrow
+  {
+    this.buffers = buffers;
+    _receiveAddress = receiveAddress;
+    _receiveControlMessages = receiveControlMessages;
+  }
+
+  /**
+      Set the buffers to receive the message data into (sets the `vectors` and `numVectors` fields).
+      Params:
+        propval = the buffers to receive the message data into (scatter input, in order), kept alive by the message
+  */
+  @property void buffers(ubyte[][] propval) nothrow
+  {
+    if (_refuseBorrowedStore("vectors"))
+      return;
+
+    _vectorsRef = new gio.types.InputVector[](propval.length);
+
+    foreach (i, buf; propval)
+    {
+      _vectorsRef[i].buffer = buf.ptr;
+      _vectorsRef[i].size = buf.length;
+    }
+
+    (cast(GInputMessage*)this._cPtr).vectors = _vectorsRef.length > 0 ? _vectorsRef.ptr : null;
+    (cast(GInputMessage*)this._cPtr).numVectors = cast(uint)_vectorsRef.length;
+  }
+
+  /**
+      Get whether the source address of the message is received.
+      Returns: true if the source address is received
+  */
+  @property bool receiveAddress() nothrow
+  {
+    return _receiveAddress;
+  }
+
+  /**
+      Set whether the source address of the message is received (see [gio.input_message.InputMessage.address]).
+      Params:
+        propval = true to receive the source address
+  */
+  @property void receiveAddress(bool propval) nothrow
+  {
+    _receiveAddress = propval;
+  }
+
+  /**
+      Get whether the control messages of the message are received.
+      Returns: true if the control messages are received
+  */
+  @property bool receiveControlMessages() nothrow
+  {
+    return _receiveControlMessages;
+  }
+
+  /**
+      Set whether the control messages of the message are received (see
+      [gio.input_message.InputMessage.controlMessages]).
+      Params:
+        propval = true to receive the control messages
+  */
+  @property void receiveControlMessages(bool propval) nothrow
+  {
+    _receiveControlMessages = propval;
+  }
+
+  /**
+      Get the source address of the message received by the last receive operation.
+      Returns: the source address or null if not received (see [gio.input_message.InputMessage.receiveAddress])
+  */
+  @property gio.socket_address.SocketAddress address() nothrow
+  {
+    return _address;
+  }
+
+  /**
+      Get the control messages received with the message by the last receive operation.
+      Returns: the control messages, empty if none were received (see
+        [gio.input_message.InputMessage.receiveControlMessages])
+  */
+  @property gio.socket_control_message.SocketControlMessage[] controlMessages() nothrow
+  {
+    return _controlMessages;
+  }
+
+  /**
+      Receive messages with a C receive function (used by [gio.socket.Socket.receiveMessages] and
+      [gio.datagram_based.DatagramBased.receiveMessages]). The C messages are temporary copies, with the address and
+      control messages return locations set as requested by the messages, which take ownership of the received
+      addresses and control messages afterwards.
+      Params:
+        messages = the messages
+        context = API name for critical messages
+        receive = delegate which calls the C receive function with the C messages and their count
+      Returns: the receive function result, -1 if a message is null
+  */
+  package static int _receiveMessages(gio.input_message.InputMessage[] messages, string context,
+    scope int delegate(GInputMessage* cMessages, uint numMessages) nothrow receive) nothrow
+  {
+    import glib.c.functions : g_free, g_log;
+    import glib.c.types : GLogLevelFlags;
+
+    foreach (i, msg; messages)
+    {
+      if (!msg)
+      {
+        g_log("Gid", GLogLevelFlags.LevelCritical, "%.*s messages[%d] is null", cast(int)context.length, context.ptr,
+          cast(int)i);
+        return -1;
+      }
+    }
+
+    auto cMessages = new GInputMessage[](messages.length);
+    auto addresses = new GSocketAddress*[](messages.length);
+    auto controlArrays = new GSocketControlMessage**[](messages.length);
+    auto numControls = new uint[](messages.length);
+
+    foreach (i, msg; messages)
+    {
+      cMessages[i] = *cast(GInputMessage*)msg._cPtr;
+      cMessages[i].address = msg._receiveAddress ? &addresses[i] : null;
+      cMessages[i].controlMessages = msg._receiveControlMessages ? &controlArrays[i] : null;
+      cMessages[i].numControlMessages = msg._receiveControlMessages ? &numControls[i] : null;
+    }
+
+    auto retval = receive(cMessages.length > 0 ? cMessages.ptr : null, cast(uint)cMessages.length);
+
+    foreach (i, msg; messages)
+    {
+      auto cMsg = cast(GInputMessage*)msg._cPtr;
+      cMsg.bytesReceived = cMessages[i].bytesReceived;
+      cMsg.flags = cMessages[i].flags;
+
+      msg._address = addresses[i]
+        ? gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(addresses[i], Yes.Take) : null;
+      msg._controlMessages = null;
+
+      if (controlArrays[i])
+      {
+        msg._controlMessages = new gio.socket_control_message.SocketControlMessage[](numControls[i]);
+
+        foreach (j; 0 .. numControls[i])
+          msg._controlMessages[j] = gobject.object.ObjectWrap._getDObject!(
+            gio.socket_control_message.SocketControlMessage)(controlArrays[i][j], Yes.Take);
+
+        g_free(controlArrays[i]);
+      }
+    }
+
+    return retval;
+  }
+
+//!class Socket pre
+
+import gio.input_message;
+
+//!class Socket
+
+  /**
+      Receive multiple data messages from socket in one go. This is the most complicated and fully-featured version of
+      this call. For easier use, see [gio.socket.Socket.receive], [gio.socket.Socket.receiveFrom], and
+      [gio.socket.Socket.receiveMessage].
+
+      messages must be an array of [gio.input_message.InputMessage] objects, each of which receives data into its
+      buffers (see [gio.input_message.InputMessage.buffers]) and is updated with the number of bytes received, the
+      message flags, and the source address and control messages if requested (see
+      [gio.input_message.InputMessage.receiveAddress] and [gio.input_message.InputMessage.receiveControlMessages]).
+
+      flags modify how all messages are received. The commonly available arguments for this are available in the
+      #GSocketMsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is,
+      so you can pass in system-specific flags too. These flags affect the overall receive operation. Flags affecting
+      individual messages are returned in [gio.input_message.InputMessage.flags].
+
+      If the socket is blocking then the call will block until one or more messages are received (or an error or
+      cancellation occurs), otherwise [gio.types.IOErrorEnum.WouldBlock] is thrown if no messages are available.
+
+      Params:
+        messages = an array of input messages
+        flags = an int containing #GSocketMsgFlags flags for the overall operation, which may additionally contain
+          [MSG_WAITFORONE](https://man7.org/linux/man-pages/man2/recvmmsg.2.html) to request blocking only until the
+          first message is received
+        cancellable = a [gio.cancellable.Cancellable] or null
+      Returns: number of messages received, which may be less than the number of messages
+      Throws: [ErrorWrap]
+  */
+  int receiveMessages(gio.input_message.InputMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
+  {
+    GError* _err;
+    auto _retval = gio.input_message.InputMessage._receiveMessages(messages, "gio.socket.Socket.receiveMessages",
+      (GInputMessage* cMessages, uint numMessages) => g_socket_receive_messages(cast(GSocket*)this._cPtr, cMessages,
+        numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err));
+
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+
+    return _retval;
+  }
+
+//!class DatagramBased pre
+
+// Public import for the interface mixin template (resolved where it is mixed in), receiveMessages is hand-written
+public import gio.input_message;
+import gobject.object;
+
+//!class DatagramBased
+
+  /**
+      Receive one or more data messages from datagram_based in one go.
+
+      messages must be an array of [gio.input_message.InputMessage] objects, each of which receives data into its
+      buffers (see [gio.input_message.InputMessage.buffers]) and is updated with the number of bytes received, the
+      message flags, and the source address and control messages if requested (see
+      [gio.input_message.InputMessage.receiveAddress] and [gio.input_message.InputMessage.receiveControlMessages]).
+
+      flags modify how all messages are received. The commonly available arguments for this are available in the
+      #GSocketMsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is,
+      so you can pass in system-specific flags too. These flags affect the overall receive operation. Flags affecting
+      individual messages are returned in [gio.input_message.InputMessage.flags].
+
+      If timeout is negative the call will block until at least one message is received, cancellable is cancelled, or
+      an error occurs. If timeout is 0 the call will return up to the number of messages without blocking, or
+      [gio.types.IOErrorEnum.WouldBlock] if no messages are queued. If timeout is positive the call will block on the
+      same conditions as if timeout were negative, or until the timeout elapses ([gio.types.IOErrorEnum.TimedOut]).
+
+      Params:
+        messages = an array of input messages
+        flags = an int containing #GSocketMsgFlags flags for the overall operation
+        timeout = the maximum time (in microseconds) to wait, 0 to not block, or -1 to block indefinitely
+        cancellable = a [gio.cancellable.Cancellable] or null
+      Returns: number of messages received, which may be less than the number of messages if timeout is zero or
+        positive, if the peer closed the connection, or if the number of messages was larger than `UIO_MAXIOV` (1024)
+      Throws: [ErrorWrap]
+  */
+  int receiveMessages()(gio.input_message.InputMessage[] messages, int flags, long timeout,
+    gio.cancellable.Cancellable cancellable = null)
+  {
+    GError* _err;
+    auto _retval = gio.input_message.InputMessage._receiveMessages(messages,
+      "gio.datagram_based.DatagramBased.receiveMessages", (GInputMessage* cMessages, uint numMessages) =>
+      g_datagram_based_receive_messages(cast(GDatagramBased*)(cast(gobject.object.ObjectWrap)this)._cPtr, cMessages,
+        numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err));
+
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+
+    return _retval;
+  }
+
+//!class TlsClientConnection
+
+  /**
+      Gets the list of distinguished names of the Certificate Authorities that the server will accept certificates
+      from. This will be set during the TLS handshake if the server requests a certificate. Otherwise, it will be
+      empty.
+      Returns: the DER encoded distinguished names, one for each accepted CA
+  */
+  ubyte[][] getAcceptedCas()() nothrow
+  {
+    import glib.c.functions : g_byte_array_unref, g_list_free;
+    import glib.c.types : GByteArray, GList;
+
+    auto _list = g_tls_client_connection_get_accepted_cas(cast(GTlsClientConnection*)(cast(gobject.object.ObjectWrap)this)._cPtr);
+    ubyte[][] _retval;
+
+    for (auto n = _list; n; n = n.next) // List and GByteArray items owned by the caller (transfer full)
+    {
+      auto ba = cast(GByteArray*)n.data;
+      _retval ~= ba && ba.len > 0 ? ba.data[0 .. ba.len].dup : null;
+
+      if (ba)
+        g_byte_array_unref(ba);
+    }
+
+    g_list_free(_list);
+    return _retval;
+  }
+
+//!class DtlsClientConnection
+
+  /**
+      Gets the list of distinguished names of the Certificate Authorities that the server will accept certificates
+      from. This will be set during the DTLS handshake if the server requests a certificate. Otherwise, it will be
+      empty.
+      Returns: the DER encoded distinguished names, one for each accepted CA
+  */
+  ubyte[][] getAcceptedCas()() nothrow
+  {
+    import glib.c.functions : g_byte_array_unref, g_list_free;
+    import glib.c.types : GByteArray, GList;
+
+    auto _list = g_dtls_client_connection_get_accepted_cas(cast(GDtlsClientConnection*)(cast(gobject.object.ObjectWrap)this)._cPtr);
+    ubyte[][] _retval;
+
+    for (auto n = _list; n; n = n.next) // List and GByteArray items owned by the caller (transfer full)
+    {
+      auto ba = cast(GByteArray*)n.data;
+      _retval ~= ba && ba.len > 0 ? ba.data[0 .. ba.len].dup : null;
+
+      if (ba)
+        g_byte_array_unref(ba);
+    }
+
+    g_list_free(_list);
+    return _retval;
+  }
 
 //!class ListModel
 

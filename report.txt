@@ -17,14 +17,14 @@ gobject2                   |   56    0    0   100 |  265    0    0   100 |    3 
 gdk3                       |   57    0    0   100 |  548    0    0   100 |   39    0    0   100 |  264    3    0  98.9 |
 gdk4                       |   66    0    0   100 |  538    4    0  99.3 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  171    0    0   100 | 1669    3    0  99.8 |   79    0    0   100 |   64    4    0  94.1 |
+gio2                       |  171    0    0   100 | 1667    1    0  99.9 |   79    0    0   100 |   64    1    0  98.5 |
 giounix2                   |   11    0    0   100 |  100    0    0   100 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  309    0    0   100 |    0    0    0   100 |   13    0    0   100 |
 gst1                       |   94    0    0   100 | 1531    0    0   100 |   23    0    0   100 |  130    1    0  99.2 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
-gstaudio1                  |   33    0    0   100 |  215    4    0  98.2 |    0    0    0   100 |   61    1    0  98.4 |
+gstaudio1                  |   33    0    0   100 |  215    3    0  98.6 |    0    0    0   100 |   61    0    0   100 |
 gstbase1                   |   23    0    0   100 |  308    0    0   100 |    2    0    0   100 |   30    0    0   100 |
 gstcheck1                  |    8    0    0   100 |  109    2    0  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   17    0    0   100 |    3    0    0   100 |    2    0    0   100 |
@@ -32,12 +32,12 @@ gstgl1                     |   38    0    0   100 |  281    0    0   100 |    5 
 gstglegl1                  |    7    0    0   100 |   16    6    0  72.7 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstnet1                    |    9    0    0   100 |   25    0    0   100 |    0    0    0   100 |    6    0    0   100 |
-gstpbutils1                |   16    0    0   100 |  182    2    0  98.9 |    5    0    0   100 |    0    0    0   100 |
-gstrtp1                    |   11    0    0   100 |  195    1    0  99.5 |    6    0    0   100 |   17    0    0   100 |
+gstpbutils1                |   16    0    0   100 |  182    0    0   100 |    5    0    0   100 |    0    0    0   100 |
+gstrtp1                    |   11    0    0   100 |  195    0    0   100 |    6    0    0   100 |   17    0    0   100 |
 gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1    0    0   100 |   51    0    0   100 |
 gstsdp1                    |   23    0    0   100 |  167    2    0  98.8 |    0    0    0   100 |   87    2    0  97.8 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   60    0    0   100 |  385    4    0  99.0 |    2    0    0   100 |  186    2    0  98.9 |
+gstvideo1                  |   60    0    0   100 |  385    4    0  99.0 |    2    0    0   100 |  186    1    0  99.5 |
 gtk3                       |  345    0    0   100 | 3780    1    0 100.0 |  448    0    0   100 |  155    0    0   100 |
 gtk4                       |  326    0    0   100 | 3667    0    0   100 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
@@ -45,7 +45,7 @@ gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32 
 harfbuzz0                  |   35    0    0   100 |  457   16    0  96.6 |    0    0    0   100 |   72    1    0  98.6 |
 javascriptcore6            |   10    0    0   100 |  104    0    0   100 |    1    0    0   100 |    5    0    0   100 |
 json1                      |   12    0    0   100 |  203    0    0   100 |    9    0    0   100 |    0    0    0   100 |
-panel1                     |   33    0    0   100 |  310    1    0  99.7 |   17    0    0   100 |    0    0    0   100 |
+panel1                     |   33    0    0   100 |  309    0    0   100 |   17    0    0   100 |    0    0    0   100 |
 pango1                     |   43    0    0   100 |  405    0    0   100 |    0    0    0   100 |   93    0    0   100 |
 pangocairo1                |    4    0    0   100 |   26    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -71,10 +71,7 @@ gdk.texture_downloader.TextureDownloader.downloadInto
 gdk.global.contentRegisterDeserializer
 gdk.global.contentRegisterSerializer
 gio.dbus_connection.DBusConnection.registerSubtree
-gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas
-gio.tls_client_connection.TlsClientConnection.getAcceptedCas
 gstaudio.audio_resampler.AudioResampler.resample
-gstaudio.audio_ring_buffer.AudioRingBuffer.setChannelPositions
 gstaudio.global.bufferAddDsdPlaneOffsetMeta
 gstaudio.global.dsdConvert
 gstcheck.harness.Harness.addSinkHarness
@@ -85,9 +82,6 @@ gstglegl.eglimage.EGLImage.fromDmabufDirect
 gstglegl.eglimage.EGLImage.fromDmabufDirectTarget
 gstglegl.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
 gstglegl.eglimage.EGLImage.fromTexture
-gstpbutils.global.codecUtilsOpusCreateCaps
-gstpbutils.global.codecUtilsOpusCreateHeader
-gstrtp.global.bufferAddRtpSourceMeta
 gstsdp.mikeymessage.MIKEYMessage.addT
 gstsdp.mikeypayload.MIKEYPayload.tSet
 gstvideo.video_scaler.VideoScaler.vertical
@@ -111,20 +105,14 @@ harfbuzz.global.fontGetNominalGlyphs
 harfbuzz.global.otShapePlanGetFeatureTags
 harfbuzz.global.tagToString
 harfbuzz.global.unicodeFuncsSetDecomposeCompatibilityFunc
-panel.settings.Settings.bindWithMapping
 
 [Disabled Fields]
 gdk.event_button.EventButton.axes
 gdk.event_motion.EventMotion.axes
 gdk.event_touch.EventTouch.axes
 gio.types.DBusSubtreeVTable.dispatch
-gio.input_message.InputMessage.address
-gio.input_message.InputMessage.controlMessages
-gio.input_message.InputMessage.numControlMessages
 gst.meta_info.MetaInfo.deserializeFunc
-gstaudio.audio_downmix_meta.AudioDownmixMeta.matrix
 gstsdp.mikeypayload_key_data.MIKEYPayloadKeyData.kvData
 gstsdp.mikeypayload_t.MIKEYPayloadT.tsValue
-gstvideo.video_meta.VideoMeta.map
 gstvideo.video_resampler.VideoResampler.taps
 harfbuzz.color_line.ColorLine.getColorStops

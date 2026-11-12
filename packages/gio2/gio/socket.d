@@ -12,7 +12,6 @@ import gio.datagram_based_mixin;
 import gio.inet_address;
 import gio.initable;
 import gio.initable_mixin;
-import gio.input_message;
 import gio.output_message;
 import gio.socket_address;
 import gio.socket_connection;
@@ -23,6 +22,9 @@ import glib.error;
 import glib.types;
 import gobject.gid_builder;
 import gobject.object;
+
+
+import gio.input_message;
 
 /**
     A [gio.socket.Socket] is a low-level networking primitive. It is a more or less
@@ -341,6 +343,47 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
 
   mixin DatagramBasedT!();
   mixin InitableT!();
+
+  /**
+  Receive multiple data messages from socket in one go. This is the most complicated and fully-featured version of
+  this call. For easier use, see [gio.socket.Socket.receive], [gio.socket.Socket.receiveFrom], and
+  [gio.socket.Socket.receiveMessage].
+  
+  messages must be an array of [gio.input_message.InputMessage] objects, each of which receives data into its
+  buffers (see [gio.input_message.InputMessage.buffers]) and is updated with the number of bytes received, the
+  message flags, and the source address and control messages if requested (see
+  [gio.input_message.InputMessage.receiveAddress] and [gio.input_message.InputMessage.receiveControlMessages]).
+  
+  flags modify how all messages are received. The commonly available arguments for this are available in the
+  #GSocketMsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is,
+  so you can pass in system-specific flags too. These flags affect the overall receive operation. Flags affecting
+  individual messages are returned in [gio.input_message.InputMessage.flags].
+  
+  If the socket is blocking then the call will block until one or more messages are received (or an error or
+  cancellation occurs), otherwise [gio.types.IOErrorEnum.WouldBlock] is thrown if no messages are available.
+  
+  Params:
+  messages = an array of input messages
+  flags = an int containing #GSocketMsgFlags flags for the overall operation, which may additionally contain
+  [MSG_WAITFORONE](https://man7.org/linux/man-pages/man2/recvmmsg.2.html) to request blocking only until the
+  first message is received
+  cancellable = a [gio.cancellable.Cancellable] or null
+  Returns: number of messages received, which may be less than the number of messages
+  Throws: [ErrorWrap]
+  */
+  int receiveMessages(gio.input_message.InputMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
+  {
+    GError* _err;
+    auto _retval = gio.input_message.InputMessage._receiveMessages(messages, "gio.socket.Socket.receiveMessages",
+    (GInputMessage* cMessages, uint numMessages) => g_socket_receive_messages(cast(GSocket*)this._cPtr, cMessages,
+    numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err));
+
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+
+    return _retval;
+  }
+
 
   /**
       Creates a new #GSocket with the defined family, type and protocol.
@@ -1375,87 +1418,6 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     foreach (i; 0 .. _numMessages)
       messages[i] = gobject.object.ObjectWrap._getDObject!(gio.socket_control_message.SocketControlMessage)(_messages[i], Yes.Take);
     gFree(cast(void*)_messages);
-    return _retval;
-  }
-
-  /**
-      Receive multiple data messages from socket in one go.  This is the most
-      complicated and fully-featured version of this call. For easier use, see
-      [gio.socket.Socket.receive], [gio.socket.Socket.receiveFrom], and [gio.socket.Socket.receiveMessage].
-      
-      messages must point to an array of #GInputMessage structs and
-      num_messages must be the length of this array. Each #GInputMessage
-      contains a pointer to an array of #GInputVector structs describing the
-      buffers that the data received in each message will be written to. Using
-      multiple #GInputVectors is more memory-efficient than manually copying data
-      out of a single buffer to multiple sources, and more system-call-efficient
-      than making multiple calls to [gio.socket.Socket.receive], such as in scenarios where
-      a lot of data packets need to be received (e.g. high-bandwidth video
-      streaming over RTP/UDP).
-      
-      flags modify how all messages are received. The commonly available
-      arguments for this are available in the #GSocketMsgFlags enum, but the
-      values there are the same as the system values, and the flags
-      are passed in as-is, so you can pass in system-specific flags too. These
-      flags affect the overall receive operation. Flags affecting individual
-      messages are returned in #GInputMessage.flags.
-      
-      The other members of #GInputMessage are treated as described in its
-      documentation.
-      
-      If #GSocket:blocking is true the call will block until num_messages have
-      been received, or the end of the stream is reached.
-      
-      If #GSocket:blocking is false the call will return up to num_messages
-      without blocking, or [gio.types.IOErrorEnum.WouldBlock] if no messages are queued in the
-      operating system to be received.
-      
-      In blocking mode, if #GSocket:timeout is positive and is reached before any
-      messages are received, [gio.types.IOErrorEnum.TimedOut] is returned, otherwise up to
-      num_messages are returned. (Note: This is effectively the
-      behaviour of `MSG_WAITFORONE` with recvmmsg().)
-      
-      To be notified when messages are available, wait for the
-      [glib.types.IOCondition.In] condition. Note though that you may still receive
-      [gio.types.IOErrorEnum.WouldBlock] from [gio.socket.Socket.receiveMessages] even if you were
-      previously notified of a [glib.types.IOCondition.In] condition.
-      
-      If the remote peer closes the connection, any messages queued in the
-      operating system will be returned, and subsequent calls to
-      [gio.socket.Socket.receiveMessages] will return 0 (with no error set).
-      
-      On error -1 is returned and error is set accordingly. An error will only
-      be returned if zero messages could be received; otherwise the number of
-      messages successfully received before the error will be returned.
-  
-      Params:
-        messages = an array of #GInputMessage structs
-        flags = an int containing #GSocketMsgFlags flags for the overall operation,
-             which may additionally contain
-             [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html)
-        cancellable = a [gio.cancellable.Cancellable] or null
-      Returns: number of messages received, or -1 on error. Note that the number
-            of messages received may be smaller than num_messages if in non-blocking
-            mode, if the peer closed the connection, or if num_messages
-            was larger than `UIO_MAXIOV` (1024), in which case the caller may re-try
-            to receive the remaining messages.
-      Throws: [ErrorWrap]
-  */
-  int receiveMessages(gio.input_message.InputMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
-  {
-    int _retval;
-    uint _numMessages;
-    if (messages)
-      _numMessages = cast(uint)messages.length;
-
-    auto _messages_arr = new GInputMessage[](messages.length);
-    auto _messages = _messages_arr.ptr;
-    foreach (i, obj; messages) _messages[i] = *cast(GInputMessage*)obj._cPtr;
-    GError *_err;
-    _retval = g_socket_receive_messages(cast(GSocket*)this._cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
-    if (_err)
-      throw new ErrorWrap(_err, Yes.Take);
-    foreach (i, obj; messages) *cast(GInputMessage*)obj._cPtr = _messages[i];
     return _retval;
   }
 

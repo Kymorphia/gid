@@ -21,18 +21,21 @@
 //!set callback[AudioFormatUnpack][disable] 1
 
 //# Unsupported callables with arrays whose sizes cannot be described by function arguments (FIXME)
-//!set class[AudioRingBuffer].method[set_channel_positions][disable] 1
 //!set record[AudioChannelMixer].method[samples][disable] 1
 //!set record[AudioConverter].method[samples][disable] 1
 //!set record[AudioQuantize].method[samples][disable] 1
 //!set record[AudioResampler].method[resample][disable] 1
-//!set function[buffer_add_audio_downmix_meta][disable] 1
 //!set function[buffer_add_dsd_plane_offset_meta][disable] 1
 //!set function[dsd_convert][disable] 1
 
 //# Hand-written below: Offsets arrays with a length from the audio info channels
 //!set function[buffer_add_audio_meta][ignore] 1
 //!set record[AudioMeta].field[offsets][ignore] 1
+
+//# Hand-written below: Arrays with a length from the ring buffer channels, downmix matrix of channel arrays
+//!set class[AudioRingBuffer].method[set_channel_positions][ignore] 1
+//!set function[buffer_add_audio_downmix_meta][ignore] 1
+//!set record[AudioDownmixMeta].field[matrix][ignore] 1
 
 //# Set basic parameters to out
 //!set callback[AudioBaseSinkCustomSlavingCallback].parameters.parameter[requested_skew][direction] out
@@ -61,9 +64,6 @@
 
 //# Ignore: Property type Gst.Fraction is a fundamental GValue type, replaced by gst.types.Fraction properties below
 //!set class[AudioAggregator].property[output-buffer-duration-fraction][ignore] 1
-
-//# Disable: Array fields with lengths from other structures (channel counts)
-//!set record[AudioDownmixMeta].field[matrix][disable] 1
 
 //# Set array field lengths from their length fields (read-only, set when mapping the buffer or adding the meta)
 //!set record[AudioBuffer].field[planes].type '<array length="2" zero-terminated="0" c:type="gpointer*"><type name="gpointer" c:type="gpointer"/></array>'
@@ -110,6 +110,7 @@ import gst.types;
   }
 //!class global pre
 
+import gstaudio.audio_downmix_meta;
 import gstaudio.audio_info;
 import gstaudio.audio_meta;
 
@@ -144,6 +145,99 @@ gstaudio.audio_meta.AudioMeta bufferAddAudioMeta(gst.buffer.Buffer buffer, gstau
     info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, samples, offsets.length > 0 ? offsets.ptr : null);
   return _cretval ? new gstaudio.audio_meta.AudioMeta(cast(GstAudioMeta*)_cretval, buffer) : null;
 }
+
+/**
+    Append a new #GstAudioDownmixMeta to buffer.
+    matrix is a two-dimensional array of toPosition.length times fromPosition.length coefficients, i.e. the i-th
+    output channel is constructed by multiplying the input channels with the coefficients in matrix[i] and taking the
+    sum of the results.
+    Params:
+      buffer = a #GstBuffer
+      fromPosition = the channel positions of the source
+      toPosition = the channel positions of the destination
+      matrix = the matrix coefficients, one row for each destination channel with one coefficient for each source
+        channel (copied)
+    Returns: the #GstAudioDownmixMeta on buffer (borrowed from it) or null on error
+*/
+gstaudio.audio_downmix_meta.AudioDownmixMeta bufferAddAudioDownmixMeta(gst.buffer.Buffer buffer,
+  gstaudio.types.AudioChannelPosition[] fromPosition, gstaudio.types.AudioChannelPosition[] toPosition,
+  float[][] matrix) nothrow
+{
+  import glib.c.functions : g_log;
+  import glib.c.types : GLogLevelFlags;
+
+  if (matrix.length != toPosition.length)
+  {
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.bufferAddAudioDownmixMeta matrix length %d does not match the number of destination channels %d",
+      cast(int)matrix.length, cast(int)toPosition.length);
+    return null;
+  }
+
+  auto _matrix = new const(float)*[](matrix.length); // Row pointers, the matrix is copied by the meta
+
+  foreach (i, row; matrix)
+  {
+    if (row.length != fromPosition.length)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.bufferAddAudioDownmixMeta matrix[%d] length %d does not match the number of source channels %d",
+        cast(int)i, cast(int)row.length, cast(int)fromPosition.length);
+      return null;
+    }
+
+    _matrix[i] = row.ptr;
+  }
+
+  auto _cretval = gst_buffer_add_audio_downmix_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null,
+    fromPosition.ptr, cast(int)fromPosition.length, toPosition.ptr, cast(int)toPosition.length, _matrix.ptr);
+  return _cretval ? new gstaudio.audio_downmix_meta.AudioDownmixMeta(cast(GstAudioDownmixMeta*)_cretval, buffer) : null;
+}
+
+//!class AudioDownmixMeta
+
+  /**
+      Get `matrix` field.
+      Returns: the matrix coefficients (copied), one row for each destination channel with one coefficient for each
+        source channel
+  */
+  @property float[][] matrix() nothrow
+  {
+    auto meta = cast(GstAudioDownmixMeta*)this._cPtr;
+
+    if (!meta.matrix || meta.toChannels <= 0 || meta.fromChannels <= 0)
+      return null;
+
+    auto _retval = new float[][](meta.toChannels);
+
+    foreach (i, ref row; _retval)
+      row = meta.matrix[i] ? meta.matrix[i][0 .. meta.fromChannels].dup : new float[](meta.fromChannels);
+
+    return _retval;
+  }
+
+//!class AudioRingBuffer
+
+  /**
+      Tell the ringbuffer that it is about to receive samples with the given channel positions.
+      Params:
+        position = the device channel positions, its length must be the number of channels of the acquired ring
+          buffer spec
+  */
+  void setChannelPositions(gstaudio.types.AudioChannelPosition[] position) nothrow
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+
+    auto channels = (cast(GstAudioRingBuffer*)this._cPtr).spec.info.channels;
+
+    if (position.length != channels)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.audio_ring_buffer.AudioRingBuffer.setChannelPositions position length %d does not match the number of channels %d",
+        cast(int)position.length, channels);
+      return;
+    }
+
+    gst_audio_ring_buffer_set_channel_positions(cast(GstAudioRingBuffer*)this._cPtr, position.ptr);
+  }
 
 //!class AudioMeta
 

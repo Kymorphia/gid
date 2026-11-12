@@ -73,6 +73,27 @@ class AudioDownmixMeta : StructWrap!(GstAudioDownmixMeta)
     return (cast(GstAudioDownmixMeta*)this._cPtr).toPosition[0 .. (cast(GstAudioDownmixMeta*)this._cPtr).toChannels].dup;
   }
 
+  /**
+  Get `matrix` field.
+  Returns: the matrix coefficients (copied), one row for each destination channel with one coefficient for each
+  source channel
+  */
+  @property float[][] matrix() nothrow
+  {
+    auto meta = cast(GstAudioDownmixMeta*)this._cPtr;
+
+    if (!meta.matrix || meta.toChannels <= 0 || meta.fromChannels <= 0)
+      return null;
+
+    auto _retval = new float[][](meta.toChannels);
+
+    foreach (i, ref row; _retval)
+      row = meta.matrix[i] ? meta.matrix[i][0 .. meta.fromChannels].dup : new float[](meta.fromChannels);
+
+    return _retval;
+  }
+
+
   /** */
   static gst.meta_info.MetaInfo getInfo() nothrow
   {

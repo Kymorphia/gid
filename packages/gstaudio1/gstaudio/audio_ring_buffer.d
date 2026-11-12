@@ -61,6 +61,30 @@ class AudioRingBuffer : gst.object.ObjectWrap
   }
 
   /**
+  Tell the ringbuffer that it is about to receive samples with the given channel positions.
+  Params:
+  position = the device channel positions, its length must be the number of channels of the acquired ring
+  buffer spec
+  */
+  void setChannelPositions(gstaudio.types.AudioChannelPosition[] position) nothrow
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+
+    auto channels = (cast(GstAudioRingBuffer*)this._cPtr).spec.info.channels;
+
+    if (position.length != channels)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.audio_ring_buffer.AudioRingBuffer.setChannelPositions position length %d does not match the number of channels %d",
+      cast(int)position.length, channels);
+      return;
+    }
+
+    gst_audio_ring_buffer_set_channel_positions(cast(GstAudioRingBuffer*)this._cPtr, position.ptr);
+  }
+
+
+  /**
       Print debug info about the buffer sized in spec to the debug log.
   
       Params:

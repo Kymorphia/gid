@@ -143,6 +143,34 @@ template TlsClientConnectionT()
     setValidationFlags(propval);
   }
 
+  /**
+  Gets the list of distinguished names of the Certificate Authorities that the server will accept certificates
+  from. This will be set during the TLS handshake if the server requests a certificate. Otherwise, it will be
+  empty.
+  Returns: the DER encoded distinguished names, one for each accepted CA
+  */
+  ubyte[][] getAcceptedCas()() nothrow
+  {
+    import glib.c.functions : g_byte_array_unref, g_list_free;
+    import glib.c.types : GByteArray, GList;
+
+    auto _list = g_tls_client_connection_get_accepted_cas(cast(GTlsClientConnection*)(cast(gobject.object.ObjectWrap)this)._cPtr);
+    ubyte[][] _retval;
+
+    for (auto n = _list; n; n = n.next) // List and GByteArray items owned by the caller (transfer full)
+    {
+      auto ba = cast(GByteArray*)n.data;
+      _retval ~= ba && ba.len > 0 ? ba.data[0 .. ba.len].dup : null;
+
+      if (ba)
+        g_byte_array_unref(ba);
+    }
+
+    g_list_free(_list);
+    return _retval;
+  }
+
+
 
   /**
       Possibly copies session state from one connection to another, for use

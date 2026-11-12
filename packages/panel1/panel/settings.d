@@ -95,6 +95,34 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
 
   mixin ActionGroupT!();
 
+  /**
+  Like [panel.settings.Settings.bind] but allows transforming to and from settings storage using getMapping and
+  setMapping.
+  Call [panel.settings.Settings.unbind] to unbind the mapping.
+  Params:
+  key = the settings key
+  object = the object to bind to
+  property = the property of object to bind to
+  flags = flags for the binding
+  getMapping = the get mapping delegate (variant to value), it should set the value and return true on success,
+  or null to use the default conversion
+  setMapping = the set mapping delegate (value to variant), it should return a new variant or null on failure,
+  or null to use the default conversion
+  */
+  void bindWithMapping(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags,
+  gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null) nothrow
+  {
+    import panel.layered_settings : LayeredSettings;
+
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
+    auto _data = LayeredSettings._mappingData(getMapping, setMapping);
+    panel_settings_bind_with_mapping(cast(PanelSettings*)this._cPtr, _key,
+    object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, flags,
+    getMapping ? &LayeredSettings._getMappingCallback : null,
+    setMapping ? &LayeredSettings._setMappingCallback : null, _data, _data ? &thawPtrDestroyFunc : null);
+  }
+
   /** */
   this(string identifier, string schemaId) nothrow
   {
@@ -146,11 +174,11 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  void bind(string key, void* object, string property, gio.types.SettingsBindFlags flags) nothrow
+  void bind(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags) nothrow
   {
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
-    panel_settings_bind(cast(PanelSettings*)this._cPtr, _key, object, _property, flags);
+    panel_settings_bind(cast(PanelSettings*)this._cPtr, _key, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, flags);
   }
 
   /** */

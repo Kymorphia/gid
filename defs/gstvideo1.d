@@ -38,6 +38,10 @@
 //# Ignore: deprecated and replaced by gst_video_meta_set_alignment_full
 //!set record[VideoMeta].method[set_alignment][ignore] 1
 
+//# Ignore: Plane map virtual function pointer for meta implementers, use the VideoMeta.map and VideoMeta.unmap
+//# methods which call it
+//!set record[VideoMeta].field[map][ignore] 1
+
 //# Ignore: deprecated and replaced by gst_video_center_rect
 //!set class[VideoSink].function[center_rect][ignore] 1
 
@@ -46,7 +50,6 @@
 //!set callback[VideoAffineTransformationGetMatrix][disable] 1
 //!set callback[VideoFormatPack][disable] 1
 //!set callback[VideoFormatUnpack][disable] 1
-//!set record[VideoMeta].field[map][disable] 1
 //!set record[VideoScaler].method[vertical][disable] 1
 //!set record[VideoVBIEncoder].method[write_line][disable] 1
 //!set function[video_chroma_resample][disable] 1

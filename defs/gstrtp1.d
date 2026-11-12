@@ -20,8 +20,8 @@
 //!set record[RTPPayloadInfo].function[for_name].return-value[][gid-borrow] static
 //!set record[RTPPayloadInfo].function[for_pt].return-value[][gid-borrow] static
 
-//# ssrc parameter appears to be an input uint pointer for some unknown reason, mark it unsupported
-//!set function[buffer_add_rtp_source_meta][disable] 1
+//# Hand-written below: Optional ssrc input value pointer
+//!set function[buffer_add_rtp_source_meta][ignore] 1
 
 //# Set basic parameters to out
 //!set record[RTCPPacket].method[sdes_copy_entry].parameters.parameter[type][direction] out
@@ -92,6 +92,44 @@
 //!set class[RTPBasePayload].property[extensions][ignore] 1
 
 //# Add read-only extensions properties, using the gst.types.ValueArray D value type (values are gstrtp.rtpheader_extension.RTPHeaderExtension objects)
+//!class global pre
+
+import gstrtp.rtpsource_meta;
+
+/**
+    Attaches RTP source information to buffer.
+    Params:
+      buffer = a #GstBuffer
+      csrc = the CSRCs (at most GST_RTP_SOURCE_META_MAX_CSRC_COUNT)
+    Returns: the #GstRTPSourceMeta on buffer (borrowed from it) or null on error
+*/
+gstrtp.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gst.buffer.Buffer buffer, uint[] csrc = null) nothrow
+{
+  return _bufferAddRtpSourceMeta(buffer, null, csrc);
+}
+
+/**
+    Attaches RTP source information to buffer.
+    Params:
+      buffer = a #GstBuffer
+      ssrc = the SSRC
+      csrc = the CSRCs (at most GST_RTP_SOURCE_META_MAX_CSRC_COUNT)
+    Returns: the #GstRTPSourceMeta on buffer (borrowed from it) or null on error
+*/
+gstrtp.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gst.buffer.Buffer buffer, uint ssrc, uint[] csrc = null) nothrow
+{
+  return _bufferAddRtpSourceMeta(buffer, &ssrc, csrc);
+}
+
+private gstrtp.rtpsource_meta.RTPSourceMeta _bufferAddRtpSourceMeta(gst.buffer.Buffer buffer, const(uint)* ssrc,
+  uint[] csrc) nothrow
+{
+  auto _csrcCount = csrc.length <= uint.max ? cast(uint)csrc.length : uint.max; // Count validated by the C function
+  auto _cretval = gst_buffer_add_rtp_source_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, ssrc,
+    _csrcCount > 0 ? csrc.ptr : null, _csrcCount);
+  return _cretval ? new gstrtp.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval, buffer) : null;
+}
+
 //!class RTPBaseDepayload
 
   /**

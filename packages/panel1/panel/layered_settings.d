@@ -7,14 +7,16 @@ import gio.settings;
 import gio.settings_schema_key;
 import gio.types;
 import glib.variant;
-import glib.variant_type;
 import gobject.dclosure;
 import gobject.gid_builder;
 import gobject.object;
-import gobject.value;
 import panel.c.functions;
 import panel.c.types;
 import panel.types;
+
+
+import glib.variant_type;
+import gobject.value;
 
 /** */
 class LayeredSettings : gobject.object.ObjectWrap
@@ -66,6 +68,97 @@ class LayeredSettings : gobject.object.ObjectWrap
     return gobject.object.ObjectWrap.getProperty!(string)("schema-id");
   }
 
+  /**
+  Creates a new binding similar to [gio.settings.Settings.bind] but applying from the resolved value via the layered
+  settings and allowing transforming to and from settings storage using getMapping and setMapping.
+  Params:
+  key = the settings key to bind
+  object = the target object
+  property = the property on object to apply
+  flags = flags for the binding
+  getMapping = the get mapping delegate (variant to value), it should set the value and return true on success,
+  or null to use the default conversion
+  setMapping = the set mapping delegate (value to variant), it should return a new variant or null on failure,
+  or null to use the default conversion
+  */
+  void bindWithMapping(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags,
+  gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
+    auto _data = _mappingData(getMapping, setMapping);
+    panel_layered_settings_bind_with_mapping(cast(PanelLayeredSettings*)this._cPtr, _key,
+    object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, flags,
+    getMapping ? &_getMappingCallback : null, setMapping ? &_setMappingCallback : null, _data,
+    _data ? &thawPtrDestroyFunc : null);
+  }
+
+  // Both mapping delegates passed to C as one closure data, frozen until the binding is destroyed (thawPtrDestroyFunc),
+  // null if there are no mapping delegates
+  package static struct _MappingDelegates
+  {
+    gio.types.SettingsBindGetMapping getMapping;
+    gio.types.SettingsBindSetMapping setMapping;
+  }
+
+  package static void* _mappingData(gio.types.SettingsBindGetMapping getMapping,
+  gio.types.SettingsBindSetMapping setMapping) nothrow
+  {
+    if (!getMapping && !setMapping)
+      return null;
+
+    auto data = new _MappingDelegates(getMapping, setMapping);
+    ptrFreezeGC(data);
+    return data;
+  }
+
+  package static extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData) nothrow
+  {
+    import gobject.c.functions : g_value_copy;
+
+    auto _data = cast(_MappingDelegates*)userData;
+
+    bool _dretval;
+
+    try
+    {
+      auto _value = new gobject.value.Value(cast(void*)value, No.Take); // Copy of the initialized value, copied back on success
+      _dretval = _data.getMapping(_value, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+
+      if (_dretval)
+        g_value_copy(cast(GValue*)_value._cPtr, value);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindGetMapping");
+      _dretval = false;
+    }
+
+    return cast(gboolean)_dretval;
+  }
+
+  package static extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType,
+  void* userData) nothrow
+  {
+    auto _data = cast(_MappingDelegates*)userData;
+
+    glib.variant.Variant _dretval;
+
+    try
+    {
+      _dretval = _data.setMapping(value ? new gobject.value.Value(cast(void*)value, No.Take) : null,
+      expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindSetMapping");
+      _dretval = null;
+    }
+
+    return _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
+  }
+
+
   /** */
   this(string schemaId, string path) nothrow
   {
@@ -83,69 +176,11 @@ class LayeredSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  void bind(string key, void* object, string property, gio.types.SettingsBindFlags flags) nothrow
+  void bind(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags) nothrow
   {
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
-    panel_layered_settings_bind(cast(PanelLayeredSettings*)this._cPtr, _key, object, _property, flags);
-  }
-
-  /**
-      Creates a new binding similar to [gio.settings.Settings.bindWithMapping] but applying
-      from the resolved value via the layered settings.
-  
-      Params:
-        key = the settings key to bind.
-          object (type GObject.Object): the target object.
-        object = 
-        property = the property on object to apply.
-        flags = flags for the binding.
-        getMapping = the get mapping function
-        setMapping = the set mapping function
-  */
-  void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping, gio.types.SettingsBindSetMapping setMapping) nothrow
-  {
-    extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData) nothrow
-    {
-      bool _dretval;
-      auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindGetMapping");
-      }
-      auto _retval = cast(gboolean)_dretval;
-
-      return _retval;
-    }
-    auto _getMappingCB = getMapping ? &_getMappingCallback : null;
-    extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData) nothrow
-    {
-      glib.variant.Variant _dretval;
-      auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindSetMapping");
-      }
-      auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
-
-      return _retval;
-    }
-    auto _setMappingCB = setMapping ? &_setMappingCallback : null;
-    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
-    const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
-    auto _setMapping = setMapping ? freezeDelegate(cast(void*)&setMapping) : null;
-    GDestroyNotify _setMappingDestroyCB = setMapping ? &thawDelegate : null;
-    panel_layered_settings_bind_with_mapping(cast(PanelLayeredSettings*)this._cPtr, _key, object, _property, flags, _getMappingCB, _setMappingCB, _setMapping, _setMappingDestroyCB);
+    panel_layered_settings_bind(cast(PanelLayeredSettings*)this._cPtr, _key, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, flags);
   }
 
   /** */

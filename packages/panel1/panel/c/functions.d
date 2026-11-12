@@ -154,7 +154,7 @@ __gshared extern(C) nothrow
   GType function() c_panel_layered_settings_get_type; ///
   PanelLayeredSettings* function(const(char)* schemaId, const(char)* path) c_panel_layered_settings_new; ///
   void function(PanelLayeredSettings* self, GSettings* settings) c_panel_layered_settings_append; ///
-  void function(PanelLayeredSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags) c_panel_layered_settings_bind; ///
+  void function(PanelLayeredSettings* self, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags) c_panel_layered_settings_bind; ///
   void function(PanelLayeredSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) c_panel_layered_settings_bind_with_mapping; ///
   gboolean function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_boolean; ///
   GVariant* function(PanelLayeredSettings* self, const(char)* key) c_panel_layered_settings_get_default_value; ///
@@ -303,7 +303,7 @@ __gshared extern(C) nothrow
   PanelSettings* function(const(char)* identifier, const(char)* schemaId, const(char)* schemaIdPrefix, const(char)* pathPrefix, const(char)* pathSuffix) c_panel_settings_new_relocatable; ///
   PanelSettings* function(const(char)* identifier, const(char)* schemaId, const(char)* path) c_panel_settings_new_with_path; ///
   char* function(const(char)* schemaIdPrefix, const(char)* schemaId, const(char)* identifier, const(char)* pathPrefix, const(char)* pathSuffix) c_panel_settings_resolve_schema_path; ///
-  void function(PanelSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags) c_panel_settings_bind; ///
+  void function(PanelSettings* self, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags) c_panel_settings_bind; ///
   void function(PanelSettings* self, const(char)* key, void* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) c_panel_settings_bind_with_mapping; ///
   gboolean function(PanelSettings* self, const(char)* key) c_panel_settings_get_boolean; ///
   GVariant* function(PanelSettings* self, const(char)* key) c_panel_settings_get_default_value; ///
