@@ -23,7 +23,7 @@ jobs:
         run: |
           git config --global --add safe.directory /__w/gid/gid
           git config --global url."https://github.com/".insteadOf "git@github.com:"
-          git submodule update --init --remote
+          git submodule update --init
 
       - name: Install dependencies
         run: |
