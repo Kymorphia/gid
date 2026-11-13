@@ -294,7 +294,6 @@
 //!set callback[IOFunc].parameters.parameter[data][closure] 2
 //!set callback[SpawnChildSetupFunc].parameters.parameter[data][closure] 0
 //!set callback[ThreadFunc].parameters.parameter[data][closure] 0
-//!set callback[TranslateFunc].parameters.parameter[data][closure] 1
 
 //# Set proper callback scopes
 //!set record[Queue].method[clear_full].parameters.parameter[free_func][scope] call
@@ -342,10 +341,11 @@
 //# julian_days is a full width 32 bit field, not a bitfield
 //!del record[Date].field[julian_days][bits]
 
-//# Disable: Callback returns a string with transfer none (no D owner to keep it alive for C)
-//!set callback[TranslateFunc][disable] 1
-//!set record[OptionContext].method[set_translate_func][disable] 1
-//!set record[OptionGroup].method[set_translate_func][disable] 1
+//# Ignore: Translate callback returns a string with transfer none (no D owner to keep it alive for C),
+//# use OptionContext.setTranslationDomain and OptionGroup.setTranslationDomain
+//!set callback[TranslateFunc][ignore] 1
+//!set record[OptionContext].method[set_translate_func][ignore] 1
+//!set record[OptionGroup].method[set_translate_func][ignore] 1
 
 //# LogWriterFunc fields are borrowed and LogField has no copy function (_dup is shallow), keep values with valueString/valueBytes
 //!set callback[LogWriterFunc].parameters.parameter[fields].doc '<doc xml:space="preserve">fields forming the message, use [glib.log_field.LogField.valueString] or [glib.log_field.LogField.valueBytes] to keep field values</doc>'

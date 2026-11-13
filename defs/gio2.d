@@ -61,9 +61,6 @@
 //!set record[DBusSignalInfo].field[args].array[][zero-terminated] 1
 //!set record[DBusSignalInfo].field[annotations].array[][zero-terminated] 1
 
-//# Set parameters to out
-//!set callback[DBusSubtreeDispatchFunc].parameters.parameter[out_user_data][direction] out
-
 //# string-length-param (Strings with array length parameters)
 //!set class[DataInputStream].method[read_upto].parameters.parameter[stop_chars].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set class[DataInputStream].method[read_upto_async].parameters.parameter[stop_chars].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
@@ -124,12 +121,11 @@
 //!set class[Task].method[run_in_thread][ignore] 1
 //!set class[Task].method[run_in_thread_sync][ignore] 1
 
-//# Disable: Callback returns structure pointer with transfer none (no D owner to keep it alive for C)
-//!set callback[DBusSubtreeDispatchFunc][disable] 1
-//!set record[DBusSubtreeVTable].field[dispatch][disable] 1
-
-//# Disable: Notified callback without closure data
-//!set class[DBusConnection].method[register_subtree][disable] 1
+//# Ignore: DBus subtree registration (skipped; dispatch callback returns a structure pointer with
+//# transfer none, and registerSubtree callbacks have no closure data)
+//!set callback[DBusSubtreeDispatchFunc][ignore] 1
+//!set record[DBusSubtreeVTable].field[dispatch][ignore] 1
+//!set class[DBusConnection].method[register_subtree][ignore] 1
 
 //# Hand-written below: Receive return location fields, set to temporary locations by receiveMessages (the received
 //# address and control messages are owned by the InputMessage), vectors set from D buffers

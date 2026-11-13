@@ -7,10 +7,6 @@
 //!subtype face_t Face
 //!subtype language_t Language
 
-//# Disable problematic callbacks
-//!set callback[font_get_glyph_advances_func_t][introspectable] 0
-//!set callback[font_get_nominal_glyphs_func_t][introspectable] 0 
-
 //# Set arrays to be zero-terminated=1
 //!set function[face_builder_sort_tables].parameters.parameter[tags].array[][zero-terminated] 1
 //!set function[ot_layout_collect_features].parameters.parameter[scripts].array[][zero-terminated] 1
@@ -147,34 +143,31 @@
 //!del function[ot_shape_plan_collect_lookups].parameters.parameter[lookup_indexes][caller-allocates]
 //!set function[ot_shape_plan_collect_lookups].parameters.parameter[lookup_indexes][direction] in
 
-//# Disable: Strided batch glyph APIs (single glyph APIs are available)
-//!set function[font_get_glyph_advances_for_direction][disable] 1
-//!set function[font_get_glyph_h_advances][disable] 1
-//!set function[font_get_glyph_v_advances][disable] 1
-//!set function[font_get_glyph_h_origins][disable] 1
-//!set function[font_get_glyph_v_origins][disable] 1
-//!set function[font_get_nominal_glyphs][disable] 1
-//!set callback[font_get_glyph_advances_func_t][disable] 1
-//!set callback[font_get_glyph_origins_func_t][disable] 1
-//!set callback[font_get_nominal_glyphs_func_t][disable] 1
-//!set alias[font_get_glyph_h_origins_func_t][disable] 1
-//!set alias[font_get_glyph_v_origins_func_t][disable] 1
-//!set function[font_funcs_set_glyph_h_advances_func][disable] 1
-//!set function[font_funcs_set_glyph_v_advances_func][disable] 1
-//!set function[font_funcs_set_glyph_h_origins_func][disable] 1
-//!set function[font_funcs_set_glyph_v_origins_func][disable] 1
-//!set function[font_funcs_set_nominal_glyphs_func][disable] 1
-//!set callback[unicode_decompose_compatibility_func_t][disable] 1
-//!set function[unicode_funcs_set_decompose_compatibility_func][disable] 1
-
-//# Disable: Tag arrays with inout count and caller allocated buffers
-//!set function[ot_shape_plan_get_feature_tags][disable] 1
-//!set callback[get_table_tags_func_t][disable] 1
-//!set function[face_set_get_table_tags_func][disable] 1
-//!set function[tag_to_string][disable] 1
-
-//# Disable: Callbacks with caller allocated output arrays
-//!set callback[font_get_glyph_name_func_t][disable] 1
-//!set function[font_funcs_set_glyph_name_func][disable] 1
-//!set callback[color_line_get_color_stops_func_t][disable] 1
-//!set record[color_line_t].field[get_color_stops][disable] 1
+//# Ignore: Font, glyph and unicode function overrides covered by Pango, and strided/batch array APIs
+//# (unicode_funcs_set_decompose_compatibility_func is also deprecated since 2.0.0)
+//!set function[font_get_glyph_advances_for_direction][ignore] 1
+//!set function[font_get_glyph_h_advances][ignore] 1
+//!set function[font_get_glyph_v_advances][ignore] 1
+//!set function[font_get_glyph_h_origins][ignore] 1
+//!set function[font_get_glyph_v_origins][ignore] 1
+//!set function[font_get_nominal_glyphs][ignore] 1
+//!set callback[font_get_glyph_advances_func_t][ignore] 1
+//!set callback[font_get_glyph_origins_func_t][ignore] 1
+//!set callback[font_get_nominal_glyphs_func_t][ignore] 1
+//!set alias[font_get_glyph_h_origins_func_t][ignore] 1
+//!set alias[font_get_glyph_v_origins_func_t][ignore] 1
+//!set function[font_funcs_set_glyph_h_advances_func][ignore] 1
+//!set function[font_funcs_set_glyph_v_advances_func][ignore] 1
+//!set function[font_funcs_set_glyph_h_origins_func][ignore] 1
+//!set function[font_funcs_set_glyph_v_origins_func][ignore] 1
+//!set function[font_funcs_set_nominal_glyphs_func][ignore] 1
+//!set callback[unicode_decompose_compatibility_func_t][ignore] 1
+//!set function[unicode_funcs_set_decompose_compatibility_func][ignore] 1
+//!set function[ot_shape_plan_get_feature_tags][ignore] 1
+//!set callback[get_table_tags_func_t][ignore] 1
+//!set function[face_set_get_table_tags_func][ignore] 1
+//!set function[tag_to_string][ignore] 1
+//!set callback[font_get_glyph_name_func_t][ignore] 1
+//!set function[font_funcs_set_glyph_name_func][ignore] 1
+//!set callback[color_line_get_color_stops_func_t][ignore] 1
+//!set record[color_line_t].field[get_color_stops][ignore] 1

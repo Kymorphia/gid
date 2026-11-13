@@ -21,6 +21,6 @@
 //!set function[content_register_deserializer][disable] 1
 //!set function[content_register_serializer][disable] 1
 
-//# Disable: Output data arrays with length computed from stride and height (use TextureDownloader.downloadBytes)
-//!set class[Texture].method[download][disable] 1
-//!set record[TextureDownloader].method[download_into][disable] 1
+//# Ignore: Output data arrays with length computed from stride and height, use TextureDownloader.downloadBytes
+//!set class[Texture].method[download][ignore] 1
+//!set record[TextureDownloader].method[download_into][ignore] 1

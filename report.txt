@@ -8,25 +8,25 @@ adw1                       |   95    0    0   100 | 1279    0    0   100 |   55 
 arrow1                     |  296    0    0   100 |  973    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-atk1                       |   40    0    0   100 |  237    1    0  99.6 |   41    0    0   100 |   29    0    0   100 |
-glib2                      |   75    0    0   100 | 1271    2    0  99.8 |    0    0    0   100 |  111    0    0   100 |
+atk1                       |   40    0    0   100 |  237    0    0   100 |   41    0    0   100 |   29    0    0   100 |
+glib2                      |   75    0    0   100 | 1271    0    0   100 |    0    0    0   100 |  111    0    0   100 |
 glibunix2                  |    3    0    0   100 |   11    0    0   100 |    0    0    0   100 |    1    0    0   100 |
 gmime3                     |   69    0    0   100 |  558    0    0   100 |    0    0    0   100 |   15    0    0   100 |
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  265    0    0   100 |    3    0    0   100 |  137    0    0   100 |
-gdk3                       |   57    0    0   100 |  548    0    0   100 |   39    0    0   100 |  264    3    0  98.9 |
-gdk4                       |   66    0    0   100 |  538    4    0  99.3 |   35    0    0   100 |   14    0    0   100 |
+gdk3                       |   57    0    0   100 |  548    0    0   100 |   39    0    0   100 |  264    0    0   100 |
+gdk4                       |   66    0    0   100 |  538    2    0  99.6 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4    0    0   100 |   23    0    0   100 |
-gio2                       |  171    0    0   100 | 1667    1    0  99.9 |   79    0    0   100 |   64    1    0  98.5 |
+gio2                       |  171    0    0   100 | 1667    0    0   100 |   79    0    0   100 |   64    0    0   100 |
 giounix2                   |   11    0    0   100 |  100    0    0   100 |    2    0    0   100 |    0    0    0   100 |
 graphene1                  |   21    0    0   100 |  367    0    0   100 |    0    0    0   100 |    9    0    0   100 |
 gsk4                       |   58    0    0   100 |  309    0    0   100 |    0    0    0   100 |   13    0    0   100 |
-gst1                       |   94    0    0   100 | 1531    0    0   100 |   23    0    0   100 |  130    1    0  99.2 |
+gst1                       |   94    0    0   100 | 1531    0    0   100 |   23    0    0   100 |  130    0    0   100 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
 gstaudio1                  |   33    0    0   100 |  215    3    0  98.6 |    0    0    0   100 |   61    0    0   100 |
 gstbase1                   |   23    0    0   100 |  308    0    0   100 |    2    0    0   100 |   30    0    0   100 |
-gstcheck1                  |    8    0    0   100 |  109    2    0  98.2 |    0    0    0   100 |    8    0    0   100 |
+gstcheck1                  |    8    0    0   100 |  109    0    0   100 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   17    0    0   100 |    3    0    0   100 |    2    0    0   100 |
 gstgl1                     |   38    0    0   100 |  281    0    0   100 |    5    0    0   100 |   54    0    0   100 |
 gstglegl1                  |    7    0    0   100 |   16    6    0  72.7 |    0    0    0   100 |    0    0    0   100 |
@@ -38,11 +38,11 @@ gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1 
 gstsdp1                    |   23    0    0   100 |  167    2    0  98.8 |    0    0    0   100 |   87    2    0  97.8 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstvideo1                  |   60    0    0   100 |  385    4    0  99.0 |    2    0    0   100 |  186    1    0  99.5 |
-gtk3                       |  345    0    0   100 | 3780    1    0 100.0 |  448    0    0   100 |  155    0    0   100 |
+gtk3                       |  345    0    0   100 | 3780    0    0   100 |  448    0    0   100 |  155    0    0   100 |
 gtk4                       |  326    0    0   100 | 3667    0    0   100 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
 gtksource5                 |   52    0    0   100 |  463    0    0   100 |   32    0    0   100 |    0    0    0   100 |
-harfbuzz0                  |   35    0    0   100 |  457   16    0  96.6 |    0    0    0   100 |   72    1    0  98.6 |
+harfbuzz0                  |   35    0    0   100 |  457    0    0   100 |    0    0    0   100 |   72    0    0   100 |
 javascriptcore6            |   10    0    0   100 |  104    0    0   100 |    1    0    0   100 |    5    0    0   100 |
 json1                      |   12    0    0   100 |  203    0    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  309    0    0   100 |   17    0    0   100 |    0    0    0   100 |
@@ -63,19 +63,11 @@ libxml2                    |   10    0    0   100 |    0    0    0   100 |    0 
 xlib2                      |   12    0    0   100 |    1    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
 [Disabled Funcs]
-atk.document.Document.getTextSelections
-glib.option_context.OptionContext.setTranslateFunc
-glib.option_group.OptionGroup.setTranslateFunc
-gdk.texture.Texture.download
-gdk.texture_downloader.TextureDownloader.downloadInto
 gdk.global.contentRegisterDeserializer
 gdk.global.contentRegisterSerializer
-gio.dbus_connection.DBusConnection.registerSubtree
 gstaudio.audio_resampler.AudioResampler.resample
 gstaudio.global.bufferAddDsdPlaneOffsetMeta
 gstaudio.global.dsdConvert
-gstcheck.harness.Harness.addSinkHarness
-gstcheck.harness.Harness.addSrcHarness
 gstglegl.eglimage.EGLImage.newWrapped
 gstglegl.eglimage.EGLImage.exportDmabuf
 gstglegl.eglimage.EGLImage.fromDmabufDirect
@@ -88,31 +80,8 @@ gstvideo.video_scaler.VideoScaler.vertical
 gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
 gstvideo.video_vbiparser.VideoVBIParser.addLine
 gstvideo.global.videoChromaResample
-gtk.accel_group.AccelGroup.query
-harfbuzz.global.faceSetGetTableTagsFunc
-harfbuzz.global.fontFuncsSetGlyphHAdvancesFunc
-harfbuzz.global.fontFuncsSetGlyphHOriginsFunc
-harfbuzz.global.fontFuncsSetGlyphNameFunc
-harfbuzz.global.fontFuncsSetGlyphVAdvancesFunc
-harfbuzz.global.fontFuncsSetGlyphVOriginsFunc
-harfbuzz.global.fontFuncsSetNominalGlyphsFunc
-harfbuzz.global.fontGetGlyphAdvancesForDirection
-harfbuzz.global.fontGetGlyphHAdvances
-harfbuzz.global.fontGetGlyphHOrigins
-harfbuzz.global.fontGetGlyphVAdvances
-harfbuzz.global.fontGetGlyphVOrigins
-harfbuzz.global.fontGetNominalGlyphs
-harfbuzz.global.otShapePlanGetFeatureTags
-harfbuzz.global.tagToString
-harfbuzz.global.unicodeFuncsSetDecomposeCompatibilityFunc
 
 [Disabled Fields]
-gdk.event_button.EventButton.axes
-gdk.event_motion.EventMotion.axes
-gdk.event_touch.EventTouch.axes
-gio.types.DBusSubtreeVTable.dispatch
-gst.meta_info.MetaInfo.deserializeFunc
 gstsdp.mikeypayload_key_data.MIKEYPayloadKeyData.kvData
 gstsdp.mikeypayload_t.MIKEYPayloadT.tsValue
 gstvideo.video_resampler.VideoResampler.taps
-harfbuzz.color_line.ColorLine.getColorStops

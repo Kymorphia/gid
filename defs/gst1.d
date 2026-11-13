@@ -93,9 +93,6 @@
 //!set callback[ControlSourceGetValueArray].parameters.parameter[values][caller-allocates] 1
 //!set callback[ControlSourceGetValueArray].parameters.parameter[values].type '<array length="3" c:type="gdouble *"><type name="double" c:type="gdouble"/></array>'
 
-//# Set MetaDeserializeFunction.data parameter to array with length
-//!set callback[MetaDeserializeFunction].parameters.parameter[data].type '<array length="3" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
-
 //# Disable unnecessary ByteArrayInterface functions (can use GArray versions instead)
 //!set record[Meta].method[serialize][ignore] 1
 //!set callback[MetaSerializeFunction][ignore] 1
@@ -153,9 +150,10 @@
 //# Ignore: Iterator.find_custom uses a GCompareFunc with positional data, use Iterator.foreach or D iteration instead
 //!set record[Iterator].method[find_custom][ignore] 1
 
-//# Disable: Callback returns structure pointer with transfer none (no D owner to keep it alive for C)
-//!set callback[MetaDeserializeFunction][disable] 1
-//!set record[MetaInfo].field[deserialize_func][disable] 1
+//# Ignore: Meta deserialize function pointer for meta implementers (callback returns a structure
+//# pointer with transfer none, no D owner to keep it alive for C)
+//!set callback[MetaDeserializeFunction][ignore] 1
+//!set record[MetaInfo].field[deserialize_func][ignore] 1
 
 //# Disable: Caller-allocated callback output arrays are not supported; installing this callback also requires support for instance function-pointer fields.
 //!set callback[ControlSourceGetValueArray][disable] 1

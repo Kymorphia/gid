@@ -54,6 +54,6 @@
 //!set interface[Text].method[get_default_attributes][ignore] 1
 //!set interface[Text].method[get_run_attributes][ignore] 1
 
-//# Disable: Transfer full GArray of TextSelection structures with AtkObject pointer fields whose ownership is
-//# undocumented (the D copies of the structures can't release them)
-//!set interface[Document].method[get_text_selections][disable] 1
+//# Ignore: Transfer full GArray of TextSelection structures with AtkObject pointer fields whose ownership is
+//# undocumented (the D copies of the structures can't release them); ATK is deprecated
+//!set interface[Document].method[get_text_selections][ignore] 1
