@@ -151,16 +151,6 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 
   /**
-      Gets the user data that was passed when the serializer was registered.
-      Returns: the user data for this serializer
-  */
-  void* getUserData() nothrow
-  {
-    auto _retval = gdk_content_serializer_get_user_data(cast(GdkContentSerializer*)this._cPtr);
-    return _retval;
-  }
-
-  /**
       Gets the [gobject.value.Value] to read the object to serialize from.
       Returns: the [gobject.value.Value] for the current operation
   */

@@ -46,13 +46,20 @@
 //!set class[VideoSink].function[center_rect][ignore] 1
 
 //# Disable callables with arrays with sizes not described by parameters (FIXME)
-//!set record[VideoVBIParser].method[add_line][disable] 1
 //!set callback[VideoAffineTransformationGetMatrix][disable] 1
 //!set callback[VideoFormatPack][disable] 1
 //!set callback[VideoFormatUnpack][disable] 1
 //!set record[VideoScaler].method[vertical][disable] 1
-//!set record[VideoVBIEncoder].method[write_line][disable] 1
 //!set function[video_chroma_resample][disable] 1
+
+//# Hand-written below: VBI lines with a size from the format and pixel width given when creating the encoder/parser
+//# (opaque structures, the D wrapper keeps the line size)
+//!set record[VideoVBIEncoder].constructor[new][ignore] 1
+//!set record[VideoVBIEncoder].method[copy][ignore] 1
+//!set record[VideoVBIEncoder].method[write_line][ignore] 1
+//!set record[VideoVBIParser].constructor[new][ignore] 1
+//!set record[VideoVBIParser].method[copy][ignore] 1
+//!set record[VideoVBIParser].method[add_line][ignore] 1
 
 //# Parameters with fixed size arrays
 //!set callback[VideoGLTextureUpload].parameters.parameter[texture_id].type '<array zero-terminated="0" fixed-size="4" c:type="guint*"><type name="guint" c:type="guint"/></array>'
@@ -119,8 +126,13 @@
 //!set record[VideoSEIUserDataUnregisteredMeta].field[data].type '<array length="3" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
 //!set record[VideoSEIUserDataUnregisteredMeta].field[data][writable] 0
 
-//# Disable: Two dimensional taps array (n_phases * max_taps)
-//!set record[VideoResampler].field[taps][disable] 1
+//# Hand-written below: Two dimensional taps array (n_phases * max_taps), max_taps is set by gst_video_resampler_init
+//!set record[VideoResampler].field[taps][ignore] 1
+//!set record[VideoResampler].field[max_taps][writable] 0
+
+//# Hand-written below: gst_video_resampler_clear() frees the arrays without clearing the pointers (array field getters
+//# would read freed memory)
+//!set record[VideoResampler].method[clear][ignore] 1
 
 //# VideoMultiviewFlagsSet D value type (GstVideoMultiviewFlagsSet GValue flag set type, see gst1-types.d)
 //!class types pre
@@ -209,4 +221,200 @@ struct VideoMultiviewFlagsSet
     }
 
     return data[0 .. size];
+  }
+//!class VideoResampler
+
+  /**
+      Get `taps` field.
+      Returns: the taps (copied), one row of maxTaps taps for each phase, or null if the resampler is not initialized
+  */
+  @property double[][] taps() nothrow
+  {
+    auto resampler = cast(GstVideoResampler*)this._cPtr;
+
+    if (!resampler.taps || resampler.nPhases == 0 || resampler.maxTaps == 0)
+      return null;
+
+    auto _retval = new double[][](resampler.nPhases);
+
+    foreach (i, ref row; _retval)
+      row = resampler.taps[i * resampler.maxTaps .. (i + 1) * resampler.maxTaps].dup;
+
+    return _retval;
+  }
+
+  /**
+      Clear a previously initialized #GstVideoResampler resampler. The arrays are freed and their fields are reset, so
+      the resampler can be initialized again.
+  */
+  void clear() nothrow
+  {
+    auto resampler = cast(GstVideoResampler*)this._cPtr;
+    gst_video_resampler_clear(resampler);
+    resampler.offset = null;
+    resampler.phase = null;
+    resampler.nTaps = null;
+    resampler.taps = null;
+    resampler.outSize = 0;
+    resampler.nPhases = 0;
+    resampler.maxTaps = 0;
+  }
+
+//!class VideoVBIEncoder pre
+
+package uint _vbiLineSize(gstvideo.types.VideoFormat format, uint pixelWidth) nothrow
+{
+  auto info = gst_video_info_new();
+  scope(exit) gst_video_info_free(info);
+
+  if (!gst_video_info_set_format(info, cast(GstVideoFormat)format, pixelWidth, 1) || info.stride[0] <= 0)
+    return 0;
+
+  return cast(uint)info.stride[0];
+}
+
+//!class VideoVBIEncoder
+
+  private uint _lineSize; // Line size in bytes from the format and pixel width, 0 if unknown
+
+  /**
+      Create a new #GstVideoVBIEncoder for the specified format and pixelWidth.
+
+      Params:
+        format = a #GstVideoFormat
+        pixelWidth = The width in pixel to use
+  */
+  this(gstvideo.types.VideoFormat format, uint pixelWidth) nothrow
+  {
+    auto _cretval = gst_video_vbi_encoder_new(cast(GstVideoFormat)format, pixelWidth);
+    this(_cretval, Yes.Take);
+
+    if (_cretval)
+      _lineSize = _vbiLineSize(format, pixelWidth);
+  }
+
+  /**
+      Copy the encoder.
+      Returns: a copy of the encoder
+  */
+  gstvideo.video_vbiencoder.VideoVBIEncoder copy() nothrow
+  {
+    auto _cretval = gst_video_vbi_encoder_copy(cast(const(GstVideoVBIEncoder)*)this._cPtr);
+    auto _retval = _cretval ? new gstvideo.video_vbiencoder.VideoVBIEncoder(cast(void*)_cretval, Yes.Take) : null;
+
+    if (_retval)
+      _retval._lineSize = _lineSize;
+
+    return _retval;
+  }
+
+  /**
+      Get the size in bytes of a line of the format and pixel width the encoder was created with.
+      Returns: the line size in bytes, or 0 if unknown (the wrapper was not created with the constructor or copy)
+  */
+  @property uint lineSize() nothrow
+  {
+    return _lineSize;
+  }
+
+  /**
+      Write the pending ancillary data as a line of the format and pixel width the encoder was created with.
+      Params:
+        data = the line to write to, its length must be at least [gstvideo.video_vbiencoder.VideoVBIEncoder.lineSize]
+  */
+  void writeLine(ubyte[] data) nothrow
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+
+    if (_lineSize == 0)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine line size unknown (not created with the constructor or copy)");
+      return;
+    }
+
+    if (data.length < _lineSize)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine data length %d is less than the line size %u",
+        cast(int)data.length, _lineSize);
+      return;
+    }
+
+    gst_video_vbi_encoder_write_line(cast(GstVideoVBIEncoder*)this._cPtr, data.ptr);
+  }
+
+//!class VideoVBIParser pre
+
+import gstvideo.video_vbiencoder : _vbiLineSize;
+
+//!class VideoVBIParser
+
+  private uint _lineSize; // Line size in bytes from the format and pixel width, 0 if unknown
+
+  /**
+      Create a new #GstVideoVBIParser for the specified format and pixelWidth.
+
+      Params:
+        format = a #GstVideoFormat
+        pixelWidth = The width in pixel to use
+  */
+  this(gstvideo.types.VideoFormat format, uint pixelWidth) nothrow
+  {
+    auto _cretval = gst_video_vbi_parser_new(cast(GstVideoFormat)format, pixelWidth);
+    this(_cretval, Yes.Take);
+
+    if (_cretval)
+      _lineSize = _vbiLineSize(format, pixelWidth);
+  }
+
+  /**
+      Copy the parser.
+      Returns: a copy of the parser
+  */
+  gstvideo.video_vbiparser.VideoVBIParser copy() nothrow
+  {
+    auto _cretval = gst_video_vbi_parser_copy(cast(const(GstVideoVBIParser)*)this._cPtr);
+    auto _retval = _cretval ? new gstvideo.video_vbiparser.VideoVBIParser(cast(void*)_cretval, Yes.Take) : null;
+
+    if (_retval)
+      _retval._lineSize = _lineSize;
+
+    return _retval;
+  }
+
+  /**
+      Get the size in bytes of a line of the format and pixel width the parser was created with.
+      Returns: the line size in bytes, or 0 if unknown (the wrapper was not created with the constructor or copy)
+  */
+  @property uint lineSize() nothrow
+  {
+    return _lineSize;
+  }
+
+  /**
+      Provide a new line of data to the parser. Call [gstvideo.video_vbiparser.VideoVBIParser.getAncillary] to get the
+      Ancillary data that might be present on that line.
+      Params:
+        data = the line of data to parse, its length must be at least
+          [gstvideo.video_vbiparser.VideoVBIParser.lineSize]
+  */
+  void addLine(ubyte[] data) nothrow
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+
+    if (_lineSize == 0)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiparser.VideoVBIParser.addLine line size unknown (not created with the constructor or copy)");
+      return;
+    }
+
+    if (data.length < _lineSize)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiparser.VideoVBIParser.addLine data length %d is less than the line size %u",
+        cast(int)data.length, _lineSize);
+      return;
+    }
+
+    gst_video_vbi_parser_add_line(cast(GstVideoVBIParser*)this._cPtr, data.ptr);
   }

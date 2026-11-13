@@ -163,6 +163,35 @@ class MIKEYMessage : gobject.boxed.BoxedWrap!(gst_mikey_message_get_type)
   }
 
   /**
+  Add a new T payload to msg with the given parameters.
+  Params:
+  type = specifies the timestamp type used
+  tsValue = the timestamp value, its length must be [gstsdp.mikeypayload.MIKEYPayload.tsValueLength] of type
+  Returns: true on success, false if type is not a valid timestamp type or tsValue has the wrong length
+  */
+  bool addT(gstsdp.types.MIKEYTSType type, ubyte[] tsValue) nothrow
+  {
+    import gstsdp.mikeypayload : MIKEYPayload;
+
+    auto _len = MIKEYPayload.tsValueLength(type);
+
+    if (_len < 0)
+      return false;
+
+    if (tsValue.length != _len)
+    {
+      import glib.c.functions : g_log;
+      import glib.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstsdp.mikeymessage.MIKEYMessage.addT tsValue length %d does not match the timestamp type length %d",
+      cast(int)tsValue.length, _len);
+      return false;
+    }
+
+    return cast(bool)gst_mikey_message_add_t(cast(GstMIKEYMessage*)this._cPtr, cast(GstMIKEYTSType)type, tsValue.ptr);
+  }
+
+
+  /**
       Make a new MIKEY message.
       Returns: a new #GstMIKEYMessage on success
   */

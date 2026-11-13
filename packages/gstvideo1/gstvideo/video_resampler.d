@@ -18,12 +18,10 @@ class VideoResampler : StructWrap!(GstVideoResampler)
       Create a `video_resampler.VideoResampler` wrap type.
       Params:
         inSize = the input size
-        maxTaps = the maximum number of taps
   */
-  this(int inSize = int.init, uint maxTaps = uint.init) nothrow
+  this(int inSize = int.init) nothrow
   {
     this.inSize = inSize;
-    this.maxTaps = maxTaps;
   }
 
   /** */
@@ -67,16 +65,6 @@ class VideoResampler : StructWrap!(GstVideoResampler)
   }
 
   /**
-      Set `maxTaps` field.
-      Params:
-        propval = the maximum number of taps
-  */
-  @property void maxTaps(uint propval) nothrow
-  {
-    (cast(GstVideoResampler*)this._cPtr).maxTaps = propval;
-  }
-
-  /**
       Get `offset` field.
       Returns: array with the source offset for each output element
   */
@@ -113,12 +101,41 @@ class VideoResampler : StructWrap!(GstVideoResampler)
   }
 
   /**
-      Clear a previously initialized #GstVideoResampler resampler.
+  Get `taps` field.
+  Returns: the taps (copied), one row of maxTaps taps for each phase, or null if the resampler is not initialized
+  */
+  @property double[][] taps() nothrow
+  {
+    auto resampler = cast(GstVideoResampler*)this._cPtr;
+
+    if (!resampler.taps || resampler.nPhases == 0 || resampler.maxTaps == 0)
+      return null;
+
+    auto _retval = new double[][](resampler.nPhases);
+
+    foreach (i, ref row; _retval)
+      row = resampler.taps[i * resampler.maxTaps .. (i + 1) * resampler.maxTaps].dup;
+
+    return _retval;
+  }
+
+  /**
+  Clear a previously initialized #GstVideoResampler resampler. The arrays are freed and their fields are reset, so
+  the resampler can be initialized again.
   */
   void clear() nothrow
   {
-    gst_video_resampler_clear(cast(GstVideoResampler*)this._cPtr);
+    auto resampler = cast(GstVideoResampler*)this._cPtr;
+    gst_video_resampler_clear(resampler);
+    resampler.offset = null;
+    resampler.phase = null;
+    resampler.nTaps = null;
+    resampler.taps = null;
+    resampler.outSize = 0;
+    resampler.nPhases = 0;
+    resampler.maxTaps = 0;
   }
+
 
   /** */
   bool init_(gstvideo.types.VideoResamplerMethod method, gstvideo.types.VideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, gst.structure.Structure options) nothrow

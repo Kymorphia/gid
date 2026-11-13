@@ -19,13 +19,11 @@ class MIKEYPayloadKeyData : StructWrap!(GstMIKEYPayloadKeyData)
       Params:
         keyType = the #GstMIKEYKeyDataType of @key_data
         kvType = the Key Validity type
-        kvLen = length of @kv_data
   */
-  this(gstsdp.types.MIKEYKeyDataType keyType = gstsdp.types.MIKEYKeyDataType.init, gstsdp.types.MIKEYKVType kvType = gstsdp.types.MIKEYKVType.init, ubyte[2] kvLen = (ubyte[2]).init) nothrow
+  this(gstsdp.types.MIKEYKeyDataType keyType = gstsdp.types.MIKEYKeyDataType.init, gstsdp.types.MIKEYKVType kvType = gstsdp.types.MIKEYKVType.init) nothrow
   {
     this.keyType = keyType;
     this.kvType = kvType;
-    this.kvLen = kvLen;
   }
 
   /** */
@@ -121,12 +119,28 @@ class MIKEYPayloadKeyData : StructWrap!(GstMIKEYPayloadKeyData)
   }
 
   /**
-      Set `kvLen` field.
-      Params:
-        propval = length of @kv_data
+  Get `kvData` field.
+  Returns: the key validity data (copied) for the key validity type: empty for
+  [gstsdp.types.MIKEYKVType.Null], the SPI/MKI for [gstsdp.types.MIKEYKVType.Spi] or the valid from and valid
+  to values for [gstsdp.types.MIKEYKVType.Interval]
   */
-  @property void kvLen(ubyte[2] propval) nothrow
+  @property ubyte[][] kvData() nothrow
   {
-    (cast(GstMIKEYPayloadKeyData*)this._cPtr).kvLen = *cast(ubyte[2]*)&propval;
+    auto payload = cast(GstMIKEYPayloadKeyData*)this._cPtr;
+    size_t _count; // Number of key validity data arrays for the key validity type
+
+    if (payload.kvType == GstMIKEYKVType.Spi)
+      _count = 1;
+    else if (payload.kvType == GstMIKEYKVType.Interval)
+    _count = 2;
+    else
+      return null;
+
+    auto _retval = new ubyte[][](_count);
+
+    foreach (i, ref data; _retval)
+      data = payload.kvData[i] ? payload.kvData[i][0 .. payload.kvLen[i]].dup : null;
+
+    return _retval;
   }
 }

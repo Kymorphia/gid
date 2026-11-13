@@ -27,9 +27,15 @@
 //!set record[SDPMedia].function[add_media_from_structure].parameters.parameter[media][direction] in
 //!set record[SDPMedia].function[add_media_from_structure].parameters.parameter[media][caller-allocates] 0
 
-//# Disable methods with arrays with sizes not described by parameters (FIXME)
-//!set record[MIKEYMessage].method[add_t][disable] 1
-//!set record[MIKEYPayload].method[t_set][disable] 1
+//# Hand-written below: Timestamp arrays with a length determined by the timestamp type
+//!set record[MIKEYMessage].method[add_t][ignore] 1
+//!set record[MIKEYPayload].method[t_set][ignore] 1
+//!set record[MIKEYPayloadT].field[ts_value][ignore] 1
+//!set record[MIKEYPayloadT].field[type][writable] 0
+
+//# Hand-written below: Key validity data arrays (none, SPI or valid from/to interval) with lengths in kv_len
+//!set record[MIKEYPayloadKeyData].field[kv_data][ignore] 1
+//!set record[MIKEYPayloadKeyData].field[kv_len][writable] 0
 
 
 //# Make read-only (no write support): Fields with types that can't be written (Wrap/Opaque/Pointer, embedded Boxed, containers)
@@ -66,9 +72,6 @@
 //!set record[SDPMessage].field[information][writable] 0
 //!set record[SDPMessage].field[uri][writable] 0
 
-//# Disable: Array field with unsupported pointer element type
-//!set record[MIKEYPayloadKeyData].field[kv_data][disable] 1
-
 //# Set array field lengths from their length fields (read-only, payload data is set with the payload API)
 //!set record[MIKEYPayloadKeyData].field[key_data].type '<array length="2" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
 //!set record[MIKEYPayloadKeyData].field[key_data][writable] 0
@@ -80,9 +83,6 @@
 //!set record[MIKEYPayloadRAND].field[rand][writable] 0
 //!set record[MIKEYPayloadSPParam].field[val].type '<array length="1" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
 //!set record[MIKEYPayloadSPParam].field[val][writable] 0
-
-//# Disable: Timestamp array field with a length determined by the timestamp type
-//!set record[MIKEYPayloadT].field[ts_value][disable] 1
 
 //# Copy function with the StructWrap copy function signature (gst_sdp_media_copy() returns the copy in an out parameter)
 //!class SDPMedia pre
@@ -113,4 +113,126 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
       gst_sdp_media_init(_media);
 
     return cast(gstsdp.types.SDPResult)_cretval;
+  }
+//!class MIKEYPayload
+
+  /**
+      Get the length of a timestamp value.
+      Params:
+        type = the timestamp type
+      Returns: the length in bytes of the timestamp value of type (8 for NTP-UTC and NTP, 4 for COUNTER) or -1 if
+        type is not a valid timestamp type
+  */
+  static int tsValueLength(gstsdp.types.MIKEYTSType type) nothrow
+  {
+    if (type == gstsdp.types.MIKEYTSType.NtpUtc || type == gstsdp.types.MIKEYTSType.Ntp)
+      return 8;
+
+    if (type == gstsdp.types.MIKEYTSType.Counter)
+      return 4;
+
+    return -1;
+  }
+
+  /**
+      Set the timestamp in a [gstsdp.types.MIKEYPayloadType.T] payload.
+      Params:
+        type = the timestamp type
+        tsValue = the timestamp value, its length must be [gstsdp.mikeypayload.MIKEYPayload.tsValueLength] of type
+      Returns: true on success, false if type is not a valid timestamp type or tsValue has the wrong length
+  */
+  bool tSet(gstsdp.types.MIKEYTSType type, ubyte[] tsValue) nothrow
+  {
+    auto _len = tsValueLength(type);
+
+    if (_len < 0)
+      return false;
+
+    if (tsValue.length != _len)
+    {
+      import glib.c.functions : g_log;
+      import glib.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstsdp.mikeypayload.MIKEYPayload.tSet tsValue length %d does not match the timestamp type length %d",
+        cast(int)tsValue.length, _len);
+      return false;
+    }
+
+    return cast(bool)gst_mikey_payload_t_set(cast(GstMIKEYPayload*)this._cPtr, cast(GstMIKEYTSType)type, tsValue.ptr);
+  }
+
+//!class MIKEYMessage
+
+  /**
+      Add a new T payload to msg with the given parameters.
+      Params:
+        type = specifies the timestamp type used
+        tsValue = the timestamp value, its length must be [gstsdp.mikeypayload.MIKEYPayload.tsValueLength] of type
+      Returns: true on success, false if type is not a valid timestamp type or tsValue has the wrong length
+  */
+  bool addT(gstsdp.types.MIKEYTSType type, ubyte[] tsValue) nothrow
+  {
+    import gstsdp.mikeypayload : MIKEYPayload;
+
+    auto _len = MIKEYPayload.tsValueLength(type);
+
+    if (_len < 0)
+      return false;
+
+    if (tsValue.length != _len)
+    {
+      import glib.c.functions : g_log;
+      import glib.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstsdp.mikeymessage.MIKEYMessage.addT tsValue length %d does not match the timestamp type length %d",
+        cast(int)tsValue.length, _len);
+      return false;
+    }
+
+    return cast(bool)gst_mikey_message_add_t(cast(GstMIKEYMessage*)this._cPtr, cast(GstMIKEYTSType)type, tsValue.ptr);
+  }
+
+//!class MIKEYPayloadT
+
+  /**
+      Get `tsValue` field.
+      Returns: the timestamp value (copied), its length is determined by the timestamp type
+  */
+  @property ubyte[] tsValue() nothrow
+  {
+    import gstsdp.mikeypayload : MIKEYPayload;
+
+    auto payload = cast(GstMIKEYPayloadT*)this._cPtr;
+    auto _len = MIKEYPayload.tsValueLength(cast(gstsdp.types.MIKEYTSType)payload.type);
+
+    if (!payload.tsValue || _len <= 0)
+      return null;
+
+    return payload.tsValue[0 .. _len].dup;
+  }
+
+//!class MIKEYPayloadKeyData
+
+  /**
+      Get `kvData` field.
+      Returns: the key validity data (copied) for the key validity type: empty for
+        [gstsdp.types.MIKEYKVType.Null], the SPI/MKI for [gstsdp.types.MIKEYKVType.Spi] or the valid from and valid
+        to values for [gstsdp.types.MIKEYKVType.Interval]
+  */
+  @property ubyte[][] kvData() nothrow
+  {
+    auto payload = cast(GstMIKEYPayloadKeyData*)this._cPtr;
+    size_t _count; // Number of key validity data arrays for the key validity type
+
+    if (payload.kvType == GstMIKEYKVType.Spi)
+      _count = 1;
+    else if (payload.kvType == GstMIKEYKVType.Interval)
+      _count = 2;
+    else
+      return null;
+
+    auto _retval = new ubyte[][](_count);
+
+    foreach (i, ref data; _retval)
+      data = payload.kvData[i] ? payload.kvData[i][0 .. payload.kvLen[i]].dup : null;
+
+    return _retval;
   }

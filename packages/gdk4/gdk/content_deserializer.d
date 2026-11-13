@@ -74,6 +74,28 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   mixin AsyncResultT!();
 
   /**
+  Set the deserialized value of the current operation ([gdk.content_deserializer.ContentDeserializer.getValue]
+  returns a copy, so changes to it are not seen by the operation).
+  Params:
+  value = the deserialized value, its type must be compatible with the type of the operation
+  ([gdk.content_deserializer.ContentDeserializer.getGtype])
+  */
+  void setValue(gobject.value.Value value) nothrow
+  {
+    import gobject.c.functions : g_value_copy;
+
+    if (!value)
+    {
+      import glib.c.functions : g_log;
+      import glib.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gdk.content_deserializer.ContentDeserializer.setValue: assertion 'value' failed");
+      return;
+    }
+
+    g_value_copy(cast(const(GValue)*)value._cPtr(No.Dup), gdk_content_deserializer_get_value(cast(GdkContentDeserializer*)this._cPtr));
+  }
+
+  /**
       Gets the cancellable for the current operation.
       
       This is the [gio.cancellable.Cancellable] that was passed to `funcGdk.content_deserialize_async`.
@@ -146,16 +168,6 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   void* getTaskData() nothrow
   {
     auto _retval = gdk_content_deserializer_get_task_data(cast(GdkContentDeserializer*)this._cPtr);
-    return _retval;
-  }
-
-  /**
-      Gets the user data that was passed when the deserializer was registered.
-      Returns: the user data for this deserializer
-  */
-  void* getUserData() nothrow
-  {
-    auto _retval = gdk_content_deserializer_get_user_data(cast(GdkContentDeserializer*)this._cPtr);
     return _retval;
   }
 

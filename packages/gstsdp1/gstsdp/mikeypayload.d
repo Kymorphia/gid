@@ -66,6 +66,51 @@ class MIKEYPayload : gobject.boxed.BoxedWrap!(gst_mikey_payload_get_type)
   }
 
   /**
+  Get the length of a timestamp value.
+  Params:
+  type = the timestamp type
+  Returns: the length in bytes of the timestamp value of type (8 for NTP-UTC and NTP, 4 for COUNTER) or -1 if
+  type is not a valid timestamp type
+  */
+  static int tsValueLength(gstsdp.types.MIKEYTSType type) nothrow
+  {
+    if (type == gstsdp.types.MIKEYTSType.NtpUtc || type == gstsdp.types.MIKEYTSType.Ntp)
+      return 8;
+
+    if (type == gstsdp.types.MIKEYTSType.Counter)
+      return 4;
+
+    return -1;
+  }
+
+  /**
+  Set the timestamp in a [gstsdp.types.MIKEYPayloadType.T] payload.
+  Params:
+  type = the timestamp type
+  tsValue = the timestamp value, its length must be [gstsdp.mikeypayload.MIKEYPayload.tsValueLength] of type
+  Returns: true on success, false if type is not a valid timestamp type or tsValue has the wrong length
+  */
+  bool tSet(gstsdp.types.MIKEYTSType type, ubyte[] tsValue) nothrow
+  {
+    auto _len = tsValueLength(type);
+
+    if (_len < 0)
+      return false;
+
+    if (tsValue.length != _len)
+    {
+      import glib.c.functions : g_log;
+      import glib.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstsdp.mikeypayload.MIKEYPayload.tSet tsValue length %d does not match the timestamp type length %d",
+      cast(int)tsValue.length, _len);
+      return false;
+    }
+
+    return cast(bool)gst_mikey_payload_t_set(cast(GstMIKEYPayload*)this._cPtr, cast(GstMIKEYTSType)type, tsValue.ptr);
+  }
+
+
+  /**
       Make a new #GstMIKEYPayload with type.
   
       Params:

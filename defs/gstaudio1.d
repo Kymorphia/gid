@@ -25,8 +25,11 @@
 //!set record[AudioConverter].method[samples][disable] 1
 //!set record[AudioQuantize].method[samples][disable] 1
 //!set record[AudioResampler].method[resample][disable] 1
-//!set function[buffer_add_dsd_plane_offset_meta][disable] 1
-//!set function[dsd_convert][disable] 1
+
+//# Hand-written below: DSD plane offsets arrays with a length from the number of channels, DSD conversion data with
+//# sizes from the formats, layouts, plane offsets, number of bytes and channels
+//!set function[buffer_add_dsd_plane_offset_meta][ignore] 1
+//!set function[dsd_convert][ignore] 1
 
 //# Hand-written below: Offsets arrays with a length from the audio info channels
 //!set function[buffer_add_audio_meta][ignore] 1
@@ -113,6 +116,7 @@ import gst.types;
 import gstaudio.audio_downmix_meta;
 import gstaudio.audio_info;
 import gstaudio.audio_meta;
+import gstaudio.dsd_plane_offset_meta;
 
 /**
     Allocates and attaches a #GstAudioMeta on buffer, which must be writable for that purpose. The fields of the
@@ -190,6 +194,150 @@ gstaudio.audio_downmix_meta.AudioDownmixMeta bufferAddAudioDownmixMeta(gst.buffe
   auto _cretval = gst_buffer_add_audio_downmix_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null,
     fromPosition.ptr, cast(int)fromPosition.length, toPosition.ptr, cast(int)toPosition.length, _matrix.ptr);
   return _cretval ? new gstaudio.audio_downmix_meta.AudioDownmixMeta(cast(GstAudioDownmixMeta*)_cretval, buffer) : null;
+}
+
+/**
+    Allocates and attaches a #GstDsdPlaneOffsetMeta on buffer, which must be writable for that purpose. The fields of
+    the meta are directly populated from the arguments of this function.
+    If offsets is empty, then the meta's offsets field is left uninitialized. This is useful if for example offset
+    values are to be calculated in the meta's offsets field in-place. Similarly, numBytesPerChannel can be set to 0,
+    but only if offsets is empty. This is useful if the number of bytes per channel is known only later.
+    It is not allowed for channels to overlap in memory, i.e. for each i in [0, channels), the range
+    [offsets[i], offsets[i] + numBytesPerChannel) must not overlap with any other such range. It is also not
+    allowed to specify parameters that would cause out-of-bounds memory access on buffer (both are checked).
+    This meta is only needed for non-interleaved (= planar) DSD data.
+    Params:
+      buffer = a #GstBuffer
+      numChannels = Number of channels in the DSD data
+      numBytesPerChannel = Number of bytes per channel
+      offsets = the offsets (in bytes) where each channel plane starts in the buffer, empty to leave them
+        uninitialized, otherwise its length must be numChannels
+    Returns: the #GstDsdPlaneOffsetMeta that was attached on the buffer (borrowed from it) or null on error
+*/
+gstaudio.dsd_plane_offset_meta.DsdPlaneOffsetMeta bufferAddDsdPlaneOffsetMeta(gst.buffer.Buffer buffer,
+  int numChannels, size_t numBytesPerChannel, size_t[] offsets = null) nothrow
+{
+  if (offsets.length > 0 && offsets.length != numChannels)
+  {
+    import glib.c.functions : g_log;
+    import glib.c.types : GLogLevelFlags;
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.bufferAddDsdPlaneOffsetMeta offsets length %d does not match the number of channels %d",
+      cast(int)offsets.length, numChannels);
+    return null;
+  }
+
+  auto _cretval = gst_buffer_add_dsd_plane_offset_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null,
+    numChannels, numBytesPerChannel, offsets.length > 0 ? offsets.ptr : null);
+  return _cretval ? new gstaudio.dsd_plane_offset_meta.DsdPlaneOffsetMeta(cast(GstDsdPlaneOffsetMeta*)_cretval, buffer) : null;
+}
+
+/**
+    Converts DSD data from one layout and grouping format to another.
+    numDsdBytes must be an integer multiple of the width of both input and output format times numChannels (whole
+    frames). For example, if the input format is [gstaudio.types.DsdFormat.DsdFormatU32le], the output format is
+    [gstaudio.types.DsdFormat.DsdFormatU16be] and there are 2 channels, then numDsdBytes must be an integer
+    multiple of 8.
+    reverseByteBits is necessary if the bit order within the DSD bytes needs to be reversed. This is rarely
+    necessary, and is not to be confused with the endianness of formats (which determines the ordering of bytes).
+    The plane offsets define the starting offset of the planes (there is exactly one plane per channel of
+    numDsdBytes / numChannels bytes) within inputData and outputData respectively, they are required for
+    [gstaudio.types.AudioLayout.NonInterleaved] and ignored for [gstaudio.types.AudioLayout.Interleaved].
+    Params:
+      inputData = the DSD format conversion's input source, at least numDsdBytes long and containing the planes
+      outputData = the DSD format conversion's output destination, at least numDsdBytes long and containing the
+        planes
+      inputFormat = DSD format of the input data to convert from
+      outputFormat = DSD format of the output data to convert to
+      inputLayout = Input data layout
+      outputLayout = Output data layout
+      inputPlaneOffsets = Plane offsets for non-interleaved input data, one for each channel
+      outputPlaneOffsets = Plane offsets for non-interleaved output data, one for each channel
+      numDsdBytes = How many bytes with DSD data to convert
+      numChannels = Number of channels (must be at least 1)
+      reverseByteBits = If true, reverse the bits in each DSD byte
+*/
+void dsdConvert(const(ubyte)[] inputData, ubyte[] outputData, gstaudio.types.DsdFormat inputFormat,
+  gstaudio.types.DsdFormat outputFormat, gstaudio.types.AudioLayout inputLayout,
+  gstaudio.types.AudioLayout outputLayout, const(size_t)[] inputPlaneOffsets, const(size_t)[] outputPlaneOffsets,
+  size_t numDsdBytes, int numChannels, bool reverseByteBits) nothrow
+{
+  import glib.c.functions : g_log;
+  import glib.c.types : GLogLevelFlags;
+
+  if (numChannels < 1 || numDsdBytes == 0)
+  {
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.dsdConvert numChannels %d and numDsdBytes %zu must be at least 1",
+      numChannels, numDsdBytes);
+    return;
+  }
+
+  // Check the format, layout, data length and plane offsets of the input or output
+  bool checkData(string name, size_t dataLength, gstaudio.types.DsdFormat format, gstaudio.types.AudioLayout layout,
+    const(size_t)[] planeOffsets)
+  {
+    auto width = gst_dsd_format_get_width(format);
+
+    if (width == 0)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.dsdConvert invalid %.*s format %d",
+        cast(int)name.length, name.ptr, cast(int)format);
+      return false;
+    }
+
+    if (numDsdBytes % (width * numChannels) != 0)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.dsdConvert numDsdBytes %zu is not a multiple of the %.*s format width %u times the number of channels %d",
+        numDsdBytes, cast(int)name.length, name.ptr, width, numChannels);
+      return false;
+    }
+
+    if (dataLength < numDsdBytes)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.dsdConvert %.*s data length %zu is less than numDsdBytes %zu",
+        cast(int)name.length, name.ptr, dataLength, numDsdBytes);
+      return false;
+    }
+
+    if (layout == gstaudio.types.AudioLayout.Interleaved)
+      return true;
+
+    if (layout != gstaudio.types.AudioLayout.NonInterleaved)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.dsdConvert invalid %.*s layout %d",
+        cast(int)name.length, name.ptr, cast(int)layout);
+      return false;
+    }
+
+    if (planeOffsets.length != numChannels)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.dsdConvert %.*s plane offsets length %d does not match the number of channels %d",
+        cast(int)name.length, name.ptr, cast(int)planeOffsets.length, numChannels);
+      return false;
+    }
+
+    auto bytesPerPlane = numDsdBytes / numChannels;
+
+    foreach (i, offset; planeOffsets)
+    {
+      if (offset > dataLength || dataLength - offset < bytesPerPlane)
+      {
+        g_log("Gid", GLogLevelFlags.LevelCritical, "gstaudio.global.dsdConvert %.*s plane %d at offset %zu with %zu bytes exceeds the data length %zu",
+          cast(int)name.length, name.ptr, cast(int)i, offset, bytesPerPlane, dataLength);
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  if (!checkData("input", inputData.length, inputFormat, inputLayout, inputPlaneOffsets)
+    || !checkData("output", outputData.length, outputFormat, outputLayout, outputPlaneOffsets))
+    return;
+
+  gst_dsd_convert(inputData.ptr, outputData.ptr, inputFormat, outputFormat, inputLayout, outputLayout,
+    inputLayout == gstaudio.types.AudioLayout.NonInterleaved ? inputPlaneOffsets.ptr : null,
+    outputLayout == gstaudio.types.AudioLayout.NonInterleaved ? outputPlaneOffsets.ptr : null,
+    numDsdBytes, numChannels, reverseByteBits);
 }
 
 //!class AudioDownmixMeta

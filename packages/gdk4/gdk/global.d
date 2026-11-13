@@ -25,6 +25,92 @@ import gobject.types;
 import gobject.value;
 
 
+import gdk.content_deserializer;
+import gdk.content_serializer;
+
+private extern(C) void _contentSerializeCallback(GdkContentSerializer* serializer) nothrow
+{
+  auto _dlg = cast(gdk.types.ContentSerializeFunc*)gdk_content_serializer_get_user_data(serializer);
+
+  try
+  {
+    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.content_serializer.ContentSerializer)(cast(void*)serializer, No.Take));
+  }
+  catch (Exception e)
+  {
+    gidInvokeCallbackExceptionHandler(e, "gdk.types.ContentSerializeFunc");
+  }
+}
+
+private extern(C) void _contentDeserializeCallback(GdkContentDeserializer* deserializer) nothrow
+{
+  auto _dlg = cast(gdk.types.ContentDeserializeFunc*)gdk_content_deserializer_get_user_data(deserializer);
+
+  try
+  {
+    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.content_deserializer.ContentDeserializer)(cast(void*)deserializer, No.Take));
+  }
+  catch (Exception e)
+  {
+    gidInvokeCallbackExceptionHandler(e, "gdk.types.ContentDeserializeFunc");
+  }
+}
+
+/**
+Registers a function to serialize objects of a given type.
+The delegate is called with the [gdk.content_serializer.ContentSerializer] of the operation, it must call
+[gdk.content_serializer.ContentSerializer.returnSuccess] or
+[gdk.content_serializer.ContentSerializer.returnError] when done (possibly asynchronously). The registration is
+permanent, the delegate is kept alive for the lifetime of the process.
+Params:
+type = the type of objects that the function can serialize
+mimeType = the mime type to serialize to
+serialize = the delegate to call to serialize
+*/
+void contentRegisterSerializer(gobject.types.GType type, string mimeType, gdk.types.ContentSerializeFunc serialize) nothrow
+{
+  import glib.c.functions : g_log;
+  import glib.c.types : GLogLevelFlags;
+
+  if (!mimeType || !serialize)
+  {
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gdk.global.contentRegisterSerializer: assertion 'mimeType && serialize' failed");
+    return;
+  }
+
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
+  auto _serialize = freezeDelegate(cast(void*)&serialize);
+  gdk_content_register_serializer(type, _mimeType, &_contentSerializeCallback, _serialize, &thawDelegate);
+}
+
+/**
+Registers a function to deserialize object of a given type.
+The delegate is called with the [gdk.content_deserializer.ContentDeserializer] of the operation, it must set the
+value ([gdk.content_deserializer.ContentDeserializer.setValue]) and call
+[gdk.content_deserializer.ContentDeserializer.returnSuccess] or
+[gdk.content_deserializer.ContentDeserializer.returnError] when done (possibly asynchronously). The registration
+is permanent, the delegate is kept alive for the lifetime of the process.
+Params:
+mimeType = the mime type which the function can deserialize from
+type = the type of objects that the function creates
+deserialize = the delegate to call to deserialize
+*/
+void contentRegisterDeserializer(string mimeType, gobject.types.GType type, gdk.types.ContentDeserializeFunc deserialize) nothrow
+{
+  import glib.c.functions : g_log;
+  import glib.c.types : GLogLevelFlags;
+
+  if (!mimeType || !deserialize)
+  {
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gdk.global.contentRegisterDeserializer: assertion 'mimeType && deserialize' failed");
+    return;
+  }
+
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
+  auto _deserialize = freezeDelegate(cast(void*)&deserialize);
+  gdk_content_register_deserializer(_mimeType, type, &_contentDeserializeCallback, _deserialize, &thawDelegate);
+}
+
 /**
     Draws GL content onto a cairo context.
     

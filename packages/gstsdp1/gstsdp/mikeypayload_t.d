@@ -15,12 +15,9 @@ class MIKEYPayloadT : StructWrap!(GstMIKEYPayloadT)
 {
   /**
       Create a `mikeypayload_t.MIKEYPayloadT` wrap type.
-      Params:
-        type = a #GstMIKEYTSType
   */
-  this(gstsdp.types.MIKEYTSType type = gstsdp.types.MIKEYTSType.init) nothrow
+  this() nothrow
   {
-    this.type = type;
   }
 
   /** */
@@ -54,12 +51,20 @@ class MIKEYPayloadT : StructWrap!(GstMIKEYPayloadT)
   }
 
   /**
-      Set `type` field.
-      Params:
-        propval = a #GstMIKEYTSType
+  Get `tsValue` field.
+  Returns: the timestamp value (copied), its length is determined by the timestamp type
   */
-  @property void type(gstsdp.types.MIKEYTSType propval) nothrow
+  @property ubyte[] tsValue() nothrow
   {
-    (cast(GstMIKEYPayloadT*)this._cPtr).type = cast(GstMIKEYTSType)propval;
+    import gstsdp.mikeypayload : MIKEYPayload;
+
+    auto payload = cast(GstMIKEYPayloadT*)this._cPtr;
+    auto _len = MIKEYPayload.tsValueLength(cast(gstsdp.types.MIKEYTSType)payload.type);
+
+    if (!payload.tsValue || _len <= 0)
+      return null;
+
+    return payload.tsValue[0 .. _len].dup;
   }
+
 }

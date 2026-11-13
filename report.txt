@@ -15,7 +15,7 @@ gmime3                     |   69    0    0   100 |  558    0    0   100 |    0 
 gmodule2                   |    3    0    0   100 |    8    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   56    0    0   100 |  265    0    0   100 |    3    0    0   100 |  137    0    0   100 |
 gdk3                       |   57    0    0   100 |  548    0    0   100 |   39    0    0   100 |  264    0    0   100 |
-gdk4                       |   66    0    0   100 |  538    2    0  99.6 |   35    0    0   100 |   14    0    0   100 |
+gdk4                       |   66    0    0   100 |  536    0    0   100 |   35    0    0   100 |   14    0    0   100 |
 gdkpixbuf2                 |   12    0    0   100 |   97    0    0   100 |    4    0    0   100 |   23    0    0   100 |
 gio2                       |  171    0    0   100 | 1667    0    0   100 |   79    0    0   100 |   64    0    0   100 |
 giounix2                   |   11    0    0   100 |  100    0    0   100 |    2    0    0   100 |    0    0    0   100 |
@@ -24,7 +24,7 @@ gsk4                       |   58    0    0   100 |  309    0    0   100 |    0 
 gst1                       |   94    0    0   100 | 1531    0    0   100 |   23    0    0   100 |  130    0    0   100 |
 gstallocators1             |    8    0    0   100 |   23    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    8    0    0   100 |   67    0    0   100 |   17    0    0   100 |    8    0    0   100 |
-gstaudio1                  |   33    0    0   100 |  215    3    0  98.6 |    0    0    0   100 |   61    0    0   100 |
+gstaudio1                  |   33    0    0   100 |  215    1    0  99.5 |    0    0    0   100 |   61    0    0   100 |
 gstbase1                   |   23    0    0   100 |  308    0    0   100 |    2    0    0   100 |   30    0    0   100 |
 gstcheck1                  |    8    0    0   100 |  109    0    0   100 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   17    0    0   100 |    3    0    0   100 |    2    0    0   100 |
@@ -35,9 +35,9 @@ gstnet1                    |    9    0    0   100 |   25    0    0   100 |    0 
 gstpbutils1                |   16    0    0   100 |  182    0    0   100 |    5    0    0   100 |    0    0    0   100 |
 gstrtp1                    |   11    0    0   100 |  195    0    0   100 |    6    0    0   100 |   17    0    0   100 |
 gstrtsp1                   |   15    0    0   100 |  139    0    0   100 |    1    0    0   100 |   51    0    0   100 |
-gstsdp1                    |   23    0    0   100 |  167    2    0  98.8 |    0    0    0   100 |   87    2    0  97.8 |
+gstsdp1                    |   23    0    0   100 |  167    0    0   100 |    0    0    0   100 |   87    0    0   100 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   60    0    0   100 |  385    4    0  99.0 |    2    0    0   100 |  186    1    0  99.5 |
+gstvideo1                  |   60    0    0   100 |  380    2    0  99.5 |    2    0    0   100 |  186    0    0   100 |
 gtk3                       |  345    0    0   100 | 3780    0    0   100 |  448    0    0   100 |  155    0    0   100 |
 gtk4                       |  326    0    0   100 | 3667    0    0   100 |  347    0    0   100 |   37    0    0   100 |
 gtksource4                 |   38    0    0   100 |  371    0    0   100 |   33    0    0   100 |    0    0    0   100 |
@@ -63,25 +63,12 @@ libxml2                    |   10    0    0   100 |    0    0    0   100 |    0 
 xlib2                      |   12    0    0   100 |    1    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
 [Disabled Funcs]
-gdk.global.contentRegisterDeserializer
-gdk.global.contentRegisterSerializer
 gstaudio.audio_resampler.AudioResampler.resample
-gstaudio.global.bufferAddDsdPlaneOffsetMeta
-gstaudio.global.dsdConvert
 gstglegl.eglimage.EGLImage.newWrapped
 gstglegl.eglimage.EGLImage.exportDmabuf
 gstglegl.eglimage.EGLImage.fromDmabufDirect
 gstglegl.eglimage.EGLImage.fromDmabufDirectTarget
 gstglegl.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
 gstglegl.eglimage.EGLImage.fromTexture
-gstsdp.mikeymessage.MIKEYMessage.addT
-gstsdp.mikeypayload.MIKEYPayload.tSet
 gstvideo.video_scaler.VideoScaler.vertical
-gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine
-gstvideo.video_vbiparser.VideoVBIParser.addLine
 gstvideo.global.videoChromaResample
-
-[Disabled Fields]
-gstsdp.mikeypayload_key_data.MIKEYPayloadKeyData.kvData
-gstsdp.mikeypayload_t.MIKEYPayloadT.tsValue
-gstvideo.video_resampler.VideoResampler.taps
