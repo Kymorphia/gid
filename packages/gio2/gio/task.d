@@ -937,7 +937,10 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     GError *_err;
     _retval = cast(bool)g_task_propagate_value(cast(GTask*)this._cPtr, _value, &_err);
     if (_err)
+    {
+      gobject.value.Value._cFree(_value);
       throw new ErrorWrap(_err, Yes.Take);
+    }
     value = new gobject.value.Value(cast(void*)_value, Yes.Take);
     return _retval;
   }
