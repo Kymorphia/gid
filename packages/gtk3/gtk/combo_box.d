@@ -962,16 +962,19 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
+      auto _iter = iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _iter);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewRowSeparatorFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_iter)
+        _iter._cUnborrow;
 
       return _retval;
     }

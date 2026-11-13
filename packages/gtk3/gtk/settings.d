@@ -1988,16 +1988,19 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
     extern(C) gboolean _parserCallback(const(GParamSpec)* pspec, const(GString)* rcString, GValue* propertyValue) nothrow
     {
       bool _dretval;
+      auto _propertyValue = propertyValue ? new gobject.value.Value(cast(void*)propertyValue, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = _static_parser(pspec ? new gobject.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null, rcString ? new glib.string_.String(cast(void*)rcString, No.Take) : null, propertyValue ? new gobject.value.Value(cast(void*)propertyValue, No.Take) : null);
+        _dretval = _static_parser(pspec ? new gobject.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null, rcString ? new glib.string_.String(cast(void*)rcString, No.Take) : null, _propertyValue);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.RcPropertyParser");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_propertyValue)
+        _propertyValue._cUnborrow;
 
       return _retval;
     }

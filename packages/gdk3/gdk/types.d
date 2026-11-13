@@ -179,7 +179,7 @@ alias WindowRedirect = GdkWindowRedirect*;
     handle all GDK events.
 
     Params:
-      event = the #GdkEvent to process.
+      event = the #GdkEvent to process. (modified in place, changes are seen by the caller)
 */
 alias EventFunc = void delegate(gdk.event.Event event);
 
@@ -216,7 +216,7 @@ alias WindowChildFunc = bool delegate(gdk.window.Window window);
 
     Params:
       window = a #GdkWindow
-      region = a #cairo_region_t
+      region = a #cairo_region_t (modified in place, changes are seen by the caller)
 */
 alias WindowInvalidateHandlerFunc = void delegate(gdk.window.Window window, cairo.region.Region region);
 

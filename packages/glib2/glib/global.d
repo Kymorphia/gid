@@ -4711,16 +4711,19 @@ uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCon
   {
     bool _dretval;
     auto _dlg = cast(glib.types.IOFunc*)data;
+    auto _source = source ? new glib.iochannel.IOChannel(cast(void*)source, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
+      _dretval = (*_dlg)(_source, condition);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "glib.types.IOFunc");
     }
     auto _retval = cast(gboolean)_dretval;
+    if (_source)
+      _source._cUnborrow;
 
     return _retval;
   }

@@ -104,7 +104,7 @@ alias StreamIOVector = GMimeStreamIOVector;
 
     Params:
       header = a #GMimeHeader
-      options = a #GMimeFormatOptions
+      options = a #GMimeFormatOptions (modified in place, changes are seen by the caller)
       value = an unencoded header value
       charset = a charset
     Returns: the encoded and formatted raw header value.

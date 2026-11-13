@@ -1073,15 +1073,19 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     extern(C) void _funcCallback(GtkIconView* iconView, GtkTreePath* path, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.IconViewForeachFunc*)data;
+      auto _path = path ? new gtk.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), _path);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.IconViewForeachFunc");
       }
+      if (_path)
+        _path._cUnborrow;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;

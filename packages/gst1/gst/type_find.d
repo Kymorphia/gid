@@ -162,15 +162,19 @@ class TypeFind : gobject.boxed.BoxedWrap!(gst_type_find_get_type)
     extern(C) void _funcCallback(GstTypeFind* find, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TypeFindFunction*)userData;
+      auto _find = find ? new gst.type_find.TypeFind(cast(void*)find, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(find ? new gst.type_find.TypeFind(cast(void*)find, No.Take) : null);
+        (*_dlg)(_find);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.TypeFindFunction");
       }
+      if (_find)
+        _find._cUnborrow;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
     bool _retval;

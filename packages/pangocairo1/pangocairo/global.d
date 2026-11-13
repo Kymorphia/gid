@@ -105,16 +105,20 @@ void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.Sha
   extern(C) void _funcCallback(cairo_t* cr, PangoAttrShape* attr, gboolean doPath, void* data) nothrow
   {
     auto _dlg = cast(pangocairo.types.ShapeRendererFunc*)data;
+    auto _cr = cr ? new cairo.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
     auto _attr = attr ? new pango.attr_shape.AttrShape(cast(void*)attr, null) : null;
 
     try
     {
-      (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, _attr, cast(bool)doPath);
+      (*_dlg)(_cr, _attr, cast(bool)doPath);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "pangocairo.types.ShapeRendererFunc");
     }
+    if (_cr)
+      _cr._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;

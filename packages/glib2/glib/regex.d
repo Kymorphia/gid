@@ -639,16 +639,19 @@ class Regex : gobject.boxed.BoxedWrap!(g_regex_get_type)
     {
       bool _dretval;
       auto _dlg = cast(glib.types.RegexEvalCallback*)userData;
+      auto _result = result ? new glib.string_.String(cast(void*)result, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new glib.string_.String(cast(void*)result, No.Take) : null);
+        _dretval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, _result);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "glib.types.RegexEvalCallback");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_result)
+        _result._cUnborrow;
 
       return _retval;
     }

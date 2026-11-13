@@ -38,7 +38,7 @@ alias PixbufRotation = GdkPixbufRotation;
     #GdkPixbufFormat structure with information about a module.
 
     Params:
-      info = a #GdkPixbufFormat.
+      info = a #GdkPixbufFormat. (modified in place, changes are seen by the caller)
 */
 alias PixbufModuleFillInfoFunc = void delegate(gdkpixbuf.pixbuf_format.PixbufFormat info);
 

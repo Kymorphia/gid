@@ -238,15 +238,19 @@ class Task : gst.object.ObjectWrap
     extern(C) void _enterFuncCallback(GstTask* task, GThread* thread, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
+      auto _thread = thread ? new glib.thread.Thread(cast(void*)thread, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), _thread);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.TaskThreadFunc");
       }
+      if (_thread)
+        _thread._cUnborrow;
+
     }
     auto _enterFuncCB = enterFunc ? &_enterFuncCallback : null;
     auto _enterFunc = enterFunc ? freezeDelegate(cast(void*)&enterFunc) : null;
@@ -267,15 +271,19 @@ class Task : gst.object.ObjectWrap
     extern(C) void _leaveFuncCallback(GstTask* task, GThread* thread, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
+      auto _thread = thread ? new glib.thread.Thread(cast(void*)thread, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), _thread);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.TaskThreadFunc");
       }
+      if (_thread)
+        _thread._cUnborrow;
+
     }
     auto _leaveFuncCB = leaveFunc ? &_leaveFuncCallback : null;
     auto _leaveFunc = leaveFunc ? freezeDelegate(cast(void*)&leaveFunc) : null;

@@ -262,16 +262,19 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.TreeModelFilterModifyFunc*)data;
+      auto _iter = iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
       gobject.value.Value _value;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null, _value, column);
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _iter, _value, column);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeModelFilterModifyFunc");
       }
+      if (_iter)
+        _iter._cUnborrow;
       if (_value)
       {
         auto p_ = _value._cPtr(Yes.Dup);
@@ -355,16 +358,19 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeModelFilterVisibleFunc*)data;
+      auto _iter = iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _iter);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeModelFilterVisibleFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_iter)
+        _iter._cUnborrow;
 
       return _retval;
     }

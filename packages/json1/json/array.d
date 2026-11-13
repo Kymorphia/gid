@@ -223,15 +223,22 @@ class Array : gobject.boxed.BoxedWrap!(json_array_get_type)
     extern(C) void _funcCallback(JsonArray* array, uint index, JsonNode* elementNode, void* userData) nothrow
     {
       auto _dlg = cast(json.types.ArrayForeach*)userData;
+      auto _array = array ? new json.array.Array(cast(void*)array, Yes.Take)._cBorrow : null;
+      auto _elementNode = elementNode ? new json.node.Node(cast(void*)elementNode, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(array ? new json.array.Array(cast(void*)array, No.Take) : null, index, elementNode ? new json.node.Node(cast(void*)elementNode, No.Take) : null);
+        (*_dlg)(_array, index, _elementNode);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "json.types.ArrayForeach");
       }
+      if (_array)
+        _array._cUnborrow;
+      if (_elementNode)
+        _elementNode._cUnborrow;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;

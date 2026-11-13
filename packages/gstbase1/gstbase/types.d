@@ -104,7 +104,7 @@ alias CollectPadsCompareFunction = int delegate(gstbase.collect_pads.CollectPads
     Params:
       pads = the #GstCollectPads that triggered the callback
       pad = the #GstPad that received an event (borrowed, only valid during the callback)
-      event = the #GstEvent received
+      event = the #GstEvent received (modified in place, changes are seen by the caller)
     Returns: true if the pad could handle the event
 */
 alias CollectPadsEventFunction = bool delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData pad, gst.event.Event event);
@@ -139,7 +139,7 @@ alias CollectPadsFunction = gst.types.FlowReturn delegate(gstbase.collect_pads.C
     Params:
       pads = the #GstCollectPads that triggered the callback
       pad = the #GstPad that received an event (borrowed, only valid during the callback)
-      query = the #GstEvent received
+      query = the #GstEvent received (modified in place, changes are seen by the caller)
     Returns: true if the pad could handle the event
 */
 alias CollectPadsQueryFunction = bool delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData pad, gst.query.Query query);

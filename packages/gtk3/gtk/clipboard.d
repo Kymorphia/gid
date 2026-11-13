@@ -262,15 +262,19 @@ class Clipboard : gobject.object.ObjectWrap
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardReceivedFunc*)data;
+      auto _selectionData = selectionData ? new gtk.selection_data.SelectionData(cast(void*)selectionData, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), selectionData ? new gtk.selection_data.SelectionData(cast(void*)selectionData, No.Take) : null);
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _selectionData);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.ClipboardReceivedFunc");
       }
+      if (_selectionData)
+        _selectionData._cUnborrow;
+
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;

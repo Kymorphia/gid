@@ -78,15 +78,22 @@ template TreeSortableT()
     {
       int _retval;
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
+      auto _a = a ? new gtk.tree_iter.TreeIter(cast(void*)a, Yes.Take)._cBorrow : null;
+      auto _b = b ? new gtk.tree_iter.TreeIter(cast(void*)b, Yes.Take)._cBorrow : null;
 
       try
       {
-        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _a, _b);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeIterCompareFunc");
       }
+      if (_a)
+        _a._cUnborrow;
+      if (_b)
+        _b._cUnborrow;
+
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -130,15 +137,22 @@ template TreeSortableT()
     {
       int _retval;
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
+      auto _a = a ? new gtk.tree_iter.TreeIter(cast(void*)a, Yes.Take)._cBorrow : null;
+      auto _b = b ? new gtk.tree_iter.TreeIter(cast(void*)b, Yes.Take)._cBorrow : null;
 
       try
       {
-        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _a, _b);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeIterCompareFunc");
       }
+      if (_a)
+        _a._cUnborrow;
+      if (_b)
+        _b._cUnborrow;
+
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;

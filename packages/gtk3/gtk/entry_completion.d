@@ -543,16 +543,19 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       bool _dretval;
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString!(No.Free);
+      auto _iter = iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, _iter);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.EntryCompletionMatchFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_iter)
+        _iter._cUnborrow;
 
       return _retval;
     }

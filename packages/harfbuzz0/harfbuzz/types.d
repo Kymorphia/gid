@@ -199,8 +199,8 @@ alias VarNum = hb_var_num_t;
     the next one.
 
     Params:
-      buffer = An #hb_buffer_t to work upon
-      font = The #hb_font_t the buffer is shaped with
+      buffer = An #hb_buffer_t to work upon (modified in place, changes are seen by the caller)
+      font = The #hb_font_t the buffer is shaped with (modified in place, changes are seen by the caller)
       message = `NULL`-terminated message passed to the function
     Returns: `true` to perform the shaping step, `false` to skip it.
 */
@@ -210,7 +210,7 @@ alias BufferMessageFunc = harfbuzz.types.Bool delegate(harfbuzz.buffer.Buffer bu
     A virtual method for the hb_color_line_t to fetches the extend mode.
 
     Params:
-      colorLine = a #hb_color_line_t object
+      colorLine = a #hb_color_line_t object (modified in place, changes are seen by the caller)
       colorLineData = the data accompanying color_line
     Returns: the extend mode of color_line
 */
@@ -226,9 +226,9 @@ alias DestroyFunc = void delegate();
     operation.
 
     Params:
-      dfuncs = draw functions object
+      dfuncs = draw functions object (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-      st = current draw state
+      st = current draw state (modified in place, changes are seen by the caller)
 */
 alias DrawClosePathFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st);
 
@@ -237,9 +237,9 @@ alias DrawClosePathFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, vo
     operation.
 
     Params:
-      dfuncs = draw functions object
+      dfuncs = draw functions object (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-      st = current draw state
+      st = current draw state (modified in place, changes are seen by the caller)
       control1X = X component of first control point
       control1Y = Y component of first control point
       control2X = X component of second control point
@@ -254,9 +254,9 @@ alias DrawCubicToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void
     operation.
 
     Params:
-      dfuncs = draw functions object
+      dfuncs = draw functions object (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-      st = current draw state
+      st = current draw state (modified in place, changes are seen by the caller)
       toX = X component of target point
       toY = Y component of target point
 */
@@ -267,9 +267,9 @@ alias DrawLineToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void*
     operation.
 
     Params:
-      dfuncs = draw functions object
+      dfuncs = draw functions object (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-      st = current draw state
+      st = current draw state (modified in place, changes are seen by the caller)
       toX = X component of target point
       toY = Y component of target point
 */
@@ -280,9 +280,9 @@ alias DrawMoveToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void*
     operation.
 
     Params:
-      dfuncs = draw functions object
+      dfuncs = draw functions object (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-      st = current draw state
+      st = current draw state (modified in place, changes are seen by the caller)
       controlX = X component of control point
       controlY = Y component of control point
       toX = X component of target point
@@ -294,10 +294,10 @@ alias DrawQuadraticToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, 
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
-      drawFuncs = The draw functions to send the shape data to
+      drawFuncs = The draw functions to send the shape data to (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions
 
     Deprecated: Use hb_font_draw_glyph_func_or_fail_t instead.
@@ -308,10 +308,10 @@ alias FontDrawGlyphFunc = void delegate(harfbuzz.font.Font font, void* fontData,
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
-      drawFuncs = The draw functions to send the shape data to
+      drawFuncs = The draw functions to send the shape data to (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions
     Returns: `true` if glyph was drawn, `false` otherwise
 */
@@ -321,7 +321,7 @@ alias FontDrawGlyphOrFailFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font 
     This method should retrieve the extents for a font.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       extents = The font extents retrieved
     Returns: 
@@ -335,7 +335,7 @@ alias FontGetFontExtentsFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font f
     method must return an #hb_position_t.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
     Returns: The advance of glyph within font
@@ -350,7 +350,7 @@ alias FontGetGlyphAdvanceFunc = harfbuzz.types.Position delegate(harfbuzz.font.F
     an #hb_position_t output parameter.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
       pointIndex = The contour-point index to query
@@ -367,7 +367,7 @@ alias FontGetGlyphContourPointFunc = harfbuzz.types.Bool delegate(harfbuzz.font.
     returned in an #hb_glyph_extents output parameter.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
       extents = The #hb_glyph_extents_t retrieved
@@ -382,7 +382,7 @@ alias FontGetGlyphExtentsFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font 
     string.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       name = The name string to query
       glyph = The glyph ID retrieved
@@ -397,7 +397,7 @@ alias FontGetGlyphFromNameFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font
     font, with an optional variation selector.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       unicode = The Unicode code point to query
       variationSelector = The  variation-selector code point to query
@@ -411,7 +411,7 @@ alias FontGetGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, v
     the specified font, for horizontal text segments.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       firstGlyph = The glyph ID of the first glyph in the glyph pair
       secondGlyph = The glyph ID of the second glyph in the glyph pair
@@ -427,7 +427,7 @@ alias FontGetGlyphKerningFunc = harfbuzz.types.Position delegate(harfbuzz.font.F
     output parameter.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
       x = The X coordinate of the origin
@@ -440,10 +440,10 @@ alias FontGetGlyphOriginFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font f
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
-      drawFuncs = The draw functions to send the shape data to
+      drawFuncs = The draw functions to send the shape data to (modified in place, changes are seen by the caller)
       drawData = The data accompanying the draw functions
 
     Deprecated: Use #hb_font_draw_glyph_func_t instead
@@ -457,7 +457,7 @@ alias FontGetGlyphShapeFunc = void delegate(harfbuzz.font.Font font, void* fontD
     point. Glyph IDs must be returned in a #hb_codepoint_t output parameter.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       unicode = The Unicode code point to query
       glyph = The glyph ID retrieved
@@ -473,7 +473,7 @@ alias FontGetNominalGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font 
     returned in a #hb_codepoint_t output parameter.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       unicode = The Unicode code point to query
       variationSelector = The  variation-selector code point to query
@@ -486,10 +486,10 @@ alias FontGetVariationGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Fon
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
-      paintFuncs = The paint functions to use
+      paintFuncs = The paint functions to use (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions
       paletteIndex = The color palette to use
       foreground = The foreground color
@@ -503,10 +503,10 @@ alias FontPaintGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font,
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
     Params:
-      font = #hb_font_t to work upon
+      font = #hb_font_t to work upon (modified in place, changes are seen by the caller)
       fontData = font user data pointer
       glyph = The glyph ID to query
-      paintFuncs = The paint functions to use
+      paintFuncs = The paint functions to use (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions
       paletteIndex = The color palette to use
       foreground = The foreground color
@@ -519,7 +519,7 @@ alias FontPaintGlyphOrFailFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font
     color everywhere within the current clip.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       isForeground = whether the color is the foreground
       color = The color to use, unpremultiplied
@@ -530,10 +530,10 @@ alias PaintColorFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void
     A virtual method for the #hb_paint_funcs_t to render a color glyph by glyph index.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       glyph = the glyph ID
-      font = the font
+      font = the font (modified in place, changes are seen by the caller)
     Returns: `true` if the glyph was painted, `false` otherwise.
 */
 alias PaintColorGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font);
@@ -550,7 +550,7 @@ alias PaintColorGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.Pa
     expected to remain unchanged for duration of a [harfbuzz.global.fontPaintGlyph] call.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       colorIndex = the color index
       color = fetched color
@@ -570,9 +570,9 @@ alias PaintCustomPaletteColorFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_
     and should be used to size and position the image.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-      image = the image data
+      image = the image data (modified in place, changes are seen by the caller)
       width = width of the raster image in pixels, or 0
       height = height of the raster image in pixels, or 0
       format = the image format as a tag
@@ -597,9 +597,9 @@ alias PaintImageFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.PaintFu
     of the gradient, and how to interpret the color_line.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-      colorLine = Color information for the gradient
+      colorLine = Color information for the gradient (modified in place, changes are seen by the caller)
       x0 = X coordinate of the first point
       y0 = Y coordinate of the first point
       x1 = X coordinate of the second point
@@ -615,7 +615,7 @@ alias PaintLinearGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fu
     or #hb_paint_funcs_push_clip_rectangle_func_t vfuncs.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
 */
 alias PaintPopClipFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData);
@@ -630,7 +630,7 @@ alias PaintPopClipFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, vo
     compositing mode passed to this call.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       mode = the compositing mode to use
 */
@@ -642,7 +642,7 @@ alias PaintPopGroupFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, v
     vfunc.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
 */
 alias PaintPopTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData);
@@ -661,10 +661,10 @@ alias PaintPopTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs func
     the #hb_paint_funcs_pop_clip_func_t vfunc.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       glyph = the glyph ID
-      font = the font
+      font = the font (modified in place, changes are seen by the caller)
 */
 alias PaintPushClipGlyphFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font);
 
@@ -680,7 +680,7 @@ alias PaintPushClipGlyphFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fun
     the #hb_paint_funcs_pop_clip_func_t vfunc.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       xmin = min X for the rectangle
       ymin = min Y for the rectangle
@@ -698,7 +698,7 @@ alias PaintPushClipRectangleFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs
     vfunc.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
 */
 alias PaintPushGroupFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData);
@@ -712,7 +712,7 @@ alias PaintPushGroupFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, 
     the #hb_paint_funcs_pop_transform_func_t vfunc.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
       xx = xx component of the transform matrix
       yx = yx component of the transform matrix
@@ -738,9 +738,9 @@ alias PaintPushTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fun
     of the gradient, and how to interpret the color_line.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-      colorLine = Color information for the gradient
+      colorLine = Color information for the gradient (modified in place, changes are seen by the caller)
       x0 = X coordinate of the first circle's center
       y0 = Y coordinate of the first circle's center
       r0 = radius of the first circle
@@ -765,9 +765,9 @@ alias PaintRadialGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fu
     of the gradient, and how to interpret the color_line.
 
     Params:
-      funcs = paint functions object
+      funcs = paint functions object (modified in place, changes are seen by the caller)
       paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-      colorLine = Color information for the gradient
+      colorLine = Color information for the gradient (modified in place, changes are seen by the caller)
       x0 = X coordinate of the circle's center
       y0 = Y coordinate of the circle's center
       startAngle = the start angle, in radians
@@ -783,7 +783,7 @@ alias PaintSweepGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs fun
     [harfbuzz.global.faceReferenceBlob] to create a face blob out of individual table blobs.
 
     Params:
-      face = an #hb_face_t to reference table for
+      face = an #hb_face_t to reference table for (modified in place, changes are seen by the caller)
       tag = the tag of the table to reference
     Returns: A pointer to the tag table within face or
       `NULL` if the table is not found or cannot be referenced.
@@ -797,7 +797,7 @@ alias ReferenceTableFunc = harfbuzz.blob.Blob delegate(harfbuzz.face.Face face, 
     property for a specified Unicode code point.
 
     Params:
-      ufuncs = A Unicode-functions structure
+      ufuncs = A Unicode-functions structure (modified in place, changes are seen by the caller)
       unicode = The code point to query
     Returns: The #hb_unicode_combining_class_t of unicode
 */
@@ -813,7 +813,7 @@ alias UnicodeCombiningClassFunc = harfbuzz.types.UnicodeCombiningClass delegate(
     of the composition.
 
     Params:
-      ufuncs = A Unicode-functions structure
+      ufuncs = A Unicode-functions structure (modified in place, changes are seen by the caller)
       a = The first code point to compose
       b = The second code point to compose
       ab = The composed code point
@@ -830,7 +830,7 @@ alias UnicodeComposeFunc = harfbuzz.types.Bool delegate(harfbuzz.unicode_funcs.U
     #hb_bool_t indicating the success of the composition.
 
     Params:
-      ufuncs = A Unicode-functions structure
+      ufuncs = A Unicode-functions structure (modified in place, changes are seen by the caller)
       ab = The code point to decompose
       a = The first decomposed code point
       b = The second decomposed code point
@@ -842,7 +842,7 @@ alias UnicodeDecomposeFunc = harfbuzz.types.Bool delegate(harfbuzz.unicode_funcs
     A virtual method for the #hb_unicode_funcs_t structure.
 
     Params:
-      ufuncs = A Unicode-functions structure
+      ufuncs = A Unicode-functions structure (modified in place, changes are seen by the caller)
       unicode = The code point to query
     Returns: 
 */
@@ -855,7 +855,7 @@ alias UnicodeEastasianWidthFunc = uint delegate(harfbuzz.unicode_funcs.UnicodeFu
     a specified Unicode code point.
 
     Params:
-      ufuncs = A Unicode-functions structure
+      ufuncs = A Unicode-functions structure (modified in place, changes are seen by the caller)
       unicode = The code point to query
     Returns: The #hb_unicode_general_category_t of unicode
 */
@@ -872,7 +872,7 @@ alias UnicodeGeneralCategoryFunc = harfbuzz.types.UnicodeGeneralCategory delegat
     return the original code point.</note>
 
     Params:
-      ufuncs = A Unicode-functions structure
+      ufuncs = A Unicode-functions structure (modified in place, changes are seen by the caller)
       unicode = The code point to query
     Returns: The #hb_codepoint_t of the Mirroring Glyph for unicode
 */
@@ -885,7 +885,7 @@ alias UnicodeMirroringFunc = harfbuzz.types.Codepoint delegate(harfbuzz.unicode_
     specified Unicode code point.
 
     Params:
-      ufuncs = A Unicode-functions structure
+      ufuncs = A Unicode-functions structure (modified in place, changes are seen by the caller)
       unicode = The code point to query
     Returns: The #hb_script_t of unicode
 */

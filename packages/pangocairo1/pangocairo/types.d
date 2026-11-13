@@ -16,7 +16,7 @@ import pangocairo.c.types;
 
     Params:
       cr = a Cairo context with current point set to where the shape should
-        be rendered
+        be rendered (modified in place, changes are seen by the caller)
       attr = the [pango.types.AttrType.Shape] to render (borrowed, only valid during the callback)
       doPath = whether only the shape path should be appended to current
         path of cr and no filling/stroking done.  This will be set

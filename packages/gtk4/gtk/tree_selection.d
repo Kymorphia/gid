@@ -296,15 +296,22 @@ class TreeSelection : gobject.object.ObjectWrap
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.TreeSelectionForeachFunc*)data;
+      auto _path = path ? new gtk.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+      auto _iter = iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _path, _iter);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeSelectionForeachFunc");
       }
+      if (_path)
+        _path._cUnborrow;
+      if (_iter)
+        _iter._cUnborrow;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -345,16 +352,19 @@ class TreeSelection : gobject.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeSelectionFunc*)data;
+      auto _path = path ? new gtk.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, cast(bool)pathCurrentlySelected);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _path, cast(bool)pathCurrentlySelected);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeSelectionFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_path)
+        _path._cUnborrow;
 
       return _retval;
     }

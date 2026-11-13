@@ -81,8 +81,8 @@ alias GLFuncs = GstGLFuncs*;
     functions from the superclass.
 
     Params:
-      src = the source #GstGLAllocationParams to copy from
-      dest = the source #GstGLAllocationParams to copy
+      src = the source #GstGLAllocationParams to copy from (modified in place, changes are seen by the caller)
+      dest = the source #GstGLAllocationParams to copy (modified in place, changes are seen by the caller)
 */
 alias GLAllocationParamsCopyFunc = void delegate(gstgl.glallocation_params.GLAllocationParams src, gstgl.glallocation_params.GLAllocationParams dest);
 
@@ -103,7 +103,7 @@ alias GLAsyncDebugLogGetMessage = string delegate();
 
     Params:
       allocator = a #GstGLBaseMemoryAllocator
-      params = the #GstGLAllocationParams to allocate the memory with
+      params = the #GstGLAllocationParams to allocate the memory with (modified in place, changes are seen by the caller)
     Returns: a newly allocated #GstGLBaseMemory from allocator and params
 */
 alias GLBaseMemoryAllocatorAllocFunction = gstgl.glbase_memory.GLBaseMemory delegate(gstgl.glbase_memory_allocator.GLBaseMemoryAllocator allocator, gstgl.glallocation_params.GLAllocationParams params);
@@ -112,7 +112,7 @@ alias GLBaseMemoryAllocatorAllocFunction = gstgl.glbase_memory.GLBaseMemory dele
     Also see [gst.memory.Memory.copy];
 
     Params:
-      mem = a #GstGLBaseMemory
+      mem = a #GstGLBaseMemory (modified in place, changes are seen by the caller)
       offset = the offset to copy from
       size = the number of bytes to copy
     Returns: the newly copied #GstGLMemory or null
@@ -124,7 +124,7 @@ alias GLBaseMemoryAllocatorCopyFunction = gstgl.glbase_memory.GLBaseMemory deleg
     function to allocate and OpenGL resources needed for your application
 
     Params:
-      mem = a #GstGLBaseMemory
+      mem = a #GstGLBaseMemory (modified in place, changes are seen by the caller)
     Returns: whether the creation succeeded
     Throws: [ErrorWrap]
 */
@@ -134,7 +134,7 @@ alias GLBaseMemoryAllocatorCreateFunction = bool delegate(gstgl.glbase_memory.GL
     Destroy any resources allocated throughout the lifetime of mem
 
     Params:
-      mem = a #GstGLBaseMemory
+      mem = a #GstGLBaseMemory (modified in place, changes are seen by the caller)
 */
 alias GLBaseMemoryAllocatorDestroyFunction = void delegate(gstgl.glbase_memory.GLBaseMemory mem);
 
@@ -142,7 +142,7 @@ alias GLBaseMemoryAllocatorDestroyFunction = void delegate(gstgl.glbase_memory.G
     Also see [gst.memory.Memory.map];
 
     Params:
-      mem = a #GstGLBaseMemory
+      mem = a #GstGLBaseMemory (modified in place, changes are seen by the caller)
       info = a #GstMapInfo to map with (borrowed, only valid during the callback)
       maxsize = the size to map
     Returns: the mapped pointer
@@ -153,7 +153,7 @@ alias GLBaseMemoryAllocatorMapFunction = void* delegate(gstgl.glbase_memory.GLBa
     Also see [gst.memory.Memory.unmap];
 
     Params:
-      mem = a #GstGLBaseMemory
+      mem = a #GstGLBaseMemory (modified in place, changes are seen by the caller)
       info = a #GstMapInfo to map with (borrowed, only valid during the callback)
 */
 alias GLBaseMemoryAllocatorUnmapFunction = void delegate(gstgl.glbase_memory.GLBaseMemory mem, gst.map_info.MapInfo info);

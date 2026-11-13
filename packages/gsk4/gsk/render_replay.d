@@ -214,16 +214,19 @@ class RenderReplay : gobject.boxed.BoxedWrap!(gsk_render_replay_get_type)
     {
       pango.font.Font _dretval;
       auto _dlg = cast(gsk.types.RenderReplayFontFilter*)userData;
+      auto _replay = replay ? new gsk.render_replay.RenderReplay(cast(void*)replay, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(replay ? new gsk.render_replay.RenderReplay(cast(void*)replay, No.Take) : null, gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
+        _dretval = (*_dlg)(_replay, gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gsk.types.RenderReplayFontFilter");
       }
       auto _retval = _dretval ? cast(PangoFont*)_dretval._cPtr(Yes.Dup) : null;
+      if (_replay)
+        _replay._cUnborrow;
 
       return _retval;
     }
@@ -257,16 +260,19 @@ class RenderReplay : gobject.boxed.BoxedWrap!(gsk_render_replay_get_type)
     {
       gsk.render_node.RenderNode _dretval;
       auto _dlg = cast(gsk.types.RenderReplayNodeFilter*)userData;
+      auto _replay = replay ? new gsk.render_replay.RenderReplay(cast(void*)replay, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(replay ? new gsk.render_replay.RenderReplay(cast(void*)replay, No.Take) : null, node ? new gsk.render_node.RenderNode(cast(void*)node, No.Take) : null);
+        _dretval = (*_dlg)(_replay, node ? new gsk.render_node.RenderNode(cast(void*)node, No.Take) : null);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gsk.types.RenderReplayNodeFilter");
       }
       auto _retval = _dretval ? cast(GskRenderNode*)_dretval._cPtr(Yes.Dup) : null;
+      if (_replay)
+        _replay._cUnborrow;
 
       return _retval;
     }
@@ -292,16 +298,19 @@ class RenderReplay : gobject.boxed.BoxedWrap!(gsk_render_replay_get_type)
     {
       gdk.texture.Texture _dretval;
       auto _dlg = cast(gsk.types.RenderReplayTextureFilter*)userData;
+      auto _replay = replay ? new gsk.render_replay.RenderReplay(cast(void*)replay, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(replay ? new gsk.render_replay.RenderReplay(cast(void*)replay, No.Take) : null, gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(void*)texture, No.Take));
+        _dretval = (*_dlg)(_replay, gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(void*)texture, No.Take));
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gsk.types.RenderReplayTextureFilter");
       }
       auto _retval = _dretval ? cast(GdkTexture*)_dretval._cPtr(Yes.Dup) : null;
+      if (_replay)
+        _replay._cUnborrow;
 
       return _retval;
     }

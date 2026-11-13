@@ -371,7 +371,7 @@ alias AllocationMetaParamsAggregator = bool delegate(out gst.structure.Structure
     When meta is set to null, the item will be removed from the buffer.
 
     Params:
-      buffer = a #GstBuffer
+      buffer = a #GstBuffer (modified in place, changes are seen by the caller)
       meta = a pointer to a #GstMeta (borrowed from the owner named by definitions; set to `null` to remove, replacing with a different instance is a programmer error)
     Returns: false when [gst.buffer.Buffer.foreachMeta] should stop
 */
@@ -409,7 +409,7 @@ alias BufferListFunc = bool delegate(ref gst.buffer.Buffer buffer, uint idx);
 
     Params:
       bus = the #GstBus that sent the message
-      message = the #GstMessage
+      message = the #GstMessage (modified in place, changes are seen by the caller)
     Returns: false if the event source should be removed.
 */
 alias BusFunc = bool delegate(gst.bus.Bus bus, gst.message.Message message);
@@ -424,7 +424,7 @@ alias BusFunc = bool delegate(gst.bus.Bus bus, gst.message.Message message);
 
     Params:
       bus = the #GstBus that sent the message
-      message = the #GstMessage
+      message = the #GstMessage (modified in place, changes are seen by the caller)
     Returns: #GstBusSyncReply stating what to do with the message
 */
 alias BusSyncHandler = gst.types.BusSyncReply delegate(gst.bus.Bus bus, gst.message.Message message);
@@ -440,8 +440,8 @@ alias CallAsyncFunc = void delegate();
     removed from the caps if false is returned.
 
     Params:
-      features = the #GstCapsFeatures
-      structure = the #GstStructure
+      features = the #GstCapsFeatures (modified in place, changes are seen by the caller)
+      structure = the #GstStructure (modified in place, changes are seen by the caller)
     Returns: true if the features and structure should be preserved,
       false if it should be removed.
 */
@@ -452,8 +452,8 @@ alias CapsFilterMapFunc = bool delegate(gst.caps_features.CapsFeatures features,
     not modify features or structure.
 
     Params:
-      features = the #GstCapsFeatures
-      structure = the #GstStructure
+      features = the #GstCapsFeatures (modified in place, changes are seen by the caller)
+      structure = the #GstStructure (modified in place, changes are seen by the caller)
     Returns: true if the foreach operation should continue, false if
       the foreach operation should stop with false.
 */
@@ -464,8 +464,8 @@ alias CapsForeachFunc = bool delegate(gst.caps_features.CapsFeatures features, g
     may modify features and structure.
 
     Params:
-      features = the #GstCapsFeatures
-      structure = the #GstStructure
+      features = the #GstCapsFeatures (modified in place, changes are seen by the caller)
+      structure = the #GstStructure (modified in place, changes are seen by the caller)
     Returns: true if the map operation should continue, false if
       the map operation should stop with false.
 */
@@ -488,7 +488,7 @@ alias ClockCallback = bool delegate(gst.clock.Clock clock, gst.types.ClockTime t
     Params:
       binding = 
       srcValue = 
-      destValue = 
+      destValue =  (modified in place, changes are seen by the caller)
 */
 alias ControlBindingConvert = void delegate(gst.control_binding.ControlBinding binding, double srcValue, gobject.value.Value destValue);
 
@@ -513,9 +513,9 @@ alias ControlSourceGetValue = bool delegate(gst.control_source.ControlSource sel
     the metadata on transbuf.
 
     Params:
-      transbuf = a #GstBuffer
+      transbuf = a #GstBuffer (modified in place, changes are seen by the caller)
       meta = a #GstCustomMeta (borrowed, only valid during the callback)
-      buffer = a #GstBuffer
+      buffer = a #GstBuffer (modified in place, changes are seen by the caller)
       type = the transform type
       data = transform specific data.
     Returns: true if the transform could be performed
@@ -558,7 +558,7 @@ alias ElementForeachPadFunc = bool delegate(gst.element.Element element, gst.pad
 
     Params:
       it = The original iterator
-      copy = The copied iterator
+      copy = The copied iterator (modified in place, changes are seen by the caller)
 */
 alias IteratorCopyFunction = void delegate(gst.iterator.Iterator it, gst.iterator.Iterator copy);
 
@@ -567,7 +567,7 @@ alias IteratorCopyFunction = void delegate(gst.iterator.Iterator it, gst.iterato
 
     Params:
       item = the item to fold
-      ret = a #GValue collecting the result
+      ret = a #GValue collecting the result (modified in place, changes are seen by the caller)
     Returns: true if the fold should continue, false if it should stop.
 */
 alias IteratorFoldFunction = bool delegate(gobject.value.Value item, gobject.value.Value ret);
@@ -588,7 +588,7 @@ alias IteratorForeachFunction = void delegate(gobject.value.Value item);
     The function will be called with the iterator lock held.
 
     Params:
-      it = the iterator
+      it = the iterator (modified in place, changes are seen by the caller)
 */
 alias IteratorFreeFunction = void delegate(gst.iterator.Iterator it);
 
@@ -600,7 +600,7 @@ alias IteratorFreeFunction = void delegate(gst.iterator.Iterator it);
     The function will be called with the iterator lock held.
 
     Params:
-      it = the iterator
+      it = the iterator (modified in place, changes are seen by the caller)
       item = the item being retrieved.
     Returns: the result of the operation.
 */
@@ -615,8 +615,8 @@ alias IteratorItemFunction = gst.types.IteratorItem delegate(gst.iterator.Iterat
     The function will be called with the iterator lock held.
 
     Params:
-      it = the iterator
-      result = a pointer to hold the next item
+      it = the iterator (modified in place, changes are seen by the caller)
+      result = a pointer to hold the next item (modified in place, changes are seen by the caller)
     Returns: the result of the operation.
 */
 alias IteratorNextFunction = gst.types.IteratorResult delegate(gst.iterator.Iterator it, gobject.value.Value result);
@@ -632,7 +632,7 @@ alias IteratorNextFunction = gst.types.IteratorResult delegate(gst.iterator.Iter
     The function will be called with the iterator lock held.
 
     Params:
-      it = the iterator
+      it = the iterator (modified in place, changes are seen by the caller)
 */
 alias IteratorResyncFunction = void delegate(gst.iterator.Iterator it);
 
@@ -658,7 +658,7 @@ alias LogFunction = void delegate(gst.debug_category.DebugCategory category, gst
     If size is set to -1, all bytes starting at offset are copied.
 
     Params:
-      mem = a #GstMemory
+      mem = a #GstMemory (modified in place, changes are seen by the caller)
       offset = an offset
       size = a size or -1
     Returns: a new #GstMemory object wrapping a copy of the requested region in
@@ -671,8 +671,8 @@ alias MemoryCopyFunction = gst.memory.Memory delegate(gst.memory.Memory mem, ptr
     mem1 in the parent buffer in offset.
 
     Params:
-      mem1 = a #GstMemory
-      mem2 = a #GstMemory
+      mem1 = a #GstMemory (modified in place, changes are seen by the caller)
+      mem2 = a #GstMemory (modified in place, changes are seen by the caller)
       offset = a result offset
     Returns: true if mem1 and mem2 are in contiguous memory.
 */
@@ -684,7 +684,7 @@ alias MemoryIsSpanFunction = bool delegate(gst.memory.Memory mem1, gst.memory.Me
     maxsize bytes.
 
     Params:
-      mem = a #GstMemory
+      mem = a #GstMemory (modified in place, changes are seen by the caller)
       info = the #GstMapInfo to map with (borrowed, only valid during the callback)
       maxsize = size to map
     Returns: a pointer to memory of which at least maxsize bytes can be
@@ -698,7 +698,7 @@ alias MemoryMapFullFunction = void* delegate(gst.memory.Memory mem, gst.map_info
     maxsize bytes.
 
     Params:
-      mem = a #GstMemory
+      mem = a #GstMemory (modified in place, changes are seen by the caller)
       maxsize = size to map
       flags = access mode for the memory
     Returns: a pointer to memory of which at least maxsize bytes can be
@@ -712,7 +712,7 @@ alias MemoryMapFunction = void* delegate(gst.memory.Memory mem, size_t maxsize, 
     shared. This function does not make a copy of the bytes in mem.
 
     Params:
-      mem = a #GstMemory
+      mem = a #GstMemory (modified in place, changes are seen by the caller)
       offset = an offset
       size = a size or -1
     Returns: a new #GstMemory object sharing the requested region in mem.
@@ -723,7 +723,7 @@ alias MemoryShareFunction = gst.memory.Memory delegate(gst.memory.Memory mem, pt
     Release the pointer previously retrieved with [gst.memory.Memory.map] with info.
 
     Params:
-      mem = a #GstMemory
+      mem = a #GstMemory (modified in place, changes are seen by the caller)
       info = a #GstMapInfo (borrowed, only valid during the callback)
 */
 alias MemoryUnmapFullFunction = void delegate(gst.memory.Memory mem, gst.map_info.MapInfo info);
@@ -732,7 +732,7 @@ alias MemoryUnmapFullFunction = void delegate(gst.memory.Memory mem, gst.map_inf
     Release the pointer previously retrieved with [gst.memory.Memory.map].
 
     Params:
-      mem = a #GstMemory
+      mem = a #GstMemory (modified in place, changes are seen by the caller)
 */
 alias MemoryUnmapFunction = void delegate(gst.memory.Memory mem);
 
@@ -741,7 +741,7 @@ alias MemoryUnmapFunction = void delegate(gst.memory.Memory mem);
     when a pooled buffer is returned.
 
     Params:
-      buffer = a #GstBuffer
+      buffer = a #GstBuffer (modified in place, changes are seen by the caller)
       meta = a #GstMeta (borrowed, only valid during the callback)
 */
 alias MetaClearFunction = void delegate(gst.buffer.Buffer buffer, gst.meta.Meta meta);
@@ -751,7 +751,7 @@ alias MetaClearFunction = void delegate(gst.buffer.Buffer buffer, gst.meta.Meta 
 
     Params:
       meta = a #GstMeta (borrowed, only valid during the callback)
-      buffer = a #GstBuffer
+      buffer = a #GstBuffer (modified in place, changes are seen by the caller)
 */
 alias MetaFreeFunction = void delegate(gst.meta.Meta meta, gst.buffer.Buffer buffer);
 
@@ -761,7 +761,7 @@ alias MetaFreeFunction = void delegate(gst.meta.Meta meta, gst.buffer.Buffer buf
     Params:
       meta = a #GstMeta (borrowed, only valid during the callback)
       params = parameters passed to the init function
-      buffer = a #GstBuffer
+      buffer = a #GstBuffer (modified in place, changes are seen by the caller)
     Returns: 
 */
 alias MetaInitFunction = bool delegate(gst.meta.Meta meta, void* params, gst.buffer.Buffer buffer);
@@ -776,9 +776,9 @@ alias MetaInitFunction = bool delegate(gst.meta.Meta meta, void* params, gst.buf
     the metadata on transbuf.
 
     Params:
-      transbuf = a #GstBuffer
+      transbuf = a #GstBuffer (modified in place, changes are seen by the caller)
       meta = a #GstMeta (borrowed, only valid during the callback)
-      buffer = a #GstBuffer
+      buffer = a #GstBuffer (modified in place, changes are seen by the caller)
       type = the transform type
     Returns: true if the transform could be performed
 */
@@ -801,7 +801,7 @@ alias MiniObjectCopyFunction = gst.mini_object.MiniObject delegate(gst.mini_obje
     and the memory associated with the object is freed.
 
     Params:
-      obj = MiniObject to dispose
+      obj = MiniObject to dispose (modified in place, changes are seen by the caller)
     Returns: true if the object should be cleaned up.
 */
 alias MiniObjectDisposeFunction = bool delegate(gst.mini_object.MiniObject obj);
@@ -811,7 +811,7 @@ alias MiniObjectDisposeFunction = bool delegate(gst.mini_object.MiniObject obj);
     mini-objects.
 
     Params:
-      obj = MiniObject to free
+      obj = MiniObject to free (modified in place, changes are seen by the caller)
 */
 alias MiniObjectFreeFunction = void delegate(gst.mini_object.MiniObject obj);
 
@@ -821,7 +821,7 @@ alias MiniObjectFreeFunction = void delegate(gst.mini_object.MiniObject obj);
     last ref and obj is about to be freed.
 
     Params:
-      obj = the mini object
+      obj = the mini object (modified in place, changes are seen by the caller)
 */
 alias MiniObjectNotify = void delegate(gst.mini_object.MiniObject obj);
 
@@ -990,7 +990,7 @@ alias PadProbeCallback = gst.types.PadProbeReturn delegate(gst.pad.Pad pad, gst.
       parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
                  flag is set, parent is guaranteed to be not-null and remain valid
                  during the execution of this function.
-      query = the #GstQuery object to execute
+      query = the #GstQuery object to execute (modified in place, changes are seen by the caller)
     Returns: true if the query could be performed.
 */
 alias PadQueryFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.query.Query query);
@@ -1082,7 +1082,7 @@ alias PromiseChangeFunc = void delegate(gst.promise.Promise promise);
 
     Params:
       fieldId = the #GQuark of the field name
-      value = the #GValue of the field
+      value = the #GValue of the field (modified in place, changes are seen by the caller)
     Returns: true if the field should be preserved, false if it
       should be removed.
 */
@@ -1095,7 +1095,7 @@ alias StructureFilterMapFunc = bool delegate(glib.types.Quark fieldId, gobject.v
 
     Params:
       fieldname = the #GstIdStr field name
-      value = the #GValue of the field
+      value = the #GValue of the field (modified in place, changes are seen by the caller)
     Returns: true if the field should be preserved, false if it
       should be removed.
 */
@@ -1131,7 +1131,7 @@ alias StructureForeachIdStrFunc = bool delegate(gst.id_str.IdStr fieldname, gobj
 
     Params:
       fieldId = the #GQuark of the field name
-      value = the #GValue of the field
+      value = the #GValue of the field (modified in place, changes are seen by the caller)
     Returns: true if the map operation should continue, false if
       the map operation should stop with false.
 */
@@ -1143,7 +1143,7 @@ alias StructureMapFunc = bool delegate(glib.types.Quark fieldId, gobject.value.V
 
     Params:
       fieldname = the #GstIdStr field name
-      value = the #GValue of the field
+      value = the #GValue of the field (modified in place, changes are seen by the caller)
     Returns: true if the map operation should continue, false if
       the map operation should stop with false.
 */
@@ -1164,7 +1164,7 @@ alias TagForeachFunc = void delegate(gst.tag_list.TagList list, string tag);
     tags.
 
     Params:
-      dest = the destination #GValue
+      dest = the destination #GValue (modified in place, changes are seen by the caller)
       src = the source #GValue
 */
 alias TagMergeFunc = void delegate(gobject.value.Value dest, gobject.value.Value src);
@@ -1185,7 +1185,7 @@ alias TaskPoolFunction = void delegate();
 
     Params:
       task = The #GstTask
-      thread = The #GThread
+      thread = The #GThread (modified in place, changes are seen by the caller)
 */
 alias TaskThreadFunc = void delegate(gst.task.Task task, glib.thread.Thread thread);
 
@@ -1193,7 +1193,7 @@ alias TaskThreadFunc = void delegate(gst.task.Task task, glib.thread.Thread thre
     A function that will be called by typefinding.
 
     Params:
-      find = A #GstTypeFind structure
+      find = A #GstTypeFind structure (modified in place, changes are seen by the caller)
 */
 alias TypeFindFunction = void delegate(gst.type_find.TypeFind find);
 
@@ -1212,7 +1212,7 @@ alias ValueCompareFunc = int delegate(gobject.value.Value value1, gobject.value.
     Used by [gst.global.valueDeserialize] to parse a non-binary form into the #GValue.
 
     Params:
-      dest = a #GValue
+      dest = a #GValue (modified in place, changes are seen by the caller)
       s = a string
     Returns: true for success
 */
@@ -1222,7 +1222,7 @@ alias ValueDeserializeFunc = bool delegate(gobject.value.Value dest, string s);
     Used by [gst.global.valueDeserializeWithPspec] to parse a non-binary form into the #GValue.
 
     Params:
-      dest = a #GValue
+      dest = a #GValue (modified in place, changes are seen by the caller)
       s = a string
       pspec = a #GParamSpec describing the expected value
     Returns: true for success

@@ -81,7 +81,7 @@ alias AppSinkNewSampleCallback = gst.types.FlowReturn delegate(gstapp.app_sink.A
 
     Params:
       appsink = a #GstAppSink
-      query = An ALLOCATION query
+      query = An ALLOCATION query (modified in place, changes are seen by the caller)
     Returns: true when the query has been handled.
 */
 alias AppSinkProposeAllocationCallback = bool delegate(gstapp.app_sink.AppSink appsink, gst.query.Query query);

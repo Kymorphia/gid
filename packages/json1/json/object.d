@@ -125,16 +125,23 @@ class ObjectWrap : gobject.boxed.BoxedWrap!(json_object_get_type)
     extern(C) void _funcCallback(JsonObject* object, const(char)* memberName, JsonNode* memberNode, void* userData) nothrow
     {
       auto _dlg = cast(json.types.ObjectForeach*)userData;
+      auto _object = object ? new json.object.ObjectWrap(cast(void*)object, Yes.Take)._cBorrow : null;
       string _memberName = memberName.fromCString!(No.Free);
+      auto _memberNode = memberNode ? new json.node.Node(cast(void*)memberNode, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(object ? new json.object.ObjectWrap(cast(void*)object, No.Take) : null, _memberName, memberNode ? new json.node.Node(cast(void*)memberNode, No.Take) : null);
+        (*_dlg)(_object, _memberName, _memberNode);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "json.types.ObjectForeach");
       }
+      if (_object)
+        _object._cUnborrow;
+      if (_memberNode)
+        _memberNode._cUnborrow;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;

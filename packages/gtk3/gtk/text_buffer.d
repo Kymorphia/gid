@@ -1201,19 +1201,22 @@ class TextBuffer : gobject.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TextBufferDeserializeFunc*)userData;
+      auto _iter = iter ? new gtk.text_iter.TextIter(cast(void*)iter, Yes.Take)._cBorrow : null;
       ubyte[] _data;
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), iter ? new gtk.text_iter.TextIter(cast(void*)iter, No.Take) : null, _data, cast(bool)createTags, _err);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), _iter, _data, cast(bool)createTags, _err);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TextBufferDeserializeFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_iter)
+        _iter._cUnborrow;
 
       return _retval;
     }

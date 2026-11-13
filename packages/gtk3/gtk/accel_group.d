@@ -224,16 +224,19 @@ class AccelGroup : gobject.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.AccelGroupFindFunc*)data;
+      auto _closure = closure ? new gobject.closure.Closure(cast(void*)closure, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(*cast(gtk.types.AccelKey*)key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
+        _dretval = (*_dlg)(*cast(gtk.types.AccelKey*)key, _closure);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.AccelGroupFindFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_closure)
+        _closure._cUnborrow;
 
       return _retval;
     }

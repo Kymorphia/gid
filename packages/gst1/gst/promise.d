@@ -111,15 +111,19 @@ class Promise : gobject.boxed.BoxedWrap!(gst_promise_get_type)
     extern(C) void _funcCallback(GstPromise* promise, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.PromiseChangeFunc*)userData;
+      auto _promise = promise ? new gst.promise.Promise(cast(void*)promise, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(promise ? new gst.promise.Promise(cast(void*)promise, No.Take) : null);
+        (*_dlg)(_promise);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.PromiseChangeFunc");
       }
+      if (_promise)
+        _promise._cUnborrow;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
     GstPromise* _cretval;

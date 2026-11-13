@@ -24,7 +24,7 @@ alias LFOWaveform = GstLFOWaveform;
     Params:
       self = the #GstDirectControlBinding instance
       srcValue = the value returned by the cotnrol source
-      destValue = the target GValue
+      destValue = the target GValue (modified in place, changes are seen by the caller)
 */
 alias DirectControlBindingConvertGValue = void delegate(gstcontroller.direct_control_binding.DirectControlBinding self, double srcValue, gobject.value.Value destValue);
 

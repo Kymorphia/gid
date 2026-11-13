@@ -110,9 +110,9 @@ alias PathForeachFunc = bool delegate(gsk.types.PathOperation op, graphene.point
     intersections of two paths.
 
     Params:
-      path1 = the first path
+      path1 = the first path (modified in place, changes are seen by the caller)
       point1 = the intersection as point on path1
-      path2 = the second path
+      path2 = the second path (modified in place, changes are seen by the caller)
       point2 = the intersection as point on path2
       kind = the nature of the intersection
     Returns: true to continue iterating, false to
@@ -131,7 +131,7 @@ alias PathIntersectionFunc = bool delegate(gsk.path.Path path1, gsk.path_point.P
     the font shuld not be modified.
 
     Params:
-      replay = The replay object used to replay the node
+      replay = The replay object used to replay the node (modified in place, changes are seen by the caller)
       font = The font to filter
     Returns: The filtered font
 */
@@ -149,7 +149,7 @@ alias RenderReplayFontFilter = pango.font.Font delegate(gsk.render_replay.Render
     that calls your function on the children of the node.
 
     Params:
-      replay = The replay object used to replay the node
+      replay = The replay object used to replay the node (modified in place, changes are seen by the caller)
       node = The node to replay
     Returns: The replayed node
 */
@@ -166,7 +166,7 @@ alias RenderReplayNodeFilter = gsk.render_node.RenderNode delegate(gsk.render_re
     the texture shuld not be modified.
 
     Params:
-      replay = The replay object used to replay the node
+      replay = The replay object used to replay the node (modified in place, changes are seen by the caller)
       texture = The texture to filter
     Returns: The filtered texture
 */

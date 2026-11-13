@@ -191,16 +191,19 @@ class AppSinkSimpleCallbacks : gobject.boxed.BoxedWrap!(gst_app_sink_simple_call
     {
       bool _dretval;
       auto _dlg = cast(gstapp.types.AppSinkProposeAllocationCallback*)userData;
+      auto _query = query ? new gst.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstapp.app_sink.AppSink)(cast(void*)appsink, No.Take), query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstapp.app_sink.AppSink)(cast(void*)appsink, No.Take), _query);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gstapp.types.AppSinkProposeAllocationCallback");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_query)
+        _query._cUnborrow;
 
       return _retval;
     }

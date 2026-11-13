@@ -698,15 +698,19 @@ void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst
   extern(C) void _callbackCallback(GstSample* sample, GError* error, void* userData) nothrow
   {
     auto _dlg = cast(gstvideo.types.VideoConvertSampleCallback*)userData;
+    auto _sample = sample ? new gst.sample.Sample(cast(void*)sample, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(sample ? new gst.sample.Sample(cast(void*)sample, No.Take) : null, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      (*_dlg)(_sample, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "gstvideo.types.VideoConvertSampleCallback");
     }
+    if (_sample)
+      _sample._cUnborrow;
+
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;

@@ -154,8 +154,8 @@ alias DestroyFunc = void delegate();
     sample data (along with width and height of the surface).
 
     Params:
-      pattern = the pattern being rendered from
-      target = the rendering target surface
+      pattern = the pattern being rendered from (modified in place, changes are seen by the caller)
+      target = the rendering target surface (modified in place, changes are seen by the caller)
       extents = rectangular region of interest in pixels in sample space
     Returns: a #cairo_surface_t
 */
@@ -166,7 +166,7 @@ alias RasterSourceAcquireFunc = cairo.surface.Surface delegate(cairo.pattern.Pat
     called when the pattern gets copied as a normal part of rendering.
 
     Params:
-      pattern = the #cairo_pattern_t that was copied to
+      pattern = the #cairo_pattern_t that was copied to (modified in place, changes are seen by the caller)
       other = the #cairo_pattern_t being used as the source for the copy
     Returns: CAIRO_STATUS_SUCCESS on success, or one of the
       #cairo_status_t error codes for failure.
@@ -178,7 +178,7 @@ alias RasterSourceCopyFunc = cairo.types.Status delegate(cairo.pattern.Pattern p
     called when the pattern (or a copy thereof) is no longer required.
 
     Params:
-      pattern = the pattern being rendered from
+      pattern = the pattern being rendered from (modified in place, changes are seen by the caller)
 */
 alias RasterSourceFinishFunc = void delegate(cairo.pattern.Pattern pattern);
 
@@ -189,8 +189,8 @@ alias RasterSourceFinishFunc = void delegate(cairo.pattern.Pattern pattern);
     destroy the surface created during acquire.
 
     Params:
-      pattern = the pattern being rendered from
-      surface = the surface created during acquire
+      pattern = the pattern being rendered from (modified in place, changes are seen by the caller)
+      surface = the surface created during acquire (modified in place, changes are seen by the caller)
 */
 alias RasterSourceReleaseFunc = void delegate(cairo.pattern.Pattern pattern, cairo.surface.Surface surface);
 
@@ -202,7 +202,7 @@ alias RasterSourceReleaseFunc = void delegate(cairo.pattern.Pattern pattern, cai
     of snapshotting.
 
     Params:
-      pattern = the pattern being rendered from
+      pattern = the pattern being rendered from (modified in place, changes are seen by the caller)
     Returns: CAIRO_STATUS_SUCCESS on success, or one of the
       #cairo_status_t error codes for failure.
 */
@@ -227,8 +227,8 @@ alias ReadFunc = cairo.types.Status delegate(ubyte[] data);
     A generic callback function for surface operations.
 
     Params:
-      observer = the #cairo_surface_observer_t
-      target = the observed surface
+      observer = the #cairo_surface_observer_t (modified in place, changes are seen by the caller)
+      target = the observed surface (modified in place, changes are seen by the caller)
 */
 alias SurfaceObserverCallback = void delegate(cairo.surface.Surface observer, cairo.surface.Surface target);
 
@@ -256,8 +256,8 @@ alias SurfaceObserverCallback = void delegate(cairo.surface.Surface observer, ca
     in deadlock.
 
     Params:
-      scaledFont = the scaled-font being created
-      cr = a cairo context, in font space
+      scaledFont = the scaled-font being created (modified in place, changes are seen by the caller)
+      cr = a cairo context, in font space (modified in place, changes are seen by the caller)
       extents = font extents to fill in, in font space
     Returns: [cairo.types.Status.Success] upon success, or an error status on error.
 */
@@ -318,9 +318,9 @@ alias UserScaledFontInitFunc = cairo.types.Status delegate(cairo.scaled_font.Sca
     glyphs.
 
     Params:
-      scaledFont = user scaled-font
+      scaledFont = user scaled-font (modified in place, changes are seen by the caller)
       glyph = glyph code to render
-      cr = cairo context to draw to, in font space
+      cr = cairo context to draw to, in font space (modified in place, changes are seen by the caller)
       extents = glyph extents to fill in, in font space
     Returns: [cairo.types.Status.Success] upon success,
       [cairo.types.Status.UserFontNotImplemented] if fallback options should be tried,
@@ -356,7 +356,7 @@ alias UserScaledFontRenderGlyphFunc = cairo.types.Status delegate(cairo.scaled_f
     glyph value for other purposes.
 
     Params:
-      scaledFont = the scaled-font being created
+      scaledFont = the scaled-font being created (modified in place, changes are seen by the caller)
       unicode = input unicode character code-point
       glyphIndex = output glyph index
     Returns: [cairo.types.Status.Success] upon success,

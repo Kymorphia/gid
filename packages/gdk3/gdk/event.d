@@ -830,15 +830,19 @@ class Event : gobject.boxed.BoxedWrap!(gdk_event_get_type)
     extern(C) void _funcCallback(GdkEvent* event, void* data) nothrow
     {
       auto _dlg = cast(gdk.types.EventFunc*)data;
+      auto _event = event ? new gdk.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(event ? new gdk.event.Event(cast(void*)event, No.Take) : null);
+        (*_dlg)(_event);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gdk.types.EventFunc");
       }
+      if (_event)
+        _event._cUnborrow;
+
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;

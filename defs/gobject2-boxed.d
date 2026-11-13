@@ -9,6 +9,7 @@ import glib.types;
 abstract class Boxed : GidWrap
 {
   void* _cInstancePtr; /// Pointer to the C boxed value
+  bool _cBorrowed; /// true if _cInstancePtr is borrowed from C (not freed by the wrapper, see _cBorrow and _cUnborrow)
 
   /**
     * Constructor for wrapping a GObject boxed value
@@ -32,7 +33,7 @@ abstract class Boxed : GidWrap
 
   ~this() nothrow
   {
-    if (!_cInstancePtr) // Might be null if an exception occurred during construction
+    if (!_cInstancePtr || _cBorrowed) // Might be null if an exception occurred during construction, borrowed is not freed
       return;
 
     struct TypeAndBoxed
@@ -105,9 +106,37 @@ abstract class Boxed : GidWrap
    */
   void* _cSteal() nothrow
   {
-    auto ptr = _cInstancePtr;
+    auto ptr = _cBorrowed ? boxedCopy(_gType, _cInstancePtr) : _cInstancePtr;
     _cInstancePtr = null;
+    _cBorrowed = false;
     return ptr;
+  }
+
+  /**
+   * Mark a wrapper created with Yes.Take as borrowing the C boxed value, which remains owned by C and is not freed by
+   * the wrapper. Used by callbacks to pass a C value which the D delegate can modify in place, see _cUnborrow.
+   * Returns: this wrapper
+   */
+  T _cBorrow(this T)() nothrow
+  {
+    _cBorrowed = true;
+    return cast(T)this;
+  }
+
+  /**
+   * Replace a borrowed C boxed value with a copy owned by the wrapper (does nothing if not borrowed). Called when the
+   * borrowed C value is no longer valid (end of a callback), so that a reference kept in D remains valid. Final (not
+   * virtual), so it can also be called on a wrapper which was destroyed by the callback (does nothing).
+   */
+  final void _cUnborrow() nothrow
+  {
+    if (!_cBorrowed)
+      return;
+
+    _cBorrowed = false;
+
+    if (_cInstancePtr)
+      _cInstancePtr = boxedCopy(_gType, _cInstancePtr);
   }
 }
 

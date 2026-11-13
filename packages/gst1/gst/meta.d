@@ -299,17 +299,23 @@ class Meta : StructWrap!(GstMeta)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CustomMetaTransformFunction*)userData;
+      auto _transbuf = transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, Yes.Take)._cBorrow : null;
       auto _meta = meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, null) : null;
+      auto _buffer = buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, _meta, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+        _dretval = (*_dlg)(_transbuf, _meta, _buffer, type, data);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.CustomMetaTransformFunction");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_transbuf)
+        _transbuf._cUnborrow;
+      if (_buffer)
+        _buffer._cUnborrow;
 
       return _retval;
     }

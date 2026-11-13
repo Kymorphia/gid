@@ -337,16 +337,19 @@ class Structure : gobject.boxed.BoxedWrap!(gst_structure_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.StructureFilterMapFunc*)userData;
+      auto _value = value ? new gobject.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+        _dretval = (*_dlg)(fieldId, _value);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.StructureFilterMapFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_value)
+        _value._cUnborrow;
 
       return _retval;
     }
@@ -371,16 +374,19 @@ class Structure : gobject.boxed.BoxedWrap!(gst_structure_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.StructureFilterMapIdStrFunc*)userData;
+      auto _value = value ? new gobject.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(fieldname ? new gst.id_str.IdStr(cast(void*)fieldname, No.Take) : null, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+        _dretval = (*_dlg)(fieldname ? new gst.id_str.IdStr(cast(void*)fieldname, No.Take) : null, _value);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.StructureFilterMapIdStrFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_value)
+        _value._cUnborrow;
 
       return _retval;
     }
@@ -1342,16 +1348,19 @@ class Structure : gobject.boxed.BoxedWrap!(gst_structure_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.StructureMapFunc*)userData;
+      auto _value = value ? new gobject.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+        _dretval = (*_dlg)(fieldId, _value);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.StructureMapFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_value)
+        _value._cUnborrow;
 
       return _retval;
     }
@@ -1378,16 +1387,19 @@ class Structure : gobject.boxed.BoxedWrap!(gst_structure_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.StructureMapIdStrFunc*)userData;
+      auto _value = value ? new gobject.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(fieldname ? new gst.id_str.IdStr(cast(void*)fieldname, No.Take) : null, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+        _dretval = (*_dlg)(fieldname ? new gst.id_str.IdStr(cast(void*)fieldname, No.Take) : null, _value);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.StructureMapIdStrFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_value)
+        _value._cUnborrow;
 
       return _retval;
     }

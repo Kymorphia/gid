@@ -170,16 +170,19 @@ class Iterator : gobject.boxed.BoxedWrap!(gst_iterator_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.IteratorFoldFunction*)userData;
+      auto _ret = ret ? new gobject.value.Value(cast(void*)ret, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null, ret ? new gobject.value.Value(cast(void*)ret, No.Take) : null);
+        _dretval = (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null, _ret);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.IteratorFoldFunction");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_ret)
+        _ret._cUnborrow;
 
       return _retval;
     }

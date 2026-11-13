@@ -140,6 +140,10 @@ class ObjectWrap : GidWrap
       g_object_ref(_cInstancePtr); // Turn toggle reference into a normal ref
       g_object_remove_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this);
 
+      // The ref above toggled the D object (frozen by _cObjToggleNotify), remove the GC root, which would otherwise
+      // remain after this object is freed and keep any later allocation at the same address alive
+      ptrThawGC(cast(void*)this);
+
       import core.memory : GC;
       if (GC.inFinalizer) // Don't do final unref if in finalizer, since object D callbacks could get invoked and allocate memory
         g_idle_add(&finalUnref, cast(void*)_cInstancePtr); // Defer to glib main loop (same note applies: if main loop does not run then a leak will result)

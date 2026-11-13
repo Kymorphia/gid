@@ -1834,16 +1834,19 @@ class Pad : gst.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(gst.types.PadQueryFunction*)(cast(GstPad*)pad).querydata;
+      auto _query = query ? new gst.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), _query);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.PadQueryFunction");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_query)
+        _query._cUnborrow;
 
       return _retval;
     }

@@ -709,7 +709,7 @@ alias ReallocFunc = void* delegate(size_t size);
     The value is already initialized to hold values of the appropriate type.
 
     Params:
-      value = return location for the property value
+      value = return location for the property value (modified in place, changes are seen by the caller)
       variant = variant to map to the property value
     Returns: true if the conversion succeeded, false in case of an error
 */

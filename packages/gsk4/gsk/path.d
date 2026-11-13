@@ -143,16 +143,22 @@ class Path : gobject.boxed.BoxedWrap!(gsk_path_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gsk.types.PathIntersectionFunc*)userData;
+      auto _path1 = path1 ? new gsk.path.Path(cast(void*)path1, Yes.Take)._cBorrow : null;
+      auto _path2 = path2 ? new gsk.path.Path(cast(void*)path2, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(path1 ? new gsk.path.Path(cast(void*)path1, No.Take) : null, point1 ? new gsk.path_point.PathPoint(cast(void*)point1, No.Take) : null, path2 ? new gsk.path.Path(cast(void*)path2, No.Take) : null, point2 ? new gsk.path_point.PathPoint(cast(void*)point2, No.Take) : null, kind);
+        _dretval = (*_dlg)(_path1, point1 ? new gsk.path_point.PathPoint(cast(void*)point1, No.Take) : null, _path2, point2 ? new gsk.path_point.PathPoint(cast(void*)point2, No.Take) : null, kind);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gsk.types.PathIntersectionFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_path1)
+        _path1._cUnborrow;
+      if (_path2)
+        _path2._cUnborrow;
 
       return _retval;
     }

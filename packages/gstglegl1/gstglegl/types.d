@@ -14,7 +14,7 @@ import gstglegl.eglimage;
     the associated `EGLImage` if necessary
 
     Params:
-      image = a #GstEGLImage
+      image = a #GstEGLImage (modified in place, changes are seen by the caller)
 */
 alias EGLImageDestroyNotify = void delegate(gstglegl.eglimage.EGLImage image);
 

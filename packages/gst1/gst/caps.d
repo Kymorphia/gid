@@ -263,16 +263,22 @@ class Caps : gobject.boxed.BoxedWrap!(gst_caps_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CapsFilterMapFunc*)userData;
+      auto _features = features ? new gst.caps_features.CapsFeatures(cast(void*)features, Yes.Take)._cBorrow : null;
+      auto _structure = structure ? new gst.structure.Structure(cast(void*)structure, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+        _dretval = (*_dlg)(_features, _structure);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.CapsFilterMapFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_features)
+        _features._cUnborrow;
+      if (_structure)
+        _structure._cUnborrow;
 
       return _retval;
     }
@@ -321,16 +327,22 @@ class Caps : gobject.boxed.BoxedWrap!(gst_caps_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CapsForeachFunc*)userData;
+      auto _features = features ? new gst.caps_features.CapsFeatures(cast(void*)features, Yes.Take)._cBorrow : null;
+      auto _structure = structure ? new gst.structure.Structure(cast(void*)structure, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+        _dretval = (*_dlg)(_features, _structure);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.CapsForeachFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_features)
+        _features._cUnborrow;
+      if (_structure)
+        _structure._cUnborrow;
 
       return _retval;
     }
@@ -640,16 +652,22 @@ class Caps : gobject.boxed.BoxedWrap!(gst_caps_get_type)
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CapsMapFunc*)userData;
+      auto _features = features ? new gst.caps_features.CapsFeatures(cast(void*)features, Yes.Take)._cBorrow : null;
+      auto _structure = structure ? new gst.structure.Structure(cast(void*)structure, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+        _dretval = (*_dlg)(_features, _structure);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.CapsMapFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_features)
+        _features._cUnborrow;
+      if (_structure)
+        _structure._cUnborrow;
 
       return _retval;
     }

@@ -127,16 +127,19 @@ class AttrList : gobject.boxed.BoxedWrap!(pango_attr_list_get_type)
     {
       bool _dretval;
       auto _dlg = cast(pango.types.AttrFilterFunc*)userData;
+      auto _attribute = attribute ? new pango.attribute.Attribute(cast(void*)attribute, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
+        _dretval = (*_dlg)(_attribute);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "pango.types.AttrFilterFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_attribute)
+        _attribute._cUnborrow;
 
       return _retval;
     }

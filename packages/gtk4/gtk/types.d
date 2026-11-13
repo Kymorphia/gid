@@ -521,7 +521,7 @@ alias CellCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer);
       cellLayout = a [gtk.cell_layout.CellLayout]
       cell = the cell renderer whose value is to be set
       treeModel = the model
-      iter = a [gtk.tree_iter.TreeIter] indicating the row to set the value for
+      iter = a [gtk.tree_iter.TreeIter] indicating the row to set the value for (modified in place, changes are seen by the caller)
 
     Deprecated: There is no replacement
 */
@@ -581,7 +581,7 @@ alias CustomRequestModeFunc = gtk.types.SizeRequestMode delegate(gtk.widget.Widg
 
     Params:
       drawingArea = the [gtk.drawing_area.DrawingArea] to redraw
-      cr = the context to draw to
+      cr = the context to draw to (modified in place, changes are seen by the caller)
       width = the actual width of the contents. This value will be at least
           as wide as GtkDrawingArea:width.
       height = the actual height of the contents. This value will be at least
@@ -601,7 +601,7 @@ alias DrawingAreaDrawFunc = void delegate(gtk.drawing_area.DrawingArea drawingAr
     Params:
       completion = the [gtk.entry_completion.EntryCompletion]
       key = the string to match, normalized and case-folded
-      iter = a [gtk.tree_iter.TreeIter] indicating the row to match
+      iter = a [gtk.tree_iter.TreeIter] indicating the row to match (modified in place, changes are seen by the caller)
     Returns: true if iter should be displayed as a possible completion
         for key
 
@@ -684,7 +684,7 @@ alias FontFilterFunc = bool delegate(pango.font_family.FontFamily family, pango.
 
     Params:
       iconView = a [gtk.icon_view.IconView]
-      path = The [gtk.tree_path.TreePath] of a selected row
+      path = The [gtk.tree_path.TreePath] of a selected row (modified in place, changes are seen by the caller)
 
     Deprecated: There is no replacement.
 */
@@ -933,7 +933,7 @@ alias TickCallback = bool delegate(gtk.widget.Widget widget, gdk.frame_clock.Fra
       treeColumn = A [gtk.tree_view_column.TreeViewColumn]
       cell = The [gtk.cell_renderer.CellRenderer] that is being rendered by tree_column
       treeModel = The [gtk.tree_model.TreeModel] being rendered
-      iter = A [gtk.tree_iter.TreeIter] of the current row rendered
+      iter = A [gtk.tree_iter.TreeIter] of the current row rendered (modified in place, changes are seen by the caller)
 
     Deprecated: There is no replacement
 */
@@ -955,8 +955,8 @@ alias TreeCellDataFunc = void delegate(gtk.tree_view_column.TreeViewColumn treeC
 
     Params:
       model = The [gtk.tree_model.TreeModel] the comparison is within
-      a = A [gtk.tree_iter.TreeIter] in model
-      b = Another [gtk.tree_iter.TreeIter] in model
+      a = A [gtk.tree_iter.TreeIter] in model (modified in place, changes are seen by the caller)
+      b = Another [gtk.tree_iter.TreeIter] in model (modified in place, changes are seen by the caller)
     Returns: a negative integer, zero or a positive integer depending on whether
         `a` sorts before, with or after `b`
 
@@ -990,7 +990,7 @@ alias TreeListModelCreateModelFunc = gio.list_model.ListModel delegate(gobject.o
 
     Params:
       model = the [gtk.tree_model_filter.TreeModelFilter]
-      iter = a [gtk.tree_iter.TreeIter] pointing to the row whose display values are determined
+      iter = a [gtk.tree_iter.TreeIter] pointing to the row whose display values are determined (modified in place, changes are seen by the caller)
       value = A [gobject.value.Value] which is already initialized for
          with the correct type for the column column.
       column = the column whose display value is determined
@@ -1005,7 +1005,7 @@ alias TreeModelFilterModifyFunc = void delegate(gtk.tree_model.TreeModel model, 
     Params:
       model = the child model of the [gtk.tree_model_filter.TreeModelFilter]
       iter = a [gtk.tree_iter.TreeIter] pointing to the row in model whose visibility
-          is determined
+          is determined (modified in place, changes are seen by the caller)
     Returns: Whether the row indicated by iter is visible.
 
     Deprecated: There is no replacement
@@ -1018,8 +1018,8 @@ alias TreeModelFilterVisibleFunc = bool delegate(gtk.tree_model.TreeModel model,
 
     Params:
       model = the [gtk.tree_model.TreeModel] being iterated
-      path = the current [gtk.tree_path.TreePath]
-      iter = the current [gtk.tree_iter.TreeIter]
+      path = the current [gtk.tree_path.TreePath] (modified in place, changes are seen by the caller)
+      iter = the current [gtk.tree_iter.TreeIter] (modified in place, changes are seen by the caller)
     Returns: true to stop iterating, false to continue
 
     Deprecated: There is no replacement.
@@ -1032,8 +1032,8 @@ alias TreeModelForeachFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.t
 
     Params:
       model = The [gtk.tree_model.TreeModel] being viewed
-      path = The [gtk.tree_path.TreePath] of a selected row
-      iter = A [gtk.tree_iter.TreeIter] pointing to a selected row
+      path = The [gtk.tree_path.TreePath] of a selected row (modified in place, changes are seen by the caller)
+      iter = A [gtk.tree_iter.TreeIter] pointing to a selected row (modified in place, changes are seen by the caller)
 
     Deprecated: There is no replacement
 */
@@ -1050,7 +1050,7 @@ alias TreeSelectionForeachFunc = void delegate(gtk.tree_model.TreeModel model, g
     Params:
       selection = A [gtk.tree_selection.TreeSelection]
       model = A [gtk.tree_model.TreeModel] being viewed
-      path = The [gtk.tree_path.TreePath] of the row in question
+      path = The [gtk.tree_path.TreePath] of the row in question (modified in place, changes are seen by the caller)
       pathCurrentlySelected = true, if the path is currently selected
     Returns: true, if the selection state of the row can be toggled
 
@@ -1084,7 +1084,7 @@ alias TreeViewColumnDropFunc = bool delegate(gtk.tree_view.TreeView treeView, gt
 
     Params:
       treeView = A [gtk.tree_view.TreeView]
-      path = The path that’s expanded
+      path = The path that’s expanded (modified in place, changes are seen by the caller)
 
     Deprecated: There is no replacement.
 */
@@ -1098,7 +1098,7 @@ alias TreeViewMappingFunc = void delegate(gtk.tree_view.TreeView treeView, gtk.t
 
     Params:
       model = the [gtk.tree_model.TreeModel]
-      iter = a [gtk.tree_iter.TreeIter] pointing at a row in model
+      iter = a [gtk.tree_iter.TreeIter] pointing at a row in model (modified in place, changes are seen by the caller)
     Returns: true if the row is a separator
 
     Deprecated: There is no replacement.
@@ -1116,7 +1116,7 @@ alias TreeViewRowSeparatorFunc = bool delegate(gtk.tree_model.TreeModel model, g
       column = the search column set by [gtk.tree_view.TreeView.setSearchColumn]
       key = the key string to compare with
       iter = a [gtk.tree_iter.TreeIter] pointing the row of model that should be compared
-         with key.
+         with key. (modified in place, changes are seen by the caller)
     Returns: false if the row matches, true otherwise.
 
     Deprecated: There is no replacement.

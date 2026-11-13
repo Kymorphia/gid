@@ -95,16 +95,19 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
     {
       bool _dretval;
       auto _dlg = cast(gstgl.types.GLFilterRenderFunc*)userData;
+      auto _inTex = inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), _inTex);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLFilterRenderFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_inTex)
+        _inTex._cUnborrow;
 
       return _retval;
     }

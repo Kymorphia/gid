@@ -34,9 +34,9 @@ alias ReaderError = JsonReaderError;
     It is safe to change the value of element_node.
 
     Params:
-      array = the iterated JSON array
+      array = the iterated JSON array (modified in place, changes are seen by the caller)
       index = the index of the element
-      elementNode = the value of the element at the given index_
+      elementNode = the value of the element at the given index_ (modified in place, changes are seen by the caller)
 */
 alias ArrayForeach = void delegate(json.array.Array array, uint index, json.node.Node elementNode);
 
@@ -73,7 +73,7 @@ alias ArrayForeach = void delegate(json.array.Array array, uint index, json.node
     ```
 
     Params:
-      node = a node tree representing a boxed data
+      node = a node tree representing a boxed data (modified in place, changes are seen by the caller)
     Returns: the newly created boxed structure
 */
 alias BoxedDeserializeFunc = void* delegate(json.node.Node node);
@@ -115,9 +115,9 @@ alias BoxedSerializeFunc = json.node.Node delegate(const(void)* boxed);
     It is safe to change the value of member_node.
 
     Params:
-      object = the iterated JSON object
+      object = the iterated JSON object (modified in place, changes are seen by the caller)
       memberName = the name of the member
-      memberNode = the value of the member
+      memberNode = the value of the member (modified in place, changes are seen by the caller)
 */
 alias ObjectForeach = void delegate(json.object.ObjectWrap object, string memberName, json.node.Node memberNode);
 

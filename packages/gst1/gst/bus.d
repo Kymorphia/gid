@@ -181,16 +181,19 @@ class Bus : gst.object.ObjectWrap
     {
       bool _dretval;
       auto _dlg = cast(gst.types.BusFunc*)userData;
+      auto _message = message ? new gst.message.Message(cast(void*)message, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), _message);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.BusFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_message)
+        _message._cUnborrow;
 
       return _retval;
     }
@@ -470,16 +473,19 @@ class Bus : gst.object.ObjectWrap
     {
       gst.types.BusSyncReply _dretval;
       auto _dlg = cast(gst.types.BusSyncHandler*)userData;
+      auto _message = message ? new gst.message.Message(cast(void*)message, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), _message);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gst.types.BusSyncHandler");
       }
       auto _retval = cast(GstBusSyncReply)_dretval;
+      if (_message)
+        _message._cUnborrow;
 
       return _retval;
     }

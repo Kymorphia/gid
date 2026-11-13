@@ -1369,17 +1369,23 @@ void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMe
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.BufferMessageFunc*)userData;
+    auto _buffer = buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
     string _message = message.fromCString!(No.Free);
 
     try
     {
-      _dretval = (*_dlg)(buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, No.Take) : null, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, _message);
+      _dretval = (*_dlg)(_buffer, _font, _message);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.BufferMessageFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_buffer)
+      _buffer._cUnborrow;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -1751,15 +1757,22 @@ void drawFuncsSetClosePathFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.ty
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawClosePathFunc*)userData;
+    auto _dfuncs = dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
+    auto _st = st ? new harfbuzz.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null);
+      (*_dlg)(_dfuncs, drawData, _st);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawClosePathFunc");
     }
+    if (_dfuncs)
+      _dfuncs._cUnborrow;
+    if (_st)
+      _st._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1779,15 +1792,22 @@ void drawFuncsSetCubicToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.type
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawCubicToFunc*)userData;
+    auto _dfuncs = dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
+    auto _st = st ? new harfbuzz.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
+      (*_dlg)(_dfuncs, drawData, _st, control1X, control1Y, control2X, control2Y, toX, toY);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawCubicToFunc");
     }
+    if (_dfuncs)
+      _dfuncs._cUnborrow;
+    if (_st)
+      _st._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1807,15 +1827,22 @@ void drawFuncsSetLineToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawLineToFunc*)userData;
+    auto _dfuncs = dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
+    auto _st = st ? new harfbuzz.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
+      (*_dlg)(_dfuncs, drawData, _st, toX, toY);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawLineToFunc");
     }
+    if (_dfuncs)
+      _dfuncs._cUnborrow;
+    if (_st)
+      _st._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1835,15 +1862,22 @@ void drawFuncsSetMoveToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawMoveToFunc*)userData;
+    auto _dfuncs = dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
+    auto _st = st ? new harfbuzz.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
+      (*_dlg)(_dfuncs, drawData, _st, toX, toY);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawMoveToFunc");
     }
+    if (_dfuncs)
+      _dfuncs._cUnborrow;
+    if (_st)
+      _st._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1863,15 +1897,22 @@ void drawFuncsSetQuadraticToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float controlX, float controlY, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawQuadraticToFunc*)userData;
+    auto _dfuncs = dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
+    auto _st = st ? new harfbuzz.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, controlX, controlY, toX, toY);
+      (*_dlg)(_dfuncs, drawData, _st, controlX, controlY, toX, toY);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawQuadraticToFunc");
     }
+    if (_dfuncs)
+      _dfuncs._cUnborrow;
+    if (_st)
+      _st._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -2091,16 +2132,19 @@ harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referen
   {
     harfbuzz.blob.Blob _dretval;
     auto _dlg = cast(harfbuzz.types.ReferenceTableFunc*)userData;
+    auto _face = face ? new harfbuzz.face.Face(cast(void*)face, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(face ? new harfbuzz.face.Face(cast(void*)face, No.Take) : null, tag);
+      _dretval = (*_dlg)(_face, tag);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.ReferenceTableFunc");
     }
     auto _retval = _dretval ? cast(hb_blob_t*)_dretval._cPtr(Yes.Dup) : null;
+    if (_face)
+      _face._cUnborrow;
 
     return _retval;
   }
@@ -2662,15 +2706,22 @@ void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
   extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.FontDrawGlyphFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
+    auto _drawFuncs = drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+      (*_dlg)(_font, fontData, glyph, _drawFuncs, drawData);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontDrawGlyphFunc");
     }
+    if (_font)
+      _font._cUnborrow;
+    if (_drawFuncs)
+      _drawFuncs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -2691,16 +2742,22 @@ void fontFuncsSetDrawGlyphOrFailFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfb
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontDrawGlyphOrFailFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
+    auto _drawFuncs = drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+      _dretval = (*_dlg)(_font, fontData, glyph, _drawFuncs, drawData);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontDrawGlyphOrFailFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
+    if (_drawFuncs)
+      _drawFuncs._cUnborrow;
 
     return _retval;
   }
@@ -2723,16 +2780,19 @@ void fontFuncsSetFontHExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetFontHExtentsFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+      _dretval = (*_dlg)(_font, fontData, *cast(harfbuzz.types.FontExtents*)extents);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetFontExtentsFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2755,16 +2815,19 @@ void fontFuncsSetFontVExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetFontVExtentsFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+      _dretval = (*_dlg)(_font, fontData, *cast(harfbuzz.types.FontExtents*)extents);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetFontExtentsFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2787,16 +2850,19 @@ void fontFuncsSetGlyphContourPointFunc(harfbuzz.font_funcs.FontFuncs ffuncs, har
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphContourPointFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
+      _dretval = (*_dlg)(_font, fontData, glyph, pointIndex, *x, *y);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphContourPointFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2819,16 +2885,19 @@ void fontFuncsSetGlyphExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphExtentsFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *cast(harfbuzz.types.GlyphExtents*)extents);
+      _dretval = (*_dlg)(_font, fontData, glyph, *cast(harfbuzz.types.GlyphExtents*)extents);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphExtentsFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2851,19 +2920,22 @@ void fontFuncsSetGlyphFromNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphFromNameFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
     char[] _name;
     _name.length = len;
     _name[0 .. len] = name[0 .. len];
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
+      _dretval = (*_dlg)(_font, fontData, _name, *glyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphFromNameFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2887,16 +2959,19 @@ void fontFuncsSetGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+      _dretval = (*_dlg)(_font, fontData, unicode, variationSelector, *glyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2919,16 +2994,19 @@ void fontFuncsSetGlyphHAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHAdvanceFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+      _dretval = (*_dlg)(_font, fontData, glyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphAdvanceFunc");
     }
     auto _retval = cast(hb_position_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2951,16 +3029,19 @@ void fontFuncsSetGlyphHKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHKerningFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+      _dretval = (*_dlg)(_font, fontData, firstGlyph, secondGlyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphKerningFunc");
     }
     auto _retval = cast(hb_position_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -2983,16 +3064,19 @@ void fontFuncsSetGlyphHOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHOriginFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+      _dretval = (*_dlg)(_font, fontData, glyph, *x, *y);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphOriginFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -3017,15 +3101,22 @@ void fontFuncsSetGlyphShapeFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
   extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphShapeFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
+    auto _drawFuncs = drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+      (*_dlg)(_font, fontData, glyph, _drawFuncs, drawData);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphShapeFunc");
     }
+    if (_font)
+      _font._cUnborrow;
+    if (_drawFuncs)
+      _drawFuncs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -3046,16 +3137,19 @@ void fontFuncsSetGlyphVAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVAdvanceFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+      _dretval = (*_dlg)(_font, fontData, glyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphAdvanceFunc");
     }
     auto _retval = cast(hb_position_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -3078,16 +3172,19 @@ void fontFuncsSetGlyphVKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVKerningFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+      _dretval = (*_dlg)(_font, fontData, firstGlyph, secondGlyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphKerningFunc");
     }
     auto _retval = cast(hb_position_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -3110,16 +3207,19 @@ void fontFuncsSetGlyphVOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVOriginFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+      _dretval = (*_dlg)(_font, fontData, glyph, *x, *y);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphOriginFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -3142,16 +3242,19 @@ void fontFuncsSetNominalGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetNominalGlyphFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
+      _dretval = (*_dlg)(_font, fontData, unicode, *glyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetNominalGlyphFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -3176,16 +3279,22 @@ void fontFuncsSetPaintGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontPaintGlyphFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
+    auto _paintFuncs = paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
+      _dretval = (*_dlg)(_font, fontData, glyph, _paintFuncs, paintData, paletteIndex, foreground);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontPaintGlyphFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
+    if (_paintFuncs)
+      _paintFuncs._cUnborrow;
 
     return _retval;
   }
@@ -3208,16 +3317,22 @@ void fontFuncsSetPaintGlyphOrFailFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harf
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontPaintGlyphOrFailFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
+    auto _paintFuncs = paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
+      _dretval = (*_dlg)(_font, fontData, glyph, _paintFuncs, paintData, paletteIndex, foreground);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontPaintGlyphOrFailFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
+    if (_paintFuncs)
+      _paintFuncs._cUnborrow;
 
     return _retval;
   }
@@ -3240,16 +3355,19 @@ void fontFuncsSetVariationGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbu
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetVariationGlyphFunc*)userData;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+      _dretval = (*_dlg)(_font, fontData, unicode, variationSelector, *glyph);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetVariationGlyphFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -7036,15 +7154,19 @@ void paintFuncsSetColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_bool_t isForeground, hb_color_t color, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintColorFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, isForeground, color);
+      (*_dlg)(_funcs, paintData, isForeground, color);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintColorFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7065,16 +7187,22 @@ void paintFuncsSetColorGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintColorGlyphFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+      _dretval = (*_dlg)(_funcs, paintData, glyph, _font);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintColorGlyphFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_funcs)
+      _funcs._cUnborrow;
+    if (_font)
+      _font._cUnborrow;
 
     return _retval;
   }
@@ -7097,16 +7225,19 @@ void paintFuncsSetCustomPaletteColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, 
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintCustomPaletteColorFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
+      _dretval = (*_dlg)(_funcs, paintData, colorIndex, *color);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintCustomPaletteColorFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_funcs)
+      _funcs._cUnborrow;
 
     return _retval;
   }
@@ -7129,16 +7260,22 @@ void paintFuncsSetImageFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintImageFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
+    auto _image = image ? new harfbuzz.blob.Blob(cast(void*)image, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new harfbuzz.blob.Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *cast(harfbuzz.types.GlyphExtents*)extents);
+      _dretval = (*_dlg)(_funcs, paintData, _image, width, height, format, slant, *cast(harfbuzz.types.GlyphExtents*)extents);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintImageFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_funcs)
+      _funcs._cUnborrow;
+    if (_image)
+      _image._cUnborrow;
 
     return _retval;
   }
@@ -7160,15 +7297,22 @@ void paintFuncsSetLinearGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float x1, float y1, float x2, float y2, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintLinearGradientFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
+    auto _colorLine = colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
+      (*_dlg)(_funcs, paintData, _colorLine, x0, y0, x1, y1, x2, y2);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintLinearGradientFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+    if (_colorLine)
+      _colorLine._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7188,15 +7332,19 @@ void paintFuncsSetPopClipFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.ty
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPopClipFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+      (*_dlg)(_funcs, paintData);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPopClipFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7216,15 +7364,19 @@ void paintFuncsSetPopGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.t
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_paint_composite_mode_t mode, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPopGroupFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, mode);
+      (*_dlg)(_funcs, paintData, mode);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPopGroupFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7244,15 +7396,19 @@ void paintFuncsSetPopTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbu
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPopTransformFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+      (*_dlg)(_funcs, paintData);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPopTransformFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7272,15 +7428,22 @@ void paintFuncsSetPushClipGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushClipGlyphFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
+    auto _font = font ? new harfbuzz.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+      (*_dlg)(_funcs, paintData, glyph, _font);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushClipGlyphFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+    if (_font)
+      _font._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7300,15 +7463,19 @@ void paintFuncsSetPushClipRectangleFunc(harfbuzz.paint_funcs.PaintFuncs funcs, h
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xmin, float ymin, float xmax, float ymax, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushClipRectangleFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xmin, ymin, xmax, ymax);
+      (*_dlg)(_funcs, paintData, xmin, ymin, xmax, ymax);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushClipRectangleFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7328,15 +7495,19 @@ void paintFuncsSetPushGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushGroupFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+      (*_dlg)(_funcs, paintData);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushGroupFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7356,15 +7527,19 @@ void paintFuncsSetPushTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushTransformFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xx, yx, xy, yy, dx, dy);
+      (*_dlg)(_funcs, paintData, xx, yx, xy, yy, dx, dy);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushTransformFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7384,15 +7559,22 @@ void paintFuncsSetRadialGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float r0, float x1, float y1, float r1, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintRadialGradientFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
+    auto _colorLine = colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
+      (*_dlg)(_funcs, paintData, _colorLine, x0, y0, r0, x1, y1, r1);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintRadialGradientFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+    if (_colorLine)
+      _colorLine._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -7412,15 +7594,22 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float startAngle, float endAngle, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintSweepGradientFunc*)userData;
+    auto _funcs = funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
+    auto _colorLine = colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, Yes.Take)._cBorrow : null;
 
     try
     {
-      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
+      (*_dlg)(_funcs, paintData, _colorLine, x0, y0, startAngle, endAngle);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintSweepGradientFunc");
     }
+    if (_funcs)
+      _funcs._cUnborrow;
+    if (_colorLine)
+      _colorLine._cUnborrow;
+
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -8681,16 +8870,19 @@ void unicodeFuncsSetCombiningClassFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
   {
     harfbuzz.types.UnicodeCombiningClass _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeCombiningClassFunc*)userData;
+    auto _ufuncs = ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+      _dretval = (*_dlg)(_ufuncs, unicode);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeCombiningClassFunc");
     }
     auto _retval = cast(hb_unicode_combining_class_t)_dretval;
+    if (_ufuncs)
+      _ufuncs._cUnborrow;
 
     return _retval;
   }
@@ -8713,16 +8905,19 @@ void unicodeFuncsSetComposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harf
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeComposeFunc*)userData;
+    auto _ufuncs = ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
+      _dretval = (*_dlg)(_ufuncs, a, b, *ab);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeComposeFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_ufuncs)
+      _ufuncs._cUnborrow;
 
     return _retval;
   }
@@ -8745,16 +8940,19 @@ void unicodeFuncsSetDecomposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeDecomposeFunc*)userData;
+    auto _ufuncs = ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
+      _dretval = (*_dlg)(_ufuncs, ab, *a, *b);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeDecomposeFunc");
     }
     auto _retval = cast(hb_bool_t)_dretval;
+    if (_ufuncs)
+      _ufuncs._cUnborrow;
 
     return _retval;
   }
@@ -8777,15 +8975,19 @@ void unicodeFuncsSetEastasianWidthFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
   {
     uint _retval;
     auto _dlg = cast(harfbuzz.types.UnicodeEastasianWidthFunc*)userData;
+    auto _ufuncs = ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+      _retval = (*_dlg)(_ufuncs, unicode);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeEastasianWidthFunc");
     }
+    if (_ufuncs)
+      _ufuncs._cUnborrow;
+
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
@@ -8807,16 +9009,19 @@ void unicodeFuncsSetGeneralCategoryFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufun
   {
     harfbuzz.types.UnicodeGeneralCategory _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeGeneralCategoryFunc*)userData;
+    auto _ufuncs = ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+      _dretval = (*_dlg)(_ufuncs, unicode);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeGeneralCategoryFunc");
     }
     auto _retval = cast(hb_unicode_general_category_t)_dretval;
+    if (_ufuncs)
+      _ufuncs._cUnborrow;
 
     return _retval;
   }
@@ -8839,16 +9044,19 @@ void unicodeFuncsSetMirroringFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
   {
     harfbuzz.types.Codepoint _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeMirroringFunc*)userData;
+    auto _ufuncs = ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+      _dretval = (*_dlg)(_ufuncs, unicode);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeMirroringFunc");
     }
     auto _retval = cast(hb_codepoint_t)_dretval;
+    if (_ufuncs)
+      _ufuncs._cUnborrow;
 
     return _retval;
   }
@@ -8871,16 +9079,19 @@ void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfb
   {
     harfbuzz.types.Script _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeScriptFunc*)userData;
+    auto _ufuncs = ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
 
     try
     {
-      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+      _dretval = (*_dlg)(_ufuncs, unicode);
     }
     catch (Exception e)
     {
       gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeScriptFunc");
     }
     auto _retval = cast(hb_script_t)_dretval;
+    if (_ufuncs)
+      _ufuncs._cUnborrow;
 
     return _retval;
   }

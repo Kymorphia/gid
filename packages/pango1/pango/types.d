@@ -133,7 +133,7 @@ alias AttrDataCopyFunc = void* delegate();
     Type of a function filtering a list of attributes.
 
     Params:
-      attribute = a Pango attribute
+      attribute = a Pango attribute (modified in place, changes are seen by the caller)
     Returns: true if the attribute should be selected for
         filtering, false otherwise.
 */

@@ -554,7 +554,7 @@ alias CellCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer);
       cellLayout = a #GtkCellLayout
       cell = the cell renderer whose value is to be set
       treeModel = the model
-      iter = a #GtkTreeIter indicating the row to set the value for
+      iter = a #GtkTreeIter indicating the row to set the value for (modified in place, changes are seen by the caller)
 */
 alias CellLayoutDataFunc = void delegate(gtk.cell_layout.CellLayout cellLayout, gtk.cell_renderer.CellRenderer cell, gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter);
 
@@ -581,7 +581,7 @@ alias ClipboardClearFunc = void delegate(gtk.clipboard.Clipboard clipboard);
     Params:
       clipboard = the #GtkClipboard
       selectionData = a #GtkSelectionData argument in which the requested
-          data should be stored.
+          data should be stored. (modified in place, changes are seen by the caller)
       info = the info field corresponding to the requested target from the
           #GtkTargetEntry array passed to [gtk.clipboard.Clipboard.setWithData] or
           [gtk.clipboard.Clipboard.setWithOwner].
@@ -606,7 +606,7 @@ alias ClipboardImageReceivedFunc = void delegate(gtk.clipboard.Clipboard clipboa
       clipboard = the #GtkClipboard
       selectionData = a #GtkSelectionData containing the data was received.
           If retrieving the data failed, then then length field
-          of selection_data will be negative.
+          of selection_data will be negative. (modified in place, changes are seen by the caller)
 */
 alias ClipboardReceivedFunc = void delegate(gtk.clipboard.Clipboard clipboard, gtk.selection_data.SelectionData selectionData);
 
@@ -673,7 +673,7 @@ alias ColorSelectionChangePaletteWithScreenFunc = void delegate(gdk.screen.Scree
     Params:
       completion = the #GtkEntryCompletion
       key = the string to match, normalized and case-folded
-      iter = a #GtkTreeIter indicating the row to match
+      iter = a #GtkTreeIter indicating the row to match (modified in place, changes are seen by the caller)
     Returns: true if iter should be displayed as a possible completion
           for key
 */
@@ -750,7 +750,7 @@ alias FontFilterFunc = bool delegate(pango.font_family.FontFamily family, pango.
 
     Params:
       iconView = a #GtkIconView
-      path = The #GtkTreePath of a selected row
+      path = The #GtkTreePath of a selected row (modified in place, changes are seen by the caller)
 */
 alias IconViewForeachFunc = void delegate(gtk.icon_view.IconView iconView, gtk.tree_path.TreePath path);
 
@@ -912,7 +912,7 @@ alias StylePropertyParser = bool delegate(string string_, gobject.value.Value va
     Params:
       registerBuffer = the #GtkTextBuffer the format is registered with
       contentBuffer = the #GtkTextBuffer to deserialize into
-      iter = insertion point for the deserialized text
+      iter = insertion point for the deserialized text (modified in place, changes are seen by the caller)
       data = data to deserialize
       createTags = true if deserializing may create tags
     Returns: true on success, false otherwise
@@ -974,7 +974,7 @@ alias TranslateFunc = string delegate(string path);
       treeColumn = A #GtkTreeViewColumn
       cell = The #GtkCellRenderer that is being rendered by tree_column
       treeModel = The #GtkTreeModel being rendered
-      iter = A #GtkTreeIter of the current row rendered
+      iter = A #GtkTreeIter of the current row rendered (modified in place, changes are seen by the caller)
 */
 alias TreeCellDataFunc = void delegate(gtk.tree_view_column.TreeViewColumn treeColumn, gtk.cell_renderer.CellRenderer cell, gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter);
 
@@ -995,8 +995,8 @@ alias TreeDestroyCountFunc = void delegate(gtk.tree_view.TreeView treeView, gtk.
 
     Params:
       model = The #GtkTreeModel the comparison is within
-      a = A #GtkTreeIter in model
-      b = Another #GtkTreeIter in model
+      a = A #GtkTreeIter in model (modified in place, changes are seen by the caller)
+      b = Another #GtkTreeIter in model (modified in place, changes are seen by the caller)
     Returns: a negative integer, zero or a positive integer depending on whether
         `a` sorts before, with or after `b`
 */
@@ -1012,7 +1012,7 @@ alias TreeIterCompareFunc = int delegate(gtk.tree_model.TreeModel model, gtk.tre
 
     Params:
       model = the #GtkTreeModelFilter
-      iter = a #GtkTreeIter pointing to the row whose display values are determined
+      iter = a #GtkTreeIter pointing to the row whose display values are determined (modified in place, changes are seen by the caller)
       value = A #GValue which is already initialized for
          with the correct type for the column column.
       column = the column whose display value is determined
@@ -1025,7 +1025,7 @@ alias TreeModelFilterModifyFunc = void delegate(gtk.tree_model.TreeModel model, 
     Params:
       model = the child model of the #GtkTreeModelFilter
       iter = a #GtkTreeIter pointing to the row in model whose visibility
-          is determined
+          is determined (modified in place, changes are seen by the caller)
     Returns: Whether the row indicated by iter is visible.
 */
 alias TreeModelFilterVisibleFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter);
@@ -1036,8 +1036,8 @@ alias TreeModelFilterVisibleFunc = bool delegate(gtk.tree_model.TreeModel model,
 
     Params:
       model = the #GtkTreeModel being iterated
-      path = the current #GtkTreePath
-      iter = the current #GtkTreeIter
+      path = the current #GtkTreePath (modified in place, changes are seen by the caller)
+      iter = the current #GtkTreeIter (modified in place, changes are seen by the caller)
     Returns: true to stop iterating, false to continue
 */
 alias TreeModelForeachFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
@@ -1048,8 +1048,8 @@ alias TreeModelForeachFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.t
 
     Params:
       model = The #GtkTreeModel being viewed
-      path = The #GtkTreePath of a selected row
-      iter = A #GtkTreeIter pointing to a selected row
+      path = The #GtkTreePath of a selected row (modified in place, changes are seen by the caller)
+      iter = A #GtkTreeIter pointing to a selected row (modified in place, changes are seen by the caller)
 */
 alias TreeSelectionForeachFunc = void delegate(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
 
@@ -1062,7 +1062,7 @@ alias TreeSelectionForeachFunc = void delegate(gtk.tree_model.TreeModel model, g
     Params:
       selection = A #GtkTreeSelection
       model = A #GtkTreeModel being viewed
-      path = The #GtkTreePath of the row in question
+      path = The #GtkTreePath of the row in question (modified in place, changes are seen by the caller)
       pathCurrentlySelected = true, if the path is currently selected
     Returns: true, if the selection state of the row can be toggled
 */
@@ -1092,7 +1092,7 @@ alias TreeViewColumnDropFunc = bool delegate(gtk.tree_view.TreeView treeView, gt
 
     Params:
       treeView = A #GtkTreeView
-      path = The path that’s expanded
+      path = The path that’s expanded (modified in place, changes are seen by the caller)
 */
 alias TreeViewMappingFunc = void delegate(gtk.tree_view.TreeView treeView, gtk.tree_path.TreePath path);
 
@@ -1104,7 +1104,7 @@ alias TreeViewMappingFunc = void delegate(gtk.tree_view.TreeView treeView, gtk.t
 
     Params:
       model = the #GtkTreeModel
-      iter = a #GtkTreeIter pointing at a row in model
+      iter = a #GtkTreeIter pointing at a row in model (modified in place, changes are seen by the caller)
     Returns: true if the row is a separator
 */
 alias TreeViewRowSeparatorFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter);
@@ -1120,7 +1120,7 @@ alias TreeViewRowSeparatorFunc = bool delegate(gtk.tree_model.TreeModel model, g
       column = the search column set by [gtk.tree_view.TreeView.setSearchColumn]
       key = the key string to compare with
       iter = a #GtkTreeIter pointing the row of model that should be compared
-         with key.
+         with key. (modified in place, changes are seen by the caller)
     Returns: false if the row matches, true otherwise.
 */
 alias TreeViewSearchEqualFunc = bool delegate(gtk.tree_model.TreeModel model, int column, string key, gtk.tree_iter.TreeIter iter);

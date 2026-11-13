@@ -411,16 +411,19 @@ class CollectPads : gst.object.ObjectWrap
       bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsEventFunction*)userData;
       auto _pad = pad ? new gstbase.collect_data.CollectData(cast(void*)pad, null) : null;
+      auto _event = event ? new gst.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _pad, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _pad, _event);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsEventFunction");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_event)
+        _event._cUnborrow;
 
       return _retval;
     }
@@ -534,16 +537,19 @@ class CollectPads : gst.object.ObjectWrap
       bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsQueryFunction*)userData;
       auto _pad = pad ? new gstbase.collect_data.CollectData(cast(void*)pad, null) : null;
+      auto _query = query ? new gst.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _pad, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), _pad, _query);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsQueryFunction");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_query)
+        _query._cUnborrow;
 
       return _retval;
     }

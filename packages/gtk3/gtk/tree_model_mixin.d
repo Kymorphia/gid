@@ -245,16 +245,22 @@ template TreeModelT()
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeModelForeachFunc*)data;
+      auto _path = path ? new gtk.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+      auto _iter = iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), _path, _iter);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeModelForeachFunc");
       }
       auto _retval = cast(gboolean)_dretval;
+      if (_path)
+        _path._cUnborrow;
+      if (_iter)
+        _iter._cUnborrow;
 
       return _retval;
     }

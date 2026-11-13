@@ -109,7 +109,7 @@ alias BaseInitFunc = void delegate(gobject.type_class.TypeClass gClass);
     Params:
       binding = a #GBinding
       fromValue = the #GValue containing the value to transform
-      toValue = the #GValue in which to store the transformed value
+      toValue = the #GValue in which to store the transformed value (modified in place, changes are seen by the caller)
     Returns: true if the transformation was successful, and false
         otherwise
 */
@@ -270,10 +270,10 @@ alias ClassInitFunc = void delegate(gobject.type_class.TypeClass gClass);
     The type used for marshaller functions.
 
     Params:
-      closure = the #GClosure to which the marshaller belongs
+      closure = the #GClosure to which the marshaller belongs (modified in place, changes are seen by the caller)
       returnValue = a #GValue to store the return
          value. May be null if the callback of closure doesn't return a
-         value.
+         value. (modified in place, changes are seen by the caller)
       paramValues = an array of
          #GValues holding the arguments on which to invoke the
          callback of closure
@@ -287,7 +287,7 @@ alias ClosureMarshal = void delegate(gobject.closure.Closure closure, gobject.va
     on closures.
 
     Params:
-      closure = the #GClosure on which the notification is emitted
+      closure = the #GClosure on which the notification is emitted (modified in place, changes are seen by the caller)
 */
 alias ClosureNotify = void delegate(gobject.closure.Closure closure);
 
@@ -328,7 +328,7 @@ alias ObjectFinalizeFunc = void delegate(gobject.object.ObjectWrap object);
       object = a #GObject
       propertyId = the numeric id under which the property was registered with
          [gobject.object_class.ObjectClass.installProperty].
-      value = a #GValue to return the property value in
+      value = a #GValue to return the property value in (modified in place, changes are seen by the caller)
       pspec = the #GParamSpec describing the property
 */
 alias ObjectGetPropertyFunc = void delegate(gobject.object.ObjectWrap object, uint propertyId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec);
@@ -358,7 +358,7 @@ alias ObjectSetPropertyFunc = void delegate(gobject.object.ObjectWrap object, ui
     Params:
       ihint = Signal invocation hint, see #GSignalInvocationHint.
       returnAccu = Accumulator to collect callback return values in, this
-         is the return value of the current signal emission.
+         is the return value of the current signal emission. (modified in place, changes are seen by the caller)
       handlerReturn = A #GValue holding the return value of the signal handler.
     Returns: The accumulator function returns whether the signal emission
        should be aborted. Returning true will continue with
@@ -495,7 +495,7 @@ alias TypeClassCacheFunc = bool delegate(gobject.type_class.TypeClass gClass);
     further program behaviour is undefined.
 
     Params:
-      value = the value to initialize
+      value = the value to initialize (modified in place, changes are seen by the caller)
       collectValues = the collected values (borrowed, only valid during the callback)
       collectFlags = optional flags
     Returns: `NULL` on success, otherwise a
@@ -537,7 +537,7 @@ alias TypeValueCopyFunc = void delegate(gobject.value.Value srcValue, out gobjec
     ```
 
     Params:
-      value = the value to free
+      value = the value to free (modified in place, changes are seen by the caller)
 */
 alias TypeValueFreeFunc = void delegate(gobject.value.Value value);
 
@@ -555,7 +555,7 @@ alias TypeValueFreeFunc = void delegate(gobject.value.Value value);
     ```
 
     Params:
-      value = the value to initialize
+      value = the value to initialize (modified in place, changes are seen by the caller)
 */
 alias TypeValueInitFunc = void delegate(gobject.value.Value value);
 
@@ -637,7 +637,7 @@ alias TypeValuePeekPointerFunc = void* delegate(gobject.value.Value value);
 
     Params:
       srcValue = source value
-      destValue = target value
+      destValue = target value (modified in place, changes are seen by the caller)
 */
 alias ValueTransform = void delegate(gobject.value.Value srcValue, gobject.value.Value destValue);
 

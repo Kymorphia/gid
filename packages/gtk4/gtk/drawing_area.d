@@ -270,15 +270,19 @@ class DrawingArea : gtk.widget.Widget
     extern(C) void _drawFuncCallback(GtkDrawingArea* drawingArea, cairo_t* cr, int width, int height, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.DrawingAreaDrawFunc*)userData;
+      auto _cr = cr ? new cairo.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), _cr, width, height);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.DrawingAreaDrawFunc");
       }
+      if (_cr)
+        _cr._cUnborrow;
+
     }
     auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
     auto _drawFunc = drawFunc ? freezeDelegate(cast(void*)&drawFunc) : null;

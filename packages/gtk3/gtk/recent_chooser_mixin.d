@@ -586,15 +586,22 @@ template RecentChooserT()
     {
       int _retval;
       auto _dlg = cast(gtk.types.RecentSortFunc*)userData;
+      auto _a = a ? new gtk.recent_info.RecentInfo(cast(void*)a, Yes.Take)._cBorrow : null;
+      auto _b = b ? new gtk.recent_info.RecentInfo(cast(void*)b, Yes.Take)._cBorrow : null;
 
       try
       {
-        _retval = (*_dlg)(a ? new gtk.recent_info.RecentInfo(cast(void*)a, No.Take) : null, b ? new gtk.recent_info.RecentInfo(cast(void*)b, No.Take) : null);
+        _retval = (*_dlg)(_a, _b);
       }
       catch (Exception e)
       {
         gidInvokeCallbackExceptionHandler(e, "gtk.types.RecentSortFunc");
       }
+      if (_a)
+        _a._cUnborrow;
+      if (_b)
+        _b._cUnborrow;
+
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
