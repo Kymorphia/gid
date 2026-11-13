@@ -30,6 +30,9 @@
 //!set class[Texture].method[download][ignore] 1
 //!set record[TextureDownloader].method[download_into][ignore] 1
 
+//# Arg should be inout caller-allocates GValue, not out
+//!set class[ContentProvider].method[get_value].parameters.parameter[value][direction] inout
+
 //!class global pre
 
 import gdk.content_deserializer;

@@ -181,18 +181,13 @@ class ContentProvider : gobject.object.ObjectWrap
           error will be set to describe the failure.
       Throws: [ErrorWrap]
   */
-  bool getValue(out gobject.value.Value value)
+  bool getValue(gobject.value.Value value)
   {
     bool _retval;
-    auto _value = boxedNew!GValue(gobject.value.Value._getGType);
     GError *_err;
-    _retval = cast(bool)gdk_content_provider_get_value(cast(GdkContentProvider*)this._cPtr, _value, &_err);
+    _retval = cast(bool)gdk_content_provider_get_value(cast(GdkContentProvider*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
-    {
-      gobject.value.Value._cFree(_value);
       throw new ErrorWrap(_err, Yes.Take);
-    }
-    value = new gobject.value.Value(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
