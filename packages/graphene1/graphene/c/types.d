@@ -378,7 +378,7 @@ struct graphene_rect_t
 }
 
 /** */
-struct graphene_simd4f_t
+align(16) struct graphene_simd4f_t
 {
   /** */
   float x;
