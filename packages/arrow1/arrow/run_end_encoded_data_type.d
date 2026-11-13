@@ -34,6 +34,12 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRunEndEncodedDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RunEndEncodedDataType self() nothrow
   {

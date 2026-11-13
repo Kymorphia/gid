@@ -42,6 +42,12 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSimpleActionGroup";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SimpleActionGroup self() nothrow
   {

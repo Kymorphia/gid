@@ -39,6 +39,12 @@ class SimplePermission : gio.permission.Permission
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSimplePermission";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SimplePermission self() nothrow
   {

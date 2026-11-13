@@ -80,6 +80,12 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwLeaflet";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Leaflet self() nothrow
   {

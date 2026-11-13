@@ -34,6 +34,12 @@ class TimestampArray : arrow.numeric_array.NumericArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTimestampArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TimestampArray self() nothrow
   {

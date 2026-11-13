@@ -153,6 +153,12 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSpinButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SpinButton self() nothrow
   {

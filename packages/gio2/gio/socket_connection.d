@@ -56,6 +56,12 @@ class SocketConnection : gio.iostream.IOStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSocketConnection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SocketConnection self() nothrow
   {

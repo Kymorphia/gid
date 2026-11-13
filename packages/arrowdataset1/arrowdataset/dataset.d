@@ -36,6 +36,12 @@ class Dataset : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetDataset";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Dataset self() nothrow
   {

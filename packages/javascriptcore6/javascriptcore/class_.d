@@ -53,6 +53,12 @@ class Class : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "JSCClass";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Class self() nothrow
   {

@@ -93,6 +93,12 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMenuItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MenuItem self() nothrow
   {

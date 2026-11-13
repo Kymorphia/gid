@@ -42,6 +42,12 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSpinButtonAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SpinButtonAccessible self() nothrow
   {

@@ -34,6 +34,12 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowAggregateNodeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AggregateNodeOptions self() nothrow
   {

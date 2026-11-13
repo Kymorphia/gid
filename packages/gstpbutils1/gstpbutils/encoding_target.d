@@ -39,6 +39,12 @@ class EncodingTarget : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstEncodingTarget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EncodingTarget self() nothrow
   {

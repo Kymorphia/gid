@@ -36,6 +36,12 @@ class FilterWindows : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterWindows";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterWindows self() nothrow
   {

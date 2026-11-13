@@ -79,6 +79,12 @@ class Scrollbar : gtk.range.Range
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScrollbar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Scrollbar self() nothrow
   {

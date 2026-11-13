@@ -39,6 +39,12 @@ class MultipartSigned : gmime.multipart.Multipart
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeMultipartSigned";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MultipartSigned self() nothrow
   {

@@ -34,6 +34,12 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightMessageReader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MessageReader self() nothrow
   {

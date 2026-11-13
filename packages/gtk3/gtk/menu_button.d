@@ -130,6 +130,12 @@ class MenuButton : gtk.toggle_button.ToggleButton
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMenuButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MenuButton self() nothrow
   {

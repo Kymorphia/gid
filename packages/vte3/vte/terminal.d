@@ -66,6 +66,12 @@ class Terminal : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "VteTerminal";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Terminal self() nothrow
   {

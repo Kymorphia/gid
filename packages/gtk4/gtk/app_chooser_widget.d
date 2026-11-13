@@ -70,6 +70,12 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAppChooserWidget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AppChooserWidget self() nothrow
   {

@@ -48,6 +48,12 @@ class VScale : gtk.scale.Scale
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkVScale";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VScale self() nothrow
   {

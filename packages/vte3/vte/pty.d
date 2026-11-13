@@ -39,6 +39,12 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "VtePty";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Pty self() nothrow
   {

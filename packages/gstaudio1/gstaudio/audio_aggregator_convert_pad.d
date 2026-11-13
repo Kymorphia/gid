@@ -38,6 +38,12 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioAggregatorConvertPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioAggregatorConvertPad self() nothrow
   {

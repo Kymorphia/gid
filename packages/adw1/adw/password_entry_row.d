@@ -62,6 +62,12 @@ class PasswordEntryRow : adw.entry_row.EntryRow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwPasswordEntryRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PasswordEntryRow self() nothrow
   {

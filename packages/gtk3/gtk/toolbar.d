@@ -68,6 +68,12 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToolbar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Toolbar self() nothrow
   {

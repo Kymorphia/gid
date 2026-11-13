@@ -32,6 +32,12 @@ class LocalFileSystemOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowLocalFileSystemOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LocalFileSystemOptions self() nothrow
   {

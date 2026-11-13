@@ -45,6 +45,12 @@ class AudioRingBuffer : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioRingBuffer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioRingBuffer self() nothrow
   {

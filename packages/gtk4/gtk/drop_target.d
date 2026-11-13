@@ -111,6 +111,12 @@ class DropTarget : gtk.event_controller.EventController
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDropTarget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DropTarget self() nothrow
   {

@@ -61,6 +61,12 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRecentChooserMenu";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RecentChooserMenu self() nothrow
   {

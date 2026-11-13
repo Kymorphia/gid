@@ -37,6 +37,12 @@ class MountOperation : gio.mount_operation.MountOperation
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMountOperation";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MountOperation self() nothrow
   {

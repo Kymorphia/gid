@@ -37,6 +37,12 @@ class ScannerBuilder : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetScannerBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ScannerBuilder self() nothrow
   {

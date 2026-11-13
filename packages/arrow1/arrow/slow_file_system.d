@@ -33,6 +33,12 @@ class SlowFileSystem : arrow.file_system.FileSystem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSlowFileSystem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SlowFileSystem self() nothrow
   {

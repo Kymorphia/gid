@@ -51,6 +51,12 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkBuilderCScope";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BuilderCScope self() nothrow
   {

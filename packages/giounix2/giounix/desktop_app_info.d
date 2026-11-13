@@ -45,6 +45,12 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDesktopAppInfo";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DesktopAppInfo self() nothrow
   {

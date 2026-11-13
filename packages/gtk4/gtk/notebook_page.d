@@ -35,6 +35,12 @@ class NotebookPage : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNotebookPage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NotebookPage self() nothrow
   {

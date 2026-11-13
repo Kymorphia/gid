@@ -68,6 +68,12 @@ class Map : gtksource.view.View
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceMap";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Map self() nothrow
   {

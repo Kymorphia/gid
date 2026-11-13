@@ -44,6 +44,12 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwViewStackPages";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ViewStackPages self() nothrow
   {

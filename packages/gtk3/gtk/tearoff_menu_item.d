@@ -56,6 +56,12 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTearoffMenuItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TearoffMenuItem self() nothrow
   {

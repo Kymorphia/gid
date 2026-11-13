@@ -48,6 +48,12 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellRendererSpin";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellRendererSpin self() nothrow
   {

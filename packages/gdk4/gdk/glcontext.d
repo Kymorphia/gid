@@ -85,6 +85,12 @@ class GLContext : gdk.draw_context.DrawContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkGLContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLContext self() nothrow
   {

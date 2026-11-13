@@ -63,6 +63,12 @@ class LinkButton : gtk.button.Button
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLinkButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LinkButton self() nothrow
   {

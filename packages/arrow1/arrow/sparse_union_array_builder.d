@@ -34,6 +34,12 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSparseUnionArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SparseUnionArrayBuilder self() nothrow
   {

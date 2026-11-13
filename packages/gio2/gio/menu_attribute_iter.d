@@ -36,6 +36,12 @@ class MenuAttributeIter : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMenuAttributeIter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MenuAttributeIter self() nothrow
   {

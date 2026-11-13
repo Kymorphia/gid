@@ -121,6 +121,12 @@ class MultiLayoutView : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwMultiLayoutView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MultiLayoutView self() nothrow
   {

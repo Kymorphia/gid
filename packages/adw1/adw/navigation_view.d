@@ -202,6 +202,12 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwNavigationView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NavigationView self() nothrow
   {

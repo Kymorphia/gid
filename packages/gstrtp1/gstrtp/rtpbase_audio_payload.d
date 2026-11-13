@@ -64,6 +64,12 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstRTPBaseAudioPayload";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RTPBaseAudioPayload self() nothrow
   {

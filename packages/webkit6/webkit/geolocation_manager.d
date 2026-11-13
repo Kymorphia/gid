@@ -43,6 +43,12 @@ class GeolocationManager : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitGeolocationManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GeolocationManager self() nothrow
   {

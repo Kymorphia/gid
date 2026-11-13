@@ -98,6 +98,12 @@ class DeviceMonitor : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDeviceMonitor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DeviceMonitor self() nothrow
   {

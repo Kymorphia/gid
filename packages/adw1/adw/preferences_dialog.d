@@ -66,6 +66,12 @@ class PreferencesDialog : adw.dialog.Dialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwPreferencesDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PreferencesDialog self() nothrow
   {

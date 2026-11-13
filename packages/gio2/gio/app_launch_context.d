@@ -40,6 +40,12 @@ class AppLaunchContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAppLaunchContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AppLaunchContext self() nothrow
   {

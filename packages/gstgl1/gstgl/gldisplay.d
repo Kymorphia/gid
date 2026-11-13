@@ -59,6 +59,12 @@ class GLDisplay : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLDisplay";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLDisplay self() nothrow
   {

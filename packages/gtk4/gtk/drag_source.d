@@ -115,6 +115,12 @@ class DragSource : gtk.gesture_single.GestureSingle
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDragSource";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DragSource self() nothrow
   {

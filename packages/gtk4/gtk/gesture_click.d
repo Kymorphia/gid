@@ -42,6 +42,12 @@ class GestureClick : gtk.gesture_single.GestureSingle
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGestureClick";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GestureClick self() nothrow
   {

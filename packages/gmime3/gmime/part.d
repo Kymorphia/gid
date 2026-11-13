@@ -39,6 +39,12 @@ class Part : gmime.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimePart";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Part self() nothrow
   {

@@ -41,6 +41,12 @@ class Fontset : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PangoFontset";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Fontset self() nothrow
   {

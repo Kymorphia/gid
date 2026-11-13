@@ -50,6 +50,12 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToolItemGroup";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToolItemGroup self() nothrow
   {

@@ -135,6 +135,12 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTreeModelSort";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TreeModelSort self() nothrow
   {

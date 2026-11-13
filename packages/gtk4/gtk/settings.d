@@ -65,6 +65,12 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSettings";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Settings self() nothrow
   {

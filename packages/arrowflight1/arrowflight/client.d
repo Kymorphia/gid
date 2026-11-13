@@ -43,6 +43,12 @@ class Client : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightClient";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Client self() nothrow
   {

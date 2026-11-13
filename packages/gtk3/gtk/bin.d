@@ -45,6 +45,12 @@ class Bin : gtk.container.Container
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkBin";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Bin self() nothrow
   {

@@ -43,6 +43,12 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelFrameTabBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FrameTabBar self() nothrow
   {

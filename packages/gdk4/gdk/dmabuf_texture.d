@@ -45,6 +45,12 @@ class DmabufTexture : gdk.texture.Texture
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDmabufTexture";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DmabufTexture self() nothrow
   {

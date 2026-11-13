@@ -42,6 +42,12 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GTcpWrapperConnection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TcpWrapperConnection self() nothrow
   {

@@ -117,6 +117,12 @@ class TreeExpander : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTreeExpander";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TreeExpander self() nothrow
   {

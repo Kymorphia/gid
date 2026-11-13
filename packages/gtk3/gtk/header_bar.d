@@ -54,6 +54,12 @@ class HeaderBar : gtk.container.Container
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkHeaderBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HeaderBar self() nothrow
   {

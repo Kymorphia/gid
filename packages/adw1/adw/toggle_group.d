@@ -140,6 +140,12 @@ class ToggleGroup : gtk.widget.Widget, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwToggleGroup";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToggleGroup self() nothrow
   {

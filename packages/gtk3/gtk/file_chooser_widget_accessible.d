@@ -37,6 +37,12 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFileChooserWidgetAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileChooserWidgetAccessible self() nothrow
   {

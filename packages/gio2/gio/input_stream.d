@@ -50,6 +50,12 @@ class InputStream : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InputStream self() nothrow
   {

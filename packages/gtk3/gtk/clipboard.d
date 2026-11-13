@@ -98,6 +98,12 @@ class Clipboard : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkClipboard";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Clipboard self() nothrow
   {

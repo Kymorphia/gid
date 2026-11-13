@@ -85,6 +85,12 @@ class Application : gtk.application.Application
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwApplication";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Application self() nothrow
   {

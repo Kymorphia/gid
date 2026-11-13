@@ -79,6 +79,12 @@ class Layout : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PangoLayout";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Layout self() nothrow
   {

@@ -36,6 +36,12 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "InternetAddressGroup";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InternetAddressGroup self() nothrow
   {

@@ -39,6 +39,12 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GNativeSocketAddress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NativeSocketAddress self() nothrow
   {

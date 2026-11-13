@@ -46,6 +46,12 @@ class AudioFilter : gstbase.base_transform.BaseTransform
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioFilter self() nothrow
   {

@@ -86,6 +86,12 @@ class ButtonRow : adw.preferences_row.PreferencesRow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwButtonRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ButtonRow self() nothrow
   {

@@ -79,6 +79,12 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPasswordEntry";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PasswordEntry self() nothrow
   {

@@ -34,6 +34,12 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGridLayoutChild";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GridLayoutChild self() nothrow
   {

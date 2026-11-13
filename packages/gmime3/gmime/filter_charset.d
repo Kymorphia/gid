@@ -34,6 +34,12 @@ class FilterCharset : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterCharset";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterCharset self() nothrow
   {

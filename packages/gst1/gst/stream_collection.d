@@ -53,6 +53,12 @@ class StreamCollection : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstStreamCollection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StreamCollection self() nothrow
   {

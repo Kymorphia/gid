@@ -34,6 +34,12 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkOverlayLayoutChild";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OverlayLayoutChild self() nothrow
   {

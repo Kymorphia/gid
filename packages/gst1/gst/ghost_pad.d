@@ -50,6 +50,12 @@ class GhostPad : gst.proxy_pad.ProxyPad
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGhostPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GhostPad self() nothrow
   {

@@ -33,6 +33,12 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowProjectNodeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ProjectNodeOptions self() nothrow
   {

@@ -32,6 +32,12 @@ class TimestampParser : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTimestampParser";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TimestampParser self() nothrow
   {

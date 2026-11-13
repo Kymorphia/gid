@@ -33,6 +33,12 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetFixedLengthByteArrayStatistics";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FixedLengthByteArrayStatistics self() nothrow
   {

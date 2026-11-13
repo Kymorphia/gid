@@ -75,6 +75,12 @@ class Spinner : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSpinner";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Spinner self() nothrow
   {

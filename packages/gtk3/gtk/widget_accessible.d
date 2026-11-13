@@ -34,6 +34,12 @@ class WidgetAccessible : gtk.accessible.Accessible, atk.component.Component
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkWidgetAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WidgetAccessible self() nothrow
   {

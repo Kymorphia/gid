@@ -66,6 +66,12 @@ class ColumnViewSorter : gtk.sorter.Sorter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColumnViewSorter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColumnViewSorter self() nothrow
   {

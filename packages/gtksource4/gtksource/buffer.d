@@ -41,6 +41,12 @@ class Buffer : gtk.text_buffer.TextBuffer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceBuffer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Buffer self() nothrow
   {

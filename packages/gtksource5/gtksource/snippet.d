@@ -49,6 +49,12 @@ class Snippet : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceSnippet";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Snippet self() nothrow
   {

@@ -44,6 +44,12 @@ class CookieJarDB : soup.cookie_jar.CookieJar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupCookieJarDB";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CookieJarDB self() nothrow
   {

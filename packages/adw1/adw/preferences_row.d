@@ -50,6 +50,12 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwPreferencesRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PreferencesRow self() nothrow
   {

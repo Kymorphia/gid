@@ -37,6 +37,12 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwViewStackPage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ViewStackPage self() nothrow
   {

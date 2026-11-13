@@ -32,6 +32,12 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStrptimeTimestampParser";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StrptimeTimestampParser self() nothrow
   {

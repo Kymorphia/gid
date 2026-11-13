@@ -76,6 +76,12 @@ class Snapshot : gdk.snapshot.Snapshot
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSnapshot";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Snapshot self() nothrow
   {

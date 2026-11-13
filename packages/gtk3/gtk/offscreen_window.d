@@ -57,6 +57,12 @@ class OffscreenWindow : gtk.window.Window
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkOffscreenWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OffscreenWindow self() nothrow
   {

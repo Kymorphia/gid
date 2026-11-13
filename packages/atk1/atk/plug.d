@@ -38,6 +38,12 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AtkPlug";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Plug self() nothrow
   {

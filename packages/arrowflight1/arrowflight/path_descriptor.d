@@ -32,6 +32,12 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightPathDescriptor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PathDescriptor self() nothrow
   {

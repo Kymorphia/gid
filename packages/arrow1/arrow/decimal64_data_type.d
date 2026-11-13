@@ -33,6 +33,12 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDecimal64DataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Decimal64DataType self() nothrow
   {

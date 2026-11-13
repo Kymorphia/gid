@@ -34,6 +34,12 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSparseUnionScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SparseUnionScalar self() nothrow
   {

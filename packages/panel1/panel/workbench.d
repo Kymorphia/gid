@@ -37,6 +37,12 @@ class Workbench : gtk.window_group.WindowGroup
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelWorkbench";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Workbench self() nothrow
   {

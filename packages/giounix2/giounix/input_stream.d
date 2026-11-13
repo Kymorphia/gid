@@ -46,6 +46,12 @@ class InputStream : gio.input_stream.InputStream, gio.pollable_input_stream.Poll
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GUnixInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InputStream self() nothrow
   {

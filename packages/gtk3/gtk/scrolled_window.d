@@ -118,6 +118,12 @@ class ScrolledWindow : gtk.bin.Bin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScrolledWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ScrolledWindow self() nothrow
   {

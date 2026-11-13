@@ -47,6 +47,12 @@ class URISchemeResponse : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitURISchemeResponse";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override URISchemeResponse self() nothrow
   {

@@ -79,6 +79,12 @@ class ShortcutsWindow : gtk.window.Window
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkShortcutsWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ShortcutsWindow self() nothrow
   {

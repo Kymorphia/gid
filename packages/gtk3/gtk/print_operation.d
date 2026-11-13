@@ -103,6 +103,12 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPrintOperation";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PrintOperation self() nothrow
   {

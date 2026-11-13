@@ -37,6 +37,12 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMemoryMappedInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MemoryMappedInputStream self() nothrow
   {

@@ -37,6 +37,12 @@ class FlowBoxChild : gtk.bin.Bin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFlowBoxChild";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FlowBoxChild self() nothrow
   {

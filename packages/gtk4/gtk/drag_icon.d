@@ -58,6 +58,12 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDragIcon";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DragIcon self() nothrow
   {

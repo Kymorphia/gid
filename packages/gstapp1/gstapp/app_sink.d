@@ -79,6 +79,12 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAppSink";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AppSink self() nothrow
   {

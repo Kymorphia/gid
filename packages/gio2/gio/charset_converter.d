@@ -40,6 +40,12 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GCharsetConverter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CharsetConverter self() nothrow
   {

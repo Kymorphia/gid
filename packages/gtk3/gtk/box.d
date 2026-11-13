@@ -88,6 +88,12 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Box self() nothrow
   {

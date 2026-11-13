@@ -142,6 +142,12 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPopover";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Popover self() nothrow
   {

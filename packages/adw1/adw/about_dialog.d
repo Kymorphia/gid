@@ -214,6 +214,12 @@ class AboutDialog : adw.dialog.Dialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwAboutDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AboutDialog self() nothrow
   {

@@ -66,6 +66,12 @@ class PreferencesWindow : adw.window.Window
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwPreferencesWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PreferencesWindow self() nothrow
   {

@@ -138,6 +138,12 @@ class Scale : gtk.range.Range
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScale";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Scale self() nothrow
   {

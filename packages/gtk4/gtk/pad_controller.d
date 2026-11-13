@@ -90,6 +90,12 @@ class PadController : gtk.event_controller.EventController
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPadController";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PadController self() nothrow
   {

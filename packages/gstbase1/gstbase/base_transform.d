@@ -143,6 +143,12 @@ class BaseTransform : gst.element.Element
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstBaseTransform";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BaseTransform self() nothrow
   {

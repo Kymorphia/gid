@@ -80,6 +80,12 @@ class GutterRenderer : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceGutterRenderer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GutterRenderer self() nothrow
   {

@@ -42,6 +42,12 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceGutterRenderer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GutterRenderer self() nothrow
   {

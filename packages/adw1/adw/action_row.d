@@ -92,6 +92,12 @@ class ActionRow : adw.preferences_row.PreferencesRow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwActionRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ActionRow self() nothrow
   {

@@ -34,6 +34,12 @@ class ConstraintLayoutChild : gtk.layout_child.LayoutChild
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkConstraintLayoutChild";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ConstraintLayoutChild self() nothrow
   {

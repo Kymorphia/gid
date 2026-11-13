@@ -35,6 +35,12 @@ class FileWriter : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetFileWriter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileWriter self() nothrow
   {

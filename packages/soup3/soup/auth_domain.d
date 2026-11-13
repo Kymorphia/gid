@@ -51,6 +51,12 @@ class AuthDomain : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupAuthDomain";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AuthDomain self() nothrow
   {

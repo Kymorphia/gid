@@ -39,6 +39,12 @@ class CairoContext : gdk.draw_context.DrawContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkCairoContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CairoContext self() nothrow
   {

@@ -48,6 +48,12 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelFrameHeaderBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FrameHeaderBar self() nothrow
   {

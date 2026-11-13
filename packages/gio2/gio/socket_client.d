@@ -55,6 +55,12 @@ class SocketClient : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSocketClient";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SocketClient self() nothrow
   {

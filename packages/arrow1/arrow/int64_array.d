@@ -34,6 +34,12 @@ class Int64Array : arrow.numeric_array.NumericArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowInt64Array";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Int64Array self() nothrow
   {

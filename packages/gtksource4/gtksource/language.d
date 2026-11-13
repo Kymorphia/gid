@@ -32,6 +32,12 @@ class Language : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceLanguage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Language self() nothrow
   {

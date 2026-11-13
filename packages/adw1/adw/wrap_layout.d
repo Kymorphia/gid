@@ -85,6 +85,12 @@ class WrapLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwWrapLayout";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WrapLayout self() nothrow
   {

@@ -39,6 +39,12 @@ class AggregatorPad : gst.pad.Pad
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAggregatorPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AggregatorPad self() nothrow
   {

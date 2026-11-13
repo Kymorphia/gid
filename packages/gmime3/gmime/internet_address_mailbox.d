@@ -34,6 +34,12 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "InternetAddressMailbox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InternetAddressMailbox self() nothrow
   {

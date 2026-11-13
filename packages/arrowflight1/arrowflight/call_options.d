@@ -32,6 +32,12 @@ class CallOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightCallOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CallOptions self() nothrow
   {

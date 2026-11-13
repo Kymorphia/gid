@@ -42,6 +42,12 @@ class DirectControlBinding : gst.control_binding.ControlBinding
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDirectControlBinding";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DirectControlBinding self() nothrow
   {

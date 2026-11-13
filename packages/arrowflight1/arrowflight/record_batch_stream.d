@@ -35,6 +35,12 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightRecordBatchStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RecordBatchStream self() nothrow
   {

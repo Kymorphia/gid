@@ -74,6 +74,12 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkIconView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IconView self() nothrow
   {

@@ -38,6 +38,12 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRadioMenuItemAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RadioMenuItemAccessible self() nothrow
   {

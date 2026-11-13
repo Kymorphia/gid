@@ -32,6 +32,12 @@ class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLBaseMixerPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLBaseMixerPad self() nothrow
   {

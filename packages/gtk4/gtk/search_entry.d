@@ -98,6 +98,12 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSearchEntry";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SearchEntry self() nothrow
   {

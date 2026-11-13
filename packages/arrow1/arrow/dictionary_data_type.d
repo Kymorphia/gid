@@ -34,6 +34,12 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDictionaryDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DictionaryDataType self() nothrow
   {

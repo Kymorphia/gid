@@ -53,6 +53,12 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwClampScrollable";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ClampScrollable self() nothrow
   {

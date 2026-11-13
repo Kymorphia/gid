@@ -44,6 +44,12 @@ class Invisible : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkInvisible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Invisible self() nothrow
   {

@@ -54,6 +54,12 @@ class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioSink";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioSink self() nothrow
   {

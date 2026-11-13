@@ -59,6 +59,12 @@ class Video : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkVideo";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Video self() nothrow
   {

@@ -45,6 +45,12 @@ class HPaned : gtk.paned.Paned
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkHPaned";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HPaned self() nothrow
   {

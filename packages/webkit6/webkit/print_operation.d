@@ -45,6 +45,12 @@ class PrintOperation : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitPrintOperation";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PrintOperation self() nothrow
   {

@@ -40,6 +40,12 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMultiFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MultiFilter self() nothrow
   {

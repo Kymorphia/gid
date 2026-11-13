@@ -129,6 +129,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEntry";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Entry self() nothrow
   {

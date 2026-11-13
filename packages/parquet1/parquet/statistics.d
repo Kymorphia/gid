@@ -32,6 +32,12 @@ class Statistics : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetStatistics";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Statistics self() nothrow
   {

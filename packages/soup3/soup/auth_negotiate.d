@@ -43,6 +43,12 @@ class AuthNegotiate : soup.auth.Auth
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupAuthNegotiate";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AuthNegotiate self() nothrow
   {

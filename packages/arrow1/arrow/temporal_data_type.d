@@ -32,6 +32,12 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTemporalDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TemporalDataType self() nothrow
   {

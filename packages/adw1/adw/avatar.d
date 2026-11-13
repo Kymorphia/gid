@@ -69,6 +69,12 @@ class Avatar : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwAvatar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Avatar self() nothrow
   {

@@ -33,6 +33,12 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowHashJoinNodeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HashJoinNodeOptions self() nothrow
   {

@@ -266,6 +266,12 @@ class Sidebar : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSidebar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Sidebar self() nothrow
   {

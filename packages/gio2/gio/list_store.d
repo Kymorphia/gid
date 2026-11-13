@@ -41,6 +41,12 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GListStore";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListStore self() nothrow
   {

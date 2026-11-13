@@ -35,6 +35,12 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoAggregatorPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VideoAggregatorPad self() nothrow
   {

@@ -56,6 +56,12 @@ class PtpClock : gst.system_clock.SystemClock
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstPtpClock";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PtpClock self() nothrow
   {

@@ -67,6 +67,12 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkBuilderListItemFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BuilderListItemFactory self() nothrow
   {

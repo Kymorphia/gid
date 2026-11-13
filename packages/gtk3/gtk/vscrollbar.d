@@ -48,6 +48,12 @@ class VScrollbar : gtk.scrollbar.Scrollbar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkVScrollbar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VScrollbar self() nothrow
   {

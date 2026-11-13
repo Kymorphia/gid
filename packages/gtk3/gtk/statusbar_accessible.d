@@ -34,6 +34,12 @@ class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStatusbarAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StatusbarAccessible self() nothrow
   {

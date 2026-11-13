@@ -38,6 +38,12 @@ class AuthBasic : soup.auth.Auth
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupAuthBasic";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AuthBasic self() nothrow
   {

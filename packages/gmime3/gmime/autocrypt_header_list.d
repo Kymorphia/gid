@@ -37,6 +37,12 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeAutocryptHeaderList";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AutocryptHeaderList self() nothrow
   {

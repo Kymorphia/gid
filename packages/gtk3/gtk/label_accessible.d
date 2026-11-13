@@ -38,6 +38,12 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLabelAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LabelAccessible self() nothrow
   {

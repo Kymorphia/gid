@@ -32,6 +32,12 @@ class FunctionOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFunctionOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FunctionOptions self() nothrow
   {

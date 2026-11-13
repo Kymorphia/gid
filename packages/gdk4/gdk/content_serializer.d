@@ -51,6 +51,12 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkContentSerializer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ContentSerializer self() nothrow
   {

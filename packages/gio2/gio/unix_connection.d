@@ -50,6 +50,12 @@ class UnixConnection : gio.socket_connection.SocketConnection
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GUnixConnection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UnixConnection self() nothrow
   {

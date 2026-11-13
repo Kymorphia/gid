@@ -40,6 +40,12 @@ class CookieJarText : soup.cookie_jar.CookieJar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupCookieJarText";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CookieJarText self() nothrow
   {

@@ -45,6 +45,12 @@ class Registry : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AtkRegistry";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Registry self() nothrow
   {

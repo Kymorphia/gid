@@ -38,6 +38,12 @@ class CompletionInfo : gtk.window.Window
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceCompletionInfo";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CompletionInfo self() nothrow
   {

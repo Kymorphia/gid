@@ -33,6 +33,12 @@ class PartitioningFactoryOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetPartitioningFactoryOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PartitioningFactoryOptions self() nothrow
   {

@@ -32,6 +32,12 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GNativeVolumeMonitor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NativeVolumeMonitor self() nothrow
   {

@@ -41,6 +41,12 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceCompletionWords";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CompletionWords self() nothrow
   {

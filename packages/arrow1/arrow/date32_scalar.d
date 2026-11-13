@@ -32,6 +32,12 @@ class Date32Scalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDate32Scalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Date32Scalar self() nothrow
   {

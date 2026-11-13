@@ -98,6 +98,12 @@ class WrapBox : gtk.widget.Widget, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwWrapBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WrapBox self() nothrow
   {

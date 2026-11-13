@@ -105,6 +105,12 @@ class Window : gtk.bin.Bin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Window self() nothrow
   {

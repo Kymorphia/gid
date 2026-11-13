@@ -38,6 +38,12 @@ class ParamList : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeParamList";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ParamList self() nothrow
   {

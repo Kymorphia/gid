@@ -49,6 +49,12 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellRendererCombo";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellRendererCombo self() nothrow
   {

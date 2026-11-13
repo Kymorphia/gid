@@ -36,6 +36,12 @@ class ExtensionDataType : arrow.data_type.DataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowExtensionDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExtensionDataType self() nothrow
   {

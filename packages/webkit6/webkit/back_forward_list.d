@@ -50,6 +50,12 @@ class BackForwardList : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitBackForwardList";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BackForwardList self() nothrow
   {

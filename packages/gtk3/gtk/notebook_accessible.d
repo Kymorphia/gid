@@ -36,6 +36,12 @@ class NotebookAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNotebookAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NotebookAccessible self() nothrow
   {

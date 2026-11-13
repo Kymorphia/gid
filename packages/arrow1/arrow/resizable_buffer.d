@@ -33,6 +33,12 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowResizableBuffer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ResizableBuffer self() nothrow
   {

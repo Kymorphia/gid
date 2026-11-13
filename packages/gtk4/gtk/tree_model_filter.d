@@ -110,6 +110,12 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTreeModelFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TreeModelFilter self() nothrow
   {

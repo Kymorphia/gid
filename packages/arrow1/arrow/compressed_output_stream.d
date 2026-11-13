@@ -39,6 +39,12 @@ class CompressedOutputStream : arrow.output_stream.OutputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowCompressedOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CompressedOutputStream self() nothrow
   {

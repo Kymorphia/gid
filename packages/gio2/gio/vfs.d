@@ -35,6 +35,12 @@ class Vfs : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GVfs";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Vfs self() nothrow
   {

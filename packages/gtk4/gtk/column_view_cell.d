@@ -50,6 +50,12 @@ class ColumnViewCell : gtk.list_item.ListItem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColumnViewCell";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColumnViewCell self() nothrow
   {

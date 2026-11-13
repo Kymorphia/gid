@@ -35,6 +35,12 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDiscovererSubtitleInfo";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DiscovererSubtitleInfo self() nothrow
   {

@@ -38,6 +38,12 @@ class TaskPool : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTaskPool";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TaskPool self() nothrow
   {

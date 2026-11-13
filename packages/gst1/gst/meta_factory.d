@@ -53,6 +53,12 @@ class MetaFactory : gst.plugin_feature.PluginFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstMetaFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MetaFactory self() nothrow
   {

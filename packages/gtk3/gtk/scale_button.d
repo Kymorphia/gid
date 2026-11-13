@@ -58,6 +58,12 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScaleButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ScaleButton self() nothrow
   {

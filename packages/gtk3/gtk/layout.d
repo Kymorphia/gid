@@ -55,6 +55,12 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLayout";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Layout self() nothrow
   {

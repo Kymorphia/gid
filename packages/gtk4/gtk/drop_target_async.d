@@ -70,6 +70,12 @@ class DropTargetAsync : gtk.event_controller.EventController
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDropTargetAsync";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DropTargetAsync self() nothrow
   {

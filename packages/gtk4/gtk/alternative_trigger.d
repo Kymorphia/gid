@@ -39,6 +39,12 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAlternativeTrigger";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AlternativeTrigger self() nothrow
   {

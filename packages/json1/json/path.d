@@ -162,6 +162,12 @@ class Path : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "JsonPath";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Path self() nothrow
   {

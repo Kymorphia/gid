@@ -36,6 +36,12 @@ class DRMDumbAllocator : gst.allocator.Allocator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDRMDumbAllocator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DRMDumbAllocator self() nothrow
   {

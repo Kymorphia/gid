@@ -49,6 +49,12 @@ class DeviceProvider : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDeviceProvider";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DeviceProvider self() nothrow
   {

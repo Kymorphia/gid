@@ -47,6 +47,12 @@ class HoverDisplay : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceHoverDisplay";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HoverDisplay self() nothrow
   {

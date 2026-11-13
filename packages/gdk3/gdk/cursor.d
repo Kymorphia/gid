@@ -37,6 +37,12 @@ class Cursor : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkCursor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Cursor self() nothrow
   {

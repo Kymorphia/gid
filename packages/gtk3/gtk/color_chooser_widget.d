@@ -62,6 +62,12 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColorChooserWidget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColorChooserWidget self() nothrow
   {

@@ -53,6 +53,12 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDynamicTypeFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DynamicTypeFactory self() nothrow
   {

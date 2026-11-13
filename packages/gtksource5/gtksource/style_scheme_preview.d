@@ -50,6 +50,12 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceStyleSchemePreview";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StyleSchemePreview self() nothrow
   {

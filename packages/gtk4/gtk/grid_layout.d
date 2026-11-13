@@ -47,6 +47,12 @@ class GridLayout : gtk.layout_manager.LayoutManager
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGridLayout";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GridLayout self() nothrow
   {

@@ -123,6 +123,12 @@ class TabOverview : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwTabOverview";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TabOverview self() nothrow
   {

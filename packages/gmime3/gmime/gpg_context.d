@@ -34,6 +34,12 @@ class GpgContext : gmime.crypto_context.CryptoContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeGpgContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GpgContext self() nothrow
   {

@@ -34,6 +34,12 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimePkcs7Context";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Pkcs7Context self() nothrow
   {

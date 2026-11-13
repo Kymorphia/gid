@@ -35,6 +35,12 @@ class TlsPassword : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GTlsPassword";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TlsPassword self() nothrow
   {

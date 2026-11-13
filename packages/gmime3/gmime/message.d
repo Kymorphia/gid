@@ -40,6 +40,12 @@ class Message : gmime.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeMessage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Message self() nothrow
   {

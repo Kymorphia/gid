@@ -32,6 +32,12 @@ class ExecuteNodeOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowExecuteNodeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExecuteNodeOptions self() nothrow
   {

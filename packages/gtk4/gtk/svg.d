@@ -179,6 +179,12 @@ class Svg : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.symbolic_pai
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSvg";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Svg self() nothrow
   {

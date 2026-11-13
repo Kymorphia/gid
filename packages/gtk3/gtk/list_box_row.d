@@ -41,6 +41,12 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListBoxRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListBoxRow self() nothrow
   {

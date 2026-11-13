@@ -41,6 +41,12 @@ class Tag : gtk.text_tag.TextTag
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceTag";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Tag self() nothrow
   {

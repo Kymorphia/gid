@@ -33,6 +33,12 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDate32ArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Date32ArrayBuilder self() nothrow
   {

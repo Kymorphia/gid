@@ -37,6 +37,12 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSignalAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SignalAction self() nothrow
   {

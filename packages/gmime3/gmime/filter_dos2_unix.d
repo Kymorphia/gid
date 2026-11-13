@@ -34,6 +34,12 @@ class FilterDos2Unix : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterDos2Unix";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterDos2Unix self() nothrow
   {

@@ -134,6 +134,12 @@ class HeaderBar : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwHeaderBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HeaderBar self() nothrow
   {

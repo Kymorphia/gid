@@ -36,6 +36,12 @@ class VulkanRenderer : gsk.renderer.Renderer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GskVulkanRenderer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VulkanRenderer self() nothrow
   {

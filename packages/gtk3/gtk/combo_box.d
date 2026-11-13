@@ -102,6 +102,12 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkComboBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ComboBox self() nothrow
   {

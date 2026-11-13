@@ -42,6 +42,12 @@ class InetSocketAddress : gio.socket_address.SocketAddress
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GInetSocketAddress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InetSocketAddress self() nothrow
   {

@@ -35,6 +35,12 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRecordBatchFileWriter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RecordBatchFileWriter self() nothrow
   {

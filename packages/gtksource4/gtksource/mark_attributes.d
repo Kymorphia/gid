@@ -38,6 +38,12 @@ class MarkAttributes : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceMarkAttributes";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MarkAttributes self() nothrow
   {

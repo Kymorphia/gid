@@ -54,6 +54,12 @@ class CicpParams : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkCicpParams";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CicpParams self() nothrow
   {

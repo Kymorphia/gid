@@ -126,6 +126,12 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPaned";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Paned self() nothrow
   {

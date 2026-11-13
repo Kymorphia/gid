@@ -56,6 +56,12 @@ class Surface : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkSurface";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Surface self() nothrow
   {

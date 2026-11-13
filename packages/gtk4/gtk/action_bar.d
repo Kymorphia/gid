@@ -81,6 +81,12 @@ class ActionBar : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkActionBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ActionBar self() nothrow
   {

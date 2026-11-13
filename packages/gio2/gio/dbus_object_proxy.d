@@ -40,6 +40,12 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusObjectProxy";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusObjectProxy self() nothrow
   {

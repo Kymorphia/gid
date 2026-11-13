@@ -39,6 +39,12 @@ class ButtonAccessible : gtk.container_accessible.ContainerAccessible, atk.actio
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkButtonAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ButtonAccessible self() nothrow
   {

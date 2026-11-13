@@ -44,6 +44,12 @@ class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitDeviceInfoPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DeviceInfoPermissionRequest self() nothrow
   {

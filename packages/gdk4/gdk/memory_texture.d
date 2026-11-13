@@ -41,6 +41,12 @@ class MemoryTexture : gdk.texture.Texture
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkMemoryTexture";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MemoryTexture self() nothrow
   {

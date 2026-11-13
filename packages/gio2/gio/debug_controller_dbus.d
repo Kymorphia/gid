@@ -152,6 +152,12 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDebugControllerDBus";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DebugControllerDBus self() nothrow
   {

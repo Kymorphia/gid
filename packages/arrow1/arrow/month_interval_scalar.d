@@ -32,6 +32,12 @@ class MonthIntervalScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMonthIntervalScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MonthIntervalScalar self() nothrow
   {

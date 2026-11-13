@@ -44,6 +44,12 @@ class AutomationSession : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitAutomationSession";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AutomationSession self() nothrow
   {

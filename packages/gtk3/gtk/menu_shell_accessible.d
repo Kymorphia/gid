@@ -36,6 +36,12 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMenuShellAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MenuShellAccessible self() nothrow
   {

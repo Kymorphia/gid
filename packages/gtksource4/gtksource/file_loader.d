@@ -41,6 +41,12 @@ class FileLoader : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceFileLoader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileLoader self() nothrow
   {

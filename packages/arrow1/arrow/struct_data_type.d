@@ -34,6 +34,12 @@ class StructDataType : arrow.data_type.DataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStructDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StructDataType self() nothrow
   {

@@ -179,6 +179,12 @@ class TestClock : gst.clock.Clock
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTestClock";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TestClock self() nothrow
   {

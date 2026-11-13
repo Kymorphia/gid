@@ -152,6 +152,12 @@ class ListView : gtk.list_base.ListBase
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListView self() nothrow
   {

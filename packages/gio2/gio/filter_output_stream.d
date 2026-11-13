@@ -38,6 +38,12 @@ class FilterOutputStream : gio.output_stream.OutputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GFilterOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterOutputStream self() nothrow
   {

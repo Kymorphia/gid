@@ -72,6 +72,12 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwTabButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TabButton self() nothrow
   {

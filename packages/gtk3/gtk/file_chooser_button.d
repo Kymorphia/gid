@@ -78,6 +78,12 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFileChooserButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileChooserButton self() nothrow
   {

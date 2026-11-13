@@ -39,6 +39,12 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkComboBoxAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ComboBoxAccessible self() nothrow
   {

@@ -38,6 +38,12 @@ class GIOOutputStream : arrow.output_stream.OutputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowGIOOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GIOOutputStream self() nothrow
   {

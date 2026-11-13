@@ -50,6 +50,12 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkContentDeserializer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ContentDeserializer self() nothrow
   {

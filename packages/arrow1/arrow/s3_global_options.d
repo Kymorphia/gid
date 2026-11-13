@@ -32,6 +32,12 @@ class S3GlobalOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowS3GlobalOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override S3GlobalOptions self() nothrow
   {

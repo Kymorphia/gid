@@ -36,6 +36,12 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNotebookPageAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NotebookPageAccessible self() nothrow
   {

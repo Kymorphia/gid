@@ -42,6 +42,12 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTriggerControlSource";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TriggerControlSource self() nothrow
   {

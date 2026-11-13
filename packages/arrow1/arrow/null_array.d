@@ -32,6 +32,12 @@ class NullArray : arrow.array.Array
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowNullArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NullArray self() nothrow
   {

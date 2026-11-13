@@ -33,6 +33,12 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFloatArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FloatArrayBuilder self() nothrow
   {

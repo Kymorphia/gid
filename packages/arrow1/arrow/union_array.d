@@ -34,6 +34,12 @@ class UnionArray : arrow.array.Array
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUnionArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UnionArray self() nothrow
   {

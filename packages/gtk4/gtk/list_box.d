@@ -111,6 +111,12 @@ class ListBox : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListBox self() nothrow
   {

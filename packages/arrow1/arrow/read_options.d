@@ -32,6 +32,12 @@ class ReadOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowReadOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ReadOptions self() nothrow
   {

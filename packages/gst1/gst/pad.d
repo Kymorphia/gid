@@ -105,6 +105,12 @@ class Pad : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Pad self() nothrow
   {

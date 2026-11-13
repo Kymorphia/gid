@@ -33,6 +33,12 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDenseUnionDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DenseUnionDataType self() nothrow
   {

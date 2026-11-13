@@ -129,6 +129,12 @@ class Gesture : gtk.event_controller.EventController
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGesture";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Gesture self() nothrow
   {

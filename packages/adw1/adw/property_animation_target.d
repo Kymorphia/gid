@@ -37,6 +37,12 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwPropertyAnimationTarget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PropertyAnimationTarget self() nothrow
   {

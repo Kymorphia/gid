@@ -32,6 +32,12 @@ class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetKeyValuePartitioning";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override KeyValuePartitioning self() nothrow
   {

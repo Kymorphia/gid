@@ -35,6 +35,12 @@ class FilterEnriched : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterEnriched";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterEnriched self() nothrow
   {

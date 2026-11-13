@@ -53,6 +53,12 @@ class VolumeButton : gtk.scale_button.ScaleButton
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkVolumeButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VolumeButton self() nothrow
   {

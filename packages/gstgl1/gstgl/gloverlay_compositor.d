@@ -38,6 +38,12 @@ class GLOverlayCompositor : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLOverlayCompositor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLOverlayCompositor self() nothrow
   {

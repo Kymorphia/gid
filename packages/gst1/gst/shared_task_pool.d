@@ -34,6 +34,12 @@ class SharedTaskPool : gst.task_pool.TaskPool
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstSharedTaskPool";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SharedTaskPool self() nothrow
   {

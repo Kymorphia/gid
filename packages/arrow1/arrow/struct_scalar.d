@@ -33,6 +33,12 @@ class StructScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStructScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StructScalar self() nothrow
   {

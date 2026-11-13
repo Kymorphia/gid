@@ -66,6 +66,12 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToolButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToolButton self() nothrow
   {

@@ -34,6 +34,12 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDenseUnionArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DenseUnionArrayBuilder self() nothrow
   {

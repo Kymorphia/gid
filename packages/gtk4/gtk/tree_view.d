@@ -149,6 +149,12 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTreeView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TreeView self() nothrow
   {

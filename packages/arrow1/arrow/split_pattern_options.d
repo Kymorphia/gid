@@ -33,6 +33,12 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSplitPatternOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SplitPatternOptions self() nothrow
   {

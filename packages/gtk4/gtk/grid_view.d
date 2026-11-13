@@ -90,6 +90,12 @@ class GridView : gtk.list_base.ListBase
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGridView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GridView self() nothrow
   {

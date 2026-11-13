@@ -39,6 +39,12 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetFileSystemDataset";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileSystemDataset self() nothrow
   {

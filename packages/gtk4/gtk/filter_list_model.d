@@ -49,6 +49,12 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFilterListModel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterListModel self() nothrow
   {

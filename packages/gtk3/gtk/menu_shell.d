@@ -69,6 +69,12 @@ class MenuShell : gtk.container.Container
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMenuShell";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MenuShell self() nothrow
   {

@@ -70,6 +70,12 @@ class StatusPage : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwStatusPage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StatusPage self() nothrow
   {

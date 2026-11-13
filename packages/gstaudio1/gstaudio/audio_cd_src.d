@@ -80,6 +80,12 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioCdSrc";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioCdSrc self() nothrow
   {

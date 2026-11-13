@@ -53,6 +53,12 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStyleProperties";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StyleProperties self() nothrow
   {

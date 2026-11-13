@@ -36,6 +36,12 @@ class BroadwayRenderer : gsk.renderer.Renderer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GskBroadwayRenderer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BroadwayRenderer self() nothrow
   {

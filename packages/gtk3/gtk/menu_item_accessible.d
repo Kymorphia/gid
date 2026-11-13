@@ -39,6 +39,12 @@ class MenuItemAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMenuItemAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MenuItemAccessible self() nothrow
   {

@@ -47,6 +47,12 @@ class IPv6TclassMessage : gio.socket_control_message.SocketControlMessage
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GIPv6TclassMessage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IPv6TclassMessage self() nothrow
   {

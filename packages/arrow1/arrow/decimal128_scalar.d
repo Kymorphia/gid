@@ -35,6 +35,12 @@ class Decimal128Scalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDecimal128Scalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Decimal128Scalar self() nothrow
   {

@@ -35,6 +35,12 @@ class CustomFilter : gtk.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCustomFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CustomFilter self() nothrow
   {

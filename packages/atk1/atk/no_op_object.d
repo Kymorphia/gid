@@ -64,6 +64,12 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AtkNoOpObject";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NoOpObject self() nothrow
   {

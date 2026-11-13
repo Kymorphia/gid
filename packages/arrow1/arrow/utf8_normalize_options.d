@@ -33,6 +33,12 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUTF8NormalizeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UTF8NormalizeOptions self() nothrow
   {

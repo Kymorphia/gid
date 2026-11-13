@@ -40,6 +40,12 @@ class SearchContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceSearchContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SearchContext self() nothrow
   {

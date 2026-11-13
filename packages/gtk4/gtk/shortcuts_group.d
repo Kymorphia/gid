@@ -62,6 +62,12 @@ class ShortcutsGroup : gtk.box.Box
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkShortcutsGroup";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ShortcutsGroup self() nothrow
   {

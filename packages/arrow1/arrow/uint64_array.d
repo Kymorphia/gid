@@ -34,6 +34,12 @@ class UInt64Array : arrow.numeric_array.NumericArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt64Array";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UInt64Array self() nothrow
   {

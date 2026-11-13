@@ -215,6 +215,12 @@ class AboutWindow : adw.window.Window
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwAboutWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AboutWindow self() nothrow
   {

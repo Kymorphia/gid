@@ -40,6 +40,12 @@ class EventBox : gtk.bin.Bin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEventBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EventBox self() nothrow
   {

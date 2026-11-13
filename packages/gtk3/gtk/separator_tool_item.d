@@ -53,6 +53,12 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSeparatorToolItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SeparatorToolItem self() nothrow
   {

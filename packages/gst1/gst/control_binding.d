@@ -39,6 +39,12 @@ class ControlBinding : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstControlBinding";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ControlBinding self() nothrow
   {

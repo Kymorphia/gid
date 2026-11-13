@@ -55,6 +55,12 @@ class Alignment : gtk.bin.Bin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAlignment";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Alignment self() nothrow
   {

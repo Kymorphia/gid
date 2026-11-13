@@ -43,6 +43,12 @@ class SystemClock : gst.clock.Clock
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstSystemClock";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SystemClock self() nothrow
   {

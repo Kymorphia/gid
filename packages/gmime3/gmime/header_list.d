@@ -38,6 +38,12 @@ class HeaderList : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeHeaderList";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HeaderList self() nothrow
   {

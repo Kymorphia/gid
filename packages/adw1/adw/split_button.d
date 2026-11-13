@@ -93,6 +93,12 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSplitButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SplitButton self() nothrow
   {

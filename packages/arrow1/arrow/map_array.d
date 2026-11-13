@@ -35,6 +35,12 @@ class MapArray : arrow.list_array.ListArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMapArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MapArray self() nothrow
   {

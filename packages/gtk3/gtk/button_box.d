@@ -40,6 +40,12 @@ class ButtonBox : gtk.box.Box
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkButtonBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ButtonBox self() nothrow
   {

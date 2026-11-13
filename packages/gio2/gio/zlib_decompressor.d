@@ -38,6 +38,12 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GZlibDecompressor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ZlibDecompressor self() nothrow
   {

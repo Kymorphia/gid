@@ -36,6 +36,12 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDecimal32ArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Decimal32ArrayBuilder self() nothrow
   {

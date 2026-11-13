@@ -34,6 +34,12 @@ class FilterBasic : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterBasic";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterBasic self() nothrow
   {

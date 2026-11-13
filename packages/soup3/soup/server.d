@@ -132,6 +132,12 @@ class Server : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupServer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Server self() nothrow
   {

@@ -57,6 +57,12 @@ class HBox : gtk.box.Box
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkHBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HBox self() nothrow
   {

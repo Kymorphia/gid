@@ -77,6 +77,12 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFileFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileFilter self() nothrow
   {

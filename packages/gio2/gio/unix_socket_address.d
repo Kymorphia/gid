@@ -55,6 +55,12 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GUnixSocketAddress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UnixSocketAddress self() nothrow
   {

@@ -34,6 +34,12 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRunEndEncodeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RunEndEncodeOptions self() nothrow
   {

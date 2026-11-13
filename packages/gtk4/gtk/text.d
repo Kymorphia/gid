@@ -160,6 +160,12 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkText";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Text self() nothrow
   {

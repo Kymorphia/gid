@@ -36,6 +36,12 @@ class MessagePartial : gmime.part.Part
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeMessagePartial";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MessagePartial self() nothrow
   {

@@ -34,6 +34,12 @@ class ScrolledWindowAccessible : gtk.container_accessible.ContainerAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScrolledWindowAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ScrolledWindowAccessible self() nothrow
   {

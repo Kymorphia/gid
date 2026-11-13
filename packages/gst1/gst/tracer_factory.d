@@ -36,6 +36,12 @@ class TracerFactory : gst.plugin_feature.PluginFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTracerFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TracerFactory self() nothrow
   {

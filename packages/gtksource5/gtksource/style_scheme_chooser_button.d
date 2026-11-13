@@ -52,6 +52,12 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceStyleSchemeChooserButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StyleSchemeChooserButton self() nothrow
   {

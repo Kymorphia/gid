@@ -33,6 +33,12 @@ class FieldExpression : arrow.expression.Expression
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFieldExpression";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FieldExpression self() nothrow
   {

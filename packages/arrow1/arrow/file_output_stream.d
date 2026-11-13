@@ -37,6 +37,12 @@ class FileOutputStream : arrow.output_stream.OutputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFileOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileOutputStream self() nothrow
   {

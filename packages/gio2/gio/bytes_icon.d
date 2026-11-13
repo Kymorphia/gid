@@ -40,6 +40,12 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GBytesIcon";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BytesIcon self() nothrow
   {

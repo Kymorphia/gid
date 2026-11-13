@@ -87,6 +87,12 @@ class Pipeline : gst.bin.Bin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstPipeline";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Pipeline self() nothrow
   {

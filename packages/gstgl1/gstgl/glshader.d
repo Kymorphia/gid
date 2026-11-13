@@ -36,6 +36,12 @@ class GLShader : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLShader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLShader self() nothrow
   {

@@ -38,6 +38,12 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowBufferInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BufferInputStream self() nothrow
   {

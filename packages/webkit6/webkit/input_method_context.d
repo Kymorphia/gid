@@ -46,6 +46,12 @@ class InputMethodContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitInputMethodContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InputMethodContext self() nothrow
   {

@@ -32,6 +32,12 @@ class Int64Scalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowInt64Scalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Int64Scalar self() nothrow
   {

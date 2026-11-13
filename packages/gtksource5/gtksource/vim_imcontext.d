@@ -107,6 +107,12 @@ class VimIMContext : gtk.imcontext.IMContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceVimIMContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VimIMContext self() nothrow
   {

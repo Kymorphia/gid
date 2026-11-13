@@ -33,6 +33,12 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSubTreeFileSystem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SubTreeFileSystem self() nothrow
   {

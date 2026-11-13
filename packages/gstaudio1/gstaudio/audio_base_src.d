@@ -39,6 +39,12 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioBaseSrc";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioBaseSrc self() nothrow
   {

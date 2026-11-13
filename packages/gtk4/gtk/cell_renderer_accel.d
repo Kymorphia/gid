@@ -45,6 +45,12 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellRendererAccel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellRendererAccel self() nothrow
   {

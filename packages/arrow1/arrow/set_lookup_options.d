@@ -34,6 +34,12 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSetLookupOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SetLookupOptions self() nothrow
   {

@@ -112,6 +112,12 @@ class TestDBus : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GTestDBus";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TestDBus self() nothrow
   {

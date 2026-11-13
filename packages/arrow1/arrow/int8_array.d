@@ -34,6 +34,12 @@ class Int8Array : arrow.numeric_array.NumericArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowInt8Array";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Int8Array self() nothrow
   {

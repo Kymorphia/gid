@@ -205,6 +205,12 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GApplicationCommandLine";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ApplicationCommandLine self() nothrow
   {

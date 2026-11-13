@@ -50,6 +50,12 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GBufferedOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BufferedOutputStream self() nothrow
   {

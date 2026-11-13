@@ -45,6 +45,12 @@ class Download : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitDownload";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Download self() nothrow
   {

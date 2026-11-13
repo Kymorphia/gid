@@ -39,6 +39,12 @@ class BinLayout : gtk.layout_manager.LayoutManager
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkBinLayout";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BinLayout self() nothrow
   {

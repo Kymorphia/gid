@@ -33,6 +33,12 @@ class Time32Scalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTime32Scalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Time32Scalar self() nothrow
   {

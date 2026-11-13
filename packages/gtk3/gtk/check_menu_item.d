@@ -61,6 +61,12 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCheckMenuItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CheckMenuItem self() nothrow
   {

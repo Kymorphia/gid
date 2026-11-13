@@ -82,6 +82,12 @@ class AudioAggregator : gstbase.aggregator.Aggregator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioAggregator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioAggregator self() nothrow
   {

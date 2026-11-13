@@ -36,6 +36,12 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkWindowAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WindowAccessible self() nothrow
   {

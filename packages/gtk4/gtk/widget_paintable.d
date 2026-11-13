@@ -55,6 +55,12 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkWidgetPaintable";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WidgetPaintable self() nothrow
   {

@@ -38,6 +38,12 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRadioButtonAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RadioButtonAccessible self() nothrow
   {

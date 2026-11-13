@@ -130,6 +130,12 @@ class AudioDecoder : gst.element.Element
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioDecoder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioDecoder self() nothrow
   {

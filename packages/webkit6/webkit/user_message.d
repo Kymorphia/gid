@@ -44,6 +44,12 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitUserMessage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UserMessage self() nothrow
   {

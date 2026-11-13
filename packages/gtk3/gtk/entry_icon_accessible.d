@@ -36,6 +36,12 @@ class EntryIconAccessible : atk.object.ObjectWrap, atk.action.Action, atk.compon
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEntryIconAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EntryIconAccessible self() nothrow
   {

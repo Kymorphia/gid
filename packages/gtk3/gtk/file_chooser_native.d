@@ -192,6 +192,12 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFileChooserNative";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileChooserNative self() nothrow
   {

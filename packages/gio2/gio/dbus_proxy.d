@@ -95,6 +95,12 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusProxy";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusProxy self() nothrow
   {

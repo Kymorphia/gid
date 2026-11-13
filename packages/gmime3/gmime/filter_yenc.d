@@ -34,6 +34,12 @@ class FilterYenc : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterYenc";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterYenc self() nothrow
   {

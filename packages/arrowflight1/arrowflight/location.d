@@ -33,6 +33,12 @@ class Location : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightLocation";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Location self() nothrow
   {

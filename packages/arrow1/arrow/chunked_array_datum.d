@@ -34,6 +34,12 @@ class ChunkedArrayDatum : arrow.datum.Datum
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowChunkedArrayDatum";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ChunkedArrayDatum self() nothrow
   {

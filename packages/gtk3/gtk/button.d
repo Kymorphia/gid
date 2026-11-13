@@ -67,6 +67,12 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Button self() nothrow
   {

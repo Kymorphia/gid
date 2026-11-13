@@ -32,6 +32,12 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLMixerPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLMixerPad self() nothrow
   {

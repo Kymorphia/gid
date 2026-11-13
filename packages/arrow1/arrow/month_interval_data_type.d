@@ -32,6 +32,12 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMonthIntervalDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MonthIntervalDataType self() nothrow
   {

@@ -32,6 +32,12 @@ class Int32DataType : arrow.integer_data_type.IntegerDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowInt32DataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Int32DataType self() nothrow
   {

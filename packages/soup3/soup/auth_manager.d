@@ -54,6 +54,12 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupAuthManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AuthManager self() nothrow
   {

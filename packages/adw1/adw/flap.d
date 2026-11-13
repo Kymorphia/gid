@@ -105,6 +105,12 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwFlap";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Flap self() nothrow
   {

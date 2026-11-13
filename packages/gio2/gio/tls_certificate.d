@@ -43,6 +43,12 @@ class TlsCertificate : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GTlsCertificate";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TlsCertificate self() nothrow
   {

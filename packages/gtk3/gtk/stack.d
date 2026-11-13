@@ -55,6 +55,12 @@ class Stack : gtk.container.Container
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStack";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Stack self() nothrow
   {

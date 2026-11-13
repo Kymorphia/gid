@@ -38,6 +38,12 @@ class UdmabufAllocator : gstallocators.dma_buf_allocator.DmaBufAllocator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstUdmabufAllocator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UdmabufAllocator self() nothrow
   {

@@ -33,6 +33,12 @@ class ToplevelAccessible : atk.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToplevelAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToplevelAccessible self() nothrow
   {

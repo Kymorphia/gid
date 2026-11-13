@@ -104,6 +104,12 @@ class ViewStack : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwViewStack";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ViewStack self() nothrow
   {

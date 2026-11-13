@@ -43,6 +43,12 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GConverterOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ConverterOutputStream self() nothrow
   {

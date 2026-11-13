@@ -34,6 +34,12 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetInMemoryFragment";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InMemoryFragment self() nothrow
   {

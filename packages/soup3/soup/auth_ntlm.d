@@ -38,6 +38,12 @@ class AuthNTLM : soup.auth.Auth
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupAuthNTLM";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AuthNTLM self() nothrow
   {

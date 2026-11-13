@@ -34,6 +34,12 @@ class StackAccessible : gtk.container_accessible.ContainerAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStackAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StackAccessible self() nothrow
   {

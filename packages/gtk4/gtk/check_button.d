@@ -112,6 +112,12 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCheckButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CheckButton self() nothrow
   {

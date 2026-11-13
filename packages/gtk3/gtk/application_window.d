@@ -147,6 +147,12 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkApplicationWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ApplicationWindow self() nothrow
   {

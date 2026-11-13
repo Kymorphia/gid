@@ -92,6 +92,12 @@ class Region : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceRegion";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Region self() nothrow
   {

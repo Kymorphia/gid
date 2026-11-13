@@ -38,6 +38,12 @@ class FileSystem : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFileSystem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileSystem self() nothrow
   {

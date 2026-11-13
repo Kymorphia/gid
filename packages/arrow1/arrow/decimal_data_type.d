@@ -33,6 +33,12 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDecimalDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DecimalDataType self() nothrow
   {

@@ -52,6 +52,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTreeViewColumn";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TreeViewColumn self() nothrow
   {

@@ -38,6 +38,12 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GZlibCompressor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ZlibCompressor self() nothrow
   {

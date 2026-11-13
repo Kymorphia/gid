@@ -34,6 +34,12 @@ class ListBoxRowAccessible : gtk.container_accessible.ContainerAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListBoxRowAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListBoxRowAccessible self() nothrow
   {

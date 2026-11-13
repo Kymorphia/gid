@@ -92,6 +92,12 @@ class Picture : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPicture";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Picture self() nothrow
   {

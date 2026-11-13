@@ -48,6 +48,12 @@ class GesturePan : gtk.gesture_drag.GestureDrag
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGesturePan";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GesturePan self() nothrow
   {

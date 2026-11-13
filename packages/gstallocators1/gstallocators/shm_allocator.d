@@ -44,6 +44,12 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstShmAllocator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ShmAllocator self() nothrow
   {

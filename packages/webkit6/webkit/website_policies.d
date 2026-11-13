@@ -37,6 +37,12 @@ class WebsitePolicies : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebsitePolicies";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebsitePolicies self() nothrow
   {

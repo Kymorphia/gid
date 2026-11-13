@@ -33,6 +33,12 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMatchSubstringOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MatchSubstringOptions self() nothrow
   {

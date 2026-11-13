@@ -42,6 +42,12 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDataInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DataInputStream self() nothrow
   {

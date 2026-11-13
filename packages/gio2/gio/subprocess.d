@@ -104,6 +104,12 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSubprocess";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Subprocess self() nothrow
   {

@@ -81,6 +81,12 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwEntryRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EntryRow self() nothrow
   {

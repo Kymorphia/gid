@@ -32,6 +32,12 @@ class DoubleStatistics : parquet.statistics.Statistics
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetDoubleStatistics";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DoubleStatistics self() nothrow
   {

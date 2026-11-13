@@ -37,6 +37,12 @@ class GLSLStage : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLSLStage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLSLStage self() nothrow
   {

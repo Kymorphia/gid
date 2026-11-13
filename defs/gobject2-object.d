@@ -2,6 +2,7 @@
 //!inhibit init
 
 import core.atomic;
+import core.stdc.string : strlen;
 import std.conv : to;
 import std.exception : assumeWontThrow;
 public import std.typecons : Flag, No, Yes;
@@ -36,7 +37,8 @@ private extern (C) Object _d_newclass(const TypeInfo_Class ci);
 immutable Quark gidObjectQuark;
 
 // One time initialized on first use and considered immutable there-after
-__gshared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info
+__gshared TypeInfo_Class[string] gtypeNameClasses; // Map of GType names to D class info (see ObjectWrap._gTypeName)
+__gshared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info, for classes without a GType name
 __gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
 __gshared bool classMapsInitialized;
 
@@ -250,6 +252,18 @@ class ObjectWrap : GidWrap
   }
 
   /**
+   * GType name of the class, which is used to map GTypes to D classes (when wrapping a GObject) without calling the
+   * get_type() function of every D class (which can have side effects, such as GStreamer types which require
+   * gst_init()). Classes which override _gType should also override _gTypeName, otherwise _gType is called when
+   * the class maps are created.
+   * Returns: The GType name of the class or null if unknown
+   */
+  @property string _gTypeName() nothrow
+  {
+    return "GObject";
+  }
+
+  /**
    * Convenience method to return `this` cast to a type. For use in D with statements.
    * Returns: The object instance
    */
@@ -284,8 +298,11 @@ class ObjectWrap : GidWrap
     {
       synchronized
       {
-        assumeWontThrow(createClassMaps);
-        atomicStore(classMapsInitialized, true);
+        if (!atomicLoad(classMapsInitialized)) // Another thread may have created them while waiting for the lock
+        {
+          assumeWontThrow(createClassMaps);
+          atomicStore(classMapsInitialized, true);
+        }
       }
     }
 
@@ -293,7 +310,13 @@ class ObjectWrap : GidWrap
     for (auto gTypeClass = (cast(GTypeInstance*)cptr).gClass; gTypeClass;
       gTypeClass = g_type_class_peek_parent(gTypeClass))
     {
-      if (auto dClassType = gTypeClass.gType in gtypeClasses)
+      auto dClassType = gTypeClass.gType in gtypeClasses;
+
+      if (!dClassType)
+        if (auto typeName = g_type_name(gTypeClass.gType))
+          dClassType = cast(string)typeName[0 .. strlen(typeName)] in gtypeNameClasses; // Not stored, cast is safe
+
+      if (dClassType)
       { // If T is an interface type, make sure the matching object class implements it
         if (is(T == interface) && !typeid(T).isBaseOf(cast(const)*dClassType))
           break;
@@ -418,18 +441,36 @@ class ObjectWrap : GidWrap
         { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
           if (auto obj = cast(ObjectWrap)_d_newclass(c))
           {
-            auto gType = obj._gType;
-            if (!gType)
-              continue;
+            ObjectWrap baseObj;
+            bool ownType = true, ownName = true;
 
-            if (c.base && c.base !is gobjClass && gobjClass.isBaseOf(c.base))
+            if (c !is gobjClass && c.base && gobjClass.isBaseOf(c.base))
             {
-              if (auto baseObj = cast(ObjectWrap)_d_newclass(c.base))
-              {
-                if (baseObj._gType == gType) // D subclass without its own GType
+              baseObj = cast(ObjectWrap)_d_newclass(c.base);
+
+              if (baseObj)
+              { // Compare the virtual functions, calling _gType would call get_type()
+                ownType = (&obj._gType).funcptr !is (&baseObj._gType).funcptr;
+                ownName = (&obj._gTypeName).funcptr !is (&baseObj._gTypeName).funcptr;
+
+                if (!ownType && !ownName) // D subclass without its own GType
                   continue;
               }
             }
+
+            if (ownType && ownName) // GType name only valid if it is from the same class as _gType
+            {
+              if (auto name = obj._gTypeName)
+              {
+                gtypeNameClasses[name] = c;
+                continue;
+              }
+            }
+
+            // Class without a GType name (custom D class overriding _gType only), get its GType
+            auto gType = obj._gType;
+            if (!gType || (baseObj && baseObj._gType == gType)) // No GType or D subclass without its own GType
+              continue;
 
             gtypeClasses[gType] = c;
           }

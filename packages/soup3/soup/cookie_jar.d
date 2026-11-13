@@ -47,6 +47,12 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupCookieJar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CookieJar self() nothrow
   {

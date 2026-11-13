@@ -88,6 +88,12 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstObject";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ObjectWrap self() nothrow
   {

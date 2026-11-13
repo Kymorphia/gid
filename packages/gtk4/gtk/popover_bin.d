@@ -55,6 +55,12 @@ class PopoverBin : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPopoverBin";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PopoverBin self() nothrow
   {

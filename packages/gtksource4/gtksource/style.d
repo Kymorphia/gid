@@ -34,6 +34,12 @@ class Style : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceStyle";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Style self() nothrow
   {

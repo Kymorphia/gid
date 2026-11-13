@@ -48,6 +48,12 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSwipeTracker";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SwipeTracker self() nothrow
   {

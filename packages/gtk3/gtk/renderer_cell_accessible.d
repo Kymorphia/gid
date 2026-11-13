@@ -40,6 +40,12 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRendererCellAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RendererCellAccessible self() nothrow
   {

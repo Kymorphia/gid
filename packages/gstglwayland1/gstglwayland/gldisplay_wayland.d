@@ -36,6 +36,12 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLDisplayWayland";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLDisplayWayland self() nothrow
   {

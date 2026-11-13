@@ -162,6 +162,12 @@ class Notebook : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNotebook";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Notebook self() nothrow
   {

@@ -86,6 +86,12 @@ class ButtonContent : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwButtonContent";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ButtonContent self() nothrow
   {

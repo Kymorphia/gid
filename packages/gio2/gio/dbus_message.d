@@ -38,6 +38,12 @@ class DBusMessage : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusMessage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusMessage self() nothrow
   {

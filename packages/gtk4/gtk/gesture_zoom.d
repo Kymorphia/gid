@@ -39,6 +39,12 @@ class GestureZoom : gtk.gesture.Gesture
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGestureZoom";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GestureZoom self() nothrow
   {

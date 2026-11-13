@@ -35,6 +35,12 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStructArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StructArrayBuilder self() nothrow
   {

@@ -46,6 +46,12 @@ class SimpleIOStream : gio.iostream.IOStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSimpleIOStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SimpleIOStream self() nothrow
   {

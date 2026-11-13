@@ -41,6 +41,12 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GInetAddressMask";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InetAddressMask self() nothrow
   {

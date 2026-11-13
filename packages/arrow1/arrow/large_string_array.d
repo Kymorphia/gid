@@ -33,6 +33,12 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowLargeStringArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LargeStringArray self() nothrow
   {

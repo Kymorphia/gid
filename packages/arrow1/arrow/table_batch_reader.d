@@ -33,6 +33,12 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTableBatchReader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TableBatchReader self() nothrow
   {

@@ -35,6 +35,12 @@ class TracerRecord : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTracerRecord";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TracerRecord self() nothrow
   {

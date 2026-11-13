@@ -34,6 +34,12 @@ class GLBufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLBufferAllocator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLBufferAllocator self() nothrow
   {

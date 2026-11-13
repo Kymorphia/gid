@@ -71,6 +71,12 @@ class SwitchRow : adw.action_row.ActionRow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSwitchRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SwitchRow self() nothrow
   {

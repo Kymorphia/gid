@@ -144,6 +144,12 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstBin";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Bin self() nothrow
   {

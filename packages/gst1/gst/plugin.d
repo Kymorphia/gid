@@ -55,6 +55,12 @@ class Plugin : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstPlugin";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Plugin self() nothrow
   {

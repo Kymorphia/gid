@@ -62,6 +62,12 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCssProvider";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CssProvider self() nothrow
   {

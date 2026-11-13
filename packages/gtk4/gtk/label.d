@@ -266,6 +266,12 @@ class Label : gtk.widget.Widget, gtk.accessible_hypertext.AccessibleHypertext, g
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLabel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Label self() nothrow
   {

@@ -42,6 +42,12 @@ class GLTexture : gdk.texture.Texture
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkGLTexture";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLTexture self() nothrow
   {

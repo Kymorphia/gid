@@ -44,6 +44,12 @@ class CellAreaContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellAreaContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellAreaContext self() nothrow
   {

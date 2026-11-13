@@ -38,6 +38,12 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupWebsocketExtensionDeflate";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebsocketExtensionDeflate self() nothrow
   {

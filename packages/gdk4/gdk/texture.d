@@ -70,6 +70,12 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkTexture";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Texture self() nothrow
   {

@@ -33,6 +33,12 @@ class ByteArrayStatistics : parquet.statistics.Statistics
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetByteArrayStatistics";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ByteArrayStatistics self() nothrow
   {

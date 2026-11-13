@@ -34,6 +34,12 @@ class FilterHTML : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterHTML";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterHTML self() nothrow
   {

@@ -38,6 +38,12 @@ class FileFormat : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetFileFormat";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileFormat self() nothrow
   {

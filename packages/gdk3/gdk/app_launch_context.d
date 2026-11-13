@@ -57,6 +57,12 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkAppLaunchContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AppLaunchContext self() nothrow
   {

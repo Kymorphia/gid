@@ -42,6 +42,12 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GFileIcon";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileIcon self() nothrow
   {

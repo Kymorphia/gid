@@ -33,6 +33,12 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowBooleanArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BooleanArrayBuilder self() nothrow
   {

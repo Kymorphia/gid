@@ -47,6 +47,12 @@ class Allocator : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAllocator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Allocator self() nothrow
   {

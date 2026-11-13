@@ -54,6 +54,12 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRadioToolButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RadioToolButton self() nothrow
   {

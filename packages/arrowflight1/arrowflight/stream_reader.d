@@ -32,6 +32,12 @@ class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightStreamReader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StreamReader self() nothrow
   {

@@ -32,6 +32,12 @@ class DoubleScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDoubleScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DoubleScalar self() nothrow
   {

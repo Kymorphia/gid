@@ -36,6 +36,12 @@ class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkProgressBarAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ProgressBarAccessible self() nothrow
   {

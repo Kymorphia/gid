@@ -32,6 +32,12 @@ class HDFSFileSystem : arrow.file_system.FileSystem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowHDFSFileSystem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HDFSFileSystem self() nothrow
   {

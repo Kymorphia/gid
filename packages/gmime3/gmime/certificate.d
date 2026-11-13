@@ -34,6 +34,12 @@ class Certificate : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeCertificate";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Certificate self() nothrow
   {

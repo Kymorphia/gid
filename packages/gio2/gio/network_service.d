@@ -44,6 +44,12 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GNetworkService";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NetworkService self() nothrow
   {

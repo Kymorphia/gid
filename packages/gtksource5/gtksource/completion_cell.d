@@ -58,6 +58,12 @@ class CompletionCell : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceCompletionCell";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CompletionCell self() nothrow
   {

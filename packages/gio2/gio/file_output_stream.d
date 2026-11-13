@@ -54,6 +54,12 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GFileOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileOutputStream self() nothrow
   {

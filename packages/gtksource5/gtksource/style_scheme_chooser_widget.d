@@ -51,6 +51,12 @@ class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_choos
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceStyleSchemeChooserWidget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StyleSchemeChooserWidget self() nothrow
   {

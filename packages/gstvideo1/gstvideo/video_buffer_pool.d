@@ -32,6 +32,12 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoBufferPool";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VideoBufferPool self() nothrow
   {

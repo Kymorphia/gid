@@ -48,6 +48,12 @@ class TlsDatabase : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GTlsDatabase";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TlsDatabase self() nothrow
   {

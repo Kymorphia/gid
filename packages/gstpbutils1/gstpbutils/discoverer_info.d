@@ -45,6 +45,12 @@ class DiscovererInfo : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDiscovererInfo";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DiscovererInfo self() nothrow
   {

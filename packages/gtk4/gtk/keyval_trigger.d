@@ -35,6 +35,12 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkKeyvalTrigger";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override KeyvalTrigger self() nothrow
   {

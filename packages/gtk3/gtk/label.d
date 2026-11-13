@@ -221,6 +221,12 @@ class Label : gtk.misc.Misc
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLabel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Label self() nothrow
   {

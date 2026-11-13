@@ -83,6 +83,12 @@ class InlineViewSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwInlineViewSwitcher";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InlineViewSwitcher self() nothrow
   {

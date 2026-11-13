@@ -87,6 +87,12 @@ class EmojiChooser : gtk.popover.Popover
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEmojiChooser";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EmojiChooser self() nothrow
   {

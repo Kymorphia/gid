@@ -54,6 +54,12 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GUnixCredentialsMessage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UnixCredentialsMessage self() nothrow
   {

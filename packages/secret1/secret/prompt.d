@@ -60,6 +60,12 @@ class Prompt : gio.dbus_proxy.DBusProxy
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SecretPrompt";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Prompt self() nothrow
   {

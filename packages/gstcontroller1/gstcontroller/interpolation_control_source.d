@@ -42,6 +42,12 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstInterpolationControlSource";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InterpolationControlSource self() nothrow
   {

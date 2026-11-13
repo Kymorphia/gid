@@ -108,6 +108,12 @@ class Aggregator : gst.element.Element
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAggregator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Aggregator self() nothrow
   {

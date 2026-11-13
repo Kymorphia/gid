@@ -38,6 +38,12 @@ class StreamDecoder : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStreamDecoder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StreamDecoder self() nothrow
   {

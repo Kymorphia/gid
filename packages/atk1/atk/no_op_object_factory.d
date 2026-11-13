@@ -38,6 +38,12 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AtkNoOpObjectFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NoOpObjectFactory self() nothrow
   {

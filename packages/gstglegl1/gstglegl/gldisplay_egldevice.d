@@ -36,6 +36,12 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLDisplayEGLDevice";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLDisplayEGLDevice self() nothrow
   {

@@ -135,6 +135,12 @@ class Application : gio.application.Application
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkApplication";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Application self() nothrow
   {

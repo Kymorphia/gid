@@ -34,6 +34,12 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStructFieldOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StructFieldOptions self() nothrow
   {

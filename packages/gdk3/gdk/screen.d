@@ -51,6 +51,12 @@ class Screen : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkScreen";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Screen self() nothrow
   {

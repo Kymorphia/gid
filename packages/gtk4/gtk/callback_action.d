@@ -37,6 +37,12 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCallbackAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CallbackAction self() nothrow
   {

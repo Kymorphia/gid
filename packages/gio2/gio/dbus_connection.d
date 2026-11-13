@@ -104,6 +104,12 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusConnection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusConnection self() nothrow
   {

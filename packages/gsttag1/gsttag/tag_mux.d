@@ -49,6 +49,12 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTagMux";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TagMux self() nothrow
   {

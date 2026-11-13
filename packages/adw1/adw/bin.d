@@ -52,6 +52,12 @@ class Bin : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwBin";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Bin self() nothrow
   {

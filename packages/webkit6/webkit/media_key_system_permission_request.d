@@ -46,6 +46,12 @@ class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permis
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitMediaKeySystemPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MediaKeySystemPermissionRequest self() nothrow
   {

@@ -49,6 +49,12 @@ class Drag : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDrag";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Drag self() nothrow
   {

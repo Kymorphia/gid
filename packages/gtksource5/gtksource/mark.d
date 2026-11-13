@@ -47,6 +47,12 @@ class Mark : gtk.text_mark.TextMark
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceMark";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Mark self() nothrow
   {

@@ -55,6 +55,12 @@ class OutputStream : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OutputStream self() nothrow
   {

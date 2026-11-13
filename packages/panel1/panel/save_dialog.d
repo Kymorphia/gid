@@ -50,6 +50,12 @@ class SaveDialog : adw.message_dialog.MessageDialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelSaveDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SaveDialog self() nothrow
   {

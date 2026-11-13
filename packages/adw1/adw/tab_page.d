@@ -38,6 +38,12 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwTabPage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TabPage self() nothrow
   {

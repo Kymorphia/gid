@@ -49,6 +49,12 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellRendererPixbuf";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellRendererPixbuf self() nothrow
   {

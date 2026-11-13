@@ -43,6 +43,12 @@ class DropControllerMotion : gtk.event_controller.EventController
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDropControllerMotion";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DropControllerMotion self() nothrow
   {

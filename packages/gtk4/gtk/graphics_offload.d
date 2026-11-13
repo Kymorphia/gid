@@ -75,6 +75,12 @@ class GraphicsOffload : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGraphicsOffload";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GraphicsOffload self() nothrow
   {

@@ -89,6 +89,12 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GPropertyAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PropertyAction self() nothrow
   {

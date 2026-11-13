@@ -46,6 +46,12 @@ class ControlSource : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstControlSource";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ControlSource self() nothrow
   {

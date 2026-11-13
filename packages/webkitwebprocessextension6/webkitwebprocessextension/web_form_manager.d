@@ -37,6 +37,12 @@ class WebFormManager : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebFormManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebFormManager self() nothrow
   {

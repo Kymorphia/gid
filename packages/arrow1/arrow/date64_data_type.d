@@ -32,6 +32,12 @@ class Date64DataType : arrow.temporal_data_type.TemporalDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDate64DataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Date64DataType self() nothrow
   {

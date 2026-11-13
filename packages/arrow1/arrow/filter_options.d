@@ -33,6 +33,12 @@ class FilterOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFilterOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterOptions self() nothrow
   {

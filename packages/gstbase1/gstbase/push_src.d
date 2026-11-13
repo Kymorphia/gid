@@ -52,6 +52,12 @@ class PushSrc : gstbase.base_src.BaseSrc
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstPushSrc";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PushSrc self() nothrow
   {

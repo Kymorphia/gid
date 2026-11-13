@@ -53,6 +53,12 @@ class Window : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Window self() nothrow
   {

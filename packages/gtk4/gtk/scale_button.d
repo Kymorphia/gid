@@ -69,6 +69,12 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScaleButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ScaleButton self() nothrow
   {

@@ -94,6 +94,12 @@ class LockButton : gtk.button.Button
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLockButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LockButton self() nothrow
   {

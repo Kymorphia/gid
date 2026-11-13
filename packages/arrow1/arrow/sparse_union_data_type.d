@@ -33,6 +33,12 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSparseUnionDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SparseUnionDataType self() nothrow
   {

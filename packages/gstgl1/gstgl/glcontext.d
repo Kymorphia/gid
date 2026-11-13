@@ -58,6 +58,12 @@ class GLContext : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLContext self() nothrow
   {

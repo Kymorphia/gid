@@ -46,6 +46,12 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstNetTimeProvider";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NetTimeProvider self() nothrow
   {

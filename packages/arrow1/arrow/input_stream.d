@@ -42,6 +42,12 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override InputStream self() nothrow
   {

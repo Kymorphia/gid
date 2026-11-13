@@ -85,6 +85,12 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSwitch";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Switch self() nothrow
   {

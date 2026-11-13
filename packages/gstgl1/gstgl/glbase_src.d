@@ -39,6 +39,12 @@ class GLBaseSrc : gstbase.push_src.PushSrc
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLBaseSrc";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLBaseSrc self() nothrow
   {

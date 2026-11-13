@@ -68,6 +68,12 @@ class FrameClock : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkFrameClock";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FrameClock self() nothrow
   {

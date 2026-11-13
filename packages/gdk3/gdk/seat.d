@@ -42,6 +42,12 @@ class Seat : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkSeat";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Seat self() nothrow
   {

@@ -108,6 +108,12 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAppSrc";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AppSrc self() nothrow
   {

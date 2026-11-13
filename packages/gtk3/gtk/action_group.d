@@ -89,6 +89,12 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkActionGroup";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ActionGroup self() nothrow
   {

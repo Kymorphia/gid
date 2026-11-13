@@ -42,6 +42,12 @@ class LFOControlSource : gst.control_source.ControlSource
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstLFOControlSource";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LFOControlSource self() nothrow
   {

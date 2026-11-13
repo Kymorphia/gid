@@ -34,6 +34,12 @@ class MapDataType : arrow.list_data_type.ListDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMapDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MapDataType self() nothrow
   {

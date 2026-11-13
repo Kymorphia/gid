@@ -39,6 +39,12 @@ class MultipartEncrypted : gmime.multipart.Multipart
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeMultipartEncrypted";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MultipartEncrypted self() nothrow
   {

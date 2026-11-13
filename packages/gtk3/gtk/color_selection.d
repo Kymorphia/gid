@@ -42,6 +42,12 @@ class ColorSelection : gtk.box.Box
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColorSelection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColorSelection self() nothrow
   {

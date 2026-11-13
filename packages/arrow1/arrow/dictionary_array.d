@@ -36,6 +36,12 @@ class DictionaryArray : arrow.array.Array
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDictionaryArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DictionaryArray self() nothrow
   {

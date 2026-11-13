@@ -43,6 +43,12 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GConverterInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ConverterInputStream self() nothrow
   {

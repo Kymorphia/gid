@@ -33,6 +33,12 @@ class ExtensionArray : arrow.array.Array
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowExtensionArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExtensionArray self() nothrow
   {

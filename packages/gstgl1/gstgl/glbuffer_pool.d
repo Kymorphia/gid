@@ -43,6 +43,12 @@ class GLBufferPool : gst.buffer_pool.BufferPool
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLBufferPool";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLBufferPool self() nothrow
   {

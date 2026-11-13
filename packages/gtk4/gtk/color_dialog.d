@@ -50,6 +50,12 @@ class ColorDialog : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColorDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColorDialog self() nothrow
   {

@@ -63,6 +63,12 @@ class ColorDialogButton : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColorDialogButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColorDialogButton self() nothrow
   {

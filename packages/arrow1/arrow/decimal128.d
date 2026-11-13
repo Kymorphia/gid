@@ -34,6 +34,12 @@ class Decimal128 : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDecimal128";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Decimal128 self() nothrow
   {

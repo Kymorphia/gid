@@ -50,6 +50,12 @@ class ShortcutsItem : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwShortcutsItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ShortcutsItem self() nothrow
   {

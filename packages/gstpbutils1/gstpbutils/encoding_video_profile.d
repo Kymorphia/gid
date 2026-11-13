@@ -35,6 +35,12 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstEncodingVideoProfile";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EncodingVideoProfile self() nothrow
   {

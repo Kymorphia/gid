@@ -82,6 +82,12 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSpinRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SpinRow self() nothrow
   {

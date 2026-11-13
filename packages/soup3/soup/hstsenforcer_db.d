@@ -40,6 +40,12 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupHSTSEnforcerDB";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HSTSEnforcerDB self() nothrow
   {

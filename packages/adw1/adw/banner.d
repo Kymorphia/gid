@@ -70,6 +70,12 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwBanner";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Banner self() nothrow
   {

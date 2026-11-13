@@ -33,6 +33,12 @@ class IMMulticontext : gtk.imcontext.IMContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkIMMulticontext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IMMulticontext self() nothrow
   {

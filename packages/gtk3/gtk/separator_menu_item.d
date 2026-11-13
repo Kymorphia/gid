@@ -48,6 +48,12 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSeparatorMenuItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SeparatorMenuItem self() nothrow
   {

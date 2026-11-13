@@ -68,6 +68,12 @@ class WebContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebContext self() nothrow
   {

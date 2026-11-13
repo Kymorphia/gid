@@ -41,6 +41,12 @@ class OptionMenu : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitOptionMenu";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OptionMenu self() nothrow
   {

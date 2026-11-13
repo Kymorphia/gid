@@ -101,6 +101,12 @@ class AccelLabel : gtk.label.Label
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAccelLabel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AccelLabel self() nothrow
   {

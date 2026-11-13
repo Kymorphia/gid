@@ -36,6 +36,12 @@ class IconViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkIconViewAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IconViewAccessible self() nothrow
   {

@@ -38,6 +38,12 @@ class DenseUnionArray : arrow.union_array.UnionArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDenseUnionArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DenseUnionArray self() nothrow
   {

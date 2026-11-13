@@ -46,6 +46,12 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNoSelection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NoSelection self() nothrow
   {

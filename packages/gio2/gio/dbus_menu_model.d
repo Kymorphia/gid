@@ -38,6 +38,12 @@ class DBusMenuModel : gio.menu_model.MenuModel
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusMenuModel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusMenuModel self() nothrow
   {

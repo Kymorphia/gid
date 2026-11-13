@@ -68,6 +68,12 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAppChooserButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AppChooserButton self() nothrow
   {

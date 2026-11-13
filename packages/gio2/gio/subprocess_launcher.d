@@ -43,6 +43,12 @@ class SubprocessLauncher : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSubprocessLauncher";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SubprocessLauncher self() nothrow
   {

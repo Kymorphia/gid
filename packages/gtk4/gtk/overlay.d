@@ -76,6 +76,12 @@ class Overlay : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkOverlay";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Overlay self() nothrow
   {

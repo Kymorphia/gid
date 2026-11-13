@@ -46,6 +46,12 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GNetworkAddress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NetworkAddress self() nothrow
   {

@@ -60,6 +60,12 @@ class Display : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDisplay";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Display self() nothrow
   {

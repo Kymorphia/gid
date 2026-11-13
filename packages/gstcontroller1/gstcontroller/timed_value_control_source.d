@@ -43,6 +43,12 @@ class TimedValueControlSource : gst.control_source.ControlSource
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTimedValueControlSource";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TimedValueControlSource self() nothrow
   {

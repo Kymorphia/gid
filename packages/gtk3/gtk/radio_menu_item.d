@@ -78,6 +78,12 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRadioMenuItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RadioMenuItem self() nothrow
   {

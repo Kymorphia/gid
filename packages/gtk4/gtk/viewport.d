@@ -62,6 +62,12 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkViewport";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Viewport self() nothrow
   {

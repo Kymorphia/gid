@@ -48,6 +48,12 @@ class UnixFDList : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GUnixFDList";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UnixFDList self() nothrow
   {

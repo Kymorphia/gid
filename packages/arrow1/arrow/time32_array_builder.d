@@ -34,6 +34,12 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTime32ArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Time32ArrayBuilder self() nothrow
   {

@@ -33,6 +33,12 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkPixbufNonAnim";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PixbufNonAnim self() nothrow
   {

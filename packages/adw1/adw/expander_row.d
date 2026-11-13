@@ -79,6 +79,12 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwExpanderRow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExpanderRow self() nothrow
   {

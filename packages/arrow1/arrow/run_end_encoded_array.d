@@ -35,6 +35,12 @@ class RunEndEncodedArray : arrow.array.Array
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRunEndEncodedArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RunEndEncodedArray self() nothrow
   {

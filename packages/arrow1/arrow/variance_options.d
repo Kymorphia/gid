@@ -33,6 +33,12 @@ class VarianceOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowVarianceOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VarianceOptions self() nothrow
   {

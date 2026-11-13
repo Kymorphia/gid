@@ -60,6 +60,12 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwCarouselIndicatorLines";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CarouselIndicatorLines self() nothrow
   {

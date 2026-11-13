@@ -32,6 +32,12 @@ class MemoryPool : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMemoryPool";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MemoryPool self() nothrow
   {

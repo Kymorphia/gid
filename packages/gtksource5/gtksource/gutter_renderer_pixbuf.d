@@ -47,6 +47,12 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceGutterRendererPixbuf";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GutterRendererPixbuf self() nothrow
   {

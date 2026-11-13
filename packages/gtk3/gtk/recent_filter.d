@@ -84,6 +84,12 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRecentFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RecentFilter self() nothrow
   {

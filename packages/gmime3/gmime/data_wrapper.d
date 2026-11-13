@@ -35,6 +35,12 @@ class DataWrapper : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeDataWrapper";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DataWrapper self() nothrow
   {

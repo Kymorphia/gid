@@ -62,6 +62,12 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwCarousel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Carousel self() nothrow
   {

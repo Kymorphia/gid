@@ -33,6 +33,12 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStrptimeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StrptimeOptions self() nothrow
   {

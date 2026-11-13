@@ -75,6 +75,12 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAppChooserDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AppChooserDialog self() nothrow
   {

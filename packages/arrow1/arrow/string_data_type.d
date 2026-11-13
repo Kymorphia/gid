@@ -32,6 +32,12 @@ class StringDataType : arrow.data_type.DataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStringDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StringDataType self() nothrow
   {

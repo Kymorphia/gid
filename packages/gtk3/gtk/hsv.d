@@ -46,6 +46,12 @@ class HSV : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkHSV";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HSV self() nothrow
   {

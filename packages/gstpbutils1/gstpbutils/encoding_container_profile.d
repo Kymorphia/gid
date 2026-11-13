@@ -35,6 +35,12 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstEncodingContainerProfile";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EncodingContainerProfile self() nothrow
   {

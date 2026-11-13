@@ -36,6 +36,12 @@ class Header : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeHeader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Header self() nothrow
   {

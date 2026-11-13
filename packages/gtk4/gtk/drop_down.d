@@ -102,6 +102,12 @@ class DropDown : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDropDown";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DropDown self() nothrow
   {

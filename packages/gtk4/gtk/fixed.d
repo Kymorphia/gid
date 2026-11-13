@@ -77,6 +77,12 @@ class Fixed : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFixed";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Fixed self() nothrow
   {

@@ -36,6 +36,12 @@ class DecryptResult : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeDecryptResult";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DecryptResult self() nothrow
   {

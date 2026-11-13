@@ -35,6 +35,12 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSinkNodeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SinkNodeOptions self() nothrow
   {

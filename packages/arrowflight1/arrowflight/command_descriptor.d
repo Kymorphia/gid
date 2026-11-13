@@ -32,6 +32,12 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightCommandDescriptor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CommandDescriptor self() nothrow
   {

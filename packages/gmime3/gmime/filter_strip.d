@@ -34,6 +34,12 @@ class FilterStrip : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterStrip";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterStrip self() nothrow
   {

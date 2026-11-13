@@ -46,6 +46,12 @@ class OutputStream : gio.output_stream.OutputStream, gio.pollable_output_stream.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GUnixOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OutputStream self() nothrow
   {

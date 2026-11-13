@@ -32,6 +32,12 @@ class UInt64DataType : arrow.integer_data_type.IntegerDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt64DataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UInt64DataType self() nothrow
   {

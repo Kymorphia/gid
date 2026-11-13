@@ -152,6 +152,12 @@ class BreakpointBin : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwBreakpointBin";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BreakpointBin self() nothrow
   {

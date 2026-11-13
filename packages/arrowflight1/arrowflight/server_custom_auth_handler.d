@@ -37,6 +37,12 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightServerCustomAuthHandler";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ServerCustomAuthHandler self() nothrow
   {

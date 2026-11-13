@@ -54,6 +54,12 @@ class Workspace : adw.application_window.ApplicationWindow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelWorkspace";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Workspace self() nothrow
   {

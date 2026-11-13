@@ -35,6 +35,12 @@ class LargeListArray : arrow.array.Array
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowLargeListArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LargeListArray self() nothrow
   {

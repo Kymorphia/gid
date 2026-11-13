@@ -46,6 +46,12 @@ class StringFilter : gtk.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStringFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StringFilter self() nothrow
   {

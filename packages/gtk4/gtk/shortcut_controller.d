@@ -81,6 +81,12 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkShortcutController";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ShortcutController self() nothrow
   {

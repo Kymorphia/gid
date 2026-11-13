@@ -37,6 +37,12 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkActivateAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ActivateAction self() nothrow
   {

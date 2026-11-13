@@ -54,6 +54,12 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMediaStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MediaStream self() nothrow
   {

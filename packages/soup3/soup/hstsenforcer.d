@@ -59,6 +59,12 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupHSTSEnforcer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HSTSEnforcer self() nothrow
   {

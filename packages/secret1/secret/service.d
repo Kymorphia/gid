@@ -93,6 +93,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SecretService";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Service self() nothrow
   {

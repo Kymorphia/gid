@@ -40,6 +40,12 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OutputStream self() nothrow
   {

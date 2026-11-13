@@ -33,6 +33,12 @@ class DoubleArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDoubleArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DoubleArrayBuilder self() nothrow
   {

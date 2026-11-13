@@ -44,6 +44,12 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMemoryOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MemoryOutputStream self() nothrow
   {

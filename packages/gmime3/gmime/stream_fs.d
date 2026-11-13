@@ -36,6 +36,12 @@ class StreamFs : gmime.stream.Stream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeStreamFs";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StreamFs self() nothrow
   {

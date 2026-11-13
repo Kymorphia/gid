@@ -38,6 +38,12 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLBaseMixer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLBaseMixer self() nothrow
   {

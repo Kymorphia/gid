@@ -41,6 +41,12 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEntryAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EntryAccessible self() nothrow
   {

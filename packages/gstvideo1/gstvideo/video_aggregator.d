@@ -44,6 +44,12 @@ class VideoAggregator : gstbase.aggregator.Aggregator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoAggregator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VideoAggregator self() nothrow
   {

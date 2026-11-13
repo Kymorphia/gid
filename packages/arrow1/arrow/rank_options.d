@@ -34,6 +34,12 @@ class RankOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRankOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RankOptions self() nothrow
   {

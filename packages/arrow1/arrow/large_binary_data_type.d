@@ -32,6 +32,12 @@ class LargeBinaryDataType : arrow.data_type.DataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowLargeBinaryDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LargeBinaryDataType self() nothrow
   {

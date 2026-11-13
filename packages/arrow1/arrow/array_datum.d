@@ -34,6 +34,12 @@ class ArrayDatum : arrow.datum.Datum
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowArrayDatum";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ArrayDatum self() nothrow
   {

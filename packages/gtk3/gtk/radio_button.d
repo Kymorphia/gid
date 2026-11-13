@@ -127,6 +127,12 @@ class RadioButton : gtk.check_button.CheckButton
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRadioButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RadioButton self() nothrow
   {

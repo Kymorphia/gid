@@ -40,6 +40,12 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLinkButtonAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LinkButtonAccessible self() nothrow
   {

@@ -97,6 +97,12 @@ class TabBar : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwTabBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TabBar self() nothrow
   {

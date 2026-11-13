@@ -56,6 +56,12 @@ class PixbufAnimation : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkPixbufAnimation";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PixbufAnimation self() nothrow
   {

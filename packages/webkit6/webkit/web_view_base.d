@@ -38,6 +38,12 @@ class WebViewBase : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebViewBase";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebViewBase self() nothrow
   {

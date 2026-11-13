@@ -35,6 +35,12 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFixedSizeBinaryArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FixedSizeBinaryArray self() nothrow
   {

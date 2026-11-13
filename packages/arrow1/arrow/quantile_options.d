@@ -33,6 +33,12 @@ class QuantileOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowQuantileOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override QuantileOptions self() nothrow
   {

@@ -130,6 +130,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTextView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TextView self() nothrow
   {

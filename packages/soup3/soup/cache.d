@@ -36,6 +36,12 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupCache";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Cache self() nothrow
   {

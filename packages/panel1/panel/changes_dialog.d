@@ -47,6 +47,12 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelChangesDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ChangesDialog self() nothrow
   {

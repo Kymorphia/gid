@@ -65,6 +65,12 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPageSetupUnixDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PageSetupUnixDialog self() nothrow
   {

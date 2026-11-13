@@ -32,6 +32,12 @@ class ServerAuthHandler : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightServerAuthHandler";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ServerAuthHandler self() nothrow
   {

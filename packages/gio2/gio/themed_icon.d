@@ -44,6 +44,12 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GThemedIcon";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ThemedIcon self() nothrow
   {

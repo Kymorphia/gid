@@ -83,6 +83,12 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFileFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileFilter self() nothrow
   {

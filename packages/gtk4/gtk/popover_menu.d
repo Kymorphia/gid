@@ -165,6 +165,12 @@ class PopoverMenu : gtk.popover.Popover
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPopoverMenu";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PopoverMenu self() nothrow
   {

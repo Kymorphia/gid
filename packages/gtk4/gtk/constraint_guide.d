@@ -46,6 +46,12 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkConstraintGuide";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ConstraintGuide self() nothrow
   {

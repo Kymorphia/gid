@@ -33,6 +33,12 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowArraySortOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ArraySortOptions self() nothrow
   {

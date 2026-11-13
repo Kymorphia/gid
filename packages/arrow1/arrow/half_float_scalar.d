@@ -32,6 +32,12 @@ class HalfFloatScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowHalfFloatScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HalfFloatScalar self() nothrow
   {

@@ -32,6 +32,12 @@ class Int32Statistics : parquet.statistics.Statistics
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetInt32Statistics";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Int32Statistics self() nothrow
   {

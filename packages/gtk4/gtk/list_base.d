@@ -88,6 +88,12 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListBase";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListBase self() nothrow
   {

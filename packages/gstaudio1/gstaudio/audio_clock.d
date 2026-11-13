@@ -40,6 +40,12 @@ class AudioClock : gst.system_clock.SystemClock
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioClock";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioClock self() nothrow
   {

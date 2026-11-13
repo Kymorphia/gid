@@ -34,6 +34,12 @@ class IndexOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowIndexOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IndexOptions self() nothrow
   {

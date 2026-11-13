@@ -86,6 +86,12 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwApplicationWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ApplicationWindow self() nothrow
   {

@@ -38,6 +38,12 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowGIOInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GIOInputStream self() nothrow
   {

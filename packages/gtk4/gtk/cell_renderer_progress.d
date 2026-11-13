@@ -43,6 +43,12 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellRendererProgress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellRendererProgress self() nothrow
   {

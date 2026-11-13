@@ -35,6 +35,12 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDiscovererContainerInfo";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DiscovererContainerInfo self() nothrow
   {

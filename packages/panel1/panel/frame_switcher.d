@@ -46,6 +46,12 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelFrameSwitcher";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FrameSwitcher self() nothrow
   {

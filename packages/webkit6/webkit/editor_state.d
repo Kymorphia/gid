@@ -39,6 +39,12 @@ class EditorState : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitEditorState";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EditorState self() nothrow
   {

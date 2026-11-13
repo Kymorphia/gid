@@ -62,6 +62,12 @@ class ShortcutAction : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkShortcutAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ShortcutAction self() nothrow
   {

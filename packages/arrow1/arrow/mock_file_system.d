@@ -32,6 +32,12 @@ class MockFileSystem : arrow.file_system.FileSystem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMockFileSystem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MockFileSystem self() nothrow
   {

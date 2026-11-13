@@ -35,6 +35,12 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNeverTrigger";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NeverTrigger self() nothrow
   {

@@ -60,6 +60,12 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusServer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusServer self() nothrow
   {

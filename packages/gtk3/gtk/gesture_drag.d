@@ -41,6 +41,12 @@ class GestureDrag : gtk.gesture_single.GestureSingle
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGestureDrag";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GestureDrag self() nothrow
   {

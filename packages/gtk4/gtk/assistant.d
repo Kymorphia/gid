@@ -91,6 +91,12 @@ class Assistant : gtk.window.Window
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAssistant";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Assistant self() nothrow
   {

@@ -33,6 +33,12 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowHalfFloatArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HalfFloatArrayBuilder self() nothrow
   {

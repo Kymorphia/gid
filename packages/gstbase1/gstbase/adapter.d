@@ -136,6 +136,12 @@ class Adapter : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAdapter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Adapter self() nothrow
   {

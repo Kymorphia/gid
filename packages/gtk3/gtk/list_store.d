@@ -183,6 +183,12 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListStore";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListStore self() nothrow
   {

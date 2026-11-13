@@ -67,6 +67,12 @@ class SpringAnimation : adw.animation.Animation
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSpringAnimation";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SpringAnimation self() nothrow
   {

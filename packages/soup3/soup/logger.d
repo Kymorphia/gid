@@ -94,6 +94,12 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupLogger";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Logger self() nothrow
   {

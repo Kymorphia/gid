@@ -35,6 +35,12 @@ class StreamMmap : gmime.stream.Stream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeStreamMmap";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StreamMmap self() nothrow
   {

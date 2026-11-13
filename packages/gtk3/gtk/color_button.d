@@ -55,6 +55,12 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColorButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColorButton self() nothrow
   {

@@ -43,6 +43,12 @@ class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_featur
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupWebsocketExtensionManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebsocketExtensionManager self() nothrow
   {

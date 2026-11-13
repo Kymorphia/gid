@@ -80,6 +80,12 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEntryCompletion";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EntryCompletion self() nothrow
   {

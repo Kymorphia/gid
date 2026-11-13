@@ -40,6 +40,12 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScaleButtonAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ScaleButtonAccessible self() nothrow
   {

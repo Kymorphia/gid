@@ -55,6 +55,12 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelOmniBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OmniBar self() nothrow
   {

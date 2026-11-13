@@ -45,6 +45,12 @@ class StyleManager : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwStyleManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StyleManager self() nothrow
   {

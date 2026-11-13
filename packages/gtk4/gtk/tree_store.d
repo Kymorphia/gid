@@ -79,6 +79,12 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTreeStore";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TreeStore self() nothrow
   {

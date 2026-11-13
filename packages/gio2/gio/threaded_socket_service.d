@@ -52,6 +52,12 @@ class ThreadedSocketService : gio.socket_service.SocketService
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GThreadedSocketService";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ThreadedSocketService self() nothrow
   {

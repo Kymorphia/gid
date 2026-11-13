@@ -32,6 +32,12 @@ class EqualOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowEqualOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EqualOptions self() nothrow
   {

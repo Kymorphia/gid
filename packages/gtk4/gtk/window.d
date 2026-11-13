@@ -126,6 +126,12 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkWindow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Window self() nothrow
   {

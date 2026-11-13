@@ -118,6 +118,12 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToolPalette";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToolPalette self() nothrow
   {

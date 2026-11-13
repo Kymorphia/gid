@@ -39,6 +39,12 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCustomLayout";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CustomLayout self() nothrow
   {

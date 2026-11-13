@@ -103,6 +103,12 @@ class ViewSwitcherBar : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwViewSwitcherBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ViewSwitcherBar self() nothrow
   {

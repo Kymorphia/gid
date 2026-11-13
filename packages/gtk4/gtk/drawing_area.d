@@ -123,6 +123,12 @@ class DrawingArea : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDrawingArea";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DrawingArea self() nothrow
   {

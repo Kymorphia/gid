@@ -32,6 +32,12 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowHalfFloatDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HalfFloatDataType self() nothrow
   {

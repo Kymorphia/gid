@@ -32,6 +32,12 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowISO8601TimestampParser";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ISO8601TimestampParser self() nothrow
   {

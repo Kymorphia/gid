@@ -43,6 +43,12 @@ class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permissi
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitNotificationPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NotificationPermissionRequest self() nothrow
   {

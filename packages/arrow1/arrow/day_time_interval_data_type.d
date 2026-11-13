@@ -32,6 +32,12 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDayTimeIntervalDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DayTimeIntervalDataType self() nothrow
   {

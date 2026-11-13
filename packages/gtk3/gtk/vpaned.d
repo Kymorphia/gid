@@ -45,6 +45,12 @@ class VPaned : gtk.paned.Paned
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkVPaned";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VPaned self() nothrow
   {

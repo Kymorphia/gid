@@ -53,6 +53,12 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GBufferedInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BufferedInputStream self() nothrow
   {

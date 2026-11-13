@@ -34,6 +34,12 @@ class RecordBatchIterator : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRecordBatchIterator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RecordBatchIterator self() nothrow
   {

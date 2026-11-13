@@ -33,6 +33,12 @@ class IntArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowIntArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IntArrayBuilder self() nothrow
   {

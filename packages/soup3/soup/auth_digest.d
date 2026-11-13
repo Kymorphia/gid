@@ -38,6 +38,12 @@ class AuthDigest : soup.auth.Auth
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupAuthDigest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AuthDigest self() nothrow
   {

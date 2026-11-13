@@ -48,6 +48,12 @@ class FileMonitor : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GFileMonitor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileMonitor self() nothrow
   {

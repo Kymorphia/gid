@@ -32,6 +32,12 @@ class UInt16DataType : arrow.integer_data_type.IntegerDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt16DataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UInt16DataType self() nothrow
   {

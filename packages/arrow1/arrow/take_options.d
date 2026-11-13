@@ -32,6 +32,12 @@ class TakeOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTakeOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TakeOptions self() nothrow
   {

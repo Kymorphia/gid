@@ -34,6 +34,12 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowBinaryArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BinaryArrayBuilder self() nothrow
   {

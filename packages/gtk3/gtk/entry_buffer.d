@@ -45,6 +45,12 @@ class EntryBuffer : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEntryBuffer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EntryBuffer self() nothrow
   {

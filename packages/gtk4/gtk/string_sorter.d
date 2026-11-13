@@ -42,6 +42,12 @@ class StringSorter : gtk.sorter.Sorter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStringSorter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StringSorter self() nothrow
   {

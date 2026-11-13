@@ -43,6 +43,12 @@ class ClipboardPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitClipboardPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ClipboardPermissionRequest self() nothrow
   {

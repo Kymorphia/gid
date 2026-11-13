@@ -36,6 +36,12 @@ class MessagePart : gmime.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeMessagePart";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MessagePart self() nothrow
   {

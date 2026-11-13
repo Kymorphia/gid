@@ -45,6 +45,12 @@ class VulkanContext : gdk.draw_context.DrawContext
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkVulkanContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VulkanContext self() nothrow
   {

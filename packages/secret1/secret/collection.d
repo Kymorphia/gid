@@ -59,6 +59,12 @@ class Collection : gio.dbus_proxy.DBusProxy
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SecretCollection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Collection self() nothrow
   {

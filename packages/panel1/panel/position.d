@@ -36,6 +36,12 @@ class Position : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelPosition";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Position self() nothrow
   {

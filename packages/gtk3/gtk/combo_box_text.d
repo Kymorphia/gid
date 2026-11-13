@@ -95,6 +95,12 @@ class ComboBoxText : gtk.combo_box.ComboBox
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkComboBoxText";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ComboBoxText self() nothrow
   {

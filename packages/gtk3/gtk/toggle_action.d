@@ -38,6 +38,12 @@ class ToggleAction : gtk.action.Action
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToggleAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToggleAction self() nothrow
   {

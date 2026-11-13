@@ -59,6 +59,12 @@ class NetClientClock : gst.system_clock.SystemClock
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstNetClientClock";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NetClientClock self() nothrow
   {

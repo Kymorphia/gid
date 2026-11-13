@@ -32,6 +32,12 @@ class MonthDayNano : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMonthDayNano";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MonthDayNano self() nothrow
   {

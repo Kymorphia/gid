@@ -32,6 +32,12 @@ class Descriptor : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightDescriptor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Descriptor self() nothrow
   {

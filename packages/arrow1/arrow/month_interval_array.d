@@ -33,6 +33,12 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMonthIntervalArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MonthIntervalArray self() nothrow
   {

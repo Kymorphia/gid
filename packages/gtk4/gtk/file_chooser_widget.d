@@ -75,6 +75,12 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFileChooserWidget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileChooserWidget self() nothrow
   {

@@ -34,6 +34,12 @@ class CustomSorter : gtk.sorter.Sorter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCustomSorter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CustomSorter self() nothrow
   {

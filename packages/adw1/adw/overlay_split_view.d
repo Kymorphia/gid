@@ -174,6 +174,12 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwOverlaySplitView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override OverlaySplitView self() nothrow
   {

@@ -45,6 +45,12 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AtkHyperlink";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Hyperlink self() nothrow
   {

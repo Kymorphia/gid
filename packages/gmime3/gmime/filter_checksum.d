@@ -35,6 +35,12 @@ class FilterChecksum : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterChecksum";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterChecksum self() nothrow
   {

@@ -42,6 +42,12 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkIconPaintable";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IconPaintable self() nothrow
   {

@@ -32,6 +32,12 @@ class S3FileSystem : arrow.file_system.FileSystem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowS3FileSystem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override S3FileSystem self() nothrow
   {

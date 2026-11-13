@@ -45,6 +45,12 @@ class Printer : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPrinter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Printer self() nothrow
   {

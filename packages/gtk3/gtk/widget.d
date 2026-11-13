@@ -479,6 +479,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkWidget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Widget self() nothrow
   {

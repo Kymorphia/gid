@@ -32,6 +32,12 @@ class BooleanScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowBooleanScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BooleanScalar self() nothrow
   {

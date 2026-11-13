@@ -57,6 +57,12 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGrid";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Grid self() nothrow
   {

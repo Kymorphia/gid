@@ -48,6 +48,12 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNumerableIcon";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NumerableIcon self() nothrow
   {

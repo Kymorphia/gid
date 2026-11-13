@@ -36,6 +36,12 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLevelBarAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LevelBarAccessible self() nothrow
   {

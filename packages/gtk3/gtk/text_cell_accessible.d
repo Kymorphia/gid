@@ -40,6 +40,12 @@ class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, 
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTextCellAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TextCellAccessible self() nothrow
   {

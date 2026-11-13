@@ -37,6 +37,12 @@ class RTPHeaderExtension : gst.element.Element
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstRTPHeaderExtension";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RTPHeaderExtension self() nothrow
   {

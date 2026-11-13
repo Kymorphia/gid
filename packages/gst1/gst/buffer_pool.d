@@ -73,6 +73,12 @@ class BufferPool : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstBufferPool";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BufferPool self() nothrow
   {

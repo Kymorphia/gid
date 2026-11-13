@@ -46,6 +46,12 @@ class DrawingContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDrawingContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DrawingContext self() nothrow
   {

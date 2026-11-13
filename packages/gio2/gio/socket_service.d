@@ -62,6 +62,12 @@ class SocketService : gio.socket_listener.SocketListener
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSocketService";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SocketService self() nothrow
   {

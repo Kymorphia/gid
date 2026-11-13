@@ -42,6 +42,12 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceCompletion";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Completion self() nothrow
   {

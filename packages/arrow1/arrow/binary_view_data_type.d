@@ -32,6 +32,12 @@ class BinaryViewDataType : arrow.data_type.DataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowBinaryViewDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BinaryViewDataType self() nothrow
   {

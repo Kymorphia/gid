@@ -35,6 +35,12 @@ class FdAllocator : gst.allocator.Allocator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstFdAllocator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FdAllocator self() nothrow
   {

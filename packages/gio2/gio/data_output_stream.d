@@ -40,6 +40,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDataOutputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DataOutputStream self() nothrow
   {

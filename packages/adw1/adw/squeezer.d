@@ -68,6 +68,12 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSqueezer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Squeezer self() nothrow
   {

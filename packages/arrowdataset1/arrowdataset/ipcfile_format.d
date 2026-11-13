@@ -32,6 +32,12 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetIPCFileFormat";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IPCFileFormat self() nothrow
   {

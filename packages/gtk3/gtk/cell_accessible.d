@@ -39,6 +39,12 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellAccessible self() nothrow
   {

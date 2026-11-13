@@ -40,6 +40,12 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTreeViewAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TreeViewAccessible self() nothrow
   {

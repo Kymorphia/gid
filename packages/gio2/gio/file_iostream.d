@@ -59,6 +59,12 @@ class FileIOStream : gio.iostream.IOStream, gio.seekable.Seekable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GFileIOStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileIOStream self() nothrow
   {

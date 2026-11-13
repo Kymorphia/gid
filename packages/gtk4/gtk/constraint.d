@@ -49,6 +49,12 @@ class Constraint : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkConstraint";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Constraint self() nothrow
   {

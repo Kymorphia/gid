@@ -120,6 +120,12 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSocket";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Socket self() nothrow
   {

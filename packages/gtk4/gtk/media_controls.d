@@ -49,6 +49,12 @@ class MediaControls : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMediaControls";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MediaControls self() nothrow
   {

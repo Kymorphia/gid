@@ -40,6 +40,12 @@ class FontsetSimple : pango.fontset.Fontset
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PangoFontsetSimple";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FontsetSimple self() nothrow
   {

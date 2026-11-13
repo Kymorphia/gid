@@ -36,6 +36,12 @@ class StreamGIO : gmime.stream.Stream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeStreamGIO";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StreamGIO self() nothrow
   {

@@ -49,6 +49,12 @@ class ColumnViewColumn : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColumnViewColumn";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColumnViewColumn self() nothrow
   {

@@ -50,6 +50,12 @@ class Renderer : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GskRenderer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Renderer self() nothrow
   {

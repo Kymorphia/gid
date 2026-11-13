@@ -36,6 +36,12 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkImageAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ImageAccessible self() nothrow
   {

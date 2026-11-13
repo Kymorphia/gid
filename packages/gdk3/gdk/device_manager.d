@@ -150,6 +150,12 @@ class DeviceManager : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDeviceManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DeviceManager self() nothrow
   {

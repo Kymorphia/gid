@@ -44,6 +44,12 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMemoryInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MemoryInputStream self() nothrow
   {

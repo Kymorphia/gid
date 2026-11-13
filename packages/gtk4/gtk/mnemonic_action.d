@@ -37,6 +37,12 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMnemonicAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MnemonicAction self() nothrow
   {

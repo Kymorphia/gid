@@ -59,6 +59,12 @@ class GeolocationPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitGeolocationPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GeolocationPermissionRequest self() nothrow
   {

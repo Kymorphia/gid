@@ -32,6 +32,12 @@ class UInt8DataType : arrow.integer_data_type.IntegerDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt8DataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UInt8DataType self() nothrow
   {

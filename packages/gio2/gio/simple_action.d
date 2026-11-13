@@ -41,6 +41,12 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSimpleAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SimpleAction self() nothrow
   {

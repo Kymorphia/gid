@@ -62,6 +62,12 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFontChooserWidget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FontChooserWidget self() nothrow
   {

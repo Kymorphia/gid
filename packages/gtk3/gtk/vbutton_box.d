@@ -38,6 +38,12 @@ class VButtonBox : gtk.button_box.ButtonBox
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkVButtonBox";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VButtonBox self() nothrow
   {

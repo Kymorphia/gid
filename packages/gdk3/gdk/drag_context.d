@@ -36,6 +36,12 @@ class DragContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDragContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DragContext self() nothrow
   {

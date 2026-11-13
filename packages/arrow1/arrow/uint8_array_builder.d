@@ -33,6 +33,12 @@ class UInt8ArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt8ArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UInt8ArrayBuilder self() nothrow
   {

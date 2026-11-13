@@ -36,6 +36,12 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoAggregatorParallelConvertPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VideoAggregatorParallelConvertPad self() nothrow
   {

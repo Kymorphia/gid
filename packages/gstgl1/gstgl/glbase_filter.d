@@ -39,6 +39,12 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLBaseFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLBaseFilter self() nothrow
   {

@@ -42,6 +42,12 @@ class EventControllerFocus : gtk.event_controller.EventController
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEventControllerFocus";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EventControllerFocus self() nothrow
   {

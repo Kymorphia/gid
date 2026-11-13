@@ -38,6 +38,12 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFileInputStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileInputStream self() nothrow
   {

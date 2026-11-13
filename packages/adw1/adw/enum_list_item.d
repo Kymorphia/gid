@@ -34,6 +34,12 @@ class EnumListItem : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwEnumListItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EnumListItem self() nothrow
   {

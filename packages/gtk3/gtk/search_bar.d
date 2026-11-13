@@ -63,6 +63,12 @@ class SearchBar : gtk.bin.Bin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSearchBar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SearchBar self() nothrow
   {

@@ -32,6 +32,12 @@ class ExecuteContext : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowExecuteContext";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExecuteContext self() nothrow
   {

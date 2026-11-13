@@ -35,6 +35,12 @@ class ListArray : arrow.array.Array
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowListArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListArray self() nothrow
   {

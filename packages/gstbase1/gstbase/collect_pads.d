@@ -76,6 +76,12 @@ class CollectPads : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstCollectPads";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CollectPads self() nothrow
   {

@@ -32,6 +32,12 @@ class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFloatingPointDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FloatingPointDataType self() nothrow
   {

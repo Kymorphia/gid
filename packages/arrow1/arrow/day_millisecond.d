@@ -32,6 +32,12 @@ class DayMillisecond : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDayMillisecond";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DayMillisecond self() nothrow
   {

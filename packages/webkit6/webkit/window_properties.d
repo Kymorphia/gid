@@ -88,6 +88,12 @@ class WindowProperties : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWindowProperties";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WindowProperties self() nothrow
   {

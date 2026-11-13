@@ -36,6 +36,12 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetHivePartitioning";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HivePartitioning self() nothrow
   {

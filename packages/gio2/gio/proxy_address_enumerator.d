@@ -46,6 +46,12 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GProxyAddressEnumerator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ProxyAddressEnumerator self() nothrow
   {

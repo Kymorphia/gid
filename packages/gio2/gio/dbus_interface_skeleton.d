@@ -42,6 +42,12 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusInterfaceSkeleton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusInterfaceSkeleton self() nothrow
   {

@@ -48,6 +48,12 @@ class Widget : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelWidget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Widget self() nothrow
   {

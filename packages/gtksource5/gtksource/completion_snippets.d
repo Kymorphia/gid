@@ -40,6 +40,12 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceCompletionSnippets";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CompletionSnippets self() nothrow
   {

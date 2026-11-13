@@ -35,6 +35,12 @@ class Decimal64Scalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDecimal64Scalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Decimal64Scalar self() nothrow
   {

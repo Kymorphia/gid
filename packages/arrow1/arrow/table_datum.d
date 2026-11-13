@@ -34,6 +34,12 @@ class TableDatum : arrow.datum.Datum
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTableDatum";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TableDatum self() nothrow
   {

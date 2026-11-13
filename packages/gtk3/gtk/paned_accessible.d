@@ -36,6 +36,12 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPanedAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PanedAccessible self() nothrow
   {

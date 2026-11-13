@@ -43,6 +43,12 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMultiSorter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MultiSorter self() nothrow
   {

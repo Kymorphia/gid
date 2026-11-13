@@ -50,6 +50,12 @@ class FaviconDatabase : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitFaviconDatabase";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FaviconDatabase self() nothrow
   {

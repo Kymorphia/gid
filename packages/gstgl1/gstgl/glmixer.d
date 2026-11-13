@@ -37,6 +37,12 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLMixer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLMixer self() nothrow
   {

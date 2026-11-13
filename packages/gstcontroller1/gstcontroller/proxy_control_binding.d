@@ -35,6 +35,12 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstProxyControlBinding";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ProxyControlBinding self() nothrow
   {

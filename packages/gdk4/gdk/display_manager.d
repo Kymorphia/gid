@@ -78,6 +78,12 @@ class DisplayManager : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDisplayManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DisplayManager self() nothrow
   {

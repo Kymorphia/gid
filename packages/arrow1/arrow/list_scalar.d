@@ -33,6 +33,12 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowListScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ListScalar self() nothrow
   {

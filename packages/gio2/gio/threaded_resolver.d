@@ -35,6 +35,12 @@ class ThreadedResolver : gio.resolver.Resolver
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GThreadedResolver";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ThreadedResolver self() nothrow
   {

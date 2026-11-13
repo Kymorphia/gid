@@ -47,6 +47,12 @@ class IPTosMessage : gio.socket_control_message.SocketControlMessage
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GIPTosMessage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IPTosMessage self() nothrow
   {

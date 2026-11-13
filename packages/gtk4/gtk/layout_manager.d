@@ -82,6 +82,12 @@ class LayoutManager : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLayoutManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LayoutManager self() nothrow
   {

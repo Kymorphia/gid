@@ -38,6 +38,12 @@ class FontSelectionDialog : gtk.dialog.Dialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFontSelectionDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FontSelectionDialog self() nothrow
   {

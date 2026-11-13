@@ -35,6 +35,12 @@ class RowGroupMetadata : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetRowGroupMetadata";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RowGroupMetadata self() nothrow
   {

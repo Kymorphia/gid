@@ -97,6 +97,12 @@ class Calendar : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCalendar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Calendar self() nothrow
   {

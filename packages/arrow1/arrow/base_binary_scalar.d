@@ -34,6 +34,12 @@ class BaseBinaryScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowBaseBinaryScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BaseBinaryScalar self() nothrow
   {

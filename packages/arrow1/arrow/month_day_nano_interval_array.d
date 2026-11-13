@@ -35,6 +35,12 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMonthDayNanoIntervalArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MonthDayNanoIntervalArray self() nothrow
   {

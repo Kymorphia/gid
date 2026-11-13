@@ -40,6 +40,12 @@ class AnyFilter : gtk.multi_filter.MultiFilter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAnyFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AnyFilter self() nothrow
   {

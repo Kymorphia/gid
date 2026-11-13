@@ -35,6 +35,12 @@ class MutableBuffer : arrow.buffer.Buffer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMutableBuffer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MutableBuffer self() nothrow
   {

@@ -57,6 +57,12 @@ class DocumentWorkspace : panel.workspace.Workspace
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelDocumentWorkspace";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DocumentWorkspace self() nothrow
   {

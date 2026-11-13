@@ -36,6 +36,12 @@ class GLRenderer : gsk.renderer.Renderer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GskGLRenderer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLRenderer self() nothrow
   {

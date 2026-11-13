@@ -32,6 +32,12 @@ class FloatStatistics : parquet.statistics.Statistics
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetFloatStatistics";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FloatStatistics self() nothrow
   {

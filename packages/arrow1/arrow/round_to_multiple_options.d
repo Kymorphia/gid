@@ -34,6 +34,12 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRoundToMultipleOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RoundToMultipleOptions self() nothrow
   {

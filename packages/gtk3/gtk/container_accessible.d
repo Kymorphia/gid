@@ -34,6 +34,12 @@ class ContainerAccessible : gtk.widget_accessible.WidgetAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkContainerAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ContainerAccessible self() nothrow
   {

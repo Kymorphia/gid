@@ -67,6 +67,12 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMapListModel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MapListModel self() nothrow
   {

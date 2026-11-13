@@ -35,6 +35,12 @@ class SessionItem : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelSessionItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SessionItem self() nothrow
   {

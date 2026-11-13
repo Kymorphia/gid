@@ -34,6 +34,12 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowDecimal128Array";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Decimal128Array self() nothrow
   {

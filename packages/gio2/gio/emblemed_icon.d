@@ -42,6 +42,12 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GEmblemedIcon";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EmblemedIcon self() nothrow
   {

@@ -34,6 +34,12 @@ class FloatArray : arrow.numeric_array.NumericArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFloatArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FloatArray self() nothrow
   {

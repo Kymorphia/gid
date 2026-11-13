@@ -97,6 +97,12 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDmabufTextureBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DmabufTextureBuilder self() nothrow
   {

@@ -84,6 +84,12 @@ class PixbufLoader : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkPixbufLoader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PixbufLoader self() nothrow
   {

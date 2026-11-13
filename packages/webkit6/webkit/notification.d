@@ -35,6 +35,12 @@ class Notification : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitNotification";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Notification self() nothrow
   {

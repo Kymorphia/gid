@@ -105,6 +105,12 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkImageMenuItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ImageMenuItem self() nothrow
   {

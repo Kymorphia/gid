@@ -32,6 +32,12 @@ class ParquetFileFormat : arrowdataset.file_format.FileFormat
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetParquetFileFormat";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ParquetFileFormat self() nothrow
   {

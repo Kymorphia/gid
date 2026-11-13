@@ -38,6 +38,12 @@ class ArrowFileReader : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetArrowFileReader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ArrowFileReader self() nothrow
   {

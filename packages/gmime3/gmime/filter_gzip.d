@@ -34,6 +34,12 @@ class FilterGZip : gmime.filter.Filter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterGZip";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FilterGZip self() nothrow
   {

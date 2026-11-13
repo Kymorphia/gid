@@ -54,6 +54,12 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToolItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToolItem self() nothrow
   {

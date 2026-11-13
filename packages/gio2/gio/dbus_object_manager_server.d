@@ -58,6 +58,12 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusObjectManagerServer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DBusObjectManagerServer self() nothrow
   {

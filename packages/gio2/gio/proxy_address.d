@@ -38,6 +38,12 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GProxyAddress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ProxyAddress self() nothrow
   {

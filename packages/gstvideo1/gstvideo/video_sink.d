@@ -39,6 +39,12 @@ class VideoSink : gstbase.base_sink.BaseSink
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoSink";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VideoSink self() nothrow
   {

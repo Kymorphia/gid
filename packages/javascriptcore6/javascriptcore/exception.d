@@ -35,6 +35,12 @@ class ExceptionWrap : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "JSCException";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExceptionWrap self() nothrow
   {

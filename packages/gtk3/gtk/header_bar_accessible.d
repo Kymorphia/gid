@@ -34,6 +34,12 @@ class HeaderBarAccessible : gtk.container_accessible.ContainerAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkHeaderBarAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override HeaderBarAccessible self() nothrow
   {

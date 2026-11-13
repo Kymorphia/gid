@@ -33,6 +33,12 @@ class WriteOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowWriteOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WriteOptions self() nothrow
   {

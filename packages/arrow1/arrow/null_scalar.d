@@ -32,6 +32,12 @@ class NullScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowNullScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NullScalar self() nothrow
   {

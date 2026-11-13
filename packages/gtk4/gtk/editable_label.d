@@ -86,6 +86,12 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEditableLabel";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EditableLabel self() nothrow
   {

@@ -38,6 +38,12 @@ class ToggleButtonAccessible : gtk.button_accessible.ButtonAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkToggleButtonAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ToggleButtonAccessible self() nothrow
   {

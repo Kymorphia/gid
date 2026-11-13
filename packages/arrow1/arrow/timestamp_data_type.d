@@ -34,6 +34,12 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTimestampDataType";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TimestampDataType self() nothrow
   {

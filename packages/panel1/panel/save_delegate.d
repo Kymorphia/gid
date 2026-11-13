@@ -39,6 +39,12 @@ class SaveDelegate : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelSaveDelegate";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SaveDelegate self() nothrow
   {

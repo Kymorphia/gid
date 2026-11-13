@@ -36,6 +36,12 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStringDictionaryArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StringDictionaryArrayBuilder self() nothrow
   {

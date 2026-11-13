@@ -35,6 +35,12 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkPixbufSimpleAnim";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PixbufSimpleAnim self() nothrow
   {

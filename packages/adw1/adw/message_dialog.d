@@ -182,6 +182,12 @@ class MessageDialog : gtk.window.Window
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwMessageDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MessageDialog self() nothrow
   {

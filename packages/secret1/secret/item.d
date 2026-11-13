@@ -70,6 +70,12 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SecretItem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Item self() nothrow
   {

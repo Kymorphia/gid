@@ -36,6 +36,12 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPlugAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PlugAccessible self() nothrow
   {

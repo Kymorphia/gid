@@ -47,6 +47,12 @@ class Array : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Array self() nothrow
   {

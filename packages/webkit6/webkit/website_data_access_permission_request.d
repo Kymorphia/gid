@@ -42,6 +42,12 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebsiteDataAccessPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebsiteDataAccessPermissionRequest self() nothrow
   {

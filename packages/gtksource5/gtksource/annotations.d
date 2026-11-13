@@ -40,6 +40,12 @@ class Annotations : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceAnnotations";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Annotations self() nothrow
   {

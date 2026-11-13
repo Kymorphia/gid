@@ -38,6 +38,12 @@ class ColorSelectionDialog : gtk.dialog.Dialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColorSelectionDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ColorSelectionDialog self() nothrow
   {

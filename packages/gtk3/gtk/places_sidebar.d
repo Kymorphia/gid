@@ -77,6 +77,12 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPlacesSidebar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PlacesSidebar self() nothrow
   {

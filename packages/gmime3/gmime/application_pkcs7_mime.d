@@ -39,6 +39,12 @@ class ApplicationPkcs7Mime : gmime.part.Part
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeApplicationPkcs7Mime";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ApplicationPkcs7Mime self() nothrow
   {

@@ -86,6 +86,12 @@ class IOStream : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GIOStream";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override IOStream self() nothrow
   {

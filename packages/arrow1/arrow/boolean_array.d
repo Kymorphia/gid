@@ -35,6 +35,12 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowBooleanArray";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override BooleanArray self() nothrow
   {

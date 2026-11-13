@@ -37,6 +37,12 @@ class SwitchAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Acti
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSwitchAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SwitchAccessible self() nothrow
   {

@@ -35,6 +35,12 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstEncodingAudioProfile";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EncodingAudioProfile self() nothrow
   {

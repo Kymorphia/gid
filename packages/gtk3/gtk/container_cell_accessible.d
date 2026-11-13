@@ -38,6 +38,12 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkContainerCellAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ContainerCellAccessible self() nothrow
   {

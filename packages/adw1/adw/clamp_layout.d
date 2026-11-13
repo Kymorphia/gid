@@ -58,6 +58,12 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwClampLayout";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ClampLayout self() nothrow
   {

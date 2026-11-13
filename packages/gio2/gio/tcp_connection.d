@@ -35,6 +35,12 @@ class TcpConnection : gio.socket_connection.SocketConnection
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GTcpConnection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TcpConnection self() nothrow
   {

@@ -43,6 +43,12 @@ class PointerLockPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitPointerLockPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override PointerLockPermissionRequest self() nothrow
   {

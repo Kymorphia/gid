@@ -42,6 +42,12 @@ class MountMonitor : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GUnixMountMonitor";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MountMonitor self() nothrow
   {

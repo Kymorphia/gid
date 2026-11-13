@@ -36,6 +36,12 @@ class FlowBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFlowBoxAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FlowBoxAccessible self() nothrow
   {

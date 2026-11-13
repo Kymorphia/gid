@@ -84,6 +84,12 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTypeFindFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TypeFindFactory self() nothrow
   {

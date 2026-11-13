@@ -48,6 +48,12 @@ class TlsConnection : gio.iostream.IOStream
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GTlsConnection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TlsConnection self() nothrow
   {

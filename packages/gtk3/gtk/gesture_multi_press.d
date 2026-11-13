@@ -46,6 +46,12 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGestureMultiPress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GestureMultiPress self() nothrow
   {

@@ -41,6 +41,12 @@ class AudioVisualizer : gst.element.Element
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioVisualizer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AudioVisualizer self() nothrow
   {

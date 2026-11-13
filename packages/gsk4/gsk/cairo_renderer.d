@@ -37,6 +37,12 @@ class CairoRenderer : gsk.renderer.Renderer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GskCairoRenderer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CairoRenderer self() nothrow
   {

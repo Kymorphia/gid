@@ -38,6 +38,12 @@ class WebsocketExtension : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupWebsocketExtension";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebsocketExtension self() nothrow
   {

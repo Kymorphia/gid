@@ -59,6 +59,12 @@ class ContentDecoder : gobject.object.ObjectWrap, soup.session_feature.SessionFe
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupContentDecoder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ContentDecoder self() nothrow
   {

@@ -67,6 +67,12 @@ class SpinnerPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSpinnerPaintable";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SpinnerPaintable self() nothrow
   {

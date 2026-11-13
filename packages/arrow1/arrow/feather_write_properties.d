@@ -32,6 +32,12 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFeatherWriteProperties";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FeatherWriteProperties self() nothrow
   {

@@ -36,6 +36,12 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetDirectoryPartitioning";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DirectoryPartitioning self() nothrow
   {

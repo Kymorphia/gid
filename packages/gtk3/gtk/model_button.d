@@ -142,6 +142,12 @@ class ModelButton : gtk.button.Button
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkModelButton";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ModelButton self() nothrow
   {

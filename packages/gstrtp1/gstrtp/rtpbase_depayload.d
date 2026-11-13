@@ -73,6 +73,12 @@ class RTPBaseDepayload : gst.element.Element
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstRTPBaseDepayload";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RTPBaseDepayload self() nothrow
   {

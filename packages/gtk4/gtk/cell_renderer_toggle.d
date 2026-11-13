@@ -44,6 +44,12 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellRendererToggle";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellRendererToggle self() nothrow
   {

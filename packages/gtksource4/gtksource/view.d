@@ -48,6 +48,12 @@ class View : gtk.text_view.TextView
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override View self() nothrow
   {

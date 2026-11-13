@@ -40,6 +40,12 @@ class GridColumn : gtk.widget.Widget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelGridColumn";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GridColumn self() nothrow
   {

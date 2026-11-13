@@ -32,6 +32,12 @@ class AzureFileSystem : arrow.file_system.FileSystem
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowAzureFileSystem";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AzureFileSystem self() nothrow
   {

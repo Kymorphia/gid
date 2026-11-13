@@ -37,6 +37,12 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkExpanderAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExpanderAccessible self() nothrow
   {

@@ -34,6 +34,12 @@ class File : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceFile";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override File self() nothrow
   {

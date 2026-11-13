@@ -41,6 +41,12 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMultiSelection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override MultiSelection self() nothrow
   {

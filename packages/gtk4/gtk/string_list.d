@@ -65,6 +65,12 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStringList";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override StringList self() nothrow
   {

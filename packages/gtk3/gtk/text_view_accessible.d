@@ -40,6 +40,12 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTextViewAccessible";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TextViewAccessible self() nothrow
   {

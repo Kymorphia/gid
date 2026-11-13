@@ -105,6 +105,12 @@ class SidebarSection : gobject.object.ObjectWrap, gtk.buildable.Buildable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSidebarSection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SidebarSection self() nothrow
   {

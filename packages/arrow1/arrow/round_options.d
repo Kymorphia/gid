@@ -33,6 +33,12 @@ class RoundOptions : arrow.function_options.FunctionOptions
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRoundOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RoundOptions self() nothrow
   {

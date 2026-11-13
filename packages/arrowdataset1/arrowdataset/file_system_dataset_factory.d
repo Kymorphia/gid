@@ -39,6 +39,12 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetFileSystemDatasetFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FileSystemDatasetFactory self() nothrow
   {

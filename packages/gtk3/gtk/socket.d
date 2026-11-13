@@ -92,6 +92,12 @@ class Socket : gtk.container.Container
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSocket";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Socket self() nothrow
   {

@@ -50,6 +50,12 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRange";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Range self() nothrow
   {

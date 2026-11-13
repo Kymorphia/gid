@@ -161,6 +161,12 @@ class VideoDecoder : gst.element.Element
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoDecoder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VideoDecoder self() nothrow
   {

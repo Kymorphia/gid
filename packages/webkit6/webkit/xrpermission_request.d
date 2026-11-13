@@ -46,6 +46,12 @@ class XRPermissionRequest : gobject.object.ObjectWrap, webkit.permission_request
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitXRPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override XRPermissionRequest self() nothrow
   {

@@ -46,6 +46,12 @@ class GutterLines : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceGutterLines";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GutterLines self() nothrow
   {

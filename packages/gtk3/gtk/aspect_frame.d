@@ -49,6 +49,12 @@ class AspectFrame : gtk.frame.Frame
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAspectFrame";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AspectFrame self() nothrow
   {

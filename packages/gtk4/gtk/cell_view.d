@@ -71,6 +71,12 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override CellView self() nothrow
   {

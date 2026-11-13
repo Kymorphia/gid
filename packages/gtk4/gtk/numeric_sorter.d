@@ -38,6 +38,12 @@ class NumericSorter : gtk.sorter.Sorter
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNumericSorter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NumericSorter self() nothrow
   {

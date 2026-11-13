@@ -37,6 +37,12 @@ class ProxyPad : gst.pad.Pad
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstProxyPad";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ProxyPad self() nothrow
   {

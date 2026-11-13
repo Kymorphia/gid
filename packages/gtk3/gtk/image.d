@@ -127,6 +127,12 @@ class Image : gtk.misc.Misc
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkImage";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Image self() nothrow
   {

@@ -40,6 +40,12 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSocketAddress";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override SocketAddress self() nothrow
   {

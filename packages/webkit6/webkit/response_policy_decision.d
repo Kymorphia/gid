@@ -43,6 +43,12 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitResponsePolicyDecision";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ResponsePolicyDecision self() nothrow
   {

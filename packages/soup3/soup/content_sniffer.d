@@ -45,6 +45,12 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupContentSniffer";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ContentSniffer self() nothrow
   {

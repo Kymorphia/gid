@@ -41,6 +41,12 @@ class AccessibleHyperlink : gobject.object.ObjectWrap, gtk.accessible.Accessible
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAccessibleHyperlink";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override AccessibleHyperlink self() nothrow
   {

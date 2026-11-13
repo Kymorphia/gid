@@ -33,6 +33,12 @@ class LargeListScalar : arrow.base_list_scalar.BaseListScalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowLargeListScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LargeListScalar self() nothrow
   {

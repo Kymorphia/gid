@@ -37,6 +37,12 @@ class VideoFilter : gstbase.base_transform.BaseTransform
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoFilter";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override VideoFilter self() nothrow
   {

@@ -35,6 +35,12 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFixedLayoutChild";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FixedLayoutChild self() nothrow
   {

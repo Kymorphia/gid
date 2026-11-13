@@ -43,6 +43,12 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitUserMediaPermissionRequest";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override UserMediaPermissionRequest self() nothrow
   {

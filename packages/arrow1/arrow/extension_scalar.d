@@ -32,6 +32,12 @@ class ExtensionScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowExtensionScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ExtensionScalar self() nothrow
   {

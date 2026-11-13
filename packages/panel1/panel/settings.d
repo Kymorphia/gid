@@ -37,6 +37,12 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelSettings";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Settings self() nothrow
   {

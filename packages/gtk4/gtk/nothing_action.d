@@ -35,6 +35,12 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkNothingAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NothingAction self() nothrow
   {

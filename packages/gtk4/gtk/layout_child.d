@@ -43,6 +43,12 @@ class LayoutChild : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkLayoutChild";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override LayoutChild self() nothrow
   {

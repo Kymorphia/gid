@@ -44,6 +44,12 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDeviceProviderFactory";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override DeviceProviderFactory self() nothrow
   {

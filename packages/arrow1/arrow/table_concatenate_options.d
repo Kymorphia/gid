@@ -32,6 +32,12 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowTableConcatenateOptions";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override TableConcatenateOptions self() nothrow
   {

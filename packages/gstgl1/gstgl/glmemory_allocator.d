@@ -36,6 +36,12 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLMemoryAllocator";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override GLMemoryAllocator self() nothrow
   {

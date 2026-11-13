@@ -39,6 +39,12 @@ class EventControllerKey : gtk.event_controller.EventController
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEventControllerKey";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override EventControllerKey self() nothrow
   {

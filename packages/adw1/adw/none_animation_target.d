@@ -34,6 +34,12 @@ class NoneAnimationTarget : adw.animation_target.AnimationTarget
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwNoneAnimationTarget";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override NoneAnimationTarget self() nothrow
   {

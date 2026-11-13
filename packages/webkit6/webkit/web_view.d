@@ -96,6 +96,12 @@ class WebView : webkit.web_view_base.WebViewBase
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebView";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebView self() nothrow
   {

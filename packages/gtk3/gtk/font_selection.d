@@ -42,6 +42,12 @@ class FontSelection : gtk.box.Box
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFontSelection";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FontSelection self() nothrow
   {

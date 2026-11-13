@@ -100,6 +100,12 @@ class Element : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstElement";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Element self() nothrow
   {

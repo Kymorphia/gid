@@ -36,6 +36,12 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRecordBatchFileReader";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RecordBatchFileReader self() nothrow
   {

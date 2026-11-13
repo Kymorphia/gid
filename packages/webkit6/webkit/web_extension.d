@@ -45,6 +45,12 @@ class WebExtension : gobject.object.ObjectWrap, gio.initable.Initable
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebExtension";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebExtension self() nothrow
   {

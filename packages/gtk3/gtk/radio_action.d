@@ -40,6 +40,12 @@ class RadioAction : gtk.toggle_action.ToggleAction
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRadioAction";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override RadioAction self() nothrow
   {

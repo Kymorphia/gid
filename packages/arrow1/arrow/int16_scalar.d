@@ -32,6 +32,12 @@ class Int16Scalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowInt16Scalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Int16Scalar self() nothrow
   {

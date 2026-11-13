@@ -127,6 +127,12 @@ class ShortcutsDialog : adw.dialog.Dialog
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwShortcutsDialog";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ShortcutsDialog self() nothrow
   {

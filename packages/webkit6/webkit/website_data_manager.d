@@ -55,6 +55,12 @@ class WebsiteDataManager : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitWebsiteDataManager";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override WebsiteDataManager self() nothrow
   {

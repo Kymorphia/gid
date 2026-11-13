@@ -35,6 +35,12 @@ class ArrayBuilder : gobject.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowArrayBuilder";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override ArrayBuilder self() nothrow
   {

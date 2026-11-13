@@ -32,6 +32,12 @@ class FloatScalar : arrow.scalar.Scalar
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFloatScalar";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override FloatScalar self() nothrow
   {

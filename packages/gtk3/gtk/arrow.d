@@ -58,6 +58,12 @@ class Arrow : gtk.misc.Misc
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkArrow";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Arrow self() nothrow
   {

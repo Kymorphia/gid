@@ -77,6 +77,12 @@ class Bus : gst.object.ObjectWrap
     return _getGType();
   }
 
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstBus";
+  }
+
   /** Returns `this`, for use in `with` statements. */
   override Bus self() nothrow
   {
