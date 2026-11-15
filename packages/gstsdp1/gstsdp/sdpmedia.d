@@ -133,7 +133,7 @@ class SDPMedia : StructWrap!(GstSDPMedia, sdpMediaCopy, gst_sdp_media_free)
   */
   @property void*[] fmts() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).fmts);
+    return gArrayToD!(void*)((cast(GstSDPMedia*)this._cPtr).fmts);
   }
 
   /**
@@ -162,7 +162,7 @@ class SDPMedia : StructWrap!(GstSDPMedia, sdpMediaCopy, gst_sdp_media_free)
   */
   @property void*[] connections() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).connections);
+    return gArrayToD!(void*)((cast(GstSDPMedia*)this._cPtr).connections);
   }
 
   /**
@@ -171,7 +171,7 @@ class SDPMedia : StructWrap!(GstSDPMedia, sdpMediaCopy, gst_sdp_media_free)
   */
   @property void*[] bandwidths() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).bandwidths);
+    return gArrayToD!(void*)((cast(GstSDPMedia*)this._cPtr).bandwidths);
   }
 
   /**
@@ -189,7 +189,7 @@ class SDPMedia : StructWrap!(GstSDPMedia, sdpMediaCopy, gst_sdp_media_free)
   */
   @property void*[] attributes() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMedia*)this._cPtr).attributes);
+    return gArrayToD!(void*)((cast(GstSDPMedia*)this._cPtr).attributes);
   }
 
   /**

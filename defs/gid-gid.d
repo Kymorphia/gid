@@ -231,12 +231,7 @@ T* arrayDtoC(T, Flag!"Malloc" malloc = No.Malloc, Flag!"ZeroTerm" zeroTerm = No.
       retArray = new T[array.length].ptr;
   }
 
-  static if (hasMember!(T, "cPtrRef"))
-  {
-    foreach(i, elem; array)
-      retArray[i] = elem.cPtrRef;
-  }
-  else static if (is(T : string))
+  static if (is(T : string))
   {
     foreach(i, elem; array)
       retArray[i] = toCString!(malloc)(array[i]);
@@ -301,7 +296,7 @@ ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes) no
  *   gArray = The GArray instance
  * Returns: D array of the given type
  */
-T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray) nothrow
+T[] gArrayToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray) nothrow
   if (containerTypeIsSupported!T)
 {
   T[] a;
@@ -498,7 +493,7 @@ GBytes* gBytesFromD(ubyte[] a) nothrow
  *   a = The D array
  * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a) nothrow
+GArray* gArrayFromD(T, bool zeroTerminated = false)(T[] a) nothrow
   if (containerTypeIsSupported!T)
 {
   // Wrap structures are cleared, so that null D objects result in zeroed structures

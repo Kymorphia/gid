@@ -150,7 +150,7 @@ class MIKEYMessage : gobject.boxed.BoxedWrap!(gst_mikey_message_get_type)
   */
   @property void*[] mapInfo() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstMIKEYMessage*)this._cPtr).mapInfo);
+    return gArrayToD!(void*)((cast(GstMIKEYMessage*)this._cPtr).mapInfo);
   }
 
   /**
@@ -159,7 +159,7 @@ class MIKEYMessage : gobject.boxed.BoxedWrap!(gst_mikey_message_get_type)
   */
   @property void*[] payloads() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstMIKEYMessage*)this._cPtr).payloads);
+    return gArrayToD!(void*)((cast(GstMIKEYMessage*)this._cPtr).payloads);
   }
 
   /**

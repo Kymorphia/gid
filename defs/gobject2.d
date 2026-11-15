@@ -106,7 +106,7 @@
 //# Add missing closure parameter designations
 //!set callback[SignalEmissionHook].parameters.parameter[data][closure] 3
 
-//# Override signalHandlerDisconnect and signalHandlersDestroy to update signalClosures references to allow garbage collection of objects referenced by signal callbacks
+//# Override signalHandlerDisconnect and signalHandlersDestroy to update _signalClosures references to allow garbage collection of objects referenced by signal callbacks
 //# NOTE: signalHandlersDisconnectMatched is also a potential candidate, but not currently implemented
 //!set function[signal_handler_disconnect][ignore] 1
 //!set function[signal_handlers_destroy][ignore] 1
@@ -151,7 +151,7 @@
 void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerId) nothrow
 {
   g_signal_handler_disconnect(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
-  instance.signalClosures.remove(handlerId);
+  instance._signalClosures.remove(handlerId);
 }
 
 /**
@@ -165,7 +165,7 @@ void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerI
 void signalHandlersDestroy(gobject.object.ObjectWrap instance) nothrow
 {
   g_signal_handlers_destroy(instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
-  instance.signalClosures.clear;
+  instance._signalClosures.clear;
 }
 
 //!class types

@@ -34,13 +34,13 @@ shared static this()
 private extern (C) Object _d_newclass(const TypeInfo_Class ci);
 
 // String quark used to assign the D ObjectWrap to the C GObject keyed-data list
-immutable Quark gidObjectQuark;
+private immutable Quark gidObjectQuark;
 
 // One time initialized on first use and considered immutable there-after
-__gshared TypeInfo_Class[string] gtypeNameClasses; // Map of GType names to D class info (see ObjectWrap._gTypeName)
-__gshared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info, for classes without a GType name
-__gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
-__gshared bool classMapsInitialized;
+private __gshared TypeInfo_Class[string] gtypeNameClasses; // Map of GType names to D class info (see ObjectWrap._gTypeName)
+private __gshared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info, for classes without a GType name
+private __gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
+private __gshared bool classMapsInitialized;
 
 /**
  * A convenient string mixin to be used for ObjectWrap derived classes to declare boilerplate constructors.
@@ -56,10 +56,49 @@ string objectMixin() nothrow
 `;
 }
 
+/**
+ * Attribute reserved for future support of defining a new GObject virtual method when a D type is exported
+ * through GIR. Not functional yet.
+ */
+struct gVirtual {}
+
+/**
+ * Attribute reserved for future support of exporting a non-virtual method on a D GObject type through GIR.
+ * Not functional yet.
+ */
+struct gMethod {}
+
+/**
+ * Attribute reserved for future support of declaring a GObject signal on a D type exported through GIR.
+ * Not functional yet.
+ */
+struct gSignal {}
+
+/**
+ * Attribute reserved for future support of declaring a GObject property on a D type exported through GIR.
+ * Not functional yet.
+ */
+struct gProperty {}
+
+/**
+ * Mixin reserved for future support of D subclasses of GObject types (lazy GType registration, class_init, and
+ * vfunc override installation). Not functional yet.
+ */
+mixin template GObjectSubclass() {}
+
+/**
+ * Mixin reserved for future support of exporting a D GObject type through GIR (class struct, get_type, and
+ * invokers). Not functional yet.
+ * Params:
+ *   ns = GIR namespace of the library
+ *   name = GObject type name without the namespace prefix
+ */
+mixin template GObjectExport(string ns, string name) {}
+
 class ObjectWrap : GidWrap
 {
   protected GObject* _cInstancePtr; // Pointer to wrapped C GObject
-  DClosure[gulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
+  package DClosure[gulong] _signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
    * Create an ObjectWrap which is wrapping a C GObject with the given GType.
@@ -494,7 +533,7 @@ class ObjectWrap : GidWrap
     g_object_watch_closure(_cInstancePtr, gclosure); // Invalidate closure when object is finalized
 
     if (retval != 0)
-      signalClosures[retval] = closure;
+      _signalClosures[retval] = closure;
 
     return retval;
   }

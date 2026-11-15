@@ -186,7 +186,7 @@ GVariant* createVariant(T)(T val)
     return g_variant_builder_end(&builder);
   }
   else static if (is(T : Variant))
-    return g_variant_new_variant(cast(GVariant*)val._cInstancePtr);
+    return g_variant_new_variant(cast(GVariant*)val._cPtr);
   else static if (is(T == GVariant*))
     return g_variant_new_variant(val);
   else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)

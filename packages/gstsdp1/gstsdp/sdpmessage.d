@@ -95,7 +95,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property void*[] emails() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).emails);
+    return gArrayToD!(void*)((cast(GstSDPMessage*)this._cPtr).emails);
   }
 
   /**
@@ -104,7 +104,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property void*[] phones() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).phones);
+    return gArrayToD!(void*)((cast(GstSDPMessage*)this._cPtr).phones);
   }
 
   /**
@@ -122,7 +122,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property void*[] bandwidths() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).bandwidths);
+    return gArrayToD!(void*)((cast(GstSDPMessage*)this._cPtr).bandwidths);
   }
 
   /**
@@ -131,7 +131,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property void*[] times() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).times);
+    return gArrayToD!(void*)((cast(GstSDPMessage*)this._cPtr).times);
   }
 
   /**
@@ -140,7 +140,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property void*[] zones() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).zones);
+    return gArrayToD!(void*)((cast(GstSDPMessage*)this._cPtr).zones);
   }
 
   /**
@@ -158,7 +158,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property void*[] attributes() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).attributes);
+    return gArrayToD!(void*)((cast(GstSDPMessage*)this._cPtr).attributes);
   }
 
   /**
@@ -167,7 +167,7 @@ class SDPMessage : gobject.boxed.BoxedWrap!(gst_sdp_message_get_type)
   */
   @property void*[] medias() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPMessage*)this._cPtr).medias);
+    return gArrayToD!(void*)((cast(GstSDPMessage*)this._cPtr).medias);
   }
 
   /**

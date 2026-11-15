@@ -91,6 +91,6 @@ class MIKEYPayloadSP : StructWrap!(GstMIKEYPayloadSP)
   */
   @property void*[] params() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstMIKEYPayloadSP*)this._cPtr).params);
+    return gArrayToD!(void*)((cast(GstMIKEYPayloadSP*)this._cPtr).params);
   }
 }

@@ -99,7 +99,7 @@ class SDPTime : StructWrap!(GstSDPTime)
   */
   @property void*[] repeat() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstSDPTime*)this._cPtr).repeat);
+    return gArrayToD!(void*)((cast(GstSDPTime*)this._cPtr).repeat);
   }
 
   /**

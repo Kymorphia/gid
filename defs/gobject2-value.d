@@ -318,7 +318,7 @@ void setVal(T)(GValue* gval, T v) nothrow
       g_value_init(gval, v._gType);
     }
 
-    g_value_set_boxed(gval, v ? v._cInstancePtr : null);
+    g_value_set_boxed(gval, v ? v._cPtr : null);
   }
   else static if (isBoxed!T)
   {

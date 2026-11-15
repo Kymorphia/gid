@@ -90,6 +90,6 @@ class MIKEYPayloadKEMAC : StructWrap!(GstMIKEYPayloadKEMAC)
   */
   @property void*[] subpayloads() nothrow
   {
-    return gArrayGToD!(void*)((cast(GstMIKEYPayloadKEMAC*)this._cPtr).subpayloads);
+    return gArrayToD!(void*)((cast(GstMIKEYPayloadKEMAC*)this._cPtr).subpayloads);
   }
 }

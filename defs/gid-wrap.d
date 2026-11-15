@@ -66,8 +66,8 @@ class OpaqueWrap(CT, alias freeFunc = void, alias copyFunc = void) : OpaqueWrapB
 {
   enum bool _copyable = !is(copyFunc == void); /// true if the structure can be copied (has a copy function)
 
-  CT _cInstancePtr; /// The C structure pointer
-  bool _owned; /// true if the wrapper owns the C structure and frees it when destroyed (requires freeFunc)
+  protected CT _cInstancePtr; /// The C structure pointer
+  protected bool _owned; /// true if the wrapper owns the C structure and frees it when destroyed (requires freeFunc)
   Object _owner; /// D object which owns a borrowed C structure, kept alive by this wrapper (null if none)
 
   /**
@@ -192,7 +192,7 @@ abstract class ReffedWrapBase : GidWrap
  */
 class ReffedWrap(CT, alias refFunc, alias unrefFunc) : ReffedWrapBase
 {
-  CT _cInstancePtr; /// The C structure pointer (the wrapper holds a reference)
+  protected CT _cInstancePtr; /// The C structure pointer (the wrapper holds a reference)
 
   /**
    * Constructor.
@@ -296,7 +296,7 @@ class StructWrap(CT, alias copyFunc = void, alias freeFunc = void) : StructWrapB
   static assert(!_cAllocated || !is(copyFunc == void), "StructWrap freeFunc requires a copyFunc");
 
   CT _cInstance; /// The C structure (owned copy, unused when borrowed or C allocated)
-  CT* _cBorrowed; /// Borrowed C structure owned by _owner (null if the inline copy is used)
+  CT* _cBorrowedPtr; /// Borrowed C structure owned by _owner (null if the inline copy is used)
   Object _owner; /// D object kept alive by this wrapper: owner of the borrowed C structure, or the source of an inline
                  /// copy whose fields may reference D memory kept alive by the source (see _dup)
   CT* _cOwned; /// C allocated structure owned by this wrapper, freed with freeFunc (only if _cAllocated)
@@ -343,7 +343,7 @@ class StructWrap(CT, alias copyFunc = void, alias freeFunc = void) : StructWrapB
    */
   this(void* ptr, Object owner) nothrow
   {
-    _cBorrowed = cast(CT*)ptr;
+    _cBorrowedPtr = cast(CT*)ptr;
     _owner = owner;
   }
 
@@ -356,7 +356,7 @@ class StructWrap(CT, alias copyFunc = void, alias freeFunc = void) : StructWrapB
    */
   protected bool _refuseBorrowedStore(string field) nothrow
   {
-    if (!_cBorrowed && !_cOwned) // A C allocated structure's fields are freed by freeFunc
+    if (!_cBorrowedPtr && !_cOwned) // A C allocated structure's fields are freed by freeFunc
       return false;
 
     g_log("Gid", GLogLevelFlags.LevelCritical, "Refusing to store D memory in field '%.*s' of borrowed structure %.*s",
@@ -373,7 +373,7 @@ class StructWrap(CT, alias copyFunc = void, alias freeFunc = void) : StructWrapB
    */
   override void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
-    auto ptr = _cBorrowed ? cast(void*)_cBorrowed : _cOwned ? cast(void*)_cOwned : cast(void*)&_cInstance;
+    auto ptr = _cBorrowedPtr ? cast(void*)_cBorrowedPtr : _cOwned ? cast(void*)_cOwned : cast(void*)&_cInstance;
     return dup ? _cDup(ptr) : ptr;
   }
 
@@ -387,7 +387,7 @@ class StructWrap(CT, alias copyFunc = void, alias freeFunc = void) : StructWrapB
    */
   T _dup(this T)() nothrow
   {
-    if (_cBorrowed || _cOwned) // C memory
+    if (_cBorrowedPtr || _cOwned) // C memory
       return new T(_cPtr, No.Take);
 
     auto copy = new T(null, cast(Object)this); // A null borrowed pointer selects the inline structure

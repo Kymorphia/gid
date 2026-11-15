@@ -37,7 +37,7 @@ handlerId = Handler id of the handler to be disconnected.
 void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerId) nothrow
 {
   g_signal_handler_disconnect(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
-  instance.signalClosures.remove(handlerId);
+  instance._signalClosures.remove(handlerId);
 }
 
 /**
@@ -51,7 +51,7 @@ instance = The instance whose signal handlers are destroyed
 void signalHandlersDestroy(gobject.object.ObjectWrap instance) nothrow
 {
   g_signal_handlers_destroy(instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
-  instance.signalClosures.clear;
+  instance._signalClosures.clear;
 }
 
 

@@ -15,8 +15,8 @@ import glib.types;
 /** */
 abstract class Boxed : GidWrap
 {
-  void* _cInstancePtr; /// Pointer to the C boxed value
-  bool _cBorrowed; /// true if _cInstancePtr is borrowed from C (not freed by the wrapper, see _cBorrow and _cUnborrow)
+  protected void* _cInstancePtr; /// Pointer to the C boxed value
+  bool _isBorrowed; /// true if _cInstancePtr is borrowed from C (not freed by the wrapper, see _cBorrow and _cUnborrow)
 
   /**
   * Constructor for wrapping a GObject boxed value
@@ -40,7 +40,7 @@ abstract class Boxed : GidWrap
 
   ~this() nothrow
   {
-    if (!_cInstancePtr || _cBorrowed) // Might be null if an exception occurred during construction, borrowed is not freed
+    if (!_cInstancePtr || _isBorrowed) // Might be null if an exception occurred during construction, borrowed is not freed
       return;
 
     struct TypeAndBoxed
@@ -113,9 +113,9 @@ abstract class Boxed : GidWrap
   */
   void* _cSteal() nothrow
   {
-    auto ptr = _cBorrowed ? boxedCopy(_gType, _cInstancePtr) : _cInstancePtr;
+    auto ptr = _isBorrowed ? boxedCopy(_gType, _cInstancePtr) : _cInstancePtr;
     _cInstancePtr = null;
-    _cBorrowed = false;
+    _isBorrowed = false;
     return ptr;
   }
 
@@ -126,7 +126,7 @@ abstract class Boxed : GidWrap
   */
   T _cBorrow(this T)() nothrow
   {
-    _cBorrowed = true;
+    _isBorrowed = true;
     return cast(T)this;
   }
 
@@ -137,10 +137,10 @@ abstract class Boxed : GidWrap
   */
   final void _cUnborrow() nothrow
   {
-    if (!_cBorrowed)
+    if (!_isBorrowed)
       return;
 
-    _cBorrowed = false;
+    _isBorrowed = false;
 
     if (_cInstancePtr)
       _cInstancePtr = boxedCopy(_gType, _cInstancePtr);

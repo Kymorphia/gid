@@ -13,13 +13,13 @@ import glib.variant;
  */
 class DClosure : Closure
 {
-  void* contextPtr; // Used to keep a reference to delegate context so it doesn't get GC'd
+  private void* _contextPtr; // Used to keep a reference to delegate context so it doesn't get GC'd
 
   /** */
   this(T)(T cb, GClosureMarshal cMarshal) nothrow
   {
     static if (is(T == delegate))
-      contextPtr = cast(void*)cb.ptr;
+      _contextPtr = cast(void*)cb.ptr;
 
     auto closure = g_closure_new_simple(DGClosure!T.sizeof, null);
     g_closure_ref(closure);

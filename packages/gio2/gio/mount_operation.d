@@ -781,7 +781,7 @@ class MountOperation : gobject.object.ObjectWrap
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
 
       static if (Parameters!T.length > 1)
-        _paramTuple[1] = gArrayGToD!(glib.types.Pid, GidOwnership.None)(cast(GArray*)getVal!(void*)(&_paramVals[2]));
+        _paramTuple[1] = gArrayToD!(glib.types.Pid, GidOwnership.None)(cast(GArray*)getVal!(void*)(&_paramVals[2]));
 
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);

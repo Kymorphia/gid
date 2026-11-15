@@ -8,7 +8,7 @@ import glib.types;
 
 class ErrorWrap : Exception
 {
-  private GError* errPtr;
+  private GError* _cInstancePtr;
 
   /** */
   this(void* err, Flag!"Take" take) nothrow
@@ -16,11 +16,11 @@ class ErrorWrap : Exception
     assert(err !is null);
 
     if (take)
-      errPtr = cast(GError*)err;
+      _cInstancePtr = cast(GError*)err;
     else
-      errPtr = g_error_copy(cast(GError*)err);
+      _cInstancePtr = g_error_copy(cast(GError*)err);
 
-    super(errPtr.message.fromCString);
+    super(_cInstancePtr.message.fromCString);
   }
 
   /** */
@@ -31,8 +31,8 @@ class ErrorWrap : Exception
 
   ~this() nothrow
   {
-    if (errPtr)
-      g_error_free(errPtr);
+    if (_cInstancePtr)
+      g_error_free(_cInstancePtr);
   }
 
   /**
@@ -43,7 +43,7 @@ class ErrorWrap : Exception
   void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow @nogc
   {
     auto copyFn = cast(GError* function(const(GError)*) @nogc nothrow)g_error_copy;
-    return cast(void*)((dup && errPtr) ? copyFn(errPtr) : errPtr);
+    return cast(void*)((dup && _cInstancePtr) ? copyFn(_cInstancePtr) : _cInstancePtr);
   }
 
   /**
@@ -53,8 +53,8 @@ class ErrorWrap : Exception
    */
   void* _cSteal() nothrow @nogc
   {
-    auto ptr = cast(void*)errPtr;
-    errPtr = null;
+    auto ptr = cast(void*)_cInstancePtr;
+    _cInstancePtr = null;
     return ptr;
   }
 
@@ -64,7 +64,7 @@ class ErrorWrap : Exception
    */
   @property Quark domain() nothrow @nogc
   {
-    return errPtr.domain;
+    return _cInstancePtr.domain;
   }
 
   /**
@@ -74,7 +74,7 @@ class ErrorWrap : Exception
    */
   @property void domain(Quark propval) nothrow @nogc
   {
-    errPtr.domain = propval;
+    _cInstancePtr.domain = propval;
   }
 
   /**
@@ -83,7 +83,7 @@ class ErrorWrap : Exception
    */
   @property int code() nothrow @nogc
   {
-    return errPtr.code;
+    return _cInstancePtr.code;
   }
 
   /**
@@ -93,7 +93,7 @@ class ErrorWrap : Exception
    */
   @property void code(int propval) nothrow @nogc
   {
-    errPtr.code = propval;
+    _cInstancePtr.code = propval;
   }
 
   /**
@@ -102,7 +102,7 @@ class ErrorWrap : Exception
    */
   @property string message() nothrow
   {
-    return errPtr.message.fromCString;
+    return _cInstancePtr.message.fromCString;
   }
 
   /**
@@ -112,8 +112,8 @@ class ErrorWrap : Exception
    */
   @property void message(string propval) nothrow
   {
-    g_free(cast(void*)errPtr.message);
-    errPtr.message = toCString!(Yes.Malloc)(propval);
+    g_free(cast(void*)_cInstancePtr.message);
+    _cInstancePtr.message = toCString!(Yes.Malloc)(propval);
   }
 
   /**
@@ -134,7 +134,7 @@ class ErrorWrap : Exception
    */
   ErrorWrap copy() nothrow
   {
-    return new ErrorWrap(cast(void*)errPtr, No.Take);
+    return new ErrorWrap(cast(void*)_cInstancePtr, No.Take);
   }
 
   /**
@@ -147,7 +147,7 @@ class ErrorWrap : Exception
   bool matches(Quark domain, int code) nothrow
   {
     bool _retval;
-    _retval = cast(bool)g_error_matches(errPtr, domain, code);
+    _retval = cast(bool)g_error_matches(_cInstancePtr, domain, code);
     return _retval;
   }
 }

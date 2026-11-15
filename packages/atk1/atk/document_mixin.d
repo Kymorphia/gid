@@ -155,7 +155,7 @@ template DocumentT()
   override bool setTextSelections(atk.text_selection.TextSelection[] selections) nothrow
   {
     bool _retval;
-    auto _selections = gArrayGFromD!(atk.text_selection.TextSelection, false)(selections);
+    auto _selections = gArrayFromD!(atk.text_selection.TextSelection, false)(selections);
     scope(exit) containerFree!(GArray*, atk.text_selection.TextSelection, GidOwnership.None)(_selections);
     _retval = cast(bool)atk_document_set_text_selections(cast(AtkDocument*)this._cPtr, _selections);
     return _retval;
