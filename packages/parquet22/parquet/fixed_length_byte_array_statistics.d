@@ -1,0 +1,92 @@
+/// Module for [FixedLengthByteArrayStatistics] class
+module parquet.fixed_length_byte_array_statistics;
+
+public import gid.basictypes;
+import gid.gid;
+import glib.bytes;
+import gobject.gid_builder;
+import parquet.c.functions;
+import parquet.c.types;
+import parquet.statistics;
+import parquet.types;
+
+/** */
+class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gparquet_fixed_length_byte_array_statistics_get_type != &gidSymbolNotFound ? gparquet_fixed_length_byte_array_statistics_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetFixedLengthByteArrayStatistics";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FixedLengthByteArrayStatistics self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
+      Returns: New builder object
+  */
+  static FixedLengthByteArrayStatisticsGidBuilder builder() nothrow
+  {
+    return new FixedLengthByteArrayStatisticsGidBuilder;
+  }
+
+  /** */
+  glib.bytes.Bytes getMax() nothrow
+  {
+    GBytes* _cretval;
+    _cretval = gparquet_fixed_length_byte_array_statistics_get_max(cast(GParquetFixedLengthByteArrayStatistics*)this._cPtr);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /** */
+  glib.bytes.Bytes getMin() nothrow
+  {
+    GBytes* _cretval;
+    _cretval = gparquet_fixed_length_byte_array_statistics_get_min(cast(GParquetFixedLengthByteArrayStatistics*)this._cPtr);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
+class FixedLengthByteArrayStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
+final class FixedLengthByteArrayStatisticsGidBuilder : FixedLengthByteArrayStatisticsGidBuilderImpl!FixedLengthByteArrayStatisticsGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  FixedLengthByteArrayStatistics build() nothrow
+  {
+    return new FixedLengthByteArrayStatistics(cast(void*)createGObject(FixedLengthByteArrayStatistics._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,112 @@
+/// Module for [RecordBatchReader] class
+module arrowflight.record_batch_reader;
+
+public import gid.basictypes;
+import arrow.table;
+import arrowflight.c.functions;
+import arrowflight.c.types;
+import arrowflight.stream_chunk;
+import arrowflight.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class RecordBatchReader : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gaflight_record_batch_reader_get_type != &gidSymbolNotFound ? gaflight_record_batch_reader_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightRecordBatchReader";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override RecordBatchReader self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrowflight.record_batch_reader.RecordBatchReader]
+      Returns: New builder object
+  */
+  static RecordBatchReaderGidBuilder builder() nothrow
+  {
+    return new RecordBatchReaderGidBuilder;
+  }
+
+  /** */
+  arrow.table.Table readAll()
+  {
+    GArrowTable* _cretval;
+    GError *_err;
+    _cretval = gaflight_record_batch_reader_read_all(cast(GAFlightRecordBatchReader*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrowflight.stream_chunk.StreamChunk readNext()
+  {
+    GAFlightStreamChunk* _cretval;
+    GError *_err;
+    _cretval = gaflight_record_batch_reader_read_next(cast(GAFlightRecordBatchReader*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.stream_chunk.StreamChunk)(cast(GAFlightStreamChunk*)_cretval, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrowflight.record_batch_reader.RecordBatchReader]
+class RecordBatchReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T isOwner(bool propval) nothrow
+  {
+    return setProperty("is-owner", propval);
+  }
+
+  /** */
+  T reader(void* propval) nothrow
+  {
+    return setProperty("reader", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.record_batch_reader.RecordBatchReader]
+final class RecordBatchReaderGidBuilder : RecordBatchReaderGidBuilderImpl!RecordBatchReaderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  RecordBatchReader build() nothrow
+  {
+    return new RecordBatchReader(cast(void*)createGObject(RecordBatchReader._getGType), Yes.Take);
+  }
+}

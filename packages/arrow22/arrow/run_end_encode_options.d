@@ -1,0 +1,113 @@
+/// Module for [RunEndEncodeOptions] class
+module arrow.run_end_encode_options;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.data_type;
+import arrow.function_options;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class RunEndEncodeOptions : arrow.function_options.FunctionOptions
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_run_end_encode_options_get_type != &gidSymbolNotFound ? garrow_run_end_encode_options_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRunEndEncodeOptions";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override RunEndEncodeOptions self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.run_end_encode_options.RunEndEncodeOptions]
+      Returns: New builder object
+  */
+  static RunEndEncodeOptionsGidBuilder builder() nothrow
+  {
+    return new RunEndEncodeOptionsGidBuilder;
+  }
+
+  /**
+      Get `runEndDataType` property.
+      Returns: The data type for run-end.
+  */
+  @property arrow.data_type.DataType runEndDataType() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.data_type.DataType)("run-end-data-type");
+  }
+
+  /**
+      Set `runEndDataType` property.
+      Params:
+        propval = The data type for run-end.
+  */
+  @property void runEndDataType(arrow.data_type.DataType propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(arrow.data_type.DataType)("run-end-data-type", propval);
+  }
+
+  /** */
+  this(arrow.data_type.DataType runEndDataType = null) nothrow
+  {
+    GArrowRunEndEncodeOptions* _cretval;
+    _cretval = garrow_run_end_encode_options_new(runEndDataType ? cast(GArrowDataType*)runEndDataType._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrow.run_end_encode_options.RunEndEncodeOptions]
+class RunEndEncodeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
+{
+
+  /**
+      Set `runEndDataType` property.
+      Params:
+        propval = The data type for run-end.
+      Returns: Builder instance for fluent chaining
+  */
+  T runEndDataType(arrow.data_type.DataType propval) nothrow
+  {
+    return setProperty("run-end-data-type", propval);
+  }
+}
+
+/// Fluent builder for [arrow.run_end_encode_options.RunEndEncodeOptions]
+final class RunEndEncodeOptionsGidBuilder : RunEndEncodeOptionsGidBuilderImpl!RunEndEncodeOptionsGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  RunEndEncodeOptions build() nothrow
+  {
+    return new RunEndEncodeOptions(cast(void*)createGObject(RunEndEncodeOptions._getGType), Yes.Take);
+  }
+}

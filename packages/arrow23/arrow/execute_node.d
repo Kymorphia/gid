@@ -1,0 +1,111 @@
+/// Module for [ExecuteNode] class
+module arrow.execute_node;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.execute_node_options;
+import arrow.schema;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class ExecuteNode : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_execute_node_get_type != &gidSymbolNotFound ? garrow_execute_node_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowExecuteNode";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ExecuteNode self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.execute_node.ExecuteNode]
+      Returns: New builder object
+  */
+  static ExecuteNodeGidBuilder builder() nothrow
+  {
+    return new ExecuteNodeGidBuilder;
+  }
+
+  /** */
+  @property arrow.execute_node_options.ExecuteNodeOptions options() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrow.execute_node_options.ExecuteNodeOptions)("options");
+  }
+
+  /** */
+  string getKindName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = garrow_execute_node_get_kind_name(cast(GArrowExecuteNode*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  arrow.schema.Schema getOutputSchema() nothrow
+  {
+    GArrowSchema* _cretval;
+    _cretval = garrow_execute_node_get_output_schema(cast(GArrowExecuteNode*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.execute_node.ExecuteNode]
+class ExecuteNodeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T node(void* propval) nothrow
+  {
+    return setProperty("node", propval);
+  }
+
+  /** */
+  T options(arrow.execute_node_options.ExecuteNodeOptions propval) nothrow
+  {
+    return setProperty("options", propval);
+  }
+}
+
+/// Fluent builder for [arrow.execute_node.ExecuteNode]
+final class ExecuteNodeGidBuilder : ExecuteNodeGidBuilderImpl!ExecuteNodeGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ExecuteNode build() nothrow
+  {
+    return new ExecuteNode(cast(void*)createGObject(ExecuteNode._getGType), Yes.Take);
+  }
+}

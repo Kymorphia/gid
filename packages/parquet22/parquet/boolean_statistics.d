@@ -1,0 +1,89 @@
+/// Module for [BooleanStatistics] class
+module parquet.boolean_statistics;
+
+public import gid.basictypes;
+import gid.gid;
+import gobject.gid_builder;
+import parquet.c.functions;
+import parquet.c.types;
+import parquet.statistics;
+import parquet.types;
+
+/** */
+class BooleanStatistics : parquet.statistics.Statistics
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gparquet_boolean_statistics_get_type != &gidSymbolNotFound ? gparquet_boolean_statistics_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetBooleanStatistics";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override BooleanStatistics self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [parquet.boolean_statistics.BooleanStatistics]
+      Returns: New builder object
+  */
+  static BooleanStatisticsGidBuilder builder() nothrow
+  {
+    return new BooleanStatisticsGidBuilder;
+  }
+
+  /** */
+  bool getMax() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gparquet_boolean_statistics_get_max(cast(GParquetBooleanStatistics*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  bool getMin() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gparquet_boolean_statistics_get_min(cast(GParquetBooleanStatistics*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [parquet.boolean_statistics.BooleanStatistics]
+class BooleanStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [parquet.boolean_statistics.BooleanStatistics]
+final class BooleanStatisticsGidBuilder : BooleanStatisticsGidBuilderImpl!BooleanStatisticsGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  BooleanStatistics build() nothrow
+  {
+    return new BooleanStatistics(cast(void*)createGObject(BooleanStatistics._getGType), Yes.Take);
+  }
+}

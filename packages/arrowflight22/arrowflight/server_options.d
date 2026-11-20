@@ -1,0 +1,133 @@
+/// Module for [ServerOptions] class
+module arrowflight.server_options;
+
+public import gid.basictypes;
+import arrowflight.c.functions;
+import arrowflight.c.types;
+import arrowflight.location;
+import arrowflight.server_auth_handler;
+import arrowflight.types;
+import gid.gid;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class ServerOptions : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gaflight_server_options_get_type != &gidSymbolNotFound ? gaflight_server_options_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GAFlightServerOptions";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ServerOptions self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrowflight.server_options.ServerOptions]
+      Returns: New builder object
+  */
+  static ServerOptionsGidBuilder builder() nothrow
+  {
+    return new ServerOptionsGidBuilder;
+  }
+
+  /**
+      Get `authHandler` property.
+      Returns: The authentication handler.
+  */
+  @property arrowflight.server_auth_handler.ServerAuthHandler authHandler() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowflight.server_auth_handler.ServerAuthHandler)("auth-handler");
+  }
+
+  /**
+      Set `authHandler` property.
+      Params:
+        propval = The authentication handler.
+  */
+  @property void authHandler(arrowflight.server_auth_handler.ServerAuthHandler propval) nothrow
+  {
+    gobject.object.ObjectWrap.setProperty!(arrowflight.server_auth_handler.ServerAuthHandler)("auth-handler", propval);
+  }
+
+  /**
+      Get `location` property.
+      Returns: The location to be listened.
+  */
+  @property arrowflight.location.Location location() nothrow
+  {
+    return gobject.object.ObjectWrap.getProperty!(arrowflight.location.Location)("location");
+  }
+
+  /** */
+  this(arrowflight.location.Location location) nothrow
+  {
+    GAFlightServerOptions* _cretval;
+    _cretval = gaflight_server_options_new(location ? cast(GAFlightLocation*)location._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrowflight.server_options.ServerOptions]
+class ServerOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `authHandler` property.
+      Params:
+        propval = The authentication handler.
+      Returns: Builder instance for fluent chaining
+  */
+  T authHandler(arrowflight.server_auth_handler.ServerAuthHandler propval) nothrow
+  {
+    return setProperty("auth-handler", propval);
+  }
+
+  /**
+      Set `location` property.
+      Params:
+        propval = The location to be listened.
+      Returns: Builder instance for fluent chaining
+  */
+  T location(arrowflight.location.Location propval) nothrow
+  {
+    return setProperty("location", propval);
+  }
+}
+
+/// Fluent builder for [arrowflight.server_options.ServerOptions]
+final class ServerOptionsGidBuilder : ServerOptionsGidBuilderImpl!ServerOptionsGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ServerOptions build() nothrow
+  {
+    return new ServerOptions(cast(void*)createGObject(ServerOptions._getGType), Yes.Take);
+  }
+}

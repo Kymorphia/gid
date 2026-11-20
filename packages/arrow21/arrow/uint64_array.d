@@ -1,0 +1,117 @@
+/// Module for [UInt64Array] class
+module arrow.uint64_array;
+
+public import gid.basictypes;
+import arrow.buffer;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.numeric_array;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+
+/** */
+class UInt64Array : arrow.numeric_array.NumericArray
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_uint64_array_get_type != &gidSymbolNotFound ? garrow_uint64_array_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt64Array";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override UInt64Array self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.uint64_array.UInt64Array]
+      Returns: New builder object
+  */
+  static UInt64ArrayGidBuilder builder() nothrow
+  {
+    return new UInt64ArrayGidBuilder;
+  }
+
+  /** */
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
+  {
+    GArrowUInt64Array* _cretval;
+    _cretval = garrow_uint64_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
+    this(_cretval, Yes.Take);
+  }
+
+  /** */
+  ulong getValue(long i) nothrow
+  {
+    ulong _retval;
+    _retval = garrow_uint64_array_get_value(cast(GArrowUInt64Array*)this._cPtr, i);
+    return _retval;
+  }
+
+  /** */
+  ulong[] getValues() nothrow
+  {
+    const(ulong)* _cretval;
+    long _cretlength;
+    _cretval = garrow_uint64_array_get_values(cast(GArrowUInt64Array*)this._cPtr, &_cretlength);
+    ulong[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ulong[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /** */
+  ulong sum()
+  {
+    ulong _retval;
+    GError *_err;
+    _retval = garrow_uint64_array_sum(cast(GArrowUInt64Array*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.uint64_array.UInt64Array]
+class UInt64ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint64_array.UInt64Array]
+final class UInt64ArrayGidBuilder : UInt64ArrayGidBuilderImpl!UInt64ArrayGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  UInt64Array build() nothrow
+  {
+    return new UInt64Array(cast(void*)createGObject(UInt64Array._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,81 @@
+/// Module for [MonthIntervalDataType] class
+module arrow.month_interval_data_type;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.interval_data_type;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+
+/** */
+class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_month_interval_data_type_get_type != &gidSymbolNotFound ? garrow_month_interval_data_type_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowMonthIntervalDataType";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MonthIntervalDataType self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.month_interval_data_type.MonthIntervalDataType]
+      Returns: New builder object
+  */
+  static MonthIntervalDataTypeGidBuilder builder() nothrow
+  {
+    return new MonthIntervalDataTypeGidBuilder;
+  }
+
+  /** */
+  this() nothrow
+  {
+    GArrowMonthIntervalDataType* _cretval;
+    _cretval = garrow_month_interval_data_type_new();
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrow.month_interval_data_type.MonthIntervalDataType]
+class MonthIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.IntervalDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.month_interval_data_type.MonthIntervalDataType]
+final class MonthIntervalDataTypeGidBuilder : MonthIntervalDataTypeGidBuilderImpl!MonthIntervalDataTypeGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  MonthIntervalDataType build() nothrow
+  {
+    return new MonthIntervalDataType(cast(void*)createGObject(MonthIntervalDataType._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,144 @@
+/// Module for [RecordBatchFileReader] class
+module arrow.record_batch_file_reader;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.record_batch;
+import arrow.schema;
+import arrow.seekable_input_stream;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class RecordBatchFileReader : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_record_batch_file_reader_get_type != &gidSymbolNotFound ? garrow_record_batch_file_reader_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowRecordBatchFileReader";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override RecordBatchFileReader self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.record_batch_file_reader.RecordBatchFileReader]
+      Returns: New builder object
+  */
+  static RecordBatchFileReaderGidBuilder builder() nothrow
+  {
+    return new RecordBatchFileReaderGidBuilder;
+  }
+
+  /** */
+  this(arrow.seekable_input_stream.SeekableInputStream file)
+  {
+    GArrowRecordBatchFileReader* _cretval;
+    GError *_err;
+    _cretval = garrow_record_batch_file_reader_new(file ? cast(GArrowSeekableInputStream*)file._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    this(_cretval, Yes.Take);
+  }
+
+  /** */
+  uint getNRecordBatches() nothrow
+  {
+    uint _retval;
+    _retval = garrow_record_batch_file_reader_get_n_record_batches(cast(GArrowRecordBatchFileReader*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  arrow.record_batch.RecordBatch getRecordBatch(uint i)
+  {
+    GArrowRecordBatch* _cretval;
+    GError *_err;
+    _cretval = garrow_record_batch_file_reader_get_record_batch(cast(GArrowRecordBatchFileReader*)this._cPtr, i, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.schema.Schema getSchema() nothrow
+  {
+    GArrowSchema* _cretval;
+    _cretval = garrow_record_batch_file_reader_get_schema(cast(GArrowRecordBatchFileReader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.types.MetadataVersion getVersion() nothrow
+  {
+    GArrowMetadataVersion _cretval;
+    _cretval = garrow_record_batch_file_reader_get_version(cast(GArrowRecordBatchFileReader*)this._cPtr);
+    arrow.types.MetadataVersion _retval = cast(arrow.types.MetadataVersion)_cretval;
+    return _retval;
+  }
+
+  /** */
+  arrow.record_batch.RecordBatch readRecordBatch(uint i)
+  {
+    GArrowRecordBatch* _cretval;
+    GError *_err;
+    _cretval = garrow_record_batch_file_reader_read_record_batch(cast(GArrowRecordBatchFileReader*)this._cPtr, i, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.record_batch_file_reader.RecordBatchFileReader]
+class RecordBatchFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T recordBatchFileReader(void* propval) nothrow
+  {
+    return setProperty("record-batch-file-reader", propval);
+  }
+}
+
+/// Fluent builder for [arrow.record_batch_file_reader.RecordBatchFileReader]
+final class RecordBatchFileReaderGidBuilder : RecordBatchFileReaderGidBuilderImpl!RecordBatchFileReaderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  RecordBatchFileReader build() nothrow
+  {
+    return new RecordBatchFileReader(cast(void*)createGObject(RecordBatchFileReader._getGType), Yes.Take);
+  }
+}

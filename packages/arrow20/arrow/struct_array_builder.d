@@ -1,0 +1,127 @@
+/// Module for [StructArrayBuilder] class
+module arrow.struct_array_builder;
+
+public import gid.basictypes;
+import arrow.array_builder;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.struct_data_type;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class StructArrayBuilder : arrow.array_builder.ArrayBuilder
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_struct_array_builder_get_type != &gidSymbolNotFound ? garrow_struct_array_builder_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStructArrayBuilder";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StructArrayBuilder self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.struct_array_builder.StructArrayBuilder]
+      Returns: New builder object
+  */
+  static StructArrayBuilderGidBuilder builder() nothrow
+  {
+    return new StructArrayBuilderGidBuilder;
+  }
+
+  /** */
+  this(arrow.struct_data_type.StructDataType dataType)
+  {
+    GArrowStructArrayBuilder* _cretval;
+    GError *_err;
+    _cretval = garrow_struct_array_builder_new(dataType ? cast(GArrowStructDataType*)dataType._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    this(_cretval, Yes.Take);
+  }
+
+  /** */
+  bool append()
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)garrow_struct_array_builder_append(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  bool appendValue()
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)garrow_struct_array_builder_append_value(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.array_builder.ArrayBuilder getFieldBuilder(int i) nothrow
+  {
+    GArrowArrayBuilder* _cretval;
+    _cretval = garrow_struct_array_builder_get_field_builder(cast(GArrowStructArrayBuilder*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.array_builder.ArrayBuilder[] getFieldBuilders() nothrow
+  {
+    GList* _cretval;
+    _cretval = garrow_struct_array_builder_get_field_builders(cast(GArrowStructArrayBuilder*)this._cPtr);
+    auto _retval = gListToD!(arrow.array_builder.ArrayBuilder, GidOwnership.None)(cast(GList*)_cretval);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.struct_array_builder.StructArrayBuilder]
+class StructArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.struct_array_builder.StructArrayBuilder]
+final class StructArrayBuilderGidBuilder : StructArrayBuilderGidBuilderImpl!StructArrayBuilderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  StructArrayBuilder build() nothrow
+  {
+    return new StructArrayBuilder(cast(void*)createGObject(StructArrayBuilder._getGType), Yes.Take);
+  }
+}

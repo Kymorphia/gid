@@ -1,0 +1,15 @@
+{
+  "name": "arrow21",
+  "description": "D binding for Apache Arrow 21.0 GLib - Universal columnar format and multi-language toolbox",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "homepage": "https://arrow.apache.org",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["arrow"],
+  "dependencies": {
+    "gid:gio2": "*",
+    "gid:glib2": "*"
+  }
+}

@@ -1,0 +1,81 @@
+/// Module for [CSVFileFormat] class
+module arrowdataset.csvfile_format;
+
+public import gid.basictypes;
+import arrowdataset.c.functions;
+import arrowdataset.c.types;
+import arrowdataset.file_format;
+import arrowdataset.types;
+import gid.gid;
+import gobject.gid_builder;
+
+/** */
+class CSVFileFormat : arrowdataset.file_format.FileFormat
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gadataset_csv_file_format_get_type != &gidSymbolNotFound ? gadataset_csv_file_format_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GADatasetCSVFileFormat";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override CSVFileFormat self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrowdataset.csvfile_format.CSVFileFormat]
+      Returns: New builder object
+  */
+  static CSVFileFormatGidBuilder builder() nothrow
+  {
+    return new CSVFileFormatGidBuilder;
+  }
+
+  /** */
+  this() nothrow
+  {
+    GADatasetCSVFileFormat* _cretval;
+    _cretval = gadataset_csv_file_format_new();
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrowdataset.csvfile_format.CSVFileFormat]
+class CSVFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrowdataset.csvfile_format.CSVFileFormat]
+final class CSVFileFormatGidBuilder : CSVFileFormatGidBuilderImpl!CSVFileFormatGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  CSVFileFormat build() nothrow
+  {
+    return new CSVFileFormat(cast(void*)createGObject(CSVFileFormat._getGType), Yes.Take);
+  }
+}

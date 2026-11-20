@@ -1,0 +1,81 @@
+/// Module for [NullScalar] class
+module arrow.null_scalar;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.scalar;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+
+/** */
+class NullScalar : arrow.scalar.Scalar
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_null_scalar_get_type != &gidSymbolNotFound ? garrow_null_scalar_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowNullScalar";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override NullScalar self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.null_scalar.NullScalar]
+      Returns: New builder object
+  */
+  static NullScalarGidBuilder builder() nothrow
+  {
+    return new NullScalarGidBuilder;
+  }
+
+  /** */
+  this() nothrow
+  {
+    GArrowNullScalar* _cretval;
+    _cretval = garrow_null_scalar_new();
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrow.null_scalar.NullScalar]
+class NullScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.null_scalar.NullScalar]
+final class NullScalarGidBuilder : NullScalarGidBuilderImpl!NullScalarGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  NullScalar build() nothrow
+  {
+    return new NullScalar(cast(void*)createGObject(NullScalar._getGType), Yes.Take);
+  }
+}

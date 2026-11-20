@@ -1,0 +1,81 @@
+/// Module for [StringDataType] class
+module arrow.string_data_type;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.data_type;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+
+/** */
+class StringDataType : arrow.data_type.DataType
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_string_data_type_get_type != &gidSymbolNotFound ? garrow_string_data_type_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowStringDataType";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StringDataType self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.string_data_type.StringDataType]
+      Returns: New builder object
+  */
+  static StringDataTypeGidBuilder builder() nothrow
+  {
+    return new StringDataTypeGidBuilder;
+  }
+
+  /** */
+  this() nothrow
+  {
+    GArrowStringDataType* _cretval;
+    _cretval = garrow_string_data_type_new();
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrow.string_data_type.StringDataType]
+class StringDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.string_data_type.StringDataType]
+final class StringDataTypeGidBuilder : StringDataTypeGidBuilderImpl!StringDataTypeGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  StringDataType build() nothrow
+  {
+    return new StringDataType(cast(void*)createGObject(StringDataType._getGType), Yes.Take);
+  }
+}

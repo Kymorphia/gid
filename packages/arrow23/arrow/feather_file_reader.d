@@ -1,0 +1,149 @@
+/// Module for [FeatherFileReader] class
+module arrow.feather_file_reader;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.seekable_input_stream;
+import arrow.table;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class FeatherFileReader : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_feather_file_reader_get_type != &gidSymbolNotFound ? garrow_feather_file_reader_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFeatherFileReader";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FeatherFileReader self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.feather_file_reader.FeatherFileReader]
+      Returns: New builder object
+  */
+  static FeatherFileReaderGidBuilder builder() nothrow
+  {
+    return new FeatherFileReaderGidBuilder;
+  }
+
+  /** */
+  this(arrow.seekable_input_stream.SeekableInputStream file)
+  {
+    GArrowFeatherFileReader* _cretval;
+    GError *_err;
+    _cretval = garrow_feather_file_reader_new(file ? cast(GArrowSeekableInputStream*)file._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    this(_cretval, Yes.Take);
+  }
+
+  /** */
+  int getVersion() nothrow
+  {
+    int _retval;
+    _retval = garrow_feather_file_reader_get_version(cast(GArrowFeatherFileReader*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  arrow.table.Table read()
+  {
+    GArrowTable* _cretval;
+    GError *_err;
+    _cretval = garrow_feather_file_reader_read(cast(GArrowFeatherFileReader*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.table.Table readIndices(int[] indices)
+  {
+    GArrowTable* _cretval;
+    uint _nIndices;
+    if (indices)
+      _nIndices = cast(uint)indices.length;
+
+    auto _indices = cast(int*)indices.ptr;
+    GError *_err;
+    _cretval = garrow_feather_file_reader_read_indices(cast(GArrowFeatherFileReader*)this._cPtr, _indices, _nIndices, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.table.Table readNames(string[] names)
+  {
+    GArrowTable* _cretval;
+    uint _nNames;
+    if (names)
+      _nNames = cast(uint)names.length;
+
+    auto _names_arr = new char*[](names.length);
+    auto _names = cast(char**)_names_arr.ptr;
+    foreach (i, s; names) _names[i] = s.toCString!(No.Malloc);
+    GError *_err;
+    _cretval = garrow_feather_file_reader_read_names(cast(GArrowFeatherFileReader*)this._cPtr, _names, _nNames, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.feather_file_reader.FeatherFileReader]
+class FeatherFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T featherReader(void* propval) nothrow
+  {
+    return setProperty("feather-reader", propval);
+  }
+}
+
+/// Fluent builder for [arrow.feather_file_reader.FeatherFileReader]
+final class FeatherFileReaderGidBuilder : FeatherFileReaderGidBuilderImpl!FeatherFileReaderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  FeatherFileReader build() nothrow
+  {
+    return new FeatherFileReader(cast(void*)createGObject(FeatherFileReader._getGType), Yes.Take);
+  }
+}

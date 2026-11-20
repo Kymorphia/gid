@@ -1,0 +1,89 @@
+/// Module for [UInt32Scalar] class
+module arrow.uint32_scalar;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.scalar;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+
+/** */
+class UInt32Scalar : arrow.scalar.Scalar
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_uint32_scalar_get_type != &gidSymbolNotFound ? garrow_uint32_scalar_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt32Scalar";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override UInt32Scalar self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.uint32_scalar.UInt32Scalar]
+      Returns: New builder object
+  */
+  static UInt32ScalarGidBuilder builder() nothrow
+  {
+    return new UInt32ScalarGidBuilder;
+  }
+
+  /** */
+  this(uint value) nothrow
+  {
+    GArrowUInt32Scalar* _cretval;
+    _cretval = garrow_uint32_scalar_new(value);
+    this(_cretval, Yes.Take);
+  }
+
+  /** */
+  uint getValue() nothrow
+  {
+    uint _retval;
+    _retval = garrow_uint32_scalar_get_value(cast(GArrowUInt32Scalar*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.uint32_scalar.UInt32Scalar]
+class UInt32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint32_scalar.UInt32Scalar]
+final class UInt32ScalarGidBuilder : UInt32ScalarGidBuilderImpl!UInt32ScalarGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  UInt32Scalar build() nothrow
+  {
+    return new UInt32Scalar(cast(void*)createGObject(UInt32Scalar._getGType), Yes.Take);
+  }
+}

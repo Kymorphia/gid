@@ -1,0 +1,89 @@
+/// Module for [FloatScalar] class
+module arrow.float_scalar;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.scalar;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+
+/** */
+class FloatScalar : arrow.scalar.Scalar
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_float_scalar_get_type != &gidSymbolNotFound ? garrow_float_scalar_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFloatScalar";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FloatScalar self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.float_scalar.FloatScalar]
+      Returns: New builder object
+  */
+  static FloatScalarGidBuilder builder() nothrow
+  {
+    return new FloatScalarGidBuilder;
+  }
+
+  /** */
+  this(float value) nothrow
+  {
+    GArrowFloatScalar* _cretval;
+    _cretval = garrow_float_scalar_new(value);
+    this(_cretval, Yes.Take);
+  }
+
+  /** */
+  float getValue() nothrow
+  {
+    float _retval;
+    _retval = garrow_float_scalar_get_value(cast(GArrowFloatScalar*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.float_scalar.FloatScalar]
+class FloatScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.float_scalar.FloatScalar]
+final class FloatScalarGidBuilder : FloatScalarGidBuilderImpl!FloatScalarGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  FloatScalar build() nothrow
+  {
+    return new FloatScalar(cast(void*)createGObject(FloatScalar._getGType), Yes.Take);
+  }
+}

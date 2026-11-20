@@ -1,0 +1,156 @@
+/// Module for [RowGroupMetadata] class
+module parquet.row_group_metadata;
+
+public import gid.basictypes;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+import gobject.object;
+import parquet.c.functions;
+import parquet.c.types;
+import parquet.column_chunk_metadata;
+import parquet.file_metadata;
+import parquet.types;
+
+/** */
+class RowGroupMetadata : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gparquet_row_group_metadata_get_type != &gidSymbolNotFound ? gparquet_row_group_metadata_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GParquetRowGroupMetadata";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override RowGroupMetadata self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [parquet.row_group_metadata.RowGroupMetadata]
+      Returns: New builder object
+  */
+  static RowGroupMetadataGidBuilder builder() nothrow
+  {
+    return new RowGroupMetadataGidBuilder;
+  }
+
+  /** */
+  bool canDecompress() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gparquet_row_group_metadata_can_decompress(cast(GParquetRowGroupMetadata*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  bool equal(parquet.row_group_metadata.RowGroupMetadata otherMetadata) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gparquet_row_group_metadata_equal(cast(GParquetRowGroupMetadata*)this._cPtr, otherMetadata ? cast(GParquetRowGroupMetadata*)otherMetadata._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  parquet.column_chunk_metadata.ColumnChunkMetadata getColumnChunk(int index)
+  {
+    GParquetColumnChunkMetadata* _cretval;
+    GError *_err;
+    _cretval = gparquet_row_group_metadata_get_column_chunk(cast(GParquetRowGroupMetadata*)this._cPtr, index, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(parquet.column_chunk_metadata.ColumnChunkMetadata)(cast(GParquetColumnChunkMetadata*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  long getFileOffset() nothrow
+  {
+    long _retval;
+    _retval = gparquet_row_group_metadata_get_file_offset(cast(GParquetRowGroupMetadata*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  int getNColumns() nothrow
+  {
+    int _retval;
+    _retval = gparquet_row_group_metadata_get_n_columns(cast(GParquetRowGroupMetadata*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  long getNRows() nothrow
+  {
+    long _retval;
+    _retval = gparquet_row_group_metadata_get_n_rows(cast(GParquetRowGroupMetadata*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  long getTotalCompressedSize() nothrow
+  {
+    long _retval;
+    _retval = gparquet_row_group_metadata_get_total_compressed_size(cast(GParquetRowGroupMetadata*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  long getTotalSize() nothrow
+  {
+    long _retval;
+    _retval = gparquet_row_group_metadata_get_total_size(cast(GParquetRowGroupMetadata*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [parquet.row_group_metadata.RowGroupMetadata]
+class RowGroupMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T metadata(void* propval) nothrow
+  {
+    return setProperty("metadata", propval);
+  }
+
+  /** */
+  T owner(parquet.file_metadata.FileMetadata propval) nothrow
+  {
+    return setProperty("owner", propval);
+  }
+}
+
+/// Fluent builder for [parquet.row_group_metadata.RowGroupMetadata]
+final class RowGroupMetadataGidBuilder : RowGroupMetadataGidBuilderImpl!RowGroupMetadataGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  RowGroupMetadata build() nothrow
+  {
+    return new RowGroupMetadata(cast(void*)createGObject(RowGroupMetadata._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,170 @@
+/// Module for [Function] class
+module arrow.function_;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.datum;
+import arrow.execute_context;
+import arrow.function_doc;
+import arrow.function_options;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+import gobject.object;
+import gobject.types;
+
+/** */
+class Function : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_function_get_type != &gidSymbolNotFound ? garrow_function_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowFunction";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Function self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.function_.Function]
+      Returns: New builder object
+  */
+  static FunctionGidBuilder builder() nothrow
+  {
+    return new FunctionGidBuilder;
+  }
+
+  /** */
+  static arrow.function_.Function[] all() nothrow
+  {
+    GList* _cretval;
+    _cretval = garrow_function_all();
+    auto _retval = gListToD!(arrow.function_.Function, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /** */
+  static arrow.function_.Function find(string name) nothrow
+  {
+    GArrowFunction* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = garrow_function_find(_name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.function_.Function)(cast(GArrowFunction*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  bool equal(arrow.function_.Function otherFunction) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)garrow_function_equal(cast(GArrowFunction*)this._cPtr, otherFunction ? cast(GArrowFunction*)otherFunction._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  arrow.datum.Datum execute(arrow.datum.Datum[] args, arrow.function_options.FunctionOptions options = null, arrow.execute_context.ExecuteContext context = null)
+  {
+    GArrowDatum* _cretval;
+    auto _args = gListFromD!(arrow.datum.Datum)(args);
+    scope(exit) containerFree!(GList*, arrow.datum.Datum, GidOwnership.None)(_args);
+    GError *_err;
+    _cretval = garrow_function_execute(cast(GArrowFunction*)this._cPtr, _args, options ? cast(GArrowFunctionOptions*)options._cPtr(No.Dup) : null, context ? cast(GArrowExecuteContext*)context._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.datum.Datum)(cast(GArrowDatum*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.function_options.FunctionOptions getDefaultOptions() nothrow
+  {
+    GArrowFunctionOptions* _cretval;
+    _cretval = garrow_function_get_default_options(cast(GArrowFunction*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.function_options.FunctionOptions)(cast(GArrowFunctionOptions*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.function_doc.FunctionDoc getDoc() nothrow
+  {
+    GArrowFunctionDoc* _cretval;
+    _cretval = garrow_function_get_doc(cast(GArrowFunction*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.function_doc.FunctionDoc)(cast(GArrowFunctionDoc*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = garrow_function_get_name(cast(GArrowFunction*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  gobject.types.GType getOptionsType() nothrow
+  {
+    gobject.types.GType _retval;
+    _retval = garrow_function_get_options_type(cast(GArrowFunction*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  string toString_() nothrow
+  {
+    char* _cretval;
+    _cretval = garrow_function_to_string(cast(GArrowFunction*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.function_.Function]
+class FunctionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T function_(void* propval) nothrow
+  {
+    return setProperty("function", propval);
+  }
+}
+
+/// Fluent builder for [arrow.function_.Function]
+final class FunctionGidBuilder : FunctionGidBuilderImpl!FunctionGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Function build() nothrow
+  {
+    return new Function(cast(void*)createGObject(Function._getGType), Yes.Take);
+  }
+}

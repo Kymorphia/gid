@@ -1,0 +1,110 @@
+/// Module for [UnionArrayBuilder] class
+module arrow.union_array_builder;
+
+public import gid.basictypes;
+import arrow.array_builder;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+
+/** */
+class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_union_array_builder_get_type != &gidSymbolNotFound ? garrow_union_array_builder_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUnionArrayBuilder";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override UnionArrayBuilder self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.union_array_builder.UnionArrayBuilder]
+      Returns: New builder object
+  */
+  static UnionArrayBuilderGidBuilder builder() nothrow
+  {
+    return new UnionArrayBuilderGidBuilder;
+  }
+
+  /** */
+  byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null) nothrow
+  {
+    byte _retval;
+    const(char)* _fieldName = fieldName.toCString!(No.Malloc, Yes.Nullable);
+    _retval = garrow_union_array_builder_append_child(cast(GArrowUnionArrayBuilder*)this._cPtr, child ? cast(GArrowArrayBuilder*)child._cPtr(No.Dup) : null, _fieldName);
+    return _retval;
+  }
+
+  /**
+      Append an element to the union array.
+      
+      If builder is #GArrowDenseUnionArrayBuilder, this must be followed by an
+      append to the appropriate child builder.
+      
+      If builder is #GArrowSparseUnionArrayBuilder, this must be
+      followed by appends to all child builders. The corresponding child
+      builder must be appended to independently after this method is
+      called, and all other child builders must have null or empty value
+      appended.
+  
+      Params:
+        value = A type ID value.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorWrap]
+  */
+  bool appendValue(byte value)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)garrow_union_array_builder_append_value(cast(GArrowUnionArrayBuilder*)this._cPtr, value, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.union_array_builder.UnionArrayBuilder]
+class UnionArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.union_array_builder.UnionArrayBuilder]
+final class UnionArrayBuilderGidBuilder : UnionArrayBuilderGidBuilderImpl!UnionArrayBuilderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  UnionArrayBuilder build() nothrow
+  {
+    return new UnionArrayBuilder(cast(void*)createGObject(UnionArrayBuilder._getGType), Yes.Take);
+  }
+}

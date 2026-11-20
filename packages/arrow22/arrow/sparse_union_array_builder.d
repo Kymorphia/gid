@@ -1,0 +1,86 @@
+/// Module for [SparseUnionArrayBuilder] class
+module arrow.sparse_union_array_builder;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.sparse_union_data_type;
+import arrow.types;
+import arrow.union_array_builder;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+
+/** */
+class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_sparse_union_array_builder_get_type != &gidSymbolNotFound ? garrow_sparse_union_array_builder_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowSparseUnionArrayBuilder";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SparseUnionArrayBuilder self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.sparse_union_array_builder.SparseUnionArrayBuilder]
+      Returns: New builder object
+  */
+  static SparseUnionArrayBuilderGidBuilder builder() nothrow
+  {
+    return new SparseUnionArrayBuilderGidBuilder;
+  }
+
+  /** */
+  this(arrow.sparse_union_data_type.SparseUnionDataType dataType = null)
+  {
+    GArrowSparseUnionArrayBuilder* _cretval;
+    GError *_err;
+    _cretval = garrow_sparse_union_array_builder_new(dataType ? cast(GArrowSparseUnionDataType*)dataType._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrow.sparse_union_array_builder.SparseUnionArrayBuilder]
+class SparseUnionArrayBuilderGidBuilderImpl(T) : arrow.union_array_builder.UnionArrayBuilderGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.sparse_union_array_builder.SparseUnionArrayBuilder]
+final class SparseUnionArrayBuilderGidBuilder : SparseUnionArrayBuilderGidBuilderImpl!SparseUnionArrayBuilderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  SparseUnionArrayBuilder build() nothrow
+  {
+    return new SparseUnionArrayBuilder(cast(void*)createGObject(SparseUnionArrayBuilder._getGType), Yes.Take);
+  }
+}

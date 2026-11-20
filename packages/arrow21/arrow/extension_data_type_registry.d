@@ -1,0 +1,138 @@
+/// Module for [ExtensionDataTypeRegistry] class
+module arrow.extension_data_type_registry;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.extension_data_type;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+import gobject.object;
+
+/** */
+class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_extension_data_type_registry_get_type != &gidSymbolNotFound ? garrow_extension_data_type_registry_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowExtensionDataTypeRegistry";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ExtensionDataTypeRegistry self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
+      Returns: New builder object
+  */
+  static ExtensionDataTypeRegistryGidBuilder builder() nothrow
+  {
+    return new ExtensionDataTypeRegistryGidBuilder;
+  }
+
+  /** */
+  static arrow.extension_data_type_registry.ExtensionDataTypeRegistry default_() nothrow
+  {
+    GArrowExtensionDataTypeRegistry* _cretval;
+    _cretval = garrow_extension_data_type_registry_default();
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  arrow.extension_data_type.ExtensionDataType lookup(string name) nothrow
+  {
+    GArrowExtensionDataType* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = garrow_extension_data_type_registry_lookup(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Register the given data_type to the registry.
+  
+      Params:
+        dataType = A #GArrowExtensionDataType to be registered.
+      Returns: true on success, false on error.
+      Throws: [ErrorWrap]
+  */
+  bool register(arrow.extension_data_type.ExtensionDataType dataType)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)garrow_extension_data_type_registry_register(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, dataType ? cast(GArrowExtensionDataType*)dataType._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Unregister an extension data type that has the given name from the
+      registry.
+  
+      Params:
+        name = An extension data type name to be unregistered.
+      Returns: true on success, false on error.
+      Throws: [ErrorWrap]
+  */
+  bool unregister(string name)
+  {
+    bool _retval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)garrow_extension_data_type_registry_unregister(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, _name, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
+class ExtensionDataTypeRegistryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T registry(void* propval) nothrow
+  {
+    return setProperty("registry", propval);
+  }
+}
+
+/// Fluent builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
+final class ExtensionDataTypeRegistryGidBuilder : ExtensionDataTypeRegistryGidBuilderImpl!ExtensionDataTypeRegistryGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ExtensionDataTypeRegistry build() nothrow
+  {
+    return new ExtensionDataTypeRegistry(cast(void*)createGObject(ExtensionDataTypeRegistry._getGType), Yes.Take);
+  }
+}

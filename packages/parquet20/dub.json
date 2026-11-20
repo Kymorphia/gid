@@ -1,0 +1,14 @@
+{
+  "name": "parquet20",
+  "description": "D binding for Apache Parquet 20.0 GLib - column-oriented data file format",
+  "copyright": "Copyright © 2024-2026, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "homepage": "https://github.com/red-data-tools/parquet-glib",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["parquet"],
+  "dependencies": {
+    "gid:arrow20": "*"
+  }
+}

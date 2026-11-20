@@ -1,0 +1,81 @@
+/// Module for [UInt64DataType] class
+module arrow.uint64_data_type;
+
+public import gid.basictypes;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.integer_data_type;
+import arrow.types;
+import gid.gid;
+import gobject.gid_builder;
+
+/** */
+class UInt64DataType : arrow.integer_data_type.IntegerDataType
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_uint64_data_type_get_type != &gidSymbolNotFound ? garrow_uint64_data_type_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowUInt64DataType";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override UInt64DataType self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.uint64_data_type.UInt64DataType]
+      Returns: New builder object
+  */
+  static UInt64DataTypeGidBuilder builder() nothrow
+  {
+    return new UInt64DataTypeGidBuilder;
+  }
+
+  /** */
+  this() nothrow
+  {
+    GArrowUInt64DataType* _cretval;
+    _cretval = garrow_uint64_data_type_new();
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [arrow.uint64_data_type.UInt64DataType]
+class UInt64DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.uint64_data_type.UInt64DataType]
+final class UInt64DataTypeGidBuilder : UInt64DataTypeGidBuilderImpl!UInt64DataTypeGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  UInt64DataType build() nothrow
+  {
+    return new UInt64DataType(cast(void*)createGObject(UInt64DataType._getGType), Yes.Take);
+  }
+}

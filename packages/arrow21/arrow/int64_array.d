@@ -1,0 +1,117 @@
+/// Module for [Int64Array] class
+module arrow.int64_array;
+
+public import gid.basictypes;
+import arrow.buffer;
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.numeric_array;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.gid_builder;
+
+/** */
+class Int64Array : arrow.numeric_array.NumericArray
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_int64_array_get_type != &gidSymbolNotFound ? garrow_int64_array_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GArrowInt64Array";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Int64Array self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [arrow.int64_array.Int64Array]
+      Returns: New builder object
+  */
+  static Int64ArrayGidBuilder builder() nothrow
+  {
+    return new Int64ArrayGidBuilder;
+  }
+
+  /** */
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
+  {
+    GArrowInt64Array* _cretval;
+    _cretval = garrow_int64_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
+    this(_cretval, Yes.Take);
+  }
+
+  /** */
+  long getValue(long i) nothrow
+  {
+    long _retval;
+    _retval = garrow_int64_array_get_value(cast(GArrowInt64Array*)this._cPtr, i);
+    return _retval;
+  }
+
+  /** */
+  long[] getValues() nothrow
+  {
+    const(long)* _cretval;
+    long _cretlength;
+    _cretval = garrow_int64_array_get_values(cast(GArrowInt64Array*)this._cPtr, &_cretlength);
+    long[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(long[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /** */
+  long sum()
+  {
+    long _retval;
+    GError *_err;
+    _retval = garrow_int64_array_sum(cast(GArrowInt64Array*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [arrow.int64_array.Int64Array]
+class Int64ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [arrow.int64_array.Int64Array]
+final class Int64ArrayGidBuilder : Int64ArrayGidBuilderImpl!Int64ArrayGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Int64Array build() nothrow
+  {
+    return new Int64Array(cast(void*)createGObject(Int64Array._getGType), Yes.Take);
+  }
+}
